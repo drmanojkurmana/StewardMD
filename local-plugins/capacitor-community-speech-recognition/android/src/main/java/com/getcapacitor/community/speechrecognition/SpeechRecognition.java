@@ -42,6 +42,21 @@ public class SpeechRecognition extends Plugin implements Constants {
 
     private JSONArray previousPartialResults = new JSONArray();
 
+    // ---- Continuous dictation (MaiK Scribe) --------------------------------
+    // Android's SpeechRecognizer is a single-utterance engine: it fires
+    // onEndOfSpeech/onResults/onError the moment it detects a pause and would
+    // otherwise end the session after ~1s. For streaming (partialResults=true)
+    // we keep the session alive by re-arming the recognizer on each endpoint,
+    // accumulating text across utterances, and only finalizing when the JS
+    // side explicitly calls stop().
+    private boolean streaming = false; // true while a continuous dictation is active
+    private boolean userStopped = false; // set by stop(): suppress further auto-restarts
+    private Intent activeIntent = null; // recognizer config, reused on every restart
+    private PluginCall streamCall = null; // the resolved start() call (events flow to it)
+    private final StringBuilder accumulated = new StringBuilder(); // finalized text so far
+    private String lastEmitted = ""; // dedupe repeated partial emissions
+    private SpeechRecognitionListener currentListener = null; // stale-callback guard
+
     @Override
     public void load() {
         super.load();
@@ -168,6 +183,10 @@ public class SpeechRecognition extends Plugin implements Constants {
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, bridge.getActivity().getPackageName());
         intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, partialResults);
         intent.putExtra("android.speech.extra.DICTATION_MODE", partialResults);
+        // Added to prevent early timeout
+        intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS, 5000L);
+        intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, 2000L);
+        intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS, 2000L);
 
         if (prompt != null) {
             intent.putExtra(RecognizerIntent.EXTRA_PROMPT, prompt);
@@ -176,35 +195,100 @@ public class SpeechRecognition extends Plugin implements Constants {
         if (showPopup) {
             startActivityForResult(call, intent, "listeningResult");
         } else {
-            bridge
-                .getWebView()
-                .post(() -> {
-                    try {
-                        SpeechRecognition.this.lock.lock();
-
-                        if (speechRecognizer != null) {
-                            speechRecognizer.cancel();
-                            speechRecognizer.destroy();
-                            speechRecognizer = null;
-                        }
-
-                        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(bridge.getActivity());
-                        SpeechRecognitionListener listener = new SpeechRecognitionListener();
-                        listener.setCall(call);
-                        listener.setPartialResults(partialResults);
-                        speechRecognizer.setRecognitionListener(listener);
-                        speechRecognizer.startListening(intent);
-                        SpeechRecognition.this.listening(true);
-                        if (partialResults) {
-                            call.resolve();
-                        }
-                    } catch (Exception ex) {
-                        call.reject(ex.getMessage());
-                    } finally {
-                        SpeechRecognition.this.lock.unlock();
-                    }
-                });
+            // Start (or, in streaming mode, keep alive) a recognizer session.
+            this.streaming = partialResults;
+            this.userStopped = false;
+            this.activeIntent = intent;
+            this.streamCall = call;
+            this.accumulated.setLength(0);
+            this.lastEmitted = "";
+            this.previousPartialResults = new JSONArray();
+            startRecognizer(call, partialResults);
+            if (partialResults) {
+                // Streaming: results arrive via the partialResults/listeningState
+                // events, so resolve start() immediately (see native-bridge.js).
+                call.resolve();
+            }
         }
+    }
+
+    // (Re)creates the recognizer and begins listening with activeIntent. Called
+    // on the initial start and on every auto-restart between utterances.
+    private void startRecognizer(final PluginCall call, final boolean partialResults) {
+        bridge
+            .getWebView()
+            .post(() -> {
+                try {
+                    SpeechRecognition.this.lock.lock();
+
+                    if (speechRecognizer != null) {
+                        speechRecognizer.cancel();
+                        speechRecognizer.destroy();
+                        speechRecognizer = null;
+                    }
+
+                    speechRecognizer = SpeechRecognizer.createSpeechRecognizer(bridge.getActivity());
+                    SpeechRecognitionListener listener = new SpeechRecognitionListener();
+                    listener.setCall(call);
+                    listener.setPartialResults(partialResults);
+                    // Mark this listener active; callbacks from any prior (now
+                    // destroyed) recognizer are ignored via isActive().
+                    SpeechRecognition.this.currentListener = listener;
+                    speechRecognizer.setRecognitionListener(listener);
+                    speechRecognizer.startListening(SpeechRecognition.this.activeIntent);
+                    SpeechRecognition.this.listening(true);
+                } catch (Exception ex) {
+                    Logger.error(getLogTag(), "startRecognizer failed: " + ex.getMessage(), ex);
+                    if (!SpeechRecognition.this.streaming && call != null) {
+                        call.reject(ex.getMessage());
+                    }
+                } finally {
+                    SpeechRecognition.this.lock.unlock();
+                }
+            });
+    }
+
+    // Re-arm the recognizer after an utterance endpoint so continuous dictation
+    // survives natural pauses. No-op once the user has stopped.
+    private void scheduleRestart() {
+        scheduleRestart(60);
+    }
+
+    // delayMs lets error-driven restarts back off (let the service settle / avoid a
+    // RECOGNIZER_BUSY spin) while seamless end-of-utterance restarts stay snappy.
+    private void scheduleRestart(long delayMs) {
+        if (userStopped || activeIntent == null) return;
+        bridge
+            .getWebView()
+            .postDelayed(
+                () -> {
+                    if (userStopped) return;
+                    startRecognizer(streamCall, true);
+                },
+                delayMs
+            );
+    }
+
+    private void emitStopped() {
+        JSObject ret = new JSObject();
+        ret.put("status", "stopped");
+        notifyListeners(LISTENING_EVENT, ret);
+    }
+
+    // Emit the FULL running transcript (finalized utterances + the live partial)
+    // as matches[0]; native-bridge.js keeps this as `last` for onPartial/onFinal.
+    private void emitTranscript(String current) {
+        String full = accumulated.toString();
+        if (current != null && !current.isEmpty()) {
+            full = full.isEmpty() ? current : full + " " + current;
+        }
+        if (full.isEmpty() || full.equals(lastEmitted)) return;
+        lastEmitted = full;
+        ArrayList<String> one = new ArrayList<>();
+        one.add(full);
+        JSObject ret = new JSObject();
+        ret.put("matches", new JSArray(one));
+        notifyListeners("partialResults", ret);
     }
 
     private void stopListening() {
@@ -213,12 +297,19 @@ public class SpeechRecognition extends Plugin implements Constants {
             .post(() -> {
                 try {
                     SpeechRecognition.this.lock.lock();
-                    if (SpeechRecognition.this.listening) {
+                    SpeechRecognition.this.userStopped = true;
+                    if (SpeechRecognition.this.listening && speechRecognizer != null) {
                         speechRecognizer.stopListening();
                         SpeechRecognition.this.listening(false);
                     }
+                    if (SpeechRecognition.this.streaming) {
+                        // Finalize the dictation for the JS side. A trailing
+                        // onResults (if any) will refresh `last` before the JS
+                        // 450ms finish timer fires; duplicate "stopped" is safe.
+                        SpeechRecognition.this.emitStopped();
+                    }
                 } catch (Exception ex) {
-                    throw ex;
+                    Logger.error(getLogTag(), "stopListening failed: " + ex.getMessage(), ex);
                 } finally {
                     SpeechRecognition.this.lock.unlock();
                 }
@@ -238,20 +329,23 @@ public class SpeechRecognition extends Plugin implements Constants {
             this.partialResults = partialResults;
         }
 
+        // Ignore callbacks from a recognizer we've already replaced during a
+        // restart — only the newest listener drives state.
+        private boolean isActive() {
+            return SpeechRecognition.this.currentListener == this;
+        }
+
         @Override
         public void onReadyForSpeech(Bundle params) {}
 
         @Override
         public void onBeginningOfSpeech() {
-            try {
-                SpeechRecognition.this.lock.lock();
-                // Notify listeners that recording has started
-                JSObject ret = new JSObject();
-                ret.put("status", "started");
-                SpeechRecognition.this.notifyListeners(LISTENING_EVENT, ret);
-            } finally {
-                SpeechRecognition.this.lock.unlock();
-            }
+            if (!isActive()) return;
+            // Notify listeners that recording has started (ignored by JS; harmless
+            // to re-emit on each restarted utterance).
+            JSObject ret = new JSObject();
+            ret.put("status", "started");
+            SpeechRecognition.this.notifyListeners(LISTENING_EVENT, ret);
         }
 
         @Override
@@ -262,27 +356,51 @@ public class SpeechRecognition extends Plugin implements Constants {
 
         @Override
         public void onEndOfSpeech() {
-            bridge
-                .getWebView()
-                .post(() -> {
-                    try {
-                        SpeechRecognition.this.lock.lock();
-                        SpeechRecognition.this.listening(false);
+            if (!isActive()) return;
+            // Streaming: do NOT end the session here — the recognizer endpoints on
+            // every pause. onResults/onError decides whether to re-arm or finalize.
+            if (SpeechRecognition.this.streaming) return;
 
-                        JSObject ret = new JSObject();
-                        ret.put("status", "stopped");
-                        SpeechRecognition.this.notifyListeners(LISTENING_EVENT, ret);
-                    } finally {
-                        SpeechRecognition.this.lock.unlock();
-                    }
-                });
+            SpeechRecognition.this.listening(false);
+            JSObject ret = new JSObject();
+            ret.put("status", "stopped");
+            SpeechRecognition.this.notifyListeners(LISTENING_EVENT, ret);
         }
 
         @Override
         public void onError(int error) {
-            SpeechRecognition.this.stopListening();
+            if (!isActive()) return;
             String errorMssg = getErrorText(error);
+            Logger.error(getLogTag(), "Speech Recognition Error: " + errorMssg + " (Code: " + error + ")", null);
 
+            if (SpeechRecognition.this.streaming) {
+                if (SpeechRecognition.this.userStopped) {
+                    // User asked to stop — finalize with whatever was accumulated.
+                    SpeechRecognition.this.listening(false);
+                    SpeechRecognition.this.emitStopped();
+                    return;
+                }
+                // The dictation must keep running until the user taps stop. Only a
+                // genuinely fatal condition ends it; everything else (silence,
+                // busy, server-disconnected, network, client, audio glitches) is
+                // transient — re-arm and carry on.
+                boolean fatal =
+                    error == SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS ||
+                    error == SpeechRecognizer.ERROR_LANGUAGE_NOT_SUPPORTED ||
+                    error == SpeechRecognizer.ERROR_LANGUAGE_UNAVAILABLE;
+                if (fatal) {
+                    SpeechRecognition.this.listening(false);
+                    SpeechRecognition.this.emitStopped();
+                    return;
+                }
+                boolean silence = error == SpeechRecognizer.ERROR_NO_MATCH || error == SpeechRecognizer.ERROR_SPEECH_TIMEOUT;
+                // Silence = a natural pause: restart snappily. Real errors: back off a
+                // little so the recognition service can settle before we retry.
+                SpeechRecognition.this.scheduleRestart(silence ? 60 : 300);
+                return;
+            }
+
+            SpeechRecognition.this.stopListening();
             if (this.call != null) {
                 call.reject(errorMssg);
             }
@@ -290,32 +408,53 @@ public class SpeechRecognition extends Plugin implements Constants {
 
         @Override
         public void onResults(Bundle results) {
+            if (!isActive()) return;
             ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+            if (SpeechRecognition.this.streaming) {
+                String finalText = (matches != null && !matches.isEmpty()) ? matches.get(0) : "";
+                if (finalText != null && !finalText.isEmpty()) {
+                    if (SpeechRecognition.this.accumulated.length() > 0) {
+                        SpeechRecognition.this.accumulated.append(" ");
+                    }
+                    SpeechRecognition.this.accumulated.append(finalText);
+                }
+                SpeechRecognition.this.emitTranscript("");
+                if (SpeechRecognition.this.userStopped) {
+                    SpeechRecognition.this.emitStopped();
+                } else {
+                    SpeechRecognition.this.scheduleRestart();
+                }
+                return;
+            }
 
             try {
                 JSArray jsArray = new JSArray(matches);
-
                 if (this.call != null) {
-                    if (!this.partialResults) {
-                        this.call.resolve(new JSObject().put("status", "success").put("matches", jsArray));
-                    } else {
-                        JSObject ret = new JSObject();
-                        ret.put("matches", jsArray);
-                        notifyListeners("partialResults", ret);
-                    }
+                    this.call.resolve(new JSObject().put("status", "success").put("matches", jsArray));
                 }
             } catch (Exception ex) {
-                this.call.resolve(new JSObject().put("status", "error").put("message", ex.getMessage()));
+                if (this.call != null) {
+                    this.call.resolve(new JSObject().put("status", "error").put("message", ex.getMessage()));
+                }
             }
         }
 
         @Override
         public void onPartialResults(Bundle partialResults) {
+            if (!isActive()) return;
             ArrayList<String> matches = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-            JSArray matchesJSON = new JSArray(matches);
+            if (matches == null || matches.isEmpty()) return;
 
+            if (SpeechRecognition.this.streaming) {
+                // Emit finalized text + this segment's live partial as one transcript.
+                SpeechRecognition.this.emitTranscript(matches.get(0));
+                return;
+            }
+
+            JSArray matchesJSON = new JSArray(matches);
             try {
-                if (matches != null && matches.size() > 0 && !previousPartialResults.equals(matchesJSON)) {
+                if (!previousPartialResults.equals(matchesJSON)) {
                     previousPartialResults = matchesJSON;
                     JSObject ret = new JSObject();
                     ret.put("matches", previousPartialResults);

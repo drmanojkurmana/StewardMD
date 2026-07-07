@@ -25,6 +25,12 @@
   window.SMD_IS_NATIVE = native;
   if (!native) return;                       // web: leave everything alone
 
+  // Native device STT is iOS-only (see transcribe below). On iOS, SFSpeechRecognizer is the
+  // ONLY speech option (WKWebView has no Web Speech API). On Android the OS SpeechRecognizer
+  // thrashes under our streaming use (cancels/restarts mid-utterance → "Didn't understand"),
+  // so we let SMD_VOICE fall through to its Web Speech engine (Chrome-in-WebView) instead.
+  var isIOS = (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) === "ios";
+
   // ---- Native helpers (native-only; stay UNDEFINED on web because this file
   // early-returns above). Callers gate on window.SMD_IS_NATIVE / window.SMD_NATIVE
   // so the web build is byte-for-byte unchanged. ----
@@ -143,10 +149,21 @@
       var SP = P && P.SpeechRecognition;
       if (!(SP && SP.start)) throw new Error("speech-unavailable");
       var self = this, last = "", done = false;
+      // Session token: every transcribe() bumps it. Callbacks/timers left over from a PRIOR
+      // session (the 450ms "stopped" finish, the 800ms stop fallback) check `current()` and
+      // no-op — otherwise a stale timer fires mid-way through the NEXT session and tears it
+      // down (button dies after ~1s, native listeners orphaned). Repro: speak → stop → speak
+      // again quickly. See git history for the singleton-state bug this guards against.
+      var token = (self._token = (self._token || 0) + 1);
+      function current() { return self._token === token; }
+      // Kill any leftover subs/timers from a previous session right now.
+      clearTimeout(self._finTimer);
+      self._removeSpeechSub();
       function finish(txt) {
-        if (done) return; done = true;
+        if (done || !current()) return; done = true;
         clearTimeout(self._finTimer); self._finish = null;
         self._removeSpeechSub();
+        try { if (SP.stop) SP.stop(); } catch (e) {}   // ensure native stops (no orphan mic / restart loop)
         if (opts.onFinal) opts.onFinal(String(txt != null ? txt : last));
       }
       self._finish = finish;
@@ -156,12 +173,15 @@
       // (doing so tore the listener down before any result arrived). iOS resolves start()
       // with the final matches, handled in the .then below.
       (SP.requestPermissions ? SP.requestPermissions() : Promise.resolve()).then(function () {
+        if (!current()) return;   // superseded before we got going
         if (SP.addListener) {
           self._speechSub = SP.addListener("partialResults", function (data) {
+            if (!current()) return;
             var m = data && data.matches && data.matches[0];
             if (m != null) { last = String(m); if (opts.onPartial) opts.onPartial(last); }
           });
           self._stateSub = SP.addListener("listeningState", function (data) {
+            if (!current()) return;
             var s = data && data.status;
             if (s === "stopped") {
               // Give the trailing final `partialResults` (emitted just after "stopped") a
@@ -173,10 +193,12 @@
         }
         return SP.start({ language: navigator.language || "en-US", partialResults: true, popup: false, maxResults: 5 });
       }).then(function (res) {
+        if (!current()) return;
         var m = res && res.matches && res.matches[0];
         if (m != null) { last = String(m); finish(last); }   // iOS: start() carried the final result
         // Android: res is empty — keep listening; finalize via listeningState / stop().
       }).catch(function (e) {
+        if (!current()) return;
         var msg = String((e && e.message) || e || "");
         if (last) { finish(last); return; }   // "no match" after real speech isn't a hard error
         clearTimeout(self._finTimer); self._finish = null;
@@ -189,11 +211,17 @@
       var P = plugins(); var SP = P && P.SpeechRecognition;
       try { if (SP && SP.stop) SP.stop(); } catch (e) {}
       // stop() triggers listeningState:"stopped" → finish() runs there. Fallback in case no
-      // state event arrives: finalize with whatever we have, else just clean up.
+      // state event arrives: finalize with whatever we have, else just clean up. Capture the
+      // session token so a NEW session started before this fires isn't torn down.
       var self = this;
+      var token = self._token;
       clearTimeout(this._finTimer);
-      this._finTimer = setTimeout(function () { if (self._finish) self._finish(); else self._removeSpeechSub(); }, 800);
+      this._finTimer = setTimeout(function () {
+        if (self._token !== token) return;   // a newer session owns SMD_NATIVE now — leave it alone
+        if (self._finish) self._finish(); else self._removeSpeechSub();
+      }, 800);
     },
+    _token: 0,
     _speechSub: null,
     _stateSub: null,
     _finTimer: null,
