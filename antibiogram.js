@@ -63,7 +63,12 @@
      ICMR AMRSN 2024 national + GIMSR hospital dataset shown in the references
      panel. Values are % SUSCEPTIBLE (higher = better); some cells are qualitative
      only. No numbers are invented here — this view just reads that data. */
-  function abgData() { return (typeof window !== "undefined" && window.ASP_ABG) ? window.ASP_ABG : null; }
+  // The ACTIVE profile's antibiogram (region composite / individual study / hospital / ICMR
+  // national), driven by the global HOSPITAL profile selector. Falls back to ICMR national.
+  function abgData() {
+    try { if (window.HOSPITAL && window.HOSPITAL.getAntibiogram) { var a = window.HOSPITAL.getAntibiogram(); if (a && a.org) return a; } } catch (e) {}
+    return (typeof window !== "undefined" && window.ASP_ABG) ? (window.ASP_ABG.national || window.ASP_ABG.hospital || null) : null;
+  }
 
   // Pretty labels for the terse drug keys used in ASP_ABG.
   var DRUG_LABEL = {
@@ -173,23 +178,20 @@
   }
   function colLabel(id) { for (var i = 0; i < COLS.length; i++) if (COLS[i].id === id) return COLS[i].label; return id; }
 
-  /* Resistance — % susceptible from window.ASP_ABG (organism cards) */
+  /* Resistance rates — % RESISTANT (= 100 − %susceptible) from the ACTIVE profile
+     (region composite / individual study / hospital / ICMR national). Data is stored as
+     % susceptible; we invert only at display. Missing cells render "—". No invented values. */
   function resistanceView() {
-    var data = abgData();
-    if (!data || (!data.national && !data.hospital))
-      return '<div class="abg-empty"><div class="abg-empty-ic">📊</div><b>Antibiogram unavailable</b><p>The susceptibility dataset has not loaded yet. Reopen this screen in a moment.</p></div>';
+    var src = abgData();
+    if (!src || !src.org || !Object.keys(src.org).length)
+      return '<div class="abg-empty"><div class="abg-empty-ic">📊</div><b>Antibiogram unavailable</b><p>The susceptibility dataset has not loaded yet, or this profile has no antibiogram. Reopen this screen in a moment.</p></div>';
 
-    if (!data[srcKey]) srcKey = data.national ? "national" : "hospital";
-    var src = data[srcKey];
-
+    var curId = (window.HOSPITAL && window.HOSPITAL.current) ? window.HOSPITAL.current().id : "ICMR";
     var h = '<div class="abg-srcbar"><label class="abg-srclab">Source</label>' +
-      '<select class="abg-srcsel" id="abgSrc">';
-    if (data.national) h += '<option value="national"' + (srcKey === "national" ? " selected" : "") + '>ICMR AMRSN 2024 · National</option>';
-    if (data.hospital) h += '<option value="hospital"' + (srcKey === "hospital" ? " selected" : "") + '>Hospital antibiogram</option>';
-    h += '</select></div>';
+      '<select class="abg-srcsel" id="abgSrc" aria-label="Antibiogram source">' + sourceOptions(curId) + '</select></div>';
 
-    h += '<div class="abg-warn"><b>' + (src.dated ? "Dated source." : "Reference data.") + '</b> ' + esc(src.source || "") +
-      (src.note ? ' — ' + esc(src.note) : '') + '</div>';
+    h += '<div class="abg-warn"><b>' + (src.dated ? "Dated source." : (src.composite ? "Regional best-of composite." : "Reference data.")) + '</b> ' + esc(src.source || "") +
+      (src.note ? ' — ' + esc(src.note) : '') + ' <b>Shown as % of isolates resistant.</b> Verify against your own local antibiogram before clinical use.</div>';
 
     var orgs = src.org || {};
     Object.keys(orgs).forEach(function (name) {
@@ -201,12 +203,14 @@
         (meta.length ? '<span class="abg-oc-m">' + meta.join(" · ") + '</span>' : '') + '</div><div class="abg-oc-rows">';
       Object.keys(drugs).forEach(function (k) {
         var v = drugs[k], s = v.s;
-        h += '<div class="abg-dr"><span class="abg-dr-n">' + esc(drugLabel(k)) + '</span>';
+        var prov = v.src ? ' data-org="' + esc(name) + '" data-drug="' + esc(k) + '"' : '';
+        h += '<div class="abg-dr' + (v.src ? ' abg-dr-prov' : '') + '"' + prov + '><span class="abg-dr-n">' + esc(drugLabel(k)) + (v.src ? ' <i class="abg-prov" title="tap for source">ⓘ</i>' : '') + '</span>';
         if (s == null) {
           h += '<span class="abg-dr-q">' + esc(v.q || "—") + '</span>';
         } else {
-          var pct = (v.approx ? "~" : "") + s + "%";
-          h += '<span class="abg-dr-v"><span class="abg-pill ' + suscClass(s) + '">' + pct + ' S' + '</span>' + trendArrow(v.trend) + '</span>';
+          var R = Math.round(100 - s);
+          var pct = (v.approx ? "~" : "") + R + "% R";
+          h += '<span class="abg-dr-v"><span class="abg-pill ' + rClass(R) + '">' + pct + '</span>' + trendArrowR(v.trend) + '</span>';
         }
         h += '</div>';
         if (s != null && v.q) h += '<div class="abg-dr-note">' + esc(v.q) + '</div>';
@@ -214,16 +218,53 @@
       h += '</div></div>';
     });
 
-    h += '<div class="abg-legend heat"><span><i class="hs su4"></i>≥90%</span><span><i class="hs su3"></i>75–89%</span><span><i class="hs su2"></i>50–74%</span><span><i class="hs su1"></i>30–49%</span><span><i class="hs su0"></i>&lt;30%</span><span>% susceptible</span></div>';
+    h += '<div class="abg-legend heat"><span><i class="hs su0"></i>≥70%</span><span><i class="hs su1"></i>50–69%</span><span><i class="hs su2"></i>25–49%</span><span><i class="hs su3"></i>10–24%</span><span><i class="hs su4"></i>&lt;10%</span><span>% resistant (red = worse)</span></div>';
     return h;
   }
-  function suscClass(s) { return s >= 90 ? "su4" : s >= 75 ? "su3" : s >= 50 ? "su2" : s >= 30 ? "su1" : "su0"; }
-  function trendArrow(t) {
+
+  /* Source dropdown built from HOSPITAL.list: ICMR national + national studies, then each
+     region's composite with its individual studies nested (grouped by <optgroup>), then GIMSR.
+     Changing it calls HOSPITAL.setProfile so the whole app (reasoning too) stays in sync. */
+  function sourceOptions(cur) {
+    if (!(window.HOSPITAL && window.HOSPITAL.list)) return '<option value="ICMR" selected>ICMR AMRSN 2024 · National</option>';
+    var list = window.HOSPITAL.list;
+    function opt(id, label) { return '<option value="' + id + '"' + (id === cur ? " selected" : "") + '>' + esc(label) + '</option>'; }
+    function studiesOf(rg) {
+      return list.filter(function (x) { return x.type === "study" && x.region === rg; })
+        .sort(function (a, b) { return (a.credibility || 9) - (b.credibility || 9); });
+    }
+    var comp = {}; list.forEach(function (x) { if (x.type === "region") comp[x.region] = x; });
+    var h = '<optgroup label="National">';
+    if (list.some(function (x) { return x.id === "ICMR"; })) h += opt("ICMR", "ICMR AMRSN 2024 · National (default)");
+    studiesOf("national").forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
+    h += '</optgroup>';
+    [["south", "South India"], ["north", "North India"], ["east", "East & NE India"], ["west", "West & Central India"]].forEach(function (rr) {
+      var c = comp[rr[0]], sts = studiesOf(rr[0]);
+      if (!c && !sts.length) return;
+      h += '<optgroup label="' + rr[1] + '">';
+      if (c) h += opt(c.id, (c.short || rr[1]) + " — regional composite (best-of)");
+      sts.forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
+      h += '</optgroup>';
+    });
+    if (list.some(function (x) { return x.id === "GIMSR"; }) && window.ASP_ABG && window.ASP_ABG.hospital && window.ASP_ABG.hospital.org && Object.keys(window.ASP_ABG.hospital.org).length)
+      h += '<optgroup label="Hospital">' + opt("GIMSR", "GIMSR, Visakhapatnam") + '</optgroup>';
+    return h;
+  }
+  function srcLabel(id) {
+    try { var st = window.ABG_DATA && window.ABG_DATA.getStudy && window.ABG_DATA.getStudy(id); if (st) return st.label; } catch (e) {}
+    return id;
+  }
+
+  // Resistance colour bands (red = high R). Reuses su0..su4 tokens (su0 red … su4 green).
+  function rClass(R) { return R >= 70 ? "su0" : R >= 50 ? "su1" : R >= 25 ? "su2" : R >= 10 ? "su3" : "su4"; }
+  // Trend on RESISTANCE: input is a %-susceptible series, so ΔR = −ΔS.
+  // Rising R = worsening = red ▲; falling R = improving = green ▼.
+  function trendArrowR(t) {
     if (!t || t.length < 2) return "";
-    var d = t[t.length - 1][1] - t[t.length - 2][1];
-    if (Math.abs(d) < 0.1) return "";
-    var up = d > 0; // susceptibility rising = improving
-    return '<span class="abg-trend ' + (up ? "up" : "down") + '" title="' + (up ? "improving" : "worsening") + '">' + (up ? "▲" : "▼") + Math.abs(Math.round(d)) + '</span>';
+    var dR = -(t[t.length - 1][1] - t[t.length - 2][1]);
+    if (Math.abs(dR) < 0.5) return "";
+    var worse = dR > 0;
+    return '<span class="abg-trend ' + (worse ? "down" : "up") + '" title="' + (worse ? "resistance rising" : "resistance falling") + '">' + (worse ? "▲" : "▼") + Math.abs(Math.round(dR)) + '</span>';
   }
 
   /* ───────────────────────────  EVENTS  ─────────────────────────── */
@@ -251,9 +292,21 @@
           return render();
         }
       }
+      if (tab === "resistance") {   // tap a cell with provenance → show its source study
+        var pr = b.closest(".abg-dr-prov[data-drug]");
+        if (pr) {
+          var src = abgData(), o = src && src.org && src.org[pr.getAttribute("data-org")];
+          var c = o && o.d && o.d[pr.getAttribute("data-drug")];
+          if (c && c.src) toast(drugLabel(pr.getAttribute("data-drug")) + " · " + pr.getAttribute("data-org") + " — source: " + srcLabel(c.src));
+          return;
+        }
+      }
     });
     root.addEventListener("change", function (e) {
-      if (e.target && e.target.id === "abgSrc") { srcKey = e.target.value; render(); }
+      if (e.target && e.target.id === "abgSrc") {
+        if (window.HOSPITAL && window.HOSPITAL.setProfile) window.HOSPITAL.setProfile(e.target.value);
+        render();
+      }
     });
   }
 
@@ -337,6 +390,8 @@
       ".abg-trend.up{color:#047857;background:rgba(4,120,87,.12)}",
       ".abg-trend.down{color:#B91C1C;background:rgba(185,28,28,.12)}",
       ".abg-dr-note{font:500 11px/1.4 var(--f);color:var(--mut);padding:0 0 4px 2px}",
+      ".abg-prov{font-style:normal;color:var(--tl);font-size:11px;opacity:.65;margin-left:3px}",
+      ".abg-dr-prov{cursor:pointer}",
       ".abg-legend.heat .hs{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:5px}",
       ".abg-empty{text-align:center;padding:40px 20px;color:var(--mut)}",
       ".abg-empty-ic{font-size:38px;margin-bottom:8px}",
