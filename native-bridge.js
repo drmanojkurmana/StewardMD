@@ -230,8 +230,27 @@
       var rm = function (s) { try { if (!s) return; if (typeof s.remove === "function") s.remove(); else if (typeof s.then === "function") s.then(function (h) { try { if (h && h.remove) h.remove(); } catch (e) {} }); } catch (e) {} };
       rm(this._speechSub); rm(this._stateSub);
       this._speechSub = null; this._stateSub = null;
+    },
+
+    // ---- Screen orientation. The app is portrait-locked everywhere (native default is
+    // set in MainActivity/AppDelegate); the antibiogram grid unlocks rotation so it can be
+    // read in landscape, then re-locks on close. Uses the native AppOrientation plugin when
+    // present, with a best-effort Web Screen Orientation fallback for plain browsers. ----
+    lockPortrait: function () {
+      var P = plugins();
+      try { if (P && P.AppOrientation && P.AppOrientation.lockPortrait) { P.AppOrientation.lockPortrait(); return; } } catch (e) {}
+      try { if (screen.orientation && screen.orientation.lock) { var r = screen.orientation.lock("portrait"); if (r && r.catch) r.catch(function () {}); } } catch (e) {}
+    },
+    unlockRotation: function () {
+      var P = plugins();
+      try { if (P && P.AppOrientation && P.AppOrientation.unlock) { P.AppOrientation.unlock(); return; } } catch (e) {}
+      try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {}
     }
   };
+
+  // Portrait by default across the app (belt-and-suspenders for web; native platforms also
+  // default to portrait at the Activity/AppDelegate level).
+  try { window.SMD_NATIVE.lockPortrait(); } catch (e) {}
 
   // ---- Native nav hardening: when a syndrome is opened from the Knowledge-Library
   // list (SB.openSyn) and the user then closes the stewardship console, return STRAIGHT
