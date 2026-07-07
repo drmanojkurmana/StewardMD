@@ -91,7 +91,7 @@
 
   function openDialog(opts) {
     opts = opts || {};
-    var target = opts.target === "icu" ? "icu" : "reasoning";
+    var target = (opts.target === "icu" || opts.target === "text") ? opts.target : "reasoning";
     injectCSS();
     stop();
     if (root) root.remove();
@@ -104,13 +104,13 @@
       '<div class="smdv-scrim" data-act="close"></div>' +
       '<div class="smdv-sheet" role="dialog" aria-modal="true" aria-label="MaiK Scribe voice intake">' +
         '<div class="smdv-hd"><span class="smdv-ttl">🎤 MaiK Scribe</span><button class="smdv-x" data-act="close" aria-label="Close">✕</button></div>' +
-        '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : "Describe your patient in plain speech — symptoms, signs, key numbers.") + '</div>' +
+        '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : target === "text" ? "Speak your question or notes — tap ✓ to drop the text into the chat." : "Describe your patient in plain speech — symptoms, signs, key numbers.") + '</div>' +
         kindSel +
         '<button class="smdv-rec" id="smdvRec">🎤 Tap to speak</button>' +
         '<div class="smdv-eng" id="smdvEng"></div>' +
         '<textarea class="smdv-ta" id="smdvTa" rows="4" placeholder="Your words appear here — you can edit before extracting."></textarea>' +
         '<div class="smdv-disc">On-device speech stays private (only text is used). AI transcription/extraction sends audio/text to the server — the same as Photo scan. Nothing is applied until you review &amp; confirm.</div>' +
-        '<button class="smdv-extract" id="smdvExtract" disabled>Extract &amp; fill</button>' +
+        '<button class="smdv-extract" id="smdvExtract" disabled>' + (target === "text" ? "✓ Use this text" : "Extract &amp; fill") + '</button>' +
         '<div class="smdv-review" id="smdvReview"></div>' +
       '</div>';
     document.body.appendChild(root);
@@ -155,6 +155,7 @@
     extractBtn.addEventListener("click", function () {
       var transcript = ta.value.trim(); if (!transcript) return;
       stop(); recording = false; setState("idle");
+      if (target === "text") { if (opts.onText) { try { opts.onText(transcript); } catch (e) {} } close(); return; }
       extractBtn.disabled = true; extractBtn.textContent = "Extracting…";
       var catalog = (target === "reasoning" && window.DX && window.DX.findingCatalog) ? window.DX.findingCatalog() : null;
       (window.SMD_AI && window.SMD_AI.extract ? window.SMD_AI.extract(transcript, kind, catalog) : Promise.resolve({ error: "no-ai" }))
@@ -216,7 +217,7 @@
     if (document.getElementById("smdv-css")) return;
     var s = document.createElement("style"); s.id = "smdv-css";
     s.textContent = [
-      ".smdv{position:fixed;inset:0;z-index:990;font-family:var(--sans,-apple-system,'Segoe UI',Roboto,system-ui,sans-serif);opacity:0;transition:opacity .2s;pointer-events:none}",
+      ".smdv{position:fixed;inset:0;z-index:17000;font-family:var(--sans,-apple-system,'Segoe UI',Roboto,system-ui,sans-serif);opacity:0;transition:opacity .2s;pointer-events:none}",
       ".smdv.on{opacity:1;pointer-events:auto}",
       ".smdv-scrim{position:absolute;inset:0;background:rgba(8,15,26,.55)}",
       ".smdv-sheet{position:absolute;left:0;right:0;bottom:0;max-height:88vh;overflow:auto;background:var(--panel,#fff);color:var(--ink,#0f172a);border-radius:20px 20px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.3);transform:translateY(14px);transition:transform .22s}",
