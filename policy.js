@@ -109,6 +109,33 @@
       policyName:"GIMSR Hospital Antimicrobial Policy", version:"HIC-3e · 04.11.2024 (ref NABH/ICMR)",
       hasPolicy:true, policy:P, watch:WATCH, reserve:RESERVE }
   ];
+
+  /* ---- Regional antibiogram profiles (data-driven from antibiogram-data.js) ---------- *
+   * Adds "South/North/East & NE/West & Central India (regional composite)" plus each
+   * individual study as a drill-down profile, so ONE Active-profile selector drives the
+   * Antibiogram screen and syndrome reasoning everywhere ICMR does. A profile carries only
+   * an `abg` (no `policy`); ICMR stays the default. Studies without per-drug data are skipped. */
+  (function () {
+    var D = window.ABG_DATA; if (!D) return;
+    var RMETA = {
+      south: { name: "South India (regional composite)", short: "South" },
+      north: { name: "North India (regional composite)", short: "North" },
+      east:  { name: "East & NE India (regional composite)", short: "East/NE" },
+      west:  { name: "West & Central India (regional composite)", short: "West/Central" }
+    };
+    ["south", "north", "east", "west"].forEach(function (rg) {
+      var abg = D.region && D.region[rg];
+      if (!abg || !abg.org || !Object.keys(abg.org).length) return;
+      HOSPITALS.push({ id: "REGION_" + rg.toUpperCase(), name: RMETA[rg].name, short: RMETA[rg].short,
+        type: "region", region: rg, hasPolicy: false, abg: abg, sources: abg.sources || [] });
+    });
+    (D.studies || []).forEach(function (st) {
+      if (!st.org || !Object.keys(st.org).length) return;   // e.g. ANDHRA_UTI reported MDR% only
+      HOSPITALS.push({ id: "ABG_" + st.id, name: st.label, short: st.city || st.id,
+        type: "study", region: st.region, credibility: st.credibility, hasPolicy: false, abg: st });
+    });
+  })();
+
   var HMAP = {}; HOSPITALS.forEach(function (h) { HMAP[h.id] = h; });
 
   var KEY = "stewardmd_hospital";
@@ -128,8 +155,52 @@
     return { hospital: h, entry: null };
   }
 
+  /* ---- Antibiogram accessors — active profile drives resistance data everywhere -------- *
+   * getAntibiogram(): the active profile's antibiogram object ({source,note?,org}); falls
+   *   back to the ICMR national dataset so nothing breaks if a profile lacks data.
+   * getSusceptibility(org, drugKey): {s, src} (% susceptible + provenance) from the active
+   *   profile, else the ICMR national dataset (national:true), else null. Never invents. */
+  var ORG_ALIAS = {
+    "e. coli": "Escherichia coli", "e.coli": "Escherichia coli", "escherichia coli": "Escherichia coli",
+    "klebsiella": "Klebsiella pneumoniae", "k. pneumoniae": "Klebsiella pneumoniae", "klebsiella pneumoniae": "Klebsiella pneumoniae",
+    "pseudomonas": "Pseudomonas aeruginosa", "p. aeruginosa": "Pseudomonas aeruginosa", "pseudomonas aeruginosa": "Pseudomonas aeruginosa",
+    "acinetobacter": "Acinetobacter baumannii", "a. baumannii": "Acinetobacter baumannii", "acinetobacter baumannii": "Acinetobacter baumannii",
+    "s. aureus": "Staphylococcus aureus", "staph aureus": "Staphylococcus aureus", "staphylococcus aureus": "Staphylococcus aureus",
+    "mrsa": "Staphylococcus aureus", "mssa": "Staphylococcus aureus",
+    "enterococcus": "Enterococcus", "enterococcus faecium": "Enterococcus faecium", "enterococcus faecalis": "Enterococcus faecalis",
+    "proteus": "Proteus mirabilis", "p. mirabilis": "Proteus mirabilis", "proteus mirabilis": "Proteus mirabilis"
+  };
+  function canonOrg(name) { var k = String(name || "").toLowerCase().trim(); return ORG_ALIAS[k] || name; }
+  function getAntibiogram() {
+    var h = current();
+    if (h && h.abg) return h.abg;
+    if (h && h.id === "GIMSR" && window.ASP_ABG && window.ASP_ABG.hospital) return window.ASP_ABG.hospital;
+    return (window.ASP_ABG && window.ASP_ABG.national) || null;
+  }
+  function lookIn(ab, orgName, drugKey) {
+    if (!ab || !ab.org) return null;
+    var o = ab.org[orgName];
+    if (!o) { // canonical + case-insensitive match
+      var cn = canonOrg(orgName), keys = Object.keys(ab.org), i;
+      for (i = 0; i < keys.length; i++) { if (keys[i] === cn || keys[i].toLowerCase() === String(orgName).toLowerCase()) { o = ab.org[keys[i]]; break; } }
+    }
+    if (!o || !o.d) return null;
+    var c = o.d[drugKey];
+    return (c && c.s != null) ? { s: c.s, src: c.src || null, approx: !!c.approx } : null;
+  }
+  function getSusceptibility(orgName, drugKey) {
+    var ab = getAntibiogram();
+    var hit = lookIn(ab, orgName, drugKey) || lookIn(ab, canonOrg(orgName), drugKey);
+    if (hit) return hit;
+    var nat = window.ASP_ABG && window.ASP_ABG.national;
+    var nh = lookIn(nat, orgName, drugKey) || lookIn(nat, canonOrg(orgName), drugKey);
+    if (nh) { nh.national = true; return nh; }
+    return null;
+  }
+
   window.HOSPITAL = {
     list: HOSPITALS, current: current, setProfile: setProfile, getPolicy: getPolicy,
+    getAntibiogram: getAntibiogram, getSusceptibility: getSusceptibility, canonOrg: canonOrg,
     awareClass: awareClass,
     stewardshipRules: [
       "Prescribe antibiotics only when clinically indicated; send cultures before the first dose.",
