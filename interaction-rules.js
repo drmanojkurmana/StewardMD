@@ -132,6 +132,44 @@
     "fluconazole":    ["azole_antifungal", "cyp3a4_inhibitor", "qt_prolonging"],
     "voriconazole":   ["azole_antifungal", "cyp3a4_inhibitor"],
 
+    // --- Beta-blockers & rate-limiting (non-dihydropyridine) CCBs ---
+    // Non-dihydropyridine CCBs (verapamil > diltiazem) depress SA/AV nodal
+    // conduction and contractility; additive with beta-blockers.
+    "metoprolol":     ["beta_blocker"],
+    "bisoprolol":     ["beta_blocker"],
+    "atenolol":       ["beta_blocker"],
+    "carvedilol":     ["beta_blocker"],
+    "propranolol":    ["beta_blocker"],
+    "nebivolol":      ["beta_blocker"],
+    // Verapamil/diltiazem are moderate CYP3A4 inhibitors, but they are
+    // intentionally NOT tagged "cyp3a4_inhibitor": the existing CYP3A4 rules
+    // carry antimicrobial-specific wording and would mislabel these findings.
+    "verapamil":      ["non_dihydropyridine_ccb"],
+    "diltiazem":      ["non_dihydropyridine_ccb"],
+
+    // --- Fibrates (lipid-lowering; myopathy risk with statins) ---
+    "gemfibrozil":    ["fibrate"],
+    "fenofibrate":    ["fibrate"],
+    "bezafibrate":    ["fibrate"],
+
+    // --- Potassium supplements (hyperkalaemia risk with RAAS / K-sparing) ---
+    // verify: confirm the exact generic string the formulary stores
+    // (e.g. "potassium chloride" vs "potassium"); both aliases added to be safe.
+    "potassium chloride": ["potassium_supplement"],
+    "potassium":      ["potassium_supplement"],
+
+    // --- Antifolate antibiotics (additive with methotrexate) ---
+    // Co-trimoxazole = trimethoprim + sulfamethoxazole; the trimethoprim
+    // component is a dihydrofolate-reductase inhibitor, additive with MTX.
+    // verify: confirm formulary spelling ("co-trimoxazole"/"cotrimoxazole").
+    "trimethoprim":   ["antifolate", "antibiotic"],
+    "co-trimoxazole": ["antifolate", "antibiotic"],
+    "cotrimoxazole":  ["antifolate", "antibiotic"],
+
+    // --- Xanthine oxidase inhibitor + thiopurine ---
+    "allopurinol":    ["xanthine_oxidase_inhibitor"],
+    "azathioprine":   ["thiopurine", "dmard"],
+
     // --- Others referenced by pair rules ---
     "methotrexate":   ["dmard", "antifolate"],
     "digoxin":        ["cardiac_glycoside"]
@@ -304,6 +342,145 @@
       specialistReview: false
     },
 
+    {
+      id: "pair-betablocker-nondhp-ccb",
+      type: "pair",
+      subjects: [{ kind: "class", value: "beta_blocker" }, { kind: "class", value: "non_dihydropyridine_ccb" }],
+      severity: "major",
+      mechanism: "Beta-blockers and non-dihydropyridine calcium-channel blockers (verapamil, and to a lesser extent diltiazem) both slow sinoatrial and atrioventricular nodal conduction and reduce myocardial contractility; the effects are additive.",
+      effect: "Risk of marked bradycardia, high-grade AV block, hypotension and worsening heart failure.",
+      action: "Avoid combining a beta-blocker with verapamil or diltiazem where possible, and especially avoid intravenous verapamil in a beta-blocked patient. If both are needed for rate control, use cautious low doses under specialist supervision and prefer diltiazem over verapamil.",
+      monitoring: "Monitor heart rate, blood pressure and ECG (PR interval); review for symptoms of bradycardia or heart failure.",
+      sourceId: "openfda-labeling",
+      evidence: "established",
+      reviewDate: "2026-07-07",
+      doseTimingSeparation: false,
+      specialistReview: true
+    },
+    {
+      id: "pair-digoxin-verapamil",
+      type: "pair",
+      subjects: [{ kind: "generic", value: "digoxin" }, { kind: "generic", value: "verapamil" }],
+      severity: "major",
+      mechanism: "Verapamil inhibits P-glycoprotein–mediated renal and biliary clearance of digoxin, raising serum digoxin concentrations; both drugs also independently slow AV-nodal conduction.",
+      effect: "Digoxin toxicity (nausea, visual disturbance, bradyarrhythmias, AV block); digoxin levels may rise by roughly 50–75%.",
+      action: "Anticipate a rise in digoxin level when starting verapamil; reduce the digoxin dose (commonly by about half) and re-titrate to level and clinical response.",
+      monitoring: "Check serum digoxin level and ECG/heart rate after starting or changing verapamil; monitor for toxicity.",
+      sourceId: "openfda-labeling",
+      evidence: "established",
+      reviewDate: "2026-07-07",
+      doseTimingSeparation: false,
+      specialistReview: false
+    },
+    {
+      id: "pair-ssri-anticoagulant",
+      type: "pair",
+      subjects: [{ kind: "class", value: "ssri" }, { kind: "class", value: "anticoagulant" }],
+      severity: "moderate",
+      mechanism: "SSRIs deplete platelet serotonin and impair platelet aggregation; combined with an anticoagulant this adds an antiplatelet effect to impaired coagulation.",
+      effect: "Increased risk of bleeding, particularly gastrointestinal.",
+      action: "Use with caution; consider gastroprotection (PPI) in higher-risk patients and counsel on bleeding signs. Consider a lower-bleeding-risk antidepressant where feasible.",
+      monitoring: "Watch for bruising and GI bleeding; for warfarin, monitor INR after starting or stopping the SSRI.",
+      sourceId: "onc-nlm-hpddi",
+      evidence: "established",
+      reviewDate: "2026-07-07",
+      doseTimingSeparation: false,
+      specialistReview: false
+    },
+    {
+      id: "pair-ssri-nsaid",
+      type: "pair",
+      subjects: [{ kind: "class", value: "ssri" }, { kind: "class", value: "nsaid" }],
+      severity: "moderate",
+      mechanism: "SSRIs impair platelet serotonin-mediated aggregation while NSAIDs inhibit platelet function and injure gastric mucosa; the effects on GI bleeding risk are additive.",
+      effect: "Increased risk of gastrointestinal bleeding (several-fold with the combination).",
+      action: "Avoid where possible; if both are needed, use the lowest NSAID dose for the shortest time and add gastroprotection (PPI). Prefer paracetamol for analgesia where appropriate.",
+      monitoring: "Counsel on and watch for GI bleeding (dyspepsia, melaena, anaemia).",
+      sourceId: "onc-nlm-hpddi",
+      evidence: "established",
+      reviewDate: "2026-07-07",
+      doseTimingSeparation: false,
+      specialistReview: false
+    },
+    {
+      id: "pair-statin-fibrate",
+      type: "pair",
+      subjects: [{ kind: "class", value: "statin" }, { kind: "class", value: "fibrate" }],
+      severity: "major",
+      mechanism: "Fibrates add an independent myotoxic effect to statins; gemfibrozil additionally inhibits statin glucuronidation and OATP1B1 uptake, markedly raising statin exposure (fenofibrate interacts far less).",
+      effect: "Increased risk of myopathy and rhabdomyolysis (with acute kidney injury).",
+      action: "Avoid gemfibrozil with any statin. If a statin–fibrate combination is required, prefer fenofibrate with a low statin dose. Counsel the patient to report muscle symptoms.",
+      monitoring: "Advise reporting of muscle pain/weakness or dark urine; check creatine kinase and renal function if symptomatic.",
+      sourceId: "openfda-labeling",
+      evidence: "established",
+      reviewDate: "2026-07-07",
+      doseTimingSeparation: false,
+      specialistReview: false
+    },
+    {
+      id: "pair-raas-potassium-supplement",
+      type: "pair",
+      subjects: [{ kind: "class", value: "raas" }, { kind: "class", value: "potassium_supplement" }],
+      severity: "major",
+      mechanism: "ACE inhibitors and ARBs reduce aldosterone-driven renal potassium excretion; adding a potassium supplement (or potassium-containing salt substitute) directly increases the potassium load.",
+      effect: "Risk of hyperkalaemia, which can cause life-threatening arrhythmias, especially in renal impairment.",
+      action: "Avoid routine potassium supplements in patients on an ACE inhibitor or ARB unless a documented deficit needs correcting; avoid potassium-based salt substitutes.",
+      monitoring: "Check serum potassium and renal function before and after starting; recheck after any dose change.",
+      sourceId: "onc-nlm-hpddi",
+      evidence: "established",
+      reviewDate: "2026-07-07",
+      doseTimingSeparation: false,
+      specialistReview: false
+    },
+    {
+      id: "pair-arb-potassium-sparing",
+      type: "pair",
+      subjects: [{ kind: "class", value: "arb" }, { kind: "class", value: "potassium_sparing_diuretic" }],
+      severity: "major",
+      mechanism: "ARBs reduce aldosterone-driven renal potassium excretion; potassium-sparing diuretics independently retain potassium. The effects are additive (mirrors the ACE-inhibitor interaction).",
+      effect: "Risk of significant hyperkalaemia, which can cause life-threatening arrhythmias, especially in renal impairment.",
+      action: "Use together only with a clear indication (e.g. heart failure). Start low, avoid potassium supplements/salt substitutes, and correct renal impairment first.",
+      monitoring: "Check serum potassium and renal function within 1 week of starting or dose change, then periodically.",
+      sourceId: "onc-nlm-hpddi",
+      evidence: "established",
+      reviewDate: "2026-07-07",
+      doseTimingSeparation: false,
+      specialistReview: false
+    },
+    {
+      id: "pair-methotrexate-trimethoprim",
+      type: "pair",
+      // Matches the (currently unused) "antifolate" tag on methotrexate against
+      // the antifolate antibiotics trimethoprim / co-trimoxazole. Distinct-med
+      // matching means a lone methotrexate cannot fire this against itself.
+      subjects: [{ kind: "generic", value: "methotrexate" }, { kind: "class", value: "antifolate" }],
+      severity: "major",
+      mechanism: "Trimethoprim (including the trimethoprim component of co-trimoxazole) is a dihydrofolate-reductase inhibitor, additive with methotrexate's antifolate effect, and also reduces methotrexate renal clearance.",
+      effect: "Additive antifolate toxicity: severe bone-marrow suppression (megaloblastic anaemia, pancytopenia) — fatal cases have been reported.",
+      action: "Avoid co-trimoxazole/trimethoprim with methotrexate; choose an alternative antibiotic. If unavoidable and short-term, seek specialist advice and consider folinic acid rescue.",
+      monitoring: "Monitor full blood count closely; watch for mucositis, infection and other signs of marrow suppression.",
+      sourceId: "onc-nlm-hpddi",
+      evidence: "established",
+      reviewDate: "2026-07-07",
+      doseTimingSeparation: false,
+      specialistReview: true
+    },
+    {
+      id: "pair-allopurinol-azathioprine",
+      type: "pair",
+      subjects: [{ kind: "generic", value: "allopurinol" }, { kind: "generic", value: "azathioprine" }],
+      severity: "major",
+      mechanism: "Azathioprine is metabolised to 6-mercaptopurine, which is inactivated by xanthine oxidase. Allopurinol inhibits xanthine oxidase, diverting metabolism toward toxic thioguanine nucleotides and markedly raising active-drug levels.",
+      effect: "Severe, potentially life-threatening myelosuppression (pancytopenia).",
+      action: "Avoid the combination if possible. If allopurinol is essential, the azathioprine dose must be reduced to about 25% of the usual dose under specialist supervision (the same caution applies to febuxostat).",
+      monitoring: "Monitor full blood count frequently, especially in the first weeks and after any dose change.",
+      sourceId: "onc-nlm-hpddi",
+      evidence: "established",
+      reviewDate: "2026-07-07",
+      doseTimingSeparation: false,
+      specialistReview: true
+    },
+
     /* ==================== DUPLICATE-CLASS RULES ==================== */
     {
       id: "dup-nsaid",
@@ -422,6 +599,37 @@
       sourceId: "openfda-labeling",
       evidence: "established",
       reviewDate: "2026-07-04",
+      doseTimingSeparation: false,
+      specialistReview: false
+    },
+
+    {
+      id: "dup-ppi",
+      type: "duplicate_class",
+      subjects: [{ kind: "class", value: "ppi" }],
+      severity: "moderate",
+      mechanism: "Two proton pump inhibitors give no added acid suppression but additive, unnecessary drug exposure.",
+      effect: "Therapeutic duplication with no added benefit and avoidable adverse-effect and interaction risk.",
+      action: "Consolidate to a single PPI at the lowest effective dose; review the ongoing indication for acid suppression.",
+      monitoring: "Reconcile the medication list to remove the duplicate PPI.",
+      sourceId: "openfda-labeling",
+      evidence: "established",
+      reviewDate: "2026-07-07",
+      doseTimingSeparation: false,
+      specialistReview: false
+    },
+    {
+      id: "dup-statin",
+      type: "duplicate_class",
+      subjects: [{ kind: "class", value: "statin" }],
+      severity: "moderate",
+      mechanism: "Two statins together give no added lipid lowering but additively increase statin exposure.",
+      effect: "Increased risk of myopathy and rhabdomyolysis without added benefit.",
+      action: "Do not co-prescribe two statins; consolidate to a single statin titrated to the lipid target.",
+      monitoring: "Advise reporting of muscle symptoms; reconcile the medication list.",
+      sourceId: "openfda-labeling",
+      evidence: "established",
+      reviewDate: "2026-07-07",
       doseTimingSeparation: false,
       specialistReview: false
     },
@@ -575,6 +783,25 @@
       sourceId: "onc-nlm-hpddi",
       evidence: "established",
       reviewDate: "2026-07-04",
+      doseTimingSeparation: false,
+      specialistReview: false
+    },
+    {
+      id: "ctx-raas-potassium-renal",
+      type: "context",
+      subjects: [
+        { kind: "class", value: "raas" },
+        { kind: "class", value: "potassium_supplement" },
+        { kind: "context", value: "renal_impairment" }
+      ],
+      severity: "major",
+      mechanism: "In renal impairment potassium excretion is already reduced; an ACE inhibitor or ARB further lowers aldosterone-driven excretion, so an added potassium supplement compounds potassium retention.",
+      effect: "High risk of severe hyperkalaemia and cardiac arrhythmia.",
+      action: "Avoid potassium supplements in a patient with renal impairment who is taking an ACE inhibitor or ARB; correct any deficit cautiously with close monitoring and avoid potassium-based salt substitutes.",
+      monitoring: "Check serum potassium and renal function before and shortly after any change; obtain an ECG if potassium is markedly elevated.",
+      sourceId: "onc-nlm-hpddi",
+      evidence: "established",
+      reviewDate: "2026-07-07",
       doseTimingSeparation: false,
       specialistReview: false
     }
