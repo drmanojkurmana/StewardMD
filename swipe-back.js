@@ -1,35 +1,41 @@
-/* StewardMD — Swipe-to-go-back (iOS + Android).
+/* StewardMD — Universal swipe-to-go-back (iOS + Android).
  * ===========================================================================
- * Adds the native "swipe from the left edge to go back" gesture used on iPhones
- * and Android phones, so users can dismiss any menu/overlay without hunting for
- * the Back button. Two inputs, one action:
- *   • iOS / touch: a left-edge → right swipe (interactive-pop style).
- *   • Android: the system back gesture / hardware back (Capacitor App backButton).
- * Both call goBack(), which finds the TOP-MOST open menu's Back/Close control and
- * activates it — reusing each screen's existing close logic (no per-screen wiring).
- * At the root (nothing open) the Android back exits the app; the edge-swipe no-ops.
+ * A horizontal swipe — LEFT or RIGHT, anywhere on the screen — goes back, on every
+ * page and window. Android's system/hardware back does the same. One action, goBack():
+ *   1. If a menu/overlay is open  → activate its top-most Back/Close control.
+ *   2. Else if the clinical engine is showing (5-step form OR the Clinical Decision
+ *      output) → step back via the app's own window._SMD_goBack().
+ *   3. Else (home/root) → nothing (iOS); Android exits the app.
+ * Reuses each screen's existing back logic — no per-screen wiring.
  *
- * Enabled on native + installed PWA (standalone). No-op on a normal desktop/web
- * browser (which has its own back gesture). Never calls preventDefault, so page
- * and horizontal-table scrolling are unaffected.
+ * Enabled on native + installed PWA (a desktop/web browser keeps its own gesture).
+ * Never preventDefaults; a swipe that begins inside a horizontally-scrollable area
+ * (e.g. the antibiogram grid) is left to scroll instead of going back.
  * ======================================================================== */
 (function () {
   "use strict";
   var C = window.Capacitor;
   var isNative = !!(C && typeof C.isNativePlatform === "function" && C.isNativePlatform());
 
-  // Back/Close controls across every overlay/menu (from the app's own markup).
+  // Back/Close controls across every overlay/menu. Pattern-based (the app uses dozens of
+  // per-screen classes: abg-back, dx-close, mcp-back, ghis-back, sp-close, sb-x, hqp-close …)
+  // rather than an ever-growing explicit list. Candidates are further filtered to interactive
+  // elements so a decorative "*-background" div is never mistaken for a button.
   var BACK_SEL = [
-    '[data-act="close"]', '[data-act="back"]', '[aria-label="Back"]', '[aria-label="Close"]',
-    '.asp-close', '.step-nav-back', '.abg-back', '.dx-back', '.dx-close', '.mc-back', '.hv-back',
-    '.ece-back', '.ddi-back', '.db-back', '.db-close', '.fea-close', '.ntf-close'
+    '[data-act="close"]', '[data-act="back"]', '[data-dismiss]',
+    '[aria-label="Back"]', '[aria-label="Close"]', '[aria-label="back"]', '[aria-label="close"]',
+    '.step-nav-back', '.sb-x',
+    '[class*="-back"]', '[class*="-close"]', '[class*="-cancel"]', '[class*="-dismiss"]'
   ].join(',');
+  function interactive(el) {
+    if (el.matches && el.matches('button,a,[role="button"],[data-act],[onclick]')) return true;
+    if (el.onclick) return true;
+    try { return window.getComputedStyle(el).cursor === "pointer"; } catch (e) { return false; }
+  }
 
   function onScreen(el) {
     if (!el) return false;
-    // Walk ancestors — a closed overlay is often opacity:0 / display:none on a PARENT
-    // (its Back button itself stays laid out), so checking only the element misses it.
-    var n = el;
+    var n = el;                                    // a closed overlay is often hidden on a PARENT
     while (n && n.nodeType === 1) {
       var cs = window.getComputedStyle(n);
       if (cs.display === "none" || cs.visibility === "hidden" || parseFloat(cs.opacity || "1") < 0.05) return false;
@@ -38,8 +44,6 @@
     var r = el.getBoundingClientRect();
     return r.width > 4 && r.height > 4 && r.top < window.innerHeight && r.bottom > 0 && r.left < window.innerWidth && r.right > 0;
   }
-  // Effective stacking z of an element (max z-index among positioned ancestors) — used to
-  // pick the top-most overlay's back control when several are in the DOM.
   function zOf(el) {
     var z = 0, n = el;
     while (n && n.nodeType === 1) {
@@ -49,29 +53,41 @@
     }
     return z;
   }
+  // The clinical engine (5-step form / Clinical Decision output) is showing.
+  function engineActive() {
+    return onScreen(document.getElementById("inputCard")) || onScreen(document.getElementById("outputArea"));
+  }
 
   var _last = 0;
   function goBack() {
     var now = Date.now();
-    if (now - _last < 400) return true;                       // debounce: don't close two menus per gesture
-    var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(onScreen);
-    if (!els.length) return false;
-    els.sort(function (a, b) {
-      var za = zOf(a), zb = zOf(b);
-      if (za !== zb) return za - zb;                          // higher z last
-      return (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1; // later in DOM last
-    });
-    _last = now;
-    try { els[els.length - 1].click(); } catch (e) {}
-    return true;
+    if (now - _last < 400) return true;                        // debounce: one back per gesture
+    // 1) top-most open menu/overlay
+    var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(function (el) { return onScreen(el) && interactive(el); });
+    if (els.length) {
+      els.sort(function (a, b) {
+        var za = zOf(a), zb = zOf(b);
+        if (za !== zb) return za - zb;
+        return (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1;
+      });
+      _last = now;
+      try { els[els.length - 1].click(); } catch (e) {}
+      return true;
+    }
+    // 2) clinical engine (incl. the Clinical Decision output, which has no visible Back button)
+    if (engineActive() && typeof window._SMD_goBack === "function") {
+      _last = now;
+      try { window._SMD_goBack(); } catch (e) {}
+      return true;
+    }
+    return false;                                              // 3) at root
   }
 
-  // Is the touch starting inside a horizontally-scrollable area that can still scroll left?
-  // If so, defer to that scroll instead of going back.
+  // Skip when the gesture starts inside a horizontally-scrollable area (let it scroll).
   function inHScroll(el) {
     var n = el;
     while (n && n.nodeType === 1 && n !== document.body) {
-      if (n.scrollWidth > n.clientWidth + 2 && n.scrollLeft > 2) {
+      if (n.scrollWidth > n.clientWidth + 4) {
         var ox = window.getComputedStyle(n).overflowX;
         if (ox === "auto" || ox === "scroll") return true;
       }
@@ -82,22 +98,24 @@
 
   var enable = isNative || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
   if (enable) {
-    var sx = 0, sy = 0, t0 = 0, tracking = false, EDGE = 34, DIST = 72;
+    var sx = 0, sy = 0, t0 = 0, tracking = false;
+    var DIST = 72, MAXOFF = 0.6, MAXTIME = 700;               // ≥72px horizontal, dominantly horizontal, brisk
     document.addEventListener("touchstart", function (e) {
       if (e.touches.length !== 1) { tracking = false; return; }
       var t = e.touches[0];
-      tracking = t.clientX <= EDGE && !inHScroll(e.target);   // must begin at the left edge
+      tracking = !inHScroll(e.target);
       sx = t.clientX; sy = t.clientY; t0 = Date.now();
     }, { passive: true });
     document.addEventListener("touchend", function (e) {
       if (!tracking) return; tracking = false;
       var t = e.changedTouches && e.changedTouches[0]; if (!t) return;
       var dx = t.clientX - sx, dy = t.clientY - sy, dt = Date.now() - t0;
-      if (dx > DIST && Math.abs(dy) < Math.abs(dx) * 0.7 && dt < 800) goBack();  // rightward, mostly-horizontal, brisk
+      // LEFT or RIGHT swipe: enough horizontal distance, mostly horizontal, quick
+      if (Math.abs(dx) >= DIST && Math.abs(dy) <= Math.abs(dx) * MAXOFF && dt <= MAXTIME) goBack();
     }, { passive: true });
   }
 
-  // Android system-gesture / hardware back → close the top menu, else exit at the root.
+  // Android system-gesture / hardware back → close the top menu / step back, else exit at root.
   try {
     if (isNative && C.Plugins && C.Plugins.App && C.Plugins.App.addListener) {
       C.Plugins.App.addListener("backButton", function () {
@@ -106,5 +124,5 @@
     }
   } catch (e) {}
 
-  window.SMD_SWIPE_BACK = { goBack: goBack, enabled: enable };
+  window.SMD_SWIPE_BACK = { goBack: goBack, enabled: enable, engineActive: engineActive };
 })();
