@@ -46,3 +46,7 @@ GoogleService-Info.plist
 
 # Local Claude Code session/agent state
 .claude/
+
+# Offline-clinical build artifacts (only the .gz ships; JSON + temp DB are regenerated)
+data/offline-clinical.json
+data/.clinical-build.db

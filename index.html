@@ -179,7 +179,13 @@ function ready(){try{
 function finish(){if(done)return;done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
 function tick(){if(done)return;var el=Date.now()-t0;if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
 tick();})();</script>
-<script>(function(){try{var s=localStorage.getItem("stewardmd_theme");if(s==="dark"||(!s&&window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches))document.body.classList.add("dark");}catch(e){}})();</script>
+<script>/* anti-flash theme boot — mirrors theme-sync.js resolution so the initial paint matches the OS (no flash) */
+(function(){try{var L=localStorage,os=!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches),stored=L.getItem("stewardmd_theme"),src=L.getItem("stewardmd_theme_source"),on=L.getItem("stewardmd_theme_autosync")!=="0",dark;
+if(!on){dark=stored==="dark"||(!stored&&os);}
+else if(src==="user"){var was=L.getItem("stewardmd_theme_os_at_override");dark=(was&&(was==="dark")!==os)?os:(stored==="dark");}
+else if(src==null&&stored&&(stored==="dark")!==os){dark=stored==="dark";}
+else{dark=os;}
+document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <h1 class="sr-only">StewardMD</h1>
 <!-- ===== INTRO POSTER: shows first, auto-dismisses after 4s or on tap ===== -->
 
@@ -1188,6 +1194,7 @@ tick();})();</script>
 
 <script src="/native-bridge.js?v=gold218" defer></script>
 <script src="/app.js?v=gold197" defer></script>
+<script src="/theme-sync.js?v=gold239" defer></script>
 <script src="/account.js?v=gold229" defer></script>
 <script src="/native-auth.js?v=gold222" defer></script>
 <script src="/policy.js?v=gold88" defer></script>
@@ -1202,7 +1209,8 @@ tick();})();</script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
-<script src="/offline-db.js?v=gold230" defer></script>
+<script src="/offline-db.js?v=gold239" defer></script>
+<script src="/offline-clinical.js?v=gold239" defer></script>
 <!-- KB data (KB_CORE/CLINICAL/ENRICHMENT/EXPANDED, ~4.8MB) is LAZY-loaded AFTER first paint
      so the branded loading splash appears fast. Reasoning uses closure fallbacks until it's
      ready; StewardRAG awaits window.SMD_KB_READY. -->

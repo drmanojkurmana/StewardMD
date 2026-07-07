@@ -43,6 +43,10 @@ for f in *.png *.webp *.ico *.svg *.gif *.jpg *.jpeg; do
   cp "$f" "$WWW/"
 done
 
+# ── 4b. Offline clinical bundle (native drug monographs, lazy-loaded by
+# offline-clinical.js). Built by scripts/build-offline-clinical.mjs. ────────────
+[ -f data/offline-clinical.json.gz ] && cp data/offline-clinical.json.gz "$WWW/"
+
 # ── 5. Knowledge base — RUNTIME pieces only ───────────────────────────────────
 # Loaded by index.html + steward-ai.browser.js; the 13 MB kb.index.json and all
 # source/dev dirs (diseases, reference, validation, tools, schema, manifest…) are

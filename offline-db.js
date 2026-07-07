@@ -50,7 +50,8 @@
   function pget(k) { return PREF().get({ key: k }).then(function (r) { return r && r.value; }).catch(function () { return null; }); }
   function pset(k, v) { return PREF().set({ key: k, value: String(v) }).catch(function () {}); }
   function prem(k) { return PREF().remove({ key: k }).catch(function () {}); }
-  var _installed = false, _rows = 0, _version = null, _dbPath = null;
+  var _installed = false, _rows = 0, _version = null, _dbPath = null, _diagSize = 0;
+  function errStr(e) { try { return String((e && (e.message || e.errorMessage)) || (typeof e === "string" ? e : JSON.stringify(e)) || e).slice(0, 120); } catch (_) { return "err"; } }
   function loadState() {
     return Promise.all([pget(PK.installed), pget(PK.version), pget(PK.rows), pget(PK.path)]).then(function (a) {
       _installed = a[0] === "1"; _version = a[1] || null; _rows = parseInt(a[2] || "0", 10) || 0; _dbPath = a[3] || null;
@@ -160,66 +161,140 @@
 
   /* -------- SQLite (Non-Conformant, read-only, opened from full path) -------- */
   function fileUri() { return FS().getUri({ path: DB_FILE, directory: DIR }).then(function (r) { return (r && r.uri) || null; }); }
+  function statSize() { return FS().stat({ path: DB_FILE, directory: DIR }).then(function (r) { return (r && r.size) || 0; }).catch(function () { return 0; }); }
   function pathOf(uri) { return uri ? uri.replace(/^file:\/\//, "") : uri; }
   var _open = false;
   function openDb() {
     if (_open && _dbPath) return Promise.resolve(_dbPath);
     return fileUri().then(function (uri) {
       _dbPath = pathOf(uri);
-      return SQLITE().createNCConnection({ databasePath: _dbPath, version: 1 }).then(function () { _open = true; return _dbPath; });
+      // Register the non-conformant connection (ignore "already exists" left over from a prior attempt)…
+      return SQLITE().createNCConnection({ databasePath: _dbPath, version: 1 })
+        .catch(function (e) { if (!/already exists/i.test(errStr(e))) throw e; })
+        // …then OPEN it. NC connections are registered but NOT auto-opened by createNCConnection;
+        // querying without this yields "Database <path> not opened".
+        .then(function () { return SQLITE().open({ database: _dbPath, readonly: true }); })
+        .then(function () { _open = true; return _dbPath; });
     });
+  }
+  // The RAW CapacitorSQLite plugin (iOS) prepends a metadata header row {ios_columns:[…]} as
+  // values[0]; real data rows start at values[1]. The high-level SQLiteDBConnection wrapper strips
+  // this via reorderRows(); we call the raw plugin, so we must strip it ourselves. No-op on
+  // Android / when absent. (Root cause of the "0 rows" install failure — data was really there.)
+  function rowsOf(r) {
+    var v = (r && r.values) || [];
+    if (v.length && v[0] && typeof v[0] === "object" && Object.prototype.hasOwnProperty.call(v[0], "ios_columns")) v = v.slice(1);
+    return v;
   }
   function query(sql, vals) {
     return openDb().then(function (dbPath) {
-      return SQLITE().query({ database: dbPath, statement: sql, values: vals || [], readonly: true }).then(function (r) { return (r && r.values) || []; });
+      return SQLITE().query({ database: dbPath, statement: sql, values: vals || [], readonly: true }).then(function (r) { return rowsOf(r); });
     });
   }
-  function closeDb() { if (!_dbPath) return Promise.resolve(); return SQLITE().closeNCConnection({ databasePath: _dbPath }).then(function () { _open = false; }).catch(function () {}); }
+  function closeDb() { if (!_dbPath) return Promise.resolve(); return SQLITE().closeNCConnection({ databasePath: _dbPath }).then(function () { _open = false; }).catch(function () { _open = false; }); }
 
   /* -------- FTS query builder -------- */
-  function ftsMatch(q) {
-    var toks = String(q || "").toLowerCase().replace(/["*]/g, " ").split(/\s+/).filter(function (t) { return t.length; });
+  // Mirror the worker's ftsQuery: extract bareword [a-z0-9]+ tokens ONLY, so FTS5 operator
+  // chars (+ ( ) : ^ - " *) in queries like "amoxicillin + clavulanic acid" can't produce an
+  // invalid MATCH expression. Optional col scopes EVERY token to that column (col: binds only
+  // to the following token, so it must be repeated per token).
+  function ftsMatch(q, col) {
+    var toks = String(q || "").toLowerCase().match(/[a-z0-9]+/g) || [];
     if (!toks.length) return null;
-    return toks.map(function (t) { return t + "*"; }).join(" ");   // prefix-match each token
+    var pfx = col ? col + ":" : "";
+    return toks.map(function (t) { return pfx + t + "*"; }).join(" ");
   }
 
   /* -------- offline search fns — shapes MATCH the online MEDAPI -------- */
-  // searchBrands → {results:[{brand,composition,manufacturer,form,mrp,discontinued}]}
+  // searchBrands → {results:[{id,brand,composition,class,manufacturer,form,pack,mrp,discontinued}]}
   function searchBrands(q, limit) {
-    var m = ftsMatch(q); if (!m) return Promise.resolve({ results: [] });
+    var m = ftsMatch(q, "brand"); if (!m) return Promise.resolve({ results: [] });
     return query(
-      "SELECT d.brand,d.composition,d.manufacturer,d.form,d.mrp,d.discontinued FROM drugs_fts f JOIN drugs d ON d.id=f.rowid WHERE drugs_fts MATCH ? ORDER BY (d.discontinued IS NOT 0), rank LIMIT ?",
-      ["brand:" + m, limit || 12]
+      "SELECT d.id,d.brand,d.composition,d.class,d.manufacturer,d.form,d.pack,d.mrp,d.discontinued FROM drugs_fts f JOIN drugs d ON d.id=f.rowid WHERE drugs_fts MATCH ? ORDER BY (d.discontinued IS NOT 0), rank LIMIT ?",
+      [m, limit || 12]
     ).then(function (rows) { return { results: rows.map(mapBrand) }; }).catch(function () { return { results: [] }; });
   }
-  // searchCompositions → {results:[{composition,class,brands:<count>}]}
+  // searchCompositions → {results:[{composition,class,brands:<TRUE total count>}]}
+  // Mirrors the worker /search: rank-ordered distinct compositions, then a 2nd query for the
+  // composition's TRUE total brand count (not just the FTS-matched rows).
   function searchCompositions(q, limit) {
     var m = ftsMatch(q); if (!m) return Promise.resolve({ results: [] });
+    var cap = limit || 30;
     return query(
-      "SELECT d.composition AS composition, MAX(d.class) AS class, COUNT(*) AS brands FROM drugs_fts f JOIN drugs d ON d.id=f.rowid WHERE drugs_fts MATCH ? AND d.composition IS NOT NULL AND d.composition<>'' GROUP BY d.composition ORDER BY brands DESC LIMIT ?",
-      [m, limit || 30]
-    ).then(function (rows) { return { results: rows.map(function (r) { return { composition: r.composition, "class": r["class"], brands: r.brands }; }) }; }).catch(function () { return { results: [] }; });
+      "SELECT d.composition AS composition, d.class AS class FROM drugs_fts f JOIN drugs d ON d.id=f.rowid WHERE drugs_fts MATCH ? ORDER BY rank LIMIT 400",
+      [m]
+    ).then(function (rows) {
+      var order = [], meta = {};
+      for (var i = 0; i < rows.length; i++) {
+        var c = rows[i].composition || "";
+        if (!c || meta[c]) continue;
+        meta[c] = { composition: c, "class": rows[i]["class"] || "", brands: 0 };
+        order.push(c);
+        if (order.length >= cap) break;
+      }
+      if (!order.length) return { results: [] };
+      var ph = order.map(function () { return "?"; }).join(",");
+      return query("SELECT composition, count(*) AS brands FROM drugs WHERE composition IN (" + ph + ") GROUP BY composition", order)
+        .then(function (cts) {
+          for (var j = 0; j < cts.length; j++) if (meta[cts[j].composition]) meta[cts[j].composition].brands = cts[j].brands;
+          return { results: order.map(function (c) { return meta[c]; }) };
+        });
+    }).catch(function () { return { results: [] }; });
   }
-  // composition → {composition,class,total,brands:[...]}
+  // composition → {composition,class,chem_class,action_class,habit_forming,total,brands:[...]}
+  // Sort/tier vocabulary + manufacturer tiers mirror worker/src/index.js SORTS + TIERS exactly.
+  var TIERS = {
+    branded: ["sun pharma", "abbott", "cipla", "dr reddy", "lupin", "torrent", "zydus", "alkem", "sanofi", "glaxo", "pfizer", "astrazeneca", "boehringer", "novo nordisk", "eli lilly"],
+    generic: ["mankind", "aristo", "intas", "macleods", "micro labs", "emcure", "alembic", "usv", "eris", "glenmark", "blue cross", "franco", "wallace", "medley", "akumentis"]
+  };
   function composition(name, sort, tier, limit, offset, bq) {
-    var order = sort === "price-asc" ? "d.mrp ASC" : sort === "price-desc" ? "d.mrp DESC" : sort === "name" ? "d.brand COLLATE NOCASE ASC" : "(d.discontinued IS NOT 0), d.mrp ASC";
+    var order = sort === "price_asc" ? "(d.mrp IS NULL) ASC, d.mrp ASC, d.brand COLLATE NOCASE ASC"
+              : sort === "price_desc" ? "(d.mrp IS NULL) ASC, d.mrp DESC, d.brand COLLATE NOCASE ASC"
+              : "d.discontinued ASC, d.brand COLLATE NOCASE ASC";   // relevance (default)
     var where = "d.composition = ?", vals = [name];
-    if (tier === "active") where += " AND (d.discontinued IS 0 OR d.discontinued IS NULL)";
-    else if (tier === "discontinued") where += " AND d.discontinued IS NOT 0";
-    if (bq) { where += " AND d.brand LIKE ?"; vals.push("%" + bq + "%"); }
-    return query("SELECT COUNT(*) AS n, MAX(d.class) AS class FROM drugs d WHERE " + where, vals).then(function (agg) {
-      var total = (agg[0] && agg[0].n) || 0, klass = agg[0] && agg[0]["class"];
-      return query("SELECT d.brand,d.manufacturer,d.form,d.pack,d.mrp,d.discontinued FROM drugs d WHERE " + where + " ORDER BY " + order + " LIMIT ? OFFSET ?", vals.concat([limit || 60, offset || 0]))
-        .then(function (rows) { return { composition: name, "class": klass, total: total, brands: rows.map(mapBrand) }; });
+    var pats = (tier && TIERS[tier]) ? TIERS[tier] : null;
+    if (pats) {
+      where += " AND (" + pats.map(function () { return "lower(d.manufacturer) LIKE ?"; }).join(" OR ") + ")";
+      pats.forEach(function (p) { vals.push(p + "%"); });
+    }
+    if (bq) { where += " AND lower(d.brand) LIKE ?"; vals.push("%" + String(bq).toLowerCase() + "%"); }
+    return query("SELECT COUNT(*) AS n, MAX(d.class) AS class, MAX(d.chem_class) AS chem_class, MAX(d.action_class) AS action_class, MAX(d.habit_forming) AS habit_forming FROM drugs d WHERE " + where, vals).then(function (agg) {
+      var a = agg[0] || {}, total = a.n || 0;
+      return query("SELECT d.id,d.brand,d.manufacturer,d.form,d.pack,d.mrp,d.discontinued FROM drugs d WHERE " + where + " ORDER BY " + order + " LIMIT ? OFFSET ?", vals.concat([limit || 60, offset || 0]))
+        .then(function (rows) { return { composition: name, "class": a["class"], chem_class: a.chem_class, action_class: a.action_class, habit_forming: a.habit_forming, total: total, brands: rows.map(mapBrand) }; });
     }).catch(function () { return null; });
   }
   function drug(id) {
-    return query("SELECT * FROM drugs WHERE id = ? LIMIT 1", [id]).then(function (rows) { return rows[0] || null; }).catch(function () { return null; });
+    // Match the worker shape {drug:{...}} + explicit columns (exclude scraped uses/side_effects/substitutes).
+    return query("SELECT id,brand,composition,class,chem_class,action_class,manufacturer,form,pack,mrp,habit_forming,discontinued FROM drugs WHERE id = ? LIMIT 1", [id])
+      .then(function (rows) { return rows[0] ? { drug: rows[0] } : null; }).catch(function () { return null; });
   }
   function mapBrand(r) {
-    return { brand: r.brand, composition: r.composition, manufacturer: r.manufacturer, form: r.form, pack: r.pack, mrp: (r.mrp === "" || r.mrp == null) ? null : r.mrp, discontinued: !!(r.discontinued && r.discontinued !== "0" && r.discontinued !== 0) };
+    return { id: r.id, brand: r.brand, composition: r.composition, "class": r["class"], manufacturer: r.manufacturer, form: r.form, pack: r.pack, mrp: (r.mrp === "" || r.mrp == null) ? null : r.mrp, discontinued: !!(r.discontinued && r.discontinued !== "0" && r.discontinued !== 0) };
   }
   function countRows() { return query("SELECT count(*) AS n FROM drugs").then(function (r) { return (r[0] && r[0].n) || 0; }).catch(function () { return 0; }); }
+  // Diagnostic: dump RAW query result shapes + true DB size so we can tell an empty DB
+  // from a result-parsing mismatch from an external-content FTS quirk.
+  function probeSchema() {
+    function q(sql) {
+      return SQLITE().query({ database: _dbPath, statement: sql, values: [], readonly: true })
+        .then(function (r) { return (r && r.values); })
+        .catch(function (e) { return "ERR:" + errStr(e); });
+    }
+    return Promise.all([
+      q("SELECT name,type FROM sqlite_master WHERE name NOT LIKE 'sqlite_%'"),
+      q("SELECT count(*) AS n FROM drugs"),
+      q("SELECT * FROM drugs LIMIT 1"),
+      q("PRAGMA page_count"),
+      q("PRAGMA page_size")
+    ]).then(function (a) {
+      var s = "master=" + JSON.stringify(a[0]).slice(0, 220) +
+              "|drugsN=" + JSON.stringify(a[1]) +
+              "|row1=" + JSON.stringify(a[2]).slice(0, 90) +
+              "|pc=" + JSON.stringify(a[3]) + "|ps=" + JSON.stringify(a[4]);
+      return s;
+    }).catch(function (e) { return "schema_err:" + errStr(e); });
+  }
 
   /* -------- offline routing: prefer online, fall back to local when offline/API-down -------- */
   function online() { return typeof navigator === "undefined" || navigator.onLine !== false; }
@@ -232,7 +307,7 @@
         if (_installed && !online()) return offlineFn.apply(null, args);      // offline → local
         return orig.apply(M, args).then(function (res) {
           var empty = !res || (res.results && !res.results.length) || (res.brands && !res.brands.length) || res === emptyShape;
-          if (_installed && (res == null)) return offlineFn.apply(null, args); // API returned null (unreachable) → local
+          if (_installed && empty) return offlineFn.apply(null, args); // API null/unreachable/empty → local backfill
           return res;
         }).catch(function () { return _installed ? offlineFn.apply(null, args) : emptyShape; });
       };
@@ -353,24 +428,47 @@
         return sha256hex(gz);
       })
       .then(function (hex) {
-        if (v.sha256 && hex.toLowerCase() !== String(v.sha256).toLowerCase()) throw new Error("The download was incomplete. Please try again.");
+        if (v.sha256 && hex.toLowerCase() !== String(v.sha256).toLowerCase()) throw new Error("DB_SHA_MISMATCH|dl=" + hex.slice(0, 12) + "|exp=" + String(v.sha256).slice(0, 12));
         renderProgress("Installing…", 0.55);
-        return decompressToFile(gz, function (written) { updateProgress(0.55 + Math.min(0.4, written / (140 * 1048576) * 0.4), "Installing " + fmtMB(written)); });
+        return decompressToFile(gz, function (written) { updateProgress(0.55 + Math.min(0.4, written / (140 * 1048576) * 0.4), "Installing " + fmtMB(written)); })
+          .catch(function (e) { throw new Error("DB_DECOMPRESS_FAIL|" + errStr(e)); });
       })
-      .then(function () { gz = null; return closeDb().then(openDb); })
-      .then(function () { return countRows(); })
+      // verify the file actually landed on disk at a plausible size (~126 MB)
+      .then(function () { gz = null; return statSize(); })
+      .then(function (sz) {
+        _diagSize = sz;
+        if (!sz || sz < 1048576) throw new Error("DB_FILE_TOO_SMALL|" + sz + "b");   // <1 MB → decompress/write truncated
+        return closeDb().then(openDb).catch(function (e) { throw new Error("DB_OPEN_FAIL|" + errStr(e) + "|size=" + fmtMB(sz)); });
+      })
+      // count with the raw plugin call so a query error is NOT swallowed
+      .then(function () {
+        return SQLITE().query({ database: _dbPath, statement: "SELECT count(*) AS n FROM drugs", values: [], readonly: true })
+          .then(function (r) { var rows = rowsOf(r); return (rows[0] && rows[0].n) || 0; })
+          .catch(function (e) { throw new Error("DB_QUERY_FAIL|" + errStr(e) + "|size=" + fmtMB(_diagSize) + "|path=" + (_dbPath || "?")); });
+      })
       .then(function (n) {
-        if (!n || (v.row_count && n < v.row_count * 0.9)) throw new Error("The database didn't install correctly. Please retry.");
+        if (!n || (v.row_count && n < v.row_count * 0.9)) {
+          return probeSchema().then(function (schema) {
+            throw new Error("DB_LOW_ROWS|got=" + n + "|expected=" + (v.row_count || "?") + "|size=" + fmtMB(_diagSize) + "|" + schema);
+          });
+        }
         return Promise.all([pset(PK.installed, "1"), pset(PK.version, v.version), pset(PK.rows, n), pset(PK.path, _dbPath || "")]);
       })
-      .then(function () { _installed = true; _version = v.version; _rows = _rows; return countRows(); })
+      .then(function () { _installed = true; _version = v.version; return countRows(); })
       .then(function (n) { _rows = n; _busy = false; installRouting(); toast("Offline database ready — " + fmtN(n) + " drugs."); render(); })
       .catch(function (e) {
         _busy = false;
-        var msg = (e && e.message === "login") ? "Please sign in again to download." :
-                  (e && e.message === "upgrade") ? "This requires StewardMD Pro." :
-                  (e && e.message) ? e.message : "Download failed. Please try again.";
-        setBody('<div class="odb-card"><div class="odb-t">Couldn\'t finish</div><div class="odb-p">' + esc(msg) + '</div><button class="odb-btn" id="odbRetry">Try again</button></div>');
+        var raw = (e && e.message) || "";
+        var friendly = (raw === "login") ? "Please sign in again to download." :
+                       (raw === "upgrade") ? "This requires StewardMD Pro." :
+                       /^DB_FILE_TOO_SMALL/.test(raw) ? "The download didn't finish (not enough was saved). Check your connection and free space, then retry." :
+                       /^DB_(SHA_MISMATCH|DECOMPRESS)/.test(raw) ? "The download was incomplete or corrupted. Please try again." :
+                       /^DB_(OPEN|QUERY|LOW_ROWS)/.test(raw) ? "The database didn't install correctly. Please retry." :
+                       raw ? raw : "Download failed. Please try again.";
+        // Keep the technical code visible (small) so an on-device failure is diagnosable.
+        var code = /^DB_/.test(raw) ? '<div class="odb-p" style="font-size:11px;opacity:.6;margin-top:6px;word-break:break-all">' + esc(raw) + '</div>' : "";
+        setBody('<div class="odb-card"><div class="odb-t">Couldn\'t finish</div><div class="odb-p">' + esc(friendly) + '</div>' + code +
+          '<button class="odb-btn" id="odbRetry">Try again</button></div>');
         var r = _root.querySelector("#odbRetry"); if (r) r.addEventListener("click", render);
       });
   }
