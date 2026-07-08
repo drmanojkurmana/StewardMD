@@ -1218,7 +1218,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script>(function(){var KB=["/kb/dist/kb.core.js?v=gold146","/kb/dist/kb.clinical.js?v=gold202","/kb/dist/kb.enrichment.js?v=gold213","/kb/dist/kb.expanded.js?v=gold111"];window.SMD_KB_READY=new Promise(function(res){function load(i){if(i>=KB.length){try{window.dispatchEvent(new Event("smd-kb-ready"));}catch(e){}res(true);return;}var s=document.createElement("script");s.src=KB[i];s.onload=function(){load(i+1);};s.onerror=function(){load(i+1);};document.head.appendChild(s);}function start(){requestAnimationFrame(function(){requestAnimationFrame(function(){load(0);});});}if(document.readyState==="loading"){window.addEventListener("DOMContentLoaded",start);}else{start();}});})();</script>
 <script src="/dxmgmt.js?v=gold122" defer></script>
 <script src="/clinical-nlp.js?v=gold199" defer></script>
-<script src="/reasoning.js?v=gold257" defer></script>
+<script src="/reasoning.js?v=gold259" defer></script>
 <!-- Image Engine chooser for ICU Snapshot (Private Device OCR vs AI Vision). Needs SMD_AI
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
 <script src="/image-engine.js?v=gold229" defer></script>
@@ -1237,7 +1237,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/ws-urology.js?v=gold190" defer></script>
 <script src="/ws-dentistry_omfs.js?v=gold190" defer></script>
 <script src="/ws-paediatrics.js?v=gold190" defer></script>
-<script src="/icu.js?v=gold258" defer></script>
+<script src="/icu.js?v=gold259" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js — only invoked on user tap, so order is safe. -->
 <script src="/voice.js?v=gold247" defer></script>

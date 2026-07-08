@@ -303,6 +303,21 @@ const VISION_SYS = {
   medication_list: "Read this medication image (prescription / OPD ticket / case sheet / discharge summary / medication chart / handwritten Rx). Extract ONLY prescribed medicine rows. Return ONLY JSON: {\"medications\":[{\"detected_text\":str,\"drug\":str|null,\"strength\":str,\"route\":str,\"frequency\":str,\"form\":str,\"confidence\":\"high\"|\"medium\"|\"low\"}]}. Rules: detected_text is the raw text you read for that row, preserved VERBATIM. Set `drug` to the medicine's STANDARDISED GENERIC (INN) name in lowercase — do the mapping yourself: expand brand names to their generic (e.g. 'Betaloc'->'metoprolol', 'Augmentin'->'amoxicillin + clavulanate', 'Pan'->'pantoprazole'), translate Latin or non-English drug names to the English INN (e.g. 'Dorzolamidum'->'dorzolamide', 'Acidum acetylsalicylicum'->'aspirin'), and correct obvious scanning/handwriting misspellings to the intended INN (e.g. 'Oxprelol'->'oxprenolol', 'Metrepolol'->'metoprolol'). Only set `drug` when you are confident of the REAL medicine intended; if genuinely unsure, set it to null (do NOT guess). For a fixed-dose combination, give the generic components joined by ' + '. Ignore patient identifiers, demographics, vitals, diagnoses, and billing. NEVER invent a medicine that is not written. Mark unclear or illegible handwriting as \"low\" confidence but still preserve its detected_text. Return only the medication list, no prose."
 };
 
+// Imaging Assist (clinician-invoked). Input is a DE-IDENTIFIED packet built client-side
+// (report text already PHI-redacted). Output is an advisory, review-required, structured
+// summary — NEVER a diagnosis. The deterministic engine remains the diagnostic authority.
+const IMAGING_SYS =
+  "You are a clinical decision-support assistant summarizing ONE radiology report for a doctor. " +
+  "You are NOT the diagnostic authority — a deterministic engine owns the diagnosis; your output is an advisory DRAFT the clinician must verify. " +
+  "Reason ONLY from the report text and the de-identified context provided. NEVER invent findings, values, measurements, or history that are not in the report. " +
+  "Use hedged wording only: 'Imaging is suggestive of…', 'Consider correlation with…', 'Differential considerations include…', 'Urgent review may be needed if…'. " +
+  "You MUST NEVER write 'confirmed diagnosis', 'the patient definitely has', 'no emergency', 'rule out completely', or 'safe to discharge'. " +
+  "If the report has no impression or is too sparse to interpret reliably, set summary to exactly 'Insufficient report detail for reliable interpretation — review original radiology report.' and return empty arrays for the rest.";
+const IMAGING_TASK =
+  "Return ONLY JSON, no prose outside it, with EXACTLY these keys: " +
+  "{\"summary\":string, \"positives\":[string], \"negatives\":[string], \"significance\":[string], \"differentials\":[string], \"correlateWith\":[string], \"redFlags\":[string], \"nextChecks\":[string]}. " +
+  "\"summary\" is ONE sentence. Each array holds short concise phrases (use [] if genuinely none). " +
+  "\"differentials\" are considerations only (hedged), never a single confirmed diagnosis. \"redFlags\" list urgent findings that warrant escalation IF present in the report.";
 function parseJsonLoose(t) {
   if (!t) return null;
   var m = t.match(/\{[\s\S]*\}/);
@@ -426,6 +441,34 @@ export async function onRequest(context) {
       const text = await callGemini(env, [{ text: prompt }], MAX_OUT);
       await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
       return json({ text: text, mode: "summary" });
+    }
+    if (seg === "imaging") {
+      // Clinician-invoked imaging summary. Packet is DE-IDENTIFIED client-side (report text
+      // PHI-redacted; NO name/MRN/bed/other-patient data). Structured, advisory, review-required.
+      const pkt = body.packet || {};
+      const reportText = clip(String(pkt.reportText || ""), Math.min(MAX_IN_CHARS, 6000));
+      if (!reportText) return json({ error: "no-report" }, 400);
+      const ctx = [];
+      if (pkt.modality) ctx.push("Modality: " + clip(pkt.modality, 80));
+      if (pkt.studyName) ctx.push("Study: " + clip(pkt.studyName, 160));
+      if (pkt.indication) ctx.push("Indication: " + clip(pkt.indication, 300));
+      if (pkt.ageBand) ctx.push("Age band: " + clip(pkt.ageBand, 20));
+      if (pkt.sex) ctx.push("Sex: " + clip(pkt.sex, 12));
+      if (pkt.specialty) ctx.push("Specialty: " + clip(pkt.specialty, 40));
+      if (pkt.careSetting) ctx.push("Care setting: " + clip(pkt.careSetting, 24));
+      if (pkt.workingDx) ctx.push("Working diagnosis (clinician, not authoritative): " + clip(pkt.workingDx, 160));
+      if (Array.isArray(pkt.symptoms) && pkt.symptoms.length) ctx.push("Relevant clinical findings: " + clip(pkt.symptoms.join("; "), 400));
+      if (Array.isArray(pkt.labs) && pkt.labs.length) ctx.push("Relevant labs: " + clip(pkt.labs.join(", "), 400));
+      const gate = await checkQuota(env, request, "case");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      const prompt = IMAGING_SYS + "\n\n=== CONTEXT (de-identified) ===\n" + ctx.join("\n") +
+        "\n\n=== RADIOLOGY REPORT TEXT ===\n" + reportText + "\n\n=== TASK ===\n" + IMAGING_TASK;
+      let text;
+      try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, { temperature: 0.3 }); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+      const parsed = parseJsonLoose(text);
+      return json(parsed ? { summary: parsed, mode: "imaging" } : { error: "parse", raw: String(text || "").slice(0, 1200), mode: "imaging" });
     }
     if (seg === "vision") {
       const kind = VISION_SYS[body.kind] ? body.kind : "monitor";

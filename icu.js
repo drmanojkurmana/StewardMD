@@ -721,7 +721,13 @@
       '.icu-img-raw{white-space:pre-wrap;font:500 12.5px/1.5 var(--mono);color:var(--muted);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:9px 10px;max-height:260px;overflow:auto}' +
       '.icu-img-acts{display:flex;flex-wrap:wrap;gap:6px;padding:2px 12px 12px}.icu-img-act{border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:var(--r-pill);font:700 11.5px var(--font);padding:6px 11px;cursor:pointer}.icu-img-act.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}' +
       '.icu-img-hidden{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;color:var(--muted);font:600 12.5px var(--font);border:1px dashed var(--border);border-radius:10px;margin:0 0 8px}' +
-      '.icu-img-btns .icu-ico,.icu-doc-sub+.icu-img-btns .icu-ico{width:15px;height:15px;vertical-align:-2px;margin-right:4px}';
+      '.icu-img-btns .icu-ico,.icu-doc-sub+.icu-img-btns .icu-ico{width:15px;height:15px;vertical-align:-2px;margin-right:4px}' +
+      '.icu-assist-out{margin-top:6px}' +
+      '.icu-assist-msg{font:600 13px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 12px}' +
+      '.icu-assist-draft{font:800 11px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:6px 10px;margin-bottom:8px}' +
+      '.icu-assist-summary{font:700 14px/1.5 var(--font);color:var(--ink);margin-bottom:8px}' +
+      '.icu-assist-ul{margin:2px 0 0;padding-left:18px}.icu-assist-ul li{font:600 13px/1.5 var(--font);color:var(--ink);margin:1px 0}' +
+      '.icu-assist-src{font:600 11px var(--font);color:var(--muted);margin-top:8px}';
     var st = document.createElement("style"); st.id = "icu-css"; st.textContent = css;
     document.head.appendChild(st);
   }
@@ -1512,7 +1518,7 @@
     if (f.net24h != null || f.cumulative != null) out.push("FLUIDS: net 24h " + (f.net24h != null ? f.net24h + " mL" : "—") + ", cumulative " + (f.cumulative != null ? f.cumulative + " mL" : "—"));
     if (v.mode) out.push("VENT: " + v.mode + (v.fio2 ? ", FiO₂ " + v.fio2 + "%" : "") + (v.peep != null ? ", PEEP " + v.peep : "") + (v.tv != null ? ", TV " + v.tv + " mL" : ""));
     var imgs = (s.imaging || []).filter(function (r) { return !r.hidden && (r.inSummary || r.reviewed); });
-    if (imgs.length) out.push("\nIMPORTANT IMAGING:\n" + imgs.map(function (r) { return "• " + (r.modality || "Imaging") + (r.reportDateTime ? " (" + imgFmtDate(r.reportDateTime) + ")" : "") + ": " + String(r.impressionRaw || r.findingsRaw || r.reportRaw || "").replace(/\s+/g, " ").trim().slice(0, 240) + ((r.critical || []).length ? "  [⚠ flagged: " + r.critical.join(", ") + " — verify]" : ""); }).join("\n"));
+    if (imgs.length) out.push("\nIMPORTANT IMAGING:\n" + imgs.map(function (r) { return "• " + (r.modality || "Imaging") + (r.reportDateTime ? " (" + imgFmtDate(r.reportDateTime) + ")" : "") + ": " + String((r.assist && r.assist.summary) || r.impressionRaw || r.findingsRaw || r.reportRaw || "").replace(/\s+/g, " ").trim().slice(0, 240) + ((r.critical || []).length ? "  [⚠ flagged: " + r.critical.join(", ") + " — verify]" : ""); }).join("\n"));
     if (alerts.length) out.push("\nACTIVE ALERTS:\n" + alerts.map(function (a) { return "• [" + a.severity.toUpperCase() + "] " + a.title + " — " + a.msg; }).join("\n"));
     var pend = ROUNDS_ITEMS.filter(function (it) { return !(rounds[it.k] && rounds[it.k].done); });
     if (pend.length) out.push("\nROUNDS PENDING: " + pend.map(function (it) { return it.label; }).join("; "));
@@ -1649,6 +1655,7 @@
         '<button class="icu-img-act" data-icu-act="imgexpand:' + eid + '">' + (open ? "Collapse" : "Open full report") + "</button>" +
         '<button class="icu-img-act' + (rec.reviewed ? " on" : "") + '" data-icu-act="imgreview:' + eid + '">' + (rec.reviewed ? "✓ Reviewed" : "Mark reviewed") + "</button>" +
         '<button class="icu-img-act' + (rec.inSummary ? " on" : "") + '" data-icu-act="imgsummary:' + eid + '">' + (rec.inSummary ? "✓ In summary" : "Add to summary") + "</button>" +
+        '<button class="icu-img-act" data-icu-act="imgassist:' + eid + '">' + (rec.assist ? "✦ AI Assist ✓" : "✦ AI Assist") + "</button>" +
         '<button class="icu-img-act" data-icu-act="imgedit:' + eid + '">Annotate</button>' +
         '<button class="icu-img-act" data-icu-act="imghide:' + eid + '">Hide</button>' +
       "</div></div>";
@@ -2290,6 +2297,116 @@
     });
   }
 
+  /* ===== AI Imaging Assist (Phase 2) — clinician chooses AI summary OR deterministic extract.
+   * Critical-term flag is ALWAYS deterministic (Phase 1 imgCritical). Advisory only; never a
+   * diagnosis; the deterministic reasoning engine stays the diagnostic authority. ============ */
+  function imgRedact(s) { try { return window.SMD_redactPHI ? window.SMD_redactPHI(String(s == null ? "" : s)) : String(s == null ? "" : s); } catch (e) { return String(s == null ? "" : s); } }
+  function ageBandOf(age) { if (age == null || age === "" || isNaN(+age)) return ""; var a = +age; if (a < 1) return "<1"; if (a < 18) return "1-17"; var lo = Math.floor(a / 10) * 10; return lo + "-" + (lo + 9); }
+  // DE-IDENTIFIED packet for the AI path. Includes ONLY: modality/study/indication (redacted),
+  // age BAND (never DOB), sex, working dx, relevant complaints + a compact lab subset, specialty,
+  // care setting, and PHI-REDACTED report text. NEVER name/MRN/bed/phone/full payload/other patients.
+  function buildImagingAiPacket(rec) {
+    rec = rec || {};
+    var p = _raw.patient || {}, L = (_raw.labs && _raw.labs.recent) || {};
+    var labs = [];
+    ["na", "k", "creat", "urea", "bili", "ast", "alt", "alp", "amylase", "lipase", "wbc", "hb", "plt", "inr", "crp", "lactate", "ca", "trig"].forEach(function (k) { if (L[k] != null && L[k] !== "") labs.push(k.toUpperCase() + " " + L[k]); });
+    return {
+      modality: rec.modality || "",
+      studyName: imgRedact(rec.studyName || ""),
+      indication: imgRedact(rec.indication || ""),
+      ageBand: ageBandOf(p.age),
+      sex: p.sex ? String(p.sex) : "",
+      specialty: "",
+      careSetting: "ICU",
+      workingDx: imgRedact(p.diagnosis || ""),
+      symptoms: p.complaints ? [imgRedact(p.complaints)] : [],
+      labs: labs,
+      reportText: imgRedact(rec.reportRaw || rec.impressionRaw || rec.findingsRaw || ""),
+      reportDate: rec.reportDateTime || null
+    };
+  }
+  // Deterministic "correlate with" suggestions from report keywords (offline; no LLM).
+  var IMG_CORRELATE = [
+    [/pancreat/i, ["Lipase/amylase trend", "Serum calcium", "Triglycerides", "LFT & bilirubin", "Severity score (e.g. BISAP)"]],
+    [/\bcbd\b|biliary|cholang|choledoch/i, ["LFT (cholestatic pattern)", "Bilirubin", "Amylase/lipase", "USG/MRCP for stones"]],
+    [/h[ae]?emorrhage|bleed|intracerebral|subdural|subarachnoid|infarct|stroke/i, ["Blood pressure", "Coagulation (INR/platelets)", "GCS / neuro obs", "Repeat CT if deteriorating"]],
+    [/consolidation|pneumon|infiltrat|ground-?glass/i, ["WBC / CRP / procalcitonin", "Sputum & blood cultures", "Oxygenation (SpO₂ / ABG)"]],
+    [/pneumothorax/i, ["Oxygenation (SpO₂)", "Chest drain review"]],
+    [/effusion|ascites/i, ["Diagnostic tap (SAAG for ascites)", "Albumin", "Cell count & culture"]],
+    [/hydronephros|obstruct|calculus|ureteric/i, ["Renal function (creatinine/urea)", "Urine output", "Urgent urology if infected/obstructed"]],
+    [/embol/i, ["Oxygenation", "RV strain on echo", "Anticoagulation review"]]
+  ];
+  function imgCorrelateFor(rec) {
+    var t = [rec.impressionRaw, rec.findingsRaw, rec.reportRaw, rec.studyName].join(" ");
+    for (var i = 0; i < IMG_CORRELATE.length; i++) if (IMG_CORRELATE[i][0].test(t)) return IMG_CORRELATE[i][1];
+    return ["Correlate with the clinical findings and relevant laboratory trends"];
+  }
+  // Offline extract — impression + ALWAYS-deterministic critical flag + modality-based correlations.
+  function imagingDeterministic(rec) {
+    var imp = rec.impressionRaw || rec.findingsRaw || rec.reportRaw || "";
+    return {
+      summary: imp ? ("Imaging report — impression: " + imgClamp(imp, 220)) : "Insufficient report detail for reliable interpretation — review original radiology report.",
+      positives: [], negatives: [], significance: [], differentials: [],
+      correlateWith: imp ? imgCorrelateFor(rec) : [],
+      redFlags: rec.critical || [], nextChecks: [], deterministic: true
+    };
+  }
+  function assistSection(label, arr) { return (arr && arr.length) ? '<div class="icu-img-sec"><span class="icu-img-k">' + esc(label) + '</span><ul class="icu-assist-ul">' + arr.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div>" : ""; }
+  function renderAssistResult(res, rec, mode) {
+    if (!res || res.error) {
+      var msg = (res && res.error === "ai-off") ? "AI summary is turned off (cloud text disabled in Settings). Use the deterministic extract instead."
+        : (res && res.error === "quota") ? "AI usage limit reached for now — try again later, or use the deterministic extract."
+        : "Couldn’t generate an AI summary right now. Use the deterministic extract instead.";
+      return '<div class="icu-assist-msg">' + esc(msg) + "</div>";
+    }
+    var s = (mode === "ai") ? (res.summary || {}) : res;
+    var crit = (rec.critical || []).length ? '<div class="icu-img-crit">' + ico("warn", "⚠️") + ' <b>Potential urgent imaging finding</b> — verify report and escalate per local protocol.<div class="icu-img-crit-t">' + rec.critical.map(function (c) { return "<span>" + esc(c) + "</span>"; }).join("") + '</div></div>' : "";
+    var redFlags = (s.redFlags && s.redFlags.length) ? s.redFlags : (rec.critical || []);
+    var bodyH = '<div class="icu-assist-summary">' + esc(s.summary || "") + "</div>" +
+      assistSection("Key positive findings", s.positives) +
+      assistSection("Important negatives", s.negatives) +
+      assistSection("Possible significance", s.significance) +
+      assistSection("Differential considerations", s.differentials) +
+      assistSection("Correlate with", s.correlateWith) +
+      assistSection("Urgent red flags", redFlags) +
+      assistSection("Suggested next checks", s.nextChecks);
+    var src = "Source: " + (mode === "ai" ? "AI summary" : "Deterministic extract") + " of " + (rec.modality || "imaging") + " — Ward Sync report" + (rec.reportDateTime ? " dated " + imgFmtDate(rec.reportDateTime) : "");
+    return crit +
+      '<div class="icu-assist-draft">' + (mode === "ai" ? "Draft — clinician review required. Advisory only; not a diagnosis." : "Deterministic extract. Advisory only; not a diagnosis.") + "</div>" +
+      bodyH + '<div class="icu-assist-src">' + esc(src) + "</div>" +
+      '<button class="icu-btn" data-icu-act="imgsummary:' + encodeURIComponent(rec.id) + '" style="margin-top:10px">Add to Daily Summary</button>';
+  }
+  function openImagingAssist(id) {
+    var rec = imgById(id); if (!rec) return;
+    ensureModal();
+    function shell(resultHTML, busy) {
+      modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("pulse", "🩻") + ' AI Assist — ' + esc(rec.studyName || "imaging") + '</h3>' +
+        '<p class="icu-doc-sub">Choose how to summarize this report. Advisory only — the deterministic engine remains the diagnostic authority; nothing here is a diagnosis. The urgent-finding flag is always deterministic.</p>' +
+        '<div class="icu-img-btns"><button class="icu-btn" id="icuAsAI">' + ico("pulse", "✨") + ' AI summary</button>' +
+        '<button class="icu-btn ghost" id="icuAsDet">' + ico("check", "▤") + ' Deterministic extract</button></div>' +
+        '<div id="icuAsOut" class="icu-assist-out">' + (busy ? '<div class="icu-assist-msg">Generating…</div>' : (resultHTML || '<div class="icu-assist-msg" style="color:var(--muted)">Pick a mode above.</div>')) + '</div>' +
+        '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:10px">Close</button></div>';
+      modalEl.classList.add("on");
+      var ai = modalEl.querySelector("#icuAsAI"), det = modalEl.querySelector("#icuAsDet");
+      if (det) det.addEventListener("click", runDet);
+      if (ai) ai.addEventListener("click", runAI);
+    }
+    function runDet() {
+      var res = imagingDeterministic(rec);
+      try { rec.assist = { mode: "deterministic", summary: res.summary, at: nowTs() }; } catch (e) {}
+      shell(renderAssistResult(res, rec, "deterministic"));
+    }
+    function runAI() {
+      shell(null, true);
+      var pkt = buildImagingAiPacket(rec);
+      (window.SMD_AI && SMD_AI.imagingSummary ? SMD_AI.imagingSummary(pkt) : Promise.resolve({ error: "ai-off" })).then(function (res) {
+        if (res && res.summary && !res.error) { try { rec.assist = { mode: "ai", summary: (res.summary.summary || ""), at: nowTs() }; } catch (e) {} }
+        shell(renderAssistResult(res, rec, "ai"));
+      });
+    }
+    shell("");
+  }
+
   /* --------------------------------------------------- share & clear findings */
   // Share a case exactly like the Clinical Reasoning dashboard: Web Share API
   // (system share sheet) with a clipboard-copy fallback where it isn't supported.
@@ -2532,6 +2649,7 @@
       case "pickdx": pickDiagnosis(decodeURIComponent(arg)); break;
       case "imgfetch": imagingFetch(); break;
       case "imgadd": openImagingForm(null); break;
+      case "imgassist": openImagingAssist(decodeURIComponent(arg)); break;
       case "imgedit": openImagingForm(decodeURIComponent(arg)); break;
       case "imgfilter": _imgFilter = arg; paint(); break;
       case "imgexpand": { var _ie = decodeURIComponent(arg); _imgOpen[_ie] = !_imgOpen[_ie]; paint(); break; }
@@ -2645,6 +2763,7 @@
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
+    _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"
