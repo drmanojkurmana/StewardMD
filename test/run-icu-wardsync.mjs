@@ -90,6 +90,30 @@ try {
   ok(C.na === 140, "manual Na (140) NOT overwritten by Ward Sync (120)");
   ok(C.conflicts >= 1, "Ward-vs-manual conflict recorded for clinician to resolve");
 
+  // 5) GUARD: body-fluid specimens + ionised/free calcium never populate serum fields.
+  //    Regression for Ward patient MR26117781 — "Ascitic Fluid Albumin" (0.3 g/dL) was being
+  //    taken as SERUM albumin, and a free/ionised calcium (~1.1 mmol/L) populated the
+  //    TOTAL-calcium field though the patient had no total calcium ordered.
+  const r5 = await ev(`
+    ICU.reset && ICU.reset();
+    ICU.ingestFromWard({ patientId: "T3", source: "Ward Sync", labs: [
+      { test: "Ascitic Fluid Albumin", result: "0.3", units: "g/dL" },
+      { test: "Albumin (Bromocresol Green)", result: "1.5", units: "g/dL" },
+      { test: "Free Calcium", result: "1.1", units: "mmol/L" },
+      { test: "Ascitic Fluid Glucose", result: "80", units: "mg/dL" }
+    ]});
+    var L = ICU.state().labs.recent;
+    return JSON.stringify({ alb: L.alb, ca: L.ca, glu: L.glu,
+      mapAsc: ICU.mapWardLab("Ascitic Fluid Albumin"), mapSer: ICU.mapWardLab("Albumin (Bromocresol Green)"),
+      mapFreeCa: ICU.mapWardLab("Free Calcium"), mapIonCa: ICU.mapWardLab("Calcium Ion"), mapTotCa: ICU.mapWardLab("Calcium (Total)") });
+  `);
+  const F = JSON.parse(r5);
+  ok(F.alb === 15, "serum albumin (1.5 g/dL → 15 g/L) mapped, NOT ascitic-fluid albumin (0.3)");
+  ok(F.ca == null, "GUARD: free/ionised calcium (1.1 mmol/L) did NOT populate the total-calcium field");
+  ok(F.glu == null, "GUARD: 'Ascitic Fluid Glucose' did NOT map to serum glucose");
+  ok(F.mapAsc === null && F.mapSer === "alb", "mapWardLab: ascitic-fluid albumin → null, serum albumin → alb");
+  ok(F.mapFreeCa === null && F.mapIonCa === null && F.mapTotCa === "ca", "mapWardLab: free/ion calcium → null, total calcium → ca (total still works)");
+
   console.log(fails === 0 ? "\nALL GREEN — ICU Ward-Sync context test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

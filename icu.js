@@ -183,7 +183,7 @@
     { key: "k", kw: /\bpotassium\b|\bserum k\b/i, ex: /urin/i },
     { key: "cl", kw: /\bchloride\b/i, ex: /urin/i },
     { key: "hco3", kw: /bicarbonate|\bhco3\b|\btco2\b|carbon dioxide|(^|[^a-z])co2([^a-z]|$)/i, ex: /partial|pco2|paco2/i },
-    { key: "ca", kw: /\bcalcium\b/i, ex: /urin|ioni|24/i },   // ionised calcium tracked separately elsewhere
+    { key: "ca", kw: /\bcalcium\b/i, ex: /urin|ionis|ioniz|ionic|\bion\b|\bfree\b|whole ?blood|24/i },   // TOTAL calcium only — ionised/free calcium (~1.1 mmol/L, e.g. "Free Calcium"/"Calcium Ion") is tracked separately, never the total field
     { key: "mg", kw: /magnesium/i, ex: /urin/i },
     { key: "po4", kw: /phosphate|phosphorus|\bpo4\b/i, ex: /alkaline|phosphatase|creatine/i }, // exclude Alk Phosphatase / CPK
     { key: "glu", kw: /glucose|blood sugar|\brbs\b|\bcbg\b/i, ex: /urin|csf|tolerance|dipsi/i },
@@ -200,8 +200,15 @@
     { key: "crp", kw: /c-reactive|\bcrp\b/i, ex: /procalcitonin/i },
     { key: "lactate", kw: /\blactate\b/i, ex: /dehydrogenase|\bldh\b|csf/i }
   ];
+  // Body-fluid / non-serum specimens must NEVER populate a serum analyte field: an
+  // "Ascitic Fluid Albumin" is not serum albumin; a pleural/CSF/peritoneal/synovial/drain
+  // fluid glucose or protein is not the serum value. The GHIS feed flattens every test from
+  // up to 25 orders, so these body-fluid rows sit right next to the serum panels. Guard them
+  // out so they're left for manual entry rather than silently overwriting the serum result.
+  var NON_SERUM_SPECIMEN = /\bfluid\b|ascit|paracente|pleural|periton|synovial|pericardial|\bcsf\b|cerebrospinal|\bdrain\b|dialysa|\bsemen\b|sputum/i;
   function mapWardLab(name) {
     var n = String(name || "").toLowerCase();
+    if (NON_SERUM_SPECIMEN.test(n)) return null;
     for (var i = 0; i < WARD_LAB_MAP.length; i++) {
       var m = WARD_LAB_MAP[i];
       if (m.kw.test(n) && !(m.ex && m.ex.test(n))) return m.key;
