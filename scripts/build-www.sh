@@ -34,6 +34,11 @@ for f in *.css; do
   cp "$f" "$WWW/"
 done
 
+# ── 2d. Vendored libraries (bundled pdf.js) — loaded LOCALLY so PDF import works
+# offline / in the native app where the CDN is unreachable (see loadPdfJs in
+# icu.js / medlist.js, which try /vendor/pdfjs/ before the CDN fallback). ──────
+[ -d vendor ] && cp -R vendor "$WWW/"
+
 # ── 3. Manifest + service worker ──────────────────────────────────────────────
 [ -f site.webmanifest ] && cp site.webmanifest "$WWW/"
 [ -f sw.js ] && cp sw.js "$WWW/"
