@@ -120,12 +120,12 @@ try {
   ok(D1.calls1 === 1 && D1.deepShown && D1.topCons, "Deep review calls the AI once + renders the structured correlation");
   ok(D2.calls2 === 1, "Deep review is CACHED by evidence hash — a repeat tap does NOT call the AI again (token control)");
 
-  // 7) external-evidence fallback is disabled (deferred to Phase 4)
-  const extDisabled = await ev(`
+  // 7) external-evidence fallback button is present and now ENABLED (Phase 4 shipped; opt-in per tap)
+  const extBtn = await ev(`
     var root=document.getElementById('icuRoot');
-    var b=Array.prototype.filter.call(root.querySelectorAll('button'),function(x){return /Find evidence beyond StewardMD/i.test(x.textContent);})[0];
-    return b ? (b.disabled ? "disabled" : "enabled") : "absent";`);
-  ok(extDisabled === "disabled", "external-evidence fallback button is present but disabled (Phase 4)");
+    var b=root.querySelector('[data-icu-act="corrext"]') || Array.prototype.filter.call(root.querySelectorAll('button'),function(x){return /Find evidence beyond StewardMD/i.test(x.textContent);})[0];
+    return b ? (b.getAttribute && b.getAttribute('data-icu-act')==='corrext' ? "enabled" : (b.disabled ? "disabled" : "enabled")) : "absent";`);
+  ok(extBtn === "enabled", "external-evidence fallback button is present + enabled (Phase 4, opt-in on tap)");
 
   // 8) advisory-only — after analyse + deep, the diagnosis + engine are untouched
   ok(await ev(`return (ICU.state().patient.diagnosis||"")==="";`) === true, "correlation never wrote a diagnosis (deterministic engine remains the authority)");
