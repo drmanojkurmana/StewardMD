@@ -748,6 +748,14 @@
       '.icu-corr-ol{margin:0;padding-left:20px}.icu-corr-ol li{font:700 14px/1.5 var(--font);color:var(--ink)}.icu-corr-conf{font:700 11px var(--font);color:var(--muted)}' +
       '.icu-corr-chips{display:flex;flex-wrap:wrap;gap:6px}.icu-corr-chip{font:600 12px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:4px 10px}.icu-corr-chip.ok{border-color:color-mix(in srgb,var(--ok) 40%,var(--border));color:var(--ok)}.icu-corr-chip.muted{color:var(--muted)}' +
       '.icu-corr-deep{margin-top:10px;border-top:1px solid var(--border);padding-top:10px}' +
+      // Guided working-diagnosis cards (smd_icu_dxflow)
+      '.icu-dx-card{border:1px solid var(--border);border-radius:12px;background:var(--panel2);padding:11px 13px;margin:8px 0}' +
+      '.icu-dx-h{display:flex;align-items:center;justify-content:space-between;gap:8px}.icu-dx-nm{font:800 14.5px var(--font);color:var(--ink)}' +
+      '.icu-dx-lvl{flex:0 0 auto;font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.03em;border-radius:999px;padding:3px 9px;background:var(--panel);color:var(--muted);border:1px solid var(--border)}' +
+      '.icu-dx-lvl.strong{background:var(--ok-soft);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 35%,var(--border))}.icu-dx-lvl.moderate{background:var(--primary-soft);color:var(--primary)}.icu-dx-lvl.possible{background:var(--panel);color:var(--muted)}' +
+      '.icu-dx-red{font:800 10.5px var(--font);color:var(--danger);background:var(--danger-soft);border-radius:6px;padding:2px 6px;margin-left:6px}' +
+      '.icu-dx-rsn{font:600 12.5px/1.5 var(--font);color:var(--muted);margin:5px 0 2px}.icu-dx-why{margin:6px 0 2px}' +
+      '.icu-dx-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.icu-dx-acts .icu-btn{width:auto;flex:1 1 auto;min-width:44%}' +
       '.icu-corr-note{font:600 12.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-corr-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}.icu-corr-partial{color:var(--muted);font-weight:600}' +
       // External evidence (Phase 4)
       '.icu-ev-hubs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.icu-ev-hub{font:700 12px var(--font);text-decoration:none;background:var(--panel2);border:1px solid var(--border);color:var(--primary);border-radius:999px;padding:5px 11px}' +
@@ -1856,15 +1864,36 @@
     },
     dx: function () {
       var p = _raw.patient;
+      var pid = p._id || p.name || "cur";
+      if (_dxPt !== pid) { _dxPt = pid; _dxShow = false; _dxWhy = {}; }   // reset guided-dx UI on patient switch
       var cc = p.complaints ? esc(p.complaints) : '<span style="color:var(--muted)">Not documented — add manually.</span>';
       var dxTxt = p.diagnosis ? "<b>" + esc(p.diagnosis) + "</b>" : '<span style="color:var(--muted)">Not set</span>';
       var fchips = findChipsHTML(false);
+      // (smd_icu_dxflow) "Clinical context ready" → Find working diagnosis → deterministic differential.
+      var guided = "";
+      if (icuDxFlowOn()) {
+        var present = (_raw.findings || []).filter(function (c) { return c.polarity !== "absent" && c.canonicalFindingId && c.canonicalFindingId.indexOf("note:") !== 0; }).length;
+        var labN = Object.keys(_raw.labs.recent || {}).length, imgN = (_raw.imaging || []).filter(function (r) { return !r.hidden; }).length, vitN = latestVitalsSummary().length;
+        var hasCtx = present > 0 || labN > 0 || imgN > 0;
+        if (hasCtx) {
+          var summ = '<div class="icu-corr-meta">' + [present + " finding" + (present === 1 ? "" : "s"), labN + " lab" + (labN === 1 ? "" : "s"), imgN + " imaging", (vitN ? "vitals ✓" : "no vitals")].join(" · ") + "</div>";
+          guided = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "✅") + ' Clinical context ready</div>' +
+            '<p class="icu-doc-sub" style="margin:0 0 4px">Use your findings with available labs, imaging and vitals to identify a working diagnosis.</p>' + summ +
+            '<button class="icu-btn" data-icu-act="finddx">' + ico("pulse", "🩺") + ' Find working diagnosis</button>' +
+            (_dxShow ? '<div style="margin-top:10px">' + dxDifferentialHTML() + "</div>" : "") + "</div>";
+        } else {
+          guided = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("info", "ⓘ") + ' No clinical context yet</div>' +
+            '<p class="icu-doc-sub" style="margin:0 0 8px">Add findings, labs or imaging to identify a working diagnosis.</p>' +
+            '<button class="icu-btn ghost" data-icu-act="findpick">' + ico("plus", "＋") + ' Add findings</button></div>';
+        }
+      }
       return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("edit", "📝") + ' Presenting complaints</div>' +
         '<p class="icu-dx-cc">' + cc + "</p>" +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("edit", "✎") + ' Edit complaints &amp; details</button></div>' +
         '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "🧾") + ' Structured findings</div>' +
         (fchips || '<p class="icu-doc-sub" style="margin:0 0 8px">Add symptoms, signs, vitals, labs or imaging findings from a fast clinical picker. Documentation only — this does not change any diagnosis or scoring.</p>') +
         '<button class="icu-btn" data-icu-act="findpick" style="margin-top:10px">' + ico("plus", "＋") + ' Add findings</button></div>' +
+        guided +
         '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🩺") + ' Working diagnosis</div>' +
         '<p class="icu-dx-cur">' + dxTxt + "</p>" +
         '<button class="icu-btn" data-icu-act="dxsearch">' + ico("search", "🔎") + ' Search &amp; select diagnosis</button>' +
@@ -2438,6 +2467,8 @@
   function pickDiagnosis(name) {
     if (!name) return;
     STATE.patient.diagnosis = name;
+    if (icuDxFlowOn()) STATE.patient.workingDx = { name: name, clinicianConfirmed: true, source: "manual", at: nowTs(), contextHash: correlationHash(buildClinicalContext()) };
+    _dxShow = false;
     closeForm();
     if (window.toast) toast("Working diagnosis set: " + name);
   }
@@ -2716,6 +2747,64 @@
       counts: { imaging: (_raw.imaging || []).filter(function (r) { return !r.hidden; }).length, labs: labs.length, findings: findings.length, vitals: vitals.length } };
   }
   function buildClinicalContext() { return correlationEvidence(); }   // A6: canonical name for the unified context service
+
+  /* ===== Guided working-diagnosis pass (smd_icu_dxflow) — DETERMINISTIC, read-only ============
+   * Feeds the clinician's structured finding chips (present/possible; negation excluded) + the
+   * labs the engine can score into SMD_REASON.assess() (PURE) for a working-diagnosis differential.
+   * Advisory only — never sets a diagnosis unless the clinician taps Select; never alters ranking. */
+  var _dxShow = false, _dxWhy = {}, _dxPt = null;
+  function dxFindingKeys() {
+    var f = {};
+    (_raw.findings || []).forEach(function (c) {
+      if (!c || !c.canonicalFindingId || c.canonicalFindingId.indexOf("note:") === 0) return;   // note:* aren't engine keys
+      if (c.polarity === "absent") return;                                                      // respect negation
+      f[c.canonicalFindingId] = true;                                                            // present / possible
+    });
+    return f;
+  }
+  function dxLabel(k) { try { return (window.SMD_REASON && SMD_REASON.label) ? SMD_REASON.label(k) : k; } catch (e) { return k; } }
+  function runWorkingDx() {
+    var ctx = buildClinicalContext(), f = dxFindingKeys();
+    correlationMappedKeys(ctx).forEach(function (k) { f[k] = true; });   // + labs the engine can score (imaging mostly has no key → Deep Review only)
+    var keys = Object.keys(f), assess = null;
+    try { if (window.SMD_REASON && SMD_REASON.assess && keys.length) assess = SMD_REASON.assess(f); } catch (e) {}
+    var cards = (assess ? (assess.infectious || []).concat(assess.nonInfectious || []) : []).slice()
+      .sort(function (a, b) { return (b.confidence || 0) - (a.confidence || 0); })
+      .map(function (c) {
+        var conf = c.confidence || 0;   // infective soft-suggestions are engine-capped at 56, so they can't reach Strong
+        var lvl = conf >= 65 ? "Strong" : conf >= 40 ? "Moderate" : conf >= 25 ? "Possible" : "Weak";
+        return { c: c, lvl: lvl };
+      }).filter(function (x) { return x.lvl !== "Weak"; }).slice(0, 5);
+    var sufficient = keys.length >= 1 && cards.length && (cards[0].c.confidence || 0) >= 25;
+    return { ctx: ctx, keys: keys, cards: cards, sufficient: sufficient, suggestions: (assess && assess.suggestions) || [] };
+  }
+  function dxDifferentialHTML() {
+    var r = runWorkingDx();
+    if (!r.keys.length) return '<div class="icu-corr-note">' + ico("info", "ⓘ") + ' Add symptoms/signs the engine can reason on (or run Deep clinical review) to generate a working differential.</div>';
+    if (!r.sufficient) return '<div class="icu-corr-note">' + ico("info", "ⓘ") + ' Insufficient context for a confident differential — add focused findings' + (r.suggestions.length ? " (e.g. " + r.suggestions.slice(0, 3).map(function (k) { return esc(dxLabel(k)); }).join(", ") + ")" : "") + ', or run Deep clinical review.</div>';
+    var cards = r.cards.map(function (x) {
+      var c = x.c, red = (c.redFlags && c.redFlags.length) ? ' <span class="icu-dx-red">⚠ red flag</span>' : "";
+      var why = _dxWhy[c.id] ? '<div class="icu-dx-why">' +
+        (c.reason ? '<div class="icu-corr-note" style="margin:6px 0">' + esc(c.reason) + "</div>" : "") +
+        ((c.supporting || []).length ? '<div class="icu-corr-sub">Supporting</div>' + corrChips(c.supporting, "ok") : "") +
+        ((c.contradictory || []).length ? '<div class="icu-corr-sub">Against</div>' + corrChips(c.contradictory, "muted") : "") +
+        ((c.missing || []).length ? '<div class="icu-corr-sub">Missing / to check</div>' + corrChips(c.missing, "muted") : "") +
+        ((c.investigations || []).length ? '<div class="icu-corr-sub">Suggested investigations</div>' + corrChips(c.investigations, "muted") : "") + "</div>" : "";
+      return '<div class="icu-dx-card"><div class="icu-dx-h"><span class="icu-dx-nm">' + esc(c.name) + red + '</span><span class="icu-dx-lvl ' + x.lvl.toLowerCase() + '">' + x.lvl + "</span></div>" +
+        (c.reason && !_dxWhy[c.id] ? '<div class="icu-dx-rsn">' + esc(c.reason) + "</div>" : "") + why +
+        '<div class="icu-dx-acts"><button class="icu-btn" data-icu-act="dxpick:' + encodeURIComponent(c.name) + '">Select as working diagnosis</button>' +
+        '<button class="icu-btn ghost" data-icu-act="dxwhy:' + esc(c.id) + '">' + (_dxWhy[c.id] ? "Hide reasoning" : "View reasoning") + "</button></div></div>";
+    }).join("");
+    return cards + '<div class="icu-img-btns" style="margin-top:8px"><button class="icu-btn ghost" data-icu-act="dxmanual">' + ico("search", "🔎") + ' Add my own</button><button class="icu-btn ghost" data-icu-act="dxskip">Continue without</button></div>' +
+      '<p class="icu-doc-sub" style="margin-top:8px">Deterministic pattern support — not a probability or a confirmed diagnosis. You decide.</p>';
+  }
+  function pickWorkingDx(name, source) {
+    if (!name) return;
+    STATE.patient.diagnosis = name;
+    STATE.patient.workingDx = { name: name, clinicianConfirmed: true, source: source || "manual", at: nowTs(), contextHash: correlationHash(buildClinicalContext()) };
+    _dxShow = false;
+    if (window.toast) toast("Working diagnosis set — " + name);
+  }
   function correlationMappedKeys(ev) {
     var keys = {};
     ev.img.forEach(function (c) { if (CONCEPT_KEY[c]) keys[CONCEPT_KEY[c]] = true; });
@@ -3142,6 +3231,11 @@
       case "discharge": if (window.toast) toast("Discharge Creator is coming in the next update — draft from this patient’s recorded data with clinician review."); break;
       case "dxsearch": openDxSearch(); break;
       case "findpick": openFindingPicker(); break;
+      case "finddx": _dxShow = true; paint(); break;
+      case "dxpick": pickWorkingDx(decodeURIComponent(arg), "deterministic_suggestion"); paint(); break;
+      case "dxwhy": { var _dk = arg; _dxWhy[_dk] = !_dxWhy[_dk]; paint(); break; }
+      case "dxmanual": openDxSearch(); break;
+      case "dxskip": _dxShow = false; paint(); break;
       case "pickdx": pickDiagnosis(decodeURIComponent(arg)); break;
       case "imgfetch": imagingFetch(); break;
       case "imgadd": openImagingForm(null); break;
@@ -3267,6 +3361,7 @@
     openFindingPicker: openFindingPicker, _addFindingChip: addFindingChip, _applyFindState: applyFindState, _findStateOf: findStateOf, _vocabNlpCtx: vocabNlpCtx,
     _correlationEvidence: correlationEvidence, _runQuickCorrelation: runQuickCorrelation, _buildCorrelationPacket: buildCorrelationPacket, _correlationTopic: correlationTopic, extEvidenceOn: extEvidenceOn,
     _buildClinicalContext: buildClinicalContext, _correlationHash: correlationHash, _latestVitalsSummary: latestVitalsSummary, dxFlowOn: icuDxFlowOn,
+    _runWorkingDx: runWorkingDx, _pickWorkingDx: pickWorkingDx, _dxFindingKeys: dxFindingKeys,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"
