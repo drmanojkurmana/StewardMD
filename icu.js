@@ -509,6 +509,7 @@
     if (conflicts.length) { STATE.conflicts = (STATE.conflicts || []).filter(function (c) { return !conflicts.some(function (n) { return n.key === c.key; }); }).concat(conflicts); }
     STATE.wardSync = { connected: true, lastTs: ts, patientId: bundle.patientId || (STATE.wardSync && STATE.wardSync.patientId) || null, newUpdate: hadNew && !!(STATE.wardSync && STATE.wardSync.lastTs) };
     recompute(_raw);   // BUG #1: recompute alerts after a Ward-Sync import (abg/vent write directly to state)
+    lwScan();          // Lab Watch: detect new results this sync brought in (no-op unless a watch is active)
     return { applied: Object.keys(applied), conflicts: conflicts.length, mappedLabs: Object.keys(labVals).length };
   }
 
@@ -572,6 +573,7 @@
     STATE.wardSync.connected = true; STATE.wardSync.lastTs = nowTs(); STATE.wardSync.newUpdate = pts > 0;
     if (bundle.patientId) STATE.wardSync.patientId = bundle.patientId;
     // STATE mutations above go through the reactive proxy, which coalesces a recompute()+render.
+    lwScan();   // Lab Watch: detect new results this sync brought in (no-op unless a watch is active)
     return { reports: tsList.length, points: pts, keys: Object.keys(keysSeen), conflicts: conflicts.length };
   }
 
@@ -700,6 +702,30 @@
       '.icu-tr-cnt{background:var(--primary-soft);color:var(--primary);border-radius:999px;font:800 11px var(--font);padding:2px 9px}' +
       '.icu-tr-none{color:var(--muted);font-weight:600;font-size:12px}.icu-tr-empty{padding:0 14px 14px;color:var(--muted);font:600 12.5px var(--font)}' +
       '.icu-tr-card{margin:0 10px 10px}' +
+      // Lab Watch
+      '.icu-chip-lw{background:var(--primary-soft);border-color:var(--primary);color:var(--primary2,var(--primary))}' +
+      '.icu-lw-badge{display:inline-flex;min-width:16px;height:16px;padding:0 4px;align-items:center;justify-content:center;background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 10px var(--font);margin-left:3px}' +
+      '.icu-tr-card.lw-hi{outline:2px solid var(--primary);outline-offset:1px;box-shadow:0 0 0 4px var(--primary-soft)}' +
+      '.icu-lw-sheet .icu-lw-list{max-height:34vh;overflow:auto;margin-bottom:6px}' +
+      '.icu-lw-grp{margin:0 0 10px}.icu-lw-grp-h{margin:0 0 6px}' +
+      '.icu-lw-grpall{font:800 11.5px var(--font);letter-spacing:.02em;text-transform:uppercase;color:var(--muted);background:none;border:none;padding:2px 0;cursor:pointer}.icu-lw-grpall.on{color:var(--primary)}' +
+      '.icu-lw-chips{display:flex;flex-wrap:wrap;gap:6px}' +
+      '.icu-lw-an{font:700 12.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:6px 11px;cursor:pointer}.icu-lw-an.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary2,var(--primary))}' +
+      '.icu-lw-none,.icu-lw-empty{font:600 12.5px var(--font);color:var(--muted);padding:10px 2px}' +
+      '.icu-lw-opts{border-top:1px solid var(--border);padding-top:10px;margin-top:4px}.icu-lw-opt{margin-bottom:10px}.icu-lw-opt>label{display:block;font:800 11.5px var(--font);text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin-bottom:5px}' +
+      '.icu-lw-segs{display:flex;flex-wrap:wrap;gap:6px}' +
+      '.icu-lw-seg{font:700 12.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:9px;padding:7px 11px;cursor:pointer}.icu-lw-seg.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '.icu-lw-hint{font:600 11.5px/1.4 var(--font);color:var(--muted);margin-top:6px}' +
+      '.icu-lw-count{font:700 12px var(--font);color:var(--muted);text-align:center;margin:6px 0 10px}' +
+      '.icu-lw-state{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:999px;vertical-align:middle}.icu-lw-state.on{background:var(--ok-soft);color:var(--ok)}.icu-lw-state.pause{background:var(--warn-soft);color:var(--warn)}.icu-lw-state.exp{background:var(--danger-soft);color:var(--danger)}' +
+      '.icu-lw-meta{font:600 12.5px var(--font);color:var(--muted);margin:2px 0 8px}' +
+      '.icu-lw-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}.icu-lw-tag{font:700 11.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:4px 9px}' +
+      '.icu-lw-banner{font:600 12px/1.4 var(--font);color:var(--primary2,var(--primary));background:var(--primary-soft);border-radius:10px;padding:9px 11px;margin-bottom:10px}' +
+      '.icu-lw-acts{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}' +
+      '.icu-lw-act{text-align:left;background:var(--panel2);border:1px solid var(--border);border-left-width:3px;border-radius:10px;padding:8px 11px;cursor:pointer;display:flex;flex-direction:column;gap:2px}' +
+      '.icu-lw-act.crit{border-left-color:var(--danger)}.icu-lw-act.chg{border-left-color:var(--warn)}.icu-lw-act.new{border-left-color:var(--primary)}' +
+      '.icu-lw-act-t{font:700 13px var(--font);color:var(--ink)}.icu-lw-act-w{font:600 11px var(--font);color:var(--muted)}' +
+      '.icu-lw-btns{display:flex;gap:8px;margin:4px 0}.icu-lw-btns .icu-btn{flex:1;margin:0}' +
       '.icu-tr-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}' +
       '.icu-tr-lbl{font:800 14px var(--font);color:var(--ink)}' +
       '.icu-tr-val{font:800 18px var(--font);color:var(--ink);white-space:nowrap}.icu-tr-val .u{font:600 11px var(--font);color:var(--muted)}.icu-tr-arrow{font-size:17px}' +
@@ -1455,7 +1481,7 @@
     var note = (o.note && (o.tone === "bad" || m.good == null)) ? '<div class="icu-tr-note">' + esc(o.note) + '</div>' : "";
     var srcLine = '<div class="icu-tr-src">' + pill + '<span>' + esc(src) + ' · ' + esc(fmtWhen(o.when)) + '</span></div>';
     var chart = series.length >= 2 ? trendGraph(series, { unit: o.unit, band: m.ref }) : '<div class="icu-tr-single">Single reading — no trend yet</div>';
-    return '<div class="icu-card icu-tr-card">' + head + sub + note + srcLine + chart + '</div>';
+    return '<div class="icu-card icu-tr-card' + (key === _lwHighlight ? " lw-hi" : "") + '">' + head + sub + note + srcLine + chart + '</div>';
   }
   function groupSection(grp, win) {
     var have = grp.keys.filter(function (k) { return trendSeriesFor(k, win).length > 0; });
@@ -1487,6 +1513,230 @@
         '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Fetch from Ward Sync</button>' +
       '</div></div>';
+  }
+
+  /* ================================ LAB WATCH ================================
+   * Patient-specific new-lab monitoring. PHASE 1 = IN-APP monitoring only: when a
+   * Ward-Sync sync brings NEW results (labs.trends[]), a deterministic comparison
+   * (reusing TREND_INTERP + interpret() — NO AI) fires an in-app alert for the analytes
+   * the clinician chose to watch, per the chosen sensitivity. Optional device notification
+   * fires ONLY while the app is running (a local notification, permission requested at Start).
+   * TRUE background push when the app is closed is PHASE 2 (documented below) — it needs a
+   * server-side patient-scoped subscription store + a scheduled worker that can poll GHIS
+   * server-side + APNs/FCM. We NEVER pretend to do 24/7 background monitoring here.
+   * Flag smd_lab_watch (default ON) + ?labwatch=0 kill-switch. Records are per-account
+   * (ownerNow) + per-patient in localStorage; comparison is deterministic; dedup by reading
+   * timestamp; no PHI in logs (device notifications carry only the analyte label + value,
+   * i.e. exactly what is already on screen). */
+  function labWatchOn() {
+    try {
+      var q = (location.search.match(/[?&]labwatch=([^&]+)/) || [])[1];
+      if (q != null) return q === "1" || q === "on" || q === "true";
+      var v = localStorage.getItem("smd_lab_watch");
+      return v === null ? true : v === "1";
+    } catch (e) { return true; }
+  }
+  var LW_BASE = "smd_lab_watch";
+  var _lwBadge = 0, _lwHighlight = null, _lwDraft = null;
+  function lwKey() { return LW_BASE + ":" + ownerNow(); }
+  function lwPatientKey() { var p = _raw.patient || {}; return String(p._id || p.name || "cur"); }
+  function lwLoadAll() { try { var m = JSON.parse(localStorage.getItem(lwKey())); return (m && typeof m === "object") ? m : {}; } catch (e) { return {}; } }
+  function lwSaveAll(m) { try { localStorage.setItem(lwKey(), JSON.stringify(m)); } catch (e) {} }
+  function lwGet() { return lwLoadAll()[lwPatientKey()] || null; }
+  function lwSet(w) { var m = lwLoadAll(); if (w) m[lwPatientKey()] = w; else delete m[lwPatientKey()]; lwSaveAll(m); }
+  function lwExpired(w) { return !!(w && w.expiresAt && nowTs() > w.expiresAt); }
+  function lwActive(w) { w = w || lwGet(); return !!(labWatchOn() && w && !w.paused && !lwExpired(w)); }
+  // Seed "seen" to each watched analyte's latest reading at Start, so only labs arriving
+  // AFTER the clinician starts watching alert (never a backlog of existing history).
+  function lwSeedSeen(analytes) { var seen = {}; (analytes || []).forEach(function (k) { var s = trendSeriesFor(k, 0); if (s.length) seen[k] = s[s.length - 1].ts; }); return seen; }
+
+  // Deterministic detection — run after every Ward-Sync ingest (see ingestFromWard /
+  // ingestWardHistory). Compares each watched analyte's latest reading against the previous
+  // one via interpret(); fires per the watch's sensitivity mode; dedups by reading timestamp.
+  function lwScan() {
+    if (!labWatchOn()) return;
+    var w = lwGet(); if (!lwActive(w)) return;
+    w.seen = w.seen || {};
+    var fresh = [];
+    (w.analytes || []).forEach(function (k) {
+      var series = trendSeriesFor(k, 0); if (!series.length) return;
+      var o = interpret(k, series); if (!o) return;
+      var ts = o.when;
+      if (w.seen[k] != null && ts <= w.seen[k]) return;   // dedup: already evaluated this reading
+      w.seen[k] = ts;                                       // mark evaluated regardless of firing
+      var meta = TREND_INTERP[k] || {};
+      var crit = (meta.crit && meta.crit(o.latest)) || o.status === "critical";
+      var fire = false, kind = "new";
+      if (crit) { fire = true; kind = "critical"; }
+      else if (w.mode === "every") { fire = true; kind = "new"; }
+      else if (w.mode === "meaningful") {
+        if (o.status === "abnormal" || o.tone === "bad" || (o.pct != null && o.dir !== "flat" && Math.abs(o.pct) >= 20)) { fire = true; kind = "change"; }
+      } // mode "critical": only crit fires
+      if (!fire) return;
+      var chg = (o.prev != null && o.dir !== "single") ? " (" + o.arrow + " from " + fmtNum(o.prev) + ")" : "";
+      var text = o.label + " " + fmtNum(o.latest) + (o.unit ? " " + o.unit : "") + (kind === "critical" ? " — critical" : chg);
+      var item = { ts: ts, analyte: k, label: o.label, value: o.latest, unit: o.unit, kind: kind, text: text, ack: false };
+      w.activity = w.activity || []; w.activity.unshift(item); fresh.push(item);
+    });
+    if ((w.activity || []).length > 60) w.activity = w.activity.slice(0, 60);
+    w.lastScan = nowTs();
+    lwSet(w);
+    if (fresh.length) lwAnnounce(w, fresh);
+  }
+  function lwAnnounce(w, items) {
+    var crit = items.filter(function (i) { return i.kind === "critical"; });
+    var head = crit.length ? "⚠ Lab Watch — critical" : "🔔 Lab Watch";
+    var msg = items.length === 1
+      ? head + ": " + items[0].text
+      : head + ": " + items.length + " new results — " + items.slice(0, 3).map(function (i) { return i.label; }).join(", ") + (items.length > 3 ? "…" : "");
+    _lwBadge += items.length;
+    try { if (window.toast) toast(msg); } catch (e) {}
+    if (w.delivery === "device" || w.delivery === "both") lwDeviceNotify(head, items.length === 1 ? items[0].text : items.length + " new lab results", crit.length > 0);
+    if (ICU.isOpen()) paint();
+    // PHI-safe telemetry only (counts + severity, never values/identifiers).
+    try { console.log("[lab-watch] fired", items.length, "items; critical=" + crit.length); } catch (e) {}
+  }
+  // Device (local) notification — fires ONLY while the app process is alive. Phase-2-ready:
+  // uses @capacitor/local-notifications if bundled; else the web Notification API; else it
+  // silently relies on the in-app toast. Body carries only the analyte label/value/count.
+  function lwDeviceNotify(title, body, urgent) {
+    try {
+      var P = (window.Capacitor && window.Capacitor.Plugins) || {};
+      if (P.LocalNotifications && P.LocalNotifications.schedule) {
+        P.LocalNotifications.schedule({ notifications: [{ id: (nowTs() % 2147483000) + 1, title: title, body: body, schedule: { at: new Date(nowTs() + 200) } }] }).catch(function () {});
+        return true;
+      }
+      if (window.Notification && Notification.permission === "granted") { new Notification(title, { body: body, tag: "smd-lab-watch", renotify: !!urgent }); return true; }
+    } catch (e) {}
+    return false;
+  }
+  function lwRequestNotifyPermission() {
+    return new Promise(function (res) {
+      try {
+        var P = (window.Capacitor && window.Capacitor.Plugins) || {};
+        if (P.LocalNotifications && P.LocalNotifications.requestPermissions) { P.LocalNotifications.requestPermissions().then(function (r) { res(!!(r && r.display === "granted")); }).catch(function () { res(false); }); return; }
+        if (window.Notification && Notification.requestPermission) { var p = Notification.requestPermission(); if (p && p.then) { p.then(function (s) { res(s === "granted"); }); return; } }
+      } catch (e) {}
+      res(false);
+    });
+  }
+
+  // Search synonyms so a clinician can find an analyte by common names/abbreviations.
+  var LW_SYN = {
+    k: ["potassium", "k+", "serum k"], na: ["sodium", "na+"], creat: ["creatinine", "kidney", "renal", "egfr"],
+    urea: ["urea", "bun", "blood urea"], hb: ["haemoglobin", "hemoglobin", "hgb"], hct: ["haematocrit", "hematocrit", "pcv"],
+    wbc: ["wbc", "tlc", "leucocyte", "leukocyte", "white cell", "count"], neut: ["neutrophil", "anc"], plt: ["platelet", "thrombocyte"],
+    cl: ["chloride"], hco3: ["bicarbonate"], ca: ["calcium"], mg: ["magnesium"], po4: ["phosphate", "phosphorus"],
+    bili: ["bilirubin", "jaundice"], bili_d: ["direct bilirubin", "conjugated"], ast: ["ast", "sgot"], alt: ["alt", "sgpt"],
+    alp: ["alkaline phosphatase", "alp"], alb: ["albumin"], inr: ["inr", "coagulation", "prothrombin"], amylase: ["amylase"],
+    lipase: ["lipase", "pancreatitis"], glu: ["glucose", "sugar", "rbs", "fbs"], lactate: ["lactate", "lactic"],
+    crp: ["crp", "c-reactive"], pct: ["procalcitonin"], hr: ["heart rate", "pulse"], map: ["map", "mean arterial", "blood pressure"],
+    spo2: ["spo2", "oxygen", "saturation"], rr: ["respiratory rate", "resp"], temp: ["temperature", "fever"], uop: ["urine", "output"]
+  };
+  function lwAnalyteMatch(k, q) {
+    if (!q) return true; q = q.toLowerCase();
+    var m = TREND_INTERP[k]; if (!m) return false;
+    if ((m.label || "").toLowerCase().indexOf(q) >= 0 || k.indexOf(q) === 0) return true;
+    return (LW_SYN[k] || []).some(function (s) { return s.indexOf(q) >= 0 || q.indexOf(s) >= 0; });
+  }
+  function lwModeLabel(m) { return m === "every" ? "every new result" : m === "critical" ? "critical results only" : "meaningful changes"; }
+  function lwDurLabel(d) { return d === "discharge" ? "until discharge" : (d === 0 || d === "stop") ? "until you stop" : d + " hours"; }
+  function lwRemaining(w) { if (!w || !w.expiresAt) return w && w.untilDischarge ? "until discharge" : "until you stop"; var ms = w.expiresAt - nowTs(); return ms <= 0 ? "expired" : fmtDur(ms) + " left"; }
+
+  function lwStart() {
+    var d = _lwDraft || {}, analytes = (d.analytes || []).slice();
+    if (!analytes.length) { if (window.toast) toast("Pick at least one lab to watch."); return; }
+    var mode = d.mode || "meaningful", dur = (d.dur != null ? d.dur : 12), delivery = d.delivery || "inapp";
+    function finalize(deliv) {
+      var now = nowTs(), expiresAt = (typeof dur === "number" && dur > 0) ? now + dur * 36e5 : null;
+      var prev = lwGet();
+      lwSet({ analytes: analytes, mode: mode, dur: dur, delivery: deliv, startedAt: now, expiresAt: expiresAt, untilDischarge: dur === "discharge", paused: false, seen: lwSeedSeen(analytes), activity: (prev && prev.activity) || [] });
+      _lwDraft = null; _lwBadge = 0;
+      if (window.toast) toast("Lab Watch on — " + analytes.length + " lab" + (analytes.length === 1 ? "" : "s") + ", " + lwModeLabel(mode) + ".");
+      openLabWatch();
+    }
+    if (delivery === "device" || delivery === "both") {
+      lwRequestNotifyPermission().then(function (granted) {
+        if (!granted) { if (window.toast) toast("Device notifications not enabled — Lab Watch will alert you in-app."); finalize("inapp"); }
+        else finalize(delivery);
+      });
+    } else finalize(delivery);
+  }
+  function lwStop() { lwSet(null); _lwDraft = null; _lwBadge = 0; if (window.toast) toast("Lab Watch stopped."); openLabWatch(); }
+  function lwPause() { var w = lwGet(); if (!w) return; w.paused = !w.paused; lwSet(w); if (window.toast) toast(w.paused ? "Lab Watch paused." : "Lab Watch resumed."); openLabWatch(); }
+  function lwEdit() { var w = lwGet(); _lwDraft = w ? { analytes: (w.analytes || []).slice(), mode: w.mode, dur: w.dur, delivery: w.delivery, q: "" } : { analytes: [], mode: "meaningful", dur: 12, delivery: "inapp", q: "" }; openLabWatch(); }
+  function lwOpenAnalyte(k) { _lwHighlight = k; _lwBadge = 0; closeForm(); _active = "trends"; _ws = wsOf("trends"); _wsLast[_ws] = "trends"; paint(); setTimeout(function () { try { var el = rootEl && rootEl.querySelector('.icu-tr-card.lw-hi'); if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {} }, 60); }
+  // Clear an "until discharge" watch when a discharge summary is generated.
+  function lwOnDischarge() { var w = lwGet(); if (w && w.untilDischarge) { lwSet(null); } }
+
+  function lwGroupChip(grp, sel) {
+    var inGrp = grp.keys.filter(function (k) { return TREND_INTERP[k]; });
+    var all = inGrp.length && inGrp.every(function (k) { return sel.indexOf(k) >= 0; });
+    return '<button class="icu-lw-grpall' + (all ? " on" : "") + '" data-icu-act="lwgrp:' + grp.id + '">' + (all ? "✓ " : "") + esc(grp.name) + '</button>';
+  }
+  function lwListHTML(d) {
+    var sel = d.analytes || [], q = (d.q || "").trim();
+    var groups = TREND_GROUPS.map(function (grp) {
+      var keys = grp.keys.filter(function (k) { return TREND_INTERP[k] && lwAnalyteMatch(k, q); });
+      if (!keys.length) return "";
+      var chips = keys.map(function (k) {
+        var on = sel.indexOf(k) >= 0, m = TREND_INTERP[k];
+        return '<button class="icu-lw-an' + (on ? " on" : "") + '" data-icu-act="lwtog:' + k + '" aria-pressed="' + on + '">' + (on ? "✓ " : "") + esc(m.label) + '</button>';
+      }).join("");
+      return '<div class="icu-lw-grp"><div class="icu-lw-grp-h">' + lwGroupChip(grp, sel) + '</div><div class="icu-lw-chips">' + chips + '</div></div>';
+    }).join("");
+    return groups || '<div class="icu-lw-none">No lab matches “' + esc(q) + '”.</div>';
+  }
+  function lwSetupHTML(d) {
+    var seg = function (act, val, cur, label) { return '<button class="icu-lw-seg' + (String(cur) === String(val) ? " on" : "") + '" data-icu-act="' + act + ':' + val + '">' + esc(label) + '</button>'; };
+    return '<div class="icu-sheet icu-lw-sheet"><h3>' + ico("bell", "🔔") + ' Lab Watch</h3>' +
+      '<p class="icu-doc-sub">Watch this patient’s labs. When Ward Sync brings a new result you’ll get an in-app alert. <b>In-app monitoring — active while StewardMD is open.</b></p>' +
+      '<input id="icuLwq" type="search" autocomplete="off" placeholder="Search a lab — e.g. potassium, creatinine, CRP…" value="' + esc(d.q || "") + '" style="width:100%;box-sizing:border-box;font:600 15px var(--font);padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);margin-bottom:10px">' +
+      '<div id="icuLwList" class="icu-lw-list">' + lwListHTML(d) + '</div>' +
+      '<div class="icu-lw-opts">' +
+        '<div class="icu-lw-opt"><label>Alert me on</label><div class="icu-lw-segs">' + seg("lwmode", "critical", d.mode, "Critical only") + seg("lwmode", "meaningful", d.mode, "Meaningful changes") + seg("lwmode", "every", d.mode, "Every result") + '</div></div>' +
+        '<div class="icu-lw-opt"><label>Keep watching</label><div class="icu-lw-segs">' + seg("lwdur", "6", d.dur, "6 h") + seg("lwdur", "12", d.dur, "12 h") + seg("lwdur", "24", d.dur, "24 h") + seg("lwdur", "stop", d.dur, "Until I stop") + seg("lwdur", "discharge", d.dur, "Until discharge") + '</div></div>' +
+        '<div class="icu-lw-opt"><label>Alerts</label><div class="icu-lw-segs">' + seg("lwdeliv", "inapp", d.delivery, "In-app") + seg("lwdeliv", "both", d.delivery, "In-app + device") + '</div>' +
+          ((d.delivery === "both" || d.delivery === "device") ? '<div class="icu-lw-hint">Device alerts fire while the app is open; you’ll be asked for permission when you start. Background alerts when the app is closed are coming later.</div>' : '') + '</div>' +
+      '</div>' +
+      '<div class="icu-lw-count">' + ((d.analytes || []).length) + ' lab' + ((d.analytes || []).length === 1 ? '' : 's') + ' selected · ' + lwModeLabel(d.mode || "meaningful") + ' · ' + lwDurLabel(d.dur != null ? d.dur : 12) + '</div>' +
+      '<button class="icu-btn" data-icu-act="lwstart">' + ico("bell", "🔔") + ' Start Lab Watch</button>' +
+      (lwGet() ? '<button class="icu-btn ghost" data-icu-act="labwatch">Back</button>' : '<button class="icu-btn ghost" data-icu-act="lwcancel">Cancel</button>') + '</div>';
+  }
+  function lwActivityHTML(w) {
+    var acts = (w.activity || []);
+    if (!acts.length) return '<div class="icu-lw-empty">No new results yet. You’ll see them here the moment Ward Sync brings them in.</div>';
+    return '<div class="icu-lw-acts">' + acts.slice(0, 30).map(function (a) {
+      var cls = a.kind === "critical" ? "crit" : a.kind === "change" ? "chg" : "new";
+      return '<button class="icu-lw-act ' + cls + '" data-icu-act="lwopen:' + a.analyte + '"><span class="icu-lw-act-t">' + esc(a.text) + '</span><span class="icu-lw-act-w">' + esc(fmtWhen(a.ts)) + ' · tap to view trend</span></button>';
+    }).join("") + '</div>';
+  }
+  function lwStatusHTML(w) {
+    var expired = lwExpired(w), sel = (w.analytes || []);
+    var chips = sel.map(function (k) { return '<span class="icu-lw-tag">' + esc((TREND_INTERP[k] || {}).label || k) + '</span>'; }).join("");
+    var state = expired ? '<span class="icu-lw-state exp">Expired</span>' : w.paused ? '<span class="icu-lw-state pause">Paused</span>' : '<span class="icu-lw-state on">Watching</span>';
+    return '<div class="icu-sheet icu-lw-sheet"><h3>' + ico("bell", "🔔") + ' Lab Watch ' + state + '</h3>' +
+      '<div class="icu-lw-meta">' + sel.length + ' lab' + (sel.length === 1 ? '' : 's') + ' · ' + esc(lwModeLabel(w.mode)) + ' · ' + esc(lwRemaining(w)) + ' · ' + (w.delivery === "both" ? "in-app + device" : "in-app") + '</div>' +
+      '<div class="icu-lw-tags">' + chips + '</div>' +
+      '<div class="icu-lw-banner">In-app monitoring ' + (expired ? 'has ended' : w.paused ? 'is paused' : 'is active') + ' — alerts appear while StewardMD is open.</div>' +
+      '<div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Activity</div>' + lwActivityHTML(w) +
+      '<div class="icu-lw-btns">' +
+        (expired ? '<button class="icu-btn" data-icu-act="lwedit">Restart</button>' : '<button class="icu-btn" data-icu-act="lwpause">' + (w.paused ? "Resume" : "Pause") + '</button>') +
+        '<button class="icu-btn ghost" data-icu-act="lwedit">Edit</button>' +
+        '<button class="icu-btn ghost" data-icu-act="lwstop">Stop</button>' +
+      '</div>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
+  }
+  function openLabWatch() {
+    if (!labWatchOn()) { if (window.toast) toast("Lab Watch is turned off."); return; }
+    injectCSS(); ensureModal();
+    var w = lwGet();
+    if (_lwDraft) { modalEl.innerHTML = lwSetupHTML(_lwDraft); }
+    else if (w) { _lwBadge = 0; modalEl.innerHTML = lwStatusHTML(w); }
+    else { _lwDraft = { analytes: [], mode: "meaningful", dur: 12, delivery: "inapp", q: "" }; modalEl.innerHTML = lwSetupHTML(_lwDraft); }
+    modalEl.classList.add("on");
+    var q = modalEl.querySelector("#icuLwq");
+    if (q) q.oninput = function () { _lwDraft.q = q.value; var list = modalEl.querySelector("#icuLwList"); if (list) list.innerHTML = lwListHTML(_lwDraft); };
   }
 
   // --- ABG / acid–base interpreter -----------------------------------------
@@ -2079,6 +2329,7 @@
         '<button class="icu-chip" data-icu-act="edit:patient">' + ico("edit", "✎") + '<span>Patient</span></button>' +
         '<button class="icu-chip" data-icu-act="savept">' + ico("save", "💾") + '<span>Save</span></button>' +
         '<button class="icu-chip" data-icu-act="patients">' + ico("folder", "📋") + '<span>Patients' + (n ? " (" + n + ")" : "") + '</span></button>' +
+        (labWatchOn() ? '<button class="icu-chip' + (lwActive() ? " icu-chip-lw" : "") + '" data-icu-act="labwatch" aria-label="Lab Watch — monitor new labs for this patient">' + ico("bell", "🔔") + '<span>' + (lwActive() ? "Watching" : "Lab Watch") + (_lwBadge ? ' <b class="icu-lw-badge">' + _lwBadge + '</b>' : "") + '</span></button>' : "") +
         '<button class="icu-chip" data-icu-act="sharecase">' + ico("share", "📤") + '<span>Share</span></button>' +
         '<button class="icu-chip" data-icu-act="clearfindings">' + ico("trash", "🧹") + '<span>Clear</span></button>' +
         '<button class="icu-chip icu-chip-primary" data-icu-act="newpt">' + ico("plus", "＋") + '<span>New</span></button>' +
@@ -2440,6 +2691,57 @@
     if (w && w.document) { w.document.open(); w.document.write(html); w.document.close(); setTimeout(function () { try { w.focus(); w.print(); } catch (e) {} }, 350); }
     else { openSummary(); if (window.toast) toast("Pop-up blocked — use Share to export as PDF"); }
   }
+
+  /* ---- Discharge Creator: draft a clinician-reviewable ICU discharge summary from the
+   * patient's RECORDED data (demographics, working dx, complaints, hospital course from
+   * rounds notes + significant trend changes, status at discharge, active issues, current
+   * infusions). Discharge-specific fields the app doesn't hold (discharge meds, follow-up,
+   * advice) are bracketed placeholders the clinician completes. Editable before Copy/Print;
+   * nothing is auto-sent. Reuses buildSummary's data extraction + significantChanges(). ---- */
+  function buildDischarge(st) {
+    var s = st || _raw, p = s.patient || {}, lv = latestByTs(s.vitals), L = (s.labs && s.labs.recent) || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], infusions = s.infusions || [], out = [];
+    out.push("STEWARDMD — ICU DISCHARGE SUMMARY (DRAFT — clinician review required)");
+    out.push((p.name || "ICU patient") + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") + (p.bed ? " · Bed " + p.bed : "") + (p.icuDay != null ? " · ICU day " + p.icuDay : "") + (p.hospital ? " · " + p.hospital : ""));
+    out.push("Working diagnosis: " + (p.diagnosis || "[ complete ]"));
+    if (p.complaints) out.push("Reason for admission: " + p.complaints);
+    var finds = s.findings || [];
+    if (finds.length) out.push("Clinical findings: " + finds.map(function (c) { return findChipLabel(c); }).join("; "));
+    // Hospital course = rounds notes + significant trend changes (plain text of the flags).
+    var course = [];
+    ROUNDS_ITEMS.forEach(function (it) { if (rounds[it.k] && rounds[it.k].note) course.push(it.label + ": " + rounds[it.k].note); });
+    var sig = significantChanges(0);
+    if (sig) { var tmp = sig.replace(/<[^>]+>/g, "|").split("|").map(function (x) { return x.trim(); }).filter(function (x) { return x && !/Significant changes|trend flags/.test(x); }); tmp.forEach(function (x) { course.push(x); }); }
+    out.push("\nHOSPITAL COURSE:");
+    out.push(course.length ? course.map(function (x) { return "• " + x; }).join("\n") : "[ summarise the ICU course ]");
+    out.push("\nSTATUS AT DISCHARGE:");
+    out.push("• Haemodynamics: HR " + (lv.hr != null ? lv.hr : "—") + ", BP " + (lv.sbp != null ? lv.sbp + "/" + lv.dbp : "—") + ", MAP " + (mp != null ? mp : "—") + (lv.spo2 != null ? ", SpO₂ " + lv.spo2 + "%" : ""));
+    var keyL = ["na", "k", "creat", "urea", "hb", "wbc", "plt", "crp"].filter(function (k) { return L[k] != null; }).map(function (k) { return k.toUpperCase() + " " + L[k]; });
+    if (keyL.length) out.push("• Labs: " + keyL.join(", "));
+    if (g.ph != null) out.push("• ABG: pH " + g.ph + " / pCO₂ " + g.paco2 + " / HCO₃ " + g.hco3);
+    if (v.mode) out.push("• Ventilation: " + v.mode + (v.fio2 ? ", FiO₂ " + v.fio2 + "%" : "") + (v.peep != null ? ", PEEP " + v.peep : ""));
+    if (f.net24h != null || f.cumulative != null) out.push("• Fluids: net 24h " + (f.net24h != null ? f.net24h + " mL" : "—") + ", cumulative " + (f.cumulative != null ? f.cumulative + " mL" : "—"));
+    if (alerts.length) out.push("\nACTIVE ISSUES AT DISCHARGE:\n" + alerts.map(function (a) { return "• [" + a.severity.toUpperCase() + "] " + a.title + " — " + a.msg; }).join("\n"));
+    if (infusions.length) out.push("\nINFUSIONS RUNNING (reconcile before discharge):\n" + infusions.map(function (i) { return "• " + i.drug + (i.dose != null ? " " + i.dose + (i.unit || "") : "") + (i.rateMlHr != null ? " @ " + i.rateMlHr + " mL/h" : ""); }).join("\n"));
+    out.push("\nDISCHARGE MEDICATIONS: [ complete ]");
+    out.push("FOLLOW-UP: [ complete ]");
+    out.push("ADVICE TO PATIENT / CARER: [ complete ]");
+    out.push("\n— Draft generated from recorded ICU data. Verify every value and complete the bracketed sections before use. Decision support only. StewardMD ICU.");
+    return out.join("\n");
+  }
+  function openDischarge() {
+    injectCSS(); ensureModal();
+    lwOnDischarge();   // an "until discharge" Lab Watch ends when the discharge summary is created
+    var draft = buildDischarge();
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("copy", "📝") + ' Discharge Creator <span style="font:700 11px var(--font);color:var(--warn);background:var(--warn-soft);padding:2px 7px;border-radius:999px;vertical-align:middle">DRAFT</span></h3>' +
+      '<p class="icu-doc-sub">Drafted from this patient’s recorded ICU data. <b>Edit below</b>, complete the bracketed sections, and verify every value — then copy or print. Nothing is sent anywhere.</p>' +
+      '<textarea id="icuDischargeText" spellcheck="false" style="width:100%;box-sizing:border-box;white-space:pre-wrap;font:500 12.5px/1.55 var(--mono);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--ink);height:48vh;resize:vertical">' + esc(draft) + '</textarea>' +
+      '<button class="icu-btn" data-icu-act="dischargecopy">' + ico("copy", "📋") + ' Copy</button>' +
+      '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
+    modalEl.classList.add("on");
+  }
+  function copyDischarge() { var ta = modalEl && modalEl.querySelector("#icuDischargeText"); var t = ta ? ta.value : buildDischarge(); try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t); } catch (e) {} if (window.toast) toast("Discharge summary copied — verify before use"); }
+
   // Search & select diagnosis — reuses the clinical reasoning engine's KB disease search
   // (window.SMD_REASON.search). Selecting sets the patient's WORKING diagnosis (clinician-
   // editable, never auto-applied elsewhere). Deterministic; no MaiK/provider call.
@@ -3497,7 +3799,21 @@
       case "ws": { _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
       case "summary": openSummary(); break;
       case "printsummary": printSummary(); break;
-      case "discharge": if (window.toast) toast("Discharge Creator is coming in the next update — draft from this patient’s recorded data with clinician review."); break;
+      case "discharge": openDischarge(); break;
+      case "dischargecopy": copyDischarge(); break;
+      // Lab Watch
+      case "labwatch": _lwDraft = null; openLabWatch(); break;
+      case "lwtog": { var _lk = arg; _lwDraft.analytes = _lwDraft.analytes || []; var _li = _lwDraft.analytes.indexOf(_lk); if (_li >= 0) _lwDraft.analytes.splice(_li, 1); else _lwDraft.analytes.push(_lk); openLabWatch(); break; }
+      case "lwgrp": { var _grp = null; for (var _gi = 0; _gi < TREND_GROUPS.length; _gi++) if (TREND_GROUPS[_gi].id === arg) _grp = TREND_GROUPS[_gi]; if (_grp) { _lwDraft.analytes = _lwDraft.analytes || []; var _ks = _grp.keys.filter(function (k) { return TREND_INTERP[k]; }); var _all = _ks.every(function (k) { return _lwDraft.analytes.indexOf(k) >= 0; }); if (_all) _lwDraft.analytes = _lwDraft.analytes.filter(function (k) { return _ks.indexOf(k) < 0; }); else _ks.forEach(function (k) { if (_lwDraft.analytes.indexOf(k) < 0) _lwDraft.analytes.push(k); }); openLabWatch(); } break; }
+      case "lwmode": _lwDraft.mode = arg; openLabWatch(); break;
+      case "lwdur": _lwDraft.dur = (arg === "stop" ? 0 : arg === "discharge" ? "discharge" : +arg); openLabWatch(); break;
+      case "lwdeliv": _lwDraft.delivery = arg; openLabWatch(); break;
+      case "lwstart": lwStart(); break;
+      case "lwcancel": _lwDraft = null; closeForm(); break;
+      case "lwstop": lwStop(); break;
+      case "lwpause": lwPause(); break;
+      case "lwedit": lwEdit(); break;
+      case "lwopen": lwOpenAnalyte(arg); break;
       case "dxsearch": openDxSearch(); break;
       case "findpick": openFindingPicker(); break;
       case "finddx": _dxShow = true; paint(); break;
@@ -3719,7 +4035,12 @@
     // patient roster (save current / reopen previous / share / clear)
     savePatient: savePatient, loadPatient: loadPatient, listPatients: loadRoster, deletePatient: deletePatient, newPatient: newPatient,
     listCasesForMyCases: listCasesForMyCases, countAnonCases: countAnonCases, migrateAnonCases: migrateAnonCases,
-    shareCase: shareCase, clearFindings: clearFindings, summary: buildSummary
+    shareCase: shareCase, clearFindings: clearFindings, summary: buildSummary,
+    // Lab Watch (Phase 1, in-app) + Discharge Creator
+    labWatchOn: labWatchOn, openLabWatch: openLabWatch, _lwScan: lwScan, _lwGet: lwGet, _lwSet: lwSet, _lwActive: lwActive,
+    _lwBadge: function () { return _lwBadge; },
+    _lwStartWith: function (cfg) { cfg = cfg || {}; _lwDraft = { analytes: (cfg.analytes || []).slice(), mode: cfg.mode || "meaningful", dur: cfg.dur != null ? cfg.dur : 12, delivery: "inapp", q: "" }; lwStart(); return lwGet(); },
+    buildDischarge: buildDischarge, openDischarge: openDischarge
   };
   window.ICU = ICU;
 
