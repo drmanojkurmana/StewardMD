@@ -141,6 +141,72 @@ try {
   const I = JSON.parse(iso);
   ok(I.notAnalysed && I.noStaleDeep, "patient isolation: new patient starts un-analysed, no prior correlation carried over");
 
+  // 10) enumeration negation — a leading "No" governs the whole comma/‑or list (review fix)
+  const enu = JSON.parse(await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"ENU",age:50,sex:"M"});
+    ICU.ingestWardImaging({ patientId:"PE", source:"Ward Sync", imaging:[{reportId:"E1",description:"CT Abdomen",
+      report:"IMPRESSION: No focal consolidation, pleural effusion, pneumothorax or ascites."}] });
+    return JSON.stringify({ img: ICU._correlationEvidence().img });`));
+  ok(enu.img.indexOf("ascites") < 0 && enu.img.indexOf("pulmonary consolidation") < 0 && enu.img.indexOf("pleural effusion") < 0, "enumeration negation: 'No A, B, C or ascites' extracts NONE of the negated concepts");
+
+  // 11) unmapped evidence (labs-only) suppresses the misleading ranked list (review fix)
+  const um = JSON.parse(await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"UMP",age:55,sex:"M"});
+    ICU.ingestLabs({ plt:80, lipase:600, crp:220 });   // thrombocytopenia maps; lipase/CRP do NOT
+    var q = ICU._runQuickCorrelation();
+    ICU.open(); var root=document.getElementById('icuRoot');
+    root.querySelector('[data-icu-act="ws:documents"]').click();
+    root.querySelector('[data-icu-act="tab:imaging"]').click();
+    root.querySelector('[data-icu-act="corranalyse"]').click();
+    var body=root.textContent||"";
+    return JSON.stringify({ unmapped: q.unmapped, caveat: /aren’t machine-matched|aren't machine-matched/.test(body), noRanked: !/Top considerations \\(pattern-based/.test(body) });`));
+  ok(um.unmapped.length >= 2, "unmapped labs (enzyme elevation, inflammatory markers) are flagged as not machine-matched");
+  ok(um.caveat && um.noRanked, "labs-only with unmapped-dominant evidence: caveat shown, misleading ranked list suppressed");
+
+  // 12) transient Deep-review errors are NOT cached — a retry re-calls the AI (review fix)
+  await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"ERR",age:60,sex:"M"});
+    ICU.ingestWardImaging({ patientId:"PZ", source:"Ward Sync", imaging:[{reportId:"Z1",description:"CT Chest",report:"IMPRESSION: consolidation."}] });
+    window.__n = 0;
+    window.SMD_AI = window.SMD_AI || {};
+    window.SMD_AI.correlate = function(){ window.__n++; return Promise.resolve(window.__n === 1 ? { error:"quota" } : { mode:"correlate", correlation:{ clinicalCorrelation:"Recovered correlation.", topConsiderations:["Pneumonia"], whyFit:[],alternatives:[],whatDoesntFit:[],missing:[],redFlags:[],nextChecks:[],protocols:[] }}); };
+    ICU.open(); var root=document.getElementById('icuRoot');
+    root.querySelector('[data-icu-act="ws:documents"]').click();
+    root.querySelector('[data-icu-act="tab:imaging"]').click();
+    root.querySelector('[data-icu-act="corranalyse"]').click();
+    root.querySelector('[data-icu-act="corrdeep"]').click();
+    return 1;`);
+  await sleep(250);
+  const err1 = JSON.parse(await ev(`return JSON.stringify({ n1: window.__n, errShown: /usage limit reached/i.test(document.getElementById('icuRoot').textContent||"") });`));
+  await ev(`document.getElementById('icuRoot').querySelector('[data-icu-act="corrdeep"]').click(); return 1;`);   // retry — must re-call the AI (not blocked by a cached error)
+  await sleep(250);
+  const err2 = JSON.parse(await ev(`return JSON.stringify({ n2: window.__n, recovered: /Recovered correlation/i.test(document.getElementById('icuRoot').textContent||"") });`));
+  ok(err1.errShown && err1.n1 === 1, "Deep review: a transient error is shown (not cached)");
+  ok(err2.n2 === 2 && err2.recovered, "Deep review retry re-calls the AI after a transient error and renders the recovered result");
+
+  // 13) cross-patient isolation — a cached Deep result never surfaces on a different patient (review fix)
+  const xp = await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"PA_ONE",age:60,sex:"M"});
+    ICU.ingestWardImaging({ patientId:"PXA", source:"Ward Sync", imaging:[{reportId:"XA1",description:"CT Chest",report:"IMPRESSION: consolidation."}] });
+    ICU.ingestLabs({ crp:150 });
+    window.SMD_AI.correlate = function(){ return Promise.resolve({ mode:"correlate", correlation:{ clinicalCorrelation:"PATIENT-A-ONLY-NARRATIVE", topConsiderations:["Pneumonia"], whyFit:[],alternatives:[],whatDoesntFit:[],missing:[],redFlags:[],nextChecks:[],protocols:[] }}); };
+    ICU.open(); var root=document.getElementById('icuRoot');
+    root.querySelector('[data-icu-act="ws:documents"]').click();
+    root.querySelector('[data-icu-act="tab:imaging"]').click();
+    root.querySelector('[data-icu-act="corranalyse"]').click();
+    root.querySelector('[data-icu-act="corrdeep"]').click();
+    return 1;`);
+  await sleep(250);
+  const XP = JSON.parse(await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"PB_TWO",age:61,sex:"F"});   // different unsaved patient, identical evidence
+    ICU.ingestWardImaging({ patientId:"PXB", source:"Ward Sync", imaging:[{reportId:"XB1",description:"CT Chest",report:"IMPRESSION: consolidation."}] });
+    ICU.ingestLabs({ crp:150 });
+    var root=document.getElementById('icuRoot');
+    root.querySelector('[data-icu-act="tab:imaging"]').click();
+    root.querySelector('[data-icu-act="corranalyse"]').click();
+    return JSON.stringify({ leaked: /PATIENT-A-ONLY-NARRATIVE/.test(root.textContent||"") });`));
+  ok(XP.leaked === false, "cross-patient isolation: patient A's cached Deep narrative never appears on patient B (cache reset on switch)");
+
   console.log(fails === 0 ? "\nALL GREEN — ICU Clinical Correlation test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

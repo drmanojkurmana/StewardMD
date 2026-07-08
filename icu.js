@@ -735,7 +735,8 @@
       '.icu-corr-sub{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:10px 0 5px}' +
       '.icu-corr-ol{margin:0;padding-left:20px}.icu-corr-ol li{font:700 14px/1.5 var(--font);color:var(--ink)}.icu-corr-conf{font:700 11px var(--font);color:var(--muted)}' +
       '.icu-corr-chips{display:flex;flex-wrap:wrap;gap:6px}.icu-corr-chip{font:600 12px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:4px 10px}.icu-corr-chip.ok{border-color:color-mix(in srgb,var(--ok) 40%,var(--border));color:var(--ok)}.icu-corr-chip.muted{color:var(--muted)}' +
-      '.icu-corr-deep{margin-top:10px;border-top:1px solid var(--border);padding-top:10px}';
+      '.icu-corr-deep{margin-top:10px;border-top:1px solid var(--border);padding-top:10px}' +
+      '.icu-corr-note{font:600 12.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-corr-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}.icu-corr-partial{color:var(--muted);font-weight:600}';
     var st = document.createElement("style"); st.id = "icu-css"; st.textContent = css;
     document.head.appendChild(st);
   }
@@ -2351,8 +2352,7 @@
     for (var i = 0; i < IMG_CORRELATE.length; i++) {
       var re = new RegExp(IMG_CORRELATE[i][0].source, "gi"), m, hit = false;
       while ((m = re.exec(t))) {
-        var pre = t.slice(Math.max(0, m.index - 40), m.index).split(/[.;:\n]/).pop();   // clause-scoped negation guard (same as imgCritical)
-        if (!IMG_NEG.test(pre)) { hit = true; break; }
+        if (!negClause(t, m.index)) { hit = true; break; }
         if (m.index === re.lastIndex) re.lastIndex++;
       }
       if (hit) return IMG_CORRELATE[i][1];
@@ -2440,7 +2440,10 @@
    * optional Deep AI synthesis (opt-in, evidence-hash cached). It NEVER sets a diagnosis, never
    * adds findings to the live engine, and never alters ranking. No new finding-keys are added
    * (that would churn the golden engine). External-evidence fallback is deferred to Phase 4. */
-  var _corrAnalysed = false, _corrBusy = false, _corrCache = {};   // in-memory Deep cache (not persisted → no onChange loop)
+  var _corrAnalysed = false, _corrBusy = false, _corrCache = {}, _corrErr = null;   // in-memory Deep cache (not persisted → no onChange loop)
+  // Negation scoped to the CURRENT clause/sentence (from the last terminator up to the match) —
+  // not a fixed byte window — so a leading negation governs a whole enumeration ("No A, B or C").
+  function negClause(text, idx) { return IMG_NEG.test(text.slice(0, idx).split(/[.;:\n]/).pop()); }
   // Imaging report keyword → human concept label (negation-guarded, like imgCritical).
   var IMG_CONCEPTS = [
     [/peripancreatic|fat stranding/i, "peripancreatic inflammatory change"],
@@ -2463,7 +2466,7 @@
   var CONCEPT_KEY = { "pulmonary consolidation": "consolidation", "ascites": "ascites", "lymphadenopathy": "lymphadenopathy", "organomegaly": "hepatosplenomegaly" };
   function nonNeg(t, re0) {
     var re = new RegExp(re0.source, "gi"), m;
-    while ((m = re.exec(t))) { var pre = t.slice(Math.max(0, m.index - 40), m.index).split(/[.;:\n]/).pop(); if (!IMG_NEG.test(pre)) return true; if (m.index === re.lastIndex) re.lastIndex++; }
+    while ((m = re.exec(t))) { if (!negClause(t, m.index)) return true; if (m.index === re.lastIndex) re.lastIndex++; }
     return false;
   }
   function extractImagingConcepts() {
@@ -2527,7 +2530,11 @@
     else if ((top.confidence || 0) >= 70 && (top.supporting || []).length >= 2) status = "Strong internal match";
     else if ((top.confidence || 0) >= 45) status = "Partial internal match";
     else status = "Broad syndrome match only";
-    return { ev: ev, keys: keys, candidates: cands, status: status };
+    // Findings the deterministic engine did NOT see (no matching key) — across BOTH imaging and
+    // labs. The ranked list is trustworthy only when nothing dominant was left out.
+    var mappedLabRe = /thrombocyto|falling platelet|lactate|creatinin|renal|\baki\b/i;
+    var unmapped = ev.img.filter(function (c) { return !CONCEPT_KEY[c]; }).concat(ev.labs.filter(function (l) { return !mappedLabRe.test(l); }));
+    return { ev: ev, keys: keys, candidates: cands, status: status, unmapped: unmapped };
   }
   // Evidence hash for the Deep-review cache (patient-scoped; de-identified content only).
   function correlationHash(ev) { return imgHash(JSON.stringify([ev.img, ev.crit, ev.labs, ev.clinical])); }
@@ -2543,12 +2550,14 @@
   function runCorrelationDeep() {
     var ev = correlationEvidence(); if (!(ev.img.length || ev.labs.length)) { if (window.toast) toast("Add imaging or labs first."); return; }
     var key = (_raw.patient._id || "cur") + ":" + correlationHash(ev);
-    if (_corrCache[key]) { paint(); return; }   // cache hit — reuse, no AI call (token control)
-    _corrBusy = true; paint();
+    if (_corrCache[key]) { paint(); return; }   // cache hit (SUCCESS only) — reuse, no AI call (token control)
+    _corrErr = null; _corrBusy = true; paint();
     var pkt = buildCorrelationPacket(ev);
     (window.SMD_AI && SMD_AI.correlate ? SMD_AI.correlate(pkt) : Promise.resolve({ error: "ai-off" })).then(function (res) {
-      _corrCache[key] = res; _corrBusy = false; paint();
-    }).catch(function () { _corrCache[key] = { error: "server" }; _corrBusy = false; paint(); });
+      // Cache ONLY a successful correlation — transient errors (quota/server/parse) stay retryable.
+      if (res && res.correlation && !res.error) _corrCache[key] = res; else _corrErr = res || { error: "server" };
+      _corrBusy = false; paint();
+    }).catch(function () { _corrErr = { error: "server" }; _corrBusy = false; paint(); });
   }
   function corrChips(arr, cls) { return (arr && arr.length) ? '<div class="icu-corr-chips">' + arr.map(function (x) { return '<span class="icu-corr-chip ' + (cls || "") + '">' + esc(x) + "</span>"; }).join("") + "</div>" : ""; }
   function corrDeepHTML(res) {
@@ -2570,7 +2579,7 @@
   function correlationCard() {
     if (!icuImagingOn()) return "";
     var pid = _raw.patient._id || _raw.patient.name || "cur";
-    if (_corrPt !== pid) { _corrPt = pid; _corrAnalysed = false; }   // reset on patient switch
+    if (_corrPt !== pid) { _corrPt = pid; _corrAnalysed = false; _corrBusy = false; _corrCache = {}; _corrErr = null; }   // reset ALL correlation state on patient switch (no cross-patient leak)
     var imgs = (_raw.imaging || []).filter(function (r) { return !r.hidden; }), labN = Object.keys(_raw.labs.recent || {}).length;
     var header = '<div class="icu-sec-lbl" style="margin-top:14px">' + ico("pulse", "🧠") + ' Clinical Correlation</div>';
     if (!hasData()) return header + '<div class="icu-empty">Select a patient to correlate imaging and laboratory findings.</div>';
@@ -2583,13 +2592,26 @@
     var q = runQuickCorrelation(), ev = q.ev, deep = _corrCache[(_raw.patient._id || "cur") + ":" + correlationHash(ev)];
     var cls = /Strong/.test(q.status) ? "ok" : /No adequate|Insufficient/.test(q.status) ? "muted" : /Conflicting/.test(q.status) ? "warn" : "partial";
     var badge = '<span class="icu-corr-badge ' + cls + '">' + esc(q.status) + "</span>";
-    var considerations = q.candidates.length ? '<div class="icu-corr-sub">Top considerations (pattern-based, advisory)</div><ol class="icu-corr-ol">' + q.candidates.map(function (c) { return "<li>" + esc(c.name) + ' <span class="icu-corr-conf">' + (c.confidence != null ? c.confidence + "/100" : "") + "</span></li>"; }).join("") + "</ol>" : '<div class="icu-corr-sub" style="color:var(--muted)">No confident internal match from the mappable pattern — consider a Deep review.</div>';
-    var supporting = (q.candidates[0] && (q.candidates[0].supporting || []).length) ? '<div class="icu-corr-sub">Supporting</div>' + corrChips(q.candidates[0].supporting, "ok") : "";
-    var missing = (q.candidates[0] && (q.candidates[0].missing || []).length) ? '<div class="icu-corr-sub">Missing / to review</div>' + corrChips(q.candidates[0].missing, "muted") : "";
+    // The Quick deterministic signal is only trustworthy when the mapped keys actually represent
+    // the evidence. If imaging findings did NOT map to an engine key (the common case — the engine
+    // has no imaging vocabulary), a ranked "Top considerations" from the leftover labs alone is
+    // MISLEADING (e.g. pancreatitis imaging + thrombocytopenia → the engine returns Dengue/Malaria).
+    // So when imaging concepts are unmapped, suppress the ranked list and steer to Deep review.
+    var considBlock, supporting = "", missing = "";
+    if ((q.unmapped || []).length) {
+      considBlock = '<div class="icu-corr-note">' + ico("info", "ⓘ") + " Some findings aren’t machine-matched to the knowledge base yet: <b>" + esc(q.unmapped.join(", ")) + "</b>. Run <b>Deep clinical review</b> below for a full imaging + lab correlation." +
+        (q.candidates.length ? ' <span class="icu-corr-partial">(The mapped findings alone point to ' + esc(q.candidates.slice(0, 2).map(function (c) { return c.name; }).join(", ")) + " — partial, do not rely on this.)</span>" : "") + "</div>";
+    } else if (q.candidates.length) {
+      considBlock = '<div class="icu-corr-sub">Top considerations (pattern-based, advisory)</div><ol class="icu-corr-ol">' + q.candidates.map(function (c) { return "<li>" + esc(c.name) + ' <span class="icu-corr-conf">' + (c.confidence != null ? c.confidence + "/100" : "") + "</span></li>"; }).join("") + "</ol>";
+      supporting = (q.candidates[0] && (q.candidates[0].supporting || []).length) ? '<div class="icu-corr-sub">Supporting</div>' + corrChips(q.candidates[0].supporting, "ok") : "";
+      missing = (q.candidates[0] && (q.candidates[0].missing || []).length) ? '<div class="icu-corr-sub">Missing / to review</div>' + corrChips(q.candidates[0].missing, "muted") : "";
+    } else {
+      considBlock = '<div class="icu-corr-sub" style="color:var(--muted)">No confident internal match — run a Deep clinical review for a full correlation.</div>';
+    }
     var redflags = ev.crit.length ? '<div class="icu-img-crit">' + ico("warn", "⚠️") + ' <b>Urgent imaging findings</b> — verify & escalate.<div class="icu-img-crit-t">' + ev.crit.map(function (c) { return "<span>" + esc(c) + "</span>"; }).join("") + "</div></div>" : "";
     var evidence = (ev.img.length || ev.labs.length) ? '<div class="icu-corr-sub">Evidence assembled</div>' + corrChips(ev.img.concat(ev.labs)) : "";
-    var deepBlock = _corrBusy ? '<div class="icu-assist-msg">Running deep clinical review…</div>' : (deep ? '<div class="icu-corr-deep">' + corrDeepHTML(deep) + "</div>" : "");
-    return header + '<div class="icu-card">' + badge + redflags + considerations + supporting + missing + evidence +
+    var deepBlock = _corrBusy ? '<div class="icu-assist-msg">Running deep clinical review…</div>' : (deep ? '<div class="icu-corr-deep">' + corrDeepHTML(deep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
+    return header + '<div class="icu-card">' + badge + redflags + considBlock + supporting + missing + evidence +
       '<div class="icu-img-btns" style="margin-top:10px">' +
         '<button class="icu-btn" data-icu-act="corrdeep"' + (_corrBusy ? " disabled" : "") + '>' + ico("pulse", "✨") + ' Deep clinical review</button>' +
         '<button class="icu-btn ghost" disabled title="Coming in a later update">Find evidence beyond StewardMD</button>' +
