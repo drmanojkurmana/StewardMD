@@ -39,6 +39,7 @@
     ventilator: {},             // { mode, fio2, peep, tv, rr, peak, plateau, drivingP, compliance, pf }
     fluids: { intake24h: null, output24h: null, urine24h: null, drains: null, net24h: null, cumulative: null, strategyPhase: "" },
     infusions: [],              // [{ drug, dose, unit, rateMlHr, indication }]
+    imaging: [],                // [{ id, ts, modality, category, studyName, bodyRegion, indication, findingsRaw, impressionRaw, reportRaw, keyPos[], keyNeg[], critical[], parsed, comment, source, reportId, reportDateTime, radiologist, reviewed, inSummary, hidden, importedAt }] — Ward Sync radiology + manual imaging notes (sibling of labs/vitals; NOT scored by any engine)
     goals: [],                  // [string]
     rounds: {},                 // checklist state (Phase 3)
     alerts: [],                 // DERIVED — written by recompute()
@@ -88,6 +89,7 @@
   /* ----------------------------------------------------- derived helpers */
   function mapCalc(sbp, dbp) { return (sbp != null && dbp != null) ? Math.round((+sbp + 2 * +dbp) / 3) : null; }
   var MAX_SERIES = 500;      // cap vitals[]/labs.trends[] so long ICU stays don't grow storage unbounded
+  var MAX_IMAGING = 200;     // cap imaging[] so it can't bloat the single localStorage blob
   var _persistWarned = false;
   // Latest reading = the one with the newest TIMESTAMP (not merely the last-pushed element).
   function latestByTs(arr) { if (!arr || !arr.length) return {}; var b = arr[0]; for (var i = 1; i < arr.length; i++) { if (((arr[i] && arr[i].ts) || 0) >= ((b && b.ts) || 0)) b = arr[i]; } return b || {}; }
@@ -170,6 +172,173 @@
     return f;
   }
   function ingestPatient(o) { o = o || {}; Object.keys(o).forEach(function (k) { if (k in STATE.patient) STATE.patient[k] = o[k]; }); }
+
+  /* ============================ IMAGING NOTES (Phase 1) ===================
+   * Ward Sync radiology + manual imaging notes, stored in a SEPARATE sibling
+   * array (imaging[]) so labs.trends[]/vitals[] and their charts are untouched.
+   * Everything here is DETERMINISTIC — modality normalized from the title,
+   * sections parsed from the free-text blob (raw always preserved), critical
+   * terms scanned client-side to trigger a "review urgently" flag ONLY (never a
+   * diagnosis). No AI in this layer. Scoped per owner+patient for free via the
+   * ICU state persistence. Flag: smd_icu_imaging (default ON) + ?icuimaging= .   */
+  function icuImagingOn() {
+    try {
+      var q = (location.search.match(/[?&]icuimaging=([^&]+)/) || [])[1];
+      if (q != null) return q === "1" || q === "on" || q === "true";
+      var v = localStorage.getItem("smd_icu_imaging");
+      return v === null ? true : v === "1";
+    } catch (e) { return true; }
+  }
+  // Modality family + filter bucket from the free-text study title (no structured
+  // modality is exposed by GHIS). Original study title is preserved separately.
+  function imgModality(title) {
+    var t = " " + String(title || "").toLowerCase() + " ";
+    if (/\bercp\b|endoscop|colonoscop|gastroscop|sigmoidoscop|bronchoscop|\bogd\b|duodenoscop/.test(t)) return { modality: "Endoscopy / procedure", category: "endo" };
+    if (/echocardiograph|\becho\b|\b2d ?echo\b|\btte\b|\btee\b/.test(t)) return { modality: "Echocardiography", category: "cardiac" };
+    if (/doppler/.test(t)) return { modality: "Doppler", category: "us" };
+    if (/\bmrcp\b/.test(t)) return { modality: "MRCP", category: "ctmri" };
+    if (/\bmri\b|\bmr \b|magnetic resonance/.test(t)) return { modality: "MRI", category: "ctmri" };
+    if (/cect|contrast[- ]?enhanced ct|\bctpa\b|ct angiogram|ct angiography|\bhrct\b|\bct\b|computed tomograph/.test(t)) return { modality: /cect|contrast/.test(t) ? "CECT" : "CT", category: "ctmri" };
+    if (/ultrasoun|\busg\b|\bus \b|sonograph|\bkub\b.*ultra|ultra.*\bkub\b/.test(t)) return { modality: "Ultrasound", category: "us" };
+    if (/x[- ]?ray|radiograph|\bcxr\b|\bkub\b|skiagram|plain film/.test(t)) return { modality: "X-ray", category: "xray" };
+    return { modality: "Imaging Report", category: "other" };
+  }
+  // Deterministic critical-term scan. Returns matched human labels (deduped).
+  // Light negation guard so "no free air" / "no evidence of PE" don't false-trigger.
+  var IMG_CRITICAL = [
+    ["Intracranial haemorrhage", /intracranial h[ae]?emorrhage|intracerebral h[ae]?emorrhage|\bich\b|subarachnoid h[ae]?emorrhage|\bsah\b|subdural h[ae]?ematoma|extradural h[ae]?ematoma|epidural h[ae]?ematoma/i],
+    ["Midline shift / mass effect", /midline shift|mass effect|uncal herniation|tonsillar herniation|\bherniation\b/i],
+    ["Hydrocephalus", /hydrocephalus/i],
+    ["Bowel perforation / free air", /perforation|pneumoperitoneum|free (?:intraperitoneal |intra-?peritoneal )?air|free gas/i],
+    ["Bowel ischaemia", /bowel ischa?emi|mesenteric ischa?emi|ischa?emic bowel|pneumatosis (?:intestinalis|coli)/i],
+    ["Aortic aneurysm rupture", /ruptured aneurysm|aneurysm.*ruptur|leaking aneurysm/i],
+    ["Aortic dissection", /aortic dissection|dissection flap|type [ab] dissection/i],
+    ["Pulmonary embolism", /pulmonary embol|\bpe\b(?![a-z])|filling defect.*pulmonary arter/i],
+    ["Tension pneumothorax", /tension pneumothorax/i],
+    ["Pneumothorax", /pneumothorax/i],
+    ["Spinal cord compression", /cord compression|spinal cord compress|cauda equina/i],
+    ["Obstructed / infected kidney", /obstructed.*kidney|pyonephrosis|obstructive uropathy|infected.*hydronephros/i],
+    ["Necrotising pancreatitis", /necroti[sz]ing pancreatit|pancreatic necrosis|necrotic pancreat/i],
+    ["Abscess / collection", /abscess|empyema|infected collection/i],
+    ["Portal vein thrombosis", /portal vein thrombos|portal venous thrombos|\bpvt\b/i],
+    ["Active contrast extravasation", /active (?:contrast )?extravasation|active bleed|active h[ae]?emorrhage/i]
+  ];
+  var IMG_NEG = /\b(?:no|without|absent|negative for|no evidence of|not? seen|ruled out|excludes?|free of|no significant)\b/i;
+  function imgCritical(text) {
+    var s = String(text || ""); if (!s) return [];
+    var hits = [];
+    IMG_CRITICAL.forEach(function (c) {
+      var re = new RegExp(c[1].source, "gi"), m;
+      while ((m = re.exec(s))) {
+        // Clause-scope the negation window: keep only the text since the last sentence/clause
+        // break so a negated CLAUSE earlier in the report ("No fracture. Acute SDH.") cannot
+        // suppress a genuine finding in the current clause (that would be a dangerous miss).
+        var pre = s.slice(Math.max(0, m.index - 40), m.index).split(/[.;:\n]/).pop();
+        if (!IMG_NEG.test(pre) && hits.indexOf(c[0]) < 0) hits.push(c[0]);
+        if (m.index === re.lastIndex) re.lastIndex++;
+      }
+    });
+    return hits;
+  }
+  // Best-effort section parser. Preserves raw ALWAYS; parsed=true only when
+  // recognised headers were found (drives the "Parsed automatically — verify" badge).
+  function parseImagingSections(raw) {
+    var text = String(raw || "").replace(/\r/g, ""); var out = { indication: "", technique: "", findings: "", impression: "", recommendation: "", parsed: false };
+    if (!text.trim()) return out;
+    var HEAD = [
+      ["indication", /(?:^|\n)[ \t]*(?:clinical\s+(?:history|indication|details|note)|clinical|history|indication)[ \t]*[:\-–]/i],
+      ["technique", /(?:^|\n)[ \t]*(?:technique|protocol|procedure)[ \t]*[:\-–]/i],
+      ["findings", /(?:^|\n)[ \t]*(?:findings?|observations?)[ \t]*[:\-–]/i],
+      ["impression", /(?:^|\n)[ \t]*(?:impression|conclusion|opinion|summary|comment)[ \t]*[:\-–]/i],
+      ["recommendation", /(?:^|\n)[ \t]*(?:recommendations?|advice|suggestions?|advised|suggested)[ \t]*[:\-–]/i]
+    ];
+    var marks = [];
+    HEAD.forEach(function (h) { var m = new RegExp(h[1].source, "i").exec(text); if (m) marks.push({ key: h[0], hstart: m.index, cstart: m.index + m[0].length }); });
+    marks.sort(function (a, b) { return a.hstart - b.hstart; });
+    if (marks.length) { out.parsed = true; for (var i = 0; i < marks.length; i++) { var end = (i + 1 < marks.length) ? marks[i + 1].hstart : text.length; out[marks[i].key] = text.slice(marks[i].cstart, end).trim(); } }
+    return out;
+  }
+  function imgHash(s) { s = String(s || ""); var h = 0; for (var i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(36); }
+  function imgFmtDate(ts) {
+    if (!ts) return "";
+    try { var d = new Date(ts); var M = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; var hh = d.getHours(), mm = d.getMinutes(); var t = (hh || mm) ? (" · " + (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm) : ""; return d.getDate() + " " + M[d.getMonth()] + " " + d.getFullYear() + t; } catch (e) { return ""; }
+  }
+  // Build a normalized imaging record from a raw Ward Sync order+report OR a manual entry.
+  function normalizeImagingRecord(raw, source) {
+    raw = raw || {};
+    var title = raw.studyName || raw.description || raw.testName || raw.modality || "Imaging Report";
+    var fam = imgModality(title);
+    var rawText = String(raw.report != null ? raw.report : (raw.reportRaw || "")).trim();
+    var sec = parseImagingSections(rawText);
+    var findings = raw.findingsRaw != null && raw.findingsRaw !== "" ? String(raw.findingsRaw) : sec.findings;
+    var impression = raw.impressionRaw != null && raw.impressionRaw !== "" ? String(raw.impressionRaw) : sec.impression;
+    var indication = raw.indication != null && raw.indication !== "" ? String(raw.indication) : sec.indication;
+    var when = raw.reportDateTime || parseWardDate(raw.date || raw.reported || raw.orderDate || raw.performedDateTime) || null;
+    var scan = [rawText, findings, impression].join("\n");
+    return {
+      modality: raw.modality && source === "Manual" ? raw.modality : fam.modality,
+      category: fam.category,
+      studyName: title,
+      bodyRegion: raw.bodyRegion || "",
+      indication: indication,
+      findingsRaw: findings,
+      impressionRaw: impression,
+      reportRaw: rawText,
+      keyPos: raw.keyPos || [],
+      keyNeg: raw.keyNeg || [],
+      critical: imgCritical(scan),
+      parsed: sec.parsed,
+      comment: raw.comment || "",
+      source: source || "Ward Sync",
+      reportId: raw.reportId != null ? raw.reportId : (raw.resultid != null ? raw.resultid : null),
+      reportDateTime: when,
+      radiologist: raw.radiologist || raw.enteredBy || raw.doctor || "",
+      reviewed: false, inSummary: false, hidden: false,
+      importedAt: nowTs(), ts: when || nowTs()
+    };
+  }
+  // Stable dedup key for a Ward Sync report: reportId + performed date + text hash.
+  function imagingKey(rec) { return "ws:" + (rec.wardPatientId != null ? rec.wardPatientId : "") + ":" + (rec.reportId != null ? rec.reportId : "") + ":" + (rec.reportDateTime || "") + ":" + imgHash((rec.impressionRaw || rec.findingsRaw || rec.reportRaw || rec.studyName || "").slice(0, 400)); }
+  function capImaging() { if (STATE.imaging.length > MAX_IMAGING) STATE.imaging.splice(0, STATE.imaging.length - MAX_IMAGING); }
+  // Resolve an imaging record by its STABLE id (card actions key by id, not array index, so
+  // they stay correct after capImaging() front-splices the oldest overflow).
+  function imgIndexById(id) { var a = _raw.imaging || []; for (var i = 0; i < a.length; i++) if (a[i].id === id) return i; return -1; }
+  function imgById(id) { var i = imgIndexById(id); return i >= 0 ? STATE.imaging[i] : null; }
+  // Single manual imaging note (always distinct; never deduped against ward reports).
+  function ingestImaging(o) {
+    var rec = normalizeImagingRecord(o || {}, (o && o.source) || "Manual");
+    rec.id = (o && o.id) || ("img_" + nowTs() + "_" + Math.floor(Math.random() * 1e6).toString(36));
+    STATE.imaging.push(rec); capImaging();
+    return rec;
+  }
+  // Batch Ward Sync imaging import — dedup by content key, never overwrite, cap.
+  function ingestWardImaging(bundle) {
+    bundle = bundle || {};
+    var pid = bundle.patientId != null ? String(bundle.patientId) : null;
+    // PHI isolation: scope Ward Sync imaging to the patient being loaded. If the imported
+    // patient differs from the Ward Sync radiology already held, DROP the prior patient's
+    // reports (Manual notes are kept) so one patient's imaging can never appear under another.
+    if (pid != null) {
+      STATE.imaging = (STATE.imaging || []).filter(function (r) { return r.source !== "Ward Sync" || String(r.wardPatientId) === pid; });
+      STATE.wardSync = STATE.wardSync || {}; STATE.wardSync.patientId = bundle.patientId;
+    }
+    var have = {}; (STATE.imaging || []).forEach(function (r) { if (r.id) have[r.id] = 1; });
+    var added = 0, dup = 0;
+    (bundle.imaging || []).forEach(function (raw) {
+      var rec = normalizeImagingRecord(raw, bundle.source || "Ward Sync");
+      rec.wardPatientId = pid; rec.id = imagingKey(rec);
+      if (have[rec.id]) { dup++; return; }
+      have[rec.id] = 1; STATE.imaging.push(rec); added++;
+    });
+    if (added) capImaging();
+    return { added: added, duplicates: dup, total: (STATE.imaging || []).length };
+  }
+  // ICU "Fetch Imaging" — pulls this patient's radiology via Ward Sync (ghis-ward.js).
+  function imagingFetch() {
+    var pid = (_raw.wardSync && _raw.wardSync.patientId) || null;
+    if (pid && window.GHIS && GHIS.fetchImagingIntoICU) { GHIS.fetchImagingIntoICU(pid); }
+    else { wardSyncFetch(); }   // opens the ward picker; selecting a patient imports labs + imaging
+  }
 
   /* ---- Ward Sync / imported-report → ICU lab mapping (gold124) ------------
    * Maps free-text HIS/report test names → ICU analyte keys by keyword, with
@@ -533,7 +702,26 @@
       '.icu-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}' +
       '.icu-fld{display:flex;flex-direction:column;gap:4px}.icu-fld label{font:700 11px var(--font);color:var(--muted)}' +
       '.icu-fld input,.icu-fld select{font:600 15px var(--font);padding:10px 11px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%}' +
-      '.icu-steps{counter-reset:s}.icu-step{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--border)}.icu-step .n{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--primary-soft);color:var(--primary);font:800 12px var(--font);display:flex;align-items:center;justify-content:center}';
+      '.icu-steps{counter-reset:s}.icu-step{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--border)}.icu-step .n{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--primary-soft);color:var(--primary);font:800 12px var(--font);display:flex;align-items:center;justify-content:center}' +
+      // Imaging Notes
+      '.icu-img-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.icu-img-btns .icu-btn{width:auto;flex:1 1 auto;min-width:44%}' +
+      '.icu-img-filters{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;-webkit-overflow-scrolling:touch}' +
+      '.icu-img-chip{flex:0 0 auto;border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:var(--r-pill);font:700 12px var(--font);padding:7px 12px;cursor:pointer;white-space:nowrap}.icu-img-chip.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '.icu-img-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);margin:0 0 10px;overflow:hidden}.icu-img-card.crit{border-color:color-mix(in srgb,var(--danger) 55%,var(--border))}' +
+      '.icu-img-hd{display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;background:none;border:none;padding:13px 14px 10px;cursor:pointer;color:var(--ink)}.icu-img-hd-l{flex:1;min-width:0}' +
+      '.icu-img-title{font:800 15px var(--font);line-height:1.3}' +
+      '.icu-img-badges{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 2px}' +
+      '.icu-img-badge{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;background:var(--primary-soft);color:var(--primary);border-radius:6px;padding:3px 7px}' +
+      '.icu-img-tag{font:700 10.5px var(--font);background:var(--panel2);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:3px 7px}.icu-img-tag.ok{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--border))}' +
+      '.icu-img-meta{font:600 11.5px var(--font);color:var(--muted);margin-top:5px}' +
+      '.icu-img-chev{flex:0 0 auto;color:var(--muted);font-size:14px;margin-top:2px}' +
+      '.icu-img-crit{margin:0 14px 10px;background:var(--danger-soft);color:var(--danger);border:1px solid color-mix(in srgb,var(--danger) 40%,transparent);border-radius:10px;padding:9px 11px;font:600 12.5px/1.45 var(--font)}.icu-img-crit .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--danger)}' +
+      '.icu-img-crit-t{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.icu-img-crit-t span{background:color-mix(in srgb,var(--danger) 14%,transparent);border-radius:6px;padding:2px 7px;font:700 11px var(--font)}' +
+      '.icu-img-imp,.icu-img-sec{padding:0 14px 10px;font:600 13.5px/1.5 var(--font);color:var(--ink)}.icu-img-k{display:block;font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:3px}' +
+      '.icu-img-raw{white-space:pre-wrap;font:500 12.5px/1.5 var(--mono);color:var(--muted);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:9px 10px;max-height:260px;overflow:auto}' +
+      '.icu-img-acts{display:flex;flex-wrap:wrap;gap:6px;padding:2px 12px 12px}.icu-img-act{border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:var(--r-pill);font:700 11.5px var(--font);padding:6px 11px;cursor:pointer}.icu-img-act.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}' +
+      '.icu-img-hidden{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;color:var(--muted);font:600 12.5px var(--font);border:1px dashed var(--border);border-radius:10px;margin:0 0 8px}' +
+      '.icu-img-btns .icu-ico,.icu-doc-sub+.icu-img-btns .icu-ico{width:15px;height:15px;vertical-align:-2px;margin-right:4px}';
     var st = document.createElement("style"); st.id = "icu-css"; st.textContent = css;
     document.head.appendChild(st);
   }
@@ -1323,6 +1511,8 @@
     if (keyL.length) out.push("LABS: " + keyL.join(", "));
     if (f.net24h != null || f.cumulative != null) out.push("FLUIDS: net 24h " + (f.net24h != null ? f.net24h + " mL" : "—") + ", cumulative " + (f.cumulative != null ? f.cumulative + " mL" : "—"));
     if (v.mode) out.push("VENT: " + v.mode + (v.fio2 ? ", FiO₂ " + v.fio2 + "%" : "") + (v.peep != null ? ", PEEP " + v.peep : "") + (v.tv != null ? ", TV " + v.tv + " mL" : ""));
+    var imgs = (s.imaging || []).filter(function (r) { return !r.hidden && (r.inSummary || r.reviewed); });
+    if (imgs.length) out.push("\nIMPORTANT IMAGING:\n" + imgs.map(function (r) { return "• " + (r.modality || "Imaging") + (r.reportDateTime ? " (" + imgFmtDate(r.reportDateTime) + ")" : "") + ": " + String(r.impressionRaw || r.findingsRaw || r.reportRaw || "").replace(/\s+/g, " ").trim().slice(0, 240) + ((r.critical || []).length ? "  [⚠ flagged: " + r.critical.join(", ") + " — verify]" : ""); }).join("\n"));
     if (alerts.length) out.push("\nACTIVE ALERTS:\n" + alerts.map(function (a) { return "• [" + a.severity.toUpperCase() + "] " + a.title + " — " + a.msg; }).join("\n"));
     var pend = ROUNDS_ITEMS.filter(function (it) { return !(rounds[it.k] && rounds[it.k].done); });
     if (pend.length) out.push("\nROUNDS PENDING: " + pend.map(function (it) { return it.label; }).join("; "));
@@ -1356,17 +1546,23 @@
     { id: "overview", label: "Overview", svg: "pulse", members: ["overview", "rounds"] },
     { id: "monitoring", label: "Monitoring", svg: "heart", members: ["hemo", "fluids", "lytes", "abg", "vent", "infusions", "trends"] },
     { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "protocols", "goals"] },
-    { id: "documents", label: "Documents", svg: "copy", members: ["documents"] },
+    { id: "documents", label: "Documents", svg: "copy", members: ["documents", "imaging"] },
     { id: "more", label: "More", svg: "more", members: ["more"] }
   ];
   var MEMBER = {}; TABS.forEach(function (t) { MEMBER[t.id] = { label: t.label, svg: t.svg, ic: t.ic }; });
   MEMBER.dx = { label: "Diagnosis", svg: "search", ic: "🩺" };
+  MEMBER.imaging = { label: "Imaging", svg: "camera", ic: "🩻" };
   function wsOf(m) { for (var i = 0; i < WORKSPACES.length; i++) if (WORKSPACES[i].members.indexOf(m) >= 0) return WORKSPACES[i].id; return "overview"; }
   function wsById(id) { for (var i = 0; i < WORKSPACES.length; i++) if (WORKSPACES[i].id === id) return WORKSPACES[i]; return WORKSPACES[0]; }
+  // Workspace members visible under the current feature flags (Imaging is flag-gated,
+  // so the kill-switch hides it from the sub-nav instantly — no reload).
+  function wsMembers(w) { return (w && w.members || []).filter(function (m) { return m === "imaging" ? icuImagingOn() : true; }); }
   function isMonWs() { return _ws === "overview" || _ws === "monitoring"; }
   var _active = "overview";
   var _ws = "overview";        // current workspace (bottom bar)
   var _wsLast = {};            // workspace id → last member viewed in it
+  var _imgFilter = "all";      // Imaging Notes filter bucket
+  var _imgOpen = {};           // imaging card index → expanded (full report)
 
   // Plain-language explanations for ICU jargon (A5) — content only, no logic change.
   var JARGON = {
@@ -1401,6 +1597,62 @@
     clearTimeout(showTip._t); showTip._t = setTimeout(close, 9000);
   }
   function phaseNote(p, what) { return '<div class="icu-card"><h3>' + esc(what) + '<span class="icu-phase">' + esc(p) + "</span></h3><p>Reads live from the current ICU data. Full decision-support arrives in this phase.</p></div>"; }
+
+  /* ---------------------------------------------- Imaging Notes rendering */
+  var IMG_FILTERS = [
+    { k: "all", label: "All" },
+    { k: "ctmri", label: "CT / MRI" },
+    { k: "us", label: "Ultrasound" },
+    { k: "xray", label: "X-ray" },
+    { k: "cardiac", label: "Cardiac" },
+    { k: "endo", label: "Endoscopy" },
+    { k: "reviewed", label: "Reviewed" },
+    { k: "unreviewed", label: "Unreviewed" }
+  ];
+  function imgMatches(rec, f) {
+    if (f === "all") return true;
+    if (f === "reviewed") return !!rec.reviewed;
+    if (f === "unreviewed") return !rec.reviewed;
+    return rec.category === f;
+  }
+  function imgClamp(s, n) { s = String(s || ""); return s.length > n ? s.slice(0, n).replace(/\s+\S*$/, "") + "…" : s; }
+  function imagingCard(rec) {
+    var eid = encodeURIComponent(rec.id), open = !!_imgOpen[rec.id];
+    var crit = (rec.critical || []).length
+      ? '<div class="icu-img-crit">' + ico("warn", "⚠️") + ' <b>Potential urgent imaging finding</b> — verify report and escalate per local protocol.<div class="icu-img-crit-t">' + rec.critical.map(function (c) { return "<span>" + esc(c) + "</span>"; }).join("") + '</div></div>'
+      : "";
+    var imp = rec.impressionRaw || "";
+    var impBlock = imp
+      ? '<div class="icu-img-imp"><span class="icu-img-k">Impression</span>' + esc(open ? imp : imgClamp(imp, 220)) + "</div>"
+      : (rec.reportRaw ? '<div class="icu-img-imp"><span class="icu-img-k">Report</span>' + esc(open ? rec.reportRaw : imgClamp(rec.reportRaw, 220)) + "</div>"
+        : '<div class="icu-img-imp" style="color:var(--muted)">Insufficient report detail — open original radiology report.</div>');
+    var expanded = open ? (
+      (rec.indication ? '<div class="icu-img-sec"><span class="icu-img-k">Clinical indication</span>' + esc(rec.indication) + "</div>" : "") +
+      (rec.findingsRaw ? '<div class="icu-img-sec"><span class="icu-img-k">Findings</span>' + esc(rec.findingsRaw) + "</div>" : "") +
+      (rec.reportRaw && (rec.impressionRaw || rec.findingsRaw) ? '<div class="icu-img-sec"><span class="icu-img-k">Full report</span><div class="icu-img-raw">' + esc(rec.reportRaw) + "</div></div>" : "") +
+      (rec.comment ? '<div class="icu-img-sec"><span class="icu-img-k">Clinician note</span>' + esc(rec.comment) + "</div>" : "")
+    ) : "";
+    var badges = '<span class="icu-img-badge">' + esc(rec.modality || "Imaging") + "</span>" +
+      (rec.parsed ? '<span class="icu-img-tag" title="Sections auto-extracted from the report text — verify">Parsed — verify</span>' : "") +
+      (rec.reviewed ? '<span class="icu-img-tag ok">Reviewed</span>' : "") +
+      (rec.inSummary ? '<span class="icu-img-tag">In summary</span>' : "");
+    var meta = [imgFmtDate(rec.reportDateTime) || "Date not documented", rec.source || "Ward Sync"];
+    if (rec.radiologist) meta.push("Dr " + rec.radiologist);
+    return '<div class="icu-img-card' + ((rec.critical || []).length ? " crit" : "") + '">' +
+      '<button class="icu-img-hd" data-icu-act="imgexpand:' + eid + '"><div class="icu-img-hd-l">' +
+        '<div class="icu-img-title">' + esc(rec.studyName || "Imaging Report") + "</div>" +
+        '<div class="icu-img-badges">' + badges + "</div>" +
+        '<div class="icu-img-meta">' + esc(meta.join(" · ")) + "</div>" +
+      '</div><span class="icu-img-chev">' + (open ? "▾" : "▸") + "</span></button>" +
+      crit + impBlock + expanded +
+      '<div class="icu-img-acts">' +
+        '<button class="icu-img-act" data-icu-act="imgexpand:' + eid + '">' + (open ? "Collapse" : "Open full report") + "</button>" +
+        '<button class="icu-img-act' + (rec.reviewed ? " on" : "") + '" data-icu-act="imgreview:' + eid + '">' + (rec.reviewed ? "✓ Reviewed" : "Mark reviewed") + "</button>" +
+        '<button class="icu-img-act' + (rec.inSummary ? " on" : "") + '" data-icu-act="imgsummary:' + eid + '">' + (rec.inSummary ? "✓ In summary" : "Add to summary") + "</button>" +
+        '<button class="icu-img-act" data-icu-act="imgedit:' + eid + '">Annotate</button>' +
+        '<button class="icu-img-act" data-icu-act="imghide:' + eid + '">Hide</button>' +
+      "</div></div>";
+  }
 
   var RENDER = {
     overview: function () {
@@ -1576,6 +1828,24 @@
         '<button class="icu-btn ghost" data-icu-act="discharge">' + ico("rounds", "📝") + ' Discharge Creator</button>' +
         '</div>';
     },
+    imaging: function () {
+      if (!icuImagingOn()) return '<div class="icu-card"><p>Imaging Notes is turned off.</p></div>';
+      var all = _raw.imaging || [], visible = all.filter(function (r) { return !r.hidden; }), hidden = all.filter(function (r) { return r.hidden; });
+      var header = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("camera", "🩻") + ' Imaging Notes</div>' +
+        '<p class="icu-doc-sub">Radiology reports from Ward Sync (report text only) plus your manual notes. Any urgent-finding flag is a deterministic keyword prompt to review — never a diagnosis.</p>' +
+        '<div class="icu-img-btns"><button class="icu-btn" data-icu-act="imgfetch">' + ico("hospital", "🏥") + ' Fetch imaging from Ward Sync</button>' +
+        '<button class="icu-btn ghost" data-icu-act="imgadd">' + ico("plus", "＋") + ' Add imaging note</button></div></div>';
+      if (!all.length) return header + '<div class="icu-empty">No imaging reports available from Ward Sync for this patient.</div>';
+      var filters = '<div class="icu-img-filters">' + IMG_FILTERS.map(function (f) {
+        return '<button class="icu-img-chip ' + (_imgFilter === f.k ? "on" : "") + '" data-icu-act="imgfilter:' + f.k + '">' + esc(f.label) + "</button>";
+      }).join("") + "</div>";
+      var shown = visible.filter(function (r) { return imgMatches(r, _imgFilter); });
+      var cards = shown.length ? shown.map(function (r) { return imagingCard(r); }).join("") : '<div class="icu-empty">No imaging matches this filter.</div>';
+      var hiddenRows = hidden.length ? ('<div class="icu-sec-lbl" style="margin-top:12px">Hidden (' + hidden.length + ")</div>" + hidden.map(function (r) {
+        return '<div class="icu-img-hidden"><span>' + esc(r.studyName || "Imaging") + '</span><button class="icu-img-act" data-icu-act="imghide:' + encodeURIComponent(r.id) + '">Unhide</button></div>';
+      }).join("")) : "";
+      return header + filters + cards + hiddenRows;
+    },
     more: function () {
       var n = rosterCount();
       return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("more", "⋯") + ' More</div>' +
@@ -1628,8 +1898,8 @@
   }
   // Segmented sub-navigation of the current workspace's members (only when >1).
   function renderSubNav() {
-    var w = wsById(_ws); if (!w.members || w.members.length < 2) return "";
-    return '<div class="icu-subnav">' + w.members.map(function (m) {
+    var w = wsById(_ws), mem = wsMembers(w); if (mem.length < 2) return "";
+    return '<div class="icu-subnav">' + mem.map(function (m) {
       var meta = MEMBER[m] || { label: m };
       return '<button class="icu-seg ' + (m === _active ? "on" : "") + '" data-icu-act="tab:' + m + '">' + esc(meta.label) + "</button>";
     }).join("") + "</div>";
@@ -1694,6 +1964,7 @@
       if ((_raw.vitals || []).length) return true;
       if (_raw.abg && Object.keys(_raw.abg).filter(function (k) { return k !== "ts"; }).length) return true;
       if (_raw.ventilator && Object.keys(_raw.ventilator).length) return true;
+      if ((_raw.imaging || []).length) return true;
       if (_raw.patient && (_raw.patient.name || _raw.patient.diagnosis)) return true;
     } catch (e) {}
     return false;
@@ -1972,6 +2243,52 @@
     closeForm();
     if (window.toast) toast("Working diagnosis set: " + name);
   }
+  // Manual imaging note (idx null) or annotate/correct an existing record (idx set).
+  function openImagingForm(id) {
+    ensureModal();
+    var idx = id != null ? imgIndexById(id) : -1;
+    var editing = idx >= 0;
+    var cur = editing ? _raw.imaging[idx] : {};
+    var dateVal = "";
+    if (editing && cur.reportDateTime) { try { var d = new Date(cur.reportDateTime); dateVal = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); } catch (e) {} }
+    var F = [
+      { k: "modality", l: "Modality (e.g. CECT, MRI, USG)", t: "text", v: cur.modality || "" },
+      { k: "studyName", l: "Study / title", t: "text", wide: true, v: cur.studyName || "" },
+      { k: "date", l: "Study date", t: "date", v: dateVal },
+      { k: "bodyRegion", l: "Body region", t: "text", v: cur.bodyRegion || "" },
+      { k: "indication", l: "Clinical indication", t: "text", wide: true, v: cur.indication || "" },
+      { k: "findings", l: "Findings", t: "textarea", wide: true, v: cur.findingsRaw || "" },
+      { k: "impression", l: "Impression", t: "textarea", wide: true, v: cur.impressionRaw || "" },
+      { k: "comment", l: "Clinician note (optional)", t: "textarea", wide: true, v: cur.comment || "" }
+    ];
+    var fieldsHTML = F.map(function (f) {
+      var inp = (f.t === "textarea")
+        ? '<textarea data-imgk="' + f.k + '" rows="3" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(f.v) + "</textarea>"
+        : '<input data-imgk="' + f.k + '" type="' + f.t + '" value="' + esc(f.v) + '">';
+      return '<div class="icu-fld" style="' + (f.wide ? "grid-column:1/-1" : "") + '"><label>' + esc(f.l) + "</label>" + inp + "</div>";
+    }).join("");
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("camera", "🩻") + " " + (editing ? "Correct / annotate imaging" : "Add imaging note") + "</h3>" +
+      '<p class="icu-doc-sub">Manual entry. Any urgent-finding flag is a deterministic keyword prompt to review — never a diagnosis.</p>' +
+      '<div class="icu-grid2">' + fieldsHTML + "</div>" +
+      '<button class="icu-btn" id="icuImgSave">Save imaging note</button><button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
+    modalEl.classList.add("on");
+    var btn = modalEl.querySelector("#icuImgSave");
+    if (btn) btn.addEventListener("click", function () {
+      var o = {}; modalEl.querySelectorAll("[data-imgk]").forEach(function (el) { o[el.getAttribute("data-imgk")] = el.value; });
+      if (!o.studyName && !o.modality && !o.findings && !o.impression) { closeForm(); return; }
+      var payload = { modality: o.modality, studyName: o.studyName || o.modality || "Imaging note", bodyRegion: o.bodyRegion, indication: o.indication, findingsRaw: o.findings, impressionRaw: o.impression, comment: o.comment, reportDateTime: parseWardDate(o.date) || (editing ? cur.reportDateTime : null) };
+      if (editing) {
+        payload.reportRaw = cur.reportRaw; payload.reportId = cur.reportId; payload.radiologist = cur.radiologist;
+        var merged = normalizeImagingRecord(payload, cur.source || "Manual");
+        merged.id = cur.id; merged.wardPatientId = cur.wardPatientId; merged.reviewed = cur.reviewed; merged.inSummary = cur.inSummary; merged.hidden = cur.hidden; merged.parsed = false;
+        // Re-resolve the index at save time (capImaging front-splice may have shifted it).
+        var i2 = imgIndexById(cur.id);
+        if (i2 >= 0) STATE.imaging[i2] = merged; else { STATE.imaging.push(merged); capImaging(); }
+      } else { ingestImaging(payload); }
+      closeForm();
+      if (window.toast) toast(editing ? "Imaging note updated" : "Imaging note added");
+    });
+  }
 
   /* --------------------------------------------------- share & clear findings */
   // Share a case exactly like the Clinical Reasoning dashboard: Web Share API
@@ -2207,12 +2524,20 @@
     switch (cmd) {
       case "close": ICU.close(); break;
       case "tab": _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
-      case "ws": _ws = arg; _active = _wsLast[arg] || wsById(arg).members[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break;
+      case "ws": { _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
       case "summary": openSummary(); break;
       case "printsummary": printSummary(); break;
       case "discharge": if (window.toast) toast("Discharge Creator is coming in the next update — draft from this patient’s recorded data with clinician review."); break;
       case "dxsearch": openDxSearch(); break;
       case "pickdx": pickDiagnosis(decodeURIComponent(arg)); break;
+      case "imgfetch": imagingFetch(); break;
+      case "imgadd": openImagingForm(null); break;
+      case "imgedit": openImagingForm(decodeURIComponent(arg)); break;
+      case "imgfilter": _imgFilter = arg; paint(); break;
+      case "imgexpand": { var _ie = decodeURIComponent(arg); _imgOpen[_ie] = !_imgOpen[_ie]; paint(); break; }
+      case "imgreview": { var _ir = imgById(decodeURIComponent(arg)); if (_ir) _ir.reviewed = !_ir.reviewed; paint(); break; }
+      case "imgsummary": { var _is = imgById(decodeURIComponent(arg)); if (_is) _is.inSummary = !_is.inSummary; paint(); if (window.toast) toast(_is && _is.inSummary ? "Added to Daily Summary" : "Removed from Daily Summary"); break; }
+      case "imghide": { var _ih = imgById(decodeURIComponent(arg)); if (_ih) _ih.hidden = !_ih.hidden; paint(); break; }
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
       case "roundnote": openRoundNote(arg); break;
@@ -2319,6 +2644,7 @@
     reset: function () { var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; }); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
+    ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"
