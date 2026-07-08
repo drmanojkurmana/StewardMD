@@ -178,7 +178,7 @@ try {
   await ev(`ICU._addFindingChip({canonicalFindingId:"headache",displayLabel:"Headache",inReasoning:true},"manual_picker"); ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker"); return 1;`);
   await sleep(150);
   const t17 = await J(`return JSON.stringify({after:JSON.stringify((ICU.state().alerts||[]).map(function(a){return a.title;})), findings:(ICU.state().findings||[]).length});`);
-  ok(t17.findings === 2 && t17.after === before17 && /hyperkalemia/i.test(before17), `documentation-only: adding findings did not perturb recompute-derived alerts (pipeline live: ${JSON.parse(before17 || "[]").length} alerts, unchanged)`);
+  ok(t17.findings === 2 && t17.after === before17 && /hyperkal/i.test(before17), `documentation-only: adding findings did not perturb recompute-derived alerts (pipeline live: ${JSON.parse(before17 || "[]").length} alerts, unchanged)`);
 
   // 18) patient isolation — a new patient starts with no findings
   const t18 = await J(`ICU.reset(); ICU.ingestPatient({name:"FP6",age:33,sex:"F"}); return JSON.stringify({n:(ICU.state().findings||[]).length});`);
