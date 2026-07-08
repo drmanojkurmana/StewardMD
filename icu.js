@@ -727,7 +727,16 @@
       '.icu-assist-draft{font:800 11px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:6px 10px;margin-bottom:8px}' +
       '.icu-assist-summary{font:700 14px/1.5 var(--font);color:var(--ink);margin-bottom:8px}' +
       '.icu-assist-ul{margin:2px 0 0;padding-left:18px}.icu-assist-ul li{font:600 13px/1.5 var(--font);color:var(--ink);margin:1px 0}' +
-      '.icu-assist-src{font:600 11px var(--font);color:var(--muted);margin-top:8px}';
+      '.icu-assist-src{font:600 11px var(--font);color:var(--muted);margin-top:8px}' +
+      // Clinical Correlation
+      '.icu-corr-meta{font:600 12px var(--font);color:var(--muted);margin:2px 0 10px}' +
+      '.icu-corr-badge{display:inline-block;font:800 11px var(--font);text-transform:uppercase;letter-spacing:.03em;border-radius:8px;padding:5px 10px;margin-bottom:8px;background:var(--panel2);color:var(--muted);border:1px solid var(--border)}' +
+      '.icu-corr-badge.ok{background:var(--ok-soft);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 35%,var(--border))}.icu-corr-badge.partial{background:var(--primary-soft);color:var(--primary)}.icu-corr-badge.warn{background:var(--warn-soft);color:var(--warn)}' +
+      '.icu-corr-sub{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:10px 0 5px}' +
+      '.icu-corr-ol{margin:0;padding-left:20px}.icu-corr-ol li{font:700 14px/1.5 var(--font);color:var(--ink)}.icu-corr-conf{font:700 11px var(--font);color:var(--muted)}' +
+      '.icu-corr-chips{display:flex;flex-wrap:wrap;gap:6px}.icu-corr-chip{font:600 12px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:4px 10px}.icu-corr-chip.ok{border-color:color-mix(in srgb,var(--ok) 40%,var(--border));color:var(--ok)}.icu-corr-chip.muted{color:var(--muted)}' +
+      '.icu-corr-deep{margin-top:10px;border-top:1px solid var(--border);padding-top:10px}' +
+      '.icu-corr-note{font:600 12.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-corr-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}.icu-corr-partial{color:var(--muted);font-weight:600}';
     var st = document.createElement("style"); st.id = "icu-css"; st.textContent = css;
     document.head.appendChild(st);
   }
@@ -1844,7 +1853,7 @@
         '<p class="icu-doc-sub">Radiology reports from Ward Sync (report text only) plus your manual notes. Any urgent-finding flag is a deterministic keyword prompt to review — never a diagnosis.</p>' +
         '<div class="icu-img-btns"><button class="icu-btn" data-icu-act="imgfetch">' + ico("hospital", "🏥") + ' Fetch imaging from Ward Sync</button>' +
         '<button class="icu-btn ghost" data-icu-act="imgadd">' + ico("plus", "＋") + ' Add imaging note</button></div></div>';
-      if (!all.length) return header + '<div class="icu-empty">No imaging reports available from Ward Sync for this patient.</div>';
+      if (!all.length) return header + '<div class="icu-empty">No imaging reports available from Ward Sync for this patient.</div>' + correlationCard();
       var filters = '<div class="icu-img-filters">' + IMG_FILTERS.map(function (f) {
         return '<button class="icu-img-chip ' + (_imgFilter === f.k ? "on" : "") + '" data-icu-act="imgfilter:' + f.k + '">' + esc(f.label) + "</button>";
       }).join("") + "</div>";
@@ -1853,7 +1862,7 @@
       var hiddenRows = hidden.length ? ('<div class="icu-sec-lbl" style="margin-top:12px">Hidden (' + hidden.length + ")</div>" + hidden.map(function (r) {
         return '<div class="icu-img-hidden"><span>' + esc(r.studyName || "Imaging") + '</span><button class="icu-img-act" data-icu-act="imghide:' + encodeURIComponent(r.id) + '">Unhide</button></div>';
       }).join("")) : "";
-      return header + filters + cards + hiddenRows;
+      return header + filters + cards + hiddenRows + correlationCard();
     },
     more: function () {
       var n = rosterCount();
@@ -2343,8 +2352,7 @@
     for (var i = 0; i < IMG_CORRELATE.length; i++) {
       var re = new RegExp(IMG_CORRELATE[i][0].source, "gi"), m, hit = false;
       while ((m = re.exec(t))) {
-        var pre = t.slice(Math.max(0, m.index - 40), m.index).split(/[.;:\n]/).pop();   // clause-scoped negation guard (same as imgCritical)
-        if (!IMG_NEG.test(pre)) { hit = true; break; }
+        if (!negClause(t, m.index)) { hit = true; break; }
         if (m.index === re.lastIndex) re.lastIndex++;
       }
       if (hit) return IMG_CORRELATE[i][1];
@@ -2423,6 +2431,192 @@
       }).catch(function () { if (live()) shell(renderAssistResult({ error: "server" }, rec, "ai")); });
     }
     shell("");
+  }
+
+  /* ===== CLINICAL CORRELATION ASSISTANT (Phase 3) — advisory only =========
+   * Staged pipeline: local deterministic extraction (imaging concepts + lab abnormalities +
+   * clinician findings) → compact de-identified packet → map the subset that have EXISTING
+   * engine finding-keys and run SMD_REASON.assess() READ-ONLY for a deterministic KB signal →
+   * optional Deep AI synthesis (opt-in, evidence-hash cached). It NEVER sets a diagnosis, never
+   * adds findings to the live engine, and never alters ranking. No new finding-keys are added
+   * (that would churn the golden engine). External-evidence fallback is deferred to Phase 4. */
+  var _corrAnalysed = false, _corrBusy = false, _corrCache = {}, _corrErr = null;   // in-memory Deep cache (not persisted → no onChange loop)
+  // Negation scoped to the CURRENT clause/sentence (from the last terminator up to the match) —
+  // not a fixed byte window — so a leading negation governs a whole enumeration ("No A, B or C").
+  function negClause(text, idx) { return IMG_NEG.test(text.slice(0, idx).split(/[.;:\n]/).pop()); }
+  // Imaging report keyword → human concept label (negation-guarded, like imgCritical).
+  var IMG_CONCEPTS = [
+    [/peripancreatic|fat stranding/i, "peripancreatic inflammatory change"],
+    [/pancreat/i, "pancreatic inflammation"],
+    [/\bcbd\b|common bile duct|choledoch|biliary (?:duct|dilat)/i, "biliary duct involvement"],
+    [/cholangit/i, "cholangitis features"],
+    [/consolidation|air ?space opacit/i, "pulmonary consolidation"],
+    [/ground.?glass/i, "ground-glass opacity"],
+    [/pleural effusion/i, "pleural effusion"],
+    [/ascites|free fluid|free intraperitoneal fluid/i, "ascites"],
+    [/hydronephros|obstruct\w* (?:kidney|ureter|collecting|renal)/i, "urinary tract obstruction"],
+    [/h[ae]?emorrhage|\bbleed\b|h[ae]?ematoma/i, "haemorrhage"],
+    [/midline shift|mass effect/i, "mass effect"],
+    [/infarct/i, "infarct"],
+    [/hepatomegaly|splenomegaly|hepatospleno/i, "organomegaly"],
+    [/lymphadenopathy|enlarged lymph node/i, "lymphadenopathy"],
+    [/abscess|infected collection/i, "collection / abscess"]
+  ];
+  // Concepts that map to an EXISTING engine finding-key (others stay context-only, never scored).
+  var CONCEPT_KEY = { "pulmonary consolidation": "consolidation", "ascites": "ascites", "lymphadenopathy": "lymphadenopathy", "organomegaly": "hepatosplenomegaly" };
+  function nonNeg(t, re0) {
+    var re = new RegExp(re0.source, "gi"), m;
+    while ((m = re.exec(t))) { if (!negClause(t, m.index)) return true; if (m.index === re.lastIndex) re.lastIndex++; }
+    return false;
+  }
+  function extractImagingConcepts() {
+    var out = [], seen = {}, imgs = (_raw.imaging || []).filter(function (r) { return !r.hidden; });
+    imgs.forEach(function (r) {
+      var t = [r.impressionRaw, r.findingsRaw, r.reportRaw].join(" ");
+      IMG_CONCEPTS.forEach(function (c) { if (nonNeg(t, c[0]) && !seen[c[1]]) { seen[c[1]] = 1; out.push(c[1]); } });
+    });
+    return out;
+  }
+  function imagingCriticalFlags() {
+    var out = [], seen = {};
+    (_raw.imaging || []).filter(function (r) { return !r.hidden; }).forEach(function (r) { (r.critical || []).forEach(function (c) { if (!seen[c]) { seen[c] = 1; out.push(c); } }); });
+    return out;
+  }
+  // Direction of a lab over the recorded series (earliest vs latest, >25% move).
+  function labDir(key) {
+    var pts = (_raw.labs.trends || []).filter(function (s) { return s[key] != null && s[key] !== ""; });
+    if (pts.length < 2) return null;
+    var a = +pts[0][key], b = +pts[pts.length - 1][key]; if (isNaN(a) || isNaN(b) || a === 0) return null;
+    var d = (b - a) / Math.abs(a);
+    return d > 0.25 ? "rising" : d < -0.25 ? "falling" : null;
+  }
+  function extractLabConcepts() {
+    var L = _raw.labs.recent || {}, out = [], seen = {}, add = function (s) { if (s && !seen[s]) { seen[s] = 1; out.push(s); } };
+    try { if (window.ELYTE && ELYTE.analyze) { var p = _raw.patient || {}; ELYTE.analyze(L, { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") }, "si").filter(function (r) { return r.level && r.level !== "ok"; }).forEach(function (r) { add(r.name + (r.severity ? " (" + r.severity + ")" : "")); }); } } catch (e) {}
+    if (L.plt != null && L.plt < 150) add("thrombocytopenia");
+    if (L.wbc != null && L.wbc > 11) add("leukocytosis"); else if (L.wbc != null && L.wbc < 4) add("leukopenia");
+    if (L.hb != null && L.hb < 10) add("anaemia");
+    if (L.bili != null && L.bili > 2) add("hyperbilirubinaemia");
+    if (L.alp != null && L.alp > 150 && (L.alt == null || L.alt < 120)) add("cholestatic LFT pattern");
+    if ((L.ast != null && L.ast > 120) || (L.alt != null && L.alt > 120)) add("hepatocellular injury");
+    if (L.lipase != null && L.lipase > 180) add("pancreatic enzyme elevation");
+    if (L.amylase != null && L.amylase > 300) add("pancreatic enzyme elevation");
+    if (L.crp != null && L.crp > 50) add("raised inflammatory markers");
+    // trend directions for high-yield analytes
+    ["creat", "bili", "lipase", "crp", "lactate"].forEach(function (k) { var d = labDir(k); if (d === "rising") add({ creat: "rising creatinine", bili: "rising bilirubin", lipase: "falling/rising lipase — trend only", crp: "rising CRP", lactate: "rising lactate" }[k]); });
+    if (labDir("plt") === "falling") add("falling platelets");
+    return out;
+  }
+  function correlationEvidence() {
+    var p = _raw.patient || {}, img = extractImagingConcepts(), crit = imagingCriticalFlags(), labs = extractLabConcepts(), clinical = [];
+    if (p.complaints) clinical.push(String(p.complaints));
+    if (p.diagnosis) clinical.push("working diagnosis: " + p.diagnosis);
+    return { img: img, crit: crit, labs: labs, clinical: clinical,
+      counts: { imaging: (_raw.imaging || []).filter(function (r) { return !r.hidden; }).length, labs: labs.length } };
+  }
+  function correlationMappedKeys(ev) {
+    var keys = {};
+    ev.img.forEach(function (c) { if (CONCEPT_KEY[c]) keys[CONCEPT_KEY[c]] = true; });
+    ev.labs.forEach(function (l) { var lc = l.toLowerCase(); if (/thrombocyto|falling platelet/.test(lc)) keys.thrombocytopenia = true; if (/lactate/.test(lc)) keys.lactateElevated = true; if (/creatinin|renal|\baki\b/.test(lc)) keys.renalImpairment = true; });
+    return Object.keys(keys);
+  }
+  function runQuickCorrelation() {
+    var ev = correlationEvidence(), keys = correlationMappedKeys(ev), assess = null;
+    try { if (window.SMD_REASON && SMD_REASON.assess && keys.length) { var f = {}; keys.forEach(function (k) { f[k] = true; }); assess = SMD_REASON.assess(f); } } catch (e) {}
+    var cands = assess ? (assess.infectious || []).concat(assess.nonInfectious || []).slice().sort(function (a, b) { return (b.confidence || 0) - (a.confidence || 0); }).slice(0, 3) : [];
+    var top = cands[0], evItems = ev.img.length + ev.labs.length + ev.clinical.length, status;
+    if (!keys.length || !top) status = evItems < 2 ? "Insufficient data" : "No adequate internal match";
+    else if (cands.length >= 2 && Math.abs((cands[0].confidence || 0) - (cands[1].confidence || 0)) < 8 && (cands[0].contradictory || []).length) status = "Conflicting evidence";
+    else if ((top.confidence || 0) >= 70 && (top.supporting || []).length >= 2) status = "Strong internal match";
+    else if ((top.confidence || 0) >= 45) status = "Partial internal match";
+    else status = "Broad syndrome match only";
+    // Findings the deterministic engine did NOT see (no matching key) — across BOTH imaging and
+    // labs. The ranked list is trustworthy only when nothing dominant was left out.
+    var mappedLabRe = /thrombocyto|falling platelet|lactate|creatinin|renal|\baki\b/i;
+    var unmapped = ev.img.filter(function (c) { return !CONCEPT_KEY[c]; }).concat(ev.labs.filter(function (l) { return !mappedLabRe.test(l); }));
+    return { ev: ev, keys: keys, candidates: cands, status: status, unmapped: unmapped };
+  }
+  // Evidence hash for the Deep-review cache (patient-scoped; de-identified content only).
+  function correlationHash(ev) { return imgHash(JSON.stringify([ev.img, ev.crit, ev.labs, ev.clinical])); }
+  function buildCorrelationPacket(ev) {
+    var p = _raw.patient || {};
+    return {
+      patientContext: { ageBand: ageBandOf(p.age), sex: p.sex ? String(p.sex) : "", specialty: "", careSetting: "ICU" },
+      imaging: { concepts: ev.img, criticalFlags: ev.crit },
+      labs: { abnormalities: ev.labs },
+      clinical: { approvedFindings: (ev.clinical || []).map(imgRedact) }
+    };
+  }
+  function runCorrelationDeep() {
+    var ev = correlationEvidence(); if (!(ev.img.length || ev.labs.length)) { if (window.toast) toast("Add imaging or labs first."); return; }
+    var key = (_raw.patient._id || "cur") + ":" + correlationHash(ev);
+    if (_corrCache[key]) { paint(); return; }   // cache hit (SUCCESS only) — reuse, no AI call (token control)
+    _corrErr = null; _corrBusy = true; paint();
+    var pkt = buildCorrelationPacket(ev);
+    (window.SMD_AI && SMD_AI.correlate ? SMD_AI.correlate(pkt) : Promise.resolve({ error: "ai-off" })).then(function (res) {
+      // Cache ONLY a successful correlation — transient errors (quota/server/parse) stay retryable.
+      if (res && res.correlation && !res.error) _corrCache[key] = res; else _corrErr = res || { error: "server" };
+      _corrBusy = false; paint();
+    }).catch(function () { _corrErr = { error: "server" }; _corrBusy = false; paint(); });
+  }
+  function corrChips(arr, cls) { return (arr && arr.length) ? '<div class="icu-corr-chips">' + arr.map(function (x) { return '<span class="icu-corr-chip ' + (cls || "") + '">' + esc(x) + "</span>"; }).join("") + "</div>" : ""; }
+  function corrDeepHTML(res) {
+    if (!res || res.error) return '<div class="icu-assist-msg">' + esc(res && res.error === "ai-off" ? "Deep review is turned off (cloud text disabled in Settings)." : res && res.error === "quota" ? "AI usage limit reached — try again later." : "Couldn’t run the deep review right now.") + "</div>";
+    var s = res.correlation || res;
+    return '<div class="icu-assist-draft">Draft — clinician review required. Advisory only; not a diagnosis.</div>' +
+      (s.clinicalCorrelation ? '<div class="icu-assist-summary">' + esc(s.clinicalCorrelation) + "</div>" : "") +
+      assistSection("Top considerations", s.topConsiderations) +
+      assistSection("Why these fit", s.whyFit) +
+      assistSection("Important alternatives / mimics", s.alternatives) +
+      assistSection("What does not fit", s.whatDoesntFit) +
+      assistSection("Missing information / investigations", s.missing) +
+      assistSection("Urgent red flags", s.redFlags) +
+      assistSection("Suggested next checks", s.nextChecks) +
+      assistSection("Relevant StewardMD protocols", s.protocols) +
+      '<div class="icu-assist-src">Advisory synthesis from de-identified StewardMD imaging + labs — verify against the report and the deterministic engine.</div>';
+  }
+  var _corrPt = null;
+  function correlationCard() {
+    if (!icuImagingOn()) return "";
+    var pid = _raw.patient._id || _raw.patient.name || "cur";
+    if (_corrPt !== pid) { _corrPt = pid; _corrAnalysed = false; _corrBusy = false; _corrCache = {}; _corrErr = null; }   // reset ALL correlation state on patient switch (no cross-patient leak)
+    var imgs = (_raw.imaging || []).filter(function (r) { return !r.hidden; }), labN = Object.keys(_raw.labs.recent || {}).length;
+    var header = '<div class="icu-sec-lbl" style="margin-top:14px">' + ico("pulse", "🧠") + ' Clinical Correlation</div>';
+    if (!hasData()) return header + '<div class="icu-empty">Select a patient to correlate imaging and laboratory findings.</div>';
+    if (!imgs.length && !labN) return header + '<div class="icu-empty">Add imaging and laboratory data to correlate them.</div>';
+    if (!_corrAnalysed) {
+      return header + '<div class="icu-card"><p class="icu-doc-sub">Correlate this patient’s imaging concepts, laboratory abnormalities and recorded findings against StewardMD’s knowledge base. Advisory only — the deterministic engine remains the diagnostic authority.</p>' +
+        '<div class="icu-corr-meta">' + imgs.length + " imaging report" + (imgs.length === 1 ? "" : "s") + " · " + labN + " lab value" + (labN === 1 ? "" : "s") + "</div>" +
+        '<button class="icu-btn" data-icu-act="corranalyse">' + ico("pulse", "✨") + ' Analyse imaging + labs</button></div>';
+    }
+    var q = runQuickCorrelation(), ev = q.ev, deep = _corrCache[(_raw.patient._id || "cur") + ":" + correlationHash(ev)];
+    var cls = /Strong/.test(q.status) ? "ok" : /No adequate|Insufficient/.test(q.status) ? "muted" : /Conflicting/.test(q.status) ? "warn" : "partial";
+    var badge = '<span class="icu-corr-badge ' + cls + '">' + esc(q.status) + "</span>";
+    // The Quick deterministic signal is only trustworthy when the mapped keys actually represent
+    // the evidence. If imaging findings did NOT map to an engine key (the common case — the engine
+    // has no imaging vocabulary), a ranked "Top considerations" from the leftover labs alone is
+    // MISLEADING (e.g. pancreatitis imaging + thrombocytopenia → the engine returns Dengue/Malaria).
+    // So when imaging concepts are unmapped, suppress the ranked list and steer to Deep review.
+    var considBlock, supporting = "", missing = "";
+    if ((q.unmapped || []).length) {
+      considBlock = '<div class="icu-corr-note">' + ico("info", "ⓘ") + " Some findings aren’t machine-matched to the knowledge base yet: <b>" + esc(q.unmapped.join(", ")) + "</b>. Run <b>Deep clinical review</b> below for a full imaging + lab correlation." +
+        (q.candidates.length ? ' <span class="icu-corr-partial">(The mapped findings alone point to ' + esc(q.candidates.slice(0, 2).map(function (c) { return c.name; }).join(", ")) + " — partial, do not rely on this.)</span>" : "") + "</div>";
+    } else if (q.candidates.length) {
+      considBlock = '<div class="icu-corr-sub">Top considerations (pattern-based, advisory)</div><ol class="icu-corr-ol">' + q.candidates.map(function (c) { return "<li>" + esc(c.name) + ' <span class="icu-corr-conf">' + (c.confidence != null ? c.confidence + "/100" : "") + "</span></li>"; }).join("") + "</ol>";
+      supporting = (q.candidates[0] && (q.candidates[0].supporting || []).length) ? '<div class="icu-corr-sub">Supporting</div>' + corrChips(q.candidates[0].supporting, "ok") : "";
+      missing = (q.candidates[0] && (q.candidates[0].missing || []).length) ? '<div class="icu-corr-sub">Missing / to review</div>' + corrChips(q.candidates[0].missing, "muted") : "";
+    } else {
+      considBlock = '<div class="icu-corr-sub" style="color:var(--muted)">No confident internal match — run a Deep clinical review for a full correlation.</div>';
+    }
+    var redflags = ev.crit.length ? '<div class="icu-img-crit">' + ico("warn", "⚠️") + ' <b>Urgent imaging findings</b> — verify & escalate.<div class="icu-img-crit-t">' + ev.crit.map(function (c) { return "<span>" + esc(c) + "</span>"; }).join("") + "</div></div>" : "";
+    var evidence = (ev.img.length || ev.labs.length) ? '<div class="icu-corr-sub">Evidence assembled</div>' + corrChips(ev.img.concat(ev.labs)) : "";
+    var deepBlock = _corrBusy ? '<div class="icu-assist-msg">Running deep clinical review…</div>' : (deep ? '<div class="icu-corr-deep">' + corrDeepHTML(deep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
+    return header + '<div class="icu-card">' + badge + redflags + considBlock + supporting + missing + evidence +
+      '<div class="icu-img-btns" style="margin-top:10px">' +
+        '<button class="icu-btn" data-icu-act="corrdeep"' + (_corrBusy ? " disabled" : "") + '>' + ico("pulse", "✨") + ' Deep clinical review</button>' +
+        '<button class="icu-btn ghost" disabled title="Coming in a later update">Find evidence beyond StewardMD</button>' +
+      "</div>" + deepBlock +
+      '<p class="icu-doc-sub" style="margin-top:8px">Advisory only. The deterministic engine owns the diagnosis; this never changes any ranking.</p></div>';
   }
 
   /* --------------------------------------------------- share & clear findings */
@@ -2674,6 +2868,8 @@
       case "imgreview": { var _ir = imgById(decodeURIComponent(arg)); if (_ir) _ir.reviewed = !_ir.reviewed; paint(); break; }
       case "imgsummary": { var _is = imgById(decodeURIComponent(arg)); if (_is) _is.inSummary = !_is.inSummary; paint(); if (window.toast) toast(_is && _is.inSummary ? "Added to Daily Summary" : "Removed from Daily Summary"); break; }
       case "imgsummaryadd": { var _isa = imgById(decodeURIComponent(arg)); if (_isa && !_isa.inSummary) { _isa.inSummary = true; if (window.toast) toast("Added to Daily Summary"); } paint(); break; }
+      case "corranalyse": _corrAnalysed = true; paint(); break;
+      case "corrdeep": runCorrelationDeep(); break;
       case "imghide": { var _ih = imgById(decodeURIComponent(arg)); if (_ih) _ih.hidden = !_ih.hidden; paint(); break; }
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
@@ -2783,6 +2979,7 @@
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
     _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,
+    _correlationEvidence: correlationEvidence, _runQuickCorrelation: runQuickCorrelation, _buildCorrelationPacket: buildCorrelationPacket,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"

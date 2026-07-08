@@ -3699,6 +3699,15 @@
         .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
+    // Clinical Correlation (Phase 3) — de-identified imaging+lab evidence packet → advisory
+    // correlation. Same cloud-text posture as visionText/imagingSummary. Advisory only.
+    correlate: function (packet) {
+      var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
+      if (!packet) return Promise.resolve({ error: "no-evidence" });
+      return aiHeaders().then(function (h) { return fetch(b + "/correlate", { method: "POST", headers: h, body: JSON.stringify({ packet: packet }) }); })
+        .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
     // Opt-in web research (Google-grounded) for topics not in StewardMD's KB. Token-frugal:
     // one grounded call, short answer; only invoked on an explicit user tap.
     research: function (question) {

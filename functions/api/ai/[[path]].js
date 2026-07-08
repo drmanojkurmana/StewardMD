@@ -318,6 +318,17 @@ const IMAGING_TASK =
   "{\"summary\":string, \"positives\":[string], \"negatives\":[string], \"significance\":[string], \"differentials\":[string], \"correlateWith\":[string], \"redFlags\":[string], \"nextChecks\":[string]}. " +
   "\"summary\" is ONE sentence. Each array holds short concise phrases (use [] if genuinely none). " +
   "\"differentials\" are considerations only (hedged), never a single confirmed diagnosis. \"redFlags\" list urgent findings that warrant escalation IF present in the report.";
+// Clinical Correlation (Phase 3). De-identified evidence packet (imaging concepts + lab
+// abnormalities + clinician findings) → advisory correlation. NEVER a diagnosis.
+const CORRELATE_SYS =
+  "You are a clinical decision-support assistant correlating a patient's imaging concepts, laboratory abnormalities and recorded findings for a doctor. " +
+  "You are NOT the diagnostic authority — a deterministic engine owns the diagnosis; your output is advisory and must be verified. " +
+  "Reason ONLY from the de-identified evidence provided; never invent findings, values, or history. " +
+  "Use hedged wording only (suggestive of / consider correlation with / differential considerations include). " +
+  "NEVER write 'confirmed diagnosis', 'definitely has', 'no emergency', or 'safe to discharge'. If the evidence is too sparse to correlate, say so plainly in clinicalCorrelation and return empty arrays.";
+const CORRELATE_TASK =
+  "Return ONLY JSON with EXACTLY these keys: {\"clinicalCorrelation\":string, \"topConsiderations\":[string], \"whyFit\":[string], \"alternatives\":[string], \"whatDoesntFit\":[string], \"missing\":[string], \"redFlags\":[string], \"nextChecks\":[string], \"protocols\":[string]}. " +
+  "clinicalCorrelation is 1-2 sentences. Each array holds short concise phrases (use [] if none). No prose outside the JSON.";
 function parseJsonLoose(t) {
   if (!t) return null;
   var m = t.match(/\{[\s\S]*\}/);
@@ -469,6 +480,29 @@ export async function onRequest(context) {
       await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
       const parsed = parseJsonLoose(text);
       return json(parsed ? { summary: parsed, mode: "imaging" } : { error: "parse", raw: String(text || "").slice(0, 1200), mode: "imaging" });
+    }
+    if (seg === "correlate") {
+      // Clinician-invoked imaging+lab correlation. De-identified packet only (no identifiers).
+      const pkt = body.packet || {};
+      const img = (pkt.imaging && pkt.imaging.concepts) || [], labs = (pkt.labs && pkt.labs.abnormalities) || [];
+      if (!img.length && !labs.length) return json({ error: "no-evidence" }, 400);
+      const pc = pkt.patientContext || {}, L = ["=== PATIENT (de-identified) ==="];
+      if (pc.ageBand) L.push("Age band: " + clip(pc.ageBand, 20));
+      if (pc.sex) L.push("Sex: " + clip(pc.sex, 12));
+      if (pc.careSetting) L.push("Care setting: " + clip(pc.careSetting, 24));
+      L.push("\n=== IMAGING CONCEPTS ===\n" + (img.map(function (x) { return "• " + clip(String(x), 120); }).join("\n") || "none"));
+      if (pkt.imaging && (pkt.imaging.criticalFlags || []).length) L.push("Critical imaging flags: " + clip(pkt.imaging.criticalFlags.join(", "), 300));
+      L.push("\n=== LABORATORY ABNORMALITIES ===\n" + (labs.map(function (x) { return "• " + clip(String(x), 120); }).join("\n") || "none"));
+      if (pkt.clinical && (pkt.clinical.approvedFindings || []).length) L.push("\n=== CLINICIAN-RECORDED FINDINGS ===\n" + clip(pkt.clinical.approvedFindings.join("; "), 500));
+      const gate = await checkQuota(env, request, "case");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      const prompt = CORRELATE_SYS + "\n\n" + L.join("\n").slice(0, MAX_IN_CHARS) + "\n\n=== TASK ===\n" + CORRELATE_TASK;
+      let text;
+      try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, { temperature: 0.3 }); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+      const parsed = parseJsonLoose(text);
+      return json(parsed ? { correlation: parsed, mode: "correlate" } : { error: "parse", raw: String(text || "").slice(0, 1200), mode: "correlate" });
     }
     if (seg === "vision") {
       const kind = VISION_SYS[body.kind] ? body.kind : "monitor";
