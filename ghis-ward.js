@@ -255,10 +255,45 @@
             var res = (ICU.ingestWardHistory
               ? ICU.ingestWardHistory({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs })
               : ICU.ingestFromWard({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs }));
-            try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
-            ICU.open();
-            try { if (window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
+            // Also import radiology reports (TEXT only) as Imaging Notes when the feature is on.
+            // A failure here never blocks the lab sync.
+            var imgP = (ICU.ingestWardImaging && (!ICU.imagingOn || ICU.imagingOn()))
+              ? GHIS.fetchImaging(patientId).then(function (records) { try { return ICU.ingestWardImaging({ patientId: patientId, source: 'Ward Sync', imaging: records }); } catch (e) { return null; } }).catch(function () { return null; })
+              : Promise.resolve(null);
+            return imgP.then(function (imgRes) {
+              try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
+              ICU.open();
+              try { if (window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0, ni = (imgRes && imgRes.added) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (ni ? ' · ' + ni + ' imaging report' + (ni === 1 ? '' : 's') : '') + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
+            });
           }).catch(function (e) { if (body) body.innerHTML = '<div class="ghis-lab-empty">Couldn’t load labs right now. Please try again.</div>'; });
+        },
+        // Fetch this patient's radiology reports (TEXT only) with the FULL field set — pulled
+        // straight from /radiology + /radiology-report (not the lossy importPatientReports shape,
+        // which drops resultid/date). Returns a Promise of raw records for ICU.ingestWardImaging.
+        // Scoped by the current GHIS session; never fetches another patient's studies.
+        fetchImaging: function(patientId) {
+          return authFetch('/radiology?patientId=' + encodeURIComponent(patientId)).then(function(j) {
+            var orders = ((j && j.orders) || []).slice(0, 20);
+            return Promise.all(orders.map(function(o) {
+              return authFetch('/radiology-report?resultid=' + encodeURIComponent(o.resultid) + '&type=' + encodeURIComponent(o.printType || 'manual'))
+                .then(function(d) {
+                  if (d && d.error) return null;   // session_expired / parse — skip this one
+                  return { reportId: o.resultid, studyName: o.description || (d && d.testName) || 'Imaging', date: o.date, printType: o.printType,
+                    report: (d && d.report) || '', reported: d && d.reported, enteredBy: d && d.enteredBy, testName: d && d.testName, doctor: d && d.doctor };
+                }).catch(function(){ return null; });
+            })).then(function(arr){ return arr.filter(Boolean); });
+          }).catch(function(){ return []; });
+        },
+        // ICU "Fetch Imaging" button entry — re-pull imaging for the linked ward patient.
+        fetchImagingIntoICU: function(patientId) {
+          if (!window.ICU || !ICU.ingestWardImaging) { if (window.toast) toast('ICU dashboard not loaded.'); return; }
+          patientId = patientId || GHIS._patientId;
+          if (!patientId) { try { window.openGHIS && window.openGHIS(); } catch (e) {} return; }
+          GHIS._patientId = patientId;
+          GHIS.fetchImaging(patientId).then(function(records) {
+            var res = ICU.ingestWardImaging({ patientId: patientId, source: 'Ward Sync', imaging: records });
+            try { if (window.toast) toast(res && res.added ? ('Imported ' + res.added + ' imaging report' + (res.added === 1 ? '' : 's') + (res.duplicates ? ' · ' + res.duplicates + ' already present' : '')) : 'No new imaging reports for this patient.'); } catch (e) {}
+          }).catch(function(){ if (window.toast) toast('Couldn’t load imaging right now. Please try again.'); });
         },
         // Patient-card click dispatcher: normal browse -> lab drawer; import mode
         // (launched from Dx My Patient -> Import Patient) -> pull reports into the engine.
