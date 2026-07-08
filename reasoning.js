@@ -3494,6 +3494,9 @@
     },
     // dynamic consultant suggestions = highest-yield next findings given current picks.
     nextFindings: function (limit) { try { return nextQuestions(limit || 6); } catch (e) { return []; } },
+    // interface-independent disease search over the KB index (name/synonym/system match) —
+    // reused by the ICU "search & select diagnosis". Returns [{id,name,sys,...}].
+    search: function (q, limit) { try { return kbSearch(q, limit || 12); } catch (e) { return []; } },
     // clinical-information threshold: ≥3 findings OR ≥1 highly-discriminative OR a matched syndrome.
     thresholdMet: function (findings) {
       var f = findings || S.f, keys = Object.keys(f).filter(function (k) { return f[k]; });

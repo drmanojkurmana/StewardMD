@@ -32,7 +32,7 @@
 
   /* -------------------------------------------------- the data model shape */
   var DEFAULT_STATE = {
-    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, diagnosis: "", hospital: "", bed: "", icuDay: null, status: "" },
+    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "" },
     vitals: [],                 // [{ ts, hr, sbp, dbp, map, rr, spo2, temp, uop, lactate, cvp, etco2 }]
     labs: { recent: {}, trends: [] },  // recent: { na,k,cl,hco3,ca,mg,po4,glu,creat,alb,wbc,hb,plt,inr,ferritin,trig,fibrinogen,... }
     abg: {},                    // { ts, ph, paco2, pao2, hco3, fio2, lactate, be }
@@ -516,6 +516,11 @@
       '.icu-seg{flex:0 0 auto;border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:999px;font:700 12.5px var(--font);padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}' +
       '.icu-seg:active{transform:scale(.96)}.icu-seg.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}' +
       '.icu-doc-sub{font:600 12.5px/1.5 var(--font);color:var(--muted);margin:2px 0 12px}' +
+      '.icu-dx-cc{font:600 14px/1.55 var(--font);color:var(--ink);margin:2px 0 12px;white-space:pre-wrap}.icu-dx-cur{font:700 16px var(--font);color:var(--ink);margin:2px 0 12px}' +
+      '.icu-dx-results{margin-top:10px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}' +
+      '.icu-dx-hint{font:600 12.5px var(--font);color:var(--muted);padding:8px 2px}' +
+      '.icu-dx-hit{display:flex;align-items:center;gap:8px;text-align:left;width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:10px;padding:11px 13px;cursor:pointer;font:700 14px var(--font)}' +
+      '.icu-dx-hit:hover{border-color:var(--primary)}.icu-dx-hit:active{transform:scale(.99)}.icu-dx-hit .nm{flex:1}.icu-dx-hit .sys{font:600 11px var(--font);color:var(--muted);white-space:nowrap}' +
       // desktop: centre the 5-workspace bar and widen items (same grouping, roomier)
       '@media (min-width:900px){.icu-ws-bar{justify-content:center;gap:8px}.icu-ws-bar .icu-tab{flex:0 0 auto;min-width:120px;flex-direction:row;gap:8px}.icu-ws-bar .icu-tab .tl{font-size:13px}}' +
       // snapshot FAB
@@ -1350,11 +1355,12 @@
   var WORKSPACES = [
     { id: "overview", label: "Overview", svg: "pulse", members: ["overview", "rounds"] },
     { id: "monitoring", label: "Monitoring", svg: "heart", members: ["hemo", "fluids", "lytes", "abg", "vent", "infusions", "trends"] },
-    { id: "careplan", label: "Care Plan", svg: "rounds", members: ["protocols", "goals"] },
+    { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "protocols", "goals"] },
     { id: "documents", label: "Documents", svg: "copy", members: ["documents"] },
     { id: "more", label: "More", svg: "more", members: ["more"] }
   ];
   var MEMBER = {}; TABS.forEach(function (t) { MEMBER[t.id] = { label: t.label, svg: t.svg, ic: t.ic }; });
+  MEMBER.dx = { label: "Diagnosis", svg: "search", ic: "🩺" };
   function wsOf(m) { for (var i = 0; i < WORKSPACES.length; i++) if (WORKSPACES[i].members.indexOf(m) >= 0) return WORKSPACES[i].id; return "overview"; }
   function wsById(id) { for (var i = 0; i < WORKSPACES.length; i++) if (WORKSPACES[i].id === id) return WORKSPACES[i]; return WORKSPACES[0]; }
   function isMonWs() { return _ws === "overview" || _ws === "monitoring"; }
@@ -1541,6 +1547,18 @@
       }).join("");
       return '<div class="icu-card"><h3>Daily ICU Rounds <span class="icu-phase">' + done + "/" + ROUNDS_ITEMS.length + " done</span></h3>" + body + "</div>" +
         '<button class="icu-btn" data-icu-act="gensummary">' + ico("copy", "📋") + ' Generate Daily ICU Summary</button>';
+    },
+    dx: function () {
+      var p = _raw.patient;
+      var cc = p.complaints ? esc(p.complaints) : '<span style="color:var(--muted)">Not documented — add manually.</span>';
+      var dxTxt = p.diagnosis ? "<b>" + esc(p.diagnosis) + "</b>" : '<span style="color:var(--muted)">Not set</span>';
+      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("edit", "📝") + ' Presenting complaints</div>' +
+        '<p class="icu-dx-cc">' + cc + "</p>" +
+        '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("edit", "✎") + ' Edit complaints &amp; details</button></div>' +
+        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🩺") + ' Working diagnosis</div>' +
+        '<p class="icu-dx-cur">' + dxTxt + "</p>" +
+        '<button class="icu-btn" data-icu-act="dxsearch">' + ico("search", "🔎") + ' Search &amp; select diagnosis</button>' +
+        '<p class="icu-doc-sub" style="margin-top:8px">Searches StewardMD’s clinical knowledge base and sets the working diagnosis — clinician-editable, never auto-applied.</p></div>';
     },
     goals: function () {
       var g = _raw.goals || [];
@@ -1745,7 +1763,7 @@
     patient: { title: "Patient details", domain: "patient", fields: [
       { k: "name", l: "Name / initials", t: "text" }, { k: "age", l: "Age", t: "number" }, { k: "sex", l: "Sex", t: "select", opts: ["", "M", "F", "Other"] },
       { k: "weightKg", l: "Weight (kg)", t: "number" }, { k: "heightCm", l: "Height (cm)", t: "number" }, { k: "bed", l: "Bed", t: "text" },
-      { k: "icuDay", l: "ICU day", t: "number" }, { k: "hospital", l: "Hospital", t: "text" }, { k: "diagnosis", l: "Diagnosis", t: "text", wide: true }, { k: "status", l: "Current status", t: "text", wide: true } ] },
+      { k: "icuDay", l: "ICU day", t: "number" }, { k: "hospital", l: "Hospital", t: "text" }, { k: "complaints", l: "Presenting complaints", t: "textarea", wide: true }, { k: "diagnosis", l: "Working diagnosis", t: "text", wide: true }, { k: "status", l: "Current status", t: "text", wide: true } ] },
     monitor: { title: "Vitals (ICU monitor)", ingest: ingestMonitor, fields: [
       { k: "hr", l: "Heart rate", t: "number" }, { k: "sbp", l: "Systolic BP", t: "number" }, { k: "dbp", l: "Diastolic BP", t: "number" }, { k: "map", l: "MAP (optional)", t: "number" },
       { k: "rr", l: "Resp rate", t: "number" }, { k: "spo2", l: "SpO₂ %", t: "number" }, { k: "temp", l: "Temp °C", t: "number" }, { k: "uop", l: "Urine mL/h", t: "number" },
@@ -1924,6 +1942,35 @@
     var w = null; try { w = window.open("", "_blank"); } catch (e) {}
     if (w && w.document) { w.document.open(); w.document.write(html); w.document.close(); setTimeout(function () { try { w.focus(); w.print(); } catch (e) {} }, 350); }
     else { openSummary(); if (window.toast) toast("Pop-up blocked — use Share to export as PDF"); }
+  }
+  // Search & select diagnosis — reuses the clinical reasoning engine's KB disease search
+  // (window.SMD_REASON.search). Selecting sets the patient's WORKING diagnosis (clinician-
+  // editable, never auto-applied elsewhere). Deterministic; no MaiK/provider call.
+  function openDxSearch() {
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("search", "🔎") + ' Search &amp; select diagnosis</h3>' +
+      '<p class="icu-doc-sub">Searches StewardMD’s clinical knowledge base. Selecting sets this patient’s working diagnosis — you can edit it any time.</p>' +
+      '<input id="icuDxq" type="search" autocomplete="off" placeholder="Type a diagnosis — e.g. sepsis, DKA, pancreatitis…" style="width:100%;box-sizing:border-box;font:600 15px var(--font);padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink)">' +
+      '<div id="icuDxResults" class="icu-dx-results"></div>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:10px">Close</button></div>';
+    modalEl.classList.add("on");
+    var inp = modalEl.querySelector("#icuDxq"), res = modalEl.querySelector("#icuDxResults");
+    function run() {
+      var q = (inp.value || "").trim();
+      if (q.length < 2) { res.innerHTML = '<div class="icu-dx-hint">Type at least 2 letters to search…</div>'; return; }
+      var hits = (window.SMD_REASON && SMD_REASON.search) ? SMD_REASON.search(q, 14) : [];
+      res.innerHTML = hits.length ? hits.map(function (d) {
+        return '<button class="icu-dx-hit" data-icu-act="pickdx:' + encodeURIComponent(d.name) + '"><span class="nm">' + esc(d.name) + "</span>" + (d.sys ? '<span class="sys">' + esc(d.sys) + "</span>" : "") + "</button>";
+      }).join("") : '<div class="icu-dx-hint">No match — you can still type the diagnosis in Patient details.</div>';
+    }
+    if (inp) inp.addEventListener("input", run);
+    setTimeout(function () { try { if (inp) inp.focus(); } catch (e) {} }, 60);
+  }
+  function pickDiagnosis(name) {
+    if (!name) return;
+    STATE.patient.diagnosis = name;
+    closeForm();
+    if (window.toast) toast("Working diagnosis set: " + name);
   }
 
   /* --------------------------------------------------- share & clear findings */
@@ -2164,6 +2211,8 @@
       case "summary": openSummary(); break;
       case "printsummary": printSummary(); break;
       case "discharge": if (window.toast) toast("Discharge Creator is coming in the next update — draft from this patient’s recorded data with clinician review."); break;
+      case "dxsearch": openDxSearch(); break;
+      case "pickdx": pickDiagnosis(decodeURIComponent(arg)); break;
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
       case "roundnote": openRoundNote(arg); break;
