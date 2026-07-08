@@ -32,6 +32,166 @@
    * ====================================================================== */
   var CALCS = [
 
+  /* ===== ICU-flagship additions — verified published formulas (ai_drafted; clinician-verify) ===== */
+  { id:"meld3", cat:"Hepatology", icon:"🩺", title:"MELD 3.0",
+    desc:"90-day mortality in chronic liver disease & transplant priority (2021; replaces MELD-Na).",
+    inputs:[
+      { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1" },
+      { id:"creat", label:"Creatinine", type:"number", unit:"mg/dL", step:"0.1" },
+      { id:"inr", label:"INR", type:"number", step:"0.1" },
+      { id:"na", label:"Sodium", type:"number", unit:"mEq/L", step:"1" },
+      { id:"alb", label:"Albumin", type:"number", unit:"g/dL", step:"0.1" },
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"hd", label:"≥2 haemodialysis / 24 h CVVHD in the past week", type:"check" }
+    ],
+    compute:function(v){
+      var bili=Math.max(1,+v.bili||1), inr=Math.max(1,+v.inr||1);
+      var creat=Math.max(1,+v.creat||1); if(v.hd) creat=3.0; creat=Math.min(creat,3.0);
+      var na=Math.min(137,Math.max(125,+v.na||137)), alb=Math.min(3.5,Math.max(1.5,+v.alb||3.5));
+      var female=v.sex==="f"?1:0;
+      var s = 1.33*female + 4.56*Math.log(bili) + 0.82*(137-na) - 0.24*(137-na)*Math.log(bili)
+            + 9.09*Math.log(inr) + 11.14*Math.log(creat) + 1.85*(3.5-alb) - 1.83*(3.5-alb)*Math.log(creat) + 6;
+      s = Math.round(Math.min(40, Math.max(6, s)));
+      var mort = s<=9?"~1.9%":s<=19?"~6.0%":s<=29?"~19.6%":s<=39?"~52.6%":"~71.3%";
+      return { v:s, u:"points", i:"Approx. 90-day mortality "+mort+". Higher = greater transplant priority (range 6–40)." };
+    }
+  },
+  { id:"egfr_cysc", cat:"Renal", icon:"🩺", title:"eGFR (cystatin C, CKD-EPI)",
+    desc:"Race-free estimated GFR from serum cystatin C (CKD-EPI cystatin C) — useful when creatinine is confounded.",
+    inputs:[
+      { id:"cysc", label:"Cystatin C", type:"number", unit:"mg/L", step:"0.01" },
+      { id:"age", label:"Age", type:"number", unit:"yrs", step:"1" },
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] }
+    ],
+    compute:function(v){
+      var sc=+v.cysc||0, age=+v.age||0;
+      if(sc<=0||age<=0) return { v:"—", u:"", i:"Enter cystatin C and age." };
+      var r=sc/0.8;
+      var e = 133 * Math.pow(Math.min(r,1),-0.499) * Math.pow(Math.max(r,1),-1.328) * Math.pow(0.996,age) * (v.sex==="f"?0.932:1);
+      e = Math.round(e);
+      var stage = band(e,[[14,"G5 (failure)"],[29,"G4 (severe ↓)"],[44,"G3b (moderate–severe ↓)"],[59,"G3a (mild–moderate ↓)"],[89,"G2 (mild ↓)"],[1e9,"G1 (normal/high)"]]);
+      return { v:e, u:"mL/min/1.73m²", i:"CKD stage <b>"+stage+"</b>. Race-free; helpful in low muscle mass / amputees where creatinine misleads." };
+    }
+  },
+  { id:"burch", cat:"Endocrine", icon:"🦋", title:"Burch-Wartofsky (thyroid storm)",
+    desc:"Likelihood of thyroid storm in thyrotoxicosis (point scale).",
+    inputs:[
+      { id:"temp", label:"Temperature", type:"select", opts:[{v:"0",t:"<37.2 °C"},{v:"5",t:"37.2–37.7"},{v:"10",t:"37.8–38.2"},{v:"15",t:"38.3–38.8"},{v:"20",t:"38.9–39.2"},{v:"25",t:"39.3–39.9"},{v:"30",t:"≥40 °C"}] },
+      { id:"cns", label:"CNS effects", type:"select", opts:[{v:"0",t:"Absent"},{v:"10",t:"Mild (agitation)"},{v:"20",t:"Moderate (delirium/psychosis/lethargy)"},{v:"30",t:"Severe (seizure/coma)"}] },
+      { id:"gi", label:"GI–hepatic dysfunction", type:"select", opts:[{v:"0",t:"Absent"},{v:"10",t:"Moderate (diarrhoea/vomiting/abdo pain)"},{v:"20",t:"Severe (unexplained jaundice)"}] },
+      { id:"hr", label:"Tachycardia", type:"select", opts:[{v:"0",t:"<90 bpm"},{v:"5",t:"90–109"},{v:"10",t:"110–119"},{v:"15",t:"120–129"},{v:"20",t:"130–139"},{v:"25",t:"≥140"}] },
+      { id:"chf", label:"Congestive heart failure", type:"select", opts:[{v:"0",t:"Absent"},{v:"5",t:"Mild (pedal oedema)"},{v:"10",t:"Moderate (bibasal crepitations)"},{v:"15",t:"Severe (pulmonary oedema)"}] },
+      { id:"af", label:"Atrial fibrillation", type:"select", opts:[{v:"0",t:"Absent"},{v:"10",t:"Present"}] },
+      { id:"precip", label:"Precipitant history", type:"select", opts:[{v:"0",t:"Absent"},{v:"10",t:"Present"}] }
+    ],
+    compute:function(v){
+      var s=(+v.temp||0)+(+v.cns||0)+(+v.gi||0)+(+v.hr||0)+(+v.chf||0)+(+v.af||0)+(+v.precip||0);
+      var i = s>=45?"<b>≥45 — highly suggestive of thyroid storm</b>":s>=25?"25–44 — impending storm; treat aggressively":"<25 — thyroid storm unlikely";
+      return { v:s, u:"points", i:i+"." };
+    }
+  },
+  { id:"rumack", cat:"Toxicology", icon:"💊", title:"Rumack-Matthew (paracetamol)",
+    desc:"Is the paracetamol (acetaminophen) level above the NAC treatment line? Single acute ingestion, 4–24 h.",
+    inputs:[
+      { id:"t", label:"Time since ingestion", type:"number", unit:"h", step:"0.5" },
+      { id:"lvl", label:"Paracetamol level", type:"number", unit:"µg/mL (=mg/L)", step:"1" }
+    ],
+    compute:function(v){
+      var t=+v.t||0, lvl=+v.lvl||0;
+      if(t<4) return { v:"—", u:"", i:"Levels before 4 h are uninterpretable — repeat at 4 h post-ingestion." };
+      if(t>24) return { v:"—", u:"", i:"Nomogram not validated beyond 24 h — treat with NAC if any detectable level or hepatotoxicity; seek toxicology advice." };
+      var line = 150 * Math.pow(2, -(t-4)/4);   // 150 µg/mL at 4 h, t½≈4 h (UK/US treatment line, 25% below the original 200 line)
+      var treat = lvl >= line;
+      return { v:Math.round(line), u:"µg/mL (line at "+t+" h)", i: treat
+        ? "<b>Level "+lvl+" ≥ line ("+line.toFixed(0)+") — ABOVE the treatment line: start N-acetylcysteine.</b>"
+        : "Level "+lvl+" &lt; line ("+line.toFixed(0)+") — below the treatment line. Treat anyway if staggered/unknown-time ingestion or clinical concern." };
+    }
+  },
+  { id:"scorten", cat:"Dermatology", icon:"🩹", title:"SCORTEN (SJS/TEN)",
+    desc:"Mortality in Stevens-Johnson syndrome / toxic epidermal necrolysis (assess at 24 h & day 3).",
+    inputs:[
+      { id:"age", label:"Age ≥40 years", type:"check" },
+      { id:"malig", label:"Malignancy", type:"check" },
+      { id:"hr", label:"Heart rate ≥120/min", type:"check" },
+      { id:"bsa", label:"Epidermal detachment >10% BSA", type:"check" },
+      { id:"urea", label:"Serum urea >10 mmol/L (BUN >28 mg/dL)", type:"check" },
+      { id:"gluc", label:"Glucose >14 mmol/L (>252 mg/dL)", type:"check" },
+      { id:"bicarb", label:"Bicarbonate <20 mmol/L", type:"check" }
+    ],
+    compute:function(v){
+      var s=["age","malig","hr","bsa","urea","gluc","bicarb"].reduce(function(a,k){return a+(v[k]?1:0);},0);
+      var mort = s<=1?"3.2%":s===2?"12.1%":s===3?"35.3%":s===4?"58.3%":"≥90%";
+      return { v:s, u:"points", i:"Predicted mortality ≈ <b>"+mort+"</b>." };
+    }
+  },
+  { id:"kings", cat:"Hepatology", icon:"🩺", title:"King's College criteria (ALF)",
+    desc:"Liver-transplant criteria in acute liver failure. Choose aetiology, tick the features present.",
+    inputs:[
+      { id:"aeti", label:"Aetiology", type:"select", opts:[{v:"para",t:"Paracetamol"},{v:"non",t:"Non-paracetamol"}] },
+      { id:"ph", label:"[Paracetamol] Arterial pH <7.30 after resuscitation", type:"check" },
+      { id:"inr65", label:"[Paracetamol] INR >6.5 (PT >100 s)", type:"check" },
+      { id:"cr34", label:"[Paracetamol] Creatinine >3.4 mg/dL (>300 µmol/L)", type:"check" },
+      { id:"enceph34", label:"[Paracetamol] Grade III–IV encephalopathy", type:"check" },
+      { id:"ninr", label:"[Non-para] INR >6.5 (PT >100 s)", type:"check" },
+      { id:"nage", label:"[Non-para] Age <10 or >40 years", type:"check" },
+      { id:"naeti", label:"[Non-para] Unfavourable aetiology (non-A–E hepatitis, idiosyncratic drug/halothane)", type:"check" },
+      { id:"njaun", label:"[Non-para] Jaundice→encephalopathy interval >7 days", type:"check" },
+      { id:"ninr35", label:"[Non-para] INR >3.5 (PT >50 s)", type:"check" },
+      { id:"nbili", label:"[Non-para] Bilirubin >17.5 mg/dL (>300 µmol/L)", type:"check" }
+    ],
+    compute:function(v){
+      if(v.aeti==="para"){
+        var met = !!v.ph || (v.inr65 && v.cr34 && v.enceph34);
+        return { v: met?"Met":"Not met", u:"", i: met
+          ? "<b>Meets King's College criteria — refer for emergency liver-transplant assessment.</b>"
+          : "Not met (need pH <7.30, OR all of INR >6.5 + creatinine >3.4 + grade III–IV encephalopathy)." };
+      }
+      var n5=["nage","naeti","njaun","ninr35","nbili"].reduce(function(a,k){return a+(v[k]?1:0);},0);
+      var met2 = !!v.ninr || n5>=3;
+      return { v: met2?"Met":"Not met", u:"", i: met2
+        ? "<b>Meets King's College criteria — refer for emergency liver-transplant assessment.</b> (INR >6.5 alone, or ≥3 of 5 minor criteria — "+n5+"/5.)"
+        : "Not met (need INR >6.5 alone, or ≥3 of 5 minor criteria — currently "+n5+"/5)." };
+    }
+  },
+  { id:"psi", cat:"Respiratory", icon:"🫁", title:"PSI / PORT (pneumonia)",
+    desc:"30-day mortality risk in community-acquired pneumonia; guides admission vs outpatient.",
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"yrs", step:"1" },
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"nh", label:"Nursing-home resident", type:"check" },
+      { id:"neo", label:"Neoplastic disease", type:"check" },
+      { id:"liver", label:"Liver disease", type:"check" },
+      { id:"chf", label:"Congestive heart failure", type:"check" },
+      { id:"cva", label:"Cerebrovascular disease", type:"check" },
+      { id:"renal", label:"Renal disease", type:"check" },
+      { id:"ams", label:"Altered mental status", type:"check" },
+      { id:"rr", label:"Respiratory rate ≥30/min", type:"check" },
+      { id:"sbp", label:"Systolic BP <90 mmHg", type:"check" },
+      { id:"temp", label:"Temp <35 or ≥40 °C", type:"check" },
+      { id:"pulse", label:"Pulse ≥125/min", type:"check" },
+      { id:"ph", label:"Arterial pH <7.35", type:"check" },
+      { id:"bun", label:"BUN ≥30 mg/dL (urea ≥11 mmol/L)", type:"check" },
+      { id:"na", label:"Sodium <130 mmol/L", type:"check" },
+      { id:"gluc", label:"Glucose ≥250 mg/dL (≥14 mmol/L)", type:"check" },
+      { id:"hct", label:"Haematocrit <30%", type:"check" },
+      { id:"hypox", label:"PaO₂ <60 mmHg or SpO₂ <90%", type:"check" },
+      { id:"eff", label:"Pleural effusion", type:"check" }
+    ],
+    compute:function(v){
+      var age=+v.age||0;
+      var s = age - (v.sex==="f"?10:0)
+        + (v.nh?10:0)+(v.neo?30:0)+(v.liver?20:0)+(v.chf?10:0)+(v.cva?10:0)+(v.renal?10:0)
+        + (v.ams?20:0)+(v.rr?20:0)+(v.sbp?20:0)+(v.temp?15:0)+(v.pulse?10:0)
+        + (v.ph?30:0)+(v.bun?20:0)+(v.na?20:0)+(v.gluc?10:0)+(v.hct?10:0)+(v.hypox?10:0)+(v.eff?10:0);
+      var cls, mort, dispo;
+      if(s<=70){ cls="I–II"; mort="0.6–0.9%"; dispo="outpatient"; }
+      else if(s<=90){ cls="III"; mort="0.9–2.8%"; dispo="brief admission / observation"; }
+      else if(s<=130){ cls="IV"; mort="8.2–9.3%"; dispo="admit"; }
+      else { cls="V"; mort="27–31%"; dispo="admit; consider ICU"; }
+      return { v:s, u:"points", i:"Risk class <b>"+cls+"</b> · 30-day mortality ≈ "+mort+" · "+dispo+"." };
+    }
+  },
+
   /* ----------------------------- CARDIOVASCULAR ----------------------------- */
   { id:"chadsvasc", cat:"Cardiovascular", icon:"🫀", title:"CHA₂DS₂-VASc",
     desc:"Stroke risk in non-valvular atrial fibrillation.",
@@ -237,13 +397,14 @@
       { id:"resp", label:"Respiration (PaO₂/FiO₂)", type:"select", opts:[{v:"0",t:"≥400 (0)"},{v:"1",t:"<400 (1)"},{v:"2",t:"<300 (2)"},{v:"3",t:"<200 + support (3)"},{v:"4",t:"<100 + support (4)"}] },
       { id:"coag", label:"Coagulation (platelets ×10³)", type:"select", opts:[{v:"0",t:"≥150 (0)"},{v:"1",t:"<150 (1)"},{v:"2",t:"<100 (2)"},{v:"3",t:"<50 (3)"},{v:"4",t:"<20 (4)"}] },
       { id:"liver", label:"Liver (bilirubin mg/dL)", type:"select", opts:[{v:"0",t:"<1.2 (0)"},{v:"1",t:"1.2–1.9 (1)"},{v:"2",t:"2.0–5.9 (2)"},{v:"3",t:"6.0–11.9 (3)"},{v:"4",t:"≥12 (4)"}] },
-      { id:"cardio", label:"Cardiovascular", type:"select", opts:[{v:"0",t:"MAP ≥70 (0)"},{v:"1",t:"MAP <70 (1)"},{v:"2",t:"Low-dose pressor (2)"},{v:"3",t:"Mod-dose pressor (3)"},{v:"4",t:"High-dose pressor (4)"}] },
+      { id:"cardio", label:"Cardiovascular (pressor µg/kg/min)", type:"select", opts:[{v:"0",t:"MAP ≥70 (0)"},{v:"1",t:"MAP <70, no pressor (1)"},{v:"2",t:"Dopamine ≤5 or any dobutamine (2)"},{v:"3",t:"Dopamine >5, or epi ≤0.1, or norepi ≤0.1 (3)"},{v:"4",t:"Dopamine >15, or epi >0.1, or norepi >0.1 (4)"}] },
       { id:"cns", label:"CNS (GCS)", type:"select", opts:[{v:"0",t:"15 (0)"},{v:"1",t:"13–14 (1)"},{v:"2",t:"10–12 (2)"},{v:"3",t:"6–9 (3)"},{v:"4",t:"<6 (4)"}] },
       { id:"renal", label:"Renal (creatinine mg/dL)", type:"select", opts:[{v:"0",t:"<1.2 (0)"},{v:"1",t:"1.2–1.9 (1)"},{v:"2",t:"2.0–3.4 (2)"},{v:"3",t:"3.5–4.9 (3)"},{v:"4",t:"≥5.0 (4)"}] }
     ],
     compute:function(v){
       var s=Number(v.resp)+Number(v.coag)+Number(v.liver)+Number(v.cardio)+Number(v.cns)+Number(v.renal);
-      return { v:s, u:"/24", i:"Mortality rises with score; an acute rise of ≥2 from baseline defines sepsis (Sepsis-3)." };
+      var mort=band(s,[[6,"predicted hospital mortality <10%"],[9,"~15–20%"],[12,"~40–50%"],[14,"~50–60%"],[24,"~80% or higher"]]);
+      return { v:s, u:"/24", i:mort+". Trend (ΔSOFA over 24–48 h) predicts outcome better than a single reading; an acute rise of ≥2 from baseline with suspected infection defines sepsis (Sepsis-3)." };
     } },
 
   { id:"pf_ratio", cat:"Critical care", icon:"🌬️", title:"PaO₂/FiO₂ ratio",
