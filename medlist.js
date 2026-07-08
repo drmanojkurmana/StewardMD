@@ -184,18 +184,24 @@
     img.src = (typeof fileOrDataUrl === "string") ? fileOrDataUrl : URL.createObjectURL(fileOrDataUrl);
   }
 
-  // Lazy-load pdf.js (CDN) only when a PDF is scanned; render capped pages to
-  // compressed images. The whole PDF is NEVER sent — only rendered page images.
+  // Lazy-load pdf.js only when a PDF is scanned; render capped pages to compressed
+  // images. The whole PDF is NEVER sent — only rendered page images.
+  // BUG #12: local bundled copy first (offline / native), CDN only as fallback.
   var _pdfjs = null;
+  var PDFJS_LOCAL = "/vendor/pdfjs/pdf.min.js", PDFJS_LOCAL_W = "/vendor/pdfjs/pdf.worker.min.js";
+  var PDFJS_CDN = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js", PDFJS_CDN_W = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
   function loadPdfJs() {
     if (_pdfjs) return Promise.resolve(_pdfjs);
-    if (window.pdfjsLib) { _pdfjs = window.pdfjsLib; return Promise.resolve(_pdfjs); }
+    if (window.pdfjsLib) { _pdfjs = window.pdfjsLib; try { _pdfjs.GlobalWorkerOptions.workerSrc = PDFJS_LOCAL_W; } catch (e) {} return Promise.resolve(_pdfjs); }
     return new Promise(function (res, rej) {
-      var s = document.createElement("script");
-      s.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
-      s.onload = function () { try { _pdfjs = window.pdfjsLib; _pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; res(_pdfjs); } catch (e) { rej(e); } };
-      s.onerror = function () { rej(new Error("pdf-load")); };
-      document.head.appendChild(s);
+      function load(src, worker, next) {
+        var s = document.createElement("script");
+        s.src = src;
+        s.onload = function () { try { _pdfjs = window.pdfjsLib; _pdfjs.GlobalWorkerOptions.workerSrc = worker; res(_pdfjs); } catch (e) { if (next) next(); else rej(e); } };
+        s.onerror = function () { if (next) next(); else rej(new Error("pdf-load")); };
+        document.head.appendChild(s);
+      }
+      load(PDFJS_LOCAL, PDFJS_LOCAL_W, function () { load(PDFJS_CDN, PDFJS_CDN_W, null); });
     });
   }
   function renderPdfPageToImage(pdf, pageNum, cb) {
