@@ -766,6 +766,7 @@
       '.icu-tour-chk{display:flex;align-items:center;gap:8px;font:600 13px var(--font);color:var(--ink);margin-top:10px}.icu-tour-chk input{width:18px;height:18px}' +
       '.icu-tour-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}.icu-tour-btns .icu-btn{width:auto;flex:0 0 auto;padding:9px 16px}' +
       '.icu-tour-hl{outline:3px solid var(--primary);outline-offset:3px;border-radius:12px;transition:outline-color .2s}' +
+      '@media (prefers-reduced-motion: reduce){.icu-tour-hl{transition:none}.icu-tip-pop{transition:none}.icu-tour-card{transition:none}}' +
       '.icu-corr-note{font:600 12.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-corr-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}.icu-corr-partial{color:var(--muted);font-weight:600}' +
       // External evidence (Phase 4)
       '.icu-ev-hubs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.icu-ev-hub{font:700 12px var(--font);text-decoration:none;background:var(--panel2);border:1px solid var(--border);color:var(--primary);border-radius:999px;padding:5px 11px}' +
@@ -1896,6 +1897,7 @@
             '<button class="icu-btn" data-icu-act="finddx">' + ico("pulse", "🩺") + ' Find working diagnosis</button>' +
             (_dxShow ? '<div style="margin-top:10px">' + dxDifferentialHTML() + "</div>" : "") +
             '<button class="icu-btn ghost" data-icu-act="corrdeep" style="margin-top:10px"' + (_corrBusy ? " disabled" : "") + ">" + ico("pulse", "✨") + " Deep clinical review</button>" + dBlock +
+            (extEvidenceOn() ? '<button class="icu-btn ghost" data-icu-act="corrext" style="margin-top:8px">' + ico("search", "🔎") + " Find evidence beyond StewardMD</button>" : "") +
             '<p class="icu-doc-sub" style="margin-top:8px">Deep review sends a de-identified context summary for advisory correlation — you confirm what is sent.</p></div>';
         } else {
           guided = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("info", "ⓘ") + ' No clinical context yet</div>' +
@@ -1912,6 +1914,8 @@
         guided +
         '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🩺") + ' Working diagnosis</div>' +
         '<p class="icu-dx-cur">' + dxTxt + "</p>" +
+        // Management considerations are surfaced ONLY once a working diagnosis is selected, and stay advisory.
+        (icuDxFlowOn() && p.diagnosis ? '<div class="icu-corr-note">' + ico("info", "ⓘ") + ' Management considerations for <b>' + esc(p.diagnosis) + '</b> are <b>advisory</b> — verify against local protocol, ICMR/guideline sources and your clinical judgement. Run <b>Deep clinical review</b> above for correlation and guideline-supported considerations.</div>' : "") +
         '<button class="icu-btn" data-icu-act="dxsearch">' + ico("search", "🔎") + ' Search &amp; select diagnosis</button>' +
         '<p class="icu-doc-sub" style="margin-top:8px">Searches StewardMD’s clinical knowledge base and sets the working diagnosis — clinician-editable, never auto-applied.</p></div>';
     },
@@ -2809,8 +2813,8 @@
         ((c.investigations || []).length ? '<div class="icu-corr-sub">Suggested investigations</div>' + corrChips(c.investigations, "muted") : "") + "</div>" : "";
       return '<div class="icu-dx-card"><div class="icu-dx-h"><span class="icu-dx-nm">' + esc(c.name) + red + '</span><span class="icu-dx-lvl ' + x.lvl.toLowerCase() + '">' + x.lvl + "</span></div>" +
         (c.reason && !_dxWhy[c.id] ? '<div class="icu-dx-rsn">' + esc(c.reason) + "</div>" : "") + why +
-        '<div class="icu-dx-acts"><button class="icu-btn" data-icu-act="dxpick:' + encodeURIComponent(c.name) + '">Select as working diagnosis</button>' +
-        '<button class="icu-btn ghost" data-icu-act="dxwhy:' + esc(c.id) + '">' + (_dxWhy[c.id] ? "Hide reasoning" : "View reasoning") + "</button></div></div>";
+        '<div class="icu-dx-acts"><button class="icu-btn" data-icu-act="dxpick:' + encodeURIComponent(c.name) + '" aria-label="Select ' + esc(c.name) + ' as working diagnosis">Select as working diagnosis</button>' +
+        '<button class="icu-btn ghost" data-icu-act="dxwhy:' + esc(c.id) + '" aria-expanded="' + (_dxWhy[c.id] ? "true" : "false") + '" aria-label="' + (_dxWhy[c.id] ? "Hide" : "View") + " reasoning for " + esc(c.name) + '">' + (_dxWhy[c.id] ? "Hide reasoning" : "View reasoning") + "</button></div></div>";
     }).join("");
     return cards + '<div class="icu-img-btns" style="margin-top:8px"><button class="icu-btn ghost" data-icu-act="dxmanual">' + ico("search", "🔎") + ' Add my own</button><button class="icu-btn ghost" data-icu-act="dxskip">Continue without</button></div>' +
       '<p class="icu-doc-sub" style="margin-top:8px">Deterministic pattern support — not a probability or a confirmed diagnosis. You decide.</p>';
@@ -2890,7 +2894,7 @@
     ensureModal();
     var items = deepReviewItems(), usable = deepReviewUsable();
     var list = items.map(function (it) { return '<div class="icu-deep-chk ' + (it.ok ? "on" : "off") + '">' + (it.ok ? "✓ " : "○ ") + esc(it.label) + (it.ok && it.n > 1 ? " (" + it.n + ")" : "") + (it.ok ? "" : " — not available") + "</div>"; }).join("");
-    modalEl.innerHTML = '<div class="icu-sheet" id="icuDeepSheet"><h3>' + ico("pulse", "✨") + " Deep Clinical Review</h3>" +
+    modalEl.innerHTML = '<div class="icu-sheet" id="icuDeepSheet" role="dialog" aria-label="Deep Clinical Review — confirm context"><h3>' + ico("pulse", "✨") + " Deep Clinical Review</h3>" +
       '<p class="icu-doc-sub">' + (usable ? "This sends a <b>de-identified</b> summary of the context below — no name, MRN, or bed. Advisory only; verify against local protocol and your judgement." : "No usable clinical context yet — add at least one finding, lab, imaging report or vital first.") + "</p>" +
       '<div class="icu-deep-list">' + list + "</div>" +
       (usable
@@ -2901,6 +2905,7 @@
           '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button>') +
       "</div>";
     modalEl.classList.add("on");
+    setTimeout(function () { try { var b = modalEl.querySelector('[data-icu-act="deepgo"],[data-icu-act="deepedit"]'); if (b) b.focus(); } catch (e) {} }, 40);
   }
 
   /* ===== First-use guided-diagnosis tour (smd_icu_dxflow) — lightweight spotlight ==============
@@ -2945,6 +2950,7 @@
         (last ? '<button class="icu-btn" data-icu-act="tourdone">Got it</button>' : '<button class="icu-btn" data-icu-act="tournext">Next</button>') +
       "</div></div>";
     _tourEl.classList.add("on");
+    setTimeout(function () { try { var b = _tourEl.querySelector('[data-icu-act="tournext"],[data-icu-act="tourdone"]'); if (b) b.focus(); } catch (e) {} }, 40);   // keyboard/SR lands on the tour
   }
   function closeTour() { clearTourHL(); if (_tourEl) { _tourEl.classList.remove("on"); _tourEl.innerHTML = ""; } }
   function onTourClick(e) {
