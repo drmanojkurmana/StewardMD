@@ -540,13 +540,13 @@
       // appended to <body> (outside #icuRoot), so without this its inputs/buttons
       // would resolve var(--border/--panel2/--ink/--primary) to nothing and render
       // invisible (white-on-white, no borders, no Save button).
-      '#icuRoot,.icu-modal{--bg:#F1F5F9;--panel:#fff;--panel2:#F8FAFC;--border:#E2E8F0;--ink:#0F172A;--muted:#64748B;--primary:#0F766E;--primary2:#115E59;--primary3:#14B8A6;--primary-soft:#CCFBF1;--ok:#15803D;--ok-soft:#DCFCE7;--warn:#92620A;--warn-soft:#FEF3C7;--danger:#B91C1C;--danger-soft:#FEE2E2;' +
+      '#icuRoot,.icu-modal,.icu-tour{--bg:#F1F5F9;--panel:#fff;--panel2:#F8FAFC;--border:#E2E8F0;--ink:#0F172A;--muted:#64748B;--primary:#0F766E;--primary2:#115E59;--primary3:#14B8A6;--primary-soft:#CCFBF1;--ok:#15803D;--ok-soft:#DCFCE7;--warn:#92620A;--warn-soft:#FEF3C7;--danger:#B91C1C;--danger-soft:#FEE2E2;' +
       '--r:16px;--r-sm:12px;--r-pill:999px;--sh:0 1px 2px rgba(15,23,42,.05),0 4px 16px rgba(15,23,42,.07);--ease:.2s cubic-bezier(.2,.7,.2,1);' +
       "--font:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;--mono:'IBM Plex Mono','SF Mono',Consolas,monospace}" +
       '#icuRoot{position:fixed;inset:0;z-index:10000;background:var(--bg);color:var(--ink);font-family:var(--font);display:none;flex-direction:column;overflow:hidden}' +
       '.icu-modal{font-family:var(--font)}' +
       '#icuRoot.on{display:flex}' +
-      'body.dark #icuRoot,body.v3-dark #icuRoot,body.dark .icu-modal,body.v3-dark .icu-modal{--bg:#0B1220;--panel:#111B2E;--panel2:#0F1A2B;--border:#1E2B43;--ink:#E7EDF5;--muted:#8597AD;--primary:#2DD4BF;--primary2:#14B8A6;--primary3:#5EEAD4;--primary-soft:#0C2E2A;--ok:#4ADE80;--ok-soft:#06240F;--warn:#F0C060;--warn-soft:#241B00;--danger:#F87171;--danger-soft:#2A0E12;--sh:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35)}' +
+      'body.dark #icuRoot,body.v3-dark #icuRoot,body.dark .icu-modal,body.v3-dark .icu-modal,body.dark .icu-tour,body.v3-dark .icu-tour{--bg:#0B1220;--panel:#111B2E;--panel2:#0F1A2B;--border:#1E2B43;--ink:#E7EDF5;--muted:#8597AD;--primary:#2DD4BF;--primary2:#14B8A6;--primary3:#5EEAD4;--primary-soft:#0C2E2A;--ok:#4ADE80;--ok-soft:#06240F;--warn:#F0C060;--warn-soft:#241B00;--danger:#F87171;--danger-soft:#2A0E12;--sh:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35)}' +
       '#icuRoot *{box-sizing:border-box}' +
       '#icuRoot button{font-family:inherit;-webkit-tap-highlight-color:transparent}' +
       // header / patient card (sticky)
@@ -750,7 +750,8 @@
       '.icu-corr-deep{margin-top:10px;border-top:1px solid var(--border);padding-top:10px}' +
       // Guided working-diagnosis cards (smd_icu_dxflow)
       '.icu-dx-card{border:1px solid var(--border);border-radius:12px;background:var(--panel2);padding:11px 13px;margin:8px 0}' +
-      '.icu-dx-h{display:flex;align-items:center;justify-content:space-between;gap:8px}.icu-dx-nm{font:800 14.5px var(--font);color:var(--ink)}' +
+      '.icu-dx-h{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;text-align:left;background:none;border:none;padding:0;cursor:pointer;color:inherit}.icu-dx-nm{font:800 14.5px var(--font);color:var(--ink);flex:1;min-width:0}' +
+      '.icu-dx-chev{flex:0 0 auto;color:var(--muted);font-size:13px}.icu-clamp1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.icu-dx-sup{font:600 11px var(--font);color:var(--muted);margin-top:2px}' +
       '.icu-dx-lvl{flex:0 0 auto;font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.03em;border-radius:999px;padding:3px 9px;background:var(--panel);color:var(--muted);border:1px solid var(--border)}' +
       '.icu-dx-lvl.strong{background:var(--ok-soft);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 35%,var(--border))}.icu-dx-lvl.moderate{background:var(--primary-soft);color:var(--primary)}.icu-dx-lvl.possible{background:var(--panel);color:var(--muted)}' +
       '.icu-dx-red{font:800 10.5px var(--font);color:var(--danger);background:var(--danger-soft);border-radius:6px;padding:2px 6px;margin-left:6px}' +
@@ -759,12 +760,12 @@
       '.icu-deep-list{margin:10px 0 14px;display:flex;flex-direction:column;gap:5px}' +
       '.icu-deep-chk{font:600 13px var(--font);padding:2px 0}.icu-deep-chk.on{color:var(--ink)}.icu-deep-chk.off{color:var(--muted)}' +
       // First-use guided-diagnosis tour (coach-mark above the bottom nav; safe-area aware)
-      '.icu-tour{position:fixed;left:0;right:0;bottom:calc(80px + env(safe-area-inset-bottom));z-index:10050;display:none;justify-content:center;padding:0 14px;pointer-events:none}.icu-tour.on{display:flex}' +
+      '.icu-tour{position:fixed;left:0;right:0;bottom:calc(92px + env(safe-area-inset-bottom));z-index:10050;display:none;justify-content:center;padding:0 14px;pointer-events:none}.icu-tour.on{display:flex}' +
       '.icu-tour-card{pointer-events:auto;width:min(440px,100%);background:var(--panel);border:1.5px solid var(--primary);border-radius:16px;box-shadow:0 16px 44px rgba(0,0,0,.4);padding:14px 16px}' +
       '.icu-tour-step{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--primary)}' +
       '.icu-tour-t{font:800 16px var(--font);color:var(--ink);margin:3px 0 5px}.icu-tour-x{font:600 13.5px/1.5 var(--font);color:var(--muted)}' +
       '.icu-tour-chk{display:flex;align-items:center;gap:8px;font:600 13px var(--font);color:var(--ink);margin-top:10px}.icu-tour-chk input{width:18px;height:18px}' +
-      '.icu-tour-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}.icu-tour-btns .icu-btn{width:auto;flex:0 0 auto;padding:9px 16px}' +
+      '.icu-tour-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;margin-top:12px}.icu-tour-btns .icu-btn{width:auto;flex:1 1 auto;min-width:0;padding:9px 14px;margin-top:0}' +
       '.icu-tour-hl{outline:3px solid var(--primary);outline-offset:3px;border-radius:12px;transition:outline-color .2s}' +
       '@media (prefers-reduced-motion: reduce){.icu-tour-hl{transition:none}.icu-tip-pop{transition:none}.icu-tour-card{transition:none}}' +
       '.icu-corr-note{font:600 12.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-corr-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}.icu-corr-partial{color:var(--muted);font-weight:600}' +
@@ -1876,7 +1877,7 @@
     dx: function () {
       var p = _raw.patient;
       var pid = p._id || p.name || "cur";
-      if (_dxPt !== pid) { _dxPt = pid; _dxShow = false; _dxWhy = {}; }   // reset guided-dx UI on patient switch
+      if (_dxPt !== pid) { _dxPt = pid; _dxShow = false; _dxWhy = {}; _dxAdvanced = false; _corrCache = {}; _corrErr = null; _corrBusy = false; }   // reset guided-dx + correlation state on patient switch (no cross-patient leak)
       if (icuDxFlowOn()) maybeAutoTour();   // first-use guided-diagnosis tour (per account; once)
       var cc = p.complaints ? esc(p.complaints) : '<span style="color:var(--muted)">Not documented — add manually.</span>';
       var dxTxt = p.diagnosis ? "<b>" + esc(p.diagnosis) + "</b>" : '<span style="color:var(--muted)">Not set</span>';
@@ -1890,14 +1891,23 @@
         if (hasCtx) {
           var summ = '<div class="icu-corr-meta">' + [present + " finding" + (present === 1 ? "" : "s"), labN + " lab" + (labN === 1 ? "" : "s"), imgN + " imaging", (vitN ? "vitals ✓" : "no vitals")].join(" · ") + "</div>";
           // Deep Review shares the correlation cache/state; a cached result renders here too.
-          var dKey = pid + ":" + correlationHash(buildClinicalContext()), dDeep = _corrCache[dKey];
+          var dKey = (p._id || "cur") + ":" + correlationHash(buildClinicalContext()), dDeep = _corrCache[dKey];   // MUST match runCorrelationDeep's key
           var dBlock = _corrBusy ? '<div class="icu-assist-msg" style="margin-top:10px">Running deep clinical review…</div>' : (dDeep ? '<div class="icu-corr-deep">' + corrDeepHTML(dDeep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
+          // Sequential gating (BUG C): Deep Review disabled until a working dx is identified/chosen;
+          // external evidence hidden until a dx is selected OR deep review completed. Advanced = escape.
+          var hasDx = !!(p.workingDx || p.diagnosis);
+          var deepDone = !!dDeep;
+          var canDeep = hasDx || _dxAdvanced;
+          var showExt = hasDx || deepDone || _dxAdvanced;
           guided = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "✅") + ' Clinical context ready</div>' +
             '<p class="icu-doc-sub" style="margin:0 0 4px">Use your findings with available labs, imaging and vitals to identify a working diagnosis.</p>' + summ +
             '<button class="icu-btn" data-icu-act="finddx">' + ico("pulse", "🩺") + ' Find working diagnosis</button>' +
             (_dxShow ? '<div style="margin-top:10px">' + dxDifferentialHTML() + "</div>" : "") +
-            '<button class="icu-btn ghost" data-icu-act="corrdeep" style="margin-top:10px"' + (_corrBusy ? " disabled" : "") + ">" + ico("pulse", "✨") + " Deep clinical review</button>" + dBlock +
-            (extEvidenceOn() ? '<button class="icu-btn ghost" data-icu-act="corrext" style="margin-top:8px">' + ico("search", "🔎") + " Find evidence beyond StewardMD</button>" : "") +
+            '<button class="icu-btn ghost" data-icu-act="corrdeep" style="margin-top:10px"' + ((_corrBusy || !canDeep) ? " disabled" : "") + ' title="' + (!canDeep ? "First identify or choose a working diagnosis" : "") + '">' + ico("pulse", "✨") + " Deep clinical review</button>" +
+            (!canDeep ? '<p class="icu-doc-sub" style="margin:6px 0 0">First identify or choose a working diagnosis.</p>' : "") + dBlock +
+            (extEvidenceOn() && showExt ? '<button class="icu-btn ghost" data-icu-act="corrext" style="margin-top:8px">' + ico("search", "🔎") + " Find evidence beyond StewardMD</button>" : "") +
+            (deepDone ? '<p class="icu-doc-sub" style="margin-top:6px">Need guideline support? Use “Find evidence beyond StewardMD”.</p>' : "") +
+            (!hasDx && !_dxAdvanced ? '<button class="icu-btn ghost" data-icu-act="dxadv" style="margin-top:8px">' + ico("info", "⏩") + " Advanced — skip ahead</button>" : "") +
             '<p class="icu-doc-sub" style="margin-top:8px">Deep review sends a de-identified context summary for advisory correlation — you confirm what is sent.</p></div>';
         } else {
           guided = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("info", "ⓘ") + ' No clinical context yet</div>' +
@@ -2188,7 +2198,7 @@
     var inputs = modalEl.querySelectorAll("[data-k]"), obj = {};
     inputs.forEach(function (el) { var k = el.getAttribute("data-k"), val = el.value; obj[k] = (el.type === "number") ? num(val) : val; });
     if (F.custom === "goals") { STATE.goals = (obj.goals || "").split("\n").map(function (s) { return s.trim(); }).filter(Boolean); }
-    else if (F.custom === "infusion") { if (obj.drug) STATE.infusions.push({ drug: obj.drug, dose: num(obj.dose), unit: obj.unit, rateMlHr: num(obj.rateMlHr), indication: obj.indication }); }
+    else if (F.custom === "infusion") { if (obj.drug) ingestInfusion({ drug: obj.drug, dose: num(obj.dose), unit: obj.unit, rateMlHr: num(obj.rateMlHr), indication: obj.indication, source: "manual" }); }
     else if (domain === "patient") { ingestPatient(obj); }
     else if (F.ingest) { F.ingest(obj); }
     // tag manually-entered fields as a Manual source so Ward Sync never silently
@@ -2773,7 +2783,7 @@
    * Feeds the clinician's structured finding chips (present/possible; negation excluded) + the
    * labs the engine can score into SMD_REASON.assess() (PURE) for a working-diagnosis differential.
    * Advisory only — never sets a diagnosis unless the clinician taps Select; never alters ranking. */
-  var _dxShow = false, _dxWhy = {}, _dxPt = null;
+  var _dxShow = false, _dxWhy = {}, _dxPt = null, _dxAdvanced = false;
   function dxFindingKeys() {
     var f = {};
     (_raw.findings || []).forEach(function (c) {
@@ -2804,17 +2814,20 @@
     if (!r.keys.length) return '<div class="icu-corr-note">' + ico("info", "ⓘ") + ' Add symptoms/signs the engine can reason on (or run Deep clinical review) to generate a working differential.</div>';
     if (!r.sufficient) return '<div class="icu-corr-note">' + ico("info", "ⓘ") + ' Insufficient context for a confident differential — add focused findings' + (r.suggestions.length ? " (e.g. " + r.suggestions.slice(0, 3).map(function (k) { return esc(dxLabel(k)); }).join(", ") + ")" : "") + ', or run Deep clinical review.</div>';
     var cards = r.cards.map(function (x) {
-      var c = x.c, red = (c.redFlags && c.redFlags.length) ? ' <span class="icu-dx-red">⚠ red flag</span>' : "";
-      var why = _dxWhy[c.id] ? '<div class="icu-dx-why">' +
+      var c = x.c, open = !!_dxWhy[c.id], red = (c.redFlags && c.redFlags.length) ? ' <span class="icu-dx-red">⚠ red flag</span>' : "", supN = (c.supporting || []).length;
+      // Expanded detail — shown only when the card is tapped open (collapsed by default: BUG B).
+      var why = open ? '<div class="icu-dx-why">' +
         (c.reason ? '<div class="icu-corr-note" style="margin:6px 0">' + esc(c.reason) + "</div>" : "") +
         ((c.supporting || []).length ? '<div class="icu-corr-sub">Supporting</div>' + corrChips(c.supporting, "ok") : "") +
         ((c.contradictory || []).length ? '<div class="icu-corr-sub">Against</div>' + corrChips(c.contradictory, "muted") : "") +
         ((c.missing || []).length ? '<div class="icu-corr-sub">Missing / to check</div>' + corrChips(c.missing, "muted") : "") +
         ((c.investigations || []).length ? '<div class="icu-corr-sub">Suggested investigations</div>' + corrChips(c.investigations, "muted") : "") + "</div>" : "";
-      return '<div class="icu-dx-card"><div class="icu-dx-h"><span class="icu-dx-nm">' + esc(c.name) + red + '</span><span class="icu-dx-lvl ' + x.lvl.toLowerCase() + '">' + x.lvl + "</span></div>" +
-        (c.reason && !_dxWhy[c.id] ? '<div class="icu-dx-rsn">' + esc(c.reason) + "</div>" : "") + why +
-        '<div class="icu-dx-acts"><button class="icu-btn" data-icu-act="dxpick:' + encodeURIComponent(c.name) + '" aria-label="Select ' + esc(c.name) + ' as working diagnosis">Select as working diagnosis</button>' +
-        '<button class="icu-btn ghost" data-icu-act="dxwhy:' + esc(c.id) + '" aria-expanded="' + (_dxWhy[c.id] ? "true" : "false") + '" aria-label="' + (_dxWhy[c.id] ? "Hide" : "View") + " reasoning for " + esc(c.name) + '">' + (_dxWhy[c.id] ? "Hide reasoning" : "View reasoning") + "</button></div></div>";
+      return '<div class="icu-dx-card">' +
+        '<button class="icu-dx-h" data-icu-act="dxwhy:' + esc(c.id) + '" aria-expanded="' + (open ? "true" : "false") + '" aria-label="' + (open ? "Hide" : "View") + " reasoning for " + esc(c.name) + '"><span class="icu-dx-nm">' + esc(c.name) + red + '</span><span class="icu-dx-lvl ' + x.lvl.toLowerCase() + '">' + x.lvl + '</span><span class="icu-dx-chev">' + (open ? "▾" : "▸") + "</span></button>" +
+        (!open && c.reason ? '<div class="icu-dx-rsn icu-clamp1">' + esc(c.reason) + "</div>" : "") +
+        (!open && supN ? '<div class="icu-dx-sup">' + supN + " supporting</div>" : "") +
+        why +
+        '<div class="icu-dx-acts"><button class="icu-btn" data-icu-act="dxpick:' + encodeURIComponent(c.name) + '" aria-label="Select ' + esc(c.name) + ' as working diagnosis">Select as working diagnosis</button></div></div>';
     }).join("");
     return cards + '<div class="icu-img-btns" style="margin-top:8px"><button class="icu-btn ghost" data-icu-act="dxmanual">' + ico("search", "🔎") + ' Add my own</button><button class="icu-btn ghost" data-icu-act="dxskip">Continue without</button></div>' +
       '<p class="icu-doc-sub" style="margin-top:8px">Deterministic pattern support — not a probability or a confirmed diagnosis. You decide.</p>';
@@ -2870,11 +2883,26 @@
     if (_corrCache[key]) { paint(); return; }   // cache hit (SUCCESS only) — reuse, no AI call (token control)
     _corrErr = null; _corrBusy = true; paint();
     var pkt = buildCorrelationPacket(ev);
-    (window.SMD_AI && SMD_AI.correlate ? SMD_AI.correlate(pkt) : Promise.resolve({ error: "ai-off" })).then(function (res) {
-      // Cache ONLY a successful correlation — transient errors (quota/server/parse) stay retryable.
-      if (res && res.correlation && !res.error) _corrCache[key] = res; else _corrErr = res || { error: "server" };
-      _corrBusy = false; paint();
-    }).catch(function () { _corrErr = { error: "server" }; _corrBusy = false; paint(); });
+    // Safe developer diagnostics only — NO PHI (counts + status/error category, never patient data).
+    try { console.log("[ICU deep-review] started · context", { findings: (ev.findings || []).length, labs: ev.labs.length, imaging: ev.img.length, vitals: (ev.vitals || []).length, workingDx: !!_raw.patient.diagnosis }); } catch (e) {}
+    // Robust lifecycle: a JS-level deadline with a single-settle guard so the spinner can NEVER
+    // outlive the timeout — even if the native transport stalls and the promise never settles.
+    var settled = false;
+    var TO_MS = (typeof window !== "undefined" && +window.SMD_ICU_DEEP_TIMEOUT_MS) || 40000;   // test seam; prod default 40s
+    var to = setTimeout(function () {
+      if (settled) return; settled = true;
+      try { console.warn("[ICU deep-review] timeout — surfacing retry"); } catch (e) {}
+      _corrErr = { error: "timeout" }; _corrBusy = false; paint();
+    }, TO_MS);   // > native 30s so a real backend error surfaces first; backstops the never-settles case
+    var done = function (fn) { return function (x) { if (settled) return; settled = true; clearTimeout(to); fn(x); }; };
+    (window.SMD_AI && SMD_AI.correlate ? SMD_AI.correlate(pkt) : Promise.resolve({ error: "ai-off" }))
+      .then(done(function (res) {
+        // Cache ONLY a successful correlation — transient errors (quota/server/parse) stay retryable.
+        if (res && res.correlation && !res.error) _corrCache[key] = res; else _corrErr = res || { error: "server" };
+        try { console.log("[ICU deep-review] response · " + (res && res.error ? "error:" + res.error : res && res.correlation ? "ok" : "empty")); } catch (e) {}
+        _corrBusy = false; paint();
+      }))
+      .catch(done(function (e) { try { console.warn("[ICU deep-review] rejected:" + String(e && e.message || e)); } catch (x) {} _corrErr = { error: "server" }; _corrBusy = false; paint(); }));
   }
   // Explicit opt-in confirm before ANY AI call (A5): shows exactly what de-identified context will be
   // sent, lets the clinician edit it first, and blocks the call entirely when there's nothing usable.
@@ -2917,7 +2945,7 @@
     { sel: '[data-icu-act="findpick"]', title: "Structured findings", text: "Add symptoms, signs and examination findings in a structured form." },
     { sel: '[data-icu-act="finddx"]', title: "Find working diagnosis", text: "StewardMD combines your findings with available labs, imaging, vitals and trends to suggest working diagnoses." },
     { sel: ".icu-dx-card", title: "You stay in control", text: "Select a suggested diagnosis, add your own, or continue without one — nothing is auto-applied." },
-    { sel: '[data-icu-act="corrdeep"]', title: "Deep Clinical Review", text: "Deep review uses only the context you confirm — advisory correlation, missing data and guideline-supported considerations." }
+    { sel: '[data-icu-act="corrdeep"]', title: "Deep Clinical Review", text: "Once you’ve chosen a working diagnosis, Deep review uses the context you confirm for advisory correlation, missing data and guideline-supported considerations. External evidence appears after this." }
   ];
   var _tourEl = null, _tourStep = 0, _tourSessionDone = false;
   function tourKey() { try { return "smd_icu_dxtour:" + ownerNow(); } catch (e) { return "smd_icu_dxtour:anon"; } }
@@ -2947,7 +2975,7 @@
       '<div class="icu-tour-btns">' +
         (_tourStep > 0 ? '<button class="icu-btn ghost" data-icu-act="tourback">Back</button>' : "") +
         '<button class="icu-btn ghost" data-icu-act="tourskip">Skip</button>' +
-        (last ? '<button class="icu-btn" data-icu-act="tourdone">Got it</button>' : '<button class="icu-btn" data-icu-act="tournext">Next</button>') +
+        (last ? '<button class="icu-btn" data-icu-act="tourdone">Done</button>' : '<button class="icu-btn" data-icu-act="tournext">Next</button>') +
       "</div></div>";
     _tourEl.classList.add("on");
     setTimeout(function () { try { var b = _tourEl.querySelector('[data-icu-act="tournext"],[data-icu-act="tourdone"]'); if (b) b.focus(); } catch (e) {} }, 40);   // keyboard/SR lands on the tour
@@ -2968,28 +2996,48 @@
   function extEvidenceOn() { try { var q = (location.search.match(/[?&]extevidence=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on"; var v = localStorage.getItem("smd_ext_evidence"); return v === null ? true : v === "1"; } catch (e) { return true; } }
   // Curated allowlist of trusted guideline organisations (landing pages — always valid; PubMed gets
   // the topic). NOT open web search.
+  // Curated allowlist — every entry carries {q} so the chip runs an ACTUAL topic search on that
+  // trusted org's own site (not the open web). Searchable orgs first; ICMR (no clean site search) last.
   var EVIDENCE_HUBS = [
-    { org: "WHO guidelines", url: "https://www.who.int/publications/who-guidelines" },
-    { org: "ICMR", url: "https://www.icmr.gov.in/" },
-    { org: "CDC", url: "https://www.cdc.gov/" },
-    { org: "NICE guidance", url: "https://www.nice.org.uk/guidance" },
-    { org: "PubMed (topic search)", url: "https://pubmed.ncbi.nlm.nih.gov/?term={q}" }
+    { org: "PubMed", url: "https://pubmed.ncbi.nlm.nih.gov/?term={q}" },
+    { org: "NICE guidance", url: "https://www.nice.org.uk/search?q={q}" },
+    { org: "CDC", url: "https://search.cdc.gov/search/?query={q}" },
+    { org: "WHO", url: "https://www.who.int/home/search?query={q}" },
+    { org: "ICMR", url: "https://www.icmr.gov.in/" }
   ];
+  // Collapse StewardMD's internal imaging vocabulary → literature/MeSH-style roots so a citation
+  // search actually hits (its own controlled labels return zero PubMed results).
+  var CONCEPT_LIT = {
+    "peripancreatic inflammatory change": "pancreatitis", "pancreatic inflammation": "pancreatitis",
+    "biliary duct involvement": "biliary obstruction", "cholangitis features": "cholangitis",
+    "pulmonary consolidation": "pneumonia", "ground-glass opacity": "ground glass opacity",
+    "urinary tract obstruction": "urinary tract obstruction", "haemorrhage": "haemorrhage",
+    "mass effect": "mass effect", "infarct": "infarction", "organomegaly": "organomegaly",
+    "lymphadenopathy": "lymphadenopathy", "collection / abscess": "abscess"
+  };
   function correlationTopic(ev) {
-    // Built from CONTROLLED-VOCABULARY concepts (imaging + lab abnormalities) plus — for the
-    // free-text diagnosis, which can hide a name/MRN — ONLY the canonical KB disease name when it
-    // matches the knowledge base (unrecognised free text is dropped). Standalone digit runs are
-    // stripped as a backstop (a guideline search needs no numbers). PHI must not reach NCBI.
+    // A SHORT, literature-phrased topic: canonical diagnosis first (high-yield), then at most a couple
+    // of imaging concepts collapsed to literature roots + deduped. Never AND a long internal-vocab
+    // string. Only the canonical KB disease name is used for the free-text diagnosis (drops any hidden
+    // name/MRN); digits stripped as a PHI backstop. PHI must not reach any external service.
     var p = _raw.patient || {}, parts = [];
-    if (p.diagnosis) { try { var h = ((window.SMD_REASON && SMD_REASON.search) ? (SMD_REASON.search(p.diagnosis, 1) || []) : [])[0]; if (h && h.name) parts.push(h.name); } catch (e) {} }
-    (ev.img || []).slice(0, 3).forEach(function (c) { parts.push(c); });
-    if (parts.length < 2) (ev.labs || []).slice(0, 2).forEach(function (l) { parts.push(l.replace(/\s*\(.*\)$/, "")); });
-    return parts.join(" ").replace(/\b\d+\b/g, " ").replace(/[^\w\s,\-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 160);
+    var push = function (t) {
+      t = String(t == null ? "" : t).trim(); if (!t) return; var k = t.toLowerCase();
+      // substring-aware dedupe: skip if an existing part already contains this term or vice-versa
+      // (so "Chronic Pancreatitis" + collapsed "pancreatitis" doesn't repeat the word).
+      for (var i = 0; i < parts.length; i++) { var e = parts[i].toLowerCase(); if (e === k || e.indexOf(k) >= 0 || k.indexOf(e) >= 0) return; }
+      parts.push(t);
+    };
+    if (p.diagnosis) { try { var h = ((window.SMD_REASON && SMD_REASON.search) ? (SMD_REASON.search(p.diagnosis, 1) || []) : [])[0]; if (h && h.name) push(h.name); } catch (e) {} }
+    (ev.img || []).forEach(function (c) { if (parts.length < 3) push(CONCEPT_LIT[c] || c); });
+    if (parts.length < 2) (ev.labs || []).slice(0, 1).forEach(function (l) { push(l.replace(/\s*\(.*\)$/, "")); });
+    return parts.join(" ").replace(/\b\d+\b/g, " ").replace(/[^\w\s,\-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 80);
   }
   function evResultsHTML(topic) {
     if (_evBusy) return '<div class="icu-assist-msg">Searching trusted references…</div>';
     var res = _evCache[topic];
-    var hubs = '<div class="icu-corr-sub">Trusted guideline sources</div><div class="icu-ev-hubs">' + EVIDENCE_HUBS.map(function (h) {
+    var terms = topic ? '<div class="icu-corr-sub">Search terms</div><div class="icu-corr-chips"><span class="icu-corr-chip">' + esc(topic) + "</span></div>" : "";
+    var hubs = '<div class="icu-corr-sub">Trusted guideline sources — tap to search this topic</div><div class="icu-ev-hubs">' + EVIDENCE_HUBS.map(function (h) {
       var u = h.url.indexOf("{q}") >= 0 ? h.url.replace("{q}", encodeURIComponent(topic)) : h.url;
       return '<a class="icu-ev-hub" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(h.org) + "</a>";
     }).join("") + "</div>";
@@ -2998,8 +3046,8 @@
     else if (res && res.results && res.results.length) cites = '<div class="icu-corr-sub">Peer-reviewed guidelines &amp; reviews (' + esc(res.source || "PubMed") + ')</div>' + res.results.map(function (r) {
       return '<a class="icu-ev-cite" href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer"><div class="t">' + esc(r.title) + '</div><div class="m">' + esc([r.journal, r.year, r.pubtype].filter(Boolean).join(" · ")) + "</div></a>";
     }).join("");
-    else if (res) cites = '<div class="icu-assist-msg" style="color:var(--muted)">No matching guidelines/reviews found — browse the trusted sources above.</div>';
-    return hubs + cites + '<div class="icu-assist-src">External references — <b>not StewardMD-verified</b>. Confirm against the source and local protocol before acting.</div>';
+    else if (res) cites = '<div class="icu-assist-msg" style="color:var(--muted)">StewardMD’s built-in citation lookup returned nothing for this exact query — this does <b>not</b> mean no evidence exists. Tap a trusted source above to search this topic.</div>';
+    return terms + hubs + cites + '<div class="icu-assist-src">External references — <b>not StewardMD-verified</b>. Confirm against the source and local protocol before acting.</div>';
   }
   function openEvidenceLookup() {
     if (!extEvidenceOn()) { if (window.toast) toast("External references are turned off in Settings."); return; }
@@ -3034,7 +3082,13 @@
   }
   function corrChips(arr, cls) { return (arr && arr.length) ? '<div class="icu-corr-chips">' + arr.map(function (x) { return '<span class="icu-corr-chip ' + (cls || "") + '">' + esc(x) + "</span>"; }).join("") + "</div>" : ""; }
   function corrDeepHTML(res) {
-    if (!res || res.error) return '<div class="icu-assist-msg">' + esc(res && res.error === "ai-off" ? "Deep review is turned off (cloud text disabled in Settings)." : res && res.error === "quota" ? "AI usage limit reached — try again later." : "Couldn’t run the deep review right now.") + "</div>";
+    if (!res || res.error) {
+      var msg = res && res.error === "ai-off" ? "Deep review is turned off (cloud text disabled in Settings)."
+        : res && res.error === "quota" ? "AI usage limit reached — try again later. Your findings remain saved."
+        : res && res.error === "timeout" ? "Deep review timed out. Your findings remain saved — tap Deep clinical review to retry, or review/edit the context."
+        : "Deep review could not be completed. Your findings remain saved. Retry, or review/edit the context.";
+      return '<div class="icu-assist-msg">' + ico("warn", "⚠️") + " " + esc(msg) + "</div>";
+    }
     var s = res.correlation || res;
     return '<div class="icu-assist-draft">Draft — clinician review required. Advisory only; not a diagnosis.</div>' +
       (s.clinicalCorrelation ? '<div class="icu-assist-summary">' + esc(s.clinicalCorrelation) + "</div>" : "") +
@@ -3343,6 +3397,7 @@
       case "dxwhy": { var _dk = arg; _dxWhy[_dk] = !_dxWhy[_dk]; paint(); break; }
       case "dxmanual": openDxSearch(); break;
       case "dxskip": _dxShow = false; paint(); break;
+      case "dxadv": _dxAdvanced = true; paint(); break;
       case "pickdx": pickDiagnosis(decodeURIComponent(arg)); break;
       case "imgfetch": imagingFetch(); break;
       case "imgadd": openImagingForm(null); break;
@@ -3364,7 +3419,9 @@
       case "roundnote": openRoundNote(arg); break;
       case "saveroundnote": saveRoundNote(arg); break;
       case "proto": _openProto[arg] = !_openProto[arg]; paint(); break;
-      case "drug": launch(function () { window.INF && (INF.openDrug ? INF.openDrug(arg) : INF.open()); }, "infOverlay"); break;
+      case "drug": launch(function () { if (!window.INF) return; (INF.openDrug ? INF.openDrug(arg) : INF.open()); infWeightBridge(); installInfBridge(); }, "infOverlay"); break;
+      case "infdupupd": if (_infDup) { ingestInfusion(Object.assign({}, _infDup.rec, { replaceIndex: _infDup.idx })); if (window.toast) toast(_infDup.rec.drug + " updated."); _infDup = null; } closeForm(); paint(); break;
+      case "infdupsep": if (_infDup) { ingestInfusion(_infDup.rec); if (window.toast) toast(_infDup.rec.drug + " added as a separate line."); _infDup = null; } closeForm(); paint(); break;
       case "gensummary": openSummary(); break;
       case "copysummary": copySummary(); break;
       case "edit": openForm(arg); break;
@@ -3402,8 +3459,8 @@
           var labs = {}; ["na", "k", "cl", "hco3", "ca", "mg", "po4", "glu", "creat", "alb", "egfr", "urea"].forEach(function (k) { if (L[k] != null && L[k] !== "") labs[k] = L[k]; });
           ELYTE.open((Object.keys(labs).length || Object.keys(pt).length) ? { labs: labs, pt: pt } : undefined);
         }, "eceOverlay");
-        else if (arg === "inf") launch(function () { window.INF && INF.open(); }, "infOverlay");
-        else if (arg === "protocols") launch(function () { window.INF && (INF.openProtocols ? INF.openProtocols() : INF.open()); }, "infOverlay");
+        else if (arg === "inf") launch(function () { if (!window.INF) return; INF.open(); infWeightBridge(); installInfBridge(); }, "infOverlay");
+        else if (arg === "protocols") launch(function () { if (!window.INF) return; (INF.openProtocols ? INF.openProtocols() : INF.open()); infWeightBridge(); installInfBridge(); }, "infOverlay");
         else if (arg === "interactions") launch(function () { window.MEDDRUGS && window.MEDDRUGS.openInteractions && window.MEDDRUGS.openInteractions(); }, "miOverlay");
         break;
       case "calc": launch(function () { window.MEDCALC && (MEDCALC.open ? MEDCALC.open(arg) : MEDCALC.openList && MEDCALC.openList()); }, "mcOverlay"); break;
@@ -3440,6 +3497,70 @@
       .then(function () { try { localStorage.removeItem(ROSTER_BASE + ":anon"); } catch (e) {} return list.length; });
   }
 
+  /* ===== Infusion bridge (BUG E) + universal weight (BUG F) ===================================
+   * The vasopressor/pump calculator (INF) lives in the frozen minified app.js and writes only to
+   * its own legacy store — never to STATE.infusions. We (a) expose ICU.ingestInfusion, (b) seed the
+   * calculator's weight from the canonical patient weight on open, and (c) wrap INF._dashAddCurrent
+   * so "Add to ICU Dashboard" mirrors the infusion into the ICU workstation. No app.js edit. */
+  function ingestInfusion(o) {
+    if (!o || !o.drug) return false;
+    var rec = { drug: o.drug, dose: (o.dose != null ? o.dose : null), unit: o.unit || "", rateMlHr: (o.rateMlHr != null ? o.rateMlHr : null), concentration: o.concentration || "", indication: o.indication || "", weightKg: (o.weightKg != null ? o.weightKg : null), source: o.source || "manual", startedAt: o.startedAt || nowTs() };
+    var list = STATE.infusions || [], idx = -1;
+    if (o.replaceIndex != null && list[o.replaceIndex]) idx = o.replaceIndex;
+    if (idx >= 0) STATE.infusions[idx] = rec; else STATE.infusions.push(rec);   // Proxy auto-persists + repaints
+    return true;
+  }
+  // Seed the frozen calculator's weight from the canonical patient weight (BUG F). Runs AFTER
+  // INF.openDrug so the calc's own `a.weight||=70` default cannot clobber it.
+  function infWeightBridge() {
+    try {
+      var w = (STATE.patient || {}).weightKg;
+      if (w != null && w !== "" && !isNaN(+w) && window.INF && typeof INF._d === "function") { INF._d("wt", +w); if (window.toast) toast("Using patient weight: " + (+w) + " kg"); }
+    } catch (e) {}
+  }
+  var _infBridged = false, _infDup = null;
+  function installInfBridge() {
+    if (_infBridged || !window.INF || typeof INF._dashAddCurrent !== "function") return;
+    _infBridged = true;
+    var orig = INF._dashAddCurrent;
+    INF._dashAddCurrent = function () {
+      var r; try { r = orig.apply(this, arguments); } catch (e) { r = null; }
+      try {
+        var dash = JSON.parse(localStorage.getItem("smd_icu_dashboard_v1") || "{}"), arr = (dash && dash.infusions) || [], last = arr[arr.length - 1];
+        if (last && last.key) bridgeInfusionFromCalc(last); else if (window.toast) toast("Couldn’t read the calculator result — add the infusion manually.");
+      } catch (e) { if (window.toast) toast("Couldn’t add to ICU dashboard — retry, or add manually."); }
+      return r;
+    };
+  }
+  // Reconstruct a full infusion record from the legacy {key,dose} + INFUSION_DRUGS meta + patient weight.
+  function bridgeInfusionFromCalc(last) {
+    var meta = (window.INFUSION_DRUGS || {})[last.key] || {}, wt = (STATE.patient || {}).weightKg;
+    var dose = last.dose, unit = meta.doseUnit || "", prep = meta.prep || {};
+    var concMcg = (prep.amt && prep.vol) ? (prep.amt * (prep.unit === "mg" ? 1000 : prep.unit === "g" ? 1e6 : 1) / prep.vol) : null;
+    var concStr = (prep.amt && prep.vol) ? (prep.amt + " " + (prep.unit || "mg") + " / " + prep.vol + " mL") : "";
+    var rate = null;   // compute ONLY for the unambiguous weight-based / per-minute microgram cases
+    if (concMcg && dose != null) {
+      if (unit === "mcg/kg/min" && wt != null) rate = +(dose * (+wt) * 60 / concMcg).toFixed(1);
+      else if (unit === "mcg/min") rate = +(dose * 60 / concMcg).toFixed(1);
+    }
+    bridgeInfusion({ drug: String(meta.name || last.key).split(" (")[0], dose: dose, unit: unit, rateMlHr: rate, concentration: concStr, weightKg: (unit.indexOf("/kg/") >= 0 ? (wt != null ? +wt : null) : null), source: "calculator", startedAt: nowTs() });
+  }
+  function bridgeInfusion(rec) {
+    var list = STATE.infusions || [], idx = -1;
+    for (var i = 0; i < list.length; i++) if (String(list[i].drug).toLowerCase() === String(rec.drug).toLowerCase()) { idx = i; break; }
+    if (idx < 0) { ingestInfusion(rec); if (window.toast) toast(rec.drug + " added to ICU dashboard."); paint(); return; }
+    _infDup = { rec: rec, idx: idx }; openInfDupConfirm(rec.drug);   // same drug already on the dashboard → ask (prevents silent dupes)
+  }
+  function openInfDupConfirm(name) {
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-label="Infusion already on dashboard"><h3>' + ico("warn", "💉") + " Already on the dashboard</h3>" +
+      '<p class="icu-doc-sub">' + esc(name) + " is already recorded in ICU Infusions. Update it with the new rate, or add it as a separate line?</p>" +
+      '<button class="icu-btn" data-icu-act="infdupupd">Update existing</button>' +
+      '<button class="icu-btn ghost" data-icu-act="infdupsep" style="margin-top:8px">Add as separate</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+
   /* ------------------------------------------------------------- controller */
   var ICU = {
     open: function () {
@@ -3465,6 +3586,7 @@
     recompute: function () { onChange(); },
     reset: function () { var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; }); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
+    ingestInfusion: ingestInfusion, _bridgeInfusion: bridgeInfusion, _bridgeInfusionFromCalc: bridgeInfusionFromCalc, _installInfBridge: installInfBridge, _infWeightBridge: infWeightBridge,
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
     _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,

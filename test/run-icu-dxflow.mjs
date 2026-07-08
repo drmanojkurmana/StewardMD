@@ -182,16 +182,18 @@ try {
 
   // ===== Slice 3 — Deep Review confirm sheet + no-context guard + Care Plan entry =====
 
-  // 20) Care Plan exposes a Deep Review button that opens the OPT-IN confirm sheet (context checklist + Review/Edit)
+  // 20) Care Plan Deep Review — DISABLED until a working dx, then opens the OPT-IN confirm sheet (BUG C)
   const c20 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"DR",age:60,sex:"M"});
     ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
     ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
-    var btn=root.querySelector('[data-icu-act="corrdeep"]'); var had=!!btn; if(btn) btn.click();
+    var gated=root.querySelector('[data-icu-act="corrdeep"]'); var gatedDisabled=!!(gated&&gated.disabled);
+    ICU._pickWorkingDx("Seizure / epilepsy","deterministic_suggestion"); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    var btn=root.querySelector('[data-icu-act="corrdeep"]'); var enabled=!!(btn&&!btn.disabled); if(btn) btn.click();
     var sheet=document.getElementById('icuDeepSheet');
-    return JSON.stringify({ had:had, sheet:!!sheet, review:!!(sheet&&sheet.querySelector('[data-icu-act="deepgo"]')), edit:!!(sheet&&sheet.querySelector('[data-icu-act="deepedit"]')), chk:(sheet?sheet.querySelectorAll('.icu-deep-chk').length:0) });
+    return JSON.stringify({ gatedDisabled:gatedDisabled, enabled:enabled, sheet:!!sheet, review:!!(sheet&&sheet.querySelector('[data-icu-act="deepgo"]')), edit:!!(sheet&&sheet.querySelector('[data-icu-act="deepedit"]')), chk:(sheet?sheet.querySelectorAll('.icu-deep-chk').length:0) });
   `);
-  ok(c20.had && c20.sheet && c20.review && c20.edit && c20.chk >= 5, `Deep Review opens the opt-in confirm sheet (Review + Edit; ${c20.chk}-item checklist)`);
+  ok(c20.gatedDisabled && c20.enabled && c20.sheet && c20.review && c20.edit && c20.chk >= 5, `Deep Review gated until dx, then opens confirm sheet (disabled-before=${c20.gatedDisabled}; ${c20.chk}-item checklist)`);
 
   // 21) no usable context → AI is NOT offered (no "Review" button); confirm sheet steers to add data
   const c21 = await J(`
@@ -301,13 +303,15 @@ try {
   const mgAfter = await ev(`return /Management considerations for/.test(document.getElementById('icuRoot').textContent||"") && /advisory/i.test(document.getElementById('icuRoot').textContent||"");`);
   ok(mgBefore === false && mgAfter === true, "management considerations shown only after a working dx is selected (advisory wording)");
 
-  // 32) external-evidence hand-off reachable from the Care Plan flow
+  // 32) external-evidence — HIDDEN until a working dx, then reachable from the Care Plan flow (BUG C)
   const c32 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"EV",age:60,sex:"M"}); ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
     ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
-    return JSON.stringify({ ext: !!root.querySelector('[data-icu-act="corrext"]') });
+    var hiddenBefore = !root.querySelector('[data-icu-act="corrext"]');
+    ICU._pickWorkingDx("Seizure / epilepsy","deterministic_suggestion"); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    return JSON.stringify({ hiddenBefore: hiddenBefore, ext: !!root.querySelector('[data-icu-act="corrext"]') });
   `);
-  ok(c32.ext === true, "external-evidence (Find evidence beyond StewardMD) reachable from Care Plan Deep Review");
+  ok(c32.hiddenBefore && c32.ext, "external evidence hidden until a working dx, then reachable in Care Plan");
 
   // 33) accessibility: differential Select carries an aria-label; confirm sheet + tour are dialogs
   const c33 = await J(`
@@ -322,6 +326,118 @@ try {
   `);
   ok(c33.selAria && c33.whyAria && c33.sheetDlg && c33.tourDlg, "a11y: Select/View-reasoning aria-labels + confirm sheet & tour are role=dialog");
 
-  console.log(fails === 0 ? "\nALL GREEN — ICU dx-flow Slice 1–5 passed" : `\n${fails} FAILED`);
+  // ===== Bug-fix acceptance (ICU diagnosis flow + infusion) =====
+
+  // 34) BUG A — Deep Review FINISHES with a stubbed result (never permanent "Running…")
+  const c34 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"DRA",age:60,sex:"M"});
+    ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
+    ICU._pickWorkingDx("Seizure / epilepsy","deterministic_suggestion");
+    window.SMD_AI = window.SMD_AI || {}; window.__cc=0;
+    window.SMD_AI.correlate = function(){ window.__cc++; return Promise.resolve({ mode:"correlate", correlation:{ clinicalCorrelation:"Advisory correlation text.", topConsiderations:["Status epilepticus"], whyFit:[],alternatives:[],whatDoesntFit:[],missing:[],redFlags:[],nextChecks:[],protocols:[] }}); };
+    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    root.querySelector('[data-icu-act="corrdeep"]').click(); var dg=document.querySelector('#icuDeepSheet [data-icu-act="deepgo"]'); if(dg) dg.click();
+    return 1;
+  `);
+  await sleep(300);
+  const c34b = await J(`var t=document.getElementById('icuRoot').textContent||""; return JSON.stringify({ calls:window.__cc, done:/Advisory correlation text/.test(t), stuck:/Running deep clinical review/.test(t) });`);
+  ok(c34b.calls === 1 && c34b.done && !c34b.stuck, `Deep Review finishes + renders advisory result (calls=${c34b.calls}, stuck=${c34b.stuck})`);
+
+  // 35) BUG A — timeout: a never-settling call surfaces an error + retry (never stuck), via the test seam
+  const c35 = await J(`
+    window.SMD_ICU_DEEP_TIMEOUT_MS = 300;
+    ICU.reset(); ICU.ingestPatient({name:"DRT",age:60,sex:"M"});
+    ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
+    ICU._pickWorkingDx("Seizure / epilepsy","deterministic_suggestion");
+    window.SMD_AI.correlate = function(){ return new Promise(function(){}); };   // never settles
+    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    root.querySelector('[data-icu-act="corrdeep"]').click(); var dg=document.querySelector('#icuDeepSheet [data-icu-act="deepgo"]'); if(dg) dg.click();
+    return 1;
+  `);
+  await sleep(600);
+  const c35b = await J(`var root=document.getElementById('icuRoot'), t=root.textContent||""; var btn=root.querySelector('[data-icu-act="corrdeep"]'); var r=JSON.stringify({ timedOut:/timed out|could not be completed/i.test(t), stuck:/Running deep clinical review/.test(t), retryable:!!(btn&&!btn.disabled) }); try{delete window.SMD_ICU_DEEP_TIMEOUT_MS;}catch(e){} return r;`);
+  ok(c35b.timedOut && !c35b.stuck && c35b.retryable, `Deep Review timeout → error shown + retry enabled, never stuck (timedOut=${c35b.timedOut}, retryable=${c35b.retryable})`);
+
+  // 36) BUG B — working-diagnosis cards COLLAPSED by default (chevron + clamped reason; no full detail until expand)
+  const c36 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"COL",age:60,sex:"M"});
+    [["alteredSensorium","AMS"],["seizure","Seizure"],["focalNeuroDeficit","Quadriparesis"]].forEach(function(p){ ICU._addFindingChip({canonicalFindingId:p[0],displayLabel:p[1],inReasoning:true},"manual_picker"); });
+    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    root.querySelector('[data-icu-act="finddx"]').click();
+    var collapsedDetail = document.querySelectorAll('#icuRoot .icu-dx-why').length;
+    var chev = document.querySelectorAll('#icuRoot .icu-dx-chev').length, clamp = document.querySelectorAll('#icuRoot .icu-clamp1').length;
+    var why=document.querySelector('#icuRoot .icu-dx-h[data-icu-act^="dxwhy"]'); if(why) why.click();
+    var expandedDetail = document.querySelectorAll('#icuRoot .icu-dx-why').length;
+    return JSON.stringify({ chev:chev, clamp:clamp, collapsedDetail:collapsedDetail, expandedDetail:expandedDetail });
+  `);
+  ok(c36.chev >= 1 && c36.clamp >= 1 && c36.collapsedDetail === 0 && c36.expandedDetail >= 1, `cards collapsed by default (chevrons=${c36.chev}, detail collapsed→expanded ${c36.collapsedDetail}→${c36.expandedDetail})`);
+
+  // 37) BUG C — "Advanced — skip ahead" unlocks Deep Review without a working dx
+  const c37 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"ADV",age:60,sex:"M"});
+    ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
+    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    var before=root.querySelector('[data-icu-act="corrdeep"]'); var beforeDisabled=!!(before&&before.disabled);
+    var adv=root.querySelector('[data-icu-act="dxadv"]'); if(adv) adv.click();
+    var after=root.querySelector('[data-icu-act="corrdeep"]'); var afterEnabled=!!(after&&!after.disabled);
+    return JSON.stringify({ beforeDisabled:beforeDisabled, afterEnabled:afterEnabled });
+  `);
+  ok(c37.beforeDisabled && c37.afterEnabled, "Advanced skip-ahead unlocks Deep Review when no working dx chosen");
+
+  // 38) BUG E — ICU.ingestInfusion adds to the ICU Infusions section
+  const c38 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"INF",age:60,sex:"M"});
+    var okAdd = ICU.ingestInfusion({ drug:"Noradrenaline", dose:0.125, unit:"mcg/kg/min", rateMlHr:6.6, concentration:"4 mg / 50 mL", weightKg:70, source:"calculator" });
+    var f=(ICU.state().infusions||[])[0]||{};
+    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:monitoring"]')&&root.querySelector('[data-icu-act="ws:monitoring"]').click(); var inf=root.querySelector('[data-icu-act="tab:infusions"]'); if(inf) inf.click();
+    return JSON.stringify({ okAdd:okAdd, drug:f.drug, rate:f.rateMlHr, source:f.source, noEmpty: !/No infusions recorded/.test((root.textContent||"")) });
+  `);
+  ok(c38.okAdd && c38.drug === "Noradrenaline" && c38.rate === 6.6 && c38.source === "calculator" && c38.noEmpty, `ingestInfusion adds to dashboard (drug=${c38.drug}, rate=${c38.rate})`);
+
+  // 39) BUG E+F — calculator bridge derives the pump rate at the PATIENT weight (66→70 changes it)
+  const c39 = await J(`
+    if(!window.INFUSION_DRUGS || !window.INFUSION_DRUGS.noradrenaline) return JSON.stringify({skip:true});
+    ICU.reset(); ICU.ingestPatient({name:"WT",age:60,sex:"M",weightKg:66});
+    ICU._bridgeInfusionFromCalc({ key:"noradrenaline", dose:0.125 });
+    var a=(ICU.state().infusions||[])[0]||{};
+    ICU.reset(); ICU.ingestPatient({name:"WT2",age:60,sex:"M",weightKg:70});
+    ICU._bridgeInfusionFromCalc({ key:"noradrenaline", dose:0.125 });
+    var b=(ICU.state().infusions||[])[0]||{};
+    return JSON.stringify({ rate66:a.rateMlHr, wt66:a.weightKg, rate70:b.rateMlHr, wt70:b.weightKg, unit:b.unit, conc:b.concentration });
+  `);
+  if (c39 && c39.skip) ok(true, "infusion weight bridge (skipped — INFUSION_DRUGS not loaded in this env)");
+  else ok(c39.rate66 && c39.rate70 && c39.rate66 !== c39.rate70 && c39.wt70 === 70 && c39.unit === "mcg/kg/min", `pump rate uses patient weight (66kg→${c39.rate66} mL/h, 70kg→${c39.rate70} mL/h; conc ${c39.conc})`);
+
+  // 40) BUG E — same drug twice → duplicate-confirm (Update / Add separate), no silent dupe
+  const c40 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"DUP",age:60,sex:"M"});
+    ICU._bridgeInfusion({ drug:"Noradrenaline", dose:0.1, unit:"mcg/kg/min", rateMlHr:5, source:"calculator" });
+    var n1=(ICU.state().infusions||[]).length;
+    ICU._bridgeInfusion({ drug:"Noradrenaline", dose:0.2, unit:"mcg/kg/min", rateMlHr:10, source:"calculator" });
+    var dlg=document.querySelector('[data-icu-act="infdupupd"]'), sep=document.querySelector('[data-icu-act="infdupsep"]');
+    var hasDlg=!!(dlg&&sep); if(dlg) dlg.click();   // choose Update
+    var list=ICU.state().infusions||[];
+    return JSON.stringify({ n1:n1, hasDlg:hasDlg, nAfter:list.length, rate:(list[0]||{}).rateMlHr });
+  `);
+  ok(c40.n1 === 1 && c40.hasDlg && c40.nAfter === 1 && c40.rate === 10, `duplicate infusion → confirm (Update kept 1 line, rate updated to ${c40.rate})`);
+
+  // 41) BUG G — external-evidence topic is short, literature-phrased, deduped (not internal AND-string)
+  const c41 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"EVT",age:60,sex:"M",diagnosis:"Chronic Pancreatitis"});
+    var ev = { img:["peripancreatic inflammatory change","pancreatic inflammation","biliary duct involvement"], labs:[], crit:[], findings:[], vitals:[], clinical:[] };
+    var topic = ICU._correlationTopic(ev);
+    return JSON.stringify({ topic:topic, len:topic.length, hasPancreatitis:/pancreatitis/i.test(topic), noInternal:!/peripancreatic inflammatory change/i.test(topic), dedup:(topic.toLowerCase().split("pancreatitis").length-1) });
+  `);
+  ok(c41.hasPancreatitis && c41.noInternal && c41.len <= 80 && c41.dedup <= 1, `evidence topic literature-phrased + deduped ("${c41.topic}")`);
+
+  // 42) BUG D — tour inherits ICU design tokens (Inter font, not serif fallback) so buttons don't overflow
+  const c42 = await J(`
+    ICU._startTour(); var card=document.querySelector('#icuTour .icu-tour-card'); var btn=document.querySelector('#icuTour .icu-tour-btns .icu-btn');
+    var ff = btn ? getComputedStyle(btn).fontFamily : ""; var wrap = getComputedStyle(document.querySelector('#icuTour .icu-tour-btns')).flexWrap;
+    return JSON.stringify({ inter:/Inter/i.test(ff), notSerif:!/times/i.test(ff), wrap:wrap });
+  `);
+  ok(c42.inter && c42.notSerif && c42.wrap === "wrap", `tour resolves tokens (Inter font) + footer wraps (font=${c42.inter?"Inter":"?"}, wrap=${c42.wrap})`);
+
+  console.log(fails === 0 ? "\nALL GREEN — ICU dx-flow + bug-fix suite passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
