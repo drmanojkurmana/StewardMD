@@ -3688,6 +3688,17 @@
       if (!pkg) return Promise.resolve({ error: "no-package" });
       return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
+    // Imaging Assist — clinician-invoked structured summary of ONE radiology report. Sends a
+    // DE-IDENTIFIED packet (report text PHI-redacted client-side; NO name/MRN/bed/other-patient
+    // data). Same cloud-text privacy posture as visionText (gated by smd_ai_vision, default ON).
+    // Advisory only — the deterministic engine remains the diagnostic authority.
+    imagingSummary: function (packet) {
+      var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
+      if (!packet || !packet.reportText) return Promise.resolve({ error: "no-report" });
+      return aiHeaders().then(function (h) { return fetch(b + "/imaging", { method: "POST", headers: h, body: JSON.stringify({ packet: packet }) }); })
+        .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
     // Opt-in web research (Google-grounded) for topics not in StewardMD's KB. Token-frugal:
     // one grounded call, short answer; only invoked on an explicit user tap.
     research: function (question) {
