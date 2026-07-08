@@ -291,6 +291,37 @@ try {
   `);
   ok(c30.on === true, "manual replay opens the tour even after completion / don't-show");
 
-  console.log(fails === 0 ? "\nALL GREEN — ICU dx-flow Slice 1–4 passed" : `\n${fails} FAILED`);
+  // ===== Slice 5 — polish: advisory management gate + external-evidence + a11y =====
+
+  // 31) management considerations appear ONLY after a working diagnosis is selected (advisory)
+  await ev(`ICU.reset(); ICU.ingestPatient({name:"MG",age:60,sex:"M"}); ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker"); ICU.open(); document.getElementById('icuRoot').querySelector('[data-icu-act="ws:careplan"]').click(); return 1;`);
+  const mgBefore = await ev(`return /Management considerations for/.test(document.getElementById('icuRoot').textContent||"");`);
+  await ev(`ICU._pickWorkingDx("Ischaemic stroke","deterministic_suggestion"); return 1;`);
+  await sleep(160);
+  const mgAfter = await ev(`return /Management considerations for/.test(document.getElementById('icuRoot').textContent||"") && /advisory/i.test(document.getElementById('icuRoot').textContent||"");`);
+  ok(mgBefore === false && mgAfter === true, "management considerations shown only after a working dx is selected (advisory wording)");
+
+  // 32) external-evidence hand-off reachable from the Care Plan flow
+  const c32 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"EV",age:60,sex:"M"}); ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
+    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    return JSON.stringify({ ext: !!root.querySelector('[data-icu-act="corrext"]') });
+  `);
+  ok(c32.ext === true, "external-evidence (Find evidence beyond StewardMD) reachable from Care Plan Deep Review");
+
+  // 33) accessibility: differential Select carries an aria-label; confirm sheet + tour are dialogs
+  const c33 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"A11Y",age:60,sex:"M"});
+    [["alteredSensorium","AMS"],["seizure","Seizure"],["focalNeuroDeficit","Quadriparesis"]].forEach(function(p){ ICU._addFindingChip({canonicalFindingId:p[0],displayLabel:p[1],inReasoning:true},"manual_picker"); });
+    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    root.querySelector('[data-icu-act="finddx"]').click();
+    var sel=root.querySelector('[data-icu-act^="dxpick"]'), why=root.querySelector('[data-icu-act^="dxwhy"]');
+    ICU._openDeepReviewConfirm(); var sheet=document.getElementById('icuDeepSheet');
+    ICU._startTour(); var tour=document.querySelector('#icuTour .icu-tour-card');
+    return JSON.stringify({ selAria:!!(sel&&/working diagnosis/i.test(sel.getAttribute('aria-label')||"")), whyAria:!!(why&&(why.getAttribute('aria-label')||"").length>0&&why.getAttribute('aria-expanded')!=null), sheetDlg:!!(sheet&&sheet.getAttribute('role')==='dialog'), tourDlg:!!(tour&&tour.getAttribute('role')==='dialog') });
+  `);
+  ok(c33.selAria && c33.whyAria && c33.sheetDlg && c33.tourDlg, "a11y: Select/View-reasoning aria-labels + confirm sheet & tour are role=dialog");
+
+  console.log(fails === 0 ? "\nALL GREEN — ICU dx-flow Slice 1–5 passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
