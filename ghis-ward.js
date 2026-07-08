@@ -247,13 +247,17 @@
             var orders = ((j && j.orders) || []).slice(0, 25);
             return Promise.all(orders.map(function (o) {
               return authFetch('/lab-detail?renderId=' + encodeURIComponent(o.renderId) + '&episodeId=' + encodeURIComponent(o.episodeId) + '&patientId=' + encodeURIComponent(patientId))
-                .then(function (d) { (d && d.tests || []).forEach(function (t) { labs.push({ test: t.test, result: t.result, units: t.units, low: t.low, high: t.high }); }); }).catch(function () {});
+                .then(function (d) { (d && d.tests || []).forEach(function (t) { labs.push({ test: t.test, result: t.result, units: t.units, low: t.low, high: t.high, date: o.orderDate || o.date }); }); }).catch(function () {});
             }));
           }).catch(function () {}).then(function () {
-            var res = ICU.ingestFromWard({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs });
+            // Preserve the per-report time series (ICU Trends) when available; fall back to the
+            // latest-only path on older builds.
+            var res = (ICU.ingestWardHistory
+              ? ICU.ingestWardHistory({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs })
+              : ICU.ingestFromWard({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs }));
             try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
             ICU.open();
-            try { if (window.toast) toast('ICU synced — ' + (res && res.mappedLabs || 0) + ' labs from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } catch (e) {}
+            try { if (window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
           }).catch(function (e) { if (body) body.innerHTML = '<div class="ghis-lab-empty">Couldn’t load labs right now. Please try again.</div>'; });
         },
         // Patient-card click dispatcher: normal browse -> lab drawer; import mode

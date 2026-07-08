@@ -150,7 +150,7 @@
     return v;
   }
   function ingestLabs(o) {
-    o = o || {}; var keys = ["na", "k", "cl", "hco3", "ca", "mg", "po4", "glu", "creat", "urea", "alb", "wbc", "hb", "plt", "inr", "ferritin", "trig", "fibrinogen", "crp", "bili", "ast", "alt"];
+    o = o || {}; var keys = ["na", "k", "cl", "hco3", "ca", "mg", "po4", "glu", "creat", "urea", "alb", "wbc", "hb", "plt", "inr", "ferritin", "trig", "fibrinogen", "crp", "bili", "ast", "alt", "alp", "bili_d", "amylase", "lipase", "pct", "neut", "hct"];
     var rec = pick(o, keys); var ts = o.ts || nowTs();
     Object.keys(rec).forEach(function (k) { STATE.labs.recent[k] = rec[k]; });
     STATE.labs.trends.push(Object.assign({ ts: ts }, rec));
@@ -194,11 +194,18 @@
     { key: "hb", kw: /h[ae]moglobin/i, ex: /corpuscular|\bmch\b|\bmchc\b|a1c|glycated|equivalent|reticulocyte/i },
     { key: "plt", kw: /platelet/i, ex: /immature|fraction/i },
     { key: "inr", kw: /\binr\b|prothrombin|\bpt\b\/inr/i, ex: /aptt|partial/i },
+    { key: "bili_d", kw: /(direct|conjugated)\s*bilirubin|bilirubin[^a-z]*(direct|conjugated)/i, ex: /indirect|unconjugat/i },   // direct/conjugated — checked before total
     { key: "bili", kw: /bilirubin/i, ex: /direct|indirect|conjugat|neonat/i },   // total only
     { key: "ast", kw: /\bast\b|sgot/i, ex: null },
     { key: "alt", kw: /\balt\b|sgpt/i, ex: null },
     { key: "crp", kw: /c-reactive|\bcrp\b/i, ex: /procalcitonin/i },
-    { key: "lactate", kw: /\blactate\b/i, ex: /dehydrogenase|\bldh\b|csf/i }
+    { key: "lactate", kw: /\blactate\b/i, ex: /dehydrogenase|\bldh\b|csf/i },
+    { key: "alp", kw: /alkaline phosphatase|\balp\b/i, ex: null },
+    { key: "amylase", kw: /amylase/i, ex: null },   // body-fluid amylase excluded by the specimen guard
+    { key: "lipase", kw: /lipase/i, ex: null },
+    { key: "pct", kw: /procalcitonin|\bpct\b/i, ex: null },
+    { key: "neut", kw: /neutrophil/i, ex: /band|immature|precursor|promyelo|metamyelo/i },
+    { key: "hct", kw: /h[ae]matocrit|\bhct\b|\bpcv\b/i, ex: null }
   ];
   // Body-fluid / non-serum specimens must NEVER populate a serum analyte field: an
   // "Ascitic Fluid Albumin" is not serum albumin; a pleural/CSF/peritoneal/synovial/drain
@@ -279,6 +286,69 @@
     if (conflicts.length) { STATE.conflicts = (STATE.conflicts || []).filter(function (c) { return !conflicts.some(function (n) { return n.key === c.key; }); }).concat(conflicts); }
     STATE.wardSync = { connected: true, lastTs: ts, patientId: bundle.patientId || (STATE.wardSync && STATE.wardSync.patientId) || null, newUpdate: hadNew && !!(STATE.wardSync && STATE.wardSync.lastTs) };
     return { applied: Object.keys(applied), conflicts: conflicts.length, mappedLabs: Object.keys(labVals).length };
+  }
+
+  // Parse a Ward/LIS report date to a timestamp. Handles ISO and "DD-MON-YYYY [HH:MM]"
+  // (GHIS style, e.g. "03-JUL-2026" / "03-Jul-2026 08:30"). Defaults to 08:00 if no time.
+  // Returns ms epoch, or null if unrecognisable (caller falls back to ingestion time).
+  var MON = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+  function parseWardDate(s) {
+    if (!s && s !== 0) return null;
+    s = String(s).trim(); if (!s) return null;
+    var m = s.match(/(\d{1,2})[-\/\s]([A-Za-z]{3,})[-\/\s](\d{2,4})(?:[\sT,]+(\d{1,2}):(\d{2}))?/);
+    if (m) {
+      var mo = MON[m[2].slice(0, 3).toLowerCase()];
+      if (mo != null) { var yr = +m[3]; if (yr < 100) yr += 2000; return new Date(yr, mo, +m[1], m[4] != null ? +m[4] : 8, m[5] != null ? +m[5] : 0).getTime(); }
+    }
+    var t = Date.parse(s); return isNaN(t) ? null : t;
+  }
+
+  // Ward Sync HISTORY ingestion (ICU Trends). Unlike ingestFromWard (which keeps only the
+  // latest value), this preserves the per-report time series: rows carry a `date` (report
+  // date), are grouped by timestamp, mapped with the SAME safe mapper (mapWardLab + wardToSI +
+  // specimen guard) and appended as dated snapshots to labs.trends[]. recent[key] is set from
+  // the NEWEST report only, and a clinician's Manual value is never overwritten (a conflict is
+  // recorded instead). Re-imports are deduped by (ts,key,value). Everything is scoped to the
+  // patient currently loaded in ICU — callers reset/select the patient before syncing.
+  function ingestWardHistory(bundle) {
+    bundle = bundle || {};
+    var source = bundle.source || "Ward Sync";
+    if (bundle.patient) ingestPatient(bundle.patient);
+    var byTs = {}, tsList = [];
+    (bundle.labs || []).forEach(function (t) {
+      var key = mapWardLab(t.test); if (!key) return;
+      var v = parseFloat(t.result); if (isNaN(v)) return;
+      v = wardToSI(key, v, t.units);
+      var ts = parseWardDate(t.date) || bundle.ts || nowTs();
+      if (!byTs[ts]) { byTs[ts] = {}; tsList.push(ts); }
+      byTs[ts][key] = v;   // last row wins within the same report timestamp
+    });
+    tsList.sort(function (a, b) { return a - b; });   // oldest → newest so recent = last
+    var pts = 0, keysSeen = {}, newestByKey = {}, conflicts = [];
+    tsList.forEach(function (ts) {
+      var rec = byTs[ts], fresh = {};
+      Object.keys(rec).forEach(function (k) {
+        var dup = (STATE.labs.trends || []).some(function (r) { return r.ts === ts && r[k] === rec[k]; });
+        if (dup) return;                                  // dedup re-imported reports
+        fresh[k] = rec[k]; keysSeen[k] = 1; pts++;
+        newestByKey[k] = { v: rec[k], ts: ts };           // ascending → last assignment is newest
+      });
+      if (Object.keys(fresh).length) STATE.labs.trends.push(Object.assign({ ts: ts }, fresh));
+    });
+    if (STATE.labs.trends.length > MAX_SERIES) STATE.labs.trends.splice(0, STATE.labs.trends.length - MAX_SERIES);
+    Object.keys(newestByKey).forEach(function (k) {
+      var prev = STATE.src[k], nv = newestByKey[k];
+      if (prev && prev.source === "Manual" && STATE.labs.recent[k] != null && Number(STATE.labs.recent[k]) !== nv.v) {
+        conflicts.push({ key: k, label: k, ward: nv.v, manual: STATE.labs.recent[k], wardTs: nv.ts, manualTs: prev.ts, source: source });
+        return;   // preserve clinician's manual value; surface a conflict
+      }
+      STATE.labs.recent[k] = nv.v; STATE.src[k] = { source: source, ts: nv.ts };
+    });
+    if (conflicts.length) STATE.conflicts = (STATE.conflicts || []).concat(conflicts);
+    STATE.wardSync.connected = true; STATE.wardSync.lastTs = nowTs(); STATE.wardSync.newUpdate = pts > 0;
+    if (bundle.patientId) STATE.wardSync.patientId = bundle.patientId;
+    // STATE mutations above go through the reactive proxy, which coalesces a recompute()+render.
+    return { reports: tsList.length, points: pts, keys: Object.keys(keysSeen), conflicts: conflicts.length };
   }
 
   /* ---------------------------------------------------------------- styles */
@@ -1979,7 +2049,7 @@
     recompute: function () { onChange(); },
     reset: function () { var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; }); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
-    ingestFromWard: ingestFromWard, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
+    ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"
