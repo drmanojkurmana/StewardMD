@@ -508,6 +508,16 @@
       '#icuSnap .icu-ico{width:24px;height:24px;stroke-width:2}' +
       '.icu-tab.on{color:var(--primary);background:var(--primary-soft);box-shadow:inset 0 2px 0 var(--primary)}' +
       '.icu-tab.on .tl{font-weight:800}' +
+      // 5-workspace bottom bar: evenly spaced, no scroll, no truncation
+      '.icu-ws-bar{overflow-x:visible;justify-content:space-between;gap:0;padding-left:4px;padding-right:4px}' +
+      '.icu-ws-bar .icu-tab{flex:1 1 0;min-width:0;padding:6px 4px}.icu-ws-bar .icu-tab .tl{font-size:10px}' +
+      // segmented sub-navigation (workspace members)
+      '.icu-subnav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 12px;padding-bottom:2px}.icu-subnav::-webkit-scrollbar{display:none}' +
+      '.icu-seg{flex:0 0 auto;border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:999px;font:700 12.5px var(--font);padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}' +
+      '.icu-seg:active{transform:scale(.96)}.icu-seg.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}' +
+      '.icu-doc-sub{font:600 12.5px/1.5 var(--font);color:var(--muted);margin:2px 0 12px}' +
+      // desktop: centre the 5-workspace bar and widen items (same grouping, roomier)
+      '@media (min-width:900px){.icu-ws-bar{justify-content:center;gap:8px}.icu-ws-bar .icu-tab{flex:0 0 auto;min-width:120px;flex-direction:row;gap:8px}.icu-ws-bar .icu-tab .tl{font-size:13px}}' +
       // snapshot FAB
       '#icuSnap{position:absolute;right:14px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:6;width:54px;height:54px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--primary3),var(--primary2));color:#fff;font-size:24px;box-shadow:0 8px 24px rgba(15,118,110,.42);cursor:pointer;display:flex;align-items:center;justify-content:center}#icuSnap:active{transform:scale(.92)}' +
       // modal
@@ -1329,9 +1339,28 @@
     { id: "protocols", ic: "🚨", svg: "siren", label: "Protocols" },
     { id: "vent", ic: "🫁", svg: "lungs", label: "Vent" },
     { id: "trends", ic: "📈", svg: "trend", label: "Trends" },
-    { id: "rounds", ic: "📋", svg: "rounds", label: "Rounds" }
+    { id: "rounds", ic: "📋", svg: "rounds", label: "Rounds" },
+    { id: "goals", ic: "🎯", svg: "check", label: "Goals" },
+    { id: "documents", ic: "📄", svg: "copy", label: "Documents" },
+    { id: "more", ic: "⋯", svg: "more", label: "More" }
   ];
+  // 5 grouped workspaces for the bottom bar (mobile-friendly). Each opens a segmented
+  // sub-nav of its members; members are the existing per-tab render keys (+ 3 new light
+  // views) so every section and its saved data is preserved — this is a NAV layer only.
+  var WORKSPACES = [
+    { id: "overview", label: "Overview", svg: "pulse", members: ["overview", "rounds"] },
+    { id: "monitoring", label: "Monitoring", svg: "heart", members: ["hemo", "fluids", "lytes", "abg", "vent", "infusions", "trends"] },
+    { id: "careplan", label: "Care Plan", svg: "rounds", members: ["protocols", "goals"] },
+    { id: "documents", label: "Documents", svg: "copy", members: ["documents"] },
+    { id: "more", label: "More", svg: "more", members: ["more"] }
+  ];
+  var MEMBER = {}; TABS.forEach(function (t) { MEMBER[t.id] = { label: t.label, svg: t.svg, ic: t.ic }; });
+  function wsOf(m) { for (var i = 0; i < WORKSPACES.length; i++) if (WORKSPACES[i].members.indexOf(m) >= 0) return WORKSPACES[i].id; return "overview"; }
+  function wsById(id) { for (var i = 0; i < WORKSPACES.length; i++) if (WORKSPACES[i].id === id) return WORKSPACES[i]; return WORKSPACES[0]; }
+  function isMonWs() { return _ws === "overview" || _ws === "monitoring"; }
   var _active = "overview";
+  var _ws = "overview";        // current workspace (bottom bar)
+  var _wsLast = {};            // workspace id → last member viewed in it
 
   // Plain-language explanations for ICU jargon (A5) — content only, no logic change.
   var JARGON = {
@@ -1511,7 +1540,32 @@
         }).join("");
       }).join("");
       return '<div class="icu-card"><h3>Daily ICU Rounds <span class="icu-phase">' + done + "/" + ROUNDS_ITEMS.length + " done</span></h3>" + body + "</div>" +
-        '<button class="icu-btn" data-icu-act="gensummary">📋 Generate Daily ICU Summary</button>';
+        '<button class="icu-btn" data-icu-act="gensummary">' + ico("copy", "📋") + ' Generate Daily ICU Summary</button>';
+    },
+    goals: function () {
+      var g = _raw.goals || [];
+      var list = g.length ? g.map(function (x) { return '<div class="icu-row"><span>• ' + esc(x) + "</span></div>"; }).join("") : '<div class="icu-empty">No goals set for today.</div>';
+      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🎯") + ' Goals for today</div>' + list +
+        '<button class="icu-btn ghost" data-icu-act="edit:goals" style="margin-top:10px">' + ico("edit", "✎") + ' Edit goals</button></div>' +
+        '<button class="icu-btn ghost" data-icu-act="launch:interactions">' + ico("warn", "⚠️") + ' Check drug interactions</button>';
+    },
+    documents: function () {
+      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("copy", "📄") + ' Documents</div>' +
+        '<p class="icu-doc-sub">Generate clinician-reviewable documents from this patient’s recorded data. Nothing is finalised without your review.</p>' +
+        '<button class="icu-btn" data-icu-act="summary">' + ico("copy", "📋") + ' Daily ICU summary</button>' +
+        '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share case</button>' +
+        '<button class="icu-btn ghost" data-icu-act="printsummary">' + ico("upload", "🖨") + ' Print / Export PDF</button>' +
+        '<button class="icu-btn ghost" data-icu-act="discharge">' + ico("rounds", "📝") + ' Discharge Creator</button>' +
+        '</div>';
+    },
+    more: function () {
+      var n = rosterCount();
+      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("more", "⋯") + ' More</div>' +
+        '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Patient details</button>' +
+        '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients' + (n ? " (" + n + ")" : "") + '</button>' +
+        '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Ward Sync</button>' +
+        '<button class="icu-btn ghost" data-icu-act="coach">' + ico("info", "ⓘ") + ' How the ICU workstation works</button>' +
+        '</div>';
     }
   };
 
@@ -1548,9 +1602,18 @@
         '<button class="icu-chip icu-chip-primary" data-icu-act="newpt">' + ico("plus", "＋") + '<span>New</span></button>' +
       '</div></div>';
   }
+  // Fixed 5-workspace bottom bar (was 10 crowded tabs). Highlights the current workspace.
   function renderTabBar() {
-    return '<div class="icu-tabs">' + TABS.map(function (t) {
-      return '<button class="icu-tab ' + (t.id === _active ? "on" : "") + '" data-icu-act="tab:' + t.id + '"><span class="ti">' + ico(t.svg, t.ic) + '</span><span class="tl">' + t.label + "</span></button>";
+    return '<div class="icu-tabs icu-ws-bar">' + WORKSPACES.map(function (w) {
+      return '<button class="icu-tab ' + (w.id === _ws ? "on" : "") + '" data-icu-act="ws:' + w.id + '"><span class="ti">' + ico(w.svg, w.ic) + '</span><span class="tl">' + w.label + "</span></button>";
+    }).join("") + "</div>";
+  }
+  // Segmented sub-navigation of the current workspace's members (only when >1).
+  function renderSubNav() {
+    var w = wsById(_ws); if (!w.members || w.members.length < 2) return "";
+    return '<div class="icu-subnav">' + w.members.map(function (m) {
+      var meta = MEMBER[m] || { label: m };
+      return '<button class="icu-seg ' + (m === _active ? "on" : "") + '" data-icu-act="tab:' + m + '">' + esc(meta.label) + "</button>";
     }).join("") + "</div>";
   }
   // one-line vitals summary for the collapsed status on non-overview tabs
@@ -1647,23 +1710,23 @@
     return '<div class="icu-sevkey"><span><i class="ok"></i>Normal</span><span><i class="warn"></i>Caution</span><span><i class="bad"></i>Critical</span></div>';
   }
   function renderBody() {
-    var tab = "", isOv = _active === "overview";
+    var tab = "", isOv = _active === "overview", mon = isMonWs();
     try { tab = RENDER[_active] ? RENDER[_active]() : ""; } catch (e) { tab = '<div class="icu-card"><p>Tab error.</p></div>'; }
-    // Overview: full vitals grid. Other tabs: collapse it behind a compact summary
-    // so the tab's own content is immediately visible (was buried below the grid).
-    var status = isOv ? renderLiveStatus()
-      : '<details class="icu-vitals-c"><summary>' + liveSummaryLine() + '</summary>' + renderLiveStatus() + '</details>';
+    // Vitals status + Add-data belong to the monitoring workspaces; Care Plan / Documents /
+    // More show only their own content (below the sub-nav). Overview shows the full grid.
+    var status = !mon ? "" : (isOv ? renderLiveStatus()
+      : '<details class="icu-vitals-c"><summary>' + liveSummaryLine() + '</summary>' + renderLiveStatus() + '</details>');
     var elyteAlerts = (isOv || _active === "lytes") ? renderElyteAlerts() : "";
     var hd = hasData();
-    var addBtn = '<button class="icu-adddata" data-icu-act="adddata">' + (hd ? "＋ Add / update data" : "＋ Add my patient") + '</button>';
+    var addBtn = !mon ? "" : '<button class="icu-adddata" data-icu-act="adddata">' + (hd ? "＋ Add / update data" : "＋ Add my patient") + '</button>';
     // Empty overview → one inviting empty state (its own CTA); otherwise grid/summary + add button.
-    // AI-import cards are gone from here — the ＋ Add data sheet now consolidates Speak/Snap/Ward/Type.
     var mid = (isOv && !hd) ? emptyStateCard() : (status + addBtn);
     return '<div class="icu-scroll"><div class="icu-wrap">' +
       patientBanner() +
+      renderSubNav() +
       ((isOv && (!icuSeen() || _coachForce)) ? coachCard() : "") +
       ((isOv && hd) ? severityKey() : "") +
-      renderWardBanner() +
+      (mon ? renderWardBanner() : "") +
       renderConflicts() +
       elyteAlerts +
       mid +
@@ -1672,7 +1735,9 @@
   }
   function paint() {
     if (!rootEl) return;
-    rootEl.innerHTML = renderHeader() + renderBody() + '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' + renderTabBar();
+    // Camera FAB is contextual — only where snapping a monitor/lab/ABG/vent is relevant.
+    var fab = isMonWs() ? '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' : "";
+    rootEl.innerHTML = renderHeader() + renderBody() + fab + renderTabBar();
   }
 
   /* ---------------------------------------------------- manual entry forms */
@@ -1849,6 +1914,17 @@
     modalEl.classList.add("on");
   }
   function copySummary() { var pre = modalEl && modalEl.querySelector("#icuSummaryText"); var t = pre ? pre.textContent : buildSummary(); try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t); } catch (e) {} if (window.toast) toast("Summary copied"); }
+  // Print / Export-PDF: open a clean print view of the summary (device "Save as PDF" from the
+  // print sheet). If pop-ups are blocked (some WKWebViews), fall back to the summary + Share.
+  function printSummary() {
+    var name = _raw.patient.name || "ICU patient";
+    var html = '<!doctype html><meta charset="utf-8"><title>StewardMD ICU — ' + esc(name) + '</title>' +
+      '<style>body{font:13px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#111;padding:24px;max-width:720px;margin:auto}h1{font-size:18px;margin:0 0 4px}.m{color:#666;font-size:12px;margin-bottom:16px}pre{white-space:pre-wrap;font:inherit}</style>' +
+      '<h1>StewardMD ICU Summary</h1><div class="m">' + esc(name) + ' · generated for clinician review — verify before use</div><pre>' + esc(buildSummary()) + "</pre>";
+    var w = null; try { w = window.open("", "_blank"); } catch (e) {}
+    if (w && w.document) { w.document.open(); w.document.write(html); w.document.close(); setTimeout(function () { try { w.focus(); w.print(); } catch (e) {} }, 350); }
+    else { openSummary(); if (window.toast) toast("Pop-up blocked — use Share to export as PDF"); }
+  }
 
   /* --------------------------------------------------- share & clear findings */
   // Share a case exactly like the Clinical Reasoning dashboard: Web Share API
@@ -1878,7 +1954,7 @@
       '<button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
     modalEl.classList.add("on");
   }
-  function clearFindings() { ICU.reset(); _lytesExp = {}; _active = "overview"; closeForm(); paint(); if (window.toast) toast("Findings cleared"); }
+  function clearFindings() { ICU.reset(); _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); paint(); if (window.toast) toast("Findings cleared"); }
 
   /* -------------------------------------------------- launch embedded modules */
   // Raise the target overlay above the ICU surface, then open it via its existing
@@ -1989,7 +2065,7 @@
   function applyState(d, id) {
     Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (d[k] != null) ? clone(d[k]) : clone(DEFAULT_STATE[k]); });
     STATE.patient._id = id;
-    _lytesExp = {}; _active = "overview"; closeForm(); paint();
+    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); paint();
   }
   function loadPatient(id) {
     var r = loadRoster(), e = null, i;
@@ -2008,7 +2084,7 @@
   }
   function newPatient() {
     ICU.reset();
-    _lytesExp = {}; _active = "overview"; closeForm(); paint();
+    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); paint();
     openForm("patient");
   }
   function renderRoster(list, cloudOn) {
@@ -2083,7 +2159,11 @@
     var ix = act.indexOf(":"), cmd = ix < 0 ? act : act.slice(0, ix), arg = ix < 0 ? "" : act.slice(ix + 1);
     switch (cmd) {
       case "close": ICU.close(); break;
-      case "tab": _active = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
+      case "tab": _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
+      case "ws": _ws = arg; _active = _wsLast[arg] || wsById(arg).members[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break;
+      case "summary": openSummary(); break;
+      case "printsummary": printSummary(); break;
+      case "discharge": if (window.toast) toast("Discharge Creator is coming in the next update — draft from this patient’s recorded data with clinician review."); break;
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
       case "roundnote": openRoundNote(arg); break;
