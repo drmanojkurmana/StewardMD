@@ -300,7 +300,14 @@
       '.icu-hd-meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;font:500 12.5px var(--font);color:var(--muted)}' +
       '.icu-hd-meta b{color:var(--ink);font-weight:700}' +
       '.icu-hd-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}' +
-      '.icu-chip{border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:var(--r-pill);font:700 12.5px var(--font);padding:8px 14px;cursor:pointer;flex:0 0 auto;min-height:36px}' +
+      '.icu-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:var(--r-pill);font:700 12.5px var(--font);padding:8px 13px;cursor:pointer;flex:0 0 auto;min-height:36px;transition:border-color .15s,background .15s}' +
+      '.icu-chip:active{transform:scale(.96)}.icu-chip:hover{border-color:var(--primary)}' +
+      '.icu-chip .icu-ico{width:15px;height:15px}' +
+      '.icu-chip-primary{background:var(--primary);border-color:var(--primary);color:#fff}.icu-chip-primary:hover{border-color:var(--primary);filter:brightness(1.05)}' +
+      '.icu-ico{width:1em;height:1em;flex:0 0 auto;stroke:currentColor;stroke-width:1.85;fill:none;stroke-linecap:round;stroke-linejoin:round}' +
+      '.icu-emoji{display:inline-flex;align-items:center;line-height:1}' +
+      '.icu-sec-lbl .icu-ico{width:15px;height:15px;vertical-align:-2px;margin-right:4px;color:var(--primary)}' +
+      '.icu-elyte-alerts>.icu-ico{width:15px;height:15px;vertical-align:-2px;margin-right:3px;color:var(--warn,#92620a)}' +
       '.icu-chip:active{background:var(--primary-soft)}' +
       '.icu-adddata{background:var(--primary);color:#fff;font:800 15px var(--font);padding:14px;border:none;border-radius:14px;width:100%;cursor:pointer;box-shadow:0 2px 10px var(--primary-soft)}' +
       // scroll area
@@ -366,7 +373,7 @@
       '.icu-coach-steps{margin:6px 0 10px;padding-left:20px;font:500 12.5px/1.7 var(--font);color:var(--muted)}' +
       '.icu-coach-steps b{color:var(--ink)}' +
       '.icu-empty-state{text-align:center;padding:26px 16px;background:var(--panel);border:1px dashed var(--border);border-radius:16px;margin-bottom:12px}' +
-      '.icu-empty-ic{font-size:40px;margin-bottom:6px}' +
+      '.icu-empty-ic{font-size:40px;margin-bottom:10px;display:flex;justify-content:center}.icu-empty-ic .icu-ico{width:46px;height:46px;stroke-width:1.4;color:var(--primary);opacity:.9}' +
       '.icu-empty-t{font:800 17px var(--font);color:var(--ink);margin-bottom:6px}' +
       '.icu-empty-p{font:500 13px/1.6 var(--font);color:var(--muted);max-width:340px;margin:0 auto}' +
       '.icu-empty-cta{width:auto!important;display:inline-block;margin-top:12px;padding:12px 22px}' +
@@ -388,7 +395,9 @@
       '.icu-tabs{position:absolute;left:0;right:0;bottom:0;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--panel) 88%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);border-top:1px solid var(--border);padding:5px 6px calc(5px + env(safe-area-inset-bottom));z-index:5}' +
       '.icu-tabs::-webkit-scrollbar{display:none}' +
       '.icu-tab{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:none;color:var(--muted);cursor:pointer;padding:6px 9px;border-radius:10px;min-width:58px}' +
-      '.icu-tab .ti{font-size:18px;line-height:1}.icu-tab .tl{font:700 9.5px var(--font);white-space:nowrap}' +
+      '.icu-tab .ti{font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;height:21px}.icu-tab .ti .icu-ico{width:21px;height:21px;stroke-width:1.9}.icu-tab .tl{font:700 9.5px var(--font);white-space:nowrap}' +
+      '.icu-x .icu-ico{width:19px;height:19px;stroke-width:2}' +
+      '#icuSnap .icu-ico{width:24px;height:24px;stroke-width:2}' +
       '.icu-tab.on{color:var(--primary);background:var(--primary-soft);box-shadow:inset 0 2px 0 var(--primary)}' +
       '.icu-tab.on .tl{font-weight:800}' +
       // snapshot FAB
@@ -450,7 +459,7 @@
       vitalCard("Net Fluid", f.net24h, "mL", ""),
       vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, 2.5, 6.5), labSeries("k", _trendWin))
     ];
-    return '<div class="icu-sec-lbl">❤️ Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
+    return '<div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
   }
 
   /* --------------------------------------------------------- AI import panel */
@@ -1077,16 +1086,16 @@
 
   /* --------------------------------------------------------------- tabs */
   var TABS = [
-    { id: "overview", ic: "❤️", label: "Overview" },
-    { id: "hemo", ic: "🫀", label: "Hemo" },
-    { id: "fluids", ic: "💧", label: "Fluids" },
-    { id: "lytes", ic: "🧪", label: "Lytes" },
-    { id: "abg", ic: "🩸", label: "ABG" },
-    { id: "infusions", ic: "💉", label: "Infusions" },
-    { id: "protocols", ic: "🚨", label: "Protocols" },
-    { id: "vent", ic: "🫁", label: "Vent" },
-    { id: "trends", ic: "📈", label: "Trends" },
-    { id: "rounds", ic: "📋", label: "Rounds" }
+    { id: "overview", ic: "❤️", svg: "pulse", label: "Overview" },
+    { id: "hemo", ic: "🫀", svg: "hemo", label: "Hemo" },
+    { id: "fluids", ic: "💧", svg: "droplet", label: "Fluids" },
+    { id: "lytes", ic: "🧪", svg: "flask", label: "Lytes" },
+    { id: "abg", ic: "🩸", svg: "abg", label: "ABG" },
+    { id: "infusions", ic: "💉", svg: "syringe", label: "Infusions" },
+    { id: "protocols", ic: "🚨", svg: "siren", label: "Protocols" },
+    { id: "vent", ic: "🫁", svg: "lungs", label: "Vent" },
+    { id: "trends", ic: "📈", svg: "trend", label: "Trends" },
+    { id: "rounds", ic: "📋", svg: "rounds", label: "Rounds" }
   ];
   var _active = "overview";
 
@@ -1172,7 +1181,7 @@
       var labels = { na: "Sodium", k: "Potassium", cl: "Chloride", hco3: "Bicarbonate", ca: "Calcium", mg: "Magnesium", po4: "Phosphate" };
       var keys = ["na", "k", "cl", "hco3", "ca", "mg", "po4"];
       var hasAny = keys.some(function (k) { return L[k] != null && L[k] !== ""; });
-      var out = '<div class="icu-sec-lbl">🧪 Electrolytes &amp; correction</div>';
+      var out = '<div class="icu-sec-lbl">' + ico("flask", "🧪") + ' Electrolytes &amp; correction</div>';
       if (!hasAny) {
         return out + '<div class="icu-card"><div class="icu-empty">No electrolyte values entered yet.</div>' +
           '<button class="icu-btn" data-icu-act="edit:labs">✎ Enter electrolytes</button></div>';
@@ -1231,7 +1240,7 @@
         evidenceBadges(["Marino ICU", "Surviving Sepsis", "PADIS"]) +
         '<button class="icu-btn ghost" data-icu-act="edit:infusion">✎ Add infusion</button>' +
         '<button class="icu-btn" data-icu-act="launch:inf">Open full Infusion &amp; Vasopressor Calculator</button></div>';
-      return '<div class="icu-sec-lbl">💉 Infusions</div>' + list + quick;
+      return '<div class="icu-sec-lbl">' + ico("syringe", "💉") + ' Infusions</div>' + list + quick;
     },
     protocols: function () {
       return '<div class="icu-sec-lbl">🚨 Critical Care Protocols</div>' +
@@ -1283,6 +1292,12 @@
 
   /* ---------------------------------------------------------- shell render */
   var rootEl = null;
+  // Crisp line-icons from the shared home.js catalog; emoji fallback keeps ICU safe if the
+  // catalog hasn't loaded yet (home.js is loaded before icu.js, so this normally hits window.icon).
+  function ico(name, fallback, cls) {
+    try { if (window.icon && window.ICONS && window.ICONS.has(name)) return window.icon(name, "icu-ico" + (cls ? " " + cls : "")); } catch (e) {}
+    return '<span class="icu-emoji">' + (fallback || "") + "</span>";
+  }
   function renderHeader() {
     var p = _raw.patient;
     var meta = [];
@@ -1296,28 +1311,28 @@
     var n = rosterCount();
     return '<div class="icu-hd"><div class="icu-hd-top">' +
       '<div class="icu-hd-name">' + (p.name ? esc(p.name) : "ICU Patient") + (p.status ? ' · <span style="font-weight:600;color:var(--muted)">' + esc(p.status) + "</span>" : "") + "</div>" +
-      '<button class="icu-x" data-icu-act="coach" aria-label="How this works" title="How this works">ⓘ</button>' +
-      '<button class="icu-x" data-icu-act="close" aria-label="Close ICU">✕</button>' +
-      '</div><div class="icu-hd-meta">' + (meta.length ? meta.join("<span>·</span>") : "Tap ✎ Patient, then ＋ Enter data below") + "</div>" +
+      '<button class="icu-x" data-icu-act="coach" aria-label="How this works" title="How this works">' + ico("info", "ⓘ") + '</button>' +
+      '<button class="icu-x" data-icu-act="close" aria-label="Close ICU">' + ico("close", "✕") + '</button>' +
+      '</div><div class="icu-hd-meta">' + (meta.length ? meta.join("<span>·</span>") : "Tap Patient, then Enter data below") + "</div>" +
       '<div class="icu-hd-actions">' +
-        '<button class="icu-chip" data-icu-act="edit:patient">✎ Patient</button>' +
-        '<button class="icu-chip" data-icu-act="savept">💾 Save</button>' +
-        '<button class="icu-chip" data-icu-act="patients">📋 Patients' + (n ? " (" + n + ")" : "") + '</button>' +
-        '<button class="icu-chip" data-icu-act="sharecase">📤 Share</button>' +
-        '<button class="icu-chip" data-icu-act="clearfindings">🧹 Clear</button>' +
-        '<button class="icu-chip" data-icu-act="newpt">＋ New</button>' +
+        '<button class="icu-chip" data-icu-act="edit:patient">' + ico("edit", "✎") + '<span>Patient</span></button>' +
+        '<button class="icu-chip" data-icu-act="savept">' + ico("save", "💾") + '<span>Save</span></button>' +
+        '<button class="icu-chip" data-icu-act="patients">' + ico("folder", "📋") + '<span>Patients' + (n ? " (" + n + ")" : "") + '</span></button>' +
+        '<button class="icu-chip" data-icu-act="sharecase">' + ico("share", "📤") + '<span>Share</span></button>' +
+        '<button class="icu-chip" data-icu-act="clearfindings">' + ico("trash", "🧹") + '<span>Clear</span></button>' +
+        '<button class="icu-chip icu-chip-primary" data-icu-act="newpt">' + ico("plus", "＋") + '<span>New</span></button>' +
       '</div></div>';
   }
   function renderTabBar() {
     return '<div class="icu-tabs">' + TABS.map(function (t) {
-      return '<button class="icu-tab ' + (t.id === _active ? "on" : "") + '" data-icu-act="tab:' + t.id + '"><span class="ti">' + t.ic + '</span><span class="tl">' + t.label + "</span></button>";
+      return '<button class="icu-tab ' + (t.id === _active ? "on" : "") + '" data-icu-act="tab:' + t.id + '"><span class="ti">' + ico(t.svg, t.ic) + '</span><span class="tl">' + t.label + "</span></button>";
     }).join("") + "</div>";
   }
   // one-line vitals summary for the collapsed status on non-overview tabs
   function liveSummaryLine() {
     var lv = latestVitals(), L = _raw.labs.recent || {}, mp = curMap();
     function v(x, u) { return (x == null || x === "") ? "—" : x + (u || ""); }
-    return '❤️ Vitals &amp; status' +
+    return ico("pulse", "❤️") + ' Vitals &amp; status' +
       '<span class="vs-k">HR</span> ' + v(lv.hr) + '<span class="vs-k">MAP</span> ' + v(mp) +
       '<span class="vs-k">SpO₂</span> ' + v(lv.spo2, "%") + '<span class="vs-k">K⁺</span> ' + v(L.k);
   }
@@ -1342,7 +1357,7 @@
   // Ward-vs-manual conflicts (clinician resolves; never auto-overwritten).
   function renderConflicts() {
     var cs = _raw.conflicts || []; if (!cs.length) return "";
-    return '<div class="icu-sec-lbl">⚠️ Value conflicts — your choice</div>' + cs.map(function (c) {
+    return '<div class="icu-sec-lbl">' + ico("warn", "⚠️") + ' Value conflicts — your choice</div>' + cs.map(function (c) {
       return '<div class="icu-card" style="border-left:3px solid var(--warn)"><b>' + esc(c.label) + '</b>' +
         '<div class="icu-row"><span>Ward Sync (' + fmtAgo(c.wardTs) + ')</span><b>' + esc(c.ward) + "</b></div>" +
         '<div class="icu-row"><span>Your manual entry (' + fmtAgo(c.manualTs) + ')</span><b>' + esc(c.manual) + "</b></div>" +
@@ -1357,7 +1372,7 @@
     var ab = res.filter(function (r) { return r.level && r.level !== "ok"; });
     if (!ab.length) return "";
     var COLOR = { crit: "var(--danger)", red: "var(--danger)", amber: "var(--warn)" };
-    return '<div class="icu-elyte-alerts">⚠️ Electrolyte alerts: ' + ab.map(function (r) {
+    return '<div class="icu-elyte-alerts">' + ico("warn", "⚠️") + ' Electrolyte alerts: ' + ab.map(function (r) {
       // name + severity word only — the grid below shows the numeric value + units
       // (r.value from ELYTE is in its own display units, so we don't repeat it here).
       return '<span class="icu-elyte-pill" style="border-color:' + (COLOR[r.level] || "var(--muted)") + ';color:' + (COLOR[r.level] || "var(--ink)") + '">' + esc(r.name) + (r.severity ? " · " + esc(r.severity) : "") + "</span>";
@@ -1386,7 +1401,7 @@
       '<button class="icu-btn" data-icu-act="coachdone">Got it</button></div>';
   }
   function emptyStateCard() {
-    return '<div class="icu-empty-state"><div class="icu-empty-ic">🫀</div>' +
+    return '<div class="icu-empty-state"><div class="icu-empty-ic">' + ico("pulse", "🫀") + '</div>' +
       '<div class="icu-empty-t">No patient data yet</div>' +
       '<p class="icu-empty-p">Track one ICU patient — enter, speak, or snap their vitals &amp; labs to get instant interpretation, alerts, and a round-ready summary.</p>' +
       '<button class="icu-btn icu-empty-cta" data-icu-act="adddata">＋ Add my patient</button></div>';
@@ -1432,7 +1447,7 @@
   }
   function paint() {
     if (!rootEl) return;
-    rootEl.innerHTML = renderHeader() + renderBody() + '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">📷</button>' + renderTabBar();
+    rootEl.innerHTML = renderHeader() + renderBody() + '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' + renderTabBar();
   }
 
   /* ---------------------------------------------------- manual entry forms */
