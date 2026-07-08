@@ -758,6 +758,14 @@
       '.icu-dx-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.icu-dx-acts .icu-btn{width:auto;flex:1 1 auto;min-width:44%}' +
       '.icu-deep-list{margin:10px 0 14px;display:flex;flex-direction:column;gap:5px}' +
       '.icu-deep-chk{font:600 13px var(--font);padding:2px 0}.icu-deep-chk.on{color:var(--ink)}.icu-deep-chk.off{color:var(--muted)}' +
+      // First-use guided-diagnosis tour (coach-mark above the bottom nav; safe-area aware)
+      '.icu-tour{position:fixed;left:0;right:0;bottom:calc(80px + env(safe-area-inset-bottom));z-index:10050;display:none;justify-content:center;padding:0 14px;pointer-events:none}.icu-tour.on{display:flex}' +
+      '.icu-tour-card{pointer-events:auto;width:min(440px,100%);background:var(--panel);border:1.5px solid var(--primary);border-radius:16px;box-shadow:0 16px 44px rgba(0,0,0,.4);padding:14px 16px}' +
+      '.icu-tour-step{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--primary)}' +
+      '.icu-tour-t{font:800 16px var(--font);color:var(--ink);margin:3px 0 5px}.icu-tour-x{font:600 13.5px/1.5 var(--font);color:var(--muted)}' +
+      '.icu-tour-chk{display:flex;align-items:center;gap:8px;font:600 13px var(--font);color:var(--ink);margin-top:10px}.icu-tour-chk input{width:18px;height:18px}' +
+      '.icu-tour-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}.icu-tour-btns .icu-btn{width:auto;flex:0 0 auto;padding:9px 16px}' +
+      '.icu-tour-hl{outline:3px solid var(--primary);outline-offset:3px;border-radius:12px;transition:outline-color .2s}' +
       '.icu-corr-note{font:600 12.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-corr-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}.icu-corr-partial{color:var(--muted);font-weight:600}' +
       // External evidence (Phase 4)
       '.icu-ev-hubs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.icu-ev-hub{font:700 12px var(--font);text-decoration:none;background:var(--panel2);border:1px solid var(--border);color:var(--primary);border-radius:999px;padding:5px 11px}' +
@@ -1868,6 +1876,7 @@
       var p = _raw.patient;
       var pid = p._id || p.name || "cur";
       if (_dxPt !== pid) { _dxPt = pid; _dxShow = false; _dxWhy = {}; }   // reset guided-dx UI on patient switch
+      if (icuDxFlowOn()) maybeAutoTour();   // first-use guided-diagnosis tour (per account; once)
       var cc = p.complaints ? esc(p.complaints) : '<span style="color:var(--muted)">Not documented — add manually.</span>';
       var dxTxt = p.diagnosis ? "<b>" + esc(p.diagnosis) + "</b>" : '<span style="color:var(--muted)">Not set</span>';
       var fchips = findChipsHTML(false);
@@ -1947,6 +1956,7 @@
         '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients' + (n ? " (" + n + ")" : "") + '</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Ward Sync</button>' +
         '<button class="icu-btn ghost" data-icu-act="coach">' + ico("info", "ⓘ") + ' How the ICU workstation works</button>' +
+        (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") +
         '</div>';
     }
   };
@@ -2893,6 +2903,60 @@
     modalEl.classList.add("on");
   }
 
+  /* ===== First-use guided-diagnosis tour (smd_icu_dxflow) — lightweight spotlight ==============
+   * A 4-step coach-mark (built on the tip-pop primitive) that explains the findings → working-dx →
+   * Deep-Review flow. Per-ACCOUNT state (keyed by ownerNow()); never re-triggers the disclaimer;
+   * shows only on the first eligible Diagnosis entry (or one more time after a plain Skip). */
+  var TOUR_VERSION = 1;
+  var TOUR_STEPS = [
+    { sel: '[data-icu-act="findpick"]', title: "Structured findings", text: "Add symptoms, signs and examination findings in a structured form." },
+    { sel: '[data-icu-act="finddx"]', title: "Find working diagnosis", text: "StewardMD combines your findings with available labs, imaging, vitals and trends to suggest working diagnoses." },
+    { sel: ".icu-dx-card", title: "You stay in control", text: "Select a suggested diagnosis, add your own, or continue without one — nothing is auto-applied." },
+    { sel: '[data-icu-act="corrdeep"]', title: "Deep Clinical Review", text: "Deep review uses only the context you confirm — advisory correlation, missing data and guideline-supported considerations." }
+  ];
+  var _tourEl = null, _tourStep = 0, _tourSessionDone = false;
+  function tourKey() { try { return "smd_icu_dxtour:" + ownerNow(); } catch (e) { return "smd_icu_dxtour:anon"; } }
+  function tourState() { try { return JSON.parse(localStorage.getItem(tourKey())) || {}; } catch (e) { return {}; } }
+  function saveTourState(s) { try { localStorage.setItem(tourKey(), JSON.stringify(s)); } catch (e) {} }
+  function tourShouldShow() {
+    if (!icuDxFlowOn()) return false;
+    var s = tourState();
+    if (s.dontShowAgain) return false;                 // explicit opt-out — never again
+    if (s.completedVersion === TOUR_VERSION) return false;   // completed this version
+    if ((s.skippedCount || 0) >= 2) return false;      // skipped → at most one extra showing
+    return true;
+  }
+  function clearTourHL() { var e; while ((e = document.querySelector(".icu-tour-hl"))) e.classList.remove("icu-tour-hl"); }
+  function ensureTourEl() { if (!_tourEl) { _tourEl = document.createElement("div"); _tourEl.id = "icuTour"; _tourEl.className = "icu-tour"; document.body.appendChild(_tourEl); _tourEl.addEventListener("click", onTourClick); } }
+  function startTour() { ensureTourEl(); _tourStep = 0; renderTour(); }
+  function renderTour() {
+    var n = TOUR_STEPS.length, step = TOUR_STEPS[_tourStep], last = _tourStep === n - 1;
+    clearTourHL();
+    var tgt = document.querySelector(step.sel);
+    if (tgt) { try { tgt.scrollIntoView({ block: "center" }); } catch (e) {} tgt.classList.add("icu-tour-hl"); }
+    _tourEl.innerHTML = '<div class="icu-tour-card" role="dialog" aria-label="ICU diagnosis tour">' +
+      '<div class="icu-tour-step">Step ' + (_tourStep + 1) + " of " + n + "</div>" +
+      '<div class="icu-tour-t">' + esc(step.title) + "</div>" +
+      '<div class="icu-tour-x">' + esc(step.text) + "</div>" +
+      (last ? '<label class="icu-tour-chk"><input type="checkbox" id="icuTourDont"> Don’t show this again</label>' : "") +
+      '<div class="icu-tour-btns">' +
+        (_tourStep > 0 ? '<button class="icu-btn ghost" data-icu-act="tourback">Back</button>' : "") +
+        '<button class="icu-btn ghost" data-icu-act="tourskip">Skip</button>' +
+        (last ? '<button class="icu-btn" data-icu-act="tourdone">Got it</button>' : '<button class="icu-btn" data-icu-act="tournext">Next</button>') +
+      "</div></div>";
+    _tourEl.classList.add("on");
+  }
+  function closeTour() { clearTourHL(); if (_tourEl) { _tourEl.classList.remove("on"); _tourEl.innerHTML = ""; } }
+  function onTourClick(e) {
+    var b = e.target.closest && e.target.closest("[data-icu-act]"); if (!b) return;
+    var act = b.getAttribute("data-icu-act");
+    if (act === "tourback") { if (_tourStep > 0) _tourStep--; renderTour(); }
+    else if (act === "tournext") { if (_tourStep < TOUR_STEPS.length - 1) _tourStep++; renderTour(); }
+    else if (act === "tourskip") { var s = tourState(); s.skippedVersion = TOUR_VERSION; s.skippedCount = (s.skippedCount || 0) + 1; s.skippedAt = nowTs(); saveTourState(s); closeTour(); }
+    else if (act === "tourdone") { var s2 = tourState(); s2.completedVersion = TOUR_VERSION; s2.completedAt = nowTs(); if ((document.getElementById("icuTourDont") || {}).checked) s2.dontShowAgain = true; saveTourState(s2); closeTour(); }
+  }
+  function maybeAutoTour() { if (!_tourSessionDone && tourShouldShow()) { _tourSessionDone = true; setTimeout(function () { try { startTour(); } catch (e) {} }, 500); } }
+
   /* ---- External trusted-evidence fallback (Phase 4) — opt-in, de-identified TOPIC only ---- */
   var _evCache = {}, _evBusy = false, _evErr = null;
   function extEvidenceOn() { try { var q = (location.search.match(/[?&]extevidence=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on"; var v = localStorage.getItem("smd_ext_evidence"); return v === null ? true : v === "1"; } catch (e) { return true; } }
@@ -3301,6 +3365,7 @@
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
       case "adddata": openDataMenu(); break;
       case "coach": _coachForce = true; paint(); break;
+      case "dxtour": startTour(); break;
       case "coachdone": setIcuSeen(); _coachForce = false; paint(); break;
       case "tip": showTip(arg); break;
       case "voice": if (modalEl) modalEl.classList.remove("on"); if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "icu" }); else alert("Voice intake is loading — try again in a moment."); break;
@@ -3402,6 +3467,7 @@
     _buildClinicalContext: buildClinicalContext, _correlationHash: correlationHash, _latestVitalsSummary: latestVitalsSummary, dxFlowOn: icuDxFlowOn,
     _runWorkingDx: runWorkingDx, _pickWorkingDx: pickWorkingDx, _dxFindingKeys: dxFindingKeys,
     _openDeepReviewConfirm: openDeepReviewConfirm, _deepReviewUsable: deepReviewUsable, _deepReviewItems: deepReviewItems,
+    _startTour: startTour, _tourShouldShow: tourShouldShow, _tourState: tourState, _tourKey: tourKey, _tourSteps: TOUR_STEPS,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"
