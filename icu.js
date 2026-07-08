@@ -191,7 +191,7 @@
     { key: "urea", kw: /\burea\b/i, ex: /nitrogen|\bbun\b|urin/i },   // BUN ≠ urea (scale differs) — excluded
     { key: "alb", kw: /\balbumin\b/i, ex: /globulin|ratio|urin|micro/i },
     { key: "wbc", kw: /\bwbc\b|leucocyte|leukocyte|total leu|\btlc\b/i, ex: /differential|urin|csf/i },
-    { key: "hb", kw: /h[ae]moglobin/i, ex: /corpuscular|\bmch\b|\bmchc\b|a1c|glycated|equivalent|reticulocyte/i },
+    { key: "hb", kw: /ha?emoglobin/i, ex: /corpuscular|\bmch\b|\bmchc\b|a1c|glycated|equivalent|reticulocyte/i },   // ha?e- matches US 'hemoglobin' + British 'haemoglobin'
     { key: "plt", kw: /platelet/i, ex: /immature|fraction/i },
     { key: "inr", kw: /\binr\b|prothrombin|\bpt\b\/inr/i, ex: /aptt|partial/i },
     { key: "bili_d", kw: /(direct|conjugated)\s*bilirubin|bilirubin[^a-z]*(direct|conjugated)/i, ex: /indirect|unconjugat/i },   // direct/conjugated — checked before total
@@ -205,7 +205,7 @@
     { key: "lipase", kw: /lipase/i, ex: null },
     { key: "pct", kw: /procalcitonin|\bpct\b/i, ex: null },
     { key: "neut", kw: /neutrophil/i, ex: /band|immature|precursor|promyelo|metamyelo/i },
-    { key: "hct", kw: /h[ae]matocrit|\bhct\b|\bpcv\b/i, ex: null }
+    { key: "hct", kw: /ha?ematocrit|\bhct\b|\bpcv\b/i, ex: null }
   ];
   // Body-fluid / non-serum specimens must NEVER populate a serum analyte field: an
   // "Ascitic Fluid Albumin" is not serum albumin; a pleural/CSF/peritoneal/synovial/drain
@@ -462,6 +462,29 @@
       '.icu-empty-t{font:800 17px var(--font);color:var(--ink);margin-bottom:6px}' +
       '.icu-empty-p{font:500 13px/1.6 var(--font);color:var(--muted);max-width:340px;margin:0 auto}' +
       '.icu-empty-cta{width:auto!important;display:inline-block;margin-top:12px;padding:12px 22px}' +
+      '.icu-tr-empty-btns{display:flex;flex-direction:column;gap:8px;max-width:270px;margin:14px auto 0}' +
+      '.icu-trend-wins{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:10px 0 12px}' +
+      '.icu-tr-flags{background:var(--warn-soft,#fef3c7);border:1px solid var(--warn,#92620a);border-radius:12px;padding:10px 12px;margin:2px 0 12px}' +
+      '.icu-tr-flags-h{font:800 12px var(--font);color:var(--warn,#92620a);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;display:flex;align-items:center;gap:5px}' +
+      '.icu-tr-flags-h span{font-weight:600;text-transform:none;letter-spacing:0;opacity:.85}.icu-tr-flags-h .icu-ico{width:15px;height:15px}' +
+      '.icu-tr-flag{display:inline-block;background:var(--panel);border:1px solid var(--warn,#92620a);color:var(--ink);border-radius:999px;font:700 12px var(--font);padding:5px 11px;margin:0 6px 6px 0}' +
+      '.icu-tr-group{margin-bottom:12px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--panel)}' +
+      '.icu-tr-group>summary{cursor:pointer;list-style:none;padding:12px 14px;font:800 13.5px var(--font);color:var(--ink);display:flex;align-items:center;gap:8px}' +
+      '.icu-tr-group>summary::-webkit-details-marker{display:none}' +
+      '.icu-tr-group>summary::after{content:"\\25B8";margin-left:auto;color:var(--muted);transition:transform .15s}.icu-tr-group[open]>summary::after{transform:rotate(90deg)}' +
+      '.icu-tr-cnt{background:var(--primary-soft);color:var(--primary);border-radius:999px;font:800 11px var(--font);padding:2px 9px}' +
+      '.icu-tr-none{color:var(--muted);font-weight:600;font-size:12px}.icu-tr-empty{padding:0 14px 14px;color:var(--muted);font:600 12.5px var(--font)}' +
+      '.icu-tr-card{margin:0 10px 10px}' +
+      '.icu-tr-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}' +
+      '.icu-tr-lbl{font:800 14px var(--font);color:var(--ink)}' +
+      '.icu-tr-val{font:800 18px var(--font);color:var(--ink);white-space:nowrap}.icu-tr-val .u{font:600 11px var(--font);color:var(--muted)}.icu-tr-arrow{font-size:17px}' +
+      '.icu-tr-sub{font:600 12px var(--font);color:var(--muted);margin-top:3px}' +
+      '.icu-tr-interp{font:800 12.5px var(--font);margin-top:2px;text-transform:capitalize}' +
+      '.icu-tr-note{font:600 11.5px var(--font);color:var(--muted);margin-top:4px;font-style:italic}' +
+      '.icu-tr-src{display:flex;align-items:center;gap:8px;font:600 11px var(--font);color:var(--muted);margin:6px 0 8px}' +
+      '.icu-tr-st{border-radius:999px;font:800 10px var(--font);padding:2px 8px;text-transform:uppercase;letter-spacing:.03em}' +
+      '.icu-tr-st.crit{background:var(--danger-soft,#fee2e2);color:var(--danger,#b91c1c)}.icu-tr-st.ab{background:var(--warn-soft,#fef3c7);color:var(--warn,#92620a)}.icu-tr-st.ok{background:var(--ok-soft,#dcfce7);color:var(--ok,#15803d)}' +
+      '.icu-tr-single{font:600 12px var(--font);color:var(--muted);padding:8px 0}' +
       // persistent patient banner + severity key (A6)
       '.icu-banner{display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px;font:600 12px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:8px 11px;margin-bottom:10px}' +
       '.icu-banner b{color:var(--ink);font-weight:800}.icu-banner .bad{color:var(--danger);font-weight:800}.icu-banner .sep{opacity:.4;margin:0 3px}' +
@@ -972,12 +995,22 @@
     var spanY = (maxY - minY) || 1, spanX = (maxX - minX) || 1;
     function X(t) { return (pad + (W - 2 * pad) * (t - minX) / spanX); }
     function Y(v) { return (H - pad - (H - 2 * pad) * (v - minY) / spanY); }
-    var d = points.map(function (p, i) { return (i ? "L" : "M") + X(p.ts).toFixed(1) + " " + Y(p.v).toFixed(1); }).join(" ");
+    // Break the line across LARGE gaps so we never imply a continuous trajectory we don't have
+    // (e.g. a 3-day hole between two labs). Gap threshold = 2.5× the median spacing, min 36 h.
+    var dts = []; for (var gi = 1; gi < points.length; gi++) dts.push(points[gi].ts - points[gi - 1].ts);
+    var sdt = dts.slice().sort(function (a, b) { return a - b; }); var med = sdt.length ? sdt[Math.floor(sdt.length / 2)] : 0;
+    var maxGap = opts.maxGap || Math.max(med * 2.5, 36 * 3600 * 1000);
+    var d = "", dots = "";
+    points.forEach(function (p, i) {
+      var brk = i === 0 || (p.ts - points[i - 1].ts) > maxGap;
+      d += (brk ? "M" : "L") + X(p.ts).toFixed(1) + " " + Y(p.v).toFixed(1) + " ";
+      dots += '<circle cx="' + X(p.ts).toFixed(1) + '" cy="' + Y(p.v).toFixed(1) + '" r="2.1" fill="var(--primary)"/>';
+    });
     var band = "";
     if (opts.band) { var y1 = Y(opts.band[1]), y2 = Y(opts.band[0]); band = '<rect x="0" y="' + y1.toFixed(1) + '" width="' + W + '" height="' + Math.max(0, y2 - y1).toFixed(1) + '" fill="var(--ok-soft)" opacity=".7"/>'; }
     var dec = spanY < 5 ? 1 : 0, last = ys[ys.length - 1];
     return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" style="width:100%;height:78px;display:block">' + band +
-      '<path d="' + d + '" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>' +
+      '<path d="' + d.trim() + '" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>' + dots + '</svg>' +
       '<div style="display:flex;justify-content:space-between;font:600 10px var(--font);color:var(--muted);margin-top:3px"><span>' + esc(minY.toFixed(dec)) + "–" + esc(maxY.toFixed(dec)) + (opts.unit ? " " + esc(opts.unit) : "") + '</span><span>last <b style="color:var(--ink)">' + esc(last) + "</b></span></div>";
   }
   function trendCard(title, series, opts) { return '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">' + esc(title) + "</div>" + trendGraph(series, opts) + "</div>"; }
@@ -987,14 +1020,130 @@
       (recs || []).map(function (r) { return '<p style="margin:9px 0 0">• ' + esc(r) + "</p>"; }).join("") + evidenceBadges(ev) + "</div>";
   }
   function winSelector() {
-    var opts = [["24h", 864e5], ["48h", 1728e5], ["72h", 2592e5], ["7d", 6048e5]];
-    return '<div style="display:flex;gap:6px;justify-content:center;margin-top:4px">' + opts.map(function (o) {
-      return '<button class="icu-btn ghost" style="width:auto;margin:0;padding:7px 13px;font-size:12px;' + (_trendWin === o[1] ? "background:var(--primary-soft);border-color:var(--primary)" : "") + '" data-icu-act="win:' + o[1] + '">' + o[0] + "</button>";
+    var opts = [["24h", 864e5], ["48h", 1728e5], ["72h", 2592e5], ["7d", 6048e5], ["All", 0]];
+    return '<div class="icu-trend-wins">' + opts.map(function (o) {
+      return '<button class="icu-btn ghost" style="width:auto;margin:0;padding:7px 12px;font-size:12px;' + (_trendWin === o[1] ? "background:var(--primary-soft);border-color:var(--primary)" : "") + '" data-icu-act="win:' + o[1] + '">' + o[0] + "</button>";
     }).join("") + "</div>";
   }
   function vitalSeries(key, win) { var c = Date.now(); return (_raw.vitals || []).filter(function (v) { return v[key] != null && (!win || v.ts >= c - win); }).map(function (v) { return { ts: v.ts, v: v[key] }; }); }
   function mapSeries(win) { var c = Date.now(); return (_raw.vitals || []).filter(function (v) { return (v.map != null || (v.sbp != null && v.dbp != null)) && (!win || v.ts >= c - win); }).map(function (v) { return { ts: v.ts, v: v.map != null ? v.map : mapCalc(v.sbp, v.dbp) }; }); }
   function labSeries(key, win) { var c = Date.now(); return (_raw.labs.trends || []).filter(function (r) { return r[key] != null && (!win || r.ts >= c - win); }).map(function (r) { return { ts: r.ts, v: r[key] }; }); }
+
+  /* ===================== ICU TRENDS — patient trajectory (config-driven) =====================
+   * Direction semantics live in DATA, not the UI. good: which way is clinically GOOD
+   * ('down' | 'up' | null=contextual). unit: the app's stored unit (SI where wardToSI converts —
+   * creat µmol/L, ca/mg/po4/glu mmol/L, alb g/L; native otherwise). src: series store. */
+  var TREND_INTERP = {
+    hb:   { label: "Haemoglobin", unit: "g/dL", good: "up", src: "lab", ref: [12, 16], note: "fall — consider bleeding / haemodilution / sample variation" },
+    hct:  { label: "Haematocrit", unit: "%", good: "up", src: "lab" },
+    wbc:  { label: "WBC / TLC", unit: "", good: null, src: "lab", note: "correlate with infection / steroids / clinical status" },
+    neut: { label: "Neutrophils", unit: "", good: null, src: "lab", note: "correlate clinically" },
+    plt:  { label: "Platelets", unit: "", good: "up", src: "lab", ref: [150, 400], note: "fall — concerning (sepsis / DIC / drugs)" },
+    creat:{ label: "Creatinine", unit: "µmol/L", good: "down", src: "lab" },
+    urea: { label: "Urea", unit: "", good: "down", src: "lab" },
+    na:   { label: "Sodium", unit: "mmol/L", good: null, src: "lab", ref: [135, 145], crit: function (v) { return v < 120 || v > 160; } },
+    k:    { label: "Potassium", unit: "mmol/L", good: null, src: "lab", ref: [3.5, 5.0], crit: function (v) { return v > 6.0 || v < 2.5; }, note: "K by safety threshold — >6.0 or <2.5 is critical" },
+    cl:   { label: "Chloride", unit: "mmol/L", good: null, src: "lab", ref: [98, 107] },
+    hco3: { label: "Bicarbonate", unit: "mmol/L", good: null, src: "lab", ref: [22, 28] },
+    ca:   { label: "Calcium (total)", unit: "mmol/L", good: null, src: "lab", ref: [2.1, 2.6] },
+    mg:   { label: "Magnesium", unit: "mmol/L", good: null, src: "lab", ref: [0.7, 1.0] },
+    po4:  { label: "Phosphate", unit: "mmol/L", good: null, src: "lab", ref: [0.8, 1.5] },
+    bili: { label: "Bilirubin (total)", unit: "mg/dL", good: "down", src: "lab", ref: [0.2, 1.2] },
+    bili_d:{ label: "Bilirubin (direct)", unit: "mg/dL", good: "down", src: "lab" },
+    ast:  { label: "AST / SGOT", unit: "U/L", good: "down", src: "lab" },
+    alt:  { label: "ALT / SGPT", unit: "U/L", good: "down", src: "lab" },
+    alp:  { label: "Alk phosphatase", unit: "U/L", good: "down", src: "lab" },
+    alb:  { label: "Albumin", unit: "g/L", good: "up", src: "lab", ref: [35, 52] },
+    inr:  { label: "INR", unit: "", good: "down", src: "lab" },
+    amylase:{ label: "Amylase", unit: "U/L", good: null, src: "lab", note: "trend only — correlate clinically" },
+    lipase:{ label: "Lipase", unit: "U/L", good: null, src: "lab", note: "trend only — correlate clinically" },
+    glu:  { label: "Glucose", unit: "mmol/L", good: null, src: "lab", ref: [4, 7.8] },
+    lactate:{ label: "Lactate", unit: "mmol/L", good: "down", src: "vital" },
+    crp:  { label: "CRP", unit: "mg/L", good: "down", src: "lab" },
+    pct:  { label: "Procalcitonin", unit: "ng/mL", good: "down", src: "lab" },
+    hr:   { label: "Heart rate", unit: "bpm", good: null, src: "vital" },
+    map:  { label: "MAP", unit: "mmHg", good: "up", src: "map", ref: [65, 110], note: "MAP <65 — perfusion at risk" },
+    spo2: { label: "SpO₂", unit: "%", good: "up", src: "vital", ref: [92, 100] },
+    rr:   { label: "Resp rate", unit: "/min", good: null, src: "vital" },
+    temp: { label: "Temperature", unit: "°C", good: null, src: "vital" },
+    uop:  { label: "Urine output", unit: "mL/h", good: "up", src: "vital" }
+  };
+  var TREND_GROUPS = [
+    { id: "cbc", name: "CBC / Haematology", keys: ["hb", "hct", "wbc", "neut", "plt"] },
+    { id: "renal", name: "Renal / Electrolytes", keys: ["creat", "urea", "na", "k", "cl", "hco3", "ca", "mg", "po4"] },
+    { id: "liver", name: "Liver / Coagulation", keys: ["bili", "bili_d", "ast", "alt", "alp", "alb", "inr"] },
+    { id: "panc", name: "Pancreatic / Metabolic", keys: ["amylase", "lipase", "glu", "lactate", "crp", "pct"] },
+    { id: "vitals", name: "Vitals / Haemodynamics", keys: ["hr", "map", "spo2", "rr", "temp", "uop"] }
+  ];
+  function trendSeriesFor(key, win) { var m = TREND_INTERP[key]; if (!m) return []; return m.src === "map" ? mapSeries(win) : m.src === "vital" ? vitalSeries(key, win) : labSeries(key, win); }
+  function fmtDur(ms) { var h = Math.round(ms / 36e5); if (h < 1) return "<1 h"; if (h < 48) return h + " h"; var dd = Math.round(h / 24); return dd + " day" + (dd === 1 ? "" : "s"); }
+  function fmtWhen(ts) { try { var d = new Date(ts); return d.toLocaleDateString(undefined, { day: "2-digit", month: "short" }) + ", " + d.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
+  function fmtNum(v) { if (v == null) return "—"; var a = Math.abs(v), dp = a >= 100 ? 0 : a >= 10 ? 1 : 2, f = Math.pow(10, dp); return (Math.round(v * f) / f).toString(); }
+  function interpret(key, series) {
+    var m = TREND_INTERP[key] || {}; series = (series || []).slice().sort(function (a, b) { return a.ts - b.ts; });
+    if (!series.length) return null;
+    var latest = series[series.length - 1], prev = series.length > 1 ? series[series.length - 2] : null;
+    var o = { key: key, meta: m, label: m.label || key, latest: latest.v, when: latest.ts, unit: m.unit || "", note: m.note || "" };
+    o.status = (m.crit && m.crit(latest.v)) ? "critical" : m.ref ? ((latest.v < m.ref[0] || latest.v > m.ref[1]) ? "abnormal" : "normal") : "—";
+    if (!prev) { o.dir = "single"; o.arrow = "•"; o.interp = "single reading"; o.tone = "flat"; return o; }
+    o.prev = prev.v; o.delta = latest.v - prev.v; o.pct = prev.v !== 0 ? (o.delta / prev.v) * 100 : null; o.interval = fmtDur(latest.ts - prev.ts);
+    var eps = Math.max(Math.abs(prev.v) * 0.02, 1e-9);
+    o.dir = o.delta > eps ? "up" : o.delta < -eps ? "down" : "flat"; o.arrow = o.dir === "up" ? "↑" : o.dir === "down" ? "↓" : "→";
+    if (o.dir === "flat") { o.interp = "stable"; o.tone = "flat"; }
+    else if (m.good === "down") { o.interp = o.dir === "up" ? "worsening" : "improving"; o.tone = o.dir === "up" ? "bad" : "good"; }
+    else if (m.good === "up") { o.interp = o.dir === "up" ? "improving" : "concerning"; o.tone = o.dir === "up" ? "good" : "bad"; }
+    else { o.interp = "trend only — correlate clinically"; o.tone = "flat"; }
+    if (m.crit && m.crit(latest.v)) o.tone = "bad";
+    return o;
+  }
+  function analyteCard(key, win) {
+    var series = trendSeriesFor(key, win), o = interpret(key, series); if (!o) return "";
+    var m = o.meta, tc = o.tone === "bad" ? "var(--danger,#b91c1c)" : o.tone === "good" ? "var(--ok,#15803d)" : "var(--muted)";
+    var pill = o.status === "critical" ? '<span class="icu-tr-st crit">critical</span>' : o.status === "abnormal" ? '<span class="icu-tr-st ab">abnormal</span>' : o.status === "normal" ? '<span class="icu-tr-st ok">normal</span>' : "";
+    var src = (STATE.src[key] && STATE.src[key].source) || "Ward Sync";
+    var head = '<div class="icu-tr-head"><span class="icu-tr-lbl">' + esc(o.label) + '</span><span class="icu-tr-val">' + esc(fmtNum(o.latest)) + (o.unit ? ' <span class="u">' + esc(o.unit) + '</span>' : '') + ' <b class="icu-tr-arrow" style="color:' + tc + '">' + o.arrow + '</b></span></div>';
+    var sub = "";
+    if (o.prev != null) {
+      var pctStr = (o.pct != null && Math.abs(o.pct) >= 5) ? " · " + (o.pct > 0 ? "+" : "") + Math.round(o.pct) + "%" : "";
+      sub = '<div class="icu-tr-sub">Previous ' + esc(fmtNum(o.prev)) + ' · ' + (o.delta > 0 ? "+" : "") + esc(fmtNum(o.delta)) + ' in ' + esc(o.interval) + pctStr + '</div>' +
+        '<div class="icu-tr-interp" style="color:' + tc + '">' + esc(o.interp) + '</div>';
+    }
+    var note = (o.note && (o.tone === "bad" || m.good == null)) ? '<div class="icu-tr-note">' + esc(o.note) + '</div>' : "";
+    var srcLine = '<div class="icu-tr-src">' + pill + '<span>' + esc(src) + ' · ' + esc(fmtWhen(o.when)) + '</span></div>';
+    var chart = series.length >= 2 ? trendGraph(series, { unit: o.unit, band: m.ref }) : '<div class="icu-tr-single">Single reading — no trend yet</div>';
+    return '<div class="icu-card icu-tr-card">' + head + sub + note + srcLine + chart + '</div>';
+  }
+  function groupSection(grp, win) {
+    var have = grp.keys.filter(function (k) { return trendSeriesFor(k, win).length > 0; });
+    if (!have.length) return '<details class="icu-tr-group"><summary>' + esc(grp.name) + ' <span class="icu-tr-none">no data</span></summary><div class="icu-tr-empty">No historical data available in this window.</div></details>';
+    return '<details class="icu-tr-group" open><summary>' + esc(grp.name) + ' <span class="icu-tr-cnt">' + have.length + '</span></summary>' + have.map(function (k) { return analyteCard(k, win); }).join("") + '</details>';
+  }
+  function significantChanges(win) {
+    var flags = [];
+    Object.keys(TREND_INTERP).forEach(function (k) {
+      var s = trendSeriesFor(k, win).slice().sort(function (a, b) { return a.ts - b.ts; }); if (s.length < 2) return;
+      var m = TREND_INTERP[k], latest = s[s.length - 1], prev = s[s.length - 2], dt = latest.ts - prev.ts, pct = prev.v !== 0 ? (latest.v - prev.v) / prev.v * 100 : 0;
+      if ((k === "k" || k === "na") && m.crit && m.crit(latest.v)) flags.push(m.label + " now " + fmtNum(latest.v) + " " + m.unit);
+      else if (k === "creat" && dt <= 48 * 36e5 && pct >= 50) flags.push("Creatinine up " + Math.round(pct) + "% in " + fmtDur(dt));
+      else if (k === "plt" && s.length >= 3 && latest.v < prev.v && prev.v < s[s.length - 3].v) flags.push("Platelets falling over 3+ results");
+      else if (k === "lactate" && latest.v > prev.v && latest.v >= 2) flags.push("Lactate rising (now " + fmtNum(latest.v) + " mmol/L)");
+      else if (m.good && Math.abs(pct) >= 50 && dt <= 72 * 36e5) flags.push(m.label + " " + (pct > 0 ? "up" : "down") + " " + Math.round(Math.abs(pct)) + "% in " + fmtDur(dt));
+    });
+    flags = flags.filter(function (f, i) { return flags.indexOf(f) === i; }).slice(0, 6);
+    if (!flags.length) return "";
+    return '<div class="icu-tr-flags"><div class="icu-tr-flags-h">' + ico("warn", "⚠️") + ' Significant changes <span>· trend flags — review clinically</span></div>' + flags.map(function (f) { return '<span class="icu-tr-flag">' + esc(f) + '</span>'; }).join("") + '</div>';
+  }
+  function hasTrendPatient() { var p = _raw.patient; return !!(p && (p.name || p.diagnosis)) || (_raw.labs.trends || []).length > 0 || (_raw.vitals || []).length > 0; }
+  function trendsEmpty() {
+    return '<div class="icu-empty-state"><div class="icu-empty-ic">' + ico("trend", "📈") + '</div>' +
+      '<div class="icu-empty-t">Select a patient to view trends</div>' +
+      '<div class="icu-empty-p">Trends chart a patient’s labs &amp; vitals over time — rising, falling, or stable — from Ward Sync history and your saved data.</div>' +
+      '<div class="icu-tr-empty-btns">' +
+        '<button class="icu-btn" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Select patient</button>' +
+        '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients</button>' +
+        '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Fetch from Ward Sync</button>' +
+      '</div></div>';
+  }
 
   // --- ABG / acid–base interpreter -----------------------------------------
   function analyzeABG(g, L) {
@@ -1345,19 +1494,10 @@
         '<div class="icu-card"><h3>Extubation readiness</h3>' + extub.map(function (t) { return '<div class="icu-row"><span>' + esc(t) + '</span><b>☐</b></div>'; }).join("") + evidenceBadges(["ESICM", "SCCM"]) + "</div>";
     },
     trends: function () {
-      var w = _trendWin, metrics = [
-        ["Heart rate", vitalSeries("hr", w), { unit: "bpm" }],
-        ["MAP", mapSeries(w), { band: [65, 110], unit: "mmHg" }],
-        ["SpO₂", vitalSeries("spo2", w), { band: [92, 100], unit: "%" }],
-        ["Respiratory rate", vitalSeries("rr", w), { unit: "/min" }],
-        ["Temperature", vitalSeries("temp", w), { unit: "°C" }],
-        ["Urine output", vitalSeries("uop", w), { unit: "mL/h" }],
-        ["Lactate", vitalSeries("lactate", w), { unit: "mmol/L" }],
-        ["Creatinine", labSeries("creat", w), { unit: "" }],
-        ["Potassium", labSeries("k", w), { unit: "mEq/L" }],
-        ["Sodium", labSeries("na", w), { unit: "mEq/L" }]
-      ];
-      return winSelector() + metrics.map(function (m) { return trendCard(m[0], m[1], m[2]); }).join("");
+      if (!hasTrendPatient()) return trendsEmpty();
+      var w = _trendWin;
+      return '<div class="icu-tr-wrap">' + significantChanges(w) + winSelector() +
+        TREND_GROUPS.map(function (g) { return groupSection(g, w); }).join("") + "</div>";
     },
     rounds: function () {
       var done = 0; ROUNDS_ITEMS.forEach(function (it) { if (_raw.rounds[it.k] && _raw.rounds[it.k].done) done++; });
@@ -1944,7 +2084,7 @@
     switch (cmd) {
       case "close": ICU.close(); break;
       case "tab": _active = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
-      case "win": _trendWin = +arg || _trendWin; paint(); break;
+      case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
       case "roundnote": openRoundNote(arg); break;
       case "saveroundnote": saveRoundNote(arg); break;
