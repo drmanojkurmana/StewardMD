@@ -190,6 +190,17 @@
       return v === null ? true : v === "1";
     } catch (e) { return true; }
   }
+  // Guided ICU diagnosis workflow (structured findings → working dx → Deep Review over the FULL
+  // clinical context). Flag: smd_icu_dxflow (default ON) + ?icudxflow= kill-switch. When OFF, the
+  // unified context omits findings/vitals and Deep Review reverts to imaging+labs only.
+  function icuDxFlowOn() {
+    try {
+      var q = (location.search.match(/[?&]icudxflow=([^&]+)/) || [])[1];
+      if (q != null) return q === "1" || q === "on" || q === "true";
+      var v = localStorage.getItem("smd_icu_dxflow");
+      return v === null ? true : v === "1";
+    } catch (e) { return true; }
+  }
   // Modality family + filter bucket from the free-text study title (no structured
   // modality is exposed by GHIS). Original study title is preserved separately.
   function imgModality(title) {
@@ -2676,13 +2687,35 @@
     if (labDir("plt") === "falling") add("falling platelets");
     return out;
   }
+  // Compact latest-vitals concept strings (numbers only — no identifiers). Feeds the unified context.
+  function latestVitalsSummary() {
+    var v = latestByTs(_raw.vitals || []), out = [];
+    if (!v || !Object.keys(v).length) return out;
+    if (v.sbp != null && v.dbp != null) { var mp = mapCalc(v.sbp, v.dbp); out.push("BP " + v.sbp + "/" + v.dbp + (mp != null ? " (MAP " + mp + ")" : "")); }
+    if (v.hr != null) out.push("HR " + v.hr);
+    if (v.rr != null) out.push("RR " + v.rr);
+    if (v.spo2 != null) out.push("SpO₂ " + v.spo2 + "%");
+    if (v.temp != null) out.push("Temp " + v.temp + "°C");
+    if (v.lactate != null) out.push("Lactate " + v.lactate);
+    return out;
+  }
+  // Unified, de-identified clinical context — the SINGLE reusable service (A6) feeding both the
+  // deterministic pass and the Deep Review packet. When smd_icu_dxflow is ON, it folds in the
+  // structured finding chips (negation preserved) + latest vitals so Deep Review reasons over the
+  // FULL picture, not just imaging + labs. When OFF, findings/vitals are omitted (old behavior).
   function correlationEvidence() {
     var p = _raw.patient || {}, img = extractImagingConcepts(), crit = imagingCriticalFlags(), labs = extractLabConcepts(), clinical = [];
     if (p.complaints) clinical.push(String(p.complaints));
     if (p.diagnosis) clinical.push("working diagnosis: " + p.diagnosis);
-    return { img: img, crit: crit, labs: labs, clinical: clinical,
-      counts: { imaging: (_raw.imaging || []).filter(function (r) { return !r.hidden; }).length, labs: labs.length } };
+    var findings = [], vitals = [];
+    if (icuDxFlowOn()) {
+      (_raw.findings || []).forEach(function (c) { findings.push({ id: c.canonicalFindingId, label: c.displayLabel, polarity: c.polarity, temporality: c.temporality, inReasoning: !!c.inReasoning }); });
+      vitals = latestVitalsSummary();
+    }
+    return { img: img, crit: crit, labs: labs, findings: findings, vitals: vitals, clinical: clinical,
+      counts: { imaging: (_raw.imaging || []).filter(function (r) { return !r.hidden; }).length, labs: labs.length, findings: findings.length, vitals: vitals.length } };
   }
+  function buildClinicalContext() { return correlationEvidence(); }   // A6: canonical name for the unified context service
   function correlationMappedKeys(ev) {
     var keys = {};
     ev.img.forEach(function (c) { if (CONCEPT_KEY[c]) keys[CONCEPT_KEY[c]] = true; });
@@ -2706,18 +2739,23 @@
     return { ev: ev, keys: keys, candidates: cands, status: status, unmapped: unmapped };
   }
   // Evidence hash for the Deep-review cache (patient-scoped; de-identified content only).
-  function correlationHash(ev) { return imgHash(JSON.stringify([ev.img, ev.crit, ev.labs, ev.clinical])); }
+  function correlationHash(ev) { return imgHash(JSON.stringify([ev.img, ev.crit, ev.labs, ev.clinical, ev.findings || [], ev.vitals || []])); }
   function buildCorrelationPacket(ev) {
     var p = _raw.patient || {};
-    return {
+    var pkt = {
       patientContext: { ageBand: ageBandOf(p.age), sex: p.sex ? String(p.sex) : "", specialty: "", careSetting: "ICU" },
       imaging: { concepts: ev.img, criticalFlags: ev.crit },
       labs: { abnormalities: ev.labs },
       clinical: { approvedFindings: (ev.clinical || []).map(imgRedact) }
     };
+    // Structured findings (with polarity/temporality so the AI sees negation) + vitals — controlled
+    // vocabulary + numbers, re-run through redactPHI as a backstop. Present only when non-empty.
+    if ((ev.findings || []).length) pkt.findings = ev.findings.map(function (f) { return { finding: imgRedact(f.label), polarity: f.polarity || "present", temporality: f.temporality || "current" }; });
+    if ((ev.vitals || []).length) pkt.vitals = ev.vitals.map(imgRedact);
+    return pkt;
   }
   function runCorrelationDeep() {
-    var ev = correlationEvidence(); if (!(ev.img.length || ev.labs.length)) { if (window.toast) toast("Add imaging or labs first."); return; }
+    var ev = correlationEvidence(); if (!(ev.img.length || ev.labs.length || (ev.findings || []).length || (ev.vitals || []).length)) { if (window.toast) toast("Add findings, imaging, or labs first."); return; }
     var key = (_raw.patient._id || "cur") + ":" + correlationHash(ev);
     if (_corrCache[key]) { paint(); return; }   // cache hit (SUCCESS only) — reuse, no AI call (token control)
     _corrErr = null; _corrBusy = true; paint();
@@ -2820,13 +2858,15 @@
     var pid = _raw.patient._id || _raw.patient.name || "cur";
     if (_corrPt !== pid) { _corrPt = pid; _corrAnalysed = false; _corrBusy = false; _corrCache = {}; _corrErr = null; }   // reset ALL correlation state on patient switch (no cross-patient leak)
     var imgs = (_raw.imaging || []).filter(function (r) { return !r.hidden; }), labN = Object.keys(_raw.labs.recent || {}).length;
+    var fN0 = icuDxFlowOn() ? (_raw.findings || []).length : 0, vN0 = icuDxFlowOn() ? latestVitalsSummary().length : 0;
     var header = '<div class="icu-sec-lbl" style="margin-top:14px">' + ico("pulse", "🧠") + ' Clinical Correlation</div>';
     if (!hasData()) return header + '<div class="icu-empty">Select a patient to correlate imaging and laboratory findings.</div>';
-    if (!imgs.length && !labN) return header + '<div class="icu-empty">Add imaging and laboratory data to correlate them.</div>';
+    if (!imgs.length && !labN && !fN0 && !vN0) return header + '<div class="icu-empty">Add findings, imaging or laboratory data to correlate them.</div>';
     if (!_corrAnalysed) {
-      return header + '<div class="icu-card"><p class="icu-doc-sub">Correlate this patient’s imaging concepts, laboratory abnormalities and recorded findings against StewardMD’s knowledge base. Advisory only — the deterministic engine remains the diagnostic authority.</p>' +
-        '<div class="icu-corr-meta">' + imgs.length + " imaging report" + (imgs.length === 1 ? "" : "s") + " · " + labN + " lab value" + (labN === 1 ? "" : "s") + "</div>" +
-        '<button class="icu-btn" data-icu-act="corranalyse">' + ico("pulse", "✨") + ' Analyse imaging + labs</button></div>';
+      var fN = icuDxFlowOn() ? (_raw.findings || []).length : 0;
+      return header + '<div class="icu-card"><p class="icu-doc-sub">Correlate this patient’s ' + (fN ? "structured findings, " : "") + 'imaging concepts, laboratory abnormalities' + (icuDxFlowOn() ? " and vitals" : "") + ' against StewardMD’s knowledge base. Advisory only — the deterministic engine remains the diagnostic authority.</p>' +
+        '<div class="icu-corr-meta">' + (fN ? fN + " finding" + (fN === 1 ? "" : "s") + " · " : "") + imgs.length + " imaging report" + (imgs.length === 1 ? "" : "s") + " · " + labN + " lab value" + (labN === 1 ? "" : "s") + "</div>" +
+        '<button class="icu-btn" data-icu-act="corranalyse">' + ico("pulse", "✨") + ' Analyse ' + (fN ? "findings + " : "") + 'imaging + labs</button></div>';
     }
     var q = runQuickCorrelation(), ev = q.ev, deep = _corrCache[(_raw.patient._id || "cur") + ":" + correlationHash(ev)];
     var cls = /Strong/.test(q.status) ? "ok" : /No adequate|Insufficient/.test(q.status) ? "muted" : /Conflicting/.test(q.status) ? "warn" : "partial";
@@ -2848,7 +2888,11 @@
       considBlock = '<div class="icu-corr-sub" style="color:var(--muted)">No confident internal match — run a Deep clinical review for a full correlation.</div>';
     }
     var redflags = ev.crit.length ? '<div class="icu-img-crit">' + ico("warn", "⚠️") + ' <b>Urgent imaging findings</b> — verify & escalate.<div class="icu-img-crit-t">' + ev.crit.map(function (c) { return "<span>" + esc(c) + "</span>"; }).join("") + "</div></div>" : "";
-    var evidence = (ev.img.length || ev.labs.length) ? '<div class="icu-corr-sub">Evidence assembled</div>' + corrChips(ev.img.concat(ev.labs)) : "";
+    // Evidence assembled now surfaces the structured findings (with negation prefix) + vitals too,
+    // so the clinician sees their symptoms are included — not just imaging + labs.
+    var fLabels = (ev.findings || []).map(function (f) { return (f.polarity === "absent" ? "No " : f.polarity === "possible" ? "? " : f.temporality === "historical" ? "H/o " : "") + f.label; });
+    var evAll = fLabels.concat(ev.img).concat(ev.labs).concat(ev.vitals || []);
+    var evidence = evAll.length ? '<div class="icu-corr-sub">Evidence assembled</div>' + corrChips(evAll) : "";
     var deepBlock = _corrBusy ? '<div class="icu-assist-msg">Running deep clinical review…</div>' : (deep ? '<div class="icu-corr-deep">' + corrDeepHTML(deep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
     return header + '<div class="icu-card">' + badge + redflags + considBlock + supporting + missing + evidence +
       '<div class="icu-img-btns" style="margin-top:10px">' +
@@ -3222,6 +3266,7 @@
     _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,
     openFindingPicker: openFindingPicker, _addFindingChip: addFindingChip, _applyFindState: applyFindState, _findStateOf: findStateOf, _vocabNlpCtx: vocabNlpCtx,
     _correlationEvidence: correlationEvidence, _runQuickCorrelation: runQuickCorrelation, _buildCorrelationPacket: buildCorrelationPacket, _correlationTopic: correlationTopic, extEvidenceOn: extEvidenceOn,
+    _buildClinicalContext: buildClinicalContext, _correlationHash: correlationHash, _latestVitalsSummary: latestVitalsSummary, dxFlowOn: icuDxFlowOn,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"

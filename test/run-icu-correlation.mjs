@@ -137,7 +137,7 @@ try {
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     var body=root.textContent||"";
-    return JSON.stringify({ notAnalysed: /Analyse imaging \\+ labs|Add imaging and laboratory data/.test(body), noStaleDeep: !/pulmonary infective process/i.test(body) });`);
+    return JSON.stringify({ notAnalysed: /Analyse[^<]*imaging \\+ labs|Add findings, imaging or laboratory data/.test(body), noStaleDeep: !/pulmonary infective process/i.test(body) });`);
   const I = JSON.parse(iso);
   ok(I.notAnalysed && I.noStaleDeep, "patient isolation: new patient starts un-analysed, no prior correlation carried over");
 
