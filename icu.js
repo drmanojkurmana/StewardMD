@@ -308,6 +308,14 @@
       '.icu-emoji{display:inline-flex;align-items:center;line-height:1}' +
       '.icu-sec-lbl .icu-ico{width:15px;height:15px;vertical-align:-2px;margin-right:4px;color:var(--primary)}' +
       '.icu-elyte-alerts>.icu-ico{width:15px;height:15px;vertical-align:-2px;margin-right:3px;color:var(--warn,#92620a)}' +
+      '.icu-srcbtn .i .icu-ico{width:20px;height:20px;color:var(--primary)}' +
+      '.icu-ai .ic .icu-ico{width:22px;height:22px;color:var(--primary)}' +
+      '.icu-ai .man .icu-ico{width:12px;height:12px;vertical-align:-1px}' +
+      '.icu-sheet h3 .icu-ico{width:19px;height:19px;vertical-align:-3px;margin-right:5px;color:var(--primary)}' +
+      '.icu-step .icu-ico{width:15px;height:15px;vertical-align:-2px;margin-right:3px;color:var(--primary)}' +
+      '.icu-badge .icu-ico{width:14px;height:14px;vertical-align:-2px;margin-right:3px}' +
+      '.icu-btn .icu-ico{width:16px;height:16px;vertical-align:-3px;margin-right:5px}' +
+      '.man .icu-ico{width:12px;height:12px;vertical-align:-1px;margin-right:1px}' +
       '.icu-chip:active{background:var(--primary-soft)}' +
       '.icu-adddata{background:var(--primary);color:#fff;font:800 15px var(--font);padding:14px;border:none;border-radius:14px;width:100%;cursor:pointer;box-shadow:0 2px 10px var(--primary-soft)}' +
       // scroll area
@@ -465,23 +473,23 @@
   /* --------------------------------------------------------- AI import panel */
   function renderAIImport() {
     var cards = [
-      { d: "labs", ic: "🧪", t: "Laboratory report", s: "CBC · LFT · RFT · Electrolytes" },
-      { d: "abg", ic: "🩸", t: "ABG report", s: "pH · PaCO₂ · PaO₂ · HCO₃" },
-      { d: "ventilator", ic: "🫁", t: "Ventilator screen", s: "Mode · FiO₂ · PEEP · TV · Plateau" },
-      { d: "monitor", ic: "❤️", t: "Monitor / vitals", s: "HR · BP · SpO₂ · Temp" }
+      { d: "labs", ic: "🧪", svg: "flask", t: "Laboratory report", s: "CBC · LFT · RFT · Electrolytes" },
+      { d: "abg", ic: "🩸", svg: "abg", t: "ABG report", s: "pH · PaCO₂ · PaO₂ · HCO₃" },
+      { d: "ventilator", ic: "🫁", svg: "lungs", t: "Ventilator screen", s: "Mode · FiO₂ · PEEP · TV · Plateau" },
+      { d: "monitor", ic: "❤️", svg: "pulse", t: "Monitor / vitals", s: "HR · BP · SpO₂ · Temp" }
     ];
-    return '<div class="icu-sec-lbl">🔄 Bring in patient data <span style="font-weight:600;text-transform:none;letter-spacing:0">· auto-fills fields you confirm</span></div>' +
+    return '<div class="icu-sec-lbl">' + ico("refresh", "🔄") + ' Bring in patient data <span style="font-weight:600;text-transform:none;letter-spacing:0">· auto-fills fields you confirm</span></div>' +
       '<div class="icu-src-btns">' +
-        '<button class="icu-srcbtn ward" data-icu-act="wardfetch"><span class="i">🏥</span><span class="l">Fetch from Ward Sync</span><span class="d">Pick patient → CBC · electrolytes · RFT · LFT</span></button>' +
+        '<button class="icu-srcbtn ward" data-icu-act="wardfetch"><span class="i">' + ico("hospital", "🏥") + '</span><span class="l">Fetch from Ward Sync</span><span class="d">Pick patient → CBC · electrolytes · RFT · LFT</span></button>' +
         // AI Vision (Camera / Upload) is on-device-first (native ML Kit OCR) — native only.
         (window.SMD_IS_NATIVE
-          ? '<button class="icu-srcbtn" data-icu-act="impmethod:camera"><span class="i">📷</span><span class="l">Camera</span><span class="d">Snap any report/screen — labs, ABG, vitals &amp; vent read together</span></button>' +
-            '<button class="icu-srcbtn" data-icu-act="impmethod:file"><span class="i">📄</span><span class="l">Upload PDF / image</span><span class="d">Every page read — e.g. electrolytes p1 + ABG p2</span></button>'
+          ? '<button class="icu-srcbtn" data-icu-act="impmethod:camera"><span class="i">' + ico("camera", "📷") + '</span><span class="l">Camera</span><span class="d">Snap any report/screen — labs, ABG, vitals &amp; vent read together</span></button>' +
+            '<button class="icu-srcbtn" data-icu-act="impmethod:file"><span class="i">' + ico("upload", "📄") + '</span><span class="l">Upload PDF / image</span><span class="d">Every page read — e.g. electrolytes p1 + ABG p2</span></button>'
           : '') +
       '</div>' +
       '<div class="icu-ai-grid">' + cards.map(function (c) {
-        return '<button class="icu-ai" data-icu-act="edit:' + (c.d === "abg" ? "abg" : c.d) + '"><div class="ic">' + c.ic + '</div><div class="t">' + c.t + '</div><div class="s">' + c.s + '</div>' +
-          '<span class="man">✎ Enter manually</span></button>';
+        return '<button class="icu-ai" data-icu-act="edit:' + (c.d === "abg" ? "abg" : c.d) + '"><div class="ic">' + ico(c.svg, c.ic) + '</div><div class="t">' + c.t + '</div><div class="s">' + c.s + '</div>' +
+          '<span class="man">' + ico("edit", "✎") + ' Enter manually</span></button>';
       }).join("") + "</div>";
   }
 
@@ -1521,17 +1529,17 @@
     // image via SMD_IMAGE_ENGINE. Hidden on web (no native capture/OCR).
     var canSnap = !!(window.SMD_IS_NATIVE && ((window.SMD_NATIVE && window.SMD_NATIVE.ocr) ||
       (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.aiAvailable && SMD_IMAGE_ENGINE.aiAvailable())));
-    var steps = [["📷", "ICU Monitor", "monitor"], ["🩸", "ABG report", "abg"], ["🧪", "Laboratory Report", "labs"], ["🫁", "Ventilator", "ventilator"], ["📋", "ICU Flow Sheet", "flowsheet"]];
-    modalEl.innerHTML = '<div class="icu-sheet"><h3>📷 ICU Snapshot</h3>' +
+    var steps = [["📷", "ICU Monitor", "monitor", "pulse"], ["🩸", "ABG report", "abg", "abg"], ["🧪", "Laboratory Report", "labs", "flask"], ["🫁", "Ventilator", "ventilator", "lungs"], ["📋", "ICU Flow Sheet", "flowsheet", "droplet"]];
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("camera", "📷") + ' ICU Snapshot</h3>' +
       '<div class="icu-steps">' + steps.map(function (s, i) {
-        return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + s[0] + " Capture " + s[1] + "</div>" +
+        return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + ico(s[3], s[0]) + " Capture " + s[1] + "</div>" +
           (canSnap
-            ? '<label class="icu-btn" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px;cursor:pointer">📷 Capture / upload<input type="file" accept="image/*" capture="environment" data-snap="' + s[2] + '" style="display:none"></label><span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">or ✎ enter manually</span><div class="snap-out" data-out="' + s[2] + '" style="font:600 11px var(--font);color:var(--muted);margin-top:4px"></div>'
-            : '<span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">✎ Enter manually for now</span>') +
+            ? '<label class="icu-btn" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px;cursor:pointer">' + ico("camera", "📷") + ' Capture / upload<input type="file" accept="image/*" capture="environment" data-snap="' + s[2] + '" style="display:none"></label><span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">or ' + ico("edit", "✎") + ' enter manually</span><div class="snap-out" data-out="' + s[2] + '" style="font:600 11px var(--font);color:var(--muted);margin-top:4px"></div>'
+            : '<span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">' + ico("edit", "✎") + ' Enter manually for now</span>') +
           "</div></div>";
       }).join("") + "</div>" +
       (canSnap
-        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">📷 Image Engine ready</span><p style="margin-top:8px">Capture any screen or report — you\'ll choose <b>Private Device OCR</b> (free, on-device) or <b>AI Vision</b> (Pro). Each capture reads the <b>whole report</b> and fills <b>every</b> relevant tab (an ABG slip fills both ABG <i>and</i> electrolytes). <b>Verify every value.</b></p></div>'
+        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">' + ico("camera", "📷") + ' Image Engine ready</span><p style="margin-top:8px">Capture any screen or report — you\'ll choose <b>Private Device OCR</b> (free, on-device) or <b>AI Vision</b> (Pro). Each capture reads the <b>whole report</b> and fills <b>every</b> relevant tab (an ABG slip fills both ABG <i>and</i> electrolytes). <b>Verify every value.</b></p></div>'
         : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 Snapshot · mobile app only</span><p style="margin-top:8px">Capture ICU screens and have them read into the tabs. Available in the StewardMD iOS/Android app.</p></div>') +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
@@ -1827,9 +1835,9 @@
 
   /* ------------------------------------------ prominent "enter data" chooser */
   var DATA_MENU = [
-    ["🧑", "Patient details", "patient"], ["❤️", "Vitals (monitor)", "monitor"], ["🩸", "Labs / electrolytes", "labs"],
-    ["🫁", "ABG", "abg"], ["🌬", "Ventilator", "ventilator"], ["💧", "Fluid balance", "flowsheet"],
-    ["💉", "Infusion", "infusion"], ["🎯", "Today's goals", "goals"]
+    ["🧑", "Patient details", "patient", "user"], ["❤️", "Vitals (monitor)", "monitor", "pulse"], ["🩸", "Labs / electrolytes", "labs", "flask"],
+    ["🫁", "ABG", "abg", "abg"], ["🌬", "Ventilator", "ventilator", "lungs"], ["💧", "Fluid balance", "flowsheet", "droplet"],
+    ["💉", "Infusion", "infusion", "syringe"], ["🎯", "Today's goals", "goals", "check"]
   ];
   // ONE consolidated "Add / import data" sheet — Speak (MaiK Scribe) · Snap · Ward · Type.
   function openDataMenu() {
@@ -1838,13 +1846,13 @@
     modalEl.innerHTML = '<div class="icu-sheet"><h3>Add / import data</h3>' +
       '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Enter, speak, or snap this patient’s vitals, labs, ABG or ventilator settings. Nothing is applied until you review it.</p>' +
       '<div class="icu-grid2">' +
-        '<button class="icu-btn" data-icu-act="voice"' + A + '>🎤 Speak <span style="opacity:.8;font-weight:700">· MaiK Scribe</span></button>' +
-        '<button class="icu-btn ghost" data-icu-act="snapshot"' + A + '>📷 Snap a photo</button>' +
-        '<button class="icu-btn ghost" data-icu-act="wardfetch"' + A + '>🏥 Import from ward</button>' +
+        '<button class="icu-btn" data-icu-act="voice"' + A + '>' + ico("mic", "🎤") + ' Speak <span style="opacity:.8;font-weight:700">· MaiK Scribe</span></button>' +
+        '<button class="icu-btn ghost" data-icu-act="snapshot"' + A + '>' + ico("camera", "📷") + ' Snap a photo</button>' +
+        '<button class="icu-btn ghost" data-icu-act="wardfetch"' + A + '>' + ico("hospital", "🏥") + ' Import from ward</button>' +
       '</div>' +
-      '<div style="font:800 11px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:14px 0 8px">⌨️ Type it in</div>' +
+      '<div style="font:800 11px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:14px 0 8px">Type it in</div>' +
       '<div class="icu-grid2">' + DATA_MENU.map(function (m) {
-        return '<button class="icu-btn ghost" data-icu-act="edit:' + m[2] + '"' + A + '>' + m[0] + " " + m[1] + "</button>";
+        return '<button class="icu-btn ghost" data-icu-act="edit:' + m[2] + '"' + A + '>' + ico(m[3], m[0]) + " " + m[1] + "</button>";
       }).join("") + "</div>" +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:10px">Close</button></div>';
     modalEl.classList.add("on");
