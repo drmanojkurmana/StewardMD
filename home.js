@@ -1235,7 +1235,10 @@
   // model names anywhere; a single persistent advisory badge replaces per-message
   // disclaimers; answers render as safe Markdown with human-readable Sources ▸.
   var _maikHist = [];
-  var _maikBodyHTML = "";   // full rendered conversation (questions + answers), kept for the session so it survives closing/reopening the sheet (resets when the app/tab is closed)
+  var MAIK_LS = "smd_maik_thread";
+  function maikSaveThread(h) { try { localStorage.setItem(MAIK_LS, h || ""); } catch (e) {} }
+  // full rendered conversation (questions + answers); persisted device-local so it survives reloads/app relaunch (cleared with the New button). It is the app's own escaped markup, restored the same way the in-session copy already was.
+  var _maikBodyHTML = (function () { try { return localStorage.getItem(MAIK_LS) || ""; } catch (e) { return ""; } })();
   var _maikBusy = false;          // idempotency guard: one in-flight provider call at a time
   var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
   // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
@@ -1263,6 +1266,9 @@
       ".maik-x .xg{font-size:16px;font-weight:700;line-height:1}",
       ".maik-x:hover{border-color:var(--hp,#0f766e);color:var(--hp,#0f766e)}",
       ".maik-x:active{transform:scale(.94)}",
+      ".maik-hd .maik-new{margin-left:auto;background:transparent;border-color:transparent;color:var(--hmut,#64748b);padding:0 10px}",
+      ".maik-hd .maik-new:hover{border-color:var(--hp,#0f766e);color:var(--hp,#0f766e);background:var(--hbg,#f1f5f9)}",
+      ".maik-hd #maikX{margin-left:0}",
       ".maik-body{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px;display:flex;flex-direction:column;gap:10px}",
       ".maik-cmp{flex:0 0 auto;display:flex;flex-direction:column;gap:8px;align-items:stretch;padding:10px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--hbd,#e2e8f0);background:var(--hpanel,#fff)}",
       ".maik-cmp-row{display:flex;gap:8px;align-items:flex-end}",
@@ -1298,6 +1304,7 @@
     sheet.innerHTML =
       '<div class="maik-grab" id="maikGrab" aria-hidden="true"></div>' +
       '<div class="maik-hd"><img class="mk-logo" src="/maik-logo.png" alt="MaiK" /><div class="mk-ti"><div class="mk-s">Medical AI Knowledge · Clinical assistant</div></div>' +
+        '<button class="maik-x maik-new" id="maikNew" aria-label="New conversation" title="Start a new conversation"><span class="xg">＋</span>New</button>' +
         '<button class="maik-x" id="maikX" aria-label="Close assistant"><span class="xg">✕</span>Close</button></div>' +
       '<div class="maik-adv"><span class="maik-badge">⚠ AI-generated · not medical advice — verify independently</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
@@ -1307,9 +1314,9 @@
     document.body.classList.add("maik-open");
     requestAnimationFrame(function () { scrim.classList.add("on"); sheet.classList.add("on"); });
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
-    function close() { try { if (body && body.innerHTML.trim()) _maikBodyHTML = body.innerHTML; } catch (e) {} sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260); }
+    function close() { try { if (body && body.innerHTML.trim()) { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } } catch (e) {} sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260); }
     function scroll() { body.scrollTop = body.scrollHeight; }
-    function bubble(who, html) { var d = document.createElement("div"); d.className = "maik-b " + (who === "you" ? "you" : "ai"); d.innerHTML = html; body.appendChild(d); scroll(); return d; }
+    function bubble(who, html) { var d = document.createElement("div"); d.className = "maik-b " + (who === "you" ? "you" : "ai"); d.innerHTML = html; body.appendChild(d); scroll(); try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {} return d; }
     function chips(list) {
       var w = document.createElement("div"); w.className = "maik-chips";
       list.forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.textContent = c.label; b.addEventListener("click", c.on); w.appendChild(b); });
@@ -1438,6 +1445,7 @@
       _maikTurns.push({ q: question, a: md.slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift();
       if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() };
       scroll();
+      try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
     }
     function runClinical(question, retrieval, depth, active, topicLabel) {
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
@@ -1515,8 +1523,10 @@
       runClinical(q, q, depth, active, topic);
     }
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
-    if (_maikBodyHTML) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
+    if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
+    function maikNewThread() { _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; maikSaveThread(""); if (body) body.innerHTML = ""; emptyState(); if (qEl) { qEl.value = ""; qEl.focus(); } }
     sheet.querySelector("#maikX").addEventListener("click", close);
+    var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
     var _grab = sheet.querySelector("#maikGrab"); if (_grab) _grab.addEventListener("click", close);
     scrim.addEventListener("click", close);
     sendBtn.addEventListener("click", send);
