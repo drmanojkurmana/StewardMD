@@ -221,6 +221,76 @@ try {
   `);
   ok(c23.picker === true, "\"Edit context first\" opens the finding picker (no AI call)");
 
-  console.log(fails === 0 ? "\nALL GREEN — ICU dx-flow Slice 1+2+3 passed" : `\n${fails} FAILED`);
+  // ===== Slice 4 — first-use spotlight tour (per account) =====
+  const clearTour = `try{localStorage.removeItem(ICU._tourKey());}catch(e){}`;
+
+  // 24) startTour renders a 4-step coach-mark; step 1 highlights Structured findings
+  const c24 = await J(clearTour + `
+    ICU._startTour(); var el=document.getElementById('icuTour');
+    return JSON.stringify({ on:!!(el&&el.classList.contains("on")), steps:ICU._tourSteps.length, t1:(el?(el.querySelector('.icu-tour-t')||{}).textContent:"")||"", hasNext:!!(el&&el.querySelector('[data-icu-act="tournext"]')), hasSkip:!!(el&&el.querySelector('[data-icu-act="tourskip"]')) });
+  `);
+  ok(c24.on && c24.steps === 4 && /structured findings/i.test(c24.t1) && c24.hasNext && c24.hasSkip, `tour renders (${c24.steps} steps; step1="${c24.t1}"; Next+Skip)`);
+
+  // 25) gating (test 15): fresh → shows; completed / dont-show / skipped-twice → does not
+  const c25 = await J(clearTour + `
+    var fresh=ICU._tourShouldShow();
+    localStorage.setItem(ICU._tourKey(), JSON.stringify({completedVersion:1})); var done=ICU._tourShouldShow();
+    localStorage.setItem(ICU._tourKey(), JSON.stringify({dontShowAgain:true})); var dont=ICU._tourShouldShow();
+    localStorage.setItem(ICU._tourKey(), JSON.stringify({skippedCount:2})); var sk2=ICU._tourShouldShow();
+    ${clearTour} return JSON.stringify({fresh:fresh, done:done, dont:dont, sk2:sk2});
+  `);
+  ok(c25.fresh === true && c25.done === false && c25.dont === false && c25.sk2 === false, "tour gating: fresh shows; completed / don't-show / skipped-twice do not");
+
+  // 26) Skip records skippedCount + allows one more; a 2nd skip stops it
+  const c26 = await J(clearTour + `
+    ICU._startTour(); document.querySelector('#icuTour [data-icu-act="tourskip"]').click();
+    var s1=ICU._tourState().skippedCount, after1=ICU._tourShouldShow();
+    ICU._startTour(); document.querySelector('#icuTour [data-icu-act="tourskip"]').click();
+    var s2=ICU._tourState().skippedCount, after2=ICU._tourShouldShow();
+    ${clearTour} return JSON.stringify({s1:s1, after1:after1, s2:s2, after2:after2});
+  `);
+  ok(c26.s1 === 1 && c26.after1 === true && c26.s2 === 2 && c26.after2 === false, "Skip: shows once more after first skip, stops after second");
+
+  // 27) "Got it" + "Don't show again" persists per account and stops the tour
+  const c27 = await J(clearTour + `
+    ICU._startTour();
+    document.querySelector('#icuTour [data-icu-act="tournext"]').click();
+    document.querySelector('#icuTour [data-icu-act="tournext"]').click();
+    document.querySelector('#icuTour [data-icu-act="tournext"]').click();
+    var dont=document.getElementById('icuTourDont'); if(dont) dont.checked=true;
+    document.querySelector('#icuTour [data-icu-act="tourdone"]').click();
+    var st=ICU._tourState(); var raw=localStorage.getItem(ICU._tourKey());
+    ${clearTour} return JSON.stringify({ completed:st.completedVersion, dont:st.dontShowAgain, persisted:!!raw, show:false });
+  `);
+  ok(c27.completed === 1 && c27.dont === true && c27.persisted, `"Got it" + don't-show persists per account (completedVersion=${c27.completed})`);
+
+  // 28) per-account key + never touches the disclaimer/account keys (test 18)
+  const c28 = await J(`
+    var beforeConsent=localStorage.getItem("smd_consent"), beforeAcct=localStorage.getItem("stewardmd_account");
+    ${clearTour} ICU._startTour(); document.querySelector('#icuTour [data-icu-act="tourskip"]').click();
+    var k=ICU._tourKey();
+    var r={ keyNs: k.indexOf("smd_icu_dxtour:")===0, consentSame: localStorage.getItem("smd_consent")===beforeConsent, acctSame: localStorage.getItem("stewardmd_account")===beforeAcct };
+    ${clearTour} return JSON.stringify(r);
+  `);
+  ok(c28.keyNs && c28.consentSame && c28.acctSame, "tour state is per-account (smd_icu_dxtour:<uid>) and never touches smd_consent / stewardmd_account");
+
+  // 29) coach-mark sits ABOVE the bottom nav (higher z + offset from bottom) — no overlap (test 20)
+  const c29 = await J(clearTour + `
+    ICU.reset(); ICU.ingestPatient({name:"NAVX",age:60,sex:"M"}); ICU.open();
+    ICU._startTour(); var el=document.getElementById('icuTour'), nav=document.querySelector('.icu-tabs');
+    var tz=+getComputedStyle(el).zIndex||0, nz=nav?(+getComputedStyle(nav).zIndex||0):-1, bottom=getComputedStyle(el).bottom;
+    ${clearTour} return JSON.stringify({ aboveNav: tz>nz, offset: bottom });
+  `);
+  ok(c29.aboveNav && c29.offset && c29.offset !== "0px", `coach-mark above the nav (z ${c29.aboveNav}; bottom offset ${c29.offset})`);
+
+  // 30) manual replay from More works even after completion (test 19)
+  const c30 = await J(`
+    localStorage.setItem(ICU._tourKey(), JSON.stringify({completedVersion:1, dontShowAgain:true}));
+    ICU._startTour(); var on=!!(document.getElementById('icuTour')||{}).classList && document.getElementById('icuTour').classList.contains("on");
+    ${clearTour} return JSON.stringify({on:on});
+  `);
+  ok(c30.on === true, "manual replay opens the tour even after completion / don't-show");
+
+  console.log(fails === 0 ? "\nALL GREEN — ICU dx-flow Slice 1–4 passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
