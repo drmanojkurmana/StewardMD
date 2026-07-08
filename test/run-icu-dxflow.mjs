@@ -109,6 +109,77 @@ try {
   `);
   ok(c12.eq === true, "building the context does not perturb the deterministic engine");
 
-  console.log(fails === 0 ? "\nALL GREEN — ICU dx-flow Slice 1 passed" : `\n${fails} FAILED`);
+  // ===== Slice 2 — deterministic working-diagnosis pass =====
+
+  // 13) dxFindingKeys: present/possible feed the engine; ABSENT excluded; note:* excluded
+  const c13 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"K",age:60,sex:"M"});
+    ICU._addFindingChip({canonicalFindingId:"alteredSensorium",displayLabel:"AMS",inReasoning:true},"manual_picker");
+    ICU._addFindingChip({canonicalFindingId:"fever",displayLabel:"Fever",polarity:"absent",inReasoning:true},"manual_picker");
+    ICU._addFindingChip({canonicalFindingId:"note:guarding",displayLabel:"Guarding",inReasoning:false},"manual_picker");
+    var k=ICU._dxFindingKeys();
+    return JSON.stringify({altered:!!k.alteredSensorium, fever:!!k.fever, note:!!k["note:guarding"], n:Object.keys(k).length});
+  `);
+  ok(c13.altered && !c13.fever && !c13.note && c13.n === 1, `dx keys: present kept, absent "fever" excluded, note:* excluded (${c13.n} key)`);
+
+  // 14) ACCEPTANCE CASE — altered sensorium + quadriparesis + seizure + severe HTN →
+  //     structural/epileptic/vascular CNS leads; meningitis does NOT dominate
+  const c14 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"ACC",age:60,sex:"M"});
+    [["alteredSensorium","Altered sensorium"],["focalNeuroDeficit","Quadriparesis"],["seizure","Seizure"],["hypertensionHx","Severe hypertension"]].forEach(function(p){ ICU._addFindingChip({canonicalFindingId:p[0],displayLabel:p[1],inReasoning:true},"manual_picker"); });
+    var r=ICU._runWorkingDx();
+    return JSON.stringify({ sufficient:r.sufficient, names:r.cards.map(function(x){return x.c.name;}), top:r.cards[0]&&r.cards[0].c.name, lvl:r.cards[0]&&r.cards[0].lvl });
+  `);
+  const topStructural = /epilep|status|ictal|stroke|h[ae]?morrhage|\bich\b|intracerebral|encephalopath|ncse|cvt|thrombosis|tumour|tumor/i.test(c14.top || "");
+  const menTop = /mening/i.test(c14.top || "");
+  ok(c14.sufficient && topStructural && !menTop, `acceptance: structural CNS leads (top="${c14.top}" ${c14.lvl}); meningitis not dominant [${(c14.names || []).slice(0, 4).join(", ")}]`);
+
+  // 15) ≤5 cards, each carries a support level
+  const c15 = await J(`var r=ICU._runWorkingDx(); return JSON.stringify({n:r.cards.length, lvls:r.cards.map(function(x){return x.lvl;})});`);
+  ok(c15.n >= 1 && c15.n <= 5 && c15.lvls.every(l => /Strong|Moderate|Possible/.test(l)), `≤5 cards with support levels (${c15.n}: ${c15.lvls.join(", ")})`);
+
+  // 16) selecting a suggestion stores patient.workingDx provenance (+ back-compat diagnosis string)
+  const c16 = await J(`
+    ICU._pickWorkingDx("Ischaemic stroke","deterministic_suggestion");
+    var w=ICU.state().patient.workingDx||{};
+    return JSON.stringify({ dx:ICU.state().patient.diagnosis, name:w.name, confirmed:w.clinicianConfirmed, source:w.source, hasHash:!!w.contextHash });
+  `);
+  ok(c16.dx === "Ischaemic stroke" && c16.name === "Ischaemic stroke" && c16.confirmed === true && c16.source === "deterministic_suggestion" && c16.hasHash, `selection stores workingDx{confirmed,source,contextHash}`);
+
+  // 17) insufficient context — only a note:* finding → no confident differential (no invented ranking)
+  const c17 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"NC",age:50,sex:"F"});
+    ICU._addFindingChip({canonicalFindingId:"note:woundDischarge",displayLabel:"Wound discharge",inReasoning:false},"manual_picker");
+    var r=ICU._runWorkingDx();
+    return JSON.stringify({keys:r.keys.length, sufficient:r.sufficient});
+  `);
+  ok(c17.keys === 0 && !c17.sufficient, `insufficient context (note-only) → no invented ranking`);
+
+  // 18) UI: "Find working diagnosis" renders cards; a card exposes Select + View reasoning
+  const c18 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"UI",age:60,sex:"M"});
+    [["alteredSensorium","AMS"],["seizure","Seizure"],["focalNeuroDeficit","Quadriparesis"]].forEach(function(p){ ICU._addFindingChip({canonicalFindingId:p[0],displayLabel:p[1],inReasoning:true},"manual_picker"); });
+    ICU.open(); var root=document.getElementById('icuRoot');
+    root.querySelector('[data-icu-act="ws:careplan"]').click();
+    var fbtn=root.querySelector('[data-icu-act="finddx"]'); var hadFind=!!fbtn; if(fbtn) fbtn.click();
+    var cards=root.querySelectorAll('.icu-dx-card').length;
+    var sel=!!root.querySelector('[data-icu-act^="dxpick"]'), why=!!root.querySelector('[data-icu-act^="dxwhy"]');
+    return JSON.stringify({hadFind:hadFind, cards:cards, sel:sel, why:why});
+  `);
+  ok(c18.hadFind && c18.cards >= 1 && c18.sel && c18.why, `UI: Find working diagnosis → ${c18.cards} cards with Select + View reasoning`);
+
+  // 19) advisory — running the differential NEVER silently sets a diagnosis (only Select commits);
+  //     and it is stable/read-only (repeated runs don't mutate patient state)
+  const c19 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"PURE",age:60,sex:"M"});
+    ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
+    var dxB=ICU.state().patient.diagnosis||"", wB=ICU.state().patient.workingDx||null;
+    ICU._runWorkingDx(); ICU._runWorkingDx();
+    var dxA=ICU.state().patient.diagnosis||"", wA=ICU.state().patient.workingDx||null;
+    return JSON.stringify({ dxUnset: dxB==="" && dxA==="", noWdx: !wB && !wA });
+  `);
+  ok(c19.dxUnset && c19.noWdx, "advisory: running the differential never silently sets a diagnosis (only Select commits)");
+
+  console.log(fails === 0 ? "\nALL GREEN — ICU dx-flow Slice 1+2 passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
