@@ -397,13 +397,14 @@
       { id:"resp", label:"Respiration (PaO₂/FiO₂)", type:"select", opts:[{v:"0",t:"≥400 (0)"},{v:"1",t:"<400 (1)"},{v:"2",t:"<300 (2)"},{v:"3",t:"<200 + support (3)"},{v:"4",t:"<100 + support (4)"}] },
       { id:"coag", label:"Coagulation (platelets ×10³)", type:"select", opts:[{v:"0",t:"≥150 (0)"},{v:"1",t:"<150 (1)"},{v:"2",t:"<100 (2)"},{v:"3",t:"<50 (3)"},{v:"4",t:"<20 (4)"}] },
       { id:"liver", label:"Liver (bilirubin mg/dL)", type:"select", opts:[{v:"0",t:"<1.2 (0)"},{v:"1",t:"1.2–1.9 (1)"},{v:"2",t:"2.0–5.9 (2)"},{v:"3",t:"6.0–11.9 (3)"},{v:"4",t:"≥12 (4)"}] },
-      { id:"cardio", label:"Cardiovascular", type:"select", opts:[{v:"0",t:"MAP ≥70 (0)"},{v:"1",t:"MAP <70 (1)"},{v:"2",t:"Low-dose pressor (2)"},{v:"3",t:"Mod-dose pressor (3)"},{v:"4",t:"High-dose pressor (4)"}] },
+      { id:"cardio", label:"Cardiovascular (pressor µg/kg/min)", type:"select", opts:[{v:"0",t:"MAP ≥70 (0)"},{v:"1",t:"MAP <70, no pressor (1)"},{v:"2",t:"Dopamine ≤5 or any dobutamine (2)"},{v:"3",t:"Dopamine >5, or epi ≤0.1, or norepi ≤0.1 (3)"},{v:"4",t:"Dopamine >15, or epi >0.1, or norepi >0.1 (4)"}] },
       { id:"cns", label:"CNS (GCS)", type:"select", opts:[{v:"0",t:"15 (0)"},{v:"1",t:"13–14 (1)"},{v:"2",t:"10–12 (2)"},{v:"3",t:"6–9 (3)"},{v:"4",t:"<6 (4)"}] },
       { id:"renal", label:"Renal (creatinine mg/dL)", type:"select", opts:[{v:"0",t:"<1.2 (0)"},{v:"1",t:"1.2–1.9 (1)"},{v:"2",t:"2.0–3.4 (2)"},{v:"3",t:"3.5–4.9 (3)"},{v:"4",t:"≥5.0 (4)"}] }
     ],
     compute:function(v){
       var s=Number(v.resp)+Number(v.coag)+Number(v.liver)+Number(v.cardio)+Number(v.cns)+Number(v.renal);
-      return { v:s, u:"/24", i:"Mortality rises with score; an acute rise of ≥2 from baseline defines sepsis (Sepsis-3)." };
+      var mort=band(s,[[6,"predicted hospital mortality <10%"],[9,"~15–20%"],[12,"~40–50%"],[14,"~50–60%"],[24,"~80% or higher"]]);
+      return { v:s, u:"/24", i:mort+". Trend (ΔSOFA over 24–48 h) predicts outcome better than a single reading; an acute rise of ≥2 from baseline with suspected infection defines sepsis (Sepsis-3)." };
     } },
 
   { id:"pf_ratio", cat:"Critical care", icon:"🌬️", title:"PaO₂/FiO₂ ratio",
