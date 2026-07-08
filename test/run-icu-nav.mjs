@@ -78,6 +78,14 @@ try {
   // 5) selected patient preserved throughout
   ok(await ev(`return ICU.state().patient.name;`) === "NAVPT", "selected patient preserved across all workspace switches");
 
+  // 6) Trends surfaced up front: Overview has a one-tap Trends shortcut + it's the first Monitoring sub-tab
+  await clickWs("overview");
+  const ovTrends = await ev(`var root=document.getElementById('icuRoot'); return !!(root.querySelector('[data-icu-act="tab:trends"]'));`);
+  ok(ovTrends === true, "Overview exposes a one-tap 'View trends' shortcut");
+  await clickWs("monitoring");
+  const monFirst = await ev(`return (document.querySelector('.icu-subnav .icu-seg')||{}).textContent||"";`);
+  ok(monFirst === "Trends", "Trends is the first Monitoring sub-tab (was last) — now front (" + monFirst + ")");
+
   console.log(fails === 0 ? "\nALL GREEN — ICU navigation test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

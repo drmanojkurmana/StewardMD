@@ -1617,7 +1617,7 @@
   // views) so every section and its saved data is preserved — this is a NAV layer only.
   var WORKSPACES = [
     { id: "overview", label: "Overview", svg: "pulse", members: ["overview", "rounds"] },
-    { id: "monitoring", label: "Monitoring", svg: "heart", members: ["hemo", "fluids", "lytes", "abg", "vent", "infusions", "trends"] },
+    { id: "monitoring", label: "Monitoring", svg: "heart", members: ["trends", "hemo", "fluids", "lytes", "abg", "vent", "infusions"] },
     { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "protocols", "goals"] },
     { id: "documents", label: "Documents", svg: "copy", members: ["documents", "imaging"] },
     { id: "more", label: "More", svg: "more", members: ["more"] }
@@ -1734,6 +1734,10 @@
       var out = "";
       out += '<div class="icu-sec-lbl">🚨 Critical Alerts</div>';
       out += alerts.length ? alerts.map(alertCard).join("") : '<div class="icu-card"><p>No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
+      // Surface Trends up front (it was buried as the last Monitoring sub-tab) — one tap to the chart.
+      out += '<div class="icu-sec-lbl">' + ico("trend", "📈") + ' Trends</div><div class="icu-card">' +
+        '<p class="icu-doc-sub" style="margin:0 0 8px">See how this patient’s vitals and labs are moving over time.</p>' +
+        '<button class="icu-btn" data-icu-act="tab:trends">' + ico("trend", "📈") + ' View vitals &amp; labs trends</button></div>';
       out += '<div class="icu-sec-lbl">Snapshot</div><div class="icu-card">' +
         row("Diagnosis", p.diagnosis) +
         row("Shock status", mp == null ? null : (mp < 65 ? "Hypotensive (MAP " + mp + ")" : "MAP " + mp + " mmHg")) +
