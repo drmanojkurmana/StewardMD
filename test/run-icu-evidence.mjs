@@ -48,12 +48,12 @@ try {
   // 1) flag on by default + de-identified topic
   ok(await ev(`return ICU.extEvidenceOn() === true;`) === true, "external-evidence feature ON by default (smd_ext_evidence)");
   const topic = JSON.parse(await ev(`
-    ICU.reset(); ICU.ingestPatient({name:"Ramesh Kumar", age:52, sex:"M", diagnosis:"sepsis MRN 4321"});
+    ICU.reset(); ICU.ingestPatient({name:"Ramesh Kumar", age:52, sex:"M", diagnosis:"Ramesh Kumar 234567 acute pancreatitis"});
     ICU.ingestWardImaging({ patientId:"P1", source:"Ward Sync", imaging:[{reportId:"C1",description:"CECT Abdomen",report:"IMPRESSION: acute pancreatitis."}] });
     var tp = ICU._correlationTopic(ICU._correlationEvidence());
     return JSON.stringify({ topic: tp });`));
-  ok(topic.topic.indexOf("4321") < 0 && topic.topic.indexOf("Ramesh") < 0, "topic is de-identified (no MRN / name) — sent: \"" + topic.topic + "\"");
-  ok(/pancrea/i.test(topic.topic), "topic carries the clinical concept (pancreatic inflammation / diagnosis)");
+  ok(topic.topic.indexOf("234567") < 0 && topic.topic.indexOf("Ramesh") < 0, "topic is de-identified — an unlabelled name + short MRN typed into the DIAGNOSIS free-text are stripped. Sent: \"" + topic.topic + "\"");
+  ok(/pancrea/i.test(topic.topic), "topic carries the controlled clinical concept (pancreatic inflammation)");
 
   // 2) button is enabled in the analysed correlation card; opens the confirm flow
   const btn = await ev(`${STUB}
@@ -105,6 +105,28 @@ try {
     return JSON.stringify({ noAction: !b, isDisabled: !!(disabled && disabled.disabled) });`);
   const O = JSON.parse(off);
   ok(O.noAction && O.isDisabled, "flag OFF → the external-evidence button is disabled (kill-switch)");
+
+  // 6) transient error is NOT cached — a retry re-queries (review fix)
+  await ev(`
+    localStorage.removeItem('smd_ext_evidence');
+    ICU.reset(); ICU.ingestPatient({name:"ERRP",age:60,sex:"M"});
+    ICU.ingestWardImaging({ patientId:"PZ", source:"Ward Sync", imaging:[{reportId:"Z1",description:"CT Chest",report:"IMPRESSION: consolidation."}] });
+    window.__en = 0;
+    window.SMD_AI.evidence = function(t){ window.__en++; return Promise.resolve(window.__en === 1 ? { error:"quota" } : { mode:"evidence", source:"PubMed (NCBI)", query:t, results:[{ title:"Recovered guideline", journal:"BMJ", year:"2020", pubtype:"Practice Guideline", url:"https://pubmed.ncbi.nlm.nih.gov/1/", pmid:"1" }] }); };
+    ICU.open(); var root=document.getElementById('icuRoot');
+    root.querySelector('[data-icu-act="ws:documents"]').click();
+    root.querySelector('[data-icu-act="tab:imaging"]').click();
+    root.querySelector('[data-icu-act="corranalyse"]').click();
+    root.querySelector('[data-icu-act="corrext"]').click();
+    document.getElementById('icuEvGo').click();
+    return 1;`);
+  await sleep(300);
+  const e1 = JSON.parse(await ev(`return JSON.stringify({ n: window.__en, errShown: /reach the reference service|usage limit/i.test(document.getElementById('icuModal').textContent||"") });`));
+  await ev(`document.getElementById('icuRoot').querySelector('[data-icu-act="corrext"]').click(); var g=document.getElementById('icuEvGo'); if(g) g.click(); return 1;`);   // reopen confirm + retry search
+  await sleep(300);
+  const e2 = JSON.parse(await ev(`return JSON.stringify({ n: window.__en, recovered: /Recovered guideline/.test(document.getElementById('icuModal').textContent||"") });`));
+  ok(e1.errShown && e1.n === 1, "transient evidence error is shown, not cached");
+  ok(e2.n === 2 && e2.recovered, "retry re-queries after a transient error and renders the recovered citation");
 
   console.log(fails === 0 ? "\nALL GREEN — ICU external-evidence test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

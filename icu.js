@@ -2564,7 +2564,7 @@
   }
 
   /* ---- External trusted-evidence fallback (Phase 4) — opt-in, de-identified TOPIC only ---- */
-  var _evCache = {}, _evBusy = false;
+  var _evCache = {}, _evBusy = false, _evErr = null;
   function extEvidenceOn() { try { var q = (location.search.match(/[?&]extevidence=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on"; var v = localStorage.getItem("smd_ext_evidence"); return v === null ? true : v === "1"; } catch (e) { return true; } }
   // Curated allowlist of trusted guideline organisations (landing pages — always valid; PubMed gets
   // the topic). NOT open web search.
@@ -2576,11 +2576,15 @@
     { org: "PubMed (topic search)", url: "https://pubmed.ncbi.nlm.nih.gov/?term={q}" }
   ];
   function correlationTopic(ev) {
+    // Built from CONTROLLED-VOCABULARY concepts (imaging + lab abnormalities) plus — for the
+    // free-text diagnosis, which can hide a name/MRN — ONLY the canonical KB disease name when it
+    // matches the knowledge base (unrecognised free text is dropped). Standalone digit runs are
+    // stripped as a backstop (a guideline search needs no numbers). PHI must not reach NCBI.
     var p = _raw.patient || {}, parts = [];
-    if (p.diagnosis) parts.push(imgRedact(p.diagnosis));
+    if (p.diagnosis) { try { var h = ((window.SMD_REASON && SMD_REASON.search) ? (SMD_REASON.search(p.diagnosis, 1) || []) : [])[0]; if (h && h.name) parts.push(h.name); } catch (e) {} }
     (ev.img || []).slice(0, 3).forEach(function (c) { parts.push(c); });
     if (parts.length < 2) (ev.labs || []).slice(0, 2).forEach(function (l) { parts.push(l.replace(/\s*\(.*\)$/, "")); });
-    return parts.join(" ").replace(/\s+/g, " ").trim().slice(0, 160);
+    return parts.join(" ").replace(/\b\d+\b/g, " ").replace(/[^\w\s,\-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 160);
   }
   function evResultsHTML(topic) {
     if (_evBusy) return '<div class="icu-assist-msg">Searching trusted references…</div>';
@@ -2590,21 +2594,22 @@
       return '<a class="icu-ev-hub" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(h.org) + "</a>";
     }).join("") + "</div>";
     var cites = "";
-    if (res) {
-      if (res.error) cites = '<div class="icu-assist-msg">' + esc(res.error === "quota" ? "Usage limit reached — try again later; use the trusted sources above." : "Couldn’t reach the reference service right now — use the trusted sources above.") + "</div>";
-      else if (!res.results || !res.results.length) cites = '<div class="icu-assist-msg" style="color:var(--muted)">No matching guidelines/reviews found — browse the trusted sources above.</div>';
-      else cites = '<div class="icu-corr-sub">Peer-reviewed guidelines &amp; reviews (' + esc(res.source || "PubMed") + ')</div>' + res.results.map(function (r) {
-        return '<a class="icu-ev-cite" href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer"><div class="t">' + esc(r.title) + '</div><div class="m">' + esc([r.journal, r.year, r.pubtype].filter(Boolean).join(" · ")) + "</div></a>";
-      }).join("");
-    }
+    if (_evErr) cites = '<div class="icu-assist-msg">' + esc(_evErr.error === "quota" ? "Usage limit reached — try again later; use the trusted sources above." : "Couldn’t reach the reference service right now — use the trusted sources above.") + "</div>";
+    else if (res && res.results && res.results.length) cites = '<div class="icu-corr-sub">Peer-reviewed guidelines &amp; reviews (' + esc(res.source || "PubMed") + ')</div>' + res.results.map(function (r) {
+      return '<a class="icu-ev-cite" href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer"><div class="t">' + esc(r.title) + '</div><div class="m">' + esc([r.journal, r.year, r.pubtype].filter(Boolean).join(" · ")) + "</div></a>";
+    }).join("");
+    else if (res) cites = '<div class="icu-assist-msg" style="color:var(--muted)">No matching guidelines/reviews found — browse the trusted sources above.</div>';
     return hubs + cites + '<div class="icu-assist-src">External references — <b>not StewardMD-verified</b>. Confirm against the source and local protocol before acting.</div>';
   }
   function openEvidenceLookup() {
     if (!extEvidenceOn()) { if (window.toast) toast("External references are turned off in Settings."); return; }
     ensureModal();
     var topic = correlationTopic(correlationEvidence());
+    // Only repaint if the EVIDENCE sheet is still the one showing (modalEl is shared by every ICU
+    // modal) — a late PubMed response must never clobber an imaging/patient/snapshot modal.
+    function evLive() { return modalEl.classList.contains("on") && !!modalEl.querySelector("#icuEvSheet"); }
     function render(confirmed) {
-      modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("search", "🔎") + ' Evidence beyond StewardMD</h3>' +
+      modalEl.innerHTML = '<div class="icu-sheet" id="icuEvSheet"><h3>' + ico("search", "🔎") + ' Evidence beyond StewardMD</h3>' +
         '<p class="icu-doc-sub">StewardMD may not have sufficient internal coverage for this pattern. Search trusted external clinical references for <b>' + esc(topic || "this patient’s findings") + '</b>?</p>' +
         (confirmed ? evResultsHTML(topic) :
           '<div class="icu-img-btns"><button class="icu-btn" id="icuEvGo">' + ico("search", "🔎") + ' Search trusted references</button>' +
@@ -2614,13 +2619,17 @@
       modalEl.classList.add("on");
       var go = modalEl.querySelector("#icuEvGo");
       if (go) go.addEventListener("click", function () {
-        if (_evCache[topic]) { render(true); return; }   // cached — no repeat fetch
-        _evBusy = true; render(true);
+        if (_evBusy) { render(true); return; }                       // in-flight — reuse the pending request (no double fetch/charge)
+        if (_evCache[topic]) { _evErr = null; render(true); return; }  // cached SUCCESS — no repeat fetch
+        _evErr = null; _evBusy = true; render(true);
         (window.SMD_AI && SMD_AI.evidence ? SMD_AI.evidence(topic) : Promise.resolve({ error: "off" })).then(function (res) {
-          _evCache[topic] = res || { error: "server" }; _evBusy = false; if (modalEl.classList.contains("on")) render(true);
-        }).catch(function () { _evCache[topic] = { error: "server" }; _evBusy = false; if (modalEl.classList.contains("on")) render(true); });
+          _evBusy = false;
+          if (res && !res.error) _evCache[topic] = res; else _evErr = res || { error: "server" };   // cache SUCCESS only → errors stay retryable
+          if (evLive()) render(true);
+        }).catch(function () { _evBusy = false; _evErr = { error: "server" }; if (evLive()) render(true); });
       });
     }
+    _evErr = null;
     render(false);
   }
   function corrChips(arr, cls) { return (arr && arr.length) ? '<div class="icu-corr-chips">' + arr.map(function (x) { return '<span class="icu-corr-chip ' + (cls || "") + '">' + esc(x) + "</span>"; }).join("") + "</div>" : ""; }
