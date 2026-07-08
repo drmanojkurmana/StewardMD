@@ -180,6 +180,47 @@ try {
   `);
   ok(c19.dxUnset && c19.noWdx, "advisory: running the differential never silently sets a diagnosis (only Select commits)");
 
-  console.log(fails === 0 ? "\nALL GREEN — ICU dx-flow Slice 1+2 passed" : `\n${fails} FAILED`);
+  // ===== Slice 3 — Deep Review confirm sheet + no-context guard + Care Plan entry =====
+
+  // 20) Care Plan exposes a Deep Review button that opens the OPT-IN confirm sheet (context checklist + Review/Edit)
+  const c20 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"DR",age:60,sex:"M"});
+    ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
+    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    var btn=root.querySelector('[data-icu-act="corrdeep"]'); var had=!!btn; if(btn) btn.click();
+    var sheet=document.getElementById('icuDeepSheet');
+    return JSON.stringify({ had:had, sheet:!!sheet, review:!!(sheet&&sheet.querySelector('[data-icu-act="deepgo"]')), edit:!!(sheet&&sheet.querySelector('[data-icu-act="deepedit"]')), chk:(sheet?sheet.querySelectorAll('.icu-deep-chk').length:0) });
+  `);
+  ok(c20.had && c20.sheet && c20.review && c20.edit && c20.chk >= 5, `Deep Review opens the opt-in confirm sheet (Review + Edit; ${c20.chk}-item checklist)`);
+
+  // 21) no usable context → AI is NOT offered (no "Review" button); confirm sheet steers to add data
+  const c21 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"NOCTX",age:40,sex:"F"});
+    var usable=ICU._deepReviewUsable();
+    ICU._openDeepReviewConfirm(); var sheet=document.getElementById('icuDeepSheet');
+    return JSON.stringify({ usable:usable, review:!!(sheet&&sheet.querySelector('[data-icu-act="deepgo"]')), edit:!!(sheet&&sheet.querySelector('[data-icu-act="deepedit"]')) });
+  `);
+  ok(c21.usable === false && c21.review === false && c21.edit === true, "no-context guard: no AI call offered on empty context (Review absent; steers to add data)");
+
+  // 22) confirm checklist reflects the sources actually present (findings ✓, labs not available)
+  const c22 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"CK",age:60,sex:"M"});
+    ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
+    var items=ICU._deepReviewItems();
+    return JSON.stringify({ findingsOk:((items.filter(function(i){return /findings/i.test(i.label);})[0]||{}).ok||0)>0, labsOk:((items.filter(function(i){return /labs/i.test(i.label);})[0]||{}).ok||0) });
+  `);
+  ok(c22.findingsOk && !c22.labsOk, "confirm checklist marks present sources (findings ✓; labs — not available)");
+
+  // 23) "Edit context first" routes to the finding picker (not the AI)
+  const c23 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"ED",age:60,sex:"M"});
+    ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
+    ICU._openDeepReviewConfirm();
+    var e=document.querySelector('#icuDeepSheet [data-icu-act="deepedit"]'); if(e) e.click();
+    return JSON.stringify({ picker:!!document.getElementById('icuFindSheet') });
+  `);
+  ok(c23.picker === true, "\"Edit context first\" opens the finding picker (no AI call)");
+
+  console.log(fails === 0 ? "\nALL GREEN — ICU dx-flow Slice 1+2+3 passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

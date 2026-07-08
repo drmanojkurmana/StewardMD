@@ -108,12 +108,13 @@ try {
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act="corranalyse"]').click();
-    root.querySelector('[data-icu-act="corrdeep"]').click();
+    root.querySelector('[data-icu-act="corrdeep"]').click();   // opens the opt-in confirm sheet
+    var _dg=document.querySelector('#icuDeepSheet [data-icu-act="deepgo"]'); if(_dg) _dg.click();   // → Review with current context
     return 1;`);
   await sleep(300);
   const D1 = JSON.parse(await ev(`
     var root=document.getElementById('icuRoot'); var txt=root.textContent||"";
-    root.querySelector('[data-icu-act="corrdeep"]').click();   // 2nd tap → should be a cache hit
+    root.querySelector('[data-icu-act="corrdeep"]').click(); var _dg2=document.querySelector('#icuDeepSheet [data-icu-act="deepgo"]'); if(_dg2) _dg2.click();   // 2nd tap → cache hit (no AI)
     return JSON.stringify({ calls1: window.__cc, deepShown: /suggestive of a pulmonary infective process/i.test(txt), topCons: /Community-acquired pneumonia/i.test(txt) });`));
   await sleep(200);
   const D2 = JSON.parse(await ev(`return JSON.stringify({ calls2: window.__cc });`));
@@ -174,11 +175,11 @@ try {
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act="corranalyse"]').click();
-    root.querySelector('[data-icu-act="corrdeep"]').click();
+    root.querySelector('[data-icu-act="corrdeep"]').click(); var _dg=document.querySelector('#icuDeepSheet [data-icu-act="deepgo"]'); if(_dg) _dg.click();
     return 1;`);
   await sleep(250);
   const err1 = JSON.parse(await ev(`return JSON.stringify({ n1: window.__n, errShown: /usage limit reached/i.test(document.getElementById('icuRoot').textContent||"") });`));
-  await ev(`document.getElementById('icuRoot').querySelector('[data-icu-act="corrdeep"]').click(); return 1;`);   // retry — must re-call the AI (not blocked by a cached error)
+  await ev(`document.getElementById('icuRoot').querySelector('[data-icu-act="corrdeep"]').click(); var _dg=document.querySelector('#icuDeepSheet [data-icu-act="deepgo"]'); if(_dg) _dg.click(); return 1;`);   // retry — must re-call the AI (not blocked by a cached error)
   await sleep(250);
   const err2 = JSON.parse(await ev(`return JSON.stringify({ n2: window.__n, recovered: /Recovered correlation/i.test(document.getElementById('icuRoot').textContent||"") });`));
   ok(err1.errShown && err1.n1 === 1, "Deep review: a transient error is shown (not cached)");
@@ -194,7 +195,7 @@ try {
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act="corranalyse"]').click();
-    root.querySelector('[data-icu-act="corrdeep"]').click();
+    root.querySelector('[data-icu-act="corrdeep"]').click(); var _dg=document.querySelector('#icuDeepSheet [data-icu-act="deepgo"]'); if(_dg) _dg.click();
     return 1;`);
   await sleep(250);
   const XP = JSON.parse(await ev(`
