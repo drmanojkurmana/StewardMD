@@ -2780,7 +2780,6 @@
       ".dx-back,.dx-reset{background:transparent;border:1px solid var(--line);border-radius:9px;height:34px;padding:0 12px;font:600 13px var(--sans);color:var(--ink);cursor:pointer}",
       ".dx-back{color:var(--teal);border-color:var(--teal)}",
       ".dx-title{flex:1;text-align:center;font:800 16px var(--sans);color:var(--ink)}",
-      ".dx-beta{font-size:10px;background:var(--teal-soft);color:var(--teal);border-radius:6px;padding:1px 6px;vertical-align:middle;font-weight:700}",
       ".dx-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:1100px;margin:0 auto;width:100%;padding-bottom:calc(48px + env(safe-area-inset-bottom))}",
       ".dx-discl{font:500 11.5px var(--sans);color:var(--slate-soft);background:var(--teal-soft);border-radius:10px;padding:9px 12px;margin-bottom:12px;line-height:1.5}",
       ".dx-find-wrap{margin-bottom:6px}",
