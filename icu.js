@@ -40,6 +40,7 @@
     fluids: { intake24h: null, output24h: null, urine24h: null, drains: null, net24h: null, cumulative: null, strategyPhase: "" },
     infusions: [],              // [{ drug, dose, unit, rateMlHr, indication }]
     imaging: [],                // [{ id, ts, modality, category, studyName, bodyRegion, indication, findingsRaw, impressionRaw, reportRaw, keyPos[], keyNeg[], critical[], parsed, comment, source, reportId, reportDateTime, radiologist, reviewed, inSummary, hidden, importedAt }] — Ward Sync radiology + manual imaging notes (sibling of labs/vitals; NOT scored by any engine)
+    findings: [],               // [{ canonicalFindingId(engine id | note:*), displayLabel, polarity:present|absent|possible, temporality:current|historical|resolved, source, clinicianConfirmed, inReasoning, at }] — structured clinician-picked findings (documentation; NOT fed to scoring)
     goals: [],                  // [string]
     rounds: {},                 // checklist state (Phase 3)
     alerts: [],                 // DERIVED — written by recompute()
@@ -739,7 +740,22 @@
       '.icu-corr-note{font:600 12.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-corr-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}.icu-corr-partial{color:var(--muted);font-weight:600}' +
       // External evidence (Phase 4)
       '.icu-ev-hubs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.icu-ev-hub{font:700 12px var(--font);text-decoration:none;background:var(--panel2);border:1px solid var(--border);color:var(--primary);border-radius:999px;padding:5px 11px}' +
-      '.icu-ev-cite{display:block;text-decoration:none;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-ev-cite .t{font:700 13.5px/1.4 var(--font);color:var(--ink)}.icu-ev-cite .m{font:600 11.5px var(--font);color:var(--muted);margin-top:3px}';
+      '.icu-ev-cite{display:block;text-decoration:none;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-ev-cite .t{font:700 13.5px/1.4 var(--font);color:var(--ink)}.icu-ev-cite .m{font:600 11.5px var(--font);color:var(--muted);margin-top:3px}' +
+      // Structured finding picker (autocomplete). Lives inside .icu-sheet (a bottom sheet that
+      // overlays the whole dashboard) so results never overlap the bottom nav / camera FAB / MaiK sheet;
+      // safe-area-inset is already handled by .icu-sheet padding.
+      '.icu-find-res{margin-top:10px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
+      '.icu-find-reshdr{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:8px 0 2px}.icu-find-reshdr:first-child{margin-top:0}' +
+      '.icu-find-hit{display:flex;flex-direction:column;gap:2px;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:11px 13px;min-height:48px;cursor:pointer;color:var(--ink)}.icu-find-hit:active{background:var(--primary-soft);border-color:var(--primary)}' +
+      '.icu-find-hit .nm{font:700 14.5px var(--font);color:var(--ink)}.icu-find-hit .mt{font:600 11px var(--font);color:var(--muted)}.icu-find-hit .sy{font:600 11px var(--font);color:var(--muted);opacity:.85}' +
+      '.icu-find-more{display:block;width:100%;border:none;background:none;font:700 12px var(--font);color:var(--primary);text-align:center;padding:9px 0;cursor:pointer}' +
+      '.icu-find-empty{font:600 12.5px var(--font);color:var(--muted);padding:6px 0}' +
+      '.icu-find-chips{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 4px}' +
+      '.icu-find-chip{display:inline-flex;align-items:center;gap:2px;font:700 13px var(--font);background:var(--primary-soft);color:var(--primary);border:1px solid color-mix(in srgb,var(--primary) 30%,var(--border));border-radius:999px;padding:6px 6px 6px 12px}' +
+      '.icu-find-chip.neg{background:var(--danger-soft);color:var(--danger);border-color:color-mix(in srgb,var(--danger) 30%,var(--border))}' +
+      '.icu-find-chip.poss{background:var(--warn-soft);color:var(--warn);border-color:color-mix(in srgb,var(--warn) 30%,var(--border))}' +
+      '.icu-find-chip.note{background:var(--panel2);color:var(--muted);border-color:var(--border)}' +
+      '.icu-find-chip .fc-mod,.icu-find-chip .fc-x{border:none;background:none;cursor:pointer;color:inherit;font:800 15px var(--font);line-height:1;padding:2px 6px;border-radius:50%;opacity:.75}.icu-find-chip .fc-mod:active,.icu-find-chip .fc-x:active{opacity:1;background:color-mix(in srgb,currentColor 15%,transparent)}';
     var st = document.createElement("style"); st.id = "icu-css"; st.textContent = css;
     document.head.appendChild(st);
   }
@@ -1522,6 +1538,8 @@
     out.push("STEWARDMD — DAILY ICU SUMMARY");
     out.push((p.name || "ICU patient") + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") + (p.bed ? " · Bed " + p.bed : "") + (p.icuDay != null ? " · ICU day " + p.icuDay : ""));
     if (p.diagnosis) out.push("Diagnosis: " + p.diagnosis);
+    var finds = s.findings || [];
+    if (finds.length) out.push("CLINICAL FINDINGS: " + finds.map(function (c) { return findChipLabel(c); }).join("; "));
     out.push("");
     out.push("HAEMODYNAMICS: HR " + (lv.hr != null ? lv.hr : "—") + ", BP " + (lv.sbp != null ? lv.sbp + "/" + lv.dbp : "—") + ", MAP " + (mp != null ? mp : "—") + ", lactate " + (lv.lactate != null ? lv.lactate : "—") + (infusions.length ? ", pressors/infusions: " + infusions.map(function (i) { return i.drug; }).join(", ") : ""));
     if (g.ph != null) { var ab = analyzeABG(g, L); out.push("ABG: pH " + g.ph + " / pCO₂ " + g.paco2 + " / HCO₃ " + g.hco3 + (ab ? " → " + ab.primary : "")); }
@@ -1825,9 +1843,13 @@
       var p = _raw.patient;
       var cc = p.complaints ? esc(p.complaints) : '<span style="color:var(--muted)">Not documented — add manually.</span>';
       var dxTxt = p.diagnosis ? "<b>" + esc(p.diagnosis) + "</b>" : '<span style="color:var(--muted)">Not set</span>';
+      var fchips = findChipsHTML(false);
       return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("edit", "📝") + ' Presenting complaints</div>' +
         '<p class="icu-dx-cc">' + cc + "</p>" +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("edit", "✎") + ' Edit complaints &amp; details</button></div>' +
+        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "🧾") + ' Structured findings</div>' +
+        (fchips || '<p class="icu-doc-sub" style="margin:0 0 8px">Add symptoms, signs, vitals, labs or imaging findings from a fast clinical picker. Documentation only — this does not change any diagnosis or scoring.</p>') +
+        '<button class="icu-btn" data-icu-act="findpick" style="margin-top:10px">' + ico("plus", "＋") + ' Add findings</button></div>' +
         '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🩺") + ' Working diagnosis</div>' +
         '<p class="icu-dx-cur">' + dxTxt + "</p>" +
         '<button class="icu-btn" data-icu-act="dxsearch">' + ico("search", "🔎") + ' Search &amp; select diagnosis</button>' +
@@ -2257,6 +2279,142 @@
     }
     if (inp) inp.addEventListener("input", run);
     setTimeout(function () { try { if (inp) inp.focus(); } catch (e) {} }, 60);
+  }
+  /* ===== Structured clinical finding picker (autocomplete) — maps clinician language →
+   * canonical finding IDs via window.SMD_VOCAB. Chips are structured + clinician-confirmed and are
+   * DOCUMENTATION ONLY — they are NOT fed to the reasoning engine / do not change any scoring. ===== */
+  var FIND_STATES = ["present", "absent", "possible", "historical", "resolved"];  // ▾ cycles through these
+  function findStateOf(c) { if (c.temporality === "historical") return "historical"; if (c.temporality === "resolved") return "resolved"; return c.polarity || "present"; }
+  function applyFindState(c, st) {
+    if (st === "absent") { c.polarity = "absent"; c.temporality = "current"; }
+    else if (st === "possible") { c.polarity = "possible"; c.temporality = "current"; }
+    else if (st === "historical") { c.polarity = "present"; c.temporality = "historical"; }
+    else if (st === "resolved") { c.polarity = "present"; c.temporality = "resolved"; }
+    else { c.polarity = "present"; c.temporality = "current"; }
+  }
+  function addFindingChip(c, source) {
+    if (!c || !c.canonicalFindingId) return false;
+    var pol = c.polarity || "present", temp = c.temporality || "current", list = STATE.findings || [];
+    // Dedupe by canonical id, but the LATEST explicit action wins: update the existing chip's
+    // polarity/temporality (so re-picking "no headache" after "headache" flips it, rather than
+    // silently keeping the stale state — and compound sub-chips refresh instead of being dropped).
+    for (var i = 0; i < list.length; i++) if (list[i].canonicalFindingId === c.canonicalFindingId) { list[i].polarity = pol; list[i].temporality = temp; list[i].at = nowTs(); return true; }
+    STATE.findings.push({ canonicalFindingId: c.canonicalFindingId, displayLabel: c.displayLabel || c.canonicalFindingId, polarity: pol, temporality: temp, source: source || "manual_picker", clinicianConfirmed: true, inReasoning: !!c.inReasoning, at: nowTs() });
+    return true;
+  }
+  // A negation/temporality cue typed into the autocomplete ("no fever", "h/o seizure", "possible …")
+  // is stripped from the SEARCH query by SMD_VOCAB — re-read it here so the added chip carries the
+  // clinician's intended polarity/temporality instead of defaulting to present/current.
+  function queryFindingMod(q) {
+    q = " " + String(q || "").toLowerCase() + " ";
+    if (/\b(no|without|denies|denied|absent|nil|negative for|ruled out|rule out|r\/o)\b/.test(q)) return { polarity: "absent", temporality: "current" };
+    if (/\b(possible|probable|suspected|query|likely)\b/.test(q) || q.indexOf("?") >= 0) return { polarity: "possible", temporality: "current" };
+    if (/\b(resolved|resolving|settled)\b/.test(q)) return { polarity: "present", temporality: "resolved" };
+    if (/\b(h\/o|history of|old|previous|prior|past|k\/c\/o|known case of)\b/.test(q)) return { polarity: "present", temporality: "historical" };
+    return null;
+  }
+  function findChipLabel(c) {
+    var pre = c.polarity === "absent" ? "No " : c.polarity === "possible" ? "? " : c.temporality === "historical" ? "H/o " : "";
+    var suf = c.temporality === "resolved" ? " (resolved)" : "";
+    return pre + c.displayLabel + suf;
+  }
+  function findChipsHTML(interactive) {
+    var list = _raw.findings || []; if (!list.length) return interactive ? '<div class="icu-find-empty">No findings added yet.</div>' : "";
+    return '<div class="icu-find-chips">' + list.map(function (c, i) {
+      var cls = "icu-find-chip" + (c.polarity === "absent" ? " neg" : c.polarity === "possible" ? " poss" : "") + (c.inReasoning ? "" : " note");
+      return '<span class="' + cls + '">' + esc(findChipLabel(c)) +
+        (interactive ? '<button class="fc-mod" data-icu-act="findmod:' + i + '" title="Present / Absent / Possible / History of / Resolved">▾</button><button class="fc-x" data-icu-act="findrm:' + i + '" aria-label="Remove">×</button>' : "") + "</span>";
+    }).join("") + "</div>";
+  }
+  // Build an SMD_NLP context from the vocab so the existing deterministic extractor (negation/typo/
+  // temporal aware) can pull findings from free text, mapped to canonical/vocab ids.
+  function vocabNlpCtx() {
+    var valid = {}, labels = {}, syn = {};
+    try { (window.SMD_VOCAB.all() || []).forEach(function (e) { var id = e.cid || ("note:" + e.id); valid[id] = true; labels[id] = e.label; syn[id] = (syn[id] || []).concat(e.syn || []); }); } catch (x) {}
+    return { valid: valid, labels: labels, syn: syn };
+  }
+  function openFindingPicker() {
+    ensureModal();
+    var _extract = null;   // reviewable extracted suggestions (never auto-added)
+    var _showAll = false, _lastList = null, VIS = 8;
+    // Category grouping order for the dropdown (Red flags surface first; never hidden).
+    var GORD = { "Red flags": 0, "Symptoms": 1, "Signs": 2, "Vitals": 3, "Laboratory": 4, "Labs": 4, "Imaging": 5, "History": 6 };
+    function hitHTML(x) {
+      return '<button class="icu-find-hit" data-find="' + esc(x.id) + '"><span class="nm">' + esc(x.label) + "</span><span class=\"mt\">" + esc((x.sys || "") + (x.red ? " · red flag" : "") + (x.inReasoning === false ? " · not yet in reasoning" : "")) + "</span>" + (x.syn ? '<span class="sy">' + esc(x.syn) + "</span>" : "") + "</button>";
+    }
+    // Grouped renderer: top-VIS (by score) are bucketed by category, ordered GORD, with headers.
+    function groupHTML(list, header) {
+      if (!list || !list.length) return "";
+      var visible;
+      if (_showAll) visible = list;
+      else { visible = list.slice(0, VIS); list.slice(VIS).forEach(function (x) { if (x.red) visible.push(x); }); }   // a matched emergency finding is never hidden behind "Show more"
+      var buckets = {};
+      visible.forEach(function (x) { (buckets[x.group] = buckets[x.group] || []).push(x); });
+      var order = Object.keys(buckets).sort(function (a, b) { return (GORD[a] == null ? 9 : GORD[a]) - (GORD[b] == null ? 9 : GORD[b]); });
+      var html = header ? '<div class="icu-find-reshdr">' + esc(header) + "</div>" : "";
+      order.forEach(function (g) { html += '<div class="icu-find-reshdr">' + esc(g) + "</div>" + buckets[g].map(hitHTML).join(""); });
+      if (list.length > visible.length) html += '<button class="icu-find-more" data-find-more="1">Show ' + (list.length - visible.length) + " more…</button>";
+      return html;
+    }
+    function render() {
+      modalEl.innerHTML = '<div class="icu-sheet" id="icuFindSheet"><h3>' + ico("search", "🔎") + ' Add clinical findings</h3>' +
+        '<p class="icu-doc-sub">Type a symptom, sign, or shorthand — tap a suggestion to add it as a chip. Free text below.</p>' +
+        '<input id="icuFindQ" type="search" autocomplete="off" placeholder="e.g. head, vom, quad, AMS, b/l plantar…" style="width:100%;box-sizing:border-box;font:600 15px var(--font);padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink)">' +
+        '<div id="icuFindRes" class="icu-find-res">' + groupHTML(_extract, "Extracted — tap to add (review first)") + "</div>" +
+        findChipsHTML(true) +
+        '<div style="font:800 11px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:14px 0 6px">Free text</div>' +
+        '<textarea id="icuFindFree" rows="2" placeholder="Add complaint, finding, or note…" style="width:100%;box-sizing:border-box;font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink)"></textarea>' +
+        '<div class="icu-img-btns"><button class="icu-btn ghost" id="icuFindNote">' + ico("edit", "✎") + ' Add as note</button><button class="icu-btn ghost" id="icuFindExtract">' + ico("pulse", "✦") + ' Extract findings</button></div>' +
+        '<button class="icu-btn" data-icu-act="closeform" style="margin-top:10px">Done</button></div>';
+      modalEl.classList.add("on");
+      bind();
+    }
+    function bind() {
+      var inp = modalEl.querySelector("#icuFindQ"), res = modalEl.querySelector("#icuFindRes"), t;
+      function run() {
+        var q = (inp.value || "").trim();
+        if (q.length < 1) { _lastList = null; res.innerHTML = groupHTML(_extract, _extract ? "Extracted — tap to add (review first)" : ""); return; }
+        var r = (window.SMD_VOCAB && SMD_VOCAB.search) ? SMD_VOCAB.search(q, { workspace: "im", limit: 24 }) : null;
+        _lastList = (r && r.results) || [];   // search() returns [] when the query strips to a cue word (e.g. "no")
+        res.innerHTML = _lastList.length ? groupHTML(_lastList) : '<div class="icu-dx-hint">No match — add it below as free text.</div>';
+      }
+      if (inp) inp.addEventListener("input", function () { _showAll = false; clearTimeout(t); t = setTimeout(run, 120); });   // ~120ms debounce; local only
+      if (res) res.addEventListener("click", function (e) {
+        var more = e.target.closest && e.target.closest("[data-find-more]");
+        if (more) { _showAll = true; res.innerHTML = groupHTML(_lastList || _extract, _lastList ? "" : (_extract ? "Extracted — tap to add (review first)" : "")); return; }
+        var b = e.target.closest && e.target.closest("[data-find]"); if (!b) return;
+        var id = b.getAttribute("data-find");
+        var mod = _extract ? null : queryFindingMod(inp && inp.value);   // Extract path is already present-only + negation-filtered
+        try { (SMD_VOCAB.toChips(id) || []).forEach(function (ch) { if (mod) { ch.polarity = mod.polarity; ch.temporality = mod.temporality; } addFindingChip(ch, _extract ? "extract" : "manual_picker"); }); } catch (x) {}
+        if (_extract) _extract = _extract.filter(function (x) { return x.id !== id; });   // consume the reviewed suggestion
+        render(); var i2 = modalEl.querySelector("#icuFindQ"); if (i2) { setTimeout(function () { try { i2.focus(); } catch (e) {} }, 10); }
+      });
+      // chip modifier ▾ / remove × (handled here so the modal re-renders in place)
+      var chips = modalEl.querySelector(".icu-find-chips");
+      if (chips) chips.addEventListener("click", function (e) {
+        var m = e.target.closest && e.target.closest("[data-icu-act]"); if (!m) return;
+        e.preventDefault(); e.stopPropagation();
+        var act = m.getAttribute("data-icu-act"), ix = +act.split(":")[1], c = STATE.findings[ix]; if (!c) return;
+        if (act.indexOf("findrm") === 0) STATE.findings.splice(ix, 1);
+        else if (act.indexOf("findmod") === 0) applyFindState(c, FIND_STATES[(FIND_STATES.indexOf(findStateOf(c)) + 1) % FIND_STATES.length]);
+        render();
+      });
+      var free = modalEl.querySelector("#icuFindFree"), note = modalEl.querySelector("#icuFindNote"), ext = modalEl.querySelector("#icuFindExtract");
+      if (note) note.addEventListener("click", function () { var txt = (free.value || "").trim(); if (!txt) return; STATE.patient.complaints = (STATE.patient.complaints ? STATE.patient.complaints + "; " : "") + txt; free.value = ""; if (window.toast) toast("Added to complaints"); });
+      if (ext) ext.addEventListener("click", function () {
+        var txt = (free.value || "").trim(); if (!txt) { if (window.toast) toast("Type a note first, then Extract."); return; }
+        var keys = [];
+        try { if (window.SMD_NLP && SMD_NLP.extract) { var r = SMD_NLP.extract(txt, vocabNlpCtx()); keys = (r && r.present) || (r && r.findings ? r.findings.filter(function (f) { return f.polarity === "present"; }).map(function (f) { return f.canonicalFindingId; }) : []); } } catch (x) {}
+        // map extracted keys → vocab entries (reviewable, NOT auto-added)
+        var seen = {}, sugg = [];
+        (window.SMD_VOCAB.all() || []).forEach(function (e) { var cid = e.cid || ("note:" + e.id); if (keys.indexOf(cid) >= 0 && !seen[cid]) { seen[cid] = 1; sugg.push({ id: e.id, label: e.label, group: e.group, sys: e.sys, red: !!e.red, inReasoning: !!(e.cid || (e.cids && e.cids.length)), syn: "" }); } });
+        _extract = sugg.length ? sugg : null;
+        if (!sugg.length && window.toast) toast("No structured findings recognised — add manually or keep as note.");
+        render();
+      });
+      setTimeout(function () { try { if (inp) inp.focus(); } catch (e) {} }, 60);
+    }
+    render();
   }
   function pickDiagnosis(name) {
     if (!name) return;
@@ -2931,6 +3089,7 @@
       case "printsummary": printSummary(); break;
       case "discharge": if (window.toast) toast("Discharge Creator is coming in the next update — draft from this patient’s recorded data with clinician review."); break;
       case "dxsearch": openDxSearch(); break;
+      case "findpick": openFindingPicker(); break;
       case "pickdx": pickDiagnosis(decodeURIComponent(arg)); break;
       case "imgfetch": imagingFetch(); break;
       case "imgadd": openImagingForm(null); break;
@@ -3053,6 +3212,7 @@
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
     _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,
+    openFindingPicker: openFindingPicker, _addFindingChip: addFindingChip, _applyFindState: applyFindState, _findStateOf: findStateOf, _vocabNlpCtx: vocabNlpCtx,
     _correlationEvidence: correlationEvidence, _runQuickCorrelation: runQuickCorrelation, _buildCorrelationPacket: buildCorrelationPacket, _correlationTopic: correlationTopic, extEvidenceOn: extEvidenceOn,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
