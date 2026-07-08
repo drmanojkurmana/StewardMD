@@ -105,31 +105,61 @@
   // alerts. Runs on EVERY state change, so any tab/importer that updates a value
   // immediately refreshes the Overview + live status. Pure read of `s`, writes
   // s.alerts only.
+  // Shared thresholds — single source of truth so tiles + the alert engine never drift (BUG #5).
+  var K_CRIT_HI = 6.5, K_WARN_HI = 5.5, K_CRIT_LO = 2.5, K_WARN_LO = 3.0;
+  // Category order for grouped display (BUG #7). Each alert carries its TRUE source.
+  var ALERT_SOURCES = ["Sepsis / Temperature", "Respiratory", "Hemodynamics", "Acid–base", "Ventilator", "Renal / Metabolic", "Haematology", "Labs"];
   function recompute(s) {
     var a = [];
     function add(sev, title, msg, source) { a.push({ severity: sev, title: title, msg: msg, source: source }); }
-    var L = (s.labs && s.labs.recent) || {}, lv = latestByTs(s.vitals), g = s.abg || {};
+    var L = (s.labs && s.labs.recent) || {}, lv = latestByTs(s.vitals), g = s.abg || {}, p = s.patient || {};
+    var wt = (p.weightKg != null && !isNaN(+p.weightKg) && +p.weightKg > 0) ? +p.weightKg : 70;   // BUG #9: default 70 kg when weight unknown
 
-    // Potassium
-    if (L.k != null) { if (L.k > 6.5) add("crit", "Critical hyperkalemia", "K " + L.k + " mEq/L — ECG + urgent treatment", "Electrolytes"); else if (L.k > 5.5) add("warn", "Hyperkalemia", "K " + L.k + " mEq/L", "Electrolytes"); else if (L.k < 2.5) add("crit", "Critical hypokalemia", "K " + L.k + " mEq/L — replace + monitor ECG", "Electrolytes"); else if (L.k < 3.0) add("warn", "Hypokalemia", "K " + L.k + " mEq/L", "Electrolytes"); }
-    // Sodium
-    if (L.na != null) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na " + L.na + " mEq/L — correct at safe rate", "Electrolytes"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na " + L.na + " mEq/L", "Electrolytes"); }
-    // Ferritin (HLH / hyperinflammation tie-in)
-    if (L.ferritin != null && L.ferritin > 10000) add("warn", "Markedly elevated ferritin", "Ferritin " + L.ferritin + " — consider HLH / hyperinflammation", "Labs");
-    // Hemodynamics
+    // ---- Electrolytes ----
+    if (L.k != null) { if (L.k > K_CRIT_HI) add("crit", "Critical hyperkalaemia", "K⁺ " + L.k + " mmol/L (>" + K_CRIT_HI + ") — ECG + urgent treatment", "Renal / Metabolic"); else if (L.k > K_WARN_HI) add("warn", "Hyperkalaemia", "K⁺ " + L.k + " mmol/L (>" + K_WARN_HI + ")", "Renal / Metabolic"); else if (L.k < K_CRIT_LO) add("crit", "Critical hypokalaemia", "K⁺ " + L.k + " mmol/L (<" + K_CRIT_LO + ") — replace + monitor ECG", "Renal / Metabolic"); else if (L.k < K_WARN_LO) add("warn", "Hypokalaemia", "K⁺ " + L.k + " mmol/L", "Renal / Metabolic"); }
+    if (L.na != null) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na⁺ " + L.na + " mmol/L — correct at a safe rate", "Renal / Metabolic"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na⁺ " + L.na + " mmol/L", "Renal / Metabolic"); }
+
+    // ---- Renal (creatinine / eGFR) + AKI composite (BUG #1, #9) ----
+    var oliguric = (lv.uop != null && lv.uop < 0.5 * wt), renalHigh = false;
+    if (L.creat != null) { if (L.creat > 300) { renalHigh = true; add("crit", "Severe renal impairment", "Creatinine " + L.creat + " µmol/L (>300) — AKI / renal failure; review nephrotoxins & drug dosing", "Renal / Metabolic"); } else if (L.creat > 130) { renalHigh = true; add("warn", "Raised creatinine", "Creatinine " + L.creat + " µmol/L (>130)", "Renal / Metabolic"); } }
+    if (L.egfr != null) { if (L.egfr < 15) { renalHigh = true; add("crit", "Critically low eGFR", "eGFR " + L.egfr + " mL/min (<15) — renal-failure range", "Renal / Metabolic"); } else if (L.egfr < 30) { renalHigh = true; add("warn", "Low eGFR", "eGFR " + L.egfr + " mL/min (<30)", "Renal / Metabolic"); } }
+    if (oliguric) add("warn", "Oliguria", "Urine " + lv.uop + " mL/h (<0.5 mL/kg/h at " + wt + " kg" + (p.weightKg == null || +p.weightKg <= 0 ? ", assumed" : "") + ")", "Renal / Metabolic");
+    if (oliguric && renalHigh) add("crit", "Acute kidney injury (composite)", "Oliguria + raised creatinine/eGFR — screen for AKI (KDIGO); review fluids, perfusion & nephrotoxins", "Renal / Metabolic");
+
+    // ---- Haematology ----
+    if (L.hb != null) { if (L.hb < 7) add("crit", "Severe anaemia", "Hb " + L.hb + " g/dL (<7) — transfusion threshold; check for bleeding", "Haematology"); else if (L.hb < 10) add("warn", "Anaemia", "Hb " + L.hb + " g/dL (<10)", "Haematology"); }
+    if (L.plt != null) { if (L.plt < 20) add("crit", "Critical thrombocytopenia", "Platelets " + L.plt + " ×10⁹/L (<20) — bleeding risk", "Haematology"); else if (L.plt < 50) add("warn", "Thrombocytopenia", "Platelets " + L.plt + " ×10⁹/L (<50)", "Haematology"); else if (L.plt > 1000) add("warn", "Thrombocytosis", "Platelets " + L.plt + " ×10⁹/L (>1000)", "Haematology"); }
+    if (L.ferritin != null && L.ferritin > 10000) add("warn", "Markedly elevated ferritin", "Ferritin " + L.ferritin + " — consider HLH / hyperinflammation", "Haematology");
+
+    // ---- Glucose (BUG #1, stored mmol/L) ----
+    if (L.glu != null) { if (L.glu > 30) add("crit", "Severe hyperglycaemia", "Glucose " + L.glu + " mmol/L (>30) — screen for DKA / HHS", "Renal / Metabolic"); else if (L.glu > 14) add("warn", "Hyperglycaemia", "Glucose " + L.glu + " mmol/L (>14)", "Renal / Metabolic"); else if (L.glu < 2.5) add("crit", "Critical hypoglycaemia", "Glucose " + L.glu + " mmol/L (<2.5) — treat now", "Renal / Metabolic"); else if (L.glu < 3.9) add("warn", "Hypoglycaemia", "Glucose " + L.glu + " mmol/L (<3.9)", "Renal / Metabolic"); }
+
+    // ---- Hemodynamics ----
     var mp = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
     if (mp != null) { if (mp < 60) add("crit", "Hypotension", "MAP " + mp + " mmHg (<60) — resuscitate", "Hemodynamics"); else if (mp < 65) add("warn", "Low MAP", "MAP " + mp + " mmHg (target ≥65)", "Hemodynamics"); }
-    if (lv.lactate != null) { if (lv.lactate > 4) add("crit", "Hyperlactataemia", "Lactate " + lv.lactate + " mmol/L (>4) — hypoperfusion", "Hemodynamics"); else if (lv.lactate > 2) add("warn", "Raised lactate", "Lactate " + lv.lactate + " mmol/L", "Hemodynamics"); }
-    if (lv.spo2 != null) { if (lv.spo2 < 88) add("crit", "Severe hypoxaemia", "SpO₂ " + lv.spo2 + "%", "Hemodynamics"); else if (lv.spo2 < 92) add("warn", "Hypoxaemia", "SpO₂ " + lv.spo2 + "%", "Hemodynamics"); }
-    // UOP (oliguria)
-    if (lv.uop != null && s.patient && s.patient.weightKg) { var thr = 0.5 * s.patient.weightKg; if (lv.uop < thr) add("warn", "Oliguria", "UOP " + lv.uop + " mL/h (<0.5 mL/kg/h)", "Fluids"); }
-    // ABG
-    if (g.ph != null) { if (g.ph < 7.2 || g.ph > 7.55) add("crit", "Severe acid–base disturbance", "pH " + g.ph, "ABG"); else if (g.ph < 7.30 || g.ph > 7.50) add("warn", "Acid–base disturbance", "pH " + g.ph, "ABG"); }
-    // Ventilation / ARDS (cross-tab: ABG PaO2 + ventilator FiO2 → P/F)
+    if (lv.lactate != null) { if (lv.lactate > 4) add("crit", "Hyperlactataemia", "Lactate " + lv.lactate + " mmol/L (>4) — hypoperfusion", "Hemodynamics"); else if (lv.lactate > 2) add("warn", "Raised lactate", "Lactate " + lv.lactate + " mmol/L (>2)", "Hemodynamics"); }
+
+    // ---- Respiratory (BUG #7: SpO₂/PaO₂ are respiratory, not haemodynamic) ----
+    if (lv.spo2 != null) { if (lv.spo2 < 88) add("crit", "Severe hypoxaemia", "SpO₂ " + lv.spo2 + "% (<88)", "Respiratory"); else if (lv.spo2 < 92) add("warn", "Hypoxaemia", "SpO₂ " + lv.spo2 + "% (<92)", "Respiratory"); }
+
+    // ---- Temperature / pyrexia (BUG #8) ----
+    if (lv.temp != null) { if (lv.temp >= 40) add("crit", "Hyperpyrexia", "Temp " + lv.temp + " °C (≥40)", "Sepsis / Temperature"); else if (lv.temp <= 35) add("crit", "Hypothermia", "Temp " + lv.temp + " °C (≤35)", "Sepsis / Temperature"); else if (lv.temp >= 38.3) add("warn", "Pyrexia", "Temp " + lv.temp + " °C (≥38.3) — screen for infection / sepsis", "Sepsis / Temperature"); }
+
+    // ---- qSOFA / sepsis composite (BUG #3) — from inputs already collected ----
+    var q = 0, qp = [];
+    if (lv.rr != null && lv.rr >= 22) { q++; qp.push("RR " + lv.rr); }
+    if ((lv.sbp != null && lv.sbp <= 100) || (lv.sbp == null && mp != null && mp < 65)) { q++; qp.push(lv.sbp != null ? "SBP " + lv.sbp : "MAP " + mp); }
+    if (lv.gcs != null && lv.gcs < 15) { q++; qp.push("GCS " + lv.gcs); }
+    if (q >= 2) add("crit", "qSOFA " + q + "/3 — screen for sepsis", "Meets qSOFA (" + qp.join(", ") + "). Suspect sepsis → cultures + lactate, source control, early antibiotics; record GCS if not done.", "Sepsis / Temperature");
+    else if (q === 1 && ((lv.lactate != null && lv.lactate > 2) || (lv.temp != null && lv.temp >= 38.3))) add("warn", "Possible sepsis", "1 qSOFA criterion (" + qp.join(", ") + ") with raised lactate/fever — reassess and record GCS.", "Sepsis / Temperature");
+
+    // ---- ABG ----
+    if (g.ph != null) { if (g.ph < 7.2 || g.ph > 7.55) add("crit", "Severe acid–base disturbance", "pH " + g.ph, "Acid–base"); else if (g.ph < 7.30 || g.ph > 7.50) add("warn", "Acid–base disturbance", "pH " + g.ph, "Acid–base"); }
+    // ---- Ventilation / ARDS (already PEEP-gated — Berlin needs PEEP ≥5 on ventilation) ----
     var vt = s.ventilator || {}, pf = vt.pf != null ? vt.pf : ((g.pao2 != null && vt.fio2) ? Math.round(g.pao2 / (vt.fio2 / 100)) : null);
     if (pf != null && pf < 300) {
       var sev = pf < 100 ? "crit" : "warn", grade = pf < 100 ? "Severe" : pf < 200 ? "Moderate" : "Mild";
-      var onVent = vt.peep != null && vt.peep >= 5;   // ARDS (Berlin) needs PEEP ≥5 on ventilation — don't call it from P/F alone
+      var onVent = vt.peep != null && vt.peep >= 5;
       if (onVent) add(sev, grade + " ARDS (P/F " + pf + ")", grade + " ARDS" + (pf < 150 ? " — consider prone positioning" : ""), "Ventilator");
       else add(sev, grade + " hypoxaemia (P/F " + pf + ")", "Meets the ARDS oxygenation criterion — confirm PEEP ≥5 + bilateral infiltrates before calling ARDS", "Ventilator");
     }
@@ -150,19 +180,22 @@
     v.ts = o.ts || nowTs();
     STATE.vitals.push(v);
     if (STATE.vitals.length > MAX_SERIES) STATE.vitals.splice(0, STATE.vitals.length - MAX_SERIES);
+    recompute(_raw);   // refresh alerts synchronously after writing vitals (BUG #1)
     return v;
   }
   function ingestLabs(o) {
-    o = o || {}; var keys = ["na", "k", "cl", "hco3", "ca", "mg", "po4", "glu", "creat", "urea", "alb", "wbc", "hb", "plt", "inr", "ferritin", "trig", "fibrinogen", "crp", "bili", "ast", "alt", "alp", "bili_d", "amylase", "lipase", "pct", "neut", "hct"];
+    o = o || {}; var keys = ["na", "k", "cl", "hco3", "ca", "mg", "po4", "glu", "creat", "egfr", "urea", "alb", "wbc", "hb", "plt", "inr", "ferritin", "trig", "fibrinogen", "crp", "bili", "ast", "alt", "alp", "bili_d", "amylase", "lipase", "pct", "neut", "hct"];
     var rec = pick(o, keys); var ts = o.ts || nowTs();
     Object.keys(rec).forEach(function (k) { STATE.labs.recent[k] = rec[k]; });
     STATE.labs.trends.push(Object.assign({ ts: ts }, rec));
     if (STATE.labs.trends.length > MAX_SERIES) STATE.labs.trends.splice(0, STATE.labs.trends.length - MAX_SERIES);
+    recompute(_raw);   // BUG #1: imported/entered labs must (re)fire alerts, not just repaint widgets
     return rec;
   }
   function ingestVentilator(o) {
     o = o || {}; var v = pick(o, ["mode", "fio2", "peep", "tv", "rr", "peak", "plateau", "drivingP", "compliance", "pf"]);
     Object.keys(v).forEach(function (k) { STATE.ventilator[k] = v[k]; });
+    recompute(_raw);   // BUG #1: ventilator/PEEP changes must refresh the ARDS/hypoxaemia alert
     return v;
   }
   function ingestFlowsheet(o) {
@@ -408,15 +441,24 @@
   // conversion, e.g. Ca 9.4 mg/dL was read as 9.4 mmol/L → ELYTE ×4 → "40.4 mg/dL, severe
   // hypercalcaemia". Convert conventional→SI on ingest. Na/K/Cl/HCO₃ are mEq/L == mmol/L, so
   // they're never converted. Factors mirror electrolytes.js CONV (conventional = SI × f).
-  var WARD_CONV = { ca: 4.0, mg: 2.43, po4: 3.1, glu: 18, creat: 1 / 88.4, alb: 0.1 };
+  var WARD_CONV = { ca: 4.0, mg: 2.43, po4: 3.1, glu: 18, creat: 1 / 88.4, alb: 0.1, urea: 6.006 };
   // Above these an SI value is implausible → the number must be conventional (used only when
   // the units string is missing; creat/alb are the inverse — a small value is conventional).
   // Unit-less plausibility ceilings. Raised glu 35→50 & ca 4→4.5 so a TRUE severe hyperglycaemia
   // (e.g. 40 mmol/L HHS) / hypercalcaemia isn't mis-divided into a normal value by wardToSI.
-  var SI_IMPLAUSIBLE = { ca: 4.5, mg: 3, po4: 4, glu: 50, creat: 20, alb: 12 };
+  var SI_IMPLAUSIBLE = { ca: 4.5, mg: 3, po4: 4, glu: 33, creat: 20, alb: 12, urea: 60 };   // glu 50→33 (mmol/L HHS ceiling); above → the raw was mg/dL
   function wardToSI(key, val, units) {
-    var f = WARD_CONV[key]; if (!f) return val;                       // Na/K/Cl/HCO₃/etc: mEq==mmol, no conversion
     var u = String(units || "").toLowerCase().replace(/\s+/g, "");
+    // Platelets (BUG #2): Indian labs report lakhs/cumm (×10⁵/µL) → ×10⁹/L is ×100; an absolute
+    // /cumm count (e.g. 141000) is ÷1000. Prefer the units string; else a value implausibly low
+    // as ×10⁹/L (normal 150–450) is really lakhs. Keeps a true ×10⁹/L thrombocytopenia (e.g. 45) as-is.
+    if (key === "plt") {
+      if (/lakh/.test(u)) return Math.round(val * 100);
+      if (val > 1000) return Math.round(val / 1000);
+      if (!u && val > 0 && val < 20) return Math.round(val * 100);
+      return val;
+    }
+    var f = WARD_CONV[key]; if (!f) return val;                       // Na/K/Cl/HCO₃/Hb/eGFR: mEq==mmol / already SI, no conversion
     if (/mmol|meq|µmol|umol|micromol|g\/l/.test(u)) return val;       // already SI (incl albumin g/L)
     var conventional = /mg\/dl/.test(u) || (key === "alb" && /g\/dl/.test(u));
     if (conventional) return val / f;                                // GHIS conventional → SI
@@ -466,6 +508,7 @@
     // merge (don't clobber) any newly-detected conflicts
     if (conflicts.length) { STATE.conflicts = (STATE.conflicts || []).filter(function (c) { return !conflicts.some(function (n) { return n.key === c.key; }); }).concat(conflicts); }
     STATE.wardSync = { connected: true, lastTs: ts, patientId: bundle.patientId || (STATE.wardSync && STATE.wardSync.patientId) || null, newUpdate: hadNew && !!(STATE.wardSync && STATE.wardSync.lastTs) };
+    recompute(_raw);   // BUG #1: recompute alerts after a Ward-Sync import (abg/vent write directly to state)
     return { applied: Object.keys(applied), conflicts: conflicts.length, mappedLabs: Object.keys(labVals).length };
   }
 
@@ -622,7 +665,8 @@
       '.icu-badge{display:inline-block;font:800 9px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);border-radius:var(--r-pill);padding:2px 7px;margin-top:8px}' +
       '.icu-ai .man{display:inline-block;margin-top:8px;margin-left:6px;font:700 11px var(--font);color:var(--primary)}' +
       // alert / recommendation / protocol cards
-      '.icu-alert{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--border);border-left-width:4px;border-radius:var(--r-sm);padding:11px 13px;background:var(--panel)}' +
+      '.icu-alert{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--border);border-left-width:4px;border-radius:var(--r-sm);padding:11px 13px;background:var(--panel);margin-bottom:6px}' +
+      '.icu-alert-grp{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:10px 0 4px}.icu-alert-grp:first-child{margin-top:0}' +
       '.icu-alert.crit{border-left-color:var(--danger);background:var(--danger-soft)}' +
       '.icu-alert.warn{border-left-color:var(--warn);background:var(--warn-soft)}' +
       '.icu-alert .at{font:700 13.5px var(--font)}.icu-alert .am{font:500 12.5px/1.45 var(--font);color:var(--muted);margin-top:1px}' +
@@ -813,6 +857,15 @@
       (value == null || value === "" ? "—" : esc(value)) + (value != null && value !== "" && unit ? '<span class="vu">' + esc(unit) + "</span>" : "") + "</div>" + (series ? miniSpark(series) : "") + "</div>";
   }
   function alertCard(a) { return '<div class="icu-alert ' + esc(a.severity) + '"><div><div class="at">' + esc(a.title) + '</div><div class="am">' + esc(a.msg) + '</div></div><div class="ax">' + esc(a.source || "") + "</div></div>"; }
+  // BUG #7: group the alert list by TRUE source, in clinical priority order.
+  function alertsGroupedHTML(alerts) {
+    var by = {}; (alerts || []).forEach(function (a) { var s = a.source || "Other"; (by[s] = by[s] || []).push(a); });
+    var order = (typeof ALERT_SOURCES !== "undefined" ? ALERT_SOURCES : []).concat(Object.keys(by).filter(function (s) { return (typeof ALERT_SOURCES === "undefined" || ALERT_SOURCES.indexOf(s) < 0); }));
+    var seen = {};
+    return order.filter(function (s) { return by[s] && !seen[s] && (seen[s] = 1); }).map(function (s) {
+      return '<div class="icu-alert-grp">' + esc(s) + "</div>" + by[s].map(alertCard).join("");
+    }).join("");
+  }
 
   /* ----------------------------------------------------- live status row */
   function vstat(v, lo, hi, clo, chi) {
@@ -837,7 +890,7 @@
       vitalCard("Pressors", pressors.length ? pressors.map(function (p) { return p.drug; }).join(", ") : "None", "", pressors.length ? "warn" : "ok"),
       vitalCard("Infusions", (_raw.infusions || []).length || "0", "", ""),
       vitalCard("Net Fluid", f.net24h, "mL", ""),
-      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, 2.5, 6.5), labSeries("k", _trendWin))
+      vitalCard("K⁺", L.k, "mmol/L", vstat(L.k, 3.5, 5.0, K_CRIT_LO, K_CRIT_HI), labSeries("k", _trendWin))   // BUG #5: shared crit constant with the alert engine
     ];
     return '<div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
   }
@@ -1569,7 +1622,7 @@
     { k: "disposition", g: "Disposition", label: "Disposition / step-down plan" }
   ];
   function buildSummary(st) {
-    var s = st || _raw, p = s.patient || {}, vits = s.vitals || [], lv = vits.length ? vits[vits.length - 1] : {}, L = s.labs && s.labs.recent || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], goals = s.goals || [], infusions = s.infusions || [], out = [];
+    var s = st || _raw, p = s.patient || {}, vits = s.vitals || [], lv = latestByTs(s.vitals), L = s.labs && s.labs.recent || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], goals = s.goals || [], infusions = s.infusions || [], out = [];   // BUG #6: latest vital by max ts, not last-pushed
     out.push("STEWARDMD — DAILY ICU SUMMARY");
     out.push((p.name || "ICU patient") + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") + (p.bed ? " · Bed " + p.bed : "") + (p.icuDay != null ? " · ICU day " + p.icuDay : ""));
     if (p.diagnosis) out.push("Diagnosis: " + p.diagnosis);
@@ -1733,7 +1786,7 @@
       var p = _raw.patient, alerts = _raw.alerts || [], f = _raw.fluids || {}, v = _raw.ventilator || {}, mp = curMap();
       var out = "";
       out += '<div class="icu-sec-lbl">🚨 Critical Alerts</div>';
-      out += alerts.length ? alerts.map(alertCard).join("") : '<div class="icu-card"><p>No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
+      out += alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p>No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
       // Surface Trends up front (it was buried as the last Monitoring sub-tab) — one tap to the chart.
       out += '<div class="icu-sec-lbl">' + ico("trend", "📈") + ' Trends</div><div class="icu-card">' +
         '<p class="icu-doc-sub" style="margin:0 0 8px">See how this patient’s vitals and labs are moving over time.</p>' +
