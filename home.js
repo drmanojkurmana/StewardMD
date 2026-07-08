@@ -61,6 +61,7 @@
       //    Clinical Reasoning / Drugs Database links.
       var links = Array.prototype.slice.call(menu.querySelectorAll(".sb-main-link"));
       var cr = links.filter(function (b) { return /Clinical Reasoning/i.test(b.textContent); })[0];
+      if (cr) { var _bb = cr.querySelector(".sb-beta"); if (_bb) _bb.remove(); }   // de-beta the Clinical Reasoning menu link (badge is rendered by app.js)
       if (cr && cr.parentNode) {
         var dx = topBtn("🩺", "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} });
         var ws = topBtn("🏥", "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} });
@@ -1206,7 +1207,7 @@
       '</div>' +
       '<div style="margin-top:14px;border:1px solid var(--hbd);border-radius:14px;padding:14px;background:var(--hbg)">' +
         '<div style="font:700 12px var(--hfont);text-transform:uppercase;letter-spacing:.05em;color:var(--hmut);margin-bottom:8px">Included</div>' +
-        '<div style="font:500 13px/1.9 var(--hfont);color:var(--hink)">✓ Full antibiotic decision engine<br>✓ 1,465-drug database — doses &amp; brands<br>✓ 50+ calculators · guidelines · ICU tools<br>✓ Clinical Reasoning (beta)</div>' +
+        '<div style="font:500 13px/1.9 var(--hfont);color:var(--hink)">✓ Full antibiotic decision engine<br>✓ 1,465-drug database — doses &amp; brands<br>✓ 50+ calculators · guidelines · ICU tools<br>✓ Clinical Reasoning</div>' +
       '</div>' +
       '<button class="hv-reset" style="background:var(--hp);color:#fff;border-color:var(--hp);margin-top:14px" data-close="1">Continue — it\'s free</button>');
     var subClose = sheetEl().querySelector("[data-close]");
