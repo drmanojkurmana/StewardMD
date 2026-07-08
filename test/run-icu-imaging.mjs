@@ -85,6 +85,23 @@ try {
   ok(crit.R3.length === 0, "negation safety: 'No consolidation / No pneumothorax / No free air' does NOT flag (R3)");
   ok(await ev(`var d=ICU.state().patient.diagnosis||""; return d==="";`) === true, "critical flag never sets a diagnosis (engine authority intact)");
 
+  // 5b) review-hardening: negation is CLAUSE-scoped (an earlier "No ..." sentence must not
+  //     suppress a real finding), and British/American spellings both flag. Uses the pure scan.
+  const scan = JSON.parse(await ev(`return JSON.stringify({
+    negClause: ICU._imgCritical("No fracture. Acute subdural haematoma seen."),
+    negClause2: ICU._imgCritical("No acute infarct. Small acute subdural haematoma."),
+    negPtx: ICU._imgCritical("No pleural effusion. Large pneumothorax on the right."),
+    trueNeg: ICU._imgCritical("No free air. No perforation. No pneumothorax."),
+    ischB: ICU._imgCritical("Features of mesenteric ischaemia with bowel wall thickening."),
+    ischA: ICU._imgCritical("Findings of mesenteric ischemia."),
+    necroZ: ICU._imgCritical("Findings consistent with necrotizing pancreatitis."),
+    necroS: ICU._imgCritical("Acute necrotising pancreatitis.")
+  });`));
+  ok(scan.negClause.length > 0 && scan.negClause2.length > 0 && scan.negPtx.length > 0, "negation clause-scoped — an earlier 'No …' clause no longer suppresses a real urgent finding");
+  ok(scan.trueNeg.length === 0, "genuine same-clause negations still suppressed ('No free air / No perforation / No pneumothorax')");
+  ok(scan.ischB.length > 0 && scan.ischA.length > 0, "bowel ischaemia flagged in BOTH British (ischaemia) + American (ischemia) spelling");
+  ok(scan.necroZ.length > 0 && scan.necroS.length > 0, "necrotising + necrotizing pancreatitis both flagged");
+
   // 6) dedup — re-import the same batch → no new records
   const dedup = JSON.parse(await ev(`var res = ICU.ingestWardImaging({ patientId:"P1", source:"Ward Sync", imaging: ${FIXTURE} });
     return JSON.stringify({ added: res.added, dups: res.duplicates, total: ICU.state().imaging.length });`));
@@ -132,6 +149,40 @@ try {
   const I = JSON.parse(iso);
   ok(I.n === 0, "patient isolation: new patient inherits no imaging");
   ok(I.empty === true, "empty state: 'No imaging reports available from Ward Sync for this patient.'");
+
+  // 11) PHI isolation across ward patients — loading a DIFFERENT ward patient drops the prior
+  //     patient's radiology (Manual notes preserved). Guards against cross-patient PHI exposure.
+  const xp = JSON.parse(await ev(`
+    ICU.reset();
+    ICU.ingestWardImaging({ patientId:"PA", source:"Ward Sync", imaging:[{reportId:"A1",description:"CT Brain",report:"IMPRESSION: normal study."}] });
+    ICU.ingestImaging({ studyName:"Bedside USG", modality:"USG", impressionRaw:"ascites" });
+    ICU.ingestWardImaging({ patientId:"PB", source:"Ward Sync", imaging:[{reportId:"B1",description:"X-ray Chest",report:"IMPRESSION: clear lungs."}] });
+    var after = ICU.state().imaging;
+    return JSON.stringify({
+      wardPatients: after.filter(function(r){return r.source==="Ward Sync";}).map(function(r){return r.wardPatientId;}),
+      hasManual: after.some(function(r){return r.source==="Manual";}),
+      studies: after.map(function(r){return r.studyName;})
+    });`));
+  ok(xp.wardPatients.length === 1 && xp.wardPatients[0] === "PB", "PHI isolation: switching ward patient drops the prior patient's radiology (only PB remains)");
+  ok(xp.hasManual === true && xp.studies.indexOf("CT Brain") < 0 && xp.studies.indexOf("X-ray Chest") >= 0, "manual note preserved across ward switch; patient A's report removed, B's present");
+
+  // 12) id-keyed card actions target the RIGHT record (robust to array reindexing). Click the
+  //     2nd card's "Mark reviewed" via its id-based data-icu-act and confirm only it flips.
+  const idact = await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"IDPT",age:60,sex:"M"});
+    ICU.ingestWardImaging({ patientId:"PC", source:"Ward Sync", imaging:[
+      {reportId:"C1",description:"USG Abdomen",report:"IMPRESSION: normal."},
+      {reportId:"C2",description:"MRI Brain",report:"IMPRESSION: small vessel disease."}]});
+    ICU.open(); var root=document.getElementById('icuRoot');
+    var wsb=root.querySelector('[data-icu-act="ws:documents"]'); if(wsb) wsb.click();
+    var seg=root.querySelector('[data-icu-act="tab:imaging"]'); if(seg) seg.click();
+    var cards=root.querySelectorAll('.icu-img-card');
+    var btn=cards[1] && cards[1].querySelector('[data-icu-act^="imgreview:"]'); if(btn) btn.click();
+    var im=ICU.state().imaging;
+    var c1=im.filter(function(r){return r.reportId==="C1";})[0]||{}, c2=im.filter(function(r){return r.reportId==="C2";})[0]||{};
+    return JSON.stringify({ c1r: !!c1.reviewed, c2r: !!c2.reviewed, cards: cards.length });`);
+  const IA = JSON.parse(idact);
+  ok(IA.c2r === true && IA.c1r === false, "id-keyed action toggled the correct record (2nd card reviewed, 1st untouched)");
 
   console.log(fails === 0 ? "\nALL GREEN — ICU imaging import + notes test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

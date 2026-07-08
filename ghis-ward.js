@@ -255,16 +255,19 @@
             var res = (ICU.ingestWardHistory
               ? ICU.ingestWardHistory({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs })
               : ICU.ingestFromWard({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs }));
-            // Also import radiology reports (TEXT only) as Imaging Notes when the feature is on.
-            // A failure here never blocks the lab sync.
-            var imgP = (ICU.ingestWardImaging && (!ICU.imagingOn || ICU.imagingOn()))
-              ? GHIS.fetchImaging(patientId).then(function (records) { try { return ICU.ingestWardImaging({ patientId: patientId, source: 'Ward Sync', imaging: records }); } catch (e) { return null; } }).catch(function () { return null; })
-              : Promise.resolve(null);
-            return imgP.then(function (imgRes) {
-              try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
-              ICU.open();
-              try { if (window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0, ni = (imgRes && imgRes.added) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (ni ? ' · ' + ni + ' imaging report' + (ni === 1 ? '' : 's') : '') + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
-            });
+            // Open the dashboard IMMEDIATELY after the lab sync — imaging must never block it.
+            try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
+            ICU.open();
+            try { if (window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
+            // Radiology (TEXT only) streams in ASYNCHRONOUSLY when the feature is on. The ICU state
+            // subscription repaints the Imaging tab when records arrive; a slow/failed/hung fetch
+            // can never stall the dashboard (which already opened above).
+            if (ICU.ingestWardImaging && (!ICU.imagingOn || ICU.imagingOn())) {
+              GHIS.fetchImaging(patientId).then(function (records) {
+                var ir = ICU.ingestWardImaging({ patientId: patientId, source: 'Ward Sync', imaging: records });
+                try { if (window.toast && ir && ir.added) toast(ir.added + ' imaging report' + (ir.added === 1 ? '' : 's') + ' imported'); } catch (e) {}
+              }).catch(function () {});
+            }
           }).catch(function (e) { if (body) body.innerHTML = '<div class="ghis-lab-empty">Couldn’t load labs right now. Please try again.</div>'; });
         },
         // Fetch this patient's radiology reports (TEXT only) with the FULL field set — pulled
