@@ -736,7 +736,10 @@
       '.icu-corr-ol{margin:0;padding-left:20px}.icu-corr-ol li{font:700 14px/1.5 var(--font);color:var(--ink)}.icu-corr-conf{font:700 11px var(--font);color:var(--muted)}' +
       '.icu-corr-chips{display:flex;flex-wrap:wrap;gap:6px}.icu-corr-chip{font:600 12px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:4px 10px}.icu-corr-chip.ok{border-color:color-mix(in srgb,var(--ok) 40%,var(--border));color:var(--ok)}.icu-corr-chip.muted{color:var(--muted)}' +
       '.icu-corr-deep{margin-top:10px;border-top:1px solid var(--border);padding-top:10px}' +
-      '.icu-corr-note{font:600 12.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-corr-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}.icu-corr-partial{color:var(--muted);font-weight:600}';
+      '.icu-corr-note{font:600 12.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-corr-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}.icu-corr-partial{color:var(--muted);font-weight:600}' +
+      // External evidence (Phase 4)
+      '.icu-ev-hubs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.icu-ev-hub{font:700 12px var(--font);text-decoration:none;background:var(--panel2);border:1px solid var(--border);color:var(--primary);border-radius:999px;padding:5px 11px}' +
+      '.icu-ev-cite{display:block;text-decoration:none;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-ev-cite .t{font:700 13.5px/1.4 var(--font);color:var(--ink)}.icu-ev-cite .m{font:600 11.5px var(--font);color:var(--muted);margin-top:3px}';
     var st = document.createElement("style"); st.id = "icu-css"; st.textContent = css;
     document.head.appendChild(st);
   }
@@ -2559,6 +2562,76 @@
       _corrBusy = false; paint();
     }).catch(function () { _corrErr = { error: "server" }; _corrBusy = false; paint(); });
   }
+
+  /* ---- External trusted-evidence fallback (Phase 4) — opt-in, de-identified TOPIC only ---- */
+  var _evCache = {}, _evBusy = false, _evErr = null;
+  function extEvidenceOn() { try { var q = (location.search.match(/[?&]extevidence=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on"; var v = localStorage.getItem("smd_ext_evidence"); return v === null ? true : v === "1"; } catch (e) { return true; } }
+  // Curated allowlist of trusted guideline organisations (landing pages — always valid; PubMed gets
+  // the topic). NOT open web search.
+  var EVIDENCE_HUBS = [
+    { org: "WHO guidelines", url: "https://www.who.int/publications/who-guidelines" },
+    { org: "ICMR", url: "https://www.icmr.gov.in/" },
+    { org: "CDC", url: "https://www.cdc.gov/" },
+    { org: "NICE guidance", url: "https://www.nice.org.uk/guidance" },
+    { org: "PubMed (topic search)", url: "https://pubmed.ncbi.nlm.nih.gov/?term={q}" }
+  ];
+  function correlationTopic(ev) {
+    // Built from CONTROLLED-VOCABULARY concepts (imaging + lab abnormalities) plus — for the
+    // free-text diagnosis, which can hide a name/MRN — ONLY the canonical KB disease name when it
+    // matches the knowledge base (unrecognised free text is dropped). Standalone digit runs are
+    // stripped as a backstop (a guideline search needs no numbers). PHI must not reach NCBI.
+    var p = _raw.patient || {}, parts = [];
+    if (p.diagnosis) { try { var h = ((window.SMD_REASON && SMD_REASON.search) ? (SMD_REASON.search(p.diagnosis, 1) || []) : [])[0]; if (h && h.name) parts.push(h.name); } catch (e) {} }
+    (ev.img || []).slice(0, 3).forEach(function (c) { parts.push(c); });
+    if (parts.length < 2) (ev.labs || []).slice(0, 2).forEach(function (l) { parts.push(l.replace(/\s*\(.*\)$/, "")); });
+    return parts.join(" ").replace(/\b\d+\b/g, " ").replace(/[^\w\s,\-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 160);
+  }
+  function evResultsHTML(topic) {
+    if (_evBusy) return '<div class="icu-assist-msg">Searching trusted references…</div>';
+    var res = _evCache[topic];
+    var hubs = '<div class="icu-corr-sub">Trusted guideline sources</div><div class="icu-ev-hubs">' + EVIDENCE_HUBS.map(function (h) {
+      var u = h.url.indexOf("{q}") >= 0 ? h.url.replace("{q}", encodeURIComponent(topic)) : h.url;
+      return '<a class="icu-ev-hub" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(h.org) + "</a>";
+    }).join("") + "</div>";
+    var cites = "";
+    if (_evErr) cites = '<div class="icu-assist-msg">' + esc(_evErr.error === "quota" ? "Usage limit reached — try again later; use the trusted sources above." : "Couldn’t reach the reference service right now — use the trusted sources above.") + "</div>";
+    else if (res && res.results && res.results.length) cites = '<div class="icu-corr-sub">Peer-reviewed guidelines &amp; reviews (' + esc(res.source || "PubMed") + ')</div>' + res.results.map(function (r) {
+      return '<a class="icu-ev-cite" href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer"><div class="t">' + esc(r.title) + '</div><div class="m">' + esc([r.journal, r.year, r.pubtype].filter(Boolean).join(" · ")) + "</div></a>";
+    }).join("");
+    else if (res) cites = '<div class="icu-assist-msg" style="color:var(--muted)">No matching guidelines/reviews found — browse the trusted sources above.</div>';
+    return hubs + cites + '<div class="icu-assist-src">External references — <b>not StewardMD-verified</b>. Confirm against the source and local protocol before acting.</div>';
+  }
+  function openEvidenceLookup() {
+    if (!extEvidenceOn()) { if (window.toast) toast("External references are turned off in Settings."); return; }
+    ensureModal();
+    var topic = correlationTopic(correlationEvidence());
+    // Only repaint if the EVIDENCE sheet is still the one showing (modalEl is shared by every ICU
+    // modal) — a late PubMed response must never clobber an imaging/patient/snapshot modal.
+    function evLive() { return modalEl.classList.contains("on") && !!modalEl.querySelector("#icuEvSheet"); }
+    function render(confirmed) {
+      modalEl.innerHTML = '<div class="icu-sheet" id="icuEvSheet"><h3>' + ico("search", "🔎") + ' Evidence beyond StewardMD</h3>' +
+        '<p class="icu-doc-sub">StewardMD may not have sufficient internal coverage for this pattern. Search trusted external clinical references for <b>' + esc(topic || "this patient’s findings") + '</b>?</p>' +
+        (confirmed ? evResultsHTML(topic) :
+          '<div class="icu-img-btns"><button class="icu-btn" id="icuEvGo">' + ico("search", "🔎") + ' Search trusted references</button>' +
+          '<button class="icu-btn ghost" data-icu-act="closeform">Continue with StewardMD only</button>' +
+          '<button class="icu-btn ghost" data-icu-act="imgadd">Add a manual note</button></div>') +
+        '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:10px">Close</button></div>';
+      modalEl.classList.add("on");
+      var go = modalEl.querySelector("#icuEvGo");
+      if (go) go.addEventListener("click", function () {
+        if (_evBusy) { render(true); return; }                       // in-flight — reuse the pending request (no double fetch/charge)
+        if (_evCache[topic]) { _evErr = null; render(true); return; }  // cached SUCCESS — no repeat fetch
+        _evErr = null; _evBusy = true; render(true);
+        (window.SMD_AI && SMD_AI.evidence ? SMD_AI.evidence(topic) : Promise.resolve({ error: "off" })).then(function (res) {
+          _evBusy = false;
+          if (res && !res.error) _evCache[topic] = res; else _evErr = res || { error: "server" };   // cache SUCCESS only → errors stay retryable
+          if (evLive()) render(true);
+        }).catch(function () { _evBusy = false; _evErr = { error: "server" }; if (evLive()) render(true); });
+      });
+    }
+    _evErr = null;
+    render(false);
+  }
   function corrChips(arr, cls) { return (arr && arr.length) ? '<div class="icu-corr-chips">' + arr.map(function (x) { return '<span class="icu-corr-chip ' + (cls || "") + '">' + esc(x) + "</span>"; }).join("") + "</div>" : ""; }
   function corrDeepHTML(res) {
     if (!res || res.error) return '<div class="icu-assist-msg">' + esc(res && res.error === "ai-off" ? "Deep review is turned off (cloud text disabled in Settings)." : res && res.error === "quota" ? "AI usage limit reached — try again later." : "Couldn’t run the deep review right now.") + "</div>";
@@ -2614,7 +2687,7 @@
     return header + '<div class="icu-card">' + badge + redflags + considBlock + supporting + missing + evidence +
       '<div class="icu-img-btns" style="margin-top:10px">' +
         '<button class="icu-btn" data-icu-act="corrdeep"' + (_corrBusy ? " disabled" : "") + '>' + ico("pulse", "✨") + ' Deep clinical review</button>' +
-        '<button class="icu-btn ghost" disabled title="Coming in a later update">Find evidence beyond StewardMD</button>' +
+        (extEvidenceOn() ? '<button class="icu-btn ghost" data-icu-act="corrext">Find evidence beyond StewardMD</button>' : '<button class="icu-btn ghost" disabled title="Turned off in Settings">Find evidence beyond StewardMD</button>') +
       "</div>" + deepBlock +
       '<p class="icu-doc-sub" style="margin-top:8px">Advisory only. The deterministic engine owns the diagnosis; this never changes any ranking.</p></div>';
   }
@@ -2870,6 +2943,7 @@
       case "imgsummaryadd": { var _isa = imgById(decodeURIComponent(arg)); if (_isa && !_isa.inSummary) { _isa.inSummary = true; if (window.toast) toast("Added to Daily Summary"); } paint(); break; }
       case "corranalyse": _corrAnalysed = true; paint(); break;
       case "corrdeep": runCorrelationDeep(); break;
+      case "corrext": openEvidenceLookup(); break;
       case "imghide": { var _ih = imgById(decodeURIComponent(arg)); if (_ih) _ih.hidden = !_ih.hidden; paint(); break; }
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
@@ -2979,7 +3053,7 @@
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
     _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,
-    _correlationEvidence: correlationEvidence, _runQuickCorrelation: runQuickCorrelation, _buildCorrelationPacket: buildCorrelationPacket,
+    _correlationEvidence: correlationEvidence, _runQuickCorrelation: runQuickCorrelation, _buildCorrelationPacket: buildCorrelationPacket, _correlationTopic: correlationTopic, extEvidenceOn: extEvidenceOn,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"

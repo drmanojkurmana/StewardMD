@@ -504,6 +504,44 @@ export async function onRequest(context) {
       const parsed = parseJsonLoose(text);
       return json(parsed ? { correlation: parsed, mode: "correlate" } : { error: "parse", raw: String(text || "").slice(0, 1200), mode: "correlate" });
     }
+    if (seg === "evidence") {
+      // Trusted external reference lookup (opt-in fallback). Input is a DE-IDENTIFIED topic string
+      // only (no patient data). Queries NCBI PubMed E-utilities — a single trusted NIH host —
+      // filtered to guideline/review publication types. Returns REAL citations; NEVER open-web.
+      // De-id backstop: strip standalone digit runs (MRN/bed/age) even if the client is bypassed —
+      // a guideline/review search needs no numbers.
+      const topic = clip(String(body.topic || "").replace(/[^\w\s,\-]/g, " ").replace(/\b\d+\b/g, " ").replace(/\s+/g, " ").trim(), 200);
+      if (!topic) return json({ error: "no-topic" }, 400);
+      const gate = await checkQuota(env, request, "general");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      const contact = env.NCBI_EMAIL || "contact@stewardmd.in";
+      const base = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
+      const cred = "&tool=stewardmd&email=" + encodeURIComponent(contact);
+      const term = encodeURIComponent(topic + ' AND (Practice Guideline[ptyp] OR Guideline[ptyp] OR systematic review[ptyp] OR Review[ptyp]) AND English[lang] AND ("2013"[dp] : "3000"[dp])');
+      let results = [];
+      try {
+        const es = await fetch(base + "esearch.fcgi?db=pubmed&retmode=json&retmax=6&sort=relevance" + cred + "&term=" + term, { cf: { cacheTtl: 86400 } });
+        if (!es.ok) throw new Error("esearch " + es.status);
+        const ej = await es.json();
+        if (ej && ej.esearchresult && ej.esearchresult.ERROR) throw new Error("esearch-error");
+        const ids = ((ej && ej.esearchresult && ej.esearchresult.idlist) || []).slice(0, 6);
+        if (ids.length) {
+          const su = await fetch(base + "esummary.fcgi?db=pubmed&retmode=json" + cred + "&id=" + ids.join(","), { cf: { cacheTtl: 86400 } });
+          if (!su.ok) throw new Error("esummary " + su.status);
+          const sj = await su.json();
+          const r = (sj && sj.result) || {};
+          results = ids.map(function (id) {
+            const x = r[id]; if (!x || !x.title) return null;
+            const pts = x.pubtype || [];
+            return { title: String(x.title).replace(/\s+/g, " ").replace(/\.$/, "").trim(), journal: x.fulljournalname || x.source || "", year: String(x.pubdate || "").slice(0, 4), pubtype: pts.filter(function (p) { return /guideline|systematic review/i.test(p); })[0] || pts[0] || "", url: "https://pubmed.ncbi.nlm.nih.gov/" + id + "/", pmid: id };
+          }).filter(Boolean);
+          // esearch found matching PMIDs but esummary yielded none → a lookup FAILURE, not "none found".
+          if (!results.length) throw new Error("esummary-empty");
+        }
+      } catch (e) { try { await recordUsage(gate, { inTok: estTokens(topic.length), outTok: 0, status: "failed" }); } catch (x) {} return json({ error: "lookup-failed", source: "pubmed" }, 502); }
+      await recordUsage(gate, { inTok: estTokens(topic.length), outTok: estTokens(JSON.stringify(results).length), status: "success" });
+      return json({ results: results, source: "PubMed (NCBI)", query: topic, mode: "evidence" });
+    }
     if (seg === "vision") {
       const kind = VISION_SYS[body.kind] ? body.kind : "monitor";
       // TEXT mode (privacy path D→B): on-device OCR text, no image ever sent. Preferred.

@@ -3699,6 +3699,15 @@
         .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
+    // Trusted external reference lookup (Phase 4) — de-identified TOPIC string only → PubMed
+    // guideline/review citations. Retrieval, not AI generation; opt-in per clinician tap.
+    evidence: function (topic) {
+      var b = aiBase(); if (!b) return Promise.resolve({ error: "off" });
+      var t = String(topic == null ? "" : topic).slice(0, 200); if (!t) return Promise.resolve({ error: "no-topic" });
+      return aiHeaders().then(function (h) { return fetch(b + "/evidence", { method: "POST", headers: h, body: JSON.stringify({ topic: t }) }); })
+        .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
     // Clinical Correlation (Phase 3) — de-identified imaging+lab evidence packet → advisory
     // correlation. Same cloud-text posture as visionText/imagingSummary. Advisory only.
     correlate: function (packet) {
