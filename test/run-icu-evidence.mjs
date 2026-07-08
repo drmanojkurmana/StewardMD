@@ -77,7 +77,7 @@ try {
     var pubmedHref=(Array.prototype.filter.call(m.querySelectorAll('.icu-ev-hub'),function(a){return /PubMed/.test(a.textContent);})[0]||{}).href||"";
     var cites=m.querySelectorAll('.icu-ev-cite');
     var blank=Array.prototype.every.call(m.querySelectorAll('.icu-ev-cite,.icu-ev-hub'),function(a){return a.target==='_blank';});
-    return JSON.stringify({ calls: window.__evn, evtopic: window.__evtopic || "", nHubs: hubs.length, hasWHO: hubs.indexOf('WHO guidelines')>=0, hasICMR: hubs.indexOf('ICMR')>=0, pubmedHasTopic: /[?&]term=/.test(pubmedHref) && pubmedHref.length>40, nCites: cites.length, citeText: (cites[0]?cites[0].textContent:""), disclaimer: /not StewardMD-verified/.test(txt), blank: blank });`));
+    return JSON.stringify({ calls: window.__evn, evtopic: window.__evtopic || "", nHubs: hubs.length, hasWHO: hubs.indexOf('WHO')>=0, hasICMR: hubs.indexOf('ICMR')>=0, pubmedHasTopic: /[?&]term=/.test(pubmedHref) && pubmedHref.length>40, nCites: cites.length, citeText: (cites[0]?cites[0].textContent:""), disclaimer: /not StewardMD-verified/.test(txt), blank: blank });`));
   ok(R.calls === 1, "search calls the evidence retrieval once");
   ok(R.nHubs >= 5 && R.hasWHO && R.hasICMR && R.pubmedHasTopic, "curated trusted-org hubs render (WHO/ICMR/CDC/NICE/PubMed); PubMed link carries the topic");
   ok(R.nCites === 2 && /acute pancreatitis/i.test(R.citeText) && /Pancreatology|2013|Practice Guideline/i.test(R.citeText), "peer-reviewed PubMed citations render (title · journal · year · type)");

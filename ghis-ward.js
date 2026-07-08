@@ -214,8 +214,10 @@
           GHIS._selectedPatient = { patientId: patientId, name: name };
           GHIS._patientId = patientId;
           title.textContent = name + ' (' + patientId + ')';
+          var lwOk = !!(window.ICU && ICU.openLabWatch && (!ICU.labWatchOn || ICU.labWatchOn()));
           body.innerHTML =
             (window.ICU ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0F766E" onclick="GHIS.loadIntoICU(\'' + jsq(patientId) + '\')">🏥 Load patient into ICU dashboard</button>' : '') +
+            (lwOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0d5c54" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">🔔 Lab Watch — alert me on new labs</button>' : '') +
             '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
           drawer.style.display = '';
           GHIS.loadRadiology(patientId);
@@ -225,7 +227,14 @@
         // (name/age/sex/bed/dept) — structured lab auto-import is deliberately NOT done
         // here: mapping GHIS test names to typed analytes must be clinician-verified
         // against the hospital's live schema before any value enters a clinical view.
-        loadIntoICU: function(patientId) {
+        // Open Lab Watch (ICU dashboard, Phase 1 in-app) for this ward patient — loads the
+        // patient into ICU first, then opens the Lab Watch setup once the sync has landed.
+        watchLabs: function(patientId) {
+          if (!window.ICU || !ICU.openLabWatch) { alert('ICU dashboard not loaded.'); return; }
+          if (ICU.labWatchOn && !ICU.labWatchOn()) { alert('Lab Watch is turned off.'); return; }
+          GHIS.loadIntoICU(patientId, function () { try { ICU.openLabWatch(); } catch (e) {} });
+        },
+        loadIntoICU: function(patientId, after) {
           if (!window.ICU || !ICU.ingestFromWard) { alert('ICU dashboard not loaded.'); return; }
           var p = null, list = (typeof _patients !== 'undefined' && _patients) || [];
           for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
@@ -258,6 +267,7 @@
             // Open the dashboard IMMEDIATELY after the lab sync — imaging must never block it.
             try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
             ICU.open();
+            try { if (typeof after === 'function') after(); } catch (e) {}
             try { if (window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
             // Radiology (TEXT only) streams in ASYNCHRONOUSLY when the feature is on. The ICU state
             // subscription repaints the Imaging tab when records arrive; a slow/failed/hung fetch
