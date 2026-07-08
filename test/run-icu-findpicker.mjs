@@ -40,11 +40,13 @@ try {
   ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
-  await call("Runtime.enable", {}); await call("Page.navigate", { url: BASE });
+  await call("Runtime.enable", {});
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });   // mobile viewport so the bottom-sheet/nav overlap check is faithful
+  await call("Page.navigate", { url: BASE });
   let ready = false;
   for (let i = 0; i < 90; i++) { await sleep(400); if (await ev(`return !!(window.ICU && ICU.open && ICU.openFindingPicker && window.SMD_VOCAB && SMD_VOCAB.search && window.SMD_NLP && SMD_NLP.extract)`) === true) { ready = true; break; } }
   if (!ready) throw new Error("ICU + SMD_VOCAB + SMD_NLP not loaded");
-  await ev(`["introPoster","splash","accountGate","introOverlay"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
+  await ev(`["smdBootSplash","introPoster","splash","accountGate","introOverlay"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
 
   const top = (q, ws2) => `SMD_VOCAB.search(${JSON.stringify(q)},{workspace:${JSON.stringify(ws2 || "im")},limit:8}).results`;
 
@@ -92,7 +94,7 @@ try {
   // 9) typing renders a GROUPED dropdown of hits (debounced ~120ms local)
   await ev(`var i=document.getElementById('icuFindQ'); if(i){ i.value="head"; i.dispatchEvent(new Event('input',{bubbles:true})); } return 1;`);
   await sleep(260);
-  const t9 = await J(`return JSON.stringify({ hits:document.querySelectorAll('#icuFindRes .icu-find-hit').length, hdrs:document.querySelectorAll('#icuFindRes .icu-find-reshdr').length, first:(document.querySelector('#icuFindRes .icu-find-hit .nm')||{}).textContent||"" });`);
+  const t9 = await J(`return JSON.stringify({ hits:document.querySelectorAll('#icuFindRes .icu-find-hit').length, hdrs:document.querySelectorAll('#icuFindRes .icu-find-cath').length, first:(document.querySelector('#icuFindRes .icu-find-hit .nm')||{}).textContent||"" });`);
   ok(t9.hits > 0 && t9.hdrs > 0 && /headache/i.test(t9.first), `typing "head" → grouped dropdown (${t9.hits} hits, ${t9.hdrs} group headers, first=${t9.first})`);
 
   // 10) tapping a hit adds a structured, clinician-confirmed chip (documentation only)
@@ -216,6 +218,44 @@ try {
     return JSON.stringify({s: ICU.summary(ICU.state())});
   `);
   ok(/CLINICAL FINDINGS:/.test(t21.s) && /Headache/.test(t21.s) && /No Fever/.test(t21.s), `findings appear in the Daily ICU summary (incl. "No Fever")`);
+
+  // 22) chips SAVE + REOPEN correctly for the selected patient (local roster; polarity preserved)
+  const t22 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"SMOKE-SAVE",age:60,sex:"M"});
+    ICU._addFindingChip({canonicalFindingId:"headache",displayLabel:"Headache",inReasoning:true},"manual_picker");
+    ICU._addFindingChip({canonicalFindingId:"fever",displayLabel:"Fever",polarity:"absent",inReasoning:true},"manual_picker");
+    ICU.savePatient();
+    var id = ICU.state().patient._id;
+    ICU.newPatient();
+    var cleared = (ICU.state().findings||[]).length;
+    ICU.loadPatient(id);
+    var restored = (ICU.state().findings||[]).map(function(c){return c.canonicalFindingId+":"+c.polarity;});
+    return JSON.stringify({ cleared:cleared, restored:restored });
+  `);
+  ok(t22.cleared === 0 && t22.restored.indexOf("headache:present") >= 0 && t22.restored.indexOf("fever:absent") >= 0,
+    `chips save + reopen for the selected patient (cleared→${t22.cleared}, restored [${t22.restored.join(", ")}])`);
+
+  // 23) mobile bottom-sheet does NOT overlap the ICU bottom navigation: the sheet covers the viewport
+  //     bottom (where the nav sits) and the nav is never the topmost element while the picker is open
+  const t23 = await J(`
+    ICU.reset(); ICU.ingestPatient({name:"SMOKE-NAV",age:55,sex:"F"}); ICU.open();
+    var cp=document.querySelector('[data-icu-act="ws:careplan"]'); if(cp) cp.click();
+    var nav=document.querySelector('.icu-tabs'), navZ = nav ? (+getComputedStyle(nav).zIndex||0) : -1;
+    ICU.openFindingPicker();
+    var sheet=document.getElementById('icuFindSheet'), modal=document.getElementById('icuModal');
+    var modalZ = +getComputedStyle(modal).zIndex||0, sr = sheet ? sheet.getBoundingClientRect() : null;
+    var bx=Math.round(window.innerWidth/2), by=Math.round(window.innerHeight-4);   // bottom-centre = the nav's spot
+    var topEl=document.elementFromPoint(bx, by);
+    return JSON.stringify({
+      navPresent: !!nav, sheetPresent: !!sheet,
+      sheetReachesBottom: !!(sr && sr.bottom >= window.innerHeight-1),
+      modalAboveNav: modalZ > navZ,
+      bottomTopIsModalLayer: !!(topEl && (topEl.closest('#icuFindSheet') || topEl.id==='icuModal')),
+      bottomTopIsNav: !!(topEl && topEl.closest('.icu-tabs'))
+    });
+  `);
+  ok(t23.navPresent && t23.sheetPresent && t23.sheetReachesBottom && t23.modalAboveNav && t23.bottomTopIsModalLayer && !t23.bottomTopIsNav,
+    `bottom-sheet does not overlap bottom nav (sheet reaches viewport bottom, modalZ>navZ, nav never topmost)`);
 
   console.log(fails === 0 ? "\nALL GREEN — ICU finding picker test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

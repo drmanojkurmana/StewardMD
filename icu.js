@@ -744,10 +744,14 @@
       // Structured finding picker (autocomplete). Lives inside .icu-sheet (a bottom sheet that
       // overlays the whole dashboard) so results never overlap the bottom nav / camera FAB / MaiK sheet;
       // safe-area-inset is already handled by .icu-sheet padding.
-      '.icu-find-res{margin-top:10px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
-      '.icu-find-reshdr{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:8px 0 2px}.icu-find-reshdr:first-child{margin-top:0}' +
-      '.icu-find-hit{display:flex;flex-direction:column;gap:2px;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:11px 13px;min-height:48px;cursor:pointer;color:var(--ink)}.icu-find-hit:active{background:var(--primary-soft);border-color:var(--primary)}' +
-      '.icu-find-hit .nm{font:700 14.5px var(--font);color:var(--ink)}.icu-find-hit .mt{font:600 11px var(--font);color:var(--muted)}.icu-find-hit .sy{font:600 11px var(--font);color:var(--muted);opacity:.85}' +
+      '#icuFindQ:focus{outline:none;border-color:var(--primary)}' +
+      '.icu-find-res{margin-top:10px;max-height:46vh;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
+      '.icu-find-cath{font:800 11px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:12px 0 5px}.icu-find-cath:first-child{margin-top:2px}' +
+      '.icu-find-cnt{display:inline-block;background:var(--primary-soft);color:var(--primary);font:700 11px var(--font);padding:1px 8px;border-radius:999px;margin-left:5px;vertical-align:1px}' +
+      '.icu-find-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;background:var(--panel2);overflow:hidden}' +
+      '.icu-find-hit{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--border);padding:12px 13px;min-height:48px;cursor:pointer;color:var(--ink)}.icu-find-hit:last-child{border-bottom:none}.icu-find-hit:active{background:var(--primary-soft)}' +
+      '.icu-fp{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--primary-soft);color:var(--primary);font:800 15px var(--font);flex:0 0 auto}' +
+      '.icu-fl{flex:1;min-width:0}.icu-find-hit .nm{display:block;font:700 14.5px var(--font);color:var(--ink)}.icu-find-hit .mt{display:block;font:600 11px var(--font);color:var(--muted);margin-top:1px}' +
       '.icu-find-more{display:block;width:100%;border:none;background:none;font:700 12px var(--font);color:var(--primary);text-align:center;padding:9px 0;cursor:pointer}' +
       '.icu-find-empty{font:600 12.5px var(--font);color:var(--muted);padding:6px 0}' +
       '.icu-find-chips{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 4px}' +
@@ -2339,10 +2343,14 @@
     var _showAll = false, _lastList = null, VIS = 8;
     // Category grouping order for the dropdown (Red flags surface first; never hidden).
     var GORD = { "Red flags": 0, "Symptoms": 1, "Signs": 2, "Vitals": 3, "Laboratory": 4, "Labs": 4, "Imaging": 5, "History": 6 };
+    // Row styled to match the Clinical Reasoning finding list: a circular "+" affordance + label,
+    // with a small subtitle (system · red flag · reasoning status).
     function hitHTML(x) {
-      return '<button class="icu-find-hit" data-find="' + esc(x.id) + '"><span class="nm">' + esc(x.label) + "</span><span class=\"mt\">" + esc((x.sys || "") + (x.red ? " · red flag" : "") + (x.inReasoning === false ? " · not yet in reasoning" : "")) + "</span>" + (x.syn ? '<span class="sy">' + esc(x.syn) + "</span>" : "") + "</button>";
+      var meta = (x.sys || "") + (x.red ? " · red flag" : "") + (x.inReasoning === false ? " · not yet in reasoning" : "");
+      return '<button class="icu-find-hit" data-find="' + esc(x.id) + '"><span class="icu-fp">+</span><span class="icu-fl"><span class="nm">' + esc(x.label) + "</span>" + (meta ? '<span class="mt">' + esc(meta) + "</span>" : "") + "</span></button>";
     }
-    // Grouped renderer: top-VIS (by score) are bucketed by category, ordered GORD, with headers.
+    // Grouped renderer: top-VIS (by score) are bucketed by category (ordered GORD), each group a
+    // count-badged header + a bordered list of rows — same visual language as the reasoning tab.
     function groupHTML(list, header) {
       if (!list || !list.length) return "";
       var visible;
@@ -2351,8 +2359,8 @@
       var buckets = {};
       visible.forEach(function (x) { (buckets[x.group] = buckets[x.group] || []).push(x); });
       var order = Object.keys(buckets).sort(function (a, b) { return (GORD[a] == null ? 9 : GORD[a]) - (GORD[b] == null ? 9 : GORD[b]); });
-      var html = header ? '<div class="icu-find-reshdr">' + esc(header) + "</div>" : "";
-      order.forEach(function (g) { html += '<div class="icu-find-reshdr">' + esc(g) + "</div>" + buckets[g].map(hitHTML).join(""); });
+      var html = header ? '<div class="icu-find-cath">' + esc(header) + "</div>" : "";
+      order.forEach(function (g) { html += '<div class="icu-find-cath">' + esc(g) + ' <span class="icu-find-cnt">' + buckets[g].length + "</span></div><div class=\"icu-find-list\">" + buckets[g].map(hitHTML).join("") + "</div>"; });
       if (list.length > visible.length) html += '<button class="icu-find-more" data-find-more="1">Show ' + (list.length - visible.length) + " more…</button>";
       return html;
     }

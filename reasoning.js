@@ -1037,11 +1037,11 @@
     root.innerHTML =
       '<div class="dx-top">' +
         '<button class="dx-back" id="dxClose" aria-label="Close reasoning">‹ Close</button>' +
-        '<div class="dx-title">Clinical Reasoning <span class="dx-beta">beta</span></div>' +
+        '<div class="dx-title">Clinical Reasoning</div>' +
         '<button class="dx-reset" id="dxReset" title="Start over">Reset</button>' +
       '</div>' +
       '<div class="dx-body">' +
-        '<div class="dx-discl"><b>⚠️ Beta — this clinical reasoning engine is still being built and is under active testing.</b> Treat all output as provisional. Live differential — updates as you add findings. Ranked by Clinical Confidence Score (a transparent rule-based score, not a validated probability). Nothing here is a confirmed diagnosis; StewardMD supports, not replaces, your clinical judgment.</div>' +
+        '<div class="dx-discl">For clinical decision support only — not a diagnosis. The treating physician remains responsible for all clinical decisions; always verify against the patient.</div>' +
         '<div id="dxImported" class="dx-imported"></div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
         '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">🔬 Advanced workspace ▾</button>' +
