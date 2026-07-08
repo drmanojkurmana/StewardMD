@@ -853,8 +853,15 @@
     return '<svg class="icu-spark" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none"><path d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
   }
   function vitalCard(label, value, unit, status, series) {
-    return '<div class="icu-vc ' + (status || "") + '"><div class="vl">' + esc(label) + '</div><div class="vv">' +
-      (value == null || value === "" ? "—" : esc(value)) + (value != null && value !== "" && unit ? '<span class="vu">' + esc(unit) + "</span>" : "") + "</div>" + (series ? miniSpark(series) : "") + "</div>";
+    // BUG #17: an empty tile means the value was NOT recorded — say so (visible dash is
+    // muted + carries title/aria "not recorded") so "K⁺ —" is never mistaken for a real
+    // measured value, and screen readers announce the full label + value or its absence.
+    var empty = (value == null || value === "");
+    var vv = empty
+      ? '<span class="icu-vc-na" title="Not recorded" style="color:var(--muted)">—</span>'
+      : (esc(value) + (unit ? '<span class="vu">' + esc(unit) + "</span>" : ""));
+    var al = esc(label) + (empty ? ": not recorded" : ": " + esc(String(value)) + (unit ? " " + esc(unit) : ""));
+    return '<div class="icu-vc ' + (status || "") + '" role="group" aria-label="' + al + '"><div class="vl">' + esc(label) + '</div><div class="vv">' + vv + "</div>" + (series ? miniSpark(series) : "") + "</div>";
   }
   function alertCard(a) { return '<div class="icu-alert ' + esc(a.severity) + '"><div><div class="at">' + esc(a.title) + '</div><div class="am">' + esc(a.msg) + '</div></div><div class="ax">' + esc(a.source || "") + "</div></div>"; }
   // BUG #7: group the alert list by TRUE source, in clinical priority order.
@@ -950,17 +957,26 @@
     img.onerror = function () { cb(null); };
     img.src = (typeof fileOrDataUrl === "string") ? fileOrDataUrl : URL.createObjectURL(fileOrDataUrl);
   }
-  // Lazy-load pdf.js (CDN) only when a PDF is imported; render selected pages to
+  // Lazy-load pdf.js only when a PDF is imported; render selected pages to
   // compressed images. Whole PDF is NEVER sent to AI — only rendered page images.
+  // BUG #12: load the LOCALLY-BUNDLED copy first so PDF import works offline and in
+  // the native (Capacitor) app where the CDN is unreachable; fall back to the CDN
+  // only if the bundled file is missing.
   var _pdfjs = null;
+  var PDFJS_LOCAL = "/vendor/pdfjs/pdf.min.js", PDFJS_LOCAL_W = "/vendor/pdfjs/pdf.worker.min.js";
+  var PDFJS_CDN = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js", PDFJS_CDN_W = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
   function loadPdfJs() {
     if (_pdfjs) return Promise.resolve(_pdfjs);
+    if (window.pdfjsLib) { _pdfjs = window.pdfjsLib; try { _pdfjs.GlobalWorkerOptions.workerSrc = PDFJS_LOCAL_W; } catch (e) {} return Promise.resolve(_pdfjs); }
     return new Promise(function (res, rej) {
-      var s = document.createElement("script");
-      s.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
-      s.onload = function () { try { _pdfjs = window.pdfjsLib; _pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; res(_pdfjs); } catch (e) { rej(e); } };
-      s.onerror = function () { rej(new Error("pdf-load")); };
-      document.head.appendChild(s);
+      function load(src, worker, next) {
+        var s = document.createElement("script");
+        s.src = src;
+        s.onload = function () { try { _pdfjs = window.pdfjsLib; _pdfjs.GlobalWorkerOptions.workerSrc = worker; res(_pdfjs); } catch (e) { if (next) next(); else rej(e); } };
+        s.onerror = function () { if (next) next(); else rej(new Error("pdf-load")); };
+        document.head.appendChild(s);
+      }
+      load(PDFJS_LOCAL, PDFJS_LOCAL_W, function () { load(PDFJS_CDN, PDFJS_CDN_W, null); });
     });
   }
   function renderPdfPageToImage(pdf, pageNum, cb) {
@@ -1173,7 +1189,7 @@
       var dup = (val !== "" && cur != null && cur !== "" && String(cur) === String(val)) ? '<span class="icu-imp-dup">≈ already recorded</span>'
         : (val !== "" && cur != null && cur !== "") ? '<span class="icu-imp-diff">differs from current ' + esc(cur) + '</span>' : "";
       return '<label class="icu-imp-row"><span class="icu-imp-k">' + esc(IMPORT_LBL[k] || k) + '</span>' +
-        '<input data-impk="' + k + '" value="' + esc(val) + '" ' + (k === "mode" ? 'type="text"' : 'type="number" step="any" inputmode="decimal"') + '>' + dup + "</label>";
+        '<input data-impk="' + k + '" aria-label="' + esc(IMPORT_LBL[k] || k) + '" value="' + esc(val) + '" ' + (k === "mode" ? 'type="text"' : 'type="number" step="any" inputmode="decimal"') + '>' + dup + "</label>";
     }).join("");
     var linesPanel = lines.length ? (
       '<div class="icu-imp-note" style="margin-top:8px">📝 <b>Recognized on-device</b> — tap a value to drop it into the focused box.</div>' +
@@ -1181,10 +1197,13 @@
       lines.map(function (ln) { return '<button type="button" class="icu-imp-line" data-line="' + esc(ln) + '" style="font:600 12px var(--font);background:var(--panel2,#0F1A2B);border:1px solid var(--border,#1E2B43);color:var(--ink,#E7EDF5);border-radius:8px;padding:6px 9px;cursor:pointer;text-align:left">' + esc(ln) + '</button>'; }).join("") +
       '</div>'
     ) : "";
+    var manual = (source === "Manual");
     el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
-      '<div class="icu-imp-note">' + (aiMode
-        ? '📷 Read on-device, structured by AI — <b>verify every value</b> against the report before applying.'
-        : '📷 Read on-device — tap the recognized values below or type them. <b>Verify every value.</b>') + ' Nothing is added until you confirm.</div>' +
+      '<div class="icu-imp-note">' + (manual
+        ? '✎ <b>Manual entry</b> — confirm your values (checked against the current reading) before they enter the patient record.'
+        : (aiMode
+          ? '📷 Read on-device, structured by AI — <b>verify every value</b> against the report before applying.'
+          : '📷 Read on-device — tap the recognized values below or type them. <b>Verify every value.</b>')) + ' Nothing is added until you confirm.</div>' +
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + rows + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">✓ Add to patient context</button></div></div>';
@@ -1208,7 +1227,7 @@
       var bundle = { source: source || "Imported report" }; bundle[IMPORT_GROUP[kind] || "mapped"] = vals;
       var res = ICU.ingestFromWard(bundle);
       close(); paint();
-      try { if (window.toast) toast("Imported " + Object.keys(vals).length + " value(s)" + (res && res.conflicts ? " · " + res.conflicts + " conflict(s) to review" : "")); } catch (e) {}
+      try { if (window.toast) toast((manual ? "Saved " : "Imported ") + Object.keys(vals).length + " value(s)" + (res && res.conflicts ? " · " + res.conflicts + " conflict(s) to review" : "")); } catch (e) {}
     });
   }
   /* ---- Combined "all" review (gold249): one report/photo/PDF → sections grouped by category,
@@ -1251,7 +1270,7 @@
         var dup = (val !== "" && cur != null && cur !== "" && String(cur) === String(val)) ? '<span class="icu-imp-dup">≈ already recorded</span>'
           : (val !== "" && cur != null && cur !== "") ? '<span class="icu-imp-diff">differs from current ' + esc(cur) + '</span>' : "";
         return '<label class="icu-imp-row"><span class="icu-imp-k">' + esc(IMPORT_LBL[k] || k) + '</span>' +
-          '<input data-impk="' + k + '" data-impsec="' + sec + '" value="' + esc(val) + '" ' + (k === "mode" ? 'type="text"' : 'type="number" step="any" inputmode="decimal"') + '>' + dup + "</label>";
+          '<input data-impk="' + k + '" data-impsec="' + sec + '" aria-label="' + esc(IMPORT_LBL[k] || k) + '" value="' + esc(val) + '" ' + (k === "mode" ? 'type="text"' : 'type="number" step="any" inputmode="decimal"') + '>' + dup + "</label>";
       }).join("");
       return '<div style="font:800 12px var(--font);color:var(--primary,#0f766e);margin:12px 0 6px;text-transform:uppercase;letter-spacing:.04em">' + m[1] + '</div>' + rows;
     }).join("");
@@ -2232,28 +2251,60 @@
     goals: { title: "Today's ICU goals", custom: "goals", fields: [{ k: "goals", l: "One goal per line", t: "textarea", wide: true }] }
   };
 
-  var modalEl = null;
+  var modalEl = null, _formDomain = null;
+  // BUG #16: a guest session expires after 5 min (in the frozen app.js gate, which reloads
+  // the page). Persist the in-progress data-entry draft to localStorage on every keystroke
+  // so a half-typed form survives the expiry/reload and is restored when it reopens. Drafts
+  // are per-account (ownerNow) and cleared on Save or Cancel; only an interrupted session
+  // ever leaves one behind. Local-device only, same class as the state already persisted.
+  function formDraftKey(domain) { return "smd_icu_draft:" + (typeof ownerNow === "function" ? ownerNow() : "anon") + ":" + domain; }
+  function readFormDraft(domain) { try { var d = JSON.parse(localStorage.getItem(formDraftKey(domain)) || "null"); if (d && d.at && (nowTs() - d.at) < 1800000 && d.vals) return d.vals; } catch (e) {} return null; }
+  function writeFormDraft(domain, vals) { try { if (vals && Object.keys(vals).length) localStorage.setItem(formDraftKey(domain), JSON.stringify({ at: nowTs(), vals: vals })); else localStorage.removeItem(formDraftKey(domain)); } catch (e) {} }
+  function clearFormDraft(domain) { try { if (domain) localStorage.removeItem(formDraftKey(domain)); } catch (e) {} }
+  function collectFormValues() { var obj = {}; if (modalEl) modalEl.querySelectorAll("[data-k]").forEach(function (el) { var v = el.value; if (v !== "" && v != null) obj[el.getAttribute("data-k")] = v; }); return obj; }
   function openForm(domain) {
     var F = FORMS[domain]; if (!F) return;
     ensureModal();
+    _formDomain = domain;
     var cur = domain === "patient" ? _raw.patient : domain === "abg" ? _raw.abg : domain === "ventilator" ? _raw.ventilator : domain === "flowsheet" ? _raw.fluids : domain === "labs" ? _raw.labs.recent : {};
+    var draft = readFormDraft(domain), restored = false;
     var fieldsHTML = F.fields.map(function (f) {
-      var v = (F.custom === "goals") ? (_raw.goals || []).join("\n") : (cur[f.k] != null ? cur[f.k] : "");
+      var v;
+      if (draft && draft[f.k] != null && draft[f.k] !== "") { v = draft[f.k]; restored = true; }
+      else v = (F.custom === "goals") ? (_raw.goals || []).join("\n") : (cur[f.k] != null ? cur[f.k] : "");
+      // BUG #15: every input carries a stable id + name + aria-label and an associated
+      // <label for> so screen readers announce each field (11 vitals inputs et al.).
+      var fid = "icufld-" + domain + "-" + f.k, al = esc(f.l), attrs = ' id="' + fid + '" name="' + esc(f.k) + '" aria-label="' + al + '"';
       var inp;
-      if (f.t === "select") inp = '<select data-k="' + f.k + '">' + f.opts.map(function (o) { return '<option' + (String(o) === String(v) ? " selected" : "") + ">" + esc(o || "—") + "</option>"; }).join("") + "</select>";
-      else if (f.t === "textarea") inp = '<textarea data-k="' + f.k + '" rows="5" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(v) + "</textarea>";
-      else inp = '<input data-k="' + f.k + '" type="' + (f.t === "number" ? "number" : "text") + '" step="any" value="' + esc(v) + '">';
-      return '<div class="icu-fld" style="' + (f.wide ? "grid-column:1/-1" : "") + '"><label>' + esc(f.l) + "</label>" + inp + "</div>";
+      if (f.t === "select") inp = '<select data-k="' + f.k + '"' + attrs + '>' + f.opts.map(function (o) { return '<option' + (String(o) === String(v) ? " selected" : "") + ">" + esc(o || "—") + "</option>"; }).join("") + "</select>";
+      else if (f.t === "textarea") inp = '<textarea data-k="' + f.k + '"' + attrs + ' rows="5" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(v) + "</textarea>";
+      else inp = '<input data-k="' + f.k + '"' + attrs + ' type="' + (f.t === "number" ? "number" : "text") + '" step="any"' + (f.t === "number" ? ' inputmode="decimal"' : "") + ' value="' + esc(v) + '">';
+      return '<div class="icu-fld" style="' + (f.wide ? "grid-column:1/-1" : "") + '"><label for="' + fid + '">' + al + "</label>" + inp + "</div>";
     }).join("");
-    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + esc(F.title) + '</h3><div class="icu-grid2">' + fieldsHTML + "</div>" +
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + esc(F.title) + '</h3>' +
+      (restored ? '<div class="icu-draft-note" role="status" style="font:600 12px var(--font);color:var(--primary);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;margin-bottom:10px">↩ Restored your unsaved draft — review before saving.</div>' : "") +
+      '<div class="icu-grid2">' + fieldsHTML + "</div>" +
       '<button class="icu-btn" data-icu-act="save:' + domain + '">Save</button><button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
     modalEl.classList.add("on");
+    // Persist the draft as the clinician types, so it survives a guest-session expiry/reload.
+    modalEl.oninput = function () { writeFormDraft(domain, collectFormValues()); };
   }
-  function closeForm() { if (modalEl) modalEl.classList.remove("on"); }
+  function closeForm() { if (modalEl) modalEl.classList.remove("on"); clearFormDraft(_formDomain); _formDomain = null; }
   function saveForm(domain) {
     var F = FORMS[domain]; if (!F || !modalEl) return;
     var inputs = modalEl.querySelectorAll("[data-k]"), obj = {};
     inputs.forEach(function (el) { var k = el.getAttribute("data-k"), val = el.value; obj[k] = (el.type === "number") ? num(val) : val; });
+    // BUG #13: manual Vitals/Labs entry — the two domains that fire critical alerts — is
+    // routed through the SAME clinician review sheet the imports use, so a mistyped value
+    // (e.g. K 68 for 6.8) is shown against the current reading and NOTHING is applied until
+    // the clinician confirms. Values are already in app units (mapped/vitals skip wardToSI),
+    // so it's unit-safe; source "Manual" keeps the override-vs-Ward-Sync conflict behaviour.
+    if (domain === "monitor" || domain === "labs") {
+      var mfields = {}; Object.keys(obj).forEach(function (k) { if (obj[k] != null && obj[k] !== "" && !(typeof obj[k] === "number" && isNaN(obj[k]))) mfields[k] = obj[k]; });
+      closeForm();
+      if (Object.keys(mfields).length) openImportReview(domain, mfields, null, null, "Manual");
+      return;
+    }
     if (F.custom === "goals") { STATE.goals = (obj.goals || "").split("\n").map(function (s) { return s.trim(); }).filter(Boolean); }
     else if (F.custom === "infusion") { if (obj.drug) ingestInfusion({ drug: obj.drug, dose: num(obj.dose), unit: obj.unit, rateMlHr: num(obj.rateMlHr), indication: obj.indication, source: "manual" }); }
     else if (domain === "patient") { ingestPatient(obj); }
@@ -3620,13 +3671,17 @@
 
   /* ------------------------------------------------------------- controller */
   var ICU = {
-    open: function () {
+    open: function (target) {
       injectCSS();
       if (!rootEl) {
         rootEl = document.createElement("div"); rootEl.id = "icuRoot";
         document.body.appendChild(rootEl);
         rootEl.addEventListener("click", onClick);
       }
+      // BUG #14: an optional sub-tab id opens the dashboard directly on that workspace —
+      // the syringe FAB opens Infusions (its actual purpose), distinct from the Home
+      // "ICU" tile which opens Overview. No argument = unchanged (open at current tab).
+      if (target && typeof target === "string" && RENDER[target]) { _active = target; _ws = wsOf(target); }
       paint();
       rootEl.classList.add("on");
       document.body.style.overflow = "hidden";

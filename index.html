@@ -1162,7 +1162,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
      patient. Last clinical review: 2026-06.
      ============================================================================ -->
 
-<button class="inf-fab" id="infFab" onclick="(window.ICU?ICU.open():INF.open())" title="ICU Infusion & Vasopressor Calculator" aria-label="ICU infusion &amp; vasopressor calculator">💉<small>ICU</small></button>
+<button class="inf-fab" id="infFab" onclick="(window.ICU?ICU.open('infusions'):INF.open())" title="Infusions &amp; vasopressor pumps" aria-label="Open infusions and vasopressor pumps">💉<small>Pumps</small></button>
 <div class="inf-overlay" id="infOverlay" role="dialog" aria-modal="true">
   <div class="inf-shell">
     <div class="inf-top">
@@ -1203,7 +1203,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/calculators.js?v=gold251" defer></script>
 <script src="/drugs.js?v=gold88" defer></script>
 <script src="/interaction-rules.js?v=gold251" defer></script>
-<script defer src="/medlist.js?v=gold175"></script>
+<script defer src="/medlist.js?v=gold283"></script>
 <script defer src="/ghis-meds.js?v=gold164"></script>
 <script defer src="/interactions.js"></script>
 <script src="/api.js?v=gold141" defer></script>
@@ -1240,7 +1240,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <!-- Clinical vocabulary registry (SMD_VOCAB) — deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold269" defer></script>
-<script src="/icu.js?v=gold282" defer></script>
+<script src="/icu.js?v=gold283" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js — only invoked on user tap, so order is safe. -->
 <script src="/voice.js?v=gold247" defer></script>
