@@ -756,6 +756,8 @@
       '.icu-dx-red{font:800 10.5px var(--font);color:var(--danger);background:var(--danger-soft);border-radius:6px;padding:2px 6px;margin-left:6px}' +
       '.icu-dx-rsn{font:600 12.5px/1.5 var(--font);color:var(--muted);margin:5px 0 2px}.icu-dx-why{margin:6px 0 2px}' +
       '.icu-dx-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.icu-dx-acts .icu-btn{width:auto;flex:1 1 auto;min-width:44%}' +
+      '.icu-deep-list{margin:10px 0 14px;display:flex;flex-direction:column;gap:5px}' +
+      '.icu-deep-chk{font:600 13px var(--font);padding:2px 0}.icu-deep-chk.on{color:var(--ink)}.icu-deep-chk.off{color:var(--muted)}' +
       '.icu-corr-note{font:600 12.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:6px 0}.icu-corr-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}.icu-corr-partial{color:var(--muted);font-weight:600}' +
       // External evidence (Phase 4)
       '.icu-ev-hubs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.icu-ev-hub{font:700 12px var(--font);text-decoration:none;background:var(--panel2);border:1px solid var(--border);color:var(--primary);border-radius:999px;padding:5px 11px}' +
@@ -1877,10 +1879,15 @@
         var hasCtx = present > 0 || labN > 0 || imgN > 0;
         if (hasCtx) {
           var summ = '<div class="icu-corr-meta">' + [present + " finding" + (present === 1 ? "" : "s"), labN + " lab" + (labN === 1 ? "" : "s"), imgN + " imaging", (vitN ? "vitals ✓" : "no vitals")].join(" · ") + "</div>";
+          // Deep Review shares the correlation cache/state; a cached result renders here too.
+          var dKey = pid + ":" + correlationHash(buildClinicalContext()), dDeep = _corrCache[dKey];
+          var dBlock = _corrBusy ? '<div class="icu-assist-msg" style="margin-top:10px">Running deep clinical review…</div>' : (dDeep ? '<div class="icu-corr-deep">' + corrDeepHTML(dDeep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
           guided = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "✅") + ' Clinical context ready</div>' +
             '<p class="icu-doc-sub" style="margin:0 0 4px">Use your findings with available labs, imaging and vitals to identify a working diagnosis.</p>' + summ +
             '<button class="icu-btn" data-icu-act="finddx">' + ico("pulse", "🩺") + ' Find working diagnosis</button>' +
-            (_dxShow ? '<div style="margin-top:10px">' + dxDifferentialHTML() + "</div>" : "") + "</div>";
+            (_dxShow ? '<div style="margin-top:10px">' + dxDifferentialHTML() + "</div>" : "") +
+            '<button class="icu-btn ghost" data-icu-act="corrdeep" style="margin-top:10px"' + (_corrBusy ? " disabled" : "") + ">" + ico("pulse", "✨") + " Deep clinical review</button>" + dBlock +
+            '<p class="icu-doc-sub" style="margin-top:8px">Deep review sends a de-identified context summary for advisory correlation — you confirm what is sent.</p></div>';
         } else {
           guided = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("info", "ⓘ") + ' No clinical context yet</div>' +
             '<p class="icu-doc-sub" style="margin:0 0 8px">Add findings, labs or imaging to identify a working diagnosis.</p>' +
@@ -2855,6 +2862,36 @@
       _corrBusy = false; paint();
     }).catch(function () { _corrErr = { error: "server" }; _corrBusy = false; paint(); });
   }
+  // Explicit opt-in confirm before ANY AI call (A5): shows exactly what de-identified context will be
+  // sent, lets the clinician edit it first, and blocks the call entirely when there's nothing usable.
+  function deepReviewItems() {
+    var ev = buildClinicalContext();
+    return [
+      { ok: (ev.findings || []).length, label: "Structured findings", n: (ev.findings || []).length },
+      { ok: (ev.clinical || []).length, label: "Narrative / complaints", n: (ev.clinical || []).length },
+      { ok: ev.labs.length, label: "Labs & trends", n: ev.labs.length },
+      { ok: ev.img.length, label: "Imaging findings", n: ev.img.length },
+      { ok: (ev.vitals || []).length, label: "Vitals", n: (ev.vitals || []).length },
+      { ok: _raw.patient.diagnosis ? 1 : 0, label: "Working diagnosis", n: _raw.patient.diagnosis ? 1 : 0 }
+    ];
+  }
+  function deepReviewUsable() { var ev = buildClinicalContext(); return !!(ev.img.length || ev.labs.length || (ev.findings || []).length || (ev.vitals || []).length); }
+  function openDeepReviewConfirm() {
+    ensureModal();
+    var items = deepReviewItems(), usable = deepReviewUsable();
+    var list = items.map(function (it) { return '<div class="icu-deep-chk ' + (it.ok ? "on" : "off") + '">' + (it.ok ? "✓ " : "○ ") + esc(it.label) + (it.ok && it.n > 1 ? " (" + it.n + ")" : "") + (it.ok ? "" : " — not available") + "</div>"; }).join("");
+    modalEl.innerHTML = '<div class="icu-sheet" id="icuDeepSheet"><h3>' + ico("pulse", "✨") + " Deep Clinical Review</h3>" +
+      '<p class="icu-doc-sub">' + (usable ? "This sends a <b>de-identified</b> summary of the context below — no name, MRN, or bed. Advisory only; verify against local protocol and your judgement." : "No usable clinical context yet — add at least one finding, lab, imaging report or vital first.") + "</p>" +
+      '<div class="icu-deep-list">' + list + "</div>" +
+      (usable
+        ? '<button class="icu-btn" data-icu-act="deepgo">' + ico("pulse", "✨") + " Review with current context</button>" +
+          '<button class="icu-btn ghost" data-icu-act="deepedit" style="margin-top:8px">Edit context first</button>' +
+          '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button>'
+        : '<button class="icu-btn" data-icu-act="deepedit">' + ico("plus", "＋") + " Add findings</button>" +
+          '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button>') +
+      "</div>";
+    modalEl.classList.add("on");
+  }
 
   /* ---- External trusted-evidence fallback (Phase 4) — opt-in, de-identified TOPIC only ---- */
   var _evCache = {}, _evBusy = false, _evErr = null;
@@ -3247,7 +3284,9 @@
       case "imgsummary": { var _is = imgById(decodeURIComponent(arg)); if (_is) _is.inSummary = !_is.inSummary; paint(); if (window.toast) toast(_is && _is.inSummary ? "Added to Daily Summary" : "Removed from Daily Summary"); break; }
       case "imgsummaryadd": { var _isa = imgById(decodeURIComponent(arg)); if (_isa && !_isa.inSummary) { _isa.inSummary = true; if (window.toast) toast("Added to Daily Summary"); } paint(); break; }
       case "corranalyse": _corrAnalysed = true; paint(); break;
-      case "corrdeep": runCorrelationDeep(); break;
+      case "corrdeep": openDeepReviewConfirm(); break;
+      case "deepgo": closeForm(); runCorrelationDeep(); break;
+      case "deepedit": closeForm(); openFindingPicker(); break;
       case "corrext": openEvidenceLookup(); break;
       case "imghide": { var _ih = imgById(decodeURIComponent(arg)); if (_ih) _ih.hidden = !_ih.hidden; paint(); break; }
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
@@ -3362,6 +3401,7 @@
     _correlationEvidence: correlationEvidence, _runQuickCorrelation: runQuickCorrelation, _buildCorrelationPacket: buildCorrelationPacket, _correlationTopic: correlationTopic, extEvidenceOn: extEvidenceOn,
     _buildClinicalContext: buildClinicalContext, _correlationHash: correlationHash, _latestVitalsSummary: latestVitalsSummary, dxFlowOn: icuDxFlowOn,
     _runWorkingDx: runWorkingDx, _pickWorkingDx: pickWorkingDx, _dxFindingKeys: dxFindingKeys,
+    _openDeepReviewConfirm: openDeepReviewConfirm, _deepReviewUsable: deepReviewUsable, _deepReviewItems: deepReviewItems,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"
