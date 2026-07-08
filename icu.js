@@ -1518,7 +1518,9 @@
     if (f.net24h != null || f.cumulative != null) out.push("FLUIDS: net 24h " + (f.net24h != null ? f.net24h + " mL" : "—") + ", cumulative " + (f.cumulative != null ? f.cumulative + " mL" : "—"));
     if (v.mode) out.push("VENT: " + v.mode + (v.fio2 ? ", FiO₂ " + v.fio2 + "%" : "") + (v.peep != null ? ", PEEP " + v.peep : "") + (v.tv != null ? ", TV " + v.tv + " mL" : ""));
     var imgs = (s.imaging || []).filter(function (r) { return !r.hidden && (r.inSummary || r.reviewed); });
-    if (imgs.length) out.push("\nIMPORTANT IMAGING:\n" + imgs.map(function (r) { return "• " + (r.modality || "Imaging") + (r.reportDateTime ? " (" + imgFmtDate(r.reportDateTime) + ")" : "") + ": " + String((r.assist && r.assist.summary) || r.impressionRaw || r.findingsRaw || r.reportRaw || "").replace(/\s+/g, " ").trim().slice(0, 240) + ((r.critical || []).length ? "  [⚠ flagged: " + r.critical.join(", ") + " — verify]" : ""); }).join("\n"));
+    // Shared handover shows the radiologist's VERBATIM impression — never an AI summary
+    // (advisory AI text must not silently supplant or relabel clinical data in an exported artifact).
+    if (imgs.length) out.push("\nIMPORTANT IMAGING:\n" + imgs.map(function (r) { return "• " + (r.modality || "Imaging") + (r.reportDateTime ? " (" + imgFmtDate(r.reportDateTime) + ")" : "") + ": " + String(r.impressionRaw || r.findingsRaw || r.reportRaw || "").replace(/\s+/g, " ").trim().slice(0, 240) + ((r.critical || []).length ? "  [⚠ flagged: " + r.critical.join(", ") + " — verify]" : ""); }).join("\n"));
     if (alerts.length) out.push("\nACTIVE ALERTS:\n" + alerts.map(function (a) { return "• [" + a.severity.toUpperCase() + "] " + a.title + " — " + a.msg; }).join("\n"));
     var pend = ROUNDS_ITEMS.filter(function (it) { return !(rounds[it.k] && rounds[it.k].done); });
     if (pend.length) out.push("\nROUNDS PENDING: " + pend.map(function (it) { return it.label; }).join("; "));
@@ -2311,7 +2313,7 @@
     var labs = [];
     ["na", "k", "creat", "urea", "bili", "ast", "alt", "alp", "amylase", "lipase", "wbc", "hb", "plt", "inr", "crp", "lactate", "ca", "trig"].forEach(function (k) { if (L[k] != null && L[k] !== "") labs.push(k.toUpperCase() + " " + L[k]); });
     return {
-      modality: rec.modality || "",
+      modality: imgRedact(rec.modality || ""),   // manual-entry modality is free text → redact like its siblings
       studyName: imgRedact(rec.studyName || ""),
       indication: imgRedact(rec.indication || ""),
       ageBand: ageBandOf(p.age),
@@ -2321,8 +2323,8 @@
       workingDx: imgRedact(p.diagnosis || ""),
       symptoms: p.complaints ? [imgRedact(p.complaints)] : [],
       labs: labs,
-      reportText: imgRedact(rec.reportRaw || rec.impressionRaw || rec.findingsRaw || ""),
-      reportDate: rec.reportDateTime || null
+      reportText: imgRedact(rec.reportRaw || rec.impressionRaw || rec.findingsRaw || "")
+      // NB: no exact date leaves the device — a service timestamp is a HIPAA/DPDP identifier.
     };
   }
   // Deterministic "correlate with" suggestions from report keywords (offline; no LLM).
@@ -2338,7 +2340,15 @@
   ];
   function imgCorrelateFor(rec) {
     var t = [rec.impressionRaw, rec.findingsRaw, rec.reportRaw, rec.studyName].join(" ");
-    for (var i = 0; i < IMG_CORRELATE.length; i++) if (IMG_CORRELATE[i][0].test(t)) return IMG_CORRELATE[i][1];
+    for (var i = 0; i < IMG_CORRELATE.length; i++) {
+      var re = new RegExp(IMG_CORRELATE[i][0].source, "gi"), m, hit = false;
+      while ((m = re.exec(t))) {
+        var pre = t.slice(Math.max(0, m.index - 40), m.index).split(/[.;:\n]/).pop();   // clause-scoped negation guard (same as imgCritical)
+        if (!IMG_NEG.test(pre)) { hit = true; break; }
+        if (m.index === re.lastIndex) re.lastIndex++;
+      }
+      if (hit) return IMG_CORRELATE[i][1];
+    }
     return ["Correlate with the clinical findings and relevant laboratory trends"];
   }
   // Offline extract — impression + ALWAYS-deterministic critical flag + modality-based correlations.
@@ -2351,7 +2361,9 @@
       redFlags: rec.critical || [], nextChecks: [], deterministic: true
     };
   }
-  function assistSection(label, arr) { return (arr && arr.length) ? '<div class="icu-img-sec"><span class="icu-img-k">' + esc(label) + '</span><ul class="icu-assist-ul">' + arr.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div>" : ""; }
+  // Coerce whatever the model returned into an array of strings — a string/number field must
+  // never throw and abort the render (that would suppress the always-deterministic critical banner).
+  function assistSection(label, arr) { arr = Array.isArray(arr) ? arr : (arr != null && arr !== "" ? [String(arr)] : []); return arr.length ? '<div class="icu-img-sec"><span class="icu-img-k">' + esc(label) + '</span><ul class="icu-assist-ul">' + arr.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div>" : ""; }
   function renderAssistResult(res, rec, mode) {
     if (!res || res.error) {
       var msg = (res && res.error === "ai-off") ? "AI summary is turned off (cloud text disabled in Settings). Use the deterministic extract instead."
@@ -2361,7 +2373,7 @@
     }
     var s = (mode === "ai") ? (res.summary || {}) : res;
     var crit = (rec.critical || []).length ? '<div class="icu-img-crit">' + ico("warn", "⚠️") + ' <b>Potential urgent imaging finding</b> — verify report and escalate per local protocol.<div class="icu-img-crit-t">' + rec.critical.map(function (c) { return "<span>" + esc(c) + "</span>"; }).join("") + '</div></div>' : "";
-    var redFlags = (s.redFlags && s.redFlags.length) ? s.redFlags : (rec.critical || []);
+    var redFlags = (Array.isArray(s.redFlags) && s.redFlags.length) ? s.redFlags : (rec.critical || []);
     var bodyH = '<div class="icu-assist-summary">' + esc(s.summary || "") + "</div>" +
       assistSection("Key positive findings", s.positives) +
       assistSection("Important negatives", s.negatives) +
@@ -2374,35 +2386,41 @@
     return crit +
       '<div class="icu-assist-draft">' + (mode === "ai" ? "Draft — clinician review required. Advisory only; not a diagnosis." : "Deterministic extract. Advisory only; not a diagnosis.") + "</div>" +
       bodyH + '<div class="icu-assist-src">' + esc(src) + "</div>" +
-      '<button class="icu-btn" data-icu-act="imgsummary:' + encodeURIComponent(rec.id) + '" style="margin-top:10px">Add to Daily Summary</button>';
+      '<button class="icu-btn" data-icu-act="imgsummaryadd:' + encodeURIComponent(rec.id) + '" style="margin-top:10px">Add to Daily Summary</button>';
   }
   function openImagingAssist(id) {
     var rec = imgById(id); if (!rec) return;
     ensureModal();
+    var seq = 0;   // monotonic choice token: a later choice supersedes an in-flight AI apply
     function shell(resultHTML, busy) {
       modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("pulse", "🩻") + ' AI Assist — ' + esc(rec.studyName || "imaging") + '</h3>' +
         '<p class="icu-doc-sub">Choose how to summarize this report. Advisory only — the deterministic engine remains the diagnostic authority; nothing here is a diagnosis. The urgent-finding flag is always deterministic.</p>' +
-        '<div class="icu-img-btns"><button class="icu-btn" id="icuAsAI">' + ico("pulse", "✨") + ' AI summary</button>' +
+        '<div class="icu-img-btns"><button class="icu-btn" id="icuAsAI"' + (busy ? " disabled" : "") + '>' + ico("pulse", "✨") + ' AI summary</button>' +
         '<button class="icu-btn ghost" id="icuAsDet">' + ico("check", "▤") + ' Deterministic extract</button></div>' +
         '<div id="icuAsOut" class="icu-assist-out">' + (busy ? '<div class="icu-assist-msg">Generating…</div>' : (resultHTML || '<div class="icu-assist-msg" style="color:var(--muted)">Pick a mode above.</div>')) + '</div>' +
         '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:10px">Close</button></div>';
       modalEl.classList.add("on");
       var ai = modalEl.querySelector("#icuAsAI"), det = modalEl.querySelector("#icuAsDet");
       if (det) det.addEventListener("click", runDet);
-      if (ai) ai.addEventListener("click", runAI);
+      if (ai && !busy) ai.addEventListener("click", runAI);   // disabled while an AI call is in flight (no double charge)
     }
     function runDet() {
+      ++seq;   // supersede any in-flight AI apply — the clinician just chose deterministic
       var res = imagingDeterministic(rec);
       try { rec.assist = { mode: "deterministic", summary: res.summary, at: nowTs() }; } catch (e) {}
       shell(renderAssistResult(res, rec, "deterministic"));
     }
     function runAI() {
+      var mine = ++seq;
       shell(null, true);
+      var out = modalEl.querySelector("#icuAsOut");
+      function live() { return mine === seq && out && out.isConnected && modalEl.classList.contains("on"); }
       var pkt = buildImagingAiPacket(rec);
       (window.SMD_AI && SMD_AI.imagingSummary ? SMD_AI.imagingSummary(pkt) : Promise.resolve({ error: "ai-off" })).then(function (res) {
+        if (!live()) return;   // superseded by a newer choice, or the modal was closed/replaced
         if (res && res.summary && !res.error) { try { rec.assist = { mode: "ai", summary: (res.summary.summary || ""), at: nowTs() }; } catch (e) {} }
         shell(renderAssistResult(res, rec, "ai"));
-      });
+      }).catch(function () { if (live()) shell(renderAssistResult({ error: "server" }, rec, "ai")); });
     }
     shell("");
   }
@@ -2655,6 +2673,7 @@
       case "imgexpand": { var _ie = decodeURIComponent(arg); _imgOpen[_ie] = !_imgOpen[_ie]; paint(); break; }
       case "imgreview": { var _ir = imgById(decodeURIComponent(arg)); if (_ir) _ir.reviewed = !_ir.reviewed; paint(); break; }
       case "imgsummary": { var _is = imgById(decodeURIComponent(arg)); if (_is) _is.inSummary = !_is.inSummary; paint(); if (window.toast) toast(_is && _is.inSummary ? "Added to Daily Summary" : "Removed from Daily Summary"); break; }
+      case "imgsummaryadd": { var _isa = imgById(decodeURIComponent(arg)); if (_isa && !_isa.inSummary) { _isa.inSummary = true; if (window.toast) toast("Added to Daily Summary"); } paint(); break; }
       case "imghide": { var _ih = imgById(decodeURIComponent(arg)); if (_ih) _ih.hidden = !_ih.hidden; paint(); break; }
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }

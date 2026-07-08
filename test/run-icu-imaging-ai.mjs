@@ -55,6 +55,15 @@ try {
   ok(P.json.indexOf("Rajesh Kumar") < 0 && P.json.indexOf("998877") < 0 && P.json.indexOf("ICU-7") < 0, "name / MRN / bed never appear anywhere in the AI packet (report text PHI-redacted)");
   ok(/acute interstitial pancreatitis/i.test(P.json), "clinical report content IS included (impression preserved after redaction)");
 
+  // 1b) review fixes — manual-entry modality is PHI-redacted; no exact timestamp in the packet
+  const P2 = JSON.parse(await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"Z",age:70,sex:"M"});
+    var rec = ICU.ingestImaging({ modality:"CT abdomen MRN 88213 Name: John Smith", studyName:"CT", impressionRaw:"moderate ascites" });
+    var pkt = ICU._buildImagingAiPacket(rec);
+    return JSON.stringify({ hasReportDate: ("reportDate" in pkt), json: JSON.stringify(pkt) });`));
+  ok(P2.json.indexOf("88213") < 0 && P2.json.indexOf("John Smith") < 0, "manual-entry modality is PHI-redacted before the AI call (MRN + labelled name gone)");
+  ok(P2.hasReportDate === false, "no exact report timestamp is included in the AI packet (date-of-service is an identifier)");
+
   // 2) DETERMINISTIC EXTRACT — offline; impression + correlations + always-deterministic red flags
   const D = JSON.parse(await ev(`
     var pancr = ICU._imagingDeterministic({impressionRaw:"Acute interstitial pancreatitis.", studyName:"CECT Abdomen", critical:[]});
@@ -118,6 +127,80 @@ try {
   await sleep(200);
   const OFF = await ev(`var out=document.getElementById('icuAsOut'); return out?out.textContent:"";`);
   ok(/turned off|deterministic extract instead/i.test(OFF || ""), "AI-off → graceful fallback message (offers deterministic extract)");
+
+  // 5) malformed AI JSON (arrays returned as strings) must NOT crash the render or hide the banner
+  await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"M",age:55,sex:"M"});
+    ICU.ingestWardImaging({ patientId:"PM", source:"Ward Sync", imaging:[{reportId:"M1",description:"CT Brain",
+      report:"IMPRESSION: acute intracerebral haemorrhage with midline shift."}] });
+    window.SMD_AI = window.SMD_AI || {};
+    window.SMD_AI.imagingSummary = function(){ return Promise.resolve({ mode:"imaging", summary:{
+      summary:"Suggestive of a bleed.", positives:"Right parietal haemorrhage", redFlags:"Midline shift",
+      negatives:[], significance:[], differentials:[], correlateWith:[], nextChecks:[] }}); };
+    ICU.open(); var root=document.getElementById('icuRoot');
+    root.querySelector('[data-icu-act="ws:documents"]').click();
+    root.querySelector('[data-icu-act="tab:imaging"]').click();
+    root.querySelector('[data-icu-act^="imgassist:"]').click();
+    document.getElementById('icuAsAI').click();
+    return 1;`);
+  await sleep(250);
+  const MAL = JSON.parse(await ev(`var out=document.getElementById('icuAsOut'); var txt=out?out.textContent:"";
+    return JSON.stringify({ notHanging: (txt.indexOf("Generating")<0 && txt.length>0), hasPos: /Right parietal haemorrhage/.test(txt), crit: !!document.querySelector('#icuAsOut .icu-img-crit') });`));
+  ok(MAL.notHanging, "malformed AI JSON (string-valued fields) does not hang the modal on 'Generating…'");
+  ok(MAL.hasPos && MAL.crit, "string fields render (coerced) + the always-deterministic critical banner still shows");
+
+  // 6) race — a late AI response must NOT clobber a deterministic choice the clinician then made
+  await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"R",age:60,sex:"M"});
+    ICU.ingestWardImaging({ patientId:"PR", source:"Ward Sync", imaging:[{reportId:"RC1",description:"USG Abdomen",report:"IMPRESSION: normal."}] });
+    window.__aiResolve=null;
+    window.SMD_AI.imagingSummary = function(){ return new Promise(function(res){ window.__aiResolve=res; }); };
+    ICU.open(); var root=document.getElementById('icuRoot');
+    root.querySelector('[data-icu-act="ws:documents"]').click();
+    root.querySelector('[data-icu-act="tab:imaging"]').click();
+    root.querySelector('[data-icu-act^="imgassist:"]').click();
+    document.getElementById('icuAsAI').click();     // AI in flight (seq=1)
+    document.getElementById('icuAsDet').click();     // clinician switches to deterministic (seq=2)
+    return 1;`);
+  await ev(`if (window.__aiResolve) window.__aiResolve({ mode:"imaging", summary:{ summary:"LATE-AI-SHOULD-NOT-SHOW", positives:[],negatives:[],significance:[],differentials:[],correlateWith:[],redFlags:[],nextChecks:[] }}); return 1;`);
+  await sleep(200);
+  const RACE = JSON.parse(await ev(`var out=document.getElementById('icuAsOut'); var txt=out?out.textContent:"";
+    var a=ICU.state().imaging.filter(function(r){return r.reportId==="RC1";})[0]||{};
+    return JSON.stringify({ showsLate: /LATE-AI-SHOULD-NOT-SHOW/.test(txt), det: /Deterministic extract\\. Advisory/.test(txt), mode:(a.assist&&a.assist.mode)||"" });`));
+  ok(!RACE.showsLate && RACE.det, "late AI response does NOT replace the deterministic result the clinician selected");
+  ok(RACE.mode === "deterministic", "rec.assist reflects the clinician's actual choice, not the superseded AI response");
+
+  // 7) exported Daily Summary shows the radiologist's VERBATIM impression, never the AI summary text
+  const bs = JSON.parse(await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"B",age:50,sex:"F"});
+    ICU.ingestWardImaging({ patientId:"PB2", source:"Ward Sync", imaging:[{reportId:"B1",description:"CT Abdomen",
+      report:"IMPRESSION: acute necrotising pancreatitis with portal vein thrombosis."}] });
+    var r=ICU.state().imaging[0]; r.assist={mode:"ai", summary:"Imaging is suggestive of pancreatitis.", at:1}; r.inSummary=true;
+    var s=ICU.summary();
+    return JSON.stringify({ verbatim: /necrotising pancreatitis with portal vein thrombosis/i.test(s), aiText: /suggestive of pancreatitis/i.test(s) });`));
+  ok(bs.verbatim && !bs.aiText, "Daily Summary uses the radiologist's verbatim impression, NOT the AI summary text");
+
+  // 8) deterministic 'correlate with' respects negation
+  const neg = JSON.parse(await ev(`
+    var pos=ICU._imagingDeterministic({impressionRaw:"Large right pneumothorax.", critical:["Pneumothorax"]});
+    var negd=ICU._imagingDeterministic({impressionRaw:"No pneumothorax. Clear lung fields.", critical:[]});
+    return JSON.stringify({ pos: pos.correlateWith.join("|"), neg: negd.correlateWith.join("|") });`));
+  ok(/chest drain/i.test(neg.pos), "correlate: a real pneumothorax → 'Chest drain review'");
+  ok(!/chest drain/i.test(neg.neg), "correlate: 'No pneumothorax' does NOT suggest a chest drain (negation-aware)");
+
+  // 9) assist-panel 'Add to Daily Summary' is ADD-ONLY (never silently removes an included report)
+  const add = JSON.parse(await ev(`
+    ICU.reset(); ICU.ingestPatient({name:"A2",age:44,sex:"M"});
+    ICU.ingestWardImaging({ patientId:"PA2", source:"Ward Sync", imaging:[{reportId:"AC1",description:"X-ray",report:"IMPRESSION: clear."}] });
+    var r=ICU.state().imaging[0]; r.inSummary=true;
+    ICU.open(); var root=document.getElementById('icuRoot');
+    root.querySelector('[data-icu-act="ws:documents"]').click();
+    root.querySelector('[data-icu-act="tab:imaging"]').click();
+    root.querySelector('[data-icu-act^="imgassist:"]').click();
+    document.getElementById('icuAsDet').click();
+    var addBtn=document.querySelector('#icuModal [data-icu-act^="imgsummaryadd:"]'); if(addBtn) addBtn.click();
+    return JSON.stringify({ inSummary: !!ICU.state().imaging.filter(function(x){return x.reportId==="AC1";})[0].inSummary });`));
+  ok(add.inSummary === true, "assist-panel add-to-summary is add-only (an already-included report stays included)");
 
   console.log(fails === 0 ? "\nALL GREEN — ICU AI Imaging Assist test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
