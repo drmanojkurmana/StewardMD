@@ -48,7 +48,7 @@ async function runForUid(env, origin, uid) {
   } catch (e) { /* login failed (network / bad creds) — skip this cycle */ }
   if (!token) return { pushed: 0, loginFailed: true };
 
-  let pushed = 0;
+  let pushed = 0, delivered = 0, tokenTotal = 0;
   for (const p of list) {
     try {
       const r = await fetch(origin + "/api/ghis/lab?patientId=" + encodeURIComponent(p.patientId), {
@@ -62,17 +62,19 @@ async function runForUid(env, origin, uid) {
       if (sig !== prev) {
         await setSeen(env, uid, p.patientId, sig);
         // No PHI/values in the push — just that something new arrived.
-        await sendNativeToAll(env, {
+        const d = (await sendNativeToAll(env, {
           title: "New lab — " + (p.name || "patient"),
           body: "A new result was reported. Open StewardMD to review.",
           url: "/?ghisPatient=" + encodeURIComponent(p.patientId),
           tag: "lab-" + p.patientId,
-        }, { uid });
+        }, { uid })) || {};
         pushed++;
+        delivered += (d.sent || 0);                       // pushes APNs/FCM accepted for this account
+        tokenTotal = Math.max(tokenTotal, d.total || 0);  // # of registered devices scoped to this account
       }
     } catch (e) { /* skip this patient this cycle */ }
   }
-  return { pushed };
+  return { pushed, delivered, hasDevice: tokenTotal > 0 };
 }
 
 export async function onRequest(context) {
@@ -89,9 +91,16 @@ export async function onRequest(context) {
     if (ok === null) return json({ error: "admin-not-configured" }, 503);
     if (!ok) return json({ error: "unauthorised" }, 401);
     const uids = await listWatchUids(env);
-    let pushed = 0, users = 0;
-    for (const uid of uids) { const r = await runForUid(env, origin, uid); pushed += (r.pushed || 0); if (r.pushed) users++; }
-    return json({ ok: true, users: uids.length, notifiedUsers: users, pushed });
+    let pushed = 0, users = 0, delivered = 0, undeliveredAccounts = 0;
+    for (const uid of uids) {
+      const r = await runForUid(env, origin, uid);
+      pushed += (r.pushed || 0);
+      delivered += (r.delivered || 0);
+      if (r.pushed) { users++; if (!r.hasDevice) undeliveredAccounts++; }   // new lab detected but this account has NO registered device → alert can't land (usually a multi-account mismatch)
+    }
+    // pushed = new-lab detections; delivered = pushes the store accepted; undeliveredAccounts makes a
+    // silent scoped-push drop VISIBLE instead of guessing.
+    return json({ ok: true, users: uids.length, notifiedUsers: users, pushed, delivered, undeliveredAccounts });
   }
 
   // ── per-user (verified Firebase token) ──
