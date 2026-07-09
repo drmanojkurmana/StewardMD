@@ -288,12 +288,14 @@ async function handleHealth(env) {
 }
 
 export default {
-  // Scheduled (cron) — pull trusted FDA medical updates into the notifications
-  // feed. The ingest logic lives in the Pages Function (/api/updates/sync); this
-  // just triggers it on a schedule with the shared admin token. Best-effort.
+  // Scheduled (cron) — two schedules, distinguished by event.cron:
+  //   "17 */6 * * *"  → pull trusted FDA medical updates into the notifications feed.
+  //   "*/15 * * * *"  → poll GHIS for consented watch-lab patients and push new labs.
+  // Both delegate to Pages Functions with the shared admin token. Best-effort.
   async scheduled(event, env, ctx) {
     if (!env.UPDATES_ADMIN_TOKEN) return;
-    const run = fetch("https://stewardmd.in/api/updates/sync", {
+    const path = event.cron === "*/15 * * * *" ? "/api/watch/run" : "/api/updates/sync";
+    const run = fetch("https://stewardmd.in" + path, {
       method: "POST", headers: { "X-Admin-Token": env.UPDATES_ADMIN_TOKEN },
     }).catch(() => {});
     ctx.waitUntil(run);

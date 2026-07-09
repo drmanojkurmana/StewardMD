@@ -28,10 +28,10 @@
   // authenticated account. Any secrets go via `wrangler secret put`, never here.
   "observability": { "enabled": true },
 
-  // Auto-pull trusted FDA medical updates into the notifications feed every 6h.
-  // Requires the secret UPDATES_ADMIN_TOKEN (wrangler secret put UPDATES_ADMIN_TOKEN),
-  // matching the same secret set on the Pages project.
-  "triggers": { "crons": ["17 */6 * * *"] },
+  // FDA medical updates every 6h; watch-lab lab poll every 15 min.
+  // scheduled() branches on event.cron. Requires the secret UPDATES_ADMIN_TOKEN
+  // (wrangler secret put UPDATES_ADMIN_TOKEN), matching the Pages project.
+  "triggers": { "crons": ["17 */6 * * *", "*/15 * * * *"] },
 
   // Edge rate limiting per client IP (protects the open, read-only API).
   "unsafe": {

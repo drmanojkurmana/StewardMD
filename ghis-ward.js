@@ -215,9 +215,13 @@
           GHIS._patientId = patientId;
           title.textContent = name + ' (' + patientId + ')';
           var lwOk = !!(window.ICU && ICU.openLabWatch && (!ICU.labWatchOn || ICU.labWatchOn()));
+          // Background (closed-app) alerts via native push — only for signed-in doctors, and only
+          // when the watch-lab client + a verifiable account are present (SMD_WATCH is consent-gated).
+          var bgOk = !!(window.SMD_WATCH && window.SMD_AUTH && window.SMD_AUTH.currentUser);
           body.innerHTML =
             (window.ICU ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0F766E" onclick="GHIS.loadIntoICU(\'' + jsq(patientId) + '\')">🏥 Load patient into ICU dashboard</button>' : '') +
             (lwOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0d5c54" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">🔔 Lab Watch — alert me on new labs</button>' : '') +
+            (bgOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0a4a44" onclick="GHIS.watchBackground(\'' + jsq(patientId) + '\',\'' + jsq(name) + '\')">🔔 Background alerts — even when the app is closed</button>' : '') +
             '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
           drawer.style.display = '';
           GHIS.loadRadiology(patientId);
@@ -233,6 +237,19 @@
           if (!window.ICU || !ICU.openLabWatch) { alert('ICU dashboard not loaded.'); return; }
           if (ICU.labWatchOn && !ICU.labWatchOn()) { alert('Lab Watch is turned off.'); return; }
           GHIS.loadIntoICU(patientId, function () { try { ICU.openLabWatch(); } catch (e) {} });
+        },
+        // Background (closed-app) lab alerts via native push (consent-gated). SMD_WATCH opens the
+        // consent sheet (stores the doctor's GHIS login server-side, AES-GCM, 30-day auto-delete,
+        // revocable) then registers a per-account server-side watch. Also registers this device
+        // for native push if not already. Signed-in doctors only; account derived server-side
+        // from the verified Firebase token, never a client-supplied uid.
+        watchBackground: function(patientId, name) {
+          if (!(window.SMD_WATCH && window.SMD_AUTH && window.SMD_AUTH.currentUser)) { alert('Sign in with your Google/Apple account to use background lab alerts.'); return; }
+          try { if (window.SMD_enableNativePush) window.SMD_enableNativePush(); } catch (e) {}
+          try {
+            window.SMD_WATCH.enableWithConsent({ patientId: patientId, episodeId: (GHIS._selectedPatient && GHIS._selectedPatient.episodeId) || undefined, name: name })
+              .catch(function () {});
+          } catch (e) {}
         },
         loadIntoICU: function(patientId, after) {
           if (!window.ICU || !ICU.ingestFromWard) { alert('ICU dashboard not loaded.'); return; }
