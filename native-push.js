@@ -1,0 +1,128 @@
+/* StewardMD — native push notifications (Capacitor).
+ * ---------------------------------------------------------------------------
+ * Web Push does NOT work inside the iOS Capacitor WebView, so the native apps
+ * use @capacitor/push-notifications (APNs on iOS, FCM on Android). This module
+ * registers the device, sends its token to /api/push/register-native, and routes
+ * taps. On the WEB build (`native` false) it is a NO-OP — web push in home.js
+ * continues to handle browsers/PWAs.
+ *
+ * Loads after native-bridge.js (so /api/* is rewritten to the live host) and
+ * after app.js (so Firebase auth/uid is available). No hard dependencies.
+ *
+ * Public API:
+ *   window.SMD_NATIVE_PUSH        true when native push is available on this device
+ *   window.SMD_enableNativePush() request permission + register  → Promise<bool granted>
+ *   window.SMD_disableNativePush() forget this device's token on the server
+ *   window.SMD_nativePushOn()     best-effort "is it on" (local flag)
+ */
+(function () {
+  "use strict";
+  var C = window.Capacitor;
+  var native = !!(C && (typeof C.isNativePlatform === "function" ? C.isNativePlatform() : (C.platform && C.platform !== "web")));
+  if (!native) return;                       // web: web-push path in home.js handles it
+
+  function plugin() { return (C.Plugins && C.Plugins.PushNotifications) || null; }
+  if (!plugin()) return;                     // plugin not present in this build
+  window.SMD_NATIVE_PUSH = true;
+
+  function platform() { try { return (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform) || "ios"; } catch (e) { return "ios"; } }
+  // Firebase ID token → the server verifies it and scopes the device to that account.
+  function idToken() {
+    try {
+      var u = window.SMD_AUTH && SMD_AUTH.currentUser;
+      return u && u.getIdToken ? u.getIdToken() : Promise.resolve(null);
+    } catch (e) { return Promise.resolve(null); }
+  }
+  function api(path) { return (window.SMD_API_BASE || "") + path; }
+  function flag(v) { try { v == null ? localStorage.removeItem("smd_push_on") : localStorage.setItem("smd_push_on", "1"); } catch (e) {} }
+
+  var _token = null, _wired = false;
+
+  function wireListeners() {
+    if (_wired) return; _wired = true;
+    var P = plugin();
+    // Device registered with APNs/FCM → we get the token. Store it server-side.
+    P.addListener("registration", function (t) {
+      _token = t && t.value;
+      if (!_token) return;
+      idToken().then(function (jwt) {
+        var headers = { "Content-Type": "application/json" };
+        if (jwt) headers["Authorization"] = "Bearer " + jwt;   // server derives the owning account from this
+        return fetch(api("/api/push/register-native"), {
+          method: "POST", headers: headers,
+          body: JSON.stringify({ token: _token, platform: platform() })
+        });
+      }).then(function () { flag("1"); }).catch(function () {});
+    });
+    P.addListener("registrationError", function (e) {
+      try { console.warn("[StewardMD] push registration error:", e && (e.error || e)); } catch (x) {}
+    });
+    // Foreground receipt (OS may not show a banner while the app is open) — surface it in-app.
+    P.addListener("pushNotificationReceived", function (n) {
+      try {
+        if (window.SMD_toast) window.SMD_toast((n && (n.title || (n.body))) || "New update");
+        if (window.SMD_refreshNotifBadge) window.SMD_refreshNotifBadge();
+      } catch (x) {}
+    });
+    // Tap on a delivered notification → route to its url.
+    P.addListener("pushNotificationActionPerformed", function (a) {
+      try {
+        var data = a && a.notification && a.notification.data;
+        var url = (data && (data.url || data.URL)) || "/";
+        if (url && url !== "/") window.location.href = url;
+      } catch (x) {}
+    });
+  }
+
+  // Request OS permission and register. Resolves true when granted+registering.
+  window.SMD_enableNativePush = async function () {
+    var P = plugin(); if (!P) return false;
+    wireListeners();
+    try {
+      var perm = await P.checkPermissions();
+      if (!perm || perm.receive === "prompt" || perm.receive === "prompt-with-rationale") {
+        perm = await P.requestPermissions();
+      }
+      if (!perm || perm.receive !== "granted") { flag(null); return false; }
+      await P.register();                    // triggers the "registration" listener above
+      return true;
+    } catch (e) { return false; }
+  };
+
+  // Forget this device on the server so it stops receiving pushes.
+  window.SMD_disableNativePush = async function () {
+    flag(null);
+    if (!_token) return true;
+    try {
+      await fetch(api("/api/push/unregister-native"), {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: _token })
+      });
+    } catch (e) {}
+    return true;
+  };
+
+  window.SMD_nativePushOn = function () { try { return localStorage.getItem("smd_push_on") === "1"; } catch (e) { return false; } };
+
+  // Wire tap/receive listeners on load so a cold-start tap still routes; only
+  // request permission when the user opts in via SMD_enableNativePush().
+  wireListeners();
+  // If the user already enabled it on a previous launch, re-register silently to refresh the token.
+  if (window.SMD_nativePushOn()) { try { plugin().register(); } catch (e) {} }
+
+  // Re-register when the signed-in account changes, so the device's token is
+  // re-scoped to the current doctor (and un-scoped to guest on sign-out). This is
+  // what keeps lab alerts account-specific — only the doctor watching a patient
+  // gets that patient's alerts. Attaches once SMD_AUTH is available.
+  (function attachAuth(tries) {
+    try {
+      if (window.SMD_AUTH && SMD_AUTH.onAuthStateChanged) {
+        SMD_AUTH.onAuthStateChanged(function () {
+          if (window.SMD_nativePushOn()) { try { plugin().register(); } catch (e) {} }
+        });
+        return;
+      }
+    } catch (e) {}
+    if ((tries || 0) < 40) setTimeout(function () { attachAuth((tries || 0) + 1); }, 500);
+  })(0);
+})();

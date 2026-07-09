@@ -23,14 +23,25 @@
  *                                (defaults to FDA MedWatch, press releases, recalls)
  */
 import { sendPushToAll, pushEnabled } from "../../_webpush.js";
+import { sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 
 const LIST_KEY = "updates:list";
 const CAP = 120;                 // keep the newest N
 const DESC_MAX = 600;
 
 // Fire OS push banners to subscribed devices (best-effort, non-blocking).
-function firePush(context) {
+// Web push is payloadless (the SW fetches the newest item); native (APNs/FCM) needs
+// the text in the payload, so pass the item's title/body when we have it.
+function firePush(context, item) {
   try { if (pushEnabled(context.env)) context.waitUntil(sendPushToAll(context.env)); } catch (e) {}
+  try {
+    if (nativePushEnabled(context.env)) {
+      const msg = item
+        ? { title: item.title || "StewardMD", body: (item.source ? item.source + " · " : "") + (item.category || "update"), url: item.url || "/", tag: item.id ? "smd-" + item.id : undefined }
+        : { title: "StewardMD", body: "New medical update", url: "/" };
+      context.waitUntil(sendNativeToAll(context.env, msg));
+    }
+  } catch (e) {}
 }
 
 function kv(env) { return env.UPDATES_KV || env.GHIS_KV || env.CASES_KV || null; }
@@ -184,7 +195,7 @@ export async function onRequest(context) {
       const list = await readList(store);
       list.push(item);
       await writeList(store, list);
-      firePush(context);                                // banner subscribed devices on manual publish
+      firePush(context, item);                          // banner subscribed devices on manual publish
       return json({ ok: true, item });
     }
     if (method === "DELETE" && id) {

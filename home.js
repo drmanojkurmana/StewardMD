@@ -1624,11 +1624,17 @@
   function closeNotifications() { if (_notifRoot) { _notifRoot.classList.remove("on"); document.body.classList.remove("ntf-lock"); } }
 
   /* ---- Web Push (OS banner) opt-in for this device ---- */
-  function pushSupported() { return ("serviceWorker" in navigator) && ("PushManager" in window) && ("Notification" in window); }
+  function isNativePush() { return !!window.SMD_NATIVE_PUSH; }
+  function pushSupported() { return isNativePush() || (("serviceWorker" in navigator) && ("PushManager" in window) && ("Notification" in window)); }
   function isStandalone() { try { return window.navigator.standalone === true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches); } catch (e) { return false; } }
   function isIOS() { try { return /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1); } catch (e) { return false; } }
   function urlB64ToU8(s) { var pad = "=".repeat((4 - s.length % 4) % 4); var b = (s + pad).replace(/-/g, "+").replace(/_/g, "/"); var raw = atob(b); var a = new Uint8Array(raw.length); for (var i = 0; i < raw.length; i++) a[i] = raw.charCodeAt(i); return a; }
-  function pushIsOn() { try { return localStorage.getItem("smd_push_on") === "1" && ("Notification" in window) && Notification.permission === "granted"; } catch (e) { return false; } }
+  function pushIsOn() {
+    try {
+      if (isNativePush()) return window.SMD_nativePushOn ? window.SMD_nativePushOn() : (localStorage.getItem("smd_push_on") === "1");
+      return localStorage.getItem("smd_push_on") === "1" && ("Notification" in window) && Notification.permission === "granted";
+    } catch (e) { return false; }
+  }
   function renderPushRow() {
     var el = _notifRoot && _notifRoot.querySelector("#ntfPush"); if (!el) return;
     if (!pushSupported()) {
@@ -1650,6 +1656,12 @@
   }
   function enablePush() {
     if (!pushSupported()) { toast("Push isn't supported here."); return; }
+    if (isNativePush()) {
+      window.SMD_enableNativePush().then(function (ok) {
+        toast(ok ? "Phone alerts enabled ✅" : "Permission not granted."); renderPushRow();
+      }).catch(function () { toast("Couldn't enable notifications — try again."); renderPushRow(); });
+      return;
+    }
     fetch("/api/push/status").then(function (r) { return r.json(); }).then(function (st) {
       if (!st || !st.enabled || !st.publicKey) { toast("Push isn't switched on server-side yet."); return; }
       return Notification.requestPermission().then(function (perm) {
@@ -1668,6 +1680,12 @@
     }).catch(function () { toast("Couldn't enable notifications — try again."); renderPushRow(); });
   }
   function disablePush() {
+    if (isNativePush()) {
+      (window.SMD_disableNativePush ? window.SMD_disableNativePush() : Promise.resolve()).then(function () {
+        toast("Phone alerts turned off."); renderPushRow();
+      });
+      return;
+    }
     navigator.serviceWorker.ready.then(function (reg) {
       return reg.pushManager.getSubscription().then(function (sub) {
         if (!sub) return;
