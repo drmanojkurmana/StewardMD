@@ -19,7 +19,37 @@
   "use strict";
   var C = window.Capacitor;
   var native = !!(C && (typeof C.isNativePlatform === "function" ? C.isNativePlatform() : (C.platform && C.platform !== "web")));
-  if (!native) return;                       // web: web-push path in home.js handles it
+
+  /* ── Immediate local notification (for the foreground watch-lab poller) ──────
+   * The watch-lab feature polls GHIS while the app is active and calls this when a
+   * NEW lab is reported for a patient the signed-in doctor is watching. It is the
+   * doctor's own device + own GHIS session, so it is inherently account-specific.
+   * Native → @capacitor/local-notifications banner; web → Notification / toast.
+   * Defined on web too so the shared poller code has one call to make.
+   *   window.SMD_localNotify(title, body, url?)  → Promise (best-effort) */
+  var _lnId = 1;
+  window.SMD_localNotify = async function (title, body, url) {
+    try {
+      if (native && C.Plugins && C.Plugins.LocalNotifications) {
+        var LN = C.Plugins.LocalNotifications;
+        try { var p = await LN.checkPermissions(); if (!p || p.display !== "granted") await LN.requestPermissions(); } catch (e) {}
+        return LN.schedule({ notifications: [{
+          id: (_lnId = (_lnId % 2147483000) + 1),
+          title: title || "StewardMD", body: body || "",
+          extra: { url: url || "/" }
+        }] });
+      }
+      // web fallback
+      if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+        var n = new Notification(title || "StewardMD", { body: body || "", data: { url: url || "/" } });
+        n.onclick = function () { try { if (url && url !== "/") window.location.href = url; window.focus(); } catch (e) {} };
+        return;
+      }
+      if (window.SMD_toast) window.SMD_toast((title ? title + " — " : "") + (body || ""));
+    } catch (e) { try { if (window.SMD_toast) window.SMD_toast(body || title || "New lab"); } catch (x) {} }
+  };
+
+  if (!native) return;                       // web: web-push path in home.js handles remote push
 
   function plugin() { return (C.Plugins && C.Plugins.PushNotifications) || null; }
   if (!plugin()) return;                     // plugin not present in this build
@@ -107,6 +137,17 @@
   // Wire tap/receive listeners on load so a cold-start tap still routes; only
   // request permission when the user opts in via SMD_enableNativePush().
   wireListeners();
+  // Route taps on local (watch-lab) notifications to their patient/url.
+  try {
+    if (C.Plugins && C.Plugins.LocalNotifications) {
+      C.Plugins.LocalNotifications.addListener("localNotificationActionPerformed", function (a) {
+        try {
+          var url = a && a.notification && a.notification.extra && a.notification.extra.url;
+          if (url && url !== "/") window.location.href = url;
+        } catch (x) {}
+      });
+    }
+  } catch (e) {}
   // If the user already enabled it on a previous launch, re-register silently to refresh the token.
   if (window.SMD_nativePushOn()) { try { plugin().register(); } catch (e) {} }
 
