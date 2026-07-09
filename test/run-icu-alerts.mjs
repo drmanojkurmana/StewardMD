@@ -51,20 +51,20 @@ try {
     urea: +SMD_wardToSI("urea", 120, "mg/dL").toFixed(1)
   });`);
   ok(u.pltLakh === 141 && u.pltUnit === 141 && u.pltAbs === 141 && u.pltReal === 45, `platelets: 1.41 lakhs→141, 141000/cumm→141, true 45 kept (${u.pltLakh}/${u.pltUnit}/${u.pltAbs}/${u.pltReal})`);
-  ok(u.gluMgdlNoUnit > 29 && u.gluMgdlNoUnit < 31 && u.gluHigh === 30, `glucose no-unit: 545(mg/dL)→30.3 mmol/L; 30→kept mmol/L (${u.gluMgdlNoUnit}/${u.gluHigh})`);
-  ok(u.urea > 19 && u.urea < 21, `urea mg/dL→mmol/L consistent (120 mg/dL→${u.urea})`);
+  ok(u.gluMgdlNoUnit === 545 && u.gluHigh === 30, `glucose kept in mg/dL (Indian units): 545→545, 30→30 (${u.gluMgdlNoUnit}/${u.gluHigh})`);
+  ok(u.urea === 120, `urea kept in mg/dL (Indian units): 120→${u.urea}`);
 
   // ===== P0 (#1): imported CRITICAL labs now alert (the real patient: creat 910, eGFR 5, Hb 5.4, glu 30) =====
   const c1 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"LABPT",age:60,sex:"M"});
-    ICU.ingestLabs({ creat:910, egfr:5, hb:5.4, plt:141, glu:30.28, k:6.8, na:118 });
+    ICU.ingestLabs({ creat:10.3, egfr:5, hb:5.4, plt:141, glu:545, k:6.8, na:118 });
     var al = ICU.state().alerts || [];
     return JSON.stringify({ n:al.length, titles: al.map(function(a){return a.title;}) });
   `);
   ok(c1.n > 0, `imported critical labs now fire alerts (was "No active alerts"): ${c1.n} alerts`);
-  ok(c1.titles.some(t => /renal impairment/i.test(t)) && c1.titles.some(t => /low eGFR|eGFR/i.test(t)), `creatinine 910 + eGFR 5 → renal alerts [${c1.titles.filter(t=>/renal|eGFR/i.test(t)).join(", ")}]`);
+  ok(c1.titles.some(t => /renal impairment/i.test(t)) && c1.titles.some(t => /low eGFR|eGFR/i.test(t)), `creatinine 10.3 mg/dL + eGFR 5 → renal alerts [${c1.titles.filter(t=>/renal|eGFR/i.test(t)).join(", ")}]`);
   ok(c1.titles.some(t => /anaemia/i.test(t)), "Hb 5.4 → severe anaemia alert");
-  ok(c1.titles.some(t => /hyperglyc/i.test(t)), "glucose 30.28 → severe hyperglycaemia alert");
+  ok(c1.titles.some(t => /hyperglyc/i.test(t)), "glucose 545 mg/dL → severe hyperglycaemia alert");
   ok(c1.titles.some(t => /hyperkal/i.test(t)) && c1.titles.some(t => /sodium/i.test(t)), "K 6.8 + Na 118 → electrolyte alerts");
   ok(!c1.titles.some(t => /thrombocyto/i.test(t)), "platelets 141 ×10⁹/L → NO false thrombocytopenia (unit fix worked)");
 

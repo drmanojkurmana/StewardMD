@@ -58,7 +58,7 @@ try {
     return JSON.stringify({ na: L.na, k: L.k, ca: L.ca, mg: L.mg, po4: L.po4, creat: L.creat, urea: L.urea, hb: L.hb, mapped: res.mappedLabs });
   `);
   const L = JSON.parse(r1);
-  ok(L.na === 128 && L.k === 6.5 && L.ca === 1.7 && L.mg === 0.5 && L.creat === 180, "electrolytes + renal populate ICU labs (Na/K/Ca/Mg/Creat)");
+  ok(L.na === 128 && L.k === 6.5 && L.ca === 1.7 && L.mg === 0.5 && L.creat === 2.04, "electrolytes + renal populate ICU labs (Na/K/Ca/Mg mmol/L; creatinine 180 µmol/L → 2.04 mg/dL, Indian units)");
   ok(L.po4 === 0.4, "phosphate populates from 'Phosphate' (0.4)");
   ok(L.po4 !== 240, "GUARD: 'Alkaline Phosphatase' did NOT overwrite phosphate");
   ok(L.urea == null, "GUARD: 'BUN' did NOT map to urea (different scale)");

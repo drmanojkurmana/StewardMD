@@ -129,7 +129,7 @@
 
     // ---- Renal (creatinine / eGFR) + AKI composite (BUG #1, #9) ----
     var oliguric = (lv.uop != null && lv.uop < 0.5 * wt), renalHigh = false;
-    if (L.creat != null) { if (L.creat > 300) { renalHigh = true; add("crit", "Severe renal impairment", "Creatinine " + L.creat + " µmol/L (>300) — AKI / renal failure; review nephrotoxins & drug dosing", "Renal / Metabolic"); } else if (L.creat > 130) { renalHigh = true; add("warn", "Raised creatinine", "Creatinine " + L.creat + " µmol/L (>130)", "Renal / Metabolic"); } }
+    if (L.creat != null) { if (L.creat > 3.4) { renalHigh = true; add("crit", "Severe renal impairment", "Creatinine " + L.creat + " mg/dL (>3.4) — AKI / renal failure; review nephrotoxins & drug dosing", "Renal / Metabolic"); } else if (L.creat > 1.5) { renalHigh = true; add("warn", "Raised creatinine", "Creatinine " + L.creat + " mg/dL (>1.5)", "Renal / Metabolic"); } }
     if (L.egfr != null) { if (L.egfr < 15) { renalHigh = true; add("crit", "Critically low eGFR", "eGFR " + L.egfr + " mL/min (<15) — renal-failure range", "Renal / Metabolic"); } else if (L.egfr < 30) { renalHigh = true; add("warn", "Low eGFR", "eGFR " + L.egfr + " mL/min (<30)", "Renal / Metabolic"); } }
     if (oliguric) add("warn", "Oliguria", "Urine " + lv.uop + " mL/h (<0.5 mL/kg/h at " + wt + " kg" + (p.weightKg == null || +p.weightKg <= 0 ? ", assumed" : "") + ")", "Renal / Metabolic");
     if (oliguric && renalHigh) add("crit", "Acute kidney injury (composite)", "Oliguria + raised creatinine/eGFR — screen for AKI (KDIGO); review fluids, perfusion & nephrotoxins", "Renal / Metabolic");
@@ -139,8 +139,8 @@
     if (L.plt != null) { if (L.plt < 20) add("crit", "Critical thrombocytopenia", "Platelets " + L.plt + " ×10⁹/L (<20) — bleeding risk", "Haematology"); else if (L.plt < 50) add("warn", "Thrombocytopenia", "Platelets " + L.plt + " ×10⁹/L (<50)", "Haematology"); else if (L.plt > 1000) add("warn", "Thrombocytosis", "Platelets " + L.plt + " ×10⁹/L (>1000)", "Haematology"); }
     if (L.ferritin != null && L.ferritin > 10000) add("warn", "Markedly elevated ferritin", "Ferritin " + L.ferritin + " — consider HLH / hyperinflammation", "Haematology");
 
-    // ---- Glucose (BUG #1, stored mmol/L) ----
-    if (L.glu != null) { if (L.glu > 30) add("crit", "Severe hyperglycaemia", "Glucose " + L.glu + " mmol/L (>30) — screen for DKA / HHS", "Renal / Metabolic"); else if (L.glu > 14) add("warn", "Hyperglycaemia", "Glucose " + L.glu + " mmol/L (>14)", "Renal / Metabolic"); else if (L.glu < 2.5) add("crit", "Critical hypoglycaemia", "Glucose " + L.glu + " mmol/L (<2.5) — treat now", "Renal / Metabolic"); else if (L.glu < 3.9) add("warn", "Hypoglycaemia", "Glucose " + L.glu + " mmol/L (<3.9)", "Renal / Metabolic"); }
+    // ---- Glucose (conventional / Indian units: mg/dL) ----
+    if (L.glu != null) { if (L.glu > 540) add("crit", "Severe hyperglycaemia", "Glucose " + L.glu + " mg/dL (>540) — screen for DKA / HHS", "Renal / Metabolic"); else if (L.glu > 250) add("warn", "Hyperglycaemia", "Glucose " + L.glu + " mg/dL (>250)", "Renal / Metabolic"); else if (L.glu < 45) add("crit", "Critical hypoglycaemia", "Glucose " + L.glu + " mg/dL (<45) — treat now", "Renal / Metabolic"); else if (L.glu < 70) add("warn", "Hypoglycaemia", "Glucose " + L.glu + " mg/dL (<70)", "Renal / Metabolic"); }
 
     // ---- Hemodynamics ----
     var mp = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
@@ -449,7 +449,7 @@
   // conversion, e.g. Ca 9.4 mg/dL was read as 9.4 mmol/L → ELYTE ×4 → "40.4 mg/dL, severe
   // hypercalcaemia". Convert conventional→SI on ingest. Na/K/Cl/HCO₃ are mEq/L == mmol/L, so
   // they're never converted. Factors mirror electrolytes.js CONV (conventional = SI × f).
-  var WARD_CONV = { ca: 4.0, mg: 2.43, po4: 3.1, glu: 18, creat: 1 / 88.4, alb: 0.1, urea: 6.006 };
+  var WARD_CONV = { ca: 4.0, mg: 2.43, po4: 3.1, alb: 0.1 };   // glu/urea/creat now kept in conventional mg/dL (Indian) — see wardToSI special-cases below
   // Above these an SI value is implausible → the number must be conventional (used only when
   // the units string is missing; creat/alb are the inverse — a small value is conventional).
   // Unit-less plausibility ceilings. Raised glu 35→50 & ca 4→4.5 so a TRUE severe hyperglycaemia
@@ -466,6 +466,11 @@
       if (!u && val > 0 && val < 20) return Math.round(val * 100);
       return val;
     }
+    // Renal/metabolic panel is stored in conventional (Indian) units — glucose & creatinine & urea
+    // in mg/dL. GHIS reports these in mg/dL → keep as-is; convert only if a lab reports SI.
+    if (key === "glu") return /mmol/.test(u) ? Math.round(val * 18) : val;
+    if (key === "urea") return /mmol/.test(u) ? +(val * 6.006).toFixed(1) : val;
+    if (key === "creat") return (/µmol|umol|micromol/.test(u)) ? +(val / 88.4).toFixed(2) : val;
     var f = WARD_CONV[key]; if (!f) return val;                       // Na/K/Cl/HCO₃/Hb/eGFR: mEq==mmol / already SI, no conversion
     if (/mmol|meq|µmol|umol|micromol|g\/l/.test(u)) return val;       // already SI (incl albumin g/L)
     var conventional = /mg\/dl/.test(u) || (key === "alb" && /g\/dl/.test(u));
@@ -1447,8 +1452,8 @@
     wbc:  { label: "WBC / TLC", unit: "", good: null, src: "lab", note: "correlate with infection / steroids / clinical status" },
     neut: { label: "Neutrophils", unit: "", good: null, src: "lab", note: "correlate clinically" },
     plt:  { label: "Platelets", unit: "", good: "up", src: "lab", ref: [150, 400], note: "fall — concerning (sepsis / DIC / drugs)" },
-    creat:{ label: "Creatinine", unit: "µmol/L", good: "down", src: "lab" },
-    urea: { label: "Urea", unit: "", good: "down", src: "lab" },
+    creat:{ label: "Creatinine", unit: "mg/dL", good: "down", src: "lab", ref: [0.6, 1.3] },
+    urea: { label: "Urea", unit: "mg/dL", good: "down", src: "lab", ref: [15, 45] },
     na:   { label: "Sodium", unit: "mmol/L", good: null, src: "lab", ref: [135, 145], crit: function (v) { return v < 120 || v > 160; } },
     k:    { label: "Potassium", unit: "mmol/L", good: null, src: "lab", ref: [3.5, 5.0], crit: function (v) { return v > 6.0 || v < 2.5; }, note: "K by safety threshold — >6.0 or <2.5 is critical" },
     cl:   { label: "Chloride", unit: "mmol/L", good: null, src: "lab", ref: [98, 107] },
@@ -1465,7 +1470,7 @@
     inr:  { label: "INR", unit: "", good: "down", src: "lab" },
     amylase:{ label: "Amylase", unit: "U/L", good: null, src: "lab", note: "trend only — correlate clinically" },
     lipase:{ label: "Lipase", unit: "U/L", good: null, src: "lab", note: "trend only — correlate clinically" },
-    glu:  { label: "Glucose", unit: "mmol/L", good: null, src: "lab", ref: [4, 7.8] },
+    glu:  { label: "Glucose", unit: "mg/dL", good: null, src: "lab", ref: [70, 140] },
     lactate:{ label: "Lactate", unit: "mmol/L", good: "down", src: "vital" },
     crp:  { label: "CRP", unit: "mg/L", good: "down", src: "lab" },
     pct:  { label: "Procalcitonin", unit: "ng/mL", good: "down", src: "lab" },
@@ -2571,8 +2576,8 @@
       { k: "lactate", l: "Lactate mmol/L", t: "number" }, { k: "cvp", l: "CVP mmHg", t: "number" }, { k: "etco2", l: "EtCO₂ mmHg", t: "number" } ] },
     labs: { title: "Laboratory values", ingest: ingestLabs, fields: [
       { k: "na", l: "Na mEq/L", t: "number" }, { k: "k", l: "K mEq/L", t: "number" }, { k: "cl", l: "Cl mEq/L", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" },
-      { k: "ca", l: "Ca mmol/L", t: "number" }, { k: "mg", l: "Mg mmol/L", t: "number" }, { k: "po4", l: "PO₄ mmol/L", t: "number" }, { k: "creat", l: "Creatinine", t: "number" },
-      { k: "alb", l: "Albumin g/L", t: "number" }, { k: "glu", l: "Glucose", t: "number" }, { k: "wbc", l: "WBC", t: "number" }, { k: "hb", l: "Hb g/dL", t: "number" },
+      { k: "ca", l: "Ca mmol/L", t: "number" }, { k: "mg", l: "Mg mmol/L", t: "number" }, { k: "po4", l: "PO₄ mmol/L", t: "number" }, { k: "creat", l: "Creatinine mg/dL", t: "number" },
+      { k: "alb", l: "Albumin g/L", t: "number" }, { k: "glu", l: "Glucose mg/dL", t: "number" }, { k: "wbc", l: "WBC", t: "number" }, { k: "hb", l: "Hb g/dL", t: "number" },
       { k: "plt", l: "Platelets", t: "number" }, { k: "ferritin", l: "Ferritin", t: "number" }, { k: "crp", l: "CRP", t: "number" }, { k: "inr", l: "INR", t: "number" } ] },
     abg: { title: "Arterial blood gas", ingest: function (o) { Object.keys(o).forEach(function (k) { STATE.abg[k] = o[k]; }); STATE.abg.ts = nowTs(); }, fields: [
       { k: "ph", l: "pH", t: "number" }, { k: "paco2", l: "PaCO₂ mmHg", t: "number" }, { k: "pao2", l: "PaO₂ mmHg", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "be", l: "Base excess", t: "number" } ] },
