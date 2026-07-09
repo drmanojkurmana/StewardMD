@@ -101,7 +101,16 @@
     // Foreground receipt (OS may not show a banner while the app is open) — surface it in-app.
     P.addListener("pushNotificationReceived", function (n) {
       try {
-        if (window.SMD_toast) window.SMD_toast((n && (n.title || (n.body))) || "New update");
+        // FOREGROUND receipt. Android/FCM does NOT show a tray banner while the app is open
+        // (iOS suppresses it too by default) — the OS only auto-displays when backgrounded, and
+        // this handler ONLY fires in the foreground. So re-raise it as a LOCAL notification, which
+        // manages its own channel — the doctor gets a real banner on Android even with the app open.
+        var d = (n && n.data) || {};
+        var title = (n && n.title) || d.title || "StewardMD";
+        var body = (n && n.body) || d.body || "New update";
+        var url = d.url || d.URL || "/";
+        if (window.SMD_localNotify) window.SMD_localNotify(title, body, url);
+        else if (window.SMD_toast) window.SMD_toast(title + " — " + body);
         if (window.SMD_refreshNotifBadge) window.SMD_refreshNotifBadge();
       } catch (x) {}
     });
