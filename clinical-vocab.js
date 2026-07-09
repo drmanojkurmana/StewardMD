@@ -53,7 +53,9 @@
     { id: "palpitations", label: "Palpitations", cid: "palpitations", group: "Symptoms", sys: "Cardiac", ws: [IM], syn: ["palpitation", "palpitations", "racing heart"] },
     { id: "syncope", label: "Syncope / collapse", cid: "syncope", group: "Symptoms", sys: "Cardiac", ws: [IM], syn: ["syncope", "collapse", "fainted", "passed out", "blackout"] },
     { id: "orthopnea", label: "Orthopnea / PND", cid: "orthopnea", group: "Symptoms", sys: "Cardiac", ws: [IM], syn: ["orthopnea", "orthopnoea", "pnd", "paroxysmal nocturnal dyspnea"] },
-    { id: "raisedJVP", label: "Raised JVP / peripheral oedema", cid: "raisedJVP", group: "Signs", sys: "Cardiac", ws: [IM], syn: ["raised jvp", "elevated jvp", "pedal edema", "peripheral oedema"] },
+    { id: "raisedJVP", label: "Raised JVP / distended neck veins", cid: "raisedJVP", group: "Signs", sys: "Cardiac", ws: [IM], syn: ["raised jvp", "elevated jvp", "jvp raised", "distended neck veins", "jvd", "engorged neck veins"] },
+    { id: "pedalEdema", label: "Bilateral pedal / lower-limb oedema", cid: "raisedJVP", group: "Signs", sys: "Cardiac", ws: [IM], syn: ["pedal edema", "pedal oedema", "peripheral oedema", "peripheral edema", "lower limb swelling", "lower limb oedema", "lower limb edema", "b/l lower limb swelling", "bilateral lower limb swelling", "lower limb both swelling", "leg swelling", "leg oedema", "both leg swelling", "both legs swollen", "bilateral leg swelling", "swollen legs", "swelling of legs", "swelling of both legs", "feet swelling", "swollen feet", "ankle swelling", "ankle oedema", "b/l pedal edema", "bipedal edema", "dependent oedema"] },
+    { id: "anasarca", label: "Generalised oedema / anasarca", cid: "raisedJVP", group: "Signs", sys: "General", ws: [IM], syn: ["anasarca", "generalised oedema", "generalized edema", "generalised swelling", "whole body swelling", "swelling all over", "gross edema", "total body swelling"] },
     { id: "severeHypertension", label: "Severe hypertension (BP > 180/120)", cid: "hypertensionHx", group: "Red flags", sys: "Cardiac", ws: [IM], red: true, syn: ["severe hypertension", "hypertensive emergency", "hypertensive urgency", "very high bp", "malignant hypertension", "bp very high"] },
 
     // ===== Respiratory =====
@@ -93,7 +95,8 @@
     { id: "urinaryRetention", label: "Urinary retention", cid: null, group: "Symptoms", sys: "Renal-GU", ws: [URO], syn: ["urinary retention", "retention of urine", "unable to pass urine", "cannot pass urine", "blocked catheter"] },
     { id: "catheterIssue", label: "Catheter problem / blockage", cid: null, group: "History", sys: "Renal-GU", ws: [URO], syn: ["catheter blocked", "catheter issue", "catheter not draining", "foley problem"] },
     { id: "costovertebralTenderness", label: "Costovertebral angle tenderness", cid: null, group: "Signs", sys: "Renal-GU", ws: [IM, URO], syn: ["cva tenderness", "costovertebral tenderness", "renal angle tenderness"] },
-    { id: "proteinuria", label: "Frothy urine / proteinuria", cid: "proteinuria", group: "Labs", sys: "Renal-GU", ws: [IM], syn: ["frothy urine", "proteinuria", "heavy protein"] },
+    { id: "proteinuria", label: "Frothy urine / proteinuria", cid: "proteinuria", group: "Labs", sys: "Renal-GU", ws: [IM], syn: ["frothy urine", "foamy urine", "proteinuria", "heavy protein", "protein in urine", "albuminuria"] },
+    { id: "periorbitalEdema", label: "Facial / periorbital puffiness", cid: null, group: "Signs", sys: "Renal-GU", ws: [IM], syn: ["periorbital edema", "periorbital oedema", "facial puffiness", "puffy face", "puffy eyes", "facial swelling", "puffy eyelids", "swelling around eyes", "morning facial swelling", "periorbital puffiness"] },
 
     // ===== ENT =====
     { id: "earDischarge", label: "Ear discharge / otorrhoea", cid: null, group: "Symptoms", sys: "ENT", ws: [ENT], syn: ["ear discharge", "otorrhoea", "otorrhea", "pus from ear", "ear pus"] },
