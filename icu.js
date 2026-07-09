@@ -2717,7 +2717,8 @@
   function copySummary() { var pre = modalEl && modalEl.querySelector("#icuSummaryText"); var t = pre ? pre.textContent : buildSummary(); try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t); } catch (e) {} if (window.toast) toast("Summary copied"); }
   // Print / Export-PDF: open a clean print view of the summary (device "Save as PDF" from the
   // print sheet). If pop-ups are blocked (some WKWebViews), fall back to the summary + Share.
-  function printSummary() {
+  function printSummary() { phiExportConfirm("print / PDF export", doPrintSummary); }   // KI-H6 consent gate
+  function doPrintSummary() {
     var name = _raw.patient.name || "ICU patient";
     var html = '<!doctype html><meta charset="utf-8"><title>StewardMD ICU — ' + esc(name) + '</title>' +
       '<style>body{font:13px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#111;padding:24px;max-width:720px;margin:auto}h1{font-size:18px;margin:0 0 4px}.m{color:#666;font-size:12px;margin-bottom:16px}pre{white-space:pre-wrap;font:inherit}</style>' +
@@ -3600,6 +3601,20 @@
   /* --------------------------------------------------- share & clear findings */
   // Share a case exactly like the Clinical Reasoning dashboard: Web Share API
   // (system share sheet) with a clipboard-copy fallback where it isn't supported.
+  // KI-H6: patient-identifiable EXPORTS (OS share sheet, print/PDF) pass through a one-tap
+  // consent gate first — buildSummary/buildDischarge carry the patient's name/bed/hospital/labs/
+  // imaging, and the share sheet forwards them to any app. Nothing leaves the device until the
+  // clinician confirms. (Copy-to-clipboard stays on-device and keeps its own "copied" toast.)
+  var _phiPending = null;
+  function phiExportConfirm(what, proceed) {
+    injectCSS(); ensureModal(); _phiPending = proceed;
+    var isPrint = what.indexOf("rint") >= 0;
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("warn", "⚠️") + ' Patient-identifiable data</h3>' +
+      '<p class="icu-doc-sub">This ' + esc(what) + ' includes the patient’s name, bed, hospital, labs and imaging. Send it only through <b>approved, secure</b> channels — never personal messaging or public posts — per your local data-protection policy.</p>' +
+      '<button class="icu-btn" data-icu-act="phiexportgo">' + ico(isPrint ? "copy" : "share", isPrint ? "🖨️" : "📤") + ' ' + (isPrint ? "Print anyway" : "Share anyway") + '</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
   function shareText(title, txt) {
     // Native: navigator.share is unreliable in WKWebView — use the Capacitor share
     // sheet (guest-safe: buildSummary is plain text, no Firebase/Firestore needed).
@@ -3610,7 +3625,8 @@
     try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt); if (window.toast) toast("Case summary copied — sharing not supported here"); return true; } } catch (e) {}
     return false;
   }
-  function shareCase() { if (!shareText("StewardMD ICU — " + (_raw.patient.name || "ICU patient"), buildSummary())) openSummary(); }
+  function doShareCase() { if (!shareText("StewardMD ICU — " + (_raw.patient.name || "ICU patient"), buildSummary())) openSummary(); }
+  function shareCase() { phiExportConfirm("share to another app", doShareCase); }   // KI-H6 consent gate
   function sharePatient(id) {
     if (!id || id === _raw.patient._id) { shareCase(); return; }
     var r = loadRoster(), e = null, i; for (i = 0; i < r.length; i++) { if (r[i].id === id) { e = r[i]; break; } }
@@ -3929,6 +3945,7 @@
       case "delpt": deletePatient(arg); break;
       case "sharept": sharePatient(arg); break;
       case "sharecase": shareCase(); break;
+      case "phiexportgo": { var _pe = _phiPending; _phiPending = null; closeForm(); if (_pe) _pe(); break; }   // KI-H6: confirmed PHI export
       case "clearfindings": openClearConfirm(); break;
       case "clearconfirm": clearFindings(); break;
       case "newpt": newPatient(); break;
