@@ -809,6 +809,11 @@
       '@media (min-width:900px){.icu-ws-bar{justify-content:center;gap:8px}.icu-ws-bar .icu-tab{flex:0 0 auto;min-width:120px;flex-direction:row;gap:8px}.icu-ws-bar .icu-tab .tl{font-size:13px}}' +
       // snapshot FAB
       '#icuSnap{position:absolute;right:14px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:6;width:54px;height:54px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--primary3),var(--primary2));color:#fff;font-size:24px;box-shadow:0 8px 24px rgba(15,118,110,.42);cursor:pointer;display:flex;align-items:center;justify-content:center}#icuSnap:active{transform:scale(.92)}' +
+      // Prominent Lab Watch FAB — a labelled pill stacked above the Snapshot FAB so the
+      // watch-labs action is easy to find (was only a small chip in the header row).
+      '#icuWatch{position:absolute;right:14px;bottom:calc(138px + env(safe-area-inset-bottom));z-index:6;height:44px;border-radius:22px;padding:0 15px;border:1.5px solid var(--primary);background:var(--panel);color:var(--primary2,var(--primary));font:800 13px var(--font);box-shadow:0 6px 18px rgba(15,118,110,.28);cursor:pointer;display:inline-flex;align-items:center;gap:6px}' +
+      '#icuWatch.on{background:linear-gradient(135deg,var(--primary3),var(--primary2));color:#fff;border-color:transparent}#icuWatch:active{transform:scale(.94)}#icuWatch .icu-ico{width:17px;height:17px}' +
+      '#icuWatch .icu-lw-fab-b{background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 10px var(--font);padding:1px 5px;min-width:15px;text-align:center}' +
       // modal
       '.icu-modal{position:fixed;inset:0;z-index:10020;display:none;align-items:flex-end;justify-content:center;background:rgba(8,18,26,.5)}' +
       '.icu-modal.on{display:flex}' +
@@ -1636,6 +1641,9 @@
   // silently relies on the in-app toast. Body carries only the analyte label/value/count.
   function lwDeviceNotify(title, body, urgent) {
     try {
+      // Prefer the unified foreground banner helper from native-push.js (native via
+      // @capacitor/local-notifications, web via Notification/toast) when it's loaded.
+      if (typeof window.SMD_localNotify === "function") { window.SMD_localNotify(title, body, "/"); return true; }
       var P = (window.Capacitor && window.Capacitor.Plugins) || {};
       if (P.LocalNotifications && P.LocalNotifications.schedule) {
         P.LocalNotifications.schedule({ notifications: [{ id: (nowTs() % 2147483000) + 1, title: title, body: body, schedule: { at: new Date(nowTs() + 200) } }] }).catch(function () {});
@@ -2506,7 +2514,12 @@
     if (!rootEl) return;
     // Camera FAB is contextual — only where snapping a monitor/lab/ABG/vent is relevant.
     var fab = isMonWs() ? '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' : "";
-    rootEl.innerHTML = renderHeader() + renderBody() + fab + renderTabBar();
+    // Prominent, always-visible Lab Watch entry (a labelled FAB, like the Snapshot button) so
+    // the feature is easy to find — shown whenever there's a patient/labs to watch.
+    var watchFab = (labWatchOn() && hasTrendPatient())
+      ? '<button id="icuWatch" class="' + (lwActive() ? "on" : "") + '" data-icu-act="labwatch" aria-label="Watch labs — alert me on new results">' + ico("bell", "🔔") + '<span>' + (lwActive() ? "Watching labs" : "Watch labs") + '</span>' + (_lwBadge ? '<b class="icu-lw-fab-b">' + _lwBadge + '</b>' : "") + '</button>'
+      : "";
+    rootEl.innerHTML = renderHeader() + renderBody() + watchFab + fab + renderTabBar();
   }
 
   /* ---------------------------------------------------- manual entry forms */
