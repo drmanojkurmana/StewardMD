@@ -45,6 +45,9 @@
       { id:"hd", label:"≥2 haemodialysis / 24 h CVVHD in the past week", type:"check" }
     ],
     compute:function(v){
+      // Guard: never score on defaulted normals — a blank lab must NOT silently become a normal
+      // value (would understate MELD / 90-day mortality / transplant priority).
+      if(!ok(v.bili)||!ok(v.creat)||!ok(v.inr)||!ok(v.na)||!ok(v.alb)) return ERR;
       var bili=Math.max(1,+v.bili||1), inr=Math.max(1,+v.inr||1);
       var creat=Math.max(1,+v.creat||1); if(v.hd) creat=3.0; creat=Math.min(creat,3.0);
       var na=Math.min(137,Math.max(125,+v.na||137)), alb=Math.min(3.5,Math.max(1.5,+v.alb||3.5));
@@ -97,6 +100,9 @@
       { id:"lvl", label:"Paracetamol level", type:"number", unit:"µg/mL (=mg/L)", step:"1" }
     ],
     compute:function(v){
+      // Guard: a blank level must NOT read as 0 (below the line) — that could contribute to
+      // withholding N-acetylcysteine. Require both time and level.
+      if(!ok(v.t)||!ok(v.lvl)) return { v:"—", u:"", i:"Enter time since ingestion and paracetamol level." };
       var t=+v.t||0, lvl=+v.lvl||0;
       if(t<4) return { v:"—", u:"", i:"Levels before 4 h are uninterpretable — repeat at 4 h post-ingestion." };
       if(t>24) return { v:"—", u:"", i:"Nomogram not validated beyond 24 h — treat with NAC if any detectable level or hepatotoxicity; seek toxicology advice." };
@@ -178,6 +184,9 @@
       { id:"eff", label:"Pleural effusion", type:"check" }
     ],
     compute:function(v){
+      // Guard: age is the dominant term — a blank age must NOT score as 0 (falsely "class I–II,
+      // outpatient"). Require age before computing.
+      if(!ok(v.age)) return ERR;
       var age=+v.age||0;
       var s = age - (v.sex==="f"?10:0)
         + (v.nh?10:0)+(v.neo?30:0)+(v.liver?20:0)+(v.chf?10:0)+(v.cva?10:0)+(v.renal?10:0)
@@ -489,6 +498,7 @@
     ],
     compute:function(v){
       if(!ok(v.wt)||!ok(v.tbsa)) return ERR;
+      if(v.wt<=0||v.tbsa<0||v.tbsa>100) return { v:"—", u:"", i:"Enter a plausible weight and %TBSA (0–100)." };  // guard impossible TBSA
       var total=4*v.wt*v.tbsa;
       return { v:r0(total), u:"mL / 24 h (Ringer's lactate)", i:"Give <b>"+r0(total/2)+" mL over first 8 h</b> (from time of burn), remainder over next 16 h. Titrate to urine output 0.5–1 mL/kg/h." };
     } },
@@ -536,6 +546,7 @@
     ],
     compute:function(v){
       if(!ok(v.age)||!ok(v.wt)||!ok(v.scr)||v.scr<=0) return ERR;
+      if(v.age<=0||v.age>120||v.wt<=0) return { v:"—", u:"", i:"Enter a plausible age (1–120 y) and weight." };  // guard outliers → no negative CrCl
       var crcl=(140-v.age)*v.wt/(72*v.scr); if(v.sex==="f")crcl*=0.85;
       return { v:r0(crcl), u:"mL/min", i:"Use actual body weight unless obese (use adjusted). Renal dosing thresholds typically at <50, <30, <15 mL/min." };
     } },
