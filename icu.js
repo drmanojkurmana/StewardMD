@@ -47,6 +47,7 @@
     src: {},                    // per-field provenance: { <field>: { source, ts } } source ∈ Ward Sync|Imported report|Manual
     wardSync: { connected: false, lastTs: null, newUpdate: false, patientId: null },
     conflicts: [],              // [{ key, label, ward, manual, wardTs, manualTs }] — clinician resolves
+    prefs: { unitSystem: "indian" },  // DISPLAY units only: 'indian' (default) | 'conventional' | 'si'. Stored values are always canonical; see fmtLab().
     meta: { updated: null }
   };
   var LS_KEY = "stewardmd_icu_state";                       // legacy (unscoped) key — migrated once
@@ -124,23 +125,23 @@
     var wt = (p.weightKg != null && !isNaN(+p.weightKg) && +p.weightKg > 0) ? +p.weightKg : 70;   // BUG #9: default 70 kg when weight unknown
 
     // ---- Electrolytes ----
-    if (L.k != null) { if (L.k > K_CRIT_HI) add("crit", "Critical hyperkalaemia", "K⁺ " + L.k + " mEq/L (>" + K_CRIT_HI + ") — ECG + urgent treatment", "Renal / Metabolic"); else if (L.k > K_WARN_HI) add("warn", "Hyperkalaemia", "K⁺ " + L.k + " mEq/L (>" + K_WARN_HI + ")", "Renal / Metabolic"); else if (L.k < K_CRIT_LO) add("crit", "Critical hypokalaemia", "K⁺ " + L.k + " mEq/L (<" + K_CRIT_LO + ") — replace + monitor ECG", "Renal / Metabolic"); else if (L.k < K_WARN_LO) add("warn", "Hypokalaemia", "K⁺ " + L.k + " mEq/L", "Renal / Metabolic"); }
-    if (L.na != null) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na⁺ " + L.na + " mEq/L — correct at a safe rate", "Renal / Metabolic"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na⁺ " + L.na + " mEq/L", "Renal / Metabolic"); }
+    if (L.k != null && unitKnown("k")) { if (L.k > K_CRIT_HI) add("crit", "Critical hyperkalaemia", "K⁺ " + labText("k", L.k) + " (>" + fmtLab("k", K_CRIT_HI).text + ") — ECG + urgent treatment", "Renal / Metabolic"); else if (L.k > K_WARN_HI) add("warn", "Hyperkalaemia", "K⁺ " + labText("k", L.k) + " (>" + fmtLab("k", K_WARN_HI).text + ")", "Renal / Metabolic"); else if (L.k < K_CRIT_LO) add("crit", "Critical hypokalaemia", "K⁺ " + labText("k", L.k) + " (<" + fmtLab("k", K_CRIT_LO).text + ") — replace + monitor ECG", "Renal / Metabolic"); else if (L.k < K_WARN_LO) add("warn", "Hypokalaemia", "K⁺ " + labText("k", L.k), "Renal / Metabolic"); }
+    if (L.na != null && unitKnown("na")) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na⁺ " + labText("na", L.na) + " — correct at a safe rate", "Renal / Metabolic"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na⁺ " + labText("na", L.na), "Renal / Metabolic"); }
 
     // ---- Renal (creatinine / eGFR) + AKI composite (BUG #1, #9) ----
     var oliguric = (lv.uop != null && lv.uop < 0.5 * wt), renalHigh = false;
-    if (L.creat != null) { if (L.creat > 3.4) { renalHigh = true; add("crit", "Severe renal impairment", "Creatinine " + L.creat + " mg/dL (>3.4) — AKI / renal failure; review nephrotoxins & drug dosing", "Renal / Metabolic"); } else if (L.creat > 1.5) { renalHigh = true; add("warn", "Raised creatinine", "Creatinine " + L.creat + " mg/dL (>1.5)", "Renal / Metabolic"); } }
+    if (L.creat != null && unitKnown("creat")) { if (L.creat > 3.4) { renalHigh = true; add("crit", "Severe renal impairment", "Creatinine " + labText("creat", L.creat) + " (>" + fmtLab("creat", 3.4).text + ") — AKI / renal failure; review nephrotoxins & drug dosing", "Renal / Metabolic"); } else if (L.creat > 1.5) { renalHigh = true; add("warn", "Raised creatinine", "Creatinine " + labText("creat", L.creat) + " (>" + fmtLab("creat", 1.5).text + ")", "Renal / Metabolic"); } }
     if (L.egfr != null) { if (L.egfr < 15) { renalHigh = true; add("crit", "Critically low eGFR", "eGFR " + L.egfr + " mL/min (<15) — renal-failure range", "Renal / Metabolic"); } else if (L.egfr < 30) { renalHigh = true; add("warn", "Low eGFR", "eGFR " + L.egfr + " mL/min (<30)", "Renal / Metabolic"); } }
     if (oliguric) add("warn", "Oliguria", "Urine " + lv.uop + " mL/h (<0.5 mL/kg/h at " + wt + " kg" + (p.weightKg == null || +p.weightKg <= 0 ? ", assumed" : "") + ")", "Renal / Metabolic");
     if (oliguric && renalHigh) add("crit", "Acute kidney injury (composite)", "Oliguria + raised creatinine/eGFR — screen for AKI (KDIGO); review fluids, perfusion & nephrotoxins", "Renal / Metabolic");
 
     // ---- Haematology ----
-    if (L.hb != null) { if (L.hb < 7) add("crit", "Severe anaemia", "Hb " + L.hb + " g/dL (<7) — transfusion threshold; check for bleeding", "Haematology"); else if (L.hb < 10) add("warn", "Anaemia", "Hb " + L.hb + " g/dL (<10)", "Haematology"); }
-    if (L.plt != null) { if (L.plt < 20) add("crit", "Critical thrombocytopenia", "Platelets " + L.plt + " ×10⁹/L (<20) — bleeding risk", "Haematology"); else if (L.plt < 50) add("warn", "Thrombocytopenia", "Platelets " + L.plt + " ×10⁹/L (<50)", "Haematology"); else if (L.plt > 1000) add("warn", "Thrombocytosis", "Platelets " + L.plt + " ×10⁹/L (>1000)", "Haematology"); }
+    if (L.hb != null && unitKnown("hb")) { if (L.hb < 7) add("crit", "Severe anaemia", "Hb " + labText("hb", L.hb) + " (<" + fmtLab("hb", 7).text + ") — transfusion threshold; check for bleeding", "Haematology"); else if (L.hb < 10) add("warn", "Anaemia", "Hb " + labText("hb", L.hb) + " (<" + fmtLab("hb", 10).text + ")", "Haematology"); }
+    if (L.plt != null && unitKnown("plt")) { if (L.plt < 20) add("crit", "Critical thrombocytopenia", "Platelets " + labText("plt", L.plt) + " (<" + fmtLab("plt", 20).text + " " + fmtLab("plt", 20).unit + ") — bleeding risk", "Haematology"); else if (L.plt < 50) add("warn", "Thrombocytopenia", "Platelets " + labText("plt", L.plt) + " (<" + fmtLab("plt", 50).text + " " + fmtLab("plt", 50).unit + ")", "Haematology"); else if (L.plt > 1000) add("warn", "Thrombocytosis", "Platelets " + labText("plt", L.plt) + " (>" + fmtLab("plt", 1000).text + " " + fmtLab("plt", 1000).unit + ")", "Haematology"); }
     if (L.ferritin != null && L.ferritin > 10000) add("warn", "Markedly elevated ferritin", "Ferritin " + L.ferritin + " — consider HLH / hyperinflammation", "Haematology");
 
     // ---- Glucose (conventional / Indian units: mg/dL) ----
-    if (L.glu != null) { if (L.glu > 540) add("crit", "Severe hyperglycaemia", "Glucose " + L.glu + " mg/dL (>540) — screen for DKA / HHS", "Renal / Metabolic"); else if (L.glu > 250) add("warn", "Hyperglycaemia", "Glucose " + L.glu + " mg/dL (>250)", "Renal / Metabolic"); else if (L.glu < 45) add("crit", "Critical hypoglycaemia", "Glucose " + L.glu + " mg/dL (<45) — treat now", "Renal / Metabolic"); else if (L.glu < 70) add("warn", "Hypoglycaemia", "Glucose " + L.glu + " mg/dL (<70)", "Renal / Metabolic"); }
+    if (L.glu != null && unitKnown("glu")) { if (L.glu > 540) add("crit", "Severe hyperglycaemia", "Glucose " + labText("glu", L.glu) + " (>" + fmtLab("glu", 540).text + ") — screen for DKA / HHS", "Renal / Metabolic"); else if (L.glu > 250) add("warn", "Hyperglycaemia", "Glucose " + labText("glu", L.glu) + " (>" + fmtLab("glu", 250).text + ")", "Renal / Metabolic"); else if (L.glu < 45) add("crit", "Critical hypoglycaemia", "Glucose " + labText("glu", L.glu) + " (<" + fmtLab("glu", 45).text + ") — treat now", "Renal / Metabolic"); else if (L.glu < 70) add("warn", "Hypoglycaemia", "Glucose " + labText("glu", L.glu) + " (<" + fmtLab("glu", 70).text + ")", "Renal / Metabolic"); }
 
     // ---- Hemodynamics ----
     var mp = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
@@ -444,32 +445,130 @@
     }
     return null;
   }
-  // GHIS/HIS reports Ca/Mg/PO₄/glucose/creatinine/albumin in CONVENTIONAL units (mg/dL, g/dL)
-  // but the ICU/ELYTE analysers store + interpret them in SI (mmol/L, µmol/L, g/L). Without
-  // conversion, e.g. Ca 9.4 mg/dL was read as 9.4 mmol/L → ELYTE ×4 → "40.4 mg/dL, severe
-  // hypercalcaemia". Convert conventional→SI on ingest. Na/K/Cl/HCO₃ are mEq/L == mmol/L, so
-  // they're never converted. Factors mirror electrolytes.js CONV (conventional = SI × f).
-  // conventional (Indian) = SI × f. The whole app AND the ELYTE correction-dose calculator work in
-  // CONVENTIONAL units: glucose/creatinine/urea/Ca/Mg/PO₄ in mg/dL, albumin g/dL, Na/K/Cl/HCO₃ mEq/L.
-  var WARD_CONV = { ca: 4.0, mg: 2.43, po4: 3.1, glu: 18, creat: 1 / 88.4, alb: 0.1, urea: 6.006 };
-  // Standardisation: keep each lab in the UNITS ON THE GHIS REPORT. GHIS reports conventional
-  // (Indian) units, so values are kept AS REPORTED — no conversion. Only an explicit SI report
-  // (mmol/L / µmol/L / g/L) is converted SI → conventional. (Function name kept for compatibility.)
-  function wardToSI(key, val, units) {
-    var u = String(units || "").toLowerCase().replace(/\s+/g, "");
-    // Platelets: Indian labs report lakhs/cumm (×10⁵/µL) → ×10⁹/L is ×100; an absolute /cumm count
-    // (e.g. 141000) is ÷1000; else a value implausibly low as ×10⁹/L (normal 150–450) is really lakhs.
-    if (key === "plt") {
-      if (/lakh/.test(u)) return Math.round(val * 100);
-      if (val > 1000) return Math.round(val / 1000);
-      if (!u && val > 0 && val < 20) return Math.round(val * 100);
-      return val;
-    }
-    var f = WARD_CONV[key]; if (!f) return val;                      // Na/K/Cl/HCO₃/Hb/eGFR: mEq==mmol, never converted
-    if (/mmol|µmol|umol|micromol|g\/l/.test(u)) return +(val * f).toFixed(2);   // explicit SI report → conventional (Indian)
-    return val;                                                      // mg/dL / g/dL / unit-less → keep exactly as the report
+  /* ── UNIT REGISTRY ─────────────────────────────────────────────────────────
+   * ONE entry per analyte. CANONICAL is the unit the engine STORES and every alert
+   * THRESHOLD is expressed in, so the display preference can NEVER change what fires:
+   *   chemistry mg/dL (creat, urea/BUN, glucose, Ca, PO₄, Mg, bilirubin, urate);
+   *   Hb/albumin/protein g/dL;  Na/K/Cl/HCO₃/lactate/ionised-Ca mmol/L;
+   *   platelets & WBC ×10⁹/L;   enzymes (AST/ALT/ALP/amylase/lipase) U/L.
+   * toCanonical(rawValue, rawUnit) TRUSTS the printed GHIS unit; when it is missing or
+   * ambiguous it applies a per-analyte plausibility guard; if it still can't decide it
+   * returns { known:false } → the ingest stores unit:"unknown", shows a "unit?" chip and
+   * does NOT fire a critical alert off that value. Conversion factors (SI → canonical):
+   *   creatinine µmol/L ÷88.4;  glucose mmol/L ×18;  bilirubin µmol/L ÷17.1;
+   *   calcium mmol/L ÷0.2495;  urea mmol/L ×6.006 (BUN mg/dL → urea ×2.14);
+   *   Mg mmol/L ×2.43;  PO₄ mmol/L ×3.1;  urate µmol/L ÷59.48;
+   *   albumin/protein/Hb g/L ÷10;  platelets lakh ×100;  WBC /µL ÷1000;
+   *   Na/K/Cl/HCO₃ mEq/L == mmol/L (1:1). */
+  function _u(s) { return String(s == null ? "" : s).toLowerCase().replace(/\s+/g, "").replace(/µ/g, "u").replace(/×/g, "x"); }
+  function _r(v, d) { if (v == null || isNaN(v)) return v; var f = Math.pow(10, d); return Math.round((+v + Number.EPSILON) * f) / f; }
+  function _isSI(u) { return /mmol|umol|micromol|g\/l|nmol/.test(u); }
+  function _asIs(canonUnit) { return function (v, u) { return { value: v, unit: canonUnit, known: true }; }; }        // canonical == every reported unit (Na/K/Cl, enzymes, ratios)
+  // A chemistry analyte reported either in canonical mg/dL (kept as-is) or an SI unit (÷/× factor).
+  function _chem(canonUnit, siUnit, factor, dp) {
+    return function (v, u) {
+      u = _u(u);
+      if (_isSI(u)) return { value: _r(v * factor, dp), unit: canonUnit, known: true };
+      if (/mg\/dl|g\/dl|mg%|g%/.test(u)) return { value: v, unit: canonUnit, known: true };
+      if (!u) return { value: v, unit: canonUnit, known: true };   // no printed unit → trust as canonical (Indian default; never ÷ a mg/dL value)
+      return { value: v, unit: canonUnit, known: false };          // an unrecognised unit → don't trust it
+    };
   }
-  window.SMD_wardToSI = wardToSI;   // exposed for verification
+  var UNIT_REGISTRY = {
+    creat:  { canonical: "mg/dL",  indian: "mg/dL",  conventional: "mg/dL",  si: "µmol/L", toCanonical: function (v, u) {
+      u = _u(u);
+      if (/umol|micromol/.test(u)) return { value: _r(v / 88.4, 2), unit: "mg/dL", known: true };
+      if (/mg\/dl|mg%/.test(u)) return { value: v, unit: "mg/dL", known: true };
+      if (!u) return v > 40 ? { value: _r(v / 88.4, 2), unit: "mg/dL", known: true, guessed: true }   // >40 mg/dL is physiologically impossible → the source was really µmol/L
+                            : { value: v, unit: "mg/dL", known: true };
+      return { value: v, unit: "mg/dL", known: false };
+    } },
+    urea:   { canonical: "mg/dL",  indian: "mg/dL",  conventional: "mg/dL",  si: "mmol/L", toCanonical: _chem("mg/dL", "mmol/L", 6.006, 0) },
+    bun:    { canonical: "mg/dL",  indian: "mg/dL",  conventional: "mg/dL",  si: "mmol/L", toCanonical: _chem("mg/dL", "mmol/L", 2.8, 0) },
+    glu:    { canonical: "mg/dL",  indian: "mg/dL",  conventional: "mg/dL",  si: "mmol/L", toCanonical: _chem("mg/dL", "mmol/L", 18, 0) },
+    ca:     { canonical: "mg/dL",  indian: "mg/dL",  conventional: "mg/dL",  si: "mmol/L", toCanonical: _chem("mg/dL", "mmol/L", 1 / 0.2495, 2) },
+    po4:    { canonical: "mg/dL",  indian: "mg/dL",  conventional: "mg/dL",  si: "mmol/L", toCanonical: _chem("mg/dL", "mmol/L", 3.1, 2) },
+    mg:     { canonical: "mg/dL",  indian: "mg/dL",  conventional: "mg/dL",  si: "mmol/L", toCanonical: _chem("mg/dL", "mmol/L", 2.43, 2) },
+    bili:   { canonical: "mg/dL",  indian: "mg/dL",  conventional: "mg/dL",  si: "µmol/L", toCanonical: _chem("mg/dL", "µmol/L", 1 / 17.1, 2) },
+    bili_d: { canonical: "mg/dL",  indian: "mg/dL",  conventional: "mg/dL",  si: "µmol/L", toCanonical: _chem("mg/dL", "µmol/L", 1 / 17.1, 2) },
+    urate:  { canonical: "mg/dL",  indian: "mg/dL",  conventional: "mg/dL",  si: "µmol/L", toCanonical: _chem("mg/dL", "µmol/L", 1 / 59.48, 1) },
+    hb:     { canonical: "g/dL",   indian: "g/dL",   conventional: "g/dL",   si: "g/L",    toCanonical: _chem("g/dL", "g/L", 0.1, 1) },
+    alb:    { canonical: "g/dL",   indian: "g/dL",   conventional: "g/dL",   si: "g/L",    toCanonical: _chem("g/dL", "g/L", 0.1, 2) },
+    protein:{ canonical: "g/dL",   indian: "g/dL",   conventional: "g/dL",   si: "g/L",    toCanonical: _chem("g/dL", "g/L", 0.1, 2) },
+    na:      { canonical: "mmol/L", indian: "mEq/L", conventional: "mEq/L",  si: "mmol/L", toCanonical: _asIs("mmol/L") },
+    k:       { canonical: "mmol/L", indian: "mEq/L", conventional: "mEq/L",  si: "mmol/L", toCanonical: _asIs("mmol/L") },
+    cl:      { canonical: "mmol/L", indian: "mEq/L", conventional: "mEq/L",  si: "mmol/L", toCanonical: _asIs("mmol/L") },
+    hco3:    { canonical: "mmol/L", indian: "mEq/L", conventional: "mEq/L",  si: "mmol/L", toCanonical: _asIs("mmol/L") },
+    lactate: { canonical: "mmol/L", indian: "mmol/L", conventional: "mmol/L", si: "mmol/L", toCanonical: _asIs("mmol/L") },
+    ica:     { canonical: "mmol/L", indian: "mmol/L", conventional: "mmol/L", si: "mmol/L", toCanonical: _asIs("mmol/L") },
+    plt: { canonical: "×10⁹/L", indian: "lakh/cumm", conventional: "×10⁹/L", si: "×10⁹/L", toCanonical: function (v, u) {
+      u = _u(u);
+      if (/lakh/.test(u)) return { value: _r(v * 100, 0), unit: "×10⁹/L", known: true };                    // Indian lakhs/cumm ×100
+      if (/10\^9|x10\^9|x10\*9|giga|10\^3\/ul|10\*3\/ul|k\/ul|thou/.test(u)) return { value: _r(v, 0), unit: "×10⁹/L", known: true }; // ×10⁹/L or ×10³/µL are 1:1
+      if (/cumm|\/ul|cells/.test(u)) return { value: _r(v / 1000, 0), unit: "×10⁹/L", known: true };         // absolute /µL ÷1000
+      if (!u) {
+        if (v > 0 && v < 20) return { value: _r(v * 100, 0), unit: "×10⁹/L", known: true, guessed: true };   // <~20 as ×10⁹/L is implausible → lakhs
+        if (v > 1000) return { value: _r(v / 1000, 0), unit: "×10⁹/L", known: true, guessed: true };         // an absolute count → ÷1000
+        return { value: _r(v, 0), unit: "×10⁹/L", known: true };
+      }
+      return { value: v, unit: "×10⁹/L", known: false };
+    } },
+    wbc: { canonical: "×10⁹/L", indian: "×10⁹/L", conventional: "×10⁹/L", si: "×10⁹/L", toCanonical: function (v, u) {
+      u = _u(u);
+      if (/10\^9|x10\^9|giga|10\^3\/ul|10\*3\/ul|k\/ul|thou/.test(u)) return { value: _r(v, 1), unit: "×10⁹/L", known: true };
+      if (/cumm|\/ul|cells/.test(u)) return { value: _r(v / 1000, 1), unit: "×10⁹/L", known: true };
+      if (!u) return v > 1000 ? { value: _r(v / 1000, 1), unit: "×10⁹/L", known: true, guessed: true } : { value: _r(v, 1), unit: "×10⁹/L", known: true };
+      return { value: v, unit: "×10⁹/L", known: false };
+    } },
+    ast:     { canonical: "U/L", indian: "U/L", conventional: "U/L", si: "U/L", toCanonical: _asIs("U/L") },
+    alt:     { canonical: "U/L", indian: "U/L", conventional: "U/L", si: "U/L", toCanonical: _asIs("U/L") },
+    alp:     { canonical: "U/L", indian: "U/L", conventional: "U/L", si: "U/L", toCanonical: _asIs("U/L") },
+    amylase: { canonical: "U/L", indian: "U/L", conventional: "U/L", si: "U/L", toCanonical: _asIs("U/L") },
+    lipase:  { canonical: "U/L", indian: "U/L", conventional: "U/L", si: "U/L", toCanonical: _asIs("U/L") }
+  };
+  // rawValue in the report's units → { value: canonical number, unit: canonicalUnit, known, guessed?, rawUnit }.
+  function unitToCanonical(key, rawValue, rawUnit) {
+    var e = UNIT_REGISTRY[key], out;
+    if (!e) out = { value: rawValue, unit: "", known: true };   // unmapped (egfr, inr, crp, pct, ferritin, hct…): dimensionless / already canonical → identity
+    else out = e.toCanonical(rawValue, rawUnit);
+    out.rawUnit = (rawUnit == null ? "" : String(rawUnit)).trim();
+    return out;
+  }
+  // Back-compat shim (name + signature kept): the ingest paths + the SMD_wardToSI verification
+  // export call this and expect the plain canonical NUMBER.
+  function wardToSI(key, val, units) { return unitToCanonical(key, val, units).value; }
+  window.SMD_wardToSI = wardToSI;
+
+  /* ── DISPLAY: unit-system preference + formatter ────────────────────────────
+   * The stored value is always canonical; the clinician's `unitSystem` preference only
+   * changes DISPLAY. Default 'indian'. fmtLab() is used for BOTH the tiles AND the alert
+   * messages so the number and its label can never disagree. */
+  function unitPref() { try { var p = _raw.prefs && _raw.prefs.unitSystem; return (p === "conventional" || p === "si") ? p : "indian"; } catch (e) { return "indian"; } }
+  function setUnitSystem(sys) { if (sys !== "indian" && sys !== "conventional" && sys !== "si") return unitPref(); if (!STATE.prefs) STATE.prefs = {}; STATE.prefs.unitSystem = sys; return sys; }   // display-only; triggers a re-render via the reactive proxy
+  var _DP = { creat: 2, urea: 0, bun: 0, glu: 0, ca: 1, po4: 1, mg: 1, bili: 1, bili_d: 1, urate: 1, hb: 1, alb: 1, protein: 1,
+              na: 0, k: 1, cl: 0, hco3: 0, lactate: 1, ica: 2, plt: 0, wbc: 1, ast: 0, alt: 0, alp: 0, amylase: 0, lipase: 0 };
+  // canonical value → SI value (only the analytes whose SI unit differs from canonical).
+  var _TO_SI = { creat: function (v) { return v * 88.4; }, glu: function (v) { return v / 18; }, urea: function (v) { return v / 6.006; },
+    bun: function (v) { return v / 2.8; }, ca: function (v) { return v * 0.2495; }, po4: function (v) { return v / 3.1; }, mg: function (v) { return v / 2.43; },
+    bili: function (v) { return v * 17.1; }, bili_d: function (v) { return v * 17.1; }, urate: function (v) { return v * 59.48; },
+    hb: function (v) { return v * 10; }, alb: function (v) { return v * 10; }, protein: function (v) { return v * 10; } };
+  var _DP_SI = { creat: 0, bili: 0, bili_d: 0, urate: 0, glu: 1, urea: 1, bun: 1, ca: 2, po4: 2, mg: 2, hb: 0, alb: 0, protein: 0 };
+  // fmtLab(analyte, canonicalValue, system?) → { text, unit }. No raw-float noise.
+  function fmtLab(key, canon, system) {
+    system = system || unitPref();
+    if (canon == null || isNaN(canon)) return { text: "—", unit: "" };
+    var e = UNIT_REGISTRY[key];
+    if (!e) { return { text: String(_r(+canon, 1)), unit: "" }; }
+    var unit = e[system] || e.canonical, val = +canon, dp = _DP[key] == null ? 1 : _DP[key];
+    if (system === "si" && _TO_SI[key]) { val = _TO_SI[key](val); if (_DP_SI[key] != null) dp = _DP_SI[key]; }
+    else if (key === "plt" && system === "indian") { val = val / 100; dp = 2; }   // ×10⁹/L → lakh/cumm
+    return { text: String(_r(val, dp)), unit: unit };
+  }
+  window.SMD_UNITS = { toCanonical: unitToCanonical, fmt: fmtLab, pref: unitPref, registry: UNIT_REGISTRY };
+  // Was the ingested unit for `key` trusted? Manual/legacy values (no provenance) are trusted.
+  function unitKnown(key) { try { var s = STATE.src && STATE.src[key]; return !s || s.unitKnown !== false; } catch (e) { return true; } }
+  // "10.3 mg/dL" in the clinician's chosen system — used to build alert messages.
+  function labText(key, canon) { var f = fmtLab(key, canon); return f.text + (f.unit ? " " + f.unit : ""); }
   // Ingest a normalised Ward-Sync / imported bundle. Conflict-SAFE: never silently
   // overwrites a clinician's Manual value — records a conflict for the clinician to resolve.
   // bundle: { patient?, source?, ts?, labs:[{test,result,units,low,high}], vitals?, abg? }
@@ -504,15 +603,16 @@
     var labVals = {};
     (bundle.labs || []).forEach(function (t) {
       var key = mapWardLab(t.test); if (!key) return;
-      var v = parseFloat(t.result); if (isNaN(v)) return;
-      v = wardToSI(key, v, t.units);   // conventional (mg/dL, g/dL) → app SI so Ca/Mg/PO₄/glu/creat/alb aren't mis-scaled
+      var raw = parseFloat(t.result); if (isNaN(raw)) return;
+      var conv = unitToCanonical(key, raw, t.units);   // → canonical value; conv.known=false when the printed unit couldn't be trusted
+      var v = conv.value;
       var prevSrc = STATE.src[key];
       if (prevSrc && prevSrc.source === "Manual" && STATE.labs.recent[key] != null && Number(STATE.labs.recent[key]) !== v) {
         conflicts.push({ key: key, label: t.test, ward: v, manual: STATE.labs.recent[key], wardTs: ts, manualTs: prevSrc.ts, source: source });
         return;  // preserve manual override; surface both for the clinician
       }
       if (STATE.labs.recent[key] == null || Number(STATE.labs.recent[key]) !== v) hadNew = true;
-      labVals[key] = v; applied[key] = { source: source, ts: ts };
+      labVals[key] = v; applied[key] = { source: source, ts: ts, rawUnit: conv.rawUnit, unitKnown: conv.known !== false };
     });
     // pre-keyed labs (e.g. from OCR vision, which already returns ICU keys) — same
     // conflict-safety as name-mapped labs.
@@ -565,14 +665,15 @@
     wardSwitchGuard(bundle);   // BUG C1: a different ward patient starts clean (see wardSwitchGuard)
     var source = bundle.source || "Ward Sync";
     if (bundle.patient) ingestPatient(bundle.patient);
-    var byTs = {}, tsList = [];
+    var byTs = {}, tsList = [], unitMeta = {};
     (bundle.labs || []).forEach(function (t) {
       var key = mapWardLab(t.test); if (!key) return;
-      var v = parseFloat(t.result); if (isNaN(v)) return;
-      v = wardToSI(key, v, t.units);
+      var raw = parseFloat(t.result); if (isNaN(raw)) return;
+      var conv = unitToCanonical(key, raw, t.units);
       var ts = parseWardDate(t.date) || bundle.ts || nowTs();
       if (!byTs[ts]) { byTs[ts] = {}; tsList.push(ts); }
-      byTs[ts][key] = v;   // last row wins within the same report timestamp
+      byTs[ts][key] = conv.value;   // last row wins within the same report timestamp
+      unitMeta[key] = { rawUnit: conv.rawUnit, unitKnown: conv.known !== false };   // unit is stable per analyte across a patient's reports
     });
     tsList.sort(function (a, b) { return a - b; });   // oldest → newest so recent = last
     var pts = 0, keysSeen = {}, newestByKey = {}, conflicts = [];
@@ -593,7 +694,7 @@
         conflicts.push({ key: k, label: k, ward: nv.v, manual: STATE.labs.recent[k], wardTs: nv.ts, manualTs: prev.ts, source: source });
         return;   // preserve clinician's manual value; surface a conflict
       }
-      STATE.labs.recent[k] = nv.v; STATE.src[k] = { source: source, ts: nv.ts };
+      STATE.labs.recent[k] = nv.v; STATE.src[k] = { source: source, ts: nv.ts, rawUnit: (unitMeta[k] || {}).rawUnit || "", unitKnown: (unitMeta[k] || {}).unitKnown !== false };
     });
     if (conflicts.length) STATE.conflicts = (STATE.conflicts || []).concat(conflicts);
     STATE.wardSync.connected = true; STATE.wardSync.lastTs = nowTs(); STATE.wardSync.newUpdate = pts > 0;
@@ -954,7 +1055,8 @@
       vitalCard("Pressors", pressors.length ? pressors.map(function (p) { return p.drug; }).join(", ") : "None", "", pressors.length ? "warn" : "ok"),
       vitalCard("Infusions", (_raw.infusions || []).length || "0", "", ""),
       vitalCard("Net Fluid", f.net24h, "mL", ""),
-      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, K_CRIT_LO, K_CRIT_HI), labSeries("k", _trendWin))   // BUG #5: shared crit constant with the alert engine
+      vitalCard("K⁺", (L.k != null ? fmtLab("k", L.k).text : null), UNIT_REGISTRY.k[unitPref()], vstat(L.k, 3.5, 5.0, K_CRIT_LO, K_CRIT_HI), labSeries("k", _trendWin))   // value+unit via fmtLab (display pref); vstat/thresholds stay canonical. BUG #5: shared crit constant with the alert engine
+
     ];
     return '<div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
   }
@@ -1426,6 +1528,15 @@
       return '<button class="icu-btn ghost" style="width:auto;margin:0;padding:7px 12px;font-size:12px;' + (_trendWin === o[1] ? "background:var(--primary-soft);border-color:var(--primary)" : "") + '" data-icu-act="win:' + o[1] + '">' + o[0] + "</button>";
     }).join("") + "</div>";
   }
+  // Display-unit picker (Indian default / Conventional / SI). Changes ONLY how values are
+  // shown — stored values are canonical and alerts are unaffected (see fmtLab / recompute).
+  function unitSelector() {
+    var cur = unitPref(), opts = [["Indian", "indian"], ["Conventional", "conv."], ["SI", "si"]], map = { indian: "indian", "conv.": "conventional", si: "si" };
+    return '<div class="icu-trend-wins" title="Display units only — stored values & alerts are unchanged"><span style="align-self:center;font:700 11px var(--font);color:var(--muted);margin-right:2px">Units</span>' + opts.map(function (o) {
+      var val = map[o[1]];
+      return '<button class="icu-btn ghost" style="width:auto;margin:0;padding:7px 12px;font-size:12px;' + (cur === val ? "background:var(--primary-soft);border-color:var(--primary)" : "") + '" data-icu-act="units:' + val + '">' + o[0] + "</button>";
+    }).join("") + "</div>";
+  }
   function vitalSeries(key, win) { var c = Date.now(); return (_raw.vitals || []).filter(function (v) { return v[key] != null && (!win || v.ts >= c - win); }).map(function (v) { return { ts: v.ts, v: v[key] }; }); }
   function mapSeries(win) { var c = Date.now(); return (_raw.vitals || []).filter(function (v) { return (v.map != null || (v.sbp != null && v.dbp != null)) && (!win || v.ts >= c - win); }).map(function (v) { return { ts: v.ts, v: v.map != null ? v.map : mapCalc(v.sbp, v.dbp) }; }); }
   function labSeries(key, win) { var c = Date.now(); return (_raw.labs.trends || []).filter(function (r) { return r[key] != null && (!win || r.ts >= c - win); }).map(function (r) { return { ts: r.ts, v: r[key] }; }); }
@@ -1485,9 +1596,13 @@
     if (!series.length) return null;
     var latest = series[series.length - 1], prev = series.length > 1 ? series[series.length - 2] : null;
     var o = { key: key, meta: m, label: m.label || key, latest: latest.v, when: latest.ts, unit: m.unit || "", note: m.note || "" };
+    // DISPLAY view in the clinician's unit system (status/dir/tone below stay on CANONICAL values,
+    // so the display preference can never change what's flagged). Falls back to m.unit for non-registry keys.
+    var _dv = fmtLab(key, latest.v); o.dispVal = UNIT_REGISTRY[key] ? _dv.text : fmtNum(latest.v); o.dispUnit = UNIT_REGISTRY[key] ? _dv.unit : (m.unit || "");
     o.status = (m.crit && m.crit(latest.v)) ? "critical" : m.ref ? ((latest.v < m.ref[0] || latest.v > m.ref[1]) ? "abnormal" : "normal") : "—";
     if (!prev) { o.dir = "single"; o.arrow = "•"; o.interp = "single reading"; o.tone = "flat"; return o; }
     o.prev = prev.v; o.delta = latest.v - prev.v; o.pct = prev.v !== 0 ? (o.delta / prev.v) * 100 : null; o.interval = fmtDur(latest.ts - prev.ts);
+    o.dispPrev = UNIT_REGISTRY[key] ? fmtLab(key, prev.v).text : fmtNum(prev.v); o.dispDelta = UNIT_REGISTRY[key] ? fmtLab(key, o.delta).text : fmtNum(o.delta);
     var eps = Math.max(Math.abs(prev.v) * 0.02, 1e-9);
     o.dir = o.delta > eps ? "up" : o.delta < -eps ? "down" : "flat"; o.arrow = o.dir === "up" ? "↑" : o.dir === "down" ? "↓" : "→";
     if (o.dir === "flat") { o.interp = "stable"; o.tone = "flat"; }
@@ -1502,16 +1617,19 @@
     var m = o.meta, tc = o.tone === "bad" ? "var(--danger,#b91c1c)" : o.tone === "good" ? "var(--ok,#15803d)" : "var(--muted)";
     var pill = o.status === "critical" ? '<span class="icu-tr-st crit">critical</span>' : o.status === "abnormal" ? '<span class="icu-tr-st ab">abnormal</span>' : o.status === "normal" ? '<span class="icu-tr-st ok">normal</span>' : "";
     var src = (STATE.src[key] && STATE.src[key].source) || "Ward Sync";
-    var head = '<div class="icu-tr-head"><span class="icu-tr-lbl">' + esc(o.label) + '</span><span class="icu-tr-val">' + esc(fmtNum(o.latest)) + (o.unit ? ' <span class="u">' + esc(o.unit) + '</span>' : '') + ' <b class="icu-tr-arrow" style="color:' + tc + '">' + o.arrow + '</b></span></div>';
+    var head = '<div class="icu-tr-head"><span class="icu-tr-lbl">' + esc(o.label) + '</span><span class="icu-tr-val">' + esc(o.dispVal) + (o.dispUnit ? ' <span class="u">' + esc(o.dispUnit) + '</span>' : '') + ' <b class="icu-tr-arrow" style="color:' + tc + '">' + o.arrow + '</b></span></div>';
     var sub = "";
     if (o.prev != null) {
       var pctStr = (o.pct != null && Math.abs(o.pct) >= 5) ? " · " + (o.pct > 0 ? "+" : "") + Math.round(o.pct) + "%" : "";
-      sub = '<div class="icu-tr-sub">Previous ' + esc(fmtNum(o.prev)) + ' · ' + (o.delta > 0 ? "+" : "") + esc(fmtNum(o.delta)) + ' in ' + esc(o.interval) + pctStr + '</div>' +
+      sub = '<div class="icu-tr-sub">Previous ' + esc(o.dispPrev) + ' · ' + (o.delta > 0 ? "+" : "") + esc(o.dispDelta) + ' in ' + esc(o.interval) + pctStr + '</div>' +
         '<div class="icu-tr-interp" style="color:' + tc + '">' + esc(o.interp) + '</div>';
     }
     var note = (o.note && (o.tone === "bad" || m.good == null)) ? '<div class="icu-tr-note">' + esc(o.note) + '</div>' : "";
     var srcLine = '<div class="icu-tr-src">' + pill + '<span>' + esc(src) + ' · ' + esc(fmtWhen(o.when)) + '</span></div>';
-    var chart = series.length >= 2 ? trendGraph(series, { unit: o.unit, band: m.ref }) : '<div class="icu-tr-single">Single reading — no trend yet</div>';
+    var toD = UNIT_REGISTRY[key] ? function (v) { return +fmtLab(key, v).text; } : function (v) { return v; };   // canonical series → display units for the chart
+    var dSeries = UNIT_REGISTRY[key] ? series.map(function (p) { return { ts: p.ts, v: toD(p.v) }; }) : series;
+    var dBand = (m.ref && UNIT_REGISTRY[key]) ? m.ref.map(toD) : m.ref;
+    var chart = series.length >= 2 ? trendGraph(dSeries, { unit: o.dispUnit, band: dBand }) : '<div class="icu-tr-single">Single reading — no trend yet</div>';
     return '<div class="icu-card icu-tr-card' + (key === _lwHighlight ? " lw-hi" : "") + '">' + head + sub + note + srcLine + chart + '</div>';
   }
   function groupSection(grp, win) {
@@ -1524,10 +1642,10 @@
     Object.keys(TREND_INTERP).forEach(function (k) {
       var s = trendSeriesFor(k, win).slice().sort(function (a, b) { return a.ts - b.ts; }); if (s.length < 2) return;
       var m = TREND_INTERP[k], latest = s[s.length - 1], prev = s[s.length - 2], dt = latest.ts - prev.ts, pct = prev.v !== 0 ? (latest.v - prev.v) / prev.v * 100 : 0;
-      if ((k === "k" || k === "na") && m.crit && m.crit(latest.v)) flags.push(m.label + " now " + fmtNum(latest.v) + " " + m.unit);
+      if ((k === "k" || k === "na") && m.crit && m.crit(latest.v)) flags.push(m.label + " now " + labText(k, latest.v));
       else if (k === "creat" && dt <= 48 * 36e5 && pct >= 50) flags.push("Creatinine up " + Math.round(pct) + "% in " + fmtDur(dt));
       else if (k === "plt" && s.length >= 3 && latest.v < prev.v && prev.v < s[s.length - 3].v) flags.push("Platelets falling over 3+ results");
-      else if (k === "lactate" && latest.v > prev.v && latest.v >= 2) flags.push("Lactate rising (now " + fmtNum(latest.v) + " mmol/L)");
+      else if (k === "lactate" && latest.v > prev.v && latest.v >= 2) flags.push("Lactate rising (now " + labText("lactate", latest.v) + ")");
       else if (m.good && Math.abs(pct) >= 50 && dt <= 72 * 36e5) flags.push(m.label + " " + (pct > 0 ? "up" : "down") + " " + Math.round(Math.abs(pct)) + "% in " + fmtDur(dt));
     });
     flags = flags.filter(function (f, i) { return flags.indexOf(f) === i; }).slice(0, 6);
@@ -1606,9 +1724,9 @@
         if (o.status === "abnormal" || o.tone === "bad" || (o.pct != null && o.dir !== "flat" && Math.abs(o.pct) >= 20)) { fire = true; kind = "change"; }
       } // mode "critical": only crit fires
       if (!fire) return;
-      var chg = (o.prev != null && o.dir !== "single") ? " (" + o.arrow + " from " + fmtNum(o.prev) + ")" : "";
-      var text = o.label + " " + fmtNum(o.latest) + (o.unit ? " " + o.unit : "") + (kind === "critical" ? " — critical" : chg);
-      var item = { ts: ts, analyte: k, label: o.label, value: o.latest, unit: o.unit, kind: kind, text: text, ack: false };
+      var chg = (o.prev != null && o.dir !== "single") ? " (" + o.arrow + " from " + (o.dispPrev != null ? o.dispPrev : fmtNum(o.prev)) + ")" : "";
+      var text = o.label + " " + (o.dispVal != null ? o.dispVal : fmtNum(o.latest)) + (o.dispUnit ? " " + o.dispUnit : "") + (kind === "critical" ? " — critical" : chg);
+      var item = { ts: ts, analyte: k, label: o.label, value: o.latest, unit: o.dispUnit || o.unit, kind: kind, text: text, ack: false };
       w.activity = w.activity || []; w.activity.unshift(item); fresh.push(item);
     });
     if ((w.activity || []).length > 60) w.activity = w.activity.slice(0, 60);
@@ -2274,7 +2392,7 @@
     trends: function () {
       if (!hasTrendPatient()) return trendsEmpty();
       var w = _trendWin;
-      return '<div class="icu-tr-wrap">' + significantChanges(w) + winSelector() +
+      return '<div class="icu-tr-wrap">' + significantChanges(w) + winSelector() + unitSelector() +
         TREND_GROUPS.map(function (g) { return groupSection(g, w); }).join("") + "</div>";
     },
     rounds: function () {
@@ -2481,7 +2599,7 @@
   // Compact electrolyte/renal alert summary from the deterministic ELYTE engine.
   function renderElyteAlerts() {
     var L = _raw.labs.recent || {}, p = _raw.patient || {}, res = [];
-    try { if (window.ELYTE && ELYTE.analyze) res = ELYTE.analyze(L, { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") }, "si"); } catch (e) {}
+    try { if (window.ELYTE && ELYTE.analyze) res = ELYTE.analyze(L, { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") }, "conventional"); } catch (e) {}
     var ab = res.filter(function (r) { return r.level && r.level !== "ok"; });
     if (!ab.length) return "";
     var COLOR = { crit: "var(--danger)", red: "var(--danger)", amber: "var(--warn)" };
@@ -3242,7 +3360,7 @@
   }
   function extractLabConcepts() {
     var L = _raw.labs.recent || {}, out = [], seen = {}, add = function (s) { if (s && !seen[s]) { seen[s] = 1; out.push(s); } };
-    try { if (window.ELYTE && ELYTE.analyze) { var p = _raw.patient || {}; ELYTE.analyze(L, { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") }, "si").filter(function (r) { return r.level && r.level !== "ok"; }).forEach(function (r) { add(r.name + (r.severity ? " (" + r.severity + ")" : "")); }); } } catch (e) {}
+    try { if (window.ELYTE && ELYTE.analyze) { var p = _raw.patient || {}; ELYTE.analyze(L, { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") }, "conventional").filter(function (r) { return r.level && r.level !== "ok"; }).forEach(function (r) { add(r.name + (r.severity ? " (" + r.severity + ")" : "")); }); } } catch (e) {}
     if (L.plt != null && L.plt < 150) add("thrombocytopenia");
     if (L.wbc != null && L.wbc > 11) add("leukocytosis"); else if (L.wbc != null && L.wbc < 4) add("leukopenia");
     if (L.hb != null && L.hb < 10) add("anaemia");
@@ -3982,6 +4100,7 @@
       case "corrext": openEvidenceLookup(); break;
       case "imghide": { var _ih = imgById(decodeURIComponent(arg)); if (_ih) _ih.hidden = !_ih.hidden; paint(); break; }
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
+      case "units": setUnitSystem(arg); recompute(_raw); paint(); break;   // rebuild alert strings in the new units, then repaint (tiles already render live via fmtLab)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
       case "roundnote": openRoundNote(arg); break;
       case "saveroundnote": saveRoundNote(arg); break;
@@ -4157,6 +4276,10 @@
     subscribe: function (fn) { if (typeof fn === "function") { _subs.push(fn); return function () { var i = _subs.indexOf(fn); if (i >= 0) _subs.splice(i, 1); }; } },
     recompute: function () { onChange(); },
     reset: function () { resetState(); },
+    // display-unit preference (Indian default / conventional / SI) — display-only; stored values stay canonical
+    setUnitSystem: function (sys) { var s = setUnitSystem(sys); recompute(_raw); onChange(); return s; },
+    unitSystem: function () { return unitPref(); },
+    _fmtLab: fmtLab, _unitToCanonical: unitToCanonical, _unitKnown: unitKnown, _unitRegistry: UNIT_REGISTRY,
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
     ingestInfusion: ingestInfusion, _bridgeInfusion: bridgeInfusion, _bridgeInfusionFromCalc: bridgeInfusionFromCalc, _installInfBridge: installInfBridge, _infWeightBridge: infWeightBridge,
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,

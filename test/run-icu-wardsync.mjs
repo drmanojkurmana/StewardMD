@@ -58,7 +58,7 @@ try {
     return JSON.stringify({ na: L.na, k: L.k, ca: L.ca, mg: L.mg, po4: L.po4, creat: L.creat, urea: L.urea, hb: L.hb, mapped: res.mappedLabs });
   `);
   const L = JSON.parse(r1);
-  ok(L.na === 128 && L.k === 6.5 && L.ca === 6.8 && L.mg === 1.22 && L.creat === 2.04, "renal/electrolytes → conventional (Indian): Na/K 128/6.5 mEq/L; Ca 1.7 mmol/L→6.8 mg/dL; Mg 0.5→1.22 mg/dL; creatinine 180 µmol/L→2.04 mg/dL");
+  ok(L.na === 128 && L.k === 6.5 && L.ca === 6.81 && L.mg === 1.22 && L.creat === 2.04, "renal/electrolytes → canonical mg/dL (Indian): Na/K 128/6.5 mEq/L; Ca 1.7 mmol/L→6.81 mg/dL; Mg 0.5→1.22 mg/dL; creatinine 180 µmol/L→2.04 mg/dL");
   ok(L.po4 === 1.24, "phosphate 0.4 mmol/L → 1.24 mg/dL (conventional)");
   ok(L.po4 !== 240, "GUARD: 'Alkaline Phosphatase' did NOT overwrite phosphate");
   ok(L.urea == null, "GUARD: 'BUN' did NOT map to urea (different scale)");
