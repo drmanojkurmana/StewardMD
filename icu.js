@@ -472,8 +472,32 @@
   // Ingest a normalised Ward-Sync / imported bundle. Conflict-SAFE: never silently
   // overwrites a clinician's Manual value — records a conflict for the clinician to resolve.
   // bundle: { patient?, source?, ts?, labs:[{test,result,units,low,high}], vitals?, abg? }
+  // Full per-patient reset: STATE + in-memory Deep/dx caches + Lab Watch view flags. Shared by
+  // ICU.reset() and the ward-patient-switch guard so NO stale patient data (weight, infusions,
+  // vitals, findings, correlation/dx caches — BUG L7 — or the Lab Watch badge/highlight/draft —
+  // BUG M5) can survive a patient switch.
+  function resetState() {
+    var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; });
+    _lwBadge = 0; _lwHighlight = null; _lwDraft = null;
+    _corrCache = {}; _corrErr = null; _corrBusy = false; _corrAnalysed = false;
+    _dxShow = false; _dxWhy = {}; _dxAdvanced = false; _dxPt = null; _corrPt = null;
+  }
+  // BUG C1 (cross-patient contamination): ingestFromWard/ingestWardHistory MERGE into live STATE
+  // (their contract is "callers reset/select the patient before syncing"). Loading a DIFFERENT
+  // ward patient must therefore start clean, or the previous patient's weight/infusions/vitals/
+  // findings/ABG bleed onto the new one. Fires ONLY on a genuine ward-patient switch (patientId
+  // present AND different from the one already loaded); a re-sync of the SAME patient still
+  // merges, and non-ward imports (Snapshot/manual/voice — no bundle.patientId) are unaffected.
+  function wardSwitchGuard(bundle) {
+    var pid = bundle && bundle.patientId;
+    if (pid == null || pid === "") return;
+    var cur = (STATE.wardSync && STATE.wardSync.patientId);
+    if (cur != null && cur !== "" && String(cur) !== String(pid)) resetState();
+  }
+
   function ingestFromWard(bundle) {
     bundle = bundle || {};
+    wardSwitchGuard(bundle);
     var source = bundle.source || "Ward Sync", ts = bundle.ts || nowTs(), applied = {}, conflicts = [], hadNew = false;
     if (bundle.patient) ingestPatient(bundle.patient);
     var labVals = {};
@@ -537,6 +561,7 @@
   // patient currently loaded in ICU — callers reset/select the patient before syncing.
   function ingestWardHistory(bundle) {
     bundle = bundle || {};
+    wardSwitchGuard(bundle);   // BUG C1: a different ward patient starts clean (see wardSwitchGuard)
     var source = bundle.source || "Ward Sync";
     if (bundle.patient) ingestPatient(bundle.patient);
     var byTs = {}, tsList = [];
@@ -1539,7 +1564,9 @@
   var LW_BASE = "smd_lab_watch";
   var _lwBadge = 0, _lwHighlight = null, _lwDraft = null;
   function lwKey() { return LW_BASE + ":" + ownerNow(); }
-  function lwPatientKey() { var p = _raw.patient || {}; return String(p._id || p.name || "cur"); }
+  // BUG H3: key on the STABLE ward patientId when available (ward patients get no _id until
+  // saved), so two patients sharing a first name — or two unnamed patients — never share a watch.
+  function lwPatientKey() { var p = _raw.patient || {}; return String(p._id || (_raw.wardSync && _raw.wardSync.patientId) || p.name || "cur"); }
   function lwLoadAll() { try { var m = JSON.parse(localStorage.getItem(lwKey())); return (m && typeof m === "object") ? m : {}; } catch (e) { return {}; } }
   function lwSaveAll(m) { try { localStorage.setItem(lwKey(), JSON.stringify(m)); } catch (e) {} }
   function lwGet() { return lwLoadAll()[lwPatientKey()] || null; }
@@ -4012,7 +4039,7 @@
     update: function (patch) { if (patch && typeof patch === "object") Object.keys(patch).forEach(function (k) { STATE[k] = patch[k]; }); },
     subscribe: function (fn) { if (typeof fn === "function") { _subs.push(fn); return function () { var i = _subs.indexOf(fn); if (i >= 0) _subs.splice(i, 1); }; } },
     recompute: function () { onChange(); },
-    reset: function () { var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; }); },
+    reset: function () { resetState(); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
     ingestInfusion: ingestInfusion, _bridgeInfusion: bridgeInfusion, _bridgeInfusionFromCalc: bridgeInfusionFromCalc, _installInfBridge: installInfBridge, _infWeightBridge: infWeightBridge,
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
