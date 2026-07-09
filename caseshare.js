@@ -89,7 +89,11 @@
       [/\b(?:mrn|uhid|uid|(?:ip|op|reg|regn|registration|hosp|hospital)\s*\.?\s*(?:no|number))[:#.\s-]*[a-z0-9]*\d/i, "hospital/MRN number"],
       [/(?:\+?91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}\b/, "phone number"],
       [/\b\d{4}\s?\d{4}\s?\d{4}\b/, "12-digit ID (Aadhaar)"],
-      [/\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b/i, "email address"]
+      [/\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b/i, "email address"],
+      // Labelled patient name — the doc is PUBLIC by code, so block an explicit patient-name
+      // label (e.g. "Patient: John Doe", "Pt - Jane R", "Patient's name: …"). Requires a PATIENT
+      // context word so clinical text like "drug name:"/"study name:" is not falsely blocked.
+      [/\b(?:patient(?:'?s)?(?:\s*name)?|\bpt)\s*[:#.\-]\s*[a-z][a-z.'-]+(?:\s+[a-z][a-z.'-]+)+/i, "labelled patient name"]
     ];
     for (var i = 0; i < checks.length; i++) if (checks[i][0].test(s)) return checks[i][1];
     return null;
