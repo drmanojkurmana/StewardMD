@@ -1962,6 +1962,21 @@
     { k: "family", g: "Family", label: "Family updated / counselling" },
     { k: "disposition", g: "Disposition", label: "Disposition / step-down plan" }
   ];
+  // Plain-text of an imaging study's AI assist summary (for the daily summary export, clearly
+  // labelled advisory). Uses the stored structured summary (rec.assist.data) when present.
+  function imgAssistText(rec) {
+    var a = rec && rec.assist; if (!a) return "";
+    var d = a.data || {}, parts = [];
+    var head = (typeof a.summary === "string" && a.summary) || (typeof d.summary === "string" && d.summary) || "";
+    if (head) parts.push(head.replace(/\s+/g, " ").trim());
+    function sec(label, arr) { if (Array.isArray(arr) && arr.length) parts.push(label + ": " + arr.map(function (x) { return String(x).replace(/\s+/g, " ").trim(); }).join("; ")); }
+    sec("Key positives", d.positives);
+    sec("Differential considerations", d.differentials);
+    sec("Correlate with", d.correlateWith);
+    sec("Urgent red flags", (Array.isArray(d.redFlags) && d.redFlags.length) ? d.redFlags : (rec.critical || []));
+    sec("Suggested next checks", d.nextChecks);
+    return parts.join("\n  ");
+  }
   function buildSummary(st) {
     var s = st || _raw, p = s.patient || {}, vits = s.vitals || [], lv = latestByTs(s.vitals), L = s.labs && s.labs.recent || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], goals = s.goals || [], infusions = s.infusions || [], out = [];   // BUG #6: latest vital by max ts, not last-pushed
     out.push("STEWARDMD — DAILY ICU SUMMARY");
@@ -1977,9 +1992,12 @@
     if (f.net24h != null || f.cumulative != null) out.push("FLUIDS: net 24h " + (f.net24h != null ? f.net24h + " mL" : "—") + ", cumulative " + (f.cumulative != null ? f.cumulative + " mL" : "—"));
     if (v.mode) out.push("VENT: " + v.mode + (v.fio2 ? ", FiO₂ " + v.fio2 + "%" : "") + (v.peep != null ? ", PEEP " + v.peep : "") + (v.tv != null ? ", TV " + v.tv + " mL" : ""));
     var imgs = (s.imaging || []).filter(function (r) { return !r.hidden && (r.inSummary || r.reviewed); });
-    // Shared handover shows the radiologist's VERBATIM impression — never an AI summary
-    // (advisory AI text must not silently supplant or relabel clinical data in an exported artifact).
+    // Handover shows the radiologist's VERBATIM impression. An AI summary is included ONLY for a
+    // study the clinician explicitly added via "Add to Daily Summary", and is CLEARLY LABELLED as
+    // advisory (not the radiologist report) — it is added alongside, never supplanting, the impression.
     if (imgs.length) out.push("\nIMPORTANT IMAGING:\n" + imgs.map(function (r) { return "• " + (r.modality || "Imaging") + (r.reportDateTime ? " (" + imgFmtDate(r.reportDateTime) + ")" : "") + ": " + String(r.impressionRaw || r.findingsRaw || r.reportRaw || "").replace(/\s+/g, " ").trim().slice(0, 240) + ((r.critical || []).length ? "  [⚠ flagged: " + r.critical.join(", ") + " — verify]" : ""); }).join("\n"));
+    var aiImgs = imgs.filter(function (r) { return r.inSummary && imgAssistText(r); });
+    if (aiImgs.length) out.push("\nAI IMAGING SUMMARY (advisory — clinician-reviewed; NOT the radiologist report):\n" + aiImgs.map(function (r) { return "• " + (r.modality || "Imaging") + ":\n  " + imgAssistText(r); }).join("\n"));
     if (alerts.length) out.push("\nACTIVE ALERTS:\n" + alerts.map(function (a) { return "• [" + a.severity.toUpperCase() + "] " + a.title + " — " + a.msg; }).join("\n"));
     var pend = ROUNDS_ITEMS.filter(function (it) { return !(rounds[it.k] && rounds[it.k].done); });
     if (pend.length) out.push("\nROUNDS PENDING: " + pend.map(function (it) { return it.label; }).join("; "));
@@ -3158,7 +3176,7 @@
       var pkt = buildImagingAiPacket(rec);
       (window.SMD_AI && SMD_AI.imagingSummary ? SMD_AI.imagingSummary(pkt) : Promise.resolve({ error: "ai-off" })).then(function (res) {
         if (!live()) return;   // superseded by a newer choice, or the modal was closed/replaced
-        if (res && res.summary && !res.error) { try { rec.assist = { mode: "ai", summary: (res.summary.summary || ""), at: nowTs() }; } catch (e) {} }
+        if (res && res.summary && !res.error) { try { rec.assist = { mode: "ai", summary: (res.summary.summary || ""), data: res.summary, at: nowTs() }; } catch (e) {} }
         shell(renderAssistResult(res, rec, "ai"));
       }).catch(function () { if (live()) shell(renderAssistResult({ error: "server" }, rec, "ai")); });
     }
@@ -3956,7 +3974,7 @@
       case "imgexpand": { var _ie = decodeURIComponent(arg); _imgOpen[_ie] = !_imgOpen[_ie]; paint(); break; }
       case "imgreview": { var _ir = imgById(decodeURIComponent(arg)); if (_ir) _ir.reviewed = !_ir.reviewed; paint(); break; }
       case "imgsummary": { var _is = imgById(decodeURIComponent(arg)); if (_is) _is.inSummary = !_is.inSummary; paint(); if (window.toast) toast(_is && _is.inSummary ? "Added to Daily Summary" : "Removed from Daily Summary"); break; }
-      case "imgsummaryadd": { var _isa = imgById(decodeURIComponent(arg)); if (_isa && !_isa.inSummary) { _isa.inSummary = true; if (window.toast) toast("Added to Daily Summary"); } paint(); break; }
+      case "imgsummaryadd": { var _isa = imgById(decodeURIComponent(arg)); if (_isa) { _isa.inSummary = true; if (window.toast) toast(_isa.assist ? "Added to Daily Summary (incl. AI summary) — open 📋 Daily Summary" : "Added to Daily Summary — open 📋 Daily Summary"); } paint(); break; }
       case "corranalyse": _corrAnalysed = true; paint(); break;
       case "corrdeep": openDeepReviewConfirm(); break;
       case "deepgo": closeForm(); runCorrelationDeep(); break;

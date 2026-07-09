@@ -170,15 +170,16 @@ try {
   ok(!RACE.showsLate && RACE.det, "late AI response does NOT replace the deterministic result the clinician selected");
   ok(RACE.mode === "deterministic", "rec.assist reflects the clinician's actual choice, not the superseded AI response");
 
-  // 7) exported Daily Summary shows the radiologist's VERBATIM impression, never the AI summary text
+  // 7) exported Daily Summary keeps the radiologist's VERBATIM impression AND, when the clinician
+  //    explicitly adds the study, includes the AI summary CLEARLY LABELLED as advisory (not the report)
   const bs = JSON.parse(await ev(`
     ICU.reset(); ICU.ingestPatient({name:"B",age:50,sex:"F"});
     ICU.ingestWardImaging({ patientId:"PB2", source:"Ward Sync", imaging:[{reportId:"B1",description:"CT Abdomen",
       report:"IMPRESSION: acute necrotising pancreatitis with portal vein thrombosis."}] });
     var r=ICU.state().imaging[0]; r.assist={mode:"ai", summary:"Imaging is suggestive of pancreatitis.", at:1}; r.inSummary=true;
     var s=ICU.summary();
-    return JSON.stringify({ verbatim: /necrotising pancreatitis with portal vein thrombosis/i.test(s), aiText: /suggestive of pancreatitis/i.test(s) });`));
-  ok(bs.verbatim && !bs.aiText, "Daily Summary uses the radiologist's verbatim impression, NOT the AI summary text");
+    return JSON.stringify({ verbatim: /necrotising pancreatitis with portal vein thrombosis/i.test(s), aiText: /suggestive of pancreatitis/i.test(s), labelled: /NOT the radiologist report/i.test(s) });`));
+  ok(bs.verbatim && bs.aiText && bs.labelled, "Daily Summary keeps the VERBATIM impression AND includes the AI summary, clearly labelled advisory (clinician explicitly added it)");
 
   // 8) deterministic 'correlate with' respects negation
   const neg = JSON.parse(await ev(`
