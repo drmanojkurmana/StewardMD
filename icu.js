@@ -49,7 +49,13 @@
     conflicts: [],              // [{ key, label, ward, manual, wardTs, manualTs }] — clinician resolves
     meta: { updated: null }
   };
-  var LS_KEY = "stewardmd_icu_state";
+  var LS_KEY = "stewardmd_icu_state";                       // legacy (unscoped) key — migrated once
+  // KI-M3: the live working buffer is PHI (name/bed/labs/imaging). Scope it PER signed-in
+  // account (like the roster) so two clinicians sharing one physical device can never read each
+  // other's open patient — isolation no longer depends on the auth-reset firing. ownerNow() is a
+  // hoisted function; at first load it is "anon" until Firebase resolves, then reconcileOwner()
+  // syncs the buffer to the resolved owner exactly once.
+  function bufKey(owner) { return LS_KEY + ":" + (owner || ownerNow()); }
 
   /* ---------------------------------------------- reactive state (Proxy) */
   // Deep proxy: any nested set/delete schedules a coalesced notify().
@@ -63,7 +69,9 @@
   }
 
   var _raw;
-  try { _raw = JSON.parse(localStorage.getItem(LS_KEY)); } catch (e) { _raw = null; }
+  // Prefer the per-owner buffer; fall back to the legacy unscoped key ONCE so existing installs
+  // don't lose their open patient on upgrade (reconcileOwner migrates it to the owner's key).
+  try { _raw = JSON.parse(localStorage.getItem(bufKey()) || localStorage.getItem(LS_KEY)); } catch (e) { _raw = null; }
   if (!_raw || typeof _raw !== "object") _raw = clone(DEFAULT_STATE);
   // backfill any missing top-level keys (forward-compat)
   Object.keys(DEFAULT_STATE).forEach(function (k) { if (_raw[k] == null) _raw[k] = clone(DEFAULT_STATE[k]); });
@@ -74,7 +82,7 @@
     try {
       recompute(_raw);                       // writes _raw.alerts on the RAW object (no re-trigger)
       _raw.meta.updated = nowTs();
-      try { localStorage.setItem(LS_KEY, JSON.stringify(_raw)); } catch (e) { if (!_persistWarned) { _persistWarned = true; try { (window.toast || function () {})("Couldn't save ICU data on this device (storage full / private mode) — kept for this session only."); } catch (x) {} } }
+      try { localStorage.setItem(bufKey(), JSON.stringify(_raw)); } catch (e) { if (!_persistWarned) { _persistWarned = true; try { (window.toast || function () {})("Couldn't save ICU data on this device (storage full / private mode) — kept for this session only."); } catch (x) {} } }
       for (var i = 0; i < _subs.length; i++) { try { _subs[i](_raw); } catch (e) {} }
     } finally { _busy = false; }
   }
@@ -3652,28 +3660,54 @@
   // React to sign-in / sign-out / account-switch. Only ever called from Firebase's
   // onAuthStateChanged (a RELIABLE, resolved signal) — never from the transient
   // "firebase not loaded yet" state — so we don't wipe a user's own work at startup.
+  // KI-M3: load THIS owner's own scoped live buffer into STATE (used on account switch / the
+  // first post-load sync). Migrates the legacy unscoped buffer if the scoped one is absent.
+  function loadOwnerBuffer(owner) {
+    try {
+      var raw = JSON.parse(localStorage.getItem(bufKey(owner)) || localStorage.getItem(LS_KEY) || "null");
+      if (raw && typeof raw === "object") Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (raw[k] != null) ? clone(raw[k]) : clone(DEFAULT_STATE[k]); });
+    } catch (e) {}
+  }
+  var _ownerBufSynced = false;   // KI-M3: has the live buffer been synced to the RESOLVED owner yet?
   function reconcileOwner() {
     var now = ownerNow(), stored = null;
     try { stored = localStorage.getItem(OWNER_KEY); } catch (e) {}
     if (stored == null) {
-      // First run under the scoped scheme: migrate the legacy shared bucket into
-      // THIS device's current owner once (data preserved, not destroyed).
+      // First run under the scoped scheme: migrate the legacy shared buckets (roster + live
+      // buffer) into THIS device's current owner once (data preserved, not destroyed).
       try {
         var legacy = localStorage.getItem(ROSTER_BASE);
         if (legacy && !localStorage.getItem(rosterKey(now))) localStorage.setItem(rosterKey(now), legacy);
         if (legacy) localStorage.removeItem(ROSTER_BASE);
+        var legacyBuf = localStorage.getItem(LS_KEY);
+        if (legacyBuf && !localStorage.getItem(bufKey(now))) localStorage.setItem(bufKey(now), legacyBuf);
+        if (legacyBuf) localStorage.removeItem(LS_KEY);
       } catch (e) {}
+      _ownerBufSynced = true;   // _raw already holds the (now migrated) buffer from init
     } else if (stored !== now) {
       if (stored === "anon" && now !== "anon") {
-        // Signing in from an anon session → claim the anon buffer/roster (keep work).
+        // Signing in from an anon session → claim the anon roster + live buffer (keep the work
+        // the clinician did before signing in).
         try { var anon = localStorage.getItem(rosterKey("anon"));
           if (anon && !localStorage.getItem(rosterKey(now))) localStorage.setItem(rosterKey(now), anon);
-          localStorage.removeItem(rosterKey("anon")); } catch (e) {}
+          localStorage.removeItem(rosterKey("anon"));
+          var anonBuf = localStorage.getItem(bufKey("anon"));
+          if (anonBuf && !localStorage.getItem(bufKey(now))) localStorage.setItem(bufKey(now), anonBuf);
+          localStorage.removeItem(bufKey("anon")); } catch (e) {}
+        _ownerBufSynced = true;   // keep current _raw (the anon work, now owned by `now`)
       } else {
-        // Real account switch or sign-out → wipe the live working buffer so the
-        // previous clinician's open patient is not visible to this account.
+        // Real account switch or sign-out → wipe the previous clinician's open patient, then
+        // load THIS owner's OWN saved buffer (so they see their work, not an empty dashboard).
         try { if (typeof ICU !== "undefined" && ICU.reset) ICU.reset(); } catch (e) {}
+        loadOwnerBuffer(now);
+        _ownerBufSynced = true;
       }
+    } else if (!_ownerBufSynced) {
+      // Same owner as last session, FIRST reconcile after load: init read the pre-auth (:anon)
+      // key, so sync to this owner's own buffer once. Never on later refreshes (a spurious
+      // same-owner auth event must not clobber in-session work).
+      loadOwnerBuffer(now);
+      _ownerBufSynced = true;
     }
     try { localStorage.setItem(OWNER_KEY, now); } catch (e) {}
     try { if (typeof ICU !== "undefined" && ICU.isOpen && ICU.isOpen()) paint(); } catch (e) {}
@@ -4067,9 +4101,16 @@
     labWatchOn: labWatchOn, openLabWatch: openLabWatch, _lwScan: lwScan, _lwGet: lwGet, _lwSet: lwSet, _lwActive: lwActive,
     _lwBadge: function () { return _lwBadge; },
     _lwStartWith: function (cfg) { cfg = cfg || {}; _lwDraft = { analytes: (cfg.analytes || []).slice(), mode: cfg.mode || "meaningful", dur: cfg.dur != null ? cfg.dur : 12, delivery: "inapp", q: "" }; lwStart(); return lwGet(); },
-    buildDischarge: buildDischarge, openDischarge: openDischarge
+    buildDischarge: buildDischarge, openDischarge: openDischarge,
+    // KI-M3 test seams (per-account live-buffer scoping)
+    _bufKey: bufKey, _reconcileOwner: reconcileOwner, _loadOwnerBuffer: loadOwnerBuffer, _resetBufSync: function () { _ownerBufSynced = false; }
   };
   window.ICU = ICU;
+
+  // KI-M3 backstop: on app resume (a shared ward device may have been handed over + re-authed
+  // while backgrounded), re-check the owner. reconcileOwner only wipes/reloads if the owner
+  // actually CHANGED — a same-owner resume is a no-op, so no in-session work is ever lost.
+  try { document.addEventListener("visibilitychange", function () { if (!document.hidden) { try { reconcileOwner(); } catch (e) {} } }); } catch (e) {}
 
   // re-render the open dashboard whenever the state changes (any source)
   _subs.push(function () { if (ICU.isOpen()) paint(); });
