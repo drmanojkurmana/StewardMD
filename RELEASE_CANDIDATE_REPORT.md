@@ -1,7 +1,7 @@
 # StewardMD — Release Candidate Report
 
-**Date:** 2026-07-09 · **RC version:** `gold287` (live in production) · **Recovery tag:** `pre-launch-qa-start`
-**Status:** ✅ **Ready for TestFlight (iOS internal) + Play Console internal testing.** ⛔ **Not cleared for public store review** — see blockers in §6.
+**Date:** 2026-07-09 (updated after the KI-H6 + KI-M3 fixes) · **RC version:** `gold289` (live in production) · **Recovery tag:** `pre-launch-qa-start`
+**Status:** ✅ **Ready for TestFlight (iOS internal) + Play Console internal testing.** ⛔ **Not cleared for public store review** — see blockers in §6 (reduced from 5 → 3 code/decision items; KI-H6 and KI-M3 now fixed & live).
 
 ---
 
@@ -14,8 +14,10 @@
 | 3 | **#315** — PR D, a11y + store readiness | `home.js`, `index.html`, `caseshare.js`, `Info.plist` + mobile-audit test | ✅ merged (sw.js resolved → gold287) |
 | 4 | **#312** — build-www: bundle `vendor/` (pdf.js) | `scripts/build-www.sh` | ✅ merged |
 | 5 | **#316** — pre-launch QA report | `PRE_LAUNCH_QA_REPORT.md` | ✅ merged |
+| 6 | **#318** — KI-H6, PHI export consent gate (Share + Print) | `icu.js` + test | ✅ merged (→ gold288) |
+| 7 | **#319** — KI-M3, account-scoped live ICU buffer | `icu.js` + test | ✅ merged (sw.js resolved → gold289) |
 
-**Merge-gate checks confirmed before each merge:** CI green (Cloudflare Pages), **no clinical-engine / diagnosis-scoring / formula change**, no privacy regression (PRs *improve* cross-patient isolation and the public-share PHI scan), no unresolved conflicts. Version conflicts resolved by **keeping the highest** value (final CACHE = `gold287`).
+**Merge-gate checks confirmed before each merge:** CI green (Cloudflare Pages), **no clinical-engine / diagnosis-scoring / formula change**, no privacy regression (every PR *improves* isolation / PHI handling), no unresolved conflicts. Version conflicts resolved by **keeping the highest** value (final CACHE = `gold289`).
 
 **Verified no engine/app.js/auth files touched by the release:** `git diff pre-launch-qa-start..main` includes **none** of `reasoning.js`, `kb/*`, `app.js`, `antibiogram-data.js`, `native-auth.js`.
 
@@ -23,10 +25,10 @@
 
 ## 2. Deployed version
 
-- **Production (Cloudflare Pages, from `main`):** `sw.js` CACHE = **`stewardmd-gold287`** — confirmed live at `https://stewardmd.in`.
-- **Asset versions on prod:** `icu.js?v=gold285`, `calculators.js?v=gold286`, `home.js?v=gold287`, `caseshare.js?v=gold287` (each a distinct cache-busting URL; CACHE ≥ all).
-- **Deployed-fix spot checks (live):** `icu.js` contains `wardSwitchGuard` (C1) ✅ · `calculators.js` contains the MELD guard ✅ · `home.js` uses `openModal('privacyModal')` and the broken `href="/privacy"` is gone ✅ · `Info.plist` has `ITSAppUsesNonExemptEncryption=false` ✅.
-- **Native bundles re-synced** (`npm run build:www` → `npx cap copy ios` + `android`): both `ios/App/App/public` and `android/app/src/main/assets/public` carry `gold287`, the C1 fix, `home.js@gold287`, and the bundled `vendor/pdfjs/`.
+- **Production (Cloudflare Pages, from `main`):** `sw.js` CACHE = **`stewardmd-gold289`** — confirmed live at `https://stewardmd.in` (CF build `completed/success`).
+- **Asset versions on prod:** `icu.js?v=gold289`, `calculators.js?v=gold286`, `home.js?v=gold287`, `caseshare.js?v=gold287` (each a distinct cache-busting URL; CACHE ≥ all).
+- **Deployed-fix spot checks (live):** `icu.js` contains `wardSwitchGuard` (C1) ✅, `phiExportConfirm` (KI-H6) ✅, and per-owner `bufKey` (KI-M3) ✅ · `calculators.js` contains the MELD guard ✅ · `home.js` uses `openModal('privacyModal')` and the broken `href="/privacy"` is gone ✅ · `Info.plist` has `ITSAppUsesNonExemptEncryption=false` ✅.
+- **Native bundles re-synced** (`npm run build:www` → `npx cap copy ios` + `android`): both `ios/App/App/public` and `android/app/src/main/assets/public` carry `gold289`, all fixes above, and the bundled `vendor/pdfjs/`.
 
 ---
 
@@ -51,13 +53,18 @@
 
 ---
 
-## 4. Remaining known issues (open, documented)
+## 4. Known issues
 
+### ✅ Fixed & live since the last report (gold288/289)
+| ID | Sev | Issue | Fix (merged + live) |
+|----|-----|-------|------|
+| **KI-H6** | High | ICU "Share"/print egressed full PHI with no consent gate. | One-tap consent gate on Share + Print (`phiExportConfirm`, `icu.js`) — nothing egresses until confirmed. **PR #318, gold288.** Test `run-icu-phi-share.mjs` (7 checks). |
+| **KI-M3** | Med | Live ICU buffer not account-scoped → shared-device cross-clinician read. | Per-account buffer key (`stewardmd_icu_state:<owner>`) + owner-aware reconcile + resume backstop (`icu.js`). **PR #319, gold289.** Test `run-icu-buffer-scope.mjs` (9 checks). |
+
+### Still open (documented)
 | ID | Sev | Issue | Plan |
 |----|-----|-------|------|
 | KI-golden | — | `run-golden` + `run-main-engine` RED from a **pre-existing** differential re-rank (HLH/TTP; "11 changed, 0 new"). Not introduced here; no engine file was touched. | **Deliberate clinical rebaseline** by the engine owner (public-store blocker). |
-| KI-H6 | High | ICU "Share"/print egress full PHI (name/bed/labs/imaging) with no explicit consent gate. | Add a one-time "contains patient-identifiable data" confirm + optional de-identified variant (`icu.js`). |
-| KI-M3 | Med | Live ICU buffer `stewardmd_icu_state` is **not account-scoped** + unencrypted → cross-clinician read on a shared ward device if the auth-reset doesn't fire. | Namespace per `ownerNow()` + clear on `visibilitychange` (`icu.js`). |
 | KI-M4 | Med | No per-infusion **stop/delete** → a discontinued pressor lingers in banner/summary/discharge. | Add delete/edit per infusion line (`icu.js`). |
 | KI-M6 | Med | DDI engine silently drops unrecognized drugs → "no issue" while an un-parsed drug is unchecked. | Surface "N medicine(s) not recognised — not checked" (`interactions.js`/`medlist.js`). |
 | KI-M8 | Med | Vasopressor calc assumes **70 kg** silently when weight unset (frozen `app.js`; on-screen dose only — stored record uses canonical weight). | Owner of `app.js` to add "assuming 70 kg — enter weight" warning / block. |
@@ -98,21 +105,20 @@ Emulation covered layout only; the following **must be run on a physical iPhone 
 
 ## 6. Public-store blockers (must clear before public App Store / Play Store submission)
 
-1. ⛔ **Golden clinical rebaseline decision** — `run-golden`/`run-main-engine` are red on a pre-existing differential re-rank (HLH/TTP). The clinical owner must confirm the ranking is intended and rebaseline the snapshots deliberately (this is a clinical call, not a code fix). CI stays red until then.
+**Cleared since the last report:** ✅ ~~KI-H6 PHI share/print consent gate~~ (PR #318, live) · ✅ ~~KI-M3 live-buffer account-scoping~~ (PR #319, live). **3 hard blockers remain (was 5):**
+
+1. ⛔ **Golden clinical rebaseline decision** — `run-golden`/`run-main-engine` are red on a pre-existing differential re-rank (HLH/TTP). The clinical owner must confirm the ranking is intended and rebaseline the snapshots deliberately (a clinical call, not a code fix). CI stays red until then.
 2. ⛔ **GHIS/Ward Sync reviewer demo credentials** — the feature ships enabled and needs hospital login; a store reviewer cannot pass it (Apple 2.1 / Play data-safety). Supply demo creds in App Review notes **or** default `smd_ghis_ward` off for store builds.
 3. ⛔ **Real-device iPhone + Android smoke tests** — §5 checklist, including Android hardware back button, on-device keyboard overlap, and safe-area on a notched device.
-4. ⛔ **PHI share/print consent gate (KI-H6)** — add before public launch.
-5. ⛔ **Live ICU buffer account-scoping (KI-M3)** — important for shared ward devices; add before public launch.
-6. ⚠️ **Per-infusion stop/delete (KI-M4)** — recommended before public launch (handover-safety).
-7. ⚠️ **Unrecognized-drug warning in DDI (KI-M6)** — recommended.
-8. ⚠️ **Silent 70 kg vasopressor fallback (KI-M8, frozen app.js)** — owner decision; recommended before public launch.
+
+**Recommended (not hard blockers):** ⚠️ Per-infusion stop/delete (KI-M4) · ⚠️ Unrecognized-drug warning in DDI (KI-M6) · ⚠️ Silent 70 kg vasopressor fallback (KI-M8, frozen `app.js` — owner decision) · ⚠️ Generic error text (KI-M7) · ⚠️ Low a11y/labeling batch.
 
 ---
 
 ## 7. Release-readiness verdict
 
-- **TestFlight (iOS internal):** ✅ **READY** — merge complete, prod deployed `gold287`, native synced, critical bug fixed + regression-verified. Build the iOS archive from the synced project and upload to TestFlight for internal testers.
+- **TestFlight (iOS internal):** ✅ **READY** — merges complete, prod deployed `gold289`, native synced, critical bug + both PHI blockers fixed & regression-verified. Build the iOS archive from the synced project and upload to TestFlight for internal testers.
 - **Play Console internal testing:** ✅ **READY** — same basis; build the Android app bundle from the synced project and upload to the internal track.
-- **Public App Store / Play Store review:** ⛔ **HOLD** until blockers 1–5 in §6 are cleared (and 6–8 addressed/accepted).
+- **Public App Store / Play Store review:** ⛔ **HOLD** until the **3** remaining blockers in §6 are cleared (recommended items addressed/accepted).
 
 *No public submission has been made. The critical cross-patient defect is fixed and live; the remaining items are transparently listed above with owners/plans.*
