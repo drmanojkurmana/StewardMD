@@ -20,6 +20,17 @@
   var C = window.Capacitor;
   var native = !!(C && (typeof C.isNativePlatform === "function" ? C.isNativePlatform() : (C.platform && C.platform !== "web")));
 
+  // Route a notification's url. A background lab-watch alert deep-links to /?ghisPatient=<id>;
+  // when Ward Sync is loaded, open that patient in-place (no reload). Otherwise navigate — the
+  // ghis-ward deep-link handler opens it on load (covers cold-start taps).
+  function routeUrl(url) {
+    try {
+      var m = url && String(url).match(/[?&]ghisPatient=([^&]+)/);
+      if (m && m[1] && window.GHIS && window.GHIS.openPatientById) { window.GHIS.openPatientById(decodeURIComponent(m[1])); return; }
+    } catch (e) {}
+    try { if (url && url !== "/") window.location.href = url; } catch (e) {}
+  }
+
   /* ── Immediate local notification (for the foreground watch-lab poller) ──────
    * The watch-lab feature polls GHIS while the app is active and calls this when a
    * NEW lab is reported for a patient the signed-in doctor is watching. It is the
@@ -42,7 +53,7 @@
       // web fallback
       if (typeof Notification !== "undefined" && Notification.permission === "granted") {
         var n = new Notification(title || "StewardMD", { body: body || "", data: { url: url || "/" } });
-        n.onclick = function () { try { if (url && url !== "/") window.location.href = url; window.focus(); } catch (e) {} };
+        n.onclick = function () { try { routeUrl(url); window.focus(); } catch (e) {} };
         return;
       }
       if (window.SMD_toast) window.SMD_toast((title ? title + " — " : "") + (body || ""));
@@ -99,7 +110,7 @@
       try {
         var data = a && a.notification && a.notification.data;
         var url = (data && (data.url || data.URL)) || "/";
-        if (url && url !== "/") window.location.href = url;
+        routeUrl(url);
       } catch (x) {}
     });
   }
@@ -143,7 +154,7 @@
       C.Plugins.LocalNotifications.addListener("localNotificationActionPerformed", function (a) {
         try {
           var url = a && a.notification && a.notification.extra && a.notification.extra.url;
-          if (url && url !== "/") window.location.href = url;
+          routeUrl(url);
         } catch (x) {}
       });
     }

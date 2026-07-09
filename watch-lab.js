@@ -42,6 +42,8 @@
       return call("enable", "POST", { ghisUserId: ghisUserId, ghisPassword: ghisPassword, patient: patient, consent: true });
     },
     enableWithConsent: function (patient) { return openConsent(patient); },
+    openManager: function () { return openManager(); },
+    count: function () { return call("status").then(function (s) { return ((s && s.watching) || []).length; }).catch(function () { return 0; }); },
   };
   window.SMD_WATCH = SMD_WATCH;
 
@@ -55,8 +57,8 @@
       var prefillUser = "";
       try { prefillUser = (window.GHIS && GHIS.getUserId && GHIS.getUserId()) || ""; } catch (e) {}
       wrap.innerHTML =
-        '<div role="dialog" aria-label="Background lab alerts" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25)">'
-        + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:6px">Background lab alerts</div>'
+        '<div role="dialog" aria-label="Lab Watch 24/7" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25)">'
+        + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:6px">Lab Watch 24/7</div>'
         + '<div style="font:500 12.5px/1.55 var(--sans,system-ui);color:var(--slate,#5a7184)">'
         + 'Get a notification when a <b>new lab is reported</b> for <b>' + esc(patient && patient.name || "this patient") + '</b> — even when the app is closed.'
         + '</div>'
@@ -85,9 +87,67 @@
         if (!user || !pass) { toast("Enter your GHIS User ID and password."); return; }
         var go = wrap.querySelector("#smdWatchGo"); go.disabled = true; go.textContent = "Enabling…";
         SMD_WATCH.enable(user, pass, patient)
-          .then(function (r) { toast("Background lab alerts on ✅"); close({ ok: true, watching: r.watching }); })
+          .then(function (r) { toast("Lab Watch 24/7 on ✅"); close({ ok: true, watching: r.watching }); })
           .catch(function (e) { go.disabled = false; go.textContent = "Enable alerts"; toast("Couldn't enable: " + (e.message || "try again")); });
       });
+    });
+  }
+  // ── watched-patients manager (view / remove; adding a patient happens from Ward Sync
+  //    or the ICU Lab Watch sheet, both of which open the consent flow above). ───────────
+  function sinceLabel(ts) {
+    try {
+      var d = Date.now() - ts; if (!(d >= 0)) return "";
+      if (d < 36e5) return Math.max(1, Math.round(d / 6e4)) + "m ago";
+      if (d < 864e5) return Math.round(d / 36e5) + "h ago";
+      return Math.round(d / 864e5) + "d ago";
+    } catch (e) { return ""; }
+  }
+  function openManager() {
+    return new Promise(function (resolve) {
+      if (!(window.SMD_AUTH && window.SMD_AUTH.currentUser)) { toast("Sign in with your Google/Apple account to see watched patients."); resolve({ ok: false }); return; }
+      if (document.getElementById("smdWatchMgr")) { resolve({ ok: false }); return; }
+      var wrap = document.createElement("div");
+      wrap.id = "smdWatchMgr";
+      wrap.setAttribute("style", "position:fixed;inset:0;z-index:20001;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center");
+      wrap.innerHTML =
+        '<div role="dialog" aria-label="Lab Watch 24/7" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25);max-height:82vh;display:flex;flex-direction:column">'
+        + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:4px">🔔 Lab Watch 24/7</div>'
+        + '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:12px">You’ll be notified when a new lab is reported — <b>even when StewardMD is closed</b>. Add a patient from <b>Ward Sync</b> → open the patient → <b>Lab Watch 24/7</b>.</div>'
+        + '<div id="smdWatchMgrBody" style="overflow-y:auto;flex:1;min-height:44px;font:500 13px var(--sans,system-ui);color:var(--slate,#5a7184);text-align:center;padding:22px 4px">Loading…</div>'
+        + '<button id="smdWatchMgrDone" style="margin-top:14px;padding:12px;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans,system-ui);cursor:pointer">Done</button>'
+        + '</div>';
+      document.body.appendChild(wrap);
+      var close = function () { try { wrap.remove(); } catch (e) {} resolve({ ok: true }); };
+      wrap.addEventListener("click", function (e) { if (e.target === wrap) close(); });
+      wrap.querySelector("#smdWatchMgrDone").addEventListener("click", close);
+      var bodyEl = wrap.querySelector("#smdWatchMgrBody");
+      function render(list) {
+        if (!bodyEl) return;
+        if (!list || !list.length) {
+          bodyEl.setAttribute("style", "overflow-y:auto;flex:1;min-height:44px;font:500 12.5px/1.6 var(--sans,system-ui);color:var(--slate,#5a7184);text-align:center;padding:22px 8px");
+          bodyEl.innerHTML = 'No patients are under background watch yet.<br>Open a patient in <b>Ward Sync</b> → tap <b>🔔 Lab Watch 24/7</b>.';
+          return;
+        }
+        bodyEl.setAttribute("style", "overflow-y:auto;flex:1;min-height:44px;text-align:left");
+        bodyEl.innerHTML = list.map(function (p) {
+          return '<div style="display:flex;align-items:center;gap:10px;padding:11px 2px;border-bottom:1px solid var(--line,#e4eae8)">'
+            + '<div style="flex:1;min-width:0"><div style="font:700 14px var(--sans,system-ui);color:var(--ink,#0f172a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + esc(p.name || p.patientId) + '</div>'
+            + '<div style="font:500 11.5px var(--sans,system-ui);color:var(--slate,#5a7184)">' + esc(p.patientId) + (p.since ? ' · added ' + esc(sinceLabel(p.since)) : '') + '</div></div>'
+            + '<button class="smdw-rm" data-pid="' + esc(p.patientId) + '" style="flex:0 0 auto;padding:7px 12px;border:1px solid var(--line,#e4eae8);border-radius:9px;background:var(--panel,#fff);color:#c0392b;font:700 12.5px var(--sans,system-ui);cursor:pointer">Remove</button>'
+            + '</div>';
+        }).join("");
+        Array.prototype.forEach.call(bodyEl.querySelectorAll(".smdw-rm"), function (btn) {
+          btn.addEventListener("click", function () {
+            var pid = btn.getAttribute("data-pid"); btn.disabled = true; btn.textContent = "…";
+            SMD_WATCH.remove(pid)
+              .then(function (r) { render((r && r.watching) || []); })
+              .catch(function () { btn.disabled = false; btn.textContent = "Remove"; toast("Couldn’t remove — try again."); });
+          });
+        });
+      }
+      SMD_WATCH.status()
+        .then(function (s) { render((s && s.watching) || []); })
+        .catch(function (e) { if (bodyEl) bodyEl.innerHTML = 'Couldn’t load: ' + esc((e && e.message) || "error"); });
     });
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }

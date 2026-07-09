@@ -6,9 +6,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    // Screen orientation. The app is portrait-locked everywhere; the antibiogram grid asks
+    // to unlock via the AppOrientation plugin, which posts "SMDSetOrientation". UIKit queries
+    // this mask through supportedInterfaceOrientationsFor to decide what rotations to allow.
+    static var orientationMask: UIInterfaceOrientationMask = .portrait
+
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return AppDelegate.orientationMask
+    }
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        NotificationCenter.default.addObserver(
+            forName: Notification.Name("SMDSetOrientation"),
+            object: nil,
+            queue: .main
+        ) { note in
+            guard let raw = note.userInfo?["mask"] as? UInt else { return }
+            AppDelegate.orientationMask = UIInterfaceOrientationMask(rawValue: raw)
+            AppDelegate.applyOrientation()
+        }
         return true
+    }
+
+    // Force UIKit to re-evaluate and rotate to match the new mask.
+    static func applyOrientation() {
+        if #available(iOS 16.0, *) {
+            UIApplication.shared.connectedScenes.forEach { scene in
+                if let windowScene = scene as? UIWindowScene {
+                    windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: AppDelegate.orientationMask)) { _ in }
+                }
+            }
+            UIApplication.shared.connectedScenes
+                .compactMap { ($0 as? UIWindowScene)?.keyWindow?.rootViewController }
+                .forEach { $0.setNeedsUpdateOfSupportedInterfaceOrientations() }
+        } else {
+            // Legacy fallback: nudge the device orientation, then let UIKit re-query the mask.
+            let value = AppDelegate.orientationMask == .portrait
+                ? UIInterfaceOrientation.portrait.rawValue
+                : UIInterfaceOrientation.landscapeRight.rawValue
+            UIDevice.current.setValue(value, forKey: "orientation")
+            UIViewController.attemptRotationToDeviceOrientation()
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -44,6 +82,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Feel free to add additional processing here, but if you want the App API to support
         // tracking app url opens, make sure to keep this call
         return ApplicationDelegateProxy.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
+    }
+
+    // Remote push (APNs) registration — REQUIRED by @capacitor/push-notifications.
+    // iOS delivers the APNs device token (or a failure) to the app delegate; forward
+    // both to Capacitor's proxy so the PushNotifications plugin fires its JS
+    // "registration" / "registrationError" events. Without this the token never
+    // reaches native-push.js, so the device silently never registers for push.
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        NotificationCenter.default.post(name: .capacitorDidRegisterForRemoteNotifications, object: deviceToken)
+    }
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        NotificationCenter.default.post(name: .capacitorDidFailToRegisterForRemoteNotifications, object: error)
     }
 
 }

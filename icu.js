@@ -1687,6 +1687,7 @@
   function lwRemaining(w) { if (!w || !w.expiresAt) return w && w.untilDischarge ? "until discharge" : "until you stop"; var ms = w.expiresAt - nowTs(); return ms <= 0 ? "expired" : fmtDur(ms) + " left"; }
 
   function lwStart() {
+    if (!lwHasPatient()) { if (window.toast) toast("Load a patient first — open Ward Sync → a patient → Load into ICU, then start Lab Watch."); return; }
     var d = _lwDraft || {}, analytes = (d.analytes || []).slice();
     if (!analytes.length) { if (window.toast) toast("Pick at least one lab to watch."); return; }
     var mode = d.mode || "meaningful", dur = (d.dur != null ? d.dur : 12), delivery = d.delivery || "inapp";
@@ -1712,6 +1713,27 @@
   // Clear an "until discharge" watch when a discharge summary is generated.
   function lwOnDischarge() { var w = lwGet(); if (w && w.untilDischarge) { lwSet(null); } }
 
+  // Bridge to the closed-app background watch (SMD_WATCH, watch-lab.js). The Lab Watch above is
+  // per-analyte and fires only while the app is open; this registers a server-side watch that
+  // alerts even when the app is fully closed. Consent-gated; needs a signed-in Google/Apple
+  // account and a Ward-Sync-linked patient (so the server can poll GHIS for new labs).
+  function lwWardPid() { try { return (_raw.wardSync && _raw.wardSync.patientId) || ""; } catch (e) { return ""; } }
+  function lwHasPatient() { var p = _raw.patient || {}; return !!(p._id || lwWardPid() || (p.name && String(p.name).trim())); }
+  function lwBgAvailable() { return !!(window.SMD_WATCH && window.SMD_AUTH && window.SMD_AUTH.currentUser && lwWardPid()); }
+  function lwEnableBackground() {
+    if (!(window.SMD_WATCH && window.SMD_AUTH && window.SMD_AUTH.currentUser)) { if (window.toast) toast("Sign in with your Google/Apple account for alerts when the app is closed."); return; }
+    var pid = lwWardPid();
+    if (!pid) { if (window.toast) toast("Open this patient from Ward Sync first — background alerts poll GHIS."); return; }
+    var p = _raw.patient || {}, name = p.name || (_raw.wardSync && _raw.wardSync.name) || "patient";
+    try { if (window.SMD_enableNativePush) window.SMD_enableNativePush(); } catch (e) {}
+    try {
+      window.SMD_WATCH.enableWithConsent({ patientId: pid, episodeId: (_raw.wardSync && _raw.wardSync.episodeId) || undefined, name: name })
+        .then(function (r) { if (r && r.ok && window.toast) toast("Background alerts on — you’ll be alerted even when the app is closed."); })
+        .catch(function () {});
+    } catch (e) {}
+  }
+  function lwOpenManager() { if (window.SMD_WATCH && window.SMD_WATCH.openManager) window.SMD_WATCH.openManager(); else if (window.toast) toast("Sign in to view watched patients."); }
+
   function lwGroupChip(grp, sel) {
     var inGrp = grp.keys.filter(function (k) { return TREND_INTERP[k]; });
     var all = inGrp.length && inGrp.every(function (k) { return sel.indexOf(k) >= 0; });
@@ -1719,6 +1741,12 @@
   }
   function lwListHTML(d) {
     var sel = d.analytes || [], q = (d.q || "").trim();
+    var total = 0; TREND_GROUPS.forEach(function (grp) { grp.keys.forEach(function (k) { if (TREND_INTERP[k]) total++; }); });
+    var ctrl = '<div class="icu-lw-allrow" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">' +
+      '<button class="icu-lw-grpall' + (total && sel.length >= total ? " on" : "") + '" data-icu-act="lwall">' + (total && sel.length >= total ? "✓ " : "") + 'Select all</button>' +
+      '<button class="icu-lw-grpall" data-icu-act="lwclear">Clear</button>' +
+      '<span style="margin-left:auto;font:600 11.5px var(--font,system-ui);color:var(--muted,#94a3b8)">' + sel.length + ' / ' + total + ' selected</span>' +
+      '</div>';
     var groups = TREND_GROUPS.map(function (grp) {
       var keys = grp.keys.filter(function (k) { return TREND_INTERP[k] && lwAnalyteMatch(k, q); });
       if (!keys.length) return "";
@@ -1728,20 +1756,26 @@
       }).join("");
       return '<div class="icu-lw-grp"><div class="icu-lw-grp-h">' + lwGroupChip(grp, sel) + '</div><div class="icu-lw-chips">' + chips + '</div></div>';
     }).join("");
-    return groups || '<div class="icu-lw-none">No lab matches “' + esc(q) + '”.</div>';
+    return ctrl + (groups || '<div class="icu-lw-none">No lab matches “' + esc(q) + '”.</div>');
   }
   function lwSetupHTML(d) {
     var seg = function (act, val, cur, label) { return '<button class="icu-lw-seg' + (String(cur) === String(val) ? " on" : "") + '" data-icu-act="' + act + ':' + val + '">' + esc(label) + '</button>'; };
+    var bgRow = '<div class="icu-lw-bg">' +
+      (lwBgAvailable()
+        ? '<button class="icu-btn ghost" data-icu-act="lwbg">' + ico("bell", "🔔") + ' Turn on Lab Watch 24/7 (even when closed)</button>'
+        : '<div class="icu-lw-hint">Tip: open this patient from Ward Sync (signed in) to also get alerts when the app is closed.</div>') +
+      '<button class="icu-btn ghost" data-icu-act="lwmgr">View Lab Watch 24/7 list</button></div>';
     return '<div class="icu-sheet icu-lw-sheet"><h3>' + ico("bell", "🔔") + ' Lab Watch</h3>' +
-      '<p class="icu-doc-sub">Watch this patient’s labs. When Ward Sync brings a new result you’ll get an in-app alert. <b>In-app monitoring — active while StewardMD is open.</b></p>' +
+      '<p class="icu-doc-sub">Watch this patient’s labs. When Ward Sync brings a new result you’ll get an alert here in the app. For alerts even when StewardMD is fully closed, use <b>Background alerts</b> below.</p>' +
       '<input id="icuLwq" type="search" autocomplete="off" placeholder="Search a lab — e.g. potassium, creatinine, CRP…" value="' + esc(d.q || "") + '" style="width:100%;box-sizing:border-box;font:600 15px var(--font);padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);margin-bottom:10px">' +
       '<div id="icuLwList" class="icu-lw-list">' + lwListHTML(d) + '</div>' +
       '<div class="icu-lw-opts">' +
         '<div class="icu-lw-opt"><label>Alert me on</label><div class="icu-lw-segs">' + seg("lwmode", "critical", d.mode, "Critical only") + seg("lwmode", "meaningful", d.mode, "Meaningful changes") + seg("lwmode", "every", d.mode, "Every result") + '</div></div>' +
         '<div class="icu-lw-opt"><label>Keep watching</label><div class="icu-lw-segs">' + seg("lwdur", "6", d.dur, "6 h") + seg("lwdur", "12", d.dur, "12 h") + seg("lwdur", "24", d.dur, "24 h") + seg("lwdur", "stop", d.dur, "Until I stop") + seg("lwdur", "discharge", d.dur, "Until discharge") + '</div></div>' +
         '<div class="icu-lw-opt"><label>Alerts</label><div class="icu-lw-segs">' + seg("lwdeliv", "inapp", d.delivery, "In-app") + seg("lwdeliv", "both", d.delivery, "In-app + device") + '</div>' +
-          ((d.delivery === "both" || d.delivery === "device") ? '<div class="icu-lw-hint">Device alerts fire while the app is open; you’ll be asked for permission when you start. Background alerts when the app is closed are coming later.</div>' : '') + '</div>' +
+          ((d.delivery === "both" || d.delivery === "device") ? '<div class="icu-lw-hint">Device banners appear while the app is open (you’ll be asked for permission once). For alerts when the app is fully closed, turn on <b>Background alerts</b> below.</div>' : '') + '</div>' +
       '</div>' +
+      bgRow +
       '<div class="icu-lw-count">' + ((d.analytes || []).length) + ' lab' + ((d.analytes || []).length === 1 ? '' : 's') + ' selected · ' + lwModeLabel(d.mode || "meaningful") + ' · ' + lwDurLabel(d.dur != null ? d.dur : 12) + '</div>' +
       '<button class="icu-btn" data-icu-act="lwstart">' + ico("bell", "🔔") + ' Start Lab Watch</button>' +
       (lwGet() ? '<button class="icu-btn ghost" data-icu-act="labwatch">Back</button>' : '<button class="icu-btn ghost" data-icu-act="lwcancel">Cancel</button>') + '</div>';
@@ -1761,7 +1795,9 @@
     return '<div class="icu-sheet icu-lw-sheet"><h3>' + ico("bell", "🔔") + ' Lab Watch ' + state + '</h3>' +
       '<div class="icu-lw-meta">' + sel.length + ' lab' + (sel.length === 1 ? '' : 's') + ' · ' + esc(lwModeLabel(w.mode)) + ' · ' + esc(lwRemaining(w)) + ' · ' + (w.delivery === "both" ? "in-app + device" : "in-app") + '</div>' +
       '<div class="icu-lw-tags">' + chips + '</div>' +
-      '<div class="icu-lw-banner">In-app monitoring ' + (expired ? 'has ended' : w.paused ? 'is paused' : 'is active') + ' — alerts appear while StewardMD is open.</div>' +
+      '<div class="icu-lw-banner">In-app monitoring ' + (expired ? 'has ended' : w.paused ? 'is paused' : 'is active') + ' — alerts appear while StewardMD is open. For alerts when it’s fully closed, use Background alerts.</div>' +
+      (lwBgAvailable() ? '<button class="icu-btn ghost" data-icu-act="lwbg">' + ico("bell", "🔔") + ' Turn on Lab Watch 24/7 (even when closed)</button>' : '') +
+      '<button class="icu-btn ghost" data-icu-act="lwmgr">View Lab Watch 24/7 list</button>' +
       '<div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Activity</div>' + lwActivityHTML(w) +
       '<div class="icu-lw-btns">' +
         (expired ? '<button class="icu-btn" data-icu-act="lwedit">Restart</button>' : '<button class="icu-btn" data-icu-act="lwpause">' + (w.paused ? "Resume" : "Pause") + '</button>') +
@@ -2373,6 +2409,7 @@
         '<button class="icu-chip" data-icu-act="savept">' + ico("save", "💾") + '<span>Save</span></button>' +
         '<button class="icu-chip" data-icu-act="patients">' + ico("folder", "📋") + '<span>Patients' + (n ? " (" + n + ")" : "") + '</span></button>' +
         (labWatchOn() ? '<button class="icu-chip' + (lwActive() ? " icu-chip-lw" : "") + '" data-icu-act="labwatch" aria-label="Lab Watch — monitor new labs for this patient">' + ico("bell", "🔔") + '<span>' + (lwActive() ? "Watching" : "Lab Watch") + (_lwBadge ? ' <b class="icu-lw-badge">' + _lwBadge + '</b>' : "") + '</span></button>' : "") +
+        (labWatchOn() ? '<button class="icu-chip" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — background lab alerts across your account">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>' : "") +
         '<button class="icu-chip" data-icu-act="sharecase">' + ico("share", "📤") + '<span>Share</span></button>' +
         '<button class="icu-chip" data-icu-act="clearfindings">' + ico("trash", "🧹") + '<span>Clear</span></button>' +
         '<button class="icu-chip icu-chip-primary" data-icu-act="newpt">' + ico("plus", "＋") + '<span>New</span></button>' +
@@ -2514,10 +2551,10 @@
     if (!rootEl) return;
     // Camera FAB is contextual — only where snapping a monitor/lab/ABG/vent is relevant.
     var fab = isMonWs() ? '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' : "";
-    // Prominent, always-visible Lab Watch entry (a labelled FAB, like the Snapshot button) so
-    // the feature is easy to find — shown whenever there's a patient/labs to watch.
-    var watchFab = (labWatchOn() && hasTrendPatient())
-      ? '<button id="icuWatch" class="' + (lwActive() ? "on" : "") + '" data-icu-act="labwatch" aria-label="Watch labs — alert me on new results">' + ico("bell", "🔔") + '<span>' + (lwActive() ? "Watching labs" : "Watch labs") + '</span>' + (_lwBadge ? '<b class="icu-lw-fab-b">' + _lwBadge + '</b>' : "") + '</button>'
+    // Prominent, ALWAYS-visible "Lab Watch 24/7" FAB (sits just above the Snapshot camera button)
+    // that opens the account's background watched-patients list — alerts even when the app is closed.
+    var watchFab = labWatchOn()
+      ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>'
       : "";
     rootEl.innerHTML = renderHeader() + renderBody() + watchFab + fab + renderTabBar();
   }
@@ -3896,8 +3933,12 @@
       case "lwtog": { var _lk = arg; _lwDraft.analytes = _lwDraft.analytes || []; var _li = _lwDraft.analytes.indexOf(_lk); if (_li >= 0) _lwDraft.analytes.splice(_li, 1); else _lwDraft.analytes.push(_lk); openLabWatch(); break; }
       case "lwgrp": { var _grp = null; for (var _gi = 0; _gi < TREND_GROUPS.length; _gi++) if (TREND_GROUPS[_gi].id === arg) _grp = TREND_GROUPS[_gi]; if (_grp) { _lwDraft.analytes = _lwDraft.analytes || []; var _ks = _grp.keys.filter(function (k) { return TREND_INTERP[k]; }); var _all = _ks.every(function (k) { return _lwDraft.analytes.indexOf(k) >= 0; }); if (_all) _lwDraft.analytes = _lwDraft.analytes.filter(function (k) { return _ks.indexOf(k) < 0; }); else _ks.forEach(function (k) { if (_lwDraft.analytes.indexOf(k) < 0) _lwDraft.analytes.push(k); }); openLabWatch(); } break; }
       case "lwmode": _lwDraft.mode = arg; openLabWatch(); break;
-      case "lwdur": _lwDraft.dur = (arg === "stop" ? 0 : arg === "discharge" ? "discharge" : +arg); openLabWatch(); break;
+      case "lwdur": _lwDraft.dur = (arg === "stop" ? "stop" : arg === "discharge" ? "discharge" : +arg); openLabWatch(); break;
+      case "lwall": { _lwDraft.analytes = []; TREND_GROUPS.forEach(function (g) { g.keys.forEach(function (k) { if (TREND_INTERP[k] && _lwDraft.analytes.indexOf(k) < 0) _lwDraft.analytes.push(k); }); }); openLabWatch(); break; }
+      case "lwclear": _lwDraft.analytes = []; openLabWatch(); break;
       case "lwdeliv": _lwDraft.delivery = arg; openLabWatch(); break;
+      case "lwbg": lwEnableBackground(); break;
+      case "lwmgr": lwOpenManager(); break;
       case "lwstart": lwStart(); break;
       case "lwcancel": _lwDraft = null; closeForm(); break;
       case "lwstop": lwStop(); break;
