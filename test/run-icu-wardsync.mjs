@@ -58,8 +58,8 @@ try {
     return JSON.stringify({ na: L.na, k: L.k, ca: L.ca, mg: L.mg, po4: L.po4, creat: L.creat, urea: L.urea, hb: L.hb, mapped: res.mappedLabs });
   `);
   const L = JSON.parse(r1);
-  ok(L.na === 128 && L.k === 6.5 && L.ca === 1.7 && L.mg === 0.5 && L.creat === 2.04, "electrolytes + renal populate ICU labs (Na/K/Ca/Mg mmol/L; creatinine 180 µmol/L → 2.04 mg/dL, Indian units)");
-  ok(L.po4 === 0.4, "phosphate populates from 'Phosphate' (0.4)");
+  ok(L.na === 128 && L.k === 6.5 && L.ca === 6.8 && L.mg === 1.22 && L.creat === 2.04, "renal/electrolytes → conventional (Indian): Na/K 128/6.5 mEq/L; Ca 1.7 mmol/L→6.8 mg/dL; Mg 0.5→1.22 mg/dL; creatinine 180 µmol/L→2.04 mg/dL");
+  ok(L.po4 === 1.24, "phosphate 0.4 mmol/L → 1.24 mg/dL (conventional)");
   ok(L.po4 !== 240, "GUARD: 'Alkaline Phosphatase' did NOT overwrite phosphate");
   ok(L.urea == null, "GUARD: 'BUN' did NOT map to urea (different scale)");
   ok(L.hb == null, "GUARD: 'Mean corpuscular hemoglobin' did NOT map to Hb");
@@ -108,7 +108,7 @@ try {
       mapFreeCa: ICU.mapWardLab("Free Calcium"), mapIonCa: ICU.mapWardLab("Calcium Ion"), mapTotCa: ICU.mapWardLab("Calcium (Total)") });
   `);
   const F = JSON.parse(r5);
-  ok(F.alb === 15, "serum albumin (1.5 g/dL → 15 g/L) mapped, NOT ascitic-fluid albumin (0.3)");
+  ok(F.alb === 1.5, "serum albumin 1.5 g/dL (kept as reported) mapped, NOT ascitic-fluid albumin (0.3)");
   ok(F.ca == null, "GUARD: free/ionised calcium (1.1 mmol/L) did NOT populate the total-calcium field");
   ok(F.glu == null, "GUARD: 'Ascitic Fluid Glucose' did NOT map to serum glucose");
   ok(F.mapAsc === null && F.mapSer === "alb", "mapWardLab: ascitic-fluid albumin → null, serum albumin → alb");

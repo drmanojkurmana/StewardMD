@@ -124,8 +124,8 @@
     var wt = (p.weightKg != null && !isNaN(+p.weightKg) && +p.weightKg > 0) ? +p.weightKg : 70;   // BUG #9: default 70 kg when weight unknown
 
     // ---- Electrolytes ----
-    if (L.k != null) { if (L.k > K_CRIT_HI) add("crit", "Critical hyperkalaemia", "K⁺ " + L.k + " mmol/L (>" + K_CRIT_HI + ") — ECG + urgent treatment", "Renal / Metabolic"); else if (L.k > K_WARN_HI) add("warn", "Hyperkalaemia", "K⁺ " + L.k + " mmol/L (>" + K_WARN_HI + ")", "Renal / Metabolic"); else if (L.k < K_CRIT_LO) add("crit", "Critical hypokalaemia", "K⁺ " + L.k + " mmol/L (<" + K_CRIT_LO + ") — replace + monitor ECG", "Renal / Metabolic"); else if (L.k < K_WARN_LO) add("warn", "Hypokalaemia", "K⁺ " + L.k + " mmol/L", "Renal / Metabolic"); }
-    if (L.na != null) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na⁺ " + L.na + " mmol/L — correct at a safe rate", "Renal / Metabolic"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na⁺ " + L.na + " mmol/L", "Renal / Metabolic"); }
+    if (L.k != null) { if (L.k > K_CRIT_HI) add("crit", "Critical hyperkalaemia", "K⁺ " + L.k + " mEq/L (>" + K_CRIT_HI + ") — ECG + urgent treatment", "Renal / Metabolic"); else if (L.k > K_WARN_HI) add("warn", "Hyperkalaemia", "K⁺ " + L.k + " mEq/L (>" + K_WARN_HI + ")", "Renal / Metabolic"); else if (L.k < K_CRIT_LO) add("crit", "Critical hypokalaemia", "K⁺ " + L.k + " mEq/L (<" + K_CRIT_LO + ") — replace + monitor ECG", "Renal / Metabolic"); else if (L.k < K_WARN_LO) add("warn", "Hypokalaemia", "K⁺ " + L.k + " mEq/L", "Renal / Metabolic"); }
+    if (L.na != null) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na⁺ " + L.na + " mEq/L — correct at a safe rate", "Renal / Metabolic"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na⁺ " + L.na + " mEq/L", "Renal / Metabolic"); }
 
     // ---- Renal (creatinine / eGFR) + AKI composite (BUG #1, #9) ----
     var oliguric = (lv.uop != null && lv.uop < 0.5 * wt), renalHigh = false;
@@ -449,37 +449,25 @@
   // conversion, e.g. Ca 9.4 mg/dL was read as 9.4 mmol/L → ELYTE ×4 → "40.4 mg/dL, severe
   // hypercalcaemia". Convert conventional→SI on ingest. Na/K/Cl/HCO₃ are mEq/L == mmol/L, so
   // they're never converted. Factors mirror electrolytes.js CONV (conventional = SI × f).
-  var WARD_CONV = { ca: 4.0, mg: 2.43, po4: 3.1, alb: 0.1 };   // glu/urea/creat now kept in conventional mg/dL (Indian) — see wardToSI special-cases below
-  // Above these an SI value is implausible → the number must be conventional (used only when
-  // the units string is missing; creat/alb are the inverse — a small value is conventional).
-  // Unit-less plausibility ceilings. Raised glu 35→50 & ca 4→4.5 so a TRUE severe hyperglycaemia
-  // (e.g. 40 mmol/L HHS) / hypercalcaemia isn't mis-divided into a normal value by wardToSI.
-  var SI_IMPLAUSIBLE = { ca: 4.5, mg: 3, po4: 4, glu: 33, creat: 20, alb: 12, urea: 60 };   // glu 50→33 (mmol/L HHS ceiling); above → the raw was mg/dL
+  // conventional (Indian) = SI × f. The whole app AND the ELYTE correction-dose calculator work in
+  // CONVENTIONAL units: glucose/creatinine/urea/Ca/Mg/PO₄ in mg/dL, albumin g/dL, Na/K/Cl/HCO₃ mEq/L.
+  var WARD_CONV = { ca: 4.0, mg: 2.43, po4: 3.1, glu: 18, creat: 1 / 88.4, alb: 0.1, urea: 6.006 };
+  // Standardisation: keep each lab in the UNITS ON THE GHIS REPORT. GHIS reports conventional
+  // (Indian) units, so values are kept AS REPORTED — no conversion. Only an explicit SI report
+  // (mmol/L / µmol/L / g/L) is converted SI → conventional. (Function name kept for compatibility.)
   function wardToSI(key, val, units) {
     var u = String(units || "").toLowerCase().replace(/\s+/g, "");
-    // Platelets (BUG #2): Indian labs report lakhs/cumm (×10⁵/µL) → ×10⁹/L is ×100; an absolute
-    // /cumm count (e.g. 141000) is ÷1000. Prefer the units string; else a value implausibly low
-    // as ×10⁹/L (normal 150–450) is really lakhs. Keeps a true ×10⁹/L thrombocytopenia (e.g. 45) as-is.
+    // Platelets: Indian labs report lakhs/cumm (×10⁵/µL) → ×10⁹/L is ×100; an absolute /cumm count
+    // (e.g. 141000) is ÷1000; else a value implausibly low as ×10⁹/L (normal 150–450) is really lakhs.
     if (key === "plt") {
       if (/lakh/.test(u)) return Math.round(val * 100);
       if (val > 1000) return Math.round(val / 1000);
       if (!u && val > 0 && val < 20) return Math.round(val * 100);
       return val;
     }
-    // Renal/metabolic panel is stored in conventional (Indian) units — glucose & creatinine & urea
-    // in mg/dL. GHIS reports these in mg/dL → keep as-is; convert only if a lab reports SI.
-    if (key === "glu") return /mmol/.test(u) ? Math.round(val * 18) : val;
-    if (key === "urea") return /mmol/.test(u) ? +(val * 6.006).toFixed(1) : val;
-    if (key === "creat") return (/µmol|umol|micromol/.test(u)) ? +(val / 88.4).toFixed(2) : val;
-    var f = WARD_CONV[key]; if (!f) return val;                       // Na/K/Cl/HCO₃/Hb/eGFR: mEq==mmol / already SI, no conversion
-    if (/mmol|meq|µmol|umol|micromol|g\/l/.test(u)) return val;       // already SI (incl albumin g/L)
-    var conventional = /mg\/dl/.test(u) || (key === "alb" && /g\/dl/.test(u));
-    if (conventional) return val / f;                                // GHIS conventional → SI
-    if (!u) {                                                        // no unit string → plausibility heuristic
-      if (key === "creat" || key === "alb") return (val > 0 && val < SI_IMPLAUSIBLE[key]) ? val / f : val;
-      return (val > SI_IMPLAUSIBLE[key]) ? val / f : val;
-    }
-    return val;
+    var f = WARD_CONV[key]; if (!f) return val;                      // Na/K/Cl/HCO₃/Hb/eGFR: mEq==mmol, never converted
+    if (/mmol|µmol|umol|micromol|g\/l/.test(u)) return +(val * f).toFixed(2);   // explicit SI report → conventional (Indian)
+    return val;                                                      // mg/dL / g/dL / unit-less → keep exactly as the report
   }
   window.SMD_wardToSI = wardToSI;   // exposed for verification
   // Ingest a normalised Ward-Sync / imported bundle. Conflict-SAFE: never silently
@@ -966,7 +954,7 @@
       vitalCard("Pressors", pressors.length ? pressors.map(function (p) { return p.drug; }).join(", ") : "None", "", pressors.length ? "warn" : "ok"),
       vitalCard("Infusions", (_raw.infusions || []).length || "0", "", ""),
       vitalCard("Net Fluid", f.net24h, "mL", ""),
-      vitalCard("K⁺", L.k, "mmol/L", vstat(L.k, 3.5, 5.0, K_CRIT_LO, K_CRIT_HI), labSeries("k", _trendWin))   // BUG #5: shared crit constant with the alert engine
+      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, K_CRIT_LO, K_CRIT_HI), labSeries("k", _trendWin))   // BUG #5: shared crit constant with the alert engine
     ];
     return '<div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
   }
@@ -1454,19 +1442,19 @@
     plt:  { label: "Platelets", unit: "", good: "up", src: "lab", ref: [150, 400], note: "fall — concerning (sepsis / DIC / drugs)" },
     creat:{ label: "Creatinine", unit: "mg/dL", good: "down", src: "lab", ref: [0.6, 1.3] },
     urea: { label: "Urea", unit: "mg/dL", good: "down", src: "lab", ref: [15, 45] },
-    na:   { label: "Sodium", unit: "mmol/L", good: null, src: "lab", ref: [135, 145], crit: function (v) { return v < 120 || v > 160; } },
-    k:    { label: "Potassium", unit: "mmol/L", good: null, src: "lab", ref: [3.5, 5.0], crit: function (v) { return v > 6.0 || v < 2.5; }, note: "K by safety threshold — >6.0 or <2.5 is critical" },
-    cl:   { label: "Chloride", unit: "mmol/L", good: null, src: "lab", ref: [98, 107] },
-    hco3: { label: "Bicarbonate", unit: "mmol/L", good: null, src: "lab", ref: [22, 28] },
-    ca:   { label: "Calcium (total)", unit: "mmol/L", good: null, src: "lab", ref: [2.1, 2.6] },
-    mg:   { label: "Magnesium", unit: "mmol/L", good: null, src: "lab", ref: [0.7, 1.0] },
-    po4:  { label: "Phosphate", unit: "mmol/L", good: null, src: "lab", ref: [0.8, 1.5] },
+    na:   { label: "Sodium", unit: "mEq/L", good: null, src: "lab", ref: [135, 145], crit: function (v) { return v < 120 || v > 160; } },
+    k:    { label: "Potassium", unit: "mEq/L", good: null, src: "lab", ref: [3.5, 5.0], crit: function (v) { return v > 6.0 || v < 2.5; }, note: "K by safety threshold — >6.0 or <2.5 is critical" },
+    cl:   { label: "Chloride", unit: "mEq/L", good: null, src: "lab", ref: [98, 107] },
+    hco3: { label: "Bicarbonate", unit: "mEq/L", good: null, src: "lab", ref: [22, 28] },
+    ca:   { label: "Calcium (total)", unit: "mg/dL", good: null, src: "lab", ref: [8.5, 10.5] },
+    mg:   { label: "Magnesium", unit: "mg/dL", good: null, src: "lab", ref: [1.7, 2.4] },
+    po4:  { label: "Phosphate", unit: "mg/dL", good: null, src: "lab", ref: [2.5, 4.5] },
     bili: { label: "Bilirubin (total)", unit: "mg/dL", good: "down", src: "lab", ref: [0.2, 1.2] },
     bili_d:{ label: "Bilirubin (direct)", unit: "mg/dL", good: "down", src: "lab" },
     ast:  { label: "AST / SGOT", unit: "U/L", good: "down", src: "lab" },
     alt:  { label: "ALT / SGPT", unit: "U/L", good: "down", src: "lab" },
     alp:  { label: "Alk phosphatase", unit: "U/L", good: "down", src: "lab" },
-    alb:  { label: "Albumin", unit: "g/L", good: "up", src: "lab", ref: [35, 52] },
+    alb:  { label: "Albumin", unit: "g/dL", good: "up", src: "lab", ref: [3.5, 5.2] },
     inr:  { label: "INR", unit: "", good: "down", src: "lab" },
     amylase:{ label: "Amylase", unit: "U/L", good: null, src: "lab", note: "trend only — correlate clinically" },
     lipase:{ label: "Lipase", unit: "U/L", good: null, src: "lab", note: "trend only — correlate clinically" },
@@ -1856,7 +1844,7 @@
     }
     if (L.na != null && L.cl != null) {
       var ag = L.na - (L.cl + hco3), agc = ag;
-      if (L.alb != null) agc = ag + 0.25 * (40 - L.alb);     // albumin in g/L (normal ~40)
+      if (L.alb != null) agc = ag + 2.5 * (4.0 - L.alb);     // albumin-corrected AG; albumin in g/dL (normal ~4.0)
       var agShown = L.alb != null ? agc : ag;
       rows.push(["Anion gap" + (L.alb != null ? " (albumin-corrected)" : ""), agShown.toFixed(0) + " mEq/L"]);
       if (agShown > 12) {
@@ -2196,12 +2184,13 @@
       var srcs = {}; keys.forEach(function (k) { var s = (_raw.src || {})[k]; if (s && L[k] != null) srcs[s.source] = Math.max(srcs[s.source] || 0, s.ts || 0); });
       var srcLine = Object.keys(srcs).length ? '<div class="icu-src">' + Object.keys(srcs).map(function (s) { return "📎 " + esc(s) + " · " + fmtAgo(srcs[s]); }).join("  ·  ") + "</div>" : "";
       grid += srcLine;
-      // Correction guidance rendered INLINE (no redirect) — reuses the validated
-      // Electrolyte Engine analyzers via ELYTE.analyze(); "si" = the mmol/L (albumin g/L)
-      // units the Labs form collects. Each analyte is an expandable card.
+      // Correction guidance rendered INLINE (no redirect) — reuses the validated Electrolyte Engine
+      // analyzers via ELYTE.analyze(). ICU labs are now stored in CONVENTIONAL (Indian) units
+      // (mg/dL / mEq/L / g/dL) — the units ELYTE itself works in — so pass "conventional" (NOT "si",
+      // which would make ELYTE convert again and mis-dose).
       var pt = { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") };
       var res = [];
-      try { if (window.ELYTE && ELYTE.analyze) res = ELYTE.analyze(L, pt, "si"); } catch (e) { res = []; }
+      try { if (window.ELYTE && ELYTE.analyze) res = ELYTE.analyze(L, pt, "conventional"); } catch (e) { res = []; }
       var COLOR = { crit: "var(--danger)", red: "var(--danger)", amber: "var(--warn)", ok: "var(--ok)" };
       var cards = res.map(function (r) {
         var c = COLOR[r.level] || "var(--muted)", open = !!_lytesExp[r.name];
@@ -2219,7 +2208,7 @@
       return out + grid + '<div class="icu-sec-lbl" style="margin-top:8px">Correction targets · tap to expand</div>' + cards +
         '<div class="icu-card"><button class="icu-btn ghost" data-icu-act="edit:labs">✎ Update electrolytes</button>' +
         '<button class="icu-btn ghost" data-icu-act="launch:elyte">Open full Electrolyte Engine (all analytes · unit toggle)</button>' +
-        '<p style="margin:8px 0 0;color:var(--muted);font:600 11px var(--font)">Interpreted as SI units (mmol/L; albumin g/L), as entered in Labs.</p></div>';
+        '<p style="margin:8px 0 0;color:var(--muted);font:600 11px var(--font)">Conventional (Indian) units — mg/dL · mEq/L · g/dL, as entered in Labs.</p></div>';
     },
     abg: function () {
       var g = _raw.abg || {}, L = _raw.labs.recent || {}, r = analyzeABG(g, L);
@@ -2576,8 +2565,8 @@
       { k: "lactate", l: "Lactate mmol/L", t: "number" }, { k: "cvp", l: "CVP mmHg", t: "number" }, { k: "etco2", l: "EtCO₂ mmHg", t: "number" } ] },
     labs: { title: "Laboratory values", ingest: ingestLabs, fields: [
       { k: "na", l: "Na mEq/L", t: "number" }, { k: "k", l: "K mEq/L", t: "number" }, { k: "cl", l: "Cl mEq/L", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" },
-      { k: "ca", l: "Ca mmol/L", t: "number" }, { k: "mg", l: "Mg mmol/L", t: "number" }, { k: "po4", l: "PO₄ mmol/L", t: "number" }, { k: "creat", l: "Creatinine mg/dL", t: "number" },
-      { k: "alb", l: "Albumin g/L", t: "number" }, { k: "glu", l: "Glucose mg/dL", t: "number" }, { k: "wbc", l: "WBC", t: "number" }, { k: "hb", l: "Hb g/dL", t: "number" },
+      { k: "ca", l: "Ca mg/dL", t: "number" }, { k: "mg", l: "Mg mg/dL", t: "number" }, { k: "po4", l: "PO₄ mg/dL", t: "number" }, { k: "creat", l: "Creatinine mg/dL", t: "number" },
+      { k: "alb", l: "Albumin g/dL", t: "number" }, { k: "glu", l: "Glucose mg/dL", t: "number" }, { k: "wbc", l: "WBC", t: "number" }, { k: "hb", l: "Hb g/dL", t: "number" },
       { k: "plt", l: "Platelets", t: "number" }, { k: "ferritin", l: "Ferritin", t: "number" }, { k: "crp", l: "CRP", t: "number" }, { k: "inr", l: "INR", t: "number" } ] },
     abg: { title: "Arterial blood gas", ingest: function (o) { Object.keys(o).forEach(function (k) { STATE.abg[k] = o[k]; }); STATE.abg.ts = nowTs(); }, fields: [
       { k: "ph", l: "pH", t: "number" }, { k: "paco2", l: "PaCO₂ mmHg", t: "number" }, { k: "pao2", l: "PaO₂ mmHg", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "be", l: "Base excess", t: "number" } ] },
