@@ -147,11 +147,28 @@
   function undoRemove() { if (_lastRemoved) { _list.splice(_lastRemoved.i, 0, _lastRemoved.med); _lastRemoved = null; _persist(); } }
   function clearAll() { _list = []; _lastRemoved = null; _persist(); }
   function getList() { return _list.slice(); }
+  // Reduce ONE active-ingredient token to its bare name so product/composition
+  // strings from the Drug Index (e.g. "Sildenafil (50mg)", "Sildenafil 20 mg tablet")
+  // collapse to the same clinical ingredient ("sildenafil"). Strips parenthetical
+  // groups, strength+unit tokens, and standalone formulation words. Salt forms
+  // (e.g. "sildenafil citrate") are intentionally left intact.
+  function normIngredient(token) {
+    var s = String(token || "").toLowerCase();
+    s = s.replace(/\([^)]*\)/g, " ");                                                      // "(50mg)", "(30 mg)"
+    s = s.replace(/\b\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|kg|ml|l|iu|units?|meq|mmol|%)\b/g, " "); // "50mg", "20 mg", "5 %"
+    var words = s.split(/[^a-z0-9'.-]+/).filter(function (w) { return w && !FORM_WORD[w]; });
+    return words.join(" ").replace(/\s+/g, " ").trim();
+  }
   function getIngredients(genericStr) {
     if (!genericStr || typeof genericStr !== "string") return [];
-    return genericStr.split("+").map(function (s) {
-      return s.trim().toLowerCase();
-    }).filter(Boolean);
+    return genericStr.split("+").map(normIngredient).filter(Boolean);
+  }
+  // Canonical clinical generic for storage/display: the normalised active
+  // ingredient(s), joined in composition order. Returns null when nothing survives
+  // (so the caller can fall back to the raw label rather than store an empty string).
+  function cleanGeneric(genericStr) {
+    var ings = getIngredients(genericStr);
+    return ings.length ? ings.join(" + ") : null;
   }
   function getClinicalKey(genericStr) {
     var ingredients = getIngredients(genericStr);
@@ -719,7 +736,10 @@
   }
   function addFromResult(r) {
     var parsed = parseEntry(r.generic || r.brand || "");
-    if (r.generic) { parsed.generic = String(r.generic).toLowerCase(); parsed.confidence = "high"; }
+    // Drug-Index compositions carry the strength inline ("Sildenafil (50mg)"). Store
+    // the NORMALISED active ingredient as the clinical generic so product variants of
+    // the same drug group + screen as one medicine (strength stays on the product row).
+    if (r.generic) { parsed.generic = cleanGeneric(r.generic) || String(r.generic).toLowerCase(); parsed.confidence = "high"; }
     if (r.brand) parsed.brand = r.brand;
     if (uiAdd(parsed, "index")) toast("Added " + cap(r.generic || r.brand || "medicine"));
   }
@@ -806,7 +826,8 @@
   function openDoseSheet(r) {
     if (!_root) return;
     var seed = parseEntry(r.generic || r.brand || "");
-    if (r.generic) { seed.generic = String(r.generic).toLowerCase(); seed.confidence = "high"; }
+    // Normalise the composition to its bare active ingredient (see addFromResult).
+    if (r.generic) { seed.generic = cleanGeneric(r.generic) || String(r.generic).toLowerCase(); seed.confidence = "high"; }
     if (r.brand) seed.brand = r.brand;
     var draft = { strength: seed.strength || "", unit: seed.unit || "mg", route: seed.route || "", freq: seed.freq || "", indication: "" };
     var s = buildSheet({ title: cap(r.generic || r.brand || "Medicine"), sub: [r.cls, (r.brands || []).slice(0, 3).map(cap).join(", ")].filter(Boolean).join(" · ") });
@@ -1789,6 +1810,7 @@
 
   window.MEDLIST = { parseEntry: parseEntry, brandCandidates: brandCandidates, parsePasted: parsePasted,
     add: add, remove: remove, undoRemove: undoRemove, clearAll: clearAll, getList: getList,
+    getClinicalList: getClinicalList, getClinicalKey: getClinicalKey,
     mount: mount, brandSearch: brandSearch,
     // Re-render the current list view (used by GHISMEDS to return from its review screen).
     _rerender: function () { _view = "list"; render(); },

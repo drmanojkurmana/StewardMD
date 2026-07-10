@@ -421,6 +421,90 @@ try {
   `));
   ok(sildPantoRes.duplicatesLength === 0, "Sildenafil + Pantoprazole yields 0 duplicate-therapy results");
 
+  // --- G. REAL Drug-Index composition path (regression for the reported bug) ---
+  // The live /brand-search returns composition strings that carry the strength in
+  // the ingredient text, e.g. "Sildenafil", "Sildenafil (50mg)", "Sildenafil 20 mg
+  // tablet". medlist stored those verbatim as `generic`, so the clinical key
+  // ("sildenafil (50mg)" vs "sildenafil") never collapsed. These add the products
+  // EXACTLY as the Drug-Index path stores them (raw composition in `generic`).
+  await ev(`
+    MEDLIST.clearAll();
+    MEDLIST.add({ generic: 'sildenafil', form: 'tablet' }, 'index');                                  // "Sildenafil"
+    MEDLIST.add({ generic: 'sildenafil (50mg)', strength: 50, unit: 'mg', form: 'tablet' }, 'index');  // "Sildenafil (50mg)"
+    MEDLIST.add({ generic: 'sildenafil (20mg)', strength: 20, unit: 'mg', form: 'tablet' }, 'index');  // "Sildenafil (20mg)"
+    MEDLIST.add({ generic: 'sildenafil 20 mg tablet' }, 'index');                                      // "Sildenafil 20 mg tablet"
+    MEDLIST.mount(document.getElementById('ml-test'));
+    return 1;
+  `);
+  ok(await ev(`return MEDLIST.getList().length`) === 4, "four Sildenafil PRODUCT rows are preserved (count is at the product layer)");
+  ok(await ev(`return document.querySelector("#ml-test .ml-list-count").innerText`) === "1 medicine selected",
+     "REAL composition variants (Sildenafil / (50mg) / (20mg) / '20 mg tablet') say '1 medicine selected'");
+  ok(await ev(`return document.getElementById("ml-check").innerText`) === "Check 1 medicine",
+     "REAL composition variants say 'Check 1 medicine'");
+  const sildRealRes = JSON.parse(await ev(`
+    var r = INTERACTIONS.checkInteractions(MEDLIST.getList());
+    return JSON.stringify({ reviewedCount: r.reviewedCount, duplicatesLength: r.duplicates.length, criticalLength: r.critical.length });
+  `));
+  ok(sildRealRes.reviewedCount === 1, "engine collapses the composition variants to exactly one clinical medicine (reviewedCount 1)");
+  ok(sildRealRes.duplicatesLength === 0, "no false duplicate-therapy alert from repeated Sildenafil product rows");
+  ok(sildRealRes.criticalLength === 0, "no Sildenafil + Sildenafil self-interaction from composition variants");
+
+  // SAFETY: a strength-polluted generic must STILL match a real interaction. Before
+  // the fix, "sildenafil (50mg)" did not satisfy the `sildenafil` rule subject, so
+  // the sildenafil + nitrate contraindication was silently MISSED.
+  await ev(`
+    MEDLIST.clearAll();
+    MEDLIST.add({ generic: 'sildenafil (50mg)', strength: 50, unit: 'mg', form: 'tablet' }, 'index');
+    MEDLIST.add({ generic: 'nitroglycerin', strength: 0.5 }, 'manual');
+    return 1;
+  `);
+  const sildNitroReal = JSON.parse(await ev(`
+    var r = INTERACTIONS.checkInteractions(MEDLIST.getList());
+    return JSON.stringify({ criticalLength: r.critical.length, drugs: r.critical[0] ? r.critical[0].drugs : [] });
+  `));
+  ok(sildNitroReal.criticalLength === 1, "'Sildenafil (50mg)' + Nitroglycerin still fires exactly one critical interaction (not missed)");
+  ok(sildNitroReal.drugs.indexOf("sildenafil") !== -1 && sildNitroReal.drugs.indexOf("nitroglycerin") !== -1,
+     "the fired interaction names the normalised ingredient 'sildenafil' (not 'sildenafil (50mg)')");
+
+  // A combination composition ("Sildenafil (50mg) + Dapoxetine (30mg)") normalises to
+  // its two active ingredients so it groups/screens correctly.
+  await ev(`
+    MEDLIST.clearAll();
+    MEDLIST.add({ generic: 'sildenafil (50mg) + dapoxetine (30mg)', strength: 50, unit: 'mg' }, 'index');
+    return 1;
+  `);
+  const comboKey = await ev(`
+    var r = INTERACTIONS.checkInteractions(MEDLIST.getList());
+    var m = MEDLIST.getClinicalList(MEDLIST.getList());
+    return JSON.stringify({ reviewedCount: r.reviewedCount, key: m[0] && m[0].clinicalKey });
+  `);
+  ok(JSON.parse(comboKey).key === "dapoxetine|sildenafil", "combination composition normalises to a two-ingredient clinical key 'dapoxetine|sildenafil'");
+
+  // END-TO-END: drive the actual Drug-Index add path (stubbed brandSearch returns the
+  // REAL API shape) — both product rows must store the normalised generic 'sildenafil'
+  // and collapse to one clinical medicine.
+  await ev(`
+    MEDLIST.clearAll();
+    window.__origConfirm = window.confirm; window.confirm = function(){ return false; };  // allow a separate dose entry
+    window.__origBrandSearch2 = MEDLIST.brandSearch;
+    MEDLIST.brandSearch = function(){ return Promise.resolve([
+      { brand: 'Grace Drugs & Pharmaceuticals Sildenafil 50mg Tablet', generic: 'sildenafil', form: 'tablet' },
+      { brand: 'Science Of Him Sildenafil 50mg Tablet', generic: 'sildenafil (50mg)', form: '4 tablets' }
+    ]); };
+    MEDLIST.mount(document.getElementById('ml-test'));
+    document.querySelector("#ml-test [data-ml-open='index']").click();
+    var inp = document.querySelector("#ml-test [data-ml-index-input]"); inp.value = 'sildenafil'; inp.dispatchEvent(new Event('input'));
+    return 1;
+  `);
+  await sleep(200);
+  await ev(`document.querySelectorAll("#ml-test [data-ml-index-result]").forEach(function(b){ b.click(); }); return 1;`);
+  await ev(`window.confirm = window.__origConfirm; MEDLIST.brandSearch = window.__origBrandSearch2; MEDLIST.mount(document.getElementById('ml-test')); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length`) === 2, "Drug-Index add path adds two product rows");
+  ok(await ev(`return MEDLIST.getList().every(function(m){ return m.generic === 'sildenafil'; })`) === true,
+     "Drug-Index add path normalises the composition to a clean generic 'sildenafil' (not 'sildenafil (50mg)')");
+  ok(await ev(`return document.querySelector("#ml-test .ml-list-count").innerText`) === "1 medicine selected",
+     "Drug-Index-added Sildenafil products collapse to '1 medicine selected'");
+
   await ev(`MEDLIST.clearAll(); return 1;`);
 
   console.log(fails === 0 ? "\nALL GREEN — medlist parser test passed" : `\n${fails} FAILED`);

@@ -50,18 +50,40 @@
     return context[value] === true;
   }
 
-  // Normalize a med to { generic:<lowercased>, classes:[...] }.
-  // classes come from INTERACTION_RULES.drugClasses[generic]; fallback to the
-  // MEDDRUGS._list `cls` string if present. Returns null when there is no
-  // resolved generic (unconfirmed meds are skipped).
+  // Formulation words a Drug-Index composition string can carry inline (e.g.
+  // "sildenafil 20 mg tablet"); stripped so the active-ingredient key is clean.
+  var FORM_WORDS = { tablet: 1, tablets: 1, tab: 1, tabs: 1, capsule: 1, capsules: 1, cap: 1, caps: 1,
+    injection: 1, inj: 1, vial: 1, vials: 1, ampoule: 1, ampule: 1, amp: 1, infusion: 1, syrup: 1, syp: 1,
+    suspension: 1, susp: 1, solution: 1, soln: 1, drops: 1, drop: 1, ointment: 1, oint: 1, cream: 1, gel: 1,
+    lotion: 1, sachet: 1, powder: 1, suppository: 1, pessary: 1, inhaler: 1, nebulisation: 1 };
+
+  // Reduce ONE active-ingredient token to its bare name: drop parenthetical groups,
+  // strength+unit tokens, and standalone formulation words. Mirrors medlist.js's
+  // normIngredient so the medication-count layer and this engine agree on the
+  // clinical key — WITHOUT it, "sildenafil (50mg)" fails to satisfy the "sildenafil"
+  // rule subject and a real interaction (e.g. with a nitrate) is silently missed.
+  function normIngredient(token) {
+    var s = String(token || "").toLowerCase();
+    s = s.replace(/\([^)]*\)/g, " ");
+    s = s.replace(/\b\d+(?:\.\d+)?\s*(?:mg|mcg|ug|g|kg|ml|l|iu|units?|meq|mmol|%)\b/g, " ");
+    var words = s.split(/[^a-z0-9'.-]+/).filter(function (w) { return w && !FORM_WORDS[w]; });
+    return words.join(" ").replace(/\s+/g, " ").trim();
+  }
+
+  // Normalize a med to { generic:<clean>, ingredients:[...], classes:[...] }.
+  // The generic/ingredients are reduced to bare active ingredients (strength, form
+  // and parenthetical dosage stripped). classes come from
+  // INTERACTION_RULES.drugClasses[ingredient]; fallback to the MEDDRUGS._list `cls`
+  // string if present. Returns null when no active ingredient survives (unconfirmed
+  // or strength-only meds are skipped).
   function normalizeMed(med, drugClasses, meddrugsList) {
     if (!med || !med.generic || typeof med.generic !== "string") return null;
     var generic = med.generic.trim().toLowerCase();
     if (!generic) return null;
 
-    var ingredients = generic.split("+").map(function (s) {
-      return s.trim().toLowerCase();
-    }).filter(Boolean);
+    var ingredients = generic.split("+").map(normIngredient).filter(Boolean);
+    if (!ingredients.length) return null;
+    generic = ingredients.join(" + ");
 
     var classes = [];
     for (var i = 0; i < ingredients.length; i++) {
