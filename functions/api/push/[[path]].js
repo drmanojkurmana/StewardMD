@@ -65,11 +65,10 @@ export async function onRequest(context) {
     const ok = adminOK(request, env);
     if (ok === null) return json({ error: "admin-not-configured" }, 503);
     if (!ok) return json({ error: "unauthorised" }, 401);
-    let msg = {}; try { msg = (await request.json()) || {}; } catch (e) {}
-    const web = await sendPushToAll(env);
-    const native = await sendNativeToAll(env, {
-      title: msg.title || "StewardMD", body: msg.body || "New medical update", url: msg.url || "/", tag: msg.tag,
-    });
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    const msg = { title: body.title || "StewardMD", body: body.body || "New medical update", url: body.url || "/", tag: body.tag || "smd-update" };
+    const web = await sendPushToAll(env, msg);
+    const native = await sendNativeToAll(env, msg);
     return json({ ok: true, web, native });
   }
   return json({ error: "not-found", seg }, 404);

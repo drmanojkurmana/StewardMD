@@ -22,7 +22,7 @@
  *   Optional    UPDATES_FEEDS  — comma-separated "category|url" trusted RSS feeds
  *                                (defaults to FDA MedWatch, press releases, recalls)
  */
-import { sendPushToAll, pushEnabled } from "../../_webpush.js";
+import { sendPushToAll, pushEnabled, buildMsg } from "../../_webpush.js";
 import { sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 
 const LIST_KEY = "updates:list";
@@ -30,16 +30,15 @@ const CAP = 120;                 // keep the newest N
 const DESC_MAX = 600;
 
 // Fire OS push banners to subscribed devices (best-effort, non-blocking).
-// Web push is payloadless (the SW fetches the newest item); native (APNs/FCM) needs
-// the text in the payload, so pass the item's title/body when we have it.
+// With an `item`, its title/body ride along in the payload (web = encrypted aes128gcm,
+// native = APNs/FCM) so the banner shows the real update title. Without an item, web push
+// is payloadless and the SW fetches the newest item.
 function firePush(context, item) {
-  try { if (pushEnabled(context.env)) context.waitUntil(sendPushToAll(context.env)); } catch (e) {}
+  const msg = buildMsg(item);
+  try { if (pushEnabled(context.env)) context.waitUntil(sendPushToAll(context.env, msg)); } catch (e) {}
   try {
     if (nativePushEnabled(context.env)) {
-      const msg = item
-        ? { title: item.title || "StewardMD", body: (item.source ? item.source + " · " : "") + (item.category || "update"), url: item.url || "/", tag: item.id ? "smd-" + item.id : undefined }
-        : { title: "StewardMD", body: "New medical update", url: "/" };
-      context.waitUntil(sendNativeToAll(context.env, msg));
+      context.waitUntil(sendNativeToAll(context.env, msg || { title: "StewardMD", body: "New medical update", url: "/" }));
     }
   } catch (e) {}
 }
