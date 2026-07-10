@@ -24,7 +24,10 @@
    urgent = High, informational = Info.)
    ========================================================================== */
 
-:root {
+/* Declared on `body` (NOT :root) so the var(--paper)/var(--teal)/… aliases resolve
+   against the app's dark override, which lives at `body.dark { --paper:… }` — a :root
+   declaration would capture the html-level (always-light) base tokens and never flip. */
+body {
   /* ---- accent + surfaces: ALIAS existing base tokens so themes/dark flow through ---- */
   --rds-primary:        var(--teal, #0F766E);
   --rds-primary-2:      #115E59;
@@ -268,3 +271,58 @@ body.dark {
   .rds-scrim, .rds-sheet, .rds-dialog { transition: none !important; }
   .rds-skeleton::after { animation: none; }
 }
+
+/* ============================================================================
+   Redesign home shell (Phase 2 · boards 1f + 3a) — ACTIVE ONLY under #homeV2.rnav
+   (opt-in flag smd_redesign_nav / ?rnav=1). Reuses the base .v3 fullscreen flex
+   container + the existing .v4-foot/.v4-maik footer styles from ui-v3.css.
+   ========================================================================== */
+#homeV2.rnav { background: var(--rds-bg); font-family: var(--rds-font); }
+#homeV2.rnav .rnav-head { display: flex; align-items: center; gap: 6px; padding: calc(10px + env(safe-area-inset-top,0px)) 14px 10px; background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+#homeV2.rnav .rnav-brand { display: flex; align-items: center; gap: 8px; font: 800 17px var(--rds-font); color: var(--rds-ink); }
+#homeV2.rnav .rnav-brand img { width: 26px; height: 26px; object-fit: contain; }
+#homeV2.rnav .rnav-brand b { color: var(--rds-primary); }
+#homeV2.rnav .rnav-head-sp { flex: 1; }
+#homeV2.rnav .rds-icon-btn { color: var(--rds-muted); }
+#homeV2.rnav .rnav-avatar { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 999px; background: var(--rds-primary-soft); color: var(--rds-primary); border: none; cursor: pointer; }
+#homeV2.rnav .rnav-main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--rds-bg); }
+#homeV2.rnav .rnav-stack { display: flex; flex-direction: column; gap: 14px; padding: var(--rds-gutter); padding-bottom: 96px; max-width: 560px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+#homeV2.rnav .rnav-greet .rnav-eyebrow { font: 700 11px var(--rds-font); text-transform: uppercase; letter-spacing: .08em; color: var(--rds-primary); }
+#homeV2.rnav .rnav-greet .rnav-hi { font: 800 24px/1.2 var(--rds-font); letter-spacing: -.02em; color: var(--rds-ink); margin-top: 2px; }
+#homeV2.rnav .rnav-qa { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+#homeV2.rnav .rnav-qa-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); font: 600 11.5px var(--rds-font); cursor: pointer; min-height: 44px; }
+#homeV2.rnav .rnav-qa-btn .rds-icon { color: var(--rds-primary); font-size: 24px; }
+#homeV2.rnav .rnav-hero { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: var(--rds-r); background: linear-gradient(135deg,var(--rds-primary),var(--rds-primary-2)); color: #fff; box-shadow: var(--rds-el-cta); }
+#homeV2.rnav .rnav-hero-bd { flex: 1; min-width: 0; }
+#homeV2.rnav .rnav-hero-tt { font: 800 20px var(--rds-font); }
+#homeV2.rnav .rnav-hero-tt b { opacity: .9; }
+#homeV2.rnav .rnav-hero-tag { font: 700 11px var(--rds-font); text-transform: uppercase; letter-spacing: .06em; opacity: .9; display: inline-block; margin-top: 3px; }
+#homeV2.rnav .rnav-hero-p { font: 500 13px/1.5 var(--rds-font); opacity: .92; margin: 6px 0 0; }
+#homeV2.rnav .rnav-hero-logo { width: 56px; height: 56px; object-fit: contain; filter: brightness(0) invert(1); opacity: .9; }
+#homeV2.rnav .rnav-qrow { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+#homeV2.rnav .rnav-qc { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); font: 600 11px var(--rds-font); cursor: pointer; min-height: 44px; }
+#homeV2.rnav .rnav-qc .rds-icon { color: var(--rds-primary); }
+#homeV2.rnav .rnav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#homeV2.rnav .rnav-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px; border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); text-align: left; cursor: pointer; }
+#homeV2.rnav .rnav-tile .rds-icon { color: var(--rds-primary); font-size: 24px; margin-bottom: 2px; }
+#homeV2.rnav .rnav-tile-tt { font: 700 14px var(--rds-font); color: var(--rds-ink); }
+#homeV2.rnav .rnav-tile-sub { font: 500 12px var(--rds-font); color: var(--rds-muted); }
+#homeV2.rnav .rnav-alert { width: 100%; text-align: left; cursor: pointer; }
+#homeV2.rnav .rnav-resume { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer; }
+#homeV2.rnav .rnav-resume-ic { color: var(--rds-primary); font-size: 28px; }
+#homeV2.rnav .rnav-resume-bd { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+#homeV2.rnav .rnav-resume-lbl { font: 700 10.5px var(--rds-font); text-transform: uppercase; letter-spacing: .06em; color: var(--rds-muted); }
+#homeV2.rnav .rnav-resume-nm { font: 700 15px var(--rds-font); color: var(--rds-ink); }
+#homeV2.rnav .rnav-resume-mt { font: 500 12px var(--rds-font); color: var(--rds-muted); }
+#homeV2.rnav .rnav-recent { padding: 0; overflow: hidden; }
+#homeV2.rnav .rnav-recent-row { width: 100%; text-align: left; cursor: pointer; }
+#homeV2.rnav .rnav-recent-tt { font: 600 14px var(--rds-font); color: var(--rds-ink); display: block; }
+#homeV2.rnav .rnav-recent-sub { font: 500 12px var(--rds-font); color: var(--rds-muted); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#homeV2.rnav .rnav-foot { margin-top: 8px; }
+#homeV2.rnav .rnav-tabbar { display: flex; align-items: flex-end; justify-content: space-around; gap: 4px; padding: 8px 8px calc(8px + env(safe-area-inset-bottom,0px)); background: var(--rds-surface); border-top: 1px solid var(--rds-line); }
+#homeV2.rnav .rnav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 2px; border: none; background: transparent; color: var(--rds-muted); font: 600 10.5px var(--rds-font); cursor: pointer; min-height: 52px; }
+#homeV2.rnav .rnav-tab .rds-icon { font-size: 24px; }
+#homeV2.rnav .rnav-tab.active { color: var(--rds-primary); }
+#homeV2.rnav .rnav-tab.active .rds-icon { font-variation-settings: 'opsz' 24,'wght' 500,'GRAD' 0,'FILL' 1; }
+#homeV2.rnav .rnav-tab-maik .rds-icon { background: var(--rds-primary); color: #fff; width: 52px; height: 52px; border-radius: 999px; display: flex; align-items: center; justify-content: center; box-shadow: var(--rds-el-cta); margin-top: -18px; }
+#homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); }

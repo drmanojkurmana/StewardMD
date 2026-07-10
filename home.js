@@ -211,7 +211,7 @@
   // Exposed so the Clinical Reasoning "Select this diagnosis" flow can reveal the classic
   // stewardship output (#outputArea) instead of leaving it hidden behind the v4 Home.
   window.SMD_hideHome = hideV2;
-  function showV2() { if (root) root.classList.add("on"); if (fab) fab.classList.remove("on"); var m = root && root.querySelector(".v3-main"); if (m) m.scrollTop = 0; }
+  function showV2() { if (root) root.classList.add("on"); if (fab) fab.classList.remove("on"); var m = root && root.querySelector(".v3-main"); if (m) m.scrollTop = 0; try { if (root && root.classList.contains("rnav") && typeof hydrateRnav === "function") hydrateRnav(); } catch (e) {} }
   // Universal "go home" — closes any open overlay/sheet and returns to the v3 home. Wired to the
   // logo (anywhere) and the home FAB, so the user can get home from any area.
   function goHome() {
@@ -469,7 +469,8 @@
     menu: function () { if (window.SB && SB.open) SB.open(); },
     about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
     account: function () { if (window.SB && SB.open) SB.open(); },
-    recent: function () { if (typeof openMyCases === "function") openMyCases(); }
+    recent: function () { if (typeof openMyCases === "function") openMyCases(); },
+    dictate: function () { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); }
   };
   function injectCSS() {
     if (document.getElementById("smd-home-css")) return;
@@ -782,6 +783,137 @@
       '</nav>';
   }
 
+  // ---- Redesign navigation shell + dashboard (Phase 2, opt-in flag) -----------
+  // Additive + reversible: default OFF. Enable with localStorage smd_redesign_nav="1"
+  // or ?rnav=1 (disable with ?rnav=0). Renders inside the SAME #homeV2 root and reuses
+  // the SAME data-act wiring / ACT dispatch / goHome / scrim-sheet-FAB, so every route
+  // and back-navigation behaviour is identical to the shipped home. Styled by the
+  // #homeV2.rnav layer in redesign-system.css (rds-* tokens).
+  function redesignNavOn() {
+    try {
+      var q = location.search || "";
+      if (/[?&]rnav=0\b/.test(q)) return false;
+      if (/[?&]rnav=1\b/.test(q)) return true;
+      return localStorage.getItem("smd_redesign_nav") === "1";
+    } catch (e) { return false; }
+  }
+  function ric(name) { return '<span class="rds-icon" aria-hidden="true">' + name + '</span>'; }
+  function rtile(act, icon, tt, sub) {
+    return '<button class="rnav-tile" data-act="' + act + '" aria-label="' + tt + '">' + ric(icon) +
+      '<span class="rnav-tile-tt">' + tt + '</span><span class="rnav-tile-sub">' + sub + '</span></button>';
+  }
+  function homeRedesignMarkup() {
+    return '' +
+      '<header class="rnav-head rds-safe-top">' +
+        '<button class="rds-icon-btn" data-act="menu" aria-label="Menu">' + ric("menu") + '</button>' +
+        '<div class="rnav-brand"><img src="/logo.png" alt="StewardMD"><span>Steward<b>MD</b></span></div>' +
+        '<div class="rnav-head-sp"></div>' +
+        '<button class="rds-icon-btn" data-act="search" aria-label="Search">' + ric("search") + '</button>' +
+        '<button class="rds-icon-btn" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + ric("dark_mode") + '</button>' +
+        '<button class="rds-icon-btn rnav-bell v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + ric("notifications") + '</button>' +
+        '<button class="rnav-avatar" data-act="more" aria-label="Account">' + ric("person") + '</button>' +
+      '</header>' +
+      '<main class="v3-main rnav-main"><div class="rnav-stack">' +
+        '<div class="rnav-greet"><div class="rnav-eyebrow">' + dateV4() + '</div><div class="rnav-hi">' + greetLineV4() + '</div></div>' +
+        '<div id="rnavWatch"></div>' +
+        '<div id="rnavResume"></div>' +
+        '<div class="rnav-qa">' +
+          '<button class="rnav-qa-btn" data-act="startcase" aria-label="Start a Case">' + ric("stethoscope") + '<span>Start Case</span></button>' +
+          '<button class="rnav-qa-btn" data-act="reasoning" aria-label="Dx My Patient">' + ric("neurology") + '<span>Dx Patient</span></button>' +
+          '<button class="rnav-qa-btn" data-act="interactions" aria-label="Medicines &amp; scan">' + ric("photo_camera") + '<span>Scan Meds</span></button>' +
+          '<button class="rnav-qa-btn" data-act="dictate" aria-label="Dictate">' + ric("mic") + '<span>Dictate</span></button>' +
+        '</div>' +
+        '<section class="rnav-hero"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b>MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care — antimicrobials, differentials, ICU &amp; more.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
+        '<div class="rnav-qrow">' +
+          '<button class="rnav-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
+          '<button class="rnav-qc" data-act="ward" aria-label="Ward Sync">' + ric("local_hospital") + '<span>Ward Sync</span></button>' +
+          '<button class="rnav-qc" data-act="icu" aria-label="ICU">' + ric("monitor_heart") + '<span>ICU</span></button>' +
+          '<button class="rnav-qc" data-act="antibiogram" aria-label="Antibiogram">' + ric("biotech") + '<span>Antibiogram</span></button>' +
+        '</div>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' +
+        '<div class="rnav-grid">' +
+          rtile("calculators", "calculate", "Calculators", "70+ clinical tools") +
+          rtile("drugmenu", "medication", "Drugs &amp; Interactions", "Database · checker") +
+          rtile("electrolytes", "science", "Electrolytes", "ICU correction") +
+          rtile("guidelines", "book_2", "Guides", "Protocols &amp; references") +
+        '</div>' +
+        '<div id="rnavRecent"></div>' +
+        '<div class="v4-foot rnav-foot"><div class="disc">Only for qualified clinicians</div>' +
+          '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.png" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.png" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
+          '<div class="cred">© 2026 StewardMD · All rights reserved · Dr. Manoj Kumar Kurmana, MD</div>' +
+          '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a role="button" tabindex="0" onclick="openModal(\'privacyModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Privacy Policy</a> · <a role="button" tabindex="0" onclick="openModal(\'termsModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Terms of Use</a> · <a role="button" tabindex="0" onclick="openModal(\'contactModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Support</a></div><div class="v4-rev" style="margin-top:4px;font:500 11px/1.5 var(--v3-font,sans-serif);color:var(--v3-muted,#889)">Clinical content last reviewed · 5 Jul 2026</div></div>' +
+      '</div></main>' +
+      '<nav class="rnav-tabbar rds-safe-bottom">' +
+        '<button class="rnav-tab active" data-act="home" aria-label="Home">' + ric("home") + '<span>Home</span></button>' +
+        '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + ric("folder_open") + '<span>Cases</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK">' + ric("forum") + '<span>MaiK</span></button>' +
+        '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + ric("medication") + '<span>Drugs</span></button>' +
+        '<button class="rnav-tab" data-act="more" aria-label="More">' + ric("more_horiz") + '<span>More</span></button>' +
+      '</nav>';
+  }
+  // Populate the dashboard cards from REAL data only (no placeholders). Anything with
+  // no real data is left empty. data-act clicks route via the delegated handler; data-rid
+  // (recent) clicks are wired here to SMD_RECENT.open.
+  function hydrateRnav() {
+    if (!root || !root.classList.contains("rnav")) return;
+    // Watch-Lab / ICU critical alert banner (only if a real critical alert exists)
+    try {
+      var w = root.querySelector("#rnavWatch");
+      if (w) {
+        var alerts = (window.ICU_STATE && Array.isArray(window.ICU_STATE.alerts)) ? window.ICU_STATE.alerts : [];
+        var crit = alerts.filter(function (a) { return a && (a.severity === "crit" || a.severity === "critical"); });
+        if (crit.length) {
+          var pn = (window.ICU_STATE && window.ICU_STATE.patient && window.ICU_STATE.patient.name) ? " · " + escV4(window.ICU_STATE.patient.name) : "";
+          w.innerHTML = '<button class="rds-banner rds-banner--critical rnav-alert" data-act="icu" aria-label="Open ICU critical alerts">' + ric("warning") +
+            '<span class="rds-banner-body"><span class="rds-banner-title">' + crit.length + ' critical alert' + (crit.length > 1 ? "s" : "") + '</span>' +
+            '<span class="rds-banner-meta">Open ICU workspace' + pn + '</span></span>' + ric("chevron_right") + '</button>';
+        } else { w.innerHTML = ""; }
+      }
+    } catch (e) {}
+    // Resume active patient (ICU active buffer) OR most-recent case
+    try {
+      var res = root.querySelector("#rnavResume");
+      if (res) {
+        var pt = (window.ICU_STATE && window.ICU_STATE.patient) ? window.ICU_STATE.patient : null;
+        var recent = (window.SMD_RECENT && SMD_RECENT.get) ? (SMD_RECENT.get() || []) : [];
+        if (pt && pt.name) {
+          var meta = [pt.bed ? "Bed " + escV4(pt.bed) : "", pt.dx ? escV4(pt.dx) : ""].filter(Boolean).join(" · ");
+          res.innerHTML = '<button class="rnav-resume rds-card" data-act="icu" aria-label="Resume patient">' +
+            '<span class="rnav-resume-ic rds-icon">monitor_heart</span><span class="rnav-resume-bd"><span class="rnav-resume-lbl">Resume ICU patient</span>' +
+            '<span class="rnav-resume-nm">' + escV4(pt.name) + '</span>' + (meta ? '<span class="rnav-resume-mt">' + meta + '</span>' : "") + '</span>' + ric("chevron_right") + '</button>';
+        } else if (recent.length) {
+          var r0 = recent[0];
+          res.innerHTML = '<button class="rnav-resume rds-card" data-rid="' + escV4(r0.caseId) + '" aria-label="Resume last case">' +
+            '<span class="rnav-resume-ic rds-icon">history</span><span class="rnav-resume-bd"><span class="rnav-resume-lbl">Resume last case</span>' +
+            '<span class="rnav-resume-nm">' + escV4(r0.title || "Case") + '</span>' + (r0.summary ? '<span class="rnav-resume-mt">' + escV4(r0.summary) + '</span>' : "") + '</span>' + ric("chevron_right") + '</button>';
+          var rb = res.querySelector("[data-rid]");
+          if (rb) rb.addEventListener("click", function () { try { SMD_RECENT.open(rb.getAttribute("data-rid")); } catch (e) {} });
+        } else { res.innerHTML = ""; }
+      }
+    } catch (e) {}
+    // Recent activity list
+    try {
+      var rc = root.querySelector("#rnavRecent");
+      if (rc) {
+        var list = (window.SMD_RECENT && SMD_RECENT.get) ? (SMD_RECENT.get() || []) : [];
+        if (list.length) {
+          var rows = list.slice(0, 5).map(function (it) {
+            return '<button class="rds-list-row rnav-recent-row" data-rid="' + escV4(it.caseId) + '">' +
+              '<span class="rds-list-lead rds-icon">history</span><span class="rds-list-main">' +
+              '<span class="rnav-recent-tt">' + escV4(it.title || "Case") + '</span>' +
+              (it.summary ? '<span class="rnav-recent-sub">' + escV4(it.summary) + '</span>' : "") + '</span>' +
+              '<span class="rds-list-trail rds-icon">chevron_right</span></button>';
+          }).join("");
+          rc.innerHTML = '<div class="rds-section-header"><span class="rds-section-title">Recent activity</span></div><div class="rds-card rnav-recent">' + rows + '</div>';
+          rc.querySelectorAll("[data-rid]").forEach(function (b) {
+            b.addEventListener("click", function () { try { SMD_RECENT.open(b.getAttribute("data-rid")); } catch (e) {} });
+          });
+        } else { rc.innerHTML = ""; }
+      }
+    } catch (e) {}
+  }
+  window.SMD_hydrateRnav = hydrateRnav;
+
   function build() {
     if (root) return;
     injectCSS(); injectV3CSS();
@@ -831,8 +963,15 @@
       '</nav>';
     document.body.appendChild(root);
 
-    // v4 redesign: swap in the coherent home layout (same data-act wiring).
-    if (homeV4On()) {
+    // Redesign nav shell (opt-in) takes precedence; else v4 coherent home; else classic v3.
+    // All three reuse the SAME data-act wiring.
+    if (redesignNavOn()) {
+      root.classList.add("hv4", "rnav"); root.innerHTML = homeRedesignMarkup();
+      var _rtb = root.querySelector("#v4ThemeBtn");
+      if (_rtb) { var _rsync = function () { _rtb.innerHTML = document.body.classList.contains("dark") ? ric("light_mode") : ric("dark_mode"); };
+        _rsync(); _rtb.addEventListener("click", function () { setTimeout(_rsync, 40); }); }
+      try { hydrateRnav(); } catch (e) {}
+    } else if (homeV4On()) {
       root.classList.add("hv4"); root.innerHTML = homeV4Markup();
       // header theme toggle reflects current theme (moon in light, sun in dark)
       var _tb = root.querySelector("#v4ThemeBtn");
@@ -884,7 +1023,7 @@
       });
       var show;
       if (gateUp) show = false;
-      else if (homeV4On()) show = !homeIsForeground(); // v4: Home button on every inner screen/dialog, hidden only on the bare home
+      else if (homeV4On() || redesignNavOn()) show = !homeIsForeground(); // v4/redesign: Home button on every inner screen/dialog, hidden only on the bare home
       else show = true;                                // classic UI: keep the persistent behaviour
       var want = show ? "flex" : "none";
       if (fab.style.display !== want) fab.style.display = want;
