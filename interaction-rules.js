@@ -128,7 +128,9 @@
     ],
     "lisinopril": [
       "ace_inhibitor",
-      "raas"
+      "diuretic",
+      "raas",
+      "thiazide_diuretic"
     ],
     "perindopril": [
       "ace_inhibitor",
@@ -418,28 +420,11 @@
     "digoxin": [
       "cardiac_glycoside"
     ],
-    "amlodipine": [
-      "calcium_channel_blocker",
-      "dihydropyridine_ccb",
-      "vasodilator"
-    ],
-    "avanafil": [
-      "cyp3a4_sensitive_substrate",
-      "pde5_inhibitor",
-      "vasodilator"
-    ],
-    "clevidipine": [
-      "calcium_channel_blocker",
-      "dihydropyridine_ccb",
-      "vasodilator"
-    ],
-    "felodipine": [
-      "calcium_channel_blocker",
-      "cyp3a4_sensitive_substrate",
-      "dihydropyridine_ccb",
-      "vasodilator"
-    ],
     "isosorbide dinitrate": [
+      "nitrate",
+      "vasodilator"
+    ],
+    "nitroglycerin": [
       "nitrate",
       "vasodilator"
     ],
@@ -447,16 +432,41 @@
       "nitrate",
       "vasodilator"
     ],
-    "labetalol": [
-      "beta_blocker"
+    "tadalafil": [
+      "cyp3a4_sensitive_substrate",
+      "pde5_inhibitor",
+      "vasodilator"
     ],
-    "nicardipine": [
+    "avanafil": [
+      "cyp3a4_sensitive_substrate",
+      "pde5_inhibitor",
+      "vasodilator"
+    ],
+    "sildenafil": [
+      "cyp3a4_sensitive_substrate",
+      "pde5_inhibitor",
+      "vasodilator"
+    ],
+    "vardenafil": [
+      "cyp3a4_sensitive_substrate",
+      "pde5_inhibitor",
+      "qt_prolonging",
+      "vasodilator"
+    ],
+    "sildenafil citrate": [
+      "pde5_inhibitor"
+    ],
+    "vardenafil hydrochloride trihydrate": [
+      "pde5_inhibitor"
+    ],
+    "vardenafil hydrochloride": [
+      "pde5_inhibitor"
+    ],
+    "nisoldipine": [
       "calcium_channel_blocker",
-      "cyp2c19_inhibitor",
-      "cyp3a4_inhibitor",
       "dihydropyridine_ccb"
     ],
-    "nifedipine": [
+    "felodipine": [
       "calcium_channel_blocker",
       "cyp3a4_sensitive_substrate",
       "dihydropyridine_ccb",
@@ -467,24 +477,955 @@
       "cyp3a4_sensitive_substrate",
       "dihydropyridine_ccb"
     ],
+    "amlodipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb",
+      "vasodilator"
+    ],
+    "clevidipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb",
+      "vasodilator"
+    ],
+    "isradipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb"
+    ],
+    "nifedipine": [
+      "calcium_channel_blocker",
+      "cyp3a4_sensitive_substrate",
+      "dihydropyridine_ccb",
+      "vasodilator"
+    ],
+    "nicardipine": [
+      "calcium_channel_blocker",
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor",
+      "dihydropyridine_ccb"
+    ],
+    "fenoprofen": [
+      "nsaid"
+    ],
+    "ketoprofen": [
+      "nsaid"
+    ],
+    "etodolac": [
+      "nsaid"
+    ],
+    "meloxicam": [
+      "nsaid"
+    ],
+    "tolmetin": [
+      "nsaid"
+    ],
+    "nepafenac": [
+      "nsaid"
+    ],
+    "oxaprozin": [
+      "nsaid"
+    ],
+    "piroxicam": [
+      "nsaid"
+    ],
+    "nabumetone": [
+      "nsaid"
+    ],
+    "diflunisal": [
+      "nsaid"
+    ],
+    "celecoxib": [
+      "nsaid"
+    ],
+    "mefenamic acid": [
+      "nsaid"
+    ],
+    "indomethacin": [
+      "nsaid"
+    ],
+    "sulindac": [
+      "nsaid"
+    ],
+    "bromfenac": [
+      "nsaid"
+    ],
+    "flurbiprofen": [
+      "nsaid"
+    ],
+    "nefazodone": [
+      "serotonergic",
+      "ssri"
+    ],
+    "trazodone": [
+      "qt_prolonging",
+      "serotonergic",
+      "ssri"
+    ],
+    "fluvoxamine": [
+      "serotonergic",
+      "ssri"
+    ],
+    "milnacipran": [
+      "serotonergic",
+      "snri"
+    ],
+    "levomilnacipran": [
+      "serotonergic",
+      "snri"
+    ],
+    "desvenlafaxine": [
+      "serotonergic",
+      "snri"
+    ],
+    "alosetron": [
+      "qt_prolonging"
+    ],
+    "palonosetron": [
+      "qt_prolonging"
+    ],
+    "dolasetron": [
+      "qt_prolonging"
+    ],
+    "granisetron": [
+      "qt_prolonging"
+    ],
+    "safinamide": [
+      "cyp2c19_inhibitor",
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "tranylcypromine": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "isocarboxazid": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "rasagiline": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "phenelzine": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "selegiline": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "amitriptyline": [
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "nortriptyline": [
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "trimipramine": [
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "clomipramine": [
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "amoxapine": [
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "protriptyline": [
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "doxepin": [
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "desipramine": [
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "imipramine": [
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "fluvastatin": [
+      "statin"
+    ],
+    "lovastatin": [
+      "cyp3a4_sensitive_substrate",
+      "statin"
+    ],
+    "pitavastatin": [
+      "statin"
+    ],
+    "benazepril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "enalaprilat anhydrous": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "moexiprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "quinapril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "captopril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "quinaprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "benazeprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "ramiprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "trandolapril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "fosinoprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "perindoprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "fosinopril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "trandolaprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "lisinopril anhydrous": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "sparsentan": [
+      "arb",
+      "raas"
+    ],
+    "eprosartan": [
+      "arb",
+      "raas"
+    ],
+    "azilsartan": [
+      "arb",
+      "raas"
+    ],
+    "candesartan": [
+      "arb",
+      "raas"
+    ],
+    "olmesartan": [
+      "arb",
+      "raas"
+    ],
+    "irbesartan": [
+      "arb",
+      "raas"
+    ],
+    "aliskiren": [
+      "raas"
+    ],
+    "torsemide": [
+      "diuretic",
+      "loop_diuretic"
+    ],
+    "ethacrynic acid": [
+      "diuretic",
+      "loop_diuretic"
+    ],
+    "chlorothiazide": [
+      "diuretic",
+      "thiazide_diuretic"
+    ],
+    "bendroflumethiazide": [
+      "diuretic",
+      "thiazide_diuretic"
+    ],
+    "polythiazide": [
+      "diuretic",
+      "thiazide_diuretic"
+    ],
+    "hydroflumethiazide": [
+      "diuretic",
+      "thiazide_diuretic"
+    ],
+    "chlorthalidone": [
+      "diuretic",
+      "thiazide_diuretic"
+    ],
+    "metolazone": [
+      "diuretic",
+      "thiazide_diuretic"
+    ],
+    "triamterene": [
+      "diuretic",
+      "potassium_sparing_diuretic"
+    ],
+    "levobunolol": [
+      "beta_blocker"
+    ],
+    "labetalol": [
+      "beta_blocker"
+    ],
+    "timolol anhydrous": [
+      "beta_blocker"
+    ],
+    "pindolol": [
+      "beta_blocker"
+    ],
+    "carteolol": [
+      "beta_blocker"
+    ],
+    "betaxolol": [
+      "beta_blocker"
+    ],
+    "landiolol": [
+      "beta_blocker"
+    ],
+    "acebutolol": [
+      "beta_blocker"
+    ],
+    "esmolol": [
+      "beta_blocker"
+    ],
+    "nadolol": [
+      "beta_blocker"
+    ],
+    "edoxaban": [
+      "anticoagulant",
+      "doac"
+    ],
+    "fondaparinux": [
+      "anticoagulant",
+      "doac"
+    ],
+    "desirudin": [
+      "anticoagulant",
+      "doac"
+    ],
+    "bivalirudin": [
+      "anticoagulant",
+      "doac"
+    ],
+    "argatroban anhydrous": [
+      "anticoagulant",
+      "doac"
+    ],
+    "heparin, porcine": [
+      "anticoagulant"
+    ],
+    "dalteparin": [
+      "anticoagulant",
+      "lmwh"
+    ],
+    "citric acid, anhydrous": [
+      "anticoagulant"
+    ],
+    "protein c, human": [
+      "anticoagulant"
+    ],
+    "edetic acid": [
+      "anticoagulant"
+    ],
+    "cangrelor": [
+      "antiplatelet",
+      "p2y12_inhibitor"
+    ],
+    "eptifibatide": [
+      "antiplatelet"
+    ],
+    "tirofiban": [
+      "antiplatelet"
+    ],
+    "vorapaxar": [
+      "antiplatelet"
+    ],
+    "ticlopidine": [
+      "antiplatelet"
+    ],
+    "dipyridamole": [
+      "antiplatelet"
+    ],
+    "codeine anhydrous": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "propoxyphene": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydrocodone": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "methadone": [
+      "cns_depressant",
+      "opioid",
+      "qt_prolonging"
+    ],
+    "alfentanil": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "levorphanol": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "remifentanil": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "sufentanil": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "difelikefalin": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "meperidine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydromorphone": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "loperamide": [
+      "cns_depressant",
+      "opioid",
+      "qt_prolonging"
+    ],
+    "dihydrocodeine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "buprenorphine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "oxymorphone": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "tapentadol": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydrocodone hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "eluxadoline": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine anhyd": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "remifentanil hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine sulfate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "meperidine hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydromorphone hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine camsyl": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "dihydrocodeine bitartrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "fentanyl hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "propoxyphene hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "alfentanil hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine polistirex": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "morphine hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydrocodone polistirex": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "paregoric": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "levorphanol tartrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "oxymorphone hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "oxycodone terephthalate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine phosphate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydrocodone resin complex": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "naldemedine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "morphine sulfate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "benzhydrocodone hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "morphine tartrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydrocodone bitartrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "naldemedine tosylate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "benzhydrocodone": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "tramadol hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "sufentanil citrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydrocodone tannate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "oxycodone hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "fentanyl citrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine phosphate anhydrous": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "propoxyphene napsylate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "quazepam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "chlordiazepoxide": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "estazolam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "flurazepam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "alprazolam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "clorazepic acid": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "clobazam": [
+      "benzodiazepine",
+      "cns_depressant",
+      "cyp3a4_inducer"
+    ],
+    "oxazepam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "triazolam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "temazepam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "butalbital": [
+      "cns_depressant"
+    ],
+    "methohexital": [
+      "cns_depressant"
+    ],
+    "dexlansoprazole": [
+      "ppi"
+    ],
+    "azithromycin anhydrous": [
+      "macrolide",
+      "qt_prolonging"
+    ],
+    "finafloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "gatifloxacin anhydrous": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "gemifloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "besifloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "luliconazole": [
+      "azole_antifungal",
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "isavuconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "econazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "tioconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "sertaconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "oxiconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "efinaconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "oteseconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "sulconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "posaconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor",
+      "qt_prolonging"
+    ],
+    "terconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "miconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "clotrimazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "butoconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "febuxostat": [
+      "xanthine_oxidase_inhibitor"
+    ],
+    "mavorixafor": [
+      "cyp3a4_inhibitor"
+    ],
+    "osilodrostat": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "lomitapide mesylate": [
+      "cyp3a4_inhibitor"
+    ],
+    "perampanel": [
+      "cyp3a4_inhibitor"
+    ],
+    "netupitant": [
+      "cyp3a4_inhibitor"
+    ],
+    "pacritinib": [
+      "cyp3a4_inhibitor"
+    ],
+    "triclabendazole": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "atazanavir": [
+      "cyp3a4_inhibitor"
+    ],
+    "boceprevir": [
+      "cyp3a4_inhibitor"
+    ],
+    "cyclosporine": [
+      "cyp3a4_inhibitor"
+    ],
+    "fexinidazole": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "simeprevir": [
+      "cyp3a4_inhibitor"
+    ],
+    "elexacaftor": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "conivaptan": [
+      "cyp3a4_inhibitor"
+    ],
+    "lazertinib": [
+      "cyp3a4_inhibitor"
+    ],
+    "letermovir": [
+      "cyp3a4_inhibitor"
+    ],
+    "aprepitant": [
+      "cyp3a4_inducer",
+      "cyp3a4_inhibitor"
+    ],
+    "viloxazine": [
+      "cyp3a4_inhibitor"
+    ],
+    "imatinib": [
+      "cyp3a4_inhibitor"
+    ],
     "ritonavir": [
       "cyp3a4_inhibitor"
     ],
-    "sildenafil": [
-      "cyp3a4_sensitive_substrate",
-      "pde5_inhibitor",
-      "vasodilator"
+    "voxelotor": [
+      "cyp3a4_inhibitor"
     ],
-    "tadalafil": [
-      "cyp3a4_sensitive_substrate",
-      "pde5_inhibitor",
-      "vasodilator"
+    "efavirenz": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor"
     ],
-    "vardenafil": [
-      "cyp3a4_sensitive_substrate",
-      "pde5_inhibitor",
-      "qt_prolonging",
-      "vasodilator"
+    "lefamulin": [
+      "cyp3a4_inhibitor"
+    ],
+    "amprenavir": [
+      "cyp3a4_inducer",
+      "cyp3a4_inhibitor"
+    ],
+    "manidipine hydrochloride": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "givinostat": [
+      "cyp3a4_inhibitor"
+    ],
+    "conivaptan hydrochloride": [
+      "cyp3a4_inhibitor"
+    ],
+    "pazopanib": [
+      "cyp3a4_inhibitor"
+    ],
+    "levoketoconazole": [
+      "cyp3a4_inhibitor"
+    ],
+    "dasatinib anhydrous": [
+      "cyp3a4_inhibitor"
+    ],
+    "indinavir anhydrous": [
+      "cyp3a4_inhibitor"
+    ],
+    "trofinetide": [
+      "cyp3a4_inhibitor"
+    ],
+    "maribavir": [
+      "cyp3a4_inhibitor"
+    ],
+    "avacopan": [
+      "cyp3a4_inhibitor"
+    ],
+    "erdafitinib": [
+      "cyp3a4_inducer",
+      "cyp3a4_inhibitor"
+    ],
+    "berotralstat": [
+      "cyp3a4_inhibitor"
+    ],
+    "simeprevir sodium": [
+      "cyp3a4_inhibitor"
+    ],
+    "everolimus": [
+      "cyp3a4_inhibitor"
+    ],
+    "xanomeline": [
+      "cyp3a4_inhibitor"
+    ],
+    "manidipine": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "lomitapide": [
+      "cyp3a4_inhibitor"
+    ],
+    "osimertinib": [
+      "cyp3a4_inducer"
+    ],
+    "eslicarbazepine": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inducer"
+    ],
+    "eslicarbazepine acetate": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inducer"
+    ],
+    "oritavancin": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inducer"
+    ],
+    "cenobamate": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inducer"
+    ],
+    "lorlatinib": [
+      "cyp3a4_inducer"
+    ],
+    "topiramate": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inducer"
+    ],
+    "carbamazepine": [
+      "cyp3a4_inducer"
+    ],
+    "pitolisant": [
+      "cyp3a4_inducer"
+    ],
+    "deferasirox": [
+      "cyp3a4_inducer"
+    ],
+    "belzutifan": [
+      "cyp3a4_inducer"
+    ],
+    "mitotane": [
+      "cyp3a4_inducer"
+    ],
+    "ivosidenib": [
+      "cyp3a4_inducer"
+    ],
+    "repotrectinib": [
+      "cyp3a4_inducer"
+    ],
+    "omaveloxolone": [
+      "cyp3a4_inducer"
+    ],
+    "elafibranor": [
+      "cyp3a4_inducer"
+    ],
+    "dabrafenib": [
+      "cyp3a4_inducer"
+    ],
+    "osimertinib mesylate": [
+      "cyp3a4_inducer"
+    ],
+    "enzalutamide": [
+      "cyp3a4_inducer"
+    ],
+    "oritavancin diphosphate": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inducer"
+    ],
+    "cannabidiol": [
+      "cyp2c19_inhibitor"
+    ],
+    "tecovirimat": [
+      "cyp2c19_inhibitor"
+    ],
+    "pirtobrutinib": [
+      "cyp2c19_inhibitor"
+    ],
+    "lonafarnib": [
+      "cyp2c19_inhibitor"
+    ],
+    "elagolix": [
+      "cyp2c19_inhibitor"
+    ],
+    "mephobarbital": [
+      "cyp2c19_inhibitor"
+    ],
+    "safinamide mesylate": [
+      "cyp2c19_inhibitor"
+    ],
+    "etravirine": [
+      "cyp2c19_inhibitor"
     ],
     "dofetilide": [
       "qt_prolonging"
@@ -517,9 +1458,6 @@
       "qt_prolonging"
     ],
     "domperidone": [
-      "qt_prolonging"
-    ],
-    "methadone": [
       "qt_prolonging"
     ],
     "pentamidine": [
@@ -564,31 +1502,7 @@
     "mirtazapine": [
       "qt_prolonging"
     ],
-    "trazodone": [
-      "qt_prolonging"
-    ],
-    "amitriptyline": [
-      "qt_prolonging"
-    ],
-    "nortriptyline": [
-      "qt_prolonging"
-    ],
-    "clomipramine": [
-      "qt_prolonging"
-    ],
-    "imipramine": [
-      "qt_prolonging"
-    ],
-    "doxepin": [
-      "qt_prolonging"
-    ],
     "famotidine": [
-      "qt_prolonging"
-    ],
-    "granisetron": [
-      "qt_prolonging"
-    ],
-    "dolasetron": [
       "qt_prolonging"
     ],
     "tacrolimus": [
@@ -601,9 +1515,6 @@
       "qt_prolonging"
     ],
     "solifenacin": [
-      "qt_prolonging"
-    ],
-    "posaconazole": [
       "qt_prolonging"
     ],
     "metronidazole": [
@@ -633,9 +1544,6 @@
     "hydroxyzine": [
       "qt_prolonging"
     ],
-    "loperamide": [
-      "qt_prolonging"
-    ],
     "amantadine": [
       "qt_prolonging"
     ],
@@ -644,10 +1552,6 @@
     ],
     "promethazine": [
       "qt_prolonging"
-    ],
-    "nitroglycerin": [
-      "nitrate",
-      "vasodilator"
     ],
     "nitroglycerin (gtn)": [
       "nitrate",
@@ -660,55 +1564,119 @@
     "nicorandil": [
       "nitrate",
       "vasodilator"
-    ],
-    "lovastatin": [
-      "cyp3a4_sensitive_substrate",
-      "statin"
     ]
   },
   "generics": [
+    "acebutolol",
     "adrenaline",
+    "alfentanil",
+    "alfentanil hydrochloride",
+    "aliskiren",
     "allopurinol",
+    "alosetron",
+    "alprazolam",
     "amantadine",
     "amiloride",
     "amiodarone",
     "amisulpride",
     "amitriptyline",
     "amlodipine",
+    "amoxapine",
+    "amprenavir",
     "apixaban",
+    "aprepitant",
+    "argatroban anhydrous",
     "arsenic trioxide",
     "aspirin",
+    "atazanavir",
     "atenolol",
     "atorvastatin",
+    "avacopan",
     "avanafil",
     "azathioprine",
+    "azilsartan",
     "azithromycin",
+    "azithromycin anhydrous",
     "bedaquiline",
+    "belzutifan",
+    "benazepril",
+    "benazeprilat",
+    "bendroflumethiazide",
+    "benzhydrocodone",
+    "benzhydrocodone hydrochloride",
+    "berotralstat",
+    "besifloxacin",
+    "betaxolol",
     "bezafibrate",
     "bisoprolol",
+    "bivalirudin",
+    "boceprevir",
+    "bromfenac",
     "bumetanide",
+    "buprenorphine",
+    "butalbital",
+    "butoconazole",
+    "candesartan",
+    "cangrelor",
+    "cannabidiol",
+    "captopril",
+    "carbamazepine",
+    "carteolol",
     "carvedilol",
+    "celecoxib",
+    "cenobamate",
+    "chlordiazepoxide",
     "chloroquine",
+    "chlorothiazide",
     "chlorpromazine",
+    "chlorthalidone",
     "ciprofloxacin",
     "citalopram",
+    "citric acid, anhydrous",
     "clarithromycin",
     "clevidipine",
+    "clobazam",
     "clofazimine",
     "clomipramine",
     "clonazepam",
     "clopidogrel",
+    "clorazepic acid",
+    "clotrimazole",
     "clozapine",
     "co-trimoxazole",
     "codeine",
+    "codeine anhyd",
+    "codeine anhydrous",
+    "codeine camsyl",
+    "codeine hydrochloride",
+    "codeine phosphate",
+    "codeine phosphate anhydrous",
+    "codeine polistirex",
+    "codeine sulfate",
+    "conivaptan",
+    "conivaptan hydrochloride",
     "cotrimoxazole",
+    "cyclosporine",
     "dabigatran",
+    "dabrafenib",
+    "dalteparin",
+    "dasatinib anhydrous",
+    "deferasirox",
     "delamanid",
+    "desipramine",
+    "desirudin",
+    "desvenlafaxine",
+    "dexlansoprazole",
     "diazepam",
     "diclofenac",
+    "difelikefalin",
+    "diflunisal",
     "digoxin",
+    "dihydrocodeine",
+    "dihydrocodeine bitartrate",
     "diltiazem",
     "diphenhydramine",
+    "dipyridamole",
     "disopyramide",
     "dofetilide",
     "dolasetron",
@@ -716,75 +1684,201 @@
     "doxepin",
     "droperidol",
     "duloxetine",
+    "econazole",
+    "edetic acid",
+    "edoxaban",
+    "efavirenz",
+    "efinaconazole",
+    "elafibranor",
+    "elagolix",
+    "elexacaftor",
+    "eluxadoline",
     "enalapril",
+    "enalaprilat anhydrous",
     "enoxaparin",
+    "enzalutamide",
     "eplerenone",
+    "eprosartan",
+    "eptifibatide",
+    "erdafitinib",
     "erythromycin",
     "escitalopram",
+    "eslicarbazepine",
+    "eslicarbazepine acetate",
+    "esmolol",
     "esomeprazole",
+    "estazolam",
+    "ethacrynic acid",
+    "etodolac",
+    "etravirine",
+    "everolimus",
     "famotidine",
+    "febuxostat",
     "felodipine",
     "fenofibrate",
+    "fenoprofen",
     "fentanyl",
+    "fentanyl citrate",
+    "fentanyl hydrochloride",
+    "fexinidazole",
+    "finafloxacin",
     "fluconazole",
     "fluoxetine",
+    "flurazepam",
+    "flurbiprofen",
+    "fluvastatin",
+    "fluvoxamine",
+    "fondaparinux",
+    "fosinopril",
+    "fosinoprilat",
     "furosemide",
+    "gatifloxacin anhydrous",
     "gemfibrozil",
+    "gemifloxacin",
+    "givinostat",
     "granisetron",
     "halofantrine",
     "haloperidol",
     "heparin",
+    "heparin, porcine",
     "hydrochlorothiazide",
+    "hydrocodone",
+    "hydrocodone bitartrate",
+    "hydrocodone hydrochloride",
+    "hydrocodone polistirex",
+    "hydrocodone resin complex",
+    "hydrocodone tannate",
+    "hydroflumethiazide",
+    "hydromorphone",
+    "hydromorphone hydrochloride",
     "hydroxychloroquine",
     "hydroxyzine",
     "ibuprofen",
     "ibutilide",
+    "imatinib",
     "imipramine",
     "indapamide",
+    "indinavir anhydrous",
+    "indomethacin",
+    "irbesartan",
+    "isavuconazole",
+    "isocarboxazid",
     "isosorbide",
     "isosorbide dinitrate",
     "isosorbide mononitrate",
+    "isradipine",
     "itraconazole",
+    "ivosidenib",
     "ketoconazole",
+    "ketoprofen",
     "ketorolac",
     "labetalol",
+    "landiolol",
     "lansoprazole",
+    "lazertinib",
+    "lefamulin",
+    "letermovir",
+    "levobunolol",
     "levofloxacin",
+    "levoketoconazole",
+    "levomilnacipran",
+    "levorphanol",
+    "levorphanol tartrate",
     "linezolid",
     "lisinopril",
+    "lisinopril anhydrous",
+    "lomitapide",
+    "lomitapide mesylate",
+    "lonafarnib",
     "loperamide",
     "lorazepam",
+    "lorlatinib",
     "losartan",
     "lovastatin",
+    "luliconazole",
+    "manidipine",
+    "manidipine hydrochloride",
+    "maribavir",
+    "mavorixafor",
+    "mefenamic acid",
+    "meloxicam",
+    "meperidine",
+    "meperidine hydrochloride",
+    "mephobarbital",
     "methadone",
+    "methohexital",
     "methotrexate",
     "metoclopramide",
+    "metolazone",
     "metoprolol",
     "metronidazole",
+    "miconazole",
     "midazolam",
+    "milnacipran",
     "mirtazapine",
+    "mitotane",
+    "moexiprilat",
     "morphine",
+    "morphine hydrochloride",
+    "morphine sulfate",
+    "morphine tartrate",
     "moxifloxacin",
+    "nabumetone",
+    "nadolol",
+    "naldemedine",
+    "naldemedine tosylate",
     "naproxen",
     "nebivolol",
+    "nefazodone",
+    "nepafenac",
+    "netupitant",
     "nicardipine",
     "nicorandil",
     "nifedipine",
     "nimodipine",
+    "nisoldipine",
     "nitroglycerin",
     "nitroglycerin (gtn)",
     "noradrenaline",
     "nortriptyline",
     "ofloxacin",
     "olanzapine",
+    "olmesartan",
+    "omaveloxolone",
     "omeprazole",
     "ondansetron",
+    "oritavancin",
+    "oritavancin diphosphate",
+    "osilodrostat",
+    "osimertinib",
+    "osimertinib mesylate",
+    "oteseconazole",
+    "oxaprozin",
+    "oxazepam",
+    "oxiconazole",
     "oxycodone",
+    "oxycodone hydrochloride",
+    "oxycodone terephthalate",
+    "oxymorphone",
+    "oxymorphone hydrochloride",
+    "pacritinib",
+    "palonosetron",
     "pantoprazole",
+    "paregoric",
     "paroxetine",
+    "pazopanib",
     "pentamidine",
+    "perampanel",
     "perindopril",
+    "perindoprilat",
+    "phenelzine",
     "pimozide",
+    "pindolol",
+    "piroxicam",
+    "pirtobrutinib",
+    "pitavastatin",
+    "pitolisant",
+    "polythiazide",
     "posaconazole",
     "potassium",
     "potassium chloride",
@@ -793,51 +1887,105 @@
     "primaquine",
     "procainamide",
     "promethazine",
+    "propoxyphene",
+    "propoxyphene hydrochloride",
+    "propoxyphene napsylate",
     "propranolol",
+    "protein c, human",
+    "protriptyline",
+    "quazepam",
     "quetiapine",
+    "quinapril",
+    "quinaprilat",
     "quinidine",
     "rabeprazole",
     "ramipril",
+    "ramiprilat",
+    "rasagiline",
+    "remifentanil",
+    "remifentanil hydrochloride",
+    "repotrectinib",
     "risperidone",
     "ritonavir",
     "rivaroxaban",
     "rosuvastatin",
+    "safinamide",
+    "safinamide mesylate",
+    "selegiline",
+    "sertaconazole",
     "sertraline",
     "sevoflurane",
     "sildenafil",
+    "sildenafil citrate",
+    "simeprevir",
+    "simeprevir sodium",
     "simvastatin",
     "solifenacin",
     "sotalol",
+    "sparsentan",
     "spironolactone",
+    "sufentanil",
+    "sufentanil citrate",
+    "sulconazole",
     "sulfamethoxazole",
+    "sulindac",
     "sultopride",
     "tacrolimus",
     "tadalafil",
     "tamoxifen",
+    "tapentadol",
+    "tecovirimat",
     "telmisartan",
+    "temazepam",
+    "terconazole",
     "thioridazine",
     "ticagrelor",
+    "ticlopidine",
+    "timolol anhydrous",
+    "tioconazole",
+    "tirofiban",
     "tizanidine",
+    "tolmetin",
     "tolterodine",
+    "topiramate",
     "torasemide",
+    "torsemide",
     "tramadol",
+    "tramadol hydrochloride",
+    "trandolapril",
+    "trandolaprilat",
+    "tranylcypromine",
     "trazodone",
+    "triamterene",
+    "triazolam",
+    "triclabendazole",
     "trimethoprim",
+    "trimipramine",
+    "trofinetide",
     "valsartan",
     "vandetanib",
     "vardenafil",
+    "vardenafil hydrochloride",
+    "vardenafil hydrochloride trihydrate",
     "venlafaxine",
     "verapamil",
+    "viloxazine",
+    "vorapaxar",
     "voriconazole",
+    "voxelotor",
     "warfarin",
+    "xanomeline",
     "ziprasidone"
   ],
   "brands": {
     "acei": "ramipril",
+    "acid reducer": "esomeprazole",
     "adalat": "nifedipine",
     "adcirca": "tadalafil",
     "adrenaline (epinephrine)": "adrenaline",
     "aldactone": "spironolactone",
+    "amiloride hydrochloride": "amiloride",
+    "amlodipine besylate": "amlodipine",
     "amlokind": "amlodipine",
     "amlong": "amlodipine",
     "angised": "nitroglycerin (gtn)",
@@ -846,9 +1994,11 @@
     "asa": "aspirin",
     "ativan": "lorazepam",
     "atorva": "atorvastatin",
+    "atorvastatin calcium": "atorvastatin",
     "bb": "carvedilol",
     "beta blocker": "metoprolol",
     "betaloc": "metoprolol",
+    "bisoprolol fumarate": "bisoprolol",
     "brufen": "ibuprofen",
     "calcigard": "nifedipine",
     "calmpose": "diazepam",
@@ -858,28 +2008,39 @@
     "cardene": "nicardipine",
     "carvil": "carvedilol",
     "ccb": "amlodipine",
+    "chloroquine phosphate": "chloroquine",
     "cialis": "tadalafil",
     "cleviprex": "clevidipine",
     "clexane": "enoxaparin",
     "clopilet": "clopidogrel",
+    "codeine sulfate": "codeine",
     "combiflam": "ibuprofen",
     "cordarone": "amiodarone",
     "crestor": "rosuvastatin",
+    "dabigatran etexilate": "dabigatran",
     "depin": "nifedipine",
     "deplatt": "clopidogrel",
+    "diclofenac sodium": "diclofenac",
+    "diltiazem hydrochloride": "diltiazem",
     "dinitrate": "isosorbide dinitrate",
     "disprin": "aspirin",
     "doac": "apixaban",
     "domstal": "domperidone",
+    "duloxetine delayed-release": "duloxetine",
     "dynapar": "diclofenac",
     "ecosprin": "aspirin",
     "eliquis": "apixaban",
     "emeset": "ondansetron",
+    "enalapril maleate": "enalapril",
+    "enoxaparin sodium": "enoxaparin",
+    "entresto": "valsartan",
+    "escitalopram oral solution": "escitalopram",
     "esomep": "esomeprazole",
     "esoz": "esomeprazole",
     "famocid": "famotidine",
     "famtac": "famotidine",
     "felodip": "felodipine",
+    "fentanyl citrate": "fentanyl",
     "frusemide": "furosemide",
     "frusenex": "furosemide",
     "fulsed": "midazolam",
@@ -888,8 +2049,11 @@
     "h2": "famotidine",
     "h2 blocker": "famotidine",
     "haldol": "haloperidol",
+    "heparin sodium": "heparin",
+    "ibuprofen dye free": "ibuprofen",
     "ikorel": "nicorandil",
     "imdur": "isosorbide mononitrate",
+    "inspra": "eplerenone",
     "ismo": "isosorbide mononitrate",
     "isordil": "isosorbide dinitrate",
     "isosorbide": "isosorbide mononitrate",
@@ -897,20 +2061,30 @@
     "kcl": "potassium chloride",
     "ketanov": "ketorolac",
     "ketorol": "ketorolac",
+    "ketorolac tromethamine": "ketorolac",
     "korandil": "nicorandil",
+    "labetalol hydrochloride": "labetalol",
     "lanoxin": "digoxin",
     "lasix": "furosemide",
     "levitra": "vardenafil",
     "lipitor": "atorvastatin",
+    "lisinopril and hydrochlorothiazide": "hydrochlorothiazide",
     "lmwh": "enoxaparin",
+    "lopinavir and ritonavir": "ritonavir",
+    "losartan potassium": "losartan",
+    "low dose aspirin": "aspirin",
     "manforce": "sildenafil",
     "maxeron": "metoclopramide",
     "megalis": "tadalafil",
     "metolar": "metoprolol",
+    "metoprolol tartrate": "metoprolol",
     "monit": "isosorbide mononitrate",
     "monotrate": "isosorbide mononitrate",
+    "morphine sulfate": "morphine",
+    "moxifloxacin hydrochloride": "moxifloxacin",
     "nexium": "esomeprazole",
     "nicardia": "nifedipine",
+    "nicardipine hydrochloride": "nicardipine",
     "nikoran": "nicorandil",
     "nimodip": "nimodipine",
     "nimotop": "nimodipine",
@@ -923,27 +2097,42 @@
     "ntg": "nitroglycerin",
     "omecip": "omeprazole",
     "omez": "omeprazole",
+    "ondansetron hydrochloride": "ondansetron",
     "ondem": "ondansetron",
+    "oxycodone hydrochloride": "oxycodone",
+    "pacerone": "amiodarone",
     "pan": "pantoprazole",
     "pan-d": "pantoprazole",
     "pantocid": "pantoprazole",
     "pantop": "pantoprazole",
+    "pantoprazole sodium": "pantoprazole",
     "penegra": "sildenafil",
+    "perindopril erbumine": "perindopril",
     "perinorm": "metoclopramide",
     "plavix": "clopidogrel",
     "plendil": "felodipine",
+    "potassium chloride": "potassium",
     "potklor": "potassium chloride",
     "ppi": "esomeprazole",
     "pradaxa": "dabigatran",
+    "pravastatin sodium": "pravastatin",
+    "primaquine phosphate": "primaquine",
+    "propranolol hydrochloride": "propranolol",
     "protonix": "pantoprazole",
+    "rabeprazole sodium": "rabeprazole",
     "rabium": "rabeprazole",
     "ramistar": "ramipril",
     "razo": "rabeprazole",
     "reglan": "metoclopramide",
     "revatio": "sildenafil",
     "rosuvas": "rosuvastatin",
+    "rosuvastatin calcium": "rosuvastatin",
     "serenace": "haloperidol",
+    "sertraline hydrochloride": "sertraline",
+    "sildenafil citrate": "sildenafil",
+    "sirturo": "bedaquiline",
     "sorbitrate": "isosorbide dinitrate",
+    "sotalol hydrochloride": "sotalol",
     "spedra": "avanafil",
     "spiractin": "spironolactone",
     "sporanox": "itraconazole",
@@ -952,22 +2141,28 @@
     "stendra": "avanafil",
     "storvas": "atorvastatin",
     "suhagra": "sildenafil",
+    "sulfamethoxazole and trimethoprim": "trimethoprim",
     "tachyra": "amiodarone",
     "tadacip": "tadalafil",
     "telma": "telmisartan",
     "telsar": "telmisartan",
+    "tramadol hydrochloride": "tramadol",
     "tramazac": "tramadol",
     "trinitroglycerin": "nitroglycerin",
     "ultracet": "tramadol",
     "uniwarfin": "warfarin",
     "valium": "diazepam",
+    "vardenafil hydrochloride": "vardenafil",
     "vasotop": "nimodipine",
+    "verapamil hydrochloride": "verapamil",
+    "vfend": "voriconazole",
     "viagra": "sildenafil",
     "vilitra": "vardenafil",
     "vomikind": "ondansetron",
     "vomistop": "domperidone",
     "voveran": "diclofenac",
     "warf": "warfarin",
+    "warfarin sodium": "warfarin",
     "xarelto": "rivaroxaban",
     "zofran": "ondansetron"
   },

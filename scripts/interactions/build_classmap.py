@@ -49,6 +49,10 @@ def build():
     except FileNotFoundError:
         rxclass = {}
     try:
+        class_members = L.load_json(f"{L.BUILD}/class_members.json")
+    except FileNotFoundError:
+        class_members = {}
+    try:
         openfda = L.load_json(f"{L.BUILD}/openfda.json")
     except FileNotFoundError:
         openfda = {}
@@ -65,6 +69,13 @@ def build():
 
     # 1. legacy tags (verbatim base)
     for g, tags in legacy.items():
+        if L.norm(g) not in excluded:
+            add(L.norm(g), tags)
+
+    # 1b. COMPREHENSIVE class-member enumeration — every drug RxClass knows to be
+    #     in an interaction-relevant class (all PDE5i, nitrates, NSAIDs, statins,
+    #     QT-prolongers, …), not just the app formulary. This is the bulk of coverage.
+    for g, tags in class_members.items():
         if L.norm(g) not in excluded:
             add(L.norm(g), tags)
 
