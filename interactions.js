@@ -344,6 +344,41 @@
       }
     }
 
+    // 3. Hidden same-ingredient duplication. Flag the SAME active ingredient
+    //    present in two or more DIFFERENT products when at least one of them is a
+    //    combination product (e.g. standalone pantoprazole + a combo that also
+    //    contains pantoprazole, or the same ingredient in two different combos).
+    //    Dose/composition variants of ONE single drug are already collapsed into
+    //    a single product and are intentionally NOT flagged here (no false alarm
+    //    from picking Drug-Index dose cards).
+    var ingGroups = {};
+    for (var a = 0; a < dedupedNorm.length; a++) {
+      var grp = dedupedNorm[a];
+      for (var b = 0; b < grp.ingredients.length; b++) {
+        (ingGroups[grp.ingredients[b]] = ingGroups[grp.ingredients[b]] || []).push(grp);
+      }
+    }
+    Object.keys(ingGroups).forEach(function (ing) {
+      var grps = ingGroups[ing];
+      if (grps.length < 2) return;                                             // only one product carries it
+      if (!grps.some(function (g) { return g.ingredients.length > 1; })) return; // all single-drug variants → skip
+      var products = grps.map(function (g) { return g.generic; })
+                         .filter(function (v, i, arr) { return arr.indexOf(v) === i; });
+      var finding = {
+        drugs: products,
+        severity: "moderate",
+        mechanism: "The same active ingredient (" + ing + ") is present in more than one of the listed medicines, including a combination product.",
+        effect: "Therapeutic duplication — unintended double dosing of " + ing + " and additive adverse-effect risk.",
+        action: "Confirm this is intended; consolidate to a single source of " + ing + " at the intended total dose.",
+        monitoring: "Reconcile the medication list and remove the duplicate source.",
+        source: "",
+        specialistReview: false,
+        ruleType: "duplicate_generic"
+      };
+      result.moderate.push(finding);
+      result.duplicates.push(finding);
+    });
+
     return result;
   }
 

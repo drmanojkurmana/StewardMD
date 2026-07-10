@@ -405,7 +405,9 @@ try {
     });
   `));
   ok(sildComboRes.criticalLength === 0, "Sildenafil + Sildenafil/Dapoxetine combination has no self-interaction");
-  ok(sildComboRes.duplicatesLength === 0, "Sildenafil + Sildenafil/Dapoxetine combination has no false duplicate warnings");
+  // Clinician decision (Dr. Kurmana): the same ingredient hidden inside a combination
+  // product alongside its standalone form IS therapeutic duplication and must warn.
+  ok(sildComboRes.duplicatesLength >= 1, "Sildenafil + Sildenafil/Dapoxetine combo flags hidden sildenafil duplication (standalone + combo)");
 
   await ev(`
     MEDLIST.clearAll();
