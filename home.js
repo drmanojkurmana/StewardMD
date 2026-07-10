@@ -916,6 +916,9 @@
 
   function build() {
     if (root) return;
+    // Phase 3: flag → global body.rds-on so the clinical-surface restyle layer
+    // (redesign-system.css, scoped `html body.rds-on …`) applies app-wide. Off = untouched.
+    try { document.body.classList.toggle("rds-on", redesignNavOn()); } catch (e) {}
     injectCSS(); injectV3CSS();
     root = document.createElement("div"); root.id = "homeV2"; root.className = "v3";
     root.innerHTML =

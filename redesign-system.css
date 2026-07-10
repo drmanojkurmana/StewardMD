@@ -326,3 +326,24 @@ body.dark {
 #homeV2.rnav .rnav-tab.active .rds-icon { font-variation-settings: 'opsz' 24,'wght' 500,'GRAD' 0,'FILL' 1; }
 #homeV2.rnav .rnav-tab-maik .rds-icon { background: var(--rds-primary); color: #fff; width: 52px; height: 52px; border-radius: 999px; display: flex; align-items: center; justify-content: center; box-shadow: var(--rds-el-cta); margin-top: -18px; }
 #homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); }
+
+/* ============================================================================
+   Phase 3 · Clinical-surface restyle — FLAG-GATED (html body.rds-on), token-level
+   only. No markup/JS/logic change; fully reversible (flag off). The `html` prefix
+   lifts specificity above icu.js's runtime-injected rules so the remap wins in
+   both light and dark. var(--rds-*)/var(--sev-*) auto-flip under body.dark.
+   ========================================================================== */
+/* --- ICU workstation (board 1e): adopt the exact design tokens app-wide --- */
+html body.rds-on #icuRoot,
+html body.rds-on .icu-modal,
+html body.rds-on .icu-tour {
+  --primary: var(--rds-primary); --primary2: var(--rds-primary-2); --primary-soft: var(--rds-primary-soft);
+  --bg: var(--rds-bg); --panel: var(--rds-surface); --panel2: var(--rds-surface-2);
+  --border: var(--rds-line); --ink: var(--rds-ink); --muted: var(--rds-muted);
+  --ok: var(--sev-stable-fg);     --ok-soft: var(--sev-stable-bg);
+  --warn: var(--sev-warning-fg);  --warn-soft: var(--sev-warning-bg);
+  --danger: var(--sev-critical-fg); --danger-soft: var(--sev-critical-bg);
+  --font: var(--rds-font); --r: var(--rds-r); --r-sm: var(--rds-r-ctl);
+}
+/* 44px minimum touch target on ICU action chips (was 36px) */
+html body.rds-on #icuRoot .icu-chip { min-height: 44px; }
