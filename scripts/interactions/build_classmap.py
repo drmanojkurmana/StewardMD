@@ -57,6 +57,10 @@ def build():
     except FileNotFoundError:
         gold = {}
     try:
+        all_epc = L.load_json(f"{L.BUILD}/all_epc.json")
+    except FileNotFoundError:
+        all_epc = {}
+    try:
         openfda = L.load_json(f"{L.BUILD}/openfda.json")
     except FileNotFoundError:
         openfda = {}
@@ -103,6 +107,13 @@ def build():
             key = ((typ or "").upper(), name)
             if key in tax:
                 add(L.norm(g), tax[key])
+
+    # 3aa. FULL EPC breadth — curated tag where the class is mapped, descriptive
+    #      "epc:<slug>" tag otherwise, so essentially every prescribable drug is
+    #      classified (and same-class duplication is detectable).
+    for g, tags in all_epc.items():
+        if L.norm(g) not in excluded:
+            add(L.norm(g), tags)
 
     # 3b. Gold composition DB — apply safe keyword-derived tags (RxClass wins where both).
     for g, rec in gold.items():

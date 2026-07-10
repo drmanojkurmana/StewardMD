@@ -24,6 +24,8 @@ offline; this pipeline only produces the data it consumes.
 
 `build_all.py` runs: fetch (cached) → classify → merge rules → validate → emit.
 
+Fetch/classify stages: `fetch_rxnorm` (normalize) → `fetch_rxclass` (per-drug curated classes incl. CYP) → `fetch_class_members` (all members of each curated class) → `fetch_all_epc` (every DailyMed EPC class + members, for full breadth) → `fetch_openfda` (enrichment/evidence) → `build_gold` (fold in worker/data/gold compositions). `build_classmap` unions them all; `build_rules` adds curated + auto low-severity duplicate-class rules.
+
 ```
 python scripts/interactions/build_all.py            # full build (fetch if cache missing)
 python scripts/interactions/build_all.py --no-fetch  # rebuild from cache only

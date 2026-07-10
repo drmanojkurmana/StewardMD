@@ -20,7 +20,7 @@ import validate as validate_mod
 
 
 def _need_fetch():
-    for f in ("rxnorm.json", "rxclass.json", "class_members.json", "openfda.json"):
+    for f in ("rxnorm.json", "rxclass.json", "class_members.json", "all_epc.json", "openfda.json"):
         if not os.path.exists(os.path.join(L.BUILD, f)):
             return True
     return False
@@ -30,6 +30,7 @@ def main(argv):
     do_fetch = "--fetch" in argv or (_need_fetch() and "--no-fetch" not in argv)
     if do_fetch:
         print("== fetch stages (network; cached) ==")
+        import fetch_all_epc
         import fetch_class_members
         import fetch_openfda
         import fetch_rxclass
@@ -37,6 +38,7 @@ def main(argv):
         fetch_rxnorm.run()
         fetch_rxclass.run()
         fetch_class_members.run()
+        fetch_all_epc.run()
         fetch_openfda.run()
     else:
         print("== using cached fetch output (build/*.json) ==")

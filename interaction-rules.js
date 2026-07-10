@@ -48,60 +48,108 @@
   "drugClasses": {
     "aspirin": [
       "antiplatelet",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
       "nsaid"
     ],
     "ibuprofen": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "diclofenac": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "naproxen": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "ketorolac": [
+      "epc:cyclooxygenase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "clopidogrel": [
       "antiplatelet",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "p2y12_inhibitor"
     ],
     "ticagrelor": [
       "antiplatelet",
       "cyp3a4_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "p2y12_inhibitor",
       "pgp_inhibitor"
     ],
     "prasugrel": [
       "antiplatelet",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "p2y12_inhibitor"
     ],
     "omeprazole": [
       "cyp2c19_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:ion_channel_or_pump_agent",
       "ppi"
     ],
     "esomeprazole": [
       "cyp2c19_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:ion_channel_or_pump_agent",
       "ppi"
     ],
     "pantoprazole": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:ion_channel_or_pump_agent",
       "ppi",
       "ppi_low_cyp2c19"
     ],
     "rabeprazole": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:ion_channel_or_pump_agent",
       "ppi",
       "ppi_low_cyp2c19"
     ],
     "lansoprazole": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:ion_channel_or_pump_agent",
       "ppi",
       "ppi_low_cyp2c19"
     ],
     "warfarin": [
       "anticoagulant",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
       "vitamin_k_antagonist"
     ],
     "enoxaparin": [
       "anticoagulant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
       "lmwh"
     ],
     "heparin": [
@@ -109,22 +157,51 @@
     ],
     "dabigatran": [
       "anticoagulant",
-      "doac"
+      "doac",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:protease_inhibitor"
     ],
     "rivaroxaban": [
       "anticoagulant",
-      "doac"
+      "doac",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
     ],
     "apixaban": [
       "anticoagulant",
-      "doac"
+      "doac",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
     ],
     "ramipril": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "enalapril": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "lisinopril": [
@@ -135,27 +212,50 @@
     ],
     "perindopril": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "telmisartan": [
       "arb",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "raas"
     ],
     "losartan": [
       "arb",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "raas"
     ],
     "valsartan": [
       "arb",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "raas"
     ],
     "furosemide": [
       "diuretic",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "loop_diuretic",
       "qt_prolonging"
     ],
     "bumetanide": [
       "diuretic",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "loop_diuretic"
     ],
     "torasemide": [
@@ -164,131 +264,221 @@
     ],
     "hydrochlorothiazide": [
       "diuretic",
+      "epc:chemical_structure",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging",
       "thiazide_diuretic"
     ],
     "indapamide": [
       "diuretic",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging",
       "thiazide_diuretic"
     ],
     "spironolactone": [
       "aldosterone_antagonist",
       "diuretic",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "potassium_sparing_diuretic",
       "qt_prolonging"
     ],
     "eplerenone": [
       "aldosterone_antagonist",
       "diuretic",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "potassium_sparing_diuretic"
     ],
     "amiloride": [
       "diuretic",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:potassium_sparing_diuretic",
       "potassium_sparing_diuretic"
     ],
     "ondansetron": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "qt_prolonging"
     ],
     "haloperidol": [
       "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:typical_antipsychotic",
       "qt_prolonging"
     ],
     "amiodarone": [
       "antiarrhythmic",
       "cyp1a2_inhibitor",
       "cyp2d6_inhibitor",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor",
       "qt_prolonging"
     ],
     "sotalol": [
       "antiarrhythmic",
       "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "moxifloxacin": [
       "antibiotic",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:fluoroquinolone_antibacterial",
       "fluoroquinolone",
       "qt_prolonging"
     ],
     "levofloxacin": [
       "antibiotic",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:fluoroquinolone_antibacterial",
       "fluoroquinolone",
       "qt_prolonging"
     ],
     "ciprofloxacin": [
       "antibiotic",
       "cyp1a2_inhibitor",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:fluoroquinolone_antibacterial",
       "fluoroquinolone",
       "qt_prolonging"
     ],
     "ofloxacin": [
       "antibiotic",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "fluoroquinolone",
       "qt_prolonging"
     ],
     "erythromycin": [
       "antibiotic",
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:macrolide",
       "macrolide",
       "qt_prolonging"
     ],
     "citalopram": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic",
       "ssri"
     ],
     "escitalopram": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic",
       "ssri"
     ],
     "sertraline": [
       "cyp2d6_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic",
       "ssri"
     ],
     "fluoxetine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic",
       "ssri"
     ],
     "paroxetine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic",
       "ssri"
     ],
     "venlafaxine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic",
       "snri"
     ],
     "duloxetine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "serotonergic",
       "snri"
     ],
     "linezolid": [
       "antibiotic",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "mao_inhibitor",
       "serotonergic"
     ],
     "tramadol": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid",
       "qt_prolonging",
       "serotonergic"
     ],
     "morphine": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "fentanyl": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "oxycodone": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "codeine": [
@@ -297,53 +487,105 @@
     ],
     "diazepam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "lorazepam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "midazolam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "clonazepam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "atorvastatin": [
       "cyp3a4_sensitive_substrate",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "statin"
     ],
     "simvastatin": [
       "cyp3a4_sensitive_substrate",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "statin"
     ],
     "rosuvastatin": [
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "statin"
     ],
     "pravastatin": [
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "statin"
     ],
     "clarithromycin": [
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:macrolide",
       "macrolide",
       "pgp_inhibitor",
       "qt_prolonging"
     ],
     "azithromycin": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:macrolide",
       "macrolide",
       "qt_prolonging"
     ],
     "ketoconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor",
       "qt_prolonging"
     ],
     "itraconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor",
       "qt_prolonging"
     ],
@@ -351,48 +593,106 @@
       "azole_antifungal",
       "cyp2c19_inhibitor",
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "voriconazole": [
       "azole_antifungal",
       "cyp2c19_inhibitor",
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "metoprolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "bisoprolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "atenolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "carvedilol": [
       "alpha_blocker",
       "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "vasodilator"
     ],
     "propranolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "nebivolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "verapamil": [
       "calcium_channel_blocker",
       "dihydropyridine_ccb",
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
       "non_dihydropyridine_ccb",
       "pgp_inhibitor"
     ],
     "diltiazem": [
       "calcium_channel_blocker",
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
       "non_dihydropyridine_ccb"
     ],
     "gemfibrozil": [
+      "epc:established_pharmacologic_classes",
+      "epc:peroxisome_proliferator_activated_receptor_agonist",
+      "epc:peroxisome_proliferator_activated_receptor_alpha_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "fibrate"
     ],
     "fenofibrate": [
+      "epc:established_pharmacologic_classes",
+      "epc:peroxisome_proliferator_activated_receptor_agonist",
+      "epc:peroxisome_proliferator_activated_receptor_alpha_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "fibrate"
     ],
     "bezafibrate": [
@@ -407,6 +707,11 @@
     "trimethoprim": [
       "antibiotic",
       "antifolate",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:dihydrofolate_reductase_inhibitor_antibacterial",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "co-trimoxazole": [
@@ -421,49 +726,92 @@
       "cyp3a4_inhibitor"
     ],
     "allopurinol": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "xanthine_oxidase_inhibitor"
     ],
     "azathioprine": [
       "dmard",
+      "epc:antimetabolite",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:purine_antimetabolite",
       "thiopurine"
     ],
     "methotrexate": [
       "antifolate",
-      "dmard"
+      "dmard",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:folate_analog_metabolic_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
     ],
     "digoxin": [
-      "cardiac_glycoside"
+      "cardiac_glycoside",
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "nitroglycerin": [
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:vasodilator",
       "nitrate",
       "vasodilator"
     ],
     "isosorbide mononitrate": [
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:vasodilator",
       "nitrate",
       "vasodilator"
     ],
     "isosorbide dinitrate": [
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:vasodilator",
       "nitrate",
       "vasodilator"
     ],
     "vardenafil": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pde5_inhibitor",
       "qt_prolonging",
       "vasodilator"
     ],
     "sildenafil": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pde5_inhibitor",
       "vasodilator"
     ],
     "avanafil": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pde5_inhibitor",
       "vasodilator"
     ],
     "tadalafil": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pde5_inhibitor",
       "vasodilator"
     ],
@@ -480,30 +828,54 @@
       "calcium_channel_blocker",
       "cyp3a4_sensitive_substrate",
       "dihydropyridine_ccb",
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
       "vasodilator"
     ],
     "clevidipine": [
       "calcium_channel_blocker",
       "dihydropyridine_ccb",
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
       "vasodilator"
     ],
     "isradipine": [
       "calcium_channel_blocker",
-      "dihydropyridine_ccb"
+      "dihydropyridine_ccb",
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent"
     ],
     "amlodipine": [
       "calcium_channel_blocker",
       "dihydropyridine_ccb",
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
       "vasodilator"
     ],
     "nisoldipine": [
       "calcium_channel_blocker",
-      "dihydropyridine_ccb"
+      "dihydropyridine_ccb",
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent"
     ],
     "nifedipine": [
       "calcium_channel_blocker",
       "cyp3a4_sensitive_substrate",
       "dihydropyridine_ccb",
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
       "vasodilator"
     ],
     "nicardipine": [
@@ -511,447 +883,933 @@
       "cyp2c19_inhibitor",
       "cyp2d6_inhibitor",
       "cyp3a4_inhibitor",
-      "dihydropyridine_ccb"
+      "dihydropyridine_ccb",
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent"
     ],
     "nimodipine": [
       "calcium_channel_blocker",
       "cyp3a4_sensitive_substrate",
-      "dihydropyridine_ccb"
+      "dihydropyridine_ccb",
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent"
     ],
     "oxaprozin": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "bromfenac": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "sulindac": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "tolmetin": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "piroxicam": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "meloxicam": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "indomethacin": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "nabumetone": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "etodolac": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "flurbiprofen": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "ketoprofen": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "fenoprofen": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "celecoxib": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "nepafenac": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "diflunisal": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "mefenamic acid": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "nsaid"
     ],
     "nefazodone": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "serotonergic",
       "ssri"
     ],
     "fluvoxamine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "serotonergic",
       "ssri"
     ],
     "trazodone": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic",
       "ssri"
     ],
     "milnacipran": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "serotonergic",
       "snri"
     ],
     "desvenlafaxine": [
       "cyp2d6_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "serotonergic",
       "snri"
     ],
     "levomilnacipran": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "serotonergic",
       "snri"
     ],
     "alosetron": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "qt_prolonging"
     ],
     "granisetron": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "qt_prolonging"
     ],
     "dolasetron": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "qt_prolonging"
     ],
     "palonosetron": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "qt_prolonging"
     ],
     "safinamide": [
       "cyp1a2_inhibitor",
       "cyp2c19_inhibitor",
       "cyp2d6_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:monoamine_oxidase_type_b_inhibitor",
+      "epc:nervous_system_agent",
       "mao_inhibitor",
       "serotonergic"
     ],
     "phenelzine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "mao_inhibitor",
       "serotonergic"
     ],
     "rasagiline": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "mao_inhibitor",
       "serotonergic"
     ],
     "selegiline": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:monoamine_oxidase_type_b_inhibitor",
+      "epc:nervous_system_agent",
       "mao_inhibitor",
       "serotonergic"
     ],
     "tranylcypromine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "mao_inhibitor",
       "serotonergic"
     ],
     "isocarboxazid": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "mao_inhibitor",
       "serotonergic"
     ],
     "protriptyline": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic"
     ],
     "amitriptyline": [
       "anticholinergic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic"
     ],
     "clomipramine": [
       "anticholinergic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic"
     ],
     "amoxapine": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic"
     ],
     "desipramine": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic"
     ],
     "doxepin": [
       "anticholinergic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic"
     ],
     "imipramine": [
       "anticholinergic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic"
     ],
     "nortriptyline": [
       "anticholinergic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic"
     ],
     "trimipramine": [
       "anticholinergic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging",
       "serotonergic"
     ],
     "fluvastatin": [
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "statin"
     ],
     "pitavastatin": [
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "statin"
     ],
     "lovastatin": [
       "cyp3a4_sensitive_substrate",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "statin"
     ],
     "benazepril": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "quinaprilat": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "enalaprilat anhydrous": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "quinapril": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "ramiprilat": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "trandolapril": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "lisinopril anhydrous": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "trandolaprilat": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "captopril": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "benazeprilat": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "fosinopril": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "moexiprilat": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "fosinoprilat": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "perindoprilat": [
       "ace_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "raas"
     ],
     "sparsentan": [
       "arb",
+      "epc:cardiovascular_agent",
+      "epc:endothelin_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "pgp_inhibitor",
       "raas"
     ],
     "azilsartan": [
       "arb",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "raas"
     ],
     "eprosartan": [
       "arb",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "raas"
     ],
     "olmesartan": [
       "arb",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "raas"
     ],
     "irbesartan": [
       "arb",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "raas"
     ],
     "candesartan": [
       "arb",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "raas"
     ],
     "aliskiren": [
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "raas"
     ],
     "ethacrynic acid": [
       "diuretic",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "loop_diuretic"
     ],
     "torsemide": [
       "diuretic",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "loop_diuretic"
     ],
     "chlorothiazide": [
       "diuretic",
+      "epc:chemical_structure",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "thiazide_diuretic"
     ],
     "polythiazide": [
       "diuretic",
+      "epc:chemical_structure",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "thiazide_diuretic"
     ],
     "hydroflumethiazide": [
       "diuretic",
+      "epc:chemical_structure",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "thiazide_diuretic"
     ],
     "bendroflumethiazide": [
       "diuretic",
+      "epc:chemical_structure",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "thiazide_diuretic"
     ],
     "chlorthalidone": [
       "diuretic",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "thiazide_diuretic"
     ],
     "metolazone": [
       "diuretic",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
       "thiazide_diuretic"
     ],
     "triamterene": [
       "diuretic",
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:potassium_sparing_diuretic",
       "potassium_sparing_diuretic"
     ],
     "timolol anhydrous": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "pindolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "acebutolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "landiolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "carteolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "labetalol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "levobunolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "esmolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "nadolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "betaxolol": [
-      "beta_blocker"
+      "beta_blocker",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "fondaparinux": [
       "anticoagulant",
-      "doac"
+      "doac",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
     ],
     "edoxaban": [
       "anticoagulant",
-      "doac"
+      "doac",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
     ],
     "argatroban anhydrous": [
       "anticoagulant",
-      "doac"
+      "doac",
+      "epc:anti_coagulant",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:protease_inhibitor"
     ],
     "bivalirudin": [
       "anticoagulant",
-      "doac"
+      "doac",
+      "epc:anti_coagulant",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:protease_inhibitor"
     ],
     "desirudin": [
       "anticoagulant",
-      "doac"
+      "doac",
+      "epc:anti_coagulant",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:protease_inhibitor"
     ],
     "dalteparin": [
       "anticoagulant",
+      "epc:anti_coagulant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
       "lmwh"
     ],
     "heparin, porcine": [
-      "anticoagulant"
+      "anticoagulant",
+      "epc:anti_coagulant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:unfractionated_heparin"
     ],
     "edetic acid": [
-      "anticoagulant"
+      "anticoagulant",
+      "epc:anti_coagulant",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:lead_chelator",
+      "epc:metal_chelator",
+      "epc:physical_or_chemical_agent"
     ],
     "citric acid, anhydrous": [
-      "anticoagulant"
+      "anticoagulant",
+      "epc:anti_coagulant",
+      "epc:calculi_dissolution_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:physical_or_chemical_agent"
     ],
     "protein c, human": [
-      "anticoagulant"
+      "anticoagulant",
+      "epc:anti_coagulant",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
     ],
     "cangrelor": [
       "antiplatelet",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "p2y12_inhibitor"
     ],
     "eptifibatide": [
-      "antiplatelet"
+      "antiplatelet",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
     ],
     "dipyridamole": [
-      "antiplatelet"
+      "antiplatelet",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
     ],
     "vorapaxar": [
-      "antiplatelet"
+      "antiplatelet",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:protease_activated_receptor_1_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "tirofiban": [
-      "antiplatelet"
+      "antiplatelet",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
     ],
     "ticlopidine": [
-      "antiplatelet"
+      "antiplatelet",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
     ],
     "loperamide": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid",
       "qt_prolonging"
     ],
     "alfentanil": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "hydromorphone": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "tapentadol": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "remifentanil": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "dihydrocodeine": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "buprenorphine": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "hydrocodone": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "codeine anhydrous": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "propoxyphene": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "meperidine": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "levorphanol": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "sufentanil": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "oxymorphone": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "methadone": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid",
       "qt_prolonging"
     ],
     "difelikefalin": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:kappa_opioid_receptor_agonist",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "naldemedine tosylate": [
@@ -972,6 +1830,10 @@
     ],
     "naldemedine": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:opioid_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "codeine polistirex": [
@@ -1040,6 +1902,10 @@
     ],
     "eluxadoline": [
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:mu_opioid_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "opioid"
     ],
     "tramadol hydrochloride": [
@@ -1100,153 +1966,313 @@
     ],
     "flurazepam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "clobazam": [
       "benzodiazepine",
       "cns_depressant",
       "cyp2d6_inhibitor",
-      "cyp3a4_inducer"
+      "cyp3a4_inducer",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "temazepam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "oxazepam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "chlordiazepoxide": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "alprazolam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "clorazepic acid": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "quazepam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "estazolam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "triazolam": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
     ],
     "butalbital": [
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "methohexital": [
-      "cns_depressant"
+      "cns_depressant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "dexlansoprazole": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:ion_channel_or_pump_agent",
       "ppi"
     ],
     "azithromycin anhydrous": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:macrolide",
       "macrolide",
       "qt_prolonging"
     ],
     "gatifloxacin anhydrous": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "fluoroquinolone",
       "qt_prolonging"
     ],
     "gemifloxacin": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "fluoroquinolone",
       "qt_prolonging"
     ],
     "finafloxacin": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "fluoroquinolone",
       "qt_prolonging"
     ],
     "besifloxacin": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "fluoroquinolone",
       "qt_prolonging"
     ],
     "econazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "terconazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "sertaconazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "oteseconazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "sulconazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "miconazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "clotrimazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "efinaconazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "luliconazole": [
       "azole_antifungal",
       "cyp2c19_inhibitor",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "tioconazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "isavuconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "oxiconazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "posaconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "butoconazole": [
       "azole_antifungal",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "febuxostat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "xanthine_oxidase_inhibitor"
     ],
     "maribavir": [
       "cyp3a4_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cytomegalovirus_pul97_kinase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "indinavir anhydrous": [
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
     ],
     "levoketoconazole": [
       "cyp3a4_inhibitor",
+      "epc:cortisol_synthesis_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "pacritinib": [
       "cyp1a2_inhibitor",
       "cyp3a4_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "manidipine hydrochloride": [
@@ -1259,7 +2285,11 @@
       "cyp3a4_inhibitor"
     ],
     "avacopan": [
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:complement_5a_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "conivaptan hydrochloride": [
       "cyp3a4_inhibitor"
@@ -1267,23 +2297,38 @@
     "viloxazine": [
       "cyp1a2_inhibitor",
       "cyp2d6_inhibitor",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:norepinephrine_reuptake_inhibitor"
     ],
     "triclabendazole": [
       "cyp1a2_inhibitor",
       "cyp2c19_inhibitor",
       "cyp2d6_inhibitor",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anthelmintic",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiparasitic",
+      "epc:established_pharmacologic_classes"
     ],
     "pazopanib": [
       "cyp2d6_inhibitor",
       "cyp3a4_inhibitor",
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "everolimus": [
       "cyp2d6_inhibitor",
       "cyp3a4_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
       "immunosuppressant"
     ],
     "simeprevir": [
@@ -1291,18 +2336,34 @@
       "pgp_inhibitor"
     ],
     "lefamulin": [
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:pleuromutilin_antibacterial"
     ],
     "trofinetide": [
       "cyp3a4_inhibitor"
     ],
     "lomitapide": [
       "cyp3a4_inhibitor",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:microsomal_triglyceride_transfer_protein_inhibitor",
       "pgp_inhibitor"
     ],
     "berotralstat": [
       "cyp2d6_inhibitor",
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:plasma_kallikrein_inhibitor",
+      "epc:protease_inhibitor",
       "pgp_inhibitor"
     ],
     "fexinidazole": [
@@ -1310,21 +2371,46 @@
       "cyp2c19_inhibitor",
       "cyp2d6_inhibitor",
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "aprepitant": [
       "cyp3a4_inducer",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:substance_p_neurokinin_1_receptor_antagonist"
     ],
     "letermovir": [
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:cytomegalovirus_dna_terminase_complex_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
     ],
     "amprenavir": [
       "cyp3a4_inducer",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
     ],
     "xanomeline": [
       "cyp3a4_inhibitor",
+      "epc:cholinergic_muscarinic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "pgp_inhibitor"
     ],
     "manidipine": [
@@ -1335,40 +2421,73 @@
     ],
     "lazertinib": [
       "cyp3a4_inhibitor",
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "perampanel": [
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:noncompetitive_ampa_glutamate_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "mavorixafor": [
       "cyp2d6_inhibitor",
       "cyp3a4_inhibitor",
+      "epc:chemokine_receptor_type_4_interaction",
+      "epc:cxc_chemokine_receptor_4_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_interaction",
       "pgp_inhibitor"
     ],
     "imatinib": [
       "cyp2d6_inhibitor",
       "cyp3a4_inhibitor",
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "ritonavir": [
       "cyp2d6_inhibitor",
       "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cytochrome_p450_3a_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "pgp_inhibitor"
     ],
     "osilodrostat": [
       "cyp1a2_inhibitor",
       "cyp2c19_inhibitor",
       "cyp2d6_inhibitor",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:cortisol_synthesis_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "dasatinib anhydrous": [
       "cyp3a4_inhibitor",
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "cyclosporine": [
       "calcineurin_inhibitor",
       "cyp3a4_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
       "nephrotoxic",
       "pgp_inhibitor"
     ],
@@ -1387,7 +2506,10 @@
       "pgp_inhibitor"
     ],
     "voxelotor": [
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:hemoglobin_s_polymerization_inhibitor"
     ],
     "simeprevir sodium": [
       "cyp3a4_inhibitor",
@@ -1395,59 +2517,119 @@
     ],
     "efavirenz": [
       "cyp2c19_inhibitor",
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_1_non_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
     ],
     "erdafitinib": [
       "cyp3a4_inducer",
       "cyp3a4_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "atazanavir": [
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
     ],
     "givinostat": [
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:histone_deacetylase_inhibitor",
+      "epc:nucleic_acid_related_agent"
     ],
     "netupitant": [
       "cyp3a4_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:substance_p_neurokinin_1_receptor_antagonist",
       "pgp_inhibitor"
     ],
     "lorlatinib": [
       "cyp3a4_inducer",
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "dabrafenib": [
       "cyp3a4_inducer",
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "cenobamate": [
       "cyp2c19_inhibitor",
       "cyp3a4_inducer"
     ],
     "pitolisant": [
-      "cyp3a4_inducer"
+      "cyp3a4_inducer",
+      "epc:established_pharmacologic_classes",
+      "epc:histamine_3_receptor_antagonist_inverse_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "carbamazepine": [
-      "cyp3a4_inducer"
+      "cyp3a4_inducer",
+      "epc:established_pharmacologic_classes",
+      "epc:mood_stabilizer",
+      "epc:nervous_system_agent"
     ],
     "ivosidenib": [
-      "cyp3a4_inducer"
+      "cyp3a4_inducer",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:isocitrate_dehydrogenase_1_inhibitor"
     ],
     "repotrectinib": [
       "cyp3a4_inducer",
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "oritavancin": [
       "cyp2c19_inhibitor",
-      "cyp3a4_inducer"
+      "cyp3a4_inducer",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:lipoglycopeptide_antibacterial"
     ],
     "enzalutamide": [
-      "cyp3a4_inducer"
+      "cyp3a4_inducer",
+      "epc:androgen_receptor_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "deferasirox": [
       "cyp1a2_inhibitor",
-      "cyp3a4_inducer"
+      "cyp3a4_inducer",
+      "epc:established_pharmacologic_classes",
+      "epc:iron_chelator",
+      "epc:metal_chelator",
+      "epc:physical_or_chemical_agent"
     ],
     "eslicarbazepine": [
       "cyp2c19_inhibitor",
@@ -1461,7 +2643,11 @@
       "cyp3a4_inducer"
     ],
     "elafibranor": [
-      "cyp3a4_inducer"
+      "cyp3a4_inducer",
+      "epc:established_pharmacologic_classes",
+      "epc:peroxisome_proliferator_activated_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
     ],
     "mitotane": [
       "cyp3a4_inducer"
@@ -1475,10 +2661,17 @@
     ],
     "osimertinib": [
       "cyp3a4_inducer",
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "belzutifan": [
-      "cyp3a4_inducer"
+      "cyp3a4_inducer",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hypoxia_inducible_factor_inhibitor"
     ],
     "oritavancin diphosphate": [
       "cyp2c19_inhibitor",
@@ -1486,18 +2679,37 @@
     ],
     "elagolix": [
       "cyp2c19_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin_releasing_hormone_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "pgp_inhibitor"
     ],
     "tecovirimat": [
-      "cyp2c19_inhibitor"
+      "cyp2c19_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:established_pharmacologic_classes",
+      "epc:orthopoxvirus_vp37_envelope_wrapping_protein_inhibitor"
     ],
     "etravirine": [
       "cyp2c19_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_1_non_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
       "pgp_inhibitor"
     ],
     "pirtobrutinib": [
       "cyp2c19_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "cannabidiol": [
@@ -1511,6 +2723,10 @@
     ],
     "lonafarnib": [
       "cyp2c19_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:farnesyltransferase_inhibitor",
       "pgp_inhibitor"
     ],
     "mephobarbital": [
@@ -1518,6 +2734,10 @@
     ],
     "eliglustat": [
       "cyp2d6_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:glucosylceramide_synthase_inhibitor",
       "pgp_inhibitor"
     ],
     "nilotinib d-tartrate": [
@@ -1526,16 +2746,27 @@
     ],
     "ranolazine": [
       "cyp2d6_inhibitor",
+      "epc:anti_anginal",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "nilotinib": [
       "cyp2d6_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "quinidine": [
       "antiarrhythmic",
       "cyp2d6_inhibitor",
+      "epc:cardiovascular_agent",
+      "epc:cytochrome_p450_2d6_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "methotrimeprazine hydrochloride": [
@@ -1543,19 +2774,39 @@
       "cyp2d6_inhibitor"
     ],
     "abiraterone": [
-      "cyp2d6_inhibitor"
+      "cyp2d6_inhibitor",
+      "epc:cytochrome_p450_17a1_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "bupropion": [
-      "cyp2d6_inhibitor"
+      "cyp2d6_inhibitor",
+      "epc:aminoketone",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "bupropion hydrobromide": [
       "cyp2d6_inhibitor"
     ],
     "panobinostat": [
-      "cyp2d6_inhibitor"
+      "cyp2d6_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:histone_deacetylase_inhibitor",
+      "epc:nucleic_acid_related_agent"
     ],
     "mirabegron": [
       "cyp2d6_inhibitor",
+      "epc:beta3_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "pgp_inhibitor",
       "sympathomimetic"
     ],
@@ -1573,13 +2824,27 @@
     ],
     "cobicistat": [
       "cyp2d6_inhibitor",
+      "epc:cytochrome_p450_3a_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "darunavir": [
-      "cyp2d6_inhibitor"
+      "cyp2d6_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
     ],
     "rolapitant": [
       "cyp2d6_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:substance_p_neurokinin_1_receptor_antagonist",
       "pgp_inhibitor"
     ],
     "bupropion hydrochloride": [
@@ -1588,36 +2853,65 @@
     "vemurafenib": [
       "cyp1a2_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "leniolisib": [
       "cyp1a2_inhibitor",
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "capmatinib": [
       "cyp1a2_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "pibrentasvir": [
       "cyp1a2_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_c_virus_ns5a_inhibitor",
       "pgp_inhibitor"
     ],
     "glecaprevir": [
       "cyp1a2_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_c_virus_ns3_4a_protease_inhibitor",
+      "epc:protease_inhibitor",
       "pgp_inhibitor"
     ],
     "ripretinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "sapropterin": [
+      "epc:enzyme_activator",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:phenylalanine_hydroxylase_activator",
       "pgp_inhibitor"
     ],
     "lumacaftor": [
       "pgp_inhibitor"
     ],
     "sotagliflozin": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor",
       "sglt2_inhibitor"
     ],
@@ -1626,31 +2920,59 @@
     ],
     "crizotinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "elbasvir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_c_virus_ns5a_inhibitor",
       "pgp_inhibitor"
     ],
     "lenacapavir": [
+      "epc:anti_infective",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_1_capsid_inhibitor",
       "pgp_inhibitor"
     ],
     "mitapivat": [
+      "epc:enzyme_activator",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:pyruvate_kinase_activator",
       "pgp_inhibitor"
     ],
     "sarecycline": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:tetracycline_class_drug",
       "pgp_inhibitor"
     ],
     "venetoclax": [
+      "epc:bcl_2_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
       "pgp_inhibitor"
     ],
     "paritaprevir dihydrate": [
       "pgp_inhibitor"
     ],
     "imlunestrant": [
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "pgp_inhibitor"
     ],
     "abrocitinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:janus_kinase_inhibitor",
       "pgp_inhibitor"
     ],
     "daclatasvir": [
@@ -1661,6 +2983,9 @@
     ],
     "selpercatinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "paritaprevir": [
@@ -1668,37 +2993,67 @@
     ],
     "neratinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "rilzabrutinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "tepotinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "daclatasvir dihydrochloride": [
       "pgp_inhibitor"
     ],
     "ivacaftor": [
+      "epc:cystic_fibrosis_transmembrane_conductance_regulator_potentiator",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:respiratory_agent",
       "pgp_inhibitor"
     ],
     "elacestrant": [
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "pgp_inhibitor"
     ],
     "pemigatinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "deutivacaftor": [
+      "epc:cystic_fibrosis_transmembrane_conductance_regulator_potentiator",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:respiratory_agent",
       "pgp_inhibitor"
     ],
     "canagliflozin anhydrous": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor",
       "sglt2_inhibitor"
     ],
     "relugolix": [
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin_releasing_hormone_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "pgp_inhibitor"
     ],
     "levacetylleucine": [
@@ -1706,13 +3061,23 @@
     ],
     "futibatinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "ledipasvir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_c_virus_ns5a_inhibitor",
       "pgp_inhibitor"
     ],
     "avapritinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "sarecycline hydrochloride": [
@@ -1722,19 +3087,34 @@
       "pgp_inhibitor"
     ],
     "danicopan": [
+      "epc:complement_factor_d_inhibitor",
+      "epc:complement_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:immunologic_agent",
       "pgp_inhibitor"
     ],
     "abciximab": [
       "pgp_inhibitor"
     ],
     "zonisamide": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "pgp_inhibitor"
     ],
     "suvorexant": [
+      "epc:established_pharmacologic_classes",
+      "epc:orexin_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "pgp_inhibitor"
     ],
     "tucatinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "nilotinib tartrate": [
@@ -1743,817 +3123,1917 @@
     "voclosporin": [
       "calcineurin_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
       "nephrotoxic",
       "pgp_inhibitor"
     ],
     "remibrutinib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
     "vandetanib": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "pgp_inhibitor",
       "qt_prolonging"
     ],
     "voxilaprevir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_c_virus_ns3_4a_protease_inhibitor",
+      "epc:protease_inhibitor",
       "pgp_inhibitor"
     ],
     "lopinavir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
       "pgp_inhibitor"
     ],
     "velpatasvir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_c_virus_ns5a_inhibitor",
       "pgp_inhibitor"
     ],
     "clidinium": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "aclidinium": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "benztropine": [
       "anticholinergic",
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:respiratory_agent"
     ],
     "ipratropium cation": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "dicyclomine": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "revefenacin": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "methscopolamine": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "ipratropium": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "tiotropium": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "scopolamine": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "umeclidinium": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "glycopyrronium": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:cardiovascular_agent",
+      "epc:cholinergic_muscarinic_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "atropine": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:cardiovascular_agent",
+      "epc:cholinergic_muscarinic_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "tropicamide": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "flavoxate": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:cardiovascular_agent",
+      "epc:cholinergic_muscarinic_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "tolterodine": [
       "anticholinergic",
+      "epc:cardiovascular_agent",
+      "epc:cholinergic_muscarinic_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "qt_prolonging"
     ],
     "homatropine": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:cardiovascular_agent",
+      "epc:cholinergic_muscarinic_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "solifenacin": [
       "anticholinergic",
+      "epc:cardiovascular_agent",
+      "epc:cholinergic_muscarinic_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "qt_prolonging"
     ],
     "oxybutynin": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:cardiovascular_agent",
+      "epc:cholinergic_muscarinic_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "trospium": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:cardiovascular_agent",
+      "epc:cholinergic_muscarinic_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "darifenacin": [
-      "anticholinergic"
+      "anticholinergic",
+      "epc:cardiovascular_agent",
+      "epc:cholinergic_muscarinic_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "doxylamine": [
       "anticholinergic",
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:respiratory_agent"
     ],
     "hydroxyzine": [
       "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:respiratory_agent",
       "qt_prolonging"
     ],
     "alcaftadine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "cetirizine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "azelastine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "olopatadine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:histamine_1_receptor_inhibitor",
+      "epc:mast_cell_stabilizer",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:respiratory_agent"
     ],
     "desloratadine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "diphenhydramine": [
       "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "qt_prolonging"
     ],
     "chlorpheniramine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "levocetirizine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "bepotastine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "acrivastine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "fexofenadine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "carbinoxamine": [
-      "antihistamine"
+      "antihistamine",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "clobetasol": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "alclometasone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "betamethasone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "prednisolone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "loteprednol": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "vamorolone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "beclomethasone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "cortisone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "prednisone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "flurandrenolide": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "halcinonide": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "desonide": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "desoximetasone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "triamcinolone acetonide": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "budesonide": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "fluocinolone acetonide": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "amcinonide": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "flunisolide anhydrous": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "fluorometholone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "medrysone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "dexamethasone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "clocortolone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "fluticasone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "halobetasol": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "fluocinonide": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "triamcinolone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "hydrocortisone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "mometasone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "diflorasone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "methylprednisolone": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "deflazacort": [
-      "corticosteroid"
+      "corticosteroid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
     ],
     "gentamicin": [
       "aminoglycoside",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "nephrotoxic"
     ],
     "amikacin": [
       "aminoglycoside",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "nephrotoxic"
     ],
     "tobramycin": [
       "aminoglycoside",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "nephrotoxic"
     ],
     "streptomycin": [
       "aminoglycoside",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:antimycobacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "nephrotoxic"
     ],
     "kanamycin": [
       "aminoglycoside",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "nephrotoxic"
     ],
     "neomycin": [
       "aminoglycoside",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "nephrotoxic"
     ],
     "vancomycin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "glycopeptide",
       "nephrotoxic"
     ],
     "polymyxin b": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "nephrotoxic"
     ],
     "colistimethate": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "nephrotoxic"
     ],
     "sulfadiazine": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:sulfonamide_antimicrobial",
       "sulfonamide"
     ],
     "sulfacetamide": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:sulfonamide_antimicrobial",
       "sulfonamide"
     ],
     "silver sulfadiazine": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:sulfonamide_antimicrobial",
       "sulfonamide"
     ],
     "tedizolid": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "mao_inhibitor",
       "serotonergic"
     ],
     "metronidazole": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "tinidazole": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "secnidazole": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "anhydrous tacrolimus": [
       "calcineurin_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
       "nephrotoxic"
     ],
     "pimecrolimus": [
       "calcineurin_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
       "nephrotoxic"
     ],
     "sirolimus": [
       "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
       "immunosuppressant"
     ],
     "palbociclib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "trametinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "trilaciclib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "ruxolitinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:janus_kinase_inhibitor"
     ],
     "ceritinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "tofacitinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:janus_kinase_inhibitor"
     ],
     "sorafenib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "alectinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "quizartinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "cetuximab": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:epidermal_growth_factor_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "axitinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "ponatinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "panitumumab": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:epidermal_growth_factor_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "erlotinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "tivozanib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "zanubrutinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "deucravacitinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:janus_kinase_inhibitor",
+      "epc:tyrosine_kinase_2_inhibitor"
     ],
     "cabozantinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "temsirolimus": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "pralsetinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "defactinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "tovorafenib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "abemaciclib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "regorafenib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "lenvatinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "ribociclib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "acalabrutinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "larotrectinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "gefitinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "cobimetinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "netarsudil": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:rho_kinase_inhibitor"
     ],
     "lapatinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "trastuzumab": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:her2_neu_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "ramucirumab": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:vascular_endothelial_growth_factor_receptor_2_antagonist"
     ],
     "sunitinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "deuruxolitinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:janus_kinase_inhibitor"
     ],
     "upadacitinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:janus_kinase_inhibitor"
     ],
     "pexidartinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "ibrutinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "brigatinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "bosutinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "idelalisib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "margetuximab": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:her2_neu_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "pertuzumab": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:her2_neu_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
     ],
     "afatinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "nintedanib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "baricitinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:janus_kinase_inhibitor"
     ],
     "midostaurin": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "inavolisib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "selumetinib": [
-      "cyp3a4_sensitive_substrate"
+      "cyp3a4_sensitive_substrate",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
     ],
     "tolazamide": [
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "hypoglycemic",
       "sulfonylurea"
     ],
     "glimepiride": [
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "hypoglycemic",
       "sulfonylurea"
     ],
     "glyburide": [
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "hypoglycemic",
       "sulfonylurea"
     ],
     "glipizide": [
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
       "hypoglycemic",
       "sulfonylurea"
     ],
     "insulin, regular, human": [
+      "epc:antidote",
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
       "hypoglycemic",
       "insulin"
     ],
     "insulin lispro": [
+      "epc:antidote",
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
       "hypoglycemic",
       "insulin"
     ],
     "insulin glargine": [
+      "epc:antidote",
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
       "hypoglycemic",
       "insulin"
     ],
     "insulin detemir": [
+      "epc:antidote",
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
       "hypoglycemic",
       "insulin"
     ],
     "insulin glulisine, human": [
+      "epc:antidote",
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
       "hypoglycemic",
       "insulin"
     ],
     "insulin aspart, human": [
+      "epc:antidote",
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
       "hypoglycemic",
       "insulin"
     ],
     "insulin degludec": [
+      "epc:antidote",
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
       "hypoglycemic",
       "insulin"
     ],
     "metformin": [
       "biguanide",
-      "dpp4_inhibitor"
+      "dpp4_inhibitor",
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
     ],
     "empagliflozin": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
       "sglt2_inhibitor"
     ],
     "dapagliflozin": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
       "sglt2_inhibitor"
     ],
     "bexagliflozin": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
       "sglt2_inhibitor"
     ],
     "linagliptin": [
-      "dpp4_inhibitor"
+      "dpp4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:blood_glucose_regulator",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
     ],
     "saxagliptin anhydrous": [
-      "dpp4_inhibitor"
+      "dpp4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:blood_glucose_regulator",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
     ],
     "alogliptin": [
-      "dpp4_inhibitor"
+      "dpp4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:blood_glucose_regulator",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
     ],
     "sitagliptin": [
-      "dpp4_inhibitor"
+      "dpp4_inhibitor",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:blood_glucose_regulator",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
     ],
     "liraglutide": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
+      "epc:glp_1_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "glp1_agonist"
     ],
     "exenatide": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
+      "epc:glp_1_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "glp1_agonist"
     ],
     "tirzepatide": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
+      "epc:glp_1_receptor_agonist",
+      "epc:glucose_dependent_insulinotropic_polypeptide_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "glp1_agonist"
     ],
     "dulaglutide": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
+      "epc:glp_1_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "glp1_agonist"
     ],
     "lixisenatide": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
+      "epc:glp_1_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "glp1_agonist"
     ],
     "semaglutide": [
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
+      "epc:glp_1_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "glp1_agonist"
     ],
     "dofetilide": [
       "antiarrhythmic",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "mexiletine": [
-      "antiarrhythmic"
+      "antiarrhythmic",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes"
     ],
     "flecainide": [
-      "antiarrhythmic"
+      "antiarrhythmic",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes"
     ],
     "disopyramide": [
       "antiarrhythmic",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "procainamide": [
       "antiarrhythmic",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "dronedarone": [
-      "antiarrhythmic"
+      "antiarrhythmic",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes"
     ],
     "ibutilide": [
       "antiarrhythmic",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
       "qt_prolonging"
     ],
     "lidocaine": [
-      "antiarrhythmic"
+      "antiarrhythmic",
+      "epc:amide_local_anesthetic",
+      "epc:anesthetic",
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:local_anesthetic"
     ],
     "propafenone": [
-      "antiarrhythmic"
+      "antiarrhythmic",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes"
     ],
     "midodrine": [
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "vibegron": [
+      "epc:beta3_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "salmeterol": [
+      "epc:beta2_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "dexmedetomidine": [
       "central_alpha2_agonist",
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "ephedrine": [
+      "epc:alpha_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:norepinephrine_releasing_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "epinephrine": [
+      "epc:alpha_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "apraclonidine": [
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "guanabenz": [
       "central_alpha2_agonist",
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "arformoterol": [
+      "epc:beta2_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "isoproterenol": [
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "brimonidine": [
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "p-hydroxyamphetamine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "pseudoephedrine": [
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "olodaterol": [
+      "epc:beta2_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "guanfacine": [
       "central_alpha2_agonist",
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "clonidine": [
       "central_alpha2_agonist",
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "albuterol": [
+      "epc:beta2_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "epinastine": [
+      "epc:established_pharmacologic_classes",
+      "epc:histamine_1_receptor_inhibitor",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "methyldopa anhydrous": [
       "central_alpha2_agonist",
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "dobutamine": [
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "formoterol": [
+      "epc:beta2_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "vilanterol": [
+      "epc:beta2_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "phenylephrine": [
+      "epc:alpha_1_adrenergic_agonist",
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "levalbuterol": [
+      "epc:beta2_adrenergic_agonist",
+      "epc:beta_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "tizanidine": [
       "central_alpha2_agonist",
+      "epc:alpha_adrenergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:sympathomimetic_agent",
       "qt_prolonging",
       "sympathomimetic"
     ],
     "norepinephrine": [
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "dopamine": [
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:sympathomimetic_agent",
       "sympathomimetic"
     ],
     "prazosin": [
       "alpha_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "vasodilator"
     ],
     "silodosin": [
       "alpha_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "vasodilator"
     ],
     "dapiprazole": [
       "alpha_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "vasodilator"
     ],
     "doxazosin": [
       "alpha_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "vasodilator"
     ],
     "terazosin": [
       "alpha_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "vasodilator"
     ],
     "alfuzosin": [
       "alpha_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "vasodilator"
     ],
     "phentolamine": [
       "alpha_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "vasodilator"
     ],
     "phenoxybenzamine": [
       "alpha_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "vasodilator"
     ],
     "tamsulosin": [
       "alpha_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
       "vasodilator"
     ],
     "caffeine": [
+      "epc:central_nervous_system_stimulant",
+      "epc:chemical_structure",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "methylxanthine"
     ],
     "theophylline anhydrous": [
+      "epc:chemical_structure",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
       "methylxanthine"
     ],
     "zaleplon": [
       "benzodiazepine",
-      "cns_depressant"
+      "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:gamma_aminobutyric_acid_a_receptor_agonist",
+      "epc:gamma_aminobutyric_acid_ergic_agonist",
+      "epc:ion_channel_or_pump_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
     ],
     "zuranolone": [
-      "cns_depressant"
+      "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:gamma_aminobutyric_acid_a_receptor_agonist",
+      "epc:gamma_aminobutyric_acid_ergic_agonist",
+      "epc:ion_channel_or_pump_agent",
+      "epc:neuroactive_steroid_gamma_aminobutyric_acid_a_receptor_positive_modulator",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
     ],
     "ganaxolone": [
-      "cns_depressant"
+      "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:gamma_aminobutyric_acid_a_receptor_agonist",
+      "epc:gamma_aminobutyric_acid_ergic_agonist",
+      "epc:ion_channel_or_pump_agent",
+      "epc:neuroactive_steroid_gamma_aminobutyric_acid_a_receptor_positive_modulator",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
     ],
     "dantrolene": [
-      "cns_depressant"
+      "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:muscle_relaxant"
     ],
     "cariprazine": [
-      "antipsychotic"
+      "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "risperidone": [
       "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging"
     ],
     "quetiapine": [
       "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging"
     ],
     "iloperidone": [
-      "antipsychotic"
+      "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "aripiprazole": [
-      "antipsychotic"
+      "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "brexpiprazole": [
-      "antipsychotic"
+      "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "clozapine": [
       "antipsychotic",
       "benzodiazepine",
       "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging"
     ],
     "ziprasidone": [
       "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging"
     ],
     "asenapine": [
-      "antipsychotic"
+      "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "olanzapine": [
       "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging"
     ],
     "lurasidone": [
-      "antipsychotic"
+      "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "pimavanserin": [
-      "antipsychotic"
+      "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "paliperidone": [
-      "antipsychotic"
+      "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "lumateperone": [
-      "antipsychotic"
+      "antipsychotic",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "trifluoperazine": [
       "anticholinergic",
-      "antipsychotic"
+      "antipsychotic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "perphenazine": [
       "anticholinergic",
-      "antipsychotic"
+      "antipsychotic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "promethazine": [
       "anticholinergic",
       "antipsychotic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging"
     ],
     "prochlorperazine": [
       "anticholinergic",
-      "antipsychotic"
+      "antipsychotic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "fluphenazine": [
       "anticholinergic",
-      "antipsychotic"
+      "antipsychotic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
     ],
     "chlorpromazine": [
       "anticholinergic",
       "antipsychotic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging"
     ],
     "thioridazine": [
       "anticholinergic",
       "antipsychotic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
       "qt_prolonging"
     ],
     "rizatriptan": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "serotonergic",
       "triptan"
     ],
     "zolmitriptan": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "serotonergic",
       "triptan"
     ],
     "frovatriptan": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "serotonergic",
       "triptan"
     ],
     "eletriptan": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "serotonergic",
       "triptan"
     ],
     "sumatriptan": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "serotonergic",
       "triptan"
     ],
     "naratriptan": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "serotonergic",
       "triptan"
     ],
     "almotriptan": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
       "serotonergic",
       "triptan"
     ],
@@ -2586,6 +5066,11147 @@
     "theophylline": [
       "cyp1a2_substrate",
       "methylxanthine"
+    ],
+    "cisplatin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:platinum_based_drug"
+    ],
+    "oxaliplatin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:platinum_based_drug"
+    ],
+    "carboplatin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:platinum_based_drug"
+    ],
+    "daunorubicin": [
+      "epc:anthracycline_topoisomerase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:topoisomerase_inhibitor"
+    ],
+    "doxorubicin": [
+      "epc:anthracycline_topoisomerase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:topoisomerase_inhibitor"
+    ],
+    "epirubicin": [
+      "epc:anthracycline_topoisomerase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:topoisomerase_inhibitor"
+    ],
+    "idarubicin": [
+      "epc:anthracycline_topoisomerase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:topoisomerase_inhibitor"
+    ],
+    "treprostinil": [
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:prostacycline",
+      "epc:prostacycline_vasodilator",
+      "epc:vasodilator"
+    ],
+    "epoprostenol": [
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:prostacycline",
+      "epc:prostacycline_vasodilator",
+      "epc:vasodilator"
+    ],
+    "benzphetamine": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:sympathomimetic_agent",
+      "epc:sympathomimetic_amine_anorectic"
+    ],
+    "phendimetrazine": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:sympathomimetic_agent",
+      "epc:sympathomimetic_amine_anorectic"
+    ],
+    "diethylpropion": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:sympathomimetic_agent",
+      "epc:sympathomimetic_amine_anorectic"
+    ],
+    "phentermine": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:sympathomimetic_agent",
+      "epc:sympathomimetic_amine_anorectic"
+    ],
+    "methamphetamine": [
+      "epc:amphetamine_anorectic",
+      "epc:central_nervous_system_stimulant",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:sympathomimetic_agent"
+    ],
+    "nateglinide": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:glinide",
+      "hypoglycemic",
+      "insulin"
+    ],
+    "repaglinide": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:glinide",
+      "hypoglycemic",
+      "insulin"
+    ],
+    "levomefolic acid": [
+      "epc:antidote",
+      "epc:established_pharmacologic_classes",
+      "epc:folate_analog"
+    ],
+    "centruroides (scorpion) immune f(ab')2 (equine)": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:antidote",
+      "epc:antivenin",
+      "epc:established_pharmacologic_classes"
+    ],
+    "fomepizole": [
+      "epc:antidote",
+      "epc:established_pharmacologic_classes"
+    ],
+    "acetylcysteine": [
+      "epc:antidote",
+      "epc:antidote_for_acetaminophen_overdose",
+      "epc:established_pharmacologic_classes",
+      "epc:mucolytic",
+      "epc:physical_or_chemical_agent",
+      "epc:respiratory_agent"
+    ],
+    "prussian blue insoluble": [
+      "epc:antidote",
+      "epc:decorporation_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent"
+    ],
+    "pralidoxime": [
+      "epc:antidote",
+      "epc:cholinesterase_reactivator",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "levocarnitine": [
+      "epc:antidote",
+      "epc:carnitine_analog",
+      "epc:established_pharmacologic_classes"
+    ],
+    "hydroxocobalamin": [
+      "epc:antidote",
+      "epc:established_pharmacologic_classes"
+    ],
+    "leucovorin": [
+      "epc:antidote",
+      "epc:established_pharmacologic_classes",
+      "epc:folate_analog"
+    ],
+    "pyridoxine": [
+      "epc:antidote",
+      "epc:established_pharmacologic_classes",
+      "epc:vitamin_b6_analog",
+      "epc:vitamin_or_mineral"
+    ],
+    "vitamin k1": [
+      "epc:antidote",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:vitamin_k",
+      "epc:vitamin_or_mineral",
+      "epc:warfarin_reversal_agent"
+    ],
+    "levoleucovorin": [
+      "epc:antidote",
+      "epc:established_pharmacologic_classes",
+      "epc:folate_analog"
+    ],
+    "agkistrodon piscivorus antivenin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:antidote",
+      "epc:antivenin",
+      "epc:established_pharmacologic_classes"
+    ],
+    "crotalus adamanteus antivenin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:antidote",
+      "epc:antivenin",
+      "epc:established_pharmacologic_classes"
+    ],
+    "crotalus atrox antivenin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:antidote",
+      "epc:antivenin",
+      "epc:established_pharmacologic_classes"
+    ],
+    "crotalus scutulatus antivenin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:antidote",
+      "epc:antivenin",
+      "epc:established_pharmacologic_classes"
+    ],
+    "latrodectus mactans antivenin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:antidote",
+      "epc:antivenin",
+      "epc:established_pharmacologic_classes"
+    ],
+    "fidaxomicin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:macrolide",
+      "epc:macrolide_antibacterial"
+    ],
+    "retapamulin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:pleuromutilin_antibacterial"
+    ],
+    "clindamycin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:lincosamide_antibacterial"
+    ],
+    "tafluprost": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:prostaglandin_analog"
+    ],
+    "carboprost": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:prostaglandin_analog"
+    ],
+    "travoprost": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:prostaglandin_analog"
+    ],
+    "bimatoprost": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:prostaglandin_analog"
+    ],
+    "dinoprostone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:prostaglandin_analog"
+    ],
+    "latanoprost": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:prostaglandin_analog"
+    ],
+    "alprostadil": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:prostaglandin_analog",
+      "epc:prostaglandin_e1_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "cidofovir anhydrous": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cytomegalovirus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "valganciclovir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cytomegalovirus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "ganciclovir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cytomegalovirus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "zidovudine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "tenofovir anhydrous": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_b_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:human_immunodeficiency_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "abacavir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "emtricitabine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "didanosine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "stavudine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "lamivudine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_b_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:human_immunodeficiency_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "rilpivirine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_1_non_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
+    ],
+    "doravirine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_1_non_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
+    ],
+    "nevirapine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_1_non_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
+    ],
+    "trifluridine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "entecavir anhydrous": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_b_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "adefovir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_b_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "acyclovir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:herpes_simplex_virus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:herpes_zoster_virus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:herpesvirus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "idoxuridine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "penciclovir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:herpesvirus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "famciclovir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:herpes_simplex_virus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "valacyclovir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:herpes_simplex_virus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:herpes_zoster_virus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:herpesvirus_nucleoside_analog_dna_polymerase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "ribavirin": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleoside_analog_antiviral"
+    ],
+    "flucytosine": [
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleoside_analog_antifungal"
+    ],
+    "foscarnet": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:pyrophosphate_analog_dna_polymerase_inhibitor"
+    ],
+    "trientine": [
+      "epc:copper_chelator",
+      "epc:established_pharmacologic_classes",
+      "epc:metal_chelator",
+      "epc:physical_or_chemical_agent"
+    ],
+    "deferiprone": [
+      "epc:established_pharmacologic_classes",
+      "epc:iron_chelator",
+      "epc:metal_chelator",
+      "epc:physical_or_chemical_agent"
+    ],
+    "deferoxamine": [
+      "epc:established_pharmacologic_classes",
+      "epc:iron_chelator",
+      "epc:metal_chelator",
+      "epc:physical_or_chemical_agent"
+    ],
+    "dimercaprol": [
+      "epc:established_pharmacologic_classes",
+      "epc:metal_chelator",
+      "epc:physical_or_chemical_agent"
+    ],
+    "succimer": [
+      "epc:established_pharmacologic_classes",
+      "epc:lead_chelator",
+      "epc:metal_chelator",
+      "epc:physical_or_chemical_agent"
+    ],
+    "pentetic acid": [
+      "epc:established_pharmacologic_classes",
+      "epc:lead_chelator",
+      "epc:metal_chelator",
+      "epc:physical_or_chemical_agent"
+    ],
+    "chloramphenicol": [
+      "epc:amphenicol_class_antibacterial",
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "thiabendazole": [
+      "epc:anthelmintic",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiparasitic",
+      "epc:established_pharmacologic_classes"
+    ],
+    "albendazole": [
+      "epc:anthelmintic",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiparasitic",
+      "epc:established_pharmacologic_classes"
+    ],
+    "mebendazole": [
+      "epc:anthelmintic",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiparasitic",
+      "epc:established_pharmacologic_classes"
+    ],
+    "praziquantel": [
+      "epc:anthelmintic",
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiparasitic",
+      "epc:established_pharmacologic_classes"
+    ],
+    "artemether": [
+      "epc:anti_infective",
+      "epc:antimalarial",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "proguanil": [
+      "epc:anti_infective",
+      "epc:antimalarial",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "chloroquine": [
+      "epc:anti_infective",
+      "epc:antimalarial",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes",
+      "qt_prolonging"
+    ],
+    "hydroxychloroquine": [
+      "epc:anti_infective",
+      "epc:antimalarial",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:antirheumatic_agent",
+      "epc:established_pharmacologic_classes",
+      "qt_prolonging"
+    ],
+    "atovaquone": [
+      "epc:anti_infective",
+      "epc:antimalarial",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "mefloquine": [
+      "epc:anti_infective",
+      "epc:antimalarial",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "lumefantrine": [
+      "epc:anti_infective",
+      "epc:antimalarial",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "primaquine": [
+      "epc:anti_infective",
+      "epc:antimalarial",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes",
+      "qt_prolonging"
+    ],
+    "pyrimethamine": [
+      "epc:anti_infective",
+      "epc:antimalarial",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:dihydrofolate_reductase_inhibitor_antimalarial",
+      "epc:established_pharmacologic_classes"
+    ],
+    "quinine": [
+      "epc:anti_infective",
+      "epc:antimalarial",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "bedaquiline": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:antimycobacterial",
+      "epc:chemical_structure",
+      "epc:diarylquinoline_antimycobacterial",
+      "epc:established_pharmacologic_classes",
+      "qt_prolonging"
+    ],
+    "pretomanid": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:antimycobacterial",
+      "epc:established_pharmacologic_classes"
+    ],
+    "rifapentine": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:antimycobacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:rifamycin_antimycobacterial"
+    ],
+    "ethambutol": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:antimycobacterial",
+      "epc:established_pharmacologic_classes"
+    ],
+    "rifabutin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:antimycobacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:rifamycin_antimycobacterial"
+    ],
+    "isoniazid": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:antimycobacterial",
+      "epc:established_pharmacologic_classes"
+    ],
+    "pyrazinamide": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:antimycobacterial",
+      "epc:established_pharmacologic_classes"
+    ],
+    "benzyl alcohol": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiparasitic",
+      "epc:established_pharmacologic_classes",
+      "epc:pediculicide"
+    ],
+    "miltefosine": [
+      "epc:anti_infective",
+      "epc:antileishmanial",
+      "epc:antimicrobial",
+      "epc:antiparasitic",
+      "epc:established_pharmacologic_classes"
+    ],
+    "lotilaner": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiparasitic",
+      "epc:ectoparasiticide",
+      "epc:established_pharmacologic_classes"
+    ],
+    "spinosad": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiparasitic",
+      "epc:established_pharmacologic_classes",
+      "epc:pediculicide"
+    ],
+    "ivermectin": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiparasitic",
+      "epc:established_pharmacologic_classes",
+      "epc:pediculicide"
+    ],
+    "nitazoxanide": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "eflornithine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:decarboxylase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "paromomycin": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "pentamidine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:antiprotozoal",
+      "epc:established_pharmacologic_classes",
+      "qt_prolonging"
+    ],
+    "hexachlorophene": [
+      "epc:anti_infective",
+      "epc:antiseptic",
+      "epc:established_pharmacologic_classes"
+    ],
+    "povidone-iodine": [
+      "epc:anti_infective",
+      "epc:antiseptic",
+      "epc:established_pharmacologic_classes"
+    ],
+    "ceftaroline": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cephalexin anhydrous": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefaclor anhydrous": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefadroxil anhydrous": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "ceftazidime anhydrous": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefixime anhydrous": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "ceftolozane": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefprozil": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefepime": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefpodoxime": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "ceftibuten": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefazolin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefotaxime": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefotetan": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefoxitin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "ceftizoxime": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "ceftriaxone": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefuroxime": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefiderocol": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefdinir": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "ceftobiprole": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "cefditoren": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:cephalosporin_antibacterial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "telithromycin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ketolide_antibacterial"
+    ],
+    "aztreonam": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:monobactam_antibacterial"
+    ],
+    "nitrofurantoin, macrocrystals": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nitrofuran_antibacterial"
+    ],
+    "nitrofurantoin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nitrofuran_antibacterial"
+    ],
+    "imipenem anhydrous": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penem_antibacterial"
+    ],
+    "meropenem anhydrous": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penem_antibacterial"
+    ],
+    "ertapenem": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penem_antibacterial"
+    ],
+    "ticarcillin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penicillin_class_antibacterial"
+    ],
+    "amoxicillin anhydrous": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penicillin_class_antibacterial"
+    ],
+    "piperacillin anhydrous": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penicillin_class_antibacterial"
+    ],
+    "dicloxacillin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penicillin_class_antibacterial"
+    ],
+    "nafcillin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penicillin_class_antibacterial"
+    ],
+    "ampicillin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penicillin_class_antibacterial"
+    ],
+    "oxacillin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penicillin_class_antibacterial"
+    ],
+    "penicillin g": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penicillin_class_antibacterial"
+    ],
+    "penicillin v": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:penicillin_class_antibacterial"
+    ],
+    "amphotericin b": [
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:lipid_based_polyene_antifungal",
+      "epc:polyene_antifungal"
+    ],
+    "nystatin": [
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:polyene_antifungal"
+    ],
+    "rifaximin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:rifamycin_antibacterial"
+    ],
+    "rifampin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:rifamycin_antibacterial"
+    ],
+    "sulfamethoxazole": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:sulfonamide_antimicrobial",
+      "qt_prolonging"
+    ],
+    "sulfisoxazole": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:sulfonamide_antimicrobial"
+    ],
+    "tetracycline": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:tetracycline_class_antimicrobial",
+      "epc:tetracycline_class_drug"
+    ],
+    "oxytetracycline anhydrous": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:tetracycline_class_antimicrobial",
+      "epc:tetracycline_class_drug"
+    ],
+    "demeclocycline": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:tetracycline_class_antimicrobial",
+      "epc:tetracycline_class_drug"
+    ],
+    "caspofungin": [
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:echinocandin_antifungal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "rezafungin": [
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:echinocandin_antifungal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "micafungin": [
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:echinocandin_antifungal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "anidulafungin": [
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:echinocandin_antifungal",
+      "epc:established_pharmacologic_classes"
+    ],
+    "daptomycin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:lipopeptide_antibacterial"
+    ],
+    "mafenide": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:methylated_sulfonamide_antibacterial"
+    ],
+    "cilastatin": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:renal_dehydropeptidase_inhibitor"
+    ],
+    "mupirocin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:rna_synthetase_inhibitor_antibacterial"
+    ],
+    "acetazolamide": [
+      "epc:carbonic_anhydrase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "brinzolamide": [
+      "epc:carbonic_anhydrase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "dichlorphenamide": [
+      "epc:carbonic_anhydrase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "dorzolamide": [
+      "epc:carbonic_anhydrase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "ketotifen": [
+      "epc:established_pharmacologic_classes",
+      "epc:histamine_1_receptor_inhibitor",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "peginterferon alfa-2a": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interferon_alpha"
+    ],
+    "ropeginterferon alfa-2b": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interferon_alfa_2b",
+      "epc:interferon_alpha"
+    ],
+    "interferon alfa-n3": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interferon_alpha"
+    ],
+    "oseltamivir carboxylate": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:neuraminidase_inhibitor"
+    ],
+    "oseltamivir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:neuraminidase_inhibitor"
+    ],
+    "zanamivir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:neuraminidase_inhibitor"
+    ],
+    "urokinase": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:thrombolytic_agent"
+    ],
+    "zinc cation": [
+      "epc:copper_absorption_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent"
+    ],
+    "hyaluronidase, human recombinant": [
+      "epc:endoglycosidase",
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes"
+    ],
+    "berahyaluronidase alfa": [
+      "epc:endoglycosidase",
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes"
+    ],
+    "hyaluronidase, bovine": [
+      "epc:endoglycosidase",
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes"
+    ],
+    "indigotindisulfonic acid": [
+      "epc:diagnostic_agent",
+      "epc:diagnostic_dye",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "trypan blue free acid": [
+      "epc:diagnostic_agent",
+      "epc:diagnostic_dye",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "fluorescein": [
+      "epc:diagnostic_agent",
+      "epc:diagnostic_dye",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "indocyanine green": [
+      "epc:diagnostic_agent",
+      "epc:diagnostic_dye",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "tetracaine": [
+      "epc:anesthetic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ester_local_anesthetic",
+      "epc:local_anesthetic"
+    ],
+    "bupivacaine": [
+      "epc:amide_local_anesthetic",
+      "epc:anesthetic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:local_anesthetic"
+    ],
+    "chloroprocaine": [
+      "epc:anesthetic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:ester_local_anesthetic",
+      "epc:local_anesthetic"
+    ],
+    "proparacaine": [
+      "epc:anesthetic",
+      "epc:established_pharmacologic_classes",
+      "epc:local_anesthetic"
+    ],
+    "ropivacaine": [
+      "epc:amide_local_anesthetic",
+      "epc:anesthetic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:local_anesthetic"
+    ],
+    "articaine": [
+      "epc:amide_local_anesthetic",
+      "epc:anesthetic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:local_anesthetic"
+    ],
+    "mepivacaine": [
+      "epc:amide_local_anesthetic",
+      "epc:anesthetic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:local_anesthetic"
+    ],
+    "prilocaine": [
+      "epc:amide_local_anesthetic",
+      "epc:anesthetic",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:local_anesthetic"
+    ],
+    "verteporfin": [
+      "epc:established_pharmacologic_classes",
+      "epc:photoenhancer",
+      "epc:physical_or_chemical_agent"
+    ],
+    "riboflavin 5'-phosphate": [
+      "epc:established_pharmacologic_classes",
+      "epc:photoenhancer",
+      "epc:physical_or_chemical_agent"
+    ],
+    "interferon gamma-1b": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interferon_gamma"
+    ],
+    "amantadine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:established_pharmacologic_classes",
+      "epc:influenza_a_m2_protein_inhibitor",
+      "qt_prolonging"
+    ],
+    "rimantadine": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:established_pharmacologic_classes",
+      "epc:influenza_a_m2_protein_inhibitor"
+    ],
+    "streptozocin": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "thiotepa": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "bendamustine": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "cyclophosphamide anhydrous": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "trabectedin": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "busulfan": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "carmustine": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "chlorambucil": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "lurbinectedin": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "dacarbazine": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "temozolomide": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "ifosfamide": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "mitomycin": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "lomustine": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "mechlorethamine": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "melphalan": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "procarbazine": [
+      "epc:alkylating_drug",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:physical_or_chemical_agent",
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "acarbose": [
+      "epc:alpha_glucosidase_inhibitor",
+      "epc:blood_glucose_regulator",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "miglitol": [
+      "epc:alpha_glucosidase_inhibitor",
+      "epc:blood_glucose_regulator",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "clascoterone": [
+      "epc:androgen_receptor_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "nilutamide": [
+      "epc:androgen_receptor_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "flutamide": [
+      "epc:androgen_receptor_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "bicalutamide": [
+      "epc:androgen_receptor_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "exemestane": [
+      "epc:aromatase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "letrozole": [
+      "epc:aromatase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "anastrozole": [
+      "epc:aromatase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "hydralazine": [
+      "epc:arteriolar_vasodilator",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:vasodilator"
+    ],
+    "minoxidil": [
+      "epc:arteriolar_vasodilator",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:vasodilator"
+    ],
+    "metyrosine": [
+      "epc:catecholamine_synthesis_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "gemtuzumab ozogamicin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd33_directed_immunoconjugate",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "maraviroc": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:ccr5_co_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "lubiprostone": [
+      "epc:chloride_channel_activator",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:ion_channel_or_pump_agent"
+    ],
+    "ravulizumab": [
+      "epc:complement_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:immunologic_agent"
+    ],
+    "pegcetacoplan": [
+      "epc:complement_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:immunologic_agent"
+    ],
+    "sutimlimab": [
+      "epc:classical_complement_pathway_inhibitor",
+      "epc:complement_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:immunologic_agent"
+    ],
+    "avacincaptad pegol": [
+      "epc:complement_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:immunologic_agent"
+    ],
+    "pozelimab": [
+      "epc:complement_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:immunologic_agent"
+    ],
+    "iptacopan": [
+      "epc:classical_complement_pathway_inhibitor",
+      "epc:complement_factor_b_inhibitor",
+      "epc:complement_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:immunologic_agent"
+    ],
+    "zilucoplan": [
+      "epc:complement_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:immunologic_agent"
+    ],
+    "crovalimab": [
+      "epc:classical_complement_pathway_inhibitor",
+      "epc:complement_c5_inhibitor",
+      "epc:complement_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:immunologic_agent"
+    ],
+    "eculizumab": [
+      "epc:complement_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:immunologic_agent"
+    ],
+    "ibandronic acid": [
+      "epc:bisphosphonate",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "etidronic acid": [
+      "epc:bisphosphonate",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "zoledronic acid anhydrous": [
+      "epc:bisphosphonate",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "pamidronic acid": [
+      "epc:bisphosphonate",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "alendronic acid": [
+      "epc:bisphosphonate",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "risedronic acid": [
+      "epc:bisphosphonate",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "apomorphine": [
+      "epc:dopaminergic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "macitentan": [
+      "epc:endothelin_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "bosentan anhydrous": [
+      "epc:endothelin_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "aprocitentan": [
+      "epc:endothelin_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "ambrisentan": [
+      "epc:endothelin_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "fulvestrant": [
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "omega-3 fatty acids": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:omega_3_fatty_acid"
+    ],
+    "pralatrexate": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:folate_analog_metabolic_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
+    ],
+    "pemetrexed": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:folate_analog_metabolic_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
+    ],
+    "belinostat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:histone_deacetylase_inhibitor",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "vorinostat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:histone_deacetylase_inhibitor",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "romidepsin": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:histone_deacetylase_inhibitor",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "orlistat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:intestinal_lipase_inhibitor"
+    ],
+    "eribulin": [
+      "epc:established_pharmacologic_classes",
+      "epc:microtubule_inhibitor",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "docetaxel anhydrous": [
+      "epc:established_pharmacologic_classes",
+      "epc:microtubule_inhibitor",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "tirbanibulin": [
+      "epc:established_pharmacologic_classes",
+      "epc:microtubule_inhibitor",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "ixabepilone": [
+      "epc:established_pharmacologic_classes",
+      "epc:microtubule_inhibitor",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "paclitaxel": [
+      "epc:established_pharmacologic_classes",
+      "epc:microtubule_inhibitor",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "cabazitaxel": [
+      "epc:established_pharmacologic_classes",
+      "epc:microtubule_inhibitor",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "niacin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nicotinic_acid",
+      "epc:vitamin_or_mineral"
+    ],
+    "azacitidine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "gemcitabine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "mercaptopurine anhydrous": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "decitabine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "capecitabine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "fludarabine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "nelarabine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "cytarabine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "clofarabine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "fluorouracil": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "pentostatin": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:nucleoside_metabolic_inhibitor"
+    ],
+    "fenofibric acid": [
+      "epc:established_pharmacologic_classes",
+      "epc:peroxisome_proliferator_activated_receptor_agonist",
+      "epc:peroxisome_proliferator_activated_receptor_alpha_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "pioglitazone": [
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:peroxisome_proliferator_activated_receptor_agonist",
+      "epc:peroxisome_proliferator_activated_receptor_alpha_agonist",
+      "epc:peroxisome_proliferator_activated_receptor_gamma_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:thiazolidinedione"
+    ],
+    "calcium ion": [
+      "epc:blood_coagulation_factor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:phosphate_binder",
+      "epc:physical_or_chemical_agent"
+    ],
+    "ferric cation": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:parenteral_iron_replacement",
+      "epc:phosphate_binder",
+      "epc:physical_or_chemical_agent",
+      "epc:vitamin_or_mineral"
+    ],
+    "lanthanum cation (3+)": [
+      "epc:established_pharmacologic_classes",
+      "epc:phosphate_binder",
+      "epc:physical_or_chemical_agent"
+    ],
+    "sevelamer": [
+      "epc:established_pharmacologic_classes",
+      "epc:phosphate_binder",
+      "epc:physical_or_chemical_agent"
+    ],
+    "cilostazol": [
+      "antiplatelet",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:phosphodiesterase_3_inhibitor"
+    ],
+    "ensifentrine": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:phosphodiesterase_3_inhibitor",
+      "epc:phosphodiesterase_4_inhibitor"
+    ],
+    "milrinone": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:phosphodiesterase_3_inhibitor"
+    ],
+    "potassium ion": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:osmotic_laxative",
+      "epc:physical_or_chemical_agent",
+      "epc:potassium_salt",
+      "epc:vitamin_or_mineral"
+    ],
+    "progesterone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progesterone",
+      "epc:steroid"
+    ],
+    "drospirenone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "etonogestrel": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "segesterone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "desogestrel": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "dienogest": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "ethynodiol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "norgestimate": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "norelgestromin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "17-alpha-hydroxyprogesterone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "levonorgestrel": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:progestin_containing_intrauterine_system",
+      "epc:steroid"
+    ],
+    "medroxyprogesterone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "megestrol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "norethindrone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:progestin",
+      "epc:steroid"
+    ],
+    "iloprost": [
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:prostacycline",
+      "epc:vasodilator"
+    ],
+    "carfilzomib": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
+      "epc:proteasome_inhibitor"
+    ],
+    "ixazomib": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
+      "epc:proteasome_inhibitor"
+    ],
+    "bortezomib": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor",
+      "epc:proteasome_inhibitor"
+    ],
+    "lonapegsomatropin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:recombinant_human_growth_hormone"
+    ],
+    "somatropin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:recombinant_human_growth_hormone"
+    ],
+    "tretinoin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:retinoid"
+    ],
+    "acitretin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:retinoid"
+    ],
+    "trifarotene": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:retinoid"
+    ],
+    "bexarotene": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:retinoid"
+    ],
+    "palovarotene": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:retinoid"
+    ],
+    "adapalene": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:retinoid"
+    ],
+    "isotretinoin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:retinoid"
+    ],
+    "alitretinoin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:retinoid"
+    ],
+    "tazarotene": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:retinoid"
+    ],
+    "etoposide": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:topoisomerase_inhibitor"
+    ],
+    "irinotecan": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:topoisomerase_inhibitor"
+    ],
+    "topotecan": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:topoisomerase_inhibitor"
+    ],
+    "mitoxantrone": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:topoisomerase_inhibitor"
+    ],
+    "infliximab-dyyb": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:tumor_necrosis_factor_blocker"
+    ],
+    "infliximab": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:tumor_necrosis_factor_blocker"
+    ],
+    "etanercept": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:tumor_necrosis_factor_blocker"
+    ],
+    "adalimumab-bwwd": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:tumor_necrosis_factor_blocker"
+    ],
+    "adalimumab-aaty": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:tumor_necrosis_factor_blocker"
+    ],
+    "adalimumab-ryvk": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:tumor_necrosis_factor_blocker"
+    ],
+    "adalimumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:tumor_necrosis_factor_blocker"
+    ],
+    "certolizumab pegol": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:tumor_necrosis_factor_blocker"
+    ],
+    "golimumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:tumor_necrosis_factor_blocker"
+    ],
+    "acetohydroxamic acid": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:urease_inhibitor"
+    ],
+    "vinblastine": [
+      "epc:alkaloid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:tubulin_agent",
+      "epc:vinca_alkaloid"
+    ],
+    "vincristine": [
+      "epc:alkaloid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:tubulin_agent",
+      "epc:vinca_alkaloid"
+    ],
+    "vinorelbine": [
+      "epc:alkaloid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:tubulin_agent",
+      "epc:vinca_alkaloid"
+    ],
+    "mycophenolic acid": [
+      "epc:antimetabolite",
+      "epc:antimetabolite_immunosuppressant",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
+    ],
+    "basiliximab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_2_receptor_blocking_antibody",
+      "epc:interleukin_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "palivizumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:respiratory_agent",
+      "epc:respiratory_syncytial_virus_anti_f_protein_monoclonal_antibody"
+    ],
+    "nirsevimab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:respiratory_agent",
+      "epc:respiratory_syncytial_virus_anti_f_protein_monoclonal_antibody"
+    ],
+    "cromolyn": [
+      "epc:established_pharmacologic_classes",
+      "epc:mast_cell_stabilizer",
+      "epc:respiratory_agent"
+    ],
+    "tranexamic acid": [
+      "epc:antifibrinolytic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "6-aminocaproic acid": [
+      "epc:antifibrinolytic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "anagrelide": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:platelet_reducing_agent"
+    ],
+    "reserpine": [
+      "epc:cardiovascular_agent",
+      "epc:catecholamine_depleting_sympatholytic",
+      "epc:established_pharmacologic_classes"
+    ],
+    "mecamylamine": [
+      "epc:autonomic_ganglionic_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "nafarelin": [
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin_releasing_hormone_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "triptorelin": [
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin_releasing_hormone_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "leuprolide": [
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin_releasing_hormone_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "goserelin": [
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin_releasing_hormone_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "histrelin": [
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin_releasing_hormone_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "rituximab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd20_directed_cytolytic_antibody",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "ocrelizumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd20_directed_cytolytic_antibody",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "ublituximab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd20_directed_cytolytic_antibody",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "ofatumumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd20_directed_cytolytic_antibody",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "obinutuzumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd20_directed_cytolytic_antibody",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "ibritumomab tiuxetan": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd20_directed_radiotherapeutic_antibody",
+      "epc:established_pharmacologic_classes"
+    ],
+    "alemtuzumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd52_directed_cytolytic_antibody",
+      "epc:established_pharmacologic_classes"
+    ],
+    "epoetin alfa": [
+      "epc:erythropoiesis_stimulating_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "darbepoetin alfa": [
+      "epc:erythropoiesis_stimulating_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "methoxy polyethylene glycol-epoetin beta": [
+      "epc:erythropoiesis_stimulating_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "eflapegrastim": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_factor",
+      "epc:leukocyte_growth_factor"
+    ],
+    "efbemalenograstim alfa": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_factor",
+      "epc:leukocyte_growth_factor"
+    ],
+    "pegfilgrastim": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_factor",
+      "epc:leukocyte_growth_factor"
+    ],
+    "filgrastim": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_factor",
+      "epc:leukocyte_growth_factor"
+    ],
+    "sargramostim": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_factor",
+      "epc:leukocyte_growth_factor"
+    ],
+    "aldesleukin": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_factor",
+      "epc:immunologic_agent",
+      "epc:lymphocyte_growth_factor"
+    ],
+    "asparaginase": [
+      "epc:asparagine_specific_enzyme",
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes"
+    ],
+    "calaspargase pegol": [
+      "epc:asparagine_specific_enzyme",
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes"
+    ],
+    "pegaspargase": [
+      "epc:asparagine_specific_enzyme",
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes"
+    ],
+    "pegloticase": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:uric_acid_specific_enzyme"
+    ],
+    "rasburicase": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:uric_acid_specific_enzyme"
+    ],
+    "palifermin": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_factor",
+      "epc:mucocutaneous_epithelial_cell_growth_factor"
+    ],
+    "disulfiram": [
+      "epc:aldehyde_dehydrogenase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "flumazenil": [
+      "benzodiazepine",
+      "cns_depressant",
+      "epc:benzodiazepine_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent"
+    ],
+    "desflurane": [
+      "epc:anesthetic",
+      "epc:established_pharmacologic_classes",
+      "epc:general_anesthetic"
+    ],
+    "sevoflurane": [
+      "epc:anesthetic",
+      "epc:established_pharmacologic_classes",
+      "epc:general_anesthetic",
+      "qt_prolonging"
+    ],
+    "etomidate": [
+      "epc:anesthetic",
+      "epc:established_pharmacologic_classes",
+      "epc:general_anesthetic"
+    ],
+    "isoflurane": [
+      "epc:anesthetic",
+      "epc:established_pharmacologic_classes",
+      "epc:general_anesthetic"
+    ],
+    "ketamine": [
+      "epc:anesthetic",
+      "epc:established_pharmacologic_classes",
+      "epc:general_anesthetic"
+    ],
+    "propofol": [
+      "epc:anesthetic",
+      "epc:established_pharmacologic_classes",
+      "epc:general_anesthetic"
+    ],
+    "pentazocine": [
+      "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:opioid_agonist_antagonist",
+      "epc:partial_opioid_agonist_antagonist",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "opioid"
+    ],
+    "alvimopan anhydrous": [
+      "epc:established_pharmacologic_classes",
+      "epc:opioid_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "naloxegol": [
+      "epc:established_pharmacologic_classes",
+      "epc:opioid_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "samidorphan": [
+      "epc:established_pharmacologic_classes",
+      "epc:opioid_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "methylnaltrexone": [
+      "epc:established_pharmacologic_classes",
+      "epc:opioid_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "nalmefene": [
+      "epc:established_pharmacologic_classes",
+      "epc:opioid_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "naloxone": [
+      "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:opioid_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "opioid"
+    ],
+    "naltrexone": [
+      "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:opioid_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "opioid"
+    ],
+    "butorphanol": [
+      "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:opioid_agonist_antagonist",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "opioid"
+    ],
+    "nalbuphine": [
+      "cns_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:opioid_agonist_antagonist",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "opioid"
+    ],
+    "atomoxetine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:norepinephrine_reuptake_inhibitor"
+    ],
+    "ziconotide": [
+      "epc:calcium_channel_agent",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:n_type_calcium_channel_antagonist",
+      "epc:nervous_system_agent"
+    ],
+    "varenicline": [
+      "epc:cholinergic_nicotinic_agonist",
+      "epc:cholinergic_receptor_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent",
+      "epc:partial_cholinergic_nicotinic_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "nicotine": [
+      "epc:cholinergic_nicotinic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "spesolimab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_1_receptor_antagonist",
+      "epc:interleukin_36_receptor_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "anakinra": [
+      "epc:established_pharmacologic_classes",
+      "epc:interleukin_1_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "cladribine": [
+      "epc:antimetabolite",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:purine_antimetabolite"
+    ],
+    "leflunomide": [
+      "epc:antirheumatic_agent",
+      "epc:established_pharmacologic_classes"
+    ],
+    "penicillamine": [
+      "epc:antirheumatic_agent",
+      "epc:established_pharmacologic_classes"
+    ],
+    "4-aminobenzoic acid": [
+      "epc:established_pharmacologic_classes",
+      "epc:vitamin_b_complex_member",
+      "epc:vitamin_or_mineral"
+    ],
+    "doxapram": [
+      "epc:established_pharmacologic_classes",
+      "epc:respiratory_agent",
+      "epc:respiratory_stimulant"
+    ],
+    "succinylcholine": [
+      "epc:depolarizing_neuromuscular_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:neuromuscular_blocker",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "atracurium": [
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:neuromuscular_blocker",
+      "epc:nondepolarizing_neuromuscular_blocker",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "vecuronium cation": [
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:neuromuscular_blocker",
+      "epc:nondepolarizing_neuromuscular_blocker",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "cisatracurium": [
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:neuromuscular_blocker",
+      "epc:nondepolarizing_neuromuscular_blocker",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "rocuronium": [
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:neuromuscular_blocker",
+      "epc:nondepolarizing_neuromuscular_blocker",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "vecuronium": [
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:neuromuscular_blocker",
+      "epc:nondepolarizing_neuromuscular_blocker",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "donepezil": [
+      "epc:cholinesterase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "edrophonium cation": [
+      "epc:cholinesterase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "rivastigmine": [
+      "epc:cholinesterase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "galantamine": [
+      "epc:cholinesterase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "malathion": [
+      "epc:cholinesterase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "neostigmine": [
+      "epc:cholinesterase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "ecothiopate": [
+      "epc:cholinesterase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "pyridostigmine": [
+      "epc:cholinesterase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "carisoprodol": [
+      "epc:established_pharmacologic_classes",
+      "epc:muscle_relaxant"
+    ],
+    "cyclobenzaprine": [
+      "epc:established_pharmacologic_classes",
+      "epc:muscle_relaxant"
+    ],
+    "chlorzoxazone": [
+      "epc:established_pharmacologic_classes",
+      "epc:muscle_relaxant"
+    ],
+    "metaxalone": [
+      "epc:established_pharmacologic_classes",
+      "epc:muscle_relaxant"
+    ],
+    "methocarbamol": [
+      "epc:established_pharmacologic_classes",
+      "epc:muscle_relaxant"
+    ],
+    "orphenadrine": [
+      "epc:established_pharmacologic_classes",
+      "epc:muscle_relaxant"
+    ],
+    "dextroamphetamine": [
+      "epc:central_nervous_system_stimulant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "dexmethylphenidate": [
+      "epc:central_nervous_system_stimulant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "methylphenidate": [
+      "epc:central_nervous_system_stimulant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "lisdexamfetamine": [
+      "epc:central_nervous_system_stimulant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "amphetamine": [
+      "epc:central_nervous_system_stimulant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "riluzole": [
+      "epc:benzothiazole",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "tasimelteon": [
+      "epc:established_pharmacologic_classes",
+      "epc:melatonin_receptor_agonist",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "ramelteon": [
+      "epc:established_pharmacologic_classes",
+      "epc:melatonin_receptor_agonist",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "memantine": [
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:n_methyl_d_aspartate_receptor_antagonist",
+      "epc:nervous_system_agent"
+    ],
+    "valproic acid": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:mood_stabilizer",
+      "epc:nervous_system_agent"
+    ],
+    "lithium cation": [
+      "epc:established_pharmacologic_classes",
+      "epc:mood_stabilizer",
+      "epc:nervous_system_agent"
+    ],
+    "lamotrigine": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:mood_stabilizer",
+      "epc:nervous_system_agent"
+    ],
+    "vigabatrin": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "felbamate": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "tiagabine": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "oxcarbazepine": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "ethosuximide": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "methsuximide": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "phenytoin": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "primidone": [
+      "epc:anti_epileptic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "carbidopa": [
+      "epc:aromatic_amino_acid_decarboxylation_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "opicapone": [
+      "epc:catechol_o_methyltransferase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "entacapone": [
+      "epc:catechol_o_methyltransferase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "tolcapone": [
+      "epc:catechol_o_methyltransferase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "4-hydroxybutyric acid": [
+      "epc:central_nervous_system_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "oxybate": [
+      "epc:central_nervous_system_depressant",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "baclofen": [
+      "epc:established_pharmacologic_classes",
+      "epc:gamma_aminobutyric_acid_ergic_agonist",
+      "epc:ion_channel_or_pump_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "dihydroergotamine": [
+      "epc:chemical_structure",
+      "epc:ergotamine_derivative",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "ergotamine": [
+      "epc:chemical_structure",
+      "epc:ergotamine_derivative",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "pergolide": [
+      "epc:ergot_derived_dopamine_receptor_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "rotigotine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:nonergot_dopamine_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "ropinirole": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:nonergot_dopamine_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "pramipexole": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:nonergot_dopamine_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "modafinil": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:sympathomimetic_agent",
+      "epc:sympathomimetic_like_agent"
+    ],
+    "botulinum toxin type a": [
+      "epc:acetylcholine_release_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent",
+      "epc:neuromuscular_blocker"
+    ],
+    "letibotulinumtoxina": [
+      "epc:acetylcholine_release_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent",
+      "epc:neuromuscular_blocker"
+    ],
+    "abobotulinumtoxina": [
+      "epc:acetylcholine_release_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent",
+      "epc:neuromuscular_blocker"
+    ],
+    "rimabotulinumtoxinb": [
+      "epc:acetylcholine_release_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "vedolizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:integrin_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "lifitegrast": [
+      "epc:established_pharmacologic_classes",
+      "epc:integrin_receptor_antagonist",
+      "epc:lymphocyte_function_associated_antigen_1_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "natalizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:integrin_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "zafirlukast": [
+      "epc:established_pharmacologic_classes",
+      "epc:leukotriene_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:respiratory_agent"
+    ],
+    "montelukast": [
+      "epc:established_pharmacologic_classes",
+      "epc:leukotriene_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:respiratory_agent"
+    ],
+    "calfactant": [
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent",
+      "epc:respiratory_agent",
+      "epc:surfactant"
+    ],
+    "poractant alfa": [
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent",
+      "epc:respiratory_agent",
+      "epc:surfactant"
+    ],
+    "alanine": [
+      "epc:amino_acid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "glutamine": [
+      "epc:amino_acid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "levodopa": [
+      "epc:amino_acid",
+      "epc:aromatic_amino_acid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "balsalazide": [
+      "epc:aminosalicylate",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "olsalazine": [
+      "epc:aminosalicylate",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "mesalamine": [
+      "epc:aminosalicylate",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "sulfasalazine": [
+      "epc:aminosalicylate",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "dronabinol": [
+      "epc:cannabinoid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "nabilone": [
+      "epc:cannabinoid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "miglustat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:enzyme_stabilizer",
+      "epc:established_pharmacologic_classes",
+      "epc:glucosylceramide_synthase_inhibitor"
+    ],
+    "cimetidine": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:histamine_2_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "nizatidine": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:histamine_2_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "famotidine": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:histamine_2_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "qt_prolonging"
+    ],
+    "ranitidine": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:histamine_2_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "misoprostol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:prostaglandin_e1_analog"
+    ],
+    "omalizumab": [
+      "epc:anti_ige",
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "benzonatate": [
+      "epc:established_pharmacologic_classes",
+      "epc:non_narcotic_antitussive",
+      "epc:respiratory_agent"
+    ],
+    "sincalide": [
+      "epc:chemical_structure",
+      "epc:cholecystokinin_analog",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone"
+    ],
+    "droperidol": [
+      "epc:dopamine_2_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "qt_prolonging"
+    ],
+    "amisulpride": [
+      "epc:dopamine_2_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "qt_prolonging"
+    ],
+    "metoclopramide": [
+      "epc:dopamine_2_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "qt_prolonging"
+    ],
+    "sucralfate": [
+      "epc:aluminum_complex",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "ursodiol": [
+      "epc:bile_acid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:steroid"
+    ],
+    "cholic acid": [
+      "epc:bile_acid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:steroid"
+    ],
+    "betaine": [
+      "epc:established_pharmacologic_classes",
+      "epc:methylating_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "betaine, anhydrous": [
+      "epc:established_pharmacologic_classes",
+      "epc:methylating_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "4-phenylbutyric acid": [
+      "epc:established_pharmacologic_classes",
+      "epc:nitrogen_binding_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "benzoic acid": [
+      "epc:established_pharmacologic_classes",
+      "epc:nitrogen_binding_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "phenylacetic acid": [
+      "epc:established_pharmacologic_classes",
+      "epc:nitrogen_binding_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "nitisinone": [
+      "epc:4_hydroxyphenyl_pyruvate_dioxygenase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "mannitol": [
+      "epc:diuretic",
+      "epc:established_pharmacologic_classes",
+      "epc:osmotic_diuretic",
+      "epc:physical_or_chemical_agent"
+    ],
+    "sodium cation": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:osmotic_laxative",
+      "epc:physical_or_chemical_agent"
+    ],
+    "sulfate ion": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:osmotic_laxative",
+      "epc:physical_or_chemical_agent"
+    ],
+    "magnesium cation": [
+      "epc:calculi_dissolution_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:osmotic_laxative",
+      "epc:physical_or_chemical_agent"
+    ],
+    "tenapanor": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:osmotic_laxative",
+      "epc:physical_or_chemical_agent",
+      "epc:sodium_hydrogen_exchanger_3_inhibitor"
+    ],
+    "polyethylene glycol 3350": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:osmotic_laxative",
+      "epc:physical_or_chemical_agent"
+    ],
+    "lactulose": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:osmotic_laxative",
+      "epc:physical_or_chemical_agent"
+    ],
+    "bisacodyl": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:stimulant_laxative"
+    ],
+    "deacetylbisacodyl": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:stimulant_laxative"
+    ],
+    "secretin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:secretin_class_hormone"
+    ],
+    "ethanolamine": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent",
+      "epc:sclerosing_agent"
+    ],
+    "polidocanol": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent",
+      "epc:sclerosing_agent"
+    ],
+    "sacrosidase": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:sucrose_specific_enzyme"
+    ],
+    "taliglucerase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_glucocerebroside_specific_enzyme"
+    ],
+    "imiglucerase": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_glucocerebroside_specific_enzyme"
+    ],
+    "velaglucerase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_glucocerebroside_specific_enzyme"
+    ],
+    "avalglucosidase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_glycogen_specific_enzyme"
+    ],
+    "alglucosidase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_glycogen_specific_enzyme"
+    ],
+    "pegunigalsidase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_neutral_glycosphingolipid_specific_enzyme"
+    ],
+    "agalsidase beta": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_neutral_glycosphingolipid_specific_enzyme"
+    ],
+    "elosulfase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_glycosaminoglycan_specific_enzyme"
+    ],
+    "laronidase": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_glycosaminoglycan_specific_enzyme"
+    ],
+    "galsulfase": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_glycosaminoglycan_specific_enzyme"
+    ],
+    "idursulfase": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_glycosaminoglycan_specific_enzyme"
+    ],
+    "testosterone": [
+      "epc:androgen",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
+    ],
+    "danazol": [
+      "epc:androgen",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
+    ],
+    "fluoxymesterone": [
+      "epc:androgen",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
+    ],
+    "methyltestosterone": [
+      "epc:androgen",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
+    ],
+    "nandrolone": [
+      "epc:androgen",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
+    ],
+    "estetrol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
+    ],
+    "estradiol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
+    ],
+    "estrogens, conjugated (usp)": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
+    ],
+    "ethinyl estradiol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:steroid"
+    ],
+    "tamoxifen": [
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen_agonist_antagonist",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "qt_prolonging"
+    ],
+    "ospemifene": [
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen_agonist_antagonist",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "bazedoxifene": [
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen_agonist_antagonist",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "clomiphene": [
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen_agonist_antagonist",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "toremifene": [
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen_agonist_antagonist",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "raloxifene": [
+      "epc:established_pharmacologic_classes",
+      "epc:estrogen_agonist_antagonist",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "bromocriptine": [
+      "epc:chemical_structure",
+      "epc:ergot_derivative",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "cabergoline": [
+      "epc:chemical_structure",
+      "epc:ergot_derivative",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "methylergonovine": [
+      "epc:chemical_structure",
+      "epc:ergot_derivative",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "oxytocin": [
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:oxytocic"
+    ],
+    "copper": [
+      "epc:copper_containing_intrauterine_device",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent"
+    ],
+    "gluconolactone": [
+      "epc:calculi_dissolution_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent"
+    ],
+    "dutasteride": [
+      "epc:5_alpha_reductase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "finasteride": [
+      "epc:5_alpha_reductase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "pentosan polysulfate": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:glycosaminoglycan"
+    ],
+    "follicle stimulating hormone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin",
+      "epc:hormone"
+    ],
+    "choriogonadotropin alfa": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin",
+      "epc:hormone"
+    ],
+    "lutropin alfa": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin",
+      "epc:hormone"
+    ],
+    "ganirelix": [
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin_releasing_hormone_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "degarelix": [
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin_releasing_hormone_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "cetrorelix": [
+      "epc:established_pharmacologic_classes",
+      "epc:gonadotropin_releasing_hormone_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "bethanechol": [
+      "epc:cholinergic_muscarinic_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "mifepristone": [
+      "corticosteroid",
+      "epc:established_pharmacologic_classes",
+      "epc:progestin_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "collagenase": [
+      "epc:collagen_specific_enzyme",
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes"
+    ],
+    "collagenase clostridium histolyticum": [
+      "epc:collagen_specific_enzyme",
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes"
+    ],
+    "methyl 5-aminolevulinate": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:porphyrin_precursor"
+    ],
+    "aminolevulinic acid": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:optical_imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:porphyrin_precursor",
+      "epc:radiographic_contrast_agent"
+    ],
+    "permethrin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:pyrethroid"
+    ],
+    "griseofulvin": [
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:tubulin_agent",
+      "epc:tubulin_inhibiting_agent"
+    ],
+    "calcipotriene": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:steroid",
+      "epc:vitamin_d_analog",
+      "epc:vitamin_or_mineral"
+    ],
+    "paricalcitol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:steroid",
+      "epc:vitamin_d2_analog",
+      "epc:vitamin_d_analog",
+      "epc:vitamin_or_mineral"
+    ],
+    "hydroquinone": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:melanin_synthesis_inhibitor"
+    ],
+    "albumin microspheres, human": [
+      "epc:contrast_agent_for_ultrasound_imaging",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "sulfur hexafluoride": [
+      "epc:contrast_agent_for_ultrasound_imaging",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "perflutren": [
+      "epc:contrast_agent_for_ultrasound_imaging",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "xenon-133": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:inhalation_diagnostic_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "iodide ion i-131": [
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_therapeutic_agent"
+    ],
+    "radium ra-223 cation": [
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_alpha_particle_emitting_therapeutic_agent",
+      "epc:radioactive_therapeutic_agent"
+    ],
+    "strontium cation sr-89": [
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_therapeutic_agent"
+    ],
+    "lutetium lu 177 vipivotide tetraxetan": [
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_therapeutic_agent",
+      "epc:radioligand_therapeutic_agent"
+    ],
+    "naftifine": [
+      "epc:allylamine_antifungal",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "terbinafine": [
+      "epc:allylamine_antifungal",
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "butenafine": [
+      "epc:anti_infective",
+      "epc:antifungal",
+      "epc:antimicrobial",
+      "epc:benzylamine_antifungal",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "methoxsalen": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:photoactivated_radical_generator",
+      "epc:physical_or_chemical_agent",
+      "epc:psoralen"
+    ],
+    "dapsone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:sulfone"
+    ],
+    "doxycycline anhydrous": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:tetracycline_class_drug"
+    ],
+    "eravacycline": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:tetracycline_class_antibacterial",
+      "epc:tetracycline_class_drug"
+    ],
+    "omadacycline": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:tetracycline_class_antibacterial",
+      "epc:tetracycline_class_drug"
+    ],
+    "doxycycline": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:tetracycline_class_drug"
+    ],
+    "tigecycline": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:tetracycline_class_antibacterial",
+      "epc:tetracycline_class_drug"
+    ],
+    "minocycline": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:tetracycline_class_drug"
+    ],
+    "carbamoylcholine": [
+      "epc:cholinergic_receptor_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "methacholine": [
+      "epc:cholinergic_receptor_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "acetylcholine": [
+      "epc:cholinergic_receptor_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "cevimeline": [
+      "epc:cholinergic_receptor_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "pilocarpine": [
+      "epc:cholinergic_receptor_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "becaplermin": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_factor",
+      "epc:human_platelet_derived_growth_factor"
+    ],
+    "urea c-13": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:helicobacter_pylori_diagnostic"
+    ],
+    "elvitegravir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_integrase_strand_transfer_inhibitor"
+    ],
+    "dolutegravir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_integrase_strand_transfer_inhibitor"
+    ],
+    "cabotegravir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_integrase_strand_transfer_inhibitor"
+    ],
+    "raltegravir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_integrase_strand_transfer_inhibitor"
+    ],
+    "nelfinavir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
+    ],
+    "alirocumab": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:pcsk9_inhibitor",
+      "epc:protease_inhibitor"
+    ],
+    "evolocumab": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:pcsk9_inhibitor",
+      "epc:protease_inhibitor"
+    ],
+    "sacubitrilat": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:neprilysin_inhibitor",
+      "epc:protease_inhibitor"
+    ],
+    "grazoprevir anhydrous": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_c_virus_ns3_4a_protease_inhibitor",
+      "epc:protease_inhibitor"
+    ],
+    "tipranavir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
+    ],
+    "lanadelumab": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:plasma_kallikrein_inhibitor",
+      "epc:protease_inhibitor"
+    ],
+    "ecallantide": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:plasma_kallikrein_inhibitor",
+      "epc:protease_inhibitor"
+    ],
+    "c1 esterase inhibitor (human)": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_c1_esterase_inhibitor",
+      "epc:protease_inhibitor"
+    ],
+    "saquinavir": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_inhibitor"
+    ],
+    "alpha 1-proteinase inhibitor, human": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:human_alpha_1_proteinase_inhibitor",
+      "epc:protease_inhibitor"
+    ],
+    "pentoxifylline": [
+      "epc:blood_viscosity_reducer",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "tiopronin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent",
+      "epc:reducing_and_complexing_thiol"
+    ],
+    "calcium": [
+      "epc:calcium",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:vitamin_or_mineral"
+    ],
+    "etelcalcetide": [
+      "epc:calcium_sensing_receptor_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "cinacalcet": [
+      "epc:calcium_sensing_receptor_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "pasireotide": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:somatostatin_analog"
+    ],
+    "lanreotide": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:somatostatin_analog"
+    ],
+    "octreotide": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:somatostatin_analog"
+    ],
+    "desmopressin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:factor_viii_activator",
+      "epc:hematology_agent",
+      "epc:hormone",
+      "epc:vasopressin_analog"
+    ],
+    "doxercalciferol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:steroid",
+      "epc:vitamin_d2_analog",
+      "epc:vitamin_or_mineral"
+    ],
+    "calcifediol anhydrous": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:steroid",
+      "epc:vitamin_d3_analog",
+      "epc:vitamin_or_mineral"
+    ],
+    "calcitriol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:steroid",
+      "epc:vitamin_d3_analog",
+      "epc:vitamin_or_mineral"
+    ],
+    "ergocalciferol": [
+      "epc:established_pharmacologic_classes",
+      "epc:provitamin_d2_compound",
+      "epc:vitamin_or_mineral"
+    ],
+    "ezetimibe": [
+      "epc:cardiovascular_agent",
+      "epc:dietary_cholesterol_absorption_inhibitor",
+      "epc:established_pharmacologic_classes"
+    ],
+    "methimazole": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:thyroid_hormone_synthesis_inhibitor"
+    ],
+    "propylthiouracil": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:thyroid_hormone_synthesis_inhibitor"
+    ],
+    "metyrapone": [
+      "epc:adrenal_steroid_synthesis_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "sulbactam": [
+      "epc:beta_lactamase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "avibactam": [
+      "epc:beta_lactamase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "vaborbactam": [
+      "epc:beta_lactamase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "clavulanic acid": [
+      "epc:beta_lactamase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "relebactam anhydrous": [
+      "epc:beta_lactamase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "durlobactam": [
+      "epc:beta_lactamase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "tazobactam": [
+      "epc:beta_lactamase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "natamycin": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:polyene_antimicrobial"
+    ],
+    "riociguat": [
+      "epc:cardiovascular_agent",
+      "epc:enzyme_activator",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:soluble_guanylate_cyclase_stimulator",
+      "epc:vasodilator"
+    ],
+    "vericiguat": [
+      "epc:cardiovascular_agent",
+      "epc:enzyme_activator",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:soluble_guanylate_cyclase_stimulator",
+      "epc:vasodilator"
+    ],
+    "nitric oxide": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:vasodilator"
+    ],
+    "nitroprusside": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:vasodilator"
+    ],
+    "cosyntropin": [
+      "epc:adrenocorticotropic_hormone",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone"
+    ],
+    "corticotropin": [
+      "epc:adrenocorticotropic_hormone",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone"
+    ],
+    "salmon calcitonin": [
+      "epc:calcitonin",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone"
+    ],
+    "levothyroxine": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:l_thyroxine"
+    ],
+    "liothyronine": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:l_triiodothyronine"
+    ],
+    "thyrotropin alfa": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:thyroid_stimulating_hormone"
+    ],
+    "vitamin a": [
+      "epc:established_pharmacologic_classes",
+      "epc:vitamin_a",
+      "epc:vitamin_or_mineral"
+    ],
+    "vitamin b12": [
+      "epc:established_pharmacologic_classes",
+      "epc:vitamin_b12",
+      "epc:vitamin_or_mineral"
+    ],
+    "cholecalciferol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:steroid",
+      "epc:vitamin_d",
+      "epc:vitamin_or_mineral"
+    ],
+    "zileuton": [
+      "epc:5_lipoxygenase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "dornase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:recombinant_human_deoxyribonuclease_1"
+    ],
+    "eltrombopag": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:thrombopoietin_receptor_agonist"
+    ],
+    "romiplostim": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:thrombopoietin_receptor_agonist"
+    ],
+    "protamines": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:heparin_reversal_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "dihematoporphyrin ether": [
+      "epc:established_pharmacologic_classes",
+      "epc:photoactivated_radical_generator",
+      "epc:physical_or_chemical_agent"
+    ],
+    "pramlintide": [
+      "epc:amylin_analog",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "denileukin diftitox": [
+      "epc:cd25_directed_cytotoxin",
+      "epc:cytotoxin",
+      "epc:established_pharmacologic_classes"
+    ],
+    "iron sucrose": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:parenteral_iron_replacement",
+      "epc:vitamin_or_mineral"
+    ],
+    "ferumoxytol": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:parenteral_iron_replacement",
+      "epc:vitamin_or_mineral"
+    ],
+    "ammonia n-13": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "indium in-111 oxyquinoline": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "iodide ion i-123": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "fluorodeoxyglucose f18": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "technetium tc 99m tilmanocept": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "technetium tc-99m sulfur colloid": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "choline c-11": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "ioflupane i-123": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "florbetapir f-18": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "technetium tc 99m exametazime": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "technetium tc 99m sestamibi": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "flutemetamol f-18": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "technetium tc-99m pyrophosphate": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "technetium tc 99m medronate": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "florbetaben f-18": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "fluoride ion f-18": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "thallous cation tl-201": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "82 rubidium": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "iothalamic acid i-125": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "indium in-111 pentetreotide": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "fluciclovine f-18": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "fluoroestradiol f-18": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "copper oxodotreotide cu-64": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "piflufolastat f-18": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "gallium ga-68 gozetotide": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "flotufolastat f-18": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "flurpiridaz f-18": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "dotatate gallium ga-68": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radioactive_diagnostic_agent"
+    ],
+    "plerixafor": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:hematopoietic_stem_cell_mobilizer",
+      "epc:immunologic_agent"
+    ],
+    "trimethobenzamide": [
+      "epc:antiemetic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "meclizine": [
+      "anticholinergic",
+      "antihistamine",
+      "epc:antiemetic",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "crofelemer": [
+      "epc:antidiarrheal",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "difenoxin": [
+      "epc:antidiarrheal",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "diphenoxylate": [
+      "epc:antidiarrheal",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "adenosine": [
+      "epc:adenosine_receptor_agonist",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "tolvaptan": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:vasopressin_receptor_antagonist",
+      "epc:vasopressin_v2_receptor_antagonist"
+    ],
+    "patiromer": [
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent",
+      "epc:potassium_binder"
+    ],
+    "thiothixene": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:typical_antipsychotic"
+    ],
+    "molindone": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:typical_antipsychotic"
+    ],
+    "pimozide": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:typical_antipsychotic",
+      "qt_prolonging"
+    ],
+    "bismuth cation": [
+      "epc:bismuth",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "bismuth subsalicylate": [
+      "epc:bismuth",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "gadofosveset": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:paramagnetic_contrast_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "manganese cation (2+)": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:paramagnetic_contrast_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "gadoteridol": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:paramagnetic_contrast_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "gadodiamide": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:paramagnetic_contrast_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "barium sulfate": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "diatrizoic acid": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "iothalamic acid": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "carbon dioxide": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "pafolacianine": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:optical_imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "iomeprol": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "iodixanol": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "iopromide": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "ioversol": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "iohexol": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "iopamidol": [
+      "epc:established_pharmacologic_classes",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:radiographic_contrast_agent"
+    ],
+    "rosiglitazone": [
+      "epc:blood_glucose_regulator",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:peroxisome_proliferator_activated_receptor_agonist",
+      "epc:peroxisome_proliferator_activated_receptor_gamma_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:thiazolidinedione"
+    ],
+    "colesevelam": [
+      "epc:bile_acid_sequestrant",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent"
+    ],
+    "cholestyramine resin": [
+      "epc:bile_acid_sequestrant",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent"
+    ],
+    "colestipol": [
+      "epc:bile_acid_sequestrant",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent"
+    ],
+    "dactinomycin": [
+      "epc:actinomycin",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "parathyroid hormone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:parathyroid_hormone"
+    ],
+    "teriparatide": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:parathyroid_hormone_analog"
+    ],
+    "thioguanine anhydrous": [
+      "epc:antimetabolite",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
+    ],
+    "floxuridine": [
+      "epc:antimetabolite",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
+    ],
+    "hydroxyurea": [
+      "epc:antimetabolite",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
+    ],
+    "amifostine anhydrous": [
+      "epc:cytoprotective_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "2-mercaptoethanesulfonic acid": [
+      "epc:cytoprotective_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "bleomycin": [
+      "epc:cytoprotective_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "glycopeptide",
+      "nephrotoxic"
+    ],
+    "dexrazoxane": [
+      "epc:cytoprotective_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent"
+    ],
+    "fingolimod": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:receptor_interaction",
+      "epc:sphingosine_1_phosphate_receptor_modulator"
+    ],
+    "siponimod": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:receptor_interaction",
+      "epc:sphingosine_1_phosphate_receptor_modulator"
+    ],
+    "ozanimod": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:receptor_interaction",
+      "epc:sphingosine_1_phosphate_receptor_modulator"
+    ],
+    "ponesimod": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:receptor_interaction",
+      "epc:sphingosine_1_phosphate_receptor_modulator"
+    ],
+    "dextromethorphan": [
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:nervous_system_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:sigma_1_agonist",
+      "epc:uncompetitive_n_methyl_d_aspartate_receptor_antagonist"
+    ],
+    "tesamorelin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:growth_hormone_releasing_factor_analog",
+      "epc:hormone"
+    ],
+    "abatacept": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:selective_t_cell_costimulation_modulator"
+    ],
+    "ipilimumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:ctla_4_directed_blocking_antibody",
+      "epc:established_pharmacologic_classes"
+    ],
+    "tremelimumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:ctla_4_directed_blocking_antibody",
+      "epc:established_pharmacologic_classes"
+    ],
+    "belimumab": [
+      "epc:b_lymphocyte_stimulator_specific_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "belatacept": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:selective_t_cell_costimulation_blocker"
+    ],
+    "roflumilast": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:phosphodiesterase_4_inhibitor"
+    ],
+    "apremilast": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:phosphodiesterase_4_inhibitor"
+    ],
+    "crisaborole": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:phosphodiesterase_4_inhibitor"
+    ],
+    "icatibant": [
+      "epc:bradykinin_b2_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "brentuximab vedotin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd30_directed_immunoconjugate",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "gadolinium cation (3+)": [
+      "epc:established_pharmacologic_classes",
+      "epc:gadolinium_based_contrast_agent",
+      "epc:imaging_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "diphtheria toxoid vaccine, inactivated": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_corynebacterium_diphtheriae_vaccine",
+      "epc:vaccine"
+    ],
+    "haemophilus influenzae type b strain 1482, capsular polysaccharide inactivated tetanus toxoid conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_haemophilus_influenzae_b_vaccine",
+      "epc:vaccine"
+    ],
+    "haemophilus influenzae b (ross strain) capsular polysaccharide meningococcal protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_haemophilus_influenzae_b_vaccine",
+      "epc:vaccine"
+    ],
+    "hepatitis a virus strain cr 326f antigen, inactivated": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_hepatitis_a_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "hepatitis a vaccine (inactivated) strain hm175": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_hepatitis_a_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "hepatitis b virus subtype adw2 hbsag surface protein antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_hepatitis_b_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "hepatitis b surface antigen vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_hepatitis_b_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "l1 protein, human papillomavirus type 11 vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_human_papillomavirus_vaccine",
+      "epc:vaccine"
+    ],
+    "l1 protein, human papillomavirus type 16 vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_human_papillomavirus_vaccine",
+      "epc:vaccine"
+    ],
+    "l1 protein, human papillomavirus type 18 vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_human_papillomavirus_vaccine",
+      "epc:vaccine"
+    ],
+    "l1 protein, human papillomavirus type 6 vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_human_papillomavirus_vaccine",
+      "epc:vaccine"
+    ],
+    "influenza a virus a/vietnam/1203/2004 (h5n1) antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_influenza_a_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "japanese encephalitis virus vaccine nakayama-nih strain, inactivated": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_japanese_encephalitis_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "meningococcal group a polysaccharide": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_meningococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "neisseria meningitidis serogroup a capsular polysaccharide diphtheria toxoid protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_meningococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "neisseria meningitidis serogroup c capsular polysaccharide diphtheria toxoid protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_meningococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "neisseria meningitidis serogroup w-135 capsular polysaccharide diphtheria toxoid protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_meningococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "neisseria meningitidis serogroup y capsular polysaccharide diphtheria toxoid protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_meningococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "neisseria meningitidis serogroup a oligosaccharide diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_meningococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "neisseria meningitidis serogroup c oligosaccharide diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_meningococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "neisseria meningitidis serogroup w-135 oligosaccharide diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_meningococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "neisseria meningitidis serogroup y oligosaccharide diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_meningococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "bordetella pertussis filamentous hemagglutinin vaccine, inactivated": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_bordetella_pertussis_vaccine",
+      "epc:vaccine"
+    ],
+    "bordetella pertussis fimbriae 2/3 vaccine, inactivated": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_bordetella_pertussis_vaccine",
+      "epc:vaccine"
+    ],
+    "bordetella pertussis pertactin vaccine, inactivated": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_bordetella_pertussis_vaccine",
+      "epc:vaccine"
+    ],
+    "bordetella pertussis toxoid vaccine, inactivated": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_bordetella_pertussis_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 14 capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 18c capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 19f capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 23f capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 4 capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 6b capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 9v capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 1 capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 10a capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 11a capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 12f capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 14 capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 15b capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 17f capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 18c capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 19a capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 19f capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 2 capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 20 capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 22f capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 23f capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 3 capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 33f capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 4 capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 5 capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 6b capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 7f capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 8 capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 9n capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae type 9v capsular polysaccharide antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 1 capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 19a capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 3 capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 5 capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 6a capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "streptococcus pneumoniae serotype 7f capsular antigen diphtheria crm197 protein conjugate vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_pneumococcal_vaccine",
+      "epc:vaccine"
+    ],
+    "poliovirus vaccine inactivated, type 1 (mahoney)": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_poliovirus_vaccine",
+      "epc:vaccine"
+    ],
+    "poliovirus vaccine inactivated, type 2 (mef-1)": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_poliovirus_vaccine",
+      "epc:vaccine"
+    ],
+    "poliovirus vaccine inactivated, type 3 (saukett)": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_poliovirus_vaccine",
+      "epc:vaccine"
+    ],
+    "rabies virus vaccine flury-lep strain": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_rabies_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "rabies virus vaccine wistar strain pm-1503-3m (human), inactivated": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_rabies_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "tetanus toxoid vaccine, inactivated": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_clostridium_tetani_vaccine",
+      "epc:vaccine"
+    ],
+    "typhoid vi polysaccharide vaccine, s typhi ty2 strain": [
+      "epc:established_pharmacologic_classes",
+      "epc:inactivated_salmonella_typhi_vaccine",
+      "epc:vaccine"
+    ],
+    "bcg, live, tice strain": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:immunotherapy",
+      "epc:live_attenuated_bacillus_calmette_guerin_immunotherapy",
+      "epc:live_attenuated_bacillus_calmette_guerin_vaccine",
+      "epc:vaccine"
+    ],
+    "varicella-zoster virus vaccine live (oka-merck) strain": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_attenuated_herpes_zoster_virus_vaccine",
+      "epc:live_attenuated_varicella_zoster_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "measles virus vaccine live, enders' attenuated edmonston strain": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_attenuated_measles_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "rotavirus vaccine, live attenuated, g1p[8] human 89-12 strain": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_attenuated_rotavirus_vaccine",
+      "epc:vaccine"
+    ],
+    "rubella virus vaccine live (wistar ra 27-3 strain)": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_attenuated_rubella_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "salmonella typhi ty21a live antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_attenuated_salmonella_typhi_vaccine",
+      "epc:vaccine"
+    ],
+    "yellow fever virus strain 17d-204 live antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_attenuated_yellow_fever_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "human adenovirus e serotype 4 strain cl-68578": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_human_adenovirus_type_4_vaccine",
+      "epc:vaccine"
+    ],
+    "human adenovirus b serotype 7 strain 55142": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_human_adenovirus_type_7_vaccine",
+      "epc:vaccine"
+    ],
+    "human-bovine reassortant rotavirus strain g1 vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_rotavirus_vaccine",
+      "epc:vaccine"
+    ],
+    "human-bovine reassortant rotavirus strain g2 vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_rotavirus_vaccine",
+      "epc:vaccine"
+    ],
+    "human-bovine reassortant rotavirus strain g3 vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_rotavirus_vaccine",
+      "epc:vaccine"
+    ],
+    "human-bovine reassortant rotavirus strain g4 vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_rotavirus_vaccine",
+      "epc:vaccine"
+    ],
+    "human-bovine reassortant rotavirus strain p1a[8] vaccine": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_rotavirus_vaccine",
+      "epc:vaccine"
+    ],
+    "vaccinia virus strain new york city board of health live antigen": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_vaccinia_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "mumps virus vaccine live, jeryl lynn strain": [
+      "epc:established_pharmacologic_classes",
+      "epc:live_attenuated_mumps_virus_vaccine",
+      "epc:vaccine"
+    ],
+    "glucarpidase": [
+      "epc:carboxypeptidase",
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes"
+    ],
+    "pomalidomide": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:thalidomide_analog"
+    ],
+    "lenalidomide": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:thalidomide_analog"
+    ],
+    "carglumic acid": [
+      "epc:carbamoyl_phosphate_synthetase_1_activator",
+      "epc:enzyme_activator",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "vismodegib": [
+      "epc:established_pharmacologic_classes",
+      "epc:hedgehog_pathway_inhibitor",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "sonidegib": [
+      "epc:established_pharmacologic_classes",
+      "epc:hedgehog_pathway_inhibitor",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "glasdegib": [
+      "epc:established_pharmacologic_classes",
+      "epc:hedgehog_pathway_inhibitor",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "rabbit anti-human t-lymphocyte globulin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:immunoglobulin_g",
+      "epc:immunologic_agent"
+    ],
+    "immunoglobulin g, human": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunoglobulin",
+      "epc:human_immunoglobulin_g",
+      "epc:immunoglobulin_g",
+      "epc:immunologic_agent"
+    ],
+    "rho(d) immune globulin, human": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunoglobulin",
+      "epc:human_immunoglobulin_g",
+      "epc:immunoglobulin_g",
+      "epc:immunologic_agent"
+    ],
+    "cytomegalovirus immune globulin, human": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunoglobulin",
+      "epc:human_immunoglobulin_g",
+      "epc:immunoglobulin_g",
+      "epc:immunologic_agent"
+    ],
+    "botulism immune globulin iv human": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunoglobulin",
+      "epc:human_immunoglobulin_g",
+      "epc:immunoglobulin_g",
+      "epc:immunologic_agent"
+    ],
+    "human vaccinia immune globulin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunoglobulin",
+      "epc:human_immunoglobulin_g",
+      "epc:immunoglobulin_g",
+      "epc:immunologic_agent"
+    ],
+    "lymphocyte immune globulin, anti-thymocyte globulin, equine": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:immunoglobulin_g",
+      "epc:immunologic_agent"
+    ],
+    "hepatitis b immune globulin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunoglobulin",
+      "epc:immunologic_agent"
+    ],
+    "anti-inhibitor coagulant complex": [
+      "epc:anti_inhibitor_coagulant_complex",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "antihemophilic factor, human recombinant": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_antihemophilic_factor"
+    ],
+    "antihemophilic factor, human": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_antihemophilic_factor"
+    ],
+    "thrombin": [
+      "epc:blood_coagulation_factor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "thrombin alfa": [
+      "epc:blood_coagulation_factor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "prothrombin, human": [
+      "epc:blood_coagulation_factor",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "factor xiii, human": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_blood_coagulation_factor"
+    ],
+    "nonacog alfa": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_blood_coagulation_factor"
+    ],
+    "factor vii, human": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_blood_coagulation_factor"
+    ],
+    "coagulation factor x, human": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_blood_coagulation_factor"
+    ],
+    "coagulation factor ix, human": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_blood_coagulation_factor"
+    ],
+    "fibrinogen, human": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_blood_coagulation_factor"
+    ],
+    "eptacog alfa activated": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_blood_coagulation_factor"
+    ],
+    "thrombin, human": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_blood_coagulation_factor"
+    ],
+    "von willebrand factor, human": [
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_blood_coagulation_factor"
+    ],
+    "albumin human, usp": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:human_serum_albumin",
+      "epc:physical_or_chemical_agent"
+    ],
+    "hydroxyethyl starch 130-0.4": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:plasma_volume_expander"
+    ],
+    "dextran 40": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:plasma_volume_expander"
+    ],
+    "dextran 70": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:plasma_volume_expander"
+    ],
+    "dextran 75": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:plasma_volume_expander"
+    ],
+    "hetastarch": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent",
+      "epc:physical_or_chemical_agent",
+      "epc:plasma_volume_expander"
+    ],
+    "purified protein derivative of tuberculin": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:skin_test_antigen",
+      "epc:tuberculosis_skin_test"
+    ],
+    "coccidioides immitis spherule": [
+      "epc:diagnostic_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:skin_test_antigen"
+    ],
+    "human cord blood hematopoietic progenitor cell": [
+      "epc:allogeneic_cord_blood_hematopoietic_progenitor_cell_therapy",
+      "epc:cell_therapy",
+      "epc:established_pharmacologic_classes"
+    ],
+    "collagen type i, bovine": [
+      "epc:allogeneic_cultured_cell_scaffold",
+      "epc:established_pharmacologic_classes"
+    ],
+    "foreskin fibroblast, neonatal": [
+      "epc:allogeneic_cultured_cell_scaffold",
+      "epc:established_pharmacologic_classes"
+    ],
+    "foreskin keratinocyte, neonatal": [
+      "epc:allogeneic_cultured_cell_scaffold",
+      "epc:established_pharmacologic_classes"
+    ],
+    "tisagenlecleucel": [
+      "epc:autologous_cellular_immunotherapy",
+      "epc:cd19_directed_chimeric_antigen_receptor",
+      "epc:established_pharmacologic_classes",
+      "epc:genetically_modified_autologous_t_cells",
+      "epc:immunologic_agent",
+      "epc:immunotherapy"
+    ],
+    "axicabtagene ciloleucel": [
+      "epc:autologous_cellular_immunotherapy",
+      "epc:cd19_directed_chimeric_antigen_receptor",
+      "epc:established_pharmacologic_classes",
+      "epc:genetically_modified_autologous_t_cells",
+      "epc:immunologic_agent",
+      "epc:immunotherapy"
+    ],
+    "sipuleucel-t": [
+      "epc:autologous_cellular_immunotherapy",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:immunotherapy"
+    ],
+    "cat hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_animal_hair_allergenic_extract"
+    ],
+    "cat skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_animal_skin_allergenic_extract"
+    ],
+    "american house dust mite allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_insect_allergenic_extract"
+    ],
+    "european house dust mite allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_insect_allergenic_extract"
+    ],
+    "bald-faced hornet venom protein": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_insect_allergenic_extract",
+      "epc:standardized_insect_venom_allergenic_extract"
+    ],
+    "common wasp venom protein": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_insect_allergenic_extract",
+      "epc:standardized_insect_venom_allergenic_extract"
+    ],
+    "eastern yellow jacket venom protein": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_insect_allergenic_extract",
+      "epc:standardized_insect_venom_allergenic_extract"
+    ],
+    "german wasp venom protein": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_insect_allergenic_extract",
+      "epc:standardized_insect_venom_allergenic_extract"
+    ],
+    "southern yellow jacket venom protein": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_insect_allergenic_extract",
+      "epc:standardized_insect_venom_allergenic_extract"
+    ],
+    "western yellow jacket venom protein": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_insect_allergenic_extract",
+      "epc:standardized_insect_venom_allergenic_extract"
+    ],
+    "yellow hornet venom protein": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_insect_allergenic_extract",
+      "epc:standardized_insect_venom_allergenic_extract"
+    ],
+    "apis mellifera preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_insect_allergenic_extract",
+      "epc:standardized_insect_venom_allergenic_extract"
+    ],
+    "orchard grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_pollen_allergenic_extract"
+    ],
+    "sweet vernal grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_pollen_allergenic_extract"
+    ],
+    "bermuda grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_pollen_allergenic_extract"
+    ],
+    "meadow fescue grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_pollen_allergenic_extract"
+    ],
+    "timothy grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_pollen_allergenic_extract"
+    ],
+    "perennial rye grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_pollen_allergenic_extract"
+    ],
+    "kentucky bluegrass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_pollen_allergenic_extract"
+    ],
+    "short ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_pollen_allergenic_extract"
+    ],
+    "syrian hamster hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "house mouse hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "rattus norvegicus hair preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "camelus bactrianus hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "canis lupus familiaris hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "domestic cow hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "domestic goat hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "guinea pig hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "horse hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "european rabbit hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "hog hair extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_hair_allergenic_extract"
+    ],
+    "domestic goat skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "domestic cow skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "guinea pig skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "horse skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "syrian hamster skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "house mouse skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "hog skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "dog skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "mongolian gerbil skin allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "european rabbit skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "rat skin extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_skin_allergenic_extract"
+    ],
+    "blatta orientalis preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "black carpenter ant allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract",
+      "epc:non_standardized_insect_venom_allergenic_extract"
+    ],
+    "periplaneta australasiae extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "tabanus nigrovittatus extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "silk allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "house fly allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "red imported fire ant allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract",
+      "epc:non_standardized_insect_venom_allergenic_extract"
+    ],
+    "dog flea allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "cat flea allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "american cockroach allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "german cockroach allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "cricket allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "mosquito allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract"
+    ],
+    "black imported fire ant allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_insect_allergenic_extract",
+      "epc:non_standardized_insect_venom_allergenic_extract"
+    ],
+    "indian wormwood sage pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "tall oat grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "scrub pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "water oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "cedar elm pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "italian rye grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "longleaf pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "yellow sweet clover pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "jack pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "redwood pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "california black oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "canadian bluegrass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "white sweet clover pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "bitter dock pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "white (mexican) dock pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "western black willow pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "balsam poplar pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "jerusalem oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "cultivated rye grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "creeping bentgrass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "broomweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "cultivated barley pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "narrowleaf marshelder pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "osage orange pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "littleseed canary grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "douglas fir pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "sudan grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "valley oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "weakleaf bur ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "pale dock pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "broadleaf cattail pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "siberian elm pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "carya laciniosa pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "silver birch pollen allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "solidago virgaurea pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "sorghum bicolor pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "salsola tragus pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "amaranthus hybridus pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "ulmus rubra pollen allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "quercus marilandica pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "colonial bent grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "meadow foxtail pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "common hazel pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "crested dogstail pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "european beech pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "ash pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "broadleaf plantain pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "english oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "bulbous buttercup pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "white willow pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "humulus lupulus pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "acer pseudoplatanus pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "golden chain pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "grindelia ciliata pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "leucanthemum vulgare pollen": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "trifolium pratense pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "european aspen pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "western larch pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "london planetree": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "chinquapin oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "sweet wormwood pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "callistemon citrinus pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "acacia dealbata pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "ulmus glabra pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "salix repens pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "pinus cembroides pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "salix lutea pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "brazilian pepper tree pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "peruvian pepper tree pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "acacia pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "coast maple pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "box elder maple pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "red maple pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "silver maple pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "hard maple pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "tree of heaven pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "iodine bush pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "tag alder pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "white alder pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "red alder pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "careless weed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "redroot pigweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "western waterhemp pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "false ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "canyon ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "sandbur ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "rabbit bush pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "desert ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "western ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "slender ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "giant ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "wormwood sage pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "coast sage pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "corn pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "common sagebrush pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "cocklebur pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "mugwort sage pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "nettle pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "american elm pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "linden pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "wing scale pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "dandelion pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "shad scale pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "lens scale pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "alkali blite pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "cultivated oat pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "fivehorn smotherweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "sugar beet pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "johnson grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "cherry birch pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "river birch pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "greasewood pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "russian thistle pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "black willow pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "water birch pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "arroyo willow pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "pussy willow pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "gray birch pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "white hickory pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "grama grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "mustard pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "yellow dock pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "sheep sorrel pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "smooth brome pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "shagbark hickory pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "cheat grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "australian pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "lambs quarters pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "black oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "red oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "pecan pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "gambels oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "hazelnut pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "white oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "coast live oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "silver ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "mesquite pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "hackberry pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "salt grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "aspen pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "quackgrass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "lombardy poplar pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "fremont cottonwood pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "palo verde pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "eastern cottonwood pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "russian olive pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "black cottonwood pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "white poplar pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "eucalyptus globulus pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "beech pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "white ash pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "green ash pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "arizona ash pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "sunflower pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "velvet grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "burrobrush pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "rough marshelder pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "poverty weed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "burweed marshelder pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "california black walnut pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "black walnut pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "english walnut pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "mountain cedar pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "california juniper pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "western juniper pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "burning bush pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "utah juniper pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "rocky mountain juniper pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "koelers grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "red cedar pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "winterfat pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "privet pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "sweet gum pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "alfalfa pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "european olive pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "western wheatgrass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "white mulberry pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "bahia grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "red mulberry pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "canary grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "date palm pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "shortleaf pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "yellow pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "eastern white pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "english plantain pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "eastern sycamore pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "western sycamore pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "california scrub oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "salt cedar pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "arizona cypress pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "chinese elm pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "prairie sagebrush pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "dogfennel pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "southern bayberry pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "plains cottonwood pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "live oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "black locust pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "queen palm pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "wheat pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "southern ragweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "california mugwort pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "para grass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "cootamundra wattle pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "sydney golden wattle pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "spiny pigweed pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "dark leaved mugwort pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "allscale pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "saltbush pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "groundsel pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "mexican tea pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "orange pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "lodgepole pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "annual bluegrass pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "yellow birch pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "paper birch pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "mulberry pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "blue beech pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "bitternut hickory pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "pignut hickory pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "oregon ash pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "oneseed juniper pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "redberry juniper pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "giant wild rye pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "blue spruce pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "slash pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "western white pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "austrian pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "red pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "pitch pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "scotch pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "loblolly pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "japanese black pine pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "garrys oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "bur oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "pin oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "post oak pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "common cocklebur pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "broad leaved paperbark pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "canada goldenrod pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "bald cypress pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "american basswood pollen extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_pollen_allergenic_extract"
+    ],
+    "domestic cow dander extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_dander_allergenic_extract"
+    ],
+    "guinea pig dander": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_dander_allergenic_extract"
+    ],
+    "horse dander extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_dander_allergenic_extract"
+    ],
+    "dog dander extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_animal_dander_allergenic_extract"
+    ],
+    "streptomyces griseus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_bacterial_allergenic_extract"
+    ],
+    "glycerin": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_chemical_allergen"
+    ],
+    "barley malt allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "chocolate allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "leek allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "oregano allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "poppy seed allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "okra allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "parsnip allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "horseradish allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "chickpea allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "lime allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "mango allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "tangerine allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "watercress allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "papaya allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "sage leaf allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "veal allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "sour cherry allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "largemouth bass allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "grapefruit extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "ginger root": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cranberry preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cucumber extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "lime (citrus) extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "barley malt syrup": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cola acuminata seed extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "wine grape extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "anise seed extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "sunflower seed extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "sesame seed extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "juniperus communis fruit extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "brown rice preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "avocado oil": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "red pepper extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "radish extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "egg extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "eggplant extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "oyster, unspecified preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "blue crab preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "beef liver preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "nutmeg extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "sage extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "grapefruit peel extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "lemon extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "clove preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "pear preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "tragacanth": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "glycyrrhiza glabra extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "onion extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "quince extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "barley extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "raspberry extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "bean extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "wheat gluten extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "okra extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "coconut extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "spearmint extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "cocoa extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "salmon preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "corn grain extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "apple extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "mango extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "tangerine extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "sea scallop preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "cod, unspecified preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "pisum sativum (pea) extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "lentil seed extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "wheat preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "pineapple extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "corylus americana nut oil": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "bay leaf extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "zucchini extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "northern quahog preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "penicillium glaucum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "papaya extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "american lobster allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "black sea bass allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "velvetleaf huckleberry allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "yellowfin tuna allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "candida albicans allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "peppermint flowering top extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "atlantic mackerel allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "colloidal oatmeal": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "atlantic halibut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "vanilla bean extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "licorice root extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cynara preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "grape extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "hops extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "black pepper preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "watermelon preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "garlic preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "coffea arabica seed extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "allium cepa bulb extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "cucumis sativus fruit extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "glycyrrhiza glabra root powder extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "banana extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "ginger extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cinnamon preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "oats preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "soybean preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "flaxseed extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "capsicum extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "thyme preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "peppermint preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "saccharomyces cerevisiae allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "rabbit allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "karaya gum extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "barley allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "casein allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "goat milk allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "green bell pepper allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "pacific halibut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "trout allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "venison allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "turnip allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "pumpkin allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "northern pike allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "red snapper allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "brazil nut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "coconut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "hazelnut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "kidney bean allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "lima bean allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "mung bean allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "nutmeg allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "peanut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "soybean allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "string bean allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "english walnut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "black walnut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "cocoa bean allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "coffee bean allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "american chestnut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "apple allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "asparagus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "banana allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "bluefish allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "wine grape allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "carrot allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "celery allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "strawberry allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "tomato allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "tuna allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "almond allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "cantaloupe allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "cashew nut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "clam allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "codfish allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "corn allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "lobster allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "orange allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "peach allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "shrimp allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "beef allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "crab allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "egg white (chicken) allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "egg yolk (chicken) allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "pork allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "potato allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "rye allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "chicken allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "cow milk allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "allspice allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "apricot allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "avocado allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "basil allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "sugar beet allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "black pepper allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "broccoli allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "brussels sprout allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "buckwheat allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "cabbage allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "garlic allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "ginger allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "grapefruit allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "haddock allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "herring allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "lentil allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "lettuce allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "mustard greens allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "mustard seed allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "onion allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "plum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "honeydew melon allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "black-eyed pea allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "caraway seed allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cauliflower allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cinnamon allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "clove allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cranberry allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cucumber allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "date allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "flounder allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "paprika allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "parsley allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "raspberry allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "scallop allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "atlantic cod allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "atlantic salmon allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "concord grape allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "sesame seed allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "sunflower seed allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "watermelon allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "white fish allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "swordfish allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "vanilla bean allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "whole wheat allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "sweet potato allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "spearmint allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "spinach allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "red bell pepper allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "cumin allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cultivated mushroom allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "lemon allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "common carp allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "carob allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "egg (chicken) allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "pistachio nut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "rhubarb preparation": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "saccharomyces cerevisiae": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "orange pekoe tea allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "white catfish allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "green olive allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "lamb allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "oat allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "duck allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "red currant allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "eggplant allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "beef liver allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "oyster allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "fig allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "sardine allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "english sole allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "thyme allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "black olive allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "radish allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "turkey allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "squash allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "dill allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "perch allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_food_allergenic_extract"
+    ],
+    "apiospora montagnei allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "aspergillus repens allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "bermuda grass smut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "humicola grisea allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "microsporum audouinii allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "microsporum canis allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "neurospora sitophila allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "trichophyton tonsurans allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "colletotrichum coccodes allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "hypomyces perniciosus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "microascus brevicaulis allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "gliocladium allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "aspergillus flavus var. oryzae protease": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "aspergillus nidulans allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "clonostachys rosea f. rosea allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "penicillium digitatum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "ustilago maydis extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "gibberella zeae allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "cephalosporium roseum extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "candida albicans": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "gibberella fujikuroi extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "aspergillus amstelodami extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "gliocladium viride extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "mucor circinelloides f. circinelloides allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "mucor circinelloides f. lusitanicus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "fusarium oxysporum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "aspergillus terreus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "chrysonilia sitophila allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "mucor plumbeus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "rhizopus arrhizus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "corn smut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "oat smut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "aspergillus fumigatus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "botrytis cinerea allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "chaetomium globosum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "cladosporium herbarum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "aureobasidium pullulans var. pullutans allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "johnson grass smut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "cochliobolus lunatus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "puccinia striiformis allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "cochliobolus sativus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "pleospora tarda allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "epicoccum nigrum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "haematonectria haematococca allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "mucor racemosus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "pleospora betae allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "wheat smut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "aspergillus niger var. niger extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "penicillium chrysogenum var. chrysogenum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "cladosporium cladosporioides extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "cladosporium sphaerospermum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "fusarium oxysporum vasinfectum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "helminthosporium solani allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "neurospora intermedia allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "phoma exigua var. exigua allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "rhodotorula rubra allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "stemphylium solani allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "trichophyton mentagrophytes allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "passalora fulva allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "khuskia oryzae allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "alternaria alternata allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "acremonium strictum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "acrothecium robustum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "algal fungi allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "penicillium camemberti allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "paecilomyces variotii allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "phoma destructiva allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "candida tropicalis allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "penicillium expansum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "rhodotorula mucilaginosa allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "rhizopus stolonifer allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "penicillium italicum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "phanerodontia chrysosporium allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "stachybotrys chartarum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "stemphylium sarciniforme allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "trichoderma harzianum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "trichoderma viride allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "trichophyton rubrum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "trichophyton schoenleinii allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "trichothecium roseum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "loose wheat smut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "verticillium albo-atrum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "loose barley smut allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "tetracoccosporium paxianum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "syncephalastrum racemosum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "pleospora herbarum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "penicillium roquefortii allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "cochliobolus spicifer allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "dendryphiella vinosa allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "epidermophyton floccosum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "lichtheimia corymbifera allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "aspergillus flavus allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "curvularia inequalis allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "eurotium herbariorum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "fusarium compactum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "geotrichum candidum allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "puccinia graminis allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_fungal_allergenic_extract"
+    ],
+    "parakeet feather allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_feather_allergenic_extract"
+    ],
+    "turkey feather extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_feather_allergenic_extract"
+    ],
+    "pheasant feather extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_feather_allergenic_extract"
+    ],
+    "duck feather extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_feather_allergenic_extract"
+    ],
+    "goose feather extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_feather_allergenic_extract"
+    ],
+    "chicken feather extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_feather_allergenic_extract"
+    ],
+    "canary feather extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_feather_allergenic_extract"
+    ],
+    "house dust allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_house_dust_allergenic_extract"
+    ],
+    "orris root allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "lawsonia inermis leaf extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "strychnos nux-vomica seed extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "alnus glutinosa bark extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "iris germanica var. florentina root extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cytisus scoparius flowering top extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "sisal fiber allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract",
+      "epc:non_standardized_plant_fiber_allergenic_extract"
+    ],
+    "tobacco leaf allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "kapok tree fiber allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract",
+      "epc:non_standardized_plant_fiber_allergenic_extract"
+    ],
+    "jute fiber allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract",
+      "epc:non_standardized_plant_fiber_allergenic_extract"
+    ],
+    "cottonseed allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cottonseed extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "cotton fiber allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract",
+      "epc:non_standardized_plant_fiber_allergenic_extract"
+    ],
+    "pyrethrum cinerariifolium allergenic extract": [
+      "epc:allergen",
+      "epc:allergenic_extract",
+      "epc:epidermal_and_animal_specific_allergenic_extract",
+      "epc:established_pharmacologic_classes",
+      "epc:non_standardized_plant_allergenic_extract"
+    ],
+    "linaclotide": [
+      "epc:enzyme_activator",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:guanylate_cyclase_c_agonist"
+    ],
+    "plecanatide": [
+      "epc:enzyme_activator",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:guanylate_cyclase_c_agonist"
+    ],
+    "teriflunomide": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:pyrimidine_synthesis_inhibitor"
+    ],
+    "thiram": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "bronopol": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "2,2'-dithiobisbenzothiazole": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "n-cyclohexyl-2-benzothiazosulfenamide": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "butylparaben": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "methyldibromo glutaronitrile": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "cobalt": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "diazolidinylurea": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "gold": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "amyl cinnamal": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "nickel": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "evernia prunastri extract": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "2-mercaptobenzothiazole": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "4-phenylenediamine": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "cinnamyl alcohol": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "ethyl-p-hydroxybenzoate": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "hydroxycitronellal": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "rosin": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "isoeugenol": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "n,n'-diphenyl-4-phenylenediamine": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "n-isopropyl-n-phenyl-4-phenylenediamine": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "n-oxydiethylene-2-benzothiazole sulfenamide": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "tetramethylthiuram monosulfide": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "5-chloro-2-methyl-4-isothiazolin-3-one": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "2,2-bis(4-glycidyloxyphenyl)propane": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "cinnamic aldehyde": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "diphenylguanidine": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "disperse blue 106": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "geraniol": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "imidurea": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "benzocaine": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "lanolin alcohols": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "dipentamethylenethiuram disulfide": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "zinc dibutyldithiocarbamate": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "n-cyclohexyl-n'-phenyl-1,4-phenylenediamine": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "p-tert-butylphenol-formaldehyde resin (low molecular weight)": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "ditiocarb, zinc salt": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "benzylparaben": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "chlorquinaldol": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "chromium": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "quaternium-15": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "methylparaben": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "parthenolide": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "peruvian balsam": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "dibucaine": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "propylparaben": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "ethylenediamine": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "eugenol": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "formaldehyde": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "clioquinol": [
+      "epc:allergen",
+      "epc:established_pharmacologic_classes",
+      "epc:standardized_chemical_allergen"
+    ],
+    "cysteamine": [
+      "epc:cystine_depleting_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent"
+    ],
+    "denosumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:rank_ligand_inhibitor",
+      "epc:receptor_interaction"
+    ],
+    "ulipristal": [
+      "epc:established_pharmacologic_classes",
+      "epc:progesterone_agonist_antagonist",
+      "epc:receptor_agonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "tetrabenazine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:vesicular_monoamine_transporter_2_inhibitor"
+    ],
+    "uridine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:pyrimidine_analog"
+    ],
+    "ascorbic acid": [
+      "epc:established_pharmacologic_classes",
+      "epc:vitamin_c",
+      "epc:vitamin_or_mineral"
+    ],
+    "aflibercept": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:vascular_endothelial_growth_factor_inhibitor"
+    ],
+    "olive oil": [
+      "epc:established_pharmacologic_classes",
+      "epc:lipid_emulsion"
+    ],
+    "triheptanoin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:medium_chain_triglyceride"
+    ],
+    "teduglutide": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:glp_2_analog",
+      "epc:hormone",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "raxibacumab": [
+      "epc:anthrax_protective_antigen_directed_antibody",
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes"
+    ],
+    "mipomersen": [
+      "epc:antisense_oligonucleotide",
+      "epc:apolipoprotein_b_100_synthesis_inhibitor",
+      "epc:cardiovascular_agent",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "tegaserod": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:serotonin_4_receptor_agonist"
+    ],
+    "sofosbuvir": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hepatitis_c_virus_nucleotide_analog_ns5b_polymerase_inhibitor",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor"
+    ],
+    "metreleptin": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:leptin_analog"
+    ],
+    "siltuximab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_6_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "dalbavancin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:lipoglycopeptide_antibacterial"
+    ],
+    "tavaborole": [
+      "epc:chemical_structure",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:oxaborole_antifungal"
+    ],
+    "regadenoson anhydrous": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:pharmacologic_cardiac_stress_test_agent"
+    ],
+    "peginterferon beta-1a": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interferon_beta"
+    ],
+    "methylene blue cation": [
+      "epc:established_pharmacologic_classes",
+      "epc:oxidation_reduction_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "pembrolizumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:programmed_death_receptor_1_blocking_antibody"
+    ],
+    "pirfenidone": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:pyridone"
+    ],
+    "blinatumomab": [
+      "epc:bispecific_cd19_directed_cd3_directed_t_cell_engager",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_interaction"
+    ],
+    "olaparib": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:poly_adp_ribose_polymerase_inhibitor"
+    ],
+    "nivolumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:programmed_death_receptor_1_blocking_antibody"
+    ],
+    "secukinumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_17a_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "dinutuximab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:glycolipid_disialoganglioside_directed_antibody"
+    ],
+    "ivabradine": [
+      "epc:established_pharmacologic_classes",
+      "epc:hyperpolarization_activated_cyclic_nucleotide_gated_channel_blocker",
+      "epc:ion_channel_or_pump_agent"
+    ],
+    "tipiracil": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:thymidine_phosphorylase_inhibitor"
+    ],
+    "idarucizumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:humanized_monoclonal_antibody_fragment"
+    ],
+    "asfotase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:tissue_nonspecific_alkaline_phosphatase"
+    ],
+    "mepolizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_5_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "daratumumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd38_directed_cytolytic_antibody",
+      "epc:established_pharmacologic_classes"
+    ],
+    "elotuzumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:slamf7_directed_immunostimulatory_antibody"
+    ],
+    "sebelipase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_cholesteryl_ester_specific_enzyme",
+      "epc:hydrolytic_lysosomal_triacylglycerol_specific_enzyme"
+    ],
+    "selexipag": [
+      "epc:established_pharmacologic_classes",
+      "epc:prostacyclin_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "ixekizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_17a_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "reslizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_5_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "obiltoxaximab": [
+      "epc:anthrax_protective_antigen_directed_antibody",
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes"
+    ],
+    "atezolizumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:programmed_death_receptor_1_blocking_antibody"
+    ],
+    "eteplirsen": [
+      "epc:antisense_oligonucleotide",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "rucaparib": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:poly_adp_ribose_polymerase_inhibitor"
+    ],
+    "nusinersen": [
+      "epc:antisense_oligonucleotide",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:survival_motor_neuron_2_directed_rna_interaction"
+    ],
+    "brodalumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_17_receptor_a_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "telotristat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:tryptophan_hydroxylase_inhibitor"
+    ],
+    "avelumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:programmed_death_ligand_1_blocker"
+    ],
+    "dupilumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_4_receptor_alpha_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "valbenazine": [
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent",
+      "epc:vesicular_monoamine_transporter_2_inhibitor"
+    ],
+    "niraparib": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:poly_adp_ribose_polymerase_inhibitor"
+    ],
+    "durvalumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:programmed_death_ligand_1_blocker"
+    ],
+    "abaloparatide": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone",
+      "epc:parathyroid_hormone_related_peptide_analog"
+    ],
+    "cerliponase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:hydrolytic_lysosomal_n_terminal_tripeptidyl_peptidase"
+    ],
+    "sarilumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_6_receptor_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "delafloxacin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:fluoroquinolone_antibacterial"
+    ],
+    "guselkumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_23_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "enasidenib": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:isocitrate_dehydrogenase_2_inhibitor"
+    ],
+    "inotuzumab ozogamicin": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd22_directed_immunoconjugate",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "benralizumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:interleukin_5_receptor_alpha_directed_cytolytic_antibody"
+    ],
+    "vestronidase alfa": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:lysosomal_beta_glucuronidase"
+    ],
+    "voretigene neparvovec": [
+      "epc:adeno_associated_virus_vector",
+      "epc:established_pharmacologic_classes",
+      "epc:viral_therapy"
+    ],
+    "brilliant blue g": [
+      "epc:disclosing_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:physical_or_chemical_agent"
+    ],
+    "angiotensin ii": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:vasoconstrictor"
+    ],
+    "macimorelin": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_hormone_secretagogue_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "ibalizumab": [
+      "epc:anti_infective",
+      "epc:antimicrobial",
+      "epc:cd4_directed_blocking_antibody",
+      "epc:established_pharmacologic_classes",
+      "epc:human_immunodeficiency_virus_1_post_attachment_fusion_inhibitor",
+      "epc:immunologic_agent"
+    ],
+    "pegvaliase": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:phenylalanine_metabolizing_enzyme"
+    ],
+    "tildrakizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_23_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "patisiran": [
+      "epc:antisense_oligonucleotide",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:small_interfering_rna",
+      "epc:transthyretin_directed_rna_interaction"
+    ],
+    "mogamulizumab": [
+      "epc:chemokine_receptor_type_4_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:monoclonal_antibody",
+      "epc:receptor_interaction"
+    ],
+    "inotersen": [
+      "epc:antisense_oligonucleotide",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:transthyretin_directed_rna_interaction"
+    ],
+    "talazoparib": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:poly_adp_ribose_polymerase_inhibitor"
+    ],
+    "cenegermin": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_factor",
+      "epc:recombinant_human_nerve_growth_factor"
+    ],
+    "emapalumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interferon_gamma_blocker"
+    ],
+    "amifampridine": [
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:potassium_channel_blocker"
+    ],
+    "prucalopride": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:serotonin_4_receptor_agonist"
+    ],
+    "tagraxofusp": [
+      "epc:cd123_interaction",
+      "epc:cytotoxin",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_interaction"
+    ],
+    "solriamfetol": [
+      "epc:dopamine_and_norepinephrine_reuptake_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:nervous_system_agent"
+    ],
+    "risankizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_23_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "bremelanotide": [
+      "epc:established_pharmacologic_classes",
+      "epc:melanocortin_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "selinexor": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nuclear_export_inhibitor"
+    ],
+    "baloxavir": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:polymerase_acidic_endonuclease_inhibitor"
+    ],
+    "crizanlizumab": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:selectin_blocker"
+    ],
+    "luspatercept": [
+      "epc:erythroid_maturation_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:hematology_agent"
+    ],
+    "givosiran": [
+      "epc:aminolevulinate_synthase_1_directed_rna_interaction",
+      "epc:antisense_oligonucleotide",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:small_interfering_rna",
+      "epc:transthyretin_directed_rna_interaction"
+    ],
+    "golodirsen": [
+      "epc:antisense_oligonucleotide",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "ubrogepant": [
+      "epc:calcitonin_gene_related_peptide_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "lemborexant": [
+      "epc:established_pharmacologic_classes",
+      "epc:orexin_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "tazemetostat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:methyltransferase_inhibitor"
+    ],
+    "teprotumumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:insulin_like_growth_factor_1_receptor_inhibitor",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "isatuximab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:cd38_directed_cytolytic_antibody",
+      "epc:established_pharmacologic_classes"
+    ],
+    "rimegepant": [
+      "epc:calcitonin_gene_related_peptide_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "bempedoic acid": [
+      "epc:adenosine_triphosphate_citrate_lyase_inhibitor",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "eptinezumab": [
+      "epc:calcitonin_gene_related_peptide_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_interaction"
+    ],
+    "remdesivir": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:nucleic_acid_synthesis_inhibitor",
+      "epc:rna_polymerase_inhibitor",
+      "epc:sars_cov_2_nucleotide_analog_rna_polymerase_inhibitor"
+    ],
+    "inebilizumab": [
+      "epc:cd19_directed_cytolytic_antibody",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:monoclonal_antibody"
+    ],
+    "risdiplam": [
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:survival_motor_neuron_2_directed_rna_interaction",
+      "epc:survival_of_motor_neuron_2_splicing_modifier"
+    ],
+    "setmelanotide": [
+      "epc:established_pharmacologic_classes",
+      "epc:melanocortin_4_receptor_agonist",
+      "epc:melanocortin_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "ansuvimab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:zaire_ebolavirus_glycoprotein_directed_antibody"
+    ],
+    "naxitamab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:glycolipid_disialoganglioside_directed_antibody"
+    ],
+    "evinacumab": [
+      "epc:angiopoietin_like_3_inhibitor",
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes"
+    ],
+    "casimersen": [
+      "epc:antisense_oligonucleotide",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "fosdenopterin": [
+      "epc:chemical_structure",
+      "epc:cyclic_pyranopterin_monophosphate",
+      "epc:established_pharmacologic_classes"
+    ],
+    "bevacizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:vascular_endothelial_growth_factor_inhibitor"
+    ],
+    "dasiglucagon": [
+      "epc:antihypoglycemic_agent",
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes"
+    ],
+    "dostarlimab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:programmed_death_receptor_1_blocking_antibody"
+    ],
+    "finerenone": [
+      "epc:established_pharmacologic_classes",
+      "epc:nonsteroidal_mineralocorticoid_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "odevixibat": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:ileal_bile_acid_transporter_inhibitor"
+    ],
+    "anifrolumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_interaction",
+      "epc:type_i_interferon_receptor_antagonist"
+    ],
+    "maralixibat": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:ileal_bile_acid_transporter_inhibitor"
+    ],
+    "atogepant": [
+      "epc:calcitonin_gene_related_peptide_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "vosoritide": [
+      "epc:c_type_natriuretic_peptide_analog",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:hormone"
+    ],
+    "efgartigimod alfa": [
+      "epc:established_pharmacologic_classes",
+      "epc:neonatal_fc_receptor_blocker",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "tezepelumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:monoclonal_antibody",
+      "epc:thymic_stromal_lymphopoietin_blocker"
+    ],
+    "tralokinumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_13_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "tebentafusp": [
+      "epc:bispecific_gp100_peptide_hla_directed_cd3_t_cell_engager",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_interaction"
+    ],
+    "daridorexant": [
+      "epc:established_pharmacologic_classes",
+      "epc:orexin_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "relatlimab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:lymphocyte_activation_gene_3_blocker"
+    ],
+    "bevacizumab-maly": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:vascular_endothelial_growth_factor_inhibitor"
+    ],
+    "mavacamten": [
+      "epc:cardiac_myosin_inhibitor",
+      "epc:cardiovascular_agent",
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes"
+    ],
+    "tapinarof": [
+      "epc:aryl_hydrocarbon_receptor_agonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "vutrisiran": [
+      "epc:antisense_oligonucleotide",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:small_interfering_rna",
+      "epc:transthyretin_directed_rna_interaction"
+    ],
+    "omidenepag": [
+      "epc:established_pharmacologic_classes",
+      "epc:prostaglandin_e2_receptor_agonist",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "teplizumab": [
+      "epc:cd3_directed_antibody",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "lecanemab-irmb": [
+      "epc:amyloid_beta_directed_antibody",
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes"
+    ],
+    "lecanemab": [
+      "epc:amyloid_beta_directed_antibody",
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes"
+    ],
+    "xenon-129, hyperpolarized": [
+      "epc:established_pharmacologic_classes",
+      "epc:hyperpolarized_contrast_agent",
+      "epc:imaging_agent"
+    ],
+    "daprodustat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hypoxia_inducible_factor_inhibitor",
+      "epc:hypoxia_inducible_factor_prolyl_hydroxylase_inhibitor"
+    ],
+    "velmanase alfa-tycv": [
+      "epc:enzyme",
+      "epc:established_pharmacologic_classes",
+      "epc:recombinant_human_lysosomal_alpha_mannosidase"
+    ],
+    "retifanlimab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:programmed_death_receptor_1_blocking_antibody"
+    ],
+    "tofersen": [
+      "epc:antisense_oligonucleotide",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent"
+    ],
+    "fezolinetant": [
+      "epc:established_pharmacologic_classes",
+      "epc:neurokinin_3_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "epcoritamab": [
+      "epc:bispecific_cd20_directed_cd3_t_cell_engager",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_interaction"
+    ],
+    "perfluorohexyloctane": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:semifluorinated_alkane"
+    ],
+    "zavegepant": [
+      "epc:calcitonin_gene_related_peptide_receptor_antagonist",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "glofitamab": [
+      "epc:bispecific_cd20_directed_cd3_t_cell_engager",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_interaction"
+    ],
+    "rozanolixizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:neonatal_fc_receptor_blocker",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "linerixibat": [
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:ileal_bile_acid_transporter_inhibitor"
+    ],
+    "mirikizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_23_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "toripalimab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:programmed_death_receptor_1_blocking_antibody"
+    ],
+    "nirogacestat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:gamma_secretase_inhibitor"
+    ],
+    "eplontersen": [
+      "epc:antisense_oligonucleotide",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:transthyretin_directed_rna_interaction"
+    ],
+    "tislelizumab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:programmed_death_receptor_1_blocking_antibody"
+    ],
+    "resmetirom": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:thyroid_hormone_receptor_beta_agonist"
+    ],
+    "sotatercept": [
+      "epc:activin_signaling_inhibitor",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_interaction"
+    ],
+    "vadadustat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:hypoxia_inducible_factor_inhibitor",
+      "epc:hypoxia_inducible_factor_prolyl_hydroxylase_inhibitor"
+    ],
+    "nogapendekin alfa inbakicept-pmln": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_15_receptor_agonist",
+      "epc:interleukin_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction"
+    ],
+    "colchicine": [
+      "epc:alkaloid",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes"
+    ],
+    "imetelstat": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:oligonucleotide_telomerase_inhibitor"
+    ],
+    "vorasidenib": [
+      "epc:enzyme_inhibitor",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:isocitrate_dehydrogenase_1_inhibitor",
+      "epc:isocitrate_dehydrogenase_2_inhibitor"
+    ],
+    "nemolizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_31_receptor_alpha_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "axatilimab": [
+      "epc:colony_stimulating_factor_1_receptor_blocker",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "lebrikizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_13_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "zolbetuximab": [
+      "epc:antibody_or_antibody_fragment",
+      "epc:claudin_18_2_directed_cytolytic_antibody",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent"
+    ],
+    "bevacizumab-tnjn": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:vascular_endothelial_growth_factor_inhibitor"
+    ],
+    "ustekinumab-aekn": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_12_antagonist",
+      "epc:interleukin_23_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "aflibercept-mrbb": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:vascular_endothelial_growth_factor_inhibitor"
+    ],
+    "berdazimer free acid": [
+      "epc:established_pharmacologic_classes",
+      "epc:nitric_oxide_releasing_agent",
+      "epc:physical_or_chemical_agent"
+    ],
+    "acoltremon": [
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:trpm8_thermoreceptor_agonist"
+    ],
+    "ustekinumab-srlf": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_12_antagonist",
+      "epc:interleukin_23_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "cosibelimab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:programmed_death_ligand_1_blocker"
+    ],
+    "linvoseltamab": [
+      "epc:bispecific_b_cell_maturation_antigen_directed_cd3_t_cell_engager",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_interaction"
+    ],
+    "dordaviprone": [
+      "epc:enzyme_activator",
+      "epc:enzyme_interaction",
+      "epc:established_pharmacologic_classes",
+      "epc:protease_activator"
+    ],
+    "ziftomenib": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:menin_inhibitor"
+    ],
+    "plozasiran": [
+      "epc:antisense_oligonucleotide",
+      "epc:apoc_iii_directed_rna_interaction",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:nucleic_acid_related_agent",
+      "epc:small_interfering_rna"
+    ],
+    "pegvisomant": [
+      "epc:established_pharmacologic_classes",
+      "epc:growth_hormone_receptor_antagonist",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "deoxycholic acid": [
+      "epc:cytolytic_agent",
+      "epc:established_pharmacologic_classes"
+    ],
+    "zolpidem": [
+      "epc:established_pharmacologic_classes",
+      "epc:gamma_aminobutyric_acid_a_receptor_positive_modulator",
+      "epc:ion_channel_or_pump_agent"
+    ],
+    "telavancin": [
+      "epc:anti_infective",
+      "epc:antibacterial",
+      "epc:antimicrobial",
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:lipoglycopeptide_antibacterial"
+    ],
+    "glucagon": [
+      "epc:antihypoglycemic_agent",
+      "epc:blood_glucose_regulator",
+      "epc:established_pharmacologic_classes",
+      "epc:gastrointestinal_agent",
+      "epc:gastrointestinal_motility_inhibitor"
+    ],
+    "guaifenesin": [
+      "epc:established_pharmacologic_classes",
+      "epc:expectorant",
+      "epc:respiratory_agent"
+    ],
+    "terlipressin": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_agonist",
+      "epc:receptor_interaction",
+      "epc:vasopressin_receptor_agonist"
+    ],
+    "ranibizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction",
+      "epc:vascular_endothelial_growth_factor_inhibitor"
+    ],
+    "tocilizumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_6_receptor_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_antagonist",
+      "epc:receptor_interaction"
+    ],
+    "interferon beta-1b": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interferon_beta"
+    ],
+    "interferon beta-1a": [
+      "epc:chemical_structure",
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interferon_beta"
+    ],
+    "oxymetazoline": [
+      "epc:cardiovascular_agent",
+      "epc:established_pharmacologic_classes",
+      "epc:vasoconstrictor"
+    ],
+    "ustekinumab": [
+      "epc:established_pharmacologic_classes",
+      "epc:immunologic_agent",
+      "epc:interleukin_12_antagonist",
+      "epc:interleukin_23_antagonist",
+      "epc:interleukin_agent",
+      "epc:receptor_interaction"
+    ],
+    "dalfampridine": [
+      "epc:established_pharmacologic_classes",
+      "epc:ion_channel_or_pump_agent",
+      "epc:potassium_channel_blocker"
+    ],
+    "soybean oil": [
+      "epc:established_pharmacologic_classes",
+      "epc:lipid_emulsion"
     ],
     "acebrophylline": [
       "methylxanthine"
@@ -2645,10 +16266,6 @@
       "azole_antifungal",
       "cyp3a4_inhibitor"
     ],
-    "bleomycin": [
-      "glycopeptide",
-      "nephrotoxic"
-    ],
     "buclizine (buclizine hydrochloride)": [
       "anticholinergic"
     ],
@@ -2658,10 +16275,6 @@
     "buspirone": [
       "benzodiazepine",
       "cns_depressant"
-    ],
-    "butorphanol": [
-      "cns_depressant",
-      "opioid"
     ],
     "caffeine (caffeine citrate)": [
       "methylxanthine"
@@ -2695,9 +16308,6 @@
     "cilnidipine": [
       "calcium_channel_blocker",
       "dihydropyridine_ccb"
-    ],
-    "cilostazol": [
-      "antiplatelet"
     ],
     "cimetropium bromide": [
       "anticholinergic"
@@ -2834,10 +16444,6 @@
     "fludrocortisone acetate": [
       "corticosteroid"
     ],
-    "flumazenil": [
-      "benzodiazepine",
-      "cns_depressant"
-    ],
     "fluorometholone acetate (ophthalmic suspension 0.1%)": [
       "corticosteroid"
     ],
@@ -2963,10 +16569,6 @@
     "loteprednol etabonate": [
       "corticosteroid"
     ],
-    "meclizine": [
-      "anticholinergic",
-      "antihistamine"
-    ],
     "melitracen": [
       "anticholinergic",
       "qt_prolonging",
@@ -2979,9 +16581,6 @@
     "methdilazine": [
       "anticholinergic",
       "antihistamine"
-    ],
-    "mifepristone": [
-      "corticosteroid"
     ],
     "milnacipran (milnacipran hydrochloride)": [
       "serotonergic",
@@ -3005,25 +16604,9 @@
     "nadroparin calcium": [
       "anticoagulant"
     ],
-    "nalbuphine": [
-      "cns_depressant",
-      "opioid"
-    ],
     "nalidixic acid": [
       "fluoroquinolone",
       "qt_prolonging"
-    ],
-    "naloxone": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "naltrexone": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "nateglinide": [
-      "hypoglycemic",
-      "insulin"
     ],
     "nefopam": [
       "cns_depressant",
@@ -3082,10 +16665,6 @@
       "fluoroquinolone",
       "qt_prolonging"
     ],
-    "pentazocine": [
-      "cns_depressant",
-      "opioid"
-    ],
     "perindopril erbumine": [
       "ace_inhibitor",
       "raas"
@@ -3114,10 +16693,6 @@
       "cns_depressant",
       "opioid"
     ],
-    "procarbazine": [
-      "mao_inhibitor",
-      "serotonergic"
-    ],
     "procyclidine": [
       "anticholinergic"
     ],
@@ -3127,10 +16702,6 @@
     "prulifloxacin": [
       "fluoroquinolone",
       "qt_prolonging"
-    ],
-    "repaglinide": [
-      "hypoglycemic",
-      "insulin"
     ],
     "reviparin (reviparin sodium)": [
       "anticoagulant"
@@ -3267,25 +16838,10 @@
       "benzodiazepine",
       "cns_depressant"
     ],
-    "droperidol": [
-      "qt_prolonging"
-    ],
-    "pimozide": [
-      "qt_prolonging"
-    ],
     "sultopride": [
       "qt_prolonging"
     ],
     "domperidone": [
-      "qt_prolonging"
-    ],
-    "pentamidine": [
-      "qt_prolonging"
-    ],
-    "chloroquine": [
-      "qt_prolonging"
-    ],
-    "hydroxychloroquine": [
       "qt_prolonging"
     ],
     "halofantrine": [
@@ -3294,40 +16850,13 @@
     "arsenic trioxide": [
       "qt_prolonging"
     ],
-    "sevoflurane": [
-      "qt_prolonging"
-    ],
-    "amisulpride": [
-      "qt_prolonging"
-    ],
     "mirtazapine": [
-      "qt_prolonging"
-    ],
-    "famotidine": [
-      "qt_prolonging"
-    ],
-    "tamoxifen": [
-      "qt_prolonging"
-    ],
-    "bedaquiline": [
       "qt_prolonging"
     ],
     "delamanid": [
       "qt_prolonging"
     ],
     "clofazimine": [
-      "qt_prolonging"
-    ],
-    "primaquine": [
-      "qt_prolonging"
-    ],
-    "sulfamethoxazole": [
-      "qt_prolonging"
-    ],
-    "amantadine": [
-      "qt_prolonging"
-    ],
-    "metoclopramide": [
       "qt_prolonging"
     ],
     "nitroglycerin (gtn)": [
@@ -3343,13 +16872,30 @@
     ]
   },
   "generics": [
+    "17-alpha-hydroxyprogesterone",
+    "2,2'-dithiobisbenzothiazole",
+    "2,2-bis(4-glycidyloxyphenyl)propane",
+    "2-mercaptobenzothiazole",
+    "2-mercaptoethanesulfonic acid",
+    "4-aminobenzoic acid",
+    "4-hydroxybutyric acid",
+    "4-phenylbutyric acid",
+    "4-phenylenediamine",
+    "5-chloro-2-methyl-4-isothiazolin-3-one",
+    "6-aminocaproic acid",
+    "82 rubidium",
+    "abacavir",
     "abacavir (abacavir sulfate)",
+    "abaloparatide",
     "abatacept",
     "abciximab",
     "abemaciclib",
     "abiraterone",
     "abiraterone acetate",
+    "abobotulinumtoxina",
     "abrocitinib",
+    "acacia dealbata pollen extract",
+    "acacia pollen extract",
     "acalabrutinib",
     "acamprosate",
     "acarbose",
@@ -3357,16 +16903,26 @@
     "acebutolol",
     "aceclofenac",
     "acenocoumarol",
+    "acer pseudoplatanus pollen extract",
     "acetazolamide",
     "acetic acid",
+    "acetohydroxamic acid",
+    "acetylcholine",
     "acetylcysteine",
     "acitretin",
     "aclidinium",
+    "acoltremon",
     "acotiamide",
+    "acremonium strictum allergenic extract",
     "acrivastine",
+    "acrothecium robustum allergenic extract",
     "actarit",
+    "acyclovir",
     "acyclovir (aciclovir)",
     "adalimumab",
+    "adalimumab-aaty",
+    "adalimumab-bwwd",
+    "adalimumab-ryvk",
     "adapalene",
     "adapting electrolyte solutions",
     "adefovir",
@@ -3379,99 +16935,190 @@
     "afatinib",
     "afatinib dimaleate",
     "aflapin",
+    "aflibercept",
     "aflibercept (intravitreal)",
+    "aflibercept-mrbb",
+    "agalsidase beta",
+    "agkistrodon piscivorus antivenin",
     "agomelatine",
+    "alanine",
     "albendazole",
+    "albumin human, usp",
+    "albumin microspheres, human",
     "albuterol",
     "alcaftadine",
     "alclometasone",
     "alcohol",
+    "aldesleukin",
     "alectinib",
+    "alemtuzumab",
+    "alendronic acid",
     "alendronic acid (alendronate sodium)",
     "alfacalcidol (1-alpha-hydroxycholecalciferol)",
+    "alfalfa pollen extract",
     "alfentanil",
     "alfentanil hydrochloride",
     "alfuzosin",
+    "algal fungi allergenic extract",
+    "alglucosidase alfa",
+    "alirocumab",
     "aliskiren",
+    "alitretinoin",
+    "alkali blite pollen extract",
+    "allium cepa bulb extract",
     "allopurinol",
+    "allscale pollen extract",
+    "allspice allergenic extract",
     "allylestrenol",
+    "almond allergenic extract",
     "almotriptan",
     "almotriptan (almotriptan malate)",
+    "alnus glutinosa bark extract",
     "aloe vera",
     "alogliptin",
     "alosetron",
     "alpelisib",
+    "alpha 1-proteinase inhibitor, human",
     "alpha glycerylphosphorylcholine",
     "alpha ketoanalogue",
     "alpha lipoic acid",
     "alpha-beta arteether",
     "alprazolam",
+    "alprostadil",
     "alprostadil (prostaglandin e1)",
     "alteplase",
+    "alternaria alternata allergenic extract",
     "altretamine",
+    "alvimopan anhydrous",
     "amantadine",
     "amantadine (amantadine hydrochloride)",
+    "amaranthus hybridus pollen extract",
     "ambrisentan",
     "ambroxol",
     "amcinonide",
+    "american basswood pollen extract",
+    "american chestnut allergenic extract",
+    "american cockroach allergenic extract",
+    "american elm pollen extract",
+    "american house dust mite allergenic extract",
+    "american lobster allergenic extract",
+    "amifampridine",
     "amifostine",
+    "amifostine anhydrous",
     "amikacin",
     "amiloride",
     "amineptine",
     "amino acids",
+    "aminolevulinic acid",
     "aminophylline",
     "amiodarone",
     "amisulpride",
     "amitriptyline",
     "amlexanox",
     "amlodipine",
+    "ammonia n-13",
     "amodiaquine",
     "amorolfine hydrochloride",
     "amoxapine",
+    "amoxicillin anhydrous",
     "amoxycillin",
+    "amphetamine",
+    "amphotericin b",
     "amphotericin b (conventional deoxycholate and lipid/liposomal formulations)",
     "ampicillin",
     "amprenavir",
     "amtolmetin guacil",
+    "amyl cinnamal",
+    "anagrelide",
+    "anakinra",
     "anastrozole",
+    "angiotensin ii",
     "anhydrous tacrolimus",
     "anidulafungin",
+    "anifrolumab",
+    "anise seed extract",
+    "annual bluegrass pollen extract",
+    "ansuvimab",
     "antacids with antispasmodics",
+    "anti-inhibitor coagulant complex",
+    "antihemophilic factor, human",
+    "antihemophilic factor, human recombinant",
     "antithymocyte immunoglobulins",
+    "apiospora montagnei allergenic extract",
+    "apis mellifera preparation",
     "apixaban",
     "apomorphine",
+    "apple allergenic extract",
+    "apple extract",
     "apraclonidine",
     "apremilast",
     "aprepitant",
+    "apricot allergenic extract",
+    "aprocitentan",
     "aprotinin",
     "ardeparin",
     "arformoterol",
     "argatroban anhydrous",
     "aripiprazole",
+    "arizona ash pollen extract",
+    "arizona cypress pollen extract",
     "armodafinil",
+    "arroyo willow pollen extract",
     "arsenic trioxide",
     "arteether (artemotil)",
     "artemether",
     "artesunate",
+    "articaine",
+    "ascorbic acid",
     "asenapine",
     "asenapine (asenapine maleate)",
+    "asfotase alfa",
+    "ash pollen extract",
     "asparaginase",
+    "asparagus allergenic extract",
+    "aspen pollen extract",
+    "aspergillus amstelodami extract",
+    "aspergillus flavus allergenic extract",
+    "aspergillus flavus var. oryzae protease",
+    "aspergillus fumigatus allergenic extract",
+    "aspergillus nidulans allergenic extract",
+    "aspergillus niger var. niger extract",
+    "aspergillus repens allergenic extract",
+    "aspergillus terreus allergenic extract",
     "aspirin",
     "astemizole",
     "asunaprevir",
     "atazanavir",
     "atenolol",
     "atezolizumab",
+    "atlantic cod allergenic extract",
+    "atlantic halibut allergenic extract",
+    "atlantic mackerel allergenic extract",
+    "atlantic salmon allergenic extract",
+    "atogepant",
     "atomoxetine",
     "atorvastatin",
     "atosiban",
+    "atovaquone",
     "atracurium",
     "atropine",
     "atropine sulfate",
+    "aureobasidium pullulans var. pullutans allergenic extract",
+    "australian pine pollen extract",
+    "austrian pine pollen extract",
+    "avacincaptad pegol",
     "avacopan",
+    "avalglucosidase alfa",
     "avanafil",
     "avapritinib",
+    "avelumab",
+    "avibactam",
+    "avocado allergenic extract",
+    "avocado oil",
+    "axatilimab",
+    "axicabtagene ciloleucel",
     "axitinib",
+    "azacitidine",
     "azacitidine (for injection)",
     "azathioprine",
     "azelaic acid",
@@ -3489,43 +17136,83 @@
     "bacillus clausii",
     "baclofen",
     "bacterial lysate",
+    "bahia grass pollen extract",
+    "bald cypress pollen extract",
+    "bald-faced hornet venom protein",
     "balofloxacin",
+    "baloxavir",
+    "balsalazide",
     "balsalazide (balsalazide disodium)",
+    "balsam poplar pollen extract",
     "bambuterol",
+    "banana allergenic extract",
+    "banana extract",
     "baricitinib",
+    "barium sulfate",
+    "barley allergenic extract",
+    "barley extract",
+    "barley malt allergenic extract",
+    "barley malt syrup",
+    "basil allergenic extract",
     "basiliximab",
+    "bay leaf extract",
+    "bazedoxifene",
+    "bcg, live, tice strain",
+    "bean extract",
     "becaplermin",
     "beclometasone (beclomethasone dipropionate)",
     "beclomethasone",
     "bedaquiline",
+    "beech pollen extract",
+    "beef allergenic extract",
+    "beef liver allergenic extract",
+    "beef liver preparation",
+    "belatacept",
+    "belimumab",
+    "belinostat",
     "belzutifan",
     "bemiparin",
     "bempedoic acid",
     "benazepril",
     "benazeprilat",
+    "bendamustine",
     "bendamustine hydrochloride",
     "bendroflumethiazide",
     "benfotiamine (s-benzoylthiamine o-monophosphate)",
     "benidipine",
+    "benralizumab",
     "benzathine penicillin g",
     "benzhydrocodone",
     "benzhydrocodone hydrochloride",
     "benzocaine",
+    "benzoic acid",
     "benzonatate",
     "benzoyl peroxide",
+    "benzphetamine",
     "benztropine",
     "benzydamine (benzydamine hydrochloride)",
+    "benzyl alcohol",
+    "benzylparaben",
     "bepotastine",
     "bepotastine (bepotastine besilate)",
+    "berahyaluronidase alfa",
+    "berdazimer free acid",
+    "bermuda grass pollen extract",
+    "bermuda grass smut allergenic extract",
     "berotralstat",
     "besifloxacin",
     "betahistine",
+    "betaine",
+    "betaine, anhydrous",
     "betamethasone",
     "betaxolol",
     "betaxolol (betaxolol hydrochloride)",
     "bethanechol",
     "bevacizumab",
+    "bevacizumab-maly",
+    "bevacizumab-tnjn",
     "bexagliflozin",
+    "bexarotene",
     "bezafibrate",
     "bicalutamide",
     "bifonazole",
@@ -3533,27 +17220,75 @@
     "bimatoprost",
     "biotin",
     "bisacodyl",
+    "bismuth cation",
+    "bismuth subsalicylate",
     "bisoprolol",
+    "bitter dock pollen extract",
+    "bitternut hickory pollen extract",
     "bivalirudin",
+    "black carpenter ant allergenic extract",
+    "black cottonwood pollen extract",
+    "black imported fire ant allergenic extract",
+    "black locust pollen extract",
+    "black oak pollen extract",
+    "black olive allergenic extract",
+    "black pepper allergenic extract",
+    "black pepper preparation",
+    "black sea bass allergenic extract",
+    "black walnut allergenic extract",
+    "black walnut pollen extract",
+    "black willow pollen extract",
+    "black-eyed pea allergenic extract",
+    "blatta orientalis preparation",
     "bleomycin",
+    "blinatumomab",
     "blonanserin",
+    "blue beech pollen extract",
+    "blue crab preparation",
+    "blue spruce pollen extract",
+    "bluefish allergenic extract",
     "boceprevir",
+    "bordetella pertussis filamentous hemagglutinin vaccine, inactivated",
+    "bordetella pertussis fimbriae 2/3 vaccine, inactivated",
+    "bordetella pertussis pertactin vaccine, inactivated",
+    "bordetella pertussis toxoid vaccine, inactivated",
     "bortezomib",
     "bosentan",
+    "bosentan anhydrous",
     "bosutinib",
     "boswellia serrata",
+    "botrytis cinerea allergenic extract",
+    "botulinum toxin type a",
+    "botulism immune globulin iv human",
+    "box elder maple pollen extract",
+    "brazil nut allergenic extract",
+    "brazilian pepper tree pollen extract",
+    "bremelanotide",
+    "brentuximab vedotin",
     "brexpiprazole",
     "brigatinib",
+    "brilliant blue g",
     "brimonidine",
     "brimonidine tartrate",
     "brinzolamide",
     "brivaracetam",
+    "broad leaved paperbark pollen extract",
+    "broadleaf cattail pollen extract",
+    "broadleaf plantain pollen extract",
+    "broccoli allergenic extract",
+    "brodalumab",
     "bromfenac",
     "bromhexine",
     "bromocriptine",
+    "bronopol",
+    "broomweed pollen extract",
+    "brown rice preparation",
+    "brussels sprout allergenic extract",
+    "buckwheat allergenic extract",
     "buclizine (buclizine hydrochloride)",
     "budesonide",
     "budesonide (oral, delayed-release)",
+    "bulbous buttercup pollen extract",
     "bumetanide",
     "buphenine",
     "bupivacaine",
@@ -3561,87 +17296,159 @@
     "bupropion",
     "bupropion hydrobromide",
     "bupropion hydrochloride",
+    "bur oak pollen extract",
+    "burning bush pollen extract",
+    "burrobrush pollen extract",
+    "burweed marshelder pollen extract",
     "buserelin",
     "buspirone",
     "busulfan",
     "butalbital",
+    "butenafine",
     "butenafine (butenafine hydrochloride)",
     "butoconazole",
     "butorphanol",
+    "butylparaben",
+    "c1 esterase inhibitor (human)",
     "cabazitaxel",
+    "cabbage allergenic extract",
     "cabergoline",
+    "cabotegravir",
     "cabozantinib",
     "cadexomer iodine",
     "caffeine",
     "caffeine (caffeine citrate)",
     "calamine (calamine topical / zinc oxide with ferric oxide)",
+    "calaspargase pegol",
+    "calcifediol anhydrous",
+    "calcipotriene",
     "calcipotriol",
     "calcitonin (salmon)",
     "calcitriol",
+    "calcium",
     "calcium (calcium carbonate / gluconate / chloride)",
     "calcium acetate",
     "calcium chloride",
     "calcium dobesilate",
     "calcium gluconate",
+    "calcium ion",
     "calcium leucovorin (leucovorin calcium / folinic acid)",
     "calcium polystyrene sulphonate",
+    "calfactant",
+    "california black oak pollen extract",
+    "california black walnut pollen extract",
+    "california juniper pollen extract",
+    "california mugwort pollen extract",
+    "california scrub oak pollen extract",
+    "callistemon citrinus pollen extract",
+    "camelus bactrianus hair extract",
     "camostat",
     "camylofin",
+    "canada goldenrod pollen extract",
+    "canadian bluegrass pollen extract",
     "canagliflozin",
     "canagliflozin anhydrous",
+    "canary feather extract",
+    "canary grass pollen extract",
     "candesartan",
+    "candida albicans",
+    "candida albicans allergenic extract",
+    "candida tropicalis allergenic extract",
     "cangrelor",
+    "canis lupus familiaris hair extract",
     "cannabidiol",
+    "cantaloupe allergenic extract",
+    "canyon ragweed pollen extract",
     "capecitabine",
     "capmatinib",
     "capreomycin sulfate",
+    "capsicum extract",
     "captopril",
+    "caraway seed allergenic extract",
     "carbachol",
     "carbamazepine",
+    "carbamoylcholine",
     "carbazochrome (carbazochrome sodium sulfonate / salicylate)",
     "carbenicillin (carbenicillin indanyl sodium / geocillin)",
     "carbetocin",
+    "carbidopa",
     "carbimazole",
     "carbinoxamine",
     "carbocisteine (carbocysteine)",
+    "carbon dioxide",
     "carboplatin",
+    "carboprost",
     "carboprost tromethamine",
     "carboxymethylcellulose sodium (ophthalmic)",
     "cardioplegia",
+    "careless weed pollen extract",
     "carfilzomib",
+    "carglumic acid",
     "cariprazine",
     "cariprazine (cariprazine hydrochloride)",
     "carisoprodol",
+    "carmustine",
     "carmustine (bcnu)",
+    "carob allergenic extract",
     "caroverine",
+    "carrot allergenic extract",
     "carteolol",
     "carvedilol",
+    "carya laciniosa pollen extract",
+    "casein allergenic extract",
+    "cashew nut allergenic extract",
+    "casimersen",
+    "caspofungin",
     "caspofungin acetate",
+    "cat flea allergenic extract",
+    "cat hair extract",
+    "cat skin extract",
+    "cauliflower allergenic extract",
+    "cedar elm pollen extract",
     "cefaclor",
+    "cefaclor anhydrous",
     "cefadroxil",
+    "cefadroxil anhydrous",
     "cefalexin (cephalexin)",
     "cefazolin",
     "cefdinir",
+    "cefditoren",
     "cefditoren pivoxil",
     "cefepime",
     "cefetamet (cefetamet pivoxil)",
+    "cefiderocol",
     "cefixime",
+    "cefixime anhydrous",
     "cefoperazone",
     "cefotaxime",
+    "cefotetan",
+    "cefoxitin",
     "cefpirome",
+    "cefpodoxime",
     "cefpodoxime proxetil",
     "cefprozil",
+    "ceftaroline",
     "ceftazidime",
+    "ceftazidime anhydrous",
     "ceftibuten",
     "ceftizoxime",
+    "ceftobiprole",
+    "ceftolozane",
     "ceftriaxone",
     "cefuroxime",
     "cefuroxime axetil",
     "celecoxib",
+    "celery allergenic extract",
     "celiprolol",
+    "cenegermin",
     "cenobamate",
+    "centruroides (scorpion) immune f(ab')2 (equine)",
+    "cephalexin anhydrous",
+    "cephalosporium roseum extract",
     "cerebroprotein hydrolysate (cerebrolysin)",
     "ceritinib",
+    "cerliponase alfa",
+    "certolizumab pegol",
     "certoparin (certoparin sodium)",
     "cetilistat",
     "cetirizine",
@@ -3649,12 +17456,23 @@
     "cetrorelix",
     "cetuximab",
     "cetyl alcohol",
+    "cevimeline",
     "chadox1 ncov-19 corona virus vaccine (recombinant) - covishield / astrazeneca covid-19 vaccine",
+    "chaetomium globosum allergenic extract",
     "charcoal (activated charcoal / activated carbon)",
+    "cheat grass pollen extract",
+    "cherry birch pollen extract",
+    "chicken allergenic extract",
+    "chicken feather extract",
+    "chickpea allergenic extract",
+    "chinese elm pollen extract",
+    "chinquapin oak pollen extract",
     "chlorambucil",
+    "chloramphenicol",
     "chloramphenicol (sodium succinate)",
     "chlordiazepoxide",
     "chlorhexidine gluconate",
+    "chloroprocaine",
     "chloroprocaine (chloroprocaine hydrochloride)",
     "chloroquine",
     "chlorothiazide",
@@ -3663,33 +17481,55 @@
     "chlorpromazine",
     "chlorpromazine (as hydrochloride)",
     "chlorpropamide",
+    "chlorquinaldol",
     "chlorthalidone",
     "chlorzoxazone",
+    "chocolate allergenic extract",
+    "cholecalciferol",
     "cholecalciferol (vitamin d3)",
     "cholera vaccine (oral cholera vaccine)",
     "cholestyramine",
+    "cholestyramine resin",
+    "cholic acid",
+    "choline c-11",
     "choline fenofibrate",
     "choline salicylate",
+    "choriogonadotropin alfa",
+    "chromium",
     "chromium (trivalent chromium - e.g., chromium picolinate/chloride; as supplement and in parenteral nutrition)",
+    "chrysonilia sitophila allergenic extract",
     "ciclesonide",
     "ciclopirox",
     "ciclosporin",
+    "cidofovir anhydrous",
+    "cilastatin",
     "cilnidipine",
     "cilostazol",
     "cimetidine",
     "cimetropium bromide",
     "cinacalcet",
     "cinitapride",
+    "cinnamic aldehyde",
+    "cinnamon allergenic extract",
+    "cinnamon preparation",
+    "cinnamyl alcohol",
     "cinnarizine",
     "ciprofloxacin",
     "cisapride",
+    "cisatracurium",
     "cisatracurium (cisatracurium besylate)",
     "cisplatin",
     "citalopram",
     "citicoline",
     "citric acid, anhydrous",
+    "cladosporium cladosporioides extract",
+    "cladosporium herbarum allergenic extract",
+    "cladosporium sphaerospermum allergenic extract",
     "cladribine",
+    "clam allergenic extract",
     "clarithromycin",
+    "clascoterone",
+    "clavulanic acid",
     "clebopride",
     "clemastine (clemastine fumarate)",
     "clevidipine",
@@ -3704,22 +17544,42 @@
     "clocortolone",
     "clofarabine",
     "clofazimine",
+    "clomiphene",
     "clomiphene citrate",
     "clomipramine",
     "clonazepam",
     "clonidine",
     "clonidine (clonidine hydrochloride)",
+    "clonostachys rosea f. rosea allergenic extract",
     "clopidogrel",
     "clopidogrel bisulfate",
     "clorazepic acid",
     "clostridium botulinum type a toxin-haemagglutinin complex",
     "clotrimazole",
+    "clove allergenic extract",
+    "clove preparation",
     "cloxacillin",
     "clozapine",
     "co-trimoxazole",
     "co-trimoxazole (trimethoprim/sulfamethoxazole, tmp-smx)",
+    "coagulation factor ix, human",
+    "coagulation factor x, human",
+    "coast live oak pollen extract",
+    "coast maple pollen extract",
+    "coast sage pollen extract",
+    "cobalt",
     "cobicistat",
     "cobimetinib",
+    "coccidioides immitis spherule",
+    "cochliobolus lunatus allergenic extract",
+    "cochliobolus sativus allergenic extract",
+    "cochliobolus spicifer allergenic extract",
+    "cocklebur pollen extract",
+    "cocoa bean allergenic extract",
+    "cocoa extract",
+    "coconut allergenic extract",
+    "coconut extract",
+    "cod, unspecified preparation",
     "codeine",
     "codeine anhyd",
     "codeine anhydrous",
@@ -3730,36 +17590,96 @@
     "codeine polistirex",
     "codeine sulfate",
     "codergocrine mesylate",
+    "codfish allergenic extract",
     "coenzyme q10 (ubiquinone / ubidecarenone)",
+    "coffea arabica seed extract",
+    "coffee bean allergenic extract",
+    "cola acuminata seed extract",
     "colchicine",
+    "colesevelam",
     "colesevelam (colesevelam hydrochloride)",
+    "colestipol",
     "colfosceril palmitate",
     "colistimethate",
     "colistimethate sodium",
     "colistin",
     "colistin sulphate",
     "collagen peptide",
+    "collagen type i, bovine",
+    "collagenase",
+    "collagenase clostridium histolyticum",
+    "colletotrichum coccodes allergenic extract",
     "colloidal bismuth subcitrate",
+    "colloidal oatmeal",
+    "colonial bent grass pollen extract",
     "colostrum (bovine colostrum)",
+    "common carp allergenic extract",
+    "common cocklebur pollen extract",
+    "common hazel pollen extract",
+    "common sagebrush pollen extract",
+    "common wasp venom protein",
+    "concord grape allergenic extract",
     "conivaptan",
     "conivaptan hydrochloride",
     "conjugated estrogens",
+    "cootamundra wattle pollen extract",
+    "copper",
+    "copper oxodotreotide cu-64",
+    "corn allergenic extract",
+    "corn grain extract",
+    "corn pollen extract",
+    "corn smut allergenic extract",
     "corticotropin",
     "cortisone",
+    "corylus americana nut oil",
+    "cosibelimab",
+    "cosyntropin",
     "cotrimoxazole",
+    "cotton fiber allergenic extract",
+    "cottonseed allergenic extract",
+    "cottonseed extract",
+    "cow milk allergenic extract",
+    "crab allergenic extract",
+    "cranberry allergenic extract",
+    "cranberry preparation",
+    "creeping bentgrass pollen extract",
+    "crested dogstail pollen extract",
+    "cricket allergenic extract",
+    "crisaborole",
+    "crizanlizumab",
     "crizotinib",
+    "crofelemer",
+    "cromolyn",
+    "crotalus adamanteus antivenin",
+    "crotalus atrox antivenin",
+    "crotalus scutulatus antivenin",
     "crotamiton",
+    "crovalimab",
+    "cucumber allergenic extract",
+    "cucumber extract",
+    "cucumis sativus fruit extract",
+    "cultivated barley pollen extract",
+    "cultivated mushroom allergenic extract",
+    "cultivated oat pollen extract",
+    "cultivated rye grass pollen extract",
+    "cumin allergenic extract",
     "curcuma longa (turmeric; rhizome / curcumin extract)",
+    "curvularia inequalis allergenic extract",
     "cyanocobalamin",
     "cyanocobalamin (vitamin b12)",
     "cyclandelate",
     "cyclobenzaprine",
     "cyclopentolate hydrochloride",
     "cyclophosphamide",
+    "cyclophosphamide anhydrous",
     "cycloserine",
     "cyclosporine",
+    "cynara preparation",
     "cyproheptadine",
+    "cysteamine",
     "cytarabine",
+    "cytisus scoparius flowering top extract",
+    "cytomegalovirus immune globulin, human",
     "d-panthenol (dexpanthenol, provitamin b5)",
     "dabigatran",
     "dabigatran etexilate (as mesylate)",
@@ -3770,24 +17690,35 @@
     "daclizumab",
     "dacomitinib",
     "dactinomycin",
+    "dalbavancin",
+    "dalfampridine",
     "dalfampridine (4-aminopyridine; brand ampyra)",
     "dalteparin",
     "danazol",
+    "dandelion pollen extract",
     "danicopan",
     "dantrolene",
     "dapagliflozin",
     "dapagliflozin (farxiga)",
     "dapiprazole",
     "dapoxetine",
+    "daprodustat",
     "dapsone",
     "daptomycin",
     "daratumumab",
     "darbepoetin alfa",
+    "daridorexant",
     "darifenacin",
+    "dark leaved mugwort pollen extract",
     "darunavir",
     "dasatinib",
     "dasatinib anhydrous",
+    "dasiglucagon",
+    "date allergenic extract",
+    "date palm pollen extract",
+    "daunorubicin",
     "daunorubicin (daunorubicin hydrochloride)",
+    "deacetylbisacodyl",
     "deca peptide (bfgf-related decapeptide)",
     "decitabine",
     "defactinib",
@@ -3798,9 +17729,15 @@
     "degarelix",
     "dehydroemetine",
     "dehydroepiandrosterone",
+    "delafloxacin",
     "delamanid",
     "demeclocycline",
+    "dendryphiella vinosa allergenic extract",
+    "denileukin diftitox",
     "denosumab",
+    "deoxycholic acid",
+    "desert ragweed pollen extract",
+    "desflurane",
     "desidustat",
     "desipramine",
     "desirudin",
@@ -3820,7 +17757,14 @@
     "dexketoprofen",
     "dexlansoprazole",
     "dexmedetomidine",
+    "dexmethylphenidate",
     "dexrabeprazole",
+    "dexrazoxane",
+    "dextran 40",
+    "dextran 70",
+    "dextran 75",
+    "dextroamphetamine",
+    "dextromethorphan",
     "dextromethorphan hydrobromide",
     "dextropropoxyphene",
     "dextrose",
@@ -3829,8 +17773,10 @@
     "diacerein",
     "diatrizoic acid",
     "diazepam",
+    "diazolidinylurea",
     "diazoxide",
     "dibucaine",
+    "dichlorphenamide",
     "diclofenac",
     "diclofenac diethylamine",
     "dicloxacillin",
@@ -3838,75 +17784,130 @@
     "didanosine",
     "dienogest",
     "diethylcarbamazine",
+    "diethylpropion",
     "difelikefalin",
+    "difenoxin",
     "diflorasone",
     "diflorasone diacetate",
     "diflunisal",
     "difluprednate",
     "digoxin",
+    "dihematoporphyrin ether",
     "dihydralazine",
     "dihydrocodeine",
     "dihydrocodeine bitartrate",
+    "dihydroergotamine",
+    "dill allergenic extract",
     "diloxanide",
     "diltiazem",
     "dimenhydrinate",
+    "dimercaprol",
     "dimercaprol (british anti-lewisite, bal)",
     "dimethicone (dimeticone / simeticone)",
     "dimethindene",
     "dimethyl fumarate",
+    "dinoprostone",
     "dinoprostone (prostaglandin e2)",
+    "dinutuximab",
     "dioctyl sodium sulfosuccinate (docusate sodium)",
     "diosmin",
+    "dipentamethylenethiuram disulfide",
     "diphenhydramine",
     "diphenhydramine hydrochloride",
+    "diphenoxylate",
+    "diphenylguanidine",
+    "diphtheria toxoid vaccine, inactivated",
     "dipyridamole",
     "disodium edetate",
     "disodium hydrogen citrate",
     "disopyramide",
+    "disperse blue 106",
     "disulfiram",
     "dithranol",
+    "ditiocarb, zinc salt",
     "divalproex",
     "dobutamine",
     "docetaxel",
+    "docetaxel anhydrous",
     "docosahexaenoic acid (dha)",
     "docusate",
     "dofetilide",
+    "dog dander extract",
+    "dog flea allergenic extract",
+    "dog skin extract",
+    "dogfennel pollen extract",
     "dolasetron",
     "dolutegravir",
+    "domestic cow dander extract",
+    "domestic cow hair extract",
+    "domestic cow skin extract",
+    "domestic goat hair extract",
+    "domestic goat skin extract",
     "domperidone",
     "donepezil",
     "dopamine",
     "dopamine (dopamine hydrochloride)",
+    "doravirine",
+    "dordaviprone",
     "doripenem",
+    "dornase alfa",
+    "dorzolamide",
     "dorzolamide (dorzolamide hydrochloride)",
+    "dostarlimab",
     "dosulepin (dothiepin)",
+    "dotatate gallium ga-68",
+    "douglas fir pollen extract",
     "doxapram",
     "doxazosin",
     "doxepin",
+    "doxercalciferol",
     "doxifluridine",
     "doxofylline",
     "doxorubicin",
     "doxycycline",
+    "doxycycline anhydrous",
     "doxylamine",
+    "dronabinol",
     "dronedarone",
     "droperidol",
     "drospirenone",
     "drotaverine",
+    "duck allergenic extract",
+    "duck feather extract",
     "dulaglutide",
     "duloxetine",
+    "dupilumab",
+    "durlobactam",
     "durvalumab",
     "dutasteride",
     "dydrogesterone",
+    "eastern cottonwood pollen extract",
+    "eastern sycamore pollen extract",
+    "eastern white pine pollen extract",
+    "eastern yellow jacket venom protein",
     "ebastine",
     "eberconazole",
+    "ecallantide",
     "econazole",
+    "ecothiopate",
+    "eculizumab",
     "edaravone",
     "edetic acid",
     "edoxaban",
+    "edrophonium cation",
     "efavirenz",
+    "efbemalenograstim alfa",
+    "efgartigimod alfa",
     "efinaconazole",
+    "eflapegrastim",
     "eflornithine",
     "efonidipine",
+    "egg (chicken) allergenic extract",
+    "egg extract",
+    "egg white (chicken) allergenic extract",
+    "egg yolk (chicken) allergenic extract",
+    "eggplant allergenic extract",
+    "eggplant extract",
     "elacestrant",
     "elafibranor",
     "elagolix",
@@ -3918,43 +17919,69 @@
     "elexacaftor",
     "eliglustat",
     "eliglustat tartrate",
+    "elosulfase alfa",
+    "elotuzumab",
     "eltrombopag",
     "eluxadoline",
+    "elvitegravir",
+    "emapalumab",
     "embramine",
     "empagliflozin",
+    "emtricitabine",
     "enalapril",
     "enalaprilat",
     "enalaprilat anhydrous",
+    "enasidenib",
     "enclomiphene",
     "endoxifen",
+    "english oak pollen extract",
+    "english plantain pollen extract",
+    "english sole allergenic extract",
+    "english walnut allergenic extract",
+    "english walnut pollen extract",
     "enoxaparin",
     "enoxaparin sodium",
     "enrofloxacin",
+    "ensifentrine",
     "entacapone",
     "entecavir",
+    "entecavir anhydrous",
     "enzalutamide",
     "epalrestat",
+    "epcoritamab",
     "eperisone (eperisone hydrochloride)",
     "ephedrine",
     "ephedrine (ephedrine sulfate / hydrochloride)",
+    "epicoccum nigrum allergenic extract",
+    "epidermophyton floccosum allergenic extract",
     "epinastine",
     "epinastine (epinastine hydrochloride)",
     "epinephrine",
     "epirubicin",
     "eplerenone",
+    "eplontersen",
+    "epoetin alfa",
+    "epoprostenol",
     "eprosartan",
     "eprosartan (eprosartan mesylate)",
     "epsilon aminocaproic acid",
     "eptacog alfa (activated) - recombinant coagulation factor viia",
+    "eptacog alfa activated",
     "eptifibatide",
+    "eptinezumab",
     "equine rabies immunoglobulin",
+    "eravacycline",
     "erdafitinib",
     "erdosteine",
     "erenumab",
+    "ergocalciferol",
     "ergoloid mesylates",
+    "ergotamine",
     "ergotamine (ergotamine tartrate, often with caffeine)",
+    "eribulin",
     "eribulin mesylate",
     "erlotinib",
+    "ertapenem",
     "ertapenem (sodium)",
     "erythromycin",
     "escitalopram",
@@ -3964,42 +17991,72 @@
     "esmolol",
     "esomeprazole",
     "estazolam",
+    "estetrol",
+    "estradiol",
     "estradiol (oral)",
     "estramustine phosphate sodium",
     "estriol",
+    "estrogens, conjugated (usp)",
     "eszopiclone",
     "etanercept",
+    "etelcalcetide",
+    "eteplirsen",
     "ethacridine (ethacridine lactate)",
     "ethacrynic acid",
     "ethambutol",
     "ethamsylate (etamsylate)",
+    "ethanolamine",
+    "ethinyl estradiol",
     "ethinyl estradiol (ethinylestradiol)",
     "ethionamide",
+    "ethosuximide",
+    "ethyl-p-hydroxybenzoate",
+    "ethylenediamine",
     "ethylmorphine",
+    "ethynodiol",
     "etidronate disodium",
+    "etidronic acid",
     "etizolam",
     "etodolac",
     "etomidate",
+    "etonogestrel",
     "etoposide",
     "etoricoxib",
     "etravirine",
+    "eucalyptus globulus pollen extract",
+    "eugenol",
     "euphorbia prostrata extract",
+    "european aspen pollen extract",
+    "european beech pollen extract",
+    "european house dust mite allergenic extract",
+    "european olive pollen extract",
+    "european rabbit hair extract",
+    "european rabbit skin extract",
+    "eurotium herbariorum allergenic extract",
     "evening primrose oil",
+    "evernia prunastri extract",
     "everolimus",
+    "evinacumab",
     "evogliptin",
+    "evolocumab",
     "exemestane",
     "exenatide",
     "ezetimibe",
+    "factor vii, human",
+    "factor xiii, human",
+    "false ragweed pollen extract",
     "famciclovir",
     "famotidine",
     "faropenem",
     "favipiravir",
     "febuxostat",
+    "felbamate",
     "felbinac",
     "felodipine",
     "fenbendazole",
     "fenfluramine (fenfluramine hydrochloride)",
     "fenofibrate",
+    "fenofibric acid",
     "fenoprofen",
     "fenoverine",
     "fentanyl",
@@ -4009,24 +18066,39 @@
     "fenticonazole",
     "feracrylum",
     "ferric carboxymaltose",
+    "ferric cation",
     "ferric citrate (ferric citrate coordination complex)",
     "ferrous ascorbate",
     "ferrous bisglycinate",
     "ferrous sulfate (elemental iron 65 mg per 325 mg tablet)",
+    "ferumoxytol",
     "fexinidazole",
     "fexofenadine",
+    "fezolinetant",
+    "fibrinogen, human",
+    "fidaxomicin",
+    "fig allergenic extract",
     "filgrastim",
     "fimasartan",
     "finafloxacin",
     "finasteride",
     "finerenone",
     "fingolimod",
+    "fivehorn smotherweed pollen extract",
     "flavoxate",
+    "flaxseed extract",
     "flecainide",
     "flibanserin",
+    "florbetaben f-18",
+    "florbetapir f-18",
+    "flotufolastat f-18",
+    "flounder allergenic extract",
+    "floxuridine",
+    "fluciclovine f-18",
     "flucloxacillin sodium",
     "fluconazole",
     "flucytosine",
+    "fludarabine",
     "fludarabine phosphate",
     "fludrocortisone acetate",
     "flumazenil",
@@ -4034,27 +18106,42 @@
     "flunisolide anhydrous",
     "fluocinolone acetonide",
     "fluocinonide",
+    "fluorescein",
     "fluorescein sodium",
+    "fluoride ion f-18",
+    "fluorodeoxyglucose f18",
+    "fluoroestradiol f-18",
     "fluorometholone",
     "fluorometholone acetate (ophthalmic suspension 0.1%)",
+    "fluorouracil",
     "fluorouracil (5-fu)",
     "fluoxetine",
+    "fluoxymesterone",
     "flupentixol (flupenthixol)",
     "fluphenazine",
     "flupirtine (as maleate)",
     "flurandrenolide",
     "flurazepam",
     "flurbiprofen",
+    "flurpiridaz f-18",
     "flutamide",
+    "flutemetamol f-18",
     "fluticasone",
     "fluticasone furoate",
     "fluticasone propionate",
     "fluvastatin",
     "fluvoxamine",
     "folic acid",
+    "follicle stimulating hormone",
+    "fomepizole",
     "fondaparinux",
+    "foreskin fibroblast, neonatal",
+    "foreskin keratinocyte, neonatal",
+    "formaldehyde",
     "formoterol",
     "fosaprepitant dimeglumine",
+    "foscarnet",
+    "fosdenopterin",
     "fosfestrol",
     "fosfomycin",
     "fosinopril",
@@ -4062,20 +18149,34 @@
     "fosphenytoin sodium",
     "framycetin",
     "freeze-dried live attenuated hepatitis a vaccine",
+    "fremont cottonwood pollen extract",
     "frovatriptan",
     "fulvestrant",
     "furazolidone",
     "furosemide",
+    "fusarium compactum allergenic extract",
+    "fusarium oxysporum allergenic extract",
+    "fusarium oxysporum vasinfectum allergenic extract",
     "fusidic acid",
     "futibatinib",
     "gabapentin",
+    "gadodiamide",
+    "gadofosveset",
+    "gadolinium cation (3+)",
+    "gadoteridol",
     "galantamine",
+    "gallium ga-68 gozetotide",
+    "galsulfase",
+    "gambels oak pollen extract",
     "gamma benzene hexachloride (lindane)",
     "gamma linolenic acid",
     "ganaxolone",
     "ganciclovir",
     "ganirelix",
     "garenoxacin",
+    "garlic allergenic extract",
+    "garlic preparation",
+    "garrys oak pollen extract",
     "gastroprokinetics plain",
     "gatifloxacin",
     "gatifloxacin anhydrous",
@@ -4085,35 +18186,86 @@
     "gemfibrozil",
     "gemifloxacin",
     "gemigliptin",
+    "gemtuzumab ozogamicin",
     "gentamicin",
+    "geotrichum candidum allergenic extract",
+    "geraniol",
+    "german cockroach allergenic extract",
+    "german wasp venom protein",
+    "giant ragweed pollen extract",
+    "giant wild rye pollen extract",
+    "gibberella fujikuroi extract",
+    "gibberella zeae allergenic extract",
+    "ginger allergenic extract",
+    "ginger extract",
+    "ginger root",
     "ginkgo biloba",
     "ginkgo biloba extract",
     "givinostat",
+    "givosiran",
+    "glasdegib",
     "glatiramer acetate",
     "glecaprevir",
     "glibenclamide (glyburide)",
     "gliclazide",
     "glimepiride",
+    "gliocladium allergenic extract",
+    "gliocladium viride extract",
     "glipizide",
+    "glofitamab",
     "glucagon",
+    "glucarpidase",
+    "gluconolactone",
     "glucosamine",
     "glucosamine sulfate potassium chloride",
+    "glutamine",
     "glutathione",
     "glyburide",
+    "glycerin",
     "glycine",
     "glycolic acid",
     "glycopyrrolate",
     "glycopyrronium",
+    "glycyrrhiza glabra extract",
+    "glycyrrhiza glabra root powder extract",
+    "goat milk allergenic extract",
+    "gold",
+    "golden chain pollen extract",
     "golimumab",
+    "golodirsen",
     "gonadotrophins (including other ovulation stimulants)",
+    "goose feather extract",
+    "goserelin",
     "goserelin acetate",
+    "grama grass pollen extract",
     "granisetron",
     "granulocyte colony stimulating factor (filgrastim)",
+    "grape extract",
+    "grapefruit allergenic extract",
+    "grapefruit extract",
+    "grapefruit peel extract",
+    "gray birch pollen extract",
+    "grazoprevir anhydrous",
+    "greasewood pollen extract",
+    "green ash pollen extract",
+    "green bell pepper allergenic extract",
+    "green olive allergenic extract",
+    "grindelia ciliata pollen extract",
     "griseofulvin",
+    "groundsel pollen extract",
     "guaifenesin",
     "guanabenz",
     "guanfacine",
+    "guinea pig dander",
+    "guinea pig hair extract",
+    "guinea pig skin extract",
+    "guselkumab",
     "gynaecological products (therapeutic category / group label)",
+    "hackberry pollen extract",
+    "haddock allergenic extract",
+    "haematonectria haematococca allergenic extract",
+    "haemophilus influenzae b (ross strain) capsular polysaccharide meningococcal protein conjugate vaccine",
+    "haemophilus influenzae type b strain 1482, capsular polysaccharide inactivated tetanus toxoid conjugate vaccine",
     "haemophilus type b conjugate vaccine (hib)",
     "halcinonide",
     "halobetasol",
@@ -4123,25 +18275,63 @@
     "haloperidol",
     "haloperidol decanoate",
     "halothane",
+    "hard maple pollen extract",
+    "hazelnut allergenic extract",
+    "hazelnut pollen extract",
+    "helminthosporium solani allergenic extract",
     "hemocoagulase",
     "heparin",
     "heparin sodium",
     "heparin, porcine",
+    "hepatitis a vaccine (inactivated) strain hm175",
     "hepatitis a vaccine, inactivated",
+    "hepatitis a virus strain cr 326f antigen, inactivated",
+    "hepatitis b immune globulin",
+    "hepatitis b surface antigen vaccine",
     "hepatitis b vaccine (recombinant, hbsag)",
+    "hepatitis b virus subtype adw2 hbsag surface protein antigen",
+    "herring allergenic extract",
+    "hetastarch",
+    "hexachlorophene",
+    "histrelin",
+    "hog hair extract",
+    "hog skin extract",
     "homatropine",
     "homatropine (homatropine hydrobromide, ophthalmic)",
     "homotaurine",
+    "honeydew melon allergenic extract",
+    "hops extract",
+    "horse dander extract",
+    "horse hair extract",
+    "horse skin extract",
+    "horseradish allergenic extract",
+    "house dust allergenic extract",
+    "house fly allergenic extract",
+    "house mouse hair extract",
+    "house mouse skin extract",
+    "human adenovirus b serotype 7 strain 55142",
+    "human adenovirus e serotype 4 strain cl-68578",
     "human adenovirus-vectored vaccine (replication-deficient adenovirus vector platform)",
     "human albumin",
     "human chorionic gonadotropin (hcg)",
+    "human cord blood hematopoietic progenitor cell",
     "human gamma globulin (immune globulin, igg)",
     "human hepatitis b immunoglobulin",
     "human insulin (regular / nph)",
     "human normal immunoglobulin",
     "human premixed insulin (biphasic isophane insulin, e.g. 70/30 or 50/50)",
+    "human vaccinia immune globulin",
+    "human-bovine reassortant rotavirus strain g1 vaccine",
+    "human-bovine reassortant rotavirus strain g2 vaccine",
+    "human-bovine reassortant rotavirus strain g3 vaccine",
+    "human-bovine reassortant rotavirus strain g4 vaccine",
+    "human-bovine reassortant rotavirus strain p1a[8] vaccine",
+    "humicola grisea allergenic extract",
+    "humulus lupulus pollen extract",
     "hyaluronic acid",
     "hyaluronidase",
+    "hyaluronidase, bovine",
+    "hyaluronidase, human recombinant",
     "hydralazine",
     "hydrochloride (hcl salt form - not a specific drug)",
     "hydrochlorothiazide",
@@ -4159,45 +18349,72 @@
     "hydroquinone",
     "hydroxocobalamin",
     "hydroxychloroquine",
+    "hydroxycitronellal",
     "hydroxyethyl starch",
+    "hydroxyethyl starch 130-0.4",
     "hydroxyprogesterone (caproate)",
     "hydroxypropylmethylcellulose (hypromellose, hpmc)",
     "hydroxyquinolines (8-hydroxyquinoline derivatives - clioquinol, chlorquinaldol, diiodohydroxyquinoline/iodoquinol)",
+    "hydroxyurea",
     "hydroxyurea (hydroxycarbamide)",
     "hydroxyzine",
     "hyoscine butylbromide (scopolamine butylbromide)",
     "hyoscyamine",
+    "hypomyces perniciosus allergenic extract",
+    "ibalizumab",
     "ibandronate sodium",
+    "ibandronic acid",
+    "ibritumomab tiuxetan",
     "ibrutinib",
     "ibuprofen",
     "ibutilide",
     "ibutilide (ibutilide fumarate)",
+    "icatibant",
     "idarubicin",
+    "idarucizumab",
     "idebenone",
     "idelalisib",
+    "idoxuridine",
     "idoxuridine (idu)",
+    "idursulfase",
     "ifosfamide",
     "iguratimod",
     "ilaprazole",
     "iloperidone",
+    "iloprost",
     "imatinib",
     "imatinib mesylate",
+    "imetelstat",
     "imidapril",
+    "imidurea",
+    "imiglucerase",
     "imipenem (with cilastatin)",
+    "imipenem anhydrous",
     "imipramine",
     "imiquimod",
     "imlunestrant",
+    "immunoglobulin g, human",
     "inactivated influenza vaccine",
     "inactivated japanese encephalitis virus protein",
     "inamrinone (formerly amrinone)",
     "inavolisib",
     "indacaterol",
     "indapamide",
+    "indian wormwood sage pollen extract",
+    "indigotindisulfonic acid",
     "indinavir",
     "indinavir anhydrous",
+    "indium in-111 oxyquinoline",
+    "indium in-111 pentetreotide",
+    "indocyanine green",
     "indomethacin",
+    "inebilizumab",
     "infliximab",
+    "infliximab-dyyb",
+    "influenza a virus a/vietnam/1203/2004 (h5n1) antigen",
     "inositol nicotinate",
+    "inotersen",
+    "inotuzumab ozogamicin",
     "inotuzumab ozogamicin (inotuzumab ozogamacin)",
     "insulin (regular)",
     "insulin aspart",
@@ -4211,24 +18428,41 @@
     "insulin lispro",
     "insulin, regular, human",
     "interferon alfa-2b",
+    "interferon alfa-n3",
     "interferon alpha 2a",
     "interferon beta-1a",
+    "interferon beta-1b",
+    "interferon gamma-1b",
     "invert sugar",
+    "iodide ion i-123",
+    "iodide ion i-131",
+    "iodine bush pollen extract",
+    "iodixanol",
+    "ioflupane i-123",
     "iohexol",
+    "iomeprol",
     "iopamidol",
     "iopromide",
+    "iothalamic acid",
+    "iothalamic acid i-125",
+    "ioversol",
+    "ipilimumab",
     "ipratropium",
     "ipratropium bromide",
     "ipratropium cation",
+    "iptacopan",
     "irbesartan",
     "irinotecan",
+    "iris germanica var. florentina root extract",
     "iron hydroxide polymaltose complex (iron(iii)-hydroxide polymaltose, ipc)",
     "iron isomaltoside 1000 (ferric derisomaltose)",
     "iron sucrose",
+    "isatuximab",
     "isavuconazole",
     "isavuconazole (as isavuconazonium sulfate)",
     "isoamyl 2-cyanoacrylate (tissue adhesive)",
     "isocarboxazid",
+    "isoeugenol",
     "isoflurane",
     "isoniazid",
     "isoprenaline (isoproterenol)",
@@ -4241,6 +18475,7 @@
     "isoxsuprine",
     "ispaghula husk (psyllium / ispaghula)",
     "isradipine",
+    "italian rye grass pollen extract",
     "itolizumab",
     "itopride",
     "itraconazole",
@@ -4249,8 +18484,21 @@
     "ivermectin",
     "ivosidenib",
     "ixabepilone",
+    "ixazomib",
+    "ixekizumab",
+    "jack pine pollen extract",
+    "japanese black pine pollen extract",
+    "japanese encephalitis virus vaccine nakayama-nih strain, inactivated",
+    "jerusalem oak pollen extract",
+    "johnson grass pollen extract",
+    "johnson grass smut allergenic extract",
+    "juniperus communis fruit extract",
+    "jute fiber allergenic extract",
     "kalmegh dry extract (andrographis paniculata, standardised to andrographolide)",
     "kanamycin",
+    "kapok tree fiber allergenic extract",
+    "karaya gum extract",
+    "kentucky bluegrass pollen extract",
     "ketamine",
     "ketoconazole",
     "ketoconazole (oral)",
@@ -4258,6 +18506,9 @@
     "ketorolac",
     "ketorolac tromethamine",
     "ketotifen",
+    "khuskia oryzae allergenic extract",
+    "kidney bean allergenic extract",
+    "koelers grass pollen extract",
     "l-alanyl-l-glutamine (alanylglutamine dipeptide)",
     "l-arginine",
     "l-glutamate (l-glutamic acid)",
@@ -4265,6 +18516,10 @@
     "l-methylfolate (l-5-methyltetrahydrofolate)",
     "l-methylfolate calcium",
     "l-ornithine l-aspartate",
+    "l1 protein, human papillomavirus type 11 vaccine",
+    "l1 protein, human papillomavirus type 16 vaccine",
+    "l1 protein, human papillomavirus type 18 vaccine",
+    "l1 protein, human papillomavirus type 6 vaccine",
     "labetalol",
     "lacidipine",
     "lacosamide",
@@ -4274,42 +18529,70 @@
     "lactobacillus sporogenes (bacillus coagulans)",
     "lactulose",
     "lafutidine",
+    "lamb allergenic extract",
+    "lambs quarters pollen extract",
     "lamivudine",
     "lamotrigine",
+    "lanadelumab",
     "landiolol",
+    "lanolin alcohols",
+    "lanreotide",
     "lansoprazole",
     "lanthanum carbonate",
+    "lanthanum cation (3+)",
     "lapatinib",
+    "largemouth bass allergenic extract",
+    "laronidase",
     "larotrectinib",
     "latanoprost",
+    "latrodectus mactans antivenin",
+    "lawsonia inermis leaf extract",
     "lazertinib",
+    "lebrikizumab",
+    "lecanemab",
+    "lecanemab-irmb",
     "lecithin",
     "ledipasvir",
+    "leek allergenic extract",
     "lefamulin",
     "leflunomide",
     "lemborexant",
+    "lemon allergenic extract",
+    "lemon extract",
     "lenacapavir",
     "lenalidomide",
     "leniolisib",
     "lenograstim (rhug-csf)",
+    "lens scale pollen extract",
+    "lentil allergenic extract",
+    "lentil seed extract",
     "lenvatinib",
     "lercanidipine",
     "letermovir",
+    "letibotulinumtoxina",
     "letrozole",
+    "lettuce allergenic extract",
+    "leucanthemum vulgare pollen",
+    "leucovorin",
+    "leuprolide",
     "leuprolide acetate",
     "levacetylleucine",
     "levalbuterol",
     "levamisole",
     "levetiracetam",
     "levobunolol",
+    "levocarnitine",
     "levocarnitine (l-carnitine)",
     "levocetirizine",
     "levocetirizine (levocetirizine dihydrochloride)",
     "levocloperastine (levocloperastine fendizoate/hydrochloride)",
+    "levodopa",
     "levodopa (usually combined with carbidopa)",
     "levodropropizine",
     "levofloxacin",
     "levoketoconazole",
+    "levoleucovorin",
+    "levomefolic acid",
     "levomepromazine maleate",
     "levomilnacipran",
     "levonadifloxacin",
@@ -4319,29 +18602,54 @@
     "levosalbutamol",
     "levosimendan",
     "levosulpiride",
+    "levothyroxine",
     "levothyroxine (thyroxine, t4)",
+    "lichtheimia corymbifera allergenic extract",
+    "licorice root extract",
     "lidocaine",
+    "lifitegrast",
+    "lima bean allergenic extract",
+    "lime (citrus) extract",
+    "lime allergenic extract",
+    "linaclotide",
     "linagliptin",
     "lincomycin",
     "lindane",
+    "linden pollen extract",
+    "linerixibat",
     "linezolid",
+    "linvoseltamab",
+    "liothyronine",
     "liposomal amphotericin b (amphotericin b, liposomal - ambisome)",
     "liposomal dithranol",
     "liquid paraffin (mineral oil)",
     "liraglutide",
+    "lisdexamfetamine",
     "lisinopril",
     "lisinopril anhydrous",
     "lithium",
     "lithium carbonate",
+    "lithium cation",
+    "littleseed canary grass pollen extract",
     "live attenuated varicella-zoster virus vaccine (oka/merck strain)",
     "live freeze dried lactic acid bacteria and bifidobacteria",
+    "live oak pollen extract",
     "lixisenatide",
     "lobeglitazone sulfate",
+    "loblolly pine pollen extract",
+    "lobster allergenic extract",
+    "lodgepole pine pollen extract",
+    "lombardy poplar pollen extract",
     "lomefloxacin",
     "lomitapide",
     "lomitapide mesylate",
     "lomustine",
     "lonafarnib",
+    "lonapegsomatropin",
+    "london planetree",
+    "longleaf pine pollen extract",
+    "loose barley smut allergenic extract",
+    "loose wheat smut allergenic extract",
     "loperamide",
     "lopinavir",
     "loratadine",
@@ -4353,6 +18661,7 @@
     "losartan potassium",
     "loteprednol",
     "loteprednol etabonate",
+    "lotilaner",
     "lovastatin",
     "low dextrans (dextran 40, low-molecular-weight dextran)",
     "loxapine",
@@ -4360,43 +18669,67 @@
     "luliconazole",
     "lumacaftor",
     "lumateperone",
+    "lumefantrine",
     "lurasidone",
     "lurasidone hydrochloride",
+    "lurbinectedin",
+    "luspatercept",
+    "lutetium lu 177 vipivotide tetraxetan",
+    "lutropin alfa",
     "lycopene",
     "lymecycline",
+    "lymphocyte immune globulin, anti-thymocyte globulin, equine",
     "lynestrenol",
     "lysine (l-lysine)",
+    "macimorelin",
     "macitentan",
+    "mafenide",
     "magaldrate",
     "magnesium (mineral supplement - e.g., magnesium oxide, citrate, sulfate)",
     "magnesium bisglycinate",
+    "magnesium cation",
     "magnesium hydroxide (milk of magnesia)",
     "magnesium sulphate",
     "magnesium valproate",
+    "malathion",
+    "manganese cation (2+)",
+    "mango allergenic extract",
+    "mango extract",
     "manidipine",
     "manidipine hydrochloride",
     "mannitol",
+    "maralixibat",
     "maraviroc",
     "margetuximab",
     "maribavir",
+    "mavacamten",
     "mavorixafor",
+    "meadow fescue grass pollen extract",
+    "meadow foxtail pollen extract",
     "measles vaccine (live, attenuated)",
+    "measles virus vaccine live, enders' attenuated edmonston strain",
     "mebendazole",
     "mebeverine",
+    "mecamylamine",
     "mecetronium",
+    "mechlorethamine",
     "meclizine",
+    "medroxyprogesterone",
     "medroxyprogesterone acetate",
     "medrysone",
     "mefenamic acid",
+    "mefloquine",
     "mefloquine (mefloquine hydrochloride)",
     "megestrol",
     "melatonin",
     "melitracen",
     "meloxicam",
+    "melphalan",
     "melphalan (melphalan hydrochloride)",
     "memantine",
     "menadione",
     "menadione sodium bisulfite (vitamin k3 derivative)",
+    "meningococcal group a polysaccharide",
     "menotrophin (human menopausal gonadotrophin, hmg)",
     "mepacrine (quinacrine)",
     "meperidine",
@@ -4404,11 +18737,16 @@
     "mephenesin",
     "mephentermine",
     "mephobarbital",
+    "mepivacaine",
     "mepolizumab",
     "mercaptopurine (6-mp)",
+    "mercaptopurine anhydrous",
     "meropenem",
+    "meropenem anhydrous",
+    "mesalamine",
     "mesalazine (mesalamine, 5-asa)",
     "mesna",
+    "mesquite pollen extract",
     "messenger ribonucleic acid (mrna therapeutics)",
     "mesterolone",
     "metadoxine",
@@ -4416,7 +18754,9 @@
     "metaxalone",
     "metformin",
     "metformin hydrochloride",
+    "methacholine",
     "methadone",
+    "methamphetamine",
     "methdilazine",
     "methimazole",
     "methocarbamol",
@@ -4427,29 +18767,46 @@
     "methoxsalen",
     "methoxy polyethylene glycol-epoetin beta",
     "methscopolamine",
+    "methsuximide",
+    "methyl 5-aminolevulinate",
     "methylcobalamin",
+    "methyldibromo glutaronitrile",
     "methyldopa",
     "methyldopa anhydrous",
     "methylene blue (methylthioninium chloride)",
+    "methylene blue cation",
     "methylergometrine (methylergonovine maleate)",
+    "methylergonovine",
+    "methylnaltrexone",
+    "methylparaben",
     "methylphenidate",
     "methylpolysiloxane (dimeticone / simeticone)",
     "methylprednisolone",
+    "methyltestosterone",
     "metoclopramide",
     "metolazone",
     "metoprolol",
     "metoprolol succinate (extended-release)",
     "metoprolol tartrate (immediate-release)",
+    "metreleptin",
     "metronidazole",
+    "metyrapone",
+    "metyrosine",
+    "mexican tea pollen extract",
     "mexiletine",
     "mianserin",
+    "micafungin",
     "micafungin (micafungin sodium)",
     "miconazole",
+    "microascus brevicaulis allergenic extract",
+    "microsporum audouinii allergenic extract",
+    "microsporum canis allergenic extract",
     "midazolam",
     "midodrine",
     "midostaurin",
     "mifepristone",
     "miglitol",
+    "miglustat",
     "milnacipran",
     "milnacipran (milnacipran hydrochloride)",
     "milrinone",
@@ -4457,7 +18814,9 @@
     "minocycline",
     "minodronic acid (minodronic acid hydrate)",
     "minoxidil",
+    "mipomersen",
     "mirabegron",
+    "mirikizumab",
     "mirtazapine",
     "misoprostol",
     "mitapivat",
@@ -4468,10 +18827,13 @@
     "moclobemide",
     "modafinil",
     "moexiprilat",
+    "mogamulizumab",
     "molgramostim (recombinant human gm-csf, rhugm-csf)",
+    "molindone",
     "molnupiravir",
     "mometasone",
     "mometasone furoate (topical)",
+    "mongolian gerbil skin allergenic extract",
     "monobenzone",
     "montelukast",
     "morphine",
@@ -4480,47 +18842,91 @@
     "morphine sulfate",
     "morphine tartrate",
     "mosapride",
+    "mosquito allergenic extract",
+    "mountain cedar pollen extract",
     "moxifloxacin",
     "moxonidine",
     "mucopolysaccharide polysulfate",
+    "mucor circinelloides f. circinelloides allergenic extract",
+    "mucor circinelloides f. lusitanicus allergenic extract",
+    "mucor plumbeus allergenic extract",
+    "mucor racemosus allergenic extract",
+    "mugwort sage pollen extract",
+    "mulberry pollen extract",
+    "mumps virus vaccine live, jeryl lynn strain",
+    "mung bean allergenic extract",
     "mupirocin",
+    "mustard greens allergenic extract",
+    "mustard pollen extract",
+    "mustard seed allergenic extract",
     "mycophenolate mofetil",
     "mycophenolate sodium",
+    "mycophenolic acid",
+    "n,n'-diphenyl-4-phenylenediamine",
     "n-butyl-2-cyanoacrylate",
+    "n-cyclohexyl-2-benzothiazosulfenamide",
+    "n-cyclohexyl-n'-phenyl-1,4-phenylenediamine",
+    "n-isopropyl-n-phenyl-4-phenylenediamine",
+    "n-oxydiethylene-2-benzothiazole sulfenamide",
+    "nabilone",
     "nabumetone",
     "nadifloxacin",
     "nadolol",
     "nadroparin calcium",
+    "nafarelin",
+    "nafcillin",
+    "naftifine",
     "naftopidil",
     "nalbuphine",
     "naldemedine",
     "naldemedine tosylate",
     "nalidixic acid",
+    "nalmefene",
+    "naloxegol",
     "naloxone",
     "naltrexone",
+    "nandrolone",
     "nandrolone decanoate",
     "naphazoline",
     "naproxen",
     "naratriptan",
+    "narrowleaf marshelder pollen extract",
     "nartograstim",
     "natalizumab",
     "natamycin",
     "nateglinide",
+    "naxitamab",
     "nebivolol",
     "nefazodone",
     "nefopam",
+    "neisseria meningitidis serogroup a capsular polysaccharide diphtheria toxoid protein conjugate vaccine",
+    "neisseria meningitidis serogroup a oligosaccharide diphtheria crm197 protein conjugate vaccine",
+    "neisseria meningitidis serogroup c capsular polysaccharide diphtheria toxoid protein conjugate vaccine",
+    "neisseria meningitidis serogroup c oligosaccharide diphtheria crm197 protein conjugate vaccine",
+    "neisseria meningitidis serogroup w-135 capsular polysaccharide diphtheria toxoid protein conjugate vaccine",
+    "neisseria meningitidis serogroup w-135 oligosaccharide diphtheria crm197 protein conjugate vaccine",
+    "neisseria meningitidis serogroup y capsular polysaccharide diphtheria toxoid protein conjugate vaccine",
+    "neisseria meningitidis serogroup y oligosaccharide diphtheria crm197 protein conjugate vaccine",
+    "nelarabine",
     "nelfinavir",
+    "nemolizumab",
     "neomycin",
+    "neostigmine",
     "neostigmine methylsulfate",
     "nepafenac",
     "neratinib",
     "netarsudil",
     "netilmicin sulfate",
+    "nettle pollen extract",
     "netupitant",
+    "neurospora intermedia allergenic extract",
+    "neurospora sitophila allergenic extract",
     "nevirapine",
+    "niacin",
     "niacinamide (nicotinamide, vitamin b3 amide)",
     "nicardipine",
     "nicergoline",
+    "nickel",
     "niclosamide",
     "nicorandil",
     "nicotinamide",
@@ -4530,37 +18936,64 @@
     "nilotinib",
     "nilotinib d-tartrate",
     "nilotinib tartrate",
+    "nilutamide",
     "nimesulide",
     "nimodipine",
     "nimorazole",
     "nimotuzumab",
     "nintedanib",
+    "niraparib",
+    "nirogacestat",
+    "nirsevimab",
     "nisoldipine",
     "nitazoxanide",
+    "nitisinone",
     "nitrazepam",
     "nitrendipine",
     "nitric oxide",
     "nitrofurantoin",
+    "nitrofurantoin, macrocrystals",
     "nitrofurazone",
     "nitroglycerin",
     "nitroglycerin (gtn)",
+    "nitroprusside",
     "nivolumab",
     "nizatidine",
+    "nogapendekin alfa inbakicept-pmln",
+    "nonacog alfa",
     "noradrenaline",
     "noradrenaline (norepinephrine)",
+    "norelgestromin",
     "norepinephrine",
     "norepinephrine (norepinephrine bitartrate)",
+    "norethindrone",
     "norethisterone (norethindrone)",
     "norethisterone enanthate",
     "norfloxacin",
+    "norgestimate",
+    "northern pike allergenic extract",
+    "northern quahog preparation",
     "nortriptyline",
     "noscapine",
+    "nusinersen",
+    "nutmeg allergenic extract",
+    "nutmeg extract",
     "nystatin",
+    "oat allergenic extract",
+    "oat smut allergenic extract",
+    "oats preparation",
     "obeticholic acid",
+    "obiltoxaximab",
+    "obinutuzumab",
+    "ocrelizumab",
     "octenidine",
+    "octreotide",
     "octreotide acetate",
+    "odevixibat",
     "ofatumumab",
     "ofloxacin",
+    "okra allergenic extract",
+    "okra extract",
     "olanzapine",
     "olaparib",
     "olive oil",
@@ -4568,31 +19001,53 @@
     "olmesartan medoxomil",
     "olodaterol",
     "olopatadine",
+    "olsalazine",
+    "omadacycline",
     "omalizumab",
     "omaveloxolone",
+    "omega-3 fatty acids",
     "omega-3 fatty acids (epa/dha)",
     "omeprazole",
+    "omidenepag",
     "onabotulinumtoxina",
     "ondansetron",
+    "oneseed juniper pollen extract",
+    "onion allergenic extract",
+    "onion extract",
+    "opicapone",
     "opipramol",
+    "orange allergenic extract",
+    "orange pekoe tea allergenic extract",
+    "orange pollen extract",
+    "orchard grass pollen extract",
     "orciprenaline (metaproterenol)",
+    "oregano allergenic extract",
+    "oregon ash pollen extract",
     "oritavancin",
     "oritavancin diphosphate",
     "orlistat",
     "ormeloxifene (centchroman)",
     "ornidazole",
+    "orphenadrine",
+    "orris root allergenic extract",
+    "osage orange pollen extract",
+    "oseltamivir",
+    "oseltamivir carboxylate",
     "oseltamivir phosphate",
     "osilodrostat",
     "osimertinib",
     "osimertinib mesylate",
+    "ospemifene",
     "oteseconazole",
     "otilonium bromide",
     "oxaceprol",
+    "oxacillin",
     "oxaliplatin",
     "oxaprozin",
     "oxazepam",
     "oxcarbazepine",
     "oxiconazole",
+    "oxybate",
     "oxybutynin",
     "oxycodone",
     "oxycodone hydrochloride",
@@ -4604,87 +19059,163 @@
     "oxyphenbutazone",
     "oxyphenonium bromide",
     "oxytetracycline",
+    "oxytetracycline anhydrous",
     "oxytocics and prostaglandin e1/e2 and products for cervical dilatation",
     "oxytocin",
+    "oyster allergenic extract",
+    "oyster, unspecified preparation",
     "ozagrel",
+    "ozanimod",
     "ozenoxacin",
     "p-hydroxyamphetamine",
+    "p-tert-butylphenol-formaldehyde resin (low molecular weight)",
+    "pacific halibut allergenic extract",
     "paclitaxel",
     "pacritinib",
+    "paecilomyces variotii allergenic extract",
+    "pafolacianine",
     "palbociclib",
+    "pale dock pollen extract",
     "pale sulfonated shale oil (pale ichthammol / 'ichthyol pale')",
+    "palifermin",
     "paliperidone",
     "paliperidone (paliperidone extended-release)",
+    "palivizumab",
+    "palo verde pollen extract",
     "palonosetron",
+    "palovarotene",
     "pamidronate disodium",
+    "pamidronic acid",
     "pancrelipase (pancreatin)",
     "pancuronium",
     "panitumumab",
     "panobinostat",
     "pantoprazole",
     "papaverine",
+    "papaya allergenic extract",
+    "papaya extract",
+    "paper birch pollen extract",
+    "paprika allergenic extract",
+    "para grass pollen extract",
     "paracetamol",
+    "parakeet feather allergenic extract",
+    "parathyroid hormone",
     "parecoxib (parecoxib sodium)",
     "paregoric",
+    "paricalcitol",
     "paritaprevir",
     "paritaprevir dihydrate",
     "parnaparin",
+    "paromomycin",
     "paroxetine",
+    "parsley allergenic extract",
+    "parsnip allergenic extract",
+    "parthenolide",
+    "pasireotide",
+    "passalora fulva allergenic extract",
+    "patiromer",
+    "patisiran",
     "pazopanib",
     "pazopanib (pazopanib hydrochloride)",
     "pazufloxacin (pazufloxazin)",
+    "peach allergenic extract",
+    "peanut allergenic extract",
+    "pear preparation",
+    "pecan pollen extract",
     "pefloxacin",
     "pegaptanib sodium",
     "pegaspargase",
+    "pegcetacoplan",
     "pegfilgrastim",
     "peginterferon alfa-2a",
     "peginterferon alfa-2b",
+    "peginterferon beta-1a",
+    "pegloticase",
+    "pegunigalsidase alfa",
+    "pegvaliase",
+    "pegvisomant",
     "pembrolizumab",
     "pemetrexed",
     "pemigatinib",
+    "penciclovir",
     "penfluridol",
     "penicillamine",
     "penicillin (natural penicillins: benzylpenicillin/penicillin g and phenoxymethylpenicillin/penicillin v)",
+    "penicillin g",
     "penicillin g benzathine",
+    "penicillin v",
     "penicillin v (phenoxymethylpenicillin)",
+    "penicillium camemberti allergenic extract",
+    "penicillium chrysogenum var. chrysogenum allergenic extract",
+    "penicillium digitatum allergenic extract",
+    "penicillium expansum allergenic extract",
+    "penicillium glaucum allergenic extract",
+    "penicillium italicum allergenic extract",
+    "penicillium roquefortii allergenic extract",
     "pentamidine",
     "pentazocine",
+    "pentetic acid",
+    "pentosan polysulfate",
     "pentosan polysulfate sodium",
+    "pentostatin",
     "pentoxifylline",
+    "peppermint flowering top extract",
+    "peppermint preparation",
     "perampanel",
+    "perch allergenic extract",
+    "perennial rye grass pollen extract",
+    "perfluorohexyloctane",
+    "perflutren",
+    "pergolide",
     "perindopril",
     "perindopril erbumine",
     "perindoprilat",
+    "periplaneta australasiae extract",
     "permethrin",
     "perphenazine",
     "pertuzumab",
+    "peruvian balsam",
+    "peruvian pepper tree pollen extract",
     "pethidine (meperidine)",
     "pexidartinib",
+    "phanerodontia chrysosporium allergenic extract",
+    "pheasant feather extract",
     "phenazopyridine",
+    "phendimetrazine",
     "phenelzine",
     "phenindione",
     "pheniramine (pheniramine maleate)",
     "phenobarbitone (phenobarbital)",
     "phenolphthalein",
     "phenoxybenzamine",
+    "phentermine",
     "phentolamine",
+    "phenylacetic acid",
     "phenylalanine",
     "phenylephrine",
     "phenylephrine hydrochloride",
     "phenyramidol",
     "phenytoin",
+    "phoma destructiva allergenic extract",
+    "phoma exigua var. exigua allergenic extract",
     "phytomenadione (phytonadione, vitamin k1)",
     "pibrentasvir",
     "pidotimod",
+    "piflufolastat f-18",
+    "pignut hickory pollen extract",
     "pilocarpine",
     "pimavanserin",
     "pimecrolimus",
     "pimozide",
+    "pin oak pollen extract",
     "pinaverium bromide",
     "pindolol",
+    "pineapple extract",
+    "pinus cembroides pollen extract",
     "pioglitazone",
     "pipecuronium bromide",
     "piperacillin",
+    "piperacillin anhydrous",
     "piperaquine",
     "piperazine",
     "piracetam",
@@ -4692,18 +19223,32 @@
     "piribedil",
     "piroxicam",
     "pirtobrutinib",
+    "pistachio nut allergenic extract",
+    "pisum sativum (pea) extract",
     "pitavastatin",
+    "pitch pine pollen extract",
     "pitolisant",
     "pizotifen",
     "placenta extracts",
+    "plains cottonwood pollen extract",
+    "plecanatide",
+    "pleospora betae allergenic extract",
+    "pleospora herbarum allergenic extract",
+    "pleospora tarda allergenic extract",
     "plerixafor",
+    "plozasiran",
+    "plum allergenic extract",
     "pneumococcal 13-valent conjugate vaccine (pcv13)",
     "pneumococcal polysaccharide conjugate vaccine (pcv)",
     "pneumococcal polysaccharide vaccine (ppsv23)",
     "policosanol",
     "polidocanol",
     "polio vaccine",
+    "poliovirus vaccine inactivated, type 1 (mahoney)",
+    "poliovirus vaccine inactivated, type 2 (mef-1)",
+    "poliovirus vaccine inactivated, type 3 (saukett)",
     "polycarbophil (calcium polycarbophil)",
+    "polyethylene glycol 3350",
     "polyethylene glycol 3350 (peg 3350)",
     "polymyxin b",
     "polymyxin b sulfate",
@@ -4712,17 +19257,31 @@
     "polyvinyl alcohol",
     "pomalidomide",
     "ponatinib",
+    "ponesimod",
+    "poppy seed allergenic extract",
     "poractant alfa",
+    "pork allergenic extract",
     "posaconazole",
+    "post oak pollen extract",
     "potassium",
     "potassium chloride",
     "potassium citrate",
+    "potassium ion",
     "potassium magnesium citrate",
     "potassium nitrate",
+    "potato allergenic extract",
+    "poverty weed pollen extract",
+    "povidone-iodine",
     "povidone-iodine (topical)",
+    "pozelimab",
+    "prairie sagebrush pollen extract",
+    "pralatrexate",
+    "pralidoxime",
     "pralidoxime chloride (2-pam)",
     "pralsetinib",
+    "pramipexole",
     "pramipexole (as dihydrochloride)",
+    "pramlintide",
     "pramoxine (pramocaine)",
     "prasugrel",
     "pravastatin",
@@ -4733,8 +19292,11 @@
     "prednisone",
     "pregabalin",
     "prenoxdiazine (prenoxdiazine hydrochloride)",
+    "pretomanid",
+    "prilocaine",
     "primaquine",
     "primidone",
+    "privet pollen extract",
     "proanthocyanidin",
     "probenecid",
     "procainamide",
@@ -4747,6 +19309,7 @@
     "promethazine",
     "propafenone",
     "propafenone (propafenone hydrochloride)",
+    "proparacaine",
     "proparacaine (proxymetacaine) hydrochloride",
     "propofol",
     "propoxyphene",
@@ -4755,35 +19318,63 @@
     "propranolol",
     "propranolol hydrochloride",
     "propyl paraben (propylparaben, propyl 4-hydroxybenzoate)",
+    "propylparaben",
+    "propylthiouracil",
     "propylthiouracil (ptu)",
     "protamine sulfate",
+    "protamines",
     "protein c, human",
     "prothionamide (protionamide)",
+    "prothrombin, human",
     "protriptyline",
     "prucalopride",
     "prulifloxacin",
+    "prussian blue insoluble",
     "pseudoephedrine",
     "pseudoephedrine (pseudoephedrine hydrochloride / sulfate)",
     "psoralen (methoxsalen)",
+    "puccinia graminis allergenic extract",
+    "puccinia striiformis allergenic extract",
+    "pumpkin allergenic extract",
+    "purified protein derivative of tuberculin",
     "purified vi polysaccharide typhoid vaccine",
+    "pussy willow pollen extract",
     "pyrantel pamoate",
     "pyrazinamide",
+    "pyrethrum cinerariifolium allergenic extract",
+    "pyridostigmine",
     "pyridostigmine bromide",
+    "pyridoxine",
     "pyrimethamine",
     "pyritinol (pyrithioxine)",
+    "quackgrass pollen extract",
+    "quaternium-15",
     "quazepam",
+    "queen palm pollen extract",
+    "quercus marilandica pollen extract",
     "quetiapine",
     "quinapril",
     "quinaprilat",
+    "quince extract",
     "quinidine",
+    "quinine",
     "quinine sulfate",
     "quiniodochlor (clioquinol)",
     "quizartinib",
+    "rabbit allergenic extract",
+    "rabbit anti-human t-lymphocyte globulin",
+    "rabbit bush pollen extract",
     "rabeprazole",
     "rabies human monoclonal antibody",
     "rabies immune globulin (human)",
+    "rabies virus vaccine flury-lep strain",
+    "rabies virus vaccine wistar strain pm-1503-3m (human), inactivated",
     "racecadotril",
+    "radish allergenic extract",
+    "radish extract",
+    "radium ra-223 cation",
     "raloxifene",
+    "raltegravir",
     "raltegravir (raltegravir potassium)",
     "ramelteon",
     "ramipril",
@@ -4795,6 +19386,12 @@
     "ranolazine",
     "rasagiline",
     "rasburicase",
+    "raspberry allergenic extract",
+    "raspberry extract",
+    "rat skin extract",
+    "rattus norvegicus hair preparation",
+    "ravulizumab",
+    "raxibacumab",
     "rebamipide",
     "reboxetine (reboxetine mesilate)",
     "recombinant follicle stimulating hormone (follitropin alfa / beta)",
@@ -4803,7 +19400,24 @@
     "recombinant human erythropoietin beta (epoetin beta)",
     "recombinant human luteinizing hormone (lutropin alfa)",
     "recombinant human parathyroid hormone (teriparatide / pth 1-34)",
+    "red alder pollen extract",
+    "red bell pepper allergenic extract",
+    "red cedar pollen extract",
+    "red currant allergenic extract",
+    "red imported fire ant allergenic extract",
+    "red maple pollen extract",
+    "red mulberry pollen extract",
+    "red oak pollen extract",
+    "red pepper extract",
+    "red pine pollen extract",
+    "red snapper allergenic extract",
+    "redberry juniper pollen extract",
+    "redroot pigweed pollen extract",
+    "redwood pollen extract",
+    "regadenoson anhydrous",
     "regorafenib",
+    "relatlimab",
+    "relebactam anhydrous",
     "relugolix",
     "remdesivir",
     "remibrutinib",
@@ -4812,76 +19426,142 @@
     "remogliflozin etabonate",
     "repaglinide",
     "repotrectinib",
+    "reserpine",
+    "reslizumab",
+    "resmetirom",
     "resveratrol",
     "retapamulin",
     "reteplase (recombinant, r-pa)",
+    "retifanlimab",
     "revaprazan",
     "revefenacin",
     "reviparin (reviparin sodium)",
+    "rezafungin",
+    "rhizopus arrhizus allergenic extract",
+    "rhizopus stolonifer allergenic extract",
     "rho(d) immune globulin (anti-d immunoglobulin)",
+    "rho(d) immune globulin, human",
+    "rhodotorula mucilaginosa allergenic extract",
+    "rhodotorula rubra allergenic extract",
+    "rhubarb preparation",
+    "ribavirin",
     "ribavirin (oral)",
     "ribociclib",
+    "riboflavin 5'-phosphate",
     "rifabutin",
     "rifampicin (rifampin)",
+    "rifampin",
+    "rifapentine",
     "rifaximin",
+    "rilpivirine",
     "riluzole",
     "rilzabrutinib",
+    "rimabotulinumtoxinb",
+    "rimantadine",
+    "rimegepant",
     "rimonabant",
     "ringer's lactate (lactated ringer's / compound sodium lactate / hartmann's solution)",
     "riociguat",
     "ripasudil",
     "ripretinib",
+    "risankizumab",
+    "risdiplam",
     "risedronate sodium",
+    "risedronic acid",
     "risperidone",
     "ritodrine",
     "ritonavir",
     "rituximab",
     "rivaroxaban",
     "rivastigmine",
+    "river birch pollen extract",
     "rizatriptan",
+    "rocky mountain juniper pollen extract",
+    "rocuronium",
     "rocuronium bromide",
     "rofecoxib",
     "roflumilast",
     "rolapitant",
+    "romidepsin",
     "romiplostim",
+    "ropeginterferon alfa-2b",
     "ropinirole",
     "ropivacaine",
+    "rosiglitazone",
     "rosiglitazone (rosiglitazone maleate)",
+    "rosin",
     "rosuvastatin",
+    "rotavirus vaccine, live attenuated, g1p[8] human 89-12 strain",
+    "rotigotine",
+    "rough marshelder pollen extract",
     "roxatidine (roxatidine acetate)",
     "roxithromycin",
+    "rozanolixizumab",
     "rubella virus vaccine live (ra 27/3 strain)",
+    "rubella virus vaccine live (wistar ra 27-3 strain)",
     "rucaparib",
     "rupatadine (rupatadine fumarate)",
+    "russian olive pollen extract",
+    "russian thistle pollen extract",
     "ruxolitinib",
+    "rye allergenic extract",
     "s-adenosyl l-methionine disulfate tosylate (ademetionine, same)",
     "s-amlodipine (levamlodipine)",
     "s-etodolac (dexetodolac)",
     "s-metoprolol succinate (s-metoprolol, dextrorotatory-resolved beta-blocker)",
     "saccharomyces boulardii",
+    "saccharomyces cerevisiae",
+    "saccharomyces cerevisiae allergenic extract",
+    "sacrosidase",
+    "sacubitrilat",
     "safinamide",
     "safinamide (safinamide mesylate)",
     "safinamide mesylate",
+    "sage extract",
+    "sage leaf allergenic extract",
     "salbutamol (albuterol sulfate)",
     "salicylic acid",
     "saline (sodium chloride solutions)",
+    "salix lutea pollen extract",
+    "salix repens pollen extract",
     "salmeterol",
+    "salmon calcitonin",
+    "salmon preparation",
+    "salmonella typhi ty21a live antigen",
     "salmonella typhi vaccine (typhoid vaccine)",
+    "salsola tragus pollen extract",
+    "salt cedar pollen extract",
+    "salt grass pollen extract",
+    "saltbush pollen extract",
+    "samidorphan",
+    "sandbur ragweed pollen extract",
     "sapropterin",
+    "saquinavir",
     "saquinavir (saquinavir mesylate)",
+    "sardine allergenic extract",
     "sarecycline",
     "sarecycline hydrochloride",
+    "sargramostim",
     "sargramostim (rhu gm-csf)",
+    "sarilumab",
     "saroglitazar (saroglitazar magnesium)",
     "satranidazole",
     "saxagliptin",
     "saxagliptin anhydrous",
+    "scallop allergenic extract",
     "scopolamine",
+    "scotch pine pollen extract",
+    "scrub pine pollen extract",
+    "sea scallop preparation",
+    "sebelipase alfa",
     "secnidazole",
+    "secretin",
     "secukinumab",
+    "segesterone",
     "selegiline",
     "selenium sulphide",
     "selexipag",
+    "selinexor",
     "selpercatinib",
     "selumetinib",
     "semaglutide",
@@ -4889,28 +19569,51 @@
     "serratiopeptidase",
     "sertaconazole",
     "sertraline",
+    "sesame seed allergenic extract",
+    "sesame seed extract",
+    "setmelanotide",
     "sevelamer",
     "sevoflurane",
+    "shad scale pollen extract",
+    "shagbark hickory pollen extract",
+    "sheep sorrel pollen extract",
+    "short ragweed pollen extract",
+    "shortleaf pine pollen extract",
+    "shrimp allergenic extract",
+    "siberian elm pollen extract",
     "sildenafil",
     "sildenafil citrate",
+    "silk allergenic extract",
     "silodosin",
+    "siltuximab",
+    "silver birch pollen allergenic extract",
     "silver colloid (colloidal silver)",
+    "silver maple pollen extract",
     "silver nanoparticles (nanosilver, colloidal nanosilver)",
     "silver nitrate",
+    "silver ragweed pollen extract",
     "silver sulfadiazine",
     "silymarin",
     "simeprevir",
     "simeprevir sodium",
     "simethicone",
     "simvastatin",
+    "sincalide",
+    "siponimod",
+    "sipuleucel-t",
     "sirolimus",
     "sirolimus (rapamycin)",
+    "sisal fiber allergenic extract",
     "sisomicin",
     "sitagliptin",
+    "slash pine pollen extract",
+    "slender ragweed pollen extract",
+    "smooth brome pollen extract",
     "snake venom antiserum (polyvalent anti-snake venom, asv)",
     "sodium acid phosphate (sodium phosphate monobasic; sodium dihydrogen phosphate)",
     "sodium aminosalicylate (sodium para-aminosalicylate, pas)",
     "sodium bicarbonate",
+    "sodium cation",
     "sodium chloride",
     "sodium citrate",
     "sodium cromoglycate",
@@ -4925,41 +19628,115 @@
     "sodium valproate (valproate sodium)",
     "sofalcone",
     "sofosbuvir",
+    "solidago virgaurea pollen extract",
     "solifenacin",
     "solifenacin succinate",
+    "solriamfetol",
     "somatostatin (somatostatin-14, acetate)",
     "somatropin",
+    "sonidegib",
     "sorafenib",
     "sorbitol",
     "sorbitol solution",
+    "sorghum bicolor pollen extract",
     "sotagliflozin",
     "sotalol",
+    "sotatercept",
+    "sour cherry allergenic extract",
+    "southern bayberry pollen extract",
+    "southern ragweed pollen extract",
+    "southern yellow jacket venom protein",
+    "soybean allergenic extract",
+    "soybean oil",
+    "soybean preparation",
     "sparfloxacin",
     "sparsentan",
+    "spearmint allergenic extract",
+    "spearmint extract",
+    "spesolimab",
+    "spinach allergenic extract",
+    "spinosad",
+    "spiny pigweed pollen extract",
     "spiramycin",
     "spironolactone",
+    "squash allergenic extract",
+    "stachybotrys chartarum allergenic extract",
     "stannous fluoride",
     "stanozolol",
+    "stavudine",
     "stavudine (d4t)",
+    "stemphylium sarciniforme allergenic extract",
+    "stemphylium solani allergenic extract",
     "sterile water for injection",
+    "strawberry allergenic extract",
+    "streptococcus pneumoniae serotype 1 capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 14 capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 18c capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 19a capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 19f capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 23f capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 3 capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 4 capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 5 capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 6a capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 6b capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 7f capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae serotype 9v capsular antigen diphtheria crm197 protein conjugate vaccine",
+    "streptococcus pneumoniae type 1 capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 10a capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 11a capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 12f capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 14 capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 15b capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 17f capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 18c capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 19a capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 19f capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 2 capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 20 capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 22f capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 23f capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 3 capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 33f capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 4 capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 5 capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 6b capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 7f capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 8 capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 9n capsular polysaccharide antigen",
+    "streptococcus pneumoniae type 9v capsular polysaccharide antigen",
     "streptokinase",
+    "streptomyces griseus allergenic extract",
     "streptomycin",
     "streptomycin (streptomycin sulfate)",
+    "streptozocin",
+    "string bean allergenic extract",
+    "strontium cation sr-89",
     "strontium chloride",
     "strontium ranelate",
+    "strychnos nux-vomica seed extract",
+    "succimer",
+    "succinylcholine",
     "succinylcholine chloride (suxamethonium)",
     "sucralfate",
     "sucroferric oxyhydroxide",
+    "sudan grass pollen extract",
     "sufentanil",
     "sufentanil citrate",
     "sugammadex (sugammadex sodium)",
+    "sugar beet allergenic extract",
+    "sugar beet pollen extract",
+    "sulbactam",
     "sulbactam (sulbactam sodium)",
     "sulconazole",
     "sulfacetamide",
     "sulfadiazine",
     "sulfamethoxazole",
     "sulfasalazine",
+    "sulfate ion",
     "sulfiram (monosulfiram)",
+    "sulfisoxazole",
+    "sulfur hexafluoride",
     "sulindac",
     "sulphacetamide (sulfacetamide sodium)",
     "sulpiride",
@@ -4967,35 +19744,78 @@
     "sultopride",
     "sumatriptan",
     "sumatriptan (sumatriptan succinate)",
+    "sunflower pollen extract",
+    "sunflower seed allergenic extract",
+    "sunflower seed extract",
     "sunitinib",
+    "sutimlimab",
     "suvorexant",
     "suxamethonium (succinylcholine chloride)",
+    "sweet gum pollen extract",
+    "sweet potato allergenic extract",
+    "sweet vernal grass pollen extract",
+    "sweet wormwood pollen extract",
+    "swordfish allergenic extract",
+    "sydney golden wattle pollen extract",
+    "syncephalastrum racemosum allergenic extract",
+    "syrian hamster hair extract",
+    "syrian hamster skin extract",
+    "tabanus nigrovittatus extract",
     "tacalcitol",
     "tacrolimus",
     "tadalafil",
     "tafamidis",
     "tafluprost",
+    "tag alder pollen extract",
+    "tagraxofusp",
+    "talazoparib",
+    "taliglucerase alfa",
+    "tall oat grass pollen extract",
     "tamoxifen",
     "tamsulosin",
+    "tangerine allergenic extract",
+    "tangerine extract",
     "tapentadol",
+    "tapinarof",
+    "tasimelteon",
+    "tavaborole",
     "tazarotene",
+    "tazemetostat",
+    "tazobactam",
+    "tebentafusp",
+    "technetium tc 99m exametazime",
+    "technetium tc 99m medronate",
+    "technetium tc 99m sestamibi",
+    "technetium tc 99m tilmanocept",
+    "technetium tc-99m pyrophosphate",
+    "technetium tc-99m sulfur colloid",
     "tecovirimat",
     "tedizolid",
+    "teduglutide",
+    "tegaserod",
     "tegaserod (tegaserod maleate)",
     "teicoplanin",
     "telaprevir",
+    "telavancin",
     "telbivudine",
+    "telithromycin",
     "telmisartan",
+    "telotristat",
     "temazepam",
     "temozolomide",
     "temsirolimus",
+    "tenapanor",
     "tenecteplase",
     "teneligliptin",
     "tenofovir alafenamide",
+    "tenofovir anhydrous",
     "tenofovir disoproxil fumarate (tdf)",
     "tenoxicam",
+    "teplizumab",
     "tepotinib",
+    "teprotumumab",
     "terazosin",
+    "terbinafine",
     "terbinafine (oral)",
     "terbutaline sulfate",
     "terconazole",
@@ -5004,68 +19824,103 @@
     "teriparatide",
     "terizidone",
     "terlipressin",
+    "tesamorelin",
     "testosterone",
     "testosterone propionate",
     "tetanus immunoglobulin",
     "tetanus toxoid",
+    "tetanus toxoid vaccine, inactivated",
     "tetrabenazine",
+    "tetracaine",
     "tetrachlorodecaoxygen anion",
+    "tetracoccosporium paxianum allergenic extract",
     "tetracosactide",
     "tetracycline",
     "tetrahydrozoline",
+    "tetramethylthiuram monosulfide",
+    "tezepelumab",
     "thalidomide",
+    "thallous cation tl-201",
     "theophylline",
     "theophylline anhydrous",
+    "thiabendazole",
     "thiamine",
     "thiamine mononitrate",
     "thiamine nitrate (thiamine mononitrate, vitamin b1)",
     "thiocolchicoside",
     "thioguanine",
+    "thioguanine anhydrous",
     "thiopental sodium (thiopentone)",
     "thioridazine",
     "thioridazine (as hydrochloride)",
     "thiotepa",
+    "thiothixene",
+    "thiram",
+    "thrombin",
+    "thrombin alfa",
+    "thrombin, human",
+    "thyme allergenic extract",
+    "thyme preparation",
     "thymosin alpha 1",
+    "thyrotropin alfa",
     "tiagabine",
     "tianeptine (tianeptine sodium)",
     "tiapride",
     "tibolone",
     "ticagrelor",
+    "ticarcillin",
     "ticlopidine",
     "ticlopidine hydrochloride",
     "tigecycline",
+    "tildrakizumab",
     "timolol",
     "timolol anhydrous",
+    "timothy grass pollen extract",
     "tinidazole",
     "tinzaparin",
     "tioconazole",
+    "tiopronin",
     "tiotropium",
     "tiotropium (tiotropium bromide)",
+    "tipiracil",
+    "tipranavir",
+    "tirbanibulin",
     "tirofiban",
     "tiropramide",
     "tirzepatide",
+    "tisagenlecleucel",
+    "tislelizumab",
     "tivozanib",
     "tizanidine",
+    "tobacco leaf allergenic extract",
     "tobramycin",
     "tocilizumab",
     "tofacitinib",
+    "tofersen",
     "tofisopam",
     "tolazamide",
     "tolbutamide",
+    "tolcapone",
     "tolfenamic acid",
     "tolmetin",
     "tolnaftate",
     "tolperisone",
     "tolterodine",
     "tolvaptan",
+    "tomato allergenic extract",
     "topiramate",
     "topiroxostat",
+    "topotecan",
     "topotecan (topotecan hydrochloride)",
     "torasemide",
     "torasemide (torsemide)",
+    "toremifene",
+    "toripalimab",
     "torsemide",
     "tovorafenib",
     "trabectedin",
+    "tragacanth",
+    "tralokinumab",
     "tramadol",
     "tramadol (tramadol hydrochloride)",
     "tramadol hydrochloride",
@@ -5077,76 +19932,133 @@
     "trastuzumab",
     "travoprost",
     "trazodone",
+    "tree of heaven pollen extract",
+    "tremelimumab",
     "treosulfan",
+    "treprostinil",
+    "tretinoin",
     "tretinoin (all-trans retinoic acid, oral)",
     "triamcinolone",
     "triamcinolone acetonide",
     "triamcinolone hexacetonide",
     "triamterene",
     "triazolam",
+    "trichoderma harzianum allergenic extract",
+    "trichoderma viride allergenic extract",
     "tricholine citrate",
+    "trichophyton mentagrophytes allergenic extract",
+    "trichophyton rubrum allergenic extract",
+    "trichophyton schoenleinii allergenic extract",
+    "trichophyton tonsurans allergenic extract",
+    "trichothecium roseum allergenic extract",
     "triclabendazole",
     "triclofos sodium",
     "triclosan",
+    "trientine",
     "trientine hydrochloride",
+    "trifarotene",
     "trifluoperazine",
     "trifluoperazine (trifluoperazine hydrochloride)",
+    "trifluridine",
+    "trifolium pratense pollen extract",
+    "triheptanoin",
     "trihexyphenidyl",
     "trilaciclib",
     "trimebutine",
     "trimetazidine",
+    "trimethobenzamide",
     "trimethoprim",
     "trimethoprim combinations",
     "trimipramine",
     "trioxasalen",
+    "triptorelin",
     "triptorelin (triptorelin pamoate)",
     "triticum vulgare extract",
     "trofinetide",
     "tropicamide",
     "trospium",
     "trospium chloride",
+    "trout allergenic extract",
     "troxerutin",
     "troxipide",
     "trypan blue",
+    "trypan blue free acid",
     "trypsin-chymotrypsin",
     "tucatinib",
     "tulobuterol",
+    "tuna allergenic extract",
+    "turkey allergenic extract",
+    "turkey feather extract",
+    "turnip allergenic extract",
+    "typhoid vi polysaccharide vaccine, s typhi ty2 strain",
+    "ublituximab",
+    "ubrogepant",
     "udenafil",
     "ulinastatin",
+    "ulipristal",
     "ulipristal acetate",
+    "ulmus glabra pollen extract",
+    "ulmus rubra pollen allergenic extract",
     "umeclidinium",
     "uniflexin (diacerein)",
     "univestin (aflapin / standardized boswellia serrata + scutellaria baicalensis extract blend)",
     "upadacitinib",
     "urea",
+    "urea c-13",
+    "uridine",
     "urofollitropin (follicle-stimulating hormone, urinary)",
     "urokinase",
     "ursodeoxycholic acid",
+    "ursodiol",
+    "ustekinumab",
+    "ustekinumab-aekn",
+    "ustekinumab-srlf",
+    "ustilago maydis extract",
+    "utah juniper pollen extract",
+    "vaborbactam",
     "vaccine",
+    "vaccinia virus strain new york city board of health live antigen",
+    "vadadustat",
+    "valacyclovir",
     "valacyclovir (valacyclovir hydrochloride)",
+    "valbenazine",
     "valdecoxib",
     "valethamate bromide",
     "valganciclovir",
+    "valley oak pollen extract",
     "valproic acid",
     "valsartan",
     "vamorolone",
     "vancomycin",
     "vandetanib",
+    "vanilla bean allergenic extract",
+    "vanilla bean extract",
     "vardenafil",
     "vardenafil (vardenafil hydrochloride)",
     "vardenafil hydrochloride",
     "vardenafil hydrochloride trihydrate",
     "varenicline",
     "varicella virus vaccine, live (oka/merck strain)",
+    "varicella-zoster virus vaccine live (oka-merck) strain",
     "vasopressin (8-l-arginine vasopressin)",
+    "veal allergenic extract",
     "vecuronium",
+    "vecuronium cation",
+    "vedolizumab",
+    "velaglucerase alfa",
+    "velmanase alfa-tycv",
     "velpatasvir",
+    "velvet grass pollen extract",
+    "velvetleaf huckleberry allergenic extract",
     "vemurafenib",
     "venetoclax",
+    "venison allergenic extract",
     "venlafaxine",
     "verapamil",
     "vericiguat",
     "verteporfin",
+    "verticillium albo-atrum allergenic extract",
+    "vestronidase alfa",
     "vi capsular polysaccharide of salmonella typhi (typhoid vi polysaccharide vaccine)",
     "vibegron",
     "vigabatrin",
@@ -5154,50 +20066,117 @@
     "vilazodone",
     "vildagliptin",
     "viloxazine",
+    "vinblastine",
     "vinblastine sulfate",
     "vincristine",
     "vinorelbine",
     "vinpocetine",
+    "vismodegib",
+    "vitamin a",
     "vitamin a (retinol / retinyl esters)",
     "vitamin b (b-complex)",
+    "vitamin b12",
     "vitamin b3 (niacin / nicotinic acid and nicotinamide)",
     "vitamin c",
     "vitamin d (cholecalciferol / ergocalciferol)",
     "vitamin e (alpha-tocopherol)",
+    "vitamin k1",
     "vitamin k1 (phytonadione / phytomenadione)",
     "voclosporin",
     "voglibose",
+    "von willebrand factor, human",
     "vorapaxar",
+    "vorasidenib",
+    "voretigene neparvovec",
     "voriconazole",
+    "vorinostat",
     "vortioxetine",
+    "vosoritide",
     "voxelotor",
     "voxilaprevir",
+    "vutrisiran",
     "warfarin",
+    "water birch pollen extract",
+    "water oak pollen extract",
+    "watercress allergenic extract",
+    "watermelon allergenic extract",
+    "watermelon preparation",
+    "weakleaf bur ragweed pollen extract",
+    "western black willow pollen extract",
+    "western juniper pollen extract",
+    "western larch pollen extract",
+    "western ragweed pollen extract",
+    "western sycamore pollen extract",
+    "western waterhemp pollen extract",
+    "western wheatgrass pollen extract",
+    "western white pine pollen extract",
+    "western yellow jacket venom protein",
+    "wheat gluten extract",
+    "wheat pollen extract",
+    "wheat preparation",
+    "wheat smut allergenic extract",
+    "white (mexican) dock pollen extract",
+    "white alder pollen extract",
+    "white ash pollen extract",
+    "white catfish allergenic extract",
+    "white fish allergenic extract",
+    "white hickory pollen extract",
+    "white mulberry pollen extract",
+    "white oak pollen extract",
+    "white poplar pollen extract",
+    "white sweet clover pollen extract",
+    "white willow pollen extract",
+    "whole wheat allergenic extract",
+    "wine grape allergenic extract",
+    "wine grape extract",
+    "wing scale pollen extract",
+    "winterfat pollen extract",
+    "wormwood sage pollen extract",
     "xanomeline",
     "xantinol nicotinate (xanthinol nicotinate)",
+    "xenon-129, hyperpolarized",
+    "xenon-133",
     "xipamide",
     "xylitol",
     "xylometazoline",
+    "yellow birch pollen extract",
+    "yellow dock pollen extract",
+    "yellow fever virus strain 17d-204 live antigen",
+    "yellow hornet venom protein",
+    "yellow pine pollen extract",
+    "yellow sweet clover pollen extract",
+    "yellowfin tuna allergenic extract",
     "zafirlukast",
     "zaleplon",
     "zaltoprofen",
+    "zanamivir",
     "zanubrutinib",
+    "zavegepant",
+    "ziconotide",
     "zidovudine",
+    "ziftomenib",
     "zileuton",
+    "zilucoplan",
     "zinc (zinc salts - sulfate, gluconate, acetate)",
     "zinc acetate",
     "zinc carnosine",
+    "zinc cation",
     "zinc chloride",
+    "zinc dibutyldithiocarbamate",
     "zinc gluconate",
     "zinc oxide",
     "zinc sulfate",
     "ziprasidone",
+    "zolbetuximab",
     "zoledronic acid",
+    "zoledronic acid anhydrous",
     "zolmitriptan",
+    "zolpidem",
     "zolpidem tartrate",
     "zonisamide",
     "zopiclone",
     "zotepine",
+    "zucchini extract",
     "zuclopenthixol",
     "zuranolone"
   ],
@@ -5285,6 +20264,7 @@
     "efcorlin": "hydrocortisone",
     "eliquis": "apixaban",
     "elliotts b": "sodium bicarbonate",
+    "eltroxin": "levothyroxine",
     "emeset": "ondansetron",
     "enalapril maleate": "enalapril",
     "enoxaparin sodium": "enoxaparin",
@@ -5301,6 +20281,7 @@
     "famtac": "famotidine",
     "felodip": "felodipine",
     "fentanyl citrate": "fentanyl",
+    "fetroja": "cefiderocol",
     "fosfomycin tromethamine": "fosfomycin",
     "frusemide": "furosemide",
     "frusenex": "furosemide",
@@ -5339,6 +20320,7 @@
     "levipil": "levetiracetam",
     "levitra": "vardenafil",
     "levophed": "noradrenaline (norepinephrine)",
+    "levothyroxine sodium": "levothyroxine",
     "licab": "lithium",
     "linospan": "linezolid",
     "lipicard": "fenofibrate",
@@ -5460,6 +20442,7 @@
     "telsar": "telmisartan",
     "theo-24": "theophylline",
     "theophylline (anhydrous)": "theophylline",
+    "thyronorm": "levothyroxine",
     "tramadol hydrochloride": "tramadol",
     "tramazac": "tramadol",
     "trapic": "tranexamic acid",
@@ -6609,6 +21592,5146 @@
       "sourceId": "onc-nlm-hpddi",
       "evidence": "established",
       "reviewDate": "2026-07-07",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-5_alpha_reductase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:5_alpha_reductase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (5-alpha Reductase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-acetylcholine_release_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:acetylcholine_release_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Acetylcholine Release Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-adrenocorticotropic_hormone",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:adrenocorticotropic_hormone"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Adrenocorticotropic Hormone).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-alkaloid",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:alkaloid"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Alkaloid).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-alkylating_drug",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:alkylating_drug"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Alkylating Drug).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-allylamine_antifungal",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:allylamine_antifungal"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Allylamine Antifungal).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-alpha_adrenergic_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:alpha_adrenergic_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (alpha-Adrenergic Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-alpha_glucosidase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:alpha_glucosidase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (alpha-Glucosidase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-aminosalicylate",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:aminosalicylate"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Aminosalicylate).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-androgen",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:androgen"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Androgen).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-androgen_receptor_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:androgen_receptor_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Androgen Receptor Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-anthelmintic",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:anthelmintic"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Anthelmintic).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-anthracycline_topoisomerase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:anthracycline_topoisomerase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Anthracycline Topoisomerase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-anti_coagulant",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:anti_coagulant"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Anti-coagulant).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-anti_epileptic_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:anti_epileptic_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Anti-epileptic Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-anti_infective",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:anti_infective"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Anti-infective).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antibacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antibacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antibacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antidiarrheal",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antidiarrheal"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antidiarrheal).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antidote",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antidote"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antidote).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antiemetic",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antiemetic"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antiemetic).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antifibrinolytic_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antifibrinolytic_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antifibrinolytic Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antifungal",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antifungal"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antifungal).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antihypoglycemic_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antihypoglycemic_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antihypoglycemic Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antimalarial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antimalarial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antimalarial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antimetabolite",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antimetabolite"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antimetabolite).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antimicrobial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antimicrobial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antimicrobial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antimycobacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antimycobacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antimycobacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antiparasitic",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antiparasitic"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antiparasitic).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antiprotozoal",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antiprotozoal"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antiprotozoal).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antirheumatic_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antirheumatic_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antirheumatic Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antisense_oligonucleotide",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antisense_oligonucleotide"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antisense Oligonucleotide).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antiseptic",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antiseptic"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antiseptic).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-antivenin",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:antivenin"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Antivenin).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-aromatase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:aromatase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Aromatase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-arteriolar_vasodilator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:arteriolar_vasodilator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Arteriolar Vasodilator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-asparagine_specific_enzyme",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:asparagine_specific_enzyme"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Asparagine-specific Enzyme).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-autologous_cellular_immunotherapy",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:autologous_cellular_immunotherapy"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Autologous Cellular Immunotherapy).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-beta2_adrenergic_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:beta2_adrenergic_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (beta2-Adrenergic Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-beta3_adrenergic_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:beta3_adrenergic_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (beta3-Adrenergic Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-beta_adrenergic_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:beta_adrenergic_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (beta-Adrenergic Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-beta_lactamase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:beta_lactamase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (beta Lactamase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-bile_acid",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:bile_acid"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Bile Acid).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-bile_acid_sequestrant",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:bile_acid_sequestrant"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Bile Acid Sequestrant).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-bismuth",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:bismuth"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Bismuth).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-bispecific_cd20_directed_cd3_t_cell_engager",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:bispecific_cd20_directed_cd3_t_cell_engager"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Bispecific CD20-directed CD3 T Cell Engager).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-bisphosphonate",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:bisphosphonate"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Bisphosphonate).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-blood_coagulation_factor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:blood_coagulation_factor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Blood Coagulation Factor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-blood_glucose_regulator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:blood_glucose_regulator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Blood Glucose Regulator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-calcitonin_gene_related_peptide_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:calcitonin_gene_related_peptide_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Calcitonin Gene-related Peptide Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-calcium_channel_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:calcium_channel_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Calcium Channel Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-calcium_sensing_receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:calcium_sensing_receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Calcium-sensing Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cannabinoid",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cannabinoid"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cannabinoid).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-carbonic_anhydrase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:carbonic_anhydrase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Carbonic Anhydrase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cardiovascular_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cardiovascular_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cardiovascular Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-catechol_o_methyltransferase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:catechol_o_methyltransferase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Catechol-O-Methyltransferase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cd19_directed_chimeric_antigen_receptor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cd19_directed_chimeric_antigen_receptor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (CD19-directed Chimeric Antigen Receptor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-central_nervous_system_depressant",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:central_nervous_system_depressant"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Central Nervous System Depressant).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-central_nervous_system_stimulant",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:central_nervous_system_stimulant"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Central Nervous System Stimulant).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cephalosporin_antibacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cephalosporin_antibacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cephalosporin Antibacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-chemical_structure",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:chemical_structure"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Chemical Structure).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-chemokine_receptor_type_4_interaction",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:chemokine_receptor_type_4_interaction"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Chemokine Receptor Type 4 Interaction).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cholinergic_muscarinic_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cholinergic_muscarinic_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cholinergic Muscarinic Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cholinergic_muscarinic_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cholinergic_muscarinic_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cholinergic Muscarinic Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cholinergic_nicotinic_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cholinergic_nicotinic_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cholinergic Nicotinic Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cholinergic_receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cholinergic_receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cholinergic Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cholinesterase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cholinesterase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cholinesterase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-classical_complement_pathway_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:classical_complement_pathway_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Classical Complement Pathway Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-collagen_specific_enzyme",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:collagen_specific_enzyme"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Collagen-specific Enzyme).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-complement_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:complement_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Complement Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cortisol_synthesis_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cortisol_synthesis_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cortisol Synthesis Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cystic_fibrosis_transmembrane_conductance_regulator_potentiator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cystic_fibrosis_transmembrane_conductance_regulator_potentiator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cystic Fibrosis Transmembrane Conductance Regulator Potentiator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cytochrome_p450_3a_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cytochrome_p450_3a_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cytochrome P450 3A Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cytomegalovirus_nucleoside_analog_dna_polymerase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cytomegalovirus_nucleoside_analog_dna_polymerase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cytomegalovirus Nucleoside Analog DNA Polymerase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cytoprotective_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cytoprotective_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cytoprotective Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-cytotoxin",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:cytotoxin"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Cytotoxin).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-diuretic",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:diuretic"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Diuretic).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-dopamine_2_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:dopamine_2_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Dopamine-2 Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-echinocandin_antifungal",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:echinocandin_antifungal"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Echinocandin Antifungal).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-endoglycosidase",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:endoglycosidase"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Endoglycosidase).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-endothelin_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:endothelin_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Endothelin Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-enzyme",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:enzyme"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Enzyme).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-enzyme_activator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:enzyme_activator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Enzyme Activator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-enzyme_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:enzyme_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Enzyme Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-enzyme_interaction",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:enzyme_interaction"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Enzyme Interaction).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-epidermal_growth_factor_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:epidermal_growth_factor_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Epidermal Growth Factor Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-ergot_derivative",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:ergot_derivative"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Ergot Derivative).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-ergotamine_derivative",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:ergotamine_derivative"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Ergotamine Derivative).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-erythropoiesis_stimulating_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:erythropoiesis_stimulating_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Erythropoiesis-stimulating Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-established_pharmacologic_classes",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:established_pharmacologic_classes"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Established Pharmacologic Classes).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-estrogen",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:estrogen"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Estrogen).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-estrogen_agonist_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:estrogen_agonist_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Estrogen Agonist/Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-estrogen_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:estrogen_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Estrogen Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-fluoroquinolone_antibacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:fluoroquinolone_antibacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Fluoroquinolone Antibacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-folate_analog",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:folate_analog"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Folate Analog).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-folate_analog_metabolic_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:folate_analog_metabolic_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Folate Analog Metabolic Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-gamma_aminobutyric_acid_a_receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:gamma_aminobutyric_acid_a_receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (gamma-Aminobutyric Acid A Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-gamma_aminobutyric_acid_ergic_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:gamma_aminobutyric_acid_ergic_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (gamma-Aminobutyric Acid-ergic Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-gastrointestinal_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:gastrointestinal_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Gastrointestinal Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-genetically_modified_autologous_t_cells",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:genetically_modified_autologous_t_cells"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Genetically-modified Autologous T Cells).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-glinide",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:glinide"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Glinide).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-glp_1_receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:glp_1_receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (GLP-1 Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-glucosylceramide_synthase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:glucosylceramide_synthase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Glucosylceramide Synthase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-gonadotropin",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:gonadotropin"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Gonadotropin).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-gonadotropin_releasing_hormone_receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:gonadotropin_releasing_hormone_receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Gonadotropin Releasing Hormone Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-gonadotropin_releasing_hormone_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:gonadotropin_releasing_hormone_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Gonadotropin Releasing Hormone Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-growth_factor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:growth_factor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Growth Factor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-guanylate_cyclase_c_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:guanylate_cyclase_c_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Guanylate Cyclase-C Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hedgehog_pathway_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hedgehog_pathway_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hedgehog Pathway Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hematology_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hematology_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hematology Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hepatitis_b_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hepatitis_b_virus_nucleoside_analog_reverse_transcriptase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hepatitis B Virus Nucleoside Analog Reverse Transcriptase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hepatitis_c_virus_ns3_4a_protease_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hepatitis_c_virus_ns3_4a_protease_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hepatitis C Virus NS3/4A Protease Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hepatitis_c_virus_ns5a_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hepatitis_c_virus_ns5a_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hepatitis C Virus NS5A Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-her2_neu_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:her2_neu_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (HER2/neu Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-herpes_simplex_virus_nucleoside_analog_dna_polymerase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:herpes_simplex_virus_nucleoside_analog_dna_polymerase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Herpes Simplex Virus Nucleoside Analog DNA Polymerase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-herpes_zoster_virus_nucleoside_analog_dna_polymerase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:herpes_zoster_virus_nucleoside_analog_dna_polymerase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Herpes Zoster Virus Nucleoside Analog DNA Polymerase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-herpesvirus_nucleoside_analog_dna_polymerase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:herpesvirus_nucleoside_analog_dna_polymerase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Herpesvirus Nucleoside Analog DNA Polymerase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-histamine_1_receptor_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:histamine_1_receptor_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Histamine-1 Receptor Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-histamine_2_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:histamine_2_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Histamine-2 Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-histone_deacetylase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:histone_deacetylase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Histone Deacetylase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hormone",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hormone"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hormone).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-human_antihemophilic_factor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:human_antihemophilic_factor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Human Antihemophilic Factor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-human_blood_coagulation_factor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:human_blood_coagulation_factor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Human Blood Coagulation Factor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-human_immunodeficiency_virus_1_non_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:human_immunodeficiency_virus_1_non_nucleoside_analog_reverse_transcriptase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Human Immunodeficiency Virus 1 Non-Nucleoside Analog Reverse Transcriptase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-human_immunodeficiency_virus_integrase_strand_transfer_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:human_immunodeficiency_virus_integrase_strand_transfer_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Human Immunodeficiency Virus Integrase Strand Transfer Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-human_immunodeficiency_virus_nucleoside_analog_reverse_transcriptase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:human_immunodeficiency_virus_nucleoside_analog_reverse_transcriptase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Human Immunodeficiency Virus Nucleoside Analog Reverse Transcriptase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-human_immunoglobulin",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:human_immunoglobulin"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Human Immunoglobulin).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-human_immunoglobulin_g",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:human_immunoglobulin_g"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Human Immunoglobulin G).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hydrolytic_lysosomal_glucocerebroside_specific_enzyme",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hydrolytic_lysosomal_glucocerebroside_specific_enzyme"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hydrolytic Lysosomal Glucocerebroside-specific Enzyme).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hydrolytic_lysosomal_glycogen_specific_enzyme",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hydrolytic_lysosomal_glycogen_specific_enzyme"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hydrolytic Lysosomal Glycogen-specific Enzyme).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hydrolytic_lysosomal_glycosaminoglycan_specific_enzyme",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hydrolytic_lysosomal_glycosaminoglycan_specific_enzyme"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hydrolytic Lysosomal Glycosaminoglycan-specific Enzyme).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hydrolytic_lysosomal_neutral_glycosphingolipid_specific_enzyme",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hydrolytic_lysosomal_neutral_glycosphingolipid_specific_enzyme"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hydrolytic Lysosomal Neutral Glycosphingolipid-specific Enzyme).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hypoxia_inducible_factor_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hypoxia_inducible_factor_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hypoxia-inducible Factor Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-hypoxia_inducible_factor_prolyl_hydroxylase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:hypoxia_inducible_factor_prolyl_hydroxylase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Hypoxia-inducible Factor Prolyl Hydroxylase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-ileal_bile_acid_transporter_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:ileal_bile_acid_transporter_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Ileal Bile Acid Transporter Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-immunoglobulin_g",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:immunoglobulin_g"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Immunoglobulin G).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-immunologic_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:immunologic_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Immunologic Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-immunotherapy",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:immunotherapy"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Immunotherapy).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-influenza_a_m2_protein_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:influenza_a_m2_protein_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Influenza A M2 Protein Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-integrin_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:integrin_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Integrin Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-interferon_alpha",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:interferon_alpha"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Interferon alpha).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-interferon_beta",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:interferon_beta"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Interferon beta).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-interleukin_12_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:interleukin_12_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Interleukin-12 Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-interleukin_13_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:interleukin_13_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Interleukin-13 Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-interleukin_17a_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:interleukin_17a_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Interleukin-17A Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-interleukin_1_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:interleukin_1_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Interleukin-1 Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-interleukin_23_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:interleukin_23_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Interleukin-23 Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-interleukin_5_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:interleukin_5_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Interleukin-5 Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-interleukin_6_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:interleukin_6_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Interleukin-6 Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-interleukin_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:interleukin_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Interleukin Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-ion_channel_or_pump_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:ion_channel_or_pump_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Ion Channel or Pump Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-iron_chelator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:iron_chelator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Iron Chelator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-isocitrate_dehydrogenase_1_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:isocitrate_dehydrogenase_1_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Isocitrate Dehydrogenase 1 Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-isocitrate_dehydrogenase_2_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:isocitrate_dehydrogenase_2_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Isocitrate Dehydrogenase 2 Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-janus_kinase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:janus_kinase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Janus Kinase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-lead_chelator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:lead_chelator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Lead Chelator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-leukocyte_growth_factor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:leukocyte_growth_factor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Leukocyte Growth Factor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-leukotriene_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:leukotriene_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Leukotriene Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-lipid_emulsion",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:lipid_emulsion"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Lipid Emulsion).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-lipoglycopeptide_antibacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:lipoglycopeptide_antibacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Lipoglycopeptide Antibacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-macrolide",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:macrolide"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Macrolide).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-mast_cell_stabilizer",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:mast_cell_stabilizer"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Mast Cell Stabilizer).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-melanocortin_receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:melanocortin_receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Melanocortin Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-melatonin_receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:melatonin_receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Melatonin Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-metal_chelator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:metal_chelator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Metal Chelator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-methylating_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:methylating_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Methylating Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-microtubule_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:microtubule_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Microtubule Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-monoamine_oxidase_type_b_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:monoamine_oxidase_type_b_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Monoamine Oxidase Type B Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-mood_stabilizer",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:mood_stabilizer"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Mood Stabilizer).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-muscle_relaxant",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:muscle_relaxant"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Muscle Relaxant).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-neonatal_fc_receptor_blocker",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:neonatal_fc_receptor_blocker"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Neonatal Fc Receptor Blocker).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-nervous_system_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:nervous_system_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Nervous System Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-neuraminidase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:neuraminidase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Neuraminidase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-neuroactive_steroid_gamma_aminobutyric_acid_a_receptor_positive_modulator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:neuroactive_steroid_gamma_aminobutyric_acid_a_receptor_positive_modulator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Neuroactive Steroid Gamma-Aminobutyric Acid A Receptor Positive Modulator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-neuromuscular_blocker",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:neuromuscular_blocker"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Neuromuscular Blocker).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-nitrofuran_antibacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:nitrofuran_antibacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Nitrofuran Antibacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-nitrogen_binding_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:nitrogen_binding_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Nitrogen Binding Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-nondepolarizing_neuromuscular_blocker",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:nondepolarizing_neuromuscular_blocker"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Nondepolarizing Neuromuscular Blocker).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-nonergot_dopamine_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:nonergot_dopamine_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Nonergot Dopamine Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-norepinephrine_reuptake_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:norepinephrine_reuptake_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Norepinephrine Reuptake Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-nucleic_acid_related_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:nucleic_acid_related_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Nucleic Acid Related Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-nucleic_acid_synthesis_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:nucleic_acid_synthesis_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Nucleic Acid Synthesis Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-nucleoside_analog_antiviral",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:nucleoside_analog_antiviral"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Nucleoside Analog Antiviral).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-nucleoside_metabolic_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:nucleoside_metabolic_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Nucleoside Metabolic Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-opioid_agonist_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:opioid_agonist_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Opioid Agonist/Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-opioid_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:opioid_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Opioid Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-orexin_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:orexin_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Orexin Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-parenteral_iron_replacement",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:parenteral_iron_replacement"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Parenteral Iron Replacement).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-pcsk9_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:pcsk9_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (PCSK9 Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-pediculicide",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:pediculicide"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Pediculicide).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-penem_antibacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:penem_antibacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Penem Antibacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-penicillin_class_antibacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:penicillin_class_antibacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Penicillin-class Antibacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-peroxisome_proliferator_activated_receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:peroxisome_proliferator_activated_receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Peroxisome Proliferator-activated Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-peroxisome_proliferator_activated_receptor_alpha_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:peroxisome_proliferator_activated_receptor_alpha_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Peroxisome Proliferator-activated Receptor alpha Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-peroxisome_proliferator_activated_receptor_gamma_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:peroxisome_proliferator_activated_receptor_gamma_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Peroxisome Proliferator-activated Receptor gamma Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-phosphate_binder",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:phosphate_binder"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Phosphate Binder).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-phosphodiesterase_3_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:phosphodiesterase_3_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Phosphodiesterase 3 Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-phosphodiesterase_4_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:phosphodiesterase_4_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Phosphodiesterase 4 Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-photoactivated_radical_generator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:photoactivated_radical_generator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Photoactivated Radical Generator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-photoenhancer",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:photoenhancer"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Photoenhancer).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-physical_or_chemical_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:physical_or_chemical_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Physical or Chemical Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-plasma_kallikrein_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:plasma_kallikrein_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Plasma Kallikrein Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-plasma_volume_expander",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:plasma_volume_expander"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Plasma Volume Expander).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-platinum_based_drug",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:platinum_based_drug"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Platinum-based Drug).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-pleuromutilin_antibacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:pleuromutilin_antibacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Pleuromutilin Antibacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-poly_adp_ribose_polymerase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:poly_adp_ribose_polymerase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Poly(ADP-Ribose) Polymerase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-polyene_antifungal",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:polyene_antifungal"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Polyene Antifungal).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-porphyrin_precursor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:porphyrin_precursor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Porphyrin Precursor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-potassium_channel_blocker",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:potassium_channel_blocker"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Potassium Channel Blocker).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-potassium_sparing_diuretic",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:potassium_sparing_diuretic"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Potassium-sparing Diuretic).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-progestin",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:progestin"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Progestin).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-programmed_death_ligand_1_blocker",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:programmed_death_ligand_1_blocker"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Programmed Death Ligand-1 Blocker).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-prostacycline",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:prostacycline"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Prostacycline).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-prostacycline_vasodilator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:prostacycline_vasodilator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Prostacycline Vasodilator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-prostaglandin_analog",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:prostaglandin_analog"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Prostaglandin Analog).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-protease_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:protease_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Protease Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-proteasome_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:proteasome_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Proteasome Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-purine_antimetabolite",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:purine_antimetabolite"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Purine Antimetabolite).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-receptor_interaction",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:receptor_interaction"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Receptor Interaction).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-recombinant_human_growth_hormone",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:recombinant_human_growth_hormone"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Recombinant Human Growth Hormone).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-respiratory_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:respiratory_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Respiratory Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-retinoid",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:retinoid"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Retinoid).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-rifamycin_antibacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:rifamycin_antibacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Rifamycin Antibacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-rifamycin_antimycobacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:rifamycin_antimycobacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Rifamycin Antimycobacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-sclerosing_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:sclerosing_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Sclerosing Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-serotonin_4_receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:serotonin_4_receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Serotonin-4 Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-skin_test_antigen",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:skin_test_antigen"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Skin Test Antigen).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-small_interfering_rna",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:small_interfering_rna"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Small Interfering RNA).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-soluble_guanylate_cyclase_stimulator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:soluble_guanylate_cyclase_stimulator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Soluble Guanylate Cyclase Stimulator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-somatostatin_analog",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:somatostatin_analog"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Somatostatin Analog).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-sphingosine_1_phosphate_receptor_modulator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:sphingosine_1_phosphate_receptor_modulator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Sphingosine 1-phosphate Receptor Modulator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-steroid",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:steroid"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Steroid).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-stimulant_laxative",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:stimulant_laxative"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Stimulant Laxative).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-substance_p_neurokinin_1_receptor_antagonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:substance_p_neurokinin_1_receptor_antagonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Substance P/Neurokinin-1 Receptor Antagonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-sulfonamide_antimicrobial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:sulfonamide_antimicrobial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Sulfonamide Antimicrobial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-surfactant",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:surfactant"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Surfactant).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-survival_motor_neuron_2_directed_rna_interaction",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:survival_motor_neuron_2_directed_rna_interaction"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Survival Motor Neuron-2-directed RNA Interaction).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-sympathomimetic_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:sympathomimetic_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Sympathomimetic Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-sympathomimetic_amine_anorectic",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:sympathomimetic_amine_anorectic"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Sympathomimetic Amine Anorectic).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-tetracycline_class_antibacterial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:tetracycline_class_antibacterial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Tetracycline-class Antibacterial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-tetracycline_class_antimicrobial",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:tetracycline_class_antimicrobial"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Tetracycline-class Antimicrobial).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-tetracycline_class_drug",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:tetracycline_class_drug"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Tetracycline-class Drug).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-thalidomide_analog",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:thalidomide_analog"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Thalidomide Analog).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-thiazolidinedione",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:thiazolidinedione"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Thiazolidinedione).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-thrombopoietin_receptor_agonist",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:thrombopoietin_receptor_agonist"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Thrombopoietin Receptor Agonist).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-thyroid_hormone_synthesis_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:thyroid_hormone_synthesis_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Thyroid Hormone Synthesis Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-topoisomerase_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:topoisomerase_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Topoisomerase Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-transthyretin_directed_rna_interaction",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:transthyretin_directed_rna_interaction"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Transthyretin-directed RNA Interaction).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-tubulin_agent",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:tubulin_agent"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Tubulin Agent).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-tumor_necrosis_factor_blocker",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:tumor_necrosis_factor_blocker"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Tumor Necrosis Factor Blocker).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-uric_acid_specific_enzyme",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:uric_acid_specific_enzyme"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Uric Acid-specific Enzyme).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-vascular_endothelial_growth_factor_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:vascular_endothelial_growth_factor_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Vascular Endothelial Growth Factor Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-vasoconstrictor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:vasoconstrictor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Vasoconstrictor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-vasodilator",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:vasodilator"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Vasodilator).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-vesicular_monoamine_transporter_2_inhibitor",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:vesicular_monoamine_transporter_2_inhibitor"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Vesicular Monoamine Transporter 2 Inhibitor).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-vinca_alkaloid",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "epc:vinca_alkaloid"
+        }
+      ],
+      "severity": "monitor",
+      "mechanism": "Two or more medicines from the same pharmacologic class (Vinca Alkaloid).",
+      "effect": "Possible therapeutic duplication — additive effect and adverse-effect risk without added benefit.",
+      "action": "Confirm the overlap is intended (e.g. cross-titration); otherwise consolidate to a single agent.",
+      "monitoring": "Review the indication for each same-class medicine.",
+      "sourceId": "rxnorm-rxclass",
+      "evidence": "class-based",
+      "reviewDate": "2026-07-10",
       "doseTimingSeparation": false,
       "specialistReview": false
     }

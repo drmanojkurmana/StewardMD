@@ -1021,6 +1021,11 @@
     var list = getList();
     var showUndoRow = _undoingId && _lastRemoved && _lastRemoved.med && _lastRemoved.med.id === _undoingId;
     var resolved = list.filter(function (m) { return m.generic && String(m.generic).trim(); }).length;
+    // "present" also counts entries that are only a (possibly-brand) name — the
+    // check can run and resolve those via the catalogue API before screening.
+    var present = list.filter(function (m) {
+      return (m.generic && String(m.generic).trim()) || (m.name && String(m.name).trim()) || (m.raw && String(m.raw).trim());
+    }).length;
 
     var work = el("div", { cls: "ml-work" });
     var main = el("div", { cls: "ml-main" });
@@ -1069,9 +1074,9 @@
     // ---- sticky CTA (always visible, count-aware) ----
     var footer = el("div", { cls: "ml-footer" });
     var inner = el("div", { cls: "ml-footer-inner" });
-    var canCheck = resolved >= 2;
+    var canCheck = present >= 2;
     var checkBtn = el("button", { cls: "ml-check-btn",
-      text: canCheck ? ("Check " + resolved + " medicine" + (resolved > 1 ? "s" : "")) : "Check interactions",
+      text: canCheck ? ("Check " + present + " medicine" + (present > 1 ? "s" : "")) : "Check interactions",
       attrs: { id: "ml-check", type: "button" } });
     if (!canCheck) checkBtn.disabled = true;
     checkBtn.addEventListener("click", function () { if (!checkBtn.disabled) runCheck(); });
@@ -1083,12 +1088,49 @@
     mountOpenSheet();
   }
 
+  // Last-chance brand resolution: for any medicine we could NOT map to a generic
+  // locally (typed or pasted brand not in the seed/formulary/pipeline maps), ask
+  // the drug-catalogue API to map brand -> composition. Auto-adopt ONLY when the
+  // API is unambiguous (one distinct single-ingredient composition); anything
+  // ambiguous is left unresolved and surfaced in the coverage warning.
+  function apiResolveBrand(name) {
+    if (!name) return Promise.resolve(null);
+    // Call the public brandSearch (same fn) at call-time so tests can stub it.
+    var fn = (window.MEDLIST && typeof window.MEDLIST.brandSearch === "function") ? window.MEDLIST.brandSearch : brandSearch;
+    var p; try { p = fn(name); } catch (e) { p = Promise.resolve([]); }
+    return Promise.resolve(p).then(function (cands) {
+      var comps = {};
+      (cands || []).forEach(function (c) {
+        var g = (c.generic || "").toLowerCase().trim();
+        if (g) comps[g] = (comps[g] || 0) + 1;
+      });
+      var keys = Object.keys(comps);
+      if (keys.length === 1 && keys[0].indexOf(" + ") === -1) return keys[0];
+      return null;
+    }).catch(function () { return null; });
+  }
+  function resolveUnresolvedViaApi() {
+    var pending = getList().filter(function (m) {
+      return (!m.generic || !String(m.generic).trim()) && (m.name || m.raw);
+    });
+    if (!pending.length) return Promise.resolve(0);
+    return Promise.all(pending.map(function (m) {
+      return apiResolveBrand(m.name || m.raw).then(function (g) {
+        if (g) { m.generic = g; m.confidence = "high"; m.apiResolved = true; return 1; }
+        return 0;
+      });
+    })).then(function (rs) { return rs.reduce(function (a, b) { return a + b; }, 0); });
+  }
+
   function runCheck() {
     if (!window.INTERACTIONS || typeof window.INTERACTIONS.checkInteractions !== "function") return;
-    _results = window.INTERACTIONS.checkInteractions(getList());
-    _view = "results";
-    _hideMinor = true;
-    render();
+    // Resolve any locally-unmapped brand via the catalogue API, THEN screen.
+    resolveUnresolvedViaApi().then(function () {
+      _results = window.INTERACTIONS.checkInteractions(getList());
+      _view = "results";
+      _hideMinor = true;
+      render();
+    });
   }
 
   // After an in-results edit (e.g. "What now? → Remove X"), re-run the check if 2+

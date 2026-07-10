@@ -315,6 +315,27 @@ try {
 
   await ev(`MEDLIST.clearAll(); return 1;`);
 
+  // Part B: a typed brand NOT in local maps is auto-resolved to its composition
+  // via the catalogue API at check time, then screened. Stub brandSearch so the
+  // test is deterministic (no live network): 'zzbrandx' -> warfarin.
+  await ev(`
+    MEDLIST.clearAll();
+    window.MEDLIST.brandSearch = function(q){ return Promise.resolve([{ brand:q, generic:'warfarin', form:'tab' }]); };
+    MEDLIST.add(MEDLIST.parseEntry('zzbrandx 5 mg'),'manual');
+    MEDLIST.add(MEDLIST.parseEntry('aspirin 75 od'),'manual');
+    MEDLIST.mount(document.getElementById('ml-test'));
+    return 1;
+  `);
+  ok(await ev(`return document.getElementById('ml-check') && document.getElementById('ml-check').disabled === false`) === true,
+     "Check enabled with an unresolved brand + a generic present (present-count gate)");
+  await ev(`document.getElementById('ml-check').click(); return 1;`);
+  await sleep(700);
+  const brandApiText = await ev(`return document.getElementById('ml-test').innerText`);
+  ok(/bleed|haemorrh|hemorrh|Major|Critical/i.test(brandApiText),
+     "typed brand 'zzbrandx' auto-resolves to warfarin via the catalogue API and is screened against aspirin (bleeding)");
+
+  await ev(`MEDLIST.clearAll(); return 1;`);
+
   console.log(fails === 0 ? "\nALL GREEN — medlist parser test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
