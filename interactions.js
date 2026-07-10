@@ -92,7 +92,12 @@
       if (Array.isArray(ingClasses)) {
         for (var j = 0; j < ingClasses.length; j++) {
           var c = ingClasses[j];
-          if (c !== "epc:established_pharmacologic_classes" && classes.indexOf(c) === -1) {
+          // Drop auto-generated EPC umbrella slugs (epc:*) — broad taxonomic
+          // parents ("…agent", "established pharmacologic classes", "allergen",
+          // "chemical structure", …) that create spurious same-class duplication
+          // noise. Curated tags (ppi, nsaid, statin, qt_prolonging, …) drive
+          // duplication and interaction detection.
+          if (c.indexOf("epc:") !== 0 && classes.indexOf(c) === -1) {
             classes.push(c);
           }
         }
@@ -265,7 +270,13 @@
     }
 
     function push(rule, indices) {
-      if (hasIngredientOverlap(dedupedNorm, indices)) {
+      // The ingredient-overlap guard stops a SINGLE combination product from
+      // firing a rule against its own ingredients. It must NOT apply to
+      // duplicate rules: two different products that share an active ingredient
+      // IS the therapeutic duplication we want to surface (e.g. a standalone PPI
+      // plus a combination that also contains a PPI).
+      var isDup = rule.type === "duplicate_generic" || rule.type === "duplicate_class";
+      if (!isDup && hasIngredientOverlap(dedupedNorm, indices)) {
         return; // Exclude invalid self-overlap comparisons/alerts
       }
       var finding = makeFinding(rule, dedupedNorm, indices, sourceTitles);
