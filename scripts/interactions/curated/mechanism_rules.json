@@ -1,0 +1,69 @@
+{
+  "_comment": "NEW class×class mechanism rules layered on top of legacy_rules.json. Because subjects reference class TAGS (not specific generics) and the auto-classifier assigns those tags to every drug in the universe, each rule below fires across all concrete drug pairs in that class combination. Schema matches the legacy rule objects exactly so interactions.js consumes them unchanged. Every contraindicated/major rule must have a matching entry in signoff.json or validate.py fails the build.",
+  "rules": [
+    {
+      "id": "mech-nitrate-pde5i",
+      "type": "pair",
+      "subjects": [{ "kind": "class", "value": "nitrate" }, { "kind": "class", "value": "pde5_inhibitor" }],
+      "severity": "contraindicated",
+      "mechanism": "Nitrates donate nitric oxide, raising cyclic GMP; PDE5 inhibitors block the breakdown of cyclic GMP. Together they cause profound, additive vasodilation.",
+      "effect": "Severe, potentially fatal hypotension. This combination is absolutely contraindicated.",
+      "action": "Do NOT co-administer. Separate a nitrate and a PDE5 inhibitor in time: at least 24 h after sildenafil/vardenafil and at least 48 h after tadalafil before a nitrate is given (and vice versa). In suspected nitrate-related hypotension after a PDE5 inhibitor, support circulation and avoid further nitrate.",
+      "monitoring": "Blood pressure; symptoms of hypotension (syncope, chest pain). Confirm no recent PDE5 inhibitor before giving any nitrate, including IV nitroglycerin.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": true,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-pde5i-dhp-ccb",
+      "type": "pair",
+      "subjects": [{ "kind": "class", "value": "pde5_inhibitor" }, { "kind": "class", "value": "dihydropyridine_ccb" }],
+      "severity": "moderate",
+      "mechanism": "Additive systemic vasodilation; dihydropyridine calcium-channel blockers may also modestly raise PDE5-inhibitor exposure.",
+      "effect": "Increased risk of symptomatic hypotension (dizziness, syncope), usually mild-to-moderate.",
+      "action": "Use together with caution. Start the PDE5 inhibitor at a low dose, warn the patient about dizziness, and review blood pressure.",
+      "monitoring": "Blood pressure and postural symptoms after starting or dose-increasing either drug.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-cyp3a4-inhibitor-sensitive-substrate",
+      "type": "pair",
+      "subjects": [{ "kind": "class", "value": "cyp3a4_inhibitor" }, { "kind": "class", "value": "cyp3a4_sensitive_substrate" }],
+      "severity": "major",
+      "mechanism": "The CYP3A4 inhibitor blocks metabolism of the sensitive CYP3A4 substrate, raising its plasma concentration substantially.",
+      "effect": "Increased substrate exposure and dose-related toxicity (e.g. myopathy/rhabdomyolysis with simvastatin/lovastatin; marked hypotension with a PDE5 inhibitor; excessive effect of a dihydropyridine).",
+      "action": "Avoid the combination or reduce the substrate dose per its label. For simvastatin/lovastatin with a strong CYP3A4 inhibitor, avoid or switch to a statin less dependent on CYP3A4 (e.g. rosuvastatin/pravastatin). For a PDE5 inhibitor with a strong inhibitor, use the lowest starting dose with an extended interval.",
+      "monitoring": "Substrate-specific: muscle pain/CK for statins; blood pressure for PDE5 inhibitors and dihydropyridines.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-multi-vasodilator-hypotension",
+      "type": "combination",
+      "subjects": [
+        { "kind": "class", "value": "vasodilator" },
+        { "kind": "class", "value": "vasodilator" },
+        { "kind": "class", "value": "vasodilator" }
+      ],
+      "severity": "moderate",
+      "mechanism": "Three or more drugs with vasodilator / blood-pressure-lowering action have additive haemodynamic effects.",
+      "effect": "Cumulative risk of hypotension, dizziness and falls, especially in the elderly or volume-depleted.",
+      "action": "Review whether all agents are needed; introduce changes one at a time; counsel about postural symptoms.",
+      "monitoring": "Lying/standing blood pressure; falls risk; symptoms of hypotension.",
+      "sourceId": "openfda-labeling",
+      "evidence": "theoretical",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    }
+  ]
+}

@@ -277,7 +277,8 @@ try {
   const rtext = await ev(`return document.getElementById("ml-test").innerText`);
   ok(/Medication Safety Summary/i.test(rtext), "results screen shows 'Medication Safety Summary'");
   ok(/Critical/i.test(rtext) && /Major/i.test(rtext) && /Monitoring/i.test(rtext), "summary shows critical/major/monitoring count chips (color-independent text)");
-  ok(/reviewed/i.test(rtext), "summary shows total medicines reviewed");
+  ok(/of \d+ medicines? checked/i.test(rtext), "summary shows how many of the submitted medicines were checked");
+  ok(/Interaction dataset/i.test(rtext), "summary discloses the interaction dataset version");
   ok(/bleed|haemorrh|hemorrh/i.test(rtext), "results surface a bleeding-related finding");
   ok(await ev(`var t=document.getElementById("ml-test").innerText; return /Critical|Major/.test(t)`) === true, "a severity label (Critical/Major) is shown");
   ok(/Action/i.test(rtext) && await ev(`return !!document.querySelector("#ml-test .mlr-why button")`) === true, "finding card shows an Action line and a 'Why?' expand control");
@@ -301,11 +302,15 @@ try {
   ok(await ev(`var b=document.querySelector("#ml-test .mlr-card-critical .mlr-sev-mark"); return !!b && b.textContent.indexOf("!!!")===0`) === true, "contraindicated finding shows the highest-severity mark '!!!'");
   ok(await ev(`var cards=document.querySelectorAll("#ml-test .mlr-card-critical"); for(var i=0;i<cards.length;i++){var t=cards[i].querySelector(".mlr-sev-text");if(t&&/Caution/i.test(t.textContent))return false;}return cards.length>0`) === true, "no critical card falls back to the 'Caution' label");
 
-  // Two non-interacting meds (amlodipine + paracetamol) -> "No major issue detected".
+  // Two non-interacting meds (amlodipine + paracetamol) -> a NEUTRAL "no finding" state.
+  // It must NOT be a falsely reassuring "all clear": no green "No major issue detected",
+  // and it must carry the "does not confirm safe" disclaimer.
   await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("amlodipine 5 od"),"manual"); MEDLIST.add(MEDLIST.parseEntry("paracetamol 650 tds"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); document.getElementById("ml-check").click(); return 1;`);
   const amText = await ev(`return document.getElementById("ml-test").innerText`);
   ok(/Medication Safety Summary/i.test(amText), "non-interacting pair results screen renders summary");
-  ok(/No major issue detected/i.test(amText), "non-interacting pair shows 'No major issue detected'");
+  ok(/No interaction found/i.test(amText), "non-interacting pair shows a neutral 'No interaction found' state");
+  ok(!/No major issue detected/i.test(amText), "does NOT show the old falsely-reassuring 'No major issue detected' text");
+  ok(/does NOT confirm the combination is safe|not clearance|Absence of a finding/i.test(amText), "shows the 'absence of a finding is not safety' disclaimer");
   ok(await ev(`var r=INTERACTIONS.checkInteractions(MEDLIST.getList()); return r.critical.length===0 && r.major.length===0`) === true, "amlodipine + paracetamol yields 0 critical/major");
 
   await ev(`MEDLIST.clearAll(); return 1;`);

@@ -1,0 +1,350 @@
+{
+  "_comment": "EXACT extract of drugClasses from interaction-rules.js at migration time. Pipeline unions these tags with RxClass-derived tags (never removes). Edit via curated_overrides.json, not here.",
+  "drugClasses": {
+    "aspirin": [
+      "antiplatelet",
+      "nsaid"
+    ],
+    "ibuprofen": [
+      "nsaid"
+    ],
+    "diclofenac": [
+      "nsaid"
+    ],
+    "naproxen": [
+      "nsaid"
+    ],
+    "ketorolac": [
+      "nsaid"
+    ],
+    "clopidogrel": [
+      "antiplatelet",
+      "p2y12_inhibitor"
+    ],
+    "ticagrelor": [
+      "antiplatelet",
+      "p2y12_inhibitor"
+    ],
+    "prasugrel": [
+      "antiplatelet",
+      "p2y12_inhibitor"
+    ],
+    "omeprazole": [
+      "ppi",
+      "cyp2c19_inhibitor"
+    ],
+    "esomeprazole": [
+      "ppi",
+      "cyp2c19_inhibitor"
+    ],
+    "pantoprazole": [
+      "ppi",
+      "ppi_low_cyp2c19"
+    ],
+    "rabeprazole": [
+      "ppi",
+      "ppi_low_cyp2c19"
+    ],
+    "lansoprazole": [
+      "ppi",
+      "ppi_low_cyp2c19"
+    ],
+    "warfarin": [
+      "anticoagulant",
+      "vitamin_k_antagonist"
+    ],
+    "enoxaparin": [
+      "anticoagulant",
+      "lmwh"
+    ],
+    "heparin": [
+      "anticoagulant"
+    ],
+    "dabigatran": [
+      "anticoagulant",
+      "doac"
+    ],
+    "rivaroxaban": [
+      "anticoagulant",
+      "doac"
+    ],
+    "apixaban": [
+      "anticoagulant",
+      "doac"
+    ],
+    "ramipril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "enalapril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "lisinopril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "perindopril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "telmisartan": [
+      "arb",
+      "raas"
+    ],
+    "losartan": [
+      "arb",
+      "raas"
+    ],
+    "valsartan": [
+      "arb",
+      "raas"
+    ],
+    "furosemide": [
+      "loop_diuretic",
+      "diuretic"
+    ],
+    "bumetanide": [
+      "loop_diuretic",
+      "diuretic"
+    ],
+    "torasemide": [
+      "loop_diuretic",
+      "diuretic"
+    ],
+    "hydrochlorothiazide": [
+      "thiazide_diuretic",
+      "diuretic"
+    ],
+    "indapamide": [
+      "thiazide_diuretic",
+      "diuretic"
+    ],
+    "spironolactone": [
+      "potassium_sparing_diuretic",
+      "diuretic",
+      "aldosterone_antagonist"
+    ],
+    "eplerenone": [
+      "potassium_sparing_diuretic",
+      "diuretic",
+      "aldosterone_antagonist"
+    ],
+    "amiloride": [
+      "potassium_sparing_diuretic",
+      "diuretic"
+    ],
+    "ondansetron": [
+      "qt_prolonging"
+    ],
+    "haloperidol": [
+      "qt_prolonging",
+      "antipsychotic"
+    ],
+    "amiodarone": [
+      "qt_prolonging",
+      "antiarrhythmic"
+    ],
+    "sotalol": [
+      "qt_prolonging",
+      "antiarrhythmic"
+    ],
+    "moxifloxacin": [
+      "qt_prolonging",
+      "fluoroquinolone",
+      "antibiotic"
+    ],
+    "levofloxacin": [
+      "qt_prolonging",
+      "fluoroquinolone",
+      "antibiotic"
+    ],
+    "ciprofloxacin": [
+      "qt_prolonging",
+      "fluoroquinolone",
+      "antibiotic"
+    ],
+    "ofloxacin": [
+      "qt_prolonging",
+      "fluoroquinolone",
+      "antibiotic"
+    ],
+    "erythromycin": [
+      "qt_prolonging",
+      "macrolide",
+      "cyp3a4_inhibitor",
+      "antibiotic"
+    ],
+    "citalopram": [
+      "ssri",
+      "serotonergic",
+      "qt_prolonging"
+    ],
+    "escitalopram": [
+      "ssri",
+      "serotonergic",
+      "qt_prolonging"
+    ],
+    "sertraline": [
+      "ssri",
+      "serotonergic"
+    ],
+    "fluoxetine": [
+      "ssri",
+      "serotonergic"
+    ],
+    "paroxetine": [
+      "ssri",
+      "serotonergic"
+    ],
+    "venlafaxine": [
+      "snri",
+      "serotonergic"
+    ],
+    "duloxetine": [
+      "snri",
+      "serotonergic"
+    ],
+    "linezolid": [
+      "mao_inhibitor",
+      "serotonergic",
+      "antibiotic"
+    ],
+    "tramadol": [
+      "opioid",
+      "serotonergic",
+      "qt_prolonging"
+    ],
+    "morphine": [
+      "opioid"
+    ],
+    "fentanyl": [
+      "opioid"
+    ],
+    "oxycodone": [
+      "opioid"
+    ],
+    "codeine": [
+      "opioid"
+    ],
+    "diazepam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "lorazepam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "midazolam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "clonazepam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "atorvastatin": [
+      "statin"
+    ],
+    "simvastatin": [
+      "statin"
+    ],
+    "rosuvastatin": [
+      "statin"
+    ],
+    "pravastatin": [
+      "statin"
+    ],
+    "clarithromycin": [
+      "macrolide",
+      "cyp3a4_inhibitor",
+      "qt_prolonging"
+    ],
+    "azithromycin": [
+      "macrolide",
+      "qt_prolonging"
+    ],
+    "ketoconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "itraconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "fluconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor",
+      "qt_prolonging"
+    ],
+    "voriconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "metoprolol": [
+      "beta_blocker"
+    ],
+    "bisoprolol": [
+      "beta_blocker"
+    ],
+    "atenolol": [
+      "beta_blocker"
+    ],
+    "carvedilol": [
+      "beta_blocker"
+    ],
+    "propranolol": [
+      "beta_blocker"
+    ],
+    "nebivolol": [
+      "beta_blocker"
+    ],
+    "verapamil": [
+      "non_dihydropyridine_ccb"
+    ],
+    "diltiazem": [
+      "non_dihydropyridine_ccb"
+    ],
+    "gemfibrozil": [
+      "fibrate"
+    ],
+    "fenofibrate": [
+      "fibrate"
+    ],
+    "bezafibrate": [
+      "fibrate"
+    ],
+    "potassium chloride": [
+      "potassium_supplement"
+    ],
+    "potassium": [
+      "potassium_supplement"
+    ],
+    "trimethoprim": [
+      "antifolate",
+      "antibiotic"
+    ],
+    "co-trimoxazole": [
+      "antifolate",
+      "antibiotic"
+    ],
+    "cotrimoxazole": [
+      "antifolate",
+      "antibiotic"
+    ],
+    "allopurinol": [
+      "xanthine_oxidase_inhibitor"
+    ],
+    "azathioprine": [
+      "thiopurine",
+      "dmard"
+    ],
+    "methotrexate": [
+      "dmard",
+      "antifolate"
+    ],
+    "digoxin": [
+      "cardiac_glycoside"
+    ]
+  }
+}

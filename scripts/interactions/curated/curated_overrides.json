@@ -1,0 +1,57 @@
+{
+  "_comment": "Human pressure-relief valve applied by build_classmap.py AFTER RxClass + legacy tags. Order: (1) start from legacy_drugclasses tags ∪ RxClass-derived tags; (2) union pin_classes; (3) remove deny_classes; (4) drop exclude_generics; (5) register alias_generics into the brands/generics maps. Pins guarantee the clinically critical classifications even when an open source under-classifies; denies preserve deliberate legacy scoping.",
+
+  "exclude_generics": ["act"],
+
+  "pin_classes": {
+    "sildenafil":            ["pde5_inhibitor", "vasodilator", "cyp3a4_sensitive_substrate"],
+    "tadalafil":             ["pde5_inhibitor", "vasodilator", "cyp3a4_sensitive_substrate"],
+    "vardenafil":            ["pde5_inhibitor", "vasodilator", "cyp3a4_sensitive_substrate", "qt_prolonging"],
+    "avanafil":              ["pde5_inhibitor", "vasodilator", "cyp3a4_sensitive_substrate"],
+
+    "nitroglycerin":         ["nitrate", "vasodilator"],
+    "nitroglycerin (gtn)":   ["nitrate", "vasodilator"],
+    "isosorbide mononitrate":["nitrate", "vasodilator"],
+    "isosorbide dinitrate":  ["nitrate", "vasodilator"],
+    "isosorbide":            ["nitrate", "vasodilator"],
+    "nicorandil":            ["nitrate", "vasodilator"],
+
+    "nifedipine":            ["dihydropyridine_ccb", "calcium_channel_blocker", "vasodilator", "cyp3a4_sensitive_substrate"],
+    "amlodipine":            ["dihydropyridine_ccb", "calcium_channel_blocker", "vasodilator"],
+    "felodipine":            ["dihydropyridine_ccb", "calcium_channel_blocker", "vasodilator", "cyp3a4_sensitive_substrate"],
+    "nimodipine":            ["dihydropyridine_ccb", "calcium_channel_blocker", "cyp3a4_sensitive_substrate"],
+    "nicardipine":           ["dihydropyridine_ccb", "calcium_channel_blocker"],
+    "clevidipine":           ["dihydropyridine_ccb", "calcium_channel_blocker", "vasodilator"],
+
+    "simvastatin":           ["statin", "cyp3a4_sensitive_substrate"],
+    "lovastatin":            ["statin", "cyp3a4_sensitive_substrate"],
+    "atorvastatin":          ["statin", "cyp3a4_sensitive_substrate"],
+
+    "ketoconazole":          ["azole_antifungal", "cyp3a4_inhibitor", "qt_prolonging"],
+    "itraconazole":          ["azole_antifungal", "cyp3a4_inhibitor"],
+    "clarithromycin":        ["macrolide", "cyp3a4_inhibitor", "qt_prolonging"],
+    "erythromycin":          ["macrolide", "cyp3a4_inhibitor", "qt_prolonging"],
+    "ritonavir":             ["cyp3a4_inhibitor"]
+  },
+
+  "deny_classes": {
+    "verapamil":  ["cyp3a4_inhibitor"],
+    "diltiazem":  ["cyp3a4_inhibitor"],
+    "azithromycin": ["cyp3a4_inhibitor"]
+  },
+
+  "alias_generics": {
+    "nitroglycerin (gtn)": "nitroglycerin",
+    "glyceryl trinitrate": "nitroglycerin",
+    "gtn": "nitroglycerin",
+    "ntg": "nitroglycerin",
+    "trinitroglycerin": "nitroglycerin",
+    "isosorbide": "isosorbide mononitrate",
+    "viagra": "sildenafil",
+    "revatio": "sildenafil",
+    "cialis": "tadalafil",
+    "levitra": "vardenafil",
+    "adrenaline (epinephrine)": "adrenaline",
+    "noradrenaline (norepinephrine)": "noradrenaline"
+  }
+}

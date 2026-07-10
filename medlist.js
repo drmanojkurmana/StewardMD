@@ -48,6 +48,12 @@
           out.push({ brand: name, generic: d.generic.toLowerCase() });
       });
     } catch (_) {}
+    // interaction pipeline brand/synonym map (INTERACTION_RULES.brands: brand -> generic),
+    // e.g. viagra->sildenafil, gtn/ntg->nitroglycerin, adalat->nifedipine.
+    try {
+      var br = window.INTERACTION_RULES && window.INTERACTION_RULES.brands;
+      if (br && Object.prototype.hasOwnProperty.call(br, n)) out.push({ brand: name, generic: String(br[n]).toLowerCase() });
+    } catch (_) {}
     // dedupe by generic
     var seen = {}; return out.filter(function (c) { if (seen[c.generic]) return false; seen[c.generic] = 1; return true; });
   }
@@ -60,6 +66,11 @@
     try { if (((window.MEDDRUGS && window.MEDDRUGS._list) || []).some(function (d) { return d.generic.toLowerCase() === n; })) return true; } catch (_) {}
     try { var dc = window.INTERACTION_RULES && window.INTERACTION_RULES.drugClasses;
       if (dc && Object.prototype.hasOwnProperty.call(dc, n)) return true; } catch (_) {}
+    // Full generic vocabulary emitted by the interaction pipeline (INTERACTION_RULES.generics)
+    // — includes drugs auto-classified from RxClass (e.g. sildenafil, nitrates, dihydropyridines)
+    // not present in the dose formularies. Without this they'd stay unresolved and be skipped.
+    try { var gl = window.INTERACTION_RULES && window.INTERACTION_RULES.generics;
+      if (gl && gl.indexOf && gl.indexOf(n) !== -1) return true; } catch (_) {}
     // Antibiotic stewardship formulary (amoxicillin, ceftriaxone, meropenem, …) lives in
     // ASP_DRUGS, keyed by generic — include it so ward antibiotics are recognised too.
     try { if (window.ASP_DRUGS && Object.prototype.hasOwnProperty.call(window.ASP_DRUGS, n)) return true; } catch (_) {}
@@ -1262,6 +1273,7 @@
     _root.textContent = "";
     _root.classList.add("ml-root");
     var res = _results || { critical: [], major: [], moderate: [], minor: [], monitor: [], duplicates: [], combinations: [], reviewedCount: 0 };
+    var cov = res.coverage || { submittedCount: res.reviewedCount, reviewedCount: res.reviewedCount, classifiedCount: res.reviewedCount, unclassified: [], unchecked: [], datasetVersion: "" };
 
     var work = el("div", { cls: "ml-work" });
     work.style.gridTemplateColumns = "1fr";              // results are single-column
@@ -1270,8 +1282,9 @@
     // ---- strong summary panel: title + reviewed count + severity count chips ----
     var panel = el("div", { cls: "mlr-summary-panel" });
     panel.appendChild(el("div", { cls: "mlr-summary-title", text: "Medication Safety Summary" }));
+    var checkedN = cov.reviewedCount, submittedN = cov.submittedCount || res.reviewedCount;
     panel.appendChild(el("div", { cls: "mlr-summary-sub",
-      text: res.reviewedCount + " medicine" + (res.reviewedCount !== 1 ? "s" : "") + " reviewed" }));
+      text: checkedN + " of " + submittedN + " medicine" + (submittedN !== 1 ? "s" : "") + " checked" }));
     var monitorCount = res.monitor.filter(notDuplicate).length + res.moderate.filter(notDuplicate).length;
     var chips = el("div", { cls: "mlr-chips" });
     summaryChip(chips, "critical", "Critical", res.critical.length);
@@ -1281,7 +1294,21 @@
     panel.appendChild(chips);
     panel.appendChild(el("div", { cls: "ml-aside-note",
       text: "Interaction check is medication-based. Add renal function, electrolytes, QTc, or patient context for more tailored cautions." }));
+    if (cov.datasetVersion) panel.appendChild(el("div", { cls: "mlr-dataset-note",
+      text: "Interaction dataset " + cov.datasetVersion }));
     main.appendChild(panel);
+
+    // ---- coverage warning: any medicine NOT screened must be shown, never hidden ----
+    var unchecked = (cov.unchecked || []), unclassified = (cov.unclassified || []);
+    if (unchecked.length || unclassified.length) {
+      var warn = el("div", { cls: "mlr-coverage-warn" });
+      warn.appendChild(el("div", { cls: "mlr-coverage-warn-title", text: "⚠ Not fully checked" }));
+      if (unchecked.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
+        text: "Not recognised — NOT checked for any interaction: " + unchecked.join(", ") + ". Verify the name/spelling or check these manually." }));
+      if (unclassified.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
+        text: "Recognised but not classified — only duplicate checks applied: " + unclassified.map(cap).join(", ") + "." }));
+      main.appendChild(warn);
+    }
 
     // ---- controls ----
     var filters = el("div", { cls: "mlr-filters" });
@@ -1302,7 +1329,19 @@
     resultsSection(main, "Duplicate therapy", (res.duplicates || []).slice());
 
     var anyShown = res.critical.length || res.major.length || monitoring.length || (res.duplicates || []).length;
-    if (!anyShown) main.appendChild(el("div", { cls: "mlr-none", text: "No major issue detected" }));
+    if (!anyShown) {
+      // NEVER show a reassuring "all clear" — absence of a rule is not proof of safety,
+      // and it must read differently when some medicines could not be screened.
+      var incomplete = unchecked.length || unclassified.length;
+      var none = el("div", { cls: "mlr-none" + (incomplete ? " mlr-none-partial" : "") });
+      none.appendChild(el("div", { cls: "mlr-none-head",
+        text: incomplete
+          ? "No interaction found among the medicines that could be checked"
+          : "No interaction found in this dataset" }));
+      none.appendChild(el("div", { cls: "mlr-none-sub",
+        text: "This is a screen against an open, non-exhaustive dataset — it does NOT confirm the combination is safe. Absence of a finding is not clearance. Verify important decisions against the drug label, a pharmacist, or local protocol." }));
+      main.appendChild(none);
+    }
 
     work.appendChild(main);
     _root.appendChild(work);
@@ -1499,7 +1538,15 @@
 ".mlr-detail{display:flex;flex-direction:column;gap:1px;margin-top:7px}",
 ".mlr-detail-label{font:800 10px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184)}",
 ".mlr-detail-val{font:500 12.5px var(--sans);color:var(--ink,#14202b);line-height:1.45}",
-".mlr-none{padding:22px 14px;text-align:center;color:var(--green,#1c7a4a);font:800 14px var(--sans);border:1px solid var(--green-line,#aedcc1);border-radius:12px;background:var(--green-bg,#e7f5ec)}",
+/* Neutral (NOT green): 'no finding' is a screen result, not a safety clearance. */
+".mlr-none{padding:18px 14px;text-align:left;border:1px solid var(--line,#d7e0ea);border-radius:12px;background:var(--panel-2,#f4f7fb)}",
+".mlr-none-partial{border-color:var(--amber-line,#e6cf9a);background:var(--amber-bg,#fdf6e7)}",
+".mlr-none-head{font:800 14px var(--sans);color:var(--ink,#1f2d3d)}",
+".mlr-none-sub{font:500 12px var(--sans);color:var(--slate-soft,#5a7184);margin-top:6px;line-height:1.5}",
+".mlr-dataset-note{font:600 10.5px var(--sans);color:var(--slate-soft,#5a7184);margin-top:8px;opacity:.85}",
+".mlr-coverage-warn{margin-top:12px;padding:12px 14px;border:1px solid var(--amber-line,#e6cf9a);background:var(--amber-bg,#fdf6e7);border-radius:12px}",
+".mlr-coverage-warn-title{font:800 12.5px var(--sans);color:var(--amber-ink,#8a5a12)}",
+".mlr-coverage-warn-line{font:600 12px var(--sans);color:var(--slate,#3d4f61);margin-top:5px;line-height:1.5}",
 ".mlr-why{margin-top:9px}",
 ".mlr-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}",
 ".mlr-whatnow-btn{background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:9px;padding:8px 14px;font:800 12.5px var(--sans);cursor:pointer;min-height:40px}",

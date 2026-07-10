@@ -110,6 +110,37 @@ try {
   const opened = await ev(`if(!(window.MEDDRUGS&&MEDDRUGS.openInteractions))return false;MEDDRUGS.openInteractions();var o=document.getElementById("miOverlay");return !!(o&&o.classList.contains("on"));`);
   ok(opened === true, "invoking MEDDRUGS.openInteractions opens the interactions overlay (#miOverlay.on)");
 
+  // 9. REGRESSION (the reported miss): sildenafil + nitroglycerin(IV) + nifedipine.
+  //    Previously returned 0 findings (all three were absent/unclassified) and the UI
+  //    showed a green "no issue". After the pipeline expansion these must fire.
+  const r9 = await check([{ generic: "sildenafil" }, { generic: "nitroglycerin" }, { generic: "nifedipine" }]);
+  ok(r9.reviewedCount === 3, "sildenafil+nitroglycerin+nifedipine reviewedCount === 3 (all resolved)");
+  ok(r9.critical.some(f => /nitrate|nitro/i.test((f.drugs || []).join(" ") + f.mechanism) && /pde5|sildenafil/i.test((f.drugs || []).join(" ") + f.mechanism)),
+     "nitroglycerin + sildenafil surfaces a CONTRAINDICATED (critical) nitrate×PDE5i finding");
+  ok(r9.critical.some(f => /fatal|hypotension/i.test((f.effect || "") + (f.mechanism || ""))),
+     "the nitrate×PDE5i finding warns of severe/fatal hypotension");
+  const nifSil = [].concat(r9.moderate, r9.monitor, r9.major).some(f => {
+    const d = (f.drugs || []).join(" ").toLowerCase();
+    return d.includes("nifedipine") && d.includes("sildenafil");
+  });
+  ok(nifSil, "nifedipine + sildenafil surfaces a monitor/moderate finding");
+  ok(r9.coverage && r9.coverage.unchecked.length === 0 && r9.coverage.reviewedCount === 3,
+     "coverage reports all 3 medicines checked, none unchecked");
+
+  // 9b. Coverage: an unrecognised medicine is recorded (never silently dropped).
+  const r9b = await check([{ generic: "sildenafil" }, { raw: "zzznotadrug", generic: null }]);
+  ok(r9b.coverage && r9b.coverage.unchecked.length === 1 && /zzznotadrug/i.test(r9b.coverage.unchecked[0]),
+     "an unrecognised entry is surfaced in coverage.unchecked, not silently skipped");
+
+  // 9c. Brand path: 'Viagra' + a nitrate brand must still catch the contraindication.
+  const r9c = JSON.parse(await ev(`
+    if(!(window.MEDLIST && MEDLIST.parseEntry)) return JSON.stringify({__noMedlist:true});
+    var a=MEDLIST.parseEntry("Viagra 50 mg"); var b=MEDLIST.parseEntry("nitroglycerin infusion");
+    var res=INTERACTIONS.checkInteractions([a,b]);
+    return JSON.stringify({ aGen:a.generic, bGen:b.generic, crit:res.critical.length });`));
+  ok(r9c.aGen === "sildenafil", "brand 'Viagra' resolves to sildenafil via INTERACTION_RULES.brands");
+  ok(r9c.crit >= 1, "Viagra (brand) + nitroglycerin fires the contraindicated nitrate×PDE5i rule");
+
   console.log(fails === 0 ? "\nALL GREEN — interactions engine test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StewardMD INTERACTION_RULES emitted contract",
+  "type": "object",
+  "required": ["version", "generated", "sources", "drugClasses", "rules", "generics", "brands"],
+  "properties": {
+    "version": { "type": "string" },
+    "generated": { "type": "string" },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "org": { "type": "string" },
+          "version": { "type": "string" },
+          "license": { "type": "string" }
+        }
+      }
+    },
+    "drugClasses": {
+      "type": "object",
+      "additionalProperties": { "type": "array", "items": { "type": "string" } }
+    },
+    "generics": { "type": "array", "items": { "type": "string" } },
+    "brands": { "type": "object", "additionalProperties": { "type": "string" } },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "subjects", "severity"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "enum": ["pair", "duplicate_generic", "duplicate_class", "combination", "context"] },
+          "subjects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["kind", "value"],
+              "properties": {
+                "kind": { "enum": ["generic", "class", "context"] },
+                "value": { "type": "string" }
+              }
+            }
+          },
+          "severity": { "enum": ["contraindicated", "major", "moderate", "minor", "monitor"] },
+          "mechanism": { "type": "string" },
+          "effect": { "type": "string" },
+          "action": { "type": "string" },
+          "monitoring": { "type": "string" },
+          "sourceId": { "type": ["string", "null"] },
+          "evidence": { "type": "string" },
+          "reviewDate": { "type": "string" },
+          "doseTimingSeparation": { "type": "boolean" },
+          "specialistReview": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "_comment": "Curated drugs to ADD to the interaction universe beyond the app's dumped formularies (drug_universe.json). These are common interacting agents (PDE5 inhibitors, extra nitrates, dihydropyridine CCBs, strong CYP3A4 inhibitors) a clinician may enter even though they are not in StewardMD's own dose formularies. Each is normalized + classified by the pipeline exactly like formulary drugs; 'query' overrides the RxNorm lookup term when the generic label differs.",
+  "drugs": [
+    { "generic": "sildenafil", "brands": ["viagra", "revatio", "penegra", "manforce", "suhagra"] },
+    { "generic": "tadalafil", "brands": ["cialis", "adcirca", "tadacip", "megalis"] },
+    { "generic": "vardenafil", "brands": ["levitra", "staxyn", "vilitra"] },
+    { "generic": "avanafil", "brands": ["stendra", "spedra"] },
+    { "generic": "isosorbide mononitrate", "query": "isosorbide mononitrate", "brands": ["imdur", "monit", "ismo", "monotrate"] },
+    { "generic": "isosorbide dinitrate", "query": "isosorbide dinitrate", "brands": ["isordil", "sorbitrate", "dinitrate"] },
+    { "generic": "nicorandil", "brands": ["nikoran", "korandil", "ikorel"] },
+    { "generic": "nifedipine", "brands": ["adalat", "nicardia", "depin", "calcigard"] },
+    { "generic": "felodipine", "brands": ["plendil", "felodip"] },
+    { "generic": "nimodipine", "brands": ["nimotop", "nimodip", "vasotop"] },
+    { "generic": "nicardipine", "brands": ["cardene"] },
+    { "generic": "clevidipine", "brands": ["cleviprex"] },
+    { "generic": "ketoconazole", "brands": ["nizoral"] },
+    { "generic": "itraconazole", "brands": ["sporanox", "itraspor", "canditral"] },
+    { "generic": "ritonavir", "brands": ["norvir"] }
+  ]
+}
