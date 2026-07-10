@@ -492,3 +492,45 @@ html.rds-on .splash-continue-btn { border-radius: var(--rds-r-ctl); min-height: 
 html.rds-on .splash-disclaimer-gate { border-radius: var(--rds-r); }
 html.rds-on .splash-name { font-family: var(--rds-font); }
 html.rds-on .splash-tagline { font-family: var(--rds-font); }
+
+/* ============================================================================
+   Fixes (device review): header search fit, sidebar drawer, classic engine.
+   ========================================================================== */
+
+/* --- Header: at narrow widths the spacer collapsed and search glued to the
+   wordmark. Shrink the header controls so a real gap returns. --- */
+#homeV2.rnav .rnav-head { gap: 3px; padding-left: 12px; padding-right: 12px; }
+#homeV2.rnav .rnav-head .rds-icon-btn { min-width: 38px; width: 38px; height: 40px; }
+#homeV2.rnav .rnav-avatar { width: 34px; height: 34px; }
+#homeV2.rnav .rnav-head .rds-icon { font-size: 22px; }
+#homeV2.rnav .rnav-brand { min-width: 0; overflow: hidden; }
+#homeV2.rnav .rnav-brand span { white-space: nowrap; }
+#homeV2.rnav [data-act="search"] { margin-left: 4px; }  /* guarantee a gap from the brand */
+
+/* --- Sidebar drawer (app.js #sbDrawer; items sb-main/sb-sub/sw-* ) --- */
+html body.rds-on #sbDrawer, html body.rds-on .sb-drawer { background: var(--rds-bg); font-family: var(--rds-font); }
+html body.rds-on .sb-head { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on .sw-sblab { color: var(--rds-muted); text-transform: uppercase; letter-spacing: .08em; font: 700 11px var(--rds-font); }
+html body.rds-on .sb-main, html body.rds-on .sb-main-link, html body.rds-on .sb-subitem, html body.rds-on .sw-sbsw {
+  min-height: 48px; border-radius: var(--rds-r-ctl); margin: 2px 8px; font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .sb-main-link:hover, html body.rds-on .sb-subitem:hover, html body.rds-on .sw-sbsw:hover { background: var(--rds-surface-2); }
+html body.rds-on .sb-main-link:active, html body.rds-on .sb-subitem:active { background: var(--rds-primary-soft); }
+html body.rds-on .sb-sub { border-radius: var(--rds-r-ctl); }
+html body.rds-on .sb-beta { background: var(--rds-primary-soft); color: var(--rds-primary); border-radius: var(--rds-r-pill); }
+
+/* --- Classic clinical engine "Start a Case" (app.js .app-head + #inputCard) --- */
+html body.rds-on .app-head { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on #inputCard.card { border-radius: var(--rds-r); border: 1px solid var(--rds-line); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .group-tabs { gap: 8px; }
+html body.rds-on .group-tab { border-radius: var(--rds-r-pill); font-family: var(--rds-font); min-height: 44px; border: 1.5px solid var(--rds-line); background: var(--rds-surface); color: var(--rds-ink); }
+html body.rds-on .group-tab.active { background: var(--rds-primary); border-color: var(--rds-primary); color: var(--rds-on-primary); }
+html body.rds-on .step-progress-bar { background: var(--rds-surface-2); border-radius: 999px; overflow: hidden; }
+html body.rds-on .step-progress-fill { background: var(--rds-primary); border-radius: 999px; }
+html body.rds-on .step-progress-label { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on .findings-count { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on .finding-grid { gap: 8px; }
+html body.rds-on .finding-item { border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); min-height: 52px; background: var(--rds-surface); color: var(--rds-ink); font-family: var(--rds-font); transition: background var(--rds-dur) var(--rds-ease), border-color var(--rds-dur) var(--rds-ease); }
+html body.rds-on .finding-item:hover { border-color: var(--rds-primary); }
+html body.rds-on .finding-item:active, html body.rds-on .finding-item.on, html body.rds-on .finding-item.sel, html body.rds-on .finding-item.checked { background: var(--rds-primary-soft); border-color: var(--rds-primary); }
+html body.rds-on .finding-list-col, html body.rds-on .finding-list-pair { gap: 8px; }
+html body.rds-on .step-nav-btn { border-radius: var(--rds-r-ctl); min-height: 48px; font-family: var(--rds-font); }
