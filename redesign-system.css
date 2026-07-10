@@ -347,3 +347,30 @@ html body.rds-on .icu-tour {
 }
 /* 44px minimum touch target on ICU action chips (was 36px) */
 html body.rds-on #icuRoot .icu-chip { min-height: 44px; }
+
+/* --- Board 2d: Interaction-checker results + med-list builder (flag-gated) ---
+   Restyles THIS surface's own classes (medlist.js .ml-*/.mlr-*) onto the design
+   system. CSS only; severity semantics preserved (critical=red, major=urgent/
+   orange, monitor=info/blue, duplicate=warning/amber). */
+html body.rds-on .mlr-summary-panel { border-radius: var(--rds-r); border-color: var(--rds-line); box-shadow: var(--rds-el-card); }
+html body.rds-on .mlr-summary-title { font-family: var(--rds-font); }
+html body.rds-on .mlr-chips { gap: 10px; }
+html body.rds-on .mlr-chip { border-radius: var(--rds-r-ctl); padding: 10px 12px; min-height: 48px; flex-direction: column; align-items: flex-start; gap: 2px; flex: 1 1 calc(50% - 10px); }
+html body.rds-on .mlr-chip-num { font: 800 20px var(--rds-mono); font-variant-numeric: tabular-nums; }
+html body.rds-on .mlr-chip-critical  { background: var(--sev-critical-bg); color: var(--sev-critical-fg); border-color: var(--sev-critical-bd); }
+html body.rds-on .mlr-chip-major     { background: var(--sev-urgent-bg);   color: var(--sev-urgent-fg);   border-color: var(--sev-urgent-bd); }
+html body.rds-on .mlr-chip-monitor   { background: var(--sev-info-bg);     color: var(--sev-info-fg);     border-color: var(--sev-info-bd); }
+html body.rds-on .mlr-chip-duplicate { background: var(--sev-warning-bg);  color: var(--sev-warning-fg);  border-color: var(--sev-warning-bd); }
+html body.rds-on .mlr-card { border-radius: var(--rds-r); border: 1px solid var(--rds-line); box-shadow: var(--rds-el-card); overflow: hidden; }
+html body.rds-on .mlr-card-critical { border-left: 4px solid var(--sev-critical-fg); }
+html body.rds-on .mlr-card-major    { border-left: 4px solid var(--sev-urgent-fg); }
+html body.rds-on .mlr-card-moderate { border-left: 4px solid var(--sev-warning-fg); }
+html body.rds-on .mlr-card-minor    { border-left: 4px solid var(--sev-info-fg); }
+html body.rds-on .mlr-card-monitor  { border-left: 4px solid var(--sev-info-fg); }
+html body.rds-on .mlr-sev-critical { color: var(--sev-critical-fg); }
+html body.rds-on .mlr-sev-major    { color: var(--sev-urgent-fg); }
+html body.rds-on .mlr-explain-btn, html body.rds-on .mlr-whatnow-btn, html body.rds-on .mlr-filter-btn, html body.rds-on .mlr-remove-drug { min-height: 40px; border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
+html body.rds-on .ml-check-btn { border-radius: var(--rds-r-ctl); min-height: 48px; box-shadow: var(--rds-el-cta); font-family: var(--rds-font); }
+html body.rds-on .ml-row, html body.rds-on .ml-row-grouped { border-radius: var(--rds-r); border-color: var(--rds-line); }
+html body.rds-on .ml-action-card { border-radius: var(--rds-r); border-color: var(--rds-line); }
+html body.rds-on .ml-list-count { font-family: var(--rds-font); }
