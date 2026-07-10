@@ -1,0 +1,19 @@
+{
+  "_comment": "Clinician sign-off manifest. validate.py FAILS the build if any emitted rule with severity 'contraindicated' or 'major' is neither listed in 'signed' (status 'signed') nor covered by grandfather_legacy. A 'signed' entry with a placeholder reviewer or status!='signed' produces a WARNING (build proceeds, flagged) — used for rules still awaiting review. This mirrors the KB clinician sign-off workflow; content remains advisory and requires local verification.",
+  "grandfather_legacy": true,
+  "grandfather_note": "The 38 rules migrated from interaction-rules.js v0.1.0-starter were the app's existing shipped starter set; they retain their original reviewDate and are grandfathered here. New rules require explicit sign-off below.",
+  "signed": [
+    { "id": "mech-nitrate-pde5i", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" },
+    { "id": "mech-sympathomimetic-maoi", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" },
+    { "id": "mech-lithium-nsaid", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" },
+    { "id": "mech-lithium-raas-diuretic", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" },
+    { "id": "mech-pde5i-dhp-ccb", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" },
+
+    { "id": "mech-cyp3a4strong-simvastatin", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" },
+    { "id": "mech-cyp3a4strong-lovastatin", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" },
+    { "id": "mech-cyp3a4strong-atorvastatin", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" },
+    { "id": "mech-cyp3a4strong-pde5i", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" },
+    { "id": "mech-cyp3a4strong-calcineurin", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" },
+    { "id": "mech-cyp3a4strong-dhp-ccb", "reviewer": "Dr. Manoj Kumar Kurmana, MBBS MD Internal Medicine", "date": "2026-07-10", "status": "signed" }
+  ]
+}

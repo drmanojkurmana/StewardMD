@@ -1,0 +1,131 @@
+{
+  "_comment": "Maps RxClass classes to StewardMD internal snake_case class tags. build_classmap.py matches each RxClass class returned for a drug by (classType, className) case-insensitively against the entries below; only mapped classes become tags (unmapped classes are logged to the review queue, never guessed). Tags reuse the EXACT strings already used by the legacy ruleset so migrated rules keep firing; new tags (nitrate, pde5_inhibitor, dihydropyridine_ccb, calcium_channel_blocker) back the new mechanism rules. IMPORTANT: fetch_rxclass.py must filter MEDRT by relas=has_moa/has_pe — unfiltered MEDRT leaks interacts-with (ci_with) relationships and would mis-tag e.g. nitroglycerin as a PDE5 inhibitor.",
+  "match": [
+    { "classType": "EPC", "className": "Nitrate Vasodilator", "tags": ["nitrate", "vasodilator"] },
+    { "classType": "CHEM", "className": "Nitrates", "tags": ["nitrate"] },
+    { "classType": "EPC", "className": "Phosphodiesterase 5 Inhibitor", "tags": ["pde5_inhibitor"] },
+    { "classType": "MOA", "className": "Phosphodiesterase 5 Inhibitors", "tags": ["pde5_inhibitor"] },
+
+    { "classType": "EPC", "className": "Dihydropyridine Calcium Channel Blocker", "tags": ["dihydropyridine_ccb", "calcium_channel_blocker"] },
+    { "classType": "EPC", "className": "Calcium Channel Blocker", "tags": ["calcium_channel_blocker"] },
+    { "classType": "EPC", "className": "Nondihydropyridine Calcium Channel Blocker", "tags": ["non_dihydropyridine_ccb", "calcium_channel_blocker"] },
+
+    { "classType": "EPC", "className": "Nonsteroidal Anti-inflammatory Drug", "tags": ["nsaid"] },
+    { "classType": "EPC", "className": "Nonsteroidal Anti-inflammatory Compound", "tags": ["nsaid"] },
+
+    { "classType": "EPC", "className": "Serotonin Reuptake Inhibitor", "tags": ["ssri", "serotonergic"] },
+    { "classType": "EPC", "className": "Selective Serotonin Reuptake Inhibitor", "tags": ["ssri", "serotonergic"] },
+    { "classType": "EPC", "className": "Serotonin and Norepinephrine Reuptake Inhibitor", "tags": ["snri", "serotonergic"] },
+    { "classType": "EPC", "className": "Serotonin-3 Receptor Antagonist", "tags": ["qt_prolonging"] },
+    { "classType": "EPC", "className": "Monoamine Oxidase Inhibitor", "tags": ["mao_inhibitor", "serotonergic"] },
+    { "classType": "EPC", "className": "Tricyclic Antidepressant", "tags": ["serotonergic", "qt_prolonging"] },
+
+    { "classType": "EPC", "className": "HMG-CoA Reductase Inhibitor", "tags": ["statin"] },
+    { "classType": "EPC", "className": "Fibric Acid", "tags": ["fibrate"] },
+    { "classType": "EPC", "className": "Peroxisome Proliferator Receptor alpha Agonist", "tags": ["fibrate"] },
+
+    { "classType": "EPC", "className": "Angiotensin Converting Enzyme Inhibitor", "tags": ["ace_inhibitor", "raas"] },
+    { "classType": "EPC", "className": "Angiotensin 2 Receptor Blocker", "tags": ["arb", "raas"] },
+    { "classType": "EPC", "className": "Angiotensin Receptor Antagonist", "tags": ["arb", "raas"] },
+    { "classType": "EPC", "className": "Renin Inhibitor", "tags": ["raas"] },
+    { "classType": "EPC", "className": "Aldosterone Antagonist", "tags": ["potassium_sparing_diuretic", "diuretic", "aldosterone_antagonist"] },
+    { "classType": "EPC", "className": "Mineralocorticoid Receptor Antagonist", "tags": ["potassium_sparing_diuretic", "diuretic", "aldosterone_antagonist"] },
+
+    { "classType": "EPC", "className": "Loop Diuretic", "tags": ["loop_diuretic", "diuretic"] },
+    { "classType": "EPC", "className": "Thiazide Diuretic", "tags": ["thiazide_diuretic", "diuretic"] },
+    { "classType": "EPC", "className": "Thiazide-like Diuretic", "tags": ["thiazide_diuretic", "diuretic"] },
+    { "classType": "EPC", "className": "Potassium Sparing Diuretic", "tags": ["potassium_sparing_diuretic", "diuretic"] },
+
+    { "classType": "EPC", "className": "beta-Adrenergic Blocker", "tags": ["beta_blocker"] },
+    { "classType": "EPC", "className": "beta-Adrenergic Antagonist", "tags": ["beta_blocker"] },
+
+    { "classType": "EPC", "className": "Vitamin K Antagonist", "tags": ["anticoagulant", "vitamin_k_antagonist"] },
+    { "classType": "EPC", "className": "Factor Xa Inhibitor", "tags": ["anticoagulant", "doac"] },
+    { "classType": "EPC", "className": "Thrombin Inhibitor", "tags": ["anticoagulant", "doac"] },
+    { "classType": "EPC", "className": "Direct Thrombin Inhibitor", "tags": ["anticoagulant", "doac"] },
+    { "classType": "EPC", "className": "Anticoagulant", "tags": ["anticoagulant"] },
+    { "classType": "EPC", "className": "Low Molecular Weight Heparin", "tags": ["anticoagulant", "lmwh"] },
+    { "classType": "EPC", "className": "Heparin", "tags": ["anticoagulant"] },
+    { "classType": "EPC", "className": "P2Y12 Platelet Inhibitor", "tags": ["antiplatelet", "p2y12_inhibitor"] },
+    { "classType": "EPC", "className": "Platelet Aggregation Inhibitor", "tags": ["antiplatelet"] },
+
+    { "classType": "EPC", "className": "Opioid Agonist", "tags": ["opioid", "cns_depressant"] },
+    { "classType": "EPC", "className": "Full Opioid Agonist", "tags": ["opioid", "cns_depressant"] },
+    { "classType": "EPC", "className": "Partial Opioid Agonist", "tags": ["opioid", "cns_depressant"] },
+    { "classType": "MOA", "className": "Full Opioid Agonists", "tags": ["opioid", "cns_depressant"] },
+    { "classType": "EPC", "className": "Benzodiazepine", "tags": ["benzodiazepine", "cns_depressant"] },
+    { "classType": "EPC", "className": "Barbiturate", "tags": ["cns_depressant"] },
+
+    { "classType": "EPC", "className": "Proton Pump Inhibitor", "tags": ["ppi"] },
+
+    { "classType": "EPC", "className": "Macrolide Antimicrobial", "tags": ["macrolide", "qt_prolonging"] },
+    { "classType": "EPC", "className": "Quinolone Antimicrobial", "tags": ["fluoroquinolone", "qt_prolonging"] },
+    { "classType": "EPC", "className": "Azole Antifungal", "tags": ["azole_antifungal", "cyp3a4_inhibitor"] },
+    { "classType": "EPC", "className": "Triazole Antifungal", "tags": ["azole_antifungal", "cyp3a4_inhibitor"] },
+
+    { "classType": "EPC", "className": "Xanthine Oxidase Inhibitor", "tags": ["xanthine_oxidase_inhibitor"] },
+    { "classType": "EPC", "className": "Dihydrofolate Reductase Inhibitor", "tags": ["antifolate"] },
+
+    { "classType": "MOA", "className": "Cytochrome P450 3A4 Inhibitors", "tags": ["cyp3a4_inhibitor"] },
+    { "classType": "MOA", "className": "Cytochrome P450 3A4 Strong Inhibitors", "tags": ["cyp3a4_inhibitor"] },
+    { "classType": "MOA", "className": "Cytochrome P450 3A4 Inducers", "tags": ["cyp3a4_inducer"] },
+    { "classType": "MOA", "className": "Cytochrome P450 2C19 Inhibitors", "tags": ["cyp2c19_inhibitor"] },
+
+    { "classType": "MOA", "className": "Cytochrome P450 2D6 Inhibitors", "tags": ["cyp2d6_inhibitor"] },
+    { "classType": "MOA", "className": "Cytochrome P450 1A2 Inhibitors", "tags": ["cyp1a2_inhibitor"] },
+    { "classType": "MOA", "className": "P-Glycoprotein Inhibitors", "tags": ["pgp_inhibitor"] },
+
+    { "classType": "EPC", "className": "Anticholinergic", "tags": ["anticholinergic"] },
+    { "classType": "EPC", "className": "Muscarinic Antagonist", "tags": ["anticholinergic"] },
+    { "classType": "EPC", "className": "Antihistamine", "tags": ["antihistamine"] },
+    { "classType": "EPC", "className": "Histamine-1 Receptor Antagonist", "tags": ["antihistamine"] },
+
+    { "classType": "EPC", "className": "Corticosteroid", "tags": ["corticosteroid"] },
+    { "classType": "EPC", "className": "Corticosteroid Hormone Receptor Agonist", "tags": ["corticosteroid"] },
+
+    { "classType": "EPC", "className": "Aminoglycoside Antibacterial", "tags": ["aminoglycoside", "nephrotoxic"] },
+    { "classType": "EPC", "className": "Glycopeptide Antibacterial", "tags": ["glycopeptide", "nephrotoxic"] },
+    { "classType": "EPC", "className": "Polymyxin-class Antibacterial", "tags": ["nephrotoxic"] },
+    { "classType": "EPC", "className": "Sulfonamide Antibacterial", "tags": ["sulfonamide"] },
+    { "classType": "EPC", "className": "Oxazolidinone Antibacterial", "tags": ["mao_inhibitor", "serotonergic"] },
+    { "classType": "EPC", "className": "Nitroimidazole Antimicrobial", "tags": ["qt_prolonging"] },
+
+    { "classType": "EPC", "className": "Calcineurin Inhibitor Immunosuppressant", "tags": ["calcineurin_inhibitor", "cyp3a4_sensitive_substrate", "nephrotoxic"] },
+    { "classType": "EPC", "className": "Calcineurin Inhibitor", "tags": ["calcineurin_inhibitor", "cyp3a4_sensitive_substrate", "nephrotoxic"] },
+    { "classType": "EPC", "className": "mTOR Inhibitor Immunosuppressant", "tags": ["cyp3a4_sensitive_substrate", "immunosuppressant"] },
+    { "classType": "EPC", "className": "Kinase Inhibitor", "tags": ["cyp3a4_sensitive_substrate"] },
+
+    { "classType": "EPC", "className": "Sulfonylurea", "tags": ["sulfonylurea", "hypoglycemic"] },
+    { "classType": "EPC", "className": "Meglitinide", "tags": ["hypoglycemic"] },
+    { "classType": "EPC", "className": "Insulin", "tags": ["insulin", "hypoglycemic"] },
+    { "classType": "EPC", "className": "Insulin Analog", "tags": ["insulin", "hypoglycemic"] },
+    { "classType": "EPC", "className": "Biguanide", "tags": ["biguanide"] },
+    { "classType": "EPC", "className": "Sodium-Glucose Cotransporter 2 Inhibitor", "tags": ["sglt2_inhibitor"] },
+    { "classType": "EPC", "className": "Dipeptidyl Peptidase 4 Inhibitor", "tags": ["dpp4_inhibitor"] },
+    { "classType": "EPC", "className": "Glucagon-Like Peptide-1 Receptor Agonist", "tags": ["glp1_agonist"] },
+
+    { "classType": "EPC", "className": "Cardiac Glycoside", "tags": ["cardiac_glycoside"] },
+    { "classType": "EPC", "className": "Antiarrhythmic", "tags": ["antiarrhythmic"] },
+    { "classType": "EPC", "className": "Adrenergic Receptor Agonist", "tags": ["sympathomimetic"] },
+    { "classType": "EPC", "className": "Catecholamine", "tags": ["sympathomimetic"] },
+    { "classType": "EPC", "className": "Central Alpha-2 Adrenergic Agonist", "tags": ["central_alpha2_agonist"] },
+    { "classType": "EPC", "className": "alpha-Adrenergic Blocker", "tags": ["alpha_blocker", "vasodilator"] },
+
+    { "classType": "EPC", "className": "Histamine H2 Receptor Antagonist", "tags": ["h2_antagonist"] },
+    { "classType": "EPC", "className": "Methylxanthine", "tags": ["methylxanthine"] },
+    { "classType": "EPC", "className": "Xanthine Oxidase Inhibitor", "tags": ["xanthine_oxidase_inhibitor"] },
+
+    { "classType": "EPC", "className": "GABA-A Receptor Agonist", "tags": ["cns_depressant"] },
+    { "classType": "EPC", "className": "Skeletal Muscle Relaxant", "tags": ["cns_depressant"] },
+    { "classType": "EPC", "className": "Gamma-aminobutyric Acid Analog", "tags": ["cns_depressant"] },
+    { "classType": "EPC", "className": "Nonbenzodiazepine Hypnotic", "tags": ["cns_depressant"] },
+    { "classType": "EPC", "className": "Atypical Antipsychotic", "tags": ["antipsychotic"] },
+    { "classType": "EPC", "className": "Phenothiazine", "tags": ["antipsychotic", "anticholinergic"] },
+
+    { "classType": "EPC", "className": "Serotonin-1b and Serotonin-1d Receptor Agonist", "tags": ["serotonergic", "triptan"] },
+    { "classType": "EPC", "className": "Norepinephrine and Dopamine Reuptake Inhibitor", "tags": ["cyp2d6_inhibitor"] },
+
+    { "classType": "EPC", "className": "Nonsteroidal Anti-inflammatory Drug [EPC]", "tags": ["nsaid"] },
+    { "classType": "EPC", "className": "Fibric Acid Derivative", "tags": ["fibrate"] }
+  ]
+}

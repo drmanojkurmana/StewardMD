@@ -158,17 +158,40 @@
     var result = {
       critical: [], major: [], moderate: [], minor: [], monitor: [],
       duplicates: [], combinations: [],
-      reviewedCount: 0
+      reviewedCount: 0,
+      // Coverage tells the UI what was and was NOT actually screened, so an
+      // absent finding is never mistaken for "safe". unchecked = entries with no
+      // resolved generic (skipped entirely); unclassified = resolved generics
+      // that carry no pharmacologic class, so only same-generic duplicate logic
+      // — not class/mechanism rules — can apply to them.
+      coverage: {
+        datasetVersion: (IR.version || "") + (IR.generated ? " (" + IR.generated + ")" : ""),
+        submittedCount: 0, reviewedCount: 0, classifiedCount: 0,
+        unclassified: [], unchecked: []
+      }
     };
 
-    // 1. Normalize; skip meds without a resolved generic.
+    // 1. Normalize; entries without a resolved generic are recorded as
+    //    "unchecked" (previously silently dropped) so the UI can surface them.
     var norm = [];
     var list = Array.isArray(meds) ? meds : [];
+    result.coverage.submittedCount = list.length;
     for (var i = 0; i < list.length; i++) {
       var n = normalizeMed(list[i], drugClasses, meddrugsList);
-      if (n) norm.push(n);
+      if (n) {
+        norm.push(n);
+        if (!n.classes || n.classes.length === 0) {
+          if (result.coverage.unclassified.indexOf(n.generic) === -1) result.coverage.unclassified.push(n.generic);
+        }
+      } else {
+        var src = list[i] || {};
+        var label = (src.raw || src.name || src.brand || src.generic || "").toString().trim();
+        if (label && result.coverage.unchecked.indexOf(label) === -1) result.coverage.unchecked.push(label);
+      }
     }
     result.reviewedCount = norm.length;
+    result.coverage.reviewedCount = norm.length;
+    result.coverage.classifiedCount = norm.length - result.coverage.unclassified.length;
     if (norm.length === 0) return result;
 
     function push(rule, indices) {
