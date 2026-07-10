@@ -1,7 +1,7 @@
 # StewardMD Mobile UX Redesign — Implementation Results (Phase 5)
 
 **Branch:** `redesign/stewardmd-mobile-ux` (pushed to origin)
-**Delivery model:** strictly **additive + flag-gated + reversible**. The entire redesign is OFF by default; enable with `?rnav=1`, `localStorage smd_redesign_nav="1"`, or the in-app **More → "New design (Beta)"** toggle. Flag off ⇒ the shipped UI is byte-for-byte unchanged.
+**Delivery model:** strictly **additive + reversible**. The redesign is now **ON by default**. Opt out with `?rnav=0`, `localStorage smd_redesign_nav="0"`, or the in-app **More → "New design"** toggle. With it off, the previous UI renders byte-for-byte unchanged (all restyles are scoped under `html.rds-on`/`body.rds-on`).
 
 ## How it's built (recap)
 - `redesign-system.css` — the design system: `rds-*` token layer (colours light/dark, typography, 4-pt spacing, radius, elevation, motion), clinical **severity tokens** (critical/urgent/warning/stable/informational/completed), reusable components (buttons/inputs/cards/chips/badges/banners/vital-tiles/list-rows/dialog/sheet/toast/skeleton/state blocks), safe-area + a11y utilities, and every per-surface restyle scoped under `html body.rds-on` (post-boot) / `html.rds-on` (onboarding).
@@ -61,7 +61,7 @@ Enable the redesign on device: **More → "New design (Beta)"** (or set `smd_red
 - 2c full "mfr + price" nested chips need the online drug DB (MEDDB/MEDAPI) wired into the browse markup (structural/data — deferred); the current card shows dose + common brands.
 - 2f/2g/3b/3c/3d are CSS-verified but not individually screenshotted (need seeded clinical/case data or the live gate); safe to review via the flag.
 - `BETA_PRO_ALL=true` (account.js/offline-db.js) is a pre-existing TESTING flag unrelated to this work — must be set `false` before a production launch (flagged in IMPLEMENTATION_PLAN.md R7).
-- The redesign is **default OFF**. Making it default requires flipping `redesignNavOn()`'s default (one line) + the early `index.html` hook — do this only after device review.
+- The redesign is **default ON** (`redesignNavOn()` returns true unless `?rnav=0` / `smd_redesign_nav="0"`). To revert to default-off, restore those two conditions in `home.js` + the early `index.html` hook.
 
 ## Git
 STEP 0 `d79e6ad` · Phase 1 `7fa4824` · Phase 2 `fee3ee3` · Phase 3 pt1 (ICU) `4594bcc` · 2d `c7a1b4f` · 2c `f895bd3` · 2e `74757a2` · Phase 3 rest + Phase 4/5 (this doc) — final commit on `redesign/stewardmd-mobile-ux`.

@@ -44,7 +44,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..700,0..1,0" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="/redesign-system.css?v=gold305">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
-try{var _q=location.search||"";var _on=/[?&]rnav=1\b/.test(_q)||(!/[?&]rnav=0\b/.test(_q)&&localStorage.getItem("smd_redesign_nav")==="1");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
+try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <script>
 /* Register the service worker (offline + instant repeat loads). Runs on load so it never
    competes with startup. Network-first HTML in sw.js means this can't trap stale versions. */
@@ -1234,7 +1234,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold199" defer></script>
 <script src="/electrolytes.js?v=gold229" defer></script>
 <script src="/caseshare.js?v=gold287" defer></script>
-<script src="/home.js?v=gold305" defer></script>
+<script src="/home.js?v=gold306" defer></script>
 <script src="/antibiogram.js?v=gold250" defer></script>
 <script src="/asp-region.js?v=gold241" defer></script>
 <script src="/swipe-back.js?v=gold243" defer></script>

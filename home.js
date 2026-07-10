@@ -792,10 +792,10 @@
   function redesignNavOn() {
     try {
       var q = location.search || "";
-      if (/[?&]rnav=0\b/.test(q)) return false;
-      if (/[?&]rnav=1\b/.test(q)) return true;
-      return localStorage.getItem("smd_redesign_nav") === "1";
-    } catch (e) { return false; }
+      if (/[?&]rnav=0\b/.test(q)) return false;                 // explicit off
+      if (/[?&]rnav=1\b/.test(q)) return true;                  // explicit on
+      return localStorage.getItem("smd_redesign_nav") !== "0";  // DEFAULT ON (off only if user opted out)
+    } catch (e) { return true; }
   }
   function ric(name) { return '<span class="rds-icon" aria-hidden="true">' + name + '</span>'; }
   function rtile(act, icon, tt, sub) {
@@ -1066,7 +1066,7 @@
       '<div class="hv-sh-t">More</div>' +
       // In-app toggle for the redesign (so it can be enabled/reviewed on a native device
       // where there is no URL bar for ?rnav=1). Toggles smd_redesign_nav + reloads.
-      '<button class="hv-mi" style="width:100%" onclick="try{var v=localStorage.getItem(\'smd_redesign_nav\')===\'1\';localStorage.setItem(\'smd_redesign_nav\',v?\'0\':\'1\');location.reload();}catch(e){}">' +
+      '<button class="hv-mi" style="width:100%" onclick="try{var on=localStorage.getItem(\'smd_redesign_nav\')!==\'0\';localStorage.setItem(\'smd_redesign_nav\',on?\'0\':\'1\');location.reload();}catch(e){}">' +
         svg("spark") + '<div class="ml">New design <span class="mc">' +
         (redesignNavOn() ? "On — tap to switch back" : "Beta — tap to try it") +
         '</span></div><span class="marr">' + svg("chev") + '</span></button>' +
