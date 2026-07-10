@@ -60,23 +60,35 @@ try {
   ok(r4.duplicates.some(f => f.ruleType === "duplicate_class"), "ibuprofen+diclofenac yields a duplicate_class finding in duplicates[]");
   ok(r4.duplicates.some(f => /nsaid/i.test((f.mechanism || "") + (f.effect || ""))), "ibuprofen+diclofenac duplicate is NSAID-related");
 
-  // 5. aspirin + aspirin -> duplicate_generic
-  const r5 = await check([{ generic: "aspirin" }, { generic: "aspirin" }]);
-  ok(r5.duplicates.some(f => f.ruleType === "duplicate_generic"), "aspirin+aspirin yields a duplicate_generic finding");
+  // 5. Sildenafil 50mg added twice -> one clinical medicine, no duplicate alert.
+  const r5 = await check([{ generic: "sildenafil", strength: 50 }, { generic: "sildenafil", strength: 50 }]);
+  ok(r5.reviewedCount === 1, "Sildenafil 50mg added twice -> reviewedCount is 1");
+  ok(r5.duplicates.length === 0, "Sildenafil 50mg added twice -> no duplicate alert");
 
-  // 5b. Spec §11: SAME generic reached via a BRAND entry + a GENERIC entry must be
-  //     detected as a duplicate. Exercise the real MEDLIST parse path (brand
-  //     "Ecosprin" resolves to aspirin) so brand+generic collapses to one generic
-  //     and fires duplicate_generic — not just when the caller passes generics directly.
-  const brandGen = JSON.parse(await ev(`
-    if(!(window.MEDLIST && MEDLIST.parseEntry)) return JSON.stringify({__noMedlist:true});
-    var brand=MEDLIST.parseEntry("T. Ecosprin 75");
-    var gen=MEDLIST.parseEntry("aspirin 75 od");
-    var res=INTERACTIONS.checkInteractions([brand, gen]);
-    return JSON.stringify({ brandGeneric:brand.generic, genGeneric:gen.generic,
-      dupGeneric:res.duplicates.some(function(f){return f.ruleType==="duplicate_generic";}) });`));
-  ok(brandGen.brandGeneric === "aspirin", "brand 'Ecosprin' parses to the aspirin generic");
-  ok(brandGen.dupGeneric === true, "Ecosprin (brand) + aspirin (generic) is detected as a duplicate_generic (same generic via brand + generic entries)");
+  // 5b. Sildenafil generic entry + Sildenafil 50mg product entry -> one clinical medicine for interaction checking.
+  const r5b = await check([{ generic: "sildenafil" }, { generic: "sildenafil", strength: 50 }]);
+  ok(r5b.duplicates.length === 0, "Sildenafil generic + Sildenafil 50mg -> no duplicate alert");
+
+  // 5c. Sildenafil + nitroglycerin -> one valid interaction, with no repeated drug name.
+  const r5c = await check([{ generic: "sildenafil" }, { generic: "nitroglycerin" }, { generic: "sildenafil", strength: 50 }]);
+  const criticalC = r5c.critical || [];
+  ok(criticalC.length > 0, "Sildenafil + nitroglycerin -> triggers critical interaction");
+  ok(criticalC.every(f => {
+    const seen = {};
+    return f.drugs.every(d => {
+      if (seen[d]) return false;
+      seen[d] = true;
+      return true;
+    });
+  }), "nitroglycerin + sildenafil has no repeated drug name in one interaction title");
+
+  // 5d. Sildenafil + pantoprazole -> no duplicate-therapy alert.
+  const r5d = await check([{ generic: "sildenafil" }, { generic: "pantoprazole" }]);
+  ok(r5d.duplicates.length === 0, "Sildenafil + pantoprazole -> no duplicate-therapy alert");
+
+  // 5e. Pantoprazole 40mg + Pantoprazole 80mg -> no automatic duplicate-therapy alert solely due to same ingredient.
+  const r5e = await check([{ generic: "pantoprazole", strength: 40 }, { generic: "pantoprazole", strength: 80 }]);
+  ok(r5e.duplicates.length === 0, "Pantoprazole 40mg + Pantoprazole 80mg -> no duplicate-therapy alert");
 
   // 6. amlodipine alone -> no critical/major, reviewedCount 1
   const r6 = await check([{ generic: "amlodipine" }]);

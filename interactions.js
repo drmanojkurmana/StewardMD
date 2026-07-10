@@ -58,30 +58,45 @@
     if (!med || !med.generic || typeof med.generic !== "string") return null;
     var generic = med.generic.trim().toLowerCase();
     if (!generic) return null;
-    var classes = drugClasses[generic];
-    if (Array.isArray(classes)) {
-      classes = classes.slice();
-    } else if (meddrugsList) {
-      // Fallback: pull the pharmacologic-class string off MEDDRUGS._list.
-      classes = [];
-      for (var i = 0; i < meddrugsList.length; i++) {
-        var d = meddrugsList[i];
-        if (d && d.generic && d.generic.toLowerCase() === generic && d.cls) {
-          classes = [String(d.cls)];
-          break;
+
+    var ingredients = generic.split("+").map(function (s) {
+      return s.trim().toLowerCase();
+    }).filter(Boolean);
+
+    var classes = [];
+    for (var i = 0; i < ingredients.length; i++) {
+      var ing = ingredients[i];
+      var ingClasses = drugClasses[ing];
+      if (Array.isArray(ingClasses)) {
+        for (var j = 0; j < ingClasses.length; j++) {
+          var c = ingClasses[j];
+          if (c !== "epc:established_pharmacologic_classes" && classes.indexOf(c) === -1) {
+            classes.push(c);
+          }
         }
       }
-    } else {
-      classes = [];
     }
-    return { generic: generic, classes: classes };
+
+    return {
+      generic: generic,
+      ingredients: ingredients,
+      classes: classes,
+      strength: med.strength != null ? med.strength : null,
+      unit: med.unit || null,
+      route: med.route || null,
+      form: med.form || null
+    };
   }
 
   // Does normalized med `m` satisfy subject `s`?
   function medSatisfies(m, s) {
     if (!s) return false;
-    if (s.kind === "generic") return m.generic === s.value;
-    if (s.kind === "class") return m.classes.indexOf(s.value) !== -1;
+    if (s.kind === "generic") {
+      return m.ingredients && m.ingredients.indexOf(s.value.toLowerCase().trim()) !== -1;
+    }
+    if (s.kind === "class") {
+      return m.classes && m.classes.indexOf(s.value) !== -1;
+    }
     return false;
   }
 
@@ -159,11 +174,6 @@
       critical: [], major: [], moderate: [], minor: [], monitor: [],
       duplicates: [], combinations: [],
       reviewedCount: 0,
-      // Coverage tells the UI what was and was NOT actually screened, so an
-      // absent finding is never mistaken for "safe". unchecked = entries with no
-      // resolved generic (skipped entirely); unclassified = resolved generics
-      // that carry no pharmacologic class, so only same-generic duplicate logic
-      // — not class/mechanism rules — can apply to them.
       coverage: {
         datasetVersion: (IR.version || "") + (IR.generated ? " (" + IR.generated + ")" : ""),
         submittedCount: 0, reviewedCount: 0, classifiedCount: 0,
@@ -189,20 +199,59 @@
         if (label && result.coverage.unchecked.indexOf(label) === -1) result.coverage.unchecked.push(label);
       }
     }
-    result.reviewedCount = norm.length;
-    result.coverage.reviewedCount = norm.length;
-    result.coverage.classifiedCount = norm.length - result.coverage.unclassified.length;
-    if (norm.length === 0) return result;
+
+    // Group normalized medicines by clinicalKey
+    function getClinicalKey(ingredients) {
+      if (!ingredients || ingredients.length === 0) return "";
+      return ingredients.slice().sort().join("|");
+    }
+
+    var dedupedNorm = [];
+    var seenKeys = {};
+    for (var i = 0; i < norm.length; i++) {
+      var n = norm[i];
+      var key = getClinicalKey(n.ingredients) || ("unresolved-" + i);
+      if (!seenKeys[key]) {
+        seenKeys[key] = {
+          generic: n.generic,
+          ingredients: n.ingredients,
+          classes: n.classes,
+          products: []
+        };
+        dedupedNorm.push(seenKeys[key]);
+      }
+      seenKeys[key].products.push(n);
+    }
+
+    result.reviewedCount = dedupedNorm.length;
+    result.coverage.reviewedCount = dedupedNorm.length;
+    result.coverage.classifiedCount = dedupedNorm.length - result.coverage.unclassified.length;
+    if (dedupedNorm.length === 0) return result;
+
+    function hasIngredientOverlap(meds, indices) {
+      var seen = {};
+      for (var i = 0; i < indices.length; i++) {
+        var m = meds[indices[i]];
+        if (!m || !m.ingredients) continue;
+        for (var j = 0; j < m.ingredients.length; j++) {
+          var ing = m.ingredients[j];
+          if (seen[ing]) return true;
+          seen[ing] = true;
+        }
+      }
+      return false;
+    }
 
     function push(rule, indices) {
-      var finding = makeFinding(rule, norm, indices, sourceTitles);
+      if (hasIngredientOverlap(dedupedNorm, indices)) {
+        return; // Exclude invalid self-overlap comparisons/alerts
+      }
+      var finding = makeFinding(rule, dedupedNorm, indices, sourceTitles);
       var bucket = SEVERITY_BUCKET[rule.severity] || "monitor";
       result[bucket].push(finding);
       if (rule.type === "duplicate_generic" || rule.type === "duplicate_class") result.duplicates.push(finding);
       if (rule.type === "combination") result.combinations.push(finding);
     }
-
-    var sawDuplicateGenericRule = false;
 
     // 2. Evaluate each rule.
     for (var r = 0; r < rules.length; r++) {
@@ -212,21 +261,20 @@
       if (rule.type === "pair") {
         // Both subjects present, satisfied by DIFFERENT meds.
         if (subjects.length < 2) continue;
-        var pairAssign = assignDistinct(norm, [subjects[0], subjects[1]]);
+        var pairAssign = assignDistinct(dedupedNorm, [subjects[0], subjects[1]]);
         if (pairAssign) push(rule, pairAssign);
 
       } else if (rule.type === "duplicate_generic") {
-        // Same generic appears in >= 2 meds.
-        sawDuplicateGenericRule = true;
+        // Explicit duplicate_generic rules (if any exist in ruleset)
         var counts = {};
         var firedGenerics = {};
-        for (var g = 0; g < norm.length; g++) {
-          var gen = norm[g].generic;
+        for (var g = 0; g < dedupedNorm.length; g++) {
+          var gen = dedupedNorm[g].generic;
           counts[gen] = (counts[gen] || 0) + 1;
           if (counts[gen] >= 2 && !firedGenerics[gen]) {
             firedGenerics[gen] = true;
             var idxs = [];
-            for (var m = 0; m < norm.length; m++) if (norm[m].generic === gen) idxs.push(m);
+            for (var m = 0; m < dedupedNorm.length; m++) if (dedupedNorm[m].generic === gen) idxs.push(m);
             push(rule, idxs);
           }
         }
@@ -234,12 +282,12 @@
       } else if (rule.type === "duplicate_class") {
         // >= 2 DISTINCT meds carry the class.
         var cls = subjects[0] && subjects[0].value;
-        var members = matchingIndices(norm, { kind: "class", value: cls });
+        var members = matchingIndices(dedupedNorm, { kind: "class", value: cls });
         if (members.length >= 2) push(rule, members);
 
       } else if (rule.type === "combination") {
         // EVERY subject satisfied by distinct meds.
-        var comboAssign = assignDistinct(norm, subjects);
+        var comboAssign = assignDistinct(dedupedNorm, subjects);
         if (comboAssign) push(rule, comboAssign);
 
       } else if (rule.type === "context") {
@@ -254,40 +302,13 @@
         // At least one med must satisfy each drug/class subject (distinct not required).
         var indices = [];
         var allPresent = drugSubjects.every(function (ds) {
-          var hit = matchingIndices(norm, ds);
+          var hit = matchingIndices(dedupedNorm, ds);
           if (hit.length === 0) return false;
           for (var h = 0; h < hit.length; h++) if (indices.indexOf(hit[h]) === -1) indices.push(hit[h]);
           return true;
         });
         if (allPresent && drugSubjects.length > 0) push(rule, indices);
       }
-    }
-
-    // 3. Duplicate-generic safety check. The algorithm mandates a
-    // duplicate_generic finding whenever the same generic appears in >= 2 meds.
-    // If the ruleset carries no explicit duplicate_generic rule, synthesize a
-    // generic finding so this universal check still fires.
-    if (!sawDuplicateGenericRule) {
-      var dupCounts = {};
-      for (var d = 0; d < norm.length; d++) {
-        dupCounts[norm[d].generic] = (dupCounts[norm[d].generic] || 0) + 1;
-      }
-      Object.keys(dupCounts).forEach(function (gen) {
-        if (dupCounts[gen] < 2) return;
-        var idxs = [];
-        for (var m = 0; m < norm.length; m++) if (norm[m].generic === gen) idxs.push(m);
-        var synth = {
-          type: "duplicate_generic",
-          severity: "moderate",
-          mechanism: "The same medicine appears more than once on the list (same generic drug), giving no added benefit but additive dose and adverse-effect risk.",
-          effect: "Therapeutic duplication: unintended double dosing with increased risk of dose-related adverse effects.",
-          action: "Confirm this is not a duplicate order. Consolidate to a single entry at the intended dose.",
-          monitoring: "Review the medication list and reconcile duplicate entries.",
-          sourceId: null,
-          specialistReview: false
-        };
-        push(synth, idxs);
-      });
     }
 
     return result;

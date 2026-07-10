@@ -135,7 +135,17 @@ try {
   ok(await ev(`return MEDLIST.getList().length`) === 0, "remove actually removes from list");
 
   // add-option buttons present; Scan is now ENABLED (PR3), Ward Sync still "Coming soon"
-  await ev(`window.SMD_IS_NATIVE = true; MEDLIST.clearAll(); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  const errVal = await ev(`
+    try {
+      window.SMD_IS_NATIVE = true;
+      MEDLIST.clearAll();
+      MEDLIST.mount(document.getElementById("ml-test"));
+      return null;
+    } catch(e) {
+      return String(e.stack || e.message || e);
+    }
+  `);
+  if (errVal) console.log("MOUNT ERROR AT LINE 138:", errVal);
   ok(await ev(`return /Search Drug Index/.test(document.getElementById("ml-test").innerText)`) === true, "'Search Drug Index' option present");
   // Redesign: entry points are action cards; a manual-entry opener carries data-ml-open='manual'.
   ok(await ev(`return !!document.querySelector("#ml-test [data-ml-open='manual']")`) === true, "manual-entry opener present");
@@ -341,6 +351,75 @@ try {
   const brandApiText = await ev(`return document.getElementById('ml-test').innerText`);
   ok(/bleed|haemorrh|hemorrh|Major|Critical/i.test(brandApiText),
      "typed brand 'zzbrandx' auto-resolves to warfarin via the catalogue API and is screened against aspirin (bleeding)");
+
+  // --- F. Clinical Grouping & Overlap Tests ---
+  await ev(`
+    MEDLIST.clearAll();
+    MEDLIST.add({ generic: 'sildenafil', strength: 20, unit: 'mg', form: 'tablet' }, 'manual');
+    MEDLIST.add({ generic: 'sildenafil', strength: 25, unit: 'mg', form: 'tablet' }, 'manual');
+    MEDLIST.add({ generic: 'sildenafil', strength: null, unit: null, form: 'tablet' }, 'manual');
+    MEDLIST.mount(document.getElementById('ml-test'));
+    return 1;
+  `);
+  ok(await ev(`return document.querySelector("#ml-test .ml-list-count").innerText`) === "1 medicine selected",
+     "Sildenafil 20mg + 25mg + unspecified count heading says '1 medicine selected'");
+  ok(await ev(`return document.getElementById("ml-check").innerText`) === "Check 1 medicine",
+     "Sildenafil 20mg + 25mg + unspecified check button says 'Check 1 medicine'");
+  
+  const sildGroupRes = JSON.parse(await ev(`
+    var r = INTERACTIONS.checkInteractions(MEDLIST.getList());
+    return JSON.stringify({ reviewedCount: r.reviewedCount, duplicatesLength: r.duplicates.length });
+  `));
+  ok(sildGroupRes.reviewedCount === 1, "sildenafil group interaction reviewedCount is 1");
+  ok(sildGroupRes.duplicatesLength === 0, "sildenafil group interaction has 0 duplicate therapy results");
+
+  await ev(`
+    MEDLIST.clearAll();
+    MEDLIST.add({ generic: 'sildenafil', strength: 20 }, 'manual');
+    MEDLIST.add({ generic: 'nitroglycerin', strength: 0.5 }, 'manual');
+    MEDLIST.add({ generic: 'sildenafil', strength: 25 }, 'manual');
+    return 1;
+  `);
+  const sildNitroRes = JSON.parse(await ev(`
+    var r = INTERACTIONS.checkInteractions(MEDLIST.getList());
+    return JSON.stringify({
+      criticalLength: r.critical.length,
+      drugs: r.critical[0] ? r.critical[0].drugs : []
+    });
+  `));
+  ok(sildNitroRes.criticalLength === 1, "Sildenafil + Nitroglycerin yields exactly one critical interaction pair");
+  ok(sildNitroRes.drugs.length === 2 && sildNitroRes.drugs.indexOf("sildenafil") !== -1 && sildNitroRes.drugs.indexOf("nitroglycerin") !== -1,
+     "Sildenafil + Nitroglycerin has no repeated ingredient in title");
+
+  await ev(`
+    MEDLIST.clearAll();
+    MEDLIST.add({ generic: 'sildenafil', strength: 50 }, 'manual');
+    MEDLIST.add({ generic: 'dapoxetine + sildenafil', strength: null }, 'manual');
+    return 1;
+  `);
+  const sildComboRes = JSON.parse(await ev(`
+    var r = INTERACTIONS.checkInteractions(MEDLIST.getList());
+    return JSON.stringify({
+      criticalLength: r.critical.length,
+      duplicatesLength: r.duplicates.length
+    });
+  `));
+  ok(sildComboRes.criticalLength === 0, "Sildenafil + Sildenafil/Dapoxetine combination has no self-interaction");
+  ok(sildComboRes.duplicatesLength === 0, "Sildenafil + Sildenafil/Dapoxetine combination has no false duplicate warnings");
+
+  await ev(`
+    MEDLIST.clearAll();
+    MEDLIST.add({ generic: 'sildenafil', strength: 50 }, 'manual');
+    MEDLIST.add({ generic: 'pantoprazole', strength: 40 }, 'manual');
+    return 1;
+  `);
+  const sildPantoRes = JSON.parse(await ev(`
+    var r = INTERACTIONS.checkInteractions(MEDLIST.getList());
+    return JSON.stringify({
+      duplicatesLength: r.duplicates.length
+    });
+  `));
+  ok(sildPantoRes.duplicatesLength === 0, "Sildenafil + Pantoprazole yields 0 duplicate-therapy results");
 
   await ev(`MEDLIST.clearAll(); return 1;`);
 

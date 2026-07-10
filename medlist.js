@@ -147,6 +147,39 @@
   function undoRemove() { if (_lastRemoved) { _list.splice(_lastRemoved.i, 0, _lastRemoved.med); _lastRemoved = null; _persist(); } }
   function clearAll() { _list = []; _lastRemoved = null; _persist(); }
   function getList() { return _list.slice(); }
+  function getIngredients(genericStr) {
+    if (!genericStr || typeof genericStr !== "string") return [];
+    return genericStr.split("+").map(function (s) {
+      return s.trim().toLowerCase();
+    }).filter(Boolean);
+  }
+  function getClinicalKey(genericStr) {
+    var ingredients = getIngredients(genericStr);
+    if (ingredients.length === 0) return "";
+    return ingredients.slice().sort().join("|");
+  }
+  function getClinicalList(list) {
+    var grouped = {};
+    var orderedKeys = [];
+    for (var i = 0; i < list.length; i++) {
+      var m = list[i];
+      var key = m.generic ? getClinicalKey(m.generic) : m.id;
+      if (!grouped[key]) {
+        grouped[key] = {
+          clinicalKey: key,
+          generic: m.generic || null,
+          name: m.name || null,
+          raw: m.raw || null,
+          source: m.source || "manual",
+          confidence: m.confidence || null,
+          products: []
+        };
+        orderedKeys.push(key);
+      }
+      grouped[key].products.push(m);
+    }
+    return orderedKeys.map(function (k) { return grouped[k]; });
+  }
   _load();
 
   // --- Drug Index search (worker API) ---
@@ -390,24 +423,89 @@
       return { generic:d.generic, cls:d.cls, brands:(d.brands||[]).slice(0,4), form:"" }; }
     return { generic:gen, cls:"", brands:[], form:"" };
   }
+  function checkAndPromptDuplicate(entry) {
+    var g = (entry.generic || "").toLowerCase().trim();
+    if (!g) return { action: "add" };
+    var list = getList();
+
+    // 1. Check for exact duplicate: same clinical ingredient + same strength/unit + same route + same form
+    for (var i = 0; i < list.length; i++) {
+      var m = list[i];
+      var mg = (m.generic || "").toLowerCase().trim();
+      if (mg === g && m.strength === entry.strength && m.unit === entry.unit && m.route === entry.route && m.form === entry.form) {
+        var drugLabel = cap(entry.brand || entry.name || entry.generic);
+        var update = window.confirm(drugLabel + " is already in the medication list. Update dose instead?");
+        if (update) {
+          return { action: "update", id: m.id, entry: entry };
+        } else {
+          return { action: "cancel" };
+        }
+      }
+    }
+
+    // 2. Check for different strength/dose: same clinical ingredient, but different strength or route/form
+    for (var i = 0; i < list.length; i++) {
+      var m = list[i];
+      var mg = (m.generic || "").toLowerCase().trim();
+      if (mg === g) {
+        var drugLabel = cap(entry.brand || entry.name || entry.generic);
+        var update = window.confirm(drugLabel + " is already in the list at a different dose. Update the existing dose? (Select Cancel to allow a separate dose entry)");
+        if (update) {
+          return { action: "update", id: m.id, entry: entry };
+        } else {
+          return { action: "add" };
+        }
+      }
+    }
+
+    return { action: "add" };
+  }
+
+  function updateMed(id, newEntry) {
+    var i = _list.findIndex(function (m) { return m.id === id; });
+    if (i >= 0) {
+      _list[i] = Object.assign({}, _list[i], {
+        brand: newEntry.brand || _list[i].brand,
+        generic: newEntry.generic || _list[i].generic,
+        strength: newEntry.strength != null ? newEntry.strength : _list[i].strength,
+        unit: newEntry.unit || _list[i].unit,
+        form: newEntry.form || _list[i].form,
+        route: newEntry.route || _list[i].route,
+        freq: newEntry.freq || _list[i].freq,
+        freqText: newEntry.freqText || _list[i].freqText,
+        confidence: newEntry.confidence || _list[i].confidence,
+        candidates: newEntry.candidates || _list[i].candidates
+      });
+      _persist();
+    }
+  }
+
   // Central add path for interactive single-add: prevents exact-generic duplicates
   // (a warning, per spec) and records a recent. Bulk imports (paste/scan/ward) use add() directly.
   function uiAdd(entry, source){
-    var g=(entry&&entry.generic||"").toLowerCase().trim();
-    if(g && hasGeneric(g)){ toast(cap(g)+" is already in the list"); return false; }
+    var res = checkAndPromptDuplicate(entry);
+    if (res.action === "cancel") {
+      return false;
+    }
+    if (res.action === "update") {
+      updateMed(res.id, entry);
+      if (entry.generic) pushRecent(entry.generic);
+      return true;
+    }
+    // res.action === "add"
     add(entry, source);
-    if(entry && entry.generic) pushRecent(entry.generic);
+    if (entry.generic) pushRecent(entry.generic);
     return true;
   }
 
   function fieldSummary(med){ return fieldLine(med); }
 
-  function renderMedCard(med) {
+  function renderProductCard(med, isSub) {
     // compact ROW (not a large card): title · dose/route/freq · source badge · edit/remove
-    var row = el("div", { cls: "ml-row", attrs: { "data-ml-card": med.id } });
+    var row = el("div", { cls: isSub ? "ml-sub-row" : "ml-row", attrs: { "data-ml-card": med.id } });
 
     if (_undoingId === med.id) {
-      row.className = "ml-card-removed";
+      row.className = isSub ? "ml-sub-row-removed" : "ml-card-removed";
       var urow = el("div", { cls: "ml-undo-row" });
       urow.appendChild(el("span", { text: (med.generic || med.raw || "Medicine") + " removed" }));
       var undoBtn = el("button", { cls: "ml-undo-btn", text: "Undo", attrs: { "data-ml-undo": med.id, type: "button" } });
@@ -418,11 +516,18 @@
     }
 
     var main = el("div", { cls: "ml-row-main" });
-    var title = el("div", { cls: "ml-row-title" + (med.generic ? "" : " ml-row-unmapped"),
-      text: med.generic ? cap(med.generic) : (med.raw || "Needs review") });
-    main.appendChild(title);
+    if (!isSub) {
+      var title = el("div", { cls: "ml-row-title" + (med.generic ? "" : " ml-row-unmapped"),
+        text: med.generic ? cap(med.generic) : (med.raw || "Needs review") });
+      main.appendChild(title);
+    }
     var line = fieldSummary(med);
-    if (line) main.appendChild(el("div", { cls: "ml-row-line", text: line }));
+    if (isSub) {
+      var subTitle = el("div", { cls: "ml-sub-row-title", text: line || "Unspecified dose" });
+      main.appendChild(subTitle);
+    } else {
+      if (line) main.appendChild(el("div", { cls: "ml-row-line", text: line }));
+    }
     var badges = el("div", { cls: "ml-row-badges" });
     var src = med.source || "manual";
     var srcLabel = { index: "Drug Index", ghis: "Ward Sync", wardsync: "Ward Sync", scan: "Scan", paste: "Manual", manual: "Manual" }[src] || cap(src);
@@ -449,6 +554,32 @@
     acts.appendChild(editBtn); acts.appendChild(removeBtn);
     row.appendChild(acts);
     return row;
+  }
+
+  function renderClinicalMedCard(clinicalMed) {
+    if (clinicalMed.products.length === 1) {
+      return renderProductCard(clinicalMed.products[0], false);
+    }
+
+    var card = el("div", { cls: "ml-row ml-row-grouped" });
+
+    // Group header
+    var header = el("div", { cls: "ml-row-group-header" });
+    header.appendChild(el("div", { cls: "ml-row-title", text: clinicalMed.generic ? cap(clinicalMed.generic) : "Needs review" }));
+    card.appendChild(header);
+
+    // Group body / sub-rows
+    var sublist = el("div", { cls: "ml-row-group-sublist" });
+    for (var i = 0; i < clinicalMed.products.length; i++) {
+      var prod = clinicalMed.products[i];
+      sublist.appendChild(renderProductCard(prod, true));
+    }
+    card.appendChild(sublist);
+    return card;
+  }
+
+  function renderMedCard(med) {
+    return renderProductCard(med, false);
   }
 
   function renderCandidateChips(container, candidates, onPick) {
@@ -1020,10 +1151,11 @@
 
     var list = getList();
     var showUndoRow = _undoingId && _lastRemoved && _lastRemoved.med && _lastRemoved.med.id === _undoingId;
-    var resolved = list.filter(function (m) { return m.generic && String(m.generic).trim(); }).length;
-    // "present" also counts entries that are only a (possibly-brand) name — the
-    // check can run and resolve those via the catalogue API before screening.
-    var present = list.filter(function (m) {
+    
+    // Group selected medications into clinical medications
+    var clinicalList = getClinicalList(list);
+    var resolved = clinicalList.filter(function (m) { return m.generic && String(m.generic).trim(); }).length;
+    var present = clinicalList.filter(function (m) {
       return (m.generic && String(m.generic).trim()) || (m.name && String(m.name).trim()) || (m.raw && String(m.raw).trim());
     }).length;
 
@@ -1042,7 +1174,8 @@
     } else {
       // ---- populated list ----
       var lh = el("div", { cls: "ml-list-head" });
-      lh.appendChild(el("div", { cls: "ml-list-count", text: resolved || list.length ? (list.length + " medicine" + (list.length > 1 ? "s" : "") + " selected") : "Medication list" }));
+      var countText = present + " medicine" + (present !== 1 ? "s" : "") + " selected";
+      lh.appendChild(el("div", { cls: "ml-list-count", text: resolved || clinicalList.length ? countText : "Medication list" }));
       lh.appendChild(el("div", { cls: "ml-list-updated", text: "Last updated just now" }));
       main.appendChild(lh);
 
@@ -1058,7 +1191,7 @@
 
       var rows = el("div", { cls: "ml-rows", attrs: { id: "ml-cards" } });
       if (showUndoRow) rows.appendChild(renderMedCard(_lastRemoved.med));
-      list.forEach(function (med) { rows.appendChild(renderMedCard(med)); });
+      clinicalList.forEach(function (clinicalMed) { rows.appendChild(renderClinicalMedCard(clinicalMed)); });
       main.appendChild(rows);
 
       // "Import more" surfaces the action grid again beneath the list.
@@ -1076,7 +1209,7 @@
     var inner = el("div", { cls: "ml-footer-inner" });
     var canCheck = present >= 2;
     var checkBtn = el("button", { cls: "ml-check-btn",
-      text: canCheck ? ("Check " + present + " medicine" + (present > 1 ? "s" : "")) : "Check interactions",
+      text: present > 0 ? ("Check " + present + " medicine" + (present !== 1 ? "s" : "")) : "Check interactions",
       attrs: { id: "ml-check", type: "button" } });
     if (!canCheck) checkBtn.disabled = true;
     checkBtn.addEventListener("click", function () { if (!checkBtn.disabled) runCheck(); });
@@ -1470,6 +1603,13 @@
 ".ml-card-removed{display:flex}",
 ".ml-undo-row{display:flex;justify-content:space-between;align-items:center;width:100%;font:600 13px var(--sans);color:var(--slate,#2d4356);background:var(--panel,#fff);border:1px dashed var(--line,#d7dee3);border-radius:11px;padding:11px 13px}",
 ".ml-undo-btn{background:transparent;border:none;color:var(--teal,#0e6e63);font:800 13px var(--sans);cursor:pointer}",
+".ml-row-grouped{display:flex;flex-direction:column;align-items:stretch;gap:0;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:11px;padding:0}",
+".ml-row-group-header{padding:10px 12px 6px;border-bottom:1px dashed var(--line,#d7dee3);background:var(--paper,#f6f7f5);border-top-left-radius:10px;border-top-right-radius:10px}",
+".ml-row-group-sublist{display:flex;flex-direction:column;gap:0}",
+".ml-sub-row{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line-soft,#ebf0f3)}",
+".ml-sub-row:last-child{border-bottom:none;border-bottom-left-radius:10px;border-bottom-right-radius:10px}",
+".ml-sub-row-title{font:500 13px var(--mono,monospace);color:var(--ink,#14202b);flex:1;min-width:0}",
+".ml-sub-row-removed{display:flex;padding:8px 12px;background:var(--panel,#fff)}",
 /* ---- right aside (summary / pre-run) ---- */
 ".ml-aside-card{background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:14px;padding:14px 15px}",
 ".ml-aside-title{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate,#2d4356);margin-bottom:9px}",
