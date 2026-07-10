@@ -396,3 +396,35 @@ html body.rds-on .mc-card-d { font: 500 12px var(--rds-font); color: var(--rds-m
 html body.rds-on .mc-chev { color: var(--rds-muted); }
 html body.rds-on .mc-panel { border-top: 1px solid var(--rds-line); }
 html body.rds-on .mc-disc { border: 1px dashed var(--rds-line); border-radius: var(--rds-r-ctl); color: var(--rds-muted); font-family: var(--rds-font); }
+
+/* --- Board 2e: MaiK grounded-AI chat (flag-gated) ---
+   Polish of the existing MaiK sheet (home.js #maikSheet). CSS only. The persistent
+   AI badge, per-answer educational tag, sources, and the deterministic(teal)/AI two-
+   block answer separation (reasoning.js .maik-det/.maik-ai/.maik-warn) are PRESERVED
+   — only radii/spacing/touch-targets adopt the design system. */
+html body.rds-on #maikSheet { border-radius: var(--rds-r-sheet) var(--rds-r-sheet) 0 0; box-shadow: var(--rds-el-sheet); }
+html body.rds-on .maik-badge { background: var(--sev-info-bg); color: var(--sev-info-fg); border: 1px solid var(--sev-info-bd); font-weight: 700; }
+html body.rds-on .maik-cmp textarea { border-radius: var(--rds-r-ctl); border: 1.5px solid var(--rds-line); font-family: var(--rds-font); }
+html body.rds-on .maik-cmp textarea:focus { outline: none; border-color: var(--rds-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25); }
+html body.rds-on .maik-cmp button { border-radius: var(--rds-r-ctl); min-height: 48px; box-shadow: var(--rds-el-cta); font-family: var(--rds-font); }
+html body.rds-on .maik-cmp button.maik-mic { min-width: 48px; box-shadow: none; }
+html body.rds-on .maik-cmp button.maik-extract { border-radius: var(--rds-r-ctl); box-shadow: none; }
+html body.rds-on .maik-b { border-radius: var(--rds-r); font-family: var(--rds-font); }
+html body.rds-on .maik-chip { border-radius: var(--rds-r-pill); border: 1.5px solid var(--rds-line); min-height: 44px; font-family: var(--rds-font); }
+html body.rds-on .maik-x, html body.rds-on .maik-new { min-height: 40px; border-radius: var(--rds-r-pill); font-family: var(--rds-font); }
+html body.rds-on .maik-edu { border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
+html body.rds-on .maik-warn { border-radius: var(--rds-r-ctl); }
+/* 2e dark-mode fix: the MaiK sheet is appended outside #homeV2, so its #homeV2-scoped
+   --h* tokens are undefined there and it never went dark. Point its surfaces at the
+   dark-aware rds tokens (flag-gated). */
+html body.rds-on #maikSheet { background: var(--rds-surface); color: var(--rds-ink); }
+html body.rds-on #maikSheet .mk-t, html body.rds-on .maik-welcome, html body.rds-on .maik-b .maik-h { color: var(--rds-ink); }
+html body.rds-on #maikSheet .mk-s, html body.rds-on .maik-edu { color: var(--rds-muted); }
+html body.rds-on .maik-grab { background: var(--rds-line); }
+html body.rds-on .maik-adv, html body.rds-on .maik-cmp { border-color: var(--rds-line); }
+html body.rds-on .maik-cmp { background: var(--rds-surface); }
+html body.rds-on .maik-cmp textarea { background: var(--rds-bg); color: var(--rds-ink); }
+html body.rds-on .maik-b.ai { background: var(--rds-surface-2); border-color: var(--rds-line); color: var(--rds-ink); }
+html body.rds-on .maik-x { background: var(--rds-surface-2); color: var(--rds-ink); border-color: var(--rds-line); }
+html body.rds-on .maik-chip { background: var(--rds-surface); color: var(--rds-ink); }
+html body.rds-on .maik-edu { background: var(--rds-surface-2); }
