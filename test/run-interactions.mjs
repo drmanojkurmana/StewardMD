@@ -90,6 +90,16 @@ try {
   const r5e = await check([{ generic: "pantoprazole", strength: 40 }, { generic: "pantoprazole", strength: 80 }]);
   ok(r5e.duplicates.length === 0, "Pantoprazole 40mg + Pantoprazole 80mg -> no duplicate-therapy alert");
 
+  // 5f. HIDDEN duplication (clinician decision): same ingredient in a standalone drug
+  //     AND inside a combination product = therapeutic duplication -> must warn.
+  const r5f = await check([{ generic: "pantoprazole" }, { generic: "amoxycillin + pantoprazole" }]);
+  ok(r5f.duplicates.some(f => /pantoprazole/i.test(f.mechanism) && f.ruleType === "duplicate_generic"),
+     "pantoprazole standalone + amoxycillin/pantoprazole combo -> flags hidden pantoprazole duplication");
+  // 5g. Same ingredient across TWO different combos also warns.
+  const r5g = await check([{ generic: "amoxycillin + pantoprazole" }, { generic: "itopride + pantoprazole" }]);
+  ok(r5g.duplicates.some(f => /pantoprazole/i.test(f.mechanism)),
+     "pantoprazole in two different combos -> flags hidden duplication");
+
   // 6. amlodipine alone -> no critical/major, reviewedCount 1
   const r6 = await check([{ generic: "amlodipine" }]);
   ok(r6.critical.length === 0 && r6.major.length === 0, "amlodipine alone yields NO critical/major");
