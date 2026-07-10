@@ -534,3 +534,8 @@ html body.rds-on .finding-item:hover { border-color: var(--rds-primary); }
 html body.rds-on .finding-item:active, html body.rds-on .finding-item.on, html body.rds-on .finding-item.sel, html body.rds-on .finding-item.checked { background: var(--rds-primary-soft); border-color: var(--rds-primary); }
 html body.rds-on .finding-list-col, html body.rds-on .finding-list-pair { gap: 8px; }
 html body.rds-on .step-nav-btn { border-radius: var(--rds-r-ctl); min-height: 48px; font-family: var(--rds-font); }
+
+/* iconified emoji → Material Symbols sizing in classic header + sidebar (flag-gated) */
+html body.rds-on .app-head .rds-icon { font-size: 22px; vertical-align: middle; color: var(--rds-primary); }
+html body.rds-on #sbMenu .ic .rds-icon, html body.rds-on .sb-drawer .ic .rds-icon { font-size: 20px; color: var(--rds-primary); }
+html body.rds-on .app-head .dx-launch .rds-icon, html body.rds-on .app-head .my-cases-btn .rds-icon { margin-right: 5px; }

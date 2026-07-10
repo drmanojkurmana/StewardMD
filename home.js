@@ -128,7 +128,7 @@
         aboutBody.appendChild(ack);
       }
     }
-    try { if (window.SB && typeof SB.open === "function") { var orig = SB.open; SB.open = function () { var r = orig.apply(this, arguments); setTimeout(reorganize, 40); return r; }; } } catch (e) {}
+    try { if (window.SB && typeof SB.open === "function") { var orig = SB.open; SB.open = function () { var r = orig.apply(this, arguments); setTimeout(function () { reorganize(); try { if (redesignNavOn()) iconifyEmoji(document.getElementById("sbDrawer")); } catch (e) {} }, 40); return r; }; } } catch (e) {}
     setTimeout(reorganize, 1500);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { setupSidebarToggle(IS_V2); }); else setupSidebarToggle(IS_V2);
@@ -207,7 +207,9 @@
   function has(path) { try { return !!path(); } catch (e) { return false; } }
 
   var root, fab;
-  function hideV2() { if (root) root.classList.remove("on"); if (fab) fab.classList.add("on"); try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {} }
+  function hideV2() { if (root) root.classList.remove("on"); if (fab) fab.classList.add("on"); try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {}
+    // Classic engine screen is now visible → swap its header emoji to Material Symbols.
+    try { if (redesignNavOn()) { iconifyEmoji(document.querySelector(".app-head")); [400, 1200].forEach(function (d) { setTimeout(function () { try { iconifyEmoji(document.querySelector(".app-head")); } catch (e) {} }, d); }); } } catch (e) {} }
   // Exposed so the Clinical Reasoning "Select this diagnosis" flow can reveal the classic
   // stewardship output (#outputArea) instead of leaving it hidden behind the v4 Home.
   window.SMD_hideHome = hideV2;
@@ -798,6 +800,57 @@
     } catch (e) { return true; }
   }
   function ric(name) { return '<span class="rds-icon" aria-hidden="true">' + name + '</span>'; }
+  // Flag-gated runtime emoji → Material Symbols swap for the classic header (.app-head)
+  // and sidebar (#sbDrawer), which are rendered by the minified app.js. Additive: replaces
+  // emoji in .ic spans and header buttons; marks [data-ic] to avoid re-work; never throws.
+  var EMOJI2SYM = { "☰": "menu", "🧠": "neurology", "⏻": "logout", "🔍": "search",
+    "📂": "folder_open", "📁": "folder", "🗄️": "medication", "🗄": "medication",
+    "🏠": "add_circle", "📋": "content_paste", "🔢": "calculate", "🫀": "cardiology",
+    "🩺": "stethoscope", "🏥": "local_hospital", "📚": "menu_book", "⚙️": "settings",
+    "⚙": "settings", "ℹ️": "info", "ℹ": "info", "💉": "vaccines", "🧬": "biotech",
+    "🦠": "coronavirus", "🧪": "science", "💊": "medication", "⚡": "bolt",
+    "📊": "monitoring", "🔬": "biotech", "🫁": "pulmonology", "🔔": "notifications",
+    "👤": "person", "✨": "auto_awesome", "🎤": "mic", "📷": "photo_camera",
+    "💧": "water_drop", "🩸": "bloodtype", "⚗️": "science", "🗂️": "folder",
+    "🧾": "receipt_long", "🧮": "calculate", "🚨": "emergency", "🫘": "nephrology",
+    "🔵": "lens", "📖": "menu_book", "🌓": "contrast", "💾": "save", "⚖️": "balance",
+    "⚖": "balance", "🔒": "lock", "📜": "description", "✉️": "mail", "✉": "mail",
+    "🐞": "bug_report", "★": "star", "☀️": "light_mode", "🌙": "dark_mode",
+    "📁": "folder", "🗂️": "folder", "🩹": "healing", "🦴": "orthopedics" };
+  function iconifyEmoji(scope) {
+    if (!scope) return;
+    try {
+      // 1) dedicated .ic icon spans (sidebar rows, some header) — whole content is the emoji
+      scope.querySelectorAll(".ic:not([data-ic])").forEach(function (el) {
+        var sym = EMOJI2SYM[(el.textContent || "").trim()];
+        if (sym) { el.innerHTML = '<span class="rds-icon" aria-hidden="true">' + sym + "</span>"; el.setAttribute("data-ic", "1"); }
+      });
+      // theme knob (☀️/🌙) — NOT marked data-ic so it re-swaps after app.js flips it on toggle
+      scope.querySelectorAll(".toggle-knob").forEach(function (el) {
+        var s = EMOJI2SYM[(el.textContent || "").trim()];
+        if (s) el.innerHTML = '<span class="rds-icon" aria-hidden="true">' + s + "</span>";
+      });
+      // 2) header buttons/links: emoji is the whole text or a leading text node before a label span
+      scope.querySelectorAll("button:not([data-ic]),a:not([data-ic])").forEach(function (b) {
+        var whole = (b.childNodes.length === 1 && b.firstChild && b.firstChild.nodeType === 3) ? (b.textContent || "").trim() : null;
+        if (whole && EMOJI2SYM[whole]) { b.innerHTML = '<span class="rds-icon" aria-hidden="true">' + EMOJI2SYM[whole] + "</span>"; b.setAttribute("data-ic", "1"); return; }
+        var fc = b.firstChild;
+        if (fc && fc.nodeType === 3) {
+          var lead = fc.nodeValue;
+          for (var em in EMOJI2SYM) {
+            if (lead.indexOf(em) === 0) {
+              var rest = lead.slice(em.length);
+              var sp = document.createElement("span"); sp.className = "rds-icon"; sp.setAttribute("aria-hidden", "true"); sp.textContent = EMOJI2SYM[em];
+              b.replaceChild(sp, fc);
+              if (rest && rest.replace(/\s/g, "")) b.insertBefore(document.createTextNode(rest), sp.nextSibling);
+              b.setAttribute("data-ic", "1"); break;
+            }
+          }
+        }
+      });
+    } catch (e) {}
+  }
+  window.SMD_iconify = iconifyEmoji;
   function rtile(act, icon, tt, sub) {
     return '<button class="rnav-tile" data-act="' + act + '" aria-label="' + tt + '">' + ric(icon) +
       '<span class="rnav-tile-tt">' + tt + '</span><span class="rnav-tile-sub">' + sub + '</span></button>';
