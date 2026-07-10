@@ -374,3 +374,25 @@ html body.rds-on .ml-check-btn { border-radius: var(--rds-r-ctl); min-height: 48
 html body.rds-on .ml-row, html body.rds-on .ml-row-grouped { border-radius: var(--rds-r); border-color: var(--rds-line); }
 html body.rds-on .ml-action-card { border-radius: var(--rds-r); border-color: var(--rds-line); }
 html body.rds-on .ml-list-count { font-family: var(--rds-font); }
+
+/* --- Board 2c: Drug Index browse + drug detail (flag-gated) ---
+   Restyles the shared browse-overlay classes (drugs.js #mdOverlay + calculators.js
+   MEDCALC list use the same .mc-* system) onto the design system. CSS only. */
+html body.rds-on .mc-overlay { background: var(--rds-bg); }
+html body.rds-on .mc-top { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on .mc-title { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .mc-count { background: var(--rds-primary-soft); color: var(--rds-primary); border-radius: var(--rds-r-pill); }
+html body.rds-on .mc-back { border: 1.5px solid var(--rds-line); color: var(--rds-primary); border-radius: var(--rds-r-ctl); min-height: 40px; font-family: var(--rds-font); background: var(--rds-surface); }
+html body.rds-on .mc-search { border: 1.5px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); min-height: 48px; font-family: var(--rds-font); }
+html body.rds-on .mc-search:focus { outline: none; border-color: var(--rds-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25); }
+html body.rds-on .mc-cat { border: 1.5px solid var(--rds-line); background: var(--rds-surface); color: var(--rds-ink); border-radius: var(--rds-r-pill); min-height: 40px; font-family: var(--rds-font); }
+html body.rds-on .mc-cat.on { background: var(--rds-primary); border-color: var(--rds-primary); color: var(--rds-on-primary); }
+html body.rds-on .mc-grp-h { color: var(--rds-muted); font-family: var(--rds-font); text-transform: uppercase; letter-spacing: .06em; }
+html body.rds-on .mc-card { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .mc-card.open { border-color: var(--rds-primary); }
+html body.rds-on .mc-ic { color: var(--rds-primary); }
+html body.rds-on .mc-card-t { font: 700 14px var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .mc-card-d { font: 500 12px var(--rds-font); color: var(--rds-muted); }
+html body.rds-on .mc-chev { color: var(--rds-muted); }
+html body.rds-on .mc-panel { border-top: 1px solid var(--rds-line); }
+html body.rds-on .mc-disc { border: 1px dashed var(--rds-line); border-radius: var(--rds-r-ctl); color: var(--rds-muted); font-family: var(--rds-font); }
