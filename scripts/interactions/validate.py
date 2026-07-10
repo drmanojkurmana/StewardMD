@@ -72,14 +72,12 @@ def validate(payload, rules_with_origin):
 def _standalone():
     import build_classmap
     import build_rules
+    import emit as emit_mod
     cm = build_classmap.build()
     rules = build_rules.build()
-    payload = {
-        "version": "1.0.0", "generated": "standalone-check",
-        "sources": L.curated("sources.json")["sources"],
-        "drugClasses": cm["drugClasses"], "generics": cm["generics"],
-        "brands": cm["brands"], "rules": rules,
-    }
+    # Build the SAME payload emit would (incl. the auto-added rxnorm-rxclass
+    # source) so provenance checks match the shipped artifact.
+    payload = emit_mod.build_payload(cm, rules, generated="standalone-check")
     errors, warnings = validate(payload, rules)
     for w in warnings:
         print("  WARN:", w)

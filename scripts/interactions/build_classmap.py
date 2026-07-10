@@ -127,6 +127,13 @@ def build():
             if L.norm(g) not in excluded:
                 add(L.norm(g), ["qt_prolonging"])
 
+    # 4b. Strong CYP3A4 inhibitors — pin the strength-specific tag (clinician-curated)
+    #     so the stratified CYP3A4 rules fire only on strong inhibitors, not weak/moderate.
+    for g in L.curated("cyp3a4_strong_inhibitors.json", {}).get("strong", []):
+        gg = L.norm(g)
+        if gg not in excluded:
+            add(gg, ["cyp3a4_strong_inhibitor", "cyp3a4_inhibitor"])
+
     # 5. curated pins (union) then denies (remove)
     for g, tags in pins.items():
         if g not in excluded:

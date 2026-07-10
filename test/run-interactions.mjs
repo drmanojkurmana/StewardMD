@@ -141,6 +141,20 @@ try {
   ok(r9c.aGen === "sildenafil", "brand 'Viagra' resolves to sildenafil via INTERACTION_RULES.brands");
   ok(r9c.crit >= 1, "Viagra (brand) + nitroglycerin fires the contraindicated nitrate×PDE5i rule");
 
+  // 10. CYP3A4 stratification (clinician-directed): strength-aware, substrate-specific.
+  const c1 = await check([{ generic: "clarithromycin" }, { generic: "simvastatin" }]);
+  ok(c1.critical.some(f => f.ruleType === "pair" && /simvastatin/i.test((f.drugs || []).join(" ")) && /myopathy|rhabdo/i.test((f.effect || "") + (f.action || ""))),
+     "strong CYP3A4 inhibitor + simvastatin is CONTRAINDICATED (critical)");
+  const c2 = await check([{ generic: "clarithromycin" }, { generic: "atorvastatin" }]);
+  ok(c2.major.length > 0 && c2.critical.length === 0,
+     "strong CYP3A4 inhibitor + atorvastatin is Major (not contraindicated)");
+  const c3 = await check([{ generic: "ketoconazole" }, { generic: "tacrolimus" }]);
+  ok(c3.major.some(f => /tacrolimus|calcineurin/i.test((f.drugs || []).join(" ") + f.mechanism)),
+     "strong CYP3A4 inhibitor + calcineurin inhibitor is Major");
+  const c4 = await check([{ generic: "erythromycin" }, { generic: "simvastatin" }]);
+  ok(c4.critical.length === 0,
+     "MODERATE CYP3A4 inhibitor (erythromycin) + simvastatin does NOT fire the strong-inhibitor contraindication (no alert-fatigue)");
+
   console.log(fails === 0 ? "\nALL GREEN — interactions engine test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

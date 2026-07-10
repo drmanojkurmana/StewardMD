@@ -549,6 +549,7 @@
     ],
     "clarithromycin": [
       "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antimicrobial",
       "epc:chemical_structure",
@@ -570,6 +571,7 @@
     "ketoconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antifungal",
       "epc:antimicrobial",
@@ -581,6 +583,7 @@
     "itraconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antifungal",
       "epc:antimicrobial",
@@ -604,6 +607,7 @@
       "azole_antifungal",
       "cyp2c19_inhibitor",
       "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antifungal",
       "epc:antimicrobial",
@@ -995,6 +999,8 @@
       "nsaid"
     ],
     "nefazodone": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:established_pharmacologic_classes",
       "epc:nervous_system_agent",
       "serotonergic",
@@ -2216,6 +2222,7 @@
     "posaconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antifungal",
       "epc:antimicrobial",
@@ -2282,7 +2289,8 @@
       "cyp3a4_inhibitor"
     ],
     "conivaptan": [
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor"
     ],
     "avacopan": [
       "cyp3a4_inhibitor",
@@ -2454,6 +2462,7 @@
     "ritonavir": [
       "cyp2d6_inhibitor",
       "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antimicrobial",
       "epc:cytochrome_p450_3a_inhibitor",
@@ -2499,7 +2508,8 @@
       "pgp_inhibitor"
     ],
     "boceprevir": [
-      "cyp3a4_inhibitor"
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor"
     ],
     "lomitapide mesylate": [
       "cyp3a4_inhibitor",
@@ -2538,6 +2548,7 @@
     ],
     "atazanavir": [
       "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antimicrobial",
       "epc:enzyme_inhibitor",
@@ -2824,6 +2835,8 @@
     ],
     "cobicistat": [
       "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:cytochrome_p450_3a_inhibitor",
       "epc:enzyme_inhibitor",
       "epc:enzyme_interaction",
@@ -2832,6 +2845,8 @@
     ],
     "darunavir": [
       "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antimicrobial",
       "epc:enzyme_inhibitor",
@@ -3084,6 +3099,8 @@
       "pgp_inhibitor"
     ],
     "telaprevir": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "pgp_inhibitor"
     ],
     "danicopan": [
@@ -3156,6 +3173,8 @@
       "pgp_inhibitor"
     ],
     "lopinavir": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antimicrobial",
       "epc:enzyme_inhibitor",
@@ -3914,7 +3933,9 @@
       "epc:janus_kinase_inhibitor"
     ],
     "ceritinib": [
+      "cyp3a4_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "cyp3a4_strong_inhibitor",
       "epc:enzyme_inhibitor",
       "epc:enzyme_interaction",
       "epc:established_pharmacologic_classes"
@@ -4152,7 +4173,9 @@
       "epc:established_pharmacologic_classes"
     ],
     "idelalisib": [
+      "cyp3a4_inhibitor",
       "cyp3a4_sensitive_substrate",
+      "cyp3a4_strong_inhibitor",
       "epc:enzyme_inhibitor",
       "epc:enzyme_interaction",
       "epc:established_pharmacologic_classes"
@@ -6060,6 +6083,8 @@
       "epc:established_pharmacologic_classes"
     ],
     "telithromycin": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antibacterial",
       "epc:antimicrobial",
@@ -9007,6 +9032,8 @@
       "epc:human_immunodeficiency_virus_integrase_strand_transfer_inhibitor"
     ],
     "nelfinavir": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antimicrobial",
       "epc:enzyme_inhibitor",
@@ -9052,6 +9079,8 @@
       "epc:protease_inhibitor"
     ],
     "tipranavir": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antimicrobial",
       "epc:enzyme_inhibitor",
@@ -9087,6 +9116,8 @@
       "epc:protease_inhibitor"
     ],
     "saquinavir": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor",
       "epc:anti_infective",
       "epc:antimicrobial",
       "epc:enzyme_inhibitor",
@@ -16859,6 +16890,10 @@
     "clofazimine": [
       "qt_prolonging"
     ],
+    "indinavir": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_strong_inhibitor"
+    ],
     "nitroglycerin (gtn)": [
       "nitrate",
       "vasodilator"
@@ -20504,6 +20539,54 @@
       "specialistReview": true
     },
     {
+      "id": "mech-cyp3a4strong-lovastatin",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "cyp3a4_strong_inhibitor"
+        },
+        {
+          "kind": "generic",
+          "value": "lovastatin"
+        }
+      ],
+      "severity": "contraindicated",
+      "mechanism": "A strong CYP3A4 inhibitor markedly reduces lovastatin metabolism, causing a large rise in lovastatin exposure.",
+      "effect": "High risk of myopathy and rhabdomyolysis. Contraindicated.",
+      "action": "Do NOT co-administer a strong CYP3A4 inhibitor with lovastatin. Suspend lovastatin for the duration of the inhibitor, or switch to a statin not dependent on CYP3A4 (e.g. rosuvastatin or pravastatin).",
+      "monitoring": "Muscle pain/weakness, creatine kinase, renal function if symptoms occur.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-cyp3a4strong-simvastatin",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "cyp3a4_strong_inhibitor"
+        },
+        {
+          "kind": "generic",
+          "value": "simvastatin"
+        }
+      ],
+      "severity": "contraindicated",
+      "mechanism": "A strong CYP3A4 inhibitor markedly reduces simvastatin metabolism, causing a large rise in simvastatin exposure.",
+      "effect": "High risk of myopathy and rhabdomyolysis. Contraindicated.",
+      "action": "Do NOT co-administer a strong CYP3A4 inhibitor with simvastatin. Suspend simvastatin for the duration of the inhibitor, or switch to a statin not dependent on CYP3A4 (e.g. rosuvastatin or pravastatin).",
+      "monitoring": "Muscle pain/weakness, creatine kinase, renal function if symptoms occur.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
       "id": "mech-nitrate-pde5i",
       "type": "pair",
       "subjects": [
@@ -20880,23 +20963,95 @@
       "specialistReview": false
     },
     {
-      "id": "mech-cyp3a4-inhibitor-sensitive-substrate",
+      "id": "mech-cyp3a4strong-atorvastatin",
       "type": "pair",
       "subjects": [
         {
           "kind": "class",
-          "value": "cyp3a4_inhibitor"
+          "value": "cyp3a4_strong_inhibitor"
         },
         {
-          "kind": "class",
-          "value": "cyp3a4_sensitive_substrate"
+          "kind": "generic",
+          "value": "atorvastatin"
         }
       ],
       "severity": "major",
-      "mechanism": "The CYP3A4 inhibitor blocks metabolism of the sensitive CYP3A4 substrate, raising its plasma concentration substantially.",
-      "effect": "Increased substrate exposure and dose-related toxicity (e.g. myopathy/rhabdomyolysis with simvastatin/lovastatin; marked hypotension with a PDE5 inhibitor; excessive effect of a dihydropyridine).",
-      "action": "Avoid the combination or reduce the substrate dose per its label. For simvastatin/lovastatin with a strong CYP3A4 inhibitor, avoid or switch to a statin less dependent on CYP3A4 (e.g. rosuvastatin/pravastatin). For a PDE5 inhibitor with a strong inhibitor, use the lowest starting dose with an extended interval.",
-      "monitoring": "Substrate-specific: muscle pain/CK for statins; blood pressure for PDE5 inhibitors and dihydropyridines.",
+      "mechanism": "A strong CYP3A4 inhibitor raises atorvastatin exposure (less than simvastatin/lovastatin but still clinically significant).",
+      "effect": "Increased risk of myopathy/rhabdomyolysis.",
+      "action": "Avoid where possible. If required, use the lowest appropriate atorvastatin dose and monitor for muscle symptoms; consider a non-CYP3A4 statin.",
+      "monitoring": "Muscle pain/weakness, creatine kinase; renal function if symptoms occur.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-cyp3a4strong-calcineurin",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "cyp3a4_strong_inhibitor"
+        },
+        {
+          "kind": "class",
+          "value": "calcineurin_inhibitor"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "A strong CYP3A4 inhibitor markedly raises tacrolimus/ciclosporin levels.",
+      "effect": "Calcineurin-inhibitor toxicity — nephrotoxicity, neurotoxicity, over-immunosuppression.",
+      "action": "Specialist oversight required: empiric dose reduction, therapeutic drug monitoring, and dose adjustment when starting/stopping the inhibitor.",
+      "monitoring": "Tacrolimus/ciclosporin trough levels, renal function, blood pressure, potassium.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": true
+    },
+    {
+      "id": "mech-cyp3a4strong-dhp-ccb",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "cyp3a4_strong_inhibitor"
+        },
+        {
+          "kind": "class",
+          "value": "dihydropyridine_ccb"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "A strong CYP3A4 inhibitor raises dihydropyridine calcium-channel-blocker exposure.",
+      "effect": "Exaggerated vasodilation — hypotension, oedema, dizziness.",
+      "action": "Reduce the dihydropyridine dose and monitor blood pressure; a moderate CYP3A4 inhibitor generally warrants monitoring rather than avoidance.",
+      "monitoring": "Blood pressure, peripheral oedema, postural symptoms.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-cyp3a4strong-pde5i",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "cyp3a4_strong_inhibitor"
+        },
+        {
+          "kind": "class",
+          "value": "pde5_inhibitor"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "A strong CYP3A4 inhibitor significantly raises PDE5-inhibitor plasma concentration.",
+      "effect": "Increased PDE5-inhibitor exposure — hypotension, visual disturbance, priapism, headache.",
+      "action": "Dose reduction and clinical monitoring required (e.g. lower starting dose and extended dosing interval per the PDE5-inhibitor label); counsel the patient.",
+      "monitoring": "Blood pressure and PDE5-inhibitor adverse effects.",
       "sourceId": "openfda-labeling",
       "evidence": "established",
       "reviewDate": "2026-07-10",

@@ -1,0 +1,11 @@
+{
+  "_comment": "Explicit list of STRONG CYP3A4 inhibitors (per FDA clinical-pharmacology classification). build_classmap.py pins the 'cyp3a4_strong_inhibitor' tag (in addition to 'cyp3a4_inhibitor') on each and ensures it is recognised. The stratified CYP3A4 mechanism rules fire ONLY on this strong tag — never on weak/moderate inhibitors — per clinician direction (Dr. Manoj Kumar Kurmana) to avoid alert fatigue while preserving the high-harm combinations. Moderate inhibitors (e.g. erythromycin, fluconazole, diltiazem, verapamil, grapefruit) are intentionally NOT included here.",
+  "strong": [
+    "ketoconazole", "itraconazole", "voriconazole", "posaconazole",
+    "clarithromycin", "telithromycin",
+    "ritonavir", "cobicistat", "nelfinavir", "saquinavir", "indinavir",
+    "lopinavir", "atazanavir", "darunavir", "tipranavir",
+    "nefazodone", "idelalisib", "ceritinib", "conivaptan",
+    "boceprevir", "telaprevir"
+  ]
+}
