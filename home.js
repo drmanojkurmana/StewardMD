@@ -1064,6 +1064,12 @@
   function openMore() {
     openSheet(
       '<div class="hv-sh-t">More</div>' +
+      // In-app toggle for the redesign (so it can be enabled/reviewed on a native device
+      // where there is no URL bar for ?rnav=1). Toggles smd_redesign_nav + reloads.
+      '<button class="hv-mi" style="width:100%" onclick="try{var v=localStorage.getItem(\'smd_redesign_nav\')===\'1\';localStorage.setItem(\'smd_redesign_nav\',v?\'0\':\'1\');location.reload();}catch(e){}">' +
+        svg("spark") + '<div class="ml">New design <span class="mc">' +
+        (redesignNavOn() ? "On — tap to switch back" : "Beta — tap to try it") +
+        '</span></div><span class="marr">' + svg("chev") + '</span></button>' +
       mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +

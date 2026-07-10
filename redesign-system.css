@@ -428,3 +428,67 @@ html body.rds-on .maik-b.ai { background: var(--rds-surface-2); border-color: va
 html body.rds-on .maik-x { background: var(--rds-surface-2); color: var(--rds-ink); border-color: var(--rds-line); }
 html body.rds-on .maik-chip { background: var(--rds-surface); color: var(--rds-ink); }
 html body.rds-on .maik-edu { background: var(--rds-surface-2); }
+
+/* ============================================================================
+   Phase 3/4 · Remaining surfaces — FLAG-GATED restyle (CSS only, reversible).
+   Post-boot surfaces use `html body.rds-on`; the onboarding gate (rendered before
+   home sets body.rds-on) uses `html.rds-on` set by an early inline script.
+   ========================================================================== */
+
+/* --- 2f · Scan review (medlist.js .ml-scan-*) --- */
+html body.rds-on .ml-scan-row { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .ml-scan-flagged { border-left: 4px solid var(--sev-warning-fg); }
+html body.rds-on .ml-scan-mapped { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .ml-scan-detected, html body.rds-on .ml-scan-line { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on .ml-scan-edit { border-radius: var(--rds-r-ctl); border: 1.5px solid var(--rds-line); }
+html body.rds-on .ml-scan-flag { color: var(--sev-warning-fg); }
+html body.rds-on .ml-scan-add { border-radius: var(--rds-r-ctl); min-height: 48px; box-shadow: var(--rds-el-cta); }
+html body.rds-on .ml-scan-cancel { border-radius: var(--rds-r-ctl); min-height: 44px; }
+html body.rds-on .ml-conf-badge { border-radius: var(--rds-r-pill); font-family: var(--rds-font); }
+html body.rds-on .ml-conf-high { background: var(--sev-stable-bg); color: var(--sev-stable-fg); }
+html body.rds-on .ml-conf-medium { background: var(--sev-warning-bg); color: var(--sev-warning-fg); }
+html body.rds-on .ml-conf-low { background: var(--sev-critical-bg); color: var(--sev-critical-fg); }
+
+/* --- 2g · Cases: recent-cases overlay (recent.js .rc-*) + My Cases container --- */
+html body.rds-on .rc-ov { background: var(--rds-bg); }
+html body.rds-on .rc-bar { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on .rc-h { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .rc-card { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .rc-title { font: 700 15px var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .rc-sub, html body.rds-on .rc-time, html body.rds-on .rc-note { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on .rc-ic { color: var(--rds-primary); }
+html body.rds-on .rc-feat { background: var(--rds-primary-soft); color: var(--rds-primary); border-radius: var(--rds-r-pill); }
+html body.rds-on .rc-x, html body.rds-on .rc-clr { border-radius: var(--rds-r-pill); min-height: 40px; font-family: var(--rds-font); }
+html body.rds-on #myCasesPanel { background: var(--rds-bg); }
+
+/* --- 2a · Dx flow (reasoning.js #dxOverlay .dx-*) --- */
+html body.rds-on #dxOverlay { background: var(--rds-bg); }
+html body.rds-on .dx-bar { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on .dx-chip { min-height: 48px; border-radius: var(--rds-r-pill); border: 1.5px solid var(--rds-line); background: var(--rds-surface); color: var(--rds-ink); font-family: var(--rds-font); }
+html body.rds-on .dx-chip.on, html body.rds-on .dx-chip.sel, html body.rds-on .dx-chip[aria-pressed="true"] { background: var(--rds-primary-soft); border-color: var(--rds-primary); color: var(--rds-primary-2); }
+html body.rds-on .dx-card, html body.rds-on .dx-cmp, html body.rds-on .dx-detail { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .dx-cat-h, html body.rds-on .dx-col-h { color: var(--rds-muted); font-family: var(--rds-font); text-transform: uppercase; letter-spacing: .06em; }
+html body.rds-on .dx-back { border-radius: var(--rds-r-ctl); min-height: 44px; color: var(--rds-primary); font-family: var(--rds-font); }
+html body.rds-on .dx-disc, html body.rds-on .dx-discl, html body.rds-on .dx-disc-pill { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on .dx-drug { font-family: var(--rds-mono); }
+
+/* --- 2b · Decision result (app.js #outputArea) — conservative: radius + type only,
+       severity coloring left to the engine's clinically-tuned classes --- */
+html body.rds-on #outputArea .decision-banner { border-radius: var(--rds-r); }
+html body.rds-on #outputArea .decision-why { font-family: var(--rds-font); line-height: 1.5; }
+html body.rds-on #outputArea .result-num, html body.rds-on #outputArea .result-unit { font-family: var(--rds-mono); font-variant-numeric: tabular-nums; }
+
+/* --- 3c/3d · More sheet, settings, account (home.js .hv-*, sidebar .sb-*) --- */
+html body.rds-on .hv-sheet { border-radius: var(--rds-r-sheet) var(--rds-r-sheet) 0 0; }
+html body.rds-on .hv-sh-t { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .hv-mi { min-height: 56px; border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
+html body.rds-on .hv-grab { background: var(--rds-line); }
+html body.rds-on .sb-drawer { background: var(--rds-surface); }
+html body.rds-on .sb-main-link, html body.rds-on .sb-subitem { min-height: 48px; border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
+html body.rds-on .sb-beta { background: var(--rds-primary-soft); color: var(--rds-primary); border-radius: var(--rds-r-pill); }
+
+/* --- 3b · Onboarding gate (index.html .splash-*) — html.rds-on (pre-boot) --- */
+html.rds-on .splash-continue-btn { border-radius: var(--rds-r-ctl); min-height: 50px; font-family: var(--rds-font); }
+html.rds-on .splash-disclaimer-gate { border-radius: var(--rds-r); }
+html.rds-on .splash-name { font-family: var(--rds-font); }
+html.rds-on .splash-tagline { font-family: var(--rds-font); }
