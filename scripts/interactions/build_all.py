@@ -41,6 +41,9 @@ def main(argv):
     else:
         print("== using cached fetch output (build/*.json) ==")
 
+    import build_gold
+    build_gold.run()
+
     print("== classify ==")
     cm = build_classmap.build()
     print(f"  drugClasses={len(cm['drugClasses'])} generics, {len(cm['generics'])} names, "

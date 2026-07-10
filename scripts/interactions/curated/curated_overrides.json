@@ -31,7 +31,18 @@
     "itraconazole":          ["azole_antifungal", "cyp3a4_inhibitor"],
     "clarithromycin":        ["macrolide", "cyp3a4_inhibitor", "qt_prolonging"],
     "erythromycin":          ["macrolide", "cyp3a4_inhibitor", "qt_prolonging"],
-    "ritonavir":             ["cyp3a4_inhibitor"]
+    "ritonavir":             ["cyp3a4_inhibitor"],
+
+    "lithium":               ["lithium"],
+    "theophylline":          ["methylxanthine", "cyp1a2_substrate"],
+    "gemfibrozil":           ["fibrate"],
+    "fenofibrate":           ["fibrate"],
+    "phenelzine":            ["mao_inhibitor"],
+    "tranylcypromine":       ["mao_inhibitor"],
+    "linezolid":             ["mao_inhibitor", "serotonergic", "antibiotic"],
+    "tacrolimus":            ["calcineurin_inhibitor", "cyp3a4_sensitive_substrate", "nephrotoxic", "qt_prolonging"],
+    "ciclosporin":           ["calcineurin_inhibitor", "cyp3a4_sensitive_substrate", "nephrotoxic"],
+    "digoxin":               ["cardiac_glycoside"]
   },
 
   "deny_classes": {

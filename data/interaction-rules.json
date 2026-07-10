@@ -55,7 +55,8 @@
     "ticagrelor": [
       "antiplatelet",
       "cyp3a4_inhibitor",
-      "p2y12_inhibitor"
+      "p2y12_inhibitor",
+      "pgp_inhibitor"
     ],
     "prasugrel": [
       "antiplatelet",
@@ -181,10 +182,14 @@
     ],
     "amiodarone": [
       "antiarrhythmic",
+      "cyp1a2_inhibitor",
+      "cyp2d6_inhibitor",
+      "pgp_inhibitor",
       "qt_prolonging"
     ],
     "sotalol": [
       "antiarrhythmic",
+      "beta_blocker",
       "qt_prolonging"
     ],
     "moxifloxacin": [
@@ -199,6 +204,7 @@
     ],
     "ciprofloxacin": [
       "antibiotic",
+      "cyp1a2_inhibitor",
       "fluoroquinolone",
       "qt_prolonging"
     ],
@@ -224,6 +230,7 @@
       "ssri"
     ],
     "sertraline": [
+      "cyp2d6_inhibitor",
       "qt_prolonging",
       "serotonergic",
       "ssri"
@@ -307,6 +314,7 @@
     "clarithromycin": [
       "cyp3a4_inhibitor",
       "macrolide",
+      "pgp_inhibitor",
       "qt_prolonging"
     ],
     "azithromycin": [
@@ -316,11 +324,13 @@
     "ketoconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor",
+      "pgp_inhibitor",
       "qt_prolonging"
     ],
     "itraconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor",
+      "pgp_inhibitor",
       "qt_prolonging"
     ],
     "fluconazole": [
@@ -345,7 +355,9 @@
       "beta_blocker"
     ],
     "carvedilol": [
-      "beta_blocker"
+      "alpha_blocker",
+      "beta_blocker",
+      "vasodilator"
     ],
     "propranolol": [
       "beta_blocker"
@@ -355,7 +367,9 @@
     ],
     "verapamil": [
       "calcium_channel_blocker",
-      "non_dihydropyridine_ccb"
+      "dihydropyridine_ccb",
+      "non_dihydropyridine_ccb",
+      "pgp_inhibitor"
     ],
     "diltiazem": [
       "calcium_channel_blocker",
@@ -406,10 +420,6 @@
     "digoxin": [
       "cardiac_glycoside"
     ],
-    "isosorbide dinitrate": [
-      "nitrate",
-      "vasodilator"
-    ],
     "nitroglycerin": [
       "nitrate",
       "vasodilator"
@@ -418,7 +428,17 @@
       "nitrate",
       "vasodilator"
     ],
-    "tadalafil": [
+    "isosorbide dinitrate": [
+      "nitrate",
+      "vasodilator"
+    ],
+    "vardenafil": [
+      "cyp3a4_sensitive_substrate",
+      "pde5_inhibitor",
+      "qt_prolonging",
+      "vasodilator"
+    ],
+    "sildenafil": [
       "cyp3a4_sensitive_substrate",
       "pde5_inhibitor",
       "vasodilator"
@@ -428,16 +448,13 @@
       "pde5_inhibitor",
       "vasodilator"
     ],
-    "sildenafil": [
+    "tadalafil": [
       "cyp3a4_sensitive_substrate",
       "pde5_inhibitor",
       "vasodilator"
     ],
-    "vardenafil": [
-      "cyp3a4_sensitive_substrate",
-      "pde5_inhibitor",
-      "qt_prolonging",
-      "vasodilator"
+    "vardenafil hydrochloride": [
+      "pde5_inhibitor"
     ],
     "sildenafil citrate": [
       "pde5_inhibitor"
@@ -445,26 +462,9 @@
     "vardenafil hydrochloride trihydrate": [
       "pde5_inhibitor"
     ],
-    "vardenafil hydrochloride": [
-      "pde5_inhibitor"
-    ],
-    "nisoldipine": [
-      "calcium_channel_blocker",
-      "dihydropyridine_ccb"
-    ],
     "felodipine": [
       "calcium_channel_blocker",
       "cyp3a4_sensitive_substrate",
-      "dihydropyridine_ccb",
-      "vasodilator"
-    ],
-    "nimodipine": [
-      "calcium_channel_blocker",
-      "cyp3a4_sensitive_substrate",
-      "dihydropyridine_ccb"
-    ],
-    "amlodipine": [
-      "calcium_channel_blocker",
       "dihydropyridine_ccb",
       "vasodilator"
     ],
@@ -477,6 +477,15 @@
       "calcium_channel_blocker",
       "dihydropyridine_ccb"
     ],
+    "amlodipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb",
+      "vasodilator"
+    ],
+    "nisoldipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb"
+    ],
     "nifedipine": [
       "calcium_channel_blocker",
       "cyp3a4_sensitive_substrate",
@@ -486,58 +495,68 @@
     "nicardipine": [
       "calcium_channel_blocker",
       "cyp2c19_inhibitor",
+      "cyp2d6_inhibitor",
       "cyp3a4_inhibitor",
       "dihydropyridine_ccb"
     ],
-    "fenoprofen": [
-      "nsaid"
-    ],
-    "ketoprofen": [
-      "nsaid"
-    ],
-    "etodolac": [
-      "nsaid"
-    ],
-    "meloxicam": [
-      "nsaid"
-    ],
-    "tolmetin": [
-      "nsaid"
-    ],
-    "nepafenac": [
-      "nsaid"
+    "nimodipine": [
+      "calcium_channel_blocker",
+      "cyp3a4_sensitive_substrate",
+      "dihydropyridine_ccb"
     ],
     "oxaprozin": [
-      "nsaid"
-    ],
-    "piroxicam": [
-      "nsaid"
-    ],
-    "nabumetone": [
-      "nsaid"
-    ],
-    "diflunisal": [
-      "nsaid"
-    ],
-    "celecoxib": [
-      "nsaid"
-    ],
-    "mefenamic acid": [
-      "nsaid"
-    ],
-    "indomethacin": [
-      "nsaid"
-    ],
-    "sulindac": [
       "nsaid"
     ],
     "bromfenac": [
       "nsaid"
     ],
+    "sulindac": [
+      "nsaid"
+    ],
+    "tolmetin": [
+      "nsaid"
+    ],
+    "piroxicam": [
+      "nsaid"
+    ],
+    "meloxicam": [
+      "nsaid"
+    ],
+    "indomethacin": [
+      "nsaid"
+    ],
+    "nabumetone": [
+      "nsaid"
+    ],
+    "etodolac": [
+      "nsaid"
+    ],
     "flurbiprofen": [
       "nsaid"
     ],
+    "ketoprofen": [
+      "nsaid"
+    ],
+    "fenoprofen": [
+      "nsaid"
+    ],
+    "celecoxib": [
+      "nsaid"
+    ],
+    "nepafenac": [
+      "nsaid"
+    ],
+    "diflunisal": [
+      "nsaid"
+    ],
+    "mefenamic acid": [
+      "nsaid"
+    ],
     "nefazodone": [
+      "serotonergic",
+      "ssri"
+    ],
+    "fluvoxamine": [
       "serotonergic",
       "ssri"
     ],
@@ -546,11 +565,12 @@
       "serotonergic",
       "ssri"
     ],
-    "fluvoxamine": [
-      "serotonergic",
-      "ssri"
-    ],
     "milnacipran": [
+      "serotonergic",
+      "snri"
+    ],
+    "desvenlafaxine": [
+      "cyp2d6_inhibitor",
       "serotonergic",
       "snri"
     ],
@@ -558,24 +578,34 @@
       "serotonergic",
       "snri"
     ],
-    "desvenlafaxine": [
-      "serotonergic",
-      "snri"
-    ],
     "alosetron": [
-      "qt_prolonging"
-    ],
-    "palonosetron": [
-      "qt_prolonging"
-    ],
-    "dolasetron": [
       "qt_prolonging"
     ],
     "granisetron": [
       "qt_prolonging"
     ],
+    "dolasetron": [
+      "qt_prolonging"
+    ],
+    "palonosetron": [
+      "qt_prolonging"
+    ],
     "safinamide": [
+      "cyp1a2_inhibitor",
       "cyp2c19_inhibitor",
+      "cyp2d6_inhibitor",
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "phenelzine": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "rasagiline": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "selegiline": [
       "mao_inhibitor",
       "serotonergic"
     ],
@@ -587,31 +617,17 @@
       "mao_inhibitor",
       "serotonergic"
     ],
-    "rasagiline": [
-      "mao_inhibitor",
-      "serotonergic"
-    ],
-    "phenelzine": [
-      "mao_inhibitor",
-      "serotonergic"
-    ],
-    "selegiline": [
-      "mao_inhibitor",
+    "protriptyline": [
+      "qt_prolonging",
       "serotonergic"
     ],
     "amitriptyline": [
-      "qt_prolonging",
-      "serotonergic"
-    ],
-    "nortriptyline": [
-      "qt_prolonging",
-      "serotonergic"
-    ],
-    "trimipramine": [
+      "anticholinergic",
       "qt_prolonging",
       "serotonergic"
     ],
     "clomipramine": [
+      "anticholinergic",
       "qt_prolonging",
       "serotonergic"
     ],
@@ -619,49 +635,41 @@
       "qt_prolonging",
       "serotonergic"
     ],
-    "protriptyline": [
-      "qt_prolonging",
-      "serotonergic"
-    ],
-    "doxepin": [
-      "qt_prolonging",
-      "serotonergic"
-    ],
     "desipramine": [
       "qt_prolonging",
       "serotonergic"
     ],
+    "doxepin": [
+      "anticholinergic",
+      "qt_prolonging",
+      "serotonergic"
+    ],
     "imipramine": [
+      "anticholinergic",
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "nortriptyline": [
+      "anticholinergic",
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "trimipramine": [
+      "anticholinergic",
       "qt_prolonging",
       "serotonergic"
     ],
     "fluvastatin": [
       "statin"
     ],
+    "pitavastatin": [
+      "statin"
+    ],
     "lovastatin": [
       "cyp3a4_sensitive_substrate",
       "statin"
     ],
-    "pitavastatin": [
-      "statin"
-    ],
     "benazepril": [
-      "ace_inhibitor",
-      "raas"
-    ],
-    "enalaprilat anhydrous": [
-      "ace_inhibitor",
-      "raas"
-    ],
-    "moexiprilat": [
-      "ace_inhibitor",
-      "raas"
-    ],
-    "quinapril": [
-      "ace_inhibitor",
-      "raas"
-    ],
-    "captopril": [
       "ace_inhibitor",
       "raas"
     ],
@@ -669,7 +677,11 @@
       "ace_inhibitor",
       "raas"
     ],
-    "benazeprilat": [
+    "enalaprilat anhydrous": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "quinapril": [
       "ace_inhibitor",
       "raas"
     ],
@@ -681,6 +693,30 @@
       "ace_inhibitor",
       "raas"
     ],
+    "lisinopril anhydrous": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "trandolaprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "captopril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "benazeprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "fosinopril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "moexiprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
     "fosinoprilat": [
       "ace_inhibitor",
       "raas"
@@ -689,31 +725,16 @@
       "ace_inhibitor",
       "raas"
     ],
-    "fosinopril": [
-      "ace_inhibitor",
-      "raas"
-    ],
-    "trandolaprilat": [
-      "ace_inhibitor",
-      "raas"
-    ],
-    "lisinopril anhydrous": [
-      "ace_inhibitor",
-      "raas"
-    ],
     "sparsentan": [
       "arb",
-      "raas"
-    ],
-    "eprosartan": [
-      "arb",
+      "pgp_inhibitor",
       "raas"
     ],
     "azilsartan": [
       "arb",
       "raas"
     ],
-    "candesartan": [
+    "eprosartan": [
       "arb",
       "raas"
     ],
@@ -725,22 +746,22 @@
       "arb",
       "raas"
     ],
-    "aliskiren": [
+    "candesartan": [
+      "arb",
       "raas"
     ],
-    "torsemide": [
-      "diuretic",
-      "loop_diuretic"
+    "aliskiren": [
+      "raas"
     ],
     "ethacrynic acid": [
       "diuretic",
       "loop_diuretic"
     ],
-    "chlorothiazide": [
+    "torsemide": [
       "diuretic",
-      "thiazide_diuretic"
+      "loop_diuretic"
     ],
-    "bendroflumethiazide": [
+    "chlorothiazide": [
       "diuretic",
       "thiazide_diuretic"
     ],
@@ -749,6 +770,10 @@
       "thiazide_diuretic"
     ],
     "hydroflumethiazide": [
+      "diuretic",
+      "thiazide_diuretic"
+    ],
+    "bendroflumethiazide": [
       "diuretic",
       "thiazide_diuretic"
     ],
@@ -764,28 +789,25 @@
       "diuretic",
       "potassium_sparing_diuretic"
     ],
-    "levobunolol": [
-      "beta_blocker"
-    ],
-    "labetalol": [
-      "beta_blocker"
-    ],
     "timolol anhydrous": [
       "beta_blocker"
     ],
     "pindolol": [
       "beta_blocker"
     ],
-    "carteolol": [
-      "beta_blocker"
-    ],
-    "betaxolol": [
+    "acebutolol": [
       "beta_blocker"
     ],
     "landiolol": [
       "beta_blocker"
     ],
-    "acebutolol": [
+    "carteolol": [
+      "beta_blocker"
+    ],
+    "labetalol": [
+      "beta_blocker"
+    ],
+    "levobunolol": [
       "beta_blocker"
     ],
     "esmolol": [
@@ -794,19 +816,14 @@
     "nadolol": [
       "beta_blocker"
     ],
-    "edoxaban": [
-      "anticoagulant",
-      "doac"
+    "betaxolol": [
+      "beta_blocker"
     ],
     "fondaparinux": [
       "anticoagulant",
       "doac"
     ],
-    "desirudin": [
-      "anticoagulant",
-      "doac"
-    ],
-    "bivalirudin": [
+    "edoxaban": [
       "anticoagulant",
       "doac"
     ],
@@ -814,20 +831,28 @@
       "anticoagulant",
       "doac"
     ],
-    "heparin, porcine": [
-      "anticoagulant"
+    "bivalirudin": [
+      "anticoagulant",
+      "doac"
+    ],
+    "desirudin": [
+      "anticoagulant",
+      "doac"
     ],
     "dalteparin": [
       "anticoagulant",
       "lmwh"
     ],
+    "heparin, porcine": [
+      "anticoagulant"
+    ],
+    "edetic acid": [
+      "anticoagulant"
+    ],
     "citric acid, anhydrous": [
       "anticoagulant"
     ],
     "protein c, human": [
-      "anticoagulant"
-    ],
-    "edetic acid": [
       "anticoagulant"
     ],
     "cangrelor": [
@@ -837,31 +862,19 @@
     "eptifibatide": [
       "antiplatelet"
     ],
-    "tirofiban": [
+    "dipyridamole": [
       "antiplatelet"
     ],
     "vorapaxar": [
       "antiplatelet"
     ],
+    "tirofiban": [
+      "antiplatelet"
+    ],
     "ticlopidine": [
       "antiplatelet"
     ],
-    "dipyridamole": [
-      "antiplatelet"
-    ],
-    "codeine anhydrous": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "propoxyphene": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "hydrocodone": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "methadone": [
+    "loperamide": [
       "cns_depressant",
       "opioid",
       "qt_prolonging"
@@ -870,34 +883,17 @@
       "cns_depressant",
       "opioid"
     ],
-    "levorphanol": [
+    "hydromorphone": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "tapentadol": [
       "cns_depressant",
       "opioid"
     ],
     "remifentanil": [
       "cns_depressant",
       "opioid"
-    ],
-    "sufentanil": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "difelikefalin": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "meperidine": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "hydromorphone": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "loperamide": [
-      "cns_depressant",
-      "opioid",
-      "qt_prolonging"
     ],
     "dihydrocodeine": [
       "cns_depressant",
@@ -907,23 +903,44 @@
       "cns_depressant",
       "opioid"
     ],
+    "hydrocodone": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine anhydrous": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "propoxyphene": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "meperidine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "levorphanol": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "sufentanil": [
+      "cns_depressant",
+      "opioid"
+    ],
     "oxymorphone": [
       "cns_depressant",
       "opioid"
     ],
-    "tapentadol": [
+    "methadone": [
+      "cns_depressant",
+      "opioid",
+      "qt_prolonging"
+    ],
+    "difelikefalin": [
       "cns_depressant",
       "opioid"
     ],
-    "hydrocodone hydrochloride": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "eluxadoline": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "codeine anhyd": [
+    "naldemedine tosylate": [
       "cns_depressant",
       "opioid"
     ],
@@ -931,47 +948,7 @@
       "cns_depressant",
       "opioid"
     ],
-    "codeine sulfate": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "meperidine hydrochloride": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "hydromorphone hydrochloride": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "codeine camsyl": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "dihydrocodeine bitartrate": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "fentanyl hydrochloride": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "propoxyphene hydrochloride": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "alfentanil hydrochloride": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "codeine polistirex": [
-      "cns_depressant",
-      "opioid"
-    ],
     "morphine hydrochloride": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "hydrocodone polistirex": [
       "cns_depressant",
       "opioid"
     ],
@@ -979,15 +956,15 @@
       "cns_depressant",
       "opioid"
     ],
-    "levorphanol tartrate": [
+    "naldemedine": [
       "cns_depressant",
       "opioid"
     ],
-    "oxymorphone hydrochloride": [
+    "codeine polistirex": [
       "cns_depressant",
       "opioid"
     ],
-    "oxycodone terephthalate": [
+    "hydrocodone hydrochloride": [
       "cns_depressant",
       "opioid"
     ],
@@ -995,11 +972,95 @@
       "cns_depressant",
       "opioid"
     ],
+    "propoxyphene napsylate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "oxymorphone hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
     "hydrocodone resin complex": [
       "cns_depressant",
       "opioid"
     ],
-    "naldemedine": [
+    "codeine sulfate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "fentanyl hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydromorphone hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "sufentanil citrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "morphine tartrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "benzhydrocodone": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydrocodone polistirex": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydrocodone tannate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine camsyl": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "fentanyl citrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "eluxadoline": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "tramadol hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "dihydrocodeine bitartrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "oxycodone terephthalate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "propoxyphene hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine phosphate anhydrous": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "hydrocodone bitartrate": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "alfentanil hydrochloride": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "codeine anhyd": [
       "cns_depressant",
       "opioid"
     ],
@@ -1011,67 +1072,37 @@
       "cns_depressant",
       "opioid"
     ],
-    "morphine tartrate": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "hydrocodone bitartrate": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "naldemedine tosylate": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "benzhydrocodone": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "tramadol hydrochloride": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "sufentanil citrate": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "codeine hydrochloride": [
-      "cns_depressant",
-      "opioid"
-    ],
-    "hydrocodone tannate": [
-      "cns_depressant",
-      "opioid"
-    ],
     "oxycodone hydrochloride": [
       "cns_depressant",
       "opioid"
     ],
-    "fentanyl citrate": [
+    "meperidine hydrochloride": [
       "cns_depressant",
       "opioid"
     ],
-    "codeine phosphate anhydrous": [
+    "levorphanol tartrate": [
       "cns_depressant",
       "opioid"
     ],
-    "propoxyphene napsylate": [
-      "cns_depressant",
-      "opioid"
+    "flurazepam": [
+      "benzodiazepine",
+      "cns_depressant"
     ],
-    "quazepam": [
+    "clobazam": [
+      "benzodiazepine",
+      "cns_depressant",
+      "cyp2d6_inhibitor",
+      "cyp3a4_inducer"
+    ],
+    "temazepam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "oxazepam": [
       "benzodiazepine",
       "cns_depressant"
     ],
     "chlordiazepoxide": [
-      "benzodiazepine",
-      "cns_depressant"
-    ],
-    "estazolam": [
-      "benzodiazepine",
-      "cns_depressant"
-    ],
-    "flurazepam": [
       "benzodiazepine",
       "cns_depressant"
     ],
@@ -1083,20 +1114,15 @@
       "benzodiazepine",
       "cns_depressant"
     ],
-    "clobazam": [
+    "quazepam": [
       "benzodiazepine",
-      "cns_depressant",
-      "cyp3a4_inducer"
+      "cns_depressant"
     ],
-    "oxazepam": [
+    "estazolam": [
       "benzodiazepine",
       "cns_depressant"
     ],
     "triazolam": [
-      "benzodiazepine",
-      "cns_depressant"
-    ],
-    "temazepam": [
       "benzodiazepine",
       "cns_depressant"
     ],
@@ -1113,10 +1139,6 @@
       "macrolide",
       "qt_prolonging"
     ],
-    "finafloxacin": [
-      "fluoroquinolone",
-      "qt_prolonging"
-    ],
     "gatifloxacin anhydrous": [
       "fluoroquinolone",
       "qt_prolonging"
@@ -1125,36 +1147,23 @@
       "fluoroquinolone",
       "qt_prolonging"
     ],
-    "besifloxacin": [
+    "finafloxacin": [
       "fluoroquinolone",
       "qt_prolonging"
     ],
-    "luliconazole": [
-      "azole_antifungal",
-      "cyp2c19_inhibitor",
-      "cyp3a4_inhibitor"
-    ],
-    "isavuconazole": [
-      "azole_antifungal",
-      "cyp3a4_inhibitor"
+    "besifloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
     ],
     "econazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor"
     ],
-    "tioconazole": [
+    "terconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor"
     ],
     "sertaconazole": [
-      "azole_antifungal",
-      "cyp3a4_inhibitor"
-    ],
-    "oxiconazole": [
-      "azole_antifungal",
-      "cyp3a4_inhibitor"
-    ],
-    "efinaconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor"
     ],
@@ -1166,15 +1175,6 @@
       "azole_antifungal",
       "cyp3a4_inhibitor"
     ],
-    "posaconazole": [
-      "azole_antifungal",
-      "cyp3a4_inhibitor",
-      "qt_prolonging"
-    ],
-    "terconazole": [
-      "azole_antifungal",
-      "cyp3a4_inhibitor"
-    ],
     "miconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor"
@@ -1183,6 +1183,33 @@
       "azole_antifungal",
       "cyp3a4_inhibitor"
     ],
+    "efinaconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "luliconazole": [
+      "azole_antifungal",
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "tioconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "isavuconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "oxiconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "posaconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor",
+      "qt_prolonging"
+    ],
     "butoconazole": [
       "azole_antifungal",
       "cyp3a4_inhibitor"
@@ -1190,251 +1217,2043 @@
     "febuxostat": [
       "xanthine_oxidase_inhibitor"
     ],
-    "mavorixafor": [
+    "maribavir": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "indinavir anhydrous": [
       "cyp3a4_inhibitor"
     ],
-    "osilodrostat": [
-      "cyp2c19_inhibitor",
-      "cyp3a4_inhibitor"
-    ],
-    "lomitapide mesylate": [
-      "cyp3a4_inhibitor"
-    ],
-    "perampanel": [
-      "cyp3a4_inhibitor"
-    ],
-    "netupitant": [
-      "cyp3a4_inhibitor"
+    "levoketoconazole": [
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
     ],
     "pacritinib": [
-      "cyp3a4_inhibitor"
+      "cyp1a2_inhibitor",
+      "cyp3a4_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
     ],
-    "triclabendazole": [
+    "manidipine hydrochloride": [
+      "cyp1a2_inhibitor",
       "cyp2c19_inhibitor",
-      "cyp3a4_inhibitor"
-    ],
-    "atazanavir": [
-      "cyp3a4_inhibitor"
-    ],
-    "boceprevir": [
-      "cyp3a4_inhibitor"
-    ],
-    "cyclosporine": [
-      "cyp3a4_inhibitor"
-    ],
-    "fexinidazole": [
-      "cyp2c19_inhibitor",
-      "cyp3a4_inhibitor"
-    ],
-    "simeprevir": [
-      "cyp3a4_inhibitor"
-    ],
-    "elexacaftor": [
-      "cyp2c19_inhibitor",
+      "cyp2d6_inhibitor",
       "cyp3a4_inhibitor"
     ],
     "conivaptan": [
       "cyp3a4_inhibitor"
     ],
-    "lazertinib": [
+    "avacopan": [
       "cyp3a4_inhibitor"
     ],
-    "letermovir": [
+    "conivaptan hydrochloride": [
       "cyp3a4_inhibitor"
+    ],
+    "viloxazine": [
+      "cyp1a2_inhibitor",
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "triclabendazole": [
+      "cyp1a2_inhibitor",
+      "cyp2c19_inhibitor",
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "pazopanib": [
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor",
+      "cyp3a4_sensitive_substrate"
+    ],
+    "everolimus": [
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "immunosuppressant"
+    ],
+    "simeprevir": [
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "lefamulin": [
+      "cyp3a4_inhibitor"
+    ],
+    "trofinetide": [
+      "cyp3a4_inhibitor"
+    ],
+    "lomitapide": [
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "berotralstat": [
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "fexinidazole": [
+      "cyp1a2_inhibitor",
+      "cyp2c19_inhibitor",
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor",
+      "qt_prolonging"
     ],
     "aprepitant": [
       "cyp3a4_inducer",
       "cyp3a4_inhibitor"
     ],
-    "viloxazine": [
-      "cyp3a4_inhibitor"
-    ],
-    "imatinib": [
-      "cyp3a4_inhibitor"
-    ],
-    "ritonavir": [
-      "cyp3a4_inhibitor"
-    ],
-    "voxelotor": [
-      "cyp3a4_inhibitor"
-    ],
-    "efavirenz": [
-      "cyp2c19_inhibitor",
-      "cyp3a4_inhibitor"
-    ],
-    "lefamulin": [
+    "letermovir": [
       "cyp3a4_inhibitor"
     ],
     "amprenavir": [
       "cyp3a4_inducer",
       "cyp3a4_inhibitor"
     ],
-    "manidipine hydrochloride": [
+    "xanomeline": [
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "manidipine": [
+      "cyp1a2_inhibitor",
       "cyp2c19_inhibitor",
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "lazertinib": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_sensitive_substrate"
+    ],
+    "perampanel": [
+      "cyp3a4_inhibitor"
+    ],
+    "mavorixafor": [
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "imatinib": [
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor",
+      "cyp3a4_sensitive_substrate"
+    ],
+    "ritonavir": [
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "osilodrostat": [
+      "cyp1a2_inhibitor",
+      "cyp2c19_inhibitor",
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "dasatinib anhydrous": [
+      "cyp3a4_inhibitor",
+      "cyp3a4_sensitive_substrate"
+    ],
+    "cyclosporine": [
+      "calcineurin_inhibitor",
+      "cyp3a4_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "nephrotoxic",
+      "pgp_inhibitor"
+    ],
+    "elexacaftor": [
+      "cyp1a2_inhibitor",
+      "cyp2c19_inhibitor",
+      "cyp2d6_inhibitor",
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "boceprevir": [
+      "cyp3a4_inhibitor"
+    ],
+    "lomitapide mesylate": [
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "voxelotor": [
+      "cyp3a4_inhibitor"
+    ],
+    "simeprevir sodium": [
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "efavirenz": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inhibitor"
+    ],
+    "erdafitinib": [
+      "cyp3a4_inducer",
+      "cyp3a4_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "atazanavir": [
       "cyp3a4_inhibitor"
     ],
     "givinostat": [
       "cyp3a4_inhibitor"
     ],
-    "conivaptan hydrochloride": [
-      "cyp3a4_inhibitor"
+    "netupitant": [
+      "cyp3a4_inhibitor",
+      "pgp_inhibitor"
     ],
-    "pazopanib": [
-      "cyp3a4_inhibitor"
-    ],
-    "levoketoconazole": [
-      "cyp3a4_inhibitor"
-    ],
-    "dasatinib anhydrous": [
-      "cyp3a4_inhibitor"
-    ],
-    "indinavir anhydrous": [
-      "cyp3a4_inhibitor"
-    ],
-    "trofinetide": [
-      "cyp3a4_inhibitor"
-    ],
-    "maribavir": [
-      "cyp3a4_inhibitor"
-    ],
-    "avacopan": [
-      "cyp3a4_inhibitor"
-    ],
-    "erdafitinib": [
+    "lorlatinib": [
       "cyp3a4_inducer",
-      "cyp3a4_inhibitor"
+      "cyp3a4_sensitive_substrate"
     ],
-    "berotralstat": [
-      "cyp3a4_inhibitor"
-    ],
-    "simeprevir sodium": [
-      "cyp3a4_inhibitor"
-    ],
-    "everolimus": [
-      "cyp3a4_inhibitor"
-    ],
-    "xanomeline": [
-      "cyp3a4_inhibitor"
-    ],
-    "manidipine": [
-      "cyp2c19_inhibitor",
-      "cyp3a4_inhibitor"
-    ],
-    "lomitapide": [
-      "cyp3a4_inhibitor"
-    ],
-    "osimertinib": [
-      "cyp3a4_inducer"
-    ],
-    "eslicarbazepine": [
-      "cyp2c19_inhibitor",
-      "cyp3a4_inducer"
-    ],
-    "eslicarbazepine acetate": [
-      "cyp2c19_inhibitor",
-      "cyp3a4_inducer"
-    ],
-    "oritavancin": [
-      "cyp2c19_inhibitor",
-      "cyp3a4_inducer"
+    "dabrafenib": [
+      "cyp3a4_inducer",
+      "cyp3a4_sensitive_substrate"
     ],
     "cenobamate": [
       "cyp2c19_inhibitor",
       "cyp3a4_inducer"
     ],
-    "lorlatinib": [
-      "cyp3a4_inducer"
-    ],
-    "topiramate": [
-      "cyp2c19_inhibitor",
-      "cyp3a4_inducer"
-    ],
-    "carbamazepine": [
-      "cyp3a4_inducer"
-    ],
     "pitolisant": [
       "cyp3a4_inducer"
     ],
-    "deferasirox": [
-      "cyp3a4_inducer"
-    ],
-    "belzutifan": [
-      "cyp3a4_inducer"
-    ],
-    "mitotane": [
+    "carbamazepine": [
       "cyp3a4_inducer"
     ],
     "ivosidenib": [
       "cyp3a4_inducer"
     ],
     "repotrectinib": [
+      "cyp3a4_inducer",
+      "cyp3a4_sensitive_substrate"
+    ],
+    "oritavancin": [
+      "cyp2c19_inhibitor",
       "cyp3a4_inducer"
     ],
-    "omaveloxolone": [
+    "enzalutamide": [
       "cyp3a4_inducer"
     ],
-    "elafibranor": [
+    "deferasirox": [
+      "cyp1a2_inhibitor",
       "cyp3a4_inducer"
     ],
-    "dabrafenib": [
+    "eslicarbazepine": [
+      "cyp2c19_inhibitor",
       "cyp3a4_inducer"
     ],
     "osimertinib mesylate": [
       "cyp3a4_inducer"
     ],
-    "enzalutamide": [
+    "eslicarbazepine acetate": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inducer"
+    ],
+    "elafibranor": [
+      "cyp3a4_inducer"
+    ],
+    "mitotane": [
+      "cyp3a4_inducer"
+    ],
+    "topiramate": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_inducer"
+    ],
+    "omaveloxolone": [
+      "cyp3a4_inducer"
+    ],
+    "osimertinib": [
+      "cyp3a4_inducer",
+      "cyp3a4_sensitive_substrate"
+    ],
+    "belzutifan": [
       "cyp3a4_inducer"
     ],
     "oritavancin diphosphate": [
       "cyp2c19_inhibitor",
       "cyp3a4_inducer"
     ],
-    "cannabidiol": [
-      "cyp2c19_inhibitor"
+    "elagolix": [
+      "cyp2c19_inhibitor",
+      "pgp_inhibitor"
     ],
     "tecovirimat": [
       "cyp2c19_inhibitor"
     ],
+    "etravirine": [
+      "cyp2c19_inhibitor",
+      "pgp_inhibitor"
+    ],
     "pirtobrutinib": [
+      "cyp2c19_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "cannabidiol": [
+      "cyp1a2_inhibitor",
       "cyp2c19_inhibitor"
+    ],
+    "safinamide mesylate": [
+      "cyp1a2_inhibitor",
+      "cyp2c19_inhibitor",
+      "cyp2d6_inhibitor"
     ],
     "lonafarnib": [
-      "cyp2c19_inhibitor"
-    ],
-    "elagolix": [
-      "cyp2c19_inhibitor"
+      "cyp2c19_inhibitor",
+      "pgp_inhibitor"
     ],
     "mephobarbital": [
       "cyp2c19_inhibitor"
     ],
-    "safinamide mesylate": [
-      "cyp2c19_inhibitor"
+    "eliglustat": [
+      "cyp2d6_inhibitor",
+      "pgp_inhibitor"
     ],
-    "etravirine": [
-      "cyp2c19_inhibitor"
+    "nilotinib d-tartrate": [
+      "cyp2d6_inhibitor",
+      "pgp_inhibitor"
     ],
-    "dofetilide": [
-      "qt_prolonging"
+    "ranolazine": [
+      "cyp2d6_inhibitor",
+      "pgp_inhibitor"
     ],
-    "ibutilide": [
-      "qt_prolonging"
+    "nilotinib": [
+      "cyp2d6_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
     ],
     "quinidine": [
+      "antiarrhythmic",
+      "cyp2d6_inhibitor",
+      "qt_prolonging"
+    ],
+    "methotrimeprazine hydrochloride": [
+      "cyp1a2_inhibitor",
+      "cyp2d6_inhibitor"
+    ],
+    "abiraterone": [
+      "cyp2d6_inhibitor"
+    ],
+    "bupropion": [
+      "cyp2d6_inhibitor"
+    ],
+    "bupropion hydrobromide": [
+      "cyp2d6_inhibitor"
+    ],
+    "panobinostat": [
+      "cyp2d6_inhibitor"
+    ],
+    "mirabegron": [
+      "cyp2d6_inhibitor",
+      "pgp_inhibitor",
+      "sympathomimetic"
+    ],
+    "eliglustat tartrate": [
+      "cyp2d6_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "levomepromazine maleate": [
+      "cyp1a2_inhibitor",
+      "cyp2d6_inhibitor"
+    ],
+    "methotrimeprazine": [
+      "cyp1a2_inhibitor",
+      "cyp2d6_inhibitor"
+    ],
+    "cobicistat": [
+      "cyp2d6_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "darunavir": [
+      "cyp2d6_inhibitor"
+    ],
+    "rolapitant": [
+      "cyp2d6_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "bupropion hydrochloride": [
+      "cyp2d6_inhibitor"
+    ],
+    "vemurafenib": [
+      "cyp1a2_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "leniolisib": [
+      "cyp1a2_inhibitor",
+      "cyp3a4_sensitive_substrate"
+    ],
+    "capmatinib": [
+      "cyp1a2_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "pibrentasvir": [
+      "cyp1a2_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "glecaprevir": [
+      "cyp1a2_inhibitor",
+      "pgp_inhibitor"
+    ],
+    "ripretinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "sapropterin": [
+      "pgp_inhibitor"
+    ],
+    "lumacaftor": [
+      "pgp_inhibitor"
+    ],
+    "sotagliflozin": [
+      "pgp_inhibitor",
+      "sglt2_inhibitor"
+    ],
+    "asunaprevir": [
+      "pgp_inhibitor"
+    ],
+    "crizotinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "elbasvir": [
+      "pgp_inhibitor"
+    ],
+    "lenacapavir": [
+      "pgp_inhibitor"
+    ],
+    "mitapivat": [
+      "pgp_inhibitor"
+    ],
+    "sarecycline": [
+      "pgp_inhibitor"
+    ],
+    "venetoclax": [
+      "pgp_inhibitor"
+    ],
+    "paritaprevir dihydrate": [
+      "pgp_inhibitor"
+    ],
+    "imlunestrant": [
+      "pgp_inhibitor"
+    ],
+    "abrocitinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "daclatasvir": [
+      "pgp_inhibitor"
+    ],
+    "flibanserin": [
+      "pgp_inhibitor"
+    ],
+    "selpercatinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "paritaprevir": [
+      "pgp_inhibitor"
+    ],
+    "neratinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "rilzabrutinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "tepotinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "daclatasvir dihydrochloride": [
+      "pgp_inhibitor"
+    ],
+    "ivacaftor": [
+      "pgp_inhibitor"
+    ],
+    "elacestrant": [
+      "pgp_inhibitor"
+    ],
+    "pemigatinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "deutivacaftor": [
+      "pgp_inhibitor"
+    ],
+    "canagliflozin anhydrous": [
+      "pgp_inhibitor",
+      "sglt2_inhibitor"
+    ],
+    "relugolix": [
+      "pgp_inhibitor"
+    ],
+    "levacetylleucine": [
+      "pgp_inhibitor"
+    ],
+    "futibatinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "ledipasvir": [
+      "pgp_inhibitor"
+    ],
+    "avapritinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "sarecycline hydrochloride": [
+      "pgp_inhibitor"
+    ],
+    "telaprevir": [
+      "pgp_inhibitor"
+    ],
+    "danicopan": [
+      "pgp_inhibitor"
+    ],
+    "abciximab": [
+      "pgp_inhibitor"
+    ],
+    "zonisamide": [
+      "pgp_inhibitor"
+    ],
+    "suvorexant": [
+      "pgp_inhibitor"
+    ],
+    "tucatinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "nilotinib tartrate": [
+      "pgp_inhibitor"
+    ],
+    "voclosporin": [
+      "calcineurin_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "nephrotoxic",
+      "pgp_inhibitor"
+    ],
+    "remibrutinib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor"
+    ],
+    "vandetanib": [
+      "cyp3a4_sensitive_substrate",
+      "pgp_inhibitor",
+      "qt_prolonging"
+    ],
+    "voxilaprevir": [
+      "pgp_inhibitor"
+    ],
+    "lopinavir": [
+      "pgp_inhibitor"
+    ],
+    "velpatasvir": [
+      "pgp_inhibitor"
+    ],
+    "clidinium": [
+      "anticholinergic"
+    ],
+    "aclidinium": [
+      "anticholinergic"
+    ],
+    "benztropine": [
+      "anticholinergic",
+      "antihistamine"
+    ],
+    "ipratropium cation": [
+      "anticholinergic"
+    ],
+    "dicyclomine": [
+      "anticholinergic"
+    ],
+    "revefenacin": [
+      "anticholinergic"
+    ],
+    "methscopolamine": [
+      "anticholinergic"
+    ],
+    "ipratropium": [
+      "anticholinergic"
+    ],
+    "tiotropium": [
+      "anticholinergic"
+    ],
+    "scopolamine": [
+      "anticholinergic"
+    ],
+    "umeclidinium": [
+      "anticholinergic"
+    ],
+    "glycopyrronium": [
+      "anticholinergic"
+    ],
+    "atropine": [
+      "anticholinergic"
+    ],
+    "tropicamide": [
+      "anticholinergic"
+    ],
+    "flavoxate": [
+      "anticholinergic"
+    ],
+    "tolterodine": [
+      "anticholinergic",
+      "qt_prolonging"
+    ],
+    "homatropine": [
+      "anticholinergic"
+    ],
+    "solifenacin": [
+      "anticholinergic",
+      "qt_prolonging"
+    ],
+    "oxybutynin": [
+      "anticholinergic"
+    ],
+    "trospium": [
+      "anticholinergic"
+    ],
+    "darifenacin": [
+      "anticholinergic"
+    ],
+    "doxylamine": [
+      "anticholinergic",
+      "antihistamine"
+    ],
+    "hydroxyzine": [
+      "antihistamine",
+      "qt_prolonging"
+    ],
+    "alcaftadine": [
+      "antihistamine"
+    ],
+    "cetirizine": [
+      "antihistamine"
+    ],
+    "azelastine": [
+      "antihistamine"
+    ],
+    "olopatadine": [
+      "antihistamine"
+    ],
+    "desloratadine": [
+      "antihistamine"
+    ],
+    "diphenhydramine": [
+      "antihistamine",
+      "qt_prolonging"
+    ],
+    "chlorpheniramine": [
+      "antihistamine"
+    ],
+    "levocetirizine": [
+      "antihistamine"
+    ],
+    "bepotastine": [
+      "antihistamine"
+    ],
+    "acrivastine": [
+      "antihistamine"
+    ],
+    "fexofenadine": [
+      "antihistamine"
+    ],
+    "carbinoxamine": [
+      "antihistamine"
+    ],
+    "clobetasol": [
+      "corticosteroid"
+    ],
+    "alclometasone": [
+      "corticosteroid"
+    ],
+    "betamethasone": [
+      "corticosteroid"
+    ],
+    "prednisolone": [
+      "corticosteroid"
+    ],
+    "loteprednol": [
+      "corticosteroid"
+    ],
+    "vamorolone": [
+      "corticosteroid"
+    ],
+    "beclomethasone": [
+      "corticosteroid"
+    ],
+    "cortisone": [
+      "corticosteroid"
+    ],
+    "prednisone": [
+      "corticosteroid"
+    ],
+    "flurandrenolide": [
+      "corticosteroid"
+    ],
+    "halcinonide": [
+      "corticosteroid"
+    ],
+    "desonide": [
+      "corticosteroid"
+    ],
+    "desoximetasone": [
+      "corticosteroid"
+    ],
+    "triamcinolone acetonide": [
+      "corticosteroid"
+    ],
+    "budesonide": [
+      "corticosteroid"
+    ],
+    "fluocinolone acetonide": [
+      "corticosteroid"
+    ],
+    "amcinonide": [
+      "corticosteroid"
+    ],
+    "flunisolide anhydrous": [
+      "corticosteroid"
+    ],
+    "fluorometholone": [
+      "corticosteroid"
+    ],
+    "medrysone": [
+      "corticosteroid"
+    ],
+    "dexamethasone": [
+      "corticosteroid"
+    ],
+    "clocortolone": [
+      "corticosteroid"
+    ],
+    "fluticasone": [
+      "corticosteroid"
+    ],
+    "halobetasol": [
+      "corticosteroid"
+    ],
+    "fluocinonide": [
+      "corticosteroid"
+    ],
+    "triamcinolone": [
+      "corticosteroid"
+    ],
+    "hydrocortisone": [
+      "corticosteroid"
+    ],
+    "mometasone": [
+      "corticosteroid"
+    ],
+    "diflorasone": [
+      "corticosteroid"
+    ],
+    "methylprednisolone": [
+      "corticosteroid"
+    ],
+    "deflazacort": [
+      "corticosteroid"
+    ],
+    "gentamicin": [
+      "aminoglycoside",
+      "nephrotoxic"
+    ],
+    "amikacin": [
+      "aminoglycoside",
+      "nephrotoxic"
+    ],
+    "tobramycin": [
+      "aminoglycoside",
+      "nephrotoxic"
+    ],
+    "streptomycin": [
+      "aminoglycoside",
+      "nephrotoxic"
+    ],
+    "kanamycin": [
+      "aminoglycoside",
+      "nephrotoxic"
+    ],
+    "neomycin": [
+      "aminoglycoside",
+      "nephrotoxic"
+    ],
+    "vancomycin": [
+      "glycopeptide",
+      "nephrotoxic"
+    ],
+    "polymyxin b": [
+      "nephrotoxic"
+    ],
+    "colistimethate": [
+      "nephrotoxic"
+    ],
+    "sulfadiazine": [
+      "sulfonamide"
+    ],
+    "sulfacetamide": [
+      "sulfonamide"
+    ],
+    "silver sulfadiazine": [
+      "sulfonamide"
+    ],
+    "tedizolid": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "metronidazole": [
+      "qt_prolonging"
+    ],
+    "tinidazole": [
+      "qt_prolonging"
+    ],
+    "secnidazole": [
+      "qt_prolonging"
+    ],
+    "anhydrous tacrolimus": [
+      "calcineurin_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "nephrotoxic"
+    ],
+    "pimecrolimus": [
+      "calcineurin_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "nephrotoxic"
+    ],
+    "sirolimus": [
+      "cyp3a4_sensitive_substrate",
+      "immunosuppressant"
+    ],
+    "palbociclib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "trametinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "trilaciclib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "ruxolitinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "ceritinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "tofacitinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "sorafenib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "alectinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "quizartinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "cetuximab": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "axitinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "ponatinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "panitumumab": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "erlotinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "tivozanib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "zanubrutinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "deucravacitinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "cabozantinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "temsirolimus": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "pralsetinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "defactinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "tovorafenib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "abemaciclib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "regorafenib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "lenvatinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "ribociclib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "acalabrutinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "larotrectinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "gefitinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "cobimetinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "netarsudil": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "lapatinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "trastuzumab": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "ramucirumab": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "sunitinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "deuruxolitinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "upadacitinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "pexidartinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "ibrutinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "brigatinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "bosutinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "idelalisib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "margetuximab": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "pertuzumab": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "afatinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "nintedanib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "baricitinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "midostaurin": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "inavolisib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "selumetinib": [
+      "cyp3a4_sensitive_substrate"
+    ],
+    "tolazamide": [
+      "hypoglycemic",
+      "sulfonylurea"
+    ],
+    "glimepiride": [
+      "hypoglycemic",
+      "sulfonylurea"
+    ],
+    "glyburide": [
+      "hypoglycemic",
+      "sulfonylurea"
+    ],
+    "glipizide": [
+      "hypoglycemic",
+      "sulfonylurea"
+    ],
+    "insulin, regular, human": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "insulin lispro": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "insulin glargine": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "insulin detemir": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "insulin glulisine, human": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "insulin aspart, human": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "insulin degludec": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "metformin": [
+      "biguanide",
+      "dpp4_inhibitor"
+    ],
+    "empagliflozin": [
+      "sglt2_inhibitor"
+    ],
+    "dapagliflozin": [
+      "sglt2_inhibitor"
+    ],
+    "bexagliflozin": [
+      "sglt2_inhibitor"
+    ],
+    "linagliptin": [
+      "dpp4_inhibitor"
+    ],
+    "saxagliptin anhydrous": [
+      "dpp4_inhibitor"
+    ],
+    "alogliptin": [
+      "dpp4_inhibitor"
+    ],
+    "sitagliptin": [
+      "dpp4_inhibitor"
+    ],
+    "liraglutide": [
+      "glp1_agonist"
+    ],
+    "exenatide": [
+      "glp1_agonist"
+    ],
+    "tirzepatide": [
+      "glp1_agonist"
+    ],
+    "dulaglutide": [
+      "glp1_agonist"
+    ],
+    "lixisenatide": [
+      "glp1_agonist"
+    ],
+    "semaglutide": [
+      "glp1_agonist"
+    ],
+    "dofetilide": [
+      "antiarrhythmic",
+      "qt_prolonging"
+    ],
+    "mexiletine": [
+      "antiarrhythmic"
+    ],
+    "flecainide": [
+      "antiarrhythmic"
+    ],
+    "disopyramide": [
+      "antiarrhythmic",
       "qt_prolonging"
     ],
     "procainamide": [
+      "antiarrhythmic",
       "qt_prolonging"
     ],
-    "disopyramide": [
+    "dronedarone": [
+      "antiarrhythmic"
+    ],
+    "ibutilide": [
+      "antiarrhythmic",
       "qt_prolonging"
     ],
-    "droperidol": [
+    "lidocaine": [
+      "antiarrhythmic"
+    ],
+    "propafenone": [
+      "antiarrhythmic"
+    ],
+    "midodrine": [
+      "sympathomimetic"
+    ],
+    "vibegron": [
+      "sympathomimetic"
+    ],
+    "salmeterol": [
+      "sympathomimetic"
+    ],
+    "dexmedetomidine": [
+      "central_alpha2_agonist",
+      "sympathomimetic"
+    ],
+    "ephedrine": [
+      "sympathomimetic"
+    ],
+    "epinephrine": [
+      "sympathomimetic"
+    ],
+    "apraclonidine": [
+      "sympathomimetic"
+    ],
+    "guanabenz": [
+      "central_alpha2_agonist",
+      "sympathomimetic"
+    ],
+    "arformoterol": [
+      "sympathomimetic"
+    ],
+    "isoproterenol": [
+      "sympathomimetic"
+    ],
+    "brimonidine": [
+      "sympathomimetic"
+    ],
+    "p-hydroxyamphetamine": [
+      "sympathomimetic"
+    ],
+    "pseudoephedrine": [
+      "sympathomimetic"
+    ],
+    "olodaterol": [
+      "sympathomimetic"
+    ],
+    "guanfacine": [
+      "central_alpha2_agonist",
+      "sympathomimetic"
+    ],
+    "clonidine": [
+      "central_alpha2_agonist",
+      "sympathomimetic"
+    ],
+    "albuterol": [
+      "sympathomimetic"
+    ],
+    "epinastine": [
+      "sympathomimetic"
+    ],
+    "methyldopa anhydrous": [
+      "central_alpha2_agonist",
+      "sympathomimetic"
+    ],
+    "dobutamine": [
+      "sympathomimetic"
+    ],
+    "formoterol": [
+      "sympathomimetic"
+    ],
+    "vilanterol": [
+      "sympathomimetic"
+    ],
+    "phenylephrine": [
+      "sympathomimetic"
+    ],
+    "levalbuterol": [
+      "sympathomimetic"
+    ],
+    "tizanidine": [
+      "central_alpha2_agonist",
+      "qt_prolonging",
+      "sympathomimetic"
+    ],
+    "norepinephrine": [
+      "sympathomimetic"
+    ],
+    "dopamine": [
+      "sympathomimetic"
+    ],
+    "prazosin": [
+      "alpha_blocker",
+      "vasodilator"
+    ],
+    "silodosin": [
+      "alpha_blocker",
+      "vasodilator"
+    ],
+    "dapiprazole": [
+      "alpha_blocker",
+      "vasodilator"
+    ],
+    "doxazosin": [
+      "alpha_blocker",
+      "vasodilator"
+    ],
+    "terazosin": [
+      "alpha_blocker",
+      "vasodilator"
+    ],
+    "alfuzosin": [
+      "alpha_blocker",
+      "vasodilator"
+    ],
+    "phentolamine": [
+      "alpha_blocker",
+      "vasodilator"
+    ],
+    "phenoxybenzamine": [
+      "alpha_blocker",
+      "vasodilator"
+    ],
+    "tamsulosin": [
+      "alpha_blocker",
+      "vasodilator"
+    ],
+    "caffeine": [
+      "methylxanthine"
+    ],
+    "theophylline anhydrous": [
+      "methylxanthine"
+    ],
+    "zaleplon": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "zuranolone": [
+      "cns_depressant"
+    ],
+    "ganaxolone": [
+      "cns_depressant"
+    ],
+    "dantrolene": [
+      "cns_depressant"
+    ],
+    "cariprazine": [
+      "antipsychotic"
+    ],
+    "risperidone": [
+      "antipsychotic",
       "qt_prolonging"
+    ],
+    "quetiapine": [
+      "antipsychotic",
+      "qt_prolonging"
+    ],
+    "iloperidone": [
+      "antipsychotic"
+    ],
+    "aripiprazole": [
+      "antipsychotic"
+    ],
+    "brexpiprazole": [
+      "antipsychotic"
+    ],
+    "clozapine": [
+      "antipsychotic",
+      "benzodiazepine",
+      "cns_depressant",
+      "qt_prolonging"
+    ],
+    "ziprasidone": [
+      "antipsychotic",
+      "qt_prolonging"
+    ],
+    "asenapine": [
+      "antipsychotic"
+    ],
+    "olanzapine": [
+      "antipsychotic",
+      "qt_prolonging"
+    ],
+    "lurasidone": [
+      "antipsychotic"
+    ],
+    "pimavanserin": [
+      "antipsychotic"
+    ],
+    "paliperidone": [
+      "antipsychotic"
+    ],
+    "lumateperone": [
+      "antipsychotic"
+    ],
+    "trifluoperazine": [
+      "anticholinergic",
+      "antipsychotic"
+    ],
+    "perphenazine": [
+      "anticholinergic",
+      "antipsychotic"
+    ],
+    "promethazine": [
+      "anticholinergic",
+      "antipsychotic",
+      "qt_prolonging"
+    ],
+    "prochlorperazine": [
+      "anticholinergic",
+      "antipsychotic"
+    ],
+    "fluphenazine": [
+      "anticholinergic",
+      "antipsychotic"
     ],
     "chlorpromazine": [
+      "anticholinergic",
+      "antipsychotic",
       "qt_prolonging"
     ],
     "thioridazine": [
+      "anticholinergic",
+      "antipsychotic",
+      "qt_prolonging"
+    ],
+    "rizatriptan": [
+      "serotonergic",
+      "triptan"
+    ],
+    "zolmitriptan": [
+      "serotonergic",
+      "triptan"
+    ],
+    "frovatriptan": [
+      "serotonergic",
+      "triptan"
+    ],
+    "eletriptan": [
+      "serotonergic",
+      "triptan"
+    ],
+    "sumatriptan": [
+      "serotonergic",
+      "triptan"
+    ],
+    "naratriptan": [
+      "serotonergic",
+      "triptan"
+    ],
+    "almotriptan": [
+      "serotonergic",
+      "triptan"
+    ],
+    "adrenaline (epinephrine)": [
+      "sympathomimetic"
+    ],
+    "ciclosporin": [
+      "calcineurin_inhibitor",
+      "cyp3a4_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "nephrotoxic",
+      "pgp_inhibitor"
+    ],
+    "colistin": [
+      "nephrotoxic"
+    ],
+    "insulin (regular)": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "noradrenaline (norepinephrine)": [
+      "sympathomimetic"
+    ],
+    "tacrolimus": [
+      "calcineurin_inhibitor",
+      "cyp3a4_sensitive_substrate",
+      "nephrotoxic",
+      "qt_prolonging"
+    ],
+    "theophylline": [
+      "cyp1a2_substrate",
+      "methylxanthine"
+    ],
+    "acebrophylline": [
+      "methylxanthine"
+    ],
+    "aceclofenac": [
+      "nsaid"
+    ],
+    "acenocoumarol": [
+      "anticoagulant"
+    ],
+    "amineptine": [
+      "anticholinergic",
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "aminophylline": [
+      "methylxanthine"
+    ],
+    "amtolmetin guacil": [
+      "nsaid"
+    ],
+    "antacids with antispasmodics": [
+      "anticholinergic"
+    ],
+    "ardeparin": [
+      "anticoagulant"
+    ],
+    "atropine sulfate": [
+      "anticholinergic"
+    ],
+    "azelnidipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb"
+    ],
+    "azilsartan medoxomil": [
+      "arb",
+      "raas"
+    ],
+    "balofloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "beclometasone (beclomethasone dipropionate)": [
+      "corticosteroid"
+    ],
+    "benidipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb"
+    ],
+    "benzydamine (benzydamine hydrochloride)": [
+      "nsaid"
+    ],
+    "betaxolol (betaxolol hydrochloride)": [
+      "beta_blocker"
+    ],
+    "bifonazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "bleomycin": [
+      "glycopeptide",
+      "nephrotoxic"
+    ],
+    "buclizine (buclizine hydrochloride)": [
+      "anticholinergic"
+    ],
+    "budesonide (oral, delayed-release)": [
+      "corticosteroid"
+    ],
+    "buspirone": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "butorphanol": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "caffeine (caffeine citrate)": [
+      "methylxanthine"
+    ],
+    "camylofin": [
+      "anticholinergic"
+    ],
+    "celiprolol": [
+      "beta_blocker"
+    ],
+    "certoparin (certoparin sodium)": [
+      "anticoagulant"
+    ],
+    "chlorpheniramine maleate": [
+      "anticholinergic",
+      "antihistamine"
+    ],
+    "chlorpropamide": [
+      "hypoglycemic",
+      "sulfonylurea"
+    ],
+    "choline fenofibrate": [
+      "fibrate"
+    ],
+    "choline salicylate": [
+      "nsaid"
+    ],
+    "ciclesonide": [
+      "corticosteroid"
+    ],
+    "cilnidipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb"
+    ],
+    "cilostazol": [
+      "antiplatelet"
+    ],
+    "cimetropium bromide": [
+      "anticholinergic"
+    ],
+    "climbazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "clobetasol propionate": [
+      "corticosteroid"
+    ],
+    "clobetasone (clobetasone butyrate)": [
+      "corticosteroid"
+    ],
+    "clopidogrel bisulfate": [
+      "antiplatelet"
+    ],
+    "cyclopentolate hydrochloride": [
+      "anticholinergic"
+    ],
+    "cyproheptadine": [
+      "anticholinergic",
+      "antihistamine"
+    ],
+    "dabigatran etexilate (as mesylate)": [
+      "anticoagulant"
+    ],
+    "dapoxetine": [
+      "serotonergic",
+      "ssri"
+    ],
+    "dexamethasone intravitreal implant": [
+      "corticosteroid"
+    ],
+    "dexchlorpheniramine": [
+      "anticholinergic",
+      "antihistamine"
+    ],
+    "dexibuprofen": [
+      "nsaid"
+    ],
+    "dexketoprofen": [
+      "nsaid"
+    ],
+    "dexrabeprazole": [
+      "ppi"
+    ],
+    "dextropropoxyphene": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "diclofenac diethylamine": [
+      "nsaid"
+    ],
+    "diflorasone diacetate": [
+      "corticosteroid"
+    ],
+    "difluprednate": [
+      "corticosteroid"
+    ],
+    "diphenhydramine hydrochloride": [
+      "anticholinergic",
+      "antihistamine"
+    ],
+    "dosulepin (dothiepin)": [
+      "anticholinergic",
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "doxofylline": [
+      "methylxanthine"
+    ],
+    "eberconazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "efonidipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb"
+    ],
+    "embramine": [
+      "anticholinergic",
+      "antihistamine"
+    ],
+    "enalaprilat": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "enoxaparin sodium": [
+      "anticoagulant"
+    ],
+    "enrofloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "eprosartan (eprosartan mesylate)": [
+      "arb",
+      "raas"
+    ],
+    "escitalopram oxalate": [
+      "serotonergic",
+      "ssri"
+    ],
+    "eszopiclone": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "ethylmorphine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "etizolam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "etoricoxib": [
+      "nsaid"
+    ],
+    "felbinac": [
+      "nsaid"
+    ],
+    "fentanyl (fentanyl citrate)": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "fenticonazole": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "fimasartan": [
+      "arb",
+      "raas"
+    ],
+    "fludrocortisone acetate": [
+      "corticosteroid"
+    ],
+    "flumazenil": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "fluorometholone acetate (ophthalmic suspension 0.1%)": [
+      "corticosteroid"
+    ],
+    "flupirtine (as maleate)": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "fluticasone furoate": [
+      "corticosteroid"
+    ],
+    "fluticasone propionate": [
+      "corticosteroid"
+    ],
+    "framycetin": [
+      "aminoglycoside",
+      "nephrotoxic"
+    ],
+    "garenoxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "gatifloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "glibenclamide (glyburide)": [
+      "hypoglycemic",
+      "sulfonylurea"
+    ],
+    "gliclazide": [
+      "hypoglycemic",
+      "sulfonylurea"
+    ],
+    "glycopyrrolate": [
+      "anticholinergic"
+    ],
+    "halobetasol propionate": [
+      "corticosteroid"
+    ],
+    "halometasone (halometasone monohydrate)": [
+      "corticosteroid"
+    ],
+    "heparin sodium": [
+      "anticoagulant"
+    ],
+    "homatropine (homatropine hydrobromide, ophthalmic)": [
+      "anticholinergic"
+    ],
+    "human insulin (regular / nph)": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "human premixed insulin (biphasic isophane insulin, e.g. 70/30 or 50/50)": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "hyoscine butylbromide (scopolamine butylbromide)": [
+      "anticholinergic"
+    ],
+    "hyoscyamine": [
+      "anticholinergic"
+    ],
+    "ilaprazole": [
+      "ppi"
+    ],
+    "imidapril": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "insulin aspart": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "insulin glulisine": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "insulin isophane": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "ipratropium bromide": [
+      "anticholinergic"
+    ],
+    "isavuconazole (as isavuconazonium sulfate)": [
+      "azole_antifungal",
+      "cyp3a4_inhibitor"
+    ],
+    "ketorolac tromethamine": [
+      "nsaid"
+    ],
+    "lacidipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb"
+    ],
+    "lercanidipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb"
+    ],
+    "levocloperastine (levocloperastine fendizoate/hydrochloride)": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "levodropropizine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "levonadifloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "lobeglitazone sulfate": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "lomefloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "lornoxicam": [
+      "nsaid"
+    ],
+    "loteprednol etabonate": [
+      "corticosteroid"
+    ],
+    "meclizine": [
+      "anticholinergic",
+      "antihistamine"
+    ],
+    "melitracen": [
+      "anticholinergic",
+      "qt_prolonging",
+      "serotonergic"
+    ],
+    "metamizole (dipyrone)": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "methdilazine": [
+      "anticholinergic",
+      "antihistamine"
+    ],
+    "mifepristone": [
+      "corticosteroid"
+    ],
+    "milnacipran (milnacipran hydrochloride)": [
+      "serotonergic",
+      "snri"
+    ],
+    "moclobemide": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "mometasone furoate (topical)": [
+      "corticosteroid"
+    ],
+    "morphine (morphine sulfate)": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "nadifloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "nadroparin calcium": [
+      "anticoagulant"
+    ],
+    "nalbuphine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "nalidixic acid": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "naloxone": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "naltrexone": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "nateglinide": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "nefopam": [
+      "cns_depressant",
+      "nsaid",
+      "opioid"
+    ],
+    "netilmicin sulfate": [
+      "aminoglycoside",
+      "nephrotoxic"
+    ],
+    "nicorandil": [
+      "nitrate",
+      "vasodilator"
+    ],
+    "nimesulide": [
+      "nsaid"
+    ],
+    "nitrazepam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "nitrendipine": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb"
+    ],
+    "norfloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "noscapine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "olmesartan medoxomil": [
+      "arb",
+      "raas"
+    ],
+    "oxyphenbutazone": [
+      "nsaid"
+    ],
+    "oxyphenonium bromide": [
+      "anticholinergic"
+    ],
+    "paracetamol": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "parnaparin": [
+      "anticoagulant"
+    ],
+    "pazufloxacin (pazufloxazin)": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "pefloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "pentazocine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "perindopril erbumine": [
+      "ace_inhibitor",
+      "raas"
+    ],
+    "pethidine (meperidine)": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "phenindione": [
+      "anticoagulant"
+    ],
+    "pheniramine (pheniramine maleate)": [
+      "anticholinergic",
+      "antihistamine"
+    ],
+    "phytomenadione (phytonadione, vitamin k1)": [
+      "anticoagulant"
+    ],
+    "pizotifen": [
+      "anticholinergic"
+    ],
+    "prednicarbate": [
+      "corticosteroid"
+    ],
+    "prenoxdiazine (prenoxdiazine hydrochloride)": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "procarbazine": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "procyclidine": [
+      "anticholinergic"
+    ],
+    "protamine sulfate": [
+      "anticoagulant"
+    ],
+    "prulifloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "repaglinide": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "reviparin (reviparin sodium)": [
+      "anticoagulant"
+    ],
+    "rofecoxib": [
+      "nsaid"
+    ],
+    "rosiglitazone (rosiglitazone maleate)": [
+      "hypoglycemic",
+      "insulin"
+    ],
+    "roxithromycin": [
+      "macrolide",
+      "qt_prolonging"
+    ],
+    "s-amlodipine (levamlodipine)": [
+      "calcium_channel_blocker",
+      "dihydropyridine_ccb"
+    ],
+    "s-etodolac (dexetodolac)": [
+      "nsaid"
+    ],
+    "safinamide (safinamide mesylate)": [
+      "mao_inhibitor",
+      "serotonergic"
+    ],
+    "sirolimus (rapamycin)": [
+      "macrolide",
+      "qt_prolonging"
+    ],
+    "sisomicin": [
+      "aminoglycoside",
+      "nephrotoxic"
+    ],
+    "sodium citrate": [
+      "anticoagulant"
+    ],
+    "solifenacin succinate": [
+      "anticholinergic"
+    ],
+    "sparfloxacin": [
+      "fluoroquinolone",
+      "qt_prolonging"
+    ],
+    "spiramycin": [
+      "macrolide",
+      "qt_prolonging"
+    ],
+    "streptomycin (streptomycin sulfate)": [
+      "aminoglycoside",
+      "nephrotoxic"
+    ],
+    "teicoplanin": [
+      "glycopeptide",
+      "nephrotoxic"
+    ],
+    "tenoxicam": [
+      "nsaid"
+    ],
+    "tianeptine (tianeptine sodium)": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "ticlopidine hydrochloride": [
+      "antiplatelet"
+    ],
+    "timolol": [
+      "beta_blocker"
+    ],
+    "tinzaparin": [
+      "anticoagulant"
+    ],
+    "tiotropium (tiotropium bromide)": [
+      "anticholinergic"
+    ],
+    "tofisopam": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "tolbutamide": [
+      "hypoglycemic",
+      "sulfonylurea"
+    ],
+    "tolfenamic acid": [
+      "nsaid"
+    ],
+    "torasemide (torsemide)": [
+      "diuretic",
+      "loop_diuretic"
+    ],
+    "tramadol (tramadol hydrochloride)": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "triamcinolone hexacetonide": [
+      "corticosteroid"
+    ],
+    "trihexyphenidyl": [
+      "anticholinergic"
+    ],
+    "trimebutine": [
+      "cns_depressant",
+      "opioid"
+    ],
+    "trospium chloride": [
+      "anticholinergic"
+    ],
+    "udenafil": [
+      "pde5_inhibitor",
+      "vasodilator"
+    ],
+    "valdecoxib": [
+      "nsaid"
+    ],
+    "valethamate bromide": [
+      "anticholinergic"
+    ],
+    "vardenafil (vardenafil hydrochloride)": [
+      "pde5_inhibitor",
+      "vasodilator"
+    ],
+    "vilazodone": [
+      "serotonergic",
+      "ssri"
+    ],
+    "xipamide": [
+      "diuretic",
+      "thiazide_diuretic"
+    ],
+    "zaltoprofen": [
+      "nsaid"
+    ],
+    "zopiclone": [
+      "benzodiazepine",
+      "cns_depressant"
+    ],
+    "droperidol": [
       "qt_prolonging"
     ],
     "pimozide": [
@@ -1458,52 +3277,19 @@
     "halofantrine": [
       "qt_prolonging"
     ],
-    "vandetanib": [
-      "qt_prolonging"
-    ],
     "arsenic trioxide": [
       "qt_prolonging"
     ],
     "sevoflurane": [
       "qt_prolonging"
     ],
-    "quetiapine": [
-      "qt_prolonging"
-    ],
-    "risperidone": [
-      "qt_prolonging"
-    ],
-    "olanzapine": [
-      "qt_prolonging"
-    ],
-    "ziprasidone": [
-      "qt_prolonging"
-    ],
     "amisulpride": [
-      "qt_prolonging"
-    ],
-    "clozapine": [
       "qt_prolonging"
     ],
     "mirtazapine": [
       "qt_prolonging"
     ],
     "famotidine": [
-      "qt_prolonging"
-    ],
-    "tacrolimus": [
-      "qt_prolonging"
-    ],
-    "tizanidine": [
-      "qt_prolonging"
-    ],
-    "tolterodine": [
-      "qt_prolonging"
-    ],
-    "solifenacin": [
-      "qt_prolonging"
-    ],
-    "metronidazole": [
       "qt_prolonging"
     ],
     "tamoxifen": [
@@ -1524,19 +3310,10 @@
     "sulfamethoxazole": [
       "qt_prolonging"
     ],
-    "diphenhydramine": [
-      "qt_prolonging"
-    ],
-    "hydroxyzine": [
-      "qt_prolonging"
-    ],
     "amantadine": [
       "qt_prolonging"
     ],
     "metoclopramide": [
-      "qt_prolonging"
-    ],
-    "promethazine": [
       "qt_prolonging"
     ],
     "nitroglycerin (gtn)": [
@@ -1547,89 +3324,388 @@
       "nitrate",
       "vasodilator"
     ],
-    "nicorandil": [
-      "nitrate",
-      "vasodilator"
+    "lithium": [
+      "lithium"
     ]
   },
   "generics": [
+    "abacavir (abacavir sulfate)",
+    "abatacept",
+    "abciximab",
+    "abemaciclib",
+    "abiraterone",
+    "abiraterone acetate",
+    "abrocitinib",
+    "acalabrutinib",
+    "acamprosate",
+    "acarbose",
+    "acebrophylline",
     "acebutolol",
+    "aceclofenac",
+    "acenocoumarol",
+    "acetazolamide",
+    "acetic acid",
+    "acetylcysteine",
+    "acitretin",
+    "aclidinium",
+    "acotiamide",
+    "acrivastine",
+    "actarit",
+    "acyclovir (aciclovir)",
+    "adalimumab",
+    "adapalene",
+    "adapting electrolyte solutions",
+    "adefovir",
+    "ademetionine (s-adenosyl-l-methionine, same)",
+    "adenosine",
+    "ado-trastuzumab emtansine",
     "adrenaline",
+    "adrenaline (epinephrine)",
+    "adrenochrome monosemicarbazone",
+    "afatinib",
+    "afatinib dimaleate",
+    "aflapin",
+    "aflibercept (intravitreal)",
+    "agomelatine",
+    "albendazole",
+    "albuterol",
+    "alcaftadine",
+    "alclometasone",
+    "alcohol",
+    "alectinib",
+    "alendronic acid (alendronate sodium)",
+    "alfacalcidol (1-alpha-hydroxycholecalciferol)",
     "alfentanil",
     "alfentanil hydrochloride",
+    "alfuzosin",
     "aliskiren",
     "allopurinol",
+    "allylestrenol",
+    "almotriptan",
+    "almotriptan (almotriptan malate)",
+    "aloe vera",
+    "alogliptin",
     "alosetron",
+    "alpelisib",
+    "alpha glycerylphosphorylcholine",
+    "alpha ketoanalogue",
+    "alpha lipoic acid",
+    "alpha-beta arteether",
     "alprazolam",
+    "alprostadil (prostaglandin e1)",
+    "alteplase",
+    "altretamine",
     "amantadine",
+    "amantadine (amantadine hydrochloride)",
+    "ambrisentan",
+    "ambroxol",
+    "amcinonide",
+    "amifostine",
+    "amikacin",
     "amiloride",
+    "amineptine",
+    "amino acids",
+    "aminophylline",
     "amiodarone",
     "amisulpride",
     "amitriptyline",
+    "amlexanox",
     "amlodipine",
+    "amodiaquine",
+    "amorolfine hydrochloride",
     "amoxapine",
+    "amoxycillin",
+    "amphotericin b (conventional deoxycholate and lipid/liposomal formulations)",
+    "ampicillin",
     "amprenavir",
+    "amtolmetin guacil",
+    "anastrozole",
+    "anhydrous tacrolimus",
+    "anidulafungin",
+    "antacids with antispasmodics",
+    "antithymocyte immunoglobulins",
     "apixaban",
+    "apomorphine",
+    "apraclonidine",
+    "apremilast",
     "aprepitant",
+    "aprotinin",
+    "ardeparin",
+    "arformoterol",
     "argatroban anhydrous",
+    "aripiprazole",
+    "armodafinil",
     "arsenic trioxide",
+    "arteether (artemotil)",
+    "artemether",
+    "artesunate",
+    "asenapine",
+    "asenapine (asenapine maleate)",
+    "asparaginase",
     "aspirin",
+    "astemizole",
+    "asunaprevir",
     "atazanavir",
     "atenolol",
+    "atezolizumab",
+    "atomoxetine",
     "atorvastatin",
+    "atosiban",
+    "atracurium",
+    "atropine",
+    "atropine sulfate",
     "avacopan",
     "avanafil",
+    "avapritinib",
+    "axitinib",
+    "azacitidine (for injection)",
     "azathioprine",
+    "azelaic acid",
+    "azelastine",
+    "azelastine (azelastine hydrochloride)",
+    "azelnidipine",
     "azilsartan",
+    "azilsartan medoxomil",
     "azithromycin",
     "azithromycin anhydrous",
+    "aztreonam",
+    "bacampicillin",
+    "bacillus calmette-guerin (bcg)",
+    "bacillus calmette-guerin strain",
+    "bacillus clausii",
+    "baclofen",
+    "bacterial lysate",
+    "balofloxacin",
+    "balsalazide (balsalazide disodium)",
+    "bambuterol",
+    "baricitinib",
+    "basiliximab",
+    "becaplermin",
+    "beclometasone (beclomethasone dipropionate)",
+    "beclomethasone",
     "bedaquiline",
     "belzutifan",
+    "bemiparin",
+    "bempedoic acid",
     "benazepril",
     "benazeprilat",
+    "bendamustine hydrochloride",
     "bendroflumethiazide",
+    "benfotiamine (s-benzoylthiamine o-monophosphate)",
+    "benidipine",
+    "benzathine penicillin g",
     "benzhydrocodone",
     "benzhydrocodone hydrochloride",
+    "benzocaine",
+    "benzonatate",
+    "benzoyl peroxide",
+    "benztropine",
+    "benzydamine (benzydamine hydrochloride)",
+    "bepotastine",
+    "bepotastine (bepotastine besilate)",
     "berotralstat",
     "besifloxacin",
+    "betahistine",
+    "betamethasone",
     "betaxolol",
+    "betaxolol (betaxolol hydrochloride)",
+    "bethanechol",
+    "bevacizumab",
+    "bexagliflozin",
     "bezafibrate",
+    "bicalutamide",
+    "bifonazole",
+    "bilastine",
+    "bimatoprost",
+    "biotin",
+    "bisacodyl",
     "bisoprolol",
     "bivalirudin",
+    "bleomycin",
+    "blonanserin",
     "boceprevir",
+    "bortezomib",
+    "bosentan",
+    "bosutinib",
+    "boswellia serrata",
+    "brexpiprazole",
+    "brigatinib",
+    "brimonidine",
+    "brimonidine tartrate",
+    "brinzolamide",
+    "brivaracetam",
     "bromfenac",
+    "bromhexine",
+    "bromocriptine",
+    "buclizine (buclizine hydrochloride)",
+    "budesonide",
+    "budesonide (oral, delayed-release)",
     "bumetanide",
+    "buphenine",
+    "bupivacaine",
     "buprenorphine",
+    "bupropion",
+    "bupropion hydrobromide",
+    "bupropion hydrochloride",
+    "buserelin",
+    "buspirone",
+    "busulfan",
     "butalbital",
+    "butenafine (butenafine hydrochloride)",
     "butoconazole",
+    "butorphanol",
+    "cabazitaxel",
+    "cabergoline",
+    "cabozantinib",
+    "cadexomer iodine",
+    "caffeine",
+    "caffeine (caffeine citrate)",
+    "calamine (calamine topical / zinc oxide with ferric oxide)",
+    "calcipotriol",
+    "calcitonin (salmon)",
+    "calcitriol",
+    "calcium (calcium carbonate / gluconate / chloride)",
+    "calcium acetate",
+    "calcium chloride",
+    "calcium dobesilate",
+    "calcium gluconate",
+    "calcium leucovorin (leucovorin calcium / folinic acid)",
+    "calcium polystyrene sulphonate",
+    "camostat",
+    "camylofin",
+    "canagliflozin",
+    "canagliflozin anhydrous",
     "candesartan",
     "cangrelor",
     "cannabidiol",
+    "capecitabine",
+    "capmatinib",
+    "capreomycin sulfate",
     "captopril",
+    "carbachol",
     "carbamazepine",
+    "carbazochrome (carbazochrome sodium sulfonate / salicylate)",
+    "carbenicillin (carbenicillin indanyl sodium / geocillin)",
+    "carbetocin",
+    "carbimazole",
+    "carbinoxamine",
+    "carbocisteine (carbocysteine)",
+    "carboplatin",
+    "carboprost tromethamine",
+    "carboxymethylcellulose sodium (ophthalmic)",
+    "cardioplegia",
+    "carfilzomib",
+    "cariprazine",
+    "cariprazine (cariprazine hydrochloride)",
+    "carisoprodol",
+    "carmustine (bcnu)",
+    "caroverine",
     "carteolol",
     "carvedilol",
+    "caspofungin acetate",
+    "cefaclor",
+    "cefadroxil",
+    "cefalexin (cephalexin)",
+    "cefazolin",
+    "cefdinir",
+    "cefditoren pivoxil",
+    "cefepime",
+    "cefetamet (cefetamet pivoxil)",
+    "cefixime",
+    "cefoperazone",
+    "cefotaxime",
+    "cefpirome",
+    "cefpodoxime proxetil",
+    "cefprozil",
+    "ceftazidime",
+    "ceftibuten",
+    "ceftizoxime",
+    "ceftriaxone",
+    "cefuroxime",
+    "cefuroxime axetil",
     "celecoxib",
+    "celiprolol",
     "cenobamate",
+    "cerebroprotein hydrolysate (cerebrolysin)",
+    "ceritinib",
+    "certoparin (certoparin sodium)",
+    "cetilistat",
+    "cetirizine",
+    "cetrimide",
+    "cetrorelix",
+    "cetuximab",
+    "cetyl alcohol",
+    "chadox1 ncov-19 corona virus vaccine (recombinant) - covishield / astrazeneca covid-19 vaccine",
+    "charcoal (activated charcoal / activated carbon)",
+    "chlorambucil",
+    "chloramphenicol (sodium succinate)",
     "chlordiazepoxide",
+    "chlorhexidine gluconate",
+    "chloroprocaine (chloroprocaine hydrochloride)",
     "chloroquine",
     "chlorothiazide",
+    "chlorpheniramine",
+    "chlorpheniramine maleate",
     "chlorpromazine",
+    "chlorpromazine (as hydrochloride)",
+    "chlorpropamide",
     "chlorthalidone",
+    "chlorzoxazone",
+    "cholecalciferol (vitamin d3)",
+    "cholera vaccine (oral cholera vaccine)",
+    "cholestyramine",
+    "choline fenofibrate",
+    "choline salicylate",
+    "chromium (trivalent chromium - e.g., chromium picolinate/chloride; as supplement and in parenteral nutrition)",
+    "ciclesonide",
+    "ciclopirox",
+    "ciclosporin",
+    "cilnidipine",
+    "cilostazol",
+    "cimetidine",
+    "cimetropium bromide",
+    "cinacalcet",
+    "cinitapride",
+    "cinnarizine",
     "ciprofloxacin",
+    "cisapride",
+    "cisatracurium (cisatracurium besylate)",
+    "cisplatin",
     "citalopram",
+    "citicoline",
     "citric acid, anhydrous",
+    "cladribine",
     "clarithromycin",
+    "clebopride",
+    "clemastine (clemastine fumarate)",
     "clevidipine",
+    "clidinium",
+    "climbazole",
+    "clindamycin",
+    "clioquinol",
     "clobazam",
+    "clobetasol",
+    "clobetasol propionate",
+    "clobetasone (clobetasone butyrate)",
+    "clocortolone",
+    "clofarabine",
     "clofazimine",
+    "clomiphene citrate",
     "clomipramine",
     "clonazepam",
+    "clonidine",
+    "clonidine (clonidine hydrochloride)",
     "clopidogrel",
+    "clopidogrel bisulfate",
     "clorazepic acid",
+    "clostridium botulinum type a toxin-haemagglutinin complex",
     "clotrimazole",
+    "cloxacillin",
     "clozapine",
     "co-trimoxazole",
+    "co-trimoxazole (trimethoprim/sulfamethoxazole, tmp-smx)",
+    "cobicistat",
+    "cobimetinib",
     "codeine",
     "codeine anhyd",
     "codeine anhydrous",
@@ -1639,94 +3715,421 @@
     "codeine phosphate anhydrous",
     "codeine polistirex",
     "codeine sulfate",
+    "codergocrine mesylate",
+    "coenzyme q10 (ubiquinone / ubidecarenone)",
+    "colchicine",
+    "colesevelam (colesevelam hydrochloride)",
+    "colfosceril palmitate",
+    "colistimethate",
+    "colistimethate sodium",
+    "colistin",
+    "colistin sulphate",
+    "collagen peptide",
+    "colloidal bismuth subcitrate",
+    "colostrum (bovine colostrum)",
     "conivaptan",
     "conivaptan hydrochloride",
+    "conjugated estrogens",
+    "corticotropin",
+    "cortisone",
     "cotrimoxazole",
+    "crizotinib",
+    "crotamiton",
+    "curcuma longa (turmeric; rhizome / curcumin extract)",
+    "cyanocobalamin",
+    "cyanocobalamin (vitamin b12)",
+    "cyclandelate",
+    "cyclobenzaprine",
+    "cyclopentolate hydrochloride",
+    "cyclophosphamide",
+    "cycloserine",
     "cyclosporine",
+    "cyproheptadine",
+    "cytarabine",
+    "d-panthenol (dexpanthenol, provitamin b5)",
     "dabigatran",
+    "dabigatran etexilate (as mesylate)",
     "dabrafenib",
+    "dacarbazine",
+    "daclatasvir",
+    "daclatasvir dihydrochloride",
+    "daclizumab",
+    "dacomitinib",
+    "dactinomycin",
+    "dalfampridine (4-aminopyridine; brand ampyra)",
     "dalteparin",
+    "danazol",
+    "danicopan",
+    "dantrolene",
+    "dapagliflozin",
+    "dapagliflozin (farxiga)",
+    "dapiprazole",
+    "dapoxetine",
+    "dapsone",
+    "daptomycin",
+    "daratumumab",
+    "darbepoetin alfa",
+    "darifenacin",
+    "darunavir",
+    "dasatinib",
     "dasatinib anhydrous",
+    "daunorubicin (daunorubicin hydrochloride)",
+    "deca peptide (bfgf-related decapeptide)",
+    "decitabine",
+    "defactinib",
     "deferasirox",
+    "deferiprone",
+    "deferoxamine",
+    "deflazacort",
+    "degarelix",
+    "dehydroemetine",
+    "dehydroepiandrosterone",
     "delamanid",
+    "demeclocycline",
+    "denosumab",
+    "desidustat",
     "desipramine",
     "desirudin",
+    "desloratadine",
+    "desmopressin",
+    "desogestrel",
+    "desonide",
+    "desoximetasone",
     "desvenlafaxine",
+    "deucravacitinib",
+    "deuruxolitinib",
+    "deutivacaftor",
+    "dexamethasone",
+    "dexamethasone intravitreal implant",
+    "dexchlorpheniramine",
+    "dexibuprofen",
+    "dexketoprofen",
     "dexlansoprazole",
+    "dexmedetomidine",
+    "dexrabeprazole",
+    "dextromethorphan hydrobromide",
+    "dextropropoxyphene",
+    "dextrose",
+    "dextrothyroxine",
+    "di-iodohydroxyquinoline (iodoquinol / diiodohydroxyquin)",
+    "diacerein",
+    "diatrizoic acid",
     "diazepam",
+    "diazoxide",
+    "dibucaine",
     "diclofenac",
+    "diclofenac diethylamine",
+    "dicloxacillin",
+    "dicyclomine",
+    "didanosine",
+    "dienogest",
+    "diethylcarbamazine",
     "difelikefalin",
+    "diflorasone",
+    "diflorasone diacetate",
     "diflunisal",
+    "difluprednate",
     "digoxin",
+    "dihydralazine",
     "dihydrocodeine",
     "dihydrocodeine bitartrate",
+    "diloxanide",
     "diltiazem",
+    "dimenhydrinate",
+    "dimercaprol (british anti-lewisite, bal)",
+    "dimethicone (dimeticone / simeticone)",
+    "dimethindene",
+    "dimethyl fumarate",
+    "dinoprostone (prostaglandin e2)",
+    "dioctyl sodium sulfosuccinate (docusate sodium)",
+    "diosmin",
     "diphenhydramine",
+    "diphenhydramine hydrochloride",
     "dipyridamole",
+    "disodium edetate",
+    "disodium hydrogen citrate",
     "disopyramide",
+    "disulfiram",
+    "dithranol",
+    "divalproex",
+    "dobutamine",
+    "docetaxel",
+    "docosahexaenoic acid (dha)",
+    "docusate",
     "dofetilide",
     "dolasetron",
+    "dolutegravir",
     "domperidone",
+    "donepezil",
+    "dopamine",
+    "dopamine (dopamine hydrochloride)",
+    "doripenem",
+    "dorzolamide (dorzolamide hydrochloride)",
+    "dosulepin (dothiepin)",
+    "doxapram",
+    "doxazosin",
     "doxepin",
+    "doxifluridine",
+    "doxofylline",
+    "doxorubicin",
+    "doxycycline",
+    "doxylamine",
+    "dronedarone",
     "droperidol",
+    "drospirenone",
+    "drotaverine",
+    "dulaglutide",
     "duloxetine",
+    "durvalumab",
+    "dutasteride",
+    "dydrogesterone",
+    "ebastine",
+    "eberconazole",
     "econazole",
+    "edaravone",
     "edetic acid",
     "edoxaban",
     "efavirenz",
     "efinaconazole",
+    "eflornithine",
+    "efonidipine",
+    "elacestrant",
     "elafibranor",
     "elagolix",
+    "elbasvir",
+    "electrolytes",
+    "elemental iron (oral iron salts)",
+    "eletriptan",
+    "eletriptan (eletriptan hydrobromide)",
     "elexacaftor",
+    "eliglustat",
+    "eliglustat tartrate",
+    "eltrombopag",
     "eluxadoline",
+    "embramine",
+    "empagliflozin",
     "enalapril",
+    "enalaprilat",
     "enalaprilat anhydrous",
+    "enclomiphene",
+    "endoxifen",
     "enoxaparin",
+    "enoxaparin sodium",
+    "enrofloxacin",
+    "entacapone",
+    "entecavir",
     "enzalutamide",
+    "epalrestat",
+    "eperisone (eperisone hydrochloride)",
+    "ephedrine",
+    "ephedrine (ephedrine sulfate / hydrochloride)",
+    "epinastine",
+    "epinastine (epinastine hydrochloride)",
+    "epinephrine",
+    "epirubicin",
     "eplerenone",
     "eprosartan",
+    "eprosartan (eprosartan mesylate)",
+    "epsilon aminocaproic acid",
+    "eptacog alfa (activated) - recombinant coagulation factor viia",
     "eptifibatide",
+    "equine rabies immunoglobulin",
     "erdafitinib",
+    "erdosteine",
+    "erenumab",
+    "ergoloid mesylates",
+    "ergotamine (ergotamine tartrate, often with caffeine)",
+    "eribulin mesylate",
+    "erlotinib",
+    "ertapenem (sodium)",
     "erythromycin",
     "escitalopram",
+    "escitalopram oxalate",
     "eslicarbazepine",
     "eslicarbazepine acetate",
     "esmolol",
     "esomeprazole",
     "estazolam",
+    "estradiol (oral)",
+    "estramustine phosphate sodium",
+    "estriol",
+    "eszopiclone",
+    "etanercept",
+    "ethacridine (ethacridine lactate)",
     "ethacrynic acid",
+    "ethambutol",
+    "ethamsylate (etamsylate)",
+    "ethinyl estradiol (ethinylestradiol)",
+    "ethionamide",
+    "ethylmorphine",
+    "etidronate disodium",
+    "etizolam",
     "etodolac",
+    "etomidate",
+    "etoposide",
+    "etoricoxib",
     "etravirine",
+    "euphorbia prostrata extract",
+    "evening primrose oil",
     "everolimus",
+    "evogliptin",
+    "exemestane",
+    "exenatide",
+    "ezetimibe",
+    "famciclovir",
     "famotidine",
+    "faropenem",
+    "favipiravir",
     "febuxostat",
+    "felbinac",
     "felodipine",
+    "fenbendazole",
+    "fenfluramine (fenfluramine hydrochloride)",
     "fenofibrate",
     "fenoprofen",
+    "fenoverine",
     "fentanyl",
+    "fentanyl (fentanyl citrate)",
     "fentanyl citrate",
     "fentanyl hydrochloride",
+    "fenticonazole",
+    "feracrylum",
+    "ferric carboxymaltose",
+    "ferric citrate (ferric citrate coordination complex)",
+    "ferrous ascorbate",
+    "ferrous bisglycinate",
+    "ferrous sulfate (elemental iron 65 mg per 325 mg tablet)",
     "fexinidazole",
+    "fexofenadine",
+    "filgrastim",
+    "fimasartan",
     "finafloxacin",
+    "finasteride",
+    "finerenone",
+    "fingolimod",
+    "flavoxate",
+    "flecainide",
+    "flibanserin",
+    "flucloxacillin sodium",
     "fluconazole",
+    "flucytosine",
+    "fludarabine phosphate",
+    "fludrocortisone acetate",
+    "flumazenil",
+    "flunarizine",
+    "flunisolide anhydrous",
+    "fluocinolone acetonide",
+    "fluocinonide",
+    "fluorescein sodium",
+    "fluorometholone",
+    "fluorometholone acetate (ophthalmic suspension 0.1%)",
+    "fluorouracil (5-fu)",
     "fluoxetine",
+    "flupentixol (flupenthixol)",
+    "fluphenazine",
+    "flupirtine (as maleate)",
+    "flurandrenolide",
     "flurazepam",
     "flurbiprofen",
+    "flutamide",
+    "fluticasone",
+    "fluticasone furoate",
+    "fluticasone propionate",
     "fluvastatin",
     "fluvoxamine",
+    "folic acid",
     "fondaparinux",
+    "formoterol",
+    "fosaprepitant dimeglumine",
+    "fosfestrol",
+    "fosfomycin",
     "fosinopril",
     "fosinoprilat",
+    "fosphenytoin sodium",
+    "framycetin",
+    "freeze-dried live attenuated hepatitis a vaccine",
+    "frovatriptan",
+    "fulvestrant",
+    "furazolidone",
     "furosemide",
+    "fusidic acid",
+    "futibatinib",
+    "gabapentin",
+    "galantamine",
+    "gamma benzene hexachloride (lindane)",
+    "gamma linolenic acid",
+    "ganaxolone",
+    "ganciclovir",
+    "ganirelix",
+    "garenoxacin",
+    "gastroprokinetics plain",
+    "gatifloxacin",
     "gatifloxacin anhydrous",
+    "gefitinib",
+    "gelatin solutions",
+    "gemcitabine",
     "gemfibrozil",
     "gemifloxacin",
+    "gemigliptin",
+    "gentamicin",
+    "ginkgo biloba",
+    "ginkgo biloba extract",
     "givinostat",
+    "glatiramer acetate",
+    "glecaprevir",
+    "glibenclamide (glyburide)",
+    "gliclazide",
+    "glimepiride",
+    "glipizide",
+    "glucagon",
+    "glucosamine",
+    "glucosamine sulfate potassium chloride",
+    "glutathione",
+    "glyburide",
+    "glycine",
+    "glycolic acid",
+    "glycopyrrolate",
+    "glycopyrronium",
+    "golimumab",
+    "gonadotrophins (including other ovulation stimulants)",
+    "goserelin acetate",
     "granisetron",
+    "granulocyte colony stimulating factor (filgrastim)",
+    "griseofulvin",
+    "guaifenesin",
+    "guanabenz",
+    "guanfacine",
+    "gynaecological products (therapeutic category / group label)",
+    "haemophilus type b conjugate vaccine (hib)",
+    "halcinonide",
+    "halobetasol",
+    "halobetasol propionate",
     "halofantrine",
+    "halometasone (halometasone monohydrate)",
     "haloperidol",
+    "haloperidol decanoate",
+    "halothane",
+    "hemocoagulase",
     "heparin",
+    "heparin sodium",
     "heparin, porcine",
+    "hepatitis a vaccine, inactivated",
+    "hepatitis b vaccine (recombinant, hbsag)",
+    "homatropine",
+    "homatropine (homatropine hydrobromide, ophthalmic)",
+    "homotaurine",
+    "human adenovirus-vectored vaccine (replication-deficient adenovirus vector platform)",
+    "human albumin",
+    "human chorionic gonadotropin (hcg)",
+    "human gamma globulin (immune globulin, igg)",
+    "human hepatitis b immunoglobulin",
+    "human insulin (regular / nph)",
+    "human normal immunoglobulin",
+    "human premixed insulin (biphasic isophane insulin, e.g. 70/30 or 50/50)",
+    "hyaluronic acid",
+    "hyaluronidase",
+    "hydralazine",
+    "hydrochloride (hcl salt form - not a specific drug)",
     "hydrochlorothiazide",
     "hydrocodone",
     "hydrocodone bitartrate",
@@ -1734,317 +4137,1183 @@
     "hydrocodone polistirex",
     "hydrocodone resin complex",
     "hydrocodone tannate",
+    "hydrocortisone",
     "hydroflumethiazide",
+    "hydrogen peroxide",
     "hydromorphone",
     "hydromorphone hydrochloride",
+    "hydroquinone",
+    "hydroxocobalamin",
     "hydroxychloroquine",
+    "hydroxyethyl starch",
+    "hydroxyprogesterone (caproate)",
+    "hydroxypropylmethylcellulose (hypromellose, hpmc)",
+    "hydroxyquinolines (8-hydroxyquinoline derivatives - clioquinol, chlorquinaldol, diiodohydroxyquinoline/iodoquinol)",
+    "hydroxyurea (hydroxycarbamide)",
     "hydroxyzine",
+    "hyoscine butylbromide (scopolamine butylbromide)",
+    "hyoscyamine",
+    "ibandronate sodium",
+    "ibrutinib",
     "ibuprofen",
     "ibutilide",
+    "ibutilide (ibutilide fumarate)",
+    "idarubicin",
+    "idebenone",
+    "idelalisib",
+    "idoxuridine (idu)",
+    "ifosfamide",
+    "iguratimod",
+    "ilaprazole",
+    "iloperidone",
     "imatinib",
+    "imatinib mesylate",
+    "imidapril",
+    "imipenem (with cilastatin)",
     "imipramine",
+    "imiquimod",
+    "imlunestrant",
+    "inactivated influenza vaccine",
+    "inactivated japanese encephalitis virus protein",
+    "inamrinone (formerly amrinone)",
+    "inavolisib",
+    "indacaterol",
     "indapamide",
+    "indinavir",
     "indinavir anhydrous",
     "indomethacin",
+    "infliximab",
+    "inositol nicotinate",
+    "inotuzumab ozogamicin (inotuzumab ozogamacin)",
+    "insulin (regular)",
+    "insulin aspart",
+    "insulin aspart, human",
+    "insulin degludec",
+    "insulin detemir",
+    "insulin glargine",
+    "insulin glulisine",
+    "insulin glulisine, human",
+    "insulin isophane",
+    "insulin lispro",
+    "insulin, regular, human",
+    "interferon alfa-2b",
+    "interferon alpha 2a",
+    "interferon beta-1a",
+    "invert sugar",
+    "iohexol",
+    "iopamidol",
+    "iopromide",
+    "ipratropium",
+    "ipratropium bromide",
+    "ipratropium cation",
     "irbesartan",
+    "irinotecan",
+    "iron hydroxide polymaltose complex (iron(iii)-hydroxide polymaltose, ipc)",
+    "iron isomaltoside 1000 (ferric derisomaltose)",
+    "iron sucrose",
     "isavuconazole",
+    "isavuconazole (as isavuconazonium sulfate)",
+    "isoamyl 2-cyanoacrylate (tissue adhesive)",
     "isocarboxazid",
+    "isoflurane",
+    "isoniazid",
+    "isoprenaline (isoproterenol)",
+    "isopropyl alcohol (isopropanol, 2-propanol)",
+    "isoproterenol",
     "isosorbide",
     "isosorbide dinitrate",
     "isosorbide mononitrate",
+    "isotretinoin",
+    "isoxsuprine",
+    "ispaghula husk (psyllium / ispaghula)",
     "isradipine",
+    "itolizumab",
+    "itopride",
     "itraconazole",
+    "ivabradine",
+    "ivacaftor",
+    "ivermectin",
     "ivosidenib",
+    "ixabepilone",
+    "kalmegh dry extract (andrographis paniculata, standardised to andrographolide)",
+    "kanamycin",
+    "ketamine",
     "ketoconazole",
+    "ketoconazole (oral)",
     "ketoprofen",
     "ketorolac",
+    "ketorolac tromethamine",
+    "ketotifen",
+    "l-alanyl-l-glutamine (alanylglutamine dipeptide)",
+    "l-arginine",
+    "l-glutamate (l-glutamic acid)",
+    "l-glutamine (endari)",
+    "l-methylfolate (l-5-methyltetrahydrofolate)",
+    "l-methylfolate calcium",
+    "l-ornithine l-aspartate",
     "labetalol",
+    "lacidipine",
+    "lacosamide",
+    "lactase",
+    "lactitol",
+    "lactobacillus",
+    "lactobacillus sporogenes (bacillus coagulans)",
+    "lactulose",
+    "lafutidine",
+    "lamivudine",
+    "lamotrigine",
     "landiolol",
     "lansoprazole",
+    "lanthanum carbonate",
+    "lapatinib",
+    "larotrectinib",
+    "latanoprost",
     "lazertinib",
+    "lecithin",
+    "ledipasvir",
     "lefamulin",
+    "leflunomide",
+    "lemborexant",
+    "lenacapavir",
+    "lenalidomide",
+    "leniolisib",
+    "lenograstim (rhug-csf)",
+    "lenvatinib",
+    "lercanidipine",
     "letermovir",
+    "letrozole",
+    "leuprolide acetate",
+    "levacetylleucine",
+    "levalbuterol",
+    "levamisole",
+    "levetiracetam",
     "levobunolol",
+    "levocarnitine (l-carnitine)",
+    "levocetirizine",
+    "levocetirizine (levocetirizine dihydrochloride)",
+    "levocloperastine (levocloperastine fendizoate/hydrochloride)",
+    "levodopa (usually combined with carbidopa)",
+    "levodropropizine",
     "levofloxacin",
     "levoketoconazole",
+    "levomepromazine maleate",
     "levomilnacipran",
+    "levonadifloxacin",
+    "levonorgestrel",
     "levorphanol",
     "levorphanol tartrate",
+    "levosalbutamol",
+    "levosimendan",
+    "levosulpiride",
+    "levothyroxine (thyroxine, t4)",
+    "lidocaine",
+    "linagliptin",
+    "lincomycin",
+    "lindane",
     "linezolid",
+    "liposomal amphotericin b (amphotericin b, liposomal - ambisome)",
+    "liposomal dithranol",
+    "liquid paraffin (mineral oil)",
+    "liraglutide",
     "lisinopril",
     "lisinopril anhydrous",
+    "lithium",
+    "lithium carbonate",
+    "live attenuated varicella-zoster virus vaccine (oka/merck strain)",
+    "live freeze dried lactic acid bacteria and bifidobacteria",
+    "lixisenatide",
+    "lobeglitazone sulfate",
+    "lomefloxacin",
     "lomitapide",
     "lomitapide mesylate",
+    "lomustine",
     "lonafarnib",
     "loperamide",
+    "lopinavir",
+    "loratadine",
     "lorazepam",
+    "lorcaserin",
     "lorlatinib",
+    "lornoxicam",
     "losartan",
+    "losartan potassium",
+    "loteprednol",
+    "loteprednol etabonate",
     "lovastatin",
+    "low dextrans (dextran 40, low-molecular-weight dextran)",
+    "loxapine",
+    "lubiprostone",
     "luliconazole",
+    "lumacaftor",
+    "lumateperone",
+    "lurasidone",
+    "lurasidone hydrochloride",
+    "lycopene",
+    "lymecycline",
+    "lynestrenol",
+    "lysine (l-lysine)",
+    "macitentan",
+    "magaldrate",
+    "magnesium (mineral supplement - e.g., magnesium oxide, citrate, sulfate)",
+    "magnesium bisglycinate",
+    "magnesium hydroxide (milk of magnesia)",
+    "magnesium sulphate",
+    "magnesium valproate",
     "manidipine",
     "manidipine hydrochloride",
+    "mannitol",
+    "maraviroc",
+    "margetuximab",
     "maribavir",
     "mavorixafor",
+    "measles vaccine (live, attenuated)",
+    "mebendazole",
+    "mebeverine",
+    "mecetronium",
+    "meclizine",
+    "medroxyprogesterone acetate",
+    "medrysone",
     "mefenamic acid",
+    "mefloquine (mefloquine hydrochloride)",
+    "megestrol",
+    "melatonin",
+    "melitracen",
     "meloxicam",
+    "melphalan (melphalan hydrochloride)",
+    "memantine",
+    "menadione",
+    "menadione sodium bisulfite (vitamin k3 derivative)",
+    "menotrophin (human menopausal gonadotrophin, hmg)",
+    "mepacrine (quinacrine)",
     "meperidine",
     "meperidine hydrochloride",
+    "mephenesin",
+    "mephentermine",
     "mephobarbital",
+    "mepolizumab",
+    "mercaptopurine (6-mp)",
+    "meropenem",
+    "mesalazine (mesalamine, 5-asa)",
+    "mesna",
+    "messenger ribonucleic acid (mrna therapeutics)",
+    "mesterolone",
+    "metadoxine",
+    "metamizole (dipyrone)",
+    "metaxalone",
+    "metformin",
+    "metformin hydrochloride",
     "methadone",
+    "methdilazine",
+    "methimazole",
+    "methocarbamol",
     "methohexital",
     "methotrexate",
+    "methotrimeprazine",
+    "methotrimeprazine hydrochloride",
+    "methoxsalen",
+    "methoxy polyethylene glycol-epoetin beta",
+    "methscopolamine",
+    "methylcobalamin",
+    "methyldopa",
+    "methyldopa anhydrous",
+    "methylene blue (methylthioninium chloride)",
+    "methylergometrine (methylergonovine maleate)",
+    "methylphenidate",
+    "methylpolysiloxane (dimeticone / simeticone)",
+    "methylprednisolone",
     "metoclopramide",
     "metolazone",
     "metoprolol",
+    "metoprolol succinate (extended-release)",
+    "metoprolol tartrate (immediate-release)",
     "metronidazole",
+    "mexiletine",
+    "mianserin",
+    "micafungin (micafungin sodium)",
     "miconazole",
     "midazolam",
+    "midodrine",
+    "midostaurin",
+    "mifepristone",
+    "miglitol",
     "milnacipran",
+    "milnacipran (milnacipran hydrochloride)",
+    "milrinone",
+    "miltefosine",
+    "minocycline",
+    "minodronic acid (minodronic acid hydrate)",
+    "minoxidil",
+    "mirabegron",
     "mirtazapine",
+    "misoprostol",
+    "mitapivat",
+    "mitomycin",
     "mitotane",
+    "mitoxantrone",
+    "mizolastine",
+    "moclobemide",
+    "modafinil",
     "moexiprilat",
+    "molgramostim (recombinant human gm-csf, rhugm-csf)",
+    "molnupiravir",
+    "mometasone",
+    "mometasone furoate (topical)",
+    "monobenzone",
+    "montelukast",
     "morphine",
+    "morphine (morphine sulfate)",
     "morphine hydrochloride",
     "morphine sulfate",
     "morphine tartrate",
+    "mosapride",
     "moxifloxacin",
+    "moxonidine",
+    "mucopolysaccharide polysulfate",
+    "mupirocin",
+    "mycophenolate mofetil",
+    "mycophenolate sodium",
+    "n-butyl-2-cyanoacrylate",
     "nabumetone",
+    "nadifloxacin",
     "nadolol",
+    "nadroparin calcium",
+    "naftopidil",
+    "nalbuphine",
     "naldemedine",
     "naldemedine tosylate",
+    "nalidixic acid",
+    "naloxone",
+    "naltrexone",
+    "nandrolone decanoate",
+    "naphazoline",
     "naproxen",
+    "naratriptan",
+    "nartograstim",
+    "natalizumab",
+    "natamycin",
+    "nateglinide",
     "nebivolol",
     "nefazodone",
+    "nefopam",
+    "nelfinavir",
+    "neomycin",
+    "neostigmine methylsulfate",
     "nepafenac",
+    "neratinib",
+    "netarsudil",
+    "netilmicin sulfate",
     "netupitant",
+    "nevirapine",
+    "niacinamide (nicotinamide, vitamin b3 amide)",
     "nicardipine",
+    "nicergoline",
+    "niclosamide",
     "nicorandil",
+    "nicotinamide",
+    "nicotine",
+    "nicotinic acid",
     "nifedipine",
+    "nilotinib",
+    "nilotinib d-tartrate",
+    "nilotinib tartrate",
+    "nimesulide",
     "nimodipine",
+    "nimorazole",
+    "nimotuzumab",
+    "nintedanib",
     "nisoldipine",
+    "nitazoxanide",
+    "nitrazepam",
+    "nitrendipine",
+    "nitric oxide",
+    "nitrofurantoin",
+    "nitrofurazone",
     "nitroglycerin",
     "nitroglycerin (gtn)",
+    "nivolumab",
+    "nizatidine",
     "noradrenaline",
+    "noradrenaline (norepinephrine)",
+    "norepinephrine",
+    "norepinephrine (norepinephrine bitartrate)",
+    "norethisterone (norethindrone)",
+    "norethisterone enanthate",
+    "norfloxacin",
     "nortriptyline",
+    "noscapine",
+    "nystatin",
+    "obeticholic acid",
+    "octenidine",
+    "octreotide acetate",
+    "ofatumumab",
     "ofloxacin",
     "olanzapine",
+    "olaparib",
+    "olive oil",
     "olmesartan",
+    "olmesartan medoxomil",
+    "olodaterol",
+    "olopatadine",
+    "omalizumab",
     "omaveloxolone",
+    "omega-3 fatty acids (epa/dha)",
     "omeprazole",
+    "onabotulinumtoxina",
     "ondansetron",
+    "opipramol",
+    "orciprenaline (metaproterenol)",
     "oritavancin",
     "oritavancin diphosphate",
+    "orlistat",
+    "ormeloxifene (centchroman)",
+    "ornidazole",
+    "oseltamivir phosphate",
     "osilodrostat",
     "osimertinib",
     "osimertinib mesylate",
     "oteseconazole",
+    "otilonium bromide",
+    "oxaceprol",
+    "oxaliplatin",
     "oxaprozin",
     "oxazepam",
+    "oxcarbazepine",
     "oxiconazole",
+    "oxybutynin",
     "oxycodone",
     "oxycodone hydrochloride",
     "oxycodone terephthalate",
+    "oxyfedrine",
+    "oxymetazoline",
     "oxymorphone",
     "oxymorphone hydrochloride",
+    "oxyphenbutazone",
+    "oxyphenonium bromide",
+    "oxytetracycline",
+    "oxytocics and prostaglandin e1/e2 and products for cervical dilatation",
+    "oxytocin",
+    "ozagrel",
+    "ozenoxacin",
+    "p-hydroxyamphetamine",
+    "paclitaxel",
     "pacritinib",
+    "palbociclib",
+    "pale sulfonated shale oil (pale ichthammol / 'ichthyol pale')",
+    "paliperidone",
+    "paliperidone (paliperidone extended-release)",
     "palonosetron",
+    "pamidronate disodium",
+    "pancrelipase (pancreatin)",
+    "pancuronium",
+    "panitumumab",
+    "panobinostat",
     "pantoprazole",
+    "papaverine",
+    "paracetamol",
+    "parecoxib (parecoxib sodium)",
     "paregoric",
+    "paritaprevir",
+    "paritaprevir dihydrate",
+    "parnaparin",
     "paroxetine",
     "pazopanib",
+    "pazopanib (pazopanib hydrochloride)",
+    "pazufloxacin (pazufloxazin)",
+    "pefloxacin",
+    "pegaptanib sodium",
+    "pegaspargase",
+    "pegfilgrastim",
+    "peginterferon alfa-2a",
+    "peginterferon alfa-2b",
+    "pembrolizumab",
+    "pemetrexed",
+    "pemigatinib",
+    "penfluridol",
+    "penicillamine",
+    "penicillin (natural penicillins: benzylpenicillin/penicillin g and phenoxymethylpenicillin/penicillin v)",
+    "penicillin g benzathine",
+    "penicillin v (phenoxymethylpenicillin)",
     "pentamidine",
+    "pentazocine",
+    "pentosan polysulfate sodium",
+    "pentoxifylline",
     "perampanel",
     "perindopril",
+    "perindopril erbumine",
     "perindoprilat",
+    "permethrin",
+    "perphenazine",
+    "pertuzumab",
+    "pethidine (meperidine)",
+    "pexidartinib",
+    "phenazopyridine",
     "phenelzine",
+    "phenindione",
+    "pheniramine (pheniramine maleate)",
+    "phenobarbitone (phenobarbital)",
+    "phenolphthalein",
+    "phenoxybenzamine",
+    "phentolamine",
+    "phenylalanine",
+    "phenylephrine",
+    "phenylephrine hydrochloride",
+    "phenyramidol",
+    "phenytoin",
+    "phytomenadione (phytonadione, vitamin k1)",
+    "pibrentasvir",
+    "pidotimod",
+    "pilocarpine",
+    "pimavanserin",
+    "pimecrolimus",
     "pimozide",
+    "pinaverium bromide",
     "pindolol",
+    "pioglitazone",
+    "pipecuronium bromide",
+    "piperacillin",
+    "piperaquine",
+    "piperazine",
+    "piracetam",
+    "pirfenidone",
+    "piribedil",
     "piroxicam",
     "pirtobrutinib",
     "pitavastatin",
     "pitolisant",
+    "pizotifen",
+    "placenta extracts",
+    "plerixafor",
+    "pneumococcal 13-valent conjugate vaccine (pcv13)",
+    "pneumococcal polysaccharide conjugate vaccine (pcv)",
+    "pneumococcal polysaccharide vaccine (ppsv23)",
+    "policosanol",
+    "polidocanol",
+    "polio vaccine",
+    "polycarbophil (calcium polycarbophil)",
+    "polyethylene glycol 3350 (peg 3350)",
+    "polymyxin b",
+    "polymyxin b sulfate",
+    "polystyrene sulfonate (sodium/calcium polystyrene sulfonate)",
     "polythiazide",
+    "polyvinyl alcohol",
+    "pomalidomide",
+    "ponatinib",
+    "poractant alfa",
     "posaconazole",
     "potassium",
     "potassium chloride",
+    "potassium citrate",
+    "potassium magnesium citrate",
+    "potassium nitrate",
+    "povidone-iodine (topical)",
+    "pralidoxime chloride (2-pam)",
+    "pralsetinib",
+    "pramipexole (as dihydrochloride)",
+    "pramoxine (pramocaine)",
     "prasugrel",
     "pravastatin",
+    "praziquantel",
+    "prazosin",
+    "prednicarbate",
+    "prednisolone",
+    "prednisone",
+    "pregabalin",
+    "prenoxdiazine (prenoxdiazine hydrochloride)",
     "primaquine",
+    "primidone",
+    "proanthocyanidin",
+    "probenecid",
     "procainamide",
+    "procaine penicillin g (penicillin g procaine)",
+    "procarbazine",
+    "prochlorperazine",
+    "procyclidine",
+    "progesterone",
+    "proguanil",
     "promethazine",
+    "propafenone",
+    "propafenone (propafenone hydrochloride)",
+    "proparacaine (proxymetacaine) hydrochloride",
+    "propofol",
     "propoxyphene",
     "propoxyphene hydrochloride",
     "propoxyphene napsylate",
     "propranolol",
+    "propranolol hydrochloride",
+    "propyl paraben (propylparaben, propyl 4-hydroxybenzoate)",
+    "propylthiouracil (ptu)",
+    "protamine sulfate",
     "protein c, human",
+    "prothionamide (protionamide)",
     "protriptyline",
+    "prucalopride",
+    "prulifloxacin",
+    "pseudoephedrine",
+    "pseudoephedrine (pseudoephedrine hydrochloride / sulfate)",
+    "psoralen (methoxsalen)",
+    "purified vi polysaccharide typhoid vaccine",
+    "pyrantel pamoate",
+    "pyrazinamide",
+    "pyridostigmine bromide",
+    "pyrimethamine",
+    "pyritinol (pyrithioxine)",
     "quazepam",
     "quetiapine",
     "quinapril",
     "quinaprilat",
     "quinidine",
+    "quinine sulfate",
+    "quiniodochlor (clioquinol)",
+    "quizartinib",
     "rabeprazole",
+    "rabies human monoclonal antibody",
+    "rabies immune globulin (human)",
+    "racecadotril",
+    "raloxifene",
+    "raltegravir (raltegravir potassium)",
+    "ramelteon",
     "ramipril",
     "ramiprilat",
+    "ramosetron",
+    "ramucirumab",
+    "ranibizumab",
+    "ranitidine",
+    "ranolazine",
     "rasagiline",
+    "rasburicase",
+    "rebamipide",
+    "reboxetine (reboxetine mesilate)",
+    "recombinant follicle stimulating hormone (follitropin alfa / beta)",
+    "recombinant human epidermal growth factor (rhegf)",
+    "recombinant human erythropoietin alfa (epoetin alfa)",
+    "recombinant human erythropoietin beta (epoetin beta)",
+    "recombinant human luteinizing hormone (lutropin alfa)",
+    "recombinant human parathyroid hormone (teriparatide / pth 1-34)",
+    "regorafenib",
+    "relugolix",
+    "remdesivir",
+    "remibrutinib",
     "remifentanil",
     "remifentanil hydrochloride",
+    "remogliflozin etabonate",
+    "repaglinide",
     "repotrectinib",
+    "resveratrol",
+    "retapamulin",
+    "reteplase (recombinant, r-pa)",
+    "revaprazan",
+    "revefenacin",
+    "reviparin (reviparin sodium)",
+    "rho(d) immune globulin (anti-d immunoglobulin)",
+    "ribavirin (oral)",
+    "ribociclib",
+    "rifabutin",
+    "rifampicin (rifampin)",
+    "rifaximin",
+    "riluzole",
+    "rilzabrutinib",
+    "rimonabant",
+    "ringer's lactate (lactated ringer's / compound sodium lactate / hartmann's solution)",
+    "riociguat",
+    "ripasudil",
+    "ripretinib",
+    "risedronate sodium",
     "risperidone",
+    "ritodrine",
     "ritonavir",
+    "rituximab",
     "rivaroxaban",
+    "rivastigmine",
+    "rizatriptan",
+    "rocuronium bromide",
+    "rofecoxib",
+    "roflumilast",
+    "rolapitant",
+    "romiplostim",
+    "ropinirole",
+    "ropivacaine",
+    "rosiglitazone (rosiglitazone maleate)",
     "rosuvastatin",
+    "roxatidine (roxatidine acetate)",
+    "roxithromycin",
+    "rubella virus vaccine live (ra 27/3 strain)",
+    "rucaparib",
+    "rupatadine (rupatadine fumarate)",
+    "ruxolitinib",
+    "s-adenosyl l-methionine disulfate tosylate (ademetionine, same)",
+    "s-amlodipine (levamlodipine)",
+    "s-etodolac (dexetodolac)",
+    "s-metoprolol succinate (s-metoprolol, dextrorotatory-resolved beta-blocker)",
+    "saccharomyces boulardii",
     "safinamide",
+    "safinamide (safinamide mesylate)",
     "safinamide mesylate",
+    "salbutamol (albuterol sulfate)",
+    "salicylic acid",
+    "saline (sodium chloride solutions)",
+    "salmeterol",
+    "salmonella typhi vaccine (typhoid vaccine)",
+    "sapropterin",
+    "saquinavir (saquinavir mesylate)",
+    "sarecycline",
+    "sarecycline hydrochloride",
+    "sargramostim (rhu gm-csf)",
+    "saroglitazar (saroglitazar magnesium)",
+    "satranidazole",
+    "saxagliptin",
+    "saxagliptin anhydrous",
+    "scopolamine",
+    "secnidazole",
+    "secukinumab",
     "selegiline",
+    "selenium sulphide",
+    "selexipag",
+    "selpercatinib",
+    "selumetinib",
+    "semaglutide",
+    "seratrodast",
+    "serratiopeptidase",
     "sertaconazole",
     "sertraline",
+    "sevelamer",
     "sevoflurane",
     "sildenafil",
     "sildenafil citrate",
+    "silodosin",
+    "silver colloid (colloidal silver)",
+    "silver nanoparticles (nanosilver, colloidal nanosilver)",
+    "silver nitrate",
+    "silver sulfadiazine",
+    "silymarin",
     "simeprevir",
     "simeprevir sodium",
+    "simethicone",
     "simvastatin",
+    "sirolimus",
+    "sirolimus (rapamycin)",
+    "sisomicin",
+    "sitagliptin",
+    "snake venom antiserum (polyvalent anti-snake venom, asv)",
+    "sodium acid phosphate (sodium phosphate monobasic; sodium dihydrogen phosphate)",
+    "sodium aminosalicylate (sodium para-aminosalicylate, pas)",
+    "sodium bicarbonate",
+    "sodium chloride",
+    "sodium citrate",
+    "sodium cromoglycate",
+    "sodium feredetate (sodium ironedetate, sodium iron edta)",
+    "sodium fluoride",
+    "sodium fusidate (fusidic acid)",
+    "sodium hyaluronate",
+    "sodium lactate",
+    "sodium nitroprusside",
+    "sodium picosulfate",
+    "sodium stibogluconate (pentavalent antimony, sb(v))",
+    "sodium valproate (valproate sodium)",
+    "sofalcone",
+    "sofosbuvir",
     "solifenacin",
+    "solifenacin succinate",
+    "somatostatin (somatostatin-14, acetate)",
+    "somatropin",
+    "sorafenib",
+    "sorbitol",
+    "sorbitol solution",
+    "sotagliflozin",
     "sotalol",
+    "sparfloxacin",
     "sparsentan",
+    "spiramycin",
     "spironolactone",
+    "stannous fluoride",
+    "stanozolol",
+    "stavudine (d4t)",
+    "sterile water for injection",
+    "streptokinase",
+    "streptomycin",
+    "streptomycin (streptomycin sulfate)",
+    "strontium chloride",
+    "strontium ranelate",
+    "succinylcholine chloride (suxamethonium)",
+    "sucralfate",
+    "sucroferric oxyhydroxide",
     "sufentanil",
     "sufentanil citrate",
+    "sugammadex (sugammadex sodium)",
+    "sulbactam (sulbactam sodium)",
     "sulconazole",
+    "sulfacetamide",
+    "sulfadiazine",
     "sulfamethoxazole",
+    "sulfasalazine",
+    "sulfiram (monosulfiram)",
     "sulindac",
+    "sulphacetamide (sulfacetamide sodium)",
+    "sulpiride",
+    "sultamicillin tosilate",
     "sultopride",
+    "sumatriptan",
+    "sumatriptan (sumatriptan succinate)",
+    "sunitinib",
+    "suvorexant",
+    "suxamethonium (succinylcholine chloride)",
+    "tacalcitol",
     "tacrolimus",
     "tadalafil",
+    "tafamidis",
+    "tafluprost",
     "tamoxifen",
+    "tamsulosin",
     "tapentadol",
+    "tazarotene",
     "tecovirimat",
+    "tedizolid",
+    "tegaserod (tegaserod maleate)",
+    "teicoplanin",
+    "telaprevir",
+    "telbivudine",
     "telmisartan",
     "temazepam",
+    "temozolomide",
+    "temsirolimus",
+    "tenecteplase",
+    "teneligliptin",
+    "tenofovir alafenamide",
+    "tenofovir disoproxil fumarate (tdf)",
+    "tenoxicam",
+    "tepotinib",
+    "terazosin",
+    "terbinafine (oral)",
+    "terbutaline sulfate",
     "terconazole",
+    "terfenadine",
+    "teriflunomide",
+    "teriparatide",
+    "terizidone",
+    "terlipressin",
+    "testosterone",
+    "testosterone propionate",
+    "tetanus immunoglobulin",
+    "tetanus toxoid",
+    "tetrabenazine",
+    "tetrachlorodecaoxygen anion",
+    "tetracosactide",
+    "tetracycline",
+    "tetrahydrozoline",
+    "thalidomide",
+    "theophylline",
+    "theophylline anhydrous",
+    "thiamine",
+    "thiamine mononitrate",
+    "thiamine nitrate (thiamine mononitrate, vitamin b1)",
+    "thiocolchicoside",
+    "thioguanine",
+    "thiopental sodium (thiopentone)",
     "thioridazine",
+    "thioridazine (as hydrochloride)",
+    "thiotepa",
+    "thymosin alpha 1",
+    "tiagabine",
+    "tianeptine (tianeptine sodium)",
+    "tiapride",
+    "tibolone",
     "ticagrelor",
     "ticlopidine",
+    "ticlopidine hydrochloride",
+    "tigecycline",
+    "timolol",
     "timolol anhydrous",
+    "tinidazole",
+    "tinzaparin",
     "tioconazole",
+    "tiotropium",
+    "tiotropium (tiotropium bromide)",
     "tirofiban",
+    "tiropramide",
+    "tirzepatide",
+    "tivozanib",
     "tizanidine",
+    "tobramycin",
+    "tocilizumab",
+    "tofacitinib",
+    "tofisopam",
+    "tolazamide",
+    "tolbutamide",
+    "tolfenamic acid",
     "tolmetin",
+    "tolnaftate",
+    "tolperisone",
     "tolterodine",
+    "tolvaptan",
     "topiramate",
+    "topiroxostat",
+    "topotecan (topotecan hydrochloride)",
     "torasemide",
+    "torasemide (torsemide)",
     "torsemide",
+    "tovorafenib",
+    "trabectedin",
     "tramadol",
+    "tramadol (tramadol hydrochloride)",
     "tramadol hydrochloride",
+    "trametinib",
     "trandolapril",
     "trandolaprilat",
+    "tranexamic acid",
     "tranylcypromine",
+    "trastuzumab",
+    "travoprost",
     "trazodone",
+    "treosulfan",
+    "tretinoin (all-trans retinoic acid, oral)",
+    "triamcinolone",
+    "triamcinolone acetonide",
+    "triamcinolone hexacetonide",
     "triamterene",
     "triazolam",
+    "tricholine citrate",
     "triclabendazole",
+    "triclofos sodium",
+    "triclosan",
+    "trientine hydrochloride",
+    "trifluoperazine",
+    "trifluoperazine (trifluoperazine hydrochloride)",
+    "trihexyphenidyl",
+    "trilaciclib",
+    "trimebutine",
+    "trimetazidine",
     "trimethoprim",
+    "trimethoprim combinations",
     "trimipramine",
+    "trioxasalen",
+    "triptorelin (triptorelin pamoate)",
+    "triticum vulgare extract",
     "trofinetide",
+    "tropicamide",
+    "trospium",
+    "trospium chloride",
+    "troxerutin",
+    "troxipide",
+    "trypan blue",
+    "trypsin-chymotrypsin",
+    "tucatinib",
+    "tulobuterol",
+    "udenafil",
+    "ulinastatin",
+    "ulipristal acetate",
+    "umeclidinium",
+    "uniflexin (diacerein)",
+    "univestin (aflapin / standardized boswellia serrata + scutellaria baicalensis extract blend)",
+    "upadacitinib",
+    "urea",
+    "urofollitropin (follicle-stimulating hormone, urinary)",
+    "urokinase",
+    "ursodeoxycholic acid",
+    "vaccine",
+    "valacyclovir (valacyclovir hydrochloride)",
+    "valdecoxib",
+    "valethamate bromide",
+    "valganciclovir",
+    "valproic acid",
     "valsartan",
+    "vamorolone",
+    "vancomycin",
     "vandetanib",
     "vardenafil",
+    "vardenafil (vardenafil hydrochloride)",
     "vardenafil hydrochloride",
     "vardenafil hydrochloride trihydrate",
+    "varenicline",
+    "varicella virus vaccine, live (oka/merck strain)",
+    "vasopressin (8-l-arginine vasopressin)",
+    "vecuronium",
+    "velpatasvir",
+    "vemurafenib",
+    "venetoclax",
     "venlafaxine",
     "verapamil",
+    "vericiguat",
+    "verteporfin",
+    "vi capsular polysaccharide of salmonella typhi (typhoid vi polysaccharide vaccine)",
+    "vibegron",
+    "vigabatrin",
+    "vilanterol",
+    "vilazodone",
+    "vildagliptin",
     "viloxazine",
+    "vinblastine sulfate",
+    "vincristine",
+    "vinorelbine",
+    "vinpocetine",
+    "vitamin a (retinol / retinyl esters)",
+    "vitamin b (b-complex)",
+    "vitamin b3 (niacin / nicotinic acid and nicotinamide)",
+    "vitamin c",
+    "vitamin d (cholecalciferol / ergocalciferol)",
+    "vitamin e (alpha-tocopherol)",
+    "vitamin k1 (phytonadione / phytomenadione)",
+    "voclosporin",
+    "voglibose",
     "vorapaxar",
     "voriconazole",
+    "vortioxetine",
     "voxelotor",
+    "voxilaprevir",
     "warfarin",
     "xanomeline",
-    "ziprasidone"
+    "xantinol nicotinate (xanthinol nicotinate)",
+    "xipamide",
+    "xylitol",
+    "xylometazoline",
+    "zafirlukast",
+    "zaleplon",
+    "zaltoprofen",
+    "zanubrutinib",
+    "zidovudine",
+    "zileuton",
+    "zinc (zinc salts - sulfate, gluconate, acetate)",
+    "zinc acetate",
+    "zinc carnosine",
+    "zinc chloride",
+    "zinc gluconate",
+    "zinc oxide",
+    "zinc sulfate",
+    "ziprasidone",
+    "zoledronic acid",
+    "zolmitriptan",
+    "zolpidem tartrate",
+    "zonisamide",
+    "zopiclone",
+    "zotepine",
+    "zuclopenthixol",
+    "zuranolone"
   ],
   "brands": {
     "acei": "ramipril",
+    "acetaminophen": "paracetamol",
     "acid reducer": "esomeprazole",
+    "actrapid": "insulin (regular)",
     "adalat": "nifedipine",
     "adcirca": "tadalafil",
+    "adrenaline": "adrenaline (epinephrine)",
     "adrenaline (epinephrine)": "adrenaline",
     "aldactone": "spironolactone",
+    "alerid": "cetirizine",
+    "amaryl": "glimepiride",
+    "amikacin sulfate": "amikacin",
     "amiloride hydrochloride": "amiloride",
     "amlodipine besylate": "amlodipine",
     "amlokind": "amlodipine",
     "amlong": "amlodipine",
+    "ampicillin and sulbactam": "ampicillin",
     "angised": "nitroglycerin (gtn)",
+    "anti itch": "hydrocortisone",
     "antiemetic": "domperidone",
     "arb": "telmisartan",
     "asa": "aspirin",
     "ativan": "lorazepam",
     "atorva": "atorvastatin",
     "atorvastatin calcium": "atorvastatin",
+    "atropine sulfate": "atropine",
+    "atrovent": "ipratropium",
     "bb": "carvedilol",
     "beta blocker": "metoprolol",
     "betaloc": "metoprolol",
     "bisoprolol fumarate": "bisoprolol",
     "brufen": "ibuprofen",
+    "budecort": "budesonide",
     "calcigard": "nifedipine",
+    "calcium gluconate in sodium chloride": "calcium gluconate",
     "calmpose": "diazepam",
+    "calpol": "paracetamol",
     "canditral": "itraconazole",
     "carca": "carvedilol",
     "cardace": "ramipril",
     "cardene": "nicardipine",
     "carvil": "carvedilol",
     "ccb": "amlodipine",
+    "ceftriaxone sodium": "ceftriaxone",
+    "cefuroxime and dextrose": "cefuroxime",
+    "cetzine": "cetirizine",
+    "childrens zyrtec": "cetirizine",
     "chloroquine phosphate": "chloroquine",
     "cialis": "tadalafil",
     "cleviprex": "clevidipine",
     "clexane": "enoxaparin",
+    "clindamycin phosphate": "clindamycin",
     "clopilet": "clopidogrel",
+    "clotonil": "tranexamic acid",
     "codeine sulfate": "codeine",
     "combiflam": "ibuprofen",
     "cordarone": "amiodarone",
+    "cortisporin tc": "colistin",
+    "cpm": "chlorpheniramine",
     "crestor": "rosuvastatin",
+    "crocin": "paracetamol",
     "dabigatran etexilate": "dabigatran",
+    "decadron": "dexamethasone",
     "depin": "nifedipine",
     "deplatt": "clopidogrel",
+    "deriphyllin": "theophylline",
+    "dexona": "dexamethasone",
     "diclofenac sodium": "diclofenac",
+    "dilantin": "phenytoin",
     "diltiazem hydrochloride": "diltiazem",
     "dinitrate": "isosorbide dinitrate",
     "disprin": "aspirin",
     "doac": "apixaban",
+    "dolo": "paracetamol",
     "domstal": "domperidone",
     "duloxetine delayed-release": "duloxetine",
+    "duphalac": "lactulose",
     "dynapar": "diclofenac",
+    "dyural 40 kit": "methylprednisolone",
     "ecosprin": "aspirin",
+    "efcorlin": "hydrocortisone",
     "eliquis": "apixaban",
+    "elliotts b": "sodium bicarbonate",
     "emeset": "ondansetron",
     "enalapril maleate": "enalapril",
     "enoxaparin sodium": "enoxaparin",
     "entresto": "valsartan",
+    "enulose": "lactulose",
+    "epinephrine": "adrenaline (epinephrine)",
+    "eptoin": "phenytoin",
     "escitalopram oral solution": "escitalopram",
+    "eskalith": "lithium",
     "esomep": "esomeprazole",
     "esoz": "esomeprazole",
+    "ethambutol hydrochloride": "ethambutol",
     "famocid": "famotidine",
     "famtac": "famotidine",
     "felodip": "felodipine",
     "fentanyl citrate": "fentanyl",
+    "fosfomycin tromethamine": "fosfomycin",
     "frusemide": "furosemide",
     "frusenex": "furosemide",
     "fulsed": "midazolam",
+    "glucophage": "metformin",
     "glyceryl trinitrate": "nitroglycerin",
+    "glycomet": "metformin",
     "gtn": "nitroglycerin",
     "h2": "famotidine",
     "h2 blocker": "famotidine",
     "haldol": "haloperidol",
     "heparin sodium": "heparin",
+    "huminsulin-r": "insulin (regular)",
     "ibuprofen dye free": "ibuprofen",
+    "ics": "budesonide",
     "ikorel": "nicorandil",
     "imdur": "isosorbide mononitrate",
     "inspra": "eplerenone",
+    "insulin": "insulin (regular)",
+    "ipratropium bromide": "ipratropium",
+    "ipravent": "ipratropium",
     "ismo": "isosorbide mononitrate",
     "isordil": "isosorbide dinitrate",
     "isosorbide": "isosorbide mononitrate",
     "itraspor": "itraconazole",
     "kcl": "potassium chloride",
+    "keppra": "levetiracetam",
     "ketanov": "ketorolac",
     "ketorol": "ketorolac",
     "ketorolac tromethamine": "ketorolac",
@@ -2052,22 +5321,41 @@
     "labetalol hydrochloride": "labetalol",
     "lanoxin": "digoxin",
     "lasix": "furosemide",
+    "laxative": "lactulose",
+    "levipil": "levetiracetam",
     "levitra": "vardenafil",
+    "levophed": "noradrenaline (norepinephrine)",
+    "licab": "lithium",
+    "linospan": "linezolid",
+    "lipicard": "fenofibrate",
     "lipitor": "atorvastatin",
     "lisinopril and hydrochlorothiazide": "hydrochlorothiazide",
+    "lithium carbonate": "lithium",
+    "lithosun": "lithium",
+    "lizolid": "linezolid",
     "lmwh": "enoxaparin",
+    "looz": "lactulose",
+    "lopid": "gemfibrozil",
     "lopinavir and ritonavir": "ritonavir",
     "losartan potassium": "losartan",
     "low dose aspirin": "aspirin",
     "manforce": "sildenafil",
     "maxeron": "metoclopramide",
+    "medrol": "methylprednisolone",
     "megalis": "tadalafil",
     "metolar": "metoprolol",
     "metoprolol tartrate": "metoprolol",
+    "minocycline hydrochloride": "minocycline",
     "monit": "isosorbide mononitrate",
     "monotrate": "isosorbide mononitrate",
+    "montair": "montelukast",
+    "montelukast sodium": "montelukast",
     "morphine sulfate": "morphine",
     "moxifloxacin hydrochloride": "moxifloxacin",
+    "nahco3": "sodium bicarbonate",
+    "narcan": "naloxone",
+    "nardil": "phenelzine",
+    "neoral": "ciclosporin",
     "nexium": "esomeprazole",
     "nicardia": "nifedipine",
     "nicardipine hydrochloride": "nicardipine",
@@ -2077,24 +5365,36 @@
     "nitrocontin": "nitroglycerin (gtn)",
     "nitroglycerin (gtn)": "nitroglycerin",
     "nizoral": "ketoconazole",
+    "norad": "noradrenaline (norepinephrine)",
     "noradrenaline (norepinephrine)": "noradrenaline",
+    "norepinephrine": "noradrenaline (norepinephrine)",
     "norvir": "ritonavir",
     "nsaid": "diclofenac",
     "ntg": "nitroglycerin",
     "omecip": "omeprazole",
     "omez": "omeprazole",
+    "omnacortil": "prednisolone",
     "ondansetron hydrochloride": "ondansetron",
     "ondem": "ondansetron",
+    "osmitrol": "mannitol",
     "oxycodone hydrochloride": "oxycodone",
     "pacerone": "amiodarone",
     "pan": "pantoprazole",
     "pan-d": "pantoprazole",
+    "pangraf": "tacrolimus",
+    "panimun": "ciclosporin",
     "pantocid": "pantoprazole",
     "pantop": "pantoprazole",
     "pantoprazole sodium": "pantoprazole",
+    "parnate": "tranylcypromine",
+    "pcm": "paracetamol",
     "penegra": "sildenafil",
+    "pentazocine hydrochloride and naloxone hydrochloride": "naloxone",
     "perindopril erbumine": "perindopril",
     "perinorm": "metoclopramide",
+    "phenelzine sulfate": "phenelzine",
+    "phenytoin sodium": "phenytoin",
+    "piriton": "chlorpheniramine",
     "plavix": "clopidogrel",
     "plendil": "felodipine",
     "potassium chloride": "potassium",
@@ -2102,9 +5402,13 @@
     "ppi": "esomeprazole",
     "pradaxa": "dabigatran",
     "pravastatin sodium": "pravastatin",
+    "pred forte": "prednisolone",
+    "priadel": "lithium",
     "primaquine phosphate": "primaquine",
+    "prograf": "tacrolimus",
     "propranolol hydrochloride": "propranolol",
     "protonix": "pantoprazole",
+    "pulmicort": "budesonide",
     "rabeprazole sodium": "rabeprazole",
     "rabium": "rabeprazole",
     "ramistar": "ramipril",
@@ -2113,34 +5417,51 @@
     "revatio": "sildenafil",
     "rosuvas": "rosuvastatin",
     "rosuvastatin calcium": "rosuvastatin",
+    "sandimmun": "ciclosporin",
     "serenace": "haloperidol",
     "sertraline hydrochloride": "sertraline",
     "sildenafil citrate": "sildenafil",
+    "singulair": "montelukast",
     "sirturo": "bedaquiline",
+    "sodabicarb": "sodium bicarbonate",
+    "solu-cortef": "hydrocortisone",
+    "solu-medrol": "methylprednisolone",
     "sorbitrate": "isosorbide dinitrate",
     "sotalol hydrochloride": "sotalol",
     "spedra": "avanafil",
     "spiractin": "spironolactone",
     "sporanox": "itraconazole",
+    "sprinsol": "chlorpheniramine",
     "statin": "atorvastatin",
     "staxyn": "vardenafil",
     "stendra": "avanafil",
+    "steroid": "dexamethasone",
     "storvas": "atorvastatin",
+    "sucrafil": "sucralfate",
     "suhagra": "sildenafil",
     "sulfamethoxazole and trimethoprim": "trimethoprim",
     "tachyra": "amiodarone",
     "tadacip": "tadalafil",
     "telma": "telmisartan",
     "telsar": "telmisartan",
+    "theo-24": "theophylline",
+    "theophylline (anhydrous)": "theophylline",
     "tramadol hydrochloride": "tramadol",
     "tramazac": "tramadol",
+    "trapic": "tranexamic acid",
+    "tricor": "fenofibrate",
     "trinitroglycerin": "nitroglycerin",
+    "txa": "tranexamic acid",
+    "tylenol": "paracetamol",
     "ultracet": "tramadol",
+    "unicontin": "theophylline",
     "uniwarfin": "warfarin",
     "valium": "diazepam",
+    "vancomycin hydrochloride": "vancomycin",
     "vardenafil hydrochloride": "vardenafil",
     "vasotop": "nimodipine",
     "verapamil hydrochloride": "verapamil",
+    "vevye": "ciclosporin",
     "vfend": "voriconazole",
     "viagra": "sildenafil",
     "vilitra": "vardenafil",
@@ -2149,8 +5470,12 @@
     "voveran": "diclofenac",
     "warf": "warfarin",
     "warfarin sodium": "warfarin",
+    "wysolone": "prednisolone",
     "xarelto": "rivaroxaban",
-    "zofran": "ondansetron"
+    "zituvimet": "metformin",
+    "zofran": "ondansetron",
+    "zyrtec": "cetirizine",
+    "zyvox": "linezolid"
   },
   "rules": [
     {
@@ -2200,6 +5525,30 @@
       "action": "Do NOT co-administer. Separate a nitrate and a PDE5 inhibitor in time: at least 24 h after sildenafil/vardenafil and at least 48 h after tadalafil before a nitrate is given (and vice versa). In suspected nitrate-related hypotension after a PDE5 inhibitor, support circulation and avoid further nitrate.",
       "monitoring": "Blood pressure; symptoms of hypotension (syncope, chest pain). Confirm no recent PDE5 inhibitor before giving any nitrate, including IV nitroglycerin.",
       "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": true,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-sympathomimetic-maoi",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "sympathomimetic"
+        },
+        {
+          "kind": "class",
+          "value": "mao_inhibitor"
+        }
+      ],
+      "severity": "contraindicated",
+      "mechanism": "MAO inhibition prevents breakdown of catecholamines; an indirect/direct sympathomimetic then triggers a massive pressor response.",
+      "effect": "Hypertensive crisis — severe hypertension, headache, potentially fatal.",
+      "action": "Do not combine. Observe the required washout after stopping an MAO inhibitor before a sympathomimetic (and vice versa).",
+      "monitoring": "Blood pressure; hypertensive-crisis symptoms.",
+      "sourceId": "onc-nlm-hpddi",
       "evidence": "established",
       "reviewDate": "2026-07-10",
       "doseTimingSeparation": true,
@@ -2552,6 +5901,54 @@
       "action": "Avoid the combination or reduce the substrate dose per its label. For simvastatin/lovastatin with a strong CYP3A4 inhibitor, avoid or switch to a statin less dependent on CYP3A4 (e.g. rosuvastatin/pravastatin). For a PDE5 inhibitor with a strong inhibitor, use the lowest starting dose with an extended interval.",
       "monitoring": "Substrate-specific: muscle pain/CK for statins; blood pressure for PDE5 inhibitors and dihydropyridines.",
       "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-lithium-nsaid",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "lithium"
+        },
+        {
+          "kind": "class",
+          "value": "nsaid"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "NSAIDs reduce renal lithium clearance, raising serum lithium.",
+      "effect": "Lithium accumulation and toxicity (tremor, confusion, seizures, arrhythmia).",
+      "action": "Avoid where possible; if combined, reduce lithium dose and monitor levels closely.",
+      "monitoring": "Serum lithium, renal function, signs of lithium toxicity.",
+      "sourceId": "onc-nlm-hpddi",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "mech-lithium-raas-diuretic",
+      "type": "pair",
+      "subjects": [
+        {
+          "kind": "generic",
+          "value": "lithium"
+        },
+        {
+          "kind": "class",
+          "value": "raas"
+        }
+      ],
+      "severity": "major",
+      "mechanism": "ACE inhibitors/ARBs (and thiazide/loop diuretics) reduce renal lithium excretion.",
+      "effect": "Increased serum lithium and risk of toxicity.",
+      "action": "Avoid or monitor lithium levels closely with dose adjustment when starting/stopping the RAAS agent or diuretic.",
+      "monitoring": "Serum lithium, renal function, sodium/volume status.",
+      "sourceId": "onc-nlm-hpddi",
       "evidence": "established",
       "reviewDate": "2026-07-10",
       "doseTimingSeparation": false,
@@ -2918,6 +6315,26 @@
       "specialistReview": false
     },
     {
+      "id": "dup-anticholinergic",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "anticholinergic"
+        }
+      ],
+      "severity": "moderate",
+      "mechanism": "Additive antimuscarinic effect from two or more anticholinergic drugs (anticholinergic burden).",
+      "effect": "Confusion/delirium, urinary retention, constipation, dry mouth, blurred vision, falls — worse in the elderly.",
+      "action": "Minimise the number of anticholinergic drugs; deprescribe where possible, especially in older patients.",
+      "monitoring": "Cognition, bowel/bladder function, falls risk.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
       "id": "dup-antiplatelet",
       "type": "duplicate_class",
       "subjects": [
@@ -2938,6 +6355,26 @@
       "specialistReview": false
     },
     {
+      "id": "dup-hypoglycemic",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "hypoglycemic"
+        }
+      ],
+      "severity": "moderate",
+      "mechanism": "Additive glucose-lowering effect when two or more insulin/insulin-secretagogue agents are combined.",
+      "effect": "Increased risk of hypoglycaemia.",
+      "action": "Review the regimen; when combining a sulfonylurea/meglitinide with insulin, reduce doses and counsel on hypoglycaemia.",
+      "monitoring": "Blood glucose; hypoglycaemia symptoms.",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
       "id": "dup-loop-diuretic",
       "type": "duplicate_class",
       "subjects": [
@@ -2954,6 +6391,26 @@
       "sourceId": "openfda-labeling",
       "evidence": "established",
       "reviewDate": "2026-07-04",
+      "doseTimingSeparation": false,
+      "specialistReview": false
+    },
+    {
+      "id": "dup-nephrotoxic",
+      "type": "duplicate_class",
+      "subjects": [
+        {
+          "kind": "class",
+          "value": "nephrotoxic"
+        }
+      ],
+      "severity": "moderate",
+      "mechanism": "Additive nephrotoxicity from two or more nephrotoxic agents (e.g. aminoglycoside, vancomycin, NSAID, calcineurin inhibitor).",
+      "effect": "Increased risk of acute kidney injury.",
+      "action": "Avoid overlapping nephrotoxins where possible; ensure hydration, dose by renal function, and monitor.",
+      "monitoring": "Serum creatinine/eGFR, urine output; drug levels where relevant (e.g. vancomycin, aminoglycoside).",
+      "sourceId": "openfda-labeling",
+      "evidence": "established",
+      "reviewDate": "2026-07-10",
       "doseTimingSeparation": false,
       "specialistReview": false
     },

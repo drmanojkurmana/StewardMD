@@ -53,6 +53,10 @@ def build():
     except FileNotFoundError:
         class_members = {}
     try:
+        gold = L.load_json(f"{L.BUILD}/gold.json")
+    except FileNotFoundError:
+        gold = {}
+    try:
         openfda = L.load_json(f"{L.BUILD}/openfda.json")
     except FileNotFoundError:
         openfda = {}
@@ -100,6 +104,12 @@ def build():
             if key in tax:
                 add(L.norm(g), tax[key])
 
+    # 3b. Gold composition DB — apply safe keyword-derived tags (RxClass wins where both).
+    for g, rec in gold.items():
+        if L.norm(g) not in excluded:
+            for t in rec.get("tags", []):
+                add(L.norm(g), [t])
+
     # 4. CredibleMeds QT membership
     for cat in ("known_risk", "possible_risk", "conditional_risk"):
         for g in qt.get(cat, []):
@@ -117,10 +127,15 @@ def build():
     # finalize drugClasses (sorted, drop empties only if truly no tag)
     drug_classes = {g: sorted(t) for g, t in classes.items() if t}
 
-    # generics: every classified generic + alias canonical targets
+    # generics: every classified generic + alias canonical targets + EVERY gold
+    # composition (so any drug in the app DB is RECOGNISED and screened — an
+    # unclassified one still gets duplicate detection instead of being skipped).
     generic_set = set(drug_classes.keys())
     for canon in aliases.values():
         generic_set.add(canon)
+    for g in gold:
+        if L.norm(g) not in excluded:
+            generic_set.add(L.norm(g))
 
     # brands: brand/synonym -> canonical generic (only when target is a known generic)
     brands = {}
