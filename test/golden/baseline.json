@@ -3,7 +3,7 @@
     "capturedAtNote": "baseline of CURRENT engine before KB migration",
     "topN": 6,
     "syndromeCount": 51,
-    "ddxNiCount": 101,
+    "ddxNiCount": 98,
     "vignetteCount": 18
   },
   "results": {
@@ -25,7 +25,7 @@
         "hypertensive_enceph:36"
       ],
       "nInf": 15,
-      "nNi": 55,
+      "nNi": 56,
       "leadInf": "MENINGITIS",
       "leadInfReason": "Fever with neck stiffness, altered sensorium, and photophobia is concerning for acute bacterial meningitis — a true medical emergency where delay in antibiotics directly worsens outcomes. Empiric therapy must be started immediately, ideally within 1 hour of suspicion, and should not be delayed for lumbar puncture or imaging if there is any logistical delay.",
       "leadNi": "sah",
@@ -96,7 +96,7 @@
         "ild:26"
       ],
       "nInf": 6,
-      "nNi": 36,
+      "nNi": 37,
       "leadInf": "CAP",
       "leadInfReason": "Clinical findings (fever, productive cough, crepitations, tachypnea) support a diagnosis of community-acquired pneumonia. Bacterial probability is high enough to justify empiric antibiotic therapy without delay for culture results.",
       "leadNi": "asthma_exac",
@@ -151,14 +151,14 @@
       ],
       "ni": [
         "renal_colic:48",
+        "HLH:18",
         "pancreatitis:12",
         "serotonin_nms:6",
         "thyroid_storm:6",
-        "salicylate_tox:4",
-        "bowel_obstruction:2"
+        "salicylate_tox:4"
       ],
       "nInf": 7,
-      "nNi": 27,
+      "nNi": 28,
       "leadInf": "PYELONEPHRITIS",
       "leadInfReason": "Flank pain with fever indicates upper urinary tract infection (pyelonephritis). This requires antibiotics with reliable renal tissue penetration, with outpatient oral therapy appropriate in hemodynamically stable, tolerating patients.",
       "leadNi": "renal_colic",
@@ -279,13 +279,13 @@
       "ni": [
         "toxic_hepatitis:58",
         "biliary_colic:52",
+        "HLH:38",
         "decomp_cirrhosis:24",
         "hepatic_enceph:24",
-        "variceal_bleed:20",
-        "ttp_hus:16"
+        "variceal_bleed:20"
       ],
       "nInf": 8,
-      "nNi": 33,
+      "nNi": 32,
       "leadInf": "CHOLECYSTITIS",
       "leadInfReason": "Right upper quadrant pain with a positive Murphy's sign and fever, in the absence of jaundice, is consistent with acute cholecystitis (typically calculous). Antibiotics should be started alongside surgical consultation for cholecystectomy (early laparoscopic cholecystectomy is the definitive treatment in most cases) — antibiotics are an adjunct to, not a substitute for, source control.",
       "leadNi": "toxic_hepatitis",
@@ -333,10 +333,10 @@
         "metabolic_enceph:40",
         "toxic_hepatitis:34",
         "variceal_bleed:30",
-        "uraemic_enceph:20"
+        "HLH:28"
       ],
       "nInf": 11,
-      "nNi": 11,
+      "nNi": 10,
       "leadInf": "SBP",
       "leadInfReason": "In a patient with ascites, clinical suspicion raises concern for spontaneous bacterial peritonitis. Diagnostic paracentesis with ascitic fluid analysis should be performed promptly, and empiric antibiotics should be started once ascitic fluid neutrophil count supports the diagnosis (or immediately if paracentesis is delayed and suspicion is high), without waiting for culture results given the risk of rapid deterioration in cirrhotic patients.",
       "leadNi": "hepatic_enceph",
@@ -388,7 +388,7 @@
         "hypoglycemia:20"
       ],
       "nInf": 5,
-      "nNi": 26,
+      "nNi": 25,
       "leadInf": "C_DIFF",
       "leadInfReason": "New diarrhea following recent antibiotic exposure (often within the preceding 8 weeks, though it can occur during therapy) raises suspicion for Clostridioides difficile infection. Note the specific terminology here — treatment is itself with a different class of \"antibiotics\" targeted at C. difficile (oral vancomycin or fidaxomicin), which is distinct from and the inverse of typical antibiotic stewardship: the priority is stopping the inciting antibiotic if still being given, plus starting C. difficile-directed therapy.",
       "leadNi": "dka",
@@ -452,7 +452,7 @@
         "heart_failure:40"
       ],
       "nInf": 2,
-      "nNi": 31,
+      "nNi": 29,
       "leadInf": "HAP",
       "leadInfReason": "New fever, cough and radiographic infiltrate developing after 48 hours of hospitalization meet criteria for hospital-acquired pneumonia. The nosocomial setting shifts pathogen likelihood toward resistant gram-negatives, warranting empiric therapy that accounts for local resistance patterns and prior antibiotic exposure.",
       "leadNi": "pe",
@@ -573,7 +573,7 @@
         "cord_compression:32"
       ],
       "nInf": 3,
-      "nNi": 23,
+      "nNi": 22,
       "leadInf": "BRAIN_ABSCESS",
       "leadInfReason": "Headache with focal neurological deficit or seizure and fever, without prominent meningismus, raises strong suspicion for brain abscess. This requires urgent neuroimaging (contrast CT or MRI) and empiric antibiotic therapy covering the likely polymicrobial source, alongside urgent neurosurgical consultation for possible drainage — antibiotics alone are often insufficient for abscesses requiring surgical source control.",
       "leadNi": "ischemic_stroke",
@@ -806,11 +806,11 @@
         "dic:68",
         "itp:52",
         "acute_leukemia:50",
-        "serotonin_nms:24",
-        "thyroid_storm:22"
+        "HLH:44",
+        "serotonin_nms:24"
       ],
       "nInf": 12,
-      "nNi": 48,
+      "nNi": 49,
       "leadInf": "MALARIA",
       "leadInfReason": "Fever with chills/rigors, thrombocytopenia and/or splenomegaly in a patient from or travelling through an endemic area is most consistent with malaria — a protozoal infection. Antibiotics have no role here; the priority is urgent peripheral smear/rapid diagnostic testing and prompt antimalarial therapy specific to the Plasmodium species identified, since delay (especially in P. falciparum) can progress rapidly to severe/complicated malaria.",
       "leadNi": "ttp_hus",
@@ -849,11 +849,11 @@
       ],
       "ni": [
         "malignancy_b:68",
+        "HLH:34",
         "lung_cancer:26",
         "acute_leukemia:24",
         "sarcoidosis:20",
-        "thyroid_storm:20",
-        "vasculitis:16"
+        "thyroid_storm:20"
       ],
       "nInf": 8,
       "nNi": 29,
@@ -889,19 +889,19 @@
     "single_fever": {
       "inf": [],
       "ni": [
+        "HLH:30",
         "serotonin_nms:18",
         "thyroid_storm:18",
         "vasculitis:14",
         "acute_leukemia:12",
-        "sle_flare:12",
-        "sjs_ten:12"
+        "sle_flare:12"
       ],
       "nInf": 0,
-      "nNi": 15,
+      "nNi": 16,
       "leadInf": null,
       "leadInfReason": null,
-      "leadNi": "serotonin_nms",
-      "leadNiReason": "Fever with rigidity/clonus and altered mental state after serotonergic or antipsychotic drugs suggests a toxidrome, not infection.",
+      "leadNi": "HLH",
+      "leadNiReason": "Persistent fever with cytopenias, hepatosplenomegaly and a markedly elevated ferritin that does not respond to antibiotics suggests hemophagocytic lymphohistiocytosis (HLH/MAS) rather than ongoing sepsis.",
       "leadInfFirstLine": null,
       "leadInfPathogens": null,
       "leadInfStewardship": null

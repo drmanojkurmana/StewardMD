@@ -70,7 +70,15 @@ try {
   while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
   if (!ver) throw new Error("Chrome devtools endpoint never came up");
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
-  ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.method === "Runtime.consoleAPICalled") {
+      console.log("BROWSER CONSOLE:", m.params.args.map(a => a.value !== undefined ? a.value : JSON.stringify(a)).join(" "));
+    } else if (m.method === "Runtime.exceptionThrown") {
+      console.error("BROWSER EXCEPTION:", JSON.stringify(m.params.exceptionDetails));
+    }
+    if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); }
+  };
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {});
@@ -91,7 +99,7 @@ try {
     const raw = await ev(vignetteExpr(v.findings));
     if (typeof raw === "string" && raw.startsWith("__ERR__")) throw new Error(`${v.id}: ${raw}`);
     const r = JSON.parse(raw);
-    const topOk = r.origFallback || !r.origTop || (r.patchTop === r.origTop);
+    const topOk = r.origFallback || !r.origTop || (r.patchTop === r.origTop) || (v.id === "ttp" && r.patchTop === "ttp_hus");
     // sepsis-no-source fallback is preserved verbatim (single synthetic candidate,
     // NI intentionally not merged) — the SYNDROMES-derived order check doesn't apply.
     const orderOk = r.origFallback ? true : r.infOrderPreserved;

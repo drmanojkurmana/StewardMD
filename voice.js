@@ -21,6 +21,52 @@
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function blobToDataURL(b) { return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(r.result); }; r.onerror = rej; r.readAsDataURL(b); }); }
 
+  // Clinical Dictation (on-device Whisper) is gated behind a feature flag — OFF by default in
+  // production (matches the smd_ai / smd_ghis_ward convention). When off, everything below is inert
+  // and MaiK Scribe behaves EXACTLY as before (Fast Dictation only).
+  function whisperFlagOn() { try { var v = localStorage.getItem("smd_whisper_clinical_dictation"); return v === "1" || v === "true"; } catch (e) { return false; } }
+  // Available only on a native build WITH the Whisper plugin present AND the flag enabled.
+  function whisperAvailable() { return !!(window.SMD_NATIVE && typeof window.SMD_NATIVE.transcribeWhisper === "function") && whisperFlagOn(); }
+
+  // Default recognition language for Clinical Dictation. Whisper has no region locales, so English
+  // is "en"; the INDIAN-ENGLISH flavour + medical accuracy come from the initial_prompt below and
+  // the multilingual model. We force "en" rather than the device locale, so a phone set to Hindi /
+  // a regional language does NOT make Whisper decode the wrong language for English dictation.
+  var WHISPER_LANG = "en";
+  var WHISPER_MODEL = "small.en-q5_1";   // default Clinical model key (must exist in native-bridge WHISPER_MODELS)
+
+  // Whisper `initial_prompt` — primes the decoder for Indian-English CLINICAL dictation so accented
+  // English + drug/organism/lab terms are recognised. Built by REUSE: a high-yield medical seed
+  // (antibiotics/vasopressors/organisms/labs/units that are frequently misheard) plus the app's own
+  // drug names from window.MEDDRUGS._list. Capped well under Whisper's ~224-token prompt budget so it
+  // biases without truncation. Pure hint — the doctor still edits the transcript before import.
+  function buildInitialPrompt() {
+    var seed = [
+      "piperacillin-tazobactam", "meropenem", "cefoperazone-sulbactam", "ceftriaxone", "cefepime",
+      "amikacin", "gentamicin", "vancomycin", "teicoplanin", "colistin", "polymyxin B", "linezolid",
+      "doxycycline", "azithromycin", "levofloxacin", "metronidazole", "fluconazole", "caspofungin",
+      "noradrenaline", "norepinephrine", "adrenaline", "vasopressin", "dobutamine", "dopamine",
+      "hydrocortisone", "insulin", "furosemide", "heparin", "enoxaparin",
+      "Escherichia coli", "Klebsiella pneumoniae", "Pseudomonas aeruginosa", "Acinetobacter baumannii",
+      "Staphylococcus aureus", "Enterococcus", "Candida",
+      "creatinine", "urea", "potassium", "sodium", "chloride", "bicarbonate", "haemoglobin", "platelets",
+      "total leucocyte count", "bilirubin", "lactate", "procalcitonin", "C-reactive protein",
+      "arterial blood gas", "SpO2", "oxygen saturation",
+      "acute kidney injury", "chronic kidney disease", "septic shock", "community-acquired pneumonia",
+      "urinary tract infection", "diabetic ketoacidosis",
+      "milligrams", "grams", "q6h", "q8h", "q12h", "once daily", "twice daily", "three times daily", "intravenous"
+    ];
+    try {
+      var list = (window.MEDDRUGS && window.MEDDRUGS._list) || [];
+      var have = {}; seed.forEach(function (s) { have[s.toLowerCase()] = 1; });
+      for (var i = 0; i < list.length && seed.length < 90; i++) {
+        var g = list[i] && list[i].generic;
+        if (g && !have[g.toLowerCase()]) { have[g.toLowerCase()] = 1; seed.push(g); }
+      }
+    } catch (e) {}
+    return "Clinical case dictation in Indian English. Terms include " + seed.join(", ") + ".";
+  }
+
   /* ------------------------------ capture ------------------------------ */
   var _active = null;   // { engine, mode:'stream'|'record', stop }
   function stop() { if (_active && _active.stop) { try { _active.stop(); } catch (e) {} } _active = null; }
@@ -28,6 +74,26 @@
   function listen(opts) {
     opts = opts || {};
     stop();
+    // CLINICAL DICTATION (on-device Whisper) — only when explicitly requested via engine:"clinical"
+    // AND available (native plugin + flag). Never auto-falls-back to cloud; on failure it signals
+    // "clinical-unavailable" so the UI can OFFER Fast Dictation. Fast path below is untouched.
+    if (opts.engine === "clinical") {
+      if (whisperAvailable()) {
+        try {
+          var wstop = window.SMD_NATIVE.transcribeWhisper({
+            language: opts.language || WHISPER_LANG, model: opts.model || WHISPER_MODEL, initialPrompt: opts.initialPrompt || buildInitialPrompt(),
+            onPartial: opts.onPartial, onFinal: opts.onFinal,
+            onError: opts.onError, onDownloadProgress: opts.onDownloadProgress,
+            onStateChange: function (s) { if (opts.onState) opts.onState(s, "Clinical (on-device)"); }
+          });
+          _active = { engine: "Clinical (on-device)", mode: "record", stop: (typeof wstop === "function") ? wstop : function () { try { window.SMD_NATIVE.stopWhisper && window.SMD_NATIVE.stopWhisper(); } catch (e) {} } };
+          if (opts.onState) opts.onState("preparing", _active.engine);
+          return _active;
+        } catch (e) { /* plugin threw (unavailable) — do NOT auto-cloud */ }
+      }
+      if (opts.onError) opts.onError("clinical-unavailable");
+      return null;
+    }
     // 1) Native device STT (default on iOS/Android) — audio never leaves the device.
     if (window.SMD_NATIVE && typeof window.SMD_NATIVE.transcribe === "function") {
       try {
@@ -100,11 +166,21 @@
     var kindSel = target === "icu"
       ? '<div class="smdv-kinds">' + ICU_KINDS.map(function (k, i) { return '<button class="smdv-kind' + (i === 0 ? " on" : "") + '" data-kind="' + k[0] + '">' + esc(k[1]) + '</button>'; }).join("") + '</div>'
       : "";
+    // Fast/Clinical engine selector — shown ONLY when Whisper is available (flag on + native plugin).
+    // Flag off / web ⇒ empty ⇒ MaiK Scribe is byte-for-byte unchanged (Fast only).
+    var modeSel = whisperAvailable()
+      ? '<div class="smdv-modes" role="tablist" aria-label="Dictation engine">' +
+          '<button class="smdv-mode on" data-mode="fast" role="tab">⚡ Fast</button>' +
+          '<button class="smdv-mode" data-mode="clinical" role="tab">🩺 Clinical</button>' +
+        '</div><div class="smdv-mode-hint" id="smdvModeHint"></div>' +
+        '<div class="smdv-model-mgr" id="smdvModelMgr"></div>'
+      : "";
     root.innerHTML =
       '<div class="smdv-scrim" data-act="close"></div>' +
       '<div class="smdv-sheet" role="dialog" aria-modal="true" aria-label="MaiK Scribe voice intake">' +
         '<div class="smdv-hd"><span class="smdv-ttl">🎤 MaiK Scribe</span><button class="smdv-x" data-act="close" aria-label="Close">✕</button></div>' +
         '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : target === "text" ? "Speak your question or notes — tap ✓ to drop the text into the chat." : "Describe your patient in plain speech — symptoms, signs, key numbers.") + '</div>' +
+        modeSel +
         kindSel +
         '<button class="smdv-rec" id="smdvRec">🎤 Tap to speak</button>' +
         '<div class="smdv-eng" id="smdvEng"></div>' +
@@ -116,28 +192,60 @@
     document.body.appendChild(root);
     requestAnimationFrame(function () { root.classList.add("on"); });
 
+    // Offer a "Remove Clinical model" control if any Whisper model is downloaded (frees storage).
+    if (whisperAvailable() && window.SMD_NATIVE && window.SMD_NATIVE.whisperModelInstalled) {
+      window.SMD_NATIVE.whisperModelInstalled().then(function (r) {
+        var mgr = root && root.querySelector("#smdvModelMgr");
+        if (!mgr || !r || !r.installed) return;
+        var mb = r.bytes ? Math.round(r.bytes / 1048576) : null;
+        mgr.innerHTML = '<button class="smdv-model-del" data-act="delmodel">🗑 Remove Clinical model' + (mb ? " (frees ~" + mb + " MB)" : "") + '</button>';
+      }).catch(function () {});
+    }
+
     var ta = root.querySelector("#smdvTa");
     var recBtn = root.querySelector("#smdvRec");
     var engEl = root.querySelector("#smdvEng");
     var extractBtn = root.querySelector("#smdvExtract");
     var reviewEl = root.querySelector("#smdvReview");
     var kind = target === "icu" ? "monitor" : "reasoning";
+    var engineMode = "fast";                 // Fast is always the default; only changes if the user picks Clinical
     var recording = false, base = "";
 
     function refreshExtract() { extractBtn.disabled = !ta.value.trim(); }
     ta.addEventListener("input", function () { base = ta.value; refreshExtract(); });
 
     root.addEventListener("click", function (e) {
-      var b = e.target.closest("[data-act],[data-kind]"); if (!b) return;
+      var b = e.target.closest("[data-act],[data-kind],[data-mode]"); if (!b) return;
       if (b.getAttribute("data-act") === "close") return close();
+      if (b.getAttribute("data-act") === "delmodel") {
+        if (!window.confirm("Remove the downloaded Clinical Dictation model? It will re-download next time you use Clinical.")) return;
+        var mgr = root.querySelector("#smdvModelMgr");
+        if (window.SMD_NATIVE && window.SMD_NATIVE.deleteWhisperModel) {
+          window.SMD_NATIVE.deleteWhisperModel().then(function () {
+            if (mgr) mgr.innerHTML = '<div class="smdv-model-gone">Clinical model removed.</div>';
+            try { (window.toast || function () {})("Clinical model removed."); } catch (e) {}
+          }).catch(function () { try { (window.toast || function () {})("Couldn’t remove the model."); } catch (e) {} });
+        }
+        return;
+      }
       var kk = b.getAttribute("data-kind");
-      if (kk) { kind = kk; [].forEach.call(root.querySelectorAll(".smdv-kind"), function (x) { x.classList.toggle("on", x === b); }); }
+      if (kk) { kind = kk; [].forEach.call(root.querySelectorAll(".smdv-kind"), function (x) { x.classList.toggle("on", x === b); }); return; }
+      var mm = b.getAttribute("data-mode");
+      if (mm) {
+        if (recording) { stop(); recording = false; setState("idle"); }   // switching engine mid-session stops the current one
+        engineMode = mm;
+        [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x === b); });
+        var hint = root.querySelector("#smdvModeHint");
+        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation — first use downloads a ~181 MB model. Better for long notes, accents & drug names." : "";
+      }
     });
 
     function setState(state, engine) {
       if (state === "listening") { recBtn.textContent = "⏹ Listening… tap to stop"; recBtn.classList.add("live"); engEl.textContent = engine ? engine + " · speak now" : ""; }
       else if (state === "recording") { recBtn.textContent = "⏹ Recording… tap to stop"; recBtn.classList.add("live"); engEl.textContent = "AI · recording (transcribes when you stop)"; }
-      else if (state === "transcribing") { recBtn.textContent = "⏳ Transcribing…"; recBtn.classList.remove("live"); engEl.textContent = "AI · transcribing"; }
+      else if (state === "transcribing") { recBtn.textContent = "⏳ Transcribing…"; recBtn.classList.remove("live"); engEl.textContent = (engine || "AI") + " · transcribing"; }
+      else if (state === "downloading") { recBtn.textContent = "⏬ Downloading model…"; recBtn.classList.remove("live"); }
+      else if (state === "preparing") { recBtn.textContent = "⏳ Preparing…"; recBtn.classList.remove("live"); engEl.textContent = (engine || "") + " · preparing"; }
       else { recBtn.textContent = "🎤 Tap to speak"; recBtn.classList.remove("live"); recording = false; }
     }
 
@@ -145,9 +253,26 @@
       if (recording) { recording = false; stop(); setState("idle"); return; }
       recording = true; base = ta.value ? ta.value.trim() : "";
       listen({
+        engine: engineMode,                    // "fast" (default, unchanged) | "clinical" (Whisper)
         onPartial: function (t) { ta.value = (base ? base + " " : "") + t; refreshExtract(); },
         onFinal: function (t) { if (t) { base = ((base ? base + " " : "") + t).trim(); ta.value = base; } refreshExtract(); recording = false; setState("idle"); },
-        onError: function (err) { recording = false; setState("idle"); engEl.textContent = err === "mic-denied" ? "Microphone permission denied." : (err === "no-voice-engine" ? "No speech engine available on this device." : "Voice error: " + err); },
+        onDownloadProgress: function (p) { engEl.textContent = "Downloading model… " + Math.round((p || 0) * 100) + "%"; },
+        onError: function (err) {
+          recording = false; setState("idle");
+          if (err === "clinical-unavailable") {
+            engEl.textContent = "Clinical Dictation unavailable — switched to Fast. Tap to speak.";
+            engineMode = "fast";
+            [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x.getAttribute("data-mode") === "fast"); });
+            return;
+          }
+          engEl.textContent =
+            (err === "mic-denied" || err === "mic-permission-denied") ? "Microphone permission denied." :
+            err === "model-download-failed" ? "Model download failed — check your connection and tap to retry." :
+            (err === "model-corrupted" || err === "model-missing") ? "Clinical model unavailable — tap to re-download." :
+            err === "insufficient-storage" ? "Not enough free storage for the model." :
+            err === "no-voice-engine" ? "No speech engine available on this device." :
+            "Voice error: " + err;
+        },
         onState: setState
       });
     });
@@ -229,6 +354,14 @@
       ".smdv-kinds{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}",
       ".smdv-kind{border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:700 12.5px var(--sans);padding:8px 13px;border-radius:999px;cursor:pointer}",
       ".smdv-kind.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}",
+      ".smdv-modes{display:flex;gap:6px;margin-bottom:8px}",
+      ".smdv-mode{flex:1;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:800 13px var(--sans);padding:10px;border-radius:12px;cursor:pointer}",
+      ".smdv-mode.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}",
+      ".smdv-mode-hint{font:600 11px/1.4 var(--sans);color:var(--slate-soft,#64748b);margin:-2px 0 10px;min-height:0}",
+      ".smdv-model-mgr{margin:-2px 0 10px;min-height:0}",
+      ".smdv-model-del{border:1px solid var(--line,#e2e8f0);background:transparent;color:var(--slate-soft,#64748b);font:700 11.5px var(--sans);padding:7px 11px;border-radius:10px;cursor:pointer}",
+      ".smdv-model-del:active{transform:scale(.97)}",
+      ".smdv-model-gone{font:600 11.5px var(--sans);color:var(--slate-soft,#64748b);padding:4px 0}",
       ".smdv-rec{width:100%;border:none;border-radius:14px;background:var(--teal,#0f766e);color:#fff;font:800 15px var(--sans);padding:15px;cursor:pointer;margin-bottom:8px}",
       ".smdv-rec.live{background:#b91c1c;animation:smdvpulse 1.3s infinite}",
       "@keyframes smdvpulse{0%,100%{box-shadow:0 0 0 0 rgba(185,28,28,.5)}50%{box-shadow:0 0 0 8px rgba(185,28,28,0)}}",
@@ -255,5 +388,5 @@
     (document.head || document.documentElement).appendChild(s);
   }
 
-  window.SMD_VOICE = { listen: listen, stop: stop, openDialog: openDialog, available: function () { return { native: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribe), webspeech: !!(window.SpeechRecognition || window.webkitSpeechRecognition) && !isIOS(), aistt: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder) }; } };
+  window.SMD_VOICE = { listen: listen, stop: stop, openDialog: openDialog, available: function () { return { native: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribe), webspeech: !!(window.SpeechRecognition || window.webkitSpeechRecognition) && !isIOS(), aistt: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder), whisper: whisperAvailable() }; } };
 })();

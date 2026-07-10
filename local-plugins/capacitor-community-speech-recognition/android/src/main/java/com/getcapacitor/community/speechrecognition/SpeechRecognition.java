@@ -371,7 +371,7 @@ public class SpeechRecognition extends Plugin implements Constants {
         public void onError(int error) {
             if (!isActive()) return;
             String errorMssg = getErrorText(error);
-            Logger.error(getLogTag(), "Speech Recognition Error: " + errorMssg + " (Code: " + error + ")", null);
+            Logger.error("Speech Recognition Error: " + errorMssg + " (Code: " + error + ")", null);
 
             if (SpeechRecognition.this.streaming) {
                 if (SpeechRecognition.this.userStopped) {

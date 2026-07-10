@@ -1,0 +1,20 @@
+{
+  "name": "@stewardmd/capacitor-whisper",
+  "version": "1.0.0",
+  "description": "On-device Whisper (whisper.cpp) speech-to-text for MaiK Scribe 'Clinical Dictation'. Audio never leaves the device — only recognized text is returned. Fully offline after a one-time model download.",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "author": "StewardMD",
+  "license": "MIT",
+  "_vendored": "StewardMD-authored local plugin (SPM on iOS like capacitor-vision-ocr; NDK/JNI on Android). Links whisper.cpp v1.9.1 (MIT). No JS dist — accessed via Capacitor.Plugins.Whisper. Android native lands in a later commit; iOS first."
+}

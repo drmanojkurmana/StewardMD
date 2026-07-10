@@ -91,7 +91,7 @@
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
   function open() {
-    if (root) { root.classList.add("on"); document.body.style.overflow = "hidden"; return; }
+    if (root) { root.classList.add("on"); document.body.style.overflow = "hidden"; enableRotate(); return; }
     injectCSS();
     root = document.createElement("div"); root.className = "abg"; root.id = "abgOverlay";
     root.innerHTML = shell();
@@ -100,8 +100,45 @@
     bind();
     requestAnimationFrame(function () { root.classList.add("on"); });
     document.body.style.overflow = "hidden";
+    enableRotate();
   }
-  function close() { if (root) { root.classList.remove("on"); document.body.style.overflow = ""; } }
+  function close() { if (root) { root.classList.remove("on"); document.body.style.overflow = ""; } disableRotate(); }
+
+  /* ─────────────── Rotation: unlock for the wide grid + rotate hint ─────────────── */
+  var _isPortrait = function () {
+    try { return window.matchMedia("(orientation: portrait)").matches; } catch (e) { return (window.innerHeight || 0) >= (window.innerWidth || 0); }
+  };
+  function enableRotate() {
+    try { if (window.SMD_NATIVE && SMD_NATIVE.unlockRotation) SMD_NATIVE.unlockRotation(); } catch (e) {}
+    if (_isPortrait()) showRotateHint();
+    window.addEventListener("orientationchange", onOrient);
+    window.addEventListener("resize", onOrient);
+  }
+  function disableRotate() {
+    window.removeEventListener("orientationchange", onOrient);
+    window.removeEventListener("resize", onOrient);
+    hideRotateHint();
+    try { if (window.SMD_NATIVE && SMD_NATIVE.lockPortrait) SMD_NATIVE.lockPortrait(); } catch (e) {}
+  }
+  function onOrient() {
+    if (_isPortrait()) { if (root && root.classList.contains("on")) showRotateHint(); }
+    else hideRotateHint();   // rotated to landscape — the hint has done its job
+  }
+  function showRotateHint() {
+    if (!root || root.querySelector("#abgRotate")) return;
+    var h = document.createElement("div");
+    h.className = "abg-rotate"; h.id = "abgRotate";
+    h.innerHTML = '<span class="abg-rotate-ic">🔄</span><span class="abg-rotate-tx">Rotate your phone for a wider view of the grid.</span><button class="abg-rotate-x" data-act="rotate-dismiss" aria-label="Dismiss">✕</button>';
+    root.appendChild(h);
+    requestAnimationFrame(function () { h.classList.add("on"); });
+    h.addEventListener("click", function (e) { if (e.target.closest("[data-act='rotate-dismiss']")) hideRotateHint(); });
+  }
+  function hideRotateHint() {
+    var h = root && root.querySelector("#abgRotate");
+    if (!h) return;
+    h.classList.remove("on");
+    setTimeout(function () { if (h && h.parentNode) h.parentNode.removeChild(h); }, 220);
+  }
 
   function shell() {
     return '' +
@@ -398,7 +435,13 @@
       ".abg-empty b{display:block;font:800 16px var(--f);color:var(--ink);margin-bottom:6px}",
       ".abg-empty p{font:500 13px/1.6 var(--f);max-width:320px;margin:0 auto}",
       ".abg-toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(10px);background:#0F172A;color:#fff;font:600 13px var(--f);padding:11px 18px;border-radius:12px;z-index:970;opacity:0;transition:.2s;pointer-events:none;max-width:88vw;text-align:center}",
-      ".abg-toast.on{opacity:1;transform:translateX(-50%)}"
+      ".abg-toast.on{opacity:1;transform:translateX(-50%)}",
+      ".abg-rotate{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%) translateY(-8px);display:flex;align-items:center;gap:9px;background:var(--tl,#0f766e);color:#fff;font:600 13px/1.35 var(--f);padding:10px 10px 10px 14px;border-radius:12px;z-index:990;opacity:0;transition:opacity .2s,transform .2s;box-shadow:0 8px 26px rgba(8,15,26,.32);max-width:92vw}",
+      ".abg-rotate.on{opacity:1;transform:translateX(-50%)}",
+      ".abg-rotate-ic{font-size:16px;animation:abgrot 1.6s ease-in-out infinite}",
+      "@keyframes abgrot{0%,60%,100%{transform:rotate(0)}75%{transform:rotate(-28deg)}88%{transform:rotate(8deg)}}",
+      ".abg-rotate-tx{flex:1}",
+      ".abg-rotate-x{border:none;background:rgba(255,255,255,.22);color:#fff;width:22px;height:22px;border-radius:999px;font:700 12px var(--f);cursor:pointer;line-height:1;flex:none}"
     ].join("");
     (document.head || document.documentElement).appendChild(s);
   }

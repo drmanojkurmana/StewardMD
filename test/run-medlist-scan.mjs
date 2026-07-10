@@ -70,6 +70,7 @@ try {
   // 2) STUB scanExtract → open scan → review screen lists rows w/ confidence +
   //    checkboxes; NOTHING auto-added to getList().
   await ev(`
+    window.SMD_IS_NATIVE = true;
     MEDLIST.clearAll();
     window.__origScan = MEDLIST.scanExtract;
     MEDLIST.scanExtract = function(dataUrl){ return Promise.resolve(${stubRows}); };

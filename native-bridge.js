@@ -31,6 +31,20 @@
   // so we let SMD_VOICE fall through to its Web Speech engine (Chrome-in-WebView) instead.
   var isIOS = (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) === "ios";
 
+  // ── On-device Whisper (Clinical Dictation) models. The bytes are the official ggml quantised
+  // Whisper weights (Hugging Face ggerganov/whisper.cpp, MIT); StewardMD RE-HOSTS them on its own
+  // origin (never a runtime hotlink). The SHA-256 is PINNED here and verified NATIVELY before first
+  // use (mismatch → model-corrupted → re-download). Audio is NEVER uploaded — only this model file
+  // is fetched, once. Default is base multilingual q5_1 (~57 MB); tiny q5_1 (~31 MB) for low-end. ──
+  var WHISPER_MODEL_HOST = "https://models.stewardmd.in/whisper";   // TODO(host): confirm R2 vs Pages origin before enabling in prod
+  var WHISPER_MODELS = {
+    // Default: small English-only q5_1 (~181 MB) — best accuracy for accented (Indian) English +
+    // medical terms among the on-device options; English-only because Clinical Dictation is English-locked.
+    "small.en-q5_1": { file: "ggml-small.en-q5_1.bin", sha256: "bfdff4894dcb76bbf647d56263ea2a96645423f1669176f4844a1bf8e478ad30", bytes: 190098681 },
+    "base-q5_1": { file: "ggml-base-q5_1.bin", sha256: "422f1ae452ade6f30a004d7e5c6a43195e4433bc370bf23fac9cc591f01a8898", bytes: 59707625 },
+    "tiny-q5_1": { file: "ggml-tiny-q5_1.bin", sha256: "818710568da3ca15689e31a743197b520007872ff9576237bda97bd1b469c3d7", bytes: 32152673 }
+  };
+
   // ---- Native helpers (native-only; stay UNDEFINED on web because this file
   // early-returns above). Callers gate on window.SMD_IS_NATIVE / window.SMD_NATIVE
   // so the web build is byte-for-byte unchanged. ----
@@ -147,7 +161,8 @@
       opts = opts || {};
       var P = plugins();
       var SP = P && P.SpeechRecognition;
-      if (!(SP && SP.start)) throw new Error("speech-unavailable");
+      // Android SpeechRecognizer thrashes under streaming; force fallback to Web Speech API.
+      if (!isIOS || !(SP && SP.start)) throw new Error("speech-unavailable");
       var self = this, last = "", done = false;
       // Session token: every transcribe() bumps it. Callbacks/timers left over from a PRIOR
       // session (the 450ms "stopped" finish, the 800ms stop fallback) check `current()` and
@@ -230,6 +245,81 @@
       var rm = function (s) { try { if (!s) return; if (typeof s.remove === "function") s.remove(); else if (typeof s.then === "function") s.then(function (h) { try { if (h && h.remove) h.remove(); } catch (e) {} }); } catch (e) {} };
       rm(this._speechSub); rm(this._stateSub);
       this._speechSub = null; this._stateSub = null;
+    },
+
+    // MaiK Scribe — CLINICAL DICTATION via the on-device Whisper plugin (@stewardmd/capacitor-whisper).
+    // A SEPARATE engine from transcribe() (SFSpeech): audio never leaves the device, and it NEVER
+    // falls back to any cloud transcription. Throws SYNCHRONOUSLY when the plugin is absent (web, or
+    // Android — not built yet) so SMD_VOICE can offer Fast Dictation instead. Stop-to-transcribe:
+    // startTranscribe → (speak) → stopWhisper() runs inference natively → onFinal.
+    // opts: { language?, model?, initialPrompt?, onPartial?, onFinal?, onError?, onStateChange?, onDownloadProgress? }
+    transcribeWhisper: function (opts) {
+      opts = opts || {};
+      var P = plugins(); var W = P && P.Whisper;
+      if (!(W && W.startTranscribe)) throw new Error("whisper-unavailable");
+      var self = this;
+      var modelKey = opts.model || "base-q5_1";
+      var m = WHISPER_MODELS[modelKey]; if (!m) throw new Error("whisper-unknown-model");
+      // Session token: a new session supersedes stale event handlers/callbacks from a prior one.
+      var token = (self._wToken = (self._wToken || 0) + 1);
+      function current() { return self._wToken === token; }
+      self._removeWhisperSubs();
+      var done = false;
+      function fail(code) { if (done || !current()) return; done = true; self._removeWhisperSubs(); try { if (W.cancel) W.cancel(); } catch (e) {} if (opts.onError) opts.onError(code || "transcription-failure"); }
+      function finalText(txt) { if (done || !current()) return; done = true; self._removeWhisperSubs(); if (opts.onFinal) opts.onFinal(String(txt != null ? txt : "")); }
+
+      self._wSubs = [];
+      function on(ev, fn) { try { self._wSubs.push(W.addListener(ev, function (d) { if (current()) fn(d || {}); })); } catch (e) {} }
+      on("whisperState", function (d) { if (opts.onStateChange) opts.onStateChange(d.state); });
+      on("whisperPartial", function (d) { if (opts.onPartial && d.text != null) opts.onPartial(String(d.text)); });
+      on("whisperFinal", function (d) { finalText(d.text); });
+      on("whisperError", function (d) { fail(d.code || "transcription-failure"); });
+      on("whisperDownloadProgress", function (d) { if (opts.onDownloadProgress) opts.onDownloadProgress(Number(d.progress) || 0); });
+
+      var lang = opts.language || "en";   // default English (Indian-English handled by initial_prompt + model); not the device locale
+      function begin() {
+        if (!current()) return;
+        W.startTranscribe({ model: modelKey, language: lang, initialPrompt: opts.initialPrompt || "" })
+          .catch(function (e) { fail((e && e.code) || "recording-failure"); });
+      }
+      // Ensure the model is installed (download only if missing), then start recording.
+      W.isModelInstalled({ model: modelKey }).then(function (r) {
+        if (!current()) return;
+        if (r && r.installed) { begin(); return; }
+        if (opts.onStateChange) opts.onStateChange("downloading");
+        W.downloadModel({ model: modelKey, url: WHISPER_MODEL_HOST + "/" + m.file, sha256: m.sha256 })
+          .then(function () { begin(); })
+          .catch(function (e) { fail((e && e.code) || "model-download-failed"); });
+      }).catch(function (e) { fail((e && e.code) || "transcription-failure"); });
+
+      return function () { self.stopWhisper(); };
+    },
+    // Stop recording and transcribe (final arrives via the whisperFinal event → onFinal).
+    stopWhisper: function () { var P = plugins(); var W = P && P.Whisper; try { if (W && W.stopTranscribe) W.stopTranscribe(); } catch (e) {} },
+    // Abort with no transcription (release native resources).
+    cancelWhisper: function () { var P = plugins(); var W = P && P.Whisper; try { if (W && W.cancel) W.cancel(); } catch (e) {} this._removeWhisperSubs(); },
+    // Is a Clinical model on the device? Checks the given model, or ALL known models (no arg) so the
+    // "Remove model" UI reflects any downloaded weights. → { installed, bytes }.
+    whisperModelInstalled: function (model) {
+      var P = plugins(); var W = P && P.Whisper;
+      if (!(W && W.isModelInstalled)) return Promise.resolve({ installed: false, bytes: 0 });
+      var keys = model ? [model] : Object.keys(WHISPER_MODELS);
+      return Promise.all(keys.map(function (k) { return W.isModelInstalled({ model: k }).catch(function () { return { installed: false, bytes: 0 }; }); }))
+        .then(function (rs) { var any = false, bytes = 0; rs.forEach(function (r) { if (r && r.installed) { any = true; bytes += (r.bytes || 0); } }); return { installed: any, bytes: bytes }; });
+    },
+    // Delete the given Clinical model, or ALL known models (no arg) to fully free the storage.
+    // Re-downloads automatically on next Clinical use.
+    deleteWhisperModel: function (model) {
+      var P = plugins(); var W = P && P.Whisper;
+      if (!(W && W.deleteModel)) return Promise.reject(new Error("whisper-unavailable"));
+      var keys = model ? [model] : Object.keys(WHISPER_MODELS);
+      return Promise.all(keys.map(function (k) { return W.deleteModel({ model: k }).catch(function () {}); }));
+    },
+    _wToken: 0,
+    _wSubs: null,
+    _removeWhisperSubs: function () {
+      var subs = this._wSubs || []; this._wSubs = [];
+      subs.forEach(function (s) { try { if (!s) return; if (typeof s.remove === "function") s.remove(); else if (typeof s.then === "function") s.then(function (h) { try { if (h && h.remove) h.remove(); } catch (e) {} }); } catch (e) {} });
     },
 
     // ---- Screen orientation. The app is portrait-locked everywhere (native default is

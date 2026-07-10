@@ -28,7 +28,15 @@ let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if
 try {
   let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
-  ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.method === "Runtime.consoleAPICalled") {
+      console.log("BROWSER CONSOLE:", m.params.args.map(a => a.value !== undefined ? a.value : JSON.stringify(a)).join(" "));
+    } else if (m.method === "Runtime.exceptionThrown") {
+      console.error("BROWSER EXCEPTION:", JSON.stringify(m.params.exceptionDetails));
+    }
+    if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); }
+  };
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.navigate", { url: BASE });
@@ -127,7 +135,7 @@ try {
   ok(await ev(`return MEDLIST.getList().length`) === 0, "remove actually removes from list");
 
   // add-option buttons present; Scan is now ENABLED (PR3), Ward Sync still "Coming soon"
-  await ev(`MEDLIST.clearAll(); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  await ev(`window.SMD_IS_NATIVE = true; MEDLIST.clearAll(); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
   ok(await ev(`return /Search Drug Index/.test(document.getElementById("ml-test").innerText)`) === true, "'Search Drug Index' option present");
   // Redesign: entry points are action cards; a manual-entry opener carries data-ml-open='manual'.
   ok(await ev(`return !!document.querySelector("#ml-test [data-ml-open='manual']")`) === true, "manual-entry opener present");
