@@ -1877,6 +1877,7 @@
       var res=document.getElementById("mcRes_"+id);
       if(!out){ res.innerHTML=""; return; }
       if(out.err){ res.innerHTML='<div class="mc-res-err">'+esc(out.err)+'</div>'; return; }
+      try { if (window.SMD_KU) SMD_KU.emit("calc", id); } catch(e){}   // KU: used a calculator (deduped per day server-side)
       if(out.html){ res.innerHTML=out.html; return; }
       res.innerHTML='<div class="mc-res-box"><div class="mc-res-num">'+esc(out.v)+(out.u?' <small>'+esc(out.u)+'</small>':"")+'</div>'+(out.i?'<div class="mc-res-i">'+out.i+'</div>':"")+'</div>';
     }
