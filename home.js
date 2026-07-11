@@ -1,4 +1,4 @@
-/* StewardMD - premium home (v2). DEFAULT UI as of gold25.
+/* StewardMD — premium home (v2). DEFAULT UI as of gold25.
    Advanced UI by MaiK is on for everyone by default. Users can switch to
    Classic from Settings / the sidebar (persists as smd_home_v2="0"), or via
    ?home=classic. ?home=v2 forces it back on. Presentation layer only: every
@@ -7,7 +7,7 @@
    gate); the classic-ui-stable backup is independent and untouched. */
 (function () {
   "use strict";
-  function flagged() { return true; }  // Classic UI removed - Advanced (by MaiK) is the only UI.
+  function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.
   var IS_V2 = flagged();
 
   // Add an "Interface: Advanced UI (by MaiK) / Classic UI" switch into the existing
@@ -16,7 +16,7 @@
   // (Interface, Credits, Experimental toggles, MaiK provider card, standalone Ward
   // Sync) into: primary clinical actions at the top + advanced controls tucked into
   // the existing Settings section as collapsible subgroups + credits inside About.
-  // Functionality/flags unchanged - this only reorganises navigation. Runs on each
+  // Functionality/flags unchanged — this only reorganises navigation. Runs on each
   // SB.open (the menu is rebuilt) and is idempotent.
   function setupSidebarToggle(isV2) {
     function flag(k, def) { try { var v = localStorage.getItem(k); return v === null ? def : v === "1"; } catch (e) { return def; } }
@@ -57,7 +57,7 @@
       // 0) strip any legacy appended blocks (older builds / re-open)
       ["[data-smd-ui]", "[data-smd-labs]", "[data-ghis-menu]", "[data-smd-nav]", "[data-smd-top]"].forEach(function (sel) { menu.querySelectorAll(sel).forEach(function (e) { e.remove(); }); });
 
-      // 1) TOP primary actions - add "Dx My Patient" + "Ward Sync" beside the existing
+      // 1) TOP primary actions — add "Dx My Patient" + "Ward Sync" beside the existing
       //    Clinical Reasoning / Drugs Database links.
       var links = Array.prototype.slice.call(menu.querySelectorAll(".sb-main-link"));
       var cr = links.filter(function (b) { return /Clinical Reasoning/i.test(b.textContent); })[0];
@@ -75,9 +75,9 @@
         var engineBody = swRow("reason", "Reasoning v2", "Live differential in the workflow", flag("smd_reason_v2", true)) +
           swRow("expanded", "Expanded Harrison KB", "+268 reference diseases as candidates", flag("smd_kb_expanded", false)) +
           swRow("safety", "Organ-safety overlay", "Renal / hepatic / QT flags on antibiotic advice", flag("smd_safety_overlay", true)) +
-          '<div class="smd-nav-note">⚗️ Experimental - for clinician review.</div>';
-        var aiBody = swRow("ai", "MaiK - Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", false)) +
-          '<div class="smd-nav-note">AI advisory - clinician confirmation required.</div>';
+          '<div class="smd-nav-note">⚗️ Experimental — for clinician review.</div>';
+        var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", false)) +
+          '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync</button>';
         var toolsBody = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
@@ -87,7 +87,7 @@
         // The New UI = the app-wide redesign (smd_redesign_nav → body.rds-on / ui-v3) PLUS the
         // v4 home layout (smd_home_v4). Old = neither (classic v2). Off is the DEFAULT. The switch
         // keys off smd_redesign_nav (the dominant flag). Persists both + reloads (rendered at load).
-        var uiBody = swRow("newui", "New interface", "Redesigned UI + v4 home - off = classic v2", flag("smd_redesign_nav", false));
+        var uiBody = swRow("newui", "New interface", "Redesigned UI + v4 home — off = classic v2", flag("smd_redesign_nav", false));
         setBody.insertAdjacentHTML("beforeend",
           group("interface", "Interface", uiBody, true) +
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
@@ -229,7 +229,7 @@
   // stewardship output (#outputArea) instead of leaving it hidden behind the v4 Home.
   window.SMD_hideHome = hideV2;
   function showV2() { if (root) root.classList.add("on"); if (fab) fab.classList.remove("on"); var m = root && root.querySelector(".v3-main"); if (m) m.scrollTop = 0; try { if (root && root.classList.contains("rnav") && typeof hydrateRnav === "function") hydrateRnav(); } catch (e) {} }
-  // Universal "go home" - closes any open overlay/sheet and returns to the v3 home. Wired to the
+  // Universal "go home" — closes any open overlay/sheet and returns to the v3 home. Wired to the
   // logo (anywhere) and the home FAB, so the user can get home from any area.
   function goHome() {
     // 1) Close every module via its own API (resets internal state + restores body scroll).
@@ -243,7 +243,7 @@
     apis.forEach(function (fn) { try { if (typeof fn === "function") fn(); } catch (e) {} });
     try { closeSheet(); } catch (e) {}
     try { if (window.closeDrawer) window.closeDrawer(); } catch (e) {}
-    // 2) Backstop - force-hide EVERY overlay/drawer/modal so nothing keeps running underneath.
+    // 2) Backstop — force-hide EVERY overlay/drawer/modal so nothing keeps running underneath.
     //    open-class overlays: just remove their show-class (do NOT add .hidden, or they can't reopen).
     ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "mdOverlay", "dxOverlay", "dbOverlay",
       "myCasesPanel", "smdSearchPanel", "sbrefOverlay", "dbDrawer", "dbScrim", "sbDrawer", "sbBackdrop",
@@ -297,11 +297,11 @@
       '<div class="smd-or">or</div>' +
       '<button type="button" class="reason-btn" id="smdReasonBtn">' +
         '<span class="rb-title">Generate Clinical Reasoning</span>' +
-        '<span class="rb-sub">Work through the full differential - including non-infective causes</span>' +
+        '<span class="rb-sub">Work through the full differential — including non-infective causes</span>' +
       '</button>' +
       '<div class="decision-legend">' +
-        '<div class="dl-row"><span class="dl-dot dl-red"></span><span><b>Clinical Decision</b> - quick antibiotic answer: yes / no &amp; which agent</span></div>' +
-        '<div class="dl-row"><span class="dl-dot dl-blue"></span><span><b>Clinical Reasoning</b> - explore all likely diagnoses, not just infection</span></div>' +
+        '<div class="dl-row"><span class="dl-dot dl-red"></span><span><b>Clinical Decision</b> — quick antibiotic answer: yes / no &amp; which agent</span></div>' +
+        '<div class="dl-row"><span class="dl-dot dl-blue"></span><span><b>Clinical Reasoning</b> — explore all likely diagnoses, not just infection</span></div>' +
       '</div>';
     runBtn.parentNode.insertBefore(wrap, runBtn.nextSibling);
     document.getElementById("smdReasonBtn").addEventListener("click", function () {
@@ -324,7 +324,7 @@
 
   // Inject a Share / Save-as-PDF bar into the main clinical-decision output (#outputArea)
   // whenever a decision is rendered. v3 layer only; reuses the in-page print-stylesheet
-  // approach so mobile shows the native sheet (Cancel returns - no stuck tab).
+  // approach so mobile shows the native sheet (Cancel returns — no stuck tab).
   var _osObs;
   function injectCaseShare() {
     if (!document.body.classList.contains("ui-v2")) return;
@@ -336,7 +336,7 @@
     bar.innerHTML = '<button type="button" data-cs="share">📤 Share case</button>'
                   + '<button type="button" data-cs="pdf">🖨 Save as PDF</button>';
     out.insertBefore(bar, out.firstChild);
-    // listeners handled by ONE delegated document listener (watchCaseShare) - survives re-renders.
+    // listeners handled by ONE delegated document listener (watchCaseShare) — survives re-renders.
   }
   var _csDelegated = false;
   function watchCaseShare() {
@@ -347,7 +347,7 @@
         if (!b) return;
         var a = b.getAttribute("data-cs");
         try { console.log("[smd] case-share click:", a); } catch (x) {}
-        if (a === "share") { try { shareCase(); } catch (er) { try { console.error("[smd] shareCase err", er); } catch (z) {} toast("Share error - try again"); } }
+        if (a === "share") { try { shareCase(); } catch (er) { try { console.error("[smd] shareCase err", er); } catch (z) {} toast("Share error — try again"); } }
         else if (a === "pdf") { try { printCase(); } catch (er) {} }
       }, true);
     }
@@ -361,12 +361,12 @@
     var out = document.getElementById("outputArea");
     var t = out ? (out.innerText || out.textContent || "") : "";
     t = t.replace(/\n{3,}/g, "\n\n").trim();
-    return "StewardMD - Clinical decision\n\n" + t + "\n\nDecision support only - verify against clinical judgment & local protocol.";
+    return "StewardMD — Clinical decision\n\n" + t + "\n\nDecision support only — verify against clinical judgment & local protocol.";
   }
   function shareCase(out) {
     if (window.CASESHARE && CASESHARE.shareCurrent) { try { CASESHARE.shareCurrent(); return; } catch (e) {} }
     var txt = caseText();
-    try { if (navigator.share) { navigator.share({ title: "StewardMD - Clinical decision", text: txt }).catch(function () {}); return; } } catch (e) {}
+    try { if (navigator.share) { navigator.share({ title: "StewardMD — Clinical decision", text: txt }).catch(function () {}); return; } } catch (e) {}
     try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt); toast("Case copied to clipboard"); return; } } catch (e) {}
     toast("Sharing not supported here");
   }
@@ -380,15 +380,15 @@
       var d = DX._differential();
       if (!d) return "";
       function e(x) { return String(x == null ? "" : x).replace(/[&<>]/g, function (c) { return c === "&" ? "&amp;" : c === "<" ? "&lt;" : "&gt;"; }); }
-      function rows(a) { return (a || []).slice(0, 15).map(function (r, i) { return '<div style="display:flex;justify-content:space-between;gap:10px;font:500 12.5px/1.7 sans-serif;padding:1px 0"><span>' + (i + 1) + ". " + e(r.name) + '</span><span style="color:#64748B">' + (r.score != null ? r.score + "/100" : "") + "</span></div>"; }).join("") || '<div style="font-size:12px;color:#888">-</div>'; }
-      return '<div style="margin-top:18px;padding-top:12px;border-top:1px solid #E2E8F0"><div style="font:800 13px sans-serif;margin-bottom:6px">Full differential - infectious</div>' + rows(d.inf) + '<div style="font:800 13px sans-serif;margin:12px 0 6px">Non-infectious</div>' + rows(d.ni) + '<div style="font:500 10px sans-serif;color:#888;margin-top:8px">Reasoning differential (decision support) - not a confirmed diagnosis.</div></div>';
+      function rows(a) { return (a || []).slice(0, 15).map(function (r, i) { return '<div style="display:flex;justify-content:space-between;gap:10px;font:500 12.5px/1.7 sans-serif;padding:1px 0"><span>' + (i + 1) + ". " + e(r.name) + '</span><span style="color:#64748B">' + (r.score != null ? r.score + "/100" : "") + "</span></div>"; }).join("") || '<div style="font-size:12px;color:#888">—</div>'; }
+      return '<div style="margin-top:18px;padding-top:12px;border-top:1px solid #E2E8F0"><div style="font:800 13px sans-serif;margin-bottom:6px">Full differential — infectious</div>' + rows(d.inf) + '<div style="font:800 13px sans-serif;margin:12px 0 6px">Non-infectious</div>' + rows(d.ni) + '<div style="font:500 10px sans-serif;color:#888;margin-top:8px">Reasoning differential (decision support) — not a confirmed diagnosis.</div></div>';
     } catch (err) { return ""; }
   }
   function printCase() {
     try {
       var out = document.getElementById("outputArea");
       if (!out || !out.children.length) { toast("Generate a clinical decision first."); return; }
-      // Native: window.print() is a no-op in WKWebView - export the FULL expanded
+      // Native: window.print() is a no-op in WKWebView — export the FULL expanded
       // decision (cloned output + full differential) as a styled page FILE, then open
       // the iOS share sheet, which offers Print → Save as PDF / Save to Files. Web keeps
       // real window.print() below.
@@ -398,8 +398,8 @@
           var nbar = nclone.querySelector("#smdCaseShare"); if (nbar) nbar.remove();
           var nfrag = nclone.innerHTML;
           try { var ndh = caseDifferentialHTML(); if (ndh) nfrag += ndh; } catch (e) {}
-          window.SMD_NATIVE.saveHtmlFile(nfrag, "StewardMD - Clinical decision", "StewardMD-clinical-decision").catch(function () { toast("Save unavailable"); });
-        } catch (e) { window.SMD_NATIVE.exportPdf(caseText(), "StewardMD - Clinical decision").catch(function () { toast("Save unavailable"); }); }
+          window.SMD_NATIVE.saveHtmlFile(nfrag, "StewardMD — Clinical decision", "StewardMD-clinical-decision").catch(function () { toast("Save unavailable"); });
+        } catch (e) { window.SMD_NATIVE.exportPdf(caseText(), "StewardMD — Clinical decision").catch(function () { toast("Save unavailable"); }); }
         return;
       }
       var old = document.getElementById("smdPrintArea"); if (old) old.remove();
@@ -436,8 +436,8 @@
       p.innerHTML =
         '<header class="v3-header"><button class="v3-ic" data-cx="back" aria-label="Back">' + svg("chev") + '</button><div class="v3-brand"><div style="min-width:0"><div class="v3-brand-tt">Start a Case</div><div class="v3-brand-sub">Choose how to enter findings</div></div></div></header>' +
         '<main class="v3-main"><div class="v3-stack">' +
-          '<button class="v3-primary" data-m="simple"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Simple</div><div class="sub">Guided, step-by-step - pick the problem, answer a few questions</div></div><div class="arr">' + svg("arrow") + '</div></button>' +
-          '<button class="v3-secondary" data-m="advanced"><div class="ic">' + svg("sliders") + '</div><div style="flex:1;min-width:0"><div class="tt">Advanced</div><div class="sub">Full clinical form - all findings, vitals, labs &amp; risk at once</div></div><div class="arr">' + svg("chev") + '</div></button>' +
+          '<button class="v3-primary" data-m="simple"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Simple</div><div class="sub">Guided, step-by-step — pick the problem, answer a few questions</div></div><div class="arr">' + svg("arrow") + '</div></button>' +
+          '<button class="v3-secondary" data-m="advanced"><div class="ic">' + svg("sliders") + '</div><div style="flex:1;min-width:0"><div class="tt">Advanced</div><div class="sub">Full clinical form — all findings, vitals, labs &amp; risk at once</div></div><div class="arr">' + svg("chev") + '</div></button>' +
           '<div class="v3-foot">You can switch modes anytime from the header.</div>' +
         '</div></main>';
       root.appendChild(p);
@@ -454,7 +454,7 @@
     p.classList.add("on");
   }
   // --- action delegates. Overlay screens (drawer/search/calculators/drugs/guidelines/about) layer OVER the v2 home
-  //     (higher z-index) and return to it when closed - so we DON'T hide the home for them. Only in-shell flows hide it. ---
+  //     (higher z-index) and return to it when closed — so we DON'T hide the home for them. Only in-shell flows hide it. ---
   var ACT = {
     startcase: openCaseChooser,
     reasoning: function () { openDxChooser(); },
@@ -466,7 +466,7 @@
     drugmenu: function () {
       openSheet('<div class="hv-sh-t">Drugs &amp; Interactions</div>' +
         mi("pills", "Drug Database", "Brands · doses · spectrum · cautions", "db") +
-        mi("interact", "Interaction Checker", "Check drug-drug interactions", "ix"));
+        mi("interact", "Interaction Checker", "Check drug–drug interactions", "ix"));
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
@@ -545,7 +545,7 @@
       "body.hv-sheet-open .hv-fab,body.hv-sheet-open #harrisonQuotePopup,body.hv-sheet-open .ghis-ward-fab{display:none!important}",
       ".hv-sheet{z-index:calc(var(--z-cases, 600) + 40)}.hv-scrim{z-index:calc(var(--z-cases, 600) + 39)}",
       // Acknowledgements sheet: render the names' hover tooltips (roles, bios, publications)
-      // INLINE as readable cards - visible on touch, no overlap. Names stack; each description
+      // INLINE as readable cards — visible on touch, no overlap. Names stack; each description
       // sits under its name.
       ".hv-ack .ack-names{display:block!important}",
       ".hv-ack .ack-role{font:700 11px var(--hfont,var(--sans))!important;text-transform:uppercase;letter-spacing:.05em;color:var(--hmut,#5a7184)!important;margin:18px 0 2px!important}",
@@ -592,11 +592,11 @@
       "ul.smd-facts{list-style:none;padding:0;margin:0}",
       "ul.smd-facts li{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--slate);line-height:1.5}",
       "ul.smd-facts .fn{font:800 17px var(--sans);color:var(--teal);min-width:62px;flex:0 0 auto}",
-      // density (spacing) - independent of font zoom
+      // density (spacing) — independent of font zoom
       "body.smd-dens-compact #homeV2 .hv-stack{gap:11px}body.smd-dens-comfortable #homeV2 .hv-stack{gap:20px}body.smd-dens-large #homeV2 .hv-stack{gap:26px}",
       "body.smd-dens-compact #homeV2 .hv-hero{padding:14px}body.smd-dens-comfortable #homeV2 .hv-hero{padding:24px}body.smd-dens-large #homeV2 .hv-hero{padding:28px}",
       "body.smd-dens-compact #homeV2 .hv-tile,body.smd-dens-compact #homeV2 .hv-primary,body.smd-dens-compact #homeV2 .hv-sec{padding:13px}body.smd-dens-large #homeV2 .hv-tile{padding:20px}",
-      // ===== Advanced UI theme - restyles the WHOLE app by overriding its design tokens (active only with body.ui-v2) =====
+      // ===== Advanced UI theme — restyles the WHOLE app by overriding its design tokens (active only with body.ui-v2) =====
       "body.ui-v2{--teal:#0F766E;--teal-soft:#CCFBF1;--paper:#F8FAFC;--panel:#FFFFFF;--line:#E2E8F0;--ink:#0F172A;--slate:#334155;--slate-soft:#64748B;--sans:'Inter',-apple-system,'SF Pro Display','Segoe UI',Roboto,system-ui,sans-serif}",
       "body.ui-v2.dark{--paper:#0B1220;--panel:#111B2E;--line:#1E2B43;--ink:#E7EDF5;--slate:#9FB2C6;--slate-soft:#7E92A8;--teal:#2DD4BF;--teal-soft:#0C2E2A}",
       "body.ui-v2{font-family:var(--sans)}",
@@ -746,7 +746,7 @@
       var a = JSON.parse(localStorage.getItem("stewardmd_account") || "{}");
       var n = String((a && a.name) || "").trim();
       if (!n || (a && a.type === "guest" && !a.name)) return "";
-      if (n.indexOf("@") > -1) return "";                 // Apple private-relay etc. store an email as "name" - don't greet with it
+      if (n.indexOf("@") > -1) return "";                 // Apple private-relay etc. store an email as "name" — don't greet with it
       return n.split(/\s+/)[0];
     } catch (e) { return ""; }
   }
@@ -772,7 +772,7 @@
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
         '<div class="v4-greet"><div class="ey">' + dateV4() + '</div><div class="hi">' + greetLineV4() + '</div><div class="q">What would you like to do?</div></div>' +
-        '<section class="v4-hero"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Clinical decision support</span><p class="v4-hero-p">Evidence-based decisions at the point of care - antimicrobials, differentials, ICU &amp; more.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
+        '<section class="v4-hero"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Clinical decision support</span><p class="v4-hero-p">Evidence-based decisions at the point of care — antimicrobials, differentials, ICU &amp; more.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
         '<div class="v4-qrow">' +
           '<button class="v4-qc" data-act="syndromes" aria-label="Syndromes">' + svg("syndromes") + '<span>Syndromes</span></button>' +
           '<button class="v4-qc" data-act="ward" aria-label="Ward Sync">' + svg("ward") + '<span>Ward Sync</span></button>' +
@@ -813,7 +813,7 @@
       var q = location.search || "";
       if (/[?&]rnav=0\b/.test(q)) return false;                 // explicit off
       if (/[?&]rnav=1\b/.test(q)) return true;                  // explicit on
-      return localStorage.getItem("smd_redesign_nav") === "1";  // DEFAULT OFF - classic v2 is default; New opt-in via Settings toggle
+      return localStorage.getItem("smd_redesign_nav") === "1";  // DEFAULT OFF — classic v2 is default; New opt-in via Settings toggle
     } catch (e) { return true; }
   }
   function ric(name) { return '<span class="rds-icon" aria-hidden="true">' + name + '</span>'; }
@@ -837,12 +837,12 @@
   function iconifyEmoji(scope) {
     if (!scope) return;
     try {
-      // 1) dedicated .ic icon spans (sidebar rows, some header) - whole content is the emoji
+      // 1) dedicated .ic icon spans (sidebar rows, some header) — whole content is the emoji
       scope.querySelectorAll(".ic:not([data-ic])").forEach(function (el) {
         var sym = EMOJI2SYM[(el.textContent || "").trim()];
         if (sym) { el.innerHTML = '<span class="rds-icon" aria-hidden="true">' + sym + "</span>"; el.setAttribute("data-ic", "1"); }
       });
-      // theme knob (☀️/🌙) - NOT marked data-ic so it re-swaps after app.js flips it on toggle
+      // theme knob (☀️/🌙) — NOT marked data-ic so it re-swaps after app.js flips it on toggle
       scope.querySelectorAll(".toggle-knob").forEach(function (el) {
         var s = EMOJI2SYM[(el.textContent || "").trim()];
         if (s) el.innerHTML = '<span class="rds-icon" aria-hidden="true">' + s + "</span>";
@@ -893,7 +893,7 @@
           '<button class="rnav-qa-btn" data-act="interactions" aria-label="Medicines &amp; scan">' + ric("photo_camera") + '<span>Scan Meds</span></button>' +
           '<button class="rnav-qa-btn" data-act="dictate" aria-label="Dictate">' + ric("mic") + '<span>Dictate</span></button>' +
         '</div>' +
-        '<section class="rnav-hero"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b>MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care - antimicrobials, differentials, ICU &amp; more.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
+        '<section class="rnav-hero"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b>MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care — antimicrobials, differentials, ICU &amp; more.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
         '<div class="rnav-qrow">' +
           '<button class="rnav-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
           '<button class="rnav-qc" data-act="ward" aria-label="Ward Sync">' + ric("local_hospital") + '<span>Ward Sync</span></button>' +
@@ -1001,15 +1001,15 @@
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
-        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">Steward<span class="v3-md">MD</span></h1><span class="v3-tag">Clinical decision support for doctors</span><p>StewardMD is a clinical decision-support platform for doctors - structured case review, clinical workflow and decision support.</p></div><div class="v3-shield" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD logo" style="width:62px;height:62px;object-fit:contain"></div></section>' +
+        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">Steward<span class="v3-md">MD</span></h1><span class="v3-tag">Clinical decision support for doctors</span><p>StewardMD is a clinical decision-support platform for doctors — structured case review, clinical workflow and decision support.</p></div><div class="v3-shield" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD logo" style="width:62px;height:62px;object-fit:contain"></div></section>' +
         '<div class="v3-qrow">' +
           '<button class="v3-qc" data-act="more">' + svg("user") + '<span>Account</span></button>' +
           '<button class="v3-qc" data-act="search">' + svg("search") + '<span>Search</span></button>' +
           '<button class="v3-qc" data-act="icu">' + svg("icu") + '<span>ICU</span></button>' +
           '<button class="v3-qc" data-act="theme">' + svg("sun") + '<span>Theme</span></button>' +
         '</div>' +
-        '<button class="v3-primary" data-act="startcase"><div class="ic">' + svg("stcase") + '</div><div style="flex:1;min-width:0"><div class="tt">Start a Case</div><div class="sub">New clinical decision - choose Simple or Advanced</div></div><div class="arr">' + svg("arrow") + '</div></button>' +
-        '<button class="v3-secondary" data-act="reasoning"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Dx My Patient</div><div class="sub">Reason through your patient - live differential, confidence &amp; next steps</div></div><div class="arr">' + svg("chev") + '</div></button>' +
+        '<button class="v3-primary" data-act="startcase"><div class="ic">' + svg("stcase") + '</div><div style="flex:1;min-width:0"><div class="tt">Start a Case</div><div class="sub">New clinical decision — choose Simple or Advanced</div></div><div class="arr">' + svg("arrow") + '</div></button>' +
+        '<button class="v3-secondary" data-act="reasoning"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Dx My Patient</div><div class="sub">Reason through your patient — live differential, confidence &amp; next steps</div></div><div class="arr">' + svg("chev") + '</div></button>' +
         '<div class="v3-sec-label">Quick access</div>' +
         '<div class="v3-grid">' +
           '<button class="v3-tile" data-act="cases"><div class="ic">' + svg("folder") + '</div><div style="min-width:0"><div class="tt">My Cases</div><div class="sub">Saved assessments</div></div></button>' +
@@ -1069,12 +1069,12 @@
     fab.style.display = "none"; // hidden until past the splash/disclaimer/login gates
     document.body.appendChild(fab);
     fab.addEventListener("click", goHome);
-    // Only show the home button once the user is on the landing page / inside the app -
+    // Only show the home button once the user is on the landing page / inside the app —
     // never on the intro splash, disclaimer, or login gates.
     // Is the v4 home the thing the user is actually looking at right now? We sample the
     // element on top at the viewport centre: if it lives inside #homeV2 the bare home is
-    // in front (hide the Home button); if anything else is on top - any overlay, sheet,
-    // modal, OR the classic app screen opened via "Start a Case" - show the Home button.
+    // in front (hide the Home button); if anything else is on top — any overlay, sheet,
+    // modal, OR the classic app screen opened via "Start a Case" — show the Home button.
     function homeIsForeground() {
       var h = document.getElementById("homeV2");
       if (!h || !h.classList.contains("on")) return false;
@@ -1089,7 +1089,7 @@
       if (!fab) return;
       var gateUp = ["introPoster", "splash", "accountGate", "disclaimerModal"].some(function (id) {
         var el = document.getElementById(id); if (!el) return false;
-        // A gate counts as "up" only if genuinely visible - these gates fade out via
+        // A gate counts as "up" only if genuinely visible — these gates fade out via
         // opacity/visibility but stay display:flex (width>0), so offsetWidth alone would
         // keep the home button hidden forever once the gate is dismissed.
         var cs = window.getComputedStyle(el);
@@ -1194,7 +1194,7 @@
       // where there is no URL bar for ?rnav=1). Toggles smd_redesign_nav + reloads.
       '<button class="hv-mi" style="width:100%" onclick="try{var on=localStorage.getItem(\'smd_redesign_nav\')===\'1\';var nv=on?\'0\':\'1\';localStorage.setItem(\'smd_redesign_nav\',nv);localStorage.setItem(\'smd_home_v4\',nv);location.reload();}catch(e){}">' +
         svg("spark") + '<div class="ml">New design <span class="mc">' +
-        (redesignNavOn() ? "On - tap to switch back" : "Beta - tap to try it") +
+        (redesignNavOn() ? "On — tap to switch back" : "Beta — tap to try it") +
         '</span></div><span class="marr">' + svg("chev") + '</span></button>' +
       mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
@@ -1205,7 +1205,7 @@
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
       mi("calc", "Calculators", "50+ clinical tools", "calculators") +
       '<div style="font:700 11px var(--hfont,sans-serif);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:16px 6px 6px">Legal &amp; safety</div>' +
-      mi("shield", "Medical disclaimer", "Decision support - not medical advice", "disclaimer") +
+      mi("shield", "Medical disclaimer", "Decision support — not medical advice", "disclaimer") +
       mi("lock", "Privacy policy", "How your data is handled", "privacy") +
       mi("book", "Terms of use", "Terms &amp; conditions", "terms")
     );
@@ -1221,7 +1221,7 @@
         if (a === "subscription") return openSubscription();
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
-        // Legal & Safety: open the in-app modals (z-index 700, above the home shell) - same as
+        // Legal & Safety: open the in-app modals (z-index 700, above the home shell) — same as
         // the footer links. The old window.location.href="/disclaimer" navigated the WebView to a
         // path that doesn't exist in the bundled native app (only disclaimer.html does), so Capacitor
         // fell back to index.html and the whole app "restarted". Modals work on web + native.
@@ -1314,7 +1314,7 @@
           u.delete()
             .then(function () { finish("Your account and all data were deleted."); })
             .catch(function (err) {
-              // Firebase needs a recent login to delete the auth record - reauthenticate
+              // Firebase needs a recent login to delete the auth record — reauthenticate
               // with Google, then retry the delete so the account is fully removed.
               if (err && err.code === "auth/requires-recent-login" && u.reauthenticateWithPopup && window.firebase) {
                 try {
@@ -1346,7 +1346,7 @@
       '<p style="font:500 13px/1.6 var(--hfont,sans-serif);color:var(--hmut,#667);text-align:center;margin:0 0 16px">' +
       (guest
         ? "This permanently erases all saved cases and settings stored on this device. This cannot be undone."
-        : "This permanently deletes your StewardMD account and all saved cases - from this device and the cloud. This cannot be undone.") + '</p>' +
+        : "This permanently deletes your StewardMD account and all saved cases — from this device and the cloud. This cannot be undone.") + '</p>' +
       '<button id="smdDelYes" type="button" style="width:100%;background:var(--hdanger,#c0392b);color:#fff;border:none;border-radius:12px;padding:14px;font:800 15px var(--hfont,sans-serif);cursor:pointer;margin-bottom:10px">Yes, delete everything</button>' +
       '<button class="hv-back" data-close="1" type="button">Cancel</button>');
     var s = sheetEl();
@@ -1359,80 +1359,80 @@
   function aboutVersionHTML() {
     return '<div class="smd-vh">' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v0 · Genesis</div><ul>' +
-        '<li><b>v0.1</b> - First static prototype mapping a clinical syndrome to an empiric antibiotic.</li>' +
-        '<li><b>v0.5</b> - The 8-question antimicrobial-stewardship framework defined as the core engine.</li>' +
+        '<li><b>v0.1</b> — First static prototype mapping a clinical syndrome to an empiric antibiotic.</li>' +
+        '<li><b>v0.5</b> — The 8-question antimicrobial-stewardship framework defined as the core engine.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v1 · Clinical engine</div><ul>' +
-        '<li><b>v1.0</b> - Structured clinical-findings wizard (vitals, system, risk factors).</li>' +
-        '<li><b>v1.1</b> - Added syndrome confidence scoring and a ranked differential.</li>' +
-        '<li><b>v1.2</b> - Tested on real cases; scoring edge-case bugs detected and fixed.</li>' +
-        '<li><b>v1.5</b> - Grew to dozens of internal-medicine syndromes.</li>' +
+        '<li><b>v1.0</b> — Structured clinical-findings wizard (vitals, system, risk factors).</li>' +
+        '<li><b>v1.1</b> — Added syndrome confidence scoring and a ranked differential.</li>' +
+        '<li><b>v1.2</b> — Tested on real cases; scoring edge-case bugs detected and fixed.</li>' +
+        '<li><b>v1.5</b> — Grew to dozens of internal-medicine syndromes.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v2 · Knowledge base</div><ul>' +
-        '<li><b>v2.0</b> - Drug monograph database: dosing, route, spectrum, cautions.</li>' +
-        '<li><b>v2.1</b> - &quot;Gold format&quot; rewrite of every drug entry for consistency.</li>' +
-        '<li><b>v2.3</b> - IDSA / WHO / ICMR / Surviving Sepsis references wired throughout.</li>' +
-        '<li><b>v2.6</b> - Bug sweep: dosing display &amp; renal-adjustment corrections.</li>' +
+        '<li><b>v2.0</b> — Drug monograph database: dosing, route, spectrum, cautions.</li>' +
+        '<li><b>v2.1</b> — &quot;Gold format&quot; rewrite of every drug entry for consistency.</li>' +
+        '<li><b>v2.3</b> — IDSA / WHO / ICMR / Surviving Sepsis references wired throughout.</li>' +
+        '<li><b>v2.6</b> — Bug sweep: dosing display &amp; renal-adjustment corrections.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v3 · Ground-up interface</div><ul>' +
-        '<li><b>v3.0</b> - Complete frontend rebuild - the &quot;Advanced UI by MaiK&quot;.</li>' +
-        '<li><b>v3.2</b> - Responsive layout for mobile / tablet / desktop, plus dark mode.</li>' +
-        '<li><b>v3.4</b> - Accessibility: font scaling, density control, auto-fit.</li>' +
-        '<li><b>v3.7</b> - Testing round: iOS viewport/zoom bugs detected and fixed.</li>' +
+        '<li><b>v3.0</b> — Complete frontend rebuild — the &quot;Advanced UI by MaiK&quot;.</li>' +
+        '<li><b>v3.2</b> — Responsive layout for mobile / tablet / desktop, plus dark mode.</li>' +
+        '<li><b>v3.4</b> — Accessibility: font scaling, density control, auto-fit.</li>' +
+        '<li><b>v3.7</b> — Testing round: iOS viewport/zoom bugs detected and fixed.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v4 · Intelligence</div><ul>' +
-        '<li><b>v4.0</b> - Clinical reasoning engine producing an explainable differential.</li>' +
-        '<li><b>v4.2</b> - Electrolyte engine: 13 analysis engines (Na, K, Mg, Ca, Cl, anion gap…).</li>' +
-        '<li><b>v4.4</b> - Medical calculators expanded to 74 bedside tools.</li>' +
-        '<li><b>v4.6</b> - Bug detected: reasoning &quot;select diagnosis&quot; mis-routed → fixed.</li>' +
+        '<li><b>v4.0</b> — Clinical reasoning engine producing an explainable differential.</li>' +
+        '<li><b>v4.2</b> — Electrolyte engine: 13 analysis engines (Na, K, Mg, Ca, Cl, anion gap…).</li>' +
+        '<li><b>v4.4</b> — Medical calculators expanded to 74 bedside tools.</li>' +
+        '<li><b>v4.6</b> — Bug detected: reasoning &quot;select diagnosis&quot; mis-routed → fixed.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v5 · Connected &amp; polished</div><ul>' +
-        '<li><b>v5.0</b> - Google sign-in and cloud sync of saved cases.</li>' +
-        '<li><b>v5.1</b> - Share a case by unique code; the My Cases library.</li>' +
-        '<li><b>v5.2</b> - Account panel and guest mode.</li>' +
-        '<li><b>v5.3</b> - Universal home button; electrolyte overlay click-block fixed; mobile header cleaned up.</li>' +
-        '<li><b>v5.4</b> - Automated headless-browser regression testing introduced.</li>' +
+        '<li><b>v5.0</b> — Google sign-in and cloud sync of saved cases.</li>' +
+        '<li><b>v5.1</b> — Share a case by unique code; the My Cases library.</li>' +
+        '<li><b>v5.2</b> — Account panel and guest mode.</li>' +
+        '<li><b>v5.3</b> — Universal home button; electrolyte overlay click-block fixed; mobile header cleaned up.</li>' +
+        '<li><b>v5.4</b> — Automated headless-browser regression testing introduced.</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver">v6 · Medical Knowledge Base</div><ul>' +
-        '<li><b>v6.0</b> - Every disease migrated into a single declarative Medical Knowledge Base; the reasoning engine now runs entirely from the KB - regression-locked and byte-identical to the trusted engine.</li>' +
-        '<li><b>v6.1</b> - Harrison&#39;s Principles of Internal Medicine (22e) knowledge integrated into all 140 diagnostic diseases: clinical pearls, pathophysiology, mimics, red flags, prognosis, pitfalls - paraphrased and page-cited.</li>' +
-        '<li><b>v6.2</b> - Knowledge base expanded to the full Harrison disease universe - <b>444 searchable entries</b> (140 diagnostic + 304 reference, including clinically-useful diagnostic &amp; procedural chapters), each with a page-cited Harrison reference panel.</li>' +
-        '<li><b>v6.3</b> - Reasoning upgrades: the stewardship engine now covers all 140 diagnoses, smart next-question suggestions, and broader non-infective finding inputs.</li>' +
-        '<li><b>v6.4</b> - AI-ready infrastructure (RAG-ready knowledge index, evidence engine, AI interface) - fully functional with no AI today, and AI-ready (decision-first, explanation second).</li>' +
+        '<li><b>v6.0</b> — Every disease migrated into a single declarative Medical Knowledge Base; the reasoning engine now runs entirely from the KB — regression-locked and byte-identical to the trusted engine.</li>' +
+        '<li><b>v6.1</b> — Harrison&#39;s Principles of Internal Medicine (22e) knowledge integrated into all 140 diagnostic diseases: clinical pearls, pathophysiology, mimics, red flags, prognosis, pitfalls — paraphrased and page-cited.</li>' +
+        '<li><b>v6.2</b> — Knowledge base expanded to the full Harrison disease universe — <b>444 searchable entries</b> (140 diagnostic + 304 reference, including clinically-useful diagnostic &amp; procedural chapters), each with a page-cited Harrison reference panel.</li>' +
+        '<li><b>v6.3</b> — Reasoning upgrades: the stewardship engine now covers all 140 diagnoses, smart next-question suggestions, and broader non-infective finding inputs.</li>' +
+        '<li><b>v6.4</b> — AI-ready infrastructure (RAG-ready knowledge index, evidence engine, AI interface) — fully functional with no AI today, and AI-ready (decision-first, explanation second).</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v7 · Redesigned workspace (current)</span></div><ul>' +
-        '<li><b>v7.0</b> - Ground-up redesign of the mobile home - editorial layout, personalised time-based greeting, and the StewardMD banner as an antibiotic decision engine.</li>' +
-        '<li><b>v7.1</b> - New <b>Antibiogram</b> explorer: an interactive antibiotic-coverage grid (green/red spectrum of activity) plus resistance rates from the ICMR AMRSN 2024 national antibiogram and the GIMSR hospital antibiogram.</li>' +
-        '<li><b>v7.2</b> - Ward Sync fetches live reports (labs / medications) directly from the GHIS hospital system for point-of-care calculators.</li>' +
-        '<li><b>v7.3</b> - Whole-app appearance themes now recolour the home too; restored the sidebar menu and a universal Home button on every screen.</li>' +
-        '<li><b>v7.4</b> - Brand polish: rounded StewardMD wordmark, refreshed footer with the MaiKnowledge signature.</li>' +
-        '<li><b>v7.5</b> - Native iOS &amp; Android apps (Capacitor): StewardMD is now installable as a real app, with offline clinical data and native push notifications.</li>' +
-        '<li><b>v7.6</b> - MaiK, the AI clinical assistant: grounded, page-cited explanations with comparison tables, per-claim citations, and streaming answers - decision first, explanation second.</li>' +
-        '<li><b>v7.7</b> - Knowledge Units: earn points as you read references and work cases, unlocking subscription discounts.</li>' +
-        '<li><b>v7.8</b> - Lab Watch: monitor a patient&#39;s labs for new results - in-app alerts plus optional 24/7 background alerts (Ward Sync / GHIS-linked, consent-gated) even when the app is closed.</li>' +
-        '<li><b>v7.9</b> - App-style navigation is now the default (bottom tab bar, quick-action tiles); plus reliability &amp; alignment polish across web, iOS and Android (global toast feedback, home-tile and sidebar alignment fixes).</li>' +
+        '<li><b>v7.0</b> — Ground-up redesign of the mobile home — editorial layout, personalised time-based greeting, and the StewardMD banner as an antibiotic decision engine.</li>' +
+        '<li><b>v7.1</b> — New <b>Antibiogram</b> explorer: an interactive antibiotic-coverage grid (green/red spectrum of activity) plus resistance rates from the ICMR AMRSN 2024 national antibiogram and the GIMSR hospital antibiogram.</li>' +
+        '<li><b>v7.2</b> — Ward Sync fetches live reports (labs / medications) directly from the GHIS hospital system for point-of-care calculators.</li>' +
+        '<li><b>v7.3</b> — Whole-app appearance themes now recolour the home too; restored the sidebar menu and a universal Home button on every screen.</li>' +
+        '<li><b>v7.4</b> — Brand polish: rounded StewardMD wordmark, refreshed footer with the MaiKnowledge signature.</li>' +
+        '<li><b>v7.5</b> — Native iOS &amp; Android apps (Capacitor): StewardMD is now installable as a real app, with offline clinical data and native push notifications.</li>' +
+        '<li><b>v7.6</b> — MaiK, the AI clinical assistant: grounded, page-cited explanations with comparison tables, per-claim citations, and streaming answers — decision first, explanation second.</li>' +
+        '<li><b>v7.7</b> — Knowledge Units: earn points as you read references and work cases, unlocking subscription discounts.</li>' +
+        '<li><b>v7.8</b> — Lab Watch: monitor a patient&#39;s labs for new results — in-app alerts plus optional 24/7 background alerts (Ward Sync / GHIS-linked, consent-gated) even when the app is closed.</li>' +
+        '<li><b>v7.9</b> — App-style navigation is now the default (bottom tab bar, quick-action tiles); plus reliability &amp; alignment polish across web, iOS and Android (global toast feedback, home-tile and sidebar alignment fixes).</li>' +
       '</ul></div>' +
     '</div>' +
-    '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD - built and refined case by case at the bedside.</p>';
+    '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD — built and refined case by case at the bedside.</p>';
   }
   function aboutFactsHTML() {
     return '<span class="smd-ab-badge">By the numbers</span>' +
       '<ul class="smd-facts">' +
-      '<li><span class="fn">444</span> searchable entries - 140 with full diagnostic reasoning + 304 Harrison reference conditions &amp; clinical chapters.</li>' +
+      '<li><span class="fn">444</span> searchable entries — 140 with full diagnostic reasoning + 304 Harrison reference conditions &amp; clinical chapters.</li>' +
       '<li><span class="fn">51</span> infective syndromes, each with a full empiric-therapy stewardship rationale.</li>' +
-      '<li><span class="fn">21,487</span> page-cited Harrison 22e knowledge chunks - RAG-ready, no AI required.</li>' +
+      '<li><span class="fn">21,487</span> page-cited Harrison 22e knowledge chunks — RAG-ready, no AI required.</li>' +
       '<li><span class="fn">1,465</span> drug monographs in structured &quot;gold&quot; format.</li>' +
       '<li><span class="fn">74</span> bedside clinical calculators.</li>' +
       '<li><span class="fn">13</span> dedicated electrolyte analysis engines.</li>' +
-      '<li><span class="fn">24</span> antibiotics × 12 organism groups in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources - ICMR AMRSN 2024 national + GIMSR hospital resistance rates.</li>' +
-      '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic - no frameworks, no build step.</li>' +
-      '<li><span class="fn">100%</span> offline-capable PWA - works with no signal at the bedside.</li>' +
+      '<li><span class="fn">24</span> antibiotics × 12 organism groups in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources — ICMR AMRSN 2024 national + GIMSR hospital resistance rates.</li>' +
+      '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic — no frameworks, no build step.</li>' +
+      '<li><span class="fn">100%</span> offline-capable PWA — works with no signal at the bedside.</li>' +
       '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
       '<li><span class="fn">1</span> clinician built the entire engine end to end.</li>' +
       '</ul>' +
       '<div class="smd-modal-section" style="margin-top:18px">What makes it unique</div>' +
-      '<p>StewardMD is one of the most content-dense clinical decision tools ever shipped as a single, buildless static web app - every syndrome, drug, calculator and reasoning rule is hand-authored, runs entirely in the browser, and works fully offline. Unlike a black-box AI, every antibiotic recommendation is <b>explainable</b>: it states why the diagnosis fits, why antibiotics are (or are not) needed, the likely pathogens, why each agent was chosen, what it covers, what it misses, and when to de-escalate or stop.</p>' +
-      '<p style="font-size:11.5px;color:var(--slate-soft)">Engineered and curated by Dr. Manoj Kumar Kurmana, MD - Internal Medicine physician and Stanford-certified antimicrobial-stewardship practitioner.</p>';
+      '<p>StewardMD is one of the most content-dense clinical decision tools ever shipped as a single, buildless static web app — every syndrome, drug, calculator and reasoning rule is hand-authored, runs entirely in the browser, and works fully offline. Unlike a black-box AI, every antibiotic recommendation is <b>explainable</b>: it states why the diagnosis fits, why antibiotics are (or are not) needed, the likely pathogens, why each agent was chosen, what it covers, what it misses, and when to de-escalate or stop.</p>' +
+      '<p style="font-size:11.5px;color:var(--slate-soft)">Engineered and curated by Dr. Manoj Kumar Kurmana, MD — Internal Medicine physician and Stanford-certified antimicrobial-stewardship practitioner.</p>';
   }
   function enhanceAbout() {
     var modal = document.getElementById("aboutModal"); if (!modal) return;
@@ -1463,7 +1463,7 @@
       var hdr = c.querySelector(".ack-header-row"); if (hdr) hdr.parentNode.removeChild(hdr);
       // The names carry rich hover tooltips (.ack-tip / .creator-tip: roles, bios, publications).
       // Hover doesn't exist on touch and, cloned here, they'd overlap. Mark this clone so the
-      // sheet CSS renders every tooltip INLINE as a readable card (see .hv-ack .ack-tip below) -
+      // sheet CSS renders every tooltip INLINE as a readable card (see .hv-ack .ack-tip below) —
       // so all contributor descriptions and the creator profile are fully visible, not hidden.
       c.classList.add("hv-ack-inline");
       inner = '<div class="hv-ack">' + c.outerHTML + '</div>';
@@ -1482,13 +1482,13 @@
     openSheet('<div class="hv-sh-t">Subscription</div>' +
       '<div style="text-align:center;padding:6px 4px 2px">' +
         '<div style="font:800 30px/1 var(--hfont);color:var(--hp)"><span style="text-decoration:line-through;color:var(--hmut);font-size:19px;font-weight:700">₹999 / year</span>&nbsp;&nbsp;Free</div>' +
-        '<div style="font:600 13px var(--hfont);color:var(--hmut);margin-top:7px">Free for all doctors for now - full access while we test.</div>' +
+        '<div style="font:600 13px var(--hfont);color:var(--hmut);margin-top:7px">Free for all doctors for now — full access while we test.</div>' +
       '</div>' +
       '<div style="margin-top:14px;border:1px solid var(--hbd);border-radius:14px;padding:14px;background:var(--hbg)">' +
         '<div style="font:700 12px var(--hfont);text-transform:uppercase;letter-spacing:.05em;color:var(--hmut);margin-bottom:8px">Included</div>' +
-        '<div style="font:500 13px/1.9 var(--hfont);color:var(--hink)">✓ Full antibiotic decision engine<br>✓ 1,465-drug database - doses &amp; brands<br>✓ 50+ calculators · guidelines · ICU tools<br>✓ Clinical Reasoning</div>' +
+        '<div style="font:500 13px/1.9 var(--hfont);color:var(--hink)">✓ Full antibiotic decision engine<br>✓ 1,465-drug database — doses &amp; brands<br>✓ 50+ calculators · guidelines · ICU tools<br>✓ Clinical Reasoning</div>' +
       '</div>' +
-      '<button class="hv-reset" style="background:var(--hp);color:#fff;border-color:var(--hp);margin-top:14px" data-close="1">Continue - it\'s free</button>');
+      '<button class="hv-reset" style="background:var(--hp);color:#fff;border-color:var(--hp);margin-top:14px" data-close="1">Continue — it\'s free</button>');
     var subClose = sheetEl().querySelector("[data-close]");
     if (subClose) subClose.addEventListener("click", closeSheet);
   }
@@ -1497,7 +1497,7 @@
     // case in THAT engine instead of the Internal Medicine chooser. IM → falls through below.
     try { if (window.SMD_WS && SMD_WS.startActiveCase && SMD_WS.startActiveCase()) return; } catch (e) {}
     openSheet('<div class="hv-sh-t">Dx My Patient</div>' +
-      '<p style="font:500 13px/1.5 var(--hfont);color:var(--hmut);text-align:center;margin:0 0 16px">Reason through a patient - live differential, confidence &amp; next steps.</p>' +
+      '<p style="font:500 13px/1.5 var(--hfont);color:var(--hmut);text-align:center;margin:0 0 16px">Reason through a patient — live differential, confidence &amp; next steps.</p>' +
       '<button id="dxAddNew" style="width:100%;background:var(--hp);color:#fff;border:none;border-radius:12px;padding:14px;font:800 15px var(--hfont);cursor:pointer;margin-bottom:10px;text-align:center">➕ Add New Patient<div style="font:500 11.5px var(--hfont);opacity:.9;margin-top:2px">Enter symptoms &amp; findings manually</div></button>' +
       '<button id="dxImportPt" style="width:100%;background:var(--hpanel);color:var(--hink);border:1px solid var(--hbd);border-radius:12px;padding:14px;font:800 15px var(--hfont);cursor:pointer;margin-bottom:10px;text-align:center">🏥 Import Patient<div style="font:500 11.5px var(--hfont);color:var(--hmut);margin-top:2px">Pull labs · imaging · culture from Ward Sync, then add symptoms</div></button>' +
       '<button class="hv-back" data-close="1">Close</button>');
@@ -1505,15 +1505,15 @@
     var addN = s.querySelector("#dxAddNew");
     if (addN) addN.addEventListener("click", function () { closeSheet(); hideV2(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical reasoning is loading…"); } catch (e) {} });
     var imp = s.querySelector("#dxImportPt");
-    if (imp) imp.addEventListener("click", function () { closeSheet(); hideV2(); try { if (window.GHIS && GHIS.startImport) GHIS.startImport(); else toast("Ward Sync is loading - try again in a moment."); } catch (e) {} });
+    if (imp) imp.addEventListener("click", function () { closeSheet(); hideV2(); try { if (window.GHIS && GHIS.startImport) GHIS.startImport(); else toast("Ward Sync is loading — try again in a moment."); } catch (e) {} });
     var c = s.querySelector("[data-close]");
     if (c) c.addEventListener("click", closeSheet);
   }
 
-  // Ask MaiK - a dedicated chat. RAG-FIRST: each question retrieves only the top-K
+  // Ask MaiK — a dedicated chat. RAG-FIRST: each question retrieves only the top-K
   // StewardMD knowledge-base chunks and sends just those + the question to the model
   // (the whole KB never transits), so answers stay grounded AND cheap on tokens.
-  // ── Ask MaiK - mobile consult sheet (gold122) ────────────────────────────
+  // ── Ask MaiK — mobile consult sheet (gold122) ────────────────────────────
   // Dedicated bottom sheet: sticky header + sticky composer, only the message area
   // scrolls, ≤90vh, iOS safe-areas, all other FABs hidden while open. No provider/
   // model names anywhere; a single persistent advisory badge replaces per-message
@@ -1593,7 +1593,7 @@
       '<div class="maik-hd"><img class="mk-logo" src="/maik-logo.png" alt="MaiK" /><div class="mk-ti"><div class="mk-s">Medical AI Knowledge · Clinical assistant</div></div>' +
         '<button class="maik-x maik-new" id="maikNew" aria-label="New conversation" title="Start a new conversation"><span class="xg">＋</span>New</button>' +
         '<button class="maik-x" id="maikX" aria-label="Close assistant"><span class="xg">✕</span>Close</button></div>' +
-      '<div class="maik-adv"><span class="maik-badge">⚠ AI-generated · not medical advice - verify independently</span></div>' +
+      '<div class="maik-adv"><span class="maik-badge">⚠ AI-generated · not medical advice — verify independently</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
       '<div class="maik-cmp"><button id="maikExtract" class="maik-extract" type="button" hidden>🩺 Extract findings for Clinical Reasoning →</button>' +
       '<div class="maik-cmp-row"><button id="maikMic" class="maik-mic" type="button" aria-label="Dictate to MaiK">🎤</button><textarea id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea><button id="maikSend">Send</button></div></div>';
@@ -1610,7 +1610,7 @@
       body.appendChild(w); scroll();
     }
     function emptyState() {
-      bubble("ai", '<div class="maik-welcome">Hello - I’m <b>MaiK</b>, your clinical knowledge assistant. Ask a general clinical question and I’ll answer from StewardMD’s knowledge base, or start a patient assessment.</div>');
+      bubble("ai", '<div class="maik-welcome">Hello — I’m <b>MaiK</b>, your clinical knowledge assistant. Ask a general clinical question and I’ll answer from StewardMD’s knowledge base, or start a patient assessment.</div>');
       if (maikActiveCase()) chips([
         { label: "What findings are missing?", on: function () { qEl.value = "What findings are missing for the current differential?"; send(); } },
         { label: "Explain this differential", on: function () { qEl.value = "Explain the leading diagnosis in the current assessment."; send(); } },
@@ -1649,16 +1649,16 @@
       if (!n || /^[?.\s]+$/.test(n)) return { kind: "clarify" };                       // empty / punctuation-only
       if (/^(dose|doses|dosage|what dose|which dose|drug|drugs|which drug|what drug)\??$/.test(n)) return { kind: "clarify" };  // bare dose/drug with no drug named
       if (/\b(weather|joke|jokes|funny|movie|movies|song|songs|music|sport|sports|cricket|football|news|poem|story|stories|recipe|cook|game|games|stock|horoscope|who won|what time|time is it|date today|your name)\b/.test(n) && !/(treat|manage|dose|drug|patient|symptom|sign|diagnos|infection|fever|pain|therapy|antibiotic|disease|syndrome|management|shock|sepsis|poison)/.test(n)) return { kind: "casual", reply: "I\u2019m MaiK \u2014 I focus on clinical knowledge, drug information, calculators, and patient assessment. Ask me a medical question and I\u2019ll help." };
-      // A/B casual conversation - fuzzy (typo-tolerant) match on the FIRST token / short phrase
+      // A/B casual conversation — fuzzy (typo-tolerant) match on the FIRST token / short phrase
       var casualHit = MAIK_CASUAL.some(function (w) { return first === w || maikLev(first, w) <= 1; })
         || /^(hello|hey|hi)\b/.test(n) || /^good (morning|afternoon|evening|night)\b/.test(n) || /^how (are|r) (you|u)\b/.test(n) || /^how'?s it going\b/.test(n) || /^whats up\b|^what'?s up\b/.test(n);
       var ackHit = isShort && MAIK_ACK.some(function (w) { return toks.indexOf(w) >= 0 || maikLev(first, w) <= 1; });
       var byeHit = isShort && /^(bye|goodbye|see ya|cya|good night)\b/.test(n);
       if (isShort && /how (are|r) (you|u)/.test(n)) return { kind: "casual", reply: "I’m well, thank you. I’m here to support clinical questions, drug information, calculations, or patient assessment. What would you like to discuss?" };
-      if (byeHit) return { kind: "casual", reply: "Goodbye - StewardMD is here whenever you need clinical support." };
+      if (byeHit) return { kind: "casual", reply: "Goodbye — StewardMD is here whenever you need clinical support." };
       if (isShort && /(thanks|thank you|thankyou|thx|^ty\b)/.test(n)) return { kind: "casual", reply: "You’re welcome. Let me know if you want to review a clinical topic or assess a patient." };
       if (casualHit && isShort && !/(treat|manage|dose|sign|symptom|approach|explain|what is|whats|difference|poison|fever|pain|shock|dka|patient)/.test(n)) return { kind: "casual", reply: "Hello. I can help with clinical knowledge, drug information, calculators, or a patient assessment. What would you like to discuss?" };
-      if (ackHit && !/(treat|manage|dose|sign|approach|explain|patient|what|how|why|which)/.test(n)) return { kind: "casual", reply: "Sure - let me know if you’d like to review a clinical topic, look up a drug, or assess a patient." };
+      if (ackHit && !/(treat|manage|dose|sign|approach|explain|patient|what|how|why|which)/.test(n)) return { kind: "casual", reply: "Sure — let me know if you’d like to review a clinical topic, look up a drug, or assess a patient." };
       // B product/help
       if (/what (can|do) you do|what is maik|who are you|how (do i|to) use|how (do i|to) start|how does this work|where('?s| is)? (the )?(drug|calculator|calc|ward|icu|dx)/.test(n)) return { kind: "help" };
       // E patient-specific (existing detector) with no active case → guided assessment
@@ -1689,26 +1689,26 @@
         return { question: "Provide a detailed, complete clinical answer on the management of " + t.topic + ".", depth: "detailed", topic: t.topic, retrieval: t.topic + " detailed management" };
       }
       if (/(antibiotic|antibiotics|abx|antimicrobial|drug of choice|which agent)/.test(n) && wc <= 7) {
-        return { question: "Empiric antimicrobial therapy for " + t.topic + " - agent/class choice, severity and host adjustment, and culture-directed de-escalation principles.", depth: "concise", topic: "antibiotics for " + t.topic, retrieval: t.topic + " empiric antibiotics antimicrobial therapy de-escalation" };
+        return { question: "Empiric antimicrobial therapy for " + t.topic + " — agent/class choice, severity and host adjustment, and culture-directed de-escalation principles.", depth: "concise", topic: "antibiotics for " + t.topic, retrieval: t.topic + " empiric antibiotics antimicrobial therapy de-escalation" };
       }
       if (/^(dose|dosage|doses|how much)\b/.test(n) || (/\bdose\b/.test(n) && wc <= 4)) {
         if (t.lastDrug) return { question: "Adult dosing of " + t.lastDrug + ", with renal-adjustment principles (verify locally).", depth: "concise", topic: "dose of " + t.lastDrug, retrieval: t.lastDrug + " dose dosing renal adjustment" };
-        return { clarify: "Which drug’s dose would you like - e.g. “ceftriaxone dose” or “atropine dose in OP poisoning”?" };
+        return { clarify: "Which drug’s dose would you like — e.g. “ceftriaxone dose” or “atropine dose in OP poisoning”?" };
       }
       if (/^(what next|whats next|next|next steps?|then( what)?|and then|what to do next)\b/.test(n) || (/\bnext\b/.test(n) && wc <= 4)) {
         return { question: "Next steps, ongoing management and monitoring for " + t.topic + ".", depth: "concise", topic: "next steps for " + t.topic, retrieval: t.topic + " monitoring ongoing management next steps escalation" };
       }
       if (/\b(in pregnancy|pregnan)/.test(n) && wc <= 5) {
-        return { question: t.topic + " - management considerations in pregnancy.", depth: "concise", topic: t.topic + " in pregnancy", retrieval: t.topic + " pregnancy management" };
+        return { question: t.topic + " — management considerations in pregnancy.", depth: "concise", topic: t.topic + " in pregnancy", retrieval: t.topic + " pregnancy management" };
       }
       if (/\b(renal (failure|impairment)|ckd|dialysis|kidney)\b/.test(n) && wc <= 6) {
-        return { question: t.topic + " - management considerations with renal impairment.", depth: "concise", topic: t.topic + " with renal impairment", retrieval: t.topic + " renal impairment dose adjustment" };
+        return { question: t.topic + " — management considerations with renal impairment.", depth: "concise", topic: t.topic + " with renal impairment", retrieval: t.topic + " renal impairment dose adjustment" };
       }
       var m = q.match(/^(what about|how about|and)\s+(.+)/i);
-      if (m && m[2]) { var rest = m[2].replace(/\?+$/, "").trim(); if (rest) return { question: t.topic + " - " + rest + ".", depth: "concise", topic: t.topic + " · " + rest, retrieval: t.topic + " " + rest }; }
+      if (m && m[2]) { var rest = m[2].replace(/\?+$/, "").trim(); if (rest) return { question: t.topic + " — " + rest + ".", depth: "concise", topic: t.topic + " · " + rest, retrieval: t.topic + " " + rest }; }
       return null;
     }
-    // Phase 2 - streaming is ON by default (self-falls-back on any failure); set localStorage
+    // Phase 2 — streaming is ON by default (self-falls-back on any failure); set localStorage
     // smd_maik_stream="0" to force the classic non-stream path.
     function maikStreamOn() { try { return localStorage.getItem("smd_maik_stream") !== "0"; } catch (e) { return true; } }
     // ── Web-research helper (extracted so the KB-miss branch AND the assume-tier refine chip
@@ -1738,7 +1738,7 @@
     //    package's own sections + resolved treatment. Each chip re-runs a grounded query only IF
     //    the clinician taps it (and hits the answer cache if repeated). Skips the section the
     //    clinician just asked about. This is the "contextual follow-ups" UpToDate spends an LLM
-    //    call on - we get it for free from KB structure.
+    //    call on — we get it for free from KB structure.
     function maikFollowupChips(pkg, question) {
       try {
         var g = pkg && pkg.grounding && pkg.grounding[0]; if (!g) return [];
@@ -1761,26 +1761,26 @@
     function maikFollowupsHTML(pkg, question, assume) {
       var chips = maikFollowupChips(pkg, question), html = "";
       chips.forEach(function (c) { html += '<button class="maik-chip" data-maik-q="' + maikEscH(c.q) + '">' + maikEscH(c.label) + '</button>'; });
-      if (assume) html += '<button class="maik-chip" data-maik-web="' + maikEscH(question) + '">🔎 Different topic - search the web</button>';
+      if (assume) html += '<button class="maik-chip" data-maik-web="' + maikEscH(question) + '">🔎 Different topic — search the web</button>';
       return html ? '<div class="maik-followups">' + html + '</div>' : "";
     }
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
-      if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "rate" ? 'One moment - you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
-      if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off - enable it in Settings › AI Assistant." : '<div class="maik-welcome">MaiK is unavailable right now - the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
+      if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "rate" ? 'One moment — you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
+      if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
         think.innerHTML = '<div class="maik-welcome">I found limited StewardMD material on this. Would you like a general overview, or to start a patient assessment?</div>';
         var ab = document.createElement("button"); ab.className = "maik-chip"; ab.style.marginTop = "8px"; ab.textContent = "Start Dx My Patient"; ab.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); think.appendChild(ab); think.appendChild(maikWebChipEl(question)); scroll(); return;
       }
       var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
-      // Phase 2 - numbered sources footer (matches the [n] markers). Prefer the package's own
+      // Phase 2 — numbered sources footer (matches the [n] markers). Prefer the package's own
       // numbered list (identical numbering to what the model was given) so citations line up.
       var srcArr = (pkg && pkg.sources && pkg.sources.length) ? pkg.sources.map(function (s) { return s.title; })
         : ((window.SMD_MaiK && SMD_MaiK.sourceList) ? SMD_MaiK.sourceList(pkg).map(function (s) { return s.title; })
           : ((window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : []));
       var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + ' ▸</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
-      var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> - not quite? Tap a topic below or search the web.</div>') : "";
-      var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference - verify with local protocol.</div>');
+      var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> — not quite? Tap a topic below or search the web.</div>') : "";
+      var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
       var full = eduHTML + rendered + srcHTML;
       if (md.length > 700) {
         think.innerHTML = eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
@@ -1789,12 +1789,12 @@
         mb.addEventListener("click", function () { var open = cd.style.maxHeight === "none"; cd.style.maxHeight = open ? "260px" : "none"; mb.textContent = open ? "Show more ▾" : "Show less ▴"; });
         think.insertBefore(mb, think.querySelector(".maik-src") || null);
       } else { think.innerHTML = full; }
-      // deterministic contextual follow-ups (0 tokens) - appended into the cached HTML; a single
+      // deterministic contextual follow-ups (0 tokens) — appended into the cached HTML; a single
       // delegated listener on the chat body handles taps even after cache restore.
       var chipsHTML = maikFollowupsHTML(pkg, question, assume);
       if (chipsHTML) think.insertAdjacentHTML("beforeend", chipsHTML);
       if (!active) _maikCache[cacheKey] = think.innerHTML;
-      // ℞ Create Prescription - on treatment answers only. Live-only (not cached), with pkg in
+      // ℞ Create Prescription — on treatment answers only. Live-only (not cached), with pkg in
       // closure so the Rx builder gets the grounded regimen. Doses come DB-first (Drug Index).
       try {
         var _isTx = (pkg && pkg.treatment && pkg.treatment.default) || /\b(treat|treatment|treating|manage|management|therapy|regimen|prescri|\brx\b|antibiotic|antibiotics|first[- ]?line|dose|dosing)\b/.test(maikNorm(question || ""));
@@ -1820,7 +1820,7 @@
         .then(function () {
           // Ground on the active case ONLY when the question is about that patient ("this/my
           // patient", "the case/diagnosis"). A standalone knowledge question (e.g. "treatment of
-          // paraquat poisoning") must be grounded on its OWN topic, never on the ambient case -
+          // paraquat poisoning") must be grounded on its OWN topic, never on the ambient case —
           // otherwise a stale case's differential (e.g. cholangitis) hijacks the answer.
           var caseRef = /\b(this|that|the|my|our|current)\s+(patient|case|pt|dx|diagnosis|condition|scenario)\b|\bthis (patient|case|dx)\b|\b(above|current) (case|patient)\b/.test(maikNorm(question));
           var findings = (active && caseRef) ? DX._state.f : {};
@@ -1831,11 +1831,11 @@
           var tm = (pkg && pkg.topicMatch) || null;
           // NONE tier: topic genuinely absent from the KB. MaiK answers every question, so
           // instead of dead-ending we AUTO-RUN web research (Google-grounded, clearly labelled
-          // "not StewardMD-verified") - no tap required. We still don't let the KB model describe
+          // "not StewardMD-verified") — no tap required. We still don't let the KB model describe
           // a lexically-near but different condition; the web tier researches the ACTUAL topic.
           if (tm && tm.matched === false && tm.mode !== "assume") {
             var tp = maikEscH(tm.topic || question);
-            think.innerHTML = '<div class="maik-welcome">Not in StewardMD’s knowledge base - researching the web for <b>' + tp + '</b>…</div>';
+            think.innerHTML = '<div class="maik-welcome">Not in StewardMD’s knowledge base — researching the web for <b>' + tp + '</b>…</div>';
             try { maikRunWeb(think, question); } catch (e) { think.appendChild(maikWebChipEl(question)); }
             try { scroll(); } catch (e) {}
             return;
@@ -1843,9 +1843,9 @@
           if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4);
           // ASSUME tier: partial KB match → answer the NEAREST topic (grounding already scoped to it)
           // under a STATED assumption; maikRenderAnswer prints the banner + refine chips. Same single
-          // grounded call as the confident path - no extra tokens, we just stopped dead-ending.
+          // grounded call as the confident path — no extra tokens, we just stopped dead-ending.
           var assume = (tm && tm.mode === "assume") ? tm.assume : null;
-          // Phase 2 - stream tokens live (UpToDate-style), then maikRenderAnswer re-renders the final
+          // Phase 2 — stream tokens live (UpToDate-style), then maikRenderAnswer re-renders the final
           // answer with sources/chips/collapse. Fully additive: explainGroundedStream self-falls-back
           // to the non-stream call on any hiccup, so this can't regress the answer.
           var onDelta = function (acc) {
@@ -1858,7 +1858,7 @@
             : window.SMD_AI.explainGrounded(pkg, { depth: depth });
           return call.then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume); });
         })
-        .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now - clinical reasoning, calculators, and reference tools remain available.</div>'; })
+        .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
         .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
     }
     function send() {
@@ -1879,7 +1879,7 @@
         [["Ask a clinical question", function () { qEl.value = "How do we treat DKA?"; try { qEl.focus(); } catch (e) {} }], ["Start Dx My Patient", function () { close(); try { openDxChooser(); } catch (e) {} }]].forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.style.margin = "8px 6px 0 0"; b.textContent = c[0]; b.addEventListener("click", c[1]); h.appendChild(b); }); scroll(); return;
       }
       if (route.kind === "patient") {
-        var d = bubble("ai", 'I can help you assess this. Start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings, vitals and labs - StewardMD’s engine computes the assessment, then MaiK adds commentary on it.');
+        var d = bubble("ai", 'I can help you assess this. Start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings, vitals and labs — StewardMD’s engine computes the assessment, then MaiK adds commentary on it.');
         var b = document.createElement("button"); b.className = "maik-chip"; b.style.marginTop = "8px"; b.textContent = "Open Dx My Patient";
         b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
       }
@@ -1899,7 +1899,7 @@
     // One delegated listener handles every follow-up / refine chip (data-maik-q re-runs a grounded
     // query; data-maik-web opens opt-in web research). Delegation survives the innerHTML answer-cache.
     body.addEventListener("click", function (ev) {
-      // Phase 2 - citation chip → reveal the numbered sources footer in the same answer bubble.
+      // Phase 2 — citation chip → reveal the numbered sources footer in the same answer bubble.
       var cite = ev.target && ev.target.closest ? ev.target.closest(".maik-cite") : null;
       if (cite) { var bub = cite.closest(".maik-b.ai") || cite.closest(".maik-b"); var det = bub && bub.querySelector(".maik-src"); if (det) { det.open = true; try { det.scrollIntoView({ block: "nearest" }); } catch (e) {} } return; }
       var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
@@ -1945,15 +1945,15 @@
         extractBtn.disabled = false; extractBtn.textContent = "🩺 Extract findings for Clinical Reasoning →";
         var raw = (r && r.findings) || [];
         var keys = raw.map(function (f) { return typeof f === "string" ? f : (f && f.key); }).filter(Boolean);
-        if (!keys.length) { bubble("ai", '<div class="maik-welcome">I couldn’t map that to any findings in StewardMD’s catalog. Try naming the symptoms, signs, or labs explicitly - e.g. “fever, neck stiffness, photophobia”.</div>'); return; }
+        if (!keys.length) { bubble("ai", '<div class="maik-welcome">I couldn’t map that to any findings in StewardMD’s catalog. Try naming the symptoms, signs, or labs explicitly — e.g. “fever, neck stiffness, photophobia”.</div>'); return; }
         try { DX.addFindings(keys); } catch (e) {}
         var labelOf = {}; catalog.forEach(function (c) { labelOf[c.key] = c.label || c.key; });
         var names = keys.map(function (k) { return labelOf[k] || k; });
-        var d = bubble("ai", '<div class="maik-welcome">Added <b>' + names.length + '</b> finding' + (names.length === 1 ? "" : "s") + ' to Clinical Reasoning - <i>' + maikEscH(names.join(", ")) + '</i>. Nothing is diagnosed automatically; open the workspace to review the differential.</div>');
+        var d = bubble("ai", '<div class="maik-welcome">Added <b>' + names.length + '</b> finding' + (names.length === 1 ? "" : "s") + ' to Clinical Reasoning — <i>' + maikEscH(names.join(", ")) + '</i>. Nothing is diagnosed automatically; open the workspace to review the differential.</div>');
         var ob = document.createElement("button"); ob.className = "maik-chip"; ob.style.marginTop = "8px"; ob.textContent = "Open Clinical Reasoning →";
         ob.addEventListener("click", function () { close(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else if (window.DX && DX.open) DX.open({ workspace: true }); } catch (e) {} });
         d.appendChild(ob); scroll(); extractBtn.hidden = true;
-      }).catch(function () { extractBtn.disabled = false; extractBtn.textContent = "🩺 Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now - please try again."); });
+      }).catch(function () { extractBtn.disabled = false; extractBtn.textContent = "🩺 Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
     });
     qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; refreshExtract(); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
@@ -2042,9 +2042,9 @@
       '<div class="hv-d-sec"><h4>Font</h4><div class="hv-fonts" id="hvFont">' +
         FONTS.map(function (f) { return '<button class="hv-fn" data-f="' + f.id + '" data-font="' + f.id + '">' + f.name + '</button>'; }).join("") +
       '</div></div>' +
-      '<div class="hv-d-sec"><h4>Headings</h4><div class="hv-seg" id="hvHead"><button data-h="default">Default</button><button data-h="script">Script</button></div><div class="hv-info" style="margin-top:6px">Decorative - titles only; never doses.</div></div>' +
+      '<div class="hv-d-sec"><h4>Headings</h4><div class="hv-seg" id="hvHead"><button data-h="default">Default</button><button data-h="script">Script</button></div><div class="hv-info" style="margin-top:6px">Decorative — titles only; never doses.</div></div>' +
       '<button class="hv-reset" id="hvReset">Reset to defaults</button>' +
-      '<div class="hv-info" style="margin-top:12px">Changes readability &amp; spacing only - never medical content. Saved on this device.</div>');
+      '<div class="hv-info" style="margin-top:12px">Changes readability &amp; spacing only — never medical content. Saved on this device.</div>');
     var s = sheetEl();
     s.querySelector("#hvFs").addEventListener("input", function () { ds.autoFit = false; ds.fontScale = (+this.value) / 100; applyD(); refreshD(); });
     s.querySelectorAll("#hvDens button").forEach(function (b) { b.addEventListener("click", function () { ds.autoFit = false; ds.density = b.getAttribute("data-d"); applyD(); refreshD(); }); });
@@ -2111,7 +2111,7 @@
     var body = _notifRoot && _notifRoot.querySelector("#ntfBody"); if (!body) return;
     var items = _notifItems || [];
     body.innerHTML = items.length ? items.map(nItemHTML).join("")
-      : '<div class="ntf-empty">🔕 No updates yet.<div>Trusted medical updates - new drug approvals, safety alerts and recalls - will appear here.</div></div>';
+      : '<div class="ntf-empty">🔕 No updates yet.<div>Trusted medical updates — new drug approvals, safety alerts and recalls — will appear here.</div></div>';
   }
   function buildNotif() {
     if (_notifRoot) return _notifRoot;
@@ -2120,7 +2120,7 @@
     _notifRoot.innerHTML =
       '<div class="ntf-top-bar"><button class="ntf-close" id="ntfClose" aria-label="Close">‹ Close</button>' +
         '<div class="ntf-h">🔔 Notifications</div><button class="ntf-refresh" id="ntfRefresh" aria-label="Refresh" title="Refresh">↻</button></div>' +
-      '<div class="ntf-scroll"><div class="ntf-note">Trusted medical updates - approvals, safety alerts, recalls - plus notices from StewardMD.</div>' +
+      '<div class="ntf-scroll"><div class="ntf-note">Trusted medical updates — approvals, safety alerts, recalls — plus notices from StewardMD.</div>' +
         '<div id="ntfPush" class="ntf-push"></div>' +
         '<div id="ntfBody" class="ntf-list"><div class="ntf-empty">Loading…</div></div></div>';
     document.body.appendChild(_notifRoot);
@@ -2180,7 +2180,7 @@
           toast("Phone alerts enabled ✅"); renderPushRow();
         });
       });
-    }).catch(function () { toast("Couldn't enable notifications - try again."); renderPushRow(); });
+    }).catch(function () { toast("Couldn't enable notifications — try again."); renderPushRow(); });
   }
   function disablePush() {
     navigator.serviceWorker.ready.then(function (reg) {
@@ -2193,7 +2193,7 @@
       toast("Phone alerts turned off."); renderPushRow();
     });
   }
-  /* ---- Native push (Capacitor @capacitor/push-notifications) - the native app has no
+  /* ---- Native push (Capacitor @capacitor/push-notifications) — the native app has no
      service-worker/web-push, so the panel uses a real "Turn on notifications" button and
      the OS permission dialog instead of the web "Add to Home Screen" hint. ---- */
   function nativePush() { return (window.SMD_IS_NATIVE && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.PushNotifications) || null; }
@@ -2224,7 +2224,7 @@
     }).catch(function () { try { toast("Couldn't enable notifications."); } catch (e) {} });
   }
   // Forward the APNs device token to the server (best-effort; server-side delivery is
-  // provisioned separately - the client flow works regardless).
+  // provisioned separately — the client flow works regardless).
   function initNativePushListeners() {
     var P = nativePush(); if (!P || P.__smdListen) return; P.__smdListen = true;
     try {
@@ -2253,7 +2253,7 @@
     d.style.cssText = "position:fixed;inset:0;z-index:16050;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center";
     d.innerHTML = '<div style="background:var(--panel,#fff);color:var(--ink,#14202b);max-width:460px;width:100%;margin:0 12px 12px;border-radius:18px;padding:20px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -8px 40px rgba(0,0,0,.3)">' +
       '<div style="font:800 17px var(--sans,system-ui);margin-bottom:6px">🔔 Turn on notifications?</div>' +
-      '<div style="font:500 14px var(--sans,system-ui);color:var(--slate,#5a7184);line-height:1.5;margin-bottom:16px">Get trusted medical updates - drug approvals, safety alerts and recalls - plus notices from StewardMD.</div>' +
+      '<div style="font:500 14px var(--sans,system-ui);color:var(--slate,#5a7184);line-height:1.5;margin-bottom:16px">Get trusted medical updates — drug approvals, safety alerts and recalls — plus notices from StewardMD.</div>' +
       '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid var(--line,#d7dee3);border-radius:12px;background:transparent;color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
       '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:12px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer">Turn on</button></div></div>';
     document.body.appendChild(d);
@@ -2319,7 +2319,7 @@
     var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s11";
     document.head.appendChild(l);
   }
-  // Live, in-place UI switch - NO page reload, NO re-splash / re-consent / re-login.
+  // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
   function setUI(on) {
     try { localStorage.setItem("smd_home_v2", on ? "1" : "0"); } catch (e) {}
     document.body.classList.toggle("ui-v2", on);
@@ -2345,7 +2345,7 @@
     if (body.querySelector("#smdRecentCasesBtn")) return;
     var b = document.createElement("button");
     b.id = "smdRecentCasesBtn"; b.type = "button";
-    b.innerHTML = "🕐 Recent Cases <span style=\"font-weight:600;opacity:.7\">- last 5 you worked on</span>";
+    b.innerHTML = "🕐 Recent Cases <span style=\"font-weight:600;opacity:.7\">— last 5 you worked on</span>";
     b.style.cssText = "display:block;width:100%;margin:0 0 12px;padding:12px 14px;border:1px solid var(--line,#E2E8F0);border-radius:12px;background:var(--panel,#fff);color:var(--teal,#0F766E);font:700 13px var(--sans,'Inter',system-ui,sans-serif);cursor:pointer;text-align:left";
     b.addEventListener("click", function () { if (window.SMD_openRecentCases) window.SMD_openRecentCases(); else toast("Recent cases loading…"); });
     var bar = body.querySelector(".mcp-storage-bar");
@@ -2398,7 +2398,7 @@
     } else {
       box.innerHTML = '<div class="smd-sba-pic smd-sba-ph">?</div>' +
         '<div class="smd-sba-info"><div class="smd-sba-name">Not signed in</div>' +
-        '<div class="smd-sba-email">Guest mode - cloud sync off</div></div>' +
+        '<div class="smd-sba-email">Guest mode — cloud sync off</div></div>' +
         '<button class="smd-sba-btn" id="smdSbSignIn" type="button">Sign in</button>';
     }
   }

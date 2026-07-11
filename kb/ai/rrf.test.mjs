@@ -1,4 +1,4 @@
-// Reciprocal Rank Fusion - pure, deterministic. Run: node kb/ai/rrf.test.mjs
+// Reciprocal Rank Fusion — pure, deterministic. Run: node kb/ai/rrf.test.mjs
 import { rrf } from "./interface.mjs";
 
 let pass = 0, fail = 0;

@@ -1,9 +1,9 @@
-/* StewardMD - Offline drug database (NATIVE + PRO only).
+/* StewardMD — Offline drug database (NATIVE + PRO only).
  * ===========================================================================
  * Downloads the ~21 MB gzipped SQLite (→~126 MB), verifies it, opens it read-only,
  * and routes drug searches to it when the device is offline (or the API is
  * unreachable). Hidden entirely on the web build; shows "Upgrade to Pro" for
- * signed-in non-paid users. The photo/token never leaves normal channels - the
+ * signed-in non-paid users. The photo/token never leaves normal channels — the
  * Firebase ID token is sent only in the Authorization header and never logged.
  *
  * Backend (already live): GET /offline-db/version → {version,row_count,bytes_gzipped,
@@ -21,7 +21,7 @@
 
   var API = "https://api.stewardmd.in";
   var DB_FILE = "stewardmd-drugs.sqlite";
-  var DIR = "DATA";                                   // Capacitor Directory.Data - app-private, not user-visible
+  var DIR = "DATA";                                   // Capacitor Directory.Data — app-private, not user-visible
   var PK = { installed: "smd_offlinedb_installed", version: "smd_offlinedb_version", rows: "smd_offlinedb_rows", path: "smd_offlinedb_path" };
 
   function P() { return (C.Plugins) || {}; }
@@ -180,7 +180,7 @@
   // The RAW CapacitorSQLite plugin (iOS) prepends a metadata header row {ios_columns:[…]} as
   // values[0]; real data rows start at values[1]. The high-level SQLiteDBConnection wrapper strips
   // this via reorderRows(); we call the raw plugin, so we must strip it ourselves. No-op on
-  // Android / when absent. (Root cause of the "0 rows" install failure - data was really there.)
+  // Android / when absent. (Root cause of the "0 rows" install failure — data was really there.)
   function rowsOf(r) {
     var v = (r && r.values) || [];
     if (v.length && v[0] && typeof v[0] === "object" && Object.prototype.hasOwnProperty.call(v[0], "ios_columns")) v = v.slice(1);
@@ -205,7 +205,7 @@
     return toks.map(function (t) { return pfx + t + "*"; }).join(" ");
   }
 
-  /* -------- offline search fns - shapes MATCH the online MEDAPI -------- */
+  /* -------- offline search fns — shapes MATCH the online MEDAPI -------- */
   // searchBrands → {results:[{id,brand,composition,class,manufacturer,form,pack,mrp,discontinued}]}
   function searchBrands(q, limit) {
     var m = ftsMatch(q, "brand"); if (!m) return Promise.resolve({ results: [] });
@@ -377,13 +377,13 @@
   }
   function renderUpgrade() {
     setBody('<div class="odb-card"><span class="odb-badge">PRO</span><div class="odb-t">Offline drug database</div>' +
-      '<div class="odb-p">Download all Indian brands to search instantly, even without internet - ideal for wards with poor signal. This is a StewardMD Pro feature.</div>' +
+      '<div class="odb-p">Download all Indian brands to search instantly, even without internet — ideal for wards with poor signal. This is a StewardMD Pro feature.</div>' +
       '<button class="odb-btn" id="odbUpgrade">Upgrade to Pro</button></div>');
     var b = _root.querySelector("#odbUpgrade"); if (b) b.addEventListener("click", function () { toast("Contact StewardMD to upgrade to Pro."); });
   }
   function renderMsg(t, p) { setBody('<div class="odb-card"><div class="odb-t">' + esc(t) + '</div><div class="odb-p">' + esc(p) + '</div><button class="odb-btn sec" id="odbRetry">Retry</button></div>'); var r = _root.querySelector("#odbRetry"); if (r) r.addEventListener("click", render); }
   function renderOfflineNow() {
-    var extra = _installed ? '<div class="odb-p">Your offline copy (' + fmtN(_rows) + ' drugs) is active - drug search works now.</div>' : '';
+    var extra = _installed ? '<div class="odb-p">Your offline copy (' + fmtN(_rows) + ' drugs) is active — drug search works now.</div>' : '';
     setBody('<div class="odb-card"><div class="odb-t">You\'re offline</div><div class="odb-p">Connect to the internet to download or update the offline database.</div>' + extra + '<button class="odb-btn sec" id="odbRetry">Retry</button></div>');
     var r = _root.querySelector("#odbRetry"); if (r) r.addEventListener("click", render);
   }
@@ -394,7 +394,7 @@
     if (_installed) {
       html += '<span class="odb-badge">INSTALLED</span><div class="odb-t">Offline database ready</div>' +
         '<div class="odb-p">' + fmtN(_rows) + ' drugs on this device' + (upToDate ? ' · up to date' : '') + '. Drug search works offline.</div>';
-      if (updateAvail) html += '<button class="odb-btn" id="odbGet">Update available - download ' + fmtMB(v.bytes_gzipped) + '</button>';
+      if (updateAvail) html += '<button class="odb-btn" id="odbGet">Update available — download ' + fmtMB(v.bytes_gzipped) + '</button>';
       html += '<button class="odb-btn danger" id="odbDel">Delete offline database</button>';
     } else {
       html += '<div class="odb-t">Enable offline database</div>' +
@@ -455,7 +455,7 @@
         return Promise.all([pset(PK.installed, "1"), pset(PK.version, v.version), pset(PK.rows, n), pset(PK.path, _dbPath || "")]);
       })
       .then(function () { _installed = true; _version = v.version; return countRows(); })
-      .then(function (n) { _rows = n; _busy = false; installRouting(); toast("Offline database ready - " + fmtN(n) + " drugs."); render(); })
+      .then(function (n) { _rows = n; _busy = false; installRouting(); toast("Offline database ready — " + fmtN(n) + " drugs."); render(); })
       .catch(function (e) {
         _busy = false;
         var raw = (e && e.message) || "";

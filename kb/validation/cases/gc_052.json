@@ -33,10 +33,10 @@
     "CT chest (limited, post-stabilization): bilateral ground-glass and consolidative opacities in a non-lobar, gravity-dependent distribution consistent with ARDS pattern rather than cardiogenic oedema"
   ],
   "microbiology": [
-    "Blood cultures x2 sent - pending",
-    "Sputum/endotracheal aspirate Gram stain and culture sent - pending",
-    "Urinary pneumococcal and Legionella antigen sent - pending",
-    "Respiratory viral PCR panel (including influenza) sent - pending",
+    "Blood cultures x2 sent — pending",
+    "Sputum/endotracheal aspirate Gram stain and culture sent — pending",
+    "Urinary pneumococcal and Legionella antigen sent — pending",
+    "Respiratory viral PCR panel (including influenza) sent — pending",
     "Initial sputum culture from admission grew no significant pathogen"
   ],
   "differentialDiagnoses": [
@@ -49,20 +49,20 @@
   ],
   "finalDiagnosis": "Moderate-to-severe ARDS (Berlin criteria) secondary to community-acquired pneumonia, with refractory hypoxaemia",
   "citations": [
-    "Harrison 22e - Acute Respiratory Distress Syndrome",
+    "Harrison 22e — Acute Respiratory Distress Syndrome",
     "ARDS Definition Task Force (Berlin Definition) 2012",
     "Surviving Sepsis Campaign Guidelines 2021"
   ],
   "stewardship": "Continue and, if not already broad enough, escalate empirical antimicrobial therapy for the underlying triggering pneumonia per severe CAP guidance (cover typical and atypical pathogens, consider MRSA/Pseudomonas coverage if risk factors present) while sending cultures and respiratory viral studies; ARDS itself has no antimicrobial treatment and management is supportive (lung-protective ventilation, conservative fluid strategy, prone positioning, consideration of neuromuscular blockade for severe cases), with de-escalation of antibiotics once a specific pathogen or non-infectious trigger is confirmed or excluded.",
   "contraindications": [
-    "Avoid high tidal volume ventilation (>6 mL/kg predicted body weight) - associated with increased mortality in ARDS",
-    "Avoid liberal fluid strategy once shock is resolved - conservative fluid management improves ventilator-free days",
+    "Avoid high tidal volume ventilation (>6 mL/kg predicted body weight) — associated with increased mortality in ARDS",
+    "Avoid liberal fluid strategy once shock is resolved — conservative fluid management improves ventilator-free days",
     "Avoid delaying prone positioning in PaO2:FiO2 <150 refractory to initial ventilator optimization",
     "Use caution with sedation/paralytic choice in hemodynamically unstable patients on vasopressors"
   ],
   "edgeCases": [
     "ARDS is a syndromic diagnosis (Berlin criteria: acute onset within 1 week, bilateral infiltrates not fully explained by cardiac failure/fluid overload, and PaO2:FiO2 impairment) rather than a single disease entity, and is NOT present as a discrete id in the provided diagnosable-disease list; acceptableIds is therefore set to [] per instructions, even though this is the correct clinical diagnosis",
-    "Distinguishing ARDS from cardiogenic pulmonary oedema is essential - echocardiography showing normal LV function and a low/normal BNP argue against a primarily cardiac cause here, supporting ARDS over heart_failure",
+    "Distinguishing ARDS from cardiogenic pulmonary oedema is essential — echocardiography showing normal LV function and a low/normal BNP argue against a primarily cardiac cause here, supporting ARDS over heart_failure",
     "The underlying trigger (pneumonia) remains a relevant differential/co-diagnosis and is represented in the disease list (CAP/SEVERE_CAP) as the precipitant rather than a competing final diagnosis",
     "Mild permissive hypercapnia (paCO2 48, pH 7.29) is an expected and accepted consequence of lung-protective ventilation and should not be over-corrected with aggressive hyperventilation",
     "Elevated D-dimer is nonspecific in critical illness/pneumonia and does not by itself confirm pulmonary embolism as an alternative explanation for hypoxaemia"

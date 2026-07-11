@@ -31,25 +31,25 @@
   "imaging": "Whole-leg compression venous duplex ultrasound of the left lower limb: non-compressible, echogenic thrombus within the left popliteal and superficial femoral veins with absent Doppler flow and loss of respiratory phasicity, extending proximally to the common femoral vein. Contralateral limb veins fully compressible. No sonographic features of Baker cyst rupture or cellulitic phlegmon.",
   "microbiology": "Not indicated; no clinical evidence of infection. Blood cultures not sent.",
   "differentialDiagnoses": [
-    "Proximal deep vein thrombosis (left femoropopliteal) - confirmed",
+    "Proximal deep vein thrombosis (left femoropopliteal) — confirmed",
     "Cellulitis of the leg (no demarcated border, no fever/toxicity, no portal of entry at site)",
     "Decompensated fluid overload / dependent oedema from CKD + diabetes (but that is bilateral and painless)",
     "Pulmonary embolism as a complication (currently no cardiorespiratory compromise; requires vigilance)"
   ],
   "finalDiagnosis": "Acute proximal deep vein thrombosis of the left lower limb (femoropopliteal), provoked by long-haul travel and immobility, in a patient whose baseline CKD- and diabetes-related bilateral oedema confounds the picture; unilateral, painful, asymmetric swelling with a positive whole-leg compression ultrasound is diagnostic.",
   "citations": [
-    "Harrison's Principles of Internal Medicine, 22e - Venous Thrombosis / Deep Vein Thrombosis and Pulmonary Thromboembolism",
-    "American Society of Hematology (ASH) - Management of Venous Thromboembolism - 2020"
+    "Harrison's Principles of Internal Medicine, 22e — Venous Thrombosis / Deep Vein Thrombosis and Pulmonary Thromboembolism",
+    "American Society of Hematology (ASH) — Management of Venous Thromboembolism — 2020"
   ],
-  "stewardship": "Not applicable - deep vein thrombosis is a non-infective vascular diagnosis. No antimicrobial therapy is indicated. Management is anticoagulation, not antibiotics; cellulitis was actively excluded so empiric antibiotics would be inappropriate and represent antibiotic misuse.",
+  "stewardship": "Not applicable — deep vein thrombosis is a non-infective vascular diagnosis. No antimicrobial therapy is indicated. Management is anticoagulation, not antibiotics; cellulitis was actively excluded so empiric antibiotics would be inappropriate and represent antibiotic misuse.",
   "contraindications": [
-    "Renal dosing critical: eGFR 26 mL/min/1.73m2 - avoid standard-dose direct oral anticoagulants where clearance is renally dependent; dabigatran contraindicated at this eGFR; if a DOAC is used, choose a renally-appropriate agent/dose or use LMWH with anti-Xa monitoring / dose reduction, or a VKA.",
+    "Renal dosing critical: eGFR 26 mL/min/1.73m2 — avoid standard-dose direct oral anticoagulants where clearance is renally dependent; dabigatran contraindicated at this eGFR; if a DOAC is used, choose a renally-appropriate agent/dose or use LMWH with anti-Xa monitoring / dose reduction, or a VKA.",
     "Avoid full therapeutic LMWH at fixed weight-based dose without accounting for CKD accumulation and bleeding risk.",
-    "Ongoing aspirin plus anticoagulation increases bleeding risk - review need for concurrent antiplatelet.",
+    "Ongoing aspirin plus anticoagulation increases bleeding risk — review need for concurrent antiplatelet.",
     "Assess bleeding risk before anticoagulation; no active bleeding here."
   ],
   "edgeCases": [
-    "Bilateral chronic oedema from CKD/diabetes can mask or mimic DVT - asymmetry, pain and warmth on one side are the discriminators.",
+    "Bilateral chronic oedema from CKD/diabetes can mask or mimic DVT — asymmetry, pain and warmth on one side are the discriminators.",
     "D-dimer has poor specificity in the elderly and in CKD; a raised value here is non-diagnostic and imaging is required.",
     "If breathlessness, hypoxia or syncope develop, escalate to evaluate for pulmonary embolism.",
     "Phlegmasia cerulea dolens (massive proximal DVT with limb ischaemia) is the limb-threatening extreme to watch for."
@@ -102,7 +102,7 @@
   },
   "regressionAssertions": [
     "Engine must return dvt as the top diagnosis given unilateral painful asymmetric leg swelling with positive compression ultrasound.",
-    "Engine must NOT recommend antibiotics - cellulitis was excluded and DVT is non-infective.",
+    "Engine must NOT recommend antibiotics — cellulitis was excluded and DVT is non-infective.",
     "Engine must flag renal impairment (eGFR ~26) as a driver of anticoagulant choice/dosing.",
     "Coexisting bilateral CKD/diabetic oedema must not override the unilateral DVT signal.",
     "stewardship.tier must be null and antibiotics empty."

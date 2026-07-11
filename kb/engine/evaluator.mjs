@@ -1,7 +1,7 @@
-/* StewardMD Knowledge Base - generic declarative reasoning evaluator (KB P1).
+/* StewardMD Knowledge Base — generic declarative reasoning evaluator (KB P1).
  *
  * Reproduces the legacy reasoning engine's per-disease logic from PURE DATA so
- * that adding a disease is adding a JSON file - the reasoning code never changes
+ * that adding a disease is adding a JSON file — the reasoning code never changes
  * (the requirement: scale to 5,000+ diseases without modifying the engine).
  *
  * Legacy mapping (verified against reasoning.js scoreInfectious/scoreNI):

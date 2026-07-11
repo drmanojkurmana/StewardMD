@@ -1,4 +1,4 @@
-/* StewardMD service worker - offline + instant repeat loads.
+/* StewardMD service worker — offline + instant repeat loads.
    UPDATE-SAFE BY DESIGN:
    - Navigations/HTML = NETWORK-FIRST with cache:"no-store" → users ALWAYS get the
      latest index.html when online (so ?v=goldN cache-busting actually works and stale
@@ -10,7 +10,7 @@
    - On activate, the new SW RELOADS open tabs so a deploy can't leave a client stuck on
      stale JS (this is what un-sticks users running an old reasoning.js/app.js).
    IMPORTANT: bump CACHE on every deploy (keep in step with ?v=goldN) so old caches purge. */
-var CACHE = "stewardmd-gold335";
+var CACHE = "stewardmd-gold336";
 
 self.addEventListener("install", function () {
   self.skipWaiting();
@@ -43,7 +43,7 @@ self.addEventListener("notificationclick", function (e) {
   }));
 });
 
-// Reload open tabs on activate ONLY for a genuine UPGRADE - i.e. a previous
+// Reload open tabs on activate ONLY for a genuine UPGRADE — i.e. a previous
 // stewardmd-* cache existed before this version took over. On a FIRST install
 // there is nothing stale to refresh, so reloading is pointless AND harmful: it
 // races the initial page load, giving first-time users a reload flash and, under
@@ -86,7 +86,7 @@ self.addEventListener("fetch", function (e) {
   // Only handle same-origin requests. Firebase/gstatic/API/fonts pass straight through.
   if (url.origin !== self.location.origin) return;
 
-  // NEVER cache API responses (e.g. /api/ghis/* carries live PHI - labs, radiology,
+  // NEVER cache API responses (e.g. /api/ghis/* carries live PHI — labs, radiology,
   // patient lists). Let them go straight to the network so nothing is persisted.
   if (url.pathname.indexOf("/api/") === 0) return;
 
@@ -99,7 +99,7 @@ self.addEventListener("fetch", function (e) {
       try {
         var net = await fetch(url.pathname + url.search, { cache: "no-store", credentials: "same-origin" });
         // A redirected response (e.g. Cloudflare Pages clean-URL 308 on "/admin/") CANNOT be
-        // returned from a service worker for a navigation - Safari rejects it with
+        // returned from a service worker for a navigation — Safari rejects it with
         // "Response served by service worker has redirections". Rebuild it as a fresh,
         // non-redirected response so the navigation succeeds.
         if (net && net.redirected) {

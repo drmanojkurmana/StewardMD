@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://stewardmd.in/kb/manifest/source-manifest.schema.json",
   "title": "StewardMD MaiK Knowledge Source Manifest",
-  "description": "Declares every knowledge source the MaiK assistant is grounded on, its lawful-use status, and how it participates. Governance artifact: enforces paraphrase-only use (no verbatim reproduction of copyrighted text) and the ICMR ▸ international-guideline ▸ Harrison treatment precedence. No source TEXT is stored here - only provenance metadata.",
+  "description": "Declares every knowledge source the MaiK assistant is grounded on, its lawful-use status, and how it participates. Governance artifact: enforces paraphrase-only use (no verbatim reproduction of copyrighted text) and the ICMR ▸ international-guideline ▸ Harrison treatment precedence. No source TEXT is stored here — only provenance metadata.",
   "type": "object",
   "required": ["version", "policy", "sources"],
   "properties": {
@@ -16,7 +16,7 @@
         "noVerbatim": { "type": "boolean" },
         "noPaywalledIngestion": { "type": "boolean", "description": "No bulk ingestion of copyrighted/paywalled full text into the KB." },
         "citationRequired": { "type": "boolean", "description": "Every clinical claim carries a source ref + page/section anchor." },
-        "engineAuthority": { "type": "string", "description": "The deterministic StewardMD engine - not any source or the LLM - owns diagnosis, confidence, and stewardship recommendations." }
+        "engineAuthority": { "type": "string", "description": "The deterministic StewardMD engine — not any source or the LLM — owns diagnosis, confidence, and stewardship recommendations." }
       }
     },
     "treatmentPrecedence": {
@@ -48,7 +48,7 @@
             "enum": ["icmr", "guideline", "harrison", "formulary", "overlay", null],
             "description": "Which tier of treatmentPrecedence this source maps to (null for non-treatment sources)."
           },
-          "verbatimStored": { "type": "boolean", "description": "MUST be false - no verbatim copyrighted text is stored." },
+          "verbatimStored": { "type": "boolean", "description": "MUST be false — no verbatim copyrighted text is stored." },
           "paraphrased": { "type": "boolean" },
           "citationAnchor": { "type": "string", "description": "Form of the citation shown/kept (e.g. page range, guideline name)." },
           "clinicianFacingLabel": { "type": "string", "description": "How this source is labelled to clinicians in the UI (never a proprietary title where inappropriate)." },

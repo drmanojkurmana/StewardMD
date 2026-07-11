@@ -1,5 +1,5 @@
 /* ============================================================================
-   StewardMD - National Drug Database client + browser (Cloudflare Worker + D1)
+   StewardMD — National Drug Database client + browser (Cloudflare Worker + D1)
    Composition-centric: search returns GENERICS; opening one shows its shared
    uses/side-effects (a property of the molecule, not the brand) and ALL its
    brands (brand → manufacturer + price), sortable by relevance / price.
@@ -28,7 +28,7 @@
   var MEDAPI = {
     base: API_BASE,
     searchCompositions: function (q, limit) { return api("/search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 20)).then(function (d) { return d || { results: [] }; }); },
-    // Brand-name search - returns individual brands whose name matches q (e.g.
+    // Brand-name search — returns individual brands whose name matches q (e.g.
     // "pantocid"). Degrades to empty if the API predates the endpoint (404 → null).
     searchBrands: function (q, limit) { return api("/brand-search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 12)).then(function (d) { return d || { results: [] }; }); },
     composition: function (name, sort, tier, limit, offset, q) {
@@ -37,7 +37,7 @@
     drug: function (id) { return api("/drug/" + encodeURIComponent(id)); },
     monograph: function (name) { return api("/monograph?name=" + encodeURIComponent(name)); },
     structured: function (name) { return api("/structured?name=" + encodeURIComponent(name)); },
-    // Live total drug/brand count - /health returns {rows}. Memoized so the label never
+    // Live total drug/brand count — /health returns {rows}. Memoized so the label never
     // goes stale again (falls back to the constant if the API is unreachable).
     _count: null,
     count: function () {
@@ -48,7 +48,7 @@
   };
 
   /* ============================================================
-   * Universal-search hook - composition results under #spResults
+   * Universal-search hook — composition results under #spResults
    * ============================================================ */
   var box = null, lastQ = "", timer = null;
   function ensureBox() {
@@ -73,7 +73,7 @@
     list.forEach(function (r) {
       var sub = [r["class"], (r.brands != null ? r.brands.toLocaleString() + " brands" : "")].filter(Boolean).join(" · ");
       html += '<div class="sp-card smddb-hit" data-comp="' + esc(r.composition) + '">' +
-        '<div class="sp-card-top"><span class="sp-card-icon">💊</span><div><div class="sp-card-type">Generic - tap for brands &amp; prices</div><div class="sp-card-title">' + esc(r.composition) + '</div></div></div>' +
+        '<div class="sp-card-top"><span class="sp-card-icon">💊</span><div><div class="sp-card-type">Generic — tap for brands &amp; prices</div><div class="sp-card-title">' + esc(r.composition) + '</div></div></div>' +
         '<div class="sp-card-desc">' + esc(sub) + '</div></div>';
     });
     box.innerHTML = html;
@@ -93,7 +93,7 @@
   }
 
   /* ============================================================
-   * Drugs Database - full-screen browser overlay (window.MEDDB)
+   * Drugs Database — full-screen browser overlay (window.MEDDB)
    * ============================================================ */
   var root = null, q2 = "", t2 = null;
   var st = { name: null, sort: "relevance", tier: "all", info: null, brands: [], total: 0, offset: 0, loading: false, bq: "" };
@@ -180,7 +180,7 @@
     return '<button class="db-comp db-brandhit' + (bd.discontinued ? " disc" : "") + '" data-comp="' + esc(bd.composition || "") + '">' +
       '<span class="db-comp-ic">🔖</span><span class="db-comp-main">' +
         '<span class="db-comp-name">' + esc(bd.brand) + (bd.discontinued ? ' <span class="db-disc">discontinued</span>' : '') + '</span>' +
-        '<span class="db-comp-sub"><b class="db-bh-comp">' + esc(bd.composition || "-") + '</b>' + (meta ? ' · ' + esc(meta) : '') + '</span>' +
+        '<span class="db-comp-sub"><b class="db-bh-comp">' + esc(bd.composition || "—") + '</b>' + (meta ? ' · ' + esc(meta) : '') + '</span>' +
       '</span><span class="db-chev">›</span></button>';
   }
   function runList(q) {
@@ -228,9 +228,9 @@
     var meta = [b.form, b.pack].filter(Boolean).join(" · ");
     return '<div class="db-brand' + (b.discontinued ? " disc" : "") + '">' +
       '<div class="db-brand-main"><div class="db-brand-name">' + esc(b.brand) + (b.discontinued ? ' <span class="db-disc">discontinued</span>' : '') + '</div>' +
-      '<div class="db-brand-mfr">' + esc(b.manufacturer || "-") + '</div>' +
+      '<div class="db-brand-mfr">' + esc(b.manufacturer || "—") + '</div>' +
       (meta ? '<div class="db-brand-meta">' + esc(meta) + '</div>' : '') + '</div>' +
-      '<div class="db-brand-price">' + (b.mrp != null ? esc(inr(b.mrp)) : '<span class="db-na">-</span>') + '</div>' +
+      '<div class="db-brand-price">' + (b.mrp != null ? esc(inr(b.mrp)) : '<span class="db-na">—</span>') + '</div>' +
       '</div>';
   }
   function renderDetail() {
@@ -292,7 +292,7 @@
     var html = '<div class="db-msrc">℞ <b>' + esc(mono.source || "openFDA") + '</b><span>Verify against local guidance. Decision support only.</span></div>';
     MONO_SECS.forEach(function (s) {
       var v = mono[s[1]]; if (!v) return; var op = openKeys[s[1]];
-      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(s[0]) + '<span class="db-msec-x">' + (op ? "-" : "+") + '</span></button>' +
+      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(s[0]) + '<span class="db-msec-x">' + (op ? "−" : "+") + '</span></button>' +
         '<div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
     });
     return html;
@@ -302,14 +302,14 @@
       h.addEventListener("click", function () {
         var b = h.nextElementSibling, hidden = b.style.display === "none";
         b.style.display = hidden ? "" : "none"; h.classList.toggle("open", hidden);
-        h.querySelector(".db-msec-x").textContent = hidden ? "-" : "+";
+        h.querySelector(".db-msec-x").textContent = hidden ? "−" : "+";
       });
     });
   }
   function renderMono(c, resp) {
     if (!resp || !resp.found) { c.innerHTML = '<div class="db-mono-none">No prescribing monograph for this molecule yet (India-only or not matched). Brand &amp; price data below.</div>'; return; }
     if (resp.combo) {
-      var html = '<div class="db-msrc">Combination product - prescribing details shown per component. Verify against local guidance.</div>';
+      var html = '<div class="db-msrc">Combination product — prescribing details shown per component. Verify against local guidance.</div>';
       (resp.components || []).forEach(function (comp) {
         html += '<div class="db-cmono"><div class="db-cmono-h">💊 ' + esc(comp.name) + '</div>' +
           (comp.monograph ? sectionsHTML(comp.monograph, { indication: 1 }) : '<div class="db-mono-none">No monograph available for this component yet.</div>') +
@@ -375,20 +375,20 @@
   function qfGrid(s) {
     var items = [["Adult dose", firstSent(s.adult_dose)], ["Meal", s.food_timing], ["Pregnancy", firstSent(s.pregnancy)],
       ["Renal", s.renal_adjust], ["Hepatic", s.hepatic_adjust], ["Half-life", s.half_life], ["Alcohol", s.alcohol], ["Monitoring", s.monitoring]];
-    return '<div class="db-qf">' + items.map(function (p) { return '<div><div class="db-qf-k">' + esc(p[0]) + '</div><div class="db-qf-v">' + esc((p[1] || "-").slice(0, 90)) + '</div></div>'; }).join("") + '</div>';
+    return '<div class="db-qf">' + items.map(function (p) { return '<div><div class="db-qf-k">' + esc(p[0]) + '</div><div class="db-qf-v">' + esc((p[1] || "—").slice(0, 90)) + '</div></div>'; }).join("") + '</div>';
   }
   function stSections(s, openKeys) {
-    var html = '<div class="db-msrc">℞ <b>Structured from official FDA label (openFDA / DailyMed)</b><span>Faithful summary - pending clinician review; US labelling, verify against local guidance.</span></div>';
+    var html = '<div class="db-msrc">℞ <b>Structured from official FDA label (openFDA / DailyMed)</b><span>Faithful summary — pending clinician review; US labelling, verify against local guidance.</span></div>';
     ST_SECS.forEach(function (sec) {
       var v = s[sec[1]]; if (!v) return; var op = openKeys[sec[1]];
-      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(sec[0]) + '<span class="db-msec-x">' + (op ? "-" : "+") + '</span></button><div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
+      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(sec[0]) + '<span class="db-msec-x">' + (op ? "−" : "+") + '</span></button><div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
     });
     return html;
   }
   function renderStructured(c, resp) {
     if (!resp || !resp.found) { c.innerHTML = '<div class="db-mono-none">No structured clinical record for this molecule yet (India-only or not matched). Brand &amp; price data below.</div>'; return; }
     if (resp.combo) {
-      var html = '<div class="db-msrc">Combination product - clinical details per component. Verify locally.</div>';
+      var html = '<div class="db-msrc">Combination product — clinical details per component. Verify locally.</div>';
       (resp.components || []).forEach(function (cp) {
         html += '<div class="db-cmono"><div class="db-cmono-h">💊 ' + esc(cp.name) + '</div>' +
           (cp.data ? ((cp.data.gold && parseGold(cp.data.gold)) ? goldHTML(parseGold(cp.data.gold)) : (qfGrid(cp.data) + stSections(cp.data, { summary: 1 }))) : '<div class="db-mono-none">No structured record for this component yet.</div>') + '</div>';
@@ -420,13 +420,13 @@
     if (g.admin) H += S('✓', 'Administration', 'How to give?', '<ul class="gd-chk">' + g.admin.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>');
     if (g.moa) H += S('🧭', 'Mechanism', 'How it works', '<div>' + esc(g.moa) + '</div>');
     if (g.contra) H += S('⛔', 'Contraindications & Cautions', 'Avoid when?', '<div class="gd-sev red"><h4>Absolute</h4>' + bl(g.contra.absolute) + '</div><div class="gd-sev amber"><h4>Relative / precautions</h4>' + bl(g.contra.relative) + '</div><div class="gd-sev blue"><h4>Monitor</h4>' + bl(g.contra.monitor) + '</div>');
-    H += '<div class="gd-2">' + S('🤰', 'Pregnancy & Lactation', 'Can I use it?', '<div class="gd-kv"><b>Preg</b><span>' + esc(g.preg || '-') + '</span></div><div class="gd-kv"><b>Lact</b><span>' + esc(g.lact || '-') + '</span></div>') + S('🫘', 'Renal / Hepatic', 'Adjust?', '<div class="gd-kv"><b>Renal</b><span>' + esc(g.renal || '-') + '</span></div><div class="gd-kv"><b>Hepatic</b><span>' + esc(g.hepatic || '-') + '</span></div>') + '</div>';
-    if (g.interactions) { var ix = g.interactions; H += S('🔗', 'Interactions', 'Worry about?', '<div class="gd-sev red"><h4>Major</h4>' + bl(ix.major) + '</div><div class="gd-sev amber"><h4>Moderate</h4>' + bl(ix.moderate) + '</div><div class="gd-sev grey"><h4>Minor</h4>' + bl(ix.minor) + '</div><div class="gd-kv"><b>Food</b><span>' + esc(ix.food || '-') + '</span></div><div class="gd-kv"><b>Alcohol</b><span>' + esc(ix.alcohol || '-') + '</span></div>' + (ix.diagnostics ? '<div class="gd-kv"><b>Dx</b><span>' + esc(ix.diagnostics) + '</span></div>' : '')); }
+    H += '<div class="gd-2">' + S('🤰', 'Pregnancy & Lactation', 'Can I use it?', '<div class="gd-kv"><b>Preg</b><span>' + esc(g.preg || '—') + '</span></div><div class="gd-kv"><b>Lact</b><span>' + esc(g.lact || '—') + '</span></div>') + S('🫘', 'Renal / Hepatic', 'Adjust?', '<div class="gd-kv"><b>Renal</b><span>' + esc(g.renal || '—') + '</span></div><div class="gd-kv"><b>Hepatic</b><span>' + esc(g.hepatic || '—') + '</span></div>') + '</div>';
+    if (g.interactions) { var ix = g.interactions; H += S('🔗', 'Interactions', 'Worry about?', '<div class="gd-sev red"><h4>Major</h4>' + bl(ix.major) + '</div><div class="gd-sev amber"><h4>Moderate</h4>' + bl(ix.moderate) + '</div><div class="gd-sev grey"><h4>Minor</h4>' + bl(ix.minor) + '</div><div class="gd-kv"><b>Food</b><span>' + esc(ix.food || '—') + '</span></div><div class="gd-kv"><b>Alcohol</b><span>' + esc(ix.alcohol || '—') + '</span></div>' + (ix.diagnostics ? '<div class="gd-kv"><b>Dx</b><span>' + esc(ix.diagnostics) + '</span></div>' : '')); }
     if (g.se) { var s = g.se; H += S('⚠️', 'Side Effects', 'What happens?', '<div class="gd-2"><div class="gd-sev green"><h4>Common</h4>' + bl(s.common) + '</div><div class="gd-sev red"><h4>Serious</h4>' + bl(s.serious) + '</div><div class="gd-sev amber"><h4>Rare (long-term)</h4>' + bl(s.rare) + '</div><div class="gd-sev red"><h4>🚨 Emergency</h4>' + bl(s.emergency) + '</div></div>'); }
     if (g.monitoring) H += S('📈', 'Monitoring', 'Follow what?', '<ul class="gd-mon">' + g.monitoring.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>');
     H += '<div class="gd-2">' + (g.counsel ? S('🗣', 'Counselling', 'Tell patient', bl(g.counsel)) : '') + S('⏱', 'Pharmacokinetics', 'Onset / duration', '<div class="gd-pk">' + (g.pk || []).map(function (p) { return '<div><div class="gd-qk">' + esc(p[0]) + '</div><div class="gd-qv">' + esc(p[1]) + '</div></div>'; }).join("") + '</div>' + (g.missed ? '<div class="gd-kv"><b>Missed</b><span>' + esc(g.missed) + '</span></div>' : '') + (g.overdose ? '<div class="gd-kv"><b>Overdose</b><span>' + esc(g.overdose) + '</span></div>' : '')) + '</div>';
     if (g.pearls) H += '<div class="gd-sec gd-pearls"><div class="gd-h">💡 Clinical Pearls <span class="gd-q">Expert tips</span></div>' + bl(g.pearls) + '</div>';
-    H += S('📚', 'References', 'Source', '<div class="gd-src">' + (g.refs || []).map(function (r) { return '<a href="' + r[1] + '" target="_blank">' + esc(r[0]) + '</a>'; }).join(" · ") + '</div><div class="gd-foot">Faithful summary - pending clinician sign-off; verify locally. Full official label preserved internally.</div>');
+    H += S('📚', 'References', 'Source', '<div class="gd-src">' + (g.refs || []).map(function (r) { return '<a href="' + r[1] + '" target="_blank">' + esc(r[0]) + '</a>'; }).join(" · ") + '</div><div class="gd-foot">Faithful summary — pending clinician sign-off; verify locally. Full official label preserved internally.</div>');
     return H;
   }
   function parseGold(s) { try { return JSON.parse(s); } catch (e) { return null; } }
@@ -513,7 +513,7 @@
       ".gd-pk>div{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed);border-radius:8px;padding:6px;text-align:center}",
       ".gd-pearls{background:linear-gradient(135deg,#e7f3f3,#eef7ee);border:1px solid #bfe3e3}",
       ".gd-src a{color:var(--teal,#0a9396)}.gd-foot{font:500 10px var(--sans,system-ui);color:var(--slate-soft,#8aa0ab);margin-top:5px}",
-      // severity/pearls blocks have fixed light pastel backgrounds - force dark text so they stay readable in dark mode
+      // severity/pearls blocks have fixed light pastel backgrounds — force dark text so they stay readable in dark mode
       ".gd-sev{color:#1f2d34}.gd-sev .gd-b li{color:#1f2d34}.gd-pearls,.gd-pearls .gd-b li{color:#173a36}",
       ".db-sev{color:#1f2d34}.db-sev .db-b li,.db-sev li{color:#1f2d34}",
       ".db-hf{font:600 12px var(--sans,system-ui);color:var(--slate,#555);margin:0 2px 10px}",

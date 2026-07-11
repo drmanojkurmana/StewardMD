@@ -40,7 +40,7 @@
     "CT head (non-contrast): no acute hemorrhage or mass lesion; done given seizure and altered sensorium"
   ],
   "microbiology": [
-    "Blood cultures x2 sent (pending) - obtained to exclude concurrent sepsis given overlapping features",
+    "Blood cultures x2 sent (pending) — obtained to exclude concurrent sepsis given overlapping features",
     "Malaria antigen/smear negative (relevant given febrile encephalopathy differential)"
   ],
   "differentialDiagnoses": [
@@ -53,30 +53,30 @@
     "Thyroid storm",
     "Anticholinergic toxidrome"
   ],
-  "finalDiagnosis": "Heat stroke (classic/non-exertional) with multiorgan dysfunction - hyperthermia with CNS dysfunction",
+  "finalDiagnosis": "Heat stroke (classic/non-exertional) with multiorgan dysfunction — hyperthermia with CNS dysfunction",
   "citations": [
-    "Harrison 22e - Heat-Related Illness (Hyperthermia and Heat Stroke)",
-    "Harrison 22e - Approach to the Patient with Multiorgan Dysfunction in Critical Illness",
+    "Harrison 22e — Heat-Related Illness (Hyperthermia and Heat Stroke)",
+    "Harrison 22e — Approach to the Patient with Multiorgan Dysfunction in Critical Illness",
     "Surviving Sepsis Campaign 2021 (used for supportive shock/organ-dysfunction management framework, not as primary etiologic guideline)"
   ],
   "stewardship": null,
   "contraindications": [
-    "Avoid antipyretics (e.g., paracetamol/NSAIDs) - ineffective in heat stroke and may worsen hepatic or renal injury",
+    "Avoid antipyretics (e.g., paracetamol/NSAIDs) — ineffective in heat stroke and may worsen hepatic or renal injury",
     "Avoid aggressive vasoconstrictor use before adequate cooling and volume assessment, as it can impair heat dissipation",
-    "Avoid empirical antibiotics as first-line therapy unless a concurrent infective source is identified - treat hyperthermia as environmental/non-infective initially and pursue rapid cooling"
+    "Avoid empirical antibiotics as first-line therapy unless a concurrent infective source is identified — treat hyperthermia as environmental/non-infective initially and pursue rapid cooling"
   ],
   "edgeCases": [
     "Heat stroke ('gc_097') is not present in the current diagnosable-disease vocabulary list provided to the engine; therefore acceptableIds and differentialIds are set to [] per rule, even though sepsis/septic shock and CNS-infection mimics are represented and should appear in the differential-scoring output.",
     "Distinguishing classic heat stroke from sepsis-induced hyperthermia can be difficult when SIRS-type findings (tachycardia, tachypnea, altered sensorium, organ dysfunction, elevated lactate) overlap; the absence of an antecedent infective prodrome and presence of an extreme environmental exposure history is the key discriminator.",
     "Rhabdomyolysis-driven AKI and DIC are expected complications of severe heat stroke and should not be mistaken for a primary hematologic or renal diagnosis.",
-    "Cessation of sweating is a classic but unreliable sign - many heat stroke patients (especially exertional) continue to sweat; diagnosis rests on core temperature plus CNS dysfunction in the correct exposure context."
+    "Cessation of sweating is a classic but unreliable sign — many heat stroke patients (especially exertional) continue to sweat; diagnosis rests on core temperature plus CNS dysfunction in the correct exposure context."
   ],
   "expectedMaiK": "MaiK should flag hyperthermia (>40°C) with CNS dysfunction (altered sensorium, seizure) in a heat-exposure context as heat stroke, prioritize rapid active cooling over antimicrobial workup, and separately flag overlapping organ dysfunction/lactate/lab picture as needing sepsis exclusion rather than automatic antibiotic initiation.",
   "expectedNextQuestions": [
-    "What was the environmental exposure - ambient temperature, humidity, duration of exposure, exertional vs non-exertional?",
+    "What was the environmental exposure — ambient temperature, humidity, duration of exposure, exertional vs non-exertional?",
     "Was there any antecedent fever or infective prodrome before the collapse?",
     "Any medications that impair thermoregulation or sweating (anticholinergics, antipsychotics, diuretics, beta-blockers)?",
-    "Is the patient still sweating or has skin become dry - and has core temperature been re-checked after initiation of cooling?",
+    "Is the patient still sweating or has skin become dry — and has core temperature been re-checked after initiation of cooling?",
     "Any history suggestive of malaria/rickettsial exposure given overlapping febrile encephalopathy picture?"
   ],
   "expectedInvestigations": [

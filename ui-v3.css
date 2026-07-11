@@ -1,5 +1,5 @@
 /* ===========================================================================
-   StewardMD UI v3 - design system foundation
+   StewardMD UI v3 — design system foundation
    Tokens + shell (header / bottom nav) + core reusable components.
    Mobile-first; desktop supported. Dark mode via <body class="v3-dark">.
    This file is the single source of UI truth for the v3 rebuild.
@@ -29,7 +29,7 @@
   --v3-maxw:520px;
 }
 /* The appearance-theme picker sets --teal on <body> (html[data-theme=x] body{…}),
-   so the accent alias must live on body - a var(--teal) on :root would only see
+   so the accent alias must live on body — a var(--teal) on :root would only see
    root's base teal and never the themed value. */
 body { --v3-primary:var(--teal,#0F766E); --v3-primary-soft:var(--teal-soft,#CCFBF1); }
 body.v3-dark, body.dark {
@@ -67,7 +67,7 @@ body.v3-dark, body.dark {
 .v3-brand{display:flex;align-items:center;gap:10px;min-width:0}
 .v3-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--v3-primary),var(--v3-primary-2));display:flex;align-items:center;justify-content:center;flex:0 0 auto}
 .v3-mark svg{width:19px;height:19px;stroke:#fff}
-/* Brand logo mark - the StewardMD glyph as a CSS mask so it takes the accent
+/* Brand logo mark — the StewardMD glyph as a CSS mask so it takes the accent
    colour (var(--v3-primary) → --teal) and thus changes with the theme/font. */
 .v3-logo{display:inline-block;width:30px;height:30px;flex:0 0 auto;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;background-color:var(--v3-primary)}
 .v3-brand-tt{font:800 16px/1.1 var(--v3-mono);letter-spacing:-.01em}.v3-md{color:var(--v3-primary)}
@@ -133,7 +133,7 @@ body.v3-dark, body.dark {
 .v3-foot{max-width:var(--v3-maxw);margin:8px auto 0;color:var(--v3-muted);font:500 11.5px/1.55 var(--v3-font);text-align:center}
 
 /* ===========================================================================
-   v4 authenticated-home - "Clinical Editorial" - OPT-IN, scoped to #homeV2.hv4
+   v4 authenticated-home — "Clinical Editorial" — OPT-IN, scoped to #homeV2.hv4
    (flag: localStorage smd_home_v4="1" or ?home=v4). Flag OFF ⇒ zero effect.
    Design language: editorial restraint. Serif display (Newsreader) for the
    masthead + greeting; flat hairline surfaces (no floaty shadows); monochrome
@@ -155,12 +155,12 @@ body.v3-dark, body.dark {
 #homeV2.hv4 .v3-avatar{width:44px;height:44px;background:transparent;border:1px solid var(--hv4-line);color:var(--v3-ink);font:600 13px var(--v3-font)}
 #homeV2.hv4 .v3-main{padding-top:var(--v3-s2)}
 #homeV2.hv4 .v3-stack{gap:var(--v3-s4)}
-/* B - greeting: date eyebrow (tracked caps) + serif headline */
+/* B — greeting: date eyebrow (tracked caps) + serif headline */
 #homeV2.hv4 .v4-greet{margin:var(--v3-s1) 2px 2px}
 #homeV2.hv4 .v4-greet .ey{font:600 11px/1.4 var(--v3-font);text-transform:uppercase;letter-spacing:.16em;color:var(--v3-muted)}
 #homeV2.hv4 .v4-greet .hi{font:500 28px/1.12 var(--hv4-serif);letter-spacing:-.01em;color:var(--v3-ink);margin-top:6px;overflow-wrap:anywhere;word-break:break-word}
 #homeV2.hv4 .v4-greet .q{font:400 14px/1.5 var(--v3-font);color:var(--v3-muted);margin-top:4px}
-/* brand banner (restored) - flat hairline card, serif wordmark, outline tag + logo */
+/* brand banner (restored) — flat hairline card, serif wordmark, outline tag + logo */
 #homeV2.hv4 .v4-hero{display:flex;align-items:center;gap:var(--v3-s4);padding:18px;border:1px solid var(--hv4-line);border-radius:var(--hv4-r);background:var(--v3-panel);box-shadow:none}
 #homeV2.hv4 .v4-hero-bd{flex:1;min-width:0}
 #homeV2.hv4 .v4-hero-tt{font:800 26px/1 var(--hv4-word);letter-spacing:-.02em;color:var(--v3-ink)}
@@ -168,13 +168,13 @@ body.v3-dark, body.dark {
 #homeV2.hv4 .v4-hero-p{font:400 13px/1.5 var(--v3-font);color:var(--v3-muted);margin:11px 0 0}
 #homeV2.hv4 .v4-hero-logo{flex:0 0 auto;width:60px;height:60px;display:flex;align-items:center;justify-content:center}
 #homeV2.hv4 .v4-hero-logo img{width:56px;height:56px;object-fit:contain}
-/* quick shortcuts (restored) - hairline wells, line icons; min-width:0 prevents 320px clipping */
+/* quick shortcuts (restored) — hairline wells, line icons; min-width:0 prevents 320px clipping */
 #homeV2.hv4 .v4-qrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 #homeV2.hv4 .v4-qc{min-width:0;height:66px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:1px solid var(--hv4-line);border-radius:12px;background:var(--v3-panel);color:var(--v3-ink);transition:transform var(--v3-ease),border-color var(--v3-ease)}
 #homeV2.hv4 .v4-qc:active{transform:scale(.96)}#homeV2.hv4 .v4-qc:hover{border-color:var(--v3-primary)}
 #homeV2.hv4 .v4-qc svg{width:20px;height:20px;stroke:var(--v3-primary)}
 #homeV2.hv4 .v4-qc span{font:500 11px var(--v3-font);color:var(--v3-muted);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* C - paired actions: identical geometry, flat surfaces */
+/* C — paired actions: identical geometry, flat surfaces */
 #homeV2.hv4 .v4-action{display:flex;align-items:center;gap:var(--v3-s3);width:100%;text-align:left;min-height:74px;padding:18px;border-radius:var(--hv4-r);border:1px solid var(--hv4-line);background:var(--v3-panel);color:var(--v3-ink);box-shadow:none;transition:transform var(--v3-ease),border-color var(--v3-ease),background var(--v3-ease)}
 #homeV2.hv4 .v4-action:active{transform:scale(.99)}
 #homeV2.hv4 .v4-action .ic{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
@@ -184,20 +184,20 @@ body.v3-dark, body.dark {
 #homeV2.hv4 .v4-action .sub{display:block;font:400 12.5px/1.4 var(--v3-font);color:var(--v3-muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #homeV2.hv4 .v4-action .arr{margin-left:auto;flex:0 0 auto;color:var(--v3-muted)}
 #homeV2.hv4 .v4-action .arr svg{width:20px;height:20px}
-/* L1 - the single emphasised action: deep solid teal (fixed in both themes) */
+/* L1 — the single emphasised action: deep solid teal (fixed in both themes) */
 #homeV2.hv4 .v4-action.primary{border:none;color:#fff;background:var(--v3-primary);box-shadow:0 10px 24px -14px rgba(15,118,110,.65),0 1px 0 rgba(255,255,255,.06) inset}
 #homeV2.hv4 .v4-action.primary:hover{background:var(--v3-primary-2)}
 #homeV2.hv4 .v4-action.primary .ic{background:rgba(255,255,255,.14)}#homeV2.hv4 .v4-action.primary .ic svg{stroke:#fff}
 #homeV2.hv4 .v4-action.primary .sub{color:rgba(255,255,255,.82)}
 #homeV2.hv4 .v4-action.primary .arr{color:#fff}
-/* L2 - same geometry, restrained: hairline well icon, teal on hover */
+/* L2 — same geometry, restrained: hairline well icon, teal on hover */
 #homeV2.hv4 .v4-action.secondary .ic{background:var(--v3-panel-2);border:1px solid var(--hv4-line)}#homeV2.hv4 .v4-action.secondary .ic svg{stroke:var(--v3-primary)}
 #homeV2.hv4 .v4-action.secondary:hover{border-color:var(--v3-primary)}
 #homeV2.hv4 .v4-badge{font:600 9.5px/1 var(--v3-font);letter-spacing:.1em;text-transform:uppercase;color:var(--v3-muted);border:1px solid var(--hv4-line);border-radius:var(--v3-r-pill);padding:3px 7px}
-/* D - section header with a hairline rule (editorial) */
+/* D — section header with a hairline rule (editorial) */
 #homeV2.hv4 .v4-sec{display:flex;align-items:center;gap:12px;font:600 11px/1.4 var(--v3-font);text-transform:uppercase;letter-spacing:.14em;color:var(--v3-muted);margin:var(--v3-s2) 2px 0}
 #homeV2.hv4 .v4-sec::after{content:"";flex:1;height:1px;background:var(--hv4-line)}
-/* E - clinical tools: one flat tile treatment, monochrome line icon in a well */
+/* E — clinical tools: one flat tile treatment, monochrome line icon in a well */
 #homeV2.hv4 .v4-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 #homeV2.hv4 .v4-tile{display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0;min-height:100px;background:var(--v3-panel);border:1px solid var(--hv4-line);border-radius:var(--hv4-r);box-shadow:none;padding:16px;text-align:left;color:var(--v3-ink);transition:transform var(--v3-ease),border-color var(--v3-ease)}
 #homeV2.hv4 .v4-tile:active{transform:scale(.98)}#homeV2.hv4 .v4-tile:hover{border-color:var(--v3-primary)}
@@ -205,7 +205,7 @@ body.v3-dark, body.dark {
 #homeV2.hv4 .v4-tile .ic svg{width:20px;height:20px;stroke:var(--v3-primary)}
 #homeV2.hv4 .v4-tile .tt{font:600 14px/1.25 var(--v3-font);letter-spacing:-.005em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:100%}
 #homeV2.hv4 .v4-tile .sub{font:400 11.5px/1.35 var(--v3-font);color:var(--v3-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-/* F - footer: hairline rule, quiet credit */
+/* F — footer: hairline rule, quiet credit */
 #homeV2.hv4 .v4-foot{max-width:var(--v3-maxw);margin:var(--v3-s4) auto 0;padding-top:var(--v3-s4);border-top:1px solid var(--hv4-line);text-align:center}
 #homeV2.hv4 .v4-foot .disc{font:400 11.5px/1.5 var(--v3-font);color:var(--v3-muted)}
 #homeV2.hv4 .v4-maik{display:flex;flex-direction:column;align-items:center;gap:9px;margin-top:16px;text-decoration:none}
@@ -233,6 +233,6 @@ body.dark #homeV2.hv4 .v4-maik-dark,body.v3-dark #homeV2.hv4 .v4-maik-dark{displ
    no truncation and no overflow (touch targets stay ≥44px) */
 @media(max-width:380px){#homeV2.hv4 .v3-header{gap:4px;padding-left:12px;padding-right:8px}#homeV2.hv4 .v3-brand-tt{font-size:18px}}
 
-/* Shared line-icon accessor (window.ICONS.get / window.icon) - sized in em, currentColor.
+/* Shared line-icon accessor (window.ICONS.get / window.icon) — sized in em, currentColor.
    Consistent with the home svg() catalog; used by icu.js / antibiogram.js / sheets. */
 .smd-ico{width:1.15em;height:1.15em;flex:0 0 auto;stroke:currentColor;stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.16em}

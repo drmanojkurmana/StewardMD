@@ -1,4 +1,4 @@
-/* StewardMD - Clinical Narrative → Structured Findings (deterministic NLP layer).
+/* StewardMD — Clinical Narrative → Structured Findings (deterministic NLP layer).
  * ---------------------------------------------------------------------------
  * UPSTREAM of the Internal Medicine reasoning engine. Turns a clinician's free-text
  * narrative into structured, canonical findings the existing engine already understands.
@@ -44,7 +44,7 @@
   var CONSIDER = ["possible", "possibly", "probable", "likely", "suspected", "suspect", "query", "?", "impression"];
   var EXCLUDE = ["rule out", "r/o", "to exclude", "cannot exclude"];
   var TEMPORAL = ["history of", "known case of", "previous", "prior", "old", "past", "h/o", "resolved", "status post", "post operative day", "background of", "on treatment for", "on rx for"];
-  // finding keys that are inherently background/chronic - keep even when phrased historically
+  // finding keys that are inherently background/chronic — keep even when phrased historically
   var BACKGROUND = { diabetesHx: 1, hypertensionHx: 1, knownCAD: 1, knownHeartFailure: 1, atrialFibHx: 1, alcoholExcess: 1, immunosuppression: 1, pregnancy: 1 };
   // neurological / systemic emergency findings → red-flag priority
   var RED_FLAG = { alteredSensorium: 1, focalNeuroDeficit: 1, seizure: 1, thunderclapHeadache: 1, ascendingWeakness: 1, neckStiffness: 1, miosisSecretions: 1, papilledema: 1, hypotension: 1, hypoxia: 1, mucocutaneousBleeding: 1, rigidity: 1 };
@@ -89,7 +89,7 @@
     return norm.slice(start, Math.max(end, idx + 1));
   }
   function has(hay, arr) { for (var i = 0; i < arr.length; i++) if (hay.indexOf(arr[i]) >= 0) return true; return false; }
-  // whole-word cue match - so "no" doesn't fire inside "known"/"now", "old" not inside "cold", etc.
+  // whole-word cue match — so "no" doesn't fire inside "known"/"now", "old" not inside "cold", etc.
   function hasWord(hay, arr) { for (var i = 0; i < arr.length; i++) { if (new RegExp("(^|[^a-z])" + esc(arr[i]) + "($|[^a-z])").test(hay)) return true; } return false; }
 
   /* ctx = { valid:{key:1}, labels:{key:label}, syn:{key:[synonyms]} } (from reasoning.js) */
@@ -158,7 +158,7 @@
       else if (engineOk) { present.push(key); if (red) redFlags.push(key); }
     });
 
-    // 6) demographics (not engine findings - display only)
+    // 6) demographics (not engine findings — display only)
     var demo = {}, dm;
     if ((dm = norm.match(/\b(\d{1,3})\s*(?:year|yr|y\/o|yo|years?)\b/)) || (dm = norm.match(/\b(\d{1,3})\s*(?:m|male|f|female)\b/))) { var a = +dm[1]; if (a > 0 && a < 120) demo.age = a; }
     if (/\b(male|gentleman|\d+\s*m\b|\bm\/\d)/.test(norm)) demo.sex = "male"; else if (/\b(female|lady|woman|\d+\s*f\b|\bf\/\d)/.test(norm)) demo.sex = "female";

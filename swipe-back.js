@@ -1,12 +1,12 @@
-/* StewardMD - Universal swipe-to-go-back (iOS + Android).
+/* StewardMD — Universal swipe-to-go-back (iOS + Android).
  * ===========================================================================
- * A horizontal swipe - LEFT or RIGHT, anywhere on the screen - goes back, on every
+ * A horizontal swipe — LEFT or RIGHT, anywhere on the screen — goes back, on every
  * page and window. Android's system/hardware back does the same. One action, goBack():
  *   1. If a menu/overlay is open  → activate its top-most Back/Close control.
  *   2. Else if the clinical engine is showing (5-step form OR the Clinical Decision
  *      output) → step back via the app's own window._SMD_goBack().
  *   3. Else (home/root) → nothing (iOS); Android exits the app.
- * Reuses each screen's existing back logic - no per-screen wiring.
+ * Reuses each screen's existing back logic — no per-screen wiring.
  *
  * Enabled on native + installed PWA (a desktop/web browser keeps its own gesture).
  * Never preventDefaults; a swipe that begins inside a horizontally-scrollable area

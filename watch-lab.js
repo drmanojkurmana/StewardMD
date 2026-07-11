@@ -1,7 +1,7 @@
-/* StewardMD - Watch-Lab client helper + consent UI (A2, opt-in).
+/* StewardMD — Watch-Lab client helper + consent UI (A2, opt-in).
  * Lets a signed-in doctor consent to background lab watching for a patient. Because
  * background polling runs on the server (only a server runs 24/7), the doctor's GHIS
- * login is stored server-side - so we collect it here behind an explicit consent tick
+ * login is stored server-side — so we collect it here behind an explicit consent tick
  * with a clear privacy note. Nothing is stored unless the doctor ticks consent.
  *
  * Public API (all Promise-based; require the doctor to be signed in with Google/Apple):
@@ -60,7 +60,7 @@
         '<div role="dialog" aria-label="Lab Watch 24/7" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25)">'
         + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:6px">Lab Watch 24/7</div>'
         + '<div style="font:500 12.5px/1.55 var(--sans,system-ui);color:var(--slate,#5a7184)">'
-        + 'Get a notification when a <b>new lab is reported</b> for <b>' + esc(patient && patient.name || "this patient") + '</b> - even when the app is closed.'
+        + 'Get a notification when a <b>new lab is reported</b> for <b>' + esc(patient && patient.name || "this patient") + '</b> — even when the app is closed.'
         + '</div>'
         + '<div style="margin:12px 0;padding:11px 12px;border:1px solid var(--line,#e4eae8);border-radius:10px;background:var(--paper,#f6f8f6);font:500 11.5px/1.5 var(--sans,system-ui);color:var(--slate,#5a7184)">'
         + '🔒 To check in the background, StewardMD stores your <b>GHIS login</b> on our server, <b>encrypted</b> and <b>auto-deleted after 30 days</b>. You can turn this off anytime. '
@@ -103,7 +103,7 @@
     } catch (e) { return ""; }
   }
   // Lab Watch 24/7 runs on the server (so it can alert when the app is closed) and therefore
-  // needs a Google/Apple account - SEPARATE from the GHIS / Ward Sync login. When the caller is
+  // needs a Google/Apple account — SEPARATE from the GHIS / Ward Sync login. When the caller is
   // not signed in we show this actionable sheet (with a real Sign in button) instead of a toast
   // that used to vanish silently, so the button never looks dead again.
   function openSignInSheet(msg) {
@@ -116,7 +116,7 @@
     wrap.innerHTML =
       '<div role="dialog" aria-label="Sign in for Lab Watch 24/7" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25)">'
       + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:6px">🔔 Lab Watch 24/7</div>'
-      + '<div style="font:500 12.5px/1.55 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:14px">' + esc(msg || "Sign in with your Google or Apple account to watch patients for new labs - even when the app is closed. This is separate from your GHIS / Ward Sync login.") + '</div>'
+      + '<div style="font:500 12.5px/1.55 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:14px">' + esc(msg || "Sign in with your Google or Apple account to watch patients for new labs — even when the app is closed. This is separate from your GHIS / Ward Sync login.") + '</div>'
       + (hasG ? '<button id="smdSiGoogle" style="width:100%;box-sizing:border-box;margin-bottom:9px;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--panel,#fff);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Sign in with Google</button>' : '')
       + (hasA ? '<button id="smdSiApple" style="width:100%;box-sizing:border-box;margin-bottom:9px;padding:12px;border:none;border-radius:11px;background:#000;color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer">Sign in with Apple</button>' : '')
       + (!hasG && !hasA ? '<div style="font:600 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:9px">Open <b>More → Account &amp; sign-in</b> to sign in with Google or Apple, then tap Lab Watch 24/7 again.</div>' : '')
@@ -139,7 +139,7 @@
       wrap.innerHTML =
         '<div role="dialog" aria-label="Lab Watch 24/7" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25);max-height:82vh;display:flex;flex-direction:column">'
         + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:4px">🔔 Lab Watch 24/7</div>'
-        + '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:12px">You’ll be notified when a new lab is reported - <b>even when StewardMD is closed</b>. Add a patient from <b>Ward Sync</b> → open the patient → <b>Lab Watch 24/7</b>.</div>'
+        + '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:12px">You’ll be notified when a new lab is reported — <b>even when StewardMD is closed</b>. Add a patient from <b>Ward Sync</b> → open the patient → <b>Lab Watch 24/7</b>.</div>'
         + '<div id="smdWatchMgrBody" style="overflow-y:auto;flex:1;min-height:44px;font:500 13px var(--sans,system-ui);color:var(--slate,#5a7184);text-align:center;padding:22px 4px">Loading…</div>'
         + '<button id="smdWatchMgrDone" style="margin-top:14px;padding:12px;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans,system-ui);cursor:pointer">Done</button>'
         + '</div>';
@@ -168,7 +168,7 @@
             var pid = btn.getAttribute("data-pid"); btn.disabled = true; btn.textContent = "…";
             SMD_WATCH.remove(pid)
               .then(function (r) { render((r && r.watching) || []); })
-              .catch(function () { btn.disabled = false; btn.textContent = "Remove"; toast("Couldn’t remove - try again."); });
+              .catch(function () { btn.disabled = false; btn.textContent = "Remove"; toast("Couldn’t remove — try again."); });
           });
         });
       }

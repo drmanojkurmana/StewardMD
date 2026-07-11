@@ -1,4 +1,4 @@
-/* StewardMD - Prescription generator (client controller + editable Rx + print).
+/* StewardMD — Prescription generator (client controller + editable Rx + print).
  *
  * window.SMD_RX = { open(ctx), canPrescribe() }
  *  - Doses/brands come DB-FIRST from the Drug Index (window.MEDDRUGS._list) via the
@@ -8,7 +8,7 @@
  *    VERIFIED registration number. Unverified → routed to the verification panel. (Manual
  *    NMC entry remains only as a fallback when the gate isn't present, e.g. local dev.)
  *  - Output: an editable on-screen Rx + print/PDF (window.print) with a signature block.
- *  - A DRAFT the prescriber reviews, edits and signs - the doctor is responsible.
+ *  - A DRAFT the prescriber reviews, edits and signs — the doctor is responsible.
  * Patient name/age are optional and NEVER persisted (typed onto the printout only).
  */
 (function () {
@@ -93,7 +93,7 @@
     if (ctx && ctx.pkg && ctx.pkg.refs && ctx.pkg.refs.drug) drugs = drugs.concat(ctx.pkg.refs.drug);
     var seen = {};
     drugs.forEach(function (d) {
-      var nm = String(d || "").split(/[-,;(]/)[0].trim(); if (!nm) return;
+      var nm = String(d || "").split(/[—,;(]/)[0].trim(); if (!nm) return;
       var k = nm.toLowerCase(); if (seen[k]) return; seen[k] = 1; reg.push({ name: nm });
     });
     return reg;
@@ -110,7 +110,7 @@
       '<div class="r2"><input class="rx-in rx-dose" data-f="dose" value="' + esc(l.dose || "") + '" placeholder="Dose">' +
       '<input class="rx-in rx-freq" data-f="freq" value="' + esc(l.freq || "") + '" placeholder="Freq">' +
       '<input class="rx-in rx-dur" data-f="duration" value="' + esc(l.duration || "") + '" placeholder="Duration"></div>' +
-      (l.unverified ? '<div class="rx-flag">⚠ Not from the Drug Index - confirm this dose before signing</div>' : "") +
+      (l.unverified ? '<div class="rx-flag">⚠ Not from the Drug Index — confirm this dose before signing</div>' : "") +
       '</div>';
   }
 
@@ -120,12 +120,12 @@
     var body =
       '<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">✕</button></div>' +
       '<div class="rx-clinic">StewardMD' + (topic ? ' · ' + esc(topic) : '') + '</div>' +
-      '<div class="rx-disc">Draft prescription - verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
+      '<div class="rx-disc">Draft prescription — verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
       '<div class="rx-pt"><input class="rx-in" id="rxPtName" placeholder="Patient name (optional, not saved)"><input class="rx-in" id="rxPtAge" placeholder="Age/Sex" style="flex:0 0 110px"></div>' +
       '<div class="rx-symbol">℞</div>' +
       '<div id="rxLines">' + lines.map(lineHTML).join("") + '</div>' +
       '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn rx-print" id="rxPrint">🖨 Print / PDF</button></div>' +
-      '<div class="rx-sign">Dr. ' + esc(docName() || "-") + '<br><small>NMC Reg: ' + esc(regNo || "-") + ' · ' + esc(date) + '</small></div>';
+      '<div class="rx-sign">Dr. ' + esc(docName() || "—") + '<br><small>NMC Reg: ' + esc(regNo || "—") + ' · ' + esc(date) + '</small></div>';
     show(body);
     sheet.querySelector("#rxX").addEventListener("click", close);
     sheet.querySelector("#rxAdd").addEventListener("click", function () {
@@ -154,7 +154,7 @@
   // Verified-doctors-only prompt (shown when the gate is present but the user isn't verified).
   function verifyRequired() {
     show('<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">✕</button></div>' +
-      '<div class="rx-gate">Only <b>verified doctors</b> can create prescriptions. Verify your medical registration once - the pad then opens with your <b>registered number</b> printed on every Rx.</div>' +
+      '<div class="rx-gate">Only <b>verified doctors</b> can create prescriptions. Verify your medical registration once — the pad then opens with your <b>registered number</b> printed on every Rx.</div>' +
       '<div class="rx-row"><button class="rx-btn rx-print" id="rxVerify">Verify my registration</button></div>');
     sheet.querySelector("#rxX").addEventListener("click", close);
     sheet.querySelector("#rxVerify").addEventListener("click", function () { close(); try { window.SMD_VERIFY.openPanel(); } catch (e) {} });

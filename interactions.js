@@ -1,14 +1,14 @@
 /* ============================================================================
-   StewardMD - Drug-Drug Interaction Engine (browser module)
+   StewardMD — Drug–Drug Interaction Engine (browser module)
    ----------------------------------------------------------------------------
    ⚠️  Clinical decision support only. Fires curated rules from
    window.INTERACTION_RULES against a medication list. Deterministic and PURE:
    no network, no AI, no side effects. Absence of a finding does NOT mean a
-   combination is safe - this is a starter ruleset requiring clinician sign-off.
+   combination is safe — this is a starter ruleset requiring clinician sign-off.
 
    Exposes: window.INTERACTIONS.checkInteractions(meds, context)
-     meds    - array of items like MEDLIST.getList() ({ generic, ... }).
-     context - optional { renalImpairment?, prolongedQtc?, hyperkalaemia?, ... }.
+     meds    — array of items like MEDLIST.getList() ({ generic, ... }).
+     context — optional { renalImpairment?, prolongedQtc?, hyperkalaemia?, ... }.
 
    Returns:
      { critical, major, moderate, minor, monitor,   // severity buckets
@@ -60,7 +60,7 @@
   // Reduce ONE active-ingredient token to its bare name: drop parenthetical groups,
   // strength+unit tokens, and standalone formulation words. Mirrors medlist.js's
   // normIngredient so the medication-count layer and this engine agree on the
-  // clinical key - WITHOUT it, "sildenafil (50mg)" fails to satisfy the "sildenafil"
+  // clinical key — WITHOUT it, "sildenafil (50mg)" fails to satisfy the "sildenafil"
   // rule subject and a real interaction (e.g. with a nitrate) is silently missed.
   function normIngredient(token) {
     var s = String(token || "").toLowerCase();
@@ -92,7 +92,7 @@
       if (Array.isArray(ingClasses)) {
         for (var j = 0; j < ingClasses.length; j++) {
           var c = ingClasses[j];
-          // Drop auto-generated EPC umbrella slugs (epc:*) - broad taxonomic
+          // Drop auto-generated EPC umbrella slugs (epc:*) — broad taxonomic
           // parents ("…agent", "established pharmacologic classes", "allergen",
           // "chemical structure", …) that create spurious same-class duplication
           // noise. Curated tags (ppi, nsaid, statin, qt_prolonging, …) drive
@@ -368,7 +368,7 @@
         drugs: products,
         severity: "moderate",
         mechanism: "The same active ingredient (" + ing + ") is present in more than one of the listed medicines, including a combination product.",
-        effect: "Therapeutic duplication - unintended double dosing of " + ing + " and additive adverse-effect risk.",
+        effect: "Therapeutic duplication — unintended double dosing of " + ing + " and additive adverse-effect risk.",
         action: "Confirm this is intended; consolidate to a single source of " + ing + " at the intended total dose.",
         monitoring: "Reconcile the medication list and remove the duplicate source.",
         source: "",
