@@ -43,16 +43,31 @@ self.addEventListener("notificationclick", function (e) {
   }));
 });
 
+// Reload open tabs on activate ONLY for a genuine UPGRADE — i.e. a previous
+// stewardmd-* cache existed before this version took over. On a FIRST install
+// there is nothing stale to refresh, so reloading is pointless AND harmful: it
+// races the initial page load, giving first-time users a reload flash and, under
+// automation/some browsers, momentarily blanking the tab (about:blank). Pure +
+// unit-tested (test/sw-activate.test.mjs).
+function swShouldReloadClients(cacheKeys, currentCache) {
+  return Array.isArray(cacheKeys) && cacheKeys.some(function (k) {
+    return k !== currentCache && /^stewardmd-/.test(k);
+  });
+}
 self.addEventListener("activate", function (e) {
   e.waitUntil((async function () {
-    var keys = await caches.keys();
+    var keys = await caches.keys();                       // captured BEFORE deletion (holds old versions)
+    var upgrade = swShouldReloadClients(keys, CACHE);
     await Promise.all(keys.map(function (k) { return k === CACHE ? null : caches.delete(k); }));
     await self.clients.claim();
-    // Force open StewardMD tabs to reload so they pick up the new versioned assets.
-    // Runs once per SW version (a reload fetches the SAME sw.js → no new activate → no loop).
+    // Only force a reload on a real version upgrade, and only for real http(s)
+    // window clients (never about:blank / non-navigable clients).
+    if (!upgrade) return;
     try {
       var cls = await self.clients.matchAll({ type: "window" });
-      cls.forEach(function (c) { try { c.navigate(c.url); } catch (err) {} });
+      cls.forEach(function (c) {
+        if (c && typeof c.url === "string" && /^https?:/.test(c.url)) { try { c.navigate(c.url); } catch (err) {} }
+      });
     } catch (err) {}
   })());
 });
