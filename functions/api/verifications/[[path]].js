@@ -34,6 +34,40 @@ function adminOK(request, env) {
   return d === 0;
 }
 
+// HMAC verify for one-click email action links (uid|action signed with VERIFY_ADMIN_TOKEN).
+async function actionSigOK(env, uid, action, sig) {
+  const want = env.VERIFY_ADMIN_TOKEN || "";
+  if (!want || !sig) return false;
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(want), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const raw = new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(uid + "|" + action)));
+  const expect = Array.from(raw, (b) => b.toString(16).padStart(2, "0")).join("");
+  if (expect.length !== sig.length) return false;
+  let d = 0; for (let i = 0; i < expect.length; i++) d |= expect.charCodeAt(i) ^ sig.charCodeAt(i);
+  return d === 0;
+}
+
+async function doApprove(store, env, uid, regNo) {
+  const rec = (await store.get(doctorKey(uid), "json")) || { uid };
+  const reg = String(regNo || rec.regNo || rec.extractedRegNo || "").trim();
+  await setUserClaims(env, uid, { verified: true, regNo: reg });
+  const updated = { ...rec, uid, status: "verified", verified: true, regNo: reg, approvedBy: "admin", verifiedAt: new Date().toISOString() };
+  await store.put(doctorKey(uid), JSON.stringify(updated));
+  if (reg) { try { await store.put(regKey(reg), uid); } catch (e) {} }
+  return updated;
+}
+async function doReject(store, env, uid, reason) {
+  const rec = (await store.get(doctorKey(uid), "json")) || { uid };
+  try { await setUserClaims(env, uid, { verified: false }); } catch (e) {}   // revoke access
+  // Clear provisional so the client gate forces a fresh upload.
+  const updated = { ...rec, uid, status: "rejected", verified: false, provisionalUntil: "", reason: String(reason || "rejected_by_admin"), updatedAt: new Date().toISOString() };
+  await store.put(doctorKey(uid), JSON.stringify(updated));
+  return updated;
+}
+const htmlPage = (title, body) => new Response(
+  `<!doctype html><meta name=viewport content="width=device-width,initial-scale=1"><body style="font:500 16px system-ui;background:#0f1b24;color:#f6f7f5;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;text-align:center"><div style="max-width:440px;padding:28px"><h2 style="margin:0 0 10px">${title}</h2><p style="color:#9fb0bd;line-height:1.5">${body}</p></div>`,
+  { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" } }
+);
+
 async function listDoctors(store, statusFilter) {
   const out = [];
   let cursor;
@@ -63,6 +97,22 @@ export async function onRequest(context) {
   const store = kv(env);
   if (method === "OPTIONS") return new Response(null, { status: 204 });
 
+  // ── One-click email action links (GET, HMAC-signed — no admin token needed) ──
+  if (method === "GET" && seg === "action") {
+    if (!store) return htmlPage("Unavailable", "Storage is not configured.");
+    const url = new URL(request.url);
+    const uid = url.searchParams.get("uid") || "";
+    const doWhat = url.searchParams.get("do") || "";
+    const sig = url.searchParams.get("sig") || "";
+    const reg = url.searchParams.get("reg") || "";
+    if (!(await actionSigOK(env, uid, doWhat, sig))) return htmlPage("Invalid or expired link", "This action link could not be verified. Open the admin page instead.");
+    try {
+      if (doWhat === "approve") { const d = await doApprove(store, env, uid, reg); return htmlPage("✓ Doctor verified", `${d.email || uid} now has full access${d.regNo ? " (" + d.regNo + ")" : ""}. They'll see it on next sign-in.`); }
+      if (doWhat === "reject")  { await doReject(store, env, uid); return htmlPage("Access blocked", "This account is blocked until the doctor uploads a valid certificate again."); }
+      return htmlPage("Unknown action", "Nothing to do.");
+    } catch (e) { return htmlPage("Something went wrong", String((e && e.message) || e)); }
+  }
+
   const ok = adminOK(request, env);
   if (ok === null) return json({ error: "admin-not-configured", detail: "set VERIFY_ADMIN_TOKEN" }, 503);
   if (!ok) return json({ error: "unauthorised" }, 401);
@@ -79,27 +129,14 @@ export async function onRequest(context) {
       let body = {}; try { body = await request.json(); } catch (e) {}
       const uid = String(body.uid || "").trim();
       if (!uid) return json({ error: "uid-required" }, 400);
-      const rec = (await store.get(doctorKey(uid), "json")) || { uid };
-      const regNo = String(body.regNo || rec.regNo || rec.extractedRegNo || "").trim();
-      await setUserClaims(env, uid, { verified: true, regNo });
-      const updated = { ...rec, uid, status: "verified", verified: true, regNo,
-        approvedBy: "admin", verifiedAt: new Date().toISOString() };
-      await store.put(doctorKey(uid), JSON.stringify(updated));
-      if (regNo) { try { await store.put(regKey(regNo), uid); } catch (e) {} }
-      return json({ ok: true, doctor: updated });
+      return json({ ok: true, doctor: await doApprove(store, env, uid, body.regNo) });
     }
 
     if (method === "POST" && seg === "reject") {
       let body = {}; try { body = await request.json(); } catch (e) {}
       const uid = String(body.uid || "").trim();
       if (!uid) return json({ error: "uid-required" }, 400);
-      const rec = (await store.get(doctorKey(uid), "json")) || { uid };
-      // Revoke any verified claim as well.
-      try { await setUserClaims(env, uid, { verified: false }); } catch (e) {}
-      const updated = { ...rec, uid, status: "rejected", verified: false,
-        reason: String(body.reason || "rejected_by_admin"), updatedAt: new Date().toISOString() };
-      await store.put(doctorKey(uid), JSON.stringify(updated));
-      return json({ ok: true, doctor: updated });
+      return json({ ok: true, doctor: await doReject(store, env, uid, body.reason) });
     }
 
     return json({ error: "bad-request", method, seg }, 400);
