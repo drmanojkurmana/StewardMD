@@ -48,6 +48,8 @@ try {
       window.__ev = { calls:0, q:"", top:null };
       window.SMD_AI = window.SMD_AI || {}; SMD_AI.setFlag = function(){};
       SMD_AI.explainGrounded = function(pkg, opts){ window.__ev.calls++; window.__ev.q = (pkg&&pkg.question)||""; var r=(pkg&&pkg.retrieved)||[]; window.__ev.top = r[0]?r[0].diseaseId:null; return Promise.resolve({ text: "## Clinical take\\nStructured management guidance, complete to the last sentence.\\n\\n- Point one\\n- Point two" }); };
+      // Phase 2: streaming variant delegates to the same stub (tests the render path; no live calls).
+      SMD_AI.explainGroundedStream = function(pkg, opts, onDelta){ if(onDelta){ try{ onDelta("Structured management guidance"); }catch(e){} } return SMD_AI.explainGrounded(pkg, opts); };
       try { localStorage.setItem("smd_maik_v2","1"); } catch(e){}
       return 1;`);
     let opened = false;

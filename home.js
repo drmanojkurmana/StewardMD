@@ -1291,6 +1291,8 @@
       ".maik-b p{margin:4px 0}.maik-b ul,.maik-b ol{margin:4px 0;padding-left:20px}.maik-b li{margin:2px 0}.maik-b code{background:rgba(100,116,139,.15);border-radius:4px;padding:0 4px;font-size:12.5px}",
       ".maik-edu{font:600 11px var(--hfont);color:var(--hmut);background:rgba(100,116,139,.1);border-radius:8px;padding:5px 8px;margin-bottom:6px}",
       ".maik-assume{font:600 12px var(--hfont);color:var(--hink);background:rgba(37,99,235,.08);border-left:3px solid var(--hacc,#2563eb);border-radius:8px;padding:7px 10px;margin-bottom:8px}.maik-assume b{color:var(--hacc,#2563eb)}.maik-followups{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.maik-followups .maik-chip{font-size:12.5px;padding:7px 12px}",
+      ".maik-tblwrap{overflow-x:auto;margin:8px 0;-webkit-overflow-scrolling:touch}.maik-tbl{border-collapse:collapse;width:100%;font:400 12.5px var(--hfont)}.maik-tbl th,.maik-tbl td{border:1px solid var(--hbd,#e2e8f0);padding:6px 9px;text-align:left;vertical-align:top}.maik-tbl th{background:rgba(100,116,139,.08);font-weight:700;color:var(--hink)}",
+      ".maik-cite{color:var(--hacc,#2563eb);font-weight:700;font-size:.68em;cursor:pointer;padding:0 1px;vertical-align:super;line-height:0}.maik-src ol{margin:4px 0 0 18px;padding:0}.maik-src li{margin:2px 0}.maik-caret{display:inline-block;width:6px;height:13px;background:var(--hacc,#2563eb);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}@keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}",
       ".maik-src{margin-top:8px;font:600 11.5px var(--hfont);color:var(--hmut)}.maik-src summary{cursor:pointer;color:var(--hp,#0f766e)}.maik-src ul{margin:4px 0 0;padding-left:18px}",
       ".maik-more{background:none;border:none;color:var(--hp,#0f766e);font:700 12px var(--hfont);cursor:pointer;padding:4px 0}",
       ".maik-chips{display:flex;flex-wrap:wrap;gap:8px}.maik-chip{background:var(--hpanel,#fff);border:1px solid var(--hbd,#e2e8f0);border-radius:999px;padding:9px 13px;font:600 13px var(--hfont);color:var(--hink);cursor:pointer}",
@@ -1427,6 +1429,9 @@
       if (m && m[2]) { var rest = m[2].replace(/\?+$/, "").trim(); if (rest) return { question: t.topic + " — " + rest + ".", depth: "concise", topic: t.topic + " · " + rest, retrieval: t.topic + " " + rest }; }
       return null;
     }
+    // Phase 2 — streaming is ON by default (self-falls-back on any failure); set localStorage
+    // smd_maik_stream="0" to force the classic non-stream path.
+    function maikStreamOn() { try { return localStorage.getItem("smd_maik_stream") !== "0"; } catch (e) { return true; } }
     // ── Web-research helper (extracted so the KB-miss branch AND the assume-tier refine chip
     //    share one implementation). Opt-in, one call, clearly labelled non-StewardMD.
     function maikRunWeb(container, q, srcEl) {
@@ -1489,8 +1494,12 @@
         var ab = document.createElement("button"); ab.className = "maik-chip"; ab.style.marginTop = "8px"; ab.textContent = "Start Dx My Patient"; ab.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); think.appendChild(ab); think.appendChild(maikWebChipEl(question)); scroll(); return;
       }
       var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
-      var titles = (window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : [];
-      var srcHTML = titles.length ? '<details class="maik-src"><summary>Sources ▸</summary><ul>' + titles.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ul></details>' : "";
+      // Phase 2 — numbered sources footer (matches the [n] markers). Prefer the package's own
+      // numbered list (identical numbering to what the model was given) so citations line up.
+      var srcArr = (pkg && pkg.sources && pkg.sources.length) ? pkg.sources.map(function (s) { return s.title; })
+        : ((window.SMD_MaiK && SMD_MaiK.sourceList) ? SMD_MaiK.sourceList(pkg).map(function (s) { return s.title; })
+          : ((window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : []));
+      var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + ' ▸</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> — not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
       var full = eduHTML + rendered + srcHTML;
@@ -1544,7 +1553,18 @@
           // under a STATED assumption; maikRenderAnswer prints the banner + refine chips. Same single
           // grounded call as the confident path — no extra tokens, we just stopped dead-ending.
           var assume = (tm && tm.mode === "assume") ? tm.assume : null;
-          return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume); });
+          // Phase 2 — stream tokens live (UpToDate-style), then maikRenderAnswer re-renders the final
+          // answer with sources/chips/collapse. Fully additive: explainGroundedStream self-falls-back
+          // to the non-stream call on any hiccup, so this can't regress the answer.
+          var onDelta = function (acc) {
+            var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(acc) : maikEscH(acc);
+            think.innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';
+            try { scroll(); } catch (e) {}
+          };
+          var call = (window.SMD_AI.explainGroundedStream && maikStreamOn())
+            ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
+            : window.SMD_AI.explainGrounded(pkg, { depth: depth });
+          return call.then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume); });
         })
         .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
         .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
@@ -1587,6 +1607,9 @@
     // One delegated listener handles every follow-up / refine chip (data-maik-q re-runs a grounded
     // query; data-maik-web opens opt-in web research). Delegation survives the innerHTML answer-cache.
     body.addEventListener("click", function (ev) {
+      // Phase 2 — citation chip → reveal the numbered sources footer in the same answer bubble.
+      var cite = ev.target && ev.target.closest ? ev.target.closest(".maik-cite") : null;
+      if (cite) { var bub = cite.closest(".maik-b.ai") || cite.closest(".maik-b"); var det = bub && bub.querySelector(".maik-src"); if (det) { det.open = true; try { det.scrollIntoView({ block: "nearest" }); } catch (e) {} } return; }
       var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
       if (!el) return;
       ev.preventDefault();
