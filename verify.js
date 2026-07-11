@@ -61,6 +61,9 @@
 
   function setStatusMsg(kind, html) { var s = $("verifyStatus"); if (!s) return; s.className = "verify-status show " + kind; s.innerHTML = html; }
   function clearStatusMsg() { var s = $("verifyStatus"); if (s) { s.className = "verify-status"; s.innerHTML = ""; } }
+  function progressHtml(msg) { return '<div class="verify-bar"><span></span></div><div style="margin-top:8px">' + msg + '</div>'; }
+  function provisionalActive(iso) { if (!iso) return false; var t = Date.parse(iso); return !isNaN(t) && Date.now() < t; }
+  function daysLeft(iso) { var t = Date.parse(iso); return isNaN(t) ? 0 : Math.max(0, Math.ceil((t - Date.now()) / 86400000)); }
 
   // Render the overlay for a given mode. forced=true → hard block (no close).
   function render(mode, data) {
@@ -135,8 +138,8 @@
     if (!file) { if (input) input.click(); return; }
     var u = fbUser(); if (!u) { setStatusMsg("error", "Session expired — please sign in again."); return; }
     submitting = true;
-    var btn = $("verifySubmit"); if (btn) btn.disabled = true;
-    setStatusMsg("info", '<span class="verify-spinner"></span>Reading your certificate and checking the National Medical Register…');
+    var btn = $("verifySubmit"); if (btn) { btn.disabled = true; btn.textContent = "Verifying…"; }
+    setStatusMsg("info", progressHtml("Reading your certificate and checking the National Medical Register…"));
     try {
       var parts = await Promise.all([fileToB64(file), u.getIdToken()]);
       var res = await fetch("/api/verify-doctor", {
@@ -144,23 +147,38 @@
         body: JSON.stringify({ idToken: parts[1], image: parts[0].b64, mime: parts[0].mime })
       });
       var data = await res.json().catch(function () { return {}; });
+      var mode = (gate() && gate().dataset.mode) || "forced";
 
+      // 1) Auto-verified against NMC → big tick + full access (confirmation email sent server-side).
       if (data.status === "verified") {
-        setStatusMsg("success", "✓ Verified — Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). Opening StewardMD…");
+        setStatusMsg("success", "✓ Verified — Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). A confirmation email is on its way. Opening StewardMD…");
         try { await u.getIdToken(true); } catch (e) {}
-        setTimeout(hideGate, 900);
+        setTimeout(hideGate, 1200);
         return;
       }
-      if (data.status === "pending_review") { render(gate().dataset.mode || "panel", { status: "pending" }); submitting = false; return; }
+      // 2) AI unsure / not matched → cert emailed to support; grant PROVISIONAL access.
+      if (data.status === "pending_review") {
+        var d = data.provisionalDays || 7;
+        if (mode === "panel") { render("panel", { status: "pending", provisionalUntil: data.provisionalUntil }); submitting = false; return; }
+        setStatusMsg("pending",
+          "✓ Certificate received. We couldn't auto-verify it instantly, so it's gone to our team for a quick manual check. " +
+          "You have <b>provisional access for " + d + " days</b> while we verify you — the <b>prescription generator stays locked</b> until then. " +
+          "We'll email you once you're approved.");
+        setTimeout(function () {
+          hideGate();
+          try { (window.toast || window.SMD_toast || function () {})("Provisional access — prescription locked until verified"); } catch (e) {}
+        }, 2600);
+        submitting = false; return;
+      }
       if (data.status === "rejected" && data.reason === "registration_already_claimed") {
         setStatusMsg("error", "This registration number is already linked to a different account. Contact support@stewardmd.in.");
-        submitting = false; if (btn) btn.disabled = false; return;
+        submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; } return;
       }
       setStatusMsg("error", (data.detail || data.error || "Verification failed") + " — try another image or contact support@stewardmd.in.");
-      submitting = false; if (btn) btn.disabled = false;
+      submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; }
     } catch (e) {
       setStatusMsg("error", "Network error — please try again.");
-      submitting = false; if (btn) btn.disabled = false;
+      submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; }
     }
   }
 
@@ -195,8 +213,18 @@
     wire();
     isVerifiedClaim().then(function (ok) {
       var g = gate();
-      if (ok) { if (g && g.dataset.mode !== "panel") hideGate(); }
-      else showForced();
+      if (ok) { if (g && g.dataset.mode !== "panel") hideGate(); return; }   // fully verified
+      // Not claim-verified → allow PROVISIONAL access while a manual review is pending
+      // and within the window; otherwise force verification.
+      fetchStatus().then(function (d) {
+        var provisional = d && d.status === "pending" && provisionalActive(d.provisionalUntil);
+        if (provisional) {
+          if (gate() && gate().dataset.mode !== "panel") hideGate();
+          try { (window.toast || window.SMD_toast || function () {})("Provisional access · " + daysLeft(d.provisionalUntil) + "d left to verify · prescription locked"); } catch (e) {}
+        } else {
+          showForced();
+        }
+      }).catch(function () { showForced(); });
     });
   }
 
