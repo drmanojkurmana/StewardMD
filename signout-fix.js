@@ -1,15 +1,27 @@
-/* StewardMD - complete sign-out (additive; NEVER edits the minified app.js).
+/* StewardMD — complete sign-out (additive; NEVER edits the minified app.js).
  * ---------------------------------------------------------------------------
- * Bug: the app's "Sign out" (#sessionSignOut, and the account sheet's #smdSbSignOut
- * which forwards to it) clears the LOCAL account object but never terminates the
- * Firebase/Google session. So onAuthStateChanged still holds the user and
- * SMD_applyGoogleUser immediately re-hydrates the account - the user appears to
- * "sign back in" instantly. Only "Delete account & data" (which tears down the
- * Firebase user) truly logs out.
+ * Bug: the app's "Sign out" (#sessionSignOut, the drawer's #smdSbSignOut and the
+ * account sheet's button — the latter two forward to #sessionSignOut) clears the
+ * LOCAL account object but never terminates the Firebase session. So on the reload
+ * that follows, onAuthStateChanged still holds the user and SMD_applyGoogleUser
+ * immediately re-hydrates the account — the user appears to "sign back in" instantly.
  *
- * Fix: when sign-out is clicked, also do a real teardown - Firebase signOut,
- * Google Identity auto-select disabled, local account key cleared - then reload to
- * a clean state (the same reload approach account.js already uses for guest expiry).
+ * Fix: intercept the sign-out click, actually end the Firebase session, then reload.
+ *
+ * CRITICAL: app.js's own #sessionSignOut handler calls location.reload() SYNCHRONOUSLY
+ * during the same click. If we merely defer our teardown (e.g. setTimeout), that reload
+ * fires first and cancels our pending work — Firebase is never signed out, so after the
+ * reload onAuthStateChanged re-hydrates the account and the user has to click again.
+ * So we run in the CAPTURE phase and stopImmediatePropagation() to SUPPRESS app.js's
+ * premature reload, do the real teardown ourselves, and reload only once signOut resolves
+ * (firebase.auth().signOut() resolves only after auth persistence is cleared, so on the
+ * next load onAuthStateChanged fires with no user). Same technique native-auth.js uses to
+ * override the Google button.
+ *
+ * NB: intentionally does NOT touch the native @capacitor-firebase/authentication plugin
+ * or install any post-reload onAuthStateChanged guard — both destabilised the sign-in
+ * path (native-auth.js's ensureFbAsync would report "Authentication is not ready yet",
+ * and a lingering guard listener would sign fresh sign-ins straight back out).
  */
 (function () {
   "use strict";
@@ -26,25 +38,30 @@
       var g = window.google;
       if (g && g.accounts && g.accounts.id && g.accounts.id.disableAutoSelect) g.accounts.id.disableAutoSelect();
     } catch (e) {}
-    // Actually end the Firebase session (this is what app.js omits).
+    // Actually end the Firebase session (this is what app.js omits). The returned promise
+    // resolves only after auth persistence is cleared — so awaiting it before reload is
+    // what guarantees the account isn't re-hydrated on the next load.
     var a = auth();
-    var p = (a && a.signOut) ? a.signOut() : Promise.resolve();
-    return Promise.resolve(p).catch(function () {});
+    if (a && a.signOut) return Promise.resolve(a.signOut()).catch(function () {});
+    return Promise.resolve();
   }
 
   var signingOut = false;
-  // Delegated + capture so it fires regardless of app.js's own handler. Covers the
-  // session-badge button and the account-sheet button (which forwards to it).
+  // Delegated + capture so it runs BEFORE app.js's own bubble/target handler. Covers the
+  // session-badge button, the drawer button (#smdSbSignOut) and the account-sheet button —
+  // the latter two forward to #sessionSignOut, but we intercept the click before that.
   document.addEventListener("click", function (e) {
     var t = e.target && e.target.closest && e.target.closest("#sessionSignOut, #smdSbSignOut");
     if (!t || signingOut) return;
     signingOut = true;
-    // Let app.js run its own (local) cleanup first, then hard-teardown + reload.
-    setTimeout(function () {
-      fullSignOut().then(function () {
-        try { localStorage.removeItem(ACCOUNT_KEY); } catch (e) {}
-        try { location.reload(); } catch (e) { signingOut = false; }
-      });
-    }, 40);
+    // Suppress app.js's synchronous location.reload() so our async teardown can complete.
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    // Clear the local account now (mirrors app.js's q()), then real teardown + reload.
+    try { localStorage.removeItem(ACCOUNT_KEY); } catch (x) {}
+    fullSignOut().then(function () {
+      try { localStorage.removeItem(ACCOUNT_KEY); } catch (x) {}
+      try { location.reload(); } catch (x) { signingOut = false; }
+    });
   }, true);
 })();

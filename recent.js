@@ -1,7 +1,7 @@
-/* StewardMD - Recent Cases (rolling last-5 activity trail).
+/* StewardMD — Recent Cases (rolling last-5 activity trail).
  *
  * A lightweight, device-local record of the last 5 cases the clinician worked on
- * across the case features - Clinical reasoning (Dx My Patient), Clinical decision
+ * across the case features — Clinical reasoning (Dx My Patient), Clinical decision
  * (Start a Case), and ICU. It is intentionally SEPARATE from "My Cases" (the
  * explicit, cloud-syncable saved library): Recent Cases is automatic, capped at 5,
  * and auto-erases the oldest as new ones arrive.
@@ -24,7 +24,7 @@
   var KEY_BASE = "smd_recent_cases";
   var listeners = [];
 
-  // Ownership is keyed by the STABLE Firebase UID (like ghis-ward.js), not the email - email
+  // Ownership is keyed by the STABLE Firebase UID (like ghis-ward.js), not the email — email
   // is empty for Apple Hide-My-Email and changes across providers, which orphaned the list.
   // Signed out → "guest". A one-time migration (below) re-homes legacy email/guest lists.
   function uid() {
@@ -37,7 +37,7 @@
   function userKey() { return uid() || "guest"; }
   function storeKey() { return KEY_BASE + "_" + userKey(); }
   // Fold any legacy list (guest + old email-keyed) into the current uid key exactly once per
-  // uid, newest-first, capped - so cases worked before signing in (or under an email key) are
+  // uid, newest-first, capped — so cases worked before signing in (or under an email key) are
   // preserved and never duplicated. Runs on boot and on every auth change.
   function migrateLegacy() {
     try {
@@ -101,7 +101,7 @@
 
   // Restore a classic "Clinical decision" case: enter the advanced form, set the
   // findings, and recompute. Falls back to the reasoning workspace (which shares the
-  // same finding keys) if the classic form path is unavailable - so a case is never lost.
+  // same finding keys) if the classic form path is unavailable — so a case is never lost.
   function restoreDecision(snap) {
     snap = snap || {};
     var findings = snap.findings || {};
@@ -119,7 +119,7 @@
         return;
       } catch (x) {}
     }
-    // fallback - reopen in the reasoning workspace with the same findings
+    // fallback — reopen in the reasoning workspace with the same findings
     if (window.DX && window.DX.restore) window.DX.restore({ findings: findings, caseId: snap.caseId });
   }
 
@@ -143,7 +143,7 @@
         wasEmpty = false;
         var f = {}; try { f = (window.SMD_getFindings && window.SMD_getFindings()) || {}; } catch (x) {}
         var lf = labelFindings(f);
-        if (!lf.count) return;                       // no real findings yet - skip
+        if (!lf.count) return;                       // no real findings yet — skip
         // top diagnosis: the most prominent heading the classic card renders
         var t = "";
         var el = oa.querySelector(".qa-title, .quick-answer-card h2, .score-card h2, .simple-candidates-card h2, h2, .dx-title, strong");
@@ -232,7 +232,7 @@
       '<div class="rc-bar"><button class="rc-x" id="rcClose">‹ Back</button>' +
       '<div class="rc-h">🕐 Recent Cases</div>' +
       '<button class="rc-clr" id="rcClear">Clear</button></div>' +
-      '<div class="rc-scroll"><div class="rc-note">Your last ' + MAX + ' cases across Clinical reasoning, Clinical decision and ICU. Tap one to reopen it. Kept on this device only - the oldest is erased as new cases arrive.</div>' +
+      '<div class="rc-scroll"><div class="rc-note">Your last ' + MAX + ' cases across Clinical reasoning, Clinical decision and ICU. Tap one to reopen it. Kept on this device only — the oldest is erased as new cases arrive.</div>' +
       '<div class="rc-list" id="rcList"></div></div>';
     document.body.appendChild(_root);
     _root.querySelector("#rcClose").addEventListener("click", close);

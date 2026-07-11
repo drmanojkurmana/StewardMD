@@ -1,11 +1,11 @@
-/* StewardMD - Privacy & Data-Control configuration (SINGLE SOURCE OF TRUTH).
+/* StewardMD — Privacy & Data-Control configuration (SINGLE SOURCE OF TRUTH).
  * ---------------------------------------------------------------------------
  * All privacy/consent version strings, dates, contacts and tunables live HERE
  * so they are maintained in one place, never hardcoded across components.
  * Bump the version strings when the Privacy Notice or Terms materially change;
  * users whose recorded consent predates the new version are re-prompted.
  *
- * This is product tooling for data control - NOT a legal-compliance claim. The
+ * This is product tooling for data control — NOT a legal-compliance claim. The
  * app never states it is "DPDP compliant", "HIPAA compliant", "certified", or
  * "fully secure".
  *

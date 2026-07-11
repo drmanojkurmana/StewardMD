@@ -1,8 +1,8 @@
-/* StewardMD - global toast shim (SMD_toast / toast).
+/* StewardMD — global toast shim (SMD_toast / toast).
  *
  * WHY THIS EXISTS: a number of modules show their user feedback through window.toast(...)
  * (icu.js, account.js, ghis-ward.js, voice.js, image-engine.js, offline-db.js) or through
- * window.SMD_toast(...) (watch-lab.js, native-push.js) - but NEITHER global was ever defined.
+ * window.SMD_toast(...) (watch-lab.js, native-push.js) — but NEITHER global was ever defined.
  * Every such message (e.g. Lab Watch 24/7's "Sign in with your Google/Apple account…", "Lab
  * Watch on ✅", "Couldn't load…") was silently swallowed, so buttons that only give toast
  * feedback looked completely dead. This defines ONE self-contained, theme-invariant toast and
@@ -36,7 +36,7 @@
       "box-sizing:border-box",
       "padding:12px 16px",
       "border-radius:12px",
-      "background:rgba(17,24,39,.96)",              // fixed dark chip - readable in light & dark themes
+      "background:rgba(17,24,39,.96)",              // fixed dark chip — readable in light & dark themes
       "color:#fff",
       "font:600 13.5px/1.45 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif",
       "box-shadow:0 10px 34px rgba(0,0,0,.30)",

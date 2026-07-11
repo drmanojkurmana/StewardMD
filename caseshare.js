@@ -1,7 +1,7 @@
-/* StewardMD - shareable case codes (Firestore-backed, free tier).
+/* StewardMD — shareable case codes (Firestore-backed, free tier).
    window.CASESHARE.shareCurrent() : signed-in user → unique code (SMD-XXXXX) + link, case stored in
    Firestore sharedCases/{code} with 30-day expiry. window.CASESHARE.openPrompt() : retrieve by code.
-   ?case=CODE links auto-open. Requires Firestore security rules (see deploy notes) - author cannot
+   ?case=CODE links auto-open. Requires Firestore security rules (see deploy notes) — author cannot
    configure those from here. No PHI: shares the clinical findings + decision only. */
 (function () {
   "use strict";
@@ -14,7 +14,7 @@
   function toast(m){ try { injectCSS(); } catch(e){} var t=document.getElementById("cs-toast"); if(!t){t=document.createElement("div");t.id="cs-toast";t.className="cs-toast";document.body.appendChild(t);} t.textContent=m; t.classList.add("on"); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove("on");},2600); }
 
   // SECURITY: shared-case html comes from Firestore (publicly readable, writable by
-  // any signed-in user) - treat it as UNTRUSTED. Allowlist-sanitize before any
+  // any signed-in user) — treat it as UNTRUSTED. Allowlist-sanitize before any
   // innerHTML: drop dangerous tags, all on* handlers, and javascript:/data: URLs.
   // Fails closed (returns "") so a parse error can never inject raw markup.
   var CS_BAD_TAGS = { SCRIPT:1,IFRAME:1,OBJECT:1,EMBED:1,LINK:1,META:1,BASE:1,FORM:1,SVG:1,MATH:1,FRAME:1,FRAMESET:1,APPLET:1,STYLE:1,AUDIO:1,VIDEO:1,SOURCE:1,TEMPLATE:1,PORTAL:1 };
@@ -25,7 +25,7 @@
       var w = document.createTreeWalker(tpl.content, NodeFilter.SHOW_ELEMENT, null, false);
       var rm = [], node;
       while ((node = w.nextNode())) {
-        // SVG/MathML elements report a lowercase tagName (non-HTML namespace) - normalise.
+        // SVG/MathML elements report a lowercase tagName (non-HTML namespace) — normalise.
         if (CS_BAD_TAGS[String(node.tagName).toUpperCase()]) { rm.push(node); continue; }
         for (var i = node.attributes.length - 1; i >= 0; i--) {
           var a = node.attributes[i], n = a.name.toLowerCase(), v = String(a.value || "");
@@ -90,7 +90,7 @@
       [/(?:\+?91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}\b/, "phone number"],
       [/\b\d{4}\s?\d{4}\s?\d{4}\b/, "12-digit ID (Aadhaar)"],
       [/\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b/i, "email address"],
-      // Labelled patient name - the doc is PUBLIC by code, so block an explicit patient-name
+      // Labelled patient name — the doc is PUBLIC by code, so block an explicit patient-name
       // label (e.g. "Patient: John Doe", "Pt - Jane R", "Patient's name: …"). Requires a PATIENT
       // context word so clinical text like "drug name:"/"study name:" is not falsely blocked.
       [/\b(?:patient(?:'?s)?(?:\s*name)?|\bpt)\s*[:#.\-]\s*[a-z][a-z.'-]+(?:\s+[a-z][a-z.'-]+)+/i, "labelled patient name"]
@@ -116,7 +116,7 @@
   // Native fallback: share the case as plain text via the iOS share sheet.
   function nativeShareText(snap){
     if (window.SMD_NATIVE && window.SMD_NATIVE.share) {
-      window.SMD_NATIVE.share({ title: (snap && snap.title) || "StewardMD - Clinical decision", text: (snap && snap.text) || "", dialogTitle: "Share case" }).catch(function () { toast("Share unavailable"); });
+      window.SMD_NATIVE.share({ title: (snap && snap.title) || "StewardMD — Clinical decision", text: (snap && snap.text) || "", dialogTitle: "Share case" }).catch(function () { toast("Share unavailable"); });
     } else { toast("Share unavailable"); }
   }
   function shareCurrent(){
@@ -128,11 +128,11 @@
       snap.text = phiRedact(snap.text || "");
       snap.title = phiRedact(snap.title || "");
       if (snap.html) snap.html = phiRedact(snap.html);
-      toast("Removed patient identifiers (" + _phi + ") before sharing - links are PUBLIC.");
+      toast("Removed patient identifiers (" + _phi + ") before sharing — links are PUBLIC.");
     }
     toast("Preparing share…");
     ensureReady(function(db, user){
-      if (!db) { try { console.error("[CASESHARE] no DB. firebase=", !!window.firebase, "firebase.firestore=", !!(window.firebase && window.firebase.firestore), "SMD_DB=", !!window.SMD_DB); } catch (e) {} toast("Cloud unavailable - reload once & try again."); return; }
+      if (!db) { try { console.error("[CASESHARE] no DB. firebase=", !!window.firebase, "firebase.firestore=", !!(window.firebase && window.firebase.firestore), "SMD_DB=", !!window.SMD_DB); } catch (e) {} toast("Cloud unavailable — reload once & try again."); return; }
       if (!user) {
         // Native guest: try an anonymous Firebase identity so we can create a REAL cloud
         // share LINK (identical to signed-in sharing). If anonymous auth is not enabled
@@ -155,7 +155,7 @@
       doShare(snap, db, user);
     });
   }
-  // Monthly share cap (100/mo) - client-side counter per month; subscription tiers planned later.
+  // Monthly share cap (100/mo) — client-side counter per month; subscription tiers planned later.
   var MONTHLY_LIMIT = 100;
   function monthKey(){ var d = new Date(); return "smd_shares_" + d.getFullYear() + "_" + (d.getMonth() + 1); }
   function sharesThisMonth(){ try { return parseInt(localStorage.getItem(monthKey()) || "0", 10) || 0; } catch (e) { return 0; } }
@@ -191,7 +191,7 @@
     var code = genCode();
     var now = Date.now();
     var name = (user.displayName) || ((user.email || "").split("@")[0]) || "Clinician";
-    // NOTE: this doc is PUBLICLY readable by code - do NOT store the owner's email
+    // NOTE: this doc is PUBLICLY readable by code — do NOT store the owner's email
     // (PII leak). Keep display name only; email stays in the private My Cases copy.
     var rec = { v:1, code:code, title:snap.title, html:snap.html, text:snap.text,
                 ownerUid:user.uid, ownerName:name, createdAt:now, expiresAt: now + TTL_MS };
@@ -206,7 +206,7 @@
     code = normCode(code);
     if (!/^SMD-[A-Z0-9]{5,8}$/.test(code)) { toast("Enter a valid code like SMD-7K2Q9."); return; }
     ensureReady(function(db){
-      if (!db) { toast("Cloud unavailable - check your connection."); return; }
+      if (!db) { toast("Cloud unavailable — check your connection."); return; }
       db.collection(COLL).doc(code).get().then(function(d){
         if (!d || !d.exists) { toast("Case " + code + " not found."); return; }
         var rec = d.data();
@@ -217,7 +217,7 @@
         // expiry is now enforced server-side: an expired/missing share fails the read
         var m = (e && (e.code || e.message)) || "";
         if (/permission|insufficient|denied/i.test(m)) { toast("Case " + code + " not found or expired."); return; }
-        toast("Could not open - " + friendly(e));
+        toast("Could not open — " + friendly(e));
       });
     });
   }
@@ -259,7 +259,7 @@
        + '<div class="cs-body"><div class="cs-code">'+esc(code)+'</div>'
        + '<div class="cs-sub">Anyone with this code (or link) can open this case for 30 days. <b>Do not include patient identifiers (name, MRN, contact).</b></div>'
        + '<div class="cs-row"><button class="cs-btn" id="csCopyCode">Copy code</button><button class="cs-btn sec" id="csCopyLink">Copy link</button><button class="cs-btn sec" id="csShareLink">Share…</button></div>'
-       + '<div class="cs-note">Saved to your account. This link is <b>public to anyone with the code</b> and shares the clinical decision only - never include patient names, MRN/UHID, phone, email or ID numbers. Decision support only.</div></div>');
+       + '<div class="cs-note">Saved to your account. This link is <b>public to anyone with the code</b> and shares the clinical decision only — never include patient names, MRN/UHID, phone, email or ID numbers. Decision support only.</div></div>');
     var o=overlay();
     o.querySelector("#csCopyCode").addEventListener("click", function(){ copy(code, "Code copied"); });
     o.querySelector("#csCopyLink").addEventListener("click", function(){ copy(link, "Link copied"); });
@@ -290,7 +290,7 @@
        + '<div class="cs-body"><div class="cs-sub">'+esc(code)+(when?" · shared "+esc(when):"")+'</div>'
        + (by?'<div class="cs-by" style="text-align:center;font:600 12.5px var(--f);color:var(--ink);margin:-8px 0 14px">'+by+'</div>':'')
        + '<div class="cs-viewer">'+((rec.html && sanitizeHTML(rec.html)) || ("<pre style=\"white-space:pre-wrap\">"+esc(rec.text||"")+"</pre>"))+'</div>'
-       + '<div class="cs-note">Read-only shared case. Decision support only - verify against clinical judgment &amp; local protocol.</div></div>');
+       + '<div class="cs-note">Read-only shared case. Decision support only — verify against clinical judgment &amp; local protocol.</div></div>');
   }
 
   // auto-open ?case=CODE links (after firebase has had a chance to load)

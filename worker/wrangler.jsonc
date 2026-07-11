@@ -34,6 +34,11 @@
   "triggers": { "crons": ["17 */6 * * *", "*/15 * * * *"] },
 
   // Edge rate limiting per client IP (protects the open, read-only API).
+  "r2_buckets": [
+    { "binding": "OFFLINE_BUCKET", "bucket_name": "stewardmd-offline" }
+  ],
+  "vars": { "FIREBASE_PROJECT_ID": "stewardmd-498ec" },
+
   "unsafe": {
     "bindings": [
       { "name": "RL", "type": "ratelimit", "namespace_id": "1001", "simple": { "limit": 120, "period": 60 } }

@@ -43,14 +43,14 @@
   ],
   "finalDiagnosis": "Tumour lysis syndrome (laboratory and clinical TLS per Cairo-Bishop criteria) with acute kidney injury, hyperkalemia, hyperuricemia, hyperphosphatemia, and hypocalcemia post-induction chemotherapy for high-grade lymphoma",
   "citations": [
-    "Harrison 22e - Oncologic Emergencies: Tumor Lysis Syndrome",
-    "Harrison 22e - Non-Hodgkin Lymphoma",
+    "Harrison 22e — Oncologic Emergencies: Tumor Lysis Syndrome",
+    "Harrison 22e — Non-Hodgkin Lymphoma",
     "ASCO/Cairo-Bishop Tumor Lysis Syndrome Guideline 2008 (updated consensus)",
     "KDIGO AKI Clinical Practice Guideline 2012"
   ],
   "stewardship": null,
   "contraindications": [
-    "Avoid rasburicase in G6PD deficiency (risk of hemolysis) - screen before use in at-risk populations",
+    "Avoid rasburicase in G6PD deficiency (risk of hemolysis) — screen before use in at-risk populations",
     "Avoid potassium-containing or lactate-containing IV fluids in hyperkalemia",
     "Avoid correcting hypocalcemia unless symptomatic (tetany, seizures, arrhythmia) due to risk of precipitating calcium phosphate deposition given concurrent hyperphosphatemia",
     "Avoid NSAIDs and other nephrotoxins",
@@ -60,9 +60,9 @@
     "Tumour lysis syndrome is not present as a distinct diagnosable id in the current disease vocabulary; closest overlapping engine concepts are hyperkalemia and aki, but neither captures the composite Cairo-Bishop syndrome, so acceptableIds is set to [] per rules",
     "Clinical TLS (with AKI, arrhythmia risk, or seizure) requires urgent nephrology involvement and consideration of renal replacement therapy if refractory hyperkalemia, severe acidosis, oliguria/anuria, or symptomatic hypocalcemia develop",
     "High LDH and bulky, rapidly proliferating disease (as here) are recognized high-risk features for TLS independent of baseline renal function",
-    "Rasburicase preferred over allopurinol once hyperuricemia is established, but was not used here initially - a clinically relevant management gap to flag"
+    "Rasburicase preferred over allopurinol once hyperuricemia is established, but was not used here initially — a clinically relevant management gap to flag"
   ],
-  "expectedMaiK": "MaiK should flag this as an oncologic emergency (tumour lysis syndrome) rather than an infective/sepsis picture - highlighting the temporal link to chemotherapy, the composite metabolic derangement (hyperkalemia, hyperuricemia, hyperphosphatemia, hypocalcemia) with AKI, and the need for urgent correction of hyperkalemia, aggressive IV hydration, urate-lowering therapy (rasburicase), and nephrology/ICU involvement with low threshold for dialysis.",
+  "expectedMaiK": "MaiK should flag this as an oncologic emergency (tumour lysis syndrome) rather than an infective/sepsis picture — highlighting the temporal link to chemotherapy, the composite metabolic derangement (hyperkalemia, hyperuricemia, hyperphosphatemia, hypocalcemia) with AKI, and the need for urgent correction of hyperkalemia, aggressive IV hydration, urate-lowering therapy (rasburicase), and nephrology/ICU involvement with low threshold for dialysis.",
   "expectedNextQuestions": [
     "Was rasburicase given or only allopurinol, and is G6PD status known?",
     "What is the current urine output over the last 6 hours (oliguria/anuria)?",
@@ -115,7 +115,7 @@
     }
   },
   "regressionAssertions": [
-    "acceptableIds is empty (TLS not represented as a discrete engine id) - top-1 correctness not scored against acceptableIds for this case",
+    "acceptableIds is empty (TLS not represented as a discrete engine id) — top-1 correctness not scored against acceptableIds for this case",
     "differential includes aki and/or hyperkalemia",
     "confidence >= expectedConfidence.min when engine surfaces oncologic-emergency reasoning",
     "expectedMaiK commentary references tumour lysis syndrome, hyperkalemia management, and urgent nephrology/dialysis consideration",

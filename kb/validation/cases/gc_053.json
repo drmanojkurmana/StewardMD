@@ -44,7 +44,7 @@
   ],
   "finalDiagnosis": "Convulsive status epilepticus (>5 minutes), secondary to subtherapeutic phenytoin from medication non-adherence",
   "citations": [
-    "Harrison 22e - Seizures and Epilepsy / Status Epilepticus",
+    "Harrison 22e — Seizures and Epilepsy / Status Epilepticus",
     "American Epilepsy Society (AES) Guideline for the Evaluation and Management of Status Epilepticus 2016",
     "Neurocritical Care Society Guideline for the Evaluation and Management of Status Epilepticus 2012"
   ],
@@ -56,9 +56,9 @@
   ],
   "edgeCases": [
     "If seizure persists beyond 30-60 minutes despite two appropriate agents, this becomes refractory status epilepticus requiring continuous IV anesthetic infusion and EEG monitoring",
-    "Non-convulsive status epilepticus can be missed if patient stops convulsing but remains unresponsive - continuous EEG is required to exclude this",
-    "'Status epilepticus' as an operational diagnosis (time-based, >5 min continuous or recurrent seizures without return to baseline) is not itself a listed disease id in the engine's diagnosable-disease vocabulary; the closest engine category is generic 'seizure_epilepsy', which does not capture the emergency time-threshold definition - acceptableIds intentionally left as a reasonable single mapping with differential coverage, and this mismatch should be flagged for vocabulary expansion",
-    "Underlying etiology (structural, toxic-metabolic, infectious) must be pursued in parallel with abortive therapy - do not delay treatment for imaging in patients with known epilepsy and a clear precipitant (non-compliance)"
+    "Non-convulsive status epilepticus can be missed if patient stops convulsing but remains unresponsive — continuous EEG is required to exclude this",
+    "'Status epilepticus' as an operational diagnosis (time-based, >5 min continuous or recurrent seizures without return to baseline) is not itself a listed disease id in the engine's diagnosable-disease vocabulary; the closest engine category is generic 'seizure_epilepsy', which does not capture the emergency time-threshold definition — acceptableIds intentionally left as a reasonable single mapping with differential coverage, and this mismatch should be flagged for vocabulary expansion",
+    "Underlying etiology (structural, toxic-metabolic, infectious) must be pursued in parallel with abortive therapy — do not delay treatment for imaging in patients with known epilepsy and a clear precipitant (non-compliance)"
   ],
   "expectedMaiK": "Recognize convulsive status epilepticus as a neurological emergency requiring immediate benzodiazepine administration per the treat-to-target time-based algorithm (first-line at 5 min, second-line at 20 min, refractory management if seizures continue at 40 min), with simultaneous airway/glucose/electrolyte assessment and search for a precipitant such as subtherapeutic antiepileptic levels.",
   "expectedNextQuestions": [
@@ -66,7 +66,7 @@
     "Is there a history of medication non-adherence or recent AED dose changes?",
     "Any fever, neck stiffness, or signs of CNS infection preceding the seizure?",
     "Any history of head trauma, alcohol/substance use, or toxin exposure?",
-    "Point-of-care glucose result - has hypoglycemia been excluded?",
+    "Point-of-care glucose result — has hypoglycemia been excluded?",
     "Is airway patent and is oxygenation being actively supported?"
   ],
   "expectedInvestigations": [
