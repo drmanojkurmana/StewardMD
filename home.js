@@ -83,7 +83,12 @@
         var toolsBody = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
           ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
           : "";
+        // Interface: single switch to flip between the Old (v2) and New (v4) home.
+        // Off = Classic v2 home (default); On = New v4 home. Persists smd_home_v4 and
+        // reloads (the home renders at load). The sidebar is identical in both modes.
+        var uiBody = swRow("homev4", "New home design", "Redesigned home screen (v4) — off = classic", flag("smd_home_v4", false));
         setBody.insertAdjacentHTML("beforeend",
+          group("interface", "Interface", uiBody, true) +
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
           (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
           group("ai", "AI Assistant", aiBody, false) +
@@ -107,6 +112,14 @@
               else if (k === "expanded" && window.SMD_setKbExpanded) SMD_setKbExpanded(nv);
               else if (k === "ai" && window.SMD_AI) SMD_AI.setFlag(nv);
               else if (k === "ghis" && window.SMD_setGhis) SMD_setGhis(nv);
+              else if (k === "homev4") {
+                // Old (v2) ⇄ New (v4) home. Render happens at load → persist + reload.
+                try { localStorage.setItem("smd_home_v4", nv ? "1" : "0"); } catch (e) {}
+                sw.classList.toggle("on", nv); sw.setAttribute("aria-checked", nv);
+                try { if (window.SB && SB.close) SB.close(); } catch (e) {}
+                setTimeout(function () { try { location.reload(); } catch (e) {} }, 120);
+                return;
+              }
             } catch (e) {}
             sw.classList.toggle("on", nv); sw.setAttribute("aria-checked", nv);
           });
@@ -720,7 +733,9 @@
   // ---- v4 home redesign (opt-in flag: localStorage smd_home_v4="1" or ?home=v4) ----
   // Renders a coherent, de-duplicated authenticated home. Reuses the ACT dispatch and
   // data-act wiring 1:1 so no routes change; styled by the scoped .hv4 layer in ui-v3.css.
-  function homeV4On() { try { var q = location.search || ""; if (/[?&]home=v3\b/.test(q)) return false; if (/[?&]home=v4\b/.test(q)) return true; if (localStorage.getItem("smd_home_v4") === "0") return false; return true; } catch (e) { return true; } }
+  // DEFAULT = OLD (v2) home. New v4 home is opt-in via the Settings "New home design"
+  // switch (localStorage smd_home_v4="1") or ?home=v4. ?home=v3 also forces old.
+  function homeV4On() { try { var q = location.search || ""; if (/[?&]home=v3\b/.test(q)) return false; if (/[?&]home=v4\b/.test(q)) return true; return localStorage.getItem("smd_home_v4") === "1"; } catch (e) { return false; } }
   function greetV4() { try { var h = (new Date()).getHours(); return h < 12 ? "Good morning" : (h < 17 ? "Good afternoon" : "Good evening"); } catch (e) { return "Welcome"; } }
   function dateV4() { try { return (new Date()).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" }); } catch (e) { return ""; } }
   // First name of the signed-in Google account → "Dr <name>"; empty for guests.
