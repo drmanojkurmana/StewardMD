@@ -15,14 +15,18 @@
 
   var Cap = window.Capacitor;
   function isNative() { try { return !!(Cap && (typeof Cap.isNativePlatform === "function" ? Cap.isNativePlatform() : Cap.isNative)); } catch (e) { return false; } }
+  function platform() { try { return (typeof Cap.getPlatform === "function" ? Cap.getPlatform() : (Cap && Cap.platform)) || "web"; } catch (e) { return "web"; } }
+  // iOS-ONLY by design: Android's vibration motor feels buzzy/cheap vs iOS's taptic engine, so
+  // haptics fire only through the Capacitor Haptics plugin on iOS. Android (native + web) and
+  // every other platform are a hard no-op. (navigator.vibrate is intentionally NOT used.)
+  function iosNative() { return isNative() && platform() === "ios"; }
 
   var _p; // cached plugin ref (undefined=unknown, null=absent)
   function plugin() {
     if (_p !== undefined) return _p;
-    _p = (isNative() && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Haptics) || null;
+    _p = (iosNative() && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Haptics) || null;
     return _p;
   }
-  function canVibrate() { try { return typeof navigator !== "undefined" && typeof navigator.vibrate === "function"; } catch (e) { return false; } }
 
   function enabled() {
     try {
@@ -42,25 +46,22 @@
   var NOTIF = { success: "SUCCESS", warning: "WARNING", error: "ERROR" };
 
   function impact(style) {
-    if (!enabled() || !gate()) return;
+    if (!enabled() || !iosNative() || !gate()) return;
     var p = plugin();
-    if (p && p.impact) { try { p.impact({ style: style }); return; } catch (e) {} }
-    if (canVibrate()) { try { navigator.vibrate(style === IMPACT.heavy ? 16 : style === IMPACT.medium ? 11 : 7); } catch (e) {} }
+    if (p && p.impact) { try { p.impact({ style: style }); } catch (e) {} }
   }
   function notify(type) {
-    if (!enabled() || !gate()) return;
+    if (!enabled() || !iosNative() || !gate()) return;
     var p = plugin();
-    if (p && p.notification) { try { p.notification({ type: type }); return; } catch (e) {} }
-    if (canVibrate()) { try { navigator.vibrate(type === NOTIF.error ? [10, 45, 10] : type === NOTIF.warning ? [10, 35] : [6, 22]); } catch (e) {} }
+    if (p && p.notification) { try { p.notification({ type: type }); } catch (e) {} }
   }
   function selection() {
-    if (!enabled() || !gate()) return;
+    if (!enabled() || !iosNative() || !gate()) return;
     var p = plugin();
     if (p && p.selectionStart) {
       try { p.selectionStart(); if (p.selectionChanged) p.selectionChanged(); if (p.selectionEnd) p.selectionEnd(); return; } catch (e) {}
     }
-    if (p && p.impact) { try { p.impact({ style: IMPACT.light }); return; } catch (e) {} }   // fallback: light tick
-    if (canVibrate()) { try { navigator.vibrate(5); } catch (e) {} }
+    if (p && p.impact) { try { p.impact({ style: IMPACT.light }); } catch (e) {} }   // fallback: light tick
   }
 
   // ---- public API -------------------------------------------------------------------------
@@ -75,7 +76,7 @@
     error: function () { notify(NOTIF.error); },
     enabled: enabled,
     setEnabled: function (on) { try { localStorage.setItem("smd_haptics", on ? "1" : "0"); } catch (e) {} },
-    supported: function () { return !!plugin() || canVibrate(); }
+    supported: function () { return !!plugin(); }   // true only on iOS native
   };
 
   // ---- auto-wire: classify every interactive tap ------------------------------------------
@@ -100,7 +101,7 @@
   // pointerdown = immediate on-press feedback (feels native); capture so it runs before the
   // app's own handlers and survives stopPropagation.
   document.addEventListener("pointerdown", function (e) {
-    if (!enabled()) return;
+    if (!iosNative() || !enabled()) return;
     if (e.pointerType === "" && e.button && e.button !== 0) return;   // ignore non-primary mouse
     var t = e.target && e.target.closest ? e.target.closest(INTERACTIVE) : null;
     if (t) fireFor(t);
@@ -108,7 +109,7 @@
 
   // Keyboard activation (Enter/Space) for accessibility parity.
   document.addEventListener("keydown", function (e) {
-    if (!enabled()) return;
+    if (!iosNative() || !enabled()) return;
     if (e.key !== "Enter" && e.key !== " " && e.key !== "Spacebar") return;
     var t = e.target && e.target.closest ? e.target.closest(INTERACTIVE) : null;
     if (t) fireFor(t);
