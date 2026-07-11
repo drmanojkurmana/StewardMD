@@ -80,9 +80,10 @@
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync</button>';
-        var toolsBody = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
-          ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
-          : "";
+        var toolsBody = swRow("whisper", "Clinical Dictation (Beta)", "On-device Whisper voice→text in MaiK Scribe · native app only (model downloads on first use)", flag("smd_whisper_clinical_dictation", false)) +
+          ((window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
+            ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
+            : "");
         setBody.insertAdjacentHTML("beforeend",
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
           (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
@@ -107,6 +108,7 @@
               else if (k === "expanded" && window.SMD_setKbExpanded) SMD_setKbExpanded(nv);
               else if (k === "ai" && window.SMD_AI) SMD_AI.setFlag(nv);
               else if (k === "ghis" && window.SMD_setGhis) SMD_setGhis(nv);
+              else if (k === "whisper") { localStorage.setItem("smd_whisper_clinical_dictation", nv ? "1" : "0"); }
             } catch (e) {}
             sw.classList.toggle("on", nv); sw.setAttribute("aria-checked", nv);
           });
