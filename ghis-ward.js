@@ -28,6 +28,39 @@
     holder.innerHTML = PANEL_HTML;
     while (holder.firstChild) document.body.appendChild(holder.firstChild);
 
+    // Hospital picker + "Add your hospital" request form, inserted BEFORE the GHIS login
+    // so Ward Sync first asks which hospital (GIMSR → GHIS login; others → request form).
+    (function () {
+      var setup = document.getElementById('ghisSetup');
+      if (!setup || document.getElementById('ghisHospital')) return;
+      var wrap = document.createElement('div');
+      wrap.innerHTML =
+        '<div id="ghisHospital" class="ghis-body">' +
+          '<div class="ghis-setup-card">' +
+            '<div class="ghis-setup-title">Select your hospital</div>' +
+            '<div class="ghis-setup-sub">Choose your hospital to connect its ward + labs.</div>' +
+            '<button class="ghis-connect-btn" onclick="ghisSelectHospital(\'gimsr\')">🏥 GIMSR</button>' +
+            '<div class="ghis-setup-sub" style="margin:10px 0 4px">GITAM Institute of Medical Sciences · sign in with GHIS</div>' +
+            '<button class="ghis-connect-btn" style="background:transparent;color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" onclick="showGhisScreen(\'addhospital\')">➕ Add your hospital</button>' +
+          '</div>' +
+        '</div>' +
+        '<div id="ghisAddHospital" class="ghis-body" style="display:none;">' +
+          '<div class="ghis-setup-card">' +
+            '<button class="ghis-back-sm" onclick="showGhisScreen(\'hospital\')">← Back</button>' +
+            '<div class="ghis-setup-title" style="margin-top:8px">Add your hospital</div>' +
+            '<div class="ghis-setup-sub">Tell us your hospital + EMR and we\'ll set up Ward Sync for you.</div>' +
+            '<input id="ghReqHosp" class="ghis-login-input" placeholder="Hospital name">' +
+            '<input id="ghReqEmr" class="ghis-login-input" placeholder="EMR / HIS system (if known)">' +
+            '<input id="ghReqName" class="ghis-login-input" placeholder="Your name">' +
+            '<input id="ghReqEmail" class="ghis-login-input" type="email" placeholder="Your email">' +
+            '<textarea id="ghReqMsg" class="ghis-login-input" rows="3" placeholder="Contact person, API docs link, anything else…"></textarea>' +
+            '<button class="ghis-connect-btn" onclick="ghisSubmitHospitalRequest()">Send request</button>' +
+            '<div id="ghReqStatus" class="ghis-setup-sub" style="margin-top:8px"></div>' +
+          '</div>' +
+        '</div>';
+      while (wrap.firstChild) setup.parentNode.insertBefore(wrap.firstChild, setup);
+    })();
+
     var btn = document.createElement('button');
     btn.id = 'ghisBtn';
     btn.className = 'ghis-ward-fab';
@@ -101,9 +134,32 @@
       }
     
       function showScreen(name) {
+        var el;
+        if ((el = document.getElementById('ghisHospital')))    el.style.display = name === 'hospital'    ? '' : 'none';
+        if ((el = document.getElementById('ghisAddHospital'))) el.style.display = name === 'addhospital' ? '' : 'none';
         document.getElementById('ghisSetup').style.display = name === 'setup' ? '' : 'none';
         document.getElementById('ghisWard').style.display  = name === 'ward'  ? '' : 'none';
       }
+      window.showGhisScreen = showScreen;
+      // Hospital picker actions.
+      window.ghisSelectHospital = function (id) { if (id === 'gimsr') showScreen('setup'); };
+      window.ghisSubmitHospitalRequest = function () {
+        var g = function (i) { var e = document.getElementById(i); return e ? String(e.value || '').trim() : ''; };
+        var st = document.getElementById('ghReqStatus');
+        var hosp = g('ghReqHosp');
+        if (!hosp) { if (st) { st.style.color = '#ef4444'; st.textContent = 'Please enter your hospital name.'; } return; }
+        var payload = { hospital: hosp, emr: g('ghReqEmr'), name: g('ghReqName'), email: g('ghReqEmail'), msg: g('ghReqMsg') };
+        if (st) { st.style.color = ''; st.textContent = 'Sending…'; }
+        fetch('/api/hospital-request', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+          .then(function (r) { return r.ok ? r.json() : r.json().then(function (j) { throw new Error(j.error || 'failed'); }); })
+          .then(function () { if (st) { st.style.color = 'var(--teal,#0e6e63)'; st.textContent = '✓ Sent — we’ll be in touch. Thank you!'; } })
+          .catch(function () {
+            // Fallback: open the mail composer with the request pre-filled.
+            var body = 'Hospital: ' + payload.hospital + '\nEMR/HIS: ' + payload.emr + '\nName: ' + payload.name + '\nEmail: ' + payload.email + '\nNotes: ' + payload.msg;
+            var href = 'mailto:drmanojkurmana@gmail.com?subject=' + encodeURIComponent('StewardMD Ward Sync request: ' + payload.hospital) + '&body=' + encodeURIComponent(body);
+            if (st) { st.style.color = ''; st.innerHTML = 'Could not send automatically. <a href="' + href + '" style="color:var(--teal,#0e6e63);font-weight:700">Tap to email us instead</a>.'; }
+          });
+      };
     
       function statusBadge(status) {
         var cls = 'ghis-status-other', label = status || 'Unknown';
@@ -526,15 +582,16 @@
     
       window.openGHIS = function() {
         document.getElementById('ghisPanel').classList.add('open');
-        // Already have a saved login? Verify the token and go straight to the ward.
-        if (!getToken()) { showScreen('setup'); return; }
+        // No saved login? Ask which hospital first (GIMSR → GHIS login; others → request form).
+        if (!getToken()) { showScreen('hospital'); return; }
+        // Have a saved login? Verify the token and go straight to the ward.
         fetch(PROXY + '/status', { headers: { 'Authorization': 'Bearer ' + getToken() } })
           .then(function(r) { return r.json(); })
           .then(function(s) {
             if (s.connected) { _connected = true; dot(true); showScreen('ward'); ghisLoadPatients(); }
-            else { setToken(''); showScreen('setup'); }
+            else { setToken(''); showScreen('hospital'); }
           })
-          .catch(function() { showScreen('setup'); });
+          .catch(function() { showScreen('hospital'); });
       };
     
       window.closeGHIS = function() {
