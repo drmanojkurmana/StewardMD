@@ -1,0 +1,594 @@
+/* ============================================================================
+   StewardMD — Redesign Design System v1  (Phase 1 · Design Foundation)
+   ----------------------------------------------------------------------------
+   ADDITIVE + OPT-IN. This file introduces the redesign token layer and a
+   reusable component library under the `rds-` namespace. It does NOT restyle
+   any existing screen: every selector is `.rds-*` (or `body.dark .rds-*`), and
+   the tokens are NEW names that ALIAS the app's existing base tokens
+   (index.html :root — --teal/--paper/--panel/--ink/--line/--slate/--mono/--sans
+   + status ramps). Nothing here changes the current appearance of the classic
+   engine, home, ICU, or any module. Later phases opt screens in by using these
+   classes/tokens. Buildless: this file is copied verbatim into www/ by
+   scripts/build-www.sh (`for f in *.css`) and linked from index.html with ?v=.
+
+   Accent + light/dark + the 7 appearance themes propagate automatically because
+   the accent/surface tokens alias var(--teal)/var(--paper)/… which the existing
+   theme system already remaps. Clinical SEVERITY tokens are deliberately
+   THEME-INVARIANT (fixed values + a body.dark override) — severity must never
+   change meaning per accent theme (clinical-safety).
+
+   Severity names follow the task spec: critical · urgent · warning · stable ·
+   informational · completed. Mapping to the existing decision-banner semantics:
+   red → critical, orange → urgent, yellow → warning, green → stable.
+   (DESIGN_SYSTEM.md labels these Critical/High/Warning/Stable/Info/Completed;
+   urgent = High, informational = Info.)
+   ========================================================================== */
+
+/* Declared on `body` (NOT :root) so the var(--paper)/var(--teal)/… aliases resolve
+   against the app's dark override, which lives at `body.dark { --paper:… }` — a :root
+   declaration would capture the html-level (always-light) base tokens and never flip. */
+body {
+  /* ---- accent + surfaces: ALIAS existing base tokens so themes/dark flow through ---- */
+  --rds-primary:        var(--teal, #0F766E);
+  --rds-primary-2:      #115E59;
+  --rds-primary-soft:   var(--teal-soft, #E4F2EF);
+  --rds-on-primary:     #ffffff;
+  --rds-bg:             var(--paper, #F5F8F9);
+  --rds-surface:        var(--panel, #ffffff);
+  --rds-surface-2:      #EEF3F5;                 /* inset tiles / skeleton base (no base token) */
+  --rds-line:           var(--line, #E3EAEE);
+  --rds-line-soft:      #EBF0F3;
+  --rds-ink:            var(--ink, #0D1B24);
+  --rds-muted:          var(--slate, #5B7083);
+  --rds-faint:          var(--slate-soft, #8CA2B1);
+
+  /* ---- typography ---- */
+  --rds-font:  var(--sans, 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif);
+  --rds-mono:  var(--mono, 'IBM Plex Mono', 'SF Mono', Consolas, monospace);
+  --rds-fs-display: 26px;  --rds-lh-display: 1.15;
+  --rds-fs-title:   20px;  --rds-fs-heading: 16px;  --rds-fs-body: 15px;
+  --rds-fs-sec:     13px;  --rds-fs-label:   11px;  --rds-fs-data: 21px;
+  --rds-fw-reg: 500; --rds-fw-med: 600; --rds-fw-bold: 700; --rds-fw-black: 800;
+
+  /* ---- 4-pt spacing ---- */
+  --rds-sp-1: 4px; --rds-sp-2: 8px; --rds-sp-3: 12px; --rds-sp-4: 16px;
+  --rds-sp-6: 24px; --rds-sp-8: 32px;
+  --rds-gutter: 20px; --rds-card-pad: 16px; --rds-stack: 12px;
+
+  /* ---- radius ---- */
+  --rds-r: 16px; --rds-r-lg: 18px; --rds-r-ctl: 12px; --rds-r-pill: 999px; --rds-r-sheet: 20px;
+
+  /* ---- elevation (borders do most separation; shadows are sparing) ---- */
+  --rds-el-cta:   0 6px 18px rgba(15,118,110,.22);
+  --rds-el-sheet: 0 12px 40px rgba(13,27,36,.14);
+  --rds-el-card:  0 1px 2px rgba(13,27,36,.04);
+
+  /* ---- motion ---- */
+  --rds-ease: cubic-bezier(.2,.7,.2,1);
+  --rds-dur: 180ms; --rds-dur-sheet: 260ms;
+
+  /* ---- clinical severity (theme-invariant) ---- */
+  --sev-critical-fg: #B42332; --sev-critical-bg: #FBE9EC; --sev-critical-bd: #F0B7C0;
+  --sev-urgent-fg:   #C2410C; --sev-urgent-bg:   #FDEEE4; --sev-urgent-bd:   #F5C6A5;
+  --sev-warning-fg:  #996007; --sev-warning-bg:  #FBF3DC; --sev-warning-bd:  #EAD28F; /* darkened from #A16207 to clear WCAG AA (4.70:1) at small text */
+  --sev-stable-fg:   #1C7A4A; --sev-stable-bg:   #E7F5EC; --sev-stable-bd:   #B5DFC6;
+  --sev-info-fg:     #1D6FA3; --sev-info-bg:     #E8F2F9; --sev-info-bd:     #B5D4E8;
+  --sev-done-fg:     #5B7083; --sev-done-bg:     #EEF3F5; --sev-done-bd:     #DCE5EA;
+}
+
+/* Dark: surface-2 + severity get explicit values (base surfaces already flip via body.dark).
+   Scoped to the app's primary dark switch (body.dark). */
+body.dark {
+  --rds-surface-2: #0D1922;
+  --rds-line-soft: #16283340;
+  --rds-el-card:  0 1px 2px rgba(0,0,0,.30);
+  --sev-critical-fg: #F17287; --sev-critical-bg: #2A1218; --sev-critical-bd: #4A2028;
+  --sev-urgent-fg:   #F0A36B; --sev-urgent-bg:   #2C190C; --sev-urgent-bd:   #4A2C15;
+  --sev-warning-fg:  #EAC26A; --sev-warning-bg:  #241B00; --sev-warning-bd:  #3E2F08;
+  --sev-stable-fg:   #5BD08F; --sev-stable-bg:   #06240F; --sev-stable-bd:   #123E22;
+  --sev-info-fg:     #6FB4E0; --sev-info-bg:     #0C2233; --sev-info-bd:     #163B54;
+  --sev-done-fg:     #8AA2B2; --sev-done-bg:     #0D1922; --sev-done-bd:     #22343F;
+}
+
+/* ---- Icons (Material Symbols Rounded; loaded via <link> in index.html) ------
+   Degrades gracefully to ligature text if the CDN font is unavailable (offline/native). */
+.rds-icon {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal; font-style: normal; line-height: 1;
+  font-size: 22px; letter-spacing: normal; text-transform: none; white-space: nowrap;
+  word-wrap: normal; direction: ltr; display: inline-block; vertical-align: middle;
+  -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'opsz' 24, 'wght' 400, 'GRAD' 0, 'FILL' 0;
+}
+.rds-icon.is-filled { font-variation-settings: 'opsz' 24, 'wght' 400, 'GRAD' 0, 'FILL' 1; }
+
+/* ---- Typography utilities ---- */
+.rds-display   { font: var(--rds-fw-black) var(--rds-fs-display)/var(--rds-lh-display) var(--rds-font); letter-spacing: -.02em; color: var(--rds-ink); }
+.rds-title     { font: var(--rds-fw-bold) var(--rds-fs-title) var(--rds-font); color: var(--rds-ink); }
+.rds-heading   { font: var(--rds-fw-bold) var(--rds-fs-heading) var(--rds-font); color: var(--rds-ink); }
+.rds-body      { font: var(--rds-fw-reg) var(--rds-fs-body)/1.5 var(--rds-font); color: var(--rds-ink); }
+.rds-secondary { font: var(--rds-fw-reg) var(--rds-fs-sec) var(--rds-font); color: var(--rds-muted); }
+.rds-label     { font: var(--rds-fw-bold) var(--rds-fs-label) var(--rds-font); text-transform: uppercase; letter-spacing: .08em; color: var(--rds-muted); }
+.rds-data      { font: var(--rds-fw-bold) var(--rds-fs-data) var(--rds-mono); font-variant-numeric: tabular-nums; color: var(--rds-ink); }
+
+/* ---- Buttons (48px target, 44px min) ---- */
+.rds-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--rds-sp-2);
+  min-height: 48px; padding: 0 18px; border-radius: var(--rds-r-ctl);
+  font: var(--rds-fw-bold) 15px var(--rds-font); cursor: pointer;
+  border: 1.5px solid transparent; background: transparent; color: var(--rds-ink);
+  transition: background var(--rds-dur) var(--rds-ease), border-color var(--rds-dur) var(--rds-ease), transform var(--rds-dur) var(--rds-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.rds-btn:active { transform: translateY(1px); }
+.rds-btn[disabled], .rds-btn.is-disabled { opacity: .5; pointer-events: none; }
+.rds-btn-primary   { background: var(--rds-primary); color: var(--rds-on-primary); box-shadow: var(--rds-el-cta); }
+.rds-btn-secondary { background: var(--rds-surface); border-color: var(--rds-line); color: var(--rds-ink); }
+.rds-btn-ghost     { background: transparent; color: var(--rds-primary); }
+.rds-btn-danger    { background: var(--sev-critical-fg); color: #fff; }
+.rds-btn-block     { display: flex; width: 100%; }
+
+/* ---- Inputs (50px, 1.5px border, focus ring) ---- */
+.rds-input, .rds-textarea, .rds-select {
+  width: 100%; box-sizing: border-box; min-height: 50px; padding: 0 14px;
+  border: 1.5px solid var(--rds-line); border-radius: var(--rds-r-ctl);
+  background: var(--rds-surface); color: var(--rds-ink);
+  font: var(--rds-fw-reg) var(--rds-fs-body) var(--rds-font);
+  transition: border-color var(--rds-dur) var(--rds-ease), box-shadow var(--rds-dur) var(--rds-ease);
+}
+.rds-textarea { min-height: 96px; padding: 12px 14px; resize: vertical; line-height: 1.5; }
+.rds-input::placeholder, .rds-textarea::placeholder { color: var(--rds-faint); }
+.rds-input:focus, .rds-textarea:focus, .rds-select:focus {
+  outline: none; border-color: var(--rds-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25);
+}
+.rds-field-label { display: block; margin-bottom: 6px; font: var(--rds-fw-bold) var(--rds-fs-label) var(--rds-font); text-transform: uppercase; letter-spacing: .06em; color: var(--rds-muted); }
+
+/* ---- Cards ---- */
+.rds-card { background: var(--rds-surface); border: 1px solid var(--rds-line); border-radius: var(--rds-r); padding: var(--rds-card-pad); box-shadow: var(--rds-el-card); }
+.rds-card-tight { padding: var(--rds-sp-3); }
+
+/* ---- Section header ---- */
+.rds-section-header { display: flex; align-items: center; justify-content: space-between; gap: var(--rds-sp-2); margin: var(--rds-sp-6) 0 var(--rds-sp-2); }
+.rds-section-header > .rds-section-title { font: var(--rds-fw-bold) var(--rds-fs-label) var(--rds-font); text-transform: uppercase; letter-spacing: .08em; color: var(--rds-muted); }
+
+/* ---- Chips ---- */
+.rds-chip {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px;
+  border: 1.5px solid var(--rds-line); border-radius: var(--rds-r-pill);
+  background: var(--rds-surface); color: var(--rds-ink);
+  font: var(--rds-fw-med) 13px var(--rds-font); cursor: pointer;
+  transition: background var(--rds-dur) var(--rds-ease), border-color var(--rds-dur) var(--rds-ease);
+}
+.rds-chip.is-selected { background: var(--rds-primary-soft); border-color: var(--rds-primary); color: var(--rds-primary-2, var(--rds-primary)); }
+
+/* ---- Badges (incl. clinical severity) ---- */
+.rds-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px; border-radius: var(--rds-r-pill); border: 1px solid var(--rds-line); background: var(--rds-surface-2); color: var(--rds-muted); font: var(--rds-fw-bold) 11px var(--rds-font); }
+.rds-badge--critical { color: var(--sev-critical-fg); background: var(--sev-critical-bg); border-color: var(--sev-critical-bd); }
+.rds-badge--urgent   { color: var(--sev-urgent-fg);   background: var(--sev-urgent-bg);   border-color: var(--sev-urgent-bd); }
+.rds-badge--warning  { color: var(--sev-warning-fg);  background: var(--sev-warning-bg);  border-color: var(--sev-warning-bd); }
+.rds-badge--stable   { color: var(--sev-stable-fg);   background: var(--sev-stable-bg);   border-color: var(--sev-stable-bd); }
+.rds-badge--info     { color: var(--sev-info-fg);     background: var(--sev-info-bg);     border-color: var(--sev-info-bd); }
+.rds-badge--completed{ color: var(--sev-done-fg);     background: var(--sev-done-bg);     border-color: var(--sev-done-bd); }
+
+/* ---- Alert / decision banner (severity-tinted, bordered, with action slot) ---- */
+.rds-banner { display: flex; align-items: flex-start; gap: var(--rds-sp-3); padding: var(--rds-sp-3) var(--rds-sp-4); border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface-2); }
+.rds-banner .rds-banner-body { flex: 1; min-width: 0; }
+.rds-banner .rds-banner-title { font: var(--rds-fw-bold) var(--rds-fs-body) var(--rds-font); }
+.rds-banner .rds-banner-meta { font: var(--rds-fw-reg) var(--rds-fs-sec) var(--rds-font); color: var(--rds-muted); margin-top: 2px; }
+.rds-banner--critical { color: var(--sev-critical-fg); background: var(--sev-critical-bg); border-color: var(--sev-critical-bd); }
+.rds-banner--urgent   { color: var(--sev-urgent-fg);   background: var(--sev-urgent-bg);   border-color: var(--sev-urgent-bd); }
+.rds-banner--warning  { color: var(--sev-warning-fg);  background: var(--sev-warning-bg);  border-color: var(--sev-warning-bd); }
+.rds-banner--stable   { color: var(--sev-stable-fg);   background: var(--sev-stable-bg);   border-color: var(--sev-stable-bd); }
+.rds-banner--info     { color: var(--sev-info-fg);     background: var(--sev-info-bg);     border-color: var(--sev-info-bd); }
+.rds-banner--critical .rds-banner-meta, .rds-banner--urgent .rds-banner-meta,
+.rds-banner--warning .rds-banner-meta, .rds-banner--stable .rds-banner-meta,
+.rds-banner--info .rds-banner-meta { color: inherit; opacity: .85; }
+
+/* ---- Vital tile (label + mono value + context; optional severity tint) ---- */
+.rds-vital { display: flex; flex-direction: column; gap: 2px; padding: var(--rds-sp-3); border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); }
+.rds-vital .rds-vital-label { font: var(--rds-fw-bold) 9.5px var(--rds-font); text-transform: uppercase; letter-spacing: .06em; color: var(--rds-muted); }
+.rds-vital .rds-vital-value { font: var(--rds-fw-bold) var(--rds-fs-data) var(--rds-mono); font-variant-numeric: tabular-nums; color: var(--rds-ink); }
+.rds-vital .rds-vital-ctx { font: var(--rds-fw-reg) 11px var(--rds-font); color: var(--rds-faint); }
+.rds-vital--critical { background: var(--sev-critical-bg); border-color: var(--sev-critical-bd); }
+.rds-vital--urgent   { background: var(--sev-urgent-bg);   border-color: var(--sev-urgent-bd); }
+.rds-vital--warning  { background: var(--sev-warning-bg);  border-color: var(--sev-warning-bd); }
+.rds-vital--stable   { background: var(--sev-stable-bg);   border-color: var(--sev-stable-bd); }
+.rds-vital--critical .rds-vital-value { color: var(--sev-critical-fg); }
+.rds-vital--urgent   .rds-vital-value { color: var(--sev-urgent-fg); }
+
+/* ---- List row ---- */
+.rds-list-row { display: flex; align-items: center; gap: var(--rds-sp-3); padding: 14px var(--rds-sp-4); border-bottom: 1px solid var(--rds-line-soft); background: var(--rds-surface); }
+.rds-list-row:last-child { border-bottom: none; }
+.rds-list-row > .rds-list-lead { color: var(--rds-muted); flex: 0 0 auto; }
+.rds-list-row > .rds-list-main { flex: 1; min-width: 0; }
+.rds-list-row > .rds-list-trail { flex: 0 0 auto; color: var(--rds-muted); font: var(--rds-fw-med) 13px var(--rds-mono); }
+
+/* ---- Scrim + bottom sheet + dialog ---- */
+.rds-scrim { position: fixed; inset: 0; background: rgba(13,27,36,.44); z-index: var(--z-modal, 700); opacity: 0; transition: opacity var(--rds-dur) var(--rds-ease); }
+.rds-scrim.is-open { opacity: 1; }
+.rds-sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: calc(var(--z-modal, 700) + 1);
+  background: var(--rds-surface); border-radius: var(--rds-r-sheet) var(--rds-r-sheet) 0 0;
+  box-shadow: var(--rds-el-sheet); padding: var(--rds-sp-3) var(--rds-gutter);
+  padding-bottom: calc(var(--rds-gutter) + env(safe-area-inset-bottom, 0px));
+  max-height: 88vh; overflow: auto; transform: translateY(100%);
+  transition: transform var(--rds-dur-sheet) var(--rds-ease);
+}
+.rds-sheet.is-open { transform: translateY(0); }
+.rds-sheet-grip { width: 40px; height: 4px; border-radius: 999px; background: var(--rds-line); margin: 4px auto 12px; }
+.rds-dialog {
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%,-48%); z-index: calc(var(--z-modal, 700) + 1);
+  width: min(92vw, 420px); background: var(--rds-surface); border-radius: var(--rds-r); box-shadow: var(--rds-el-sheet);
+  padding: var(--rds-sp-6); opacity: 0; transition: opacity var(--rds-dur) var(--rds-ease), transform var(--rds-dur) var(--rds-ease);
+}
+.rds-dialog.is-open { transform: translate(-50%,-50%); opacity: 1; }
+
+/* ---- Toast / confirmation ---- */
+.rds-toast {
+  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  z-index: var(--z-popup, 500); display: flex; align-items: center; gap: var(--rds-sp-3);
+  background: var(--rds-ink); color: var(--rds-surface); padding: 12px 16px; border-radius: var(--rds-r-ctl);
+  box-shadow: var(--rds-el-sheet); font: var(--rds-fw-med) 14px var(--rds-font); max-width: min(92vw, 480px);
+}
+.rds-toast .rds-toast-action { color: var(--rds-primary-soft); font-weight: var(--rds-fw-bold); background: none; border: none; cursor: pointer; }
+
+/* ---- Skeleton loaders ---- */
+.rds-skeleton { position: relative; overflow: hidden; background: var(--rds-surface-2); border-radius: var(--rds-r-ctl); }
+.rds-skeleton::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent); animation: rds-shimmer 1.3s infinite; }
+.rds-skel-line { height: 12px; margin: 8px 0; }
+.rds-skel-line.rds-skel-sm { width: 40%; } .rds-skel-line.rds-skel-lg { width: 85%; }
+.rds-skel-block { height: 72px; }
+@keyframes rds-shimmer { 100% { transform: translateX(100%); } }
+
+/* ---- State blocks: empty / loading / error / offline / success ---- */
+.rds-state { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--rds-sp-3); padding: var(--rds-sp-8) var(--rds-gutter); }
+.rds-state .rds-state-icon { font-size: 40px; color: var(--rds-faint); }
+.rds-state .rds-state-title { font: var(--rds-fw-bold) var(--rds-fs-heading) var(--rds-font); color: var(--rds-ink); }
+.rds-state .rds-state-msg { font: var(--rds-fw-reg) var(--rds-fs-body)/1.5 var(--rds-font); color: var(--rds-muted); max-width: 34ch; }
+.rds-state--error .rds-state-icon   { color: var(--sev-critical-fg); }
+.rds-state--offline .rds-state-icon { color: var(--sev-warning-fg); }
+.rds-state--success .rds-state-icon { color: var(--sev-stable-fg); }
+
+/* ---- Utilities: safe-area + keyboard-safe + a11y ---- */
+.rds-safe-top    { padding-top: env(safe-area-inset-top, 0px); }
+.rds-safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.rds-safe-x      { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
+/* Keyboard-safe: keep the last interactive area above the soft keyboard/home-indicator. */
+.rds-kb-safe     { padding-bottom: calc(var(--rds-sp-4) + env(safe-area-inset-bottom, 0px)); scroll-margin-bottom: 96px; }
+.rds-visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.rds-touch { min-width: 44px; min-height: 44px; }
+
+/* Focus ring — scoped to rds- interactive components only (never global). */
+.rds-btn:focus-visible, .rds-chip:focus-visible, .rds-input:focus-visible,
+.rds-textarea:focus-visible, .rds-select:focus-visible, .rds-list-row:focus-visible,
+.rds-icon-btn:focus-visible { outline: 3px solid rgba(15,118,110,.55); outline-offset: 2px; }
+.rds-icon-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border: none; background: transparent; color: var(--rds-ink); border-radius: var(--rds-r-ctl); cursor: pointer; }
+
+/* Respect reduced-motion for all rds- transitions/animations. */
+@media (prefers-reduced-motion: reduce) {
+  .rds-btn, .rds-chip, .rds-input, .rds-textarea, .rds-select,
+  .rds-scrim, .rds-sheet, .rds-dialog { transition: none !important; }
+  .rds-skeleton::after { animation: none; }
+}
+
+/* ============================================================================
+   Redesign home shell (Phase 2 · boards 1f + 3a) — ACTIVE ONLY under #homeV2.rnav
+   (opt-in flag smd_redesign_nav / ?rnav=1). Reuses the base .v3 fullscreen flex
+   container + the existing .v4-foot/.v4-maik footer styles from ui-v3.css.
+   ========================================================================== */
+#homeV2.rnav { background: var(--rds-bg); font-family: var(--rds-font); }
+#homeV2.rnav .rnav-head { display: flex; align-items: center; gap: 6px; padding: calc(10px + env(safe-area-inset-top,0px)) 14px 10px; background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+#homeV2.rnav .rnav-brand { display: flex; align-items: center; gap: 8px; font: 800 17px var(--rds-font); color: var(--rds-ink); }
+#homeV2.rnav .rnav-brand img { width: 26px; height: 26px; object-fit: contain; }
+#homeV2.rnav .rnav-brand b { color: var(--rds-primary); }
+#homeV2.rnav .rnav-head-sp { flex: 1; }
+#homeV2.rnav .rds-icon-btn { color: var(--rds-muted); }
+#homeV2.rnav .rnav-avatar { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 999px; background: var(--rds-primary-soft); color: var(--rds-primary); border: none; cursor: pointer; }
+#homeV2.rnav .rnav-main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--rds-bg); }
+#homeV2.rnav .rnav-stack { display: flex; flex-direction: column; gap: 14px; padding: var(--rds-gutter); padding-bottom: 96px; max-width: 560px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+#homeV2.rnav .rnav-greet .rnav-eyebrow { font: 700 11px var(--rds-font); text-transform: uppercase; letter-spacing: .08em; color: var(--rds-primary); }
+#homeV2.rnav .rnav-greet .rnav-hi { font: 800 24px/1.2 var(--rds-font); letter-spacing: -.02em; color: var(--rds-ink); margin-top: 2px; }
+#homeV2.rnav .rnav-qa { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+#homeV2.rnav .rnav-qa-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); font: 600 11.5px var(--rds-font); cursor: pointer; min-height: 44px; }
+#homeV2.rnav .rnav-qa-btn .rds-icon { color: var(--rds-primary); font-size: 24px; }
+#homeV2.rnav .rnav-hero { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: var(--rds-r); background: linear-gradient(135deg,var(--rds-primary),var(--rds-primary-2)); color: #fff; box-shadow: var(--rds-el-cta); }
+#homeV2.rnav .rnav-hero-bd { flex: 1; min-width: 0; }
+#homeV2.rnav .rnav-hero-tt { font: 800 20px var(--rds-font); }
+#homeV2.rnav .rnav-hero-tt b { opacity: .9; }
+#homeV2.rnav .rnav-hero-tag { font: 700 11px var(--rds-font); text-transform: uppercase; letter-spacing: .06em; opacity: .9; display: inline-block; margin-top: 3px; }
+#homeV2.rnav .rnav-hero-p { font: 500 13px/1.5 var(--rds-font); opacity: .92; margin: 6px 0 0; }
+#homeV2.rnav .rnav-hero-logo { width: 56px; height: 56px; object-fit: contain; filter: brightness(0) invert(1); opacity: .9; }
+#homeV2.rnav .rnav-qrow { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+#homeV2.rnav .rnav-qc { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); font: 600 11px var(--rds-font); cursor: pointer; min-height: 44px; }
+#homeV2.rnav .rnav-qc .rds-icon { color: var(--rds-primary); }
+#homeV2.rnav .rnav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#homeV2.rnav .rnav-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px; border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); text-align: left; cursor: pointer; }
+#homeV2.rnav .rnav-tile .rds-icon { color: var(--rds-primary); font-size: 24px; margin-bottom: 2px; }
+#homeV2.rnav .rnav-tile-tt { font: 700 14px var(--rds-font); color: var(--rds-ink); }
+#homeV2.rnav .rnav-tile-sub { font: 500 12px var(--rds-font); color: var(--rds-muted); }
+#homeV2.rnav .rnav-alert { width: 100%; text-align: left; cursor: pointer; }
+#homeV2.rnav .rnav-resume { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer; }
+#homeV2.rnav .rnav-resume-ic { color: var(--rds-primary); font-size: 28px; }
+#homeV2.rnav .rnav-resume-bd { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+#homeV2.rnav .rnav-resume-lbl { font: 700 10.5px var(--rds-font); text-transform: uppercase; letter-spacing: .06em; color: var(--rds-muted); }
+#homeV2.rnav .rnav-resume-nm { font: 700 15px var(--rds-font); color: var(--rds-ink); }
+#homeV2.rnav .rnav-resume-mt { font: 500 12px var(--rds-font); color: var(--rds-muted); }
+#homeV2.rnav .rnav-recent { padding: 0; overflow: hidden; }
+#homeV2.rnav .rnav-recent-row { width: 100%; text-align: left; cursor: pointer; }
+#homeV2.rnav .rnav-recent-tt { font: 600 14px var(--rds-font); color: var(--rds-ink); display: block; }
+#homeV2.rnav .rnav-recent-sub { font: 500 12px var(--rds-font); color: var(--rds-muted); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#homeV2.rnav .rnav-foot { margin-top: 8px; }
+#homeV2.rnav .rnav-tabbar { display: flex; align-items: flex-end; justify-content: space-around; gap: 4px; padding: 8px 8px calc(8px + env(safe-area-inset-bottom,0px)); background: var(--rds-surface); border-top: 1px solid var(--rds-line); }
+#homeV2.rnav .rnav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 2px; border: none; background: transparent; color: var(--rds-muted); font: 600 10.5px var(--rds-font); cursor: pointer; min-height: 52px; }
+#homeV2.rnav .rnav-tab .rds-icon { font-size: 24px; }
+#homeV2.rnav .rnav-tab.active { color: var(--rds-primary); }
+#homeV2.rnav .rnav-tab.active .rds-icon { font-variation-settings: 'opsz' 24,'wght' 500,'GRAD' 0,'FILL' 1; }
+#homeV2.rnav .rnav-tab-maik .rds-icon { background: var(--rds-primary); color: #fff; width: 52px; height: 52px; border-radius: 999px; display: flex; align-items: center; justify-content: center; box-shadow: var(--rds-el-cta); margin-top: -18px; }
+#homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); }
+
+/* ============================================================================
+   Phase 3 · Clinical-surface restyle — FLAG-GATED (html body.rds-on), token-level
+   only. No markup/JS/logic change; fully reversible (flag off). The `html` prefix
+   lifts specificity above icu.js's runtime-injected rules so the remap wins in
+   both light and dark. var(--rds-*)/var(--sev-*) auto-flip under body.dark.
+   ========================================================================== */
+/* --- ICU workstation (board 1e): adopt the exact design tokens app-wide --- */
+html body.rds-on #icuRoot,
+html body.rds-on .icu-modal,
+html body.rds-on .icu-tour {
+  --primary: var(--rds-primary); --primary2: var(--rds-primary-2); --primary-soft: var(--rds-primary-soft);
+  --bg: var(--rds-bg); --panel: var(--rds-surface); --panel2: var(--rds-surface-2);
+  --border: var(--rds-line); --ink: var(--rds-ink); --muted: var(--rds-muted);
+  --ok: var(--sev-stable-fg);     --ok-soft: var(--sev-stable-bg);
+  --warn: var(--sev-warning-fg);  --warn-soft: var(--sev-warning-bg);
+  --danger: var(--sev-critical-fg); --danger-soft: var(--sev-critical-bg);
+  --font: var(--rds-font); --r: var(--rds-r); --r-sm: var(--rds-r-ctl);
+}
+/* 44px minimum touch target on ICU action chips (was 36px) */
+html body.rds-on #icuRoot .icu-chip { min-height: 44px; }
+
+/* --- Board 2d: Interaction-checker results + med-list builder (flag-gated) ---
+   Restyles THIS surface's own classes (medlist.js .ml-*/.mlr-*) onto the design
+   system. CSS only; severity semantics preserved (critical=red, major=urgent/
+   orange, monitor=info/blue, duplicate=warning/amber). */
+html body.rds-on .mlr-summary-panel { border-radius: var(--rds-r); border-color: var(--rds-line); box-shadow: var(--rds-el-card); }
+html body.rds-on .mlr-summary-title { font-family: var(--rds-font); }
+html body.rds-on .mlr-chips { gap: 10px; }
+html body.rds-on .mlr-chip { border-radius: var(--rds-r-ctl); padding: 10px 12px; min-height: 48px; flex-direction: column; align-items: flex-start; gap: 2px; flex: 1 1 calc(50% - 10px); }
+html body.rds-on .mlr-chip-num { font: 800 20px var(--rds-mono); font-variant-numeric: tabular-nums; }
+html body.rds-on .mlr-chip-critical  { background: var(--sev-critical-bg); color: var(--sev-critical-fg); border-color: var(--sev-critical-bd); }
+html body.rds-on .mlr-chip-major     { background: var(--sev-urgent-bg);   color: var(--sev-urgent-fg);   border-color: var(--sev-urgent-bd); }
+html body.rds-on .mlr-chip-monitor   { background: var(--sev-info-bg);     color: var(--sev-info-fg);     border-color: var(--sev-info-bd); }
+html body.rds-on .mlr-chip-duplicate { background: var(--sev-warning-bg);  color: var(--sev-warning-fg);  border-color: var(--sev-warning-bd); }
+html body.rds-on .mlr-card { border-radius: var(--rds-r); border: 1px solid var(--rds-line); box-shadow: var(--rds-el-card); overflow: hidden; }
+html body.rds-on .mlr-card-critical { border-left: 4px solid var(--sev-critical-fg); }
+html body.rds-on .mlr-card-major    { border-left: 4px solid var(--sev-urgent-fg); }
+html body.rds-on .mlr-card-moderate { border-left: 4px solid var(--sev-warning-fg); }
+html body.rds-on .mlr-card-minor    { border-left: 4px solid var(--sev-info-fg); }
+html body.rds-on .mlr-card-monitor  { border-left: 4px solid var(--sev-info-fg); }
+html body.rds-on .mlr-sev-critical { color: var(--sev-critical-fg); }
+html body.rds-on .mlr-sev-major    { color: var(--sev-urgent-fg); }
+html body.rds-on .mlr-explain-btn, html body.rds-on .mlr-whatnow-btn, html body.rds-on .mlr-filter-btn, html body.rds-on .mlr-remove-drug { min-height: 40px; border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
+html body.rds-on .ml-check-btn { border-radius: var(--rds-r-ctl); min-height: 48px; box-shadow: var(--rds-el-cta); font-family: var(--rds-font); }
+html body.rds-on .ml-row, html body.rds-on .ml-row-grouped { border-radius: var(--rds-r); border-color: var(--rds-line); }
+html body.rds-on .ml-action-card { border-radius: var(--rds-r); border-color: var(--rds-line); }
+html body.rds-on .ml-list-count { font-family: var(--rds-font); }
+
+/* --- Board 2c: Drug Index browse + drug detail (flag-gated) ---
+   Restyles the shared browse-overlay classes (drugs.js #mdOverlay + calculators.js
+   MEDCALC list use the same .mc-* system) onto the design system. CSS only. */
+html body.rds-on .mc-overlay { background: var(--rds-bg); }
+html body.rds-on .mc-top { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on .mc-title { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .mc-count { background: var(--rds-primary-soft); color: var(--rds-primary); border-radius: var(--rds-r-pill); }
+html body.rds-on .mc-back { border: 1.5px solid var(--rds-line); color: var(--rds-primary); border-radius: var(--rds-r-ctl); min-height: 40px; font-family: var(--rds-font); background: var(--rds-surface); }
+html body.rds-on .mc-search { border: 1.5px solid var(--rds-line); border-radius: var(--rds-r-ctl); background: var(--rds-surface); color: var(--rds-ink); min-height: 48px; font-family: var(--rds-font); }
+html body.rds-on .mc-search:focus { outline: none; border-color: var(--rds-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25); }
+html body.rds-on .mc-cat { border: 1.5px solid var(--rds-line); background: var(--rds-surface); color: var(--rds-ink); border-radius: var(--rds-r-pill); min-height: 40px; font-family: var(--rds-font); }
+html body.rds-on .mc-cat.on { background: var(--rds-primary); border-color: var(--rds-primary); color: var(--rds-on-primary); }
+html body.rds-on .mc-grp-h { color: var(--rds-muted); font-family: var(--rds-font); text-transform: uppercase; letter-spacing: .06em; }
+html body.rds-on .mc-card { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .mc-card.open { border-color: var(--rds-primary); }
+html body.rds-on .mc-ic { color: var(--rds-primary); }
+html body.rds-on .mc-card-t { font: 700 14px var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .mc-card-d { font: 500 12px var(--rds-font); color: var(--rds-muted); }
+html body.rds-on .mc-chev { color: var(--rds-muted); }
+html body.rds-on .mc-panel { border-top: 1px solid var(--rds-line); }
+html body.rds-on .mc-disc { border: 1px dashed var(--rds-line); border-radius: var(--rds-r-ctl); color: var(--rds-muted); font-family: var(--rds-font); }
+
+/* --- Board 2e: MaiK grounded-AI chat (flag-gated) ---
+   Polish of the existing MaiK sheet (home.js #maikSheet). CSS only. The persistent
+   AI badge, per-answer educational tag, sources, and the deterministic(teal)/AI two-
+   block answer separation (reasoning.js .maik-det/.maik-ai/.maik-warn) are PRESERVED
+   — only radii/spacing/touch-targets adopt the design system. */
+html body.rds-on #maikSheet { border-radius: var(--rds-r-sheet) var(--rds-r-sheet) 0 0; box-shadow: var(--rds-el-sheet); }
+html body.rds-on .maik-badge { background: var(--sev-info-bg); color: var(--sev-info-fg); border: 1px solid var(--sev-info-bd); font-weight: 700; }
+html body.rds-on .maik-cmp textarea { border-radius: var(--rds-r-ctl); border: 1.5px solid var(--rds-line); font-family: var(--rds-font); }
+html body.rds-on .maik-cmp textarea:focus { outline: none; border-color: var(--rds-primary); box-shadow: 0 0 0 3px rgba(15,118,110,.25); }
+html body.rds-on .maik-cmp button { border-radius: var(--rds-r-ctl); min-height: 48px; box-shadow: var(--rds-el-cta); font-family: var(--rds-font); }
+html body.rds-on .maik-cmp button.maik-mic { min-width: 48px; box-shadow: none; }
+html body.rds-on .maik-cmp button.maik-extract { border-radius: var(--rds-r-ctl); box-shadow: none; }
+html body.rds-on .maik-b { border-radius: var(--rds-r); font-family: var(--rds-font); }
+html body.rds-on .maik-chip { border-radius: var(--rds-r-pill); border: 1.5px solid var(--rds-line); min-height: 44px; font-family: var(--rds-font); }
+html body.rds-on .maik-x, html body.rds-on .maik-new { min-height: 40px; border-radius: var(--rds-r-pill); font-family: var(--rds-font); }
+html body.rds-on .maik-edu { border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
+html body.rds-on .maik-warn { border-radius: var(--rds-r-ctl); }
+/* 2e dark-mode fix: the MaiK sheet is appended outside #homeV2, so its #homeV2-scoped
+   --h* tokens are undefined there and it never went dark. Point its surfaces at the
+   dark-aware rds tokens (flag-gated). */
+html body.rds-on #maikSheet { background: var(--rds-surface); color: var(--rds-ink); }
+html body.rds-on #maikSheet .mk-t, html body.rds-on .maik-welcome, html body.rds-on .maik-b .maik-h { color: var(--rds-ink); }
+html body.rds-on #maikSheet .mk-s, html body.rds-on .maik-edu { color: var(--rds-muted); }
+html body.rds-on .maik-grab { background: var(--rds-line); }
+html body.rds-on .maik-adv, html body.rds-on .maik-cmp { border-color: var(--rds-line); }
+html body.rds-on .maik-cmp { background: var(--rds-surface); }
+html body.rds-on .maik-cmp textarea { background: var(--rds-bg); color: var(--rds-ink); }
+html body.rds-on .maik-b.ai { background: var(--rds-surface-2); border-color: var(--rds-line); color: var(--rds-ink); }
+html body.rds-on .maik-x { background: var(--rds-surface-2); color: var(--rds-ink); border-color: var(--rds-line); }
+html body.rds-on .maik-chip { background: var(--rds-surface); color: var(--rds-ink); }
+html body.rds-on .maik-edu { background: var(--rds-surface-2); }
+
+/* ============================================================================
+   Phase 3/4 · Remaining surfaces — FLAG-GATED restyle (CSS only, reversible).
+   Post-boot surfaces use `html body.rds-on`; the onboarding gate (rendered before
+   home sets body.rds-on) uses `html.rds-on` set by an early inline script.
+   ========================================================================== */
+
+/* --- 2f · Scan review (medlist.js .ml-scan-*) --- */
+html body.rds-on .ml-scan-row { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .ml-scan-flagged { border-left: 4px solid var(--sev-warning-fg); }
+html body.rds-on .ml-scan-mapped { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .ml-scan-detected, html body.rds-on .ml-scan-line { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on .ml-scan-edit { border-radius: var(--rds-r-ctl); border: 1.5px solid var(--rds-line); }
+html body.rds-on .ml-scan-flag { color: var(--sev-warning-fg); }
+html body.rds-on .ml-scan-add { border-radius: var(--rds-r-ctl); min-height: 48px; box-shadow: var(--rds-el-cta); }
+html body.rds-on .ml-scan-cancel { border-radius: var(--rds-r-ctl); min-height: 44px; }
+html body.rds-on .ml-conf-badge { border-radius: var(--rds-r-pill); font-family: var(--rds-font); }
+html body.rds-on .ml-conf-high { background: var(--sev-stable-bg); color: var(--sev-stable-fg); }
+html body.rds-on .ml-conf-medium { background: var(--sev-warning-bg); color: var(--sev-warning-fg); }
+html body.rds-on .ml-conf-low { background: var(--sev-critical-bg); color: var(--sev-critical-fg); }
+
+/* --- 2g · Cases: recent-cases overlay (recent.js .rc-*) + My Cases container --- */
+html body.rds-on .rc-ov { background: var(--rds-bg); }
+html body.rds-on .rc-bar { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on .rc-h { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .rc-card { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .rc-title { font: 700 15px var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .rc-sub, html body.rds-on .rc-time, html body.rds-on .rc-note { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on .rc-ic { color: var(--rds-primary); }
+html body.rds-on .rc-feat { background: var(--rds-primary-soft); color: var(--rds-primary); border-radius: var(--rds-r-pill); }
+html body.rds-on .rc-x, html body.rds-on .rc-clr { border-radius: var(--rds-r-pill); min-height: 40px; font-family: var(--rds-font); }
+html body.rds-on #myCasesPanel { background: var(--rds-bg); }
+
+/* --- 2a · Dx flow (reasoning.js #dxOverlay .dx-*) --- */
+html body.rds-on #dxOverlay { background: var(--rds-bg); }
+html body.rds-on .dx-bar { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on .dx-chip { min-height: 48px; border-radius: var(--rds-r-pill); border: 1.5px solid var(--rds-line); background: var(--rds-surface); color: var(--rds-ink); font-family: var(--rds-font); }
+html body.rds-on .dx-chip.on, html body.rds-on .dx-chip.sel, html body.rds-on .dx-chip[aria-pressed="true"] { background: var(--rds-primary-soft); border-color: var(--rds-primary); color: var(--rds-primary-2); }
+html body.rds-on .dx-card, html body.rds-on .dx-cmp, html body.rds-on .dx-detail { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .dx-cat-h, html body.rds-on .dx-col-h { color: var(--rds-muted); font-family: var(--rds-font); text-transform: uppercase; letter-spacing: .06em; }
+html body.rds-on .dx-back { border-radius: var(--rds-r-ctl); min-height: 44px; color: var(--rds-primary); font-family: var(--rds-font); }
+html body.rds-on .dx-disc, html body.rds-on .dx-discl, html body.rds-on .dx-disc-pill { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on .dx-drug { font-family: var(--rds-mono); }
+
+/* --- 2b · Decision result (app.js #outputArea) — conservative: radius + type only,
+       severity coloring left to the engine's clinically-tuned classes --- */
+html body.rds-on #outputArea .decision-banner { border-radius: var(--rds-r); }
+html body.rds-on #outputArea .decision-why { font-family: var(--rds-font); line-height: 1.5; }
+html body.rds-on #outputArea .result-num, html body.rds-on #outputArea .result-unit { font-family: var(--rds-mono); font-variant-numeric: tabular-nums; }
+
+/* --- 3c/3d · More sheet, settings, account (home.js .hv-*, sidebar .sb-*) --- */
+html body.rds-on .hv-sheet { border-radius: var(--rds-r-sheet) var(--rds-r-sheet) 0 0; }
+html body.rds-on .hv-sh-t { font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .hv-mi { min-height: 56px; border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
+html body.rds-on .hv-grab { background: var(--rds-line); }
+html body.rds-on .sb-drawer { background: var(--rds-surface); }
+html body.rds-on .sb-main-link, html body.rds-on .sb-subitem { min-height: 48px; border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
+html body.rds-on .sb-beta { background: var(--rds-primary-soft); color: var(--rds-primary); border-radius: var(--rds-r-pill); }
+
+/* --- 3b · Onboarding gate (index.html .splash-*) — html.rds-on (pre-boot) --- */
+html.rds-on .splash-continue-btn { border-radius: var(--rds-r-ctl); min-height: 50px; font-family: var(--rds-font); }
+html.rds-on .splash-disclaimer-gate { border-radius: var(--rds-r); }
+html.rds-on .splash-name { font-family: var(--rds-font); }
+html.rds-on .splash-tagline { font-family: var(--rds-font); }
+
+/* ============================================================================
+   Fixes (device review): header search fit, sidebar drawer, classic engine.
+   ========================================================================== */
+
+/* --- Header: at narrow widths the spacer collapsed and search glued to the
+   wordmark. Shrink the header controls so a real gap returns. --- */
+#homeV2.rnav .rnav-head { gap: 3px; padding-left: 12px; padding-right: 12px; }
+#homeV2.rnav .rnav-head .rds-icon-btn { min-width: 38px; width: 38px; height: 40px; }
+#homeV2.rnav .rnav-avatar { width: 34px; height: 34px; }
+#homeV2.rnav .rnav-head .rds-icon { font-size: 22px; }
+#homeV2.rnav .rnav-brand { min-width: 0; overflow: hidden; }
+#homeV2.rnav .rnav-brand span { white-space: nowrap; }
+#homeV2.rnav [data-act="search"] { margin-left: 4px; }  /* guarantee a gap from the brand */
+
+/* --- Sidebar drawer (app.js #sbDrawer; items sb-main/sb-sub/sw-* ) --- */
+html body.rds-on #sbDrawer, html body.rds-on .sb-drawer { background: var(--rds-bg); font-family: var(--rds-font); }
+html body.rds-on .sb-head { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on .sw-sblab { color: var(--rds-muted); text-transform: uppercase; letter-spacing: .08em; font: 700 11px var(--rds-font); }
+html body.rds-on .sb-main, html body.rds-on .sb-main-link, html body.rds-on .sb-subitem, html body.rds-on .sw-sbsw {
+  min-height: 48px; border-radius: var(--rds-r-ctl); margin: 2px 8px; font-family: var(--rds-font); color: var(--rds-ink); }
+html body.rds-on .sb-main-link:hover, html body.rds-on .sb-subitem:hover, html body.rds-on .sw-sbsw:hover { background: var(--rds-surface-2); }
+html body.rds-on .sb-main-link:active, html body.rds-on .sb-subitem:active { background: var(--rds-primary-soft); }
+html body.rds-on .sb-sub { border-radius: var(--rds-r-ctl); }
+html body.rds-on .sb-beta { background: var(--rds-primary-soft); color: var(--rds-primary); border-radius: var(--rds-r-pill); }
+
+/* --- Classic clinical engine "Start a Case" (app.js .app-head + #inputCard) --- */
+html body.rds-on .app-head { background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+html body.rds-on #inputCard.card { border-radius: var(--rds-r); border: 1px solid var(--rds-line); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
+html body.rds-on .group-tabs { gap: 8px; }
+html body.rds-on .group-tab { border-radius: var(--rds-r-pill); font-family: var(--rds-font); min-height: 44px; border: 1.5px solid var(--rds-line); background: var(--rds-surface); color: var(--rds-ink); }
+html body.rds-on .group-tab.active { background: var(--rds-primary); border-color: var(--rds-primary); color: var(--rds-on-primary); }
+html body.rds-on .step-progress-bar { background: var(--rds-surface-2); border-radius: 999px; overflow: hidden; }
+html body.rds-on .step-progress-fill { background: var(--rds-primary); border-radius: 999px; }
+html body.rds-on .step-progress-label { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on .findings-count { color: var(--rds-muted); font-family: var(--rds-font); }
+html body.rds-on .finding-grid { gap: 8px; }
+html body.rds-on .finding-item { border: 1px solid var(--rds-line); border-radius: var(--rds-r-ctl); min-height: 52px; background: var(--rds-surface); color: var(--rds-ink); font-family: var(--rds-font); transition: background var(--rds-dur) var(--rds-ease), border-color var(--rds-dur) var(--rds-ease); }
+html body.rds-on .finding-item:hover { border-color: var(--rds-primary); }
+html body.rds-on .finding-item:active, html body.rds-on .finding-item.on, html body.rds-on .finding-item.sel, html body.rds-on .finding-item.checked { background: var(--rds-primary-soft); border-color: var(--rds-primary); }
+html body.rds-on .finding-list-col, html body.rds-on .finding-list-pair { gap: 8px; }
+html body.rds-on .step-nav-btn { border-radius: var(--rds-r-ctl); min-height: 48px; font-family: var(--rds-font); }
+
+/* iconified emoji → Material Symbols sizing in classic header + sidebar (flag-gated) */
+html body.rds-on .app-head .rds-icon { font-size: 22px; vertical-align: middle; color: var(--rds-primary); }
+html body.rds-on #sbMenu .ic .rds-icon, html body.rds-on .sb-drawer .ic .rds-icon { font-size: 20px; color: var(--rds-primary); }
+html body.rds-on .app-head .dx-launch .rds-icon, html body.rds-on .app-head .my-cases-btn .rds-icon { margin-right: 5px; }
+
+/* ============================================================================
+   Home polish v2 (device review): header search spacing, symmetric tiles,
+   un-clip the raised MaiK tab. All under #homeV2.rnav.
+   ========================================================================== */
+/* Header: push search+theme+bell+avatar fully right, clear of the wordmark. */
+#homeV2.rnav .rnav-head-sp { display: none; }
+#homeV2.rnav .rnav-head [data-act="search"] { margin-left: auto; }
+#homeV2.rnav .rnav-brand { flex: 0 1 auto; }
+#homeV2.rnav .rnav-brand span { overflow: hidden; text-overflow: ellipsis; }
+
+/* Quick-action + quick-row tiles: equal height, content vertically centred, symmetric
+   even when a label wraps to two lines (Scan Meds / Ward Sync). */
+#homeV2.rnav .rnav-qa, #homeV2.rnav .rnav-qrow { grid-auto-rows: 1fr; align-items: stretch; }
+#homeV2.rnav .rnav-qa-btn, #homeV2.rnav .rnav-qc { justify-content: center; min-height: 80px; padding: 10px 4px; }
+#homeV2.rnav .rnav-qa-btn > span, #homeV2.rnav .rnav-qc > span { line-height: 1.15; text-align: center; }
+
+/* Bottom tab bar: don't clip the raised MaiK button; keep its label fully visible. */
+#homeV2.rnav .rnav-tabbar { overflow: visible; }
+#homeV2.rnav .rnav-tab { min-height: 56px; justify-content: flex-end; gap: 3px; }
+#homeV2.rnav .rnav-tab-maik { justify-content: flex-end; }
+#homeV2.rnav .rnav-tab-maik .rds-icon { width: 46px; height: 46px; margin-top: -16px; margin-bottom: 3px; border: 3px solid var(--rds-surface); box-sizing: content-box; }
+#homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); line-height: 1; }
+
+/* ============================================================================
+   Home polish v3 — iOS/WebKit-ROBUST overrides (renders fine in Chromium but broke
+   on iPhone: grid `1fr` row-sizing + flex negative-margin raised tab are unreliable
+   in iOS Safari). Use fixed heights + an inline (non-raised) MaiK circle instead.
+   ========================================================================== */
+#homeV2.rnav .rnav-qa, #homeV2.rnav .rnav-qrow { grid-auto-rows: auto; }
+#homeV2.rnav .rnav-qa-btn, #homeV2.rnav .rnav-qc {
+  height: 86px; min-height: 0; justify-content: center; box-sizing: border-box;
+}
+#homeV2.rnav .rnav-qa-btn > span, #homeV2.rnav .rnav-qc > span {
+  line-height: 1.15; text-align: center; display: block;
+}
+/* MaiK center tab: inline teal-filled circle that fits WITHIN the bar (no negative
+   margin / no overflow raise → nothing clips on iOS). Still visually distinct. */
+#homeV2.rnav .rnav-tabbar { overflow: visible; }
+#homeV2.rnav .rnav-tab { min-height: 54px; justify-content: center; gap: 2px; }
+#homeV2.rnav .rnav-tab-maik .rds-icon {
+  width: 42px; height: 42px; margin: 0 0 2px; border: none;
+  background: var(--rds-primary); color: #fff; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--rds-el-cta); box-sizing: border-box;
+}
+#homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); line-height: 1; }
+
+/* Home tiles v4: top-align icons + reserve a 2-line label area so tiles with 1-line
+   and 2-line labels (Scan Meds / Ward Sync) are identical and icons line up. */
+#homeV2.rnav .rnav-qa-btn, #homeV2.rnav .rnav-qc { height: 88px; justify-content: flex-start; padding: 13px 4px 8px; gap: 7px; }
+#homeV2.rnav .rnav-qa-btn .rds-icon, #homeV2.rnav .rnav-qc .rds-icon { flex: 0 0 auto; }
+#homeV2.rnav .rnav-qa-btn > span, #homeV2.rnav .rnav-qc > span { display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.12; min-height: 2.24em; width: 100%; }

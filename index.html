@@ -36,6 +36,19 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="StewardMD">
+<!-- Redesign design system (Phase 1) — additive token layer + rds-* component library.
+     Scoped to .rds-* classes; does not restyle existing screens. Material Symbols is a
+     progressive enhancement (degrades to ligature text offline/native). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..700,0..1,0" media="print" onload="this.media='all'">
+<!-- Sacramento: the script font the "MaiKnowledge" credit (.v4-maik-name .mk-s) already
+     asks for. It was never actually loaded, so it fell back to a different cursive on
+     devices without it (e.g. iPhone). Load it so the credit renders as designed everywhere. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/redesign-system.css?v=gold314">
+<script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
+try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <script>
 /* Register the service worker (offline + instant repeat loads). Runs on load so it never
    competes with startup. Network-first HTML in sw.js means this can't trap stale versions. */
@@ -1235,8 +1248,8 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/image-engine.js?v=gold229" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold199" defer></script>
 <script src="/electrolytes.js?v=gold229" defer></script>
-<script src="/caseshare.js?v=gold287" defer></script>
-<script src="/home.js?v=gold287" defer></script>
+<script src="/caseshare.js?v=gold314" defer></script>
+<script src="/home.js?v=gold310" defer></script>
 <script src="/antibiogram.js?v=gold250" defer></script>
 <script src="/asp-region.js?v=gold241" defer></script>
 <script src="/swipe-back.js?v=gold243" defer></script>
