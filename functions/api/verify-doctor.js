@@ -24,7 +24,8 @@ import { setUserClaims } from "../_fbadmin.js";
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
-const GEMINI_MODEL = "gemini-2.0-flash";
+// Match the app's working AI setup: gemini-2.5-flash (NOT 2.0), model via env.
+const GEMINI_MODEL_DEFAULT = "gemini-2.5-flash";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -62,15 +63,18 @@ async function geminiExtract(env, imageB64, mime) {
     "- looks_valid: set false ONLY if this is clearly NOT a medical registration document " +
     "(e.g. a random photo, a blank page). If it looks like a registration certificate, true.\n" +
     "- confidence: 0..1 for your overall reading. Use \"\" for any field you cannot read.";
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${env.GEMINI_API_KEY}`;
+  const model = env.GEMINI_MODEL || GEMINI_MODEL_DEFAULT;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`;
   let res, data = {}, text = "", httpOk = false;
   try {
     res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: [{ parts: [ { text: prompt }, { inline_data: { mime_type: mime || "image/jpeg", data: imageB64 } } ] }],
-        generationConfig: { temperature: 0, responseMimeType: "application/json" },
+        contents: [{ role: "user", parts: [ { text: prompt }, { inline_data: { mime_type: mime || "image/jpeg", data: imageB64 } } ] }],
+        // thinkingBudget:0 is REQUIRED for gemini-2.5-flash — otherwise it spends the whole
+        // output budget on hidden "thinking" and returns empty text (→ blank extraction).
+        generationConfig: { temperature: 0, maxOutputTokens: 1024, responseMimeType: "application/json", thinkingConfig: { thinkingBudget: 0 } },
       }),
     });
     httpOk = res.ok;
@@ -121,26 +125,51 @@ async function nmcLookup(regNo) {
 }
 
 // ── Resend — manual-review email ──────────────────────────────────────────────
+// HMAC-sign an email action link so the owner can approve/block from the inbox with a
+// single click, without exposing the admin token. Verified by /api/verifications/action.
+async function signAction(secret, uid, action) {
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const sig = new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(uid + "|" + action)));
+  return Array.from(sig, (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
 async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime }) {
   if (!env.RESEND_API_KEY) return;
   const support = env.SUPPORT_EMAIL || "support@stewardmd.in";
   const from = env.FROM_EMAIL || "StewardMD Verify <verify@stewardmd.in>";
+  const origin = env.APP_ORIGIN || "https://stewardmd.in";
   const ext = (mime && mime.includes("png")) ? "png" : (mime && mime.includes("pdf")) ? "pdf" : "jpg";
+
+  // One-click action buttons (signed). Absent if no admin secret configured.
+  let buttons = "<p>Certificate attached. To approve: set custom claim verified:true for this UID.</p>";
+  if (env.VERIFY_ADMIN_TOKEN) {
+    const reg = encodeURIComponent(extracted.regNo || "");
+    const approveSig = await signAction(env.VERIFY_ADMIN_TOKEN, uid, "approve");
+    const rejectSig  = await signAction(env.VERIFY_ADMIN_TOKEN, uid, "reject");
+    const approveUrl = `${origin}/api/verifications/action?uid=${encodeURIComponent(uid)}&do=approve&reg=${reg}&sig=${approveSig}`;
+    const rejectUrl  = `${origin}/api/verifications/action?uid=${encodeURIComponent(uid)}&do=reject&sig=${rejectSig}`;
+    buttons =
+      `<p style="margin:18px 0">` +
+      `<a href="${approveUrl}" style="background:#15803d;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui;margin-right:10px">✓ Verify &amp; grant access</a>` +
+      `<a href="${rejectUrl}" style="background:#dc2626;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui">✕ Block until re-upload</a>` +
+      `</p><p style="font:400 12px system-ui;color:#64748b">Approve → sets the doctor verified (full access incl. prescriptions). Block → revokes access until they upload a valid certificate again.</p>`;
+  }
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { "Authorization": `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from, to: [support],
-      subject: `[StewardMD] Manual verification — ${extracted.regNo || "unknown"} (${reason})`,
+      subject: `[StewardMD] Manual verification — ${extracted.regNo || email || "unknown"} (${reason})`,
       html:
         `<h2>Doctor verification needs manual review</h2><p><b>Reason:</b> ${reason}</p>` +
         `<table cellpadding="6"><tr><td><b>UID</b></td><td>${uid}</td></tr>` +
         `<tr><td><b>Google email</b></td><td>${email}</td></tr>` +
-        `<tr><td><b>Extracted reg</b></td><td>${extracted.regNo}</td></tr>` +
-        `<tr><td><b>Extracted name</b></td><td>${extracted.name}</td></tr>` +
-        `<tr><td><b>Council</b></td><td>${extracted.council}</td></tr>` +
+        `<tr><td><b>Extracted reg</b></td><td>${extracted.regNo || "—"}</td></tr>` +
+        `<tr><td><b>Extracted name</b></td><td>${extracted.name || "—"}</td></tr>` +
+        `<tr><td><b>Council</b></td><td>${extracted.council || "—"}</td></tr>` +
         `<tr><td><b>Confidence</b></td><td>${extracted.confidence}</td></tr></table>` +
-        `<p>Certificate attached. To approve: set custom claim verified:true for this UID.</p>`,
+        buttons,
       attachments: [{ filename: `cert-${uid}.${ext}`, content: imageB64 }],
     }),
   });
