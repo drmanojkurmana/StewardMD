@@ -68,6 +68,9 @@
       ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:9px;margin:8px 0}.rx-line.unv{border-color:#f59e0b;background:rgba(245,158,11,.06)}.rx-line.adv{background:rgba(100,116,139,.06)}" +
       ".rx-line .r1{display:flex;gap:6px;flex-wrap:wrap}.rx-line .r1 input{}.rx-drug{flex:2 1 160px}.rx-brand{flex:1 1 110px}.rx-line .r2{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.rx-dose{flex:2 1 160px}.rx-freq{flex:1 1 90px}.rx-dur{flex:1 1 90px}" +
       ".rx-flag{font:700 10.5px var(--hfont);color:#b45309;margin-top:5px}.rx-del{border:0;background:transparent;color:#ef4444;cursor:pointer;font-size:16px;align-self:center}" +
+      ".rx-ac{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;margin-top:6px;background:var(--hpanel,#fff);max-height:240px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}" +
+      ".rx-ac-item{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:8px 10px;cursor:pointer;font:500 13px var(--hfont);color:var(--hink,#14202b)}.rx-ac-item:last-child{border-bottom:0}.rx-ac-item:hover,.rx-ac-item.on{background:var(--paper,#f6f7f5)}" +
+      ".rx-ac-g{font-weight:800}.rx-ac-b{color:var(--teal,#0e6e63);font-weight:600}.rx-ac-d{display:block;color:var(--hmut,#64748b);font-size:11.5px;margin-top:2px}.rx-ac-empty{padding:8px 10px;color:var(--hmut,#64748b);font:500 12px var(--hfont)}" +
       ".rx-btn{border:0;border-radius:999px;padding:9px 16px;font:800 13px var(--hfont);cursor:pointer}.rx-add{background:rgba(100,116,139,.12);color:var(--hink)}.rx-print{background:#2563eb;color:#fff}.rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}" +
       ".rx-sign{margin-top:14px;border-top:1px dashed var(--hbd,#e2e8f0);padding-top:10px;font:600 13px var(--hfont);color:var(--hink)}.rx-sign small{color:var(--hmut,#64748b);font-weight:500}" +
       ".rx-gate{font:500 13px var(--hfont);color:var(--hink)}.rx-gate input{margin-top:10px;width:100%}" +
@@ -114,6 +117,61 @@
       '</div>';
   }
 
+  // Live brand/composition search on a drug line, powered by the Drug Index (MEDDRUGS).
+  // Typing in the Drug (generic) OR Brand field shows matching medicines; picking one auto-fills
+  // the composition (generic), a matching brand and the DB dose — the "auto-add once composition
+  // is selected" path, for a doctor-typed line or an AI-suggested one being edited.
+  function acAttach(line) {
+    if (!line || line.classList.contains("adv") || line._acWired) return;
+    line._acWired = true;
+    var r1 = line.querySelector(".r1");
+    var drugIn = line.querySelector(".rx-drug"), brandIn = line.querySelector(".rx-brand");
+    if (!r1 || !drugIn) return;
+    var ac = null, rows = [], active = -1;
+    function closeAc() { if (ac) { ac.remove(); ac = null; } rows = []; active = -1; }
+    function fill(r, typedBrand) {
+      drugIn.value = r.generic;
+      if (brandIn) {
+        var b = "";
+        if (typedBrand) { var q = typedBrand.toLowerCase(); b = (r.brands || []).filter(function (x) { return x.toLowerCase().indexOf(q) >= 0; })[0] || ""; }
+        brandIn.value = b || (r.brands || [])[0] || brandIn.value || "";
+      }
+      var doseIn = line.querySelector(".rx-dose"); if (doseIn && r.dose) doseIn.value = r.dose;
+      line.classList.remove("unv"); var fl = line.querySelector(".rx-flag"); if (fl) fl.remove();  // now DB-sourced
+      closeAc();
+    }
+    function paint() { Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b, i) { b.classList.toggle("on", i === active); }); }
+    function search(q, fromBrand) {
+      q = (q || "").trim();
+      if (!window.MEDDRUGS || !MEDDRUGS.searchIndex || q.length < 2) { closeAc(); return; }
+      rows = MEDDRUGS.searchIndex(q).slice(0, 8); active = -1;
+      if (!rows.length) { closeAc(); return; }
+      if (!ac) { ac = document.createElement("div"); ac.className = "rx-ac"; r1.insertAdjacentElement("afterend", ac); }
+      ac.innerHTML = rows.map(function (r, i) {
+        var brands = (r.brands || []).slice(0, 3).join(", ");
+        return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(r.generic) + '</span>' + (brands ? ' <span class="rx-ac-b">' + esc(brands) + '</span>' : '') + '<span class="rx-ac-d">' + esc(r.dose || '') + '</span></button>';
+      }).join("");
+      Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b) {
+        b.addEventListener("mousedown", function (e) { e.preventDefault(); fill(rows[+b.getAttribute("data-i")], fromBrand ? q : ""); });
+      });
+    }
+    function onKey(e, fromBrand, val) {
+      if (!ac || !rows.length) return;
+      if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, rows.length - 1); paint(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); paint(); }
+      else if (e.key === "Enter" && active >= 0) { e.preventDefault(); fill(rows[active], fromBrand ? val : ""); }
+      else if (e.key === "Escape") { closeAc(); }
+    }
+    drugIn.addEventListener("input", function () { search(drugIn.value, false); });
+    drugIn.addEventListener("keydown", function (e) { onKey(e, false, drugIn.value); });
+    drugIn.addEventListener("blur", function () { setTimeout(closeAc, 150); });
+    if (brandIn) {
+      brandIn.addEventListener("input", function () { search(brandIn.value, true); });
+      brandIn.addEventListener("keydown", function (e) { onKey(e, true, brandIn.value); });
+      brandIn.addEventListener("blur", function () { setTimeout(closeAc, 150); });
+    }
+  }
+
   function renderRx(topic, lines, regNo) {
     var now = new Date();
     var date = now.toISOString().slice(0, 10);
@@ -132,9 +190,12 @@
       var wrap = sheet.querySelector("#rxLines"); var i = wrap.children.length;
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }, i));
       bindDel();
+      acAttach(wrap.lastElementChild);   // brand/composition search on the new line
     });
     sheet.querySelector("#rxPrint").addEventListener("click", function () { try { window.print(); } catch (e) {} });
     bindDel();
+    // Brand/composition search + auto-fill on every drug line (skips advice lines).
+    sheet.querySelectorAll("#rxLines .rx-line").forEach(acAttach);
     function bindDel() { sheet.querySelectorAll(".rx-del").forEach(function (b) { b.onclick = function () { var ln = b.closest(".rx-line"); if (ln) ln.remove(); }; }); }
   }
 
