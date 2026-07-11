@@ -87,29 +87,6 @@
   // ── consent gate UI ─────────────────────────────────────────────────────
   var _gateOpen = false, _pending = [];   // callbacks awaiting a resolution (bool)
 
-  function injectCSS() {
-    if (document.getElementById("smdPrivacyCSS")) return;
-    var s = document.createElement("style"); s.id = "smdPrivacyCSS";
-    s.textContent =
-      "#smdConsentBackdrop{position:fixed;inset:0;z-index:var(--z-modal,700);background:rgba(6,14,20,.62);display:flex;align-items:center;justify-content:center;padding:16px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(16px,env(safe-area-inset-bottom))}" +
-      "#smdConsentCard{background:var(--panel,#fff);color:var(--ink,#14202b);border:1px solid var(--line,#d7dee3);border-radius:16px;max-width:560px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 18px 60px rgba(0,0,0,.4);font-family:var(--sans)}" +
-      "#smdConsentCard .cg-h{padding:18px 20px 8px;font-size:19px;font-weight:700}" +
-      "#smdConsentCard .cg-sub{padding:0 20px 12px;color:var(--slate-soft,#5a7184);font-size:13.5px;line-height:1.5}" +
-      "#smdConsentCard .cg-list{padding:4px 20px 6px}" +
-      "#smdConsentCard label.cg-row{display:flex;gap:11px;align-items:flex-start;padding:12px;border:1px solid var(--line,#d7dee3);border-radius:11px;margin-bottom:10px;cursor:pointer;font-size:14px;line-height:1.5}" +
-      "#smdConsentCard label.cg-row.cg-opt{border-style:dashed}" +
-      "#smdConsentCard label.cg-row input{margin-top:2px;width:19px;height:19px;flex:0 0 auto;accent-color:var(--teal,#0e6e63)}" +
-      "#smdConsentCard .cg-req{color:var(--teal,#0e6e63);font-weight:600;font-size:11.5px;letter-spacing:.03em;text-transform:uppercase}" +
-      "#smdConsentCard .cg-opttag{color:var(--slate-soft,#5a7184);font-weight:600;font-size:11.5px;letter-spacing:.03em;text-transform:uppercase}" +
-      "#smdConsentCard a.cg-link{color:var(--teal,#0e6e63);text-decoration:underline;cursor:pointer}" +
-      "#smdConsentCard .cg-foot{padding:8px 20px 20px;display:flex;gap:10px;align-items:center;justify-content:flex-end;flex-wrap:wrap}" +
-      "#smdConsentCard .cg-cancel{background:none;border:0;color:var(--slate-soft,#5a7184);font-size:14px;padding:11px 12px;cursor:pointer}" +
-      "#smdConsentCard .cg-continue{background:var(--teal,#0e6e63);color:#fff;border:0;border-radius:10px;font-size:15px;font-weight:600;padding:12px 22px;cursor:pointer}" +
-      "#smdConsentCard .cg-continue:disabled{opacity:.45;cursor:not-allowed}" +
-      "#smdConsentCard .cg-note{padding:0 20px 4px;font-size:11.5px;color:var(--slate-soft,#5a7184)}";
-    (document.head || document.documentElement).appendChild(s);
-  }
-
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 
   function resolveAll(v) { var cbs = _pending.slice(); _pending = []; cbs.forEach(function (cb) { try { cb(v); } catch (e) {} }); }
