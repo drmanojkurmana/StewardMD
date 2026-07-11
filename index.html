@@ -46,7 +46,7 @@
      asks for. It was never actually loaded, so it fell back to a different cursive on
      devices without it (e.g. iPhone). Load it so the credit renders as designed everywhere. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/redesign-system.css?v=gold317">
+<link rel="stylesheet" href="/redesign-system.css?v=gold334">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <script>
@@ -1305,77 +1305,77 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   </div>
 </div>
 
-<script src="/native-bridge.js?v=gold303" defer></script>
-<script src="/app.js?v=gold197" defer></script>
-<script src="/antibiogram-data.js?v=gold240" defer></script>
-<script src="/theme-sync.js?v=gold239" defer></script>
-<script src="/account.js?v=gold229" defer></script>
-<script src="/signout-fix.js?v=gold1" defer></script>
-<script src="/verify.js?v=gold8" defer></script>
-<script src="/prescription.js?v=gold321" defer></script>
-<script src="/ku.js?v=gold315" defer></script>
+<script src="/native-bridge.js?v=gold334" defer></script>
+<script src="/app.js?v=gold334" defer></script>
+<script src="/antibiogram-data.js?v=gold334" defer></script>
+<script src="/theme-sync.js?v=gold334" defer></script>
+<script src="/account.js?v=gold334" defer></script>
+<script src="/signout-fix.js?v=gold334" defer></script>
+<script src="/verify.js?v=gold334" defer></script>
+<script src="/prescription.js?v=gold334" defer></script>
+<script src="/ku.js?v=gold334" defer></script>
 <!-- Global toast shim: defines window.toast + window.SMD_toast (many modules call these but
      neither was ever defined, so their feedback was silently dropped). Loaded early; idempotent. -->
-<script src="/toast.js?v=gold316" defer></script>
-<script src="/native-auth.js?v=gold222" defer></script>
-<script src="/policy.js?v=gold240" defer></script>
-<script src="/features.js?v=gold88" defer></script>
-<script src="/calculators.js?v=gold286" defer></script>
-<script src="/drugs.js?v=gold88" defer></script>
-<script src="/interaction-rules.js?v=gold253" defer></script>
-<script defer src="/medlist.js?v=gold285"></script>
-<script defer src="/ghis-meds.js?v=gold164"></script>
+<script src="/toast.js?v=gold334" defer></script>
+<script src="/native-auth.js?v=gold334" defer></script>
+<script src="/policy.js?v=gold334" defer></script>
+<script src="/features.js?v=gold334" defer></script>
+<script src="/calculators.js?v=gold334" defer></script>
+<script src="/drugs.js?v=gold334" defer></script>
+<script src="/interaction-rules.js?v=gold334" defer></script>
+<script defer src="/medlist.js?v=gold334"></script>
+<script defer src="/ghis-meds.js?v=gold334"></script>
 <script defer src="/interactions.js"></script>
-<script src="/api.js?v=gold141" defer></script>
+<script src="/api.js?v=gold334" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
-<script src="/offline-db.js?v=gold239" defer></script>
-<script src="/offline-clinical.js?v=gold239" defer></script>
+<script src="/offline-db.js?v=gold334" defer></script>
+<script src="/offline-clinical.js?v=gold334" defer></script>
 <!-- KB data (KB_CORE/CLINICAL/ENRICHMENT/EXPANDED, ~4.8MB) is LAZY-loaded AFTER first paint
      so the branded loading splash appears fast. Reasoning uses closure fallbacks until it's
      ready; StewardRAG awaits window.SMD_KB_READY. -->
-<script>(function(){var KB=["/kb/dist/kb.core.js?v=gold146","/kb/dist/kb.clinical.js?v=gold202","/kb/dist/kb.enrichment.js?v=gold213","/kb/dist/kb.expanded.js?v=gold111"];window.SMD_KB_READY=new Promise(function(res){function load(i){if(i>=KB.length){try{window.dispatchEvent(new Event("smd-kb-ready"));}catch(e){}res(true);return;}var s=document.createElement("script");s.src=KB[i];s.onload=function(){load(i+1);};s.onerror=function(){load(i+1);};document.head.appendChild(s);}function start(){requestAnimationFrame(function(){requestAnimationFrame(function(){load(0);});});}if(document.readyState==="loading"){window.addEventListener("DOMContentLoaded",start);}else{start();}});})();</script>
-<script src="/dxmgmt.js?v=gold324" defer></script>
-<script src="/clinical-nlp.js?v=gold199" defer></script>
-<script src="/reasoning.js?v=gold324" defer></script>
+<script>(function(){var KB=["/kb/dist/kb.core.js?v=gold334","/kb/dist/kb.clinical.js?v=gold334","/kb/dist/kb.enrichment.js?v=gold334","/kb/dist/kb.expanded.js?v=gold334"];window.SMD_KB_READY=new Promise(function(res){function load(i){if(i>=KB.length){try{window.dispatchEvent(new Event("smd-kb-ready"));}catch(e){}res(true);return;}var s=document.createElement("script");s.src=KB[i];s.onload=function(){load(i+1);};s.onerror=function(){load(i+1);};document.head.appendChild(s);}function start(){requestAnimationFrame(function(){requestAnimationFrame(function(){load(0);});});}if(document.readyState==="loading"){window.addEventListener("DOMContentLoaded",start);}else{start();}});})();</script>
+<script src="/dxmgmt.js?v=gold334" defer></script>
+<script src="/clinical-nlp.js?v=gold334" defer></script>
+<script src="/reasoning.js?v=gold334" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
      smd_privacy_gate=0 (default ON). -->
-<script src="/privacy-config.js?v=gold319" defer></script>
-<script src="/privacy.js?v=gold329" defer></script>
+<script src="/privacy-config.js?v=gold334" defer></script>
+<script src="/privacy.js?v=gold334" defer></script>
 <!-- Image Engine chooser for ICU Snapshot (Private Device OCR vs AI Vision). Needs SMD_AI
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
-<script src="/image-engine.js?v=gold229" defer></script>
-<script src="/kb/ai/steward-ai.browser.js?v=gold327" defer></script>
-<script src="/electrolytes.js?v=gold229" defer></script>
-<script src="/caseshare.js?v=gold314" defer></script>
-<script src="/home.js?v=gold333" defer></script>
-<script src="/antibiogram.js?v=gold318" defer></script>
-<script src="/asp-region.js?v=gold241" defer></script>
-<script src="/swipe-back.js?v=gold243" defer></script>
-<script src="/workspaces.js?v=gold197" defer></script>
-<script src="/ws-surgery.js?v=gold190" defer></script>
-<script src="/ws-ent.js?v=gold190" defer></script>
-<script src="/ws-ophthalmology.js?v=gold190" defer></script>
-<script src="/ws-obstetrics_gynaecology.js?v=gold190" defer></script>
-<script src="/ws-urology.js?v=gold190" defer></script>
-<script src="/ws-dentistry_omfs.js?v=gold190" defer></script>
-<script src="/ws-paediatrics.js?v=gold190" defer></script>
+<script src="/image-engine.js?v=gold334" defer></script>
+<script src="/kb/ai/steward-ai.browser.js?v=gold334" defer></script>
+<script src="/electrolytes.js?v=gold334" defer></script>
+<script src="/caseshare.js?v=gold334" defer></script>
+<script src="/home.js?v=gold334" defer></script>
+<script src="/antibiogram.js?v=gold334" defer></script>
+<script src="/asp-region.js?v=gold334" defer></script>
+<script src="/swipe-back.js?v=gold334" defer></script>
+<script src="/workspaces.js?v=gold334" defer></script>
+<script src="/ws-surgery.js?v=gold334" defer></script>
+<script src="/ws-ent.js?v=gold334" defer></script>
+<script src="/ws-ophthalmology.js?v=gold334" defer></script>
+<script src="/ws-obstetrics_gynaecology.js?v=gold334" defer></script>
+<script src="/ws-urology.js?v=gold334" defer></script>
+<script src="/ws-dentistry_omfs.js?v=gold334" defer></script>
+<script src="/ws-paediatrics.js?v=gold334" defer></script>
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
-<script src="/clinical-vocab.js?v=gold295" defer></script>
-<script src="/icu.js?v=gold297" defer></script>
+<script src="/clinical-vocab.js?v=gold334" defer></script>
+<script src="/icu.js?v=gold334" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
-<script src="/native-push.js?v=gold298" defer></script>
-<script src="/watch-lab.js?v=gold316" defer></script>
+<script src="/native-push.js?v=gold334" defer></script>
+<script src="/watch-lab.js?v=gold334" defer></script>
 <!-- Copy/Print augmentation for the frozen app.js infusion calc (WebView-safe copy + branded print). -->
-<script src="/infusion-actions.js?v=gold294" defer></script>
+<script src="/infusion-actions.js?v=gold334" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=gold303" defer></script>
-<script src="/recent.js?v=gold223" defer></script>
+<script src="/voice.js?v=gold334" defer></script>
+<script src="/recent.js?v=gold334" defer></script>
 <!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
      ghis-ward.js self-injects a 🏥 Ward button + #ghisPanel. Each doctor signs in
      with their OWN GHIS id/password; the token is stored client-side and sent as
@@ -1402,7 +1402,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold293"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold334"; document.body.appendChild(s); }
     ghisHideFab(); ghisWrapSB(); ghisSidebarItem();
     [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { ghisWrapSB(); ghisSidebarItem(); }, ms); });
   }
