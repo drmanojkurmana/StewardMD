@@ -18,7 +18,7 @@ import { verifyFirebaseToken } from "../../_fbauth.js";
 
 // Owners who may manage verifications (by Google account email). Override via env.OWNER_EMAILS
 // (comma-separated). Kept in sync with the intent of the app's team allowlist.
-const OWNER_EMAILS_DEFAULT = ["drmanojkurmana@gmail.com", "northstar201b@gmail.com", "mkkmanojkumar0@gmail.com"];
+const OWNER_EMAILS_DEFAULT = ["stewardmd.in@gmail.com", "drmanojkurmana@gmail.com"];
 function ownerEmails(env) {
   return (env.OWNER_EMAILS ? String(env.OWNER_EMAILS).split(",") : OWNER_EMAILS_DEFAULT)
     .map((s) => s.trim().toLowerCase()).filter(Boolean);
