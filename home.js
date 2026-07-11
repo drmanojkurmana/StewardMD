@@ -83,11 +83,10 @@
         var toolsBody = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
           ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
           : "";
-        // Interface: single switch to flip between the Old (classic v2) and New UI.
-        // The New UI = the app-wide redesign (smd_redesign_nav → body.rds-on / ui-v3) PLUS the
-        // v4 home layout (smd_home_v4). Old = neither (classic v2). Off is the DEFAULT. The switch
-        // keys off smd_redesign_nav (the dominant flag). Persists both + reloads (rendered at load).
-        var uiBody = swRow("newui", "New interface", "Redesigned UI + v4 home — off = classic v2", flag("smd_redesign_nav", false));
+        // Interface: single switch to flip between the Old (v2) and New (v4) home.
+        // Off = Classic v2 home (default); On = New v4 home. Persists smd_home_v4 and
+        // reloads (the home renders at load). The sidebar is identical in both modes.
+        var uiBody = swRow("homev4", "New home design", "Redesigned home screen (v4) — off = classic", flag("smd_home_v4", false));
         setBody.insertAdjacentHTML("beforeend",
           group("interface", "Interface", uiBody, true) +
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
@@ -113,10 +112,9 @@
               else if (k === "expanded" && window.SMD_setKbExpanded) SMD_setKbExpanded(nv);
               else if (k === "ai" && window.SMD_AI) SMD_AI.setFlag(nv);
               else if (k === "ghis" && window.SMD_setGhis) SMD_setGhis(nv);
-              else if (k === "newui") {
-                // Old (classic v2) ⇄ New (redesign + v4 home). Set BOTH flags together so the
-                // whole UI switches, not just a sub-layout. Rendered at load → persist + reload.
-                try { localStorage.setItem("smd_redesign_nav", nv ? "1" : "0"); localStorage.setItem("smd_home_v4", nv ? "1" : "0"); } catch (e) {}
+              else if (k === "homev4") {
+                // Old (v2) ⇄ New (v4) home. Render happens at load → persist + reload.
+                try { localStorage.setItem("smd_home_v4", nv ? "1" : "0"); } catch (e) {}
                 sw.classList.toggle("on", nv); sw.setAttribute("aria-checked", nv);
                 try { if (window.SB && SB.close) SB.close(); } catch (e) {}
                 setTimeout(function () { try { location.reload(); } catch (e) {} }, 120);
@@ -813,7 +811,7 @@
       var q = location.search || "";
       if (/[?&]rnav=0\b/.test(q)) return false;                 // explicit off
       if (/[?&]rnav=1\b/.test(q)) return true;                  // explicit on
-      return localStorage.getItem("smd_redesign_nav") === "1";  // DEFAULT OFF — classic v2 is default; New opt-in via Settings toggle
+      return localStorage.getItem("smd_redesign_nav") !== "0";  // DEFAULT ON (off only if user opted out)
     } catch (e) { return true; }
   }
   function ric(name) { return '<span class="rds-icon" aria-hidden="true">' + name + '</span>'; }
@@ -1192,7 +1190,7 @@
       '<div class="hv-sh-t">More</div>' +
       // In-app toggle for the redesign (so it can be enabled/reviewed on a native device
       // where there is no URL bar for ?rnav=1). Toggles smd_redesign_nav + reloads.
-      '<button class="hv-mi" style="width:100%" onclick="try{var on=localStorage.getItem(\'smd_redesign_nav\')===\'1\';var nv=on?\'0\':\'1\';localStorage.setItem(\'smd_redesign_nav\',nv);localStorage.setItem(\'smd_home_v4\',nv);location.reload();}catch(e){}">' +
+      '<button class="hv-mi" style="width:100%" onclick="try{var on=localStorage.getItem(\'smd_redesign_nav\')!==\'0\';localStorage.setItem(\'smd_redesign_nav\',on?\'0\':\'1\');location.reload();}catch(e){}">' +
         svg("spark") + '<div class="ml">New design <span class="mc">' +
         (redesignNavOn() ? "On — tap to switch back" : "Beta — tap to try it") +
         '</span></div><span class="marr">' + svg("chev") + '</span></button>' +
