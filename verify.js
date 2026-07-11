@@ -90,18 +90,21 @@
     if (sub) sub.textContent = verified
       ? "Your medical registration is linked to this account."
       : (pending
-        ? "We've received your certificate and are reviewing it. We'll email you once it's approved."
+        ? "We've received your certificate and our team is reviewing it — we'll email you once it's approved. In the meantime you can upload a clearer certificate below to try instant verification again."
         : "StewardMD is for registered medical practitioners only. Upload your medical registration certificate — we verify it instantly against the National Medical Register.");
 
+    // Upload box stays available unless FULLY verified — so a doctor under review can
+    // re-submit a clearer certificate and get instant verification without being stuck.
     var up = $("verifyUploadBlock");
-    if (up) up.style.display = (verified || pending) ? "none" : "";
-    if (!verified && !pending) {
-      clearStatusMsg();
+    if (up) up.style.display = verified ? "none" : "";
+    if (!verified) {
       // Reset the upload control to reflect whether a file is currently chosen.
-      var inp = $("verifyFile"), sub = $("verifySubmit"), lbl = $("verifyFileLabel"), drp = $("verifyDrop");
+      var inp = $("verifyFile"), sub2 = $("verifySubmit"), lbl = $("verifyFileLabel"), drp = $("verifyDrop");
       var hasFile = !!(inp && inp.files && inp.files[0]);
-      if (sub) { sub.disabled = false; sub.textContent = hasFile ? "Verify & continue" : "Choose certificate"; }
-      if (!hasFile) { if (lbl) lbl.textContent = "📄 Choose your registration certificate"; if (drp) drp.classList.remove("has-file"); }
+      if (sub2) { sub2.disabled = false; sub2.textContent = hasFile ? "Verify & continue" : (pending ? "Re-upload certificate" : "Choose certificate"); }
+      if (!hasFile) { if (lbl) lbl.textContent = "📄 " + (pending ? "Upload a clearer certificate" : "Choose your registration certificate"); if (drp) drp.classList.remove("has-file"); }
+      if (pending) { setStatusMsg("pending", "Under review — we'll email you. Uploading a clearer photo/scan often verifies instantly."); }
+      else { clearStatusMsg(); }
     }
 
     var closable = mode !== "forced";
