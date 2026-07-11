@@ -1,0 +1,17 @@
+{
+  "name": "@stewardmd/capacitor-app-orientation",
+  "version": "1.0.0",
+  "description": "Lock/unlock screen orientation. The app is portrait-locked app-wide; specific screens (e.g. the antibiogram grid) unlock rotation for a wider landscape view. iOS-only (Android uses the app-target AppOrientationPlugin).",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "package.json"
+  ],
+  "author": "StewardMD",
+  "license": "MIT"
+}
