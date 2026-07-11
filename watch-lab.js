@@ -14,7 +14,7 @@
   "use strict";
 
   function apiBase() { return window.SMD_API_BASE || ""; }
-  function toast(m) { try { (window.SMD_toast || function () {})(m); } catch (e) {} }
+  function toast(m) { try { (window.SMD_toast || window.toast || function () {})(m); } catch (e) {} }
   async function idToken() {
     var u = window.SMD_AUTH && window.SMD_AUTH.currentUser;
     if (!u || !u.getIdToken) throw new Error("Sign in to use background lab alerts.");
@@ -102,9 +102,36 @@
       return Math.round(d / 864e5) + "d ago";
     } catch (e) { return ""; }
   }
+  // Lab Watch 24/7 runs on the server (so it can alert when the app is closed) and therefore
+  // needs a Google/Apple account — SEPARATE from the GHIS / Ward Sync login. When the caller is
+  // not signed in we show this actionable sheet (with a real Sign in button) instead of a toast
+  // that used to vanish silently, so the button never looks dead again.
+  function openSignInSheet(msg) {
+    if (document.getElementById("smdWatchSignin")) return;
+    var hasG = typeof window.SMD_signInWithGoogle === "function";
+    var hasA = typeof window.SMD_signInWithApple === "function";
+    var wrap = document.createElement("div");
+    wrap.id = "smdWatchSignin";
+    wrap.setAttribute("style", "position:fixed;inset:0;z-index:20002;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center");
+    wrap.innerHTML =
+      '<div role="dialog" aria-label="Sign in for Lab Watch 24/7" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25)">'
+      + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:6px">🔔 Lab Watch 24/7</div>'
+      + '<div style="font:500 12.5px/1.55 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:14px">' + esc(msg || "Sign in with your Google or Apple account to watch patients for new labs — even when the app is closed. This is separate from your GHIS / Ward Sync login.") + '</div>'
+      + (hasG ? '<button id="smdSiGoogle" style="width:100%;box-sizing:border-box;margin-bottom:9px;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--panel,#fff);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Sign in with Google</button>' : '')
+      + (hasA ? '<button id="smdSiApple" style="width:100%;box-sizing:border-box;margin-bottom:9px;padding:12px;border:none;border-radius:11px;background:#000;color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer">Sign in with Apple</button>' : '')
+      + (!hasG && !hasA ? '<div style="font:600 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:9px">Open <b>More → Account &amp; sign-in</b> to sign in with Google or Apple, then tap Lab Watch 24/7 again.</div>' : '')
+      + '<button id="smdSiClose" style="width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--paper,#f6f8f6);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Close</button>'
+      + '</div>';
+    document.body.appendChild(wrap);
+    var close = function () { try { wrap.remove(); } catch (e) {} };
+    wrap.addEventListener("click", function (e) { if (e.target === wrap) close(); });
+    wrap.querySelector("#smdSiClose").addEventListener("click", close);
+    var g = wrap.querySelector("#smdSiGoogle"); if (g) g.addEventListener("click", function () { close(); try { window.SMD_signInWithGoogle(); } catch (e) {} });
+    var a = wrap.querySelector("#smdSiApple"); if (a) a.addEventListener("click", function () { close(); try { window.SMD_signInWithApple(); } catch (e) {} });
+  }
   function openManager() {
     return new Promise(function (resolve) {
-      if (!(window.SMD_AUTH && window.SMD_AUTH.currentUser)) { toast("Sign in with your Google/Apple account to see watched patients."); resolve({ ok: false }); return; }
+      if (!(window.SMD_AUTH && window.SMD_AUTH.currentUser)) { openSignInSheet("Sign in with your Google or Apple account to see and manage the patients you're watching. This is separate from your GHIS / Ward Sync login."); resolve({ ok: false }); return; }
       if (document.getElementById("smdWatchMgr")) { resolve({ ok: false }); return; }
       var wrap = document.createElement("div");
       wrap.id = "smdWatchMgr";

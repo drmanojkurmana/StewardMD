@@ -592,3 +592,15 @@ html body.rds-on .app-head .dx-launch .rds-icon, html body.rds-on .app-head .my-
 #homeV2.rnav .rnav-qa-btn, #homeV2.rnav .rnav-qc { height: 88px; justify-content: flex-start; padding: 13px 4px 8px; gap: 7px; }
 #homeV2.rnav .rnav-qa-btn .rds-icon, #homeV2.rnav .rnav-qc .rds-icon { flex: 0 0 auto; }
 #homeV2.rnav .rnav-qa-btn > span, #homeV2.rnav .rnav-qc > span { display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.12; min-height: 2.24em; width: 100%; }
+
+/* FIX (gold316): the label-layout rule above (`.rnav-qa-btn > span`) unintentionally ALSO
+   matched the Material-Symbols ICON span — ric() renders <span class="rds-icon">, a direct
+   child — giving the icon width:100% + min-height:2.24em (~54px at its 24px font). Icon(54) +
+   gap + label + padding overflowed the fixed 88px tile, so the label text spilled out the
+   bottom of the box (Scan Meds / Dx Patient / Syndromes …). Pin the icon back to its natural
+   glyph size; only the text label reserves the 2-line height. Higher specificity than `> span`. */
+#homeV2.rnav .rnav-qa-btn > .rds-icon,
+#homeV2.rnav .rnav-qc > .rds-icon {
+  width: auto; height: auto; min-height: 0; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+}
