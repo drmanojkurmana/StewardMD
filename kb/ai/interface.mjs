@@ -26,6 +26,22 @@ export const DEFAULT_FLAGS = Object.freeze({
   professional: false,  // future Professional-subscription gate — OFF.
 });
 
+/* Reciprocal Rank Fusion — merge two ranked id lists (e.g. lexical + vector arms)
+ * into one. score(id) = Σ over lists containing id of 1/(K + rank0based). Ties keep
+ * first-appearance order (A before B) via a stable sort. An empty second list makes
+ * the result identical to the first — the hybrid-retrieval no-regression guarantee. */
+export function rrf(a, b, K) {
+  K = (typeof K === "number" && K > 0) ? K : 60;
+  const score = new Map(), order = [];
+  const add = (list) => (Array.isArray(list) ? list : []).forEach((id, i) => {
+    if (id == null) return;
+    if (!score.has(id)) { score.set(id, 0); order.push(id); }
+    score.set(id, score.get(id) + 1 / (K + i));
+  });
+  add(a); add(b);
+  return order.slice().sort((x, y) => score.get(y) - score.get(x));  // stable → ties keep insertion order
+}
+
 const STOP = new Set("the a an of to in is are with and or for as on at by from this that without within into be can may not no".split(" "));
 function tokenize(s) {
   return String(s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter((w) => w.length > 2 && !STOP.has(w));
