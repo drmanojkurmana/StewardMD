@@ -20,7 +20,7 @@
   /* Team bypass during rollout (mirrors account.js TEST_PRO_EMAILS). Leave BETA_VERIFY_ALL
    * false; trim the allowlist before public launch and rely on the claim. */
   var BETA_VERIFY_ALL = false;
-  var VERIFY_ALLOWLIST = ["drmanojkurmana@gmail.com", "northstar201b@gmail.com", "mkkmanojkumar0@gmail.com"];
+  var VERIFY_ALLOWLIST = ["northstar201b@gmail.com", "mkkmanojkumar0@gmail.com"];
 
   function auth() { try { return window.SMD_AUTH || (window.firebase && window.firebase.auth && window.firebase.auth()); } catch (e) { return null; } }
   function fbUser() { try { var a = auth(); return a && a.currentUser; } catch (e) { return null; } }
