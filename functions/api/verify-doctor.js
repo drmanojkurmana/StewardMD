@@ -20,8 +20,8 @@
  */
 
 import { verifyFirebaseToken } from "../../_fbauth.js";
+import { setUserClaims } from "../../_fbadmin.js";
 
-const FB_PROJECT_DEFAULT = "stewardmd-498ec";
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
 const GEMINI_MODEL = "gemini-2.0-flash";
@@ -34,56 +34,17 @@ function kv(env) { return env.CASES_KV || env.GHIS_KV || null; }
 function doctorKey(uid) { return "icu:doctor:" + uid; }
 function regKey(reg)    { return "icu:reg:" + reg.replace(/[^A-Za-z0-9]/g, "_").toUpperCase(); }
 
-// ── base64 / bytes ────────────────────────────────────────────────────────────
-const b64ToBytes   = (s) => Uint8Array.from(atob(String(s).replace(/-/g, "+").replace(/_/g, "/")), c => c.charCodeAt(0));
-const bytesToB64Url = (u8) => btoa(String.fromCharCode(...u8)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-const strToB64Url   = (s) => bytesToB64Url(new TextEncoder().encode(s));
-
 // Decode a JWT payload (token already verified by verifyFirebaseToken) to read email.
 function decodePayload(token) {
-  try { return JSON.parse(new TextDecoder().decode(b64ToBytes(String(token).split(".")[1]))); }
-  catch (e) { return {}; }
+  try {
+    const b = String(token).split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+    return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(b), c => c.charCodeAt(0))));
+  } catch (e) { return {}; }
 }
 
-// ── Service-account OAuth2 token (JWT bearer grant) — to set custom claims ─────
-let _saTok = { token: null, exp: 0 };
-async function serviceAccountToken(env) {
-  const now = Math.floor(Date.now() / 1000);
-  if (_saTok.token && now < _saTok.exp - 60) return _saTok.token;
-  const sa = JSON.parse(env.FIREBASE_SERVICE_ACCOUNT);
-  const header = { alg: "RS256", typ: "JWT" };
-  const claims = {
-    iss: sa.client_email,
-    scope: "https://www.googleapis.com/auth/identitytoolkit",
-    aud: sa.token_uri || "https://oauth2.googleapis.com/token",
-    iat: now, exp: now + 3600,
-  };
-  const signingInput = `${strToB64Url(JSON.stringify(header))}.${strToB64Url(JSON.stringify(claims))}`;
-  const pkcs8 = b64ToBytes(sa.private_key.replace(/-----(BEGIN|END) PRIVATE KEY-----/g, "").replace(/\s+/g, ""));
-  const key = await crypto.subtle.importKey("pkcs8", pkcs8, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["sign"]);
-  const sig = new Uint8Array(await crypto.subtle.sign("RSASSA-PKCS1-v1_5", key, new TextEncoder().encode(signingInput)));
-  const assertion = `${signingInput}.${bytesToB64Url(sig)}`;
-  const res = await fetch(sa.token_uri || "https://oauth2.googleapis.com/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `grant_type=${encodeURIComponent("urn:ietf:params:oauth:grant-type:jwt-bearer")}&assertion=${assertion}`,
-  });
-  const data = await res.json();
-  if (!data.access_token) throw new Error("sa_token_failed");
-  _saTok = { token: data.access_token, exp: now + (data.expires_in || 3600) };
-  return data.access_token;
-}
-
+// Set the verified custom claim (via the shared Firebase-admin helper).
 async function setVerifiedClaim(env, uid, regNo) {
-  const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
-  const saToken = await serviceAccountToken(env);
-  // Preserve any existing claims (e.g. pro) by merging.
-  const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:update`, {
-    method: "POST",
-    headers: { "Authorization": `Bearer ${saToken}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ localId: uid, customAttributes: JSON.stringify({ verified: true, regNo }) }),
-  });
-  if (!res.ok) throw new Error("set_claim_failed: " + (await res.text()));
+  await setUserClaims(env, uid, { verified: true, regNo });
 }
 
 // ── Gemini — read the certificate ─────────────────────────────────────────────
@@ -175,6 +136,23 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
 export async function onRequest(context) {
   const { request, env } = context;
   if (request.method === "OPTIONS") return new Response(null, { status: 204 });
+
+  // GET → the caller's own verification status (for the account panel).
+  if (request.method === "GET") {
+    const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+    const uid = await verifyFirebaseToken(tok, env);
+    if (!uid) return json({ error: "auth_failed" }, 401);
+    const store = kv(env);
+    let rec = null;
+    try { if (store) rec = await store.get(doctorKey(uid), "json"); } catch (e) {}
+    if (rec) return json({
+      status: rec.status || (rec.verified ? "verified" : "unverified"),
+      regNo: rec.regNo || rec.extractedRegNo || "", name: rec.name || "",
+      council: rec.council || "", verifiedAt: rec.verifiedAt || "", reason: rec.reason || "",
+    });
+    return json({ status: "unverified" });
+  }
+
   if (request.method !== "POST") return json({ error: "method_not_allowed" }, 405);
   for (const k of ["GEMINI_API_KEY", "FIREBASE_SERVICE_ACCOUNT"]) {
     if (!env[k]) return json({ error: "server_misconfigured", detail: `${k} missing` }, 500);

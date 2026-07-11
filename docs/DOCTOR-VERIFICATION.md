@@ -9,10 +9,27 @@ the **live NMC register** → on pass, set the Firebase custom claim `verified:t
 
 | File | Role |
 |---|---|
-| `functions/api/verify-doctor.js` | POST endpoint. Reuses `functions/_fbauth.js` `verifyFirebaseToken`; Gemini extract → live NMC check → sets `verified` claim via a service account; records the doctor + reg-no→uid map in KV (`CASES_KV`/`GHIS_KV`, keys `icu:doctor:*` / `icu:reg:*`); emails support on manual-review cases. |
-| `verify.js` | Additive client module (never edits `app.js`), loaded after `account.js`. Shows a full-screen blocking overlay until the `verified` claim is present; handles cert upload. Mirrors `account.js` (`SMD_PRO` → `SMD_VERIFY`). |
-| `index.html` | `#verifyGate` overlay markup + `verify.js` include; guest UI hidden; account-gate copy updated. |
+| `functions/api/verify-doctor.js` | `POST` verifies a cert (Gemini → live NMC → sets `verified` claim, records doctor + reg-no→uid map in KV `icu:doctor:*`/`icu:reg:*`, emails support on manual-review). `GET` returns the caller's own status (for the account panel). Reuses `_fbauth.js` + `_fbadmin.js`. |
+| `functions/_fbadmin.js` | Shared Firebase-admin helper: mints a service-account OAuth token (Web Crypto) and sets custom claims. Used by verify-doctor + the admin endpoint. |
+| `functions/api/verifications/[[path]].js` | **Admin** endpoint (token-gated like `updates`): `GET` list by status; `POST /approve` (set claim), `POST /reject`. Lists KV prefix `icu:doctor:`. Secret `VERIFY_ADMIN_TOKEN`. |
+| `admin/verifications.html` | Owner UI to review pending doctors and Approve/Reject (mirrors `admin/updates.html`). |
+| `verify.js` | Additive client module (never edits `app.js`). Two surfaces on one overlay: **forced gate** (blocks unverified) + **Account & Verification panel** opened from the sidebar (shows provider + email ↔ reg no ↔ status; upload if unverified). Injects the menu item via the `SB.open` wrap (home.js pattern). Mirrors `account.js` (`SMD_PRO` → `SMD_VERIFY`). |
+| `index.html` | `#verifyGate` overlay (account summary + upload + close/done) + `verify.js` include; guest UI hidden; account-gate copy updated. |
 | `account.js` | `GUEST_MAX_PER_DAY = 0` — reuses the existing cap machinery to remove guest access. |
+
+## Admin
+
+Open `https://stewardmd.in/admin/verifications.html`, paste the `VERIFY_ADMIN_TOKEN`, and
+review **Pending** doctors (auto-verification could not match them against NMC). Approve →
+sets their `verified` claim; Reject → marks rejected. Set the secret:
+`npx wrangler pages secret put VERIFY_ADMIN_TOKEN --project-name stewardmd`.
+
+## In-app account panel
+
+Sidebar menu → **Account & Verification** opens a panel showing the linked account
+(Google/Apple/Mobile) ↔ registration number ↔ status. Unverified users get the upload
+option there too (in addition to the forced gate at sign-in). Mobile/phone sign-in is
+labelled "Mobile" and slots in once phone auth is added — no panel change needed.
 
 ## Secrets (Cloudflare Pages)
 

@@ -608,17 +608,37 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   .verify-status.error   { background: rgba(232,90,90,0.12);  color: #f4bcbc; }
   .verify-spinner { display:inline-block; width:14px; height:14px; border:2px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:verifySpin .7s linear infinite; vertical-align:-2px; margin-right:6px; }
   @keyframes verifySpin { to { transform: rotate(360deg); } }
+  .verify-account { width:100%; margin:6px 0 14px; border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:6px 14px; background:rgba(255,255,255,0.03); }
+  .verify-acc-row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.07); font-size:13px; }
+  .verify-acc-row:last-child { border-bottom:none; }
+  .verify-acc-k { color:rgba(246,247,245,0.55); font-weight:500; }
+  .verify-acc-v { color:#f6f7f5; font-weight:600; text-align:right; word-break:break-word; }
+  .verify-badge { border-radius:999px; padding:3px 10px; font-size:11px; font-weight:700; }
+  .verify-badge.verified { background:rgba(76,201,120,0.18); color:#8ff0ab; }
+  .verify-badge.pending  { background:rgba(240,193,90,0.18); color:#f3dfa8; }
+  .verify-badge.unverified,.verify-badge.rejected { background:rgba(232,90,90,0.16); color:#f4bcbc; }
 </style>
 <div id="verifyGate" class="hidden">
+  <button id="verifyClose" aria-label="Close" title="Close"
+    style="display:none;position:absolute;top:16px;right:18px;background:none;border:none;color:#f6f7f5;font-size:26px;line-height:1;cursor:pointer;opacity:.8;">×</button>
   <div class="account-inner">
     <div class="splash-name">Steward<span class="accent">MD</span></div>
-    <div class="account-title">Verify you're a registered doctor</div>
-    <div class="account-subtitle">
+    <div class="account-title" id="verifyTitle">Verify you're a registered doctor</div>
+    <div class="account-subtitle" id="verifySubtitle">
       StewardMD is for registered medical practitioners only. Upload your medical
       registration certificate — we verify it instantly against the National Medical
       Register. Your certificate is used only for verification.
     </div>
-    <div class="account-card">
+
+    <!-- Account + verification status summary (populated by verify.js) -->
+    <div class="verify-account" id="verifyAccount" style="display:none;">
+      <div class="verify-acc-row"><span class="verify-acc-k">Signed in</span><span class="verify-acc-v" id="verifyAccEmail">—</span></div>
+      <div class="verify-acc-row"><span class="verify-acc-k">Method</span><span class="verify-acc-v" id="verifyAccProvider">—</span></div>
+      <div class="verify-acc-row"><span class="verify-acc-k">Registration No</span><span class="verify-acc-v" id="verifyAccReg">—</span></div>
+      <div class="verify-acc-row"><span class="verify-acc-k">Status</span><span class="verify-acc-v"><span class="verify-badge" id="verifyBadge">—</span></span></div>
+    </div>
+
+    <div class="account-card" id="verifyUploadBlock">
       <label class="verify-drop" id="verifyDrop">
         <input type="file" id="verifyFile" accept="image/png,image/jpeg,image/webp,application/pdf" hidden>
         <span id="verifyFileLabel">📄 Choose your registration certificate</span>
@@ -627,6 +647,9 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       <button class="account-google-btn" id="verifySubmit" disabled style="margin-top:14px;justify-content:center;">Verify &amp; continue</button>
       <div class="verify-status" id="verifyStatus" role="status" aria-live="polite"></div>
     </div>
+
+    <button class="account-google-btn" id="verifyDoneBtn" style="display:none;justify-content:center;">Done</button>
+
     <div class="account-fineprint" style="margin-top:16px;">
       Trouble verifying? We'll review it manually and email you — or write to
       <a href="mailto:support@stewardmd.in" style="color:#34b7e8;">support@stewardmd.in</a>.
@@ -1277,7 +1300,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/antibiogram-data.js?v=gold240" defer></script>
 <script src="/theme-sync.js?v=gold239" defer></script>
 <script src="/account.js?v=gold229" defer></script>
-<script src="/verify.js?v=gold1" defer></script>
+<script src="/verify.js?v=gold2" defer></script>
 <script src="/ku.js?v=gold315" defer></script>
 <!-- Global toast shim: defines window.toast + window.SMD_toast (many modules call these but
      neither was ever defined, so their feedback was silently dropped). Loaded early; idempotent. -->
