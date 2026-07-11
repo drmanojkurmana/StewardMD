@@ -15,6 +15,12 @@ binding = "AI"
 binding = "KB_VECTORIZE"
 index_name = "stewardmd-kb"
 
+# D1 — offline NMC register mirror; doctor verification falls back to it when live NMC is down
+[[d1_databases]]
+binding = "stewardmd_nmc"
+database_name = "stewardmd-nmc"
+database_id = "36803432-5e8c-45e7-8dff-530f9a36c2cd"
+
 [env.production]
 compatibility_date = "2026-06-28"
 
@@ -34,6 +40,11 @@ binding = "UPDATES_KV"
 [[env.production.vectorize]]
 binding = "KB_VECTORIZE"
 index_name = "stewardmd-kb"
+
+[[env.production.d1_databases]]
+binding = "stewardmd_nmc"
+database_name = "stewardmd-nmc"
+database_id = "36803432-5e8c-45e7-8dff-530f9a36c2cd"
 
 [env.production.ai]
 binding = "AI"
