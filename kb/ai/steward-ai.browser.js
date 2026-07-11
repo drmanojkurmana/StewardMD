@@ -25,7 +25,7 @@
   // Hybrid retrieval (flag smd_hybrid, default OFF). Vector arm = POST /api/retrieve
   // (Workers AI embed → Vectorize). Fully degradation-safe: flag off OR empty/failed
   // vector arm → identical to lexical-only.
-  function smdHybridOn() { try { return localStorage.getItem("smd_hybrid") === "1"; } catch (e) { return false; } }
+  function smdHybridOn() { try { return localStorage.getItem("smd_hybrid") !== "0"; } catch (e) { return true; } }   // default ON (Vectorize index live); set "0" to disable
   function hybridBase() { return window.AI_PROXY ? String(window.AI_PROXY).replace(/\/ai\b/, "/retrieve") : "/api/retrieve"; }
   function vectorDiseaseIds(query, k) {
     var headers = { "Content-Type": "application/json" };
@@ -34,13 +34,16 @@
       var u = window.firebase && firebase.auth && firebase.auth().currentUser;
       p = (u && u.getIdToken) ? u.getIdToken().then(function (t) { if (t) headers["Authorization"] = "Bearer " + t; }).catch(function () {}) : Promise.resolve();
     } catch (e) { p = Promise.resolve(); }
+    // Bounded: hybrid must never delay a MaiK answer if /api/retrieve is slow.
+    var ac = (typeof AbortController !== "undefined") ? new AbortController() : null;
+    var to = ac ? setTimeout(function () { try { ac.abort(); } catch (e) {} }, 2500) : null;
     return p.then(function () {
-      return fetch(hybridBase(), { method: "POST", headers: headers, body: JSON.stringify({ query: String(query || "").slice(0, 500), k: k || 12 }) });
-    }).then(function (r) { return r && r.ok ? r.json() : null; }).then(function (j) {
+      return fetch(hybridBase(), { method: "POST", headers: headers, body: JSON.stringify({ query: String(query || "").slice(0, 500), k: k || 12 }), signal: ac ? ac.signal : undefined });
+    }).then(function (r) { if (to) clearTimeout(to); return r && r.ok ? r.json() : null; }).then(function (j) {
       var ids = [], seen = {};
       ((j && j.matches) || []).forEach(function (m) { var d = m && m.diseaseId; if (d && !seen[d]) { seen[d] = 1; ids.push(d); } });
       return ids;
-    }).catch(function () { return []; });   // any failure → lexical-only
+    }).catch(function () { if (to) clearTimeout(to); return []; });   // any failure/timeout → lexical-only
   }
   var TOP_N = 5;                 // grounded diseases (engine-ranked)
   var PER_DISEASE = 8;           // max knowledge chunks per grounded disease
