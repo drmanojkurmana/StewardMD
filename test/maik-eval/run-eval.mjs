@@ -51,6 +51,10 @@ try {
       // Phase 2: streaming variant delegates to the same stub (tests the render path; no live calls).
       SMD_AI.explainGroundedStream = function(pkg, opts, onDelta){ if(onDelta){ try{ onDelta("Structured management guidance"); }catch(e){} } return SMD_AI.explainGrounded(pkg, opts); };
       try { localStorage.setItem("smd_maik_v2","1"); } catch(e){}
+      // Deterministic routing check: force hybrid OFF so the eval exercises the pure lexical
+      // path with no /api/retrieve network hop (the semantic arm needs live Vectorize + no
+      // per-case time budget, which the harness can't provide; hybrid is verified on prod).
+      try { localStorage.setItem("smd_hybrid","0"); } catch(e){}
       return 1;`);
     let opened = false;
     for (let i = 0; i < 12 && !opened; i++) { await ev(`var t=document.querySelector('[data-act="askai"]'); if(t){t.click();} return 1;`); await sleep(300); opened = await ev(`return !!document.getElementById("maikQ")`) === true; }
