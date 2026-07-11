@@ -1,10 +1,10 @@
 {
   "generated": "run-eval.mjs",
-  "base": "http://localhost:8903/",
+  "base": "https://54785f50.stewardmd.pages.dev/",
   "tier1": {
     "cases": 56,
-    "passed": 55,
-    "scorePct": 98.2
+    "passed": 54,
+    "scorePct": 96.4
   },
   "byCategory": {
     "conversation": {
@@ -14,8 +14,8 @@
     },
     "acute": {
       "n": 21,
-      "pass": 21,
-      "pct": 100
+      "pass": 20,
+      "pct": 95.2
     },
     "continuity": {
       "n": 10,
@@ -36,8 +36,8 @@
   "byDimension": {
     "action": {
       "n": 56,
-      "pass": 55,
-      "pct": 98.2
+      "pass": 54,
+      "pct": 96.4
     },
     "no_raw_id": {
       "n": 56,
@@ -51,8 +51,8 @@
     },
     "topic_relevance": {
       "n": 32,
-      "pass": 31,
-      "pct": 96.9
+      "pass": 30,
+      "pct": 93.8
     },
     "safety": {
       "n": 6,
@@ -103,6 +103,24 @@
     "R-02"
   ],
   "failures": [
+    {
+      "id": "T-04",
+      "category": "acute",
+      "expectedAction": "retrieve_synthesis",
+      "action": "local_reply",
+      "expectedTopic": "hyperkal",
+      "resolvedQ": "",
+      "retrievedTop": null,
+      "calls": 0,
+      "dims": {
+        "action": false,
+        "topic_relevance": false,
+        "no_raw_id": true,
+        "no_markdown_leak": true
+      },
+      "pass": false,
+      "reviewerRequired": true
+    },
     {
       "id": "K-04",
       "category": "continuity",
@@ -352,7 +370,7 @@
       "action": "retrieve_synthesis",
       "expectedTopic": "dka",
       "resolvedQ": "management of DKA",
-      "retrievedTop": "dka",
+      "retrievedTop": "diabetes_mellitus_management_and_therapies",
       "calls": 1,
       "dims": {
         "action": true,
@@ -385,18 +403,18 @@
       "id": "T-04",
       "category": "acute",
       "expectedAction": "retrieve_synthesis",
-      "action": "retrieve_synthesis",
+      "action": "local_reply",
       "expectedTopic": "hyperkal",
-      "resolvedQ": "hyperkalemia management",
-      "retrievedTop": "hyperkalemia",
-      "calls": 1,
+      "resolvedQ": "",
+      "retrievedTop": null,
+      "calls": 0,
       "dims": {
-        "action": true,
-        "topic_relevance": true,
+        "action": false,
+        "topic_relevance": false,
         "no_raw_id": true,
         "no_markdown_leak": true
       },
-      "pass": true,
+      "pass": false,
       "reviewerRequired": true
     },
     {
@@ -766,7 +784,7 @@
       "action": "retrieve_synthesis",
       "expectedTopic": "dka",
       "resolvedQ": "DKA — management considerations with renal impairment.",
-      "retrievedTop": "renal_colic",
+      "retrievedTop": "renal_cell_carcinoma",
       "calls": 1,
       "dims": {
         "action": true,
@@ -891,7 +909,7 @@
       "action": "retrieve_synthesis",
       "expectedTopic": "pyelo",
       "resolvedQ": "empiric antibiotics for pyelonephritis",
-      "retrievedTop": "PYELONEPHRITIS",
+      "retrievedTop": "urinary_tract_infections_cystitis_prostati",
       "calls": 1,
       "dims": {
         "action": true,
@@ -943,7 +961,7 @@
       "action": "retrieve_synthesis",
       "expectedTopic": null,
       "resolvedQ": "renal dose caution for vancomycin",
-      "retrievedTop": "renal_colic",
+      "retrievedTop": "renal_cell_carcinoma",
       "calls": 1,
       "dims": {
         "action": true,
