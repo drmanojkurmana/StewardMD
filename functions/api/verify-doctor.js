@@ -24,8 +24,11 @@ import { setUserClaims } from "../_fbadmin.js";
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
-// Match the app's working AI setup: gemini-2.5-flash (NOT 2.0), model via env.
-const GEMINI_MODEL_DEFAULT = "gemini-2.5-flash";
+// Developer-API model for reading certificates. Uses the rolling "…-latest" alias so it
+// never gets retired out from under us (gemini-2.0-flash and 2.5-flash both got 404'd for
+// new keys). Do NOT read env.GEMINI_MODEL — that's tuned for MaiK's Vertex path (2.5-flash),
+// which 404s on this developer API key. Override only via VERIFY_GEMINI_MODEL if ever needed.
+const GEMINI_MODEL_DEFAULT = "gemini-flash-latest";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -63,7 +66,7 @@ async function geminiExtract(env, imageB64, mime) {
     "- looks_valid: set false ONLY if this is clearly NOT a medical registration document " +
     "(e.g. a random photo, a blank page). If it looks like a registration certificate, true.\n" +
     "- confidence: 0..1 for your overall reading. Use \"\" for any field you cannot read.";
-  const model = env.GEMINI_MODEL || GEMINI_MODEL_DEFAULT;
+  const model = env.VERIFY_GEMINI_MODEL || GEMINI_MODEL_DEFAULT;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`;
   let res, data = {}, text = "", httpOk = false;
   try {
@@ -201,33 +204,6 @@ async function emailVerified(env, { email, name, regNo, council }) {
 export async function onRequest(context) {
   const { request, env } = context;
   if (request.method === "OPTIONS") return new Response(null, { status: 204 });
-
-  // GET ?debug=models → list the Gemini models this key can use (temporary diagnostic).
-  if (request.method === "GET" && new URL(request.url).searchParams.get("debug") === "models") {
-    try {
-      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${env.GEMINI_API_KEY}`);
-      const d = await r.json();
-      const models = (d.models || [])
-        .filter((m) => (m.supportedGenerationMethods || []).indexOf("generateContent") > -1)
-        .map((m) => m.name.replace("models/", ""));
-      return json({ ok: true, current: env.GEMINI_MODEL || "(unset)", models });
-    } catch (e) { return json({ error: String((e && e.message) || e) }); }
-  }
-  // GET ?debug=test&model=X → try a tiny generateContent with our exact config (temporary).
-  if (request.method === "GET" && new URL(request.url).searchParams.get("debug") === "test") {
-    const model = new URL(request.url).searchParams.get("model") || "gemini-flash-latest";
-    try {
-      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ role: "user", parts: [{ text: 'Return strict JSON only: {"ok": true}' }] }],
-          generationConfig: { temperature: 0, maxOutputTokens: 256, responseMimeType: "application/json", thinkingConfig: { thinkingBudget: 0 } },
-        }),
-      });
-      const d = await r.json();
-      return json({ model, httpStatus: r.status, text: d?.candidates?.[0]?.content?.parts?.[0]?.text || "", error: d?.error || null });
-    } catch (e) { return json({ model, error: String((e && e.message) || e) }); }
-  }
 
   // GET → the caller's own verification status (for the account panel).
   if (request.method === "GET") {
