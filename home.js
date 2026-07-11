@@ -1034,6 +1034,7 @@
       if (_tb) { var _sync = function () { _tb.innerHTML = document.body.classList.contains("dark") ? svg("sun") : svg("moon"); };
         _sync(); _tb.addEventListener("click", function () { setTimeout(_sync, 40); }); }
     }
+    try { mountKuChip(root); } catch (e) {}   // KU: header chip (both header variants)
 
     try {
       var _dl = document.querySelector(".dev-studio-logo,.about-dev-logo");
@@ -1094,6 +1095,7 @@
       var b = e.target.closest("[data-act]"); if (!b) return;
       var a = b.getAttribute("data-act");
       if (a === "notifications") return openNotifications();
+      if (a === "ku") return openKuPanel();
       if (a === "more") return openMore();
       if (a === "home") { window.scrollTo(0, 0); var m = root.querySelector(".v3-main"); if (m) m.scrollTo({ top: 0, behavior: "smooth" }); return; }
       if (ACT[a]) ACT[a]();
@@ -1113,6 +1115,60 @@
   }
   function openSheet(html) { var s = sheetEl(); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); document.body.classList.add("hv-sheet-open"); }
   function closeSheet() { var s = sheetEl(); s.classList.remove("on"); document.getElementById("hvScrim").classList.remove("on"); document.body.classList.remove("hv-sheet-open"); }
+
+  // ---- Knowledge Units: header chip + progress panel ----
+  function kuFmt(n) { n = Number(n) || 0; return n >= 1000 ? (Math.round(n / 100) / 10 + "").replace(/\.0$/, "") + "k" : String(n); }
+  function kuInjectCSS() {
+    if (document.getElementById("kuCss")) return;
+    var s = document.createElement("style"); s.id = "kuCss";
+    s.textContent =
+      ".v3-ku{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--hbd,#e2e8f0);background:var(--hpanel,#fff);color:var(--hink,#0f172a);border-radius:999px;padding:5px 10px;font:800 12.5px var(--hfont,system-ui);cursor:pointer;line-height:1}.v3-ku .kudia{color:#f59e0b}"
+      + ".ku-panel{padding:4px 2px 8px}.ku-h{font:800 17px var(--hfont,system-ui);color:var(--hink,#0f172a);margin:2px 0}.ku-bal{font:800 34px/1 var(--hfont,system-ui);color:var(--hink,#0f172a);letter-spacing:-.02em;margin-top:8px}.ku-bal .kudia{color:#f59e0b}.ku-sub{color:var(--hmut,#64748b);font:600 12.5px var(--hfont,system-ui);margin-top:6px}"
+      + ".ku-bar{height:10px;border-radius:999px;background:rgba(100,116,139,.18);overflow:hidden;margin:12px 0 6px}.ku-bar>i{display:block;height:100%;background:linear-gradient(90deg,#f59e0b,#ef8f00)}"
+      + ".ku-tiers{display:flex;flex-direction:column;gap:8px;margin-top:14px}.ku-tier{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:10px 12px;font:600 13px var(--hfont,system-ui);color:var(--hink,#0f172a)}.ku-tier.on{border-color:#f59e0b;background:rgba(245,158,11,.08)}.ku-tier .kt-r{color:var(--hmut,#64748b);font-weight:700}.ku-tier.on .kt-r{color:#b45309}"
+      + ".ku-brk{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.ku-brk span{background:rgba(100,116,139,.1);border-radius:999px;padding:5px 10px;font:600 12px var(--hfont,system-ui);color:var(--hink,#0f172a)}"
+      + ".ku-signin{margin-top:14px;border:0;border-radius:999px;background:#f59e0b;color:#fff;font:800 14px var(--hfont,system-ui);padding:10px 18px;cursor:pointer}"
+      + ".ku-note{color:var(--hmut,#64748b);font:500 11.5px var(--hfont,system-ui);margin-top:16px;line-height:1.45}";
+    document.head.appendChild(s);
+  }
+  function mountKuChip(root) {
+    if (!window.SMD_KU) return;
+    var hdr = root.querySelector(".rnav-head, .v3-header"); if (!hdr || hdr.querySelector(".v3-ku")) return;
+    kuInjectCSS();
+    var chip = document.createElement("button");
+    chip.className = "v3-ku"; chip.setAttribute("data-act", "ku"); chip.setAttribute("aria-label", "Knowledge Points");
+    function paint() { chip.innerHTML = '<span class="kudia">◆</span>' + kuFmt(SMD_KU.balance()); chip.style.display = SMD_KU.signedIn() ? "inline-flex" : "none"; }
+    paint(); try { SMD_KU.onChange(paint); } catch (e) {}
+    var anchor = hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
+    if (anchor) hdr.insertBefore(chip, anchor); else hdr.appendChild(chip);
+    try { SMD_KU.summary(); } catch (e) {}   // refresh balance from server on home mount
+  }
+  function openKuPanel() {
+    kuInjectCSS();
+    if (!window.SMD_KU || !SMD_KU.signedIn()) {
+      openSheet('<div class="ku-panel"><div class="ku-h">Knowledge Points</div><div class="ku-sub">Sign in to start earning Knowledge Units. The more you read and use StewardMD, the more you earn toward subscription discounts.</div><button class="ku-signin" id="kuSignin">Sign in</button></div>');
+      var sb = document.getElementById("kuSignin"); if (sb) sb.addEventListener("click", function () { closeSheet(); try { openMore(); } catch (e) {} });
+      return;
+    }
+    function render(sum) {
+      sum = sum || { balance: SMD_KU.balance(), tiers: [], byType: {}, streak: 0, nextTier: null, progressPct: 0 };
+      var LBL = { read: "Reading", "case": "Cases", calc: "Calculators", maik: "MaiK", streak: "Streak" };
+      var brk = Object.keys(sum.byType || {}).map(function (k) { return '<span>' + (LBL[k] || k) + ': ' + (sum.byType[k] || 0) + '</span>'; }).join("");
+      var tiers = (sum.tiers || []).map(function (t) { return '<div class="ku-tier' + (t.unlocked ? ' on' : '') + '"><span>' + (t.unlocked ? '✓ ' : '') + t.ku + ' KU</span><span class="kt-r">' + t.label + '</span></div>'; }).join("");
+      var goal = sum.nextTier ? ((sum.nextTier.ku - (sum.balance || 0)) + ' KU to ' + sum.nextTier.label) : 'Top tier unlocked 🎉';
+      openSheet('<div class="ku-panel">'
+        + '<div class="ku-h">Knowledge Points</div>'
+        + '<div class="ku-bal"><span class="kudia">◆</span> ' + (sum.balance || 0) + ' <span style="font-size:15px;color:var(--hmut,#64748b)">KU</span></div>'
+        + '<div class="ku-sub">' + (sum.streak ? '🔥 ' + sum.streak + '-day streak · ' : '') + goal + '</div>'
+        + '<div class="ku-bar"><i style="width:' + (sum.progressPct || 0) + '%"></i></div>'
+        + '<div class="ku-tiers">' + tiers + '</div>'
+        + (brk ? '<div class="ku-brk">' + brk + '</div>' : '')
+        + '<div class="ku-note">Earn KU by reading clinical content, running cases &amp; calculators, and using MaiK. Discounts apply at renewal once redemption launches; KU are provisional until verified.</div>'
+        + '</div>');
+    }
+    render(null);   // instant paint from cached balance
+    SMD_KU.summary().then(function (s) { if (s) render(s); }).catch(function () {});
+  }
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
   function openMore() {
     openSheet(
