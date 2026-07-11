@@ -19,8 +19,8 @@
  * ---------------------------------------------------------------------------
  */
 
-import { verifyFirebaseToken } from "../../_fbauth.js";
-import { setUserClaims } from "../../_fbadmin.js";
+import { verifyFirebaseToken } from "../_fbauth.js";
+import { setUserClaims } from "../_fbadmin.js";
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
