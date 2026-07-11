@@ -318,38 +318,48 @@
           first:1,second:1,third:1,line:1,firstline:1,oral:1,orally:1,intravenous:1,parenteral:1,
           dosage:1,duration:1,frequency:1,route:1,routes:1 };
         var distinctive = String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
-        var candId = (hybridIds && hybridIds[0]) || (retrieved[0] && retrieved[0].diseaseId) || null;
-        var candGc = candId ? trimGrounding(_ai.getGroundingContext(candId)) : null;
-        var hay = candGc ? (String(candId) + " " + (candGc.name || "") + " " + JSON.stringify(candGc)).toLowerCase() : "";
         // Coverage-based relevance (gold-next) — replaces the brittle all-or-nothing every() gate.
-        // The old gate required EVERY distinctive token to appear in the nearest topic, so any real
-        // qualifier the KB chunk didn't contain verbatim ("in an adult", "oral", a drug name)
-        // refused an answerable question. Three tiers instead:
-        //   • CONFIDENT  → most distinctive tokens hit, or a token names the topic → answer directly
-        //   • ASSUME     → partial overlap → answer the NEAREST topic under a STATED assumption, and
-        //                  the caller offers one-tap refine chips (mirrors UpToDate Expert AI)
-        //   • NONE       → zero overlap (topic genuinely absent) → do NOT describe a different
-        //                  condition; caller offers opt-in web research (paraquat-vs-paracetamol case)
-        var hit = distinctive.filter(function (t) { return hay.indexOf(t) >= 0; });
-        var coverage = distinctive.length ? hit.length / distinctive.length : 1;
-        // a distinctive token that NAMES the topic is a strong confident signal on its own
-        var nameHit = false, nameToksAll = false;
-        if (candGc && candGc.name) {
-          var nm = String(candGc.name).toLowerCase();
-          nameHit = distinctive.some(function (t) { return t.length >= 5 && nm.indexOf(t) >= 0; });
-          // question contains ALL of the topic's own significant name tokens (typo/lead-in tolerant)
-          var qHay = " " + String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim() + " ";
-          var nameToks = nm.replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
-          nameToksAll = nameToks.length > 0 && nameToks.every(function (t) { return qHay.indexOf(" " + t + " ") >= 0; });
+        // Three tiers: CONFIDENT (answer directly) / ASSUME (nearest topic, stated assumption +
+        // refine chips) / NONE (topic absent → opt-in web research, never describe a wrong disease).
+        //
+        // gold326: evaluate the whole candidate POOL, not just rank-0. With hybrid on the pool is
+        // the RRF-fused lexical+vector order, so a semantically-correct disease the lexical arm
+        // mis-ranked (e.g. "hyperkalemia" losing rank-0 to "Diabetes: Management" for "hyperkalemia
+        // management", because RRF rewards the disease present in BOTH arms) is still tested and
+        // wins the gate on coverage. Without hybrid the pool is just the lexical nearest (unchanged).
+        var candPool = (hybridIds && hybridIds.length)
+          ? hybridIds.slice(0, 8)
+          : (retrieved[0] && retrieved[0].diseaseId ? [retrieved[0].diseaseId] : []);
+        var qHay = " " + String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim() + " ";
+        function evalCand(id) {
+          var gc = id ? trimGrounding(_ai.getGroundingContext(id)) : null;
+          if (!gc) return null;
+          var hay = (String(id) + " " + (gc.name || "") + " " + JSON.stringify(gc)).toLowerCase();
+          var hitT = distinctive.filter(function (t) { return hay.indexOf(t) >= 0; });
+          var cov = distinctive.length ? hitT.length / distinctive.length : 1;
+          var nameHit = false, nameToksAll = false;
+          if (gc.name) {
+            var nm = String(gc.name).toLowerCase();
+            nameHit = distinctive.some(function (t) { return t.length >= 5 && nm.indexOf(t) >= 0; });
+            var nameToks = nm.replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
+            nameToksAll = nameToks.length > 0 && nameToks.every(function (t) { return qHay.indexOf(" " + t + " ") >= 0; });
+          }
+          var conf = distinctive.length === 0 || cov >= 0.6 || nameHit || nameToksAll;
+          return { id: id, gc: gc, hit: hitT, coverage: cov, missing: distinctive.filter(function (t) { return hay.indexOf(t) < 0; }), confident: conf };
         }
-        var confident = !!candGc && (distinctive.length === 0 || coverage >= 0.6 || nameHit || nameToksAll);
-        var missing = distinctive.filter(function (t) { return hay.indexOf(t) < 0; });
-        if (confident) {
+        var evals = candPool.map(evalCand).filter(Boolean);
+        // prefer the highest-ranked CONFIDENT candidate; else the highest-ranked PARTIAL; else rank-0
+        var chosen = evals.filter(function (e) { return e.confident; })[0]
+                  || evals.filter(function (e) { return e.hit.length > 0; })[0]
+                  || evals[0] || null;
+        var candId = chosen ? chosen.id : null;
+        var candGc = chosen ? chosen.gc : null;
+        if (chosen && chosen.confident) {
           grounding = [candGc];
           if (!lead) lead = { id: candId, name: candGc.name || candId };
           if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(candId, hospitalId); } catch (e) {} }
           topicMatch = { matched: true, topic: distinctive.join(" "), grounded: candGc.name || candId };
-        } else if (candGc && hit.length > 0) {
+        } else if (chosen && chosen.hit.length > 0) {
           // partial overlap → keep grounding on the nearest topic so nothing off-KB is invented,
           // but flag it as an ASSUMPTION for the caller to state + let the clinician refine.
           grounding = [candGc];
@@ -357,7 +367,7 @@
           if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(candId, hospitalId); } catch (e) {} }
           topicMatch = { matched: false, mode: "assume", topic: distinctive.join(" ") || String(opts.question).trim(),
             nearest: candGc.name || candId, assume: { id: candId, name: candGc.name || candId },
-            coverage: Math.round(coverage * 100) / 100, missing: missing };
+            coverage: Math.round(chosen.coverage * 100) / 100, missing: chosen.missing };
         } else {
           // topic genuinely not in the KB → drop the near-miss grounding so nothing wrong is described
           grounding = []; lead = null; treatment = null; retrieved = [];
