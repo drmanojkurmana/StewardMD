@@ -220,9 +220,24 @@
     if (signout && !signout._smdWired) {
       signout._smdWired = true;
       signout.addEventListener("click", function () {
+        // "Use a different account" — full teardown so it works for GUESTS too
+        // (guest session lives in stewardmd_account; a bare Firebase signOut left it
+        // intact → reload just resumed guest → button appeared dead). Clear the
+        // account, stop Google auto-select, end any Firebase session, THEN reload to
+        // the sign-in gate. (Don't reload before signOut resolves — that was the race.)
         hideGate();
-        try { var a = auth(); if (a && a.signOut) a.signOut(); } catch (e) {}
-        try { location.reload(); } catch (e) {}
+        try {
+          var g = window.google;
+          if (g && g.accounts && g.accounts.id && g.accounts.id.disableAutoSelect) g.accounts.id.disableAutoSelect();
+        } catch (e) {}
+        try { localStorage.removeItem("stewardmd_account"); } catch (e) {}
+        var a = auth();
+        var p = (a && a.signOut) ? a.signOut() : Promise.resolve();
+        // Reload once signOut settles — but never let a slow/hanging signOut block it.
+        var reloaded = false;
+        function go() { if (reloaded) return; reloaded = true; try { location.reload(); } catch (e) {} }
+        Promise.resolve(p).catch(function () {}).then(go);
+        setTimeout(go, 700);
       });
     }
   }
