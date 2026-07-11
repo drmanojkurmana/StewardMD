@@ -25,7 +25,7 @@
   // Hybrid retrieval (flag smd_hybrid, default OFF). Vector arm = POST /api/retrieve
   // (Workers AI embed → Vectorize). Fully degradation-safe: flag off OR empty/failed
   // vector arm → identical to lexical-only.
-  function smdHybridOn() { try { return localStorage.getItem("smd_hybrid") === "1"; } catch (e) { return false; } }
+  function smdHybridOn() { try { return localStorage.getItem("smd_hybrid") !== "0"; } catch (e) { return true; } }   // default ON (Vectorize index live); set "0" to disable
   function hybridBase() { return window.AI_PROXY ? String(window.AI_PROXY).replace(/\/ai\b/, "/retrieve") : "/api/retrieve"; }
   function vectorDiseaseIds(query, k) {
     var headers = { "Content-Type": "application/json" };
