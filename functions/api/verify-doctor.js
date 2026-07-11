@@ -52,8 +52,8 @@ async function setVerifiedClaim(env, uid, regNo) {
 }
 
 // ── Gemini — read the certificate ─────────────────────────────────────────────
-async function geminiExtract(env, imageB64, mime) {
-  const prompt =
+async function geminiExtract(env, imageB64, mime, mode) {
+  const certPrompt =
     "This is an Indian medical registration certificate (National Medical Commission, a " +
     "State Medical Council, or erstwhile MCI). It may be a scan, a phone photo, or a PDF, " +
     "and the quality may be poor — read it as carefully as you can (OCR).\n" +
@@ -66,6 +66,17 @@ async function geminiExtract(env, imageB64, mime) {
     "- looks_valid: set false ONLY if this is clearly NOT a medical registration document " +
     "(e.g. a random photo, a blank page). If it looks like a registration certificate, true.\n" +
     "- confidence: 0..1 for your overall reading. Use \"\" for any field you cannot read.";
+  // ID mode: read ONLY the person's name. Do NOT extract or return any ID/Aadhaar number,
+  // DOB, or address — we deliberately never touch those.
+  const idPrompt =
+    "This is a government photo identity document (e.g. Aadhaar, PAN, driving licence, voter " +
+    "ID) or a medical-council ID card. Read it as carefully as you can (OCR).\n" +
+    "Return STRICT JSON only, no prose: {\"full_name\": string, \"looks_valid\": boolean, \"confidence\": number}\n" +
+    "- full_name: ONLY the person's full name as printed. Do NOT output the ID number, Aadhaar " +
+    "number, date of birth or address — omit them entirely.\n" +
+    "- looks_valid: false only if this is clearly not an identity document.\n" +
+    "- confidence: 0..1.";
+  const prompt = mode === "id" ? idPrompt : certPrompt;
   const model = env.VERIFY_GEMINI_MODEL || GEMINI_MODEL_DEFAULT;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`;
   let res, data = {}, text = "", httpOk = false;
@@ -91,7 +102,7 @@ async function geminiExtract(env, imageB64, mime) {
   console.log("[verify] gemini raw text:", String(text).slice(0, 400));
   let p; try { p = JSON.parse(text); } catch (e) { const m = text.match(/\{[\s\S]*\}/); p = m ? (function(){ try { return JSON.parse(m[0]); } catch (_) { return {}; } })() : {}; }
   return {
-    regNo: String(p.registration_number || "").trim(),
+    regNo: String(p.registration_number || "").trim(),   // "" in id mode
     name: String(p.full_name || "").trim(),
     council: String(p.state_medical_council || "").trim(),
     year: String(p.year || "").trim(),
@@ -155,17 +166,18 @@ async function signAction(secret, uid, action) {
   return Array.from(sig, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime }) {
+async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime, attach, regNo }) {
   if (!env.RESEND_API_KEY) return;
   const support = env.SUPPORT_EMAIL || "support@stewardmd.in";
   const from = env.FROM_EMAIL || "StewardMD Verify <verify@stewardmd.in>";
   const origin = env.APP_ORIGIN || "https://stewardmd.in";
   const ext = (mime && mime.includes("png")) ? "png" : (mime && mime.includes("pdf")) ? "pdf" : "jpg";
+  const regForAction = regNo || extracted.regNo || "";
 
   // One-click action buttons (signed). Absent if no admin secret configured.
-  let buttons = "<p>Certificate attached. To approve: set custom claim verified:true for this UID.</p>";
+  let buttons = "<p>To approve: set custom claim verified:true for this UID.</p>";
   if (env.VERIFY_ADMIN_TOKEN) {
-    const reg = encodeURIComponent(extracted.regNo || "");
+    const reg = encodeURIComponent(regForAction);
     const approveSig = await signAction(env.VERIFY_ADMIN_TOKEN, uid, "approve");
     const rejectSig  = await signAction(env.VERIFY_ADMIN_TOKEN, uid, "reject");
     const approveUrl = `${origin}/api/verifications/action?uid=${encodeURIComponent(uid)}&do=approve&reg=${reg}&sig=${approveSig}`;
@@ -174,26 +186,29 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
       `<p style="margin:18px 0">` +
       `<a href="${approveUrl}" style="background:#15803d;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui;margin-right:10px">✓ Verify &amp; grant access</a>` +
       `<a href="${rejectUrl}" style="background:#dc2626;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui">✕ Block until re-upload</a>` +
-      `</p><p style="font:400 12px system-ui;color:#64748b">Approve → sets the doctor verified (full access incl. prescriptions). Block → revokes access until they upload a valid certificate again.</p>`;
+      `</p><p style="font:400 12px system-ui;color:#64748b">Approve → sets the doctor verified (full access incl. prescriptions). Block → revokes access until they re-verify.</p>`;
   }
+
+  // ID-path submissions are handled ephemerally: the identity document is NEVER attached or
+  // stored — only the extracted name + the reg number the doctor typed are shown.
+  const idNote = attach ? "" : `<p style="font:400 12px system-ui;color:#b45309">Identity document not attached (ephemeral — never stored, per privacy policy).</p>`;
 
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { "Authorization": `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
+    body: JSON.stringify(Object.assign({
       from, to: [support],
-      subject: `[StewardMD] Manual verification — ${extracted.regNo || email || "unknown"} (${reason})`,
+      subject: `[StewardMD] Manual verification — ${regForAction || email || "unknown"} (${reason})`,
       html:
         `<h2>Doctor verification needs manual review</h2><p><b>Reason:</b> ${reason}</p>` +
         `<table cellpadding="6"><tr><td><b>UID</b></td><td>${uid}</td></tr>` +
         `<tr><td><b>Google email</b></td><td>${email}</td></tr>` +
-        `<tr><td><b>Extracted reg</b></td><td>${extracted.regNo || "—"}</td></tr>` +
-        `<tr><td><b>Extracted name</b></td><td>${extracted.name || "—"}</td></tr>` +
+        `<tr><td><b>Reg no</b></td><td>${regForAction || "—"}</td></tr>` +
+        `<tr><td><b>Name read</b></td><td>${extracted.name || "—"}</td></tr>` +
         `<tr><td><b>Council</b></td><td>${extracted.council || "—"}</td></tr>` +
         `<tr><td><b>Confidence</b></td><td>${extracted.confidence}</td></tr></table>` +
-        buttons,
-      attachments: [{ filename: `cert-${uid}.${ext}`, content: imageB64 }],
-    }),
+        idNote + buttons,
+    }, attach ? { attachments: [{ filename: `cert-${uid}.${ext}`, content: imageB64 }] } : {})),
   });
   if (!res.ok) console.warn("[verify] resend(support) failed:", await res.text());
 }
@@ -251,6 +266,8 @@ export async function onRequest(context) {
   const idToken  = body.idToken || (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
   const imageB64 = String(body.image || "").replace(/^data:[^;]+;base64,/, "");
   const mime     = body.mime || "image/jpeg";
+  const typedReg = String(body.regNo || "").trim();   // present ⇒ ID mode
+  const idMode   = !!typedReg;
   if (!idToken)  return json({ error: "missing_id_token" }, 401);
   if (!imageB64) return json({ error: "missing_image" }, 400);
 
@@ -259,10 +276,11 @@ export async function onRequest(context) {
   if (!uid) return json({ error: "auth_failed" }, 401);
   const email = decodePayload(idToken).email || "";
 
-  // 2. Gemini extraction
-  let ex; try { ex = await geminiExtract(env, imageB64, mime); }
+  // 2. Gemini extraction — certificate (reg+name) or ID (name only)
+  let ex; try { ex = await geminiExtract(env, imageB64, mime, idMode ? "id" : "cert"); }
   catch (e) { ex = { regNo: "", name: "", council: "", year: "", looksValid: false, confidence: 0, httpOk: false }; }
-  console.log("[verify] uid", uid, "extracted:", JSON.stringify({ regNo: ex.regNo, name: ex.name, looksValid: ex.looksValid, confidence: ex.confidence, httpOk: ex.httpOk }));
+  const effReg = idMode ? typedReg : ex.regNo;   // reg used for the NMC lookup
+  console.log("[verify] uid", uid, "mode:", idMode ? "id" : "cert", "extracted:", JSON.stringify({ regNo: ex.regNo, typedReg, name: ex.name, looksValid: ex.looksValid, confidence: ex.confidence, httpOk: ex.httpOk }));
 
   // Provisional access: on manual review the doctor still gets in for 7 days, but the
   // prescription generator stays locked (no verified claim) until approved.
@@ -272,24 +290,26 @@ export async function onRequest(context) {
     const provisionalUntil = new Date(Date.now() + PROVISIONAL_DAYS * 86400000).toISOString();
     try { if (store) await store.put(doctorKey(uid), JSON.stringify({
       uid, email, status: "pending", reason,
-      extractedRegNo: ex.regNo, extractedName: ex.name,
+      extractedRegNo: effReg, extractedName: ex.name,
       provisionalUntil, updatedAt: new Date().toISOString(),
     })); } catch (e) {}
-    try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime }); } catch (e) {}
+    // ID-mode: ephemeral — do NOT attach/store the identity document.
+    try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime, attach: !idMode, regNo: effReg }); } catch (e) {}
     return json({ status: "pending_review", reason, provisionalUntil, provisionalDays: PROVISIONAL_DAYS });
   };
 
-  // 3. decide — the NMC register is authoritative. We do NOT gate on Gemini's self-reported
-  // confidence; if it read a reg number and NMC confirms it (with a matching name), verify.
-  if (ex.looksValid === false) return toManual("not_a_certificate");
-  if (!ex.regNo) return toManual("no_reg_number_read");
+  // 3. decide — the register (live NMC, D1 fallback) is authoritative. In ID mode we match the
+  // name read off the ID against NMC's registered name for the reg number the doctor typed.
+  if (ex.looksValid === false) return toManual(idMode ? "not_an_id" : "not_a_certificate");
+  if (!ex.name)  return toManual("no_name_read");
+  if (!effReg)   return toManual("no_reg_number");
 
-  const core = regCore(ex.regNo);
+  const core = regCore(effReg);
   // Live NMC is primary. If it's unreachable/slow, fall back to the offline D1 mirror so
   // verification still works fast when NMC is down.
   let records, source = "nmc";
   try {
-    records = await nmcLookup(ex.regNo);
+    records = await nmcLookup(effReg);
   } catch (e) {
     console.warn("[verify] NMC unreachable → offline D1 fallback:", String((e && e.message) || e));
     records = await d1Lookup(env, core);
@@ -297,7 +317,7 @@ export async function onRequest(context) {
     if (records === null) return toManual("nmc_unreachable");  // NMC down AND no offline DB
   }
   const match = records.find(r =>
-    (regCore(r.registrationNo) === core || String(r.registrationNo).includes(ex.regNo)) &&
+    (regCore(r.registrationNo) === core || String(r.registrationNo).includes(effReg)) &&
     nameAgrees(ex.name, r.firstName)
   );
   console.log("[verify] uid", uid, "source:", source, "records:", records.length, "core:", core, "match:", match ? match.registrationNo + " / " + match.firstName : "NONE");
@@ -321,10 +341,10 @@ export async function onRequest(context) {
       uid, email, status: "verified", verified: true,
       regNo: match.registrationNo, name: match.firstName, council: match.smcName,
       dob: match.birthDateStr || "", university: match.university || "",
-      source, verifiedAt: new Date().toISOString(),
+      source, via: idMode ? "id" : "cert", verifiedAt: new Date().toISOString(),
     })); } catch (e) {}
   }
-  console.log("[verify] uid", uid, "→ VERIFIED", match.registrationNo, "(" + source + ")");
+  console.log("[verify] uid", uid, "→ VERIFIED", match.registrationNo, "(" + source + "/" + (idMode ? "id" : "cert") + ")");
 
   // Confirmation email to the doctor (best-effort).
   try { await emailVerified(env, { email, name: match.firstName, regNo: match.registrationNo, council: match.smcName }); } catch (e) {}

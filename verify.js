@@ -98,12 +98,9 @@
     var up = $("verifyUploadBlock");
     if (up) up.style.display = verified ? "none" : "";
     if (!verified) {
-      // Reset the upload control to reflect whether a file is currently chosen.
-      var inp = $("verifyFile"), sub2 = $("verifySubmit"), lbl = $("verifyFileLabel"), drp = $("verifyDrop");
-      var hasFile = !!(inp && inp.files && inp.files[0]);
-      if (sub2) { sub2.disabled = false; sub2.textContent = hasFile ? "Verify & continue" : (pending ? "Re-upload certificate" : "Choose certificate"); }
-      if (!hasFile) { if (lbl) lbl.textContent = "📄 " + (pending ? "Upload a clearer certificate" : "Choose your registration certificate"); if (drp) drp.classList.remove("has-file"); }
-      if (pending) { setStatusMsg("pending", "Under review — we'll email you. Uploading a clearer photo/scan often verifies instantly."); }
+      var sub2 = $("verifySubmit"); if (sub2) sub2.disabled = false;
+      syncMode();   // sets labels/button for cert-vs-ID mode + file state
+      if (pending) { setStatusMsg("pending", "Under review — we'll email you. Uploading a clearer photo/scan (or reg number + a photo ID) often verifies instantly."); }
       else { clearStatusMsg(); }
     }
 
@@ -140,14 +137,19 @@
     // No file yet → the button acts as "Choose certificate": open the picker.
     if (!file) { if (input) input.click(); return; }
     var u = fbUser(); if (!u) { setStatusMsg("error", "Session expired — please sign in again."); return; }
+    var regEl = $("verifyRegNo"); var typedReg = regEl ? regEl.value.trim() : "";
     submitting = true;
     var btn = $("verifySubmit"); if (btn) { btn.disabled = true; btn.textContent = "Verifying…"; }
-    setStatusMsg("info", progressHtml("Reading your certificate and checking the National Medical Register…"));
+    setStatusMsg("info", progressHtml(typedReg
+      ? "Reading your ID and checking the register for " + typedReg + "…"
+      : "Reading your certificate and checking the National Medical Register…"));
     try {
       var parts = await Promise.all([fileToB64(file), u.getIdToken()]);
+      var payloadBody = { idToken: parts[1], image: parts[0].b64, mime: parts[0].mime };
+      if (typedReg) payloadBody.regNo = typedReg;   // ID-mode: name-match against this reg no
       var res = await fetch("/api/verify-doctor", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idToken: parts[1], image: parts[0].b64, mime: parts[0].mime })
+        body: JSON.stringify(payloadBody)
       });
       var data = await res.json().catch(function () { return {}; });
       var mode = (gate() && gate().dataset.mode) || "forced";
@@ -185,17 +187,31 @@
     }
   }
 
+  // Reflect ID-mode (a reg number typed) vs certificate-mode in the labels.
+  function syncMode() {
+    var reg = $("verifyRegNo"), label = $("verifyFileLabel"), sub = $("verifyDropSub"),
+        btn = $("verifySubmit"), input = $("verifyFile"), drop = $("verifyDrop");
+    var idMode = !!(reg && reg.value.trim());
+    var hasFile = !!(input && input.files && input.files[0]);
+    if (label && !hasFile) label.textContent = idMode ? "🪪 Choose a photo ID" : "📄 Choose your registration certificate";
+    if (sub) sub.textContent = idMode ? "Any government photo ID · we read only your name · never stored" : "JPG, PNG or PDF · from NMC / State Medical Council";
+    if (btn && !btn.disabled) btn.textContent = hasFile ? (idMode ? "Verify with ID" : "Verify & continue") : (idMode ? "Choose photo ID" : "Choose certificate");
+    if (drop) drop.classList.toggle("has-file", hasFile);
+  }
+
   function wire() {
     var input = $("verifyFile"), drop = $("verifyDrop"), btn = $("verifySubmit"),
-        signout = $("verifySignOut"), label = $("verifyFileLabel"), x = $("verifyClose"), done = $("verifyDoneBtn");
+        signout = $("verifySignOut"), label = $("verifyFileLabel"), x = $("verifyClose"), done = $("verifyDoneBtn"), reg = $("verifyRegNo");
     if (input && !input._smdWired) {
       input._smdWired = true;
       input.addEventListener("change", function () {
         var f = input.files && input.files[0];
-        if (f) { if (label) label.textContent = "📄 " + f.name; if (drop) drop.classList.add("has-file"); if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; } }
-        else { if (label) label.textContent = "📄 Choose your registration certificate"; if (drop) drop.classList.remove("has-file"); if (btn) { btn.disabled = false; btn.textContent = "Choose certificate"; } }
+        if (f) { if (label) label.textContent = "📄 " + f.name; if (drop) drop.classList.add("has-file"); if (btn) btn.disabled = false; }
+        else { if (drop) drop.classList.remove("has-file"); if (btn) btn.disabled = false; }
+        syncMode();
       });
     }
+    if (reg && !reg._smdWired) { reg._smdWired = true; reg.addEventListener("input", syncMode); }
     if (btn && !btn._smdWired) { btn._smdWired = true; btn.addEventListener("click", submit); }
     if (x && !x._smdWired) { x._smdWired = true; x.addEventListener("click", hideGate); }
     if (done && !done._smdWired) { done._smdWired = true; done.addEventListener("click", hideGate); }
