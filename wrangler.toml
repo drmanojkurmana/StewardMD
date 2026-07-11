@@ -1,0 +1,22 @@
+# Cloudflare Pages config — declares the Functions bindings the hybrid-retrieval
+# vector arm needs. StewardMD is a STATIC site (no build step) served from the repo
+# root, so pages_build_output_dir is ".". Adding this file makes the git deploy read
+# it for bindings; it does NOT change what is served (root, exactly as today).
+#
+# ⚠️ Before merging: confirm in the Pages dashboard that the project's build output
+# directory is the repo root (it is for this static site). If a preview deploy serves
+# the app correctly, production will too.
+#
+# Bindings consumed by functions/api/retrieve/[[path]].js (fail-safe: absent → {matches:[]}).
+name = "stewardmd"
+pages_build_output_dir = "."
+compatibility_date = "2025-01-01"
+
+# Workers AI — query embedding (bge-base-en-v1.5, 768-d)
+[ai]
+binding = "AI"
+
+# Vectorize — KB chunk vectors (index created: `wrangler vectorize create stewardmd-kb --dimensions=768 --metric=cosine`)
+[[vectorize]]
+binding = "KB_VECTORIZE"
+index_name = "stewardmd-kb"
