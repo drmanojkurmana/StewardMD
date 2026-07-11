@@ -92,7 +92,14 @@
 
     var up = $("verifyUploadBlock");
     if (up) up.style.display = (verified || pending) ? "none" : "";
-    if (!verified && !pending) clearStatusMsg();
+    if (!verified && !pending) {
+      clearStatusMsg();
+      // Reset the upload control to reflect whether a file is currently chosen.
+      var inp = $("verifyFile"), sub = $("verifySubmit"), lbl = $("verifyFileLabel"), drp = $("verifyDrop");
+      var hasFile = !!(inp && inp.files && inp.files[0]);
+      if (sub) { sub.disabled = false; sub.textContent = hasFile ? "Verify & continue" : "Choose certificate"; }
+      if (!hasFile) { if (lbl) lbl.textContent = "📄 Choose your registration certificate"; if (drp) drp.classList.remove("has-file"); }
+    }
 
     var closable = mode !== "forced";
     var x = $("verifyClose"); if (x) x.style.display = closable ? "" : "none";
@@ -124,7 +131,8 @@
   async function submit() {
     if (submitting) return;
     var input = $("verifyFile"); var file = input && input.files && input.files[0];
-    if (!file) return;
+    // No file yet → the button acts as "Choose certificate": open the picker.
+    if (!file) { if (input) input.click(); return; }
     var u = fbUser(); if (!u) { setStatusMsg("error", "Session expired — please sign in again."); return; }
     submitting = true;
     var btn = $("verifySubmit"); if (btn) btn.disabled = true;
@@ -163,8 +171,8 @@
       input._smdWired = true;
       input.addEventListener("change", function () {
         var f = input.files && input.files[0];
-        if (f) { if (label) label.textContent = "📄 " + f.name; if (drop) drop.classList.add("has-file"); if (btn) btn.disabled = false; }
-        else { if (drop) drop.classList.remove("has-file"); if (btn) btn.disabled = true; }
+        if (f) { if (label) label.textContent = "📄 " + f.name; if (drop) drop.classList.add("has-file"); if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; } }
+        else { if (label) label.textContent = "📄 Choose your registration certificate"; if (drop) drop.classList.remove("has-file"); if (btn) { btn.disabled = false; btn.textContent = "Choose certificate"; } }
       });
     }
     if (btn && !btn._smdWired) { btn._smdWired = true; btn.addEventListener("click", submit); }
