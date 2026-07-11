@@ -20,7 +20,7 @@
  * ----------------------------------------------------------------------------
  */
 
-import { requirePro } from "./auth.js";
+import { verifyFirebaseToken } from "./auth.js";
 
 const ALLOWED_ORIGINS = [
   "https://stewardmd.in", "https://www.stewardmd.in",
@@ -291,14 +291,14 @@ async function handleHealth(env) {
 
 // ---- Paid-only offline database download (served from R2). Gate: Firebase token + pro claim (src/auth.js). ----
 async function handleOfflineDbVersion(request, env) {
-  try { await requirePro(request, env); } catch (e) { return json({ error: e.message }, { status: e.status || 401 }); }
+  try { await verifyFirebaseToken(request, env); } catch (e) { return json({ error: e.message }, { status: e.status || 401 }); }
   if (!env.OFFLINE_BUCKET) return json({ error: "offline_unavailable" }, { status: 503 });
   const obj = await env.OFFLINE_BUCKET.get("version.json");
   if (!obj) return json({ error: "not_found" }, { status: 404 });
   return new Response(obj.body, { status: 200, headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" } });
 }
 async function handleOfflineDb(request, env) {
-  try { await requirePro(request, env); } catch (e) { return json({ error: e.message }, { status: e.status || 401 }); }
+  try { await verifyFirebaseToken(request, env); } catch (e) { return json({ error: e.message }, { status: e.status || 401 }); }
   if (!env.OFFLINE_BUCKET) return json({ error: "offline_unavailable" }, { status: 503 });
   const obj = await env.OFFLINE_BUCKET.get("stewardmd-drugs.sqlite.gz");
   if (!obj) return json({ error: "not_found" }, { status: 404 });
