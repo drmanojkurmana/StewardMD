@@ -14,6 +14,21 @@
  * ---------------------------------------------------------------------------
  */
 import { setUserClaims } from "../../_fbadmin.js";
+import { verifyFirebaseToken } from "../../_fbauth.js";
+
+// Owners who may manage verifications (by Google account email). Override via env.OWNER_EMAILS
+// (comma-separated). Kept in sync with the intent of the app's team allowlist.
+const OWNER_EMAILS_DEFAULT = ["drmanojkurmana@gmail.com", "northstar201b@gmail.com", "mkkmanojkumar0@gmail.com"];
+function ownerEmails(env) {
+  return (env.OWNER_EMAILS ? String(env.OWNER_EMAILS).split(",") : OWNER_EMAILS_DEFAULT)
+    .map((s) => s.trim().toLowerCase()).filter(Boolean);
+}
+function emailFromToken(idToken) {
+  try {
+    const p = String(idToken).split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+    return String(JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(p), (c) => c.charCodeAt(0)))).email || "").toLowerCase();
+  } catch (e) { return ""; }
+}
 
 function kv(env) { return env.CASES_KV || env.GHIS_KV || null; }
 const DOCTOR_PREFIX = "icu:doctor:";
@@ -24,14 +39,31 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
 });
 
-// admin token check → true/false, or null when not configured
-function adminOK(request, env) {
+// Legacy admin-token check (kept as a fallback) → true/false, or null when not configured.
+function tokenOK(request, env) {
   const want = env.VERIFY_ADMIN_TOKEN || "";
   if (!want) return null;
   const got = request.headers.get("X-Admin-Token") || "";
   if (got.length !== want.length) return false;
   let d = 0; for (let i = 0; i < got.length; i++) d |= got.charCodeAt(i) ^ want.charCodeAt(i);
   return d === 0;
+}
+
+// Authorised = an OWNER signed in with Google (Authorization: Bearer <Firebase ID token>,
+// email in the owner allowlist), OR the legacy admin token. Returns
+// { ok, who } — who is the email/'token' for logging, or "" if unauthorised.
+async function authOK(request, env) {
+  const bearer = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  if (bearer) {
+    const uid = await verifyFirebaseToken(bearer, env);
+    if (uid) {
+      const email = emailFromToken(bearer);
+      if (email && ownerEmails(env).indexOf(email) > -1) return { ok: true, who: email };
+      return { ok: false, who: email || "signed-in" };  // valid Google user but not an owner
+    }
+  }
+  if (tokenOK(request, env) === true) return { ok: true, who: "token" };
+  return { ok: false, who: "" };
 }
 
 // HMAC verify for one-click email action links (uid|action signed with VERIFY_ADMIN_TOKEN).
@@ -113,9 +145,8 @@ export async function onRequest(context) {
     } catch (e) { return htmlPage("Something went wrong", String((e && e.message) || e)); }
   }
 
-  const ok = adminOK(request, env);
-  if (ok === null) return json({ error: "admin-not-configured", detail: "set VERIFY_ADMIN_TOKEN" }, 503);
-  if (!ok) return json({ error: "unauthorised" }, 401);
+  const auth = await authOK(request, env);
+  if (!auth.ok) return json({ error: "unauthorised", detail: auth.who ? "not an owner account" : "sign in as an owner" }, 401);
   if (!store) return json({ error: "no-store", detail: "CASES_KV/GHIS_KV not bound" }, 501);
 
   try {

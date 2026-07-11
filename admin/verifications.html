@@ -43,11 +43,12 @@
   <div class="wrap">
 
     <div class="card">
-      <div class="tokrow">
-        <div><label for="tok">Admin token</label><input id="tok" type="password" placeholder="VERIFY_ADMIN_TOKEN" autocomplete="off"></div>
-        <button class="ghost" id="saveTok">Save</button>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="flex:1"><div id="authState" class="hint">Checking sign-in…</div></div>
+        <button class="ghost" id="signInBtn" style="display:none">Sign in with Google</button>
+        <button class="ghost" id="signOutBtn" style="display:none">Sign out</button>
       </div>
-      <div class="hint" style="margin-top:8px">Stored only in this browser. Must match the <code>VERIFY_ADMIN_TOKEN</code> secret in Cloudflare Pages.</div>
+      <div class="hint" style="margin-top:8px">Owner-only. Sign in with your Google account — it must be an approved owner (<code>OWNER_EMAILS</code>).</div>
     </div>
 
     <div class="card">
@@ -66,17 +67,26 @@
     </div>
   </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>
 (function(){
-  var API="/api/verifications", TK="smd_verify_admin_token";
+  var API="/api/verifications";
   var $=function(id){return document.getElementById(id);};
   var filter="pending";
-  try{ $("tok").value=localStorage.getItem(TK)||""; }catch(e){}
-  $("saveTok").onclick=function(){ try{localStorage.setItem(TK,$("tok").value.trim());}catch(e){} load(); };
-  function token(){ return ($("tok").value||"").trim(); }
+  var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
+  var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
+
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-  function hdr(){ return {"X-Admin-Token":token()}; }
   function say(k,t){ var m=$("msg"); m.className="msg "+(k||""); m.textContent=t||""; }
+  function currentToken(){ var u=auth&&auth.currentUser; return u?u.getIdToken():Promise.resolve(null); }
+
+  function signedInUI(user){
+    if(user){ $("authState").innerHTML='Signed in as <b>'+esc(user.email||user.displayName||"account")+'</b>'; $("signInBtn").style.display='none'; $("signOutBtn").style.display=''; }
+    else { $("authState").textContent='Not signed in.'; $("signInBtn").style.display=''; $("signOutBtn").style.display='none'; }
+  }
+  $("signInBtn").onclick=function(){ if(!auth)return; auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(e){ say("err","Sign-in failed: "+((e&&e.message)||e)); }); };
+  $("signOutBtn").onclick=function(){ if(auth) auth.signOut(); };
 
   $("filters").addEventListener("click",function(e){
     var b=e.target.closest("[data-f]"); if(!b)return;
@@ -86,16 +96,17 @@
   });
 
   function act(path,uid,extra){
-    if(!token()){ say("err","Enter your admin token first."); return; }
-    var body=Object.assign({uid:uid},extra||{});
-    fetch(API+"/"+path,{method:"POST",headers:Object.assign({"Content-Type":"application/json"},hdr()),body:JSON.stringify(body)})
-      .then(function(r){return r.json().then(function(d){return{s:r.status,d:d};});})
-      .then(function(x){
-        if(x.s===200&&x.d.ok){ say("ok","✅ "+path+" done for "+uid); load(); }
-        else if(x.s===401){ say("err","Wrong admin token."); }
-        else if(x.s===503){ say("err","Server has no VERIFY_ADMIN_TOKEN set."); }
-        else { say("err","Failed: "+(x.d.error||x.s)); }
-      }).catch(function(){ say("err","Network error."); });
+    currentToken().then(function(tok){
+      if(!tok){ say("err","Sign in with Google first."); return; }
+      var body=Object.assign({uid:uid},extra||{});
+      fetch(API+"/"+path,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+tok},body:JSON.stringify(body)})
+        .then(function(r){return r.json().then(function(d){return{s:r.status,d:d};});})
+        .then(function(x){
+          if(x.s===200&&x.d.ok){ say("ok","✅ "+path+" done for "+uid); load(); }
+          else if(x.s===401){ say("err","Your account isn't an approved owner."); }
+          else { say("err","Failed: "+(x.d.error||x.s)); }
+        }).catch(function(){ say("err","Network error."); });
+    });
   }
 
   function row(d){
@@ -116,22 +127,25 @@
 
   function load(){
     var el=$("list");
-    if(!token()){ el.innerHTML='<div class="hint">Enter your token and Reload.</div>'; return; }
-    el.innerHTML='<div class="hint">Loading…</div>'; say("","");
-    fetch(API+"?status="+encodeURIComponent(filter),{headers:hdr()})
-      .then(function(r){return r.json().then(function(d){return{s:r.status,d:d};});})
-      .then(function(x){
-        if(x.s===401){ el.innerHTML='<div class="hint">Wrong admin token.</div>'; return; }
-        if(x.s===503){ el.innerHTML='<div class="hint">Server has no VERIFY_ADMIN_TOKEN set.</div>'; return; }
-        var docs=(x.d&&x.d.doctors)||[];
-        if(!docs.length){ el.innerHTML='<div class="hint">No '+esc(filter)+' verifications.</div>'; return; }
-        el.innerHTML=docs.map(row).join("");
-        Array.prototype.forEach.call(el.querySelectorAll("[data-approve]"),function(b){ b.onclick=function(){ act("approve",b.getAttribute("data-approve"),{regNo:b.getAttribute("data-reg")}); }; });
-        Array.prototype.forEach.call(el.querySelectorAll("[data-reject]"),function(b){ b.onclick=function(){ if(confirm("Reject this doctor?")) act("reject",b.getAttribute("data-reject")); }; });
-      }).catch(function(){ el.innerHTML='<div class="hint">Could not load.</div>'; });
+    currentToken().then(function(tok){
+      if(!tok){ el.innerHTML='<div class="hint">Sign in with Google to manage verifications.</div>'; return; }
+      el.innerHTML='<div class="hint">Loading…</div>'; say("","");
+      fetch(API+"?status="+encodeURIComponent(filter),{headers:{"Authorization":"Bearer "+tok}})
+        .then(function(r){return r.json().then(function(d){return{s:r.status,d:d};});})
+        .then(function(x){
+          if(x.s===401){ el.innerHTML='<div class="hint">Your account isn\'t an approved owner (OWNER_EMAILS).</div>'; return; }
+          var docs=(x.d&&x.d.doctors)||[];
+          if(!docs.length){ el.innerHTML='<div class="hint">No '+esc(filter)+' verifications.</div>'; return; }
+          el.innerHTML=docs.map(row).join("");
+          Array.prototype.forEach.call(el.querySelectorAll("[data-approve]"),function(b){ b.onclick=function(){ act("approve",b.getAttribute("data-approve"),{regNo:b.getAttribute("data-reg")}); }; });
+          Array.prototype.forEach.call(el.querySelectorAll("[data-reject]"),function(b){ b.onclick=function(){ if(confirm("Reject this doctor? They'll be blocked until they upload a valid certificate again.")) act("reject",b.getAttribute("data-reject")); }; });
+        }).catch(function(){ el.innerHTML='<div class="hint">Could not load.</div>'; });
+    });
   }
   $("reload").onclick=load;
-  if(token()) load();
+
+  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u) load(); else $("list").innerHTML='<div class="hint">Sign in with Google to manage verifications.</div>'; }); }
+  else { $("authState").textContent="Firebase failed to load."; }
 })();
 </script>
 </body>
