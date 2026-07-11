@@ -586,3 +586,9 @@ html body.rds-on .app-head .dx-launch .rds-icon, html body.rds-on .app-head .my-
   box-shadow: var(--rds-el-cta); box-sizing: border-box;
 }
 #homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); line-height: 1; }
+
+/* Home tiles v4: top-align icons + reserve a 2-line label area so tiles with 1-line
+   and 2-line labels (Scan Meds / Ward Sync) are identical and icons line up. */
+#homeV2.rnav .rnav-qa-btn, #homeV2.rnav .rnav-qc { height: 88px; justify-content: flex-start; padding: 13px 4px 8px; gap: 7px; }
+#homeV2.rnav .rnav-qa-btn .rds-icon, #homeV2.rnav .rnav-qc .rds-icon { flex: 0 0 auto; }
+#homeV2.rnav .rnav-qa-btn > span, #homeV2.rnav .rnav-qc > span { display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.12; min-height: 2.24em; width: 100%; }

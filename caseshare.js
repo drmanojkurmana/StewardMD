@@ -98,6 +98,19 @@
     for (var i = 0; i < checks.length; i++) if (checks[i][0].test(s)) return checks[i][1];
     return null;
   }
+  // De-identify for a PUBLIC share: instead of blocking, STRIP any detected identifier
+  // from the shared copy so the case can always be shared safely. High-precision IDs
+  // (MRN/phone/Aadhaar/email) are removed whole; a labelled patient name keeps its label
+  // but the name tokens are redacted. Clinical text is otherwise untouched.
+  function phiRedact(str){
+    var s = String(str || "");
+    s = s.replace(/\b(?:mrn|uhid|uid|(?:ip|op|reg|regn|registration|hosp|hospital)\s*\.?\s*(?:no|number))[:#.\s-]*[a-z0-9]*\d[a-z0-9]*/ig, "[ID removed]");
+    s = s.replace(/(?:\+?91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}\b/g, "[phone removed]");
+    s = s.replace(/\b\d{4}\s?\d{4}\s?\d{4}\b/g, "[ID removed]");
+    s = s.replace(/\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b/ig, "[email removed]");
+    s = s.replace(/\b(patient(?:'?s)?(?:\s*name)?|pt)(\s*[:#.\-]\s*)([a-z][a-z.'-]+(?:\s+[a-z][a-z.'-]+)+)/ig, "$1$2[name removed]");
+    return s;
+  }
 
   // ---- create a share ----
   // Native fallback: share the case as plain text via the iOS share sheet.
@@ -111,7 +124,12 @@
     var snap = currentSnapshot();
     if (!snap) { toast("Generate a clinical decision first."); return; }
     var _phi = phiScan((snap.text || "") + " " + (snap.title || ""));
-    if (_phi) { toast("Can\u2019t share \u2014 remove the " + _phi + " first. Shared links are PUBLIC; never include names, MRN/UHID, phone, email or ID numbers."); return; }
+    if (_phi) {
+      snap.text = phiRedact(snap.text || "");
+      snap.title = phiRedact(snap.title || "");
+      if (snap.html) snap.html = phiRedact(snap.html);
+      toast("Removed patient identifiers (" + _phi + ") before sharing — links are PUBLIC.");
+    }
     toast("Preparing share…");
     ensureReady(function(db, user){
       if (!db) { try { console.error("[CASESHARE] no DB. firebase=", !!window.firebase, "firebase.firestore=", !!(window.firebase && window.firebase.firestore), "SMD_DB=", !!window.SMD_DB); } catch (e) {} toast("Cloud unavailable — reload once & try again."); return; }
