@@ -52,15 +52,15 @@ applyEvents(s, [{ type: "read", refId: "a" }], D3); eq("streak gap resets to 1",
 eq("streak KU counted", s.byType.streak, STREAK_KU * 3);
 
 // summarize tiers + progress
-let sm = summarize({ balance: 600, byType: {}, streakDays: 4, day: D1, seen: {}, dayTotals: {}, lastDay: D1 });
-eq("summary balance", sm.balance, 600);
+let sm = summarize({ balance: 6000, byType: {}, streakDays: 4, day: D1, seen: {}, dayTotals: {}, lastDay: D1 });
+eq("summary balance", sm.balance, 6000);
 eq("summary streak", sm.streak, 4);
-ok("tier 500 unlocked", sm.tiers.find(t => t.ku === 500).unlocked === true);
-ok("tier 1500 locked", sm.tiers.find(t => t.ku === 1500).unlocked === false);
-eq("nextTier is 1500", sm.nextTier.ku, 1500);
-// 600 of the way from 500→1500 = (600-500)/(1500-500) = 10%
+ok("tier 5000 unlocked", sm.tiers.find(t => t.ku === 5000).unlocked === true);
+ok("tier 15000 locked", sm.tiers.find(t => t.ku === 15000).unlocked === false);
+eq("nextTier is 15000", sm.nextTier.ku, 15000);
+// 6000 of the way from 5000→15000 = (6000-5000)/(15000-5000) = 10%
 eq("progressPct 10", sm.progressPct, 10);
-let smMax = summarize({ balance: 5000, byType: {}, streakDays: 1, day: D1, seen: {}, dayTotals: {}, lastDay: D1 });
+let smMax = summarize({ balance: 30000, byType: {}, streakDays: 1, day: D1, seen: {}, dayTotals: {}, lastDay: D1 });
 eq("all unlocked → nextTier null", smMax.nextTier, null);
 eq("progress 100 when maxed", smMax.progressPct, 100);
 
