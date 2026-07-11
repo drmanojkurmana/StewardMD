@@ -2703,6 +2703,18 @@
     var system = (syn && syn.system) || (ni && ni.system) || (H && H.system) || "";
     var inf = !!syn || !!(H && H.class === "infective");
     var reason = (ni && ni.reason) || "";
+    // Curated management brief (DX_MGMT). Infective REFERENCE diseases (no classic SYNDROMES
+    // stewardship case) previously routed to a BLANK stewardship page — render their antimicrobial
+    // brief INLINE here instead, and drop the dead "stewardship" button.
+    var dm = (window.DX_MGMT || {})[id];
+    var refInf = inf && !syn;
+    var hasBrief = !!(dm && dm.tx && dm.tx.length);
+    var mgmtHtml = (refInf && hasBrief)
+      ? ('<div class="dx-mgmt-sec tx">💊 Management / Treatment</div><ol class="dx-mgmt-tx">' + dm.tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
+         + (dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '')
+         + (dm.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(dm.dispo) + '</p>' : '')
+         + (dm.src ? '<div class="dx-mgmt-src">Source: ' + esc(dm.src) + '</div>' : ''))
+      : "";
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">‹ Back</button></div>' +
@@ -2711,8 +2723,9 @@
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
+        mgmtHtml +
         (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
-        '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>' +
+        (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
         '<div class="dx-mgmt-disc">⚠️ Decision-support only — reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
       '</div>';
     el.classList.add("on"); el.scrollTop = 0;
