@@ -3,7 +3,10 @@
  * window.SMD_RX = { open(ctx), canPrescribe() }
  *  - Doses/brands come DB-FIRST from the Drug Index (window.MEDDRUGS._list) via the
  *    pure rx-build.mjs core; gaps are flagged "⚠ confirm", never silently invented.
- *  - Requires the prescriber's NMC registration number before any Rx (blocks + prompts).
+ *  - Gated by the Doctor Verification system (verify.js / window.SMD_VERIFY): ONLY doctors
+ *    verified against the National Medical Register may prescribe, and the Rx carries their
+ *    VERIFIED registration number. Unverified → routed to the verification panel. (Manual
+ *    NMC entry remains only as a fallback when the gate isn't present, e.g. local dev.)
  *  - Output: an editable on-screen Rx + print/PDF (window.print) with a signature block.
  *  - A DRAFT the prescriber reviews, edits and signs — the doctor is responsible.
  * Patient name/age are optional and NEVER persisted (typed onto the printout only).
@@ -18,11 +21,37 @@
     try { var a = JSON.parse(localStorage.getItem("stewardmd_account") || "null"); if (a && (a.name || a.displayName)) return a.name || a.displayName; } catch (e) {}
     return "";
   }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  // ── Doctor Verification gate (verify.js → window.SMD_VERIFY) is the source of truth ──
+  // Only doctors VERIFIED against the National Medical Register may prescribe, and the Rx
+  // carries their VERIFIED registration number (minted into the Firebase claim {verified,
+  // regNo}), never a self-typed one. If the gate isn't present on this build (e.g. local
+  // dev before verify.js ships), we fall back to a manual NMC entry so the pad still works.
+  function fbUser() { try { return (window.firebase && firebase.auth && firebase.auth().currentUser) || null; } catch (e) { return null; } }
+  var _vcache = null;   // last known { verified, regNo }
+  function verifiedInfo() {
+    if (!window.SMD_VERIFY || !window.SMD_VERIFY.isVerified) return Promise.resolve(null);   // gate absent → caller falls back
+    return window.SMD_VERIFY.isVerified().then(function (v) {
+      if (!v) return (_vcache = { verified: false, regNo: "" });
+      var u = fbUser();
+      if (!(u && u.getIdTokenResult)) return (_vcache = { verified: true, regNo: "" });
+      return u.getIdTokenResult().then(function (r) {
+        var rn = (r && r.claims && r.claims.regNo) || "";
+        if (rn) return (_vcache = { verified: true, regNo: rn });
+        // team-allowlist or claim without regNo → ask the gate's status endpoint
+        return u.getIdToken().then(function (tok) {
+          return fetch("/api/verify-doctor", { headers: { "Authorization": "Bearer " + tok } }).then(function (x) { return x.json(); })
+            .then(function (d) { return (_vcache = { verified: true, regNo: (d && d.regNo) || "" }); });
+        }).catch(function () { return (_vcache = { verified: true, regNo: "" }); });
+      }).catch(function () { return (_vcache = { verified: true, regNo: "" }); });
+    }).catch(function () { return { verified: false, regNo: "" }; });
+  }
+  // Manual-entry fallback (only used when the verification gate is not on this build).
   function nmcKey() { return "stewardmd_nmc_reg_" + uid(); }
   function getNmc() { try { return (localStorage.getItem(nmcKey()) || "").trim(); } catch (e) { return ""; } }
   function setNmc(v) { try { localStorage.setItem(nmcKey(), String(v || "").trim()); } catch (e) {} }
-  function canPrescribe() { return !!getNmc(); }
-  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function canPrescribe() { return window.SMD_VERIFY ? !!(_vcache && _vcache.verified) : !!getNmc(); }
 
   function injectCSS() {
     if (document.getElementById("rxCss")) return;
@@ -85,7 +114,7 @@
       '</div>';
   }
 
-  function renderRx(topic, lines) {
+  function renderRx(topic, lines, regNo) {
     var now = new Date();
     var date = now.toISOString().slice(0, 10);
     var body =
@@ -96,7 +125,7 @@
       '<div class="rx-symbol">℞</div>' +
       '<div id="rxLines">' + lines.map(lineHTML).join("") + '</div>' +
       '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn rx-print" id="rxPrint">🖨 Print / PDF</button></div>' +
-      '<div class="rx-sign">Dr. ' + esc(docName() || "—") + '<br><small>NMC Reg: ' + esc(getNmc()) + ' · ' + esc(date) + '</small></div>';
+      '<div class="rx-sign">Dr. ' + esc(docName() || "—") + '<br><small>NMC Reg: ' + esc(regNo || "—") + ' · ' + esc(date) + '</small></div>';
     show(body);
     sheet.querySelector("#rxX").addEventListener("click", close);
     sheet.querySelector("#rxAdd").addEventListener("click", function () {
@@ -122,18 +151,38 @@
     });
   }
 
-  function open(ctx) {
-    ensureEls();
-    if (!canPrescribe()) { window.__rxPending = ctx || {}; gate(); return; }
-    var reg = (ctx && ctx.regimen) || regimenFromCtx(ctx);
-    var drugList = (window.MEDDRUGS && window.MEDDRUGS._list) || [];
-    import("/rx-build.mjs?v=gold320").then(function (m) {
-      var lines = m.buildRxLines(reg, drugList);
-      renderRx(ctx && ctx.topic, lines);
-    }).catch(function () {
-      renderRx(ctx && ctx.topic, reg.map(function (r) { return { drug: r.name, brand: null, dose: r.dose || null, freq: null, duration: null, unverified: !r.isAdvice, isAdvice: !!r.isAdvice }; }));
-    });
+  // Verified-doctors-only prompt (shown when the gate is present but the user isn't verified).
+  function verifyRequired() {
+    show('<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">✕</button></div>' +
+      '<div class="rx-gate">Only <b>verified doctors</b> can create prescriptions. Verify your medical registration once — the pad then opens with your <b>registered number</b> printed on every Rx.</div>' +
+      '<div class="rx-row"><button class="rx-btn rx-print" id="rxVerify">Verify my registration</button></div>');
+    sheet.querySelector("#rxX").addEventListener("click", close);
+    sheet.querySelector("#rxVerify").addEventListener("click", function () { close(); try { window.SMD_VERIFY.openPanel(); } catch (e) {} });
   }
 
-  window.SMD_RX = { open: open, canPrescribe: canPrescribe, _getNmc: getNmc, _setNmc: setNmc };
+  function open(ctx) {
+    ensureEls();
+    var reg = (ctx && ctx.regimen) || regimenFromCtx(ctx);
+    var drugList = (window.MEDDRUGS && window.MEDDRUGS._list) || [];
+    function build(regNo) {
+      import("/rx-build.mjs?v=gold321").then(function (m) {
+        renderRx(ctx && ctx.topic, m.buildRxLines(reg, drugList), regNo);
+      }).catch(function () {
+        renderRx(ctx && ctx.topic, reg.map(function (r) { return { drug: r.name, brand: null, dose: r.dose || null, freq: null, duration: null, unverified: !r.isAdvice, isAdvice: !!r.isAdvice }; }), regNo);
+      });
+    }
+    // PRIMARY: gate on the Doctor Verification system; Rx carries the VERIFIED reg number.
+    if (window.SMD_VERIFY) {
+      verifiedInfo().then(function (info) {
+        if (!info || !info.verified) { verifyRequired(); return; }
+        build(info.regNo || "");
+      }).catch(function () { verifyRequired(); });
+      return;
+    }
+    // FALLBACK: gate not on this build → manual NMC entry (dev/rollout only).
+    if (!canPrescribe()) { window.__rxPending = ctx || {}; gate(); return; }
+    build(getNmc());
+  }
+
+  window.SMD_RX = { open: open, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc };
 })();
