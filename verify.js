@@ -68,6 +68,8 @@
   // Render the overlay for a given mode. forced=true → hard block (no close).
   function render(mode, data) {
     var g = gate(); if (!g) return;
+    wire();   // idempotent — ensures ✕/buttons are wired on EVERY show path (incl. guest/panel,
+              // where evaluate()'s sign-in-gated wire() never ran → ✕ did nothing).
     g.dataset.mode = mode;
     var verified = data && data.status === "verified";
     var pending  = data && data.status === "pending";
