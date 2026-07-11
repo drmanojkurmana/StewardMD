@@ -1,9 +1,9 @@
-/* StewardMD — native push notifications (Capacitor).
+/* StewardMD - native push notifications (Capacitor).
  * ---------------------------------------------------------------------------
  * Web Push does NOT work inside the iOS Capacitor WebView, so the native apps
  * use @capacitor/push-notifications (APNs on iOS, FCM on Android). This module
  * registers the device, sends its token to /api/push/register-native, and routes
- * taps. On the WEB build (`native` false) it is a NO-OP — web push in home.js
+ * taps. On the WEB build (`native` false) it is a NO-OP - web push in home.js
  * continues to handle browsers/PWAs.
  *
  * Loads after native-bridge.js (so /api/* is rewritten to the live host) and
@@ -21,7 +21,7 @@
   var native = !!(C && (typeof C.isNativePlatform === "function" ? C.isNativePlatform() : (C.platform && C.platform !== "web")));
 
   // Route a notification's url. A background lab-watch alert deep-links to /?ghisPatient=<id>;
-  // when Ward Sync is loaded, open that patient in-place (no reload). Otherwise navigate — the
+  // when Ward Sync is loaded, open that patient in-place (no reload). Otherwise navigate - the
   // ghis-ward deep-link handler opens it on load (covers cold-start taps).
   function routeUrl(url) {
     try {
@@ -56,7 +56,7 @@
         n.onclick = function () { try { routeUrl(url); window.focus(); } catch (e) {} };
         return;
       }
-      if (window.SMD_toast) window.SMD_toast((title ? title + " — " : "") + (body || ""));
+      if (window.SMD_toast) window.SMD_toast((title ? title + " - " : "") + (body || ""));
     } catch (e) { try { if (window.SMD_toast) window.SMD_toast(body || title || "New lab"); } catch (x) {} }
   };
 
@@ -98,19 +98,19 @@
     P.addListener("registrationError", function (e) {
       try { console.warn("[StewardMD] push registration error:", e && (e.error || e)); } catch (x) {}
     });
-    // Foreground receipt (OS may not show a banner while the app is open) — surface it in-app.
+    // Foreground receipt (OS may not show a banner while the app is open) - surface it in-app.
     P.addListener("pushNotificationReceived", function (n) {
       try {
         // FOREGROUND receipt. Android/FCM does NOT show a tray banner while the app is open
-        // (iOS suppresses it too by default) — the OS only auto-displays when backgrounded, and
+        // (iOS suppresses it too by default) - the OS only auto-displays when backgrounded, and
         // this handler ONLY fires in the foreground. So re-raise it as a LOCAL notification, which
-        // manages its own channel — the doctor gets a real banner on Android even with the app open.
+        // manages its own channel - the doctor gets a real banner on Android even with the app open.
         var d = (n && n.data) || {};
         var title = (n && n.title) || d.title || "StewardMD";
         var body = (n && n.body) || d.body || "New update";
         var url = d.url || d.URL || "/";
         if (window.SMD_localNotify) window.SMD_localNotify(title, body, url);
-        else if (window.SMD_toast) window.SMD_toast(title + " — " + body);
+        else if (window.SMD_toast) window.SMD_toast(title + " - " + body);
         if (window.SMD_refreshNotifBadge) window.SMD_refreshNotifBadge();
       } catch (x) {}
     });
@@ -173,7 +173,7 @@
 
   // Re-register when the signed-in account changes, so the device's token is
   // re-scoped to the current doctor (and un-scoped to guest on sign-out). This is
-  // what keeps lab alerts account-specific — only the doctor watching a patient
+  // what keeps lab alerts account-specific - only the doctor watching a patient
   // gets that patient's alerts. Attaches once SMD_AUTH is available.
   (function attachAuth(tries) {
     try {

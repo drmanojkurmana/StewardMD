@@ -1,4 +1,4 @@
-/* StewardMD — Medication list builder. Exposes window.MEDLIST.
+/* StewardMD - Medication list builder. Exposes window.MEDLIST.
    Deterministic parsing only (no AI). Keeps original text until the clinician
    confirms an uncertain drug mapping. */
 (function () {
@@ -6,7 +6,7 @@
   var FORM_PREFIX = { t: "tablet", tab: "tablet", tabs: "tablet", cap: "capsule", caps: "capsule",
     inj: "injection", syp: "syrup", syr: "syrup", susp: "suspension", drop: "drops", oint: "ointment",
     neb: "nebulisation", inh: "inhaler" };
-  // Full formulation words that hospital feeds (e.g. GHIS) append/prepend — stripped
+  // Full formulation words that hospital feeds (e.g. GHIS) append/prepend - stripped
   // from the drug name wherever they appear so "PARACETAMOL-650MG TABLET" resolves to
   // "paracetamol". (inh/neb are also routes and handled there first.)
   var FORM_WORD = { tablet: "tablet", tablets: "tablet", tab: "tablet", tabs: "tablet",
@@ -36,12 +36,12 @@
   function brandCandidates(name) {
     if (!name) return [];
     var n = name.toLowerCase().trim(), out = [];
-    // BRAND_SEED is checked/listed before formulary hits intentionally — seed precedence
+    // BRAND_SEED is checked/listed before formulary hits intentionally - seed precedence
     // is deliberate (fast, hand-curated matches take priority), not a bug.
     if (BRAND_SEED[n]) out.push({ brand: name, generic: BRAND_SEED[n] });
     // formulary aliases (window.MEDDRUGS: {generic, brands:[...]})
     try {
-      // MEDDRUGS is a facade object ({match, findByName, ..., _list}), not an array —
+      // MEDDRUGS is a facade object ({match, findByName, ..., _list}), not an array -
       // the actual drug array lives at MEDDRUGS._list.
       ((window.MEDDRUGS && window.MEDDRUGS._list) || []).forEach(function (d) {
         if ((d.brands || []).some(function (b) { return b.toLowerCase() === n; }))
@@ -67,12 +67,12 @@
     try { var dc = window.INTERACTION_RULES && window.INTERACTION_RULES.drugClasses;
       if (dc && Object.prototype.hasOwnProperty.call(dc, n)) return true; } catch (_) {}
     // Full generic vocabulary emitted by the interaction pipeline (INTERACTION_RULES.generics)
-    // — includes drugs auto-classified from RxClass (e.g. sildenafil, nitrates, dihydropyridines)
+    // - includes drugs auto-classified from RxClass (e.g. sildenafil, nitrates, dihydropyridines)
     // not present in the dose formularies. Without this they'd stay unresolved and be skipped.
     try { var gl = window.INTERACTION_RULES && window.INTERACTION_RULES.generics;
       if (gl && gl.indexOf && gl.indexOf(n) !== -1) return true; } catch (_) {}
     // Antibiotic stewardship formulary (amoxicillin, ceftriaxone, meropenem, …) lives in
-    // ASP_DRUGS, keyed by generic — include it so ward antibiotics are recognised too.
+    // ASP_DRUGS, keyed by generic - include it so ward antibiotics are recognised too.
     try { if (window.ASP_DRUGS && Object.prototype.hasOwnProperty.call(window.ASP_DRUGS, n)) return true; } catch (_) {}
     return false;
   }
@@ -246,7 +246,7 @@
   }
 
   // Lazy-load pdf.js only when a PDF is scanned; render capped pages to compressed
-  // images. The whole PDF is NEVER sent — only rendered page images.
+  // images. The whole PDF is NEVER sent - only rendered page images.
   // BUG #12: local bundled copy first (offline / native), CDN only as fallback.
   var _pdfjs = null;
   var PDFJS_LOCAL = "/vendor/pdfjs/pdf.min.js", PDFJS_LOCAL_W = "/vendor/pdfjs/pdf.worker.min.js";
@@ -302,7 +302,7 @@
     var text = String(m.detected_text || m.text || "").trim();
     if (!text && !m.drug) return null;
     var parsed = parseEntry(text || String(m.drug || ""));
-    // OCR may fill strength/route/frequency separately — prefer parsed, else OCR text.
+    // OCR may fill strength/route/frequency separately - prefer parsed, else OCR text.
     if (parsed.strength == null && m.strength) { var pm = parseEntry(String(m.strength)); if (pm.strength != null) { parsed.strength = pm.strength; parsed.unit = parsed.unit || pm.unit; } }
     if (!parsed.route && m.route) { var rt = String(m.route).toLowerCase(); if (ROUTES[rt]) parsed.route = ROUTES[rt]; }
     if (!parsed.freq && m.frequency) { var fr = String(m.frequency).toLowerCase(); if (FREQ[fr]) { parsed.freq = FREQ[fr]; parsed.freqText = fr; } }
@@ -345,7 +345,7 @@
   // add/remove findings, or alter counts.
   //
   // De-identification: we send ONLY the finding's drug names + mechanism/effect +
-  // severity LABEL — never any patient data. The payload is a compact string the
+  // severity LABEL - never any patient data. The payload is a compact string the
   // existing /api/ai/explain endpoint already understands (via window.SMD_AI.explain),
   // so no raw JSON, ids, provider or model names transit or return to the DOM.
   // Called via window.MEDLIST.explainInteraction at click time so tests can stub it.
@@ -356,7 +356,7 @@
     var sevLabel = SEVERITY_LABEL[sevBucket] || "Caution";
     var drugs = (finding.drugs || []).join(" + ");
     var mech = [finding.mechanism, finding.effect].filter(Boolean).join(" ");
-    // De-identified finding only — NO patient context of any kind.
+    // De-identified finding only - NO patient context of any kind.
     var summary = "A drug-interaction check flagged this deterministic finding. "
       + "Explain in plain language, for a clinician, why it matters and what to watch for. "
       + "Do NOT change or dispute the severity. "
@@ -380,7 +380,7 @@
   var _manualState = { value: "", parsed: null };
   var _indexState = { value: "", results: [], reqSeq: 0 };
   var _pasteState = { value: "", rows: [] }; // rows: [{entry, include}]
-  var _scanState = { rows: [] };             // rows: [{entry, include, editText}] — candidate scan review
+  var _scanState = { rows: [] };             // rows: [{entry, include, editText}] - candidate scan review
   var _view = "list";                        // "list" | "results" | "scan"
   var _results = null;                        // last checkInteractions() result
   var _hideMinor = true;                      // results filter: hide minor findings by default
@@ -629,7 +629,7 @@
       { "data-ml-open": "index" }, function () { _openAdd = "index"; render(); });
     card("", "✍️", "Type / Paste list", "e.g. metformin 500 mg BD",
       { "data-ml-open": "paste" }, function () { _openAdd = "paste"; render(); });
-    // Scan = on-device-first AI Vision (native ML Kit OCR) — hide on web.
+    // Scan = on-device-first AI Vision (native ML Kit OCR) - hide on web.
     if (window.SMD_IS_NATIVE) card("", "📷", "Scan prescription", "Prescription, OPD ticket, case sheet, PDF",
       { "data-ml-scan": "1" }, function () { startScan(); });
     card("", "🏥", "Ward Sync", "Import current medication chart",
@@ -669,7 +669,7 @@
     card.appendChild(el("div", { cls: "ml-ward-ic", text: "🏥" }));
     var body = el("div", { cls: "ml-ward-body" });
     if (w.ready) {
-      body.appendChild(el("div", { cls: "ml-ward-t", text: "Ward Sync — " + ptInitials(w.pt.name) }));
+      body.appendChild(el("div", { cls: "ml-ward-t", text: "Ward Sync - " + ptInitials(w.pt.name) }));
       body.appendChild(el("div", { cls: "ml-ward-d", text: "Last sync: not fetched" }));
     } else {
       body.appendChild(el("div", { cls: "ml-ward-t", text: "Ward Sync" }));
@@ -720,7 +720,7 @@
     var row = el("div", { cls: "ml-index-result" });
     var info = el("button", { cls: "ml-index-info", attrs: { type: "button" } });
     var gen = el("div", { cls: "ml-index-generic" }); gen.innerHTML = highlight(cap(r.generic), q); info.appendChild(gen);
-    var meta = [r.cls, r.form].filter(function (x) { return x && x !== "—"; }).join(" · ");
+    var meta = [r.cls, r.form].filter(function (x) { return x && x !== "-"; }).join(" · ");
     if (meta) info.appendChild(el("div", { cls: "ml-index-meta", text: meta }));
     if (r.brands && r.brands.length) {
       var b = el("div", { cls: "ml-index-brands" });
@@ -757,7 +757,7 @@
   }
 
   function buildIndexSheet() {
-    var s = buildSheet({ title: "Search Drug Index", sub: "On-device formulary — instant, works offline" });
+    var s = buildSheet({ title: "Search Drug Index", sub: "On-device formulary - instant, works offline" });
     s.sheet.classList.add("ml-sheet-tall");                 // tall surface: scrollable typeahead
     // Fixed search bar (stays put); the suggestion list below it scrolls.
     var bar = el("div", { cls: "ml-searchbar" });
@@ -771,7 +771,7 @@
     function drawState(node, kind) {
       var box = el("div", { cls: "ml-state" + (kind === "offline" ? " ml-state-offline" : "") });
       if (kind === "loading") { box.innerHTML = '<span class="ml-spin">◐</span>'; box.appendChild(el("span", { text: " Searching…" })); }
-      else if (kind === "offline") { box.appendChild(el("span", { text: "Search unavailable — showing offline formulary." })); box.appendChild(el("span", { cls: "ml-state-sub", text: "Type the medicine name manually if it isn't listed." })); }
+      else if (kind === "offline") { box.appendChild(el("span", { text: "Search unavailable - showing offline formulary." })); box.appendChild(el("span", { cls: "ml-state-sub", text: "Type the medicine name manually if it isn't listed." })); }
       else { box.appendChild(el("span", { text: "No medicines found." })); box.appendChild(el("span", { cls: "ml-state-sub", text: "Check spelling, or add it via Type / Paste." })); }
       node.appendChild(box);
     }
@@ -795,7 +795,7 @@
       var wrap = el("div", { cls: "ml-index-results" });
       rows.forEach(function (r) { wrap.appendChild(resultRow(r, q)); });
       out.appendChild(wrap);
-      if (offline) { var note = el("div", { cls: "ml-state ml-state-offline" }); note.appendChild(el("span", { cls: "ml-state-sub", text: "Online brand search unavailable — showing on-device matches." })); out.appendChild(note); }
+      if (offline) { var note = el("div", { cls: "ml-state ml-state-offline" }); note.appendChild(el("span", { cls: "ml-state-sub", text: "Online brand search unavailable - showing on-device matches." })); out.appendChild(note); }
     }
     function run() {
       var q = input.value.trim();
@@ -819,7 +819,7 @@
     return s;
   }
 
-  // Compact dose sheet — refine formulation/strength/route/frequency before adding.
+  // Compact dose sheet - refine formulation/strength/route/frequency before adding.
   // No field is required (spec): tapping Add uses whatever is set.
   var ROUTE_OPTS = ["PO", "IV", "IM", "SC", "SL", "Neb", "PR", "Topical"];
   var FREQ_OPTS = ["OD", "BD", "TDS", "QID", "HS", "STAT", "PRN"];
@@ -847,7 +847,7 @@
     FREQ_OPTS.forEach(function (fq) { var c = el("button", { cls: "ml-chip" + (draft.freq === fq ? " on" : ""), text: fq, attrs: { type: "button" } });
       c.addEventListener("click", function () { draft.freq = draft.freq === fq ? "" : fq; freqRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", x.textContent === draft.freq); }); }); freqRow.appendChild(c); });
     grid.appendChild(field("Frequency", freqRow, true));
-    var indInp = el("input", { cls: "ml-input", type: "text", placeholder: "Optional — why it's prescribed" });
+    var indInp = el("input", { cls: "ml-input", type: "text", placeholder: "Optional - why it's prescribed" });
     indInp.addEventListener("input", function () { draft.indication = indInp.value; });
     grid.appendChild(field("Indication (optional)", indInp, true));
     s.body.appendChild(grid);
@@ -870,7 +870,7 @@
   }
 
   function buildManualSheet() {
-    var s = buildSheet({ title: "Type a medicine", sub: "One medicine — we parse dose, route and frequency" });
+    var s = buildSheet({ title: "Type a medicine", sub: "One medicine - we parse dose, route and frequency" });
     var input = el("input", { cls: "ml-input", type: "text", placeholder: "e.g. metformin 500 mg BD",
       attrs: { "data-ml-manual-input": "1", autocomplete: "off" } });
     input.value = _manualState.value || "";
@@ -975,9 +975,9 @@
 
   // Open the OS file/camera picker (image or PDF). Camera capture on mobile.
   function startScan() {
-    // Native: <input type=file>.click() opens no picker in WKWebView — use the Camera
+    // Native: <input type=file>.click() opens no picker in WKWebView - use the Camera
     // plugin (Camera/Photos action sheet) and feed the dataUrl into the SAME OCR path.
-    // NOTE: Camera returns IMAGES only — PDF scan stays web-only.
+    // NOTE: Camera returns IMAGES only - PDF scan stays web-only.
     if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
       window.SMD_NATIVE.pickImage({ prompt: true }).then(function (dataUrl) {
         scanProgress("Compressing image…");
@@ -1012,7 +1012,7 @@
           }).catch(function () { scanProgress("Could not open this PDF.", true); });
         };
         fr.readAsArrayBuffer(file);
-      }).catch(function () { scanProgress("PDF support unavailable offline — try a photo.", true); });
+      }).catch(function () { scanProgress("PDF support unavailable offline - try a photo.", true); });
       return;
     }
     // image: compress client-side BEFORE any AI call (raw file never sent)
@@ -1032,13 +1032,13 @@
       _openScanReview(rows, dataUrl);
     }).catch(function () { scanProgressDone(); scanProgress("Could not read the image. Enter medicines manually.", true); });
   }
-  // Clinician REVIEW — nothing is added until "Add selected". rows are candidate
+  // Clinician REVIEW - nothing is added until "Add selected". rows are candidate
   // parse results (or raw OCR rows, which are normalised here).
   function _openScanReview(rows, dataUrl) {
     scanProgressDone();
     var norm = (rows || []).map(function (r) {
       // A parseEntry() result carries a `raw` string + `candidates` array. A raw OCR
-      // row does not — normalise it (maps generic, sets confidence, never silently maps).
+      // row does not - normalise it (maps generic, sets confidence, never silently maps).
       var entry = (r && typeof r.raw === "string" && Array.isArray(r.candidates)) ? r : normalizeScanRow(r);
       if (!entry) return null;
       return { entry: entry, include: true, editText: entry.detected_text || entry.raw || "" };
@@ -1057,7 +1057,7 @@
     header.appendChild(el("h2", { cls: "ml-title", text: "Review scanned medicines" }));
     header.appendChild(el("p", { cls: "ml-subtitle", text: "Verify each row against the source. Nothing is added until you confirm." }));
     header.appendChild(el("div", { cls: "ml-advisory",
-      text: "Extracted for review only — confirm every medicine, strength, route, and frequency. Illegible or unmapped rows need manual review." }));
+      text: "Extracted for review only - confirm every medicine, strength, route, and frequency. Illegible or unmapped rows need manual review." }));
     _root.appendChild(header);
 
     var body = el("div", { cls: "ml-body" });
@@ -1077,7 +1077,7 @@
 
       var titleWrap = el("div", { cls: "ml-scan-titlewrap" });
       titleWrap.appendChild(el("div", { cls: "ml-scan-mapped", text: entry.generic || "Not mapped" }));
-      // detected_text preserved verbatim (textContent — never innerHTML)
+      // detected_text preserved verbatim (textContent - never innerHTML)
       titleWrap.appendChild(el("div", { cls: "ml-scan-detected", text: entry.detected_text || entry.raw || "" }));
       top.appendChild(titleWrap);
 
@@ -1088,7 +1088,7 @@
       var line = fieldLine(entry);
       if (line) card.appendChild(el("div", { cls: "ml-scan-line", text: line }));
 
-      // editable field — clinician can correct the detected text before adding
+      // editable field - clinician can correct the detected text before adding
       var edit = el("input", { cls: "ml-input ml-scan-edit", type: "text",
         attrs: { "data-ml-scan-edit": String(idx), placeholder: "Correct or complete this medicine…" } });
       edit.value = row.editText;
@@ -1100,7 +1100,7 @@
       card.appendChild(edit);
 
       if (flagged) {
-        var flag = el("div", { cls: "ml-scan-flag", text: "⚠ Review manually — not confidently mapped" });
+        var flag = el("div", { cls: "ml-scan-flag", text: "⚠ Review manually - not confidently mapped" });
         card.appendChild(flag);
         if (entry.candidates && entry.candidates.length) {
           renderCandidateChips(card, entry.candidates, function (c) {
@@ -1123,7 +1123,7 @@
       _scanState.rows.forEach(function (row) {
         if (!row.include) return;
         // Re-normalise from the (possibly edited) text so a corrected row maps fresh;
-        // an unconfirmed row stays unmapped (generic:null) — never silently mapped.
+        // an unconfirmed row stays unmapped (generic:null) - never silently mapped.
         var entry = row.entry;
         add(Object.assign({}, entry, { confidence: entry.confidence }), "scan");
       });
@@ -1149,7 +1149,7 @@
     return getList().some(function (m) { return m.generic && typeof m.generic === "string" && m.generic.trim(); });
   }
 
-  var REVIEW_DIMENSIONS = ["Drug–drug interactions", "Duplicate therapy", "Bleeding risk",
+  var REVIEW_DIMENSIONS = ["Drug-drug interactions", "Duplicate therapy", "Bleeding risk",
     "QT prolongation", "Renal risk", "Hyperkalaemia", "CNS depression"];
 
   function renderReviewAside(container) {
@@ -1296,7 +1296,7 @@
       _view = "results"; render();
     } else {
       _view = "list"; render();
-      toast("Fewer than 2 medicines left — add more to re-check.");
+      toast("Fewer than 2 medicines left - add more to re-check.");
     }
   }
   function removeGenericAndRecheck(generic) {
@@ -1343,7 +1343,7 @@
     if (consequence) card.appendChild(el("div", { cls: "mlr-consequence", text: consequence }));
     if (finding.action) card.appendChild(detailRow("Action", finding.action));
 
-    // "Why?" expand — mechanism / monitoring / source disclosure + optional MaiK explain.
+    // "Why?" expand - mechanism / monitoring / source disclosure + optional MaiK explain.
     var why = el("div", { cls: "mlr-why" });
     var whyBtn = el("button", { cls: "mlr-explain-btn", text: "Why? · details", attrs: { type: "button", "aria-expanded": "false" } });
     var whyBody = el("div", { attrs: { hidden: "hidden" } });
@@ -1351,7 +1351,7 @@
     if (finding.monitoring) whyBody.appendChild(detailRow("Monitoring", finding.monitoring));
     if (finding.source) whyBody.appendChild(detailRow("Source", finding.source));
 
-    // Optional MaiK "explain this interaction" — DISPLAY-ONLY; can never change the
+    // Optional MaiK "explain this interaction" - DISPLAY-ONLY; can never change the
     // severity/marker above, add/remove findings, or alter the summary counts.
     var explainWrap = el("div", { cls: "mlr-explain-wrap" });
     var explainBtn = el("button", { cls: "mlr-explain-btn", text: "Explain in plain language",
@@ -1368,7 +1368,7 @@
         renderExplanation(explainOut, String(text || ""));
         explainBtn.textContent = "Explanation shown";
       }).catch(function () {
-        renderExplanation(explainOut, "Couldn't load explanation — the interaction result stands.", true);
+        renderExplanation(explainOut, "Couldn't load explanation - the interaction result stands.", true);
         explainBtn.disabled = false;
         explainBtn.textContent = "Explain in plain language";
       });
@@ -1383,7 +1383,7 @@
     });
     why.appendChild(whyBody);
 
-    // "What now?" — the concrete next step: remove (or plan to replace) an implicated
+    // "What now?" - the concrete next step: remove (or plan to replace) an implicated
     // drug, then re-check. Turns the finding into a decision, not just a warning.
     var whatBtn = el("button", { cls: "mlr-whatnow-btn", text: "What now?", attrs: { type: "button", "aria-expanded": "false" } });
     var whatBody = el("div", { cls: "mlr-whatnow", attrs: { hidden: "hidden" } });
@@ -1426,7 +1426,7 @@
     if (!isError) {
       container.appendChild(el("div", { cls: "mlr-explain-label", text: "Explanation" }));
       container.appendChild(el("div", { cls: "mlr-explain-note",
-        text: "AI explanation of this rule — the interaction finding above is unchanged." }));
+        text: "AI explanation of this rule - the interaction finding above is unchanged." }));
     }
     container.appendChild(el("div", { cls: "mlr-explain-body", text: text }));
   }
@@ -1500,9 +1500,9 @@
       var warn = el("div", { cls: "mlr-coverage-warn" });
       warn.appendChild(el("div", { cls: "mlr-coverage-warn-title", text: "⚠ Not fully checked" }));
       if (unchecked.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
-        text: "Not recognised — NOT checked for any interaction: " + unchecked.join(", ") + ". Verify the name/spelling or check these manually." }));
+        text: "Not recognised - NOT checked for any interaction: " + unchecked.join(", ") + ". Verify the name/spelling or check these manually." }));
       if (unclassified.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
-        text: "Recognised but not classified — only duplicate checks applied: " + unclassified.map(cap).join(", ") + "." }));
+        text: "Recognised but not classified - only duplicate checks applied: " + unclassified.map(cap).join(", ") + "." }));
       main.appendChild(warn);
     }
 
@@ -1519,14 +1519,14 @@
     // ---- grouped sections (duplicates shown once, in their own section) ----
     var minorFindings = _hideMinor ? [] : res.minor.filter(notDuplicate);
     var monitoring = res.monitor.filter(notDuplicate).concat(res.moderate.filter(notDuplicate), minorFindings);
-    resultsSection(main, "Critical — act now", res.critical);
-    resultsSection(main, "Major — review before prescribing", res.major);
+    resultsSection(main, "Critical - act now", res.critical);
+    resultsSection(main, "Major - review before prescribing", res.major);
     resultsSection(main, "Monitoring required", monitoring);
     resultsSection(main, "Duplicate therapy", (res.duplicates || []).slice());
 
     var anyShown = res.critical.length || res.major.length || monitoring.length || (res.duplicates || []).length;
     if (!anyShown) {
-      // NEVER show a reassuring "all clear" — absence of a rule is not proof of safety,
+      // NEVER show a reassuring "all clear" - absence of a rule is not proof of safety,
       // and it must read differently when some medicines could not be screened.
       var incomplete = unchecked.length || unclassified.length;
       var none = el("div", { cls: "mlr-none" + (incomplete ? " mlr-none-partial" : "") });
@@ -1535,7 +1535,7 @@
           ? "No interaction found among the medicines that could be checked"
           : "No interaction found in this dataset" }));
       none.appendChild(el("div", { cls: "mlr-none-sub",
-        text: "This is a screen against an open, non-exhaustive dataset — it does NOT confirm the combination is safe. Absence of a finding is not clearance. Verify important decisions against the drug label, a pharmacist, or local protocol." }));
+        text: "This is a screen against an open, non-exhaustive dataset - it does NOT confirm the combination is safe. Absence of a finding is not clearance. Verify important decisions against the drug label, a pharmacist, or local protocol." }));
       main.appendChild(none);
     }
 

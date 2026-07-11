@@ -19,12 +19,12 @@
       "items": {
         "type": "object", "additionalProperties": false, "required": ["tier", "line"],
         "properties": {
-          "tier": { "type": "string", "enum": ["icmr", "guideline", "harrison", "hospital"], "description": "Source class — drives precedence." },
+          "tier": { "type": "string", "enum": ["icmr", "guideline", "harrison", "hospital"], "description": "Source class - drives precedence." },
           "line": { "type": "string", "enum": ["empiric", "definitive", "alternative", "supportive", "adjunct"] },
           "regimenLabel": { "type": "string", "description": "Human-readable regimen, e.g. 'Ceftriaxone + Vancomycin'." },
           "drugRefs": {
             "type": "array",
-            "description": "Structured links into the Drug Index by composition (the ONLY pharmacology DB) — never free-text-only, never duplicated drug data.",
+            "description": "Structured links into the Drug Index by composition (the ONLY pharmacology DB) - never free-text-only, never duplicated drug data.",
             "items": {
               "type": "object", "additionalProperties": false, "required": ["composition"],
               "properties": {
@@ -50,7 +50,7 @@
     },
     "conflicts": {
       "type": "array",
-      "description": "Recorded when sources genuinely disagree — keep BOTH, tagged; engine still shows a primary by precedence.",
+      "description": "Recorded when sources genuinely disagree - keep BOTH, tagged; engine still shows a primary by precedence.",
       "items": { "type": "object", "additionalProperties": false, "properties": { "topic": { "type": "string" }, "note": { "type": "string" } } }
     },
     "review": { "type": "object", "additionalProperties": false, "required": ["status"], "properties": { "status": { "type": "string", "enum": ["draft", "ai_drafted", "in_review", "approved", "deprecated"] }, "reviewedBy": { "type": ["string", "null"] }, "reviewedAt": { "type": ["string", "null"] } } },

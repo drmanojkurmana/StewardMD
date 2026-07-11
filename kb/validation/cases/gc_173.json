@@ -6,7 +6,7 @@
   "sex": "M",
   "presentingComplaint": "Progressive abdominal distension, leg swelling and jaundice over 3 weeks",
   "history": "54-year-old man with a 15-year history of heavy alcohol intake (approx 80 g/day) presents with gradually worsening abdominal swelling, bilateral ankle oedema and yellowing of the eyes over 3 weeks. Reduced appetite, early satiety and 4 kg apparent weight gain despite poor intake. No haematemesis or melaena. Mild intermittent confusion in the evenings noted by family. Known esophageal varices on prior endoscopy; not on beta-blocker. No recent GI bleed, sepsis or new medications. No fever.",
-  "examination": "Icteric sclerae, palmar erythema, multiple spider naevi over the chest, gynaecomastia. Abdomen distended with shifting dullness and a fluid thrill consistent with moderate-to-tense ascites; non-tender, no guarding (pertinent negative — no peritonism to suggest SBP). Splenomegaly palpable. Mild asterixis elicited. Bilateral pitting pedal oedema. No focal neurological deficit. Chest clear, no basal crackles (pertinent negative against cardiac failure).",
+  "examination": "Icteric sclerae, palmar erythema, multiple spider naevi over the chest, gynaecomastia. Abdomen distended with shifting dullness and a fluid thrill consistent with moderate-to-tense ascites; non-tender, no guarding (pertinent negative - no peritonism to suggest SBP). Splenomegaly palpable. Mild asterixis elicited. Bilateral pitting pedal oedema. No focal neurological deficit. Chest clear, no basal crackles (pertinent negative against cardiac failure).",
   "vitals": {
     "hr": 92,
     "bp": "104/66",
@@ -39,14 +39,14 @@
   ],
   "finalDiagnosis": "Decompensated alcohol-related cirrhosis (ascites + hepatic encephalopathy, Child-Pugh C)",
   "citations": [
-    "Harrison 22e — Cirrhosis and Its Complications",
+    "Harrison 22e - Cirrhosis and Its Complications",
     "AASLD Management of Ascites due to Cirrhosis 2021"
   ],
-  "stewardship": "Not applicable — non-infective decompensation. Ascitic PMN <250/mm3 and afebrile, so no empiric antibiotics indicated. Reserve antibiotic prophylaxis/treatment for confirmed SBP (PMN >=250) or GI bleed.",
+  "stewardship": "Not applicable - non-infective decompensation. Ascitic PMN <250/mm3 and afebrile, so no empiric antibiotics indicated. Reserve antibiotic prophylaxis/treatment for confirmed SBP (PMN >=250) or GI bleed.",
   "contraindications": [
     "Avoid NSAIDs (precipitate AKI/hepatorenal syndrome and GI bleed)",
     "Avoid nephrotoxins and aminoglycosides given borderline renal function",
-    "Cautious sedatives/benzodiazepines — may precipitate/worsen encephalopathy",
+    "Cautious sedatives/benzodiazepines - may precipitate/worsen encephalopathy",
     "Dose-adjust renally cleared drugs; avoid hepatotoxins"
   ],
   "edgeCases": [
@@ -54,7 +54,7 @@
     "Rapidly rising creatinine after diuresis/paracentesis may signal hepatorenal syndrome (HRS-AKI)",
     "A new focal liver lesion on imaging mandates HCC surveillance (AFP + triphasic CT/MRI)"
   ],
-  "expectedMaiK": "This is a classic decompensated cirrhosis picture — ascites (SAAG >=1.1), coagulopathy, hypoalbuminaemia, thrombocytopenia and early encephalopathy on an alcohol-related background. It is non-infective: with ascitic PMN <250 and no fever there is no indication for empiric antibiotics; prioritise diagnostic paracentesis to exclude SBP, sodium/fluid restriction with spironolactone-based diuresis, and lactulose for encephalopathy.",
+  "expectedMaiK": "This is a classic decompensated cirrhosis picture - ascites (SAAG >=1.1), coagulopathy, hypoalbuminaemia, thrombocytopenia and early encephalopathy on an alcohol-related background. It is non-infective: with ascitic PMN <250 and no fever there is no indication for empiric antibiotics; prioritise diagnostic paracentesis to exclude SBP, sodium/fluid restriction with spironolactone-based diuresis, and lactulose for encephalopathy.",
   "expectedNextQuestions": [
     "Any recent GI bleeding (haematemesis, melaena) or missed lactulose doses?",
     "Alcohol quantity and time since last drink; any withdrawal symptoms?",
@@ -103,7 +103,7 @@
   },
   "regressionAssertions": [
     "top-3 must include decomp_cirrhosis",
-    "stewardship tier must be null (non-infective — no empiric antibiotics)",
+    "stewardship tier must be null (non-infective - no empiric antibiotics)",
     "SBP must appear in differential given ascites but not be the top diagnosis (PMN <250)"
   ],
   "review": {

@@ -1,14 +1,14 @@
-/* StewardMD — complete sign-out (additive; NEVER edits the minified app.js).
+/* StewardMD - complete sign-out (additive; NEVER edits the minified app.js).
  * ---------------------------------------------------------------------------
  * Bug: the app's "Sign out" (#sessionSignOut, and the account sheet's #smdSbSignOut
  * which forwards to it) clears the LOCAL account object but never terminates the
  * Firebase/Google session. So onAuthStateChanged still holds the user and
- * SMD_applyGoogleUser immediately re-hydrates the account — the user appears to
+ * SMD_applyGoogleUser immediately re-hydrates the account - the user appears to
  * "sign back in" instantly. Only "Delete account & data" (which tears down the
  * Firebase user) truly logs out.
  *
- * Fix: when sign-out is clicked, also do a real teardown — Firebase signOut,
- * Google Identity auto-select disabled, local account key cleared — then reload to
+ * Fix: when sign-out is clicked, also do a real teardown - Firebase signOut,
+ * Google Identity auto-select disabled, local account key cleared - then reload to
  * a clean state (the same reload approach account.js already uses for guest expiry).
  */
 (function () {

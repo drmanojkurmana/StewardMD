@@ -1,26 +1,26 @@
-/* StewardMD — System appearance sync (light/dark follows the OS).
+/* StewardMD - System appearance sync (light/dark follows the OS).
  * ===========================================================================
  * The core theme logic in app.js reads the OS preference ONCE at first launch
  * (then a stored value wins forever) and never live-updates. This module makes
  * the in-app Light/Dark theme track the device's system appearance:
- *   • on launch, live while open, and on app resume — the app matches the OS;
+ *   • on launch, live while open, and on app resume - the app matches the OS;
  *   • the manual theme toggle still works as an OVERRIDE, held until the OS
  *     appearance next changes (then the app snaps back to following the OS).
  *
- * Pure JS / no app.js edit — augments via the same DOM/localStorage seams the
+ * Pure JS / no app.js edit - augments via the same DOM/localStorage seams the
  * core uses (body.dark, #themeKnob, key "stewardmd_theme"). Works on web + the
  * Capacitor WKWebView (which reflects the iOS system appearance via
  * prefers-color-scheme, since nothing forces overrideUserInterfaceStyle).
  *
  * Reversible: set localStorage "stewardmd_theme_autosync"="0" to disable and
  * fall back to the classic stored-preference behavior. Accent themes
- * (html[data-theme=...]) are untouched — this only flips the light/dark axis.
+ * (html[data-theme=...]) are untouched - this only flips the light/dark axis.
  * ======================================================================== */
 (function () {
   "use strict";
   var TK = "stewardmd_theme";                 // "dark" | "light" (applied theme; also read by app.js)
   var SRC = "stewardmd_theme_source";         // "system" | "user"
-  var OSAT = "stewardmd_theme_os_at_override"; // "dark" | "light" — OS value captured when user overrode
+  var OSAT = "stewardmd_theme_os_at_override"; // "dark" | "light" - OS value captured when user overrode
   var FLAG = "stewardmd_theme_autosync";      // "0" disables (default enabled)
 
   function lsGet(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } }
@@ -62,7 +62,7 @@
 
   // Resolve + apply the correct theme for the current OS state.
   function resolve() {
-    if (!enabled()) return;                       // classic behavior — leave app.js's result as-is
+    if (!enabled()) return;                       // classic behavior - leave app.js's result as-is
     migrateIfNeeded();
     var src = lsGet(SRC);
     if (src === "user") {
@@ -104,7 +104,7 @@
     // Track manual toggle taps (bubble phase → after app.js's element handler).
     document.addEventListener("click", onToggleClick, false);
 
-    // Native: re-evaluate on resume — an OS appearance change made while the app was
+    // Native: re-evaluate on resume - an OS appearance change made while the app was
     // backgrounded may not deliver a matchMedia 'change' until foreground.
     try {
       var C = window.Capacitor;

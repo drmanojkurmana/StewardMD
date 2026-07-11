@@ -1,9 +1,9 @@
-/* StewardMD — browser RAG wiring (client-side retrieval; grounded-package builder)
+/* StewardMD - browser RAG wiring (client-side retrieval; grounded-package builder)
  *
  * Wires the pure kb/ai/interface.mjs (retrieve / getGroundingContext /
  * resolveTreatment) into the live app WITHOUT shipping the 12 MB chunk index:
  * the Harrison chunk corpus is DERIVED at runtime from the already-loaded
- * window.KB_ENRICHMENT (+ KB_CORE) — so retrieval is fully OFFLINE. Treatment
+ * window.KB_ENRICHMENT (+ KB_CORE) - so retrieval is fully OFFLINE. Treatment
  * precedence (ICMR ▸ guideline ▸ Harrison) + hospital overlays come from the
  * ~550 KB window.KB_RAG bundle, lazy-loaded once when the smd_ai flag is on.
  *
@@ -115,11 +115,11 @@
     }
     Object.keys(EN).forEach(function (id) {
       // dist KB_ENRICHMENT.byId stores harrison fields FLAT on the entry; raw KB files
-      // nest them under .harrison — support both.
+      // nest them under .harrison - support both.
       var e = EN[id] || {}, h = e.harrison || e, name = e.name || id, cls = e.class || null, system = e.system || null;
       var src = { ref: h.source || e.source || "Harrison 22e", page: h.pages || e.pages || null };
       var core = coreById[id];
-      if (core && core.name) push(id, name, cls, system, "overview", (core.name + " (" + (cls || "") + ") — " + (system || "")), src);
+      if (core && core.name) push(id, name, cls, system, "overview", (core.name + " (" + (cls || "") + ") - " + (system || "")), src);
       if (core && core.matching && core.matching.reasoningTemplate) push(id, name, cls, system, "reasoning", core.matching.reasoningTemplate, src);
       (h.clinicalPearls || []).forEach(function (t) { push(id, name, cls, system, "harrison.pearl", t, src); });
       if (h.pathophysiology) push(id, name, cls, system, "harrison.pathophysiology", h.pathophysiology, src);
@@ -130,14 +130,14 @@
       (h.redFlags || []).forEach(function (t) { push(id, name, cls, system, "harrison.redFlag", t, src); });
       (h.pitfalls || []).forEach(function (t) { push(id, name, cls, system, "harrison.pitfall", t, src); });
       if (core && (core.redFlags || []).length) push(id, name, cls, system, "redFlags", "Red flags: " + core.redFlags.join("; "), src);
-      (core && core.investigations || []).forEach(function (iv) { push(id, name, cls, system, "investigation", (iv.test || "") + (iv.why ? " — " + iv.why : ""), src); });
+      (core && core.investigations || []).forEach(function (iv) { push(id, name, cls, system, "investigation", (iv.test || "") + (iv.why ? " - " + iv.why : ""), src); });
 
       // ── MANAGEMENT / TREATMENT chunks (gold122) ──────────────────────────
       // Previously NO management content was indexed, so "how to treat X" could only
       // retrieve pathophysiology/pearls (root cause of the organophosphate failure).
       // Index the already-curated StewardMD management content so treatment queries
       // retrieve treatment. This is disease-level reference content (no patient data,
-      // no new clinical claims) — RAG privacy/de-identification rules are unchanged.
+      // no new clinical claims) - RAG privacy/de-identification rules are unchanged.
       var mgmtSrc = { ref: "StewardMD management protocol", page: null };
       var dm = (window.DX_MGMT && window.DX_MGMT[id]) || null;   // non-infective management (curated)
       if (dm && dm.tx && dm.tx.length) push(id, name, cls, system, "management", "Management / how to treat " + name + ": " + dm.tx.join(" "), mgmtSrc);
@@ -146,7 +146,7 @@
       if (tx) {
         var drugSrc = { ref: "StewardMD Drug Index / protocol", page: null };
         (tx.recommendations || []).forEach(function (r) {
-          var drugs = (r.drugRefs || []).map(function (d) { return (d.composition || d.regimenLabel || "") + (d.why ? " — " + d.why : ""); }).filter(Boolean);
+          var drugs = (r.drugRefs || []).map(function (d) { return (d.composition || d.regimenLabel || "") + (d.why ? " - " + d.why : ""); }).filter(Boolean);
           if (drugs.length) push(id, name, cls, system, "management.treatment", "Treatment (" + (r.line || "empiric") + ") for " + name + ": " + drugs.join("; "), drugSrc);
           if (r.steps && r.steps.length) push(id, name, cls, system, "management", "Management steps (" + (r.line || "management") + ") for " + name + ": " + r.steps.join(" "), mgmtSrc);
         });
@@ -158,7 +158,7 @@
 
     // ── DX_MGMT-only canonical objects (gold122) ─────────────────────────────
     // Some high-risk topics (e.g. dedicated toxicology entries) live only in
-    // DX_MGMT with no enrichment record — the loop above would skip them, so they
+    // DX_MGMT with no enrichment record - the loop above would skip them, so they
     // were unretrievable. Index every DX_MGMT entry not already covered, using its
     // name + synonyms so "how to treat X" (and synonym queries) find its management.
     var DM_ALL = window.DX_MGMT || {};
@@ -168,7 +168,7 @@
       var m = DM_ALL[id] || {}, nm = m.name || id.replace(/_/g, " ");
       var mgmtSrc2 = { ref: m.src || "StewardMD management protocol", page: null };
       var synText = (m.syn && m.syn.length) ? " (also: " + m.syn.join(", ") + ")" : "";
-      push(id, nm, m.class || null, m.system || null, "overview", nm + synText + (m.dx ? " — " + m.dx : ""), mgmtSrc2);
+      push(id, nm, m.class || null, m.system || null, "overview", nm + synText + (m.dx ? " - " + m.dx : ""), mgmtSrc2);
       if (m.tx && m.tx.length) push(id, nm, m.class || null, m.system || null, "management", "Management / how to treat " + nm + ": " + m.tx.join(" "), mgmtSrc2);
       if (m.ix && m.ix.length) push(id, nm, m.class || null, m.system || null, "management.investigation", "Investigations & monitoring: " + m.ix.join("; "), mgmtSrc2);
     });
@@ -231,7 +231,7 @@
       var query = findingLabels.concat([opts.question || ""], top.map(function (c) { return c.name; })).join(" ");
       var retrieved = _ai.retrieve(query, RETRIEVE_K);
 
-      // Hybrid retrieval (flag smd_hybrid) — only for a standalone knowledge question
+      // Hybrid retrieval (flag smd_hybrid) - only for a standalone knowledge question
       // (no case differential), where the topicMatch gate keys off the nearest candidate.
       // Fuse the lexical disease order with the Vectorize semantic arm (RRF). Any failure
       // or empty vector arm leaves hybridIds null → candid selection is unchanged.
@@ -293,15 +293,15 @@
       // must come from the QUESTION's own topic, not from an empty/ambient differential. And if
       // the question's distinctive term isn't actually in the KB (e.g. "paraquat" → the nearest
       // lexical hit is paracetamol/methanol poisoning), we must NOT ground on that different
-      // disease — surface topicMatch.matched=false so the caller caveats instead of confidently
+      // disease - surface topicMatch.matched=false so the caller caveats instead of confidently
       // describing the wrong condition.
       var topicMatch = null;
       if (!top.length && (opts.question || "").trim()) {
         var GENERIC_TOPIC = { treatment:1,treat:1,treating:1,management:1,manage:1,managing:1,therapy:1,approach:1,protocol:1,regimen:1,empiric:1,initial:1,signs:1,sign:1,symptoms:1,symptom:1,diagnosis:1,diagnose:1,poisoning:1,poison:1,toxicity:1,toxic:1,overdose:1,syndrome:1,disease:1,disorder:1,infection:1,fever:1,dose:1,dosing:1,drug:1,drugs:1,acute:1,chronic:1,severe:1,about:1,information:1,info:1,what:1,which:1,when:1,how:1,why:1,does:1,with:1,from:1,the:1,and:1,for:1,of:1,
-          // conversational fillers/lead-ins (4+ chars) — must NOT count as the topic, else
+          // conversational fillers/lead-ins (4+ chars) - must NOT count as the topic, else
           // "tell"/"hello"/"please" break the exact-match gate ("no entry for tell diabetic ketoacidosis").
           tell:1,tells:1,told:1,telling:1,hello:1,hey:1,hi:1,please:1,kindly:1,could:1,would:1,should:1,shall:1,can:1,you:1,your:1,give:1,gives:1,giving:1,want:1,wants:1,need:1,needs:1,know:1,knows:1,explain:1,explaining:1,describe:1,help:1,helps:1,share:1,provide:1,list:1,discuss:1,okay:1,sure:1,here:1,there:1,also:1,some:1,more:1,this:1,that:1,these:1,those:1,understand:1,regarding:1,concerning:1,briefly:1,quickly:1,detail:1,details:1,
-          // more conversational lead-ins (verbs/nouns that carry NO clinical topic) — must be
+          // more conversational lead-ins (verbs/nouns that carry NO clinical topic) - must be
           // dropped so "speak about X", "talk me through X", "read out X" ground on X, not on "speak X".
           speak:1,speaks:1,speaking:1,spoke:1,talk:1,talks:1,talking:1,talked:1,read:1,reads:1,reading:1,discusses:1,discussed:1,discussing:1,teach:1,teaches:1,teaching:1,taught:1,learn:1,learns:1,learning:1,study:1,studying:1,cover:1,covers:1,covering:1,define:1,defines:1,defining:1,mention:1,mentions:1,note:1,notes:1,overview:1,summary:1,summarise:1,summarize:1,summarised:1,summarized:1,lecture:1,walk:1,through:1,everything:1,anything:1,something:1,thing:1,things:1,stuff:1,aspect:1,aspects:1,topic:1,topics:1,brief:1,briefing:1,elaborate:1,
           // demographic / qualifier / route / dose framing words (gold-next): they describe HOW a
@@ -318,7 +318,7 @@
           first:1,second:1,third:1,line:1,firstline:1,oral:1,orally:1,intravenous:1,parenteral:1,
           dosage:1,duration:1,frequency:1,route:1,routes:1 };
         var distinctive = String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
-        // Coverage-based relevance (gold-next) — replaces the brittle all-or-nothing every() gate.
+        // Coverage-based relevance (gold-next) - replaces the brittle all-or-nothing every() gate.
         // Three tiers: CONFIDENT (answer directly) / ASSUME (nearest topic, stated assumption +
         // refine chips) / NONE (topic absent → opt-in web research, never describe a wrong disease).
         //
@@ -379,11 +379,11 @@
         schema: "steward-rag-1",
         hospitalId: hospitalId,
         patientCase: patientCase,
-        reasoning: reasoning,            // deterministic engine output — AUTHORITATIVE diagnosis
+        reasoning: reasoning,            // deterministic engine output - AUTHORITATIVE diagnosis
         grounding: grounding,            // retrieved Harrison KB (per top disease, cited)
         retrieved: retrieved,            // lexical top-K chunks for the query (cited)
         treatment: treatment,            // ICMR ▸ guideline ▸ Harrison + hospital overlay
-        refs: refs,                      // drug/calculator/ICU/stewardship — by reference only
+        refs: refs,                      // drug/calculator/ICU/stewardship - by reference only
         topicMatch: topicMatch,          // knowledge-Q relevance: null=case/NA, {matched:false}=topic not in KB
         question: opts.question || ""
       };

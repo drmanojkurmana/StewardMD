@@ -1,22 +1,22 @@
-/* StewardMD — Paediatrics specialty engine.
+/* StewardMD - Paediatrics specialty engine.
    ---------------------------------------------------------------------------
    Registers into window.SMD_WS_ENGINES.paediatrics, consumed by workspaces.js. A
-   LIGHTWEIGHT specialty pathway — NOT the (adult) Internal Medicine engine and NOT
+   LIGHTWEIGHT specialty pathway - NOT the (adult) Internal Medicine engine and NOT
    a diagnosis generator. For each syndrome it collects focused findings + danger
    signs and returns a conservative MANAGEMENT DECISION: the antibiotic-need level
    (0 none → 5 emergency referral), whether SOURCE CONTROL / a procedure is required,
-   and the referral/escalation. Actual drug choice AND ALL DOSING are deferred — in
+   and the referral/escalation. Actual drug choice AND ALL DOSING are deferred - in
    paediatrics every dose is weight/age-based and MUST be taken from the paediatric
    formulary / local protocol; antibiotic choice per local guidance / ICMR. No drug
    name, no dose, and NO adult regimen is ever implied here.
 
-   The core value is RED-FLAG TRIAGE — the paediatric "traffic light" idea
-   (appearance · work of breathing · circulation / hydration) — and separating the
+   The core value is RED-FLAG TRIAGE - the paediatric "traffic light" idea
+   (appearance · work of breathing · circulation / hydration) - and separating the
    self-limiting VIRAL illness (antibiotics NOT indicated) from the child who needs
    urgent escalation. When in doubt, escalate. Any toxic, poorly-perfused, dehydrated
    or apnoeic child, and ANY unwell infant < 3 months, is treated as high-risk.
 
-   Paediatrics is its own domain — this engine never marks conditions as "shared"
+   Paediatrics is its own domain - this engine never marks conditions as "shared"
    with the adult Internal Medicine engine; escalation is to the paediatric team / PICU.
 
    Advisory only. Verify against local protocol, weight/age, and the individual child. */
@@ -27,20 +27,20 @@
   function has(sel, id) { return sel && sel.has && sel.has(id); }
   function anyOf(sel, ids) { for (var i = 0; i < ids.length; i++) if (has(sel, ids[i])) return true; return false; }
 
-  // Shared paediatric sepsis result — any red flag in a febrile child.
+  // Shared paediatric sepsis result - any red flag in a febrile child.
   function sepsisEmergency(catg, extra) {
     return { emergency: true, ladder: 5, catg: catg,
       sc: "Immediate IV/IO access; take cultures if it does not delay treatment; give empirical antibiotics WITHOUT delay; fluid resuscitation and oxygen per the paediatric sepsis pathway.",
       ref: "Emergency paediatric team + PICU escalation NOW.",
-      mgmt: (["Empirical antibiotics — choice per local guidance / ICMR; ALL dosing weight-based per paediatric formulary / local protocol.", "Do NOT wait for LP, imaging or investigations before giving antibiotics in the shocked / toxic child.", "Reassess appearance, work of breathing and circulation frequently; escalate early."]).concat(extra || []) };
+      mgmt: (["Empirical antibiotics - choice per local guidance / ICMR; ALL dosing weight-based per paediatric formulary / local protocol.", "Do NOT wait for LP, imaging or investigations before giving antibiotics in the shocked / toxic child.", "Reassess appearance, work of breathing and circulation frequently; escalate early."]).concat(extra || []) };
   }
 
   // Shared paediatric airway emergency (croup / upper-airway obstruction).
   function airwayEmergency(catg, extra) {
     return { emergency: true, ladder: 5, catg: catg,
-      sc: "Do NOT distress or examine the throat, do not lie the child flat, do not cannulate if the airway is threatened — keep the child calm on the parent's lap. Secure the airway in a controlled setting with senior anaesthesia + ENT/paediatrics.",
+      sc: "Do NOT distress or examine the throat, do not lie the child flat, do not cannulate if the airway is threatened - keep the child calm on the parent's lap. Secure the airway in a controlled setting with senior anaesthesia + ENT/paediatrics.",
       ref: "Emergency paediatric + anaesthesia / PICU escalation NOW.",
-      mgmt: (["Humidified oxygen as tolerated; nebulised adrenaline and steroid per local protocol (weight-based dosing per paediatric formulary).", "Antibiotics do NOT treat viral croup — reserve for suspected bacterial airway infection, per local guidance / ICMR, only after the airway is secured."]).concat(extra || []) };
+      mgmt: (["Humidified oxygen as tolerated; nebulised adrenaline and steroid per local protocol (weight-based dosing per paediatric formulary).", "Antibiotics do NOT treat viral croup - reserve for suspected bacterial airway infection, per local guidance / ICMR, only after the airway is secured."]).concat(extra || []) };
   }
 
   var PAEDS = {
@@ -64,22 +64,22 @@
           { id: "jaundice", label: "Early / deep jaundice / not passing urine" }
         ],
         assess: function () {
-          // ANY unwell neonate (< 28 days) is a sepsis emergency — no observation, no oral-only route.
-          var r = sepsisEmergency("⚠ Neonate (< 28 days) unwell / febrile — treat as neonatal sepsis until proven otherwise",
-            ["ANY fever OR hypothermia in a neonate is an emergency — full septic screen (blood, urine AND LP) and empirical IV/IO antibiotics WITHOUT delay; NEVER observe at home or treat orally.",
-             "Neonates decompensate fast and often lack classic signs — poor feeding, lethargy or temperature instability may be the only clue.",
+          // ANY unwell neonate (< 28 days) is a sepsis emergency - no observation, no oral-only route.
+          var r = sepsisEmergency("⚠ Neonate (< 28 days) unwell / febrile - treat as neonatal sepsis until proven otherwise",
+            ["ANY fever OR hypothermia in a neonate is an emergency - full septic screen (blood, urine AND LP) and empirical IV/IO antibiotics WITHOUT delay; NEVER observe at home or treat orally.",
+             "Neonates decompensate fast and often lack classic signs - poor feeding, lethargy or temperature instability may be the only clue.",
              "Add empirical cover for herpes (HSV) and consider meningitis per local neonatal protocol; check glucose. Escalate to paediatric team / neonatal unit NOW."]);
           r.abx = {
             firstLine: [
-              { drug: "Ampicillin", dose: "50 mg/kg", route: "IV q8–12h", note: "Interval by postnatal age/gestation; use meningitic dose (100 mg/kg/dose) if meningitis suspected." },
-              { drug: "+ Gentamicin", dose: "4–5 mg/kg", route: "IV once daily", note: "Neonatal interval by gestation/postnatal age; monitor levels." }
+              { drug: "Ampicillin", dose: "50 mg/kg", route: "IV q8-12h", note: "Interval by postnatal age/gestation; use meningitic dose (100 mg/kg/dose) if meningitis suspected." },
+              { drug: "+ Gentamicin", dose: "4-5 mg/kg", route: "IV once daily", note: "Neonatal interval by gestation/postnatal age; monitor levels." }
             ],
             alt: [
-              { drug: "Cefotaxime", dose: "50 mg/kg", route: "IV q8–12h", note: "May add to / replace gentamicin per neonatal protocol; preferred if meningitis (avoid ceftriaxone in neonates)." },
+              { drug: "Cefotaxime", dose: "50 mg/kg", route: "IV q8-12h", note: "May add to / replace gentamicin per neonatal protocol; preferred if meningitis (avoid ceftriaxone in neonates)." },
               { drug: "+ Aciclovir", dose: "20 mg/kg", route: "IV q8h", note: "ADD if HSV suspected (seizures, vesicles, deranged LFTs, maternal HSV)." }
             ],
             ref: "WHO Pocket Book (neonatal sepsis) / national neonatal protocol / ICMR",
-            note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+            note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
           };
           return r;
         }
@@ -103,29 +103,29 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["young_infant", "toxic", "nonblanching", "caprefill", "lethargy"])) {
-            var r = sepsisEmergency("⚠ Febrile child with RED FLAG — treat as paediatric sepsis until proven otherwise",
+            var r = sepsisEmergency("⚠ Febrile child with RED FLAG - treat as paediatric sepsis until proven otherwise",
               ["ANY red flag (age < 3 months, toxic look, non-blanching rash, prolonged cap refill, or lethargy) = full septic screen + sepsis pathway.", "A well-looking infant < 3 months with fever still needs urgent paediatric assessment and a septic work-up."]);
             r.abx = {
               firstLine: [
                 { drug: "Ceftriaxone", dose: "80 mg/kg", route: "IV once daily", note: "Use meningitic dosing (50 mg/kg q12h) if meningitis possible; max per formulary." }
               ],
               alt: [
-                { drug: "Cefotaxime", dose: "50 mg/kg", route: "IV q6–8h", note: "Preferred over ceftriaxone in infants < 3 months / neonatal age." },
-                { drug: "Ampicillin + Gentamicin", dose: "weight-based — per paediatric formulary", route: "IV", note: "Prefer in infants < 3 months (Listeria/enterococcal cover); add aciclovir if HSV/encephalitis suspected." }
+                { drug: "Cefotaxime", dose: "50 mg/kg", route: "IV q6-8h", note: "Preferred over ceftriaxone in infants < 3 months / neonatal age." },
+                { drug: "Ampicillin + Gentamicin", dose: "weight-based - per paediatric formulary", route: "IV", note: "Prefer in infants < 3 months (Listeria/enterococcal cover); add aciclovir if HSV/encephalitis suspected." }
               ],
               ref: "WHO / national paediatric sepsis / ICMR",
-              note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+              note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
             };
             return r;
           }
           if (has(sel, "immuno") || (has(sel, "highfever") && has(sel, "poorfeed")))
-            return { emergency: false, ladder: 3, catg: "Febrile child — intermediate risk / needs paediatric assessment",
-              sc: "Septic screen (bloods, urine ± CXR/LP) per age and clinical picture; observe.", ref: "Paediatric review; admit for observation if immunocompromised, unimmunised or not improving.", mgmt: ["Do NOT give blind antibiotics to a well child — but have a low threshold to treat and admit the high-risk child; choice per local guidance / ICMR, dosing weight-based per paediatric formulary.", "Safety-net thoroughly and reassess appearance, work of breathing and hydration."] };
+            return { emergency: false, ladder: 3, catg: "Febrile child - intermediate risk / needs paediatric assessment",
+              sc: "Septic screen (bloods, urine ± CXR/LP) per age and clinical picture; observe.", ref: "Paediatric review; admit for observation if immunocompromised, unimmunised or not improving.", mgmt: ["Do NOT give blind antibiotics to a well child - but have a low threshold to treat and admit the high-risk child; choice per local guidance / ICMR, dosing weight-based per paediatric formulary.", "Safety-net thoroughly and reassess appearance, work of breathing and hydration."] };
           if (has(sel, "source"))
             return { emergency: false, ladder: 2, catg: "Febrile child with an identified source",
-              sc: "No procedure — treat the identified source; open the relevant syndrome pathway.", ref: "Follow-up per the source; escalate if the child becomes toxic or dehydrated.", mgmt: ["Manage the specific source (viral sources need supportive care only, not antibiotics).", "Antibiotic choice, if indicated, per local guidance / ICMR; ALL dosing weight-based per paediatric formulary / local protocol."] };
-          return { emergency: false, ladder: 0, catg: "Well febrile child, no source — likely self-limiting viral illness",
-            sc: "No procedure.", ref: "Safety-net (return if drowsy, non-blanching rash, poor feeding, breathing difficulty, cold hands/feet, or fever > 5 days); review if not settling.", mgmt: ["Supportive care — fluids, antipyresis for distress, observation. Antibiotics are NOT indicated for a well child without a bacterial source.", "Give clear return advice describing the red flags to the carer."] };
+              sc: "No procedure - treat the identified source; open the relevant syndrome pathway.", ref: "Follow-up per the source; escalate if the child becomes toxic or dehydrated.", mgmt: ["Manage the specific source (viral sources need supportive care only, not antibiotics).", "Antibiotic choice, if indicated, per local guidance / ICMR; ALL dosing weight-based per paediatric formulary / local protocol."] };
+          return { emergency: false, ladder: 0, catg: "Well febrile child, no source - likely self-limiting viral illness",
+            sc: "No procedure.", ref: "Safety-net (return if drowsy, non-blanching rash, poor feeding, breathing difficulty, cold hands/feet, or fever > 5 days); review if not settling.", mgmt: ["Supportive care - fluids, antipyresis for distress, observation. Antibiotics are NOT indicated for a well child without a bacterial source.", "Give clear return advice describing the red flags to the carer."] };
         }
       },
       /* ───────────────────── Suspected meningitis / meningococcal sepsis ───────────────────── */
@@ -140,11 +140,11 @@
           { id: "neck_stiff", label: "Neck stiffness / Kernig / Brudzinski" },
           { id: "fontanelle", label: "Bulging fontanelle (infant)" },
           { id: "altered", label: "Altered consciousness / seizures / focal neuro signs" },
-          { id: "shock", label: "Shock — mottled, cold, prolonged cap refill, hypotension (late)" }
+          { id: "shock", label: "Shock - mottled, cold, prolonged cap refill, hypotension (late)" }
         ],
         assess: function () {
-          var r = sepsisEmergency("⚠ Suspected meningitis / meningococcal sepsis — medical emergency",
-            ["Do NOT delay antibiotics for LP, CT or any imaging — give empirical antibiotics IMMEDIATELY (choice per local guidance / ICMR, weight-based dosing per paediatric formulary).", "Consider steroid and, in meningococcal disease, isolation + public-health notification + contact prophylaxis per local protocol.", "PICU escalation; watch for raised ICP and shock."]);
+          var r = sepsisEmergency("⚠ Suspected meningitis / meningococcal sepsis - medical emergency",
+            ["Do NOT delay antibiotics for LP, CT or any imaging - give empirical antibiotics IMMEDIATELY (choice per local guidance / ICMR, weight-based dosing per paediatric formulary).", "Consider steroid and, in meningococcal disease, isolation + public-health notification + contact prophylaxis per local protocol.", "PICU escalation; watch for raised ICP and shock."]);
           r.abx = {
             firstLine: [
               { drug: "Ceftriaxone", dose: "50 mg/kg", route: "IV q12h", note: "Meningitic dosing (100 mg/kg/day); give IMMEDIATELY, before LP/imaging." }
@@ -152,17 +152,17 @@
             alt: [
               { drug: "Cefotaxime", dose: "50 mg/kg", route: "IV q6h", note: "Preferred over ceftriaxone in neonates / infants < 3 months." },
               { drug: "+ Vancomycin", dose: "15 mg/kg", route: "IV q6h", note: "ADD if resistant pneumococcus suspected; monitor levels." },
-              { drug: "+ Ampicillin", dose: "weight-based — per paediatric formulary", route: "IV", note: "ADD Listeria cover in infants < 3 months; add aciclovir if encephalitis suspected." }
+              { drug: "+ Ampicillin", dose: "weight-based - per paediatric formulary", route: "IV", note: "ADD Listeria cover in infants < 3 months; add aciclovir if encephalitis suspected." }
             ],
             ref: "WHO / national paediatric / ICMR",
-            note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+            note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
           };
           return r;
         }
       },
       /* ───────────────────── Febrile seizure ───────────────────── */
       {
-        id: "febrile_seizure", name: "Febrile seizure (6 mo – 6 yr)",
+        id: "febrile_seizure", name: "Febrile seizure (6 mo - 6 yr)",
         q: [
           { id: "generalised", label: "Generalised, < 15 min, single in 24 h (simple)" },
           { id: "recovered", label: "Fully recovered / back to baseline" },
@@ -178,11 +178,11 @@
         ],
         assess: function (sel) {
           if (has(sel, "ongoing"))
-            return { emergency: true, ladder: 5, catg: "⚠ Prolonged / ongoing seizure — status epilepticus pathway",
-              sc: "Airway + high-flow oxygen; check glucose; IV/IO access; benzodiazepine per the paediatric status epilepticus protocol (weight-based dosing per formulary).", ref: "Emergency paediatric team + PICU escalation NOW.", mgmt: ["Treat the seizure per status protocol; do a septic screen and exclude CNS infection / hypoglycaemia.", "Antibiotics only if sepsis / meningitis is suspected — the seizure itself is not treated with antibiotics."] };
+            return { emergency: true, ladder: 5, catg: "⚠ Prolonged / ongoing seizure - status epilepticus pathway",
+              sc: "Airway + high-flow oxygen; check glucose; IV/IO access; benzodiazepine per the paediatric status epilepticus protocol (weight-based dosing per formulary).", ref: "Emergency paediatric team + PICU escalation NOW.", mgmt: ["Treat the seizure per status protocol; do a septic screen and exclude CNS infection / hypoglycaemia.", "Antibiotics only if sepsis / meningitis is suspected - the seizure itself is not treated with antibiotics."] };
           if (anyOf(sel, ["cns", "notback"])) {
-            var r = sepsisEmergency("⚠ Seizure with features suggesting CNS infection — treat as meningitis / encephalitis",
-              ["A seizure with meningism, altered consciousness or a non-blanching rash is NOT a simple febrile seizure — full septic screen (incl. LP) + empirical antibiotics ± antivirals without delay.", "Have a very low threshold for CNS infection in a child under 18 months, who often lacks classic meningism."]);
+            var r = sepsisEmergency("⚠ Seizure with features suggesting CNS infection - treat as meningitis / encephalitis",
+              ["A seizure with meningism, altered consciousness or a non-blanching rash is NOT a simple febrile seizure - full septic screen (incl. LP) + empirical antibiotics ± antivirals without delay.", "Have a very low threshold for CNS infection in a child under 18 months, who often lacks classic meningism."]);
             r.abx = {
               firstLine: [
                 { drug: "Ceftriaxone", dose: "50 mg/kg", route: "IV q12h", note: "Meningitic dosing; do not delay for LP." }
@@ -193,15 +193,15 @@
                 { drug: "+ Vancomycin", dose: "15 mg/kg", route: "IV q6h", note: "ADD if resistant pneumococcus suspected; monitor levels." }
               ],
               ref: "WHO / national paediatric / ICMR",
-              note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+              note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
             };
             return r;
           }
           if (anyOf(sel, ["complex", "ageband"]))
-            return { emergency: false, ladder: 3, catg: "Complex / atypical febrile seizure — needs paediatric assessment",
-              sc: "Assess for a source; investigate per age and picture; consider observation / admission.", ref: "Paediatric review; admit if complex, first seizure, age outside 6 mo–6 yr, or diagnostic doubt.", mgmt: ["Complex features (focal, prolonged, or recurrent within 24 h) warrant fuller assessment and a lower threshold to exclude CNS infection.", "Identify and treat the fever source; antibiotics only if a bacterial source or CNS infection is found (choice per local guidance / ICMR)."] };
-          return { emergency: false, ladder: 0, catg: "Simple febrile seizure — benign, self-limiting",
-            sc: "No procedure — recovery position during any seizure; identify the fever source.", ref: "Safety-net (return if a seizure lasts > 5 min, recurs, focal features, drowsiness, or non-blanching rash); routine review.", mgmt: ["Reassure: simple febrile seizures are benign, do NOT cause epilepsy or brain damage, and do NOT need antiepileptics.", "Manage the underlying fever; most sources are viral — antibiotics are NOT indicated for the seizure itself.", "Antipyretics ease distress but do NOT prevent recurrence."] };
+            return { emergency: false, ladder: 3, catg: "Complex / atypical febrile seizure - needs paediatric assessment",
+              sc: "Assess for a source; investigate per age and picture; consider observation / admission.", ref: "Paediatric review; admit if complex, first seizure, age outside 6 mo-6 yr, or diagnostic doubt.", mgmt: ["Complex features (focal, prolonged, or recurrent within 24 h) warrant fuller assessment and a lower threshold to exclude CNS infection.", "Identify and treat the fever source; antibiotics only if a bacterial source or CNS infection is found (choice per local guidance / ICMR)."] };
+          return { emergency: false, ladder: 0, catg: "Simple febrile seizure - benign, self-limiting",
+            sc: "No procedure - recovery position during any seizure; identify the fever source.", ref: "Safety-net (return if a seizure lasts > 5 min, recurs, focal features, drowsiness, or non-blanching rash); routine review.", mgmt: ["Reassure: simple febrile seizures are benign, do NOT cause epilepsy or brain damage, and do NOT need antiepileptics.", "Manage the underlying fever; most sources are viral - antibiotics are NOT indicated for the seizure itself.", "Antipyretics ease distress but do NOT prevent recurrence."] };
         }
       },
       /* ───────────────────── Gastroenteritis / dehydration ───────────────────── */
@@ -215,36 +215,36 @@
           { id: "young", label: "Age < 6 months / malnourished / comorbidity" }
         ],
         danger: [
-          { id: "shock", label: "Shock — lethargic/floppy, cold, prolonged cap refill, weak pulse" },
-          { id: "severe", label: "Severe dehydration — sunken eyes, very slow skin pinch, unable to drink" },
+          { id: "shock", label: "Shock - lethargic/floppy, cold, prolonged cap refill, weak pulse" },
+          { id: "severe", label: "Severe dehydration - sunken eyes, very slow skin pinch, unable to drink" },
           { id: "bilious", label: "Bilious/green vomiting / abdominal distension (?surgical)" },
           { id: "altered", label: "Reduced consciousness / seizures / anuria" }
         ],
         assess: function (sel) {
           if (anyOf(sel, ["shock", "severe", "altered"]))
-            return { emergency: true, ladder: 5, catg: "⚠ Severe dehydration / hypovolaemic shock — resuscitate NOW (WHO Plan C)",
-              sc: "Immediate IV/IO access and rapid fluid resuscitation per the paediatric fluid protocol; if no access, escalate for IO. Check glucose; oxygen if shocked.", ref: "Emergency paediatric team + PICU escalation NOW.", mgmt: ["Rapid rehydration by IV/IO (volumes weight-based per protocol) — do NOT rely on oral route in the shocked or obtunded child.", "Antibiotics are NOT indicated for routine acute watery diarrhoea; add only for dysentery, suspected cholera or sepsis (choice per local guidance / ICMR).", "Continue feeding/breastfeeding as able; give zinc supplementation per ICMR / local protocol; reassess perfusion and urine output frequently."] };
+            return { emergency: true, ladder: 5, catg: "⚠ Severe dehydration / hypovolaemic shock - resuscitate NOW (WHO Plan C)",
+              sc: "Immediate IV/IO access and rapid fluid resuscitation per the paediatric fluid protocol; if no access, escalate for IO. Check glucose; oxygen if shocked.", ref: "Emergency paediatric team + PICU escalation NOW.", mgmt: ["Rapid rehydration by IV/IO (volumes weight-based per protocol) - do NOT rely on oral route in the shocked or obtunded child.", "Antibiotics are NOT indicated for routine acute watery diarrhoea; add only for dysentery, suspected cholera or sepsis (choice per local guidance / ICMR).", "Continue feeding/breastfeeding as able; give zinc supplementation per ICMR / local protocol; reassess perfusion and urine output frequently."] };
           if (anyOf(sel, ["orsfail", "bilious"]))
             return { emergency: false, ladder: 3, catg: "Dehydration with failed oral rehydration / possible surgical abdomen",
-              sc: "Admit; rehydrate via NG or IV per protocol; surgical review if bilious vomiting / distension / suspected obstruction or intussusception.", ref: "Paediatric review; surgical opinion if any surgical red flag.", mgmt: ["Trial ORS little-and-often; escalate to NG/IV if vomiting persists or intake inadequate.", "Bilious vomiting is a surgical emergency until proven otherwise — do not label as simple gastroenteritis.", "Antibiotics NOT routine; give zinc per protocol; assess for hypoglycaemia."] };
+              sc: "Admit; rehydrate via NG or IV per protocol; surgical review if bilious vomiting / distension / suspected obstruction or intussusception.", ref: "Paediatric review; surgical opinion if any surgical red flag.", mgmt: ["Trial ORS little-and-often; escalate to NG/IV if vomiting persists or intake inadequate.", "Bilious vomiting is a surgical emergency until proven otherwise - do not label as simple gastroenteritis.", "Antibiotics NOT routine; give zinc per protocol; assess for hypoglycaemia."] };
           if (has(sel, "blood"))
-            return { emergency: false, ladder: 2, catg: "Bloody diarrhoea (dysentery) — may need antibiotics",
-              sc: "No procedure; send stool per local protocol; assess hydration.", ref: "Paediatric review; escalate if dehydrated or systemically unwell.", mgmt: ["Dysentery (bloody stool) may warrant antibiotics — choice per local guidance / ICMR; ALL dosing weight-based per paediatric formulary.", "Continue ORS + feeding + zinc per protocol; AVOID anti-motility agents in children.", "Reassess for HUS (pallor, reduced urine, bruising) if E. coli / bloody diarrhoea."],
+            return { emergency: false, ladder: 2, catg: "Bloody diarrhoea (dysentery) - may need antibiotics",
+              sc: "No procedure; send stool per local protocol; assess hydration.", ref: "Paediatric review; escalate if dehydrated or systemically unwell.", mgmt: ["Dysentery (bloody stool) may warrant antibiotics - choice per local guidance / ICMR; ALL dosing weight-based per paediatric formulary.", "Continue ORS + feeding + zinc per protocol; AVOID anti-motility agents in children.", "Reassess for HUS (pallor, reduced urine, bruising) if E. coli / bloody diarrhoea."],
               abx: {
                 firstLine: [
                   { drug: "Ciprofloxacin", dose: "15 mg/kg", route: "PO q12h", note: "WHO first-line for bloody diarrhoea (Shigella); 3 days." }
                 ],
                 alt: [
-                  { drug: "Azithromycin", dose: "10–12 mg/kg", route: "PO once daily", note: "3 days; useful where fluoroquinolone resistance is high." },
-                  { drug: "Cefixime", dose: "8 mg/kg", route: "PO once daily (1–2 divided doses)", note: "Alternative per local sensitivity." }
+                  { drug: "Azithromycin", dose: "10-12 mg/kg", route: "PO once daily", note: "3 days; useful where fluoroquinolone resistance is high." },
+                  { drug: "Cefixime", dose: "8 mg/kg", route: "PO once daily (1-2 divided doses)", note: "Alternative per local sensitivity." }
                 ],
                 ref: "WHO diarrhoea management / ICMR",
-                note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+                note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
               } };
           if (anyOf(sel, ["somededehyd", "young"]))
-            return { emergency: false, ladder: 0, catg: "Some dehydration — supervised oral rehydration (WHO Plan B)",
-              sc: "No procedure — give ORS little-and-often over 4 h; observe ability to tolerate.", ref: "Review / admit if unable to tolerate ORS, high-output, or age < 6 months; escalate on any shock sign.", mgmt: ["ORS is the mainstay — replace losses with frequent small volumes; continue breastfeeding/feeding.", "Give zinc supplementation per ICMR / local protocol; antibiotics NOT indicated for watery diarrhoea.", "Teach carers the red flags: floppy/drowsy, sunken eyes, no urine, blood in stool, green vomit."] };
-          return { emergency: false, ladder: 0, catg: "Gastroenteritis, no dehydration — manage at home (WHO Plan A)",
+            return { emergency: false, ladder: 0, catg: "Some dehydration - supervised oral rehydration (WHO Plan B)",
+              sc: "No procedure - give ORS little-and-often over 4 h; observe ability to tolerate.", ref: "Review / admit if unable to tolerate ORS, high-output, or age < 6 months; escalate on any shock sign.", mgmt: ["ORS is the mainstay - replace losses with frequent small volumes; continue breastfeeding/feeding.", "Give zinc supplementation per ICMR / local protocol; antibiotics NOT indicated for watery diarrhoea.", "Teach carers the red flags: floppy/drowsy, sunken eyes, no urine, blood in stool, green vomit."] };
+          return { emergency: false, ladder: 0, catg: "Gastroenteritis, no dehydration - manage at home (WHO Plan A)",
             sc: "No procedure.", ref: "Safety-net (return for reduced urine output, drowsiness, sunken eyes, blood in stool, bilious vomiting, or inability to drink).", mgmt: ["Home ORS after each loose stool + continue normal feeding/breastfeeding; zinc supplementation per ICMR / local protocol.", "Antibiotics and anti-emetics/anti-motility drugs are NOT indicated in routine viral gastroenteritis.", "Advise hand hygiene / safe water; give clear carer red-flag advice."] };
         }
       },
@@ -266,14 +266,14 @@
         assess: function (sel) {
           if (anyOf(sel, ["silent", "cyanosis", "altered"]))
             return { emergency: true, ladder: 5, catg: "⚠ Life-threatening asthma / acute severe wheeze",
-              sc: "High-flow oxygen to keep SpO₂ ≥ 94%; back-to-back inhaled bronchodilators ± ipratropium; early systemic steroid; IV bronchodilators / magnesium per protocol (all dosing weight-based per formulary).", ref: "Emergency paediatric team + PICU escalation NOW; prepare for respiratory support.", mgmt: ["A silent chest, cyanosis, poor effort or drowsiness signals impending arrest — treat and escalate immediately.", "Antibiotics are NOT part of acute asthma management — most exacerbations are viral-triggered."] };
+              sc: "High-flow oxygen to keep SpO₂ ≥ 94%; back-to-back inhaled bronchodilators ± ipratropium; early systemic steroid; IV bronchodilators / magnesium per protocol (all dosing weight-based per formulary).", ref: "Emergency paediatric team + PICU escalation NOW; prepare for respiratory support.", mgmt: ["A silent chest, cyanosis, poor effort or drowsiness signals impending arrest - treat and escalate immediately.", "Antibiotics are NOT part of acute asthma management - most exacerbations are viral-triggered."] };
           if (has(sel, "severe"))
-            return { emergency: false, ladder: 3, catg: "Acute severe wheeze — admit for treatment",
+            return { emergency: false, ladder: 3, catg: "Acute severe wheeze - admit for treatment",
               sc: "Oxygen if SpO₂ < 92%; inhaled bronchodilator via spacer/nebuliser + oral/IV steroid per protocol; reassess response.", ref: "Paediatric admission; escalate if life-threatening features or poor response.", mgmt: ["Assess severity by SpO₂, work of breathing and ability to talk/feed; reassess after each bronchodilator.", "Give a steroid course per local protocol (weight-based dosing per formulary); antibiotics NOT indicated unless a bacterial infection is proven."] };
           if (anyOf(sel, ["wheeze", "known", "trigger"]))
-            return { emergency: false, ladder: 0, catg: "Mild–moderate wheeze — treat and review",
-              sc: "No procedure — inhaled bronchodilator via a spacer is first-line; observe response.", ref: "Safety-net (return for fast/hard breathing, unable to talk/feed, blue lips, or bronchodilator wearing off quickly); GP/paediatric review.", mgmt: ["Inhaled bronchodilator via spacer is first-line; a short steroid course per protocol if significant exacerbation (dosing weight-based per formulary).", "Antibiotics are NOT indicated — triggers are usually viral; check inhaler technique and review the asthma plan.", "Recurrent wheeze in an infant < 1 yr is more often bronchiolitis / viral — reconsider the diagnosis."] };
-          return { emergency: false, ladder: 0, catg: "No active wheeze / not asthma — supportive",
+            return { emergency: false, ladder: 0, catg: "Mild-moderate wheeze - treat and review",
+              sc: "No procedure - inhaled bronchodilator via a spacer is first-line; observe response.", ref: "Safety-net (return for fast/hard breathing, unable to talk/feed, blue lips, or bronchodilator wearing off quickly); GP/paediatric review.", mgmt: ["Inhaled bronchodilator via spacer is first-line; a short steroid course per protocol if significant exacerbation (dosing weight-based per formulary).", "Antibiotics are NOT indicated - triggers are usually viral; check inhaler technique and review the asthma plan.", "Recurrent wheeze in an infant < 1 yr is more often bronchiolitis / viral - reconsider the diagnosis."] };
+          return { emergency: false, ladder: 0, catg: "No active wheeze / not asthma - supportive",
             sc: "No procedure.", ref: "Safety-net; review if wheeze, breathlessness or poor feeding develop.", mgmt: ["Supportive care; antibiotics NOT indicated.", "Reassess the diagnosis if breathing difficulty or focal chest signs appear."] };
         }
       },
@@ -283,7 +283,7 @@
         q: [
           { id: "otalgia", label: "Ear pain / ear-tugging / irritability" }, { id: "fever", label: "Fever" },
           { id: "under2_bilat", label: "Age < 2 with BILATERAL infection" }, { id: "otorrhoea", label: "Otorrhoea / discharge (perforation)" },
-          { id: "systemic", label: "Systemically unwell / not settling at 48–72 h" }, { id: "immuno", label: "Immunocompromise / comorbidity" }
+          { id: "systemic", label: "Systemically unwell / not settling at 48-72 h" }, { id: "immuno", label: "Immunocompromise / comorbidity" }
         ],
         danger: [
           { id: "mastoid", label: "Post-auricular swelling / protruding pinna (mastoiditis)" },
@@ -293,7 +293,7 @@
         assess: function (sel) {
           if (anyOf(sel, ["intracranial", "toxic"]))
             return { emergency: true, ladder: 5, catg: "AOM with suspected complication / systemically unwell child",
-              sc: "Urgent assessment ± imaging (CT/MRI); ENT for possible source control (myringotomy ± mastoid surgery).", ref: "Emergency paediatric + ENT review; admit / PICU escalation if toxic.", mgmt: ["Admit for IV antibiotics per local guidance / ICMR (weight-based dosing per paediatric formulary).", "This is a complication of AOM — do not treat as a simple ear infection."],
+              sc: "Urgent assessment ± imaging (CT/MRI); ENT for possible source control (myringotomy ± mastoid surgery).", ref: "Emergency paediatric + ENT review; admit / PICU escalation if toxic.", mgmt: ["Admit for IV antibiotics per local guidance / ICMR (weight-based dosing per paediatric formulary).", "This is a complication of AOM - do not treat as a simple ear infection."],
               abx: {
                 firstLine: [
                   { drug: "Ceftriaxone", dose: "50 mg/kg", route: "IV q12h", note: "Meningitic dosing for suspected intracranial spread." }
@@ -303,38 +303,38 @@
                   { drug: "+ Vancomycin", dose: "15 mg/kg", route: "IV q6h", note: "ADD if intracranial complication / resistant pneumococcus; monitor levels." }
                 ],
                 ref: "WHO / national paediatric / ICMR",
-                note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+                note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
               } };
           if (has(sel, "mastoid"))
             return { emergency: true, ladder: 4, catg: "AOM with suspected acute mastoiditis",
               sc: "Imaging (CT temporal bone); ENT for myringotomy ± drainage of subperiosteal abscess.", ref: "Urgent ENT + paediatrics; admit.", mgmt: ["IV antibiotics per local guidance / ICMR, dosing weight-based per paediatric formulary; de-escalate on culture."],
               abx: {
                 firstLine: [
-                  { drug: "Ceftriaxone", dose: "50–80 mg/kg", route: "IV once daily", note: "De-escalate on culture." }
+                  { drug: "Ceftriaxone", dose: "50-80 mg/kg", route: "IV once daily", note: "De-escalate on culture." }
                 ],
                 alt: [
-                  { drug: "Amoxicillin–clavulanate", dose: "weight-based — per paediatric formulary", route: "IV", note: "Per local protocol." },
+                  { drug: "Amoxicillin-clavulanate", dose: "weight-based - per paediatric formulary", route: "IV", note: "Per local protocol." },
                   { drug: "+ Vancomycin", dose: "15 mg/kg", route: "IV q6h", note: "ADD if MRSA / intracranial spread; monitor levels." }
                 ],
                 ref: "WHO / national paediatric / ICMR",
-                note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+                note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
               } };
           if (anyOf(sel, ["under2_bilat", "otorrhoea", "systemic", "immuno"]))
             return { emergency: false, ladder: 2, catg: "AOM likely to benefit from antibiotics",
-              sc: "No procedure — treat medically; ENT if recurrent perforation / persistent discharge.", ref: "Review at 48–72 h; escalate if the child becomes toxic or dehydrated.", mgmt: ["Antibiotics reasonable (age < 2 with bilateral disease, otorrhoea, systemic upset or immunocompromise) — choice per local guidance / ICMR, ALL dosing weight-based per paediatric formulary.", "Analgesia (weight-based) is the mainstay for pain."],
+              sc: "No procedure - treat medically; ENT if recurrent perforation / persistent discharge.", ref: "Review at 48-72 h; escalate if the child becomes toxic or dehydrated.", mgmt: ["Antibiotics reasonable (age < 2 with bilateral disease, otorrhoea, systemic upset or immunocompromise) - choice per local guidance / ICMR, ALL dosing weight-based per paediatric formulary.", "Analgesia (weight-based) is the mainstay for pain."],
               abx: {
                 firstLine: [
-                  { drug: "Amoxicillin", dose: "40 mg/kg", route: "PO q12h", note: "High-dose (~80–90 mg/kg/day); 5–7 days." }
+                  { drug: "Amoxicillin", dose: "40 mg/kg", route: "PO q12h", note: "High-dose (~80-90 mg/kg/day); 5-7 days." }
                 ],
                 alt: [
-                  { drug: "Amoxicillin–clavulanate", dose: "weight-based — per paediatric formulary", route: "PO", note: "If recent amoxicillin, otorrhoea, or treatment failure." },
+                  { drug: "Amoxicillin-clavulanate", dose: "weight-based - per paediatric formulary", route: "PO", note: "If recent amoxicillin, otorrhoea, or treatment failure." },
                   { drug: "Azithromycin", dose: "10 mg/kg", route: "PO once daily", note: "Penicillin allergy; 3 days (dose age/day-adjusted)." }
                 ],
                 ref: "WHO / national paediatric / ICMR",
-                note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+                note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
               } };
-          return { emergency: false, ladder: 0, catg: "Uncomplicated AOM — mostly viral / self-limiting",
-            sc: "No procedure.", ref: "Safety-net; review if no improvement at 48–72 h or discharge / mastoid signs develop.", mgmt: ["Analgesia + watchful waiting — antibiotics usually NOT needed and can be safely deferred 48–72 h in the well child.", "Antibiotics only if it fails to settle or red flags appear (age < 2 bilateral, otorrhoea, systemic upset)."] };
+          return { emergency: false, ladder: 0, catg: "Uncomplicated AOM - mostly viral / self-limiting",
+            sc: "No procedure.", ref: "Safety-net; review if no improvement at 48-72 h or discharge / mastoid signs develop.", mgmt: ["Analgesia + watchful waiting - antibiotics usually NOT needed and can be safely deferred 48-72 h in the well child.", "Antibiotics only if it fails to settle or red flags appear (age < 2 bilateral, otorrhoea, systemic upset)."] };
         }
       },
       /* ───────────────────── Tonsillitis / pharyngitis (paediatric) ───────────────────── */
@@ -352,43 +352,43 @@
         ],
         assess: function (sel) {
           if (has(sel, "airway"))
-            return airwayEmergency("Sore throat with airway compromise — exclude epiglottitis / deep-neck abscess",
+            return airwayEmergency("Sore throat with airway compromise - exclude epiglottitis / deep-neck abscess",
               ["Do NOT attempt throat examination if stridor or drooling."]);
           if (has(sel, "unilateral"))
             return { emergency: false, ladder: 4, catg: "Peritonsillar abscess (quinsy)",
-              sc: "ENT for needle aspiration / incision & drainage — drainage is the primary treatment.", ref: "Urgent ENT + paediatrics; watch the airway.", mgmt: ["IV antibiotics per local guidance / ICMR (weight-based dosing) as adjunct to drainage; IV fluids; analgesia."],
+              sc: "ENT for needle aspiration / incision & drainage - drainage is the primary treatment.", ref: "Urgent ENT + paediatrics; watch the airway.", mgmt: ["IV antibiotics per local guidance / ICMR (weight-based dosing) as adjunct to drainage; IV fluids; analgesia."],
               abx: {
                 firstLine: [
-                  { drug: "Benzylpenicillin", dose: "weight-based — per paediatric formulary", route: "IV q6h", note: "Adjunct to drainage." },
+                  { drug: "Benzylpenicillin", dose: "weight-based - per paediatric formulary", route: "IV q6h", note: "Adjunct to drainage." },
                   { drug: "+ Metronidazole", dose: "7.5 mg/kg", route: "IV q8h", note: "Anaerobic cover for peritonsillar abscess." }
                 ],
                 alt: [
-                  { drug: "Amoxicillin–clavulanate", dose: "weight-based — per paediatric formulary", route: "IV", note: "Covers strep + anaerobes; AVOID if glandular fever (EBV) possible." },
+                  { drug: "Amoxicillin-clavulanate", dose: "weight-based - per paediatric formulary", route: "IV", note: "Covers strep + anaerobes; AVOID if glandular fever (EBV) possible." },
                   { drug: "Clindamycin", dose: "10 mg/kg", route: "IV q8h", note: "Penicillin allergy." }
                 ],
                 ref: "WHO / national paediatric / ICMR",
-                note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+                note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
               } };
           if (has(sel, "toxic"))
             return { emergency: false, ladder: 3, catg: "Tonsillitis with dehydration / unable to maintain intake",
-              sc: "No procedure — assess hydration.", ref: "Paediatric review; admit for IV fluids if not tolerating oral intake.", mgmt: ["Admit for IV fluids and analgesia; antibiotics only if bacterial features, per local guidance / ICMR (weight-based dosing).", "AVOID aminopenicillins if glandular fever is possible."] };
+              sc: "No procedure - assess hydration.", ref: "Paediatric review; admit for IV fluids if not tolerating oral intake.", mgmt: ["Admit for IV fluids and analgesia; antibiotics only if bacterial features, per local guidance / ICMR (weight-based dosing).", "AVOID aminopenicillins if glandular fever is possible."] };
           var centor = (has(sel, "exudate") ? 1 : 0) + (has(sel, "fever") ? 1 : 0) + (has(sel, "nodes") ? 1 : 0) + (has(sel, "nocough") ? 1 : 0);
           if (centor >= 3)
             return { emergency: false, ladder: 2, catg: "Possible bacterial (group A strep) tonsillitis",
-              sc: "No procedure.", ref: "Review at 48 h; ENT if recurrent or peritonsillar spread.", mgmt: ["Antibiotic reasonable with high bacterial score — penicillin-class per local guidance / ICMR; ALL dosing weight-based per paediatric formulary. AVOID aminopenicillins if glandular fever possible.", "Analgesia + fluids; safety-net for airway symptoms and dehydration."],
+              sc: "No procedure.", ref: "Review at 48 h; ENT if recurrent or peritonsillar spread.", mgmt: ["Antibiotic reasonable with high bacterial score - penicillin-class per local guidance / ICMR; ALL dosing weight-based per paediatric formulary. AVOID aminopenicillins if glandular fever possible.", "Analgesia + fluids; safety-net for airway symptoms and dehydration."],
               abx: {
                 firstLine: [
-                  { drug: "Phenoxymethylpenicillin (penicillin V)", dose: "weight-based — per paediatric formulary", route: "PO q6–12h", note: "First-line for group A strep; 10-day course." }
+                  { drug: "Phenoxymethylpenicillin (penicillin V)", dose: "weight-based - per paediatric formulary", route: "PO q6-12h", note: "First-line for group A strep; 10-day course." }
                 ],
                 alt: [
-                  { drug: "Amoxicillin", dose: "40 mg/kg", route: "PO q12h", note: "Alternative — AVOID if glandular fever (EBV) possible (rash risk)." },
-                  { drug: "Azithromycin", dose: "12 mg/kg", route: "PO once daily", note: "Penicillin allergy; 3–5 days (max per formulary)." }
+                  { drug: "Amoxicillin", dose: "40 mg/kg", route: "PO q12h", note: "Alternative - AVOID if glandular fever (EBV) possible (rash risk)." },
+                  { drug: "Azithromycin", dose: "12 mg/kg", route: "PO once daily", note: "Penicillin allergy; 3-5 days (max per formulary)." }
                 ],
                 ref: "WHO / national paediatric / ICMR",
-                note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+                note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
               } };
-          return { emergency: false, ladder: 0, catg: "Sore throat — likely viral / self-limiting",
-            sc: "No procedure.", ref: "Safety-net; review if unable to swallow, unilateral swelling, drooling or airway symptoms.", mgmt: ["Analgesia + fluids — antibiotics usually NOT needed (most childhood pharyngitis is viral).", "Antibiotics only if clear bacterial features; escalate for airway compromise or dehydration."] };
+          return { emergency: false, ladder: 0, catg: "Sore throat - likely viral / self-limiting",
+            sc: "No procedure.", ref: "Safety-net; review if unable to swallow, unilateral swelling, drooling or airway symptoms.", mgmt: ["Analgesia + fluids - antibiotics usually NOT needed (most childhood pharyngitis is viral).", "Antibiotics only if clear bacterial features; escalate for airway compromise or dehydration."] };
         }
       },
       /* ───────────────────── Bronchiolitis ───────────────────── */
@@ -396,7 +396,7 @@
         id: "bronchiolitis", name: "Bronchiolitis (< 2 yr)",
         q: [
           { id: "coryza_wheeze", label: "Coryza then wheeze / crackles (age < 2 yr)" },
-          { id: "feeding", label: "Reduced feeding (< 50–75% normal)" },
+          { id: "feeding", label: "Reduced feeding (< 50-75% normal)" },
           { id: "risk", label: "Risk factor (prematurity, chronic lung/heart disease, age < 3 months)" }
         ],
         danger: [
@@ -407,13 +407,13 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["apnoea", "exhaustion", "hypoxia"]))
-            return { emergency: true, ladder: 5, catg: "⚠ Severe bronchiolitis — impending respiratory failure",
-              sc: "Oxygen / high-flow or CPAP as needed; support feeding (NG or IV fluids); prepare for respiratory support.", ref: "Emergency paediatric + PICU escalation NOW.", mgmt: ["Supportive care is the treatment — antibiotics are NOT indicated for viral bronchiolitis (add only if secondary bacterial infection is suspected, per local guidance / ICMR).", "Apnoea / hypoxia / exhaustion = high dependency; monitor closely."] };
+            return { emergency: true, ladder: 5, catg: "⚠ Severe bronchiolitis - impending respiratory failure",
+              sc: "Oxygen / high-flow or CPAP as needed; support feeding (NG or IV fluids); prepare for respiratory support.", ref: "Emergency paediatric + PICU escalation NOW.", mgmt: ["Supportive care is the treatment - antibiotics are NOT indicated for viral bronchiolitis (add only if secondary bacterial infection is suspected, per local guidance / ICMR).", "Apnoea / hypoxia / exhaustion = high dependency; monitor closely."] };
           if (anyOf(sel, ["resp_distress", "feeding", "risk"]))
             return { emergency: false, ladder: 3, catg: "Bronchiolitis needing admission for support",
-              sc: "Admit for oxygen if hypoxic, feeding support (NG / IV fluids), and monitoring for apnoea.", ref: "Paediatric admission; lower threshold if age < 3 months or risk factors.", mgmt: ["SUPPORTIVE care only — no antibiotics, no routine bronchodilators/steroids for typical bronchiolitis.", "Watch for the red flags: apnoea, rising work of breathing, hypoxia, exhaustion — escalate if they appear."] };
-          return { emergency: false, ladder: 0, catg: "Mild bronchiolitis — manage at home",
-            sc: "No procedure.", ref: "Safety-net (return for reduced feeding < 50–75%, increased work of breathing, apnoea, or fewer wet nappies); review as needed.", mgmt: ["Supportive care — small frequent feeds, nasal saline, observation. Antibiotics are NOT indicated.", "Give clear carer red-flag advice and review the young / at-risk infant early."] };
+              sc: "Admit for oxygen if hypoxic, feeding support (NG / IV fluids), and monitoring for apnoea.", ref: "Paediatric admission; lower threshold if age < 3 months or risk factors.", mgmt: ["SUPPORTIVE care only - no antibiotics, no routine bronchodilators/steroids for typical bronchiolitis.", "Watch for the red flags: apnoea, rising work of breathing, hypoxia, exhaustion - escalate if they appear."] };
+          return { emergency: false, ladder: 0, catg: "Mild bronchiolitis - manage at home",
+            sc: "No procedure.", ref: "Safety-net (return for reduced feeding < 50-75%, increased work of breathing, apnoea, or fewer wet nappies); review as needed.", mgmt: ["Supportive care - small frequent feeds, nasal saline, observation. Antibiotics are NOT indicated.", "Give clear carer red-flag advice and review the young / at-risk infant early."] };
         }
       },
       /* ───────────────────── Croup (laryngotracheobronchitis) ───────────────────── */
@@ -430,10 +430,10 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["stridor_rest", "distress", "cyanosis"]))
-            return airwayEmergency("⚠ Severe croup — airway emergency (stridor at rest / distress)",
-              ["Keep the child calm on the parent's lap — agitation worsens obstruction.", "Steroid is the mainstay; give nebulised adrenaline for severe obstruction (weight-based dosing per paediatric formulary); prepare for a difficult airway."]);
-          return { emergency: false, ladder: 0, catg: "Mild croup — viral, self-limiting",
-            sc: "No procedure — keep the child calm and comfortable.", ref: "Safety-net (return for stridor at rest, respiratory distress, drooling, or drowsiness); review if worsening.", mgmt: ["A single dose of oral corticosteroid is the mainstay of treatment (dose weight-based per paediatric formulary / local protocol).", "Antibiotics are NOT indicated — croup is viral. Antipyresis / fluids as needed; escalate for any stridor at rest."] };
+            return airwayEmergency("⚠ Severe croup - airway emergency (stridor at rest / distress)",
+              ["Keep the child calm on the parent's lap - agitation worsens obstruction.", "Steroid is the mainstay; give nebulised adrenaline for severe obstruction (weight-based dosing per paediatric formulary); prepare for a difficult airway."]);
+          return { emergency: false, ladder: 0, catg: "Mild croup - viral, self-limiting",
+            sc: "No procedure - keep the child calm and comfortable.", ref: "Safety-net (return for stridor at rest, respiratory distress, drooling, or drowsiness); review if worsening.", mgmt: ["A single dose of oral corticosteroid is the mainstay of treatment (dose weight-based per paediatric formulary / local protocol).", "Antibiotics are NOT indicated - croup is viral. Antipyresis / fluids as needed; escalate for any stridor at rest."] };
         }
       },
       /* ───────────────────── Community-acquired pneumonia (paediatric) ───────────────────── */
@@ -465,7 +465,7 @@
                 { drug: "+ Azithromycin", dose: "10 mg/kg", route: "IV/PO once daily", note: "ADD if atypical (Mycoplasma) suspected in older child." }
               ],
               ref: "WHO Pocket Book (severe pneumonia) / national paediatric / ICMR",
-              note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+              note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
             };
             return r;
           }
@@ -482,38 +482,38 @@
                   { drug: "+ Cloxacillin", dose: "50 mg/kg", route: "IV q6h", note: "ADD for empyema / suspected Staph aureus (vancomycin if MRSA)." }
                 ],
                 ref: "WHO Pocket Book (severe pneumonia) / national paediatric / ICMR",
-                note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+                note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
               } };
           if (has(sel, "poorfeed") || (has(sel, "tachypnoea") && has(sel, "focal")))
             return { emergency: false, ladder: 3, catg: "Pneumonia needing admission",
-              sc: "Chest imaging if diagnosis unclear; assess oxygenation and hydration.", ref: "Paediatric admission — lower threshold in infants / reduced feeding.", mgmt: ["IV antibiotics if not tolerating oral intake or moderately unwell — choice per local guidance / ICMR, dosing weight-based per paediatric formulary.", "Monitor SpO₂, work of breathing and hydration; escalate if hypoxic or toxic."],
+              sc: "Chest imaging if diagnosis unclear; assess oxygenation and hydration.", ref: "Paediatric admission - lower threshold in infants / reduced feeding.", mgmt: ["IV antibiotics if not tolerating oral intake or moderately unwell - choice per local guidance / ICMR, dosing weight-based per paediatric formulary.", "Monitor SpO₂, work of breathing and hydration; escalate if hypoxic or toxic."],
               abx: {
                 firstLine: [
                   { drug: "Ampicillin", dose: "50 mg/kg", route: "IV q6h", note: "Or benzylpenicillin; step down to oral amoxicillin on improvement." }
                 ],
                 alt: [
-                  { drug: "Ceftriaxone", dose: "50–80 mg/kg", route: "IV once daily" },
+                  { drug: "Ceftriaxone", dose: "50-80 mg/kg", route: "IV once daily" },
                   { drug: "Azithromycin", dose: "10 mg/kg", route: "IV/PO once daily", note: "If atypical pneumonia suspected." }
                 ],
                 ref: "WHO Pocket Book (pneumonia) / national paediatric / ICMR",
-                note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+                note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
               } };
           if (anyOf(sel, ["tachypnoea", "focal"]))
-            return { emergency: false, ladder: 2, catg: "Community pneumonia — well enough for oral therapy",
-              sc: "No procedure; chest imaging only if diagnosis unclear or not improving.", ref: "Review at 48 h; escalate if increased work of breathing, poor feeding or hypoxia develop.", mgmt: ["Oral antibiotics for the well child able to feed — choice per local guidance / ICMR; ALL dosing weight-based per paediatric formulary.", "Safety-net; note many young children have viral LRTI — reassess if not improving."],
+            return { emergency: false, ladder: 2, catg: "Community pneumonia - well enough for oral therapy",
+              sc: "No procedure; chest imaging only if diagnosis unclear or not improving.", ref: "Review at 48 h; escalate if increased work of breathing, poor feeding or hypoxia develop.", mgmt: ["Oral antibiotics for the well child able to feed - choice per local guidance / ICMR; ALL dosing weight-based per paediatric formulary.", "Safety-net; note many young children have viral LRTI - reassess if not improving."],
               abx: {
                 firstLine: [
-                  { drug: "Amoxicillin", dose: "40 mg/kg", route: "PO q12h", note: "High-dose (~80 mg/kg/day) — WHO first-line for non-severe pneumonia; 5 days." }
+                  { drug: "Amoxicillin", dose: "40 mg/kg", route: "PO q12h", note: "High-dose (~80 mg/kg/day) - WHO first-line for non-severe pneumonia; 5 days." }
                 ],
                 alt: [
-                  { drug: "Amoxicillin–clavulanate", dose: "weight-based — per paediatric formulary", route: "PO" },
-                  { drug: "Azithromycin", dose: "10 mg/kg", route: "PO once daily", note: "If atypical (Mycoplasma) suspected in older child; 3–5 days." }
+                  { drug: "Amoxicillin-clavulanate", dose: "weight-based - per paediatric formulary", route: "PO" },
+                  { drug: "Azithromycin", dose: "10 mg/kg", route: "PO once daily", note: "If atypical (Mycoplasma) suspected in older child; 3-5 days." }
                 ],
                 ref: "WHO Pocket Book (pneumonia) / national paediatric / ICMR",
-                note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+                note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
               } };
           return { emergency: false, ladder: 0, catg: "Likely viral lower respiratory tract infection",
-            sc: "No procedure.", ref: "Safety-net for tachypnoea, hypoxia, poor feeding or focal signs; review if not settling.", mgmt: ["Supportive care — antibiotics NOT indicated without features of bacterial pneumonia.", "Reassess if focal signs, hypoxia or systemic upset develop."] };
+            sc: "No procedure.", ref: "Safety-net for tachypnoea, hypoxia, poor feeding or focal signs; review if not settling.", mgmt: ["Supportive care - antibiotics NOT indicated without features of bacterial pneumonia.", "Reassess if focal signs, hypoxia or systemic upset develop."] };
         }
       },
       /* ───────────────────── Urinary tract infection (paediatric) ───────────────────── */
@@ -531,48 +531,48 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["toxic", "young_infant"])) {
-            var r = sepsisEmergency("⚠ Febrile UTI in a toxic child / young infant — treat as sepsis",
+            var r = sepsisEmergency("⚠ Febrile UTI in a toxic child / young infant - treat as sepsis",
               ["Obtain a urine sample (clean-catch / SPA / catheter per protocol) but do NOT delay IV antibiotics in the toxic or very young child (choice per local guidance / ICMR, weight-based dosing).", "Arrange renal tract imaging and paediatric follow-up per local protocol."]);
             r.abx = {
               firstLine: [
                 { drug: "Cefotaxime", dose: "50 mg/kg", route: "IV q8h", note: "Preferred in infants < 3 months." }
               ],
               alt: [
-                { drug: "Ceftriaxone", dose: "50–75 mg/kg", route: "IV once daily", note: "For children > 3 months." },
-                { drug: "Ampicillin + Gentamicin", dose: "weight-based — per paediatric formulary", route: "IV", note: "Young-infant regimen (enterococcal cover); monitor gentamicin levels." }
+                { drug: "Ceftriaxone", dose: "50-75 mg/kg", route: "IV once daily", note: "For children > 3 months." },
+                { drug: "Ampicillin + Gentamicin", dose: "weight-based - per paediatric formulary", route: "IV", note: "Young-infant regimen (enterococcal cover); monitor gentamicin levels." }
               ],
               ref: "WHO / national paediatric / ICMR",
-              note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+              note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
             };
             return r;
           }
           if (has(sel, "dehydrated"))
             return { emergency: false, ladder: 3, catg: "UTI with dehydration / unable to tolerate oral therapy",
-              sc: "Obtain urine culture before antibiotics; assess hydration.", ref: "Paediatric review; admit for IV fluids + antibiotics if not tolerating oral intake.", mgmt: ["Admit for IV antibiotics + rehydration — choice per local guidance / ICMR; ALL dosing weight-based per paediatric formulary.", "Arrange urine culture and imaging / paediatric follow-up per local protocol."],
+              sc: "Obtain urine culture before antibiotics; assess hydration.", ref: "Paediatric review; admit for IV fluids + antibiotics if not tolerating oral intake.", mgmt: ["Admit for IV antibiotics + rehydration - choice per local guidance / ICMR; ALL dosing weight-based per paediatric formulary.", "Arrange urine culture and imaging / paediatric follow-up per local protocol."],
               abx: {
                 firstLine: [
                   { drug: "Cefotaxime", dose: "50 mg/kg", route: "IV q8h" }
                 ],
                 alt: [
-                  { drug: "Ceftriaxone", dose: "50–75 mg/kg", route: "IV once daily", note: "Children > 3 months." },
+                  { drug: "Ceftriaxone", dose: "50-75 mg/kg", route: "IV once daily", note: "Children > 3 months." },
                   { drug: "Gentamicin", dose: "7.5 mg/kg", route: "IV once daily", note: "Per local protocol; monitor levels." }
                 ],
                 ref: "WHO / national paediatric / ICMR",
-                note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+                note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
               } };
-          return { emergency: false, ladder: 2, catg: "UTI in a well / stable child — treat orally",
-            sc: "Send urine culture BEFORE starting antibiotics; no procedure.", ref: "Review at 48 h; arrange imaging (USS ± further studies) and paediatric follow-up per local protocol, esp. if < 6 months, atypical or recurrent.", mgmt: ["Oral antibiotics for the well child — empirical choice per local guidance / ICMR, refined on culture; ALL dosing weight-based per paediatric formulary / local protocol.", "Always confirm with culture; escalate if the child becomes toxic or dehydrated."],
+          return { emergency: false, ladder: 2, catg: "UTI in a well / stable child - treat orally",
+            sc: "Send urine culture BEFORE starting antibiotics; no procedure.", ref: "Review at 48 h; arrange imaging (USS ± further studies) and paediatric follow-up per local protocol, esp. if < 6 months, atypical or recurrent.", mgmt: ["Oral antibiotics for the well child - empirical choice per local guidance / ICMR, refined on culture; ALL dosing weight-based per paediatric formulary / local protocol.", "Always confirm with culture; escalate if the child becomes toxic or dehydrated."],
             abx: {
               firstLine: [
                 { drug: "Cephalexin", dose: "12.5 mg/kg", route: "PO q6h", note: "Common oral option; refine on culture." }
               ],
               alt: [
-                { drug: "Amoxicillin–clavulanate", dose: "weight-based — per paediatric formulary", route: "PO" },
+                { drug: "Amoxicillin-clavulanate", dose: "weight-based - per paediatric formulary", route: "PO" },
                 { drug: "Cefixime", dose: "8 mg/kg", route: "PO once daily (or 2 divided doses)", note: "Per local sensitivity." },
-                { drug: "Trimethoprim", dose: "weight-based — per paediatric formulary", route: "PO", note: "Only where local resistance is low." }
+                { drug: "Trimethoprim", dose: "weight-based - per paediatric formulary", route: "PO", note: "Only where local resistance is low." }
               ],
               ref: "WHO / national paediatric / ICMR",
-              note: "Weight-based — CONFIRM every dose against a paediatric formulary/local protocol before giving."
+              note: "Weight-based - CONFIRM every dose against a paediatric formulary/local protocol before giving."
             } };
         }
       }

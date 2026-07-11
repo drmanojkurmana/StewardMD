@@ -1,17 +1,17 @@
-/* StewardMD — Offline CLINICAL data (structured "gold" records + openFDA monographs).
+/* StewardMD - Offline CLINICAL data (structured "gold" records + openFDA monographs).
  * ===========================================================================
  * The drug detail screen's clinical sections (Quick Facts / Summary / Indications /
  * dosing / renal / hepatic / safety) come from the API's /structured and /monograph
  * endpoints. Offline, those returned nothing ("No structured clinical record…").
  *
  * This module ships a compact, gzipped clinical bundle INSIDE the app
- * (data/offline-clinical.json.gz, built by scripts/build-offline-clinical.mjs — 1,465
+ * (data/offline-clinical.json.gz, built by scripts/build-offline-clinical.mjs - 1,465
  * gold molecules + 934 monographs) and routes MEDAPI.structured / MEDAPI.monograph to
  * it when the drug API is unreachable, returning the SAME response shapes so the UI
  * renders identically to online. Data is lazy-loaded + decompressed on first use.
  *
  * Native-only (the file is bundled; the web PWA uses the live API). Reversible:
- * localStorage "stewardmd_offline_clinical"="0" disables it. No API-shape guessing —
+ * localStorage "stewardmd_offline_clinical"="0" disables it. No API-shape guessing -
  * mirrors worker/src/index.js handleStructured / handleMonograph exactly.
  * ======================================================================== */
 (function () {
@@ -69,7 +69,7 @@
   function isCombo(name) { return /\s\+\s/.test(String(name)); }
   function splitCombo(name) { return String(name).split(/\s*\+\s*/).map(function (s) { return s.trim(); }).filter(Boolean); }
 
-  /* -------- response builders — identical shapes to the worker handlers -------- */
+  /* -------- response builders - identical shapes to the worker handlers -------- */
   function structResp(name) {
     return ensureData().then(function () {
       if (isCombo(name)) {

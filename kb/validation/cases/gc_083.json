@@ -43,16 +43,16 @@
   ],
   "finalDiagnosis": "Tricyclic antidepressant (amitriptyline) overdose with wide-complex QRS, hypotension, and seizure",
   "citations": [
-    "Harrison 22e — Poisoning and Drug Overdose",
-    "Harrison 22e — Approach to the Patient with Cardiac Arrhythmia (sodium-channel blockade)",
+    "Harrison 22e - Poisoning and Drug Overdose",
+    "Harrison 22e - Approach to the Patient with Cardiac Arrhythmia (sodium-channel blockade)",
     "American College of Medical Toxicology (ACMT) Cyclic Antidepressant Poisoning Guidance 2017",
     "AHA Toxicology in ECC / ACLS Guidelines 2020"
   ],
   "stewardship": null,
   "contraindications": [
-    "Avoid class Ia (procainamide, quinidine) and class Ic antiarrhythmics — additive sodium-channel blockade, can worsen QRS widening and precipitate arrest",
-    "Avoid flumazenil if co-ingestion with benzodiazepine suspected — can precipitate seizures in TCA overdose",
-    "Avoid physostigmine — historically used but contraindicated due to risk of asystole/seizures in TCA toxicity",
+    "Avoid class Ia (procainamide, quinidine) and class Ic antiarrhythmics - additive sodium-channel blockade, can worsen QRS widening and precipitate arrest",
+    "Avoid flumazenil if co-ingestion with benzodiazepine suspected - can precipitate seizures in TCA overdose",
+    "Avoid physostigmine - historically used but contraindicated due to risk of asystole/seizures in TCA toxicity",
     "Avoid routine gastric lavage beyond early presentation window; airway must be protected first given depressed sensorium"
   ],
   "edgeCases": [
@@ -60,7 +60,7 @@
     "Serum alkalinization with sodium bicarbonate is the cornerstone treatment for wide QRS/hypotension/arrhythmia, targeting arterial pH 7.50-7.55, independent of presenting pH",
     "Refractory hypotension despite bicarbonate and fluids may require IV lipid emulsion or vasopressors (norepinephrine preferred over dopamine)",
     "Recurrent seizures should be treated with benzodiazepines first-line; avoid phenytoin due to additional sodium-channel blocking effects that may worsen cardiotoxicity",
-    "TCA overdose is not one of the reference D1 diagnosable conditions in this build; mapped here to the closest available engine categories (drug_intox as primary; serotonin_nms and seizure_epilepsy as differential proxies) for regression purposes only — acceptableIds intentionally left as [] to avoid false-positive scoring against an unlisted condition",
+    "TCA overdose is not one of the reference D1 diagnosable conditions in this build; mapped here to the closest available engine categories (drug_intox as primary; serotonin_nms and seizure_epilepsy as differential proxies) for regression purposes only - acceptableIds intentionally left as [] to avoid false-positive scoring against an unlisted condition",
     "Clinical deterioration can be delayed and rapid; patients require continuous cardiac monitoring for at least 6 hours after any QRS widening or arrhythmia, even if asymptomatic on arrival"
   ],
   "expectedMaiK": "MaiK should flag this as sodium-channel blocker (TCA) toxicity given wide QRS, hypotension, seizure and anticholinergic exam, and recommend immediate IV sodium bicarbonate boluses/infusion targeting serum alkalinization, benzodiazepines for seizure control, continuous cardiac monitoring, and avoidance of class Ia/Ic antiarrhythmics and physostigmine.",

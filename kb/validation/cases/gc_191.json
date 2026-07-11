@@ -37,12 +37,12 @@
   ],
   "finalDiagnosis": "Moderate-to-severe ulcerative colitis flare (relapse of left-sided disease)",
   "citations": [
-    "Harrison 22e — Inflammatory Bowel Disease (Ulcerative Colitis and Crohn's Disease)",
+    "Harrison 22e - Inflammatory Bowel Disease (Ulcerative Colitis and Crohn's Disease)",
     "ACG Ulcerative Colitis in Adults Clinical Guideline 2019"
   ],
-  "stewardship": "Not applicable — non-infective inflammatory flare. Infective colitis (bacterial dysentery, C. difficile) must be actively excluded before/at the time of escalating immunosuppression, but empiric antibiotics are not indicated for an uncomplicated UC flare. Treatment is anti-inflammatory: optimise/escalate 5-ASA (oral + topical) and add oral corticosteroids (e.g. prednisolone 40 mg/day) for moderate-to-severe activity, with early consideration of biologic/steroid-sparing therapy.",
+  "stewardship": "Not applicable - non-infective inflammatory flare. Infective colitis (bacterial dysentery, C. difficile) must be actively excluded before/at the time of escalating immunosuppression, but empiric antibiotics are not indicated for an uncomplicated UC flare. Treatment is anti-inflammatory: optimise/escalate 5-ASA (oral + topical) and add oral corticosteroids (e.g. prednisolone 40 mg/day) for moderate-to-severe activity, with early consideration of biologic/steroid-sparing therapy.",
   "contraindications": [
-    "Avoid antimotility/opioid agents and anticholinergics — risk of precipitating toxic megacolon",
+    "Avoid antimotility/opioid agents and anticholinergics - risk of precipitating toxic megacolon",
     "Sulfasalazine contraindicated in sulfa allergy; check G6PD",
     "Corticosteroids: caution/monitoring in occult infection, hyperglycaemia and osteoporosis; not for maintenance",
     "Confirm C. difficile-negative before intensifying immunosuppression"
@@ -50,7 +50,7 @@
   "edgeCases": [
     "Acute severe UC (ASUC/Truelove-Witts) with >6 bloody stools/day plus systemic toxicity (fever, tachycardia, anaemia, raised ESR) requires admission for IV steroids and daily monitoring for toxic megacolon/perforation",
     "Superimposed CMV colitis or C. difficile can drive steroid-refractory flares and must be excluded",
-    "New-onset bloody diarrhoea can mimic invasive bacterial dysentery — negative stool studies plus chronicity and continuous endoscopic inflammation favour IBD"
+    "New-onset bloody diarrhoea can mimic invasive bacterial dysentery - negative stool studies plus chronicity and continuous endoscopic inflammation favour IBD"
   ],
   "expectedMaiK": "This is a classic relapse of ulcerative colitis: chronic relapsing bloody diarrhoea with urgency/tenesmus, raised inflammatory markers and markedly elevated faecal calprotectin with negative infective studies, on a background of known UC after mesalazine non-adherence. Confirm the flare is non-infective (stool cultures/C. difficile), grade severity (Truelove-Witts), and escalate anti-inflammatory therapy rather than antibiotics.",
   "expectedNextQuestions": [
@@ -100,7 +100,7 @@
   },
   "regressionAssertions": [
     "top-3 must include ibd_flare",
-    "expected.stewardship.tier must be null (non-infective flare — no empiric antibiotics)",
+    "expected.stewardship.tier must be null (non-infective flare - no empiric antibiotics)",
     "differential must include an infective colitis mimic (DYSENTERY or C_DIFF)"
   ],
   "review": {

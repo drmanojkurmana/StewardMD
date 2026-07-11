@@ -41,10 +41,10 @@
     "Community-acquired pneumonia with respiratory failure",
     "Anaphylaxis with laryngeal/pulmonary involvement"
   ],
-  "finalDiagnosis": "Acute heart failure — flash pulmonary oedema, hypertensive (HFpEF-range LVEF, hypertensive crisis-triggered)",
+  "finalDiagnosis": "Acute heart failure - flash pulmonary oedema, hypertensive (HFpEF-range LVEF, hypertensive crisis-triggered)",
   "citations": [
-    "Harrison 22e — Heart Failure",
-    "Harrison 22e — Hypertensive Emergencies",
+    "Harrison 22e - Heart Failure",
+    "Harrison 22e - Hypertensive Emergencies",
     "AHA/ACC/HFSA Heart Failure Guideline 2022",
     "ESC Acute and Chronic Heart Failure Guideline 2021"
   ],
@@ -58,7 +58,7 @@
   ],
   "edgeCases": [
     "Flash pulmonary oedema with preserved EF should prompt exclusion of acute coronary ischemia and renal artery stenosis as precipitants",
-    "Severe hypoxia with rapid onset can mimic primary respiratory pathology (asthma/COPD) — bilateral crepitations plus hypertension plus S3 favour cardiogenic cause",
+    "Severe hypoxia with rapid onset can mimic primary respiratory pathology (asthma/COPD) - bilateral crepitations plus hypertension plus S3 favour cardiogenic cause",
     "If troponin rises further on serial testing, consider concomitant type 1 or type 2 myocardial infarction as the precipitant",
     "This exact diagnosis (hypertensive flash pulmonary oedema) is not a distinct id in the engine's diagnosable-disease list; mapped to the closest available id 'heart_failure' for acceptable/differential scoring, and 'htn_emergency' listed as differential given the hypertensive-crisis trigger"
   ],
@@ -98,7 +98,7 @@
     "knownHeartFailure": true
   },
   "expected": {
-    "diagnosis": "Acute heart failure — flash pulmonary oedema, hypertensive",
+    "diagnosis": "Acute heart failure - flash pulmonary oedema, hypertensive",
     "acceptableIds": [
       "heart_failure"
     ],

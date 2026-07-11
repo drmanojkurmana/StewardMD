@@ -1,9 +1,9 @@
-/* StewardMD — Antibiogram & Antibiotic-Coverage explorer (standalone full-page module).
+/* StewardMD - Antibiogram & Antibiotic-Coverage explorer (standalone full-page module).
    Self-contained overlay; window.ABG.open() / window.ABG.close().
    TWO tabs:
-     • Resistance — pick a source (ICMR 2024 national / a local hospital antibiogram) and
+     • Resistance - pick a source (ICMR 2024 national / a local hospital antibiogram) and
        read organism × antibiotic resistance rates as a colour-coded heatmap.
-     • Coverage   — an interactive spectrum-of-activity grid (drug class × organism group);
+     • Coverage   - an interactive spectrum-of-activity grid (drug class × organism group);
        tap a drug or an organism to see, at a glance, what covers what.
 
    EDUCATIONAL DECISION SUPPORT ONLY. Coverage is qualitative spectrum of activity.
@@ -51,24 +51,24 @@
     { cls: "Anti-staphylococcal penicillin", agent: "Cloxacillin / Flucloxacillin / Nafcillin / Oxacillin",
       cov: { mssa:2, strep:2 }, note: "MSSA drug of choice. No MRSA, no Gram-negatives, no enterococci." },
     // ── β-lactam / β-lactamase-inhibitor ───────────────────────────────────
-    { cls: "Aminopenicillin + BLI", agent: "Amoxicillin–clavulanate",
+    { cls: "Aminopenicillin + BLI", agent: "Amoxicillin-clavulanate",
       cov: { mssa:2, strep:2, efaecalis:2, ecoli:1, kleb:2, pmir:2, hflu:2, morax:2, oralana:2, bfrag:2 } },
-    { cls: "Aminopenicillin + BLI", agent: "Ampicillin–sulbactam",
+    { cls: "Aminopenicillin + BLI", agent: "Ampicillin-sulbactam",
       cov: { mssa:2, strep:2, efaecalis:2, ecoli:1, kleb:2, pmir:2, hflu:2, bfrag:2, oralana:2, acineto:1 }, note: "Sulbactam has intrinsic Acinetobacter activity." },
-    { cls: "Antipseudomonal penicillin + BLI", agent: "Piperacillin–tazobactam",
+    { cls: "Antipseudomonal penicillin + BLI", agent: "Piperacillin-tazobactam",
       cov: { mssa:2, strep:2, efaecalis:2, ecoli:2, kleb:2, pmir:2, escappm:1, pseud:2, hflu:2, bfrag:2, oralana:2, esbl:1 }, note: "Avoid for ESBL bacteraemia (MERINO). AmpC induction risk." },
-    { cls: "Cephalosporin + sulbactam", agent: "Cefoperazone–sulbactam",
-      cov: { ecoli:2, kleb:2, pmir:2, escappm:1, pseud:1, acineto:2, bfrag:1, esbl:1 }, note: "Widely used in India for MDR GNB / Acinetobacter — confirm susceptibility." },
-    { cls: "Cephalosporin + novel BLI", agent: "Ceftazidime–avibactam",
-      cov: { ecoli:2, kleb:2, escappm:2, pseud:2, esbl:2, cre:2 }, note: "CRE: KPC & OXA-48 — NOT metallo-β-lactamase (NDM/VIM). Add aztreonam for MBL." },
-    { cls: "Cephalosporin + novel BLI", agent: "Ceftolozane–tazobactam",
+    { cls: "Cephalosporin + sulbactam", agent: "Cefoperazone-sulbactam",
+      cov: { ecoli:2, kleb:2, pmir:2, escappm:1, pseud:1, acineto:2, bfrag:1, esbl:1 }, note: "Widely used in India for MDR GNB / Acinetobacter - confirm susceptibility." },
+    { cls: "Cephalosporin + novel BLI", agent: "Ceftazidime-avibactam",
+      cov: { ecoli:2, kleb:2, escappm:2, pseud:2, esbl:2, cre:2 }, note: "CRE: KPC & OXA-48 - NOT metallo-β-lactamase (NDM/VIM). Add aztreonam for MBL." },
+    { cls: "Cephalosporin + novel BLI", agent: "Ceftolozane-tazobactam",
       cov: { ecoli:2, kleb:2, escappm:1, pseud:2, esbl:2 }, note: "Best-in-class for MDR Pseudomonas. Not reliable for CRE." },
-    { cls: "Carbapenem + novel BLI", agent: "Meropenem–vaborbactam",
+    { cls: "Carbapenem + novel BLI", agent: "Meropenem-vaborbactam",
       cov: { ecoli:2, kleb:2, escappm:2, pseud:1, esbl:2, cre:2 }, note: "CRE: KPC. Not MBL / OXA-48." },
-    { cls: "Carbapenem + novel BLI", agent: "Imipenem–relebactam",
+    { cls: "Carbapenem + novel BLI", agent: "Imipenem-relebactam",
       cov: { ecoli:2, kleb:2, escappm:2, pseud:2, esbl:2, cre:2 }, note: "CRE: KPC. Not MBL." },
-    { cls: "Monobactam + novel BLI", agent: "Aztreonam–avibactam",
-      cov: { ecoli:2, kleb:2, escappm:2, esbl:2, cre:2 }, note: "Covers metallo-β-lactamase (NDM) producers — key MBL-CRE option." },
+    { cls: "Monobactam + novel BLI", agent: "Aztreonam-avibactam",
+      cov: { ecoli:2, kleb:2, escappm:2, esbl:2, cre:2 }, note: "Covers metallo-β-lactamase (NDM) producers - key MBL-CRE option." },
     // ── Cephalosporins (by generation) ─────────────────────────────────────
     { cls: "1st-gen cephalosporin", agent: "Cefazolin / Cephalexin",
       cov: { mssa:2, strep:2, ecoli:1, kleb:1, pmir:1 }, note: "Surgical prophylaxis, MSSA, simple UTI/SSTI." },
@@ -81,9 +81,9 @@
     { cls: "3rd-gen cephalosporin (oral)", agent: "Cefixime / Cefpodoxime",
       cov: { strep:2, ecoli:1, kleb:1, pmir:1, hflu:2, morax:2, ngon:2 } },
     { cls: "3rd-gen antipseudomonal", agent: "Ceftazidime",
-      cov: { ecoli:1, kleb:1, pmir:1, pseud:2, escappm:1 }, note: "Poor Gram-positive. AmpC-labile — unreliable vs ESCAPPM." },
+      cov: { ecoli:1, kleb:1, pmir:1, pseud:2, escappm:1 }, note: "Poor Gram-positive. AmpC-labile - unreliable vs ESCAPPM." },
     { cls: "4th-gen cephalosporin", agent: "Cefepime",
-      cov: { mssa:2, strep:2, ecoli:2, kleb:2, pmir:2, escappm:2, pseud:2, hflu:2 }, note: "AmpC-stable (ESCAPPM). ESBL variable — inoculum effect." },
+      cov: { mssa:2, strep:2, ecoli:2, kleb:2, pmir:2, escappm:2, pseud:2, hflu:2 }, note: "AmpC-stable (ESCAPPM). ESBL variable - inoculum effect." },
     { cls: "5th-gen (anti-MRSA) cephalosporin", agent: "Ceftaroline",
       cov: { mrsa:2, mssa:2, strep:2, ecoli:1, kleb:1, hflu:2 }, note: "MRSA-active cephalosporin. No Pseudomonas / AmpC / ESBL." },
     { cls: "Siderophore cephalosporin", agent: "Cefiderocol",
@@ -116,7 +116,7 @@
     { cls: "Glycopeptide", agent: "Teicoplanin",
       cov: { mrsa:2, mssa:2, strep:2, efaecalis:2 } },
     { cls: "Lipopeptide", agent: "Daptomycin",
-      cov: { mrsa:2, mssa:2, strep:2, efaecalis:2, efaecium:2 }, note: "NOT for pneumonia — inactivated by lung surfactant. Covers VRE." },
+      cov: { mrsa:2, mssa:2, strep:2, efaecalis:2, efaecium:2 }, note: "NOT for pneumonia - inactivated by lung surfactant. Covers VRE." },
     { cls: "Lipoglycopeptide (long-acting)", agent: "Dalbavancin / Oritavancin",
       cov: { mrsa:2, mssa:2, strep:2, efaecalis:1 }, note: "Single/weekly dosing for SSTI." },
     // ── Oxazolidinone ──────────────────────────────────────────────────────
@@ -130,21 +130,21 @@
     { cls: "Tetracycline", agent: "Doxycycline / Minocycline",
       cov: { mrsa:2, mssa:2, strep:1, ecoli:1, hflu:2, morax:2, ngon:1, atyp:2, legio:1, steno:2, acineto:1 }, note: "Minocycline adds Stenotrophomonas & Acinetobacter. Also rickettsia, Brucella, Leptospira." },
     { cls: "Glycylcycline", agent: "Tigecycline",
-      cov: { mrsa:2, mssa:2, strep:2, efaecalis:2, efaecium:2, ecoli:2, kleb:2, escappm:2, esbl:2, cre:1, acineto:2, bfrag:2, oralana:2, steno:1 }, note: "Very broad EXCEPT Pseudomonas & Proteus. Low serum levels — avoid bloodstream infection." },
+      cov: { mrsa:2, mssa:2, strep:2, efaecalis:2, efaecium:2, ecoli:2, kleb:2, escappm:2, esbl:2, cre:1, acineto:2, bfrag:2, oralana:2, steno:1 }, note: "Very broad EXCEPT Pseudomonas & Proteus. Low serum levels - avoid bloodstream infection." },
     // ── Polymyxins ─────────────────────────────────────────────────────────
     { cls: "Polymyxin", agent: "Colistin / Polymyxin B",
       cov: { ecoli:2, kleb:2, pseud:2, acineto:2, esbl:2, cre:2 }, note: "Last-resort GNB. Intrinsic resistance: Proteus, Serratia, Providencia, Morganella, Burkholderia. No GPC/anaerobes. Nephrotoxic." },
     // ── Folate / urinary / anaerobe / misc ─────────────────────────────────
-    { cls: "Folate antagonist", agent: "Co-trimoxazole (TMP–SMX)",
+    { cls: "Folate antagonist", agent: "Co-trimoxazole (TMP-SMX)",
       cov: { mrsa:2, mssa:2, strep:1, ecoli:1, kleb:1, pmir:1, escappm:1, hflu:2, steno:2, listeria:2 }, note: "First-line for Stenotrophomonas, Nocardia, PCP. No Pseudomonas / anaerobes / enterococci." },
     { cls: "Nitrofuran (urinary)", agent: "Nitrofurantoin",
-      cov: { ecoli:2, efaecalis:2, kleb:1 }, note: "Uncomplicated cystitis only — no tissue levels. Not Proteus/Pseudomonas/Serratia. Avoid CrCl <30." },
+      cov: { ecoli:2, efaecalis:2, kleb:1 }, note: "Uncomplicated cystitis only - no tissue levels. Not Proteus/Pseudomonas/Serratia. Avoid CrCl <30." },
     { cls: "Phosphonic acid", agent: "Fosfomycin",
       cov: { ecoli:2, efaecalis:2, kleb:1, esbl:2, pseud:1 }, note: "PO (trometamol) for MDR cystitis incl. ESBL; IV form broader." },
     { cls: "Nitroimidazole", agent: "Metronidazole",
       cov: { bfrag:2, oralana:2 }, note: "Anaerobes only (+ C. difficile, amoebae, Giardia). No aerobes; no Actinomyces/Propionibacterium." },
     { cls: "Amphenicol", agent: "Chloramphenicol",
-      cov: { strep:2, nmen:2, hflu:2, bfrag:2, oralana:2, atyp:1 }, note: "Reserve — marrow toxicity. Broad but rarely used." },
+      cov: { strep:2, nmen:2, hflu:2, bfrag:2, oralana:2, atyp:1 }, note: "Reserve - marrow toxicity. Broad but rarely used." },
     { cls: "Rifamycin (adjunct)", agent: "Rifampicin",
       cov: { mrsa:1, mssa:1, strep:1 }, note: "NEVER monotherapy (rapid resistance). Biofilm/prosthetic adjunct; meningococcal prophylaxis." },
     { cls: "Macrocyclic (C. difficile)", agent: "Fidaxomicin",
@@ -152,10 +152,10 @@
   ];
 
   /* ─────────────────────────  RESISTANCE DATA  ─────────────────────────
-     Uses the app's existing, sourced antibiogram (window.ASP_ABG) — the same
+     Uses the app's existing, sourced antibiogram (window.ASP_ABG) - the same
      ICMR AMRSN 2024 national + GIMSR hospital dataset shown in the references
      panel. Values are % SUSCEPTIBLE (higher = better); some cells are qualitative
-     only. No numbers are invented here — this view just reads that data. */
+     only. No numbers are invented here - this view just reads that data. */
   // The ACTIVE profile's antibiogram (region composite / individual study / hospital / ICMR
   // national), driven by the global HOSPITAL profile selector. Falls back to ICMR national.
   function abgData() {
@@ -215,7 +215,7 @@
   }
   function onOrient() {
     if (_isPortrait()) { if (root && root.classList.contains("on")) showRotateHint(); }
-    else hideRotateHint();   // rotated to landscape — the hint has done its job
+    else hideRotateHint();   // rotated to landscape - the hint has done its job
   }
   function showRotateHint() {
     if (!root || root.querySelector("#abgRotate")) return;
@@ -256,7 +256,7 @@
 
   /* Coverage grid + interactive summary */
   function coverageView() {
-    var h = '<div class="abg-note">Spectrum of activity — a teaching guide, <b>not</b> a substitute for susceptibility testing or your local antibiogram. Tap a drug or an organism to isolate it.</div>';
+    var h = '<div class="abg-note">Spectrum of activity - a teaching guide, <b>not</b> a substitute for susceptibility testing or your local antibiogram. Tap a drug or an organism to isolate it.</div>';
 
     // interactive summary bar
     h += '<div class="abg-sum" id="abgSum">' + coverageSummary() + '</div>';
@@ -291,29 +291,29 @@
       h += '</tr>';
     });
     h += '</tbody></table></div>';
-    h += '<div class="abg-legend"><span><i class="sw on"></i>Reliably active</span><span><i class="sw part"></i>Variable / not first-line</span><span><i class="sw no"></i>Not active</span><span class="abg-src">Spectrum reference — verify against your local antibiogram · Sanford / IDSA / CLSI M100 (2024)</span></div>';
+    h += '<div class="abg-legend"><span><i class="sw on"></i>Reliably active</span><span><i class="sw part"></i>Variable / not first-line</span><span><i class="sw no"></i>Not active</span><span class="abg-src">Spectrum reference - verify against your local antibiogram · Sanford / IDSA / CLSI M100 (2024)</span></div>';
     return h;
   }
 
   function coverageSummary() {
-    if (covSel === null) return '<span class="abg-hint">Nothing selected — showing the full spectrum grid.</span>';
+    if (covSel === null) return '<span class="abg-hint">Nothing selected - showing the full spectrum grid.</span>';
     if (covSelType === "drug") {
       var d = COVERAGE[covSel];
       var keys = Object.keys(d.cov).sort(function (a, b) { return (d.cov[b] || 0) - (d.cov[a] || 0); });   // reliable (2) first
       return '<button class="abg-clear" data-act="clearcov">✕</button><b>' + esc(d.agent) + '</b> covers: ' +
-        (keys.length ? '<span class="abg-tags">' + keys.map(function (id) { return '<em class="' + (d.cov[id] === 1 ? "part" : "") + '">' + esc(colLabel(id)) + '</em>'; }).join("") + '</span>' : '—') +
+        (keys.length ? '<span class="abg-tags">' + keys.map(function (id) { return '<em class="' + (d.cov[id] === 1 ? "part" : "") + '">' + esc(colLabel(id)) + '</em>'; }).join("") + '</span>' : '-') +
         (d.note ? '<span class="abg-note-sm">' + esc(d.note) + '</span>' : '');
     }
-    // org selected — any tier active, reliable (2) listed first
+    // org selected - any tier active, reliable (2) listed first
     var hits = COVERAGE.filter(function (x) { return x.cov[covSel]; }).sort(function (a, b) { return (b.cov[covSel] || 0) - (a.cov[covSel] || 0); });
     return '<button class="abg-clear" data-act="clearcov">✕</button><b>' + esc(colLabel(covSel)) + '</b> is covered by: ' +
-      (hits.length ? '<span class="abg-tags">' + hits.map(function (x) { return '<em class="' + (x.cov[covSel] === 1 ? "part" : "") + '">' + esc(x.agent) + '</em>'; }).join("") + '</span>' : '—');
+      (hits.length ? '<span class="abg-tags">' + hits.map(function (x) { return '<em class="' + (x.cov[covSel] === 1 ? "part" : "") + '">' + esc(x.agent) + '</em>'; }).join("") + '</span>' : '-');
   }
   function colLabel(id) { for (var i = 0; i < COLS.length; i++) if (COLS[i].id === id) return COLS[i].label; return id; }
 
-  /* Resistance rates — % RESISTANT (= 100 − %susceptible) from the ACTIVE profile
+  /* Resistance rates - % RESISTANT (= 100 - %susceptible) from the ACTIVE profile
      (region composite / individual study / hospital / ICMR national). Data is stored as
-     % susceptible; we invert only at display. Missing cells render "—". No invented values. */
+     % susceptible; we invert only at display. Missing cells render "-". No invented values. */
   function resistanceView() {
     var src = abgData();
     if (!src || !src.org || !Object.keys(src.org).length)
@@ -324,7 +324,7 @@
       '<select class="abg-srcsel" id="abgSrc" aria-label="Antibiogram source">' + sourceOptions(curId) + '</select></div>';
 
     h += '<div class="abg-warn"><b>' + (src.dated ? "Dated source." : (src.composite ? "Regional best-of composite." : "Reference data.")) + '</b> ' + esc(src.source || "") +
-      (src.note ? ' — ' + esc(src.note) : '') + ' <b>Shown as % of isolates resistant.</b> Verify against your own local antibiogram before clinical use.</div>';
+      (src.note ? ' - ' + esc(src.note) : '') + ' <b>Shown as % of isolates resistant.</b> Verify against your own local antibiogram before clinical use.</div>';
 
     var orgs = src.org || {};
     Object.keys(orgs).forEach(function (name) {
@@ -339,7 +339,7 @@
         var prov = v.src ? ' data-org="' + esc(name) + '" data-drug="' + esc(k) + '"' : '';
         h += '<div class="abg-dr' + (v.src ? ' abg-dr-prov' : '') + '"' + prov + '><span class="abg-dr-n">' + esc(drugLabel(k)) + (v.src ? ' <i class="abg-prov" title="tap for source">ⓘ</i>' : '') + '</span>';
         if (s == null) {
-          h += '<span class="abg-dr-q">' + esc(v.q || "—") + '</span>';
+          h += '<span class="abg-dr-q">' + esc(v.q || "-") + '</span>';
         } else {
           var R = Math.round(100 - s);
           var pct = (v.approx ? "~" : "") + R + "% R";
@@ -351,7 +351,7 @@
       h += '</div></div>';
     });
 
-    h += '<div class="abg-legend heat"><span><i class="hs su0"></i>≥70%</span><span><i class="hs su1"></i>50–69%</span><span><i class="hs su2"></i>25–49%</span><span><i class="hs su3"></i>10–24%</span><span><i class="hs su4"></i>&lt;10%</span><span>% resistant (red = worse)</span></div>';
+    h += '<div class="abg-legend heat"><span><i class="hs su0"></i>≥70%</span><span><i class="hs su1"></i>50-69%</span><span><i class="hs su2"></i>25-49%</span><span><i class="hs su3"></i>10-24%</span><span><i class="hs su4"></i>&lt;10%</span><span>% resistant (red = worse)</span></div>';
     return h;
   }
 
@@ -375,7 +375,7 @@
       var c = comp[rr[0]], sts = studiesOf(rr[0]);
       if (!c && !sts.length) return;
       h += '<optgroup label="' + rr[1] + '">';
-      if (c) h += opt(c.id, (c.short || rr[1]) + " — regional composite (best-of)");
+      if (c) h += opt(c.id, (c.short || rr[1]) + " - regional composite (best-of)");
       sts.forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
       h += '</optgroup>';
     });
@@ -390,7 +390,7 @@
 
   // Resistance colour bands (red = high R). Reuses su0..su4 tokens (su0 red … su4 green).
   function rClass(R) { return R >= 70 ? "su0" : R >= 50 ? "su1" : R >= 25 ? "su2" : R >= 10 ? "su3" : "su4"; }
-  // Trend on RESISTANCE: input is a %-susceptible series, so ΔR = −ΔS.
+  // Trend on RESISTANCE: input is a %-susceptible series, so ΔR = -ΔS.
   // Rising R = worsening = red ▲; falling R = improving = green ▼.
   function trendArrowR(t) {
     if (!t || t.length < 2) return "";
@@ -430,7 +430,7 @@
         if (pr) {
           var src = abgData(), o = src && src.org && src.org[pr.getAttribute("data-org")];
           var c = o && o.d && o.d[pr.getAttribute("data-drug")];
-          if (c && c.src) toast(drugLabel(pr.getAttribute("data-drug")) + " · " + pr.getAttribute("data-org") + " — source: " + srcLabel(c.src));
+          if (c && c.src) toast(drugLabel(pr.getAttribute("data-drug")) + " · " + pr.getAttribute("data-org") + " - source: " + srcLabel(c.src));
           return;
         }
       }

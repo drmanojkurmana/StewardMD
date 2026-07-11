@@ -1,7 +1,7 @@
-/* StewardMD — Surgery specialty engine (data + deterministic management logic).
+/* StewardMD - Surgery specialty engine (data + deterministic management logic).
    ---------------------------------------------------------------------------
    Registers into window.SMD_WS_ENGINES.surgery, consumed by workspaces.js. This is
-   a LIGHTWEIGHT specialty pathway — NOT the Internal Medicine engine and NOT a
+   a LIGHTWEIGHT specialty pathway - NOT the Internal Medicine engine and NOT a
    diagnosis generator. For each syndrome it collects focused findings + danger
    signs and returns a conservative MANAGEMENT DECISION: the antibiotic-need level
    (0 none → 5 emergency referral), whether SOURCE CONTROL / a procedure is required,
@@ -10,11 +10,11 @@
 
    The recurring SURGICAL theme: antibiotics are an ADJUNCT to source control, not a
    substitute for it. A collection is drained, dead tissue is debrided, a perforation
-   is closed, an obstruction is decompressed — antibiotics only support that. Blind
+   is closed, an obstruction is decompressed - antibiotics only support that. Blind
    antibiotics in an undifferentiated abdomen mask the picture and delay the knife.
 
    Shared conditions (cholangitis, liver abscess, colitis) keep Internal Medicine as
-   the PRIMARY pathway and show a Surgery consult / source-control overlay — they never
+   the PRIMARY pathway and show a Surgery consult / source-control overlay - they never
    duplicate or overwrite the IM assessment.
 
    Advisory only. Verify against local protocol, imaging, and the individual patient. */
@@ -27,27 +27,27 @@
 
   // Shared necrotising-infection result (surgical emergency).
   function necFashResult() {
-    return { emergency: true, ladder: 5, catg: "⚠ Necrotising soft-tissue infection — surgical emergency",
-      sc: "IMMEDIATE surgical exploration & debridement — the diagnosis is surgical, do NOT delay for imaging or a normal-looking surface.",
+    return { emergency: true, ladder: 5, catg: "⚠ Necrotising soft-tissue infection - surgical emergency",
+      sc: "IMMEDIATE surgical exploration & debridement - the diagnosis is surgical, do NOT delay for imaging or a normal-looking surface.",
       ref: "Emergency surgery + critical care NOW.",
       mgmt: [
         "Pain out of proportion, rapid spread, crepitus, bullae or dishwater fluid = operate first, investigate later.",
-        "Aggressive resuscitation; broad-spectrum IV cover (Gram-positive + Gram-negative + anaerobe) plus a protein-synthesis inhibitor (e.g. clindamycin) for toxin suppression — agent per local antibiogram / ICMR.",
-        "Do NOT rely on a single debridement — plan re-look at 24–48 h; ICU / high-dependency care."
+        "Aggressive resuscitation; broad-spectrum IV cover (Gram-positive + Gram-negative + anaerobe) plus a protein-synthesis inhibitor (e.g. clindamycin) for toxin suppression - agent per local antibiogram / ICMR.",
+        "Do NOT rely on a single debridement - plan re-look at 24-48 h; ICU / high-dependency care."
       ],
       abx: {
         firstLine: [
-          { drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "broad Gram+/Gram−/anaerobe cover" },
+          { drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "broad Gram+/Gram-/anaerobe cover" },
           { drug: "+ Clindamycin", dose: "900 mg", route: "IV q8h", note: "toxin suppression (add regardless of primary agent)" },
-          { drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h", note: "MRSA cover empirically" }
+          { drug: "+ Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h", note: "MRSA cover empirically" }
         ],
         alt: [
-          { drug: "Meropenem", dose: "1 g", route: "IV q8h", note: "penicillin allergy / prior ESBL–resistant flora" },
+          { drug: "Meropenem", dose: "1 g", route: "IV q8h", note: "penicillin allergy / prior ESBL-resistant flora" },
           { drug: "+ Clindamycin", dose: "900 mg", route: "IV q8h", note: "toxin suppression" },
           { drug: "+ Linezolid", dose: "600 mg", route: "IV q12h", note: "if vancomycin unsuitable / MRSA" }
         ],
         ref: "ICMR AMRSN 2024 / Sanford",
-        note: "Empiric — surgery is the priority, antibiotics are adjunctive; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
+        note: "Empiric - surgery is the priority, antibiotics are adjunctive; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
       } };
   }
 
@@ -72,27 +72,27 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["peritonism", "free_air", "unstable"])) {
-            return { emergency: true, ladder: 5, catg: "Surgical abdomen — peritonitis / perforation until proven otherwise",
+            return { emergency: true, ladder: 5, catg: "Surgical abdomen - peritonitis / perforation until proven otherwise",
               sc: "Resuscitate + urgent theatre for source control. NBM, wide-bore IV access, fluids, analgesia, NG tube if vomiting/distended, urinary catheter to guide resuscitation.",
               ref: "Emergency surgical referral now.",
               mgmt: [
-                "Do NOT wait for imaging if peritonitic or unstable — resuscitate and call theatre.",
-                "Broad-spectrum IV cover for enteric Gram-negatives + anaerobes as an ADJUNCT to source control — agent per local antibiogram / ICMR / stewardship.",
-                "An erect CXR misses up to a third of perforations — a normal film does NOT exclude one."
+                "Do NOT wait for imaging if peritonitic or unstable - resuscitate and call theatre.",
+                "Broad-spectrum IV cover for enteric Gram-negatives + anaerobes as an ADJUNCT to source control - agent per local antibiogram / ICMR / stewardship.",
+                "An erect CXR misses up to a third of perforations - a normal film does NOT exclude one."
               ],
               abx: {
                 firstLine: [
-                  { drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "enteric Gram− + anaerobe cover" },
+                  { drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "enteric Gram- + anaerobe cover" },
                   { drug: "or Ceftriaxone", dose: "2 g", route: "IV q24h", note: "+ metronidazole below" },
                   { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobes (with ceftriaxone)" }
                 ],
                 alt: [
                   { drug: "Meropenem", dose: "1 g", route: "IV q8h", note: "septic shock / prior ESBL / healthcare exposure" },
-                  { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy — with metronidazole" },
+                  { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy - with metronidazole" },
                   { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe cover in allergy regimen" }
                 ],
                 ref: "ICMR AMRSN 2024 / Sanford",
-                note: "Empiric — adjunct to source control; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
+                note: "Empiric - adjunct to source control; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
               } };
           }
           var pts = [];
@@ -101,15 +101,15 @@
           if (has(sel, "loc_rlq")) pts.push("RLQ → appendicitis; in India also ileocaecal TB, typhoid, amoebiasis; ovarian/ectopic in women");
           if (has(sel, "loc_llq")) pts.push("LLQ → diverticulitis, colitis, ureteric colic");
           if (has(sel, "generalised") || has(sel, "distension") || has(sel, "vomiting")) pts.push("Generalised / distended / vomiting → obstruction, perforation, mesenteric ischaemia");
-          var hints = pts.length ? "Likely by region — " + pts.join(" · ") + "." : "Localise the pain, do a PR/hernial-orifice exam, and dip the urine.";
+          var hints = pts.length ? "Likely by region - " + pts.join(" · ") + "." : "Localise the pain, do a PR/hernial-orifice exam, and dip the urine.";
           var extra = has(sel, "female_repro") ? ["Woman of childbearing age → do a urine/serum β-hCG in EVERY case and think ectopic, ovarian torsion, PID."] : [];
-          return { emergency: false, ladder: 3, catg: "Undifferentiated acute abdomen — needs surgical evaluation",
-            sc: "Source control depends on the cause — resuscitate, NBM, analgesia; image (erect CXR + USS, CT if unclear) and reassess with serial examination.",
+          return { emergency: false, ladder: 3, catg: "Undifferentiated acute abdomen - needs surgical evaluation",
+            sc: "Source control depends on the cause - resuscitate, NBM, analgesia; image (erect CXR + USS, CT if unclear) and reassess with serial examination.",
             ref: "Surgical review; admit for serial examination + bloods (include lipase).",
             mgmt: [
               hints,
-              "Do NOT give blind antibiotics — start only once an infective/surgical source is identified; empirical cover masks the picture and delays diagnosis.",
-              "Adequate analgesia does NOT hide peritonism — never withhold it to 'preserve the signs'.",
+              "Do NOT give blind antibiotics - start only once an infective/surgical source is identified; empirical cover masks the picture and delays diagnosis.",
+              "Adequate analgesia does NOT hide peritonism - never withhold it to 'preserve the signs'.",
               "Exclude the medical mimics: inferior MI, DKA, lower-lobe pneumonia, ruptured AAA."
             ].concat(extra) };
         }
@@ -129,66 +129,66 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["sepsis", "gangrene", "peritonism"])) return { emergency: true, ladder: 4, catg: "Complicated cholecystitis (gangrene / perforation / sepsis)",
-            sc: "Urgent source control — emergency cholecystectomy, or percutaneous cholecystostomy if unfit/unstable. Resuscitate, NBM.",
+            sc: "Urgent source control - emergency cholecystectomy, or percutaneous cholecystostomy if unfit/unstable. Resuscitate, NBM.",
             ref: "Emergency surgical referral; admit.",
             mgmt: [
-              "IV broad-spectrum cover (enteric Gram-negatives + anaerobes) per local antibiogram/ICMR as an adjunct — it does NOT replace drainage.",
-              "Emphysematous cholecystitis (gas in GB wall, often diabetic men) is rapidly fatal — do not sit on it."
+              "IV broad-spectrum cover (enteric Gram-negatives + anaerobes) per local antibiogram/ICMR as an adjunct - it does NOT replace drainage.",
+              "Emphysematous cholecystitis (gas in GB wall, often diabetic men) is rapidly fatal - do not sit on it."
             ],
             abx: {
               firstLine: [
-                { drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "severe/complicated biliary sepsis" },
+                { drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "severe/complicated biliary sepsis" },
                 { drug: "or Ceftriaxone", dose: "2 g", route: "IV q24h", note: "+ metronidazole below" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobes (with ceftriaxone)" }
               ],
               alt: [
                 { drug: "Meropenem", dose: "1 g", route: "IV q8h", note: "septic shock / prior ESBL / healthcare exposure" },
-                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy — with metronidazole" },
+                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy - with metronidazole" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe cover in allergy regimen" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — adjunct to drainage/cholecystectomy; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
+              note: "Empiric - adjunct to drainage/cholecystectomy; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
             } };
-          if (has(sel, "jaundice")) return { emergency: false, ladder: 3, catg: "Cholecystitis with obstructive jaundice — exclude CBD stone / cholangitis",
+          if (has(sel, "jaundice")) return { emergency: false, ladder: 3, catg: "Cholecystitis with obstructive jaundice - exclude CBD stone / cholangitis",
             sc: "Admit, NBM, IV fluids; USS then MRCP/ERCP to clear the duct; cholecystectomy once settled.",
             ref: "Surgical + GI review; open the Cholangitis pathway if fever + jaundice + RUQ pain (Charcot).",
             mgmt: [
-              "Jaundice + fever + RUQ pain = cholangitis, not simple cholecystitis — that is an IM-primary emergency needing biliary drainage.",
+              "Jaundice + fever + RUQ pain = cholangitis, not simple cholecystitis - that is an IM-primary emergency needing biliary drainage.",
               "IV antibiotics per local guidance; deranged LFTs point to a CBD stone."
             ],
             abx: {
               firstLine: [
-                { drug: "Ceftriaxone", dose: "2 g", route: "IV q24h", note: "biliary Gram−" },
+                { drug: "Ceftriaxone", dose: "2 g", route: "IV q24h", note: "biliary Gram-" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobes" },
-                { drug: "or Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "single-agent alternative" }
+                { drug: "or Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "single-agent alternative" }
               ],
               alt: [
-                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy — with metronidazole" },
+                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy - with metronidazole" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe cover in allergy regimen" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — if frank cholangitis (Charcot), Internal Medicine leads antibiotics + urgent drainage; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
+              note: "Empiric - if frank cholangitis (Charcot), Internal Medicine leads antibiotics + urgent drainage; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
             } };
           return { emergency: false, ladder: 3, catg: "Acute (calculous) cholecystitis",
             sc: "Admit, NBM, IV fluids, analgesia; USS is first-line. Definitive source control = early laparoscopic cholecystectomy (same admission / within ~1 week beats delayed).",
             ref: "Surgical admission.",
             mgmt: [
-              "Antibiotics are supportive — cholecystectomy is the cure; do not discharge on antibiotics alone expecting it to settle for good.",
-              "Acalculous cholecystitis occurs in the critically ill / fasted / diabetic — no stones does not exclude it.",
+              "Antibiotics are supportive - cholecystectomy is the cure; do not discharge on antibiotics alone expecting it to settle for good.",
+              "Acalculous cholecystitis occurs in the critically ill / fasted / diabetic - no stones does not exclude it.",
               "IV cover per local antibiogram/ICMR; de-escalate as the patient settles."
             ],
             abx: {
               firstLine: [
-                { drug: "Ceftriaxone", dose: "2 g", route: "IV q24h", note: "biliary Gram−" },
+                { drug: "Ceftriaxone", dose: "2 g", route: "IV q24h", note: "biliary Gram-" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobes if severe / elderly / biliary-enteric anastomosis" },
-                { drug: "or Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h", note: "single-agent alternative" }
+                { drug: "or Amoxicillin-clavulanate", dose: "1.2 g", route: "IV q8h", note: "single-agent alternative" }
               ],
               alt: [
-                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy — with metronidazole" },
+                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy - with metronidazole" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe cover in allergy regimen" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — supportive to cholecystectomy; de-escalate as patient settles; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
+              note: "Empiric - supportive to cholecystectomy; de-escalate as patient settles; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
             } };
         }
       },
@@ -206,46 +206,46 @@
           { id: "peritonism", label: "Peritonism / free air" }, { id: "unstable", label: "Sepsis / instability" }
         ],
         assess: function (sel) {
-          if (anyOf(sel, ["ischaemia", "peritonism", "unstable"])) return { emergency: true, ladder: 5, catg: "Obstruction with strangulation / ischaemia — surgical emergency",
-            sc: "Urgent theatre — resect non-viable bowel. Resuscitate aggressively, NBM, NG decompression, urinary catheter.",
+          if (anyOf(sel, ["ischaemia", "peritonism", "unstable"])) return { emergency: true, ladder: 5, catg: "Obstruction with strangulation / ischaemia - surgical emergency",
+            sc: "Urgent theatre - resect non-viable bowel. Resuscitate aggressively, NBM, NG decompression, urinary catheter.",
             ref: "Emergency surgical referral now.",
             mgmt: [
-              "Continuous (not colicky) pain, tenderness, rising lactate or fever = strangulation — do NOT persist with conservative treatment.",
+              "Continuous (not colicky) pain, tenderness, rising lactate or fever = strangulation - do NOT persist with conservative treatment.",
               "IV cover for enteric Gram-negatives + anaerobes per local antibiogram/ICMR, as an adjunct to resection."
             ],
             abx: {
               firstLine: [
-                { drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "enteric Gram− + anaerobe cover" },
+                { drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "enteric Gram- + anaerobe cover" },
                 { drug: "or Ceftriaxone", dose: "2 g", route: "IV q24h", note: "+ metronidazole below" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobes (with ceftriaxone)" }
               ],
               alt: [
                 { drug: "Meropenem", dose: "1 g", route: "IV q8h", note: "septic shock / prior ESBL / healthcare exposure" },
-                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy — with metronidazole" },
+                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy - with metronidazole" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe cover in allergy regimen" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — adjunct to resection of non-viable bowel; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
+              note: "Empiric - adjunct to resection of non-viable bowel; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
             } };
-          if (has(sel, "hernia")) return { emergency: false, ladder: 3, catg: "Obstruction with an external hernia — likely mechanical cause",
-            sc: "Examine every hernial orifice. NBM, NG, IV fluids; a tender irreducible hernia needs urgent surgery — open the Hernia pathway.",
+          if (has(sel, "hernia")) return { emergency: false, ladder: 3, catg: "Obstruction with an external hernia - likely mechanical cause",
+            sc: "Examine every hernial orifice. NBM, NG, IV fluids; a tender irreducible hernia needs urgent surgery - open the Hernia pathway.",
             ref: "Urgent surgical review.",
             mgmt: [
               "A groin lump + obstruction = incarcerated/strangulated hernia until proven otherwise; do not force reduction of a tender/dusky hernia.",
-              "Antibiotics not needed for simple mechanical obstruction — reserve for strangulation/perforation."
+              "Antibiotics not needed for simple mechanical obstruction - reserve for strangulation/perforation."
             ] };
-          if (has(sel, "malignancy")) return { emergency: false, ladder: 3, catg: "Suspected large-bowel obstruction — exclude malignancy / volvulus",
+          if (has(sel, "malignancy")) return { emergency: false, ladder: 3, catg: "Suspected large-bowel obstruction - exclude malignancy / volvulus",
             sc: "NBM, NG, IV fluids; CT to define level & cause. LBO is less likely to settle and often needs surgery/stent; a competent ileocaecal valve risks caecal blow-out.",
             ref: "Surgical admission; imaging urgently.",
             mgmt: [
-              "Do NOT assume adhesions in LBO — colorectal cancer, sigmoid volvulus and stricture are the common causes here.",
+              "Do NOT assume adhesions in LBO - colorectal cancer, sigmoid volvulus and stricture are the common causes here.",
               "Antibiotics only if perforation/strangulation supervenes."
             ] };
           return { emergency: false, ladder: 0, catg: "Simple / adhesive small-bowel obstruction",
-            sc: "'Drip and suck' — NBM, NG decompression, IV fluids, correct electrolytes, catheter + fluid balance; water-soluble contrast study can be therapeutic & prognostic.",
+            sc: "'Drip and suck' - NBM, NG decompression, IV fluids, correct electrolytes, catheter + fluid balance; water-soluble contrast study can be therapeutic & prognostic.",
             ref: "Surgical admission; serial examination.",
             mgmt: [
-              "Antibiotics are NOT indicated for uncomplicated obstruction — it is a mechanical, not infective, problem.",
+              "Antibiotics are NOT indicated for uncomplicated obstruction - it is a mechanical, not infective, problem.",
               "Escalate to theatre if pain becomes constant, tenderness develops, or it fails to resolve in ~48 h.",
               "Adhesions are the commonest cause after prior surgery, but always exclude a hernia and malignancy."
             ] };
@@ -264,35 +264,35 @@
           { id: "sepsis", label: "Systemic sepsis / peritonism" }
         ],
         assess: function (sel) {
-          if (anyOf(sel, ["strangulation", "sepsis"])) return { emergency: true, ladder: 5, catg: "Strangulated hernia — ischaemic bowel, surgical emergency",
-            sc: "Emergency theatre — reduce & assess viability, resect if non-viable. Resuscitate, NBM, NG.",
+          if (anyOf(sel, ["strangulation", "sepsis"])) return { emergency: true, ladder: 5, catg: "Strangulated hernia - ischaemic bowel, surgical emergency",
+            sc: "Emergency theatre - reduce & assess viability, resect if non-viable. Resuscitate, NBM, NG.",
             ref: "Emergency surgical referral now.",
             mgmt: [
-              "Do NOT attempt forceful reduction of a tender/discoloured hernia — you risk reducing dead bowel en-masse into the abdomen.",
+              "Do NOT attempt forceful reduction of a tender/discoloured hernia - you risk reducing dead bowel en-masse into the abdomen.",
               "IV cover for enteric organisms + anaerobes per local antibiogram/ICMR, as an adjunct to resection."
             ],
             abx: {
               firstLine: [
-                { drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "enteric Gram− + anaerobe cover" },
+                { drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "enteric Gram- + anaerobe cover" },
                 { drug: "or Ceftriaxone", dose: "2 g", route: "IV q24h", note: "+ metronidazole below" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobes (with ceftriaxone)" }
               ],
               alt: [
                 { drug: "Meropenem", dose: "1 g", route: "IV q8h", note: "septic shock / prior ESBL / healthcare exposure" },
-                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy — with metronidazole" },
+                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy - with metronidazole" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe cover in allergy regimen" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — only when bowel is compromised; adjunct to resection; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
+              note: "Empiric - only when bowel is compromised; adjunct to resection; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
             } };
-          if (anyOf(sel, ["irreducible", "obstruction", "tender"])) return { emergency: false, ladder: 3, catg: "Incarcerated hernia — needs urgent repair",
+          if (anyOf(sel, ["irreducible", "obstruction", "tender"])) return { emergency: false, ladder: 3, catg: "Incarcerated hernia - needs urgent repair",
             sc: "Analgesia, NBM, IV fluids; gentle taxis may be attempted ONLY if non-tender and no strangulation signs, otherwise prep for urgent surgery.",
             ref: "Urgent surgical review; admit.",
             mgmt: [
-              "Femoral hernias (often in women) have a high strangulation risk — low threshold for surgery.",
-              "Antibiotics not needed unless bowel is compromised — this is a mechanical problem needing repair."
+              "Femoral hernias (often in women) have a high strangulation risk - low threshold for surgery.",
+              "Antibiotics not needed unless bowel is compromised - this is a mechanical problem needing repair."
             ] };
-          return { emergency: false, ladder: 0, catg: "Reducible hernia — no acute complication",
+          return { emergency: false, ladder: 0, catg: "Reducible hernia - no acute complication",
             sc: "No procedure now; confirms fully reducible with a cough impulse.",
             ref: "Elective surgical referral for repair.",
             mgmt: [
@@ -313,20 +313,20 @@
           { id: "sepsis", label: "Sepsis / shock" }, { id: "peritonism", label: "Generalised peritonitis" }
         ],
         assess: function () {
-          return { emergency: true, ladder: 5, catg: "GI perforation — peritonitis, surgical emergency",
+          return { emergency: true, ladder: 5, catg: "GI perforation - peritonitis, surgical emergency",
             sc: "Resuscitate + urgent theatre for source control (repair / omental patch / resection ± washout). NBM, wide-bore IV, fluids, NG, urinary catheter.",
             ref: "Emergency surgical referral now.",
             mgmt: [
-              "IV broad-spectrum cover (enteric Gram-negatives + anaerobes; add antifungal thinking in upper-GI/immunocompromised per local protocol) — ADJUNCT to source control, per local antibiogram/ICMR.",
+              "IV broad-spectrum cover (enteric Gram-negatives + anaerobes; add antifungal thinking in upper-GI/immunocompromised per local protocol) - ADJUNCT to source control, per local antibiogram/ICMR.",
               "In India think enteric (typhoid) terminal-ileal perforation and ileocaecal TB, not just peptic ulcer.",
-              "A normal erect CXR does NOT exclude perforation — get a CT if stable and the diagnosis is in doubt.",
-              "Only highly selected, stable, contained/sealed perforations are managed non-operatively — the default is theatre."
+              "A normal erect CXR does NOT exclude perforation - get a CT if stable and the diagnosis is in doubt.",
+              "Only highly selected, stable, contained/sealed perforations are managed non-operatively - the default is theatre."
             ],
             abx: {
               firstLine: [
-                { drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "enteric Gram− + anaerobe cover" },
+                { drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "enteric Gram- + anaerobe cover" },
                 { drug: "or Meropenem", dose: "1 g", route: "IV q8h", note: "septic shock / prior ESBL / healthcare exposure" },
-                { drug: "± Fluconazole", dose: "400 mg (loading, then 200–400 mg)", route: "IV daily", note: "upper-GI perforation / immunocompromised — Candida cover per local protocol" }
+                { drug: "± Fluconazole", dose: "400 mg (loading, then 200-400 mg)", route: "IV daily", note: "upper-GI perforation / immunocompromised - Candida cover per local protocol" }
               ],
               alt: [
                 { drug: "Ceftriaxone", dose: "2 g", route: "IV q24h", note: "with metronidazole below" },
@@ -334,7 +334,7 @@
                 { drug: "Ciprofloxacin + Metronidazole", dose: "400 mg q12h / 500 mg q8h", route: "IV", note: "penicillin allergy" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — adjunct to source control (repair/patch/resection ± washout); consider enteric/typhoid & ileocaecal TB in India; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
+              note: "Empiric - adjunct to source control (repair/patch/resection ± washout); consider enteric/typhoid & ileocaecal TB in India; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
             } };
         }
       },
@@ -355,60 +355,60 @@
           if (has(sel, "evisceration")) return { emergency: true, ladder: 5, catg: "Fascial dehiscence with evisceration",
             sc: "Cover the bowel with saline-soaked gauze, do NOT push it back; NBM, urgent theatre for closure.",
             ref: "Emergency surgical referral.",
-            mgmt: ["Resuscitate; IV antibiotics per local protocol as an adjunct — the treatment is operative re-closure."],
+            mgmt: ["Resuscitate; IV antibiotics per local protocol as an adjunct - the treatment is operative re-closure."],
             abx: {
               firstLine: [
-                { drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "exposed bowel — Gram+/enteric Gram−/anaerobe cover" },
+                { drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "exposed bowel - Gram+/enteric Gram-/anaerobe cover" },
                 { drug: "or Ceftriaxone", dose: "2 g", route: "IV q24h", note: "+ metronidazole below" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobes (with ceftriaxone)" }
               ],
               alt: [
                 { drug: "Meropenem", dose: "1 g", route: "IV q8h", note: "prior ESBL / healthcare exposure" },
-                { drug: "± Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h", note: "MRSA risk" }
+                { drug: "± Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h", note: "MRSA risk" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — adjunct to operative re-closure; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
+              note: "Empiric - adjunct to operative re-closure; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
             } };
           if (anyOf(sel, ["deep", "sepsis"])) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Deep / organ-space surgical site infection",
-            sc: "Source control — drain the collection (image-guided or open); send pus for culture. Retained infected mesh may need removal.",
+            sc: "Source control - drain the collection (image-guided or open); send pus for culture. Retained infected mesh may need removal.",
             ref: "Surgical review; imaging for a collection.",
             mgmt: [
               "IV cover (Gram-positive + enteric, per local antibiogram) once drained; de-escalate on culture.",
-              "Antibiotics without draining a deep collection will fail — find and drain the source."
+              "Antibiotics without draining a deep collection will fail - find and drain the source."
             ],
             abx: {
               firstLine: [
-                { drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "Gram+ + enteric Gram− + anaerobe cover" },
+                { drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "Gram+ + enteric Gram- + anaerobe cover" },
                 { drug: "or Ceftriaxone", dose: "2 g", route: "IV q24h", note: "+ metronidazole below" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobes (with ceftriaxone)" }
               ],
               alt: [
                 { drug: "Meropenem", dose: "1 g", route: "IV q8h", note: "prior ESBL / healthcare exposure" },
-                { drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h", note: "MRSA risk / implant / prosthetic material" }
+                { drug: "+ Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h", note: "MRSA risk / implant / prosthetic material" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — start after source control (drainage); de-escalate on deep culture; adjust to local antibiogram/ICMR, renal function & allergy."
+              note: "Empiric - start after source control (drainage); de-escalate on deep culture; adjust to local antibiogram/ICMR, renal function & allergy."
             } };
           if (has(sel, "purulent")) return { emergency: false, ladder: 2, catg: "Superficial surgical site infection",
             sc: "Open the wound / release pus, lay it open for dressings; swab only if not responding.",
             ref: "Nursing wound care; surgical review if worsening.",
             mgmt: [
-              "The treatment is opening the wound, NOT reflex antibiotics — a drained superficial SSI often needs no systemic cover.",
+              "The treatment is opening the wound, NOT reflex antibiotics - a drained superficial SSI often needs no systemic cover.",
               "Add oral antibiotics only for surrounding cellulitis or systemic features; reassess at 48 h."
             ],
             abx: {
               firstLine: [
                 { drug: "Cephalexin", dose: "500 mg", route: "PO QID", note: "only if surrounding cellulitis / systemic features" },
-                { drug: "or Amoxicillin–clavulanate", dose: "625 mg", route: "PO TID", note: "if mixed flora suspected" }
+                { drug: "or Amoxicillin-clavulanate", dose: "625 mg", route: "PO TID", note: "if mixed flora suspected" }
               ],
               alt: [
-                { drug: "Clindamycin", dose: "300–450 mg", route: "PO q8h", note: "penicillin allergy" },
+                { drug: "Clindamycin", dose: "300-450 mg", route: "PO q8h", note: "penicillin allergy" },
                 { drug: "Doxycycline / Co-trimoxazole", dose: "100 mg BID / 960 mg BID", route: "PO", note: "if MRSA suspected" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — a drained superficial SSI often needs no systemic cover; treat only cellulitis/systemic features; adjust to local antibiogram/ICMR & allergy."
+              note: "Empiric - a drained superficial SSI often needs no systemic cover; treat only cellulitis/systemic features; adjust to local antibiogram/ICMR & allergy."
             } };
-          return { emergency: false, ladder: 1, catg: "Wound concern — reassess",
+          return { emergency: false, ladder: 1, catg: "Wound concern - reassess",
             sc: "Wound care, keep clean and dry.",
             ref: "Review if discharge, spreading erythema or fever develop.",
             mgmt: ["No antibiotics without signs of infection."] };
@@ -428,21 +428,21 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["oop", "crepitus", "rapid"])) return necFashResult();
-          if (has(sel, "purulent")) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Purulent SSTI — likely abscess",
+          if (has(sel, "purulent")) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Purulent SSTI - likely abscess",
             sc: "Incision & drainage is the primary treatment; culture the pus.",
             ref: "Surgical / minor-ops.",
-            mgmt: ["Antibiotics are the adjunct — add for surrounding cellulitis, systemic features, immunocompromise or diabetes; cover S. aureus (MRSA per local rates)."],
+            mgmt: ["Antibiotics are the adjunct - add for surrounding cellulitis, systemic features, immunocompromise or diabetes; cover S. aureus (MRSA per local rates)."],
             abx: {
               firstLine: [
-                { drug: "Cloxacillin", dose: "500 mg PO QID / 1–2 g IV q6h", route: "PO/IV", note: "anti-staphylococcal" },
-                { drug: "or Cefazolin", dose: "1–2 g", route: "IV q8h", note: "if IV needed" }
+                { drug: "Cloxacillin", dose: "500 mg PO QID / 1-2 g IV q6h", route: "PO/IV", note: "anti-staphylococcal" },
+                { drug: "or Cefazolin", dose: "1-2 g", route: "IV q8h", note: "if IV needed" }
               ],
               alt: [
                 { drug: "Clindamycin", dose: "600 mg", route: "IV/PO q8h", note: "penicillin allergy / MRSA cover" },
                 { drug: "Doxycycline / Co-trimoxazole", dose: "100 mg BID / 960 mg BID", route: "PO", note: "purulent, MRSA suspected" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — incision & drainage is primary; antibiotics adjunctive; adjust to local antibiogram/ICMR, cultures & allergy."
+              note: "Empiric - incision & drainage is primary; antibiotics adjunctive; adjust to local antibiogram/ICMR, cultures & allergy."
             } };
           if (has(sel, "sepsis")) return { emergency: true, ladder: 3, catg: "Cellulitis with systemic features",
             sc: "Rule out a drainable collection (USS if in doubt); mark the margin.",
@@ -450,38 +450,38 @@
             mgmt: ["IV anti-streptococcal / anti-staphylococcal cover per local antibiogram; reassess the marked margin."],
             abx: {
               firstLine: [
-                { drug: "Cefazolin", dose: "1–2 g", route: "IV q8h", note: "streptococci + MSSA" },
-                { drug: "or Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h", note: "if mixed flora / bite / diabetes" }
+                { drug: "Cefazolin", dose: "1-2 g", route: "IV q8h", note: "streptococci + MSSA" },
+                { drug: "or Amoxicillin-clavulanate", dose: "1.2 g", route: "IV q8h", note: "if mixed flora / bite / diabetes" }
               ],
               alt: [
                 { drug: "Clindamycin", dose: "600 mg", route: "IV q8h", note: "penicillin allergy" },
-                { drug: "± Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h", note: "MRSA risk" }
+                { drug: "± Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h", note: "MRSA risk" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — exclude a drainable collection; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
+              note: "Empiric - exclude a drainable collection; adjust to local antibiogram/ICMR, cultures, renal function & allergy."
             } };
-          if (has(sel, "bilateral")) return { emergency: false, ladder: 0, catg: "Bilateral lower-leg redness — likely NOT cellulitis",
+          if (has(sel, "bilateral")) return { emergency: false, ladder: 0, catg: "Bilateral lower-leg redness - likely NOT cellulitis",
             sc: "No collection to drain; elevate, emollients, treat venous disease.",
             ref: "Review; reconsider the diagnosis.",
             mgmt: [
-              "Bilateral, symmetrical, non-tender leg redness is usually venous stasis / lipodermatosclerosis, NOT infection — a very common over-treatment trap.",
-              "True cellulitis is almost always unilateral and acutely tender — do not start antibiotics for stasis."
+              "Bilateral, symmetrical, non-tender leg redness is usually venous stasis / lipodermatosclerosis, NOT infection - a very common over-treatment trap.",
+              "True cellulitis is almost always unilateral and acutely tender - do not start antibiotics for stasis."
             ] };
           return { emergency: false, ladder: 2, catg: "Uncomplicated cellulitis",
-            sc: "No collection to drain — mark the margin, elevate the limb, treat the portal of entry.",
+            sc: "No collection to drain - mark the margin, elevate the limb, treat the portal of entry.",
             ref: "Review at 48 h; escalate if spreading.",
             mgmt: ["Oral anti-streptococcal / anti-staphylococcal antibiotic per local guidance; lower threshold for IV in diabetes / immunosuppression."],
             abx: {
               firstLine: [
                 { drug: "Cephalexin", dose: "500 mg", route: "PO QID", note: "streptococci + MSSA" },
-                { drug: "or Amoxicillin–clavulanate", dose: "625 mg", route: "PO TID", note: "mixed flora / diabetes" }
+                { drug: "or Amoxicillin-clavulanate", dose: "625 mg", route: "PO TID", note: "mixed flora / diabetes" }
               ],
               alt: [
-                { drug: "Clindamycin", dose: "300–450 mg", route: "PO q8h", note: "penicillin allergy" },
+                { drug: "Clindamycin", dose: "300-450 mg", route: "PO q8h", note: "penicillin allergy" },
                 { drug: "Doxycycline / Co-trimoxazole", dose: "100 mg BID / 960 mg BID", route: "PO", note: "if MRSA suspected" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — oral for uncomplicated cellulitis; escalate to IV in diabetes/immunosuppression; adjust to local antibiogram/ICMR & allergy."
+              note: "Empiric - oral for uncomplicated cellulitis; escalate to IV in diabetes/immunosuppression; adjust to local antibiogram/ICMR & allergy."
             } };
         }
       },
@@ -500,56 +500,56 @@
         ],
         assess: function (sel) {
           if (has(sel, "fournier")) return necFashResult();
-          if (has(sel, "perianal")) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Perianal abscess — needs drainage",
+          if (has(sel, "perianal")) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Perianal abscess - needs drainage",
             sc: "Incision & drainage (theatre / EUA) is the definitive treatment; do NOT wait for it to 'point'. Send pus for culture.",
             ref: "Surgical drainage; image (MRI) for suspected ischiorectal / supralevator / horseshoe extension.",
             mgmt: [
-              "Antibiotics do NOT drain an abscess — pain out of proportion demands EUA; deep pain with a normal-looking outside suggests a supralevator collection.",
-              "Diabetics have a high risk of Fournier's gangrene — reassess for spreading necrosis.",
+              "Antibiotics do NOT drain an abscess - pain out of proportion demands EUA; deep pain with a normal-looking outside suggests a supralevator collection.",
+              "Diabetics have a high risk of Fournier's gangrene - reassess for spreading necrosis.",
               "Do not chase a fistula acutely; add antibiotics only for cellulitis, systemic sepsis or immunocompromise, per local antibiogram."
             ],
             abx: {
               firstLine: [
-                { drug: "Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h", note: "enteric Gram− + anaerobe cover (gut flora)" },
+                { drug: "Amoxicillin-clavulanate", dose: "1.2 g", route: "IV q8h", note: "enteric Gram- + anaerobe cover (gut flora)" },
                 { drug: "or Ceftriaxone", dose: "2 g", route: "IV q24h", note: "+ metronidazole below" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobes (with ceftriaxone)" }
               ],
               alt: [
-                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy — with metronidazole" },
+                { drug: "Ciprofloxacin", dose: "400 mg", route: "IV q12h", note: "penicillin allergy - with metronidazole" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe cover in allergy regimen" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — drainage is definitive, antibiotics only for cellulitis/sepsis/immunocompromise; watch for Fournier's in diabetics; adjust to local antibiogram/ICMR, cultures & allergy."
+              note: "Empiric - drainage is definitive, antibiotics only for cellulitis/sepsis/immunocompromise; watch for Fournier's in diabetics; adjust to local antibiogram/ICMR, cultures & allergy."
             } };
-          if (has(sel, "pilonidal")) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Pilonidal abscess — needs drainage",
+          if (has(sel, "pilonidal")) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Pilonidal abscess - needs drainage",
             sc: "Incision & drainage off the midline for the acute abscess; definitive excision is a planned later procedure.",
             ref: "Surgical drainage; elective follow-up for definitive surgery.",
-            mgmt: ["Drainage is the treatment; antibiotics are adjunct only if surrounding cellulitis or systemic features — per local guidance."],
+            mgmt: ["Drainage is the treatment; antibiotics are adjunct only if surrounding cellulitis or systemic features - per local guidance."],
             abx: {
               firstLine: [
-                { drug: "Amoxicillin–clavulanate", dose: "1.2 g IV q8h / 625 mg PO TID", route: "IV/PO", note: "skin flora + anaerobes" }
+                { drug: "Amoxicillin-clavulanate", dose: "1.2 g IV q8h / 625 mg PO TID", route: "IV/PO", note: "skin flora + anaerobes" }
               ],
               alt: [
-                { drug: "Clindamycin", dose: "600 mg IV / 300–450 mg PO q8h", route: "IV/PO", note: "penicillin allergy — covers anaerobes + Gram+" }
+                { drug: "Clindamycin", dose: "600 mg IV / 300-450 mg PO q8h", route: "IV/PO", note: "penicillin allergy - covers anaerobes + Gram+" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — off-midline drainage is definitive; antibiotics only for surrounding cellulitis / systemic features; adjust to local antibiogram/ICMR & allergy."
+              note: "Empiric - off-midline drainage is definitive; antibiotics only for surrounding cellulitis / systemic features; adjust to local antibiogram/ICMR & allergy."
             } };
-          return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Abscess — needs drainage",
+          return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Abscess - needs drainage",
             sc: "Incision & drainage / image-guided drainage is definitive; send pus for culture.",
             ref: "Surgical drainage (theatre if deep / large).",
-            mgmt: ["Antibiotics are adjunct to drainage — add for surrounding cellulitis, systemic features or immunocompromise; choose per local antibiogram and de-escalate on culture."],
+            mgmt: ["Antibiotics are adjunct to drainage - add for surrounding cellulitis, systemic features or immunocompromise; choose per local antibiogram and de-escalate on culture."],
             abx: {
               firstLine: [
-                { drug: "Cloxacillin", dose: "500 mg PO QID / 1–2 g IV q6h", route: "PO/IV", note: "S. aureus (skin abscess)" },
-                { drug: "or Amoxicillin–clavulanate", dose: "625 mg PO TID / 1.2 g IV q8h", route: "PO/IV", note: "mixed flora" }
+                { drug: "Cloxacillin", dose: "500 mg PO QID / 1-2 g IV q6h", route: "PO/IV", note: "S. aureus (skin abscess)" },
+                { drug: "or Amoxicillin-clavulanate", dose: "625 mg PO TID / 1.2 g IV q8h", route: "PO/IV", note: "mixed flora" }
               ],
               alt: [
-                { drug: "Clindamycin", dose: "600 mg IV / 300–450 mg PO q8h", route: "IV/PO", note: "penicillin allergy / MRSA cover" },
+                { drug: "Clindamycin", dose: "600 mg IV / 300-450 mg PO q8h", route: "IV/PO", note: "penicillin allergy / MRSA cover" },
                 { drug: "Doxycycline / Co-trimoxazole", dose: "100 mg BID / 960 mg BID", route: "PO", note: "MRSA suspected" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — incision & drainage is definitive; antibiotics only for cellulitis/systemic features/immunocompromise; de-escalate on culture; adjust to local antibiogram/ICMR & allergy."
+              note: "Empiric - incision & drainage is definitive; antibiotics only for cellulitis/systemic features/immunocompromise; de-escalate on culture; adjust to local antibiogram/ICMR & allergy."
             } };
         }
       },
@@ -569,64 +569,64 @@
             sc: "Urgent surgical debridement / drainage; decompress the deep spaces of the foot; assess for revascularisation.",
             ref: "Emergency surgical + vascular referral; admit.",
             mgmt: [
-              "The deep-space infection tracks along tendons — drain it early; do not be reassured by a small skin opening.",
+              "The deep-space infection tracks along tendons - drain it early; do not be reassured by a small skin opening.",
               "Broad-spectrum IV cover (Gram-positive + Gram-negative ± anaerobic) per local antibiogram/ICMR; tight glycaemic control; de-escalate on deep culture."
             ],
             abx: {
               firstLine: [
-                { drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "Gram+ + Gram− + anaerobe cover" },
-                { drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h", note: "MRSA cover empirically" }
+                { drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "Gram+ + Gram- + anaerobe cover" },
+                { drug: "+ Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h", note: "MRSA cover empirically" }
               ],
               alt: [
                 { drug: "Meropenem", dose: "1 g", route: "IV q8h", note: "penicillin allergy / prior ESBL" },
                 { drug: "+ Linezolid", dose: "600 mg", route: "IV q12h", note: "if vancomycin unsuitable / MRSA" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — adjunct to urgent debridement/drainage; assess perfusion; de-escalate on deep/bone culture; adjust to local antibiogram/ICMR, renal function & allergy."
+              note: "Empiric - adjunct to urgent debridement/drainage; assess perfusion; de-escalate on deep/bone culture; adjust to local antibiogram/ICMR, renal function & allergy."
             } };
           if (anyOf(sel, ["purulent", "probe_bone"])) return { emergency: false, ladder: 3, catg: "Moderate diabetic foot infection ± osteomyelitis",
             sc: "Drain/debride collections; probe-to-bone + plain X-ray (then MRI) for osteomyelitis; offload.",
             ref: "Surgical + podiatry/vascular; consider admission.",
             mgmt: [
-              "Probe-to-bone positive strongly suggests osteomyelitis — send a deep/bone specimen, not a superficial swab, to guide therapy.",
-              "IV then oral antibiotics guided by deep culture; always assess perfusion — infection won't clear an ischaemic foot."
+              "Probe-to-bone positive strongly suggests osteomyelitis - send a deep/bone specimen, not a superficial swab, to guide therapy.",
+              "IV then oral antibiotics guided by deep culture; always assess perfusion - infection won't clear an ischaemic foot."
             ],
             abx: {
               firstLine: [
-                { drug: "Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h", note: "Gram+ + Gram− + anaerobe cover" },
+                { drug: "Amoxicillin-clavulanate", dose: "1.2 g", route: "IV q8h", note: "Gram+ + Gram- + anaerobe cover" },
                 { drug: "or Ceftriaxone", dose: "2 g", route: "IV q24h", note: "+ metronidazole below" },
                 { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobes (with ceftriaxone)" }
               ],
               alt: [
-                { drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h", note: "MRSA risk" },
+                { drug: "+ Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h", note: "MRSA risk" },
                 { drug: "Clindamycin + Ciprofloxacin", dose: "600 mg q8h / 400 mg q12h", route: "IV", note: "penicillin allergy" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — pair with debridement/offloading; step down to oral guided by deep/bone culture; assess perfusion; adjust to local antibiogram/ICMR, renal function & allergy."
+              note: "Empiric - pair with debridement/offloading; step down to oral guided by deep/bone culture; assess perfusion; adjust to local antibiogram/ICMR, renal function & allergy."
             } };
           if (has(sel, "erythema")) return { emergency: false, ladder: 2, catg: "Mild diabetic foot infection",
             sc: "Debride callus / dead tissue; offload pressure; wound care.",
             ref: "Podiatry / diabetic foot clinic.",
             mgmt: [
-              "Diabetics mount a blunted inflammatory response — modest signs can hide serious infection, so review closely.",
+              "Diabetics mount a blunted inflammatory response - modest signs can hide serious infection, so review closely.",
               "Oral antibiotics targeting Gram-positives per local guidance."
             ],
             abx: {
               firstLine: [
-                { drug: "Amoxicillin–clavulanate", dose: "625 mg", route: "PO TID", note: "Gram+ (± limited Gram−) cover" },
+                { drug: "Amoxicillin-clavulanate", dose: "625 mg", route: "PO TID", note: "Gram+ (± limited Gram-) cover" },
                 { drug: "or Cephalexin", dose: "500 mg", route: "PO QID", note: "if predominantly Gram+" }
               ],
               alt: [
-                { drug: "Clindamycin", dose: "300–450 mg", route: "PO q8h", note: "penicillin allergy" },
+                { drug: "Clindamycin", dose: "300-450 mg", route: "PO q8h", note: "penicillin allergy" },
                 { drug: "± Co-trimoxazole", dose: "960 mg", route: "PO BID", note: "if MRSA suspected" }
               ],
               ref: "ICMR AMRSN 2024 / Sanford",
-              note: "Empiric — pair with debridement/offloading and vascular assessment; review closely (blunted diabetic response); adjust to local antibiogram/ICMR & allergy."
+              note: "Empiric - pair with debridement/offloading and vascular assessment; review closely (blunted diabetic response); adjust to local antibiogram/ICMR & allergy."
             } };
-          return { emergency: false, ladder: 1, catg: "Diabetic foot — no active infection",
+          return { emergency: false, ladder: 1, catg: "Diabetic foot - no active infection",
             sc: "Offloading, wound care, vascular assessment.",
             ref: "Diabetic foot clinic.",
-            mgmt: ["No antibiotics without signs of infection — a colonised ulcer is not an infected one."] };
+            mgmt: ["No antibiotics without signs of infection - a colonised ulcer is not an infected one."] };
         }
       },
       /* ───────────── Necrotising soft-tissue infection (red-flag) ───────────── */
@@ -639,10 +639,10 @@
         danger: [{ id: "any", label: "Any of the above = surgical emergency" }],
         assess: function () { return necFashResult(); }
       },
-      /* ───────────────── Cholangitis — SHARED (IM primary) ───────────────── */
+      /* ───────────────── Cholangitis - SHARED (IM primary) ───────────────── */
       {
         id: "cholangitis", name: "Acute cholangitis", primary: "internal_medicine",
-        shared: { primary: "Internal Medicine", role: "Surgery / GI / IR consult — biliary drainage & source control" },
+        shared: { primary: "Internal Medicine", role: "Surgery / GI / IR consult - biliary drainage & source control" },
         q: [
           { id: "charcot", label: "Charcot triad (fever + jaundice + RUQ pain)" }, { id: "stones", label: "Known stones / stent / prior ERCP" },
           { id: "reynolds", label: "+ Hypotension &/or confusion (Reynolds pentad)" }
@@ -650,20 +650,20 @@
         danger: [{ id: "reynolds", label: "Reynolds pentad / septic shock" }, { id: "nondrain", label: "No improvement on antibiotics" }],
         assess: function (sel) {
           var severe = anyOf(sel, ["reynolds", "nondrain"]);
-          return { emergency: severe, ladder: severe ? 4 : 3, catg: "Acute cholangitis — Internal Medicine primary",
-            sc: severe ? "URGENT biliary decompression (ERCP; PTC if ERCP not feasible) — an obstructed infected duct will not respond to antibiotics alone, source control cannot wait." : "Biliary drainage (ERCP) is the definitive source control — arrange early; timing per severity grade.",
+          return { emergency: severe, ladder: severe ? 4 : 3, catg: "Acute cholangitis - Internal Medicine primary",
+            sc: severe ? "URGENT biliary decompression (ERCP; PTC if ERCP not feasible) - an obstructed infected duct will not respond to antibiotics alone, source control cannot wait." : "Biliary drainage (ERCP) is the definitive source control - arrange early; timing per severity grade.",
             ref: "Internal Medicine leads sepsis + antibiotics (per ICMR/local); GI/Surgery/IR for drainage.",
             shared: true,
             mgmt: [
               "SHARED condition: open the Internal Medicine pathway for the full diagnostic + antibiotic assessment (ICMR precedence preserved).",
-              "Surgery/IR role here = source control (drainage), not antibiotic selection — a decompensating patient needs the duct drained now."
+              "Surgery/IR role here = source control (drainage), not antibiotic selection - a decompensating patient needs the duct drained now."
             ] };
         }
       },
-      /* ───────────────── Liver abscess — SHARED (IM primary) ───────────────── */
+      /* ───────────────── Liver abscess - SHARED (IM primary) ───────────────── */
       {
         id: "liver_abscess", name: "Liver abscess", primary: "internal_medicine",
-        shared: { primary: "Internal Medicine", role: "Surgery / IR consult — drainage / source control" },
+        shared: { primary: "Internal Medicine", role: "Surgery / IR consult - drainage / source control" },
         q: [
           { id: "large", label: "Large (> 5 cm) / multiloculated" }, { id: "nonresponse", label: "No response to medical therapy" },
           { id: "rupture_risk", label: "Peritoneal signs / impending rupture" }
@@ -671,19 +671,19 @@
         danger: [{ id: "rupture_risk", label: "Impending rupture / peritonitis" }],
         assess: function (sel) {
           var drain = anyOf(sel, ["large", "nonresponse", "rupture_risk"]);
-          return { emergency: has(sel, "rupture_risk"), ladder: 4, catg: "Liver abscess — Internal Medicine primary", shared: true,
-            sc: drain ? "Percutaneous (image-guided) drainage indicated; surgical drainage if ruptured or not amenable." : "Small abscesses may respond to medical therapy — IM leads; drain if large or not improving.",
+          return { emergency: has(sel, "rupture_risk"), ladder: 4, catg: "Liver abscess - Internal Medicine primary", shared: true,
+            sc: drain ? "Percutaneous (image-guided) drainage indicated; surgical drainage if ruptured or not amenable." : "Small abscesses may respond to medical therapy - IM leads; drain if large or not improving.",
             ref: "Internal Medicine for pyogenic-vs-amoebic work-up + antibiotics; IR/Surgery for drainage.",
             mgmt: [
-              "SHARED condition — the Internal Medicine pathway owns diagnosis + antimicrobial choice (ICMR/local); amoebic (common in India) is treated medically first.",
+              "SHARED condition - the Internal Medicine pathway owns diagnosis + antimicrobial choice (ICMR/local); amoebic (common in India) is treated medically first.",
               "Surgery/IR role = drainage / source control, especially large left-lobe or non-responding abscesses."
             ] };
         }
       },
-      /* ───────────────── Colitis — SHARED (IM primary) ───────────────── */
+      /* ───────────────── Colitis - SHARED (IM primary) ───────────────── */
       {
         id: "colitis", name: "Colitis (surgical escalation)", primary: "internal_medicine",
-        shared: { primary: "Internal Medicine", role: "Surgery consult — complications / acute abdomen escalation" },
+        shared: { primary: "Internal Medicine", role: "Surgery consult - complications / acute abdomen escalation" },
         q: [
           { id: "diarrhoea", label: "Bloody / severe diarrhoea" }, { id: "distension", label: "Marked colonic distension" }
         ],
@@ -692,12 +692,12 @@
         ],
         assess: function (sel) {
           var surg = anyOf(sel, ["toxic_megacolon", "perforation", "unstable"]);
-          return { emergency: surg, ladder: surg ? 5 : 3, catg: "Colitis — Internal Medicine primary", shared: true,
-            sc: surg ? "Surgical emergency — consider colectomy for toxic megacolon / perforation; resuscitate, NBM." : "No surgical target yet — Internal Medicine leads medical management; monitor for complications.",
+          return { emergency: surg, ladder: surg ? 5 : 3, catg: "Colitis - Internal Medicine primary", shared: true,
+            sc: surg ? "Surgical emergency - consider colectomy for toxic megacolon / perforation; resuscitate, NBM." : "No surgical target yet - Internal Medicine leads medical management; monitor for complications.",
             ref: surg ? "Emergency surgical referral." : "Internal Medicine primary; surgical review if deteriorating.",
             mgmt: [
-              "SHARED condition — IM owns the diagnostic pathway (infective vs IBD vs ischaemic) + antibiotics/therapy.",
-              "Surgery escalates only for toxic megacolon, perforation, or an acute abdomen — track colonic diameter and lactate."
+              "SHARED condition - IM owns the diagnostic pathway (infective vs IBD vs ischaemic) + antibiotics/therapy.",
+              "Surgery escalates only for toxic megacolon, perforation, or an acute abdomen - track colonic diameter and lactate."
             ] };
         }
       }

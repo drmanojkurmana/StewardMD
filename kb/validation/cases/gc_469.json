@@ -32,39 +32,39 @@
     "serum_bicarbonate_mmol_L": 24
   },
   "imaging": "Chest radiograph: right hilar/perihilar mass with right upper zone volume loss. CT head (non-contrast): no haemorrhage, mass or acute infarct; consistent with metabolic encephalopathy. Staging CT chest recommended for suspected bronchogenic malignancy.",
-  "microbiology": "Not applicable — no infective focus; septic screen not indicated on clinical grounds.",
+  "microbiology": "Not applicable - no infective focus; septic screen not indicated on clinical grounds.",
   "differentialDiagnoses": [
     "SIADH (euvolaemic hypotonic hyponatraemia), likely paraneoplastic from a bronchogenic (small-cell) tumour",
-    "Hyperglycaemia-related (translocational) hyponatraemia / HHS — excluded: glucose only mildly raised, corrected Na still 112, osmolality low",
-    "Hypervolaemic hyponatraemia from heart failure — no oedema, no raised JVP, no orthopnoea",
-    "CKD-related dilutional hyponatraemia — degree far exceeds CKD stage 3b expectation",
-    "Adrenal insufficiency — 9am cortisol reassuring"
+    "Hyperglycaemia-related (translocational) hyponatraemia / HHS - excluded: glucose only mildly raised, corrected Na still 112, osmolality low",
+    "Hypervolaemic hyponatraemia from heart failure - no oedema, no raised JVP, no orthopnoea",
+    "CKD-related dilutional hyponatraemia - degree far exceeds CKD stage 3b expectation",
+    "Adrenal insufficiency - 9am cortisol reassuring"
   ],
   "finalDiagnosis": "Severe symptomatic hyponatraemia (Na 111 mmol/L) due to SIADH, most likely paraneoplastic from an underlying lung malignancy; diabetes and CKD are confounders that must be excluded before anchoring on SIADH.",
   "citations": [
-    "European Society of Endocrinology — Clinical Practice Guideline on Diagnosis and Treatment of Hyponatraemia — 2014",
-    "American Diabetes Association — Standards of Care in Diabetes (hyperglycaemic crises) — 2024",
-    "Harrison's Principles of Internal Medicine 22e — Disorders of Sodium and Water Balance / Paraneoplastic Syndromes"
+    "European Society of Endocrinology - Clinical Practice Guideline on Diagnosis and Treatment of Hyponatraemia - 2014",
+    "American Diabetes Association - Standards of Care in Diabetes (hyperglycaemic crises) - 2024",
+    "Harrison's Principles of Internal Medicine 22e - Disorders of Sodium and Water Balance / Paraneoplastic Syndromes"
   ],
-  "stewardship": "Not applicable — non-infective metabolic emergency; no antibiotics indicated. 'Stewardship' here is diagnostic and therapeutic restraint: establish true volume status and hypotonic state before treatment, avoid unnecessary saline boluses, and above all avoid overly rapid sodium correction.",
+  "stewardship": "Not applicable - non-infective metabolic emergency; no antibiotics indicated. 'Stewardship' here is diagnostic and therapeutic restraint: establish true volume status and hypotonic state before treatment, avoid unnecessary saline boluses, and above all avoid overly rapid sodium correction.",
   "contraindications": [
-    "Do NOT correct sodium faster than 8 mmol/L in 24h (or 4-6 mmol/L if very high osmotic demyelination risk) — malnourished ex-smoker is high-risk",
-    "Avoid 0.9% saline as sole therapy in SIADH — may worsen hyponatraemia when urine osmolality exceeds infusate osmolality",
+    "Do NOT correct sodium faster than 8 mmol/L in 24h (or 4-6 mmol/L if very high osmotic demyelination risk) - malnourished ex-smoker is high-risk",
+    "Avoid 0.9% saline as sole therapy in SIADH - may worsen hyponatraemia when urine osmolality exceeds infusate osmolality",
     "Avoid gliclazide-driven hypoglycaemia masking the picture; recheck glucose",
-    "Fluid restriction alone is inadequate for acute symptomatic (seizure) presentation — needs hypertonic saline"
+    "Fluid restriction alone is inadequate for acute symptomatic (seizure) presentation - needs hypertonic saline"
   ],
   "edgeCases": [
     "Symptomatic (seizure) hyponatraemia warrants 100-150 mL boluses of 3% hypertonic saline regardless of chronicity to raise Na 4-6 mmol/L acutely",
     "Corrected sodium for glucose reclassifies apparent hyperglycaemic hyponatraemia; here correction is negligible, confirming true hypotonicity",
     "Low serum uric acid (<4 mg/dL) and high fractional excretion of urate support SIADH over other causes",
-    "CKD blunts urinary dilution/concentration — interpret urine osmolality with caution, but 512 mOsm/kg with low serum osmolality is still inappropriate"
+    "CKD blunts urinary dilution/concentration - interpret urine osmolality with caution, but 512 mOsm/kg with low serum osmolality is still inappropriate"
   ],
   "expectedMaiK": "Euvolaemic, hypotonic hyponatraemia (low serum osmolality) with inappropriately concentrated urine (osm >100), urine Na >30, low uric acid, and normal thyroid/adrenal/renal-adjusted status = SIADH; exclude the diabetes (glucose correction) and CKD confounders, then treat symptomatic Na 111 with cautious hypertonic saline while investigating an underlying lung malignancy.",
   "expectedNextQuestions": [
     "What is the true volume status (JVP, oedema, postural BP, mucous membranes)?",
     "Any diuretics, PPI, SSRI, carbamazepine or other drugs precipitating SIADH?",
     "Is there weight loss, cough, haemoptysis or smoking history suggesting malignancy?",
-    "How acute is the drop — any prior sodium results to gauge chronicity and demyelination risk?"
+    "How acute is the drop - any prior sodium results to gauge chronicity and demyelination risk?"
   ],
   "expectedInvestigations": [
     "Paired serum and urine osmolality with urine sodium",
@@ -111,7 +111,7 @@
   },
   "regressionAssertions": [
     "Engine must rank hyponatremia first given euvolaemic hypotonic hyponatraemia with concentrated urine and high urine sodium",
-    "Must not anchor on hhs — glucose-corrected sodium remains ~112 with low serum osmolality",
+    "Must not anchor on hhs - glucose-corrected sodium remains ~112 with low serum osmolality",
     "Must flag risk of osmotic demyelination and cap correction at 8 mmol/L/24h",
     "Must recommend no antibiotics (non-infective) and set stewardship tier null",
     "Must trigger malignancy work-up given weight loss, smoking history and hilar mass"

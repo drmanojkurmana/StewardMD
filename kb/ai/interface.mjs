@@ -1,17 +1,17 @@
-/* StewardMD — AI interface layer + evidence engine (Phase 4, NO AI INTEGRATED)
+/* StewardMD - AI interface layer + evidence engine (Phase 4, NO AI INTEGRATED)
  *
  * This is the SEAM a future Gemini "explainer" plugs into. It integrates NO AI
  * and performs NO network calls. The application is FULLY FUNCTIONAL with AI
  * disabled: explain() returns the existing rule-based reasoning verbatim, and
  * retrieve() is a deterministic lexical search over the RAG index (a fallback
  * that needs no embeddings). When a future build sets flags.ai=true AND injects
- * a provider, explain() would route the grounded prompt to that provider — but
+ * a provider, explain() would route the grounded prompt to that provider - but
  * the decision is always computed offline first and the provider only explains
  * an already-decided output (post-validated; works with AI off).
  *
  * Pure + dependency-free + side-effect-free. Factory takes a KB "store" so it is
  * testable in node and usable in the browser (a thin shim would build the store
- * from window.KB_CORE/KB_CLINICAL/kb.index.json — that wiring is intentionally
+ * from window.KB_CORE/KB_CLINICAL/kb.index.json - that wiring is intentionally
  * deferred until the UI/flag review; nothing here is loaded by index.html yet).
  *
  *   import { createStewardAI } from "./interface.mjs";
@@ -19,17 +19,17 @@
  */
 
 export const DEFAULT_FLAGS = Object.freeze({
-  ai: false,            // master AI switch — OFF. App must work fully with this false.
-  gemini: false,        // Gemini provider wired — OFF (no provider, no network).
+  ai: false,            // master AI switch - OFF. App must work fully with this false.
+  gemini: false,        // Gemini provider wired - OFF (no provider, no network).
   ragRetrieval: true,   // lexical retrieve() works with AI off (no embeddings needed).
-  embeddings: false,    // vector index present — OFF until the embedding step runs.
-  professional: false,  // future Professional-subscription gate — OFF.
+  embeddings: false,    // vector index present - OFF until the embedding step runs.
+  professional: false,  // future Professional-subscription gate - OFF.
 });
 
-/* Reciprocal Rank Fusion — merge two ranked id lists (e.g. lexical + vector arms)
+/* Reciprocal Rank Fusion - merge two ranked id lists (e.g. lexical + vector arms)
  * into one. score(id) = Σ over lists containing id of 1/(K + rank0based). Ties keep
  * first-appearance order (A before B) via a stable sort. An empty second list makes
- * the result identical to the first — the hybrid-retrieval no-regression guarantee. */
+ * the result identical to the first - the hybrid-retrieval no-regression guarantee. */
 export function rrf(a, b, K) {
   K = (typeof K === "number" && K > 0) ? K : 60;
   const score = new Map(), order = [];
@@ -68,7 +68,7 @@ export function createStewardAI(store, opts) {
 
   function isAIEnabled() { return !!flags.ai && !!provider; }
 
-  /* RAG retrieval — deterministic tf-idf lexical scorer (pre-embedding fallback). */
+  /* RAG retrieval - deterministic tf-idf lexical scorer (pre-embedding fallback). */
   function retrieve(query, k) {
     k = k || 8;
     const q = tokenize(query);
@@ -78,7 +78,7 @@ export function createStewardAI(store, opts) {
     // Name-match stays the dominant sort key, so the correct disease still leads.
     const treatIntent = /\b(treat|treatment|treating|manage|management|managing|therapy|therapeutic|antidote|regimen|empiric|initial|approach|protocol|first[\s-]?line|dose|dosing|administer)\b/i.test(query) || /how\s+to/i.test(query);
     // Capability-intent detection (gold153): float the section the clinician actually asked for
-    // (red flags / investigations / differential) WITHIN the named disease — mirrors treatIntent.
+    // (red flags / investigations / differential) WITHIN the named disease - mirrors treatIntent.
     // Name-match stays the dominant sort key, so the correct disease still leads.
     const redFlagIntent = /\b(red[\s-]?flags?|danger signs?|warning signs?|when to (escalate|refer|admit|worry)|do ?n[o']?t miss|not to miss|alarm|life[\s-]?threat)\b/i.test(query);
     const ixIntent = /\b(investigat\w*|work[\s-]?up|what tests?|which tests?|what to order|labs?|imaging|\bix\b|bloods?|diagnostic (test|work))\b/i.test(query);
@@ -113,7 +113,7 @@ export function createStewardAI(store, opts) {
     }));
   }
 
-  /* Grounding context for a disease — what a future Gemini prompt is grounded on.
+  /* Grounding context for a disease - what a future Gemini prompt is grounded on.
    * Returns ONLY KB-sourced, page-cited material (never free text), so any AI
    * output can be post-validated against it. */
   function getGroundingContext(diseaseId) {
@@ -131,7 +131,7 @@ export function createStewardAI(store, opts) {
     };
   }
 
-  /* EVIDENCE ENGINE — resolve the default treatment by precedence
+  /* EVIDENCE ENGINE - resolve the default treatment by precedence
    * (ICMR ▸ international guideline ▸ Harrison fallback), and surface the
    * optional hospital overlay SEPARATELY (it never silently replaces the
    * default). Pharmacology is referenced by composition only. */
@@ -158,7 +158,7 @@ export function createStewardAI(store, opts) {
         out.overlay = { hospitalId, recommendation: entry.entry };
         out.overlayApplied = true;
         // a real difference between overlay and default is recorded as a conflict (both kept)
-        out.conflicts.push({ type: "hospital_overlay", note: "Hospital overlay present — clinician-selected, does not replace national/guideline default by default." });
+        out.conflicts.push({ type: "hospital_overlay", note: "Hospital overlay present - clinician-selected, does not replace national/guideline default by default." });
       }
     }
     return out;
@@ -166,7 +166,7 @@ export function createStewardAI(store, opts) {
 
   /* The Gemini SEAM. Decision is computed offline FIRST; this only explains an
    * already-decided output. With AI disabled (default) it returns the existing
-   * rule-based reasoning verbatim — so the app is fully functional without AI.
+   * rule-based reasoning verbatim - so the app is fully functional without AI.
    * No network is ever called from here; a provider, if injected and enabled,
    * receives the grounding context and must be post-validated by the caller. */
   function explain(payload) {
