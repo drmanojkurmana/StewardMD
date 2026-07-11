@@ -540,6 +540,20 @@ html body.rds-on .app-head .rds-icon { font-size: 22px; vertical-align: middle; 
 html body.rds-on #sbMenu .ic .rds-icon, html body.rds-on .sb-drawer .ic .rds-icon { font-size: 20px; color: var(--rds-primary); }
 html body.rds-on .app-head .dx-launch .rds-icon, html body.rds-on .app-head .my-cases-btn .rds-icon { margin-right: 5px; }
 
+/* FIX (gold317): sidebar rows had ragged icon/label alignment — the Material-Symbols glyph in
+   .ic shrink-wraps to varying widths, so adjacent items' icons (and their labels) landed at
+   different x. Pin every sidebar .ic to a fixed 24px slot with the glyph centred, so all labels
+   align to one common left edge (rows are already display:flex; this only sizes the icon slot). */
+html body.rds-on #sbMenu .ic, html body.rds-on .sb-drawer .ic {
+  flex: 0 0 24px; width: 24px; min-width: 24px; margin-right: 0;
+  display: inline-flex; align-items: center; justify-content: center; text-align: center;
+}
+/* ROOT CAUSE of the ragged sidebar rows: home.js promotes some items to the top with
+   `[data-smd-top]{margin:0}`, but the redesign gives every other row `margin:2px 8px` — so the
+   promoted rows sat 8px to the LEFT of the rest, alternating. Give them the same margin so ALL
+   rows (and their icons + labels) share one left edge. Higher specificity than the margin:0 rule. */
+html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
+
 /* ============================================================================
    Home polish v2 (device review): header search spacing, symmetric tiles,
    un-clip the raised MaiK tab. All under #homeV2.rnav.

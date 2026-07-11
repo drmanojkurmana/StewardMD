@@ -1389,6 +1389,11 @@
         '<li><b>v7.2</b> — Ward Sync fetches live reports (labs / medications) directly from the GHIS hospital system for point-of-care calculators.</li>' +
         '<li><b>v7.3</b> — Whole-app appearance themes now recolour the home too; restored the sidebar menu and a universal Home button on every screen.</li>' +
         '<li><b>v7.4</b> — Brand polish: rounded StewardMD wordmark, refreshed footer with the MaiKnowledge signature.</li>' +
+        '<li><b>v7.5</b> — Native iOS &amp; Android apps (Capacitor): StewardMD is now installable as a real app, with offline clinical data and native push notifications.</li>' +
+        '<li><b>v7.6</b> — MaiK, the AI clinical assistant: grounded, page-cited explanations with comparison tables, per-claim citations, and streaming answers — decision first, explanation second.</li>' +
+        '<li><b>v7.7</b> — Knowledge Units: earn points as you read references and work cases, unlocking subscription discounts.</li>' +
+        '<li><b>v7.8</b> — Lab Watch: monitor a patient&#39;s labs for new results — in-app alerts plus optional 24/7 background alerts (Ward Sync / GHIS-linked, consent-gated) even when the app is closed.</li>' +
+        '<li><b>v7.9</b> — App-style navigation is now the default (bottom tab bar, quick-action tiles); plus reliability &amp; alignment polish across web, iOS and Android (global toast feedback, home-tile and sidebar alignment fixes).</li>' +
       '</ul></div>' +
     '</div>' +
     '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD — built and refined case by case at the bedside.</p>';
