@@ -61,6 +61,11 @@
     function reorganize() {
       var menu = document.getElementById("sbMenu"); if (!menu) return;
       injectCSS();
+      // Retire the OLD ICU dashboard: route every INF.openDashboard() caller (base sidebar
+      // "ICU Dashboard" item, legacy links) to the NEW flagship ICU.open(). The new dashboard
+      // already integrates infusion + electrolyte, so the old one is redundant. Safe: icu.js
+      // never calls INF.openDashboard, so no recursion. Idempotent.
+      try { if (window.INF && window.ICU && ICU.open && INF.openDashboard !== ICU.open) INF.openDashboard = ICU.open; } catch (e) {}
       // 0) strip any legacy appended blocks (older builds / re-open) — idempotent
       ["[data-smd-ui]", "[data-smd-labs]", "[data-ghis-menu]", "[data-smd-nav]", "[data-smd-top]"].forEach(function (sel) { menu.querySelectorAll(sel).forEach(function (e) { e.remove(); }); });
 
@@ -76,7 +81,7 @@
       var topFrag = document.createDocumentFragment();
       topFrag.appendChild(topBtn("🩺", "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} }));
       topFrag.appendChild(topBtn("🏥", "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} }));
-      topFrag.appendChild(topBtn("🫀", "ICU Dashboard", false, function () { try { if (window.INF) INF.openDashboard(); else toast("ICU loading…"); } catch (e) {} }));
+      topFrag.appendChild(topBtn("🫀", "ICU Dashboard", false, function () { try { if (window.ICU && ICU.open) ICU.open(); else if (window.INF) INF.openDashboard(); else toast("ICU loading…"); } catch (e) {} }));
       menu.insertBefore(topFrag, menu.firstChild);
 
       // 1b) Clinical group (sbsub_clinical): fold Dx My Patient + Drugs Database in; drop the
