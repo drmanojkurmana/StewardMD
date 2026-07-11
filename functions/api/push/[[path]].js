@@ -13,6 +13,7 @@
 import { saveSubscription, deleteSubscription, sendPushToAll, pushEnabled } from "../../_webpush.js";
 import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 import { identify } from "../../_fbauth.js";
+import { ownerOK } from "../../_adminauth.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -62,9 +63,7 @@ export async function onRequest(context) {
     return json({ ok: true });
   }
   if (method === "POST" && seg === "send") {
-    const ok = adminOK(request, env);
-    if (ok === null) return json({ error: "admin-not-configured" }, 503);
-    if (!ok) return json({ error: "unauthorised" }, 401);
+    if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
     let msg = {}; try { msg = (await request.json()) || {}; } catch (e) {}
     const web = await sendPushToAll(env);
     const native = await sendNativeToAll(env, {

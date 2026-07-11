@@ -12,6 +12,7 @@
  * only ever receive their own patients' alerts.
  */
 import { identify } from "../../_fbauth.js";
+import { ownerOK } from "../../_adminauth.js";
 import {
   watchConfigured, saveCred, getCred, getList, addWatch, removeWatch, forget,
   getSeen, setSeen, labSignature, listWatchUids,
@@ -87,9 +88,7 @@ export async function onRequest(context) {
 
   // ── cron / admin ──
   if (method === "POST" && seg === "run") {
-    const ok = adminOK(request, env);
-    if (ok === null) return json({ error: "admin-not-configured" }, 503);
-    if (!ok) return json({ error: "unauthorised" }, 401);
+    if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
     const uids = await listWatchUids(env);
     let pushed = 0, users = 0, delivered = 0, undeliveredAccounts = 0;
     for (const uid of uids) {
