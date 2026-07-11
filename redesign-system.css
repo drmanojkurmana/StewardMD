@@ -539,3 +539,50 @@ html body.rds-on .step-nav-btn { border-radius: var(--rds-r-ctl); min-height: 48
 html body.rds-on .app-head .rds-icon { font-size: 22px; vertical-align: middle; color: var(--rds-primary); }
 html body.rds-on #sbMenu .ic .rds-icon, html body.rds-on .sb-drawer .ic .rds-icon { font-size: 20px; color: var(--rds-primary); }
 html body.rds-on .app-head .dx-launch .rds-icon, html body.rds-on .app-head .my-cases-btn .rds-icon { margin-right: 5px; }
+
+/* ============================================================================
+   Home polish v2 (device review): header search spacing, symmetric tiles,
+   un-clip the raised MaiK tab. All under #homeV2.rnav.
+   ========================================================================== */
+/* Header: push search+theme+bell+avatar fully right, clear of the wordmark. */
+#homeV2.rnav .rnav-head-sp { display: none; }
+#homeV2.rnav .rnav-head [data-act="search"] { margin-left: auto; }
+#homeV2.rnav .rnav-brand { flex: 0 1 auto; }
+#homeV2.rnav .rnav-brand span { overflow: hidden; text-overflow: ellipsis; }
+
+/* Quick-action + quick-row tiles: equal height, content vertically centred, symmetric
+   even when a label wraps to two lines (Scan Meds / Ward Sync). */
+#homeV2.rnav .rnav-qa, #homeV2.rnav .rnav-qrow { grid-auto-rows: 1fr; align-items: stretch; }
+#homeV2.rnav .rnav-qa-btn, #homeV2.rnav .rnav-qc { justify-content: center; min-height: 80px; padding: 10px 4px; }
+#homeV2.rnav .rnav-qa-btn > span, #homeV2.rnav .rnav-qc > span { line-height: 1.15; text-align: center; }
+
+/* Bottom tab bar: don't clip the raised MaiK button; keep its label fully visible. */
+#homeV2.rnav .rnav-tabbar { overflow: visible; }
+#homeV2.rnav .rnav-tab { min-height: 56px; justify-content: flex-end; gap: 3px; }
+#homeV2.rnav .rnav-tab-maik { justify-content: flex-end; }
+#homeV2.rnav .rnav-tab-maik .rds-icon { width: 46px; height: 46px; margin-top: -16px; margin-bottom: 3px; border: 3px solid var(--rds-surface); box-sizing: content-box; }
+#homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); line-height: 1; }
+
+/* ============================================================================
+   Home polish v3 — iOS/WebKit-ROBUST overrides (renders fine in Chromium but broke
+   on iPhone: grid `1fr` row-sizing + flex negative-margin raised tab are unreliable
+   in iOS Safari). Use fixed heights + an inline (non-raised) MaiK circle instead.
+   ========================================================================== */
+#homeV2.rnav .rnav-qa, #homeV2.rnav .rnav-qrow { grid-auto-rows: auto; }
+#homeV2.rnav .rnav-qa-btn, #homeV2.rnav .rnav-qc {
+  height: 86px; min-height: 0; justify-content: center; box-sizing: border-box;
+}
+#homeV2.rnav .rnav-qa-btn > span, #homeV2.rnav .rnav-qc > span {
+  line-height: 1.15; text-align: center; display: block;
+}
+/* MaiK center tab: inline teal-filled circle that fits WITHIN the bar (no negative
+   margin / no overflow raise → nothing clips on iOS). Still visually distinct. */
+#homeV2.rnav .rnav-tabbar { overflow: visible; }
+#homeV2.rnav .rnav-tab { min-height: 54px; justify-content: center; gap: 2px; }
+#homeV2.rnav .rnav-tab-maik .rds-icon {
+  width: 42px; height: 42px; margin: 0 0 2px; border: none;
+  background: var(--rds-primary); color: #fff; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--rds-el-cta); box-sizing: border-box;
+}
+#homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); line-height: 1; }
