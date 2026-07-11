@@ -268,31 +268,65 @@
           tell:1,tells:1,told:1,telling:1,hello:1,hey:1,hi:1,please:1,kindly:1,could:1,would:1,should:1,shall:1,can:1,you:1,your:1,give:1,gives:1,giving:1,want:1,wants:1,need:1,needs:1,know:1,knows:1,explain:1,explaining:1,describe:1,help:1,helps:1,share:1,provide:1,list:1,discuss:1,okay:1,sure:1,here:1,there:1,also:1,some:1,more:1,this:1,that:1,these:1,those:1,understand:1,regarding:1,concerning:1,briefly:1,quickly:1,detail:1,details:1,
           // more conversational lead-ins (verbs/nouns that carry NO clinical topic) — must be
           // dropped so "speak about X", "talk me through X", "read out X" ground on X, not on "speak X".
-          speak:1,speaks:1,speaking:1,spoke:1,talk:1,talks:1,talking:1,talked:1,read:1,reads:1,reading:1,discusses:1,discussed:1,discussing:1,teach:1,teaches:1,teaching:1,taught:1,learn:1,learns:1,learning:1,study:1,studying:1,cover:1,covers:1,covering:1,define:1,defines:1,defining:1,mention:1,mentions:1,note:1,notes:1,overview:1,summary:1,summarise:1,summarize:1,summarised:1,summarized:1,lecture:1,walk:1,through:1,everything:1,anything:1,something:1,thing:1,things:1,stuff:1,aspect:1,aspects:1,topic:1,topics:1,brief:1,briefing:1,elaborate:1 };
+          speak:1,speaks:1,speaking:1,spoke:1,talk:1,talks:1,talking:1,talked:1,read:1,reads:1,reading:1,discusses:1,discussed:1,discussing:1,teach:1,teaches:1,teaching:1,taught:1,learn:1,learns:1,learning:1,study:1,studying:1,cover:1,covers:1,covering:1,define:1,defines:1,defining:1,mention:1,mentions:1,note:1,notes:1,overview:1,summary:1,summarise:1,summarize:1,summarised:1,summarized:1,lecture:1,walk:1,through:1,everything:1,anything:1,something:1,thing:1,things:1,stuff:1,aspect:1,aspects:1,topic:1,topics:1,brief:1,briefing:1,elaborate:1,
+          // demographic / qualifier / route / dose framing words (gold-next): they describe HOW a
+          // topic is framed, not the topic itself. Leaving them "distinctive" made the relevance
+          // gate refuse valid in-KB questions ("… in an ADULT", "CONFIRM … ORAL … FIRST-LINE …").
+          // NOTE: clinically-discriminating qualifiers (renal, hepatic, pregnant, resistant, mrsa,
+          // paediatric-specific dosing intent, etc.) are deliberately NOT listed here.
+          adult:1,adults:1,child:1,children:1,childhood:1,elderly:1,geriatric:1,male:1,female:1,
+          man:1,woman:1,men:1,women:1,patient:1,patients:1,person:1,people:1,someone:1,
+          year:1,years:1,month:1,months:1,week:1,weeks:1,aged:1,age:1,ages:1,old:1,young:1,
+          adolescent:1,adolescents:1,baby:1,babies:1,
+          confirm:1,confirms:1,confirmed:1,confirming:1,verify:1,verifies:1,verified:1,verifying:1,
+          correct:1,incorrect:1,wrong:1,right:1,true:1,false:1,really:1,actually:1,indeed:1,
+          first:1,second:1,third:1,line:1,firstline:1,oral:1,orally:1,intravenous:1,parenteral:1,
+          dosage:1,duration:1,frequency:1,route:1,routes:1 };
         var distinctive = String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
         var candId = (retrieved[0] && retrieved[0].diseaseId) || null;
         var candGc = candId ? trimGrounding(_ai.getGroundingContext(candId)) : null;
         var hay = candGc ? (String(candId) + " " + (candGc.name || "") + " " + JSON.stringify(candGc)).toLowerCase() : "";
-        var matched = distinctive.length === 0 ? !!candGc : (!!candGc && distinctive.every(function (t) { return hay.indexOf(t) >= 0; }));
-        // Robustness ("catch the disease keyword"): if the retrieved KB disease's OWN significant
-        // name tokens are ALL present in the question, treat it as matched even when the question
-        // carries extra lead-in words we didn't enumerate ("speak about …", "read out …", a typo).
-        // Safe: a topic genuinely NOT in the KB (e.g. "paraquat poisoning") still fails, because the
-        // near-miss disease's distinctive name token (paracetamol) is not in the question.
-        if (!matched && candGc && candGc.name) {
+        // Coverage-based relevance (gold-next) — replaces the brittle all-or-nothing every() gate.
+        // The old gate required EVERY distinctive token to appear in the nearest topic, so any real
+        // qualifier the KB chunk didn't contain verbatim ("in an adult", "oral", a drug name)
+        // refused an answerable question. Three tiers instead:
+        //   • CONFIDENT  → most distinctive tokens hit, or a token names the topic → answer directly
+        //   • ASSUME     → partial overlap → answer the NEAREST topic under a STATED assumption, and
+        //                  the caller offers one-tap refine chips (mirrors UpToDate Expert AI)
+        //   • NONE       → zero overlap (topic genuinely absent) → do NOT describe a different
+        //                  condition; caller offers opt-in web research (paraquat-vs-paracetamol case)
+        var hit = distinctive.filter(function (t) { return hay.indexOf(t) >= 0; });
+        var coverage = distinctive.length ? hit.length / distinctive.length : 1;
+        // a distinctive token that NAMES the topic is a strong confident signal on its own
+        var nameHit = false, nameToksAll = false;
+        if (candGc && candGc.name) {
+          var nm = String(candGc.name).toLowerCase();
+          nameHit = distinctive.some(function (t) { return t.length >= 5 && nm.indexOf(t) >= 0; });
+          // question contains ALL of the topic's own significant name tokens (typo/lead-in tolerant)
           var qHay = " " + String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim() + " ";
-          var nameToks = String(candGc.name).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
-          if (nameToks.length && nameToks.every(function (t) { return qHay.indexOf(" " + t + " ") >= 0; })) matched = true;
+          var nameToks = nm.replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
+          nameToksAll = nameToks.length > 0 && nameToks.every(function (t) { return qHay.indexOf(" " + t + " ") >= 0; });
         }
-        if (matched && candGc) {
+        var confident = !!candGc && (distinctive.length === 0 || coverage >= 0.6 || nameHit || nameToksAll);
+        var missing = distinctive.filter(function (t) { return hay.indexOf(t) < 0; });
+        if (confident) {
           grounding = [candGc];
           if (!lead) lead = { id: candId, name: candGc.name || candId };
           if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(candId, hospitalId); } catch (e) {} }
           topicMatch = { matched: true, topic: distinctive.join(" "), grounded: candGc.name || candId };
+        } else if (candGc && hit.length > 0) {
+          // partial overlap → keep grounding on the nearest topic so nothing off-KB is invented,
+          // but flag it as an ASSUMPTION for the caller to state + let the clinician refine.
+          grounding = [candGc];
+          if (!lead) lead = { id: candId, name: candGc.name || candId };
+          if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(candId, hospitalId); } catch (e) {} }
+          topicMatch = { matched: false, mode: "assume", topic: distinctive.join(" ") || String(opts.question).trim(),
+            nearest: candGc.name || candId, assume: { id: candId, name: candGc.name || candId },
+            coverage: Math.round(coverage * 100) / 100, missing: missing };
         } else {
-          // topic not confidently in the KB → drop the near-miss grounding so nothing wrong is described
+          // topic genuinely not in the KB → drop the near-miss grounding so nothing wrong is described
           grounding = []; lead = null; treatment = null; retrieved = [];
-          topicMatch = { matched: false, topic: distinctive.join(" ") || String(opts.question).trim(), nearest: (candGc && candGc.name) || candId || null };
+          topicMatch = { matched: false, mode: "none", topic: distinctive.join(" ") || String(opts.question).trim(), nearest: (candGc && candGc.name) || candId || null };
         }
       }
 

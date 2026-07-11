@@ -1491,6 +1491,7 @@
       ".maik-b .maik-h{font:800 13.5px var(--hfont);margin:8px 0 3px;color:var(--hp,#0f766e)}.maik-b .maik-h:first-child{margin-top:0}",
       ".maik-b p{margin:4px 0}.maik-b ul,.maik-b ol{margin:4px 0;padding-left:20px}.maik-b li{margin:2px 0}.maik-b code{background:rgba(100,116,139,.15);border-radius:4px;padding:0 4px;font-size:12.5px}",
       ".maik-edu{font:600 11px var(--hfont);color:var(--hmut);background:rgba(100,116,139,.1);border-radius:8px;padding:5px 8px;margin-bottom:6px}",
+      ".maik-assume{font:600 12px var(--hfont);color:var(--hink);background:rgba(37,99,235,.08);border-left:3px solid var(--hacc,#2563eb);border-radius:8px;padding:7px 10px;margin-bottom:8px}.maik-assume b{color:var(--hacc,#2563eb)}.maik-followups{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.maik-followups .maik-chip{font-size:12.5px;padding:7px 12px}",
       ".maik-src{margin-top:8px;font:600 11.5px var(--hfont);color:var(--hmut)}.maik-src summary{cursor:pointer;color:var(--hp,#0f766e)}.maik-src ul{margin:4px 0 0;padding-left:18px}",
       ".maik-more{background:none;border:none;color:var(--hp,#0f766e);font:700 12px var(--hfont);cursor:pointer;padding:4px 0}",
       ".maik-chips{display:flex;flex-wrap:wrap;gap:8px}.maik-chip{background:var(--hpanel,#fff);border:1px solid var(--hbd,#e2e8f0);border-radius:999px;padding:9px 13px;font:600 13px var(--hfont);color:var(--hink);cursor:pointer}",
@@ -1627,18 +1628,72 @@
       if (m && m[2]) { var rest = m[2].replace(/\?+$/, "").trim(); if (rest) return { question: t.topic + " — " + rest + ".", depth: "concise", topic: t.topic + " · " + rest, retrieval: t.topic + " " + rest }; }
       return null;
     }
-    function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth) {
+    // ── Web-research helper (extracted so the KB-miss branch AND the assume-tier refine chip
+    //    share one implementation). Opt-in, one call, clearly labelled non-StewardMD.
+    function maikRunWeb(container, q, srcEl) {
+      if (srcEl) srcEl.disabled = true;
+      container.insertAdjacentHTML("beforeend", '<div class="maik-webbusy" style="margin-top:8px;color:var(--slate-soft,#64748b)">🌐 Researching the web…</div>');
+      var busy = container.querySelector(".maik-webbusy");
+      return window.SMD_AI.research(q).then(function (r) {
+        if (busy) busy.remove();
+        if (r && r.text) {
+          var bd = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(String(r.text)) : maikEscH(String(r.text));
+          container.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div style="font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;margin-bottom:5px">🌐 Web-sourced (Google) · not StewardMD-verified</div>' + bd + '</div>');
+        } else {
+          container.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>');
+        }
+        try { scroll(); } catch (e) {}
+        try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+      });
+    }
+    function maikWebChipEl(q) {
+      var rb = document.createElement("button"); rb.className = "maik-chip"; rb.style.marginTop = "8px"; rb.textContent = "🔎 Research on the web";
+      rb.addEventListener("click", function () { maikRunWeb(rb.parentNode || body, q, rb); });
+      return rb;
+    }
+    // ── Deterministic follow-up chips (ZERO extra AI tokens): derived purely from the grounded
+    //    package's own sections + resolved treatment. Each chip re-runs a grounded query only IF
+    //    the clinician taps it (and hits the answer cache if repeated). Skips the section the
+    //    clinician just asked about. This is the "contextual follow-ups" UpToDate spends an LLM
+    //    call on — we get it for free from KB structure.
+    function maikFollowupChips(pkg, question) {
+      try {
+        var g = pkg && pkg.grounding && pkg.grounding[0]; if (!g) return [];
+        var name = g.name || (pkg.topicMatch && (pkg.topicMatch.grounded || pkg.topicMatch.nearest)) || ""; if (!name) return [];
+        var secs = (g.knowledge || []).map(function (k) { return String(k.section || ""); }).join("|");
+        var qn = maikNorm(question || ""), out = [];
+        var askedTx = /\b(treat|treatment|treating|manage|management|therapy|regimen|antibiotic|antibiotics|drug|drugs|dose|dosing)\b/.test(qn);
+        var askedRf = /\b(red ?flag|danger|warning|escalate|admit|worry|miss)\b/.test(qn);
+        var askedIx = /\b(investigat|work ?up|test|tests|labs?|imaging|bloods?)\b/.test(qn);
+        var askedDx = /\b(differential|ddx|mimic|versus|\bvs\b|distinguish)\b/.test(qn);
+        if (/redflag/i.test(secs) && !askedRf) out.push({ label: "🚩 Red flags not to miss", q: name + " red flags" });
+        if ((/management|treatment/i.test(secs) || (pkg.treatment && pkg.treatment.default)) && !askedTx) out.push({ label: "💊 First-line treatment", q: "treatment of " + name });
+        if (/investigation/i.test(secs) && !askedIx) out.push({ label: "🔬 What to investigate", q: "investigations for " + name });
+        if (/differential|mimic/i.test(secs) && !askedDx) out.push({ label: "🔀 Differentials & mimics", q: name + " differential diagnosis" });
+        return out.slice(0, 3);
+      } catch (e) { return []; }
+    }
+    // Chips are emitted as data-attribute buttons (not live listeners) so they survive the
+    // innerHTML answer-cache and are handled by ONE delegated listener on the chat body.
+    function maikFollowupsHTML(pkg, question, assume) {
+      var chips = maikFollowupChips(pkg, question), html = "";
+      chips.forEach(function (c) { html += '<button class="maik-chip" data-maik-q="' + maikEscH(c.q) + '">' + maikEscH(c.label) + '</button>'; });
+      if (assume) html += '<button class="maik-chip" data-maik-web="' + maikEscH(question) + '">🔎 Different topic — search the web</button>';
+      return html ? '<div class="maik-followups">' + html + '</div>' : "";
+    }
+    function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
       if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.</div>'; return; }
       if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
         think.innerHTML = '<div class="maik-welcome">I found limited StewardMD material on this. Would you like a general overview, or to start a patient assessment?</div>';
-        var ab = document.createElement("button"); ab.className = "maik-chip"; ab.style.marginTop = "8px"; ab.textContent = "Start Dx My Patient"; ab.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); think.appendChild(ab); scroll(); return;
+        var ab = document.createElement("button"); ab.className = "maik-chip"; ab.style.marginTop = "8px"; ab.textContent = "Start Dx My Patient"; ab.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); think.appendChild(ab); think.appendChild(maikWebChipEl(question)); scroll(); return;
       }
       var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
       var titles = (window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : [];
       var srcHTML = titles.length ? '<details class="maik-src"><summary>Sources ▸</summary><ul>' + titles.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ul></details>' : "";
-      var eduHTML = active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>';
+      var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> — not quite? Tap a topic below or search the web.</div>') : "";
+      var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
       var full = eduHTML + rendered + srcHTML;
       if (md.length > 700) {
         think.innerHTML = eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
@@ -1647,6 +1702,10 @@
         mb.addEventListener("click", function () { var open = cd.style.maxHeight === "none"; cd.style.maxHeight = open ? "260px" : "none"; mb.textContent = open ? "Show more ▾" : "Show less ▴"; });
         think.insertBefore(mb, think.querySelector(".maik-src") || null);
       } else { think.innerHTML = full; }
+      // deterministic contextual follow-ups (0 tokens) — appended into the cached HTML; a single
+      // delegated listener on the chat body handles taps even after cache restore.
+      var chipsHTML = maikFollowupsHTML(pkg, question, assume);
+      if (chipsHTML) think.insertAdjacentHTML("beforeend", chipsHTML);
       if (!active) _maikCache[cacheKey] = think.innerHTML;
       _maikTurns.push({ q: question, a: md.slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift();
       if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() };
@@ -1671,32 +1730,22 @@
         })
         .then(function (pkg) {
           if (pkg && question) pkg.question = question;
-          // Topic isn't in StewardMD's knowledge base → do NOT let the model describe a
-          // lexically-near but different condition. Say so plainly and skip the AI call.
-          if (pkg && pkg.topicMatch && pkg.topicMatch.matched === false) {
-            var tp = maikEscH(pkg.topicMatch.topic || question);
-            var near = pkg.topicMatch.nearest ? (' The closest StewardMD entry was <b>' + maikEscH(pkg.topicMatch.nearest) + '</b>, which is a different condition.') : '';
+          var tm = (pkg && pkg.topicMatch) || null;
+          // NONE tier: topic genuinely absent from the KB → do NOT describe a lexically-near but
+          // different condition (e.g. paraquat vs paracetamol). Say so plainly; offer opt-in web.
+          if (tm && tm.matched === false && tm.mode !== "assume") {
+            var tp = maikEscH(tm.topic || question);
+            var near = tm.nearest ? (' The closest StewardMD entry was <b>' + maikEscH(tm.nearest) + '</b>, which is a different condition.') : '';
             think.innerHTML = '<div class="maik-welcome">StewardMD’s knowledge base doesn’t have a specific entry for <b>' + tp + '</b>, so I can’t answer from it without risking describing a different condition.' + near + '</div>';
-            // Offer opt-in web research (Google-grounded, concise) — one tap, one call.
-            var rb = document.createElement("button"); rb.className = "maik-chip"; rb.style.marginTop = "8px"; rb.textContent = "🔎 Research on the web";
-            rb.addEventListener("click", function () {
-              rb.disabled = true; var wrap = think.querySelector(".maik-welcome"); if (wrap) wrap.insertAdjacentHTML("beforeend", '<div id="maikResBusy" style="margin-top:8px;color:var(--slate-soft,#64748b)">🌐 Researching the web…</div>');
-              window.SMD_AI.research(question).then(function (r) {
-                var busy = document.getElementById("maikResBusy"); if (busy) busy.remove();
-                if (r && r.text) {
-                  var body = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(String(r.text)) : maikEscH(String(r.text));
-                  think.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div style="font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;margin-bottom:5px">🌐 Web-sourced (Google) · not StewardMD-verified</div>' + body + '</div>');
-                } else {
-                  think.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>');
-                }
-                try { scroll(); } catch (e) {}
-              });
-            });
-            think.appendChild(rb); try { scroll(); } catch (e) {}
+            think.appendChild(maikWebChipEl(question)); try { scroll(); } catch (e) {}
             return;
           }
           if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4);
-          return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth); });
+          // ASSUME tier: partial KB match → answer the NEAREST topic (grounding already scoped to it)
+          // under a STATED assumption; maikRenderAnswer prints the banner + refine chips. Same single
+          // grounded call as the confident path — no extra tokens, we just stopped dead-ending.
+          var assume = (tm && tm.mode === "assume") ? tm.assume : null;
+          return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume); });
         })
         .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
         .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
@@ -1736,6 +1785,22 @@
     var _grab = sheet.querySelector("#maikGrab"); if (_grab) _grab.addEventListener("click", close);
     scrim.addEventListener("click", close);
     sendBtn.addEventListener("click", send);
+    // One delegated listener handles every follow-up / refine chip (data-maik-q re-runs a grounded
+    // query; data-maik-web opens opt-in web research). Delegation survives the innerHTML answer-cache.
+    body.addEventListener("click", function (ev) {
+      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
+      if (!el) return;
+      ev.preventDefault();
+      var fq = el.getAttribute("data-maik-q");
+      if (fq) {
+        if (_maikBusy) return;
+        var tpc = maikV2() ? maikCanonTopic(fq) : fq;
+        var dp = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(fq)) ? "detailed" : "concise";
+        runClinical(fq, fq, dp, maikActiveCase(), tpc); return;
+      }
+      var wq = el.getAttribute("data-maik-web");
+      if (wq) { el.disabled = true; maikRunWeb(el.closest(".maik-b.ai") || body, wq, el); }
+    });
     // ---- MaiK Scribe: voice dictation into the chat box + inline findings extraction (spec C2) ----
     var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract");
     function reasoningReady() { return !!(window.SMD_AI && SMD_AI.extract && window.DX && DX.addFindings && DX.findingCatalog); }

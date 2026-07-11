@@ -2,9 +2,9 @@
   "generated": "run-eval.mjs",
   "base": "http://localhost:8903/",
   "tier1": {
-    "cases": 54,
-    "passed": 54,
-    "scorePct": 100
+    "cases": 56,
+    "passed": 55,
+    "scorePct": 98.2
   },
   "byCategory": {
     "conversation": {
@@ -13,18 +13,18 @@
       "pct": 100
     },
     "acute": {
-      "n": 20,
-      "pass": 20,
+      "n": 21,
+      "pass": 21,
       "pct": 100
     },
     "continuity": {
       "n": 10,
-      "pass": 10,
-      "pct": 100
+      "pass": 9,
+      "pct": 90
     },
     "drug": {
-      "n": 5,
-      "pass": 5,
+      "n": 6,
+      "pass": 6,
       "pct": 100
     },
     "safety": {
@@ -35,24 +35,24 @@
   },
   "byDimension": {
     "action": {
-      "n": 54,
-      "pass": 54,
-      "pct": 100
+      "n": 56,
+      "pass": 55,
+      "pct": 98.2
     },
     "no_raw_id": {
-      "n": 54,
-      "pass": 54,
+      "n": 56,
+      "pass": 56,
       "pct": 100
     },
     "no_markdown_leak": {
-      "n": 54,
-      "pass": 54,
+      "n": 56,
+      "pass": 56,
       "pct": 100
     },
     "topic_relevance": {
-      "n": 30,
-      "pass": 30,
-      "pct": 100
+      "n": 32,
+      "pass": 31,
+      "pct": 96.9
     },
     "safety": {
       "n": 6,
@@ -98,9 +98,30 @@
     "D-02",
     "D-03",
     "D-04",
-    "D-05"
+    "D-05",
+    "R-01",
+    "R-02"
   ],
-  "failures": [],
+  "failures": [
+    {
+      "id": "K-04",
+      "category": "continuity",
+      "expectedAction": "retrieve_synthesis",
+      "action": "local_reply",
+      "expectedTopic": "dka",
+      "resolvedQ": "",
+      "retrievedTop": null,
+      "calls": 0,
+      "dims": {
+        "action": false,
+        "topic_relevance": false,
+        "no_raw_id": true,
+        "no_markdown_leak": true
+      },
+      "pass": false,
+      "reviewerRequired": true
+    }
+  ],
   "results": [
     {
       "id": "C-01",
@@ -724,18 +745,18 @@
       "id": "K-04",
       "category": "continuity",
       "expectedAction": "retrieve_synthesis",
-      "action": "retrieve_synthesis",
+      "action": "local_reply",
       "expectedTopic": "dka",
-      "resolvedQ": "DKA — management considerations in pregnancy.",
-      "retrievedTop": "dka",
-      "calls": 1,
+      "resolvedQ": "",
+      "retrievedTop": null,
+      "calls": 0,
       "dims": {
-        "action": true,
-        "topic_relevance": true,
+        "action": false,
+        "topic_relevance": false,
         "no_raw_id": true,
         "no_markdown_leak": true
       },
-      "pass": true,
+      "pass": false,
       "reviewerRequired": true
     },
     {
@@ -1056,6 +1077,42 @@
       },
       "pass": true,
       "reviewerRequired": false
+    },
+    {
+      "id": "R-01",
+      "category": "acute",
+      "expectedAction": "retrieve_synthesis",
+      "action": "retrieve_synthesis",
+      "expectedTopic": "malaria",
+      "resolvedQ": "empiric treatment for severe falciparum malaria in an adult",
+      "retrievedTop": "MIXED_MALARIA",
+      "calls": 1,
+      "dims": {
+        "action": true,
+        "topic_relevance": true,
+        "no_raw_id": true,
+        "no_markdown_leak": true
+      },
+      "pass": true,
+      "reviewerRequired": true
+    },
+    {
+      "id": "R-02",
+      "category": "drug",
+      "expectedAction": "retrieve_synthesis",
+      "action": "retrieve_synthesis",
+      "expectedTopic": "pneumonia",
+      "resolvedQ": "confirm oral vancomycin is first-line for MRSA pneumonia",
+      "retrievedTop": "SEVERE_CAP",
+      "calls": 1,
+      "dims": {
+        "action": true,
+        "topic_relevance": true,
+        "no_raw_id": true,
+        "no_markdown_leak": true
+      },
+      "pass": true,
+      "reviewerRequired": true
     }
   ]
 }
