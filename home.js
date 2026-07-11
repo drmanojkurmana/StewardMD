@@ -51,47 +51,50 @@
       b.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(onclick, 60); });
       return b;
     }
+    // A collapsible-group child row (matches app.js .sb-subitem markup); `mark` tags it for idempotent strip/skip.
+    function subItem(icon, label, onclick, mark) {
+      var b = document.createElement("button"); b.className = "sb-subitem"; if (mark) b.setAttribute(mark, "1");
+      b.innerHTML = '<span class="ic">' + icon + '</span><span>' + label + '</span>';
+      b.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(onclick, 60); });
+      return b;
+    }
     function reorganize() {
       var menu = document.getElementById("sbMenu"); if (!menu) return;
       injectCSS();
-      // 0) strip any legacy appended blocks (older builds / re-open)
+      // 0) strip any legacy appended blocks (older builds / re-open) — idempotent
       ["[data-smd-ui]", "[data-smd-labs]", "[data-ghis-menu]", "[data-smd-nav]", "[data-smd-top]"].forEach(function (sel) { menu.querySelectorAll(sel).forEach(function (e) { e.remove(); }); });
 
-      // 1) TOP primary actions — add "Dx My Patient" + "Ward Sync" beside the existing
-      //    Clinical Reasoning / Drugs Database links.
+      // 1) Collapse the flat top of the menu into grouped navigation:
+      //    - Remove the two standalone top links: "Clinical Reasoning" (Dx My Patient replaces it)
+      //      and "Drugs Database" (moves inside the Clinical group).
+      //    - Pin three quick-links at the very top: Dx My Patient, Ward Sync, ICU Dashboard.
       var links = Array.prototype.slice.call(menu.querySelectorAll(".sb-main-link"));
-      var cr = links.filter(function (b) { return /Clinical Reasoning/i.test(b.textContent); })[0];
-      if (cr) { var _bb = cr.querySelector(".sb-beta"); if (_bb) _bb.remove(); }   // de-beta the Clinical Reasoning menu link (badge is rendered by app.js)
-      if (cr && cr.parentNode) {
-        var dx = topBtn("🩺", "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} });
-        var ws = topBtn("🏥", "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} });
-        cr.parentNode.insertBefore(dx, cr);            // Dx My Patient first
-        cr.parentNode.insertBefore(ws, cr.nextSibling); // Ward Sync after Clinical Reasoning
+      var crLink = links.filter(function (b) { return /Clinical Reasoning/i.test(b.textContent); })[0];
+      var drugLink = links.filter(function (b) { return /Drugs Database/i.test(b.textContent); })[0];
+      if (crLink) crLink.remove();
+      if (drugLink) drugLink.remove();
+      var topFrag = document.createDocumentFragment();
+      topFrag.appendChild(topBtn("🩺", "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} }));
+      topFrag.appendChild(topBtn("🏥", "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} }));
+      topFrag.appendChild(topBtn("🫀", "ICU Dashboard", false, function () { try { if (window.INF) INF.openDashboard(); else toast("ICU loading…"); } catch (e) {} }));
+      menu.insertBefore(topFrag, menu.firstChild);
+
+      // 1b) Clinical group (sbsub_clinical): fold Dx My Patient + Drugs Database in; drop the
+      //     redundant "New clinical decision" (Dx My Patient / Start a Case cover it).
+      var clin = document.getElementById("sbsub_clinical");
+      if (clin && !clin.querySelector("[data-smd-sub]")) {
+        clin.querySelectorAll(".sb-subitem").forEach(function (b) { if (/New clinical decision/i.test(b.textContent)) b.style.display = "none"; });
+        var cf = document.createDocumentFragment();
+        cf.appendChild(subItem("🩺", "Dx My Patient", function () { try { openDxChooser(); } catch (e) {} }, "data-smd-sub"));
+        cf.appendChild(subItem("🗄️", "Drugs Database", function () { try { if (window.MEDDB) MEDDB.openList(); else toast("Drugs loading…"); } catch (e) {} }, "data-smd-sub"));
+        clin.insertBefore(cf, clin.firstChild);
       }
 
-      // 1b) De-clutter the long flat menu: drop redundant per-category calculator shortcuts
-      //     (Browse all calculators covers them) and group the rest under section headers.
-      (function () {
-        if (!document.getElementById("smdSbGrpCss")) {
-          var st = document.createElement("style"); st.id = "smdSbGrpCss";
-          st.textContent = "#sbMenu .sb-grouphdr{font:700 10.5px/1 var(--sans,'IBM Plex Sans');letter-spacing:.09em;text-transform:uppercase;color:var(--slate-soft,#7690a6);margin:16px 10px 6px}";
-          document.head.appendChild(st);
-        }
-        var all = Array.prototype.slice.call(menu.querySelectorAll(".sb-main-link"));
-        var find = function (t) { return all.filter(function (b) { return b.textContent.replace(/\s+/g, " ").indexOf(t) >= 0; })[0]; };
-        ["Cardiovascular", "Critical care", "Renal & electrolytes", "Neurology & stroke"].forEach(function (t) { var b = find(t); if (b) b.style.display = "none"; });
-        function hdr(beforeTxt, title) {
-          var b = find(beforeTxt); if (!b || !b.parentNode) return;
-          var prev = b.previousElementSibling;
-          if (prev && prev.classList && prev.classList.contains("sb-grouphdr")) return;   // idempotent
-          var h = document.createElement("div"); h.className = "sb-grouphdr"; h.textContent = title;
-          b.parentNode.insertBefore(h, b);
-        }
-        hdr("Browse all calculators", "Calculators");
-        hdr("Infusion & Vasopressor", "ICU & critical care");
-        hdr("Browse syndromes", "References");
-        hdr("Features & How-to", "Settings & help");
-      })();
+      // 1c) Drop the redundant per-category calculator shortcuts (Browse-all covers them).
+      ["Cardiovascular", "Critical care & sepsis", "Renal & electrolytes", "Neurology & stroke"].forEach(function (t) {
+        var b = Array.prototype.slice.call(menu.querySelectorAll(".sb-subitem, .sb-main-link")).filter(function (x) { return x.textContent.replace(/\s+/g, " ").indexOf(t) >= 0; })[0];
+        if (b) b.style.display = "none";
+      });
 
       // 2) Advanced controls INTO Settings (#sbsub_set) as collapsible subgroups
       var setBody = document.getElementById("sbsub_set");
@@ -145,13 +148,25 @@
         if (og) og.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { if (window.openGHIS) openGHIS(); } catch (e) {} }, 60); });
       }
 
-      // 3) Credits INTO About & Help (#sbsub_about)
+      // 3) Merge "About & Help" INTO "Reference" -> one "Reference & Help" group. Move the About
+      //    children across, hide the About header/body, add Acknowledgements + the App-tour replay.
+      var refBody = document.getElementById("sbsub_ref");
+      var refHead = document.getElementById("sbmain_ref");
       var aboutBody = document.getElementById("sbsub_about");
-      if (aboutBody && !aboutBody.querySelector("[data-smd-cred]")) {
-        var ack = document.createElement("button"); ack.className = "sb-subitem"; ack.setAttribute("data-smd-cred", "1");
-        ack.innerHTML = '<span class="ic">★</span><span>Acknowledgements &amp; Contributors</span>';
-        ack.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { openAck(); } catch (e) {} }, 60); });
-        aboutBody.appendChild(ack);
+      var aboutHead = document.getElementById("sbmain_about");
+      if (refBody && aboutBody && refHead && !refBody.querySelector("[data-smd-merged]")) {
+        var marker = document.createElement("span"); marker.setAttribute("data-smd-merged", "1"); marker.style.display = "none"; refBody.appendChild(marker);
+        // Acknowledgements (was previously injected into About)
+        refBody.appendChild(subItem("★", "Acknowledgements & Contributors", function () { try { openAck(); } catch (e) {} }, "data-smd-sub"));
+        // Bring every About & Help child into the Reference group
+        Array.prototype.slice.call(aboutBody.children).forEach(function (c) { refBody.appendChild(c); });
+        if (aboutHead) aboutHead.style.display = "none";
+        aboutBody.style.display = "none";
+        // App tour — replay the guided onboarding
+        refBody.appendChild(subItem("🧭", "App tour", function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, "data-smd-sub"));
+        // Rename the Reference header to "Reference & Help"
+        var hs = refHead.querySelectorAll("span");
+        for (var k = 0; k < hs.length; k++) { if (!hs[k].classList.contains("ic") && !hs[k].classList.contains("chev")) { hs[k].textContent = "Reference & Help"; break; } }
       }
     }
     try { if (window.SB && typeof SB.open === "function") { var orig = SB.open; SB.open = function () { var r = orig.apply(this, arguments); setTimeout(function () { reorganize(); try { if (redesignNavOn()) iconifyEmoji(document.getElementById("sbDrawer")); } catch (e) {} }, 40); return r; }; } } catch (e) {}
@@ -1211,6 +1226,7 @@
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
       mi("calc", "Calculators", "50+ clinical tools", "calculators") +
+      mi("play", "App tour", "Replay the guided tour", "apptour") +
       '<div style="font:700 11px var(--hfont,sans-serif);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:16px 6px 6px">Legal &amp; safety</div>' +
       mi("shield", "Medical disclaimer", "Decision support — not medical advice", "disclaimer") +
       mi("lock", "Privacy policy", "How your data is handled", "privacy") +
@@ -1228,6 +1244,7 @@
         if (a === "subscription") return openSubscription();
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
+        if (a === "apptour") { closeSheet(); setTimeout(function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, 120); return; }
         // Legal & Safety: open the in-app modals (z-index 700, above the home shell) — same as
         // the footer links. The old window.location.href="/disclaimer" navigated the WebView to a
         // path that doesn't exist in the bundled native app (only disclaimer.html does), so Capacitor
