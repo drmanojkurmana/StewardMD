@@ -21,10 +21,10 @@ export function usageKv(env) { return env.MAIK_KV || env.CASES_KV || env.GHIS_KV
 export function usageConfig(env) {
   const n = (k, d) => { const v = Number(env[k]); return Number.isFinite(v) && v > 0 ? v : d; };
   return {
-    generalDaily: n("MAIK_GENERAL_DAILY_LIMIT", 30),
-    caseDaily: n("MAIK_CASE_DAILY_LIMIT", 15),
-    dailyTokens: n("MAIK_DAILY_TOKEN_LIMIT", 30000),
-    monthlyTokens: n("MAIK_MONTHLY_TOKEN_LIMIT", 300000),
+    generalDaily: n("MAIK_GENERAL_DAILY_LIMIT", 60),
+    caseDaily: n("MAIK_CASE_DAILY_LIMIT", 30),
+    dailyTokens: n("MAIK_DAILY_TOKEN_LIMIT", 200000),
+    monthlyTokens: n("MAIK_MONTHLY_TOKEN_LIMIT", 3000000),
     maxInputTokens: n("MAIK_MAX_INPUT_TOKENS", 4000),
     maxOutputTokens: n("MAIK_MAX_OUTPUT_TOKENS", 800),
     ocrDaily: n("MAIK_OCR_DAILY_LIMIT", 10),
@@ -33,7 +33,7 @@ export function usageConfig(env) {
     rateSeconds: n("MAIK_RATE_LIMIT_SECONDS", 3),
     costAlertInr: n("MAIK_PROJECT_DAILY_COST_ALERT_INR", 500),
     costHardStopInr: n("MAIK_PROJECT_DAILY_COST_HARD_STOP_INR", 1000),
-    guestDaily: n("MAIK_GUEST_DAILY_LIMIT", 5),
+    guestDaily: n("MAIK_GUEST_DAILY_LIMIT", 15),
     // model pricing (INR per 1000 tokens) — server-side, estimate only. Override via env.
     priceInInrPer1k: Number(env.MAIK_PRICE_IN_INR_PER_1K) || 0.007,
     priceOutInrPer1k: Number(env.MAIK_PRICE_OUT_INR_PER_1K) || 0.025,
