@@ -178,13 +178,12 @@
     } catch (e) {}
   }
 
-  /* -------- Guest trial policy: DISABLED — StewardMD is doctors-only --------
-   * Guest access is removed: the app must be restricted to registered doctors who
-   * pass the certificate verification in verify.js. Setting the daily cap to 0 makes
-   * guestCapped() always true, so the existing machinery below hides the guest button
-   * (and keeps the block set), forcing a Google/Apple sign-in → verification. The
-   * #guestBlock is also display:none in index.html to avoid any first-paint flash. */
-  var GUEST_MAX_PER_DAY = 0;
+  /* -------- Guest trial policy: 2 × 5-minute sessions per day, then force sign-in --------
+   * app.js's gate gives each guest a 5-min trial (expiresAt) and permanently blocks once
+   * stewardmd_guest_used is set. We steer it: clear that flag to grant a session while under
+   * the daily cap; leave it set (→ app.js shows "trial used") and hide the guest button once
+   * the cap is reached, so the clinician must sign in with Google/Apple. */
+  var GUEST_MAX_PER_DAY = 2;
   function guestDay() { try { return new Date().toISOString().slice(0, 10); } catch (e) { return "0"; } }
   function guestUsesToday() {
     try { if (localStorage.getItem("smd_guest_day") !== guestDay()) return 0; return parseInt(localStorage.getItem("smd_guest_uses") || "0", 10) || 0; } catch (e) { return 0; }
