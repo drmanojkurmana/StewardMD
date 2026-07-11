@@ -16,46 +16,139 @@
   /* ─────────────────────────  COVERAGE DATA  ─────────────────────────
      Organism columns grouped; coverage is the classic spectrum-of-activity
      (ref: github.com/aetherist/antibiogram, educational). */
+  // Organism + key resistance-phenotype columns, grouped.
   var GROUPS = [
-    { id: "gpc", name: "Gram-positive cocci", cols: [
-      { id: "mrsa", label: "MRSA" }, { id: "mssa", label: "MSSA" }, { id: "strep", label: "Streptococci" } ] },
-    { id: "gnb", name: "Gram-negative bacilli", cols: [
-      { id: "ecoli", label: "E. coli" }, { id: "pmir", label: "P. mirabilis" }, { id: "kleb", label: "Klebsiella" },
-      { id: "pseud", label: "Pseudomonas" }, { id: "escappm", label: "ESCAPPM" } ] },
-    { id: "gnc", name: "Gram-negative cocci", cols: [
+    { id: "gpc", name: "Gram-positive", cols: [
+      { id: "mrsa", label: "MRSA" }, { id: "mssa", label: "MSSA" }, { id: "strep", label: "Streptococci" },
+      { id: "efaecalis", label: "E. faecalis" }, { id: "efaecium", label: "E. faecium / VRE" },
+      { id: "listeria", label: "Listeria" } ] },
+    { id: "entero", name: "Enterobacterales", cols: [
+      { id: "ecoli", label: "E. coli" }, { id: "kleb", label: "Klebsiella" }, { id: "pmir", label: "P. mirabilis" },
+      { id: "escappm", label: "ESCAPPM (AmpC)" }, { id: "esbl", label: "ESBL" }, { id: "cre", label: "CRE" } ] },
+    { id: "nonferm", name: "Non-fermenters", cols: [
+      { id: "pseud", label: "P. aeruginosa" }, { id: "acineto", label: "A. baumannii" },
+      { id: "steno", label: "S. maltophilia" } ] },
+    { id: "fast", name: "Fastidious / GN cocci", cols: [
+      { id: "hflu", label: "H. influenzae" }, { id: "morax", label: "Moraxella" },
       { id: "ngon", label: "N. gonorrhoeae" }, { id: "nmen", label: "N. meningitidis" } ] },
-    { id: "ana", name: "Anaerobes", cols: [ { id: "anaer", label: "Anaerobes" } ] },
-    { id: "aty", name: "Atypicals", cols: [ { id: "atyp", label: "e.g. Mycoplasma" } ] }
+    { id: "ana", name: "Anaerobes", cols: [
+      { id: "bfrag", label: "B. fragilis" }, { id: "oralana", label: "Oral anaerobes" } ] },
+    { id: "aty", name: "Atypicals", cols: [
+      { id: "atyp", label: "Mycoplasma / Chlamydia" }, { id: "legio", label: "Legionella" } ] }
   ];
   var COLS = [];
   GROUPS.forEach(function (g) { g.cols.forEach(function (c) { c.group = g.id; COLS.push(c); }); });
 
-  // Drug rows: class + agent + array of covered organism-column ids.
+  // Drug rows: class + agent + a MAP of organism-column → tier.
+  // 2 = reliably active (first-line spectrum) · 1 = variable / inducible / not-first-line / partial.
+  // Omitted key = not active (intrinsic or usual acquired resistance). No cell asserts a susceptibility %.
   var COVERAGE = [
-    { cls: "Penicillin", agent: "Penicillin G", cov: ["strep"] },
-    { cls: "Anti-staphylococcal penicillins", agent: "Nafcillin / Oxacillin", cov: ["mssa", "strep"] },
-    { cls: "Aminopenicillins", agent: "Ampicillin / Amoxicillin", cov: ["strep", "ecoli", "pmir", "nmen"] },
-    { cls: "1st-gen cephalosporin", agent: "Cefazolin, cephalexin", cov: ["mssa", "strep", "ecoli", "pmir", "kleb"] },
-    { cls: "2nd-gen cephalosporin", agent: "Cefotetan, cefoxitin", cov: ["mssa", "strep", "ecoli", "pmir", "kleb", "anaer"] },
-    { cls: "3rd-gen cephalosporin", agent: "Ceftriaxone", cov: ["mssa", "strep", "ecoli", "pmir", "kleb", "ngon", "nmen"] },
-    { cls: "3rd-gen cephalosporin", agent: "Ceftazidime", cov: ["ecoli", "pmir", "kleb", "pseud", "escappm"] },
-    { cls: "4th-gen cephalosporin", agent: "Cefepime", cov: ["mssa", "strep", "ecoli", "pmir", "kleb", "pseud", "escappm"] },
-    { cls: "Aminopenicillin + β-lactamase inhibitor", agent: "Amoxicillin + clavulanate (Augmentin)", cov: ["mssa", "strep", "ecoli", "pmir", "kleb", "anaer"] },
-    { cls: "Aminopenicillin + β-lactamase inhibitor", agent: "Ampicillin + sulbactam (Unasyn)", cov: ["mssa", "strep", "ecoli", "pmir", "kleb", "anaer"] },
-    { cls: "Antipseudomonal penicillin + BLI", agent: "Piperacillin + tazobactam (Zosyn)", cov: ["mssa", "strep", "ecoli", "pmir", "kleb", "pseud", "escappm", "anaer"] },
-    { cls: "Carbapenems", agent: "Ertapenem", cov: ["mssa", "strep", "ecoli", "pmir", "kleb", "escappm", "anaer"] },
-    { cls: "Carbapenems", agent: "Imipenem, meropenem", cov: ["mssa", "strep", "ecoli", "pmir", "kleb", "pseud", "escappm", "anaer"] },
-    { cls: "Monobactams", agent: "Aztreonam", cov: ["ecoli", "pmir", "kleb", "pseud", "escappm"] },
-    { cls: "Quinolones", agent: "Ciprofloxacin", cov: ["ecoli", "pmir", "kleb", "pseud", "escappm", "ngon", "nmen", "atyp"] },
-    { cls: "Quinolones", agent: "Levofloxacin", cov: ["mssa", "strep", "ecoli", "pmir", "kleb", "pseud", "escappm", "ngon", "nmen", "atyp"] },
-    { cls: "Quinolones", agent: "Moxifloxacin", cov: ["mssa", "strep", "ecoli", "pmir", "kleb", "escappm", "ngon", "nmen", "anaer", "atyp"] },
-    { cls: "Aminoglycosides", agent: "Gentamicin / Tobramycin / Amikacin", cov: ["ecoli", "pmir", "kleb", "pseud", "escappm"] },
-    { cls: "Lincosamide", agent: "Clindamycin", cov: ["mrsa", "mssa", "strep", "anaer"] },
-    { cls: "Macrolides", agent: "Azithromycin", cov: ["mssa", "strep", "ngon", "nmen", "atyp"] },
-    { cls: "Tetracyclines", agent: "Doxycycline", cov: ["mrsa", "mssa", "strep", "ecoli", "ngon", "nmen", "atyp"] },
-    { cls: "Glycopeptides", agent: "Vancomycin", cov: ["mrsa", "mssa", "strep"] },
-    { cls: "Antimetabolite", agent: "TMP/SMX (Bactrim)", cov: ["mrsa", "mssa", "strep", "ecoli", "pmir", "kleb", "escappm", "atyp"] },
-    { cls: "Nitroimidazoles", agent: "Metronidazole", cov: ["anaer"] }
+    // ── Natural / aminopenicillins ─────────────────────────────────────────
+    { cls: "Natural penicillin", agent: "Penicillin G / V",
+      cov: { strep:2, nmen:2, oralana:2, listeria:1 }, note: "Also T. pallidum, Actinomyces. Pneumococcal resistance regional." },
+    { cls: "Aminopenicillin", agent: "Ampicillin / Amoxicillin",
+      cov: { strep:2, efaecalis:2, listeria:2, ecoli:1, pmir:1, hflu:1, nmen:2 }, note: "Enterococcus faecalis drug of choice (± gentamicin synergy). Many E. coli now resistant." },
+    { cls: "Anti-staphylococcal penicillin", agent: "Cloxacillin / Flucloxacillin / Nafcillin / Oxacillin",
+      cov: { mssa:2, strep:2 }, note: "MSSA drug of choice. No MRSA, no Gram-negatives, no enterococci." },
+    // ── β-lactam / β-lactamase-inhibitor ───────────────────────────────────
+    { cls: "Aminopenicillin + BLI", agent: "Amoxicillin–clavulanate",
+      cov: { mssa:2, strep:2, efaecalis:2, ecoli:1, kleb:2, pmir:2, hflu:2, morax:2, oralana:2, bfrag:2 } },
+    { cls: "Aminopenicillin + BLI", agent: "Ampicillin–sulbactam",
+      cov: { mssa:2, strep:2, efaecalis:2, ecoli:1, kleb:2, pmir:2, hflu:2, bfrag:2, oralana:2, acineto:1 }, note: "Sulbactam has intrinsic Acinetobacter activity." },
+    { cls: "Antipseudomonal penicillin + BLI", agent: "Piperacillin–tazobactam",
+      cov: { mssa:2, strep:2, efaecalis:2, ecoli:2, kleb:2, pmir:2, escappm:1, pseud:2, hflu:2, bfrag:2, oralana:2, esbl:1 }, note: "Avoid for ESBL bacteraemia (MERINO). AmpC induction risk." },
+    { cls: "Cephalosporin + sulbactam", agent: "Cefoperazone–sulbactam",
+      cov: { ecoli:2, kleb:2, pmir:2, escappm:1, pseud:1, acineto:2, bfrag:1, esbl:1 }, note: "Widely used in India for MDR GNB / Acinetobacter — confirm susceptibility." },
+    { cls: "Cephalosporin + novel BLI", agent: "Ceftazidime–avibactam",
+      cov: { ecoli:2, kleb:2, escappm:2, pseud:2, esbl:2, cre:2 }, note: "CRE: KPC & OXA-48 — NOT metallo-β-lactamase (NDM/VIM). Add aztreonam for MBL." },
+    { cls: "Cephalosporin + novel BLI", agent: "Ceftolozane–tazobactam",
+      cov: { ecoli:2, kleb:2, escappm:1, pseud:2, esbl:2 }, note: "Best-in-class for MDR Pseudomonas. Not reliable for CRE." },
+    { cls: "Carbapenem + novel BLI", agent: "Meropenem–vaborbactam",
+      cov: { ecoli:2, kleb:2, escappm:2, pseud:1, esbl:2, cre:2 }, note: "CRE: KPC. Not MBL / OXA-48." },
+    { cls: "Carbapenem + novel BLI", agent: "Imipenem–relebactam",
+      cov: { ecoli:2, kleb:2, escappm:2, pseud:2, esbl:2, cre:2 }, note: "CRE: KPC. Not MBL." },
+    { cls: "Monobactam + novel BLI", agent: "Aztreonam–avibactam",
+      cov: { ecoli:2, kleb:2, escappm:2, esbl:2, cre:2 }, note: "Covers metallo-β-lactamase (NDM) producers — key MBL-CRE option." },
+    // ── Cephalosporins (by generation) ─────────────────────────────────────
+    { cls: "1st-gen cephalosporin", agent: "Cefazolin / Cephalexin",
+      cov: { mssa:2, strep:2, ecoli:1, kleb:1, pmir:1 }, note: "Surgical prophylaxis, MSSA, simple UTI/SSTI." },
+    { cls: "2nd-gen cephalosporin", agent: "Cefuroxime",
+      cov: { mssa:1, strep:2, ecoli:1, kleb:1, pmir:1, hflu:2, morax:2 } },
+    { cls: "2nd-gen cephamycin", agent: "Cefoxitin / Cefotetan",
+      cov: { mssa:1, strep:1, ecoli:1, kleb:1, pmir:1, bfrag:2, oralana:2 }, note: "Anaerobe activity; stable to some ESBL but not a clinical ESBL option." },
+    { cls: "3rd-gen cephalosporin", agent: "Ceftriaxone / Cefotaxime",
+      cov: { mssa:1, strep:2, ecoli:2, kleb:2, pmir:2, hflu:2, morax:2, ngon:2, nmen:2 }, note: "No Pseudomonas, no AmpC/ESBL, no enterococci/Listeria." },
+    { cls: "3rd-gen cephalosporin (oral)", agent: "Cefixime / Cefpodoxime",
+      cov: { strep:2, ecoli:1, kleb:1, pmir:1, hflu:2, morax:2, ngon:2 } },
+    { cls: "3rd-gen antipseudomonal", agent: "Ceftazidime",
+      cov: { ecoli:1, kleb:1, pmir:1, pseud:2, escappm:1 }, note: "Poor Gram-positive. AmpC-labile — unreliable vs ESCAPPM." },
+    { cls: "4th-gen cephalosporin", agent: "Cefepime",
+      cov: { mssa:2, strep:2, ecoli:2, kleb:2, pmir:2, escappm:2, pseud:2, hflu:2 }, note: "AmpC-stable (ESCAPPM). ESBL variable — inoculum effect." },
+    { cls: "5th-gen (anti-MRSA) cephalosporin", agent: "Ceftaroline",
+      cov: { mrsa:2, mssa:2, strep:2, ecoli:1, kleb:1, hflu:2 }, note: "MRSA-active cephalosporin. No Pseudomonas / AmpC / ESBL." },
+    { cls: "Siderophore cephalosporin", agent: "Cefiderocol",
+      cov: { ecoli:2, kleb:2, escappm:2, pseud:2, acineto:2, steno:2, esbl:2, cre:2 }, note: "Broadest GNB incl. MBL/NDM & carbapenem-resistant non-fermenters. Reserve." },
+    // ── Carbapenems ────────────────────────────────────────────────────────
+    { cls: "Carbapenem (limited)", agent: "Ertapenem",
+      cov: { mssa:2, strep:2, ecoli:2, kleb:2, pmir:2, escappm:2, esbl:2, hflu:2, bfrag:2, oralana:2 }, note: "NO Pseudomonas, Acinetobacter, or enterococci." },
+    { cls: "Antipseudomonal carbapenem", agent: "Imipenem / Meropenem / Doripenem",
+      cov: { mssa:2, strep:2, efaecalis:1, ecoli:2, kleb:2, pmir:2, escappm:2, esbl:2, pseud:2, acineto:2, hflu:2, bfrag:2, oralana:2 }, note: "Broadest empiric β-lactam. Not CRE, not S. maltophilia, not MRSA/VRE." },
+    // ── Monobactam ─────────────────────────────────────────────────────────
+    { cls: "Monobactam", agent: "Aztreonam",
+      cov: { ecoli:2, kleb:2, pmir:2, pseud:2, escappm:1 }, note: "Gram-negative only. Safe in penicillin anaphylaxis. Stable to MBLs." },
+    // ── Fluoroquinolones ───────────────────────────────────────────────────
+    { cls: "Fluoroquinolone", agent: "Ciprofloxacin",
+      cov: { ecoli:2, kleb:2, pmir:2, escappm:2, pseud:2, acineto:1, hflu:2, morax:2, ngon:1, nmen:2, atyp:2, legio:2 }, note: "Most antipseudomonal FQ. Rising Enterobacterales & gonococcal resistance." },
+    { cls: "Respiratory fluoroquinolone", agent: "Levofloxacin",
+      cov: { mssa:1, strep:2, ecoli:2, kleb:2, pmir:2, escappm:2, pseud:2, acineto:1, hflu:2, morax:2, steno:2, atyp:2, legio:2 } },
+    { cls: "Respiratory fluoroquinolone", agent: "Moxifloxacin",
+      cov: { mssa:1, strep:2, ecoli:1, kleb:1, escappm:1, hflu:2, morax:2, bfrag:1, oralana:2, atyp:2, legio:2 }, note: "Adds anaerobe cover; NO Pseudomonas." },
+    // ── Aminoglycosides ────────────────────────────────────────────────────
+    { cls: "Aminoglycoside", agent: "Gentamicin / Tobramycin",
+      cov: { ecoli:2, kleb:2, pmir:2, escappm:2, pseud:2, acineto:1, efaecalis:1 }, note: "Enterococcal/staph SYNERGY only (not monotherapy). Tobramycin best vs Pseudomonas." },
+    { cls: "Aminoglycoside", agent: "Amikacin",
+      cov: { ecoli:2, kleb:2, pmir:2, escappm:2, pseud:2, acineto:2 }, note: "Most stable to aminoglycoside-modifying enzymes." },
+    { cls: "Aminoglycoside (next-gen)", agent: "Plazomicin",
+      cov: { ecoli:2, kleb:2, escappm:2, esbl:2, cre:1 }, note: "Retains activity vs many ESBL/AmpC and some CRE." },
+    // ── Glyco- / lipo-peptides ─────────────────────────────────────────────
+    { cls: "Glycopeptide", agent: "Vancomycin",
+      cov: { mrsa:2, mssa:2, strep:2, efaecalis:2, listeria:1 }, note: "Oral (non-absorbed) for C. difficile. VRE resistant." },
+    { cls: "Glycopeptide", agent: "Teicoplanin",
+      cov: { mrsa:2, mssa:2, strep:2, efaecalis:2 } },
+    { cls: "Lipopeptide", agent: "Daptomycin",
+      cov: { mrsa:2, mssa:2, strep:2, efaecalis:2, efaecium:2 }, note: "NOT for pneumonia — inactivated by lung surfactant. Covers VRE." },
+    { cls: "Lipoglycopeptide (long-acting)", agent: "Dalbavancin / Oritavancin",
+      cov: { mrsa:2, mssa:2, strep:2, efaecalis:1 }, note: "Single/weekly dosing for SSTI." },
+    // ── Oxazolidinone ──────────────────────────────────────────────────────
+    { cls: "Oxazolidinone", agent: "Linezolid / Tedizolid",
+      cov: { mrsa:2, mssa:2, strep:2, efaecalis:2, efaecium:2 }, note: "Covers VRE & MRSA; good lung penetration. Bacteriostatic; marrow suppression on prolonged use." },
+    // ── Lincosamide / macrolide / tetracyclines ────────────────────────────
+    { cls: "Lincosamide", agent: "Clindamycin",
+      cov: { mrsa:1, mssa:2, strep:2, oralana:2, bfrag:1 }, note: "CA-MRSA if D-test negative. Rising B. fragilis resistance. Toxin suppression in TSS/nec-fasc." },
+    { cls: "Macrolide", agent: "Azithromycin / Clarithromycin",
+      cov: { mssa:1, strep:1, hflu:1, morax:2, ngon:1, atyp:2, legio:2 }, note: "Atypical cover. High pneumococcal macrolide resistance in India." },
+    { cls: "Tetracycline", agent: "Doxycycline / Minocycline",
+      cov: { mrsa:2, mssa:2, strep:1, ecoli:1, hflu:2, morax:2, ngon:1, atyp:2, legio:1, steno:2, acineto:1 }, note: "Minocycline adds Stenotrophomonas & Acinetobacter. Also rickettsia, Brucella, Leptospira." },
+    { cls: "Glycylcycline", agent: "Tigecycline",
+      cov: { mrsa:2, mssa:2, strep:2, efaecalis:2, efaecium:2, ecoli:2, kleb:2, escappm:2, esbl:2, cre:1, acineto:2, bfrag:2, oralana:2, steno:1 }, note: "Very broad EXCEPT Pseudomonas & Proteus. Low serum levels — avoid bloodstream infection." },
+    // ── Polymyxins ─────────────────────────────────────────────────────────
+    { cls: "Polymyxin", agent: "Colistin / Polymyxin B",
+      cov: { ecoli:2, kleb:2, pseud:2, acineto:2, esbl:2, cre:2 }, note: "Last-resort GNB. Intrinsic resistance: Proteus, Serratia, Providencia, Morganella, Burkholderia. No GPC/anaerobes. Nephrotoxic." },
+    // ── Folate / urinary / anaerobe / misc ─────────────────────────────────
+    { cls: "Folate antagonist", agent: "Co-trimoxazole (TMP–SMX)",
+      cov: { mrsa:2, mssa:2, strep:1, ecoli:1, kleb:1, pmir:1, escappm:1, hflu:2, steno:2, listeria:2 }, note: "First-line for Stenotrophomonas, Nocardia, PCP. No Pseudomonas / anaerobes / enterococci." },
+    { cls: "Nitrofuran (urinary)", agent: "Nitrofurantoin",
+      cov: { ecoli:2, efaecalis:2, kleb:1 }, note: "Uncomplicated cystitis only — no tissue levels. Not Proteus/Pseudomonas/Serratia. Avoid CrCl <30." },
+    { cls: "Phosphonic acid", agent: "Fosfomycin",
+      cov: { ecoli:2, efaecalis:2, kleb:1, esbl:2, pseud:1 }, note: "PO (trometamol) for MDR cystitis incl. ESBL; IV form broader." },
+    { cls: "Nitroimidazole", agent: "Metronidazole",
+      cov: { bfrag:2, oralana:2 }, note: "Anaerobes only (+ C. difficile, amoebae, Giardia). No aerobes; no Actinomyces/Propionibacterium." },
+    { cls: "Amphenicol", agent: "Chloramphenicol",
+      cov: { strep:2, nmen:2, hflu:2, bfrag:2, oralana:2, atyp:1 }, note: "Reserve — marrow toxicity. Broad but rarely used." },
+    { cls: "Rifamycin (adjunct)", agent: "Rifampicin",
+      cov: { mrsa:1, mssa:1, strep:1 }, note: "NEVER monotherapy (rapid resistance). Biofilm/prosthetic adjunct; meningococcal prophylaxis." },
+    { cls: "Macrocyclic (C. difficile)", agent: "Fidaxomicin",
+      cov: {}, note: "C. difficile only (narrow-spectrum, gut-selective)." }
   ];
 
   /* ─────────────────────────  RESISTANCE DATA  ─────────────────────────
@@ -187,16 +280,18 @@
       h += '<tr class="abg-drow' + rowOn + dim + '" data-drug="' + i + '">';
       h += '<td class="abg-rowh">' + (newCls ? '<span class="abg-cls">' + esc(d.cls) + '</span>' : '') + '<span class="abg-agent">' + esc(d.agent) + '</span></td>';
       COLS.forEach(function (c) {
-        var covered = d.cov.indexOf(c.id) !== -1;
+        var st = (d.cov && d.cov[c.id]) || 0;   // 2 = reliable · 1 = variable · 0 = not active
         var hl = "";
         if (covSelType === "org" && covSel === c.id) hl = " col";
         if ((covSelType === "org" && covSel === c.id) || (covSelType === "drug" && covSel === i)) hl += " hit";
-        h += '<td class="abg-cell ' + (covered ? "on" : "off") + hl + '"><i>' + (covered ? "✓" : "✕") + '</i></td>';
+        var cls = st === 2 ? "on" : st === 1 ? "part" : "no";
+        var sym = st === 2 ? "✓" : st === 1 ? "◐" : "✕";   // ✓ active (green) · ◐ variable (amber hatch on light green) · ✕ not active (red)
+        h += '<td class="abg-cell ' + cls + hl + '"><i>' + sym + '</i></td>';
       });
       h += '</tr>';
     });
     h += '</tbody></table></div>';
-    h += '<div class="abg-legend"><span><i class="sw on"></i>Covered</span><span><i class="sw off"></i>Not covered / unreliable</span><span class="abg-src">Ref: aetherist/antibiogram · educational</span></div>';
+    h += '<div class="abg-legend"><span><i class="sw on"></i>Reliably active</span><span><i class="sw part"></i>Variable / not first-line</span><span><i class="sw no"></i>Not active</span><span class="abg-src">Spectrum reference — verify against your local antibiogram · Sanford / IDSA / CLSI M100 (2024)</span></div>';
     return h;
   }
 
@@ -204,14 +299,15 @@
     if (covSel === null) return '<span class="abg-hint">Nothing selected — showing the full spectrum grid.</span>';
     if (covSelType === "drug") {
       var d = COVERAGE[covSel];
-      var names = d.cov.map(function (id) { return colLabel(id); });
+      var keys = Object.keys(d.cov).sort(function (a, b) { return (d.cov[b] || 0) - (d.cov[a] || 0); });   // reliable (2) first
       return '<button class="abg-clear" data-act="clearcov">✕</button><b>' + esc(d.agent) + '</b> covers: ' +
-        (names.length ? '<span class="abg-tags">' + names.map(function (n) { return '<em>' + esc(n) + '</em>'; }).join("") + '</span>' : '—');
+        (keys.length ? '<span class="abg-tags">' + keys.map(function (id) { return '<em class="' + (d.cov[id] === 1 ? "part" : "") + '">' + esc(colLabel(id)) + '</em>'; }).join("") + '</span>' : '—') +
+        (d.note ? '<span class="abg-note-sm">' + esc(d.note) + '</span>' : '');
     }
-    // org selected
-    var covered = COVERAGE.filter(function (d) { return d.cov.indexOf(covSel) !== -1; }).map(function (d) { return d.agent; });
+    // org selected — any tier active, reliable (2) listed first
+    var hits = COVERAGE.filter(function (x) { return x.cov[covSel]; }).sort(function (a, b) { return (b.cov[covSel] || 0) - (a.cov[covSel] || 0); });
     return '<button class="abg-clear" data-act="clearcov">✕</button><b>' + esc(colLabel(covSel)) + '</b> is covered by: ' +
-      (covered.length ? '<span class="abg-tags">' + covered.map(function (n) { return '<em>' + esc(n) + '</em>'; }).join("") + '</span>' : '—');
+      (hits.length ? '<span class="abg-tags">' + hits.map(function (x) { return '<em class="' + (x.cov[covSel] === 1 ? "part" : "") + '">' + esc(x.agent) + '</em>'; }).join("") + '</span>' : '—');
   }
   function colLabel(id) { for (var i = 0; i < COLS.length; i++) if (COLS[i].id === id) return COLS[i].label; return id; }
 
@@ -375,6 +471,9 @@
       ".abg-sum b{font-weight:800}",
       ".abg-tags{display:inline-flex;flex-wrap:wrap;gap:5px;margin-left:2px;vertical-align:middle}",
       ".abg-tags em{font-style:normal;font:700 11px var(--f);background:var(--panel);border:1px solid var(--tl);color:var(--tl);padding:2px 8px;border-radius:999px}",
+      ".abg-tags em.part{background:var(--warn-soft,#fbf0dd);border-color:#e0b978;color:var(--warn,#b5720a)}",
+      "body.dark .abg-tags em.part{background:#3a2e0a;border-color:#8a6a1a;color:#fbbf24}",
+      ".abg-note-sm{display:block;margin-top:6px;font:500 11.5px/1.5 var(--f);color:var(--mut)}",
       ".abg-clear{position:absolute;top:8px;right:8px;border:none;background:var(--tl);color:#fff;width:22px;height:22px;border-radius:999px;font:700 12px var(--f);cursor:pointer;line-height:1}",
       ".abg-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:var(--panel)}",
       ".abg-grid{border-collapse:separate;border-spacing:0;font:600 11px var(--f);width:max-content;min-width:100%}",
@@ -406,6 +505,16 @@
       ".abg-legend .sw{display:inline-block;width:13px;height:13px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;margin-right:5px;background:var(--panel)}",
       ".abg-legend .sw.on{background:#059669;border-color:#059669}",
       ".abg-legend .sw.off{background:#E15B64;border-color:#E15B64}",
+      // 3-tier cell: reliable (solid green ✓) · variable (amber hatch on LIGHT GREEN ◐) · not active (red ✕)
+      ".abg-cell.part{background-color:var(--green-bg,#e7f5ec);background-image:repeating-linear-gradient(45deg,rgba(181,114,10,.5),rgba(181,114,10,.5) 4px,transparent 4px,transparent 8px)}",
+      ".abg-cell.part i{color:#8a5a0a;opacity:1;font-size:13px}",
+      "body.dark .abg-cell.part{background-color:#0f3a2f;background-image:repeating-linear-gradient(45deg,rgba(240,192,96,.45),rgba(240,192,96,.45) 4px,transparent 4px,transparent 8px)}",
+      "body.dark .abg-cell.part i{color:#f0c060}",
+      ".abg-cell.no{background:#E15B64}",
+      "body.dark .abg-cell.no{background:#a83b43}",
+      ".abg-legend .sw.part{background-color:var(--green-bg,#e7f5ec);background-image:repeating-linear-gradient(45deg,rgba(181,114,10,.6),rgba(181,114,10,.6) 3px,transparent 3px,transparent 6px);border-color:#bcd7c8}",
+      "body.dark .abg-legend .sw.part{background-color:#0f3a2f;background-image:repeating-linear-gradient(45deg,rgba(240,192,96,.5),rgba(240,192,96,.5) 3px,transparent 3px,transparent 6px)}",
+      ".abg-legend .sw.no{background:#E15B64;border-color:#E15B64}",
       ".abg-src{margin-left:auto;font-weight:500;font-size:10px}",
       ".abg-srcbar{display:flex;align-items:center;gap:10px;margin-bottom:12px}",
       ".abg-srclab{font:800 11px var(--f);text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}",
