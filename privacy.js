@@ -115,50 +115,31 @@
   function resolveAll(v) { var cbs = _pending.slice(); _pending = []; cbs.forEach(function (cb) { try { cb(v); } catch (e) {} }); }
 
   function closeGate() {
-    var b = document.getElementById("smdConsentBackdrop");
-    if (b && b.parentNode) b.parentNode.removeChild(b);
+    var ov = document.getElementById("consentOverlay");
+    if (ov) { ov.classList.remove("show"); ov.setAttribute("aria-hidden", "true"); }
     _gateOpen = false;
   }
 
+  // UNIFIED SINGLE GATE: there is ONE consent screen — the entry splash
+  // (#consentOverlay in index.html), a comprehensive single-tick acknowledgment.
+  // This module NEVER renders its own second card anymore; openGate simply shows
+  // that splash. Acceptance is handled by the #splashContinueBtn hook in init()
+  // (records consent + resolves any pending ensureConsent waiters). The optional
+  // de-identified-data consent is NOT on the gate — it's an opt-in in Settings ›
+  // Privacy & Data Controls (default off), so consent stays specific + withdrawable.
   function openGate() {
     if (_gateOpen) return;
-    _gateOpen = true;
-    injectCSS();
-    var wrap = document.createElement("div"); wrap.id = "smdConsentBackdrop";
-    wrap.innerHTML =
-      '<div id="smdConsentCard" role="dialog" aria-modal="true" aria-label="Privacy consent">' +
-        '<div class="cg-h">Before you continue</div>' +
-        '<div class="cg-sub">StewardMD is a decision-support aid for qualified clinicians. Please confirm the following before entering patient information or using AI-assisted analysis.</div>' +
-        '<div class="cg-list">' +
-          '<label class="cg-row"><input type="checkbox" id="cgA"><span><span class="cg-req">Required</span><br>I have read the <a class="cg-link" id="cgPrivacyLink">Privacy Notice</a> and agree to StewardMD processing my account information to provide the service.</span></label>' +
-          '<label class="cg-row"><input type="checkbox" id="cgB"><span><span class="cg-req">Required</span><br>I confirm that I am authorised to enter or upload this patient information and have obtained any required patient consent under applicable law and my institution&rsquo;s policy.</span></label>' +
-          '<label class="cg-row cg-opt"><input type="checkbox" id="cgC"><span><span class="cg-opttag">Optional</span><br>I agree that de-identified data may be used to improve StewardMD.</span></label>' +
-        '</div>' +
-        '<div class="cg-note">You can change the optional choice anytime in Settings &rsaquo; Privacy &amp; Data Controls. Version ' + esc(CFG.privacyPolicyVersion) + '.</div>' +
-        '<div class="cg-foot">' +
-          '<button class="cg-cancel" id="cgCancel">Not now</button>' +
-          '<button class="cg-continue" id="cgContinue" disabled>Continue</button>' +
-        '</div>' +
-      '</div>';
-    document.body.appendChild(wrap);
-    var A = wrap.querySelector("#cgA"), B = wrap.querySelector("#cgB"), C = wrap.querySelector("#cgC");
-    var cont = wrap.querySelector("#cgContinue");
-    function refresh() { cont.disabled = !(A.checked && B.checked); }   // A AND B required
-    A.addEventListener("change", refresh); B.addEventListener("change", refresh);
-    wrap.querySelector("#cgPrivacyLink").addEventListener("click", function (e) {
-      e.preventDefault();
-      if (typeof window.openModal === "function") window.openModal("privacyModal");
-    });
-    wrap.querySelector("#cgCancel").addEventListener("click", function () { closeGate(); resolveAll(false); });
-    cont.addEventListener("click", function () {
-      if (cont.disabled) return;
-      cont.disabled = true; cont.textContent = "Saving…";
-      recordConsent(C.checked).then(function () { closeGate(); resolveAll(true); })
-        .catch(function () { closeGate(); resolveAll(true); });
-    });
-    // trap: clicking the backdrop does NOT dismiss (blocking gate); Esc = Not now.
-    wrap.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeGate(); resolveAll(false); } });
-    setTimeout(function () { try { A.focus(); } catch (e) {} }, 30);
+    var ov = document.getElementById("consentOverlay");
+    if (ov) {
+      _gateOpen = true;
+      if (!ov.classList.contains("show")) {
+        ov.setAttribute("aria-hidden", "false");
+        ov.classList.add("show");
+      }
+      return;
+    }
+    // Splash not in DOM (unexpected) → do not spawn a second UI; don't block.
+    resolveAll(true);
   }
 
   // Promise<boolean> — resolves true when consent is current (showing the gate
@@ -211,7 +192,20 @@
     // Controls), so consent stays specific and separately withdrawable.
     try {
       var sb = document.getElementById("splashContinueBtn");
-      if (sb && !sb.__consentHooked) { sb.__consentHooked = true; sb.addEventListener("click", function () { try { recordConsent(false); } catch (e) {} }); }
+      if (sb && !sb.__consentHooked) {
+        sb.__consentHooked = true;
+        sb.addEventListener("click", function () {
+          try { recordConsent(false); } catch (e) {}   // optional consent → Settings, default off
+          closeGate();                                  // hide the splash overlay
+          resolveAll(true);                             // release any AI/entry waiters
+        });
+      }
+      // ✕ / dismiss on the splash → treat as declined so waiters don't hang.
+      var cx = document.getElementById("consentClose");
+      if (cx && !cx.__consentHooked) {
+        cx.__consentHooked = true;
+        cx.addEventListener("click", function () { closeGate(); resolveAll(false); });
+      }
     } catch (e) {}
     // Attach to auth state so the gate appears right after sign-in.
     var tries = 0, t = setInterval(function () {
