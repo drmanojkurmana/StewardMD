@@ -94,20 +94,37 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.gstatic.com">
 <script>
-/* Lazy-load Firebase (auth + firestore) AFTER the page is interactive, so its ~120KB
-   doesn't compete with the critical app code at startup. Sign-in still works: if a user
-   signs in before it has loaded, SMD_firebaseSignIn loads it on demand (see app.js). */
+/* Lazy-load Firebase (auth + firestore) AFTER the page is interactive, so it doesn't
+   compete with the critical app code at startup. Sign-in still works: if a user signs
+   in before it has loaded, SMD_firebaseSignIn / native-auth load it on demand.
+   Loaded from the LOCAL bundle (/vendor/firebase/, same pattern as /vendor/pdfjs) so
+   sign-in never depends on reaching the gstatic CDN — the CDN is kept only as a fallback
+   if a local file is ever missing. In the native WKWebView the CDN is often unreachable,
+   which used to leave sign-in stuck on "Authentication is not ready yet".
+   Marks itself loaded ONLY once window.firebase actually initialises; otherwise it resets
+   so the next call can retry (a swallowed load failure used to report a false success). */
 (function(){
-  var FB="https://www.gstatic.com/firebasejs/10.12.0/",loaded=false,loading=false,cbs=[];
-  function chain(srcs,done){var i=0;(function next(){if(i>=srcs.length){done();return;}var s=document.createElement("script");s.src=srcs[i++];s.onload=next;s.onerror=next;document.head.appendChild(s);})();}
+  var LOCAL="/vendor/firebase/",CDN="https://www.gstatic.com/firebasejs/10.12.0/";
+  var FILES=["firebase-app-compat.js","firebase-firestore-compat.js","firebase-auth-compat.js"];
+  var loaded=false,loading=false,cbs=[];
+  function loadScript(src){return new Promise(function(res,rej){var s=document.createElement("script");s.src=src;s.onload=res;s.onerror=function(){rej(new Error(src));};document.head.appendChild(s);});}
+  // Local first; if a local file is somehow absent, fall back to the CDN for that file.
+  function loadOne(file){return loadScript(LOCAL+file).catch(function(){return loadScript(CDN+file);});}
+  function ready(){return !!(window.firebase&&window.firebase.auth);}
   window.SMD_loadFirebase=function(cb){
     if(loaded){cb&&cb();return;}
     if(cb)cbs.push(cb);
     if(loading)return;loading=true;
-    chain([FB+"firebase-app-compat.js",FB+"firebase-firestore-compat.js",FB+"firebase-auth-compat.js"],function(){
-      loaded=true;try{window.SMD_bootFirebase&&window.SMD_bootFirebase();}catch(e){}
-      var f;while(f=cbs.shift()){try{f();}catch(e){}}
-    });
+    (function seq(i){
+      if(i>=FILES.length){
+        if(ready()){loaded=true;try{window.SMD_bootFirebase&&window.SMD_bootFirebase();}catch(e){}}
+        else{loading=false;} // let a later call retry instead of reporting a false success
+        var f;while(f=cbs.shift()){try{f();}catch(e){}}
+        return;
+      }
+      // compat scripts must load in order (firestore/auth depend on app) — hence sequential.
+      loadOne(FILES[i]).then(function(){seq(i+1);},function(){seq(i+1);});
+    })(0);
   };
   function kick(){try{window.SMD_loadFirebase();}catch(e){}}
   if("requestIdleCallback"in window){requestIdleCallback(kick,{timeout:2500});}
@@ -1310,7 +1327,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/antibiogram-data.js?v=gold336" defer></script>
 <script src="/theme-sync.js?v=gold336" defer></script>
 <script src="/account.js?v=gold336" defer></script>
-<script src="/signout-fix.js?v=gold336" defer></script>
+<script src="/signout-fix.js?v=gold339" defer></script>
 <script src="/verify.js?v=gold336" defer></script>
 <script src="/prescription.js?v=gold336" defer></script>
 <script src="/ku.js?v=gold336" defer></script>
