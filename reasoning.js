@@ -2585,6 +2585,7 @@
         summary: keys.length + " finding" + (keys.length === 1 ? "" : "s") + (lead ? " · leading: " + lead.name : ""),
         snapshot: { caseId: S._caseId, findings: (function () { var o = {}; keys.forEach(function (k) { o[k] = true; }); return o; })(), workspace: true }
       });
+      try { if (window.SMD_KU) SMD_KU.emit("case", S._caseId); } catch (e) {}   // KU: completed a case
     } catch (e) {}
   }
   // re-render only the columns (used on expand so we don't reset prev/delta)
@@ -2694,6 +2695,7 @@
   // current differential) — reuses the #dxMgmt panel. Shows the Harrison reference
   // and an action to open the full stewardship/management page.
   function openDiseaseRef(id) {
+    try { if (window.SMD_KU) SMD_KU.emit("read", id); } catch (e) {}   // KU: reading clinical content
     var syn = (window.SYNDROMES || {})[id];
     var ni = null; (DDX_NI || []).forEach(function (d) { if (d.id === id) ni = d; });
     var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId && window.KB_ENRICHMENT.byId[id]) || null;
