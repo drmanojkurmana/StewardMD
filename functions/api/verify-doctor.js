@@ -202,6 +202,18 @@ export async function onRequest(context) {
   const { request, env } = context;
   if (request.method === "OPTIONS") return new Response(null, { status: 204 });
 
+  // GET ?debug=models → list the Gemini models this key can use (temporary diagnostic).
+  if (request.method === "GET" && new URL(request.url).searchParams.get("debug") === "models") {
+    try {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${env.GEMINI_API_KEY}`);
+      const d = await r.json();
+      const models = (d.models || [])
+        .filter((m) => (m.supportedGenerationMethods || []).indexOf("generateContent") > -1)
+        .map((m) => m.name.replace("models/", ""));
+      return json({ ok: true, current: env.GEMINI_MODEL || "(unset)", models });
+    } catch (e) { return json({ error: String((e && e.message) || e) }); }
+  }
+
   // GET → the caller's own verification status (for the account panel).
   if (request.method === "GET") {
     const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
