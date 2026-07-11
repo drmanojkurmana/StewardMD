@@ -203,6 +203,16 @@
   function init() {
     populateNotice();
     guardAI();
+    // UNIFIED GATE: the entry splash's single required tick now covers the privacy +
+    // clinical-authority consents too. When it's accepted, record a current consent so
+    // this separate gate (ensureConsent / maybePrompt) never appears as a 2nd screen.
+    // We record the REQUIRED consents only; the OPTIONAL de-identified-data use is NOT
+    // bundled into a mandatory tick (kept as an opt-in in Settings › Privacy & Data
+    // Controls), so consent stays specific and separately withdrawable.
+    try {
+      var sb = document.getElementById("splashContinueBtn");
+      if (sb && !sb.__consentHooked) { sb.__consentHooked = true; sb.addEventListener("click", function () { try { recordConsent(false); } catch (e) {} }); }
+    } catch (e) {}
     // Attach to auth state so the gate appears right after sign-in.
     var tries = 0, t = setInterval(function () {
       guardAI();
