@@ -10,7 +10,7 @@
    - On activate, the new SW RELOADS open tabs so a deploy can't leave a client stuck on
      stale JS (this is what un-sticks users running an old reasoning.js/app.js).
    IMPORTANT: bump CACHE on every deploy (keep in step with ?v=goldN) so old caches purge. */
-var CACHE = "stewardmd-gold331";
+var CACHE = "stewardmd-gold332";
 
 self.addEventListener("install", function () {
   self.skipWaiting();
@@ -98,6 +98,14 @@ self.addEventListener("fetch", function (e) {
     e.respondWith((async function () {
       try {
         var net = await fetch(url.pathname + url.search, { cache: "no-store", credentials: "same-origin" });
+        // A redirected response (e.g. Cloudflare Pages clean-URL 308 on "/admin/") CANNOT be
+        // returned from a service worker for a navigation — Safari rejects it with
+        // "Response served by service worker has redirections". Rebuild it as a fresh,
+        // non-redirected response so the navigation succeeds.
+        if (net && net.redirected) {
+          var buf = await net.arrayBuffer();
+          net = new Response(buf, { status: net.status, statusText: net.statusText, headers: net.headers });
+        }
         if (net && net.status === 200) {
           var copy = net.clone();
           caches.open(CACHE).then(function (c) { c.put(req, copy); });
