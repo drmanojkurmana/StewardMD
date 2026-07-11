@@ -14,6 +14,7 @@
  * ---------------------------------------------------------------------------
  */
 import { setUserClaims } from "../../_fbadmin.js";
+import { emailVerified, emailFailed } from "../../_email.js";
 import { verifyFirebaseToken } from "../../_fbauth.js";
 
 // Owners who may manage verifications (by Google account email). Override via env.OWNER_EMAILS
@@ -85,6 +86,7 @@ async function doApprove(store, env, uid, regNo) {
   const updated = { ...rec, uid, status: "verified", verified: true, regNo: reg, approvedBy: "admin", verifiedAt: new Date().toISOString() };
   await store.put(doctorKey(uid), JSON.stringify(updated));
   if (reg) { try { await store.put(regKey(reg), uid); } catch (e) {} }
+  try { await emailVerified(env, { email: rec.email, name: rec.name || rec.firstName, regNo: reg, council: rec.council }); } catch (e) {}
   return updated;
 }
 async function doReject(store, env, uid, reason) {
@@ -93,6 +95,7 @@ async function doReject(store, env, uid, reason) {
   // Clear provisional so the client gate forces a fresh upload.
   const updated = { ...rec, uid, status: "rejected", verified: false, provisionalUntil: "", reason: String(reason || "rejected_by_admin"), updatedAt: new Date().toISOString() };
   await store.put(doctorKey(uid), JSON.stringify(updated));
+  try { await emailFailed(env, { email: rec.email, name: rec.name || rec.firstName, reason: updated.reason }); } catch (e) {}
   return updated;
 }
 const htmlPage = (title, body) => new Response(

@@ -21,6 +21,7 @@
 
 import { verifyFirebaseToken } from "../_fbauth.js";
 import { setUserClaims } from "../_fbadmin.js";
+import { emailVerified } from "../_email.js";
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
@@ -213,26 +214,8 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
   if (!res.ok) console.warn("[verify] resend(support) failed:", await res.text());
 }
 
-// ── Resend — "your account is verified" email to the doctor ───────────────────
-async function emailVerified(env, { email, name, regNo, council }) {
-  if (!env.RESEND_API_KEY || !email) return;
-  const from = env.FROM_EMAIL || "StewardMD Verify <verify@stewardmd.in>";
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { "Authorization": `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      from, to: [email],
-      subject: "✓ Your StewardMD account is verified",
-      html:
-        `<h2>You're verified ✓</h2>` +
-        `<p>Dr. ${name || ""}, your medical registration has been verified and linked to your StewardMD account.</p>` +
-        `<table cellpadding="6"><tr><td><b>Registration No</b></td><td>${regNo || ""}</td></tr>` +
-        `<tr><td><b>Council</b></td><td>${council || ""}</td></tr></table>` +
-        `<p>You now have full access, including the prescription generator. Welcome to StewardMD.</p>`,
-    }),
-  });
-  if (!res.ok) console.warn("[verify] resend(verified) failed:", await res.text());
-}
+// "Your account is verified" email to the doctor now lives in ../_email.js
+// (branded template, from noreply@stewardmd.in) and is imported above.
 
 // ── Entry ─────────────────────────────────────────────────────────────────────
 export async function onRequest(context) {
