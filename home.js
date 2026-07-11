@@ -1777,6 +1777,16 @@
       var chipsHTML = maikFollowupsHTML(pkg, question, assume);
       if (chipsHTML) think.insertAdjacentHTML("beforeend", chipsHTML);
       if (!active) _maikCache[cacheKey] = think.innerHTML;
+      // ℞ Create Prescription — on treatment answers only. Live-only (not cached), with pkg in
+      // closure so the Rx builder gets the grounded regimen. Doses come DB-first (Drug Index).
+      try {
+        var _isTx = (pkg && pkg.treatment && pkg.treatment.default) || /\b(treat|treatment|treating|manage|management|therapy|regimen|prescri|\brx\b|antibiotic|antibiotics|first[- ]?line|dose|dosing)\b/.test(maikNorm(question || ""));
+        if (_isTx && window.SMD_RX) {
+          var _rxc = document.createElement("button"); _rxc.className = "maik-chip"; _rxc.style.marginTop = "8px"; _rxc.textContent = "℞ Create Prescription";
+          _rxc.addEventListener("click", function () { try { SMD_RX.open({ topic: topicLabel || question, pkg: pkg }); } catch (e) {} });
+          think.appendChild(_rxc);
+        }
+      } catch (e) {}
       _maikTurns.push({ q: question, a: md.slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift();
       try { if (window.SMD_KU && question) { var _kh = 0, _ks = String(question); for (var _ki = 0; _ki < _ks.length; _ki++) { _kh = ((_kh << 5) - _kh + _ks.charCodeAt(_ki)) | 0; } SMD_KU.emit("maik", "q" + (_kh >>> 0).toString(36)); } } catch (e) {}   // KU: read a MaiK answer
       if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() };
