@@ -921,7 +921,7 @@
           var pn = (window.ICU_STATE && window.ICU_STATE.patient && window.ICU_STATE.patient.name) ? " · " + escV4(window.ICU_STATE.patient.name) : "";
           w.innerHTML = '<button class="rds-banner rds-banner--critical rnav-alert" data-act="icu" aria-label="Open ICU critical alerts">' + ric("warning") +
             '<span class="rds-banner-body"><span class="rds-banner-title">' + crit.length + ' critical alert' + (crit.length > 1 ? "s" : "") + '</span>' +
-            '<span class="rds-banner-meta">Open ICU workspace' + pn + '</span></span>' + ric("chevron_right") + '</button>';
+            '<span class="rds-banner-meta">Open ICU workspace' + pn + '</span></span>' + svg("chev") + '</button>';
         } else { w.innerHTML = ""; }
       }
     } catch (e) {}
@@ -935,12 +935,12 @@
           var meta = [pt.bed ? "Bed " + escV4(pt.bed) : "", pt.dx ? escV4(pt.dx) : ""].filter(Boolean).join(" · ");
           res.innerHTML = '<button class="rnav-resume rds-card" data-act="icu" aria-label="Resume patient">' +
             '<span class="rnav-resume-ic rds-icon">monitor_heart</span><span class="rnav-resume-bd"><span class="rnav-resume-lbl">Resume ICU patient</span>' +
-            '<span class="rnav-resume-nm">' + escV4(pt.name) + '</span>' + (meta ? '<span class="rnav-resume-mt">' + meta + '</span>' : "") + '</span>' + ric("chevron_right") + '</button>';
+            '<span class="rnav-resume-nm">' + escV4(pt.name) + '</span>' + (meta ? '<span class="rnav-resume-mt">' + meta + '</span>' : "") + '</span>' + svg("chev") + '</button>';
         } else if (recent.length) {
           var r0 = recent[0];
           res.innerHTML = '<button class="rnav-resume rds-card" data-rid="' + escV4(r0.caseId) + '" aria-label="Resume last case">' +
             '<span class="rnav-resume-ic rds-icon">history</span><span class="rnav-resume-bd"><span class="rnav-resume-lbl">Resume last case</span>' +
-            '<span class="rnav-resume-nm">' + escV4(r0.title || "Case") + '</span>' + (r0.summary ? '<span class="rnav-resume-mt">' + escV4(r0.summary) + '</span>' : "") + '</span>' + ric("chevron_right") + '</button>';
+            '<span class="rnav-resume-nm">' + escV4(r0.title || "Case") + '</span>' + (r0.summary ? '<span class="rnav-resume-mt">' + escV4(r0.summary) + '</span>' : "") + '</span>' + svg("chev") + '</button>';
           var rb = res.querySelector("[data-rid]");
           if (rb) rb.addEventListener("click", function () { try { SMD_RECENT.open(rb.getAttribute("data-rid")); } catch (e) {} });
         } else { res.innerHTML = ""; }
@@ -957,7 +957,7 @@
               '<span class="rds-list-lead rds-icon">history</span><span class="rds-list-main">' +
               '<span class="rnav-recent-tt">' + escV4(it.title || "Case") + '</span>' +
               (it.summary ? '<span class="rnav-recent-sub">' + escV4(it.summary) + '</span>' : "") + '</span>' +
-              '<span class="rds-list-trail rds-icon">chevron_right</span></button>';
+              '<span class="rds-list-trail">' + svg("chev") + '</span></button>';
           }).join("");
           rc.innerHTML = '<div class="rds-section-header"><span class="rds-section-title">Recent activity</span></div><div class="rds-card rnav-recent">' + rows + '</div>';
           rc.querySelectorAll("[data-rid]").forEach(function (b) {
