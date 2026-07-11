@@ -488,7 +488,10 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
     .smd-consent-overlay .splash-ack-links{margin:11px 0 4px;font-size:12px}
     .smd-consent-overlay .splash-disclaimer-gate,.smd-consent-overlay .splash-disclaimer-title{color:#0F172A!important}
     .smd-consent-overlay .splash-disclaimer-body,.smd-consent-overlay .splash-disclaimer-body b,.smd-consent-overlay .splash-ack-row,.smd-consent-overlay .splash-ack-row span,.smd-consent-overlay .splash-ack-row b{color:#243244!important}
-    .smd-consent-overlay .splash-ack-row input{accent-color:#0F766E;width:18px;height:18px;flex:0 0 auto}
+    /* Bigger, easier-to-hit checkbox (was 18px — read as a tiny target). The whole row is
+       already a clickable <label>, but a 24px box + comfortable row padding make it obvious. */
+    .smd-consent-overlay .splash-ack-row{padding:16px 2px 0;min-height:44px}
+    .smd-consent-overlay .splash-ack-row input{accent-color:#0F766E;width:24px;height:24px;flex:0 0 auto;margin-top:1px;cursor:pointer}
     .smd-consent-overlay .splash-continue-btn{background:#0F766E!important;color:#fff!important;border:none!important}
     .smd-consent-overlay .splash-foot-link{color:#0F766E!important}
     body.dark .smd-consent-overlay .splash-disclaimer-gate{background:#ffffff!important;border-color:#e2e8f0!important}
