@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>StewardMD — Doctor Verifications</title>
+<style>
+  :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0f766e;--tls:#ccfbf1;--red:#dc2626;--amb:#b45309;--grn:#15803d;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
+  @media(prefers-color-scheme:dark){:root{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);padding:0 0 60px}
+  .top{background:var(--panel);border-bottom:1px solid var(--line);padding:16px 18px;position:sticky;top:0;z-index:5}
+  .top h1{margin:0;font:800 18px var(--f)}.top p{margin:4px 0 0;font:500 12.5px var(--f);color:var(--mut)}
+  .wrap{max-width:760px;margin:0 auto;padding:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+  label{display:block;font:700 11.5px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:12px 0 5px}
+  input,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:500 14px var(--f);background:var(--bg);color:var(--ink)}
+  input:focus,select:focus{outline:none;border-color:var(--tl)}
+  button{border:none;border-radius:11px;font:700 14px var(--f);padding:10px 14px;cursor:pointer}
+  .ghost{background:var(--panel);color:var(--tl);border:1px solid var(--line)}
+  .msg{font:600 12.5px var(--f);margin-top:10px;min-height:16px}.msg.ok{color:var(--tl)}.msg.err{color:var(--red)}
+  .tokrow{display:flex;gap:8px;align-items:flex-end}.tokrow>div{flex:1}
+  .filters{display:flex;gap:8px;align-items:center;margin-top:4px;flex-wrap:wrap}
+  .pill{font:700 12px var(--f);border:1px solid var(--line);border-radius:999px;padding:7px 14px;background:var(--panel);color:var(--mut);cursor:pointer}
+  .pill.on{background:var(--tl);color:#fff;border-color:var(--tl)}
+  .list-item{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:var(--bg)}
+  .li-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .st{font:800 10px var(--f);text-transform:uppercase;border-radius:6px;padding:2px 8px;color:#fff}
+  .st.pending{background:var(--amb)}.st.verified{background:var(--grn)}.st.rejected{background:var(--red)}.st.unverified{background:var(--mut)}
+  .li-time{margin-left:auto;font:600 11px var(--f);color:var(--mut)}
+  .li-name{font:800 14px var(--f);margin-top:6px}
+  .li-meta{font:500 12.5px var(--f);color:var(--mut);margin-top:3px;line-height:1.6}
+  .li-meta b{color:var(--ink)}
+  .li-foot{display:flex;align-items:center;gap:8px;margin-top:10px}
+  .approve{background:var(--grn);color:#fff}.reject{background:none;border:1px solid var(--line);color:var(--red)}
+  .hint{font:500 12px var(--f);color:var(--mut);line-height:1.55}
+  code{background:var(--tls);color:var(--tl);border-radius:5px;padding:1px 5px;font-size:12px}
+  a{color:var(--tl)}
+</style>
+</head>
+<body>
+  <div class="top"><h1>🩺 StewardMD — Doctor Verifications</h1><p>Approve doctors whose certificate could not be auto-verified against the NMC register. Owner-only.</p></div>
+  <div class="wrap">
+
+    <div class="card">
+      <div class="tokrow">
+        <div><label for="tok">Admin token</label><input id="tok" type="password" placeholder="VERIFY_ADMIN_TOKEN" autocomplete="off"></div>
+        <button class="ghost" id="saveTok">Save</button>
+      </div>
+      <div class="hint" style="margin-top:8px">Stored only in this browser. Must match the <code>VERIFY_ADMIN_TOKEN</code> secret in Cloudflare Pages.</div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <b style="flex:1">Verifications</b>
+        <div class="filters" id="filters">
+          <button class="pill on" data-f="pending">Pending</button>
+          <button class="pill" data-f="verified">Verified</button>
+          <button class="pill" data-f="rejected">Rejected</button>
+          <button class="pill" data-f="all">All</button>
+        </div>
+        <button class="ghost" id="reload" style="padding:8px 12px">Reload</button>
+      </div>
+      <div class="msg" id="msg"></div>
+      <div id="list" style="margin-top:12px"><div class="hint">Enter your token and Reload.</div></div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  var API="/api/verifications", TK="smd_verify_admin_token";
+  var $=function(id){return document.getElementById(id);};
+  var filter="pending";
+  try{ $("tok").value=localStorage.getItem(TK)||""; }catch(e){}
+  $("saveTok").onclick=function(){ try{localStorage.setItem(TK,$("tok").value.trim());}catch(e){} load(); };
+  function token(){ return ($("tok").value||"").trim(); }
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+  function hdr(){ return {"X-Admin-Token":token()}; }
+  function say(k,t){ var m=$("msg"); m.className="msg "+(k||""); m.textContent=t||""; }
+
+  $("filters").addEventListener("click",function(e){
+    var b=e.target.closest("[data-f]"); if(!b)return;
+    filter=b.getAttribute("data-f");
+    Array.prototype.forEach.call($("filters").children,function(p){ p.classList.toggle("on",p===b); });
+    load();
+  });
+
+  function act(path,uid,extra){
+    if(!token()){ say("err","Enter your admin token first."); return; }
+    var body=Object.assign({uid:uid},extra||{});
+    fetch(API+"/"+path,{method:"POST",headers:Object.assign({"Content-Type":"application/json"},hdr()),body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(d){return{s:r.status,d:d};});})
+      .then(function(x){
+        if(x.s===200&&x.d.ok){ say("ok","✅ "+path+" done for "+uid); load(); }
+        else if(x.s===401){ say("err","Wrong admin token."); }
+        else if(x.s===503){ say("err","Server has no VERIFY_ADMIN_TOKEN set."); }
+        else { say("err","Failed: "+(x.d.error||x.s)); }
+      }).catch(function(){ say("err","Network error."); });
+  }
+
+  function row(d){
+    var st=d.status||"unverified";
+    var reg=d.regNo||d.extractedRegNo||"—", name=d.name||d.extractedName||"(name not read)";
+    return '<div class="list-item"><div class="li-top">'+
+      '<span class="st '+esc(st)+'">'+esc(st)+'</span>'+
+      (d.reason?'<span class="hint">'+esc(d.reason)+'</span>':'')+
+      '<span class="li-time">'+esc(d.verifiedAt||d.updatedAt||"")+'</span></div>'+
+      '<div class="li-name">'+esc(name)+'</div>'+
+      '<div class="li-meta"><b>Reg:</b> '+esc(reg)+(d.council?' &nbsp;·&nbsp; '+esc(d.council):'')+'<br>'+
+      '<b>Account:</b> '+esc(d.email||"—")+' &nbsp;·&nbsp; <b>UID:</b> <code>'+esc(d.uid||"")+'</code></div>'+
+      '<div class="li-foot">'+
+        (st!=="verified"?'<button class="approve" data-approve="'+esc(d.uid)+'" data-reg="'+esc(reg)+'">✓ Approve</button>':'')+
+        (st!=="rejected"?'<button class="reject" data-reject="'+esc(d.uid)+'">Reject</button>':'')+
+      '</div></div>';
+  }
+
+  function load(){
+    var el=$("list");
+    if(!token()){ el.innerHTML='<div class="hint">Enter your token and Reload.</div>'; return; }
+    el.innerHTML='<div class="hint">Loading…</div>'; say("","");
+    fetch(API+"?status="+encodeURIComponent(filter),{headers:hdr()})
+      .then(function(r){return r.json().then(function(d){return{s:r.status,d:d};});})
+      .then(function(x){
+        if(x.s===401){ el.innerHTML='<div class="hint">Wrong admin token.</div>'; return; }
+        if(x.s===503){ el.innerHTML='<div class="hint">Server has no VERIFY_ADMIN_TOKEN set.</div>'; return; }
+        var docs=(x.d&&x.d.doctors)||[];
+        if(!docs.length){ el.innerHTML='<div class="hint">No '+esc(filter)+' verifications.</div>'; return; }
+        el.innerHTML=docs.map(row).join("");
+        Array.prototype.forEach.call(el.querySelectorAll("[data-approve]"),function(b){ b.onclick=function(){ act("approve",b.getAttribute("data-approve"),{regNo:b.getAttribute("data-reg")}); }; });
+        Array.prototype.forEach.call(el.querySelectorAll("[data-reject]"),function(b){ b.onclick=function(){ if(confirm("Reject this doctor?")) act("reject",b.getAttribute("data-reject")); }; });
+      }).catch(function(){ el.innerHTML='<div class="hint">Could not load.</div>'; });
+  }
+  $("reload").onclick=load;
+  if(token()) load();
+})();
+</script>
+</body>
+</html>
