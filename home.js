@@ -1748,7 +1748,7 @@
       return html ? '<div class="maik-followups">' + html + '</div>' : "";
     }
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
-      if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.</div>'; return; }
+      if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "rate" ? 'One moment — you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
       if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {

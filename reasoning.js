@@ -3688,7 +3688,21 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
-      return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) }); }).then(function (r) { return r.json(); }).then(function (j) { if (j && !j.sources) j.sources = pkg.sources; return j; }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" });
+      // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
+      // silently after the window so a fast follow-up never surfaces "usage limit reached".
+      function attempt(retried) {
+        return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: body }); }).then(function (r) {
+          if (r.status === 429) {
+            return r.json().catch(function () { return {}; }).then(function (j) {
+              if (j && j.reason === "rate" && !retried) return new Promise(function (res) { setTimeout(res, 3400); }).then(function () { return attempt(true); });
+              return { error: "quota", reason: (j && j.reason) || "rate" };
+            });
+          }
+          return r.json().then(function (j) { if (j && !j.sources) j.sources = pkg.sources; return j; });
+        });
+      }
+      return attempt(false).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // Phase 2 — STREAMING grounded explain (progressive tokens like UpToDate's live answer).
     // onDelta(accumulatedText) is called as tokens arrive. STRICTLY additive: any failure — server
