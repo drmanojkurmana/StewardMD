@@ -21,10 +21,11 @@
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function blobToDataURL(b) { return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(r.result); }; r.onerror = rej; r.readAsDataURL(b); }); }
 
-  // Clinical Dictation (on-device Whisper) is gated behind a feature flag — OFF by default in
-  // production (matches the smd_ai / smd_ghis_ward convention). When off, everything below is inert
-  // and MaiK Scribe behaves EXACTLY as before (Fast Dictation only).
-  function whisperFlagOn() { try { var v = localStorage.getItem("smd_whisper_clinical_dictation"); return v === "1" || v === "true"; } catch (e) { return false; } }
+  // Clinical Dictation (on-device Whisper) is ON by default — the Fast/Clinical selector shows in
+  // MaiK Scribe on native builds (web is inert: gated by the native-plugin check below). Selecting
+  // Clinical downloads the model on first use; a "Remove Clinical model" control frees the storage.
+  // Users can still opt out by setting smd_whisper_clinical_dictation="0".
+  function whisperFlagOn() { try { var v = localStorage.getItem("smd_whisper_clinical_dictation"); return v !== "0" && v !== "false"; } catch (e) { return true; } }
   // Available only on a native build WITH the Whisper plugin present AND the flag enabled.
   function whisperAvailable() { return !!(window.SMD_NATIVE && typeof window.SMD_NATIVE.transcribeWhisper === "function") && whisperFlagOn(); }
 
