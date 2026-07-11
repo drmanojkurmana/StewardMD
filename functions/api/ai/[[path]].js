@@ -82,6 +82,13 @@ const developerProvider = {
     const r = await fetch(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
       { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
     return parseCandidates(await r.json(), r.status);
+  },
+  // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
+  streamFetch: function (env, parts, maxTokens, opts) {
+    let o = opts || {};
+    if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });
+    return fetch(`${DEV_HOST}/${modelId(env)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
   }
 };
 
@@ -145,10 +152,69 @@ const vertexProvider = {
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
     const r = await fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
     return parseCandidates(await r.json(), r.status);
+  },
+  // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
+  streamFetch: async function (env, parts, maxTokens, opts) {
+    const loc = env.GCP_LOCATION || "us-central1";
+    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:streamGenerateContent?alt=sse`;
+    const token = await vertexAccessToken(env);
+    let o = opts || {};
+    if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });
+    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
   }
 };
 
 const PROVIDERS = { vertex: vertexProvider, developer: developerProvider };
+
+// Phase 2 — streaming plumbing. geminiStreamUpstream tries providers in order for a streamable
+// body (no mid-stream failover: once bytes flow we commit; the CLIENT falls back to non-stream on
+// any gap). streamGeminiToSSE transforms Gemini's SSE into our compact {delta}/{done} event stream.
+async function geminiStreamUpstream(env, parts, maxTokens, opts) {
+  const order = providerOrder(env);
+  let lastErr = null;
+  for (const name of order) {
+    const p = PROVIDERS[name];
+    if (!p || !p.available(env) || !p.streamFetch) { lastErr = new Error(name + " stream unavailable"); continue; }
+    try {
+      const r = await p.streamFetch(env, parts, maxTokens, opts);
+      if (r && r.ok && r.body) return r;
+      lastErr = new Error(name + " stream HTTP " + (r && r.status));
+    } catch (e) { lastErr = e; }
+  }
+  throw lastErr || new Error("no streaming provider");
+}
+function streamGeminiToSSE(upstream, onText) {
+  const enc = new TextEncoder(), dec = new TextDecoder();
+  const reader = upstream.body.getReader();
+  let buf = "", full = "", closed = false;
+  const rs = new ReadableStream({
+    async pull(controller) {
+      try {
+        const { value, done } = await reader.read();
+        if (done) {
+          if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
+          try { if (onText) onText(full); } catch (e) {}
+          return;
+        }
+        buf += dec.decode(value, { stream: true });
+        const blocks = buf.split("\n\n"); buf = blocks.pop();
+        for (const block of blocks) {
+          const data = block.split("\n").filter((l) => l.indexOf("data:") === 0).map((l) => l.slice(5).trim()).join("");
+          if (!data || data === "[DONE]") continue;
+          let j; try { j = JSON.parse(data); } catch (e) { continue; }
+          const cand = j.candidates && j.candidates[0];
+          const txt = (cand && cand.content && cand.content.parts) ? cand.content.parts.map((p) => p.text || "").join("") : "";
+          if (txt) { full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
+        }
+      } catch (e) {
+        if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
+        try { if (onText) onText(full); } catch (e2) {}
+      }
+    },
+    cancel() { try { reader.cancel(); } catch (e) {} }
+  });
+  return new Response(rs, { headers: { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-store", "X-Accel-Buffering": "no" } });
+}
 function providerOrder(env) {
   // Vertex is primary and fails over to Developer. If AI_PROVIDER=developer, use it directly.
   return String(env.AI_PROVIDER || "vertex").toLowerCase() === "developer" ? ["developer"] : ["vertex", "developer"];
@@ -285,6 +351,13 @@ function renderGroundedPrompt(pkg) {
   if (rf.icuProtocols && rf.icuProtocols.length) refLine.push("ICU modules: " + rf.icuProtocols.join(", "));
   if (refLine.length) { L.push("\n=== REFERENCES (by reference only) ==="); L.push(refLine.join(" | ")); }
   if (pkg.question) L.push("\n=== CLINICIAN QUESTION ===\n" + clip(pkg.question, 500));
+  // Phase 2 — numbered SOURCES for per-claim citations + table formatting hint. The client builds
+  // this list (identical numbering to the footer it renders) so [n] markers line up exactly.
+  if (pkg.sources && pkg.sources.length) {
+    L.push("\n=== SOURCES (cite the specific supporting claim inline with [n]; use ONLY these numbers, never invent one) ===");
+    pkg.sources.slice(0, 12).forEach((s) => L.push((s.n || "") + ". " + clip(s.title, 120)));
+    L.push("\nFORMATTING: append the matching [n] right after a statement that rests on a source above (e.g. 'first-line is X [2]'). When you compare 3+ options across the same attributes (differentials, empiric regimens, drug choices), present them as a compact GitHub-flavoured markdown table (header row + |---| separator). Do not cite what you cannot attribute to a listed source.");
+  }
   return L.join("\n");
 }
 
@@ -435,6 +508,15 @@ export async function onRequest(context) {
         const gate = await checkQuota(env, request, hasDx ? "case" : "general");
         if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
         const grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
+        // Phase 2 — opt-in streaming (client sends ?stream=1 + Accept: text/event-stream). If the
+        // provider can't stream we fall straight through to the unchanged JSON path below, so the
+        // answer never fails to arrive.
+        const wantStream = (new URL(request.url).searchParams.get("stream") === "1") && (((request.headers.get("Accept")) || "").indexOf("text/event-stream") >= 0);
+        if (wantStream) {
+          let up = null;
+          try { up = await geminiStreamUpstream(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); } catch (e) { up = null; }
+          if (up) return streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} });
+        }
         let text;
         try { text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }

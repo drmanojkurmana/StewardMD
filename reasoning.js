@@ -3685,7 +3685,44 @@
     explainGrounded: function (pkg, opts) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
-      return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
+      return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) }); }).then(function (r) { return r.json(); }).then(function (j) { if (j && !j.sources) j.sources = pkg.sources; return j; }).catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
+    // Phase 2 — STREAMING grounded explain (progressive tokens like UpToDate's live answer).
+    // onDelta(accumulatedText) is called as tokens arrive. STRICTLY additive: any failure — server
+    // not streaming, non-event-stream response, network error, or an empty stream — transparently
+    // falls back to the proven JSON explainGrounded(), so the answer path can never regress.
+    explainGroundedStream: function (pkg, opts, onDelta) {
+      var self = this;
+      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
+      if (!pkg) return Promise.resolve({ error: "no-package" });
+      try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
+      function fallback() { return self.explainGrounded(pkg, opts); }
+      if (typeof ReadableStream === "undefined" || !window.TextDecoder) return fallback();
+      return aiHeaders().then(function (h) {
+        var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
+        return fetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) });
+      }).then(function (r) {
+        var ct = (r.headers && r.headers.get("Content-Type")) || "";
+        if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) return fallback();
+        var reader = r.body.getReader(), dec = new TextDecoder(), buf = "", acc = "";
+        function pump() {
+          return reader.read().then(function (res) {
+            if (res.done) return;
+            buf += dec.decode(res.value, { stream: true });
+            var blocks = buf.split("\n\n"); buf = blocks.pop();
+            blocks.forEach(function (block) {
+              var data = block.split("\n").filter(function (l) { return l.indexOf("data:") === 0; }).map(function (l) { return l.slice(5).trim(); }).join("");
+              if (!data) return;
+              var ev; try { ev = JSON.parse(data); } catch (e) { return; }
+              if (ev && ev.delta) { acc += ev.delta; try { if (onDelta) onDelta(acc); } catch (e) {} }
+            });
+            return pump();
+          });
+        }
+        return pump().then(function () { return acc ? { text: acc, mode: "grounded-stream", sources: pkg.sources } : fallback(); })
+          .catch(function () { return acc ? { text: acc, mode: "grounded-stream", sources: pkg.sources } : fallback(); });
+      }).catch(function () { return fallback(); });
     },
     // Imaging Assist — clinician-invoked structured summary of ONE radiology report. Sends a
     // DE-IDENTIFIED packet (report text PHI-redacted client-side; NO name/MRN/bed/other-patient
@@ -3945,18 +3982,38 @@
       t = t.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/__([^_]+)__/g, "<b>$1</b>");
       t = t.replace(/(^|[^*])\*(?!\s)([^*]+?)\*/g, "$1<i>$2</i>");
       t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
+      // Phase 2 — per-claim citation markers: [1] or [1, 2] → clickable superscripts mapped to the
+      // numbered sources footer. NUMERIC-only so real bracketed prose is never touched; degrades to
+      // nothing when the model emits no markers.
+      t = t.replace(/\[(\d{1,2}(?:\s*,\s*\d{1,2})*)\]/g, function (_, ns) {
+        return ns.split(/\s*,\s*/).map(function (n) { return '<sup class="maik-cite" data-cite="' + n + '" title="Show source ' + n + '">' + n + "</sup>"; }).join("");
+      });
       return t;
     }
-    var lines = String(md == null ? "" : md).replace(/\r/g, "").split("\n"), html = [], lt = null;
+    // Phase 2 — GFM pipe tables (UpToDate-style structured comparisons).
+    function isRow(s) { return /^\s*\|.*\|\s*$/.test(s); }
+    function isSep(s) { return /\|/.test(s) && /-{2,}/.test(s) && /^\s*\|?[\s:|-]+\|?\s*$/.test(s); }
+    function cells(s) { return s.trim().replace(/^\||\|$/g, "").split("|").map(function (c) { return c.trim(); }); }
+    var lines = String(md == null ? "" : md).replace(/\r/g, "").split("\n"), html = [], lt = null, i;
     function closeL() { if (lt) { html.push(lt === "ol" ? "</ol>" : "</ul>"); lt = null; } }
-    lines.forEach(function (ln) {
-      var m;
-      if (/^\s*#{1,6}\s+/.test(ln)) { closeL(); html.push("<div class='maik-h'>" + inline(ln.replace(/^\s*#{1,6}\s+/, "")) + "</div>"); return; }
-      if ((m = ln.match(/^\s*(?:[-*•])\s+(.*)/))) { if (lt !== "ul") { closeL(); html.push("<ul>"); lt = "ul"; } html.push("<li>" + inline(m[1]) + "</li>"); return; }
-      if ((m = ln.match(/^\s*\d+[.)]\s+(.*)/))) { if (lt !== "ol") { closeL(); html.push("<ol>"); lt = "ol"; } html.push("<li>" + inline(m[1]) + "</li>"); return; }
-      if (!ln.trim()) { closeL(); return; }
+    for (i = 0; i < lines.length; i++) {
+      var ln = lines[i], m;
+      if (isRow(ln) && i + 1 < lines.length && isSep(lines[i + 1])) {
+        closeL();
+        var head = cells(ln); i += 2; var rows = [];
+        while (i < lines.length && isRow(lines[i]) && !isSep(lines[i])) { rows.push(cells(lines[i])); i++; }
+        i--; // for-loop increments
+        var th = head.map(function (c) { return "<th>" + inline(c) + "</th>"; }).join("");
+        var tb = rows.map(function (r) { return "<tr>" + head.map(function (_, ci) { return "<td>" + inline(r[ci] || "") + "</td>"; }).join("") + "</tr>"; }).join("");
+        html.push('<div class="maik-tblwrap"><table class="maik-tbl"><thead><tr>' + th + "</tr></thead><tbody>" + tb + "</tbody></table></div>");
+        continue;
+      }
+      if (/^\s*#{1,6}\s+/.test(ln)) { closeL(); html.push("<div class='maik-h'>" + inline(ln.replace(/^\s*#{1,6}\s+/, "")) + "</div>"); continue; }
+      if ((m = ln.match(/^\s*(?:[-*•])\s+(.*)/))) { if (lt !== "ul") { closeL(); html.push("<ul>"); lt = "ul"; } html.push("<li>" + inline(m[1]) + "</li>"); continue; }
+      if ((m = ln.match(/^\s*\d+[.)]\s+(.*)/))) { if (lt !== "ol") { closeL(); html.push("<ol>"); lt = "ol"; } html.push("<li>" + inline(m[1]) + "</li>"); continue; }
+      if (!ln.trim()) { closeL(); continue; }
       closeL(); html.push("<p>" + inline(ln) + "</p>");
-    });
+    }
     closeL();
     return html.join("");
   }
@@ -3976,7 +4033,18 @@
     });
     return out;
   }
-  try { window.SMD_MaiK = { compose: maikCompose, css: maikCSS, assessmentHTML: maikAssessmentHTML, renderMarkdown: maikMarkdown, sourceTitles: maikSourceTitles }; } catch (e) {}
+  // Phase 2 — NUMBERED source list (single source of truth for both the prompt's cite list and the
+  // client footer, so [n] markers line up). Built from grounding + retrieved + treatment via the same
+  // human-title mapping as maikSourceTitles, de-duplicated in reading order.
+  function maikSourceList(pkg) {
+    if (!pkg) return [];
+    var chunks = [];
+    (pkg.grounding || []).forEach(function (g) { (g.knowledge || []).forEach(function (k) { chunks.push(k); }); });
+    (pkg.retrieved || []).forEach(function (c) { chunks.push(c); });
+    if (pkg.treatment && pkg.treatment.default && pkg.treatment.default.source) chunks.push({ source: { ref: pkg.treatment.default.source }, section: "management" });
+    return maikSourceTitles(chunks).map(function (t, i) { return { n: i + 1, title: t }; });
+  }
+  try { window.SMD_MaiK = { compose: maikCompose, css: maikCSS, assessmentHTML: maikAssessmentHTML, renderMarkdown: maikMarkdown, sourceTitles: maikSourceTitles, sourceList: maikSourceList }; } catch (e) {}
 
   /* ====================================================================== *
    * Phase 2 — LIVE differential inside the PRIMARY 5-step Advanced form.
