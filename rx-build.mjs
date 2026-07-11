@@ -1,16 +1,16 @@
-/* StewardMD — Prescription safety core (pure, unit-tested).
+/* StewardMD - Prescription safety core (pure, unit-tested).
  *
  * Maps a regimen (drug names, optionally with a dose) to prescription lines, taking
  * doses/brands from the deterministic Drug Index FIRST. It NEVER silently invents a
  * dose: a drug not in the Index (and without a caller-supplied dose) gets a null dose
  * and `unverified:true` so the UI flags it "⚠ confirm" and the doctor fills it in.
- * The prescriber reviews, edits and signs — this only assembles a safe draft.
+ * The prescriber reviews, edits and signs - this only assembles a safe draft.
  *
  * Node + browser: ESM. The browser controller dynamic-imports it (`import('/rx-build.mjs')`).
  */
 
 // Brand lists in the Drug Index include class abbreviations ("ppi","h2","laxative"…) as
-// search aliases — never print those as a brand.
+// search aliases - never print those as a brand.
 const CLASS_TOKENS = new Set([
   "ppi", "h2", "h2 blocker", "antiemetic", "laxative", "bulk-forming laxative", "prokinetic",
   "nsaid", "ssri", "snri", "opioid", "statin", "arb", "acei", "ccb", "beta blocker",

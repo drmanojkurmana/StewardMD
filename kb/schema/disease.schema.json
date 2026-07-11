@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "stewardmd/kb/disease.schema.json",
   "title": "StewardMD Disease (knowledge object)",
-  "description": "Disease KNOWLEDGE only — matching/scoring + reference content. Treatment recommendations live in a SEPARATE Treatment object (treatmentRef). The reasoning engine is generic over this schema: adding a disease is adding one of these files; the engine never changes. Designed to represent every Internal Medicine disease in Harrison without redesign.",
+  "description": "Disease KNOWLEDGE only - matching/scoring + reference content. Treatment recommendations live in a SEPARATE Treatment object (treatmentRef). The reasoning engine is generic over this schema: adding a disease is adding one of these files; the engine never changes. Designed to represent every Internal Medicine disease in Harrison without redesign.",
   "type": "object",
   "additionalProperties": false,
   "required": ["id", "name", "class", "matching", "provenance", "review", "version"],
@@ -10,12 +10,12 @@
     "id": { "type": "string", "pattern": "^[A-Za-z0-9_]+$", "description": "Stable universal disease key, preserved verbatim from the legacy engine (e.g. MENINGITIS infective, dka non-infective) so the engine swap is a drop-in. Never reused." },
     "legacyId": { "type": ["string", "null"], "description": "Original reasoning.js / SYNDROMES key if it differed; usually == id." },
     "name": { "type": "string" },
-    "aliases": { "type": "array", "items": { "type": "string" }, "description": "Synonyms / lay terms — also used for retrieval." },
+    "aliases": { "type": "array", "items": { "type": "string" }, "description": "Synonyms / lay terms - also used for retrieval." },
     "class": { "type": "string", "enum": ["infective", "non_infective"] },
     "system": { "type": "string", "description": "Organ system (free text; mapped to an organ tag by the engine's dzTag)." },
     "coding": {
       "type": "object", "additionalProperties": false,
-      "description": "Optional external coding — reserved for interoperability; nullable now.",
+      "description": "Optional external coding - reserved for interoperability; nullable now.",
       "properties": { "icd10": { "type": ["string", "null"] }, "icd11": { "type": ["string", "null"] }, "snomed": { "type": ["string", "null"] } }
     },
     "applicability": {
@@ -64,7 +64,7 @@
           "section": { "type": "string", "description": "Stable chunk id, e.g. overview | pathophysiology | clinical_pearls | pitfalls | mimics_note." },
           "text": { "type": "string" },
           "source": { "$ref": "#/$defs/source" },
-          "embedding": { "type": ["null"], "description": "Reserved — populated by the future RAG build step; must be null in authored files." }
+          "embedding": { "type": ["null"], "description": "Reserved - populated by the future RAG build step; must be null in authored files." }
         }
       }
     },
@@ -72,11 +72,11 @@
     "policyRef": { "type": ["string", "null"], "description": "Key into hospital PolicyOverlay objects (optional, user-selected)." },
     "calculatorRefs": { "type": "array", "items": { "type": "string" }, "description": "MEDCALC calculator ids to surface." },
     "icuModuleRefs": { "type": "array", "items": { "type": "string" }, "description": "ICU/clinical module ids (e.g. electrolytes)." },
-    "drugRefs": { "type": "array", "items": { "type": "string" }, "description": "Composition keys (Drug Index) relevant to this disease — links, never copies. The Drug Index stays the only pharmacology DB." },
+    "drugRefs": { "type": "array", "items": { "type": "string" }, "description": "Composition keys (Drug Index) relevant to this disease - links, never copies. The Drug Index stays the only pharmacology DB." },
     "provenance": {
       "type": "object", "additionalProperties": false, "required": ["primaryRef"],
       "properties": {
-        "primaryRef": { "type": "string", "description": "Primary disease reference — Harrison's by policy." },
+        "primaryRef": { "type": "string", "description": "Primary disease reference - Harrison's by policy." },
         "editions": { "type": "array", "items": { "type": "string" } }
       }
     },
@@ -85,7 +85,7 @@
     "contentHash": { "type": ["string", "null"], "description": "Set by the build step for change detection." },
     "enrichment": {
       "type": "object", "additionalProperties": true,
-      "description": "ADDITIVE reference enrichment, isolated from curated content (never overwrites it). Keyed by source so future re-imports replace only that source's block (idempotent, no duplication). Disease-KNOWLEDGE only — treatment is never sourced here.",
+      "description": "ADDITIVE reference enrichment, isolated from curated content (never overwrites it). Keyed by source so future re-imports replace only that source's block (idempotent, no duplication). Disease-KNOWLEDGE only - treatment is never sourced here.",
       "properties": {
         "harrison": {
           "type": "object", "additionalProperties": false,
@@ -104,7 +104,7 @@
             "severityClassification": { "type": ["string", "null"] },
             "references": { "type": "array", "items": { "type": "string" } },
             "crossLinks": { "type": "array", "items": { "type": "string" }, "description": "Related KB disease ids." },
-            "conflicts": { "type": "array", "items": { "type": "object" }, "description": "Where Harrison differs from curated content — both kept, attributed." },
+            "conflicts": { "type": "array", "items": { "type": "object" }, "description": "Where Harrison differs from curated content - both kept, attributed." },
             "importedAt": { "type": ["string", "null"] }, "contentHash": { "type": ["string", "null"] }
           }
         }

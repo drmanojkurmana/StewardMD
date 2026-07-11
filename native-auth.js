@@ -1,4 +1,4 @@
-/* StewardMD — native Google + Sign in with Apple (Capacitor).
+/* StewardMD - native Google + Sign in with Apple (Capacitor).
  * ---------------------------------------------------------------------------
  * Google blocks OAuth (popup AND redirect) inside embedded WebViews
  * ("disallowed_useragent"), so the web sign-in flow cannot work on native. This
@@ -7,7 +7,7 @@
  * credential into the app's EXISTING Firebase WEB SDK via signInWithCredential.
  * The web SDK's onAuthStateChanged → SMD_applyGoogleUser then applies the account
  * exactly like the web popup flow (gate dismissed, guest cases migrated, consent,
- * GHIS scoping) — a SINGLE auth state, no native/web split.
+ * GHIS scoping) - a SINGLE auth state, no native/web split.
  *
  * Apple Guideline 4.8: because Google sign-in is offered, Sign in with Apple is
  * offered too. Requires the plist (GoogleService-Info.plist), the Google URL
@@ -37,7 +37,7 @@
     });
   }
   // Apply the signed-in user to the app UI (dismisses the gate, migrates guest cases, etc.)
-  // — the same path the web popup uses. We call it explicitly rather than trusting only the
+  // - the same path the web popup uses. We call it explicitly rather than trusting only the
   // async onAuthStateChanged, so the gate reliably closes right after sign-in.
   function applyUser(u) {
     // SMD_applyGoogleUser writes the account (type "google", a name) even when the provider
@@ -55,7 +55,7 @@
   // ---- Native Google → app's Firebase web session -------------------------
   async function signInWithGoogle() {
     var P = plugin(); if (!P) throw new Error("Google sign-in is unavailable on this device.");
-    var F = await ensureFbAsync(); if (!F) throw new Error("Authentication is not ready yet — please try again.");
+    var F = await ensureFbAsync(); if (!F) throw new Error("Authentication is not ready yet - please try again.");
     var res = await P.signInWithGoogle();
     var cred = (res && res.credential) || {};
     var idToken = cred.idToken || (res && res.idToken);
@@ -72,14 +72,14 @@
   // nonce in credential.nonce, which Firebase needs to verify the identity token.
   async function signInWithApple() {
     var P = plugin(); if (!P) throw new Error("Sign in with Apple is unavailable on this device.");
-    var F = await ensureFbAsync(); if (!F) throw new Error("Authentication is not ready yet — please try again.");
+    var F = await ensureFbAsync(); if (!F) throw new Error("Authentication is not ready yet - please try again.");
     var res = await P.signInWithApple();
     var cred = (res && res.credential) || {};
     if (!cred.idToken) throw new Error("Apple returned no identity token: " + JSON.stringify(res || {}).slice(0, 180));
     var provider = new F.auth.OAuthProvider("apple.com");
     var ocred = provider.credential({ idToken: cred.idToken, rawNonce: cred.nonce });
     var out = await F.auth().signInWithCredential(ocred);
-    // Apple sends the name only on the FIRST authorization — capture it if given.
+    // Apple sends the name only on the FIRST authorization - capture it if given.
     try {
       var dn = res.user && res.user.displayName;
       if (dn && out && out.user && out.user.updateProfile && !out.user.displayName) await out.user.updateProfile({ displayName: dn });

@@ -52,33 +52,33 @@
     "Scrub typhus",
     "Acute gastroenteritis with dehydration"
   ],
-  "finalDiagnosis": "Dengue with warning signs (plasma leakage — rising hematocrit, ascites, pleural effusion, thrombocytopenia) per WHO 2009 classification",
+  "finalDiagnosis": "Dengue with warning signs (plasma leakage - rising hematocrit, ascites, pleural effusion, thrombocytopenia) per WHO 2009 classification",
   "citations": [
-    "Harrison's Principles of Internal Medicine 22e — Dengue and Other Arboviral Diseases",
+    "Harrison's Principles of Internal Medicine 22e - Dengue and Other Arboviral Diseases",
     "WHO Dengue Guidelines for Diagnosis, Treatment, Prevention and Control 2009",
     "WHO Comprehensive Guideline for Prevention and Control of Dengue and Dengue Haemorrhagic Fever (SEARO) 2011"
   ],
   "stewardship": null,
   "contraindications": [
-    "Avoid NSAIDs (ibuprofen, aspirin) — risk of bleeding and Reye syndrome-like complications",
-    "Avoid intramuscular injections — bleeding risk with thrombocytopenia",
+    "Avoid NSAIDs (ibuprofen, aspirin) - risk of bleeding and Reye syndrome-like complications",
+    "Avoid intramuscular injections - bleeding risk with thrombocytopenia",
     "Avoid unnecessary IV cannulation sites / minimize invasive procedures",
-    "Avoid aggressive crystalloid boluses beyond WHO-recommended graded fluid protocol — risk of fluid overload once leak phase resolves",
+    "Avoid aggressive crystalloid boluses beyond WHO-recommended graded fluid protocol - risk of fluid overload once leak phase resolves",
     "Avoid empirical antibiotics unless secondary bacterial infection or septic shock is confirmed/suspected"
   ],
   "edgeCases": [
-    "Rising hematocrit with falling platelet count in the defervescence window (afebrile phase) is the classic warning sign of plasma leakage — critical phase, not recovery, despite fever settling",
+    "Rising hematocrit with falling platelet count in the defervescence window (afebrile phase) is the classic warning sign of plasma leakage - critical phase, not recovery, despite fever settling",
     "IgM may be falsely negative early in illness (day 3-5); NS1 antigen is more sensitive in the first 5 days and should not be dismissed if IgM is negative",
     "Concurrent malaria/leptospirosis co-infection should be excluded in endemic-overlap regions before anchoring solely on dengue",
     "If hypotension/narrowed pulse pressure develops (<20 mmHg) this progresses to dengue shock syndrome (severe dengue) requiring urgent fluid resuscitation",
-    "This diagnosis (dengue with warning signs) is not itself a distinct id in the engine's disease list — it maps to DENGUE; severe/shock dengue would still map to DENGUE unless a SEPTIC_SHOCK phenotype supervenes",
-    "Careful fluid balance charting essential — over-resuscitation during the leak phase can precipitate pulmonary edema once reabsorption phase begins (~48-72h later)"
+    "This diagnosis (dengue with warning signs) is not itself a distinct id in the engine's disease list - it maps to DENGUE; severe/shock dengue would still map to DENGUE unless a SEPTIC_SHOCK phenotype supervenes",
+    "Careful fluid balance charting essential - over-resuscitation during the leak phase can precipitate pulmonary edema once reabsorption phase begins (~48-72h later)"
   ],
-  "expectedMaiK": "Flag this as dengue with warning signs (plasma leak) — rising hematocrit + thrombocytopenia + ascites/pleural effusion around defervescence is a critical-phase red flag; recommend close hemodynamic monitoring, graded IV fluids per WHO protocol, platelet/hematocrit trend monitoring, and avoidance of NSAIDs/IM injections; no antibiotics indicated unless bacterial superinfection suspected.",
+  "expectedMaiK": "Flag this as dengue with warning signs (plasma leak) - rising hematocrit + thrombocytopenia + ascites/pleural effusion around defervescence is a critical-phase red flag; recommend close hemodynamic monitoring, graded IV fluids per WHO protocol, platelet/hematocrit trend monitoring, and avoidance of NSAIDs/IM injections; no antibiotics indicated unless bacterial superinfection suspected.",
   "expectedNextQuestions": [
     "What is the trend in hematocrit and platelet count over the last 24-48 hours?",
     "Is there narrowing of pulse pressure or any evidence of shock (dengue shock syndrome)?",
-    "Any bleeding manifestations — gum bleeding, melena, hematemesis, menorrhagia?",
+    "Any bleeding manifestations - gum bleeding, melena, hematemesis, menorrhagia?",
     "Has she received any NSAIDs or aspirin during this illness?",
     "Is she able to tolerate oral fluids, or does she need IV fluid resuscitation per WHO graded protocol?",
     "Any co-existing conditions (pregnancy, diabetes, obesity, infancy/old age) that increase risk of severe dengue?"

@@ -3,9 +3,9 @@
 import { buildRxLines, pickBrand } from "./rx-build.mjs";
 
 const DB = [
-  { generic: "Lactulose", cls: "Osmotic laxative", brands: ["duphalac", "looz", "laxative"], dose: "15–30 mL PO BD–TDS" },
+  { generic: "Lactulose", cls: "Osmotic laxative", brands: ["duphalac", "looz", "laxative"], dose: "15-30 mL PO BD-TDS" },
   { generic: "Pantoprazole", cls: "Proton pump inhibitor (PPI)", brands: ["pan", "pantop", "ppi"], dose: "40 mg PO OD" },
-  { generic: "Psyllium husk", cls: "Bulk-forming laxative", brands: ["isabgol", "naturolax", "laxative"], dose: "1 tbsp in water OD–BD" }
+  { generic: "Psyllium husk", cls: "Bulk-forming laxative", brands: ["isabgol", "naturolax", "laxative"], dose: "1 tbsp in water OD-BD" }
 ];
 
 let pass = 0, fail = 0;
@@ -25,7 +25,7 @@ const lines = buildRxLines([
 
 const L = (drug) => lines.find(x => x.drug === drug || x.drug === drug + "");
 ok("advice line passthrough", lines[0].isAdvice === true && lines[0].dose == null && lines[0].source === "advice" && lines[0].unverified === false);
-ok("DB drug: trusted dose", L("Lactulose").dose === "15–30 mL PO BD–TDS" && L("Lactulose").source === "db" && L("Lactulose").unverified === false);
+ok("DB drug: trusted dose", L("Lactulose").dose === "15-30 mL PO BD-TDS" && L("Lactulose").source === "db" && L("Lactulose").unverified === false);
 ok("DB drug: brand from index", L("Lactulose").brand === "duphalac");
 ok("non-DB + regimen dose → unverified", L("Lubiprostone").dose === "8 mcg BD" && L("Lubiprostone").unverified === true && L("Lubiprostone").brand == null);
 ok("KB-sourced dose trusted", L("Pantoprazole").dose === "40 mg OD" && L("Pantoprazole").unverified === false);

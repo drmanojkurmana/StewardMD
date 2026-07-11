@@ -46,7 +46,7 @@ function ghisRequest(method, path, formData, opts = {}) {
         const newCookies = res.headers['set-cookie'].map(c => c.split(';')[0]).join('; ');
         if (newCookies) sessionCookies = newCookies;
       }
-      // Follow redirects (302/301) when asked — preserves cookies
+      // Follow redirects (302/301) when asked - preserves cookies
       if ([301, 302, 303, 307, 308].includes(res.statusCode) && maxRedirects > 0) {
         const loc = res.headers.location;
         res.resume(); // drain
@@ -202,7 +202,7 @@ function htmlToText(s) {
   return String(s)
     .replace(/<\s*(br|\/p|\/div|\/tr|\/h[1-6])\s*\/?>/gi, '\n')
     .replace(/<[^>]+>/g, '')
-    .replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&ndash;/gi, '–')
+    .replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&ndash;/gi, '-')
     .replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&quot;/gi, '"').replace(/&#39;/gi, "'")
     .replace(/\n{3,}/g, '\n\n').replace(/[ \t]{2,}/g, ' ').trim();
 }
@@ -284,7 +284,7 @@ const server = http.createServer(async (req, res) => {
 
     // GET /patients?patientId=&floorId=&deptId=&empId=
     if (path === '/patients') {
-      if (!sessionCookies) return send(res, { error: 'Not connected — set cookies first' }, 401);
+      if (!sessionCookies) return send(res, { error: 'Not connected - set cookies first' }, 401);
       const r = await getIPWorklist({
         patientId: url.searchParams.get('patientId') || '',
         floorId: url.searchParams.get('floorId') || '',

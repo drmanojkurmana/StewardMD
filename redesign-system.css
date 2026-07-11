@@ -1,11 +1,11 @@
 /* ============================================================================
-   StewardMD — Redesign Design System v1  (Phase 1 · Design Foundation)
+   StewardMD - Redesign Design System v1  (Phase 1 · Design Foundation)
    ----------------------------------------------------------------------------
    ADDITIVE + OPT-IN. This file introduces the redesign token layer and a
    reusable component library under the `rds-` namespace. It does NOT restyle
    any existing screen: every selector is `.rds-*` (or `body.dark .rds-*`), and
    the tokens are NEW names that ALIAS the app's existing base tokens
-   (index.html :root — --teal/--paper/--panel/--ink/--line/--slate/--mono/--sans
+   (index.html :root - --teal/--paper/--panel/--ink/--line/--slate/--mono/--sans
    + status ramps). Nothing here changes the current appearance of the classic
    engine, home, ICU, or any module. Later phases opt screens in by using these
    classes/tokens. Buildless: this file is copied verbatim into www/ by
@@ -14,7 +14,7 @@
    Accent + light/dark + the 7 appearance themes propagate automatically because
    the accent/surface tokens alias var(--teal)/var(--paper)/… which the existing
    theme system already remaps. Clinical SEVERITY tokens are deliberately
-   THEME-INVARIANT (fixed values + a body.dark override) — severity must never
+   THEME-INVARIANT (fixed values + a body.dark override) - severity must never
    change meaning per accent theme (clinical-safety).
 
    Severity names follow the task spec: critical · urgent · warning · stable ·
@@ -25,7 +25,7 @@
    ========================================================================== */
 
 /* Declared on `body` (NOT :root) so the var(--paper)/var(--teal)/… aliases resolve
-   against the app's dark override, which lives at `body.dark { --paper:… }` — a :root
+   against the app's dark override, which lives at `body.dark { --paper:… }` - a :root
    declaration would capture the html-level (always-light) base tokens and never flip. */
 body {
   /* ---- accent + surfaces: ALIAS existing base tokens so themes/dark flow through ---- */
@@ -259,7 +259,7 @@ body.dark {
 .rds-visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .rds-touch { min-width: 44px; min-height: 44px; }
 
-/* Focus ring — scoped to rds- interactive components only (never global). */
+/* Focus ring - scoped to rds- interactive components only (never global). */
 .rds-btn:focus-visible, .rds-chip:focus-visible, .rds-input:focus-visible,
 .rds-textarea:focus-visible, .rds-select:focus-visible, .rds-list-row:focus-visible,
 .rds-icon-btn:focus-visible { outline: 3px solid rgba(15,118,110,.55); outline-offset: 2px; }
@@ -273,7 +273,7 @@ body.dark {
 }
 
 /* ============================================================================
-   Redesign home shell (Phase 2 · boards 1f + 3a) — ACTIVE ONLY under #homeV2.rnav
+   Redesign home shell (Phase 2 · boards 1f + 3a) - ACTIVE ONLY under #homeV2.rnav
    (opt-in flag smd_redesign_nav / ?rnav=1). Reuses the base .v3 fullscreen flex
    container + the existing .v4-foot/.v4-maik footer styles from ui-v3.css.
    ========================================================================== */
@@ -328,7 +328,7 @@ body.dark {
 #homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); }
 
 /* ============================================================================
-   Phase 3 · Clinical-surface restyle — FLAG-GATED (html body.rds-on), token-level
+   Phase 3 · Clinical-surface restyle - FLAG-GATED (html body.rds-on), token-level
    only. No markup/JS/logic change; fully reversible (flag off). The `html` prefix
    lifts specificity above icu.js's runtime-injected rules so the remap wins in
    both light and dark. var(--rds-*)/var(--sev-*) auto-flip under body.dark.
@@ -401,7 +401,7 @@ html body.rds-on .mc-disc { border: 1px dashed var(--rds-line); border-radius: v
    Polish of the existing MaiK sheet (home.js #maikSheet). CSS only. The persistent
    AI badge, per-answer educational tag, sources, and the deterministic(teal)/AI two-
    block answer separation (reasoning.js .maik-det/.maik-ai/.maik-warn) are PRESERVED
-   — only radii/spacing/touch-targets adopt the design system. */
+   - only radii/spacing/touch-targets adopt the design system. */
 html body.rds-on #maikSheet { border-radius: var(--rds-r-sheet) var(--rds-r-sheet) 0 0; box-shadow: var(--rds-el-sheet); }
 html body.rds-on .maik-badge { background: var(--sev-info-bg); color: var(--sev-info-fg); border: 1px solid var(--sev-info-bd); font-weight: 700; }
 html body.rds-on .maik-cmp textarea { border-radius: var(--rds-r-ctl); border: 1.5px solid var(--rds-line); font-family: var(--rds-font); }
@@ -430,7 +430,7 @@ html body.rds-on .maik-chip { background: var(--rds-surface); color: var(--rds-i
 html body.rds-on .maik-edu { background: var(--rds-surface-2); }
 
 /* ============================================================================
-   Phase 3/4 · Remaining surfaces — FLAG-GATED restyle (CSS only, reversible).
+   Phase 3/4 · Remaining surfaces - FLAG-GATED restyle (CSS only, reversible).
    Post-boot surfaces use `html body.rds-on`; the onboarding gate (rendered before
    home sets body.rds-on) uses `html.rds-on` set by an early inline script.
    ========================================================================== */
@@ -472,7 +472,7 @@ html body.rds-on .dx-back { border-radius: var(--rds-r-ctl); min-height: 44px; c
 html body.rds-on .dx-disc, html body.rds-on .dx-discl, html body.rds-on .dx-disc-pill { color: var(--rds-muted); font-family: var(--rds-font); }
 html body.rds-on .dx-drug { font-family: var(--rds-mono); }
 
-/* --- 2b · Decision result (app.js #outputArea) — conservative: radius + type only,
+/* --- 2b · Decision result (app.js #outputArea) - conservative: radius + type only,
        severity coloring left to the engine's clinically-tuned classes --- */
 html body.rds-on #outputArea .decision-banner { border-radius: var(--rds-r); }
 html body.rds-on #outputArea .decision-why { font-family: var(--rds-font); line-height: 1.5; }
@@ -487,7 +487,7 @@ html body.rds-on .sb-drawer { background: var(--rds-surface); }
 html body.rds-on .sb-main-link, html body.rds-on .sb-subitem { min-height: 48px; border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
 html body.rds-on .sb-beta { background: var(--rds-primary-soft); color: var(--rds-primary); border-radius: var(--rds-r-pill); }
 
-/* --- 3b · Onboarding gate (index.html .splash-*) — html.rds-on (pre-boot) --- */
+/* --- 3b · Onboarding gate (index.html .splash-*) - html.rds-on (pre-boot) --- */
 html.rds-on .splash-continue-btn { border-radius: var(--rds-r-ctl); min-height: 50px; font-family: var(--rds-font); }
 html.rds-on .splash-disclaimer-gate { border-radius: var(--rds-r); }
 html.rds-on .splash-name { font-family: var(--rds-font); }
@@ -540,7 +540,7 @@ html body.rds-on .app-head .rds-icon { font-size: 22px; vertical-align: middle; 
 html body.rds-on #sbMenu .ic .rds-icon, html body.rds-on .sb-drawer .ic .rds-icon { font-size: 20px; color: var(--rds-primary); }
 html body.rds-on .app-head .dx-launch .rds-icon, html body.rds-on .app-head .my-cases-btn .rds-icon { margin-right: 5px; }
 
-/* FIX (gold317): sidebar rows had ragged icon/label alignment — the Material-Symbols glyph in
+/* FIX (gold317): sidebar rows had ragged icon/label alignment - the Material-Symbols glyph in
    .ic shrink-wraps to varying widths, so adjacent items' icons (and their labels) landed at
    different x. Pin every sidebar .ic to a fixed 24px slot with the glyph centred, so all labels
    align to one common left edge (rows are already display:flex; this only sizes the icon slot). */
@@ -549,7 +549,7 @@ html body.rds-on #sbMenu .ic, html body.rds-on .sb-drawer .ic {
   display: inline-flex; align-items: center; justify-content: center; text-align: center;
 }
 /* ROOT CAUSE of the ragged sidebar rows: home.js promotes some items to the top with
-   `[data-smd-top]{margin:0}`, but the redesign gives every other row `margin:2px 8px` — so the
+   `[data-smd-top]{margin:0}`, but the redesign gives every other row `margin:2px 8px` - so the
    promoted rows sat 8px to the LEFT of the rest, alternating. Give them the same margin so ALL
    rows (and their icons + labels) share one left edge. Higher specificity than the margin:0 rule. */
 html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
@@ -578,7 +578,7 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 #homeV2.rnav .rnav-tab-maik span { color: var(--rds-primary); line-height: 1; }
 
 /* ============================================================================
-   Home polish v3 — iOS/WebKit-ROBUST overrides (renders fine in Chromium but broke
+   Home polish v3 - iOS/WebKit-ROBUST overrides (renders fine in Chromium but broke
    on iPhone: grid `1fr` row-sizing + flex negative-margin raised tab are unreliable
    in iOS Safari). Use fixed heights + an inline (non-raised) MaiK circle instead.
    ========================================================================== */
@@ -608,8 +608,8 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 #homeV2.rnav .rnav-qa-btn > span, #homeV2.rnav .rnav-qc > span { display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.12; min-height: 2.24em; width: 100%; }
 
 /* FIX (gold316): the label-layout rule above (`.rnav-qa-btn > span`) unintentionally ALSO
-   matched the Material-Symbols ICON span — ric() renders <span class="rds-icon">, a direct
-   child — giving the icon width:100% + min-height:2.24em (~54px at its 24px font). Icon(54) +
+   matched the Material-Symbols ICON span - ric() renders <span class="rds-icon">, a direct
+   child - giving the icon width:100% + min-height:2.24em (~54px at its 24px font). Icon(54) +
    gap + label + padding overflowed the fixed 88px tile, so the label text spilled out the
    bottom of the box (Scan Meds / Dx Patient / Syndromes …). Pin the icon back to its natural
    glyph size; only the text label reserves the 2-line height. Higher specificity than `> span`. */

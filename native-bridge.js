@@ -1,4 +1,4 @@
-/* StewardMD — native (Capacitor) bridge.
+/* StewardMD - native (Capacitor) bridge.
  * ---------------------------------------------------------------------------
  * The app is bundled LOCALLY inside the iOS/Android apps, so its origin is
  * https://localhost (Capacitor). Relative "/api/*" calls would resolve to that
@@ -6,7 +6,7 @@
  * Cloudflare Functions host. CapacitorHttp (enabled in capacitor.config.json)
  * then proxies the request through native HTTP, bypassing browser CORS.
  *
- * On the WEB build (stewardmd.in) this file is a NO-OP — `native` is false, so
+ * On the WEB build (stewardmd.in) this file is a NO-OP - `native` is false, so
  * fetch is left untouched and same-origin "/api/*" works as before. Safe to load
  * everywhere from the single shared index.html.
  *
@@ -34,11 +34,11 @@
   // ── On-device Whisper (Clinical Dictation) models. The bytes are the official ggml quantised
   // Whisper weights (Hugging Face ggerganov/whisper.cpp, MIT); StewardMD RE-HOSTS them on its own
   // origin (never a runtime hotlink). The SHA-256 is PINNED here and verified NATIVELY before first
-  // use (mismatch → model-corrupted → re-download). Audio is NEVER uploaded — only this model file
+  // use (mismatch → model-corrupted → re-download). Audio is NEVER uploaded - only this model file
   // is fetched, once. Default is base multilingual q5_1 (~57 MB); tiny q5_1 (~31 MB) for low-end. ──
   var WHISPER_MODEL_HOST = "https://models.stewardmd.in/whisper";   // TODO(host): confirm R2 vs Pages origin before enabling in prod
   var WHISPER_MODELS = {
-    // Default: small English-only q5_1 (~181 MB) — best accuracy for accented (Indian) English +
+    // Default: small English-only q5_1 (~181 MB) - best accuracy for accented (Indian) English +
     // medical terms among the on-device options; English-only because Clinical Dictation is English-locked.
     "small.en-q5_1": { file: "ggml-small.en-q5_1.bin", sha256: "bfdff4894dcb76bbf647d56263ea2a96645423f1669176f4844a1bf8e478ad30", bytes: 190098681 },
     "base-q5_1": { file: "ggml-base-q5_1.bin", sha256: "422f1ae452ade6f30a004d7e5c6a43195e4433bc370bf23fac9cc591f01a8898", bytes: 59707625 },
@@ -63,7 +63,7 @@
   }
   // Wrap an HTML fragment into a standalone, print/PDF-friendly light-theme document.
   function buildHtmlDoc(fragment, title) {
-    var t = String(title || "StewardMD — Clinical decision");
+    var t = String(title || "StewardMD - Clinical decision");
     return '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
       '<meta name="viewport" content="width=device-width,initial-scale=1">' +
       '<title>' + t.replace(/[&<>]/g, function (c) { return c === "&" ? "&amp;" : c === "<" ? "&lt;" : "&gt;"; }) + '</title>' +
@@ -83,13 +83,13 @@
       if (P && P.Share && P.Share.share) { try { return P.Share.share(opts || {}); } catch (e) {} }
       return Promise.reject(new Error("share-unavailable"));
     },
-    // There is NO print plugin on iOS — share the case as text so the share sheet
+    // There is NO print plugin on iOS - share the case as text so the share sheet
     // can Save as PDF / Print / Markup. (Plain text; rich HTML export not available.)
     exportPdf: function (text, title) {
       return this.share({ title: title || "StewardMD", text: String(text == null ? "" : text), dialogTitle: title || "Save or share" });
     },
     // Export an HTML fragment as a fully-styled, self-contained page FILE and open the
-    // iOS share sheet ON THE FILE — which offers "Print" (→ pinch → Save as PDF),
+    // iOS share sheet ON THE FILE - which offers "Print" (→ pinch → Save as PDF),
     // "Save to Files", Books, Markup, Mail. This gives the whole expanded decision as a
     // real document (not plain text). Uses @capacitor/filesystem + @capacitor/share
     // (both first-party). Falls back to a stripped-text share if either is missing.
@@ -138,7 +138,7 @@
         return blob;
       });
     },
-    // On-device OCR via ML Kit text recognition. The IMAGE NEVER LEAVES THE DEVICE —
+    // On-device OCR via ML Kit text recognition. The IMAGE NEVER LEAVES THE DEVICE -
     // only recognized text is returned to JS. Resolves { text, lines:[string] }.
     ocr: function (dataUrl) {
       var P = plugins();
@@ -153,8 +153,8 @@
         return { text: (res && res.text) || lines.join("\n"), lines: lines };
       });
     },
-    // MaiK Scribe — native device speech-to-text (@capacitor-community/speech-recognition:
-    // iOS SFSpeechRecognizer / Android SpeechRecognizer). Audio stays on the device — only
+    // MaiK Scribe - native device speech-to-text (@capacitor-community/speech-recognition:
+    // iOS SFSpeechRecognizer / Android SpeechRecognizer). Audio stays on the device - only
     // text returns. Streams interim results via opts.onPartial; opts.onFinal on stop.
     // Throws SYNCHRONOUSLY if the plugin is absent so SMD_VOICE falls back to Web Speech / AI STT.
     transcribe: function (opts) {
@@ -166,7 +166,7 @@
       var self = this, last = "", done = false;
       // Session token: every transcribe() bumps it. Callbacks/timers left over from a PRIOR
       // session (the 450ms "stopped" finish, the 800ms stop fallback) check `current()` and
-      // no-op — otherwise a stale timer fires mid-way through the NEXT session and tears it
+      // no-op - otherwise a stale timer fires mid-way through the NEXT session and tears it
       // down (button dies after ~1s, native listeners orphaned). Repro: speak → stop → speak
       // again quickly. See git history for the singleton-state bug this guards against.
       var token = (self._token = (self._token || 0) + 1);
@@ -182,7 +182,7 @@
         if (opts.onFinal) opts.onFinal(String(txt != null ? txt : last));
       }
       self._finish = finish;
-      // IMPORTANT (Android): SpeechRecognizer auto-endpoints — text streams via the
+      // IMPORTANT (Android): SpeechRecognizer auto-endpoints - text streams via the
       // `partialResults` listener and the session ends via `listeningState:"stopped"`.
       // start() resolves IMMEDIATELY with nothing, so it must NOT be treated as the final
       // (doing so tore the listener down before any result arrived). iOS resolves start()
@@ -211,7 +211,7 @@
         if (!current()) return;
         var m = res && res.matches && res.matches[0];
         if (m != null) { last = String(m); finish(last); }   // iOS: start() carried the final result
-        // Android: res is empty — keep listening; finalize via listeningState / stop().
+        // Android: res is empty - keep listening; finalize via listeningState / stop().
       }).catch(function (e) {
         if (!current()) return;
         var msg = String((e && e.message) || e || "");
@@ -232,7 +232,7 @@
       var token = self._token;
       clearTimeout(this._finTimer);
       this._finTimer = setTimeout(function () {
-        if (self._token !== token) return;   // a newer session owns SMD_NATIVE now — leave it alone
+        if (self._token !== token) return;   // a newer session owns SMD_NATIVE now - leave it alone
         if (self._finish) self._finish(); else self._removeSpeechSub();
       }, 800);
     },
@@ -247,10 +247,10 @@
       this._speechSub = null; this._stateSub = null;
     },
 
-    // MaiK Scribe — CLINICAL DICTATION via the on-device Whisper plugin (@stewardmd/capacitor-whisper).
+    // MaiK Scribe - CLINICAL DICTATION via the on-device Whisper plugin (@stewardmd/capacitor-whisper).
     // A SEPARATE engine from transcribe() (SFSpeech): audio never leaves the device, and it NEVER
     // falls back to any cloud transcription. Throws SYNCHRONOUSLY when the plugin is absent (web, or
-    // Android — not built yet) so SMD_VOICE can offer Fast Dictation instead. Stop-to-transcribe:
+    // Android - not built yet) so SMD_VOICE can offer Fast Dictation instead. Stop-to-transcribe:
     // startTranscribe → (speak) → stopWhisper() runs inference natively → onFinal.
     // opts: { language?, model?, initialPrompt?, onPartial?, onFinal?, onError?, onStateChange?, onDownloadProgress? }
     transcribeWhisper: function (opts) {
@@ -344,7 +344,7 @@
 
   // ---- Native nav hardening: when a syndrome is opened from the Knowledge-Library
   // list (SB.openSyn) and the user then closes the stewardship console, return STRAIGHT
-  // to the home shell — never strand them on a lurking Clinical Reasoning overlay.
+  // to the home shell - never strand them on a lurking Clinical Reasoning overlay.
   // Only the LIST-opened path is forced home; the reasoning→stewardship path is left
   // untouched so "Select diagnosis → back" still returns to the differential. ----
   (function hardenSyndromeNav() {
@@ -408,12 +408,12 @@
 
   // Splash: launchAutoHide is false (see capacitor.config.json). The 35 app scripts
   // are `defer`, so the WebView does not paint the app's own boot splash until they
-  // all execute — hiding the native splash before that shows a BLACK unpainted WebView.
+  // all execute - hiding the native splash before that shows a BLACK unpainted WebView.
   // The KB (~4.8MB) is now lazy-loaded AFTER first paint (see index.html), so the app's
-  // own white branded loading splash (#smdBootSplash — logo + wordmark + progress + MaiK)
+  // own white branded loading splash (#smdBootSplash - logo + wordmark + progress + MaiK)
   // paints quickly. We hand off to it by hiding the native splash as soon as that white
   // splash has painted (DOMContentLoaded + double rAF), so the user sees the branded white
-  // splash — not a lingering navy native splash. Backgrounds are white (capacitor.config)
+  // splash - not a lingering navy native splash. Backgrounds are white (capacitor.config)
   // so any sub-frame gap is white, not black/navy. 'load' + a timeout are backstops so the
   // native splash can never get stuck even if the app scripts throw.
   var _splashHidden = false;
@@ -425,10 +425,10 @@
       if (P && P.SplashScreen) P.SplashScreen.hide();
     } catch (e) { /* no-op */ }
   }
-  // Hide the native splash on window 'load' — the only reliable signal that the WebView's
+  // Hide the native splash on window 'load' - the only reliable signal that the WebView's
   // content is actually COMPOSITED to screen. (rAF/DOMContentLoaded fire while the WebView
   // still paints behind the native splash, so hiding then reveals an un-composited black
-  // frame.) The native splash is now a WHITE branded splash (white bg + StewardMD logo — see
+  // frame.) The native splash is now a WHITE branded splash (white bg + StewardMD logo - see
   // Splash.imageset + LaunchScreen.storyboard), so the user sees white-branded → the white
   // #smdBootSplash (logo + progress + MaiK) → home, with no black/navy flash. The KB is
   // lazy-loaded after first paint, so 'load' now fires quickly. Timeout is a hard backstop.
@@ -442,7 +442,7 @@
   }
 
   // ---- Native /api transport. CapacitorHttp's fetch AUTO-patch proved unreliable here
-  // (patch-ordering vs. our wrapper) — relative "/api/*" calls leaked out as browser
+  // (patch-ordering vs. our wrapper) - relative "/api/*" calls leaked out as browser
   // CROSS-ORIGIN requests to stewardmd.in and died on the CORS preflight (the server
   // sends no CORS headers) → "Server not reachable" for GHIS login, MaiK AI/web-research,
   // and ICU vision. Fix: for /api/* on native, call the CapacitorHttp plugin EXPLICITLY

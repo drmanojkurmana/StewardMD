@@ -1,6 +1,6 @@
-/* StewardMD — MaiK Scribe: voice intake → AI extract → review → autofill.
+/* StewardMD - MaiK Scribe: voice intake → AI extract → review → autofill.
  * ===========================================================================
- * window.SMD_VOICE — a reusable capability shared by the ICU dashboard, MaiK, and the
+ * window.SMD_VOICE - a reusable capability shared by the ICU dashboard, MaiK, and the
  * Clinical Reasoning workspace. Speak → transcript → in-app AI extracts structured data
  * → clinician REVIEWS → fields/findings autofill. Nothing is auto-applied.
  *
@@ -21,7 +21,7 @@
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function blobToDataURL(b) { return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(r.result); }; r.onerror = rej; r.readAsDataURL(b); }); }
 
-  // Clinical Dictation (on-device Whisper) is gated behind a feature flag — OFF by default in
+  // Clinical Dictation (on-device Whisper) is gated behind a feature flag - OFF by default in
   // production (matches the smd_ai / smd_ghis_ward convention). When off, everything below is inert
   // and MaiK Scribe behaves EXACTLY as before (Fast Dictation only).
   function whisperFlagOn() { try { var v = localStorage.getItem("smd_whisper_clinical_dictation"); return v === "1" || v === "true"; } catch (e) { return false; } }
@@ -35,11 +35,11 @@
   var WHISPER_LANG = "en";
   var WHISPER_MODEL = "small.en-q5_1";   // default Clinical model key (must exist in native-bridge WHISPER_MODELS)
 
-  // Whisper `initial_prompt` — primes the decoder for Indian-English CLINICAL dictation so accented
+  // Whisper `initial_prompt` - primes the decoder for Indian-English CLINICAL dictation so accented
   // English + drug/organism/lab terms are recognised. Built by REUSE: a high-yield medical seed
   // (antibiotics/vasopressors/organisms/labs/units that are frequently misheard) plus the app's own
   // drug names from window.MEDDRUGS._list. Capped well under Whisper's ~224-token prompt budget so it
-  // biases without truncation. Pure hint — the doctor still edits the transcript before import.
+  // biases without truncation. Pure hint - the doctor still edits the transcript before import.
   function buildInitialPrompt() {
     var seed = [
       "piperacillin-tazobactam", "meropenem", "cefoperazone-sulbactam", "ceftriaxone", "cefepime",
@@ -74,7 +74,7 @@
   function listen(opts) {
     opts = opts || {};
     stop();
-    // CLINICAL DICTATION (on-device Whisper) — only when explicitly requested via engine:"clinical"
+    // CLINICAL DICTATION (on-device Whisper) - only when explicitly requested via engine:"clinical"
     // AND available (native plugin + flag). Never auto-falls-back to cloud; on failure it signals
     // "clinical-unavailable" so the UI can OFFER Fast Dictation. Fast path below is untouched.
     if (opts.engine === "clinical") {
@@ -89,12 +89,12 @@
           _active = { engine: "Clinical (on-device)", mode: "record", stop: (typeof wstop === "function") ? wstop : function () { try { window.SMD_NATIVE.stopWhisper && window.SMD_NATIVE.stopWhisper(); } catch (e) {} } };
           if (opts.onState) opts.onState("preparing", _active.engine);
           return _active;
-        } catch (e) { /* plugin threw (unavailable) — do NOT auto-cloud */ }
+        } catch (e) { /* plugin threw (unavailable) - do NOT auto-cloud */ }
       }
       if (opts.onError) opts.onError("clinical-unavailable");
       return null;
     }
-    // 1) Native device STT (default on iOS/Android) — audio never leaves the device.
+    // 1) Native device STT (default on iOS/Android) - audio never leaves the device.
     if (window.SMD_NATIVE && typeof window.SMD_NATIVE.transcribe === "function") {
       try {
         var stopFn = window.SMD_NATIVE.transcribe({ onPartial: opts.onPartial, onFinal: opts.onFinal, onError: opts.onError });
@@ -122,7 +122,7 @@
         return _active;
       } catch (e) { /* fall through */ }
     }
-    // 3) AI STT fallback — record mic, transcribe on stop via /api/ai/transcribe.
+    // 3) AI STT fallback - record mic, transcribe on stop via /api/ai/transcribe.
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder) {
       var chunks = [], mr = null, stream = null, stopped = false;
       _active = { engine: "AI", mode: "record", stop: function () { if (stopped) return; stopped = true; try { if (mr && mr.state !== "inactive") mr.stop(); } catch (e) {} } };
@@ -166,7 +166,7 @@
     var kindSel = target === "icu"
       ? '<div class="smdv-kinds">' + ICU_KINDS.map(function (k, i) { return '<button class="smdv-kind' + (i === 0 ? " on" : "") + '" data-kind="' + k[0] + '">' + esc(k[1]) + '</button>'; }).join("") + '</div>'
       : "";
-    // Fast/Clinical engine selector — shown ONLY when Whisper is available (flag on + native plugin).
+    // Fast/Clinical engine selector - shown ONLY when Whisper is available (flag on + native plugin).
     // Flag off / web ⇒ empty ⇒ MaiK Scribe is byte-for-byte unchanged (Fast only).
     var modeSel = whisperAvailable()
       ? '<div class="smdv-modes" role="tablist" aria-label="Dictation engine">' +
@@ -179,13 +179,13 @@
       '<div class="smdv-scrim" data-act="close"></div>' +
       '<div class="smdv-sheet" role="dialog" aria-modal="true" aria-label="MaiK Scribe voice intake">' +
         '<div class="smdv-hd"><span class="smdv-ttl">🎤 MaiK Scribe</span><button class="smdv-x" data-act="close" aria-label="Close">✕</button></div>' +
-        '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : target === "text" ? "Speak your question or notes — tap ✓ to drop the text into the chat." : "Describe your patient in plain speech — symptoms, signs, key numbers.") + '</div>' +
+        '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : target === "text" ? "Speak your question or notes - tap ✓ to drop the text into the chat." : "Describe your patient in plain speech - symptoms, signs, key numbers.") + '</div>' +
         modeSel +
         kindSel +
         '<button class="smdv-rec" id="smdvRec">🎤 Tap to speak</button>' +
         '<div class="smdv-eng" id="smdvEng"></div>' +
-        '<textarea class="smdv-ta" id="smdvTa" rows="4" placeholder="Your words appear here — you can edit before extracting."></textarea>' +
-        '<div class="smdv-disc">On-device speech stays private (only text is used). AI transcription/extraction sends audio/text to the server — the same as Photo scan. Nothing is applied until you review &amp; confirm.</div>' +
+        '<textarea class="smdv-ta" id="smdvTa" rows="4" placeholder="Your words appear here - you can edit before extracting."></textarea>' +
+        '<div class="smdv-disc">On-device speech stays private (only text is used). AI transcription/extraction sends audio/text to the server - the same as Photo scan. Nothing is applied until you review &amp; confirm.</div>' +
         '<button class="smdv-extract" id="smdvExtract" disabled>' + (target === "text" ? "✓ Use this text" : "Extract &amp; fill") + '</button>' +
         '<div class="smdv-review" id="smdvReview"></div>' +
       '</div>';
@@ -236,7 +236,7 @@
         engineMode = mm;
         [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x === b); });
         var hint = root.querySelector("#smdvModeHint");
-        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation — first use downloads a ~181 MB model. Better for long notes, accents & drug names." : "";
+        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation - first use downloads a ~181 MB model. Better for long notes, accents & drug names." : "";
       }
     });
 
@@ -260,15 +260,15 @@
         onError: function (err) {
           recording = false; setState("idle");
           if (err === "clinical-unavailable") {
-            engEl.textContent = "Clinical Dictation unavailable — switched to Fast. Tap to speak.";
+            engEl.textContent = "Clinical Dictation unavailable - switched to Fast. Tap to speak.";
             engineMode = "fast";
             [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x.getAttribute("data-mode") === "fast"); });
             return;
           }
           engEl.textContent =
             (err === "mic-denied" || err === "mic-permission-denied") ? "Microphone permission denied." :
-            err === "model-download-failed" ? "Model download failed — check your connection and tap to retry." :
-            (err === "model-corrupted" || err === "model-missing") ? "Clinical model unavailable — tap to re-download." :
+            err === "model-download-failed" ? "Model download failed - check your connection and tap to retry." :
+            (err === "model-corrupted" || err === "model-missing") ? "Clinical model unavailable - tap to re-download." :
             err === "insufficient-storage" ? "Not enough free storage for the model." :
             err === "no-voice-engine" ? "No speech engine available on this device." :
             "Voice error: " + err;
@@ -295,7 +295,7 @@
 
   function errMsg(e) {
     if (e === "ai-off") return "AI is not available on this build.";
-    if (e === "quota") return "AI usage limit reached — try again later.";
+    if (e === "quota") return "AI usage limit reached - try again later.";
     if (e === "server" || e === "no-ai") return "The extraction service is unavailable right now.";
     return "Couldn’t extract: " + (e || "unknown error");
   }
@@ -311,9 +311,9 @@
       var chips = keys.map(function (k) { return '<span class="smdv-chip" data-k="' + esc(k) + '">' + esc(labelOf[k] || k) + '<button class="smdv-chip-x" data-rm="' + esc(k) + '" aria-label="Remove">✕</button></span>'; }).join("");
       reviewEl.innerHTML =
         (pt && (pt.age || pt.sex) ? '<div class="smdv-pt">Patient: ' + esc([pt.age ? pt.age + "y" : "", pt.sex || ""].filter(Boolean).join(" ")) + '</div>' : "") +
-        '<div class="smdv-rv-h">Findings heard (' + keys.length + ') — tap ✕ to remove any that are wrong:</div>' +
+        '<div class="smdv-rv-h">Findings heard (' + keys.length + ') - tap ✕ to remove any that are wrong:</div>' +
         '<div class="smdv-chips">' + (chips || '<span class="smdv-muted">none</span>') + '</div>' +
-        (unmatched.length ? '<div class="smdv-rv-h">Heard but not matched — add by hand if needed:</div><div class="smdv-unm">' + unmatched.map(function (u) { return '<span class="smdv-unmatched">' + esc(u) + '</span>'; }).join("") + '</div>' : "") +
+        (unmatched.length ? '<div class="smdv-rv-h">Heard but not matched - add by hand if needed:</div><div class="smdv-unm">' + unmatched.map(function (u) { return '<span class="smdv-unmatched">' + esc(u) + '</span>'; }).join("") + '</div>' : "") +
         '<button class="smdv-apply" id="smdvApply"' + (keys.length ? "" : " disabled") + '>＋ Add ' + keys.length + ' finding' + (keys.length === 1 ? "" : "s") + ' to reasoning</button>';
       [].forEach.call(reviewEl.querySelectorAll("[data-rm]"), function (b) { b.addEventListener("click", function () { var k = b.getAttribute("data-rm"); keys = keys.filter(function (x) { return x !== k; }); render(); }); });
       var ap = reviewEl.querySelector("#smdvApply");
@@ -321,7 +321,7 @@
         var added = (window.DX && window.DX.addFindings) ? window.DX.addFindings(keys) : 0;
         if (opts && opts.onApply) { try { opts.onApply(keys, pt); } catch (e) {} }
         close();
-        try { (window.toast || function () {})("Added " + added + " finding" + (added === 1 ? "" : "s") + " — differential updated."); } catch (e) {}
+        try { (window.toast || function () {})("Added " + added + " finding" + (added === 1 ? "" : "s") + " - differential updated."); } catch (e) {}
       });
     }
     render();
@@ -334,7 +334,7 @@
     close();
     if (window.ICU && typeof window.ICU.reviewVoice === "function") window.ICU.reviewVoice(fields, kind);
     else if (opts && opts.onApply) opts.onApply(fields, kind);
-    else try { (window.toast || function () {})("Voice values captured — open the ICU dashboard to review."); } catch (e) {}
+    else try { (window.toast || function () {})("Voice values captured - open the ICU dashboard to review."); } catch (e) {}
   }
 
   /* ------------------------------ styles ------------------------------- */

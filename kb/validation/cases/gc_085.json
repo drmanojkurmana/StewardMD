@@ -41,18 +41,18 @@
   ],
   "finalDiagnosis": "Acute (uncomplicated, non-perforated) appendicitis with classic migratory right lower quadrant pain",
   "citations": [
-    "Harrison 22e — Acute Appendicitis and Peritonitis",
+    "Harrison 22e - Acute Appendicitis and Peritonitis",
     "American College of Surgeons / WSES Acute Appendicitis Guidelines 2020"
   ],
   "stewardship": "If managed operatively for uncomplicated appendicitis, a single preoperative prophylactic dose of a narrow-spectrum agent covering gram-negative enterics and anaerobes (e.g., a second-generation cephalosporin with anaerobic activity, or cefazolin plus metronidazole) is sufficient; postoperative antibiotics are not required for simple, non-perforated appendicitis. If non-operative (antibiotic-first) management is chosen or perforation/abscess is found, a longer empirical course targeting gram-negative enteric organisms and anaerobes is indicated per intra-abdominal infection stewardship principles, de-escalated once source control is achieved.",
   "contraindications": [
-    "Avoid opioid analgesia withheld solely to 'preserve' the exam — adequate analgesia does not obscure diagnostic accuracy and should not be delayed",
+    "Avoid opioid analgesia withheld solely to 'preserve' the exam - adequate analgesia does not obscure diagnostic accuracy and should not be delayed",
     "Avoid prolonged observation beyond 48 hours without surgical/imaging reassessment, as persistent unresolved symptoms increase perforation risk",
     "Avoid unnecessary broad-spectrum or prolonged antibiotic courses for uncomplicated, non-perforated appendicitis undergoing timely appendectomy"
   ],
   "edgeCases": [
     "Acute appendicitis is not represented as a discrete id in the current diagnosable-disease list (no dedicated APPENDICITIS entry); acceptableIds is therefore set to [] per rules, even though this is the textbook top diagnosis clinically",
-    "Retrocecal or pelvic appendix can present atypically with minimal anterior tenderness or with urinary/rectal symptoms — not present in this classic case but relevant for engine generalization",
+    "Retrocecal or pelvic appendix can present atypically with minimal anterior tenderness or with urinary/rectal symptoms - not present in this classic case but relevant for engine generalization",
     "In women of childbearing age this presentation mandates a pregnancy test and consideration of ectopic pregnancy/ovarian pathology; not applicable here (male patient)",
     "Temperature >38.3C or rigors would raise concern for perforation/abscess and should prompt urgent surgical reassessment rather than routine work-up"
   ],
@@ -111,7 +111,7 @@
     }
   },
   "regressionAssertions": [
-    "acceptableIds is empty (appendicitis not a discrete engine id in the current disease list) — top-1 correctness not scored against acceptableIds for this case",
+    "acceptableIds is empty (appendicitis not a discrete engine id in the current disease list) - top-1 correctness not scored against acceptableIds for this case",
     "differential surfaced includes at least one of the intra-abdominal surgical/GI emergency ids (e.g., bowel_obstruction, mesenteric_ischemia, pancreatitis)",
     "confidence >= expectedConfidence.min when classic migratory RLQ pain pattern with McBurney's/Rovsing's findings is present",
     "expectedMaiK commentary references migratory pain pattern, McBurney's point/Rovsing's sign, and surgical (not primarily antimicrobial) management",

@@ -1,5 +1,5 @@
 /* ============================================================================
-   StewardMD — Features & How-to Guide (sidebar overlay)
+   StewardMD - Features & How-to Guide (sidebar overlay)
    A scannable, mobile-first reference of everything the app can do and how to
    use it. Opened from the sidebar: ✨ Features & How-to Guide.
    ========================================================================== */
@@ -8,26 +8,26 @@
 
   var SECTIONS = [
     { h: "🧠 Clinical Reasoning Engine (flagship)", items: [
-      { n: "Live differential diagnosis", d: "Open <b>🧠 Clinical Reasoning</b> from the sidebar, or tap <b>🧠 Reasoning</b> in the header. The differential builds and re-ranks live as you add findings — no page reloads." },
+      { n: "Live differential diagnosis", d: "Open <b>🧠 Clinical Reasoning</b> from the sidebar, or tap <b>🧠 Reasoning</b> in the header. The differential builds and re-ranks live as you add findings - no page reloads." },
       { n: "Progressive, consultant-style workflow", d: "Add <b>General findings</b> → pick the <b>involved system</b> → choose its <b>common findings</b> → tap <b>▼ Show more</b> for rarer ones. Mirrors bedside history-taking instead of one huge list." },
       { n: "Smart search & next-finding suggestions", d: "Use 🔍 <b>Search findings</b> to jump to any symptom/sign/lab. After each finding, <b>💡 Suggested next findings</b> recommends the highest-yield questions to ask next." },
-      { n: "Two-section differential", d: "Diagnoses are split into 🔴 <b>Infectious</b> and 🟢 <b>Non-infectious</b> cards, each with a <b>Clinical Confidence Score (0–100)</b> — a transparent weighted score, not a statistical probability." },
+      { n: "Two-section differential", d: "Diagnoses are split into 🔴 <b>Infectious</b> and 🟢 <b>Non-infectious</b> cards, each with a <b>Clinical Confidence Score (0-100)</b> - a transparent weighted score, not a statistical probability." },
       { n: "Consultant reasoning, not symptom-counting", d: "The engine detects the <b>dominant organ system</b>, weights disease-defining findings (neck stiffness ≫ fever), and uses positive, contradictory and missing evidence to raise or lower confidence." },
       { n: "Every card explains itself", d: "Expand a card for <b>Supporting / Contradictory / Missing</b> findings, <b>Why this</b>, <b>Why not higher</b>, <b>red flags</b>, <b>suggested investigations</b>, and a <b>confidence trail</b> showing how the score moved." },
       { n: "Clinical Information Threshold", d: "To avoid a huge list after one vague symptom, the differential appears only once you have <b>≥3 meaningful findings</b> (or one highly specific finding). Until then it prompts for more information." },
       { n: "Antibiotic gate", d: "Before any antibiotic is suggested, the case is graded <b>Infection very likely → likely → possible → unlikely → non-infectious favoured</b>. Antibiotics surface only when infection genuinely leads (with sepsis & febrile-neutropenia safety rules)." },
-      { n: "Related bedside tools", d: "When relevant, a diagnosis shows one-tap tools — e.g. shock → vasopressor + ICU dashboard, GI bleed → PPI infusion, DKA → insulin, stroke → A2DS2 score." },
-      { n: "Select this diagnosis", d: "Tap <b>Select this diagnosis</b> on any card to open the full StewardMD management page (you stay in control — the engine supports, never replaces, your judgment)." }
+      { n: "Related bedside tools", d: "When relevant, a diagnosis shows one-tap tools - e.g. shock → vasopressor + ICU dashboard, GI bleed → PPI infusion, DKA → insulin, stroke → A2DS2 score." },
+      { n: "Select this diagnosis", d: "Tap <b>Select this diagnosis</b> on any card to open the full StewardMD management page (you stay in control - the engine supports, never replaces, your judgment)." }
     ]},
     { h: "🔬 Advanced Reasoning Workspace (sidebar)", items: [
       { n: "Free-text case entry", d: "Open the sidebar <b>🧠 Clinical Reasoning</b> and type a plain-language vignette (e.g. “65M fever, neck stiffness, photophobia, drowsy”). Tap <b>✨ Extract findings</b> and the engine builds the differential." },
       { n: "Compare diagnoses side-by-side", d: "Tap the ⚖ button on up to 3 cards to compare their score, supporting, contradictory and missing findings in one grid." },
       { n: "Confidence timeline", d: "The workspace logs each finding you add and the leading diagnosis's confidence at that step, with ▲/▼ deltas." },
       { n: "Save · Continue · Export · Print", d: "Save a reasoning session to revisit later, reload saved sessions, copy a full summary to the clipboard, or print it." },
-      { n: "One synchronised engine", d: "Findings stay in sync between the header wizard and the sidebar workspace — start in one, continue in the other." }
+      { n: "One synchronised engine", d: "Findings stay in sync between the header wizard and the sidebar workspace - start in one, continue in the other." }
     ]},
     { h: "💊 Antimicrobial Stewardship", items: [
-      { n: "Syndrome decision console", d: "From a selected diagnosis (or 'New clinical decision'), get empiric + definitive therapy, likely organisms, a coverage matrix, doses, route, duration, de-escalation and stewardship notes — with guideline references." },
+      { n: "Syndrome decision console", d: "From a selected diagnosis (or 'New clinical decision'), get empiric + definitive therapy, likely organisms, a coverage matrix, doses, route, duration, de-escalation and stewardship notes - with guideline references." },
       { n: "Hospital Antimicrobial Policy", d: "Pick your hospital at the top of the reasoning screen. <b>GIMSR</b> policy (HIC-3e 2024) is built in; recommendations show a <b>Recommendation Source</b> badge with the GIMSR logo, plus ICMR/IDSA secondary references." },
       { n: "AWaRe classification", d: "Antibiotics are flagged <b>Watch</b> or <b>Reserve · AMS approval</b> per the WHO/GIMSR AWaRe lists, to support responsible prescribing." },
       { n: "Treatment-failure / escalation wizard", d: "Enter the current drug, dose and duration to get an escalation/de-escalation recommendation based on resistance and guidelines." }
@@ -45,9 +45,9 @@
       { n: "A2DS2 stroke score", d: "Stroke-associated pneumonia risk." }
     ]},
     { h: "📂 Cases, search & reference", items: [
-      { n: "My Cases", d: "Header 📂 <b>My Cases</b> — save a clinical decision and reopen it later with all findings and the full recommendation restored." },
-      { n: "Search", d: "Header 🔍 — search across syndromes, drugs and calculators; jump straight to any tool." },
-      { n: "Guidelines library", d: "Sidebar → Reference — links to Surviving Sepsis, IDSA, ATS/IDSA, ICMR, WHO, CLSI, GOLD, NICE, AWaRe and more, plus the ICMR 2024 antibiogram." }
+      { n: "My Cases", d: "Header 📂 <b>My Cases</b> - save a clinical decision and reopen it later with all findings and the full recommendation restored." },
+      { n: "Search", d: "Header 🔍 - search across syndromes, drugs and calculators; jump straight to any tool." },
+      { n: "Guidelines library", d: "Sidebar → Reference - links to Surviving Sepsis, IDSA, ATS/IDSA, ICMR, WHO, CLSI, GOLD, NICE, AWaRe and more, plus the ICMR 2024 antibiogram." }
     ]},
     { h: "⚙️ App & display", items: [
       { n: "Dark / light mode", d: "Toggle the sun/moon button in the header (top-right). Your choice is remembered." },
@@ -55,7 +55,7 @@
     ]}
   ];
 
-  var SAFETY = "StewardMD is clinical decision support — it supports, but does not replace, your clinical judgment. Nothing it shows is a confirmed diagnosis. Verify every dose, drug and recommendation against your patient and local policy. Medical content is pending clinician sign-off.";
+  var SAFETY = "StewardMD is clinical decision support - it supports, but does not replace, your clinical judgment. Nothing it shows is a confirmed diagnosis. Verify every dose, drug and recommendation against your patient and local policy. Medical content is pending clinician sign-off.";
 
   var root = null;
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}

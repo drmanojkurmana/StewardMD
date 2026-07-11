@@ -1,10 +1,10 @@
-/* StewardMD — Clinical Vocabulary Registry (window.SMD_VOCAB)
+/* StewardMD - Clinical Vocabulary Registry (window.SMD_VOCAB)
  *
  * A CURATED, deterministic, offline finding vocabulary for the ICU complaint/finding autocomplete
  * picker. It is DELIBERATELY SEPARATE from disease scoring: it maps clinician language → EXISTING
  * canonical engine finding IDs where they exist (so a picked chip lines up with the reasoning
  * engine's vocabulary), and marks concepts the engine does not yet score as inReasoning:false. It
- * NEVER changes scoring, ranking, or any disease signature — it is search + display only.
+ * NEVER changes scoring, ranking, or any disease signature - it is search + display only.
  *
  * Entry: { id, label, cid|cids, group, sys, ws:[...], red, syn:[...] }
  *   id     picker id (stable); label = display; cid = canonical engine finding id (reuse) or null;
@@ -12,7 +12,7 @@
  *   group  Symptoms | Signs | Red flags | Vitals | Labs | Imaging | History
  *   sys    body-system tag (display helper): Neuro/Cardiac/Resp/GI/Hepatobiliary/Renal-GU/ENT/Eye/OBGYN/General
  *   ws     workspaces where it is prioritised (im/surgery/ent/ophthalmology/obgyn/urology). Empty = broadly relevant.
- *   red    emergency red flag — always allowed in every workspace.
+ *   red    emergency red flag - always allowed in every workspace.
  *   syn    synonyms / abbreviations / doctor shorthand / typo-prone forms (all lowercase).
  */
 (function () {
@@ -129,7 +129,7 @@
     { id: "lactateElevated", label: "Raised lactate", cid: "lactateElevated", group: "Labs", sys: "General", ws: [IM], red: true, syn: ["raised lactate", "high lactate", "lactataemia", "elevated lactate"] },
     { id: "renalImpairment", label: "Raised creatinine / renal impairment", cid: "renalImpairment", group: "Labs", sys: "Renal-GU", ws: [IM, URO], syn: ["raised creatinine", "high creatinine", "renal impairment", "aki", "acute kidney injury", "deranged rft"] },
 
-    // ===== Imaging (not yet scored — inReasoning:false) =====
+    // ===== Imaging (not yet scored - inReasoning:false) =====
     { id: "consolidation", label: "Consolidation on chest imaging", cid: "consolidation", group: "Imaging", sys: "Resp", ws: [IM], syn: ["consolidation", "lobar consolidation", "infiltrate", "opacity chest"] },
     { id: "pleuralEffusion", label: "Pleural effusion", cid: null, group: "Imaging", sys: "Resp", ws: [IM, SURG], syn: ["pleural effusion", "effusion chest", "fluid in chest"] },
     { id: "pneumothorax", label: "Pneumothorax", cid: null, group: "Imaging", sys: "Resp", ws: [IM, SURG], red: true, syn: ["pneumothorax", "collapsed lung", "air in pleura"] },

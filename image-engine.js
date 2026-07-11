@@ -1,18 +1,18 @@
-/* StewardMD — Image Engine chooser for ICU Snapshot image processing.
+/* StewardMD - Image Engine chooser for ICU Snapshot image processing.
  * ===========================================================================
  * Two clinician-controlled engines, one central router (no duplicated branching):
- *   • Private Device OCR · Free — native Apple Vision (iOS) / ML Kit bridge (Android where
+ *   • Private Device OCR · Free - native Apple Vision (iOS) / ML Kit bridge (Android where
  *     available), else local OCR fallback. Image NEVER leaves the device. Best for labelled
  *     documents (labs, ABG, medication lists, flowsheets); labels + reading order preserved.
- *   • AI Vision · Pro — sends the ORIGINAL image { image, kind } to the existing StewardMD AI
- *     vision endpoint (server understands spatial layout — best for monitor/ventilator). May
+ *   • AI Vision · Pro - sends the ORIGINAL image { image, kind } to the existing StewardMD AI
+ *     vision endpoint (server understands spatial layout - best for monitor/ventilator). May
  *     process PHI → explicit consent required before the first upload / whenever unsaved.
  *
  * Preference: localStorage "stewardmd.imageEngine" ∈ {device, ai} (default device).
  * Consent:    localStorage "stewardmd.aiVisionPhiConsent" = "true".
  * Central API: window.SMD_IMAGE_ENGINE.process({ image, kind, engineOverride })
  *   resolves { mode:"fields", fields, lines, engine } | { mode:"lines", lines, engine }
- *            | { cancelled:true }  — the ingest shape the ICU review already consumes.
+ *            | { cancelled:true }  - the ingest shape the ICU review already consumes.
  * Server code is NOT changed; both { image, kind } and { text, kind } already supported.
  * ======================================================================== */
 (function () {
@@ -32,7 +32,7 @@
   // AI Vision availability (matches reasoning.js visionAiOn; default on = current beta behavior).
   function aiAvailable() { try { return lget("smd_ai_vision") !== "0"; } catch (e) { return true; } }
   function deviceOcrAvailable() { return !!(window.SMD_NATIVE && window.SMD_NATIVE.ocr); }
-  // Pro entitlement — delegates to the app's single source of truth (SMD_PRO). For LABELLING
+  // Pro entitlement - delegates to the app's single source of truth (SMD_PRO). For LABELLING
   // only here (AI Vision never hard-blocks; consent is the real gate). Beta/test allowed.
   function isPro() {
     try { if (window.SMD_PRO && window.SMD_PRO.isPro) return window.SMD_PRO.isPro(); } catch (e) {}
@@ -243,7 +243,7 @@
     var msg = reason === "quota" ? "AI Vision is temporarily over its usage limit. Please try again shortly."
       : reason === "entitlement" ? "AI Vision requires StewardMD Pro."
       : reason === "ai-off" ? "AI Vision is turned off. You can use Private Device OCR instead."
-      : !online() ? "You appear to be offline — AI Vision needs a connection. Private Device OCR works offline."
+      : !online() ? "You appear to be offline - AI Vision needs a connection. Private Device OCR works offline."
       : "AI Vision couldn’t process this image right now.";
     var canRetry = reason !== "entitlement" && reason !== "ai-off" && online();
     return fallbackDialog(msg, { ai: canRetry, device: deviceOcrAvailable(), retryLabel: "Try AI Vision again" }).then(function (f) {
@@ -287,7 +287,7 @@
     var o = overlay(
       '<div class="ie-h">Privacy &amp; processing</div>' +
       '<div class="ie-sub"><b>Private Device OCR</b> reads the image entirely on your device (Apple Vision / ML Kit). The image and its text never leave the device.<br><br>' +
-      '<b>AI Vision</b> sends the original clinical image to StewardMD’s secure AI processing service so it can interpret screen layouts. The image may contain patient information — only use it where your institution’s privacy policy permits.</div>' +
+      '<b>AI Vision</b> sends the original clinical image to StewardMD’s secure AI processing service so it can interpret screen layouts. The image may contain patient information - only use it where your institution’s privacy policy permits.</div>' +
       '<div class="ie-sub">AI Vision consent: <b>' + (consented ? "granted" : "not granted") + "</b>.</div>" +
       '<div class="ie-row" style="flex-direction:column">' +
       (consented ? '<button class="ie-btn sec" id="ieRevoke">Revoke AI Vision consent</button>' : "") +

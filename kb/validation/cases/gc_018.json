@@ -53,26 +53,26 @@
   ],
   "finalDiagnosis": "Hyperosmolar hyperglycaemic state (HHS)",
   "citations": [
-    "Harrison's Principles of Internal Medicine 22e — Diabetes Mellitus: Complications (Hyperglycemic Crises)",
+    "Harrison's Principles of Internal Medicine 22e - Diabetes Mellitus: Complications (Hyperglycemic Crises)",
     "ADA Standards of Care in Diabetes 2024",
     "ADA/Kitabchi Hyperglycemic Crises Consensus Statement 2009"
   ],
   "stewardship": null,
   "contraindications": [
-    "Avoid rapid correction of serum sodium/osmolality — risk of cerebral edema, especially in elderly",
-    "Avoid bolus insulin before adequate fluid resuscitation — risk of precipitous osmotic shift and cardiovascular collapse",
-    "Avoid empirical antibiotics in absence of identified infective source — no evidence of infection here"
+    "Avoid rapid correction of serum sodium/osmolality - risk of cerebral edema, especially in elderly",
+    "Avoid bolus insulin before adequate fluid resuscitation - risk of precipitous osmotic shift and cardiovascular collapse",
+    "Avoid empirical antibiotics in absence of identified infective source - no evidence of infection here"
   ],
   "edgeCases": [
-    "No significant ketosis or acidosis despite profound hyperglycaemia (glucose >600 mg/dL, pH >7.30, bicarbonate >18, minimal ketones) — classic HHS rather than DKA, though mixed DKA/HHS pictures occur in up to a third of cases",
+    "No significant ketosis or acidosis despite profound hyperglycaemia (glucose >600 mg/dL, pH >7.30, bicarbonate >18, minimal ketones) - classic HHS rather than DKA, though mixed DKA/HHS pictures occur in up to a third of cases",
     "Elderly patients with HHS often lack a clear precipitant and may present with an insidious, several-day prodrome of altered mental status rather than acute presentation",
-    "Corrected sodium is markedly elevated despite a 'normal' measured sodium, reflecting the dilutional effect of severe hyperglycaemia — must calculate corrected Na to appreciate true free-water deficit",
+    "Corrected sodium is markedly elevated despite a 'normal' measured sodium, reflecting the dilutional effect of severe hyperglycaemia - must calculate corrected Na to appreciate true free-water deficit",
     "HHS is not present in the provided diagnosable-disease list, so acceptableIds is set to [] even though this is the correct clinical diagnosis; DKA (dka) is included as the closest listed differential concept but is not a correct top-1 for this presentation",
     "Mortality of HHS (10-20%) exceeds that of DKA and is driven more by underlying precipitant/comorbidity and age than by the metabolic derangement itself"
   ],
   "expectedMaiK": "MaiK should flag profound hyperglycaemia with markedly elevated effective osmolality and corrected sodium but absent significant ketosis/acidosis as consistent with HHS rather than DKA, emphasize cautious fluid resuscitation before insulin, and prompt a search for an occult precipitant (infection, ischemia, medication non-adherence) despite a currently unremarkable septic/vascular workup.",
   "expectedNextQuestions": [
-    "What precipitated this episode — infection, myocardial ischemia, stroke, medication changes, or reduced access to fluids?",
+    "What precipitated this episode - infection, myocardial ischemia, stroke, medication changes, or reduced access to fluids?",
     "What is the calculated effective serum osmolality and corrected sodium, and how rapidly is osmolality being corrected?",
     "Is there any biochemical or clinical evidence of concurrent ketoacidosis (mixed DKA/HHS)?",
     "What is the estimated free-water deficit and planned rate of fluid replacement given her age and cardiac status?",
@@ -145,12 +145,12 @@
       {
         "id": "hhs",
         "tier": "A-idfix",
-        "rationale": "Same diagnosis (HHS) — acceptableId used a non-engine id; engine correctly says hhs."
+        "rationale": "Same diagnosis (HHS) - acceptableId used a non-engine id; engine correctly says hhs."
       }
     ]
   },
   "regressionAssertions": [
-    "top-1 diagnosis output should correspond conceptually to HHS (not present in disease list, so acceptableIds intentionally empty — flag as known gap)",
+    "top-1 diagnosis output should correspond conceptually to HHS (not present in disease list, so acceptableIds intentionally empty - flag as known gap)",
     "differential should include dka as top-3 consideration given overlapping hyperglycaemic crisis picture",
     "confidence >= 70",
     "system should NOT recommend empirical antibiotics given negative infective workup",

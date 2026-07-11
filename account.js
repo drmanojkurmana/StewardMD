@@ -1,10 +1,10 @@
-/* StewardMD — unified account layer (additive; NEVER edits the minified app.js).
+/* StewardMD - unified account layer (additive; NEVER edits the minified app.js).
  * ---------------------------------------------------------------------------
  * Fixes two structural account problems:
- *   1) Provider mislabel — app.js stores type:"google" for EVERY provider, so Apple
+ *   1) Provider mislabel - app.js stores type:"google" for EVERY provider, so Apple
  *      sign-ins showed as "Google". We enrich the stored account with the real provider
  *      (from Firebase providerData) and expose window.SMD_ACCOUNT as the source of truth.
- *   2) Orphaned cases — saved cases are keyed by u_<email>, which is empty for Apple
+ *   2) Orphaned cases - saved cases are keyed by u_<email>, which is empty for Apple
  *      Hide-My-Email and changes across guest/provider, so cases vanished. We re-anchor
  *      ownership to the STABLE Firebase UID (mirroring ghis-ward.js) by normalizing the
  *      key SMD_CASES stores under, and migrate existing buckets so nothing is lost.
@@ -53,8 +53,8 @@
   /* -------- Pro entitlement (single source of truth) --------
    * Real entitlement = Firebase custom claim pro===true (set server-side). Until billing
    * exists we ALSO grant Pro via:
-   *   • BETA_PRO_ALL — every signed-in user is Pro (so the team can test Pro features), and
-   *   • TEST_PRO_EMAILS — a named allowlist that stays Pro even after BETA_PRO_ALL is off.
+   *   • BETA_PRO_ALL - every signed-in user is Pro (so the team can test Pro features), and
+   *   • TEST_PRO_EMAILS - a named allowlist that stays Pro even after BETA_PRO_ALL is off.
    * ⚠️ TESTING ONLY: set BETA_PRO_ALL = false before launch and rely on the claim/allowlist. */
   var BETA_PRO_ALL = true;
   var TEST_PRO_EMAILS = ["drmanojkurmana@gmail.com", "northstar201b@gmail.com", "mkkmanojkumar0@gmail.com"];
@@ -102,7 +102,7 @@
   // Local-FIRST with cloud mirror. Firestore is unreliable inside the WKWebView (and the
   // app's getAll doesn't fall back to local on an empty/no-db cloud read), so saved cases
   // could vanish. We (a) always mirror saves to local, (b) merge local into every getAll,
-  // and (c) apply delete/clear to both — so cases reliably save + show, while cloud still
+  // and (c) apply delete/clear to both - so cases reliably save + show, while cloud still
   // syncs opportunistically when it works. arg[0] is always the ownership key → normalize to uid.
   function wrapCases() {
     var real = window.SMD_CASES;
@@ -152,7 +152,7 @@
       // Guest→account upgrade feedback: how many were carried in from other buckets.
       if (_movedIn > 0) { try { (window.toast || function () {})(_movedIn + (_movedIn === 1 ? " case" : " cases") + " moved to your account"); } catch (e) {} }
       // Signed-in users read from Firestore (users/<uid>/cases), so also PUSH the merged
-      // cases to the cloud bucket (best-effort) — else the cloud read returns empty and the
+      // cases to the cloud bucket (best-effort) - else the cloud read returns empty and the
       // migrated local cases wouldn't surface. Idempotent: runs once per uid (flag below).
       if (keep.length && _realSave && fbUser()) {
         keep.forEach(function (c) { try { _realSave(u, true, c, function () {}); } catch (e) {} });

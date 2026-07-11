@@ -1,6 +1,6 @@
 {
   "id": "tb_dr_regimens",
-  "title": "Tuberculosis treatment pathways — first-line, drug-resistant, and alternative regimens",
+  "title": "Tuberculosis treatment pathways - first-line, drug-resistant, and alternative regimens",
   "primarySource": {
     "docId": "ntep_drtb_2024",
     "label": "National Guidelines for Management of Drug-Resistant TB (NTEP, Nov 2024)",
@@ -19,7 +19,7 @@
       "priority": 5
     }
   ],
-  "policyNote": "India-facing: NTEP is highest precedence; WHO is comparative/reference. Paraphrased from cited sources; verify weight-band dosing against the current NTEP release before prescribing. DST context is required before any drug-resistant regimen — never select a DR-TB regimen because 'TB' alone was chosen.",
+  "policyNote": "India-facing: NTEP is highest precedence; WHO is comparative/reference. Paraphrased from cited sources; verify weight-band dosing against the current NTEP release before prescribing. DST context is required before any drug-resistant regimen - never select a DR-TB regimen because 'TB' alone was chosen.",
   "dstModel": {
     "fields": [
       {
@@ -171,7 +171,7 @@
         "longer_oral"
       ],
       "rule": "QTcF ≤450 ms (male) / ≤470 ms (female); correct hypokalaemia/hypomagnesaemia/hypocalcaemia before any QT-prolonging drug; recheck if abnormal.",
-      "missingMessage": "Baseline ECG / QTcF required — verify before selecting regimen.",
+      "missingMessage": "Baseline ECG / QTcF required - verify before selecting regimen.",
       "source": "ntep_drtb_2024 §3.3.1, Annex 4"
     },
     {
@@ -183,7 +183,7 @@
         "longer_oral"
       ],
       "rule": "Hb ≥8 g/dL, platelets ≥75,000/mm³, ANC ≥750/mm³; grade 3/4 neuropathy is a relative contraindication; add pyridoxine; monitor CBC (baseline, wk2/4/8) and neuropathy.",
-      "missingMessage": "CBC and neuropathy screen required for linezolid-containing regimens — verify before selecting.",
+      "missingMessage": "CBC and neuropathy screen required for linezolid-containing regimens - verify before selecting.",
       "source": "ntep_drtb_2024 §3.3, Table 3.2, Annex 3"
     },
     {
@@ -198,7 +198,7 @@
         "hepatotoxicity_pathway"
       ],
       "rule": "Significant liver dysfunction (AST/ALT >3×ULN or total bilirubin >2×ULN) excludes BPaLM; hepatotoxic first-line drugs need LFT monitoring.",
-      "missingMessage": "Liver function required — verify before selecting regimen.",
+      "missingMessage": "Liver function required - verify before selecting regimen.",
       "source": "ntep_drtb_2024 §3.3.1, Annex 4"
     },
     {
@@ -210,7 +210,7 @@
         "renal_pathway"
       ],
       "rule": "Serum creatinine >3×ULN is a relative contraindication to BPaLM; injectables (amikacin/streptomycin) and several drugs need renal dose review.",
-      "missingMessage": "Renal function required — verify before selecting regimen.",
+      "missingMessage": "Renal function required - verify before selecting regimen.",
       "source": "ntep_drtb_2024 §3.3, Table 3.2, §3.9.5"
     },
     {
@@ -221,8 +221,8 @@
         "shorter_oral",
         "longer_oral"
       ],
-      "rule": "BPaLM: pregnancy restrictions apply (per current MTP notification). The Lzd-containing 9–11-mo shorter oral regimen may be used in pregnancy with monitoring. Counsel on family planning; rifampicin reduces hormonal-contraceptive efficacy.",
-      "missingMessage": "Pregnancy status required — verify before selecting regimen.",
+      "rule": "BPaLM: pregnancy restrictions apply (per current MTP notification). The Lzd-containing 9-11-mo shorter oral regimen may be used in pregnancy with monitoring. Counsel on family planning; rifampicin reduces hormonal-contraceptive efficacy.",
+      "missingMessage": "Pregnancy status required - verify before selecting regimen.",
       "source": "ntep_drtb_2024 §3.3.1, §3.4.1, §3.9.1"
     },
     {
@@ -233,7 +233,7 @@
         "longer_oral"
       ],
       "rule": "Exclude significant cardiac conduction disease, uncontrolled arrhythmia, Torsade risk. Review CYP450 inducers/inhibitors, other QT-prolonging drugs, serotonergic/MAOI, myelosuppressive drugs; separate Mg-containing products from fluoroquinolone by 2h.",
-      "missingMessage": "Cardiac and interaction review required — verify before selecting regimen.",
+      "missingMessage": "Cardiac and interaction review required - verify before selecting regimen.",
       "source": "ntep_drtb_2024 Table 3.2"
     }
   ],
@@ -275,7 +275,7 @@
       ],
       "aeWatchlist": [
         "hepatotoxicity (H/R/Z)",
-        "peripheral neuropathy (H — give pyridoxine)",
+        "peripheral neuropathy (H - give pyridoxine)",
         "optic neuritis (E)",
         "hyperuricaemia (Z)"
       ],
@@ -300,8 +300,8 @@
         "moxifloxacin"
       ],
       "duration": "26 weeks (extendable to 39 weeks per criteria, e.g. Lzd dose reduction).",
-      "doseRef": "Bedaquiline 400 mg OD weeks 1–2, then 200 mg thrice weekly to week 26/39; pretomanid 200 mg OD; linezolid 600 mg OD; moxifloxacin 400 mg OD; pyridoxine 50 mg (16–29 kg) / 100 mg (>30 kg). No weight-band dosing for the four core drugs (≥14 y). Take orally with food; separate magnesium-containing products by 2 h.",
-      "dstRequirements": "May start while awaiting baseline Bdq/Lzd/Pa DST (resistance rates low in India). If baseline DST shows resistance to Bdq/Pa/Lzd → declare 'treatment regimen changed' and switch to 18–20-month longer oral regimen. Moxifloxacin continues full course regardless of FQ resistance.",
+      "doseRef": "Bedaquiline 400 mg OD weeks 1-2, then 200 mg thrice weekly to week 26/39; pretomanid 200 mg OD; linezolid 600 mg OD; moxifloxacin 400 mg OD; pyridoxine 50 mg (16-29 kg) / 100 mg (>30 kg). No weight-band dosing for the four core drugs (≥14 y). Take orally with food; separate magnesium-containing products by 2 h.",
+      "dstRequirements": "May start while awaiting baseline Bdq/Lzd/Pa DST (resistance rates low in India). If baseline DST shows resistance to Bdq/Pa/Lzd → declare 'treatment regimen changed' and switch to 18-20-month longer oral regimen. Moxifloxacin continues full course regardless of FQ resistance.",
       "baselineIx": [
         "ECG/QTcF",
         "CBC",
@@ -334,17 +334,17 @@
         "hepatotoxicity",
         "GI intolerance"
       ],
-      "escalation": "Grade 3/4 Lzd toxicity <9 weeks → treatment failed; Bdq/Pa/Lzd resistance on DST → longer oral regimen; ineligible → 9–11-month shorter oral regimen (then longer oral).",
+      "escalation": "Grade 3/4 Lzd toxicity <9 weeks → treatment failed; Bdq/Pa/Lzd resistance on DST → longer oral regimen; ineligible → 9-11-month shorter oral regimen (then longer oral).",
       "source": "ntep_drtb_2024 §3.3"
     },
     {
       "id": "shorter_oral",
-      "name": "9–11-month shorter oral MDR/RR-TB regimen",
+      "name": "9-11-month shorter oral MDR/RR-TB regimen",
       "forStates": [
         "rr",
         "mdr"
       ],
-      "eligibility": "Rifampicin resistance detected; fluoroquinolone resistance NOT detected; no >1-month exposure to second-line drugs in the regimen (Bdq/Lfx/Cfz/Lzd) unless susceptibility confirmed; no extensive disease; no severe extrapulmonary MDR-TB. Preferred over the 18–20-month longer regimen. In ≥14 y, BPaLM is first preference. The Lzd-containing version may be used in pregnancy with monitoring.",
+      "eligibility": "Rifampicin resistance detected; fluoroquinolone resistance NOT detected; no >1-month exposure to second-line drugs in the regimen (Bdq/Lfx/Cfz/Lzd) unless susceptibility confirmed; no extensive disease; no severe extrapulmonary MDR-TB. Preferred over the 18-20-month longer regimen. In ≥14 y, BPaLM is first preference. The Lzd-containing version may be used in pregnancy with monitoring.",
       "notForUse": "Fluoroquinolone resistance; severe extrapulmonary TB (CNS/spinal/skeletal/miliary/disseminated); extensive disease; additional resistance to Z (switch to longer oral).",
       "coreMeds": [
         "bedaquiline",
@@ -356,8 +356,8 @@
         "high-dose isoniazid",
         "ethionamide (alternative to Lzd)"
       ],
-      "duration": "9–11 months. Structure (Lzd version): (2) Lzd + (4–6) Lfx-Cfz-Z-E-Hh + (6–9) Bdq intensive → (5) Lfx-Cfz-Z-E continuation. IP extendable to max 6 months if smear-positive at month 4.",
-      "doseRef": "Adult weight-band (16–29 / 30–45 / 46–70 / >70 kg): high-dose H 300/600/900/900 mg; E 400/800/1200/1600 mg; Z 750/1250/1750/2000 mg; Lfx 250/750/1000/1000 mg; Bdq 400 mg daily wk0–2 then 200 mg 3×/wk wk3–24; Cfz 50/100/100/200 mg; Eto 375/500/750/1000 mg; pyridoxine 50/100/100/100 mg. Linezolid 600 mg (≥14 y). Paediatric Lzd by weight band (Table 3.5).",
+      "duration": "9-11 months. Structure (Lzd version): (2) Lzd + (4-6) Lfx-Cfz-Z-E-Hh + (6-9) Bdq intensive → (5) Lfx-Cfz-Z-E continuation. IP extendable to max 6 months if smear-positive at month 4.",
+      "doseRef": "Adult weight-band (16-29 / 30-45 / 46-70 / >70 kg): high-dose H 300/600/900/900 mg; E 400/800/1200/1600 mg; Z 750/1250/1750/2000 mg; Lfx 250/750/1000/1000 mg; Bdq 400 mg daily wk0-2 then 200 mg 3×/wk wk3-24; Cfz 50/100/100/200 mg; Eto 375/500/750/1000 mg; pyridoxine 50/100/100/100 mg. Linezolid 600 mg (≥14 y). Paediatric Lzd by weight band (Table 3.5).",
       "dstRequirements": "Rapid DST to rule out FQ resistance required BEFORE starting. Repeat NAAT/LPA + culture DST if smear-positive at end of IP or culture-positive at month 3+.",
       "baselineIx": [
         "ophthalmic (visual acuity + colour vision) at baseline, wk9/13/26",
@@ -386,18 +386,18 @@
         "clofazimine skin pigmentation/QT",
         "ethionamide GI/hypothyroidism"
       ],
-      "escalation": "Z resistance at baseline, or FQ/InhA+KatG on month-4 sample, or ≥2 core drugs stopped → declare treatment failed → switch to 18–20-month longer oral regimen after N/DDR-TBC reassessment.",
+      "escalation": "Z resistance at baseline, or FQ/InhA+KatG on month-4 sample, or ≥2 core drugs stopped → declare treatment failed → switch to 18-20-month longer oral regimen after N/DDR-TBC reassessment.",
       "source": "ntep_drtb_2024 §3.4 (Tables 3.5, 3.6)"
     },
     {
       "id": "longer_oral",
-      "name": "18–20-month longer oral M/XDR-TB regimen",
+      "name": "18-20-month longer oral M/XDR-TB regimen",
       "forStates": [
         "mdr",
         "pre_xdr",
         "xdr"
       ],
-      "eligibility": "Persons ineligible for BPaLM or the 9–11-month shorter regimen (ineligibility, additional resistance, intolerance, drug non-availability), or pre-XDR/XDR-TB. Individualised per DST from Groups A/B/C. Specialist / N-DDR-TBC decision.",
+      "eligibility": "Persons ineligible for BPaLM or the 9-11-month shorter regimen (ineligibility, additional resistance, intolerance, drug non-availability), or pre-XDR/XDR-TB. Individualised per DST from Groups A/B/C. Specialist / N-DDR-TBC decision.",
       "notForUse": "Where a shorter all-oral regimen is eligible (prefer shorter).",
       "coreMeds": [
         "bedaquiline",
@@ -413,8 +413,8 @@
         "ethambutol",
         "imipenem-cilastatin_or_meropenem + clavulanate"
       ],
-      "duration": "18–20 months (bedaquiline limited to 6 months, extension only if an effective regimen cannot otherwise be built). XDR-TB: 20 months. Backbone: (6+) Bdq + (18–20) Lfx-Lzd-Cfz-Cs.",
-      "doseRef": "Adult weight-band Table 3.7: Lfx 250/750/1000/1000; Mfx 200/400/400/400 (high-dose Mfx 400/600/800/800); Bdq as above; Cfz 50/100/100/200; Cs 250/500/750/1000; Lzd 300–600; Dlm 100 mg BD (≥12 y); Am 500/750/750/1000 (≤10 mg/kg, max 750 mg if >60 y); Z 750/1250/1750/2000; Eto 375/500/750/1000; Na-PAS 10/14/16/22 g; E 400/800/1200/1600; imipenem-cilastatin 1 g+1 g BD or meropenem 1 g TID / 2 g BD, each WITH clavulanate (amox-clav 875/125 BD, only with carbapenem); pyridoxine 50/100/100/100.",
+      "duration": "18-20 months (bedaquiline limited to 6 months, extension only if an effective regimen cannot otherwise be built). XDR-TB: 20 months. Backbone: (6+) Bdq + (18-20) Lfx-Lzd-Cfz-Cs.",
+      "doseRef": "Adult weight-band Table 3.7: Lfx 250/750/1000/1000; Mfx 200/400/400/400 (high-dose Mfx 400/600/800/800); Bdq as above; Cfz 50/100/100/200; Cs 250/500/750/1000; Lzd 300-600; Dlm 100 mg BD (≥12 y); Am 500/750/750/1000 (≤10 mg/kg, max 750 mg if >60 y); Z 750/1250/1750/2000; Eto 375/500/750/1000; Na-PAS 10/14/16/22 g; E 400/800/1200/1600; imipenem-cilastatin 1 g+1 g BD or meropenem 1 g TID / 2 g BD, each WITH clavulanate (amox-clav 875/125 BD, only with carbapenem); pyridoxine 50/100/100/100.",
       "dstRequirements": "Full DST-driven drug selection (FQ, SLI, Eto, Bdq/Lzd/Pa/Dlm where available). Repeat NAAT/LPA + LC-DST if culture-positive at month 6+.",
       "baselineIx": [
         "ECG/QTcF",
@@ -438,7 +438,7 @@
         "culture conversion"
       ],
       "interactions": [
-        "multiple QT-prolonging agents (Bdq/Mfx/Cfz/Dlm) — cumulative QT risk",
+        "multiple QT-prolonging agents (Bdq/Mfx/Cfz/Dlm) - cumulative QT risk",
         "myelosuppressive (Lzd)",
         "nephro/ototoxic (amikacin)"
       ],
@@ -504,7 +504,7 @@
       "coreMeds": [
         "per DST from WHO/NTEP Groups A/B/C"
       ],
-      "duration": "Individualised (typically 18–20 months).",
+      "duration": "Individualised (typically 18-20 months).",
       "doseRef": "Per Table 3.7 weight bands for the selected drugs.",
       "dstRequirements": "Complete DST review is mandatory.",
       "baselineIx": [
@@ -651,14 +651,14 @@
       "id": "pregnancy",
       "label": "Pregnancy & lactation",
       "source": "ntep_drtb_2024 §3.9.1",
-      "guidance": "Joint obstetrician + physician management at a DR-TBC. BPaLM only if <20/<24 wk gestation AND willing for MTP (pretomanid not in lactation unless formula-feeding) — so BPaLM generally does NOT apply to pregnant/breastfeeding women. The Lzd-containing 9–11-mo shorter oral regimen is available to all pregnant women (after other eligibility); Eto-based only after 32 wk if Lzd unusable; else 18–20-mo longer oral. Counsel on contraception (OCP efficacy reduced by vomiting + DR-TB drug interactions).",
+      "guidance": "Joint obstetrician + physician management at a DR-TBC. BPaLM only if <20/<24 wk gestation AND willing for MTP (pretomanid not in lactation unless formula-feeding) - so BPaLM generally does NOT apply to pregnant/breastfeeding women. The Lzd-containing 9-11-mo shorter oral regimen is available to all pregnant women (after other eligibility); Eto-based only after 32 wk if Lzd unusable; else 18-20-mo longer oral. Counsel on contraception (OCP efficacy reduced by vomiting + DR-TB drug interactions).",
       "monitoring": "Monthly CBC/Hb; USG anomaly scan 18 wk + growth scan 32 wk; more frequent ECG/electrolytes as indicated; TSH monthly if Eto and basal TSH deranged; newborn CBC + TSH if exposed to Lzd/Eto/PAS; deliver where a paediatrician is available."
     },
     {
       "id": "children",
       "label": "Children (<14 y)",
       "source": "ntep_drtb_2024 §3.9.2",
-      "guidance": "BPaLM (contains pretomanid) not established <14 y → use 9–11-mo shorter or longer oral regimen per eligibility with a paediatrician. Bedaquiline approved ≥5 y (child-friendly 20 mg dispersible tablet); below 5 y only where regulator-approved (otherwise replace per PMDT). Delamanid 25 mg DT approved from ≥10 kg.",
+      "guidance": "BPaLM (contains pretomanid) not established <14 y → use 9-11-mo shorter or longer oral regimen per eligibility with a paediatrician. Bedaquiline approved ≥5 y (child-friendly 20 mg dispersible tablet); below 5 y only where regulator-approved (otherwise replace per PMDT). Delamanid 25 mg DT approved from ≥10 kg.",
       "monitoring": "Weight-band paediatric dosing (Lzd Table 3.5); paediatric monitoring per regimen."
     },
     {
@@ -672,7 +672,7 @@
       "id": "hiv",
       "label": "People living with HIV",
       "source": "ntep_drtb_2024 §3.9.4",
-      "guidance": "BPaLM can be given regardless of HIV status/CD4 (care if CD4 <100); manage with the ART centre. Interactions: efavirenz induces bedaquiline AND reduces pretomanid — AVOID with BPaLM (prefer dolutegravir); ritonavir raises bedaquiline (monitor QT); avoid zidovudine with linezolid (additive neuropathy + myelosuppression).",
+      "guidance": "BPaLM can be given regardless of HIV status/CD4 (care if CD4 <100); manage with the ART centre. Interactions: efavirenz induces bedaquiline AND reduces pretomanid - AVOID with BPaLM (prefer dolutegravir); ritonavir raises bedaquiline (monitor QT); avoid zidovudine with linezolid (additive neuropathy + myelosuppression).",
       "monitoring": "Joint ART-centre + DR-TBC follow-up; QT and CBC monitoring given interactions."
     },
     {
@@ -693,7 +693,7 @@
       "id": "diabetes",
       "label": "Diabetes mellitus",
       "source": "ntep_drtb_2024 §3.9.7",
-      "guidance": "Glycaemic control is harder in MDR-TB + DM (insulin often needed). Increased peripheral-neuropathy risk (exacerbated by linezolid + high-dose isoniazid) — counsel to report early; may switch to Eto-containing shorter regimen or longer regimen without linezolid. High-dose metformin + linezolid raises lactic-acidosis risk.",
+      "guidance": "Glycaemic control is harder in MDR-TB + DM (insulin often needed). Increased peripheral-neuropathy risk (exacerbated by linezolid + high-dose isoniazid) - counsel to report early; may switch to Eto-containing shorter regimen or longer regimen without linezolid. High-dose metformin + linezolid raises lactic-acidosis risk.",
       "monitoring": "Blood glucose; neuropathy screening."
     },
     {
@@ -714,7 +714,7 @@
         "version": "November 2024",
         "jurisdiction": "India",
         "priority": 1,
-        "keySections": "§3.3 BPaLM · §3.4 9–11-mo shorter oral · §3.5 18–20-mo longer oral M/XDR · §3.6 H mono/poly · §3.9 special situations · Annex 3 neuropathy · Annex 4 QT/hepatotoxicity"
+        "keySections": "§3.3 BPaLM · §3.4 9-11-mo shorter oral · §3.5 18-20-mo longer oral M/XDR · §3.6 H mono/poly · §3.9 special situations · Annex 3 neuropathy · Annex 4 QT/hepatotoxicity"
       },
       {
         "docId": "who_tb_consolidated",
@@ -730,7 +730,7 @@
         "title": "Standard internal-medicine reference",
         "body": "Harrison's Principles of Internal Medicine 22e",
         "version": "2025",
-        "jurisdiction": "—",
+        "jurisdiction": "-",
         "priority": 5,
         "keySections": "Drug-susceptible TB, CNS/extrapulmonary disease, drug monitoring/adverse effects"
       }

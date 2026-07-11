@@ -1,11 +1,11 @@
-/* StewardMD — Regional antibiogram in the Antimicrobial Stewardship Console.
+/* StewardMD - Regional antibiogram in the Antimicrobial Stewardship Console.
  * ===========================================================================
  * The Stewardship Console (window.ASP, minified in app.js) renders its Step-4
  * "Antibiogram" from ICMR national only (its o()/ASP_ABG are private and _abgTab
  * hardcodes "national"). This module AUGMENTS window.ASP.open (no app.js edit):
  * after the console renders, it hides the national-only block and injects a
  * grouped Region/source selector + a region-aware % Resistant panel driven by the
- * global HOSPITAL profile system — so the console matches the rest of the app.
+ * global HOSPITAL profile system - so the console matches the rest of the app.
  * ICMR stays the default; regional data is decision-support, shown with its source.
  * ======================================================================== */
 (function () {
@@ -54,7 +54,7 @@
       var c = comp[rr[0]], sts = studiesOf(rr[0]);
       if (!c && !sts.length) return;
       h += '<optgroup label="' + rr[1] + '">';
-      if (c) h += opt(c.id, (c.short || rr[1]) + " — regional composite (best-of)");
+      if (c) h += opt(c.id, (c.short || rr[1]) + " - regional composite (best-of)");
       sts.forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
       h += '</optgroup>';
     });
@@ -98,7 +98,7 @@
       h += '</div>';
     }
     h += '<div id="aspRegionBody">' + bodyHTML() + '</div>';
-    h += '<div style="margin-top:10px;font:500 10.5px/1.45 system-ui;color:var(--slate-soft,#64748b)">Shown as % <b>resistant</b> (red = worse). ICMR national guidance remains the baseline; regional/local data is decision support — verify against your own antibiogram. Tap a value for its source.</div>';
+    h += '<div style="margin-top:10px;font:500 10.5px/1.45 system-ui;color:var(--slate-soft,#64748b)">Shown as % <b>resistant</b> (red = worse). ICMR national guidance remains the baseline; regional/local data is decision support - verify against your own antibiogram. Tap a value for its source.</div>';
     h += '</div>';
     return h;
   }
@@ -108,10 +108,10 @@
     var rec = orgRecord(org), o = rec.o, prof = window.HOSPITAL.current();
     var srcName = prof.name || prof.short || "ICMR national";
     if (!o || !o.d || !Object.keys(o.d).length)
-      return '<div style="font:600 12.5px system-ui;color:var(--slate-soft,#64748b)"><i>' + esc(org) + '</i> — no data in <b>' + esc(srcName) + '</b>' + (prof.id === "ICMR" ? "" : " (ICMR national remains the baseline)") + '.</div>';
+      return '<div style="font:600 12.5px system-ui;color:var(--slate-soft,#64748b)"><i>' + esc(org) + '</i> - no data in <b>' + esc(srcName) + '</b>' + (prof.id === "ICMR" ? "" : " (ICMR national remains the baseline)") + '.</div>';
     var rows = orderDrugs(Object.keys(o.d)).map(function (k) {
       var c = o.d[k];
-      if (c.s == null) return '<div style="display:flex;justify-content:space-between;padding:4px 0;font:600 12.5px system-ui"><span>' + esc(drugLabel(k)) + '</span><span style="color:var(--slate-soft,#64748b)">' + esc(c.q || "—") + '</span></div>';
+      if (c.s == null) return '<div style="display:flex;justify-content:space-between;padding:4px 0;font:600 12.5px system-ui"><span>' + esc(drugLabel(k)) + '</span><span style="color:var(--slate-soft,#64748b)">' + esc(c.q || "-") + '</span></div>';
       var R = Math.round(100 - c.s), col = rColor(R);
       var prov = c.src ? ' title="source: ' + esc(srcLabel(c.src)) + '" data-src="' + esc(c.src) + '"' : '';
       return '<div class="asp-region-row"' + prov + ' style="padding:5px 0;' + (c.src ? 'cursor:pointer;' : '') + '">' +

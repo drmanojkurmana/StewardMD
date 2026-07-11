@@ -1,7 +1,7 @@
-/* StewardMD — Obstetrics & Gynaecology specialty engine.
+/* StewardMD - Obstetrics & Gynaecology specialty engine.
    ---------------------------------------------------------------------------
    Registers into window.SMD_WS_ENGINES.obstetrics_gynaecology, consumed by
-   workspaces.js. A LIGHTWEIGHT specialty pathway — NOT the Internal Medicine
+   workspaces.js. A LIGHTWEIGHT specialty pathway - NOT the Internal Medicine
    engine and NOT a diagnosis generator. For each syndrome it collects focused
    findings + danger signs and returns a conservative MANAGEMENT DECISION: the
    antibiotic-need level (0 none → 5 emergency referral), whether SOURCE CONTROL
@@ -13,13 +13,13 @@
    The recurring OBGYN theme is separating mild, self-limiting disease
    (uncomplicated vaginitis, outpatient PID) from the true obstetric / gynae
    EMERGENCIES. Several of the killers are NOT infective and antibiotics are NOT
-   the answer — ruptured ectopic and postpartum haemorrhage are BLEEDING, eclampsia
+   the answer - ruptured ectopic and postpartum haemorrhage are BLEEDING, eclampsia
    is SEIZURE + severe HYPERTENSION (magnesium + BP control + delivery), ovarian
    torsion is a SURGICAL emergency. Others are infective and need source control
    as much as antibiotics: chorioamnionitis, septic abortion, endometritis and
    tubo-ovarian abscess. For every woman of reproductive age with abdominal pain,
    DO A PREGNANCY TEST. When sepsis needs critical-care or medical co-management
-   the notes flag IM/ICU involvement — OBGYN remains the primary owner of all
+   the notes flag IM/ICU involvement - OBGYN remains the primary owner of all
    conditions here.
 
    Advisory only. Verify against local protocol, imaging, and the individual patient. */
@@ -51,26 +51,26 @@
             sc: "Resuscitate; urgent imaging (USS/CT) to exclude abscess needing drainage; laparoscopy if diagnosis unclear or deteriorating.",
             ref: "Emergency OBGYN; admit. IM/ICU co-management for sepsis.",
             mgmt: ["IV broad-spectrum antibiotics per local PID guidance / ICMR immediately (cover gonorrhoea, chlamydia + anaerobes).", "Escalate to critical care; look for a drainable collection."],
-            abx: { firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "+ Doxycycline", dose: "100 mg", route: "IV/PO BID", note: "atypical / chlamydia cover" }], alt: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "± Ceftriaxone 2 g IV daily", dose: "", route: "", note: "gonococcal cover; de-escalate on cultures" }], ref: "ICMR / national PID guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. In PREGNANCY avoid doxycycline — substitute azithromycin 500 mg IV/PO daily with a β-lactam + metronidazole + gentamicin regimen." } };
+            abx: { firstLine: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }, { drug: "+ Doxycycline", dose: "100 mg", route: "IV/PO BID", note: "atypical / chlamydia cover" }], alt: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "± Ceftriaxone 2 g IV daily", dose: "", route: "", note: "gonococcal cover; de-escalate on cultures" }], ref: "ICMR / national PID guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. In PREGNANCY avoid doxycycline - substitute azithromycin 500 mg IV/PO daily with a β-lactam + metronidazole + gentamicin regimen." } };
           if (has(sel, "mass")) return { emergency: true, ladder: 4, catg: "PID with suspected tubo-ovarian abscess",
-            sc: "Image (USS/CT); drainage of the abscess if large / not responding — see the tubo-ovarian abscess pathway.",
+            sc: "Image (USS/CT); drainage of the abscess if large / not responding - see the tubo-ovarian abscess pathway.",
             ref: "Urgent OBGYN; admit.",
             mgmt: ["IV broad-spectrum antibiotics per local PID guidance / ICMR.", "Open the tubo-ovarian abscess pathway for source-control detail."],
-            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Doxycycline", dose: "100 mg", route: "IV/PO BID" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe cover for abscess" }], alt: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }], ref: "ICMR / national PID guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are adjunct to drainage. In PREGNANCY avoid doxycycline — use azithromycin instead." } };
-          if (anyOf(sel, ["peritonism", "fever", "no_oral", "pregnant"])) return { emergency: false, ladder: 3, catg: "Moderate–severe PID — admit for IV therapy",
-            sc: "No procedure if no collection — image to exclude abscess; reassess.",
+            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Doxycycline", dose: "100 mg", route: "IV/PO BID" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe cover for abscess" }], alt: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }], ref: "ICMR / national PID guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are adjunct to drainage. In PREGNANCY avoid doxycycline - use azithromycin instead." } };
+          if (anyOf(sel, ["peritonism", "fever", "no_oral", "pregnant"])) return { emergency: false, ladder: 3, catg: "Moderate-severe PID - admit for IV therapy",
+            sc: "No procedure if no collection - image to exclude abscess; reassess.",
             ref: "OBGYN admission; gynae review.",
             mgmt: ["IV antibiotics per local PID guidance / ICMR, switch to oral once improving.", "Low threshold to treat empirically; test for STIs and offer partner notification.", "Remove/review IUD per local guidance if no response."],
-            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Doxycycline", dose: "100 mg", route: "IV/PO BID", note: "total course 14 days" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }], alt: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily", note: "switch to oral doxycycline + metronidazole once improving" }], ref: "ICMR / national PID guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. In PREGNANCY avoid doxycycline — substitute azithromycin + a β-lactam; metronidazole may be used." } };
-          if (anyOf(sel, ["pelvic_pain", "discharge", "cmt"])) return { emergency: false, ladder: 2, catg: "Mild PID — outpatient oral therapy",
+            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Doxycycline", dose: "100 mg", route: "IV/PO BID", note: "total course 14 days" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }], alt: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily", note: "switch to oral doxycycline + metronidazole once improving" }], ref: "ICMR / national PID guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. In PREGNANCY avoid doxycycline - substitute azithromycin + a β-lactam; metronidazole may be used." } };
+          if (anyOf(sel, ["pelvic_pain", "discharge", "cmt"])) return { emergency: false, ladder: 2, catg: "Mild PID - outpatient oral therapy",
             sc: "No procedure.",
-            ref: "Gynae / sexual-health follow-up; review at 48–72 h.",
-            mgmt: ["Do a pregnancy test FIRST in any reproductive-age woman with pelvic pain — a positive test means EXCLUDE ectopic (a bleeding/surgical emergency) before labelling this PID.", "Oral regimen per local PID guidance (empirical cover for gonorrhoea, chlamydia + anaerobes) — low threshold to treat on clinical suspicion.", "Test for STIs incl. HIV; partner notification and treatment; safety-net to re-attend if worsening."],
-            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "500 mg", route: "IM stat" }, { drug: "+ Doxycycline", dose: "100 mg", route: "PO BID", note: "14 days" }, { drug: "+ Metronidazole", dose: "400 mg", route: "PO BID", note: "14 days" }], alt: [{ drug: "Cefixime", dose: "400 mg", route: "PO stat", note: "if IM not feasible" }, { drug: "+ Azithromycin", dose: "1 g", route: "PO weekly ×2", note: "pregnancy-safe alternative to doxycycline" }], ref: "ICMR / national PID guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. In PREGNANCY avoid doxycycline — use ceftriaxone + azithromycin + metronidazole; review at 48–72 h." } };
+            ref: "Gynae / sexual-health follow-up; review at 48-72 h.",
+            mgmt: ["Do a pregnancy test FIRST in any reproductive-age woman with pelvic pain - a positive test means EXCLUDE ectopic (a bleeding/surgical emergency) before labelling this PID.", "Oral regimen per local PID guidance (empirical cover for gonorrhoea, chlamydia + anaerobes) - low threshold to treat on clinical suspicion.", "Test for STIs incl. HIV; partner notification and treatment; safety-net to re-attend if worsening."],
+            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "500 mg", route: "IM stat" }, { drug: "+ Doxycycline", dose: "100 mg", route: "PO BID", note: "14 days" }, { drug: "+ Metronidazole", dose: "400 mg", route: "PO BID", note: "14 days" }], alt: [{ drug: "Cefixime", dose: "400 mg", route: "PO stat", note: "if IM not feasible" }, { drug: "+ Azithromycin", dose: "1 g", route: "PO weekly ×2", note: "pregnancy-safe alternative to doxycycline" }], ref: "ICMR / national PID guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. In PREGNANCY avoid doxycycline - use ceftriaxone + azithromycin + metronidazole; review at 48-72 h." } };
           return { emergency: false, ladder: 0, catg: "PID unlikely on current findings",
             sc: "No procedure.",
             ref: "Safety-net; reassess if pelvic pain, discharge or fever develop.",
-            mgmt: ["Do a pregnancy test before reassuring — a positive test with pelvic pain/bleeding means EXCLUDE ectopic, not PID.", "Insufficient features for empirical PID treatment now — reassess and test for STIs.", "Have a low threshold to treat if minimal criteria appear."],
+            mgmt: ["Do a pregnancy test before reassuring - a positive test with pelvic pain/bleeding means EXCLUDE ectopic, not PID.", "Insufficient features for empirical PID treatment now - reassess and test for STIs.", "Have a low threshold to treat if minimal criteria appear."],
             abx: null };
         }
       },
@@ -79,8 +79,8 @@
         id: "tubo_ovarian_abscess", name: "Tubo-ovarian abscess",
         q: [
           { id: "mass", label: "Adnexal mass / complex collection on imaging" }, { id: "pid_hx", label: "PID features / known/treated PID" },
-          { id: "fever", label: "Fever / systemic upset" }, { id: "nonresponse", label: "No response to IV antibiotics (48–72 h)" },
-          { id: "large", label: "Large abscess (> 5–7 cm)" }
+          { id: "fever", label: "Fever / systemic upset" }, { id: "nonresponse", label: "No response to IV antibiotics (48-72 h)" },
+          { id: "large", label: "Large abscess (> 5-7 cm)" }
         ],
         danger: [
           { id: "rupture", label: "Suspected rupture / peritonism / acute abdomen" },
@@ -88,20 +88,20 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["rupture", "sepsis"])) return { emergency: true, ladder: 5, catg: "Ruptured / septic tubo-ovarian abscess",
-            sc: "Resuscitate; EMERGENCY surgical drainage / washout (laparoscopy or laparotomy) — source control cannot wait.",
+            sc: "Resuscitate; EMERGENCY surgical drainage / washout (laparoscopy or laparotomy) - source control cannot wait.",
             ref: "Emergency OBGYN; admit. IM/ICU co-management for sepsis; Surgery/IR for drainage.",
             mgmt: ["IV broad-spectrum antibiotics per local guidance / ICMR (aerobic + anaerobic cover) as adjunct to drainage.", "This is a surgical / source-control emergency."],
-            abx: { firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }], alt: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }, { drug: "or Clindamycin 900 mg IV q8h + Gentamicin 5 mg/kg IV daily", dose: "", route: "", note: "aerobic + anaerobic cover; carbapenem if severe/resistant" }], ref: "ICMR / national obstetric–gynae guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are ADJUNCT — emergency drainage/washout is the definitive treatment." } };
-          if (anyOf(sel, ["nonresponse", "large"])) return { emergency: false, ladder: 4, catg: "Tubo-ovarian abscess — needs drainage",
+            abx: { firstLine: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }], alt: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }, { drug: "or Clindamycin 900 mg IV q8h + Gentamicin 5 mg/kg IV daily", dose: "", route: "", note: "aerobic + anaerobic cover; carbapenem if severe/resistant" }], ref: "ICMR / national obstetric-gynae guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are ADJUNCT - emergency drainage/washout is the definitive treatment." } };
+          if (anyOf(sel, ["nonresponse", "large"])) return { emergency: false, ladder: 4, catg: "Tubo-ovarian abscess - needs drainage",
             sc: "Image-guided (USS/CT) or surgical drainage is the definitive treatment when large or not responding to antibiotics; send pus for culture.",
             ref: "Urgent OBGYN; consider IR / Surgery consult for drainage. Admit.",
-            mgmt: ["IV broad-spectrum antibiotics per local guidance / ICMR — drainage is the source control, antibiotics are adjunct.", "De-escalate on culture; OBGYN remains primary."],
-            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Doxycycline", dose: "100 mg", route: "IV/PO BID" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }], alt: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "or Clindamycin + Gentamicin", dose: "900 mg q8h / 5 mg/kg daily", route: "IV" }], ref: "ICMR / national obstetric–gynae guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Drainage is the source control; de-escalate on culture. In PREGNANCY avoid doxycycline — substitute azithromycin." } };
-          return { emergency: false, ladder: 3, catg: "Tubo-ovarian abscess — trial of IV antibiotics",
-            sc: "Small unruptured abscesses may respond medically — image and reassess; drain if no improvement at 48–72 h or if it enlarges.",
+            mgmt: ["IV broad-spectrum antibiotics per local guidance / ICMR - drainage is the source control, antibiotics are adjunct.", "De-escalate on culture; OBGYN remains primary."],
+            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Doxycycline", dose: "100 mg", route: "IV/PO BID" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }], alt: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }, { drug: "or Clindamycin + Gentamicin", dose: "900 mg q8h / 5 mg/kg daily", route: "IV" }], ref: "ICMR / national obstetric-gynae guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Drainage is the source control; de-escalate on culture. In PREGNANCY avoid doxycycline - substitute azithromycin." } };
+          return { emergency: false, ladder: 3, catg: "Tubo-ovarian abscess - trial of IV antibiotics",
+            sc: "Small unruptured abscesses may respond medically - image and reassess; drain if no improvement at 48-72 h or if it enlarges.",
             ref: "OBGYN admission; gynae review.",
             mgmt: ["IV broad-spectrum antibiotics per local guidance / ICMR with close monitoring.", "Have a plan for drainage (IR / Surgery) if it fails to improve."],
-            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Doxycycline", dose: "100 mg", route: "IV/PO BID" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }], alt: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }], ref: "ICMR / national obstetric–gynae guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Reassess for drainage at 48–72 h if no improvement. In PREGNANCY avoid doxycycline — substitute azithromycin." } };
+            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Doxycycline", dose: "100 mg", route: "IV/PO BID" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }], alt: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }], ref: "ICMR / national obstetric-gynae guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Reassess for drainage at 48-72 h if no improvement. In PREGNANCY avoid doxycycline - substitute azithromycin." } };
         }
       },
       /* ───────────────────── Ectopic pregnancy ───────────────────── */
@@ -117,18 +117,18 @@
           { id: "peritonism", label: "Peritonism / shoulder-tip pain / rebound (rupture)" }, { id: "syncope", label: "Syncope / severe sudden pain" }
         ],
         assess: function (sel) {
-          if (anyOf(sel, ["shock", "peritonism", "syncope"])) return { emergency: true, ladder: 5, catg: "Ruptured ectopic pregnancy — SURGICAL / BLEEDING EMERGENCY (not infective)",
+          if (anyOf(sel, ["shock", "peritonism", "syncope"])) return { emergency: true, ladder: 5, catg: "Ruptured ectopic pregnancy - SURGICAL / BLEEDING EMERGENCY (not infective)",
             sc: "Resuscitate (ABC, large-bore IV access, group & crossmatch, activate massive-haemorrhage protocol); EMERGENCY laparoscopy/laparotomy for surgical control of bleeding.",
             ref: "Emergency OBGYN + anaesthesia NOW.",
-            mgmt: ["This is intra-abdominal HAEMORRHAGE, not an infection — antibiotics are NOT the treatment; do not delay theatre.", "Correct coagulopathy; transfuse per protocol; give anti-D if Rh-negative per local policy."] };
-          if (has(sel, "positive")) return { emergency: false, ladder: 0, catg: "Suspected ectopic pregnancy — bleeding / surgical problem, not infective",
-            sc: "Urgent transvaginal USS + serial β-hCG; management (expectant / medical / surgical) per OBGYN — antibiotics are NOT indicated for an uncomplicated ectopic.",
+            mgmt: ["This is intra-abdominal HAEMORRHAGE, not an infection - antibiotics are NOT the treatment; do not delay theatre.", "Correct coagulopathy; transfuse per protocol; give anti-D if Rh-negative per local policy."] };
+          if (has(sel, "positive")) return { emergency: false, ladder: 0, catg: "Suspected ectopic pregnancy - bleeding / surgical problem, not infective",
+            sc: "Urgent transvaginal USS + serial β-hCG; management (expectant / medical / surgical) per OBGYN - antibiotics are NOT indicated for an uncomplicated ectopic.",
             ref: "Urgent OBGYN / early-pregnancy unit; admit if pain or instability.",
-            mgmt: ["Positive pregnancy test + pain/bleeding = exclude ectopic until proven otherwise — this is a bleeding/surgical risk, not an infection.", "Safety-net firmly: return immediately for severe pain, shoulder-tip pain, dizziness or collapse.", "Give anti-D if Rh-negative per local policy where indicated."] };
-          return { emergency: false, ladder: 0, catg: "Pregnancy not confirmed — check β-hCG",
+            mgmt: ["Positive pregnancy test + pain/bleeding = exclude ectopic until proven otherwise - this is a bleeding/surgical risk, not an infection.", "Safety-net firmly: return immediately for severe pain, shoulder-tip pain, dizziness or collapse.", "Give anti-D if Rh-negative per local policy where indicated."] };
+          return { emergency: false, ladder: 0, catg: "Pregnancy not confirmed - check β-hCG",
             sc: "Perform a pregnancy test; if positive with pain/bleeding, treat as suspected ectopic and image.",
             ref: "Early-pregnancy unit / OBGYN if pregnancy confirmed.",
-            mgmt: ["Antibiotics are not relevant here — the concern is early-pregnancy bleeding.", "Confirm pregnancy status before proceeding."] };
+            mgmt: ["Antibiotics are not relevant here - the concern is early-pregnancy bleeding.", "Confirm pregnancy status before proceeding."] };
         }
       },
       /* ───────────────────── Miscarriage (threatened / incomplete) ───────────────────── */
@@ -144,24 +144,24 @@
           { id: "sepsis", label: "Fever / offensive discharge (septic abortion)" }, { id: "severe_pain", label: "Severe / unilateral pain (exclude ectopic)" }
         ],
         assess: function (sel) {
-          if (has(sel, "shock")) return { emergency: true, ladder: 4, catg: "Incomplete miscarriage with heavy bleeding — BLEEDING emergency",
-            sc: "Resuscitate (IV access, group & crossmatch); remove products from the os; urgent surgical / medical uterine evacuation stops the bleeding — antibiotics are NOT the treatment.",
+          if (has(sel, "shock")) return { emergency: true, ladder: 4, catg: "Incomplete miscarriage with heavy bleeding - BLEEDING emergency",
+            sc: "Resuscitate (IV access, group & crossmatch); remove products from the os; urgent surgical / medical uterine evacuation stops the bleeding - antibiotics are NOT the treatment.",
             ref: "Emergency OBGYN NOW.",
-            mgmt: ["Bleeding is from retained products — evacuate; transfuse per protocol.", "Give anti-D if Rh-negative per local policy."] };
-          if (has(sel, "sepsis")) return { emergency: true, ladder: 4, catg: "Septic miscarriage — open the septic abortion pathway",
+            mgmt: ["Bleeding is from retained products - evacuate; transfuse per protocol.", "Give anti-D if Rh-negative per local policy."] };
+          if (has(sel, "sepsis")) return { emergency: true, ladder: 4, catg: "Septic miscarriage - open the septic abortion pathway",
             sc: "Do NOT delay uterine evacuation of retained products; resuscitate + IV antibiotics.",
             ref: "Urgent OBGYN; admit.",
             mgmt: ["Fever + bleeding after/during miscarriage = septic abortion until proven otherwise.", "Open the septic abortion pathway for detail."],
-            abx: { firstLine: [{ drug: "Ampicillin", dose: "2 g", route: "IV q6h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe / Clostridium cover" }], alt: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "or Clindamycin 900 mg IV q8h + Gentamicin", dose: "", route: "" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are adjunct — uterine evacuation of retained products is the definitive source control." } };
-          if (has(sel, "severe_pain")) return { emergency: false, ladder: 0, catg: "Early-pregnancy pain + bleeding — EXCLUDE ectopic first",
-            sc: "Urgent transvaginal USS + serial β-hCG before calling it a miscarriage — see the ectopic pathway.",
+            abx: { firstLine: [{ drug: "Ampicillin", dose: "2 g", route: "IV q6h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobe / Clostridium cover" }], alt: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }, { drug: "or Clindamycin 900 mg IV q8h + Gentamicin", dose: "", route: "" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are adjunct - uterine evacuation of retained products is the definitive source control." } };
+          if (has(sel, "severe_pain")) return { emergency: false, ladder: 0, catg: "Early-pregnancy pain + bleeding - EXCLUDE ectopic first",
+            sc: "Urgent transvaginal USS + serial β-hCG before calling it a miscarriage - see the ectopic pathway.",
             ref: "Urgent OBGYN / early-pregnancy unit.",
-            mgmt: ["Never diagnose miscarriage on symptoms alone — a ruptured ectopic can look identical and kills.", "Give anti-D if Rh-negative per local policy where indicated."] };
-          if (anyOf(sel, ["tissue", "os_open"])) return { emergency: false, ladder: 4, catg: "Incomplete miscarriage — needs evacuation",
-            sc: "USS to confirm retained products; expectant / medical / surgical evacuation per OBGYN — no antibiotics unless infected.",
+            mgmt: ["Never diagnose miscarriage on symptoms alone - a ruptured ectopic can look identical and kills.", "Give anti-D if Rh-negative per local policy where indicated."] };
+          if (anyOf(sel, ["tissue", "os_open"])) return { emergency: false, ladder: 4, catg: "Incomplete miscarriage - needs evacuation",
+            sc: "USS to confirm retained products; expectant / medical / surgical evacuation per OBGYN - no antibiotics unless infected.",
             ref: "OBGYN / early-pregnancy unit.",
-            mgmt: ["Antibiotics not routine — only if signs of infection.", "Give anti-D if Rh-negative per local policy."] };
-          if (has(sel, "positive")) return { emergency: false, ladder: 0, catg: "Threatened miscarriage (os closed) — supportive",
+            mgmt: ["Antibiotics not routine - only if signs of infection.", "Give anti-D if Rh-negative per local policy."] };
+          if (has(sel, "positive")) return { emergency: false, ladder: 0, catg: "Threatened miscarriage (os closed) - supportive",
             sc: "USS to confirm viability + location (exclude ectopic); no procedure if os closed.",
             ref: "Early-pregnancy unit; safety-net.",
             mgmt: ["Reassure but confirm intrauterine pregnancy on USS.", "Safety-net firmly for heavy bleeding, severe pain, dizziness or fever; anti-D if Rh-negative per local policy."] };
@@ -183,16 +183,16 @@
           { id: "sepsis", label: "Maternal septic shock / instability" }, { id: "fetal_distress", label: "Non-reassuring / abnormal fetal status" }
         ],
         assess: function (sel) {
-          if (anyOf(sel, ["sepsis", "fetal_distress"])) return { emergency: true, ladder: 5, catg: "Chorioamnionitis with maternal sepsis / fetal compromise — obstetric emergency",
+          if (anyOf(sel, ["sepsis", "fetal_distress"])) return { emergency: true, ladder: 5, catg: "Chorioamnionitis with maternal sepsis / fetal compromise - obstetric emergency",
             sc: "Resuscitate mother; EXPEDITE DELIVERY urgently (do not delay); continuous fetal monitoring; neonatal team present.",
             ref: "Emergency OBGYN + anaesthesia + neonatology. IM/ICU co-management for maternal sepsis.",
             mgmt: ["IV broad-spectrum antibiotics per local guidance / ICMR immediately (do not wait for delivery).", "Delivery is the definitive source control."],
-            abx: { firstLine: [{ drug: "Ampicillin", dose: "2 g", route: "IV q6h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "+ Clindamycin 900 mg IV q8h (or Metronidazole 500 mg IV q8h)", dose: "", route: "", note: "add for caesarean / anaerobic cover" }], alt: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Ampicillin + gentamicin (± clindamycin/metronidazole) is the pregnancy-appropriate regimen; delivery is the definitive source control." } };
-          return { emergency: true, ladder: 4, catg: "Chorioamnionitis — IV antibiotics + expedite delivery",
-            sc: "Delivery is the source control — expedite delivery once maternal condition allows; continuous fetal monitoring; involve neonatology.",
+            abx: { firstLine: [{ drug: "Ampicillin", dose: "2 g", route: "IV q6h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "+ Clindamycin 900 mg IV q8h (or Metronidazole 500 mg IV q8h)", dose: "", route: "", note: "add for caesarean / anaerobic cover" }], alt: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Ampicillin + gentamicin (± clindamycin/metronidazole) is the pregnancy-appropriate regimen; delivery is the definitive source control." } };
+          return { emergency: true, ladder: 4, catg: "Chorioamnionitis - IV antibiotics + expedite delivery",
+            sc: "Delivery is the source control - expedite delivery once maternal condition allows; continuous fetal monitoring; involve neonatology.",
             ref: "Urgent OBGYN; admit to labour ward.",
-            mgmt: ["Start IV broad-spectrum antibiotics per local guidance / ICMR promptly — do not delay for delivery.", "Monitor mother and fetus closely; antipyretics; escalate if sepsis develops."],
-            abx: { firstLine: [{ drug: "Ampicillin", dose: "2 g", route: "IV q6h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "+ Clindamycin 900 mg IV q8h or Metronidazole 500 mg IV q8h", dose: "", route: "", note: "if caesarean delivery" }], alt: [{ drug: "Ampicillin–sulbactam", dose: "3 g", route: "IV q6h" }, { drug: "or Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Pregnancy-appropriate regimen — start promptly, do not wait for delivery." } };
+            mgmt: ["Start IV broad-spectrum antibiotics per local guidance / ICMR promptly - do not delay for delivery.", "Monitor mother and fetus closely; antipyretics; escalate if sepsis develops."],
+            abx: { firstLine: [{ drug: "Ampicillin", dose: "2 g", route: "IV q6h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "+ Clindamycin 900 mg IV q8h or Metronidazole 500 mg IV q8h", dose: "", route: "", note: "if caesarean delivery" }], alt: [{ drug: "Ampicillin-sulbactam", dose: "3 g", route: "IV q6h" }, { drug: "or Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Pregnancy-appropriate regimen - start promptly, do not wait for delivery." } };
         }
       },
       /* ───────────────────── Pre-eclampsia / eclampsia ───────────────────── */
@@ -208,24 +208,24 @@
           { id: "hellp", label: "Signs of HELLP / pulmonary oedema / oliguria" }, { id: "fetal_distress", label: "Non-reassuring fetal status" }
         ],
         assess: function (sel) {
-          if (has(sel, "seizure")) return { emergency: true, ladder: 5, catg: "ECLAMPSIA — magnesium + BP control + delivery (NOT an infection)",
-            sc: "Protect airway, left lateral, high-flow O₂; magnesium sulphate (per protocol, no dose here) to stop/prevent seizures; control severe BP (labetalol / nifedipine / hydralazine class); DELIVER once mother is stabilised — delivery is the definitive treatment.",
+          if (has(sel, "seizure")) return { emergency: true, ladder: 5, catg: "ECLAMPSIA - magnesium + BP control + delivery (NOT an infection)",
+            sc: "Protect airway, left lateral, high-flow O₂; magnesium sulphate (per protocol, no dose here) to stop/prevent seizures; control severe BP (labetalol / nifedipine / hydralazine class); DELIVER once mother is stabilised - delivery is the definitive treatment.",
             ref: "Emergency OBGYN + anaesthesia + neonatology NOW. IM/ICU for organ support.",
-            mgmt: ["Antibiotics are irrelevant — this is seizure + BP control, then delivery.", "Magnesium is standard for eclampsia (and severe pre-eclampsia prophylaxis); continue postpartum per protocol.", "Do not give too much fluid — risk of pulmonary oedema; monitor for HELLP."] };
-          if (anyOf(sel, ["severe_htn", "hellp", "fetal_distress"])) return { emergency: true, ladder: 5, catg: "Severe pre-eclampsia — urgent BP control + magnesium + plan delivery",
+            mgmt: ["Antibiotics are irrelevant - this is seizure + BP control, then delivery.", "Magnesium is standard for eclampsia (and severe pre-eclampsia prophylaxis); continue postpartum per protocol.", "Do not give too much fluid - risk of pulmonary oedema; monitor for HELLP."] };
+          if (anyOf(sel, ["severe_htn", "hellp", "fetal_distress"])) return { emergency: true, ladder: 5, catg: "Severe pre-eclampsia - urgent BP control + magnesium + plan delivery",
             sc: "Urgent control of severe hypertension (labetalol / nifedipine / hydralazine class, per protocol); magnesium sulphate for seizure prophylaxis; expedite delivery per OBGYN; continuous fetal monitoring.",
             ref: "Emergency OBGYN + anaesthesia; admit to labour ward. IM/ICU if HELLP / pulmonary oedema.",
-            mgmt: ["This is a hypertensive / obstetric emergency, not infective — no antibiotics.", "Magnesium prevents eclampsia; give steroids for fetal lung maturity if preterm, per protocol.", "Bloods for HELLP (platelets, LFTs, LDH, haemolysis); careful fluid balance."] };
-          if (anyOf(sel, ["headache", "visual", "epigastric", "brisk"])) return { emergency: true, ladder: 3, catg: "Pre-eclampsia with warning symptoms — admit",
+            mgmt: ["This is a hypertensive / obstetric emergency, not infective - no antibiotics.", "Magnesium prevents eclampsia; give steroids for fetal lung maturity if preterm, per protocol.", "Bloods for HELLP (platelets, LFTs, LDH, haemolysis); careful fluid balance."] };
+          if (anyOf(sel, ["headache", "visual", "epigastric", "brisk"])) return { emergency: true, ladder: 3, catg: "Pre-eclampsia with warning symptoms - admit",
             sc: "Admit; monitor BP, urine protein, reflexes, bloods (HELLP screen) and fetus; low threshold for magnesium and delivery if it progresses.",
             ref: "Urgent OBGYN; admit.",
-            mgmt: ["Symptomatic pre-eclampsia can progress to eclampsia fast — do not send home.", "Antibiotics not indicated; BP control and monitoring are the priority."] };
-          if (anyOf(sel, ["high_bp", "proteinuria"])) return { emergency: false, ladder: 0, catg: "Suspected pre-eclampsia — investigate",
+            mgmt: ["Symptomatic pre-eclampsia can progress to eclampsia fast - do not send home.", "Antibiotics not indicated; BP control and monitoring are the priority."] };
+          if (anyOf(sel, ["high_bp", "proteinuria"])) return { emergency: false, ladder: 0, catg: "Suspected pre-eclampsia - investigate",
             sc: "Confirm BP, check urine protein and bloods; assess fetus; arrange close follow-up.",
             ref: "OBGYN / antenatal review promptly.",
-            mgmt: ["Not infective — no antibiotics.", "Safety-net firmly for headache, visual symptoms, epigastric pain, reduced fetal movements or seizure."] };
+            mgmt: ["Not infective - no antibiotics.", "Safety-net firmly for headache, visual symptoms, epigastric pain, reduced fetal movements or seizure."] };
           return { emergency: false, ladder: 0, catg: "Check BP and urine in any pregnant woman",
-            sc: "Measure BP and dip urine — pre-eclampsia is often silent.",
+            sc: "Measure BP and dip urine - pre-eclampsia is often silent.",
             ref: "Antenatal review.",
             mgmt: ["Always check BP and urine in pregnancy ≥ 20 wk or postpartum."] };
         }
@@ -243,18 +243,18 @@
           { id: "coag", label: "Coagulopathy / oozing from puncture sites (DIC)" }
         ],
         assess: function (sel) {
-          if (anyOf(sel, ["shock", "coag"])) return { emergency: true, ladder: 5, catg: "Massive postpartum haemorrhage — BLEEDING emergency (NOT infective)",
+          if (anyOf(sel, ["shock", "coag"])) return { emergency: true, ladder: 5, catg: "Massive postpartum haemorrhage - BLEEDING emergency (NOT infective)",
             sc: "Activate massive-haemorrhage protocol: ABC, two large-bore cannulae, group & crossmatch, transfuse + tranexamic acid; uterine massage + uterotonics; find & treat the cause (atony, retained tissue, trauma, thrombin); escalate to bimanual compression, balloon tamponade, EUA/evacuation, surgical control (B-Lynch, ligation, hysterectomy).",
             ref: "Emergency OBGYN + anaesthesia + haematology NOW. IM/ICU for resuscitation.",
-            mgmt: ["Antibiotics are NOT the treatment — this is bleeding control (4 T's: Tone, Tissue, Trauma, Thrombin).", "Uterotonics + uterine massage first-line for atony; give tranexamic acid early.", "Correct coagulopathy; transfuse per protocol."] };
-          if (anyOf(sel, ["retained", "trauma"])) return { emergency: true, ladder: 4, catg: "PPH with retained tissue / genital tract trauma — source control",
-            sc: "Retained products → uterine evacuation; genital tract tear → suture/repair; examine under anaesthesia if needed — this is the definitive treatment.",
+            mgmt: ["Antibiotics are NOT the treatment - this is bleeding control (4 T's: Tone, Tissue, Trauma, Thrombin).", "Uterotonics + uterine massage first-line for atony; give tranexamic acid early.", "Correct coagulopathy; transfuse per protocol."] };
+          if (anyOf(sel, ["retained", "trauma"])) return { emergency: true, ladder: 4, catg: "PPH with retained tissue / genital tract trauma - source control",
+            sc: "Retained products → uterine evacuation; genital tract tear → suture/repair; examine under anaesthesia if needed - this is the definitive treatment.",
             ref: "Urgent OBGYN; theatre.",
-            mgmt: ["Find the cause among the 4 T's; uterotonics + massage while arranging source control.", "Give prophylactic antibiotics around manual removal / evacuation per local policy — antibiotics are adjunct, not the treatment."] };
-          if (anyOf(sel, ["heavy_bleed", "atony", "risk"])) return { emergency: true, ladder: 3, catg: "Postpartum haemorrhage — atony likely",
+            mgmt: ["Find the cause among the 4 T's; uterotonics + massage while arranging source control.", "Give prophylactic antibiotics around manual removal / evacuation per local policy - antibiotics are adjunct, not the treatment."] };
+          if (anyOf(sel, ["heavy_bleed", "atony", "risk"])) return { emergency: true, ladder: 3, catg: "Postpartum haemorrhage - atony likely",
             sc: "Uterine massage + uterotonics; empty the bladder; ensure the placenta is complete; IV access, fluids, monitor; escalate if not controlled.",
             ref: "Urgent OBGYN; admit.",
-            mgmt: ["Atony causes most PPH — massage + uterotonics are first-line; give tranexamic acid.", "Not infective — do not wait on antibiotics; reassess for retained tissue / trauma if bleeding continues."] };
+            mgmt: ["Atony causes most PPH - massage + uterotonics are first-line; give tranexamic acid.", "Not infective - do not wait on antibiotics; reassess for retained tissue / trauma if bleeding continues."] };
           return { emergency: false, ladder: 0, catg: "Assess blood loss and uterine tone",
             sc: "Quantify loss; check tone, tissue, trauma; monitor observations.",
             ref: "OBGYN if bleeding is more than expected.",
@@ -278,22 +278,22 @@
             sc: "Resuscitate; image (USS) for retained products / collection; evacuation of retained products or drainage as source control.",
             ref: "Emergency OBGYN; admit. IM/ICU co-management for sepsis.",
             mgmt: ["IV broad-spectrum antibiotics per local guidance / ICMR (aerobic + anaerobic cover) immediately.", "Identify and treat the source (retained products, collection)."],
-            abx: { firstLine: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "± Ampicillin 2 g IV q6h", dose: "", route: "", note: "add for enterococcal cover / poor response" }], alt: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are adjunct — identify and treat the source (retained products, collection)." } };
+            abx: { firstLine: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "± Ampicillin 2 g IV q6h", dose: "", route: "", note: "add for enterococcal cover / poor response" }], alt: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are adjunct - identify and treat the source (retained products, collection)." } };
           if (has(sel, "retained")) return { emergency: false, ladder: 4, catg: "Postpartum endometritis with retained products",
             sc: "USS to confirm; surgical evacuation of retained products of conception is the source control.",
             ref: "OBGYN; admit for evacuation.",
-            mgmt: ["IV broad-spectrum antibiotics per local guidance / ICMR around evacuation.", "Antibiotics are adjunct — retained products must be evacuated."],
-            abx: { firstLine: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }], alt: [{ drug: "Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h" }, { drug: "or Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Evacuation of retained products is the source control — antibiotics are adjunct." } };
-          if (anyOf(sel, ["fever", "csection", "no_oral"])) return { emergency: false, ladder: 3, catg: "Postpartum endometritis — admit for IV therapy",
+            mgmt: ["IV broad-spectrum antibiotics per local guidance / ICMR around evacuation.", "Antibiotics are adjunct - retained products must be evacuated."],
+            abx: { firstLine: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }], alt: [{ drug: "Amoxicillin-clavulanate", dose: "1.2 g", route: "IV q8h" }, { drug: "or Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Evacuation of retained products is the source control - antibiotics are adjunct." } };
+          if (anyOf(sel, ["fever", "csection", "no_oral"])) return { emergency: false, ladder: 3, catg: "Postpartum endometritis - admit for IV therapy",
             sc: "Image to exclude retained products / collection; no procedure if none found.",
             ref: "OBGYN admission.",
             mgmt: ["IV broad-spectrum antibiotics per local guidance / ICMR, switch to oral once afebrile and improving.", "Reassess for retained products if slow to respond."],
-            abx: { firstLine: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }], alt: [{ drug: "Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Switch to oral (e.g. amoxicillin–clavulanate 625 mg PO TID ± metronidazole) once afebrile 24–48 h and improving." } };
-          return { emergency: false, ladder: 2, catg: "Mild postpartum endometritis — oral therapy",
+            abx: { firstLine: [{ drug: "Clindamycin", dose: "900 mg", route: "IV q8h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }], alt: [{ drug: "Amoxicillin-clavulanate", dose: "1.2 g", route: "IV q8h" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Switch to oral (e.g. amoxicillin-clavulanate 625 mg PO TID ± metronidazole) once afebrile 24-48 h and improving." } };
+          return { emergency: false, ladder: 2, catg: "Mild postpartum endometritis - oral therapy",
             sc: "No procedure; image if not settling.",
             ref: "Gynae / postnatal review; review at 48 h.",
             mgmt: ["Oral antibiotics per local guidance for mild disease with adequate oral intake.", "Safety-net to escalate for fever, worsening pain or heavy/foul discharge."],
-            abx: { firstLine: [{ drug: "Amoxicillin–clavulanate", dose: "625 mg", route: "PO TID", note: "7–10 days" }], alt: [{ drug: "Clindamycin", dose: "300 mg", route: "PO QID" }, { drug: "± Metronidazole", dose: "400 mg", route: "PO BID", note: "extra anaerobic cover" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Only for mild disease with adequate oral intake — escalate to IV if fever / worsening." } };
+            abx: { firstLine: [{ drug: "Amoxicillin-clavulanate", dose: "625 mg", route: "PO TID", note: "7-10 days" }], alt: [{ drug: "Clindamycin", dose: "300 mg", route: "PO QID" }, { drug: "± Metronidazole", dose: "400 mg", route: "PO BID", note: "extra anaerobic cover" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Only for mild disease with adequate oral intake - escalate to IV if fever / worsening." } };
         }
       },
       /* ───────────────────── Septic abortion ───────────────────── */
@@ -309,16 +309,16 @@
           { id: "peritonism", label: "Peritonism / suspected uterine perforation / bowel injury" }
         ],
         assess: function (sel) {
-          if (anyOf(sel, ["sepsis", "peritonism"])) return { emergency: true, ladder: 5, catg: "Septic abortion with septic shock / visceral injury — EMERGENCY",
+          if (anyOf(sel, ["sepsis", "peritonism"])) return { emergency: true, ladder: 5, catg: "Septic abortion with septic shock / visceral injury - EMERGENCY",
             sc: "Resuscitate aggressively; URGENT uterine evacuation of retained products; laparotomy if perforation / bowel injury; hysterectomy may be needed in life-threatening sepsis.",
             ref: "Emergency OBGYN + anaesthesia NOW. IM/ICU co-management for sepsis; Surgery if visceral injury.",
             mgmt: ["IV broad-spectrum antibiotics per local guidance / ICMR (aerobic + anaerobic incl. cover for Clostridium/toxin) immediately.", "Evacuation of retained products is the definitive source control; give anti-D if Rh-negative per local policy."],
-            abx: { firstLine: [{ drug: "Ampicillin", dose: "2 g", route: "IV q6h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobic + Clostridium / toxin cover" }], alt: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "or Clindamycin 900 mg IV q8h + Gentamicin", dose: "", route: "", note: "clindamycin adds clostridial toxin suppression; carbapenem if severe/resistant" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are adjunct — urgent uterine evacuation (± laparotomy/hysterectomy) is the definitive source control." } };
-          return { emergency: true, ladder: 4, catg: "Septic abortion — resuscitate + IV antibiotics + urgent evacuation",
+            abx: { firstLine: [{ drug: "Ampicillin", dose: "2 g", route: "IV q6h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobic + Clostridium / toxin cover" }], alt: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }, { drug: "or Clindamycin 900 mg IV q8h + Gentamicin", dose: "", route: "", note: "clindamycin adds clostridial toxin suppression; carbapenem if severe/resistant" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are adjunct - urgent uterine evacuation (± laparotomy/hysterectomy) is the definitive source control." } };
+          return { emergency: true, ladder: 4, catg: "Septic abortion - resuscitate + IV antibiotics + urgent evacuation",
             sc: "Urgent surgical evacuation of retained products of conception is the source control; USS to confirm; send tissue/pus for culture.",
             ref: "Urgent OBGYN; admit.",
             mgmt: ["Resuscitate (IV access, fluids); start IV broad-spectrum antibiotics per local guidance / ICMR before / around evacuation.", "Do not delay evacuation of retained products; give anti-D if Rh-negative per local policy."],
-            abx: { firstLine: [{ drug: "Ampicillin", dose: "2 g", route: "IV q6h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }], alt: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "or Clindamycin 900 mg IV q8h + Gentamicin", dose: "", route: "" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Start before / around evacuation — do not delay uterine evacuation of retained products." } };
+            abx: { firstLine: [{ drug: "Ampicillin", dose: "2 g", route: "IV q6h" }, { drug: "+ Gentamicin", dose: "5 mg/kg", route: "IV daily" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }], alt: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }, { drug: "or Clindamycin 900 mg IV q8h + Gentamicin", dose: "", route: "" }], ref: "ICMR / national obstetric guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Start before / around evacuation - do not delay uterine evacuation of retained products." } };
         }
       },
       /* ───────────────────── Ovarian torsion ───────────────────── */
@@ -334,18 +334,18 @@
           { id: "fever", label: "Fever (necrosis / late)" }
         ],
         assess: function (sel) {
-          if (anyOf(sel, ["peritonism", "shock", "fever"])) return { emergency: true, ladder: 5, catg: "Ovarian torsion with peritonism / instability — SURGICAL emergency (not infective)",
-            sc: "Resuscitate; EMERGENCY laparoscopy — detorsion (± cystectomy) to save the ovary; do NOT wait — the ovary is time-critical.",
+          if (anyOf(sel, ["peritonism", "shock", "fever"])) return { emergency: true, ladder: 5, catg: "Ovarian torsion with peritonism / instability - SURGICAL emergency (not infective)",
+            sc: "Resuscitate; EMERGENCY laparoscopy - detorsion (± cystectomy) to save the ovary; do NOT wait - the ovary is time-critical.",
             ref: "Emergency OBGYN + anaesthesia NOW.",
-            mgmt: ["This is ischaemia, not infection — antibiotics are not the treatment; theatre saves the ovary.", "Do a pregnancy test; USS with Doppler helps but normal flow does NOT exclude torsion — clinical suspicion wins."] };
-          if (anyOf(sel, ["sudden_pain", "mass", "intermittent"])) return { emergency: true, ladder: 4, catg: "Suspected ovarian torsion — urgent surgery",
-            sc: "Urgent transvaginal/pelvic USS with Doppler; EMERGENCY laparoscopy for detorsion is the definitive treatment — early surgery preserves the ovary.",
+            mgmt: ["This is ischaemia, not infection - antibiotics are not the treatment; theatre saves the ovary.", "Do a pregnancy test; USS with Doppler helps but normal flow does NOT exclude torsion - clinical suspicion wins."] };
+          if (anyOf(sel, ["sudden_pain", "mass", "intermittent"])) return { emergency: true, ladder: 4, catg: "Suspected ovarian torsion - urgent surgery",
+            sc: "Urgent transvaginal/pelvic USS with Doppler; EMERGENCY laparoscopy for detorsion is the definitive treatment - early surgery preserves the ovary.",
             ref: "Urgent OBGYN; admit.",
-            mgmt: ["Sudden severe unilateral pain + adnexal mass = torsion until excluded — do not delay for imaging if suspicion is high.", "Always do a pregnancy test; not an infective problem — antibiotics not indicated."] };
-          return { emergency: false, ladder: 0, catg: "Acute pelvic pain — keep torsion in mind",
+            mgmt: ["Sudden severe unilateral pain + adnexal mass = torsion until excluded - do not delay for imaging if suspicion is high.", "Always do a pregnancy test; not an infective problem - antibiotics not indicated."] };
+          return { emergency: false, ladder: 0, catg: "Acute pelvic pain - keep torsion in mind",
             sc: "Pregnancy test + pelvic USS with Doppler; low threshold to escalate to surgery if pain is severe or a mass is present.",
             ref: "OBGYN if pain persists or a mass is found.",
-            mgmt: ["Torsion is a clinical diagnosis — imaging supports but does not exclude it.", "Exclude ectopic (β-hCG) and appendicitis."] };
+            mgmt: ["Torsion is a clinical diagnosis - imaging supports but does not exclude it.", "Exclude ectopic (β-hCG) and appendicitis."] };
         }
       },
       /* ───────────────────── Bartholin abscess ───────────────────── */
@@ -361,20 +361,20 @@
         ],
         assess: function (sel) {
           if (has(sel, "necrosis")) return { emergency: true, ladder: 5, catg: "⚠ Suspected necrotising vulval / perineal infection",
-            sc: "IMMEDIATE surgical exploration & debridement — do NOT delay for imaging.",
+            sc: "IMMEDIATE surgical exploration & debridement - do NOT delay for imaging.",
             ref: "Emergency OBGYN + Surgery + critical care NOW.",
-            mgmt: ["Aggressive resuscitation; broad-spectrum IV antibiotics per local protocol / ICMR.", "This is beyond a simple abscess — a surgical emergency."],
-            abx: { firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "+ Clindamycin", dose: "900 mg", route: "IV q8h", note: "toxin suppression" }, { drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h", note: "MRSA cover" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }, { drug: "+ Clindamycin", dose: "900 mg", route: "IV q8h" }], ref: "ICMR / national guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Surgery (urgent debridement) is the priority — antibiotics are adjunctive." } };
+            mgmt: ["Aggressive resuscitation; broad-spectrum IV antibiotics per local protocol / ICMR.", "This is beyond a simple abscess - a surgical emergency."],
+            abx: { firstLine: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }, { drug: "+ Clindamycin", dose: "900 mg", route: "IV q8h", note: "toxin suppression" }, { drug: "+ Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h", note: "MRSA cover" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }, { drug: "+ Clindamycin", dose: "900 mg", route: "IV q8h" }], ref: "ICMR / national guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Surgery (urgent debridement) is the priority - antibiotics are adjunctive." } };
           if (has(sel, "sepsis")) return { emergency: false, ladder: 4, catg: "Bartholin abscess with systemic sepsis",
             sc: "Incision & drainage (with Word catheter or marsupialisation) is the primary treatment; send pus for culture.",
             ref: "Urgent OBGYN; admit.",
             mgmt: ["IV antibiotics per local guidance / ICMR as adjunct to drainage given systemic features."],
-            abx: { firstLine: [{ drug: "Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h" }], alt: [{ drug: "Ceftriaxone", dose: "1–2 g", route: "IV daily" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }], ref: "ICMR / national guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are adjunct to incision & drainage; add gonococcal / chlamydial cover if an STI is suspected." } };
-          return { emergency: false, ladder: 1, catg: "Bartholin abscess — incision & drainage",
+            abx: { firstLine: [{ drug: "Amoxicillin-clavulanate", dose: "1.2 g", route: "IV q8h" }], alt: [{ drug: "Ceftriaxone", dose: "1-2 g", route: "IV daily" }, { drug: "+ Metronidazole", dose: "500 mg", route: "IV q8h" }], ref: "ICMR / national guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Antibiotics are adjunct to incision & drainage; add gonococcal / chlamydial cover if an STI is suspected." } };
+          return { emergency: false, ladder: 1, catg: "Bartholin abscess - incision & drainage",
             sc: "Incision & drainage with Word catheter placement, or marsupialisation (esp. if recurrent), is the definitive treatment; culture pus.",
             ref: "OBGYN / minor-ops for drainage.",
-            mgmt: ["Antibiotics are adjunct ONLY — add if surrounding cellulitis, systemic features or immunocompromise/diabetes; otherwise drainage alone suffices.", "Analgesia; sitz baths; consider STI screening.", "Consider biopsy in women > 40 y to exclude malignancy."],
-            abx: { firstLine: [{ drug: "Amoxicillin–clavulanate", dose: "625 mg", route: "PO TID", note: "ONLY if surrounding cellulitis / systemic features / diabetes-immunocompromise" }], alt: [{ drug: "Cephalexin", dose: "500 mg", route: "PO QID" }, { drug: "± Ceftriaxone 500 mg IM + Azithromycin 1 g PO", dose: "", route: "", note: "if gonococcal / chlamydial STI suspected" }], ref: "ICMR / national guidance / Sanford", note: "Empiric — adjust to local antibiogram/ICMR, cultures, renal function & allergy. Drainage alone suffices for a simple abscess — antibiotics are adjunct only. In PREGNANCY avoid doxycycline (use azithromycin)." } };
+            mgmt: ["Antibiotics are adjunct ONLY - add if surrounding cellulitis, systemic features or immunocompromise/diabetes; otherwise drainage alone suffices.", "Analgesia; sitz baths; consider STI screening.", "Consider biopsy in women > 40 y to exclude malignancy."],
+            abx: { firstLine: [{ drug: "Amoxicillin-clavulanate", dose: "625 mg", route: "PO TID", note: "ONLY if surrounding cellulitis / systemic features / diabetes-immunocompromise" }], alt: [{ drug: "Cephalexin", dose: "500 mg", route: "PO QID" }, { drug: "± Ceftriaxone 500 mg IM + Azithromycin 1 g PO", dose: "", route: "", note: "if gonococcal / chlamydial STI suspected" }], ref: "ICMR / national guidance / Sanford", note: "Empiric - adjust to local antibiogram/ICMR, cultures, renal function & allergy. Drainage alone suffices for a simple abscess - antibiotics are adjunct only. In PREGNANCY avoid doxycycline (use azithromycin)." } };
         }
       },
       /* ───────────────────── Vaginitis ───────────────────── */
@@ -390,30 +390,30 @@
           { id: "systemic", label: "Fever / systemic upset" }
         ],
         assess: function (sel) {
-          if (anyOf(sel, ["pelvic_pain", "systemic"])) return { emergency: false, ladder: 2, catg: "Discharge with pelvic pain / systemic features — reassess for PID / upper-tract infection",
-            sc: "No procedure — examine (incl. speculum + bimanual); this is beyond simple vaginitis.",
+          if (anyOf(sel, ["pelvic_pain", "systemic"])) return { emergency: false, ladder: 2, catg: "Discharge with pelvic pain / systemic features - reassess for PID / upper-tract infection",
+            sc: "No procedure - examine (incl. speculum + bimanual); this is beyond simple vaginitis.",
             ref: "Gynae / sexual-health; open the PID pathway if cervical motion / adnexal tenderness.",
-            mgmt: ["Do not label as simple vaginitis if there is pelvic pain or fever — assess and treat for PID per local guidance if criteria met.", "Test for STIs; treat partners where relevant."],
-            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "500 mg", route: "IM stat" }, { drug: "+ Doxycycline", dose: "100 mg", route: "PO BID", note: "14 days" }, { drug: "+ Metronidazole", dose: "400 mg", route: "PO BID", note: "14 days" }], alt: [{ drug: "Azithromycin", dose: "1 g", route: "PO weekly ×2", note: "pregnancy-safe alternative to doxycycline" }], ref: "ICMR / national PID guidance / Sanford", note: "Empiric PID cover — give only if PID criteria are met; adjust to local antibiogram/ICMR, cultures, renal function & allergy. In PREGNANCY avoid doxycycline — use ceftriaxone + azithromycin + metronidazole." } };
+            mgmt: ["Do not label as simple vaginitis if there is pelvic pain or fever - assess and treat for PID per local guidance if criteria met.", "Test for STIs; treat partners where relevant."],
+            abx: { firstLine: [{ drug: "Ceftriaxone", dose: "500 mg", route: "IM stat" }, { drug: "+ Doxycycline", dose: "100 mg", route: "PO BID", note: "14 days" }, { drug: "+ Metronidazole", dose: "400 mg", route: "PO BID", note: "14 days" }], alt: [{ drug: "Azithromycin", dose: "1 g", route: "PO weekly ×2", note: "pregnancy-safe alternative to doxycycline" }], ref: "ICMR / national PID guidance / Sanford", note: "Empiric PID cover - give only if PID criteria are met; adjust to local antibiogram/ICMR, cultures, renal function & allergy. In PREGNANCY avoid doxycycline - use ceftriaxone + azithromycin + metronidazole." } };
           if (has(sel, "frothy")) return { emergency: false, ladder: 2, catg: "Trichomoniasis (suspected)",
             sc: "No procedure.",
             ref: "Sexual-health; partner notification and treatment.",
-            mgmt: ["Oral regimen per local guidance — an STI, so screen for co-infections and treat the partner.", "Not an emergency."],
-            abx: { firstLine: [{ drug: "Metronidazole", dose: "400 mg", route: "PO BID", note: "7 days" }], alt: [{ drug: "Metronidazole", dose: "2 g", route: "PO single dose" }, { drug: "or Tinidazole", dose: "2 g", route: "PO single dose" }], ref: "ICMR / national STI guidance / Sanford", note: "Empiric — adjust to local guidance & allergy. An STI — treat the partner and screen for co-infection. Metronidazole is acceptable in PREGNANCY (prefer 400 mg BID over the 2 g single dose); avoid alcohol during and 48 h after." } };
+            mgmt: ["Oral regimen per local guidance - an STI, so screen for co-infections and treat the partner.", "Not an emergency."],
+            abx: { firstLine: [{ drug: "Metronidazole", dose: "400 mg", route: "PO BID", note: "7 days" }], alt: [{ drug: "Metronidazole", dose: "2 g", route: "PO single dose" }, { drug: "or Tinidazole", dose: "2 g", route: "PO single dose" }], ref: "ICMR / national STI guidance / Sanford", note: "Empiric - adjust to local guidance & allergy. An STI - treat the partner and screen for co-infection. Metronidazole is acceptable in PREGNANCY (prefer 400 mg BID over the 2 g single dose); avoid alcohol during and 48 h after." } };
           if (has(sel, "fishy")) return { emergency: false, ladder: 1, catg: "Bacterial vaginosis (suspected)",
             sc: "No procedure.",
             ref: "GP / sexual-health; review if recurrent.",
             mgmt: ["Topical or oral regimen per local guidance; often self-limiting.", "Treat symptomatic BV in pregnancy per local guidance; not an emergency."],
-            abx: { firstLine: [{ drug: "Metronidazole", dose: "400 mg", route: "PO BID", note: "5–7 days" }], alt: [{ drug: "Metronidazole 0.75% gel", dose: "5 g", route: "intravaginal OD", note: "5 days" }, { drug: "or Clindamycin 2% cream", dose: "5 g", route: "intravaginal nocte", note: "7 days" }], ref: "ICMR / national STI guidance / Sanford", note: "Empiric — adjust to local guidance & allergy. Oral/gel metronidazole and clindamycin cream are all acceptable in PREGNANCY; treat symptomatic BV. Avoid alcohol with oral metronidazole." } };
+            abx: { firstLine: [{ drug: "Metronidazole", dose: "400 mg", route: "PO BID", note: "5-7 days" }], alt: [{ drug: "Metronidazole 0.75% gel", dose: "5 g", route: "intravaginal OD", note: "5 days" }, { drug: "or Clindamycin 2% cream", dose: "5 g", route: "intravaginal nocte", note: "7 days" }], ref: "ICMR / national STI guidance / Sanford", note: "Empiric - adjust to local guidance & allergy. Oral/gel metronidazole and clindamycin cream are all acceptable in PREGNANCY; treat symptomatic BV. Avoid alcohol with oral metronidazole." } };
           if (has(sel, "curdy")) return { emergency: false, ladder: 1, catg: "Vulvovaginal candidiasis (uncomplicated)",
             sc: "No procedure.",
-            ref: "GP; review if recurrent / not responding — investigate for diabetes.",
+            ref: "GP; review if recurrent / not responding - investigate for diabetes.",
             mgmt: ["Topical or single-dose oral antifungal per local guidance for uncomplicated disease.", "Recurrent / severe / pregnant / immunocompromised → per local guidance (topical preferred in pregnancy); not an emergency."],
-            abx: { firstLine: [{ drug: "Fluconazole", dose: "150 mg", route: "PO single dose" }], alt: [{ drug: "Clotrimazole", dose: "500 mg pessary", route: "intravaginal single dose", note: "or 1% cream ×7 nights" }], ref: "ICMR / national guidance / Sanford", note: "Empiric antifungal — adjust to local guidance & allergy. In PREGNANCY AVOID oral fluconazole — use topical clotrimazole (7-day intravaginal course). Recurrent disease → induction–maintenance azole per local guidance." } };
-          return { emergency: false, ladder: 0, catg: "Vaginal discharge — clarify cause",
-            sc: "No procedure — examine and take swabs to characterise the discharge.",
+            abx: { firstLine: [{ drug: "Fluconazole", dose: "150 mg", route: "PO single dose" }], alt: [{ drug: "Clotrimazole", dose: "500 mg pessary", route: "intravaginal single dose", note: "or 1% cream ×7 nights" }], ref: "ICMR / national guidance / Sanford", note: "Empiric antifungal - adjust to local guidance & allergy. In PREGNANCY AVOID oral fluconazole - use topical clotrimazole (7-day intravaginal course). Recurrent disease → induction-maintenance azole per local guidance." } };
+          return { emergency: false, ladder: 0, catg: "Vaginal discharge - clarify cause",
+            sc: "No procedure - examine and take swabs to characterise the discharge.",
             ref: "GP / sexual-health.",
-            mgmt: ["Treat once the cause is identified (BV, candidiasis, trichomoniasis) per local guidance — avoid blind treatment.", "Test for STIs; not an emergency."],
+            mgmt: ["Treat once the cause is identified (BV, candidiasis, trichomoniasis) per local guidance - avoid blind treatment.", "Test for STIs; not an emergency."],
             abx: null };
         }
       }

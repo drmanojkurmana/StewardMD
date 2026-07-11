@@ -1,13 +1,13 @@
 /* ============================================================================
-   StewardMD vNext — Dynamic Clinical Reasoning Engine (Phase 2)
+   StewardMD vNext - Dynamic Clinical Reasoning Engine (Phase 2)
    FULLY DATA-DRIVEN. The infectious differential is generated live from the
-   entire StewardMD disease database (window.SYNDROMES) — every current and
+   entire StewardMD disease database (window.SYNDROMES) - every current and
    future syndrome auto-participates with NO new reasoning code. A parallel
    non-infectious knowledge layer (DDX_NI, same schema) drives the green
    differential. Symptom-first, live-updating, two-section (🔴/🟢), with a
    transparent Clinical Confidence Score and an infection gate that controls
    when the stewardship engine activates.
-   Decision support only — never diagnostic. Pending clinician sign-off.
+   Decision support only - never diagnostic. Pending clinician sign-off.
    ========================================================================== */
 (function () {
   "use strict";
@@ -77,7 +77,7 @@
   /* ---------------------------------------------------------------------- *
    * NON-INFECTIOUS knowledge layer (data-driven, extensible).
    * find: { findingKey: weight }   positive raises, negative lowers.
-   * Add entries freely — they automatically join the differential.
+   * Add entries freely - they automatically join the differential.
    * ---------------------------------------------------------------------- */
   var DDX_NI = [
     /* ---- Headache cluster ---- */
@@ -91,11 +91,11 @@
       reason:"Bilateral pressure-type headache without systemic or neurological red flags." },
     { id:"sah", name:"Subarachnoid hemorrhage", system:"Neurology / Vascular",
       find:{ thunderclapHeadache:55, headache:20, neckStiffness:22, alteredSensorium:18, seizure:8, ageOver50:6, fever:-6 },
-      inv:["Non-contrast CT head (urgent)","LP for xanthochromia if CT negative","CT angiography"], red:["Thunderclap headache is SAH until proven otherwise — image immediately"],
+      inv:["Non-contrast CT head (urgent)","LP for xanthochromia if CT negative","CT angiography"], red:["Thunderclap headache is SAH until proven otherwise - image immediately"],
       reason:"Sudden worst-ever headache ± meningism and reduced consciousness is classic for subarachnoid hemorrhage." },
     { id:"ischemic_stroke", name:"Acute ischemic stroke", system:"Neurology / Vascular",
       find:{ focalNeuroDeficit:46, alteredSensorium:16, ageOver50:10, hypertensionHx:8, headache:4, fever:-20, neckStiffness:-14 },
-      inv:["Non-contrast CT head (urgent)","CT/MR angiography","Glucose (stroke mimic)"], red:["Time-critical — thrombolysis/thrombectomy window"],
+      inv:["Non-contrast CT head (urgent)","CT/MR angiography","Glucose (stroke mimic)"], red:["Time-critical - thrombolysis/thrombectomy window"],
       reason:"Acute focal neurological deficit favours a vascular event; image urgently and check the stroke pathway." },
     { id:"ich", name:"Intracerebral hemorrhage", system:"Neurology / Vascular",
       find:{ focalNeuroDeficit:36, headache:24, alteredSensorium:24, hypertensionHx:16, anticoagulated:16, ageOver50:6, fever:-10 },
@@ -111,7 +111,7 @@
       reason:"Headache with visual disturbance and papilloedema in the right demographic suggests raised intracranial pressure without a mass." },
     { id:"temporal_arteritis", name:"Giant cell (temporal) arteritis", system:"Rheumatology",
       find:{ headache:28, visualDisturbance:24, ageOver50:22, polyarthralgia:8, weightLoss:8 },
-      inv:["ESR / CRP (markedly raised)","Temporal artery biopsy","Start high-dose steroids if suspected"], red:["Visual loss is an emergency — do not delay steroids"],
+      inv:["ESR / CRP (markedly raised)","Temporal artery biopsy","Start high-dose steroids if suspected"], red:["Visual loss is an emergency - do not delay steroids"],
       reason:"New headache with visual symptoms in a patient over 50 with raised inflammatory markers suggests giant cell arteritis." },
 
     /* ---- Chest pain cluster ---- */
@@ -121,7 +121,7 @@
       reason:"Pressure-type / exertional chest pain with ischaemic ECG or risk factors favours an acute coronary syndrome." },
     { id:"aortic_dissection", name:"Aortic dissection", system:"Vascular emergency",
       find:{ chestPain:30, backPain:30, thunderclapHeadache:6, hypertensionHx:18, ageOver50:8, syncope:10 },
-      inv:["CT aortogram (urgent)","BP in both arms","Control HR & BP"], red:["Tearing chest/back pain with pulse/BP differential — emergency imaging"],
+      inv:["CT aortogram (urgent)","BP in both arms","Control HR & BP"], red:["Tearing chest/back pain with pulse/BP differential - emergency imaging"],
       reason:"Severe tearing chest pain radiating to the back, especially with hypertension, raises aortic dissection." },
     { id:"pe", name:"Pulmonary embolism", system:"Pulmonary / Vascular",
       find:{ pleuriticChestPain:30, dyspnea:34, hypoxia:22, tachycardia:16, legSwellingUnilateral:18, calfTenderness:12, fever:-6 },
@@ -147,13 +147,13 @@
       reason:"Orthopnoea, raised JVP and bilateral crackles favour cardiogenic pulmonary oedema rather than infection." },
     { id:"copd_exac_ni", name:"COPD exacerbation (non-infective)", system:"Pulmonary",
       find:{ dyspnea:30, knownHeartFailure:-6, fever:-6, knownCOPD:16, increasedDyspnea:14 },
-      inv:["ABG","CXR to exclude pneumonia/pneumothorax"], red:["Distinguish infective trigger — may need antibiotics"],
+      inv:["ABG","CXR to exclude pneumonia/pneumothorax"], red:["Distinguish infective trigger - may need antibiotics"],
       reason:"Increased breathlessness in known COPD without consolidation or fever may be a non-infective exacerbation." },
 
     /* ---- Shock cluster (mimics of septic shock) ---- */
     { id:"cardiogenic_shock", name:"Cardiogenic shock", system:"Cardiology / Critical care",
       find:{ hypotension:40, raisedJVP:24, bilateralCrackles:20, ecgIschemia:30, dyspnea:12, fever:-16 },
-      inv:["ECG, troponin","Echocardiogram","Lactate"], red:["Revascularisation/inotropes — not antibiotics"], tools:["shock"],
+      inv:["ECG, troponin","Echocardiogram","Lactate"], red:["Revascularisation/inotropes - not antibiotics"], tools:["shock"],
       reason:"Hypotension with pulmonary congestion and ischaemic ECG favours a primary cardiac cause of shock." },
     { id:"hypovolemic_shock", name:"Hypovolemic / haemorrhagic shock", system:"Critical care",
       find:{ hypotension:38, tachycardia:22, melena:18, anticoagulated:8, fever:-12, hemoglobin:18, syncope:14 },
@@ -172,19 +172,19 @@
     { id:"dka", name:"Diabetic ketoacidosis", system:"Endocrine",
       find:{ ketonemia:40, polyuriaPolydipsia:28, diabetesHx:24, dyspnea:10, abdominalPain:10, alteredSensorium:10, fever:-6 },
       inv:["Venous gas","Blood & urine ketones","Glucose, electrolytes","Search for precipitant (infection)"], red:["DKA protocol; look for precipitating infection"], tools:["dka"],
-      reason:"High-anion-gap acidosis with ketonaemia in a diabetic indicates DKA — search for a precipitant." },
+      reason:"High-anion-gap acidosis with ketonaemia in a diabetic indicates DKA - search for a precipitant." },
     { id:"hypoglycemia", name:"Hypoglycemia", system:"Endocrine",
       find:{ alteredSensorium:34, diabetesHx:14, seizure:8, fever:-12, neckStiffness:-12, clinicallyImproving:16, oralIntake:10 },
-      inv:["Capillary & lab glucose","Give IV dextrose"], red:["Rapidly reversible — check glucose first in any altered patient"],
+      inv:["Capillary & lab glucose","Give IV dextrose"], red:["Rapidly reversible - check glucose first in any altered patient"],
       reason:"Altered sensorium with low glucose is rapidly reversible and must be excluded first." },
     { id:"metabolic_enceph", name:"Metabolic encephalopathy", system:"Neuro / Metabolic",
       find:{ alteredSensorium:44, asterixis:30, jaundice:10, fever:-14, neckStiffness:-16, renalImpairment:10, subacuteOnset:6 },
-      inv:["Electrolytes, glucose, calcium","Renal & liver panel, ammonia","ABG"], red:["Reversible — correct the derangement"],
+      inv:["Electrolytes, glucose, calcium","Renal & liver panel, ammonia","ABG"], red:["Reversible - correct the derangement"],
       reason:"Diffuse encephalopathy without meningism, driven by a metabolic derangement." },
     { id:"hepatic_enceph", name:"Hepatic encephalopathy", system:"Hepatology",
       find:{ alteredSensorium:36, asterixis:30, jaundice:24, ascites:18, fever:-6, neckStiffness:-10 },
       inv:["Ammonia, LFT, coagulation","Identify precipitant (SBP, GI bleed)"], red:["Look for precipitating infection (e.g. SBP)"],
-      reason:"Encephalopathy with stigmata of chronic liver disease suggests hepatic encephalopathy — seek a precipitant." },
+      reason:"Encephalopathy with stigmata of chronic liver disease suggests hepatic encephalopathy - seek a precipitant." },
     { id:"drug_intox", name:"Drug intoxication / poisoning", system:"Toxicology",
       find:{ alteredSensorium:36, drugOverdose:42, seizure:8, fever:-10, neckStiffness:-12 },
       inv:["Toxidrome assessment","Paracetamol/salicylate levels","ABG, osmolar gap"], red:["Specific antidotes where available"],
@@ -213,7 +213,7 @@
     /* ---- Abdominal cluster ---- */
     { id:"pancreatitis", name:"Acute pancreatitis", system:"Gastroenterology",
       find:{ abdominalPain:34, severeAbdominalPain:24, nauseaVomiting:18, backPain:14, fever:6 },
-      inv:["Serum lipase/amylase (>3× ULN)","CT abdomen if severe/uncertain","Ultrasound for gallstones"], red:["Assess severity (organ failure) — may need ICU"],
+      inv:["Serum lipase/amylase (>3× ULN)","CT abdomen if severe/uncertain","Ultrasound for gallstones"], red:["Assess severity (organ failure) - may need ICU"],
       reason:"Severe epigastric pain radiating to the back with raised lipase indicates pancreatitis." },
     { id:"peptic_ulcer", name:"Peptic ulcer disease / upper GI bleed", system:"Gastroenterology",
       find:{ abdominalPain:24, melena:30, hematemesis:30, anticoagulated:10, fever:-10 },
@@ -225,7 +225,7 @@
       reason:"Colicky pain with distension and vomiting and absolute constipation suggests obstruction." },
     { id:"mesenteric_ischemia", name:"Acute mesenteric ischemia", system:"Vascular / GI",
       find:{ severeAbdominalPain:36, abdominalPain:18, atrialFibHx:18, ageOver50:12, raised_lactate:16, fever:-4, severePain:18, lactateElevated:10, organDysfunction:6 },
-      inv:["CT angiography (mesenteric)","Lactate","Urgent surgical/vascular review"], red:["Pain out of proportion to exam — time-critical"],
+      inv:["CT angiography (mesenteric)","Lactate","Urgent surgical/vascular review"], red:["Pain out of proportion to exam - time-critical"],
       reason:"Severe pain out of proportion to examination, especially with AF or vascular disease, suggests mesenteric ischaemia." },
     { id:"biliary_colic", name:"Biliary colic / cholelithiasis", system:"Gastroenterology",
       find:{ rightUpperQuadrantPain:44, nauseaVomiting:16, murphySign:10, fever:-12, jaundice:-6, oralIntake:8, stable:6, afebrile:6, abdominalPain:4 },
@@ -243,8 +243,8 @@
     /* ---- Endocrine / metabolic / neuro ---- */
     { id:"thyroid_storm", name:"Thyroid storm", system:"Endocrine",
       find:{ fever:18, tachycardia:24, palpitations:20, alteredSensorium:16, diarrhea:10, atrialFibHx:20, weightLoss:14, toxicAppearing:6 },
-      inv:["TFTs (TSH↓, free T4/T3↑)","ECG","Burch-Wartofsky score"], red:["Life-threatening — beta-blockade, antithyroid drugs"],
-      reason:"Fever, tachycardia and agitation with thyrotoxic features suggest thyroid storm — a non-infectious cause of fever." },
+      inv:["TFTs (TSH↓, free T4/T3↑)","ECG","Burch-Wartofsky score"], red:["Life-threatening - beta-blockade, antithyroid drugs"],
+      reason:"Fever, tachycardia and agitation with thyrotoxic features suggest thyroid storm - a non-infectious cause of fever." },
     { id:"seizure_epilepsy", name:"Seizure / epilepsy", system:"Neurology",
       find:{ seizure:44, alteredSensorium:18, fever:-8 },
       inv:["Glucose, electrolytes, calcium","EEG","Neuroimaging if first seizure/focal"], red:["Status epilepticus → emergency"],
@@ -254,43 +254,43 @@
        src = source metadata for governance (title / edition / internal ref / last reviewed). */
     { id:"hypertensive_enceph", name:"Hypertensive encephalopathy / PRES", system:"Neurology / Vascular",
       find:{ alteredSensorium:34, hypertensionHx:30, headache:22, visualDisturbance:20, seizure:14, nauseaVomiting:8, focalNeuroDeficit:-6, fever:-14, neckStiffness:-12 },
-      inv:["Urgent BP + fundoscopy (grade III–IV retinopathy)","CT/MRI brain to exclude haemorrhage / stroke (PRES: posterior white-matter oedema)","Renal function + urinalysis"],
-      red:["Diagnosis of exclusion — image FIRST to exclude ICH/stroke; lower BP in a controlled, gradual manner"],
+      inv:["Urgent BP + fundoscopy (grade III-IV retinopathy)","CT/MRI brain to exclude haemorrhage / stroke (PRES: posterior white-matter oedema)","Renal function + urinalysis"],
+      red:["Diagnosis of exclusion - image FIRST to exclude ICH/stroke; lower BP in a controlled, gradual manner"],
       disc:["GCS","pupils/reactivity","focal deficit vs diffuse","CT/MRI result","fundoscopy"],
-      reason:"Severe hypertension with a diffuse encephalopathy (± seizures, visual disturbance) and no clear focal deficit suggests hypertensive encephalopathy / PRES — exclude haemorrhage first.",
+      reason:"Severe hypertension with a diffuse encephalopathy (± seizures, visual disturbance) and no clear focal deficit suggests hypertensive encephalopathy / PRES - exclude haemorrhage first.",
       src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Hypertensive emergencies; PRES", rev:"2026-07", note:"Diagnosis of exclusion; neuroimaging mandatory." } },
     { id:"post_ictal", name:"Post-ictal state", system:"Neurology",
       find:{ seizure:34, alteredSensorium:26, clinicallyImproving:20, focalNeuroDeficit:8, fever:-10, neckStiffness:-12 },
       inv:["Capillary + lab glucose","Electrolytes, calcium, magnesium","Neuroimaging if first seizure / focal / head injury"],
       red:["If consciousness does NOT recover between or after seizures → exclude non-convulsive status; always check glucose"],
       disc:["seizure duration & recurrence","time since seizure","glucose","recovery trajectory (GCS trend)"],
-      reason:"Transient reduced consciousness that is recovering after a witnessed seizure suggests a post-ictal state — exclude metabolic and structural triggers.",
+      reason:"Transient reduced consciousness that is recovering after a witnessed seizure suggests a post-ictal state - exclude metabolic and structural triggers.",
       src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Seizures & status epilepticus", rev:"2026-07", note:"Post-ictal recovery distinguishes from ongoing/non-convulsive status." } },
     { id:"status_epilepticus", name:"Convulsive status epilepticus", system:"Neurology / Emergency",
       find:{ seizure:46, alteredSensorium:24, focalNeuroDeficit:6, fever:-6 },
       inv:["ABC + capillary glucose immediately","Timed benzodiazepine per protocol","Electrolytes, calcium, magnesium, toxicology","EEG + neuroimaging once stabilised"],
-      red:["≥5 min of continuous seizures, or no recovery between seizures, is status epilepticus — a time-critical emergency"],
+      red:["≥5 min of continuous seizures, or no recovery between seizures, is status epilepticus - a time-critical emergency"],
       disc:["seizure duration","recovery between seizures","glucose","precipitant (drug/withdrawal/structural)"],
-      reason:"Continuous or repeated seizures without recovery of consciousness is convulsive status epilepticus — treat immediately.",
+      reason:"Continuous or repeated seizures without recovery of consciousness is convulsive status epilepticus - treat immediately.",
       src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Status epilepticus", rev:"2026-07", note:"Time-critical; benzodiazepine-first per protocol." } },
     { id:"ncse", name:"Non-convulsive status epilepticus", system:"Neurology",
       find:{ alteredSensorium:34, seizure:20, focalNeuroDeficit:6, fever:-8, neckStiffness:-10 },
       inv:["Urgent EEG (diagnostic)","Glucose, electrolytes","Neuroimaging"],
-      red:["Prolonged unexplained altered sensorium (± subtle motor signs) — consider NCSE; needs urgent EEG"],
+      red:["Prolonged unexplained altered sensorium (± subtle motor signs) - consider NCSE; needs urgent EEG"],
       disc:["EEG","subtle motor signs (eyelid/limb twitching)","glucose","known epilepsy"],
-      reason:"Persistent unexplained altered consciousness with subtle motor signs may be non-convulsive status epilepticus — confirm on EEG.",
+      reason:"Persistent unexplained altered consciousness with subtle motor signs may be non-convulsive status epilepticus - confirm on EEG.",
       src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Status epilepticus (NCSE)", rev:"2026-07", note:"EEG-dependent diagnosis." } },
     { id:"cvt", name:"Cerebral venous sinus thrombosis", system:"Neurology / Vascular",
       find:{ headache:30, seizure:22, focalNeuroDeficit:20, alteredSensorium:16, papilledema:16, visualDisturbance:10, fever:-4 },
       inv:["MR venography or CT venography (diagnostic)","Thrombophilia / pregnancy / OCP history","D-dimer (supportive, not exclusionary)"],
-      red:["Headache + seizures + focal signs, especially young / peripartum / prothrombotic — image the venous sinuses"],
+      red:["Headache + seizures + focal signs, especially young / peripartum / prothrombotic - image the venous sinuses"],
       disc:["pregnancy/postpartum/OCP","prothrombotic history","CT/MR venography","fundoscopy"],
       reason:"Headache with seizures and focal deficits, especially in a prothrombotic or peripartum patient, raises cerebral venous sinus thrombosis.",
       src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Cerebral venous thrombosis", rev:"2026-07", note:"Consider in atypical stroke/seizure with headache." } },
     { id:"uraemic_enceph", name:"Uraemic encephalopathy", system:"Neuro / Renal",
       find:{ alteredSensorium:34, renalImpairment:34, asterixis:20, seizure:8, oliguria:10, fever:-12, neckStiffness:-12 },
       inv:["Renal function + electrolytes","Consider dialysis","Exclude other metabolic causes"],
-      red:["Encephalopathy with severe renal failure — reversible with dialysis"],
+      red:["Encephalopathy with severe renal failure - reversible with dialysis"],
       disc:["urea/creatinine","urine output","other metabolic contributors","dialysis status"],
       reason:"Diffuse encephalopathy with severe renal impairment (± asterixis) suggests uraemic encephalopathy.",
       src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Uraemic encephalopathy", rev:"2026-07", note:"Reversible; dialysis-responsive." } },
@@ -299,7 +299,7 @@
       inv:["Assess with CIWA-Ar","Glucose, Mg/K/PO4","Thiamine BEFORE glucose","Exclude head injury, infection, metabolic cause"],
       red:["Give thiamine before glucose; benzodiazepine-based protocol; watch for delirium tremens"],
       disc:["alcohol history & last drink","autonomic signs (HR/BP/tremor)","glucose","thiamine given?"],
-      reason:"Seizure with autonomic hyperactivity in alcohol dependence suggests alcohol withdrawal — give thiamine and treat per protocol.",
+      reason:"Seizure with autonomic hyperactivity in alcohol dependence suggests alcohol withdrawal - give thiamine and treat per protocol.",
       src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Alcohol withdrawal", rev:"2026-07", note:"Thiamine before glucose to prevent Wernicke." } },
     { id:"carbamate", name:"Carbamate / cholinergic poisoning", system:"Toxicology",
       find:{ miosisSecretions:36, drugOverdose:16, alteredSensorium:12, bradycardia:10, diarrhea:14, nauseaVomiting:6 },
@@ -307,7 +307,7 @@
       red:["Atropine titrated to secretions; pralidoxime usually not required (self-limiting carbamylation)"],
       disc:["exposure/agent","pupils/secretions","heart rate","fasciculations"],
       reason:"A cholinergic toxidrome after carbamate exposure resembles organophosphate poisoning but is usually shorter-lived.",
-      src:{ t:"WHO / national poisoning guidance", ed:"—", ref:"Cholinergic (anticholinesterase) toxidrome", rev:"2026-07", note:"Distinguished from OP by shorter course; pralidoxime often unnecessary." } },
+      src:{ t:"WHO / national poisoning guidance", ed:"-", ref:"Cholinergic (anticholinesterase) toxidrome", rev:"2026-07", note:"Distinguished from OP by shorter course; pralidoxime often unnecessary." } },
     { id:"vasovagal_syncope", name:"Vasovagal / orthostatic syncope", system:"Neurology / Cardiology",
       find:{ syncope:52, palpitations:-6, exertionalChestPain:-10, fever:-10, nauseaVomiting:6 },
       inv:["Lying/standing BP","ECG (exclude arrhythmia)"], red:["Exertional or cardiac syncope needs cardiac workup"],
@@ -325,7 +325,7 @@
     { id:"crystal_arthritis", name:"Crystal arthritis (gout / pseudogout)", system:"Rheumatology",
       find:{ polyarthralgia:24, jointSwelling:30, fever:8, alcoholExcess:18 },
       inv:["Joint aspiration + polarised microscopy","Serum urate (off-attack)"], red:["Septic arthritis must be excluded by aspiration"],
-      reason:"Acute mono/oligoarticular hot joint may be crystal-induced — but exclude septic arthritis by aspiration." },
+      reason:"Acute mono/oligoarticular hot joint may be crystal-induced - but exclude septic arthritis by aspiration." },
 
     /* ---- Further Internal Medicine breadth ---- */
     { id:"sle_flare", name:"SLE / autoimmune flare", system:"Rheumatology",
@@ -346,11 +346,11 @@
       reason:"Progressive exertional dyspnoea with fine bibasal crackles and no fever points to interstitial lung disease." },
     { id:"pleural_effusion", name:"Pleural effusion", system:"Pulmonary",
       find:{ dyspnea:26, pleuriticChestPain:16, hypoxia:10, fever:-4, crepitations:12, subacuteOnset:10, weightLoss:12, coughRadio:8 },
-      inv:["CXR / thoracic ultrasound","Diagnostic pleural tap (Light's criteria)"], red:["Empyema if infected — needs drainage"],
+      inv:["CXR / thoracic ultrasound","Diagnostic pleural tap (Light's criteria)"], red:["Empyema if infected - needs drainage"],
       reason:"Breathlessness with reduced breath sounds and stony dullness suggests a pleural effusion; tap to characterise." },
     { id:"tamponade", name:"Cardiac tamponade", system:"Cardiology / Emergency",
       find:{ dyspnea:24, hypotension:30, raisedJVP:30, tachycardia:18, chestPain:8 },
-      inv:["Urgent echocardiogram","ECG (electrical alternans)"], red:["Obstructive shock — urgent pericardiocentesis"],
+      inv:["Urgent echocardiogram","ECG (electrical alternans)"], red:["Obstructive shock - urgent pericardiocentesis"],
       reason:"Hypotension with raised JVP and muffled heart sounds (Beck's triad) suggests cardiac tamponade." },
     { id:"htn_emergency", name:"Hypertensive emergency", system:"Cardiology / Neuro",
       find:{ headache:22, hypertensionHx:24, visualDisturbance:16, papilledema:18, chestPain:12, focalNeuroDeficit:10 },
@@ -366,12 +366,12 @@
       reason:"Jaundice and transaminitis after a hepatotoxic drug/overdose, without sepsis, suggests toxic hepatitis." },
     { id:"ibd_flare", name:"Inflammatory bowel disease flare", system:"Gastroenterology",
       find:{ diarrhea:26, bloodyStool:26, abdominalPain:16, weightLoss:18, fever:6, subacuteOnset:16 },
-      inv:["Stool studies (exclude infection/C. difficile)","CRP, faecal calprotectin","Endoscopy"], red:["Toxic megacolon — surgical emergency"],
+      inv:["Stool studies (exclude infection/C. difficile)","CRP, faecal calprotectin","Endoscopy"], red:["Toxic megacolon - surgical emergency"],
       reason:"Chronic bloody diarrhoea with weight loss suggests an IBD flare, but infective colitis must be excluded first." },
     { id:"ttp_hus", name:"Thrombotic microangiopathy (TTP/HUS)", system:"Hematology",
       find:{ thrombocytopenia:30, alteredSensorium:16, fever:10, focalNeuroDeficit:8, hematuria:6, mucocutaneousBleeding:12, renalImpairment:10, darkUrine:10, petechialRash:8, jaundice:6 },
-      inv:["Blood film (schistocytes)","LDH, haptoglobin, bilirubin","ADAMTS13"], red:["Haematological emergency — urgent plasma exchange"],
-      reason:"Microangiopathic haemolysis with thrombocytopenia and neurological signs suggests TTP — do not transfuse platelets reflexively." },
+      inv:["Blood film (schistocytes)","LDH, haptoglobin, bilirubin","ADAMTS13"], red:["Haematological emergency - urgent plasma exchange"],
+      reason:"Microangiopathic haemolysis with thrombocytopenia and neurological signs suggests TTP - do not transfuse platelets reflexively." },
     { id:"HLH", name:"Hemophagocytic Lymphohistiocytosis (HLH)", system:"Hematology / Immunology",
       find:{ fever:30, cytopenia:24, hepatosplenomegaly:20, splenomegaly:14, lymphadenopathy:10, organDysfunction:10, weightLoss:8, jaundice:8, nightSweats:8, mucocutaneousBleeding:8, rigors:6 },
       inv:["Ferritin (often >10,000 µg/L in adults)","Triglycerides and fibrinogen","FBC + film (≥2-lineage cytopenias)","Soluble CD25 / NK-cell activity","Bone marrow for hemophagocytosis","Trigger work-up: EBV/CMV PCR, evaluate for lymphoma / autoimmune disease"],
@@ -381,21 +381,21 @@
     /* ---- Neurology / neuromuscular ---- */
     { id:"gbs", name:"Guillain-Barré syndrome", system:"Neurology",
       find:{ ascendingWeakness:42, focalNeuroDeficit:12, dyspnea:12, fever:-8, neckStiffness:-6 },
-      inv:["Nerve conduction studies","CSF (albuminocytologic dissociation)","Serial vital capacity / NIF"], red:["Respiratory failure & autonomic instability — monitor FVC, may need ventilation"],
+      inv:["Nerve conduction studies","CSF (albuminocytologic dissociation)","Serial vital capacity / NIF"], red:["Respiratory failure & autonomic instability - monitor FVC, may need ventilation"],
       reason:"Progressive ascending weakness with areflexia and no fever suggests Guillain-Barré; watch respiratory function." },
     { id:"myasthenic_crisis", name:"Myasthenic crisis", system:"Neurology",
       find:{ dyspnea:26, visualDisturbance:18, ascendingWeakness:16, fever:-6, dysphagia:22, orthopnea:12, steroidUse:8 },
-      inv:["Serial FVC/NIF","Anti-AChR / anti-MuSK","Exclude infective trigger"], red:["Bulbar/respiratory weakness — airway support; avoid precipitating drugs"],
+      inv:["Serial FVC/NIF","Anti-AChR / anti-MuSK","Exclude infective trigger"], red:["Bulbar/respiratory weakness - airway support; avoid precipitating drugs"],
       reason:"Fatigable weakness with diplopia and respiratory compromise suggests a myasthenic crisis." },
     { id:"cord_compression", name:"Spinal cord compression", system:"Neurology / Emergency",
       find:{ backPain:28, focalNeuroDeficit:26, urinaryRetention:18, fever:-4 },
       inv:["Urgent whole-spine MRI","Neurosurgical / oncology review"], red:["Time-critical for neurological recovery; high-dose steroids if malignant"],
-      reason:"Back pain with limb weakness and bladder dysfunction is cord compression until proven otherwise — image urgently." },
+      reason:"Back pain with limb weakness and bladder dysfunction is cord compression until proven otherwise - image urgently." },
 
     /* ---- Endocrine / metabolic ---- */
     { id:"hhs", name:"Hyperosmolar hyperglycaemic state", system:"Endocrine",
       find:{ polyuriaPolydipsia:30, alteredSensorium:26, diabetesHx:22, ketonemia:-10, fever:-4 },
-      inv:["Glucose, osmolality, electrolytes","Venous gas (minimal ketosis)","Search for precipitant"], red:["Profound dehydration — careful fluid/insulin; precipitant often infection"],
+      inv:["Glucose, osmolality, electrolytes","Venous gas (minimal ketosis)","Search for precipitant"], red:["Profound dehydration - careful fluid/insulin; precipitant often infection"],
       reason:"Marked hyperglycaemia with hyperosmolar altered sensorium and minimal ketosis suggests HHS rather than DKA." },
     { id:"myxedema", name:"Myxoedema coma", system:"Endocrine",
       find:{ alteredSensorium:26, hypothermia:30, bradycardia:22, fever:-8, bradypnea:18 },
@@ -403,17 +403,17 @@
       reason:"Altered sensorium with hypothermia and bradycardia in a hypothyroid patient suggests myxoedema coma." },
     { id:"pheo", name:"Phaeochromocytoma crisis", system:"Endocrine",
       find:{ palpitations:26, headache:22, hypertensionHx:18, tachycardia:10, rash:-6, headacheSevere:26 },
-      inv:["Plasma/urine metanephrines","CT/MRI adrenals"], red:["Paroxysmal severe hypertension — alpha-blockade before beta"],
+      inv:["Plasma/urine metanephrines","CT/MRI adrenals"], red:["Paroxysmal severe hypertension - alpha-blockade before beta"],
       reason:"Episodic headache, palpitations and sweating with paroxysmal hypertension suggests a catecholamine-secreting tumour." },
     { id:"hypercalcemia", name:"Hypercalcaemia of malignancy", system:"Oncology / Metabolic",
       find:{ alteredSensorium:18, polyuriaPolydipsia:18, nauseaVomiting:12, malignancy:24, constipationOrDiarrhea:8 },
-      inv:["Corrected calcium, PTH/PTHrP","Renal function"], red:["Severe hypercalcaemia — IV fluids + bisphosphonate"],
+      inv:["Corrected calcium, PTH/PTHrP","Renal function"], red:["Severe hypercalcaemia - IV fluids + bisphosphonate"],
       reason:"'Stones, bones, groans, moans' with known malignancy suggests hypercalcaemia." },
 
     /* ---- Toxicology ---- */
     { id:"opioid_od", name:"Opioid overdose", system:"Toxicology",
       find:{ alteredSensorium:30, drugOverdose:34, bradypnea:28, fever:-8 },
-      inv:["Clinical (pinpoint pupils, ↓RR)","Trial of naloxone"], red:["Respiratory depression — naloxone + airway support"],
+      inv:["Clinical (pinpoint pupils, ↓RR)","Trial of naloxone"], red:["Respiratory depression - naloxone + airway support"],
       reason:"Reduced consciousness with depressed respiration and pinpoint pupils is opioid toxicity until proven otherwise." },
     { id:"salicylate_tox", name:"Salicylate toxicity", system:"Toxicology",
       find:{ tachypnea:24, alteredSensorium:18, drugOverdose:24, nauseaVomiting:10, fever:6 },
@@ -421,7 +421,7 @@
       reason:"Tachypnoea with a mixed respiratory alkalosis/metabolic acidosis and tinnitus suggests salicylate poisoning." },
     { id:"serotonin_nms", name:"Serotonin syndrome / NMS", system:"Toxicology / Neuro",
       find:{ fever:18, rigidity:32, alteredSensorium:18, drugOverdose:16, tachycardia:10 },
-      inv:["Medication review (serotonergics/antipsychotics)","CK, renal function","Temperature"], red:["Hyperthermia + rigidity — stop agent, cooling, supportive ICU care"],
+      inv:["Medication review (serotonergics/antipsychotics)","CK, renal function","Temperature"], red:["Hyperthermia + rigidity - stop agent, cooling, supportive ICU care"],
       reason:"Fever with rigidity/clonus and altered mental state after serotonergic or antipsychotic drugs suggests a toxidrome, not infection." },
     { id:"organophosphate", name:"Organophosphate / cholinergic poisoning", system:"Toxicology",
       find:{ miosisSecretions:38, drugOverdose:18, alteredSensorium:12, bradycardia:10, diarrhea:16, nauseaVomiting:6 },
@@ -431,47 +431,47 @@
     /* ---- Haematology / oncology ---- */
     { id:"dic", name:"Disseminated intravascular coagulation", system:"Hematology",
       find:{ mucocutaneousBleeding:32, thrombocytopenia:24, hypotension:12, fever:6, inr:22 },
-      inv:["PT/APTT, fibrinogen, D-dimer","Blood film","Treat the underlying trigger"], red:["Often secondary to sepsis/malignancy — treat the cause"],
-      reason:"Diffuse bleeding with thrombocytopenia and deranged coagulation suggests DIC — find and treat the trigger." },
+      inv:["PT/APTT, fibrinogen, D-dimer","Blood film","Treat the underlying trigger"], red:["Often secondary to sepsis/malignancy - treat the cause"],
+      reason:"Diffuse bleeding with thrombocytopenia and deranged coagulation suggests DIC - find and treat the trigger." },
     { id:"acute_leukemia", name:"Acute leukaemia", system:"Hematology / Oncology",
       find:{ mucocutaneousBleeding:20, lymphadenopathy:16, weightLoss:14, fever:12, hepatosplenomegaly:14, nightSweats:10, petechialRash:16, thrombocytopenia:12, bleedingManifestation:10, splenomegaly:4 },
       inv:["CBC + peripheral smear (blasts)","Bone marrow","Coagulation (APML risk)"], red:["Febrile neutropenia / leukostasis are emergencies"],
       reason:"Cytopenias with bleeding, infections and blasts on film suggest acute leukaemia." },
     { id:"variceal_bleed", name:"Variceal bleeding", system:"Hepatology / GI",
       find:{ hematemesis:34, melena:22, jaundice:14, ascites:10, hypotension:10 },
-      inv:["Urgent upper GI endoscopy","Crossmatch, coagulation","Vasoactive (terlipressin) + antibiotic prophylaxis"], red:["Major haemorrhage — resuscitate; antibiotics reduce mortality in cirrhotic GI bleed"],
+      inv:["Urgent upper GI endoscopy","Crossmatch, coagulation","Vasoactive (terlipressin) + antibiotic prophylaxis"], red:["Major haemorrhage - resuscitate; antibiotics reduce mortality in cirrhotic GI bleed"],
       reason:"Haematemesis/melaena in a patient with chronic liver disease suggests variceal bleeding." },
     { id:"svc_obstruction", name:"Superior vena cava obstruction", system:"Oncology / Emergency",
       find:{ facialSwelling:34, dyspnea:18, malignancy:24, cough:8, lymphadenopathy:14, dysphagia:10, weightLoss:8, coughRadio:6 },
-      inv:["CT chest with contrast","Tissue diagnosis"], red:["Airway/cerebral oedema — urgent oncology/radiotherapy"],
+      inv:["CT chest with contrast","Tissue diagnosis"], red:["Airway/cerebral oedema - urgent oncology/radiotherapy"],
       reason:"Facial/upper-body swelling with distended neck veins and dyspnoea suggests SVC obstruction, often malignant." },
 
     /* ---- Nephrology / dermatology ---- */
     { id:"aki", name:"Acute kidney injury", system:"Nephrology",
       find:{ oliguria:30, nauseaVomiting:10, legSwellingBilateral:12, alteredSensorium:8 },
       inv:["Renal function, electrolytes (K⁺)","Urinalysis, urine output","Renal ultrasound (obstruction)"], red:["Hyperkalaemia / pulmonary oedema / acidosis may need dialysis"],
-      reason:"Falling urine output with rising creatinine indicates AKI — define pre-renal / renal / post-renal and act on hyperkalaemia." },
+      reason:"Falling urine output with rising creatinine indicates AKI - define pre-renal / renal / post-renal and act on hyperkalaemia." },
     { id:"rhabdo", name:"Rhabdomyolysis", system:"Nephrology / Metabolic",
       find:{ myalgiaArthralgia:24, darkUrine:30, oliguria:14, alteredSensorium:6 },
       inv:["Creatine kinase (markedly raised)","Renal function, K⁺","Urine myoglobin"], red:["Aggressive fluids; watch hyperkalaemia and AKI"],
       reason:"Muscle pain with tea-coloured urine and very high CK indicates rhabdomyolysis with AKI risk." },
     { id:"sjs_ten", name:"Stevens-Johnson syndrome / TEN", system:"Dermatology / Emergency",
       find:{ rash:26, mucosalLesions:34, drugOverdose:14, fever:12 },
-      inv:["Stop the culprit drug","Dermatology review","SCORTEN severity"], red:["Skin detachment — manage like a burn; high mortality"],
+      inv:["Stop the culprit drug","Dermatology review","SCORTEN severity"], red:["Skin detachment - manage like a burn; high mortality"],
       reason:"Painful rash with mucosal erosions and skin detachment after a new drug suggests SJS/TEN, not cellulitis." },
 
     /* ---- Neurology (vascular / chronic / deficiency) ---- */
     { id:"tia", name:"Transient ischaemic attack", system:"Neurology / Vascular",
       find:{ focalNeuroDeficit:38, ageOver50:12, hypertensionHx:10, atrialFibHx:10, fever:-16, neckStiffness:-12, clinicallyImproving:14, stable:8 },
-      inv:["Urgent CT/MRI + carotid imaging","ECG (AF)","ABCD² risk; start antiplatelet/statin"], red:["High early stroke risk — urgent TIA clinic / admission"],
-      reason:"Transient focal neurological deficit that fully resolves suggests a TIA — high short-term stroke risk." },
+      inv:["Urgent CT/MRI + carotid imaging","ECG (AF)","ABCD² risk; start antiplatelet/statin"], red:["High early stroke risk - urgent TIA clinic / admission"],
+      reason:"Transient focal neurological deficit that fully resolves suggests a TIA - high short-term stroke risk." },
     { id:"subdural", name:"Subdural haematoma", system:"Neurology / Vascular",
       find:{ headache:22, alteredSensorium:22, focalNeuroDeficit:18, headInjury:26, anticoagulated:18, ageOver50:10, fever:-10 },
-      inv:["Non-contrast CT head","Coagulation; reverse anticoagulation","Neurosurgical review"], red:["Expanding bleed — may need evacuation"],
+      inv:["Non-contrast CT head","Coagulation; reverse anticoagulation","Neurosurgical review"], red:["Expanding bleed - may need evacuation"],
       reason:"Headache and fluctuating consciousness after a fall, especially elderly/anticoagulated, suggests a subdural haematoma." },
     { id:"wernicke", name:"Wernicke encephalopathy", system:"Neurology / Nutrition",
       find:{ alteredSensorium:24, ataxia:26, visualDisturbance:16, alcoholExcess:30, fever:-8 },
-      inv:["Clinical triad (confusion, ataxia, ophthalmoplegia)","Give IV thiamine BEFORE glucose"], red:["Reversible — treat empirically with thiamine, do not delay"],
+      inv:["Clinical triad (confusion, ataxia, ophthalmoplegia)","Give IV thiamine BEFORE glucose"], red:["Reversible - treat empirically with thiamine, do not delay"],
       reason:"Confusion, ataxia and eye signs in an alcohol-dependent or malnourished patient is Wernicke until proven otherwise." },
     { id:"ms", name:"Multiple sclerosis (relapse)", system:"Neurology",
       find:{ focalNeuroDeficit:30, visualDisturbance:24, ataxia:12, fever:-12, afebrile:12, subacuteOnset:8 },
@@ -485,17 +485,17 @@
       reason:"Symmetrical small-joint pain and swelling with morning stiffness suggests rheumatoid arthritis." },
     { id:"pmr", name:"Polymyalgia rheumatica", system:"Rheumatology",
       find:{ polyarthralgia:28, ageOver50:24, weightLoss:10, fever:4 },
-      inv:["ESR/CRP (markedly raised)","Assess for giant cell arteritis"], red:["Watch for GCA — visual symptoms need urgent steroids"],
+      inv:["ESR/CRP (markedly raised)","Assess for giant cell arteritis"], red:["Watch for GCA - visual symptoms need urgent steroids"],
       reason:"Proximal shoulder/hip girdle pain and stiffness in an older patient with high ESR suggests PMR." },
 
     /* ---- Hepatology / GI (chronic) ---- */
     { id:"decomp_cirrhosis", name:"Decompensated cirrhosis", system:"Hepatology",
       find:{ ascites:30, jaundice:24, asterixis:14, legSwellingBilateral:14, alteredSensorium:8, fever:-6 },
       inv:["LFTs, INR, ammonia","Ascitic tap (exclude SBP)","Identify decompensation trigger"], red:["Always tap ascites to exclude SBP (an infective trigger)"],
-      reason:"Ascites and jaundice with stigmata of chronic liver disease suggest decompensated cirrhosis — look for a precipitant." },
+      reason:"Ascites and jaundice with stigmata of chronic liver disease suggest decompensated cirrhosis - look for a precipitant." },
     { id:"ibs", name:"Irritable bowel syndrome", system:"Gastroenterology",
       find:{ abdominalPain:24, constipationOrDiarrhea:22, fever:-14, weightLoss:-10, bloodyStool:-12, abdominalDistension:16, abdominalDiscomfort:10, oralIntakeAdequate:8 },
-      inv:["Diagnosis of exclusion (Rome criteria)","Check alarm features absent"], red:["Weight loss, bleeding or anaemia argue AGAINST IBS — investigate"],
+      inv:["Diagnosis of exclusion (Rome criteria)","Check alarm features absent"], red:["Weight loss, bleeding or anaemia argue AGAINST IBS - investigate"],
       reason:"Chronic abdominal pain with altered bowel habit and NO alarm features suggests IBS." },
 
     /* ---- Nephrology (chronic) ---- */
@@ -519,46 +519,46 @@
       reason:"Bone pain, anaemia, renal impairment and hypercalcaemia (CRAB) in an older patient suggests myeloma." },
     { id:"lung_cancer", name:"Lung cancer", system:"Oncology / Pulmonary",
       find:{ hemoptysis:28, weightLoss:24, ageOver50:14, cough:14, lymphadenopathy:8, fever:-4, prolongedCough2Weeks:24, chestPain:8 },
-      inv:["CXR / CT chest","Bronchoscopy / biopsy","Staging imaging"], red:["Haemoptysis with weight loss in a smoker — urgent 2-week-wait pathway"],
+      inv:["CXR / CT chest","Bronchoscopy / biopsy","Staging imaging"], red:["Haemoptysis with weight loss in a smoker - urgent 2-week-wait pathway"],
       reason:"Haemoptysis and weight loss in an older smoker raise concern for bronchogenic carcinoma." },
     { id:"sarcoidosis", name:"Sarcoidosis", system:"Pulmonary / Multisystem",
       find:{ lymphadenopathy:22, dyspnea:16, polyarthralgia:14, cough:12, rash:10, fever:6, subacuteOnset:16, weightLoss:8 },
       inv:["CXR (bilateral hilar lymphadenopathy)","Serum ACE, calcium","Biopsy (non-caseating granuloma)"], red:["Exclude TB/lymphoma before steroids"],
-      reason:"Bilateral hilar lymphadenopathy with multisystem involvement suggests sarcoidosis — exclude TB/lymphoma." },
+      reason:"Bilateral hilar lymphadenopathy with multisystem involvement suggests sarcoidosis - exclude TB/lymphoma." },
 
     /* ---- Electrolyte / metabolic / functional ---- */
     { id:"hyponatremia", name:"Symptomatic hyponatraemia / SIADH", system:"Metabolic",
       find:{ alteredSensorium:24, seizure:14, nauseaVomiting:12, fever:-8, malignancy:20, ataxia:14, weightLoss:8 },
       inv:["Serum & urine osmolality, urine Na⁺","Volume status assessment"], red:["Correct slowly (osmotic demyelination risk)"],
-      reason:"Confusion or seizures with low sodium suggest symptomatic hyponatraemia — establish the mechanism before correcting." },
+      reason:"Confusion or seizures with low sodium suggest symptomatic hyponatraemia - establish the mechanism before correcting." },
     { id:"hyperkalemia", name:"Hyperkalaemia", system:"Metabolic / Nephrology",
       find:{ palpitations:18, ascendingWeakness:16, bradycardia:24, oliguria:12, renalImpairment:10 },
-      inv:["Urgent ECG (peaked T waves)","Repeat K⁺, renal function","Calcium gluconate + insulin-dextrose"], red:["Risk of fatal arrhythmia — treat empirically on ECG changes"],
-      reason:"Weakness and bradyarrhythmia with renal impairment suggest hyperkalaemia — an ECG-confirmed emergency." },
+      inv:["Urgent ECG (peaked T waves)","Repeat K⁺, renal function","Calcium gluconate + insulin-dextrose"], red:["Risk of fatal arrhythmia - treat empirically on ECG changes"],
+      reason:"Weakness and bradyarrhythmia with renal impairment suggest hyperkalaemia - an ECG-confirmed emergency." },
     { id:"panic", name:"Panic attack / anxiety", system:"Functional",
       find:{ palpitations:28, chestPain:16, dyspnea:16, fever:-16, hypoxia:-12, ecgIschemia:-12, tachypnea:10, headache:8 },
-      inv:["Diagnosis of exclusion — rule out ACS/PE first","ECG normal"], red:["Do not anchor on anxiety until cardiac/pulmonary emergencies excluded"],
-      reason:"Palpitations, chest tightness and breathlessness in a young patient with normal workup may be a panic attack — but exclude organic causes." },
+      inv:["Diagnosis of exclusion - rule out ACS/PE first","ECG normal"], red:["Do not anchor on anxiety until cardiac/pulmonary emergencies excluded"],
+      reason:"Palpitations, chest tightness and breathlessness in a young patient with normal workup may be a panic attack - but exclude organic causes." },
     { id:"angioedema_acei", name:"ACE-inhibitor / hereditary angioedema", system:"Allergy / Emergency",
       find:{ facialSwelling:34, dyspnea:18, rash:-12, fever:-8 },
-      inv:["Airway assessment","C1-esterase inhibitor / C4 if recurrent"], red:["Airway swelling — secure airway; not always histamine-mediated"],
+      inv:["Airway assessment","C1-esterase inhibitor / C4 if recurrent"], red:["Airway swelling - secure airway; not always histamine-mediated"],
       reason:"Facial/tongue swelling WITHOUT urticaria (often on an ACE inhibitor) suggests bradykinin-mediated angioedema." }
   ];
 
   /* ---------------------------------------------------------------------- *
-   * SMART BEDSIDE-TOOL TRIGGERS — a diagnosis surfaces the relevant existing
+   * SMART BEDSIDE-TOOL TRIGGERS - a diagnosis surfaces the relevant existing
    * StewardMD calculators/protocols. Keyed by diagnosis id (works for both
    * infectious syndrome ids and non-infectious ids).
    * ---------------------------------------------------------------------- */
   // Open the bedside tool as an overlay ON TOP of the reasoning workspace (INF is z-index 10000).
-  // Do NOT close() the workspace first — otherwise dismissing the tool strands the user on the
+  // Do NOT close() the workspace first - otherwise dismissing the tool strands the user on the
   // home/blank layer instead of returning to the diagnosis they came from.
   function inf(fn) { return function () { try { if (window.INF) fn(window.INF); } catch (e) {} }; }
   var TOOLREG = {
     vaso:       { icon: "💉", label: "Vasopressor / infusion calculator", run: inf(function (I) { I.openDrug("noradrenaline"); }) },
-    dashboard:  { icon: "🩺", label: "ICU dashboard — MAP · lactate · urine output", run: inf(function (I) { I.openDashboard(); }) },
+    dashboard:  { icon: "🩺", label: "ICU dashboard - MAP · lactate · urine output", run: inf(function (I) { I.openDashboard(); }) },
     insulin:    { icon: "💉", label: "Insulin infusion (DKA)", run: inf(function (I) { I.openDrug("insulin"); }) },
-    ppi:        { icon: "💊", label: "PPI infusion (pantoprazole) — GI bleed", run: inf(function (I) { I.openDrug("pantoprazole"); }) },
+    ppi:        { icon: "💊", label: "PPI infusion (pantoprazole) - GI bleed", run: inf(function (I) { I.openDrug("pantoprazole"); }) },
     furosemide: { icon: "💧", label: "Furosemide infusion", run: inf(function (I) { I.openDrug("furosemide"); }) },
     gtn:        { icon: "💊", label: "Nitroglycerin infusion", run: inf(function (I) { I.openDrug("nitroglycerin"); }) },
     heparin:    { icon: "🩸", label: "Heparin infusion", run: inf(function (I) { I.openDrug("heparin"); }) },
@@ -601,7 +601,7 @@
   };
 
   /* ---------------------------------------------------------------------- *
-   * CONSULTANT REASONING META — weighted findings + organ-system mapping.
+   * CONSULTANT REASONING META - weighted findings + organ-system mapping.
    * Diagnostic value is NOT equal: a disease-defining sign (neck stiffness)
    * far outweighs a non-specific one (fever). The dominant organ system,
    * derived from weighted findings, shapes the differential.
@@ -646,7 +646,7 @@
   }
 
   /* ---------------------------------------------------------------------- *
-   * ONTOLOGY — merge real FIELD_GROUPS with EXTRA_GROUPS
+   * ONTOLOGY - merge real FIELD_GROUPS with EXTRA_GROUPS
    * ---------------------------------------------------------------------- */
   var ONT = null, LABEL = {}, VALID = {}, GENERAL = [], SYSPICK = [];
   function buildOntology() {
@@ -680,10 +680,10 @@
   // (Respiratory→cough, Neuro→headache, GI→abdominal pain) are intentionally NOT listed,
   // so their existing order is preserved unchanged.
   var COMMON_FIRST = {
-    // Renal / Urinary — oliguria is the cardinal acute-renal sign; UTI symptoms next.
+    // Renal / Urinary - oliguria is the cardinal acute-renal sign; UTI symptoms next.
     oliguria: 96, dysuria: 94, flankPain: 90, hematuria: 86, urinaryFrequency: 84,
     feverGU: 70, costovertebralTenderness: 66, proteinuria: 62, urinaryRetention: 58,
-    // Cardiac / Vascular — common cardiac presentations above endocarditis-specific findings.
+    // Cardiac / Vascular - common cardiac presentations above endocarditis-specific findings.
     chestPain: 96, dyspnea: 92, palpitations: 86, exertionalChestPain: 84, orthopnea: 74, raisedJVP: 66
   };
   // stable ordering: by commonness weight (desc), original position for ties/unlisted.
@@ -702,7 +702,7 @@
   function lbl(k) { return LABEL[k] || k; }
 
   /* ---------------------------------------------------------------------- *
-   * INFECTIOUS introspection — derive each syndrome's associated finding
+   * INFECTIOUS introspection - derive each syndrome's associated finding
    * keys from its match()/baseScore() source (∩ valid keys). Cached.
    * ---------------------------------------------------------------------- */
   var ASSOC = {}, IDF = null, NSYN = 0;
@@ -723,7 +723,7 @@
    * non-infectious), from each disease's declarative KB finding-map (find) +
    * associated keys (assoc). A finding present in few diseases is disease-
    * defining; one present in many (fever, tachycardia) is not. Used ONLY to
-   * ORDER near-tied candidates — never changes a candidate's score, the infection
+   * ORDER near-tied candidates - never changes a candidate's score, the infection
    * gate, or the antibiotic decision. Falls back to a flat 0.5 (no effect) when
    * KB_CORE is absent, so the classic score-order is preserved. ---- */
   var GIDF = null;
@@ -742,7 +742,7 @@
     return GIDF;
   }
   // rankSpec = the single most disease-defining finding a candidate matched.
-  // (max, not sum — so a generalist matching many generic findings is NOT
+  // (max, not sum - so a generalist matching many generic findings is NOT
   // rewarded over a specific diagnosis matching one pathognomonic finding.)
   function rankSpec(supporting) {
     if (!rankV2() || !supporting || !supporting.length) return 0;
@@ -788,7 +788,7 @@
     var added = 0, lastK = null;
     keys.forEach(function (k) {
       if (!k || S.f[k]) return;
-      if (!(VALID[k] || LABEL[k])) return;                       // only real finding keys — never invent
+      if (!(VALID[k] || LABEL[k])) return;                       // only real finding keys - never invent
       S.f[k] = true; added++; lastK = k;
       try { S.timeline.push({ f: LABEL[k] || k }); } catch (e) {}
     });
@@ -829,7 +829,7 @@
   }
   function kbEvalScore(sm, e) { if (!sm) return 0; var i = sm.base || 0; var mo = sm.modifiers || []; for (var n = 0; n < mo.length; n++) if (kbEvalRule(mo[n].when, e)) i += mo[n].add; return i; }
   function kbDisease(id) { return (window.KB_CORE && KB_CORE.diseases) ? KB_CORE.diseases[id] : null; }
-  // KB "why this" reason interpolator — renders the declarative template (no eval).
+  // KB "why this" reason interpolator - renders the declarative template (no eval).
   function kbRenderNode(node, e) {
     if (!node) return "";
     switch (node[0]) {
@@ -877,7 +877,7 @@
 
   // Bridge generic presenting symptoms to the infection ontology's specific
   // keys so a generic pick still engages the relevant syndromes (infectious
-  // scoring only — the non-infectious layer keeps the literal findings).
+  // scoring only - the non-infectious layer keeps the literal findings).
   var ALIAS = { headache: ["headacheSevere"], dyspnea: ["hypoxia"], legSwellingUnilateral: ["dvtRisk"], coughRadio: ["cough"], purulentSputum: ["productiveCough"] };
   function infFindings() {
     var e = {};
@@ -902,7 +902,7 @@
       computeIDF();
       var rel = 0; present.forEach(function (k) { rel += (IDF[k] || 0.5) * (fw(k) === 3 ? 1.6 : fw(k) === 1 ? 0.6 : 1); });
       sc = clamp(Math.round(rel * 13), 0, 56);
-      if (sc < 16) return null; // below the noise floor — don't list
+      if (sc < 16) return null; // below the noise floor - don't list
     }
     // dominant-organ-system influence (consultant reasoning)
     var hasVHI = present.some(function (k) { return fw(k) === 3; });
@@ -967,9 +967,9 @@
     return { inf: inf, ni: ni };
   }
 
-  /* Infection gate — keyed off whether infection LEADS overall */
+  /* Infection gate - keyed off whether infection LEADS overall */
   function gate(d) {
-    // MAX score across each column — order-independent, so the specificity
+    // MAX score across each column - order-independent, so the specificity
     // re-rank (which can change which candidate sits at [0]) leaves the infection
     // gate + antibiotic decision byte-identical to the classic ordering.
     var topInf = d.inf.reduce(function (m, x) { return x.score > m ? x.score : m; }, 0);
@@ -985,7 +985,7 @@
     else cls = "none";
     // Sepsis physiology (Surviving Sepsis): fever/rigors + shock or organ
     // dysfunction → treat suspected sepsis as infection likely and activate
-    // stewardship even if no single syndrome's criteria matched — PROVIDED an
+    // stewardship even if no single syndrome's criteria matched - PROVIDED an
     // infective cause is at least competitive (guards against over-calling when
     // a non-infectious cause clearly leads).
     var f = S.f || {};
@@ -997,7 +997,7 @@
       else if (cls === "likely" && hard) cls = "very_likely";
     }
     // Febrile neutropenia / fever in an immunocompromised host: low threshold
-    // for empiric antibiotics (oncological emergency) — flag infection likely.
+    // for empiric antibiotics (oncological emergency) - flag infection likely.
     var febrileNeutropenia = (f.fever || f.rigors) && (f.absoluteNeutrophilCountLow || f.immunocompromised);
     if (febrileNeutropenia && topInf >= 30 && topInf >= topNi - 8) {
       if (cls === "noninfective" || cls === "unlikely" || cls === "possible") cls = "likely";
@@ -1014,11 +1014,11 @@
   };
   function gateMsg(g) {
     switch (g.cls) {
-      case "very_likely": return "Infection leads the differential — empiric antimicrobial therapy is appropriate. Select the diagnosis to open its stewardship recommendation.";
-      case "likely": return "Infection is the leading consideration — empiric therapy may be warranted after cultures. Confirm before prescribing.";
-      case "possible": return "Infection is in the differential but not dominant — pursue targeted investigations before antibiotics.";
-      case "unlikely": return "Infection is low on the differential — antibiotics are not recommended yet. Investigate the alternatives.";
-      case "noninfective": return "A non-infectious diagnosis currently leads — antibiotics are not recommended. Address the leading diagnosis.";
+      case "very_likely": return "Infection leads the differential - empiric antimicrobial therapy is appropriate. Select the diagnosis to open its stewardship recommendation.";
+      case "likely": return "Infection is the leading consideration - empiric therapy may be warranted after cultures. Confirm before prescribing.";
+      case "possible": return "Infection is in the differential but not dominant - pursue targeted investigations before antibiotics.";
+      case "unlikely": return "Infection is low on the differential - antibiotics are not recommended yet. Investigate the alternatives.";
+      case "noninfective": return "A non-infectious diagnosis currently leads - antibiotics are not recommended. Address the leading diagnosis.";
       default: return "";
     }
   }
@@ -1041,13 +1041,13 @@
         '<button class="dx-reset" id="dxReset" title="Start over">Reset</button>' +
       '</div>' +
       '<div class="dx-body">' +
-        '<div class="dx-discl">For clinical decision support only — not a diagnosis. The treating physician remains responsible for all clinical decisions; always verify against the patient.</div>' +
+        '<div class="dx-discl">For clinical decision support only - not a diagnosis. The treating physician remains responsible for all clinical decisions; always verify against the patient.</div>' +
         '<div id="dxImported" class="dx-imported"></div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
         '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">🔬 Advanced workspace ▾</button>' +
         '<div id="dxAdv" class="dx-adv" style="display:none"></div>' +
         '<div class="dx-find-wrap">' +
-          '<button id="dxSpeak" class="dx-speak" type="button" aria-label="Speak about your patient — MaiK Scribe">🎤 Speak about your patient <span class="dx-speak-tag">MaiK Scribe</span></button>' +
+          '<button id="dxSpeak" class="dx-speak" type="button" aria-label="Speak about your patient - MaiK Scribe">🎤 Speak about your patient <span class="dx-speak-tag">MaiK Scribe</span></button>' +
           '<div class="dx-search-box">' +
             '<input id="dxSearch" class="dx-search" type="text" placeholder="🔍 Search findings (e.g. pap → Papilledema, dys → Dysuria/Dysphagia)…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list">' +
             '<div id="dxSearchDrop" class="dx-search-drop" role="listbox" style="display:none"></div>' +
@@ -1070,7 +1070,7 @@
     var dxSp = root.querySelector("#dxSpeak");
     if (dxSp) dxSp.addEventListener("click", function () {
       if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "reasoning" });
-      else if (window.SMD_VOICE === undefined) alert("Voice intake is loading — try again in a moment.");
+      else if (window.SMD_VOICE === undefined) alert("Voice intake is loading - try again in a moment.");
     });
     var si = root.querySelector("#dxSearch");
     si.addEventListener("input", function () { filter = si.value.trim().toLowerCase(); renderPicker(); });
@@ -1104,13 +1104,13 @@
   function renderSelected() {
     var el = root.querySelector("#dxSel");
     var keys = Object.keys(S.f);
-    if (!keys.length) { el.innerHTML = '<span class="dx-sel-empty">No findings yet — tap below to add.</span>'; return; }
+    if (!keys.length) { el.innerHTML = '<span class="dx-sel-empty">No findings yet - tap below to add.</span>'; return; }
     // red-flag review alert for extracted emergency findings (from the NLP layer), still selected
     var rf = ((S._lastExtract && S._lastExtract.redFlags) || []).filter(function (k) { return S.f[k]; });
     var banner = rf.length ? '<div class="dx-redflag">⚠ Urgent red flags for review: ' + rf.map(function (k) { return esc(lbl(k)); }).join(" · ") + '</div>' : "";
     // Acute-neuro safety cue: altered sensorium with a focal/seizure/pupil sign → image before committing.
     if (S.f.alteredSensorium && (S.f.focalNeuroDeficit || S.f.seizure || S.f.anisocoria || S.f.papilledema)) {
-      banner += '<div class="dx-redflag">🧠 Altered sensorium with a focal / seizure / pupillary sign — check glucose now and obtain urgent neuroimaging (CT/MRI) to exclude a structural or vascular emergency before diagnosing a primary infection.</div>';
+      banner += '<div class="dx-redflag">🧠 Altered sensorium with a focal / seizure / pupillary sign - check glucose now and obtain urgent neuroimaging (CT/MRI) to exclude a structural or vascular emergency before diagnosing a primary infection.</div>';
     }
     el.innerHTML = banner + keys.map(function (k) {
       return '<button class="dx-sel-chip" data-f="' + k + '">' + esc(lbl(k)) + ' ✕</button>';
@@ -1151,7 +1151,7 @@
       }
       ONT.forEach(function (g) { g.fields.forEach(consider); });
       // also search the full disease directory (all 140) by name or system, so any
-      // syndrome / diagnosis is findable — each row opens its reference + Harrison.
+      // syndrome / diagnosis is findable - each row opens its reference + Harrison.
       var dzMatches = diseaseDirectory().filter(function (z) {
         return z.name.toLowerCase().indexOf(filter) >= 0 || (z.system || "").toLowerCase().indexOf(filter) >= 0;
       });
@@ -1165,7 +1165,7 @@
       drop.querySelectorAll(".dx-search-row[data-f]").forEach(function (b) { b.addEventListener("mousedown", function (e) { e.preventDefault(); }); b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); }); });
       drop.querySelectorAll(".dx-search-row[data-dz]").forEach(function (b) { b.addEventListener("mousedown", function (e) { e.preventDefault(); }); b.addEventListener("click", function () { openDiseaseRef(b.getAttribute("data-dz")); }); });
       drop._rows = drop.querySelectorAll(".dx-search-row"); drop._hi = -1;   // for keyboard ↑/↓/Enter navigation
-      // suggested findings as chips BELOW the search list — contextual to the
+      // suggested findings as chips BELOW the search list - contextual to the
       // current differential (same source as the always-on suggest strip).
       if (Object.keys(S.f).length) {
         try {
@@ -1281,7 +1281,7 @@
     headInjury:["head injury","fall","fell","trauma to head"], alcoholExcess:["alcohol","alcoholic","drinks heavily","etoh"],
     ataxia:["ataxia","unsteady","unsteady gait","incoordination"], proteinuria:["frothy urine","proteinuria","heavy protein"]
   };
-  // Broaden coverage of real doctor phrasing (merged into FT_SYN — does not overwrite the above).
+  // Broaden coverage of real doctor phrasing (merged into FT_SYN - does not overwrite the above).
   var FT_SYN_MORE = {
     diabetesHx:["diabet","known diabetic","dm","t2dm","t1dm","niddm","iddm","on insulin","on metformin","raised sugars","high sugars"],
     hypertensionHx:["hypertens","raised bp","high blood pressure","high bp","elevated bp","known hypertensive","on antihypertensive"],
@@ -1294,7 +1294,7 @@
     tachypnea:["tachypnea","tachypnoea","fast breathing","rapid breathing","increased respiratory rate"],
     dyspnea:["breathlessness","difficulty breathing","respiratory distress","gasping"]
   };
-  // Merge unconditionally — parseFreeText only applies keys that are in VALID, so extras are harmless.
+  // Merge unconditionally - parseFreeText only applies keys that are in VALID, so extras are harmless.
   Object.keys(FT_SYN_MORE).forEach(function (k) { FT_SYN[k] = (FT_SYN[k] || []).concat(FT_SYN_MORE[k]); });
   function parseFreeText(text) {
     if (!text) return;
@@ -1307,11 +1307,11 @@
       (nr.present || []).forEach(function (k) { if (VALID[k] && !S.f[k]) { S.f[k] = true; nadded++; } });
       S._lastExtract = nr;
       S.started = true;
-      S.timeline.push({ f: "free-text (" + nadded + " finding" + (nadded === 1 ? "" : "s") + " extracted — review)", topName: null, topScore: null });
+      S.timeline.push({ f: "free-text (" + nadded + " finding" + (nadded === 1 ? "" : "s") + " extracted - review)", topName: null, topScore: null });
       recompute();
       var rf = (nr.redFlags || []).length;
-      var msg = nadded ? (nadded + " finding" + (nadded > 1 ? "s" : "") + " extracted — review below" + (rf ? " · ⚠ " + rf + " red flag" + (rf > 1 ? "s" : "") : "")) : "No findings recognised — rephrase or add them manually below";
-      if (nadded <= 1 && nr.incomplete) msg = "Extraction may be incomplete — review the note or add findings below.";
+      var msg = nadded ? (nadded + " finding" + (nadded > 1 ? "s" : "") + " extracted - review below" + (rf ? " · ⚠ " + rf + " red flag" + (rf > 1 ? "s" : "") : "")) : "No findings recognised - rephrase or add them manually below";
+      if (nadded <= 1 && nr.incomplete) msg = "Extraction may be incomplete - review the note or add findings below.";
       toast(msg);
       return;
     }
@@ -1333,7 +1333,7 @@
       if (hit) { S.f[k] = true; added++; }
     });
     // ---- numeric VITALS → findings (e.g. "vitals 180/100", "spo2 88", "gcs 9", "hr 120").
-    //      NOTE: run against the RAW lowercased text — `t` has had "/" and ":" stripped. ----
+    //      NOTE: run against the RAW lowercased text - `t` has had "/" and ":" stripped. ----
     var raw = " " + String(text).toLowerCase() + " ";
     function addF(k) { if (VALID[k] && !S.f[k]) { S.f[k] = true; added++; } }
     var m;
@@ -1346,7 +1346,7 @@
     S.started = true;
     S.timeline.push({ f: "free-text (" + added + " findings extracted)", topName: null, topScore: null });
     recompute();
-    toast(added ? (added + " finding" + (added > 1 ? "s" : "") + " extracted from the text") : "No findings recognised — try different wording or add them manually below");
+    toast(added ? (added + " finding" + (added > 1 ? "s" : "") + " extracted from the text") : "No findings recognised - try different wording or add them manually below");
   }
   function loadSessions() { try { return JSON.parse(localStorage.getItem("stewardmd_rx_sessions") || "[]"); } catch (e) { return []; } }
   function saveSession() {
@@ -1362,15 +1362,15 @@
   }
   function buildSummary() {
     var d = differential(), g = gate(d), L = [];
-    L.push("StewardMD — Clinical Reasoning summary");
+    L.push("StewardMD - Clinical Reasoning summary");
     L.push("Generated: " + new Date().toLocaleString()); L.push("");
-    L.push("Findings: " + (Object.keys(S.f).map(lbl).join(", ") || "—")); L.push("");
+    L.push("Findings: " + (Object.keys(S.f).map(lbl).join(", ") || "-")); L.push("");
     L.push("Infection assessment: " + GATEINFO[g.cls].t); L.push("");
     L.push("Infectious differential:");
-    d.inf.slice(0, 6).forEach(function (r, i) { L.push("  " + (i + 1) + ". " + r.name + " — " + r.score + "/100"); });
+    d.inf.slice(0, 6).forEach(function (r, i) { L.push("  " + (i + 1) + ". " + r.name + " - " + r.score + "/100"); });
     if (!d.inf.length) L.push("  (none)");
     L.push("Non-infectious differential:");
-    d.ni.slice(0, 6).forEach(function (r, i) { L.push("  " + (i + 1) + ". " + r.name + " — " + r.score + "/100"); });
+    d.ni.slice(0, 6).forEach(function (r, i) { L.push("  " + (i + 1) + ". " + r.name + " - " + r.score + "/100"); });
     if (!d.ni.length) L.push("  (none)");
     if (GATEINFO[g.cls].ab && g.lead && window.HOSPITAL) {
       var pol = window.HOSPITAL.getPolicy(g.lead.id);
@@ -1387,7 +1387,7 @@
         L.push("Empiric therapy: refer to local antibiogram / policy.");
       }
     }
-    L.push(""); L.push("Decision support only — not a confirmed diagnosis. StewardMD supports, not replaces, clinical judgment.");
+    L.push(""); L.push("Decision support only - not a confirmed diagnosis. StewardMD supports, not replaces, clinical judgment.");
     return L.join("\n");
   }
   function exportSummary() {
@@ -1406,10 +1406,10 @@
     // Print the rendered clinical-reasoning OUTPUT in-page via a print stylesheet: the OS
     // print/share sheet opens OVER the app and Cancel returns here (no blank new tab).
     try {
-      // Native: window.print() no-ops in WKWebView — share the summary text so the iOS
+      // Native: window.print() no-ops in WKWebView - share the summary text so the iOS
       // sheet can Save as PDF / Print. Web keeps the in-page print stylesheet path.
       if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
-        window.SMD_NATIVE.exportPdf(buildSummary(), "StewardMD — Clinical Reasoning").catch(function () { toast("Save unavailable"); });
+        window.SMD_NATIVE.exportPdf(buildSummary(), "StewardMD - Clinical Reasoning").catch(function () { toast("Save unavailable"); });
         return;
       }
       var old = document.getElementById("dxPrintArea"); if (old) old.remove();
@@ -1439,8 +1439,8 @@
         }
       } catch (e) {}
       area.innerHTML =
-        '<h2 style="font:700 17px system-ui,Segoe UI,sans-serif;margin:0 0 2px">StewardMD — Clinical Reasoning</h2>' +
-        '<div style="font:12px system-ui,sans-serif;color:#555;margin:0 0 12px">Decision support — verify against clinical judgement. Printed ' + esc(new Date().toLocaleString()) + '</div>' +
+        '<h2 style="font:700 17px system-ui,Segoe UI,sans-serif;margin:0 0 2px">StewardMD - Clinical Reasoning</h2>' +
+        '<div style="font:12px system-ui,sans-serif;color:#555;margin:0 0 12px">Decision support - verify against clinical judgement. Printed ' + esc(new Date().toLocaleString()) + '</div>' +
         (rendered
           ? '<div class="dx-print-rendered">' + rendered + '</div><hr style="margin:14px 0;border:none;border-top:1px solid #ccc">'
           : '') +
@@ -1449,22 +1449,22 @@
       var cleaned = false;
       function cleanup(){ if (cleaned) return; cleaned = true; try { area.remove(); } catch (e) {} window.removeEventListener("afterprint", cleanup); }
       window.addEventListener("afterprint", cleanup);
-      setTimeout(function () { try { window.print(); } catch (e) { toast("Print unavailable — use Export."); cleanup(); } }, 80);
+      setTimeout(function () { try { window.print(); } catch (e) { toast("Print unavailable - use Export."); cleanup(); } }, 80);
       setTimeout(cleanup, 60000);
-    } catch (e) { toast("Print unavailable — use Export."); }
+    } catch (e) { toast("Print unavailable - use Export."); }
   }
   function shareSummary() {
     var txt = buildSummary();
-    // Native: navigator.share is unreliable in WKWebView — use the Capacitor share sheet.
+    // Native: navigator.share is unreliable in WKWebView - use the Capacitor share sheet.
     if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
-      window.SMD_NATIVE.share({ title: "StewardMD — Clinical Reasoning", text: txt, dialogTitle: "Share summary" }).catch(function () {});
+      window.SMD_NATIVE.share({ title: "StewardMD - Clinical Reasoning", text: txt, dialogTitle: "Share summary" }).catch(function () {});
       return;
     }
     try {
-      if (navigator.share) { navigator.share({ title: "StewardMD — Clinical Reasoning", text: txt }).catch(function () {}); return; }
+      if (navigator.share) { navigator.share({ title: "StewardMD - Clinical Reasoning", text: txt }).catch(function () {}); return; }
     } catch (e) {}
     exportSummary(); // fallback: copy to clipboard
-    toast("Sharing not supported here — copied instead.");
+    toast("Sharing not supported here - copied instead.");
   }
   function toast(msg) {
     var t = document.createElement("div"); t.className = "dx-toast"; t.textContent = msg; document.body.appendChild(t);
@@ -1478,7 +1478,7 @@
     if (!S.advOpen) return;
     var sessions = loadSessions();
     el.innerHTML =
-      '<textarea id="dxFreeText" class="dx-free" rows="3" placeholder="Describe the case in plain text — e.g. 65M, 2 days fever, neck stiffness, photophobia, drowsy…"></textarea>' +
+      '<textarea id="dxFreeText" class="dx-free" rows="3" placeholder="Describe the case in plain text - e.g. 65M, 2 days fever, neck stiffness, photophobia, drowsy…"></textarea>' +
       '<div class="dx-adv-row">' +
         '<button class="dx-adv-btn primary" id="dxExtract">✨ Extract findings</button>' +
         '<button class="dx-adv-btn" id="dxSaveSess">💾 Save session</button>' +
@@ -1487,7 +1487,7 @@
         '<button class="dx-adv-btn" id="dxShare">📤 Share</button>' +
       '</div>' +
       (sessions.length ? '<div class="dx-sess-h">Saved sessions</div><div class="dx-sess">' + sessions.map(function (s, i) { return '<button class="dx-sess-item" data-i="' + i + '">' + esc(s.label) + ' <span>' + esc(s.when) + '</span></button>'; }).join("") + '</div>' : '') +
-      (S.timeline.length ? '<div class="dx-tl-h">Reasoning timeline — leading diagnosis & confidence</div><div class="dx-tl">' + S.timeline.map(function (t, i) {
+      (S.timeline.length ? '<div class="dx-tl-h">Reasoning timeline - leading diagnosis & confidence</div><div class="dx-tl">' + S.timeline.map(function (t, i) {
         var arrow = "";
         if (i > 0) { var pr = S.timeline[i - 1]; if (pr && pr.topName === t.topName && t.topScore != null && pr.topScore != null) { arrow = t.topScore > pr.topScore ? ' <span class="up">▲</span>' : t.topScore < pr.topScore ? ' <span class="down">▼</span>' : ""; } }
         var lead = t.topName ? ' → ' + esc(t.topName) + (t.topScore != null ? ' <b>' + t.topScore + '/100</b>' + arrow : "") : "";
@@ -1501,28 +1501,28 @@
     el.querySelectorAll(".dx-sess-item").forEach(function (b) { b.addEventListener("click", function () { loadSession(+b.getAttribute("data-i")); }); });
   }
 
-  // 📖 Harrison reference block for a disease card — paraphrased, page-cited
+  // 📖 Harrison reference block for a disease card - paraphrased, page-cited
   // KNOWLEDGE from window.KB_ENRICHMENT (built from kb/diseases enrichment.harrison).
   // Display-only; returns "" if no enrichment is loaded for this id.
   /* ---------------------------------------------------------------------- *
-   * EVIDENCE VIEWER — premium, reusable clinical-evidence component (gold71)
+   * EVIDENCE VIEWER - premium, reusable clinical-evidence component (gold71)
    *
    * Replaces the old "wall of Harrison text" with a structured viewer: a source
    * header, a Clinical Pearls HERO (callout cards), and independent animated
    * collapsible sections (Pathophysiology · Diagnosis · Red flags & pitfalls ·
    * Course & prognosis · Full reference). Progressive disclosure, mobile-first,
    * lazy body build. SOURCE-AGNOSTIC: evViewerHTML(src) renders ANY evidence
-   * source (Harrison today; Sanford / IDSA / ESC / NICE / WHO later) — only the
+   * source (Harrison today; Sanford / IDSA / ESC / NICE / WHO later) - only the
    * src-builder differs. Citations are preserved verbatim inside the content.
    * ---------------------------------------------------------------------- */
-  /* SMART MEDICAL HIGHLIGHTING — semantic, meaning-preserving auto-emphasis.
+  /* SMART MEDICAL HIGHLIGHTING - semantic, meaning-preserving auto-emphasis.
    * Escapes text FIRST, then a SINGLE-PASS combined regex wraps recognised terms
    * in semantic spans (ordered by priority; longer phrases first). One pass = no
    * re-matching inside inserted markup, so HTML stays balanced and the medical
-   * meaning/wording is never changed — only visually emphasised. Citations kept. */
+   * meaning/wording is never changed - only visually emphasised. Citations kept. */
   var MED_RULES = [
     { cls: "md-cite", re: "Harrison(?:[’']s)?\\s*22e(?:\\s*pp?\\.?\\s*[\\dIVXLC]+(?:[\\u2013\\-,]\\s*\\d+)*)?" },
-    // high-yield ENUMERATION phrase — "classic triad of fever, headache and nuchal
+    // high-yield ENUMERATION phrase - "classic triad of fever, headache and nuchal
     // rigidity" etc. captured as one purple span (lazy, verb/punctuation-bounded;
     // fails safe to no-match if no boundary within range, never runs away).
     { cls: "md-hi", re: "(?:classic(?:al)?\\s+|the\\s+)?(?:clinical\\s+)?(?:triad|tetrad|pentad)\\s+of\\s+[a-z][^.;:&()]{2,70}?(?=\\s+(?:is|are|was|were|can|may|occurs?|suggests?|implies|indicates?|usually|typically|often|seen|present|presents?|consists?|comprises?|includes?|with|that|which|but|while|and is|and are)\\b|[.;:&()]|$)" },
@@ -1559,7 +1559,7 @@
     { cls: "md-action", re: "\\b(?:source control|device removal|removal of the device|remove the device|repeat blood cultures|repeat cultures|surgical debridement|urgent surgery|debridement|IV antibiotics|intravenous antibiotics|empi?ric antibiotics)\\b" },
     // high-yield SIGNAL markers + named signs/scores/criteria (the points worth noticing)
     { cls: "md-sig", re: "\\b(?:classic(?:al)?\\s+(?:triad|tetrad|pentad|presentation|features?)|pathognomonic|hallmark|gold standard|drug of choice|treatment of choice|first[\\u2013\\- ]line|second[\\u2013\\- ]line|mainstay|diagnostic of|diagnostic criteria|definitive diagnosis|Kernig(?:[’']s)?|Brudzinski(?:[’']s)?|Murphy(?:[’']s)? sign|Charcot(?:[’']s)?(?: triad)?|Reynolds pentad|Beck(?:[’']s)? triad|Whipple(?:[’']s)? triad|Cushing(?:[’']s)?(?: reflex| triad)?|Janeway lesions|Osler(?:[’']s)? nodes|Roth spots|Duke criteria|CURB[\\u2013\\-]?65|qSOFA|Wells score|Centor(?: criteria| score)?|Light(?:[’']s)? criteria|Ranson(?:[’']s)?(?: criteria)?|MELD(?:[\\u2013\\-]Na)?|Child[\\u2013\\- ]Pugh|Glasgow Coma Scale|GCS)\\b" },
-    // high-yield clinical CONCEPTS — bold the important medical points in context
+    // high-yield clinical CONCEPTS - bold the important medical points in context
     { cls: "md-key", re: "\\b(?:purulent|suppurative|pyogenic|abscess|empyema|vegetations?|biofilm|bacterae?mia|fungae?mia|virae?mia|septic emboli|immunocompromised|immunosuppressed|neutropeni[ac]|nuchal rigidity|meningismus|neck stiffness|subarachnoid space|blood[\\u2013\\- ]brain barrier|inflammatory reaction|foreign body|indwelling|prosthetic|necrosis|necrotic|ischae?mi[ac]|infarction|thrombosis|perforation|hydrocephalus|vasculitis|demyelination|granulomatous|granuloma|malignancy|metasta(?:sis|tic)|raised intracranial pressure|intracranial pressure|herniation|pleocytosis|coloni[sz](?:e|ed|ation)|opsoni[sz]ation|phagocytosis)\\b" },
     { cls: "md-abs", re: "\\b(?:never|always|must|contraindicated|mandatory|strongly recommended|strongly suggested|life[\\u2013\\- ]threatening)\\b" }
   ];
@@ -1585,32 +1585,32 @@
   function pearlKind(t) {
     var s = (t || "").toLowerCase();
     if (/persistent\s+\w+\s+bacter|persistent bacter|\bshock\b|hypotension|deteriorat|life[\s-]?threatening|high mortality|\bfatal\b|fulminant|until proven otherwise|do not delay|requires? urgent|impending|massive|emergenc/.test(s)) return { a: "warn", ic: "🚨", label: "Red flag" };
-    if (/source control|remove (?:the )?device|device removal|\bdrain\b|debridement|urgent surger|surgical|first[–\- ]line|drug of choice|mainstay|vancomycin|meropenem|linezolid|daptomycin|\bcef|piperacillin|\bantibiotics?\b|regimen|therapy is/.test(s)) return { a: "tx", ic: "💊", label: "Treatment pearl" };
+    if (/source control|remove (?:the )?device|device removal|\bdrain\b|debridement|urgent surger|surgical|first[-\- ]line|drug of choice|mainstay|vancomycin|meropenem|linezolid|daptomycin|\bcef|piperacillin|\bantibiotics?\b|regimen|therapy is/.test(s)) return { a: "tx", ic: "💊", label: "Treatment pearl" };
     if (/culture|echocard|\btee\b|\btte\b|\bmri\b|\bct\b|imaging|biopsy|gram stain|sensitivity|specificity|diagnostic|gold standard|investigat|\bpcr\b|serolog/.test(s)) return { a: "ix", ic: "🩺", label: "Diagnostic pearl" };
     if (/most common|classic|pathognomonic|hallmark|triad|tetrad|pentad|remember|\bexam\b|associated with/.test(s)) return { a: "pearl", ic: "🎯", label: "Exam pearl" };
     return { a: "pearl", ic: "💡", label: "Clinical pearl" };
   }
-  // Remove inline citations from displayed text — references are collected ONCE in
+  // Remove inline citations from displayed text - references are collected ONCE in
   // the source footer instead of repeating "(Harrison 22e p.1120)" on every point.
   // Only strips citation parentheticals (Harrison… / p.NNN); clinical parentheticals
   // like "(>45 mg/dL)" or "(meningoencephalitis)" are preserved.
   function stripCite(t) {
     return String(t == null ? "" : t)
-      .replace(/\s*\((?:Harrison[^)]*|pp?\.?\s*[\dIVXLC][\d,\s–\-]*)\)/g, "")
-      .replace(/\s*\bHarrison(?:[’']s)?\s*22e(?:\s*pp?\.?\s*[\d,\s–\-]+)?/g, "")
-      .replace(/\s*\bpp?\.\s*\d{2,4}(?:[–\-]\d{2,4})?(?:\s*,\s*\d{2,4}(?:[–\-]\d{2,4})?)*/g, "") // bare "p.818" / "pp. 1118-1125" (dot required → p.o./p53 safe)
+      .replace(/\s*\((?:Harrison[^)]*|pp?\.?\s*[\dIVXLC][\d,\s-\-]*)\)/g, "")
+      .replace(/\s*\bHarrison(?:[’']s)?\s*22e(?:\s*pp?\.?\s*[\d,\s-\-]+)?/g, "")
+      .replace(/\s*\bpp?\.\s*\d{2,4}(?:[-\-]\d{2,4})?(?:\s*,\s*\d{2,4}(?:[-\-]\d{2,4})?)*/g, "") // bare "p.818" / "pp. 1118-1125" (dot required → p.o./p53 safe)
       .replace(/\s+([.;,])/g, "$1").replace(/\s{2,}/g, " ").trim();
   }
-  // concise page list for the footer — prefer the curated `pages` field (already a
+  // concise page list for the footer - prefer the curated `pages` field (already a
   // clean range like "1078, 1082-1085"); only fall back to scanning body "p.NNN"
   // citations when no curated pages exist. Dedup + numeric sort, no body-number noise.
   function evPages(e) {
     var seen = {}, out = [];
-    function add(tok) { tok = String(tok).replace(/\s*[–\-]\s*/, "–").replace(/\s+/g, ""); if (/^\d{2,4}/.test(tok) && !seen[tok]) { seen[tok] = 1; out.push(tok); } }
-    function ctxScan(str) { var re = /pp?\.?\s*(\d{2,4}(?:\s*[–\-]\s*\d{2,4})?)/ig, m; while ((m = re.exec(str))) add(m[1]); }
+    function add(tok) { tok = String(tok).replace(/\s*[-\-]\s*/, "-").replace(/\s+/g, ""); if (/^\d{2,4}/.test(tok) && !seen[tok]) { seen[tok] = 1; out.push(tok); } }
+    function ctxScan(str) { var re = /pp?\.?\s*(\d{2,4}(?:\s*[-\-]\s*\d{2,4})?)/ig, m; while ((m = re.exec(str))) add(m[1]); }
     var curated = String(e.pages || "");
     if (/p\.?\s*\d/i.test(curated)) ctxScan(curated);                 // prose with p.NNN markers (ignore chapter/table numbers)
-    else if (/\d/.test(curated)) curated.replace(/[^\d,\s–\-]/g, " ").split(/[,\s]+/).forEach(add); // bare numeric list = all pages
+    else if (/\d/.test(curated)) curated.replace(/[^\d,\s-\-]/g, " ").split(/[,\s]+/).forEach(add); // bare numeric list = all pages
     else [].concat(e.clinicalPearls || [], e.pathophysiology ? [e.pathophysiology] : [], e.redFlags || [], e.pitfalls || [],
       e.additionalInvestigations || [], e.additionalDifferentials || []).forEach(ctxScan);
     out.sort(function (a, b) { return (parseInt(a, 10) || 0) - (parseInt(b, 10) || 0); });
@@ -1621,7 +1621,7 @@
     return '<ul class="ev-ul' + (kind ? " ev-ul--" + kind : "") + '">' + arr.map(function (x) { return '<li>' + medFormat(stripCite(x)) + '</li>'; }).join("") + '</ul>';
   }
   // render prose with the opening DEFINITION sentence as a lead callout (Quick Take),
-  // the rest as normal paragraphs — so the key statement is grasped at a glance.
+  // the rest as normal paragraphs - so the key statement is grasped at a glance.
   // group sentences into short ~2-sentence paragraphs (readability; no text removed)
   function paraChunks(text) {
     var sents = String(text).match(/[^.;]*[.;]+|\S[^.;]*$/g) || [text];
@@ -1665,7 +1665,7 @@
     if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(e.severityClassification)) + '</p>';
     if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + medFormat(stripCite(e.prognosis)) + '</p>';
     if (cp) sections.push({ ic: "📈", title: "Course & prognosis", html: cp });
-    // Original Reference — VERBATIM detail with inline page citations preserved
+    // Original Reference - VERBATIM detail with inline page citations preserved
     // (distinct from the de-cited summary sections above; citations also in footer).
     var rawUl = function (arr) { return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : ""; };
     var full = "";
@@ -1685,21 +1685,21 @@
       _id: id, srcKey: "harrison", icon: "📖",
       sourceName: srcName,
       edition: "22e", tag: "Primary Reference",
-      pages: "",                              // not in the header — references live in the footer
+      pages: "",                              // not in the header - references live in the footer
       pearls: pearls, sections: sections, fullHTML: full,
-      cite: '<strong>📖 ' + esc(srcName) + ' (22e)</strong>' + (pages.length ? ' — pp. ' + pages.join(", ") : "") +
-        '<br>Reference knowledge paraphrased &amp; page-cited. Not a treatment regimen — verify against full guidelines before acting.'
+      cite: '<strong>📖 ' + esc(srcName) + ' (22e)</strong>' + (pages.length ? ' - pp. ' + pages.join(", ") : "") +
+        '<br>Reference knowledge paraphrased &amp; page-cited. Not a treatment regimen - verify against full guidelines before acting.'
     };
   }
-  /* FLAGSHIP CLINICIAN-CURATED BRIEFINGS — hand-authored high-yield blocks for
+  /* FLAGSHIP CLINICIAN-CURATED BRIEFINGS - hand-authored high-yield blocks for
    * high-traffic diseases (Don't-miss / Exam pearl / Pitfall / Key action /
    * Practice tip). Reviewed standard-IM teaching points, distinct from the
    * AI-drafted Harrison paraphrase; rendered at the TOP of the viewer. */
   var EXAM_PEARLS = {
     MENINGITIS: [
-      { t: "action", x: "Do not delay antibiotics for imaging or LP — give empiric ceftriaxone + vancomycin (add ampicillin if >50y or immunocompromised, for Listeria) immediately, with dexamethasone before or with the first dose." },
+      { t: "action", x: "Do not delay antibiotics for imaging or LP - give empiric ceftriaxone + vancomycin (add ampicillin if >50y or immunocompromised, for Listeria) immediately, with dexamethasone before or with the first dose." },
       { t: "exam", x: "The classic triad of fever, headache and nuchal rigidity is often incomplete, but nearly all patients have at least one of fever, neck stiffness or altered mental status." },
-      { t: "pitfall", x: "A head CT before LP is only needed for focal deficit, papilledema, new seizure, immunocompromise or reduced GCS — not for every patient." },
+      { t: "pitfall", x: "A head CT before LP is only needed for focal deficit, papilledema, new seizure, immunocompromise or reduced GCS - not for every patient." },
       { t: "dx", x: "CSF in bacterial meningitis: neutrophilic pleocytosis, high protein, low glucose (CSF/serum ratio <0.4). Send CSF Gram stain, CSF culture and CSF multiplex PCR." }
     ],
     CAP: [
@@ -1712,23 +1712,23 @@
     ],
     SEPSIS: [
       { t: "action", x: "Hour-1 bundle: blood cultures before antibiotics, broad-spectrum antibiotics, lactate, and 30 mL/kg crystalloid for hypotension or lactate ≥4." },
-      { t: "dontmiss", x: "Source control is essential — identify and drain or remove the source whenever feasible; antibiotics alone usually fail without it." },
+      { t: "dontmiss", x: "Source control is essential - identify and drain or remove the source whenever feasible; antibiotics alone usually fail without it." },
       { t: "pitfall", x: "A normal early lactate or the absence of fever does not exclude sepsis, especially in the elderly or immunocompromised." }
     ],
     SEPTIC_SHOCK: [
-      { t: "dontmiss", x: "Septic shock = sepsis needing vasopressors to keep MAP ≥65 with lactate >2 despite fluids — start norepinephrine first-line and do not delay." },
+      { t: "dontmiss", x: "Septic shock = sepsis needing vasopressors to keep MAP ≥65 with lactate >2 despite fluids - start norepinephrine first-line and do not delay." },
       { t: "action", x: "Early broad-spectrum antibiotics plus source control; reassess and de-escalate once cultures return." }
     ],
     PYELONEPHRITIS: [
-      { t: "exam", x: "Flank pain with fever and pyuria suggests pyelonephritis; image with CT if there is no improvement by 48–72h to exclude obstruction or abscess." },
-      { t: "dontmiss", x: "An obstructing infected stone is a urological emergency that requires urgent drainage (stent or nephrostomy) — antibiotics alone will fail." }
+      { t: "exam", x: "Flank pain with fever and pyuria suggests pyelonephritis; image with CT if there is no improvement by 48-72h to exclude obstruction or abscess." },
+      { t: "dontmiss", x: "An obstructing infected stone is a urological emergency that requires urgent drainage (stent or nephrostomy) - antibiotics alone will fail." }
     ],
     CELLULITIS: [
-      { t: "pitfall", x: "Bilateral lower-limb 'cellulitis' is usually stasis dermatitis, not infection — true cellulitis is almost always unilateral." },
-      { t: "dontmiss", x: "Pain out of proportion to examination, rapid spread, bullae, crepitus or systemic toxicity should raise necrotizing fasciitis — get urgent surgery." }
+      { t: "pitfall", x: "Bilateral lower-limb 'cellulitis' is usually stasis dermatitis, not infection - true cellulitis is almost always unilateral." },
+      { t: "dontmiss", x: "Pain out of proportion to examination, rapid spread, bullae, crepitus or systemic toxicity should raise necrotizing fasciitis - get urgent surgery." }
     ],
     NECROTIZING_FASCIITIS: [
-      { t: "dontmiss", x: "Pain out of proportion to examination is the classic early clue; the diagnosis is surgical, not radiologic — do not delay surgical exploration." },
+      { t: "dontmiss", x: "Pain out of proportion to examination is the classic early clue; the diagnosis is surgical, not radiologic - do not delay surgical exploration." },
       { t: "action", x: "Urgent surgical debridement plus broad-spectrum antibiotics (add clindamycin for toxin suppression); imaging must never delay the operating room." }
     ],
     IE: [
@@ -1737,74 +1737,74 @@
       { t: "action", x: "Take three sets of blood cultures before antibiotics, treat with prolonged IV therapy, and involve cardiac surgery early for heart failure, abscess or large vegetations." }
     ],
     DEVICE_INFECTION: [
-      { t: "dontmiss", x: "Complete device removal is recommended whenever feasible — antibiotics alone usually fail while the hardware remains." },
+      { t: "dontmiss", x: "Complete device removal is recommended whenever feasible - antibiotics alone usually fail while the hardware remains." },
       { t: "exam", x: "Persistent or relapsing Staphylococcus aureus or coagulase-negative staphylococcal bacteremia without another source suggests CIED infection." }
     ],
     CHOLANGITIS: [
-      { t: "dontmiss", x: "Charcot's triad (fever, jaundice, RUQ pain) and Reynolds' pentad point to acute cholangitis, which requires urgent biliary drainage — antibiotics alone are not enough." },
+      { t: "dontmiss", x: "Charcot's triad (fever, jaundice, RUQ pain) and Reynolds' pentad point to acute cholangitis, which requires urgent biliary drainage - antibiotics alone are not enough." },
       { t: "action", x: "Blood cultures, broad-spectrum antibiotics and source control by biliary decompression; emergent ERCP if septic shock or no response." }
     ],
     C_DIFF: [
       { t: "tip", x: "First-line is oral vancomycin or fidaxomicin; use metronidazole only if these are unavailable, and stop the inciting antibiotic." },
-      { t: "dontmiss", x: "Ileus, toxic megacolon, rising lactate or shock indicate fulminant C. difficile — get a surgical consult; do not rely on stool tests to gauge severity." },
+      { t: "dontmiss", x: "Ileus, toxic megacolon, rising lactate or shock indicate fulminant C. difficile - get a surgical consult; do not rely on stool tests to gauge severity." },
       { t: "pitfall", x: "Do not test or treat asymptomatic carriers, and do not repeat testing to confirm cure." }
     ],
     FEBRILE_NEUTROPENIA: [
-      { t: "action", x: "A medical emergency — give an empiric antipseudomonal beta-lactam (piperacillin-tazobactam or cefepime) within 1 hour of presentation." },
-      { t: "pitfall", x: "Add vancomycin only for specific indications (line infection, skin/soft-tissue, severe mucositis, instability, known MRSA) — not routinely." }
+      { t: "action", x: "A medical emergency - give an empiric antipseudomonal beta-lactam (piperacillin-tazobactam or cefepime) within 1 hour of presentation." },
+      { t: "pitfall", x: "Add vancomycin only for specific indications (line infection, skin/soft-tissue, severe mucositis, instability, known MRSA) - not routinely." }
     ],
     DENGUE: [
-      { t: "dontmiss", x: "Watch for warning signs around defervescence (days 3–7): abdominal pain, persistent vomiting, mucosal bleeding, lethargy, and a rising haematocrit with falling platelets — these herald plasma leak." },
+      { t: "dontmiss", x: "Watch for warning signs around defervescence (days 3-7): abdominal pain, persistent vomiting, mucosal bleeding, lethargy, and a rising haematocrit with falling platelets - these herald plasma leak." },
       { t: "pitfall", x: "Avoid NSAIDs and intramuscular injections; the danger is plasma leakage and shock, not the platelet count itself." }
     ],
     MALARIA: [
-      { t: "dontmiss", x: "Any fever with recent travel to or residence in an endemic area is malaria until proven otherwise — do thick and thin smears (repeat if negative) or a rapid antigen test." },
-      { t: "action", x: "Severe or falciparum malaria is a medical emergency — IV artesunate is first-line." }
+      { t: "dontmiss", x: "Any fever with recent travel to or residence in an endemic area is malaria until proven otherwise - do thick and thin smears (repeat if negative) or a rapid antigen test." },
+      { t: "action", x: "Severe or falciparum malaria is a medical emergency - IV artesunate is first-line." }
     ],
     ENTERIC_FEVER: [
       { t: "exam", x: "Sustained fever with relative bradycardia, abdominal pain and altered bowel habit after endemic exposure; blood culture is the diagnostic gold standard." },
-      { t: "pitfall", x: "The Widal test is unreliable — do not diagnose or exclude typhoid on Widal alone." }
+      { t: "pitfall", x: "The Widal test is unreliable - do not diagnose or exclude typhoid on Widal alone." }
     ],
     PULMONARY_TB: [
-      { t: "dontmiss", x: "Cough for more than 2 weeks with weight loss and night sweats — send sputum for Xpert MTB/RIF (detects rifampicin resistance) and AFB, and start airborne isolation." },
+      { t: "dontmiss", x: "Cough for more than 2 weeks with weight loss and night sweats - send sputum for Xpert MTB/RIF (detects rifampicin resistance) and AFB, and start airborne isolation." },
       { t: "pitfall", x: "A normal chest X-ray does not exclude TB in HIV or immunocompromised patients." }
     ],
     SBP: [
-      { t: "dx", x: "Diagnose with an ascitic fluid PMN count ≥250/µL — perform a diagnostic paracentesis in any cirrhotic with ascites who develops fever, abdominal pain or encephalopathy." },
+      { t: "dx", x: "Diagnose with an ascitic fluid PMN count ≥250/µL - perform a diagnostic paracentesis in any cirrhotic with ascites who develops fever, abdominal pain or encephalopathy." },
       { t: "action", x: "Empiric ceftriaxone plus IV albumin (on day 1 and day 3) reduces hepatorenal syndrome and mortality." }
     ],
     dka: [
       { t: "action", x: "Fluids first, then an IV insulin infusion; replace potassium before insulin if K+ <3.3, and never stop insulin until the anion gap has closed." },
-      { t: "pitfall", x: "Do not be reassured by glucose alone — beware euglycemic DKA in patients on SGLT2 inhibitors." }
+      { t: "pitfall", x: "Do not be reassured by glucose alone - beware euglycemic DKA in patients on SGLT2 inhibitors." }
     ],
     acs: [
       { t: "action", x: "Obtain an ECG within 10 minutes; STEMI needs immediate reperfusion (PCI preferred), and give aspirin to all unless contraindicated." },
-      { t: "pitfall", x: "A normal initial troponin or ECG does not exclude ACS — serial testing is required." }
+      { t: "pitfall", x: "A normal initial troponin or ECG does not exclude ACS - serial testing is required." }
     ],
     pe: [
       { t: "exam", x: "Risk-stratify with the Wells score and an age-adjusted D-dimer; CT pulmonary angiography is the investigation of choice in most patients." },
-      { t: "dontmiss", x: "Hypotension or RV strain means high-risk PE — consider thrombolysis, and do not delay anticoagulation while awaiting imaging when probability is high." }
+      { t: "dontmiss", x: "Hypotension or RV strain means high-risk PE - consider thrombolysis, and do not delay anticoagulation while awaiting imaging when probability is high." }
     ],
     mesenteric_ischemia: [
-      { t: "dontmiss", x: "Pain out of proportion to examination with a vascular history is acute mesenteric ischaemia until proven otherwise — get urgent CT angiography." },
+      { t: "dontmiss", x: "Pain out of proportion to examination with a vascular history is acute mesenteric ischaemia until proven otherwise - get urgent CT angiography." },
       { t: "pitfall", x: "An almost normal abdominal exam and labs early on are typical and falsely reassuring; lactate rises late." }
     ],
 
     // ---- next tier of common presentations ----
     HAP: [
       { t: "exam", x: "Pneumonia developing ≥48h after admission; cover MRSA and Pseudomonas empirically when MDR risk factors are present (recent IV antibiotics, prior resistant isolates, high local resistance)." },
-      { t: "action", x: "Send a respiratory culture and blood cultures before empiric antibiotics, then de-escalate at 48–72h on results." }
+      { t: "action", x: "Send a respiratory culture and blood cultures before empiric antibiotics, then de-escalate at 48-72h on results." }
     ],
     VAP: [
       { t: "exam", x: "Suspect with a new infiltrate plus fever, leukocytosis, purulent secretions and worsening oxygenation ≥48h after intubation." },
-      { t: "pitfall", x: "Tracheal colonisation is common — do not treat a positive aspirate without clinical/radiographic signs; aim for ~7-day courses to limit resistance." }
+      { t: "pitfall", x: "Tracheal colonisation is common - do not treat a positive aspirate without clinical/radiographic signs; aim for ~7-day courses to limit resistance." }
     ],
     ASPIRATION_PNEUMONIA: [
       { t: "exam", x: "Dependent-segment infiltrate after impaired consciousness or dysphagia; routine anaerobic cover is not needed unless there is abscess/empyema or poor dentition." },
-      { t: "pitfall", x: "Aspiration pneumonitis (acid/chemical) is not infection — antibiotics are not needed in the first 48h unless features fail to resolve." }
+      { t: "pitfall", x: "Aspiration pneumonitis (acid/chemical) is not infection - antibiotics are not needed in the first 48h unless features fail to resolve." }
     ],
     COPD_EXACERBATION: [
-      { t: "action", x: "Controlled O2 (target SpO2 88–92%), inhaled bronchodilators and systemic steroids; add antibiotics when sputum is purulent or ventilatory support is needed." },
+      { t: "action", x: "Controlled O2 (target SpO2 88-92%), inhaled bronchodilators and systemic steroids; add antibiotics when sputum is purulent or ventilatory support is needed." },
       { t: "dontmiss", x: "Rising CO2 with respiratory acidosis → start NIV early; it reduces intubation and mortality." }
     ],
     CYSTITIS: [
@@ -1812,43 +1812,43 @@
       { t: "pitfall", x: "Do not treat asymptomatic bacteriuria except in pregnancy or before a urologic procedure." }
     ],
     COMPLICATED_UTI: [
-      { t: "exam", x: "UTI with fever, or in men, pregnancy, catheter, obstruction or immunocompromise — culture-guided and longer course; image if no response by 48–72h." },
-      { t: "dontmiss", x: "An obstructed, infected urinary tract needs urgent drainage — antibiotics alone will fail." }
+      { t: "exam", x: "UTI with fever, or in men, pregnancy, catheter, obstruction or immunocompromise - culture-guided and longer course; image if no response by 48-72h." },
+      { t: "dontmiss", x: "An obstructed, infected urinary tract needs urgent drainage - antibiotics alone will fail." }
     ],
     CHOLECYSTITIS: [
       { t: "exam", x: "RUQ pain, fever and a positive Murphy's sign; ultrasound shows wall thickening, pericholecystic fluid and a sonographic Murphy's sign." },
       { t: "action", x: "Antibiotics plus analgesia, and early laparoscopic cholecystectomy (within ~7 days) is preferred over delayed surgery." }
     ],
     GASTROENTERITIS: [
-      { t: "tip", x: "Most acute gastroenteritis is viral and self-limited — oral rehydration is the mainstay and antibiotics are not routinely needed." },
+      { t: "tip", x: "Most acute gastroenteritis is viral and self-limited - oral rehydration is the mainstay and antibiotics are not routinely needed." },
       { t: "dontmiss", x: "In bloody diarrhoea, avoid antimotility agents and avoid empiric antibiotics if Shiga-toxin E. coli is possible (haemolytic-uraemic syndrome risk)." }
     ],
     DIABETIC_FOOT: [
-      { t: "exam", x: "Probe-to-bone, or an ulcer >2 cm or long-standing, suggests osteomyelitis — image (MRI) and take deep/bone cultures, not superficial swabs." },
+      { t: "exam", x: "Probe-to-bone, or an ulcer >2 cm or long-standing, suggests osteomyelitis - image (MRI) and take deep/bone cultures, not superficial swabs." },
       { t: "action", x: "Debridement/drainage, offloading and vascular assessment matter as much as antibiotics." }
     ],
     ERYSIPELAS: [
       { t: "exam", x: "Sharply demarcated, raised, fiery-red plaque (unlike cellulitis' ill-defined edge); usually group A Streptococcus, and penicillin is first-line." }
     ],
     BRAIN_ABSCESS: [
-      { t: "dontmiss", x: "Ring-enhancing lesion with headache, fever and focal deficit — neurosurgical aspiration gives both diagnosis and source control; avoid LP (herniation risk)." },
+      { t: "dontmiss", x: "Ring-enhancing lesion with headache, fever and focal deficit - neurosurgical aspiration gives both diagnosis and source control; avoid LP (herniation risk)." },
       { t: "action", x: "Empiric cover for streptococci, anaerobes and gram-negatives (e.g., ceftriaxone + metronidazole), then prolonged IV therapy." }
     ],
     ENCEPHALITIS: [
-      { t: "dontmiss", x: "Fever with altered mental status, seizures or focal signs — start empiric IV acyclovir immediately for possible HSV; do not wait for PCR." },
+      { t: "dontmiss", x: "Fever with altered mental status, seizures or focal signs - start empiric IV acyclovir immediately for possible HSV; do not wait for PCR." },
       { t: "dx", x: "CSF shows a lymphocytic pleocytosis; HSV PCR can be falsely negative very early (repeat), and MRI may show temporal-lobe changes in HSV." }
     ],
     CNS_TB: [
       { t: "exam", x: "Subacute meningitis with cranial-nerve palsies and basal enhancement; CSF shows lymphocytic pleocytosis, high protein and very low glucose." },
-      { t: "action", x: "Start anti-TB therapy plus adjunctive corticosteroids early — do not delay for confirmation when suspicion is high." }
+      { t: "action", x: "Start anti-TB therapy plus adjunctive corticosteroids early - do not delay for confirmation when suspicion is high." }
     ],
     VIRAL_HEPATITIS: [
       { t: "exam", x: "Acute hepatitis with markedly raised transaminases; check A/B/C/E serologies. Hepatitis E can be severe in pregnancy." },
-      { t: "dontmiss", x: "Watch for acute liver failure — coagulopathy (rising INR) and encephalopathy — and refer to a transplant centre early." }
+      { t: "dontmiss", x: "Watch for acute liver failure - coagulopathy (rising INR) and encephalopathy - and refer to a transplant centre early." }
     ],
     LEPTOSPIROSIS: [
       { t: "exam", x: "Fever with calf myalgia, conjunctival suffusion and AKI after water/soil exposure; Weil's disease = jaundice + AKI + bleeding." },
-      { t: "action", x: "Treat empirically (doxycycline, or IV penicillin/ceftriaxone if severe) — do not wait for serology." }
+      { t: "action", x: "Treat empirically (doxycycline, or IV penicillin/ceftriaxone if severe) - do not wait for serology." }
     ],
     SCRUB_TYPHUS: [
       { t: "exam", x: "Acute undifferentiated fever with an eschar and regional lymphadenopathy in an endemic area." },
@@ -1860,7 +1860,7 @@
     ],
     covid19: [
       { t: "action", x: "Dexamethasone for patients needing oxygen; add an immunomodulator (e.g., tocilizumab or baricitinib) in rapidly progressing hypoxia per local protocol." },
-      { t: "pitfall", x: "Antibiotics are not routine — bacterial co-infection at presentation is uncommon; assess VTE risk and anticoagulate per protocol." }
+      { t: "pitfall", x: "Antibiotics are not routine - bacterial co-infection at presentation is uncommon; assess VTE risk and anticoagulate per protocol." }
     ],
     hiv_aids: [
       { t: "dontmiss", x: "New HIV with hypoxia and bilateral infiltrates → think PCP (start co-trimoxazole, add steroids if PaO2 is low); consider cryptococcal disease and TB in advanced disease." },
@@ -1871,15 +1871,15 @@
       { t: "pitfall", x: "Avoid fluids, and recognise the cold-and-wet (hypoperfused) patient who needs inotropes/ICU rather than diuresis alone." }
     ],
     ischemic_stroke: [
-      { t: "action", x: "Time is brain — non-contrast CT to exclude haemorrhage, then IV thrombolysis within the window and thrombectomy for large-vessel occlusion. Document last-known-well." },
+      { t: "action", x: "Time is brain - non-contrast CT to exclude haemorrhage, then IV thrombolysis within the window and thrombectomy for large-vessel occlusion. Document last-known-well." },
       { t: "pitfall", x: "Do not aggressively lower BP in acute ischaemic stroke unless thrombolysing or BP >220/120; always check glucose (a stroke mimic)." }
     ],
     ich: [
       { t: "action", x: "Reverse anticoagulation immediately, control BP (target ~140 mmHg systolic) and get neurosurgical review for posterior-fossa or large haematomas." },
-      { t: "dontmiss", x: "A rapid GCS drop or a posterior-fossa bleed signals impending herniation — urgent imaging and neurosurgery." }
+      { t: "dontmiss", x: "A rapid GCS drop or a posterior-fossa bleed signals impending herniation - urgent imaging and neurosurgery." }
     ],
     sah: [
-      { t: "exam", x: "Thunderclap (worst-ever, peaks in seconds) headache; CT is highly sensitive early — if negative and suspicion persists, do an LP for xanthochromia." },
+      { t: "exam", x: "Thunderclap (worst-ever, peaks in seconds) headache; CT is highly sensitive early - if negative and suspicion persists, do an LP for xanthochromia." },
       { t: "action", x: "Secure the aneurysm early (coil/clip), give nimodipine to prevent vasospasm, and manage in a specialist centre." }
     ],
     aki: [
@@ -1888,7 +1888,7 @@
     ],
     pancreatitis: [
       { t: "exam", x: "Diagnose with 2 of 3: typical pain, lipase >3× upper limit, or imaging. Early aggressive fluid resuscitation is the cornerstone." },
-      { t: "pitfall", x: "Do not give prophylactic antibiotics — reserve them for confirmed infected necrosis; early CT severity is unreliable in the first 72h." }
+      { t: "pitfall", x: "Do not give prophylactic antibiotics - reserve them for confirmed infected necrosis; early CT severity is unreliable in the first 72h." }
     ],
     peptic_ulcer: [
       { t: "action", x: "Resuscitate first (restrictive transfusion to Hb ~7 g/dL), IV PPI, and endoscopy within 24h; if cirrhotic, suspect varices and add a vasoactive drug plus antibiotics." },
@@ -1896,23 +1896,23 @@
     ],
     asthma_exac: [
       { t: "action", x: "Back-to-back salbutamol + ipratropium, early systemic steroids and controlled O2; add IV magnesium for severe or life-threatening attacks." },
-      { t: "dontmiss", x: "A normalising or rising CO2 during an acute asthma attack signals fatigue and impending respiratory failure — get ICU early." }
+      { t: "dontmiss", x: "A normalising or rising CO2 during an acute asthma attack signals fatigue and impending respiratory failure - get ICU early." }
     ],
     anaphylaxis: [
       { t: "action", x: "IM adrenaline 0.5 mg (1:1000) to the anterolateral thigh immediately is first-line; repeat at 5 minutes. Antihistamines and steroids are adjuncts, never the priority." },
       { t: "pitfall", x: "Do not delay adrenaline for IV access or steroids, and observe for a biphasic reaction." }
     ],
     hyperkalemia: [
-      { t: "action", x: "ECG first — with changes (peaked T waves, wide QRS), give IV calcium to stabilise the myocardium, then insulin–glucose ± salbutamol to shift K+, and remove K+ (dialysis if severe)." },
-      { t: "pitfall", x: "Calcium does not lower potassium — it protects the heart while the shifting and removal measures work." }
+      { t: "action", x: "ECG first - with changes (peaked T waves, wide QRS), give IV calcium to stabilise the myocardium, then insulin-glucose ± salbutamol to shift K+, and remove K+ (dialysis if severe)." },
+      { t: "pitfall", x: "Calcium does not lower potassium - it protects the heart while the shifting and removal measures work." }
     ],
     hyponatremia: [
-      { t: "action", x: "Symptomatic (seizures/coma) → 3% hypertonic saline boluses; otherwise correct slowly (≤8–10 mmol/L per 24h)." },
-      { t: "dontmiss", x: "Over-rapid correction causes osmotic demyelination — recheck sodium frequently and cap the rate of rise." }
+      { t: "action", x: "Symptomatic (seizures/coma) → 3% hypertonic saline boluses; otherwise correct slowly (≤8-10 mmol/L per 24h)." },
+      { t: "dontmiss", x: "Over-rapid correction causes osmotic demyelination - recheck sodium frequently and cap the rate of rise." }
     ],
     thyroid_storm: [
       { t: "action", x: "Beta-blocker (propranolol), then a thionamide (PTU/methimazole), then iodine at least 1h AFTER the thionamide, plus hydrocortisone; treat the trigger." },
-      { t: "pitfall", x: "Give iodine only after the thionamide — given first it fuels hormone synthesis." }
+      { t: "pitfall", x: "Give iodine only after the thionamide - given first it fuels hormone synthesis." }
     ],
     adrenal_crisis: [
       { t: "action", x: "Give IV hydrocortisone 100 mg immediately (do not wait for cortisol), with aggressive IV fluids and glucose; treat the precipitant." },
@@ -1920,11 +1920,11 @@
     ],
     gbs: [
       { t: "exam", x: "Ascending symmetric weakness with areflexia after a recent infection; CSF shows albuminocytologic dissociation (high protein, normal cell count)." },
-      { t: "dontmiss", x: "Monitor FVC and respiratory function serially — a falling FVC means impending respiratory failure; treat with IVIG or plasma exchange." }
+      { t: "dontmiss", x: "Monitor FVC and respiratory function serially - a falling FVC means impending respiratory failure; treat with IVIG or plasma exchange." }
     ],
     htn_emergency: [
-      { t: "action", x: "Hypertensive emergency = severe BP plus acute target-organ damage — lower MAP by ~10–20% in the first hour with a titratable IV agent, not a rapid normalisation." },
-      { t: "pitfall", x: "Asymptomatic severe hypertension (urgency) does not need rapid IV lowering — over-aggressive drops cause ischaemia." }
+      { t: "action", x: "Hypertensive emergency = severe BP plus acute target-organ damage - lower MAP by ~10-20% in the first hour with a titratable IV agent, not a rapid normalisation." },
+      { t: "pitfall", x: "Asymptomatic severe hypertension (urgency) does not need rapid IV lowering - over-aggressive drops cause ischaemia." }
     ]
   };
   var EV_BRIEF_META = {
@@ -1943,9 +1943,9 @@
         return '<div class="ev-bc ev-bc--' + m.a + '"><span class="ev-bc-ic">' + m.ic + '</span><div class="ev-bc-bd"><span class="ev-bc-tag ev-tag--' + m.a + '">' + m.label + '</span>' + medFormat(stripCite(p.x)) + '</div></div>';
       }).join("") + '</div>';
   }
-  // the collapsible body (pearls hero + sections + full reference) — lazy-built
+  // the collapsible body (pearls hero + sections + full reference) - lazy-built
   function evBodyHTML(src) {
-    // the clinician briefing belongs to the disease — show it once, in the primary (Harrison) panel.
+    // the clinician briefing belongs to the disease - show it once, in the primary (Harrison) panel.
     var h = '<div class="ev-body">' + (src.srcKey === "harrison" ? evBriefing(src._id) : "");
     if (src.pearls && src.pearls.length) {
       h += '<div class="ev-pearls"><div class="ev-pearls-h"><span>⭐</span> ' + esc(src.pearlsLabel || "Key clinical pearls") + '</div>' +
@@ -1977,7 +1977,7 @@
         '<span class="ev-chev ev-chev-top">⌄</span></button>' +
       '<div class="ev-panel"><div class="ev-panel-in">' + (open ? evBodyHTML(src) : '') + '</div></div></div>';
   }
-  // delegated toggle + lazy build — wired once, works wherever the HTML is injected
+  // delegated toggle + lazy build - wired once, works wherever the HTML is injected
   function evEnsure() {
     try { evInjectCSS(); } catch (e) {}
     if (window.__smdEvWired) return; window.__smdEvWired = true;
@@ -2082,8 +2082,8 @@
   /* ---- ADDITIONAL EVIDENCE SOURCES (reusable, same viewer) ----
    * Each builder returns the same descriptor shape as evHarrisonSrc and is rendered
    * by the same evViewerHTML/evBodyHTML. Content is clinician-PARAPHRASED standard
-   * recommendations + standard empiric dosing for decision support — NOT verbatim
-   * proprietary text — with official source links. Future sources (ESC, ATS, NICE,
+   * recommendations + standard empiric dosing for decision support - NOT verbatim
+   * proprietary text - with official source links. Future sources (ESC, ATS, NICE,
    * WHO) drop in by adding a data store + a builder to EV_BUILDERS. */
   var IDSA_GUIDELINES = {
     CAP: { society: "IDSA / ATS", title: "Community-Acquired Pneumonia in Adults", year: 2019, url: "https://www.idsociety.org/practice-guideline/community-acquired-pneumonia-cap-in-adults/", recs: [
@@ -2114,20 +2114,20 @@
     IE: { society: "AHA / IDSA", title: "Infective Endocarditis in Adults (AHA Scientific Statement)", year: 2015, url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296", recs: [
       "Obtain three sets of blood cultures from separate sites before antibiotics.",
       "Apply the modified Duke criteria; echocardiography with TEE preferred when suspicion is high.",
-      "Definitive therapy is pathogen-directed and prolonged (typically 4–6 weeks IV).",
+      "Definitive therapy is pathogen-directed and prolonged (typically 4-6 weeks IV).",
       "Early surgery for heart failure, perivalvular abscess, large/mobile vegetations or persistent bacteremia." ] },
     FEBRILE_NEUTROPENIA: { society: "IDSA", title: "Antimicrobial Use in Neutropenic Patients with Cancer", year: 2010, url: "https://www.idsociety.org/practice-guideline/fever-and-neutropenia/", recs: [
       "High-risk patients: empiric monotherapy with an antipseudomonal beta-lactam within 1 hour.",
       "Add vancomycin only for specific indications (line infection, skin/soft-tissue, severe mucositis, hypotension, known MRSA).",
       "Low-risk patients (by MASCC score) may be eligible for oral outpatient therapy.",
-      "Reassess at 2–4 days and adjust on cultures and clinical response." ] },
+      "Reassess at 2-4 days and adjust on cultures and clinical response." ] },
     CELLULITIS: { society: "IDSA", title: "Skin and Soft Tissue Infections", year: 2014, url: "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/", recs: [
       "Non-purulent cellulitis: cover streptococci (and MSSA) with a beta-lactam.",
       "Purulent SSTI: incision and drainage; add MRSA cover for moderate/severe disease.",
       "Mark the margin, elevate the limb and treat predisposing factors.",
       "Severe or rapidly progressive infection: broaden cover and obtain surgical evaluation." ] },
     NECROTIZING_FASCIITIS: { society: "IDSA", title: "Necrotizing Soft Tissue Infections (SSTI guideline)", year: 2014, url: "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/", recs: [
-      "Urgent surgical exploration and debridement is the priority — do not delay for imaging.",
+      "Urgent surgical exploration and debridement is the priority - do not delay for imaging.",
       "Empiric broad-spectrum cover PLUS clindamycin for toxin suppression.",
       "Narrow therapy once operative findings and cultures return.",
       "Repeat debridement as needed with supportive ICU care." ] },
@@ -2140,19 +2140,19 @@
       "Obtain a urine culture before therapy.",
       "Outpatient: a fluoroquinolone where local resistance is low, guided by susceptibility.",
       "Hospitalized: an IV agent active against likely gram-negatives, narrowed on cultures.",
-      "Image to exclude obstruction or abscess if no improvement by 48–72 hours." ] },
+      "Image to exclude obstruction or abscess if no improvement by 48-72 hours." ] },
     COMPLICATED_UTI: { society: "IDSA", title: "Complicated Urinary Tract Infection", year: 2010, url: "https://www.idsociety.org/practice-guideline/uncomplicated-cystitis-and-pyelonephritis-uti/", recs: [
       "Always obtain a urine culture and treat based on susceptibility.",
-      "Relieve any obstruction — antibiotics alone fail an obstructed, infected tract.",
+      "Relieve any obstruction - antibiotics alone fail an obstructed, infected tract.",
       "Use a longer course than for uncomplicated cystitis.",
       "Remove or exchange an infected catheter where possible." ] },
     CYSTITIS: { society: "IDSA", title: "Acute Uncomplicated Cystitis in Women", year: 2011, url: "https://www.idsociety.org/practice-guideline/uncomplicated-cystitis-and-pyelonephritis-uti/", recs: [
-      "First-line: nitrofurantoin, trimethoprim–sulfamethoxazole (resistance <20%), or fosfomycin.",
+      "First-line: nitrofurantoin, trimethoprim-sulfamethoxazole (resistance <20%), or fosfomycin.",
       "Reserve fluoroquinolones for when first-line agents are unsuitable.",
       "A urine culture is not required for classic uncomplicated cystitis.",
       "Do not treat asymptomatic bacteriuria except in pregnancy or before urologic procedures." ] },
     CHOLANGITIS: { society: "IDSA / SIS + Tokyo Guidelines", title: "Acute Cholangitis / Complicated Intra-abdominal Infection", year: 2010, url: "https://www.idsociety.org/practice-guideline/intra-abdominal-infections/", recs: [
-      "Source control by biliary drainage (ERCP) is essential — urgently if severe.",
+      "Source control by biliary drainage (ERCP) is essential - urgently if severe.",
       "Empiric cover for enteric gram-negatives and anaerobes.",
       "Obtain blood and bile cultures and narrow on results.",
       "Tokyo severity grading guides the timing of drainage and level of care." ] },
@@ -2168,21 +2168,21 @@
       "Start secondary prophylaxis after an episode." ] }
   };
   var SANFORD_RX = {
-    CAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Amoxicillin", dose: "1 g", route: "PO TID", dur: "≥5 d" }, { drug: "Doxycycline", dose: "100 mg", route: "PO BID", dur: "5 d" }], alt: [{ drug: "Azithromycin", dose: "500 mg → 250 mg", route: "PO", note: "only where macrolide resistance is low" }], notes: "With comorbidities: amoxicillin–clavulanate or a cephalosporin PLUS a macrolide, or a respiratory fluoroquinolone (levofloxacin 750 mg)." },
-    SEVERE_CAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Azithromycin", dose: "500 mg", route: "IV daily" }], alt: [{ drug: "Levofloxacin", dose: "750 mg", route: "IV daily" }], notes: "Add vancomycin/linezolid (MRSA) or piperacillin–tazobactam/cefepime (Pseudomonas) only with risk factors." },
-    HAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "or Cefepime", dose: "2 g", route: "IV q8h" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }], notes: "Add vancomycin or linezolid for MRSA; choose per unit antibiogram; 7-day course." },
-    VAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6h" }, { drug: "or Cefepime", dose: "2 g", route: "IV q8h" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }], notes: "Add vancomycin/linezolid for MRSA; de-escalate on cultures." },
-    MENINGITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV q12h" }, { drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h" }], alt: [{ drug: "+ Ampicillin", dose: "2 g", route: "IV q4h", note: "if Listeria risk" }], notes: "Dexamethasone 10 mg IV q6h before/with the first dose for suspected pneumococcal." },
-    IE: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h" }, { drug: "+ Ceftriaxone", dose: "2 g", route: "IV daily", note: "empiric, native valve, cultures pending" }], notes: "Definitive therapy is pathogen-directed and prolonged (4–6 weeks); add gentamicin/rifampin per organism and valve type." },
-    FEBRILE_NEUTROPENIA: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6h" }, { drug: "or Cefepime", dose: "2 g", route: "IV q8h" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }], notes: "Within 1 hour; add vancomycin only for specific indications." },
-    CELLULITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Cephalexin", dose: "500 mg", route: "PO QID", note: "mild, non-purulent" }, { drug: "or Cefazolin", dose: "1–2 g", route: "IV q8h", note: "moderate" }], alt: [{ drug: "Doxycycline / TMP–SMX", dose: "", route: "PO", note: "if MRSA suspected (purulent)" }], notes: "Purulent SSTI → incision & drainage plus MRSA cover." },
-    NECROTIZING_FASCIITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h" }, { drug: "+ Clindamycin", dose: "900 mg", route: "IV q8h", note: "toxin suppression" }], notes: "Surgery is the priority; antibiotics are adjunctive." },
+    CAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Amoxicillin", dose: "1 g", route: "PO TID", dur: "≥5 d" }, { drug: "Doxycycline", dose: "100 mg", route: "PO BID", dur: "5 d" }], alt: [{ drug: "Azithromycin", dose: "500 mg → 250 mg", route: "PO", note: "only where macrolide resistance is low" }], notes: "With comorbidities: amoxicillin-clavulanate or a cephalosporin PLUS a macrolide, or a respiratory fluoroquinolone (levofloxacin 750 mg)." },
+    SEVERE_CAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Azithromycin", dose: "500 mg", route: "IV daily" }], alt: [{ drug: "Levofloxacin", dose: "750 mg", route: "IV daily" }], notes: "Add vancomycin/linezolid (MRSA) or piperacillin-tazobactam/cefepime (Pseudomonas) only with risk factors." },
+    HAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }, { drug: "or Cefepime", dose: "2 g", route: "IV q8h" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }], notes: "Add vancomycin or linezolid for MRSA; choose per unit antibiogram; 7-day course." },
+    VAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6h" }, { drug: "or Cefepime", dose: "2 g", route: "IV q8h" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }], notes: "Add vancomycin/linezolid for MRSA; de-escalate on cultures." },
+    MENINGITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV q12h" }, { drug: "+ Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h" }], alt: [{ drug: "+ Ampicillin", dose: "2 g", route: "IV q4h", note: "if Listeria risk" }], notes: "Dexamethasone 10 mg IV q6h before/with the first dose for suspected pneumococcal." },
+    IE: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h" }, { drug: "+ Ceftriaxone", dose: "2 g", route: "IV daily", note: "empiric, native valve, cultures pending" }], notes: "Definitive therapy is pathogen-directed and prolonged (4-6 weeks); add gentamicin/rifampin per organism and valve type." },
+    FEBRILE_NEUTROPENIA: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6h" }, { drug: "or Cefepime", dose: "2 g", route: "IV q8h" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }], notes: "Within 1 hour; add vancomycin only for specific indications." },
+    CELLULITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Cephalexin", dose: "500 mg", route: "PO QID", note: "mild, non-purulent" }, { drug: "or Cefazolin", dose: "1-2 g", route: "IV q8h", note: "moderate" }], alt: [{ drug: "Doxycycline / TMP-SMX", dose: "", route: "PO", note: "if MRSA suspected (purulent)" }], notes: "Purulent SSTI → incision & drainage plus MRSA cover." },
+    NECROTIZING_FASCIITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }, { drug: "+ Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h" }, { drug: "+ Clindamycin", dose: "900 mg", route: "IV q8h", note: "toxin suppression" }], notes: "Surgery is the priority; antibiotics are adjunctive." },
     C_DIFF: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Fidaxomicin", dose: "200 mg", route: "PO BID", dur: "10 d" }, { drug: "or Vancomycin", dose: "125 mg", route: "PO QID", dur: "10 d" }], alt: [{ drug: "Vancomycin 500 mg PO QID + Metronidazole 500 mg IV q8h", dose: "", route: "", note: "fulminant" }], notes: "Stop the inciting antibiotic; surgical consult if fulminant." },
-    PYELONEPHRITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "1–2 g", route: "IV daily" }, { drug: "or Ciprofloxacin", dose: "500 mg", route: "PO BID", note: "outpatient, low resistance" }], notes: "Narrow on culture; image if no response by 48–72h." },
-    COMPLICATED_UTI: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "1–2 g", route: "IV daily" }, { drug: "or Piperacillin–tazobactam", dose: "4.5 g", route: "IV q8h", note: "resistant-organism risk" }], notes: "Relieve obstruction; culture-guided; longer course." },
-    CYSTITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Nitrofurantoin", dose: "100 mg", route: "PO BID", dur: "5 d" }, { drug: "or Fosfomycin", dose: "3 g", route: "PO once" }], alt: [{ drug: "TMP–SMX", dose: "160/800 mg", route: "PO BID", dur: "3 d", note: "if resistance <20%" }], notes: "Avoid fluoroquinolones for simple cystitis." },
-    CHOLANGITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "or Ceftriaxone + Metronidazole", dose: "2 g / 500 mg", route: "IV" }], notes: "Biliary drainage (ERCP) is essential — antibiotics are adjunctive." },
-    DIABETIC_FOOT: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Amoxicillin–clavulanate", dose: "875/125 mg", route: "PO BID", note: "mild" }, { drug: "or Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "moderate–severe" }], alt: [{ drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h", note: "MRSA risk" }], notes: "Combine with debridement, offloading and vascular assessment." },
+    PYELONEPHRITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "1-2 g", route: "IV daily" }, { drug: "or Ciprofloxacin", dose: "500 mg", route: "PO BID", note: "outpatient, low resistance" }], notes: "Narrow on culture; image if no response by 48-72h." },
+    COMPLICATED_UTI: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "1-2 g", route: "IV daily" }, { drug: "or Piperacillin-tazobactam", dose: "4.5 g", route: "IV q8h", note: "resistant-organism risk" }], notes: "Relieve obstruction; culture-guided; longer course." },
+    CYSTITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Nitrofurantoin", dose: "100 mg", route: "PO BID", dur: "5 d" }, { drug: "or Fosfomycin", dose: "3 g", route: "PO once" }], alt: [{ drug: "TMP-SMX", dose: "160/800 mg", route: "PO BID", dur: "3 d", note: "if resistance <20%" }], notes: "Avoid fluoroquinolones for simple cystitis." },
+    CHOLANGITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h" }, { drug: "or Ceftriaxone + Metronidazole", dose: "2 g / 500 mg", route: "IV" }], notes: "Biliary drainage (ERCP) is essential - antibiotics are adjunctive." },
+    DIABETIC_FOOT: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Amoxicillin-clavulanate", dose: "875/125 mg", route: "PO BID", note: "mild" }, { drug: "or Piperacillin-tazobactam", dose: "4.5 g", route: "IV q6-8h", note: "moderate-severe" }], alt: [{ drug: "+ Vancomycin", dose: "15-20 mg/kg", route: "IV q8-12h", note: "MRSA risk" }], notes: "Combine with debridement, offloading and vascular assessment." },
     SBP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "or Cefotaxime", dose: "2 g", route: "IV q8h" }], notes: "Add IV albumin: 1.5 g/kg on day 1 and 1 g/kg on day 3." }
   };
   function evIdsaSrc(id) {
@@ -2195,7 +2195,7 @@
       pearls: g.recs || [], sections: sections, fullHTML: "",
       cite: '<strong>📐 ' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</strong>' +
         (g.url ? '<br><a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">' + esc(g.url) + '</a>' : '') +
-        '<br>Key recommendations paraphrased for decision support — consult the full guideline before acting.'
+        '<br>Key recommendations paraphrased for decision support - consult the full guideline before acting.'
     };
   }
   function evSanfordSrc(id) {
@@ -2203,7 +2203,7 @@
     var rxList = function (arr) {
       return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (r) {
         var line = [r.drug, r.dose, r.route, r.dur].filter(Boolean).join(" · ");
-        return '<li>' + medFormat(line) + (r.note ? ' <span class="ev-rx-note">— ' + esc(r.note) + '</span>' : '') + '</li>';
+        return '<li>' + medFormat(line) + (r.note ? ' <span class="ev-rx-note">- ' + esc(r.note) + '</span>' : '') + '</li>';
       }).join("") + '</ul>' : "";
     };
     var body = evSub("First-line", rxList(rx.firstLine)) + evSub("Alternative", rxList(rx.alt));
@@ -2212,7 +2212,7 @@
       _id: id, srcKey: "sanford", icon: "💊", sourceName: "Empiric antimicrobial therapy",
       edition: "", tag: "Regimens · Sanford-aligned", pages: "", pearls: [],
       sections: body ? [{ ic: "💊", title: "Empiric regimens", html: body }] : [], fullHTML: "",
-      cite: '<strong>💊 Empiric regimens</strong> — standard adult dosing for decision support; <b>verify dose, route &amp; duration and adjust for renal function, allergy and local resistance.</b> ' +
+      cite: '<strong>💊 Empiric regimens</strong> - standard adult dosing for decision support; <b>verify dose, route &amp; duration and adjust for renal function, allergy and local resistance.</b> ' +
         'Cross-check the Sanford Guide' + (rx.url ? ' (<a href="' + esc(rx.url) + '" target="_blank" rel="noopener noreferrer">sanfordguide.com</a>)' : '') + '.'
     };
   }
@@ -2254,7 +2254,7 @@
         '<div class="dx-score">' + r.score + '<small>/100</small></div>' +
       '</div>';
     if (!open) return '<div class="dx-card ' + cls + '">' + head + '</div>';
-    function fl(keys, c, sign) { return keys.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") || '<span class="dx-none">—</span>'; }
+    function fl(keys, c, sign) { return keys.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") || '<span class="dx-none">-</span>'; }
     var tools = toolsFor(r.id);
     var pv = S.prev[r.id];
     var confLine = "";
@@ -2277,19 +2277,19 @@
       '<div class="dx-d-row"><b>Supporting findings</b><div>' + fl(r.supporting, "sup", "✓ ") + '</div></div>' +
       (r.contra && r.contra.length ? '<div class="dx-d-row"><b>Contradictory findings</b><div>' + fl(r.contra, "con", "✕ ") + '</div></div>' : '') +
       '<div class="dx-d-row"><b>Missing / would help</b><div>' + fl(r.missing, "mis", "? ") + '</div></div>' +
-      (r.reason ? '<div class="dx-d-row"><b>Why this — likely because</b><div class="dx-reason">' +
-        (function () { var s = (r.supporting || []).slice(0, 3).map(lbl); return s.length ? '<b>' + esc(s.join(", ")) + '</b> ' + (s.length > 1 ? "together point here — " : "points here — ") : ""; })() +
+      (r.reason ? '<div class="dx-d-row"><b>Why this - likely because</b><div class="dx-reason">' +
+        (function () { var s = (r.supporting || []).slice(0, 3).map(lbl); return s.length ? '<b>' + esc(s.join(", ")) + '</b> ' + (s.length > 1 ? "together point here - " : "points here - ") : ""; })() +
         esc(r.reason) + '</div></div>' : '') +
       whyNot +
       (r.red && r.red.length ? '<div class="dx-d-row red"><b>Red flags</b><ul>' + r.red.map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
       (r.inv && r.inv.length ? '<div class="dx-d-row"><b>Suggested investigations</b><ul>' + r.inv.slice(0,5).map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
-      (r.disc && r.disc.length ? '<div class="dx-d-row"><b>Required next information — discriminators</b><div class="dx-disc">' + r.disc.slice(0,6).map(function (x){return '<span class="dx-disc-pill">'+esc(x)+'</span>';}).join("") + '</div></div>' : '') +
+      (r.disc && r.disc.length ? '<div class="dx-d-row"><b>Required next information - discriminators</b><div class="dx-disc">' + r.disc.slice(0,6).map(function (x){return '<span class="dx-disc-pill">'+esc(x)+'</span>';}).join("") + '</div></div>' : '') +
       (function () {
         if (!reasonV2()) return "";
         var mm = mimicsFor(r.id, r.inf); if (!mm.length) return "";
         return '<div class="dx-d-row"><b>Important mimics to exclude</b><div class="dx-reason">' +
-          (r.inf ? "Non-infectious conditions that overlap this presentation — distinguish before committing to an infective diagnosis: "
-                 : "Conditions (including infections) with an overlapping presentation — exclude before settling on this: ") +
+          (r.inf ? "Non-infectious conditions that overlap this presentation - distinguish before committing to an infective diagnosis: "
+                 : "Conditions (including infections) with an overlapping presentation - exclude before settling on this: ") +
           mm.map(esc).join(", ") + '.</div></div>';
       })() +
       (tools.length ? '<div class="dx-d-row"><b>Related bedside tools</b><div class="dx-tools">' + tools.map(function (t){return '<button class="dx-tool" data-tool="'+t+'">'+esc(TOOLREG[t].icon+" "+TOOLREG[t].label)+'</button>';}).join("") + '</div></div>' : '') +
@@ -2309,7 +2309,7 @@
       else if (r.score - p >= 6) msgs.push("▲ " + r.name + " rose (" + p + "→" + r.score + ")");
       else if (p - r.score >= 6) msgs.push("▼ " + r.name + " fell (" + p + "→" + r.score + ")");
     });
-    if (msgs.length) { el.style.display = ""; el.innerHTML = '<b>What changed</b> ' + (S.lastAdded ? 'adding <b>' + esc(S.lastAdded) + '</b> — ' : "") + msgs.slice(0, 3).map(esc).join("  ·  "); }
+    if (msgs.length) { el.style.display = ""; el.innerHTML = '<b>What changed</b> ' + (S.lastAdded ? 'adding <b>' + esc(S.lastAdded) + '</b> - ' : "") + msgs.slice(0, 3).map(esc).join("  ·  "); }
     else el.style.display = "none";
   }
 
@@ -2323,7 +2323,7 @@
   }
 
   // Grouped profile options for #dxHospSel: National (ICMR + national studies), each region's
-  // composite + its studies, then Hospitals — mirrors the Antibiogram source dropdown so both
+  // composite + its studies, then Hospitals - mirrors the Antibiogram source dropdown so both
   // views share one profile system (data-driven from HOSPITAL.list).
   function hospOptions(cur) {
     var list = (window.HOSPITAL && window.HOSPITAL.list) || [];
@@ -2339,7 +2339,7 @@
       var c = comp[rr[0]], sts = studiesOf(rr[0]);
       if (!c && !sts.length) return;
       h += '<optgroup label="' + rr[1] + '">';
-      if (c) h += opt(c.id, (c.short || rr[1]) + " — regional composite");
+      if (c) h += opt(c.id, (c.short || rr[1]) + " - regional composite");
       sts.forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
       h += '</optgroup>';
     });
@@ -2349,9 +2349,9 @@
   }
 
   // Additive, data-driven regional resistance snapshot for the lead syndrome's likely
-  // organisms — shown ALONGSIDE (never replacing) ICMR national guidance. Only genuine local
+  // organisms - shown ALONGSIDE (never replacing) ICMR national guidance. Only genuine local
   // cells from the active profile are shown (national fallbacks omitted; the national baseline
-  // is already present). Every value carries its source. % resistant = 100 − %susceptible.
+  // is already present). Every value carries its source. % resistant = 100 - %susceptible.
   var RSHORT = { piptazo: "Pip-tazo", cefotaxime: "Cefotaxime", ceftriaxone: "Ceftriaxone", ceftazidime: "Ceftazidime", cefepime: "Cefepime", meropenem: "Meropenem", imipenem: "Imipenem", ertapenem: "Ertapenem", ciprofloxacin: "Cipro", levofloxacin: "Levo", amikacin: "Amikacin", gentamicin: "Gentamicin", colistin: "Colistin", cotrimoxazole: "Co-trimox", nitrofurantoin: "Nitrofur", fosfomycin: "Fosfomycin", cefoxitin: "Cefoxitin(MR)", vancomycin: "Vancomycin", linezolid: "Linezolid", teicoplanin: "Teicoplanin" };
   var RPANEL = ["piptazo", "cefotaxime", "ceftriaxone", "cefepime", "meropenem", "imipenem", "ciprofloxacin", "amikacin", "colistin", "cotrimoxazole", "nitrofurantoin", "cefoxitin", "vancomycin", "linezolid"];
   function rColor(R) { return R >= 70 ? "#B91C1C" : R >= 50 ? "#EA580C" : R >= 25 ? "#D97706" : R >= 10 ? "#65a30d" : "#047857"; }
@@ -2378,7 +2378,7 @@
       if (!rows.length) return "";
       var nm = hp.name || hp.short || "regional";
       return '<div class="dx-region-abg" style="margin-top:10px;padding:10px 12px;border:1px solid var(--line,#E2E8F0);border-radius:12px;background:var(--panel,#fff)">' +
-        '<div style="font:800 12px var(--sans,system-ui);color:var(--ink,#0F172A)">📊 Local resistance — ' + esc(nm) + ' <span style="font-weight:600;color:var(--slate-soft,#64748B)">(% resistant · decision support)</span></div>' +
+        '<div style="font:800 12px var(--sans,system-ui);color:var(--ink,#0F172A)">📊 Local resistance - ' + esc(nm) + ' <span style="font-weight:600;color:var(--slate-soft,#64748B)">(% resistant · decision support)</span></div>' +
         rows.join("") +
         '<div style="margin-top:8px;font:500 10.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#64748B)">Regional susceptibility for the active profile; ICMR national guidance remains the baseline. Verify against your own local antibiogram before prescribing.</div></div>';
     } catch (e) { return ""; }
@@ -2404,11 +2404,11 @@
       var h = null; ((window.HOSPITAL && window.HOSPITAL.list) || []).forEach(function (x) { if (x.id === id) h = x; });
       if (!h || h.hasPolicy || h.abg || h.type === "region" || h.type === "study" || h.id === "ICMR") return;
       var name = h.name || h.short || "my hospital";
-      var go = window.confirm("StewardMD doesn't yet hold the local antimicrobial policy / antibiogram for " + name + ".\n\nWould you like to email it so we can add your hospital? This opens your mail app addressed to Support@StewardMD.in — attach your latest antibiogram PDF before sending.");
+      var go = window.confirm("StewardMD doesn't yet hold the local antimicrobial policy / antibiogram for " + name + ".\n\nWould you like to email it so we can add your hospital? This opens your mail app addressed to Support@StewardMD.in - attach your latest antibiogram PDF before sending.");
       if (!go) return;
-      var subject = "StewardMD — Local antibiogram upload (" + name + ")";
+      var subject = "StewardMD - Local antibiogram upload (" + name + ")";
       var body = "Hi StewardMD Support Team,\n\nI would like StewardMD to support my hospital's local antimicrobial policy / antibiogram.\n\nHospital: " + name + "\nCity / location: \nDepartment / unit: \n\nI have attached our latest local antibiogram / antibiotic policy PDF.\n(Please attach the PDF before sending.)\n\nThank you!";
-      // Native: mailto: is not reliably handled by WKWebView — route via the share
+      // Native: mailto: is not reliably handled by WKWebView - route via the share
       // sheet so the user can pick Mail. Web keeps the direct mailto navigation.
       if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
         window.SMD_NATIVE.share({ title: subject, text: body, dialogTitle: "Email antibiogram" }).catch(function () {});
@@ -2449,7 +2449,7 @@
     if (e) {
       html = '<div class="dx-policy">' +
         '<div class="dx-policy-src">' + src + '</div>' +
-        '<div class="dx-policy-syn">Empiric therapy — ' + esc(lead.name) + '</div>' +
+        '<div class="dx-policy-syn">Empiric therapy - ' + esc(lead.name) + '</div>' +
         '<div class="dx-policy-sec"><b>Preferred</b>' + drugRows(e.preferred) + '</div>' +
         (e.alternatives && e.alternatives.length ? '<div class="dx-policy-sec"><b>Alternatives</b>' + drugRows(e.alternatives) + '</div>' : "") +
         (e.duration ? '<div class="dx-policy-line"><b>Duration:</b> ' + esc(e.duration) + '</div>' : "") +
@@ -2463,7 +2463,7 @@
     } else {
       html = '<div class="dx-policy nopol">' +
         '<div class="dx-policy-src">' + src + '</div>' +
-        '<div class="dx-policy-note"><b>ICMR national guidance (AMRSN 2024)</b> is applied as the default standard for <b>' + esc(lead.name) + '</b>' + (h.id === "ICMR" ? "" : " — no " + esc(h.short || h.name) + "-specific local entry") + '. ' +
+        '<div class="dx-policy-note"><b>ICMR national guidance (AMRSN 2024)</b> is applied as the default standard for <b>' + esc(lead.name) + '</b>' + (h.id === "ICMR" ? "" : " - no " + esc(h.short || h.name) + "-specific local entry") + '. ' +
         (h.note ? esc(h.note) + " " : "") + 'StewardMD incorporates ICMR / IDSA evidence on the full disease page; institutional policies (e.g. GIMSR) are offered last as local options.</div>' +
         regionSuscHTML(lead) +
         '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
@@ -2487,7 +2487,7 @@
     if (cols.length < 2) { el.innerHTML = ""; return; }
     function cell(r, field, sign, c) {
       var arr = r[field] || [];
-      return arr.length ? arr.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") : '<span class="dx-none">—</span>';
+      return arr.length ? arr.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") : '<span class="dx-none">-</span>';
     }
     var html = '<div class="dx-cmp-h">⚖ Compare diagnoses <button class="dx-cmp-clear" id="dxCmpClear">clear</button></div>' +
       '<div class="dx-cmp-grid" style="grid-template-columns:repeat(' + cols.length + ',minmax(0,1fr))">';
@@ -2532,12 +2532,12 @@
     if (!ready) {
       gateEl.innerHTML = ""; polEl.innerHTML = ""; chEl.style.display = "none"; if (domEl) domEl.innerHTML = "";
       colEl.innerHTML = '<div class="dx-threshold">🧩 Please add more clinical findings to improve diagnostic accuracy.' +
-        '<span>Add at least 3 findings (or one highly specific finding) to generate a reliable differential — use the suggestions above.</span></div>';
+        '<span>Add at least 3 findings (or one highly specific finding) to generate a reliable differential - use the suggestions above.</span></div>';
       S.prev = {}; return;
     }
     if (domEl) {
       var domTags = Object.keys(S._dom || {});
-      domEl.innerHTML = domTags.length ? '<div class="dx-dom">🧭 Dominant system: <b>' + domTags.map(function (t) { return esc(TAG_LABEL[t] || t); }).join(" · ") + '</b> — shaping the differential</div>' : "";
+      domEl.innerHTML = domTags.length ? '<div class="dx-dom">🧭 Dominant system: <b>' + domTags.map(function (t) { return esc(TAG_LABEL[t] || t); }).join(" · ") + '</b> - shaping the differential</div>' : "";
     }
 
     var g = gate(d), info = GATEINFO[g.cls];
@@ -2565,7 +2565,7 @@
     });
     renderCompare(d);
     recordRecentCase(d);
-    // NB: S.prev is the PRE-change snapshot taken in addFinding — do not
+    // NB: S.prev is the PRE-change snapshot taken in addFinding - do not
     // overwrite it here, or confidence deltas would vanish on the next render.
   }
   // Log the working case into the rolling Recent-Cases trail (last 5). Upserts one
@@ -2623,7 +2623,7 @@
           // (which is display:none until a classic case is started).
           try { if (window.SMD_hideHome) SMD_hideHome(); } catch (e) {}
           try { var _sh = document.querySelector(".shell"); if (_sh) _sh.style.display = "block"; } catch (e) {}
-          // bring the freshly-rendered stewardship page into view — without this the
+          // bring the freshly-rendered stewardship page into view - without this the
           // overlay closes but the output stays off-screen (the "click does nothing"
           // bug). Mirrors the My-Cases restore path, which scrolls #outputArea.
           try {
@@ -2635,7 +2635,7 @@
           return;
         }
       } catch (e) {}
-      alert("Opening the disease page — stewardship module is loading.");
+      alert("Opening the disease page - stewardship module is loading.");
       return;
     }
     // non-infectious -> open the management / treatment panel for this diagnosis
@@ -2663,12 +2663,12 @@
         (m && m.dx ? '<div class="dx-mgmt-sec">How to confirm</div><p>' + esc(m.dx) + '</p>'
                    : (r.reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(r.reason) + '</p>' : '')) +
         (tx ? '<div class="dx-mgmt-sec tx">💊 Management / Treatment</div><ol class="dx-mgmt-tx">' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
-            : '<div class="dx-mgmt-sec">Management</div><p>Specialist-guided management — see the investigations and red flags below and consult full guidelines.</p>') +
+            : '<div class="dx-mgmt-sec">Management</div><p>Specialist-guided management - see the investigations and red flags below and consult full guidelines.</p>') +
         (ix && ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
         (m && m.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(m.dispo) + '</p>' : '') +
         (r.red && r.red.length ? '<div class="dx-mgmt-sec red">Red flags</div><ul class="dx-mgmt-ul">' + r.red.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
         (m && m.src ? '<div class="dx-mgmt-src">Source: ' + esc(m.src) + '</div>' : '') +
-        '<div class="dx-mgmt-disc">⚠️ Decision-support only — provisional and aligned to standard guidelines / Harrison\'s 22e. Verify against full guidelines, local protocol and current prescribing references (doses, contraindications, renal/hepatic adjustment, pregnancy) before acting.</div>' +
+        '<div class="dx-mgmt-disc">⚠️ Decision-support only - provisional and aligned to standard guidelines / Harrison\'s 22e. Verify against full guidelines, local protocol and current prescribing references (doses, contraindications, renal/hepatic adjustment, pregnancy) before acting.</div>' +
       '</div>';
     el.innerHTML = html;
     el.classList.add("on");
@@ -2678,7 +2678,7 @@
   }
   function closeMgmt() { var el = root && root.querySelector("#dxMgmt"); if (el) el.classList.remove("on"); }
 
-  // Full searchable disease directory (all 140) — merges the enrichment manifest
+  // Full searchable disease directory (all 140) - merges the enrichment manifest
   // (every disease) with the live SYNDROMES / DDX_NI so a name lookup always works.
   function diseaseDirectory() {
     var out = [], seen = {};
@@ -2692,7 +2692,7 @@
   }
 
   // Self-contained reference panel for ANY disease (whether or not it is in the
-  // current differential) — reuses the #dxMgmt panel. Shows the Harrison reference
+  // current differential) - reuses the #dxMgmt panel. Shows the Harrison reference
   // and an action to open the full stewardship/management page.
   function openDiseaseRef(id) {
     try { if (window.SMD_KU) SMD_KU.emit("read", id); } catch (e) {}   // KU: reading clinical content
@@ -2704,7 +2704,7 @@
     var inf = !!syn || !!(H && H.class === "infective");
     var reason = (ni && ni.reason) || "";
     // Curated management brief (DX_MGMT). Infective REFERENCE diseases (no classic SYNDROMES
-    // stewardship case) previously routed to a BLANK stewardship page — render their antimicrobial
+    // stewardship case) previously routed to a BLANK stewardship page - render their antimicrobial
     // brief INLINE here instead, and drop the dead "stewardship" button.
     var dm = (window.DX_MGMT || {})[id];
     var refInf = inf && !syn;
@@ -2726,7 +2726,7 @@
         mgmtHtml +
         (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
         (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
-        '<div class="dx-mgmt-disc">⚠️ Decision-support only — reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
+        '<div class="dx-mgmt-disc">⚠️ Decision-support only - reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
       '</div>';
     el.classList.add("on"); el.scrollTop = 0;
     var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () { el.classList.remove("on"); });
@@ -2748,7 +2748,7 @@
     }
     root.classList.add("on"); document.body.classList.add("dx-lock"); recompute();
     // focus the findings search so the clinician can start typing immediately
-    // Native: skip programmatic focus — it pops the iOS keyboard with no user intent.
+    // Native: skip programmatic focus - it pops the iOS keyboard with no user intent.
     try { var sif = root.querySelector("#dxSearch"); if (sif && !window.SMD_IS_NATIVE) setTimeout(function () { try { sif.focus(); } catch (e) {} }, 60); } catch (e) {}
   }
   function openWorkspace() { if (!S._restoring) S._caseId = null; open({ workspace: true }); }
@@ -2771,7 +2771,7 @@
     try { if (typeof window.SMD_setFindings === "function") window.SMD_setFindings(S.f); } catch (e) {}
     closeMgmt();
     if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); }
-    // Reasoning was opened from the home (which hideV2()'d it) — restore the home shell,
+    // Reasoning was opened from the home (which hideV2()'d it) - restore the home shell,
     // otherwise closing falls through to the empty classic view (blank screen on native).
     try { if (window.SMD_setUI) window.SMD_setUI(true); } catch (e) {}
   }
@@ -3002,7 +3002,7 @@
   else init();
 
   /* ---------------------------------------------------------------------- *
-   * Smart next-question engine (Phase 3 — additive + PURE, no eval).
+   * Smart next-question engine (Phase 3 - additive + PURE, no eval).
    *
    * Consultant-style progressive questioning: given the current differential,
    * rank the highest-yield UNENTERED findings to ask about next, by how much
@@ -3010,7 +3010,7 @@
    * closest rival (discrimination) and how broadly it moves the head of the
    * differential (breadth). Each candidate is simulated by CLONING the finding
    * set and re-scoring through the SAME engine (differential), after which the
-   * engine state is fully restored — so this never alters _differential output
+   * engine state is fully restored - so this never alters _differential output
    * (golden/parity stay byte-identical). On-demand only; not in the keystroke
    * hot path. Reuses the engine's own per-disease `missing` as the candidate
    * pool, so it inherits the same KB-driven vocabulary.
@@ -3020,7 +3020,7 @@
     var f2 = {}; for (var x in savedF) f2[x] = savedF[x]; if (extraKey) f2[extraKey] = true;
     S.f = f2;
     var d; try { d = differential(); } catch (e) { d = { inf: [], ni: [] }; }
-    S.f = savedF; S.fInf = savedFInf; S._dom = savedDom;   // restore — purity guarantee
+    S.f = savedF; S.fInf = savedFInf; S._dom = savedDom;   // restore - purity guarantee
     var m = {};
     d.inf.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: true }; });
     d.ni.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: false }; });
@@ -3066,8 +3066,8 @@
    * The new 444-entry KB (window.KB_ENRICHMENT) was never wired into the two
    * app.js surfaces that only knew the 51 infective syndromes: the GLOBAL search
    * (#smdSearchInput → #spResults) and the Syndrome library modal (window.SB).
-   * Wire both here — full-text over every Harrison detail, Infective/NI + system
-   * filters — with NO minified app.js edits. Click routes via DX.openRef / ASP.
+   * Wire both here - full-text over every Harrison detail, Infective/NI + system
+   * filters - with NO minified app.js edits. Click routes via DX.openRef / ASP.
    * ---------------------------------------------------------------------- */
   var _kbIdx = null;
   function kbBranch(sys) {
@@ -3172,7 +3172,7 @@
     inp.__smdKbWired = true;
     try { inp.placeholder = "Search a disease, antibiotic or calculator…"; } catch (e) {}   // drop the example list from the placeholder
     inp.addEventListener("input", function () { var q = inp.value; setTimeout(function () { kbInjectSearch(q); smdRenderRecentChips(); }, 0); });
-    // record recent searches only on a COMMITTED search (Enter, or opening a result) — not per keystroke
+    // record recent searches only on a COMMITTED search (Enter, or opening a result) - not per keystroke
     inp.addEventListener("keydown", function (e) { if ((e.key === "Enter" || e.keyCode === 13) && inp.value.trim().length >= 2) smdRecentPush(inp.value); });
     var res = document.getElementById("spResults");
     if (res && !res.__smdRecentWired) {
@@ -3184,7 +3184,7 @@
     smdRenderRecentChips();
   }
   // Wire recent-search history each time the search panel opens (openSearch is a global in
-  // app.js; wrap it once — never edits app.js).
+  // app.js; wrap it once - never edits app.js).
   function smdWireRecentSearch() {
     if (window.__smdRecentSearchWrapped || typeof window.openSearch !== "function") { smdRecentInjectCSS(); return; }
     window.__smdRecentSearchWrapped = true;
@@ -3195,7 +3195,7 @@
   function kbInjectSearch(q) {
     var box = document.getElementById("spResults"); if (!box) return;
     var old = document.getElementById("smdKbSec"); if (old && old.parentNode) old.parentNode.removeChild(old);
-    // Search the FULL Harrison knowledge base — ALL 444 diseases incl. the 51 infective
+    // Search the FULL Harrison knowledge base - ALL 444 diseases incl. the 51 infective
     // syndromes (malaria, sepsis, CAP…). No longer deduped against the native list, so
     // every disease's Harrison reference is reachable. Clicking opens the evidence viewer.
     var hits = kbSearch(q, 30);
@@ -3320,7 +3320,7 @@
         (d.sys ? '<span class="kblib-sys">' + esc(d.sys) + '</span>' : '') + '</div></button>';
     }).join("") || '<div style="padding:30px;text-align:center;color:var(--slate-soft)">No matches.</div>';
   }
-  // ONE delegated listener for the Knowledge Library — survives modal re-renders.
+  // ONE delegated listener for the Knowledge Library - survives modal re-renders.
   function kbWireLibrary() {
     if (window.__smdKbLibWired) return; window.__smdKbLibWired = true;
     document.addEventListener("input", function (e) {
@@ -3363,8 +3363,8 @@
   function smdWireKBSurfaces() { try { kbInjectCSS(); } catch (e) {} try { wireGlobalSearch(); } catch (e) {} try { smdWireRecentSearch(); } catch (e) {} try { wireSyndromeLibrary(); } catch (e) {} }
 
   /* ---------------------------------------------------------------------- *
-   * IMPORT PATIENT — pull a Ward Sync patient's labs/imaging/culture into the
-   * workspace. DISPLAY the reports + SUGGEST findings (clinician confirms — we
+   * IMPORT PATIENT - pull a Ward Sync patient's labs/imaging/culture into the
+   * workspace. DISPLAY the reports + SUGGEST findings (clinician confirms - we
    * never auto-tick). Structured lab values are matched to finding keys only by
    * unambiguous name + abnormal direction; everything is shown transparently
    * with its reference range so the clinician verifies before confirming.
@@ -3382,7 +3382,7 @@
   ];
   function labAbnormal(t) {
     var v = parseFloat(t.result), lo = parseFloat(t.low), hi = parseFloat(t.high);
-    if (isNaN(v)) return null;                       // non-numeric (e.g. "NEGATIVE") — no auto-suggest
+    if (isNaN(v)) return null;                       // non-numeric (e.g. "NEGATIVE") - no auto-suggest
     if (!isNaN(hi) && hi > 0 && v > hi) return "high";
     if (!isNaN(lo) && lo > 0 && v < lo) return "low";
     return null;
@@ -3414,13 +3414,13 @@
     }).join("");
     var labs = (imp.labs || []).map(function (t) {
       var ab = labAbnormal(t);
-      return '<tr' + (ab ? ' class="dx-imp-ab"' : '') + '><td>' + esc2(t.test || t.testName) + '</td><td>' + esc2(t.result) + " " + esc2(t.units || "") + (ab ? ' <b>' + (ab === "high" ? "▲" : "▼") + '</b>' : '') + '</td><td>' + (t.low || t.high ? esc2((t.low || "") + "–" + (t.high || "")) : "") + '</td></tr>';
+      return '<tr' + (ab ? ' class="dx-imp-ab"' : '') + '><td>' + esc2(t.test || t.testName) + '</td><td>' + esc2(t.result) + " " + esc2(t.units || "") + (ab ? ' <b>' + (ab === "high" ? "▲" : "▼") + '</b>' : '') + '</td><td>' + (t.low || t.high ? esc2((t.low || "") + "-" + (t.high || "")) : "") + '</td></tr>';
     }).join("");
     var rad = (imp.radiology || []).map(function (r) { return '<div class="dx-imp-rad"><b>' + esc2(r.name) + '</b><div>' + esc2(r.report) + '</div></div>'; }).join("");
     var cult = (imp.culture || []).map(function (c) { return '<div class="dx-imp-rad"><b>🧫 ' + esc2(c.name || "Culture") + '</b><div>' + esc2(c.detail) + '</div></div>'; }).join("");
     el.innerHTML =
-      '<div class="dx-imp-wrap"><div class="dx-imp-h">📋 Imported from Ward Sync' + (imp.patientName ? ' — ' + esc2(imp.patientName) : '') + ' <button class="dx-imp-x" id="dxImpClear" title="Clear import">✕</button></div>' +
-      (sugKeys.length ? '<div class="dx-imp-sec">💡 Findings suggested by these labs — <b>tap to confirm</b> (nothing added automatically):<div class="dx-chips" style="margin-top:6px">' + chips + '</div></div>' : '') +
+      '<div class="dx-imp-wrap"><div class="dx-imp-h">📋 Imported from Ward Sync' + (imp.patientName ? ' - ' + esc2(imp.patientName) : '') + ' <button class="dx-imp-x" id="dxImpClear" title="Clear import">✕</button></div>' +
+      (sugKeys.length ? '<div class="dx-imp-sec">💡 Findings suggested by these labs - <b>tap to confirm</b> (nothing added automatically):<div class="dx-chips" style="margin-top:6px">' + chips + '</div></div>' : '') +
       (labs ? '<details class="dx-imp-sec" open><summary>🧪 Laboratory (' + (imp.labs || []).length + ')</summary><table class="dx-imp-tbl"><tbody>' + labs + '</tbody></table></details>' : '') +
       (rad ? '<details class="dx-imp-sec"><summary>🩻 Imaging</summary>' + rad + '</details>' : '') +
       (cult ? '<details class="dx-imp-sec"><summary>🧫 Culture / sensitivity</summary>' + cult + '</details>' : '') +
@@ -3452,18 +3452,18 @@
     _onHospitalChange: function () { if (root && root.classList.contains("on")) recompute(); } };
 
   /* ====================================================================== *
-   * SMD_REASON — the ONE interface-independent reasoning engine API.
+   * SMD_REASON - the ONE interface-independent reasoning engine API.
    * Both the sidebar Clinical Reasoning workspace and (Phase 2) the primary
    * 5-step workflow consume this; neither re-implements scoring. It is a thin,
-   * PURE facade over the existing differential()/gate()/nextQuestions()/IDF —
+   * PURE facade over the existing differential()/gate()/nextQuestions()/IDF -
    * no DOM, no duplication. Future AI Copilot / Vision / ICU Snapshot call it too.
    *
    * Reversibility: the new unified experience is gated by the `smd_reason_v2`
    * flag (localStorage, default ON). reasonV2()===false reverts every view to
-   * the classic path instantly — no redeploy.
+   * the classic path instantly - no redeploy.
    * ---------------------------------------------------------------------- */
   function reasonV2() { try { var v = localStorage.getItem("smd_reason_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
-  // smd_rank_v2 — specificity-aware differential ORDERING (default ON). When off,
+  // smd_rank_v2 - specificity-aware differential ORDERING (default ON). When off,
   // rankScore collapses to score and the differential reverts to the classic
   // score-then-name order instantly. Independent of reasonV2 (ordering, not UI).
   function rankV2() { try { var v = localStorage.getItem("smd_rank_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
@@ -3508,7 +3508,7 @@
     },
     // dynamic consultant suggestions = highest-yield next findings given current picks.
     nextFindings: function (limit) { try { return nextQuestions(limit || 6); } catch (e) { return []; } },
-    // interface-independent disease search over the KB index (name/synonym/system match) —
+    // interface-independent disease search over the KB index (name/synonym/system match) -
     // reused by the ICU "search & select diagnosis". Returns [{id,name,sys,...}].
     search: function (q, limit) { try { return kbSearch(q, limit || 12); } catch (e) { return []; } },
     // clinical-information threshold: ≥3 findings OR ≥1 highly-discriminative OR a matched syndrome.
@@ -3521,22 +3521,22 @@
     mimicsFor: mimicsFor,
     flag: reasonV2,
     setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} try { smdProgressiveFindings(); } catch (e) {} },
-    // specificity-aware ranking flag (smd_rank_v2, default ON) — instantly reversible.
+    // specificity-aware ranking flag (smd_rank_v2, default ON) - instantly reversible.
     rankFlag: rankV2,
     setRankFlag: function (on) { try { localStorage.setItem("smd_rank_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} }
   };
 
   /* ====================================================================== *
-   * SMD_AI — Gemini seam (decision-support EXPLAINER + Vision EXTRACTOR).
+   * SMD_AI - Gemini seam (decision-support EXPLAINER + Vision EXTRACTOR).
    * The engine ALWAYS decides first; AI only explains an already-computed
    * differential or extracts structured fields from a captured image. OFF by
    * default (smd_ai flag) and requires a server-side GEMINI_API_KEY (set on the
    * Cloudflare Pages project). When off / no key / error → callers fall back to
    * the rule-based output. PHI note: explain sends findings, vision sends an
-   * image, to Google — only when explicitly enabled.
+   * image, to Google - only when explicitly enabled.
    * ---------------------------------------------------------------------- */
   // NOTE: in the native app the WebView origin is https://localhost, so hostname is
-  // "localhost" — that must NOT take the dev branch (returns "" → every AI method
+  // "localhost" - that must NOT take the dev branch (returns "" → every AI method
   // short-circuits to {error:"ai-off"} and the calls would hit https://localhost anyway).
   // Native uses /api/ai (native-bridge rewrites → stewardmd.in via CapacitorHttp → Vertex).
   function aiBase() { var h = location.hostname; return window.AI_PROXY || ((!window.SMD_IS_NATIVE && (h === "localhost" || h === "127.0.0.1")) ? "" : "/api/ai"); }
@@ -3552,7 +3552,7 @@
     return Promise.resolve(base);
   }
   function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF (MaiK chat / AI commentary)
-  // Live differential on/off (default ON) — a per-device switch in the differential header.
+  // Live differential on/off (default ON) - a per-device switch in the differential header.
   function liveDiffOn() { try { return localStorage.getItem("smd_live_diff") !== "0"; } catch (e) { return true; } }
   function liveToggleHTML() {
     var on = liveDiffOn();
@@ -3602,7 +3602,7 @@
   window.SMD_redactPHI = redactPHI;
   // On-device structuring: parse common labelled values from OCR text so AI Vision fills
   // fields even when the cloud is unavailable (offline / quota / endpoint not deployed).
-  // Conservative — only clearly-matched values; the clinician verifies + taps the rest.
+  // Conservative - only clearly-matched values; the clinician verifies + taps the rest.
   function parseFieldsOnDevice(text, kind) {
     var t = " " + String(text == null ? "" : text).replace(/[\n\r]+/g, " ") + " ";
     var out = {};
@@ -3610,7 +3610,7 @@
     function set(k, v) { if (v != null && !isNaN(v)) out[k] = v; }
     // On monitors the value sits below/beside its label with units in between (e.g. M70:
     // "HR bpm 60", "TEMP °C 30 T1 36.5"). Scan the ~44 chars after the label and return the
-    // first number within the physiologic range — skipping waveform sweep speeds ("25 mm/s")
+    // first number within the physiologic range - skipping waveform sweep speeds ("25 mm/s")
     // and BP-style "120/80" fragments, and stepping past out-of-range distractors.
     function near(labels, lo, hi, dec) {
       var lm = t.match(new RegExp("\\b(?:" + labels + ")\\b", "i")); if (!lm) return null;
@@ -3666,7 +3666,7 @@
       // Combined extractor (gold249): parse EVERY category from one blob (a photo with a monitor
       // + ABG together, or multi-page PDF text) and return SECTIONS. Overlapping keys (hco3,
       // lactate, fio2, be, rr) are only kept in the ABG/ventilator section when that panel is
-      // actually present — otherwise they belong to labs/vitals, so we don't invent a bogus section.
+      // actually present - otherwise they belong to labs/vitals, so we don't invent a bogus section.
       var _v = parseFieldsOnDevice(text, "vitals");
       var _g = parseFieldsOnDevice(text, "abg");
       var _l = parseFieldsOnDevice(text, "labs");
@@ -3695,14 +3695,14 @@
       return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ summary: summary, question: question || "" }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // Grounded RAG explain: send the compact, de-identified, citable package
-    // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
+    // (deterministic reasoning + retrieved StewardMD knowledge + treatment) - the
     // KB is the primary source. Falls back to summary explain if RAG is unavailable.
     explainGrounded: function (pkg, opts) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
       var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" });
-      // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
+      // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap - retry ONCE
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
       function attempt(retried) {
         return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: body }); }).then(function (r) {
@@ -3717,9 +3717,9 @@
       }
       return attempt(false).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
-    // Phase 2 — STREAMING grounded explain (progressive tokens like UpToDate's live answer).
-    // onDelta(accumulatedText) is called as tokens arrive. STRICTLY additive: any failure — server
-    // not streaming, non-event-stream response, network error, or an empty stream — transparently
+    // Phase 2 - STREAMING grounded explain (progressive tokens like UpToDate's live answer).
+    // onDelta(accumulatedText) is called as tokens arrive. STRICTLY additive: any failure - server
+    // not streaming, non-event-stream response, network error, or an empty stream - transparently
     // falls back to the proven JSON explainGrounded(), so the answer path can never regress.
     explainGroundedStream: function (pkg, opts, onDelta) {
       var self = this;
@@ -3753,10 +3753,10 @@
           .catch(function () { return acc ? { text: acc, mode: "grounded-stream", sources: pkg.sources } : fallback(); });
       }).catch(function () { return fallback(); });
     },
-    // Imaging Assist — clinician-invoked structured summary of ONE radiology report. Sends a
+    // Imaging Assist - clinician-invoked structured summary of ONE radiology report. Sends a
     // DE-IDENTIFIED packet (report text PHI-redacted client-side; NO name/MRN/bed/other-patient
     // data). Same cloud-text privacy posture as visionText (gated by smd_ai_vision, default ON).
-    // Advisory only — the deterministic engine remains the diagnostic authority.
+    // Advisory only - the deterministic engine remains the diagnostic authority.
     imagingSummary: function (packet) {
       var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
       if (!packet || !packet.reportText) return Promise.resolve({ error: "no-report" });
@@ -3764,7 +3764,7 @@
         .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
-    // Trusted external reference lookup (Phase 4) — de-identified TOPIC string only → PubMed
+    // Trusted external reference lookup (Phase 4) - de-identified TOPIC string only → PubMed
     // guideline/review citations. Retrieval, not AI generation; opt-in per clinician tap.
     evidence: function (topic) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "off" });
@@ -3773,7 +3773,7 @@
         .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
-    // Clinical Correlation (Phase 3) — de-identified imaging+lab evidence packet → advisory
+    // Clinical Correlation (Phase 3) - de-identified imaging+lab evidence packet → advisory
     // correlation. Same cloud-text posture as visionText/imagingSummary. Advisory only.
     correlate: function (packet) {
       var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
@@ -3798,7 +3798,7 @@
         .then(function (r) { if (r.status === 429) return { error: "quota" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
-    // MaiK Scribe — extract structured data from a spoken transcript. kind ∈ ICU kinds → { fields };
+    // MaiK Scribe - extract structured data from a spoken transcript. kind ∈ ICU kinds → { fields };
     // "reasoning" (with catalog=[{key,label}]) → { findings, patient?, unmatched }. Never invents.
     extract: function (transcript, kind, catalog) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
@@ -3808,7 +3808,7 @@
         .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
-    // AI STT fallback — audio dataURL → { transcript }. Used only where native/Web-Speech STT is absent.
+    // AI STT fallback - audio dataURL → { transcript }. Used only where native/Web-Speech STT is absent.
     transcribe: function (audioDataUrl) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
       var a = String(audioDataUrl == null ? "" : audioDataUrl); if (!a) return Promise.resolve({ error: "no-audio" });
@@ -3816,7 +3816,7 @@
         .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
-    // AI Vision — IMAGE mode. Sends the ORIGINAL image { image, kind } so the server can read
+    // AI Vision - IMAGE mode. Sends the ORIGINAL image { image, kind } so the server can read
     // spatial layout (critical for monitor/ventilator, where a number's position decides if it
     // is HR/SBP/SpO2/RR). No pre-OCR, redaction, or flattening. 429/entitlement/offline are
     // surfaced as { error }. Consent + engine choice are enforced upstream (SMD_IMAGE_ENGINE).
@@ -3831,7 +3831,7 @@
           return r.json();
         }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
-    // Private Device OCR — device only, NEVER uploads. Native OCR (Apple Vision / ML Kit
+    // Private Device OCR - device only, NEVER uploads. Native OCR (Apple Vision / ML Kit
     // bridge) → on-device field parse (labels + reading order preserved) + recognized lines
     // for tap-to-fill. Resolves { mode, fields, lines, source } | { error }.
     readImageLocal: function (dataUrl, kind) {
@@ -3845,7 +3845,7 @@
           : { mode: "lines", lines: lines, source: "on-device" };
       }).catch(function () { return { error: "ocr-failed" }; });
     },
-    // On-device-first AI Vision (NATIVE only) — LEGACY combined path (on-device OCR + optional
+    // On-device-first AI Vision (NATIVE only) - LEGACY combined path (on-device OCR + optional
     // scrubbed-TEXT cloud call). Retained for backward compatibility; the ICU flow now routes
     // through SMD_IMAGE_ENGINE.process(), which picks device (readImageLocal) or AI (vision).
     // Resolves: { mode:"fields", fields, lines } | { mode:"lines", lines, reason? }.
@@ -3856,7 +3856,7 @@
         var text = (o && o.text) || lines.join("\n");
         var online = (typeof navigator === "undefined") || navigator.onLine !== false;
         // Apple Vision OCR is always done on-device (above). We ALSO parse fields on-device
-        // for free/instantly — this is both the offline path and a safety net that fills any
+        // for free/instantly - this is both the offline path and a safety net that fills any
         // field the cloud misses. Cloud (Vertex, from redacted text) is more accurate, so it
         // wins on overlap; on-device fills the gaps → "use both engines".
         var localFields = parseFieldsOnDevice(text, kind) || {};
@@ -3882,12 +3882,12 @@
     }
   };
   /* ====================================================================== *
-   * Phase 4 — EXPANDED Harrison KB: the ~268 reference diseases (window.
+   * Phase 4 - EXPANDED Harrison KB: the ~268 reference diseases (window.
    * KB_EXPANDED, auto-derived signatures) become diagnostic candidates when the
    * `smd_kb_expanded` flag is ON (default OFF). Off → _expInf/_expNi stay empty
    * → differential() is byte-identical (golden stays green). On → they score via
    * the find-map path (same as DDX_NI) and join the 🔴/🟢 columns. Reversible;
-   * recovery tag reasoning-v1-stable. Signatures are AUTO-DERIVED — for review.
+   * recovery tag reasoning-v1-stable. Signatures are AUTO-DERIVED - for review.
    * ---------------------------------------------------------------------- */
   var _expInf = [], _expNi = [];
   function smdKbExpandedOn() { try { return localStorage.getItem("smd_kb_expanded") === "1"; } catch (e) { return false; } }   // default OFF
@@ -3936,15 +3936,15 @@
     var rows = d.slice(0, 5).map(function (x, i) {
       return '<div class="maik-dx-row"><span>' + (i + 1) + ". " + maikEsc(x.name) + '</span><b>' + (x.confidence != null ? x.confidence + "/100" : "") + "</b></div>";
     }).join("");
-    var ev = lead && lead.supporting && lead.supporting.length ? lead.supporting.slice(0, 8).map(maikEsc).join(", ") : "—";
-    var tx = "—";
+    var ev = lead && lead.supporting && lead.supporting.length ? lead.supporting.slice(0, 8).map(maikEsc).join(", ") : "-";
+    var tx = "-";
     if (t && t.default) tx = "[" + maikEsc(t.default.tier || "?") + "] " + maikEsc(t.default.line || "") + (t.default.drugRefs && t.default.drugRefs.length ? " · " + t.default.drugRefs.map(maikEsc).join(", ") : "");
-    var ov = (t && t.overlayApplied && t.overlay) ? '<div class="maik-kv"><span>Hospital overlay</span><b>' + maikEsc(t.overlay.hospitalId) + " (shown separately — does not replace default)</b></div>" : "";
+    var ov = (t && t.overlayApplied && t.overlay) ? '<div class="maik-kv"><span>Hospital overlay</span><b>' + maikEsc(t.overlay.hospitalId) + " (shown separately - does not replace default)</b></div>" : "";
     return '<div class="maik-det">' +
       '<div class="maik-sec-h maik-det-h">🧠 StewardMD Clinical Assessment <span class="maik-tag">Deterministic</span></div>' +
-      '<div class="maik-kv"><span>Primary diagnosis</span><b>' + (lead ? maikEsc(lead.name) : "—") + "</b></div>" +
-      '<div class="maik-kv"><span>Confidence</span><b>' + (lead && lead.confidence != null ? lead.confidence + "/100" : "—") + "</b></div>" +
-      '<div class="maik-kv-col"><span>Differential</span>' + (rows || "<b>—</b>") + "</div>" +
+      '<div class="maik-kv"><span>Primary diagnosis</span><b>' + (lead ? maikEsc(lead.name) : "-") + "</b></div>" +
+      '<div class="maik-kv"><span>Confidence</span><b>' + (lead && lead.confidence != null ? lead.confidence + "/100" : "-") + "</b></div>" +
+      '<div class="maik-kv-col"><span>Differential</span>' + (rows || "<b>-</b>") + "</div>" +
       '<div class="maik-kv"><span>Evidence</span><b>' + ev + "</b></div>" +
       '<div class="maik-kv"><span>Treatment</span><b>' + tx + "</b></div>" + ov +
       "</div>";
@@ -3999,7 +3999,7 @@
   // ▸ disclaimer). Used by the panel handler AND exposed for tests.
   function maikCompose(pkg, r) {
     var body = (r && r.text) ? maikCommentaryHTML(r.text, r.citations)
-      : '<div class="maik-note">' + ((r && r.error === "ai-off") ? "MaiK is off — enable AI in Settings." : "MaiK unavailable — the StewardMD assessment above stands. (" + maikEsc((r && r.error) || "no response") + ")") + "</div>";
+      : '<div class="maik-note">' + ((r && r.error === "ai-off") ? "MaiK is off - enable AI in Settings." : "MaiK unavailable - the StewardMD assessment above stands. (" + maikEsc((r && r.error) || "no response") + ")") + "</div>";
     return maikAssessmentHTML(pkg) + maikDivider() + maikHeaderHTML() + body + maikDisclaimerHTML();
   }
   // Safe Markdown → HTML for MaiK answers (headings, bold/italic, bullet + numbered
@@ -4011,7 +4011,7 @@
       t = t.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/__([^_]+)__/g, "<b>$1</b>");
       t = t.replace(/(^|[^*])\*(?!\s)([^*]+?)\*/g, "$1<i>$2</i>");
       t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
-      // Phase 2 — per-claim citation markers: [1] or [1, 2] → clickable superscripts mapped to the
+      // Phase 2 - per-claim citation markers: [1] or [1, 2] → clickable superscripts mapped to the
       // numbered sources footer. NUMERIC-only so real bracketed prose is never touched; degrades to
       // nothing when the model emits no markers.
       t = t.replace(/\[(\d{1,2}(?:\s*,\s*\d{1,2})*)\]/g, function (_, ns) {
@@ -4019,7 +4019,7 @@
       });
       return t;
     }
-    // Phase 2 — GFM pipe tables (UpToDate-style structured comparisons).
+    // Phase 2 - GFM pipe tables (UpToDate-style structured comparisons).
     function isRow(s) { return /^\s*\|.*\|\s*$/.test(s); }
     function isSep(s) { return /\|/.test(s) && /-{2,}/.test(s) && /^\s*\|?[\s:|-]+\|?\s*$/.test(s); }
     function cells(s) { return s.trim().replace(/^\||\|$/g, "").split("|").map(function (c) { return c.trim(); }); }
@@ -4062,7 +4062,7 @@
     });
     return out;
   }
-  // Phase 2 — NUMBERED source list (single source of truth for both the prompt's cite list and the
+  // Phase 2 - NUMBERED source list (single source of truth for both the prompt's cite list and the
   // client footer, so [n] markers line up). Built from grounding + retrieved + treatment via the same
   // human-title mapping as maikSourceTitles, de-duplicated in reading order.
   function maikSourceList(pkg) {
@@ -4076,7 +4076,7 @@
   try { window.SMD_MaiK = { compose: maikCompose, css: maikCSS, assessmentHTML: maikAssessmentHTML, renderMarkdown: maikMarkdown, sourceTitles: maikSourceTitles, sourceList: maikSourceList }; } catch (e) {}
 
   /* ====================================================================== *
-   * Phase 2 — LIVE differential inside the PRIMARY 5-step Advanced form.
+   * Phase 2 - LIVE differential inside the PRIMARY 5-step Advanced form.
    * Same engine (SMD_REASON), second view. A panel injected into #inputCard
    * recomputes the 🔴/🟢 differential as findings are ticked (threshold-gated),
    * and "Select this diagnosis" opens the EXISTING stewardship page (reuse, no
@@ -4085,7 +4085,7 @@
   var _liveExp = {}, _livePrev = {}, _livePrevKeys = {}, _liveLastKey = null, _liveStarted = false;
   function smdLiveCard(c, inf, rank) {
     var cls = inf ? "inf" : "ni", open = _liveExp[c.id];
-    function fl(arr, sign) { return (arr && arr.length) ? arr.map(function (k) { return '<span class="sl-f">' + (sign || "") + esc(lbl(k)) + "</span>"; }).join("") : '<span class="sl-none">—</span>'; }
+    function fl(arr, sign) { return (arr && arr.length) ? arr.map(function (k) { return '<span class="sl-f">' + (sign || "") + esc(lbl(k)) + "</span>"; }).join("") : '<span class="sl-none">-</span>'; }
     var prev = _livePrev[c.id], dlt = "";
     if (prev != null && prev !== c.confidence) dlt = c.confidence > prev ? ' <span class="sl-up">▲</span>' : ' <span class="sl-down">▼</span>';
     else if (prev == null && _liveStarted) dlt = ' <span class="sl-new">NEW</span>';
@@ -4235,7 +4235,7 @@
     var st = document.createElement("style"); st.id = "smd-livedx-css"; st.textContent = css; document.head.appendChild(st);
   }
 
-  /* ---- Phase 2b — progressive disclosure of the primary form's Step-3 findings.
+  /* ---- Phase 2b - progressive disclosure of the primary form's Step-3 findings.
    * Each .finding-grid shows the top ~8 findings first, the rest behind "Show
    * more", with a per-section 🔍 search. Selected findings always stay visible.
    * Structure-agnostic (operates on .finding-grid children) so it never breaks
@@ -4284,7 +4284,7 @@
     Array.prototype.forEach.call(grids, function (grid) {
       if (grid.getAttribute("data-smd-prog")) { smdProgGrid(grid); return; }
       var items = Array.prototype.slice.call(grid.children).filter(function (n) { return n.nodeType === 1; });
-      if (items.length <= PROG_TOP) return;             // short list — leave as-is
+      if (items.length <= PROG_TOP) return;             // short list - leave as-is
       grid.setAttribute("data-smd-prog", "1");
       var sb = document.createElement("input"); sb.className = "smd-find-search"; sb.type = "text"; sb.placeholder = "🔍 Search findings…";
       sb.addEventListener("input", function () { grid._smdQuery = sb.value; smdProgGrid(grid); });
@@ -4319,7 +4319,7 @@
    *    the KB find-maps in DDX_NI) and merge them into the ranked candidate list,
    *    so the main "possible matches" list can surface any of the 140. Infective
    *    scoring is recomputed with the SAME match/baseScore closures (identical raw
-   *    scores + order) — only the normalisation denominator changes, exactly as it
+   *    scores + order) - only the normalisation denominator changes, exactly as it
    *    would when any candidate is added. The sepsis-no-source fallback is left
    *    untouched. Non-infective only surface when their findings are present.
    *  - renderOutput(e,id): wrapped so selecting a non-infective diagnosis renders a
@@ -4332,13 +4332,13 @@
   // Add the broader NON-INFECTIVE finding inputs to the MAIN app's form so the
   // 89 non-infective diagnoses can be ticked (and thus surface in the expanded
   // engine). The main form is data-driven from window.FIELD_GROUPS + the system
-  // picker window.SYSTEM_PICKER_MAP — both globals from app.js. We append new
+  // picker window.SYSTEM_PICKER_MAP - both globals from app.js. We append new
   // organ-system groups (labels reused from the reasoning ontology) WITHOUT
   // editing minified app.js. reasoning's own ontology is already built from
   // EXTRA_GROUPS, so this is purely additive to the main form. Idempotent.
   // Each NI group either MERGES into an existing infective system tab (mergeInto =
-  // that tab's app.js id) so we get ONE tab per organ system — no "two Cardiac /
-  // two Neuro" — or, when there is no infective counterpart (Endocrine, Toxicology),
+  // that tab's app.js id) so we get ONE tab per organ system - no "two Cardiac /
+  // two Neuro" - or, when there is no infective counterpart (Endocrine, Toxicology),
   // adds a genuinely new tab. relabel broadens the merged tab's label to reflect it
   // now covers infective + non-infective findings.
   var NI_INPUT_GROUPS = [
@@ -4395,7 +4395,7 @@
     (DDX_NI || []).forEach(function (d) {
       if (!d || !d.id || byId[d.id]) return;
       var syn = { id: d.id, name: d.name || d.id, system: d.system || "", nonInfective: true,
-        antibioticRelevant: false, decision: { status: "green", label: "Non-infective diagnosis — management" },
+        antibioticRelevant: false, decision: { status: "green", label: "Non-infective diagnosis - management" },
         find: d.find || {}, reason: d.reason || "", red: d.red || [], inv: d.inv || [] };
       reg.push(syn); byId[d.id] = syn;
     });
@@ -4423,17 +4423,17 @@
       '</div>' +
       (syn.reason ? '<div class="card"><div class="simple-section-label">Why this</div><p>' + esc(syn.reason) + '</p></div>' : '') +
       (tx ? '<div class="card"><div class="simple-section-label">💊 Management / Treatment</div><ol>' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol></div>'
-          : '<div class="card"><div class="simple-section-label">Management</div><p>Specialist-guided, non-antibiotic management — see the investigations, red flags and Harrison reference below and consult full guidelines.</p></div>') +
+          : '<div class="card"><div class="simple-section-label">Management</div><p>Specialist-guided, non-antibiotic management - see the investigations, red flags and Harrison reference below and consult full guidelines.</p></div>') +
       (ix && ix.length ? '<div class="card"><div class="simple-section-label">Key investigations</div>' + li(ix, 8) + '</div>' : '') +
       (syn.red && syn.red.length ? '<div class="card"><div class="simple-section-label">Red flags</div>' + li(syn.red, 8) + '</div>' : '') +
       (harrisonRef(syn.id, { expanded: true }) ? '<div class="card">' + harrisonRef(syn.id, { expanded: true }) + '</div>' : '') +
-      '<div class="qa-pregnancy-note" style="margin-top:10px">⚠️ Decision-support only — non-infective management aligned to standard guidelines / Harrison 22e. Verify before acting.</div>';
+      '<div class="qa-pregnancy-note" style="margin-top:10px">⚠️ Decision-support only - non-infective management aligned to standard guidelines / Harrison 22e. Verify before acting.</div>';
   }
   function installMainEngineExpansion() {
     if (window.__smdEngineExpanded) return;
     if (typeof window.runEngine !== "function" || typeof window.renderOutput !== "function") return;
     var NI = buildNIRegistry();
-    if (!NI.reg.length) return;                       // DDX_NI not ready yet — retry later
+    if (!NI.reg.length) return;                       // DDX_NI not ready yet - retry later
     var origRun = window.runEngine, origRender = window.renderOutput;
     window.__smdOrigRunEngine = origRun;
     window.runEngine = function (e) {
@@ -4450,7 +4450,7 @@
         });
         NI.reg.forEach(function (sd) { var sc = niScoreFor(e, sd.find); if (sc > 0) scored.push({ syn: sd, score: sc }); });
         if (!scored.length) return base;
-        scored.sort(function (a, b) { return b.score - a.score; });   // score desc — matches origRun (no tiebreak)
+        scored.sort(function (a, b) { return b.score - a.score; });   // score desc - matches origRun (no tiebreak)
         var o = scored.reduce(function (t, x) { return t + x.score; }, 0) || 1;
         var r = scored.slice(0, 5).map(function (x) { return { name: x.syn.name, id: x.syn.id, probability: Math.round(x.score / o * 100), syn: x.syn }; });
         var s2 = r.reduce(function (t, x) { return t + x.probability; }, 0) || 1;
@@ -4469,7 +4469,7 @@
       // never corrupt the clinical output (it's purely progressive enhancement).
       try { smdEnhanceOutput(); } catch (_) {}
       try { if (!isNI) smdSafetyOverlay(e, i); } catch (_) {}   // antibiotic path only; never blocks output
-      try { if (!isNI) smdTbWorkspace(e, i); } catch (_) {}      // TB pathways workspace (PR2) — TB renders only
+      try { if (!isNI) smdTbWorkspace(e, i); } catch (_) {}      // TB pathways workspace (PR2) - TB renders only
       return ret;
     };
     window.__smdEngineExpanded = true;
@@ -4477,7 +4477,7 @@
   // app.js (classic script) runs before this; augment the main form's finding
   // inputs and install the engine expansion now, retrying on DOM ready in case a
   // global is populated slightly later.
-  /* ---- Sidebar "🧪 Experimental features" toggles — one place to flip every
+  /* ---- Sidebar "🧪 Experimental features" toggles - one place to flip every
    * flag I ship (reasoning v2, expanded KB, AI, GHIS) from the UI instead of the
    * console. Injected into #sbMenu on each SB.open (the menu is rebuilt). Calls
    * the existing public setters; purely a control surface (no behaviour of its own).
@@ -4495,18 +4495,18 @@
       '<div style="font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-bottom:8px">AI-assisted clinical commentary</div>' +
       kv.map(function (r) { return '<div style="display:flex;justify-content:space-between;gap:10px;font:500 11.5px/1.6 var(--sans,system-ui);border-top:1px solid rgba(100,116,139,0.14);padding:3px 0"><span style="color:var(--slate-soft,#5a7184)">' + r[0] + '</span><b style="color:var(--ink,#14202b)">' + r[1] + '</b></div>'; }).join("") +
       '<div style="font:500 11px/1.55 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px;border-top:1px solid rgba(100,116,139,0.14);padding-top:8px">' +
-        '<b style="color:var(--ink,#14202b)">About MaiK</b> — MaiK (Medical AI Knowledge) is StewardMD’s clinician-assistive AI. It provides evidence-supported clinical explanations and educational insights while StewardMD’s deterministic clinical reasoning engine remains the primary diagnostic authority. AI output is advisory and always requires clinician verification.' +
+        '<b style="color:var(--ink,#14202b)">About MaiK</b> - MaiK (Medical AI Knowledge) is StewardMD’s clinician-assistive AI. It provides evidence-supported clinical explanations and educational insights while StewardMD’s deterministic clinical reasoning engine remains the primary diagnostic authority. AI output is advisory and always requires clinician verification.' +
       '</div></div>';
   }
   function smdSettingsInject() {
-    return;   // DISABLED gold121 — sidebar settings consolidated into home.js reorganizer
+    return;   // DISABLED gold121 - sidebar settings consolidated into home.js reorganizer
     var menu = document.getElementById("sbMenu"); if (!menu) return;
     if (menu.querySelector("[data-smd-labs]")) return;
     var st = smdLabsState();
     var rows = [
       ["reason", "🧠 Reasoning v2", "Live differential + progressive findings in the workflow"],
-      ["expanded", "📚 Expanded Harrison KB", "+268 reference diseases as candidates (auto-derived — review)"],
-      ["ai", "✨ MaiK — Medical AI Knowledge", "Advisory commentary + ICU Vision"],
+      ["expanded", "📚 Expanded Harrison KB", "+268 reference diseases as candidates (auto-derived - review)"],
+      ["ai", "✨ MaiK - Medical AI Knowledge", "Advisory commentary + ICU Vision"],
       ["ghis", "🏥 GHIS Ward Sync", "Live inpatient labs + radiology"]
     ];
     var w = document.createElement("div"); w.setAttribute("data-smd-labs", "1");
@@ -4541,19 +4541,19 @@
     else setTimeout(smdMainAppHooks, 0);
   }
   // the global search input + SB library object are created at/after DOMContentLoaded
-  // and sometimes later — re-attempt the (idempotent) KB wiring a few times.
+  // and sometimes later - re-attempt the (idempotent) KB wiring a few times.
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdWireKBSurfaces);
   [250, 800, 2000].forEach(function (ms) { setTimeout(smdWireKBSurfaces, ms); });
   [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { try { smdEnsureLivePanel(); } catch (e) {} try { smdEnsureProgressive(); } catch (e) {} try { smdWrapSBSettings(); } catch (e) {} }, ms); });
 
   /* ====================================================================== *
-   * gold88 — UI polish, all in one global place (no minified app.js edits):
+   * gold88 - UI polish, all in one global place (no minified app.js edits):
    *   (1) collapsible / accordion clinical-decision results
    *   (2) a single global "⬆ Back to Top" floating action button
    *   (3) relocate the "Save this case?" box to the top of the results
    * Everything below is progressive enhancement layered on top of the markup
    * app.js already produced, so it cannot change any calculation or break the
-   * underlying output — it only restyles/reorganises the DOM after render.
+   * underlying output - it only restyles/reorganises the DOM after render.
    * ====================================================================== */
 
   // --- (S) inject the CSS once -------------------------------------------
@@ -4682,7 +4682,7 @@
   }
   // every NUMBERED section card (<h2><span class="num">…) becomes collapsible,
   // collapsed by default. Quick Decision (.quick-answer-card) and the critical
-  // alert banners are NOT .card-with-.num, so they always stay open — exactly the
+  // alert banners are NOT .card-with-.num, so they always stay open - exactly the
   // "keep expanded" set requested.
   function smdAccordionize(root) {
     if (!root) return;
@@ -4833,7 +4833,7 @@
       crcl = Math.max(0, Math.round(crcl));
       if (crcl >= 50) return null;
       var tier = crcl < 15 ? "kidney failure / ESRD" : crcl < 30 ? "severe impairment" : "moderate impairment";
-      return { crcl: crcl, tier: tier, text: "CrCl ≈ " + crcl + " mL/min (" + tier + ") — renal dose adjustment applies; see the per-drug renal-adjust notes below." };
+      return { crcl: crcl, tier: tier, text: "CrCl ≈ " + crcl + " mL/min (" + tier + ") - renal dose adjustment applies; see the per-drug renal-adjust notes below." };
     } catch (e) { return null; }
   }
 
@@ -4847,7 +4847,7 @@
         var d = ref[k];
         if (d && d.hepatic && !/^\s*no adjustment/i.test(d.hepatic)) perDrug.push({ label: d.label || k, text: d.hepatic });
       });
-      return { text: "Hepatic impairment flagged — review hepatic dosing for the recommended agents.", perDrug: perDrug };
+      return { text: "Hepatic impairment flagged - review hepatic dosing for the recommended agents.", perDrug: perDrug };
     } catch (e) { return null; }
   }
 
@@ -4862,7 +4862,7 @@
       if (!hit) return null;
       var label = QT_PROLONGERS[hit];
       return { drug: hit, label: label,
-        text: label + " prolongs the QT interval. In an elderly/cardiac patient: obtain a baseline ECG (QTc), check and replete K⁺/Mg²⁺, and prefer a non-QT-prolonging agent appropriate to the indication — e.g. doxycycline (atypical/CAP cover), amoxicillin-clavulanate, or a beta-lactam. Advisory — does not override the recommendation." };
+        text: label + " prolongs the QT interval. In an elderly/cardiac patient: obtain a baseline ECG (QTc), check and replete K⁺/Mg²⁺, and prefer a non-QT-prolonging agent appropriate to the indication - e.g. doxycycline (atypical/CAP cover), amoxicillin-clavulanate, or a beta-lactam. Advisory - does not override the recommendation." };
     } catch (e) { return null; }
   }
 
@@ -4888,7 +4888,7 @@
   // render-time findings + syndrome id; the read-only base the card's own inputs are overlaid onto.
   var _safetyE = null, _safetyId = null;
   // Effective patient = render-time findings overlaid with whatever the clinician typed into
-  // the card's inputs. NEVER written back to the case or the engine — this is a local check.
+  // the card's inputs. NEVER written back to the case or the engine - this is a local check.
   function smdSafetyEffective() {
     var e = _safetyE || {}, eff = {}; for (var k in e) eff[k] = e[k];
     var box = document.getElementById("smdSafetyInputs");
@@ -4906,7 +4906,7 @@
     });
     return eff;
   }
-  // CrCl (Cockcroft-Gault) — returns the number regardless of band (null only if inputs missing),
+  // CrCl (Cockcroft-Gault) - returns the number regardless of band (null only if inputs missing),
   // so the card can show "normal" as well as impaired. renalCheck stays the <50 escalation flag.
   function smdCrclValue(e) {
     var age = smdSafetyNum(e.age), wt = smdSafetyNum(e.weight), scr = smdSafetyNum(e.creatinine);
@@ -4928,7 +4928,7 @@
     cefta_avi:    { standard: "2.5 g IV q8h",     bands: { "Moderate impairment": "1.25 g IV q8h", "Severe impairment": "0.94 g IV q12h", "Kidney failure / ESRD": "0.94 g IV q48h (dose after HD)" } },
     cefiderocol:  { standard: "2 g IV q8h",       bands: { "Moderate impairment": "1.5 g IV q8h", "Severe impairment": "1 g IV q8h", "Kidney failure / ESRD": "0.75 g IV q12h (dose after HD)" } },
     aztreonam:    { standard: "1-2 g IV q8h",     bands: { "Severe impairment": "50% of usual dose", "Kidney failure / ESRD": "25% of usual dose" } },
-    doripenem:    { standard: "500 mg IV q8h",    bands: { "Moderate impairment": "250 mg IV q8h", "Severe impairment": "250 mg IV q12h", "Kidney failure / ESRD": "limited data — 250 mg IV q12h" } },
+    doripenem:    { standard: "500 mg IV q8h",    bands: { "Moderate impairment": "250 mg IV q8h", "Severe impairment": "250 mg IV q12h", "Kidney failure / ESRD": "limited data - 250 mg IV q12h" } },
     imipenem:     { standard: "500 mg IV q6h",    bands: { "Moderate impairment": "500 mg IV q8h", "Severe impairment": "250-500 mg IV q12h", "Kidney failure / ESRD": "250 mg IV q12h + HD (seizure risk)" } },
     ertapenem:    { standard: "1 g IV once daily", bands: { "Severe impairment": "500 mg IV once daily", "Kidney failure / ESRD": "500 mg IV once daily (supplement after HD)" } },
     ampicillin:   { standard: "1-2 g IV q6h",     bands: { "Severe impairment": "1-2 g IV q8-12h", "Kidney failure / ESRD": "1-2 g IV q12h" } },
@@ -4951,7 +4951,7 @@
   // DRAFT SMD_RENAL_DOSING. Returns {dose, note, draft, noChange} or null (drug not dose-banded).
   function smdRenalDoseFor(key, label, crcl) {
     var band = smdRenalBand(crcl); if (!band) return null;
-    // 1) verified engine table (10 drugs) — matched by label substring
+    // 1) verified engine table (10 drugs) - matched by label substring
     try {
       if (typeof window.getRenalAdjustment === "function") {
         var a = window.getRenalAdjustment(String(label || key), band);
@@ -4965,13 +4965,13 @@
     return null;
   }
   // recommended drugs → their authored renal/hepatic dosing guidance (from ASP_DRUGS; no
-  // fabricated doses — this is the "corrected-dose" guidance the app already ships per drug).
+  // fabricated doses - this is the "corrected-dose" guidance the app already ships per drug).
   function smdRxDosing(drugs) {
     var ref = window.ASP_DRUGS || {};
     return (drugs || []).map(function (k) { var d = ref[k] || {}; return { key: k, label: d.label || k, renal: d.renal || "", hepatic: d.hepatic || "" }; })
       .filter(function (d) { return d.renal || d.hepatic; });
   }
-  // the syndrome's alternative regimens (engine data — real authored doses).
+  // the syndrome's alternative regimens (engine data - real authored doses).
   function smdAlternatives() {
     try {
       var syn = _safetyId && window.SYNDROMES && window.SYNDROMES[_safetyId]; if (!syn) return [];
@@ -4985,12 +4985,12 @@
   // recommended; otherwise reassure. Escalates when the patient is elderly/cardiac.
   function smdCardioLine(eff, drugs) {
     var qt = (drugs || []).filter(function (k) { return QT_PROLONGERS[k]; });
-    if (!qt.length) return { ok: true, text: "No QT-prolonging agent in this regimen — no additional QT precaution needed." };
+    if (!qt.length) return { ok: true, text: "No QT-prolonging agent in this regimen - no additional QT precaution needed." };
     var age = smdSafetyNum(eff.age), risk = (age !== null && age >= 65) || !!eff.knownCAD || !!eff.knownHeartFailure || !!eff.atrialFibHx;
     var name = QT_PROLONGERS[qt[0]];
-    var head = risk ? (name + " prolongs the QT interval — HIGHER RISK in this elderly/cardiac patient.")
-                    : (name + " prolongs the QT interval — caution if the patient is elderly or has cardiac disease/low K⁺/Mg²⁺.");
-    return { ok: false, text: head + " Obtain a baseline ECG (QTc), check and replete K⁺/Mg²⁺, and prefer a non-QT-prolonging agent appropriate to the indication — e.g. doxycycline (atypical/CAP cover), amoxicillin-clavulanate, or a beta-lactam. Advisory — does not override the recommendation." };
+    var head = risk ? (name + " prolongs the QT interval - HIGHER RISK in this elderly/cardiac patient.")
+                    : (name + " prolongs the QT interval - caution if the patient is elderly or has cardiac disease/low K⁺/Mg²⁺.");
+    return { ok: false, text: head + " Obtain a baseline ECG (QTc), check and replete K⁺/Mg²⁺, and prefer a non-QT-prolonging agent appropriate to the indication - e.g. doxycycline (atypical/CAP cover), amoxicillin-clavulanate, or a beta-lactam. Advisory - does not override the recommendation." };
   }
   // recompute + re-render the sections (inputs keep focus) from the effective patient.
   function smdSafetyRecalc() {
@@ -5004,20 +5004,20 @@
       if (crcl === null) renalHead = "enter age, weight & creatinine above for the patient's CrCl. Per-drug adjustment:";
       else {
         var tier = crcl < 15 ? "kidney failure / ESRD" : crcl < 30 ? "severe impairment" : crcl < 50 ? "moderate impairment" : "normal / mild";
-        renalHead = esc("CrCl ≈ " + crcl + " mL/min (" + tier + ") — " + (crcl < 50 ? "renal dose reduction applies." : "no renal dose reduction needed.") + " Per-drug:");
+        renalHead = esc("CrCl ≈ " + crcl + " mL/min (" + tier + ") - " + (crcl < 50 ? "renal dose reduction applies." : "no renal dose reduction needed.") + " Per-drug:");
       }
       html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + renalHead;
       if (rx.length) html += '<ul class="smd-safety-ul">' + rx.map(function (d) {
         var dose = (crcl !== null) ? smdRenalDoseFor(d.key, d.label, crcl) : null;
         var body;
-        if (dose && dose.dose) body = '<b>' + esc(dose.dose) + '</b>' + (dose.note ? " — " + esc(dose.note) : "") + (dose.draft ? ' <span class="smd-safety-draft">draft · verify locally</span>' : "");
-        else if (dose && dose.noChange) body = "usual dose — no reduction at this CrCl" + (dose.draft ? ' <span class="smd-safety-draft">draft · verify locally</span>' : "");
+        if (dose && dose.dose) body = '<b>' + esc(dose.dose) + '</b>' + (dose.note ? " - " + esc(dose.note) : "") + (dose.draft ? ' <span class="smd-safety-draft">draft · verify locally</span>' : "");
+        else if (dose && dose.noChange) body = "usual dose - no reduction at this CrCl" + (dose.draft ? ' <span class="smd-safety-draft">draft · verify locally</span>' : "");
         else body = esc(d.renal || "see product label");
         return '<li><b>' + esc(d.label) + ':</b> ' + body + '</li>';
       }).join("") + '</ul>';
       html += '</div></div>';
       // Hepatic: per-drug guidance (always); flag impairment when entered.
-      var hepHead = hep ? esc(hep.text) : "Hepatic dosing — review if hepatic impairment; per-drug guidance:";
+      var hepHead = hep ? esc(hep.text) : "Hepatic dosing - review if hepatic impairment; per-drug guidance:";
       html += '<div class="smd-safety-row"><span class="smd-safety-ic">🟠</span><div><b>Hepatic</b> ' + hepHead;
       if (rx.length) html += '<ul class="smd-safety-ul">' + rx.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.hepatic || "see product label") + '</li>'; }).join("") + '</ul>';
       html += '</div></div>';
@@ -5025,7 +5025,7 @@
       html += '<div class="smd-safety-row"><span class="smd-safety-ic">' + (card.ok ? "✅" : "❤️") + '</span><div><b>Cardiac (QT)</b> ' + esc(card.text) + '</div></div>';
       // Alternatives: the syndrome's other regimens.
       if (alts.length) html += '<div class="smd-safety-row"><span class="smd-safety-ic">🔁</span><div><b>Alternatives</b><ul class="smd-safety-ul">' +
-        alts.map(function (a) { return '<li><b>' + esc(a.drug) + '</b>' + (a.dose ? " — " + esc(a.dose) : "") + '</li>'; }).join("") + '</ul></div></div>';
+        alts.map(function (a) { return '<li><b>' + esc(a.drug) + '</b>' + (a.dose ? " - " + esc(a.dose) : "") + '</li>'; }).join("") + '</ul></div></div>';
       lines.innerHTML = html;
     } catch (e) { /* never break the page */ }
   }
@@ -5055,7 +5055,7 @@
     if (!drugs.length && !fires) return false;
     smdInjectSafetyCSS();
     var html = '<div id="smdSafetyCard" class="smd-safety-card">' +
-      '<div class="smd-safety-h">⚠️ Patient-specific safety <span class="smd-safety-sub">— enter values to check; does not change the recommendation</span></div>' +
+      '<div class="smd-safety-h">⚠️ Patient-specific safety <span class="smd-safety-sub">- enter values to check; does not change the recommendation</span></div>' +
       smdSafetyInputsHTML(e) +
       '<div class="smd-safety-lines" id="smdSafetyLines"></div></div>';
     // Sit the card with the recommendation: directly under the (relocated) Save-case box when
@@ -5084,7 +5084,7 @@
   };
 
   /* ---------------------------------------------------------------------- *
-   * SMD_TB — decision-aware TB treatment-pathway engine (PR1 data+logic).
+   * SMD_TB - decision-aware TB treatment-pathway engine (PR1 data+logic).
    * Loads the NTEP-sourced regimen/drug data (kb/treatments/tb_dr_regimens.json +
    * tb_drugs.json) and exposes pure selection logic: classify DST → eligible vs
    * excluded regimens (with reasons) → mandatory safety gates. UI (PR2) and tests
@@ -5119,13 +5119,13 @@
     return (dst.hSusceptibility === "resistant" || dst.hSusceptibility === "InhA+KatG") ? "mdr" : "rr";
   }
   function smdTbNum(x) { var n = parseFloat(x); return isFinite(n) ? n : null; }
-  // exclusion rules per regimen (encoded from NTEP §3.3–3.6). Returns null if eligible, else reason.
+  // exclusion rules per regimen (encoded from NTEP §3.3-3.6). Returns null if eligible, else reason.
   function smdTbExclusion(reg, p) {
     p = p || {};
     var age = smdTbNum(p.age), qtc = smdTbNum(p.qtcF), hb = smdTbNum(p.hb), plt = smdTbNum(p.platelets), anc = smdTbNum(p.anc), crX = smdTbNum(p.creatinineXULN), neu = smdTbNum(p.neuropathyGrade);
     var severeEP = /cns|spinal|skeletal|bone|disseminat|miliary/i.test(String(p.site || ""));
     if (reg.id === "bpalm") {
-      if (age !== null && age < 14) return "Age < 14 years — BPaLM not indicated";
+      if (age !== null && age < 14) return "Age < 14 years - BPaLM not indicated";
       if (p.bdqResistance || p.lzdResistance || p.paResistance) return "Documented resistance to bedaquiline / linezolid / pretomanid";
       if (p.liverDysfunction) return "Significant liver dysfunction (AST/ALT > 3×ULN or bilirubin > 2×ULN)";
       if (severeEP) return "Severe extrapulmonary TB (CNS / spinal-skeletal / disseminated / miliary)";
@@ -5177,7 +5177,7 @@
   };
 
   /* ---------------------------------------------------------------------- *
-   * TB TREATMENT WORKSPACE (PR2) — decision-aware UI that renders SMD_TB into
+   * TB TREATMENT WORKSPACE (PR2) - decision-aware UI that renders SMD_TB into
    * the TB output. Replaces the vague "Modified regimens per DST" card with
    * DST-driven regimen cards + why-eligible/why-not + safety gates + sources.
    * Injected post-render via the renderOutput seam; no minified app.js edit.
@@ -5288,7 +5288,7 @@
       var gd = SMD_TB.guidelines();
       if (gd.length) {
         html += '<div class="smd-tb-sec"><b>📖 Guideline reference</b><ul class="smd-tb-det" style="margin:5px 0 0;padding-left:18px">' +
-          gd.map(function (g) { return '<li class="smd-tb-src"><b>' + esc(g.title) + '</b> — ' + esc(g.body) + ' (' + esc(g.version) + (g.jurisdiction && g.jurisdiction !== "—" ? ", " + esc(g.jurisdiction) : "") + ')<br>' + esc(g.keySections || "") + '</li>'; }).join("") + '</ul></div>';
+          gd.map(function (g) { return '<li class="smd-tb-src"><b>' + esc(g.title) + '</b> - ' + esc(g.body) + ' (' + esc(g.version) + (g.jurisdiction && g.jurisdiction !== "-" ? ", " + esc(g.jurisdiction) : "") + ')<br>' + esc(g.keySections || "") + '</li>'; }).join("") + '</ul></div>';
       }
       // sources
       var srcs = SMD_TB.data().reg;
@@ -5306,7 +5306,7 @@
     // and remember it as the anchor so we can slot the rich workspace into the ALTERNATIVE
     // REGIMENS section (where clinicians look for alternatives), keeping that heading as the label.
     // GUARD: our own injected cards (#smdSafetyCard / #smdTbCard) echo that phrase in their
-    // "Alternatives" list, and their class matches [class*=card] — so an unqualified closest()
+    // "Alternatives" list, and their class matches [class*=card] - so an unqualified closest()
     // would hide the safety card / this workspace. Skip them.
     var _tbAnchor = null;
     try {
@@ -5323,7 +5323,7 @@
     } catch (_) {}
     var html = '<div id="smdTbCard" class="smd-tb-card">' +
       '<div class="smd-tb-h">🫁 Tuberculosis treatment pathway</div>' +
-      '<div class="smd-tb-policy">NTEP India (primary) · WHO reference · advisory — clinician verifies</div>' +
+      '<div class="smd-tb-policy">NTEP India (primary) · WHO reference · advisory - clinician verifies</div>' +
       smdTbInputsHTML(e) +
       '<div id="smdTbLines"></div></div>';
     // Prefer slotting the workspace into the alternative-regimens location (right before the hidden
@@ -5340,32 +5340,32 @@
 
   // --- ASP console: name the real second-line DR-TB drugs -------------------
   // The app.js Antimicrobial Stewardship Console (window.ASP_DATA) shipped a
-  // single vague TB alternative ("DR-TB regimen (if RR/MDR) — refer to DR-TB
+  // single vague TB alternative ("DR-TB regimen (if RR/MDR) - refer to DR-TB
   // services") that named NO second-line drugs, and ASP_DRUGS lacked
   // pretomanid/moxifloxacin/clofazimine/cycloserine/delamanid/ethionamide. We
   // augment both after app.js loads (same window seam used elsewhere) with the
-  // NTEP-sourced regimens (BPaLM · 9–11-mo shorter · 18–20-mo longer · H
+  // NTEP-sourced regimens (BPaLM · 9-11-mo shorter · 18-20-mo longer · H
   // mono/poly), respecting that BPaLM and the shorter regimen are NOT used in
-  // severe extrapulmonary TB (CNS / disseminated / miliary) — those route to
+  // severe extrapulmonary TB (CNS / disseminated / miliary) - those route to
   // the longer oral regimen. Content mirrors kb/treatments/tb_dr_regimens.json
   // + tb_drugs.json (NTEP Nov-2024). Reversible: localStorage smd_asp_tb=0.
   function smdAspTbOn() { try { var v = localStorage.getItem("smd_asp_tb"); return v === null ? true : v === "1"; } catch (e) { return true; } }
   var SMD_ASP_TB_DRUGS = {
-    pretomanid: { label: "Pretomanid (Pa)", aware: "Reserve", cls: "Anti-TB (nitroimidazole)", spectrum: "Drug-resistant M. tuberculosis — component of BPaLM/BPaL.", mech: ["Documented pretomanid resistance (uncommon)"], adverse: ["hepatotoxicity", "peripheral neuropathy", "myelosuppression (with linezolid)"], monitoring: "Baseline + periodic LFT, CBC; neuropathy check.", renal: "Limited data — caution.", hepatic: "Discontinue for significant hepatotoxicity.", preg: "Per NTEP eligibility.", lact: "Caution (not in lactation unless formula-feeding).", contra: ["Documented Pa resistance", "Age/paediatric restrictions per NTEP"], cost: "₹₹₹", india: "NTEP (programmatic, free)", note: "Only as part of BPaLM/BPaL (≥14 y) per WHO/NTEP §3.3." },
-    moxifloxacin: { label: "Moxifloxacin (Mfx)", aware: "Watch", cls: "Fluoroquinolone (DR-TB Group A)", spectrum: "TB — Group A fluoroquinolone; retained in BPaLM even if FQ-resistant.", mech: ["gyrA / gyrB mutations (fluoroquinolone resistance)"], adverse: ["QT prolongation", "tendinopathy", "dysglycaemia", "CNS effects"], monitoring: "Baseline + periodic ECG (QTcF); electrolytes.", renal: "No major adjustment.", hepatic: "Caution.", preg: "Per DR-TB regimen risk/benefit.", lact: "Caution.", contra: ["QT-prolongation risk"], cost: "₹", india: "NTEP (programmatic)", note: "BPaLM (full course) & longer regimen; additive QT with Bdq/Cfz — monitor QTcF. Space cation/Mg products by 2 h." },
-    clofazimine: { label: "Clofazimine (Cfz)", aware: "Watch", cls: "Riminophenazine (DR-TB Group B)", spectrum: "DR-TB — shorter & longer oral regimens.", mech: [], adverse: ["skin/conjunctival pigmentation", "QT prolongation", "GI upset / ichthyosis"], monitoring: "Baseline + periodic ECG (QTcF).", renal: "No major adjustment.", hepatic: "Caution.", preg: "Per regimen risk/benefit.", lact: "Caution.", contra: ["Significant QT prolongation"], cost: "₹₹", india: "NTEP (programmatic)", note: "Component of the 9–11-mo shorter & 18–20-mo longer oral regimens; additive QT." },
-    cycloserine: { label: "Cycloserine / Terizidone (Cs)", aware: "Watch", cls: "DR-TB Group B", spectrum: "DR-TB — longer oral M/XDR regimen.", mech: [], adverse: ["psychiatric effects (depression, psychosis, suicidality)", "seizures"], monitoring: "Baseline + ongoing psychiatric/neurological assessment; give with pyridoxine.", renal: "Reduce in renal impairment (renally cleared).", hepatic: "No major adjustment.", preg: "Per regimen risk/benefit.", lact: "Caution.", contra: ["Active psychosis / seizure disorder (relative)", "Heavy alcohol use"], cost: "₹₹", india: "NTEP (programmatic)", note: "Longer oral regimen; monitor mental state; additive CNS toxicity with isoniazid/alcohol." },
-    delamanid: { label: "Delamanid (Dlm)", aware: "Reserve", cls: "Anti-TB (nitro-dihydro-imidazooxazole)", spectrum: "DR-TB — longer oral; paediatric alternative where Bdq restricted.", mech: [], adverse: ["QT prolongation"], monitoring: "Baseline + periodic ECG (QTcF); albumin, electrolytes.", renal: "Caution.", hepatic: "Caution.", preg: "Per regimen risk/benefit.", lact: "Caution.", contra: ["Significant QT prolongation", "Albumin < 2.8 g/dL (caution)"], cost: "₹₹₹", india: "NTEP (programmatic)", note: "Longer oral regimen; 100 mg BD (≥12 y), 50 mg BD (6–11 y); additive QT." },
-    ethionamide: { label: "Ethionamide / Prothionamide (Eto)", aware: "Watch", cls: "DR-TB Group C", spectrum: "DR-TB — alternative to linezolid in the shorter regimen; longer regimen.", mech: [], adverse: ["GI intolerance", "hypothyroidism", "hepatotoxicity"], monitoring: "Baseline + periodic LFT, TSH.", renal: "Caution.", hepatic: "Hepatotoxic — caution.", preg: "Avoid (teratogenic) — prefer the Lzd-containing shorter regimen in pregnancy.", lact: "Caution.", contra: ["Significant hepatic dysfunction"], cost: "₹", india: "NTEP (programmatic)", note: "Alternative to linezolid in the shorter regimen; monitor TSH (hypothyroidism)." }
+    pretomanid: { label: "Pretomanid (Pa)", aware: "Reserve", cls: "Anti-TB (nitroimidazole)", spectrum: "Drug-resistant M. tuberculosis - component of BPaLM/BPaL.", mech: ["Documented pretomanid resistance (uncommon)"], adverse: ["hepatotoxicity", "peripheral neuropathy", "myelosuppression (with linezolid)"], monitoring: "Baseline + periodic LFT, CBC; neuropathy check.", renal: "Limited data - caution.", hepatic: "Discontinue for significant hepatotoxicity.", preg: "Per NTEP eligibility.", lact: "Caution (not in lactation unless formula-feeding).", contra: ["Documented Pa resistance", "Age/paediatric restrictions per NTEP"], cost: "₹₹₹", india: "NTEP (programmatic, free)", note: "Only as part of BPaLM/BPaL (≥14 y) per WHO/NTEP §3.3." },
+    moxifloxacin: { label: "Moxifloxacin (Mfx)", aware: "Watch", cls: "Fluoroquinolone (DR-TB Group A)", spectrum: "TB - Group A fluoroquinolone; retained in BPaLM even if FQ-resistant.", mech: ["gyrA / gyrB mutations (fluoroquinolone resistance)"], adverse: ["QT prolongation", "tendinopathy", "dysglycaemia", "CNS effects"], monitoring: "Baseline + periodic ECG (QTcF); electrolytes.", renal: "No major adjustment.", hepatic: "Caution.", preg: "Per DR-TB regimen risk/benefit.", lact: "Caution.", contra: ["QT-prolongation risk"], cost: "₹", india: "NTEP (programmatic)", note: "BPaLM (full course) & longer regimen; additive QT with Bdq/Cfz - monitor QTcF. Space cation/Mg products by 2 h." },
+    clofazimine: { label: "Clofazimine (Cfz)", aware: "Watch", cls: "Riminophenazine (DR-TB Group B)", spectrum: "DR-TB - shorter & longer oral regimens.", mech: [], adverse: ["skin/conjunctival pigmentation", "QT prolongation", "GI upset / ichthyosis"], monitoring: "Baseline + periodic ECG (QTcF).", renal: "No major adjustment.", hepatic: "Caution.", preg: "Per regimen risk/benefit.", lact: "Caution.", contra: ["Significant QT prolongation"], cost: "₹₹", india: "NTEP (programmatic)", note: "Component of the 9-11-mo shorter & 18-20-mo longer oral regimens; additive QT." },
+    cycloserine: { label: "Cycloserine / Terizidone (Cs)", aware: "Watch", cls: "DR-TB Group B", spectrum: "DR-TB - longer oral M/XDR regimen.", mech: [], adverse: ["psychiatric effects (depression, psychosis, suicidality)", "seizures"], monitoring: "Baseline + ongoing psychiatric/neurological assessment; give with pyridoxine.", renal: "Reduce in renal impairment (renally cleared).", hepatic: "No major adjustment.", preg: "Per regimen risk/benefit.", lact: "Caution.", contra: ["Active psychosis / seizure disorder (relative)", "Heavy alcohol use"], cost: "₹₹", india: "NTEP (programmatic)", note: "Longer oral regimen; monitor mental state; additive CNS toxicity with isoniazid/alcohol." },
+    delamanid: { label: "Delamanid (Dlm)", aware: "Reserve", cls: "Anti-TB (nitro-dihydro-imidazooxazole)", spectrum: "DR-TB - longer oral; paediatric alternative where Bdq restricted.", mech: [], adverse: ["QT prolongation"], monitoring: "Baseline + periodic ECG (QTcF); albumin, electrolytes.", renal: "Caution.", hepatic: "Caution.", preg: "Per regimen risk/benefit.", lact: "Caution.", contra: ["Significant QT prolongation", "Albumin < 2.8 g/dL (caution)"], cost: "₹₹₹", india: "NTEP (programmatic)", note: "Longer oral regimen; 100 mg BD (≥12 y), 50 mg BD (6-11 y); additive QT." },
+    ethionamide: { label: "Ethionamide / Prothionamide (Eto)", aware: "Watch", cls: "DR-TB Group C", spectrum: "DR-TB - alternative to linezolid in the shorter regimen; longer regimen.", mech: [], adverse: ["GI intolerance", "hypothyroidism", "hepatotoxicity"], monitoring: "Baseline + periodic LFT, TSH.", renal: "Caution.", hepatic: "Hepatotoxic - caution.", preg: "Avoid (teratogenic) - prefer the Lzd-containing shorter regimen in pregnancy.", lact: "Caution.", contra: ["Significant hepatic dysfunction"], cost: "₹", india: "NTEP (programmatic)", note: "Alternative to linezolid in the shorter regimen; monitor TSH (hypothyroidism)." }
   };
   var _aspTbRow = {
-    bpalm: { drugKey: "bedaquiline", regimen: "BPaLM — Bedaquiline + Pretomanid + Linezolid + Moxifloxacin", dose: "Bdq 400 mg OD ×2 wk → 200 mg 3×/wk; Pa 200 mg OD; Lzd 600 mg OD; Mfx 400 mg OD (+ pyridoxine)", route: "Oral (with food)", freq: "once daily (Bdq per schedule)", duration: "26 weeks (extendable to 39)", soR: "Strong — first choice (MDR/RR, ≥14 y)", evi: "NTEP §3.3 / WHO", src: "NTEP §3.3", rankLabel: "MDR/RR-TB · first choice", note: "First choice for MDR/RR-TB in persons ≥14 y, regardless of fluoroquinolone resistance or HIV. Baseline QTcF ≤450 ms (M)/≤470 ms (F). Not for age <14, Bdq/Lzd/Pa resistance, AST/ALT >3×ULN, or severe extrapulmonary TB (CNS/skeletal/disseminated). Full DST-driven selection in the Tuberculosis treatment pathway workspace." },
-    shorter: { drugKey: "levofloxacin", regimen: "9–11-mo shorter oral — Bedaquiline + Levofloxacin + Clofazimine + Linezolid + Pyrazinamide + Ethambutol + high-dose Isoniazid (± Ethionamide)", dose: "Weight-band per NTEP Tables 3.5–3.6", route: "Oral", freq: "daily (Bdq per schedule)", duration: "9–11 months", soR: "Strong (FQ-sensitive RR-TB)", evi: "NTEP §3.4 / WHO", src: "NTEP §3.4", rankLabel: "MDR/RR-TB · FQ-sensitive", note: "For RR-TB with fluoroquinolone susceptibility and no severe extrapulmonary / extensive disease. In ≥14 y BPaLM is preferred; the linezolid-containing version may be used in pregnancy with monitoring." },
-    longer: { drugKey: "bedaquiline", regimen: "18–20-mo longer oral (M/XDR) — Bedaquiline + Levofloxacin/Moxifloxacin + Linezolid + Clofazimine + Cycloserine (± Delamanid / Amikacin / Ethionamide / PAS / carbapenem + clavulanate per DST)", dose: "Individualised weight-band per NTEP Table 3.7 (Groups A/B/C)", route: "Oral (± injectable / carbapenem)", freq: "daily", duration: "18–20 months (Bdq ≥6 mo)", soR: "Strong (pre-XDR / XDR / severe)", evi: "NTEP §3.5 / WHO", src: "NTEP §3.5", rankLabel: "pre-XDR / XDR / severe TB", note: "For patients ineligible for BPaLM or the shorter regimen, pre-XDR/XDR, or severe extrapulmonary disease (CNS, disseminated/miliary, skeletal). Individualised per DST from Groups A/B/C — specialist / N-DR-TBC decision." },
-    hmono: { drugKey: "levofloxacin", regimen: "Isoniazid mono/poly-resistant (6 Lfx-R-E-Z) — Levofloxacin + Rifampicin + Ethambutol + Pyrazinamide", dose: "Weight-band per NTEP Table 3.8", route: "Oral", freq: "once daily", duration: "6 months (extend to 9 for extensive / extrapulmonary disease)", soR: "Strong (H-resistant, R-susceptible)", evi: "NTEP §3.6", src: "NTEP §3.6", rankLabel: "H-resistant · R-susceptible", note: "For isoniazid mono/poly-resistance with rifampicin SUSCEPTIBLE. If Lfx or Z cannot be used, substitute per NTEP Table 3.9." }
+    bpalm: { drugKey: "bedaquiline", regimen: "BPaLM - Bedaquiline + Pretomanid + Linezolid + Moxifloxacin", dose: "Bdq 400 mg OD ×2 wk → 200 mg 3×/wk; Pa 200 mg OD; Lzd 600 mg OD; Mfx 400 mg OD (+ pyridoxine)", route: "Oral (with food)", freq: "once daily (Bdq per schedule)", duration: "26 weeks (extendable to 39)", soR: "Strong - first choice (MDR/RR, ≥14 y)", evi: "NTEP §3.3 / WHO", src: "NTEP §3.3", rankLabel: "MDR/RR-TB · first choice", note: "First choice for MDR/RR-TB in persons ≥14 y, regardless of fluoroquinolone resistance or HIV. Baseline QTcF ≤450 ms (M)/≤470 ms (F). Not for age <14, Bdq/Lzd/Pa resistance, AST/ALT >3×ULN, or severe extrapulmonary TB (CNS/skeletal/disseminated). Full DST-driven selection in the Tuberculosis treatment pathway workspace." },
+    shorter: { drugKey: "levofloxacin", regimen: "9-11-mo shorter oral - Bedaquiline + Levofloxacin + Clofazimine + Linezolid + Pyrazinamide + Ethambutol + high-dose Isoniazid (± Ethionamide)", dose: "Weight-band per NTEP Tables 3.5-3.6", route: "Oral", freq: "daily (Bdq per schedule)", duration: "9-11 months", soR: "Strong (FQ-sensitive RR-TB)", evi: "NTEP §3.4 / WHO", src: "NTEP §3.4", rankLabel: "MDR/RR-TB · FQ-sensitive", note: "For RR-TB with fluoroquinolone susceptibility and no severe extrapulmonary / extensive disease. In ≥14 y BPaLM is preferred; the linezolid-containing version may be used in pregnancy with monitoring." },
+    longer: { drugKey: "bedaquiline", regimen: "18-20-mo longer oral (M/XDR) - Bedaquiline + Levofloxacin/Moxifloxacin + Linezolid + Clofazimine + Cycloserine (± Delamanid / Amikacin / Ethionamide / PAS / carbapenem + clavulanate per DST)", dose: "Individualised weight-band per NTEP Table 3.7 (Groups A/B/C)", route: "Oral (± injectable / carbapenem)", freq: "daily", duration: "18-20 months (Bdq ≥6 mo)", soR: "Strong (pre-XDR / XDR / severe)", evi: "NTEP §3.5 / WHO", src: "NTEP §3.5", rankLabel: "pre-XDR / XDR / severe TB", note: "For patients ineligible for BPaLM or the shorter regimen, pre-XDR/XDR, or severe extrapulmonary disease (CNS, disseminated/miliary, skeletal). Individualised per DST from Groups A/B/C - specialist / N-DR-TBC decision." },
+    hmono: { drugKey: "levofloxacin", regimen: "Isoniazid mono/poly-resistant (6 Lfx-R-E-Z) - Levofloxacin + Rifampicin + Ethambutol + Pyrazinamide", dose: "Weight-band per NTEP Table 3.8", route: "Oral", freq: "once daily", duration: "6 months (extend to 9 for extensive / extrapulmonary disease)", soR: "Strong (H-resistant, R-susceptible)", evi: "NTEP §3.6", src: "NTEP §3.6", rankLabel: "H-resistant · R-susceptible", note: "For isoniazid mono/poly-resistance with rifampicin SUSCEPTIBLE. If Lfx or Z cannot be used, substitute per NTEP Table 3.9." }
   };
-  function _aspCnsLonger() { var r = {}; for (var k in _aspTbRow.longer) r[k] = _aspTbRow.longer[k]; r.note = "CNS / severe extrapulmonary DR-TB uses the longer oral regimen — BPaLM and the 9–11-mo shorter regimen are NOT used in CNS TB. Prefer CNS-penetrating agents (linezolid, high-dose fluoroquinolone, cycloserine); avoid poorly-penetrating drugs. Continue adjunctive corticosteroids. Specialist / N-DR-TBC decision, individualised per DST."; r.rankLabel = "CNS DR-TB (longer oral)"; return r; }
-  function _aspDissLonger() { var r = {}; for (var k in _aspTbRow.longer) r[k] = _aspTbRow.longer[k]; r.note = "Disseminated / miliary DR-TB is severe extrapulmonary disease — BPaLM and the 9–11-mo shorter regimen are NOT used; use the longer oral regimen, individualised per DST (Groups A/B/C). Extend duration for CNS/skeletal involvement. Specialist / N-DR-TBC decision."; r.rankLabel = "severe/disseminated DR-TB (longer oral)"; return r; }
+  function _aspCnsLonger() { var r = {}; for (var k in _aspTbRow.longer) r[k] = _aspTbRow.longer[k]; r.note = "CNS / severe extrapulmonary DR-TB uses the longer oral regimen - BPaLM and the 9-11-mo shorter regimen are NOT used in CNS TB. Prefer CNS-penetrating agents (linezolid, high-dose fluoroquinolone, cycloserine); avoid poorly-penetrating drugs. Continue adjunctive corticosteroids. Specialist / N-DR-TBC decision, individualised per DST."; r.rankLabel = "CNS DR-TB (longer oral)"; return r; }
+  function _aspDissLonger() { var r = {}; for (var k in _aspTbRow.longer) r[k] = _aspTbRow.longer[k]; r.note = "Disseminated / miliary DR-TB is severe extrapulmonary disease - BPaLM and the 9-11-mo shorter regimen are NOT used; use the longer oral regimen, individualised per DST (Groups A/B/C). Extend duration for CNS/skeletal involvement. Specialist / N-DR-TBC decision."; r.rankLabel = "severe/disseminated DR-TB (longer oral)"; return r; }
   var SMD_ASP_TB_ALTS = {
     PULMONARY_TB: ["bpalm", "shorter", "longer", "hmono"],
     CNS_TB: ["_cns", "hmono"],
@@ -5401,7 +5401,7 @@
   // so window.SMD_AUTH stays null and every sign-in throws "No Firebase App
   // '[DEFAULT]' has been created". Verified headless: calling SMD_bootFirebase()
   // directly initializes the app (firebase.apps.length === 1, SMD_AUTH set) and
-  // signInWithPopup then returns auth/popup-blocked (NOT unauthorized-domain) —
+  // signInWithPopup then returns auth/popup-blocked (NOT unauthorized-domain) -
   // i.e. the domain is authorized and the only defect is that boot never runs.
   // Fix: once the SDK is present, call the (working) boot ourselves so SMD_AUTH
   // is ready BEFORE the user clicks; the button's fast path then opens the popup
@@ -5417,7 +5417,7 @@
         window.SMD_bootFirebase();
         return !!window.SMD_AUTH;
       }
-      // SDK not loaded yet — kick the lazy loader once so window.firebase appears.
+      // SDK not loaded yet - kick the lazy loader once so window.firebase appears.
       if (window.SMD_loadFirebase && !window.__smdFbLoadKicked) {
         window.__smdFbLoadKicked = true;
         try { window.SMD_loadFirebase(function () { try { if (window.SMD_bootFirebase) window.SMD_bootFirebase(); } catch (e) {} }); } catch (e) {}

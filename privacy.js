@@ -1,19 +1,19 @@
-/* StewardMD — Privacy & Data Controls (consent gate + data-subject controls).
+/* StewardMD - Privacy & Data Controls (consent gate + data-subject controls).
  * ---------------------------------------------------------------------------
  * Layer over the minified app.js via the same window.SMD_* seam used elsewhere.
  * NOTHING here changes the clinical engine, scoring, or the AI recommendation.
  *
  * PR-A scope (this file, grows in later PRs):
- *   • SMD_CONSENT — record/read/update a per-user consent record.
+ *   • SMD_CONSENT - record/read/update a per-user consent record.
  *       signed-in  → Firestore  users/{uid}/consent/current   (rules-enforced)
  *       guest      → localStorage smd_consent_guest            (best-effort)
- *   • Consent gate — a blocking modal with 2 required + 1 optional checkbox,
+ *   • Consent gate - a blocking modal with 2 required + 1 optional checkbox,
  *     shown before a user can use AI analysis / upload patient info. Continue
  *     is disabled until BOTH required boxes are ticked. Links to the Privacy
  *     Notice (#privacyModal). Reversible via localStorage smd_privacy_gate=0.
  *   • Defense-in-depth: SMD_AI.* is guarded so AI calls await consent.
  *
- * Versions/contacts come from SMD_PRIVACY (privacy-config.js) — never hardcoded.
+ * Versions/contacts come from SMD_PRIVACY (privacy-config.js) - never hardcoded.
  */
 (function () {
   "use strict";
@@ -97,12 +97,12 @@
     _gateOpen = false;
   }
 
-  // UNIFIED SINGLE GATE: there is ONE consent screen — the entry splash
+  // UNIFIED SINGLE GATE: there is ONE consent screen - the entry splash
   // (#consentOverlay in index.html), a comprehensive single-tick acknowledgment.
   // This module NEVER renders its own second card anymore; openGate simply shows
   // that splash. Acceptance is handled by the #splashContinueBtn hook in init()
   // (records consent + resolves any pending ensureConsent waiters). The optional
-  // de-identified-data consent is NOT on the gate — it's an opt-in in Settings ›
+  // de-identified-data consent is NOT on the gate - it's an opt-in in Settings ›
   // Privacy & Data Controls (default off), so consent stays specific + withdrawable.
   function openGate() {
     if (_gateOpen) return;
@@ -119,7 +119,7 @@
     resolveAll(true);
   }
 
-  // Promise<boolean> — resolves true when consent is current (showing the gate
+  // Promise<boolean> - resolves true when consent is current (showing the gate
   // if needed). If the gate is off (flag) we treat as satisfied (no block).
   function ensureConsent() {
     if (!P.gateOn()) return Promise.resolve(true);
@@ -153,7 +153,7 @@
       var c = document.getElementById("pnContact"); if (c) { c.textContent = CFG.contactEmail; c.setAttribute("href", "mailto:" + CFG.contactEmail); }
       var ul = document.getElementById("pnProviders");
       if (ul && Array.isArray(CFG.serviceProviders) && CFG.serviceProviders.length) {
-        ul.innerHTML = CFG.serviceProviders.map(function (p) { return "<li><strong>" + esc(p.name) + "</strong> — " + esc(p.role) + "</li>"; }).join("");
+        ul.innerHTML = CFG.serviceProviders.map(function (p) { return "<li><strong>" + esc(p.name) + "</strong> - " + esc(p.role) + "</li>"; }).join("");
       }
     } catch (e) {}
   }

@@ -1,9 +1,9 @@
-/* StewardMD — Knowledge Units (KU) client.
+/* StewardMD - Knowledge Units (KU) client.
  *
  * Batches "learning/usage" events (reading content, cases, calculators, MaiK) and
  * posts them to the server-authoritative ledger (/api/ku/award) with the Firebase
  * ID token so the server can verify identity. Balance is cached in localStorage for
- * instant display, but the SERVER is the source of truth — local edits never grant
+ * instant display, but the SERVER is the source of truth - local edits never grant
  * redeemable KU. Earns ONLY when signed in (guests see "sign in to earn" in the UI).
  *
  * window.SMD_KU = { emit(type,refId), balance(), summary()->Promise, onChange(fn), signedIn() }

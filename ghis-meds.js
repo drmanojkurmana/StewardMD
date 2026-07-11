@@ -1,14 +1,14 @@
-/* StewardMD — GHIS Medication History import. Exposes window.GHISMEDS.
+/* StewardMD - GHIS Medication History import. Exposes window.GHISMEDS.
    -------------------------------------------------------------------------
    The deterministic PARSING lives here (testable via CDP): it takes PHI-stripped
    medication rows from /api/ghis/medications and turns them into review
-   candidates — splitting combination products, mapping to generics via
+   candidates - splitting combination products, mapping to generics via
    MEDLIST.parseEntry/resolveGeneric, recognising formulation, and bucketing
    consumables (excluded) and low-confidence rows (needs review) so nothing is
    ever silently added. The clinician REVIEWS and CONFIRMS before any med enters
    the list; the interaction check runs only afterwards.
 
-   PRIVACY: patient-scoped. The draft holds only medication fields — never MRN /
+   PRIVACY: patient-scoped. The draft holds only medication fields - never MRN /
    UHID / name / bed / clinician. Raw GHIS product codes are kept for internal
    audit only and are NEVER rendered in the review DOM. The draft is cleared on
    logout / patient-switch (GHIS.clearSelectedPatient -> GHISMEDS.clearDraft). */
@@ -59,9 +59,9 @@
     if (!raw) return [];
     // Strip a leading form prefix so it doesn't get glued to the first ingredient.
     // Split on ingredient separators: "&", "+", "plus", " with ", or a "/" that is a
-    // real separator — NOT a "/" inside a strength ratio like "80/12.5". A ratio "/" is
+    // real separator - NOT a "/" inside a strength ratio like "80/12.5". A ratio "/" is
     // followed by a digit; an ingredient "/" (e.g. "amoxicillin/clavulanate") is not.
-    // NB: no regex look-behind here — it throws a SyntaxError on iOS < 16.4 WebViews
+    // NB: no regex look-behind here - it throws a SyntaxError on iOS < 16.4 WebViews
     // (deployment target is iOS 15), which would abort this module entirely. The
     // negative look-AHEAD alone keeps ratios intact and is universally supported.
     var parts = raw.split(/\s*(?:&|\+|\bplus\b|\swith\s)\s*|\s*\/(?![0-9])\s*/i)
@@ -105,7 +105,7 @@
       ingredientText: String(text || ""),          // this single ingredient fragment
       isConsumable: false,
       needsReview: false,
-      // Internal audit ONLY — never rendered in the review DOM.
+      // Internal audit ONLY - never rendered in the review DOM.
       ghisMeta: { productCode: String(row.productCode || ""), dept: String(row.dept || ""), dateTime: String(row.dateTime || ""), duration: String(row.duration || "") }
     });
     return cand;
@@ -179,7 +179,7 @@
 
   // ── duplicate / merge detection against the existing MEDLIST ────────────────
   // Detects: exact-generic duplicates, same-drug-different-dose, and combination
-  // overlap. Returns [{ candidate, existing, kind }] — the CALLER decides how to
+  // overlap. Returns [{ candidate, existing, kind }] - the CALLER decides how to
   // resolve (merge / keep both / replace). A manual med is NEVER auto-deleted.
   function detectDuplicates(candidates, existingList) {
     candidates = candidates || []; existingList = existingList || [];
@@ -202,17 +202,17 @@
   // ── OPTIONAL low-confidence AI mapping (deterministic-first, PROD-ONLY) ─────
   // The mapping above is fully deterministic. This seam runs AFTER it, ONLY on
   // rows that stayed low-confidence/unmapped, and ONLY sends DE-IDENTIFIED drug
-  // text (a single medication string — no patient identifiers ever pass through).
+  // text (a single medication string - no patient identifiers ever pass through).
   // It is a no-op unless a prod AI helper (window.SMD_AI.mapDrug) is present, and
   // is stub-able via GHISMEDS.aiMapLowConfidence in tests. It never upgrades a row
-  // to a generic the deterministic layer would reject silently — the clinician
+  // to a generic the deterministic layer would reject silently - the clinician
   // still confirms every AI-suggested mapping in the review screen (confidence
   // capped at "medium").
   function aiMapLowConfidence(candidates) {
     var lows = (candidates || []).filter(function (c) { return !c.isConsumable && (!c.generic || c.confidence === "low"); });
     if (!lows.length || !(window.SMD_AI && window.SMD_AI.mapDrug)) return Promise.resolve(candidates);
     return Promise.all(lows.map(function (c) {
-      // DE-IDENTIFIED: only the ingredient drug text is sent — nothing patient-scoped.
+      // DE-IDENTIFIED: only the ingredient drug text is sent - nothing patient-scoped.
       var text = String(c.ingredientText || c.name || c.originalText || "");
       return Promise.resolve().then(function () { return window.SMD_AI.mapDrug(text); }).then(function (g) {
         if (g && typeof g === "string" && g.trim()) {
@@ -259,7 +259,7 @@
     noPatient: "Select a Ward Sync patient first.",
     empty: "No medication history available for this patient.",
     failed: "Could not fetch medication history. Try again or add medicines manually.",
-    expired: "GHIS session expired — reconnect Ward Sync."
+    expired: "GHIS session expired - reconnect Ward Sync."
   };
   function errMessage(code) {
     if (code === "session_expired") return MSG.expired;
@@ -344,7 +344,7 @@
 
     var header = el("div", { cls: "ml-header" });
     header.appendChild(el("h2", { cls: "ml-title", text: "Imported from GHIS Medication History" }));
-    // Non-sensitive patient context — display name only, never MRN/UHID/raw id.
+    // Non-sensitive patient context - display name only, never MRN/UHID/raw id.
     if (_draft.patientName) header.appendChild(el("p", { cls: "ml-subtitle", text: "For " + _draft.patientName }));
     header.appendChild(el("div", { cls: "gi-summary",
       text: p.recognizedCount + " recognized · " + p.combinationsExpanded + " combination products expanded · "
@@ -371,8 +371,8 @@
         top.appendChild(cb);
       }
       var tw = el("div", { cls: "gi-titlewrap" });
-      tw.appendChild(el("div", { cls: "gi-mapped", text: c.generic || "Not mapped — review" }));
-      // Original GHIS drug text (verbatim) — never the product code.
+      tw.appendChild(el("div", { cls: "gi-mapped", text: c.generic || "Not mapped - review" }));
+      // Original GHIS drug text (verbatim) - never the product code.
       tw.appendChild(el("div", { cls: "gi-orig", text: c.originalText || c.ingredientText || "" }));
       top.appendChild(tw);
       var conf = el("span", { cls: "ml-conf-badge ml-conf-" + (c.confidence || "low"), text: (c.confidence || "low") });
@@ -388,8 +388,8 @@
       var dup = (_draft.dupInfo || []).find(function (d) { return d.candidate === c; });
       if (dup) {
         var dupText = dup.kind === "different-dose"
-          ? "Already in list at a different dose — choose merge, keep both, or replace."
-          : "Already in your list — choose merge, keep both, or replace.";
+          ? "Already in list at a different dose - choose merge, keep both, or replace."
+          : "Already in your list - choose merge, keep both, or replace.";
         card.appendChild(el("div", { cls: "gi-dup", text: dupText }));
         var mrow = el("div", { cls: "gi-merge-row" });
         ["Merge", "Keep both", "Replace"].forEach(function (lbl, i) {
@@ -465,7 +465,7 @@
       if (c.isConsumable) return;                 // never import a consumable
       if (mode === "all" && (c.needsReview || !c.generic)) return; // "all" = recognized only
       // Merge resolution: default keep-both. "replace" removes the matched existing med
-      // (an explicit clinician choice — not silent). "merge"/keep-both both add the GHIS med.
+      // (an explicit clinician choice - not silent). "merge"/keep-both both add the GHIS med.
       var dup = (_draft.dupInfo || []).find(function (d) { return d.candidate === c; });
       if (dup && c._mergeMode === "replace" && dup.existing && dup.existing.id) {
         try { window.MEDLIST.remove(dup.existing.id); } catch (e) {}
