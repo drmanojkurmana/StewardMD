@@ -2694,7 +2694,7 @@
   // Self-contained reference panel for ANY disease (whether or not it is in the
   // current differential) - reuses the #dxMgmt panel. Shows the Harrison reference
   // and an action to open the full stewardship/management page.
-  function openDiseaseRef(id) {
+  function openDiseaseRef(id, opts) {
     try { if (window.SMD_KU) SMD_KU.emit("read", id); } catch (e) {}   // KU: reading clinical content
     var syn = (window.SYNDROMES || {})[id];
     var ni = null; (DDX_NI || []).forEach(function (d) { if (d.id === id) ni = d; });
@@ -2729,7 +2729,17 @@
         '<div class="dx-mgmt-disc">⚠️ Decision-support only - reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
       '</div>';
     el.classList.add("on"); el.scrollTop = 0;
-    var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () { el.classList.remove("on"); });
+    var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () {
+      el.classList.remove("on");
+      // Opened standalone from the Knowledge Library / global search? The reasoning
+      // workspace was turned on ONLY to host this reference panel — so Back must exit
+      // it and return the user to the library they were browsing, NOT drop them into
+      // the (empty) clinical-reasoning view underneath.
+      if (opts && opts.standalone) {
+        try { close(); } catch (e) {}
+        try { if (window.SB && SB.openRef) SB.openRef("syndromes"); } catch (e) {}
+      }
+    });
     var sel = el.querySelector(".dx-select[data-sel]");
     if (sel) sel.addEventListener("click", function () {
       el.classList.remove("on");
@@ -3440,7 +3450,7 @@
     _nextQuestions: nextQuestions,
     // open ANY disease's reference panel from outside the reasoning workspace
     // (global search, knowledge library): open the panel, then show the ref.
-    openRef: function (id) { try { open(); } catch (e) {} setTimeout(function () { try { openDiseaseRef(id); } catch (e) {} }, 90); },
+    openRef: function (id) { var wasOpen = !!(root && root.classList.contains("on")); try { open(); } catch (e) {} setTimeout(function () { try { openDiseaseRef(id, { standalone: !wasOpen }); } catch (e) {} }, 90); },
     _assess: function () {
       var d = differential(), g = gate(d), info = GATEINFO[g.cls];
       return { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name,
