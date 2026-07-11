@@ -890,7 +890,6 @@
         '<button class="rds-icon-btn" data-act="search" aria-label="Search">' + ric("search") + '</button>' +
         '<button class="rds-icon-btn" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + ric("dark_mode") + '</button>' +
         '<button class="rds-icon-btn rnav-bell v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + ric("notifications") + '</button>' +
-        '<button class="rnav-avatar" data-act="more" aria-label="Account">' + ric("person") + '</button>' +
       '</header>' +
       '<main class="v3-main rnav-main"><div class="rnav-stack">' +
         '<div class="rnav-greet"><div class="rnav-eyebrow">' + dateV4() + '</div><div class="rnav-hi">' + greetLineV4() + '</div></div>' +
