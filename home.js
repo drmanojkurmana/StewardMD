@@ -69,6 +69,30 @@
         cr.parentNode.insertBefore(ws, cr.nextSibling); // Ward Sync after Clinical Reasoning
       }
 
+      // 1b) De-clutter the long flat menu: drop redundant per-category calculator shortcuts
+      //     (Browse all calculators covers them) and group the rest under section headers.
+      (function () {
+        if (!document.getElementById("smdSbGrpCss")) {
+          var st = document.createElement("style"); st.id = "smdSbGrpCss";
+          st.textContent = "#sbMenu .sb-grouphdr{font:700 10.5px/1 var(--sans,'IBM Plex Sans');letter-spacing:.09em;text-transform:uppercase;color:var(--slate-soft,#7690a6);margin:16px 10px 6px}";
+          document.head.appendChild(st);
+        }
+        var all = Array.prototype.slice.call(menu.querySelectorAll(".sb-main-link"));
+        var find = function (t) { return all.filter(function (b) { return b.textContent.replace(/\s+/g, " ").indexOf(t) >= 0; })[0]; };
+        ["Cardiovascular", "Critical care", "Renal & electrolytes", "Neurology & stroke"].forEach(function (t) { var b = find(t); if (b) b.style.display = "none"; });
+        function hdr(beforeTxt, title) {
+          var b = find(beforeTxt); if (!b || !b.parentNode) return;
+          var prev = b.previousElementSibling;
+          if (prev && prev.classList && prev.classList.contains("sb-grouphdr")) return;   // idempotent
+          var h = document.createElement("div"); h.className = "sb-grouphdr"; h.textContent = title;
+          b.parentNode.insertBefore(h, b);
+        }
+        hdr("Browse all calculators", "Calculators");
+        hdr("Infusion & Vasopressor", "ICU & critical care");
+        hdr("Browse syndromes", "References");
+        hdr("Features & How-to", "Settings & help");
+      })();
+
       // 2) Advanced controls INTO Settings (#sbsub_set) as collapsible subgroups
       var setBody = document.getElementById("sbsub_set");
       if (setBody && !setBody.querySelector("[data-smd-adv]")) {
