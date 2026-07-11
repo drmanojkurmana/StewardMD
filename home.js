@@ -1812,13 +1812,15 @@
         .then(function (pkg) {
           if (pkg && question) pkg.question = question;
           var tm = (pkg && pkg.topicMatch) || null;
-          // NONE tier: topic genuinely absent from the KB → do NOT describe a lexically-near but
-          // different condition (e.g. paraquat vs paracetamol). Say so plainly; offer opt-in web.
+          // NONE tier: topic genuinely absent from the KB. MaiK answers every question, so
+          // instead of dead-ending we AUTO-RUN web research (Google-grounded, clearly labelled
+          // "not StewardMD-verified") — no tap required. We still don't let the KB model describe
+          // a lexically-near but different condition; the web tier researches the ACTUAL topic.
           if (tm && tm.matched === false && tm.mode !== "assume") {
             var tp = maikEscH(tm.topic || question);
-            var near = tm.nearest ? (' The closest StewardMD entry was <b>' + maikEscH(tm.nearest) + '</b>, which is a different condition.') : '';
-            think.innerHTML = '<div class="maik-welcome">StewardMD’s knowledge base doesn’t have a specific entry for <b>' + tp + '</b>, so I can’t answer from it without risking describing a different condition.' + near + '</div>';
-            think.appendChild(maikWebChipEl(question)); try { scroll(); } catch (e) {}
+            think.innerHTML = '<div class="maik-welcome">Not in StewardMD’s knowledge base — researching the web for <b>' + tp + '</b>…</div>';
+            try { maikRunWeb(think, question); } catch (e) { think.appendChild(maikWebChipEl(question)); }
+            try { scroll(); } catch (e) {}
             return;
           }
           if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4);
