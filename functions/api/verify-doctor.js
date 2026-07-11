@@ -213,6 +213,21 @@ export async function onRequest(context) {
       return json({ ok: true, current: env.GEMINI_MODEL || "(unset)", models });
     } catch (e) { return json({ error: String((e && e.message) || e) }); }
   }
+  // GET ?debug=test&model=X → try a tiny generateContent with our exact config (temporary).
+  if (request.method === "GET" && new URL(request.url).searchParams.get("debug") === "test") {
+    const model = new URL(request.url).searchParams.get("model") || "gemini-flash-latest";
+    try {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts: [{ text: 'Return strict JSON only: {"ok": true}' }] }],
+          generationConfig: { temperature: 0, maxOutputTokens: 256, responseMimeType: "application/json", thinkingConfig: { thinkingBudget: 0 } },
+        }),
+      });
+      const d = await r.json();
+      return json({ model, httpStatus: r.status, text: d?.candidates?.[0]?.content?.parts?.[0]?.text || "", error: d?.error || null });
+    } catch (e) { return json({ model, error: String((e && e.message) || e) }); }
+  }
 
   // GET → the caller's own verification status (for the account panel).
   if (request.method === "GET") {
