@@ -117,14 +117,33 @@ function nameAgrees(extracted, nmcName) {
   return inter >= Math.max(1, Math.ceil(Math.min(a.size, b.size) * 0.6));
 }
 async function nmcLookup(regNo) {
-  const res = await fetch(NMC_SEARCH, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "Referer": NMC_REFERER, "User-Agent": "Mozilla/5.0" },
-    body: JSON.stringify({ registrationNo: regNo }),
-  });
-  if (!res.ok) throw new Error("nmc_http_" + res.status);
-  const arr = await res.json();
-  return Array.isArray(arr) ? arr : [];
+  // Timeout so a hung NMC doesn't stall verification — fall back to the offline DB instead.
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 8000);
+  try {
+    const res = await fetch(NMC_SEARCH, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Referer": NMC_REFERER, "User-Agent": "Mozilla/5.0" },
+      body: JSON.stringify({ registrationNo: regNo }),
+      signal: ctrl.signal,
+    });
+    if (!res.ok) throw new Error("nmc_http_" + res.status);
+    const arr = await res.json();
+    return Array.isArray(arr) ? arr : [];
+  } finally { clearTimeout(t); }
+}
+
+// Offline fallback: the NMC register mirrored in Cloudflare D1 (binding: stewardmd_nmc).
+// Queried by reg-number "core" (digit group), returning rows shaped like the NMC API so the
+// same match logic applies. Returns null if D1 isn't bound (→ caller routes to manual review).
+async function d1Lookup(env, core) {
+  const db = env.stewardmd_nmc;
+  if (!db || !core) return null;
+  try {
+    const rs = await db.prepare("SELECT reg_no, name, council FROM doctors WHERE reg_core = ? LIMIT 25").bind(core).all();
+    const rows = (rs && rs.results) || [];
+    return rows.map((r) => ({ registrationNo: r.reg_no, firstName: r.name, smcName: r.council }));
+  } catch (e) { console.warn("[verify] d1 error:", String((e && e.message) || e)); return null; }
 }
 
 // ── Resend — manual-review email ──────────────────────────────────────────────
@@ -265,14 +284,24 @@ export async function onRequest(context) {
   if (ex.looksValid === false) return toManual("not_a_certificate");
   if (!ex.regNo) return toManual("no_reg_number_read");
 
-  let records; try { records = await nmcLookup(ex.regNo); } catch (e) { console.warn("[verify] nmc error", String(e)); return toManual("nmc_unreachable"); }
   const core = regCore(ex.regNo);
+  // Live NMC is primary. If it's unreachable/slow, fall back to the offline D1 mirror so
+  // verification still works fast when NMC is down.
+  let records, source = "nmc";
+  try {
+    records = await nmcLookup(ex.regNo);
+  } catch (e) {
+    console.warn("[verify] NMC unreachable → offline D1 fallback:", String((e && e.message) || e));
+    records = await d1Lookup(env, core);
+    source = "offline";
+    if (records === null) return toManual("nmc_unreachable");  // NMC down AND no offline DB
+  }
   const match = records.find(r =>
     (regCore(r.registrationNo) === core || String(r.registrationNo).includes(ex.regNo)) &&
     nameAgrees(ex.name, r.firstName)
   );
-  console.log("[verify] uid", uid, "nmc records:", records.length, "core:", core, "match:", match ? match.registrationNo + " / " + match.firstName : "NONE");
-  if (!match) return toManual("no_nmc_match");
+  console.log("[verify] uid", uid, "source:", source, "records:", records.length, "core:", core, "match:", match ? match.registrationNo + " / " + match.firstName : "NONE");
+  if (!match) return toManual(source === "offline" ? "no_offline_match" : "no_nmc_match");
 
   // 4. one reg no = one account (KV read-then-write; verification is rare)
   if (store) {
@@ -292,10 +321,10 @@ export async function onRequest(context) {
       uid, email, status: "verified", verified: true,
       regNo: match.registrationNo, name: match.firstName, council: match.smcName,
       dob: match.birthDateStr || "", university: match.university || "",
-      verifiedAt: new Date().toISOString(),
+      source, verifiedAt: new Date().toISOString(),
     })); } catch (e) {}
   }
-  console.log("[verify] uid", uid, "→ VERIFIED", match.registrationNo);
+  console.log("[verify] uid", uid, "→ VERIFIED", match.registrationNo, "(" + source + ")");
 
   // Confirmation email to the doctor (best-effort).
   try { await emailVerified(env, { email, name: match.firstName, regNo: match.registrationNo, council: match.smcName }); } catch (e) {}
