@@ -44,6 +44,8 @@ function firePush(context, item) {
   } catch (e) {}
 }
 
+import { ownerOK } from "../../_adminauth.js";
+
 function kv(env) { return env.UPDATES_KV || env.GHIS_KV || env.CASES_KV || null; }
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -166,10 +168,8 @@ export async function onRequest(context) {
     return json({ enabled: true, items });
   }
 
-  // Everything below is admin-only
-  const ok = adminOK(request, env);
-  if (ok === null) return json({ error: "admin-not-configured", detail: "set UPDATES_ADMIN_TOKEN" }, 503);
-  if (!ok) return json({ error: "unauthorised" }, 401);
+  // Everything below is admin-only (owner Google login OR legacy admin token)
+  if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
 
   try {
     if (method === "POST" && id === "sync") {

@@ -28,7 +28,7 @@ const ev = async (e) => { const r = await call("Runtime.evaluate", { expression:
 // run a calc by id with a synthetic value object; returns {err?, v?, i?}
 const calc = async (id, v) => { const r = await ev(`var c=(window.MEDCALC._calcs||[]).filter(function(x){return x.id==="${id}";})[0]; if(!c) return JSON.stringify({__err:"no-calc"}); return JSON.stringify(c.compute(${JSON.stringify(v)}));`); try { return JSON.parse(r); } catch { return {}; } };
 const isNum = (o) => o && typeof o.v === "number" && isFinite(o.v);
-const isErr = (o) => o && (o.err != null || o.v === "—");
+const isErr = (o) => o && (o.err != null || o.v === "—" || o.v === "-");
 
 try {
   let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }

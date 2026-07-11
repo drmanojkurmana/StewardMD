@@ -2694,7 +2694,7 @@
   // Self-contained reference panel for ANY disease (whether or not it is in the
   // current differential) — reuses the #dxMgmt panel. Shows the Harrison reference
   // and an action to open the full stewardship/management page.
-  function openDiseaseRef(id) {
+  function openDiseaseRef(id, opts) {
     try { if (window.SMD_KU) SMD_KU.emit("read", id); } catch (e) {}   // KU: reading clinical content
     var syn = (window.SYNDROMES || {})[id];
     var ni = null; (DDX_NI || []).forEach(function (d) { if (d.id === id) ni = d; });
@@ -2703,6 +2703,18 @@
     var system = (syn && syn.system) || (ni && ni.system) || (H && H.system) || "";
     var inf = !!syn || !!(H && H.class === "infective");
     var reason = (ni && ni.reason) || "";
+    // Curated management brief (DX_MGMT). Infective REFERENCE diseases (no classic SYNDROMES
+    // stewardship case) previously routed to a BLANK stewardship page — render their antimicrobial
+    // brief INLINE here instead, and drop the dead "stewardship" button.
+    var dm = (window.DX_MGMT || {})[id];
+    var refInf = inf && !syn;
+    var hasBrief = !!(dm && dm.tx && dm.tx.length);
+    var mgmtHtml = (refInf && hasBrief)
+      ? ('<div class="dx-mgmt-sec tx">💊 Management / Treatment</div><ol class="dx-mgmt-tx">' + dm.tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
+         + (dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '')
+         + (dm.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(dm.dispo) + '</p>' : '')
+         + (dm.src ? '<div class="dx-mgmt-src">Source: ' + esc(dm.src) + '</div>' : ''))
+      : "";
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">‹ Back</button></div>' +
@@ -2711,12 +2723,23 @@
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
+        mgmtHtml +
         (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
-        '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>' +
+        (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
         '<div class="dx-mgmt-disc">⚠️ Decision-support only — reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
       '</div>';
     el.classList.add("on"); el.scrollTop = 0;
-    var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () { el.classList.remove("on"); });
+    var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () {
+      el.classList.remove("on");
+      // Opened standalone from the Knowledge Library / global search? The reasoning
+      // workspace was turned on ONLY to host this reference panel — so Back must exit
+      // it and return the user to the library they were browsing, NOT drop them into
+      // the (empty) clinical-reasoning view underneath.
+      if (opts && opts.standalone) {
+        try { close(); } catch (e) {}
+        try { if (window.SB && SB.openRef) SB.openRef("syndromes"); } catch (e) {}
+      }
+    });
     var sel = el.querySelector(".dx-select[data-sel]");
     if (sel) sel.addEventListener("click", function () {
       el.classList.remove("on");
@@ -3427,7 +3450,7 @@
     _nextQuestions: nextQuestions,
     // open ANY disease's reference panel from outside the reasoning workspace
     // (global search, knowledge library): open the panel, then show the ref.
-    openRef: function (id) { try { open(); } catch (e) {} setTimeout(function () { try { openDiseaseRef(id); } catch (e) {} }, 90); },
+    openRef: function (id) { var wasOpen = !!(root && root.classList.contains("on")); try { open(); } catch (e) {} setTimeout(function () { try { openDiseaseRef(id, { standalone: !wasOpen }); } catch (e) {} }, 90); },
     _assess: function () {
       var d = differential(), g = gate(d), info = GATEINFO[g.cls];
       return { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name,
@@ -3688,7 +3711,21 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
-      return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) }); }).then(function (r) { return r.json(); }).then(function (j) { if (j && !j.sources) j.sources = pkg.sources; return j; }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" });
+      // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
+      // silently after the window so a fast follow-up never surfaces "usage limit reached".
+      function attempt(retried) {
+        return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: body }); }).then(function (r) {
+          if (r.status === 429) {
+            return r.json().catch(function () { return {}; }).then(function (j) {
+              if (j && j.reason === "rate" && !retried) return new Promise(function (res) { setTimeout(res, 3400); }).then(function () { return attempt(true); });
+              return { error: "quota", reason: (j && j.reason) || "rate" };
+            });
+          }
+          return r.json().then(function (j) { if (j && !j.sources) j.sources = pkg.sources; return j; });
+        });
+      }
+      return attempt(false).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // Phase 2 — STREAMING grounded explain (progressive tokens like UpToDate's live answer).
     // onDelta(accumulatedText) is called as tokens arrive. STRICTLY additive: any failure — server

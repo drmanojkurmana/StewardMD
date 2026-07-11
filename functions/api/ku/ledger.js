@@ -14,9 +14,9 @@ export const WEIGHTS = { read: 5, case: 15, calc: 3, maik: 2 };
 export const CAPS = { read: 100, case: 90, calc: 30, maik: 40 }; // KU/day per type
 export const STREAK_KU = 10;                                     // once per active day
 export const TIERS = [
-  { ku: 500, label: "10% off" },
-  { ku: 1500, label: "25% off" },
-  { ku: 4000, label: "40% off" }
+  { ku: 5000, label: "5% off" },
+  { ku: 15000, label: "10% off" },
+  { ku: 30000, label: "15% off" }
 ];
 
 // "YYYYMMDD" in UTC.

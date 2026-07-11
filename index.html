@@ -46,7 +46,7 @@
      asks for. It was never actually loaded, so it fell back to a different cursive on
      devices without it (e.g. iPhone). Load it so the credit renders as designed everywhere. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/redesign-system.css?v=gold317">
+<link rel="stylesheet" href="/redesign-system.css?v=gold336">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <script>
@@ -447,13 +447,11 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
         <button type="button" class="consent-x" id="consentClose" aria-label="Close">✕</button>
         <div class="splash-disclaimer-title" id="consentTitle">Before you continue</div>
         <div class="splash-disclaimer-body">
-          StewardMD is an <b>educational clinical reasoning aid</b>, built from guideline references for self-study and teaching discussion. It is <b>not a validated clinical decision support tool</b> and has not been clinically tested or peer-reviewed for direct patient care.
-          <br><br>
-          Drug &amp; medicine information is <b>AI-summarised from official labels</b> (FDA / EMA / SmPC / BNF / WHO). Always <b>verify doses against the primary source</b> before prescribing. It does <b>not replace clinical judgment</b>, local antibiograms, institutional protocols, or specialist input. The creator and contributors accept no liability for clinical decisions made using this tool.
+          StewardMD is an <b>educational clinical reasoning aid</b> — <b>not a validated decision-support tool</b>; drug data is <b>AI-summarised from official labels</b>, so <b>verify every dose against the primary source</b> and apply your own clinical judgment. No liability is accepted for clinical decisions.
         </div>
         <label class="splash-ack-row">
           <input type="checkbox" id="splashAckCheckbox">
-          <span>I am a <b>qualified, registered healthcare professional</b> using this within my scope of practice. I have read and agree to the <b>Disclaimer</b>, <b>Terms of Use</b> and <b>Privacy Policy</b>, and understand this is an educational aid with AI-summarised drug data — I will independently verify every recommendation and dose before clinical use.</span>
+          <span>I am a <b>qualified, registered healthcare professional</b> using this within my scope of practice. I have read and agree to the <b>Disclaimer</b>, <b>Terms of Use</b> and <b>Privacy Notice</b>, and understand this is an educational aid with AI-summarised drug data — I will independently verify every recommendation and dose before clinical use. I am <b>authorised to enter any patient information</b> I use and have obtained any consent required under applicable law and my institution’s policy.</span>
         </label>
         <div class="splash-ack-links">
           <button type="button" class="splash-foot-link" onclick="openModal('disclaimerModal')">Read Disclaimer</button> ·
@@ -542,7 +540,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
     </div>
     <div class="splash-name">Steward<span class="accent">MD</span></div>
     <div class="account-title" id="accountTitle">Sign up or sign in to continue</div>
-    <div class="account-subtitle" id="accountSubtitle">For registered doctors only. It's free — sign in with your Google account to continue.</div>
+    <div class="account-subtitle" id="accountSubtitle">It's free — use your Google account, or try guest access for 5 minutes.</div>
     <div class="account-expired-note" id="accountExpiredNote" style="display:none;">Your free 5-minute guest session has ended. Sign up or sign in with Google — it's free — to continue. Any details you entered have been cleared.</div>
 
     <div class="account-card">
@@ -552,7 +550,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
         Continue with Google
       </button>
 
-      <div id="guestBlock" style="display:none;">
+      <div id="guestBlock">
         <div class="account-or">or</div>
 
         <button class="account-guest-btn" id="guestBtn">
@@ -572,7 +570,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       </div>
     </div>
 
-    <div class="account-fineprint" id="accountFineprint">StewardMD is for registered medical practitioners. Sign in free with Google, then verify your medical registration once to unlock access.</div>
+    <div class="account-fineprint" id="accountFineprint">Guest access is limited to one 5-minute session. Sign up or sign in free with Google for uninterrupted access.</div>
 
     <div class="splash-foot" style="margin-top:24px;">
       © <span id="accountYear"></span> StewardMD · <strong>MaiKnowledge</strong> · Dr. Manoj Kumar Kurmana, MD
@@ -608,6 +606,14 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   .verify-status.error   { background: rgba(232,90,90,0.12);  color: #f4bcbc; }
   .verify-spinner { display:inline-block; width:14px; height:14px; border:2px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:verifySpin .7s linear infinite; vertical-align:-2px; margin-right:6px; }
   @keyframes verifySpin { to { transform: rotate(360deg); } }
+  .verify-regrow { margin-top:12px; }
+  .verify-reginput { width:100%; box-sizing:border-box; padding:11px 13px; border-radius:12px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.04); color:#f6f7f5; font-size:14px; }
+  .verify-reginput::placeholder { color:rgba(246,247,245,0.4); }
+  .verify-reginput:focus { outline:none; border-color:#34b7e8; }
+  .verify-reghint { margin-top:7px; font-size:11.5px; line-height:1.5; color:rgba(246,247,245,0.55); }
+  .verify-bar { height:6px; border-radius:6px; background:rgba(255,255,255,0.14); overflow:hidden; position:relative; }
+  .verify-bar > span { position:absolute; left:-40%; width:40%; height:100%; border-radius:6px; background:#34b7e8; animation:verifyBarSlide 1.1s ease-in-out infinite; }
+  @keyframes verifyBarSlide { 0% { left:-40%; } 100% { left:100%; } }
   .verify-account { width:100%; margin:6px 0 14px; border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:6px 14px; background:rgba(255,255,255,0.03); }
   .verify-acc-row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.07); font-size:13px; }
   .verify-acc-row:last-child { border-bottom:none; }
@@ -642,9 +648,13 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       <label class="verify-drop" id="verifyDrop">
         <input type="file" id="verifyFile" accept="image/png,image/jpeg,image/webp,application/pdf" hidden>
         <span id="verifyFileLabel">📄 Choose your registration certificate</span>
-        <span class="verify-drop-sub">JPG, PNG or PDF · from NMC / State Medical Council</span>
+        <span class="verify-drop-sub" id="verifyDropSub">JPG, PNG or PDF · from NMC / State Medical Council</span>
       </label>
-      <button class="account-google-btn" id="verifySubmit" disabled style="margin-top:14px;justify-content:center;">Verify &amp; continue</button>
+      <div class="verify-regrow">
+        <input type="text" id="verifyRegNo" class="verify-reginput" placeholder="Registration number (optional)" autocomplete="off" spellcheck="false">
+        <div class="verify-reghint">No clear certificate? Enter your NMC / State Medical Council <b>registration number</b> and upload any <b>photo ID</b> — we only read your name to match the register. Your ID is never stored.</div>
+      </div>
+      <button class="account-google-btn" id="verifySubmit" style="margin-top:14px;justify-content:center;">Choose certificate</button>
       <div class="verify-status" id="verifyStatus" role="status" aria-live="polite"></div>
     </div>
 
@@ -1295,76 +1305,77 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   </div>
 </div>
 
-<script src="/native-bridge.js?v=gold303" defer></script>
-<script src="/app.js?v=gold197" defer></script>
-<script src="/antibiogram-data.js?v=gold240" defer></script>
-<script src="/theme-sync.js?v=gold239" defer></script>
-<script src="/account.js?v=gold229" defer></script>
-<script src="/verify.js?v=gold2" defer></script>
-<script src="/prescription.js?v=gold321" defer></script>
-<script src="/ku.js?v=gold315" defer></script>
+<script src="/native-bridge.js?v=gold336" defer></script>
+<script src="/app.js?v=gold336" defer></script>
+<script src="/antibiogram-data.js?v=gold336" defer></script>
+<script src="/theme-sync.js?v=gold336" defer></script>
+<script src="/account.js?v=gold336" defer></script>
+<script src="/signout-fix.js?v=gold336" defer></script>
+<script src="/verify.js?v=gold336" defer></script>
+<script src="/prescription.js?v=gold336" defer></script>
+<script src="/ku.js?v=gold336" defer></script>
 <!-- Global toast shim: defines window.toast + window.SMD_toast (many modules call these but
      neither was ever defined, so their feedback was silently dropped). Loaded early; idempotent. -->
-<script src="/toast.js?v=gold316" defer></script>
-<script src="/native-auth.js?v=gold222" defer></script>
-<script src="/policy.js?v=gold240" defer></script>
-<script src="/features.js?v=gold88" defer></script>
-<script src="/calculators.js?v=gold286" defer></script>
-<script src="/drugs.js?v=gold88" defer></script>
-<script src="/interaction-rules.js?v=gold253" defer></script>
-<script defer src="/medlist.js?v=gold285"></script>
-<script defer src="/ghis-meds.js?v=gold164"></script>
+<script src="/toast.js?v=gold336" defer></script>
+<script src="/native-auth.js?v=gold336" defer></script>
+<script src="/policy.js?v=gold336" defer></script>
+<script src="/features.js?v=gold336" defer></script>
+<script src="/calculators.js?v=gold336" defer></script>
+<script src="/drugs.js?v=gold336" defer></script>
+<script src="/interaction-rules.js?v=gold336" defer></script>
+<script defer src="/medlist.js?v=gold336"></script>
+<script defer src="/ghis-meds.js?v=gold336"></script>
 <script defer src="/interactions.js"></script>
-<script src="/api.js?v=gold141" defer></script>
+<script src="/api.js?v=gold336" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
-<script src="/offline-db.js?v=gold239" defer></script>
-<script src="/offline-clinical.js?v=gold239" defer></script>
+<script src="/offline-db.js?v=gold336" defer></script>
+<script src="/offline-clinical.js?v=gold336" defer></script>
 <!-- KB data (KB_CORE/CLINICAL/ENRICHMENT/EXPANDED, ~4.8MB) is LAZY-loaded AFTER first paint
      so the branded loading splash appears fast. Reasoning uses closure fallbacks until it's
      ready; StewardRAG awaits window.SMD_KB_READY. -->
-<script>(function(){var KB=["/kb/dist/kb.core.js?v=gold146","/kb/dist/kb.clinical.js?v=gold202","/kb/dist/kb.enrichment.js?v=gold213","/kb/dist/kb.expanded.js?v=gold111"];window.SMD_KB_READY=new Promise(function(res){function load(i){if(i>=KB.length){try{window.dispatchEvent(new Event("smd-kb-ready"));}catch(e){}res(true);return;}var s=document.createElement("script");s.src=KB[i];s.onload=function(){load(i+1);};s.onerror=function(){load(i+1);};document.head.appendChild(s);}function start(){requestAnimationFrame(function(){requestAnimationFrame(function(){load(0);});});}if(document.readyState==="loading"){window.addEventListener("DOMContentLoaded",start);}else{start();}});})();</script>
-<script src="/dxmgmt.js?v=gold122" defer></script>
-<script src="/clinical-nlp.js?v=gold199" defer></script>
-<script src="/reasoning.js?v=gold271" defer></script>
+<script>(function(){var KB=["/kb/dist/kb.core.js?v=gold336","/kb/dist/kb.clinical.js?v=gold336","/kb/dist/kb.enrichment.js?v=gold336","/kb/dist/kb.expanded.js?v=gold336"];window.SMD_KB_READY=new Promise(function(res){function load(i){if(i>=KB.length){try{window.dispatchEvent(new Event("smd-kb-ready"));}catch(e){}res(true);return;}var s=document.createElement("script");s.src=KB[i];s.onload=function(){load(i+1);};s.onerror=function(){load(i+1);};document.head.appendChild(s);}function start(){requestAnimationFrame(function(){requestAnimationFrame(function(){load(0);});});}if(document.readyState==="loading"){window.addEventListener("DOMContentLoaded",start);}else{start();}});})();</script>
+<script src="/dxmgmt.js?v=gold336" defer></script>
+<script src="/clinical-nlp.js?v=gold336" defer></script>
+<script src="/reasoning.js?v=gold336" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
      smd_privacy_gate=0 (default ON). -->
-<script src="/privacy-config.js?v=gold319" defer></script>
-<script src="/privacy.js?v=gold319" defer></script>
+<script src="/privacy-config.js?v=gold336" defer></script>
+<script src="/privacy.js?v=gold336" defer></script>
 <!-- Image Engine chooser for ICU Snapshot (Private Device OCR vs AI Vision). Needs SMD_AI
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
-<script src="/image-engine.js?v=gold229" defer></script>
-<script src="/kb/ai/steward-ai.browser.js?v=gold199" defer></script>
-<script src="/electrolytes.js?v=gold229" defer></script>
-<script src="/caseshare.js?v=gold314" defer></script>
-<script src="/home.js?v=gold317" defer></script>
-<script src="/antibiogram.js?v=gold318" defer></script>
-<script src="/asp-region.js?v=gold241" defer></script>
-<script src="/swipe-back.js?v=gold243" defer></script>
-<script src="/workspaces.js?v=gold197" defer></script>
-<script src="/ws-surgery.js?v=gold190" defer></script>
-<script src="/ws-ent.js?v=gold190" defer></script>
-<script src="/ws-ophthalmology.js?v=gold190" defer></script>
-<script src="/ws-obstetrics_gynaecology.js?v=gold190" defer></script>
-<script src="/ws-urology.js?v=gold190" defer></script>
-<script src="/ws-dentistry_omfs.js?v=gold190" defer></script>
-<script src="/ws-paediatrics.js?v=gold190" defer></script>
-<!-- Clinical vocabulary registry (SMD_VOCAB) — deterministic offline finding autocomplete for the
+<script src="/image-engine.js?v=gold336" defer></script>
+<script src="/kb/ai/steward-ai.browser.js?v=gold336" defer></script>
+<script src="/electrolytes.js?v=gold336" defer></script>
+<script src="/caseshare.js?v=gold336" defer></script>
+<script src="/home.js?v=gold336" defer></script>
+<script src="/antibiogram.js?v=gold336" defer></script>
+<script src="/asp-region.js?v=gold336" defer></script>
+<script src="/swipe-back.js?v=gold336" defer></script>
+<script src="/workspaces.js?v=gold336" defer></script>
+<script src="/ws-surgery.js?v=gold336" defer></script>
+<script src="/ws-ent.js?v=gold336" defer></script>
+<script src="/ws-ophthalmology.js?v=gold336" defer></script>
+<script src="/ws-obstetrics_gynaecology.js?v=gold336" defer></script>
+<script src="/ws-urology.js?v=gold336" defer></script>
+<script src="/ws-dentistry_omfs.js?v=gold336" defer></script>
+<script src="/ws-paediatrics.js?v=gold336" defer></script>
+<!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
-<script src="/clinical-vocab.js?v=gold295" defer></script>
-<script src="/icu.js?v=gold297" defer></script>
+<script src="/clinical-vocab.js?v=gold336" defer></script>
+<script src="/icu.js?v=gold336" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
-<script src="/native-push.js?v=gold298" defer></script>
-<script src="/watch-lab.js?v=gold316" defer></script>
+<script src="/native-push.js?v=gold336" defer></script>
+<script src="/watch-lab.js?v=gold336" defer></script>
 <!-- Copy/Print augmentation for the frozen app.js infusion calc (WebView-safe copy + branded print). -->
-<script src="/infusion-actions.js?v=gold294" defer></script>
+<script src="/infusion-actions.js?v=gold336" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
-     Loads after icu.js/reasoning.js/native-bridge/api.js — only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=gold303" defer></script>
-<script src="/recent.js?v=gold223" defer></script>
+     Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
+<script src="/voice.js?v=gold336" defer></script>
+<script src="/recent.js?v=gold336" defer></script>
 <!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
      ghis-ward.js self-injects a 🏥 Ward button + #ghisPanel. Each doctor signs in
      with their OWN GHIS id/password; the token is stored client-side and sent as
@@ -1391,7 +1402,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold293"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold336"; document.body.appendChild(s); }
     ghisHideFab(); ghisWrapSB(); ghisSidebarItem();
     [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { ghisWrapSB(); ghisSidebarItem(); }, ms); });
   }

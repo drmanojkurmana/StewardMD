@@ -1,22 +1,50 @@
-# Cloudflare Pages config — declares the Functions bindings the hybrid-retrieval
-# vector arm needs. StewardMD is a STATIC site (no build step) served from the repo
-# root, so pages_build_output_dir is ".". Adding this file makes the git deploy read
-# it for bindings; it does NOT change what is served (root, exactly as today).
-#
-# ⚠️ Before merging: confirm in the Pages dashboard that the project's build output
-# directory is the repo root (it is for this static site). If a preview deploy serves
-# the app correctly, production will too.
-#
-# Bindings consumed by functions/api/retrieve/[[path]].js (fail-safe: absent → {matches:[]}).
+# Cloudflare Pages config — mirrors the project's LIVE dashboard bindings
+# (captured via `wrangler pages download config stewardmd`) and ADDS the Vectorize
+# binding the hybrid-retrieval vector arm needs. Nothing else changes: same build
+# output (root), same AI + KV bindings that are already configured.
 name = "stewardmd"
-pages_build_output_dir = "."
+pages_build_output_dir = ""
 compatibility_date = "2025-01-01"
 
-# Workers AI — query embedding (bge-base-en-v1.5, 768-d)
+# Workers AI (already live) — query embedding for hybrid retrieval
 [ai]
 binding = "AI"
 
-# Vectorize — KB chunk vectors (index created: `wrangler vectorize create stewardmd-kb --dimensions=768 --metric=cosine`)
+# Vectorize (NEW) — KB disease-vector index for the semantic arm (functions/api/retrieve)
 [[vectorize]]
 binding = "KB_VECTORIZE"
 index_name = "stewardmd-kb"
+
+# D1 — offline NMC register mirror; doctor verification falls back to it when live NMC is down
+[[d1_databases]]
+binding = "stewardmd_nmc"
+database_name = "stewardmd-nmc"
+database_id = "36803432-5e8c-45e7-8dff-530f9a36c2cd"
+
+[env.production]
+compatibility_date = "2026-06-28"
+
+[[env.production.kv_namespaces]]
+id = "fe08922ff2504aeb913b10a818054a08"
+binding = "GHIS_KV"
+
+[[env.production.kv_namespaces]]
+id = "c110474def2947ddb657d93a6f9cbefe"
+binding = "MAIK_KV"
+
+[[env.production.kv_namespaces]]
+id = "48a600aeff5b4500a2ae73e632eafe3f"
+binding = "UPDATES_KV"
+
+# Vectorize must also be declared for the production env (KV lives here too)
+[[env.production.vectorize]]
+binding = "KB_VECTORIZE"
+index_name = "stewardmd-kb"
+
+[[env.production.d1_databases]]
+binding = "stewardmd_nmc"
+database_name = "stewardmd-nmc"
+database_id = "36803432-5e8c-45e7-8dff-530f9a36c2cd"
+
+[env.production.ai]
+binding = "AI"

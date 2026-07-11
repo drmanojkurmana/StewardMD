@@ -24,7 +24,11 @@ import { setUserClaims } from "../_fbadmin.js";
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
-const GEMINI_MODEL = "gemini-2.0-flash";
+// Developer-API model for reading certificates. Uses the rolling "…-latest" alias so it
+// never gets retired out from under us (gemini-2.0-flash and 2.5-flash both got 404'd for
+// new keys). Do NOT read env.GEMINI_MODEL — that's tuned for MaiK's Vertex path (2.5-flash),
+// which 404s on this developer API key. Override only via VERIFY_GEMINI_MODEL if ever needed.
+const GEMINI_MODEL_DEFAULT = "gemini-flash-latest";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -48,34 +52,63 @@ async function setVerifiedClaim(env, uid, regNo) {
 }
 
 // ── Gemini — read the certificate ─────────────────────────────────────────────
-async function geminiExtract(env, imageB64, mime) {
-  const prompt =
-    "You are validating an Indian medical registration certificate (National Medical " +
-    "Commission / a State Medical Council / erstwhile MCI). Extract EXACTLY these fields " +
-    "and return STRICT JSON only, no prose:\n" +
+async function geminiExtract(env, imageB64, mime, mode) {
+  const certPrompt =
+    "This is an Indian medical registration certificate (National Medical Commission, a " +
+    "State Medical Council, or erstwhile MCI). It may be a scan, a phone photo, or a PDF, " +
+    "and the quality may be poor — read it as carefully as you can (OCR).\n" +
+    "Return STRICT JSON only, no prose:\n" +
     '{"registration_number": string, "full_name": string, "state_medical_council": string, ' +
     '"year": string, "looks_valid": boolean, "confidence": number}\n' +
-    "looks_valid=false if this is NOT a genuine-looking medical registration certificate. " +
-    "confidence is 0..1. Use \"\" for anything unreadable.";
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${env.GEMINI_API_KEY}`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ parts: [ { text: prompt }, { inline_data: { mime_type: mime || "image/jpeg", data: imageB64 } } ] }],
-      generationConfig: { temperature: 0, responseMimeType: "application/json" },
-    }),
-  });
-  const data = await res.json();
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-  let p; try { p = JSON.parse(text); } catch (e) { const m = text.match(/\{[\s\S]*\}/); p = m ? JSON.parse(m[0]) : {}; }
+    "- registration_number: the medical registration / enrolment number EXACTLY as printed " +
+    "(it may contain letters and slashes, e.g. APMC/FMR/112487 or a plain number).\n" +
+    "- full_name: the doctor's name as printed.\n" +
+    "- looks_valid: set false ONLY if this is clearly NOT a medical registration document " +
+    "(e.g. a random photo, a blank page). If it looks like a registration certificate, true.\n" +
+    "- confidence: 0..1 for your overall reading. Use \"\" for any field you cannot read.";
+  // ID mode: read ONLY the person's name. Do NOT extract or return any ID/Aadhaar number,
+  // DOB, or address — we deliberately never touch those.
+  const idPrompt =
+    "This is a government photo identity document (e.g. Aadhaar, PAN, driving licence, voter " +
+    "ID) or a medical-council ID card. Read it as carefully as you can (OCR).\n" +
+    "Return STRICT JSON only, no prose: {\"full_name\": string, \"looks_valid\": boolean, \"confidence\": number}\n" +
+    "- full_name: ONLY the person's full name as printed. Do NOT output the ID number, Aadhaar " +
+    "number, date of birth or address — omit them entirely.\n" +
+    "- looks_valid: false only if this is clearly not an identity document.\n" +
+    "- confidence: 0..1.";
+  const prompt = mode === "id" ? idPrompt : certPrompt;
+  const model = env.VERIFY_GEMINI_MODEL || GEMINI_MODEL_DEFAULT;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`;
+  let res, data = {}, text = "", httpOk = false;
+  try {
+    res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ role: "user", parts: [ { text: prompt }, { inline_data: { mime_type: mime || "image/jpeg", data: imageB64 } } ] }],
+        // thinkingBudget:0 is REQUIRED for gemini-2.5-flash — otherwise it spends the whole
+        // output budget on hidden "thinking" and returns empty text (→ blank extraction).
+        generationConfig: { temperature: 0, maxOutputTokens: 1024, responseMimeType: "application/json", thinkingConfig: { thinkingBudget: 0 } },
+      }),
+    });
+    httpOk = res.ok;
+    data = await res.json().catch(() => ({}));
+    if (!res.ok) console.warn("[verify] gemini HTTP", res.status, JSON.stringify(data).slice(0, 400));
+    text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    if (!text) console.warn("[verify] gemini empty text; finishReason:", data?.candidates?.[0]?.finishReason, "promptFeedback:", JSON.stringify(data?.promptFeedback || {}).slice(0, 200));
+  } catch (e) {
+    console.warn("[verify] gemini fetch threw:", String(e && e.message || e));
+  }
+  console.log("[verify] gemini raw text:", String(text).slice(0, 400));
+  let p; try { p = JSON.parse(text); } catch (e) { const m = text.match(/\{[\s\S]*\}/); p = m ? (function(){ try { return JSON.parse(m[0]); } catch (_) { return {}; } })() : {}; }
   return {
-    regNo: String(p.registration_number || "").trim(),
+    regNo: String(p.registration_number || "").trim(),   // "" in id mode
     name: String(p.full_name || "").trim(),
     council: String(p.state_medical_council || "").trim(),
     year: String(p.year || "").trim(),
     looksValid: p.looks_valid !== false,
     confidence: typeof p.confidence === "number" ? p.confidence : 0,
+    httpOk: httpOk,
   };
 }
 
@@ -95,41 +128,110 @@ function nameAgrees(extracted, nmcName) {
   return inter >= Math.max(1, Math.ceil(Math.min(a.size, b.size) * 0.6));
 }
 async function nmcLookup(regNo) {
-  const res = await fetch(NMC_SEARCH, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "Referer": NMC_REFERER, "User-Agent": "Mozilla/5.0" },
-    body: JSON.stringify({ registrationNo: regNo }),
-  });
-  if (!res.ok) throw new Error("nmc_http_" + res.status);
-  const arr = await res.json();
-  return Array.isArray(arr) ? arr : [];
+  // Timeout so a hung NMC doesn't stall verification — fall back to the offline DB instead.
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 8000);
+  try {
+    const res = await fetch(NMC_SEARCH, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Referer": NMC_REFERER, "User-Agent": "Mozilla/5.0" },
+      body: JSON.stringify({ registrationNo: regNo }),
+      signal: ctrl.signal,
+    });
+    if (!res.ok) throw new Error("nmc_http_" + res.status);
+    const arr = await res.json();
+    return Array.isArray(arr) ? arr : [];
+  } finally { clearTimeout(t); }
+}
+
+// Offline fallback: the NMC register mirrored in Cloudflare D1 (binding: stewardmd_nmc).
+// Queried by reg-number "core" (digit group), returning rows shaped like the NMC API so the
+// same match logic applies. Returns null if D1 isn't bound (→ caller routes to manual review).
+async function d1Lookup(env, core) {
+  const db = env.stewardmd_nmc;
+  if (!db || !core) return null;
+  try {
+    const rs = await db.prepare("SELECT reg_no, name, council FROM doctors WHERE reg_core = ? LIMIT 25").bind(core).all();
+    const rows = (rs && rs.results) || [];
+    return rows.map((r) => ({ registrationNo: r.reg_no, firstName: r.name, smcName: r.council }));
+  } catch (e) { console.warn("[verify] d1 error:", String((e && e.message) || e)); return null; }
 }
 
 // ── Resend — manual-review email ──────────────────────────────────────────────
-async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime }) {
+// HMAC-sign an email action link so the owner can approve/block from the inbox with a
+// single click, without exposing the admin token. Verified by /api/verifications/action.
+async function signAction(secret, uid, action) {
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const sig = new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(uid + "|" + action)));
+  return Array.from(sig, (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime, attach, regNo }) {
   if (!env.RESEND_API_KEY) return;
   const support = env.SUPPORT_EMAIL || "support@stewardmd.in";
   const from = env.FROM_EMAIL || "StewardMD Verify <verify@stewardmd.in>";
+  const origin = env.APP_ORIGIN || "https://stewardmd.in";
   const ext = (mime && mime.includes("png")) ? "png" : (mime && mime.includes("pdf")) ? "pdf" : "jpg";
+  const regForAction = regNo || extracted.regNo || "";
+
+  // One-click action buttons (signed). Absent if no admin secret configured.
+  let buttons = "<p>To approve: set custom claim verified:true for this UID.</p>";
+  if (env.VERIFY_ADMIN_TOKEN) {
+    const reg = encodeURIComponent(regForAction);
+    const approveSig = await signAction(env.VERIFY_ADMIN_TOKEN, uid, "approve");
+    const rejectSig  = await signAction(env.VERIFY_ADMIN_TOKEN, uid, "reject");
+    const approveUrl = `${origin}/api/verifications/action?uid=${encodeURIComponent(uid)}&do=approve&reg=${reg}&sig=${approveSig}`;
+    const rejectUrl  = `${origin}/api/verifications/action?uid=${encodeURIComponent(uid)}&do=reject&sig=${rejectSig}`;
+    buttons =
+      `<p style="margin:18px 0">` +
+      `<a href="${approveUrl}" style="background:#15803d;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui;margin-right:10px">✓ Verify &amp; grant access</a>` +
+      `<a href="${rejectUrl}" style="background:#dc2626;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui">✕ Block until re-upload</a>` +
+      `</p><p style="font:400 12px system-ui;color:#64748b">Approve → sets the doctor verified (full access incl. prescriptions). Block → revokes access until they re-verify.</p>`;
+  }
+
+  // ID-path submissions are handled ephemerally: the identity document is NEVER attached or
+  // stored — only the extracted name + the reg number the doctor typed are shown.
+  const idNote = attach ? "" : `<p style="font:400 12px system-ui;color:#b45309">Identity document not attached (ephemeral — never stored, per privacy policy).</p>`;
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { "Authorization": `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
+    body: JSON.stringify(Object.assign({
       from, to: [support],
-      subject: `[StewardMD] Manual verification — ${extracted.regNo || "unknown"} (${reason})`,
+      subject: `[StewardMD] Manual verification — ${regForAction || email || "unknown"} (${reason})`,
       html:
         `<h2>Doctor verification needs manual review</h2><p><b>Reason:</b> ${reason}</p>` +
         `<table cellpadding="6"><tr><td><b>UID</b></td><td>${uid}</td></tr>` +
         `<tr><td><b>Google email</b></td><td>${email}</td></tr>` +
-        `<tr><td><b>Extracted reg</b></td><td>${extracted.regNo}</td></tr>` +
-        `<tr><td><b>Extracted name</b></td><td>${extracted.name}</td></tr>` +
-        `<tr><td><b>Council</b></td><td>${extracted.council}</td></tr>` +
+        `<tr><td><b>Reg no</b></td><td>${regForAction || "—"}</td></tr>` +
+        `<tr><td><b>Name read</b></td><td>${extracted.name || "—"}</td></tr>` +
+        `<tr><td><b>Council</b></td><td>${extracted.council || "—"}</td></tr>` +
         `<tr><td><b>Confidence</b></td><td>${extracted.confidence}</td></tr></table>` +
-        `<p>Certificate attached. To approve: set custom claim verified:true for this UID.</p>`,
-      attachments: [{ filename: `cert-${uid}.${ext}`, content: imageB64 }],
+        idNote + buttons,
+    }, attach ? { attachments: [{ filename: `cert-${uid}.${ext}`, content: imageB64 }] } : {})),
+  });
+  if (!res.ok) console.warn("[verify] resend(support) failed:", await res.text());
+}
+
+// ── Resend — "your account is verified" email to the doctor ───────────────────
+async function emailVerified(env, { email, name, regNo, council }) {
+  if (!env.RESEND_API_KEY || !email) return;
+  const from = env.FROM_EMAIL || "StewardMD Verify <verify@stewardmd.in>";
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { "Authorization": `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      from, to: [email],
+      subject: "✓ Your StewardMD account is verified",
+      html:
+        `<h2>You're verified ✓</h2>` +
+        `<p>Dr. ${name || ""}, your medical registration has been verified and linked to your StewardMD account.</p>` +
+        `<table cellpadding="6"><tr><td><b>Registration No</b></td><td>${regNo || ""}</td></tr>` +
+        `<tr><td><b>Council</b></td><td>${council || ""}</td></tr></table>` +
+        `<p>You now have full access, including the prescription generator. Welcome to StewardMD.</p>`,
     }),
   });
-  if (!res.ok) console.warn("[verify] resend failed:", await res.text());
+  if (!res.ok) console.warn("[verify] resend(verified) failed:", await res.text());
 }
 
 // ── Entry ─────────────────────────────────────────────────────────────────────
@@ -149,6 +251,7 @@ export async function onRequest(context) {
       status: rec.status || (rec.verified ? "verified" : "unverified"),
       regNo: rec.regNo || rec.extractedRegNo || "", name: rec.name || "",
       council: rec.council || "", verifiedAt: rec.verifiedAt || "", reason: rec.reason || "",
+      provisionalUntil: rec.provisionalUntil || "",
     });
     return json({ status: "unverified" });
   }
@@ -163,6 +266,8 @@ export async function onRequest(context) {
   const idToken  = body.idToken || (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
   const imageB64 = String(body.image || "").replace(/^data:[^;]+;base64,/, "");
   const mime     = body.mime || "image/jpeg";
+  const typedReg = String(body.regNo || "").trim();   // present ⇒ ID mode
+  const idMode   = !!typedReg;
   if (!idToken)  return json({ error: "missing_id_token" }, 401);
   if (!imageB64) return json({ error: "missing_image" }, 400);
 
@@ -171,29 +276,52 @@ export async function onRequest(context) {
   if (!uid) return json({ error: "auth_failed" }, 401);
   const email = decodePayload(idToken).email || "";
 
-  // 2. Gemini extraction
-  let ex; try { ex = await geminiExtract(env, imageB64, mime); }
-  catch (e) { ex = { regNo: "", name: "", council: "", year: "", looksValid: false, confidence: 0 }; }
+  // 2. Gemini extraction — certificate (reg+name) or ID (name only)
+  let ex; try { ex = await geminiExtract(env, imageB64, mime, idMode ? "id" : "cert"); }
+  catch (e) { ex = { regNo: "", name: "", council: "", year: "", looksValid: false, confidence: 0, httpOk: false }; }
+  const effReg = idMode ? typedReg : ex.regNo;   // reg used for the NMC lookup
+  console.log("[verify] uid", uid, "mode:", idMode ? "id" : "cert", "extracted:", JSON.stringify({ regNo: ex.regNo, typedReg, name: ex.name, looksValid: ex.looksValid, confidence: ex.confidence, httpOk: ex.httpOk }));
 
+  // Provisional access: on manual review the doctor still gets in for 7 days, but the
+  // prescription generator stays locked (no verified claim) until approved.
+  const PROVISIONAL_DAYS = 7;
   const toManual = async (reason) => {
+    console.log("[verify] uid", uid, "→ MANUAL:", reason);
+    const provisionalUntil = new Date(Date.now() + PROVISIONAL_DAYS * 86400000).toISOString();
     try { if (store) await store.put(doctorKey(uid), JSON.stringify({
-      uid, email, status: "pending", reason, extractedRegNo: ex.regNo, extractedName: ex.name,
-      updatedAt: new Date().toISOString(),
+      uid, email, status: "pending", reason,
+      extractedRegNo: effReg, extractedName: ex.name,
+      provisionalUntil, updatedAt: new Date().toISOString(),
     })); } catch (e) {}
-    try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime }); } catch (e) {}
-    return json({ status: "pending_review", reason });
+    // ID-mode: ephemeral — do NOT attach/store the identity document.
+    try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime, attach: !idMode, regNo: effReg }); } catch (e) {}
+    return json({ status: "pending_review", reason, provisionalUntil, provisionalDays: PROVISIONAL_DAYS });
   };
 
-  // 3. decide
-  if (!ex.looksValid || ex.confidence < 0.4 || !ex.regNo) return toManual("low_confidence_or_unreadable");
+  // 3. decide — the register (live NMC, D1 fallback) is authoritative. In ID mode we match the
+  // name read off the ID against NMC's registered name for the reg number the doctor typed.
+  if (ex.looksValid === false) return toManual(idMode ? "not_an_id" : "not_a_certificate");
+  if (!ex.name)  return toManual("no_name_read");
+  if (!effReg)   return toManual("no_reg_number");
 
-  let records; try { records = await nmcLookup(ex.regNo); } catch (e) { return toManual("nmc_unreachable"); }
-  const core = regCore(ex.regNo);
+  const core = regCore(effReg);
+  // Live NMC is primary. If it's unreachable/slow, fall back to the offline D1 mirror so
+  // verification still works fast when NMC is down.
+  let records, source = "nmc";
+  try {
+    records = await nmcLookup(effReg);
+  } catch (e) {
+    console.warn("[verify] NMC unreachable → offline D1 fallback:", String((e && e.message) || e));
+    records = await d1Lookup(env, core);
+    source = "offline";
+    if (records === null) return toManual("nmc_unreachable");  // NMC down AND no offline DB
+  }
   const match = records.find(r =>
-    (regCore(r.registrationNo) === core || String(r.registrationNo).includes(ex.regNo)) &&
+    (regCore(r.registrationNo) === core || String(r.registrationNo).includes(effReg)) &&
     nameAgrees(ex.name, r.firstName)
   );
-  if (!match) return toManual("no_nmc_match");
+  console.log("[verify] uid", uid, "source:", source, "records:", records.length, "core:", core, "match:", match ? match.registrationNo + " / " + match.firstName : "NONE");
+  if (!match) return toManual(source === "offline" ? "no_offline_match" : "no_nmc_match");
 
   // 4. one reg no = one account (KV read-then-write; verification is rare)
   if (store) {
@@ -213,9 +341,13 @@ export async function onRequest(context) {
       uid, email, status: "verified", verified: true,
       regNo: match.registrationNo, name: match.firstName, council: match.smcName,
       dob: match.birthDateStr || "", university: match.university || "",
-      verifiedAt: new Date().toISOString(),
+      source, via: idMode ? "id" : "cert", verifiedAt: new Date().toISOString(),
     })); } catch (e) {}
   }
+  console.log("[verify] uid", uid, "→ VERIFIED", match.registrationNo, "(" + source + "/" + (idMode ? "id" : "cert") + ")");
+
+  // Confirmation email to the doctor (best-effort).
+  try { await emailVerified(env, { email, name: match.firstName, regNo: match.registrationNo, council: match.smcName }); } catch (e) {}
 
   return json({ status: "verified", regNo: match.registrationNo, name: match.firstName, council: match.smcName });
 }
