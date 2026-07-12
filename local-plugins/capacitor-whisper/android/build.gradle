@@ -13,7 +13,10 @@ apply plugin: 'com.android.library'
 android {
     namespace "in.stewardmd.whisper"
     compileSdk project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 36
-    ndkVersion project.hasProperty('ndkVersion') ? rootProject.ext.ndkVersion : '26.1.10909125'
+    // NDK r27+ ships 16 KB-aligned prebuilts (libc++_shared.so) and, with
+    // ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON below, links our .so with 16 KB LOAD-segment
+    // alignment — required for Android 15 devices with 16 KB memory pages (and Play compliance).
+    ndkVersion project.hasProperty('ndkVersion') ? rootProject.ext.ndkVersion : '27.2.12479018'
     defaultConfig {
         minSdkVersion project.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 24
         targetSdkVersion project.hasProperty('targetSdkVersion') ? rootProject.ext.targetSdkVersion : 36
@@ -28,7 +31,9 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags '-O3 -std=c++17 -fexceptions -frtti'
-                arguments '-DANDROID_STL=c++_shared'
+                // ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON makes the NDK link every .so with
+                // max-page-size=16384 (16 KB-aligned LOAD segments) — see the ndkVersion note.
+                arguments '-DANDROID_STL=c++_shared', '-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON'
             }
         }
     }
