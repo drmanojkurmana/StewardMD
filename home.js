@@ -1825,12 +1825,17 @@
       var chipsHTML = maikFollowupsHTML(pkg, question, assume);
       if (chipsHTML) think.insertAdjacentHTML("beforeend", chipsHTML);
       if (!active) _maikCache[cacheKey] = think.innerHTML;
-      // ℞ Create Prescription — on treatment answers only. Live-only (not cached), with pkg in
-      // closure so the Rx builder gets the grounded regimen. Doses come DB-first (Drug Index).
+      // ℞ Create Prescription — shown on EVERY MaiK answer (prominent), with pkg in closure so
+      // treatment answers pre-fill the grounded regimen (doses DB-first via the Drug Index) and
+      // any other answer opens the pad for manual entry. SMD_RX gates on doctor verification.
+      // Live-only (appended after cache write). Treatment answers get a hint sub-label.
       try {
-        var _isTx = (pkg && pkg.treatment && pkg.treatment.default) || /\b(treat|treatment|treating|manage|management|therapy|regimen|prescri|\brx\b|antibiotic|antibiotics|first[- ]?line|dose|dosing)\b/.test(maikNorm(question || ""));
-        if (_isTx && window.SMD_RX) {
-          var _rxc = document.createElement("button"); _rxc.className = "maik-chip"; _rxc.style.marginTop = "8px"; _rxc.textContent = "℞ Create Prescription";
+        if (window.SMD_RX) {
+          var _isTx = (pkg && pkg.treatment && pkg.treatment.default) || /\b(treat|treatment|treating|manage|management|therapy|regimen|prescri|\brx\b|antibiotic|antibiotics|first[- ]?line|dose|dosing)\b/.test(maikNorm(question || ""));
+          var _rxc = document.createElement("button");
+          _rxc.className = "maik-chip maik-rx";
+          _rxc.style.cssText = "margin-top:10px;background:#0e6e63;color:#fff;border-color:#0e6e63;font-weight:700";
+          _rxc.textContent = "℞ Create prescription" + (_isTx ? " (pre-fill from this)" : "");
           _rxc.addEventListener("click", function () { try { SMD_RX.open({ topic: topicLabel || question, pkg: pkg }); } catch (e) {} });
           think.appendChild(_rxc);
         }
