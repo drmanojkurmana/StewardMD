@@ -327,10 +327,11 @@
           if (id && _ecache.hasOwnProperty(id)) return _ecache[id];
           var gc = id ? trimGrounding(_ai.getGroundingContext(id)) : null;
           if (!gc) { if (id) _ecache[id] = null; return null; }
-          // Coverage haystack from TEXT only (name + class + chunk text + drug refs) — much cheaper
-          // than JSON.stringify-ing the whole grounding object, and more precise (no structural keys).
-          var kn = (gc.knowledge || []).map(function (k) { return (k && k.text) || ""; }).join(" ");
-          var hay = (String(id) + " " + (gc.name || "") + " " + (gc.class || "") + " " + kn + " " + (gc.drugRefs || []).join(" ")).toLowerCase();
+          // Coverage haystack = the WHOLE grounding object (name/class/section/source/crossLinks/text)
+          // so a distinctive term anywhere in it counts — kept as-is for routing parity. This runs only
+          // for the candidates actually evaluated (≈1 for a confident rank-0 match, memoized), so it's
+          // cheap; the real perf win is the short-circuit + the lazy vector hop, not trimming this.
+          var hay = (String(id) + " " + (gc.name || "") + " " + JSON.stringify(gc)).toLowerCase();
           var hitT = distinctive.filter(function (t) { return hay.indexOf(t) >= 0; });
           var cov = distinctive.length ? hitT.length / distinctive.length : 1;
           var nameHit = false, nameToksAll = false;
@@ -362,7 +363,12 @@
         // Phase 1 — LEXICAL only (instant, no network). Dedup the retrieved disease order.
         var lexIds = []; retrieved.forEach(function (r) { if (r && r.diseaseId && lexIds.indexOf(r.diseaseId) < 0) lexIds.push(r.diseaseId); });
         if (!lexIds.length && retrieved[0] && retrieved[0].diseaseId) lexIds = [retrieved[0].diseaseId];
-        var chosen = pick(lexIds.slice(0, 8));
+        // Evaluate ONLY the lexical rank-0 here — matches the pre-hybrid lexical path (and the
+        // offline/native path where the vector arm is unreachable). Scanning the deeper lexical pool
+        // let a body-coverage match on a LOWER-ranked disease win (e.g. HF-management mentions many
+        // electrolytes) → mis-routes. The multi-candidate POOL evaluation belongs to the fused
+        // vector phase below, where the semantic arm actually justifies considering rank>0.
+        var chosen = pick(lexIds.slice(0, 1));
         // Phase 2 — SEMANTIC fallback. Skip the Vectorize hop ONLY when the lexical pick is a NAME-level
         // match (disease name matches the query topic) or there's no distinctive term to disambiguate.
         // A mere body-text coverage match is NOT enough to skip — e.g. "hyperkalemia management" hits
