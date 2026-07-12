@@ -491,8 +491,16 @@
     window.fetch = function (input, init) {
       try {
         var url = (typeof input === "string") ? input : (input && typeof input === "object" ? input.url : null);
-        if (typeof url === "string" && url.charAt(0) === "/" && url.lastIndexOf("/api/", 0) === 0) {
-          var abs = API_ORIGIN + url;
+        // Route through CapacitorHttp (a real native request, no CORS): relative "/api/*" AND the
+        // absolute drug/index API worker "https://api.stewardmd.in/*" — the latter is cross-origin
+        // from the WebView (origin https://localhost) and would otherwise leak out as a CORS-blocked
+        // browser request (Drug Database came up empty). Absolute URLs are used as-is.
+        var abs = null;
+        if (typeof url === "string") {
+          if (url.charAt(0) === "/" && url.lastIndexOf("/api/", 0) === 0) abs = API_ORIGIN + url;
+          else if (url.lastIndexOf("https://api.stewardmd.in", 0) === 0 || url.lastIndexOf("http://api.stewardmd.in", 0) === 0) abs = url;
+        }
+        if (abs) {
           var merged = init || (input && typeof input === "object" ? { method: input.method, headers: input.headers } : {});
           var r = nativeApiFetch(abs, merged);
           if (r) return r;                              // native request in flight
