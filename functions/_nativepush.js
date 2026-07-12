@@ -22,7 +22,7 @@ export async function saveNativeToken(env, rec) {
   const store = pushKv(env);
   if (!store || !rec || !rec.token || !rec.platform) return false;
   await store.put(NAT_PREFIX + (await tokenId(rec.token)),
-    JSON.stringify({ token: rec.token, platform: rec.platform, uid: rec.uid || null, ts: Date.now() }));
+    JSON.stringify({ token: rec.token, platform: rec.platform, uid: rec.uid || null, workspaces: Array.isArray(rec.workspaces) ? rec.workspaces : [], ts: Date.now() }));
   return true;
 }
 export async function deleteNativeToken(env, token) {
@@ -43,12 +43,14 @@ export async function listNativeTokens(env) {
 }
 
 /* Fan a single alert out to every stored native token. Prunes dead tokens.
- * msg = { title, body, url, tag }. Pass opts.uid to target one user's devices only. */
+ * msg = { title, body, url, tag }. opts.uid targets one user's devices; opts.workspace
+ * targets subscribers of that workspace (legacy tokens with no workspaces = all). */
 export async function sendNativeToAll(env, msg, opts) {
   if (!nativePushEnabled(env)) return { sent: 0, total: 0, disabled: true };
   msg = msg || {};
   let toks = await listNativeTokens(env);
   if (opts && opts.uid) toks = toks.filter((t) => t.uid === opts.uid);
+  if (opts && opts.workspace) toks = toks.filter((t) => !t.workspaces || !t.workspaces.length || t.workspaces.indexOf(opts.workspace) >= 0);
   const store = pushKv(env);
   let sent = 0;
   await Promise.all(toks.map(async (t) => {

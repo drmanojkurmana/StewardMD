@@ -18,6 +18,8 @@ import { ownerOK } from "../../_adminauth.js";
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
 });
+const WORKSPACES = ["internal_medicine", "surgery", "ent", "ophthalmology", "obstetrics_gynaecology", "urology", "dentistry_omfs", "paediatrics"];
+function cleanWorkspaces(v) { return Array.isArray(v) ? v.filter((w) => WORKSPACES.indexOf(w) >= 0) : []; }
 function adminOK(request, env) {
   const want = env.UPDATES_ADMIN_TOKEN || ""; if (!want) return null;
   const got = request.headers.get("X-Admin-Token") || "";
@@ -37,7 +39,8 @@ export async function onRequest(context) {
     let body = {}; try { body = await request.json(); } catch (e) {}
     const sub = body.subscription || body;
     if (!sub || !sub.endpoint) return json({ error: "no-subscription" }, 400);
-    const okSave = await saveSubscription(env, sub);
+    const uid = await identify(request, env);                       // null for guests
+    const okSave = await saveSubscription(env, sub, { uid, workspaces: cleanWorkspaces(body.workspaces) });
     return okSave ? json({ ok: true }) : json({ error: "store-unavailable" }, 501);
   }
   if (method === "POST" && seg === "unsubscribe") {
@@ -54,7 +57,7 @@ export async function onRequest(context) {
     // else's account and receive their patients' lab alerts. Guests get uid=null
     // (broadcast updates only, never per-patient alerts).
     const uid = await identify(request, env);
-    const okSave = await saveNativeToken(env, { token: body.token, platform: body.platform, uid });
+    const okSave = await saveNativeToken(env, { token: body.token, platform: body.platform, uid, workspaces: cleanWorkspaces(body.workspaces) });
     return okSave ? json({ ok: true, scoped: !!uid }) : json({ error: "store-unavailable" }, 501);
   }
   if (method === "POST" && seg === "unregister-native") {

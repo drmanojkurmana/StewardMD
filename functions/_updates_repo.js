@@ -31,6 +31,7 @@ export function rowToItem(r) {
     organization: r.organization || r.source_id || "",
     source: r.organization || r.source_id || "StewardMD",
     workspace: r.workspace || "internal_medicine",
+    branch: r.branch || "",
     importance: r.importance || "normal",
     est_read_min: r.est_read_min || 0,
     url: r.official_url || "",
@@ -58,6 +59,7 @@ export async function getFeed(env, opts) {
   const where = [], binds = [];
   if (opts.type && opts.type !== "all") { where.push("type = ?"); binds.push(String(opts.type)); }
   if (opts.workspace && opts.workspace !== "all") { where.push("workspace = ?"); binds.push(String(opts.workspace)); }
+  if (opts.branch && opts.branch !== "all") { where.push("branch = ?"); binds.push(String(opts.branch)); }
   if (opts.q) {
     const like = "%" + String(opts.q).toLowerCase().slice(0, 80) + "%";
     where.push("(lower(title) LIKE ? OR lower(summary) LIKE ? OR lower(keywords) LIKE ?)");
@@ -110,10 +112,10 @@ export async function insertUpdate(env, u) {
   const now = Date.now();
   const id = u.id || newId("u");
   await db(env).prepare(
-    "INSERT INTO updates (id, doc_key, source_id, type, organization, workspace, title, body, category, published_ts, importance, est_read_min, summary, summary_json, official_url, official_pdf_url, doi, pmid, keywords, version, content_hash, auto, pinned, created_ts, updated_ts) " +
-    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+    "INSERT INTO updates (id, doc_key, source_id, type, organization, workspace, branch, title, body, category, published_ts, importance, est_read_min, summary, summary_json, official_url, official_pdf_url, doi, pmid, keywords, version, content_hash, auto, pinned, created_ts, updated_ts) " +
+    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
   ).bind(
-    id, u.doc_key, u.source_id || "", u.type || "guideline", u.organization || "", u.workspace || "internal_medicine",
+    id, u.doc_key, u.source_id || "", u.type || "guideline", u.organization || "", u.workspace || "internal_medicine", u.branch || "",
     u.title, u.body || "", u.category || typeCategory(u.type), u.published_ts || now, u.importance || "normal",
     u.est_read_min || 0, u.summary || "", u.summary_json || "", u.official_url || "", u.official_pdf_url || "",
     u.doi || "", u.pmid || "", u.keywords || "", u.version || "", u.content_hash || "", u.auto == null ? 1 : (u.auto ? 1 : 0),
@@ -126,9 +128,9 @@ export async function insertUpdate(env, u) {
 export async function updateExisting(env, id, u) {
   if (!hasDb(env)) throw new Error("no-db");
   await db(env).prepare(
-    "UPDATE updates SET type=?, organization=?, workspace=?, title=?, body=?, category=?, published_ts=?, importance=?, est_read_min=?, summary=?, summary_json=?, official_url=?, official_pdf_url=?, doi=?, pmid=?, keywords=?, version=?, content_hash=?, updated_ts=? WHERE id=?"
+    "UPDATE updates SET type=?, organization=?, workspace=?, branch=?, title=?, body=?, category=?, published_ts=?, importance=?, est_read_min=?, summary=?, summary_json=?, official_url=?, official_pdf_url=?, doi=?, pmid=?, keywords=?, version=?, content_hash=?, updated_ts=? WHERE id=?"
   ).bind(
-    u.type || "guideline", u.organization || "", u.workspace || "internal_medicine", u.title, u.body || "",
+    u.type || "guideline", u.organization || "", u.workspace || "internal_medicine", u.branch || "", u.title, u.body || "",
     u.category || typeCategory(u.type), u.published_ts || Date.now(), u.importance || "normal", u.est_read_min || 0,
     u.summary || "", u.summary_json || "", u.official_url || "", u.official_pdf_url || "", u.doi || "", u.pmid || "",
     u.keywords || "", u.version || "", u.content_hash || "", Date.now(), id
@@ -169,11 +171,11 @@ export async function saveSource(env, s) {
   if (!hasDb(env)) throw new Error("no-db");
   const now = Date.now();
   await db(env).prepare(
-    "INSERT INTO sources (id, name, workspace, type, homepage, guideline_page, rss_url, parser_type, priority, enabled, created_ts) " +
-    "VALUES (?,?,?,?,?,?,?,?,?,?,?) " +
-    "ON CONFLICT(id) DO UPDATE SET name=excluded.name, workspace=excluded.workspace, type=excluded.type, homepage=excluded.homepage, guideline_page=excluded.guideline_page, rss_url=excluded.rss_url, parser_type=excluded.parser_type, priority=excluded.priority, enabled=excluded.enabled"
+    "INSERT INTO sources (id, name, workspace, branch, type, homepage, guideline_page, rss_url, parser_type, priority, enabled, created_ts) " +
+    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?) " +
+    "ON CONFLICT(id) DO UPDATE SET name=excluded.name, workspace=excluded.workspace, branch=excluded.branch, type=excluded.type, homepage=excluded.homepage, guideline_page=excluded.guideline_page, rss_url=excluded.rss_url, parser_type=excluded.parser_type, priority=excluded.priority, enabled=excluded.enabled"
   ).bind(
-    s.id, s.name || s.id, s.workspace || "internal_medicine", s.type || "guideline", s.homepage || "",
+    s.id, s.name || s.id, s.workspace || "internal_medicine", s.branch || "", s.type || "guideline", s.homepage || "",
     s.guideline_page || "", s.rss_url || "", s.parser_type || "rss", parseInt(s.priority, 10) || 100,
     s.enabled ? 1 : 0, now
   ).run();
@@ -212,4 +214,47 @@ export async function pruneCrawlLogs(env, keep) {
       "DELETE FROM crawl_logs WHERE id NOT IN (SELECT id FROM crawl_logs ORDER BY ts DESC LIMIT ?)"
     ).bind(n).run();
   } catch (e) {}
+}
+
+/* ---------------- per-user notification preferences (Phase 2) ---------------- */
+const DEFAULT_WS = ["internal_medicine"];
+export async function getPrefs(env, uid) {
+  if (!hasDb(env) || !uid) return null;
+  const r = await db(env).prepare("SELECT * FROM user_prefs WHERE uid = ?").bind(uid).first();
+  if (!r) return null;
+  let ws = DEFAULT_WS; try { ws = JSON.parse(r.workspaces || "[]"); if (!Array.isArray(ws) || !ws.length) ws = DEFAULT_WS; } catch (e) {}
+  let br = []; try { br = JSON.parse(r.branches || "[]"); if (!Array.isArray(br)) br = []; } catch (e) {}
+  return { uid: r.uid, workspaces: ws, branches: br, push_enabled: !!r.push_enabled, updated_ts: r.updated_ts };
+}
+export async function savePrefs(env, uid, p) {
+  if (!hasDb(env)) throw new Error("no-db");
+  const ws = JSON.stringify(Array.isArray(p.workspaces) && p.workspaces.length ? p.workspaces : DEFAULT_WS);
+  const br = JSON.stringify(Array.isArray(p.branches) ? p.branches : []);
+  await db(env).prepare(
+    "INSERT INTO user_prefs (uid, workspaces, branches, push_enabled, updated_ts) VALUES (?,?,?,?,?) " +
+    "ON CONFLICT(uid) DO UPDATE SET workspaces=excluded.workspaces, branches=excluded.branches, push_enabled=excluded.push_enabled, updated_ts=excluded.updated_ts"
+  ).bind(uid, ws, br, p.push_enabled === false ? 0 : 1, Date.now()).run();
+}
+
+/* ---------------- cross-device bookmarks (Phase 2) ---------------- */
+export async function listBookmarkIds(env, uid) {
+  if (!hasDb(env) || !uid) return [];
+  const rs = await db(env).prepare("SELECT update_id FROM bookmarks WHERE uid = ? ORDER BY created_ts DESC").bind(uid).all();
+  return (rs.results || []).map((x) => x.update_id);
+}
+// Full bookmarked update rows (for a "Saved" view), newest-bookmarked first.
+export async function listBookmarkItems(env, uid) {
+  if (!hasDb(env) || !uid) return [];
+  const rs = await db(env).prepare(
+    "SELECT u.* FROM bookmarks b JOIN updates u ON u.id = b.update_id WHERE b.uid = ? ORDER BY b.created_ts DESC LIMIT 200"
+  ).bind(uid).all();
+  return (rs.results || []).map(rowToItem);
+}
+export async function addBookmark(env, uid, updateId) {
+  if (!hasDb(env)) throw new Error("no-db");
+  await db(env).prepare("INSERT OR IGNORE INTO bookmarks (uid, update_id, created_ts) VALUES (?,?,?)").bind(uid, updateId, Date.now()).run();
+}
+export async function removeBookmark(env, uid, updateId) {
+  if (!hasDb(env)) throw new Error("no-db");
+  await db(env).prepare("DELETE FROM bookmarks WHERE uid = ? AND update_id = ?").bind(uid, updateId).run();
 }
