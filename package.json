@@ -4,6 +4,7 @@
   "private": true,
   "description": "StewardMD — native iOS + Android app wrapper (Capacitor) around the StewardMD PWA. The web app itself is buildless static files at the repo root; scripts/build-www.sh assembles the runtime bundle into www/.",
   "scripts": {
+    "postinstall": "patch-package",
     "build:www": "bash scripts/build-www.sh",
     "sync": "npm run build:www && npx cap sync",
     "ios": "npm run sync && npx cap open ios",
@@ -32,5 +33,8 @@
     "@stewardmd/capacitor-vision-ocr": "file:local-plugins/capacitor-vision-ocr",
     "@stewardmd/capacitor-whisper": "file:local-plugins/capacitor-whisper",
     "fflate": "^0.8.3"
+  },
+  "devDependencies": {
+    "patch-package": "^8.0.1"
   }
 }
