@@ -34,11 +34,12 @@
     return "—";
   }
 
-  // Resolve the verified custom claim → Promise<boolean>.
-  function isVerifiedClaim() {
+  // Resolve the verified custom claim → Promise<boolean>. Pass force=true to refresh the
+  // ID token first (needed right after an owner approval, whose claim the cached token lacks).
+  function isVerifiedClaim(force) {
     if (allowlisted()) return Promise.resolve(true);
     var u = fbUser(); if (!u) return Promise.resolve(false);
-    return u.getIdTokenResult().then(function (r) { return !!(r && r.claims && r.claims.verified === true); }).catch(function () { return false; });
+    return u.getIdTokenResult(!!force).then(function (r) { return !!(r && r.claims && r.claims.verified === true); }).catch(function () { return false; });
   }
   // Full status (incl. pending) from the server; falls back to the claim.
   function fetchStatus() {
@@ -72,7 +73,8 @@
               // where evaluate()'s sign-in-gated wire() never ran → ✕ did nothing).
     g.dataset.mode = mode;
     var verified = data && data.status === "verified";
-    var pending  = data && data.status === "pending";
+    var trial    = data && data.status === "trial";
+    var pending  = data && (data.status === "pending" || trial);   // both = provisional, upload still offered
     var st = (data && data.status) || "unverified";
 
     var acc = $("verifyAccount");
@@ -83,17 +85,19 @@
       $("verifyAccProvider").textContent = providerLabel();
       $("verifyAccReg").textContent = (data && data.regNo) || (verified ? "—" : "not linked yet");
       var badge = $("verifyBadge");
-      badge.className = "verify-badge " + st;
-      badge.textContent = ({ verified: "✓ Verified", pending: "Under review", rejected: "Rejected", unverified: "Not verified" })[st] || st;
+      badge.className = "verify-badge " + (st === "trial" ? "pending" : st);   // reuse pending styling for trial
+      badge.textContent = ({ verified: "✓ Verified", pending: "Under review", trial: "Trial access", rejected: "Rejected", unverified: "Not verified" })[st] || st;
     }
 
-    $("verifyTitle").textContent = verified ? "Your account is verified" : (pending ? "Verification under review" : "Verify you're a registered doctor");
+    $("verifyTitle").textContent = verified ? "Your account is verified" : (trial ? "You're on a 7-day trial" : (pending ? "Verification under review" : "Verify you're a registered doctor"));
     var sub = $("verifySubtitle");
     if (sub) sub.textContent = verified
       ? "Your medical registration is linked to this account."
-      : (pending
-        ? "We've received your certificate and our team is reviewing it — we'll email you once it's approved. In the meantime you can upload a clearer certificate below to try instant verification again."
-        : "StewardMD is for registered medical practitioners only. Upload your medical registration certificate — we verify it instantly against the National Medical Register.");
+      : (trial
+        ? "You have full access for a few more days. Verify your medical registration anytime to keep access and unlock the prescription generator — upload your certificate below, or enter your registration number with a photo ID."
+        : (pending
+          ? "We've received your certificate and our team is reviewing it — we'll email you once it's approved. In the meantime you can upload a clearer certificate below to try instant verification again."
+          : "StewardMD is for registered doctors. Verify instantly by uploading your NMC / State Medical Council registration certificate — or enter your registration number and upload Aadhaar / any government photo ID (we read only your name to match the register; the ID is never stored)."));
 
     // Upload box stays available unless FULLY verified — so a doctor under review can
     // re-submit a clearer certificate and get instant verification without being stuck.
@@ -107,7 +111,8 @@
     }
 
     var closable = mode !== "forced";
-    var x = $("verifyClose"); if (x) x.style.display = closable ? "" : "none";
+    var x = $("verifyClose"); if (x) x.style.display = "";   // always shown; on the forced gate ✕ starts the trial
+    var skip = $("verifySkipBtn"); if (skip) skip.style.display = (mode === "forced" && !verified) ? "" : "none";
     var done = $("verifyDoneBtn"); if (done) done.style.display = (closable && (verified || pending)) ? "" : "none";
 
     g.classList.remove("hidden"); g.style.display = "flex";
@@ -189,6 +194,44 @@
     }
   }
 
+  // "Skip for now" — start the one-time 7-day trial (server-side, per account). Grants
+  // provisional access (prescription stays locked); dismisses the gate. Used by BOTH the
+  // skip button and the ✕ on the forced gate (a bare close would just re-force otherwise).
+  var trialing = false;
+  function startTrial() {
+    if (trialing) return;
+    var u = fbUser(); if (!u) { setStatusMsg("error", "Session expired — please sign in again."); return; }
+    trialing = true;
+    var skip = $("verifySkipBtn"); if (skip) skip.disabled = true;
+    setStatusMsg("info", progressHtml("Starting your 7-day trial…"));
+    u.getIdToken().then(function (tok) {
+      return fetch("/api/verify-doctor", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken: tok, trial: true })
+      });
+    }).then(function (r) { return r.json().catch(function () { return {}; }); }).then(function (d) {
+      trialing = false; if (skip) skip.disabled = false;
+      if (d && d.status === "trial") {
+        var n = daysLeft(d.provisionalUntil) || d.provisionalDays || 7;
+        hideGate();
+        try { (window.toast || window.SMD_toast || function () {})("7-day trial started · " + n + "d left · prescription locked until verified"); } catch (e) {}
+        return;
+      }
+      if (d && d.status === "verified") {   // already verified — just let them in
+        (u.getIdToken ? u.getIdToken(true) : Promise.resolve()).catch(function () {}).then(hideGate);
+        return;
+      }
+      if (d && d.status === "trial_expired") {
+        setStatusMsg("error", "Your 7-day trial has ended — please verify your registration to continue.");
+        return;
+      }
+      setStatusMsg("error", "Couldn't start the trial — please try again, or verify your certificate.");
+    }).catch(function () {
+      trialing = false; if (skip) skip.disabled = false;
+      setStatusMsg("error", "Network error — please try again.");
+    });
+  }
+
   // Reflect ID-mode (a reg number typed) vs certificate-mode in the labels.
   function syncMode() {
     var reg = $("verifyRegNo"), label = $("verifyFileLabel"), sub = $("verifyDropSub"),
@@ -203,7 +246,7 @@
 
   function wire() {
     var input = $("verifyFile"), drop = $("verifyDrop"), btn = $("verifySubmit"),
-        signout = $("verifySignOut"), label = $("verifyFileLabel"), x = $("verifyClose"), done = $("verifyDoneBtn"), reg = $("verifyRegNo");
+        signout = $("verifySignOut"), label = $("verifyFileLabel"), x = $("verifyClose"), done = $("verifyDoneBtn"), reg = $("verifyRegNo"), skip = $("verifySkipBtn");
     if (input && !input._smdWired) {
       input._smdWired = true;
       input.addEventListener("change", function () {
@@ -215,7 +258,16 @@
     }
     if (reg && !reg._smdWired) { reg._smdWired = true; reg.addEventListener("input", syncMode); }
     if (btn && !btn._smdWired) { btn._smdWired = true; btn.addEventListener("click", submit); }
-    if (x && !x._smdWired) { x._smdWired = true; x.addEventListener("click", hideGate); }
+    if (x && !x._smdWired) {
+      x._smdWired = true;
+      x.addEventListener("click", function () {
+        // On the FORCED gate the ✕ must consume the trial (a plain close just re-forces);
+        // elsewhere (panel / already provisional) it simply dismisses.
+        var g = gate();
+        if (g && g.dataset.mode === "forced") startTrial(); else hideGate();
+      });
+    }
+    if (skip && !skip._smdWired) { skip._smdWired = true; skip.addEventListener("click", startTrial); }
     if (done && !done._smdWired) { done._smdWired = true; done.addEventListener("click", hideGate); }
     if (signout && !signout._smdWired) {
       signout._smdWired = true;
@@ -250,13 +302,24 @@
     isVerifiedClaim().then(function (ok) {
       var g = gate();
       if (ok) { if (g && g.dataset.mode !== "panel") hideGate(); return; }   // fully verified
-      // Not claim-verified → allow PROVISIONAL access while a manual review is pending
-      // and within the window; otherwise force verification.
+      // Cached claim says not-verified — but the server is authoritative. Consult it.
       fetchStatus().then(function (d) {
-        var provisional = d && d.status === "pending" && provisionalActive(d.provisionalUntil);
+        // Owner just approved us (email/admin)? The cached ID token doesn't carry the fresh
+        // verified:true claim yet — force a token refresh so the claim catches up, then let
+        // the doctor straight in. No re-upload, no re-login, no manual admin step.
+        if (d && d.status === "verified") {
+          var u2 = fbUser();
+          (u2 && u2.getIdToken ? u2.getIdToken(true) : Promise.resolve()).catch(function () {}).then(function () {
+            if (gate() && gate().dataset.mode !== "panel") hideGate();
+          });
+          return;
+        }
+        // Otherwise allow PROVISIONAL access — a manual review pending OR an active 7-day
+        // "skip" trial — while inside the window; else force verification.
+        var provisional = d && (d.status === "pending" || d.status === "trial") && provisionalActive(d.provisionalUntil);
         if (provisional) {
           if (gate() && gate().dataset.mode !== "panel") hideGate();
-          try { (window.toast || window.SMD_toast || function () {})("Provisional access · " + daysLeft(d.provisionalUntil) + "d left to verify · prescription locked"); } catch (e) {}
+          try { (window.toast || window.SMD_toast || function () {})((d.status === "trial" ? "Trial access · " : "Provisional access · ") + daysLeft(d.provisionalUntil) + "d left to verify · prescription locked"); } catch (e) {}
         } else {
           showForced();
         }

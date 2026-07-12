@@ -669,9 +669,10 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
     <div class="splash-name">Steward<span class="accent">MD</span></div>
     <div class="account-title" id="verifyTitle">Verify you're a registered doctor</div>
     <div class="account-subtitle" id="verifySubtitle">
-      StewardMD is for registered medical practitioners only. Upload your medical
-      registration certificate — we verify it instantly against the National Medical
-      Register. Your certificate is used only for verification.
+      StewardMD is for registered doctors. Verify instantly by uploading your
+      <b>NMC / State Medical Council registration certificate</b> — or enter your
+      <b>registration number</b> and upload <b>Aadhaar / any government photo ID</b>
+      (we read only your name to match the register; the ID is never stored).
     </div>
 
     <!-- Account + verification status summary (populated by verify.js) -->
@@ -690,13 +691,17 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       </label>
       <div class="verify-regrow">
         <input type="text" id="verifyRegNo" class="verify-reginput" placeholder="Registration number (optional)" autocomplete="off" spellcheck="false">
-        <div class="verify-reghint">No clear certificate? Enter your NMC / State Medical Council <b>registration number</b> and upload any <b>photo ID</b> — we only read your name to match the register. Your ID is never stored.</div>
+        <div class="verify-reghint">No clear certificate? Enter your NMC / State Medical Council <b>registration number</b> and upload your <b>Aadhaar or any government photo ID</b> — we only read your name to match the register. Your ID is never stored.</div>
       </div>
       <button class="account-google-btn" id="verifySubmit" style="margin-top:14px;justify-content:center;">Choose certificate</button>
       <div class="verify-status" id="verifyStatus" role="status" aria-live="polite"></div>
     </div>
 
     <button class="account-google-btn" id="verifyDoneBtn" style="display:none;justify-content:center;">Done</button>
+
+    <!-- Escape hatch on the forced gate: start a one-time 7-day trial (prescription stays locked). -->
+    <button id="verifySkipBtn" style="display:none;margin-top:12px;width:100%;background:none;border:1px solid rgba(246,247,245,.28);border-radius:12px;padding:12px 14px;color:#f6f7f5;font:600 14px system-ui;cursor:pointer;">Skip for now — start your 7-day trial</button>
+    <div style="margin-top:6px;font:400 12px system-ui;color:#9fb0bd;text-align:center;">Full access for 7 days · the prescription generator unlocks once you verify.</div>
 
     <div class="account-fineprint" style="margin-top:16px;">
       Trouble verifying? We'll review it manually and email you — or write to
