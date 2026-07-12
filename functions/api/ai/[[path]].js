@@ -513,10 +513,12 @@ export async function onRequest(context) {
   // inputs are rejected before any provider call. Per-user quota metering + circuit
   // breaker are layered in a follow-up (functions/_usage.js + KV) — these caps are the
   // no-auth floor that bounds per-request cost immediately.
-  // Output cap: default 1400 (a complete 250–500-word clinical answer; thinking is disabled so
-  // the whole budget is the visible answer). "detailed" depth allows a fuller 700–1200-word answer.
-  const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1400));
-  const MAX_OUT = (body && body.depth === "detailed") ? Math.min(2048, Math.round(OUT_BASE * 1.6)) : OUT_BASE;
+  // Output cap. LATENCY: the streamed answer isn't done until generation finishes, so a shorter
+  // concise answer completes ~2x sooner (the #1 driver of MaiK's perceived speed). Default concise
+  // = 768 (~a tight 250–400-word bedside answer); the client's "Show more" + follow-up chips + the
+  // "detailed" depth cover length on demand. Override with MAIK_MAX_OUTPUT_TOKENS. Was 1400.
+  const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 768));
+  const MAX_OUT = (body && body.depth === "detailed") ? Math.min(2048, Math.round(OUT_BASE * 2)) : OUT_BASE;
   const MAX_IN_CHARS = Math.max(2000, (Number(env.MAIK_MAX_INPUT_TOKENS) || 4000) * 4);
 
   try {
