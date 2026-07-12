@@ -1602,7 +1602,7 @@
       ".maik-edu{font:600 11px var(--hfont);color:var(--hmut);background:rgba(100,116,139,.1);border-radius:8px;padding:5px 8px;margin-bottom:6px}",
       ".maik-assume{font:600 12px var(--hfont);color:var(--hink);background:rgba(37,99,235,.08);border-left:3px solid var(--hacc,#2563eb);border-radius:8px;padding:7px 10px;margin-bottom:8px}.maik-assume b{color:var(--hacc,#2563eb)}.maik-followups{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.maik-followups .maik-chip{font-size:12.5px;padding:7px 12px}",
       ".maik-tblwrap{overflow-x:auto;margin:8px 0;-webkit-overflow-scrolling:touch}.maik-tbl{border-collapse:collapse;width:100%;font:400 12.5px var(--hfont)}.maik-tbl th,.maik-tbl td{border:1px solid var(--hbd,#e2e8f0);padding:6px 9px;text-align:left;vertical-align:top}.maik-tbl th{background:rgba(100,116,139,.08);font-weight:700;color:var(--hink)}",
-      ".maik-cite{color:var(--hacc,#2563eb);font-weight:700;font-size:.68em;cursor:pointer;padding:0 1px;vertical-align:super;line-height:0}.maik-src ol{margin:4px 0 0 18px;padding:0}.maik-src li{margin:2px 0}.maik-caret{display:inline-block;width:6px;height:13px;background:var(--hacc,#2563eb);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}@keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}",
+      ".maik-cite{color:var(--hacc,#2563eb);font-weight:700;font-size:.68em;cursor:pointer;padding:0 1px;vertical-align:super;line-height:0}.maik-src ol{margin:4px 0 0 18px;padding:0}.maik-src li{margin:2px 0}.maik-caret{display:inline-block;width:6px;height:13px;background:var(--hacc,#2563eb);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}@keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}.maik-thinking{animation:maikThink 1.3s ease-in-out infinite}.maik-thinking .d{display:inline-block;animation:maikThink 1.3s ease-in-out infinite}.maik-thinking .d2{animation-delay:.18s}.maik-thinking .d3{animation-delay:.36s}@keyframes maikThink{0%,100%{opacity:.45}50%{opacity:1}}",
       ".maik-src{margin-top:8px;font:600 11.5px var(--hfont);color:var(--hmut)}.maik-src summary{cursor:pointer;color:var(--hp,#0f766e)}.maik-src ul{margin:4px 0 0;padding-left:18px}",
       ".maik-more{background:none;border:none;color:var(--hp,#0f766e);font:700 12px var(--hfont);cursor:pointer;padding:4px 0}",
       ".maik-chips{display:flex;flex-wrap:wrap;gap:8px}.maik-chip{background:var(--hpanel,#fff);border:1px solid var(--hbd,#e2e8f0);border-radius:999px;padding:9px 13px;font:600 13px var(--hfont);color:var(--hink);cursor:pointer}",
@@ -1850,7 +1850,7 @@
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
       _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
-      var think = bubble("ai", "✨ Searching StewardMD knowledge…");
+      var think = bubble("ai", '<span class="maik-thinking">✨ Searching StewardMD knowledge<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>');
       Promise.resolve()
         .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
         .then(function () {

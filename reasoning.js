@@ -3736,17 +3736,29 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
-      function fallback() { return self.explainGrounded(pkg, opts); }
-      if (typeof ReadableStream === "undefined" || !window.TextDecoder) return fallback();
-      // Native can't stream through CapacitorHttp — opt in (per device) to the direct WebView
-      // streaming transport (needs server CORS). Default OFF pending on-device verification; any
-      // failure falls through to the buffered non-stream path, so it can never regress the answer.
-      var nativeStream = false;
-      try { nativeStream = !!(window.SMD_IS_NATIVE && window.SMD_NATIVE && window.SMD_NATIVE.streamFetch && localStorage.getItem("smd_maik_native_stream") === "1"); } catch (e) {}
-      var doFetch = nativeStream ? window.SMD_NATIVE.streamFetch : fetch;
+      // Reveal a finished answer progressively so it "flows" like a live stream. Native WebViews
+      // buffer SSE (CapacitorHttp), so true token streaming isn't possible there — we fetch the whole
+      // answer, then type it out via onDelta (reusing the exact streaming render). Web streams for real.
+      function replay(res) {
+        var full = res && res.text;
+        if (!full || typeof onDelta !== "function") return res;
+        return new Promise(function (resolve) {
+          var i = 0, step = Math.max(4, Math.round(full.length / 90));   // ~90 frames
+          var raf = window.requestAnimationFrame || function (f) { return setTimeout(f, 16); };
+          (function tick() {
+            i = Math.min(full.length, i + step);
+            try { onDelta(full.slice(0, i)); } catch (e) {}
+            if (i >= full.length) return resolve(res);
+            raf(tick);
+          })();
+        });
+      }
+      function fallback() { return Promise.resolve(self.explainGrounded(pkg, opts)).then(replay); }
+      // Native buffers SSE → fetch-whole + typewriter. Also the no-ReadableStream path.
+      if (window.SMD_IS_NATIVE || typeof ReadableStream === "undefined" || !window.TextDecoder) return fallback();
       return aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
-        return doFetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) });
+        return fetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) });
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) return fallback();
