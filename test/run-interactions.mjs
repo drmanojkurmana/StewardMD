@@ -126,7 +126,9 @@ try {
   const { readFileSync } = await import("node:fs");
   const homeSrc = readFileSync(join(HERE, "..", "home.js"), "utf8");
   ok(/data-act="interactions"/.test(homeSrc), "home.js source contains the data-act=\"interactions\" tile");
-  ok(/Drug Interactions/.test(homeSrc), "home.js Drug Interactions tile has its label");
+  // The standalone "Drug Interactions" tile was merged into the "Drugs & Interactions" (drugmenu)
+  // tile, which opens a sheet with an "Interaction Checker" entry. Accept either label.
+  ok(/Interaction Checker|Drugs?\s*(?:&amp;|&)\s*Interactions/.test(homeSrc), "home.js surfaces the Drugs & Interactions / Interaction Checker entry point");
   ok(await ev(`return typeof (window.MEDDRUGS && MEDDRUGS.openInteractions)`) === "function", "MEDDRUGS.openInteractions is a function");
   // Simulate the home action delegate: invoke openInteractions and confirm the overlay is present.
   const opened = await ev(`if(!(window.MEDDRUGS&&MEDDRUGS.openInteractions))return false;MEDDRUGS.openInteractions();var o=document.getElementById("miOverlay");return !!(o&&o.classList.contains("on"));`);
