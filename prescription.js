@@ -87,6 +87,93 @@
   function show(html) { ensureEls(); sheet.innerHTML = '<div class="rx-wrap">' + html + '</div>'; scrim.classList.add("on"); sheet.classList.add("on"); }
   function close() { if (sheet) sheet.classList.remove("on"); if (scrim) scrim.classList.remove("on"); }
 
+  // ---- WebView-safe Print / PDF ----------------------------------------------------------------
+  // window.print() is a no-op in the native WKWebView, so we build a self-contained branded Rx
+  // document and: print it via a hidden iframe on web, or write it to a file + Share it on native
+  // (the OS share sheet offers Print / AirPrint / Save as PDF).
+  function rxNative() { try { var C = window.Capacitor; return !!(C && (C.isNativePlatform ? C.isNativePlatform() : C.isNative)); } catch (e) { return false; } }
+  function rxPlugins() { try { return (window.Capacitor && window.Capacitor.Plugins) || {}; } catch (e) { return {}; } }
+  function collectRx() {
+    var name = (sheet.querySelector("#rxPtName") || {}).value || "";
+    var age = (sheet.querySelector("#rxPtAge") || {}).value || "";
+    var lines = [];
+    sheet.querySelectorAll("#rxLines .rx-line").forEach(function (ln) {
+      if (ln.style.display === "none") return;
+      var g = ((ln.querySelector('[data-f="drug"]') || {}).value || "").trim();
+      if (ln.classList.contains("adv")) { if (g) lines.push({ advice: true, text: g }); return; }
+      if (!g) return;
+      lines.push({
+        drug: g,
+        brand: ((ln.querySelector('[data-f="brand"]') || {}).value || "").trim(),
+        dose: ((ln.querySelector('[data-f="dose"]') || {}).value || "").trim(),
+        freq: ((ln.querySelector('[data-f="freq"]') || {}).value || "").trim(),
+        duration: ((ln.querySelector('[data-f="duration"]') || {}).value || "").trim()
+      });
+    });
+    return { name: name, age: age, lines: lines };
+  }
+  function rxPrintHTML(topic, regNo) {
+    var d = collectRx(), date = ""; try { date = new Date().toISOString().slice(0, 10); } catch (e) {}
+    var n = 0;
+    var rows = d.lines.map(function (L) {
+      if (L.advice) return '<div class="adv">&bull; ' + esc(L.text) + '</div>';
+      n++;
+      var sub = [L.dose, L.freq, L.duration].filter(Boolean).join(" &middot; ");
+      return '<div class="rx"><div class="rxn">' + n + '.</div><div class="rxd"><b>' + esc(L.drug) + '</b>' +
+        (L.brand ? ' <span class="br">(' + esc(L.brand) + ')</span>' : '') +
+        (sub ? '<div class="dz">' + sub + '</div>' : '') + '</div></div>';
+    }).join("");
+    return '<!doctype html><html><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1"><title>StewardMD Prescription</title><style>' +
+      '*{box-sizing:border-box}html,body{margin:0;padding:0}' +
+      'body{font:15px/1.55 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;color:#0f172a;padding:26px}' +
+      '.hd{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #0e6e63;padding-bottom:10px}' +
+      '.logo{font:800 22px/1 Georgia,serif;color:#0e6e63}.logo b{color:#0f172a}.tag{font-size:12px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:.06em}' +
+      '.clinic{font-weight:700;margin:12px 0 2px}.pt{color:#334155;font-size:14px;margin:8px 0 4px}' +
+      '.rxsym{font:800 26px Georgia,serif;margin:12px 0 6px}' +
+      '.rx{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #eef2f1}.rxn{color:#64748b;font-weight:700;min-width:20px}.br{color:#0e6e63;font-weight:600}.dz{color:#475569;font-size:13px;margin-top:2px}' +
+      '.adv{padding:6px 0;color:#475569;font-size:13px}' +
+      '.sign{margin-top:34px;text-align:right}.sign .nm{font-weight:700}.sign .mt{color:#64748b;font-size:12px}' +
+      '.disc{margin-top:22px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.5}' +
+      '@media print{body{padding:0}@page{margin:16mm}}' +
+      '</style></head><body>' +
+      '<div class="hd"><span class="logo">Steward<b>MD</b></span><span class="tag">Prescription</span></div>' +
+      '<div class="clinic">StewardMD' + (topic ? ' &middot; ' + esc(topic) : '') + '</div>' +
+      ((d.name || d.age) ? '<div class="pt">' + esc(d.name) + (d.age ? '  &middot;  ' + esc(d.age) : '') + '</div>' : '') +
+      '<div class="rxsym">&#8478;</div><main>' + (rows || '<div class="adv">No items.</div>') + '</main>' +
+      '<div class="sign"><div class="nm">Dr. ' + esc(docName() || "—") + '</div><div class="mt">NMC Reg: ' + esc(regNo || "—") + '  &middot;  ' + esc(date) + '</div></div>' +
+      '<div class="disc">Draft prescription generated with StewardMD. Verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
+      '</body></html>';
+  }
+  function rxWebPrint(html) {
+    try {
+      var f = document.createElement("iframe");
+      f.setAttribute("aria-hidden", "true");
+      f.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden";
+      document.body.appendChild(f);
+      var doc = f.contentWindow.document; doc.open(); doc.write(html); doc.close();
+      f.contentWindow.focus();
+      setTimeout(function () { try { f.contentWindow.print(); } catch (e) {} setTimeout(function () { try { f.remove(); } catch (e) {} }, 1500); }, 350);
+      return true;
+    } catch (e) { return false; }
+  }
+  function rxNativePrint(html) {
+    var P = rxPlugins();
+    if (P.Filesystem && P.Filesystem.writeFile && P.Share && P.Share.share) {
+      P.Filesystem.writeFile({ path: "stewardmd-prescription.html", data: html, directory: "CACHE", encoding: "utf8" })
+        .then(function (res) { return P.Share.share({ title: "StewardMD Prescription", url: res.uri, dialogTitle: "Print or share prescription" }); })
+        .catch(function () { try { if (P.Share && P.Share.share) P.Share.share({ title: "StewardMD Prescription", text: (sheet && sheet.innerText) || "" }); } catch (e) {} });
+      return true;
+    }
+    try { if (navigator.share) { navigator.share({ title: "StewardMD Prescription", text: (sheet && sheet.innerText) || "" }); return true; } } catch (e) {}
+    return false;
+  }
+  function doRxPrint(topic, regNo) {
+    var html = rxPrintHTML(topic, regNo);
+    if (rxNative()) { if (!rxNativePrint(html)) rxWebPrint(html); return; }
+    if (!rxWebPrint(html)) rxNativePrint(html);
+  }
+
   // Regimen from the grounded package: advice + de-duped drug names (doses filled by the core).
   function regimenFromCtx(ctx) {
     var reg = [{ name: "Lifestyle & general measures", isAdvice: true }];
@@ -192,7 +279,7 @@
       bindDel();
       acAttach(wrap.lastElementChild);   // brand/composition search on the new line
     });
-    sheet.querySelector("#rxPrint").addEventListener("click", function () { try { window.print(); } catch (e) {} });
+    sheet.querySelector("#rxPrint").addEventListener("click", function () { try { doRxPrint(topic, regNo); } catch (e) {} });
     bindDel();
     // Brand/composition search + auto-fill on every drug line (skips advice lines).
     sheet.querySelectorAll("#rxLines .rx-line").forEach(acAttach);
