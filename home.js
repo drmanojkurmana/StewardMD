@@ -1567,46 +1567,80 @@
     if (document.getElementById("maik-sheet-css")) return;
     var st = document.createElement("style"); st.id = "maik-sheet-css";
     st.textContent = [
+      // ---- Aurora palette, scoped to the sheet so dark mode flips even though #maikSheet lives
+      //      outside #homeV2 (re-declares the same --h* names + a couple new literals). ----
+      "#maikSheet{--hpanel:#fff;--hbg:#F5F7F9;--hink:#0F172A;--hmut:#64748B;--hbd:#EAEEF3;--hp:#0F766E;--hps:#D7F5EF;--hacc:#2563EB;--mkfaint:#9AA7B6;--mkfield:#F2F5F8;--mksend:linear-gradient(140deg,#19b8a8,#0e6e63);--mkglow:rgba(20,184,166,.35);--mkyou:linear-gradient(140deg,#15a89a,#0f766e)}",
+      "body.dark #maikSheet,body.v3-dark #maikSheet{--hpanel:#101A2C;--hbg:#182338;--hink:#EAF0F7;--hmut:#8C9AB0;--hbd:#233149;--hp:#2DD4BF;--hps:#0E2E2B;--hacc:#7DB3FF;--mkfaint:#5D6E86;--mkfield:#0E1829;--mkyou:linear-gradient(140deg,#0f766e,#0b5a53)}",
       "#maikScrim{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:16000;opacity:0;transition:opacity .2s}#maikScrim.on{opacity:1}",
-      "#maikSheet{position:fixed;left:0;right:0;bottom:0;z-index:16001;background:var(--hpanel,#fff);color:var(--hink,#0f172a);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);display:flex;flex-direction:column;max-height:86vh;height:86vh;transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);font-family:var(--hfont,system-ui)}",
+      "#maikSheet{position:fixed;left:0;right:0;bottom:0;z-index:16001;background:var(--hpanel);color:var(--hink);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);display:flex;flex-direction:column;max-height:86vh;height:86vh;transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);font-family:var(--hfont,system-ui)}",
       "#maikSheet.on{transform:translateY(0)}",
-      ".maik-grab{flex:0 0 auto;width:40px;height:5px;border-radius:3px;background:var(--hbd,#cbd5e1);margin:8px auto 0;cursor:pointer}",
-      ".maik-hd{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:10px 14px 6px}",
-      ".maik-hd .mk-ti{flex:1 1 auto;min-width:0}",
-      ".maik-hd .mk-t{font:800 17px var(--hfont);color:var(--hink);line-height:1.1}.maik-hd .mk-s{font:600 12px var(--hfont);color:var(--hmut,#64748b);margin-top:2px}",
-      ".maik-hd .mk-logo{height:26px;width:auto;flex:0 0 auto;display:block}",
-      ".maik-adv{flex:0 0 auto;padding:0 16px 10px;border-bottom:1px solid var(--hbd,#e2e8f0)}",
-      ".maik-badge{display:inline-block;font:700 10.5px var(--hfont);color:var(--hp,#0f766e);background:var(--hps,#ccfbf1);border-radius:999px;padding:5px 11px;white-space:nowrap;letter-spacing:.01em}",
-      ".maik-x{margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:5px;height:38px;padding:0 14px 0 12px;border:1px solid var(--hbd,#e2e8f0);background:var(--hbg,#f1f5f9);color:var(--hink);border-radius:999px;font:800 13px var(--hfont);cursor:pointer;line-height:1}",
-      ".maik-x .xg{font-size:16px;font-weight:700;line-height:1}",
-      ".maik-x:hover{border-color:var(--hp,#0f766e);color:var(--hp,#0f766e)}",
-      ".maik-x:active{transform:scale(.94)}",
-      ".maik-hd .maik-new{margin-left:auto;background:transparent;border-color:transparent;color:var(--hmut,#64748b);padding:0 10px}",
-      ".maik-hd .maik-new:hover{border-color:var(--hp,#0f766e);color:var(--hp,#0f766e);background:var(--hbg,#f1f5f9)}",
-      ".maik-hd #maikX{margin-left:0}",
-      ".maik-body{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px;display:flex;flex-direction:column;gap:10px}",
-      ".maik-cmp{flex:0 0 auto;display:flex;flex-direction:column;gap:8px;align-items:stretch;padding:10px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--hbd,#e2e8f0);background:var(--hpanel,#fff)}",
-      ".maik-cmp-row{display:flex;gap:8px;align-items:flex-end}",
-      ".maik-cmp textarea{flex:1 1 auto;min-width:0;resize:none;max-height:120px;background:var(--hbg,#f8fafc);border:1px solid var(--hbd,#e2e8f0);border-radius:12px;color:var(--hink);font:500 15px var(--hfont);padding:10px 12px;box-sizing:border-box}",
-      ".maik-cmp button{flex:0 0 auto;background:var(--hp,#0f766e);color:#fff;border:none;border-radius:12px;padding:0 16px;height:44px;font:800 14px var(--hfont);cursor:pointer}",
-      ".maik-cmp button.maik-mic{background:var(--hbg,#f8fafc);color:var(--hp,#0f766e);border:1px solid var(--hbd,#e2e8f0);width:44px;padding:0;font-size:19px;line-height:1}",
-      ".maik-cmp button.maik-mic.live{background:#dc2626;color:#fff;border-color:#dc2626;animation:maikPulse 1.2s ease-in-out infinite}",
+      "#maikSheet *{box-sizing:border-box}",
+      ".maik-grab{flex:0 0 auto;width:38px;height:5px;border-radius:3px;background:var(--hbd);margin:9px auto 0;cursor:pointer}",
+      // header: subtle teal wash, wordmark + radial glow on the left, two circular icon buttons right
+      ".maik-hd{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:10px 14px 8px;background:linear-gradient(180deg,var(--hps),transparent)}",
+      ".maik-hd .mk-logowrap{position:relative;flex:0 0 auto;display:inline-flex;align-items:center}",
+      ".maik-hd .mk-logowrap::before{content:'';position:absolute;inset:-4px -8px;background:radial-gradient(ellipse,var(--mkglow),transparent 70%);z-index:0;animation:maikGlow 3.2s ease-in-out infinite}",
+      ".maik-hd .mk-logo{position:relative;z-index:1;height:24px;width:auto;display:block}",
+      ".maik-hd .mk-sp{flex:1 1 auto}",
+      ".maik-ic{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--hbd);background:var(--hbg);color:var(--hink);cursor:pointer;padding:0;line-height:1;font-size:18px}",
+      ".maik-ic:hover{border-color:var(--hp);color:var(--hp)}.maik-ic:active{transform:scale(.94)}",
+      "@keyframes maikGlow{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.08)}}",
+      "@media (prefers-reduced-motion:reduce){.maik-hd .mk-logowrap::before{animation:none}}",
+      // disclaimer strip: full-width, wraps (fixes old overflow)
+      ".maik-adv{flex:0 0 auto;display:flex;align-items:flex-start;gap:7px;padding:8px 16px;background:linear-gradient(90deg,var(--hps),transparent);border-top:1px solid var(--hbd);border-bottom:1px solid var(--hbd)}",
+      ".maik-adv .maik-shield{flex:0 0 auto;width:14px;height:14px;color:var(--hp);margin-top:1px}",
+      ".maik-disc{font:600 11px/1.4 var(--hfont);color:var(--hmut);white-space:normal;overflow-wrap:anywhere}",
+      // body + centered wordmark watermark (theme-swapped), sits behind the messages
+      ".maik-body{position:relative;flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px 6px;display:flex;flex-direction:column;gap:10px}",
+      ".maik-body::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:230px;height:230px;background:url('/maik-wordmark-color.png') center/contain no-repeat;opacity:.05;pointer-events:none;z-index:0}",
+      "body.dark #maikSheet .maik-body::before,body.v3-dark #maikSheet .maik-body::before{background-image:url('/maik-wordmark-white.png');opacity:.06}",
+      ".maik-body>*{position:relative;z-index:1}",
+      // composer: single pill (mic + textarea + send), extract button above
+      ".maik-cmp{flex:0 0 auto;display:flex;flex-direction:column;gap:8px;align-items:stretch;padding:10px 12px calc(12px + env(safe-area-inset-bottom));background:var(--hpanel)}",
+      ".maik-cmp-row{display:flex;gap:8px;align-items:center;background:var(--mkfield);border:1px solid var(--hbd);border-radius:24px;padding:6px 6px 6px 8px;box-shadow:0 6px 20px rgba(15,23,42,.10)}",
+      ".maik-cmp-row:focus-within{border-color:var(--hp)}",
+      ".maik-cmp textarea{flex:1 1 auto;min-width:0;resize:none;max-height:120px;background:transparent;border:0;color:var(--hink);font:500 14px var(--hfont);padding:8px 2px;box-sizing:border-box;outline:none}",
+      ".maik-cmp textarea::placeholder{color:var(--mkfaint)}",
+      ".maik-mic{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--hbg);color:var(--hmut);border:1px solid var(--hbd);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;font-size:16px;line-height:1}",
+      ".maik-mic:hover{color:var(--hp);background:var(--hps);border-color:var(--hps)}.maik-mic:active{transform:scale(.94)}",
+      ".maik-mic.live{background:#dc2626;color:#fff;border-color:#dc2626;animation:maikPulse 1.2s ease-in-out infinite}",
       "@keyframes maikPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}50%{box-shadow:0 0 0 6px rgba(220,38,38,0)}}",
-      ".maik-cmp button.maik-extract{background:transparent;color:var(--hp,#0f766e);border:1px dashed var(--hp,#0f766e);height:auto;min-height:38px;padding:8px 12px;font:700 13px var(--hfont);width:100%;text-align:center}",
-      ".maik-cmp button.maik-extract[hidden]{display:none}",
-      ".maik-b{max-width:90%;padding:10px 13px;border-radius:14px;font:500 14px/1.55 var(--hfont);word-break:break-word}",
-      ".maik-b.you{align-self:flex-end;background:var(--hp,#0f766e);color:#fff}",
-      ".maik-b.ai{align-self:flex-start;background:var(--hbg,#f8fafc);border:1px solid var(--hbd,#e2e8f0);color:var(--hink)}",
-      ".maik-b .maik-h{font:800 13.5px var(--hfont);margin:8px 0 3px;color:var(--hp,#0f766e)}.maik-b .maik-h:first-child{margin-top:0}",
-      ".maik-b p{margin:4px 0}.maik-b ul,.maik-b ol{margin:4px 0;padding-left:20px}.maik-b li{margin:2px 0}.maik-b code{background:rgba(100,116,139,.15);border-radius:4px;padding:0 4px;font-size:12.5px}",
-      ".maik-edu{font:600 11px var(--hfont);color:var(--hmut);background:rgba(100,116,139,.1);border-radius:8px;padding:5px 8px;margin-bottom:6px}",
-      ".maik-assume{font:600 12px var(--hfont);color:var(--hink);background:rgba(37,99,235,.08);border-left:3px solid var(--hacc,#2563eb);border-radius:8px;padding:7px 10px;margin-bottom:8px}.maik-assume b{color:var(--hacc,#2563eb)}.maik-followups{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.maik-followups .maik-chip{font-size:12.5px;padding:7px 12px}",
-      ".maik-tblwrap{overflow-x:auto;margin:8px 0;-webkit-overflow-scrolling:touch}.maik-tbl{border-collapse:collapse;width:100%;font:400 12.5px var(--hfont)}.maik-tbl th,.maik-tbl td{border:1px solid var(--hbd,#e2e8f0);padding:6px 9px;text-align:left;vertical-align:top}.maik-tbl th{background:rgba(100,116,139,.08);font-weight:700;color:var(--hink)}",
-      ".maik-cite{color:var(--hacc,#2563eb);font-weight:700;font-size:.68em;cursor:pointer;padding:0 1px;vertical-align:super;line-height:0}.maik-src ol{margin:4px 0 0 18px;padding:0}.maik-src li{margin:2px 0}.maik-caret{display:inline-block;width:6px;height:13px;background:var(--hacc,#2563eb);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}@keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}.maik-thinking{animation:maikThink 1.3s ease-in-out infinite}.maik-thinking .d{display:inline-block;animation:maikThink 1.3s ease-in-out infinite}.maik-thinking .d2{animation-delay:.18s}.maik-thinking .d3{animation-delay:.36s}@keyframes maikThink{0%,100%{opacity:.45}50%{opacity:1}}",
-      ".maik-src{margin-top:8px;font:600 11.5px var(--hfont);color:var(--hmut)}.maik-src summary{cursor:pointer;color:var(--hp,#0f766e)}.maik-src ul{margin:4px 0 0;padding-left:18px}",
-      ".maik-more{background:none;border:none;color:var(--hp,#0f766e);font:700 12px var(--hfont);cursor:pointer;padding:4px 0}",
-      ".maik-chips{display:flex;flex-wrap:wrap;gap:8px}.maik-chip{background:var(--hpanel,#fff);border:1px solid var(--hbd,#e2e8f0);border-radius:999px;padding:9px 13px;font:600 13px var(--hfont);color:var(--hink);cursor:pointer}",
-      ".maik-welcome{font:500 14px/1.6 var(--hfont);color:var(--hink)}",
+      ".maik-send{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--mksend);color:#fff;border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;box-shadow:0 6px 16px rgba(15,118,110,.5)}",
+      ".maik-send:active{transform:scale(.94)}.maik-send:disabled{opacity:.55}",
+      ".maik-extract{background:transparent;color:var(--hp);border:1px dashed var(--hp);border-radius:12px;min-height:38px;padding:8px 12px;font:700 13px var(--hfont);width:100%;text-align:center;cursor:pointer}",
+      ".maik-extract[hidden]{display:none}",
+      // bubbles
+      ".maik-b{max-width:92%;padding:11px 13px;border-radius:16px 16px 16px 6px;font:500 12.5px/1.5 var(--hfont);word-break:break-word;background:var(--hbg);border:1px solid var(--hbd);color:var(--hink);box-shadow:0 1px 2px rgba(15,23,42,.04)}",
+      ".maik-b.you{align-self:flex-end;max-width:82%;background:var(--mkyou);border:none;color:#fff;border-radius:16px 16px 6px 16px;padding:9px 12px;box-shadow:0 4px 14px rgba(15,118,110,.28)}",
+      ".maik-b.ai{align-self:flex-start}",
+      ".maik-attr{display:flex;align-items:center;gap:5px;margin-bottom:5px}.maik-attr svg{width:13px;height:13px;color:var(--hp)}.maik-attr b{font:800 10.5px var(--hfont);letter-spacing:.06em;text-transform:uppercase;color:var(--hp)}",
+      ".maik-b .maik-h{font:800 12.5px var(--hfont);margin:8px 0 3px;color:var(--hink)}.maik-b .maik-h:first-child{margin-top:0}",
+      ".maik-b p{margin:4px 0;color:var(--hink)}.maik-b ul,.maik-b ol{margin:4px 0;padding-left:18px}.maik-b li{margin:3px 0;font:500 12px/1.45 var(--hfont)}.maik-b ul li::marker{color:var(--hp)}.maik-b code{background:rgba(100,116,139,.15);border-radius:4px;padding:0 4px;font-size:12px}",
+      ".maik-edu{font:600 11px var(--hfont);color:var(--hmut);background:var(--hbg);border-radius:10px;padding:6px 9px;margin-bottom:6px}",
+      ".maik-assume{font:600 12px var(--hfont);color:var(--hink);background:rgba(37,99,235,.08);border-left:3px solid var(--hacc);border-radius:10px;padding:7px 10px;margin-bottom:8px}.maik-assume b{color:var(--hacc)}",
+      ".maik-followups{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}",
+      ".maik-tblwrap{overflow-x:auto;margin:8px 0;-webkit-overflow-scrolling:touch}.maik-tbl{border-collapse:collapse;width:100%;font:400 12px var(--hfont)}.maik-tbl th,.maik-tbl td{border:1px solid var(--hbd);padding:6px 9px;text-align:left;vertical-align:top}.maik-tbl th{background:var(--hbg);font-weight:700;color:var(--hink)}",
+      ".maik-cite{color:var(--hacc);font-weight:700;font-size:.7em;cursor:pointer;padding:0 1px;vertical-align:super;line-height:0}",
+      ".maik-caret{display:inline-block;width:6px;height:13px;background:var(--hacc);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}@keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}",
+      ".maik-thinking{color:var(--hmut)}.maik-thinking .d{display:inline-block;animation:maikThink 1.3s ease-in-out infinite}.maik-thinking .d2{animation-delay:.18s}.maik-thinking .d3{animation-delay:.36s}@keyframes maikThink{0%,100%{opacity:.45}50%{opacity:1}}",
+      // sources footer: teal row with book icon (keeps the <details> behavior)
+      ".maik-src{margin-top:9px;border-top:1px solid var(--hbd);padding-top:7px;font:600 10.5px var(--hfont);color:var(--hp)}.maik-src summary{cursor:pointer;color:var(--hp);display:flex;align-items:center;gap:5px;list-style:none}.maik-src summary::-webkit-details-marker{display:none}.maik-src summary svg{width:12px;height:12px}.maik-src ol{margin:6px 0 0 18px;padding:0;color:var(--hmut)}.maik-src li{margin:2px 0}",
+      ".maik-more{background:none;border:none;color:var(--hp);font:700 12px var(--hfont);cursor:pointer;padding:4px 0}",
+      // chips / follow-up pills
+      ".maik-chips{display:flex;flex-wrap:wrap;gap:8px}",
+      ".maik-chip{background:var(--hps);border:1px solid var(--hps);border-radius:999px;padding:6px 11px;font:600 11.5px var(--hfont);color:var(--hp);cursor:pointer}",
+      ".maik-chip:hover{border-color:var(--hp)}.maik-chip:active{transform:scale(.96)}",
+      // welcome + suggestion cards (empty state)
+      ".maik-welcome{font:500 12.5px/1.5 var(--hfont);color:var(--hink)}",
+      ".maik-empty{display:flex;flex-direction:column;justify-content:center;min-height:100%;padding:6px 2px}",
+      ".maik-empty .mk-hl{font:800 22px/1.24 var(--hfont);letter-spacing:-.02em;color:var(--hink);margin:0}",
+      ".maik-empty .mk-sub{font:500 12.5px/1.5 var(--hfont);color:var(--hmut);margin:8px 0 16px;max-width:44ch}",
+      ".maik-sg{display:flex;flex-direction:column;gap:8px}",
+      ".maik-card{display:flex;align-items:center;gap:11px;text-align:left;width:100%;padding:11px 12px;border:1px solid var(--hbd);border-radius:14px;background:var(--hbg);box-shadow:0 1px 2px rgba(15,23,42,.04);cursor:pointer;color:var(--hink)}",
+      ".maik-card:hover{border-color:var(--hp);box-shadow:0 6px 16px rgba(15,118,110,.14)}.maik-card:active{transform:scale(.99)}",
+      ".maik-card .ic{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:linear-gradient(140deg,var(--hps),var(--hbg));color:var(--hp);display:inline-flex;align-items:center;justify-content:center}.maik-card .ic svg{width:18px;height:18px}",
+      ".maik-card .bd{flex:1 1 auto;min-width:0}.maik-card .t{display:block;font:700 13px var(--hfont);color:var(--hink)}.maik-card .s{display:block;font:500 11px var(--hfont);color:var(--hmut);margin-top:2px}",
+      ".maik-card .chev{flex:0 0 auto;color:var(--mkfaint)}.maik-card .chev svg{width:16px;height:16px}",
       "body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-open .inf-fab,body.maik-open .ghis-ward-fab{display:none!important}"
     ].join("");
     (document.head || document.documentElement).appendChild(st);
@@ -1619,15 +1653,17 @@
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask MaiK");
+    var mkDark = document.body.classList.contains("dark") || document.body.classList.contains("v3-dark");
+    var mkLogo = mkDark ? "/maik-wordmark-white.png" : "/maik-wordmark-color.png";
     sheet.innerHTML =
       '<div class="maik-grab" id="maikGrab" aria-hidden="true"></div>' +
-      '<div class="maik-hd"><img class="mk-logo" src="/maik-logo.png" alt="MaiK" /><div class="mk-ti"><div class="mk-s">Medical AI Knowledge · Clinical assistant</div></div>' +
-        '<button class="maik-x maik-new" id="maikNew" aria-label="New conversation" title="Start a new conversation"><span class="xg">＋</span>New</button>' +
-        '<button class="maik-x" id="maikX" aria-label="Close assistant"><span class="xg">✕</span>Close</button></div>' +
-      '<div class="maik-adv"><span class="maik-badge">⚠ AI-generated · not medical advice — verify independently</span></div>' +
+      '<div class="maik-hd"><span class="mk-logowrap"><img class="mk-logo" src="' + mkLogo + '" alt="MaiK" /></span><span class="mk-sp"></span>' +
+        '<button class="maik-ic" id="maikNew" aria-label="New conversation" title="New conversation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>' +
+        '<button class="maik-ic" id="maikX" aria-label="Close assistant"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button></div>' +
+      '<div class="maik-adv"><svg class="maik-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/></svg><span class="maik-disc">Grounded · AI-generated, verify independently</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
       '<div class="maik-cmp"><button id="maikExtract" class="maik-extract" type="button" hidden>🩺 Extract findings for Clinical Reasoning →</button>' +
-      '<div class="maik-cmp-row"><button id="maikMic" class="maik-mic" type="button" aria-label="Dictate to MaiK">🎤</button><textarea id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea><button id="maikSend">Send</button></div></div>';
+      '<div class="maik-cmp-row"><button id="maikMic" class="maik-mic" type="button" aria-label="Dictate to MaiK"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/></svg></button><textarea id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea><button id="maikSend" class="maik-send" aria-label="Send"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="6"/><path d="M6 12l6-6 6 6"/></svg></button></div></div>';
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
     requestAnimationFrame(function () { scrim.classList.add("on"); sheet.classList.add("on"); });
@@ -1640,19 +1676,42 @@
       list.forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.textContent = c.label; b.addEventListener("click", c.on); w.appendChild(b); });
       body.appendChild(w); scroll();
     }
+    // Aurora empty/welcome state: centered headline + sub + list-style suggestion cards. Same
+    // handlers as before; active-case swaps to the four case-aware prompts.
+    var MK_ICO = {
+      steth: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>',
+      book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4a2 2 0 0 1 2-2h12v18H7a2 2 0 0 0-2 2z"/><path d="M5 4v18"/></svg>',
+      pill: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 20.5 10.5a4.95 4.95 0 0 0-7-7l-10 10a4.95 4.95 0 0 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>',
+      calc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="8.01" y2="12"/><line x1="12" y1="12" x2="12.01" y2="12"/><line x1="16" y1="12" x2="16.01" y2="12"/><line x1="8" y1="16" x2="8.01" y2="16"/></svg>',
+      quest: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1 .9-1 1.6"/><line x1="12" y1="16.5" x2="12.01" y2="16.5"/></svg>',
+      search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+      flask: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg>',
+      chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'
+    };
+    function suggCards(list) {
+      var wrap = document.createElement("div"); wrap.className = "maik-empty";
+      wrap.innerHTML = '<h2 class="mk-hl">Ask MaiK anything clinical.</h2>' +
+        '<p class="mk-sub">Grounded answers from StewardMD’s knowledge base — with sources you can verify.</p>';
+      var sg = document.createElement("div"); sg.className = "maik-sg";
+      list.forEach(function (c) {
+        var b = document.createElement("button"); b.className = "maik-card"; b.type = "button";
+        b.innerHTML = '<span class="ic">' + c.ic + '</span><span class="bd"><span class="t">' + maikEscH(c.t) + '</span><span class="s">' + maikEscH(c.s) + '</span></span><span class="chev">' + MK_ICO.chev + '</span>';
+        b.addEventListener("click", c.on); sg.appendChild(b);
+      });
+      wrap.appendChild(sg); body.appendChild(wrap); scroll();
+    }
     function emptyState() {
-      bubble("ai", '<div class="maik-welcome">Hello — I’m <b>MaiK</b>, your clinical knowledge assistant. Ask a general clinical question and I’ll answer from StewardMD’s knowledge base, or start a patient assessment.</div>');
-      if (maikActiveCase()) chips([
-        { label: "What findings are missing?", on: function () { qEl.value = "What findings are missing for the current differential?"; send(); } },
-        { label: "Explain this differential", on: function () { qEl.value = "Explain the leading diagnosis in the current assessment."; send(); } },
-        { label: "What investigations next?", on: function () { qEl.value = "What investigations should I order next?"; send(); } },
-        { label: "Culture-directed options", on: function () { qEl.value = "What are the culture-directed antibiotic options?"; send(); } }
+      if (maikActiveCase()) suggCards([
+        { t: "What findings are missing?", s: "Complete the clinical picture", ic: MK_ICO.quest, on: function () { qEl.value = "What findings are missing for the current differential?"; send(); } },
+        { t: "Explain this differential", s: "Reasoning for the leading diagnosis", ic: MK_ICO.book, on: function () { qEl.value = "Explain the leading diagnosis in the current assessment."; send(); } },
+        { t: "What investigations next?", s: "Targeted next steps", ic: MK_ICO.search, on: function () { qEl.value = "What investigations should I order next?"; send(); } },
+        { t: "Culture-directed options", s: "De-escalation choices", ic: MK_ICO.flask, on: function () { qEl.value = "What are the culture-directed antibiotic options?"; send(); } }
       ]);
-      else chips([
-        { label: "Start a clinical assessment", on: function () { close(); try { openDxChooser(); } catch (e) {} } },
-        { label: "Ask a general knowledge question", on: function () { qEl.value = "How to treat organophosphate poisoning?"; try { qEl.focus(); } catch (e) {} } },
-        { label: "Open Drug Index", on: function () { close(); var b = document.querySelector('#homeV2 [data-act="drugs"]'); if (b) b.click(); else toast("Open Drugs from the home screen."); } },
-        { label: "Open calculator", on: function () { close(); var b = document.querySelector('#homeV2 [data-act="calculators"]'); if (b) b.click(); else toast("Open Calculators from the home screen."); } }
+      else suggCards([
+        { t: "Start a clinical assessment", s: "Guided differential & workup", ic: MK_ICO.steth, on: function () { close(); try { openDxChooser(); } catch (e) {} } },
+        { t: "Ask a knowledge question", s: "Cited, page-level answers", ic: MK_ICO.book, on: function () { qEl.value = "How to treat organophosphate poisoning?"; try { qEl.focus(); } catch (e) {} } },
+        { t: "Open Drug Index", s: "Brands, doses, spectrum, cautions", ic: MK_ICO.pill, on: function () { close(); var b = document.querySelector('#homeV2 [data-act="drugs"]'); if (b) b.click(); else toast("Open Drugs from the home screen."); } },
+        { t: "Open calculators", s: "70+ clinical tools", ic: MK_ICO.calc, on: function () { close(); var b = document.querySelector('#homeV2 [data-act="calculators"]'); if (b) b.click(); else toast("Open Calculators from the home screen."); } }
       ]);
     }
     // patient-specific (individualized) request with NO active case → redirect, don't answer
@@ -1809,12 +1868,15 @@
       var srcArr = (pkg && pkg.sources && pkg.sources.length) ? pkg.sources.map(function (s) { return s.title; })
         : ((window.SMD_MaiK && SMD_MaiK.sourceList) ? SMD_MaiK.sourceList(pkg).map(function (s) { return s.title; })
           : ((window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : []));
-      var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + ' ▸</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
+      var bookSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4a2 2 0 0 1 2-2h12v18H7a2 2 0 0 0-2 2z"/><path d="M5 4v18"/></svg>';
+      var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + bookSvg + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + '</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
+      // MaiK attribution row (sparkle + MAIK) atop every answer bubble.
+      var attrHTML = '<div class="maik-attr"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8z"/></svg><b>MaiK</b></div>';
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> — not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
-      var full = eduHTML + rendered + srcHTML;
+      var full = attrHTML + eduHTML + rendered + srcHTML;
       if (md.length > 700) {
-        think.innerHTML = eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
+        think.innerHTML = attrHTML + eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
         var cd = think.querySelector(".maik-collapsed"); cd.style.maxHeight = "260px"; cd.style.overflow = "hidden";
         var mb = document.createElement("button"); mb.className = "maik-more"; mb.textContent = "Show more ▾";
         mb.addEventListener("click", function () { var open = cd.style.maxHeight === "none"; cd.style.maxHeight = open ? "260px" : "none"; mb.textContent = open ? "Show more ▾" : "Show less ▴"; });
