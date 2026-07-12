@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS sources (
   homepage       TEXT DEFAULT '',           -- org homepage (shown as a reference link)
   guideline_page TEXT DEFAULT '',           -- page to HEAD-poll when parser_type='head'
   rss_url        TEXT DEFAULT '',           -- RSS/Atom feed when parser_type='rss'
-  parser_type    TEXT NOT NULL DEFAULT 'rss',                -- rss|head
+  query          TEXT DEFAULT '',           -- Europe PMC query when parser_type='litapi'
+  parser_type    TEXT NOT NULL DEFAULT 'rss',                -- rss|head|litapi
   priority       INTEGER NOT NULL DEFAULT 100,               -- lower = crawled first
   enabled        INTEGER NOT NULL DEFAULT 1,
   -- conditional-request state for parser_type='head' (metadata comparison before download)

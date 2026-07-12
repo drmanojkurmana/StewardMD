@@ -10,6 +10,7 @@
 import * as repo from "./_updates_repo.js";
 import { summarizeDocument } from "./_summarize.js";
 import { clean, sha256hex, itemHashInput, parseRss, keepItem } from "./_updates_util.js";
+import { fetchLitApi } from "./_litapi.js";
 
 const UA = "StewardMD/1.0 (+https://stewardmd.in)";
 export { parseRss };
@@ -21,7 +22,7 @@ function metaFor(source, item, excerpt) {
     sourceType: source.type,
     workspace: source.workspace,
     url: item.url || source.guideline_page || source.homepage || "",
-    doi: "", pmid: "",
+    doi: item.doi || "", pmid: item.pmid || "",
     publishedTs: item.ts || Date.now(),
     excerpt,
   };
@@ -41,7 +42,7 @@ async function storeSummary(env, source, item, docKey, hash, mode) {
     category: repo.typeCategory(source.type), published_ts: item.ts || Date.now(), importance: d.importance,
     est_read_min: d.est_read_min, summary: d.summary, summary_json,
     official_url: d.official_url || item.url || "", official_pdf_url: d.official_pdf_url || "",
-    doi: d.doi || "", pmid: d.pmid || "", keywords: (d.keywords || []).join(", "), version: d.version || "",
+    doi: d.doi || item.doi || "", pmid: d.pmid || item.pmid || "", keywords: (d.keywords || []).join(", "), version: d.version || "",
     content_hash: hash, auto: 1,
   };
   const pushItem = (id) => ({ id, title: base.title, url: base.official_url, workspace: base.workspace, importance: base.importance, organization: base.organization, category: base.category });
@@ -131,6 +132,39 @@ async function crawlHeadSource(env, source, budget) {
   return acc;
 }
 
+// Literature-API source (Europe PMC): auto-discovers individual published guideline
+// documents via source.query, then summarizes each abstract into a rich card.
+async function crawlLitApiSource(env, source, budget) {
+  const acc = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0, items: [] };
+  const query = source.query || source.rss_url;
+  if (!query) { await repo.addCrawlLog(env, { source_id: source.id, status: "skipped", detail: "no query" }); return acc; }
+  let results;
+  try { results = await fetchLitApi(query, { limit: 12 }); }
+  catch (e) { await repo.addCrawlLog(env, { source_id: source.id, status: "error", detail: String(e && e.message || e).slice(0, 200) }); acc.errors++; return acc; }
+
+  const maxNew = Math.max(1, parseInt(env.UPDATES_MAX_NEW_PER_SOURCE, 10) || 8);
+  for (const it of results) {
+    if (acc.new + acc.updated >= maxNew) break;
+    if (budget.left <= 0) break;
+    const docKey = it.docKey;
+    const hash = await sha256hex(it.title + "|" + it.abstract);
+    const existing = await repo.getByDocKey(env, docKey);
+    if (existing && existing.content_hash === hash) { acc.unchanged++; continue; }        // no AI
+    const mode = existing ? "updated" : "new";
+    budget.left--;
+    const item = { title: it.title, url: it.url, desc: it.abstract, ts: it.ts, doi: it.doi, pmid: it.pmid };
+    const res = await storeSummary(env, source, item, docKey, hash, mode);
+    acc.ai += res.ai ? 1 : 0;
+    if (!res.ok) { acc.errors++; await repo.addCrawlLog(env, { source_id: source.id, status: "error", detail: "summarize: " + (res.error || ""), ai_used: 1 }); continue; }
+    acc[res.mode]++;
+    if (res.item) acc.items.push(res.item);
+  }
+  await repo.addCrawlLog(env, { source_id: source.id, status: (acc.new || acc.updated) ? (acc.updated ? "updated" : "new") : "unchanged", detail: `new=${acc.new} updated=${acc.updated} unchanged=${acc.unchanged} err=${acc.errors} (litapi)`, ai_used: acc.ai });
+  return acc;
+}
+
+function crawlFor(parser) { return parser === "litapi" ? crawlLitApiSource : (parser === "head" ? crawlHeadSource : crawlRssSource); }
+
 // Entry point. Iterates enabled sources; bounds total AI calls per run. Returns a tally.
 export async function runPipeline(env) {
   if (!repo.hasDb(env)) return { ok: false, error: "no-db" };
@@ -138,7 +172,7 @@ export async function runPipeline(env) {
   const total = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0, sources: sources.length, items: [] };
   const budget = { left: Math.max(1, parseInt(env.UPDATES_MAX_AI_PER_RUN, 10) || 20) };
   for (const s of sources) {
-    const acc = s.parser_type === "head" ? await crawlHeadSource(env, s, budget) : await crawlRssSource(env, s, budget);
+    const acc = await crawlFor(s.parser_type)(env, s, budget);
     total.new += acc.new; total.updated += acc.updated; total.unchanged += acc.unchanged; total.errors += acc.errors; total.ai += acc.ai;
     if (acc.items && acc.items.length) total.items = total.items.concat(acc.items);
   }
