@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS sources (
   id             TEXT PRIMARY KEY,          -- slug, e.g. "fda-press"
   name           TEXT NOT NULL,             -- display name, e.g. "FDA Press Releases"
   workspace      TEXT NOT NULL DEFAULT 'internal_medicine',  -- one of the 8 workspaces
+  branch         TEXT DEFAULT '',           -- sub-specialty within internal_medicine (cardiology, …); '' = general
   type           TEXT NOT NULL DEFAULT 'guideline',          -- guideline|drug_approval|safety_alert|trial
   homepage       TEXT DEFAULT '',           -- org homepage (shown as a reference link)
   guideline_page TEXT DEFAULT '',           -- page to HEAD-poll when parser_type='head'
@@ -39,6 +40,7 @@ CREATE TABLE IF NOT EXISTS updates (
   type            TEXT NOT NULL DEFAULT 'guideline',
   organization    TEXT DEFAULT '',
   workspace       TEXT NOT NULL DEFAULT 'internal_medicine',
+  branch          TEXT DEFAULT '',          -- sub-specialty within internal_medicine
   title           TEXT NOT NULL,
   body            TEXT DEFAULT '',          -- short preview (back-compat with old feed card)
   category        TEXT DEFAULT 'general',   -- legacy category (back-compat: approval|safety|...)
@@ -63,6 +65,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_updates_dockey ON updates(doc_key);
 CREATE INDEX IF NOT EXISTS idx_updates_feed  ON updates(published_ts DESC);
 CREATE INDEX IF NOT EXISTS idx_updates_type  ON updates(type, published_ts DESC);
 CREATE INDEX IF NOT EXISTS idx_updates_ws    ON updates(workspace, published_ts DESC);
+CREATE INDEX IF NOT EXISTS idx_updates_branch ON updates(branch, published_ts DESC);
 
 -- ---- Version history (What's-Changed lives here; diff populated in Phase 3) ----
 CREATE TABLE IF NOT EXISTS update_versions (
@@ -93,6 +96,7 @@ CREATE INDEX IF NOT EXISTS idx_crawl_ts ON crawl_logs(ts DESC);
 CREATE TABLE IF NOT EXISTS user_prefs (
   uid          TEXT PRIMARY KEY,            -- "fb:<uid>" server-derived identity
   workspaces   TEXT NOT NULL DEFAULT '["internal_medicine"]',  -- JSON array
+  branches     TEXT DEFAULT '[]',           -- JSON array of IM sub-specialties (filter pref)
   push_enabled INTEGER NOT NULL DEFAULT 1,
   updated_ts   INTEGER NOT NULL DEFAULT 0
 );

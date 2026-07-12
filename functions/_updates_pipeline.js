@@ -37,28 +37,29 @@ async function storeSummary(env, source, item, docKey, hash, mode) {
   const summary_json = JSON.stringify(d);
   const base = {
     doc_key: docKey, source_id: source.id, type: source.type, organization: d.organization || source.name,
-    workspace: d.workspace || source.workspace, title: d.title || item.title, body,
+    workspace: d.workspace || source.workspace, branch: source.branch || "", title: d.title || item.title, body,
     category: repo.typeCategory(source.type), published_ts: item.ts || Date.now(), importance: d.importance,
     est_read_min: d.est_read_min, summary: d.summary, summary_json,
     official_url: d.official_url || item.url || "", official_pdf_url: d.official_pdf_url || "",
     doi: d.doi || "", pmid: d.pmid || "", keywords: (d.keywords || []).join(", "), version: d.version || "",
     content_hash: hash, auto: 1,
   };
+  const pushItem = (id) => ({ id, title: base.title, url: base.official_url, workspace: base.workspace, importance: base.importance, organization: base.organization, category: base.category });
   if (mode === "updated") {
     const existing = await repo.getByDocKey(env, docKey);
     if (existing) {
       // snapshot the PREVIOUS summary as a version (Phase 3 fills whats_changed_json)
       await repo.insertVersion(env, { update_id: existing.id, version: existing.version || "", published_ts: existing.published_ts, summary_json: existing.summary_json || "", content_hash: existing.content_hash || "" });
       await repo.updateExisting(env, existing.id, base);
-      return { ai: true, ok: true, id: existing.id, mode: "updated" };
+      return { ai: true, ok: true, id: existing.id, mode: "updated", item: pushItem(existing.id) };
     }
   }
   const id = await repo.insertUpdate(env, base);
-  return { ai: true, ok: true, id, mode: "new" };
+  return { ai: true, ok: true, id, mode: "new", item: pushItem(id) };
 }
 
 async function crawlRssSource(env, source, budget) {
-  const acc = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0 };
+  const acc = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0, items: [] };
   let xml = "";
   try {
     const r = await fetch(source.rss_url, { headers: { "User-Agent": UA, "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml" }, cf: { cacheTtl: 300 } });
@@ -82,13 +83,14 @@ async function crawlRssSource(env, source, budget) {
     acc.ai += res.ai ? 1 : 0;
     if (!res.ok) { acc.errors++; await repo.addCrawlLog(env, { source_id: source.id, status: "error", detail: "summarize: " + (res.error || ""), ai_used: 1 }); continue; }
     acc[res.mode]++;
+    if (res.item) acc.items.push(res.item);
   }
   await repo.addCrawlLog(env, { source_id: source.id, status: (acc.new || acc.updated) ? (acc.updated ? "updated" : "new") : "unchanged", detail: `new=${acc.new} updated=${acc.updated} unchanged=${acc.unchanged} err=${acc.errors}`, ai_used: acc.ai });
   return acc;
 }
 
 async function crawlHeadSource(env, source, budget) {
-  const acc = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0 };
+  const acc = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0, items: [] };
   const page = source.guideline_page || source.homepage;
   if (!page) { await repo.addCrawlLog(env, { source_id: source.id, status: "skipped", detail: "no guideline_page" }); return acc; }
   const headers = { "User-Agent": UA };
@@ -124,6 +126,7 @@ async function crawlHeadSource(env, source, budget) {
   acc.ai += res.ai ? 1 : 0;
   if (!res.ok) { acc.errors++; await repo.addCrawlLog(env, { source_id: source.id, status: "error", detail: "summarize: " + (res.error || ""), ai_used: 1 }); return acc; }
   acc[res.mode]++;
+  if (res.item) acc.items.push(res.item);
   await repo.addCrawlLog(env, { source_id: source.id, status: res.mode, detail: "head-detected change", ai_used: 1 });
   return acc;
 }
@@ -132,11 +135,12 @@ async function crawlHeadSource(env, source, budget) {
 export async function runPipeline(env) {
   if (!repo.hasDb(env)) return { ok: false, error: "no-db" };
   const sources = await repo.listSources(env, true);
-  const total = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0, sources: sources.length };
+  const total = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0, sources: sources.length, items: [] };
   const budget = { left: Math.max(1, parseInt(env.UPDATES_MAX_AI_PER_RUN, 10) || 20) };
   for (const s of sources) {
     const acc = s.parser_type === "head" ? await crawlHeadSource(env, s, budget) : await crawlRssSource(env, s, budget);
     total.new += acc.new; total.updated += acc.updated; total.unchanged += acc.unchanged; total.errors += acc.errors; total.ai += acc.ai;
+    if (acc.items && acc.items.length) total.items = total.items.concat(acc.items);
   }
   await repo.pruneCrawlLogs(env, parseInt(env.UPDATES_CRAWL_LOG_KEEP, 10) || 500);
   total.ok = true;

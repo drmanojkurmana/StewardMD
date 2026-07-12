@@ -76,6 +76,8 @@
   }
   function api(path) { return (window.SMD_API_BASE || "") + path; }
   function flag(v) { try { v == null ? localStorage.removeItem("smd_push_on") : localStorage.setItem("smd_push_on", "1"); } catch (e) {} }
+  // Selected specialty workspaces for specialty-aware push (set via Notification preferences).
+  function workspaces() { try { var a = JSON.parse(localStorage.getItem("smd_notif_prefs") || "null"); if (a && Array.isArray(a.workspaces) && a.workspaces.length) return a.workspaces; } catch (e) {} return ["internal_medicine"]; }
 
   var _token = null, _wired = false;
 
@@ -91,7 +93,7 @@
         if (jwt) headers["Authorization"] = "Bearer " + jwt;   // server derives the owning account from this
         return fetch(api("/api/push/register-native"), {
           method: "POST", headers: headers,
-          body: JSON.stringify({ token: _token, platform: platform() })
+          body: JSON.stringify({ token: _token, platform: platform(), workspaces: workspaces() })
         });
       }).then(function () { flag("1"); }).catch(function () {});
     });

@@ -1229,6 +1229,7 @@
       mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
+      mi("bell", "Notification preferences", "Choose which specialties alert you", "notifprefs") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
       mi("calc", "Calculators", "50+ clinical tools", "calculators") +
       mi("play", "App tour", "Replay the guided tour", "apptour") +
@@ -1245,6 +1246,7 @@
       b.addEventListener("click", function () {
         var a = b.getAttribute("data-mi");
         if (a === "display") return openDisplay();
+        if (a === "notifprefs") return openNotifPrefs();
         if (a === "account") return openAccount();
         if (a === "subscription") return openSubscription();
         if (a === "ack") { closeSheet(); return openAck(); }
@@ -2105,9 +2107,12 @@
   var tEl, tTimer;
   function toast(msg) { if (!tEl) { tEl = document.createElement("div"); tEl.className = "hv-toast"; document.body.appendChild(tEl); } tEl.textContent = msg; tEl.classList.add("on"); clearTimeout(tTimer); tTimer = setTimeout(function () { tEl.classList.remove("on"); }, 1800); }
 
-  /* ================= Notifications (🔔 bell → medical updates) ================= */
-  var NOTIF_API = "/api/updates", NOTIF_SEEN = "smd_updates_seen_ts";
-  var _notifItems = null, _notifRoot = null;
+  /* ================= Notifications (🔔 bell → Notifications + Medical Updates) ================= */
+  var NOTIF_API = "/api/updates", NOTIF_SEEN = "smd_updates_seen_ts", NOTIF_BM = "smd_updates_bm";
+  var _notifItems = null;                 // Tab 1: manual app notices (auto=0)
+  var _feedItems = [], _feedCursor = null, _feedEnd = false, _feedLoading = false;
+  var _feedType = "all", _feedQ = "", _feedBranch = "all";
+  var _notifRoot = null, _activeTab = "updates", _detailRoot = null;
   function nEsc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function nSeen() { try { return parseInt(localStorage.getItem(NOTIF_SEEN) || "0", 10) || 0; } catch (e) { return 0; } }
   function nSetSeen(ts) { try { localStorage.setItem(NOTIF_SEEN, String(ts || Date.now())); } catch (e) {} }
@@ -2118,16 +2123,74 @@
     if (s < 86400) return Math.floor(s / 3600) + "h ago"; if (s < 604800) return Math.floor(s / 86400) + "d ago";
     try { return new Date(ts).toLocaleDateString([], { month: "short", day: "numeric" }); } catch (e) { return ""; }
   }
+  function nDate(ts) { try { return ts ? new Date(ts).toLocaleDateString([], { year: "numeric", month: "short", day: "numeric" }) : ""; } catch (e) { return ""; } }
   var NCAT = { drug: "💊 Drug", approval: "✅ Approval", safety: "⚠️ Safety", recall: "🚫 Recall", guideline: "📋 Guideline", study: "🔬 Study", general: "📣 Update" };
-  function fetchUpdates() {
-    return fetch(NOTIF_API, { headers: { "Accept": "application/json" } }).then(function (r) { return r.json(); })
+  var WSLBL = { internal_medicine: "Internal Medicine", surgery: "Surgery", ent: "ENT", ophthalmology: "Ophthalmology", obstetrics_gynaecology: "Obstetrics & Gynaecology", urology: "Urology", dentistry_omfs: "Dentistry / OMFS", paediatrics: "Paediatrics" };
+  // Internal-Medicine sub-specialties ("branches") — used to filter the feed and in Notification preferences.
+  var BRANCH_ORDER = ["cardiology", "nephrology", "pulmonology", "endocrinology", "infectious_diseases", "critical_care", "gastroenterology", "hepatology", "oncology", "emergency_medicine", "family_medicine"];
+  var BRANCH_LBL = { cardiology: "Cardiology", nephrology: "Nephrology", pulmonology: "Pulmonology", endocrinology: "Endocrinology", infectious_diseases: "Infectious Diseases", critical_care: "Critical Care", gastroenterology: "Gastroenterology", hepatology: "Hepatology", oncology: "Oncology", emergency_medicine: "Emergency Medicine", family_medicine: "Family Medicine" };
+  var TYPE_FILTERS = [["all", "All"], ["guideline", "Guidelines"], ["drug_approval", "Drug Approvals"], ["safety_alert", "Safety Alerts"], ["trial", "Major Trials"]];
+  var TYPE_TAG = { guideline: "📋 Guideline", drug_approval: "✅ Approval", safety_alert: "⚠️ Safety", trial: "🔬 Trial" };
+
+  function bmGet() { try { return JSON.parse(localStorage.getItem(NOTIF_BM) || "[]") || []; } catch (e) { return []; } }
+  function bmHas(id) { return bmGet().indexOf(id) >= 0; }
+  function bmToggle(id) {
+    var a = bmGet(), i = a.indexOf(id), on;
+    if (i >= 0) { a.splice(i, 1); on = false; } else { a.push(id); on = true; }
+    try { localStorage.setItem(NOTIF_BM, JSON.stringify(a)); } catch (e) {}
+    // best-effort cross-device sync (signed-in only; guests stay local)
+    try {
+      idToken().then(function (t) {
+        if (!t) return;
+        var h = { "Content-Type": "application/json", "Authorization": "Bearer " + t };
+        fetch(NOTIF_API + "/bookmarks" + (on ? "" : "/" + encodeURIComponent(id)), { method: on ? "POST" : "DELETE", headers: h, body: on ? JSON.stringify({ id: id }) : undefined }).catch(function () {});
+      });
+    } catch (e) {}
+    return on;
+  }
+  // Merge server-side bookmarks into local (cross-device), signed-in only.
+  function bmMergeFromServer() {
+    try {
+      idToken().then(function (t) {
+        if (!t) return;
+        fetch(NOTIF_API + "/bookmarks", { headers: { "Authorization": "Bearer " + t } }).then(function (r) { return r.json(); }).then(function (j) {
+          if (j && Array.isArray(j.ids)) { var merged = bmGet(); j.ids.forEach(function (id) { if (merged.indexOf(id) < 0) merged.push(id); }); try { localStorage.setItem(NOTIF_BM, JSON.stringify(merged)); } catch (e) {} }
+        }).catch(function () {});
+      });
+    } catch (e) {}
+  }
+
+  /* ---- data ---- */
+  function fetchNotices() {
+    return fetch(NOTIF_API + "?auto=0&limit=50", { headers: { "Accept": "application/json" } }).then(function (r) { return r.json(); })
       .then(function (j) { _notifItems = (j && j.items) || []; return _notifItems; }).catch(function () { _notifItems = _notifItems || []; return _notifItems; });
   }
-  function refreshBadge() {
-    var badge = function () { var b = document.getElementById("v3BellBtn"); if (b) b.classList.toggle("has-unread", nMaxTs(_notifItems) > nSeen()); };
-    if (_notifItems) { badge(); return; }
-    fetchUpdates().then(badge);
+  function fetchFeed(reset) {
+    if (_feedLoading) return Promise.resolve(_feedItems);
+    if (reset) { _feedCursor = null; _feedEnd = false; }
+    if (_feedEnd && !reset) return Promise.resolve(_feedItems);
+    _feedLoading = true;
+    var u = NOTIF_API + "?limit=15";
+    if (_feedType && _feedType !== "all") u += "&type=" + encodeURIComponent(_feedType);
+    if (_feedBranch && _feedBranch !== "all") u += "&branch=" + encodeURIComponent(_feedBranch);
+    if (_feedQ) u += "&q=" + encodeURIComponent(_feedQ);
+    if (_feedCursor && !reset) u += "&before=" + encodeURIComponent(_feedCursor);
+    return fetch(u, { headers: { "Accept": "application/json" } }).then(function (r) { return r.json(); })
+      .then(function (j) {
+        var items = (j && j.items) || [];
+        _feedItems = reset ? items : _feedItems.concat(items);
+        _feedCursor = (j && j.nextCursor) || null; _feedEnd = !_feedCursor;
+        _feedLoading = false; return _feedItems;
+      }).catch(function () { _feedLoading = false; _feedEnd = true; return _feedItems; });
   }
+  function refreshBadge() {
+    var badge = function () { var b = document.getElementById("v3BellBtn"); if (b) b.classList.toggle("has-unread", nMaxTs(_feedItems) > nSeen()); };
+    if (_feedItems && _feedItems.length) { badge(); return; }
+    fetchFeed(true).then(badge);
+  }
+  try { window.SMD_refreshNotifBadge = refreshBadge; } catch (e) {}
+
+  /* ---- Tab 1: app notices ---- */
   function nItemHTML(it) {
     var cat = NCAT[it.category] || NCAT.general;
     var link = it.url ? '<a class="ntf-link" href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Read source ↗</a>' : "";
@@ -2140,35 +2203,239 @@
       (it.body ? '<div class="ntf-body">' + nEsc(it.body) + '</div>' : "") +
       '<div class="ntf-foot">' + src + link + '</div></div>';
   }
-  function renderNotif() {
-    var body = _notifRoot && _notifRoot.querySelector("#ntfBody"); if (!body) return;
+  function renderNotices() {
+    var body = _notifRoot && _notifRoot.querySelector("#ntfNotices"); if (!body) return;
     var items = _notifItems || [];
     body.innerHTML = items.length ? items.map(nItemHTML).join("")
-      : '<div class="ntf-empty">🔕 No updates yet.<div>Trusted medical updates — new drug approvals, safety alerts and recalls — will appear here.</div></div>';
+      : '<div class="ntf-empty">🔕 No notifications.<div>App notices and announcements from StewardMD will appear here.</div></div>';
+  }
+
+  /* ---- Tab 2: medical updates feed ---- */
+  function feedCardHTML(it) {
+    var tag = TYPE_TAG[it.type] || NCAT.general;
+    var hi = it.importance === "high" || it.importance === "critical";
+    var badge = it.importance === "critical" ? '<span class="ntf-hi crit">Critical</span>' : (it.importance === "high" ? '<span class="ntf-hi">Important</span>' : "");
+    var read = it.est_read_min ? '<span class="fd-read">⏱ ' + it.est_read_min + ' min</span>' : "";
+    var ws = it.workspace ? '<span class="fd-ws">' + nEsc(WSLBL[it.workspace] || it.workspace) + '</span>' : "";
+    var org = it.organization || it.source || "";
+    var prev = String(it.summary || it.body || "");
+    return '<div class="fd-card' + (hi ? " hi" : "") + '" data-uid="' + nEsc(it.id) + '" role="button" tabindex="0">' +
+      '<div class="ntf-top"><span class="ntf-cat cat-' + nEsc(it.category || "general") + '">' + tag + '</span>' + badge +
+        '<span class="ntf-time">' + nEsc(nDate(it.ts)) + '</span></div>' +
+      '<div class="ntf-title">' + nEsc(it.title) + '</div>' +
+      (org ? '<div class="fd-org">' + nEsc(org) + '</div>' : "") +
+      (prev ? '<div class="ntf-body">' + nEsc(prev.slice(0, 220)) + (prev.length > 220 ? "…" : "") + '</div>' : "") +
+      '<div class="fd-meta">' + ws + read + '<span class="fd-open">Open ›</span></div></div>';
+  }
+  function renderFeed() {
+    var body = _notifRoot && _notifRoot.querySelector("#ntfFeed"); if (!body) return;
+    var items = _feedItems || [];
+    var cards = items.length ? items.map(feedCardHTML).join("")
+      : '<div class="ntf-empty">🩺 No medical updates yet.<div>New guidelines, drug approvals, safety alerts and major trials appear here once the daily sync runs.</div></div>';
+    var more = (!_feedEnd && items.length) ? '<div class="fd-more">Loading more…</div>' : (items.length ? '<div class="fd-end">— end —</div>' : "");
+    body.innerHTML = cards + more;
+  }
+
+  /* ---- shell ---- */
+  function switchTab(t) {
+    _activeTab = t; if (!_notifRoot) return;
+    _notifRoot.querySelectorAll(".ntf-tab").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-tab") === t); });
+    _notifRoot.querySelector("#paneNotices").style.display = t === "notices" ? "block" : "none";
+    _notifRoot.querySelector("#paneUpdates").style.display = t === "updates" ? "block" : "none";
+    if (t === "notices" && _notifItems == null) fetchNotices().then(renderNotices);
   }
   function buildNotif() {
     if (_notifRoot) return _notifRoot;
     injectNotifCSS();
     _notifRoot = document.createElement("div"); _notifRoot.id = "ntfOverlay"; _notifRoot.className = "ntf-overlay"; _notifRoot.setAttribute("role", "dialog"); _notifRoot.setAttribute("aria-modal", "true"); _notifRoot.setAttribute("aria-label", "Notifications");
+    var chips = TYPE_FILTERS.map(function (f) { return '<button class="fd-chip' + (f[0] === "all" ? " on" : "") + '" data-fchip="' + f[0] + '">' + f[1] + '</button>'; }).join("");
+    var branchOpts = '<option value="all">All specialties</option>' + BRANCH_ORDER.map(function (b) { return '<option value="' + b + '"' + (_feedBranch === b ? " selected" : "") + '>' + nEsc(BRANCH_LBL[b]) + '</option>'; }).join("");
     _notifRoot.innerHTML =
       '<div class="ntf-top-bar"><button class="ntf-close" id="ntfClose" aria-label="Close">‹ Close</button>' +
-        '<div class="ntf-h">🔔 Notifications</div><button class="ntf-refresh" id="ntfRefresh" aria-label="Refresh" title="Refresh">↻</button></div>' +
-      '<div class="ntf-scroll"><div class="ntf-note">Trusted medical updates — approvals, safety alerts, recalls — plus notices from StewardMD.</div>' +
-        '<div id="ntfPush" class="ntf-push"></div>' +
-        '<div id="ntfBody" class="ntf-list"><div class="ntf-empty">Loading…</div></div></div>';
+        '<div class="ntf-h">🔔 Alerts</div><button class="ntf-refresh" id="ntfRefresh" aria-label="Refresh" title="Refresh">↻</button></div>' +
+      '<div class="ntf-tabs"><button class="ntf-tab" data-tab="notices">Notifications</button>' +
+        '<button class="ntf-tab on" data-tab="updates">Medical Updates</button></div>' +
+      '<div class="ntf-scroll" id="ntfScroll">' +
+        '<div id="paneNotices" style="display:none">' +
+          '<div id="ntfNotices" class="ntf-list"><div class="ntf-empty">Loading…</div></div></div>' +
+        '<div id="paneUpdates">' +
+          '<div id="ntfPush" class="ntf-push"></div>' +
+          '<div class="fd-tools"><div class="fd-chips">' + chips + '</div>' +
+            '<div class="fd-row2"><select id="fdBranch" class="fd-branch" aria-label="Specialty">' + branchOpts + '</select>' +
+            '<input id="fdSearch" class="fd-search" type="search" placeholder="Search…" autocomplete="off"></div></div>' +
+          '<div id="ntfFeed" class="ntf-list"><div class="ntf-empty">Loading…</div></div></div>' +
+      '</div>';
     document.body.appendChild(_notifRoot);
     _notifRoot.querySelector("#ntfClose").addEventListener("click", closeNotifications);
-    _notifRoot.querySelector("#ntfRefresh").addEventListener("click", function () { fetchUpdates().then(function () { renderNotif(); nSetSeen(nMaxTs(_notifItems)); refreshBadge(); }); });
+    _notifRoot.querySelector("#ntfRefresh").addEventListener("click", function () {
+      if (_activeTab === "notices") { fetchNotices().then(renderNotices); }
+      else { fetchFeed(true).then(function () { renderFeed(); nSetSeen(nMaxTs(_feedItems)); refreshBadge(); }); }
+    });
+    _notifRoot.querySelectorAll(".ntf-tab").forEach(function (b) { b.addEventListener("click", function () { switchTab(b.getAttribute("data-tab")); }); });
+    _notifRoot.querySelectorAll("[data-fchip]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        _feedType = b.getAttribute("data-fchip");
+        _notifRoot.querySelectorAll("[data-fchip]").forEach(function (x) { x.classList.toggle("on", x === b); });
+        fetchFeed(true).then(renderFeed);
+      });
+    });
+    var si = _notifRoot.querySelector("#fdSearch"), sT = null;
+    if (si) si.addEventListener("input", function () { clearTimeout(sT); sT = setTimeout(function () { _feedQ = si.value.trim(); fetchFeed(true).then(renderFeed); }, 350); });
+    var bsel = _notifRoot.querySelector("#fdBranch");
+    if (bsel) bsel.addEventListener("change", function () { _feedBranch = bsel.value; fetchFeed(true).then(renderFeed); });
+    var sc = _notifRoot.querySelector("#ntfScroll");
+    sc.addEventListener("scroll", function () {
+      if (_activeTab !== "updates" || _feedEnd || _feedLoading) return;
+      if (sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 120) fetchFeed(false).then(renderFeed);
+    });
+    _notifRoot.querySelector("#ntfFeed").addEventListener("click", function (e) {
+      var card = e.target.closest && e.target.closest(".fd-card"); if (card) openDetail(card.getAttribute("data-uid"));
+    });
     return _notifRoot;
   }
   function openNotifications() {
     buildNotif(); _notifRoot.classList.add("on"); document.body.classList.add("ntf-lock");
-    renderPushRow();
-    (_notifItems ? Promise.resolve(_notifItems) : fetchUpdates()).then(function () {
-      renderNotif(); nSetSeen(nMaxTs(_notifItems)); refreshBadge();
-    });
+    switchTab(_activeTab); renderPushRow(); bmMergeFromServer();
+    fetchFeed(true).then(function () { renderFeed(); nSetSeen(nMaxTs(_feedItems)); refreshBadge(); });
   }
   function closeNotifications() { if (_notifRoot) { _notifRoot.classList.remove("on"); document.body.classList.remove("ntf-lock"); } }
+
+  /* ---- Guideline / update detail overlay ---- */
+  function detailSection(title, arr) {
+    if (!arr || !arr.length) return "";
+    return '<div class="dt-sec"><h4>' + nEsc(title) + '</h4><ul>' + arr.map(function (x) { return "<li>" + nEsc(x) + "</li>"; }).join("") + '</ul></div>';
+  }
+  function renderDetail(data) {
+    var body = _detailRoot && _detailRoot.querySelector("#dtBody"); if (!body) return;
+    if (!data || !data.item) { body.innerHTML = '<div class="ntf-empty">Couldn\'t load this update.</div>'; return; }
+    var it = data.item, s = data.structured || {};
+    var refs = [];
+    if (it.url) refs.push('<a href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Official website ↗</a>');
+    if (s.official_pdf_url) refs.push('<a href="' + nEsc(s.official_pdf_url) + '" target="_blank" rel="noopener noreferrer">Official PDF ↗</a>');
+    if (it.doi) refs.push('<a href="https://doi.org/' + nEsc(it.doi) + '" target="_blank" rel="noopener noreferrer">DOI: ' + nEsc(it.doi) + ' ↗</a>');
+    if (it.pmid) refs.push('<a href="https://pubmed.ncbi.nlm.nih.gov/' + nEsc(it.pmid) + '/" target="_blank" rel="noopener noreferrer">PubMed ' + nEsc(it.pmid) + ' ↗</a>');
+    var wc = "", lastV = (data.versions || [])[0], changes = [];
+    try { changes = lastV && lastV.whats_changed_json ? JSON.parse(lastV.whats_changed_json) : []; } catch (e) {}
+    if (changes && changes.length) {
+      wc = '<div class="dt-sec"><h4>What\'s Changed</h4><table class="dt-wc"><tr><th>Topic</th><th>Previous</th><th>Current</th><th>Impact</th></tr>' +
+        changes.map(function (c) { return '<tr><td>' + nEsc(c.topic) + '</td><td>' + nEsc(c.previous) + '</td><td>' + nEsc(c.current) + '</td><td>' + nEsc(c.impact) + '</td></tr>'; }).join("") + '</table></div>';
+    } else if (data.has_whats_changed) {
+      wc = '<div class="dt-sec"><h4>What\'s Changed</h4><div class="dt-muted">A newer version was detected; a change comparison will appear here.</div></div>';
+    }
+    var hi = it.importance === "critical" ? '<span class="ntf-hi crit">Critical</span>' : (it.importance === "high" ? '<span class="ntf-hi">Important</span>' : "");
+    body.innerHTML =
+      '<div class="dt-head"><div class="ntf-top"><span class="ntf-cat cat-' + nEsc(it.category || "general") + '">' + (TYPE_TAG[it.type] || NCAT.general) + '</span>' + hi +
+        (it.est_read_min ? '<span class="fd-read">⏱ ' + it.est_read_min + ' min</span>' : "") + '</div>' +
+      '<h2>' + nEsc(it.title) + '</h2>' +
+      '<div class="dt-sub">' + nEsc(it.organization || it.source || "") + (s.version ? " · " + nEsc(s.version) : "") + (it.ts ? " · " + nEsc(nDate(it.ts)) : "") + (it.workspace ? " · " + nEsc(WSLBL[it.workspace] || it.workspace) : "") + '</div></div>' +
+      ((s.summary || it.summary) ? '<div class="dt-summary">' + nEsc(s.summary || it.summary) + '</div>' : "") +
+      detailSection("What's New", (s.major_changes || []).concat(s.new_recommendations || [])) +
+      wc +
+      detailSection("Clinical pearls", s.clinical_pearls) +
+      (s.clinical_impact ? '<div class="dt-sec"><h4>Practice impact</h4><p>' + nEsc(s.clinical_impact) + '</p></div>' : "") +
+      detailSection("Practice points", s.practice_points) +
+      detailSection("Removed recommendations", s.removed_recommendations) +
+      (refs.length ? '<div class="dt-sec"><h4>References</h4><div class="dt-refs">' + refs.join("") + '</div></div>' : "") +
+      '<div class="dt-actions">' +
+        (it.url ? '<a class="dt-btn primary" href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Open Official Guideline</a>' : "") +
+        '<button class="dt-btn" id="dtBookmark">' + (bmHas(it.id) ? "★ Bookmarked" : "☆ Bookmark") + '</button>' +
+        '<button class="dt-btn" id="dtShare">Share</button></div>';
+    var bm = body.querySelector("#dtBookmark");
+    if (bm) bm.addEventListener("click", function () { bm.textContent = bmToggle(it.id) ? "★ Bookmarked" : "☆ Bookmark"; });
+    var sh = body.querySelector("#dtShare");
+    if (sh) sh.addEventListener("click", function () {
+      var url = it.url || location.href, txt = it.title || "StewardMD medical update";
+      if (navigator.share) { navigator.share({ title: txt, url: url }).catch(function () {}); }
+      else { try { navigator.clipboard.writeText(txt + " — " + url); toast("Link copied"); } catch (e) {} }
+    });
+  }
+  function buildDetail() {
+    if (_detailRoot) return _detailRoot;
+    _detailRoot = document.createElement("div"); _detailRoot.id = "ntfDetail"; _detailRoot.className = "ntf-overlay dt-overlay"; _detailRoot.setAttribute("role", "dialog"); _detailRoot.setAttribute("aria-modal", "true");
+    _detailRoot.innerHTML =
+      '<div class="ntf-top-bar"><button class="ntf-close" id="dtClose" aria-label="Back">‹ Back</button><div class="ntf-h">Medical Update</div><span style="width:38px"></span></div>' +
+      '<div class="ntf-scroll"><div id="dtBody" class="dt-body"><div class="ntf-empty">Loading…</div></div></div>';
+    document.body.appendChild(_detailRoot);
+    _detailRoot.querySelector("#dtClose").addEventListener("click", function () { _detailRoot.classList.remove("on"); });
+    return _detailRoot;
+  }
+  function openDetail(id) {
+    if (!id) return;
+    buildDetail(); _detailRoot.classList.add("on");
+    var body = _detailRoot.querySelector("#dtBody"); if (body) body.innerHTML = '<div class="ntf-empty">Loading…</div>';
+    fetch(NOTIF_API + "?id=" + encodeURIComponent(id), { headers: { "Accept": "application/json" } })
+      .then(function (r) { return r.json(); }).then(renderDetail).catch(function () { renderDetail(null); });
+  }
+
+  /* ---- auth + notification preferences (Phase 2) ---- */
+  var NOTIF_PREFS = "smd_notif_prefs";
+  function idToken() { try { var u = window.SMD_AUTH && window.SMD_AUTH.currentUser; return u ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
+  function authHeaders() { return idToken().then(function (t) { var h = { "Content-Type": "application/json" }; if (t) h["Authorization"] = "Bearer " + t; return h; }); }
+  function defaultWorkspace() { try { if (window.SMD_WS && window.SMD_WS.active) return window.SMD_WS.active() || "internal_medicine"; } catch (e) {} return "internal_medicine"; }
+  function prefsGetLocal() { try { var a = JSON.parse(localStorage.getItem(NOTIF_PREFS) || "null"); if (a && Array.isArray(a.workspaces) && a.workspaces.length) return a; } catch (e) {} return { workspaces: [defaultWorkspace()], branches: [], push_enabled: true }; }
+  function prefsSetLocal(p) { try { localStorage.setItem(NOTIF_PREFS, JSON.stringify(p)); } catch (e) {} }
+  function selectedWorkspaces() { return prefsGetLocal().workspaces || ["internal_medicine"]; }
+  function selectedBranches() { var b = prefsGetLocal().branches; return Array.isArray(b) ? b : []; }
+  // Push the current workspace selection onto this device's push subscription so the
+  // server can target specialty alerts. Web: re-POST /api/push/subscribe. Native: the
+  // registration listener re-posts with workspaces; nudge it by re-registering.
+  function syncPushWorkspaces() {
+    var ws = selectedWorkspaces();
+    try {
+      if (pushSupported() && navigator.serviceWorker) {
+        navigator.serviceWorker.ready.then(function (reg) { return reg.pushManager.getSubscription(); }).then(function (sub) {
+          if (!sub) return;
+          authHeaders().then(function (h) { fetch("/api/push/subscribe", { method: "POST", headers: h, body: JSON.stringify({ subscription: sub.toJSON ? sub.toJSON() : sub, workspaces: ws }) }).catch(function () {}); });
+        }).catch(function () {});
+      }
+    } catch (e) {}
+    try { var P = nativePush(); if (P && P.register) P.register(); } catch (e) {}   // re-fires registration → re-posts workspaces
+  }
+  function openNotifPrefs() {
+    var sel = selectedWorkspaces(), selB = selectedBranches();
+    var order = ["internal_medicine", "surgery", "ent", "ophthalmology", "obstetrics_gynaecology", "urology", "dentistry_omfs", "paediatrics"];
+    var rows = order.map(function (w) {
+      var on = sel.indexOf(w) >= 0;
+      var row = '<label class="np-row"><span>' + nEsc(WSLBL[w] || w) + '</span>' +
+        '<input type="checkbox" class="np-ck" value="' + w + '"' + (on ? " checked" : "") + '></label>';
+      if (w === "internal_medicine") {
+        var brs = BRANCH_ORDER.map(function (b) {
+          return '<label class="np-brow"><span>' + nEsc(BRANCH_LBL[b]) + '</span><input type="checkbox" class="np-bck" value="' + b + '"' + (selB.indexOf(b) >= 0 ? " checked" : "") + '></label>';
+        }).join("");
+        row += '<div class="np-branches" id="npBranches" style="' + (on ? "" : "display:none") + '"><div class="np-blabel">Internal Medicine specialties (filter your feed)</div>' + brs + '</div>';
+      }
+      return row;
+    }).join("");
+    openSheet('<div class="hv-sh-t">🔔 Notification preferences</div>' +
+      '<div class="np-hint">Choose which specialties send you push alerts. Under Internal Medicine, pick sub-specialties (branches) to filter your Medical Updates feed. All updates still appear in the feed regardless.</div>' +
+      '<div class="np-list">' + rows + '</div>' +
+      '<button class="np-save" id="npSave">Save preferences</button>' +
+      '<div class="np-msg" id="npMsg"></div>');
+    injectNotifCSS();
+    var s = (typeof sheetEl === "function") ? sheetEl() : document;
+    var imCk = [].filter.call(s.querySelectorAll(".np-ck"), function (c) { return c.value === "internal_medicine"; })[0];
+    var brWrap = s.querySelector("#npBranches");
+    if (imCk && brWrap) imCk.addEventListener("change", function () { brWrap.style.display = imCk.checked ? "" : "none"; });
+    var save = s.querySelector("#npSave");
+    if (save) save.addEventListener("click", function () {
+      var ws = [].map.call(s.querySelectorAll(".np-ck:checked"), function (c) { return c.value; });
+      if (!ws.length) ws = ["internal_medicine"];
+      var br = [].map.call(s.querySelectorAll(".np-bck:checked"), function (c) { return c.value; });
+      if (ws.indexOf("internal_medicine") < 0) br = [];   // branches only apply within Internal Medicine
+      var p = { workspaces: ws, branches: br, push_enabled: true };
+      prefsSetLocal(p);
+      _feedBranch = br.length === 1 ? br[0] : "all";       // one branch → default the feed filter to it
+      var msg = s.querySelector("#npMsg"); if (msg) msg.textContent = "Saving…";
+      authHeaders().then(function (h) {
+        return fetch(NOTIF_API + "/prefs", { method: "POST", headers: h, body: JSON.stringify(p) }).then(function (r) { return r.json().catch(function () { return {}; }); });
+      }).then(function (j) {
+        syncPushWorkspaces();
+        if (msg) msg.textContent = (j && j.ok) ? "✅ Saved" : "Saved on this device";
+        try { toast("Notification preferences saved"); } catch (e) {}
+      }).catch(function () { syncPushWorkspaces(); if (msg) msg.textContent = "Saved on this device"; });
+    });
+  }
+  try { window.SMD_openNotifPrefs = openNotifPrefs; } catch (e) {}
 
   /* ---- Web Push (OS banner) opt-in for this device ---- */
   function pushSupported() { return ("serviceWorker" in navigator) && ("PushManager" in window) && ("Notification" in window); }
@@ -2207,7 +2474,7 @@
             return sub || reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlB64ToU8(st.publicKey) });
           });
         }).then(function (sub) {
-          return fetch("/api/push/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ subscription: sub.toJSON ? sub.toJSON() : sub }) });
+          return authHeaders().then(function (h) { return fetch("/api/push/subscribe", { method: "POST", headers: h, body: JSON.stringify({ subscription: sub.toJSON ? sub.toJSON() : sub, workspaces: selectedWorkspaces() }) }); });
         }).then(function () {
           try { localStorage.setItem("smd_push_on", "1"); } catch (e) {}
           toast("Phone alerts enabled ✅"); renderPushRow();
@@ -2331,7 +2598,62 @@
       ".ntf-push-off span,.ntf-push-on span{flex:1;font:600 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.4}",
       ".ntf-push-btn{flex:0 0 auto;border:none;background:var(--teal,#0a9396);color:#fff;font:700 12.5px var(--sans,system-ui);border-radius:9px;padding:9px 13px;cursor:pointer}",
       ".ntf-push-btn.ghost{background:transparent;color:var(--teal,#0a9396);border:1px solid var(--line,#e5e5e0)}",
-      ".ntf-push-hint{background:var(--teal-soft,#e0f2f1);border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:11px 13px;font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.5}.ntf-push-hint b{color:var(--ink,#1a1a1a)}"
+      ".ntf-push-hint{background:var(--teal-soft,#e0f2f1);border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:11px 13px;font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.5}.ntf-push-hint b{color:var(--ink,#1a1a1a)}",
+      // tabs
+      ".ntf-tabs{display:flex;gap:6px;padding:8px 14px 0;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e5e5e0);position:sticky;top:0;z-index:1}",
+      ".ntf-tab{flex:1;background:transparent;border:none;border-bottom:2.5px solid transparent;padding:10px 6px;font:700 13px var(--sans,system-ui);color:var(--slate-soft,#888);cursor:pointer}",
+      ".ntf-tab.on{color:var(--teal,#0a9396);border-bottom-color:var(--teal,#0a9396)}",
+      // feed tools (filters + search)
+      ".fd-tools{display:flex;flex-direction:column;gap:9px;margin-bottom:12px}",
+      ".fd-chips{display:flex;gap:7px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}",
+      ".fd-chip{flex:0 0 auto;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:999px;padding:6px 12px;font:600 12px var(--sans,system-ui);color:var(--slate,#555);cursor:pointer;white-space:nowrap}",
+      ".fd-chip.on{background:var(--teal,#0a9396);border-color:var(--teal,#0a9396);color:#fff}",
+      ".fd-search{width:100%;box-sizing:border-box;border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:9px 12px;font:500 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);background:var(--panel,#fff)}",
+      // feed card
+      ".fd-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--teal,#0a9396);cursor:pointer;transition:transform .08s ease,box-shadow .12s ease}",
+      ".fd-card:hover,.fd-card:focus{box-shadow:0 3px 14px rgba(0,0,0,.08);outline:none}.fd-card:active{transform:scale(.995)}",
+      ".fd-card.hi{border-left-color:#ef4444}",
+      ".fd-org{font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396);margin-top:3px}",
+      ".fd-meta{display:flex;align-items:center;gap:10px;margin-top:9px;flex-wrap:wrap}",
+      ".fd-ws{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--teal-soft,#e0f2f1);border-radius:6px;padding:2px 8px}",
+      ".fd-read{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#888)}",
+      ".fd-open{margin-left:auto;font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396)}",
+      ".fd-more,.fd-end{text-align:center;font:600 12px var(--sans,system-ui);color:var(--slate-soft,#888);padding:16px}",
+      ".ntf-hi.crit{background:#b91c1c}",
+      // detail overlay
+      ".dt-overlay{z-index:860}",
+      ".dt-body{max-width:720px}",
+      ".dt-head h2{font:800 20px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.25;margin:8px 0 4px}",
+      ".dt-sub{font:600 12.5px var(--sans,system-ui);color:var(--slate-soft,#888);line-height:1.5}",
+      ".dt-summary{font:500 14.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.65;margin:14px 0;white-space:pre-wrap}",
+      ".dt-sec{margin:16px 0;border-top:1px solid var(--line,#e5e5e0);padding-top:14px}",
+      ".dt-sec h4{font:800 13px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--teal,#0a9396);margin:0 0 8px}",
+      ".dt-sec ul{margin:0;padding-left:18px}.dt-sec li{font:500 13.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.6;margin-bottom:5px}",
+      ".dt-sec p{font:500 13.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.6;margin:0}",
+      ".dt-muted{font:500 13px var(--sans,system-ui);color:var(--slate-soft,#888);font-style:italic}",
+      ".dt-wc{width:100%;border-collapse:collapse;font:500 12.5px var(--sans,system-ui)}",
+      ".dt-wc th{text-align:left;font-weight:800;color:var(--ink,#1a1a1a);border-bottom:2px solid var(--line,#e5e5e0);padding:6px 8px}",
+      ".dt-wc td{color:var(--slate,#555);border-bottom:1px solid var(--line,#e5e5e0);padding:6px 8px;vertical-align:top}",
+      ".dt-refs{display:flex;flex-direction:column;gap:7px}.dt-refs a{font:600 13px var(--sans,system-ui);color:var(--teal,#0a9396);text-decoration:none}",
+      ".dt-actions{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 10px}",
+      ".dt-btn{border:1px solid var(--line,#e5e5e0);background:var(--panel,#fff);color:var(--ink,#1a1a1a);font:700 13px var(--sans,system-ui);border-radius:10px;padding:11px 15px;cursor:pointer;text-decoration:none}",
+      ".dt-btn.primary{background:var(--teal,#0a9396);border-color:var(--teal,#0a9396);color:#fff}",
+      // notification preferences sheet
+      ".np-hint{font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.5;margin:2px 0 12px}",
+      ".np-list{display:flex;flex-direction:column;gap:2px;margin-bottom:14px}",
+      ".np-row{display:flex;align-items:center;justify-content:space-between;padding:11px 2px;border-bottom:1px solid var(--line,#e5e5e0);font:600 14px var(--sans,system-ui);color:var(--ink,#1a1a1a);cursor:pointer}",
+      ".np-row input{width:20px;height:20px;accent-color:var(--teal,#0a9396)}",
+      ".np-save{width:100%;border:none;background:var(--teal,#0a9396);color:#fff;font:700 14px var(--sans,system-ui);border-radius:11px;padding:12px;cursor:pointer}",
+      ".np-msg{text-align:center;font:600 12.5px var(--sans,system-ui);color:var(--teal,#0a9396);min-height:16px;margin-top:8px}",
+      // feed branch dropdown
+      ".fd-row2{display:flex;gap:8px;align-items:center}",
+      ".fd-branch{flex:0 0 auto;max-width:52%;border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:9px 10px;font:600 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);background:var(--panel,#fff)}",
+      ".fd-row2 .fd-search{flex:1}",
+      // nested Internal-Medicine branches in the prefs sheet
+      ".np-branches{margin:2px 0 6px;padding:8px 10px;background:var(--teal-soft,#e0f2f1);border-radius:10px}",
+      ".np-blabel{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--teal,#0a9396);margin:2px 0 4px}",
+      ".np-brow{display:flex;align-items:center;justify-content:space-between;padding:7px 2px;font:600 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);cursor:pointer}",
+      ".np-brow input{width:18px;height:18px;accent-color:var(--teal,#0a9396)}"
     ].join("");
     var st = document.createElement("style"); st.id = "ntf-css"; st.textContent = css; document.head.appendChild(st);
   }

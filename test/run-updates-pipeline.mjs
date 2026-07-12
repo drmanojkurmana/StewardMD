@@ -36,10 +36,10 @@ function mockDb() {
   const byKey = new Map(), byId = new Map();
   const sources = [{ id: "fda-press", name: "FDA Press", workspace: "internal_medicine", type: "drug_approval", parser_type: "rss", rss_url: "https://feed", guideline_page: "", homepage: "", enabled: 1, priority: 10, etag: "", last_modified: "", content_length: "" }];
   // INSERT column order from repo.insertUpdate:
-  const COLS = ["id", "doc_key", "source_id", "type", "organization", "workspace", "title", "body", "category", "published_ts", "importance", "est_read_min", "summary", "summary_json", "official_url", "official_pdf_url", "doi", "pmid", "keywords", "version", "content_hash", "auto", "pinned", "created_ts", "updated_ts"];
+  const COLS = ["id", "doc_key", "source_id", "type", "organization", "workspace", "branch", "title", "body", "category", "published_ts", "importance", "est_read_min", "summary", "summary_json", "official_url", "official_pdf_url", "doi", "pmid", "keywords", "version", "content_hash", "auto", "pinned", "created_ts", "updated_ts"];
   function insert(binds) { const row = {}; COLS.forEach((c, i) => row[c] = binds[i]); byKey.set(row.doc_key, row); byId.set(row.id, row); }
-  function update(binds) { // updateExisting order ends: ...content_hash(17), updated_ts(18), id(19)
-    const id = binds[binds.length - 1], row = byId.get(id); if (row) { row.content_hash = binds[17]; row.title = binds[3]; row.summary = binds[9]; }
+  function update(binds) { // updateExisting order: type,org,ws,branch,title,body,cat,pub,imp,read,summary,sj,url,pdf,doi,pmid,kw,ver,content_hash(18),updated_ts(19),id(20)
+    const id = binds[binds.length - 1], row = byId.get(id); if (row) { row.content_hash = binds[18]; row.title = binds[4]; row.summary = binds[10]; }
   }
   return {
     _byKey: byKey,
@@ -75,6 +75,7 @@ function mockDb() {
   chk("2 new items stored", r1.new === 2, JSON.stringify({ new: r1.new, updated: r1.updated, unchanged: r1.unchanged }));
   chk("AI called exactly twice (once per new doc)", AI_CALLS === 2, "AI_CALLS=" + AI_CALLS);
   chk("rows persisted to D1", db._byKey.size === 2);
+  chk("returns push items with workspace (for targeted push)", (r1.items || []).length === 2 && r1.items.every((i) => i.workspace && i.id), JSON.stringify((r1.items || []).map((i) => i.workspace)));
 
   console.log("\n── run 2: identical feed (nothing changed) ──");
   AI_CALLS = 0;
