@@ -54,7 +54,7 @@ function normWorkspace(v, fallback) { v = String(v || "").toLowerCase().trim(); 
 
 // Build a metering gate that reuses _usage.recordUsage so summaries appear in the
 // existing /api/ai/admin report under byType.updates_summary. Fail-open (no KV → no meter).
-async function meterGate(env) {
+async function meterGate(env, type) {
   const store = usageKv(env);
   if (!store) return { meter: false };
   const cfg = usageConfig(env);
@@ -64,7 +64,7 @@ async function meterGate(env) {
   const u = (await rj("maik:u:" + id + ":" + day)) || { general: 0, case: 0, intent: 0, ocr: 0, pdfPages: 0, tokens: 0 };
   const m = (await rj("maik:m:" + id + ":" + month)) || { tokens: 0 };
   const g = (await rj("maik:global:" + day)) || { cost: 0, req: 0, blocked: 0 };
-  return { meter: true, store, cfg, u, m, g, id, _day: day, _month: month, type: "updates_summary" };
+  return { meter: true, store, cfg, u, m, g, id, _day: day, _month: month, type: type || "updates_summary" };
 }
 
 /**
@@ -140,4 +140,83 @@ export async function summarizeDocument(env, meta) {
     try { await recordUsage(gate, { inTok: estTokens(SUMMARY_SYS.length + metaBlock.length), outTok: 0, status: "failed" }); } catch (e) {}
   }
   return { ok: false, error: String((lastErr && lastErr.message) || lastErr || "summarize failed") };
+}
+
+/* ------------------------------------------------------------------ *
+ * Phase 3 — "What's Changed": diff a document against its prior version.
+ * Runs ONLY when the pipeline detects a changed doc (rare). Produces the
+ * Topic / Previous / Current / Impact rows shown on the guideline page.
+ * ------------------------------------------------------------------ */
+const IMPACTS = ["Practice changing", "High", "Moderate", "Low"];
+function normImpact(v) {
+  v = String(v || "").trim().toLowerCase();
+  if (/practice/.test(v)) return "Practice changing";
+  if (v === "high") return "High";
+  if (v === "moderate" || v === "medium") return "Moderate";
+  if (v === "low") return "Low";
+  return "Moderate";
+}
+const DIFF_SYS =
+  "You are a medical editor. You are given a PREVIOUS plain-language summary of a clinical guideline/document " +
+  "(already in our own words) and the CURRENT source excerpt for the NEW version of that same document. Identify " +
+  "what MATERIALLY CHANGED for a practising clinician — new, revised, or removed recommendations, thresholds, drug " +
+  "choices, dosing, eligibility/indications. Focus on differences, not a re-summary.\n" +
+  "COPYRIGHT: paraphrase in your own words; never copy source wording, tables, or figures.\n" +
+  "Return ONLY JSON (no prose, no fence): {\"changes\":[{\"topic\":string,\"previous\":string,\"current\":string," +
+  "\"impact\":\"Practice changing\"|\"High\"|\"Moderate\"|\"Low\"}]}. `topic` is the clinical area (e.g. 'Blood pressure " +
+  "target'); `previous` and `current` are short phrases. Include ONLY concrete, evidence-based changes you can support " +
+  "from the inputs — never invent a change. If you cannot identify concrete changes, return {\"changes\":[]}. Max 8 rows.";
+
+function prevSummaryText(prev) {
+  if (!prev) return "";
+  if (typeof prev === "string") return prev;
+  return [
+    prev.summary || "",
+    (prev.new_recommendations || []).length ? "Recommendations: " + prev.new_recommendations.join("; ") : "",
+    (prev.practice_points || []).length ? "Practice points: " + prev.practice_points.join("; ") : "",
+    (prev.major_changes || []).length ? "Prior changes: " + prev.major_changes.join("; ") : "",
+  ].filter(Boolean).join("\n");
+}
+
+/**
+ * diffDocument(env, meta) → { ok, changes: [{topic, previous, current, impact}] }
+ *   meta = { prevSummary (object|string), newExcerpt, title, organization }
+ */
+export async function diffDocument(env, meta) {
+  const prevText = prevSummaryText(meta.prevSummary);
+  if (!prevText) return { ok: false, changes: [], error: "no-previous" };
+  const primary = env.UPDATES_MODEL || MODEL_PRIMARY_DEFAULT;
+  const fallback = env.UPDATES_MODEL_FALLBACK || MODEL_FALLBACK_DEFAULT;
+  const models = fallback && fallback !== primary ? [primary, fallback] : [primary];
+  const block = [
+    "Title: " + (meta.title || ""),
+    "Organization: " + (meta.organization || ""),
+    "",
+    "=== PREVIOUS SUMMARY (older version, our own words) ===",
+    prevText,
+    "",
+    "=== CURRENT SOURCE EXCERPT (new version) ===",
+    String(meta.newExcerpt || "").slice(0, 8000),
+  ].join("\n");
+  const gate = await meterGate(env, "updates_diff");
+  let lastErr = null;
+  for (const model of models) {
+    try {
+      const text = await callGemini(Object.assign({}, env, { GEMINI_MODEL: model }), [{ text: DIFF_SYS + "\n\n" + block }], 1024, { temperature: 0.2 });
+      const parsed = parseJsonLoose(text);
+      if (parsed && Array.isArray(parsed.changes)) {
+        const changes = parsed.changes.filter((c) => c && (c.topic || c.current)).slice(0, 8).map((c) => ({
+          topic: String(c.topic || "").slice(0, 120),
+          previous: String(c.previous || "").slice(0, 300),
+          current: String(c.current || "").slice(0, 300),
+          impact: normImpact(c.impact),
+        }));
+        if (gate.meter) { try { await recordUsage(gate, { inTok: estTokens(DIFF_SYS.length + block.length), outTok: estTokens((text || "").length), status: "success" }); } catch (e) {} }
+        return { ok: true, changes };
+      }
+      lastErr = new Error("diff returned unparseable JSON");
+    } catch (e) { lastErr = e; }
+  }
+  if (gate.meter) { try { await recordUsage(gate, { inTok: estTokens(DIFF_SYS.length + block.length), outTok: 0, status: "failed" }); } catch (e) {} }
+  return { ok: false, changes: [], error: String((lastErr && lastErr.message) || lastErr || "diff failed") };
 }
