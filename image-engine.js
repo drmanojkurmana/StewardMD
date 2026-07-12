@@ -39,8 +39,11 @@
     return Promise.resolve(true);   // no entitlement system present → allow (per spec)
   }
 
-  var SCREEN_KINDS = { monitor: 1, ventilator: 1 };                 // layout-dependent → AI recommended
-  function recommendFor(kind) { return SCREEN_KINDS[kind] ? "ai" : "device"; }
+  var SCREEN_KINDS = { monitor: 1, ventilator: 1 };                 // layout-dependent → AI especially important
+  // AI Vision is the recommended engine for best accuracy on ANY clinical image whenever it can
+  // run (enabled + online). On-device OCR is the private fallback but can be less accurate — so it
+  // is only recommended when AI Vision isn't available (offline / disabled).
+  function recommendFor(kind) { return (aiAvailable() && online()) ? "ai" : "device"; }
   function online() { return typeof navigator === "undefined" || navigator.onLine !== false; }
   function log() { if (!DEV) return; try { console.log.apply(console, ["[ImageEngine]"].concat([].slice.call(arguments))); } catch (e) {} }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -107,8 +110,8 @@
     var pill = isAi ? '<span class="ie-pill pro">Pro</span>' : '<span class="ie-pill free">Free</span>';
     var recPill = rec ? '<span class="ie-pill rec">Recommended</span>' : "";
     var desc = isAi
-      ? "Uses secure cloud AI for better monitor and ventilator screen interpretation. The image is sent for processing."
-      : "Uses Apple Vision on iPhone/iPad and ML Kit on Android. Image stays on this device. Best for labelled reports.";
+      ? "Secure cloud AI — the most accurate reading of any clinical image (labs, ABG, medication lists, monitor & ventilator screens). The image is sent for processing."
+      : "Runs privately on this device (Apple Vision / ML Kit) — the image never leaves it, but it can be less accurate, especially for screens, handwriting or complex layouts.";
     return '<button type="button" class="ie-card' + (selected ? " sel" : "") + '" data-engine="' + engine + '">' +
       '<span class="ie-radio"></span><span class="ie-cmain"><span class="ie-ct">' + esc(title) + " " + pill + recPill + "</span>" +
       '<span class="ie-cs">' + esc(desc) + "</span></span></button>";
@@ -124,10 +127,10 @@
       function body() {
         var rec = recommendFor(kind);
         var helper = rec === "ai"
-          ? "Best for screen layouts where values depend on position."
-          : "Image stays on this device. Best for labelled reports.";
-        var warn = (SCREEN_KINDS[kind] && sel === "device")
-          ? '<div class="ie-warn">⚠️ Device OCR may be less accurate for monitor layouts. AI Vision is recommended.</div>' : "";
+          ? "AI Vision is recommended for the most accurate reading. Your image is sent securely for processing; on-device OCR stays private but can be less accurate."
+          : "Image stays on this device. (AI Vision is unavailable right now.)";
+        var warn = (rec === "ai" && sel === "device")
+          ? '<div class="ie-warn">⚠️ On-device OCR can be less accurate. AI Vision is recommended for the best accuracy.</div>' : "";
         return '<div class="ie-h">Choose Image Engine</div>' +
           '<div class="ie-sub">' + esc(helper) + "</div>" +
           engineCard("device", sel === "device", kind) +
