@@ -5,16 +5,22 @@
   "capacitor": {
     "ios": {
       "src": "ios"
+    },
+    "android": {
+      "src": "android"
     }
   },
   "files": [
     "ios/Sources",
+    "android/src",
+    "android/build.gradle",
     "Package.swift",
     "package.json",
     "README.md",
+    "README-ANDROID.md",
     "LICENSE"
   ],
   "author": "StewardMD",
   "license": "MIT",
-  "_vendored": "StewardMD-authored local plugin (SPM on iOS like capacitor-vision-ocr; NDK/JNI on Android). Links whisper.cpp v1.9.1 (MIT). No JS dist — accessed via Capacitor.Plugins.Whisper. Android native lands in a later commit; iOS first."
+  "_vendored": "StewardMD-authored local plugin (SPM on iOS like capacitor-vision-ocr; NDK/JNI on Android). Links whisper.cpp v1.9.1 (MIT, git submodule at android/src/main/cpp/whisper-cpp). No JS dist — accessed via Capacitor.Plugins.Whisper."
 }
