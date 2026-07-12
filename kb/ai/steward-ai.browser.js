@@ -322,10 +322,15 @@
         // management", because RRF rewards the disease present in BOTH arms) is still tested and
         // wins the gate on coverage. Without hybrid the pool is just the lexical nearest (unchanged).
         var qHay = " " + String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim() + " ";
+        var _ecache = {};   // memoize per id — Phase 1/2 pools overlap; grounding build is the costly bit
         function evalCand(id) {
+          if (id && _ecache.hasOwnProperty(id)) return _ecache[id];
           var gc = id ? trimGrounding(_ai.getGroundingContext(id)) : null;
-          if (!gc) return null;
-          var hay = (String(id) + " " + (gc.name || "") + " " + JSON.stringify(gc)).toLowerCase();
+          if (!gc) { if (id) _ecache[id] = null; return null; }
+          // Coverage haystack from TEXT only (name + class + chunk text + drug refs) — much cheaper
+          // than JSON.stringify-ing the whole grounding object, and more precise (no structural keys).
+          var kn = (gc.knowledge || []).map(function (k) { return (k && k.text) || ""; }).join(" ");
+          var hay = (String(id) + " " + (gc.name || "") + " " + (gc.class || "") + " " + kn + " " + (gc.drugRefs || []).join(" ")).toLowerCase();
           var hitT = distinctive.filter(function (t) { return hay.indexOf(t) >= 0; });
           var cov = distinctive.length ? hitT.length / distinctive.length : 1;
           var nameHit = false, nameToksAll = false;
@@ -336,15 +341,23 @@
             nameToksAll = nameToks.length > 0 && nameToks.every(function (t) { return qHay.indexOf(" " + t + " ") >= 0; });
           }
           var conf = distinctive.length === 0 || cov >= 0.6 || nameHit || nameToksAll;
-          return { id: id, gc: gc, hit: hitT, coverage: cov, missing: distinctive.filter(function (t) { return hay.indexOf(t) < 0; }),
-                   confident: conf, nameHit: nameHit, nameToksAll: nameToksAll };
+          var res = { id: id, gc: gc, hit: hitT, coverage: cov, missing: distinctive.filter(function (t) { return hay.indexOf(t) < 0; }),
+                      confident: conf, nameHit: nameHit, nameToksAll: nameToksAll };
+          if (id) _ecache[id] = res;
+          return res;
         }
-        // pick(): best-covering candidate from a ranked id list — confident, else partial, else rank-0.
+        // pick(): highest-ranked candidate — confident, else partial, else rank-0. Short-circuits on
+        // the first confident hit, so a rank-0 match builds grounding for ONE disease, not the whole
+        // pool of 8 (grounding assembly is the costly step).
         function pick(ids) {
-          var evs = ids.map(evalCand).filter(Boolean);
-          return evs.filter(function (e) { return e.confident; })[0]
-              || evs.filter(function (e) { return e.hit.length > 0; })[0]
-              || evs[0] || null;
+          var firstPartial = null, firstAny = null;
+          for (var i = 0; i < ids.length; i++) {
+            var e = evalCand(ids[i]); if (!e) continue;
+            if (!firstAny) firstAny = e;
+            if (e.confident) return e;
+            if (!firstPartial && e.hit.length > 0) firstPartial = e;
+          }
+          return firstPartial || firstAny || null;
         }
         // Phase 1 — LEXICAL only (instant, no network). Dedup the retrieved disease order.
         var lexIds = []; retrieved.forEach(function (r) { if (r && r.diseaseId && lexIds.indexOf(r.diseaseId) < 0) lexIds.push(r.diseaseId); });
