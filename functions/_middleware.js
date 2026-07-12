@@ -4,9 +4,17 @@
  * Why this exists: the StewardMD web app is being taken PRIVATE for now while the
  * native apps go through App Store / Play Store review, after a wave of scraping /
  * data-theft attempts against the public web app. This Cloudflare Pages middleware
- * runs on EVERY request to stewardmd.in (static assets, pages, and /api/* functions
- * alike) and, by default, shows the public a self-contained "coming soon" page while
- * blocking all app code and API endpoints.
+ * runs on every request to stewardmd.in but only ever HIDES THE PUBLIC WEB UI: the
+ * single thing it can replace is a top-level HTML page view by an anonymous browser,
+ * which gets a self-contained "coming soon" page. Everything that carries functionality
+ * passes straight through untouched, so no API, endpoint, or app feature is affected:
+ *   • /api/* — in-app AI (/api/ai/*), Resend email sends, cron, the native app, and the
+ *     emailed verification approve/reject links (/api/verifications/action) all keep
+ *     working exactly as before the gate. Each endpoint enforces its own auth.
+ *   • /admin/* — the admin console is already protected by Google owner login (_adminauth.js).
+ *   • assets, fetch/XHR, and any non-GET request (POST/webhooks) — never a "page view".
+ * The native apps bundle their HTML locally (capacitor webDir), so they never request a
+ * page here and are wholly unaffected.
  *
  * Authorized access (owner / testers) — "only who knows the URL can visit":
  *   1. Visit the secret entry URL once:  https://stewardmd.in/realapp
@@ -80,31 +88,32 @@ export async function onRequest(context) {
     return new Response(null, { status: 302, headers });
   }
 
-  // Already unlocked? Let the real app / API through.
+  // Functionality is NEVER gated. Anything that carries app behaviour passes straight through so
+  // no API, endpoint, cron, email link, or native-app feature is affected by the lock:
+  //   • /api/* — in-app AI, Resend-triggering endpoints, the emailed approve/reject links
+  //     (/api/verifications/action), the native app, and cron. Each endpoint self-authorises.
+  //   • /admin/* — the admin console gates itself with Google owner login (_adminauth.js).
+  if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/admin")) {
+    return next();
+  }
+
+  // Already unlocked on this browser? Let the real web app through.
   const cookie = readCookie(request.headers.get("Cookie"), COOKIE_NAME);
   if (cookie && safeEqual(cookie, token)) {
     return next();
   }
 
-  // Locked. Server-to-server cron / admin calls that carry the shared admin token bypass the
-  // gate (there is no unlock cookie for machine callers) — e.g. the stewardmd-api Worker's daily
-  // POST /api/updates/sync and 15-min /api/watch/run. Everything else /api/* stays 503.
-  if (url.pathname.startsWith("/api/")) {
-    const adminTok = request.headers.get("X-Admin-Token");
-    if (adminTok && env && env.UPDATES_ADMIN_TOKEN && safeEqual(adminTok, env.UPDATES_ADMIN_TOKEN)) {
-      return next();
-    }
-    // The native app authorizes its API calls with a shared app key (native-bridge.js sends
-    // X-SMD-App). The public web app never runs (its HTML is gated), so this only lets the
-    // real native app through — keeping the site private to public browsers/scrapers.
-    const appKey = request.headers.get("X-SMD-App");
-    if (appKey && env && env.APP_GATE_KEY && safeEqual(appKey, env.APP_GATE_KEY)) {
-      return next();
-    }
-    return new Response(
-      JSON.stringify({ error: "unavailable", message: "StewardMD is temporarily private." }),
-      { status: 503, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } }
-    );
+  // The ONLY thing the gate hides is a genuine top-level page navigation (a human typing/clicking
+  // to a site page in a browser). Sec-Fetch-Dest:"document" marks that in every modern browser;
+  // we fall back to the Accept header for the rare client that omits it. Scripts, styles, images,
+  // JSON/fetch/XHR and any non-GET request have a different Dest (or none) and sail through, so no
+  // asset or feature is ever replaced — only the public web UI shell.
+  const dest = request.headers.get("Sec-Fetch-Dest");
+  const accept = request.headers.get("Accept") || "";
+  const isPageView =
+    request.method === "GET" && (dest === "document" || (!dest && accept.includes("text/html")));
+  if (!isPageView) {
+    return next();
   }
 
   return new Response(COMING_SOON_HTML, {
