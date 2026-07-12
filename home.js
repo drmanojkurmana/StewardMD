@@ -1563,86 +1563,209 @@
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  // ── MaiK "Aurora" wordmark + icon set (design_handoff_maik_assistant/IMPLEMENTATION.md §2) ──
+  var MK_LOGO = function () { return (document.body.classList.contains("dark") || document.body.classList.contains("v3-dark")) ? "/maik-wordmark-white.png" : "/maik-wordmark-color.png"; };
+  var MK = {
+    new: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+    close: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>',
+    shield: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--mk-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/></svg>',
+    spark: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--mk-teal)" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/></svg>',
+    book: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/></svg>',
+    chevron: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
+    mic: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
+    send: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>',
+    cAssess: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>',
+    cKnow: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/></svg>',
+    cDrug: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 13.5 3 21"/><path d="M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/></svg>'
+  };
+  // §3 sheet shell — markup verbatim from IMPLEMENTATION.md (kept the app's extract label so it
+  // stays consistent with the extract handler's own text; #maikClose replaces the old #maikX id).
+  function maikShellHTML() {
+    return '' +
+      '<div class="maik-grab" id="maikGrab" aria-hidden="true"></div>' +
+      '<div class="maik-hd"><div class="maik-hd-row">' +
+        '<div class="maik-logo-wrap"><div class="maik-logo-glow"></div><img class="maik-logo" src="' + MK_LOGO() + '" alt="MaiK"></div>' +
+        '<span style="flex:1"></span>' +
+        '<button class="maik-hd-btn" id="maikNew" type="button" title="New conversation" aria-label="New conversation">' + MK.new + '</button>' +
+        '<button class="maik-hd-btn" id="maikClose" type="button" title="Close" aria-label="Close assistant">' + MK.close + '</button>' +
+      '</div></div>' +
+      '<div class="maik-disc">' + MK.shield + '<span>Grounded &middot; AI-generated, verify independently</span></div>' +
+      '<div class="maik-body" id="maikBody"></div>' +
+      '<div class="maik-cmp">' +
+        '<button class="maik-extract" id="maikExtract" type="button">🩺 Extract findings for Clinical Reasoning →</button>' +
+        '<div class="maik-cmp-in">' +
+          '<button class="maik-mic" id="maikMic" type="button" title="Dictate" aria-label="Dictate to MaiK">' + MK.mic + '</button>' +
+          '<textarea class="maik-ta" id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea>' +
+          '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
+        '</div>' +
+      '</div>';
+  }
+  // ── MaiK "Aurora" styles: IMPLEMENTATION.md §1 verbatim, then a support block (retokenized to
+  //    --mk-*) that keeps the app's markdown answers, streaming caret, tables, <details> sources,
+  //    chips, welcome/edu/assume notes and FAB-hiding working. #maikSheet lives outside #homeV2, so
+  //    the tokens sit on the sheet itself and flip via `body.dark #maikSheet` (+ v3-dark mirror). ──
   function maikCSS() {
     if (document.getElementById("maik-sheet-css")) return;
     var st = document.createElement("style"); st.id = "maik-sheet-css";
-    st.textContent = [
-      // ---- Aurora palette, scoped to the sheet so dark mode flips even though #maikSheet lives
-      //      outside #homeV2 (re-declares the same --h* names + a couple new literals). ----
-      "#maikSheet{--hpanel:#fff;--hbg:#F5F7F9;--hink:#0F172A;--hmut:#64748B;--hbd:#EAEEF3;--hp:#0F766E;--hps:#D7F5EF;--hacc:#2563EB;--mkfaint:#9AA7B6;--mkfield:#F2F5F8;--mksend:linear-gradient(140deg,#19b8a8,#0e6e63);--mkglow:rgba(20,184,166,.35);--mkyou:linear-gradient(140deg,#15a89a,#0f766e)}",
-      "body.dark #maikSheet,body.v3-dark #maikSheet{--hpanel:#101A2C;--hbg:#182338;--hink:#EAF0F7;--hmut:#8C9AB0;--hbd:#233149;--hp:#2DD4BF;--hps:#0E2E2B;--hacc:#7DB3FF;--mkfaint:#5D6E86;--mkfield:#0E1829;--mkyou:linear-gradient(140deg,#0f766e,#0b5a53)}",
-      "#maikScrim{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:16000;opacity:0;transition:opacity .2s}#maikScrim.on{opacity:1}",
-      "#maikSheet{position:fixed;left:0;right:0;bottom:0;z-index:16001;background:var(--hpanel);color:var(--hink);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);display:flex;flex-direction:column;max-height:86vh;height:86vh;transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);font-family:var(--hfont,system-ui)}",
-      "#maikSheet.on{transform:translateY(0)}",
-      "#maikSheet *{box-sizing:border-box}",
-      ".maik-grab{flex:0 0 auto;width:38px;height:5px;border-radius:3px;background:var(--hbd);margin:9px auto 0;cursor:pointer}",
-      // header: subtle teal wash, wordmark + radial glow on the left, two circular icon buttons right
-      ".maik-hd{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:10px 14px 8px;background:linear-gradient(180deg,var(--hps),transparent)}",
-      ".maik-hd .mk-logowrap{position:relative;flex:0 0 auto;display:inline-flex;align-items:center}",
-      ".maik-hd .mk-logowrap::before{content:'';position:absolute;inset:-4px -8px;background:radial-gradient(ellipse,var(--mkglow),transparent 70%);z-index:0;animation:maikGlow 3.2s ease-in-out infinite}",
-      ".maik-hd .mk-logo{position:relative;z-index:1;height:24px;width:auto;display:block}",
-      ".maik-hd .mk-sp{flex:1 1 auto}",
-      ".maik-ic{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--hbd);background:var(--hbg);color:var(--hink);cursor:pointer;padding:0;line-height:1;font-size:18px}",
-      ".maik-ic:hover{border-color:var(--hp);color:var(--hp)}.maik-ic:active{transform:scale(.94)}",
-      "@keyframes maikGlow{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.08)}}",
-      "@media (prefers-reduced-motion:reduce){.maik-hd .mk-logowrap::before{animation:none}}",
-      // disclaimer strip: full-width, wraps (fixes old overflow)
-      ".maik-adv{flex:0 0 auto;display:flex;align-items:flex-start;gap:7px;padding:8px 16px;background:linear-gradient(90deg,var(--hps),transparent);border-top:1px solid var(--hbd);border-bottom:1px solid var(--hbd)}",
-      ".maik-adv .maik-shield{flex:0 0 auto;width:14px;height:14px;color:var(--hp);margin-top:1px}",
-      ".maik-disc{font:600 11px/1.4 var(--hfont);color:var(--hmut);white-space:normal;overflow-wrap:anywhere}",
-      // body + centered wordmark watermark (theme-swapped), sits behind the messages
-      ".maik-body{position:relative;flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px 6px;display:flex;flex-direction:column;gap:10px}",
-      ".maik-body::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:230px;height:230px;background:url('/maik-wordmark-color.png') center/contain no-repeat;opacity:.05;pointer-events:none;z-index:0}",
-      "body.dark #maikSheet .maik-body::before,body.v3-dark #maikSheet .maik-body::before{background-image:url('/maik-wordmark-white.png');opacity:.06}",
-      ".maik-body>*{position:relative;z-index:1}",
-      // composer: single pill (mic + textarea + send), extract button above
-      ".maik-cmp{flex:0 0 auto;display:flex;flex-direction:column;gap:8px;align-items:stretch;padding:10px 12px calc(12px + env(safe-area-inset-bottom));background:var(--hpanel)}",
-      ".maik-cmp-row{display:flex;gap:8px;align-items:center;background:var(--mkfield);border:1px solid var(--hbd);border-radius:24px;padding:6px 6px 6px 8px;box-shadow:0 6px 20px rgba(15,23,42,.10)}",
-      ".maik-cmp-row:focus-within{border-color:var(--hp)}",
-      ".maik-cmp textarea{flex:1 1 auto;min-width:0;resize:none;max-height:120px;background:transparent;border:0;color:var(--hink);font:500 14px var(--hfont);padding:8px 2px;box-sizing:border-box;outline:none}",
-      ".maik-cmp textarea::placeholder{color:var(--mkfaint)}",
-      ".maik-mic{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--hbg);color:var(--hmut);border:1px solid var(--hbd);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;font-size:16px;line-height:1}",
-      ".maik-mic:hover{color:var(--hp);background:var(--hps);border-color:var(--hps)}.maik-mic:active{transform:scale(.94)}",
-      ".maik-mic.live{background:#dc2626;color:#fff;border-color:#dc2626;animation:maikPulse 1.2s ease-in-out infinite}",
-      "@keyframes maikPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}50%{box-shadow:0 0 0 6px rgba(220,38,38,0)}}",
-      ".maik-send{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--mksend);color:#fff;border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;box-shadow:0 6px 16px rgba(15,118,110,.5)}",
-      ".maik-send:active{transform:scale(.94)}.maik-send:disabled{opacity:.55}",
-      ".maik-extract{background:transparent;color:var(--hp);border:1px dashed var(--hp);border-radius:12px;min-height:38px;padding:8px 12px;font:700 13px var(--hfont);width:100%;text-align:center;cursor:pointer}",
-      ".maik-extract[hidden]{display:none}",
-      // bubbles
-      ".maik-b{max-width:92%;padding:11px 13px;border-radius:16px 16px 16px 6px;font:500 12.5px/1.5 var(--hfont);word-break:break-word;background:var(--hbg);border:1px solid var(--hbd);color:var(--hink);box-shadow:0 1px 2px rgba(15,23,42,.04)}",
-      ".maik-b.you{align-self:flex-end;max-width:82%;background:var(--mkyou);border:none;color:#fff;border-radius:16px 16px 6px 16px;padding:9px 12px;box-shadow:0 4px 14px rgba(15,118,110,.28)}",
-      ".maik-b.ai{align-self:flex-start}",
-      ".maik-attr{display:flex;align-items:center;gap:5px;margin-bottom:5px}.maik-attr svg{width:13px;height:13px;color:var(--hp)}.maik-attr b{font:800 10.5px var(--hfont);letter-spacing:.06em;text-transform:uppercase;color:var(--hp)}",
-      ".maik-b .maik-h{font:800 12.5px var(--hfont);margin:8px 0 3px;color:var(--hink)}.maik-b .maik-h:first-child{margin-top:0}",
-      ".maik-b p{margin:4px 0;color:var(--hink)}.maik-b ul,.maik-b ol{margin:4px 0;padding-left:18px}.maik-b li{margin:3px 0;font:500 12px/1.45 var(--hfont)}.maik-b ul li::marker{color:var(--hp)}.maik-b code{background:rgba(100,116,139,.15);border-radius:4px;padding:0 4px;font-size:12px}",
-      ".maik-edu{font:600 11px var(--hfont);color:var(--hmut);background:var(--hbg);border-radius:10px;padding:6px 9px;margin-bottom:6px}",
-      ".maik-assume{font:600 12px var(--hfont);color:var(--hink);background:rgba(37,99,235,.08);border-left:3px solid var(--hacc);border-radius:10px;padding:7px 10px;margin-bottom:8px}.maik-assume b{color:var(--hacc)}",
-      ".maik-followups{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}",
-      ".maik-tblwrap{overflow-x:auto;margin:8px 0;-webkit-overflow-scrolling:touch}.maik-tbl{border-collapse:collapse;width:100%;font:400 12px var(--hfont)}.maik-tbl th,.maik-tbl td{border:1px solid var(--hbd);padding:6px 9px;text-align:left;vertical-align:top}.maik-tbl th{background:var(--hbg);font-weight:700;color:var(--hink)}",
-      ".maik-cite{color:var(--hacc);font-weight:700;font-size:.7em;cursor:pointer;padding:0 1px;vertical-align:super;line-height:0}",
-      ".maik-caret{display:inline-block;width:6px;height:13px;background:var(--hacc);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}@keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}",
-      ".maik-thinking{color:var(--hmut)}.maik-thinking .d{display:inline-block;animation:maikThink 1.3s ease-in-out infinite}.maik-thinking .d2{animation-delay:.18s}.maik-thinking .d3{animation-delay:.36s}@keyframes maikThink{0%,100%{opacity:.45}50%{opacity:1}}",
-      // sources footer: teal row with book icon (keeps the <details> behavior)
-      ".maik-src{margin-top:9px;border-top:1px solid var(--hbd);padding-top:7px;font:600 10.5px var(--hfont);color:var(--hp)}.maik-src summary{cursor:pointer;color:var(--hp);display:flex;align-items:center;gap:5px;list-style:none}.maik-src summary::-webkit-details-marker{display:none}.maik-src summary svg{width:12px;height:12px}.maik-src ol{margin:6px 0 0 18px;padding:0;color:var(--hmut)}.maik-src li{margin:2px 0}",
-      ".maik-more{background:none;border:none;color:var(--hp);font:700 12px var(--hfont);cursor:pointer;padding:4px 0}",
-      // chips / follow-up pills
-      ".maik-chips{display:flex;flex-wrap:wrap;gap:8px}",
-      ".maik-chip{background:var(--hps);border:1px solid var(--hps);border-radius:999px;padding:6px 11px;font:600 11.5px var(--hfont);color:var(--hp);cursor:pointer}",
-      ".maik-chip:hover{border-color:var(--hp)}.maik-chip:active{transform:scale(.96)}",
-      // welcome + suggestion cards (empty state)
-      ".maik-welcome{font:500 12.5px/1.5 var(--hfont);color:var(--hink)}",
-      ".maik-empty{display:flex;flex-direction:column;justify-content:center;min-height:100%;padding:6px 2px}",
-      ".maik-empty .mk-hl{font:800 22px/1.24 var(--hfont);letter-spacing:-.02em;color:var(--hink);margin:0}",
-      ".maik-empty .mk-sub{font:500 12.5px/1.5 var(--hfont);color:var(--hmut);margin:8px 0 16px;max-width:44ch}",
-      ".maik-sg{display:flex;flex-direction:column;gap:8px}",
-      ".maik-card{display:flex;align-items:center;gap:11px;text-align:left;width:100%;padding:11px 12px;border:1px solid var(--hbd);border-radius:14px;background:var(--hbg);box-shadow:0 1px 2px rgba(15,23,42,.04);cursor:pointer;color:var(--hink)}",
-      ".maik-card:hover{border-color:var(--hp);box-shadow:0 6px 16px rgba(15,118,110,.14)}.maik-card:active{transform:scale(.99)}",
-      ".maik-card .ic{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:linear-gradient(140deg,var(--hps),var(--hbg));color:var(--hp);display:inline-flex;align-items:center;justify-content:center}.maik-card .ic svg{width:18px;height:18px}",
-      ".maik-card .bd{flex:1 1 auto;min-width:0}.maik-card .t{display:block;font:700 13px var(--hfont);color:var(--hink)}.maik-card .s{display:block;font:500 11px var(--hfont);color:var(--hmut);margin-top:2px}",
-      ".maik-card .chev{flex:0 0 auto;color:var(--mkfaint)}.maik-card .chev svg{width:16px;height:16px}",
-      "body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-open .inf-fab,body.maik-open .ghis-ward-fab{display:none!important}"
-    ].join("");
+    st.textContent = `
+#maikScrim{position:fixed;inset:0;background:rgba(15,23,42,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:998}
+#maikScrim.on{opacity:1;pointer-events:auto}
+#maikSheet{
+  --mk-bg:#fff;--mk-ink:#0f172a;--mk-mut:#64748b;--mk-faint:#9aa7b6;--mk-bd:#eaeef3;--mk-soft:#f5f7f9;--mk-field:#f2f5f8;
+  --mk-teal:#0f766e;--mk-tsoft:#d7f5ef;--mk-acc:#2563eb;--mk-glow:rgba(20,184,166,.35);
+  --mk-userbub:linear-gradient(140deg,#15a89a,#0f766e);--mk-userink:#fff;--mk-usersh:0 4px 12px rgba(15,118,110,.28);
+  --mk-send:linear-gradient(140deg,#19b8a8,#0e6e63);
+  position:fixed;left:0;right:0;bottom:0;z-index:999;height:86vh;max-height:86vh;
+  background:var(--mk-bg);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);
+  font-family:'Inter',-apple-system,system-ui,sans-serif}
+#maikSheet.on{transform:translateY(0)}
+body.dark #maikSheet{
+  --mk-bg:#101a2c;--mk-ink:#eaf0f7;--mk-mut:#8c9ab0;--mk-faint:#5d6e86;--mk-bd:#233149;--mk-soft:#182338;--mk-field:#0e1829;
+  --mk-teal:#2dd4bf;--mk-tsoft:#0e2e2b;--mk-acc:#7db3ff;--mk-glow:rgba(45,212,191,.32);
+  --mk-userbub:linear-gradient(140deg,#0f766e,#0b5a53);--mk-userink:#eafff9;--mk-usersh:0 4px 12px rgba(0,0,0,.35);
+  box-shadow:0 -8px 40px rgba(0,0,0,.6)}
+
+.maik-grab{width:38px;height:5px;border-radius:3px;background:var(--mk-bd);margin:9px auto 2px;flex:0 0 auto;cursor:grab}
+
+/* header (shared) */
+.maik-hd{position:relative;padding:8px 14px 10px;background:linear-gradient(180deg,var(--mk-tsoft),transparent);flex:0 0 auto}
+.maik-hd-row{display:flex;align-items:center;gap:11px}
+.maik-logo-wrap{position:relative;display:flex;align-items:center;flex:0 0 auto}
+.maik-logo-glow{position:absolute;left:-8px;right:-8px;top:-4px;bottom:-4px;border-radius:50%;background:radial-gradient(ellipse,var(--mk-glow),transparent 70%)}
+.maik-logo{position:relative;height:24px;width:auto;display:block}
+.maik-hd-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--mk-bd);background:var(--mk-soft);color:var(--mk-ink);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
+.maik-hd-btn:hover{border-color:var(--mk-teal);color:var(--mk-teal)}
+.maik-hd-btn:active{transform:scale(.94)}
+
+/* disclaimer (shared, wraps — never clips) */
+.maik-disc{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--mk-soft);border-top:1px solid var(--mk-bd);border-bottom:1px solid var(--mk-bd);flex:0 0 auto}
+.maik-disc svg{flex:0 0 auto}
+.maik-disc span{font:600 11px/1.3 'Inter';color:var(--mk-mut)}
+
+/* body (shared scroll area) */
+.maik-body{position:relative;flex:1;overflow-y:auto;padding:14px 14px 6px;display:flex;flex-direction:column;gap:10px}
+.maik-wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:230px;opacity:.05;pointer-events:none}
+body.dark .maik-wm{opacity:.06}
+
+/* EMPTY / START screen (from #2b) */
+.maik-empty{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding:6px 4px}
+.maik-hero{display:flex;flex-direction:column;align-items:center;margin-bottom:16px}
+.maik-hero-logo{position:relative;display:flex;align-items:center;justify-content:center;padding:5px 0}
+.maik-hero-glow{position:absolute;width:160px;height:64px;border-radius:50%;background:radial-gradient(ellipse,var(--mk-glow),transparent 70%);animation:maikGlow 3.2s ease-in-out infinite}
+.maik-hero-logo img{position:relative;height:32px;width:auto;display:block}
+.maik-kicker{font:700 10px 'Inter';color:var(--mk-teal);text-transform:uppercase;letter-spacing:.09em;margin-top:8px}
+.maik-h1{font:800 22px/1.24 'Inter';letter-spacing:-.02em;color:var(--mk-ink)}
+.maik-sub{font:500 12.5px/1.5 'Inter';color:var(--mk-mut);margin-top:8px}
+.maik-cards{margin-top:15px;display:flex;flex-direction:column;gap:8px}
+.maik-card{display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid var(--mk-bd);border-radius:14px;background:var(--mk-bg);cursor:pointer;text-align:left;box-shadow:0 1px 2px rgba(15,23,42,.04);transition:.15s}
+.maik-card:hover{border-color:var(--mk-teal);box-shadow:0 6px 16px rgba(15,118,110,.14)}
+body.dark .maik-card{background:var(--mk-soft);box-shadow:none}
+.maik-card-ic{width:34px;height:34px;border-radius:10px;background:linear-gradient(140deg,var(--mk-tsoft),var(--mk-soft));color:var(--mk-teal);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+body.dark .maik-card-ic{background:var(--mk-tsoft)}
+.maik-card-tx{flex:1;min-width:0}
+.maik-card-tt{display:block;font:700 13px 'Inter';color:var(--mk-ink)}
+.maik-card-sb{display:block;font:500 11px 'Inter';color:var(--mk-mut);margin-top:1px}
+.maik-card-ch{color:var(--mk-faint);display:flex}
+
+/* CONVERSATION bubbles (from #final) */
+.maik-b{position:relative;max-width:92%}
+.maik-b.you{align-self:flex-end;max-width:82%;background:var(--mk-userbub);color:var(--mk-userink);border-radius:16px 16px 6px 16px;padding:9px 12px;font:500 12.5px/1.5 'Inter';box-shadow:var(--mk-usersh)}
+.maik-b.ai{align-self:flex-start;background:var(--mk-soft);border:1px solid var(--mk-bd);border-radius:16px 16px 16px 6px;padding:11px 13px;box-shadow:0 2px 8px rgba(15,23,42,.05)}
+body.dark .maik-b.ai{box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.maik-attr{display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.maik-attr span{font:800 10.5px 'Inter';color:var(--mk-teal);text-transform:uppercase;letter-spacing:.06em}
+.maik-h{font:800 12.5px 'Inter';color:var(--mk-ink);margin-bottom:4px}
+.maik-p{font:500 12px/1.5 'Inter';color:var(--mk-ink)}
+.maik-ul{margin:6px 0 2px;display:flex;flex-direction:column;gap:4px}
+.maik-li{display:flex;gap:7px;font:500 12px/1.45 'Inter';color:var(--mk-ink)}
+.maik-li .dot{color:var(--mk-teal);font-weight:800}
+.maik-cite{color:var(--mk-acc);font-weight:700;font-size:.7em;vertical-align:super}
+.maik-note{font:500 11.5px/1.45 'Inter';color:var(--mk-mut);margin-top:6px}
+.maik-src{margin-top:9px;padding-top:8px;border-top:1px solid var(--mk-bd);display:flex;align-items:center;gap:6px;font:600 10.5px 'Inter';color:var(--mk-teal)}
+.maik-followups{position:relative;display:flex;flex-wrap:wrap;gap:7px;margin-top:1px}
+.maik-fu{font:600 11.5px 'Inter';color:var(--mk-teal);background:var(--mk-tsoft);border:1px solid var(--mk-tsoft);border-radius:999px;padding:6px 11px;cursor:pointer;transition:.15s}
+.maik-fu:hover{border-color:var(--mk-teal)}
+
+/* composer (shared) */
+.maik-cmp{padding:6px 14px 15px;flex:0 0 auto}
+.maik-extract{width:100%;margin-bottom:8px;padding:9px;border:1px dashed var(--mk-teal);border-radius:12px;background:transparent;color:var(--mk-teal);font:700 12px 'Inter';cursor:pointer;display:none}
+.maik-extract.show{display:block}
+.maik-cmp-in{display:flex;align-items:center;gap:8px;background:var(--mk-bg);border:1px solid var(--mk-bd);border-radius:24px;padding:6px 6px 6px 8px;box-shadow:0 6px 20px rgba(15,23,42,.1);transition:.15s}
+body.dark .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.maik-cmp-in:focus-within{border-color:var(--mk-teal)}
+.maik-mic{width:36px;height:36px;border-radius:50%;border:none;background:var(--mk-soft);color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
+.maik-mic:hover{color:var(--mk-teal);background:var(--mk-tsoft)}
+.maik-mic.live{background:#fee2e2;color:#dc2626;animation:maikPulse 1.2s ease-in-out infinite}
+.maik-ta{flex:1;border:none;background:transparent;outline:none;resize:none;font:500 14px 'Inter';color:var(--mk-ink);max-height:88px;padding:8px 0}
+.maik-ta::placeholder{color:var(--mk-faint)}
+.maik-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--mk-send);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:0 6px 16px rgba(15,118,110,.5)}
+.maik-send:active{transform:scale(.94)}
+
+@keyframes maikGlow{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.08)}}
+@keyframes maikPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{box-shadow:0 0 0 6px rgba(220,38,38,0)}}
+` + `
+/* ── support: app behaviors mapped onto the Aurora tokens (not a design change) ── */
+#maikSheet{color:var(--mk-ink)}
+#maikSheet *{box-sizing:border-box}
+body.v3-dark #maikSheet{--mk-bg:#101a2c;--mk-ink:#eaf0f7;--mk-mut:#8c9ab0;--mk-faint:#5d6e86;--mk-bd:#233149;--mk-soft:#182338;--mk-field:#0e1829;--mk-teal:#2dd4bf;--mk-tsoft:#0e2e2b;--mk-acc:#7db3ff;--mk-glow:rgba(45,212,191,.32);--mk-userbub:linear-gradient(140deg,#0f766e,#0b5a53);--mk-userink:#eafff9;--mk-usersh:0 4px 12px rgba(0,0,0,.35);box-shadow:0 -8px 40px rgba(0,0,0,.6)}
+body.v3-dark .maik-wm{opacity:.06}
+body.v3-dark #maikSheet .maik-b.ai{box-shadow:0 2px 8px rgba(0,0,0,.25)}
+body.v3-dark #maikSheet .maik-card{background:var(--mk-soft);box-shadow:none}
+body.v3-dark #maikSheet .maik-card-ic{background:var(--mk-tsoft)}
+body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+@media (prefers-reduced-motion:reduce){.maik-logo-glow,.maik-hero-glow,.maik-mic.live{animation:none}}
+/* markdown answer body (SMD_MaiK.renderMarkdown output) inside the AI bubble */
+.maik-b.ai>*:first-child{margin-top:0}
+.maik-b.ai p{margin:6px 0;font:500 12.5px/1.55 'Inter';color:var(--mk-ink)}
+.maik-b.ai h1,.maik-b.ai h2,.maik-b.ai h3,.maik-b.ai h4{font:800 12.5px/1.35 'Inter';color:var(--mk-ink);margin:10px 0 4px}
+.maik-b.ai ul,.maik-b.ai ol{margin:6px 0;padding-left:18px}
+.maik-b.ai li{margin:3px 0;font:500 12.5px/1.5 'Inter';color:var(--mk-ink)}
+.maik-b.ai ul li::marker{color:var(--mk-teal)}
+.maik-b.ai strong,.maik-b.ai b{font-weight:800;color:var(--mk-ink)}
+.maik-b.ai em{font-style:italic}
+.maik-b.ai code{background:rgba(100,116,139,.15);border-radius:4px;padding:0 4px;font:500 12px/1.4 ui-monospace,monospace;color:var(--mk-ink)}
+.maik-b.ai a{color:var(--mk-acc);text-decoration:underline}
+.maik-collapsed{position:relative}
+/* streaming caret + thinking dots (kept, retokenized) */
+.maik-streaming{font:500 12.5px/1.55 'Inter';color:var(--mk-ink)}
+.maik-caret{display:inline-block;width:6px;height:13px;background:var(--mk-acc);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}
+@keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}
+.maik-thinking{color:var(--mk-mut);font:500 12.5px 'Inter'}
+.maik-thinking .d{display:inline-block;animation:maikThink 1.3s ease-in-out infinite}
+.maik-thinking .d2{animation-delay:.18s}.maik-thinking .d3{animation-delay:.36s}
+@keyframes maikThink{0%,100%{opacity:.45}50%{opacity:1}}
+/* tables */
+.maik-tblwrap{overflow-x:auto;margin:8px 0;-webkit-overflow-scrolling:touch}
+.maik-tbl{border-collapse:collapse;width:100%;font:400 12px 'Inter'}
+.maik-tbl th,.maik-tbl td{border:1px solid var(--mk-bd);padding:6px 9px;text-align:left;vertical-align:top;color:var(--mk-ink)}
+.maik-tbl th{background:var(--mk-soft);font-weight:700}
+.maik-cite{cursor:pointer;padding:0 1px;line-height:0}
+/* expandable <details> sources — the app uses <details class="maik-src">, so make it a
+   disclosure block (overrides the spec's flat flex row while keeping its border/spacing/teal) */
+.maik-src{display:block}
+.maik-src summary{cursor:pointer;color:var(--mk-teal);display:flex;align-items:center;gap:5px;list-style:none;font:600 10.5px 'Inter'}
+.maik-src summary::-webkit-details-marker{display:none}
+.maik-src summary svg{width:12px;height:12px}
+.maik-src ol{margin:6px 0 0 18px;padding:0;color:var(--mk-mut);font:500 10.5px/1.5 'Inter'}
+.maik-src li{margin:2px 0}
+.maik-more{background:none;border:none;color:var(--mk-teal);font:700 12px 'Inter';cursor:pointer;padding:4px 0}
+/* generic chips still used by web-research / Rx / help / patient / extract replies */
+.maik-chip{background:var(--mk-tsoft);border:1px solid var(--mk-tsoft);border-radius:999px;padding:6px 11px;font:600 11.5px 'Inter';color:var(--mk-teal);cursor:pointer}
+.maik-chip:hover{border-color:var(--mk-teal)}
+.maik-chip:active{transform:scale(.96)}
+/* status / helper note bubbles */
+.maik-welcome{font:500 12.5px/1.55 'Inter';color:var(--mk-ink)}
+.maik-edu{font:600 11px 'Inter';color:var(--mk-mut);background:var(--mk-soft);border-radius:10px;padding:6px 9px;margin-bottom:6px}
+.maik-assume{font:600 12px 'Inter';color:var(--mk-ink);background:rgba(37,99,235,.08);border-left:3px solid var(--mk-acc);border-radius:10px;padding:7px 10px;margin-bottom:8px}
+.maik-assume b{color:var(--mk-acc)}
+/* content sits above the faint watermark */
+.maik-body>.maik-wm{z-index:0}
+.maik-body>*:not(.maik-wm){position:relative;z-index:1}
+/* keep launch FABs (they sit at a high z-index) from floating over the sheet */
+body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-open .inf-fab,body.maik-open .ghis-ward-fab,body.maik-open .hv-fab{display:none!important}
+`;
     (document.head || document.documentElement).appendChild(st);
   }
   function maikActiveCase() { try { return !!(window.DX && DX._state && Object.keys(DX._state.f || {}).length >= 1); } catch (e) { return false; } }
@@ -1653,66 +1776,52 @@
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask MaiK");
-    var mkDark = document.body.classList.contains("dark") || document.body.classList.contains("v3-dark");
-    var mkLogo = mkDark ? "/maik-wordmark-white.png" : "/maik-wordmark-color.png";
-    sheet.innerHTML =
-      '<div class="maik-grab" id="maikGrab" aria-hidden="true"></div>' +
-      '<div class="maik-hd"><span class="mk-logowrap"><img class="mk-logo" src="' + mkLogo + '" alt="MaiK" /></span><span class="mk-sp"></span>' +
-        '<button class="maik-ic" id="maikNew" aria-label="New conversation" title="New conversation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>' +
-        '<button class="maik-ic" id="maikX" aria-label="Close assistant"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button></div>' +
-      '<div class="maik-adv"><svg class="maik-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/></svg><span class="maik-disc">Grounded · AI-generated, verify independently</span></div>' +
-      '<div class="maik-body" id="maikBody"></div>' +
-      '<div class="maik-cmp"><button id="maikExtract" class="maik-extract" type="button" hidden>🩺 Extract findings for Clinical Reasoning →</button>' +
-      '<div class="maik-cmp-row"><button id="maikMic" class="maik-mic" type="button" aria-label="Dictate to MaiK"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/></svg></button><textarea id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea><button id="maikSend" class="maik-send" aria-label="Send"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="6"/><path d="M6 12l6-6 6 6"/></svg></button></div></div>';
+    sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
     requestAnimationFrame(function () { scrim.classList.add("on"); sheet.classList.add("on"); });
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
     function close() { try { if (body && body.innerHTML.trim()) { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } } catch (e) {} sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260); }
     function scroll() { body.scrollTop = body.scrollHeight; }
-    function bubble(who, html) { var d = document.createElement("div"); d.className = "maik-b " + (who === "you" ? "you" : "ai"); d.innerHTML = html; body.appendChild(d); scroll(); try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {} return d; }
-    function chips(list) {
-      var w = document.createElement("div"); w.className = "maik-chips";
-      list.forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.textContent = c.label; b.addEventListener("click", c.on); w.appendChild(b); });
-      body.appendChild(w); scroll();
-    }
-    // Aurora empty/welcome state: centered headline + sub + list-style suggestion cards. Same
-    // handlers as before; active-case swaps to the four case-aware prompts.
-    var MK_ICO = {
-      steth: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>',
-      book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4a2 2 0 0 1 2-2h12v18H7a2 2 0 0 0-2 2z"/><path d="M5 4v18"/></svg>',
-      pill: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 20.5 10.5a4.95 4.95 0 0 0-7-7l-10 10a4.95 4.95 0 0 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>',
-      calc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="8.01" y2="12"/><line x1="12" y1="12" x2="12.01" y2="12"/><line x1="16" y1="12" x2="16.01" y2="12"/><line x1="8" y1="16" x2="8.01" y2="16"/></svg>',
-      quest: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1 .9-1 1.6"/><line x1="12" y1="16.5" x2="12.01" y2="16.5"/></svg>',
-      search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
-      flask: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg>',
-      chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'
-    };
-    function suggCards(list) {
-      var wrap = document.createElement("div"); wrap.className = "maik-empty";
-      wrap.innerHTML = '<h2 class="mk-hl">Ask MaiK anything clinical.</h2>' +
-        '<p class="mk-sub">Grounded answers from StewardMD’s knowledge base — with sources you can verify.</p>';
-      var sg = document.createElement("div"); sg.className = "maik-sg";
-      list.forEach(function (c) {
-        var b = document.createElement("button"); b.className = "maik-card"; b.type = "button";
-        b.innerHTML = '<span class="ic">' + c.ic + '</span><span class="bd"><span class="t">' + maikEscH(c.t) + '</span><span class="s">' + maikEscH(c.s) + '</span></span><span class="chev">' + MK_ICO.chev + '</span>';
-        b.addEventListener("click", c.on); sg.appendChild(b);
-      });
-      wrap.appendChild(sg); body.appendChild(wrap); scroll();
-    }
+    // Prepend the faint centered wordmark watermark (§1 .maik-wm) behind the thread the first time a
+    // bubble is added. emptyState() renders its own hero logo instead, so it deliberately omits this.
+    function bubble(who, html) { if (!body.querySelector(".maik-wm")) { var wm = document.createElement("img"); wm.className = "maik-wm"; wm.src = MK_LOGO(); wm.alt = ""; wm.setAttribute("aria-hidden", "true"); body.insertBefore(wm, body.firstChild); } var d = document.createElement("div"); d.className = "maik-b " + (who === "you" ? "you" : "ai"); d.innerHTML = html; body.appendChild(d); scroll(); try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {} return d; }
+    // (chips() removed — Aurora uses the §4 start-screen cards and §5 .maik-fu follow-ups instead)
+    // Aurora start screen (IMPLEMENTATION.md §4, reference #2b): glowing hero wordmark + kicker,
+    // headline, sub, and three list cards. Active-case swaps to the three case-aware prompts. Same
+    // handlers as before (openDxChooser / focus #maikQ / Drug Index).
     function emptyState() {
-      if (maikActiveCase()) suggCards([
-        { t: "What findings are missing?", s: "Complete the clinical picture", ic: MK_ICO.quest, on: function () { qEl.value = "What findings are missing for the current differential?"; send(); } },
-        { t: "Explain this differential", s: "Reasoning for the leading diagnosis", ic: MK_ICO.book, on: function () { qEl.value = "Explain the leading diagnosis in the current assessment."; send(); } },
-        { t: "What investigations next?", s: "Targeted next steps", ic: MK_ICO.search, on: function () { qEl.value = "What investigations should I order next?"; send(); } },
-        { t: "Culture-directed options", s: "De-escalation choices", ic: MK_ICO.flask, on: function () { qEl.value = "What are the culture-directed antibiotic options?"; send(); } }
-      ]);
-      else suggCards([
-        { t: "Start a clinical assessment", s: "Guided differential & workup", ic: MK_ICO.steth, on: function () { close(); try { openDxChooser(); } catch (e) {} } },
-        { t: "Ask a knowledge question", s: "Cited, page-level answers", ic: MK_ICO.book, on: function () { qEl.value = "How to treat organophosphate poisoning?"; try { qEl.focus(); } catch (e) {} } },
-        { t: "Open Drug Index", s: "Brands, doses, spectrum, cautions", ic: MK_ICO.pill, on: function () { close(); var b = document.querySelector('#homeV2 [data-act="drugs"]'); if (b) b.click(); else toast("Open Drugs from the home screen."); } },
-        { t: "Open calculators", s: "70+ clinical tools", ic: MK_ICO.calc, on: function () { close(); var b = document.querySelector('#homeV2 [data-act="calculators"]'); if (b) b.click(); else toast("Open Calculators from the home screen."); } }
-      ]);
+      var active = maikActiveCase();
+      var cards = active ? [
+        ["cAssess", "What findings are missing?", "Complete the picture"],
+        ["cKnow", "Explain this differential", "Reasoning & evidence"],
+        ["cDrug", "What investigations next?", "Targeted workup"]
+      ] : [
+        ["cAssess", "Start a clinical assessment", "Guided differential & workup"],
+        ["cKnow", "Ask a knowledge question", "Cited, page-level answers"],
+        ["cDrug", "Open Drug Index & calculators", "Doses, spectrum, tools"]
+      ];
+      var cardHTML = cards.map(function (c, i) {
+        return '<button class="maik-card" data-mk-card="' + i + '">' +
+          '<span class="maik-card-ic">' + MK[c[0]] + '</span>' +
+          '<span class="maik-card-tx"><span class="maik-card-tt">' + maikEscH(c[1]) + '</span><span class="maik-card-sb">' + maikEscH(c[2]) + '</span></span>' +
+          '<span class="maik-card-ch">' + MK.chevron + '</span></button>';
+      }).join("");
+      body.innerHTML = '<div class="maik-empty">' +
+        '<div class="maik-hero"><div class="maik-hero-logo"><div class="maik-hero-glow"></div><img src="' + MK_LOGO() + '" alt="MaiK"></div><div class="maik-kicker">Medical AI Knowledge</div></div>' +
+        '<div class="maik-h1">Ask MaiK anything clinical.</div>' +
+        '<div class="maik-sub">Grounded answers from StewardMD&rsquo;s knowledge base &mdash; with sources you can verify.</div>' +
+        '<div class="maik-cards">' + cardHTML + '</div></div>';
+      var cardEls = body.querySelectorAll(".maik-card");
+      if (active) {
+        var qs = ["What findings are missing for the current differential?", "Explain the leading diagnosis in the current assessment.", "What investigations should I order next?"];
+        cardEls.forEach(function (el, i) { el.addEventListener("click", function () { qEl.value = qs[i]; send(); }); });
+      } else {
+        if (cardEls[0]) cardEls[0].addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} });
+        if (cardEls[1]) cardEls[1].addEventListener("click", function () { qEl.value = "How to treat organophosphate poisoning?"; try { qEl.focus(); } catch (e) {} });
+        if (cardEls[2]) cardEls[2].addEventListener("click", function () { close(); var b = document.querySelector('#homeV2 [data-act="drugs"]'); if (b) b.click(); else if (typeof toast === "function") toast("Open Drugs from the home screen."); });
+      }
+      scroll();
     }
     // patient-specific (individualized) request with NO active case → redirect, don't answer
     function isPatientSpecific(q) { return /\b(my patient|this patient|the patient|my case|this case|should i (give|start|prescribe|treat)|what.?s wrong with|dose for (my|this)|diagnos(e|is) (my|this))\b/i.test(q) || /\b(mrn|uhid)\b/i.test(q) || /\bpatient\s+[a-z]+\s+(has|with|is|presenting|aged)/i.test(q) || /\bgive (him|her|them|the patient)\b/i.test(q) || /\b\d{1,3}\s*(yo|y\/o|year[- ]?old|yrs?)\b.*\b(patient|give|start|prescribe|dose)\b/i.test(q); }
@@ -1850,8 +1959,8 @@
     // innerHTML answer-cache and are handled by ONE delegated listener on the chat body.
     function maikFollowupsHTML(pkg, question, assume) {
       var chips = maikFollowupChips(pkg, question), html = "";
-      chips.forEach(function (c) { html += '<button class="maik-chip" data-maik-q="' + maikEscH(c.q) + '">' + maikEscH(c.label) + '</button>'; });
-      if (assume) html += '<button class="maik-chip" data-maik-web="' + maikEscH(question) + '">🔎 Different topic — search the web</button>';
+      chips.forEach(function (c) { html += '<button class="maik-fu" data-maik-q="' + maikEscH(c.q) + '">' + maikEscH(c.label) + '</button>'; });
+      if (assume) html += '<button class="maik-fu" data-maik-web="' + maikEscH(question) + '">🔎 Different topic — search the web</button>';
       return html ? '<div class="maik-followups">' + html + '</div>' : "";
     }
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
@@ -1868,10 +1977,10 @@
       var srcArr = (pkg && pkg.sources && pkg.sources.length) ? pkg.sources.map(function (s) { return s.title; })
         : ((window.SMD_MaiK && SMD_MaiK.sourceList) ? SMD_MaiK.sourceList(pkg).map(function (s) { return s.title; })
           : ((window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : []));
-      var bookSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4a2 2 0 0 1 2-2h12v18H7a2 2 0 0 0-2 2z"/><path d="M5 4v18"/></svg>';
+      var bookSvg = MK.book;
       var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + bookSvg + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + '</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
       // MaiK attribution row (sparkle + MAIK) atop every answer bubble.
-      var attrHTML = '<div class="maik-attr"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8z"/></svg><b>MaiK</b></div>';
+      var attrHTML = '<div class="maik-attr">' + MK.spark + '<span>MaiK</span></div>';
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> — not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
       var full = attrHTML + eduHTML + rendered + srcHTML;
@@ -1962,8 +2071,9 @@
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
-      try { var _ex = sheet.querySelector("#maikExtract"); if (_ex) _ex.hidden = true; } catch (e) {}
+      try { var _ex = sheet.querySelector("#maikExtract"); if (_ex) _ex.classList.remove("show"); } catch (e) {}
       _maikHist.push({ q: q }); bubble("you", maikEscH(q));
+      try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
       var active = maikActiveCase();
       if (maikV2()) {
         var fu = maikResolveFollowup(q);
@@ -1988,8 +2098,8 @@
     }
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
-    function maikNewThread() { _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; maikSaveThread(""); if (body) body.innerHTML = ""; emptyState(); if (qEl) { qEl.value = ""; qEl.focus(); } }
-    sheet.querySelector("#maikX").addEventListener("click", close);
+    function maikNewThread() { _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; maikSaveThread(""); if (body) body.innerHTML = ""; emptyState(); if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
+    sheet.querySelector("#maikClose").addEventListener("click", close);
     var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
     var _grab = sheet.querySelector("#maikGrab"); if (_grab) _grab.addEventListener("click", close);
     scrim.addEventListener("click", close);
@@ -2017,7 +2127,7 @@
     var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract");
     function reasoningReady() { return !!(window.SMD_AI && SMD_AI.extract && window.DX && DX.addFindings && DX.findingCatalog); }
     function autosizeQ() { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; }
-    function refreshExtract() { if (extractBtn) extractBtn.hidden = !((qEl.value || "").trim() && reasoningReady()); }
+    function refreshExtract() { if (extractBtn) extractBtn.classList.toggle("show", !!((qEl.value || "").trim() && reasoningReady())); }
     // MaiK Scribe mic → the shared voice dialog (the same one that works in Clinical
     // Reasoning), in text mode: dictate into the chat box, then send to MaiK or tap
     // "Extract findings →". (Inline capture in the composer was unreliable while the
@@ -2035,7 +2145,7 @@
     });
     if (extractBtn) extractBtn.addEventListener("click", function () {
       var q = (qEl.value || "").trim();
-      if (!q) { extractBtn.hidden = true; return; }
+      if (!q) { extractBtn.classList.remove("show"); return; }
       if (!reasoningReady()) { toast("Clinical Reasoning isn’t ready yet."); return; }
       var catalog = []; try { catalog = DX.findingCatalog() || []; } catch (e) {}
       extractBtn.disabled = true; extractBtn.textContent = "Extracting findings…";
@@ -2050,7 +2160,7 @@
         var d = bubble("ai", '<div class="maik-welcome">Added <b>' + names.length + '</b> finding' + (names.length === 1 ? "" : "s") + ' to Clinical Reasoning — <i>' + maikEscH(names.join(", ")) + '</i>. Nothing is diagnosed automatically; open the workspace to review the differential.</div>');
         var ob = document.createElement("button"); ob.className = "maik-chip"; ob.style.marginTop = "8px"; ob.textContent = "Open Clinical Reasoning →";
         ob.addEventListener("click", function () { close(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else if (window.DX && DX.open) DX.open({ workspace: true }); } catch (e) {} });
-        d.appendChild(ob); scroll(); extractBtn.hidden = true;
+        d.appendChild(ob); scroll(); extractBtn.classList.remove("show");
       }).catch(function () { extractBtn.disabled = false; extractBtn.textContent = "🩺 Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
     });
     qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; refreshExtract(); });

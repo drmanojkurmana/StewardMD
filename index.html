@@ -46,7 +46,7 @@
      asks for. It was never actually loaded, so it fell back to a different cursive on
      devices without it (e.g. iPhone). Load it so the credit renders as designed everywhere. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/redesign-system.css?v=gold345">
+<link rel="stylesheet" href="/redesign-system.css?v=gold358">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <script>
@@ -1394,7 +1394,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold358" defer></script>
 <script src="/electrolytes.js?v=gold336" defer></script>
 <script src="/caseshare.js?v=gold336" defer></script>
-<script src="/home.js?v=gold357" defer></script>
+<script src="/home.js?v=gold358" defer></script>
 <!-- Guided tour (SMD_TOUR): first-run interactive onboarding + one-time contextual tips.
      Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
      home.js + account.js so it can read the home DOM and the signed-in account. -->
