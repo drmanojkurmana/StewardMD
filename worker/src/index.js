@@ -309,7 +309,7 @@ async function handleOfflineDb(request, env) {
 
 export default {
   // Scheduled (cron) — two schedules, distinguished by event.cron:
-  //   "17 */6 * * *"  → pull trusted FDA medical updates into the notifications feed.
+  //   "30 5 * * *"    → run the Medical Updates pipeline (crawl → dedup → AI-summarize new).
   //   "*/15 * * * *"  → poll GHIS for consented watch-lab patients and push new labs.
   // Both delegate to Pages Functions with the shared admin token. Best-effort.
   async scheduled(event, env, ctx) {

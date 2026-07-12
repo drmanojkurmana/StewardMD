@@ -3736,8 +3736,26 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
-      function fallback() { return self.explainGrounded(pkg, opts); }
-      if (typeof ReadableStream === "undefined" || !window.TextDecoder) return fallback();
+      // Reveal a finished answer progressively so it "flows" like a live stream. Native WebViews
+      // buffer SSE (CapacitorHttp), so true token streaming isn't possible there — we fetch the whole
+      // answer, then type it out via onDelta (reusing the exact streaming render). Web streams for real.
+      function replay(res) {
+        var full = res && res.text;
+        if (!full || typeof onDelta !== "function") return res;
+        return new Promise(function (resolve) {
+          var i = 0, step = Math.max(4, Math.round(full.length / 90));   // ~90 frames
+          var raf = window.requestAnimationFrame || function (f) { return setTimeout(f, 16); };
+          (function tick() {
+            i = Math.min(full.length, i + step);
+            try { onDelta(full.slice(0, i)); } catch (e) {}
+            if (i >= full.length) return resolve(res);
+            raf(tick);
+          })();
+        });
+      }
+      function fallback() { return Promise.resolve(self.explainGrounded(pkg, opts)).then(replay); }
+      // Native buffers SSE → fetch-whole + typewriter. Also the no-ReadableStream path.
+      if (window.SMD_IS_NATIVE || typeof ReadableStream === "undefined" || !window.TextDecoder) return fallback();
       return aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
         return fetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) });

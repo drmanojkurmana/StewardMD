@@ -1,0 +1,77 @@
+ext {
+    androidxCoreKtxVersion = project.hasProperty('androidxCoreKtxVersion') ? rootProject.ext.androidxCoreKtxVersion : '1.13.1'
+    kotlinVersion = project.hasProperty('kotlin_version') ? rootProject.ext.kotlin_version : '1.9.25'
+}
+
+buildscript {
+    ext.kotlin_version = project.hasProperty('kotlin_version') ? rootProject.ext.kotlin_version : '1.9.25'
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.7.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace "in.stewardmd.whisper"
+    compileSdk project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 36
+    defaultConfig {
+        minSdkVersion project.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 24
+        targetSdkVersion project.hasProperty('targetSdkVersion') ? rootProject.ext.targetSdkVersion : 36
+        versionCode 1
+        versionName '1.0'
+
+        // ── DEFERRED: native whisper.cpp build (plan §9b) ────────────────────────────────────────
+        // Uncomment together with vendoring whisper.cpp into src/main/cpp/ (see README-ANDROID.md).
+        // arm64-v8a FIRST; x86_64 emulators may not run inference (test on a real arm64 device).
+        //
+        // ndk {
+        //     abiFilters 'arm64-v8a'   // add 'x86_64','armeabi-v7a' only if the .so is built for them
+        // }
+        // externalNativeBuild {
+        //     cmake {
+        //         cppFlags '-O3 -std=c++17 -fexceptions -frtti'
+        //         arguments '-DANDROID_STL=c++_shared'
+        //     }
+        // }
+    }
+    // externalNativeBuild {
+    //     cmake {
+    //         path 'src/main/cpp/CMakeLists.txt'
+    //         version '3.22.1'
+    //     }
+    // }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+    kotlinOptions {
+        jvmTarget = '21'
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':capacitor-android')
+    implementation "androidx.core:core-ktx:$androidxCoreKtxVersion"
+}

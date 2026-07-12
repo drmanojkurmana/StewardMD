@@ -50,6 +50,29 @@ function authorise(request, env) {
 }
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
+// CORS for the native apps only: the Capacitor WebView (origin https://localhost /
+// capacitor://localhost) needs real cross-origin streaming (CapacitorHttp can't stream). Web is
+// same-origin and unaffected. Echo the Origin only when it's an allowed app/site origin.
+const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
+function corsHeaders(request) {
+  const o = request.headers.get("Origin") || "";
+  if (CORS_ORIGINS.indexOf(o) < 0) return {};
+  return {
+    "Access-Control-Allow-Origin": o,
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, X-SMD-App, X-App-Token",
+    "Access-Control-Max-Age": "86400",
+    "Vary": "Origin",
+  };
+}
+function withCors(request, resp) {
+  const ch = corsHeaders(request);
+  if (!Object.keys(ch).length) return resp;
+  const h = new Headers(resp.headers);
+  for (const k in ch) h.set(k, ch[k]);
+  return new Response(resp.body, { status: resp.status, headers: h });
+}
+
 /* ===================================================================
  * AI TRANSPORT — provider abstraction (this is the ONLY layer that changed).
  * Prompt construction, RAG grounding, /vision, and response parsing are
@@ -232,7 +255,7 @@ function failReason(e) {
 // Facade — callers (RAG explain / legacy explain / vision) are unchanged. Provider priority:
 // Vertex (retry once) → Developer hot standby. Fails over on any Vertex auth/OAuth/STS/
 // permission/quota/429/5xx/network/unavailable error so the clinician workflow never breaks.
-async function callGemini(env, parts, maxTokens, opts) {
+export async function callGemini(env, parts, maxTokens, opts) {
   const order = providerOrder(env);
   let lastErr = null;
   for (let i = 0; i < order.length; i++) {
@@ -442,6 +465,8 @@ function reasoningExtractPrompt(transcript, catalog) {
 
 export async function onRequest(context) {
   const { request, env, params } = context;
+  // CORS preflight (native WebView streaming) — no auth; must precede authorise.
+  if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
   if (!authorise(request, env)) return json({ error: "unauthorised" }, 403);
   const seg = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
   const enabled = aiEnabled(env);
@@ -515,7 +540,7 @@ export async function onRequest(context) {
         if (wantStream) {
           let up = null;
           try { up = await geminiStreamUpstream(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); } catch (e) { up = null; }
-          if (up) return streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} });
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
         }
         let text;
         try { text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); }

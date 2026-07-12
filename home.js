@@ -51,23 +51,55 @@
       b.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(onclick, 60); });
       return b;
     }
+    // A collapsible-group child row (matches app.js .sb-subitem markup); `mark` tags it for idempotent strip/skip.
+    function subItem(icon, label, onclick, mark) {
+      var b = document.createElement("button"); b.className = "sb-subitem"; if (mark) b.setAttribute(mark, "1");
+      b.innerHTML = '<span class="ic">' + icon + '</span><span>' + label + '</span>';
+      b.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(onclick, 60); });
+      return b;
+    }
     function reorganize() {
       var menu = document.getElementById("sbMenu"); if (!menu) return;
       injectCSS();
-      // 0) strip any legacy appended blocks (older builds / re-open)
+      // Retire the OLD ICU dashboard: route every INF.openDashboard() caller (base sidebar
+      // "ICU Dashboard" item, legacy links) to the NEW flagship ICU.open(). The new dashboard
+      // already integrates infusion + electrolyte, so the old one is redundant. Safe: icu.js
+      // never calls INF.openDashboard, so no recursion. Idempotent.
+      try { if (window.INF && window.ICU && ICU.open && INF.openDashboard !== ICU.open) INF.openDashboard = ICU.open; } catch (e) {}
+      // 0) strip any legacy appended blocks (older builds / re-open) — idempotent
       ["[data-smd-ui]", "[data-smd-labs]", "[data-ghis-menu]", "[data-smd-nav]", "[data-smd-top]"].forEach(function (sel) { menu.querySelectorAll(sel).forEach(function (e) { e.remove(); }); });
 
-      // 1) TOP primary actions — add "Dx My Patient" + "Ward Sync" beside the existing
-      //    Clinical Reasoning / Drugs Database links.
+      // 1) Collapse the flat top of the menu into grouped navigation:
+      //    - Remove the two standalone top links: "Clinical Reasoning" (Dx My Patient replaces it)
+      //      and "Drugs Database" (moves inside the Clinical group).
+      //    - Pin three quick-links at the very top: Dx My Patient, Ward Sync, ICU Dashboard.
       var links = Array.prototype.slice.call(menu.querySelectorAll(".sb-main-link"));
-      var cr = links.filter(function (b) { return /Clinical Reasoning/i.test(b.textContent); })[0];
-      if (cr) { var _bb = cr.querySelector(".sb-beta"); if (_bb) _bb.remove(); }   // de-beta the Clinical Reasoning menu link (badge is rendered by app.js)
-      if (cr && cr.parentNode) {
-        var dx = topBtn("🩺", "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} });
-        var ws = topBtn("🏥", "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} });
-        cr.parentNode.insertBefore(dx, cr);            // Dx My Patient first
-        cr.parentNode.insertBefore(ws, cr.nextSibling); // Ward Sync after Clinical Reasoning
+      var crLink = links.filter(function (b) { return /Clinical Reasoning/i.test(b.textContent); })[0];
+      var drugLink = links.filter(function (b) { return /Drugs Database/i.test(b.textContent); })[0];
+      if (crLink) crLink.remove();
+      if (drugLink) drugLink.remove();
+      var topFrag = document.createDocumentFragment();
+      topFrag.appendChild(topBtn("🩺", "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} }));
+      topFrag.appendChild(topBtn("🏥", "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} }));
+      topFrag.appendChild(topBtn("🫀", "ICU Dashboard", false, function () { try { if (window.ICU && ICU.open) ICU.open(); else if (window.INF) INF.openDashboard(); else toast("ICU loading…"); } catch (e) {} }));
+      menu.insertBefore(topFrag, menu.firstChild);
+
+      // 1b) Clinical group (sbsub_clinical): fold Dx My Patient + Drugs Database in; drop the
+      //     redundant "New clinical decision" (Dx My Patient / Start a Case cover it).
+      var clin = document.getElementById("sbsub_clinical");
+      if (clin && !clin.querySelector("[data-smd-sub]")) {
+        clin.querySelectorAll(".sb-subitem").forEach(function (b) { if (/New clinical decision/i.test(b.textContent)) b.style.display = "none"; });
+        var cf = document.createDocumentFragment();
+        cf.appendChild(subItem("🩺", "Dx My Patient", function () { try { openDxChooser(); } catch (e) {} }, "data-smd-sub"));
+        cf.appendChild(subItem("🗄️", "Drugs Database", function () { try { if (window.MEDDB) MEDDB.openList(); else toast("Drugs loading…"); } catch (e) {} }, "data-smd-sub"));
+        clin.insertBefore(cf, clin.firstChild);
       }
+
+      // 1c) Drop the redundant per-category calculator shortcuts (Browse-all covers them).
+      ["Cardiovascular", "Critical care & sepsis", "Renal & electrolytes", "Neurology & stroke"].forEach(function (t) {
+        var b = Array.prototype.slice.call(menu.querySelectorAll(".sb-subitem, .sb-main-link")).filter(function (x) { return x.textContent.replace(/\s+/g, " ").indexOf(t) >= 0; })[0];
+        if (b) b.style.display = "none";
+      });
 
       // 2) Advanced controls INTO Settings (#sbsub_set) as collapsible subgroups
       var setBody = document.getElementById("sbsub_set");
@@ -121,13 +153,25 @@
         if (og) og.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { if (window.openGHIS) openGHIS(); } catch (e) {} }, 60); });
       }
 
-      // 3) Credits INTO About & Help (#sbsub_about)
+      // 3) Merge "About & Help" INTO "Reference" -> one "Reference & Help" group. Move the About
+      //    children across, hide the About header/body, add Acknowledgements + the App-tour replay.
+      var refBody = document.getElementById("sbsub_ref");
+      var refHead = document.getElementById("sbmain_ref");
       var aboutBody = document.getElementById("sbsub_about");
-      if (aboutBody && !aboutBody.querySelector("[data-smd-cred]")) {
-        var ack = document.createElement("button"); ack.className = "sb-subitem"; ack.setAttribute("data-smd-cred", "1");
-        ack.innerHTML = '<span class="ic">★</span><span>Acknowledgements &amp; Contributors</span>';
-        ack.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { openAck(); } catch (e) {} }, 60); });
-        aboutBody.appendChild(ack);
+      var aboutHead = document.getElementById("sbmain_about");
+      if (refBody && aboutBody && refHead && !refBody.querySelector("[data-smd-merged]")) {
+        var marker = document.createElement("span"); marker.setAttribute("data-smd-merged", "1"); marker.style.display = "none"; refBody.appendChild(marker);
+        // Acknowledgements (was previously injected into About)
+        refBody.appendChild(subItem("★", "Acknowledgements & Contributors", function () { try { openAck(); } catch (e) {} }, "data-smd-sub"));
+        // Bring every About & Help child into the Reference group
+        Array.prototype.slice.call(aboutBody.children).forEach(function (c) { refBody.appendChild(c); });
+        if (aboutHead) aboutHead.style.display = "none";
+        aboutBody.style.display = "none";
+        // App tour — replay the guided onboarding
+        refBody.appendChild(subItem("🧭", "App tour", function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, "data-smd-sub"));
+        // Rename the Reference header to "Reference & Help"
+        var hs = refHead.querySelectorAll("span");
+        for (var k = 0; k < hs.length; k++) { if (!hs[k].classList.contains("ic") && !hs[k].classList.contains("chev")) { hs[k].textContent = "Reference & Help"; break; } }
       }
     }
     try { if (window.SB && typeof SB.open === "function") { var orig = SB.open; SB.open = function () { var r = orig.apply(this, arguments); setTimeout(function () { reorganize(); try { if (redesignNavOn()) iconifyEmoji(document.getElementById("sbDrawer")); } catch (e) {} }, 40); return r; }; } } catch (e) {}
@@ -866,7 +910,6 @@
         '<button class="rds-icon-btn" data-act="search" aria-label="Search">' + ric("search") + '</button>' +
         '<button class="rds-icon-btn" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + ric("dark_mode") + '</button>' +
         '<button class="rds-icon-btn rnav-bell v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + ric("notifications") + '</button>' +
-        '<button class="rnav-avatar" data-act="more" aria-label="Account">' + ric("person") + '</button>' +
       '</header>' +
       '<main class="v3-main rnav-main"><div class="rnav-stack">' +
         '<div class="rnav-greet"><div class="rnav-eyebrow">' + dateV4() + '</div><div class="rnav-hi">' + greetLineV4() + '</div></div>' +
@@ -878,7 +921,7 @@
           '<button class="rnav-qa-btn" data-act="interactions" aria-label="Medicines &amp; scan">' + ric("photo_camera") + '<span>Scan Meds</span></button>' +
           '<button class="rnav-qa-btn" data-act="dictate" aria-label="Dictate">' + ric("mic") + '<span>Dictate</span></button>' +
         '</div>' +
-        '<section class="rnav-hero"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b>MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care — antimicrobials, differentials, ICU &amp; more.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
+        '<section class="rnav-hero"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b style="color:#0a2320">MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
         '<div class="rnav-qrow">' +
           '<button class="rnav-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
           '<button class="rnav-qc" data-act="ward" aria-label="Ward Sync">' + ric("local_hospital") + '<span>Ward Sync</span></button>' +
@@ -1186,8 +1229,10 @@
       mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
+      mi("bell", "Notification preferences", "Choose which specialties alert you", "notifprefs") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
       mi("calc", "Calculators", "50+ clinical tools", "calculators") +
+      mi("play", "App tour", "Replay the guided tour", "apptour") +
       '<div style="font:700 11px var(--hfont,sans-serif);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:16px 6px 6px">Legal &amp; safety</div>' +
       mi("shield", "Medical disclaimer", "Decision support — not medical advice", "disclaimer") +
       mi("lock", "Privacy policy", "How your data is handled", "privacy") +
@@ -1201,10 +1246,12 @@
       b.addEventListener("click", function () {
         var a = b.getAttribute("data-mi");
         if (a === "display") return openDisplay();
+        if (a === "notifprefs") return openNotifPrefs();
         if (a === "account") return openAccount();
         if (a === "subscription") return openSubscription();
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
+        if (a === "apptour") { closeSheet(); setTimeout(function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, 120); return; }
         // Legal & Safety: open the in-app modals (z-index 700, above the home shell) — same as
         // the footer links. The old window.location.href="/disclaimer" navigated the WebView to a
         // path that doesn't exist in the bundled native app (only disclaimer.html does), so Capacitor
@@ -1520,46 +1567,80 @@
     if (document.getElementById("maik-sheet-css")) return;
     var st = document.createElement("style"); st.id = "maik-sheet-css";
     st.textContent = [
+      // ---- Aurora palette, scoped to the sheet so dark mode flips even though #maikSheet lives
+      //      outside #homeV2 (re-declares the same --h* names + a couple new literals). ----
+      "#maikSheet{--hpanel:#fff;--hbg:#F5F7F9;--hink:#0F172A;--hmut:#64748B;--hbd:#EAEEF3;--hp:#0F766E;--hps:#D7F5EF;--hacc:#2563EB;--mkfaint:#9AA7B6;--mkfield:#F2F5F8;--mksend:linear-gradient(140deg,#19b8a8,#0e6e63);--mkglow:rgba(20,184,166,.35);--mkyou:linear-gradient(140deg,#15a89a,#0f766e)}",
+      "body.dark #maikSheet,body.v3-dark #maikSheet{--hpanel:#101A2C;--hbg:#182338;--hink:#EAF0F7;--hmut:#8C9AB0;--hbd:#233149;--hp:#2DD4BF;--hps:#0E2E2B;--hacc:#7DB3FF;--mkfaint:#5D6E86;--mkfield:#0E1829;--mkyou:linear-gradient(140deg,#0f766e,#0b5a53)}",
       "#maikScrim{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:16000;opacity:0;transition:opacity .2s}#maikScrim.on{opacity:1}",
-      "#maikSheet{position:fixed;left:0;right:0;bottom:0;z-index:16001;background:var(--hpanel,#fff);color:var(--hink,#0f172a);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);display:flex;flex-direction:column;max-height:86vh;height:86vh;transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);font-family:var(--hfont,system-ui)}",
+      "#maikSheet{position:fixed;left:0;right:0;bottom:0;z-index:16001;background:var(--hpanel);color:var(--hink);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);display:flex;flex-direction:column;max-height:86vh;height:86vh;transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);font-family:var(--hfont,system-ui)}",
       "#maikSheet.on{transform:translateY(0)}",
-      ".maik-grab{flex:0 0 auto;width:40px;height:5px;border-radius:3px;background:var(--hbd,#cbd5e1);margin:8px auto 0;cursor:pointer}",
-      ".maik-hd{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:10px 14px 6px}",
-      ".maik-hd .mk-ti{flex:1 1 auto;min-width:0}",
-      ".maik-hd .mk-t{font:800 17px var(--hfont);color:var(--hink);line-height:1.1}.maik-hd .mk-s{font:600 12px var(--hfont);color:var(--hmut,#64748b);margin-top:2px}",
-      ".maik-hd .mk-logo{height:26px;width:auto;flex:0 0 auto;display:block}",
-      ".maik-adv{flex:0 0 auto;padding:0 16px 10px;border-bottom:1px solid var(--hbd,#e2e8f0)}",
-      ".maik-badge{display:inline-block;font:700 10.5px var(--hfont);color:var(--hp,#0f766e);background:var(--hps,#ccfbf1);border-radius:999px;padding:5px 11px;white-space:nowrap;letter-spacing:.01em}",
-      ".maik-x{margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:5px;height:38px;padding:0 14px 0 12px;border:1px solid var(--hbd,#e2e8f0);background:var(--hbg,#f1f5f9);color:var(--hink);border-radius:999px;font:800 13px var(--hfont);cursor:pointer;line-height:1}",
-      ".maik-x .xg{font-size:16px;font-weight:700;line-height:1}",
-      ".maik-x:hover{border-color:var(--hp,#0f766e);color:var(--hp,#0f766e)}",
-      ".maik-x:active{transform:scale(.94)}",
-      ".maik-hd .maik-new{margin-left:auto;background:transparent;border-color:transparent;color:var(--hmut,#64748b);padding:0 10px}",
-      ".maik-hd .maik-new:hover{border-color:var(--hp,#0f766e);color:var(--hp,#0f766e);background:var(--hbg,#f1f5f9)}",
-      ".maik-hd #maikX{margin-left:0}",
-      ".maik-body{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px;display:flex;flex-direction:column;gap:10px}",
-      ".maik-cmp{flex:0 0 auto;display:flex;flex-direction:column;gap:8px;align-items:stretch;padding:10px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--hbd,#e2e8f0);background:var(--hpanel,#fff)}",
-      ".maik-cmp-row{display:flex;gap:8px;align-items:flex-end}",
-      ".maik-cmp textarea{flex:1 1 auto;min-width:0;resize:none;max-height:120px;background:var(--hbg,#f8fafc);border:1px solid var(--hbd,#e2e8f0);border-radius:12px;color:var(--hink);font:500 15px var(--hfont);padding:10px 12px;box-sizing:border-box}",
-      ".maik-cmp button{flex:0 0 auto;background:var(--hp,#0f766e);color:#fff;border:none;border-radius:12px;padding:0 16px;height:44px;font:800 14px var(--hfont);cursor:pointer}",
-      ".maik-cmp button.maik-mic{background:var(--hbg,#f8fafc);color:var(--hp,#0f766e);border:1px solid var(--hbd,#e2e8f0);width:44px;padding:0;font-size:19px;line-height:1}",
-      ".maik-cmp button.maik-mic.live{background:#dc2626;color:#fff;border-color:#dc2626;animation:maikPulse 1.2s ease-in-out infinite}",
+      "#maikSheet *{box-sizing:border-box}",
+      ".maik-grab{flex:0 0 auto;width:38px;height:5px;border-radius:3px;background:var(--hbd);margin:9px auto 0;cursor:pointer}",
+      // header: subtle teal wash, wordmark + radial glow on the left, two circular icon buttons right
+      ".maik-hd{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:10px 14px 8px;background:linear-gradient(180deg,var(--hps),transparent)}",
+      ".maik-hd .mk-logowrap{position:relative;flex:0 0 auto;display:inline-flex;align-items:center}",
+      ".maik-hd .mk-logowrap::before{content:'';position:absolute;inset:-4px -8px;background:radial-gradient(ellipse,var(--mkglow),transparent 70%);z-index:0;animation:maikGlow 3.2s ease-in-out infinite}",
+      ".maik-hd .mk-logo{position:relative;z-index:1;height:24px;width:auto;display:block}",
+      ".maik-hd .mk-sp{flex:1 1 auto}",
+      ".maik-ic{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--hbd);background:var(--hbg);color:var(--hink);cursor:pointer;padding:0;line-height:1;font-size:18px}",
+      ".maik-ic:hover{border-color:var(--hp);color:var(--hp)}.maik-ic:active{transform:scale(.94)}",
+      "@keyframes maikGlow{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.08)}}",
+      "@media (prefers-reduced-motion:reduce){.maik-hd .mk-logowrap::before{animation:none}}",
+      // disclaimer strip: full-width, wraps (fixes old overflow)
+      ".maik-adv{flex:0 0 auto;display:flex;align-items:flex-start;gap:7px;padding:8px 16px;background:linear-gradient(90deg,var(--hps),transparent);border-top:1px solid var(--hbd);border-bottom:1px solid var(--hbd)}",
+      ".maik-adv .maik-shield{flex:0 0 auto;width:14px;height:14px;color:var(--hp);margin-top:1px}",
+      ".maik-disc{font:600 11px/1.4 var(--hfont);color:var(--hmut);white-space:normal;overflow-wrap:anywhere}",
+      // body + centered wordmark watermark (theme-swapped), sits behind the messages
+      ".maik-body{position:relative;flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px 6px;display:flex;flex-direction:column;gap:10px}",
+      ".maik-body::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:230px;height:230px;background:url('/maik-wordmark-color.png') center/contain no-repeat;opacity:.05;pointer-events:none;z-index:0}",
+      "body.dark #maikSheet .maik-body::before,body.v3-dark #maikSheet .maik-body::before{background-image:url('/maik-wordmark-white.png');opacity:.06}",
+      ".maik-body>*{position:relative;z-index:1}",
+      // composer: single pill (mic + textarea + send), extract button above
+      ".maik-cmp{flex:0 0 auto;display:flex;flex-direction:column;gap:8px;align-items:stretch;padding:10px 12px calc(12px + env(safe-area-inset-bottom));background:var(--hpanel)}",
+      ".maik-cmp-row{display:flex;gap:8px;align-items:center;background:var(--mkfield);border:1px solid var(--hbd);border-radius:24px;padding:6px 6px 6px 8px;box-shadow:0 6px 20px rgba(15,23,42,.10)}",
+      ".maik-cmp-row:focus-within{border-color:var(--hp)}",
+      ".maik-cmp textarea{flex:1 1 auto;min-width:0;resize:none;max-height:120px;background:transparent;border:0;color:var(--hink);font:500 14px var(--hfont);padding:8px 2px;box-sizing:border-box;outline:none}",
+      ".maik-cmp textarea::placeholder{color:var(--mkfaint)}",
+      ".maik-mic{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--hbg);color:var(--hmut);border:1px solid var(--hbd);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;font-size:16px;line-height:1}",
+      ".maik-mic:hover{color:var(--hp);background:var(--hps);border-color:var(--hps)}.maik-mic:active{transform:scale(.94)}",
+      ".maik-mic.live{background:#dc2626;color:#fff;border-color:#dc2626;animation:maikPulse 1.2s ease-in-out infinite}",
       "@keyframes maikPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}50%{box-shadow:0 0 0 6px rgba(220,38,38,0)}}",
-      ".maik-cmp button.maik-extract{background:transparent;color:var(--hp,#0f766e);border:1px dashed var(--hp,#0f766e);height:auto;min-height:38px;padding:8px 12px;font:700 13px var(--hfont);width:100%;text-align:center}",
-      ".maik-cmp button.maik-extract[hidden]{display:none}",
-      ".maik-b{max-width:90%;padding:10px 13px;border-radius:14px;font:500 14px/1.55 var(--hfont);word-break:break-word}",
-      ".maik-b.you{align-self:flex-end;background:var(--hp,#0f766e);color:#fff}",
-      ".maik-b.ai{align-self:flex-start;background:var(--hbg,#f8fafc);border:1px solid var(--hbd,#e2e8f0);color:var(--hink)}",
-      ".maik-b .maik-h{font:800 13.5px var(--hfont);margin:8px 0 3px;color:var(--hp,#0f766e)}.maik-b .maik-h:first-child{margin-top:0}",
-      ".maik-b p{margin:4px 0}.maik-b ul,.maik-b ol{margin:4px 0;padding-left:20px}.maik-b li{margin:2px 0}.maik-b code{background:rgba(100,116,139,.15);border-radius:4px;padding:0 4px;font-size:12.5px}",
-      ".maik-edu{font:600 11px var(--hfont);color:var(--hmut);background:rgba(100,116,139,.1);border-radius:8px;padding:5px 8px;margin-bottom:6px}",
-      ".maik-assume{font:600 12px var(--hfont);color:var(--hink);background:rgba(37,99,235,.08);border-left:3px solid var(--hacc,#2563eb);border-radius:8px;padding:7px 10px;margin-bottom:8px}.maik-assume b{color:var(--hacc,#2563eb)}.maik-followups{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.maik-followups .maik-chip{font-size:12.5px;padding:7px 12px}",
-      ".maik-tblwrap{overflow-x:auto;margin:8px 0;-webkit-overflow-scrolling:touch}.maik-tbl{border-collapse:collapse;width:100%;font:400 12.5px var(--hfont)}.maik-tbl th,.maik-tbl td{border:1px solid var(--hbd,#e2e8f0);padding:6px 9px;text-align:left;vertical-align:top}.maik-tbl th{background:rgba(100,116,139,.08);font-weight:700;color:var(--hink)}",
-      ".maik-cite{color:var(--hacc,#2563eb);font-weight:700;font-size:.68em;cursor:pointer;padding:0 1px;vertical-align:super;line-height:0}.maik-src ol{margin:4px 0 0 18px;padding:0}.maik-src li{margin:2px 0}.maik-caret{display:inline-block;width:6px;height:13px;background:var(--hacc,#2563eb);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}@keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}",
-      ".maik-src{margin-top:8px;font:600 11.5px var(--hfont);color:var(--hmut)}.maik-src summary{cursor:pointer;color:var(--hp,#0f766e)}.maik-src ul{margin:4px 0 0;padding-left:18px}",
-      ".maik-more{background:none;border:none;color:var(--hp,#0f766e);font:700 12px var(--hfont);cursor:pointer;padding:4px 0}",
-      ".maik-chips{display:flex;flex-wrap:wrap;gap:8px}.maik-chip{background:var(--hpanel,#fff);border:1px solid var(--hbd,#e2e8f0);border-radius:999px;padding:9px 13px;font:600 13px var(--hfont);color:var(--hink);cursor:pointer}",
-      ".maik-welcome{font:500 14px/1.6 var(--hfont);color:var(--hink)}",
+      ".maik-send{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--mksend);color:#fff;border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;box-shadow:0 6px 16px rgba(15,118,110,.5)}",
+      ".maik-send:active{transform:scale(.94)}.maik-send:disabled{opacity:.55}",
+      ".maik-extract{background:transparent;color:var(--hp);border:1px dashed var(--hp);border-radius:12px;min-height:38px;padding:8px 12px;font:700 13px var(--hfont);width:100%;text-align:center;cursor:pointer}",
+      ".maik-extract[hidden]{display:none}",
+      // bubbles
+      ".maik-b{max-width:92%;padding:11px 13px;border-radius:16px 16px 16px 6px;font:500 12.5px/1.5 var(--hfont);word-break:break-word;background:var(--hbg);border:1px solid var(--hbd);color:var(--hink);box-shadow:0 1px 2px rgba(15,23,42,.04)}",
+      ".maik-b.you{align-self:flex-end;max-width:82%;background:var(--mkyou);border:none;color:#fff;border-radius:16px 16px 6px 16px;padding:9px 12px;box-shadow:0 4px 14px rgba(15,118,110,.28)}",
+      ".maik-b.ai{align-self:flex-start}",
+      ".maik-attr{display:flex;align-items:center;gap:5px;margin-bottom:5px}.maik-attr svg{width:13px;height:13px;color:var(--hp)}.maik-attr b{font:800 10.5px var(--hfont);letter-spacing:.06em;text-transform:uppercase;color:var(--hp)}",
+      ".maik-b .maik-h{font:800 12.5px var(--hfont);margin:8px 0 3px;color:var(--hink)}.maik-b .maik-h:first-child{margin-top:0}",
+      ".maik-b p{margin:4px 0;color:var(--hink)}.maik-b ul,.maik-b ol{margin:4px 0;padding-left:18px}.maik-b li{margin:3px 0;font:500 12px/1.45 var(--hfont)}.maik-b ul li::marker{color:var(--hp)}.maik-b code{background:rgba(100,116,139,.15);border-radius:4px;padding:0 4px;font-size:12px}",
+      ".maik-edu{font:600 11px var(--hfont);color:var(--hmut);background:var(--hbg);border-radius:10px;padding:6px 9px;margin-bottom:6px}",
+      ".maik-assume{font:600 12px var(--hfont);color:var(--hink);background:rgba(37,99,235,.08);border-left:3px solid var(--hacc);border-radius:10px;padding:7px 10px;margin-bottom:8px}.maik-assume b{color:var(--hacc)}",
+      ".maik-followups{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}",
+      ".maik-tblwrap{overflow-x:auto;margin:8px 0;-webkit-overflow-scrolling:touch}.maik-tbl{border-collapse:collapse;width:100%;font:400 12px var(--hfont)}.maik-tbl th,.maik-tbl td{border:1px solid var(--hbd);padding:6px 9px;text-align:left;vertical-align:top}.maik-tbl th{background:var(--hbg);font-weight:700;color:var(--hink)}",
+      ".maik-cite{color:var(--hacc);font-weight:700;font-size:.7em;cursor:pointer;padding:0 1px;vertical-align:super;line-height:0}",
+      ".maik-caret{display:inline-block;width:6px;height:13px;background:var(--hacc);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}@keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}",
+      ".maik-thinking{color:var(--hmut)}.maik-thinking .d{display:inline-block;animation:maikThink 1.3s ease-in-out infinite}.maik-thinking .d2{animation-delay:.18s}.maik-thinking .d3{animation-delay:.36s}@keyframes maikThink{0%,100%{opacity:.45}50%{opacity:1}}",
+      // sources footer: teal row with book icon (keeps the <details> behavior)
+      ".maik-src{margin-top:9px;border-top:1px solid var(--hbd);padding-top:7px;font:600 10.5px var(--hfont);color:var(--hp)}.maik-src summary{cursor:pointer;color:var(--hp);display:flex;align-items:center;gap:5px;list-style:none}.maik-src summary::-webkit-details-marker{display:none}.maik-src summary svg{width:12px;height:12px}.maik-src ol{margin:6px 0 0 18px;padding:0;color:var(--hmut)}.maik-src li{margin:2px 0}",
+      ".maik-more{background:none;border:none;color:var(--hp);font:700 12px var(--hfont);cursor:pointer;padding:4px 0}",
+      // chips / follow-up pills
+      ".maik-chips{display:flex;flex-wrap:wrap;gap:8px}",
+      ".maik-chip{background:var(--hps);border:1px solid var(--hps);border-radius:999px;padding:6px 11px;font:600 11.5px var(--hfont);color:var(--hp);cursor:pointer}",
+      ".maik-chip:hover{border-color:var(--hp)}.maik-chip:active{transform:scale(.96)}",
+      // welcome + suggestion cards (empty state)
+      ".maik-welcome{font:500 12.5px/1.5 var(--hfont);color:var(--hink)}",
+      ".maik-empty{display:flex;flex-direction:column;justify-content:center;min-height:100%;padding:6px 2px}",
+      ".maik-empty .mk-hl{font:800 22px/1.24 var(--hfont);letter-spacing:-.02em;color:var(--hink);margin:0}",
+      ".maik-empty .mk-sub{font:500 12.5px/1.5 var(--hfont);color:var(--hmut);margin:8px 0 16px;max-width:44ch}",
+      ".maik-sg{display:flex;flex-direction:column;gap:8px}",
+      ".maik-card{display:flex;align-items:center;gap:11px;text-align:left;width:100%;padding:11px 12px;border:1px solid var(--hbd);border-radius:14px;background:var(--hbg);box-shadow:0 1px 2px rgba(15,23,42,.04);cursor:pointer;color:var(--hink)}",
+      ".maik-card:hover{border-color:var(--hp);box-shadow:0 6px 16px rgba(15,118,110,.14)}.maik-card:active{transform:scale(.99)}",
+      ".maik-card .ic{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:linear-gradient(140deg,var(--hps),var(--hbg));color:var(--hp);display:inline-flex;align-items:center;justify-content:center}.maik-card .ic svg{width:18px;height:18px}",
+      ".maik-card .bd{flex:1 1 auto;min-width:0}.maik-card .t{display:block;font:700 13px var(--hfont);color:var(--hink)}.maik-card .s{display:block;font:500 11px var(--hfont);color:var(--hmut);margin-top:2px}",
+      ".maik-card .chev{flex:0 0 auto;color:var(--mkfaint)}.maik-card .chev svg{width:16px;height:16px}",
       "body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-open .inf-fab,body.maik-open .ghis-ward-fab{display:none!important}"
     ].join("");
     (document.head || document.documentElement).appendChild(st);
@@ -1572,15 +1653,17 @@
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask MaiK");
+    var mkDark = document.body.classList.contains("dark") || document.body.classList.contains("v3-dark");
+    var mkLogo = mkDark ? "/maik-wordmark-white.png" : "/maik-wordmark-color.png";
     sheet.innerHTML =
       '<div class="maik-grab" id="maikGrab" aria-hidden="true"></div>' +
-      '<div class="maik-hd"><img class="mk-logo" src="/maik-logo.png" alt="MaiK" /><div class="mk-ti"><div class="mk-s">Medical AI Knowledge · Clinical assistant</div></div>' +
-        '<button class="maik-x maik-new" id="maikNew" aria-label="New conversation" title="Start a new conversation"><span class="xg">＋</span>New</button>' +
-        '<button class="maik-x" id="maikX" aria-label="Close assistant"><span class="xg">✕</span>Close</button></div>' +
-      '<div class="maik-adv"><span class="maik-badge">⚠ AI-generated · not medical advice — verify independently</span></div>' +
+      '<div class="maik-hd"><span class="mk-logowrap"><img class="mk-logo" src="' + mkLogo + '" alt="MaiK" /></span><span class="mk-sp"></span>' +
+        '<button class="maik-ic" id="maikNew" aria-label="New conversation" title="New conversation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>' +
+        '<button class="maik-ic" id="maikX" aria-label="Close assistant"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button></div>' +
+      '<div class="maik-adv"><svg class="maik-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/></svg><span class="maik-disc">Grounded · AI-generated, verify independently</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
       '<div class="maik-cmp"><button id="maikExtract" class="maik-extract" type="button" hidden>🩺 Extract findings for Clinical Reasoning →</button>' +
-      '<div class="maik-cmp-row"><button id="maikMic" class="maik-mic" type="button" aria-label="Dictate to MaiK">🎤</button><textarea id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea><button id="maikSend">Send</button></div></div>';
+      '<div class="maik-cmp-row"><button id="maikMic" class="maik-mic" type="button" aria-label="Dictate to MaiK"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/></svg></button><textarea id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea><button id="maikSend" class="maik-send" aria-label="Send"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="6"/><path d="M6 12l6-6 6 6"/></svg></button></div></div>';
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
     requestAnimationFrame(function () { scrim.classList.add("on"); sheet.classList.add("on"); });
@@ -1593,19 +1676,42 @@
       list.forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.textContent = c.label; b.addEventListener("click", c.on); w.appendChild(b); });
       body.appendChild(w); scroll();
     }
+    // Aurora empty/welcome state: centered headline + sub + list-style suggestion cards. Same
+    // handlers as before; active-case swaps to the four case-aware prompts.
+    var MK_ICO = {
+      steth: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>',
+      book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4a2 2 0 0 1 2-2h12v18H7a2 2 0 0 0-2 2z"/><path d="M5 4v18"/></svg>',
+      pill: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 20.5 10.5a4.95 4.95 0 0 0-7-7l-10 10a4.95 4.95 0 0 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>',
+      calc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="8.01" y2="12"/><line x1="12" y1="12" x2="12.01" y2="12"/><line x1="16" y1="12" x2="16.01" y2="12"/><line x1="8" y1="16" x2="8.01" y2="16"/></svg>',
+      quest: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1 .9-1 1.6"/><line x1="12" y1="16.5" x2="12.01" y2="16.5"/></svg>',
+      search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+      flask: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg>',
+      chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'
+    };
+    function suggCards(list) {
+      var wrap = document.createElement("div"); wrap.className = "maik-empty";
+      wrap.innerHTML = '<h2 class="mk-hl">Ask MaiK anything clinical.</h2>' +
+        '<p class="mk-sub">Grounded answers from StewardMD’s knowledge base — with sources you can verify.</p>';
+      var sg = document.createElement("div"); sg.className = "maik-sg";
+      list.forEach(function (c) {
+        var b = document.createElement("button"); b.className = "maik-card"; b.type = "button";
+        b.innerHTML = '<span class="ic">' + c.ic + '</span><span class="bd"><span class="t">' + maikEscH(c.t) + '</span><span class="s">' + maikEscH(c.s) + '</span></span><span class="chev">' + MK_ICO.chev + '</span>';
+        b.addEventListener("click", c.on); sg.appendChild(b);
+      });
+      wrap.appendChild(sg); body.appendChild(wrap); scroll();
+    }
     function emptyState() {
-      bubble("ai", '<div class="maik-welcome">Hello — I’m <b>MaiK</b>, your clinical knowledge assistant. Ask a general clinical question and I’ll answer from StewardMD’s knowledge base, or start a patient assessment.</div>');
-      if (maikActiveCase()) chips([
-        { label: "What findings are missing?", on: function () { qEl.value = "What findings are missing for the current differential?"; send(); } },
-        { label: "Explain this differential", on: function () { qEl.value = "Explain the leading diagnosis in the current assessment."; send(); } },
-        { label: "What investigations next?", on: function () { qEl.value = "What investigations should I order next?"; send(); } },
-        { label: "Culture-directed options", on: function () { qEl.value = "What are the culture-directed antibiotic options?"; send(); } }
+      if (maikActiveCase()) suggCards([
+        { t: "What findings are missing?", s: "Complete the clinical picture", ic: MK_ICO.quest, on: function () { qEl.value = "What findings are missing for the current differential?"; send(); } },
+        { t: "Explain this differential", s: "Reasoning for the leading diagnosis", ic: MK_ICO.book, on: function () { qEl.value = "Explain the leading diagnosis in the current assessment."; send(); } },
+        { t: "What investigations next?", s: "Targeted next steps", ic: MK_ICO.search, on: function () { qEl.value = "What investigations should I order next?"; send(); } },
+        { t: "Culture-directed options", s: "De-escalation choices", ic: MK_ICO.flask, on: function () { qEl.value = "What are the culture-directed antibiotic options?"; send(); } }
       ]);
-      else chips([
-        { label: "Start a clinical assessment", on: function () { close(); try { openDxChooser(); } catch (e) {} } },
-        { label: "Ask a general knowledge question", on: function () { qEl.value = "How to treat organophosphate poisoning?"; try { qEl.focus(); } catch (e) {} } },
-        { label: "Open Drug Index", on: function () { close(); var b = document.querySelector('#homeV2 [data-act="drugs"]'); if (b) b.click(); else toast("Open Drugs from the home screen."); } },
-        { label: "Open calculator", on: function () { close(); var b = document.querySelector('#homeV2 [data-act="calculators"]'); if (b) b.click(); else toast("Open Calculators from the home screen."); } }
+      else suggCards([
+        { t: "Start a clinical assessment", s: "Guided differential & workup", ic: MK_ICO.steth, on: function () { close(); try { openDxChooser(); } catch (e) {} } },
+        { t: "Ask a knowledge question", s: "Cited, page-level answers", ic: MK_ICO.book, on: function () { qEl.value = "How to treat organophosphate poisoning?"; try { qEl.focus(); } catch (e) {} } },
+        { t: "Open Drug Index", s: "Brands, doses, spectrum, cautions", ic: MK_ICO.pill, on: function () { close(); var b = document.querySelector('#homeV2 [data-act="drugs"]'); if (b) b.click(); else toast("Open Drugs from the home screen."); } },
+        { t: "Open calculators", s: "70+ clinical tools", ic: MK_ICO.calc, on: function () { close(); var b = document.querySelector('#homeV2 [data-act="calculators"]'); if (b) b.click(); else toast("Open Calculators from the home screen."); } }
       ]);
     }
     // patient-specific (individualized) request with NO active case → redirect, don't answer
@@ -1762,12 +1868,15 @@
       var srcArr = (pkg && pkg.sources && pkg.sources.length) ? pkg.sources.map(function (s) { return s.title; })
         : ((window.SMD_MaiK && SMD_MaiK.sourceList) ? SMD_MaiK.sourceList(pkg).map(function (s) { return s.title; })
           : ((window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : []));
-      var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + ' ▸</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
+      var bookSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4a2 2 0 0 1 2-2h12v18H7a2 2 0 0 0-2 2z"/><path d="M5 4v18"/></svg>';
+      var srcHTML = srcArr.length ? '<details class="maik-src"><summary>' + bookSvg + srcArr.length + ' source' + (srcArr.length > 1 ? 's' : '') + '</summary><ol>' + srcArr.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ol></details>' : "";
+      // MaiK attribution row (sparkle + MAIK) atop every answer bubble.
+      var attrHTML = '<div class="maik-attr"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8z"/></svg><b>MaiK</b></div>';
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> — not quite? Tap a topic below or search the web.</div>') : "";
       var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
-      var full = eduHTML + rendered + srcHTML;
+      var full = attrHTML + eduHTML + rendered + srcHTML;
       if (md.length > 700) {
-        think.innerHTML = eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
+        think.innerHTML = attrHTML + eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
         var cd = think.querySelector(".maik-collapsed"); cd.style.maxHeight = "260px"; cd.style.overflow = "hidden";
         var mb = document.createElement("button"); mb.className = "maik-more"; mb.textContent = "Show more ▾";
         mb.addEventListener("click", function () { var open = cd.style.maxHeight === "none"; cd.style.maxHeight = open ? "260px" : "none"; mb.textContent = open ? "Show more ▾" : "Show less ▴"; });
@@ -1778,13 +1887,18 @@
       var chipsHTML = maikFollowupsHTML(pkg, question, assume);
       if (chipsHTML) think.insertAdjacentHTML("beforeend", chipsHTML);
       if (!active) _maikCache[cacheKey] = think.innerHTML;
-      // ℞ Create Prescription — on treatment answers only. Live-only (not cached), with pkg in
-      // closure so the Rx builder gets the grounded regimen. Doses come DB-first (Drug Index).
+      // ℞ Create Prescription — shown on EVERY MaiK answer (prominent), with pkg in closure so
+      // treatment answers pre-fill the grounded regimen (doses DB-first via the Drug Index) and
+      // any other answer opens the pad for manual entry. SMD_RX gates on doctor verification.
+      // Live-only (appended after cache write). Treatment answers get a hint sub-label.
       try {
-        var _isTx = (pkg && pkg.treatment && pkg.treatment.default) || /\b(treat|treatment|treating|manage|management|therapy|regimen|prescri|\brx\b|antibiotic|antibiotics|first[- ]?line|dose|dosing)\b/.test(maikNorm(question || ""));
-        if (_isTx && window.SMD_RX) {
-          var _rxc = document.createElement("button"); _rxc.className = "maik-chip"; _rxc.style.marginTop = "8px"; _rxc.textContent = "℞ Create Prescription";
-          _rxc.addEventListener("click", function () { try { SMD_RX.open({ topic: topicLabel || question, pkg: pkg }); } catch (e) {} });
+        if (window.SMD_RX) {
+          var _isTx = (pkg && pkg.treatment && pkg.treatment.default) || /\b(treat|treatment|treating|manage|management|therapy|regimen|prescri|\brx\b|antibiotic|antibiotics|first[- ]?line|dose|dosing)\b/.test(maikNorm(question || ""));
+          var _rxc = document.createElement("button");
+          _rxc.className = "maik-chip maik-rx";
+          _rxc.style.cssText = "margin-top:10px;background:#0e6e63;color:#fff;border-color:#0e6e63;font-weight:700";
+          _rxc.textContent = "℞ Create prescription" + (_isTx ? " (pre-fill from this)" : "");
+          _rxc.addEventListener("click", function () { try { SMD_RX.open({ topic: topicLabel || question, pkg: pkg, answerText: md }); } catch (e) {} });
           think.appendChild(_rxc);
         }
       } catch (e) {}
@@ -1798,7 +1912,7 @@
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
       _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
-      var think = bubble("ai", "✨ Searching StewardMD knowledge…");
+      var think = bubble("ai", '<span class="maik-thinking">✨ Searching StewardMD knowledge<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>');
       Promise.resolve()
         .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
         .then(function () {
@@ -2020,6 +2134,7 @@
       '<div class="hv-d-sec"><h4>Display density</h4><div class="hv-seg" id="hvDens"><button data-d="compact">Compact</button><button data-d="default">Default</button><button data-d="comfortable">Comfort</button><button data-d="large">Large</button></div></div>' +
       '<div class="hv-d-sec"><h4>Quick presets</h4><div class="hv-pre" id="hvPre"><button data-p="default">Default</button><button data-p="small">Small screen</button><button data-p="large">Large screen</button><button data-p="senior">Senior friendly</button></div></div>' +
       '<div class="hv-d-sec"><h4>Auto fit</h4><div class="hv-sw"><div><div class="lab">Optimise for this device</div><div class="sub" id="hvDet"></div></div><button class="hv-tg" id="hvAuto"></button></div></div>' +
+      ((window.SMD_HAPTICS && SMD_HAPTICS.supported()) ? '<div class="hv-d-sec"><h4>Haptics</h4><div class="hv-sw"><div><div class="lab">Vibration feedback on tap</div><div class="sub">A subtle tap on buttons and actions</div></div><button class="hv-tg" id="hvHaptics"></button></div></div>' : '') +
       '<div class="hv-d-sec"><h4>Theme</h4><div class="hv-theme" id="hvTheme">' +
         THEMES.map(function (t) { return '<button class="hv-th" data-t="' + t.id + '" style="--sw-paper:' + t.paper + ';--sw-acc:' + t.accent + '"><span class="hv-th-dot"></span><span class="hv-th-nm">' + t.name + '</span></button>'; }).join("") +
       '</div></div>' +
@@ -2034,6 +2149,8 @@
     s.querySelectorAll("#hvDens button").forEach(function (b) { b.addEventListener("click", function () { ds.autoFit = false; ds.density = b.getAttribute("data-d"); applyD(); refreshD(); }); });
     s.querySelectorAll("#hvPre button").forEach(function (b) { b.addEventListener("click", function () { var p = DPRE[b.getAttribute("data-p")]; ds.autoFit = false; ds.fontScale = p.fontScale; ds.density = p.density; applyD(); refreshD(); }); });
     s.querySelector("#hvAuto").addEventListener("click", function () { ds.autoFit = !ds.autoFit; if (ds.autoFit) autoFitD(); else { applyD(); refreshD(); } });
+    var hp = s.querySelector("#hvHaptics");
+    if (hp) hp.addEventListener("click", function () { var on = !(window.SMD_HAPTICS && SMD_HAPTICS.enabled()); if (window.SMD_HAPTICS) { SMD_HAPTICS.setEnabled(on); if (on) SMD_HAPTICS.medium(); } refreshD(); });
     s.querySelector("#hvReset").addEventListener("click", function () { ds = Object.assign({}, DDEF); applyD(); refreshD(); });
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
     s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-f"); var f = FONTS.filter(function (x) { return x.id === id; })[0]; if (f && f.web) ensureFont(f.web); ds.font = id; applyD(); refreshD(); }); });
@@ -2046,6 +2163,7 @@
     var v = s.querySelector("#hvFsv"); if (v) v.textContent = Math.round(ds.fontScale * 100) + "%";
     s.querySelectorAll("#hvDens button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-d") === ds.density); });
     var a = s.querySelector("#hvAuto"); if (a) a.classList.toggle("on", ds.autoFit);
+    var hp = s.querySelector("#hvHaptics"); if (hp) hp.classList.toggle("on", !!(window.SMD_HAPTICS && SMD_HAPTICS.enabled()));
     var d = s.querySelector("#hvDet"); if (d) d.textContent = window.innerWidth + "×" + window.innerHeight + " · DPR " + (window.devicePixelRatio || 1).toFixed(2);
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-t") === ds.theme); });
     s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-f") === ds.font); });
@@ -2056,9 +2174,12 @@
   var tEl, tTimer;
   function toast(msg) { if (!tEl) { tEl = document.createElement("div"); tEl.className = "hv-toast"; document.body.appendChild(tEl); } tEl.textContent = msg; tEl.classList.add("on"); clearTimeout(tTimer); tTimer = setTimeout(function () { tEl.classList.remove("on"); }, 1800); }
 
-  /* ================= Notifications (🔔 bell → medical updates) ================= */
-  var NOTIF_API = "/api/updates", NOTIF_SEEN = "smd_updates_seen_ts";
-  var _notifItems = null, _notifRoot = null;
+  /* ================= Notifications (🔔 bell → Notifications + Medical Updates) ================= */
+  var NOTIF_API = "/api/updates", NOTIF_SEEN = "smd_updates_seen_ts", NOTIF_BM = "smd_updates_bm";
+  var _notifItems = null;                 // Tab 1: manual app notices (auto=0)
+  var _feedItems = [], _feedCursor = null, _feedEnd = false, _feedLoading = false;
+  var _feedType = "all", _feedQ = "", _feedBranch = "all";
+  var _notifRoot = null, _activeTab = "updates", _detailRoot = null;
   function nEsc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function nSeen() { try { return parseInt(localStorage.getItem(NOTIF_SEEN) || "0", 10) || 0; } catch (e) { return 0; } }
   function nSetSeen(ts) { try { localStorage.setItem(NOTIF_SEEN, String(ts || Date.now())); } catch (e) {} }
@@ -2069,16 +2190,74 @@
     if (s < 86400) return Math.floor(s / 3600) + "h ago"; if (s < 604800) return Math.floor(s / 86400) + "d ago";
     try { return new Date(ts).toLocaleDateString([], { month: "short", day: "numeric" }); } catch (e) { return ""; }
   }
+  function nDate(ts) { try { return ts ? new Date(ts).toLocaleDateString([], { year: "numeric", month: "short", day: "numeric" }) : ""; } catch (e) { return ""; } }
   var NCAT = { drug: "💊 Drug", approval: "✅ Approval", safety: "⚠️ Safety", recall: "🚫 Recall", guideline: "📋 Guideline", study: "🔬 Study", general: "📣 Update" };
-  function fetchUpdates() {
-    return fetch(NOTIF_API, { headers: { "Accept": "application/json" } }).then(function (r) { return r.json(); })
+  var WSLBL = { internal_medicine: "Internal Medicine", surgery: "Surgery", ent: "ENT", ophthalmology: "Ophthalmology", obstetrics_gynaecology: "Obstetrics & Gynaecology", urology: "Urology", dentistry_omfs: "Dentistry / OMFS", paediatrics: "Paediatrics" };
+  // Internal-Medicine sub-specialties ("branches") — used to filter the feed and in Notification preferences.
+  var BRANCH_ORDER = ["cardiology", "nephrology", "pulmonology", "endocrinology", "infectious_diseases", "critical_care", "gastroenterology", "hepatology", "oncology", "emergency_medicine", "family_medicine"];
+  var BRANCH_LBL = { cardiology: "Cardiology", nephrology: "Nephrology", pulmonology: "Pulmonology", endocrinology: "Endocrinology", infectious_diseases: "Infectious Diseases", critical_care: "Critical Care", gastroenterology: "Gastroenterology", hepatology: "Hepatology", oncology: "Oncology", emergency_medicine: "Emergency Medicine", family_medicine: "Family Medicine" };
+  var TYPE_FILTERS = [["all", "All"], ["guideline", "Guidelines"], ["drug_approval", "Drug Approvals"], ["safety_alert", "Safety Alerts"], ["trial", "Major Trials"]];
+  var TYPE_TAG = { guideline: "📋 Guideline", drug_approval: "✅ Approval", safety_alert: "⚠️ Safety", trial: "🔬 Trial" };
+
+  function bmGet() { try { return JSON.parse(localStorage.getItem(NOTIF_BM) || "[]") || []; } catch (e) { return []; } }
+  function bmHas(id) { return bmGet().indexOf(id) >= 0; }
+  function bmToggle(id) {
+    var a = bmGet(), i = a.indexOf(id), on;
+    if (i >= 0) { a.splice(i, 1); on = false; } else { a.push(id); on = true; }
+    try { localStorage.setItem(NOTIF_BM, JSON.stringify(a)); } catch (e) {}
+    // best-effort cross-device sync (signed-in only; guests stay local)
+    try {
+      idToken().then(function (t) {
+        if (!t) return;
+        var h = { "Content-Type": "application/json", "Authorization": "Bearer " + t };
+        fetch(NOTIF_API + "/bookmarks" + (on ? "" : "/" + encodeURIComponent(id)), { method: on ? "POST" : "DELETE", headers: h, body: on ? JSON.stringify({ id: id }) : undefined }).catch(function () {});
+      });
+    } catch (e) {}
+    return on;
+  }
+  // Merge server-side bookmarks into local (cross-device), signed-in only.
+  function bmMergeFromServer() {
+    try {
+      idToken().then(function (t) {
+        if (!t) return;
+        fetch(NOTIF_API + "/bookmarks", { headers: { "Authorization": "Bearer " + t } }).then(function (r) { return r.json(); }).then(function (j) {
+          if (j && Array.isArray(j.ids)) { var merged = bmGet(); j.ids.forEach(function (id) { if (merged.indexOf(id) < 0) merged.push(id); }); try { localStorage.setItem(NOTIF_BM, JSON.stringify(merged)); } catch (e) {} }
+        }).catch(function () {});
+      });
+    } catch (e) {}
+  }
+
+  /* ---- data ---- */
+  function fetchNotices() {
+    return fetch(NOTIF_API + "?auto=0&limit=50", { headers: { "Accept": "application/json" } }).then(function (r) { return r.json(); })
       .then(function (j) { _notifItems = (j && j.items) || []; return _notifItems; }).catch(function () { _notifItems = _notifItems || []; return _notifItems; });
   }
-  function refreshBadge() {
-    var badge = function () { var b = document.getElementById("v3BellBtn"); if (b) b.classList.toggle("has-unread", nMaxTs(_notifItems) > nSeen()); };
-    if (_notifItems) { badge(); return; }
-    fetchUpdates().then(badge);
+  function fetchFeed(reset) {
+    if (_feedLoading) return Promise.resolve(_feedItems);
+    if (reset) { _feedCursor = null; _feedEnd = false; }
+    if (_feedEnd && !reset) return Promise.resolve(_feedItems);
+    _feedLoading = true;
+    var u = NOTIF_API + "?limit=15";
+    if (_feedType && _feedType !== "all") u += "&type=" + encodeURIComponent(_feedType);
+    if (_feedBranch && _feedBranch !== "all") u += "&branch=" + encodeURIComponent(_feedBranch);
+    if (_feedQ) u += "&q=" + encodeURIComponent(_feedQ);
+    if (_feedCursor && !reset) u += "&before=" + encodeURIComponent(_feedCursor);
+    return fetch(u, { headers: { "Accept": "application/json" } }).then(function (r) { return r.json(); })
+      .then(function (j) {
+        var items = (j && j.items) || [];
+        _feedItems = reset ? items : _feedItems.concat(items);
+        _feedCursor = (j && j.nextCursor) || null; _feedEnd = !_feedCursor;
+        _feedLoading = false; return _feedItems;
+      }).catch(function () { _feedLoading = false; _feedEnd = true; return _feedItems; });
   }
+  function refreshBadge() {
+    var badge = function () { var b = document.getElementById("v3BellBtn"); if (b) b.classList.toggle("has-unread", nMaxTs(_feedItems) > nSeen()); };
+    if (_feedItems && _feedItems.length) { badge(); return; }
+    fetchFeed(true).then(badge);
+  }
+  try { window.SMD_refreshNotifBadge = refreshBadge; } catch (e) {}
+
+  /* ---- Tab 1: app notices ---- */
   function nItemHTML(it) {
     var cat = NCAT[it.category] || NCAT.general;
     var link = it.url ? '<a class="ntf-link" href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Read source ↗</a>' : "";
@@ -2091,35 +2270,239 @@
       (it.body ? '<div class="ntf-body">' + nEsc(it.body) + '</div>' : "") +
       '<div class="ntf-foot">' + src + link + '</div></div>';
   }
-  function renderNotif() {
-    var body = _notifRoot && _notifRoot.querySelector("#ntfBody"); if (!body) return;
+  function renderNotices() {
+    var body = _notifRoot && _notifRoot.querySelector("#ntfNotices"); if (!body) return;
     var items = _notifItems || [];
     body.innerHTML = items.length ? items.map(nItemHTML).join("")
-      : '<div class="ntf-empty">🔕 No updates yet.<div>Trusted medical updates — new drug approvals, safety alerts and recalls — will appear here.</div></div>';
+      : '<div class="ntf-empty">🔕 No notifications.<div>App notices and announcements from StewardMD will appear here.</div></div>';
+  }
+
+  /* ---- Tab 2: medical updates feed ---- */
+  function feedCardHTML(it) {
+    var tag = TYPE_TAG[it.type] || NCAT.general;
+    var hi = it.importance === "high" || it.importance === "critical";
+    var badge = it.importance === "critical" ? '<span class="ntf-hi crit">Critical</span>' : (it.importance === "high" ? '<span class="ntf-hi">Important</span>' : "");
+    var read = it.est_read_min ? '<span class="fd-read">⏱ ' + it.est_read_min + ' min</span>' : "";
+    var ws = it.workspace ? '<span class="fd-ws">' + nEsc(WSLBL[it.workspace] || it.workspace) + '</span>' : "";
+    var org = it.organization || it.source || "";
+    var prev = String(it.summary || it.body || "");
+    return '<div class="fd-card' + (hi ? " hi" : "") + '" data-uid="' + nEsc(it.id) + '" role="button" tabindex="0">' +
+      '<div class="ntf-top"><span class="ntf-cat cat-' + nEsc(it.category || "general") + '">' + tag + '</span>' + badge +
+        '<span class="ntf-time">' + nEsc(nDate(it.ts)) + '</span></div>' +
+      '<div class="ntf-title">' + nEsc(it.title) + '</div>' +
+      (org ? '<div class="fd-org">' + nEsc(org) + '</div>' : "") +
+      (prev ? '<div class="ntf-body">' + nEsc(prev.slice(0, 220)) + (prev.length > 220 ? "…" : "") + '</div>' : "") +
+      '<div class="fd-meta">' + ws + read + '<span class="fd-open">Open ›</span></div></div>';
+  }
+  function renderFeed() {
+    var body = _notifRoot && _notifRoot.querySelector("#ntfFeed"); if (!body) return;
+    var items = _feedItems || [];
+    var cards = items.length ? items.map(feedCardHTML).join("")
+      : '<div class="ntf-empty">🩺 No medical updates yet.<div>New guidelines, drug approvals, safety alerts and major trials appear here once the daily sync runs.</div></div>';
+    var more = (!_feedEnd && items.length) ? '<div class="fd-more">Loading more…</div>' : (items.length ? '<div class="fd-end">— end —</div>' : "");
+    body.innerHTML = cards + more;
+  }
+
+  /* ---- shell ---- */
+  function switchTab(t) {
+    _activeTab = t; if (!_notifRoot) return;
+    _notifRoot.querySelectorAll(".ntf-tab").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-tab") === t); });
+    _notifRoot.querySelector("#paneNotices").style.display = t === "notices" ? "block" : "none";
+    _notifRoot.querySelector("#paneUpdates").style.display = t === "updates" ? "block" : "none";
+    if (t === "notices" && _notifItems == null) fetchNotices().then(renderNotices);
   }
   function buildNotif() {
     if (_notifRoot) return _notifRoot;
     injectNotifCSS();
     _notifRoot = document.createElement("div"); _notifRoot.id = "ntfOverlay"; _notifRoot.className = "ntf-overlay"; _notifRoot.setAttribute("role", "dialog"); _notifRoot.setAttribute("aria-modal", "true"); _notifRoot.setAttribute("aria-label", "Notifications");
+    var chips = TYPE_FILTERS.map(function (f) { return '<button class="fd-chip' + (f[0] === "all" ? " on" : "") + '" data-fchip="' + f[0] + '">' + f[1] + '</button>'; }).join("");
+    var branchOpts = '<option value="all">All specialties</option>' + BRANCH_ORDER.map(function (b) { return '<option value="' + b + '"' + (_feedBranch === b ? " selected" : "") + '>' + nEsc(BRANCH_LBL[b]) + '</option>'; }).join("");
     _notifRoot.innerHTML =
       '<div class="ntf-top-bar"><button class="ntf-close" id="ntfClose" aria-label="Close">‹ Close</button>' +
-        '<div class="ntf-h">🔔 Notifications</div><button class="ntf-refresh" id="ntfRefresh" aria-label="Refresh" title="Refresh">↻</button></div>' +
-      '<div class="ntf-scroll"><div class="ntf-note">Trusted medical updates — approvals, safety alerts, recalls — plus notices from StewardMD.</div>' +
-        '<div id="ntfPush" class="ntf-push"></div>' +
-        '<div id="ntfBody" class="ntf-list"><div class="ntf-empty">Loading…</div></div></div>';
+        '<div class="ntf-h">🔔 Alerts</div><button class="ntf-refresh" id="ntfRefresh" aria-label="Refresh" title="Refresh">↻</button></div>' +
+      '<div class="ntf-tabs"><button class="ntf-tab" data-tab="notices">Notifications</button>' +
+        '<button class="ntf-tab on" data-tab="updates">Medical Updates</button></div>' +
+      '<div class="ntf-scroll" id="ntfScroll">' +
+        '<div id="paneNotices" style="display:none">' +
+          '<div id="ntfNotices" class="ntf-list"><div class="ntf-empty">Loading…</div></div></div>' +
+        '<div id="paneUpdates">' +
+          '<div id="ntfPush" class="ntf-push"></div>' +
+          '<div class="fd-tools"><div class="fd-chips">' + chips + '</div>' +
+            '<div class="fd-row2"><select id="fdBranch" class="fd-branch" aria-label="Specialty">' + branchOpts + '</select>' +
+            '<input id="fdSearch" class="fd-search" type="search" placeholder="Search…" autocomplete="off"></div></div>' +
+          '<div id="ntfFeed" class="ntf-list"><div class="ntf-empty">Loading…</div></div></div>' +
+      '</div>';
     document.body.appendChild(_notifRoot);
     _notifRoot.querySelector("#ntfClose").addEventListener("click", closeNotifications);
-    _notifRoot.querySelector("#ntfRefresh").addEventListener("click", function () { fetchUpdates().then(function () { renderNotif(); nSetSeen(nMaxTs(_notifItems)); refreshBadge(); }); });
+    _notifRoot.querySelector("#ntfRefresh").addEventListener("click", function () {
+      if (_activeTab === "notices") { fetchNotices().then(renderNotices); }
+      else { fetchFeed(true).then(function () { renderFeed(); nSetSeen(nMaxTs(_feedItems)); refreshBadge(); }); }
+    });
+    _notifRoot.querySelectorAll(".ntf-tab").forEach(function (b) { b.addEventListener("click", function () { switchTab(b.getAttribute("data-tab")); }); });
+    _notifRoot.querySelectorAll("[data-fchip]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        _feedType = b.getAttribute("data-fchip");
+        _notifRoot.querySelectorAll("[data-fchip]").forEach(function (x) { x.classList.toggle("on", x === b); });
+        fetchFeed(true).then(renderFeed);
+      });
+    });
+    var si = _notifRoot.querySelector("#fdSearch"), sT = null;
+    if (si) si.addEventListener("input", function () { clearTimeout(sT); sT = setTimeout(function () { _feedQ = si.value.trim(); fetchFeed(true).then(renderFeed); }, 350); });
+    var bsel = _notifRoot.querySelector("#fdBranch");
+    if (bsel) bsel.addEventListener("change", function () { _feedBranch = bsel.value; fetchFeed(true).then(renderFeed); });
+    var sc = _notifRoot.querySelector("#ntfScroll");
+    sc.addEventListener("scroll", function () {
+      if (_activeTab !== "updates" || _feedEnd || _feedLoading) return;
+      if (sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 120) fetchFeed(false).then(renderFeed);
+    });
+    _notifRoot.querySelector("#ntfFeed").addEventListener("click", function (e) {
+      var card = e.target.closest && e.target.closest(".fd-card"); if (card) openDetail(card.getAttribute("data-uid"));
+    });
     return _notifRoot;
   }
   function openNotifications() {
     buildNotif(); _notifRoot.classList.add("on"); document.body.classList.add("ntf-lock");
-    renderPushRow();
-    (_notifItems ? Promise.resolve(_notifItems) : fetchUpdates()).then(function () {
-      renderNotif(); nSetSeen(nMaxTs(_notifItems)); refreshBadge();
-    });
+    switchTab(_activeTab); renderPushRow(); bmMergeFromServer();
+    fetchFeed(true).then(function () { renderFeed(); nSetSeen(nMaxTs(_feedItems)); refreshBadge(); });
   }
   function closeNotifications() { if (_notifRoot) { _notifRoot.classList.remove("on"); document.body.classList.remove("ntf-lock"); } }
+
+  /* ---- Guideline / update detail overlay ---- */
+  function detailSection(title, arr) {
+    if (!arr || !arr.length) return "";
+    return '<div class="dt-sec"><h4>' + nEsc(title) + '</h4><ul>' + arr.map(function (x) { return "<li>" + nEsc(x) + "</li>"; }).join("") + '</ul></div>';
+  }
+  function renderDetail(data) {
+    var body = _detailRoot && _detailRoot.querySelector("#dtBody"); if (!body) return;
+    if (!data || !data.item) { body.innerHTML = '<div class="ntf-empty">Couldn\'t load this update.</div>'; return; }
+    var it = data.item, s = data.structured || {};
+    var refs = [];
+    if (it.url) refs.push('<a href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Official website ↗</a>');
+    if (s.official_pdf_url) refs.push('<a href="' + nEsc(s.official_pdf_url) + '" target="_blank" rel="noopener noreferrer">Official PDF ↗</a>');
+    if (it.doi) refs.push('<a href="https://doi.org/' + nEsc(it.doi) + '" target="_blank" rel="noopener noreferrer">DOI: ' + nEsc(it.doi) + ' ↗</a>');
+    if (it.pmid) refs.push('<a href="https://pubmed.ncbi.nlm.nih.gov/' + nEsc(it.pmid) + '/" target="_blank" rel="noopener noreferrer">PubMed ' + nEsc(it.pmid) + ' ↗</a>');
+    var wc = "", lastV = (data.versions || [])[0], changes = [];
+    try { changes = lastV && lastV.whats_changed_json ? JSON.parse(lastV.whats_changed_json) : []; } catch (e) {}
+    if (changes && changes.length) {
+      wc = '<div class="dt-sec"><h4>What\'s Changed</h4><table class="dt-wc"><tr><th>Topic</th><th>Previous</th><th>Current</th><th>Impact</th></tr>' +
+        changes.map(function (c) { return '<tr><td>' + nEsc(c.topic) + '</td><td>' + nEsc(c.previous) + '</td><td>' + nEsc(c.current) + '</td><td>' + nEsc(c.impact) + '</td></tr>'; }).join("") + '</table></div>';
+    } else if (data.has_whats_changed) {
+      wc = '<div class="dt-sec"><h4>What\'s Changed</h4><div class="dt-muted">A newer version was detected; a change comparison will appear here.</div></div>';
+    }
+    var hi = it.importance === "critical" ? '<span class="ntf-hi crit">Critical</span>' : (it.importance === "high" ? '<span class="ntf-hi">Important</span>' : "");
+    body.innerHTML =
+      '<div class="dt-head"><div class="ntf-top"><span class="ntf-cat cat-' + nEsc(it.category || "general") + '">' + (TYPE_TAG[it.type] || NCAT.general) + '</span>' + hi +
+        (it.est_read_min ? '<span class="fd-read">⏱ ' + it.est_read_min + ' min</span>' : "") + '</div>' +
+      '<h2>' + nEsc(it.title) + '</h2>' +
+      '<div class="dt-sub">' + nEsc(it.organization || it.source || "") + (s.version ? " · " + nEsc(s.version) : "") + (it.ts ? " · " + nEsc(nDate(it.ts)) : "") + (it.workspace ? " · " + nEsc(WSLBL[it.workspace] || it.workspace) : "") + '</div></div>' +
+      ((s.summary || it.summary) ? '<div class="dt-summary">' + nEsc(s.summary || it.summary) + '</div>' : "") +
+      detailSection("What's New", (s.major_changes || []).concat(s.new_recommendations || [])) +
+      wc +
+      detailSection("Clinical pearls", s.clinical_pearls) +
+      (s.clinical_impact ? '<div class="dt-sec"><h4>Practice impact</h4><p>' + nEsc(s.clinical_impact) + '</p></div>' : "") +
+      detailSection("Practice points", s.practice_points) +
+      detailSection("Removed recommendations", s.removed_recommendations) +
+      (refs.length ? '<div class="dt-sec"><h4>References</h4><div class="dt-refs">' + refs.join("") + '</div></div>' : "") +
+      '<div class="dt-actions">' +
+        (it.url ? '<a class="dt-btn primary" href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Open Official Guideline</a>' : "") +
+        '<button class="dt-btn" id="dtBookmark">' + (bmHas(it.id) ? "★ Bookmarked" : "☆ Bookmark") + '</button>' +
+        '<button class="dt-btn" id="dtShare">Share</button></div>';
+    var bm = body.querySelector("#dtBookmark");
+    if (bm) bm.addEventListener("click", function () { bm.textContent = bmToggle(it.id) ? "★ Bookmarked" : "☆ Bookmark"; });
+    var sh = body.querySelector("#dtShare");
+    if (sh) sh.addEventListener("click", function () {
+      var url = it.url || location.href, txt = it.title || "StewardMD medical update";
+      if (navigator.share) { navigator.share({ title: txt, url: url }).catch(function () {}); }
+      else { try { navigator.clipboard.writeText(txt + " — " + url); toast("Link copied"); } catch (e) {} }
+    });
+  }
+  function buildDetail() {
+    if (_detailRoot) return _detailRoot;
+    _detailRoot = document.createElement("div"); _detailRoot.id = "ntfDetail"; _detailRoot.className = "ntf-overlay dt-overlay"; _detailRoot.setAttribute("role", "dialog"); _detailRoot.setAttribute("aria-modal", "true");
+    _detailRoot.innerHTML =
+      '<div class="ntf-top-bar"><button class="ntf-close" id="dtClose" aria-label="Back">‹ Back</button><div class="ntf-h">Medical Update</div><span style="width:38px"></span></div>' +
+      '<div class="ntf-scroll"><div id="dtBody" class="dt-body"><div class="ntf-empty">Loading…</div></div></div>';
+    document.body.appendChild(_detailRoot);
+    _detailRoot.querySelector("#dtClose").addEventListener("click", function () { _detailRoot.classList.remove("on"); });
+    return _detailRoot;
+  }
+  function openDetail(id) {
+    if (!id) return;
+    buildDetail(); _detailRoot.classList.add("on");
+    var body = _detailRoot.querySelector("#dtBody"); if (body) body.innerHTML = '<div class="ntf-empty">Loading…</div>';
+    fetch(NOTIF_API + "?id=" + encodeURIComponent(id), { headers: { "Accept": "application/json" } })
+      .then(function (r) { return r.json(); }).then(renderDetail).catch(function () { renderDetail(null); });
+  }
+
+  /* ---- auth + notification preferences (Phase 2) ---- */
+  var NOTIF_PREFS = "smd_notif_prefs";
+  function idToken() { try { var u = window.SMD_AUTH && window.SMD_AUTH.currentUser; return u ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
+  function authHeaders() { return idToken().then(function (t) { var h = { "Content-Type": "application/json" }; if (t) h["Authorization"] = "Bearer " + t; return h; }); }
+  function defaultWorkspace() { try { if (window.SMD_WS && window.SMD_WS.active) return window.SMD_WS.active() || "internal_medicine"; } catch (e) {} return "internal_medicine"; }
+  function prefsGetLocal() { try { var a = JSON.parse(localStorage.getItem(NOTIF_PREFS) || "null"); if (a && Array.isArray(a.workspaces) && a.workspaces.length) return a; } catch (e) {} return { workspaces: [defaultWorkspace()], branches: [], push_enabled: true }; }
+  function prefsSetLocal(p) { try { localStorage.setItem(NOTIF_PREFS, JSON.stringify(p)); } catch (e) {} }
+  function selectedWorkspaces() { return prefsGetLocal().workspaces || ["internal_medicine"]; }
+  function selectedBranches() { var b = prefsGetLocal().branches; return Array.isArray(b) ? b : []; }
+  // Push the current workspace selection onto this device's push subscription so the
+  // server can target specialty alerts. Web: re-POST /api/push/subscribe. Native: the
+  // registration listener re-posts with workspaces; nudge it by re-registering.
+  function syncPushWorkspaces() {
+    var ws = selectedWorkspaces();
+    try {
+      if (pushSupported() && navigator.serviceWorker) {
+        navigator.serviceWorker.ready.then(function (reg) { return reg.pushManager.getSubscription(); }).then(function (sub) {
+          if (!sub) return;
+          authHeaders().then(function (h) { fetch("/api/push/subscribe", { method: "POST", headers: h, body: JSON.stringify({ subscription: sub.toJSON ? sub.toJSON() : sub, workspaces: ws }) }).catch(function () {}); });
+        }).catch(function () {});
+      }
+    } catch (e) {}
+    try { var P = nativePush(); if (P && P.register) P.register(); } catch (e) {}   // re-fires registration → re-posts workspaces
+  }
+  function openNotifPrefs() {
+    var sel = selectedWorkspaces(), selB = selectedBranches();
+    var order = ["internal_medicine", "surgery", "ent", "ophthalmology", "obstetrics_gynaecology", "urology", "dentistry_omfs", "paediatrics"];
+    var rows = order.map(function (w) {
+      var on = sel.indexOf(w) >= 0;
+      var row = '<label class="np-row"><span>' + nEsc(WSLBL[w] || w) + '</span>' +
+        '<input type="checkbox" class="np-ck" value="' + w + '"' + (on ? " checked" : "") + '></label>';
+      if (w === "internal_medicine") {
+        var brs = BRANCH_ORDER.map(function (b) {
+          return '<label class="np-brow"><span>' + nEsc(BRANCH_LBL[b]) + '</span><input type="checkbox" class="np-bck" value="' + b + '"' + (selB.indexOf(b) >= 0 ? " checked" : "") + '></label>';
+        }).join("");
+        row += '<div class="np-branches" id="npBranches" style="' + (on ? "" : "display:none") + '"><div class="np-blabel">Internal Medicine specialties (filter your feed)</div>' + brs + '</div>';
+      }
+      return row;
+    }).join("");
+    openSheet('<div class="hv-sh-t">🔔 Notification preferences</div>' +
+      '<div class="np-hint">Choose which specialties send you push alerts. Under Internal Medicine, pick sub-specialties (branches) to filter your Medical Updates feed. All updates still appear in the feed regardless.</div>' +
+      '<div class="np-list">' + rows + '</div>' +
+      '<button class="np-save" id="npSave">Save preferences</button>' +
+      '<div class="np-msg" id="npMsg"></div>');
+    injectNotifCSS();
+    var s = (typeof sheetEl === "function") ? sheetEl() : document;
+    var imCk = [].filter.call(s.querySelectorAll(".np-ck"), function (c) { return c.value === "internal_medicine"; })[0];
+    var brWrap = s.querySelector("#npBranches");
+    if (imCk && brWrap) imCk.addEventListener("change", function () { brWrap.style.display = imCk.checked ? "" : "none"; });
+    var save = s.querySelector("#npSave");
+    if (save) save.addEventListener("click", function () {
+      var ws = [].map.call(s.querySelectorAll(".np-ck:checked"), function (c) { return c.value; });
+      if (!ws.length) ws = ["internal_medicine"];
+      var br = [].map.call(s.querySelectorAll(".np-bck:checked"), function (c) { return c.value; });
+      if (ws.indexOf("internal_medicine") < 0) br = [];   // branches only apply within Internal Medicine
+      var p = { workspaces: ws, branches: br, push_enabled: true };
+      prefsSetLocal(p);
+      _feedBranch = br.length === 1 ? br[0] : "all";       // one branch → default the feed filter to it
+      var msg = s.querySelector("#npMsg"); if (msg) msg.textContent = "Saving…";
+      authHeaders().then(function (h) {
+        return fetch(NOTIF_API + "/prefs", { method: "POST", headers: h, body: JSON.stringify(p) }).then(function (r) { return r.json().catch(function () { return {}; }); });
+      }).then(function (j) {
+        syncPushWorkspaces();
+        if (msg) msg.textContent = (j && j.ok) ? "✅ Saved" : "Saved on this device";
+        try { toast("Notification preferences saved"); } catch (e) {}
+      }).catch(function () { syncPushWorkspaces(); if (msg) msg.textContent = "Saved on this device"; });
+    });
+  }
+  try { window.SMD_openNotifPrefs = openNotifPrefs; } catch (e) {}
 
   /* ---- Web Push (OS banner) opt-in for this device ---- */
   function pushSupported() { return ("serviceWorker" in navigator) && ("PushManager" in window) && ("Notification" in window); }
@@ -2158,7 +2541,7 @@
             return sub || reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlB64ToU8(st.publicKey) });
           });
         }).then(function (sub) {
-          return fetch("/api/push/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ subscription: sub.toJSON ? sub.toJSON() : sub }) });
+          return authHeaders().then(function (h) { return fetch("/api/push/subscribe", { method: "POST", headers: h, body: JSON.stringify({ subscription: sub.toJSON ? sub.toJSON() : sub, workspaces: selectedWorkspaces() }) }); });
         }).then(function () {
           try { localStorage.setItem("smd_push_on", "1"); } catch (e) {}
           toast("Phone alerts enabled ✅"); renderPushRow();
@@ -2282,7 +2665,62 @@
       ".ntf-push-off span,.ntf-push-on span{flex:1;font:600 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.4}",
       ".ntf-push-btn{flex:0 0 auto;border:none;background:var(--teal,#0a9396);color:#fff;font:700 12.5px var(--sans,system-ui);border-radius:9px;padding:9px 13px;cursor:pointer}",
       ".ntf-push-btn.ghost{background:transparent;color:var(--teal,#0a9396);border:1px solid var(--line,#e5e5e0)}",
-      ".ntf-push-hint{background:var(--teal-soft,#e0f2f1);border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:11px 13px;font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.5}.ntf-push-hint b{color:var(--ink,#1a1a1a)}"
+      ".ntf-push-hint{background:var(--teal-soft,#e0f2f1);border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:11px 13px;font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.5}.ntf-push-hint b{color:var(--ink,#1a1a1a)}",
+      // tabs
+      ".ntf-tabs{display:flex;gap:6px;padding:8px 14px 0;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e5e5e0);position:sticky;top:0;z-index:1}",
+      ".ntf-tab{flex:1;background:transparent;border:none;border-bottom:2.5px solid transparent;padding:10px 6px;font:700 13px var(--sans,system-ui);color:var(--slate-soft,#888);cursor:pointer}",
+      ".ntf-tab.on{color:var(--teal,#0a9396);border-bottom-color:var(--teal,#0a9396)}",
+      // feed tools (filters + search)
+      ".fd-tools{display:flex;flex-direction:column;gap:9px;margin-bottom:12px}",
+      ".fd-chips{display:flex;gap:7px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}",
+      ".fd-chip{flex:0 0 auto;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:999px;padding:6px 12px;font:600 12px var(--sans,system-ui);color:var(--slate,#555);cursor:pointer;white-space:nowrap}",
+      ".fd-chip.on{background:var(--teal,#0a9396);border-color:var(--teal,#0a9396);color:#fff}",
+      ".fd-search{width:100%;box-sizing:border-box;border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:9px 12px;font:500 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);background:var(--panel,#fff)}",
+      // feed card
+      ".fd-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--teal,#0a9396);cursor:pointer;transition:transform .08s ease,box-shadow .12s ease}",
+      ".fd-card:hover,.fd-card:focus{box-shadow:0 3px 14px rgba(0,0,0,.08);outline:none}.fd-card:active{transform:scale(.995)}",
+      ".fd-card.hi{border-left-color:#ef4444}",
+      ".fd-org{font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396);margin-top:3px}",
+      ".fd-meta{display:flex;align-items:center;gap:10px;margin-top:9px;flex-wrap:wrap}",
+      ".fd-ws{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--teal-soft,#e0f2f1);border-radius:6px;padding:2px 8px}",
+      ".fd-read{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#888)}",
+      ".fd-open{margin-left:auto;font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396)}",
+      ".fd-more,.fd-end{text-align:center;font:600 12px var(--sans,system-ui);color:var(--slate-soft,#888);padding:16px}",
+      ".ntf-hi.crit{background:#b91c1c}",
+      // detail overlay
+      ".dt-overlay{z-index:860}",
+      ".dt-body{max-width:720px}",
+      ".dt-head h2{font:800 20px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.25;margin:8px 0 4px}",
+      ".dt-sub{font:600 12.5px var(--sans,system-ui);color:var(--slate-soft,#888);line-height:1.5}",
+      ".dt-summary{font:500 14.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.65;margin:14px 0;white-space:pre-wrap}",
+      ".dt-sec{margin:16px 0;border-top:1px solid var(--line,#e5e5e0);padding-top:14px}",
+      ".dt-sec h4{font:800 13px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--teal,#0a9396);margin:0 0 8px}",
+      ".dt-sec ul{margin:0;padding-left:18px}.dt-sec li{font:500 13.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.6;margin-bottom:5px}",
+      ".dt-sec p{font:500 13.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.6;margin:0}",
+      ".dt-muted{font:500 13px var(--sans,system-ui);color:var(--slate-soft,#888);font-style:italic}",
+      ".dt-wc{width:100%;border-collapse:collapse;font:500 12.5px var(--sans,system-ui)}",
+      ".dt-wc th{text-align:left;font-weight:800;color:var(--ink,#1a1a1a);border-bottom:2px solid var(--line,#e5e5e0);padding:6px 8px}",
+      ".dt-wc td{color:var(--slate,#555);border-bottom:1px solid var(--line,#e5e5e0);padding:6px 8px;vertical-align:top}",
+      ".dt-refs{display:flex;flex-direction:column;gap:7px}.dt-refs a{font:600 13px var(--sans,system-ui);color:var(--teal,#0a9396);text-decoration:none}",
+      ".dt-actions{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 10px}",
+      ".dt-btn{border:1px solid var(--line,#e5e5e0);background:var(--panel,#fff);color:var(--ink,#1a1a1a);font:700 13px var(--sans,system-ui);border-radius:10px;padding:11px 15px;cursor:pointer;text-decoration:none}",
+      ".dt-btn.primary{background:var(--teal,#0a9396);border-color:var(--teal,#0a9396);color:#fff}",
+      // notification preferences sheet
+      ".np-hint{font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.5;margin:2px 0 12px}",
+      ".np-list{display:flex;flex-direction:column;gap:2px;margin-bottom:14px}",
+      ".np-row{display:flex;align-items:center;justify-content:space-between;padding:11px 2px;border-bottom:1px solid var(--line,#e5e5e0);font:600 14px var(--sans,system-ui);color:var(--ink,#1a1a1a);cursor:pointer}",
+      ".np-row input{width:20px;height:20px;accent-color:var(--teal,#0a9396)}",
+      ".np-save{width:100%;border:none;background:var(--teal,#0a9396);color:#fff;font:700 14px var(--sans,system-ui);border-radius:11px;padding:12px;cursor:pointer}",
+      ".np-msg{text-align:center;font:600 12.5px var(--sans,system-ui);color:var(--teal,#0a9396);min-height:16px;margin-top:8px}",
+      // feed branch dropdown
+      ".fd-row2{display:flex;gap:8px;align-items:center}",
+      ".fd-branch{flex:0 0 auto;max-width:52%;border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:9px 10px;font:600 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);background:var(--panel,#fff)}",
+      ".fd-row2 .fd-search{flex:1}",
+      // nested Internal-Medicine branches in the prefs sheet
+      ".np-branches{margin:2px 0 6px;padding:8px 10px;background:var(--teal-soft,#e0f2f1);border-radius:10px}",
+      ".np-blabel{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--teal,#0a9396);margin:2px 0 4px}",
+      ".np-brow{display:flex;align-items:center;justify-content:space-between;padding:7px 2px;font:600 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);cursor:pointer}",
+      ".np-brow input{width:18px;height:18px;accent-color:var(--teal,#0a9396)}"
     ].join("");
     var st = document.createElement("style"); st.id = "ntf-css"; st.textContent = css; document.head.appendChild(st);
   }

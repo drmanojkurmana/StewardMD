@@ -21,6 +21,7 @@
 
 import { verifyFirebaseToken } from "../_fbauth.js";
 import { setUserClaims } from "../_fbadmin.js";
+import { emailVerified } from "../_email.js";
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
@@ -33,6 +34,28 @@ const GEMINI_MODEL_DEFAULT = "gemini-flash-latest";
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
 });
+
+// One-time "Skip for now" trial: pure decision over the stored doctor record.
+//   verified            → { status:"verified" }              (no trial needed)
+//   prior trial active  → { status:"trial", provisionalUntil }
+//   prior trial elapsed → { status:"trial_expired" }         (one trial per account)
+//   otherwise           → { status:"trial", provisionalUntil, grant:true }  (grant a fresh one)
+export const TRIAL_DAYS = 7;
+export function decideTrial(rec, now, trialDays) {
+  const days = trialDays || TRIAL_DAYS;
+  if (rec && (rec.verified === true || rec.status === "verified")) {
+    return { status: "verified", regNo: (rec && rec.regNo) || "" };
+  }
+  if (rec && rec.trialStartedAt) {
+    const until = Date.parse(rec.provisionalUntil || "");
+    if (!isNaN(until) && now < until) {
+      return { status: "trial", provisionalUntil: rec.provisionalUntil, provisionalDays: days };
+    }
+    return { status: "trial_expired" };
+  }
+  const provisionalUntil = new Date(now + days * 86400000).toISOString();
+  return { status: "trial", provisionalUntil, provisionalDays: days, grant: true };
+}
 
 function kv(env) { return env.CASES_KV || env.GHIS_KV || null; }
 function doctorKey(uid) { return "icu:doctor:" + uid; }
@@ -213,26 +236,8 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
   if (!res.ok) console.warn("[verify] resend(support) failed:", await res.text());
 }
 
-// ── Resend — "your account is verified" email to the doctor ───────────────────
-async function emailVerified(env, { email, name, regNo, council }) {
-  if (!env.RESEND_API_KEY || !email) return;
-  const from = env.FROM_EMAIL || "StewardMD Verify <verify@stewardmd.in>";
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { "Authorization": `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      from, to: [email],
-      subject: "✓ Your StewardMD account is verified",
-      html:
-        `<h2>You're verified ✓</h2>` +
-        `<p>Dr. ${name || ""}, your medical registration has been verified and linked to your StewardMD account.</p>` +
-        `<table cellpadding="6"><tr><td><b>Registration No</b></td><td>${regNo || ""}</td></tr>` +
-        `<tr><td><b>Council</b></td><td>${council || ""}</td></tr></table>` +
-        `<p>You now have full access, including the prescription generator. Welcome to StewardMD.</p>`,
-    }),
-  });
-  if (!res.ok) console.warn("[verify] resend(verified) failed:", await res.text());
-}
+// "Your account is verified" email to the doctor now lives in ../_email.js
+// (branded template, from noreply@stewardmd.in) and is imported above.
 
 // ── Entry ─────────────────────────────────────────────────────────────────────
 export async function onRequest(context) {
@@ -269,6 +274,28 @@ export async function onRequest(context) {
   const typedReg = String(body.regNo || "").trim();   // present ⇒ ID mode
   const idMode   = !!typedReg;
   if (!idToken)  return json({ error: "missing_id_token" }, 401);
+
+  // "Skip for now" — grant one 7-day provisional trial per account (no certificate, no
+  // verified claim → the prescription generator stays locked). One trial only.
+  if (body.trial === true) {
+    const tuid = await verifyFirebaseToken(idToken, env);
+    if (!tuid) return json({ error: "auth_failed" }, 401);
+    let rec = null;
+    try { if (store) rec = await store.get(doctorKey(tuid), "json"); } catch (e) {}
+    const decision = decideTrial(rec, Date.now(), TRIAL_DAYS);
+    if (decision.grant && store) {
+      const email = decodePayload(idToken).email || (rec && rec.email) || "";
+      const updated = { ...(rec || {}), uid: tuid, email,
+        // Don't clobber a genuine "pending" review — just mark the trial consumed.
+        status: (rec && rec.status === "pending") ? "pending" : "trial",
+        trialStartedAt: new Date().toISOString(), trialUsed: true,
+        provisionalUntil: decision.provisionalUntil, updatedAt: new Date().toISOString() };
+      try { await store.put(doctorKey(tuid), JSON.stringify(updated)); } catch (e) {}
+    }
+    const { grant, ...resp } = decision;   // `grant` is internal only
+    return json(resp);
+  }
+
   if (!imageB64) return json({ error: "missing_image" }, 400);
 
   // 1. authenticate (reuse shared verifier)

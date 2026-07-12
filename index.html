@@ -46,7 +46,7 @@
      asks for. It was never actually loaded, so it fell back to a different cursive on
      devices without it (e.g. iPhone). Load it so the credit renders as designed everywhere. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/redesign-system.css?v=gold336">
+<link rel="stylesheet" href="/redesign-system.css?v=gold345">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <script>
@@ -290,6 +290,24 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 
 
 
+<style>
+/* Compact splash so it fits one screen without scrolling (id+class beats base rules). */
+#splash .splash-mark-logo{width:94px;height:94px}
+#splash .splash-mark{margin:0 auto 6px}
+#splash .splash-mark svg{width:30px;height:30px}
+#splash .splash-name{font-size:25px}
+#splash .splash-tagline{margin-top:3px;font-size:12.5px}
+#splash .demo-wrap{margin-top:12px}
+#splash .demo-label{margin-bottom:7px}
+#splash .demo-cta{padding:13px}
+#splash .splash-foot{margin-top:12px;font-size:11px}
+#splash .splash-inner{padding-top:max(10px,env(safe-area-inset-top))}
+@media (max-height:740px){
+  #splash .splash-mark-logo{width:76px;height:76px}
+  #splash .demo-wrap{margin-top:8px}
+  #splash .splash-foot{margin-top:8px}
+}
+</style>
 <div id="splash">
   <div class="splash-inner">
     <div class="splash-mark">
@@ -651,9 +669,10 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
     <div class="splash-name">Steward<span class="accent">MD</span></div>
     <div class="account-title" id="verifyTitle">Verify you're a registered doctor</div>
     <div class="account-subtitle" id="verifySubtitle">
-      StewardMD is for registered medical practitioners only. Upload your medical
-      registration certificate — we verify it instantly against the National Medical
-      Register. Your certificate is used only for verification.
+      StewardMD is for registered doctors. Verify instantly by uploading your
+      <b>NMC / State Medical Council registration certificate</b> — or enter your
+      <b>registration number</b> and upload <b>Aadhaar / any government photo ID</b>
+      (we read only your name to match the register; the ID is never stored).
     </div>
 
     <!-- Account + verification status summary (populated by verify.js) -->
@@ -672,13 +691,17 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       </label>
       <div class="verify-regrow">
         <input type="text" id="verifyRegNo" class="verify-reginput" placeholder="Registration number (optional)" autocomplete="off" spellcheck="false">
-        <div class="verify-reghint">No clear certificate? Enter your NMC / State Medical Council <b>registration number</b> and upload any <b>photo ID</b> — we only read your name to match the register. Your ID is never stored.</div>
+        <div class="verify-reghint">No clear certificate? Enter your NMC / State Medical Council <b>registration number</b> and upload your <b>Aadhaar or any government photo ID</b> — we only read your name to match the register. Your ID is never stored.</div>
       </div>
       <button class="account-google-btn" id="verifySubmit" style="margin-top:14px;justify-content:center;">Choose certificate</button>
       <div class="verify-status" id="verifyStatus" role="status" aria-live="polite"></div>
     </div>
 
     <button class="account-google-btn" id="verifyDoneBtn" style="display:none;justify-content:center;">Done</button>
+
+    <!-- Escape hatch on the forced gate: start a one-time 7-day trial (prescription stays locked). -->
+    <button id="verifySkipBtn" style="display:none;margin-top:12px;width:100%;background:none;border:1px solid rgba(246,247,245,.28);border-radius:12px;padding:12px 14px;color:#f6f7f5;font:600 14px system-ui;cursor:pointer;">Skip for now — start your 7-day trial</button>
+    <div style="margin-top:6px;font:400 12px system-ui;color:#9fb0bd;text-align:center;">Full access for 7 days · the prescription generator unlocks once you verify.</div>
 
     <div class="account-fineprint" style="margin-top:16px;">
       Trouble verifying? We'll review it manually and email you — or write to
@@ -1325,14 +1348,15 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   </div>
 </div>
 
-<script src="/native-bridge.js?v=gold336" defer></script>
+<script src="/native-bridge.js?v=gold356" defer></script>
 <script src="/app.js?v=gold336" defer></script>
 <script src="/antibiogram-data.js?v=gold336" defer></script>
 <script src="/theme-sync.js?v=gold336" defer></script>
 <script src="/account.js?v=gold336" defer></script>
 <script src="/signout-fix.js?v=gold339" defer></script>
+<script src="/welcome-email.js?v=gold342" defer></script>
 <script src="/verify.js?v=gold336" defer></script>
-<script src="/prescription.js?v=gold336" defer></script>
+<script src="/prescription.js?v=gold353" defer></script>
 <script src="/ku.js?v=gold336" defer></script>
 <!-- Global toast shim: defines window.toast + window.SMD_toast (many modules call these but
      neither was ever defined, so their feedback was silently dropped). Loaded early; idempotent. -->
@@ -1367,10 +1391,18 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <!-- Image Engine chooser for ICU Snapshot (Private Device OCR vs AI Vision). Needs SMD_AI
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
 <script src="/image-engine.js?v=gold336" defer></script>
-<script src="/kb/ai/steward-ai.browser.js?v=gold342" defer></script>
+<script src="/kb/ai/steward-ai.browser.js?v=gold357" defer></script>
 <script src="/electrolytes.js?v=gold336" defer></script>
 <script src="/caseshare.js?v=gold336" defer></script>
-<script src="/home.js?v=gold340" defer></script>
+<script src="/home.js?v=gold357" defer></script>
+<!-- Guided tour (SMD_TOUR): first-run interactive onboarding + one-time contextual tips.
+     Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
+     home.js + account.js so it can read the home DOM and the signed-in account. -->
+<script src="/onboarding.js?v=gold347" defer></script>
+<!-- Global haptics (SMD_HAPTICS): tactile feedback on every interactive tap. Additive; uses
+     @capacitor/haptics on native + navigator.vibrate fallback on web. Pref smd_haptics
+     (default ON; ?haptics=0 disables). Loads after native-bridge so Capacitor.Plugins exists. -->
+<script src="/haptics.js?v=gold348" defer></script>
 <script src="/antibiogram.js?v=gold336" defer></script>
 <script src="/asp-region.js?v=gold336" defer></script>
 <script src="/swipe-back.js?v=gold336" defer></script>
@@ -1385,7 +1417,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold336" defer></script>
-<script src="/icu.js?v=gold336" defer></script>
+<script src="/icu.js?v=gold355" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
 <script src="/native-push.js?v=gold336" defer></script>
@@ -1394,7 +1426,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/infusion-actions.js?v=gold336" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=gold338" defer></script>
+<script src="/voice.js?v=gold356" defer></script>
 <script src="/recent.js?v=gold336" defer></script>
 <!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
      ghis-ward.js self-injects a 🏥 Ward button + #ghisPanel. Each doctor signs in

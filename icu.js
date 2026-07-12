@@ -1940,27 +1940,29 @@
   }
 
   // --- Daily ICU Rounds checklist + summary --------------------------------
+  // `ex` = a short worked example shown as the note-box placeholder, so a clinician unsure what to
+  // record for an item sees the kind of thing to jot. Examples only — never auto-filled.
   var ROUNDS_ITEMS = [
-    { k: "general", g: "General", label: "Overnight events / trajectory reviewed" },
-    { k: "airway", g: "Airway", label: "Airway secure / ETT position & cuff" },
-    { k: "breathing", g: "Breathing", label: "Ventilation & oxygenation reviewed" },
-    { k: "circulation", g: "Circulation", label: "Haemodynamics & pressors reviewed" },
-    { k: "fluids", g: "Fluids", label: "Fluid balance & strategy set" },
-    { k: "renal", g: "Renal", label: "Renal function / RRT need" },
-    { k: "lytes", g: "Electrolytes", label: "Electrolytes corrected / monitored" },
-    { k: "abg", g: "ABG", label: "Acid–base reviewed" },
-    { k: "nutrition", g: "Nutrition", label: "Feeding plan (enteral preferred)" },
-    { k: "sedation", g: "Sedation", label: "Sedation target / daily interruption" },
-    { k: "pain", g: "Pain", label: "Analgesia & delirium (CAM-ICU) assessed" },
-    { k: "cultures", g: "Cultures", label: "Cultures / micro results reviewed" },
-    { k: "antibiotics", g: "Antibiotics", label: "Antibiotic indication / de-escalation / stop date" },
-    { k: "dvt", g: "Prophylaxis", label: "DVT prophylaxis prescribed" },
-    { k: "ulcer", g: "Prophylaxis", label: "Stress-ulcer prophylaxis reviewed" },
-    { k: "lines", g: "Lines", label: "Central/arterial lines — still needed?" },
-    { k: "catheter", g: "Catheters", label: "Urinary catheter — still needed?" },
-    { k: "drains", g: "Drains", label: "Drains reviewed" },
-    { k: "family", g: "Family", label: "Family updated / counselling" },
-    { k: "disposition", g: "Disposition", label: "Disposition / step-down plan" }
+    { k: "general", g: "General", label: "Overnight events / trajectory reviewed", ex: "e.g. Stable overnight; one self-resolving desat to 88%; overall improving — continue weaning support." },
+    { k: "airway", g: "Airway", label: "Airway secure / ETT position & cuff", ex: "e.g. ETT 22 cm at lips, cuff 25 cmH₂O, well secured; CXR tip ~3 cm above carina." },
+    { k: "breathing", g: "Breathing", label: "Ventilation & oxygenation reviewed", ex: "e.g. SIMV, tolerating wean; SpO₂ 96% on FiO₂ 0.4, PEEP 6; plan SBT tomorrow." },
+    { k: "circulation", g: "Circulation", label: "Haemodynamics & pressors reviewed", ex: "e.g. MAP 72 off noradrenaline since 06:00; lactate cleared to 1.4." },
+    { k: "fluids", g: "Fluids", label: "Fluid balance & strategy set", ex: "e.g. Net +1.2 L/24h; now deresuscitating — target −500 mL/day, furosemide 20 mg BD." },
+    { k: "renal", g: "Renal", label: "Renal function / RRT need", ex: "e.g. Creatinine 1.8 stable, UO 0.6 mL/kg/h; no RRT needed today." },
+    { k: "lytes", g: "Electrolytes", label: "Electrolytes corrected / monitored", ex: "e.g. K 3.2 → 40 mmol KCl replaced, recheck 14:00; Mg 1.8 topped up." },
+    { k: "abg", g: "ABG", label: "Acid–base reviewed", ex: "e.g. pH 7.32 / pCO₂ 48 / HCO₃ 24 — compensated respiratory acidosis, improving." },
+    { k: "nutrition", g: "Nutrition", label: "Feeding plan (enteral preferred)", ex: "e.g. NG feed 40 mL/h, tolerating; target 25 kcal/kg; no high gastric residuals." },
+    { k: "sedation", g: "Sedation", label: "Sedation target / daily interruption", ex: "e.g. RASS target −1 to 0; daily sedation hold done — follows commands." },
+    { k: "pain", g: "Pain", label: "Analgesia & delirium (CAM-ICU) assessed", ex: "e.g. CPOT 2, fentanyl PRN adequate; CAM-ICU negative." },
+    { k: "cultures", g: "Cultures", label: "Cultures / micro results reviewed", ex: "e.g. Blood cultures NG at 48h; urine — E. coli sensitive to nitrofurantoin." },
+    { k: "antibiotics", g: "Antibiotics", label: "Antibiotic indication / de-escalation / stop date", ex: "e.g. Day 4 pip-tazo for HAP; de-escalate to co-amoxiclav; stop date day 7." },
+    { k: "dvt", g: "Prophylaxis", label: "DVT prophylaxis prescribed", ex: "e.g. Enoxaparin 40 mg SC OD; no active bleeding / contraindication." },
+    { k: "ulcer", g: "Prophylaxis", label: "Stress-ulcer prophylaxis reviewed", ex: "e.g. Pantoprazole 40 mg IV OD while ventilated; review once feeding established." },
+    { k: "lines", g: "Lines", label: "Central/arterial lines — still needed?", ex: "e.g. R IJ CVC day 5, site clean, still needed for pressors; a-line day 3." },
+    { k: "catheter", g: "Catheters", label: "Urinary catheter — still needed?", ex: "e.g. IDC day 4 — still needed for strict UO; reassess for removal tomorrow." },
+    { k: "drains", g: "Drains", label: "Drains reviewed", ex: "e.g. R chest drain 50 mL serous/24h, no air leak — consider removal." },
+    { k: "family", g: "Family", label: "Family updated / counselling", ex: "e.g. Updated wife by phone 11:00 re: slow improvement; goals-of-care talk planned." },
+    { k: "disposition", g: "Disposition", label: "Disposition / step-down plan", ex: "e.g. If extubated and off pressors, step down to HDU tomorrow." }
   ];
   // Plain-text of an imaging study's AI assist summary (for the daily summary export, clearly
   // labelled advisory). Uses the stored structured summary (rec.assist.data) when present.
@@ -2559,8 +2561,18 @@
       tab +   // each tab renders its own descriptive header — no redundant generic label
       '</div></div>';
   }
+  // One-shot: set true right before a paint() that should land at the TOP (a real context switch —
+  // load/new/clear patient). Every other repaint keeps the user where they were.
+  var _paintTop = false;
   function paint() {
     if (!rootEl) return;
+    // Preserve scroll across the full innerHTML rebuild. Without this, EVERY state change (ticking a
+    // rounds checkbox, marking imaging reviewed, ingesting data…) recreated the .icu-scroll container
+    // and snapped the list back to the top — so you couldn't work down the rounds checklist. Genuine
+    // context switches opt out via _paintTop; tab/workspace changes reset to 0 explicitly after paint.
+    var _osc = rootEl.querySelector(".icu-scroll");
+    var _keepTop = (_paintTop || !_osc) ? 0 : _osc.scrollTop;
+    _paintTop = false;
     // Camera FAB is contextual — only where snapping a monitor/lab/ABG/vent is relevant.
     var fab = isMonWs() ? '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' : "";
     // Prominent, ALWAYS-visible "Lab Watch 24/7" FAB (sits just above the Snapshot camera button)
@@ -2569,6 +2581,7 @@
       ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>'
       : "";
     rootEl.innerHTML = renderHeader() + renderBody() + watchFab + fab + renderTabBar();
+    if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
   }
 
   /* ---------------------------------------------------- manual entry forms */
@@ -2763,9 +2776,22 @@
     ensureModal();
     var it = ROUNDS_ITEMS.filter(function (x) { return x.k === k; })[0] || { label: k };
     var cur = (_raw.rounds[k] || {}).note || "";
-    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + esc(it.label) + '</h3><div class="icu-fld"><label>Note</label><textarea data-k="note" rows="4" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(cur) + "</textarea></div>" +
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + esc(it.label) + '</h3><div class="icu-fld"><label>Note</label><textarea data-k="note" rows="4" placeholder="' + esc(it.ex || "Add a short note for this item…") + '" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(cur) + "</textarea></div>" +
+      '<button class="icu-btn ghost" data-icu-act="roundmic:' + k + '" style="margin-bottom:8px">' + ico("mic", "🎤") + ' Speak <span style="opacity:.8;font-weight:700">· MaiK Scribe</span></button>' +
       '<button class="icu-btn" data-icu-act="saveroundnote:' + k + '">Save note</button><button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
     modalEl.classList.add("on");
+  }
+  // MaiK Scribe → round note: dictate into the note textarea (append), reusing the shared voice
+  // dialog used by the Add-data sheet and MaiK chat. No new engine; native/Whisper/web STT.
+  function roundNoteDictate(k) {
+    if (!(window.SMD_VOICE && SMD_VOICE.openDialog)) { if (window.toast) toast("Voice intake is still loading…"); return; }
+    var ta = modalEl && modalEl.querySelector("[data-k=note]");
+    SMD_VOICE.openDialog({ target: "text", onText: function (t) {
+      if (!t || !ta) return;
+      var base = (ta.value || "").trim();
+      ta.value = (base ? base + " " : "") + t;
+      try { ta.focus(); } catch (e) {}
+    } });
   }
   function saveRoundNote(k) { if (!modalEl) return; var ta = modalEl.querySelector("[data-k=note]"); var cur = _raw.rounds[k] || {}; STATE.rounds[k] = { done: !!cur.done, note: ta ? ta.value : "" }; closeForm(); }
   function openSummary() {
@@ -3703,7 +3729,7 @@
       '<button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
     modalEl.classList.add("on");
   }
-  function clearFindings() { ICU.reset(); _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); paint(); if (window.toast) toast("Findings cleared"); }
+  function clearFindings() { ICU.reset(); _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); _paintTop = true; paint(); if (window.toast) toast("Findings cleared"); }
 
   /* -------------------------------------------------- launch embedded modules */
   // Raise the target overlay above the ICU surface, then open it via its existing
@@ -3840,7 +3866,7 @@
   function applyState(d, id) {
     Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (d[k] != null) ? clone(d[k]) : clone(DEFAULT_STATE[k]); });
     STATE.patient._id = id;
-    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); paint();
+    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); _paintTop = true; paint();
   }
   function loadPatient(id) {
     var r = loadRoster(), e = null, i;
@@ -3859,7 +3885,7 @@
   }
   function newPatient() {
     ICU.reset();
-    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); paint();
+    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); _paintTop = true; paint();
     openForm("patient");
   }
   function renderRoster(list, cloudOn) {
@@ -3916,6 +3942,7 @@
       '<div class="icu-grid2">' +
         '<button class="icu-btn" data-icu-act="voice"' + A + '>' + ico("mic", "🎤") + ' Speak <span style="opacity:.8;font-weight:700">· MaiK Scribe</span></button>' +
         '<button class="icu-btn ghost" data-icu-act="snapshot"' + A + '>' + ico("camera", "📷") + ' Snap a photo</button>' +
+        '<button class="icu-btn ghost" data-icu-act="impmethod:file"' + A + '>' + ico("upload", "📄") + ' Upload PDF / image</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch"' + A + '>' + ico("hospital", "🏥") + ' Import from ward</button>' +
       '</div>' +
       '<div style="font:800 11px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:14px 0 8px">Type it in</div>' +
@@ -3984,6 +4011,7 @@
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
       case "roundnote": openRoundNote(arg); break;
+      case "roundmic": roundNoteDictate(arg); break;
       case "saveroundnote": saveRoundNote(arg); break;
       case "proto": _openProto[arg] = !_openProto[arg]; paint(); break;
       case "drug": launch(function () { if (!window.INF) return; (INF.openDrug ? INF.openDrug(arg) : INF.open()); infWeightBridge(); installInfBridge(); }, "infOverlay"); break;

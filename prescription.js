@@ -68,6 +68,9 @@
       ".rx-line{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;padding:9px;margin:8px 0}.rx-line.unv{border-color:#f59e0b;background:rgba(245,158,11,.06)}.rx-line.adv{background:rgba(100,116,139,.06)}" +
       ".rx-line .r1{display:flex;gap:6px;flex-wrap:wrap}.rx-line .r1 input{}.rx-drug{flex:2 1 160px}.rx-brand{flex:1 1 110px}.rx-line .r2{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.rx-dose{flex:2 1 160px}.rx-freq{flex:1 1 90px}.rx-dur{flex:1 1 90px}" +
       ".rx-flag{font:700 10.5px var(--hfont);color:#b45309;margin-top:5px}.rx-del{border:0;background:transparent;color:#ef4444;cursor:pointer;font-size:16px;align-self:center}" +
+      ".rx-ac{border:1px solid var(--hbd,#e2e8f0);border-radius:10px;margin-top:6px;background:var(--hpanel,#fff);max-height:240px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}" +
+      ".rx-ac-item{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--hbd,#eef1f4);background:none;padding:8px 10px;cursor:pointer;font:500 13px var(--hfont);color:var(--hink,#14202b)}.rx-ac-item:last-child{border-bottom:0}.rx-ac-item:hover,.rx-ac-item.on{background:var(--paper,#f6f7f5)}" +
+      ".rx-ac-g{font-weight:800}.rx-ac-b{color:var(--teal,#0e6e63);font-weight:600}.rx-ac-d{display:block;color:var(--hmut,#64748b);font-size:11.5px;margin-top:2px}.rx-ac-empty{padding:8px 10px;color:var(--hmut,#64748b);font:500 12px var(--hfont)}" +
       ".rx-btn{border:0;border-radius:999px;padding:9px 16px;font:800 13px var(--hfont);cursor:pointer}.rx-add{background:rgba(100,116,139,.12);color:var(--hink)}.rx-print{background:#2563eb;color:#fff}.rx-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}" +
       ".rx-sign{margin-top:14px;border-top:1px dashed var(--hbd,#e2e8f0);padding-top:10px;font:600 13px var(--hfont);color:var(--hink)}.rx-sign small{color:var(--hmut,#64748b);font-weight:500}" +
       ".rx-gate{font:500 13px var(--hfont);color:var(--hink)}.rx-gate input{margin-top:10px;width:100%}" +
@@ -84,6 +87,128 @@
   function show(html) { ensureEls(); sheet.innerHTML = '<div class="rx-wrap">' + html + '</div>'; scrim.classList.add("on"); sheet.classList.add("on"); }
   function close() { if (sheet) sheet.classList.remove("on"); if (scrim) scrim.classList.remove("on"); }
 
+  // ---- WebView-safe Print / PDF ----------------------------------------------------------------
+  // window.print() is a no-op in the native WKWebView, so we build a self-contained branded Rx
+  // document and: print it via a hidden iframe on web, or write it to a file + Share it on native
+  // (the OS share sheet offers Print / AirPrint / Save as PDF).
+  function rxNative() { try { var C = window.Capacitor; return !!(C && (C.isNativePlatform ? C.isNativePlatform() : C.isNative)); } catch (e) { return false; } }
+  function rxPlugins() { try { return (window.Capacitor && window.Capacitor.Plugins) || {}; } catch (e) { return {}; } }
+  function collectRx() {
+    var name = (sheet.querySelector("#rxPtName") || {}).value || "";
+    var age = (sheet.querySelector("#rxPtAge") || {}).value || "";
+    var lines = [];
+    sheet.querySelectorAll("#rxLines .rx-line").forEach(function (ln) {
+      if (ln.style.display === "none") return;
+      var g = ((ln.querySelector('[data-f="drug"]') || {}).value || "").trim();
+      if (ln.classList.contains("adv")) { if (g) lines.push({ advice: true, text: g }); return; }
+      if (!g) return;
+      lines.push({
+        drug: g,
+        brand: ((ln.querySelector('[data-f="brand"]') || {}).value || "").trim(),
+        dose: ((ln.querySelector('[data-f="dose"]') || {}).value || "").trim(),
+        freq: ((ln.querySelector('[data-f="freq"]') || {}).value || "").trim(),
+        duration: ((ln.querySelector('[data-f="duration"]') || {}).value || "").trim()
+      });
+    });
+    return { name: name, age: age, lines: lines };
+  }
+  function rxPrintHTML(topic, regNo) {
+    var d = collectRx(), date = ""; try { date = new Date().toISOString().slice(0, 10); } catch (e) {}
+    var n = 0;
+    var rows = d.lines.map(function (L) {
+      if (L.advice) return '<div class="adv">&bull; ' + esc(L.text) + '</div>';
+      n++;
+      var sub = [L.dose, L.freq, L.duration].filter(Boolean).join(" &middot; ");
+      return '<div class="rx"><div class="rxn">' + n + '.</div><div class="rxd"><b>' + esc(L.drug) + '</b>' +
+        (L.brand ? ' <span class="br">(' + esc(L.brand) + ')</span>' : '') +
+        (sub ? '<div class="dz">' + sub + '</div>' : '') + '</div></div>';
+    }).join("");
+    return '<!doctype html><html><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1"><title>StewardMD Prescription</title><style>' +
+      '*{box-sizing:border-box}html,body{margin:0;padding:0}' +
+      'body{font:15px/1.55 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;color:#0f172a;padding:26px}' +
+      '.hd{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #0e6e63;padding-bottom:10px}' +
+      '.logo{font:800 22px/1 Georgia,serif;color:#0e6e63}.logo b{color:#0f172a}.tag{font-size:12px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:.06em}' +
+      '.clinic{font-weight:700;margin:12px 0 2px}.pt{color:#334155;font-size:14px;margin:8px 0 4px}' +
+      '.rxsym{font:800 26px Georgia,serif;margin:12px 0 6px}' +
+      '.rx{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #eef2f1}.rxn{color:#64748b;font-weight:700;min-width:20px}.br{color:#0e6e63;font-weight:600}.dz{color:#475569;font-size:13px;margin-top:2px}' +
+      '.adv{padding:6px 0;color:#475569;font-size:13px}' +
+      '.sign{margin-top:34px;text-align:right}.sign .nm{font-weight:700}.sign .mt{color:#64748b;font-size:12px}' +
+      '.disc{margin-top:22px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:11px;color:#64748b;line-height:1.5}' +
+      '@media print{body{padding:0}@page{margin:16mm}}' +
+      '</style></head><body>' +
+      '<div class="hd"><span class="logo">Steward<b>MD</b></span><span class="tag">Prescription</span></div>' +
+      '<div class="clinic">StewardMD' + (topic ? ' &middot; ' + esc(topic) : '') + '</div>' +
+      ((d.name || d.age) ? '<div class="pt">' + esc(d.name) + (d.age ? '  &middot;  ' + esc(d.age) : '') + '</div>' : '') +
+      '<div class="rxsym">&#8478;</div><main>' + (rows || '<div class="adv">No items.</div>') + '</main>' +
+      '<div class="sign"><div class="nm">Dr. ' + esc(docName() || "—") + '</div><div class="mt">NMC Reg: ' + esc(regNo || "—") + '  &middot;  ' + esc(date) + '</div></div>' +
+      '<div class="disc">Draft prescription generated with StewardMD. Verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +
+      '</body></html>';
+  }
+  function rxWebPrint(html) {
+    try {
+      var f = document.createElement("iframe");
+      f.setAttribute("aria-hidden", "true");
+      f.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden";
+      document.body.appendChild(f);
+      var doc = f.contentWindow.document; doc.open(); doc.write(html); doc.close();
+      f.contentWindow.focus();
+      setTimeout(function () { try { f.contentWindow.print(); } catch (e) {} setTimeout(function () { try { f.remove(); } catch (e) {} }, 1500); }, 350);
+      return true;
+    } catch (e) { return false; }
+  }
+  function rxNativePrint(html) {
+    var P = rxPlugins();
+    if (P.Filesystem && P.Filesystem.writeFile && P.Share && P.Share.share) {
+      P.Filesystem.writeFile({ path: "stewardmd-prescription.html", data: html, directory: "CACHE", encoding: "utf8" })
+        .then(function (res) { return P.Share.share({ title: "StewardMD Prescription", url: res.uri, dialogTitle: "Print or share prescription" }); })
+        .catch(function () { try { if (P.Share && P.Share.share) P.Share.share({ title: "StewardMD Prescription", text: (sheet && sheet.innerText) || "" }); } catch (e) {} });
+      return true;
+    }
+    try { if (navigator.share) { navigator.share({ title: "StewardMD Prescription", text: (sheet && sheet.innerText) || "" }); return true; } } catch (e) {}
+    return false;
+  }
+  function doRxPrint(topic, regNo) {
+    var html = rxPrintHTML(topic, regNo);
+    if (rxNative()) { if (!rxNativePrint(html)) rxWebPrint(html); return; }
+    if (!rxWebPrint(html)) rxNativePrint(html);
+  }
+
+  // Drug dictionary for text extraction — the interaction engine (~3k generics, incl. specialty
+  // drugs like antiretrovirals) plus the Drug Index. Built once, cached. Multi-word generics also
+  // index their first word (e.g. "tenofovir" from "tenofovir anhydrous").
+  var _rxDictCache = null;
+  var _RX_STOP = { alcohol: 1, oxygen: 1, water: 1, glucose: 1, dextrose: 1, saline: 1, sodium: 1, potassium: 1, calcium: 1, magnesium: 1, chloride: 1, protein: 1, albumin: 1, fluid: 1, fluids: 1 };
+  function rxDrugDict() {
+    if (_rxDictCache) return _rxDictCache;
+    var set = {};
+    function add(n) {
+      if (!n) return; var s = String(n).toLowerCase().trim();
+      if (s.length >= 5 && !_RX_STOP[s]) set[s] = 1;
+      var first = s.split(/[\s/,+()\-]/)[0];   // single-word variant of a multi-word generic
+      if (first && first.length >= 6 && !_RX_STOP[first]) set[first] = 1;
+    }
+    try { var IR = window.INTERACTION_RULES; if (IR) { if (Array.isArray(IR.generics)) IR.generics.forEach(add); if (IR.drugClasses) Object.keys(IR.drugClasses).forEach(add); } } catch (e) {}
+    try { ((window.MEDDRUGS && MEDDRUGS._list) || []).forEach(function (d) { if (d && d.generic) add(d.generic); }); } catch (e) {}
+    _rxDictCache = Object.keys(set);
+    return _rxDictCache;
+  }
+  // Pull the real drugs a free-text answer names — only names that exist in the dictionaries, in
+  // order of first appearance. Returned title-cased; buildRxLines flags them unverified (no dose).
+  function drugsFromText(text) {
+    var dict = rxDrugDict(); if (!dict.length || !text) return [];
+    var hay = " " + String(text).toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ") + " ";
+    var hits = [];
+    for (var i = 0; i < dict.length; i++) { var nm = dict[i]; var idx = hay.indexOf(" " + nm + " "); if (idx >= 0) hits.push([idx, nm]); }
+    hits.sort(function (a, b) { return a[0] - b[0]; });
+    var seen = {}, out = [];
+    for (var j = 0; j < hits.length && out.length < 15; j++) {
+      var g = hits[j][1]; if (seen[g]) continue; seen[g] = 1;
+      out.push(g.replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); }));
+    }
+    return out;
+  }
+
   // Regimen from the grounded package: advice + de-duped drug names (doses filled by the core).
   function regimenFromCtx(ctx) {
     var reg = [{ name: "Lifestyle & general measures", isAdvice: true }];
@@ -91,11 +216,19 @@
     if (t && t.default && t.default.drugRefs) drugs = drugs.concat(t.default.drugRefs);
     (t && t.alternatives || []).forEach(function (a) { drugs = drugs.concat(a.drugRefs || []); });
     if (ctx && ctx.pkg && ctx.pkg.refs && ctx.pkg.refs.drug) drugs = drugs.concat(ctx.pkg.refs.drug);
-    var seen = {};
+    var seen = {}, added = 0;
     drugs.forEach(function (d) {
       var nm = String(d || "").split(/[—,;(]/)[0].trim(); if (!nm) return;
-      var k = nm.toLowerCase(); if (seen[k]) return; seen[k] = 1; reg.push({ name: nm });
+      var k = nm.toLowerCase(); if (seen[k]) return; seen[k] = 1; reg.push({ name: nm }); added++;
     });
+    // FALLBACK: the grounded package carried no structured drugs (e.g. HIV/AIDS), but the answer
+    // text named real regimens. Extract the drugs it mentioned (validated against the dictionaries)
+    // so the pad still pre-fills them — each lands as an unverified line for the clinician to confirm.
+    if (!added && ctx && ctx.answerText) {
+      drugsFromText(ctx.answerText).forEach(function (nm) {
+        var k = nm.toLowerCase(); if (seen[k]) return; seen[k] = 1; reg.push({ name: nm });
+      });
+    }
     return reg;
   }
 
@@ -112,6 +245,61 @@
       '<input class="rx-in rx-dur" data-f="duration" value="' + esc(l.duration || "") + '" placeholder="Duration"></div>' +
       (l.unverified ? '<div class="rx-flag">⚠ Not from the Drug Index — confirm this dose before signing</div>' : "") +
       '</div>';
+  }
+
+  // Live brand/composition search on a drug line, powered by the Drug Index (MEDDRUGS).
+  // Typing in the Drug (generic) OR Brand field shows matching medicines; picking one auto-fills
+  // the composition (generic), a matching brand and the DB dose — the "auto-add once composition
+  // is selected" path, for a doctor-typed line or an AI-suggested one being edited.
+  function acAttach(line) {
+    if (!line || line.classList.contains("adv") || line._acWired) return;
+    line._acWired = true;
+    var r1 = line.querySelector(".r1");
+    var drugIn = line.querySelector(".rx-drug"), brandIn = line.querySelector(".rx-brand");
+    if (!r1 || !drugIn) return;
+    var ac = null, rows = [], active = -1;
+    function closeAc() { if (ac) { ac.remove(); ac = null; } rows = []; active = -1; }
+    function fill(r, typedBrand) {
+      drugIn.value = r.generic;
+      if (brandIn) {
+        var b = "";
+        if (typedBrand) { var q = typedBrand.toLowerCase(); b = (r.brands || []).filter(function (x) { return x.toLowerCase().indexOf(q) >= 0; })[0] || ""; }
+        brandIn.value = b || (r.brands || [])[0] || brandIn.value || "";
+      }
+      var doseIn = line.querySelector(".rx-dose"); if (doseIn && r.dose) doseIn.value = r.dose;
+      line.classList.remove("unv"); var fl = line.querySelector(".rx-flag"); if (fl) fl.remove();  // now DB-sourced
+      closeAc();
+    }
+    function paint() { Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b, i) { b.classList.toggle("on", i === active); }); }
+    function search(q, fromBrand) {
+      q = (q || "").trim();
+      if (!window.MEDDRUGS || !MEDDRUGS.searchIndex || q.length < 2) { closeAc(); return; }
+      rows = MEDDRUGS.searchIndex(q).slice(0, 8); active = -1;
+      if (!rows.length) { closeAc(); return; }
+      if (!ac) { ac = document.createElement("div"); ac.className = "rx-ac"; r1.insertAdjacentElement("afterend", ac); }
+      ac.innerHTML = rows.map(function (r, i) {
+        var brands = (r.brands || []).slice(0, 3).join(", ");
+        return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(r.generic) + '</span>' + (brands ? ' <span class="rx-ac-b">' + esc(brands) + '</span>' : '') + '<span class="rx-ac-d">' + esc(r.dose || '') + '</span></button>';
+      }).join("");
+      Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b) {
+        b.addEventListener("mousedown", function (e) { e.preventDefault(); fill(rows[+b.getAttribute("data-i")], fromBrand ? q : ""); });
+      });
+    }
+    function onKey(e, fromBrand, val) {
+      if (!ac || !rows.length) return;
+      if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, rows.length - 1); paint(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); paint(); }
+      else if (e.key === "Enter" && active >= 0) { e.preventDefault(); fill(rows[active], fromBrand ? val : ""); }
+      else if (e.key === "Escape") { closeAc(); }
+    }
+    drugIn.addEventListener("input", function () { search(drugIn.value, false); });
+    drugIn.addEventListener("keydown", function (e) { onKey(e, false, drugIn.value); });
+    drugIn.addEventListener("blur", function () { setTimeout(closeAc, 150); });
+    if (brandIn) {
+      brandIn.addEventListener("input", function () { search(brandIn.value, true); });
+      brandIn.addEventListener("keydown", function (e) { onKey(e, true, brandIn.value); });
+      brandIn.addEventListener("blur", function () { setTimeout(closeAc, 150); });
+    }
   }
 
   function renderRx(topic, lines, regNo) {
@@ -132,9 +320,12 @@
       var wrap = sheet.querySelector("#rxLines"); var i = wrap.children.length;
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }, i));
       bindDel();
+      acAttach(wrap.lastElementChild);   // brand/composition search on the new line
     });
-    sheet.querySelector("#rxPrint").addEventListener("click", function () { try { window.print(); } catch (e) {} });
+    sheet.querySelector("#rxPrint").addEventListener("click", function () { try { doRxPrint(topic, regNo); } catch (e) {} });
     bindDel();
+    // Brand/composition search + auto-fill on every drug line (skips advice lines).
+    sheet.querySelectorAll("#rxLines .rx-line").forEach(acAttach);
     function bindDel() { sheet.querySelectorAll(".rx-del").forEach(function (b) { b.onclick = function () { var ln = b.closest(".rx-line"); if (ln) ln.remove(); }; }); }
   }
 

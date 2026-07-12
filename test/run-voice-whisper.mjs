@@ -41,12 +41,20 @@ try {
   if (!ready) throw new Error("SMD_VOICE not loaded");
 
   // Helpers to set flag / (un)install a fake native Whisper plugin on the web page.
+  // IMPORTANT: whisperAvailable() gates on the REAL Capacitor.Plugins.Whisper (not the SMD_NATIVE
+  // wrapper, which exists on every native build). So a faithful "plugin present" stub must install
+  // BOTH: window.SMD_NATIVE.transcribeWhisper (routing) AND Capacitor.Plugins.Whisper (availability).
+  // Passing stubNative:"wrapper-only" models Android BEFORE the native plugin ships — the wrapper
+  // exists but Capacitor.Plugins.Whisper does not, so Clinical must stay hidden.
   const setup = async (flag, stubNative) => await ev(`
     try { ${flag ? `localStorage.setItem("smd_whisper_clinical_dictation","1")` : `localStorage.removeItem("smd_whisper_clinical_dictation")`}; } catch(e){}
     window.__wCalled = null;
     ${stubNative
       ? `window.__wDeleted = false; window.SMD_NATIVE = { transcribeWhisper: function(o){ window.__wCalled = { model:o&&o.model, language:o&&o.language, prompt:(o&&o.initialPrompt)||"", hasFinal: typeof (o&&o.onFinal)==="function" }; return function(){}; }, stopWhisper: function(){}, cancelWhisper: function(){}, whisperModelInstalled: function(){ return Promise.resolve({ installed:true, bytes:59707625 }); }, deleteWhisperModel: function(){ window.__wDeleted = true; return Promise.resolve(); } };`
       : `try { delete window.SMD_NATIVE; } catch(e){ window.SMD_NATIVE = undefined; }`}
+    ${stubNative === true
+      ? `window.Capacitor = window.Capacitor || {}; window.Capacitor.Plugins = window.Capacitor.Plugins || {}; window.Capacitor.Plugins.Whisper = { startTranscribe: function(){ return Promise.resolve({ok:true}); }, stopTranscribe: function(){ return Promise.resolve({ok:true}); }, cancel: function(){ return Promise.resolve({ok:true}); }, isModelInstalled: function(){ return Promise.resolve({installed:true}); }, downloadModel: function(){ return Promise.resolve({}); }, deleteModel: function(){ return Promise.resolve({}); }, addListener: function(){ return { remove: function(){} }; } };`
+      : `try { if (window.Capacitor && window.Capacitor.Plugins) delete window.Capacitor.Plugins.Whisper; } catch(e){}`}
     return "ok";
   `);
 
@@ -82,6 +90,21 @@ try {
     return JSON.stringify({ err: err, nullReturn: r === null });
   `);
   ok(c1.err === "clinical-unavailable" && c1.nullReturn, "clinical requested but unavailable → onError('clinical-unavailable'), returns null (no cloud)");
+
+  // ===== 2b) REGRESSION (Android before the plugin ships): SMD_NATIVE.transcribeWhisper wrapper
+  // exists but Capacitor.Plugins.Whisper does NOT ⇒ Clinical must stay hidden (was the bug: the
+  // selector showed and every Clinical tap died with "Clinical Dictation unavailable"). =====
+  await setup(true, "wrapper-only");
+  const a1b = await J(`return JSON.stringify({ whisper: SMD_VOICE.available().whisper, hasWrapper: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribeWhisper) });`);
+  ok(a1b.hasWrapper === true, "Android case: SMD_NATIVE.transcribeWhisper wrapper IS present");
+  ok(a1b.whisper === false, "Android case: wrapper present but no Capacitor.Plugins.Whisper → whisper false (not gated on the wrapper)");
+  const d1b = await J(`
+    SMD_VOICE.openDialog({ target: "text" });
+    var modes = document.querySelectorAll(".smdv-modes").length;
+    SMD_VOICE.stop();
+    return JSON.stringify({ modes: modes });
+  `);
+  ok(d1b.modes === 0, "Android case: NO Fast/Clinical selector rendered (Clinical button hidden)");
 
   // ===== 3) FLAG ON + native plugin present — selector + routing =====
   await setup(true, true);

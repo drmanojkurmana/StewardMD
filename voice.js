@@ -26,8 +26,15 @@
   // Clinical downloads the model on first use; a "Remove Clinical model" control frees the storage.
   // Users can still opt out by setting smd_whisper_clinical_dictation="0".
   function whisperFlagOn() { try { var v = localStorage.getItem("smd_whisper_clinical_dictation"); return v !== "0" && v !== "false"; } catch (e) { return true; } }
-  // Available only on a native build WITH the Whisper plugin present AND the flag enabled.
-  function whisperAvailable() { return !!(window.SMD_NATIVE && typeof window.SMD_NATIVE.transcribeWhisper === "function") && whisperFlagOn(); }
+  // Available only when the REAL native Whisper plugin is registered AND the flag is enabled.
+  // NOTE: gate on Capacitor.Plugins.Whisper — NOT on SMD_NATIVE.transcribeWhisper, which is a JS
+  // wrapper that exists on every native build (so it wrongly showed Clinical on Android, where the
+  // whisper.cpp plugin isn't built → every Clinical tap failed with "clinical-unavailable"). This
+  // hides the Clinical selector on any platform that lacks the plugin (web + Android-until-shipped).
+  function whisperPluginPresent() {
+    try { var P = window.Capacitor && window.Capacitor.Plugins; return !!(P && P.Whisper && typeof P.Whisper.startTranscribe === "function"); } catch (e) { return false; }
+  }
+  function whisperAvailable() { return whisperPluginPresent() && whisperFlagOn(); }
 
   // Default recognition language for Clinical Dictation. Whisper has no region locales, so English
   // is "en"; the INDIAN-ENGLISH flavour + medical accuracy come from the initial_prompt below and

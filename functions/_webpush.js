@@ -25,12 +25,23 @@ async function endpointId(endpoint) {
   return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("").slice(0, 32);
 }
 
-export async function saveSubscription(env, sub) {
+// meta (optional): { uid, workspaces } — used for specialty-aware targeting. Legacy
+// subs (no workspaces) are treated as "all workspaces" so they keep receiving alerts.
+export async function saveSubscription(env, sub, meta) {
   const store = pushKv(env);
   if (!store || !sub || !sub.endpoint) return false;
+  meta = meta || {};
   await store.put(SUB_PREFIX + (await endpointId(sub.endpoint)),
-    JSON.stringify({ endpoint: sub.endpoint, keys: sub.keys || null, ts: Date.now() }));
+    JSON.stringify({ endpoint: sub.endpoint, keys: sub.keys || null, uid: meta.uid || null, workspaces: Array.isArray(meta.workspaces) ? meta.workspaces : [], ts: Date.now() }));
   return true;
+}
+// A subscription matches a target workspace if no target is given (broadcast), or the
+// sub has no stored workspaces (legacy → all), or its workspaces include the target.
+export function subMatchesWorkspace(rec, workspace) {
+  if (!workspace) return true;
+  const ws = rec && rec.workspaces;
+  if (!ws || !ws.length) return true;
+  return ws.indexOf(workspace) >= 0;
 }
 export async function deleteSubscription(env, endpoint) {
   const store = pushKv(env);
@@ -63,10 +74,12 @@ async function vapidJwt(env, audience) {
   return input + "." + b64u(sig);
 }
 
-// Send a payloadless VAPID push to every stored subscription. Prunes dead ones (404/410).
-export async function sendPushToAll(env) {
+// Send a payloadless VAPID push. Prunes dead ones (404/410). Pass opts.workspace to
+// deliver only to subscribers of that workspace (plus legacy/all-workspace subs).
+export async function sendPushToAll(env, opts) {
   if (!pushEnabled(env)) return { sent: 0, total: 0, disabled: true };
-  const subs = await listSubscriptions(env);
+  let subs = await listSubscriptions(env);
+  if (opts && opts.workspace) subs = subs.filter((s) => subMatchesWorkspace(s, opts.workspace));
   const store = pushKv(env);
   let sent = 0;
   await Promise.all(subs.map(async (s) => {

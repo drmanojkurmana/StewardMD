@@ -25,10 +25,12 @@
   window.SMD_IS_NATIVE = native;
   if (!native) return;                       // web: leave everything alone
 
-  // Native device STT is iOS-only (see transcribe below). On iOS, SFSpeechRecognizer is the
-  // ONLY speech option (WKWebView has no Web Speech API). On Android the OS SpeechRecognizer
-  // thrashes under our streaming use (cancels/restarts mid-utterance → "Didn't understand"),
-  // so we let SMD_VOICE fall through to its Web Speech engine (Chrome-in-WebView) instead.
+  // Native device STT (Fast Dictation) runs on BOTH platforms via @capacitor-community/speech-
+  // recognition (iOS SFSpeechRecognizer / Android SpeechRecognizer). iOS WKWebView has no Web
+  // Speech API; the Android System WebView ALSO ships no Web Speech engine (only full Chrome does),
+  // so this native plugin is the only on-device option on Android too — do NOT gate it to iOS.
+  // (transcribe() below already handles both flavours: iOS resolves start() with the final
+  // matches; Android streams via `partialResults` and ends via `listeningState:"stopped"`.)
   var isIOS = (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) === "ios";
 
   // ── On-device Whisper (Clinical Dictation) models. The bytes are the official ggml quantised
@@ -161,8 +163,9 @@
       opts = opts || {};
       var P = plugins();
       var SP = P && P.SpeechRecognition;
-      // Android SpeechRecognizer thrashes under streaming; force fallback to Web Speech API.
-      if (!isIOS || !(SP && SP.start)) throw new Error("speech-unavailable");
+      // Use the native plugin wherever it's present (iOS + Android). Throw synchronously when it's
+      // absent so SMD_VOICE can fall back to Web Speech / AI STT.
+      if (!(SP && SP.start)) throw new Error("speech-unavailable");
       var self = this, last = "", done = false;
       // Session token: every transcribe() bumps it. Callbacks/timers left over from a PRIOR
       // session (the 450ms "stopped" finish, the 800ms stop fallback) check `current()` and
@@ -466,6 +469,10 @@
     if (!Http || !Http.request) return null;          // signal caller to fall back
     init = init || {};
     var headers = headersToObj(init.headers);
+    // Authorize the native app past the site "coming soon" access gate (functions/_middleware.js
+    // checks this against env.APP_GATE_KEY). The public web never serves this bundle — the gate
+    // returns the coming-soon page for any non-/api path — so the key stays inside the app.
+    headers["X-SMD-App"] = "smdapp_ec051e785edc74766ee4a6d37282d79ea9b0feeb";
     var ct = ""; for (var k in headers) if (k.toLowerCase() === "content-type") ct = String(headers[k]);
     var data = init.body;
     // CapacitorHttp wants string or JSON object on iOS; hand JSON bodies as objects so it encodes them.
@@ -487,8 +494,16 @@
     window.fetch = function (input, init) {
       try {
         var url = (typeof input === "string") ? input : (input && typeof input === "object" ? input.url : null);
-        if (typeof url === "string" && url.charAt(0) === "/" && url.lastIndexOf("/api/", 0) === 0) {
-          var abs = API_ORIGIN + url;
+        // Route through CapacitorHttp (a real native request, no CORS): relative "/api/*" AND the
+        // absolute drug/index API worker "https://api.stewardmd.in/*" — the latter is cross-origin
+        // from the WebView (origin https://localhost) and would otherwise leak out as a CORS-blocked
+        // browser request (Drug Database came up empty). Absolute URLs are used as-is.
+        var abs = null;
+        if (typeof url === "string") {
+          if (url.charAt(0) === "/" && url.lastIndexOf("/api/", 0) === 0) abs = API_ORIGIN + url;
+          else if (url.lastIndexOf("https://api.stewardmd.in", 0) === 0 || url.lastIndexOf("http://api.stewardmd.in", 0) === 0) abs = url;
+        }
+        if (abs) {
           var merged = init || (input && typeof input === "object" ? { method: input.method, headers: input.headers } : {});
           var r = nativeApiFetch(abs, merged);
           if (r) return r;                              // native request in flight

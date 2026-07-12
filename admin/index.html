@@ -55,6 +55,8 @@
   <div class="wrap">
     <div class="tabs" id="tabs">
       <button class="tab on" data-p="notif">🔔 Notifications</button>
+      <button class="tab" data-p="sources">📚 Medical Sources</button>
+      <button class="tab" data-p="logs">🛰️ Crawl Logs</button>
       <button class="tab" data-p="verif">🩺 Verifications</button>
       <button class="tab" data-p="watch">🧪 Lab-watch</button>
       <button class="tab" data-p="push">📣 Push</button>
@@ -113,6 +115,39 @@
         <div class="msg" id="pMsg"></div>
       </div>
     </div>
+
+    <!-- MEDICAL SOURCES -->
+    <div class="pane" id="pane-sources" data-need-auth>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="flex:1">Add / edit a source</b>
+          <button class="ghost" id="sSync" style="padding:7px 11px">↻ Force refresh (run pipeline)</button></div>
+        <div class="hint" style="margin:6px 0 4px">Sources drive the daily crawl. <code>rss</code> parses a feed; <code>head</code> HEAD-polls a page and only summarizes when it changes. AI runs only on genuinely new/changed docs.</div>
+        <div class="row"><div><label for="sId">ID (slug) *</label><input id="sId" maxlength="40" placeholder="e.g. esc-cardio"></div><div><label for="sName">Name *</label><input id="sName" maxlength="120" placeholder="European Society of Cardiology"></div></div>
+        <div class="row">
+          <div><label>Workspace</label><select id="sWs"><option value="internal_medicine">Internal Medicine</option><option value="surgery">Surgery</option><option value="ent">ENT</option><option value="ophthalmology">Ophthalmology</option><option value="obstetrics_gynaecology">Obstetrics & Gynaecology</option><option value="urology">Urology</option><option value="dentistry_omfs">Dentistry / OMFS</option><option value="paediatrics">Paediatrics</option></select></div>
+          <div><label>Branch (IM sub-specialty)</label><select id="sBranch"><option value="">— general —</option><option value="cardiology">Cardiology</option><option value="nephrology">Nephrology</option><option value="pulmonology">Pulmonology</option><option value="endocrinology">Endocrinology</option><option value="infectious_diseases">Infectious Diseases</option><option value="critical_care">Critical Care</option><option value="gastroenterology">Gastroenterology</option><option value="hepatology">Hepatology</option><option value="oncology">Oncology</option><option value="emergency_medicine">Emergency Medicine</option><option value="family_medicine">Family Medicine</option></select></div>
+          <div><label>Type</label><select id="sType"><option value="guideline">Guideline</option><option value="drug_approval">Drug approval</option><option value="safety_alert">Safety alert</option><option value="trial">Major trial</option></select></div>
+          <div><label>Parser</label><select id="sParser"><option value="rss">RSS feed</option><option value="head">HEAD poll</option><option value="litapi">Literature API (Europe PMC)</option></select></div>
+        </div>
+        <label for="sRss">RSS URL (parser = rss)</label><input id="sRss" maxlength="400" placeholder="https://…/rss.xml">
+        <label for="sPage">Guideline page (parser = head)</label><input id="sPage" maxlength="400" placeholder="https://…/guidelines">
+        <label for="sQuery">Europe PMC query (parser = litapi)</label><input id="sQuery" maxlength="600" placeholder='(AUTH:&quot;KDIGO&quot; OR TITLE:&quot;KDIGO&quot;) AND PUB_TYPE:&quot;Guideline&quot;'>
+        <label for="sHome">Homepage</label><input id="sHome" maxlength="400" placeholder="https://…">
+        <div class="row"><div><label for="sPrio">Priority (lower first)</label><input id="sPrio" type="number" value="100"></div><div class="chk" style="align-self:flex-end"><input id="sEnabled" type="checkbox" checked><label for="sEnabled">Enabled</label></div></div>
+        <div style="margin-top:14px;display:flex;gap:8px"><button class="primary" id="sSave">Save source</button><button class="ghost" id="sClear">Clear form</button></div>
+        <div class="msg" id="sMsg"></div>
+      </div>
+      <div class="card"><div style="display:flex;align-items:center"><b style="flex:1">Registered sources</b><button class="ghost" id="sReload" style="padding:7px 11px">Reload</button></div><div id="sList" style="margin-top:12px"></div></div>
+    </div>
+
+    <!-- CRAWL LOGS -->
+    <div class="pane" id="pane-logs" data-need-auth>
+      <div class="card">
+        <div style="display:flex;align-items:center"><b style="flex:1">Crawl logs (newest first)</b><button class="ghost" id="lReload" style="padding:7px 11px">Reload</button></div>
+        <div class="hint" style="margin:6px 0 4px"><code>unchanged</code> = detected but skipped, no AI. <code>new</code>/<code>updated</code> = summarized once. <code>error</code>/<code>skipped</code> as labelled.</div>
+        <div class="msg" id="lMsg"></div><div id="lList" style="margin-top:12px"></div>
+      </div>
+    </div>
   </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -134,7 +169,7 @@
   // ---- panes/gate visibility (only show a pane when signed in) ----
   function showActivePane(){
     var signedIn=!!(auth&&auth.currentUser);
-    ["notif","verif","watch","push"].forEach(function(p){ $("pane-"+p).classList.toggle("on", signedIn && p===activePane); });
+    ["notif","sources","logs","verif","watch","push"].forEach(function(p){ $("pane-"+p).classList.toggle("on", signedIn && p===activePane); });
     $("gate").style.display=signedIn?"none":"";
   }
 
@@ -161,7 +196,7 @@
       .then(function(x){ if(x.s===200&&x.d.ok){say("nMsg","ok","✅ Published.");$("nTitle").value="";$("nBody").value="";$("nUrl").value="";$("nPin").checked=false;nLoad();} else say("nMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); })
       .catch(function(){say("nMsg","err","Sign in first.");});
   }
-  function nSync(){ say("nMsg","","Pulling FDA…"); api("/api/updates/sync",{method:"POST"}).then(function(x){ if(x.s===200&&x.d.ok){say("nMsg","ok","✅ Added "+x.d.added+" · "+x.d.total+" total.");nLoad();} else say("nMsg","err","Failed: "+(x.d.error||x.s)); }); }
+  function nSync(){ say("nMsg","","Running sync…"); api("/api/updates/sync",{method:"POST"}).then(function(x){ if(x.s===200&&x.d.ok!==false){say("nMsg","ok","✅ new="+(x.d.new||0)+" updated="+(x.d.updated||0)+" unchanged="+(x.d.unchanged||0));nLoad();} else say("nMsg","err","Failed: "+(x.d.error||x.s)); }); }
   function nDel(id){ if(!confirm("Delete this notification?"))return; api("/api/updates/"+encodeURIComponent(id),{method:"DELETE"}).then(nLoad); }
   function nLoad(){ var el=$("nList"); el.innerHTML='<div class="hint">Loading…</div>';
     fetch("/api/updates").then(function(r){return r.json();}).then(function(j){ var items=(j&&j.items)||[]; if(!items.length){el.innerHTML='<div class="hint">No notifications yet.</div>';return;}
@@ -192,8 +227,32 @@
   function pStatus(){ fetch("/api/push/status").then(function(r){return r.json();}).then(function(d){ $("pStatus").textContent="Web push: "+(d.enabled?"on":"off")+" · Native: "+(d.native?"on":"off"); }).catch(function(){}); }
   $("pSend").onclick=function(){ say("pMsg","","Sending…"); api("/api/push/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:$("pTitle").value||"StewardMD",body:$("pBody").value||""})}).then(function(x){ if(x.s===200){say("pMsg","ok","✅ Sent — web:"+JSON.stringify(x.d.web||{})+" native:"+JSON.stringify(x.d.native||{}));} else say("pMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); }).catch(function(){say("pMsg","err","Sign in first.");}); };
 
+  // ---- Medical Sources ----
+  function sForm(){ return {id:$("sId").value.trim(),name:$("sName").value.trim(),workspace:$("sWs").value,branch:$("sBranch").value,type:$("sType").value,parser_type:$("sParser").value,rss_url:$("sRss").value.trim(),guideline_page:$("sPage").value.trim(),query:$("sQuery").value.trim(),homepage:$("sHome").value.trim(),priority:parseInt($("sPrio").value,10)||100,enabled:$("sEnabled").checked}; }
+  function sFill(s){ $("sId").value=s.id||"";$("sName").value=s.name||"";$("sWs").value=s.workspace||"internal_medicine";$("sBranch").value=s.branch||"";$("sType").value=s.type||"guideline";$("sParser").value=s.parser_type||"rss";$("sRss").value=s.rss_url||"";$("sPage").value=s.guideline_page||"";$("sQuery").value=s.query||"";$("sHome").value=s.homepage||"";$("sPrio").value=s.priority||100;$("sEnabled").checked=!!s.enabled; window.scrollTo(0,0); }
+  function sClear(){ sFill({enabled:true,priority:100}); $("sId").value="";$("sName").value=""; }
+  function sSave(){ var f=sForm(); if(!f.id||!f.name){say("sMsg","err","ID and Name required.");return;} say("sMsg","","Saving…");
+    api("/api/updates/sources",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(f)}).then(function(x){ if(x.s===200&&x.d.ok){say("sMsg","ok","✅ Saved "+x.d.id);sLoad();} else say("sMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); }).catch(function(){say("sMsg","err","Sign in first.");}); }
+  function sDel(id){ if(!confirm("Delete source "+id+"? (existing updates are kept)"))return; api("/api/updates/sources/"+encodeURIComponent(id),{method:"DELETE"}).then(sLoad); }
+  function sLoad(){ var el=$("sList"); el.innerHTML='<div class="hint">Loading…</div>';
+    api("/api/updates/sources").then(function(x){ if(x.s===401){el.innerHTML='<div class="hint">Not an approved owner.</div>';return;} var list=(x.d&&x.d.sources)||[]; if(!list.length){el.innerHTML='<div class="hint">No sources yet — add one above, or seed with functions/db/seed_sources.sql.</div>';return;}
+      el.innerHTML=list.map(function(s){ return '<div class="item"><div class="h"><span class="cat">'+esc(s.parser_type)+'</span><span class="cat">'+esc(s.type)+'</span>'+(s.enabled?'<span class="st verified">on</span>':'<span class="st unverified">off</span>')+'<span class="t">#'+esc(String(s.priority))+'</span></div><div class="title">'+esc(s.name)+' <span class="hint">('+esc(s.id)+')</span></div><div class="meta">'+esc(s.rss_url||s.guideline_page||s.homepage||"—")+(s.last_crawl_ts?'<br><b>Last crawl:</b> '+esc(when(s.last_crawl_ts)):'')+'</div><div class="foot"><button class="ghost" data-edit="'+esc(s.id)+'">Edit</button><button class="del" data-sdel="'+esc(s.id)+'" style="margin-left:auto">Delete</button></div></div>'; }).join("");
+      el.querySelectorAll("[data-edit]").forEach(function(b){b.onclick=function(){var id=b.getAttribute("data-edit");var s=list.filter(function(z){return z.id===id;})[0];if(s)sFill(s);};});
+      el.querySelectorAll("[data-sdel]").forEach(function(b){b.onclick=function(){sDel(b.getAttribute("data-sdel"));};});
+    }).catch(function(){el.innerHTML='<div class="hint">Could not load.</div>';}); }
+  $("sSave").onclick=sSave; $("sClear").onclick=sClear; $("sReload").onclick=sLoad;
+  $("sSync").onclick=function(){ say("sMsg","","Running pipeline…"); api("/api/updates/sync",{method:"POST"}).then(function(x){ if(x.s===200&&x.d.ok!==false){say("sMsg","ok","✅ new="+(x.d.new||0)+" updated="+(x.d.updated||0)+" unchanged="+(x.d.unchanged||0)+" AI="+(x.d.ai||0));sLoad();} else say("sMsg","err","Failed: "+(x.d.error||x.s)); }).catch(function(){say("sMsg","err","Sign in first.");}); };
+
+  // ---- Crawl Logs ----
+  function lLoad(){ var el=$("lList"); el.innerHTML='<div class="hint">Loading…</div>';
+    api("/api/updates/crawl-logs?limit=200").then(function(x){ if(x.s===401){el.innerHTML='<div class="hint">Not an approved owner.</div>';return;} var logs=(x.d&&x.d.logs)||[]; if(!logs.length){el.innerHTML='<div class="hint">No crawl logs yet — run a sync from Medical Sources.</div>';return;}
+      var stc={unchanged:"unverified",new:"verified",updated:"verified",error:"rejected",skipped:"pending"};
+      el.innerHTML=logs.map(function(g){ return '<div class="item"><div class="h"><span class="st '+(stc[g.status]||"unverified")+'">'+esc(g.status)+'</span><span class="cat">'+esc(g.source_id||"—")+'</span>'+(g.ai_used?'<span class="st pending">AI</span>':'')+'<span class="t">'+esc(when(g.ts))+'</span></div>'+(g.detail?'<div class="body">'+esc(g.detail)+'</div>':'')+'</div>'; }).join("");
+    }).catch(function(){el.innerHTML='<div class="hint">Could not load.</div>';}); }
+  $("lReload").onclick=lLoad;
+
   // ---- refresh a pane's data when shown / on sign-in ----
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="notif")nLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); }
 
   if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u){ var on=document.querySelector(".tab.on"); refresh(on?on.getAttribute("data-p"):"notif"); } }); }
   else { $("who").textContent="Firebase failed to load."; }

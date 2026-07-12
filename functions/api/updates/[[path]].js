@@ -1,209 +1,230 @@
-/* StewardMD — Notifications / Medical Updates API (Cloudflare Pages Function)
+/* StewardMD — Medical Updates API (Cloudflare Pages Function).
  *
- * Powers the in-app 🔔 notifications panel. Two kinds of updates:
- *   • MANUAL   — published by the admin from /admin/updates.html (what you type).
- *   • AUTO     — trusted medical updates ingested from FDA RSS feeds (new drug
- *                approvals, MedWatch safety alerts, recalls), filtered to the
- *                important ones. Triggered by POST /api/updates/sync (the Worker
- *                cron calls this on a schedule; the admin page has a button too).
+ * Powers the 🔔 bell "Medical Updates" tab + guideline detail page + admin registry.
+ * Backed by Cloudflare D1 (binding UPDATES_DB, "stewardmd-updates"). Reads fall back to
+ * the legacy KV feed (updates:list) when D1 is not yet bound so the bell never goes dark.
  *
- * Content here is PUBLIC, non-PHI reference information → GET is open. Writes
- * (publish / delete / sync) require the admin token.
+ * Content is PUBLIC non-PHI reference info → reads are open. Writes (publish, delete,
+ * sync, source CRUD, migrate) require owner auth (Google owner login OR X-Admin-Token).
  *
  * Routes:
- *   GET    /api/updates            -> { enabled, items:[...] }         (public)
- *   POST   /api/updates            -> { ok, item }   body={title,body,category,url,importance}  (admin)
- *   POST   /api/updates/sync       -> { ok, added, total }            (admin; pulls FDA feeds)
- *   DELETE /api/updates/:id        -> { ok }                          (admin)
- *
- * Config (Cloudflare Pages env):
- *   KV binding  UPDATES_KV  (or falls back to GHIS_KV / CASES_KV)  — key "updates:list"
- *   Secret      UPDATES_ADMIN_TOKEN  — required to publish/delete/sync
- *   Optional    UPDATES_FEEDS  — comma-separated "category|url" trusted RSS feeds
- *                                (defaults to FDA MedWatch, press releases, recalls)
+ *   GET    /api/updates                         -> { enabled, items, nextCursor }   (public feed; filters: type, workspace, q, before, limit)
+ *   GET    /api/updates?id=<id>                  -> { enabled, item, structured, versions, has_whats_changed }  (public detail)
+ *   GET    /api/updates/sources                 -> { sources }                      (admin)
+ *   GET    /api/updates/crawl-logs              -> { logs }                         (admin)
+ *   POST   /api/updates                         -> { ok, item }  manual publish     (admin)
+ *   POST   /api/updates/sync                    -> { ok, ...tally }  run pipeline    (admin/cron)
+ *   POST   /api/updates/migrate                 -> { ok, imported }  KV -> D1        (admin, one-time)
+ *   POST   /api/updates/sources                 -> { ok }  create/update source     (admin)
+ *   DELETE /api/updates/sources/:id             -> { ok }                           (admin)
+ *   DELETE /api/updates/:id                     -> { ok }                           (admin)
  */
 import { sendPushToAll, pushEnabled } from "../../_webpush.js";
 import { sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
-
-const LIST_KEY = "updates:list";
-const CAP = 120;                 // keep the newest N
-const DESC_MAX = 600;
-
-// Fire OS push banners to subscribed devices (best-effort, non-blocking).
-// Web push is payloadless (the SW fetches the newest item); native (APNs/FCM) needs
-// the text in the payload, so pass the item's title/body when we have it.
-function firePush(context, item) {
-  try { if (pushEnabled(context.env)) context.waitUntil(sendPushToAll(context.env)); } catch (e) {}
-  try {
-    if (nativePushEnabled(context.env)) {
-      const msg = item
-        ? { title: item.title || "StewardMD", body: (item.source ? item.source + " · " : "") + (item.category || "update"), url: item.url || "/", tag: item.id ? "smd-" + item.id : undefined }
-        : { title: "StewardMD", body: "New medical update", url: "/" };
-      context.waitUntil(sendNativeToAll(context.env, msg));
-    }
-  } catch (e) {}
-}
-
 import { ownerOK } from "../../_adminauth.js";
+import { identify } from "../../_fbauth.js";
+import * as repo from "../../_updates_repo.js";
+import { runPipeline } from "../../_updates_pipeline.js";
 
-function kv(env) { return env.UPDATES_KV || env.GHIS_KV || env.CASES_KV || null; }
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
 });
 
-// admin token check → true/false, or null when not configured (publishing disabled)
-function adminOK(request, env) {
-  const want = env.UPDATES_ADMIN_TOKEN || "";
-  if (!want) return null;
-  const got = request.headers.get("X-Admin-Token") || "";
-  if (got.length !== want.length) return false;
-  let d = 0; for (let i = 0; i < got.length; i++) d |= got.charCodeAt(i) ^ want.charCodeAt(i);
-  return d === 0;
-}
-
 const CATS = ["drug", "approval", "safety", "recall", "guideline", "study", "general"];
+const CAT_TYPE = { approval: "drug_approval", drug: "drug_approval", safety: "safety_alert", recall: "safety_alert", guideline: "guideline", study: "trial", general: "guideline" };
+const WORKSPACES = ["internal_medicine", "surgery", "ent", "ophthalmology", "obstetrics_gynaecology", "urology", "dentistry_omfs", "paediatrics"];
+const BRANCHES = ["cardiology", "nephrology", "pulmonology", "endocrinology", "infectious_diseases", "critical_care", "gastroenterology", "hepatology", "oncology", "emergency_medicine", "family_medicine"];
+function normBranch(v) { v = String(v || "").toLowerCase().trim(); return BRANCHES.indexOf(v) >= 0 ? v : ""; }
+function cleanBranches(v) { return Array.isArray(v) ? v.filter((b) => BRANCHES.indexOf(b) >= 0) : []; }
 function normCategory(c) { c = String(c || "").toLowerCase().trim(); return CATS.indexOf(c) >= 0 ? c : "general"; }
 function normImportance(v) { v = String(v || "").toLowerCase().trim(); return (v === "high" || v === "critical") ? v : "normal"; }
-function newId() { return "u" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+function normWorkspace(v) { v = String(v || "").toLowerCase().trim(); return WORKSPACES.indexOf(v) >= 0 ? v : "internal_medicine"; }
+function cleanWorkspaces(v) { return Array.isArray(v) ? v.filter((w) => WORKSPACES.indexOf(w) >= 0) : []; }
+function normType(t) { t = String(t || "").toLowerCase().trim(); return ["guideline", "drug_approval", "safety_alert", "trial"].indexOf(t) >= 0 ? t : ""; }
 
-async function readList(store) { try { return (await store.get(LIST_KEY, "json")) || []; } catch (e) { return []; } }
-async function writeList(store, list) {
-  list.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || (b.ts || 0) - (a.ts || 0));
-  const capped = list.slice(0, CAP);
-  await store.put(LIST_KEY, JSON.stringify(capped));
-  return capped;
-}
-
-/* ---------------- FDA feed ingest (trusted, auto) ---------------- */
-// Default trusted sources. FDA RSS is curated + authoritative. Category is the feed's.
-const DEFAULT_FEEDS = [
-  { category: "safety",   url: "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/medwatch/rss.xml", source: "FDA MedWatch" },
-  { category: "approval", url: "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml", source: "FDA Press" },
-  { category: "recall",   url: "https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/recalls/rss.xml", source: "FDA Recalls" }
-];
-// Keep only genuinely important items (approvals / safety / recalls / label changes).
-// NB: no trailing \b — these are word STEMS (approv → approves/approved/approval),
-// so anchoring the end would reject the inflected forms we most want.
-const IMPORTANT_RE = /\b(approv|clearance|authoriz|granted|safety|warning|boxed|black[-\s]?box|recall|withdraw|alert|contraindicat|shortage|label|guidance|adverse|indication|black box)/i;
-// Drop the non-medicine noise that the general FDA recall feed carries (pet food,
-// cosmetics, and undeclared-allergen food alerts) — irrelevant to a clinical app.
-const NON_MEDICAL_RE = /\b(pet food|dog food|cat food|pet treats?|dogs?|cats?|puppy|kitten|veterinary|animal (health|feed)|shampoo|conditioner|lotion|cosmetic|makeup|mascara|eyeliner|fragrance|perfume|undeclared|allergy alert|ice cream|cheese|yogurt|frozen (food|meal)|snack|beverage|seafood|salad|sausage|poultry)\b/i;
-
-function feedsFromEnv(env) {
-  if (!env.UPDATES_FEEDS) return DEFAULT_FEEDS;
-  return String(env.UPDATES_FEEDS).split(",").map((s) => {
-    const parts = s.split("|"); const url = (parts[1] || parts[0] || "").trim();
-    return url ? { category: normCategory(parts[1] ? parts[0] : "general"), url, source: "FDA" } : null;
-  }).filter(Boolean);
-}
-function decodeEntities(s) {
-  return String(s).replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
-    .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, " ")
-    .replace(/&#(\d+);/g, (m, n) => { try { return String.fromCharCode(+n); } catch (e) { return m; } });
-}
-function stripTags(s) { return String(s).replace(/<[^>]+>/g, " ").replace(/\s{2,}/g, " ").trim(); }
-function clean(s) { return decodeEntities(stripTags(decodeEntities(s || ""))); }
-
-function parseRss(xml) {
-  const out = [];
-  const blocks = String(xml || "").split(/<item[\s>]/i).slice(1);
-  for (const raw of blocks) {
-    const seg = raw.split(/<\/item>/i)[0];
-    const pick = (tag) => { const m = seg.match(new RegExp("<" + tag + "[^>]*>([\\s\\S]*?)</" + tag + ">", "i")); return m ? clean(m[1]) : ""; };
-    const title = pick("title"); if (!title) continue;
-    const link = pick("link") || pick("guid");
-    const desc = pick("description");
-    const date = pick("pubDate") || pick("updated") || pick("date");
-    const ts = date ? (Date.parse(date) || Date.now()) : Date.now();
-    out.push({ title, url: link, body: desc.slice(0, DESC_MAX), ts });
-  }
-  return out;
-}
-
-async function ingestFeeds(env, store) {
-  const feeds = feedsFromEnv(env);
-  const list = await readList(store);
-  const seen = new Set(list.map((x) => x.url || x.title));
-  let added = 0;
-  for (const f of feeds) {
-    let xml = "";
-    try {
-      const r = await fetch(f.url, { headers: { "User-Agent": "StewardMD/1.0 (+https://stewardmd.in)", "Accept": "application/rss+xml, application/xml, text/xml" }, cf: { cacheTtl: 300 } });
-      if (!r.ok) continue;
-      xml = await r.text();
-    } catch (e) { continue; }
-    for (const it of parseRss(xml)) {
-      const key = it.url || it.title;
-      if (seen.has(key)) continue;
-      if (!IMPORTANT_RE.test(it.title + " " + it.body)) continue;         // only important items
-      if (NON_MEDICAL_RE.test(it.title + " " + it.body)) continue;        // skip pet-food / cosmetic / food-allergen noise
-      seen.add(key);
-      list.push({ id: newId(), title: it.title.slice(0, 200), body: it.body,
-        category: f.category, source: f.source, url: it.url,
-        importance: /recall|boxed|black[-\s]?box|withdraw|contraindicat/i.test(it.title + it.body) ? "high" : "normal",
-        ts: it.ts, auto: true });
-      added++;
+// Fire OS push banners (best-effort). Web push is payloadless (SW fetches newest);
+// native carries the text. Pass `workspace` to deliver only to that workspace's
+// subscribers (specialty-aware); omit it to broadcast to everyone.
+function firePush(context, item, workspace) {
+  const wsOpt = workspace ? { workspace } : undefined;
+  try { if (pushEnabled(context.env)) context.waitUntil(sendPushToAll(context.env, wsOpt)); } catch (e) {}
+  try {
+    if (nativePushEnabled(context.env)) {
+      const msg = item
+        ? { title: item.title || "StewardMD", body: (item.organization || item.source ? (item.organization || item.source) + " · " : "") + (item.category || "update"), url: item.url || "/", tag: item.id ? "smd-" + item.id : undefined }
+        : { title: "StewardMD", body: "New medical update", url: "/" };
+      context.waitUntil(sendNativeToAll(context.env, msg, wsOpt));
     }
+  } catch (e) {}
+}
+// Group new/updated pipeline items by workspace and fire one targeted push per
+// workspace (a representative item per group — highest importance first).
+function firePushForItems(context, items) {
+  const rank = { critical: 3, high: 2, normal: 1 };
+  const byWs = {};
+  for (const it of items || []) {
+    const w = it.workspace || "internal_medicine";
+    if (!byWs[w] || (rank[it.importance] || 1) > (rank[byWs[w].importance] || 1)) byWs[w] = it;
   }
-  const saved = await writeList(store, list);
-  return { added, total: saved.length };
+  Object.keys(byWs).forEach((w) => firePush(context, byWs[w], w));
 }
 
-/* ---------------- entry ---------------- */
+// One-time import of the legacy KV feed (updates:list) into D1.
+async function migrateKvToD1(env) {
+  const kv = env.UPDATES_KV || env.GHIS_KV || env.CASES_KV || null;
+  if (!kv) return { imported: 0, note: "no-kv" };
+  let list = [];
+  try { list = (await kv.get("updates:list", "json")) || []; } catch (e) {}
+  let imported = 0;
+  for (const x of list) {
+    const docKey = x.url || x.title;
+    if (!docKey) continue;
+    if (await repo.getByDocKey(env, docKey)) continue;
+    const type = CAT_TYPE[normCategory(x.category)] || "guideline";
+    await repo.insertUpdate(env, {
+      doc_key: docKey, source_id: "legacy", type, organization: x.source || "StewardMD",
+      workspace: "internal_medicine", title: String(x.title || "").slice(0, 240), body: String(x.body || "").slice(0, 240),
+      category: normCategory(x.category), published_ts: x.ts || Date.now(), importance: normImportance(x.importance),
+      est_read_min: 1, summary: String(x.body || ""), summary_json: "", official_url: x.url || "",
+      content_hash: "", auto: x.auto ? 1 : 0, pinned: x.pinned ? 1 : 0,
+    });
+    imported++;
+  }
+  return { imported, total: list.length };
+}
+
 export async function onRequest(context) {
   const { request, env, params } = context;
-  const store = kv(env);
-  const id = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
   const method = request.method;
+  const url = new URL(request.url);
+  const parts = Array.isArray(params.path) ? params.path.filter(Boolean) : (params.path ? [params.path] : []);
+  const head = parts[0] || "";
 
-  if (!store) {
-    if (method === "GET" && !id) return json({ enabled: false, items: [] });
-    return json({ enabled: false, error: "no-store" }, 501);
+  /* ---------------- public reads ---------------- */
+  if (method === "GET" && !head) {
+    const idq = url.searchParams.get("id");
+    if (idq) {
+      const detail = await repo.getById(env, idq);
+      if (!detail) return json({ enabled: repo.hasDb(env), error: "not-found" }, 404);
+      return json({ enabled: true, item: detail.item, structured: detail.structured, versions: detail.versions, has_whats_changed: (detail.versions || []).length > 0 });
+    }
+    const feed = await repo.getFeed(env, {
+      type: url.searchParams.get("type") || "all",
+      workspace: url.searchParams.get("workspace") || "all",
+      branch: url.searchParams.get("branch") || "all",
+      q: url.searchParams.get("q") || "",
+      auto: url.searchParams.get("auto"),
+      before: url.searchParams.get("before") || "",
+      limit: url.searchParams.get("limit") || "20",
+    });
+    return json({ enabled: repo.hasDb(env) || feed.items.length > 0, items: feed.items, nextCursor: feed.nextCursor });
   }
 
-  // Public read
-  if (method === "GET" && !id) {
-    const items = await readList(store);
-    return json({ enabled: true, items });
+  /* ---------- user-authenticated (any signed-in doctor; NOT owner-only) ---------- */
+  if (head === "prefs") {
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "sign-in-required" }, 401);
+    if (method === "GET") {
+      const prefs = (await repo.getPrefs(env, uid)) || { uid, workspaces: ["internal_medicine"], branches: [], push_enabled: true };
+      return json({ ok: true, prefs });
+    }
+    if (method === "POST") {
+      if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
+      let body = {}; try { body = await request.json(); } catch (e) {}
+      const workspaces = cleanWorkspaces(body.workspaces);
+      const branches = cleanBranches(body.branches);
+      const push_enabled = body.push_enabled !== false;
+      await repo.savePrefs(env, uid, { workspaces, branches, push_enabled });
+      return json({ ok: true, prefs: { uid, workspaces: workspaces.length ? workspaces : ["internal_medicine"], branches, push_enabled } });
+    }
+    return json({ error: "bad-request" }, 400);
+  }
+  if (head === "bookmarks") {
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "sign-in-required" }, 401);
+    if (method === "GET") return json({ ok: true, ids: await repo.listBookmarkIds(env, uid), items: await repo.listBookmarkItems(env, uid) });
+    if (method === "POST") {
+      if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
+      let body = {}; try { body = await request.json(); } catch (e) {}
+      if (!body.id) return json({ error: "id-required" }, 400);
+      await repo.addBookmark(env, uid, String(body.id));
+      return json({ ok: true });
+    }
+    if (method === "DELETE" && parts[1]) {
+      if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
+      await repo.removeBookmark(env, uid, parts[1]);
+      return json({ ok: true });
+    }
+    return json({ error: "bad-request" }, 400);
   }
 
-  // Everything below is admin-only (owner Google login OR legacy admin token)
+  /* ---------------- admin gate (everything below) ---------------- */
   if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
 
   try {
-    if (method === "POST" && id === "sync") {
-      const res = await ingestFeeds(env, store);
-      if (res.added > 0) firePush(context);           // banner devices when the FDA pull adds something
+    if (method === "GET" && head === "sources") return json({ sources: await repo.listSources(env, false) });
+    if (method === "GET" && head === "crawl-logs") return json({ logs: await repo.listCrawlLogs(env, url.searchParams.get("limit")) });
+
+    if (method === "POST" && head === "sync") {
+      const res = await runPipeline(env);
+      if (res && res.items && res.items.length) firePushForItems(context, res.items);
+      return json(res.ok === false ? { ok: false, ...res } : { ok: true, ...res });
+    }
+
+    if (method === "POST" && head === "migrate") {
+      if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
+      const res = await migrateKvToD1(env);
       return json({ ok: true, ...res });
     }
-    if (method === "POST" && !id) {
-      let body = {};
-      try { body = await request.json(); } catch (e) {}
-      const title = String(body.title || "").trim().slice(0, 200);
+
+    if (method === "POST" && head === "sources") {
+      if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
+      let body = {}; try { body = await request.json(); } catch (e) {}
+      const id = String(body.id || "").trim().toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40);
+      if (!id) return json({ error: "id-required" }, 400);
+      await repo.saveSource(env, {
+        id, name: String(body.name || id).slice(0, 120), workspace: normWorkspace(body.workspace), branch: normBranch(body.branch),
+        type: normType(body.type) || "guideline", query: String(body.query || "").slice(0, 600), homepage: String(body.homepage || "").slice(0, 400),
+        guideline_page: String(body.guideline_page || "").slice(0, 400), rss_url: String(body.rss_url || "").slice(0, 400),
+        parser_type: body.parser_type === "head" ? "head" : "rss", priority: parseInt(body.priority, 10) || 100,
+        enabled: body.enabled ? 1 : 0,
+      });
+      return json({ ok: true, id });
+    }
+
+    if (method === "POST" && !head) {
+      if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
+      let body = {}; try { body = await request.json(); } catch (e) {}
+      const title = String(body.title || "").trim().slice(0, 240);
       if (!title) return json({ error: "title-required" }, 400);
-      const item = {
-        id: newId(), title,
-        body: String(body.body || "").trim().slice(0, 4000),
-        category: normCategory(body.category),
-        importance: normImportance(body.importance),
-        source: String(body.source || "StewardMD").slice(0, 60),
-        url: String(body.url || "").slice(0, 400),
-        pinned: !!body.pinned,
-        ts: Date.now(), auto: false
-      };
-      const list = await readList(store);
-      list.push(item);
-      await writeList(store, list);
-      firePush(context, item);                          // banner subscribed devices on manual publish
+      const category = normCategory(body.category);
+      const type = normType(body.type) || CAT_TYPE[category] || "guideline";
+      const bodyText = String(body.body || "").trim().slice(0, 4000);
+      const id = await repo.insertUpdate(env, {
+        doc_key: String(body.url || "").slice(0, 500) || ("manual:" + repo.newId("m")),
+        source_id: "manual", type, organization: String(body.source || "StewardMD").slice(0, 120),
+        workspace: normWorkspace(body.workspace), branch: normBranch(body.branch), title, body: bodyText.slice(0, 240),
+        category, published_ts: Date.now(), importance: normImportance(body.importance),
+        est_read_min: Math.max(1, Math.round(bodyText.split(/\s+/).length / 200)) || 1,
+        summary: bodyText, summary_json: "", official_url: String(body.url || "").slice(0, 500),
+        content_hash: "", auto: 0, pinned: !!body.pinned,
+      });
+      const detail = await repo.getById(env, id);
+      const item = detail && detail.item;
+      firePush(context, item, item && item.workspace);
       return json({ ok: true, item });
     }
-    if (method === "DELETE" && id) {
-      const list = (await readList(store)).filter((x) => x.id !== id);
-      await writeList(store, list);
+
+    if (method === "DELETE" && head === "sources" && parts[1]) {
+      await repo.deleteSource(env, parts[1]);
       return json({ ok: true });
     }
-    return json({ error: "bad-request", method, id }, 400);
+    if (method === "DELETE" && head) {
+      await repo.deleteUpdate(env, head);
+      return json({ ok: true });
+    }
+
+    return json({ error: "bad-request", method, head }, 400);
   } catch (e) {
     return json({ error: String((e && e.message) || e) }, 500);
   }
