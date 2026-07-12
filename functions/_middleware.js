@@ -94,6 +94,13 @@ export async function onRequest(context) {
     if (adminTok && env && env.UPDATES_ADMIN_TOKEN && safeEqual(adminTok, env.UPDATES_ADMIN_TOKEN)) {
       return next();
     }
+    // The native app authorizes its API calls with a shared app key (native-bridge.js sends
+    // X-SMD-App). The public web app never runs (its HTML is gated), so this only lets the
+    // real native app through — keeping the site private to public browsers/scrapers.
+    const appKey = request.headers.get("X-SMD-App");
+    if (appKey && env && env.APP_GATE_KEY && safeEqual(appKey, env.APP_GATE_KEY)) {
+      return next();
+    }
     return new Response(
       JSON.stringify({ error: "unavailable", message: "StewardMD is temporarily private." }),
       { status: 503, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } }
