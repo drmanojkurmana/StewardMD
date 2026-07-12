@@ -39,3 +39,13 @@ INSERT OR IGNORE INTO sources (id, name, workspace, type, homepage, guideline_pa
   ('ers',   'European Respiratory Society',           'internal_medicine', 'guideline',    'https://www.ersnet.org', 'https://www.ersnet.org/science-and-research/clinical-practice-guidelines/', '', 'head', 100, 0, strftime('%s','now')*1000),
   ('ctgov', 'ClinicalTrials.gov',                     'internal_medicine', 'trial',        'https://clinicaltrials.gov', 'https://clinicaltrials.gov', '', 'head', 120, 0, strftime('%s','now')*1000),
   ('pubmed','PubMed (practice-changing)',             'internal_medicine', 'trial',        'https://pubmed.ncbi.nlm.nih.gov', 'https://pubmed.ncbi.nlm.nih.gov', '', 'head', 120, 0, strftime('%s','now')*1000);
+
+-- Branch (Internal-Medicine sub-specialty) tagging. Harmless if the `branch` column
+-- doesn't exist yet on an older DB — run migrate_branches.sql first on the live DB.
+UPDATE sources SET branch = 'cardiology'          WHERE id IN ('acc', 'aha', 'esc');
+UPDATE sources SET branch = 'nephrology'          WHERE id = 'kdigo';
+UPDATE sources SET branch = 'endocrinology'       WHERE id = 'ada';
+UPDATE sources SET branch = 'infectious_diseases' WHERE id IN ('idsa', 'cdc', 'who');
+UPDATE sources SET branch = 'pulmonology'         WHERE id IN ('ats', 'chest', 'gold', 'gina', 'ers');
+UPDATE sources SET branch = 'gastroenterology'    WHERE id = 'acg';
+UPDATE sources SET branch = 'hepatology'          WHERE id = 'aasld';

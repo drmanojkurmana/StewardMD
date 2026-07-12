@@ -20,7 +20,7 @@ function mockDb(rows) {
     },
   };
 }
-const mkRow = (i, over) => Object.assign({ id: "u" + i, doc_key: "k" + i, type: "guideline", organization: "ESC", workspace: "internal_medicine", title: "Item " + i, body: "", summary: "s", category: "guideline", published_ts: 2000 - i, importance: "normal", est_read_min: 3, official_url: "https://x/" + i, version: "", doi: "", pmid: "", pinned: 0, auto: 1 }, over || {});
+const mkRow = (i, over) => Object.assign({ id: "u" + i, doc_key: "k" + i, type: "guideline", organization: "ESC", workspace: "internal_medicine", branch: "cardiology", title: "Item " + i, body: "", summary: "s", category: "guideline", published_ts: 2000 - i, importance: "normal", est_read_min: 3, official_url: "https://x/" + i, version: "", doi: "", pmid: "", pinned: 0, auto: 1 }, over || {});
 
 (async () => {
   console.log("\n── RSS parsing ──");
@@ -66,14 +66,15 @@ const mkRow = (i, over) => Object.assign({ id: "u" + i, doc_key: "k" + i, type: 
     const res = await repo.getFeed(env, { limit: 20 });
     chk("returns limit items (not the +1 probe)", res.items.length === 20, "got " + res.items.length);
     chk("computes nextCursor from last item", res.items.length === 20 && res.nextCursor === (rows[19].published_ts + "_" + rows[19].id), res.nextCursor);
-    chk("rowToItem maps legacy + new fields", res.items[0].ts === rows[0].published_ts && res.items[0].category === "guideline" && res.items[0].source === "ESC" && res.items[0].url === "https://x/0");
+    chk("rowToItem maps legacy + new fields (incl. branch)", res.items[0].ts === rows[0].published_ts && res.items[0].category === "guideline" && res.items[0].source === "ESC" && res.items[0].url === "https://x/0" && res.items[0].branch === "cardiology");
   }
   {
     const env = { UPDATES_DB: mockDb([]) };
-    await repo.getFeed(env, { type: "drug_approval", workspace: "surgery", q: "sglt2", before: "1500_u5", limit: 10 });
+    await repo.getFeed(env, { type: "drug_approval", workspace: "internal_medicine", branch: "cardiology", q: "sglt2", before: "1500_u5", limit: 10 });
     const s = env.UPDATES_DB._state;
     chk("SQL has type filter", /type = \?/.test(s.sql));
     chk("SQL has workspace filter", /workspace = \?/.test(s.sql));
+    chk("SQL has branch filter", /branch = \?/.test(s.sql));
     chk("SQL has search filter", /lower\(title\) LIKE/.test(s.sql));
     chk("SQL has cursor clause", /published_ts < \? OR \(published_ts = \? AND id < \?\)/.test(s.sql));
     chk("binds end with limit+1 probe", s.binds[s.binds.length - 1] === 11, "last bind " + s.binds[s.binds.length - 1]);
