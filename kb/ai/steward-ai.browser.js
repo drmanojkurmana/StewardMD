@@ -327,10 +327,11 @@
           if (id && _ecache.hasOwnProperty(id)) return _ecache[id];
           var gc = id ? trimGrounding(_ai.getGroundingContext(id)) : null;
           if (!gc) { if (id) _ecache[id] = null; return null; }
-          // Coverage haystack from TEXT only (name + class + chunk text + drug refs) — much cheaper
-          // than JSON.stringify-ing the whole grounding object, and more precise (no structural keys).
-          var kn = (gc.knowledge || []).map(function (k) { return (k && k.text) || ""; }).join(" ");
-          var hay = (String(id) + " " + (gc.name || "") + " " + (gc.class || "") + " " + kn + " " + (gc.drugRefs || []).join(" ")).toLowerCase();
+          // Coverage haystack = the WHOLE grounding object (name/class/section/source/crossLinks/text)
+          // so a distinctive term anywhere in it counts — kept as-is for routing parity. This runs only
+          // for the candidates actually evaluated (≈1 for a confident rank-0 match, memoized), so it's
+          // cheap; the real perf win is the short-circuit + the lazy vector hop, not trimming this.
+          var hay = (String(id) + " " + (gc.name || "") + " " + JSON.stringify(gc)).toLowerCase();
           var hitT = distinctive.filter(function (t) { return hay.indexOf(t) >= 0; });
           var cov = distinctive.length ? hitT.length / distinctive.length : 1;
           var nameHit = false, nameToksAll = false;
