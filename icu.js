@@ -2559,8 +2559,18 @@
       tab +   // each tab renders its own descriptive header — no redundant generic label
       '</div></div>';
   }
+  // One-shot: set true right before a paint() that should land at the TOP (a real context switch —
+  // load/new/clear patient). Every other repaint keeps the user where they were.
+  var _paintTop = false;
   function paint() {
     if (!rootEl) return;
+    // Preserve scroll across the full innerHTML rebuild. Without this, EVERY state change (ticking a
+    // rounds checkbox, marking imaging reviewed, ingesting data…) recreated the .icu-scroll container
+    // and snapped the list back to the top — so you couldn't work down the rounds checklist. Genuine
+    // context switches opt out via _paintTop; tab/workspace changes reset to 0 explicitly after paint.
+    var _osc = rootEl.querySelector(".icu-scroll");
+    var _keepTop = (_paintTop || !_osc) ? 0 : _osc.scrollTop;
+    _paintTop = false;
     // Camera FAB is contextual — only where snapping a monitor/lab/ABG/vent is relevant.
     var fab = isMonWs() ? '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' : "";
     // Prominent, ALWAYS-visible "Lab Watch 24/7" FAB (sits just above the Snapshot camera button)
@@ -2569,6 +2579,7 @@
       ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>'
       : "";
     rootEl.innerHTML = renderHeader() + renderBody() + watchFab + fab + renderTabBar();
+    if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
   }
 
   /* ---------------------------------------------------- manual entry forms */
@@ -3703,7 +3714,7 @@
       '<button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
     modalEl.classList.add("on");
   }
-  function clearFindings() { ICU.reset(); _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); paint(); if (window.toast) toast("Findings cleared"); }
+  function clearFindings() { ICU.reset(); _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); _paintTop = true; paint(); if (window.toast) toast("Findings cleared"); }
 
   /* -------------------------------------------------- launch embedded modules */
   // Raise the target overlay above the ICU surface, then open it via its existing
@@ -3840,7 +3851,7 @@
   function applyState(d, id) {
     Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (d[k] != null) ? clone(d[k]) : clone(DEFAULT_STATE[k]); });
     STATE.patient._id = id;
-    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); paint();
+    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); _paintTop = true; paint();
   }
   function loadPatient(id) {
     var r = loadRoster(), e = null, i;
@@ -3859,7 +3870,7 @@
   }
   function newPatient() {
     ICU.reset();
-    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); paint();
+    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); _paintTop = true; paint();
     openForm("patient");
   }
   function renderRoster(list, cloudOn) {
