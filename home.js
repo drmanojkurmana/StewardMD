@@ -1836,7 +1836,7 @@
           _rxc.className = "maik-chip maik-rx";
           _rxc.style.cssText = "margin-top:10px;background:#0e6e63;color:#fff;border-color:#0e6e63;font-weight:700";
           _rxc.textContent = "℞ Create prescription" + (_isTx ? " (pre-fill from this)" : "");
-          _rxc.addEventListener("click", function () { try { SMD_RX.open({ topic: topicLabel || question, pkg: pkg }); } catch (e) {} });
+          _rxc.addEventListener("click", function () { try { SMD_RX.open({ topic: topicLabel || question, pkg: pkg, answerText: md }); } catch (e) {} });
           think.appendChild(_rxc);
         }
       } catch (e) {}

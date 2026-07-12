@@ -174,6 +174,41 @@
     if (!rxWebPrint(html)) rxNativePrint(html);
   }
 
+  // Drug dictionary for text extraction — the interaction engine (~3k generics, incl. specialty
+  // drugs like antiretrovirals) plus the Drug Index. Built once, cached. Multi-word generics also
+  // index their first word (e.g. "tenofovir" from "tenofovir anhydrous").
+  var _rxDictCache = null;
+  var _RX_STOP = { alcohol: 1, oxygen: 1, water: 1, glucose: 1, dextrose: 1, saline: 1, sodium: 1, potassium: 1, calcium: 1, magnesium: 1, chloride: 1, protein: 1, albumin: 1, fluid: 1, fluids: 1 };
+  function rxDrugDict() {
+    if (_rxDictCache) return _rxDictCache;
+    var set = {};
+    function add(n) {
+      if (!n) return; var s = String(n).toLowerCase().trim();
+      if (s.length >= 5 && !_RX_STOP[s]) set[s] = 1;
+      var first = s.split(/[\s/,+()\-]/)[0];   // single-word variant of a multi-word generic
+      if (first && first.length >= 6 && !_RX_STOP[first]) set[first] = 1;
+    }
+    try { var IR = window.INTERACTION_RULES; if (IR) { if (Array.isArray(IR.generics)) IR.generics.forEach(add); if (IR.drugClasses) Object.keys(IR.drugClasses).forEach(add); } } catch (e) {}
+    try { ((window.MEDDRUGS && MEDDRUGS._list) || []).forEach(function (d) { if (d && d.generic) add(d.generic); }); } catch (e) {}
+    _rxDictCache = Object.keys(set);
+    return _rxDictCache;
+  }
+  // Pull the real drugs a free-text answer names — only names that exist in the dictionaries, in
+  // order of first appearance. Returned title-cased; buildRxLines flags them unverified (no dose).
+  function drugsFromText(text) {
+    var dict = rxDrugDict(); if (!dict.length || !text) return [];
+    var hay = " " + String(text).toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ") + " ";
+    var hits = [];
+    for (var i = 0; i < dict.length; i++) { var nm = dict[i]; var idx = hay.indexOf(" " + nm + " "); if (idx >= 0) hits.push([idx, nm]); }
+    hits.sort(function (a, b) { return a[0] - b[0]; });
+    var seen = {}, out = [];
+    for (var j = 0; j < hits.length && out.length < 15; j++) {
+      var g = hits[j][1]; if (seen[g]) continue; seen[g] = 1;
+      out.push(g.replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); }));
+    }
+    return out;
+  }
+
   // Regimen from the grounded package: advice + de-duped drug names (doses filled by the core).
   function regimenFromCtx(ctx) {
     var reg = [{ name: "Lifestyle & general measures", isAdvice: true }];
@@ -181,11 +216,19 @@
     if (t && t.default && t.default.drugRefs) drugs = drugs.concat(t.default.drugRefs);
     (t && t.alternatives || []).forEach(function (a) { drugs = drugs.concat(a.drugRefs || []); });
     if (ctx && ctx.pkg && ctx.pkg.refs && ctx.pkg.refs.drug) drugs = drugs.concat(ctx.pkg.refs.drug);
-    var seen = {};
+    var seen = {}, added = 0;
     drugs.forEach(function (d) {
       var nm = String(d || "").split(/[—,;(]/)[0].trim(); if (!nm) return;
-      var k = nm.toLowerCase(); if (seen[k]) return; seen[k] = 1; reg.push({ name: nm });
+      var k = nm.toLowerCase(); if (seen[k]) return; seen[k] = 1; reg.push({ name: nm }); added++;
     });
+    // FALLBACK: the grounded package carried no structured drugs (e.g. HIV/AIDS), but the answer
+    // text named real regimens. Extract the drugs it mentioned (validated against the dictionaries)
+    // so the pad still pre-fills them — each lands as an unverified line for the clinician to confirm.
+    if (!added && ctx && ctx.answerText) {
+      drugsFromText(ctx.answerText).forEach(function (nm) {
+        var k = nm.toLowerCase(); if (seen[k]) return; seen[k] = 1; reg.push({ name: nm });
+      });
+    }
     return reg;
   }
 
