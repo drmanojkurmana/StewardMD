@@ -1,5 +1,5 @@
 /*
- * Site-wide access gate — TEMPORARY "coming soon" mode.
+ * Site-wide access gate — TEMPORARY "coming soon" mode via a SECRET URL.
  *
  * Why this exists: the StewardMD web app is being taken PRIVATE for now while the
  * native apps go through App Store / Play Store review, after a wave of scraping /
@@ -8,24 +8,23 @@
  * alike) and, by default, shows the public a self-contained "coming soon" page while
  * blocking all app code and API endpoints.
  *
- * Authorized access (owner / testers):
- *   1. Set the `SITE_ACCESS_PASSWORD` env var (Cloudflare Pages → Settings →
- *      Environment variables — mark it "Encrypt"/secret). Do this for BOTH the
- *      Production and Preview environments if you want to unlock previews too.
- *   2. Visit https://stewardmd.in/?access=YOUR_PASSWORD once. The gate sets an
- *      HttpOnly cookie (30 days) and redirects to a clean URL; the full app then
- *      loads normally for you on that device/browser.
+ * Authorized access (owner / testers) — "only who knows the URL can visit":
+ *   1. Visit the secret entry URL once:  https://stewardmd.in/realapp
+ *   2. The gate sets an HttpOnly cookie (30 days) and redirects to the app, which
+ *      then loads normally for you on that device/browser. Share that URL only with
+ *      people you want to have access.
  *   3. To lock yourself back out (clear the cookie): visit /?lock=1
  *
- * Fail-closed: if `SITE_ACCESS_PASSWORD` is unset/empty, NOBODY can unlock — the
- * whole site stays on "coming soon". That is intentional: the safe default for a
- * privacy lockdown is closed, not open.
+ * The secret path is "realapp" by default; override it without code by setting the
+ * SITE_ACCESS_PATH env var in the Cloudflare Pages environment (e.g. to rotate it if
+ * the current one leaks). Changing it invalidates existing unlock cookies.
  *
- * To REMOVE the lockdown later: delete this file (and, optionally, the env var).
+ * To REMOVE the lockdown later: delete this file.
  */
 
 const COOKIE_NAME = "smd_access";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
+const DEFAULT_SECRET_PATH = "realapp";
 
 // Constant-time-ish string comparison (avoids trivial timing leaks on the compare).
 function safeEqual(a, b) {
@@ -36,9 +35,10 @@ function safeEqual(a, b) {
   return diff === 0;
 }
 
-// SHA-256 hex — the cookie stores a hash of the password, never the password itself.
-async function tokenFor(password) {
-  const data = new TextEncoder().encode("smd:" + password);
+// SHA-256 hex — the cookie stores a hash derived from the secret path, not the path
+// itself, so rotating SITE_ACCESS_PATH automatically invalidates old cookies.
+async function tokenFor(secret) {
+  const data = new TextEncoder().encode("smd:" + secret);
   const digest = await crypto.subtle.digest("SHA-256", data);
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
@@ -55,7 +55,8 @@ function readCookie(header, name) {
 export async function onRequest(context) {
   const { request, env, next } = context;
   const url = new URL(request.url);
-  const password = (env && env.SITE_ACCESS_PASSWORD) || "";
+  const secretPath = ((env && env.SITE_ACCESS_PATH) || DEFAULT_SECRET_PATH).replace(/^\/+|\/+$/g, "");
+  const token = await tokenFor(secretPath);
 
   // Explicit lock / logout.
   if (url.searchParams.has("lock")) {
@@ -67,22 +68,21 @@ export async function onRequest(context) {
     return new Response(null, { status: 302, headers });
   }
 
-  // Unlock via ?access=... — set the cookie and redirect to a clean URL.
-  const provided = url.searchParams.get("access");
-  if (password && provided && safeEqual(provided, password)) {
-    url.searchParams.delete("access");
-    const clean = url.pathname + (url.searchParams.toString() ? "?" + url.searchParams.toString() : "");
-    const headers = new Headers({ Location: clean || "/" });
+  // Secret-URL knock: /realapp (with or without trailing slash) unlocks and redirects
+  // to the app root so all of the app's root-relative assets resolve normally.
+  const hitPath = url.pathname.replace(/^\/+|\/+$/g, "");
+  if (hitPath === secretPath) {
+    const headers = new Headers({ Location: "/" });
     headers.append(
       "Set-Cookie",
-      `${COOKIE_NAME}=${await tokenFor(password)}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; Secure; SameSite=Lax`
+      `${COOKIE_NAME}=${token}; Path=/; Max-Age=${COOKIE_MAX_AGE}; HttpOnly; Secure; SameSite=Lax`
     );
     return new Response(null, { status: 302, headers });
   }
 
   // Already unlocked? Let the real app / API through.
   const cookie = readCookie(request.headers.get("Cookie"), COOKIE_NAME);
-  if (password && cookie && safeEqual(cookie, await tokenFor(password))) {
+  if (cookie && safeEqual(cookie, token)) {
     return next();
   }
 
