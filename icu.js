@@ -2775,8 +2775,21 @@
     var it = ROUNDS_ITEMS.filter(function (x) { return x.k === k; })[0] || { label: k };
     var cur = (_raw.rounds[k] || {}).note || "";
     modalEl.innerHTML = '<div class="icu-sheet"><h3>' + esc(it.label) + '</h3><div class="icu-fld"><label>Note</label><textarea data-k="note" rows="4" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(cur) + "</textarea></div>" +
+      '<button class="icu-btn ghost" data-icu-act="roundmic:' + k + '" style="margin-bottom:8px">' + ico("mic", "🎤") + ' Speak <span style="opacity:.8;font-weight:700">· MaiK Scribe</span></button>' +
       '<button class="icu-btn" data-icu-act="saveroundnote:' + k + '">Save note</button><button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
     modalEl.classList.add("on");
+  }
+  // MaiK Scribe → round note: dictate into the note textarea (append), reusing the shared voice
+  // dialog used by the Add-data sheet and MaiK chat. No new engine; native/Whisper/web STT.
+  function roundNoteDictate(k) {
+    if (!(window.SMD_VOICE && SMD_VOICE.openDialog)) { if (window.toast) toast("Voice intake is still loading…"); return; }
+    var ta = modalEl && modalEl.querySelector("[data-k=note]");
+    SMD_VOICE.openDialog({ target: "text", onText: function (t) {
+      if (!t || !ta) return;
+      var base = (ta.value || "").trim();
+      ta.value = (base ? base + " " : "") + t;
+      try { ta.focus(); } catch (e) {}
+    } });
   }
   function saveRoundNote(k) { if (!modalEl) return; var ta = modalEl.querySelector("[data-k=note]"); var cur = _raw.rounds[k] || {}; STATE.rounds[k] = { done: !!cur.done, note: ta ? ta.value : "" }; closeForm(); }
   function openSummary() {
@@ -3996,6 +4009,7 @@
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
       case "roundnote": openRoundNote(arg); break;
+      case "roundmic": roundNoteDictate(arg); break;
       case "saveroundnote": saveRoundNote(arg); break;
       case "proto": _openProto[arg] = !_openProto[arg]; paint(); break;
       case "drug": launch(function () { if (!window.INF) return; (INF.openDrug ? INF.openDrug(arg) : INF.open()); infWeightBridge(); installInfBridge(); }, "infOverlay"); break;
