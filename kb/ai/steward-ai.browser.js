@@ -336,7 +336,8 @@
             nameToksAll = nameToks.length > 0 && nameToks.every(function (t) { return qHay.indexOf(" " + t + " ") >= 0; });
           }
           var conf = distinctive.length === 0 || cov >= 0.6 || nameHit || nameToksAll;
-          return { id: id, gc: gc, hit: hitT, coverage: cov, missing: distinctive.filter(function (t) { return hay.indexOf(t) < 0; }), confident: conf };
+          return { id: id, gc: gc, hit: hitT, coverage: cov, missing: distinctive.filter(function (t) { return hay.indexOf(t) < 0; }),
+                   confident: conf, nameHit: nameHit, nameToksAll: nameToksAll };
         }
         // pick(): best-covering candidate from a ranked id list — confident, else partial, else rank-0.
         function pick(ids) {
@@ -349,9 +350,13 @@
         var lexIds = []; retrieved.forEach(function (r) { if (r && r.diseaseId && lexIds.indexOf(r.diseaseId) < 0) lexIds.push(r.diseaseId); });
         if (!lexIds.length && retrieved[0] && retrieved[0].diseaseId) lexIds = [retrieved[0].diseaseId];
         var chosen = pick(lexIds.slice(0, 8));
-        // Phase 2 — SEMANTIC fallback: only when lexical isn't confident (pays the Vectorize hop only
-        // when it can actually help; RRF-fuse then re-pick over the fused pool).
-        if ((!chosen || !chosen.confident) && smdHybridOn() && _rrf && (opts.question || "").trim()) {
+        // Phase 2 — SEMANTIC fallback. Skip the Vectorize hop ONLY when the lexical pick is a NAME-level
+        // match (disease name matches the query topic) or there's no distinctive term to disambiguate.
+        // A mere body-text coverage match is NOT enough to skip — e.g. "hyperkalemia management" hits
+        // "Heart Failure: Management" (which just mentions hyperkalemia); the vector arm must still run
+        // to route it to the actual Hyperkalaemia entry.
+        var nameSure = chosen && chosen.confident && (chosen.nameHit || chosen.nameToksAll);
+        if (distinctive.length && !nameSure && smdHybridOn() && _rrf && (opts.question || "").trim()) {
           var vecIds = await vectorDiseaseIds(opts.question, RETRIEVE_K);
           if (vecIds.length) {
             var fusedChosen = pick(_rrf(lexIds, vecIds).slice(0, 8));
