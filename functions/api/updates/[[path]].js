@@ -184,7 +184,7 @@ export async function onRequest(context) {
       if (!id) return json({ error: "id-required" }, 400);
       await repo.saveSource(env, {
         id, name: String(body.name || id).slice(0, 120), workspace: normWorkspace(body.workspace), branch: normBranch(body.branch),
-        type: normType(body.type) || "guideline", homepage: String(body.homepage || "").slice(0, 400),
+        type: normType(body.type) || "guideline", query: String(body.query || "").slice(0, 600), homepage: String(body.homepage || "").slice(0, 400),
         guideline_page: String(body.guideline_page || "").slice(0, 400), rss_url: String(body.rss_url || "").slice(0, 400),
         parser_type: body.parser_type === "head" ? "head" : "rss", priority: parseInt(body.priority, 10) || 100,
         enabled: body.enabled ? 1 : 0,

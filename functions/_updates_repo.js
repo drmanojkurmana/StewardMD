@@ -171,12 +171,12 @@ export async function saveSource(env, s) {
   if (!hasDb(env)) throw new Error("no-db");
   const now = Date.now();
   await db(env).prepare(
-    "INSERT INTO sources (id, name, workspace, branch, type, homepage, guideline_page, rss_url, parser_type, priority, enabled, created_ts) " +
-    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?) " +
-    "ON CONFLICT(id) DO UPDATE SET name=excluded.name, workspace=excluded.workspace, branch=excluded.branch, type=excluded.type, homepage=excluded.homepage, guideline_page=excluded.guideline_page, rss_url=excluded.rss_url, parser_type=excluded.parser_type, priority=excluded.priority, enabled=excluded.enabled"
+    "INSERT INTO sources (id, name, workspace, branch, type, homepage, guideline_page, rss_url, query, parser_type, priority, enabled, created_ts) " +
+    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) " +
+    "ON CONFLICT(id) DO UPDATE SET name=excluded.name, workspace=excluded.workspace, branch=excluded.branch, type=excluded.type, homepage=excluded.homepage, guideline_page=excluded.guideline_page, rss_url=excluded.rss_url, query=excluded.query, parser_type=excluded.parser_type, priority=excluded.priority, enabled=excluded.enabled"
   ).bind(
     s.id, s.name || s.id, s.workspace || "internal_medicine", s.branch || "", s.type || "guideline", s.homepage || "",
-    s.guideline_page || "", s.rss_url || "", s.parser_type || "rss", parseInt(s.priority, 10) || 100,
+    s.guideline_page || "", s.rss_url || "", s.query || "", s.parser_type || "rss", parseInt(s.priority, 10) || 100,
     s.enabled ? 1 : 0, now
   ).run();
 }
