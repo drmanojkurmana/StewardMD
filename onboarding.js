@@ -121,6 +121,29 @@
     }
     return null;
   }
+  // Tight highlight rect: union of the element and its visible children. This hugs the real
+  // content (icon + label) rather than the full tap cell, and — crucially for the elevated
+  // bottom-nav MaiK button — includes children that overflow the button box (its round icon
+  // sits above via a negative margin), so the spotlight wraps the whole button, not a clipped
+  // white cell. Falls back to the element's own rect when it has no laid-out children.
+  function rectOf(el) {
+    var r = el.getBoundingClientRect();
+    var kids = el.children, any = false;
+    var top = r.top, left = r.left, bottom = r.bottom, right = r.right;
+    for (var i = 0; kids && i < kids.length; i++) {
+      var cs = window.getComputedStyle(kids[i]);
+      if (cs.display === "none" || cs.visibility === "hidden") continue;
+      var cr = kids[i].getBoundingClientRect();
+      if (cr.width < 1 || cr.height < 1) continue;
+      any = true;
+      if (cr.top < top) top = cr.top;
+      if (cr.left < left) left = cr.left;
+      if (cr.bottom > bottom) bottom = cr.bottom;
+      if (cr.right > right) right = cr.right;
+    }
+    if (!any) return { top: r.top, left: r.left, bottom: r.bottom, right: r.right, width: r.width, height: r.height };
+    return { top: top, left: left, bottom: bottom, right: right, width: right - left, height: bottom - top };
+  }
 
   // ---- engine ------------------------------------------------------------------------------
   var _spot = null, _card = null, _veil = null, _step = 0, _live = [], _sessionShown = false, _onKey = null;
@@ -138,27 +161,37 @@
     if (!_live.length) _live = [TOUR_STEPS[0]];
   }
 
+  // Position the spotlight over the target and return the padded rect it occupies (or null for
+  // the no-target welcome step) so the card can be placed clear of it.
   function positionSpot(tgt) {
-    if (!tgt) { _spot.style.display = "none"; _veil.style.display = "block"; return; }
+    if (!tgt) { _spot.style.display = "none"; _veil.style.display = "block"; return null; }
     _veil.style.display = "none";
-    var r = tgt.getBoundingClientRect(), pad = 6;
+    var r = rectOf(tgt), pad = 6;
+    var top = Math.max(4, r.top - pad), left = Math.max(4, r.left - pad);
+    var w = r.width + pad * 2, h = r.height + pad * 2;
     _spot.style.display = "block";
-    _spot.style.top = Math.max(4, r.top - pad) + "px";
-    _spot.style.left = Math.max(4, r.left - pad) + "px";
-    _spot.style.width = (r.width + pad * 2) + "px";
-    _spot.style.height = (r.height + pad * 2) + "px";
+    _spot.style.top = top + "px";
+    _spot.style.left = left + "px";
+    _spot.style.width = w + "px";
+    _spot.style.height = h + "px";
     _spot.classList.add("pulse");
+    return { top: top, left: left, bottom: top + h, right: left + w, width: w, height: h };
   }
-  function positionCard(tgt) {
-    var cw = _card.offsetWidth || 340, ch = _card.offsetHeight || 180, vw = window.innerWidth, vh = window.innerHeight, m = 12, top, left;
-    if (!tgt) { left = (vw - cw) / 2; top = (vh - ch) / 2; }
+  // Place the card clear of the spotlight: below if it fits, else above, else on the side with
+  // more room (clamped into the viewport). Keyed off the padded spotlight rect so the card never
+  // covers the button being highlighted.
+  function positionCard(spot) {
+    var cw = _card.offsetWidth || 340, ch = _card.offsetHeight || 180, vw = window.innerWidth, vh = window.innerHeight, m = 12, gap = 16, top, left;
+    if (!spot) { left = (vw - cw) / 2; top = (vh - ch) / 2; }
     else {
-      var r = tgt.getBoundingClientRect();
-      left = Math.min(Math.max(m, r.left + r.width / 2 - cw / 2), vw - cw - m);
-      var below = r.bottom + 14, above = r.top - ch - 14;
-      top = (below + ch + m <= vh) ? below : (above >= m ? above : Math.max(m, (vh - ch) / 2));
+      left = Math.min(Math.max(m, spot.left + spot.width / 2 - cw / 2), vw - cw - m);
+      var below = spot.bottom + gap, above = spot.top - gap - ch;
+      if (below + ch + m <= vh) top = below;
+      else if (above >= m) top = above;
+      else if ((vh - spot.bottom) >= spot.top) top = Math.min(below, vh - ch - m);
+      else top = Math.max(m, above);
     }
-    _card.style.left = left + "px"; _card.style.top = top + "px";
+    _card.style.left = left + "px"; _card.style.top = Math.max(m, top) + "px";
   }
 
   function render() {
@@ -179,13 +212,13 @@
         (last ? '<button class="smdt-b pri" data-t="done">Finish</button>' : '<button class="smdt-b pri" data-t="next">Next</button>') +
       "</div>";
     // paint after layout so card size is known for positioning
-    positionSpot(tgt); positionCard(tgt);
-    requestAnimationFrame(function () { positionCard(tgt); });
+    var spot = positionSpot(tgt); positionCard(spot);
+    requestAnimationFrame(function () { positionCard(positionSpot(tgt)); });
     setTimeout(function () { try { var b = _card.querySelector('[data-t="next"],[data-t="done"]'); if (b) b.focus(); } catch (e) {} }, 40);
     emit("step_view", _step);
   }
 
-  function reflow() { if (!_card || _card.style.display === "none") return; var s = _live[_step]; var tgt = s && s.sel ? resolve(s.sel) : null; positionSpot(tgt); positionCard(tgt); }
+  function reflow() { if (!_card || _card.style.display === "none") return; var s = _live[_step]; var tgt = s && s.sel ? resolve(s.sel) : null; positionCard(positionSpot(tgt)); }
 
   function open() {
     ensureEls(); _step = 0; buildLive();
