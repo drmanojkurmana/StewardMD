@@ -231,16 +231,10 @@
       var query = findingLabels.concat([opts.question || ""], top.map(function (c) { return c.name; })).join(" ");
       var retrieved = _ai.retrieve(query, RETRIEVE_K);
 
-      // Hybrid retrieval (flag smd_hybrid) — only for a standalone knowledge question
-      // (no case differential), where the topicMatch gate keys off the nearest candidate.
-      // Fuse the lexical disease order with the Vectorize semantic arm (RRF). Any failure
-      // or empty vector arm leaves hybridIds null → candid selection is unchanged.
-      var hybridIds = null;
-      if (!top.length && smdHybridOn() && _rrf && (opts.question || "").trim()) {
-        var lexIds = []; retrieved.forEach(function (r) { if (r && r.diseaseId && lexIds.indexOf(r.diseaseId) < 0) lexIds.push(r.diseaseId); });
-        var vecIds = await vectorDiseaseIds(opts.question, RETRIEVE_K);
-        if (vecIds.length) hybridIds = _rrf(lexIds, vecIds);
-      }
+      // Hybrid retrieval (flag smd_hybrid) is applied LAZILY inside the knowledge-question gate
+      // below — the Vectorize round-trip (~0.7-1.4s) is only paid when the lexical arm is NOT a
+      // confident match (exactly when the semantic arm can rescue a mis-route). Confident lexical
+      // hits (the common case) skip the network hop, so answers start ~1s sooner. (perf)
 
       var grounding = top.map(function (c) { return trimGrounding(_ai.getGroundingContext(c.id)); }).filter(Boolean);
 
@@ -327,9 +321,6 @@
         // mis-ranked (e.g. "hyperkalemia" losing rank-0 to "Diabetes: Management" for "hyperkalemia
         // management", because RRF rewards the disease present in BOTH arms) is still tested and
         // wins the gate on coverage. Without hybrid the pool is just the lexical nearest (unchanged).
-        var candPool = (hybridIds && hybridIds.length)
-          ? hybridIds.slice(0, 8)
-          : (retrieved[0] && retrieved[0].diseaseId ? [retrieved[0].diseaseId] : []);
         var qHay = " " + String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim() + " ";
         function evalCand(id) {
           var gc = id ? trimGrounding(_ai.getGroundingContext(id)) : null;
@@ -347,11 +338,27 @@
           var conf = distinctive.length === 0 || cov >= 0.6 || nameHit || nameToksAll;
           return { id: id, gc: gc, hit: hitT, coverage: cov, missing: distinctive.filter(function (t) { return hay.indexOf(t) < 0; }), confident: conf };
         }
-        var evals = candPool.map(evalCand).filter(Boolean);
-        // prefer the highest-ranked CONFIDENT candidate; else the highest-ranked PARTIAL; else rank-0
-        var chosen = evals.filter(function (e) { return e.confident; })[0]
-                  || evals.filter(function (e) { return e.hit.length > 0; })[0]
-                  || evals[0] || null;
+        // pick(): best-covering candidate from a ranked id list — confident, else partial, else rank-0.
+        function pick(ids) {
+          var evs = ids.map(evalCand).filter(Boolean);
+          return evs.filter(function (e) { return e.confident; })[0]
+              || evs.filter(function (e) { return e.hit.length > 0; })[0]
+              || evs[0] || null;
+        }
+        // Phase 1 — LEXICAL only (instant, no network). Dedup the retrieved disease order.
+        var lexIds = []; retrieved.forEach(function (r) { if (r && r.diseaseId && lexIds.indexOf(r.diseaseId) < 0) lexIds.push(r.diseaseId); });
+        if (!lexIds.length && retrieved[0] && retrieved[0].diseaseId) lexIds = [retrieved[0].diseaseId];
+        var chosen = pick(lexIds.slice(0, 8));
+        // Phase 2 — SEMANTIC fallback: only when lexical isn't confident (pays the Vectorize hop only
+        // when it can actually help; RRF-fuse then re-pick over the fused pool).
+        if ((!chosen || !chosen.confident) && smdHybridOn() && _rrf && (opts.question || "").trim()) {
+          var vecIds = await vectorDiseaseIds(opts.question, RETRIEVE_K);
+          if (vecIds.length) {
+            var fusedChosen = pick(_rrf(lexIds, vecIds).slice(0, 8));
+            // adopt the fused pick when it's a stronger match (confident, or a hit where lexical had none)
+            if (fusedChosen && (fusedChosen.confident || (fusedChosen.hit.length > 0 && (!chosen || !chosen.hit.length)))) chosen = fusedChosen;
+          }
+        }
         var candId = chosen ? chosen.id : null;
         var candGc = chosen ? chosen.gc : null;
         if (chosen && chosen.confident) {
