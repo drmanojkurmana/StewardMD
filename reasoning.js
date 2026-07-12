@@ -3738,9 +3738,15 @@
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
       function fallback() { return self.explainGrounded(pkg, opts); }
       if (typeof ReadableStream === "undefined" || !window.TextDecoder) return fallback();
+      // Native can't stream through CapacitorHttp — opt in (per device) to the direct WebView
+      // streaming transport (needs server CORS). Default OFF pending on-device verification; any
+      // failure falls through to the buffered non-stream path, so it can never regress the answer.
+      var nativeStream = false;
+      try { nativeStream = !!(window.SMD_IS_NATIVE && window.SMD_NATIVE && window.SMD_NATIVE.streamFetch && localStorage.getItem("smd_maik_native_stream") === "1"); } catch (e) {}
+      var doFetch = nativeStream ? window.SMD_NATIVE.streamFetch : fetch;
       return aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
-        return fetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) });
+        return doFetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) });
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) return fallback();

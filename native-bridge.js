@@ -488,6 +488,20 @@
   }
   if (typeof window.fetch === "function") {
     var origFetch = window.fetch.bind(window);
+    // Real streaming transport for SSE. CapacitorHttp buffers the whole response (no progressive
+    // body), so token-by-token streaming (MaiK) must use the ORIGINAL WebView fetch straight to the
+    // absolute origin, carrying the app-gate key. This is CROSS-ORIGIN, so the server must return
+    // CORS headers for the WebView origin (functions/api/ai does). Callers fall back to the buffered
+    // CapacitorHttp path on any failure, so this can never regress the answer.
+    try {
+      window.SMD_NATIVE = window.SMD_NATIVE || {};
+      window.SMD_NATIVE.streamFetch = function (url, init) {
+        init = init || {};
+        var abs = (typeof url === "string" && url.charAt(0) === "/") ? API_ORIGIN + url : url;
+        var headers = Object.assign({}, init.headers || {}, { "X-SMD-App": "smdapp_ec051e785edc74766ee4a6d37282d79ea9b0feeb" });
+        return origFetch(abs, { method: init.method || "GET", headers: headers, body: init.body, mode: "cors", credentials: "omit" });
+      };
+    } catch (e) {}
     window.fetch = function (input, init) {
       try {
         var url = (typeof input === "string") ? input : (input && typeof input === "object" ? input.url : null);
