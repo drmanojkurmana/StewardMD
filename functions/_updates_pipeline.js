@@ -8,7 +8,7 @@
  * Every source writes a crawl_logs row. Results are cached in D1 and shared by all users.
  */
 import * as repo from "./_updates_repo.js";
-import { summarizeDocument } from "./_summarize.js";
+import { summarizeDocument, diffDocument } from "./_summarize.js";
 import { clean, sha256hex, itemHashInput, parseRss, keepItem } from "./_updates_util.js";
 import { fetchLitApi } from "./_litapi.js";
 
@@ -49,8 +49,17 @@ async function storeSummary(env, source, item, docKey, hash, mode) {
   if (mode === "updated") {
     const existing = await repo.getByDocKey(env, docKey);
     if (existing) {
-      // snapshot the PREVIOUS summary as a version (Phase 3 fills whats_changed_json)
-      await repo.insertVersion(env, { update_id: existing.id, version: existing.version || "", published_ts: existing.published_ts, summary_json: existing.summary_json || "", content_hash: existing.content_hash || "" });
+      // Phase 3 — "What's Changed": diff the previous summary against the new source,
+      // and store the Topic/Previous/Current/Impact rows on the snapshot version row.
+      let whats_changed_json = "";
+      try {
+        const prev = existing.summary_json ? JSON.parse(existing.summary_json) : null;
+        if (prev) {
+          const diff = await diffDocument(env, { prevSummary: prev, newExcerpt: excerpt, title: base.title, organization: base.organization });
+          if (diff.ok && diff.changes.length) whats_changed_json = JSON.stringify(diff.changes);
+        }
+      } catch (e) {}
+      await repo.insertVersion(env, { update_id: existing.id, version: existing.version || "", published_ts: existing.published_ts, summary_json: existing.summary_json || "", whats_changed_json: whats_changed_json, content_hash: existing.content_hash || "" });
       await repo.updateExisting(env, existing.id, base);
       return { ai: true, ok: true, id: existing.id, mode: "updated", item: pushItem(existing.id) };
     }

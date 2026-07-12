@@ -20,20 +20,29 @@ function feedXml() {
 
 // ---- AI call counter + mock Gemini ----
 let AI_CALLS = 0;
+let DIFF_CALLS = 0;
+function gpart(obj) { return { ok: true, status: 200, json: async () => ({ candidates: [{ content: { parts: [{ text: JSON.stringify(obj) }] } }] }) }; }
 function geminiResponse() {
-  const obj = { title: "Summary", organization: "FDA", specialty: "cardiology", release_date: "2026-07-01", version: "1", importance: "high", estimated_read_time: 3, summary: "An original plain-language summary.", major_changes: ["x"], what_changed: [], clinical_impact: "High.", clinical_pearls: ["p"], new_recommendations: [], removed_recommendations: [], practice_points: [], evidence_level: "A", keywords: ["cardio"], official_url: "", official_pdf_url: "", doi: "", pmid: "" };
-  return { ok: true, status: 200, json: async () => ({ candidates: [{ content: { parts: [{ text: JSON.stringify(obj) }] } }] }) };
+  return gpart({ title: "Summary", organization: "FDA", specialty: "cardiology", release_date: "2026-07-01", version: "1", importance: "high", estimated_read_time: 3, summary: "An original plain-language summary.", major_changes: ["x"], what_changed: [], clinical_impact: "High.", clinical_pearls: ["p"], new_recommendations: [], removed_recommendations: [], practice_points: [], evidence_level: "A", keywords: ["cardio"], official_url: "", official_pdf_url: "", doi: "", pmid: "" });
 }
-globalThis.fetch = async (u) => {
+function geminiDiffResponse() {
+  return gpart({ changes: [{ topic: "Blood pressure target", previous: "<130/80", current: "<120 systolic (selected CKD)", impact: "High" }] });
+}
+globalThis.fetch = async (u, opts) => {
   const url = String(u);
-  if (url.indexOf("generativelanguage") >= 0) { AI_CALLS++; return geminiResponse(); }
+  if (url.indexOf("generativelanguage") >= 0) {
+    AI_CALLS++;
+    const body = (opts && opts.body) || "";
+    if (body.indexOf("MATERIALLY CHANGED") >= 0) { DIFF_CALLS++; return geminiDiffResponse(); }   // Phase 3 diff prompt
+    return geminiResponse();
+  }
   // RSS feed
   return { ok: true, status: 200, text: async () => feedXml(), headers: { get: () => "" } };
 };
 
 // ---- mock D1 (pattern-matched on the exact SQL the pipeline path issues) ----
 function mockDb() {
-  const byKey = new Map(), byId = new Map();
+  const byKey = new Map(), byId = new Map(), versions = [];
   const sources = [{ id: "fda-press", name: "FDA Press", workspace: "internal_medicine", type: "drug_approval", parser_type: "rss", rss_url: "https://feed", guideline_page: "", homepage: "", enabled: 1, priority: 10, etag: "", last_modified: "", content_length: "" }];
   // INSERT column order from repo.insertUpdate:
   const COLS = ["id", "doc_key", "source_id", "type", "organization", "workspace", "branch", "title", "body", "category", "published_ts", "importance", "est_read_min", "summary", "summary_json", "official_url", "official_pdf_url", "doi", "pmid", "keywords", "version", "content_hash", "auto", "pinned", "created_ts", "updated_ts"];
@@ -43,6 +52,7 @@ function mockDb() {
   }
   return {
     _byKey: byKey,
+    _versions: versions,
     prepare(sql) {
       const stmt = (b) => ({
         bind: (...nb) => stmt(nb),
@@ -57,6 +67,7 @@ function mockDb() {
         run: async () => {
           if (/INSERT INTO updates/.test(sql)) insert(b);
           else if (/UPDATE updates SET/.test(sql)) update(b);
+          else if (/INSERT INTO update_versions/.test(sql)) versions.push({ update_id: b[1], version: b[2], summary_json: b[4], whats_changed_json: b[5] });
           return {};
         },
       });
@@ -83,12 +94,14 @@ function mockDb() {
   chk("all items unchanged", r2.unchanged === 2 && r2.new === 0 && r2.updated === 0, JSON.stringify({ new: r2.new, updated: r2.updated, unchanged: r2.unchanged }));
   chk("ZERO AI calls on unchanged run (the cost guarantee)", AI_CALLS === 0, "AI_CALLS=" + AI_CALLS);
 
-  console.log("\n── run 3: one item's content changed ──");
+  console.log("\n── run 3: one item's content changed (Phase 3 What's-Changed) ──");
   FEED_ITEMS[0].desc = "This description was revised — new evidence.";
-  AI_CALLS = 0;
+  AI_CALLS = 0; DIFF_CALLS = 0;
   const r3 = await runPipeline(env);
   chk("exactly one updated, one unchanged", r3.updated === 1 && r3.unchanged === 1, JSON.stringify({ new: r3.new, updated: r3.updated, unchanged: r3.unchanged }));
-  chk("AI called exactly once (only the changed doc)", AI_CALLS === 1, "AI_CALLS=" + AI_CALLS);
+  chk("AI called twice for the changed doc (summarize + diff)", AI_CALLS === 2 && DIFF_CALLS === 1, "AI_CALLS=" + AI_CALLS + " DIFF_CALLS=" + DIFF_CALLS);
+  const v = db._versions.filter((x) => x.whats_changed_json);
+  chk("version row records the What's-Changed diff", v.length === 1 && /Blood pressure target/.test(v[0].whats_changed_json), JSON.stringify(v[0] && v[0].whats_changed_json));
 
   console.log(`\n${fails ? "❌ " + fails + " failed" : "✅ all passed"}\n`);
   process.exit(fails ? 1 : 0);
