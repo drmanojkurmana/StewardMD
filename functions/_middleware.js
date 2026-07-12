@@ -63,6 +63,17 @@ function readCookie(header, name) {
 export async function onRequest(context) {
   const { request, env, next } = context;
   const url = new URL(request.url);
+
+  // PREVIEW BYPASS: Cloudflare Pages preview/branch deployments (<hash|branch>.stewardmd.pages.dev)
+  // serve the REAL app unconditionally, so changes can be verified (headless eval harness + manual
+  // QA) without the /realapp cookie. ONLY the production custom domain (stewardmd.in) stays gated;
+  // the production pages.dev alias ("stewardmd.pages.dev", no subdomain) is NOT a preview and is
+  // still gated. Anti-scraping on the public site is unaffected — preview URLs are unlisted hashes.
+  const host = url.hostname.toLowerCase();
+  if (/\.stewardmd\.pages\.dev$/.test(host) && host !== "stewardmd.pages.dev") {
+    return next();
+  }
+
   const secretPath = ((env && env.SITE_ACCESS_PATH) || DEFAULT_SECRET_PATH).replace(/^\/+|\/+$/g, "");
   const token = await tokenFor(secretPath);
 
