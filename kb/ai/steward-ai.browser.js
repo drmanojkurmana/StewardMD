@@ -362,7 +362,12 @@
         // Phase 1 — LEXICAL only (instant, no network). Dedup the retrieved disease order.
         var lexIds = []; retrieved.forEach(function (r) { if (r && r.diseaseId && lexIds.indexOf(r.diseaseId) < 0) lexIds.push(r.diseaseId); });
         if (!lexIds.length && retrieved[0] && retrieved[0].diseaseId) lexIds = [retrieved[0].diseaseId];
-        var chosen = pick(lexIds.slice(0, 8));
+        // Evaluate ONLY the lexical rank-0 here — matches the pre-hybrid lexical path (and the
+        // offline/native path where the vector arm is unreachable). Scanning the deeper lexical pool
+        // let a body-coverage match on a LOWER-ranked disease win (e.g. HF-management mentions many
+        // electrolytes) → mis-routes. The multi-candidate POOL evaluation belongs to the fused
+        // vector phase below, where the semantic arm actually justifies considering rank>0.
+        var chosen = pick(lexIds.slice(0, 1));
         // Phase 2 — SEMANTIC fallback. Skip the Vectorize hop ONLY when the lexical pick is a NAME-level
         // match (disease name matches the query topic) or there's no distinctive term to disambiguate.
         // A mere body-text coverage match is NOT enough to skip — e.g. "hyperkalemia management" hits
