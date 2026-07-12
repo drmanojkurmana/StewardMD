@@ -86,8 +86,14 @@ export async function onRequest(context) {
     return next();
   }
 
-  // Locked. Block API calls with a plain 503; show humans the coming-soon page.
+  // Locked. Server-to-server cron / admin calls that carry the shared admin token bypass the
+  // gate (there is no unlock cookie for machine callers) — e.g. the stewardmd-api Worker's daily
+  // POST /api/updates/sync and 15-min /api/watch/run. Everything else /api/* stays 503.
   if (url.pathname.startsWith("/api/")) {
+    const adminTok = request.headers.get("X-Admin-Token");
+    if (adminTok && env && env.UPDATES_ADMIN_TOKEN && safeEqual(adminTok, env.UPDATES_ADMIN_TOKEN)) {
+      return next();
+    }
     return new Response(
       JSON.stringify({ error: "unavailable", message: "StewardMD is temporarily private." }),
       { status: 503, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } }
