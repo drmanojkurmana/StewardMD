@@ -21,6 +21,14 @@ binding = "stewardmd_nmc"
 database_name = "stewardmd-nmc"
 database_id = "36803432-5e8c-45e7-8dff-530f9a36c2cd"
 
+# D1 — Medical Updates module (guidelines / approvals / safety alerts / trials + sources + crawl logs)
+# CREATE FIRST:  wrangler d1 create stewardmd-updates   → paste the returned database_id below (both blocks).
+# Then apply schema: wrangler d1 execute stewardmd-updates --remote --file functions/db/updates_schema.sql
+[[d1_databases]]
+binding = "UPDATES_DB"
+database_name = "stewardmd-updates"
+database_id = "f1fe0b36-d780-415d-ae8d-e9024747b552"
+
 [env.production]
 compatibility_date = "2026-06-28"
 
@@ -45,6 +53,11 @@ index_name = "stewardmd-kb"
 binding = "stewardmd_nmc"
 database_name = "stewardmd-nmc"
 database_id = "36803432-5e8c-45e7-8dff-530f9a36c2cd"
+
+[[env.production.d1_databases]]
+binding = "UPDATES_DB"
+database_name = "stewardmd-updates"
+database_id = "f1fe0b36-d780-415d-ae8d-e9024747b552"
 
 [env.production.ai]
 binding = "AI"

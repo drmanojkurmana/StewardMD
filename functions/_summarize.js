@@ -1,0 +1,143 @@
+/* StewardMD — Medical Updates AI summarizer.
+ *
+ * Turns a newly-detected medical document (metadata + a bounded text excerpt) into
+ * a structured, ORIGINAL summary. Called ONCE per genuinely new/changed document by
+ * the ingest pipeline; the result is cached in D1 forever and shared by all users.
+ *
+ * Reuses the app's existing Gemini transport (callGemini → Vertex primary, AI-Studio
+ * fallback) from functions/api/ai. Model chain: gemini-2.5-flash-lite (cheapest) →
+ * gemini-2.5-flash (fallback), overridable via UPDATES_MODEL / UPDATES_MODEL_FALLBACK.
+ *
+ * COPYRIGHT: the prompt forbids reproducing guideline text, tables, or figures. Only
+ * an original plain-language summary + structured facts + links are produced/stored.
+ */
+import { callGemini } from "./api/ai/[[path]].js";
+import { usageKv, usageConfig, recordUsage, estTokens } from "./_usage.js";
+
+const MODEL_PRIMARY_DEFAULT = "gemini-2.5-flash-lite";
+const MODEL_FALLBACK_DEFAULT = "gemini-2.5-flash";
+const WORKSPACES = ["internal_medicine", "surgery", "ent", "ophthalmology", "obstetrics_gynaecology", "urology", "dentistry_omfs", "paediatrics"];
+
+const SUMMARY_SYS =
+  "You are a medical editor for a clinical app used by qualified doctors. You are given METADATA and a " +
+  "SOURCE EXCERPT for ONE newly released medical item (a guideline, drug approval, safety alert, or major " +
+  "trial) from an official organization. Write an ORIGINAL, plain-language summary for busy clinicians.\n" +
+  "STRICT COPYRIGHT RULES: Do NOT reproduce, quote, or closely paraphrase the source text. Do NOT copy tables, " +
+  "figures, or verbatim recommendation wording. Summarize in your own words only. If the excerpt is too thin to " +
+  "summarize reliably, say so in the summary and leave the detail arrays empty — never invent facts, doses, " +
+  "numbers, DOIs, or PMIDs that are not present.\n" +
+  "Return ONLY JSON (no prose, no markdown fence) with EXACTLY these keys:\n" +
+  "{\"title\":string, \"organization\":string, \"specialty\":string, \"release_date\":string, \"version\":string, " +
+  "\"importance\":\"normal\"|\"high\"|\"critical\", \"estimated_read_time\":number, \"summary\":string, " +
+  "\"major_changes\":[string], \"what_changed\":[string], \"clinical_impact\":string, \"clinical_pearls\":[string], " +
+  "\"new_recommendations\":[string], \"removed_recommendations\":[string], \"practice_points\":[string], " +
+  "\"evidence_level\":string, \"keywords\":[string], \"official_url\":string, \"official_pdf_url\":string, " +
+  "\"doi\":string, \"pmid\":string}.\n" +
+  "GUIDANCE: \"summary\" is original prose, AT MOST 700 words. \"estimated_read_time\" is whole minutes to read the " +
+  "summary. \"importance\": 'critical' for safety withdrawals/boxed warnings/drug bans, 'high' for practice-changing " +
+  "guideline updates or major approvals, else 'normal'. Arrays hold short phrases; use [] when genuinely none. Echo " +
+  "official_url/doi/pmid from the metadata when present, else empty string. No text outside the JSON.";
+
+function parseJsonLoose(t) {
+  if (!t) return null;
+  const m = String(t).match(/\{[\s\S]*\}/);
+  if (!m) return null;
+  try { return JSON.parse(m[0]); } catch (e) { return null; }
+}
+function clampWords(s, max) {
+  const w = String(s || "").trim().split(/\s+/);
+  return w.length <= max ? String(s || "").trim() : w.slice(0, max).join(" ") + "…";
+}
+function arr(x) { return Array.isArray(x) ? x.filter(Boolean).map((v) => String(v)).slice(0, 12) : []; }
+function normImportance(v) { v = String(v || "").toLowerCase().trim(); return (v === "high" || v === "critical") ? v : "normal"; }
+function normWorkspace(v, fallback) { v = String(v || "").toLowerCase().trim(); return WORKSPACES.indexOf(v) >= 0 ? v : (fallback || "internal_medicine"); }
+
+// Build a metering gate that reuses _usage.recordUsage so summaries appear in the
+// existing /api/ai/admin report under byType.updates_summary. Fail-open (no KV → no meter).
+async function meterGate(env) {
+  const store = usageKv(env);
+  if (!store) return { meter: false };
+  const cfg = usageConfig(env);
+  const now = new Date(), day = now.toISOString().slice(0, 10), month = now.toISOString().slice(0, 7);
+  const id = "system:updates";
+  const rj = async (k) => { try { return (await store.get(k, "json")) || null; } catch (e) { return null; } };
+  const u = (await rj("maik:u:" + id + ":" + day)) || { general: 0, case: 0, intent: 0, ocr: 0, pdfPages: 0, tokens: 0 };
+  const m = (await rj("maik:m:" + id + ":" + month)) || { tokens: 0 };
+  const g = (await rj("maik:global:" + day)) || { cost: 0, req: 0, blocked: 0 };
+  return { meter: true, store, cfg, u, m, g, id, _day: day, _month: month, type: "updates_summary" };
+}
+
+/**
+ * summarizeDocument(env, meta) → { ok, data?, model?, error? }
+ *   meta = { title, organization, sourceType, workspace, url, doi, pmid, publishedTs, excerpt }
+ * `data` is the normalised structured object ready to persist. On failure ok=false.
+ */
+export async function summarizeDocument(env, meta) {
+  const primary = env.UPDATES_MODEL || MODEL_PRIMARY_DEFAULT;
+  const fallback = env.UPDATES_MODEL_FALLBACK || MODEL_FALLBACK_DEFAULT;
+  const models = fallback && fallback !== primary ? [primary, fallback] : [primary];
+
+  const metaBlock = [
+    "=== METADATA ===",
+    "Organization: " + (meta.organization || ""),
+    "Item type: " + (meta.sourceType || "guideline"),
+    "Title: " + (meta.title || ""),
+    meta.url ? "Official URL: " + meta.url : "",
+    meta.doi ? "DOI: " + meta.doi : "",
+    meta.pmid ? "PMID: " + meta.pmid : "",
+    meta.publishedTs ? "Published: " + new Date(meta.publishedTs).toISOString().slice(0, 10) : "",
+    "",
+    "=== SOURCE EXCERPT (summarize in your OWN words; do not copy) ===",
+    String(meta.excerpt || meta.title || "").slice(0, 8000),
+  ].filter(Boolean).join("\n");
+
+  const gate = await meterGate(env);
+  let lastErr = null;
+
+  for (const model of models) {
+    try {
+      const text = await callGemini(
+        Object.assign({}, env, { GEMINI_MODEL: model }),
+        [{ text: SUMMARY_SYS + "\n\n" + metaBlock }],
+        1400,
+        { temperature: 0.3 }
+      );
+      const parsed = parseJsonLoose(text);
+      if (parsed && (parsed.summary || parsed.title)) {
+        if (gate.meter) {
+          try { await recordUsage(gate, { inTok: estTokens(SUMMARY_SYS.length + metaBlock.length), outTok: estTokens((text || "").length), status: "success" }); } catch (e) {}
+        }
+        const data = {
+          title: String(parsed.title || meta.title || "").slice(0, 240),
+          organization: String(parsed.organization || meta.organization || "").slice(0, 120),
+          workspace: normWorkspace(meta.workspace, "internal_medicine"),
+          specialty: String(parsed.specialty || "").slice(0, 80),
+          release_date: String(parsed.release_date || "").slice(0, 40),
+          version: String(parsed.version || "").slice(0, 60),
+          importance: normImportance(parsed.importance),
+          est_read_min: Math.max(1, Math.min(60, parseInt(parsed.estimated_read_time, 10) || 3)),
+          summary: clampWords(parsed.summary, 700),
+          major_changes: arr(parsed.major_changes),
+          what_changed: arr(parsed.what_changed),
+          clinical_impact: String(parsed.clinical_impact || "").slice(0, 1200),
+          clinical_pearls: arr(parsed.clinical_pearls),
+          new_recommendations: arr(parsed.new_recommendations),
+          removed_recommendations: arr(parsed.removed_recommendations),
+          practice_points: arr(parsed.practice_points),
+          evidence_level: String(parsed.evidence_level || "").slice(0, 80),
+          keywords: arr(parsed.keywords),
+          official_url: String(parsed.official_url || meta.url || "").slice(0, 500),
+          official_pdf_url: String(parsed.official_pdf_url || "").slice(0, 500),
+          doi: String(parsed.doi || meta.doi || "").slice(0, 120),
+          pmid: String(parsed.pmid || meta.pmid || "").slice(0, 40),
+        };
+        return { ok: true, data, model };
+      }
+      lastErr = new Error("summarizer returned unparseable JSON");
+    } catch (e) { lastErr = e; }
+  }
+  if (gate.meter) {
+    try { await recordUsage(gate, { inTok: estTokens(SUMMARY_SYS.length + metaBlock.length), outTok: 0, status: "failed" }); } catch (e) {}
+  }
+  return { ok: false, error: String((lastErr && lastErr.message) || lastErr || "summarize failed") };
+}

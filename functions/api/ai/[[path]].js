@@ -232,7 +232,7 @@ function failReason(e) {
 // Facade — callers (RAG explain / legacy explain / vision) are unchanged. Provider priority:
 // Vertex (retry once) → Developer hot standby. Fails over on any Vertex auth/OAuth/STS/
 // permission/quota/429/5xx/network/unavailable error so the clinician workflow never breaks.
-async function callGemini(env, parts, maxTokens, opts) {
+export async function callGemini(env, parts, maxTokens, opts) {
   const order = providerOrder(env);
   let lastErr = null;
   for (let i = 0; i < order.length; i++) {
