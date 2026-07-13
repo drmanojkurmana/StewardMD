@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 657,
+    "diseases": 713,
     "diagnostic": 141,
-    "reference": 516,
+    "reference": 572,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -27,16 +27,16 @@
     "overview": 100,
     "clinicalFeatures": 100,
     "pathophysiology": 100,
-    "differential": 99.1,
+    "differential": 99.2,
     "investigations": 99.7,
     "redFlags": 100,
-    "severity": 60.1,
-    "prognosis": 98.6,
-    "diagnosticScoring": 21.5,
-    "management": 21.3,
-    "drugTherapy": 19.6,
-    "dosing": 19.6,
-    "stewardship": 7.8
+    "severity": 55.4,
+    "prognosis": 98.7,
+    "diagnosticScoring": 19.8,
+    "management": 19.6,
+    "drugTherapy": 18.1,
+    "dosing": 18.1,
+    "stewardship": 7.2
   },
   "bySpecialty": {
     "Pulmonology": {
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 26,
+      "total": 40,
       "diagnostic": 5,
-      "reference": 21,
+      "reference": 35,
       "dims": {
-        "overview": 26,
-        "clinicalFeatures": 26,
-        "pathophysiology": 26,
-        "differential": 26,
-        "investigations": 25,
-        "redFlags": 26,
+        "overview": 40,
+        "clinicalFeatures": 40,
+        "pathophysiology": 40,
+        "differential": 40,
+        "investigations": 39,
+        "redFlags": 40,
         "severity": 7,
-        "prognosis": 25,
+        "prognosis": 39,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -400,38 +400,18 @@
       }
     },
     "Obstetrics": {
-      "total": 14,
+      "total": 28,
       "diagnostic": 0,
-      "reference": 14,
+      "reference": 28,
       "dims": {
-        "overview": 14,
-        "clinicalFeatures": 14,
-        "pathophysiology": 14,
-        "differential": 14,
-        "investigations": 14,
-        "redFlags": 14,
+        "overview": 28,
+        "clinicalFeatures": 28,
+        "pathophysiology": 28,
+        "differential": 28,
+        "investigations": 28,
+        "redFlags": 28,
         "severity": 0,
-        "prognosis": 14,
-        "diagnosticScoring": 0,
-        "management": 0,
-        "drugTherapy": 0,
-        "dosing": 0,
-        "stewardship": 0
-      }
-    },
-    "Eye": {
-      "total": 24,
-      "diagnostic": 0,
-      "reference": 24,
-      "dims": {
-        "overview": 24,
-        "clinicalFeatures": 24,
-        "pathophysiology": 24,
-        "differential": 24,
-        "investigations": 24,
-        "redFlags": 24,
-        "severity": 0,
-        "prognosis": 24,
+        "prognosis": 28,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -440,18 +420,38 @@
       }
     },
     "ENT": {
-      "total": 14,
+      "total": 28,
       "diagnostic": 0,
-      "reference": 14,
+      "reference": 28,
       "dims": {
-        "overview": 14,
-        "clinicalFeatures": 14,
-        "pathophysiology": 14,
-        "differential": 14,
-        "investigations": 14,
-        "redFlags": 14,
+        "overview": 28,
+        "clinicalFeatures": 28,
+        "pathophysiology": 28,
+        "differential": 28,
+        "investigations": 28,
+        "redFlags": 28,
         "severity": 0,
-        "prognosis": 14,
+        "prognosis": 28,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Eye": {
+      "total": 38,
+      "diagnostic": 0,
+      "reference": 38,
+      "dims": {
+        "overview": 38,
+        "clinicalFeatures": 38,
+        "pathophysiology": 38,
+        "differential": 38,
+        "investigations": 38,
+        "redFlags": 38,
+        "severity": 0,
+        "prognosis": 38,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -1814,8 +1814,74 @@
       }
     },
     {
+      "id": "actinic_keratosis",
+      "name": "Actinic Keratosis",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "alopecia_areata",
+      "name": "Alopecia Areata",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "atopic_dermatitis",
       "name": "Atopic dermatitis",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "basal_cell_carcinoma",
+      "name": "Basal Cell Carcinoma",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
       "tier": "reference",
@@ -1882,6 +1948,72 @@
     {
       "id": "contact_dermatitis",
       "name": "Contact dermatitis",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cutaneous_larva_migrans",
+      "name": "Cutaneous Larva Migrans",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "squamous_cell_carcinoma_skin",
+      "name": "Cutaneous Squamous Cell Carcinoma",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dermatitis_herpetiformis",
+      "name": "Dermatitis Herpetiformis",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
       "tier": "reference",
@@ -2078,6 +2210,28 @@
       }
     },
     {
+      "id": "impetigo",
+      "name": "Impetigo",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "infectious_complications_of_bites",
       "name": "Infectious Complications of Bites",
       "specialty": "Dermatology",
@@ -2100,8 +2254,96 @@
       }
     },
     {
+      "id": "keloid",
+      "name": "Keloid",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lichen_planus",
       "name": "Lichen planus",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "melasma",
+      "name": "Melasma",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "miliaria",
+      "name": "Miliaria",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "molluscum_contagiosum",
+      "name": "Molluscum Contagiosum",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
       "tier": "reference",
@@ -2146,6 +2388,28 @@
     {
       "id": "pemphigus_vulgaris",
       "name": "Pemphigus vulgaris",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pityriasis_rosea",
+      "name": "Pityriasis Rosea",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
       "tier": "reference",
@@ -2320,10 +2584,54 @@
       }
     },
     {
+      "id": "tinea_versicolor",
+      "name": "Tinea Versicolor",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "viral_exanthems",
       "name": "Viral Exanthems of Childhood",
       "specialty": "Dermatology",
       "system": "Dermatological",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "viral_warts",
+      "name": "Viral Warts",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -3574,6 +3882,50 @@
       }
     },
     {
+      "id": "acoustic_neuroma",
+      "name": "Acoustic neuroma",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mastoiditis",
+      "name": "Acute mastoiditis",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acute_otitis_media",
       "name": "Acute otitis media",
       "specialty": "ENT",
@@ -3596,8 +3948,52 @@
       }
     },
     {
+      "id": "sialadenitis",
+      "name": "Acute sialadenitis",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acute_tonsillitis",
       "name": "Acute tonsillitis",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "adenoid_hypertrophy",
+      "name": "Adenoid hypertrophy",
       "specialty": "ENT",
       "system": "ENT / Otorhinolaryngology",
       "tier": "reference",
@@ -3662,8 +4058,74 @@
       }
     },
     {
+      "id": "cholesteatoma",
+      "name": "Cholesteatoma",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chronic_rhinosinusitis",
+      "name": "Chronic rhinosinusitis",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chronic_suppurative_otitis_media",
       "name": "Chronic suppurative otitis media",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "deviated_nasal_septum",
+      "name": "Deviated nasal septum",
       "specialty": "ENT",
       "system": "ENT / Otorhinolaryngology",
       "tier": "reference",
@@ -3728,6 +4190,28 @@
       }
     },
     {
+      "id": "ludwig_angina",
+      "name": "Ludwig angina",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "menieres_disease",
       "name": "Meniere's disease",
       "specialty": "ENT",
@@ -3752,6 +4236,28 @@
     {
       "id": "nasal_polyps",
       "name": "Nasal polyps",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nasopharyngeal_carcinoma",
+      "name": "Nasopharyngeal carcinoma",
       "specialty": "ENT",
       "system": "ENT / Otorhinolaryngology",
       "tier": "reference",
@@ -3816,6 +4322,28 @@
       }
     },
     {
+      "id": "otosclerosis",
+      "name": "Otosclerosis",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "peritonsillar_abscess",
       "name": "Peritonsillar abscess",
       "specialty": "ENT",
@@ -3838,8 +4366,96 @@
       }
     },
     {
+      "id": "presbycusis",
+      "name": "Presbycusis",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sudden_sensorineural_hearing_loss",
       "name": "Sudden sensorineural hearing loss",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tinnitus",
+      "name": "Tinnitus",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tympanic_membrane_perforation",
+      "name": "Tympanic membrane perforation",
+      "specialty": "ENT",
+      "system": "ENT / Otorhinolaryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vocal_cord_nodules",
+      "name": "Vocal cord nodules",
       "specialty": "ENT",
       "system": "ENT / Otorhinolaryngology",
       "tier": "reference",
@@ -4212,6 +4828,28 @@
       }
     },
     {
+      "id": "corneal_abrasion",
+      "name": "Corneal abrasion",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dacryocystitis",
       "name": "Dacryocystitis",
       "specialty": "Eye",
@@ -4256,6 +4894,50 @@
       }
     },
     {
+      "id": "dry_eye_disease",
+      "name": "Dry eye disease",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ectropion",
+      "name": "Ectropion",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "endophthalmitis",
       "name": "Endophthalmitis",
       "specialty": "Eye",
@@ -4278,8 +4960,118 @@
       }
     },
     {
+      "id": "entropion",
+      "name": "Entropion",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "episcleritis",
       "name": "Episcleritis",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "herpes_simplex_keratitis",
+      "name": "Herpes simplex keratitis",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "herpes_zoster_ophthalmicus",
+      "name": "Herpes zoster ophthalmicus",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hyphema",
+      "name": "Hyphema",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "keratoconus",
+      "name": "Keratoconus",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -4344,6 +5136,28 @@
       }
     },
     {
+      "id": "papilloedema",
+      "name": "Papilloedema",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "primary_open_angle_glaucoma",
       "name": "Primary open-angle glaucoma",
       "specialty": "Eye",
@@ -4388,8 +5202,52 @@
       }
     },
     {
+      "id": "ptosis",
+      "name": "Ptosis",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "retinal_detachment",
       "name": "Retinal detachment",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "retinitis_pigmentosa",
+      "name": "Retinitis pigmentosa",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -4456,6 +5314,72 @@
     {
       "id": "strabismus",
       "name": "Strabismus",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "subconjunctival_hemorrhage",
+      "name": "Subconjunctival haemorrhage",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "thyroid_eye_disease",
+      "name": "Thyroid eye disease",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vitreous_hemorrhage",
+      "name": "Vitreous haemorrhage",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -11406,6 +12330,116 @@
       }
     },
     {
+      "id": "bacterial_vaginosis",
+      "name": "Bacterial Vaginosis",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "bartholin_abscess",
+      "name": "Bartholin's Abscess",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cervical_cancer",
+      "name": "Cervical Cancer",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chorioamnionitis",
+      "name": "Chorioamnionitis",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dysmenorrhea",
+      "name": "Dysmenorrhoea",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "eclampsia",
       "name": "Eclampsia",
       "specialty": "Obstetrics",
@@ -11430,6 +12464,28 @@
     {
       "id": "ectopic_pregnancy",
       "name": "Ectopic pregnancy",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "endometrial_cancer",
+      "name": "Endometrial Cancer",
       "specialty": "Obstetrics",
       "system": "Obstetrics / Gynaecology",
       "tier": "reference",
@@ -11494,8 +12550,118 @@
       }
     },
     {
+      "id": "gestational_trophoblastic_disease",
+      "name": "Gestational Trophoblastic Disease",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hyperemesis_gravidarum",
       "name": "Hyperemesis gravidarum",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "intrauterine_growth_restriction",
+      "name": "Intrauterine Growth Restriction",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "obstetric_cholestasis",
+      "name": "Obstetric Cholestasis",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ovarian_cancer",
+      "name": "Ovarian Cancer",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ovarian_torsion",
+      "name": "Ovarian Torsion",
       "specialty": "Obstetrics",
       "system": "Obstetrics / Gynaecology",
       "tier": "reference",
@@ -11670,8 +12836,74 @@
       }
     },
     {
+      "id": "rh_isoimmunization",
+      "name": "Rhesus Isoimmunisation",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "uterine_fibroids",
       "name": "Uterine fibroids",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "uterine_prolapse",
+      "name": "Uterine Prolapse",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vulvovaginal_candidiasis",
+      "name": "Vulvovaginal Candidiasis",
       "specialty": "Obstetrics",
       "system": "Obstetrics / Gynaecology",
       "tier": "reference",
