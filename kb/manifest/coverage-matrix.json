@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 1765,
+    "diseases": 1821,
     "diagnostic": 141,
-    "reference": 1624,
+    "reference": 1680,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,13 +30,13 @@
     "differential": 99.7,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 22.4,
+    "severity": 21.7,
     "prognosis": 99.5,
-    "diagnosticScoring": 8,
-    "management": 7.9,
-    "drugTherapy": 7.3,
-    "dosing": 7.3,
-    "stewardship": 2.9
+    "diagnosticScoring": 7.7,
+    "management": 7.7,
+    "drugTherapy": 7.1,
+    "dosing": 7.1,
+    "stewardship": 2.8
   },
   "bySpecialty": {
     "Pulmonology": {
@@ -380,18 +380,18 @@
       }
     },
     "Infectious Diseases": {
-      "total": 130,
+      "total": 159,
       "diagnostic": 0,
-      "reference": 130,
+      "reference": 159,
       "dims": {
-        "overview": 130,
-        "clinicalFeatures": 130,
-        "pathophysiology": 130,
-        "differential": 129,
-        "investigations": 130,
-        "redFlags": 130,
+        "overview": 159,
+        "clinicalFeatures": 159,
+        "pathophysiology": 159,
+        "differential": 158,
+        "investigations": 159,
+        "redFlags": 159,
         "severity": 63,
-        "prognosis": 130,
+        "prognosis": 159,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -420,18 +420,18 @@
       }
     },
     "Eye": {
-      "total": 58,
+      "total": 72,
       "diagnostic": 0,
-      "reference": 58,
+      "reference": 72,
       "dims": {
-        "overview": 58,
-        "clinicalFeatures": 58,
-        "pathophysiology": 58,
-        "differential": 58,
-        "investigations": 58,
-        "redFlags": 58,
+        "overview": 72,
+        "clinicalFeatures": 72,
+        "pathophysiology": 72,
+        "differential": 72,
+        "investigations": 72,
+        "redFlags": 72,
         "severity": 0,
-        "prognosis": 58,
+        "prognosis": 72,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -632,6 +632,26 @@
         "redFlags": 15,
         "severity": 3,
         "prognosis": 15,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Ear-Nose-Throat": {
+      "total": 13,
+      "diagnostic": 0,
+      "reference": 13,
+      "dims": {
+        "overview": 13,
+        "clinicalFeatures": 13,
+        "pathophysiology": 13,
+        "differential": 13,
+        "investigations": 13,
+        "redFlags": 13,
+        "severity": 0,
+        "prognosis": 13,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -5136,6 +5156,292 @@
       "name": "Waardenburg syndrome",
       "specialty": "Ear",
       "system": "Ear / Audiology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "branchial_cleft_cyst",
+      "name": "Branchial cleft cyst",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "eustachian_tube_dysfunction",
+      "name": "Eustachian tube dysfunction",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "glomus_jugulare_tumor",
+      "name": "Glomus jugulare tumour (jugular paraganglioma)",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "petrous_apicitis",
+      "name": "Petrous apicitis (Gradenigo syndrome)",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "plunging_ranula",
+      "name": "Plunging (cervical) ranula",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ranula",
+      "name": "Ranula",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "recurrent_respiratory_papillomatosis",
+      "name": "Recurrent respiratory papillomatosis (HPV 6/11)",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "samter_triad",
+      "name": "Samter triad (aspirin-exacerbated respiratory disease)",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sialolithiasis",
+      "name": "Sialolithiasis",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sinonasal_inverted_papilloma",
+      "name": "Sinonasal inverted papilloma",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "superior_semicircular_canal_dehiscence",
+      "name": "Superior semicircular canal dehiscence",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "thyroglossal_duct_cyst",
+      "name": "Thyroglossal duct cyst",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vestibular_schwannoma",
+      "name": "Vestibular schwannoma (acoustic neuroma)",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Head and Neck",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -12018,6 +12324,28 @@
       }
     },
     {
+      "id": "acute_zonal_occult_outer_retinopathy",
+      "name": "Acute zonal occult outer retinopathy (AZOOR)",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "age_related_macular_degeneration",
       "name": "Age-related macular degeneration",
       "specialty": "Eye",
@@ -12042,6 +12370,28 @@
     {
       "id": "amblyopia",
       "name": "Amblyopia",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "angioid_streaks",
+      "name": "Angioid streaks",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -12172,6 +12522,28 @@
       }
     },
     {
+      "id": "birdshot_chorioretinopathy",
+      "name": "Birdshot chorioretinopathy (HLA-A29)",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "blepharitis",
       "name": "Blepharitis",
       "specialty": "Eye",
@@ -12260,6 +12632,28 @@
       }
     },
     {
+      "id": "central_serous_chorioretinopathy",
+      "name": "Central serous chorioretinopathy",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chalazion",
       "name": "Chalazion",
       "specialty": "Eye",
@@ -12328,6 +12722,28 @@
     {
       "id": "choroideremia",
       "name": "Choroideremia",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "coats_disease",
+      "name": "Coats disease (retinal telangiectasia)",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -12568,8 +12984,52 @@
       }
     },
     {
+      "id": "epiretinal_membrane",
+      "name": "Epiretinal membrane (macular pucker)",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "episcleritis",
       "name": "Episcleritis",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fuchs_endothelial_dystrophy",
+      "name": "Fuchs endothelial corneal dystrophy",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -12680,6 +13140,28 @@
     {
       "id": "hyphema",
       "name": "Hyphema",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "idiopathic_intracranial_hypertension",
+      "name": "Idiopathic intracranial hypertension",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -12812,6 +13294,72 @@
     {
       "id": "norrie_disease",
       "name": "Norrie disease",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ocular_cicatricial_pemphigoid",
+      "name": "Ocular cicatricial pemphigoid (mucous membrane pemphigoid)",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ocular_ischemic_syndrome",
+      "name": "Ocular ischaemic syndrome",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "optic_disc_drusen",
+      "name": "Optic disc drusen",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -13096,6 +13644,28 @@
       }
     },
     {
+      "id": "serpiginous_choroiditis",
+      "name": "Serpiginous choroiditis",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "stargardt_disease",
       "name": "Stargardt disease",
       "specialty": "Eye",
@@ -13162,6 +13732,28 @@
       }
     },
     {
+      "id": "sympathetic_ophthalmia",
+      "name": "Sympathetic ophthalmia",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "congenital_cataract_syndromic",
       "name": "Syndromic congenital cataract",
       "specialty": "Eye",
@@ -13208,6 +13800,28 @@
     {
       "id": "coloboma_chard_syndrome",
       "name": "Uveal/ocular coloboma and CHARGE-associated coloboma",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vitreomacular_traction_syndrome",
+      "name": "Vitreomacular traction syndrome",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -21610,6 +22224,28 @@
       }
     },
     {
+      "id": "bacillary_angiomatosis",
+      "name": "Bacillary angiomatosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bartonellosis",
       "name": "Bartonellosis",
       "specialty": "Infectious Diseases",
@@ -21830,6 +22466,28 @@
       }
     },
     {
+      "id": "capnocytophaga_infection",
+      "name": "Capnocytophaga canimorsus infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "catheter_related_bloodstream",
       "name": "Catheter-related bloodstream infection",
       "specialty": "Infectious Diseases",
@@ -22006,6 +22664,28 @@
       }
     },
     {
+      "id": "colorado_tick_fever",
+      "name": "Colorado tick fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "congenital_cmv",
       "name": "Congenital Cytomegalovirus Infection",
       "specialty": "Infectious Diseases",
@@ -22085,6 +22765,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cryptococcus_gattii_infection",
+      "name": "Cryptococcus gattii infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -22182,8 +22884,52 @@
       }
     },
     {
+      "id": "disseminated_mac_infection",
+      "name": "Disseminated Mycobacterium avium complex infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dracunculiasis",
       "name": "Dracunculiasis (Guinea worm disease)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "eastern_equine_encephalitis",
+      "name": "Eastern equine encephalitis",
       "specialty": "Infectious Diseases",
       "system": "Infectious disease",
       "tier": "reference",
@@ -22248,6 +22994,28 @@
       }
     },
     {
+      "id": "emergomycosis",
+      "name": "Emergomycosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "enterococcal_infections",
       "name": "Enterococcal Infections",
       "specialty": "Infectious Diseases",
@@ -22272,6 +23040,50 @@
     {
       "id": "entomophthoromycosis",
       "name": "Entomophthoromycosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "epidemic_typhus",
+      "name": "Epidemic (louse-borne) typhus",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "erysipeloid",
+      "name": "Erysipeloid",
       "specialty": "Infectious Diseases",
       "system": "Infectious disease",
       "tier": "reference",
@@ -22402,6 +23214,28 @@
       }
     },
     {
+      "id": "glanders",
+      "name": "Glanders",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gnathostomiasis",
       "name": "Gnathostomiasis",
       "specialty": "Infectious Diseases",
@@ -22446,6 +23280,50 @@
       }
     },
     {
+      "id": "hemorrhagic_fever_with_renal_syndrome",
+      "name": "Haemorrhagic fever with renal syndrome",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hantavirus_cardiopulmonary_syndrome",
+      "name": "Hantavirus cardiopulmonary syndrome",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hantavirus",
       "name": "Hantavirus infection",
       "specialty": "Infectious Diseases",
@@ -22478,6 +23356,28 @@
         "clinicalFeatures": true,
         "pathophysiology": true,
         "differential": false,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hendra_virus_infection",
+      "name": "Hendra virus infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
         "investigations": true,
         "redFlags": true,
         "severity": false,
@@ -22547,6 +23447,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "human_granulocytic_anaplasmosis",
+      "name": "Human granulocytic anaplasmosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -22679,6 +23601,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fusariosis",
+      "name": "Invasive fusariosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -22886,6 +23830,28 @@
       }
     },
     {
+      "id": "louse_borne_relapsing_fever",
+      "name": "Louse-borne relapsing fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lyme_disease",
       "name": "Lyme Disease (Lyme Borreliosis)",
       "specialty": "Infectious Diseases",
@@ -22943,6 +23909,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mediterranean_spotted_fever",
+      "name": "Mediterranean spotted fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -23075,6 +24063,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "murine_typhus",
+      "name": "Murine (endemic) typhus",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -23282,6 +24292,28 @@
       }
     },
     {
+      "id": "pasteurellosis",
+      "name": "Pasteurellosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pathogenesis_diagnosis_and_treatment_of",
       "name": "Pathogenesis, Diagnosis, and Treatment of Fungal Infections",
       "specialty": "Infectious Diseases",
@@ -23308,6 +24340,28 @@
       "name": "Pertussis (Whooping Cough)",
       "specialty": "Infectious Diseases",
       "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "phaeohyphomycosis",
+      "name": "Phaeohyphomycosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -23418,6 +24472,28 @@
       "name": "Pott's spine",
       "specialty": "Infectious Diseases",
       "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "powassan_virus_infection",
+      "name": "Powassan virus encephalitis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -23568,6 +24644,72 @@
       }
     },
     {
+      "id": "rickettsialpox",
+      "name": "Rickettsialpox",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rift_valley_fever",
+      "name": "Rift Valley fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rocky_mountain_spotted_fever",
+      "name": "Rocky Mountain spotted fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "roseola_infantum",
       "name": "Roseola infantum",
       "specialty": "Infectious Diseases",
@@ -23616,6 +24758,28 @@
       "name": "Scarlet fever",
       "specialty": "Infectious Diseases",
       "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "scedosporiosis",
+      "name": "Scedosporiosis / lomentosporiosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -23876,6 +25040,50 @@
       }
     },
     {
+      "id": "tick_borne_encephalitis",
+      "name": "Tick-borne encephalitis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tick_borne_relapsing_fever",
+      "name": "Tick-borne relapsing fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "TOXIC_SHOCK_SYNDROME",
       "name": "Toxic shock syndrome",
       "specialty": "Infectious Diseases",
@@ -23911,6 +25119,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trench_fever",
+      "name": "Trench fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -24144,6 +25374,28 @@
       "name": "Varicella-Zoster Virus Infection",
       "specialty": "Infectious Diseases",
       "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "venezuelan_equine_encephalitis",
+      "name": "Venezuelan equine encephalitis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
       "tier": "reference",
       "caps": {
         "overview": true,
