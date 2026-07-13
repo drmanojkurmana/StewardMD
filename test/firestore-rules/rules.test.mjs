@@ -111,7 +111,7 @@ const cases = [
   ["member: head self-leave (blocked)", await allowed(deleteDoc(doc(A, "icuGroups/GRPI/members/docA"))), false, "head can't bare-leave"],
   ["member: professor removes head (blocked)", await allowed(deleteDoc(doc(G, "icuGroups/GRPI/members/docA"))), false, "head can't be removed"],
   ["member: intern removes SR (non-admin)", await allowed(deleteDoc(doc(D, "icuGroups/GRPI/members/docB"))), false, "non-admin can't remove"],
-  ["member: admin removes SR", await allowed(deleteDoc(doc(G, "icuGroups/GRPI/members/docB"))), true, "admin removes a member"],
+  ["member: admin removes SR", await allowed(deleteDoc(doc(G, "icuGroups/GRPI/members/docN1"))), true, "admin removes a member"],   // remove a spare SR (docN1), not docB — docB is reused by the task/timeline cases below
   ["member: self-leave (intern/SR now)", await allowed(deleteDoc(doc(D, "icuGroups/GRPI/members/docD"))), true, "anyone may leave on their own"],
 
   // ── invites ────────────────────────────────────────────────────────────────
