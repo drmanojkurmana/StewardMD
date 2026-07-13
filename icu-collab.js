@@ -272,7 +272,9 @@
   function ptRef(db, gid, pid) { return grpRef(db, gid).collection("patients").doc(pid); }
 
   /* ------------------------------------------------------------------ groups */
-  function subscribeGroups(cb) {
+  // onErr (optional) — called with the snapshot error (e.g. permission-denied) so the UI can show
+  // a non-technical error state + Retry. When omitted, falls back to the old cb([]) behaviour.
+  function subscribeGroups(cb, onErr) {
     if (!icuGroupsOn() || !currentUid()) { cb && cb([]); return function () {}; }
     return makeSub(function (db) {
       var uid = currentUid();
@@ -283,7 +285,7 @@
           var out = [];
           snap.forEach(function (d) { out.push(mapGroupDoc(d.id, d.data(), uid)); });
           cb && cb(out);
-        }, function () { cb && cb([]); });
+        }, function (e) { if (onErr) onErr(e); else cb && cb([]); });
     });
   }
   function createGroup(info) {
@@ -330,7 +332,7 @@
   }
 
   /* ---------------------------------------------------------------- patients */
-  function subscribePatients(gid, cb) {
+  function subscribePatients(gid, cb, onErr) {
     if (!icuGroupsOn() || !gid) { cb && cb([]); return function () {}; }
     return makeSub(function (db) {
       return grpRef(db, gid).collection("patients")
@@ -338,7 +340,7 @@
           var out = [];
           snap.forEach(function (d) { out.push(mapPatientDoc(d.id, d.data())); });
           cb && cb(out);
-        }, function () { cb && cb([]); });
+        }, function (e) { if (onErr) onErr(e); else cb && cb([]); });
     });
   }
   // Merge the patient doc + timeline + tasks listeners into ONE view-model, re-emitted on any change.

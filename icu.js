@@ -1051,7 +1051,7 @@
       '#icuRoot.icu-v2 .icu-v2-sync{display:flex;align-items:center;gap:5px;font:600 11px var(--font);color:var(--ok);flex:0 0 auto}' +
       '#icuRoot.icu-v2 .icu-v2-sync .icu-v2-dot{background:var(--ok)}' +
       '#icuRoot.icu-v2 .icu-v2-sync.syncing{color:var(--warn)}#icuRoot.icu-v2 .icu-v2-sync.syncing .icu-v2-dot{background:var(--warn)}' +
-      '#icuRoot.icu-v2 .icu-v2-sync.offline{color:var(--muted)}#icuRoot.icu-v2 .icu-v2-sync.offline .icu-v2-dot{background:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-sync.offline{color:var(--warn)}#icuRoot.icu-v2 .icu-v2-sync.offline .icu-v2-dot{background:var(--warn)}' +
       // other viewers in the presence stack
       '#icuRoot.icu-v2 .icu-v2-viewer.alt{background:var(--warn);margin-left:-6px;border:2px solid var(--panel)}' +
       // "not reviewed" chip on a live card footer
@@ -1077,6 +1077,44 @@
       '#icuRoot.icu-v2 .icu-v2-alert-ic{font-size:18px}' +
       '#icuRoot.icu-v2 .icu-v2-alert-ago{display:block;font:600 11px var(--font);color:var(--muted);margin-top:5px}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row.fresh{background:var(--primary-soft)}' +
+      // ═══ Phase 4 (polish): empty/loading/error/offline states + a11y — additive, v2-scoped ═══
+      // Calm loading: skeleton shimmer cards + a centered spinner. Reuses tokens (--panel2/--border/--primary).
+      '#icuRoot.icu-v2 .icu-v2-skel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:13px 15px;margin-bottom:10px}' +
+      '#icuRoot.icu-v2 .icu-v2-skel-top{display:flex;align-items:center;gap:10px}' +
+      '#icuRoot.icu-v2 .icu-v2-shim{background-color:var(--panel2);background-image:linear-gradient(90deg,transparent 0,var(--border) 40%,var(--border) 60%,transparent 100%);background-size:220% 100%;background-repeat:no-repeat;animation:icuv2shim 1.3s ease-in-out infinite;border-radius:7px}' +
+      '@keyframes icuv2shim{0%{background-position:180% 0}100%{background-position:-80% 0}}' +
+      '#icuRoot.icu-v2 .icu-v2-skel-bed{width:44px;height:44px;border-radius:12px;flex:0 0 auto}' +
+      '#icuRoot.icu-v2 .icu-v2-skel-id{flex:1;min-width:0}' +
+      '#icuRoot.icu-v2 .icu-v2-skel-l{height:13px;margin-bottom:7px}' +
+      '#icuRoot.icu-v2 .icu-v2-skel-strip{height:30px;margin-top:12px;border-radius:10px}' +
+      '#icuRoot.icu-v2 .icu-v2-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding:44px 20px;color:var(--muted);font:600 13px var(--font);text-align:center}' +
+      '#icuRoot.icu-v2 .icu-v2-spin{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:icuspin .9s linear infinite}' +
+      // Offline: unobtrusive amber full-width strip (reuses --warn/--warn-soft, AA-verified).
+      '#icuRoot.icu-v2 .icu-v2-offline{display:flex;align-items:center;gap:8px;background:var(--warn-soft);color:var(--warn);border-bottom:1px solid var(--warn);padding:9px 15px;font:600 12px var(--font)}' +
+      '#icuRoot.icu-v2 .icu-v2-offline .icu-ico{width:15px;height:15px;flex:0 0 auto}' +
+      // Error: a clear non-technical card with a Retry (re-subscribes) — never a raw error / blank board.
+      '#icuRoot.icu-v2 .icu-v2-errcard{text-align:center;padding:32px 20px;background:var(--panel);border:1px solid var(--warn);border-radius:16px;margin-bottom:12px}' +
+      '#icuRoot.icu-v2 .icu-v2-errcard .icu-v2-empty-ic .icu-ico{color:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-err-t{font:800 16px var(--font);color:var(--ink);margin:10px 0 6px}' +
+      '#icuRoot.icu-v2 .icu-v2-err-p{font:500 13px/1.55 var(--font);color:var(--muted);max-width:320px;margin:0 auto 4px}' +
+      // a11y: visible keyboard/switch focus ring (keeps -webkit-tap-highlight-color on touch untouched).
+      '#icuRoot.icu-v2 button:focus-visible,#icuRoot.icu-v2 [data-icu-act]:focus-visible,#icuRoot.icu-v2 input:focus-visible,#icuRoot.icu-v2 select:focus-visible,#icuRoot.icu-v2 textarea:focus-visible{outline:2px solid var(--primary);outline-offset:2px}' +
+      // white/high-contrast ring for controls that sit on the teal/acuity chrome (translucent-white buttons).
+      '#icuRoot.icu-v2 .icu-v2-banner :focus-visible,#icuRoot.icu-v2 .icu-v2-ubtn:focus-visible,#icuRoot.icu-v2 .icu-v2-gswitch:focus-visible,#icuRoot.icu-v2 .icu-v2-avatars:focus-visible,#icuRoot.icu-v2 .icu-v2-scount.total:focus-visible,#icuRoot.icu-v2 .icu-v2-sback:focus-visible{outline-color:#fff}' +
+      // ≥44px tap targets: bump the sub-44 controls (pills/chips stay ≥40 per the existing sub-nav rule).
+      '#icuRoot.icu-v2 .icu-v2-avatars{min-height:44px}' +
+      '#icuRoot.icu-v2 .icu-v2-gswitch{min-height:44px}' +
+      '#icuRoot.icu-v2 .icu-v2-tasktog{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center}' +
+      // Contrast (AA): in DARK theme the accent tokens are LIGHT, so white text on the vivid acuity
+      // chrome fails (~1.7–2.8:1). Darken the chrome toward --bg via color-mix so white passes ≥4.6:1
+      // (ratios documented in ICU_IMPLEMENTATION_RESULTS.md). Light theme already passes, untouched.
+      'body.dark #icuRoot.icu-v2 .icu-v2-banner.crit,body.dark #icuRoot.icu-v2 .icu-v2-banner.critical{background:color-mix(in srgb,var(--danger) 55%,var(--bg))}' +
+      'body.dark #icuRoot.icu-v2 .icu-v2-banner.review{background:color-mix(in srgb,var(--warn) 50%,var(--bg))}' +
+      'body.dark #icuRoot.icu-v2 .icu-v2-banner.stable{background:color-mix(in srgb,var(--primary) 50%,var(--bg))}' +
+      'body.dark #icuRoot.icu-v2 .icu-v2-uhead{background:linear-gradient(160deg,color-mix(in srgb,var(--primary2) 50%,var(--bg)),color-mix(in srgb,var(--primary) 50%,var(--bg)))}' +
+      'body.dark #icuRoot.icu-v2 .icu-v2-shead{background:color-mix(in srgb,var(--primary) 50%,var(--bg))}' +
+      // prefers-reduced-motion: silence v2 shimmer/spin/pulse + card transitions (scoped to v2 only).
+      '@media (prefers-reduced-motion:reduce){#icuRoot.icu-v2 *,#icuRoot.icu-v2 *::before,#icuRoot.icu-v2 *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}' +
       // dark mode: v2 chrome inherits the token flip; only the badge cut-out border needs the darker teal
       'body.dark #icuRoot.icu-v2 .icu-v2-ubadge{border-color:var(--primary2)}' +
       'body.dark #icuRoot.icu-v2 .icu-v2-av{border-color:var(--primary2)}';
@@ -2932,12 +2970,12 @@
     var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
       '<button class="icu-v2-ubtn" data-icu-act="icumore" aria-label="Settings">' + ico("settings", "⚙") + '</button>' +
       '<div class="icu-v2-utitle">My ICU patients<div class="icu-v2-usub">' + counts.total + ' patient' + (counts.total === 1 ? "" : "s") + ' · on this device</div></div>' +
-      '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
+      '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications' + (unread ? " (" + unread + " unread)" : "") + '">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
       '</div><div class="icu-v2-strip">' +
-      '<button class="icu-v2-scount total' + (_v2Filter === "all" ? " on" : "") + '" data-icu-act="icufilter:all"><b>' + counts.total + '</b><span>Patients</span></button>' +
-      '<button class="icu-v2-scount crit' + (_v2Filter === "critical" ? " on" : "") + '" data-icu-act="icufilter:critical"><b>' + counts.critical + '</b><span>Critical</span></button>' +
-      '<button class="icu-v2-scount review' + (_v2Filter === "review" ? " on" : "") + '" data-icu-act="icufilter:review"><b>' + counts.review + '</b><span>Review</span></button>' +
-      '<button class="icu-v2-scount stable' + (_v2Filter === "stable" ? " on" : "") + '" data-icu-act="icufilter:stable"><b>' + counts.stable + '</b><span>Stable</span></button>' +
+      '<button class="icu-v2-scount total' + (_v2Filter === "all" ? " on" : "") + '" data-icu-act="icufilter:all"' + v2StripAria("all", counts.total, "All patients") + '><b>' + counts.total + '</b><span>Patients</span></button>' +
+      '<button class="icu-v2-scount crit' + (_v2Filter === "critical" ? " on" : "") + '" data-icu-act="icufilter:critical"' + v2StripAria("critical", counts.critical, "Critical") + '><b>' + counts.critical + '</b><span>Critical</span></button>' +
+      '<button class="icu-v2-scount review' + (_v2Filter === "review" ? " on" : "") + '" data-icu-act="icufilter:review"' + v2StripAria("review", counts.review, "Needs review") + '><b>' + counts.review + '</b><span>Review</span></button>' +
+      '<button class="icu-v2-scount stable' + (_v2Filter === "stable" ? " on" : "") + '" data-icu-act="icufilter:stable"' + v2StripAria("stable", counts.stable, "Stable") + '><b>' + counts.stable + '</b><span>Stable</span></button>' +
       '</div></div>';
     if (!list.length) {
       return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board"><div class="icu-v2-empty">' +
@@ -2949,22 +2987,22 @@
     var attn = list.filter(function (p) { return p.sev !== "stable"; });
     var attnHTML = (_v2Filter === "all" && attn.length)
       ? '<div class="icu-v2-sec-lbl">Needs your attention</div><div class="icu-v2-attn">' + attn.map(function (p) {
-          return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '">' +
+          return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '>' +
             '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
             '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
             '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || "Review recommended") + '</div></button>';
         }).join("") + '</div>'
       : "";
     var chips = [{ k: "all", label: "All" }, { k: "critical", label: "Critical" }, { k: "review", label: "Needs review" }, { k: "stable", label: "Stable" }];
-    var filters = '<div class="icu-v2-filters">' + chips.map(function (c) {
-      return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '">' + esc(c.label) + '</button>';
+    var filters = '<div class="icu-v2-filters" role="group" aria-label="Filter patients">' + chips.map(function (c) {
+      return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '"' + v2ChipAria(c.k, c.label) + '>' + esc(c.label) + '</button>';
     }).join("") + '</div>';
     var shown = _v2Filter === "all" ? list : list.filter(function (p) { return p.sev === _v2Filter; });
     var ini = esc(v2Initials(v2AccountName()));
     var cards = shown.length ? shown.map(function (p) {
       var demo = (p.age != null) ? (p.age + (p.sex ? "/" + p.sex : "")) : "";
       var vits = v2CardVitals(p.snap);
-      return '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
+      return '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
         '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
         '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
         '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
@@ -2981,13 +3019,13 @@
   // Board / alerts / team bottom bar: Unit · Alerts · Team · Admit.
   function renderV2BottomBar() {
     var items = [
-      { k: "board", label: "Unit", act: "icuboard", svg: "list", em: "🏥" },
-      { k: "alerts", label: "Alerts", act: "icualerts", svg: "bell", em: "🔔" },
-      { k: "team", label: "Team", act: "icuteam", svg: "user", em: "👥" }
+      { k: "board", label: "Unit", al: "Unit board", act: "icuboard", svg: "list", em: "🏥" },
+      { k: "alerts", label: "Alerts", al: "Alerts / notifications", act: "icualerts", svg: "bell", em: "🔔" },
+      { k: "team", label: "Team", al: "Care team", act: "icuteam", svg: "user", em: "👥" }
     ];
-    return '<div class="icu-v2-bottombar">' + items.map(function (it) {
-      return '<button class="icu-v2-navbtn' + (_screen === it.k ? " on" : "") + '" data-icu-act="' + it.act + '"><span class="icu-v2-navic">' + ico(it.svg, it.em) + '</span><span>' + it.label + '</span></button>';
-    }).join("") + '<button class="icu-v2-navbtn icu-v2-admit" data-icu-act="icuadmit"><span class="icu-v2-admit-ic">' + ico("plus", "＋") + '</span><span>Admit</span></button></div>';
+    return '<nav class="icu-v2-bottombar" aria-label="ICU navigation">' + items.map(function (it) {
+      return '<button class="icu-v2-navbtn' + (_screen === it.k ? " on" : "") + '" data-icu-act="' + it.act + '" aria-label="' + esc(it.al) + '"' + (_screen === it.k ? ' aria-current="page"' : '') + '><span class="icu-v2-navic">' + ico(it.svg, it.em) + '</span><span>' + it.label + '</span></button>';
+    }).join("") + '<button class="icu-v2-navbtn icu-v2-admit" data-icu-act="icuadmit" aria-label="Admit patient"><span class="icu-v2-admit-ic">' + ico("plus", "＋") + '</span><span>Admit</span></button></nav>';
   }
   // Notifications — deterministic acuity across the roster (local in Phase 1; the LIVE shared unit
   // in group mode). Real event-stream notifications land in a later phase.
@@ -3004,8 +3042,8 @@
       ? ' Derived from each patient’s latest values in this shared unit. Event-stream notifications (instructions, uploads, deterioration) arrive in a later phase.'
       : ' Derived from each patient’s latest values on this device. Live team notifications from real events arrive in Phase 2.') + '</div>';
     var body = rows.length ? rows.map(function (r) {
-      return '<button class="icu-v2-alert-row ' + r.sev + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '">' +
-        '<span class="icu-v2-alert-ic">' + (r.sev === "critical" ? ico("warn", "⚠️") : ico("bell", "🔔")) + '</span>' +
+      return '<button class="icu-v2-alert-row ' + r.sev + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '" aria-label="' + esc((r.sev === "critical" ? "Urgent: " : "") + r.title + ". " + (r.body || "") + " — open patient") + '">' +
+        '<span class="icu-v2-alert-ic" aria-hidden="true">' + (r.sev === "critical" ? ico("warn", "⚠️") : ico("bell", "🔔")) + '</span>' +
         '<span class="icu-v2-alert-tx"><span class="icu-v2-alert-h">' + esc(r.title) + (r.sev === "critical" ? '<span class="icu-v2-urg">URGENT</span>' : "") + '</span>' +
         '<span class="icu-v2-alert-b">' + esc(r.body) + '</span></span></button>';
     }).join("") : '<div class="icu-v2-empty2">No active alerts across your patients.</div>';
@@ -3086,6 +3124,75 @@
     return list;
   }
 
+  /* --------------------------- Phase 4: a11y attribute helpers -------------------------------- */
+  // Acuity-strip count buttons + filter chips: descriptive label + toggle state (aria-pressed).
+  function v2StripAria(key, count, name) { return ' aria-pressed="' + (_v2Filter === key) + '" aria-label="' + esc(name + ", " + count + ". Filter the unit.") + '"'; }
+  function v2ChipAria(key, label) { return ' aria-pressed="' + (_v2Filter === key) + '" aria-label="' + esc("Show " + label + " patients") + '"'; }
+  // Patient / attention cards: an explicit open-target label instead of concatenated inner text.
+  function v2CardAria(p) { return ' aria-label="' + esc("Open Bed " + (p.bed || "—") + ", " + (p.name || "Patient") + ", " + (V2_LABEL[p.sev] || "")) + '"'; }
+
+  /* --------------------------- Phase 4: loading / offline / error state helpers --------------- */
+  // A single calm shimmer placeholder shaped like a patient card. DOM-free; no data leaks.
+  function v2SkeletonCard() {
+    return '<div class="icu-v2-skel" aria-hidden="true"><div class="icu-v2-skel-top">' +
+      '<div class="icu-v2-shim icu-v2-skel-bed"></div>' +
+      '<div class="icu-v2-skel-id"><div class="icu-v2-shim icu-v2-skel-l" style="width:58%"></div><div class="icu-v2-shim icu-v2-skel-l" style="width:82%;margin-bottom:0"></div></div></div>' +
+      '<div class="icu-v2-shim icu-v2-skel-strip"></div></div>';
+  }
+  function v2SkeletonCards(n) { var out = ""; for (var i = 0; i < (n || 3); i++) out += v2SkeletonCard(); return out; }
+  // Centered spinner + label — for a "connecting" phase where a card shape would be misleading.
+  function v2Spinner(text) {
+    return '<div class="icu-v2-loading" role="status"><div class="icu-v2-spin" aria-hidden="true"></div><div>' + esc(text || "Loading…") + '</div></div>';
+  }
+  // Offline = navigator.onLine false OR the collab layer reports offline. Group mode only (the LOCAL
+  // board is on-device and always "synced", so no offline strip there).
+  function grpIsOffline() {
+    try { if (typeof navigator !== "undefined" && navigator.onLine === false) return true; } catch (e) {}
+    try { var api = groupsApi(); if (api && api.syncState && api.syncState() === "offline") return true; } catch (e) {}
+    return false;
+  }
+  function grpOfflineBar() {
+    if (!grpActive() || !grpIsOffline()) return "";
+    return '<div class="icu-v2-offline" role="status">' + ico("warn", "⚠") + '<span>Offline — changes will sync when you reconnect</span></div>';
+  }
+  // Non-technical error card. Permission errors are informational (no Retry helps); connection
+  // errors get a Retry that re-subscribes. Never renders a raw error string or a blank board.
+  function grpErrIsPermission() { return /permission/i.test(_grpErr || ""); }
+  function grpErrCard() {
+    var perm = grpErrIsPermission();
+    return '<div class="icu-v2-errcard" role="alert">' +
+      '<div class="icu-v2-empty-ic">' + ico("warn", "⚠️") + '</div>' +
+      '<div class="icu-v2-err-t">' + (perm ? "You don’t have access here" : "Couldn’t reach the unit") + '</div>' +
+      '<p class="icu-v2-err-p">' + esc(_grpErr || (perm ? "Ask the unit head to add you." : "Check your connection and try again.")) + '</p>' +
+      (perm ? '' : '<button class="icu-btn icu-v2-empty-cta" data-icu-act="grpretry" aria-label="Retry connecting to the unit">' + ico("refresh", "↻") + ' Retry</button>') +
+      '</div>';
+  }
+  // Open-patient workspace while its live view-model has not returned yet — calm loading, not a
+  // blank/stale screen. Keeps the sync indicator visible so the clinician knows it is fetching.
+  function renderV2PatientLoading() {
+    return '<div class="icu-v2-banner stable"><div class="icu-v2-banner-top">' +
+      '<button class="icu-v2-back" data-icu-act="icuboard" aria-label="Back to unit board">‹</button>' +
+      '<div class="icu-v2-banner-id"><div class="icu-v2-banner-nm">Loading patient…</div>' +
+      '<div class="icu-v2-banner-meta">Fetching the latest shared record</div></div></div></div>' +
+      renderV2PresenceGroup() +
+      '<div class="icu-scroll icu-v2-scroll"><div class="icu-v2-board">' + grpOfflineBar() + v2SkeletonCards(2) + '</div></div>';
+  }
+  // Retry: clear the error and re-open the failed subscription(s). Safe/idempotent.
+  function grpRetry() {
+    _grpErr = null;
+    try { if (!_grpSubGroups) grpEnsureGroupsSub(); } catch (e) {}
+    var api = groupsApi();
+    if (grpActive() && api) {
+      if (_grpSubPts) { try { _grpSubPts(); } catch (e) {} _grpSubPts = null; }
+      _grpPatients = null;
+      _grpSubPts = api.subscribePatients(_grp.id, function (list) {
+        _grpPatients = list || []; grpNotifTick();
+        if (ICU.isOpen() && _screen === "board") paint();
+      }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+    }
+    _paintTop = true; paint();
+  }
+
   /* --------------------------- subscription lifecycle (no listener leaks) --------------------- */
   function grpEnsureGroupsSub() {
     if (!groupMode()) return;
@@ -3104,7 +3211,7 @@
         grpSelect(sel || _grpList[0], true);
       }
       if (ICU.isOpen() && (_screen === "board" || _screen === "team")) paint();
-    });
+    }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen() && _screen === "board") paint(); });   // Phase 4: surface a groups-load failure as the error card
   }
   function grpSelect(group, silent) {
     if (!group) return;
@@ -3122,7 +3229,7 @@
         _grpPatients = list || [];
         grpNotifTick();   // Phase 3: best-effort device notification for a NEW critical event
         if (ICU.isOpen() && _screen === "board") paint();
-      });
+      }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen() && _screen === "board") paint(); });   // Phase 4: unit-load failure → error card + Retry
     }
     if (!silent) { _screen = "board"; _paintTop = true; paint(); }
   }
@@ -3189,46 +3296,54 @@
   }
   function renderV2BoardGroup() {
     var loadingGroups = (_grpList === null);
-    var errNote = _grpErr ? '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") + ' ' + esc(_grpErr) + '</div>' : "";
+    var list = grpActive() ? grpEnrichedList() : [];
+    // Phase 4: a hard error (nothing to show yet) → a full error card + Retry, not a blank/empty board.
+    // A transient error while data is already on screen degrades to a non-blocking inline note.
+    var errFull = _grpErr && !list.length;
+    var errNote = (_grpErr && !errFull) ? '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") + ' ' + esc(_grpErr) + '</div>' : "";
+    var offBar = grpOfflineBar();
     // Header: unit switcher + member avatars + notifications.
     var gname = _grp ? (_grp.name || _grp.unit || "ICU unit") : (loadingGroups ? "Connecting…" : "Choose a unit");
     var gsub = _grp
       ? ((_grp.unit ? esc(_grp.unit) + " · " : "") + (grpActive() && _grpPatients ? _grpPatients.length + " patient" + (_grpPatients.length === 1 ? "" : "s") : "…") + (_grp.myRole ? " · " + esc(grpRoleLabel(_grp.myRole)) : ""))
       : "Tap to open or create a shared unit";
-    var list = grpActive() ? grpEnrichedList() : [];
     var counts = { total: list.length, critical: 0, review: 0, stable: 0 };
     list.forEach(function (p) { counts[p.sev]++; });
     // Phase 3: the bell badge = count of meaningful UNSEEN events (per-user last-seen), not raw acuity.
     var unread = grpActive() ? grpUnreadCount(grpNotifRows(), grpNotifSeen()) : (counts.critical + counts.review);
     var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
       '<button class="icu-v2-ubtn" data-icu-act="icumore" aria-label="Settings">' + ico("settings", "⚙") + '</button>' +
-      '<button class="icu-v2-utitle icu-v2-gswitch" data-icu-act="grppick">' + esc(gname) + ' ▾<div class="icu-v2-usub">' + gsub + '</div></button>' +
+      '<button class="icu-v2-utitle icu-v2-gswitch" data-icu-act="grppick" aria-label="Switch or create a unit">' + esc(gname) + ' ▾<div class="icu-v2-usub">' + gsub + '</div></button>' +
       (grpActive() ? grpAvatarsHTML() : "") +
-      '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
+      '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications' + (unread ? " (" + unread + " unread)" : "") + '">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
       '</div>' + (grpActive() ? (
         '<div class="icu-v2-strip">' +
-        '<button class="icu-v2-scount total' + (_v2Filter === "all" ? " on" : "") + '" data-icu-act="icufilter:all"><b>' + counts.total + '</b><span>Patients</span></button>' +
-        '<button class="icu-v2-scount crit' + (_v2Filter === "critical" ? " on" : "") + '" data-icu-act="icufilter:critical"><b>' + counts.critical + '</b><span>Critical</span></button>' +
-        '<button class="icu-v2-scount review' + (_v2Filter === "review" ? " on" : "") + '" data-icu-act="icufilter:review"><b>' + counts.review + '</b><span>Review</span></button>' +
-        '<button class="icu-v2-scount stable' + (_v2Filter === "stable" ? " on" : "") + '" data-icu-act="icufilter:stable"><b>' + counts.stable + '</b><span>Stable</span></button>' +
+        '<button class="icu-v2-scount total' + (_v2Filter === "all" ? " on" : "") + '" data-icu-act="icufilter:all"' + v2StripAria("all", counts.total, "All patients") + '><b>' + counts.total + '</b><span>Patients</span></button>' +
+        '<button class="icu-v2-scount crit' + (_v2Filter === "critical" ? " on" : "") + '" data-icu-act="icufilter:critical"' + v2StripAria("critical", counts.critical, "Critical") + '><b>' + counts.critical + '</b><span>Critical</span></button>' +
+        '<button class="icu-v2-scount review' + (_v2Filter === "review" ? " on" : "") + '" data-icu-act="icufilter:review"' + v2StripAria("review", counts.review, "Needs review") + '><b>' + counts.review + '</b><span>Review</span></button>' +
+        '<button class="icu-v2-scount stable' + (_v2Filter === "stable" ? " on" : "") + '" data-icu-act="icufilter:stable"' + v2StripAria("stable", counts.stable, "Stable") + '><b>' + counts.stable + '</b><span>Stable</span></button>' +
         '</div>') : "") + '</div>';
-    // No unit selected → an inviting "open or create a unit" state.
+    // Hard error state — takes precedence over loading/empty (never a raw error / blank screen).
+    if (errFull) {
+      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + grpErrCard() + '</div></div>';
+    }
+    // No unit selected → an inviting "open or create a unit" state (calm spinner while connecting).
     if (!grpActive()) {
       var body = loadingGroups
-        ? '<div class="icu-v2-empty"><div class="icu-v2-empty-t">Connecting to your shared units…</div></div>'
+        ? v2Spinner("Connecting to your shared units…")
         : '<div class="icu-v2-empty"><div class="icu-v2-empty-ic">' + ico("users", "👥") + '</div>' +
           '<div class="icu-v2-empty-t">Work your ICU as a team</div>' +
           '<p class="icu-v2-empty-p">Open or create a shared unit so your consultants and residents see the same patients, instructions and timeline — live, with a full audit trail.</p>' +
           '<button class="icu-btn icu-v2-empty-cta" data-icu-act="grppick">' + ico("folder", "📋") + ' Open a unit</button>' +
           '<button class="icu-btn ghost" data-icu-act="grpnew" style="margin-top:10px">' + ico("plus", "＋") + ' Create a unit</button></div>';
-      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + errNote + body + '</div></div>';
+      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + body + '</div></div>';
     }
-    // Live unit board.
+    // Live unit board — calm skeleton while the first snapshot has not returned.
     if (_grpPatients === null) {
-      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + errNote + '<div class="icu-v2-empty2">Loading patients…</div></div></div>';
+      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + '<div class="icu-v2-sec-lbl">Loading unit…</div>' + v2SkeletonCards(3) + '</div></div>';
     }
     if (!list.length) {
-      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + errNote + '<div class="icu-v2-empty">' +
+      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + '<div class="icu-v2-empty">' +
         '<div class="icu-v2-empty-ic">' + ico("pulse", "🫀") + '</div><div class="icu-v2-empty-t">No patients in this unit yet</div>' +
         '<p class="icu-v2-empty-p">Admit the first patient — everyone in ' + esc(gname) + ' will see them instantly.</p>' +
         '<button class="icu-btn icu-v2-empty-cta" data-icu-act="icuadmit">＋ Admit patient</button></div></div></div>';
@@ -3236,15 +3351,15 @@
     var attn = list.filter(function (p) { return p.sev !== "stable"; });
     var attnHTML = (_v2Filter === "all" && attn.length)
       ? '<div class="icu-v2-sec-lbl">Needs your attention</div><div class="icu-v2-attn">' + attn.map(function (p) {
-          return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '">' +
+          return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '>' +
             '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
             '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
             '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || "Review recommended") + '</div></button>';
         }).join("") + '</div>'
       : "";
     var chips = [{ k: "all", label: "All" }, { k: "critical", label: "Critical" }, { k: "review", label: "Needs review" }, { k: "stable", label: "Stable" }];
-    var filters = '<div class="icu-v2-filters">' + chips.map(function (c) {
-      return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '">' + esc(c.label) + '</button>';
+    var filters = '<div class="icu-v2-filters" role="group" aria-label="Filter patients">' + chips.map(function (c) {
+      return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '"' + v2ChipAria(c.k, c.label) + '>' + esc(c.label) + '</button>';
     }).join("") + '</div>';
     var shown = _v2Filter === "all" ? list : list.filter(function (p) { return p.sev === _v2Filter; });
     var cards = shown.length ? shown.map(function (p) {
@@ -3254,7 +3369,7 @@
       var footAv = esc(v2Initials(lu && lu.byName ? lu.byName : v2AccountName()));
       var footTxt = lu && lu.text ? esc(lu.text) : (p.reviewed ? "Reviewed" : "Updated");
       var footAgo = esc(fmtAgo((lu && lu.at) || p.savedAt) || fmtWhen((lu && lu.at) || p.savedAt));
-      return '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
+      return '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
         '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
         '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
         '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
@@ -3266,7 +3381,7 @@
         '<span class="icu-v2-foot-ago">' + (p.reviewed ? "" : '<span class="icu-v2-unrev">Not reviewed</span> ') + footAgo + '</span></div></button>';
     }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
     var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
-    return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + errNote + attnHTML + filters + cards + foot + '</div></div>';
+    return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + errNote + attnHTML + filters + cards + foot + '</div></div>';
   }
   function renderV2TeamGroup() {
     var g = _grp, me = ownerNow();
@@ -3320,7 +3435,7 @@
         var mark = t.status === "done" ? "☑" : t.status === "progress" ? "◐" : "☐";
         var col = t.status === "done" ? "var(--ok)" : t.status === "progress" ? "var(--warn)" : "var(--muted)";
         var meta = (t.due ? t.due : "") + (t.assignedByName ? (t.due ? " · " : "") + t.assignedByName : "") + (t.status === "done" && t.completedByName ? " · done by " + t.completedByName : "");
-        return '<div class="icu-row" style="align-items:flex-start;gap:8px"><button data-icu-act="grptask:' + encodeURIComponent(t.id) + '" aria-label="Cycle task status" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;color:' + col + '">' + mark + '</button>' +
+        return '<div class="icu-row" style="align-items:flex-start;gap:8px"><button class="icu-v2-tasktog" data-icu-act="grptask:' + encodeURIComponent(t.id) + '" aria-label="Change status of: ' + esc(t.text || "task") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;margin:-6px 0;color:' + col + '">' + mark + '</button>' +
           '<span style="flex:1"><span style="' + (t.status === "done" ? "text-decoration:line-through;opacity:.6" : "") + '">' + esc(t.text) + '</span>' +
           (meta ? '<span style="display:block;font:600 11px var(--font);color:var(--muted);margin-top:2px">' + esc(meta) + '</span>' : "") + '</span></div>';
       }).join("");
@@ -3359,14 +3474,14 @@
         (active ? "● " : "") + '<span style="flex:1">' + esc(g.name || "ICU unit") + (g.unit ? " · " + esc(g.unit) : "") +
         '<span style="display:block;font:600 11px var(--font);color:var(--muted)">' + esc(grpRoleLabel(g.myRole) + " · " + ((g.members || []).length) + " member" + ((g.members || []).length === 1 ? "" : "s")) + '</span></span></button>';
     }).join("") : '<div class="icu-empty">' + (_grpList === null ? "Connecting to your shared units…" : "No shared units yet.") + '</div>';
-    modalEl.innerHTML = '<div class="icu-sheet"><h3>Your ICU units</h3>' + rows +
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Your ICU units"><h3>Your ICU units</h3>' + rows +
       '<button class="icu-btn" data-icu-act="grpnew" style="margin-top:10px">' + ico("plus", "＋") + ' Create a unit</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Close</button></div>';
     modalEl.classList.add("on");
   }
   function grpOpenCreate() {
     ensureModal();
-    modalEl.innerHTML = '<div class="icu-sheet"><h3>Create an ICU unit</h3>' +
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Create an ICU unit"><h3>Create an ICU unit</h3>' +
       '<p class="icu-doc-sub" style="margin:0 0 10px">A shared unit lets your team see the same patients, instructions and timeline live. You become the unit head.</p>' +
       '<div class="icu-fld"><label for="grpNm">Unit name</label><input id="grpNm" type="text" placeholder="e.g. Medicine ICU"></div>' +
       '<div class="icu-fld"><label for="grpUnit">Ward / unit (optional)</label><input id="grpUnit" type="text" placeholder="e.g. Unit I"></div>' +
@@ -3390,7 +3505,7 @@
     ensureModal();
     var roles = (groupsApi() && groupsApi().ROLES) ? groupsApi().ROLES : ["head", "professor", "assistant", "senior_resident", "junior_resident", "intern"];
     var opts = roles.map(function (r) { return '<option value="' + r + '"' + (r === "junior_resident" ? " selected" : "") + '>' + esc(grpRoleLabel(r)) + '</option>'; }).join("");
-    modalEl.innerHTML = '<div class="icu-sheet"><h3>Invite a doctor</h3>' +
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Invite a doctor"><h3>Invite a doctor</h3>' +
       '<p class="icu-doc-sub" style="margin:0 0 10px">Add a colleague to <b>' + esc((_grp && _grp.name) || "this unit") + '</b> by their StewardMD user ID (uid). Roles set who can give instructions vs. update status.</p>' +
       '<div class="icu-fld"><label for="grpInvUid">User ID (uid)</label><input id="grpInvUid" type="text" placeholder="Firebase uid"></div>' +
       '<div class="icu-fld"><label for="grpInvRole">Role</label><select id="grpInvRole">' + opts + '</select></div>' +
@@ -3622,8 +3737,8 @@
     var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Live from this shared unit — critical acuity, instructions for you, completed tasks, new investigations and med changes. Derived from the unit snapshot plus the open patient’s timeline; a full per-event unit feed is a later refinement.</div>';
     var body = rows.length ? rows.map(function (r) {
       var fresh = (r.ts || 0) > seen;
-      return '<button class="icu-v2-alert-row ' + (r.urgent ? "critical" : "review") + (fresh ? " fresh" : "") + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '">' +
-        '<span class="icu-v2-alert-ic">' + esc(r.icon || "🔔") + '</span>' +
+      return '<button class="icu-v2-alert-row ' + (r.urgent ? "critical" : "review") + (fresh ? " fresh" : "") + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '" aria-label="' + esc((r.urgent ? "Urgent: " : "") + (fresh ? "New. " : "") + r.title + (r.body ? ". " + r.body : "") + " — open patient") + '">' +
+        '<span class="icu-v2-alert-ic" aria-hidden="true">' + esc(r.icon || "🔔") + '</span>' +
         '<span class="icu-v2-alert-tx"><span class="icu-v2-alert-h">' + esc(r.title) + (r.urgent ? '<span class="icu-v2-urg">URGENT</span>' : "") + '</span>' +
         (r.body ? '<span class="icu-v2-alert-b">' + esc(r.body) + '</span>' : "") +
         '<span class="icu-v2-alert-ago">' + esc(fmtAgo(r.ts) || fmtWhen(r.ts) || "") + '</span></span></button>';
@@ -3651,20 +3766,23 @@
       : ' Add a note for the team — it posts to the timeline, author- and time-stamped. Only consultants and senior residents can issue tracked instructions.') + '</div>';
     var presets = instr ? ('<div class="icu-v2-rpre">' + ROUND_PRESETS.map(function (txt, i) {
       var on = !!_roundSel[i];
-      return '<button class="icu-v2-rchip' + (on ? " on" : "") + '" data-icu-act="grproundtog:' + i + '"><span class="icu-v2-rbox">' + (on ? "✓" : "") + '</span><span class="icu-v2-rtx">' + esc(txt) + '</span></button>';
+      return '<button class="icu-v2-rchip' + (on ? " on" : "") + '" data-icu-act="grproundtog:' + i + '" aria-pressed="' + on + '" aria-label="' + esc(txt) + '"><span class="icu-v2-rbox" aria-hidden="true">' + (on ? "✓" : "") + '</span><span class="icu-v2-rtx">' + esc(txt) + '</span></button>';
     }).join("") + '</div>') : "";
     var extra = _roundExtra.length ? ('<div class="icu-v2-rpre">' + _roundExtra.map(function (txt, i) {
-      return '<button class="icu-v2-rchip on" data-icu-act="grproundrm:' + i + '"><span class="icu-v2-rbox">✓</span><span class="icu-v2-rtx">' + esc(txt) + '</span><span class="icu-v2-rx">✕</span></button>';
+      return '<button class="icu-v2-rchip on" data-icu-act="grproundrm:' + i + '" aria-label="' + esc("Remove: " + txt) + '"><span class="icu-v2-rbox" aria-hidden="true">✓</span><span class="icu-v2-rtx">' + esc(txt) + '</span><span class="icu-v2-rx" aria-hidden="true">✕</span></button>';
     }).join("") + '</div>') : "";
     var custom = '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">Add your own</div>' +
-      '<div class="icu-v2-rcustom"><input id="icuRoundCustom" type="text" aria-label="Add your own instruction" placeholder="e.g. Increase PEEP to 8" value="' + esc(_roundText) + '"><button class="icu-btn" data-icu-act="grproundadd">Add</button></div></div>';
+      '<div class="icu-v2-rcustom"><input id="icuRoundCustom" type="text" aria-label="Add your own instruction" placeholder="e.g. Increase PEEP to 8" value="' + esc(_roundText) + '"><button class="icu-btn" data-icu-act="grproundadd" aria-label="Add this instruction">Add</button></div></div>';
     var n = grpRoundChosen().length;
     var btnLbl = instr
       ? (n ? "Post " + n + " instruction" + (n === 1 ? "" : "s") + " to timeline" : "Choose or type an instruction")
       : (n ? "Post note to timeline" : "Type a note first");
     var post = '<div class="icu-v2-rpost"><button class="icu-btn' + (n ? "" : " ghost") + '" data-icu-act="grproundpost"' + (n ? "" : " disabled") + '>' + esc(btnLbl) + '</button></div>';
     var errNote = _grpErr ? '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") + ' ' + esc(_grpErr) + '</div>' : "";
-    return header + '<div class="icu-scroll icu-v2-rscroll">' + errNote + intro + presets + extra + custom + '</div>' + post;
+    // Phase 4: dialog semantics — a modal step with a labelled region + a focusable close (‹). The
+    // flex wrapper preserves the sticky header / scroll / sticky post-bar layout inside #icuRoot.
+    return '<div class="icu-v2-dialog" role="dialog" aria-modal="true" aria-label="' + (instr ? "Add round note" : "Add a note") + '" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden">' +
+      header + '<div class="icu-scroll icu-v2-rscroll">' + errNote + intro + presets + extra + custom + '</div>' + post + '</div>';
   }
   function grpOpenRound() {
     if (!grpActive() || !_grpPtId) return;
@@ -3721,12 +3839,15 @@
       rootEl.innerHTML = renderV2Alerts() + renderV2BottomBar();
     } else if (_screen === "team") {
       rootEl.innerHTML = renderV2Team() + renderV2BottomBar();
+    } else if (grpActive() && _grpPtId && _grpPtVM === null) {
+      // Phase 4: an open shared patient whose live view-model has not returned yet — calm loading.
+      rootEl.innerHTML = renderV2PatientLoading();
     } else {
       var fab = isMonWs() ? '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' : "";
       var watchFab = labWatchOn()
         ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>'
         : "";
-      rootEl.innerHTML = renderV2Banner() + renderV2Presence() + renderV2TopTabs() + renderBody() + watchFab + fab;
+      rootEl.innerHTML = renderV2Banner() + renderV2Presence() + grpOfflineBar() + renderV2TopTabs() + renderBody() + watchFab + fab;
     }
     if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
   }
@@ -5128,6 +5249,7 @@
       case "grpinvitesend": grpDoInvite(); break;
       case "grpreviewed": grpDoReviewed(); break;
       case "grptask": grpCycleTask(decodeURIComponent(arg)); break;
+      case "grpretry": grpRetry(); break;   // Phase 4: re-subscribe after a connection/error state
       // ---- ICU v2 Phase 3 — round-note composer (no-type instruction → tasks + timeline) ----
       case "grpround": grpOpenRound(); break;
       case "grproundback": grpRoundBack(); break;
@@ -5337,6 +5459,13 @@
         rootEl = document.createElement("div"); rootEl.id = "icuRoot";
         document.body.appendChild(rootEl);
         rootEl.addEventListener("click", onClick);
+        // Phase 4: reflect connectivity promptly (offline strip + sync indicator) — repaint only
+        // when a shared unit is open. Attached once; a no-op while the dashboard is closed.
+        try {
+          var _onNet = function () { if (ICU.isOpen() && grpActive()) paint(); };
+          window.addEventListener("online", _onNet);
+          window.addEventListener("offline", _onNet);
+        } catch (e) {}
       }
       rootEl.classList.toggle("icu-v2", icuV2On());   // v2 (smd_icu_v2) chrome is gated on this class
       if (groupMode()) { try { grpEnsureGroupsSub(); } catch (e) {} }   // Phase 2: start the live unit subscription

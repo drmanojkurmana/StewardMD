@@ -363,3 +363,200 @@ timeline/tasks). A full per-event unit feed (its own streamed collection) is a l
   the guarded best-effort call is a no-op on web/headless, so it is exercised only by code review here.
 - The notification **derive-from-snapshot** model (see §3) is intentional; a full per-event unit feed
   is deferred.
+
+---
+
+# Phase 4 — polish: empty / loading / error / offline states + accessibility
+
+**Branch:** `feat/icu-v2-redesign` · **Flags:** `smd_icu_v2` + `smd_icu_groups` (both **default OFF**).
+**Cache:** `index.html` `icu.js?v=gold366 → ?v=gold367` and `icu-collab.js?v=gold366 → ?v=gold367`;
+`sw.js` `CACHE stewardmd-gold366 → stewardmd-gold367`.
+**Scope:** a **refinement pass** — no new features. Everything ADDITIVE and gated on `icuV2On()` /
+`grpActive()`. No engine / threshold / unit-assumption / `ingest*` / `ICU_STATE` / `data-icu-act` /
+global / user-string rename; `.on` toggle unchanged; reused existing tokens (no invented hex — the
+only new colours are `color-mix()` of existing tokens, a technique already used in this file).
+**Flag(s) OFF ⇒ byte-for-byte classic** (verified: the flag-OFF harness suite is unchanged; see below).
+**Files touched:** `icu.js` (states + a11y + renderers), `icu-collab.js` (optional `onErr` on the two
+board subscriptions), `index.html` + `sw.js` (version bumps), this doc.
+
+## 1. Empty / loading / error / offline states (group mode + v2 board)
+
+New DOM-free helpers next to the group renderers: `v2SkeletonCard/v2SkeletonCards`, `v2Spinner`,
+`grpIsOffline`, `grpOfflineBar`, `grpErrIsPermission`, `grpErrCard`, `renderV2PatientLoading`,
+`grpRetry`. New CSS (all `#icuRoot.icu-v2`-scoped) for `.icu-v2-skel*` shimmer, `.icu-v2-loading` +
+`.icu-v2-spin` (reuses the existing `@keyframes icuspin`), `.icu-v2-offline`, `.icu-v2-errcard`.
+
+- **Loading** — `renderV2BoardGroup`: while a unit is selected but `_grpPatients === null` it renders
+  a **"Loading unit…" label + 3 shimmer skeleton cards** (was a bare "Loading patients…" line); while
+  the groups list is still loading (`_grpList === null`, no unit) it shows a **centered spinner**
+  ("Connecting to your shared units…"). The **open patient** while its live view-model is null
+  (`grpActive() && _grpPtId && _grpPtVM === null`, `paintV2` patient branch) renders
+  `renderV2PatientLoading()` — a calm back-enabled banner + sync indicator + 2 skeleton cards, instead
+  of a stale/blank workspace.
+- **Error** — `grpErrCard()` shows a clear non-technical card: connection errors →
+  "Couldn't reach the unit / Check your connection and try again." **+ a Retry** button
+  (`data-icu-act="grpretry"` → `grpRetry()` clears `_grpErr` and re-opens the failed subscription);
+  permission errors → "You don't have access here / Ask the unit head to add you." (no Retry — a retry
+  can't help). A hard error (nothing on screen yet) shows the **full card and takes precedence** over
+  the loading/empty branches; a transient error while data is already shown degrades to the existing
+  non-blocking inline note. To surface **read/subscription** failures (permission-denied on a unit the
+  user was removed from), `subscribeGroups`/`subscribePatients` in `icu-collab.js` gained an **optional
+  `onErr` callback** (backward-compatible: absent ⇒ old `cb([])` behaviour); `grpEnsureGroupsSub` /
+  `grpSelect` / `grpRetry` pass it and set `_grpErr`.
+- **Offline** — `grpOfflineBar()` renders an unobtrusive amber full-width strip
+  ("Offline — changes will sync when you reconnect") on the board (under the header) and the patient
+  workspace (between presence and tabs) when `navigator.onLine === false` **or**
+  `SMD_ICU_GROUPS.syncState() === "offline"`. The banner **"Synced" indicator** (`grpSyncHTML`) reads
+  **Synced** (green `--ok`) / **Syncing…** (amber `--warn`) / **Offline** (amber `--warn` — was neutral
+  grey; now matches the spec). A one-time `window` `online`/`offline` listener (attached in `ICU.open`,
+  a no-op while closed / not grouped) repaints so the strip + indicator update promptly.
+- **No groups** — the existing "create or join a unit" empty state kept its clear primary action
+  ("Open a unit") + secondary ("Create a unit"); the connecting phase is now the calm spinner.
+- **LOCAL empty state** ("No patients yet → Admit", Phase-1 `renderV2Board`) — **unchanged.**
+
+## 2. Accessibility pass (v2 + group; classic untouched)
+
+**aria-labels / state added** (helpers `v2StripAria`, `v2ChipAria`, `v2CardAria`):
+
+| Control | Before | After |
+|---|---|---|
+| Acuity-strip counts (Total/Critical/Review/Stable) ×2 boards | none | `aria-label` ("All patients, N. Filter the unit.") + **`aria-pressed`** |
+| Filter chips (All/Critical/Needs review/Stable) ×2 boards | text only | `aria-label` + **`aria-pressed`**; container `role="group" aria-label="Filter patients"` |
+| Patient cards + "Needs your attention" cards ×2 boards | inner-text name | explicit `aria-label` "Open Bed X, Name, Severity" |
+| Notification/alert rows (`renderV2Alerts` + `…Group`) | inner-text | `aria-label` (Urgent/New + title + body + "open patient"); icon `aria-hidden` |
+| Bottom bar | `<div>` + text | `<nav aria-label="ICU navigation">`, each button `aria-label` + `aria-current="page"` when active |
+| Notifications bell (both boards) | "Notifications" | "Notifications (N unread)" |
+| Unit switcher (`grppick`) | none (text) | `aria-label="Switch or create a unit"` |
+| Round preset chips | none | `aria-label` + **`aria-pressed`**; box `aria-hidden` |
+| Round custom "remove" chips / "Add" button | none | `aria-label` ("Remove: …" / "Add this instruction") |
+| Rounds task toggle | "Cycle task status" | "Change status of: <task text>" + `.icu-v2-tasktog` (≥44px) |
+
+Already-present labels retained: banner back / handover, board settings ⚙, `sback`, member avatars,
+Snapshot FAB, Lab Watch FAB, round custom input, form inputs (`<label for>` from earlier phases).
+
+**Focus ring** (keyboard/switch users; `-webkit-tap-highlight-color` on touch untouched):
+`#icuRoot.icu-v2 button:focus-visible,[data-icu-act]:focus-visible,input/select/textarea:focus-visible
+{ outline:2px solid var(--primary); outline-offset:2px }` plus a **white** variant for controls that
+sit on teal/acuity chrome (`.icu-v2-banner :focus-visible`, `.icu-v2-ubtn`, `.icu-v2-gswitch`,
+`.icu-v2-avatars`, `.icu-v2-scount.total`, `.icu-v2-sback`). Count/soft-bg chips keep the primary ring
+(a white ring would be invisible on their pale light-mode fill).
+
+**Dialog semantics** — `role="dialog"` + `aria-modal="true"` + `aria-label` + a focusable close on:
+the **round-note composer** (`renderV2RoundNote` wrapper, ‹ back; the flex wrapper preserves the
+sticky-header / scroll / sticky-post layout), and the **create-unit**, **invite**, and **unit-picker**
+sheets (Cancel/Close). The shared classic `openForm`/`openDataMenu` sheets were **not** touched.
+
+**Contrast (AA) — pairs verified** (WCAG 2.x; normal text ≥ 4.5:1, large ≥ 3:1). Computed from the
+Phase-1 tokens; `color-mix(in srgb, …)` values computed as gamma-encoded sRGB interpolation:
+
+| Pair | Light | Dark |
+|---|---|---|
+| Critical text `--danger` on `--danger-soft` | 5.30 ✅ | 6.49 ✅ |
+| Review text `--warn` on `--warn-soft` (also the offline strip) | 4.75 ✅ | 10.08 ✅ |
+| Stable text `--ok` on `--ok-soft` | 4.57 ✅ | 9.51 ✅ |
+| Primary text `--primary` on `--primary-soft` | 4.86 ✅ | 7.83 ✅ |
+| White on critical banner | 6.47 ✅ | **2.77 ❌ → fixed 6.74 ✅** |
+| White on review banner | 5.28 ✅ | **1.69 ❌ → fixed 5.27 ✅** |
+| White on stable banner / `.icu-v2-shead` | 5.47 ✅ | **1.86 ❌ → fixed 5.62 ✅** |
+| White on `.icu-v2-uhead` gradient (`--primary2`→`--primary`) | ✅ | **fail → fixed 6.85 / 5.62 ✅** |
+
+**Finding:** in **dark** theme the accent tokens are *light* colours (`--danger #F87171`,
+`--warn #F0C060`, `--primary #2DD4BF`), so **white text on the vivid acuity chrome failed AA**
+(1.7–2.8:1) — this was a real defect, not previously caught. **Fix:** dark-mode-only overrides darken
+the banner / board header / screen header toward `--bg` via `color-mix` (`--danger 55%`, `--warn 50%`,
+`--primary 50%`), lifting white text to **≥ 5.27:1** while keeping the acuity hue. Light theme already
+passed and is untouched. The severity **note/pill/card-value** pairs (text-on-soft, never light-on-
+light) pass in both modes as designed.
+
+**≥44px tap targets** — audited all visible v2/group interactive controls headlessly (measured
+`getBoundingClientRect`): **0 below the floor**. Bumped the three that were sub-44: the member-avatar
+stack (`.icu-v2-avatars` was ~30px → `min-height:44px`), the unit switcher (`.icu-v2-gswitch` →
+`min-height:44px`), the rounds task toggle (`.icu-v2-tasktog` 19px glyph → `min 44×44`). Tabs / back /
+handover / settings / bell / bottom-nav / acuity counts / sback / FABs were already ≥44; filter chips
++ sub-nav pills stay ≥40 (accepted per the existing sub-nav rule).
+
+**prefers-reduced-motion** — `@media (prefers-reduced-motion:reduce){ #icuRoot.icu-v2 *,::before,::after
+{ animation-duration:.001ms!important; animation-iteration-count:1!important; transition-duration:
+.001ms!important } }` silences the shimmer / spinner / card transitions, scoped to v2 only (matches the
+pre-existing `.icu-tour`/`.icu-tip-pop` reduced-motion rule).
+
+## 3. Jargon tooltips retained
+
+Confirmed (headless): the classic `JARGON` / `.icu-tip` tap-to-explain buttons **render inside the v2
+tab bodies** (the tabs reuse `RENDER.*`), and the `.icu-tip-pop` popover (`position:fixed; z-index:
+10040`, appended to `document.body`) **sits above the v2 chrome** (`#icuRoot` z-index 10000, bottom bar
+7, FAB 8) — it is not clipped by any v2 `overflow` because it is a fixed-position body child. No JARGON
+content changed; no v2 CSS hides/overlaps `.icu-tip`/`.icu-tip-pop`.
+
+## Verification (from the worktree root)
+
+- `node --check icu.js` / `node --check icu-collab.js` / `node --check sw.js` → **PASS**.
+- **Flag-OFF harness suite** — measured against a same-branch pre-change baseline. **Zero regression:**
+  `run-icu-nav`, `run-icu-patient-switch`, `run-icu-alerts`, `run-icu-safety-ux`, `run-icu-findpicker`,
+  `run-icu-wardsync`, `run-icu-import`, `run-golden`, `run-interactions`, `run-medlist`,
+  `run-calc-guards` → **exit 0** (11 GREEN). `run-icu-nav` first-visit flaked once (all-DOM-missing) →
+  **GREEN on retry**, as documented. The only failures are the **exact same three pre-existing single
+  assertions** as baseline: `run-icu-trends` (`patient isolation … rows=1`), `run-icu-dxflow`
+  (`tour resolves tokens … font`), `run-icu-labwatch` (`#12 tap → Trends highlighted`) — 1 each,
+  unchanged, not worse.
+- `npm run build:www` → **exit 0** (`icu.js`/`icu-collab.js` at `?v=gold367`, `sw.js CACHE
+  stewardmd-gold367` in `www/`).
+- **Throwaway render smoke** (headless Chrome, stubbed `SMD_ICU_GROUPS`, no Firestore; removed before
+  commit) — **24/24 GREEN**: local-board aria (strip/chip `aria-pressed`, card/nav labels, focus-ring +
+  reduced-motion + dark-contrast rules present, all controls ≥ floor, JARGON tooltip renders + z-index
+  above chrome) and every group state (connecting spinner, loading-unit skeleton, connection-error card
+  + working Retry, permission-error card without Retry, offline strip, patient-loading skeleton, banner
+  "Offline" indicator, round-composer dialog role + `aria-pressed` chips).
+
+## Could NOT be verified in the sandbox (needs live Firestore / owner / device)
+
+- **Real** offline→online reconcile, `syncState()` transitions under true network loss, and multi-device
+  propagation of the states — the smoke uses a stubbed collab API. `firestore.rules` enforcement of the
+  read-permission error (removed-member) needs the emulator (a JDK; not installed).
+- Live-Firestore states are still **owner-verified** (per the handoff).
+- **Reduced-motion / dark-contrast on real hardware** — verified by rule presence + computed ratios
+  here; final look is an on-device build check.
+
+---
+
+# Redesign complete — summary & owner go-live checklist
+
+Four additive, flag-gated PRs land the collaborative ICU workspace **without changing any clinical
+compute, threshold, unit assumption, `ICU_STATE` shape, `ingest*` contract, `data-icu-act` verb, DOM
+id/class, `window.ICU` API, or user-facing string.** With both flags OFF the classic UI is
+**byte-for-byte unchanged**.
+
+| Phase | What shipped | Flag gate |
+|---|---|---|
+| **1** | Unit-board front door, 5-tab segmented patient workspace, acuity/presence/sync banner, bottom bar — LOCAL roster, no data-model change | `icuV2On()` (`.icu-v2` class) |
+| **2** | Firestore collaboration backend (`icu-collab.js` = `SMD_ICU_GROUPS`): groups/patients/timeline/tasks + `firestore.rules` + `onSnapshot` sync + roles + offline persistence | `grpActive()` |
+| **3** | Round-note→tasks+one-timeline-event composer, automatic audit timeline (mirror diff), smart notifications, presence/audit surfacing | `grpActive()` |
+| **4** | Empty/loading/error/offline states + a11y (focus rings, aria + `aria-pressed`, AA contrast light+dark, ≥44px, reduced-motion), jargon tooltips retained | `icuV2On()` / `grpActive()` |
+
+**Flags (both localStorage, DEFAULT OFF):** `smd_icu_v2` (URL `?icuv2=1|0`) enables the v2 chrome;
+`smd_icu_groups` (URL `?icugroups=1|0`) layers live collaboration on top (requires v2 on + a signed-in
+Firebase user + `icu-collab.js` loaded). An in-app "Try the new ICU workspace (Beta)" toggle lives at
+the top of the **More** tab.
+
+**Ship version:** `icu.js` / `icu-collab.js` at **`?v=gold367`**; `sw.js` **`CACHE
+stewardmd-gold367`** (bump these together on any further change or the SW serves stale files).
+
+### Owner go-live checklist (NOT done here — needs owner / live project / device)
+1. **Deploy the rules:** `firebase deploy --only firestore:rules` (a PR to `firestore.rules` does **not**
+   deploy). This is required before `smd_icu_groups` is usable.
+2. **Run the rules emulator test** (needs a JDK + Firebase CLI): from `test/firestore-rules`,
+   `firebase emulators:exec --only firestore --project demo-stewardmd "node rules.test.mjs"` — exit 0 =
+   every `sharedCases` **and** `icuGroups` guarantee holds (membership boundary, instruct-role gate,
+   append-only timeline, self-only presence, no self-role-escalation).
+3. **Enable the flags for testers only** — `localStorage['smd_icu_v2']='1'` (+ `'smd_icu_groups']='1'`
+   for collaboration) or `?icuv2=1&icugroups=1`. They are default OFF in prod and this change does not
+   enable them.
+4. **Multi-device PHI test** — two signed-in devices in one unit: create/invite (by uid), admit a
+   patient, confirm live board/patient sync, presence ("… are viewing"), the **Synced/Syncing/Offline**
+   indicator + the offline strip (airplane-mode one device), the append-only timeline + round-note→task
+   flow, task status changes, reviewed stamping, role gating (an intern updates status but can't create
+   tasks / delete a patient), and the **error card + Retry** (remove a member → they should see the
+   permission card, not a blank board).
+5. **On-device build** — `npm run build:www && npx cap copy ios/android`, then build + smoke on a
+   physical iPhone + Android (dark mode, VoiceOver/TalkBack labels, reduced-motion system setting,
+   safe-area on a notched device, and the best-effort device notification via `native-push.js`).
