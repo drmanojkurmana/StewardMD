@@ -109,6 +109,7 @@
           swRow("safety", "Organ-safety overlay", "Renal / hepatic / QT flags on antibiotic advice", flag("smd_safety_overlay", true)) +
           '<div class="smd-nav-note">⚗️ Experimental — for clinician review.</div>';
         var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", false)) +
+          swRow("maikperf", "Show AI response time", "Prints MaiK first-token + full-answer time under each answer (diagnostics)", flag("smd_maik_perf", false)) +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync</button>';
@@ -141,6 +142,7 @@
               else if (k === "ai" && window.SMD_AI) SMD_AI.setFlag(nv);
               else if (k === "ghis" && window.SMD_setGhis) SMD_setGhis(nv);
               else if (k === "whisper") { localStorage.setItem("smd_whisper_clinical_dictation", nv ? "1" : "0"); }
+              else if (k === "maikperf") { localStorage.setItem("smd_maik_perf", nv ? "1" : "0"); }
             } catch (e) {}
             sw.classList.toggle("on", nv); sw.setAttribute("aria-checked", nv);
           });
@@ -1910,6 +1912,10 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     // Phase 2 — streaming is ON by default (self-falls-back on any failure); set localStorage
     // smd_maik_stream="0" to force the classic non-stream path.
     function maikStreamOn() { try { return localStorage.getItem("smd_maik_stream") !== "0"; } catch (e) { return true; } }
+    // Diagnostics: when smd_maik_perf="1" (Settings › Interface › "AI response timing"), MaiK prints
+    // first-token + full-answer time under each answer so real-device / native TTFT is readable.
+    function maikPerfOn() { try { return localStorage.getItem("smd_maik_perf") === "1"; } catch (e) { return false; } }
+    function maikNow() { try { return (window.performance && performance.now) ? performance.now() : Date.now(); } catch (e) { return Date.now(); } }
     // ── Web-research helper (extracted so the KB-miss branch AND the assume-tier refine chip
     //    share one implementation). Opt-in, one call, clearly labelled non-StewardMD.
     function maikRunWeb(container, q, srcEl) {
@@ -2055,7 +2061,9 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           // Phase 2 — stream tokens live (UpToDate-style), then maikRenderAnswer re-renders the final
           // answer with sources/chips/collapse. Fully additive: explainGroundedStream self-falls-back
           // to the non-stream call on any hiccup, so this can't regress the answer.
+          var _perfT0 = maikNow(), _perfTTFT = 0;
           var onDelta = function (acc) {
+            if (!_perfTTFT) _perfTTFT = maikNow();
             var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(acc) : maikEscH(acc);
             think.innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';
             try { scroll(); } catch (e) {}
@@ -2063,7 +2071,22 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           var call = (window.SMD_AI.explainGroundedStream && maikStreamOn())
             ? window.SMD_AI.explainGroundedStream(pkg, { depth: depth }, onDelta)
             : window.SMD_AI.explainGrounded(pkg, { depth: depth });
-          return call.then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume); });
+          return call.then(function (r) {
+            maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume);
+            // TTFT diagnostics (flag-gated) — readable on the real app incl. native.
+            try {
+              if (maikPerfOn()) {
+                var total = ((maikNow() - _perfT0) / 1000).toFixed(1);
+                var ttft = _perfTTFT ? ((_perfTTFT - _perfT0) / 1000).toFixed(1) : null;
+                var el = document.createElement("div");
+                el.className = "maik-perf";
+                el.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9";
+                el.textContent = "⏱ " + (ttft ? ("first token " + ttft + "s · ") : "") + "full answer " + total + "s" + (r && r.mode ? " · " + r.mode : "");
+                think.appendChild(el);
+                try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
+              }
+            } catch (e) {}
+          });
         })
         .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
         .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
