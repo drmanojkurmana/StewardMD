@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 713,
+    "diseases": 769,
     "diagnostic": 141,
-    "reference": 572,
+    "reference": 628,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,28 +30,28 @@
     "differential": 99.2,
     "investigations": 99.7,
     "redFlags": 100,
-    "severity": 55.4,
-    "prognosis": 98.7,
-    "diagnosticScoring": 19.8,
-    "management": 19.6,
-    "drugTherapy": 18.1,
-    "dosing": 18.1,
-    "stewardship": 7.2
+    "severity": 51.4,
+    "prognosis": 98.8,
+    "diagnosticScoring": 18.3,
+    "management": 18.2,
+    "drugTherapy": 16.8,
+    "dosing": 16.8,
+    "stewardship": 6.6
   },
   "bySpecialty": {
     "Pulmonology": {
-      "total": 44,
+      "total": 45,
       "diagnostic": 20,
-      "reference": 24,
+      "reference": 25,
       "dims": {
-        "overview": 44,
-        "clinicalFeatures": 44,
-        "pathophysiology": 44,
-        "differential": 44,
-        "investigations": 44,
-        "redFlags": 44,
+        "overview": 45,
+        "clinicalFeatures": 45,
+        "pathophysiology": 45,
+        "differential": 45,
+        "investigations": 45,
+        "redFlags": 45,
         "severity": 28,
-        "prognosis": 43,
+        "prognosis": 44,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 18,
@@ -60,18 +60,18 @@
       }
     },
     "Infectious / Tropical": {
-      "total": 12,
+      "total": 26,
       "diagnostic": 12,
-      "reference": 0,
+      "reference": 14,
       "dims": {
-        "overview": 12,
-        "clinicalFeatures": 12,
-        "pathophysiology": 12,
-        "differential": 12,
-        "investigations": 11,
-        "redFlags": 12,
+        "overview": 26,
+        "clinicalFeatures": 26,
+        "pathophysiology": 26,
+        "differential": 26,
+        "investigations": 25,
+        "redFlags": 26,
         "severity": 9,
-        "prognosis": 12,
+        "prognosis": 26,
         "diagnosticScoring": 12,
         "management": 12,
         "drugTherapy": 8,
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 64,
+      "total": 78,
       "diagnostic": 20,
-      "reference": 44,
+      "reference": 58,
       "dims": {
-        "overview": 64,
-        "clinicalFeatures": 64,
-        "pathophysiology": 64,
-        "differential": 64,
-        "investigations": 64,
-        "redFlags": 64,
+        "overview": 78,
+        "clinicalFeatures": 78,
+        "pathophysiology": 78,
+        "differential": 78,
+        "investigations": 78,
+        "redFlags": 78,
         "severity": 48,
-        "prognosis": 64,
+        "prognosis": 78,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -160,18 +160,18 @@
       }
     },
     "Cardiology": {
-      "total": 53,
+      "total": 59,
       "diagnostic": 11,
-      "reference": 42,
+      "reference": 48,
       "dims": {
-        "overview": 53,
-        "clinicalFeatures": 53,
-        "pathophysiology": 53,
-        "differential": 51,
-        "investigations": 53,
-        "redFlags": 53,
+        "overview": 59,
+        "clinicalFeatures": 59,
+        "pathophysiology": 59,
+        "differential": 57,
+        "investigations": 59,
+        "redFlags": 59,
         "severity": 48,
-        "prognosis": 52,
+        "prognosis": 58,
         "diagnosticScoring": 11,
         "management": 11,
         "drugTherapy": 9,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 49,
+      "total": 52,
       "diagnostic": 10,
-      "reference": 39,
+      "reference": 42,
       "dims": {
-        "overview": 49,
-        "clinicalFeatures": 49,
-        "pathophysiology": 49,
-        "differential": 48,
-        "investigations": 49,
-        "redFlags": 49,
+        "overview": 52,
+        "clinicalFeatures": 52,
+        "pathophysiology": 52,
+        "differential": 51,
+        "investigations": 52,
+        "redFlags": 52,
         "severity": 33,
-        "prognosis": 47,
+        "prognosis": 50,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -320,18 +320,18 @@
       }
     },
     "Toxicology": {
-      "total": 10,
+      "total": 24,
       "diagnostic": 6,
-      "reference": 4,
+      "reference": 18,
       "dims": {
-        "overview": 10,
-        "clinicalFeatures": 10,
-        "pathophysiology": 10,
-        "differential": 10,
-        "investigations": 10,
-        "redFlags": 10,
+        "overview": 24,
+        "clinicalFeatures": 24,
+        "pathophysiology": 24,
+        "differential": 24,
+        "investigations": 24,
+        "redFlags": 24,
         "severity": 10,
-        "prognosis": 9,
+        "prognosis": 23,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -479,6 +479,26 @@
         "stewardship": 0
       }
     },
+    "Neonatology": {
+      "total": 6,
+      "diagnostic": 0,
+      "reference": 6,
+      "dims": {
+        "overview": 6,
+        "clinicalFeatures": 6,
+        "pathophysiology": 6,
+        "differential": 6,
+        "investigations": 6,
+        "redFlags": 6,
+        "severity": 0,
+        "prognosis": 6,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
     "Genetic": {
       "total": 2,
       "diagnostic": 0,
@@ -532,26 +552,6 @@
         "redFlags": 3,
         "severity": 3,
         "prognosis": 3,
-        "diagnosticScoring": 0,
-        "management": 0,
-        "drugTherapy": 0,
-        "dosing": 0,
-        "stewardship": 0
-      }
-    },
-    "Neonatology": {
-      "total": 2,
-      "diagnostic": 0,
-      "reference": 2,
-      "dims": {
-        "overview": 2,
-        "clinicalFeatures": 2,
-        "pathophysiology": 2,
-        "differential": 2,
-        "investigations": 2,
-        "redFlags": 2,
-        "severity": 0,
-        "prognosis": 2,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -868,6 +868,28 @@
       }
     },
     {
+      "id": "atrial_septal_defect",
+      "name": "Atrial Septal Defect",
+      "specialty": "Cardiology",
+      "system": "Paediatric cardiology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "basic_biology_of_the_cardiovascular",
       "name": "Basic Biology of the Cardiovascular System",
       "specialty": "Cardiology",
@@ -1035,6 +1057,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "coarctation_of_aorta",
+      "name": "Coarctation of the Aorta",
+      "specialty": "Cardiology",
+      "system": "Paediatric cardiology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -1484,6 +1528,28 @@
       }
     },
     {
+      "id": "patent_ductus_arteriosus",
+      "name": "Patent Ductus Arteriosus",
+      "specialty": "Cardiology",
+      "system": "Paediatric cardiology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pericardial_disease",
       "name": "Pericardial Disease",
       "specialty": "Cardiology",
@@ -1682,6 +1748,28 @@
       }
     },
     {
+      "id": "tetralogy_of_fallot",
+      "name": "Tetralogy of Fallot",
+      "specialty": "Cardiology",
+      "system": "Paediatric cardiology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "the_bradyarrhythmias_disorders_of_the",
       "name": "The Bradyarrhythmias: Disorders of the Atrioventricular Node",
       "specialty": "Cardiology",
@@ -1695,6 +1783,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "transposition_of_great_arteries",
+      "name": "Transposition of the Great Arteries",
+      "specialty": "Cardiology",
+      "system": "Paediatric cardiology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -1742,6 +1852,28 @@
         "prognosis": true,
         "diagnosticScoring": true,
         "management": true,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ventricular_septal_defect",
+      "name": "Ventricular Septal Defect",
+      "specialty": "Cardiology",
+      "system": "Paediatric cardiology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
         "drugTherapy": false,
         "dosing": false,
         "stewardship": false
@@ -3156,6 +3288,28 @@
       }
     },
     {
+      "id": "galactosemia",
+      "name": "Galactosemia",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic-metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "glycogen_storage_diseases_and_other",
       "name": "Glycogen Storage Diseases and Other Inherited Disorders of Carbohydrate Metabolism",
       "specialty": "Endocrine / Metabolic",
@@ -3411,6 +3565,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "maple_syrup_urine_disease",
+      "name": "Maple Syrup Urine Disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic-metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -3732,6 +3908,28 @@
       "name": "Primary aldosteronism (Conn syndrome)",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrinology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "spinal_muscular_atrophy",
+      "name": "Spinal Muscular Atrophy",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic-metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -8480,6 +8678,50 @@
       }
     },
     {
+      "id": "anthrax",
+      "name": "Anthrax",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ascariasis",
+      "name": "Ascariasis",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "CHIKUNGUNYA",
       "name": "Chikungunya",
       "specialty": "Infectious / Tropical",
@@ -8524,6 +8766,50 @@
       }
     },
     {
+      "id": "cryptosporidiosis",
+      "name": "Cryptosporidiosis",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cysticercosis",
+      "name": "Cysticercosis",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "DENGUE",
       "name": "Dengue Fever",
       "specialty": "Infectious / Tropical",
@@ -8546,6 +8832,28 @@
       }
     },
     {
+      "id": "dengue_hemorrhagic_fever",
+      "name": "Dengue haemorrhagic fever",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "DISSEMINATED_TB",
       "name": "Disseminated (Miliary) Tuberculosis",
       "specialty": "Infectious / Tropical",
@@ -8565,6 +8873,94 @@
         "drugTherapy": true,
         "dosing": true,
         "stewardship": true
+      }
+    },
+    {
+      "id": "giardiasis",
+      "name": "Giardiasis",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hand_foot_mouth_disease",
+      "name": "Hand, foot and mouth disease",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "japanese_encephalitis",
+      "name": "Japanese encephalitis",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kala_azar",
+      "name": "Kala-azar (visceral leishmaniasis)",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
       }
     },
     {
@@ -8634,6 +9030,50 @@
       }
     },
     {
+      "id": "neurocysticercosis",
+      "name": "Neurocysticercosis",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nipah_virus",
+      "name": "Nipah virus infection",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "PULMONARY_TB",
       "name": "Pulmonary Tuberculosis",
       "specialty": "Infectious / Tropical",
@@ -8697,6 +9137,72 @@
         "drugTherapy": true,
         "dosing": true,
         "stewardship": true
+      }
+    },
+    {
+      "id": "strongyloidiasis",
+      "name": "Strongyloidiasis",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "yellow_fever",
+      "name": "Yellow fever",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "zika_virus",
+      "name": "Zika virus infection",
+      "specialty": "Infectious / Tropical",
+      "system": "Infectious / Tropical",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
       }
     },
     {
@@ -10306,6 +10812,72 @@
       }
     },
     {
+      "id": "congenital_diaphragmatic_hernia",
+      "name": "Congenital Diaphragmatic Hernia",
+      "specialty": "Neonatology",
+      "system": "Neonatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hemolytic_disease_of_newborn",
+      "name": "Hemolytic Disease of the Newborn",
+      "specialty": "Neonatology",
+      "system": "Neonatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kernicterus",
+      "name": "Kernicterus",
+      "specialty": "Neonatology",
+      "system": "Neonatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "neonatal_jaundice",
       "name": "Neonatal jaundice",
       "specialty": "Neonatology",
@@ -10330,6 +10902,28 @@
     {
       "id": "neonatal_sepsis",
       "name": "Neonatal sepsis",
+      "specialty": "Neonatology",
+      "system": "Neonatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tracheoesophageal_fistula",
+      "name": "Tracheoesophageal Fistula",
       "specialty": "Neonatology",
       "system": "Neonatology",
       "tier": "reference",
@@ -11032,6 +11626,28 @@
       }
     },
     {
+      "id": "bells_palsy",
+      "name": "Bell's palsy",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "BRAIN_ABSCESS",
       "name": "Brain Abscess",
       "specialty": "Neurology",
@@ -11089,6 +11705,50 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cauda_equina_syndrome",
+      "name": "Cauda equina syndrome",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cerebellar_ataxia",
+      "name": "Cerebellar ataxia",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -11166,6 +11826,28 @@
     {
       "id": "CIDP",
       "name": "Chronic inflammatory demyelinating polyneuropathy",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cluster_headache",
+      "name": "Cluster headache",
       "specialty": "Neurology",
       "system": "Neurology",
       "tier": "reference",
@@ -11296,6 +11978,28 @@
       }
     },
     {
+      "id": "dystonia",
+      "name": "Dystonia",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ectoparasite_infestations_and_arthropod_in",
       "name": "Ectoparasite Infestations and Arthropod Injuries",
       "specialty": "Neurology",
@@ -11340,8 +12044,52 @@
       }
     },
     {
+      "id": "essential_tremor",
+      "name": "Essential tremor",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "febrile_seizure",
       "name": "Febrile seizure",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "friedreichs_ataxia",
+      "name": "Friedreich's ataxia",
       "specialty": "Neurology",
       "system": "Neurology",
       "tier": "reference",
@@ -11402,6 +12150,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "huntington_disease",
+      "name": "Huntington disease",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -11648,6 +12418,50 @@
       }
     },
     {
+      "id": "myoclonus",
+      "name": "Myoclonus",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "narcolepsy",
+      "name": "Narcolepsy",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "neonatal_seizures",
       "name": "Neonatal Seizures",
       "specialty": "Neurology",
@@ -11771,6 +12585,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "normal_pressure_hydrocephalus",
+      "name": "Normal pressure hydrocephalus",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -11956,6 +12792,28 @@
       }
     },
     {
+      "id": "restless_legs_syndrome",
+      "name": "Restless legs syndrome",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "seizure_epilepsy",
       "name": "Seizure / epilepsy",
       "specialty": "Neurology",
@@ -12088,6 +12946,28 @@
       }
     },
     {
+      "id": "syringomyelia",
+      "name": "Syringomyelia",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tension_ha",
       "name": "Tension-type headache",
       "specialty": "Neurology",
@@ -12128,6 +13008,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "transverse_myelitis",
+      "name": "Transverse myelitis",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -14618,6 +15520,28 @@
       }
     },
     {
+      "id": "pediatric_status_asthmaticus",
+      "name": "Pediatric Status Asthmaticus",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pleural_effusion",
       "name": "Pleural effusion",
       "specialty": "Pulmonology",
@@ -16004,6 +16928,72 @@
       }
     },
     {
+      "id": "aluminium_phosphide_poisoning",
+      "name": "Aluminium phosphide poisoning",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "benzodiazepine_overdose",
+      "name": "Benzodiazepine overdose",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "carbon_monoxide_poisoning",
+      "name": "Carbon monoxide poisoning",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cocaine_other_psychostimulants_and_halluci",
       "name": "Cocaine, Other Psychostimulants, and Hallucinogens",
       "specialty": "Toxicology",
@@ -16026,6 +17016,50 @@
       }
     },
     {
+      "id": "corrosive_ingestion",
+      "name": "Corrosive ingestion",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "digoxin_toxicity",
+      "name": "Digoxin toxicity",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "disorders_caused_by_venomous_snakebites",
       "name": "Disorders Caused by Venomous Snakebites and Marine Animal Exposures",
       "specialty": "Toxicology",
@@ -16039,6 +17073,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "drowning",
+      "name": "Drowning",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -16092,6 +17148,50 @@
       }
     },
     {
+      "id": "electrical_injury",
+      "name": "Electrical injury",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ethylene_glycol_poisoning",
+      "name": "Ethylene glycol poisoning",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "heavy_metal_poisoning",
       "name": "Heavy Metal Poisoning",
       "specialty": "Toxicology",
@@ -16105,6 +17205,72 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "iron_poisoning",
+      "name": "Iron poisoning",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lithium_toxicity",
+      "name": "Lithium toxicity",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "methanol_poisoning",
+      "name": "Methanol poisoning",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -16158,6 +17324,28 @@
       }
     },
     {
+      "id": "paraquat_poisoning",
+      "name": "Paraquat poisoning",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "poisoning_and_drug_overdose",
       "name": "Poisoning and Drug Overdose",
       "specialty": "Toxicology",
@@ -16202,6 +17390,28 @@
       }
     },
     {
+      "id": "scorpion_sting",
+      "name": "Scorpion sting",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "serotonin_nms",
       "name": "Serotonin syndrome / NMS",
       "specialty": "Toxicology",
@@ -16220,6 +17430,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tricyclic_antidepressant_overdose",
+      "name": "Tricyclic antidepressant overdose",
+      "specialty": "Toxicology",
+      "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
