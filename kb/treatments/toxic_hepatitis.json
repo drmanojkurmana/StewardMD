@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Withdraw toxin + N-acetylcysteine + supportive care",
       "steps": [
         "Stop the offending drug/toxin immediately.",
         "Paracetamol overdose: N-ACETYLCYSTEINE (use the nomogram / treat if staggered or uncertain timing).",
@@ -18,14 +19,39 @@
         "Contact a liver/transplant unit early if ALF criteria (rising INR, encephalopathy, acidosis) — King's College criteria.",
         "Avoid further hepatotoxins; treat complications (coagulopathy, hypoglycaemia, cerebral oedema)."
       ],
+      "drugRefs": [
+        {
+          "composition": "acetylcysteine",
+          "regimenLabel": "N-acetylcysteine (paracetamol antidote)",
+          "dose": "150 mg/kg over 1 h, then 50 mg/kg over 4 h, then 100 mg/kg over 16 h (21-hour regimen)",
+          "route": "IV infusion",
+          "freq": "continuous per regimen; continue if ongoing hepatotoxicity",
+          "why": "Restores hepatic glutathione — antidote for paracetamol-induced hepatotoxicity; treat per nomogram, or empirically if staggered/uncertain timing. Also benefits non-paracetamol acute liver failure."
+        },
+        {
+          "composition": "glucose 10%",
+          "regimenLabel": "IV dextrose (hypoglycaemia)",
+          "dose": "titrated to maintain normoglycaemia",
+          "route": "IV",
+          "freq": "continuous, guided by capillary glucose",
+          "why": "Hypoglycaemia is common in acute liver failure and a treatable cause of deterioration."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · AASLD ALF",
         "refs": [
-          "Harrison 22e · AASLD ALF"
+          "Harrison's Principles of Internal Medicine, 22e — Toxic and Drug-Induced Hepatitis / Acute Liver Failure",
+          "AASLD Position Paper — Management of Acute Liver Failure",
+          "King's College Criteria for liver transplantation in ALF"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Stop toxin; NAC for paracetamol; monitor for ALF"
+  },
+  "antibioticRelevant": false,
   "confirm": "Acute transaminitis ± jaundice temporally linked to a drug/toxin (esp. paracetamol). Assess for acute liver failure (INR, encephalopathy).",
   "investigations": [
     {
@@ -43,9 +69,10 @@
     "Harrison 22e · AASLD ALF"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

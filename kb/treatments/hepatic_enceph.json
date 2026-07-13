@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Treat the precipitant + lactulose (± rifaximin)",
       "steps": [
         "Identify and treat the PRECIPITANT (GI bleed, sepsis/SBP, constipation, hypokalaemia, dehydration, sedatives).",
         "Lactulose titrated to 2–3 soft stools/day (oral or enema).",
@@ -18,14 +19,38 @@
         "Avoid sedatives; do not over-restrict protein; correct electrolytes.",
         "Manage underlying cirrhosis; assess for transplant."
       ],
+      "drugRefs": [
+        {
+          "composition": "lactulose",
+          "regimenLabel": "First-line non-absorbable disaccharide",
+          "dose": "30–45 mL (20–30 g) titrated to 2–3 soft stools/day; if unable to take orally, give as retention enema (300 mL lactulose in 700 mL water)",
+          "route": "PO/NG (or PR enema)",
+          "freq": "2–4 times daily, titrated to stool output",
+          "why": "Acidifies the gut lumen and traps/clears ammonia; dose is titrated to 2–3 soft stools per day."
+        },
+        {
+          "composition": "rifaximin",
+          "regimenLabel": "Add-on gut-selective antibiotic",
+          "dose": "550 mg twice daily",
+          "route": "PO",
+          "freq": "twice daily",
+          "why": "Reduces ammonia-producing gut flora; added for inadequate response to lactulose and for secondary prevention of recurrence."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · AASLD/EASL",
         "refs": [
-          "Harrison 22e · AASLD/EASL"
+          "Harrison's Principles of Internal Medicine, 22e — Cirrhosis and Its Complications",
+          "AASLD/EASL Practice Guideline — Hepatic Encephalopathy in Chronic Liver Disease"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Treat precipitant + lactulose"
+  },
+  "antibioticRelevant": false,
   "confirm": "Confusion/asterixis with chronic liver disease or porto-systemic shunt; a precipitant (GI bleed, infection, constipation, electrolytes, sedatives) is usually present.",
   "investigations": [
     {
@@ -43,9 +68,10 @@
     "Harrison 22e · AASLD/EASL"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

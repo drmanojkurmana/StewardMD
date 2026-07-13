@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Stop culprit drug + burns-type supportive care",
       "steps": [
         "STOP the culprit drug immediately (single most important step affecting outcome).",
         "Manage like a burn — fluid/electrolyte balance, temperature control, meticulous wound/eye/mucosal care; ideally a burns/specialist unit.",
@@ -18,14 +19,68 @@
         "Ophthalmology and urology/gynae input for mucosal involvement; calculate SCORTEN.",
         "Immunomodulation (ciclosporin/IVIG/etanercept) per specialist — evidence evolving."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "Burn-type fluid resuscitation",
+          "dose": "titrated to detached body-surface area, urine output and electrolytes (burn-type replacement)",
+          "route": "IV",
+          "freq": "continuous, reassessed",
+          "why": "Loss of skin barrier causes large fluid/electrolyte losses; volume requirements are usually lower than a comparable thermal burn but must be titrated to physiology."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Cutaneous Drug Reactions (Ch. 63)",
+          "UK Guidelines for the Management of Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis in Adults (BAD)"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Immunomodulation (specialist-directed, evidence evolving)",
+      "drugRefs": [
+        {
+          "composition": "ciclosporin",
+          "regimenLabel": "Immunomodulator (favoured option in several series)",
+          "dose": "3 mg/kg/day in two divided doses for ~7–10 days, then taper",
+          "route": "PO",
+          "freq": "twice daily",
+          "why": "Most-supported immunomodulatory agent in current SJS/TEN literature; given under specialist guidance."
+        },
+        {
+          "composition": "human normal immunoglobulin (ivig)",
+          "regimenLabel": "High-dose IVIG",
+          "dose": "2–3 g/kg total, divided over 3–4 days",
+          "route": "IV",
+          "freq": "daily over 3–4 days",
+          "why": "Used in some protocols; evidence for benefit is mixed and it is given per specialist decision."
+        },
+        {
+          "composition": "etanercept",
+          "regimenLabel": "TNF-alpha inhibitor",
+          "dose": "50 mg SC (single dose; may repeat)",
+          "route": "SC",
+          "freq": "single dose, repeat per response",
+          "why": "Emerging option with supportive trial data; specialist-directed, evidence evolving."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Cutaneous Drug Reactions (Ch. 63)",
+          "UK Guidelines for the Management of Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis in Adults (BAD)"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Stop culprit drug; burns-unit supportive care"
+  },
+  "antibioticRelevant": false,
   "confirm": "Painful mucocutaneous rash with blistering/skin detachment and mucosal erosions, usually drug-induced; SJS <10%, TEN >30% body-surface detachment.",
   "investigations": [
     {
@@ -43,9 +98,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

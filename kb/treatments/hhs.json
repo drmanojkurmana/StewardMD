@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "IV saline first, low-rate insulin, K+ replacement, VTE prophylaxis",
       "steps": [
         "Aggressive IV 0.9% saline — fluid replacement is the priority (large deficits, replace gradually).",
         "Low-rate IV insulin, started after fluids (or if ketonaemia/glucose not falling with fluids alone).",
@@ -18,14 +19,55 @@
         "VTE prophylaxis (high thrombotic risk); find and treat the precipitant.",
         "Monitor glucose, Na, K and neuro status closely."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV crystalloid rehydration (priority)",
+          "dose": "0.5–1 L over the first hour, then titrated (aim gradual, e.g. positive balance 3–6 L by 12 h)",
+          "route": "IV",
+          "freq": "continuous, per HHS fluid protocol",
+          "why": "Fluid replacement is the cornerstone and alone lowers glucose/osmolality; correct gradually to avoid rapid osmotic shifts and cerebral oedema."
+        },
+        {
+          "composition": "insulin (regular / soluble)",
+          "regimenLabel": "Low-rate IV insulin infusion",
+          "dose": "0.05 unit/kg/hour (start only after fluids, or if ketonaemia present / glucose not falling)",
+          "route": "IV infusion",
+          "freq": "continuous, titrated to gradual glucose fall (~4–6 mmol/L/h)",
+          "why": "Lower rate than DKA because fluids do much of the work; premature/high-dose insulin causes dangerous rapid osmotic shifts."
+        },
+        {
+          "composition": "potassium chloride",
+          "regimenLabel": "Potassium replacement (in IV fluids)",
+          "dose": "add per serum K⁺ (e.g. 40 mmol/L when K⁺ 3.5–5.5)",
+          "route": "IV (in fluids)",
+          "freq": "guided by regular K⁺ monitoring",
+          "why": "Insulin and rehydration drive K⁺ intracellularly; replace once K⁺ <5.5 mmol/L with adequate urine output, withhold if >5.5 or anuric."
+        },
+        {
+          "composition": "enoxaparin",
+          "regimenLabel": "VTE prophylaxis",
+          "dose": "40 mg SC once daily (adjust for renal function/weight)",
+          "route": "SC",
+          "freq": "once daily",
+          "why": "HHS carries a very high thrombotic risk from hyperviscosity/dehydration; prophylactic LMWH is recommended unless contraindicated."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ADA/JBDS HHS",
         "refs": [
-          "Harrison 22e · ADA/JBDS HHS"
+          "Harrison's Principles of Internal Medicine, 22e — Diabetic Ketoacidosis and Hyperosmolar Hyperglycemic State",
+          "JBDS Management of the Hyperosmolar Hyperglycaemic State (HHS) in Adults",
+          "ADA Standards of Care — Hyperglycaemic Crises"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Aggressive IV saline first, then low-rate insulin"
+  },
+  "antibioticRelevant": false,
   "confirm": "Marked hyperglycaemia with high osmolality and minimal ketosis/acidosis, profound dehydration ± reduced consciousness (typically older T2DM).",
   "investigations": [
     {
@@ -43,9 +85,10 @@
     "Harrison 22e · ADA/JBDS HHS"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

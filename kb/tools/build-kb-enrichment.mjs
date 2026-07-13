@@ -58,7 +58,7 @@ if (existsSync(REF)) {
   for (const f of readdirSync(REF).filter((x) => x.endsWith(".json"))) {
     const d = JSON.parse(readFileSync(join(REF, f), "utf8"));
     if (!d.id || byId[d.id]) continue;           // don't shadow a diagnostic disease
-    const h = d.harrison || {};
+    const h = d.harrison || d.reference || {};   // `reference` = source-neutral key (Nelson/Parsons/etc.)
     byId[d.id] = {
       name: d.name, system: d.system || null, class: d.class || null, referenceOnly: true,
       aliases: d.aliases || [],   // carry synonyms into the search index (searchable by alias)

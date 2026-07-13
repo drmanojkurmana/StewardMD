@@ -11,20 +11,68 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Dexamethasone for vasogenic oedema (with gastroprotection)",
       "steps": [
         "MRI with contrast; refer neuro-oncology / neurosurgery.",
         "Dexamethasone for symptomatic vasogenic oedema (with PPI cover).",
         "Antiepileptics only if seizures have occurred (not routine prophylaxis).",
         "Definitive therapy (surgery, radiotherapy, chemotherapy) is tumour-specific via MDT."
       ],
+      "drugRefs": [
+        {
+          "composition": "dexamethasone",
+          "regimenLabel": "Corticosteroid for peritumoural oedema",
+          "dose": "10 mg loading, then 4 mg every 6 hours (titrate to lowest effective dose)",
+          "route": "IV/PO",
+          "freq": "every 6 hours",
+          "why": "Reduces symptomatic vasogenic oedema and raised intracranial pressure. Withhold if primary CNS lymphoma is suspected until biopsy, as steroids can render tissue non-diagnostic."
+        },
+        {
+          "composition": "omeprazole",
+          "regimenLabel": "PPI gastroprotection",
+          "dose": "20–40 mg",
+          "route": "PO/IV",
+          "freq": "once daily",
+          "why": "Gastroprotection while on corticosteroids."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Primary and Metastatic Tumors of the Nervous System",
+          "EANO Guidelines on Diagnosis and Treatment of Gliomas",
+          "NICE NG99 — Brain Tumours (Primary) and Brain Metastases in Adults"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Seizure control (only if a seizure has occurred)",
+      "drugRefs": [
+        {
+          "composition": "levetiracetam",
+          "regimenLabel": "Antiepileptic (therapeutic, not prophylactic)",
+          "dose": "500 mg twice daily, titrate to response",
+          "route": "PO/IV",
+          "freq": "twice daily",
+          "why": "For patients who have had a tumour-related seizure. Prophylactic antiepileptics have no role in patients who have never seized (except sometimes perioperatively)."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Primary and Metastatic Tumors of the Nervous System",
+          "NICE NG99 — Brain Tumours (Primary) and Brain Metastases in Adults"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Dexamethasone for oedema; urgent neuro referral"
+  },
+  "antibioticRelevant": false,
   "confirm": "Progressive headache (worse on waking/Valsalva), focal signs, new seizures, or papilloedema. MRI brain with contrast.",
   "investigations": [
     {
@@ -42,9 +90,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

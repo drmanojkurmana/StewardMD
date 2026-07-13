@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Vasopressor + inotrope, cautious diuresis; treat the cause",
       "steps": [
         "ICU; treat the cause — urgent revascularisation for ischaemic cause.",
         "Inotrope/vasopressor (e.g. noradrenaline ± dobutamine) titrated to perfusion.",
@@ -18,14 +19,47 @@
         "Consider mechanical support (IABP/Impella/ECMO) in selected cases.",
         "Invasive monitoring; serial lactate, urine output."
       ],
+      "drugRefs": [
+        {
+          "composition": "noradrenaline",
+          "regimenLabel": "First-line vasopressor",
+          "dose": "0.05–0.5 mcg/kg/min, titrated",
+          "route": "IV infusion (central)",
+          "freq": "continuous, titrated to MAP ≥65 mmHg",
+          "why": "Preferred first-line vasopressor in cardiogenic shock (lower arrhythmia/mortality vs dopamine); restores coronary and organ perfusion pressure."
+        },
+        {
+          "composition": "dobutamine",
+          "regimenLabel": "Inotrope (add for low output)",
+          "dose": "2.5–10 mcg/kg/min (up to 20)",
+          "route": "IV infusion",
+          "freq": "continuous, titrated to cardiac output/perfusion",
+          "why": "Beta-1 inotrope augments contractility and cardiac output when hypoperfusion persists despite adequate perfusion pressure."
+        },
+        {
+          "composition": "furosemide",
+          "regimenLabel": "Loop diuretic (congestion, filling-guided)",
+          "dose": "40 mg IV (higher/infusion if resistant)",
+          "route": "IV",
+          "freq": "titrated to congestion/urine output",
+          "why": "Relieves pulmonary/systemic congestion once perfusion is being supported; use cautiously and only when filling status allows."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ESC",
         "refs": [
-          "Harrison 22e · ESC"
+          "Harrison's Principles of Internal Medicine, 22e — Cardiogenic Shock and Pulmonary Edema",
+          "2021 ESC Guidelines for the Diagnosis and Treatment of Acute and Chronic Heart Failure",
+          "2023 ESC Guidelines for the Management of Acute Coronary Syndromes"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "ICU — vasopressor/inotrope + treat cause"
+  },
+  "antibioticRelevant": false,
   "confirm": "Hypotension with hypoperfusion despite adequate filling, due to pump failure (often after large MI). Raised lactate, low cardiac output, congestion.",
   "investigations": [
     {
@@ -43,9 +77,10 @@
     "Harrison 22e · ESC"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Remission induction — cyclophosphamide OR rituximab + glucocorticoids",
       "steps": [
         "Assess for organ/life-threatening features (alveolar haemorrhage, active glomerulonephritis — always classed as severe even with normal renal function).",
         "Induce remission of severe ANCA-associated vasculitis with cyclophosphamide OR rituximab plus glucocorticoids; consider adjunctive avacopan to reduce steroid exposure.",
@@ -18,14 +19,76 @@
         "Confirm with ANCA and tissue biopsy; exclude infection/mimics before immunosuppression (a rising ANCA alone is not a reason to escalate therapy).",
         "Maintenance immunosuppression after induction; give Pneumocystis (TMP-SMX) prophylaxis plus bone/gastric protection on glucocorticoids."
       ],
+      "drugRefs": [
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Glucocorticoid backbone",
+          "dose": "1 mg/kg/day (max ~60–80 mg), then tapered (IV methylprednisolone pulses, e.g. 500 mg–1 g/day for 1–3 days, in organ-threatening disease)",
+          "route": "oral (IV methylprednisolone for pulses)",
+          "freq": "once daily, tapering per protocol",
+          "why": "Rapidly suppresses inflammation; the backbone of remission induction combined with a steroid-sparing agent. Reduced-dose regimens (PEXIVAS) lower infection risk."
+        },
+        {
+          "composition": "rituximab",
+          "regimenLabel": "Anti-CD20 (remission induction)",
+          "dose": "375 mg/m² weekly for 4 weeks (or 1 g on days 0 and 14)",
+          "route": "IV infusion",
+          "freq": "per induction schedule",
+          "why": "Non-inferior to cyclophosphamide for induction (RAVE/RITUXVAS) and preferred for relapsing disease and where fertility preservation matters."
+        },
+        {
+          "composition": "cyclophosphamide",
+          "regimenLabel": "Alkylating agent (remission induction)",
+          "dose": "IV pulse 15 mg/kg (max 1.2 g) every 2–3 weeks, or oral 2 mg/kg/day",
+          "route": "IV or oral",
+          "freq": "pulsed (2–3 weekly) or daily oral, adjusted for age/renal function",
+          "why": "Alternative induction agent for severe ANCA-associated vasculitis; dose-reduce for renal impairment and older age. Give with mesna/hydration for bladder protection."
+        },
+        {
+          "composition": "avacopan",
+          "regimenLabel": "C5a-receptor antagonist (steroid-sparing adjunct)",
+          "dose": "30 mg twice daily",
+          "route": "oral",
+          "freq": "twice daily",
+          "why": "Adjunct that allows substantial reduction in glucocorticoid exposure while maintaining remission (ADVOCATE trial)."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · EULAR/KDIGO · rev. Harrison 22e 2898-2946",
         "refs": [
-          "Harrison 22e · EULAR/KDIGO · rev. Harrison 22e 2898-2946"
+          "Harrison's Principles of Internal Medicine, 22e — The Vasculitis Syndromes",
+          "EULAR Recommendations for the Management of ANCA-Associated Vasculitis (2022)",
+          "KDIGO Clinical Practice Guideline for the Management of ANCA-Associated Vasculitis (2024)"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Pneumocystis prophylaxis while immunosuppressed",
+      "drugRefs": [
+        {
+          "composition": "co-trimoxazole",
+          "regimenLabel": "Pneumocystis (PJP) prophylaxis",
+          "dose": "960 mg three times weekly (or 480 mg once daily)",
+          "route": "oral",
+          "freq": "three times weekly (or daily)",
+          "why": "Prevents Pneumocystis jirovecii pneumonia during high-dose glucocorticoid/immunosuppressive therapy; combine with bone and gastric protection."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · EULAR/KDIGO · rev. Harrison 22e 2898-2946",
+        "refs": [
+          "EULAR Recommendations for the Management of ANCA-Associated Vasculitis (2022)"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Urgent immunosuppression (red flags if organ-threatening)"
+  },
+  "antibioticRelevant": false,
   "confirm": "Multisystem illness — purpura, mononeuritis, renal/lung involvement, raised inflammatory markers; ANCA and biopsy guide diagnosis.",
   "investigations": [
     {
@@ -43,9 +106,10 @@
     "Harrison 22e · EULAR/KDIGO · rev. Harrison 22e 2898-2946"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

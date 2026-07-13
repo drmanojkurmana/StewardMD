@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "First-line — IM adrenaline",
       "steps": [
         "IM ADRENALINE 0.5 mg (0.5 mL 1:1000) into anterolateral thigh — repeat every 5 min as needed. FIRST and most important step.",
         "Remove trigger; lie flat with legs raised (sit up if breathing difficulty); high-flow oxygen.",
@@ -18,14 +19,87 @@
         "Refractory: IV adrenaline infusion in a monitored setting.",
         "Observe 6–12 h (biphasic risk); prescribe adrenaline auto-injector + allergy referral."
       ],
+      "drugRefs": [
+        {
+          "composition": "adrenaline (epinephrine)",
+          "regimenLabel": "IM Adrenaline 1:1000",
+          "dose": "0.5 mg (0.5 mL of 1:1000)",
+          "route": "IM (anterolateral thigh)",
+          "freq": "repeat every 5 min as needed",
+          "duration": "until haemodynamic/airway stability",
+          "why": "First-line and most time-critical agent — reverses airway oedema, bronchospasm and vasodilatory shock. Paediatric dose is weight-based via the paediatric formulary."
+        }
+      ],
       "evidence": {
-        "source": "Harrison 22e · WAO/Resus Council",
+        "source": "Harrison 22e · WAO/Resuscitation Council",
         "refs": [
-          "Harrison 22e · WAO/Resus Council"
+          "Harrison's Principles of Internal Medicine, 22e — Anaphylaxis",
+          "World Allergy Organization Anaphylaxis Guidance",
+          "Resuscitation Council Anaphylaxis Algorithm"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Adjuncts & refractory support",
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV crystalloid bolus",
+          "dose": "500–1000 mL (adult)",
+          "route": "IV",
+          "freq": "repeat to clinical response",
+          "why": "Corrects distributive hypotension from capillary leak; large volumes may be required."
+        },
+        {
+          "composition": "salbutamol",
+          "regimenLabel": "Nebulised salbutamol",
+          "dose": "5 mg",
+          "route": "nebulised",
+          "freq": "repeat as needed",
+          "why": "Persistent bronchospasm not resolved by adrenaline."
+        },
+        {
+          "composition": "adrenaline (epinephrine)",
+          "regimenLabel": "IV adrenaline infusion (refractory)",
+          "dose": "titrated infusion (e.g. 0.05–0.5 mcg/kg/min)",
+          "route": "IV infusion",
+          "freq": "continuous, in a monitored/critical-care setting",
+          "why": "For anaphylaxis refractory to repeated IM adrenaline; requires haemodynamic monitoring."
+        },
+        {
+          "composition": "hydrocortisone",
+          "regimenLabel": "Corticosteroid (second-line, not a substitute for adrenaline)",
+          "dose": "200 mg",
+          "route": "IV",
+          "freq": "once, then as needed",
+          "why": "Second-line; does not treat the acute event and must never delay adrenaline. Deemphasised in recent guidance."
+        },
+        {
+          "composition": "chlorphenamine",
+          "regimenLabel": "Antihistamine (symptomatic, second-line)",
+          "dose": "10 mg",
+          "route": "IV/IM",
+          "freq": "once",
+          "why": "Relieves cutaneous symptoms (urticaria/itch) only; not life-saving and must not delay adrenaline."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · WAO/Resuscitation Council",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Anaphylaxis",
+          "World Allergy Organization Anaphylaxis Guidance",
+          "Resuscitation Council Anaphylaxis Algorithm"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate IM adrenaline required"
+  },
+  "antibioticRelevant": false,
   "confirm": "Acute onset of airway/breathing/circulation compromise ± urticaria/angioedema after an allergen exposure.",
   "investigations": [
     {
@@ -38,14 +112,17 @@
       "test": "Allergy referral"
     }
   ],
-  "disposition": "Admit/observe; refractory → ICU.",
+  "disposition": "Admit/observe 6–12 h (biphasic risk); refractory → ICU. Discharge with adrenaline auto-injector + allergy referral.",
   "references": [
-    "Harrison 22e · WAO/Resus Council"
+    "Harrison's Principles of Internal Medicine, 22e — Anaphylaxis",
+    "World Allergy Organization Anaphylaxis Guidance",
+    "Resuscitation Council Anaphylaxis Algorithm"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Resuscitation + broad-spectrum antibiotics + anticoagulation (with urgent revascularisation)",
       "steps": [
         "EMERGENCY — urgent CT angiography; do not delay for equivocal exam.",
         "Resuscitate (fluids), broad-spectrum antibiotics, correct acidosis; NG decompression.",
@@ -18,14 +19,61 @@
         "Therapeutic anticoagulation for embolic/thrombotic arterial or venous occlusion.",
         "ICU; high mortality — speed is critical."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV crystalloid resuscitation",
+          "dose": "bolus 500 mL-1 L, then titrated to perfusion/urine output",
+          "route": "IV",
+          "freq": "repeat to clinical response",
+          "why": "Corrects the large third-space/volume losses and hypoperfusion; helps correct the metabolic acidosis."
+        },
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Broad-spectrum empiric antibiotic",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 h",
+          "why": "Empiric Gram-negative/anaerobic cover for bacterial translocation across the ischaemic bowel wall; give early. Follow local antimicrobial policy."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · WSES",
         "refs": [
-          "Harrison 22e · WSES"
+          "Harrison's Principles of Internal Medicine, 22e — Mesenteric Vascular Insufficiency",
+          "WSES Guidelines on Acute Mesenteric Ischaemia",
+          "ESVS Clinical Practice Guidelines — Mesenteric Ischaemia"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Therapeutic anticoagulation",
+      "drugRefs": [
+        {
+          "composition": "heparin (unfractionated)",
+          "regimenLabel": "IV unfractionated heparin (therapeutic)",
+          "dose": "80 units/kg bolus, then 18 units/kg/h infusion (titrate to APTT)",
+          "route": "IV",
+          "freq": "continuous, titrated to APTT",
+          "why": "Therapeutic anticoagulation for embolic/thrombotic arterial or venous mesenteric occlusion; preferred peri-operatively for its short half-life and reversibility."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · WSES",
+        "refs": [
+          "WSES Guidelines on Acute Mesenteric Ischaemia",
+          "ESVS Clinical Practice Guidelines — Mesenteric Ischaemia"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Emergency CT angiography, resuscitate, revascularise"
+  },
+  "antibioticRelevant": true,
   "confirm": "Severe abdominal pain OUT OF PROPORTION to exam, ± AF/vascular disease, rising lactate. CT angiography is key.",
   "investigations": [
     {
@@ -43,9 +91,10 @@
     "Harrison 22e · WSES"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

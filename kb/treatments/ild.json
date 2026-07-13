@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Pattern-specific therapy — immunosuppression for inflammatory ILD, antifibrotics for IPF (specialist-directed)",
       "steps": [
         "HRCT chest and full PFTs; refer respiratory ILD service / MDT.",
         "Identify cause — drugs, connective-tissue disease, occupational/environmental, hypersensitivity.",
@@ -18,14 +19,46 @@
         "Oxygen for hypoxaemia; pulmonary rehabilitation; vaccinations.",
         "Manage comorbidities; consider transplant referral in advanced disease."
       ],
+      "drugRefs": [
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Corticosteroid (inflammatory / CTD-associated ILD)",
+          "dose": "~0.5 mg/kg/day, then taper to lowest effective dose (specialist-directed)",
+          "route": "oral",
+          "freq": "once daily, tapered",
+          "why": "For inflammatory (non-IPF) ILD such as connective-tissue-disease-associated or hypersensitivity pneumonitis. Not indicated in and can be harmful in IPF."
+        },
+        {
+          "composition": "pirfenidone",
+          "regimenLabel": "Antifibrotic (IPF)",
+          "dose": "titrate to 801 mg three times daily (2403 mg/day)",
+          "route": "oral",
+          "freq": "three times daily with food",
+          "why": "Slows FVC decline in idiopathic pulmonary fibrosis. Monitor LFTs; photosensitivity precautions."
+        },
+        {
+          "composition": "nintedanib",
+          "regimenLabel": "Antifibrotic (IPF / progressive fibrosing ILD)",
+          "dose": "150 mg twice daily",
+          "route": "oral",
+          "freq": "twice daily with food",
+          "why": "Slows lung-function decline in IPF and other progressive fibrosing ILDs. Monitor LFTs; diarrhoea is common."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ATS/ERS",
         "refs": [
-          "Harrison 22e · ATS/ERS"
+          "Harrison's Principles of Internal Medicine, 22e — Interstitial Lung Diseases",
+          "ATS/ERS/JRS/ALAT Clinical Practice Guideline — Idiopathic Pulmonary Fibrosis: Diagnosis and Treatment"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Respiratory referral; pattern-specific therapy"
+  },
+  "antibioticRelevant": false,
   "confirm": "Progressive exertional dyspnoea, dry cough, fine bibasal 'velcro' crackles; restrictive spirometry; HRCT pattern.",
   "investigations": [
     {
@@ -43,9 +76,10 @@
     "Harrison 22e · ATS/ERS"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -112,7 +112,7 @@ for (const id of ids) {
 for (const id of refIds) {
   const d = JSON.parse(readFileSync(join(REFDIR, id + ".json"), "utf8"));
   nRef++;
-  const h = d.harrison || {};
+  const h = d.harrison || d.reference || {};   // `reference` = source-neutral key (Nelson/Parsons/etc.)
   const src = () => ({ ref: h.source || "Harrison 22e", page: h.pages || (d.page ? "p." + d.page : null) });
   const tag = { referenceOnly: true };
   const overview = [d.name, d.class === "infective" ? "(infective)" : "(non-infective)",

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "IVIG or plasma exchange + airway support",
       "steps": [
         "ADMIT to ICU; monitor FVC/NIF — intubate early for respiratory failure.",
         "IVIG or plasma exchange for the crisis.",
@@ -18,14 +19,60 @@
         "Hold/adjust pyridostigmine acutely (secretions); optimise immunotherapy (steroids ± steroid-sparing) once stabilising.",
         "Steroids may transiently worsen weakness — start cautiously under specialist care."
       ],
+      "drugRefs": [
+        {
+          "composition": "human normal immunoglobulin (ivig)",
+          "regimenLabel": "IVIG (rapid immunotherapy for crisis)",
+          "dose": "0.4 g/kg/day for 5 days (total 2 g/kg)",
+          "route": "IV",
+          "freq": "daily for 5 days",
+          "why": "First-line rapid-acting therapy for myasthenic crisis; alternative to plasma exchange with comparable efficacy. Plasma exchange (≈5 exchanges over ~10 days) is the equivalent non-pharmacological option."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Myasthenia Gravis and Other Diseases of the Neuromuscular Junction (Ch. 459)",
+          "International Consensus Guidance for Management of Myasthenia Gravis (Sanders et al., updated 2020)"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Immunotherapy + symptomatic agents (specialist, cautious)",
+      "drugRefs": [
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Corticosteroid immunotherapy (start cautiously)",
+          "dose": "1 mg/kg/day once stabilising; consider gradual up-titration to avoid early steroid-induced worsening",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Mainstay maintenance immunotherapy, but high-dose steroids can transiently worsen weakness at initiation — introduce cautiously in an inpatient/ICU setting, ideally after IVIG/plasma exchange."
+        },
+        {
+          "composition": "pyridostigmine",
+          "regimenLabel": "Anticholinesterase (held/reduced during crisis)",
+          "dose": "60 mg PO 3–4 times daily when used; commonly withheld or reduced acutely in crisis",
+          "route": "PO",
+          "freq": "3–4 times daily",
+          "why": "Symptomatic only; often held during crisis to reduce airway secretions and because it does not treat the underlying process. Avoid escalating doses (risk of cholinergic crisis)."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Myasthenia Gravis and Other Diseases of the Neuromuscular Junction (Ch. 459)",
+          "International Consensus Guidance for Management of Myasthenia Gravis (Sanders et al., updated 2020)"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "ICU; IVIG/plasma exchange + airway support"
+  },
+  "antibioticRelevant": false,
   "confirm": "Worsening bulbar/respiratory weakness in myasthenia gravis (or new presentation) with respiratory failure; often triggered by infection/drugs.",
   "investigations": [
     {
@@ -43,9 +90,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

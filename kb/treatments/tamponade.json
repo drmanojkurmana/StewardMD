@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Emergency pericardiocentesis (fluids as a bridge)",
       "steps": [
         "EMERGENCY — urgent echo; cardiology/cardiothoracic input.",
         "Echo-guided pericardiocentesis (or surgical drainage) to relieve tamponade.",
@@ -18,14 +19,30 @@
         "Avoid positive-pressure ventilation if possible until drained.",
         "Treat and investigate the underlying cause; send pericardial fluid for analysis."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV crystalloid bolus (temporising)",
+          "dose": "250–500 mL bolus, repeated to clinical response",
+          "route": "IV",
+          "freq": "as needed while awaiting drainage",
+          "why": "Temporising measure only — augments preload/right-heart filling to maintain cardiac output until definitive pericardiocentesis. Definitive treatment is drainage, not drugs."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ESC pericardial",
         "refs": [
-          "Harrison 22e · ESC pericardial"
+          "Harrison's Principles of Internal Medicine, 22e — Pericardial Disease and Cardiac Tamponade",
+          "2015 ESC Guidelines for the Diagnosis and Management of Pericardial Diseases"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Emergency pericardiocentesis"
+  },
+  "antibioticRelevant": false,
   "confirm": "Hypotension, raised JVP, muffled heart sounds (Beck's triad) with pulsus paradoxus; echo shows effusion with diastolic collapse.",
   "investigations": [
     {
@@ -43,9 +60,10 @@
     "Harrison 22e · ESC pericardial"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Restore perfusion, stop nephrotoxins, treat the cause",
       "steps": [
         "Assess volume status — fluid resuscitate if pre-renal/hypovolaemic; relieve obstruction (catheter/imaging) if post-renal.",
         "Stop/avoid nephrotoxins (NSAIDs, ACEi/ARB, contrast, aminoglycosides); review drug doses.",
@@ -18,14 +19,68 @@
         "Monitor and treat complications — hyperkalaemia, acidosis, fluid overload, uraemia.",
         "Urgent dialysis for refractory hyperkalaemia/acidosis/overload/uraemic complications; nephrology if intrinsic/unclear."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV crystalloid resuscitation",
+          "dose": "250–500 mL bolus, then titrated to volume status",
+          "route": "IV",
+          "freq": "repeat to euvolaemia; reassess after each bolus",
+          "why": "Restores renal perfusion in pre-renal/hypovolaemic AKI. Avoid over-filling once euvolaemic (risk of pulmonary oedema)."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · KDIGO AKI",
         "refs": [
-          "Harrison 22e · KDIGO AKI"
+          "Harrison's Principles of Internal Medicine, 22e — Acute Kidney Injury",
+          "KDIGO Clinical Practice Guideline for Acute Kidney Injury"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Emergency hyperkalaemia treatment",
+      "drugRefs": [
+        {
+          "composition": "calcium gluconate",
+          "regimenLabel": "Cardiac membrane stabilisation",
+          "dose": "10 mL of 10% (2.25 mmol)",
+          "route": "IV",
+          "freq": "repeat every 5–10 min if ECG changes persist",
+          "why": "Stabilises the myocardium when hyperkalaemia causes ECG changes; does not lower serum K⁺."
+        },
+        {
+          "composition": "insulin (regular / soluble)",
+          "regimenLabel": "Insulin–glucose shift",
+          "dose": "10 units with 25 g glucose (e.g. 250 mL of 10%)",
+          "route": "IV",
+          "freq": "once, monitor glucose 1–2 hourly",
+          "why": "Drives K⁺ intracellularly; give with glucose to prevent hypoglycaemia."
+        },
+        {
+          "composition": "salbutamol",
+          "regimenLabel": "Nebulised beta-agonist (adjunct K⁺ shift)",
+          "dose": "10–20 mg",
+          "route": "nebulised",
+          "freq": "once, adjunct to insulin–glucose",
+          "why": "Additional intracellular K⁺ shift; adjunct only, not a substitute for insulin–glucose."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · KDIGO AKI",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Acute Kidney Injury",
+          "UK Renal Association / Renal Registry — Treatment of Acute Hyperkalaemia in Adults"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Stop nephrotoxins; treat hyperkalaemia; admit"
+  },
+  "antibioticRelevant": false,
   "confirm": "Acute rise in creatinine and/or fall in urine output (KDIGO). Classify pre-renal / renal / post-renal.",
   "investigations": [
     {
@@ -43,9 +98,10 @@
     "Harrison 22e · KDIGO AKI"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

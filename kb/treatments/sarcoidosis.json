@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Observe if mild; corticosteroids first-line if organ-threatening",
       "steps": [
         "Confirm histology (non-caseating granulomas) and EXCLUDE TB/infection/lymphoma first.",
         "Asymptomatic/mild: observe — many resolve spontaneously.",
@@ -18,14 +19,60 @@
         "Steroid-sparing agents (methotrexate/azathioprine) for chronic disease.",
         "Screen for cardiac and ocular involvement; monitor calcium."
       ],
+      "drugRefs": [
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Oral corticosteroid (first-line for organ-threatening disease)",
+          "dose": "20–40 mg once daily, then taper to a low maintenance dose over 6–12 months",
+          "route": "oral",
+          "freq": "once daily, tapered by response",
+          "why": "First-line for organ-threatening sarcoidosis (cardiac, neurological, ocular, progressive pulmonary, hypercalcaemia). Only exclude infection/TB before starting."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ATS sarcoid",
         "refs": [
-          "Harrison 22e · ATS sarcoid"
+          "Harrison's Principles of Internal Medicine, 22e — Sarcoidosis",
+          "ATS Clinical Practice Guideline — Diagnosis and Detection of Sarcoidosis"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Steroid-sparing agents (chronic disease)",
+      "drugRefs": [
+        {
+          "composition": "methotrexate",
+          "regimenLabel": "DMARD (steroid-sparing)",
+          "dose": "10–15 mg once weekly (with folic acid)",
+          "route": "oral/SC",
+          "freq": "once weekly",
+          "why": "Preferred second-line steroid-sparing agent for chronic sarcoidosis; monitor FBC/LFTs."
+        },
+        {
+          "composition": "azathioprine",
+          "regimenLabel": "Immunosuppressant (steroid-sparing alternative)",
+          "dose": "2 mg/kg/day (check TPMT before starting)",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Alternative steroid-sparing agent for chronic disease where methotrexate is unsuitable."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ATS sarcoid",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Sarcoidosis",
+          "ATS Clinical Practice Guideline — Diagnosis and Detection of Sarcoidosis"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Observe if mild; steroids if organ-threatening"
+  },
+  "antibioticRelevant": false,
   "confirm": "Multisystem granulomatous disease — bilateral hilar lymphadenopathy, lung infiltrates ± skin/eye/cardiac involvement; non-caseating granulomas on biopsy (exclude TB).",
   "investigations": [
     {
@@ -43,9 +90,10 @@
     "Harrison 22e · ATS sarcoid"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

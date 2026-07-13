@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "PPI trial (after excluding cardiac cause)",
       "steps": [
         "EXCLUDE cardiac cause first if any doubt.",
         "Lifestyle: weight loss, smaller meals, avoid late meals/triggers, elevate head of bed.",
@@ -18,14 +19,32 @@
         "Endoscopy if alarm features (dysphagia, weight loss, anaemia, age/onset).",
         "Step down to lowest effective therapy."
       ],
+      "drugRefs": [
+        {
+          "composition": "omeprazole",
+          "regimenLabel": "Proton-pump inhibitor trial",
+          "dose": "20–40 mg once daily",
+          "route": "oral",
+          "freq": "once daily, 30–60 min before food",
+          "duration": "4–8 weeks, then step down to lowest effective dose",
+          "why": "Empirical PPI trial is first-line for typical reflux symptoms once cardiac causes are excluded; suppresses gastric acid and heals reflux oesophagitis."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ACG GERD",
         "refs": [
-          "Harrison 22e · ACG GERD"
+          "Harrison's Principles of Internal Medicine, 22e — Gastroesophageal Reflux Disease",
+          "ACG Clinical Guideline — Diagnosis and Management of GERD (2022)",
+          "NICE CG184 — Gastro-oesophageal Reflux Disease and Dyspepsia in Adults"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "green",
+    "label": "PPI trial after excluding cardiac cause"
+  },
+  "antibioticRelevant": false,
   "confirm": "Burning retrosternal pain, postprandial/positional, acid regurgitation — once cardiac causes are excluded.",
   "investigations": [
     {
@@ -40,9 +59,10 @@
     "Harrison 22e · ACG GERD"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

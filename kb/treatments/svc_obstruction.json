@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Corticosteroid + supportive measures (with stenting / cause-directed therapy)",
       "steps": [
         "Sit the patient up; oxygen; assess airway (emergency if stridor/cerebral oedema).",
         "CT chest to define cause and obtain tissue diagnosis before treatment where possible.",
@@ -18,14 +19,51 @@
         "Cause-directed therapy: radiotherapy/chemotherapy for malignancy (SCLC/lymphoma chemo-sensitive).",
         "Corticosteroids in steroid-responsive tumours/airway compromise; anticoagulate if thrombus."
       ],
+      "drugRefs": [
+        {
+          "composition": "dexamethasone",
+          "regimenLabel": "Corticosteroid (steroid-responsive tumour / airway oedema)",
+          "dose": "8 mg twice daily (16 mg/day)",
+          "route": "oral or IV",
+          "freq": "in 1-2 divided doses daily",
+          "why": "Reduces peritumoural/airway oedema in steroid-responsive tumours (lymphoma, thymoma) and airway compromise; avoid before biopsy in suspected lymphoma if it would obscure the diagnosis."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Superior Vena Cava Syndrome / Oncologic Emergencies",
+          "ESMO Clinical Practice Guidelines — Oncological Emergencies"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Anticoagulation if thrombus",
+      "drugRefs": [
+        {
+          "composition": "enoxaparin",
+          "regimenLabel": "Therapeutic LMWH (if associated thrombus)",
+          "dose": "1 mg/kg every 12 h",
+          "route": "subcutaneous",
+          "freq": "twice daily",
+          "why": "Anticoagulate when SVC obstruction is associated with intraluminal/catheter-related thrombus."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Superior Vena Cava Syndrome / Oncologic Emergencies"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Tissue diagnosis + stenting/cause-directed therapy; steroid if responsive"
+  },
+  "antibioticRelevant": false,
   "confirm": "Facial/neck/arm swelling, distended veins, dyspnoea ± plethora; usually malignant. CT confirms level/cause.",
   "investigations": [
     {
@@ -43,9 +81,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

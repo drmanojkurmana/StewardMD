@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Acute attack — NSAID, colchicine or corticosteroid (choose by comorbidity)",
       "steps": [
         "Aspirate the joint — crystals confirm gout/pseudogout; Gram stain/culture EXCLUDES septic arthritis.",
         "Acute attack: NSAID, or colchicine, or corticosteroid (oral/intra-articular) — choose by comorbidity.",
@@ -18,14 +19,69 @@
         "Do NOT start/stop allopurinol during an acute flare for the first time; initiate urate-lowering later with prophylaxis.",
         "Address risk factors (diuretics, alcohol, renal function)."
       ],
+      "drugRefs": [
+        {
+          "composition": "naproxen",
+          "regimenLabel": "NSAID option",
+          "dose": "500 mg",
+          "route": "oral",
+          "freq": "twice daily until attack settles, then taper",
+          "why": "First-line for acute flare in patients without renal/GI/cardiovascular contraindication; co-prescribe gastroprotection if indicated."
+        },
+        {
+          "composition": "colchicine",
+          "regimenLabel": "Colchicine option",
+          "dose": "0.5 mg (500 mcg) 2–3 times daily (e.g. 1 mg then 0.5 mg 1 h later on day 1)",
+          "route": "oral",
+          "freq": "until symptoms relieved (max ~6 mg/course)",
+          "why": "Useful when NSAIDs are contraindicated. Reduce dose in renal impairment and with interacting drugs; low-dose regimens are as effective and better tolerated."
+        },
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Oral corticosteroid option",
+          "dose": "30–35 mg once daily",
+          "route": "oral",
+          "freq": "for ~5 days (or intra-articular for a single joint)",
+          "why": "Preferred where NSAIDs and colchicine are contraindicated (e.g. renal impairment); intra-articular steroid for an isolated large joint once sepsis excluded."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ACR/EULAR gout",
         "refs": [
-          "Harrison 22e · ACR/EULAR gout"
+          "Harrison's Principles of Internal Medicine, 22e — Gout and Other Crystal-Associated Arthropathies",
+          "ACR Guideline for the Management of Gout",
+          "EULAR Recommendations for the Management of Gout"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Urate-lowering therapy (after the flare, with prophylaxis)",
+      "drugRefs": [
+        {
+          "composition": "allopurinol",
+          "regimenLabel": "Xanthine-oxidase inhibitor",
+          "dose": "start 100 mg once daily (50 mg if CKD), titrate to serum urate target <360 micromol/L",
+          "route": "oral",
+          "freq": "once daily, titrated every 2–4 weeks",
+          "why": "Long-term urate-lowering to prevent recurrence. Do not start during an acute flare for the first time; when starting, cover with flare prophylaxis (low-dose colchicine or NSAID)."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ACR/EULAR gout",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Gout and Other Crystal-Associated Arthropathies",
+          "ACR Guideline for the Management of Gout"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Confirm crystals; exclude septic arthritis; treat flare"
+  },
+  "antibioticRelevant": false,
   "confirm": "Acute monoarthritis (often 1st MTP/knee) — confirm with joint aspiration showing crystals; ALWAYS exclude septic arthritis.",
   "investigations": [
     {
@@ -40,9 +96,10 @@
     "Harrison 22e · ACR/EULAR gout"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

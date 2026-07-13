@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Rate control (IV beta-blocker) then BP control + analgesia",
       "steps": [
         "EMERGENCY — CT angiogram of the aorta; involve cardiothoracic surgery.",
         "Control HR then BP: IV beta-blocker (labetalol/esmolol) to HR <60 and SBP ~100–120, add vasodilator.",
@@ -18,14 +19,55 @@
         "Adequate analgesia (reduces sympathetic drive).",
         "Cross-match blood; ICU monitoring."
       ],
+      "drugRefs": [
+        {
+          "composition": "labetalol",
+          "regimenLabel": "IV beta-blockade (first-line rate/BP control)",
+          "dose": "20 mg IV bolus, repeat/double every 10 min (max ~300 mg) or infusion 1–2 mg/min",
+          "route": "IV",
+          "freq": "titrated to HR <60 and SBP ~100–120 mmHg",
+          "why": "Reduces aortic wall shear stress (dP/dt); rate control must precede vasodilatation to avoid reflex tachycardia and propagation."
+        },
+        {
+          "composition": "esmolol",
+          "regimenLabel": "IV beta-blockade (short-acting alternative)",
+          "dose": "500 mcg/kg IV over 1 min, then infusion 50–200 mcg/kg/min",
+          "route": "IV infusion",
+          "freq": "titrated to HR <60",
+          "why": "Ultra-short-acting; easily titratable rate control, useful if haemodynamic instability or need for rapid on/off control."
+        },
+        {
+          "composition": "sodium nitroprusside",
+          "regimenLabel": "IV vasodilator (add AFTER beta-blockade)",
+          "dose": "0.3–0.5 mcg/kg/min, titrate up to ~8 mcg/kg/min",
+          "route": "IV infusion",
+          "freq": "titrated to SBP ~100–120 mmHg",
+          "why": "Further lowers BP once heart rate is controlled; must never be given before beta-blockade (reflex tachycardia increases dP/dt)."
+        },
+        {
+          "composition": "morphine",
+          "regimenLabel": "Analgesia",
+          "dose": "2.5–5 mg IV, titrated to pain",
+          "route": "IV",
+          "freq": "as needed",
+          "why": "Controls pain and the associated sympathetic surge, helping HR/BP control."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ESC aortic",
         "refs": [
-          "Harrison 22e · ESC aortic"
+          "Harrison's Principles of Internal Medicine, 22e — Aortic Aneurysm and Dissection",
+          "2014 ESC Guidelines on the Diagnosis and Treatment of Aortic Diseases",
+          "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Emergency — HR then BP control + surgery for Type A"
+  },
+  "antibioticRelevant": false,
   "confirm": "Sudden tearing chest/back pain ± pulse/BP differential, new aortic regurgitation, widened mediastinum. CT angiography aorta.",
   "investigations": [
     {
@@ -43,9 +85,10 @@
     "Harrison 22e · ESC aortic"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

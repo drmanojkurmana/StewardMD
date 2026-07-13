@@ -11,21 +11,56 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Controlled oxygen + nebulised bronchodilators + oral corticosteroid",
       "steps": [
-        "Controlled oxygen targeting SpO2 88–92% (avoid over-oxygenation).",
+        "Controlled oxygen targeting SpO2 88-92% (avoid over-oxygenation).",
         "Nebulised salbutamol + ipratropium.",
         "Oral prednisolone 30 mg for ~5 days.",
         "Antibiotics only if increased purulent sputum / consolidation / ventilatory support.",
         "NIV for persistent respiratory acidosis (pH <7.35 with hypercapnia)."
       ],
+      "drugRefs": [
+        {
+          "composition": "salbutamol",
+          "regimenLabel": "Nebulised short-acting beta-agonist",
+          "dose": "5 mg",
+          "route": "nebulised",
+          "freq": "every 4-6 h (more frequently if needed)",
+          "why": "Relieves bronchospasm and airflow limitation in the exacerbation."
+        },
+        {
+          "composition": "ipratropium bromide",
+          "regimenLabel": "Nebulised short-acting anticholinergic",
+          "dose": "500 mcg",
+          "route": "nebulised",
+          "freq": "every 4-6 h",
+          "why": "Combined with salbutamol for additive bronchodilation in COPD exacerbations."
+        },
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Oral corticosteroid (short course)",
+          "dose": "30 mg",
+          "route": "oral",
+          "freq": "once daily",
+          "duration": "5 days",
+          "why": "Shortens recovery, improves lung function and reduces relapse; a short 5-day course is standard."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · GOLD",
         "refs": [
-          "Harrison 22e · GOLD"
+          "Harrison's Principles of Internal Medicine, 22e — Chronic Obstructive Pulmonary Disease",
+          "GOLD Report — Management of Exacerbations of COPD",
+          "NICE NG115 — COPD in over 16s"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Controlled O2 + nebulised bronchodilators + prednisolone"
+  },
+  "antibioticRelevant": false,
   "confirm": "Increased dyspnoea/sputum/wheeze in known COPD without convincing infection. Assess for CO2 retention.",
   "investigations": [
     {
@@ -43,9 +78,10 @@
     "Harrison 22e · GOLD"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

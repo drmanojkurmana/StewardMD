@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Urgent plasma exchange + corticosteroid (± caplacizumab/rituximab) for TTP",
       "steps": [
         "HAEMATOLOGICAL EMERGENCY — urgent haematology referral.",
         "TTP: start PLASMA EXCHANGE immediately (don't wait for ADAMTS13) + corticosteroids; add caplacizumab/rituximab.",
@@ -18,14 +19,70 @@
         "HUS: supportive care, renal support; eculizumab for atypical/complement-mediated HUS.",
         "Monitor LDH, platelets, haemoglobin and organ function."
       ],
+      "drugRefs": [
+        {
+          "composition": "methylprednisolone",
+          "regimenLabel": "High-dose corticosteroid (immune TTP)",
+          "dose": "1 g/day (or prednisolone 1 mg/kg/day)",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "typically 3 days then taper per response",
+          "why": "Immunosuppression alongside plasma exchange for immune-mediated TTP. Do NOT give platelet transfusions unless life-threatening bleeding."
+        },
+        {
+          "composition": "caplacizumab",
+          "regimenLabel": "Anti-von Willebrand factor nanobody (immune TTP)",
+          "dose": "10 mg",
+          "route": "IV first dose then subcutaneous",
+          "freq": "once daily (during and after plasma exchange per protocol)",
+          "why": "Blocks platelet-VWF interaction, hastening platelet recovery and reducing refractoriness/exacerbations in acute immune TTP."
+        },
+        {
+          "composition": "rituximab",
+          "regimenLabel": "Anti-CD20 monoclonal (immune TTP)",
+          "dose": "375 mg/m²",
+          "route": "IV",
+          "freq": "once weekly for 4 weeks",
+          "why": "Reduces anti-ADAMTS13 autoantibody production in immune TTP; used for acute treatment and to prevent relapse."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · BSH/ISTH",
         "refs": [
-          "Harrison 22e · BSH/ISTH"
+          "Harrison's Principles of Internal Medicine, 22e — Thrombotic Microangiopathies (TTP/HUS)",
+          "ISTH Guidelines for the Diagnosis and Management of TTP",
+          "BSH Guideline on the Diagnosis and Management of Thrombotic Thrombocytopenic Purpura"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Complement-mediated (atypical) HUS",
+      "drugRefs": [
+        {
+          "composition": "eculizumab",
+          "regimenLabel": "Terminal complement (C5) inhibitor (atypical HUS)",
+          "dose": "900 mg weekly ×4, then 1200 mg fortnightly (adult induction)",
+          "route": "IV",
+          "freq": "per aHUS protocol",
+          "why": "First-line for atypical/complement-mediated HUS. Requires meningococcal vaccination/prophylaxis before or at initiation."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · BSH/ISTH",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Thrombotic Microangiopathies (TTP/HUS)",
+          "KDIGO / expert consensus — Atypical Haemolytic Uraemic Syndrome"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate plasma exchange + steroid (TTP); eculizumab for aHUS"
+  },
+  "antibioticRelevant": false,
   "confirm": "Microangiopathic haemolytic anaemia + thrombocytopenia (± renal failure, neuro signs, fever). Schistocytes on film; ADAMTS13 in TTP.",
   "investigations": [
     {
@@ -43,9 +100,10 @@
     "Harrison 22e · BSH/ISTH"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

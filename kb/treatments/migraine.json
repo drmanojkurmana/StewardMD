@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Acute abortive — NSAID/paracetamol ± triptan + antiemetic",
       "steps": [
         "Acute: NSAID (e.g. naproxen) or paracetamol; add an oral triptan (e.g. sumatriptan 50–100 mg) if no vascular contraindication.",
         "Add an antiemetic (metoclopramide / prochlorperazine) for nausea.",
@@ -18,14 +19,101 @@
         "Limit acute drugs to <10–15 days/month to avoid medication-overuse headache.",
         "Prophylaxis if frequent/disabling: propranolol, amitriptyline, topiramate or candesartan."
       ],
+      "drugRefs": [
+        {
+          "composition": "naproxen",
+          "regimenLabel": "NSAID (abortive)",
+          "dose": "500 mg",
+          "route": "oral",
+          "freq": "at onset, may repeat once after 6–8 h (max 1000 mg/day)",
+          "why": "Effective acute treatment; take early in the attack."
+        },
+        {
+          "composition": "paracetamol",
+          "regimenLabel": "Simple analgesic (abortive)",
+          "dose": "1 g",
+          "route": "oral",
+          "freq": "up to four times daily (max 4 g/day)",
+          "why": "Alternative simple analgesic for milder attacks or where NSAIDs are contraindicated."
+        },
+        {
+          "composition": "sumatriptan",
+          "regimenLabel": "Triptan (abortive)",
+          "dose": "50–100 mg",
+          "route": "oral",
+          "freq": "at onset; may repeat after 2 h if response then recurrence (max 300 mg/day)",
+          "why": "Migraine-specific abortive. Avoid in ischaemic heart/cerebrovascular disease and uncontrolled hypertension."
+        },
+        {
+          "composition": "metoclopramide",
+          "regimenLabel": "Antiemetic/prokinetic",
+          "dose": "10 mg",
+          "route": "oral/IV/IM",
+          "freq": "up to three times daily",
+          "why": "Relieves nausea and improves absorption of oral analgesics. Prochlorperazine is an alternative."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ICHD-3",
         "refs": [
-          "Harrison 22e · ICHD-3"
+          "Harrison's Principles of Internal Medicine, 22e — Migraine and Other Primary Headache Disorders",
+          "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
+          "NICE CG150 — Headaches in Over 12s: Diagnosis and Management"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Prophylaxis (frequent/disabling migraine)",
+      "drugRefs": [
+        {
+          "composition": "propranolol",
+          "regimenLabel": "Beta-blocker prophylaxis",
+          "dose": "80 mg/day, titrate to 80–160 mg/day (modified-release option)",
+          "route": "oral",
+          "freq": "daily",
+          "why": "First-line preventive; avoid in asthma."
+        },
+        {
+          "composition": "amitriptyline",
+          "regimenLabel": "Tricyclic prophylaxis",
+          "dose": "10 mg at night, titrate to 25–75 mg",
+          "route": "oral",
+          "freq": "once at night",
+          "why": "Useful preventive, especially with coexisting sleep disturbance or tension-type headache."
+        },
+        {
+          "composition": "topiramate",
+          "regimenLabel": "Antiepileptic prophylaxis",
+          "dose": "start 25 mg/day, titrate to 50–100 mg/day",
+          "route": "oral",
+          "freq": "daily (usually divided)",
+          "why": "Effective preventive. Teratogenic and reduces hormonal contraceptive efficacy — counsel women of childbearing potential."
+        },
+        {
+          "composition": "candesartan",
+          "regimenLabel": "ARB prophylaxis",
+          "dose": "16 mg once daily",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Preventive option, particularly where beta-blockers are unsuitable."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ICHD-3",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Migraine and Other Primary Headache Disorders",
+          "NICE CG150 — Headaches in Over 12s: Diagnosis and Management"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "green",
+    "label": "Acute abortive ± prophylaxis"
+  },
+  "antibioticRelevant": false,
   "confirm": "Recurrent moderate–severe, often unilateral throbbing headache ± aura, photophobia, nausea with a normal exam (ICHD-3). Image only for red flags.",
   "investigations": [
     {
@@ -40,9 +128,10 @@
     "Harrison 22e · ICHD-3"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

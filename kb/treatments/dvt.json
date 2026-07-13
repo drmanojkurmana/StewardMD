@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Anticoagulation — DOAC first-line",
       "steps": [
         "Confirm proximal DVT with compression venous ultrasonography (D-dimer to help exclude when pretest probability is low).",
         "Anticoagulate once confirmed: DOAC monotherapy (rivaroxaban or apixaban) first-line, or parenteral heparin/LMWH bridged to warfarin (target INR 2-3); warfarin not DOACs for antiphospholipid syndrome.",
@@ -18,14 +19,66 @@
         "For cancer-associated VTE use LMWH or a DOAC (apixaban/edoxaban; avoid DOAC with GI cancer) and continue until cancer-free.",
         "Compression stockings for symptomatic relief; check renal function for dosing; counsel on PE warning signs."
       ],
+      "drugRefs": [
+        {
+          "composition": "apixaban",
+          "regimenLabel": "DOAC (first-line)",
+          "dose": "10 mg twice daily for 7 days, then 5 mg twice daily",
+          "route": "PO",
+          "freq": "twice daily",
+          "duration": "at least 3 months",
+          "why": "First-line single-drug oral anticoagulation; no parenteral lead-in required."
+        },
+        {
+          "composition": "rivaroxaban",
+          "regimenLabel": "DOAC (first-line)",
+          "dose": "15 mg twice daily for 21 days, then 20 mg once daily",
+          "route": "PO",
+          "freq": "twice daily then once daily",
+          "duration": "at least 3 months",
+          "why": "Alternative first-line single-drug DOAC; no parenteral lead-in required."
+        },
+        {
+          "composition": "enoxaparin",
+          "regimenLabel": "LMWH (parenteral / cancer-associated / bridging)",
+          "dose": "1.5 mg/kg once daily (or 1 mg/kg twice daily)",
+          "route": "SC",
+          "freq": "once or twice daily",
+          "why": "Parenteral option for cancer-associated VTE, pregnancy, or bridging to warfarin; dose per renal function."
+        },
+        {
+          "composition": "edoxaban",
+          "regimenLabel": "DOAC after heparin lead-in (cancer-associated)",
+          "dose": "60 mg once daily (after ≥5 days LMWH/heparin)",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Option for cancer-associated VTE; avoid in luminal GI cancers due to bleeding risk."
+        },
+        {
+          "composition": "warfarin",
+          "regimenLabel": "Vitamin K antagonist (target INR 2–3)",
+          "dose": "titrated to INR 2–3 (with parenteral heparin/LMWH cover until therapeutic)",
+          "route": "PO",
+          "freq": "once daily",
+          "duration": "at least 3 months",
+          "why": "Preferred over DOACs in antiphospholipid syndrome; requires overlapping LMWH until INR therapeutic."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ASH/NICE VTE · rev. Harrison 22e 2204-2207",
         "refs": [
-          "Harrison 22e · ASH/NICE VTE · rev. Harrison 22e 2204-2207"
+          "Harrison's Principles of Internal Medicine, 22e — Deep Vein Thrombosis & Venous Thromboembolism (pp. 2204–2207)",
+          "ASH 2020 Guidelines for Management of Venous Thromboembolism",
+          "NICE NG158 — Venous thromboembolic diseases: diagnosis, management and thrombophilia testing"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Anticoagulate once confirmed (DOAC first-line)"
+  },
+  "antibioticRelevant": false,
   "confirm": "Unilateral leg pain/swelling/tenderness; risk-stratify (Wells), D-dimer if low probability, compression US confirms.",
   "investigations": [
     {
@@ -43,9 +96,10 @@
     "Harrison 22e · ASH/NICE VTE · rev. Harrison 22e 2204-2207"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

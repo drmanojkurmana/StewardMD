@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Anticoagulation (DOAC or LMWH) on confirmed/high-probability PE",
       "steps": [
         "Start anticoagulation on clinical suspicion if high probability (LMWH/DOAC).",
         "Massive PE (shock): thrombolysis (or embolectomy) and resuscitation.",
@@ -18,14 +19,79 @@
         "Continue DOAC/LMWH→oral; duration ≥3 months (longer if unprovoked/recurrent).",
         "Oxygen, analgesia; assess for cancer/thrombophilia if unprovoked."
       ],
+      "drugRefs": [
+        {
+          "composition": "apixaban",
+          "regimenLabel": "DOAC (oral, single-drug approach)",
+          "dose": "10 mg twice daily for 7 days, then 5 mg twice daily",
+          "route": "PO",
+          "freq": "twice daily",
+          "duration": "≥3 months (longer if unprovoked/recurrent)",
+          "why": "First-line oral anticoagulation for haemodynamically stable PE; no parenteral lead-in required."
+        },
+        {
+          "composition": "rivaroxaban",
+          "regimenLabel": "DOAC (alternative oral, single-drug approach)",
+          "dose": "15 mg twice daily for 21 days, then 20 mg once daily",
+          "route": "PO",
+          "freq": "twice daily then once daily",
+          "duration": "≥3 months (longer if unprovoked/recurrent)",
+          "why": "Alternative first-line DOAC; take the 15/20 mg maintenance dose with food."
+        },
+        {
+          "composition": "enoxaparin",
+          "regimenLabel": "LMWH (parenteral; preferred in cancer/pregnancy/DOAC-unsuitable)",
+          "dose": "1.5 mg/kg once daily (or 1 mg/kg every 12 hours)",
+          "route": "SC",
+          "freq": "once or twice daily",
+          "why": "Parenteral option when DOACs are unsuitable and as a lead-in for warfarin; preferred in active cancer and pregnancy."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ESC PE",
         "refs": [
-          "Harrison 22e · ESC PE"
+          "Harrison's Principles of Internal Medicine, 22e — Deep Venous Thrombosis and Pulmonary Thromboembolism (Ch. 290)",
+          "ESC 2019 Guidelines on the Diagnosis and Management of Acute Pulmonary Embolism",
+          "NICE NG158 — Venous Thromboembolic Diseases"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Reperfusion / parenteral therapy for high-risk (massive) PE",
+      "drugRefs": [
+        {
+          "composition": "alteplase",
+          "regimenLabel": "Systemic thrombolysis (massive/high-risk PE)",
+          "dose": "100 mg IV over 2 hours",
+          "route": "IV infusion",
+          "freq": "single course",
+          "why": "For haemodynamically unstable (high-risk) PE; rapidly lyses clot. Surgical/catheter embolectomy if thrombolysis contraindicated or failed."
+        },
+        {
+          "composition": "heparin (unfractionated)",
+          "regimenLabel": "IV unfractionated heparin (unstable / peri-thrombolysis / renal failure)",
+          "dose": "80 units/kg bolus, then 18 units/kg/hour infusion titrated to APTT",
+          "route": "IV infusion",
+          "freq": "continuous",
+          "why": "Preferred anticoagulant when thrombolysis is planned, in haemodynamic instability, or severe renal impairment, because of its short half-life and reversibility."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC PE",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Deep Venous Thrombosis and Pulmonary Thromboembolism (Ch. 290)",
+          "ESC 2019 Guidelines on the Diagnosis and Management of Acute Pulmonary Embolism"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Anticoagulate; thrombolyse if high-risk"
+  },
+  "antibioticRelevant": false,
   "confirm": "Pleuritic pain/dyspnoea/tachycardia ± leg DVT; risk-stratify (Wells), D-dimer if low probability, CTPA to confirm.",
   "investigations": [
     {
@@ -43,9 +109,10 @@
     "Harrison 22e · ESC PE"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

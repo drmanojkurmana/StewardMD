@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Dual antiplatelet + anticoagulation + reperfusion & secondary prevention",
       "steps": [
         "Aspirin 300 mg + a second antiplatelet (ticagrelor/clopidogrel); analgesia, oxygen only if hypoxic.",
         "STEMI: primary PCI (or thrombolysis if PCI unavailable) — time-critical.",
@@ -18,14 +19,89 @@
         "Start high-intensity statin, beta-blocker and ACE-inhibitor as tolerated.",
         "Continuous monitoring; treat arrhythmia/heart failure."
       ],
+      "drugRefs": [
+        {
+          "composition": "aspirin",
+          "regimenLabel": "Loading + maintenance antiplatelet",
+          "dose": "300 mg loading, then 75 mg maintenance",
+          "route": "PO",
+          "freq": "loading once, then once daily",
+          "why": "Immediate antiplatelet — reduces thrombus propagation; give as soon as ACS suspected."
+        },
+        {
+          "composition": "ticagrelor",
+          "regimenLabel": "P2Y12 inhibitor (preferred)",
+          "dose": "180 mg loading, then 90 mg",
+          "route": "PO",
+          "freq": "loading once, then twice daily",
+          "duration": "12 months (dual antiplatelet therapy)",
+          "why": "Second antiplatelet for dual antiplatelet therapy; more potent than clopidogrel in ACS."
+        },
+        {
+          "composition": "clopidogrel",
+          "regimenLabel": "P2Y12 inhibitor (alternative)",
+          "dose": "300–600 mg loading, then 75 mg",
+          "route": "PO",
+          "freq": "loading once, then once daily",
+          "duration": "up to 12 months",
+          "why": "Alternative P2Y12 inhibitor where ticagrelor is contraindicated (e.g. high bleeding risk, on anticoagulation)."
+        },
+        {
+          "composition": "fondaparinux",
+          "regimenLabel": "Anticoagulation (NSTE-ACS)",
+          "dose": "2.5 mg",
+          "route": "SC",
+          "freq": "once daily",
+          "why": "Anticoagulation in NSTE-ACS pending angiography; favourable bleeding profile."
+        },
+        {
+          "composition": "enoxaparin",
+          "regimenLabel": "LMWH anticoagulation (alternative)",
+          "dose": "1 mg/kg",
+          "route": "SC",
+          "freq": "twice daily",
+          "why": "Alternative parenteral anticoagulant; dose-reduce in renal impairment."
+        },
+        {
+          "composition": "atorvastatin",
+          "regimenLabel": "High-intensity statin",
+          "dose": "80 mg",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "High-intensity statin started early for plaque stabilisation and secondary prevention."
+        },
+        {
+          "composition": "bisoprolol",
+          "regimenLabel": "Beta-blocker",
+          "dose": "2.5–10 mg",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Reduces myocardial oxygen demand and reinfarction; start once haemodynamically stable and no acute heart failure."
+        },
+        {
+          "composition": "ramipril",
+          "regimenLabel": "ACE inhibitor",
+          "dose": "2.5–10 mg",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "ACE inhibitor for LV remodelling and secondary prevention, titrated as tolerated."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ESC ACS",
         "refs": [
-          "Harrison 22e · ESC ACS"
+          "Harrison's Principles of Internal Medicine, 22e — Acute Coronary Syndromes (STEMI/NSTE-ACS)",
+          "ESC 2023 Guidelines for the Management of Acute Coronary Syndromes",
+          "ACC/AHA Guideline for Coronary Artery Disease / ACS"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Time-critical — reperfusion + dual antiplatelet"
+  },
+  "antibioticRelevant": false,
   "confirm": "Ischaemic chest pain ± ECG changes and troponin rise. Distinguish STEMI from NSTE-ACS by ECG.",
   "investigations": [
     {
@@ -43,9 +119,10 @@
     "Harrison 22e · ESC ACS"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

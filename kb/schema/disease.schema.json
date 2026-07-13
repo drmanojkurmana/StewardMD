@@ -83,6 +83,15 @@
     "review": { "$ref": "#/$defs/review" },
     "version": { "type": "integer", "minimum": 1 },
     "contentHash": { "type": ["string", "null"], "description": "Set by the build step for change detection." },
+    "references": { "type": "array", "items": { "type": "string" }, "description": "Plain-text source names surfaced with the disease (guideline/textbook titles). Provenance detail lives in enrichment.harrison.references and narrative[].source." },
+    "decision": {
+      "type": "object", "additionalProperties": false, "required": ["status"],
+      "description": "Traffic-light triage summary transpiled from the legacy engine (status + label). Display only; the engine still owns the scored decision.",
+      "properties": { "status": { "type": "string", "enum": ["red", "orange", "amber", "yellow", "green"] }, "label": { "type": "string" } }
+    },
+    "reason": { "type": "array", "description": "Transpiled reasoning AST (lit/seq/cond/join/var tokens) — the data form of the legacy 'reasoning: e=>...' closure, produced by kb/tools/transpile-reasons.mjs. Rendered to the human rationale at runtime." },
+    "reasonDerived": { "type": "object", "additionalProperties": true, "description": "Named finding-groups referenced by the reason AST (e.g. clinical-criteria bundles like _anthonisen). Build-derived; do not hand-edit." },
+    "provenanceNote": { "type": "string", "description": "Free-text note on provenance specifics for this disease (optional)." },
     "enrichment": {
       "type": "object", "additionalProperties": true,
       "description": "ADDITIVE reference enrichment, isolated from curated content (never overwrites it). Keyed by source so future re-imports replace only that source's block (idempotent, no duplication). Disease-KNOWLEDGE only — treatment is never sourced here.",

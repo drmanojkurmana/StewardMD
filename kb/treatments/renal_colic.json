@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "NSAID analgesia first-line (opioid if contraindicated)",
       "steps": [
         "Analgesia: an NSAID (e.g. IM/PR diclofenac) is first-line; opioid if NSAID contraindicated.",
         "Antiemetic and fluids as needed; non-contrast CT KUB to confirm and size the stone.",
@@ -18,14 +19,70 @@
         "URGENT urology if obstruction WITH infection (obstructed infected system = emergency decompression), AKI, single kidney, or uncontrolled pain.",
         "Larger/non-passing stones → urology for lithotripsy/ureteroscopy; advise hydration and prevention."
       ],
+      "drugRefs": [
+        {
+          "composition": "diclofenac",
+          "regimenLabel": "First-line NSAID analgesia",
+          "dose": "75 mg IM (or 100 mg PR)",
+          "route": "IM/PR",
+          "freq": "as needed (max 150 mg/day)",
+          "why": "NSAIDs are first-line for renal colic — more effective and longer-lasting than opioids and reduce ureteric smooth-muscle contraction."
+        },
+        {
+          "composition": "morphine",
+          "regimenLabel": "Opioid (if NSAID contraindicated)",
+          "dose": "titrated IV, e.g. 2.5–5 mg increments",
+          "route": "IV",
+          "freq": "titrated to pain",
+          "why": "Alternative analgesia when NSAIDs are contraindicated (renal impairment, bleeding risk, allergy)."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · EAU urolithiasis",
         "refs": [
-          "Harrison 22e · EAU urolithiasis"
+          "Harrison's Principles of Internal Medicine, 22e — Nephrolithiasis",
+          "EAU Guidelines on Urolithiasis",
+          "NICE NG118 — Renal and Ureteric Stones: Assessment and Management"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Antiemetic + medical expulsive therapy",
+      "drugRefs": [
+        {
+          "composition": "metoclopramide",
+          "regimenLabel": "Antiemetic",
+          "dose": "10 mg",
+          "route": "IV/IM",
+          "freq": "up to three times daily",
+          "why": "Controls the nausea/vomiting that commonly accompanies colic."
+        },
+        {
+          "composition": "tamsulosin",
+          "regimenLabel": "Alpha-blocker (medical expulsive therapy)",
+          "dose": "400 micrograms once daily",
+          "route": "PO",
+          "freq": "once daily",
+          "duration": "up to 4 weeks or until stone passes",
+          "why": "Medical expulsive therapy that aids passage of distal ureteric stones (most benefit for stones ~5–10 mm)."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · EAU urolithiasis",
+        "refs": [
+          "EAU Guidelines on Urolithiasis",
+          "NICE NG118 — Renal and Ureteric Stones: Assessment and Management"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "NSAID analgesia; urology if obstructed/infected"
+  },
+  "antibioticRelevant": false,
   "confirm": "Sudden severe loin-to-groin colicky pain ± haematuria, restless patient; non-contrast CT KUB confirms a stone and its size/site.",
   "investigations": [
     {
@@ -43,9 +100,10 @@
     "Harrison 22e · EAU urolithiasis"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

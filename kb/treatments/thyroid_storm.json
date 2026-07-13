@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Beta-blockade + antithyroid drug + iodine + steroid (ICU)",
       "steps": [
         "ICU; beta-blocker (propranolol) for adrenergic symptoms and to block T4→T3 conversion.",
         "Antithyroid drug — propylthiouracil (preferred in storm) or carbimazole.",
@@ -18,14 +19,62 @@
         "Hydrocortisone (reduces T4→T3 and treats relative adrenal insufficiency).",
         "Supportive: cooling, fluids, treat the precipitant (often infection); avoid aspirin."
       ],
+      "drugRefs": [
+        {
+          "composition": "propranolol",
+          "regimenLabel": "Beta-blockade",
+          "dose": "60–80 mg PO every 4–6 hours (or 0.5–1 mg IV slowly, repeated with cardiac monitoring)",
+          "route": "PO/IV",
+          "freq": "every 4–6 hours",
+          "why": "Controls the hyperadrenergic state (tachycardia, tremor, agitation) and, at high dose, blunts peripheral T4→T3 conversion."
+        },
+        {
+          "composition": "propylthiouracil",
+          "regimenLabel": "Antithyroid drug (preferred in storm)",
+          "dose": "500–1000 mg loading, then 250 mg every 4 hours",
+          "route": "PO/NG",
+          "freq": "every 4 hours",
+          "why": "Blocks new thyroid hormone synthesis and, unlike carbimazole, also inhibits peripheral T4→T3 conversion — preferred in the acute crisis."
+        },
+        {
+          "composition": "carbimazole",
+          "regimenLabel": "Antithyroid drug (alternative)",
+          "dose": "20 mg every 4–6 hours",
+          "route": "PO/NG",
+          "freq": "every 4–6 hours",
+          "why": "Alternative thionamide blocking hormone synthesis when propylthiouracil is unavailable or contraindicated."
+        },
+        {
+          "composition": "potassium iodide (lugol's iodine)",
+          "regimenLabel": "Inorganic iodine (Wolff–Chaikoff block)",
+          "dose": "Lugol's iodine 5–10 drops (or potassium iodide) every 6–8 hours",
+          "route": "PO",
+          "freq": "every 6–8 hours",
+          "why": "Inhibits release of stored thyroid hormone. Must be given at least 1 hour AFTER the antithyroid drug, otherwise it can fuel further hormone synthesis."
+        },
+        {
+          "composition": "hydrocortisone",
+          "regimenLabel": "Corticosteroid",
+          "dose": "100 mg IV every 8 hours (or 300 mg loading then 100 mg 8-hourly)",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "why": "Reduces peripheral T4→T3 conversion and covers the relative adrenal insufficiency of severe thyrotoxicosis."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ATA",
         "refs": [
-          "Harrison 22e · ATA"
+          "Harrison's Principles of Internal Medicine, 22e — Hyperthyroidism and Thyrotoxicosis",
+          "ATA Guidelines for Diagnosis and Management of Hyperthyroidism and Thyrotoxicosis"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "ICU; multimodal thyroid storm therapy"
+  },
+  "antibioticRelevant": false,
   "confirm": "Severe thyrotoxicosis with fever, tachyarrhythmia, agitation/delirium, GI/hepatic dysfunction (Burch-Wartofsky score). Treat clinically.",
   "investigations": [
     {
@@ -43,9 +92,10 @@
     "Harrison 22e · ATA"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

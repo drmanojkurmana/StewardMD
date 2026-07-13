@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "NSAID + colchicine + gastroprotection",
       "steps": [
         "NSAID (e.g. ibuprofen) + COLCHICINE for ~3 months (reduces recurrence).",
         "Add gastroprotection; restrict strenuous activity until resolved.",
@@ -18,14 +19,71 @@
         "Treat the underlying cause; reserve steroids for specific indications (refractory, autoimmune).",
         "Investigate for tamponade if hypotensive/raised JVP."
       ],
+      "drugRefs": [
+        {
+          "composition": "ibuprofen",
+          "regimenLabel": "NSAID (first-line anti-inflammatory)",
+          "dose": "600 mg",
+          "route": "PO",
+          "freq": "three times daily",
+          "duration": "1–2 weeks then taper on symptom/CRP resolution",
+          "why": "First-line anti-inflammatory for acute pericarditis pain; aspirin preferred if concurrent ischaemic heart disease."
+        },
+        {
+          "composition": "colchicine",
+          "regimenLabel": "Anti-inflammatory (recurrence prevention)",
+          "dose": "0.5 mg once daily (<70 kg) or twice daily (≥70 kg)",
+          "route": "PO",
+          "freq": "once to twice daily",
+          "duration": "3 months",
+          "why": "Added to the NSAID — improves symptom resolution and roughly halves recurrence."
+        },
+        {
+          "composition": "omeprazole",
+          "regimenLabel": "PPI gastroprotection",
+          "dose": "20 mg",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Gastroprotection while on NSAID therapy."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ESC pericardial",
         "refs": [
-          "Harrison 22e · ESC pericardial"
+          "Harrison's Principles of Internal Medicine, 22e — Pericardial Disease",
+          "ESC 2015 Guidelines for the Diagnosis and Management of Pericardial Diseases",
+          "ICAP trial — colchicine for acute pericarditis"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Corticosteroid (reserved indications)",
+      "drugRefs": [
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Low-dose corticosteroid (second-line)",
+          "dose": "0.2–0.5 mg/kg/day, then slow taper",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Reserved for NSAID/colchicine contraindication, connective-tissue disease, uraemic or refractory pericarditis; low dose lowers recurrence risk."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC pericardial",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Pericardial Disease",
+          "ESC 2015 Guidelines for the Diagnosis and Management of Pericardial Diseases"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "green",
+    "label": "NSAID + colchicine; outpatient if low-risk"
+  },
+  "antibioticRelevant": false,
   "confirm": "Sharp pleuritic chest pain relieved by sitting forward, friction rub, widespread saddle ST-elevation/PR depression. Exclude ACS and effusion/tamponade.",
   "investigations": [
     {
@@ -43,9 +101,10 @@
     "Harrison 22e · ESC pericardial"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

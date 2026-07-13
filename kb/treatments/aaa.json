@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Permissive hypotension + major haemorrhage protocol, then emergency repair",
       "steps": [
         "EMERGENCY — call vascular surgery immediately; do NOT delay for extensive imaging if unstable.",
         "Permissive hypotension (avoid aggressive fluids/overshoot before repair); large-bore access, major haemorrhage protocol.",
@@ -18,14 +19,38 @@
         "CT angiography only if stable enough.",
         "Cross-match; ICU post-op."
       ],
+      "drugRefs": [
+        {
+          "composition": "packed red blood cells",
+          "regimenLabel": "Major haemorrhage protocol (blood products)",
+          "dose": "transfuse via major haemorrhage protocol, targeting permissive hypotension",
+          "route": "IV",
+          "freq": "titrated to perfusion until surgical control",
+          "why": "Ruptured AAA is haemorrhagic shock; balanced blood-product resuscitation (with FFP/platelets per protocol) restores oxygen delivery while awaiting definitive repair. Definitive treatment is surgical, not pharmacological."
+        },
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "Judicious crystalloid (permissive hypotension)",
+          "dose": "minimise volume; target SBP ~70–90 mmHg (or palpable radial pulse / preserved consciousness) until repair",
+          "route": "IV",
+          "freq": "titrated, deliberately restricted",
+          "why": "Aggressive fluid loading raises BP and dislodges clot, worsening bleeding; keep pressure low until surgical control."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ESVS",
         "refs": [
-          "Harrison 22e · ESVS"
+          "Harrison's Principles of Internal Medicine, 22e — Diseases of the Aorta",
+          "ESVS 2019 Clinical Practice Guidelines on the Management of Abdominal Aorto-iliac Artery Aneurysms"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Emergency vascular surgery — ruptured AAA"
+  },
+  "antibioticRelevant": false,
   "confirm": "Sudden abdominal/back/flank pain with hypotension and a pulsatile mass in an older patient — ruptured AAA until proven otherwise.",
   "investigations": [
     {
@@ -43,9 +68,10 @@
     "Harrison 22e · ESVS"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }
