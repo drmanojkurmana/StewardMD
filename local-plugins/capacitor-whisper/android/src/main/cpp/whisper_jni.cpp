@@ -12,6 +12,7 @@
 
 #define LOG_TAG "whisper_jni"
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 
 extern "C" {
 
@@ -22,9 +23,11 @@ Java_in_stewardmd_whisper_WhisperNative_initContext(
     if (path == nullptr) return 0;
     whisper_context_params cparams = whisper_context_default_params();
     cparams.use_gpu = (bool) useGpu;
+    LOGI("initContext: loading model useGpu=%d", (int) useGpu);
     whisper_context* ctx = whisper_init_from_file_with_params(path, cparams);
     env->ReleaseStringUTFChars(modelPath, path);
     if (ctx == nullptr) LOGE("whisper_init_from_file_with_params returned null");
+    else LOGI("initContext: model loaded OK");
     return reinterpret_cast<jlong>(ctx);
 }
 
@@ -50,8 +53,13 @@ Java_in_stewardmd_whisper_WhisperNative_fullTranscribe(
     const char* lang = env->GetStringUTFChars(language, nullptr);
     const char* prompt = env->GetStringUTFChars(initialPrompt, nullptr);
 
-    whisper_full_params p = whisper_full_default_params(WHISPER_SAMPLING_BEAM_SEARCH);
-    p.beam_search.beam_size = beamSize;
+    // GREEDY on Android (not beam search): beam search over the small model on a mobile CPU is
+    // impractically slow (>60 s for a few seconds of audio — no GPU accel, unlike iOS/Metal).
+    // Greedy with best_of=1 keeps dictation accuracy while cutting decoder cost ~5-10x.
+    // (beamSize arg is retained for signature/compat; unused in greedy mode.)
+    (void) beamSize;
+    whisper_full_params p = whisper_full_default_params(WHISPER_SAMPLING_GREEDY);
+    p.greedy.best_of   = 1;
     p.n_threads        = nThreads;
     p.print_realtime   = false;
     p.print_progress   = false;
@@ -65,7 +73,9 @@ Java_in_stewardmd_whisper_WhisperNative_fullTranscribe(
     p.detect_language = detect;
     if (prompt != nullptr && prompt[0] != '\0') p.initial_prompt = prompt;
 
+    LOGI("fullTranscribe: begin samples=%d threads=%d beam=%d lang=%s", n, (int) nThreads, (int) beamSize, p.language);
     int ret = whisper_full(ctx, p, audio.data(), (int) audio.size());
+    LOGI("fullTranscribe: whisper_full ret=%d", ret);
 
     std::string text;
     if (ret == 0) {

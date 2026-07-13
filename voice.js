@@ -41,7 +41,15 @@
   // the multilingual model. We force "en" rather than the device locale, so a phone set to Hindi /
   // a regional language does NOT make Whisper decode the wrong language for English dictation.
   var WHISPER_LANG = "en";
-  var WHISPER_MODEL = "small.en-q5_1";   // default Clinical model key (must exist in native-bridge WHISPER_MODELS)
+  // Clinical model key (must exist in native-bridge WHISPER_MODELS). PLATFORM-SPECIFIC:
+  //  • iOS keeps small.en (~181 MB) — best accuracy; the Metal GPU transcribes it in ~1-2 s.
+  //  • Android uses base (~57 MB) — the CPU-only build runs small.en at ~7 s/clip, which is too
+  //    slow; base is ~2-3x faster (~2.5-3.5 s) and still accurate for English clinical dictation
+  //    (helped by the medical initial_prompt below). Forced "en" keeps the multilingual base English.
+  function isAndroidNative() {
+    try { var C = window.Capacitor; return !!(C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform) === "android"); } catch (e) { return false; }
+  }
+  function whisperModel() { return isAndroidNative() ? "base-q5_1" : "small.en-q5_1"; }
 
   // Whisper `initial_prompt` — primes the decoder for Indian-English CLINICAL dictation so accented
   // English + drug/organism/lab terms are recognised. Built by REUSE: a high-yield medical seed
@@ -89,7 +97,7 @@
       if (whisperAvailable()) {
         try {
           var wstop = window.SMD_NATIVE.transcribeWhisper({
-            language: opts.language || WHISPER_LANG, model: opts.model || WHISPER_MODEL, initialPrompt: opts.initialPrompt || buildInitialPrompt(),
+            language: opts.language || WHISPER_LANG, model: opts.model || whisperModel(), initialPrompt: opts.initialPrompt || buildInitialPrompt(),
             onPartial: opts.onPartial, onFinal: opts.onFinal,
             onError: opts.onError, onDownloadProgress: opts.onDownloadProgress,
             onStateChange: function (s) { if (opts.onState) opts.onState(s, "Clinical (on-device)"); }
