@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Treat ascites + encephalopathy; always seek the precipitant",
       "steps": [
         "Identify and treat the PRECIPITANT — always do a diagnostic ascitic tap to exclude SBP (treat with IV cefotaxime + albumin if PMN ≥250).",
         "Ascites: salt restriction + spironolactone ± furosemide; large-volume paracentesis with albumin for tense ascites.",
@@ -18,14 +19,113 @@
         "Variceal bleed: resuscitation, terlipressin, prophylactic antibiotics, urgent endoscopic band ligation.",
         "Avoid nephrotoxins/NSAIDs; nutrition; assess for transplant; manage AKI/HRS."
       ],
+      "drugRefs": [
+        {
+          "composition": "spironolactone",
+          "regimenLabel": "Aldosterone antagonist (ascites)",
+          "dose": "100 mg once daily, titrate up to 400 mg/day",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "First-line diuretic for cirrhotic ascites; combined with salt restriction, titrated to weight loss and natriuresis."
+        },
+        {
+          "composition": "furosemide",
+          "regimenLabel": "Loop diuretic (adjunct to spironolactone)",
+          "dose": "40 mg once daily, titrate (maintain ~100:40 spironolactone:furosemide ratio)",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Added to spironolactone for a greater/faster diuresis while preserving potassium balance."
+        },
+        {
+          "composition": "human albumin solution",
+          "regimenLabel": "Albumin for large-volume paracentesis",
+          "dose": "~8 g albumin per litre of ascites removed",
+          "route": "IV",
+          "freq": "with each large-volume paracentesis (>5 L)",
+          "why": "Prevents post-paracentesis circulatory dysfunction after removal of tense ascites."
+        },
+        {
+          "composition": "lactulose",
+          "regimenLabel": "Osmotic laxative (encephalopathy)",
+          "dose": "30–45 mL, titrated to 2–3 soft stools/day",
+          "route": "oral / NG",
+          "freq": "two to four times daily",
+          "why": "First-line for hepatic encephalopathy; reduces ammonia absorption from the gut."
+        },
+        {
+          "composition": "rifaximin",
+          "regimenLabel": "Non-absorbable antibiotic (encephalopathy add-on)",
+          "dose": "550 mg twice daily",
+          "route": "oral",
+          "freq": "twice daily",
+          "why": "Added to lactulose to reduce recurrence of hepatic encephalopathy."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · AASLD/EASL",
         "refs": [
-          "Harrison 22e · AASLD/EASL"
+          "Harrison's Principles of Internal Medicine, 22e — Cirrhosis and Its Complications",
+          "EASL Clinical Practice Guidelines on Decompensated Cirrhosis",
+          "AASLD Practice Guidance — Ascites, SBP and Hepatic Encephalopathy"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Acute complications — SBP and variceal bleeding",
+      "drugRefs": [
+        {
+          "composition": "cefotaxime",
+          "regimenLabel": "Empirical antibiotic for SBP",
+          "dose": "2 g every 8 hours",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "duration": "5 days (guided by response/culture)",
+          "why": "First-line for spontaneous bacterial peritonitis (ascitic PMN ≥250 cells/mm³)."
+        },
+        {
+          "composition": "human albumin solution",
+          "regimenLabel": "Albumin in SBP (renal protection)",
+          "dose": "1.5 g/kg on day 1, then 1 g/kg on day 3",
+          "route": "IV",
+          "freq": "days 1 and 3",
+          "why": "Reduces hepatorenal syndrome and mortality when given with antibiotics for SBP."
+        },
+        {
+          "composition": "terlipressin",
+          "regimenLabel": "Splanchnic vasoconstrictor (variceal bleed)",
+          "dose": "1–2 mg every 4–6 hours",
+          "route": "IV",
+          "freq": "every 4–6 hours until bleeding controlled",
+          "duration": "up to 5 days",
+          "why": "Reduces portal pressure and controls acute variceal haemorrhage; bridge to endoscopic band ligation."
+        },
+        {
+          "composition": "ceftriaxone",
+          "regimenLabel": "Antibiotic prophylaxis in variceal bleed",
+          "dose": "1 g once daily",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "up to 7 days",
+          "why": "Prophylactic antibiotics in cirrhotic GI bleeding reduce infection and rebleeding and improve survival."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AASLD/EASL",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Cirrhosis and Its Complications",
+          "EASL Clinical Practice Guidelines on Decompensated Cirrhosis",
+          "Baveno VII Consensus — Portal Hypertension and Variceal Bleeding"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Treat precipitant; SBP → cefotaxime + albumin; bleed → terlipressin + antibiotics"
+  },
+  "antibioticRelevant": true,
   "confirm": "Ascites, jaundice, encephalopathy or variceal bleed with stigmata of chronic liver disease; LFTs/INR/imaging confirm. Always seek a precipitant.",
   "investigations": [
     {
@@ -43,9 +143,10 @@
     "Harrison 22e · AASLD/EASL"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

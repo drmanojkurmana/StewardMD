@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Controlled IV BP reduction with a titratable agent",
       "steps": [
         "Confirm target-organ damage (distinguishes emergency from urgency).",
         "Controlled IV BP reduction — lower MAP by ~20–25% in the first hour (not to normal), titratable agent (labetalol, nicardipine, GTN).",
@@ -18,14 +19,47 @@
         "ICU/HDU monitoring with arterial line.",
         "Identify cause; transition to oral agents once stable."
       ],
+      "drugRefs": [
+        {
+          "composition": "labetalol",
+          "regimenLabel": "IV alpha/beta-blocker",
+          "dose": "20 mg bolus, then 20–80 mg every 10 min, or infusion 0.5–2 mg/min",
+          "route": "IV",
+          "freq": "titrated to target MAP",
+          "why": "Titratable first-line agent for most hypertensive emergencies; avoid in bradycardia/severe asthma/decompensated heart failure."
+        },
+        {
+          "composition": "nicardipine",
+          "regimenLabel": "IV dihydropyridine calcium blocker",
+          "dose": "5 mg/h, titrate by 2.5 mg/h every 5–15 min (max 15 mg/h)",
+          "route": "IV infusion",
+          "freq": "continuous, titrated to target MAP",
+          "why": "Smooth, titratable BP control; useful when beta-blockade is contraindicated."
+        },
+        {
+          "composition": "glyceryl trinitrate",
+          "regimenLabel": "IV nitrate",
+          "dose": "5–200 mcg/min",
+          "route": "IV infusion",
+          "freq": "continuous, titrated to response",
+          "why": "Preferred where there is acute pulmonary oedema or myocardial ischaemia; reduces preload/afterload."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ESC/ACC HTN",
         "refs": [
-          "Harrison 22e · ESC/ACC HTN"
+          "Harrison's Principles of Internal Medicine, 22e — Hypertensive Emergencies",
+          "ESC 2023/2024 Hypertension Guidelines — Hypertensive emergencies",
+          "ACC/AHA Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Controlled IV BP reduction — ICU/HDU"
+  },
+  "antibioticRelevant": false,
   "confirm": "Severe hypertension (often >180/120) WITH acute target-organ damage (encephalopathy, ACS, pulmonary oedema, AKI, retinopathy, dissection).",
   "investigations": [
     {
@@ -43,9 +77,10 @@
     "Harrison 22e · ESC/ACC HTN"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

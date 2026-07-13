@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Diagnostic tap + treat cause; drain if symptomatic/infected",
       "steps": [
         "Diagnostic pleural aspiration (US-guided) — protein, LDH, pH, cytology, microbiology.",
         "Apply Light's criteria; treat the underlying cause (heart failure, malignancy, etc.).",
@@ -18,14 +19,30 @@
         "Suspected empyema/complicated parapneumonic: chest drain.",
         "Malignant effusion: consider indwelling pleural catheter or pleurodesis."
       ],
+      "drugRefs": [
+        {
+          "composition": "talc (sterile)",
+          "regimenLabel": "Talc pleurodesis (recurrent malignant effusion)",
+          "dose": "4–5 g slurry via chest drain (or 2–5 g poudrage at thoracoscopy)",
+          "route": "intrapleural",
+          "freq": "single instillation after full lung re-expansion",
+          "why": "Standard sclerosant to obliterate the pleural space and prevent re-accumulation in recurrent malignant effusion; an alternative to an indwelling pleural catheter."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · BTS pleural",
         "refs": [
-          "Harrison 22e · BTS pleural"
+          "Harrison's Principles of Internal Medicine, 22e — Disorders of the Pleura",
+          "BTS Pleural Disease Guideline (Thorax 2023)"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Diagnostic tap; drain if symptomatic or infected"
+  },
+  "antibioticRelevant": false,
   "confirm": "Dyspnoea with stony dull base, reduced breath sounds; CXR/US confirms. Tap to classify (Light's criteria: exudate vs transudate).",
   "investigations": [
     {
@@ -43,9 +60,10 @@
     "Harrison 22e · BTS pleural"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

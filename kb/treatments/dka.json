@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Fluids + fixed-rate insulin + potassium replacement",
       "steps": [
         "IV 0.9% saline resuscitation first (fluid deficit is large); careful in young/cardiac/renal.",
         "Fixed-rate IV insulin infusion (~0.1 U/kg/h); continue basal insulin if on it.",
@@ -18,14 +19,56 @@
         "Add dextrose when glucose <14 mmol/L; monitor ketones, glucose, K, pH hourly.",
         "Find and treat the precipitant; do not stop insulin infusion until ketones cleared and eating."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV crystalloid resuscitation",
+          "dose": "~1 L over the first hour, then titrated to deficit/haemodynamics",
+          "route": "IV",
+          "freq": "continuous, rate per fluid-replacement protocol",
+          "why": "Corrects the large fluid deficit and improves perfusion; give before/alongside insulin. Caution in young, cardiac or renal patients."
+        },
+        {
+          "composition": "insulin (regular / soluble)",
+          "regimenLabel": "Fixed-rate IV insulin infusion",
+          "dose": "0.1 unit/kg/hour",
+          "route": "IV infusion",
+          "freq": "continuous; adjust to ketone/glucose clearance",
+          "duration": "until ketones cleared, acidosis resolved and patient eating",
+          "why": "Switches off ketogenesis and lowers glucose. Continue long-acting basal insulin if already prescribed."
+        },
+        {
+          "composition": "potassium chloride",
+          "regimenLabel": "Potassium replacement (in IV fluids)",
+          "dose": "add per serum K⁺ (e.g. 40 mmol/L when K⁺ 3.5–5.5)",
+          "route": "IV (in fluids)",
+          "freq": "guided by hourly/2-hourly K⁺",
+          "why": "Insulin drives K⁺ intracellularly; replace once K⁺ <5.5 mmol/L and urine output is adequate. Withhold if K⁺ >5.5 or anuric."
+        },
+        {
+          "composition": "dextrose 10%",
+          "regimenLabel": "IV dextrose (when glucose falls)",
+          "dose": "start when glucose <14 mmol/L (~250 mg/dL)",
+          "route": "IV",
+          "freq": "continuous alongside insulin",
+          "why": "Lets the insulin infusion continue to clear ketones without causing hypoglycaemia."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ADA/JBDS DKA",
         "refs": [
-          "Harrison 22e · ADA/JBDS DKA"
+          "Harrison's Principles of Internal Medicine, 22e — Diabetic Ketoacidosis",
+          "ADA Standards of Care — Hyperglycaemic Crises",
+          "JBDS Management of DKA in Adults"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "IV fluids + fixed-rate insulin infusion"
+  },
+  "antibioticRelevant": false,
   "confirm": "Hyperglycaemia + ketonaemia/ketonuria + high-anion-gap metabolic acidosis. Often a precipitant (infection, missed insulin, new T1DM).",
   "investigations": [
     {
@@ -40,12 +83,15 @@
   ],
   "disposition": "Admit (HDU/ICU if severe).",
   "references": [
-    "Harrison 22e · ADA/JBDS DKA"
+    "Harrison's Principles of Internal Medicine, 22e — Diabetic Ketoacidosis",
+    "ADA Standards of Care — Hyperglycaemic Crises",
+    "JBDS Management of DKA in Adults"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

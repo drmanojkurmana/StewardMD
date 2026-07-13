@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Rapidly raise glucose — oral if conscious, IV glucose or IM glucagon if not",
       "steps": [
         "Conscious: 15–20 g fast-acting oral carbohydrate, repeat in 15 min if still low.",
         "Impaired/NBM: IV glucose (e.g. 100 mL 20%) or IM glucagon if no IV access.",
@@ -18,14 +19,68 @@
         "Sulfonylurea/long-acting insulin overdose: prolonged monitoring ± octreotide; admit.",
         "Review drugs/diabetes regimen; address recurrent causes."
       ],
+      "drugRefs": [
+        {
+          "composition": "glucose",
+          "regimenLabel": "Oral fast-acting carbohydrate (conscious)",
+          "dose": "15–20 g",
+          "route": "oral",
+          "freq": "repeat after 15 min if glucose still low",
+          "why": "First-line if the patient is conscious and able to swallow; follow with longer-acting carbohydrate once recovered."
+        },
+        {
+          "composition": "glucose 20%",
+          "regimenLabel": "IV glucose (impaired consciousness / NBM)",
+          "dose": "100 mL of 20% (20 g); recheck and repeat as needed",
+          "route": "IV",
+          "freq": "once, recheck glucose at 10 min",
+          "why": "For reduced consciousness or nil-by-mouth patients with IV access. 10% glucose (e.g. 150–200 mL) is an alternative."
+        },
+        {
+          "composition": "glucagon",
+          "regimenLabel": "IM glucagon (no IV access)",
+          "dose": "1 mg",
+          "route": "IM/SC",
+          "freq": "once",
+          "why": "Used when IV access is unavailable. Less effective in malnourished, alcohol-dependent or hepatic-glycogen-depleted patients, and in sulfonylurea overdose."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · Endocrine Society",
         "refs": [
-          "Harrison 22e · Endocrine Society"
+          "Harrison's Principles of Internal Medicine, 22e — Hypoglycemia",
+          "Endocrine Society Clinical Practice Guideline — Evaluation and Management of Adult Hypoglycemic Disorders"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Sulfonylurea-induced hypoglycaemia",
+      "drugRefs": [
+        {
+          "composition": "octreotide",
+          "regimenLabel": "Somatostatin analogue (sulfonylurea overdose)",
+          "dose": "50 micrograms",
+          "route": "SC",
+          "freq": "every 6–12 h as needed while monitoring",
+          "why": "Suppresses sulfonylurea-driven insulin secretion and reduces recurrent hypoglycaemia; use alongside glucose with prolonged monitoring and admission."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · Endocrine Society",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Hypoglycemia",
+          "Endocrine Society Clinical Practice Guideline — Evaluation and Management of Adult Hypoglycemic Disorders"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate glucose; IM glucagon if no IV access"
+  },
+  "antibioticRelevant": false,
   "confirm": "Whipple's triad: low plasma glucose with autonomic/neuroglycopenic symptoms relieved by glucose. Identify cause (insulin/sulfonylurea, sepsis, etc.).",
   "investigations": [
     {
@@ -43,9 +98,10 @@
     "Harrison 22e · Endocrine Society"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

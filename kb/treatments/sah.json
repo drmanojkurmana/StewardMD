@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Nimodipine + BP/pain control (with early aneurysm securing)",
       "steps": [
         "EMERGENCY — resuscitate (ABC), neurosurgery / stroke team immediately.",
         "CT angiography to localise aneurysm; secure aneurysm early (endovascular coiling or clipping).",
@@ -18,14 +19,70 @@
         "Control pain and BP (avoid extreme swings); bed rest, analgesia, antiemetics.",
         "Monitor for hydrocephalus, rebleeding, vasospasm, hyponatraemia."
       ],
+      "drugRefs": [
+        {
+          "composition": "nimodipine",
+          "regimenLabel": "Oral calcium-channel blocker (vasospasm prophylaxis)",
+          "dose": "60 mg",
+          "route": "oral (NG if unable to swallow)",
+          "freq": "every 4 h",
+          "duration": "21 days",
+          "why": "Reduces delayed cerebral ischaemia from vasospasm and improves neurological outcome; standard for 21 days."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · AHA/ASA SAH",
         "refs": [
-          "Harrison 22e · AHA/ASA SAH"
+          "Harrison's Principles of Internal Medicine, 22e — Subarachnoid Haemorrhage",
+          "AHA/ASA Guidelines for the Management of Aneurysmal Subarachnoid Haemorrhage",
+          "Neurocritical Care Society — Critical Care Management of SAH"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Symptom control (BP, pain, nausea)",
+      "drugRefs": [
+        {
+          "composition": "labetalol",
+          "regimenLabel": "IV BP control (avoid extreme swings)",
+          "dose": "10-20 mg IV bolus, then infusion titrated",
+          "route": "IV",
+          "freq": "titrated to target BP",
+          "why": "Titratable control of hypertension before the aneurysm is secured, avoiding extreme swings."
+        },
+        {
+          "composition": "paracetamol",
+          "regimenLabel": "Analgesia",
+          "dose": "1 g",
+          "route": "oral or IV",
+          "freq": "every 6 h (max 4 g/day)",
+          "why": "First-line analgesia for the severe headache; opioids may be added if needed."
+        },
+        {
+          "composition": "ondansetron",
+          "regimenLabel": "Antiemetic",
+          "dose": "4-8 mg",
+          "route": "IV/oral",
+          "freq": "every 8 h as needed",
+          "why": "Controls nausea/vomiting and reduces straining that could raise ICP or provoke rebleeding."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AHA/ASA SAH",
+        "refs": [
+          "AHA/ASA Guidelines for the Management of Aneurysmal Subarachnoid Haemorrhage",
+          "Neurocritical Care Society — Critical Care Management of SAH"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Secure aneurysm early + nimodipine + BP control"
+  },
+  "antibioticRelevant": false,
   "confirm": "Sudden thunderclap (worst-ever) headache ± neck stiffness, photophobia, transient LOC. Non-contrast CT head; LP for xanthochromia if CT negative and high suspicion.",
   "investigations": [
     {
@@ -43,9 +100,10 @@
     "Harrison 22e · AHA/ASA SAH"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

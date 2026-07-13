@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Stabilise → shift → remove",
       "steps": [
         "ECG changes / K ≥6.5: IV CALCIUM gluconate to stabilise the myocardium FIRST.",
         "Shift K intracellularly: IV insulin + dextrose, and nebulised salbutamol.",
@@ -18,14 +19,63 @@
         "Dialysis for refractory/severe hyperkalaemia or established renal failure.",
         "Treat the cause (AKI, drugs — ACEi/ARB/K-sparing, acidosis, rhabdo); recheck K."
       ],
+      "drugRefs": [
+        {
+          "composition": "calcium gluconate 10%",
+          "regimenLabel": "Membrane stabilisation (FIRST if ECG changes / K⁺ ≥6.5)",
+          "dose": "10 mL of 10% IV over 5–10 min; repeat if ECG changes persist",
+          "route": "IV",
+          "freq": "repeat every 5–10 min until ECG normalises",
+          "why": "Stabilises the myocardium; does NOT lower serum K⁺ — give the shift/removal steps alongside."
+        },
+        {
+          "composition": "insulin (regular / soluble)",
+          "regimenLabel": "Intracellular shift — insulin",
+          "dose": "10 units IV",
+          "route": "IV",
+          "freq": "once, with dextrose; recheck glucose and K⁺",
+          "why": "Drives K⁺ into cells within 15–30 min. Always co-administer dextrose to prevent hypoglycaemia."
+        },
+        {
+          "composition": "dextrose 25%",
+          "regimenLabel": "Dextrose cover for insulin",
+          "dose": "25 g IV (e.g. 100 mL of 25%)",
+          "route": "IV",
+          "freq": "with insulin; monitor glucose for several hours",
+          "why": "Prevents insulin-induced hypoglycaemia. Omit only if glucose already markedly elevated."
+        },
+        {
+          "composition": "salbutamol",
+          "regimenLabel": "Intracellular shift — nebulised salbutamol",
+          "dose": "10–20 mg nebulised",
+          "route": "nebulised",
+          "freq": "once, adjunct to insulin/dextrose",
+          "why": "Additional intracellular shift; additive to insulin. Use with caution in ischaemic heart disease."
+        },
+        {
+          "composition": "sodium zirconium cyclosilicate / calcium resonium",
+          "regimenLabel": "Potassium binder (removal)",
+          "dose": "per product (e.g. SZC 10 g PO TDS acutely)",
+          "route": "PO",
+          "freq": "as per agent",
+          "why": "Removes K⁺ from the body (gut). Onset is slower than stabilise/shift measures."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · UK Renal/KDIGO",
         "refs": [
-          "Harrison 22e · UK Renal/KDIGO"
+          "Harrison's Principles of Internal Medicine, 22e — Potassium Disorders",
+          "UK Renal Association — Treatment of Acute Hyperkalaemia",
+          "KDIGO guidance"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "IV calcium first if ECG changes / K⁺ ≥6.5"
+  },
+  "antibioticRelevant": false,
   "confirm": "Raised serum potassium ± ECG changes (peaked T, wide QRS). Treat urgently if K ≥6.5 or ECG changes.",
   "investigations": [
     {
@@ -40,12 +90,15 @@
   ],
   "disposition": "Admit/monitored area; nephrology if dialysis needed.",
   "references": [
-    "Harrison 22e · UK Renal/KDIGO"
+    "Harrison's Principles of Internal Medicine, 22e — Potassium Disorders",
+    "UK Renal Association — Treatment of Acute Hyperkalaemia",
+    "KDIGO guidance"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

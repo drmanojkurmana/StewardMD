@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Aggressive IV fluids + analgesia + antiemetic (no routine antibiotics)",
       "steps": [
         "Aggressive early IV fluid resuscitation (balanced crystalloid) with monitoring.",
         "Analgesia (opioids), antiemetics; early enteral nutrition as tolerated (avoid prolonged NBM).",
@@ -18,14 +19,47 @@
         "Gallstone cause with cholangitis/obstruction: urgent ERCP; cholecystectomy on the same admission for mild biliary pancreatitis.",
         "Severe/organ failure → HDU/ICU; monitor for necrosis, pseudocyst, collections."
       ],
+      "drugRefs": [
+        {
+          "composition": "compound sodium lactate (hartmann's)",
+          "regimenLabel": "Balanced crystalloid resuscitation",
+          "dose": "5–10 mL/kg/h initially (goal-directed), reassess frequently",
+          "route": "IV",
+          "freq": "continuous, titrated to urine output/haemodynamics/haematocrit",
+          "why": "Early aggressive fluid resuscitation with a balanced crystalloid improves perfusion; balanced solutions preferred over 0.9% saline. Avoid over-resuscitation."
+        },
+        {
+          "composition": "morphine",
+          "regimenLabel": "Opioid analgesia",
+          "dose": "0.1 mg/kg (titrated in 2–4 mg increments)",
+          "route": "IV",
+          "freq": "titrated to pain",
+          "why": "Pain in acute pancreatitis is often severe and usually needs opioids."
+        },
+        {
+          "composition": "metoclopramide",
+          "regimenLabel": "Antiemetic",
+          "dose": "10 mg",
+          "route": "IV/IM",
+          "freq": "up to three times daily",
+          "why": "Controls nausea/vomiting; supports early enteral nutrition."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ACG/IAP pancreatitis",
         "refs": [
-          "Harrison 22e · ACG/IAP pancreatitis"
+          "Harrison's Principles of Internal Medicine, 22e — Acute and Chronic Pancreatitis",
+          "American College of Gastroenterology Guideline — Management of Acute Pancreatitis",
+          "IAP/APA Evidence-Based Guidelines for the Management of Acute Pancreatitis"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Aggressive IV fluids + analgesia; no routine antibiotics"
+  },
+  "antibioticRelevant": false,
   "confirm": "Severe epigastric pain radiating to back with lipase/amylase >3× upper limit (or imaging). Identify cause (gallstones, alcohol); score severity.",
   "investigations": [
     {
@@ -43,9 +77,10 @@
     "Harrison 22e · ACG/IAP pancreatitis"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

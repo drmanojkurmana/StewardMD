@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Hydroxychloroquine backbone ± corticosteroid (mild–moderate flare)",
       "steps": [
         "Assess organ involvement and severity (esp. renal, CNS, haematological).",
         "Mild: hydroxychloroquine ± short NSAID/low-dose steroid.",
@@ -18,14 +19,78 @@
         "Hydroxychloroquine for essentially all patients (reduces flares).",
         "Exclude/treat concurrent infection (mimics flare and complicates immunosuppression); sun protection, vaccination."
       ],
+      "drugRefs": [
+        {
+          "composition": "hydroxychloroquine",
+          "regimenLabel": "Antimalarial backbone (all patients)",
+          "dose": "200–400 mg PO once daily (≤5 mg/kg actual body weight/day)",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Recommended for essentially all SLE patients — reduces flares, organ damage and mortality; baseline/annual retinal screening required."
+        },
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Oral corticosteroid (mild–moderate flare)",
+          "dose": "low dose (≤7.5 mg/day) for mild; up to 0.5 mg/kg/day short course for moderate, then taper",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Controls active inflammation; use the lowest effective dose and taper to minimise long-term steroid toxicity."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · EULAR SLE",
         "refs": [
-          "Harrison 22e · EULAR SLE"
+          "Harrison's Principles of Internal Medicine, 22e — Systemic Lupus Erythematosus",
+          "2019 EULAR Recommendations for the Management of Systemic Lupus Erythematosus",
+          "2019 EULAR/ERA-EDTA Recommendations for the Management of Lupus Nephritis"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Organ-threatening / severe flare — pulse steroids + immunosuppression",
+      "drugRefs": [
+        {
+          "composition": "methylprednisolone",
+          "regimenLabel": "IV pulse corticosteroid (organ-threatening)",
+          "dose": "500–1000 mg IV daily for 3 days",
+          "route": "IV infusion",
+          "freq": "3 consecutive days, then oral taper",
+          "why": "Rapid control of severe/organ-threatening flares (e.g. nephritis, CNS, severe cytopenias) before/with maintenance immunosuppression."
+        },
+        {
+          "composition": "mycophenolate mofetil",
+          "regimenLabel": "Immunosuppressant (induction/maintenance)",
+          "dose": "2–3 g/day PO in divided doses (induction)",
+          "route": "PO",
+          "freq": "in 2 divided doses",
+          "why": "First-line induction/maintenance for lupus nephritis and other severe manifestations; teratogenic — ensure contraception."
+        },
+        {
+          "composition": "cyclophosphamide",
+          "regimenLabel": "Immunosuppressant (severe/refractory)",
+          "dose": "500 mg IV every 2 weeks for 6 doses (Euro-Lupus low-dose regimen)",
+          "route": "IV infusion",
+          "freq": "fortnightly x6",
+          "why": "Induction option for severe lupus nephritis or life-threatening disease; requires fertility counselling and bladder protection."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · EULAR SLE",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Systemic Lupus Erythematosus",
+          "2019 EULAR Recommendations for the Management of Systemic Lupus Erythematosus",
+          "2019 EULAR/ERA-EDTA Recommendations for the Management of Lupus Nephritis"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Exclude infection; escalate immunosuppression by severity"
+  },
+  "antibioticRelevant": false,
   "confirm": "Multisystem flare (rash, arthritis, serositis, cytopenias, nephritis) in known/new SLE; raised anti-dsDNA, low complement.",
   "investigations": [
     {
@@ -43,9 +108,10 @@
     "Harrison 22e · EULAR SLE"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

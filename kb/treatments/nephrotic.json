@@ -11,21 +11,85 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "RAAS blockade + diuresis + statin (with cause-specific immunosuppression)",
       "steps": [
         "Quantify proteinuria; renal biopsy in adults to define the lesion (guides specific therapy).",
         "Reduce proteinuria with ACEi/ARB; manage oedema with salt restriction + loop diuretics (cautious).",
-        "Statin for hyperlipidaemia; consider VTE prophylaxis (high thrombotic risk, esp. albumin <20–25 g/L).",
+        "Statin for hyperlipidaemia; consider VTE prophylaxis (high thrombotic risk, esp. albumin <20-25 g/L).",
         "Cause-specific immunosuppression (e.g. steroids for minimal change) per nephrology.",
         "Treat secondary causes (diabetes, amyloid, drugs, infection); vaccination."
+      ],
+      "drugRefs": [
+        {
+          "composition": "ramipril",
+          "regimenLabel": "ACE inhibitor (antiproteinuric)",
+          "dose": "2.5 mg starting, titrate to 10 mg (max)",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Reduces intraglomerular pressure and proteinuria; an ARB is an alternative if ACEi not tolerated. Monitor U&E/potassium."
+        },
+        {
+          "composition": "furosemide",
+          "regimenLabel": "Loop diuretic for oedema",
+          "dose": "40 mg (titrate to response; higher doses often needed)",
+          "route": "oral or IV",
+          "freq": "once-twice daily",
+          "why": "Controls oedema alongside salt restriction; use cautiously to avoid intravascular depletion/AKI."
+        },
+        {
+          "composition": "atorvastatin",
+          "regimenLabel": "Statin for hyperlipidaemia",
+          "dose": "20 mg",
+          "route": "oral",
+          "freq": "once daily at night",
+          "why": "Treats the secondary hyperlipidaemia of nephrotic syndrome."
+        }
       ],
       "evidence": {
         "source": "Harrison 22e · KDIGO GN",
         "refs": [
-          "Harrison 22e · KDIGO GN"
+          "Harrison's Principles of Internal Medicine, 22e — Glomerular Diseases",
+          "KDIGO Clinical Practice Guideline for Glomerular Diseases",
+          "UpToDate — Overview of the Management of Nephrotic Syndrome in Adults"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Thromboprophylaxis + cause-specific immunosuppression",
+      "drugRefs": [
+        {
+          "composition": "enoxaparin",
+          "regimenLabel": "VTE prophylaxis (high thrombotic risk)",
+          "dose": "40 mg",
+          "route": "subcutaneous",
+          "freq": "once daily",
+          "why": "Nephrotic syndrome is strongly prothrombotic, especially when serum albumin is <20-25 g/L; consider prophylactic anticoagulation."
+        },
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Corticosteroid (e.g. minimal change disease)",
+          "dose": "1 mg/kg/day (max 60-80 mg/day)",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Cause-specific immunosuppression example (minimal change disease); the specific regimen depends on the biopsy diagnosis and is directed by nephrology."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · KDIGO GN",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Glomerular Diseases",
+          "KDIGO Clinical Practice Guideline for Glomerular Diseases"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "ACEi/ARB + diuretics + statin; nephrology for biopsy-directed therapy"
+  },
+  "antibioticRelevant": false,
   "confirm": "Heavy proteinuria (>3.5 g/day), hypoalbuminaemia, oedema ± hyperlipidaemia. Identify primary vs secondary cause; biopsy in adults.",
   "investigations": [
     {
@@ -43,9 +107,10 @@
     "Harrison 22e · KDIGO GN"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

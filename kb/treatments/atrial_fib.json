@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Rate control + anticoagulation (cardiovert if unstable)",
       "steps": [
         "Unstable (shock, ischaemia, pulmonary oedema): emergency synchronised DC cardioversion.",
         "Stable: rate control with a beta-blocker or diltiazem/verapamil (digoxin if HF/hypotension).",
@@ -18,14 +19,55 @@
         "Anticoagulate per CHA2DS2-VASc (DOAC preferred) for stroke prevention.",
         "Identify/treat triggers — sepsis, thyroid, electrolytes, alcohol, ischaemia."
       ],
+      "drugRefs": [
+        {
+          "composition": "metoprolol",
+          "regimenLabel": "Beta-blocker rate control",
+          "dose": "25–100 mg orally twice daily (or IV 2.5–5 mg over 2 min, repeat to max 15 mg)",
+          "route": "oral / IV",
+          "freq": "regular; IV titrated for acute control",
+          "why": "First-line rate control in stable AF; slows AV-nodal conduction. Avoid in decompensated heart failure or hypotension."
+        },
+        {
+          "composition": "diltiazem",
+          "regimenLabel": "Non-dihydropyridine calcium-channel blocker (rate control)",
+          "dose": "120–360 mg/day orally (or IV 0.25 mg/kg over 2 min)",
+          "route": "oral / IV",
+          "freq": "regular; IV for acute control",
+          "why": "Alternative rate control when beta-blockers are contraindicated. Avoid in HFrEF (as with verapamil)."
+        },
+        {
+          "composition": "digoxin",
+          "regimenLabel": "Digoxin rate control (HF/hypotension)",
+          "dose": "loading ~500 mcg then 250 mcg at intervals (total ~0.75–1.5 mg/24 h), then 62.5–250 mcg/day",
+          "route": "oral / IV",
+          "freq": "loading then once daily maintenance",
+          "why": "Preferred rate-control agent when there is heart failure or hypotension; less effective on exertional rates. Adjust for renal function."
+        },
+        {
+          "composition": "apixaban",
+          "regimenLabel": "DOAC for stroke prevention",
+          "dose": "5 mg twice daily (2.5 mg twice daily if ≥2 of: age ≥80, weight ≤60 kg, creatinine ≥133 µmol/L)",
+          "route": "oral",
+          "freq": "twice daily",
+          "why": "Stroke prevention guided by CHA2DS2-VASc; DOACs preferred over warfarin except in mechanical valves/moderate–severe mitral stenosis."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ESC AF",
         "refs": [
-          "Harrison 22e · ESC AF"
+          "Harrison's Principles of Internal Medicine, 22e — Atrial Fibrillation",
+          "2024 ESC Guidelines for the Management of Atrial Fibrillation",
+          "ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Rate/rhythm control + anticoagulation"
+  },
+  "antibioticRelevant": false,
   "confirm": "Irregularly irregular pulse; ECG shows AF/flutter. Assess haemodynamic stability and onset/duration.",
   "investigations": [
     {
@@ -43,9 +85,10 @@
     "Harrison 22e · ESC AF"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

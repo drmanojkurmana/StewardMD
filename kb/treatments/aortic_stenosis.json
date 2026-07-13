@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Valve replacement — no disease-modifying pharmacotherapy",
       "steps": [
         "Echocardiography to grade severity; refer cardiology.",
         "Avoid aggressive vasodilators/nitrates in severe AS (preload-dependent — risk of collapse).",
@@ -18,14 +19,22 @@
         "Treat heart failure cautiously; manage concomitant CAD.",
         "Endocarditis awareness/dental hygiene."
       ],
+      "drugRefs": [],
       "evidence": {
         "source": "Harrison 22e · ESC/AHA valve",
         "refs": [
-          "Harrison 22e · ESC/AHA valve"
+          "Harrison's Principles of Internal Medicine, 22e — Valvular Heart Disease (Aortic Stenosis)",
+          "ESC/EACTS 2021 Guidelines for the Management of Valvular Heart Disease",
+          "ACC/AHA 2020 Guideline for the Management of Patients with Valvular Heart Disease"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Cardiology referral — definitive Rx is valve replacement"
+  },
+  "antibioticRelevant": false,
   "confirm": "Exertional syncope/angina/dyspnoea with an ejection-systolic murmur radiating to carotids, slow-rising pulse. Echo confirms severity.",
   "investigations": [
     {
@@ -43,9 +52,10 @@
     "Harrison 22e · ESC/AHA valve"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

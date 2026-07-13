@@ -11,20 +11,68 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Simple analgesia used sparingly",
       "steps": [
         "Simple analgesia: paracetamol or an NSAID, used sparingly.",
         "Address triggers — stress, poor sleep, posture, caffeine, eye strain.",
         "Prophylaxis with low-dose amitriptyline if chronic (>15 days/month).",
         "Avoid opioids and frequent analgesia (medication-overuse risk)."
       ],
+      "drugRefs": [
+        {
+          "composition": "paracetamol",
+          "regimenLabel": "Simple analgesic",
+          "dose": "1 g up to four times daily (max 4 g/day)",
+          "route": "oral",
+          "freq": "as needed, up to four times daily",
+          "why": "First-line acute relief for tension-type headache; limit frequency to avoid medication-overuse headache."
+        },
+        {
+          "composition": "ibuprofen",
+          "regimenLabel": "NSAID (alternative simple analgesic)",
+          "dose": "400 mg three times daily as needed",
+          "route": "oral",
+          "freq": "as needed, up to three times daily",
+          "why": "Alternative acute analgesic; use sparingly and with gastric caution."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Headache / Tension-Type Headache",
+          "EFNS Guideline on the Treatment of Tension-Type Headache",
+          "NICE CG150 — Headaches in Over 12s: Diagnosis and Management"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Prophylaxis for chronic tension-type headache",
+      "drugRefs": [
+        {
+          "composition": "amitriptyline",
+          "regimenLabel": "Tricyclic prophylaxis",
+          "dose": "10–25 mg at night, titrate slowly to effect",
+          "route": "oral",
+          "freq": "once daily at night",
+          "why": "First-line preventive for chronic tension-type headache (>15 days/month); start low and up-titrate."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Headache / Tension-Type Headache",
+          "EFNS Guideline on the Treatment of Tension-Type Headache"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "green",
+    "label": "Simple analgesia sparingly; amitriptyline if chronic"
+  },
+  "antibioticRelevant": false,
   "confirm": "Bilateral, pressing/tightening, mild–moderate headache without migrainous features or red flags.",
   "investigations": [
     {
@@ -36,9 +84,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

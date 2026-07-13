@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Early aggressive IV fluid resuscitation (cornerstone)",
       "steps": [
         "Early aggressive IV fluid resuscitation (isotonic saline) to maintain high urine output — cornerstone to prevent AKI.",
         "Monitor and treat hyperkalaemia and other electrolyte/acid-base disturbances; watch calcium/phosphate.",
@@ -18,14 +19,86 @@
         "Avoid nephrotoxins; consider urinary alkalinisation in selected cases (controversial).",
         "Dialysis for refractory hyperkalaemia/acidosis/overload; watch for compartment syndrome."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "Aggressive IV crystalloid (cornerstone)",
+          "dose": "start ~1–2 L/h, then titrate to urine output 200–300 mL/h",
+          "route": "IV",
+          "freq": "continuous, titrated to urine output and volume status",
+          "why": "Early, aggressive isotonic fluids maintain renal perfusion and flush myoglobin, the single most effective measure to prevent pigment-induced AKI."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Rhabdomyolysis",
+          "KDIGO Clinical Practice Guideline for Acute Kidney Injury",
+          "UK Kidney Association guidance on Acute Kidney Injury"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Hyperkalaemia management + (controversial) urinary alkalinisation",
+      "drugRefs": [
+        {
+          "composition": "calcium gluconate",
+          "regimenLabel": "Cardiac membrane stabilisation (hyperkalaemia with ECG changes)",
+          "dose": "10 mL of 10% IV over 5–10 min, repeat as needed",
+          "route": "IV",
+          "freq": "repeat per ECG/serum K⁺",
+          "why": "Stabilises the myocardium against hyperkalaemic arrhythmia; does not lower potassium."
+        },
+        {
+          "composition": "insulin (regular / soluble)",
+          "regimenLabel": "Potassium shift (with glucose)",
+          "dose": "10 units IV with 25 g glucose",
+          "route": "IV",
+          "freq": "repeat with glucose monitoring",
+          "why": "Drives potassium intracellularly; give with glucose to avoid hypoglycaemia."
+        },
+        {
+          "composition": "glucose 50%",
+          "regimenLabel": "Hypoglycaemia cover for insulin",
+          "dose": "50 mL of 50% (25 g) IV with insulin",
+          "route": "IV",
+          "freq": "with each insulin dose",
+          "why": "Prevents insulin-induced hypoglycaemia during potassium shifting."
+        },
+        {
+          "composition": "salbutamol",
+          "regimenLabel": "Nebulised beta-agonist (potassium shift)",
+          "dose": "10–20 mg nebulised",
+          "route": "nebulised",
+          "freq": "as adjunct to insulin-glucose",
+          "why": "Additional intracellular potassium shift; adjunct, not a substitute for insulin-glucose."
+        },
+        {
+          "composition": "sodium bicarbonate",
+          "regimenLabel": "Urinary alkalinisation (selected cases — controversial)",
+          "dose": "isotonic (1.26%) infusion titrated to urine pH >6.5 (or 8.4% correction of severe acidosis)",
+          "route": "IV infusion",
+          "freq": "titrated, with monitoring of pH/calcium",
+          "why": "May reduce myoglobin tubular toxicity but evidence is weak and it risks hypocalcaemia/alkalosis — reserve for selected cases and stop if no benefit."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Rhabdomyolysis",
+          "Harrison's Principles of Internal Medicine, 22e — Fluid and Electrolyte Disturbances (Hyperkalemia)",
+          "UK Kidney Association guidance on the Treatment of Acute Hyperkalaemia in Adults"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Aggressive IV fluids; monitor and treat hyperkalaemia"
+  },
+  "antibioticRelevant": false,
   "confirm": "Muscle pain/weakness with markedly raised creatine kinase ± myoglobinuria (dark urine) and AKI; common after immobility, trauma, seizures, toxins, statins.",
   "investigations": [
     {
@@ -43,9 +116,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

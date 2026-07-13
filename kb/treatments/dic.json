@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Treat the cause + blood-product support (guided by bleeding and levels)",
       "steps": [
         "TREAT THE UNDERLYING CAUSE — this is the priority (sepsis, obstetric emergency, malignancy).",
         "Bleeding/high-risk: replace with platelets, fresh frozen plasma, and cryoprecipitate/fibrinogen guided by levels.",
@@ -18,14 +19,69 @@
         "Supportive care; serial coagulation monitoring.",
         "Haematology involvement."
       ],
+      "drugRefs": [
+        {
+          "composition": "fresh frozen plasma",
+          "regimenLabel": "FFP for prolonged PT/APTT with bleeding",
+          "dose": "15 mL/kg (≈4 units in an adult)",
+          "route": "IV",
+          "freq": "guided by repeat PT/APTT and bleeding",
+          "why": "Replaces consumed clotting factors in the bleeding patient with prolonged PT/APTT."
+        },
+        {
+          "composition": "platelets",
+          "regimenLabel": "Platelet transfusion",
+          "dose": "1 adult dose (pool); target >50 ×10⁹/L in active bleeding",
+          "route": "IV",
+          "freq": "guided by count and bleeding",
+          "why": "Corrects consumptive thrombocytopenia in the bleeding or high-bleeding-risk patient."
+        },
+        {
+          "composition": "cryoprecipitate",
+          "regimenLabel": "Fibrinogen replacement",
+          "dose": "2 pools (≈10 units) when fibrinogen <1.5 g/L",
+          "route": "IV",
+          "freq": "guided by fibrinogen level",
+          "why": "Replaces fibrinogen when depleted by consumption; alternative is fibrinogen concentrate."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ISTH/BSH",
         "refs": [
-          "Harrison 22e · ISTH/BSH"
+          "Harrison's Principles of Internal Medicine, 22e — Coagulation Disorders (Ch. 121)",
+          "ISTH Guidance for Diagnosis and Management of DIC",
+          "BSH Guideline on the Diagnosis and Management of DIC"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Anticoagulation for the thrombotic phenotype (specialist-guided)",
+      "drugRefs": [
+        {
+          "composition": "heparin (unfractionated)",
+          "regimenLabel": "Therapeutic anticoagulation (thrombotic DIC without bleeding)",
+          "dose": "weight-based IV infusion titrated to APTT (specialist-directed)",
+          "route": "IV infusion",
+          "freq": "continuous",
+          "why": "Considered only in a predominantly thrombotic phenotype without active bleeding; started under haematology guidance."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ISTH/BSH",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Coagulation Disorders (Ch. 121)",
+          "ISTH Guidance for Diagnosis and Management of DIC"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Treat cause + blood-product support"
+  },
+  "antibioticRelevant": false,
   "confirm": "Bleeding and/or thrombosis with consumptive coagulopathy (low platelets, high PT/APTT, low fibrinogen, high D-dimer) secondary to a trigger (sepsis, malignancy, obstetric).",
   "investigations": [
     {
@@ -43,9 +99,10 @@
     "Harrison 22e · ISTH/BSH"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

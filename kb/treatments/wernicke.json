@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "High-dose IV thiamine before glucose + correct magnesium",
       "steps": [
         "Give IV THIAMINE BEFORE any glucose (glucose first can precipitate/worsen Wernicke).",
         "High-dose IV thiamine (e.g. 500 mg tds for 2–3 days, then taper) — Pabrinex regimens.",
@@ -18,14 +19,62 @@
         "Treat the underlying cause; alcohol withdrawal management.",
         "Continue oral thiamine after the acute course."
       ],
+      "drugRefs": [
+        {
+          "composition": "thiamine",
+          "regimenLabel": "High-dose IV thiamine (Pabrinex)",
+          "dose": "500 mg three times daily for 2–3 days, then 250 mg daily and taper",
+          "route": "IV infusion",
+          "freq": "three times daily initially",
+          "duration": "2–3 days IV, then step down to oral",
+          "why": "Treats established Wernicke's encephalopathy; must be given before any glucose load, which can otherwise precipitate or worsen it. Delivered as Pabrinex (thiamine with other B vitamins)."
+        },
+        {
+          "composition": "magnesium sulfate",
+          "regimenLabel": "Magnesium replacement (cofactor)",
+          "dose": "correct deficiency (e.g. ~2 g IV), guided by serum Mg",
+          "route": "IV",
+          "freq": "as needed to normalise magnesium",
+          "why": "Magnesium is a cofactor for thiamine-dependent enzymes; hypomagnesaemia impairs the response to thiamine."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · EFNS",
         "refs": [
-          "Harrison 22e · EFNS"
+          "Harrison's Principles of Internal Medicine, 22e — Nutritional Deficiencies / Wernicke's Encephalopathy",
+          "EFNS Guidelines for Diagnosis, Therapy and Prevention of Wernicke Encephalopathy",
+          "Royal College of Physicians / BNF Guidance on Parenteral B Vitamins (Pabrinex)"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Oral maintenance after the acute course",
+      "drugRefs": [
+        {
+          "composition": "thiamine",
+          "regimenLabel": "Oral thiamine maintenance",
+          "dose": "100 mg once to three times daily",
+          "route": "oral",
+          "freq": "once to three times daily",
+          "why": "Continues repletion after the parenteral course, particularly in ongoing alcohol misuse or malnutrition."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · EFNS",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Nutritional Deficiencies / Wernicke's Encephalopathy",
+          "EFNS Guidelines for Diagnosis, Therapy and Prevention of Wernicke Encephalopathy"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "IV thiamine BEFORE glucose"
+  },
+  "antibioticRelevant": false,
   "confirm": "Confusion, ophthalmoplegia/nystagmus, ataxia — esp. alcohol misuse or malnutrition. Clinical diagnosis; treat empirically, don't wait for tests.",
   "investigations": [
     {
@@ -43,9 +92,10 @@
     "Harrison 22e · EFNS"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

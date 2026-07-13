@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Urgent MRI + high-dose dexamethasone",
       "steps": [
         "EMERGENCY — urgent whole-spine MRI; immobilise if traumatic/unstable.",
         "High-dose dexamethasone for malignant compression (with PPI).",
@@ -18,14 +19,60 @@
         "Time-critical: outcome depends on speed — treat within hours.",
         "Bladder care, VTE prophylaxis, analgesia."
       ],
+      "drugRefs": [
+        {
+          "composition": "dexamethasone",
+          "regimenLabel": "High-dose dexamethasone (malignant compression)",
+          "dose": "16 mg daily (e.g. 8 mg twice daily; some give a 10 mg IV loading dose)",
+          "route": "IV or oral",
+          "freq": "once daily (or 8 mg twice daily), reduced/tapered after definitive treatment",
+          "why": "Reduces vasogenic cord oedema and can improve neurological function while awaiting surgery/radiotherapy. Give gastric protection alongside."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · NICE MSCC",
         "refs": [
-          "Harrison 22e · NICE MSCC"
+          "Harrison's Principles of Internal Medicine, 22e — Neoplastic Spinal Cord Compression",
+          "NICE NG234 — Metastatic Spinal Cord Compression in Adults",
+          "EFNS/EANO Guidance on Metastatic Spinal Cord Compression"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Gastric protection + VTE prophylaxis",
+      "drugRefs": [
+        {
+          "composition": "omeprazole",
+          "regimenLabel": "Proton-pump inhibitor (gastric protection)",
+          "dose": "20–40 mg once daily",
+          "route": "oral / IV",
+          "freq": "once daily while on high-dose corticosteroid",
+          "why": "Reduces steroid-associated gastric/peptic ulcer risk during high-dose dexamethasone."
+        },
+        {
+          "composition": "enoxaparin",
+          "regimenLabel": "LMWH VTE prophylaxis",
+          "dose": "40 mg once daily",
+          "route": "subcutaneous",
+          "freq": "once daily",
+          "why": "Immobile patients with malignancy are at high VTE risk; use prophylactic-dose LMWH unless contraindicated."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · NICE MSCC",
+        "refs": [
+          "NICE NG234 — Metastatic Spinal Cord Compression in Adults"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Urgent MRI + high-dose dexamethasone"
+  },
+  "antibioticRelevant": false,
   "confirm": "Bilateral leg weakness, a sensory level, and bladder/bowel dysfunction ± back pain. Urgent whole-spine MRI.",
   "investigations": [
     {
@@ -40,9 +87,10 @@
     "Harrison 22e · NICE MSCC"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

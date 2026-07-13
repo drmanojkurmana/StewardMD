@@ -11,21 +11,77 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "IV saline rehydration + bisphosphonate (± calcitonin for rapid control)",
       "steps": [
         "Aggressive IV 0.9% saline rehydration (cornerstone) with monitoring of fluid status.",
-        "IV bisphosphonate (e.g. zoledronic acid) for moderate–severe hypercalcaemia (effect over 2–4 days).",
+        "IV bisphosphonate (e.g. zoledronic acid) for moderate-severe hypercalcaemia (effect over 2-4 days).",
         "Calcitonin for rapid short-term lowering in severe/symptomatic cases.",
         "Avoid thiazides; stop calcium/vitamin D; treat the underlying cause (malignancy, hyperparathyroidism).",
         "Denosumab for bisphosphonate-refractory malignant hypercalcaemia."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV crystalloid rehydration",
+          "dose": "3-4 L over 24 h (e.g. 200-300 mL/h, titrate to fluid status)",
+          "route": "IV",
+          "freq": "continuous",
+          "why": "Cornerstone of treatment — restores volume and enhances urinary calcium excretion. Monitor for fluid overload in cardiac/renal patients."
+        },
+        {
+          "composition": "zoledronic acid",
+          "regimenLabel": "IV bisphosphonate",
+          "dose": "4 mg",
+          "route": "IV infusion over 15 min",
+          "freq": "single dose (may repeat after ≥7 days)",
+          "why": "Inhibits osteoclastic bone resorption for moderate-severe hypercalcaemia; onset over 2-4 days. Reduce/adjust in renal impairment."
+        },
+        {
+          "composition": "calcitonin (salmon)",
+          "regimenLabel": "Calcitonin for rapid short-term lowering",
+          "dose": "4 IU/kg",
+          "route": "subcutaneous / intramuscular",
+          "freq": "every 12 h",
+          "why": "Rapid but short-lived (tachyphylaxis) fall in calcium while the bisphosphonate takes effect, in severe/symptomatic cases."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · Endocrine Society",
         "refs": [
-          "Harrison 22e · Endocrine Society"
+          "Harrison's Principles of Internal Medicine, 22e — Disorders of Calcium Metabolism",
+          "Endocrine Society — Hypercalcaemia of Malignancy",
+          "UpToDate — Treatment of Hypercalcaemia"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Refractory malignant hypercalcaemia",
+      "drugRefs": [
+        {
+          "composition": "denosumab",
+          "regimenLabel": "RANKL inhibitor (bisphosphonate-refractory)",
+          "dose": "120 mg",
+          "route": "subcutaneous",
+          "freq": "as per malignancy protocol (e.g. weekly loading then monthly)",
+          "why": "Option for malignant hypercalcaemia refractory to bisphosphonates, including in renal impairment where bisphosphonates are limited."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · Endocrine Society",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Disorders of Calcium Metabolism",
+          "Endocrine Society — Hypercalcaemia of Malignancy"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "IV saline + IV bisphosphonate (± calcitonin if severe)"
+  },
+  "antibioticRelevant": false,
   "confirm": "Confusion, polyuria, constipation, abdominal pain with raised corrected calcium; PTH distinguishes hyperparathyroidism from malignancy/other.",
   "investigations": [
     {
@@ -43,9 +99,10 @@
     "Harrison 22e · Endocrine Society"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

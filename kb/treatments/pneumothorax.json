@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Decompression/drainage (procedural) ± supplemental oxygen",
       "steps": [
         "TENSION pneumothorax: immediate needle decompression then chest drain — do NOT wait for imaging.",
         "Primary, small, minimal symptoms: observation ± oxygen.",
@@ -18,14 +19,31 @@
         "Secondary (underlying lung disease): low threshold for chest drain + admission.",
         "Smoking cessation; refer for recurrence (pleurodesis)."
       ],
+      "drugRefs": [
+        {
+          "composition": "oxygen",
+          "regimenLabel": "Supplemental oxygen",
+          "dose": "high-concentration O2 (e.g. 15 L/min via non-rebreathe; target sats per patient)",
+          "route": "inhaled",
+          "freq": "continuous while symptomatic/observed",
+          "why": "Relieves hypoxia and accelerates reabsorption of pleural air in conservatively managed pneumothorax. Definitive management is procedural (needle decompression/aspiration/chest drain)."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · BTS pleural",
         "refs": [
-          "Harrison 22e · BTS pleural"
+          "Harrison's Principles of Internal Medicine, 22e — Disorders of the Pleura",
+          "BTS Guideline for the Management of Spontaneous Pneumothorax / Pleural Disease",
+          "ACCP Consensus Statement on Spontaneous Pneumothorax"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Tension → immediate needle decompression then chest drain"
+  },
+  "antibioticRelevant": false,
   "confirm": "Sudden pleuritic pain and dyspnoea with reduced breath sounds; CXR confirms. Tension = hypotension + tracheal shift (clinical, treat immediately).",
   "investigations": [
     {
@@ -43,9 +61,10 @@
     "Harrison 22e · BTS pleural"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

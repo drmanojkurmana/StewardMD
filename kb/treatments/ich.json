@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Blood-pressure control + urgent anticoagulation reversal",
       "steps": [
         "Resuscitate; protect airway if GCS ≤8.",
         "Reverse anticoagulation urgently (vitamin K + PCC for warfarin; specific reversal agents for DOACs).",
@@ -18,14 +19,77 @@
         "Manage raised ICP; neurosurgical referral (esp. cerebellar bleed, hydrocephalus).",
         "Admit to stroke unit/ICU; VTE prophylaxis (mechanical first)."
       ],
+      "drugRefs": [
+        {
+          "composition": "labetalol",
+          "regimenLabel": "IV beta/alpha-blocker for acute BP control",
+          "dose": "10-20 mg IV bolus, then infusion titrated to target",
+          "route": "IV",
+          "freq": "repeat bolus every 10 min / infusion to SBP ~140 mmHg",
+          "why": "Titratable agent to lower systolic BP towards ~140 mmHg and limit haematoma expansion."
+        },
+        {
+          "composition": "nicardipine",
+          "regimenLabel": "IV calcium-channel blocker (alternative)",
+          "dose": "5 mg/h, titrate by 2.5 mg/h every 5-15 min (max 15 mg/h)",
+          "route": "IV infusion",
+          "freq": "continuous, titrated to target SBP",
+          "why": "Smoothly titratable BP control alternative to labetalol for the same target."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · AHA/ASA ICH",
         "refs": [
-          "Harrison 22e · AHA/ASA ICH"
+          "Harrison's Principles of Internal Medicine, 22e — Intracerebral Haemorrhage",
+          "AHA/ASA Guideline for the Management of Spontaneous Intracerebral Haemorrhage",
+          "Neurocritical Care Society — Reversal of Antithrombotics in ICH"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Anticoagulation reversal",
+      "drugRefs": [
+        {
+          "composition": "prothrombin complex concentrate",
+          "regimenLabel": "4-factor PCC (warfarin/VKA reversal)",
+          "dose": "25-50 units/kg (dosed by INR and weight)",
+          "route": "IV",
+          "freq": "single dose, guided by repeat INR",
+          "why": "Rapid replacement of vitamin-K-dependent factors to reverse warfarin-associated ICH; faster than FFP."
+        },
+        {
+          "composition": "phytomenadione (vitamin K1)",
+          "regimenLabel": "Vitamin K (with PCC for VKA reversal)",
+          "dose": "5-10 mg",
+          "route": "slow IV",
+          "freq": "once",
+          "why": "Given alongside PCC to sustain reversal of warfarin once the PCC effect wanes."
+        },
+        {
+          "composition": "idarucizumab",
+          "regimenLabel": "Dabigatran-specific reversal agent",
+          "dose": "5 g (two 2.5 g vials)",
+          "route": "IV",
+          "freq": "single dose",
+          "why": "Specific reversal for dabigatran-associated haemorrhage; use factor-Xa-inhibitor reversal (e.g. andexanet/PCC) for apixaban/rivaroxaban."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AHA/ASA ICH",
+        "refs": [
+          "AHA/ASA Guideline for the Management of Spontaneous Intracerebral Haemorrhage",
+          "Neurocritical Care Society — Reversal of Antithrombotics in ICH"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Reverse anticoagulation + lower SBP to ~140 mmHg"
+  },
+  "antibioticRelevant": false,
   "confirm": "Sudden focal deficit ± reduced consciousness, headache, vomiting; non-contrast CT shows intraparenchymal haemorrhage.",
   "investigations": [
     {
@@ -43,9 +107,10 @@
     "Harrison 22e · AHA/ASA ICH"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

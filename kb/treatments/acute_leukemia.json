@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Supportive care + tumour-lysis prophylaxis (definitive chemo by subtype)",
       "steps": [
         "Urgent haematology referral; admit.",
         "Supportive: transfuse as needed, neutropenic-sepsis protocol for fever, tumour-lysis prophylaxis (hydration, allopurinol/rasburicase).",
@@ -18,14 +19,55 @@
         "Definitive remission-induction chemotherapy per subtype; consider transplant.",
         "Central access, fertility/consent discussions as appropriate."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV hydration for tumour-lysis prophylaxis",
+          "dose": "2-3 L/m²/day (target high urine output)",
+          "route": "IV",
+          "freq": "continuous",
+          "why": "Cornerstone of tumour-lysis-syndrome prophylaxis — maintains high urine flow to clear urate/phosphate before and during cytoreduction."
+        },
+        {
+          "composition": "allopurinol",
+          "regimenLabel": "Xanthine-oxidase inhibitor (TLS prophylaxis, standard risk)",
+          "dose": "300 mg (up to 600-800 mg/day)",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Prevents new urate formation in standard-risk patients; reduce dose in renal impairment. Does not lower pre-existing urate."
+        },
+        {
+          "composition": "rasburicase",
+          "regimenLabel": "Recombinant urate oxidase (high-risk / established TLS)",
+          "dose": "0.2 mg/kg",
+          "route": "IV infusion",
+          "freq": "once daily (typically 1-5 days per urate)",
+          "why": "Rapidly degrades existing urate in high tumour-burden disease or established hyperuricaemia. Contraindicated in G6PD deficiency."
+        },
+        {
+          "composition": "tretinoin (all-trans retinoic acid)",
+          "regimenLabel": "ATRA — start empirically on suspected APML",
+          "dose": "45 mg/m²/day in two divided doses",
+          "route": "oral",
+          "freq": "daily until remission",
+          "why": "Start promptly on suspicion of acute promyelocytic leukaemia (APML) to correct the coagulopathy/DIC and induce differentiation — do not wait for genetic confirmation."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Acute Myeloid & Lymphoblastic Leukaemia",
+          "NCCN Guidelines — Acute Myeloid Leukemia",
+          "British Society for Haematology — Management of Tumour Lysis Syndrome"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Urgent haematology + TLS prophylaxis; ATRA if APML"
+  },
+  "antibioticRelevant": false,
   "confirm": "Pancytopenia or leucocytosis with blasts on film, bleeding/infection; bone marrow confirms. Watch for tumour lysis/DIC.",
   "investigations": [
     {
@@ -43,9 +85,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

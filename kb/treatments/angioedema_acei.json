@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "First-line — stop ACEi, protect airway, empirical anaphylaxis therapy if any doubt",
       "steps": [
         "Assess and protect the AIRWAY early — low threshold for senior anaesthetic/ENT involvement and early intubation.",
         "Stop the ACE inhibitor permanently.",
@@ -18,14 +19,77 @@
         "Hereditary angioedema: specific therapy (C1-esterase-inhibitor concentrate, icatibant).",
         "Observe for delayed/progressive swelling; avoid ACEi/ARB in future."
       ],
+      "drugRefs": [
+        {
+          "composition": "adrenaline (epinephrine)",
+          "regimenLabel": "IM adrenaline (only if anaphylaxis cannot be excluded)",
+          "dose": "0.5 mg (0.5 mL of 1:1000)",
+          "route": "IM (anterolateral thigh)",
+          "freq": "repeat every 5 min as needed",
+          "why": "Bradykinin-mediated angioedema responds poorly, but give empirically when an allergic/anaphylactic mechanism cannot be excluded — do not withhold if in doubt."
+        },
+        {
+          "composition": "hydrocortisone",
+          "regimenLabel": "Corticosteroid (empirical if allergic mechanism possible)",
+          "dose": "200 mg",
+          "route": "IV",
+          "freq": "once, then as needed",
+          "why": "Adjunct only if a histaminergic/allergic component is suspected; ineffective for pure bradykinin-mediated swelling."
+        },
+        {
+          "composition": "chlorphenamine",
+          "regimenLabel": "Antihistamine (empirical if allergic mechanism possible)",
+          "dose": "10 mg",
+          "route": "IV/IM",
+          "freq": "once",
+          "why": "Only useful if a histaminergic component is present; not effective for bradykinin-mediated angioedema."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Urticaria, Angioedema and Allergic Rhinitis (Ch. 363)",
+          "WAO/EAACI Guideline for the Management of Hereditary Angioedema",
+          "Resuscitation Council Anaphylaxis Algorithm"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Bradykinin-targeted / hereditary angioedema therapy (specialist)",
+      "drugRefs": [
+        {
+          "composition": "icatibant",
+          "regimenLabel": "Bradykinin B2-receptor antagonist",
+          "dose": "30 mg",
+          "route": "SC",
+          "freq": "single dose; may repeat after 6 h (max 3 doses/24 h)",
+          "why": "Directly antagonises bradykinin; used for hereditary angioedema attacks and considered off-label in severe ACEi-induced angioedema."
+        },
+        {
+          "composition": "c1-esterase inhibitor",
+          "regimenLabel": "C1-esterase inhibitor concentrate",
+          "dose": "20 units/kg",
+          "route": "IV",
+          "freq": "single dose, repeat per response",
+          "why": "Replaces deficient/consumed C1-inhibitor in hereditary/acquired angioedema, restraining bradykinin generation."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Urticaria, Angioedema and Allergic Rhinitis (Ch. 363)",
+          "WAO/EAACI Guideline for the Management of Hereditary Angioedema"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Stop ACEi; protect airway"
+  },
+  "antibioticRelevant": false,
   "confirm": "Non-pitting swelling of lips/tongue/face/airway WITHOUT urticaria; ACE-inhibitor or hereditary (bradykinin-mediated). Assess airway.",
   "investigations": [
     {
@@ -40,9 +104,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "First-line corticosteroids ± IVIG (treat by bleeding/count)",
       "steps": [
         "No/minor bleeding with platelets >20–30: often observe.",
         "Treat if bleeding or very low count: corticosteroids (prednisolone or dexamethasone) ± IVIG for rapid rise.",
@@ -18,14 +19,101 @@
         "Second-line: TPO-receptor agonists, rituximab, or splenectomy.",
         "Avoid antiplatelets/anticoagulants; confirm diagnosis (exclude secondary causes)."
       ],
+      "drugRefs": [
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "First-line corticosteroid",
+          "dose": "1 mg/kg/day (max ~80 mg/day), then taper",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Standard first-line therapy to reduce immune platelet destruction."
+        },
+        {
+          "composition": "dexamethasone",
+          "regimenLabel": "High-dose pulsed corticosteroid (alternative first-line)",
+          "dose": "40 mg daily for 4 days",
+          "route": "PO",
+          "freq": "once daily for 4 days (may repeat cycles)",
+          "why": "Alternative first-line regimen giving faster responses than prolonged prednisolone tapers."
+        },
+        {
+          "composition": "human normal immunoglobulin (ivig)",
+          "regimenLabel": "IVIG for rapid platelet rise",
+          "dose": "1 g/kg/day for 1–2 days (or 0.4 g/kg/day for 5 days)",
+          "route": "IV",
+          "freq": "per protocol",
+          "why": "Produces a rapid rise in platelets when urgent (active bleeding, pre-procedure) — added to steroids."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ASH ITP",
         "refs": [
-          "Harrison 22e · ASH ITP"
+          "Harrison's Principles of Internal Medicine, 22e — Disorders of Platelets and Vessel Wall (Ch. 120)",
+          "ASH 2019 Guidelines for Immune Thrombocytopenia",
+          "International Consensus Report on the Investigation and Management of Primary ITP"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Life-threatening bleeding + second-line agents",
+      "drugRefs": [
+        {
+          "composition": "methylprednisolone",
+          "regimenLabel": "IV pulse steroid (life-threatening bleeding)",
+          "dose": "1 g IV daily for 3 days",
+          "route": "IV",
+          "freq": "once daily for 3 days",
+          "why": "High-dose IV steroid combined with IVIG and platelet transfusion for critical bleeding."
+        },
+        {
+          "composition": "platelets",
+          "regimenLabel": "Platelet transfusion (life-threatening bleeding only)",
+          "dose": "continuous/repeated transfusion during major bleeding",
+          "route": "IV",
+          "freq": "as needed",
+          "why": "Reserved for life-threatening haemorrhage; consumed rapidly, so given with IVIG and steroids."
+        },
+        {
+          "composition": "tranexamic acid",
+          "regimenLabel": "Antifibrinolytic adjunct for mucosal bleeding",
+          "dose": "1 g three times daily",
+          "route": "PO/IV",
+          "freq": "three times daily",
+          "why": "Adjunct to reduce mucosal/menstrual bleeding; not a substitute for raising the platelet count."
+        },
+        {
+          "composition": "rituximab",
+          "regimenLabel": "Second-line anti-CD20",
+          "dose": "375 mg/m² weekly for 4 weeks",
+          "route": "IV",
+          "freq": "weekly × 4",
+          "why": "Second-line option for steroid-refractory/relapsed ITP."
+        },
+        {
+          "composition": "eltrombopag",
+          "regimenLabel": "Second-line TPO-receptor agonist",
+          "dose": "50 mg once daily (adjust to platelet response; 25 mg in East Asian patients/hepatic impairment)",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Stimulates platelet production; second-line for persistent/chronic ITP."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ASH ITP",
+        "refs": [
+          "ASH 2019 Guidelines for Immune Thrombocytopenia",
+          "International Consensus Report on the Investigation and Management of Primary ITP"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Steroids ± IVIG; treat by bleeding/count"
+  },
+  "antibioticRelevant": false,
   "confirm": "Isolated thrombocytopenia with otherwise normal counts/film and no alternative cause; bleeding risk relates to platelet count.",
   "investigations": [
     {
@@ -43,9 +131,10 @@
     "Harrison 22e · ASH ITP"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

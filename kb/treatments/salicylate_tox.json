@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Urinary alkalinisation + supportive care",
       "steps": [
         "Resuscitate; correct hypokalaemia and hypoglycaemia (cerebral glucose may be low despite normal serum).",
         "Activated charcoal if early; generous IV fluids.",
@@ -18,14 +19,55 @@
         "HAEMODIALYSIS for severe toxicity (high levels, acidosis, CNS features, renal failure, pulmonary oedema).",
         "Avoid intubation if possible (loss of compensatory hyperventilation is dangerous); serial levels."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium bicarbonate",
+          "regimenLabel": "Urinary alkalinisation",
+          "dose": "1 mmol/kg IV bolus (8.4%), then infusion (e.g. 1.26% / 1.4%) titrated to urine pH 7.5–8",
+          "route": "IV",
+          "freq": "continuous infusion, titrated to urine pH",
+          "why": "Alkalinises urine to trap ionised salicylate and enhance renal elimination; also corrects acidaemia which otherwise increases CNS salicylate entry. Requires concurrent potassium repletion to be effective."
+        },
+        {
+          "composition": "activated charcoal",
+          "regimenLabel": "GI decontamination (early presentation)",
+          "dose": "50 g",
+          "route": "oral / NG",
+          "freq": "single dose if within ~1 hour (consider repeat doses for large ingestions)",
+          "why": "Adsorbs unabsorbed salicylate; most useful early and for the modified-release/concretion-forming ingestions typical of salicylates."
+        },
+        {
+          "composition": "potassium chloride",
+          "regimenLabel": "Potassium repletion",
+          "dose": "add per serum K⁺ (e.g. 40 mmol/L in IV fluids)",
+          "route": "IV (in fluids)",
+          "freq": "guided by serial K⁺",
+          "why": "Hypokalaemia prevents effective urinary alkalinisation (kidney exchanges K⁺ for H⁺); keep potassium replete throughout."
+        },
+        {
+          "composition": "glucose",
+          "regimenLabel": "IV glucose for neuroglycopenia",
+          "dose": "e.g. 100 mL of 20% (or 50 mL of 50%)",
+          "route": "IV",
+          "freq": "for hypoglycaemia or altered mental status",
+          "why": "CNS glucose may be low despite normal serum glucose; give to any patient with neurological features."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · poisons service",
         "refs": [
-          "Harrison 22e · poisons service"
+          "Harrison's Principles of Internal Medicine, 22e — Poisoning and Drug Overdose (Salicylates)",
+          "AACT/EAPCCT Position Paper — Urine Alkalinization",
+          "EXTRIP Workgroup Recommendations — Extracorporeal Treatment for Salicylate Poisoning"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Urinary alkalinisation; haemodialysis if severe"
+  },
+  "antibioticRelevant": false,
   "confirm": "Tinnitus, hyperventilation, nausea, agitation with a mixed respiratory alkalosis + high-anion-gap metabolic acidosis; rising salicylate level.",
   "investigations": [
     {
@@ -43,9 +85,10 @@
     "Harrison 22e · poisons service"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

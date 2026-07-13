@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Symptom-targeted pharmacotherapy",
       "steps": [
         "Confirm alarm features absent (weight loss, bleeding, anaemia, nocturnal symptoms, onset >50) and basic tests normal.",
         "Diet/lifestyle: regular meals, fibre adjustment, trial of low-FODMAP with dietitian; address triggers.",
@@ -18,14 +19,63 @@
         "Low-dose tricyclic or SSRI for pain/global symptoms; psychological therapies (CBT/gut-directed hypnotherapy).",
         "Reassurance and a positive diagnosis; review and safety-net."
       ],
+      "drugRefs": [
+        {
+          "composition": "mebeverine",
+          "regimenLabel": "Antispasmodic (pain/cramping)",
+          "dose": "135 mg",
+          "route": "PO",
+          "freq": "three times daily before meals",
+          "why": "Smooth-muscle relaxant for abdominal pain/spasm in IBS."
+        },
+        {
+          "composition": "loperamide",
+          "regimenLabel": "Antimotility (IBS-D)",
+          "dose": "2 mg (after each loose stool; max 16 mg/day)",
+          "route": "PO",
+          "freq": "as needed, up to four times daily",
+          "why": "First-line for diarrhoea-predominant IBS; titrate to stool response."
+        },
+        {
+          "composition": "macrogol",
+          "regimenLabel": "Osmotic laxative (IBS-C)",
+          "dose": "1 sachet",
+          "route": "PO",
+          "freq": "once to twice daily, titrated",
+          "why": "Preferred laxative for constipation-predominant IBS (avoid lactulose, which can worsen bloating)."
+        },
+        {
+          "composition": "amitriptyline",
+          "regimenLabel": "Low-dose tricyclic (pain/global symptoms)",
+          "dose": "10 mg (titrate up to 30 mg)",
+          "route": "PO",
+          "freq": "once at night",
+          "why": "Neuromodulator for pain and global symptoms at low, sub-antidepressant dose."
+        },
+        {
+          "composition": "citalopram",
+          "regimenLabel": "SSRI (second-line neuromodulator)",
+          "dose": "20 mg",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Alternative neuromodulator for global symptoms, particularly with coexisting low mood/anxiety."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · Rome IV/NICE IBS",
         "refs": [
-          "Harrison 22e · Rome IV/NICE IBS"
+          "Harrison's Principles of Internal Medicine, 22e — Irritable Bowel Syndrome",
+          "Rome IV Diagnostic Criteria for IBS",
+          "NICE CG61 — Irritable bowel syndrome in adults: diagnosis and management"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "green",
+    "label": "Positive diagnosis + symptom-targeted therapy (outpatient)"
+  },
+  "antibioticRelevant": false,
   "confirm": "Chronic abdominal pain related to defecation with altered bowel habit and no alarm features; positive symptom-based (Rome IV) diagnosis after excluding organic disease.",
   "investigations": [
     {
@@ -40,9 +90,10 @@
     "Harrison 22e · Rome IV/NICE IBS"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

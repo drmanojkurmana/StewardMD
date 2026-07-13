@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Resuscitate with balanced crystalloid / blood + control the source",
       "steps": [
         "Two large-bore IV lines; rapid balanced crystalloid resuscitation.",
         "Haemorrhagic: activate major haemorrhage protocol — transfuse blood/products, tranexamic acid early.",
@@ -18,14 +19,70 @@
         "Titrate to perfusion (MAP, urine output, lactate clearance) — avoid over-resuscitation in active bleeding.",
         "Keep warm; correct coagulopathy and calcium."
       ],
+      "drugRefs": [
+        {
+          "composition": "compound sodium lactate (hartmann's)",
+          "regimenLabel": "Balanced crystalloid resuscitation",
+          "dose": "250–500 mL boluses, reassessed after each",
+          "route": "IV",
+          "freq": "repeat to clinical response",
+          "why": "Restores intravascular volume and perfusion; balanced crystalloid is preferred. Avoid over-resuscitation in active bleeding (permissive hypotension until source controlled)."
+        },
+        {
+          "composition": "packed red blood cells",
+          "regimenLabel": "Blood transfusion (major haemorrhage protocol)",
+          "dose": "transfuse to restore oxygen-carrying capacity; give in balanced ratio with FFP/platelets per MHP",
+          "route": "IV",
+          "freq": "guided by ongoing loss and haemodynamics",
+          "why": "Definitive replacement in haemorrhagic shock; crystalloid alone is inadequate for significant blood loss."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ATLS",
         "refs": [
-          "Harrison 22e · ATLS"
+          "Harrison's Principles of Internal Medicine, 22e — Approach to the Patient with Shock (Ch. 314)",
+          "ATLS (Advanced Trauma Life Support), 10th edition",
+          "European Guideline on Management of Major Bleeding and Coagulopathy Following Trauma"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Antifibrinolytic + correct coagulopathy/calcium",
+      "drugRefs": [
+        {
+          "composition": "tranexamic acid",
+          "regimenLabel": "Antifibrinolytic (traumatic/haemorrhagic shock)",
+          "dose": "1 g IV over 10 min, then 1 g IV over 8 hours",
+          "route": "IV",
+          "freq": "loading dose then infusion",
+          "why": "Reduces mortality in traumatic haemorrhage when given early (within 3 h of injury)."
+        },
+        {
+          "composition": "calcium chloride",
+          "regimenLabel": "Correct hypocalcaemia of massive transfusion",
+          "dose": "10 mL of 10% (6.8 mmol Ca²⁺), guided by ionised calcium",
+          "route": "IV",
+          "freq": "as needed during major transfusion",
+          "why": "Massive transfusion and citrate load cause hypocalcaemia, which worsens coagulopathy and cardiac contractility."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ATLS",
+        "refs": [
+          "ATLS (Advanced Trauma Life Support), 10th edition",
+          "CRASH-2 Trial — Tranexamic Acid in Trauma Haemorrhage",
+          "European Guideline on Management of Major Bleeding and Coagulopathy Following Trauma"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Resuscitate + control haemorrhage"
+  },
+  "antibioticRelevant": false,
   "confirm": "Hypotension, tachycardia, cool peripheries, low JVP with a source of fluid/blood loss.",
   "investigations": [
     {
@@ -40,9 +97,10 @@
     "Harrison 22e · ATLS"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "IV thyroid hormone + hydrocortisone cover + supportive ICU care",
       "steps": [
         "ICU; IV levothyroxine (± liothyronine) — give thyroid hormone.",
         "Give IV HYDROCORTISONE first/concurrently (until adrenal insufficiency excluded).",
@@ -18,14 +19,47 @@
         "Cautious correction of hyponatraemia and hypoglycaemia; IV fluids.",
         "Treat the precipitant (commonly infection — may be afebrile)."
       ],
+      "drugRefs": [
+        {
+          "composition": "hydrocortisone",
+          "regimenLabel": "Glucocorticoid cover (give first/concurrently)",
+          "dose": "100 mg",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "why": "Give before/with thyroid hormone until coexisting adrenal insufficiency is excluded — thyroid replacement alone can precipitate adrenal crisis."
+        },
+        {
+          "composition": "levothyroxine (T4)",
+          "regimenLabel": "IV thyroid hormone (loading + maintenance)",
+          "dose": "300–500 mcg loading, then 50–100 mcg daily",
+          "route": "IV",
+          "freq": "loading once, then once daily",
+          "why": "Replaces thyroid hormone in myxoedema coma; switch to oral once stable and absorbing."
+        },
+        {
+          "composition": "liothyronine (T3)",
+          "regimenLabel": "IV T3 (adjunct in severe cases)",
+          "dose": "5–20 mcg loading, then 2.5–10 mcg every 8 h",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "why": "Added in severe/refractory coma or where peripheral T4→T3 conversion is impaired; use cautiously (cardiac risk)."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ATA",
         "refs": [
-          "Harrison 22e · ATA"
+          "Harrison's Principles of Internal Medicine, 22e — Hypothyroidism / Myxoedema Coma",
+          "American Thyroid Association Guidelines for Treatment of Hypothyroidism",
+          "ATA — Management of Myxoedema Coma"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "ICU — IV thyroid hormone + hydrocortisone"
+  },
+  "antibioticRelevant": false,
   "confirm": "Severe hypothyroidism with hypothermia, bradycardia, hypoventilation and reduced consciousness ± hyponatraemia; usually a precipitant.",
   "investigations": [
     {
@@ -43,9 +77,10 @@
     "Harrison 22e · ATA"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

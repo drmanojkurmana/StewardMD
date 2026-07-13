@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Analgesia + antiemetic for the acute episode",
       "steps": [
         "Analgesia (NSAID/opioid) and antiemetics for the acute episode.",
         "USS to confirm gallstones; check LFTs (exclude CBD stone/cholecystitis).",
@@ -18,14 +19,46 @@
         "Elective laparoscopic cholecystectomy for symptomatic gallstones.",
         "Escalate if fever, persistent pain or jaundice (cholecystitis/cholangitis)."
       ],
+      "drugRefs": [
+        {
+          "composition": "diclofenac",
+          "regimenLabel": "NSAID (first-line analgesia)",
+          "dose": "75 mg",
+          "route": "IM (or 50 mg oral)",
+          "freq": "up to twice daily as needed",
+          "why": "NSAIDs are effective first-line for biliary colic and may reduce progression to cholecystitis. Avoid in renal impairment/peptic ulcer disease."
+        },
+        {
+          "composition": "morphine",
+          "regimenLabel": "Opioid for severe pain",
+          "dose": "0.1 mg/kg (titrated in 2–4 mg increments)",
+          "route": "IV",
+          "freq": "titrated to pain",
+          "why": "For pain not controlled by an NSAID; titrate to effect."
+        },
+        {
+          "composition": "metoclopramide",
+          "regimenLabel": "Antiemetic",
+          "dose": "10 mg",
+          "route": "IV/IM/oral",
+          "freq": "up to three times daily",
+          "why": "Controls associated nausea/vomiting."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · NICE gallstones",
         "refs": [
-          "Harrison 22e · NICE gallstones"
+          "Harrison's Principles of Internal Medicine, 22e — Diseases of the Gallbladder and Bile Ducts",
+          "NICE CG188 — Gallstone Disease: Diagnosis and Management"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "green",
+    "label": "Analgesia; refer for elective cholecystectomy"
+  },
+  "antibioticRelevant": false,
   "confirm": "Postprandial RUQ/epigastric pain ± radiation to scapula, lasting <6 h, with gallstones on US and no fever/inflammation.",
   "investigations": [
     {
@@ -43,9 +76,10 @@
     "Harrison 22e · NICE gallstones"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

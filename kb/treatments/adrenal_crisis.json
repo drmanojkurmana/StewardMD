@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Immediate IV hydrocortisone + fluid resuscitation",
       "steps": [
         "Give IV HYDROCORTISONE 100 mg immediately — do NOT wait for cortisol results.",
         "Aggressive IV fluids (0.9% saline) to correct volume and hypotension.",
@@ -18,14 +19,70 @@
         "Treat the precipitant (often infection); continue hydrocortisone (e.g. 50 mg q6h) then taper.",
         "Sick-day rules and steroid-emergency card education on recovery."
       ],
+      "drugRefs": [
+        {
+          "composition": "hydrocortisone",
+          "regimenLabel": "IV hydrocortisone (stat)",
+          "dose": "100 mg",
+          "route": "IV bolus (IM if no IV access)",
+          "freq": "immediately, once",
+          "why": "Life-saving glucocorticoid replacement — give on clinical suspicion without waiting for cortisol/ACTH results."
+        },
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV crystalloid resuscitation",
+          "dose": "~1 L over the first hour, then titrated to volume status",
+          "route": "IV",
+          "freq": "continuous, guided by haemodynamics",
+          "why": "Corrects hypovolaemia and hypotension from cortisol/aldosterone deficiency."
+        },
+        {
+          "composition": "glucose",
+          "regimenLabel": "IV glucose for hypoglycaemia",
+          "dose": "e.g. 100 mL of 20% (or 50 mL of 50%)",
+          "route": "IV",
+          "freq": "as needed for documented hypoglycaemia",
+          "why": "Glucocorticoid deficiency causes hypoglycaemia; correct alongside electrolyte disturbance."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · Endocrine Society",
         "refs": [
-          "Harrison 22e · Endocrine Society"
+          "Harrison's Principles of Internal Medicine, 22e — Adrenal Insufficiency and Crisis",
+          "Endocrine Society Clinical Practice Guideline — Primary Adrenal Insufficiency",
+          "Society for Endocrinology Emergency Guidance — Acute Adrenal Insufficiency"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Maintenance glucocorticoid after stabilisation",
+      "drugRefs": [
+        {
+          "composition": "hydrocortisone",
+          "regimenLabel": "IV/IM hydrocortisone maintenance",
+          "dose": "50 mg",
+          "route": "IV/IM",
+          "freq": "every 6 hours",
+          "duration": "until stable, then taper to oral replacement",
+          "why": "Continues cover after the initial bolus while the precipitant (often infection) is treated; a continuous infusion (~200 mg/24 h) is an alternative. Taper as the patient recovers."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · Endocrine Society",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Adrenal Insufficiency and Crisis",
+          "Endocrine Society Clinical Practice Guideline — Primary Adrenal Insufficiency"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate IV hydrocortisone"
+  },
+  "antibioticRelevant": false,
   "confirm": "Hypotension/shock, vomiting, hypoglycaemia, hyponatraemia ± known adrenal insufficiency or steroid withdrawal/stress. Treat on suspicion.",
   "investigations": [
     {
@@ -43,9 +100,10 @@
     "Harrison 22e · Endocrine Society"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

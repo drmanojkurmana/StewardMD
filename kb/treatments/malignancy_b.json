@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Diagnosis-led — no empirical drug therapy before histology",
       "steps": [
         "Structured work-up: examination, bloods, imaging (CT) and targeted tissue diagnosis (excision/core biopsy).",
         "Avoid empirical steroids before histology (can obscure lymphoma diagnosis).",
@@ -18,14 +19,61 @@
         "Definitive treatment is tumour-specific after staging.",
         "Manage symptoms and oncological emergencies (hypercalcaemia, SVCO, cord compression)."
       ],
+      "drugRefs": [],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Approach to the Patient with Cancer / Lymphoma",
+          "Harrison's Principles of Internal Medicine, 22e — Oncologic Emergencies",
+          "ESMO Clinical Practice Guidelines — Diagnosis and staging of malignancy of unknown primary/lymphoma"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Oncological emergency management",
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV rehydration (hypercalcaemia)",
+          "dose": "3–4 L over 24 h (titrated to volume status)",
+          "route": "IV",
+          "freq": "continuous",
+          "why": "First step in hypercalcaemia of malignancy — restores volume and promotes calciuresis before a bisphosphonate."
+        },
+        {
+          "composition": "zoledronic acid",
+          "regimenLabel": "IV bisphosphonate (hypercalcaemia)",
+          "dose": "4 mg over ≥15 min",
+          "route": "IV",
+          "freq": "single dose (may repeat after ≥7 days)",
+          "why": "Definitive treatment of hypercalcaemia of malignancy after rehydration; dose-adjust for renal function."
+        },
+        {
+          "composition": "dexamethasone",
+          "regimenLabel": "Corticosteroid (confirmed cord compression)",
+          "dose": "16 mg daily",
+          "route": "PO/IV",
+          "freq": "once daily (with PPI cover)",
+          "why": "For malignant spinal cord compression to reduce oedema — but withhold before biopsy where lymphoma is suspected, as steroids obscure histology."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Oncologic Emergencies",
+          "NICE — Metastatic spinal cord compression (NG234)",
+          "Hypercalcaemia of malignancy — management guidance"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Urgent tissue diagnosis; avoid empirical steroids"
+  },
+  "antibioticRelevant": false,
   "confirm": "Constitutional 'B' symptoms (weight loss, fevers, night sweats) ± lymphadenopathy/organomegaly suggesting lymphoma/occult malignancy.",
   "investigations": [
     {
@@ -43,9 +91,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

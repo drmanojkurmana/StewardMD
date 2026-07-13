@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Early DMARD (methotrexate) + steroid bridge + symptom relief",
       "steps": [
         "Early referral to rheumatology — 'treat to target' (remission/low disease activity).",
         "Start a DMARD early (methotrexate first-line) ± short-term steroid bridge.",
@@ -18,14 +19,93 @@
         "NSAID for symptom relief; monitor DMARD toxicity (FBC, LFTs).",
         "Manage cardiovascular risk, bone health and vaccination."
       ],
+      "drugRefs": [
+        {
+          "composition": "methotrexate",
+          "regimenLabel": "First-line conventional DMARD",
+          "dose": "10–15 mg once weekly, titrate to 20–25 mg weekly",
+          "route": "PO/SC",
+          "freq": "once weekly",
+          "why": "Anchor DMARD for RA; started early to control disease and prevent erosions. Monitor FBC/LFTs."
+        },
+        {
+          "composition": "folic acid",
+          "regimenLabel": "Folate supplementation with methotrexate",
+          "dose": "5 mg once weekly (on a different day to methotrexate)",
+          "route": "PO",
+          "freq": "once weekly",
+          "why": "Reduces methotrexate mucosal/haematological/hepatic toxicity."
+        },
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Short-term steroid bridge",
+          "dose": "15–30 mg daily, tapering over weeks",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Rapid symptom control while the DMARD takes effect; kept short-term to avoid steroid toxicity."
+        },
+        {
+          "composition": "naproxen",
+          "regimenLabel": "NSAID (symptom relief)",
+          "dose": "500 mg",
+          "route": "PO",
+          "freq": "twice daily",
+          "why": "Analgesia/anti-inflammatory for symptom relief; add gastroprotection and use lowest effective dose."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ACR/EULAR RA",
         "refs": [
-          "Harrison 22e · ACR/EULAR RA"
+          "Harrison's Principles of Internal Medicine, 22e — Rheumatoid Arthritis",
+          "EULAR 2022/2023 Recommendations for the Management of Rheumatoid Arthritis",
+          "ACR 2021 Guideline for the Treatment of Rheumatoid Arthritis"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Escalation — combination DMARDs / biologic",
+      "drugRefs": [
+        {
+          "composition": "sulfasalazine",
+          "regimenLabel": "Conventional DMARD (combination)",
+          "dose": "500 mg daily, titrated to 1 g twice daily",
+          "route": "PO",
+          "freq": "twice daily",
+          "why": "Used in combination DMARD therapy when methotrexate alone is inadequate."
+        },
+        {
+          "composition": "hydroxychloroquine",
+          "regimenLabel": "Conventional DMARD (combination)",
+          "dose": "200–400 mg (≤5 mg/kg/day)",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Component of triple therapy; requires baseline/annual retinal monitoring."
+        },
+        {
+          "composition": "adalimumab",
+          "regimenLabel": "TNF-inhibitor biologic",
+          "dose": "40 mg every 2 weeks",
+          "route": "SC",
+          "freq": "every 2 weeks",
+          "why": "Biologic DMARD for inadequate response to conventional DMARDs; screen for latent TB/hepatitis first."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ACR/EULAR RA",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Rheumatoid Arthritis",
+          "EULAR 2022/2023 Recommendations for the Management of Rheumatoid Arthritis"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Early DMARD (methotrexate); rheumatology referral"
+  },
+  "antibioticRelevant": false,
   "confirm": "Symmetrical small-joint polyarthritis with early-morning stiffness >30 min; RF/anti-CCP, raised ESR/CRP, erosions.",
   "investigations": [
     {
@@ -43,9 +123,10 @@
     "Harrison 22e · ACR/EULAR RA"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -2,24 +2,43 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "stewardmd/kb/policy-overlay.schema.json",
   "title": "StewardMD Hospital Policy Overlay",
-  "description": "OPTIONAL, hospital-specific regimen overlay. Applied only when the user selects their hospital; it overrides the default ICMR/guideline recommendation for that selection but is never the default. Mirrors the existing policy.js model (keyed by hospital + disease), kept as a SEPARATE, mutable, hospital-owned layer.",
+  "description": "OPTIONAL, hospital-specific regimen overlay. One file per hospital (kb/policies/<HOSPITAL>.json), keyed internally by disease id. Applied only when the user selects their hospital; it overrides the default ICMR/guideline recommendation for that selection but is never the default. Kept as a SEPARATE, mutable, hospital-owned layer.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["hospitalId", "diseaseId", "regimen", "source", "review", "version"],
+  "required": ["hospitalId", "diseases", "review", "version"],
   "properties": {
-    "hospitalId": { "type": "string", "description": "e.g. GIMSR." },
-    "diseaseId": { "type": "string" },
-    "regimen": {
-      "type": "object", "additionalProperties": false, "required": ["preferred"],
-      "properties": {
-        "preferred": { "type": "array", "items": { "type": "string" }, "description": "Preferred regimen(s) per the hospital antibiogram/policy." },
-        "alternatives": { "type": "array", "items": { "type": "string" } },
-        "duration": { "type": ["string", "null"] },
-        "comments": { "type": ["string", "null"] }
+    "hospitalId": { "type": "string", "description": "e.g. GIMSR, AIIMS, APOLLO, ICMR (default overlay), CUSTOM." },
+    "diseases": {
+      "type": "object",
+      "description": "Map of Disease.id -> per-hospital policy entry.",
+      "additionalProperties": {
+        "type": "object", "additionalProperties": true, "required": ["entry"],
+        "properties": {
+          "hospital": {
+            "type": "object", "additionalProperties": true,
+            "description": "Hospital branding + policy metadata (repeated per entry to keep entries self-contained for the UI).",
+            "properties": {
+              "id": { "type": "string" }, "name": { "type": "string" }, "short": { "type": ["string", "null"] },
+              "logo": { "type": ["string", "null"] }, "policyName": { "type": ["string", "null"] },
+              "version": { "type": ["string", "null"] }, "hasPolicy": { "type": "boolean" },
+              "policy": {}, "watch": { "type": "array" }, "reserve": { "type": "array" }
+            }
+          },
+          "entry": {
+            "type": ["object", "null"], "additionalProperties": false, "required": ["preferred"],
+            "description": "The actual regimen overlay for this hospital+disease. null when the hospital declares no specific policy for this disease (hasPolicy:false).",
+            "properties": {
+              "preferred": { "type": "array", "items": { "type": "string" }, "description": "Preferred regimen(s) per the hospital antibiogram/policy." },
+              "alternatives": { "type": "array", "items": { "type": "string" } },
+              "duration": { "type": ["string", "null"] },
+              "comments": { "type": ["string", "null"] },
+              "table": { "type": ["string", "null"] },
+              "page": { "type": ["integer", "string", "null"] }
+            }
+          }
+        }
       }
     },
-    "source": { "type": "string", "description": "e.g. 'GIMSR Antimicrobial Policy 2024'." },
-    "locator": { "type": "object", "additionalProperties": false, "properties": { "table": { "type": ["string", "null"] }, "page": { "type": ["integer", "null"] } } },
     "review": { "type": "object", "additionalProperties": false, "required": ["status"], "properties": { "status": { "type": "string", "enum": ["draft", "in_review", "approved", "deprecated"] }, "reviewedBy": { "type": ["string", "null"] }, "reviewedAt": { "type": ["string", "null"] } } },
     "version": { "type": "integer", "minimum": 1 }
   }
