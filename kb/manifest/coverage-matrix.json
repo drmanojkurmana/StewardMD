@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 1317,
+    "diseases": 1373,
     "diagnostic": 141,
-    "reference": 1176,
+    "reference": 1232,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -27,16 +27,16 @@
     "overview": 100,
     "clinicalFeatures": 100,
     "pathophysiology": 100,
-    "differential": 99.5,
-    "investigations": 99.8,
+    "differential": 99.6,
+    "investigations": 99.9,
     "redFlags": 100,
-    "severity": 30,
+    "severity": 28.8,
     "prognosis": 99.3,
-    "diagnosticScoring": 10.7,
-    "management": 10.6,
-    "drugTherapy": 9.8,
-    "dosing": 9.8,
-    "stewardship": 3.9
+    "diagnosticScoring": 10.3,
+    "management": 10.2,
+    "drugTherapy": 9.4,
+    "dosing": 9.4,
+    "stewardship": 3.7
   },
   "bySpecialty": {
     "Pulmonology": {
@@ -180,18 +180,18 @@
       }
     },
     "Oncology": {
-      "total": 29,
+      "total": 43,
       "diagnostic": 3,
-      "reference": 26,
+      "reference": 40,
       "dims": {
-        "overview": 29,
-        "clinicalFeatures": 29,
-        "pathophysiology": 29,
-        "differential": 29,
-        "investigations": 29,
-        "redFlags": 29,
+        "overview": 43,
+        "clinicalFeatures": 43,
+        "pathophysiology": 43,
+        "differential": 43,
+        "investigations": 43,
+        "redFlags": 43,
         "severity": 14,
-        "prognosis": 29,
+        "prognosis": 43,
         "diagnosticScoring": 3,
         "management": 3,
         "drugTherapy": 3,
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 61,
+      "total": 63,
       "diagnostic": 7,
-      "reference": 54,
+      "reference": 56,
       "dims": {
-        "overview": 61,
-        "clinicalFeatures": 61,
-        "pathophysiology": 61,
-        "differential": 60,
-        "investigations": 61,
-        "redFlags": 61,
+        "overview": 63,
+        "clinicalFeatures": 63,
+        "pathophysiology": 63,
+        "differential": 62,
+        "investigations": 63,
+        "redFlags": 63,
         "severity": 29,
-        "prognosis": 61,
+        "prognosis": 63,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 153,
+      "total": 169,
       "diagnostic": 10,
-      "reference": 143,
+      "reference": 159,
       "dims": {
-        "overview": 153,
-        "clinicalFeatures": 153,
-        "pathophysiology": 153,
-        "differential": 152,
-        "investigations": 153,
-        "redFlags": 153,
+        "overview": 169,
+        "clinicalFeatures": 169,
+        "pathophysiology": 169,
+        "differential": 168,
+        "investigations": 169,
+        "redFlags": 169,
         "severity": 33,
-        "prognosis": 151,
+        "prognosis": 167,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -499,6 +499,26 @@
         "stewardship": 0
       }
     },
+    "Genetics": {
+      "total": 14,
+      "diagnostic": 0,
+      "reference": 14,
+      "dims": {
+        "overview": 14,
+        "clinicalFeatures": 14,
+        "pathophysiology": 14,
+        "differential": 14,
+        "investigations": 14,
+        "redFlags": 14,
+        "severity": 0,
+        "prognosis": 14,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
     "Rehabilitation": {
       "total": 11,
       "diagnostic": 0,
@@ -540,18 +560,18 @@
       }
     },
     "Immunology": {
-      "total": 17,
+      "total": 27,
       "diagnostic": 0,
-      "reference": 17,
+      "reference": 27,
       "dims": {
-        "overview": 17,
-        "clinicalFeatures": 17,
-        "pathophysiology": 17,
-        "differential": 17,
-        "investigations": 17,
-        "redFlags": 17,
+        "overview": 27,
+        "clinicalFeatures": 27,
+        "pathophysiology": 27,
+        "differential": 27,
+        "investigations": 27,
+        "redFlags": 27,
         "severity": 1,
-        "prognosis": 17,
+        "prognosis": 27,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -4960,6 +4980,28 @@
       }
     },
     {
+      "id": "adenylosuccinate_lyase_deficiency",
+      "name": "Adenylosuccinate lyase deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "adrenal_disorders",
       "name": "Adrenal Cortical Disorders",
       "specialty": "Endocrine / Metabolic",
@@ -5158,6 +5200,28 @@
       }
     },
     {
+      "id": "barth_syndrome",
+      "name": "Barth syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "beriberi",
       "name": "Beriberi",
       "specialty": "Endocrine / Metabolic",
@@ -5182,6 +5246,28 @@
     {
       "id": "beta_mannosidosis",
       "name": "Beta-mannosidosis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "biotin_thiamine_responsive_basal_ganglia_disease",
+      "name": "Biotin-thiamine-responsive basal ganglia disease",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
       "tier": "reference",
@@ -5334,6 +5420,28 @@
       }
     },
     {
+      "id": "creatine_deficiency_syndromes",
+      "name": "Cerebral creatine deficiency syndromes",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "childhood_obesity",
       "name": "Childhood Obesity",
       "specialty": "Endocrine / Metabolic",
@@ -5358,6 +5466,28 @@
     {
       "id": "citrullinemia_type_2",
       "name": "Citrullinaemia type 2 (citrin deficiency)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "galactosemia_classic",
+      "name": "Classic galactosaemia",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
       "tier": "reference",
@@ -5950,6 +6080,28 @@
       }
     },
     {
+      "id": "glut1_deficiency_syndrome",
+      "name": "GLUT1 deficiency syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "glutaric_aciduria",
       "name": "Glutaric aciduria",
       "specialty": "Endocrine / Metabolic",
@@ -6020,6 +6172,28 @@
       "name": "Gynecomastia",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hereditary_fructose_intolerance",
+      "name": "Hereditary fructose intolerance",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6478,10 +6652,54 @@
       }
     },
     {
+      "id": "sulfite_oxidase_deficiency",
+      "name": "Isolated sulfite oxidase deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "isovaleric_acidemia",
       "name": "Isovaleric acidemia",
       "specialty": "Endocrine / Metabolic",
       "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kearns_sayre_syndrome",
+      "name": "Kearns-Sayre syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6548,6 +6766,28 @@
       "name": "Latent autoimmune diabetes in adults",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lesch_nyhan_syndrome",
+      "name": "Lesch-Nyhan syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6742,6 +6982,28 @@
       }
     },
     {
+      "id": "menkes_disease",
+      "name": "Menkes disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "menopause_and_postmenopausal_hormone_thera",
       "name": "Menopause and Postmenopausal Hormone Therapy",
       "specialty": "Endocrine / Metabolic",
@@ -6812,6 +7074,28 @@
       "name": "Mitochondrial disease",
       "specialty": "Endocrine / Metabolic",
       "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "molybdenum_cofactor_deficiency",
+      "name": "Molybdenum cofactor deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7248,6 +7532,28 @@
       }
     },
     {
+      "id": "pearson_syndrome",
+      "name": "Pearson marrow-pancreas syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pellagra",
       "name": "Pellagra",
       "specialty": "Endocrine / Metabolic",
@@ -7578,6 +7884,28 @@
       }
     },
     {
+      "id": "pyruvate_carboxylase_deficiency",
+      "name": "Pyruvate carboxylase deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pyruvate_dehydrogenase_deficiency",
       "name": "Pyruvate dehydrogenase deficiency",
       "specialty": "Endocrine / Metabolic",
@@ -7800,6 +8128,28 @@
     {
       "id": "sly_syndrome",
       "name": "Sly syndrome (MPS VII)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "smith_lemli_opitz_syndrome",
+      "name": "Smith-Lemli-Opitz syndrome",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
       "tier": "reference",
@@ -8242,6 +8592,28 @@
       "name": "Wolman disease",
       "specialty": "Endocrine / Metabolic",
       "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "zellweger_syndrome",
+      "name": "Zellweger syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -10882,6 +11254,314 @@
       "name": "Williams syndrome",
       "specialty": "Genetic",
       "system": "Genetic / Paediatrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "alstrom_syndrome",
+      "name": "Alstrom syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "bardet_biedl_syndrome",
+      "name": "Bardet-Biedl syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cardiofaciocutaneous_syndrome",
+      "name": "Cardiofaciocutaneous syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "coffin_siris_syndrome",
+      "name": "Coffin-Siris syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cornelia_de_lange_syndrome",
+      "name": "Cornelia de Lange syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "costello_syndrome",
+      "name": "Costello syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cri_du_chat_syndrome",
+      "name": "Cri-du-chat syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kabuki_syndrome",
+      "name": "Kabuki syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mowat_wilson_syndrome",
+      "name": "Mowat-Wilson syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pallister_killian_syndrome",
+      "name": "Pallister-Killian syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pitt_hopkins_syndrome",
+      "name": "Pitt-Hopkins syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rubinstein_taybi_syndrome",
+      "name": "Rubinstein-Taybi syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tuberous_sclerosis_complex",
+      "name": "Tuberous sclerosis complex",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "wolf_hirschhorn_syndrome",
+      "name": "Wolf-Hirschhorn syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -14574,6 +15254,28 @@
       }
     },
     {
+      "id": "diamond_blackfan_anemia",
+      "name": "Diamond-Blackfan anaemia",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dic",
       "name": "Disseminated intravascular coagulation",
       "specialty": "Hematology",
@@ -15366,6 +16068,28 @@
       }
     },
     {
+      "id": "shwachman_diamond_syndrome",
+      "name": "Shwachman-Diamond syndrome",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sickle_cell_disease",
       "name": "Sickle Cell Disease",
       "specialty": "Hematology",
@@ -15630,6 +16354,28 @@
       }
     },
     {
+      "id": "cartilage_hair_hypoplasia",
+      "name": "Cartilage-hair hypoplasia",
+      "specialty": "Immunology",
+      "system": "Genetics / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chediak_higashi",
       "name": "Chediak-Higashi syndrome",
       "specialty": "Immunology",
@@ -15652,10 +16398,120 @@
       }
     },
     {
+      "id": "chediak_higashi_syndrome",
+      "name": "Chediak-Higashi syndrome",
+      "specialty": "Immunology",
+      "system": "Genetics / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cockayne_syndrome",
+      "name": "Cockayne syndrome",
+      "specialty": "Immunology",
+      "system": "Genetics / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "complement_c3_deficiency",
       "name": "Complement C3 deficiency",
       "specialty": "Immunology",
       "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "griscelli_syndrome",
+      "name": "Griscelli syndrome",
+      "specialty": "Immunology",
+      "system": "Genetics / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hermansky_pudlak_syndrome",
+      "name": "Hermansky-Pudlak syndrome",
+      "specialty": "Immunology",
+      "system": "Genetics / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "progeria_hutchinson_gilford",
+      "name": "Hutchinson-Gilford progeria syndrome",
+      "specialty": "Immunology",
+      "system": "Genetics / Immunology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -15828,10 +16684,54 @@
       }
     },
     {
+      "id": "mevalonate_kinase_deficiency",
+      "name": "Mevalonate kinase deficiency",
+      "specialty": "Immunology",
+      "system": "Genetics / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "nk_cell_deficiency",
       "name": "Natural killer cell deficiency",
       "specialty": "Immunology",
       "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "omenn_syndrome",
+      "name": "Omenn syndrome",
+      "specialty": "Immunology",
+      "system": "Genetics / Immunology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -15907,6 +16807,50 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trichothiodystrophy",
+      "name": "Trichothiodystrophy",
+      "specialty": "Immunology",
+      "system": "Genetics / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "werner_syndrome",
+      "name": "Werner syndrome",
+      "specialty": "Immunology",
+      "system": "Genetics / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -23572,6 +24516,28 @@
       }
     },
     {
+      "id": "birt_hogg_dube_syndrome",
+      "name": "Birt-Hogg-Dube syndrome",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bladder_cancer",
       "name": "Bladder & Urinary Tract Cancer",
       "specialty": "Oncology",
@@ -23594,6 +24560,28 @@
       }
     },
     {
+      "id": "bloom_syndrome",
+      "name": "Bloom syndrome",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "breast_cancer",
       "name": "Breast Cancer",
       "specialty": "Oncology",
@@ -23607,6 +24595,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "carney_complex",
+      "name": "Carney complex",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -23660,6 +24670,50 @@
       }
     },
     {
+      "id": "cowden_syndrome",
+      "name": "Cowden syndrome",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fanconi_anemia",
+      "name": "Fanconi anaemia",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "FEBRILE_NEUTROPENIA",
       "name": "Febrile Neutropenia",
       "specialty": "Oncology",
@@ -23704,6 +24758,28 @@
       }
     },
     {
+      "id": "gorlin_syndrome",
+      "name": "Gorlin syndrome",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "head_and_neck_cancer",
       "name": "Head and Neck Cancer",
       "specialty": "Oncology",
@@ -23726,10 +24802,54 @@
       }
     },
     {
+      "id": "hereditary_hemorrhagic_telangiectasia",
+      "name": "Hereditary haemorrhagic telangiectasia",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "immunotherapy_toxicity",
       "name": "Immunotherapy toxicity",
       "specialty": "Oncology",
       "system": "Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "klippel_trenaunay_syndrome",
+      "name": "Klippel-Trenaunay syndrome",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -23792,6 +24912,28 @@
       }
     },
     {
+      "id": "mccune_albright_syndrome",
+      "name": "McCune-Albright syndrome",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mesothelioma",
       "name": "Mesothelioma",
       "specialty": "Oncology",
@@ -23840,6 +24982,28 @@
       "name": "Neuroendocrine tumor",
       "specialty": "Oncology",
       "system": "Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nijmegen_breakage_syndrome",
+      "name": "Nijmegen breakage syndrome",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -23946,6 +25110,28 @@
       }
     },
     {
+      "id": "peutz_jeghers_syndrome",
+      "name": "Peutz-Jeghers syndrome",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "prostate_cancer",
       "name": "Prostate Disease (BPH & Cancer)",
       "specialty": "Oncology",
@@ -23959,6 +25145,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "proteus_syndrome",
+      "name": "Proteus syndrome",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -24003,6 +25211,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rothmund_thomson_syndrome",
+      "name": "Rothmund-Thomson syndrome",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -24148,6 +25378,28 @@
       "name": "Tumour lysis syndrome",
       "specialty": "Oncology",
       "system": "Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "von_hippel_lindau_disease",
+      "name": "Von Hippel-Lindau disease",
+      "specialty": "Oncology",
+      "system": "Genetics / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
