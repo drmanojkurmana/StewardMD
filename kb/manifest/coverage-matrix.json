@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 1103,
+    "diseases": 1150,
     "diagnostic": 141,
-    "reference": 962,
+    "reference": 1009,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,13 +30,13 @@
     "differential": 99.5,
     "investigations": 99.8,
     "redFlags": 100,
-    "severity": 35.8,
+    "severity": 34.3,
     "prognosis": 99.2,
-    "diagnosticScoring": 12.8,
-    "management": 12.7,
-    "drugTherapy": 11.7,
-    "dosing": 11.7,
-    "stewardship": 4.6
+    "diagnosticScoring": 12.3,
+    "management": 12.2,
+    "drugTherapy": 11.2,
+    "dosing": 11.2,
+    "stewardship": 4.4
   },
   "bySpecialty": {
     "Pulmonology": {
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 41,
+      "total": 53,
       "diagnostic": 5,
-      "reference": 36,
+      "reference": 48,
       "dims": {
-        "overview": 41,
-        "clinicalFeatures": 41,
-        "pathophysiology": 41,
-        "differential": 41,
-        "investigations": 40,
-        "redFlags": 41,
+        "overview": 53,
+        "clinicalFeatures": 53,
+        "pathophysiology": 53,
+        "differential": 53,
+        "investigations": 52,
+        "redFlags": 53,
         "severity": 7,
-        "prognosis": 40,
+        "prognosis": 52,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 49,
+      "total": 61,
       "diagnostic": 7,
-      "reference": 42,
+      "reference": 54,
       "dims": {
-        "overview": 49,
-        "clinicalFeatures": 49,
-        "pathophysiology": 49,
-        "differential": 48,
-        "investigations": 49,
-        "redFlags": 49,
+        "overview": 61,
+        "clinicalFeatures": 61,
+        "pathophysiology": 61,
+        "differential": 60,
+        "investigations": 61,
+        "redFlags": 61,
         "severity": 29,
-        "prognosis": 49,
+        "prognosis": 61,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -380,18 +380,18 @@
       }
     },
     "Infectious Diseases": {
-      "total": 96,
+      "total": 108,
       "diagnostic": 0,
-      "reference": 96,
+      "reference": 108,
       "dims": {
-        "overview": 96,
-        "clinicalFeatures": 96,
-        "pathophysiology": 96,
-        "differential": 95,
-        "investigations": 96,
-        "redFlags": 96,
+        "overview": 108,
+        "clinicalFeatures": 108,
+        "pathophysiology": 108,
+        "differential": 107,
+        "investigations": 108,
+        "redFlags": 108,
         "severity": 63,
-        "prognosis": 96,
+        "prognosis": 108,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -492,6 +492,26 @@
         "redFlags": 26,
         "severity": 0,
         "prognosis": 26,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Rehabilitation": {
+      "total": 11,
+      "diagnostic": 0,
+      "reference": 11,
+      "dims": {
+        "overview": 11,
+        "clinicalFeatures": 11,
+        "pathophysiology": 11,
+        "differential": 11,
+        "investigations": 11,
+        "redFlags": 11,
+        "severity": 0,
+        "prognosis": 11,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -3296,10 +3316,76 @@
       }
     },
     {
+      "id": "discoid_lupus_erythematosus",
+      "name": "Discoid Lupus Erythematosus",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "DRESS_SYNDROME",
       "name": "DRESS syndrome",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "eczema_herpeticum",
+      "name": "Eczema Herpeticum",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "epidermolysis_bullosa",
+      "name": "Epidermolysis Bullosa",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -3384,6 +3470,50 @@
       }
     },
     {
+      "id": "erythroderma",
+      "name": "Erythroderma",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "granuloma_annulare",
+      "name": "Granuloma Annulare",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hidradenitis_suppurativa",
       "name": "Hidradenitis suppurativa",
       "specialty": "Dermatology",
@@ -3428,8 +3558,52 @@
       }
     },
     {
+      "id": "ichthyosis",
+      "name": "Ichthyosis",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "impetigo",
       "name": "Impetigo",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "infantile_hemangioma",
+      "name": "Infantile Haemangioma",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
       "tier": "reference",
@@ -3472,6 +3646,28 @@
       }
     },
     {
+      "id": "kaposi_sarcoma",
+      "name": "Kaposi Sarcoma",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "keloid",
       "name": "Keloid",
       "specialty": "Dermatology",
@@ -3496,6 +3692,28 @@
     {
       "id": "lichen_planus",
       "name": "Lichen planus",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lichen_sclerosus",
+      "name": "Lichen Sclerosus",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
       "tier": "reference",
@@ -3562,6 +3780,50 @@
     {
       "id": "molluscum_contagiosum",
       "name": "Molluscum Contagiosum",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "morphea",
+      "name": "Morphea",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mycosis_fungoides",
+      "name": "Mycosis Fungoides",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
       "tier": "reference",
@@ -3650,6 +3912,28 @@
     {
       "id": "pityriasis_rosea",
       "name": "Pityriasis Rosea",
+      "specialty": "Dermatology",
+      "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "port_wine_stain",
+      "name": "Port-Wine Stain",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
       "tier": "reference",
@@ -11062,6 +11346,28 @@
       }
     },
     {
+      "id": "acute_hemolytic_transfusion_reaction",
+      "name": "Acute haemolytic transfusion reaction",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acute_leukemia",
       "name": "Acute leukaemia",
       "specialty": "Hematology",
@@ -11414,6 +11720,50 @@
       }
     },
     {
+      "id": "factor_v_leiden",
+      "name": "Factor V Leiden",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "febrile_nonhemolytic_reaction",
+      "name": "Febrile non-haemolytic transfusion reaction",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "g6pd_deficiency",
       "name": "Glucose-6-Phosphate Dehydrogenase Deficiency",
       "specialty": "Hematology",
@@ -11550,6 +11900,28 @@
       "name": "Hemophagocytic Lymphohistiocytosis (HLH)",
       "specialty": "Hematology",
       "system": "Hematology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "heparin_induced_thrombocytopenia",
+      "name": "Heparin-induced thrombocytopenia",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -11722,6 +12094,28 @@
       }
     },
     {
+      "id": "massive_transfusion",
+      "name": "Massive transfusion",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mastocytosis",
       "name": "Mastocytosis",
       "specialty": "Hematology",
@@ -11757,6 +12151,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "methemoglobinemia",
+      "name": "Methaemoglobinaemia",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -12008,6 +12424,50 @@
       }
     },
     {
+      "id": "protein_c_deficiency",
+      "name": "Protein C deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "protein_s_deficiency",
+      "name": "Protein S deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sickle_cell_disease",
       "name": "Sickle Cell Disease",
       "specialty": "Hematology",
@@ -12052,6 +12512,28 @@
       }
     },
     {
+      "id": "thrombophilia",
+      "name": "Thrombophilia",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ttp_hus",
       "name": "Thrombotic microangiopathy (TTP/HUS)",
       "specialty": "Hematology",
@@ -12087,6 +12569,72 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "taco",
+      "name": "Transfusion-associated circulatory overload",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "transfusion_associated_gvhd",
+      "name": "Transfusion-associated graft-versus-host disease",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trali",
+      "name": "Transfusion-related acute lung injury",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -12910,6 +13458,28 @@
       }
     },
     {
+      "id": "bartonellosis",
+      "name": "Bartonellosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cat_scratch_disease",
       "name": "Bartonellosis (incl. Cat-Scratch Disease)",
       "specialty": "Infectious Diseases",
@@ -13240,6 +13810,28 @@
       }
     },
     {
+      "id": "crimean_congo_hemorrhagic_fever",
+      "name": "Crimean-Congo haemorrhagic fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cryptococcosis",
       "name": "Cryptococcosis",
       "specialty": "Infectious Diseases",
@@ -13350,6 +13942,50 @@
       }
     },
     {
+      "id": "ebola_virus_disease",
+      "name": "Ebola virus disease",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ehrlichiosis",
+      "name": "Ehrlichiosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "enterococcal_infections",
       "name": "Enterococcal Infections",
       "specialty": "Infectious Diseases",
@@ -13363,6 +13999,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "erythema_infectiosum",
+      "name": "Erythema infectiosum",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -13451,6 +14109,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hantavirus",
+      "name": "Hantavirus infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -13671,6 +14351,50 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kyasanur_forest_disease",
+      "name": "Kyasanur Forest disease",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lassa_fever",
+      "name": "Lassa fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -14252,6 +14976,28 @@
       }
     },
     {
+      "id": "q_fever",
+      "name": "Q fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "rabies",
       "name": "Rabies",
       "specialty": "Infectious Diseases",
@@ -14318,6 +15064,28 @@
       }
     },
     {
+      "id": "roseola_infantum",
+      "name": "Roseola infantum",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "rubella_german_measles",
       "name": "Rubella (German Measles)",
       "specialty": "Infectious Diseases",
@@ -14331,6 +15099,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "scarlet_fever",
+      "name": "Scarlet fever",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -14859,6 +15649,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "west_nile_virus",
+      "name": "West Nile virus infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -22411,6 +23223,248 @@
         "drugTherapy": true,
         "dosing": true,
         "stewardship": true
+      }
+    },
+    {
+      "id": "amputation_care",
+      "name": "Amputation care and rehabilitation",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chronic_pelvic_pain",
+      "name": "Chronic pelvic pain",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "complex_regional_pain_syndrome",
+      "name": "Complex regional pain syndrome",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "heterotopic_ossification",
+      "name": "Heterotopic ossification",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "myofascial_pain_syndrome",
+      "name": "Myofascial pain syndrome",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "neuropathic_pain",
+      "name": "Neuropathic pain",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "peripheral_nerve_injury",
+      "name": "Peripheral nerve injury",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "phantom_limb_pain",
+      "name": "Phantom limb pain",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "spasticity_management",
+      "name": "Spasticity management",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "spinal_cord_injury_rehab",
+      "name": "Spinal cord injury rehabilitation",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "stroke_rehabilitation",
+      "name": "Stroke rehabilitation",
+      "specialty": "Rehabilitation",
+      "system": "Rehabilitation / Pain",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
       }
     },
     {
