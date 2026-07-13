@@ -159,7 +159,9 @@ run('diseases', S.disease, (o, errs) => {
 });
 
 run('reference', S.reference, (o, errs) => {
-  const links = o.harrison?.crossLinks || [];
+  const kb = o.harrison || o.reference;
+  if (!kb) errs.push('missing knowledge block — needs `harrison` (IM) or `reference` (source-neutral, e.g. Nelson/Parsons)');
+  const links = kb?.crossLinks || [];
   for (const l of links) if (!diseaseIds.has(l)) errs.push(`crossLink -> unknown disease id "${l}"`);
 });
 

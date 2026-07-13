@@ -60,7 +60,7 @@ const HARRISON_ARRAY_FIELDS = [
 const HARRISON_TEXT_FIELDS = ["pathophysiology", "prognosis", "severityClassification"];
 
 function docFor(entry) {
-  const h = entry.enrichment?.harrison || entry.harrison || {};
+  const h = entry.enrichment?.harrison || entry.harrison || entry.reference || {};
   const parts = [];
   // aliases help lexical/semantic recall for synonym queries
   if (Array.isArray(entry.aliases) && entry.aliases.length) parts.push(entry.aliases.join(", "));
