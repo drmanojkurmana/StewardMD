@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 1001,
+    "diseases": 1051,
     "diagnostic": 141,
-    "reference": 860,
+    "reference": 910,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,13 +30,13 @@
     "differential": 99.4,
     "investigations": 99.8,
     "redFlags": 100,
-    "severity": 39.5,
+    "severity": 37.6,
     "prognosis": 99.1,
-    "diagnosticScoring": 14.1,
-    "management": 14,
-    "drugTherapy": 12.9,
-    "dosing": 12.9,
-    "stewardship": 5.1
+    "diagnosticScoring": 13.4,
+    "management": 13.3,
+    "drugTherapy": 12.3,
+    "dosing": 12.3,
+    "stewardship": 4.9
   },
   "bySpecialty": {
     "Pulmonology": {
@@ -100,18 +100,18 @@
       }
     },
     "Genitourinary / Repro": {
-      "total": 27,
+      "total": 33,
       "diagnostic": 6,
-      "reference": 21,
+      "reference": 27,
       "dims": {
-        "overview": 27,
-        "clinicalFeatures": 27,
-        "pathophysiology": 27,
-        "differential": 27,
-        "investigations": 27,
-        "redFlags": 27,
+        "overview": 33,
+        "clinicalFeatures": 33,
+        "pathophysiology": 33,
+        "differential": 33,
+        "investigations": 33,
+        "redFlags": 33,
         "severity": 10,
-        "prognosis": 27,
+        "prognosis": 33,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 63,
+      "total": 76,
       "diagnostic": 6,
-      "reference": 57,
+      "reference": 70,
       "dims": {
-        "overview": 63,
-        "clinicalFeatures": 63,
-        "pathophysiology": 63,
-        "differential": 63,
-        "investigations": 63,
-        "redFlags": 63,
+        "overview": 76,
+        "clinicalFeatures": 76,
+        "pathophysiology": 76,
+        "differential": 76,
+        "investigations": 76,
+        "redFlags": 76,
         "severity": 23,
-        "prognosis": 63,
+        "prognosis": 76,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -400,18 +400,18 @@
       }
     },
     "Obstetrics": {
-      "total": 28,
+      "total": 36,
       "diagnostic": 0,
-      "reference": 28,
+      "reference": 36,
       "dims": {
-        "overview": 28,
-        "clinicalFeatures": 28,
-        "pathophysiology": 28,
-        "differential": 28,
-        "investigations": 28,
-        "redFlags": 28,
+        "overview": 36,
+        "clinicalFeatures": 36,
+        "pathophysiology": 36,
+        "differential": 36,
+        "investigations": 36,
+        "redFlags": 36,
         "severity": 0,
-        "prognosis": 28,
+        "prognosis": 36,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -519,6 +519,26 @@
         "stewardship": 0
       }
     },
+    "Environmental / Occupational": {
+      "total": 15,
+      "diagnostic": 0,
+      "reference": 15,
+      "dims": {
+        "overview": 15,
+        "clinicalFeatures": 15,
+        "pathophysiology": 15,
+        "differential": 15,
+        "investigations": 15,
+        "redFlags": 15,
+        "severity": 3,
+        "prognosis": 15,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
     "Breast": {
       "total": 1,
       "diagnostic": 0,
@@ -552,6 +572,26 @@
         "redFlags": 10,
         "severity": 0,
         "prognosis": 10,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Geriatrics": {
+      "total": 11,
+      "diagnostic": 0,
+      "reference": 11,
+      "dims": {
+        "overview": 11,
+        "clinicalFeatures": 11,
+        "pathophysiology": 11,
+        "differential": 11,
+        "investigations": 11,
+        "redFlags": 11,
+        "severity": 0,
+        "prognosis": 11,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -611,26 +651,6 @@
         "investigations": 3,
         "redFlags": 3,
         "severity": 0,
-        "prognosis": 3,
-        "diagnosticScoring": 0,
-        "management": 0,
-        "drugTherapy": 0,
-        "dosing": 0,
-        "stewardship": 0
-      }
-    },
-    "Environmental / Occupational": {
-      "total": 3,
-      "diagnostic": 0,
-      "reference": 3,
-      "dims": {
-        "overview": 3,
-        "clinicalFeatures": 3,
-        "pathophysiology": 3,
-        "differential": 3,
-        "investigations": 3,
-        "redFlags": 3,
-        "severity": 3,
         "prognosis": 3,
         "diagnosticScoring": 0,
         "management": 0,
@@ -6534,6 +6554,204 @@
       }
     },
     {
+      "id": "radiation_sickness",
+      "name": "Acute radiation syndrome",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "arsenic_poisoning",
+      "name": "Arsenic poisoning",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "asbestosis",
+      "name": "Asbestosis",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "berylliosis",
+      "name": "Berylliosis",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "byssinosis",
+      "name": "Byssinosis",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chemical_burns",
+      "name": "Chemical burns",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "contact_urticaria",
+      "name": "Contact urticaria",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "decompression_sickness",
+      "name": "Decompression sickness",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hand_arm_vibration",
+      "name": "Hand-arm vibration syndrome",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "heat_related_illnesses",
       "name": "Heat-Related Illnesses",
       "specialty": "Environmental / Occupational",
@@ -6591,6 +6809,72 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mercury_poisoning",
+      "name": "Mercury poisoning",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "noise_induced_hearing_loss",
+      "name": "Noise-induced hearing loss",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "occupational_asthma",
+      "name": "Occupational asthma",
+      "specialty": "Environmental / Occupational",
+      "system": "Occupational / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -7766,6 +8050,50 @@
       }
     },
     {
+      "id": "hydronephrosis",
+      "name": "Hydronephrosis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "interstitial_cystitis",
+      "name": "Interstitial Cystitis / Bladder Pain Syndrome",
+      "specialty": "Genitourinary / Repro",
+      "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "menstrual_disorders_and_pelvic_pain",
       "name": "Menstrual Disorders and Pelvic Pain",
       "specialty": "Genitourinary / Repro",
@@ -7814,6 +8142,28 @@
       "name": "Nocturnal Enuresis",
       "specialty": "Genitourinary / Repro",
       "system": "Genitourinary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "peyronie_disease",
+      "name": "Peyronie Disease",
+      "specialty": "Genitourinary / Repro",
+      "system": "Genitourinary / Urology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7920,8 +8270,74 @@
       }
     },
     {
+      "id": "stress_incontinence",
+      "name": "Stress Urinary Incontinence",
+      "specialty": "Genitourinary / Repro",
+      "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "testicular_torsion",
       "name": "Testicular torsion",
+      "specialty": "Genitourinary / Repro",
+      "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "undescended_testis",
+      "name": "Undescended Testis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "urethral_prolapse",
+      "name": "Urethral Prolapse",
       "specialty": "Genitourinary / Repro",
       "system": "Genitourinary / Urology",
       "tier": "reference",
@@ -8056,6 +8472,248 @@
       "name": "Vesicoureteric reflux",
       "specialty": "Genitourinary / Repro",
       "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cancer_cachexia",
+      "name": "Cancer cachexia",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cancer_pain_management",
+      "name": "Cancer pain management",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dysphagia",
+      "name": "Dysphagia",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "elder_abuse",
+      "name": "Elder abuse",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "end_of_life_care",
+      "name": "End-of-life care",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "falls_in_elderly",
+      "name": "Falls in the elderly",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "frailty_syndrome",
+      "name": "Frailty syndrome",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "orthostatic_hypotension",
+      "name": "Orthostatic hypotension",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "polypharmacy",
+      "name": "Polypharmacy",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pressure_injury",
+      "name": "Pressure injury",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sarcopenia",
+      "name": "Sarcopenia",
+      "specialty": "Geriatrics",
+      "system": "Geriatrics / Palliative",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -17072,6 +17730,28 @@
       }
     },
     {
+      "id": "amniotic_fluid_embolism",
+      "name": "Amniotic Fluid Embolism",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bacterial_vaginosis",
       "name": "Bacterial Vaginosis",
       "specialty": "Obstetrics",
@@ -17118,6 +17798,28 @@
     {
       "id": "cervical_cancer",
       "name": "Cervical Cancer",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cervical_incompetence",
+      "name": "Cervical Incompetence",
       "specialty": "Obstetrics",
       "system": "Obstetrics / Gynaecology",
       "tier": "reference",
@@ -17270,6 +17972,28 @@
       }
     },
     {
+      "id": "fibrocystic_breast",
+      "name": "Fibrocystic Breast Change",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gestational_diabetes_mellitus",
       "name": "Gestational diabetes mellitus",
       "specialty": "Obstetrics",
@@ -17358,6 +18082,28 @@
       }
     },
     {
+      "id": "lactational_mastitis",
+      "name": "Lactational Mastitis",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "obstetric_cholestasis",
       "name": "Obstetric Cholestasis",
       "specialty": "Obstetrics",
@@ -17402,6 +18148,28 @@
       }
     },
     {
+      "id": "ovarian_hyperstimulation",
+      "name": "Ovarian Hyperstimulation Syndrome",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ovarian_torsion",
       "name": "Ovarian Torsion",
       "specialty": "Obstetrics",
@@ -17426,6 +18194,28 @@
     {
       "id": "pelvic_inflammatory_disease",
       "name": "Pelvic inflammatory disease",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "placenta_accreta",
+      "name": "Placenta Accreta Spectrum",
       "specialty": "Obstetrics",
       "system": "Obstetrics / Gynaecology",
       "tier": "reference",
@@ -17580,6 +18370,50 @@
     {
       "id": "rh_isoimmunization",
       "name": "Rhesus Isoimmunisation",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "shoulder_dystocia",
+      "name": "Shoulder Dystocia",
+      "specialty": "Obstetrics",
+      "system": "Obstetrics / Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cord_prolapse",
+      "name": "Umbilical Cord Prolapse",
       "specialty": "Obstetrics",
       "system": "Obstetrics / Gynaecology",
       "tier": "reference",
@@ -20416,6 +21250,28 @@
       }
     },
     {
+      "id": "achilles_tendinopathy",
+      "name": "Achilles tendinopathy",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "compartment_syndrome",
       "name": "Acute compartment syndrome",
       "specialty": "Rheumatology / MSK",
@@ -20464,6 +21320,28 @@
       "name": "Adult-onset Still's disease",
       "specialty": "Rheumatology / MSK",
       "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ankle_sprain",
+      "name": "Ankle sprain",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -20768,6 +21646,28 @@
       }
     },
     {
+      "id": "de_quervain_tenosynovitis",
+      "name": "De Quervain tenosynovitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dermatomyositis",
       "name": "Dermatomyositis",
       "specialty": "Rheumatology / MSK",
@@ -20878,6 +21778,28 @@
       }
     },
     {
+      "id": "ganglion_cyst",
+      "name": "Ganglion cyst",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "temporal_arteritis",
       "name": "Giant cell (temporal) arteritis",
       "specialty": "Rheumatology / MSK",
@@ -20896,6 +21818,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "golfers_elbow",
+      "name": "Golfer's elbow",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -21164,6 +22108,28 @@
       }
     },
     {
+      "id": "mechanical_low_back_pain",
+      "name": "Mechanical low back pain",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "meniscal_injury",
       "name": "Meniscal injury",
       "specialty": "Rheumatology / MSK",
@@ -21318,6 +22284,28 @@
       }
     },
     {
+      "id": "patellofemoral_pain",
+      "name": "Patellofemoral pain syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "periarticular_disorders_of_the_extremities",
       "name": "Periarticular Disorders of the Extremities",
       "specialty": "Rheumatology / MSK",
@@ -21344,6 +22332,28 @@
       "name": "Perthes' disease",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "plantar_fasciitis",
+      "name": "Plantar fasciitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -21560,6 +22570,28 @@
       }
     },
     {
+      "id": "sciatica",
+      "name": "Sciatica",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "scoliosis",
       "name": "Scoliosis",
       "specialty": "Rheumatology / MSK",
@@ -21692,6 +22724,28 @@
       }
     },
     {
+      "id": "stress_fracture",
+      "name": "Stress fracture",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "systemic_lupus_erythematosus",
       "name": "Systemic Lupus Erythematosus",
       "specialty": "Rheumatology / MSK",
@@ -21780,6 +22834,28 @@
       }
     },
     {
+      "id": "tennis_elbow",
+      "name": "Tennis elbow",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "the_vasculitis_syndromes",
       "name": "The Vasculitis Syndromes",
       "specialty": "Rheumatology / MSK",
@@ -21793,6 +22869,50 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trigger_finger",
+      "name": "Trigger finger",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "whiplash_injury",
+      "name": "Whiplash injury",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
