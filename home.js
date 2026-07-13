@@ -1047,7 +1047,7 @@
           '<button class="v3-tile" data-act="drugmenu"><div class="ic">' + svg("pills") + '</div><div style="min-width:0"><div class="tt">Drugs</div><div class="sub">Database · interactions · doses</div></div></button>' +
           '<button class="v3-tile" data-act="electrolytes"><div class="ic">' + svg("flask") + '</div><div style="min-width:0"><div class="tt">Electrolyte Engine</div><div class="sub">ICU correction · doses · rates</div></div></button>' +
         '</div>' +
-        '<div class="v3-foot">For qualified clinicians · <b>AI-summarised, verify doses</b></div>' +
+        '<div class="v3-foot">For qualified clinicians · <b>From official labels · verify doses</b></div>' +
         '<div class="v3-devfoot">' +
           '<div class="v3-devlabel">DEVELOPED BY</div>' +
           '<img id="v3DevLogo" class="v3-devlogo" alt="MaiKnowledge" />' +

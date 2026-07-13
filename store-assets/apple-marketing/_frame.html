@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1290, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas-w:1290px; --canvas-h:2796px;
+    --pine-1:#0E5751; --pine-2:#083E39; --pine-3:#04211E;
+    --mint:#5EEAD4; --mint-2:#34D8B0;
+    --ink:#F4FBF9; --muted:rgba(226,248,243,.72);
+    --disp:"Space Grotesk","SF Pro Display","Helvetica Neue",system-ui,sans-serif;
+    --body:"Inter","SF Pro Text","Helvetica Neue",system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:var(--canvas-w);height:var(--canvas-h);overflow:hidden}
+  #stage{
+    position:relative;width:var(--canvas-w);height:var(--canvas-h);
+    background:
+      radial-gradient(120% 70% at 82% -6%, rgba(94,234,212,.22) 0%, rgba(94,234,212,0) 46%),
+      radial-gradient(90% 60% at 0% 12%, rgba(52,216,176,.10) 0%, rgba(52,216,176,0) 40%),
+      linear-gradient(168deg, var(--pine-1) 0%, var(--pine-2) 46%, var(--pine-3) 100%);
+    font-family:var(--body);color:var(--ink);
+  }
+  /* dark-app variant: deeper, cooler base to signal night mode */
+  #stage.dark{
+    background:
+      radial-gradient(120% 70% at 82% -6%, rgba(94,234,212,.18) 0%, rgba(94,234,212,0) 46%),
+      linear-gradient(168deg, #0A2A28 0%, #06201E 44%, #030E0D 100%);
+  }
+  /* signature: faint ECG baseline behind the copy */
+  #ecg{position:absolute;top:452px;left:0;width:100%;height:120px;opacity:.5;pointer-events:none}
+  #ecg path{fill:none;stroke:var(--mint);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:.55}
+
+  .brand{position:absolute;top:88px;left:96px;display:flex;align-items:center;gap:16px}
+  .brand img.mark{width:66px;height:66px;object-fit:contain}
+  .brand .wm{font-family:var(--disp);font-weight:700;font-size:40px;letter-spacing:-.01em}
+  .brand .wm b{color:var(--mint)}
+
+  .copy{position:absolute;top:238px;left:96px;right:96px}
+  .eyebrow{display:inline-flex;align-items:center;gap:14px;
+    font-family:var(--body);font-weight:700;font-size:26px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--mint);padding:14px 26px;border:1.5px solid rgba(94,234,212,.5);border-radius:999px;
+    background:rgba(94,234,212,.06)}
+  h1{font-family:var(--disp);font-weight:700;font-size:104px;line-height:1.02;letter-spacing:-.028em;margin-top:34px}
+  .sub{font-family:var(--body);font-weight:400;font-size:38px;line-height:1.4;color:var(--muted);margin-top:28px;max-width:1010px}
+
+  /* device */
+  #phoneWrap{position:absolute;left:50%;transform:translateX(-50%);top:876px}
+  .phone{position:relative;width:1030px;border-radius:132px;padding:20px;
+    background:linear-gradient(160deg,#20302e,#0c1918 60%);
+    box-shadow:0 3px 0 rgba(255,255,255,.05) inset, 0 70px 120px rgba(0,0,0,.5), 0 20px 50px rgba(0,0,0,.35);}
+  .bezel{position:relative;border-radius:114px;overflow:hidden;background:#0b0b0d;
+    border:2px solid rgba(255,255,255,.04)}
+  .screen{position:relative;background:#fff;overflow:hidden}
+  .screen.dark{background:#0B1220}
+  /* faux iOS status bar */
+  .statusbar{position:relative;z-index:3;height:132px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 66px;background:transparent}
+  .statusbar.on-white{color:#0B1220}.statusbar.on-dark{color:#F4FBF9}
+  .sb-time{font-family:var(--body);font-weight:700;font-size:44px;letter-spacing:.01em}
+  .sb-right{display:flex;align-items:center;gap:18px}
+  .sb-right svg{height:34px}
+  .island{position:absolute;top:44px;left:50%;transform:translateX(-50%);width:344px;height:60px;background:#000;border-radius:40px;z-index:4}
+  .shot{display:block;width:100%;margin-top:0}
+  /* soft bottom vignette so bleed feels intentional */
+  #fade{position:absolute;left:0;bottom:0;width:100%;height:220px;
+    background:linear-gradient(180deg, rgba(4,33,30,0) 0%, rgba(3,14,13,.0) 100%);pointer-events:none}
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="ecg" viewBox="0 0 1284 120" preserveAspectRatio="none">
+    <path d="M0,60 L360,60 L392,60 L410,20 L436,100 L456,60 L520,60 L548,60 L566,36 L590,84 L612,60 L1284,60"/>
+  </svg>
+
+  <div class="brand">
+    <img class="mark" src="screens/mark.png" alt="">
+    <div class="wm">Steward<b>MD</b></div>
+  </div>
+
+  <div class="copy">
+    <div class="eyebrow" id="eyebrow">POINT OF CARE</div>
+    <h1 id="head">Antibiotic decisions,<br>right at the bedside</h1>
+    <div class="sub" id="sub">Evidence-based antimicrobial guidance in seconds.</div>
+  </div>
+
+  <div id="phoneWrap">
+    <div class="phone">
+      <div class="bezel">
+        <div class="screen" id="screen">
+          <div class="island"></div>
+          <div class="statusbar on-white" id="statusbar">
+            <div class="sb-time">9:41</div>
+            <div class="sb-right">
+              <svg viewBox="0 0 24 16" fill="currentColor"><rect x="0" y="9" width="4" height="7" rx="1"/><rect x="6" y="6" width="4" height="10" rx="1"/><rect x="12" y="3" width="4" height="13" rx="1"/><rect x="18" y="0" width="4" height="16" rx="1"/></svg>
+              <svg viewBox="0 0 22 16" fill="currentColor"><path d="M11 3.5c3 0 5.7 1.1 7.7 3l-2 2C15.3 7.1 13.2 6.3 11 6.3S6.7 7.1 5.3 8.5l-2-2C5.3 4.6 8 3.5 11 3.5zM11 9c1.4 0 2.7.5 3.6 1.4L11 14l-3.6-3.6C8.3 9.5 9.6 9 11 9z"/></svg>
+              <svg viewBox="0 0 32 16" fill="none"><rect x="1" y="1.5" width="26" height="13" rx="4" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="3.5" width="20" height="9" rx="2" fill="currentColor"/><rect x="28.5" y="5" width="2.5" height="6" rx="1.2" fill="currentColor"/></svg>
+            </div>
+          </div>
+          <img class="shot" id="shot" src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="fade"></div>
+</div>
+
+<script>
+  var q = new URLSearchParams(location.search);
+  var dark = q.get('appdark') === '1';
+  var bgDark = q.get('bg') === 'dark';
+  if (bgDark) document.getElementById('stage').classList.add('dark');
+  document.getElementById('eyebrow').textContent = q.get('eyebrow') || 'STEWARDMD';
+  document.getElementById('head').innerHTML = (q.get('head') || '').replace(/\|/g, '<br>');
+  document.getElementById('sub').textContent = q.get('sub') || '';
+  var screen = document.getElementById('screen');
+  var sb = document.getElementById('statusbar');
+  if (dark) { screen.classList.add('dark'); sb.classList.remove('on-white'); sb.classList.add('on-dark'); }
+  var img = document.getElementById('shot');
+  img.src = 'screens/' + q.get('img');
+  // signal readiness for the renderer
+  window.__framReady = false;
+  Promise.all([
+    img.decode ? img.decode().catch(function(){}) : Promise.resolve(),
+    (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve()
+  ]).then(function(){ window.__framReady = true; });
+</script>
+</body>
+</html>
