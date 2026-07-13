@@ -45,7 +45,7 @@ async function storeSummary(env, source, item, docKey, hash, mode) {
     doi: d.doi || item.doi || "", pmid: d.pmid || item.pmid || "", keywords: (d.keywords || []).join(", "), version: d.version || "",
     content_hash: hash, auto: 1,
   };
-  const pushItem = (id) => ({ id, title: base.title, url: base.official_url, workspace: base.workspace, importance: base.importance, organization: base.organization, category: base.category });
+  const pushItem = (id) => ({ id, title: base.title, url: base.official_url, workspace: base.workspace, importance: base.importance, organization: base.organization, category: base.category, type: base.type, body: base.body });
   if (mode === "updated") {
     const existing = await repo.getByDocKey(env, docKey);
     if (existing) {

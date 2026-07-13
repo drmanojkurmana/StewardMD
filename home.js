@@ -2637,6 +2637,26 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   }
   try { window.SMD_openNotifPrefs = openNotifPrefs; } catch (e) {}
 
+  // Deep link from a push notification → open the Medical Updates bell on that guideline's
+  // card (NOT the external source URL). Used by the SW + native tap handlers via /?u=<id>.
+  function openUpdate(id) {
+    if (!id) return;
+    try {
+      _activeTab = "updates";
+      openNotifications();
+      setTimeout(function () { try { openDetail(String(id)); } catch (e) {} }, 220);
+    } catch (e) {}
+  }
+  try { window.SMD_openUpdate = openUpdate; } catch (e) {}
+  // Cold-start tap: the app opened at /?u=<id> — open that card once the shell is up.
+  try {
+    var _um = (location.search || "").match(/[?&]u=([^&]+)/);
+    if (_um && _um[1]) {
+      var _uid = decodeURIComponent(_um[1]);
+      window.addEventListener("load", function () { setTimeout(function () { try { openUpdate(_uid); } catch (e) {} }, 800); });
+    }
+  } catch (e) {}
+
   /* ---- Web Push (OS banner) opt-in for this device ---- */
   function pushSupported() { return ("serviceWorker" in navigator) && ("PushManager" in window) && ("Notification" in window); }
   function isStandalone() { try { return window.navigator.standalone === true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches); } catch (e) { return false; } }

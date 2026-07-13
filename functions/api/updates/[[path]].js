@@ -41,6 +41,9 @@ function normImportance(v) { v = String(v || "").toLowerCase().trim(); return (v
 function normWorkspace(v) { v = String(v || "").toLowerCase().trim(); return WORKSPACES.indexOf(v) >= 0 ? v : "internal_medicine"; }
 function cleanWorkspaces(v) { return Array.isArray(v) ? v.filter((w) => WORKSPACES.indexOf(w) >= 0) : []; }
 function normType(t) { t = String(t || "").toLowerCase().trim(); return ["guideline", "drug_approval", "safety_alert", "trial"].indexOf(t) >= 0 ? t : ""; }
+// Notification label prefix by content type, e.g. "New Guideline: <title>".
+const NOTIF_LABEL = { guideline: "New Guideline", drug_approval: "New Drug Approval", safety_alert: "Safety Alert", trial: "New Trial" };
+function pushLabel(item) { const t = (item && (item.type || CAT_TYPE[item.category])) || ""; return NOTIF_LABEL[t] || "Medical Update"; }
 
 // Fire OS push banners (best-effort). Web push is payloadless (SW fetches newest);
 // native carries the text. Pass `workspace` to deliver only to that workspace's
@@ -50,8 +53,12 @@ function firePush(context, item, workspace) {
   try { if (pushEnabled(context.env)) context.waitUntil(sendPushToAll(context.env, wsOpt)); } catch (e) {}
   try {
     if (nativePushEnabled(context.env)) {
+      // Title = "<label>: <title>"; body = the summary/description. Tap target is an
+      // IN-APP deep link (/?u=<id>) so tapping opens the summary, not the PDF in Safari.
       const msg = item
-        ? { title: item.title || "StewardMD", body: (item.organization || item.source ? (item.organization || item.source) + " · " : "") + (item.category || "update"), url: item.url || "/", tag: item.id ? "smd-" + item.id : undefined }
+        ? { title: pushLabel(item) + ": " + (item.title || "StewardMD"),
+            body: String(item.body || item.summary || item.organization || item.source || "New medical update").slice(0, 180),
+            url: item.id ? "/?u=" + item.id : "/", tag: item.id ? "smd-" + item.id : undefined }
         : { title: "StewardMD", body: "New medical update", url: "/" };
       context.waitUntil(sendNativeToAll(context.env, msg, wsOpt));
     }
