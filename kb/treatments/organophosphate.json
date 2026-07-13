@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Atropine titration + oxime + supportive care",
       "steps": [
         "Protect staff (PPE) and decontaminate (remove clothing, wash skin).",
         "Secure airway; suction copious secretions — bronchorrhoea/respiratory failure is the killer.",
@@ -18,14 +19,46 @@
         "PRALIDOXIME (oxime) for organophosphates with nicotinic features/weakness.",
         "Benzodiazepines for seizures; ICU monitoring (intermediate syndrome, rebound)."
       ],
+      "drugRefs": [
+        {
+          "composition": "atropine",
+          "regimenLabel": "Atropine — titrated to secretions",
+          "dose": "start 1.8–3 mg IV, DOUBLE every ~5 min until chest clear/dry",
+          "route": "IV",
+          "freq": "escalating/doubling boluses, then infusion to maintain atropinisation",
+          "why": "The primary antidote. Titrate to drying of secretions and adequate oxygenation — NOT to pupils or heart rate. Large cumulative doses are often required."
+        },
+        {
+          "composition": "pralidoxime",
+          "regimenLabel": "Oxime (reactivates cholinesterase)",
+          "dose": "loading 30 mg/kg IV over 20 min, then 8 mg/kg/hour infusion",
+          "route": "IV",
+          "freq": "loading dose then continuous infusion",
+          "why": "Reactivates acetylcholinesterase; give early for organophosphates with nicotinic features/weakness. Adjunct to — not a replacement for — atropine."
+        },
+        {
+          "composition": "diazepam",
+          "regimenLabel": "Benzodiazepine for seizures/agitation",
+          "dose": "5–10 mg IV, repeat as needed",
+          "route": "IV",
+          "freq": "repeat to control seizures",
+          "why": "Controls seizures and reduces CNS toxicity/agitation."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · WHO",
         "refs": [
-          "Harrison 22e · WHO"
+          "Harrison's Principles of Internal Medicine, 22e — Organophosphate Poisoning",
+          "WHO / national toxicology guidance on organophosphate poisoning"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Atropine titrated to secretions + oxime"
+  },
+  "antibioticRelevant": false,
   "confirm": "Cholinergic toxidrome — miosis, salivation/lacrimation, bronchorrhoea, bradycardia, fasciculations — after organophosphate/carbamate exposure.",
   "investigations": [
     {
@@ -40,12 +73,14 @@
   ],
   "disposition": "ICU.",
   "references": [
-    "Harrison 22e · WHO"
+    "Harrison's Principles of Internal Medicine, 22e — Organophosphate Poisoning",
+    "WHO / national toxicology guidance on organophosphate poisoning"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

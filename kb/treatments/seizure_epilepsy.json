@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Status epilepticus ladder + first-seizure management",
       "steps": [
         "Status epilepticus: protect airway, O2, glucose; IV lorazepam (or IM midazolam), repeat once.",
         "Second-line: IV levetiracetam, valproate or phenytoin/fosphenytoin.",
@@ -18,14 +19,71 @@
         "Correct provoking causes (hypoglycaemia, hyponatraemia, alcohol, drugs, infection).",
         "First unprovoked seizure: usually no drug; start AED if high recurrence risk / abnormal EEG-MRI; neurology referral, driving advice."
       ],
+      "drugRefs": [
+        {
+          "composition": "lorazepam",
+          "regimenLabel": "First-line benzodiazepine (SE)",
+          "dose": "4 mg IV, repeat once after 5–10 min if seizure continues",
+          "route": "IV",
+          "freq": "may repeat once",
+          "why": "First-line abortive therapy for status epilepticus. If no IV access, use IM midazolam."
+        },
+        {
+          "composition": "midazolam",
+          "regimenLabel": "Benzodiazepine (no IV access)",
+          "dose": "10 mg IM (buccal/IM)",
+          "route": "IM / buccal",
+          "freq": "once",
+          "why": "Alternative first-line when IV access is not immediately available."
+        },
+        {
+          "composition": "levetiracetam",
+          "regimenLabel": "Second-line AED",
+          "dose": "60 mg/kg IV (max ~4.5 g)",
+          "route": "IV",
+          "freq": "once, over 10–15 min",
+          "why": "Second-line control after benzodiazepines; well tolerated with few interactions."
+        },
+        {
+          "composition": "sodium valproate",
+          "regimenLabel": "Second-line AED (alternative)",
+          "dose": "40 mg/kg IV (max ~3 g)",
+          "route": "IV",
+          "freq": "once",
+          "why": "Alternative second-line agent; avoid in pregnancy and hepatic disease."
+        },
+        {
+          "composition": "phenytoin / fosphenytoin",
+          "regimenLabel": "Second-line AED (alternative)",
+          "dose": "phenytoin 20 mg/kg IV (fosphenytoin 20 mg PE/kg) at ≤50 mg/min with cardiac monitoring",
+          "route": "IV",
+          "freq": "once, loading",
+          "why": "Alternative second-line; requires cardiac/BP monitoring during loading."
+        },
+        {
+          "composition": "propofol",
+          "regimenLabel": "Refractory status (anaesthetic infusion, ICU)",
+          "dose": "titrated infusion under intubation",
+          "route": "IV infusion",
+          "freq": "continuous, ICU",
+          "why": "For refractory status epilepticus requiring intubation and burst-suppression; midazolam infusion is an alternative."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · NICE/AES",
         "refs": [
-          "Harrison 22e · NICE/AES"
+          "Harrison's Principles of Internal Medicine, 22e — Seizures and Epilepsy",
+          "NICE Epilepsies guideline",
+          "American Epilepsy Society — Treatment of Convulsive Status Epilepticus"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Status epilepticus: benzodiazepine first, then 2nd-line AED"
+  },
+  "antibioticRelevant": false,
   "confirm": "Stereotyped paroxysmal event ± post-ictal confusion. First seizure vs known epilepsy; status if >5 min or recurrent without recovery.",
   "investigations": [
     {
@@ -40,12 +98,15 @@
   ],
   "disposition": "Status → ICU; first seizure → neurology.",
   "references": [
-    "Harrison 22e · NICE/AES"
+    "Harrison's Principles of Internal Medicine, 22e — Seizures and Epilepsy",
+    "NICE Epilepsies guideline",
+    "American Epilepsy Society — Treatment of Convulsive Status Epilepticus"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }
