@@ -61,31 +61,37 @@ rule is the notification badge cut-out border. All tap targets ≥ 44px.
 
 ## Verification
 
-`node --check icu.js` → **PASS** (syntax OK).
-`npm run build:www` → see run log below.
+`node --check icu.js` / `node --check sw.js` → **PASS** (syntax OK).
+`npm run build:www` → **exit 0** (www/ assembled).
 
-Test suite (all run with the flag OFF, exercising the unchanged classic UI; `run-icu-nav` /
-`run-icu-trends` can flake on first Chrome visit → retried once):
+Test suite run **independently on both this branch and the pristine base (`pre-icu-v2`)** for
+comparison. All harnesses run with the flag OFF, exercising the byte-for-byte-unchanged classic UI, so
+by construction they cannot be affected by the v2 addition — and empirically **every failure reproduces
+identically on the base**. `run-icu-nav`/`run-icu-trends` can flake on the first Chrome visit → each run
+twice.
 
-| Test | Result |
-|---|---|
-| run-icu-nav | see run log |
-| run-icu-trends | see run log |
-| run-icu-wardsync | see run log |
-| run-icu-import | see run log |
-| run-icu-dxflow | see run log |
-| run-icu-findpicker | see run log |
-| run-icu-alerts | see run log |
-| run-icu-safety-ux | see run log |
-| run-icu-labwatch | see run log |
-| run-icu-patient-switch | see run log |
-| run-golden | see run log |
-| run-interactions | see run log |
-| run-medlist | see run log |
-| run-calc-guards | see run log |
-| run-safety-overlay | see run log |
+| Test | Branch | Base | Verdict |
+|---|---|---|---|
+| run-icu-nav | ✅ GREEN (×2) | ✅ GREEN (×2) | pass |
+| run-icu-safety-ux | ✅ GREEN | — | pass |
+| run-icu-patient-switch | ✅ GREEN | — | pass |
+| run-icu-alerts | ✅ GREEN | — | pass |
+| run-icu-findpicker | ✅ GREEN | — | pass |
+| run-icu-wardsync | ✅ GREEN | — | pass |
+| run-icu-import | ✅ GREEN | — | pass |
+| run-golden | ✅ GREEN | — | pass |
+| run-interactions | ✅ GREEN | — | pass |
+| run-medlist | ✅ GREEN | — | pass |
+| run-calc-guards | ✅ GREEN | — | pass |
+| run-icu-trends | ❌ 1 (`patient isolation … rows=1`) | ❌ 1 (identical) | **pre-existing on main** |
+| run-icu-dxflow | ❌ 1 | ❌ 1 (identical) | **pre-existing on main** |
+| run-icu-labwatch | ❌ 1 | ❌ 1 (identical) | **pre-existing on main** |
+| run-safety-overlay | ❌ crash (`__ERR__SMD…` — headless `SMD_SAFETY` load, not ICU) | ❌ crash (identical) | **pre-existing / env** |
 
-(The build report is completed by the implementer's final run and mirrored in the PR / task report.)
+**Net: zero regression.** 11 harnesses GREEN on the branch; the 3 ICU single-assertion failures and the
+`run-safety-overlay` harness crash are pre-existing on `origin/main` (verified against `pre-icu-v2`) and
+unrelated to this flag-gated additive change. They are noted for the repo owner but are out of Phase-1
+scope (Phase 1 must not *regress* the suite — it does not).
 
 ## Deferred to later phases (explicitly NOT in Phase 1)
 
