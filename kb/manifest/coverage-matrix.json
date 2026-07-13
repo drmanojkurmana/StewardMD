@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 1709,
+    "diseases": 1765,
     "diagnostic": 141,
-    "reference": 1568,
+    "reference": 1624,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -27,16 +27,16 @@
     "overview": 100,
     "clinicalFeatures": 100,
     "pathophysiology": 100,
-    "differential": 99.6,
+    "differential": 99.7,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 23.1,
+    "severity": 22.4,
     "prognosis": 99.5,
-    "diagnosticScoring": 8.3,
-    "management": 8.2,
-    "drugTherapy": 7.5,
-    "dosing": 7.5,
-    "stewardship": 3
+    "diagnosticScoring": 8,
+    "management": 7.9,
+    "drugTherapy": 7.3,
+    "dosing": 7.3,
+    "stewardship": 2.9
   },
   "bySpecialty": {
     "Pulmonology": {
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 197,
+      "total": 222,
       "diagnostic": 20,
-      "reference": 177,
+      "reference": 202,
       "dims": {
-        "overview": 197,
-        "clinicalFeatures": 197,
-        "pathophysiology": 197,
-        "differential": 197,
-        "investigations": 197,
-        "redFlags": 197,
+        "overview": 222,
+        "clinicalFeatures": 222,
+        "pathophysiology": 222,
+        "differential": 222,
+        "investigations": 222,
+        "redFlags": 222,
         "severity": 48,
-        "prognosis": 197,
+        "prognosis": 222,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 67,
+      "total": 70,
       "diagnostic": 5,
-      "reference": 62,
+      "reference": 65,
       "dims": {
-        "overview": 67,
-        "clinicalFeatures": 67,
-        "pathophysiology": 67,
-        "differential": 67,
-        "investigations": 66,
-        "redFlags": 67,
+        "overview": 70,
+        "clinicalFeatures": 70,
+        "pathophysiology": 70,
+        "differential": 70,
+        "investigations": 69,
+        "redFlags": 70,
         "severity": 7,
-        "prognosis": 66,
+        "prognosis": 69,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -160,18 +160,18 @@
       }
     },
     "Cardiology": {
-      "total": 83,
+      "total": 86,
       "diagnostic": 11,
-      "reference": 72,
+      "reference": 75,
       "dims": {
-        "overview": 83,
-        "clinicalFeatures": 83,
-        "pathophysiology": 83,
-        "differential": 81,
-        "investigations": 83,
-        "redFlags": 83,
+        "overview": 86,
+        "clinicalFeatures": 86,
+        "pathophysiology": 86,
+        "differential": 84,
+        "investigations": 86,
+        "redFlags": 86,
         "severity": 48,
-        "prognosis": 82,
+        "prognosis": 85,
         "diagnosticScoring": 11,
         "management": 11,
         "drugTherapy": 9,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 233,
+      "total": 241,
       "diagnostic": 10,
-      "reference": 223,
+      "reference": 231,
       "dims": {
-        "overview": 233,
-        "clinicalFeatures": 233,
-        "pathophysiology": 233,
-        "differential": 232,
-        "investigations": 233,
-        "redFlags": 233,
+        "overview": 241,
+        "clinicalFeatures": 241,
+        "pathophysiology": 241,
+        "differential": 240,
+        "investigations": 241,
+        "redFlags": 241,
         "severity": 33,
-        "prognosis": 231,
+        "prognosis": 239,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 111,
+      "total": 128,
       "diagnostic": 6,
-      "reference": 105,
+      "reference": 122,
       "dims": {
-        "overview": 111,
-        "clinicalFeatures": 111,
-        "pathophysiology": 111,
-        "differential": 111,
-        "investigations": 111,
-        "redFlags": 111,
+        "overview": 128,
+        "clinicalFeatures": 128,
+        "pathophysiology": 128,
+        "differential": 128,
+        "investigations": 128,
+        "redFlags": 128,
         "severity": 23,
-        "prognosis": 111,
+        "prognosis": 128,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -1568,6 +1568,28 @@
       }
     },
     {
+      "id": "cardiac_amyloidosis",
+      "name": "Cardiac amyloidosis",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tamponade",
       "name": "Cardiac tamponade",
       "specialty": "Cardiology",
@@ -1911,6 +1933,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "endomyocardial_fibrosis",
+      "name": "Endomyocardial fibrosis",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -2888,6 +2932,28 @@
       }
     },
     {
+      "id": "uhl_anomaly",
+      "name": "Uhl anomaly",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "unstable_angina",
       "name": "Unstable angina",
       "specialty": "Cardiology",
@@ -3508,6 +3574,28 @@
       "name": "Bullous pemphigoid",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "calciphylaxis",
+      "name": "Calciphylaxis (calcific uraemic arteriolopathy)",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -4648,6 +4736,28 @@
       }
     },
     {
+      "id": "scleredema",
+      "name": "Scleredema (of Buschke)",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "seborrheic_dermatitis",
       "name": "Seborrheic dermatitis",
       "specialty": "Dermatology",
@@ -4705,6 +4815,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sweet_syndrome",
+      "name": "Sweet syndrome (acute febrile neutrophilic dermatosis)",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -5946,6 +6078,28 @@
       }
     },
     {
+      "id": "camurati_engelmann_disease",
+      "name": "Camurati-Engelmann disease (progressive diaphyseal dysplasia, TGFB1)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Musculoskeletal / Metabolic bone",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "carbamoyl_phosphate_synthetase_1_deficiency",
       "name": "Carbamoyl phosphate synthetase 1 deficiency",
       "specialty": "Endocrine / Metabolic",
@@ -6980,6 +7134,28 @@
       }
     },
     {
+      "id": "fibrous_dysplasia",
+      "name": "Fibrous dysplasia of bone (GNAS)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Musculoskeletal / Metabolic bone",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "folate_deficiency",
       "name": "Folate deficiency",
       "specialty": "Endocrine / Metabolic",
@@ -7226,6 +7402,28 @@
       "name": "GM2 activator deficiency",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gorham_stout_disease",
+      "name": "Gorham-Stout disease (vanishing bone disease)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Musculoskeletal / Metabolic bone",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7860,6 +8058,28 @@
       }
     },
     {
+      "id": "juvenile_pagets_disease",
+      "name": "Juvenile Paget disease (idiopathic hyperphosphatasia, TNFRSF11B)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Musculoskeletal / Metabolic bone",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "kallmann_syndrome",
       "name": "Kallmann syndrome (hypogonadotropic hypogonadism + anosmia)",
       "specialty": "Endocrine / Metabolic",
@@ -8282,6 +8502,28 @@
       "name": "MELAS syndrome",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "melorheostosis",
+      "name": "Melorheostosis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Musculoskeletal / Metabolic bone",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -9488,6 +9730,28 @@
       }
     },
     {
+      "id": "pycnodysostosis",
+      "name": "Pycnodysostosis (CTSK)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Musculoskeletal / Metabolic bone",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pyruvate_carboxylase_deficiency",
       "name": "Pyruvate carboxylase deficiency",
       "specialty": "Endocrine / Metabolic",
@@ -9712,6 +9976,28 @@
       "name": "Schindler disease",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sclerosteosis",
+      "name": "Sclerosteosis (SOST)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Musculoskeletal / Metabolic bone",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -10262,6 +10548,28 @@
       "name": "Urea cycle disorder",
       "specialty": "Endocrine / Metabolic",
       "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "van_buchem_disease",
+      "name": "Van Buchem disease (SOST regulatory)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Musculoskeletal / Metabolic bone",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -25702,6 +26010,28 @@
       }
     },
     {
+      "id": "anti_nmda_receptor_encephalitis",
+      "name": "Anti-NMDA receptor encephalitis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ataxic_disorders",
       "name": "Ataxic Disorders",
       "specialty": "Neurology",
@@ -25750,6 +26080,28 @@
       "name": "Autoimmune encephalitis",
       "specialty": "Neurology",
       "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "balo_concentric_sclerosis",
+      "name": "Balo concentric sclerosis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -25878,6 +26230,28 @@
       }
     },
     {
+      "id": "bickerstaff_brainstem_encephalitis",
+      "name": "Bickerstaff brainstem encephalitis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "blepharospasm",
       "name": "Blepharospasm",
       "specialty": "Neurology",
@@ -25988,6 +26362,28 @@
       }
     },
     {
+      "id": "cadasil",
+      "name": "CADASIL",
+      "specialty": "Neurology",
+      "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "canavan_disease",
       "name": "Canavan disease",
       "specialty": "Neurology",
@@ -26023,6 +26419,50 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "carasil",
+      "name": "CARASIL",
+      "specialty": "Neurology",
+      "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "caspr2_encephalitis",
+      "name": "CASPR2 antibody encephalitis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -26384,10 +26824,54 @@
       }
     },
     {
+      "id": "chronic_inflammatory_demyelinating_polyneuropathy",
+      "name": "Chronic inflammatory demyelinating polyradiculoneuropathy (CIDP)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chronic_subdural_hematoma",
       "name": "Chronic subdural haematoma",
       "specialty": "Neurology",
       "system": "Neurosurgery / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "clippers_syndrome",
+      "name": "CLIPPERS",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -26978,6 +27462,28 @@
       }
     },
     {
+      "id": "fibromuscular_dysplasia",
+      "name": "Fibromuscular dysplasia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "fkrp_dystroglycanopathy",
       "name": "FKRP-related dystroglycanopathy",
       "specialty": "Neurology",
@@ -27057,6 +27563,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gabab_receptor_encephalitis",
+      "name": "GABA-B receptor encephalitis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -27396,6 +27924,28 @@
       }
     },
     {
+      "id": "immune_mediated_necrotizing_myopathy",
+      "name": "Immune-mediated necrotising myopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "infantile_spasms",
       "name": "Infantile Spasms",
       "specialty": "Neurology",
@@ -27616,6 +28166,28 @@
       }
     },
     {
+      "id": "lgi1_encephalitis",
+      "name": "LGI1 limbic encephalitis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "limb_girdle_muscular_dystrophy",
       "name": "Limb-girdle muscular dystrophy",
       "specialty": "Neurology",
@@ -27708,6 +28280,28 @@
       "name": "Malignant hyperthermia susceptibility",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "marburg_multiple_sclerosis",
+      "name": "Marburg variant multiple sclerosis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -27836,10 +28430,54 @@
       }
     },
     {
+      "id": "miller_fisher_syndrome",
+      "name": "Miller Fisher syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "miyoshi_myopathy",
       "name": "Miyoshi myopathy",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mog_antibody_disease",
+      "name": "MOG antibody-associated disease (MOGAD)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -27880,6 +28518,28 @@
       }
     },
     {
+      "id": "morvan_syndrome",
+      "name": "Morvan syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "movement_disorders",
       "name": "Movement Disorders (Tremor, Chorea, Dystonia)",
       "specialty": "Neurology",
@@ -27893,6 +28553,50 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "moyamoya_disease",
+      "name": "Moyamoya disease",
+      "specialty": "Neurology",
+      "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "multifocal_motor_neuropathy",
+      "name": "Multifocal motor neuropathy with conduction block",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -28386,6 +29090,28 @@
       }
     },
     {
+      "id": "neurosarcoidosis",
+      "name": "Neurosarcoidosis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "nicotine_addiction",
       "name": "Nicotine Addiction",
       "specialty": "Neurology",
@@ -28487,6 +29213,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "opsoclonus_myoclonus_syndrome",
+      "name": "Opsoclonus-myoclonus-ataxia syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -28826,6 +29574,28 @@
       }
     },
     {
+      "id": "primary_angiitis_cns",
+      "name": "Primary angiitis of the central nervous system",
+      "specialty": "Neurology",
+      "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "prion_diseases",
       "name": "Prion Diseases (CJD)",
       "specialty": "Neurology",
@@ -29002,6 +29772,28 @@
       }
     },
     {
+      "id": "reversible_cerebral_vasoconstriction_syndrome",
+      "name": "Reversible cerebral vasoconstriction syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "reye_syndrome",
       "name": "Reye Syndrome",
       "specialty": "Neurology",
@@ -29160,6 +29952,28 @@
       "name": "Smith-Magenis syndrome",
       "specialty": "Neurology",
       "system": "Nervous system / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sneddon_syndrome",
+      "name": "Sneddon syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Cerebrovascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29358,6 +30172,28 @@
       "name": "Spondylolisthesis",
       "specialty": "Neurology",
       "system": "Neurosurgery / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "inclusion_body_myositis",
+      "name": "Sporadic inclusion body myositis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29609,6 +30445,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tumefactive_demyelination",
+      "name": "Tumefactive demyelination",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -35140,6 +35998,28 @@
       }
     },
     {
+      "id": "adult_onset_still_disease",
+      "name": "Adult-onset Still disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "adult_still_disease",
       "name": "Adult-onset Still's disease",
       "specialty": "Rheumatology / MSK",
@@ -35241,6 +36121,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "antisynthetase_syndrome",
+      "name": "Antisynthetase syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -35558,6 +36460,28 @@
       }
     },
     {
+      "id": "cogan_syndrome",
+      "name": "Cogan syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "colles_fracture",
       "name": "Colles' fracture",
       "specialty": "Rheumatology / MSK",
@@ -35628,6 +36552,28 @@
       "name": "Crouzon syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cryoglobulinemic_vasculitis",
+      "name": "Cryoglobulinaemic vasculitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Vasculitis",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -35804,6 +36750,72 @@
       "name": "Ellis-van Creveld syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "eosinophilic_fasciitis",
+      "name": "Eosinophilic fasciitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "eosinophilic_granulomatosis_polyangiitis",
+      "name": "Eosinophilic granulomatosis with polyangiitis (Churg-Strauss)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Vasculitis",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "erdheim_chester_disease",
+      "name": "Erdheim-Chester disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -36284,6 +37296,50 @@
       }
     },
     {
+      "id": "kikuchi_fujimoto_disease",
+      "name": "Kikuchi-Fujimoto disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kimura_disease",
+      "name": "Kimura disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "larsen_syndrome",
       "name": "Larsen syndrome",
       "specialty": "Rheumatology / MSK",
@@ -36416,6 +37472,28 @@
       }
     },
     {
+      "id": "microscopic_polyangiitis",
+      "name": "Microscopic polyangiitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Vasculitis",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "MCTD",
       "name": "Mixed connective tissue disease",
       "specialty": "Rheumatology / MSK",
@@ -36464,6 +37542,28 @@
       "name": "Muenke syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "multicentric_reticulohistiocytosis",
+      "name": "Multicentric reticulohistiocytosis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -36922,6 +38022,28 @@
       }
     },
     {
+      "id": "retroperitoneal_fibrosis",
+      "name": "Retroperitoneal fibrosis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "rheumatoid",
       "name": "Rheumatoid arthritis",
       "specialty": "Rheumatology / MSK",
@@ -36948,6 +38070,28 @@
       "name": "Robinow syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rosai_dorfman_disease",
+      "name": "Rosai-Dorfman disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -37014,6 +38158,28 @@
       "name": "Sciatica",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "scleromyxedema",
+      "name": "Scleromyxoedema",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -37230,6 +38396,28 @@
       }
     },
     {
+      "id": "susac_syndrome",
+      "name": "Susac syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "systemic_lupus_erythematosus",
       "name": "Systemic Lupus Erythematosus",
       "specialty": "Rheumatology / MSK",
@@ -37388,6 +38576,50 @@
       "name": "Trigger finger",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vexas_syndrome",
+      "name": "VEXAS syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vogt_koyanagi_harada_disease",
+      "name": "Vogt-Koyanagi-Harada disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Immunology",
       "tier": "reference",
       "caps": {
         "overview": true,
