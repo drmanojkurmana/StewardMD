@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 1205,
+    "diseases": 1261,
     "diagnostic": 141,
-    "reference": 1064,
+    "reference": 1120,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,13 +30,13 @@
     "differential": 99.5,
     "investigations": 99.8,
     "redFlags": 100,
-    "severity": 32.8,
+    "severity": 31.3,
     "prognosis": 99.3,
-    "diagnosticScoring": 11.7,
-    "management": 11.6,
-    "drugTherapy": 10.7,
-    "dosing": 10.7,
-    "stewardship": 4.2
+    "diagnosticScoring": 11.2,
+    "management": 11.1,
+    "drugTherapy": 10.2,
+    "dosing": 10.2,
+    "stewardship": 4
   },
   "bySpecialty": {
     "Pulmonology": {
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 108,
+      "total": 122,
       "diagnostic": 20,
-      "reference": 88,
+      "reference": 102,
       "dims": {
-        "overview": 108,
-        "clinicalFeatures": 108,
-        "pathophysiology": 108,
-        "differential": 108,
-        "investigations": 108,
-        "redFlags": 108,
+        "overview": 122,
+        "clinicalFeatures": 122,
+        "pathophysiology": 122,
+        "differential": 122,
+        "investigations": 122,
+        "redFlags": 122,
         "severity": 48,
-        "prognosis": 108,
+        "prognosis": 122,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 93,
+      "total": 121,
       "diagnostic": 10,
-      "reference": 83,
+      "reference": 111,
       "dims": {
-        "overview": 93,
-        "clinicalFeatures": 93,
-        "pathophysiology": 93,
-        "differential": 92,
-        "investigations": 93,
-        "redFlags": 93,
+        "overview": 121,
+        "clinicalFeatures": 121,
+        "pathophysiology": 121,
+        "differential": 120,
+        "investigations": 121,
+        "redFlags": 121,
         "severity": 33,
-        "prognosis": 91,
+        "prognosis": 119,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -539,6 +539,26 @@
         "stewardship": 0
       }
     },
+    "Immunology": {
+      "total": 17,
+      "diagnostic": 0,
+      "reference": 17,
+      "dims": {
+        "overview": 17,
+        "clinicalFeatures": 17,
+        "pathophysiology": 17,
+        "differential": 17,
+        "investigations": 17,
+        "redFlags": 17,
+        "severity": 1,
+        "prognosis": 17,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
     "Oral": {
       "total": 13,
       "diagnostic": 0,
@@ -752,26 +772,6 @@
         "redFlags": 2,
         "severity": 0,
         "prognosis": 2,
-        "diagnosticScoring": 0,
-        "management": 0,
-        "drugTherapy": 0,
-        "dosing": 0,
-        "stewardship": 0
-      }
-    },
-    "Immunology": {
-      "total": 3,
-      "diagnostic": 0,
-      "reference": 3,
-      "dims": {
-        "overview": 3,
-        "clinicalFeatures": 3,
-        "pathophysiology": 3,
-        "differential": 3,
-        "investigations": 3,
-        "redFlags": 3,
-        "severity": 1,
-        "prognosis": 3,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -4784,6 +4784,28 @@
       }
     },
     {
+      "id": "alkaptonuria",
+      "name": "Alkaptonuria",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "autoimmune_polyendocrine_syndromes",
       "name": "Autoimmune Polyendocrine Syndromes",
       "specialty": "Endocrine / Metabolic",
@@ -4810,6 +4832,28 @@
       "name": "Beriberi",
       "specialty": "Endocrine / Metabolic",
       "system": "Nutrition / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "biotinidase_deficiency",
+      "name": "Biotinidase deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -4876,6 +4920,28 @@
       "name": "Carcinoid syndrome",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrinology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "carnitine_deficiency",
+      "name": "Carnitine deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -4964,6 +5030,28 @@
       "name": "Cushing syndrome",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cystinosis",
+      "name": "Cystinosis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -5246,6 +5334,28 @@
       }
     },
     {
+      "id": "fabry_disease",
+      "name": "Fabry disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "folate_deficiency",
       "name": "Folate deficiency",
       "specialty": "Endocrine / Metabolic",
@@ -5272,6 +5382,28 @@
       "name": "Galactosemia",
       "specialty": "Endocrine / Metabolic",
       "system": "Genetic-metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gaucher_disease",
+      "name": "Gaucher disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -5334,6 +5466,28 @@
       }
     },
     {
+      "id": "glutaric_aciduria",
+      "name": "Glutaric aciduria",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "glycogen_storage_diseases_and_other",
       "name": "Glycogen Storage Diseases and Other Inherited Disorders of Carbohydrate Metabolism",
       "specialty": "Endocrine / Metabolic",
@@ -5347,6 +5501,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gm1_gangliosidosis",
+      "name": "GM1 gangliosidosis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -5400,10 +5576,76 @@
       }
     },
     {
+      "id": "homocystinuria",
+      "name": "Homocystinuria",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hungry_bone_syndrome",
       "name": "Hungry bone syndrome",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hunter_syndrome",
+      "name": "Hunter syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hurler_syndrome",
+      "name": "Hurler syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -5664,6 +5906,50 @@
       }
     },
     {
+      "id": "isovaleric_acidemia",
+      "name": "Isovaleric acidemia",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "krabbe_disease",
+      "name": "Krabbe disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "kwashiorkor",
       "name": "Kwashiorkor",
       "specialty": "Endocrine / Metabolic",
@@ -5818,6 +6104,28 @@
       }
     },
     {
+      "id": "medium_chain_acyl_coa_deficiency",
+      "name": "Medium-chain acyl-CoA dehydrogenase deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "menopause_and_postmenopausal_hormone_thera",
       "name": "Menopause and Postmenopausal Hormone Therapy",
       "specialty": "Endocrine / Metabolic",
@@ -5831,6 +6139,94 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "metachromatic_leukodystrophy",
+      "name": "Metachromatic leukodystrophy",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "methylmalonic_acidemia",
+      "name": "Methylmalonic acidemia",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mitochondrial_disease",
+      "name": "Mitochondrial disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mucopolysaccharidosis",
+      "name": "Mucopolysaccharidosis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -5928,6 +6324,28 @@
       }
     },
     {
+      "id": "niemann_pick_disease",
+      "name": "Niemann-Pick disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "obesity",
       "name": "Obesity",
       "specialty": "Endocrine / Metabolic",
@@ -5954,6 +6372,28 @@
       "name": "Obesity hypoventilation syndrome",
       "specialty": "Endocrine / Metabolic",
       "system": "Nutrition / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ornithine_transcarbamylase_deficiency",
+      "name": "Ornithine transcarbamylase deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6192,6 +6632,28 @@
       }
     },
     {
+      "id": "pompe_disease",
+      "name": "Pompe disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "porphyria",
       "name": "Porphyria",
       "specialty": "Endocrine / Metabolic",
@@ -6324,10 +6786,76 @@
       }
     },
     {
+      "id": "propionic_acidemia",
+      "name": "Propionic acidemia",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pyruvate_dehydrogenase_deficiency",
+      "name": "Pyruvate dehydrogenase deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "refeeding_syndrome",
       "name": "Refeeding syndrome",
       "specialty": "Endocrine / Metabolic",
       "system": "Nutrition / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sandhoff_disease",
+      "name": "Sandhoff disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6474,6 +7002,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tay_sachs_disease",
+      "name": "Tay-Sachs disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -6632,6 +7182,50 @@
       }
     },
     {
+      "id": "tyrosinemia",
+      "name": "Tyrosinemia",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "urea_cycle_disorder",
+      "name": "Urea cycle disorder",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "vipoma",
       "name": "VIPoma",
       "specialty": "Endocrine / Metabolic",
@@ -6702,6 +7296,28 @@
       "name": "Vitamin K deficiency",
       "specialty": "Endocrine / Metabolic",
       "system": "Nutrition / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "wolman_disease",
+      "name": "Wolman disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Genetic / Metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -13870,6 +14486,270 @@
       }
     },
     {
+      "id": "apeced",
+      "name": "APECED",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "autoimmune_lymphoproliferative",
+      "name": "Autoimmune lymphoproliferative syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chediak_higashi",
+      "name": "Chediak-Higashi syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "complement_c3_deficiency",
+      "name": "Complement C3 deficiency",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hyper_ige_syndrome",
+      "name": "Hyper-IgE syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hyper_igm_syndrome",
+      "name": "Hyper-IgM syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "interferon_gamma_defect",
+      "name": "Interferon-gamma pathway defect",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ipex_syndrome",
+      "name": "IPEX syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "job_syndrome",
+      "name": "Job syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "leukocyte_adhesion_deficiency",
+      "name": "Leukocyte adhesion deficiency",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mbl_deficiency",
+      "name": "Mannose-binding lectin deficiency",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nk_cell_deficiency",
+      "name": "Natural killer cell deficiency",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "perinatal_hiv",
       "name": "Perinatal HIV Infection",
       "specialty": "Immunology",
@@ -13927,6 +14807,50 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "wiskott_aldrich_syndrome",
+      "name": "Wiskott-Aldrich syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "x_linked_agammaglobulinemia",
+      "name": "X-linked agammaglobulinemia",
+      "specialty": "Immunology",
+      "system": "Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -17918,6 +18842,28 @@
       }
     },
     {
+      "id": "adrenoleukodystrophy",
+      "name": "Adrenoleukodystrophy",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "alcohol_and_alcohol_use_disorders",
       "name": "Alcohol and Alcohol Use Disorders",
       "specialty": "Neurology",
@@ -17931,6 +18877,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "alexander_disease",
+      "name": "Alexander disease",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -18072,6 +19040,28 @@
       }
     },
     {
+      "id": "blepharospasm",
+      "name": "Blepharospasm",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "brachial_neuritis",
       "name": "Brachial neuritis",
       "specialty": "Neurology",
@@ -18134,6 +19124,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "canavan_disease",
+      "name": "Canavan disease",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -18272,6 +19284,28 @@
     {
       "id": "CEREBRAL_VENOUS_THROMBOSIS",
       "name": "Cerebral venous sinus thrombosis",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "charcot_marie_tooth",
+      "name": "Charcot-Marie-Tooth disease",
       "specialty": "Neurology",
       "system": "Neurology",
       "tier": "reference",
@@ -18490,6 +19524,28 @@
       }
     },
     {
+      "id": "dejerine_sottas",
+      "name": "Dejerine-Sottas disease",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dementia_with_lewy_bodies",
       "name": "Dementia with Lewy Bodies",
       "specialty": "Neurology",
@@ -18503,6 +19559,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dentatorubral_pallidoluysian",
+      "name": "Dentatorubral-pallidoluysian atrophy",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -18798,6 +19876,50 @@
       }
     },
     {
+      "id": "hemifacial_spasm",
+      "name": "Hemifacial spasm",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hereditary_spastic_paraplegia",
+      "name": "Hereditary spastic paraplegia",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "huntington_disease",
       "name": "Huntington disease",
       "specialty": "Neurology",
@@ -18934,6 +20056,28 @@
       "name": "Juvenile Myoclonic Epilepsy",
       "specialty": "Neurology",
       "system": "Neurological",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kennedy_disease",
+      "name": "Kennedy disease",
+      "specialty": "Neurology",
+      "system": "Neurology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -19502,10 +20646,54 @@
       }
     },
     {
+      "id": "paroxysmal_dyskinesia",
+      "name": "Paroxysmal dyskinesia",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pathobiology_of_neurologic_diseases",
       "name": "Pathobiology of Neurologic Diseases",
       "specialty": "Neurology",
       "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pelizaeus_merzbacher",
+      "name": "Pelizaeus-Merzbacher disease",
+      "specialty": "Neurology",
+      "system": "Neurology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -19876,6 +21064,28 @@
       }
     },
     {
+      "id": "spinocerebellar_ataxia",
+      "name": "Spinocerebellar ataxia",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "spondylolisthesis",
       "name": "Spondylolisthesis",
       "specialty": "Neurology",
@@ -19900,6 +21110,28 @@
     {
       "id": "STATUS_EPILEPTICUS",
       "name": "Status epilepticus",
+      "specialty": "Neurology",
+      "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "stiff_person_syndrome",
+      "name": "Stiff-person syndrome",
       "specialty": "Neurology",
       "system": "Neurology",
       "tier": "reference",
