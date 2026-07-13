@@ -251,6 +251,21 @@
       return localStorage.getItem("smd_icu_v2") === "1";
     } catch (e) { return false; }
   }
+  // ICU v2 real-time collaboration (Phase 2, smd_icu_groups). ADDITIVE + GATED: only when v2 is
+  // on AND groups is on AND the collab module (icu-collab.js) loaded does the board/workspace read
+  // LIVE from Firestore; otherwise the Phase-1 LOCAL path is byte-for-byte unchanged. DEFAULT OFF;
+  // ?icugroups= overrides. The flag is read independently of the module so mode-gating is robust to
+  // load order (icu-collab.js loads after icu.js); live data ops check groupsApi() presence.
+  function icuGroupsOn() {
+    try {
+      var q = (location.search.match(/[?&]icugroups=([^&]+)/) || [])[1];
+      if (q != null) return q === "1" || q === "on" || q === "true";
+      return localStorage.getItem("smd_icu_groups") === "1";
+    } catch (e) { return false; }
+  }
+  function groupsApi() { try { return (typeof window !== "undefined" && window.SMD_ICU_GROUPS) || null; } catch (e) { return null; } }
+  function groupMode() { return icuV2On() && icuGroupsOn() && !!groupsApi(); }
+  function grpActive() { return groupMode() && !!(_grp && _grp.id); }
   // Modality family + filter bucket from the free-text study title (no structured
   // modality is exposed by GHIS). Original study title is preserved separately.
   function imgModality(title) {
@@ -1025,8 +1040,27 @@
       // v2 FAB positions (no bottom bar on the patient screen)
       '#icuRoot.icu-v2 #icuSnap{bottom:calc(24px + env(safe-area-inset-bottom))}' +
       '#icuRoot.icu-v2 #icuWatch{bottom:calc(90px + env(safe-area-inset-bottom))}' +
+      // ── group mode (smd_icu_groups, Phase 2) — additive, scoped under #icuRoot.icu-v2 ──
+      // unit switcher (the header title becomes a tappable group picker)
+      '#icuRoot.icu-v2 .icu-v2-gswitch{flex:1;min-width:0;border:none;background:none;color:inherit;text-align:left;cursor:pointer;padding:0;font:700 17px var(--font)}' +
+      // member-avatar stack (→ Team sheet)
+      '#icuRoot.icu-v2 .icu-v2-avatars{flex:0 0 auto;display:flex;align-items:center;border:none;background:none;cursor:pointer;padding:0}' +
+      '#icuRoot.icu-v2 .icu-v2-av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.22);color:#fff;font:700 10px var(--font);display:flex;align-items:center;justify-content:center;border:2px solid var(--primary);margin-left:-8px}' +
+      '#icuRoot.icu-v2 .icu-v2-av.more{background:rgba(255,255,255,.16)}' +
+      // live sync indicator (banner presence row) — Synced / Syncing / Offline
+      '#icuRoot.icu-v2 .icu-v2-sync{display:flex;align-items:center;gap:5px;font:600 11px var(--font);color:var(--ok);flex:0 0 auto}' +
+      '#icuRoot.icu-v2 .icu-v2-sync .icu-v2-dot{background:var(--ok)}' +
+      '#icuRoot.icu-v2 .icu-v2-sync.syncing{color:var(--warn)}#icuRoot.icu-v2 .icu-v2-sync.syncing .icu-v2-dot{background:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-sync.offline{color:var(--muted)}#icuRoot.icu-v2 .icu-v2-sync.offline .icu-v2-dot{background:var(--muted)}' +
+      // other viewers in the presence stack
+      '#icuRoot.icu-v2 .icu-v2-viewer.alt{background:var(--warn);margin-left:-6px;border:2px solid var(--panel)}' +
+      // "not reviewed" chip on a live card footer
+      '#icuRoot.icu-v2 .icu-v2-unrev{font:700 9px var(--font);color:var(--warn);background:var(--warn-soft);border-radius:999px;padding:2px 6px;margin-right:5px}' +
+      // shared instructions/timeline panel (Rounds tab)
+      '#icuRoot.icu-v2 .icu-v2-collab{margin-bottom:6px}' +
       // dark mode: v2 chrome inherits the token flip; only the badge cut-out border needs the darker teal
-      'body.dark #icuRoot.icu-v2 .icu-v2-ubadge{border-color:var(--primary2)}';
+      'body.dark #icuRoot.icu-v2 .icu-v2-ubadge{border-color:var(--primary2)}' +
+      'body.dark #icuRoot.icu-v2 .icu-v2-av{border-color:var(--primary2)}';
     var st = document.createElement("style"); st.id = "icu-css"; st.textContent = css;
     document.head.appendChild(st);
   }
@@ -2187,6 +2221,17 @@
   var _v2Filter = "all";       // v2 board acuity filter: "all" | "critical" | "review" | "stable"
   var _imgFilter = "all";      // Imaging Notes filter bucket
   var _imgOpen = {};           // imaging card index → expanded (full report)
+  // ---- ICU v2 group mode (smd_icu_groups, Phase 2) — live-collaboration state ----
+  var _grp = null;             // active group {id,name,unit,hospital,roles,members,myRole} | null
+  var _grpList = null;         // this user's groups (null = not loaded yet)
+  var _grpPatients = null;     // live board list from Firestore (null = loading)
+  var _grpPtId = null;         // open shared-patient doc id
+  var _grpPtVM = null;         // {patient,timeline,tasks} live view-model for the open patient
+  var _grpPresence = [];       // live viewers (excl. self)
+  var _grpErr = null;          // last collab error text (inline degrade; never crashes the board)
+  var _grpLastHash = null;     // last-synced patient-state hash (mirror echo-suppression)
+  var _grpMirrorT = null;      // debounce timer for the ICU_STATE → Firestore mirror
+  var _grpSubGroups = null, _grpSubPts = null, _grpSubPt = null, _grpSubPres = null;
 
   // Plain-language explanations for ICU jargon (A5) — content only, no logic change.
   var JARGON = {
@@ -2831,8 +2876,9 @@
         return '<div class="icu-v2-mv"><div class="icu-v2-mv-k">' + v.k + '</div><div class="icu-v2-mv-v">' + esc(v.val) + '</div></div>';
       }).join("") + '</div></div>';
   }
-  // Presence + sync line — Phase 1 is LOCAL/single-user (real presence arrives with Phase 2 Firestore).
+  // Presence + sync line — Phase 1 is LOCAL/single-user; group mode shows real viewers + live sync.
   function renderV2Presence() {
+    if (grpActive()) return renderV2PresenceGroup();
     return '<div class="icu-v2-presence">' +
       '<span class="icu-v2-viewer">' + esc(v2Initials(v2AccountName())) + '</span>' +
       '<span class="icu-v2-presence-tx">Only you are viewing · saved on this device</span>' +
@@ -2851,8 +2897,9 @@
       return '<button class="icu-v2-tab' + (t.on ? " on" : "") + '" data-icu-act="' + t.act + '">' + esc(t.label) + '</button>';
     }).join("") + '</div></div>';
   }
-  // Unit board — the "front door". Local roster only in Phase 1.
+  // Unit board — the "front door". Local roster in Phase 1; LIVE shared unit in group mode.
   function renderV2Board() {
+    if (groupMode()) return renderV2BoardGroup();   // Phase 2: live Firestore unit (additive, gated)
     var list = v2BoardList();
     var counts = { total: list.length, critical: 0, review: 0, stable: 0 };
     list.forEach(function (p) { counts[p.sev]++; });
@@ -2917,16 +2964,19 @@
       return '<button class="icu-v2-navbtn' + (_screen === it.k ? " on" : "") + '" data-icu-act="' + it.act + '"><span class="icu-v2-navic">' + ico(it.svg, it.em) + '</span><span>' + it.label + '</span></button>';
     }).join("") + '<button class="icu-v2-navbtn icu-v2-admit" data-icu-act="icuadmit"><span class="icu-v2-admit-ic">' + ico("plus", "＋") + '</span><span>Admit</span></button></div>';
   }
-  // Notifications — deterministic acuity across the local roster (real team events = Phase 2).
+  // Notifications — deterministic acuity across the roster (local in Phase 1; the LIVE shared unit
+  // in group mode). Real event-stream notifications land in a later phase.
   function renderV2Alerts() {
-    var list = v2BoardList(), rows = [];
+    var list = v2BoardListActive(), rows = [];
     list.forEach(function (p) {
       if (p.sev === "stable") return;
       rows.push({ id: p.id, sev: p.sev, title: V2_LABEL[p.sev] + " · Bed " + (p.bed || "—") + " · " + (p.name || "Patient"), body: v2Reason(p.snap) || "Review recommended" });
     });
     rows.sort(function (a, b) { return (a.sev === "critical" ? 0 : 1) - (b.sev === "critical" ? 0 : 1); });
     var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Notifications</div><div class="icu-v2-shead-s">Only clinically meaningful events</div></div></div>';
-    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Derived from each patient’s latest values on this device. Live team notifications from real events arrive in Phase 2.</div>';
+    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + (grpActive()
+      ? ' Derived from each patient’s latest values in this shared unit. Event-stream notifications (instructions, uploads, deterioration) arrive in a later phase.'
+      : ' Derived from each patient’s latest values on this device. Live team notifications from real events arrive in Phase 2.') + '</div>';
     var body = rows.length ? rows.map(function (r) {
       return '<button class="icu-v2-alert-row ' + r.sev + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '">' +
         '<span class="icu-v2-alert-ic">' + (r.sev === "critical" ? ico("warn", "⚠️") : ico("bell", "🔔")) + '</span>' +
@@ -2935,8 +2985,9 @@
     }).join("") : '<div class="icu-v2-empty2">No active alerts across your patients.</div>';
     return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-slist">' + note + body + '</div></div>';
   }
-  // Care team — Phase 1 shows the signed-in user only; multi-doctor units/roles = Phase 2.
+  // Care team — Phase 1 shows the signed-in user only; group mode shows the real unit roster + roles.
   function renderV2Team() {
+    if (grpActive()) return renderV2TeamGroup();
     var name = v2AccountName(), p = v2AccountProfile(), email = (p && p.email) || "";
     var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Care team</div><div class="icu-v2-shead-s">This device</div></div></div>';
     var member = '<div class="icu-v2-member"><span class="icu-v2-member-av">' + esc(v2Initials(name)) + '</span>' +
@@ -2945,6 +2996,401 @@
     var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Multi-doctor units, roles (who can give instructions vs. update status) and a shared audit trail arrive in Phase 2 (smd_icu_groups).</div>';
     return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-tlist">' + member + note + '</div></div>';
   }
+  /* ============================================================ ICU v2 GROUP MODE
+   * (smd_icu_groups, Phase 2) — the LIVE Firestore collaboration layer wired into the v2
+   * board/workspace. Everything here is ADDITIVE and gated on groupMode(); with the groups flag
+   * OFF, groupMode() is false and NONE of this runs — the Phase-1 LOCAL path (and, with v2 off,
+   * the classic UI) is byte-for-byte unchanged. icu-collab.js (window.SMD_ICU_GROUPS) owns all
+   * Firestore I/O; this section is presentation + lifecycle only. Never throws to the board.
+   */
+  function grpRoleLabel(r) {
+    var api = groupsApi(); if (api && api.roleLabel) { try { return api.roleLabel(r); } catch (e) {} }
+    var M = { head: "Unit Head", professor: "Professor", assistant: "Assistant Professor", senior_resident: "Senior Resident", junior_resident: "Junior Resident", intern: "Intern" };
+    return M[r] || (r ? String(r) : "Member");
+  }
+  function grpCanInstruct(role) { var api = groupsApi(); if (api && api.canInstruct) { try { return !!api.canInstruct(role); } catch (e) {} } return ["head", "professor", "assistant", "senior_resident"].indexOf(role) >= 0; }
+  function grpPrefKey() { return "smd_icu_active_group:" + (typeof ownerNow === "function" ? ownerNow() : "anon"); }
+  function grpPrefId() { try { return localStorage.getItem(grpPrefKey()) || ""; } catch (e) { return ""; } }
+  function grpById(id) { var l = _grpList || []; for (var i = 0; i < l.length; i++) if (l[i].id === id) return l[i]; return null; }
+  function grpErrText(e) {
+    var m = (e && (e.code || e.message)) || "";
+    if (/permission|denied|forbidden/i.test(m)) return "You don’t have permission for that in this unit.";
+    return "Couldn’t reach the shared unit — your changes are kept and will sync when you’re back online.";
+  }
+  // Only DERIVED alerts + volatile meta are excluded from the hash, so the mirror fires on real
+  // clinical changes but not on its own echo (or a no-op meta.updated bump).
+  function grpMirrorPayload(st) { var c; try { c = JSON.parse(JSON.stringify(st || {})); } catch (e) { c = {}; } c.alerts = []; if (c.meta) delete c.meta; return c; }
+  function grpStateHash(st) {
+    var s; try { s = JSON.stringify(grpMirrorPayload(st)); } catch (e) { s = ""; }
+    var h = 0; for (var i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) | 0; }
+    return (h >>> 0).toString(36) + ":" + s.length;
+  }
+  // Load a shared patient's state into ICU_STATE so every existing renderer/tab shows it. Sets the
+  // echo-suppression hash so the resulting reactive notify() does NOT bounce back to Firestore.
+  function grpApplyState(state, id) {
+    try {
+      Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (state[k] != null) ? clone(state[k]) : clone(DEFAULT_STATE[k]); });
+      STATE.patient._id = id;
+      _grpLastHash = grpStateHash(_raw);
+    } catch (e) {}
+  }
+  // The list source the board/alerts consume: LIVE shared unit when a group is active; empty while
+  // group mode is on but no unit is selected; the LOCAL roster otherwise (Phase-1 behaviour).
+  function v2BoardListActive() {
+    if (grpActive()) return grpEnrichedList();
+    if (groupMode()) return [];
+    return v2BoardList();
+  }
+  // Live docs → the same enriched card shape v2BoardList produces (deterministic acuity via the
+  // SAME v2Severity/v2Snapshot — single source of truth for scoring; the doc's stored severity is
+  // only a hint used server-side/for notifications).
+  function grpEnrichedList() {
+    var list = (_grpPatients || []).map(function (p) {
+      return { id: p.id, name: p.name, dx: p.dx, bed: p.bed, savedAt: p.savedAt || p.reviewedAt || null, state: p.state || {}, lastUpdate: p.lastUpdate, reviewedAt: p.reviewedAt, reviewedByName: p.reviewedByName, assignedTo: p.assignedTo };
+    });
+    list.forEach(function (p) {
+      p.sev = v2Severity(p.state); p.snap = v2Snapshot(p.state);
+      p.age = (p.state.patient && p.state.patient.age != null) ? p.state.patient.age : null;
+      p.sex = (p.state.patient && p.state.patient.sex) || "";
+      p.reviewed = !!p.reviewedAt;
+    });
+    var rank = { critical: 0, review: 1, stable: 2 };
+    list.sort(function (a, b) { var d = (rank[a.sev] || 9) - (rank[b.sev] || 9); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
+    return list;
+  }
+
+  /* --------------------------- subscription lifecycle (no listener leaks) --------------------- */
+  function grpEnsureGroupsSub() {
+    if (!groupMode()) return;
+    var api = groupsApi(); if (!api) return;
+    try { if (api.setSeverityFn) api.setSeverityFn(function (st) { try { return v2Severity(st); } catch (e) { return null; } }); } catch (e) {}
+    if (_grpSubGroups) return;
+    _grpSubGroups = api.subscribeGroups(function (groups) {
+      _grpList = groups || [];
+      if (_grp) {
+        var found = null, i; for (i = 0; i < _grpList.length; i++) if (_grpList[i].id === _grp.id) { found = _grpList[i]; break; }
+        _grp = found || null;                                   // unit may have been left / deleted
+        if (_grp) { try { if (api.setActiveGroup) api.setActiveGroup(_grp.id, _grp.myRole); } catch (e) {} }
+      }
+      if (!_grp && _grpList.length) {
+        var pref = grpPrefId(), sel = null, j; for (j = 0; j < _grpList.length; j++) if (_grpList[j].id === pref) { sel = _grpList[j]; break; }
+        grpSelect(sel || _grpList[0], true);
+      }
+      if (ICU.isOpen() && (_screen === "board" || _screen === "team")) paint();
+    });
+  }
+  function grpSelect(group, silent) {
+    if (!group) return;
+    var changed = !_grp || _grp.id !== group.id;
+    _grp = group;
+    try { localStorage.setItem(grpPrefKey(), group.id); } catch (e) {}
+    var api = groupsApi();
+    try { if (api && api.setActiveGroup) api.setActiveGroup(group.id, group.myRole); } catch (e) {}
+    if (changed) {
+      grpTeardownPatient();
+      if (_grpSubPts) { try { _grpSubPts(); } catch (e) {} _grpSubPts = null; }
+      _grpPatients = null; _grpErr = null;
+      if (api) _grpSubPts = api.subscribePatients(group.id, function (list) {
+        _grpPatients = list || [];
+        if (ICU.isOpen() && _screen === "board") paint();
+      });
+    }
+    if (!silent) { _screen = "board"; _paintTop = true; paint(); }
+  }
+  function grpTeardownPatient() {
+    if (_grpSubPt) { try { _grpSubPt(); } catch (e) {} _grpSubPt = null; }
+    if (_grpSubPres) { try { _grpSubPres(); } catch (e) {} _grpSubPres = null; }
+    if (_grpMirrorT) { try { clearTimeout(_grpMirrorT); } catch (e) {} _grpMirrorT = null; }
+    var api = groupsApi(); if (api && api.leavePatient) { try { api.leavePatient(); } catch (e) {} }
+    _grpPtId = null; _grpPtVM = null; _grpPresence = []; _grpLastHash = null;
+  }
+  // Open a shared patient: subscribe to the doc (+ timeline + tasks) + presence, join presence.
+  function grpOpenPatient(id) {
+    if (!grpActive() || !id) return;
+    if (id === _grpPtId) { _paintTop = true; paint(); return; }
+    grpTeardownPatient();
+    _grpPtId = id; _grpPtVM = null; _grpPresence = []; _grpErr = null;
+    var api = groupsApi(), gid = _grp.id;
+    if (api) {
+      _grpSubPt = api.subscribePatient(gid, id, function (vm) {
+        _grpPtVM = vm || null;
+        if (vm && vm.patient && vm.patient.state && grpStateHash(vm.patient.state) !== grpStateHash(_raw)) grpApplyState(vm.patient.state, id);
+        if (ICU.isOpen() && _screen === "patient") paint();
+      });
+      _grpSubPres = api.subscribePresence(gid, id, function (viewers) {
+        _grpPresence = viewers || [];
+        if (ICU.isOpen() && _screen === "patient") paint();
+      });
+      try { api.enterPatient(gid, id); } catch (e) {}
+    }
+    _active = "overview"; _ws = "overview"; _wsLast = {}; _paintTop = true; paint();
+  }
+  // Admit a NEW patient into the active unit: a blank workspace whose first edit creates the doc.
+  function grpAdmit() {
+    if (!grpActive()) return;
+    grpTeardownPatient();
+    var id = "p" + nowTs();
+    _grpPtId = id; _grpPtVM = { patient: null, timeline: [], tasks: [] }; _grpPresence = [];
+    Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = clone(DEFAULT_STATE[k]); });
+    STATE.patient._id = id;
+    _grpLastHash = null;                                        // force the first edit to create the shared doc
+    var api = groupsApi(), gid = _grp.id;
+    if (api) {
+      _grpSubPt = api.subscribePatient(gid, id, function (vm) {
+        _grpPtVM = vm || _grpPtVM;
+        if (vm && vm.patient && vm.patient.state && grpStateHash(vm.patient.state) !== grpStateHash(_raw)) grpApplyState(vm.patient.state, id);
+        if (ICU.isOpen() && _screen === "patient") paint();
+      });
+      _grpSubPres = api.subscribePresence(gid, id, function (v) { _grpPresence = v || []; if (ICU.isOpen() && _screen === "patient") paint(); });
+      try { api.enterPatient(gid, id); } catch (e) {}
+    }
+    _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); _paintTop = true; paint();
+    openForm("patient");
+  }
+
+  /* --------------------------- group-mode renderers (reuse the v2 classes) -------------------- */
+  function grpAvatarsHTML() {
+    var mem = (_grp && _grp.members) || [];
+    var meIni = esc(v2Initials(v2AccountName())), others = mem.length - 1;
+    return '<button class="icu-v2-avatars" data-icu-act="icuteam" aria-label="Care team"><span class="icu-v2-av">' + meIni + '</span>' +
+      (others > 0 ? '<span class="icu-v2-av more">+' + others + '</span>' : "") + '</button>';
+  }
+  function renderV2BoardGroup() {
+    var loadingGroups = (_grpList === null);
+    var errNote = _grpErr ? '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") + ' ' + esc(_grpErr) + '</div>' : "";
+    // Header: unit switcher + member avatars + notifications.
+    var gname = _grp ? (_grp.name || _grp.unit || "ICU unit") : (loadingGroups ? "Connecting…" : "Choose a unit");
+    var gsub = _grp
+      ? ((_grp.unit ? esc(_grp.unit) + " · " : "") + (grpActive() && _grpPatients ? _grpPatients.length + " patient" + (_grpPatients.length === 1 ? "" : "s") : "…") + (_grp.myRole ? " · " + esc(grpRoleLabel(_grp.myRole)) : ""))
+      : "Tap to open or create a shared unit";
+    var list = grpActive() ? grpEnrichedList() : [];
+    var counts = { total: list.length, critical: 0, review: 0, stable: 0 };
+    list.forEach(function (p) { counts[p.sev]++; });
+    var unread = counts.critical + counts.review;
+    var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
+      '<button class="icu-v2-ubtn" data-icu-act="icumore" aria-label="Settings">' + ico("settings", "⚙") + '</button>' +
+      '<button class="icu-v2-utitle icu-v2-gswitch" data-icu-act="grppick">' + esc(gname) + ' ▾<div class="icu-v2-usub">' + gsub + '</div></button>' +
+      (grpActive() ? grpAvatarsHTML() : "") +
+      '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
+      '</div>' + (grpActive() ? (
+        '<div class="icu-v2-strip">' +
+        '<button class="icu-v2-scount total' + (_v2Filter === "all" ? " on" : "") + '" data-icu-act="icufilter:all"><b>' + counts.total + '</b><span>Patients</span></button>' +
+        '<button class="icu-v2-scount crit' + (_v2Filter === "critical" ? " on" : "") + '" data-icu-act="icufilter:critical"><b>' + counts.critical + '</b><span>Critical</span></button>' +
+        '<button class="icu-v2-scount review' + (_v2Filter === "review" ? " on" : "") + '" data-icu-act="icufilter:review"><b>' + counts.review + '</b><span>Review</span></button>' +
+        '<button class="icu-v2-scount stable' + (_v2Filter === "stable" ? " on" : "") + '" data-icu-act="icufilter:stable"><b>' + counts.stable + '</b><span>Stable</span></button>' +
+        '</div>') : "") + '</div>';
+    // No unit selected → an inviting "open or create a unit" state.
+    if (!grpActive()) {
+      var body = loadingGroups
+        ? '<div class="icu-v2-empty"><div class="icu-v2-empty-t">Connecting to your shared units…</div></div>'
+        : '<div class="icu-v2-empty"><div class="icu-v2-empty-ic">' + ico("users", "👥") + '</div>' +
+          '<div class="icu-v2-empty-t">Work your ICU as a team</div>' +
+          '<p class="icu-v2-empty-p">Open or create a shared unit so your consultants and residents see the same patients, instructions and timeline — live, with a full audit trail.</p>' +
+          '<button class="icu-btn icu-v2-empty-cta" data-icu-act="grppick">' + ico("folder", "📋") + ' Open a unit</button>' +
+          '<button class="icu-btn ghost" data-icu-act="grpnew" style="margin-top:10px">' + ico("plus", "＋") + ' Create a unit</button></div>';
+      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + errNote + body + '</div></div>';
+    }
+    // Live unit board.
+    if (_grpPatients === null) {
+      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + errNote + '<div class="icu-v2-empty2">Loading patients…</div></div></div>';
+    }
+    if (!list.length) {
+      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + errNote + '<div class="icu-v2-empty">' +
+        '<div class="icu-v2-empty-ic">' + ico("pulse", "🫀") + '</div><div class="icu-v2-empty-t">No patients in this unit yet</div>' +
+        '<p class="icu-v2-empty-p">Admit the first patient — everyone in ' + esc(gname) + ' will see them instantly.</p>' +
+        '<button class="icu-btn icu-v2-empty-cta" data-icu-act="icuadmit">＋ Admit patient</button></div></div></div>';
+    }
+    var attn = list.filter(function (p) { return p.sev !== "stable"; });
+    var attnHTML = (_v2Filter === "all" && attn.length)
+      ? '<div class="icu-v2-sec-lbl">Needs your attention</div><div class="icu-v2-attn">' + attn.map(function (p) {
+          return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '">' +
+            '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
+            '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
+            '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || "Review recommended") + '</div></button>';
+        }).join("") + '</div>'
+      : "";
+    var chips = [{ k: "all", label: "All" }, { k: "critical", label: "Critical" }, { k: "review", label: "Needs review" }, { k: "stable", label: "Stable" }];
+    var filters = '<div class="icu-v2-filters">' + chips.map(function (c) {
+      return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '">' + esc(c.label) + '</button>';
+    }).join("") + '</div>';
+    var shown = _v2Filter === "all" ? list : list.filter(function (p) { return p.sev === _v2Filter; });
+    var cards = shown.length ? shown.map(function (p) {
+      var demo = (p.age != null) ? (p.age + (p.sex ? "/" + p.sex : "")) : "";
+      var vits = v2CardVitals(p.snap);
+      var lu = p.lastUpdate || null;
+      var footAv = esc(v2Initials(lu && lu.byName ? lu.byName : v2AccountName()));
+      var footTxt = lu && lu.text ? esc(lu.text) : (p.reviewed ? "Reviewed" : "Updated");
+      var footAgo = esc(fmtAgo((lu && lu.at) || p.savedAt) || fmtWhen((lu && lu.at) || p.savedAt));
+      return '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
+        '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
+        '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
+        '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
+        '<span class="icu-v2-pill ' + p.sev + '">' + V2_LABEL[p.sev] + '</span></div>' +
+        '<div class="icu-v2-vstrip">' + vits.map(function (v) {
+          return '<div class="icu-v2-vc ' + v.st + '"><div class="icu-v2-vk">' + v.k + '</div><div class="icu-v2-vv">' + esc(v.val) + '</div></div>';
+        }).join("") + '</div></div>' +
+        '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + footAv + '</span><span class="icu-v2-foot-txt">' + footTxt + '</span>' +
+        '<span class="icu-v2-foot-ago">' + (p.reviewed ? "" : '<span class="icu-v2-unrev">Not reviewed</span> ') + footAgo + '</span></div></button>';
+    }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
+    var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
+    return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + errNote + attnHTML + filters + cards + foot + '</div></div>';
+  }
+  function renderV2TeamGroup() {
+    var g = _grp, me = ownerNow();
+    var members = g.members || [];
+    var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">' + esc(g.name || "Care team") + '</div><div class="icu-v2-shead-s">' + members.length + ' member' + (members.length === 1 ? "" : "s") + (g.unit ? " · " + esc(g.unit) : "") + '</div></div></div>';
+    var rows = members.map(function (uid) {
+      var role = (g.roles && g.roles[uid]) || null, isMe = uid === me;
+      var nm = isMe ? v2AccountName() : grpRoleLabel(role);
+      var sub = isMe ? (grpRoleLabel(role) + " · you") : "Member of this unit";
+      var ini = isMe ? v2Initials(v2AccountName()) : grpRoleLabel(role).replace(/[^A-Za-z]/g, "").slice(0, 2).toUpperCase();
+      return '<div class="icu-v2-member"><span class="icu-v2-member-av">' + esc(ini || "DR") + '</span>' +
+        '<span class="icu-v2-member-id"><span class="icu-v2-member-nm">' + esc(nm) + '</span><span class="icu-v2-member-role">' + esc(sub) + '</span></span>' +
+        (isMe ? '<span class="icu-v2-member-state">You</span>' : '') + '</div>';
+    }).join("");
+    var canManage = g.myRole === "head" || g.myRole === "professor";
+    var invite = canManage ? '<button class="icu-btn" data-icu-act="grpinvite" style="margin-top:4px">' + ico("plus", "＋") + ' Invite doctor to this unit</button>' : "";
+    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Roles set who can give instructions vs. update status. Every change is stamped with author and time — a full audit trail for the unit.' + (canManage ? "" : " Only the unit head or a professor can change roles.") + '</div>';
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-tlist">' + rows + invite + note + '</div></div>';
+  }
+  function grpJoinNames(a) {
+    if (!a.length) return "";
+    if (a.length === 1) return a[0];
+    if (a.length === 2) return a[0] + " & " + a[1];
+    return a[0] + ", " + a[1] + " +" + (a.length - 2) + " more";
+  }
+  function grpSyncHTML() {
+    var s = "synced"; try { var api = groupsApi(); if (api && api.syncState) s = api.syncState(); } catch (e) {}
+    var label = s === "offline" ? "Offline" : s === "syncing" ? "Syncing…" : "Synced";
+    return '<span class="icu-v2-sync ' + s + '"><span class="icu-v2-dot"></span>' + label + '</span>';
+  }
+  function renderV2PresenceGroup() {
+    var viewers = _grpPresence || [];
+    var av = '<span class="icu-v2-viewer">' + esc(v2Initials(v2AccountName())) + '</span>';
+    viewers.slice(0, 3).forEach(function (v) { av += '<span class="icu-v2-viewer alt">' + esc(v2Initials(v.name)) + '</span>'; });
+    var txt = viewers.length ? (grpJoinNames(viewers.map(function (v) { return v.name; })) + (viewers.length === 1 ? " is" : " are") + " also viewing") : "Only you are viewing";
+    return '<div class="icu-v2-presence">' + av + '<span class="icu-v2-presence-tx">' + esc(txt) + '</span>' + grpSyncHTML() + '</div>';
+  }
+  function grpTlIcon(type) { var m = { round: "🩺", task: "✅", imaging: "🩻", abg: "🫁", vent: "🌬", pressor: "💉", note: "📝" }; return m[type] || "•"; }
+  // Prepended to the Rounds tab in group mode — the LIVE instructions/tasks + append-only timeline
+  // from subscribePatient, plus the reviewed state. (The no-type round-note composer is a later phase.)
+  function grpRoundsPanel() {
+    var vm = _grpPtVM;
+    if (!vm) return '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">Loading shared instructions & timeline…</p></div>';
+    var tasks = vm.tasks || [], tl = vm.timeline || [], pt = vm.patient || {};
+    var open = tasks.filter(function (t) { return t.status !== "done"; }).length;
+    var out = '<div class="icu-v2-collab">';
+    out += '<div class="icu-sec-lbl">' + ico("pulse", "🩺") + ' Shared unit — ' + esc((_grp && _grp.name) || "ICU") + '</div>';
+    out += '<div class="icu-card"><h3>Instructions &amp; tasks <span class="icu-phase">' + open + ' open</span></h3>';
+    if (tasks.length) {
+      out += tasks.map(function (t) {
+        var mark = t.status === "done" ? "☑" : t.status === "progress" ? "◐" : "☐";
+        var col = t.status === "done" ? "var(--ok)" : t.status === "progress" ? "var(--warn)" : "var(--muted)";
+        var meta = (t.due ? t.due : "") + (t.assignedByName ? (t.due ? " · " : "") + t.assignedByName : "") + (t.status === "done" && t.completedByName ? " · done by " + t.completedByName : "");
+        return '<div class="icu-row" style="align-items:flex-start;gap:8px"><button data-icu-act="grptask:' + encodeURIComponent(t.id) + '" aria-label="Cycle task status" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;color:' + col + '">' + mark + '</button>' +
+          '<span style="flex:1"><span style="' + (t.status === "done" ? "text-decoration:line-through;opacity:.6" : "") + '">' + esc(t.text) + '</span>' +
+          (meta ? '<span style="display:block;font:600 11px var(--font);color:var(--muted);margin-top:2px">' + esc(meta) + '</span>' : "") + '</span></div>';
+      }).join("");
+    } else {
+      out += '<p class="icu-doc-sub" style="margin:0">No open instructions. ' + (grpCanInstruct(_grp && _grp.myRole) ? "Give one on the round and it will appear here for the team." : "Awaiting a consultant instruction.") + '</p>';
+    }
+    out += '</div>';
+    var revTxt = pt.reviewedAt ? ("Reviewed " + (fmtAgo(pt.reviewedAt) || "") + (pt.reviewedByName ? " by " + pt.reviewedByName : "")) : "Mark reviewed";
+    out += '<button class="icu-btn ghost" data-icu-act="grpreviewed">' + ico("check", "✓") + ' ' + esc(revTxt) + '</button>';
+    out += '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("clock", "🕑") + ' Timeline</div>';
+    if (tl.length) {
+      out += '<div class="icu-card">' + tl.slice(0, 40).map(function (e) {
+        return '<div class="icu-row" style="align-items:flex-start;gap:8px;border-bottom:1px solid var(--border);padding:7px 0"><span style="flex:0 0 auto;font-size:15px">' + grpTlIcon(e.type) + '</span>' +
+          '<span style="flex:1"><b>' + esc(e.title || "Update") + '</b>' + (e.detail ? '<span style="display:block;color:var(--muted);font-size:12px;margin-top:1px">' + esc(e.detail) + '</span>' : "") +
+          '<span style="display:block;font:600 11px var(--font);color:var(--muted);margin-top:2px">' + esc((e.byName || "") + (e.byRole ? " · " + grpRoleLabel(e.byRole) : "") + (e.ts ? " · " + (fmtAgo(e.ts) || fmtWhen(e.ts)) : "")) + '</span></span></div>';
+      }).join("") + '</div>';
+    } else {
+      out += '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No timeline events yet. Actions on this patient appear here, author- and time-stamped.</p></div>';
+    }
+    out += '</div>';
+    return out;
+  }
+
+  /* --------------------------- group-mode action sheets + write actions ----------------------- */
+  function grpOpenPicker() {
+    ensureModal();
+    var list = _grpList || [];
+    var rows = list.length ? list.map(function (g) {
+      var active = _grp && _grp.id === g.id;
+      return '<button class="icu-btn ghost" data-icu-act="grpsel:' + encodeURIComponent(g.id) + '" style="justify-content:flex-start;text-align:left">' +
+        (active ? "● " : "") + '<span style="flex:1">' + esc(g.name || "ICU unit") + (g.unit ? " · " + esc(g.unit) : "") +
+        '<span style="display:block;font:600 11px var(--font);color:var(--muted)">' + esc(grpRoleLabel(g.myRole) + " · " + ((g.members || []).length) + " member" + ((g.members || []).length === 1 ? "" : "s")) + '</span></span></button>';
+    }).join("") : '<div class="icu-empty">' + (_grpList === null ? "Connecting to your shared units…" : "No shared units yet.") + '</div>';
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>Your ICU units</h3>' + rows +
+      '<button class="icu-btn" data-icu-act="grpnew" style="margin-top:10px">' + ico("plus", "＋") + ' Create a unit</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Close</button></div>';
+    modalEl.classList.add("on");
+  }
+  function grpOpenCreate() {
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>Create an ICU unit</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">A shared unit lets your team see the same patients, instructions and timeline live. You become the unit head.</p>' +
+      '<div class="icu-fld"><label for="grpNm">Unit name</label><input id="grpNm" type="text" placeholder="e.g. Medicine ICU"></div>' +
+      '<div class="icu-fld"><label for="grpUnit">Ward / unit (optional)</label><input id="grpUnit" type="text" placeholder="e.g. Unit I"></div>' +
+      '<div class="icu-fld"><label for="grpHosp">Hospital (optional)</label><input id="grpHosp" type="text" placeholder="e.g. GIMSR"></div>' +
+      '<button class="icu-btn" data-icu-act="grpcreate">Create unit</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  function grpVal(id) { try { var el = modalEl && modalEl.querySelector(id); return el ? String(el.value || "") : ""; } catch (e) { return ""; } }
+  function grpDoCreate() {
+    var api = groupsApi(); if (!api) return;
+    var nm = grpVal("#grpNm"); if (!nm.trim()) { if (window.toast) toast("Enter a unit name"); return; }
+    closeForm();
+    api.createGroup({ name: nm, unit: grpVal("#grpUnit"), hospital: grpVal("#grpHosp") }).then(function (id) {
+      if (window.toast) toast("Unit created");
+      var tries = 0, iv = setInterval(function () { var g = grpById(id); if (g) { clearInterval(iv); grpSelect(g, false); } else if (++tries > 40) clearInterval(iv); }, 150);
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t create the unit"); if (ICU.isOpen()) paint(); });
+  }
+  function grpOpenInvite() {
+    if (!grpActive()) return;
+    ensureModal();
+    var roles = (groupsApi() && groupsApi().ROLES) ? groupsApi().ROLES : ["head", "professor", "assistant", "senior_resident", "junior_resident", "intern"];
+    var opts = roles.map(function (r) { return '<option value="' + r + '"' + (r === "junior_resident" ? " selected" : "") + '>' + esc(grpRoleLabel(r)) + '</option>'; }).join("");
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>Invite a doctor</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">Add a colleague to <b>' + esc((_grp && _grp.name) || "this unit") + '</b> by their StewardMD user ID (uid). Roles set who can give instructions vs. update status.</p>' +
+      '<div class="icu-fld"><label for="grpInvUid">User ID (uid)</label><input id="grpInvUid" type="text" placeholder="Firebase uid"></div>' +
+      '<div class="icu-fld"><label for="grpInvRole">Role</label><select id="grpInvRole">' + opts + '</select></div>' +
+      '<button class="icu-btn" data-icu-act="grpinvitesend">Add to unit</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  function grpDoInvite() {
+    var api = groupsApi(); if (!api || !grpActive()) return;
+    var uid = grpVal("#grpInvUid").trim(), role = grpVal("#grpInvRole") || "junior_resident";
+    if (!uid) { if (window.toast) toast("Enter a user ID"); return; }
+    closeForm();
+    api.inviteMember(_grp.id, uid, role).then(function () { if (window.toast) toast("Added to unit"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t add — head/professor only"); if (ICU.isOpen()) paint(); });
+  }
+  function grpDoReviewed() {
+    var api = groupsApi(); if (!api || !grpActive() || !_grpPtId) return;
+    api.setReviewed(_grp.id, _grpPtId).then(function () { if (window.toast) toast("Marked reviewed"); }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+    try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Marked reviewed" }); } catch (e) {}
+  }
+  function grpCycleTask(taskId) {
+    var api = groupsApi(); if (!api || !grpActive() || !_grpPtId || !_grpPtVM) return;
+    var t = null, arr = _grpPtVM.tasks || []; for (var i = 0; i < arr.length; i++) if (arr[i].id === taskId) { t = arr[i]; break; }
+    if (!t) return;
+    var next = t.status === "pending" ? "progress" : t.status === "progress" ? "done" : "pending";
+    api.setTaskStatus(_grp.id, _grpPtId, taskId, next).then(function () {}, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+  }
+
+  // Rounds tab in group mode → prepend the LIVE shared instructions/tasks + audit timeline. The
+  // wrap is additive: with group mode off, grpActive() is false and the original Rounds is returned
+  // untouched (RENDER.rounds is already defined above, so this runs at load once).
+  (function () {
+    var _origRounds = RENDER.rounds;
+    RENDER.rounds = function () {
+      var base = _origRounds ? _origRounds.apply(RENDER, arguments) : "";
+      return grpActive() ? (grpRoundsPanel() + base) : base;
+    };
+  })();
+
   function paintV2() {
     if (!rootEl) return;
     var _osc = rootEl.querySelector(".icu-scroll");
@@ -4346,14 +4792,23 @@
       case "tab": if (icuV2On()) _screen = "patient"; _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
       case "ws": { if (icuV2On()) _screen = "patient"; _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
       // ---- ICU v2 (smd_icu_v2) — board / alerts / team / admit / filter, all flag-only ----
-      case "icuboard": _screen = "board"; _paintTop = true; paint(); break;
+      case "icuboard": if (grpActive()) grpTeardownPatient(); _screen = "board"; _paintTop = true; paint(); break;
       case "icualerts": _screen = "alerts"; _paintTop = true; paint(); break;
       case "icuteam": _screen = "team"; _paintTop = true; paint(); break;
-      case "icuadmit": _screen = "patient"; newPatient(); break;
+      case "icuadmit": _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); break;
       case "icumore": _screen = "patient"; _active = "more"; _ws = "more"; _paintTop = true; paint(); break;
-      case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
+      case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
       case "v2toggle": try { if (localStorage.getItem("smd_icu_v2") === "1") localStorage.removeItem("smd_icu_v2"); else localStorage.setItem("smd_icu_v2", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
+      // ---- ICU v2 group mode (smd_icu_groups, Phase 2) — unit switcher / create / invite / tasks ----
+      case "grppick": grpOpenPicker(); break;
+      case "grpsel": { var _gsel = grpById(decodeURIComponent(arg)); if (_gsel) grpSelect(_gsel, false); closeForm(); break; }
+      case "grpnew": grpOpenCreate(); break;
+      case "grpcreate": grpDoCreate(); break;
+      case "grpinvite": grpOpenInvite(); break;
+      case "grpinvitesend": grpDoInvite(); break;
+      case "grpreviewed": grpDoReviewed(); break;
+      case "grptask": grpCycleTask(decodeURIComponent(arg)); break;
       case "summary": openSummary(); break;
       case "printsummary": printSummary(); break;
       case "discharge": openDischarge(); break;
@@ -4558,6 +5013,7 @@
         rootEl.addEventListener("click", onClick);
       }
       rootEl.classList.toggle("icu-v2", icuV2On());   // v2 (smd_icu_v2) chrome is gated on this class
+      if (groupMode()) { try { grpEnsureGroupsSub(); } catch (e) {} }   // Phase 2: start the live unit subscription
       // BUG #14: an optional sub-tab id opens the dashboard directly on that workspace —
       // the syringe FAB opens Infusions (its actual purpose), distinct from the Home
       // "ICU" tile which opens Overview. No argument = unchanged (open at current tab).
@@ -4569,7 +5025,7 @@
       rootEl.classList.add("on");
       document.body.style.overflow = "hidden";
     },
-    close: function () { if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; },
+    close: function () { if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; try { grpTeardownPatient(); } catch (e) {} },
     isOpen: function () { return !!(rootEl && rootEl.classList.contains("on")); },
     // Drug Interactions entry point — delegates to drugs.js's window.MEDDRUGS.openInteractions,
     // the single shared MEDLIST overlay (Task 5/6), same as the "launch:interactions" action.
@@ -4620,6 +5076,25 @@
 
   // re-render the open dashboard whenever the state changes (any source)
   _subs.push(function () { if (ICU.isOpen()) paint(); });
+
+  // Group mode (Phase 2): mirror the open shared patient's ICU_STATE → Firestore on change
+  // (debounced). Echo-suppressed via the state hash so a remote snapshot we just applied never
+  // bounces back. Engine-scored source tags (ICU_STATE.src) are carried through by upsertPatient;
+  // only DERIVED alerts are stripped. Inert unless a shared patient is open in group mode.
+  _subs.push(function () {
+    if (!grpActive() || !_grpPtId || _screen !== "patient" || !ICU.isOpen()) return;
+    if (grpStateHash(_raw) === _grpLastHash) return;             // unchanged vs last synced → no write
+    if (_grpMirrorT) { try { clearTimeout(_grpMirrorT); } catch (e) {} }
+    _grpMirrorT = setTimeout(function () {
+      _grpMirrorT = null;
+      var h = grpStateHash(_raw); if (h === _grpLastHash) return;
+      _grpLastHash = h;
+      try {
+        var api = groupsApi();
+        if (api && api.upsertPatient) api.upsertPatient(_grp.id, _grpPtId, _raw, "Updated patient").then(function () { _grpErr = null; }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+      } catch (e) {}
+    }, 1500);
+  });
 
   // Per-account on-device isolation: attach to Firebase auth once it's loaded so
   // sign-in / sign-out / account-switch re-point the roster and clear a previous

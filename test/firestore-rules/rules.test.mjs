@@ -20,10 +20,19 @@ await env.withSecurityRulesDisabled(async (ctx) => {
   await setDoc(doc(db, "sharedCases/SMDLIVE1"), { code: "SMDLIVE1", ownerUid: "docA", ownerName: "Dr A", html: "<p>cholangitis</p>", text: "cholangitis", expiresAt: future });
   await setDoc(doc(db, "sharedCases/SMDEXPD1"), { code: "SMDEXPD1", ownerUid: "docA", ownerName: "Dr A", html: "<p>old</p>", text: "old", expiresAt: past });
   await setDoc(doc(db, "users/docA/cases/c1"), { note: "private A" });
+  // ICU collaboration unit: docA=head, docB=senior_resident (instructor), docD=intern
+  // (member but NOT an instructor). docC is a NON-member.
+  await setDoc(doc(db, "icuGroups/GRPI"), { name: "Medicine ICU · Unit I", unit: "Unit I", hospital: "GIMSR", createdBy: "docA", roles: { docA: "head", docB: "senior_resident", docD: "intern" }, members: ["docA", "docB", "docD"] });
+  await setDoc(doc(db, "icuGroups/GRPI/patients/p1"), { name: "R.K.", dx: "bacterial meningitis", bed: "1", state: {}, severity: "critical" });
+  await setDoc(doc(db, "icuGroups/GRPI/patients/p2"), { name: "S.M.", dx: "sepsis", bed: "5", state: {} });
+  await setDoc(doc(db, "icuGroups/GRPI/patients/p1/timeline/te1"), { by: "docA", type: "round", title: "Morning round", ts: now });
+  await setDoc(doc(db, "icuGroups/GRPI/patients/p1/tasks/tSeed"), { text: "Neuro obs hourly", status: "pending", assignedBy: "docA" });
 });
 const anon = env.unauthenticatedContext().firestore();
-const A = env.authenticatedContext("docA").firestore();
-const B = env.authenticatedContext("docB").firestore();
+const A = env.authenticatedContext("docA").firestore();   // head
+const B = env.authenticatedContext("docB").firestore();   // senior_resident (instructor)
+const C = env.authenticatedContext("docC").firestore();   // non-member
+const D = env.authenticatedContext("docD").firestore();   // intern (member, not instructor)
 
 // [operation, actualAllowed, expectedAllowed, guarantee]
 const cases = [
@@ -38,6 +47,25 @@ const cases = [
   ["delete own share (revoke)", await allowed(deleteDoc(doc(A, "sharedCases/SMDLIVE1"))), true, "#4 revocation"],
   ["read own private case", await allowed(getDoc(doc(A, "users/docA/cases/c1"))), true, "private ok for owner"],
   ["read another's private case", await allowed(getDoc(doc(B, "users/docA/cases/c1"))), false, "#3 private isolation"],
+
+  // ── ICU collaboration groups (icuGroups) ──────────────────────────────────
+  ["group: member reads unit", await allowed(getDoc(doc(A, "icuGroups/GRPI"))), true, "icu membership read"],
+  ["group: non-member reads unit", await allowed(getDoc(doc(C, "icuGroups/GRPI"))), false, "icu non-member denied"],
+  ["group: create own unit (self=head)", await allowed(setDoc(doc(C, "icuGroups/GRPNEW"), { name: "New", createdBy: "docC", roles: { docC: "head" }, members: ["docC"] })), true, "icu create as head"],
+  ["group: create with spoofed createdBy", await allowed(setDoc(doc(D, "icuGroups/GRPSPOOF"), { name: "X", createdBy: "docA", roles: { docD: "head" }, members: ["docD"] })), false, "icu no spoofed createdBy"],
+  ["group: create not-as-head", await allowed(setDoc(doc(C, "icuGroups/GRPJR"), { name: "X", createdBy: "docC", roles: { docC: "senior_resident" }, members: ["docC"] })), false, "icu creator must be head"],
+  ["task: instructor (senior_resident) creates", await allowed(setDoc(doc(B, "icuGroups/GRPI/patients/p1/tasks/tB"), { text: "ABG q6h", status: "pending", assignedBy: "docB" })), true, "icu instructor task-create"],
+  ["task: non-instructor (intern) creates", await allowed(setDoc(doc(D, "icuGroups/GRPI/patients/p1/tasks/tD"), { text: "x", status: "pending", assignedBy: "docD" })), false, "icu non-instructor task-create denied"],
+  ["task: member updates status", await allowed(updateDoc(doc(D, "icuGroups/GRPI/patients/p1/tasks/tSeed"), { status: "done" })), true, "icu any member completes"],
+  ["timeline: member creates as self", await allowed(setDoc(doc(B, "icuGroups/GRPI/patients/p1/timeline/eB"), { by: "docB", type: "note", title: "pressor up" })), true, "icu append-self allowed"],
+  ["timeline: create spoofing author", await allowed(setDoc(doc(B, "icuGroups/GRPI/patients/p1/timeline/eS"), { by: "docA", type: "note", title: "x" })), false, "icu author must be self"],
+  ["timeline: update (append-only)", await allowed(updateDoc(doc(A, "icuGroups/GRPI/patients/p1/timeline/te1"), { title: "edited" })), false, "icu timeline immutable"],
+  ["timeline: delete (append-only)", await allowed(deleteDoc(doc(A, "icuGroups/GRPI/patients/p1/timeline/te1"))), false, "icu timeline no-delete"],
+  ["presence: write self", await allowed(setDoc(doc(B, "icuGroups/GRPI/patients/p1/presence/docB"), { name: "Dr B", at: now })), true, "icu presence self"],
+  ["presence: write another", await allowed(setDoc(doc(B, "icuGroups/GRPI/patients/p1/presence/docD"), { name: "x", at: now })), false, "icu presence self-only"],
+  ["patient: member (intern) updates status", await allowed(setDoc(doc(D, "icuGroups/GRPI/patients/p1"), { name: "R.K.", dx: "sepsis" }, { merge: true })), true, "icu all members update status"],
+  ["patient: non-instructor deletes", await allowed(deleteDoc(doc(D, "icuGroups/GRPI/patients/p2"))), false, "icu delete needs instruct"],
+  ["patient: head deletes", await allowed(deleteDoc(doc(A, "icuGroups/GRPI/patients/p2"))), true, "icu head may delete"],
 ];
 await env.cleanup();
 

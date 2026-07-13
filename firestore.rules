@@ -55,6 +55,68 @@ service cloud.firestore {
                     && resource.data.ownerUid == request.auth.uid;
     }
 
+    // ── ICU collaboration groups (smd_icu_groups) ─────────────────────────────
+    // A shared, permissioned ICU unit. The access boundary is GROUP MEMBERSHIP:
+    // shared patient docs hold PHI, so only members may read/write within a group.
+    // Roles gate who may INSTRUCT (create tasks, delete patients) vs merely update
+    // status (all members). The timeline is an append-only audit trail.
+    match /icuGroups/{groupId} {
+      function grp(gid) { return get(/databases/$(database)/documents/icuGroups/$(gid)).data; }
+      function isMember(gid) { return request.auth != null && (request.auth.uid in grp(gid).members); }
+      function roleOf(gid) { return grp(gid).roles[request.auth.uid]; }
+      function canInstruct(gid) { return isMember(gid) && roleOf(gid) in ['head', 'professor', 'assistant', 'senior_resident']; }
+
+      // Read the unit if you are a member.
+      allow read: if isMember(groupId);
+
+      // Create: the creator must set THEMSELVES as the sole head and be in members.
+      allow create: if request.auth != null
+                    && request.auth.uid == request.resource.data.createdBy
+                    && request.resource.data.roles[request.auth.uid] == 'head'
+                    && (request.auth.uid in request.resource.data.members);
+
+      // Update (membership / role management): head or professor only. A member may
+      // never escalate their OWN role — roles[self] must be unchanged by the update.
+      allow update: if request.auth != null
+                    && (roleOf(groupId) == 'head' || roleOf(groupId) == 'professor')
+                    && request.resource.data.roles[request.auth.uid] == resource.data.roles[request.auth.uid];
+
+      // Delete the whole unit: head only.
+      allow delete: if roleOf(groupId) == 'head';
+
+      // Shared patient docs — every member may read + create/update status; only an
+      // instructing role may delete (discharge / remove) a patient.
+      match /patients/{pid} {
+        allow read: if isMember(groupId);
+        allow create, update: if isMember(groupId);
+        allow delete: if canInstruct(groupId);
+
+        // Append-only audit trail: a member may add an event authored AS THEMSELVES;
+        // events can NEVER be edited or deleted.
+        match /timeline/{eid} {
+          allow read: if isMember(groupId);
+          allow create: if isMember(groupId) && request.resource.data.by == request.auth.uid;
+          allow update, delete: if false;
+        }
+
+        // Tasks: only an instructing role may create / delete; ANY member may update
+        // (mark in-progress / complete).
+        match /tasks/{tid} {
+          allow read: if isMember(groupId);
+          allow create: if canInstruct(groupId);
+          allow update: if isMember(groupId);
+          allow delete: if canInstruct(groupId);
+        }
+
+        // Presence heartbeat: a member may read who's viewing; you may only write
+        // your OWN presence doc.
+        match /presence/{uid} {
+          allow read: if isMember(groupId);
+          allow write: if request.auth.uid == uid && isMember(groupId);
+        }
+      }
+    }
+
     // Everything else is denied.
     match /{document=**} {
       allow read, write: if false;

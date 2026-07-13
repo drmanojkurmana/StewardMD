@@ -106,3 +106,126 @@ scope (Phase 1 must not *regress* the suite — it does not).
 - **Rounds tasks / timeline split**, **Monitoring "Vitals" sub-tab**, **Care Plan "Interactions"
   sub-tab**, and the SBAR handover composer shown in the prototype — the prototype's richer per-tab
   layouts are Phase 2+; Phase 1 reuses the existing tab bodies verbatim.
+
+---
+
+# Phase 2 — collaboration backend (`smd_icu_groups`)
+
+**Flag:** `smd_icu_groups` (localStorage, **default OFF**) · URL override `?icugroups=1` / `?icugroups=0`.
+**Gate:** live collaboration is active only when **`icuV2On() && icuGroupsOn()` AND the collab module
+loaded AND a unit is selected** (`grpActive()`). With the groups flag OFF, `groupMode()` is false and
+**none** of the Phase-2 code runs — the Phase-1 LOCAL path is byte-for-byte identical (and, with v2
+also off, so is the classic UI).
+**Cache:** `index.html` `icu.js?v=gold364 → ?v=gold365`, new `icu-collab.js?v=gold365` added **after**
+the `icu.js` line; `sw.js` `CACHE stewardmd-gold364 → stewardmd-gold365`.
+
+## Files
+
+- **`icu-collab.js`** (new, root) → `window.SMD_ICU_GROUPS`. ES5 IIFE, buildless, **pure data +
+  Firestore subscription layer, NO DOM**. Every function is a safe no-op / graceful reject when the
+  flag is off, Firebase/Firestore is unavailable, or the user is signed out. Lazy `fs()` via
+  `SMD_loadFirebase` → `firebase.firestore()`; offline persistence enabled once
+  (`enablePersistence({synchronizeTabs:true}).catch(...)`, failure ignored). Roles enum
+  `head|professor|assistant|senior_resident|junior_resident|intern`; `canInstruct` set =
+  `head|professor|assistant|senior_resident`. Subscriptions are tracked so `unsubscribeAll()` +
+  per-subscription teardown never leak listeners. Presence heartbeat ~20s + visibilitychange;
+  `syncState()` → `synced|syncing|offline` from `navigator.onLine` + snapshot `metadata.fromCache/
+  hasPendingWrites` + writes-in-flight. `upsertPatient` carries `ICU_STATE.src` source tags through
+  unchanged (only DERIVED `alerts` stripped, like `savePatient`).
+- **`icu.js`** — additive group-mode layer, all gated on `groupMode()`/`grpActive()`:
+  flag readers `icuGroupsOn()/groupsApi()/groupMode()/grpActive()` (after `icuV2On()`, ~L254); group
+  state vars (`_grp`, `_grpList`, `_grpPatients`, `_grpPtId`, `_grpPtVM`, `_grpPresence`, `_grpErr`,
+  `_grpLastHash`, `_grpMirrorT`, subs) (~L2200); a new **ICU v2 GROUP MODE** section (renderers +
+  lifecycle + action sheets, ~L2960): `renderV2BoardGroup` (live unit board + unit switcher + member
+  avatars + notifications + no-unit state), `renderV2TeamGroup` (real members/roles + invite),
+  `renderV2PresenceGroup` (real viewers + `syncState()` indicator), `grpRoundsPanel` (live
+  instructions/tasks + append-only timeline, prepended to the Rounds tab), `grpEnsureGroupsSub`,
+  `grpSelect`, `grpOpenPatient`, `grpAdmit`, `grpTeardownPatient`, `grpApplyState`, `grpStateHash`,
+  the create/invite/task sheets and write actions; board/alerts/team/presence renderers branch to the
+  group variants at their top; `RENDER.rounds` is wrapped to prepend the live collab panel; `onClick`
+  gains `grppick / grpsel:<id> / grpnew / grpcreate / grpinvite / grpinvitesend / grpreviewed /
+  grptask:<id>` and branches `openpt/icuadmit/icuboard` into group mode; `ICU.open` starts the unit
+  subscription, `ICU.close` tears down the open-patient subs (stops the presence heartbeat); a
+  debounced, echo-suppressed `_subs` mirror pushes `ICU_STATE` → `upsertPatient` while a shared
+  patient is open. **No existing id / class / `data-icu-act` / global / string was renamed or
+  removed;** all new verbs are additive (colon-arg convention). New CSS is scoped under
+  `#icuRoot.icu-v2` and reuses existing tokens (no invented hex).
+- **`firestore.rules`** — `icuGroups` block inserted **before** the catch-all deny (see below).
+- **`test/firestore-rules/rules.test.mjs`** — extended with `icuGroups` guarantee cases (same style).
+
+## Firestore collections + rules added
+
+```
+icuGroups/{gid}                     { name, unit, hospital, createdBy, roles:{uid:role}, members:[uid], createdAt }
+icuGroups/{gid}/patients/{pid}      mirror of ICU_STATE + { severity, reviewedAt, reviewedBy, reviewedByName,
+                                      lastUpdate:{by,byName,text,at}, assignedTo }
+.../patients/{pid}/timeline/{eid}   { ts, type, title, detail, by, byName, byRole }   (append-only audit)
+.../patients/{pid}/tasks/{tid}      { text, status(pending|progress|done), assignedBy, assignedByName,
+                                      completedBy, completedByName, completedAt, due, ts }
+.../patients/{pid}/presence/{uid}   { name, at }
+```
+
+Rules boundary = **group membership** (shared docs hold PHI); **roles** gate who may *instruct*
+(create tasks, delete patients) vs merely *update status* (all members). Timeline is **append-only**
+(create-by-self only; update/delete denied). Presence is **self-write only**. Group create requires
+the creator sets themselves as the sole `head`; group update (membership/roles) is head|professor and
+a member cannot escalate their own role. The existing `users/**`, `sharedCases/**`, consent,
+`privacyRequests`, and catch-all rules are untouched. **caseshare EXTERNAL-share sanitisation is
+unchanged** — this is an internal member-only surface; existing disclaimers/consent posture stands.
+
+## Verification
+
+- `node --check icu.js` / `node --check icu-collab.js` → **PASS**.
+- Pure-logic transform check (temp harness, stubbed Firebase; removed before commit) — **43/43
+  assertions GREEN**: board-card mapping (incl. `src` preservation + name/dx/bed fallback), the
+  `canInstruct` role gate, task status transitions (done sets `completedBy/At`, others clear, invalid
+  → pending), timeline event shape, task builder, `sanitizeState` (strips alerts, keeps `src`).
+- Harness suite, **flags OFF** (the collab layer must be inert):
+
+  | Test | Result |
+  |---|---|
+  | run-golden / run-interactions / run-medlist / run-calc-guards | ✅ exit 0 |
+  | run-icu-nav | ✅ exit 0 (green on retry — documented first-visit Chrome flake) |
+  | run-icu-patient-switch / run-icu-alerts / run-icu-findpicker | ✅ exit 0 |
+  | run-icu-wardsync / run-icu-import / run-icu-safety-ux | ✅ exit 0 |
+  | run-icu-trends | ❌ 1 (`patient isolation … rows=1`) — **pre-existing on main** (matches Phase 1) |
+  | run-icu-dxflow | ❌ 1 (`tour resolves tokens … font`) — **pre-existing on main** |
+  | run-icu-labwatch | ❌ 1 (`#12 tap → Trends highlighted`) — **pre-existing on main** |
+  | run-safety-overlay | ❌ crash (`__ERR__SMD_SAFETY` headless load) — **pre-existing / env** |
+
+  **Net: zero regression.** Every failure is exactly the pre-existing set documented in Phase 1;
+  nothing that passes today regressed. `npm run build:www` → **exit 0** (`icu-collab.js` bundled into
+  `www/` and referenced in `www/index.html`).
+
+## Could NOT be verified in the sandbox
+
+- **Live Firestore sync** (real onSnapshot streaming, offline persistence + reconcile, presence
+  heartbeat, multi-device propagation) — needs a real signed-in Firebase project + ≥2 devices.
+- **Rules enforcement** — `@firebase/rules-unit-testing` and the Firestore emulator (a JDK) are NOT
+  installed here, so `test/firestore-rules/rules.test.mjs` is written correct but **not run**. The
+  rules were also not deployed (editing `firestore.rules` does not touch prod).
+
+## Owner-only go-live steps (do NOT do these here)
+
+1. **Deploy the rules:** `firebase deploy --only firestore:rules` (a PR to `firestore.rules` does NOT
+   deploy).
+2. **Run the rules emulator test** (needs a JDK + Firebase CLI): `cd test/firestore-rules` then
+   `firebase emulators:exec --only firestore --project demo-stewardmd "node rules.test.mjs"` — exit 0
+   = every `sharedCases` **and** `icuGroups` guarantee holds.
+3. **Enable the flag** for testers only (`localStorage['smd_icu_groups']='1'` or `?icugroups=1`); it is
+   default OFF in prod and this change does **not** enable it.
+4. **Multi-device test with real PHI:** two signed-in devices in one unit — create a unit, invite the
+   second user (by uid), admit a patient, confirm live board/patient sync, presence ("… are viewing"),
+   the Synced/Syncing/Offline indicator, the append-only timeline, task status changes, reviewed
+   stamping, and role gating (an intern can update status but cannot create tasks / delete a patient).
+
+## Known Phase-2 limitations (polish deferred to Phase 3/4)
+
+- **Member name resolution:** the group doc stores uids (no user directory), so the Team sheet shows
+  the signed-in user's real name for **self** and the **role label** as the identity proxy for other
+  members; invites are by **uid**. A directory/name-capture pass is deferred.
+- **Round-note composer** (the prototype's no-type tap-list of common instructions that create a task
+  **and** post a timeline event, plus automatic event-stream notifications) is **Phase 3**. Phase 2
+  ships the backend for it (`addTask`/`addTimelineEvent`) and READS/DISPLAYS the live tasks + timeline;
+  the interactive create surface wired here is limited to task **status** toggles + Mark reviewed.
+- **Loading/offline/empty-state polish, a11y sweep, and SBAR** remain Phase 4.
