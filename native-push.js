@@ -28,6 +28,12 @@
       var m = url && String(url).match(/[?&]ghisPatient=([^&]+)/);
       if (m && m[1] && window.GHIS && window.GHIS.openPatientById) { window.GHIS.openPatientById(decodeURIComponent(m[1])); return; }
     } catch (e) {}
+    // Medical Update deep link (/?u=<id>): open that guideline's card IN-APP (warm tap);
+    // if the app isn't ready yet, fall through to navigate — the on-load handler opens it.
+    try {
+      var mu = url && String(url).match(/[?&]u=([^&]+)/);
+      if (mu && mu[1] && window.SMD_openUpdate) { window.SMD_openUpdate(decodeURIComponent(mu[1])); return; }
+    } catch (e) {}
     try { if (url && url !== "/") window.location.href = url; } catch (e) {}
   }
 

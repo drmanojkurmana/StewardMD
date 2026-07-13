@@ -50,8 +50,10 @@ function firePush(context, item, workspace) {
   try { if (pushEnabled(context.env)) context.waitUntil(sendPushToAll(context.env, wsOpt)); } catch (e) {}
   try {
     if (nativePushEnabled(context.env)) {
+      // Tap target is an IN-APP deep link to this update's card (/?u=<id>) — NOT the
+      // external source URL, so tapping opens the summary in-app, not the PDF in Safari.
       const msg = item
-        ? { title: item.title || "StewardMD", body: (item.organization || item.source ? (item.organization || item.source) + " · " : "") + (item.category || "update"), url: item.url || "/", tag: item.id ? "smd-" + item.id : undefined }
+        ? { title: item.title || "StewardMD", body: (item.organization || item.source ? (item.organization || item.source) + " · " : "") + (item.category || "update"), url: item.id ? "/?u=" + item.id : "/", tag: item.id ? "smd-" + item.id : undefined }
         : { title: "StewardMD", body: "New medical update", url: "/" };
       context.waitUntil(sendNativeToAll(context.env, msg, wsOpt));
     }
