@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 869,
+    "diseases": 912,
     "diagnostic": 141,
-    "reference": 728,
+    "reference": 771,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,13 +30,13 @@
     "differential": 99.3,
     "investigations": 99.8,
     "redFlags": 100,
-    "severity": 45.5,
+    "severity": 43.3,
     "prognosis": 99,
-    "diagnosticScoring": 16.2,
-    "management": 16.1,
-    "drugTherapy": 14.8,
-    "dosing": 14.8,
-    "stewardship": 5.9
+    "diagnosticScoring": 15.5,
+    "management": 15.4,
+    "drugTherapy": 14.1,
+    "dosing": 14.1,
+    "stewardship": 5.6
   },
   "bySpecialty": {
     "Pulmonology": {
@@ -140,18 +140,18 @@
       }
     },
     "GI / Hepatology": {
-      "total": 83,
+      "total": 91,
       "diagnostic": 19,
-      "reference": 64,
+      "reference": 72,
       "dims": {
-        "overview": 83,
-        "clinicalFeatures": 83,
-        "pathophysiology": 83,
-        "differential": 82,
-        "investigations": 83,
-        "redFlags": 83,
+        "overview": 91,
+        "clinicalFeatures": 91,
+        "pathophysiology": 91,
+        "differential": 90,
+        "investigations": 91,
+        "redFlags": 91,
         "severity": 44,
-        "prognosis": 81,
+        "prognosis": 89,
         "diagnosticScoring": 19,
         "management": 19,
         "drugTherapy": 18,
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 39,
+      "total": 48,
       "diagnostic": 7,
-      "reference": 32,
+      "reference": 41,
       "dims": {
-        "overview": 39,
-        "clinicalFeatures": 39,
-        "pathophysiology": 39,
-        "differential": 38,
-        "investigations": 39,
-        "redFlags": 39,
+        "overview": 48,
+        "clinicalFeatures": 48,
+        "pathophysiology": 48,
+        "differential": 47,
+        "investigations": 48,
+        "redFlags": 48,
         "severity": 29,
-        "prognosis": 39,
+        "prognosis": 48,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -280,18 +280,18 @@
       }
     },
     "Nephrology": {
-      "total": 24,
+      "total": 38,
       "diagnostic": 6,
-      "reference": 18,
+      "reference": 32,
       "dims": {
-        "overview": 24,
-        "clinicalFeatures": 24,
-        "pathophysiology": 24,
-        "differential": 24,
-        "investigations": 24,
-        "redFlags": 24,
+        "overview": 38,
+        "clinicalFeatures": 38,
+        "pathophysiology": 38,
+        "differential": 38,
+        "investigations": 38,
+        "redFlags": 38,
         "severity": 13,
-        "prognosis": 24,
+        "prognosis": 38,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 51,
+      "total": 63,
       "diagnostic": 6,
-      "reference": 45,
+      "reference": 57,
       "dims": {
-        "overview": 51,
-        "clinicalFeatures": 51,
-        "pathophysiology": 51,
-        "differential": 51,
-        "investigations": 51,
-        "redFlags": 51,
+        "overview": 63,
+        "clinicalFeatures": 63,
+        "pathophysiology": 63,
+        "differential": 63,
+        "investigations": 63,
+        "redFlags": 63,
         "severity": 23,
-        "prognosis": 51,
+        "prognosis": 63,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -7614,6 +7614,28 @@
       }
     },
     {
+      "id": "colonic_pseudo_obstruction",
+      "name": "Acute colonic pseudo-obstruction",
+      "specialty": "GI / Hepatology",
+      "system": "GI / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "GASTROENTERITIS",
       "name": "Acute Gastroenteritis",
       "specialty": "GI / Hepatology",
@@ -7900,6 +7922,28 @@
       }
     },
     {
+      "id": "budd_chiari_syndrome",
+      "name": "Budd-Chiari syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "GI / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chronic_constipation",
       "name": "Chronic constipation",
       "specialty": "GI / Hepatology",
@@ -7935,6 +7979,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chronic_mesenteric_ischemia",
+      "name": "Chronic mesenteric ischaemia",
+      "specialty": "GI / Hepatology",
+      "system": "GI / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -8340,6 +8406,28 @@
       }
     },
     {
+      "id": "gi_stromal_tumor",
+      "name": "Gastrointestinal stromal tumour",
+      "specialty": "GI / Hepatology",
+      "system": "GI / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gastroparesis",
       "name": "Gastroparesis",
       "specialty": "GI / Hepatology",
@@ -8380,6 +8468,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gilbert_syndrome",
+      "name": "Gilbert syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "GI / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -8446,6 +8556,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hepatocellular_carcinoma",
+      "name": "Hepatocellular carcinoma",
+      "specialty": "GI / Hepatology",
+      "system": "GI / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -8732,6 +8864,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ischemic_colitis",
+      "name": "Ischaemic colitis",
+      "specialty": "GI / Hepatology",
+      "system": "GI / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -9110,6 +9264,28 @@
       }
     },
     {
+      "id": "short_bowel_syndrome",
+      "name": "Short bowel syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "GI / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sigmoid_volvulus",
       "name": "Sigmoid volvulus",
       "specialty": "GI / Hepatology",
@@ -9462,6 +9638,50 @@
       }
     },
     {
+      "id": "antithrombin_deficiency",
+      "name": "Antithrombin deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "aplastic_anemia",
+      "name": "Aplastic anaemia",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "beta_thalassemia",
       "name": "Beta Thalassaemia",
       "specialty": "Hematology",
@@ -9638,10 +9858,54 @@
       }
     },
     {
+      "id": "essential_thrombocythemia",
+      "name": "Essential thrombocythaemia",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "g6pd_deficiency",
       "name": "Glucose-6-Phosphate Dehydrogenase Deficiency",
       "specialty": "Hematology",
       "system": "Haematological",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hemolytic_uremic_syndrome",
+      "name": "Haemolytic uraemic syndrome",
+      "specialty": "Hematology",
+      "system": "Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -9752,6 +10016,28 @@
       "name": "Hemophagocytic Lymphohistiocytosis (HLH)",
       "specialty": "Hematology",
       "system": "Hematology / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hereditary_spherocytosis",
+      "name": "Hereditary spherocytosis",
+      "specialty": "Hematology",
+      "system": "Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -9946,6 +10232,28 @@
       }
     },
     {
+      "id": "myelodysplastic_syndrome",
+      "name": "Myelodysplastic syndrome",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "non_hodgkin_lymphoma",
       "name": "Non-Hodgkin's Lymphoma",
       "specialty": "Hematology",
@@ -9972,6 +10280,28 @@
       "name": "Paroxysmal nocturnal haemoglobinuria",
       "specialty": "Hematology",
       "system": "Hematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "paroxysmal_nocturnal",
+      "name": "Paroxysmal nocturnal haemoglobinuria",
+      "specialty": "Hematology",
+      "system": "Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -10100,6 +10430,28 @@
       }
     },
     {
+      "id": "primary_myelofibrosis",
+      "name": "Primary myelofibrosis",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sickle_cell_disease",
       "name": "Sickle Cell Disease",
       "specialty": "Hematology",
@@ -10179,6 +10531,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "von_willebrand_disease",
+      "name": "Von Willebrand disease",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -12630,10 +13004,76 @@
       }
     },
     {
+      "id": "alport_syndrome",
+      "name": "Alport syndrome",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "GOODPASTURE",
       "name": "Anti-GBM disease (Goodpasture)",
       "specialty": "Nephrology",
       "system": "Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "adpkd",
+      "name": "Autosomal dominant polycystic kidney disease",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "bartter_syndrome",
+      "name": "Bartter syndrome",
+      "specialty": "Nephrology",
+      "system": "Renal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -12674,10 +13114,98 @@
       }
     },
     {
+      "id": "contrast_induced_nephropathy",
+      "name": "Contrast-induced nephropathy",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "diabetic_kidney_disease",
+      "name": "Diabetic kidney disease",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fanconi_syndrome",
+      "name": "Fanconi syndrome",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "FSGS",
       "name": "Focal segmental glomerulosclerosis",
       "specialty": "Nephrology",
       "system": "Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gitelman_syndrome",
+      "name": "Gitelman syndrome",
+      "specialty": "Nephrology",
+      "system": "Renal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -12740,6 +13268,50 @@
       }
     },
     {
+      "id": "hypernatremia",
+      "name": "Hypernatraemia",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hyponatremia_siadh",
+      "name": "Hyponatraemia and SIADH",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "IGA_NEPHROPATHY",
       "name": "IgA nephropathy",
       "specialty": "Nephrology",
@@ -12784,10 +13356,54 @@
       }
     },
     {
+      "id": "lupus_nephritis",
+      "name": "Lupus nephritis",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "MEMBRANOUS_NEPHROPATHY",
       "name": "Membranous nephropathy",
       "specialty": "Nephrology",
       "system": "Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "metabolic_alkalosis",
+      "name": "Metabolic alkalosis",
+      "specialty": "Nephrology",
+      "system": "Renal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -12940,6 +13556,72 @@
     {
       "id": "poststreptococcal_glomerulonephritis",
       "name": "Post-streptococcal Glomerulonephritis",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rapidly_progressive_gn",
+      "name": "Rapidly progressive glomerulonephritis",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "renal_artery_stenosis",
+      "name": "Renal artery stenosis",
+      "specialty": "Nephrology",
+      "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "renal_tubular_acidosis",
+      "name": "Renal tubular acidosis",
       "specialty": "Nephrology",
       "system": "Renal",
       "tier": "reference",
@@ -18020,6 +18702,50 @@
       }
     },
     {
+      "id": "adult_still_disease",
+      "name": "Adult-onset Still's disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ankylosing_spondylitis",
+      "name": "Ankylosing spondylitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acl_injury",
       "name": "Anterior cruciate ligament injury",
       "specialty": "Rheumatology / MSK",
@@ -18099,6 +18825,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "behcet_disease",
+      "name": "Behçet disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -18262,6 +19010,28 @@
       }
     },
     {
+      "id": "dermatomyositis",
+      "name": "Dermatomyositis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "developmental_dysplasia_of_hip",
       "name": "Developmental Dysplasia of the Hip",
       "specialty": "Rheumatology / MSK",
@@ -18385,6 +19155,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "granulomatosis_polyangiitis",
+      "name": "Granulomatosis with polyangiitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -18658,6 +19450,28 @@
       }
     },
     {
+      "id": "mixed_connective_tissue",
+      "name": "Mixed connective tissue disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "nutritional_rickets",
       "name": "Nutritional Rickets",
       "specialty": "Rheumatology / MSK",
@@ -18790,6 +19604,28 @@
       }
     },
     {
+      "id": "polyarteritis_nodosa",
+      "name": "Polyarteritis nodosa",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pmr",
       "name": "Polymyalgia rheumatica",
       "specialty": "Rheumatology / MSK",
@@ -18808,6 +19644,72 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "polymyositis",
+      "name": "Polymyositis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "psoriatic_arthritis",
+      "name": "Psoriatic arthritis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "raynaud_phenomenon",
+      "name": "Raynaud phenomenon",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -18904,6 +19806,28 @@
       "name": "Scoliosis",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sjogren_syndrome",
+      "name": "Sjögren syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -19072,6 +19996,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "takayasu_arteritis",
+      "name": "Takayasu arteritis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
