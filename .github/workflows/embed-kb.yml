@@ -1,0 +1,60 @@
+name: Embed KB into Vectorize
+
+# Embeds EVERY KB disease (diagnostic + reference) and upserts the vectors into
+# the `stewardmd-kb` Vectorize index that the hybrid-retrieval vector arm
+# (functions/api/retrieve) queries. Run this after a KB content change so the
+# newly-added diseases become semantically searchable (until then they retrieve
+# via the client's offline lexical arm only).
+#
+# One-tap from the GitHub app: Actions -> "Embed KB into Vectorize" -> Run workflow.
+# Gated by the `production` Environment (same one-tap approval as the Worker deploy).
+#
+# Needs repo/Environment secret CLOUDFLARE_API_TOKEN with BOTH:
+#   - Workers AI: Read/Run   (to embed with @cf/baai/bge-base-en-v1.5)
+#   - Vectorize: Edit        (to upsert into stewardmd-kb)
+# CLOUDFLARE_ACCOUNT_ID falls back to the project's public account id if no secret.
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: embed-kb
+  cancel-in-progress: false
+
+jobs:
+  embed:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || '5476a757e49205bd1cce40b144eb59a9' }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # 1. Build docs + embed every disease (writes kb/dist/kb.disease-vectors.ndjson)
+      - name: Embed all diseases (bge-base-en-v1.5, 768-d)
+        run: node kb/tools/build-disease-vectors.mjs --embed
+
+      # 2. Sanity-check the vector file before touching the live index
+      - name: Verify vector file
+        run: |
+          test -s kb/dist/kb.disease-vectors.ndjson || { echo "no vectors produced"; exit 1; }
+          n=$(wc -l < kb/dist/kb.disease-vectors.ndjson)
+          echo "vectors to upsert: $n"
+          dims=$(head -1 kb/dist/kb.disease-vectors.ndjson | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).values.length))")
+          echo "dimensions: $dims"
+          test "$dims" = "768" || { echo "unexpected embedding dimension $dims (index expects 768)"; exit 1; }
+
+      # 3. Upsert into the live Vectorize index (idempotent — overwrites existing ids)
+      - name: Upsert into stewardmd-kb
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || '5476a757e49205bd1cce40b144eb59a9' }}
+          command: vectorize upsert stewardmd-kb --file kb/dist/kb.disease-vectors.ndjson
