@@ -229,3 +229,137 @@ unchanged** — this is an internal member-only surface; existing disclaimers/co
   ships the backend for it (`addTask`/`addTimelineEvent`) and READS/DISPLAYS the live tasks + timeline;
   the interactive create surface wired here is limited to task **status** toggles + Mark reviewed.
 - **Loading/offline/empty-state polish, a11y sweep, and SBAR** remain Phase 4.
+
+---
+
+# ICU v2 Redesign — Phase 3 Implementation Results
+
+**Branch:** `feat/icu-v2-redesign` · **Flags:** `smd_icu_v2` + `smd_icu_groups` (both **default OFF**).
+**Cache:** `index.html` `icu.js?v=gold365 → ?v=gold366` and `icu-collab.js?v=gold365 → ?v=gold366`;
+`sw.js` `CACHE stewardmd-gold365 → stewardmd-gold366`.
+**Scope:** everything ADDITIVE and gated on **`grpActive()`** (a shared unit is selected in group
+mode). No engine / threshold / unit assumption / `ingest*` write-contract / `ICU_STATE` shape change;
+no id / class / `data-icu-act` / global / string rename; `.on` visibility toggle unchanged; reused the
+existing design tokens (no invented hex). **Flag(s) OFF ⇒ byte-for-byte Phase-1 / classic.** All Phase-3
+code lives in `icu.js` (renderers + lifecycle + the new pure transforms); `icu-collab.js` was NOT
+changed — the notification feed derives from the patients snapshot already subscribed in `icu.js`, so
+no new backend primitive (`subscribeUnitFeed`) was needed.
+
+## What shipped (Phase 3 = round-note→tasks+timeline · auto audit timeline · smart notifications · presence/audit)
+
+### 1. Round-note composer (`renderV2RoundNote`, `_screen === "round"`)
+Reached from the Rounds tab **"＋ Add round note / instruction"** button (`data-icu-act="grpround"`,
+wired into `grpRoundsPanel`). Full-screen composer matching the prototype: intro line, a tap-list of
+common instruction presets (`ROUND_PRESETS` — the prototype's set, editable), a "Add your own"
+input + **Add**, and a sticky **"Post N instruction(s) to timeline"** button. No typing required for
+the common path.
+
+- **On Post**, the pure `grpRoundPlan(instructions, canInstruct, authorName)` maps the chosen list →
+  `{ tasks[], event }`:
+  - **Instructors** (`SMD_ICU_GROUPS.canInstruct(myRole)` → head / professor / assistant /
+    senior_resident): each instruction becomes a tracked **task** (`addTask`), **and** exactly **one**
+    summarising timeline event is posted — `{type:'round', title:'Round instruction — <name>',
+    detail:'<N> instructions given'}` (one per round, never one per task).
+  - **Non-instructors:** no tracked tasks — a single plain note event `{type:'note', title:'Round
+    note — <name>', detail:'<instructions joined>'}`. Role-gated in the UI; `firestore.rules` +
+    `addTask`'s `forbidden-role` reject are the real boundary.
+- Returns to the Rounds tab; the live `subscribePatient` view-model re-renders the new task + event.
+- Toggling a task to **done** (`grptask:` → `setTaskStatus`) now **also** writes a
+  `{type:'task', title:'Task completed — <text>'}` timeline event (audit trail).
+
+### 2. Automatic timeline (audit trail — residents never hand-maintain a log)
+Meaningful clinical actions self-log as author-stamped timeline events. **Implementation note (honest
+deviation from the "wrap each `ICU.ingest*`" suggestion):** the events are derived by a **diff at the
+existing state→Firestore mirror chokepoint**, not by wrapping the individual ingest methods. Rationale:
+many write paths (manual forms via `openImportReview`, ICU Snapshot's internal `ingestFromWard`, the
+calculator infusion bridge, imaging) call the **internal** ingest functions directly rather than
+`ICU.ingest*`, so wrapping the public methods would miss them. Diffing at the mirror covers **every**
+path through one seam, and the mirror's existing **~1.5 s debounce** is the natural de-dupe/coalesce
+window while its **state-hash echo-suppression** (a remote snapshot we just applied re-baselines the
+hash *and* `_grpPrevSync`) guarantees we **never emit from our own echo**. Because we hold both the
+previous and next fragments, **old→new** diffs are cheap.
+
+`grpDiffEvents(prev, next)` (pure, DOM-free) covers:
+- **Vitals** → "Vitals updated" (+ MAP / HR / SpO₂ of the new reading).
+- **ABG** → "ABG uploaded" (+ pH / pCO₂ / HCO₃).
+- **Ventilator** → "Ventilator settings changed" (mode / FiO₂ / PEEP; **old→new** for FiO₂/PEEP when
+  the previous value is known, else just the new).
+- **Infusions** → "<drug> started" (new line) or "<drug> changed" (Rate old → new when known).
+- **Imaging** → "Imaging added — <study>" (or "N studies" for a batch).
+- **Labs** → source-aware: "Ward Sync — labs updated" when the changed keys' `src.source` is Ward
+  Sync, else "Labs updated"; collapsed to one event per burst (never one per analyte).
+
+A burst from one Snapshot/Ward-Sync import coalesces into per-domain events (typically ≤4:
+labs / vitals / ABG / vent). The mirror also now stamps a **"what changed"** `lastUpdate.text`
+(`grpChangeSummary` → the first event's title, or "First +N more") so the board card footer and the
+notification feed show the real change instead of a generic "Updated patient".
+
+### 3. Smart notifications (only clinically meaningful events)
+`renderV2AlertsGroup` builds the Alerts screen from LIVE data via the pure
+`grpDeriveNotifs(patients, ptVM, myUid, now)`. Surfaced (newest first, deduped by key, capped at 30):
+- **Critical acuity / deterioration** → **URGENT** row (from each patient's derived severity/reason).
+- **Consultant instruction assigned to me** — an open-patient task where `assignedTo == myUid` (or a
+  new `round` timeline event).
+- **Task completed**, **investigation/imaging added**, **med / vent / ABG changed** — from the open
+  patient's live tasks/timeline; plus each **other** patient's "what changed" `lastUpdate.text`.
+- Each row: icon, "Bed X · Name — <event>", who/when, taps to the patient. Plain notes are not
+  surfaced (fatigue control).
+- **Unread bell badge** on the board header = `grpUnreadCount(rows, lastSeen)` where `lastSeen` is a
+  per-user localStorage timestamp `smd_icu_notif_seen:<owner>`, set (badge cleared) when Alerts opens.
+- **Optional device notification (best-effort, guarded):** if `window.SMD_localNotify` exists, a NEW
+  critical event fires one native local notification (reuses the `native-push.js` path); absent ⇒
+  silent no-op. De-duped via `_grpNotifiedTs`, seeded to "now" on unit selection so the first snapshot
+  never retro-fires the whole roster. The in-app feed is the deliverable.
+
+**Derive-from-snapshot limitation (by design):** unit-wide detection reads only what each patient doc
+already carries (`severity` / `lastUpdate` / `reviewedAt` / `assignedTo`) — no N per-patient timeline
+listeners are opened. Rich per-event rows exist only for the **currently-open** patient (its live
+timeline/tasks). A full per-event unit feed (its own streamed collection) is a later refinement.
+
+### 4. Presence + audit surfacing
+- Patient banner presence line (`renderV2PresenceGroup`) shows real viewer initials + a **"N viewing"**
+  count (from `_grpPresence`), and the **Synced / Syncing / Offline** indicator reflects
+  `SMD_ICU_GROUPS.syncState()`.
+- Rounds tasks show **assigner + completer + due**; the Timeline now shows an **author avatar** chip
+  (initials) + role + time (`.icu-v2-tlav`) — the human-visible audit trail.
+
+## Verification (from the worktree root)
+
+- `node --check icu.js` / `node --check icu-collab.js` → **PASS**.
+- **Pure-logic node check** (temp `test/run-icu-phase3-logic.mjs`, **removed before commit**) — drives
+  Chrome and asserts the real DOM-free seams `ICU._grpRoundPlan` / `_grpDiffEvents` / `_grpChangeSummary`
+  / `_grpDeriveNotifs` / `_grpUnreadCount`: **26/26 GREEN** (round→plan mapping incl. instructor vs
+  non-instructor + blank filtering; the auto-timeline describe-change incl. old→new vent, infusion
+  start/rate, ABG, imaging, source-aware labs, and the no-change/echo case; the notification derive
+  incl. critical/assigned/what-changed/task/round rows + newest-first + "Updated patient" suppression;
+  and unread-vs-last-seen counts). A throwaway stubbed-API UI smoke (no Firestore, in `/tmp`) also
+  confirmed the composer/notifications/presence render + flow end-to-end (16/16).
+- **Full flag-OFF harness suite** (`smd_icu_groups` OFF ⇒ no Phase-3 code runs) — measured against a
+  pre-change baseline on this branch. **Zero regression** — the only failures are the exact
+  pre-existing set:
+
+  | harness | before | after |
+  | --- | --- | --- |
+  | run-icu-nav / run-icu-patient-switch / run-icu-alerts / run-icu-safety-ux | ✅ exit 0 | ✅ exit 0 |
+  | run-icu-wardsync / run-icu-import | ✅ exit 0 | ✅ exit 0 |
+  | run-golden / run-interactions / run-medlist / run-calc-guards | ✅ exit 0 | ✅ exit 0 |
+  | run-icu-findpicker | ❌ 1 (`documentation-only … 0 alerts`) | ❌ 1 (identical) — **pre-existing** |
+  | run-icu-trends | ❌ 1 (`patient isolation … rows=1`) | ❌ 1 (identical) — **pre-existing** |
+  | run-icu-dxflow | ❌ 1 (`tour resolves tokens … font`) | ❌ 1 (identical) — **pre-existing** |
+  | run-icu-labwatch | ❌ 1 (`#12 tap → Trends highlighted`) | ❌ 1 (identical) — **pre-existing** |
+
+- `npm run build:www` → **exit 0** (bundle re-assembled; `icu.js`/`icu-collab.js` at `?v=gold366`).
+
+## Could NOT be verified in the sandbox (needs live Firestore / owner)
+
+- **Live sync of the new writes** — real `onSnapshot` propagation of the round-note tasks + `round`
+  timeline event, the auto-timeline events, completed-task events, and `lastUpdate.text` across ≥2
+  devices; offline queue + reconcile of these writes.
+- **Rules enforcement** of the instruct-gate on the new `addTask` calls (an intern's Post must be
+  rejected server-side) — the Firestore emulator (a JDK) is not installed here.
+- **Real presence "N viewing"** with ≥2 signed-in devices; the **`syncState()`** transitions under
+  real network loss.
+- **Device notification** — `window.SMD_localNotify` only fires on the native build (native-push.js);
+  the guarded best-effort call is a no-op on web/headless, so it is exercised only by code review here.
+- The notification **derive-from-snapshot** model (see §3) is intentional; a full per-event unit feed
+  is deferred.

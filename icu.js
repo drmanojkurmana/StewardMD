@@ -1058,6 +1058,25 @@
       '#icuRoot.icu-v2 .icu-v2-unrev{font:700 9px var(--font);color:var(--warn);background:var(--warn-soft);border-radius:999px;padding:2px 6px;margin-right:5px}' +
       // shared instructions/timeline panel (Rounds tab)
       '#icuRoot.icu-v2 .icu-v2-collab{margin-bottom:6px}' +
+      // ── Phase 3: round-note composer + timeline author avatar + smart-notification feed ──
+      '#icuRoot.icu-v2 .icu-v2-addround{border:2px dashed var(--primary3);background:var(--panel2);color:var(--primary);box-shadow:none}' +
+      '#icuRoot.icu-v2 .icu-v2-tlav{width:16px;height:16px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 8px var(--font);display:inline-flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-rscroll{padding:14px 16px;display:flex;flex-direction:column;gap:10px}' +
+      '#icuRoot.icu-v2 .icu-v2-rpre{display:flex;flex-direction:column;gap:9px}' +
+      '#icuRoot.icu-v2 .icu-v2-rchip{display:flex;align-items:center;gap:12px;text-align:left;background:var(--panel);border:2px solid var(--border);border-radius:14px;padding:14px 15px;cursor:pointer;color:var(--ink)}' +
+      '#icuRoot.icu-v2 .icu-v2-rchip.on{border-color:var(--primary);background:var(--primary-soft)}' +
+      '#icuRoot.icu-v2 .icu-v2-rbox{width:26px;height:26px;flex:0 0 auto;border-radius:8px;border:2px solid var(--border);background:var(--panel);color:var(--primary);display:flex;align-items:center;justify-content:center;font:700 14px var(--font)}' +
+      '#icuRoot.icu-v2 .icu-v2-rchip.on .icu-v2-rbox{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '#icuRoot.icu-v2 .icu-v2-rtx{flex:1;min-width:0;font:600 15px var(--font);color:var(--ink)}' +
+      '#icuRoot.icu-v2 .icu-v2-rx{flex:0 0 auto;color:var(--muted);font:700 13px var(--font)}' +
+      '#icuRoot.icu-v2 .icu-v2-rcustom{display:flex;gap:8px;align-items:center}' +
+      '#icuRoot.icu-v2 .icu-v2-rcustom input{flex:1;min-width:0;border:1px solid var(--border);border-radius:10px;padding:11px 12px;font:600 14px var(--font);color:var(--ink);background:var(--panel2)}' +
+      '#icuRoot.icu-v2 .icu-v2-rcustom .icu-btn{width:auto;flex:0 0 auto;margin-top:0;padding:0 16px;min-height:44px}' +
+      '#icuRoot.icu-v2 .icu-v2-rpost{flex:0 0 auto;background:var(--panel);border-top:1px solid var(--border);padding:12px 16px calc(16px + env(safe-area-inset-bottom))}' +
+      '#icuRoot.icu-v2 .icu-v2-rpost .icu-btn{margin-top:0}#icuRoot.icu-v2 .icu-v2-rpost .icu-btn[disabled]{opacity:.5;cursor:default;filter:none}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-ic{font-size:18px}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-ago{display:block;font:600 11px var(--font);color:var(--muted);margin-top:5px}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-row.fresh{background:var(--primary-soft)}' +
       // dark mode: v2 chrome inherits the token flip; only the badge cut-out border needs the darker teal
       'body.dark #icuRoot.icu-v2 .icu-v2-ubadge{border-color:var(--primary2)}' +
       'body.dark #icuRoot.icu-v2 .icu-v2-av{border-color:var(--primary2)}';
@@ -2232,6 +2251,12 @@
   var _grpLastHash = null;     // last-synced patient-state hash (mirror echo-suppression)
   var _grpMirrorT = null;      // debounce timer for the ICU_STATE → Firestore mirror
   var _grpSubGroups = null, _grpSubPts = null, _grpSubPt = null, _grpSubPres = null;
+  // ---- ICU v2 Phase 3 (round-note composer + auto-timeline + smart notifications) ----
+  var _grpPrevSync = null;     // last-synced mirror payload — the auto-timeline diff baseline (null = no baseline yet)
+  var _roundSel = {};          // round-note composer: preset index → chosen (true)
+  var _roundExtra = [];        // round-note composer: custom instructions the user added
+  var _roundText = "";         // round-note composer: current "add your own" input (kept across re-renders)
+  var _grpNotifiedTs = 0;      // best-effort device-notify de-dupe: newest critical ts already notified
 
   // Plain-language explanations for ICU jargon (A5) — content only, no logic change.
   var JARGON = {
@@ -2967,6 +2992,7 @@
   // Notifications — deterministic acuity across the roster (local in Phase 1; the LIVE shared unit
   // in group mode). Real event-stream notifications land in a later phase.
   function renderV2Alerts() {
+    if (grpActive()) return renderV2AlertsGroup();   // Phase 3: live smart-notification feed
     var list = v2BoardListActive(), rows = [];
     list.forEach(function (p) {
       if (p.sev === "stable") return;
@@ -3032,6 +3058,7 @@
       Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (state[k] != null) ? clone(state[k]) : clone(DEFAULT_STATE[k]); });
       STATE.patient._id = id;
       _grpLastHash = grpStateHash(_raw);
+      _grpPrevSync = grpMirrorPayload(_raw);   // Phase 3: re-baseline the auto-timeline diff to the applied remote state (no re-emit)
     } catch (e) {}
   }
   // The list source the board/alerts consume: LIVE shared unit when a group is active; empty while
@@ -3088,10 +3115,12 @@
     try { if (api && api.setActiveGroup) api.setActiveGroup(group.id, group.myRole); } catch (e) {}
     if (changed) {
       grpTeardownPatient();
+      _grpNotifiedTs = nowTs();   // Phase 3: seed device-notify baseline so the first snapshot never retro-fires the roster
       if (_grpSubPts) { try { _grpSubPts(); } catch (e) {} _grpSubPts = null; }
       _grpPatients = null; _grpErr = null;
       if (api) _grpSubPts = api.subscribePatients(group.id, function (list) {
         _grpPatients = list || [];
+        grpNotifTick();   // Phase 3: best-effort device notification for a NEW critical event
         if (ICU.isOpen() && _screen === "board") paint();
       });
     }
@@ -3102,7 +3131,7 @@
     if (_grpSubPres) { try { _grpSubPres(); } catch (e) {} _grpSubPres = null; }
     if (_grpMirrorT) { try { clearTimeout(_grpMirrorT); } catch (e) {} _grpMirrorT = null; }
     var api = groupsApi(); if (api && api.leavePatient) { try { api.leavePatient(); } catch (e) {} }
-    _grpPtId = null; _grpPtVM = null; _grpPresence = []; _grpLastHash = null;
+    _grpPtId = null; _grpPtVM = null; _grpPresence = []; _grpLastHash = null; _grpPrevSync = null;
   }
   // Open a shared patient: subscribe to the doc (+ timeline + tasks) + presence, join presence.
   function grpOpenPatient(id) {
@@ -3115,6 +3144,7 @@
       _grpSubPt = api.subscribePatient(gid, id, function (vm) {
         _grpPtVM = vm || null;
         if (vm && vm.patient && vm.patient.state && grpStateHash(vm.patient.state) !== grpStateHash(_raw)) grpApplyState(vm.patient.state, id);
+        grpNotifTick();
         if (ICU.isOpen() && _screen === "patient") paint();
       });
       _grpSubPres = api.subscribePresence(gid, id, function (viewers) {
@@ -3134,11 +3164,13 @@
     Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = clone(DEFAULT_STATE[k]); });
     STATE.patient._id = id;
     _grpLastHash = null;                                        // force the first edit to create the shared doc
+    _grpPrevSync = grpMirrorPayload(_raw);                      // Phase 3: blank baseline so the first edits self-log to the timeline
     var api = groupsApi(), gid = _grp.id;
     if (api) {
       _grpSubPt = api.subscribePatient(gid, id, function (vm) {
         _grpPtVM = vm || _grpPtVM;
         if (vm && vm.patient && vm.patient.state && grpStateHash(vm.patient.state) !== grpStateHash(_raw)) grpApplyState(vm.patient.state, id);
+        grpNotifTick();
         if (ICU.isOpen() && _screen === "patient") paint();
       });
       _grpSubPres = api.subscribePresence(gid, id, function (v) { _grpPresence = v || []; if (ICU.isOpen() && _screen === "patient") paint(); });
@@ -3166,7 +3198,8 @@
     var list = grpActive() ? grpEnrichedList() : [];
     var counts = { total: list.length, critical: 0, review: 0, stable: 0 };
     list.forEach(function (p) { counts[p.sev]++; });
-    var unread = counts.critical + counts.review;
+    // Phase 3: the bell badge = count of meaningful UNSEEN events (per-user last-seen), not raw acuity.
+    var unread = grpActive() ? grpUnreadCount(grpNotifRows(), grpNotifSeen()) : (counts.critical + counts.review);
     var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
       '<button class="icu-v2-ubtn" data-icu-act="icumore" aria-label="Settings">' + ico("settings", "⚙") + '</button>' +
       '<button class="icu-v2-utitle icu-v2-gswitch" data-icu-act="grppick">' + esc(gname) + ' ▾<div class="icu-v2-usub">' + gsub + '</div></button>' +
@@ -3268,7 +3301,7 @@
     var viewers = _grpPresence || [];
     var av = '<span class="icu-v2-viewer">' + esc(v2Initials(v2AccountName())) + '</span>';
     viewers.slice(0, 3).forEach(function (v) { av += '<span class="icu-v2-viewer alt">' + esc(v2Initials(v.name)) + '</span>'; });
-    var txt = viewers.length ? (grpJoinNames(viewers.map(function (v) { return v.name; })) + (viewers.length === 1 ? " is" : " are") + " also viewing") : "Only you are viewing";
+    var txt = viewers.length ? (grpJoinNames(viewers.map(function (v) { return v.name; })) + (viewers.length === 1 ? " is" : " are") + " also viewing · " + (viewers.length + 1) + " viewing") : "Only you are viewing";
     return '<div class="icu-v2-presence">' + av + '<span class="icu-v2-presence-tx">' + esc(txt) + '</span>' + grpSyncHTML() + '</div>';
   }
   function grpTlIcon(type) { var m = { round: "🩺", task: "✅", imaging: "🩻", abg: "🫁", vent: "🌬", pressor: "💉", note: "📝" }; return m[type] || "•"; }
@@ -3295,14 +3328,19 @@
       out += '<p class="icu-doc-sub" style="margin:0">No open instructions. ' + (grpCanInstruct(_grp && _grp.myRole) ? "Give one on the round and it will appear here for the team." : "Awaiting a consultant instruction.") + '</p>';
     }
     out += '</div>';
+    // No-type round-note composer (Phase 3). Instructors post tracked tasks + one timeline event;
+    // everyone else can post a plain (untracked) note. Rules enforce the write boundary too.
+    var roundLbl = grpCanInstruct(_grp && _grp.myRole) ? "Add round note / instruction" : "Add a note";
+    out += '<button class="icu-btn ghost icu-v2-addround" data-icu-act="grpround">' + ico("plus", "＋") + ' ' + roundLbl + '</button>';
     var revTxt = pt.reviewedAt ? ("Reviewed " + (fmtAgo(pt.reviewedAt) || "") + (pt.reviewedByName ? " by " + pt.reviewedByName : "")) : "Mark reviewed";
     out += '<button class="icu-btn ghost" data-icu-act="grpreviewed">' + ico("check", "✓") + ' ' + esc(revTxt) + '</button>';
     out += '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("clock", "🕑") + ' Timeline</div>';
     if (tl.length) {
       out += '<div class="icu-card">' + tl.slice(0, 40).map(function (e) {
+        var by = (e.byName || "") + (e.byRole ? " · " + grpRoleLabel(e.byRole) : "") + (e.ts ? " · " + (fmtAgo(e.ts) || fmtWhen(e.ts)) : "");
         return '<div class="icu-row" style="align-items:flex-start;gap:8px;border-bottom:1px solid var(--border);padding:7px 0"><span style="flex:0 0 auto;font-size:15px">' + grpTlIcon(e.type) + '</span>' +
           '<span style="flex:1"><b>' + esc(e.title || "Update") + '</b>' + (e.detail ? '<span style="display:block;color:var(--muted);font-size:12px;margin-top:1px">' + esc(e.detail) + '</span>' : "") +
-          '<span style="display:block;font:600 11px var(--font);color:var(--muted);margin-top:2px">' + esc((e.byName || "") + (e.byRole ? " · " + grpRoleLabel(e.byRole) : "") + (e.ts ? " · " + (fmtAgo(e.ts) || fmtWhen(e.ts)) : "")) + '</span></span></div>';
+          '<span style="display:flex;align-items:center;gap:5px;margin-top:3px"><span class="icu-v2-tlav">' + esc(v2Initials(e.byName || "")) + '</span><span style="font:600 11px var(--font);color:var(--muted)">' + esc(by) + '</span></span></span></div>';
       }).join("") + '</div>';
     } else {
       out += '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No timeline events yet. Actions on this patient appear here, author- and time-stamped.</p></div>';
@@ -3378,6 +3416,285 @@
     if (!t) return;
     var next = t.status === "pending" ? "progress" : t.status === "progress" ? "done" : "pending";
     api.setTaskStatus(_grp.id, _grpPtId, taskId, next).then(function () {}, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+    // Completing a task self-logs an author-stamped audit event (see the auto-timeline set).
+    if (next === "done") { try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "task", title: "Task completed — " + (t.text || "task") }); } catch (e) {} }
+  }
+
+  /* ============================================================ ICU v2 PHASE 3
+   * Round-note composer → tasks + one timeline event · automatic audit timeline ·
+   * smart notifications · presence/audit surfacing. Everything here is gated on grpActive()
+   * (a shared unit is selected); with the groups flag OFF none of it runs. The DETERMINISTIC
+   * transforms below (grpRoundPlan / grpDiffEvents / grpDeriveNotifs / grpUnreadCount) are PURE
+   * and DOM-free — exposed as ICU._grp* test seams and unit-tested without Firestore.
+   */
+  // Common round instructions (editable). The prototype's exact set. Presets → tracked tasks.
+  var ROUND_PRESETS = ["Increase Noradrenaline", "Repeat ABG in 2 hours", "Maintain MAP above 65", "Nephrology review", "Reduce sedation", "Evening review"];
+
+  // PURE: a chosen list of instructions → the tasks to create + the ONE summarising timeline
+  // event (never one event per task). Instructors create tracked tasks; everyone else posts a
+  // plain (untracked) note — the UI role-gates and firestore.rules enforce the real boundary.
+  function grpRoundPlan(instructions, canInstruct, authorName) {
+    instructions = (instructions || []).filter(function (s) { return s && String(s).trim(); }).map(function (s) { return String(s).trim(); });
+    authorName = authorName || "Clinician";
+    var n = instructions.length;
+    if (!n) return { tasks: [], event: null };
+    if (canInstruct) {
+      var tasks = instructions.map(function (s) { return { text: s }; });
+      return { tasks: tasks, event: { type: "round", title: "Round instruction — " + authorName, detail: n + " instruction" + (n === 1 ? "" : "s") + " given" } };
+    }
+    return { tasks: [], event: { type: "note", title: "Round note — " + authorName, detail: instructions.join("; ") } };
+  }
+
+  /* --------------------------- automatic timeline (audit trail) ------------------------------- */
+  // PURE, DOM-free change-descriptors. Given two sanitised state fragments (prev → next) return
+  // the meaningful clinical actions between them. Implemented as a DIFF at the mirror chokepoint
+  // (NOT by wrapping each ICU.ingest*) so EVERY write path — manual forms, ICU Snapshot, Ward
+  // Sync, imaging, the calculator bridge — is covered through one seam, and a burst of ingests
+  // from one import naturally COALESCES into per-domain events (the mirror is debounced ~1.5s and
+  // echo-suppressed, so a remote snapshot we just applied never re-emits). old→new diffs are cheap
+  // here because we hold both fragments; where a previous value is unknown we emit just the new.
+  function grpObjDiff(a, b, keys) {
+    a = a || {}; b = b || {};
+    for (var i = 0; i < keys.length; i++) { var k = keys[i]; if (String(a[k] == null ? "" : a[k]) !== String(b[k] == null ? "" : b[k])) return true; }
+    return false;
+  }
+  function grpLastVit(st) { var arr = (st && st.vitals) || []; return arr.length ? arr[arr.length - 1] : null; }
+  function grpFmtVit(v) {
+    if (!v) return "";
+    var p = [];
+    if (v.map != null) p.push("MAP " + v.map);
+    if (v.hr != null) p.push("HR " + v.hr);
+    if (v.spo2 != null) p.push("SpO₂ " + v.spo2 + "%");
+    return p.join(" · ");
+  }
+  function grpDiffEvents(prev, next) {
+    prev = prev || {}; next = next || {};
+    var ev = [];
+    // Vitals — a new/changed latest reading.
+    var pv = grpLastVit(prev), nv = grpLastVit(next);
+    if (nv && JSON.stringify(nv) !== JSON.stringify(pv)) ev.push({ type: "note", title: "Vitals updated", detail: grpFmtVit(nv) });
+    // ABG.
+    var pa = prev.abg || {}, na = next.abg || {};
+    if (grpObjDiff(pa, na, ["ph", "paco2", "pao2", "hco3", "fio2", "be"])) {
+      var ad = [];
+      if (na.ph != null) ad.push("pH " + na.ph);
+      if (na.paco2 != null) ad.push("pCO₂ " + na.paco2);
+      if (na.hco3 != null) ad.push("HCO₃ " + na.hco3);
+      ev.push({ type: "abg", title: "ABG uploaded", detail: ad.join(" · ") });
+    }
+    // Ventilator — old→new for FiO₂/PEEP when the previous value is known.
+    var pvt = prev.ventilator || {}, nvt = next.ventilator || {};
+    if (grpObjDiff(pvt, nvt, ["mode", "fio2", "peep", "tv", "rr", "plateau"])) {
+      var vd = [];
+      if (nvt.mode != null && nvt.mode !== "") vd.push("Mode " + nvt.mode);
+      if (nvt.fio2 != null) vd.push("FiO₂ " + (pvt.fio2 != null && String(pvt.fio2) !== String(nvt.fio2) ? pvt.fio2 + "→" : "") + nvt.fio2 + "%");
+      if (nvt.peep != null) vd.push("PEEP " + (pvt.peep != null && String(pvt.peep) !== String(nvt.peep) ? pvt.peep + "→" : "") + nvt.peep);
+      ev.push({ type: "vent", title: "Ventilator settings changed", detail: vd.join(" · ") });
+    }
+    // Infusions — started (new drug) or rate changed (old→new when known).
+    var pm = {}; (prev.infusions || []).forEach(function (i) { if (i && i.drug) pm[String(i.drug).toLowerCase()] = i; });
+    (next.infusions || []).forEach(function (i) {
+      if (!i || !i.drug) return;
+      var k = String(i.drug).toLowerCase(), old = pm[k];
+      var rate = (i.rateMlHr != null ? i.rateMlHr + " mL/h" : (i.dose != null ? i.dose + " " + (i.unit || "") : ""));
+      if (!old) { ev.push({ type: "pressor", title: i.drug + " started", detail: rate }); return; }
+      var oldR = (old.rateMlHr != null ? old.rateMlHr : old.dose), newR = (i.rateMlHr != null ? i.rateMlHr : i.dose);
+      if (oldR != null && newR != null && String(oldR) !== String(newR)) ev.push({ type: "pressor", title: i.drug + " changed", detail: "Rate " + oldR + " → " + newR });
+    });
+    // Imaging — new studies added.
+    var pim = {}; (prev.imaging || []).forEach(function (r) { if (r && r.id) pim[r.id] = 1; });
+    var newImg = (next.imaging || []).filter(function (r) { return r && r.id && !pim[r.id]; });
+    if (newImg.length === 1) ev.push({ type: "imaging", title: "Imaging added — " + (newImg[0].studyName || "study"), detail: "" });
+    else if (newImg.length > 1) ev.push({ type: "imaging", title: "Imaging added — " + newImg.length + " studies", detail: "" });
+    // Labs — source-aware (Ward Sync vs Manual), collapsed to one event per burst.
+    var pl = (prev.labs && prev.labs.recent) || {}, nl = (next.labs && next.labs.recent) || {};
+    var changed = []; Object.keys(nl).forEach(function (k) { if (String(nl[k]) !== String(pl[k])) changed.push(k); });
+    if (changed.length) {
+      var src = next.src || {}, ward = 0; changed.forEach(function (k) { if (src[k] && /ward/i.test(src[k].source || "")) ward++; });
+      ev.push({ type: "note", title: ward > 0 ? "Ward Sync — labs updated" : "Labs updated", detail: changed.length + " value" + (changed.length === 1 ? "" : "s") });
+    }
+    return ev;
+  }
+  // A short "what changed" line for the board card footer + notifications (from the diff events).
+  function grpChangeSummary(events) {
+    if (!events || !events.length) return "Updated patient";
+    if (events.length === 1) return events[0].title;
+    return events[0].title + " +" + (events.length - 1) + " more";
+  }
+
+  /* --------------------------- smart notifications (derive-from-snapshot) --------------------- */
+  // PURE. Given the enriched unit patients snapshot + the OPEN patient's live view-model, derive
+  // only clinically-meaningful notification rows (newest first, deduped, capped). Unit-wide signals
+  // come from each patient doc's severity / lastUpdate / assignedTo (NOT N per-patient listeners);
+  // the open patient additionally contributes its live tasks + timeline. A full per-event unit feed
+  // (its own collection streamed for every patient) is a later refinement — see the results doc.
+  function grpNotifIcon(text) {
+    var t = String(text || "").toLowerCase();
+    if (/vent/.test(t)) return "🌬";
+    if (/abg/.test(t)) return "🫁";
+    if (/started|changed|noradr|adren|infus|pressor|rate|med/.test(t)) return "💉";
+    if (/imaging|ct|x-ray|scan/.test(t)) return "🩻";
+    if (/lab|ward sync/.test(t)) return "🧪";
+    return "📝";
+  }
+  function grpNotifFromEvent(e) {
+    if (!e) return null;
+    switch (e.type) {
+      case "round": return { icon: "🩺", title: e.title || "Round instruction" };
+      case "imaging": return { icon: "🩻", title: e.title || "Investigation added" };
+      case "pressor": return { icon: "💉", title: e.title || "Medication changed" };
+      case "vent": return { icon: "🌬", title: e.title || "Ventilator changed" };
+      case "abg": return { icon: "🫁", title: e.title || "ABG uploaded" };
+      case "task": return { icon: "✅", title: e.title || "Task completed" };
+      default: return null;   // plain notes are not surfaced as notifications (avoid fatigue)
+    }
+  }
+  function grpDeriveNotifs(patients, ptVM, myUid, now) {
+    now = now || Date.now(); patients = patients || [];
+    var openId = (ptVM && ptVM.patient && ptVM.patient.id) || null, byId = {};
+    patients.forEach(function (p) { byId[p.id] = p; });
+    function label(p) { return "Bed " + (p.bed || "—") + " · " + (p.name || "Patient"); }
+    var rows = [];
+    patients.forEach(function (p) {
+      var ts = (p.lastUpdate && p.lastUpdate.at) || p.reviewedAt || p.savedAt || now;
+      if (p.sev === "critical") rows.push({ key: "crit:" + p.id + ":" + ts, id: p.id, urgent: true, icon: "⚠️", title: label(p) + " — Critical", body: p.reason || "Deterioration — review this patient", ts: ts });
+      if (p.assignedTo && p.assignedTo === myUid) rows.push({ key: "assign:" + p.id, id: p.id, urgent: false, icon: "🩺", title: label(p) + " — Assigned to you", body: "You are the named clinician for this patient", ts: ts });
+      // "What changed" from the doc's lastUpdate — skip the OPEN patient (its rich timeline is used).
+      if (p.id !== openId && p.lastUpdate && p.lastUpdate.text && !/^updated patient$/i.test(p.lastUpdate.text))
+        rows.push({ key: "lu:" + p.id + ":" + ts, id: p.id, urgent: false, icon: grpNotifIcon(p.lastUpdate.text), title: label(p) + " — " + p.lastUpdate.text, body: (p.lastUpdate.byName ? "by " + p.lastUpdate.byName : "Updated"), ts: ts });
+    });
+    if (ptVM && openId && byId[openId]) {
+      var op = byId[openId];
+      (ptVM.tasks || []).forEach(function (t) {
+        if (t.assignedTo === myUid && t.status !== "done") rows.push({ key: "task:" + t.id, id: openId, urgent: true, icon: "🩺", title: label(op) + " — Instruction for you", body: t.text || "", ts: t.ts || now });
+        else if (t.status === "done" && t.completedAt) rows.push({ key: "taskdone:" + t.id, id: openId, urgent: false, icon: "✅", title: label(op) + " — Task completed", body: (t.text || "") + (t.completedByName ? " · by " + t.completedByName : ""), ts: t.completedAt });
+      });
+      (ptVM.timeline || []).forEach(function (e) {
+        var m = grpNotifFromEvent(e); if (!m) return;
+        rows.push({ key: "tl:" + e.id, id: openId, urgent: false, icon: m.icon, title: label(op) + " — " + m.title, body: e.detail || "", ts: e.ts || now });
+      });
+    }
+    rows.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+    var seen = {}, out = [];
+    for (var i = 0; i < rows.length; i++) { if (seen[rows[i].key]) continue; seen[rows[i].key] = 1; out.push(rows[i]); if (out.length >= 30) break; }
+    return out;
+  }
+  // PURE: how many rows are newer than the per-user "last seen" timestamp → the bell badge.
+  function grpUnreadCount(rows, lastSeen) {
+    lastSeen = lastSeen || 0; var n = 0;
+    (rows || []).forEach(function (r) { if ((r.ts || 0) > lastSeen) n++; });
+    return n;
+  }
+  // Non-pure wrappers: enrich the live board list + open patient into notification rows.
+  function grpNotifRows() {
+    var pts = grpEnrichedList().map(function (p) {
+      return { id: p.id, name: p.name, bed: p.bed, sev: p.sev, reason: v2Reason(p.snap || {}), lastUpdate: p.lastUpdate, reviewedAt: p.reviewedAt, savedAt: p.savedAt, assignedTo: p.assignedTo };
+    });
+    return grpDeriveNotifs(pts, _grpPtVM, ownerNow(), Date.now());
+  }
+  function grpNotifSeenKey() { return "smd_icu_notif_seen:" + (typeof ownerNow === "function" ? ownerNow() : "anon"); }
+  function grpNotifSeen() { try { return +localStorage.getItem(grpNotifSeenKey()) || 0; } catch (e) { return 0; } }
+  function grpNotifMarkSeen() { try { localStorage.setItem(grpNotifSeenKey(), String(Date.now())); } catch (e) {} }
+  // Optional device notification (best-effort): reuse the native SMD_localNotify path (native-push.js)
+  // for a NEW critical event while grouped. Never crashes when the helper is absent — the in-app feed
+  // is the deliverable. De-duped via _grpNotifiedTs (seeded to "now" when a unit is selected, so the
+  // first snapshot never retro-fires the whole roster).
+  function grpDeviceNotifyNew(rows) {
+    try {
+      if (typeof window.SMD_localNotify !== "function") return;
+      var newest = _grpNotifiedTs;
+      for (var i = 0; i < rows.length; i++) {
+        var r = rows[i];
+        if (r.urgent && (r.ts || 0) > _grpNotifiedTs) {
+          window.SMD_localNotify("⚠ " + (r.title || "ICU alert"), r.body || "Review this patient", "/");
+          if ((r.ts || 0) > newest) newest = r.ts || 0;
+          break;   // one per tick — the in-app feed carries the rest
+        }
+      }
+      if (newest > _grpNotifiedTs) _grpNotifiedTs = newest;
+    } catch (e) {}
+  }
+  function grpNotifTick() { if (!grpActive()) return; try { grpDeviceNotifyNew(grpNotifRows()); } catch (e) {} }
+  // The Notifications screen in group mode — the LIVE smart feed (replaces the acuity-only stub).
+  function renderV2AlertsGroup() {
+    var rows = grpNotifRows(), seen = grpNotifSeen();
+    var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Notifications</div><div class="icu-v2-shead-s">Only clinically meaningful events</div></div></div>';
+    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Live from this shared unit — critical acuity, instructions for you, completed tasks, new investigations and med changes. Derived from the unit snapshot plus the open patient’s timeline; a full per-event unit feed is a later refinement.</div>';
+    var body = rows.length ? rows.map(function (r) {
+      var fresh = (r.ts || 0) > seen;
+      return '<button class="icu-v2-alert-row ' + (r.urgent ? "critical" : "review") + (fresh ? " fresh" : "") + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '">' +
+        '<span class="icu-v2-alert-ic">' + esc(r.icon || "🔔") + '</span>' +
+        '<span class="icu-v2-alert-tx"><span class="icu-v2-alert-h">' + esc(r.title) + (r.urgent ? '<span class="icu-v2-urg">URGENT</span>' : "") + '</span>' +
+        (r.body ? '<span class="icu-v2-alert-b">' + esc(r.body) + '</span>' : "") +
+        '<span class="icu-v2-alert-ago">' + esc(fmtAgo(r.ts) || fmtWhen(r.ts) || "") + '</span></span></button>';
+    }).join("") : '<div class="icu-v2-empty2">No new alerts. Critical changes, consultant instructions, completed tasks and new investigations will appear here.</div>';
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-slist">' + note + body + '</div></div>';
+  }
+
+  /* --------------------------- round-note composer (full-screen) ------------------------------ */
+  function grpRoundChosen() {
+    var out = [], i;
+    for (i = 0; i < ROUND_PRESETS.length; i++) if (_roundSel[i]) out.push(ROUND_PRESETS[i]);
+    for (i = 0; i < _roundExtra.length; i++) if (_roundExtra[i]) out.push(_roundExtra[i]);
+    var pend = String(_roundText || "").trim(); if (pend) out.push(pend);
+    return out;
+  }
+  function grpRoundCaptureText() { try { var el = rootEl && rootEl.querySelector("#icuRoundCustom"); if (el) _roundText = String(el.value || ""); } catch (e) {} }
+  function renderV2RoundNote() {
+    var pt = (_grpPtVM && _grpPtVM.patient) || {}, p = _raw.patient || {};
+    var bed = pt.bed || p.bed || "—", nm = pt.name || p.name || "Patient";
+    var instr = grpCanInstruct(_grp && _grp.myRole);
+    var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="grproundback" aria-label="Back to rounds">‹</button>' +
+      '<div><div class="icu-v2-shead-h">' + (instr ? "Add round note" : "Add a note") + '</div><div class="icu-v2-shead-s">Bed ' + esc(bed) + ' · ' + esc(nm) + '</div></div></div>';
+    var intro = '<div class="icu-v2-note">' + ico("info", "ⓘ") + (instr
+      ? ' Tap the instructions you gave. Each becomes a tracked task and posts to the timeline — the whole unit sees it instantly. No typing required.'
+      : ' Add a note for the team — it posts to the timeline, author- and time-stamped. Only consultants and senior residents can issue tracked instructions.') + '</div>';
+    var presets = instr ? ('<div class="icu-v2-rpre">' + ROUND_PRESETS.map(function (txt, i) {
+      var on = !!_roundSel[i];
+      return '<button class="icu-v2-rchip' + (on ? " on" : "") + '" data-icu-act="grproundtog:' + i + '"><span class="icu-v2-rbox">' + (on ? "✓" : "") + '</span><span class="icu-v2-rtx">' + esc(txt) + '</span></button>';
+    }).join("") + '</div>') : "";
+    var extra = _roundExtra.length ? ('<div class="icu-v2-rpre">' + _roundExtra.map(function (txt, i) {
+      return '<button class="icu-v2-rchip on" data-icu-act="grproundrm:' + i + '"><span class="icu-v2-rbox">✓</span><span class="icu-v2-rtx">' + esc(txt) + '</span><span class="icu-v2-rx">✕</span></button>';
+    }).join("") + '</div>') : "";
+    var custom = '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">Add your own</div>' +
+      '<div class="icu-v2-rcustom"><input id="icuRoundCustom" type="text" aria-label="Add your own instruction" placeholder="e.g. Increase PEEP to 8" value="' + esc(_roundText) + '"><button class="icu-btn" data-icu-act="grproundadd">Add</button></div></div>';
+    var n = grpRoundChosen().length;
+    var btnLbl = instr
+      ? (n ? "Post " + n + " instruction" + (n === 1 ? "" : "s") + " to timeline" : "Choose or type an instruction")
+      : (n ? "Post note to timeline" : "Type a note first");
+    var post = '<div class="icu-v2-rpost"><button class="icu-btn' + (n ? "" : " ghost") + '" data-icu-act="grproundpost"' + (n ? "" : " disabled") + '>' + esc(btnLbl) + '</button></div>';
+    var errNote = _grpErr ? '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") + ' ' + esc(_grpErr) + '</div>' : "";
+    return header + '<div class="icu-scroll icu-v2-rscroll">' + errNote + intro + presets + extra + custom + '</div>' + post;
+  }
+  function grpOpenRound() {
+    if (!grpActive() || !_grpPtId) return;
+    _roundSel = {}; _roundExtra = []; _roundText = ""; _grpErr = null;
+    _screen = "round"; _paintTop = true; paint();
+  }
+  function grpRoundToggle(i) { grpRoundCaptureText(); i = +i; _roundSel[i] = !_roundSel[i]; paint(); }
+  function grpRoundAddCustom() {
+    grpRoundCaptureText();
+    var t = String(_roundText || "").trim();
+    if (t) { _roundExtra.push(t); _roundText = ""; }
+    paint();
+    try { var el = rootEl && rootEl.querySelector("#icuRoundCustom"); if (el) el.focus(); } catch (e) {}
+  }
+  function grpRoundRemove(i) { grpRoundCaptureText(); i = +i; if (i >= 0 && i < _roundExtra.length) _roundExtra.splice(i, 1); paint(); }
+  function grpRoundBack() { _screen = "patient"; _active = "rounds"; _ws = wsOf("rounds"); _wsLast[_ws] = "rounds"; _paintTop = true; paint(); }
+  function grpDoPostRound() {
+    grpRoundCaptureText();
+    var api = groupsApi(); if (!api || !grpActive() || !_grpPtId) return;
+    var chosen = grpRoundChosen(); if (!chosen.length) return;
+    var instr = grpCanInstruct(_grp && _grp.myRole);
+    var plan = grpRoundPlan(chosen, instr, v2AccountName());
+    var gid = _grp.id, pid = _grpPtId, i;
+    for (i = 0; i < plan.tasks.length; i++) {
+      (function (task) { try { var pr = api.addTask(gid, pid, task); if (pr && pr.then) pr.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {} })(plan.tasks[i]);
+    }
+    if (plan.event) { try { var pe = api.addTimelineEvent(gid, pid, plan.event); if (pe && pe.then) pe.then(null, function () {}); } catch (e) {} }
+    _roundSel = {}; _roundExtra = []; _roundText = "";
+    if (window.toast) toast(instr ? (plan.tasks.length + " instruction" + (plan.tasks.length === 1 ? "" : "s") + " posted") : "Note posted");
+    grpRoundBack();
   }
 
   // Rounds tab in group mode → prepend the LIVE shared instructions/tasks + audit timeline. The
@@ -3398,6 +3715,8 @@
     _paintTop = false;
     if (_screen === "board") {
       rootEl.innerHTML = renderV2Board() + renderV2BottomBar();
+    } else if (_screen === "round") {
+      rootEl.innerHTML = renderV2RoundNote();   // Phase 3: full-screen round-note composer (no bottom bar)
     } else if (_screen === "alerts") {
       rootEl.innerHTML = renderV2Alerts() + renderV2BottomBar();
     } else if (_screen === "team") {
@@ -4793,7 +5112,7 @@
       case "ws": { if (icuV2On()) _screen = "patient"; _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
       // ---- ICU v2 (smd_icu_v2) — board / alerts / team / admit / filter, all flag-only ----
       case "icuboard": if (grpActive()) grpTeardownPatient(); _screen = "board"; _paintTop = true; paint(); break;
-      case "icualerts": _screen = "alerts"; _paintTop = true; paint(); break;
+      case "icualerts": if (grpActive()) grpNotifMarkSeen(); _screen = "alerts"; _paintTop = true; paint(); break;
       case "icuteam": _screen = "team"; _paintTop = true; paint(); break;
       case "icuadmit": _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); break;
       case "icumore": _screen = "patient"; _active = "more"; _ws = "more"; _paintTop = true; paint(); break;
@@ -4809,6 +5128,13 @@
       case "grpinvitesend": grpDoInvite(); break;
       case "grpreviewed": grpDoReviewed(); break;
       case "grptask": grpCycleTask(decodeURIComponent(arg)); break;
+      // ---- ICU v2 Phase 3 — round-note composer (no-type instruction → tasks + timeline) ----
+      case "grpround": grpOpenRound(); break;
+      case "grproundback": grpRoundBack(); break;
+      case "grproundtog": grpRoundToggle(arg); break;
+      case "grproundadd": grpRoundAddCustom(); break;
+      case "grproundrm": grpRoundRemove(arg); break;
+      case "grproundpost": grpDoPostRound(); break;
       case "summary": openSummary(); break;
       case "printsummary": printSummary(); break;
       case "discharge": openDischarge(); break;
@@ -5065,7 +5391,11 @@
     _lwStartWith: function (cfg) { cfg = cfg || {}; _lwDraft = { analytes: (cfg.analytes || []).slice(), mode: cfg.mode || "meaningful", dur: cfg.dur != null ? cfg.dur : 12, delivery: "inapp", q: "" }; lwStart(); return lwGet(); },
     buildDischarge: buildDischarge, openDischarge: openDischarge,
     // KI-M3 test seams (per-account live-buffer scoping)
-    _bufKey: bufKey, _reconcileOwner: reconcileOwner, _loadOwnerBuffer: loadOwnerBuffer, _resetBufSync: function () { _ownerBufSynced = false; }
+    _bufKey: bufKey, _reconcileOwner: reconcileOwner, _loadOwnerBuffer: loadOwnerBuffer, _resetBufSync: function () { _ownerBufSynced = false; },
+    // Phase 3 pure-transform test seams (deterministic, DOM-free): round-note→plan, auto-timeline
+    // diff, notification derive + unread-count.
+    _grpRoundPlan: grpRoundPlan, _grpDiffEvents: grpDiffEvents, _grpChangeSummary: grpChangeSummary,
+    _grpDeriveNotifs: grpDeriveNotifs, _grpUnreadCount: grpUnreadCount
   };
   window.ICU = ICU;
 
@@ -5089,9 +5419,20 @@
       _grpMirrorT = null;
       var h = grpStateHash(_raw); if (h === _grpLastHash) return;
       _grpLastHash = h;
+      // Phase 3: derive the author-stamped audit events for this coalesced burst (the debounce is the
+      // de-dupe window; a remote echo never reaches here because grpApplyState re-baselines the hash).
+      var nextPayload = grpMirrorPayload(_raw);
+      var events = (_grpPrevSync != null) ? grpDiffEvents(_grpPrevSync, nextPayload) : [];
+      _grpPrevSync = nextPayload;
+      var luText = grpChangeSummary(events);   // richer "what changed" line for the board footer + notifications
       try {
         var api = groupsApi();
-        if (api && api.upsertPatient) api.upsertPatient(_grp.id, _grpPtId, _raw, "Updated patient").then(function () { _grpErr = null; }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+        if (api && api.upsertPatient) api.upsertPatient(_grp.id, _grpPtId, _raw, luText).then(function () { _grpErr = null; }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+        if (api && api.addTimelineEvent) {
+          for (var i = 0; i < events.length; i++) {
+            (function (ev) { try { var pr = api.addTimelineEvent(_grp.id, _grpPtId, ev); if (pr && pr.then) pr.then(null, function () {}); } catch (e) {} })(events[i]);
+          }
+        }
       } catch (e) {}
     }, 1500);
   });
