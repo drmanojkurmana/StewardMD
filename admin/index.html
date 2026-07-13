@@ -60,6 +60,7 @@
       <button class="tab" data-p="verif">🩺 Verifications</button>
       <button class="tab" data-p="watch">🧪 Lab-watch</button>
       <button class="tab" data-p="push">📣 Push</button>
+      <button class="tab" data-p="ai">📊 AI Usage</button>
     </div>
     <div id="gate" class="card hint">Sign in with your owner Google account to manage StewardMD.</div>
 
@@ -148,6 +149,14 @@
         <div class="msg" id="lMsg"></div><div id="lList" style="margin-top:12px"></div>
       </div>
     </div>
+
+    <div class="pane" id="pane-ai" data-need-auth>
+      <div class="card">
+        <div style="display:flex;align-items:center"><b style="flex:1">AI usage (today)</b><button class="ghost" id="aiReload" style="padding:7px 11px">Reload</button></div>
+        <div class="hint" style="margin:6px 0 4px">Aggregate MaiK + Medical-Updates AI usage. <code>updates_summary</code> / <code>updates_diff</code> / <code>updates_digest</code> are the pipeline calls. Costs are estimated from token counts; no prompts or PHI are stored.</div>
+        <div class="msg" id="aiMsg"></div><div id="aiBox" style="margin-top:12px"></div>
+      </div>
+    </div>
   </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -169,7 +178,7 @@
   // ---- panes/gate visibility (only show a pane when signed in) ----
   function showActivePane(){
     var signedIn=!!(auth&&auth.currentUser);
-    ["notif","sources","logs","verif","watch","push"].forEach(function(p){ $("pane-"+p).classList.toggle("on", signedIn && p===activePane); });
+    ["notif","sources","logs","verif","watch","push","ai"].forEach(function(p){ $("pane-"+p).classList.toggle("on", signedIn && p===activePane); });
     $("gate").style.display=signedIn?"none":"";
   }
 
@@ -250,9 +259,24 @@
       el.innerHTML=logs.map(function(g){ return '<div class="item"><div class="h"><span class="st '+(stc[g.status]||"unverified")+'">'+esc(g.status)+'</span><span class="cat">'+esc(g.source_id||"—")+'</span>'+(g.ai_used?'<span class="st pending">AI</span>':'')+'<span class="t">'+esc(when(g.ts))+'</span></div>'+(g.detail?'<div class="body">'+esc(g.detail)+'</div>':'')+'</div>'; }).join("");
     }).catch(function(){el.innerHTML='<div class="hint">Could not load.</div>';}); }
   $("lReload").onclick=lLoad;
+  $("aiReload").onclick=aiLoad;
 
   // ---- refresh a pane's data when shown / on sign-in ----
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); }
+
+  // ---- AI usage ----
+  function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line,#e5e5e0)"><span style="color:var(--slate,#5a7184)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }
+  function aiLoad(){ say("aiMsg","","Loading…"); api("/api/ai/admin").then(function(r){
+    if(r.s!==200||!r.d||r.d.enabled===false){ say("aiMsg","err", (r.d&&r.d.error)||"Unavailable (need owner login)."); $("aiBox").innerHTML=""; return; }
+    say("aiMsg","","");
+    var d=r.d, day=d.daily||{}, bt=d.byType||{}, cb=d.circuitBreaker||{};
+    var types=Object.keys(bt).map(function(t){return aiRow(t, bt[t]);}).join("")||'<div class="hint">No calls yet today.</div>';
+    $("aiBox").innerHTML=
+      '<div style="font:700 12px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--slate);margin:2px 0 6px">Today ('+esc(d.day||"")+')</div>'+
+      aiRow("Requests", day.requests||0)+aiRow("Tokens", (day.tokens||0).toLocaleString())+aiRow("Est. cost (INR)", "₹"+(day.estCostInr||0))+aiRow("Blocked", day.blocked||0)+aiRow("Circuit breaker", cb.status||"ok")+
+      '<div style="font:700 12px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--slate);margin:14px 0 6px">By type</div>'+types+
+      '<div class="hint" style="margin-top:10px">Accounts today: '+(d.accountCount||0)+'</div>';
+  }).catch(function(){ say("aiMsg","err","Failed to load."); }); }
 
   if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u){ var on=document.querySelector(".tab.on"); refresh(on?on.getAttribute("data-p"):"notif"); } }); }
   else { $("who").textContent="Firebase failed to load."; }

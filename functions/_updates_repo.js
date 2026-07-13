@@ -258,3 +258,38 @@ export async function removeBookmark(env, uid, updateId) {
   if (!hasDb(env)) throw new Error("no-db");
   await db(env).prepare("DELETE FROM bookmarks WHERE uid = ? AND update_id = ?").bind(uid, updateId).run();
 }
+
+/* ---------------- weekly digest (Phase 4) ---------------- */
+// ISO-8601 week key, e.g. "2026-W28".
+export function isoWeekKey(ts) {
+  const d = new Date(ts || Date.now());
+  const u = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  const day = u.getUTCDay() || 7;                 // Mon=1..Sun=7
+  u.setUTCDate(u.getUTCDate() + 4 - day);         // nearest Thursday
+  const yearStart = new Date(Date.UTC(u.getUTCFullYear(), 0, 1));
+  const week = Math.ceil((((u - yearStart) / 86400000) + 1) / 7);
+  return u.getUTCFullYear() + "-W" + String(week).padStart(2, "0");
+}
+// Feed items published on/after `sinceTs` (for the weekly digest synthesis).
+export async function getUpdatesSince(env, sinceTs, limit) {
+  if (!hasDb(env)) return [];
+  const n = Math.max(1, Math.min(200, parseInt(limit, 10) || 100));
+  const rs = await db(env).prepare(
+    "SELECT * FROM updates WHERE published_ts >= ? ORDER BY published_ts DESC LIMIT ?"
+  ).bind(sinceTs, n).all();
+  return (rs.results || []).map(rowToItem);
+}
+export async function saveDigest(env, weekKey, summaryJson) {
+  if (!hasDb(env)) throw new Error("no-db");
+  await db(env).prepare(
+    "INSERT INTO digests (week_key, summary_json, created_ts) VALUES (?,?,?) " +
+    "ON CONFLICT(week_key) DO UPDATE SET summary_json=excluded.summary_json, created_ts=excluded.created_ts"
+  ).bind(weekKey, summaryJson, Date.now()).run();
+}
+export async function getLatestDigest(env) {
+  if (!hasDb(env)) return null;
+  const r = await db(env).prepare("SELECT * FROM digests ORDER BY created_ts DESC LIMIT 1").first();
+  if (!r) return null;
+  let data = null; try { data = r.summary_json ? JSON.parse(r.summary_json) : null; } catch (e) {}
+  return { week_key: r.week_key, data, created_ts: r.created_ts };
+}

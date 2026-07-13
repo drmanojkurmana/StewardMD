@@ -308,13 +308,16 @@ async function handleOfflineDb(request, env) {
 }
 
 export default {
-  // Scheduled (cron) — two schedules, distinguished by event.cron:
+  // Scheduled (cron) — distinguished by event.cron:
   //   "30 5 * * *"    → run the Medical Updates pipeline (crawl → dedup → AI-summarize new).
+  //   "0 6 * * 1"     → build the weekly "This Week in Medicine" digest (Mon 06:00 UTC).
   //   "*/15 * * * *"  → poll GHIS for consented watch-lab patients and push new labs.
-  // Both delegate to Pages Functions with the shared admin token. Best-effort.
+  // All delegate to Pages Functions with the shared admin token. Best-effort.
   async scheduled(event, env, ctx) {
     if (!env.UPDATES_ADMIN_TOKEN) return;
-    const path = event.cron === "*/15 * * * *" ? "/api/watch/run" : "/api/updates/sync";
+    let path = "/api/updates/sync";
+    if (event.cron === "*/15 * * * *") path = "/api/watch/run";
+    else if (event.cron === "0 6 * * 1") path = "/api/updates/digest";
     const run = fetch("https://stewardmd.in" + path, {
       method: "POST", headers: { "X-Admin-Token": env.UPDATES_ADMIN_TOKEN },
     }).catch(() => {});

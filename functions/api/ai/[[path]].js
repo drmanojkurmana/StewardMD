@@ -83,6 +83,7 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens } from "../../_usage.js";
+import { ownerOK } from "../../_adminauth.js";
 function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
 // thinkingBudget:0 disables gemini-2.5-flash's dynamic "thinking" — otherwise it silently
 // consumes the maxOutputTokens budget and the visible clinician answer truncates mid-sentence.
@@ -478,7 +479,8 @@ export async function onRequest(context) {
     const want = env.UPDATES_ADMIN_TOKEN || "";
     const url = new URL(request.url);
     const got = (request.headers.get("X-Admin-Token") || url.searchParams.get("token") || "");
-    if (!want || got !== want) return json({ error: "forbidden" }, 403);
+    const tokenOK = !!want && got === want;
+    if (!tokenOK && !(await ownerOK(request, env))) return json({ error: "forbidden" }, 403);   // owner Google login OR admin token
     const rep = await adminReport(env);
     if (url.searchParams.get("format") === "csv") {
       const rows = [["account", "tokens", "general", "case", "ocr"]].concat((rep.accounts || []).map((a) => [a.acct, a.tokens, a.general, a.case, a.ocr]));
