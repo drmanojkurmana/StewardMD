@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 818,
+    "diseases": 869,
     "diagnostic": 141,
-    "reference": 677,
+    "reference": 728,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,28 +30,28 @@
     "differential": 99.3,
     "investigations": 99.8,
     "redFlags": 100,
-    "severity": 48.3,
-    "prognosis": 98.9,
-    "diagnosticScoring": 17.2,
-    "management": 17.1,
-    "drugTherapy": 15.8,
-    "dosing": 15.8,
-    "stewardship": 6.2
+    "severity": 45.5,
+    "prognosis": 99,
+    "diagnosticScoring": 16.2,
+    "management": 16.1,
+    "drugTherapy": 14.8,
+    "dosing": 14.8,
+    "stewardship": 5.9
   },
   "bySpecialty": {
     "Pulmonology": {
-      "total": 46,
+      "total": 57,
       "diagnostic": 20,
-      "reference": 26,
+      "reference": 37,
       "dims": {
-        "overview": 46,
-        "clinicalFeatures": 46,
-        "pathophysiology": 46,
-        "differential": 46,
-        "investigations": 46,
-        "redFlags": 46,
+        "overview": 57,
+        "clinicalFeatures": 57,
+        "pathophysiology": 57,
+        "differential": 57,
+        "investigations": 57,
+        "redFlags": 57,
         "severity": 28,
-        "prognosis": 45,
+        "prognosis": 56,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 18,
@@ -160,18 +160,18 @@
       }
     },
     "Cardiology": {
-      "total": 59,
+      "total": 73,
       "diagnostic": 11,
-      "reference": 48,
+      "reference": 62,
       "dims": {
-        "overview": 59,
-        "clinicalFeatures": 59,
-        "pathophysiology": 59,
-        "differential": 57,
-        "investigations": 59,
-        "redFlags": 59,
+        "overview": 73,
+        "clinicalFeatures": 73,
+        "pathophysiology": 73,
+        "differential": 71,
+        "investigations": 73,
+        "redFlags": 73,
         "severity": 48,
-        "prognosis": 58,
+        "prognosis": 72,
         "diagnosticScoring": 11,
         "management": 11,
         "drugTherapy": 9,
@@ -459,6 +459,26 @@
         "stewardship": 0
       }
     },
+    "Anaesthesia": {
+      "total": 13,
+      "diagnostic": 0,
+      "reference": 13,
+      "dims": {
+        "overview": 13,
+        "clinicalFeatures": 13,
+        "pathophysiology": 13,
+        "differential": 13,
+        "investigations": 13,
+        "redFlags": 13,
+        "severity": 0,
+        "prognosis": 13,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
     "Psychiatry": {
       "total": 26,
       "diagnostic": 0,
@@ -472,6 +492,26 @@
         "redFlags": 26,
         "severity": 0,
         "prognosis": 26,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Oral": {
+      "total": 13,
+      "diagnostic": 0,
+      "reference": 13,
+      "dims": {
+        "overview": 13,
+        "clinicalFeatures": 13,
+        "pathophysiology": 13,
+        "differential": 13,
+        "investigations": 13,
+        "redFlags": 13,
+        "severity": 0,
+        "prognosis": 13,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -621,6 +661,292 @@
     }
   },
   "perDisease": [
+    {
+      "id": "acute_pain_management",
+      "name": "Acute pain management",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "aspiration_pneumonitis",
+      "name": "Aspiration pneumonitis",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "awareness_under_anaesthesia",
+      "name": "Awareness under anaesthesia",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chronic_pain_management",
+      "name": "Chronic pain management",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "difficult_airway",
+      "name": "Difficult airway",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "local_anaesthetic_systemic_toxicity",
+      "name": "Local anaesthetic systemic toxicity",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "malignant_hyperthermia",
+      "name": "Malignant hyperthermia",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "perioperative_anaphylaxis",
+      "name": "Perioperative anaphylaxis",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "postdural_puncture_headache",
+      "name": "Postdural puncture headache",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "delirium_postoperative",
+      "name": "Postoperative delirium",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "post_operative_nausea_vomiting",
+      "name": "Postoperative nausea and vomiting",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sedation_complications",
+      "name": "Sedation complications",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "spinal_anaesthesia_complications",
+      "name": "Spinal anaesthesia complications",
+      "specialty": "Anaesthesia",
+      "system": "Anaesthesia / Perioperative",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
     {
       "id": "breast_abscess",
       "name": "Breast abscess",
@@ -996,6 +1322,28 @@
       }
     },
     {
+      "id": "brugada_syndrome",
+      "name": "Brugada syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tamponade",
       "name": "Cardiac tamponade",
       "specialty": "Cardiology",
@@ -1163,6 +1511,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "complete_heart_block",
+      "name": "Complete heart block",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -1414,6 +1784,28 @@
       }
     },
     {
+      "id": "hypertrophic_cardiomyopathy",
+      "name": "Hypertrophic cardiomyopathy",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "infections_due_to_the_hacek",
       "name": "Infections Due to the HACEK Group and Miscellaneous Gram-Negative Bacteria",
       "specialty": "Cardiology",
@@ -1471,6 +1863,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "long_qt_syndrome",
+      "name": "Long QT syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -1568,6 +1982,28 @@
       }
     },
     {
+      "id": "nstemi",
+      "name": "Non-ST-elevation myocardial infarction",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "paroxysmal_supraventricular_tachycardias",
       "name": "Paroxysmal Supraventricular Tachycardias",
       "specialty": "Cardiology",
@@ -1625,6 +2061,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "peripheral_arterial_disease",
+      "name": "Peripheral arterial disease",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -1766,6 +2224,72 @@
       }
     },
     {
+      "id": "restrictive_cardiomyopathy",
+      "name": "Restrictive cardiomyopathy",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rheumatic_heart_disease",
+      "name": "Rheumatic heart disease",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sick_sinus_syndrome",
+      "name": "Sick sinus syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "st_segment_elevation_myocardial_infarction",
       "name": "ST-Segment Elevation Myocardial Infarction",
       "specialty": "Cardiology",
@@ -1779,6 +2303,50 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "stable_angina",
+      "name": "Stable angina pectoris",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "supraventricular_tachycardia",
+      "name": "Supraventricular tachycardia",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -1898,6 +2466,28 @@
       }
     },
     {
+      "id": "unstable_angina",
+      "name": "Unstable angina",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "vasovagal_syncope",
       "name": "Vasovagal / orthostatic syncope",
       "specialty": "Cardiology",
@@ -1924,6 +2514,50 @@
       "name": "Ventricular Septal Defect",
       "specialty": "Cardiology",
       "system": "Paediatric cardiology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ventricular_tachycardia",
+      "name": "Ventricular tachycardia",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "wolff_parkinson_white",
+      "name": "Wolff-Parkinson-White syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -15230,6 +15864,292 @@
       }
     },
     {
+      "id": "aphthous_stomatitis",
+      "name": "Aphthous stomatitis",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dental_caries",
+      "name": "Dental caries",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dental_trauma",
+      "name": "Dental trauma",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dry_socket",
+      "name": "Dry socket",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gingivitis",
+      "name": "Gingivitis",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "odontogenic_sinusitis",
+      "name": "Odontogenic sinusitis",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "oral_candidiasis",
+      "name": "Oral candidiasis",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "oral_leukoplakia",
+      "name": "Oral leukoplakia",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "oral_squamous_cell_carcinoma",
+      "name": "Oral squamous cell carcinoma",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "periapical_abscess",
+      "name": "Periapical abscess",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "periodontitis",
+      "name": "Periodontitis",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pulpitis",
+      "name": "Pulpitis",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tmj_disorder",
+      "name": "Temporomandibular joint disorder",
+      "specialty": "Oral",
+      "system": "Oral / Dental / Maxillofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acute_stress_disorder",
       "name": "Acute stress disorder",
       "specialty": "Psychiatry",
@@ -15912,6 +16832,28 @@
       }
     },
     {
+      "id": "allergic_bronchopulmonary_aspergillosis",
+      "name": "Allergic bronchopulmonary aspergillosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "altitude_illness",
       "name": "Altitude Illness",
       "specialty": "Pulmonology",
@@ -15974,6 +16916,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "bronchiectasis",
+      "name": "Bronchiectasis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -16057,6 +17021,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chylothorax",
+      "name": "Chylothorax",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -16150,6 +17136,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cor_pulmonale",
+      "name": "Cor pulmonale",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -16572,6 +17580,28 @@
       }
     },
     {
+      "id": "obstructive_sleep_apnoea",
+      "name": "Obstructive sleep apnoea",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "occupational_lung_disease",
       "name": "Occupational and Environmental Lung Disease",
       "specialty": "Pulmonology",
@@ -16638,6 +17668,50 @@
       }
     },
     {
+      "id": "pleural_empyema",
+      "name": "Pleural empyema",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pneumoconiosis",
+      "name": "Pneumoconiosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pneumothorax",
       "name": "Pneumothorax",
       "specialty": "Pulmonology",
@@ -16678,6 +17752,72 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pulmonary_fibrosis",
+      "name": "Pulmonary fibrosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sarcoidosis_lung",
+      "name": "Pulmonary sarcoidosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "respiratory_acidosis",
+      "name": "Respiratory acidosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -16723,6 +17863,28 @@
         "drugTherapy": true,
         "dosing": true,
         "stewardship": true
+      }
+    },
+    {
+      "id": "silicosis",
+      "name": "Silicosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
       }
     },
     {
