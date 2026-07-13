@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 2101,
+    "diseases": 2157,
     "diagnostic": 141,
-    "reference": 1960,
+    "reference": 2016,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.7,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 18.8,
+    "severity": 18.3,
     "prognosis": 99.6,
-    "diagnosticScoring": 6.7,
-    "management": 6.7,
-    "drugTherapy": 6.1,
-    "dosing": 6.1,
+    "diagnosticScoring": 6.5,
+    "management": 6.5,
+    "drugTherapy": 6,
+    "dosing": 6,
     "stewardship": 2.4
   },
   "bySpecialty": {
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 256,
+      "total": 269,
       "diagnostic": 20,
-      "reference": 236,
+      "reference": 249,
       "dims": {
-        "overview": 256,
-        "clinicalFeatures": 256,
-        "pathophysiology": 256,
-        "differential": 256,
-        "investigations": 256,
-        "redFlags": 256,
+        "overview": 269,
+        "clinicalFeatures": 269,
+        "pathophysiology": 269,
+        "differential": 269,
+        "investigations": 269,
+        "redFlags": 269,
         "severity": 48,
-        "prognosis": 256,
+        "prognosis": 269,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 101,
+      "total": 115,
       "diagnostic": 5,
-      "reference": 96,
+      "reference": 110,
       "dims": {
-        "overview": 101,
-        "clinicalFeatures": 101,
-        "pathophysiology": 101,
-        "differential": 101,
-        "investigations": 100,
-        "redFlags": 101,
+        "overview": 115,
+        "clinicalFeatures": 115,
+        "pathophysiology": 115,
+        "differential": 115,
+        "investigations": 114,
+        "redFlags": 115,
         "severity": 7,
-        "prognosis": 100,
+        "prognosis": 114,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 285,
+      "total": 294,
       "diagnostic": 10,
-      "reference": 275,
+      "reference": 284,
       "dims": {
-        "overview": 285,
-        "clinicalFeatures": 285,
-        "pathophysiology": 285,
-        "differential": 284,
-        "investigations": 285,
-        "redFlags": 285,
+        "overview": 294,
+        "clinicalFeatures": 294,
+        "pathophysiology": 294,
+        "differential": 293,
+        "investigations": 294,
+        "redFlags": 294,
         "severity": 33,
-        "prognosis": 283,
+        "prognosis": 292,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 157,
+      "total": 177,
       "diagnostic": 6,
-      "reference": 151,
+      "reference": 171,
       "dims": {
-        "overview": 157,
-        "clinicalFeatures": 157,
-        "pathophysiology": 157,
-        "differential": 157,
-        "investigations": 157,
-        "redFlags": 157,
+        "overview": 177,
+        "clinicalFeatures": 177,
+        "pathophysiology": 177,
+        "differential": 177,
+        "investigations": 177,
+        "redFlags": 177,
         "severity": 23,
-        "prognosis": 157,
+        "prognosis": 177,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -3984,6 +3984,28 @@
       }
     },
     {
+      "id": "blue_rubber_bleb_nevus_syndrome",
+      "name": "Blue rubber bleb naevus syndrome",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bullous_pemphigoid",
       "name": "Bullous pemphigoid",
       "specialty": "Dermatology",
@@ -4010,6 +4032,28 @@
       "name": "Calciphylaxis (calcific uraemic arteriolopathy)",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "capillary_malformation_avm_syndrome",
+      "name": "Capillary malformation-AVM syndrome",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -4142,6 +4186,28 @@
       "name": "Cutaneous Squamous Cell Carcinoma",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cutis_marmorata_telangiectatica_congenita",
+      "name": "Cutis marmorata telangiectatica congenita",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -4622,6 +4688,50 @@
       }
     },
     {
+      "id": "generalized_lymphatic_anomaly",
+      "name": "Generalised lymphatic anomaly",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "glomuvenous_malformation",
+      "name": "Glomuvenous malformation",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "granuloma_annulare",
       "name": "Granuloma Annulare",
       "specialty": "Dermatology",
@@ -4974,6 +5084,72 @@
       }
     },
     {
+      "id": "kaposiform_hemangioendothelioma",
+      "name": "Kaposiform haemangioendothelioma",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kaposiform_lymphangiomatosis",
+      "name": "Kaposiform lymphangiomatosis",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kasabach_merritt_phenomenon",
+      "name": "Kasabach-Merritt phenomenon",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "keloid",
       "name": "Keloid",
       "specialty": "Dermatology",
@@ -5128,6 +5304,28 @@
       }
     },
     {
+      "id": "lymphedema_distichiasis",
+      "name": "Lymphoedema-distichiasis syndrome",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "melasma",
       "name": "Melasma",
       "specialty": "Dermatology",
@@ -5154,6 +5352,28 @@
       "name": "Miliaria",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "milroy_disease",
+      "name": "Milroy disease",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -5436,6 +5656,28 @@
       }
     },
     {
+      "id": "parkes_weber_syndrome",
+      "name": "Parkes-Weber syndrome",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "peeling_skin_syndrome",
       "name": "Peeling skin syndrome",
       "specialty": "Dermatology",
@@ -5506,6 +5748,28 @@
       "name": "Pemphigus vulgaris",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "phace_syndrome",
+      "name": "PHACE syndrome",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -5788,6 +6052,28 @@
       }
     },
     {
+      "id": "sinus_pericranii",
+      "name": "Sinus pericranii",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sjogren_larsson_syndrome",
       "name": "Sjogren-Larsson syndrome",
       "specialty": "Dermatology",
@@ -5902,6 +6188,28 @@
       "name": "Tinea Versicolor",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "verrucous_venous_malformation",
+      "name": "Verrucous venous malformation",
+      "specialty": "Dermatology",
+      "system": "Vascular anomalies / Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7020,6 +7328,28 @@
       }
     },
     {
+      "id": "complete_gonadal_dysgenesis_46xx",
+      "name": "46,XX gonadal dysgenesis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Reproductive genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "5_alpha_reductase_deficiency",
       "name": "5-alpha-reductase type 2 deficiency (SRD5A2)",
       "specialty": "Endocrine / Metabolic",
@@ -7442,6 +7772,50 @@
       "name": "Argininosuccinic aciduria",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "aromatase_deficiency",
+      "name": "Aromatase deficiency (CYP19A1)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Reproductive genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "aromatase_excess_syndrome",
+      "name": "Aromatase excess syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Reproductive genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -8212,6 +8586,28 @@
       "name": "Congenital hyperinsulinism",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_hypogonadotropic_hypogonadism",
+      "name": "Congenital hypogonadotropic hypogonadism (normosmic)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Reproductive genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -10760,6 +11156,28 @@
       }
     },
     {
+      "id": "mixed_gonadal_dysgenesis",
+      "name": "Mixed gonadal dysgenesis (45,X/46,XY)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Reproductive genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mngie_syndrome",
       "name": "MNGIE",
       "specialty": "Endocrine / Metabolic",
@@ -11354,6 +11772,28 @@
       }
     },
     {
+      "id": "ovotesticular_dsd",
+      "name": "Ovotesticular disorder of sex development",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Reproductive genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pagets_disease_bone",
       "name": "Paget's Disease of Bone",
       "specialty": "Endocrine / Metabolic",
@@ -11468,6 +11908,28 @@
       "name": "Pellagra",
       "specialty": "Endocrine / Metabolic",
       "system": "Nutrition / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "persistent_mullerian_duct_syndrome",
+      "name": "Persistent mullerian duct syndrome (AMH/AMHR2)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Reproductive genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -12586,6 +13048,28 @@
       }
     },
     {
+      "id": "swyer_syndrome",
+      "name": "Swyer syndrome (46,XY complete gonadal dysgenesis)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Reproductive genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "paraganglioma_sympathetic",
       "name": "Sympathetic paraganglioma",
       "specialty": "Endocrine / Metabolic",
@@ -12876,6 +13360,28 @@
       "name": "Transcobalamin deficiency",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "turner_mosaicism",
+      "name": "Turner syndrome mosaicism (45,X/46,XX)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Reproductive genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -30846,6 +31352,28 @@
       }
     },
     {
+      "id": "alternating_hemiplegia_of_childhood",
+      "name": "Alternating hemiplegia of childhood",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "alzheimers_disease",
       "name": "Alzheimer's Disease",
       "specialty": "Neurology",
@@ -31000,6 +31528,50 @@
       }
     },
     {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy",
+      "name": "Autosomal dominant lateral temporal epilepsy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "adnfle",
+      "name": "Autosomal dominant sleep-related hypermotor epilepsy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "autosomal_recessive_cerebellar_ataxia_charlevoix",
       "name": "Autosomal recessive spastic ataxia of Charlevoix-Saguenay (SACS)",
       "specialty": "Neurology",
@@ -31090,6 +31662,28 @@
     {
       "id": "benign_familial_neonatal_epilepsy",
       "name": "Benign familial neonatal epilepsy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "benign_hereditary_chorea",
+      "name": "Benign hereditary chorea",
       "specialty": "Neurology",
       "system": "Nervous system / Neurology",
       "tier": "reference",
@@ -31686,6 +32280,28 @@
       "name": "Chiari malformation",
       "specialty": "Neurology",
       "system": "Neurosurgery / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chorea_acanthocytosis",
+      "name": "Chorea-acanthocytosis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -32496,6 +33112,28 @@
       }
     },
     {
+      "id": "familial_hemiplegic_migraine",
+      "name": "Familial hemiplegic migraine",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "febrile_seizure",
       "name": "Febrile seizure",
       "specialty": "Neurology",
@@ -32650,6 +33288,28 @@
       }
     },
     {
+      "id": "gelastic_epilepsy",
+      "name": "Gelastic epilepsy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "genetic_epilepsy_febrile_seizures_plus",
       "name": "Genetic epilepsy with febrile seizures plus (GEFS+)",
       "specialty": "Neurology",
@@ -32786,6 +33446,28 @@
       "name": "Hemifacial spasm",
       "specialty": "Neurology",
       "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hereditary_hyperekplexia",
+      "name": "Hereditary hyperekplexia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -33116,6 +33798,28 @@
       "name": "Hypokalaemic periodic paralysis",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hypothalamic_hamartoma",
+      "name": "Hypothalamic hamartoma",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -33622,6 +34326,28 @@
       "name": "Markesbery-Griggs distal myopathy (ZASP/LDB3)",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mcleod_syndrome",
+      "name": "McLeod syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -34718,6 +35444,50 @@
       }
     },
     {
+      "id": "paroxysmal_kinesigenic_dyskinesia",
+      "name": "Paroxysmal kinesigenic dyskinesia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "paroxysmal_nonkinesigenic_dyskinesia",
+      "name": "Paroxysmal non-kinesigenic dyskinesia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pathobiology_of_neurologic_diseases",
       "name": "Pathobiology of Neurologic Diseases",
       "specialty": "Neurology",
@@ -35074,6 +35844,28 @@
       "name": "Rapid-onset dystonia-parkinsonism",
       "specialty": "Neurology",
       "system": "Nervous system / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rasmussen_encephalitis",
+      "name": "Rasmussen encephalitis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -42198,6 +42990,50 @@
       }
     },
     {
+      "id": "alveolar_soft_part_sarcoma",
+      "name": "Alveolar soft part sarcoma",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "aneurysmal_bone_cyst",
+      "name": "Aneurysmal bone cyst",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ankle_sprain",
       "name": "Ankle sprain",
       "specialty": "Rheumatology / MSK",
@@ -42616,6 +43452,50 @@
       }
     },
     {
+      "id": "chondroblastoma",
+      "name": "Chondroblastoma",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chondromyxoid_fibroma",
+      "name": "Chondromyxoid fibroma",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chronic_recurrent_multifocal_osteomyelitis",
       "name": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO)",
       "specialty": "Rheumatology / MSK",
@@ -42880,10 +43760,54 @@
       }
     },
     {
+      "id": "dermatofibrosarcoma_protuberans",
+      "name": "Dermatofibrosarcoma protuberans",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dermatomyositis",
       "name": "Dermatomyositis",
       "specialty": "Rheumatology / MSK",
       "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "desmoid_tumor",
+      "name": "Desmoid-type fibromatosis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -42968,6 +43892,28 @@
       }
     },
     {
+      "id": "tenosynovial_giant_cell_tumor_diffuse",
+      "name": "Diffuse-type tenosynovial giant cell tumour",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dyggve_melchior_clausen_syndrome",
       "name": "Dyggve-Melchior-Clausen syndrome",
       "specialty": "Rheumatology / MSK",
@@ -42994,6 +43940,28 @@
       "name": "Ehlers-Danlos syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "elastofibroma",
+      "name": "Elastofibroma dorsi",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -43060,6 +44028,50 @@
       "name": "Eosinophilic granulomatosis with polyangiitis (Churg-Strauss)",
       "specialty": "Rheumatology / MSK",
       "system": "Rheumatology / Vasculitis",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "epithelioid_hemangioendothelioma",
+      "name": "Epithelioid haemangioendothelioma",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "epithelioid_sarcoma",
+      "name": "Epithelioid sarcoma",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -43250,6 +44262,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "giant_cell_tumor_of_bone",
+      "name": "Giant cell tumour of bone",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -43465,6 +44499,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "infantile_myofibromatosis",
+      "name": "Infantile myofibromatosis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -44046,10 +45102,76 @@
       }
     },
     {
+      "id": "myositis_ossificans",
+      "name": "Myositis ossificans traumatica",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "nail_patella_syndrome",
       "name": "Nail-patella syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nodular_fasciitis",
+      "name": "Nodular fasciitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nonossifying_fibroma",
+      "name": "Non-ossifying fibroma",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -44134,10 +45256,76 @@
       }
     },
     {
+      "id": "osteoblastoma",
+      "name": "Osteoblastoma",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "osteofibrous_dysplasia",
+      "name": "Osteofibrous dysplasia",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "osteogenesis_imperfecta",
       "name": "Osteogenesis imperfecta",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "osteoid_osteoma",
+      "name": "Osteoid osteoma",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -44948,6 +46136,28 @@
       }
     },
     {
+      "id": "solitary_fibrous_tumor",
+      "name": "Solitary fibrous tumour",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "spondyloarthritis",
       "name": "Spondyloarthritis",
       "specialty": "Rheumatology / MSK",
@@ -45304,6 +46514,28 @@
       "name": "Trigger finger",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "unicameral_bone_cyst",
+      "name": "Unicameral (simple) bone cyst",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
