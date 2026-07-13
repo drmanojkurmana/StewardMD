@@ -1031,6 +1031,19 @@
       '#icuRoot.icu-v2 .icu-v2-member-av{width:40px;height:40px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 13px var(--font);display:flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-member-id{flex:1;min-width:0}#icuRoot.icu-v2 .icu-v2-member-nm{display:block;font:700 14.5px var(--font);color:var(--ink)}#icuRoot.icu-v2 .icu-v2-member-role{display:block;font:600 12px var(--font);color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '#icuRoot.icu-v2 .icu-v2-member-state{flex:0 0 auto;font:600 11px var(--font);color:var(--ok);background:var(--ok-soft);border-radius:999px;padding:4px 10px}' +
+      // Phase 5 — team screen: Doctor ID card, online dot, per-member remove, admin actions, role segments
+      '#icuRoot.icu-v2 .icu-v2-idcard{display:flex;align-items:center;gap:12px;background:var(--primary-soft);border:1px solid var(--primary);border-radius:14px;padding:12px 14px}' +
+      '#icuRoot.icu-v2 .icu-v2-idcard-l{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}' +
+      '#icuRoot.icu-v2 .icu-v2-idcard-lbl{font:600 11px var(--font);color:var(--muted);text-transform:uppercase;letter-spacing:.04em}' +
+      '#icuRoot.icu-v2 .icu-v2-idcard-code{font:800 20px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--primary);letter-spacing:.06em}' +
+      '#icuRoot.icu-v2 .icu-v2-idcopy{flex:0 0 auto;min-height:44px;padding:0 14px;border:1px solid var(--primary);background:var(--panel);color:var(--primary);border-radius:11px;font:700 13px var(--font);cursor:pointer;display:inline-flex;align-items:center;gap:6px}#icuRoot.icu-v2 .icu-v2-idcopy .icu-ico{width:15px;height:15px}' +
+      '#icuRoot.icu-v2 .icu-v2-member-av.on{box-shadow:0 0 0 2px var(--panel),0 0 0 4px var(--ok)}' +
+      '#icuRoot.icu-v2 .icu-v2-memrm{flex:0 0 auto;min-height:36px;padding:0 12px;border:1px solid var(--border);background:var(--panel);color:var(--bad,#c0392b);border-radius:999px;font:700 12px var(--font);cursor:pointer}' +
+      '#icuRoot.icu-v2 .icu-v2-teamacts{display:flex;flex-direction:column;gap:9px;margin-top:4px}' +
+      '#icuRoot.icu-v2 .icu-v2-roleseg-row{display:flex;flex-wrap:wrap;gap:7px}' +
+      '#icuRoot.icu-v2 .icu-v2-roleseg{min-height:40px;padding:0 13px;border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:999px;font:700 12.5px var(--font);cursor:pointer}' +
+      '#icuRoot.icu-v2 .icu-v2-roleseg.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '#icuRoot.icu-v2 .icu-v2-danger{color:var(--bad,#c0392b);border-color:var(--bad,#c0392b)}' +
       // bottom bar (board / alerts / team only)
       '#icuRoot.icu-v2 .icu-v2-bottombar{position:absolute;left:0;right:0;bottom:0;z-index:7;display:flex;background:color-mix(in srgb,var(--panel) 92%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);border-top:1px solid var(--border);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}' +
       '#icuRoot.icu-v2 .icu-v2-navbtn{flex:1;min-height:44px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--muted);font:600 10.5px var(--font)}' +
@@ -2289,6 +2302,14 @@
   var _grpLastHash = null;     // last-synced patient-state hash (mirror echo-suppression)
   var _grpMirrorT = null;      // debounce timer for the ICU_STATE → Firestore mirror
   var _grpSubGroups = null, _grpSubPts = null, _grpSubPt = null, _grpSubPres = null;
+  // ---- ICU v2 group mode Phase 5 (doctor identity + membership subcollection + invites) ----
+  var _grpMembers = null;      // live unit roster from subscribeMembers [{uid,role,name,...}] (null = loading)
+  var _grpSubMembers = null;   // members subscription teardown
+  var _grpDoctorId = null;     // my StewardMD Doctor ID (SMD-XXXXXX), minted lazily under the flag
+  var _grpInvRole = "junior_resident";   // invite-link role picker draft (LINK roles only)
+  var _grpInvLink = null;      // last generated invite URL (shown + copyable in the sheet)
+  var _grpJoinPending = null;  // stashed ?icujoin= raw value while signed out (processed after sign-in)
+  var _grpJoinConfirm = null;  // pending invite awaiting the user's confirm {gid,code,inv}
   // ---- ICU v2 Phase 3 (round-note composer + auto-timeline + smart notifications) ----
   var _grpPrevSync = null;     // last-synced mirror payload — the auto-timeline diff baseline (null = no baseline yet)
   var _roundSel = {};          // round-note composer: preset index → chosen (true)
@@ -3073,6 +3094,8 @@
     return M[r] || (r ? String(r) : "Member");
   }
   function grpCanInstruct(role) { var api = groupsApi(); if (api && api.canInstruct) { try { return !!api.canInstruct(role); } catch (e) {} } return ["head", "professor", "assistant", "senior_resident"].indexOf(role) >= 0; }
+  // Phase 5: admin (head|professor) may manage membership. UI-gate only — rules are the boundary.
+  function grpIsAdmin(role) { var api = groupsApi(); if (api && api.isAdminRole) { try { return !!api.isAdminRole(role); } catch (e) {} } return ["head", "professor"].indexOf(role) >= 0; }
   function grpPrefKey() { return "smd_icu_active_group:" + (typeof ownerNow === "function" ? ownerNow() : "anon"); }
   function grpPrefId() { try { return localStorage.getItem(grpPrefKey()) || ""; } catch (e) { return ""; } }
   function grpById(id) { var l = _grpList || []; for (var i = 0; i < l.length; i++) if (l[i].id === id) return l[i]; return null; }
@@ -3198,6 +3221,8 @@
     if (!groupMode()) return;
     var api = groupsApi(); if (!api) return;
     try { if (api.setSeverityFn) api.setSeverityFn(function (st) { try { return v2Severity(st); } catch (e) { return null; } }); } catch (e) {}
+    // Phase 5: mint the account-linked StewardMD Doctor ID lazily (first team engagement).
+    try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paint(); }); } catch (e) {}
     if (_grpSubGroups) return;
     _grpSubGroups = api.subscribeGroups(function (groups) {
       _grpList = groups || [];
@@ -3205,6 +3230,10 @@
         var found = null, i; for (i = 0; i < _grpList.length; i++) if (_grpList[i].id === _grp.id) { found = _grpList[i]; break; }
         _grp = found || null;                                   // unit may have been left / deleted
         if (_grp) { try { if (api.setActiveGroup) api.setActiveGroup(_grp.id, _grp.myRole); } catch (e) {} }
+        else {                                                  // Phase 5: left/removed/deleted → drop roster + go back to the board
+          if (_grpSubMembers) { try { _grpSubMembers(); } catch (e) {} _grpSubMembers = null; }
+          _grpMembers = null; grpTeardownPatient(); _screen = "board";
+        }
       }
       if (!_grp && _grpList.length) {
         var pref = grpPrefId(), sel = null, j; for (j = 0; j < _grpList.length; j++) if (_grpList[j].id === pref) { sel = _grpList[j]; break; }
@@ -3230,6 +3259,13 @@
         grpNotifTick();   // Phase 3: best-effort device notification for a NEW critical event
         if (ICU.isOpen() && _screen === "board") paint();
       }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen() && _screen === "board") paint(); });   // Phase 4: unit-load failure → error card + Retry
+      // Phase 5: the live unit roster (members subcollection) — for the Team screen + avatars.
+      if (_grpSubMembers) { try { _grpSubMembers(); } catch (e) {} _grpSubMembers = null; }
+      _grpMembers = null;
+      if (api && api.subscribeMembers) _grpSubMembers = api.subscribeMembers(group.id, function (list) {
+        _grpMembers = list || [];
+        if (ICU.isOpen() && (_screen === "team" || _screen === "board")) paint();
+      });
     }
     if (!silent) { _screen = "board"; _paintTop = true; paint(); }
   }
@@ -3289,8 +3325,9 @@
 
   /* --------------------------- group-mode renderers (reuse the v2 classes) -------------------- */
   function grpAvatarsHTML() {
-    var mem = (_grp && _grp.members) || [];
-    var meIni = esc(v2Initials(v2AccountName())), others = mem.length - 1;
+    // Phase 5: member count comes from the live roster (members subcollection), not the group doc.
+    var count = (_grpMembers && _grpMembers.length) ? _grpMembers.length : 1;
+    var meIni = esc(v2Initials(v2AccountName())), others = count - 1;
     return '<button class="icu-v2-avatars" data-icu-act="icuteam" aria-label="Care team"><span class="icu-v2-av">' + meIni + '</span>' +
       (others > 0 ? '<span class="icu-v2-av more">+' + others + '</span>' : "") + '</button>';
   }
@@ -3383,23 +3420,66 @@
     var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
     return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + errNote + attnHTML + filters + cards + foot + '</div></div>';
   }
+  // Phase 5: the Team screen — your StewardMD Doctor ID (copyable), the live unit roster (from the
+  // members subcollection), admin add/invite/remove actions, and leave/delete. Role-gated in the UI
+  // (rules enforce server-side). Reuses the v2 member/note/sheet classes; new bits are additive CSS.
+  function grpMemberOnline(uid, me) {
+    if (uid === me) return true;
+    var v = _grpPresence || []; for (var i = 0; i < v.length; i++) if (v[i].uid === uid) return true;
+    return false;
+  }
   function renderV2TeamGroup() {
     var g = _grp, me = ownerNow();
-    var members = g.members || [];
-    var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">' + esc(g.name || "Care team") + '</div><div class="icu-v2-shead-s">' + members.length + ' member' + (members.length === 1 ? "" : "s") + (g.unit ? " · " + esc(g.unit) : "") + '</div></div></div>';
-    var rows = members.map(function (uid) {
-      var role = (g.roles && g.roles[uid]) || null, isMe = uid === me;
-      var nm = isMe ? v2AccountName() : grpRoleLabel(role);
-      var sub = isMe ? (grpRoleLabel(role) + " · you") : "Member of this unit";
-      var ini = isMe ? v2Initials(v2AccountName()) : grpRoleLabel(role).replace(/[^A-Za-z]/g, "").slice(0, 2).toUpperCase();
-      return '<div class="icu-v2-member"><span class="icu-v2-member-av">' + esc(ini || "DR") + '</span>' +
-        '<span class="icu-v2-member-id"><span class="icu-v2-member-nm">' + esc(nm) + '</span><span class="icu-v2-member-role">' + esc(sub) + '</span></span>' +
-        (isMe ? '<span class="icu-v2-member-state">You</span>' : '') + '</div>';
-    }).join("");
-    var canManage = g.myRole === "head" || g.myRole === "professor";
-    var invite = canManage ? '<button class="icu-btn" data-icu-act="grpinvite" style="margin-top:4px">' + ico("plus", "＋") + ' Invite doctor to this unit</button>' : "";
-    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Roles set who can give instructions vs. update status. Every change is stamped with author and time — a full audit trail for the unit.' + (canManage ? "" : " Only the unit head or a professor can change roles.") + '</div>';
-    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-tlist">' + rows + invite + note + '</div></div>';
+    var canManage = grpIsAdmin(g && g.myRole);
+    var iAmHead = (g && g.myRole) === "head";
+    var members = _grpMembers;                         // null = loading
+    var count = members ? members.length : null;
+    var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">' + esc(g.name || "Care team") + '</div><div class="icu-v2-shead-s">' + (count != null ? (count + ' member' + (count === 1 ? "" : "s")) : "Loading team…") + (g.unit ? " · " + esc(g.unit) : "") + '</div></div></div>';
+
+    // Your StewardMD Doctor ID — copyable so a colleague can add you by it.
+    var idVal = _grpDoctorId || "";
+    var idCard = '<div class="icu-v2-idcard"><div class="icu-v2-idcard-l"><span class="icu-v2-idcard-lbl">Your StewardMD ID</span>' +
+      '<span class="icu-v2-idcard-code">' + (idVal ? esc(idVal) : "Generating…") + '</span></div>' +
+      (idVal ? '<button class="icu-v2-idcopy" data-icu-act="grpcopyid" aria-label="Copy your StewardMD ID">' + ico("copy", "📋") + ' Copy</button>' : "") +
+      '</div>';
+
+    // Roster rows (from the live members subcollection).
+    var rows;
+    if (members == null) {
+      rows = '<div class="icu-v2-member" aria-busy="true"><span class="icu-v2-member-av">…</span><span class="icu-v2-member-id"><span class="icu-v2-member-nm">Loading team…</span></span></div>';
+    } else if (!members.length) {
+      rows = '<div class="icu-v2-empty2">No members yet.</div>';
+    } else {
+      var order = { head: 0, professor: 1, assistant: 2, senior_resident: 3, junior_resident: 4, intern: 5 };
+      rows = members.slice().sort(function (a, b) { return (order[a.role] == null ? 9 : order[a.role]) - (order[b.role] == null ? 9 : order[b.role]); }).map(function (m) {
+        var isMe = m.uid === me, isHead = m.role === "head", online = grpMemberOnline(m.uid, me);
+        var nm = isMe ? v2AccountName() : (m.name || grpRoleLabel(m.role));
+        var ini = v2Initials(isMe ? v2AccountName() : (m.name || grpRoleLabel(m.role)));
+        var sub = grpRoleLabel(m.role) + (isMe ? " · you" : "");
+        var rm = (canManage && !isMe && !isHead) ? '<button class="icu-v2-memrm" data-icu-act="grprm:' + encodeURIComponent(m.uid) + '" aria-label="Remove ' + esc(nm) + ' from this unit">Remove</button>' : "";
+        var badge = isMe ? '<span class="icu-v2-member-state">You</span>' : (rm || '<span class="icu-v2-member-role" style="flex:0 0 auto">' + esc(grpRoleLabel(m.role)) + '</span>');
+        return '<div class="icu-v2-member"><span class="icu-v2-member-av' + (online ? " on" : "") + '">' + esc(ini || "DR") + '</span>' +
+          '<span class="icu-v2-member-id"><span class="icu-v2-member-nm">' + esc(nm) + '</span><span class="icu-v2-member-role">' + esc(sub) + '</span></span>' +
+          badge + '</div>';
+      }).join("");
+    }
+
+    // Admin actions (role-gated; rules enforce too).
+    var admin = canManage
+      ? '<div class="icu-v2-teamacts">' +
+          '<button class="icu-btn" data-icu-act="grpinvlink">' + ico("share", "🔗") + ' Invite by link</button>' +
+          '<button class="icu-btn ghost" data-icu-act="grpaddid">' + ico("plus", "＋") + ' Add by StewardMD ID or email</button>' +
+        '</div>'
+      : "";
+
+    // Leave / delete.
+    var leave = iAmHead
+      ? '<button class="icu-btn ghost icu-v2-danger" data-icu-act="grpdelete">' + ico("trash", "🗑") + ' Delete this unit</button>'
+      : '<button class="icu-btn ghost icu-v2-danger" data-icu-act="grpleave">' + ico("close", "↩") + ' Leave this unit</button>';
+
+    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Roles set who can give instructions vs. update status. Anyone can leave on their own; only the unit head or a professor can add or remove others, and the head cannot be removed. An invite link only ever adds a resident/intern — never an admin.' + '</div>';
+    var err = _grpErr ? '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") + ' ' + esc(_grpErr) + '</div>' : "";
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-tlist">' + idCard + err + rows + admin + leave + note + '</div></div>';
   }
   function grpJoinNames(a) {
     if (!a.length) return "";
@@ -3472,7 +3552,7 @@
       var active = _grp && _grp.id === g.id;
       return '<button class="icu-btn ghost" data-icu-act="grpsel:' + encodeURIComponent(g.id) + '" style="justify-content:flex-start;text-align:left">' +
         (active ? "● " : "") + '<span style="flex:1">' + esc(g.name || "ICU unit") + (g.unit ? " · " + esc(g.unit) : "") +
-        '<span style="display:block;font:600 11px var(--font);color:var(--muted)">' + esc(grpRoleLabel(g.myRole) + " · " + ((g.members || []).length) + " member" + ((g.members || []).length === 1 ? "" : "s")) + '</span></span></button>';
+        '<span style="display:block;font:600 11px var(--font);color:var(--muted)">' + esc(grpRoleLabel(g.myRole)) + '</span></span></button>';
     }).join("") : '<div class="icu-empty">' + (_grpList === null ? "Connecting to your shared units…" : "No shared units yet.") + '</div>';
     modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Your ICU units"><h3>Your ICU units</h3>' + rows +
       '<button class="icu-btn" data-icu-act="grpnew" style="margin-top:10px">' + ico("plus", "＋") + ' Create a unit</button>' +
@@ -3500,26 +3580,166 @@
       var tries = 0, iv = setInterval(function () { var g = grpById(id); if (g) { clearInterval(iv); grpSelect(g, false); } else if (++tries > 40) clearInterval(iv); }, 150);
     }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t create the unit"); if (ICU.isOpen()) paint(); });
   }
-  function grpOpenInvite() {
-    if (!grpActive()) return;
+  /* --------------------------- Phase 5: add-by-ID/email + invite-by-link + leave/remove ------- */
+  // Add a colleague by StewardMD Doctor ID OR email (admin only). The role picker excludes head
+  // (only the head may grant professor — rules enforce that too). "grpinvite" (kept) aliases here.
+  function grpOpenAddById() {
+    if (!grpActive() || !grpIsAdmin(_grp && _grp.myRole)) return;
     ensureModal();
-    var roles = (groupsApi() && groupsApi().ROLES) ? groupsApi().ROLES : ["head", "professor", "assistant", "senior_resident", "junior_resident", "intern"];
+    var iAmHead = (_grp && _grp.myRole) === "head";
+    var roles = ["professor", "assistant", "senior_resident", "junior_resident", "intern"].filter(function (r) { return r !== "professor" || iAmHead; });
     var opts = roles.map(function (r) { return '<option value="' + r + '"' + (r === "junior_resident" ? " selected" : "") + '>' + esc(grpRoleLabel(r)) + '</option>'; }).join("");
-    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Invite a doctor"><h3>Invite a doctor</h3>' +
-      '<p class="icu-doc-sub" style="margin:0 0 10px">Add a colleague to <b>' + esc((_grp && _grp.name) || "this unit") + '</b> by their StewardMD user ID (uid). Roles set who can give instructions vs. update status.</p>' +
-      '<div class="icu-fld"><label for="grpInvUid">User ID (uid)</label><input id="grpInvUid" type="text" placeholder="Firebase uid"></div>' +
-      '<div class="icu-fld"><label for="grpInvRole">Role</label><select id="grpInvRole">' + opts + '</select></div>' +
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Add a doctor by ID or email"><h3>' + ico("plus", "＋") + ' Add a doctor</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">Add a colleague to <b>' + esc((_grp && _grp.name) || "this unit") + '</b> by their <b>StewardMD ID</b> (e.g. SMD-7F3K2C) or the email on their StewardMD account.</p>' +
+      '<div class="icu-fld"><label for="grpAddId">StewardMD ID or email</label><input id="grpAddId" type="text" autocapitalize="characters" autocomplete="off" placeholder="SMD-XXXXXX or name@hospital.org"></div>' +
+      '<div class="icu-fld"><label for="grpAddRole">Role</label><select id="grpAddRole">' + opts + '</select></div>' +
       '<button class="icu-btn" data-icu-act="grpinvitesend">Add to unit</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
     modalEl.classList.add("on");
   }
-  function grpDoInvite() {
-    var api = groupsApi(); if (!api || !grpActive()) return;
-    var uid = grpVal("#grpInvUid").trim(), role = grpVal("#grpInvRole") || "junior_resident";
-    if (!uid) { if (window.toast) toast("Enter a user ID"); return; }
+  function grpDoAddById() {
+    var api = groupsApi(); if (!api || !grpActive() || !api.addByIdOrEmail) return;
+    var idOrEmail = grpVal("#grpAddId").trim(), role = grpVal("#grpAddRole") || "junior_resident";
+    if (!idOrEmail) { if (window.toast) toast("Enter a StewardMD ID or email"); return; }
     closeForm();
-    api.inviteMember(_grp.id, uid, role).then(function () { if (window.toast) toast("Added to unit"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t add — head/professor only"); if (ICU.isOpen()) paint(); });
+    api.addByIdOrEmail(_grp.id, idOrEmail, role).then(function (doc) {
+      if (window.toast) toast("Added " + ((doc && doc.name) || "doctor") + " to the unit");
+    }, function (e) {
+      var m = (e && e.message) || "";
+      if (window.toast) toast(m === "not-found" ? "No StewardMD doctor found for that ID/email" : "Couldn’t add — head/professor only");
+      _grpErr = null; if (ICU.isOpen()) paint();
+    });
   }
+  // Generate a shareable invite LINK (admin only). The role is a LINK role (default JR) — a link
+  // can never confer head/professor. On generate we copy the URL to the clipboard; a repeat tap
+  // re-copies the SAME link (changing the role clears it so the next generate mints a fresh one).
+  function grpOpenInviteLink() {
+    if (!grpActive() || !grpIsAdmin(_grp && _grp.myRole)) return;
+    ensureModal();
+    var linkRoles = (groupsApi() && groupsApi().LINK_ROLES) ? groupsApi().LINK_ROLES : ["assistant", "senior_resident", "junior_resident", "intern"];
+    var segs = linkRoles.map(function (r) {
+      return '<button class="icu-v2-roleseg' + (r === _grpInvRole ? " on" : "") + '" data-icu-act="grpinvrole:' + r + '" aria-pressed="' + (r === _grpInvRole) + '">' + esc(grpRoleLabel(r)) + '</button>';
+    }).join("");
+    var linkBox = _grpInvLink
+      ? '<div class="icu-fld"><label for="grpInvLinkVal">Shareable link (copied)</label><input id="grpInvLinkVal" type="text" readonly value="' + esc(_grpInvLink) + '"></div>' +
+        '<p class="icu-doc-sub" style="margin:-4px 0 10px">Anyone who opens this link and signs in joins <b>' + esc((_grp && _grp.name) || "this unit") + '</b> as <b>' + esc(grpRoleLabel(_grpInvRole)) + '</b> (after a confirm). Expires in ~14 days.</p>'
+      : '<p class="icu-doc-sub" style="margin:0 0 10px">Create a link a colleague can tap to join <b>' + esc((_grp && _grp.name) || "this unit") + '</b>. A link only ever adds a resident/intern/assistant — never a head or professor.</p>';
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Invite by link"><h3>' + ico("share", "🔗") + ' Invite by link</h3>' +
+      '<div class="icu-fld"><label>They join as</label><div class="icu-v2-roleseg-row" role="group" aria-label="Link role">' + segs + '</div></div>' +
+      linkBox +
+      '<button class="icu-btn" data-icu-act="grpinvlink">' + ico("copy", "📋") + ' ' + (_grpInvLink ? "Copy link again" : "Generate & copy link") + '</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Done</button></div>';
+    modalEl.classList.add("on");
+  }
+  function grpSetInvRole(role) {
+    var api = groupsApi();
+    var ok = (api && api.LINK_ROLES) ? api.LINK_ROLES : ["assistant", "senior_resident", "junior_resident", "intern"];
+    _grpInvRole = ok.indexOf(role) >= 0 ? role : "junior_resident";
+    _grpInvLink = null;                                 // role changed → force a fresh link on next generate
+    grpOpenInviteLink();
+  }
+  function grpDoInviteLink() {
+    var api = groupsApi(); if (!api || !grpActive() || !api.createInvite) return;
+    if (_grpInvLink) { grpCopyText(_grpInvLink, "Invite link copied"); grpOpenInviteLink(); return; }   // re-copy + keep the sheet open
+    api.createInvite(_grp.id, _grpInvRole).then(function (res) {
+      _grpInvLink = (res && res.url) || null;
+      if (_grpInvLink) grpCopyText(_grpInvLink, "Invite link copied — share it with your colleague");
+      grpOpenInviteLink();
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t create the link — head/professor only"); if (ICU.isOpen()) paint(); });
+  }
+  // Clipboard copy (reuses the app's existing navigator.clipboard pattern) with a toast.
+  function grpCopyText(txt, msg) {
+    try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(String(txt || "")); } catch (e) {}
+    if (window.toast) toast(msg || "Copied");
+  }
+  function grpCopyId() { if (_grpDoctorId) grpCopyText(_grpDoctorId, "Your StewardMD ID copied"); }
+  function grpDoLeave() {
+    var api = groupsApi(); if (!api || !grpActive() || !api.leaveGroup) return;
+    if (!window.confirm("Leave " + ((_grp && _grp.name) || "this unit") + "? You will lose access to its patients until you are added again.")) return;
+    api.leaveGroup(_grp.id).then(function () { if (window.toast) toast("You left the unit"); }, function (e) {
+      var m = (e && e.message) || "";
+      if (window.toast) toast(m === "head-cannot-leave" ? "You are the head — delete the unit instead" : "Couldn’t leave the unit");
+      _grpErr = null; if (ICU.isOpen()) paint();
+    });
+  }
+  function grpDoDelete() {
+    var api = groupsApi(); if (!api || !grpActive() || !api.deleteGroup) return;
+    if ((_grp && _grp.myRole) !== "head") { if (window.toast) toast("Only the unit head can delete the unit"); return; }
+    if (!window.confirm("Delete " + ((_grp && _grp.name) || "this unit") + " for everyone? This cannot be undone.")) return;
+    api.deleteGroup(_grp.id).then(function () { if (window.toast) toast("Unit deleted"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t delete the unit"); if (ICU.isOpen()) paint(); });
+  }
+  function grpDoRemove(uid) {
+    var api = groupsApi(); if (!api || !grpActive() || !uid || !api.removeMember) return;
+    var m = null, arr = _grpMembers || []; for (var i = 0; i < arr.length; i++) if (arr[i].uid === uid) { m = arr[i]; break; }
+    var nm = (m && m.name) || "this member";
+    if (!window.confirm("Remove " + nm + " from " + ((_grp && _grp.name) || "the unit") + "?")) return;
+    api.removeMember(_grp.id, uid).then(function () { if (window.toast) toast("Removed from unit"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — head/professor only"); if (ICU.isOpen()) paint(); });
+  }
+  /* --------------------------- Phase 5: join-by-link (?icujoin=<gid>.<code>) ------------------- */
+  function grpJoinParam() { try { return (location.search.match(/[?&]icujoin=([^&]+)/) || [])[1] || ""; } catch (e) { return ""; } }
+  function grpCleanJoinParam() {
+    try { var u = new URL(location.href); u.searchParams.delete("icujoin"); history.replaceState(null, "", u.pathname + (u.search || "") + (u.hash || "")); } catch (e) {}
+  }
+  // Boot handler: with the flag ON, an ?icujoin= link previews the invite and asks the user to
+  // confirm before joining. Signed out → stash + prompt sign-in (re-run after auth resolves).
+  // Flag OFF → ignored entirely (no reads, no UI). Never throws.
+  function grpBootJoin() {
+    if (!icuGroupsOn()) return;
+    var api = groupsApi(); if (!api || !api.getInvite || !api._parseJoinParam) return;
+    var raw = _grpJoinPending || grpJoinParam();
+    if (!raw) return;
+    var parsed = api._parseJoinParam(decodeURIComponent(raw));
+    if (!parsed) { _grpJoinPending = null; grpCleanJoinParam(); return; }
+    var uid = ownerNow();
+    if (!uid || uid === "anon") {                       // signed out → stash + nudge sign-in
+      _grpJoinPending = raw;
+      try { window.SMD_loadFirebase && window.SMD_loadFirebase(); } catch (e) {}
+      if (window.toast) toast("Sign in to join the ICU unit you were invited to.");
+      return;
+    }
+    _grpJoinPending = null; grpCleanJoinParam();
+    api.getInvite(parsed.gid, parsed.code).then(function (inv) {
+      if (!inv) { if (window.toast) toast("That invite link is not valid."); return; }
+      if (inv.expired) { if (window.toast) toast("That invite link has expired."); return; }
+      _grpJoinConfirm = { gid: parsed.gid, code: parsed.code, inv: inv };
+      grpShowJoinConfirm(inv);
+    }, function () { if (window.toast) toast("Couldn’t open that invite link."); });
+  }
+  function grpShowJoinConfirm(inv) {
+    injectCSS(); ensureModal();   // the confirm can appear before the dashboard was ever opened
+    var unit = inv.name || inv.unit || "an ICU unit";
+    var who = inv.createdByName ? (" invited by " + esc(inv.createdByName)) : "";
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Join ICU unit"><h3>' + ico("users", "👥") + ' Join ' + esc(unit) + '?</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 12px">You have been invited to join <b>' + esc(unit) + '</b>' + who + ' as <b>' + esc(grpRoleLabel(inv.role)) + '</b>. You will see the unit’s shared patients, instructions and timeline.</p>' +
+      '<button class="icu-btn" data-icu-act="grpjoinaccept">' + ico("check", "✓") + ' Join as ' + esc(grpRoleLabel(inv.role)) + '</button>' +
+      '<button class="icu-btn ghost" data-icu-act="grpjoindecline" style="margin-top:8px">Not now</button></div>';
+    modalEl.classList.add("on");
+  }
+  function grpDoJoinAccept() {
+    var c = _grpJoinConfirm, api = groupsApi();
+    if (!c || !api || !api.joinByInvite) { closeForm(); _grpJoinConfirm = null; return; }
+    closeForm();
+    api.joinByInvite(c.gid, c.code).then(function (gid) {
+      _grpJoinConfirm = null;
+      if (window.toast) toast("Joined the unit");
+      try { if (!ICU.isOpen()) ICU.open(); } catch (e) {}
+      try { grpEnsureGroupsSub(); } catch (e) {}
+      // Select the joined unit once it appears in the live list.
+      var tries = 0, iv = setInterval(function () {
+        var g = grpById(gid);
+        if (g) { clearInterval(iv); grpSelect(g, false); _screen = "board"; _paintTop = true; if (ICU.isOpen()) paint(); }
+        else if (++tries > 60) clearInterval(iv);
+      }, 200);
+    }, function (e) {
+      _grpJoinConfirm = null;
+      var m = (e && e.message) || "";
+      if (window.toast) toast(m === "invite-expired" ? "That invite link has expired." : "Couldn’t join — the invite may be invalid.");
+    });
+  }
+  function grpDoJoinDecline() { _grpJoinConfirm = null; grpCleanJoinParam(); closeForm(); }
+  // Kept for back-compat: the old "Invite a doctor" verbs now route to the add-by-ID/email sheet.
+  function grpOpenInvite() { grpOpenAddById(); }
+  function grpDoInvite() { grpDoAddById(); }
   function grpDoReviewed() {
     var api = groupsApi(); if (!api || !grpActive() || !_grpPtId) return;
     api.setReviewed(_grp.id, _grpPtId).then(function () { if (window.toast) toast("Marked reviewed"); }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
@@ -5246,10 +5466,20 @@
       case "grpnew": grpOpenCreate(); break;
       case "grpcreate": grpDoCreate(); break;
       case "grpinvite": grpOpenInvite(); break;
-      case "grpinvitesend": grpDoInvite(); break;
+      case "grpinvitesend": grpDoAddById(); break;
       case "grpreviewed": grpDoReviewed(); break;
       case "grptask": grpCycleTask(decodeURIComponent(arg)); break;
       case "grpretry": grpRetry(); break;   // Phase 4: re-subscribe after a connection/error state
+      // ---- ICU v2 group mode Phase 5 — doctor ID + membership (add/invite-link/leave/remove/join) ----
+      case "grpcopyid": grpCopyId(); break;
+      case "grpaddid": grpOpenAddById(); break;
+      case "grpinvlink": grpDoInviteLink(); break;
+      case "grpinvrole": grpSetInvRole(arg); break;
+      case "grpleave": grpDoLeave(); break;
+      case "grpdelete": grpDoDelete(); break;
+      case "grprm": grpDoRemove(decodeURIComponent(arg)); break;
+      case "grpjoinaccept": grpDoJoinAccept(); break;
+      case "grpjoindecline": grpDoJoinDecline(); break;
       // ---- ICU v2 Phase 3 — round-note composer (no-type instruction → tasks + timeline) ----
       case "grpround": grpOpenRound(); break;
       case "grproundback": grpRoundBack(); break;
@@ -5574,12 +5804,22 @@
     function attach() {
       try {
         var a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth());
-        if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { reconcileOwner(); }); return true; }
+        if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { reconcileOwner(); try { grpBootJoin(); } catch (e) {} }); return true; }
       } catch (e) {}
       return false;
     }
     if (attach()) return;
     var iv = setInterval(function () { if (attach() || ++tries > 60) clearInterval(iv); }, 500);
+  })();
+  // Phase 5: process a ?icujoin=<gid>.<code> invite link on boot (flag-gated — a no-op when
+  // smd_icu_groups is off). If a link is present, nudge Firebase to load so auth resolves and the
+  // auth watcher above re-runs grpBootJoin once signed in. Delayed so groupsApi()/toast exist.
+  (function () {
+    try {
+      if (!icuGroupsOn() || !grpJoinParam()) return;
+      try { window.SMD_loadFirebase && window.SMD_loadFirebase(); } catch (e) {}
+      setTimeout(function () { try { grpBootJoin(); } catch (e) {} }, 800);
+    } catch (e) {}
   })();
   // Opening the dashboard nudges Firebase to load so auth (and thus the correct
   // per-account roster) resolves promptly instead of waiting for idle.

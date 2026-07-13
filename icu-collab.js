@@ -4,15 +4,26 @@
  * existing Firebase stack (the same one SMD_CASES / caseshare use). NO DOM: icu.js
  * owns all rendering; this module only reads/writes Firestore and streams snapshots.
  *
- *   window.SMD_ICU_GROUPS — { enabled, subscribeGroups, createGroup, inviteMember,
- *     setRole, subscribePatients, subscribePatient, upsertPatient, setReviewed,
+ *   window.SMD_ICU_GROUPS — { enabled, subscribeGroups, subscribeMembers, createGroup,
+ *     inviteMember, setRole, addByIdOrEmail, leaveGroup, removeMember, deleteGroup,
+ *     createInvite, getInvite, joinByInvite, inviteUrl, ensureIdentity, myDoctorId,
+ *     resolveDoctor, subscribePatients, subscribePatient, upsertPatient, setReviewed,
  *     addTimelineEvent, subscribeTasks, addTask, setTaskStatus, enterPatient,
  *     leavePatient, subscribePresence, syncState, unsubscribeAll, … }
  *
+ * PHASE 5 reworks the membership model: members move OFF the group doc (array/map) into a
+ * per-unit SUBCOLLECTION, so a colleague can self-join by an invite link under tight rules
+ * (deny-by-default). Every doctor also gets an account-linked StewardMD Doctor ID (SMD-XXXXXX)
+ * minted lazily under the flag; the directory is get-by-exact-key only (never listable).
+ *
  * Firestore data model (per-hospital unit; security by membership + role — see
  * firestore.rules):
- *   icuGroups/{gid}                      { name, unit, hospital, createdBy,
- *                                          roles:{uid:role}, members:[uid], createdAt }
+ *   icuGroups/{gid}                      { name, unit, hospital, createdBy, createdAt }
+ *   icuGroups/{gid}/members/{uid}        { uid, role, name, addedBy, joinedAt, via? }
+ *                                        role ∈ head|professor|assistant|senior_resident|
+ *                                               junior_resident|intern
+ *   icuGroups/{gid}/invites/{code}       { role, createdBy, createdByName, expiresAt, unit, name }
+ *                                        (role is a LINK role only — never head/professor)
  *   icuGroups/{gid}/patients/{pid}       mirror of ICU_STATE + { severity, reviewedAt,
  *                                          reviewedBy, lastUpdate:{by,byName,text,at},
  *                                          assignedTo }
@@ -20,6 +31,9 @@
  *   .../patients/{pid}/tasks/{tid}       { text, status, assignedBy, assignedByName,
  *                                          completedBy, completedByName, completedAt, due, ts }
  *   .../patients/{pid}/presence/{uid}    { name, at }
+ *   users/{uid}/profile/self             { smdId, name, at }  (private cache of my Doctor ID)
+ *   doctorDirectory/{smdId}              { uid, name, at }    (source-of-truth for ID uniqueness)
+ *   doctorDirectory/e_{emailHash}        { uid, name, smdId, at }  (email→doctor lookup; hashed key)
  *
  * EVERY function is a safe no-op / graceful reject when the flag is OFF, Firebase /
  * Firestore is unavailable, or the user is signed out. Nothing here ever throws to a
@@ -37,13 +51,23 @@
   // Roles allowed to INSTRUCT (create tasks, delete patients, etc.). Enforced here (UI)
   // AND in firestore.rules — this list must stay in sync with rules' canInstruct().
   var INSTRUCT = ["head", "professor", "assistant", "senior_resident"];
+  // ADMIN roles may manage membership (invite/add/remove/role-change). Head is the ONLY role
+  // that can grant 'professor' or delete the unit; head can never be removed.
+  var ADMIN = ["head", "professor"];
+  // Roles an invite LINK may confer — NEVER head/professor (a link can't mint an admin). Must
+  // stay in sync with the rules' self-join-via-link allow-list.
+  var LINK_ROLES = ["assistant", "senior_resident", "junior_resident", "intern"];
   var ROLE_LABEL = {
     head: "Unit Head", professor: "Professor", assistant: "Assistant Professor",
     senior_resident: "Senior Resident", junior_resident: "Junior Resident", intern: "Intern"
   };
   function canInstruct(role) { return INSTRUCT.indexOf(role) >= 0; }
+  function isAdminRole(role) { return ADMIN.indexOf(role) >= 0; }
   function roleLabel(r) { return ROLE_LABEL[r] || (r ? String(r) : "Member"); }
   function normRole(r) { return ROLES.indexOf(r) >= 0 ? r : "junior_resident"; }
+  // Clamp an invite-link role to a NON-admin role (default junior_resident). A link can never
+  // confer head/professor — mirrored server-side in firestore.rules.
+  function normInviteRole(r) { return LINK_ROLES.indexOf(r) >= 0 ? r : "junior_resident"; }
 
   /* ------------------------------------------------------------------- flag */
   // ?icugroups=1/0 → localStorage['smd_icu_groups'] → default OFF.
@@ -85,6 +109,15 @@
       }
     } catch (e) {}
     return "Clinician";
+  }
+  function currentEmail() {
+    try {
+      if (window.SMD_ACCOUNT && SMD_ACCOUNT.profile) {
+        var p = SMD_ACCOUNT.profile();
+        if (p && p.email) return String(p.email).trim().toLowerCase();
+      }
+    } catch (e) {}
+    return "";
   }
   // Enable offline persistence ONCE. Failure (multi-tab / unsupported / firestore already
   // started) is expected and ignored — the app boots firestore in app.js, so this often
@@ -169,21 +202,28 @@
     clean.alerts = [];
     return clean;
   }
-  // Map a group doc → the shape icu.js consumes ({id,name,unit,hospital,roles,members,myRole}).
-  function mapGroupDoc(id, data, uid) {
+  // Map a group doc → the shape icu.js consumes. PHASE 5: members/roles no longer live on the
+  // group doc — they're a subcollection (see subscribeMembers). myRole is supplied by the
+  // membership query (subscribeGroups). members/roles are kept as empty defaults for callers
+  // that still reference them; the live roster comes from subscribeMembers.
+  function mapGroupDoc(id, data, uid, role) {
     data = data || {};
-    var roles = data.roles || {};
     return {
       id: id, name: data.name || "", unit: data.unit || "", hospital: data.hospital || "",
-      roles: roles, members: data.members || [], createdBy: data.createdBy || null,
-      myRole: (uid && roles[uid]) || null
+      roles: {}, members: [], createdBy: data.createdBy || null,
+      myRole: role || null
+    };
+  }
+  function mapMemberDoc(id, data) {
+    data = data || {};
+    return {
+      uid: id, role: data.role || null, name: data.name || "",
+      addedBy: data.addedBy || null, joinedAt: tsToMs(data.joinedAt), via: data.via || null
     };
   }
   function myRole(group) {
     if (!group) return null;
-    if (group.myRole) return group.myRole;
-    var uid = currentUid();
-    return (uid && group.roles && group.roles[uid]) || null;
+    return group.myRole || null;
   }
   // Map a shared patient doc → the SAME board-card base shape v2BoardList produces in icu.js
   // ({id,name,dx,bed,savedAt,state,…}), so the existing board renderer is reused. icu.js applies
@@ -270,64 +310,350 @@
 
   function grpRef(db, gid) { return db.collection("icuGroups").doc(gid); }
   function ptRef(db, gid, pid) { return grpRef(db, gid).collection("patients").doc(pid); }
+  function memRef(db, gid, uid) { return grpRef(db, gid).collection("members").doc(uid); }
+  function invRef(db, gid, code) { return grpRef(db, gid).collection("invites").doc(code); }
+  function dirRef(db, key) { return db.collection("doctorDirectory").doc(key); }
+  function profRef(db, uid) { return db.collection("users").doc(uid).collection("profile").doc("self"); }
 
   /* ------------------------------------------------------------------ groups */
   // onErr (optional) — called with the snapshot error (e.g. permission-denied) so the UI can show
   // a non-technical error state + Retry. When omitted, falls back to the old cb([]) behaviour.
+  //
+  // PHASE 5: "units I belong to" = a collectionGroup('members') query where uid == me. For each
+  // membership we hold its parent group doc + my role and re-emit the merged list on any change.
+  // (Requires the members collection-group index — see firestore.indexes.json.)
   function subscribeGroups(cb, onErr) {
     if (!icuGroupsOn() || !currentUid()) { cb && cb([]); return function () {}; }
     return makeSub(function (db) {
       var uid = currentUid();
       if (!uid) { cb && cb([]); return null; }
-      return db.collection("icuGroups").where("members", "array-contains", uid)
+      var myRoles = {};      // gid -> my role (from the member doc)
+      var groupData = {};    // gid -> group doc data (undefined=loading, null=missing/denied)
+      var groupOffs = {};    // gid -> group-doc listener teardown
+      function emit() {
+        var out = [];
+        for (var gid in myRoles) {
+          if (!myRoles.hasOwnProperty(gid)) continue;
+          var d = groupData[gid];
+          if (d === undefined || d === null) continue;   // not loaded / gone
+          out.push(mapGroupDoc(gid, d, uid, myRoles[gid]));
+        }
+        cb && cb(out);
+      }
+      var memOff = db.collectionGroup("members").where("uid", "==", uid)
         .onSnapshot({ includeMetadataChanges: true }, function (snap) {
           try { _meta.fromCache = !!(snap.metadata && snap.metadata.fromCache); _meta.pendingWrites = !!(snap.metadata && snap.metadata.hasPendingWrites); } catch (e) {}
-          var out = [];
-          snap.forEach(function (d) { out.push(mapGroupDoc(d.id, d.data(), uid)); });
-          cb && cb(out);
+          var seen = {};
+          snap.forEach(function (mdoc) {
+            var gref = mdoc.ref && mdoc.ref.parent && mdoc.ref.parent.parent;   // icuGroups/{gid}
+            if (!gref) return;
+            var gid = gref.id; seen[gid] = true;
+            myRoles[gid] = (mdoc.data() || {}).role || null;
+            if (!groupOffs[gid]) {
+              groupData[gid] = undefined;
+              groupOffs[gid] = gref.onSnapshot(function (gd) {
+                groupData[gid] = (gd && gd.exists) ? gd.data() : null; emit();
+              }, function () { groupData[gid] = null; emit(); });
+            }
+          });
+          // Drop memberships that vanished (left / removed / unit deleted).
+          for (var gid2 in myRoles) {
+            if (!myRoles.hasOwnProperty(gid2) || seen[gid2]) continue;
+            delete myRoles[gid2]; delete groupData[gid2];
+            if (groupOffs[gid2]) { try { groupOffs[gid2](); } catch (e) {} delete groupOffs[gid2]; }
+          }
+          emit();
         }, function (e) { if (onErr) onErr(e); else cb && cb([]); });
+      return function () {
+        try { memOff(); } catch (e) {}
+        for (var gid in groupOffs) { if (groupOffs.hasOwnProperty(gid)) { try { groupOffs[gid](); } catch (e) {} } }
+      };
     });
   }
+  // Live unit roster (members subcollection) → [{uid,role,name,addedBy,joinedAt,via}].
+  function subscribeMembers(gid, cb) {
+    if (!icuGroupsOn() || !gid) { cb && cb([]); return function () {}; }
+    return makeSub(function (db) {
+      return grpRef(db, gid).collection("members")
+        .onSnapshot(function (snap) {
+          var out = []; snap.forEach(function (d) { out.push(mapMemberDoc(d.id, d.data())); });
+          cb && cb(out);
+        }, function () { cb && cb([]); });
+    });
+  }
+  // Create a unit. PHASE 5: the group doc + the creator's members/{uid}=head doc are written
+  // SEQUENTIALLY (group first, member second) — NOT batched — because the members-create rule
+  // does get(/icuGroups/{gid}).createdBy, and get()/exists() in rules read the pre-commit state,
+  // so a batched member-create would not yet see its sibling group doc and would be denied. We
+  // also mint the doctor identity first (first team engagement).
   function createGroup(info) {
     return new Promise(function (resolve, reject) {
       if (!icuGroupsOn()) return reject(new Error("icu-groups-disabled"));
-      fs(function (db) {
-        var uid = currentUid();
-        if (!db || !uid) return reject(new Error("firestore-unavailable"));
-        var roles = {}; roles[uid] = "head";
-        var doc = {
-          name: (info && info.name) || "ICU unit",
-          unit: (info && info.unit) || "",
-          hospital: (info && info.hospital) || "",
-          createdBy: uid, roles: roles, members: [uid],
-          createdAt: fieldValue().serverTimestamp()
-        };
-        track(db.collection("icuGroups").add(doc)).then(function (ref) { resolve(ref.id); }, reject);
+      ensureIdentity(function () {
+        fs(function (db) {
+          var uid = currentUid();
+          if (!db || !uid) return reject(new Error("firestore-unavailable"));
+          var gref = db.collection("icuGroups").doc();
+          var doc = {
+            name: (info && info.name) || "ICU unit",
+            unit: (info && info.unit) || "",
+            hospital: (info && info.hospital) || "",
+            createdBy: uid,
+            createdAt: fieldValue().serverTimestamp()
+          };
+          track(gref.set(doc)).then(function () {
+            var mdoc = { uid: uid, role: "head", name: currentName(), addedBy: uid, joinedAt: fieldValue().serverTimestamp() };
+            track(memRef(db, gref.id, uid).set(mdoc)).then(function () { resolve(gref.id); }, reject);
+          }, reject);
+        });
       });
     });
   }
-  // Membership / role management — head|professor only (enforced in rules too; a member can
-  // never escalate their own role — see the rules' self-role-immutability check).
-  function updateGroup(gid, build) {
+  // Delete the whole unit (head only — rules enforce). The members/invites/patients
+  // subcollections are NOT cascade-deleted client-side (Firestore has no cascade); once the
+  // group doc is gone the unit is unreadable and drops out of every member's list.
+  function deleteGroup(gid) {
     return new Promise(function (resolve, reject) {
-      if (!icuGroupsOn()) return reject(new Error("icu-groups-disabled"));
+      if (!icuGroupsOn() || !gid) return reject(new Error("icu-groups-disabled"));
       fs(function (db) {
         if (!db || !currentUid()) return reject(new Error("firestore-unavailable"));
-        var patch; try { patch = build(fieldValue()); } catch (e) { return reject(e); }
-        track(grpRef(db, gid).update(patch)).then(function () { resolve(gid); }, reject);
+        track(grpRef(db, gid).delete()).then(function () { resolve(gid); }, reject);
       });
     });
   }
+  // Admin-add by raw uid (legacy invite path kept for back-compat). Rules enforce admin + role!=head
+  // (+ only head may grant professor). A member may never change their own role.
   function inviteMember(gid, uid, role) {
-    return updateGroup(gid, function (fv) {
-      var patch = { members: fv.arrayUnion(uid) };
-      patch["roles." + uid] = normRole(role);
-      return patch;
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid || !uid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        if (!db || !currentUid()) return reject(new Error("firestore-unavailable"));
+        var mdoc = { uid: uid, role: normRole(role), name: "", addedBy: currentUid(), joinedAt: fieldValue().serverTimestamp() };
+        track(memRef(db, gid, uid).set(mdoc)).then(function () { resolve(uid); }, reject);
+      });
     });
   }
   function setRole(gid, uid, role) {
-    return updateGroup(gid, function () {
-      var patch = {}; patch["roles." + uid] = normRole(role); return patch;
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid || !uid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        if (!db || !currentUid()) return reject(new Error("firestore-unavailable"));
+        track(memRef(db, gid, uid).update({ role: normRole(role) })).then(function () { resolve(uid); }, reject);
+      });
+    });
+  }
+  // Add a colleague by their StewardMD Doctor ID or email (admin only; rules enforce). Resolves
+  // via the directory (get-by-exact-key only) then creates their members/{uid} doc.
+  function addByIdOrEmail(gid, idOrEmail, role) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid) return reject(new Error("icu-groups-disabled"));
+      resolveDoctor(idOrEmail).then(function (doc) {
+        if (!doc || !doc.uid) return reject(new Error("not-found"));
+        fs(function (db) {
+          if (!db || !currentUid()) return reject(new Error("firestore-unavailable"));
+          var r = normRole(role); if (r === "head") r = "professor";   // never admin-add a head
+          var mdoc = { uid: doc.uid, role: r, name: doc.name || "", addedBy: currentUid(), joinedAt: fieldValue().serverTimestamp() };
+          track(memRef(db, gid, doc.uid).set(mdoc)).then(function () { resolve(doc); }, reject);
+        });
+      }, reject);
+    });
+  }
+  // Leave a unit on your own. A HEAD may not bare-leave (they must delete the unit instead) —
+  // blocked here with a clear error and by the rules (a head's own member doc can't be deleted).
+  function leaveGroup(gid) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        var uid = currentUid();
+        if (!db || !uid) return reject(new Error("firestore-unavailable"));
+        memRef(db, gid, uid).get().then(function (d) {
+          var role = (d && d.exists) ? ((d.data() || {}).role || null) : null;
+          if (role === "head") return reject(new Error("head-cannot-leave"));
+          track(memRef(db, gid, uid).delete()).then(function () { resolve(gid); }, reject);
+        }, function () {
+          track(memRef(db, gid, uid).delete()).then(function () { resolve(gid); }, reject);
+        });
+      });
+    });
+  }
+  // Remove another member (admin only; never the head — rules enforce both).
+  function removeMember(gid, uid) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid || !uid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        if (!db || !currentUid()) return reject(new Error("firestore-unavailable"));
+        track(memRef(db, gid, uid).delete()).then(function () { resolve(uid); }, reject);
+      });
+    });
+  }
+
+  /* --------------------------------------------------- doctor identity + dir */
+  // A short, unguessable, account-linked StewardMD Doctor ID (SMD-XXXXXX). Uppercase base32 with
+  // ambiguous chars removed (no 0/O/1/I/L). Uniqueness is guaranteed by the directory doc being
+  // the source of truth: we create doctorDirectory/{smdId} inside a transaction that aborts on
+  // collision, then regenerate. smdId is cached on users/{uid}/profile/self so we never re-mint.
+  var SMD_ID_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";   // 31 chars, no 0/O/1/I/L
+  var _identity = { smdId: null };
+  function randChar(alphabet) { return alphabet.charAt(Math.floor(Math.random() * alphabet.length)); }
+  function genSmdId() { var s = ""; for (var i = 0; i < 6; i++) s += randChar(SMD_ID_ALPHABET); return "SMD-" + s; }
+  // Deterministic, dependency-free hash of the lowercased email → a directory key (NEVER the raw
+  // email). Two independent 32-bit accumulators (FNV-1a + djb2) concatenated in base36 to keep
+  // collisions low across a clinic-sized user base without a crypto dependency.
+  function emailHash(email) {
+    var s = String(email || "").trim().toLowerCase();
+    var h1 = 0x811c9dc5, h2 = 5381;
+    for (var i = 0; i < s.length; i++) {
+      var c = s.charCodeAt(i);
+      h1 ^= c; h1 = (h1 + ((h1 << 1) + (h1 << 4) + (h1 << 7) + (h1 << 8) + (h1 << 24))) >>> 0;   // ×16777619
+      h2 = (((h2 << 5) + h2) + c) >>> 0;   // ×33 + c
+    }
+    return (h1 >>> 0).toString(36) + (h2 >>> 0).toString(36);
+  }
+  function looksLikeEmail(s) { return /@/.test(String(s || "")); }
+  // Normalise a typed Doctor ID: uppercase, strip spaces, allow a bare 6-char code (add SMD-).
+  function normalizeId(s) {
+    s = String(s || "").trim().toUpperCase().replace(/\s+/g, "");
+    if (s && s.indexOf("SMD-") !== 0 && /^[A-Z0-9]{6}$/.test(s)) s = "SMD-" + s;
+    return s;
+  }
+  function myDoctorId() { return _identity.smdId || null; }
+  // Ensure this account has a Doctor ID (idempotent). cb (optional) is invoked with the id (or
+  // null) regardless of outcome — never throws to the caller.
+  function ensureIdentity(cb) {
+    if (!icuGroupsOn()) { cb && cb(null); return; }
+    if (_identity.smdId) { cb && cb(_identity.smdId); return; }
+    fs(function (db) {
+      var uid = currentUid();
+      if (!db || !uid) { cb && cb(null); return; }
+      profRef(db, uid).get().then(function (snap) {
+        var data = (snap && snap.exists) ? (snap.data() || {}) : {};
+        if (data.smdId) { _identity.smdId = data.smdId; cb && cb(data.smdId); return; }
+        mintIdentity(db, uid, 0, cb);
+      }, function () { mintIdentity(db, uid, 0, cb); });
+    });
+  }
+  function mintIdentity(db, uid, attempt, cb) {
+    attempt = attempt || 0;
+    if (attempt > 6) { cb && cb(null); return; }
+    var smdId = genSmdId(), name = currentName(), fv = fieldValue();
+    var ref = dirRef(db, smdId);
+    track(db.runTransaction(function (tx) {
+      return tx.get(ref).then(function (d) {
+        if (d && d.exists) return Promise.reject(new Error("smdid-collision"));   // regenerate
+        tx.set(ref, { uid: uid, name: name, at: fv.serverTimestamp() });
+        return smdId;
+      });
+    })).then(function () {
+      _identity.smdId = smdId;
+      try { profRef(db, uid).set({ smdId: smdId, name: name, at: fv.serverTimestamp() }, { merge: true }).catch(function () {}); } catch (e) {}
+      try {
+        var email = currentEmail();
+        if (email) dirRef(db, "e_" + emailHash(email)).set({ uid: uid, name: name, smdId: smdId, at: fv.serverTimestamp() }, { merge: true }).catch(function () {});
+      } catch (e) {}
+      cb && cb(smdId);
+    }, function () {
+      if (attempt < 6) { mintIdentity(db, uid, attempt + 1, cb); return; }
+      cb && cb(null);
+    });
+  }
+  // Resolve a doctor by exact StewardMD ID OR email (get-by-exact-key only — the directory is
+  // NEVER listed). Returns {uid,name,smdId} or null.
+  function resolveDoctor(idOrEmail) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn()) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        if (!db) return reject(new Error("firestore-unavailable"));
+        var raw = String(idOrEmail || "").trim();
+        if (!raw) return resolve(null);
+        var byEmail = looksLikeEmail(raw);
+        var key = byEmail ? ("e_" + emailHash(raw)) : normalizeId(raw);
+        if (!key) return resolve(null);
+        track(dirRef(db, key).get()).then(function (d) {
+          if (!d || !d.exists) return resolve(null);
+          var data = d.data() || {};
+          resolve({ uid: data.uid || null, name: data.name || "", smdId: data.smdId || (byEmail ? null : key) });
+        }, reject);
+      });
+    });
+  }
+
+  /* ------------------------------------------------------- invites + join */
+  var INVITE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
+  function genCode(n) { n = n || 22; var s = ""; for (var i = 0; i < n; i++) s += randChar(INVITE_ALPHABET); return s; }
+  var INVITE_TTL_MS = 14 * 24 * 60 * 60 * 1000;   // ~14 days
+  function inviteUrl(gid, code) {
+    var origin = ""; try { origin = location.origin; } catch (e) {}
+    return origin + "/?icujoin=" + gid + "." + code;
+  }
+  // Parse a "?icujoin=<gid>.<code>" value → {gid,code} | null. Splits on the FIRST dot (gids and
+  // codes are dot-free alphanumerics).
+  function parseJoinParam(raw) {
+    raw = String(raw || "");
+    var dot = raw.indexOf(".");
+    if (dot <= 0 || dot >= raw.length - 1) return null;
+    var gid = raw.slice(0, dot), code = raw.slice(dot + 1);
+    if (!gid || !code) return null;
+    return { gid: gid, code: code };
+  }
+  // Create a shareable invite (admin only — rules enforce). The role is clamped to a LINK role
+  // (never head/professor). Returns { code, url, role }.
+  function createInvite(gid, role) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        var uid = currentUid();
+        if (!db || !uid) return reject(new Error("firestore-unavailable"));
+        var r = normInviteRole(role), code = genCode(22), fv = fieldValue();
+        grpRef(db, gid).get().then(function (gd) {
+          var g = (gd && gd.exists) ? (gd.data() || {}) : {};
+          var doc = {
+            role: r, createdBy: uid, createdByName: currentName(),
+            expiresAt: nowMs() + INVITE_TTL_MS, unit: g.unit || "", name: g.name || ""
+          };
+          track(invRef(db, gid, code).set(doc)).then(function () {
+            resolve({ code: code, url: inviteUrl(gid, code), role: r });
+          }, reject);
+        }, reject);
+      });
+    });
+  }
+  // Read an invite by code (any signed-in holder of the link — needed to preview/join).
+  function getInvite(gid, code) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid || !code) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        if (!db) return reject(new Error("firestore-unavailable"));
+        track(invRef(db, gid, code).get()).then(function (d) {
+          if (!d || !d.exists) return resolve(null);
+          var data = d.data() || {}, exp = tsToMs(data.expiresAt);
+          resolve({
+            gid: gid, code: code, role: normInviteRole(data.role), unit: data.unit || "",
+            name: data.name || "", createdByName: data.createdByName || "",
+            expiresAt: exp, expired: (exp != null && exp < nowMs())
+          });
+        }, reject);
+      });
+    });
+  }
+  // Self-join via a valid invite link: mint identity, then create members/{self} with the invite's
+  // (clamped, non-admin) role, addedBy:'link', via:code. Rules re-verify the invite + role.
+  function joinByInvite(gid, code) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid || !code) return reject(new Error("icu-groups-disabled"));
+      ensureIdentity(function () {
+        fs(function (db) {
+          var uid = currentUid();
+          if (!db || !uid) return reject(new Error("firestore-unavailable"));
+          invRef(db, gid, code).get().then(function (d) {
+            if (!d || !d.exists) return reject(new Error("invite-not-found"));
+            var inv = d.data() || {}, exp = tsToMs(inv.expiresAt);
+            if (exp != null && exp < nowMs()) return reject(new Error("invite-expired"));
+            var role = normInviteRole(inv.role);   // clamp — a link can never confer head/professor
+            var mdoc = { uid: uid, role: role, name: currentName(), addedBy: "link", joinedAt: fieldValue().serverTimestamp(), via: code };
+            track(memRef(db, gid, uid).set(mdoc)).then(function () { resolve(gid); }, reject);
+          }, reject);
+        });
+      });
     });
   }
 
@@ -509,18 +835,34 @@
   window.SMD_ICU_GROUPS = {
     enabled: icuGroupsOn,
     ROLES: ROLES,
+    LINK_ROLES: LINK_ROLES,
     canInstruct: canInstruct,
+    isAdminRole: isAdminRole,
     roleLabel: roleLabel,
     myRole: myRole,
     setActiveGroup: setActiveGroup,
     setSeverityFn: setSeverityFn,
     syncState: syncState,
     unsubscribeAll: unsubscribeAll,
-    // groups
+    // groups + membership
     subscribeGroups: subscribeGroups,
+    subscribeMembers: subscribeMembers,
     createGroup: createGroup,
+    deleteGroup: deleteGroup,
     inviteMember: inviteMember,
     setRole: setRole,
+    addByIdOrEmail: addByIdOrEmail,
+    leaveGroup: leaveGroup,
+    removeMember: removeMember,
+    // doctor identity + directory
+    ensureIdentity: ensureIdentity,
+    myDoctorId: myDoctorId,
+    resolveDoctor: resolveDoctor,
+    // invites + join-by-link
+    createInvite: createInvite,
+    getInvite: getInvite,
+    joinByInvite: joinByInvite,
+    inviteUrl: inviteUrl,
     // patients
     subscribePatients: subscribePatients,
     subscribePatient: subscribePatient,
@@ -536,8 +878,11 @@
     leavePatient: leavePatient,
     subscribePresence: subscribePresence,
     // pure test seams (deterministic transforms — used by the rules/logic harness)
-    _mapGroupDoc: mapGroupDoc, _mapPatientDoc: mapPatientDoc, _mapTimeline: mapTimeline, _mapTask: mapTask,
+    _mapGroupDoc: mapGroupDoc, _mapMemberDoc: mapMemberDoc, _mapPatientDoc: mapPatientDoc, _mapTimeline: mapTimeline, _mapTask: mapTask,
     _buildTimelineEvent: buildTimelineEvent, _buildTask: buildTask, _taskStatusPatch: taskStatusPatch,
-    _sanitizeState: sanitizeState, _normStatus: normStatus, _normRole: normRole
+    _sanitizeState: sanitizeState, _normStatus: normStatus, _normRole: normRole, _normInviteRole: normInviteRole,
+    _genSmdId: genSmdId, _emailHash: emailHash, _looksLikeEmail: looksLikeEmail, _normalizeId: normalizeId,
+    _parseJoinParam: parseJoinParam, _inviteUrl: inviteUrl, _isAdminRole: isAdminRole,
+    _SMD_ID_ALPHABET: SMD_ID_ALPHABET
   };
 })();

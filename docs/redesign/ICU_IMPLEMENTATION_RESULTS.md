@@ -560,3 +560,157 @@ stewardmd-gold367`** (bump these together on any further change or the SW serves
 5. **On-device build** — `npm run build:www && npx cap copy ios/android`, then build + smoke on a
    physical iPhone + Android (dark mode, VoiceOver/TalkBack labels, reduced-motion system setting,
    safe-area on a notched device, and the best-effort device notification via `native-push.js`).
+
+---
+
+## Phase 5 — identity + membership + invites (`smd_icu_groups`, default OFF)
+
+Additive and fully flag-gated: with `smd_icu_groups` OFF, nothing here runs — no Firestore
+writes, no identity minting, no UI, no `?icujoin=` handling. This phase reworks the Phase-2
+membership model and adds a doctor identity/directory + shareable invite links. Security-critical
+(a get-by-key doctor directory + a self-join-by-link rule), so the posture is deny-by-default with
+a thorough rules-test pattern.
+
+### The reworked membership model
+Members moved OFF the group doc (the old `members:[uid]` array + `roles:{uid:role}` map) into a
+per-unit **subcollection** so a colleague can self-join under tight per-write rules:
+
+- `icuGroups/{gid}` → `{ name, unit, hospital, createdBy, createdAt }` (dropped `members`/`roles`).
+- `icuGroups/{gid}/members/{uid}` → `{ uid, role, name, addedBy, joinedAt, via? }`,
+  role ∈ `head|professor|assistant|senior_resident|junior_resident|intern`.
+- `createGroup` now writes the group doc **then** the creator's `members/{uid}` head doc
+  **sequentially — NOT batched**. The members-create rule calls `get(/icuGroups/{gid}).createdBy`,
+  and rule `get()`/`exists()` read **committed** state; a batched member-create would not yet see
+  its sibling group doc and would be denied. (The task said "a batch is fine" — this is the one
+  deliberate deviation, driven by that get() gotcha.)
+- `subscribeGroups` = a **`collectionGroup('members') where uid == me`** query → for each
+  membership, subscribe to the parent group doc + carry my role; re-emit the merged list on any
+  change. New `subscribeMembers(gid, cb)` streams the roster for the Team screen + avatars.
+- **collectionGroup index** — `firestore.indexes.json` (new) enables the `members` collection-group
+  query on `uid` (single-field, `COLLECTION_GROUP` scope, under `fieldOverrides`). `firebase.json`
+  now references it. **Owner must** `firebase deploy --only firestore:indexes` (a PR does not deploy).
+
+### Doctor identity + directory (privacy guarantees)
+- Every doctor gets a short, unguessable, account-linked **StewardMD Doctor ID** `SMD-XXXXXX`
+  (uppercase base32, 31-char alphabet with ambiguous `0/O/1/I/L` removed), **minted lazily under
+  the flag** on first team engagement (`grpEnsureGroupsSub` / Team-screen open / first join).
+  *(Alternative considered: mint-for-all-at-sign-in — NOT chosen; it would write identity for
+  every user regardless of whether they ever touch collaboration, and can't be flag-scoped.)*
+- **Uniqueness** is guaranteed by the directory doc being the source of truth: `ensureIdentity`
+  creates `doctorDirectory/{smdId}` = `{uid,name,at}` inside a **transaction that aborts on
+  collision** (doc already exists) and regenerates; the id is then cached on
+  `users/{uid}/profile/self`. An email lookup entry `doctorDirectory/e_{emailHash}` =
+  `{uid,name,smdId,at}` is keyed by a **hash of the lowercased email — the raw email is never
+  stored**.
+- **Privacy:** the directory is **get-by-exact-key only** (rules: `get` if signed in, `list:false`).
+  You cannot enumerate it into a roster of every doctor. A user may only create/own the entry
+  pointing to **their** uid (`request.resource.data.uid == request.auth.uid`), and `update` requires
+  `resource.data.uid == request.auth.uid` and forbids reassigning `uid` — so nobody can overwrite
+  another doctor's ID entry (this is also what makes the smdId collision-check trustworthy).
+- `resolveDoctor(idOrEmail)`: email-looking input → hash → `get('doctorDirectory/e_'+hash)`; else
+  normalise the id (uppercase, add `SMD-` to a bare 6-char code) → `get('doctorDirectory/'+id)`.
+  Returns `{uid,name,smdId}` or null. Never lists.
+
+### Invites + join-by-link
+- `createInvite(gid, role)` (admin only): writes `icuGroups/{gid}/invites/{code}` =
+  `{ role, createdBy, createdByName, expiresAt (~14 days), unit, name }` with an unguessable 22-char
+  code. Role is **clamped to a LINK role** (default `junior_resident`; never head/professor).
+  Returns a shareable `location.origin + '/?icujoin=' + gid + '.' + code`.
+- **Boot handler** (`grpBootJoin`, wired into the auth watcher + a boot IIFE): on load, if
+  `smd_icu_groups` is on and `?icujoin=<gid>.<code>` is present → when signed in, `getInvite` →
+  a **confirm** sheet ("Join <unit> as <role>?") → on accept `joinByInvite` mints identity then
+  creates `members/{self}` = `{uid, role: invite.role, name, addedBy:'link', joinedAt, via:code}`,
+  then opens the unit board. Signed out → the pending join is **stashed** and sign-in is prompted;
+  the auth watcher re-runs the handler after sign-in. The `?icujoin=` param is cleaned from the URL.
+  Flag OFF → ignored entirely.
+- `addByIdOrEmail(gid, idOrEmail, role)` (admin): resolve via the directory → create
+  `members/{resolvedUid}`. `leaveGroup(gid)`: delete `members/{self}` (blocked for a head — must
+  delete the unit). `removeMember(gid, uid)`: admin only, never the head. `deleteGroup(gid)`: head
+  only (subcollections are not cascade-deleted client-side; the unit becomes unreadable once the
+  group doc is gone and drops out of every member's list).
+
+### Exact permission matrix (as implemented, enforced server-side in `firestore.rules`)
+Rule helpers: `isMember(gid)=exists(members/{me})`, `roleOf(gid)=get(members/{me}).role`,
+`isAdmin = isMember && roleOf in [head,professor]`,
+`canInstruct = isMember && roleOf in [head,professor,assistant,senior_resident]`.
+
+| Operation | Allowed when |
+|---|---|
+| `icuGroups/{gid}` read | isMember |
+| `icuGroups/{gid}` create | `auth.uid == createdBy` |
+| `icuGroups/{gid}` update (metadata) | isAdmin |
+| `icuGroups/{gid}` delete (whole unit) | isMember && `roleOf == head` |
+| `members/{uid}` read | isMember |
+| `members/{uid}` create (a) self-join-via-link | `auth.uid==uid` && `'via' in data` && `role in [assistant,senior_resident,junior_resident,intern]` && invite exists && `invite.expiresAt > now` && `role == invite.role` |
+| `members/{uid}` create (b) creator bootstrap | `auth.uid==uid` && `role=='head'` && `get(group).createdBy == auth.uid` |
+| `members/{uid}` create (c) admin-add | isAdmin && `role != head` && (`role != professor` OR `roleOf==head`) |
+| `members/{uid}` update (role change) | isAdmin && `auth.uid != uid` && `resource.role != head` && `new role != head` && (`new role != professor` OR `roleOf==head`) |
+| `members/{uid}` delete | (`auth.uid==uid` && `resource.role != head`) — leave — OR (isAdmin && `resource.role != head`) — remove |
+| `invites/{code}` get | signed in (holder of the code) |
+| `invites/{code}` list | never |
+| `invites/{code}` create/update/delete | isAdmin |
+| `patients/**` read / create+update / delete | isMember / isMember / canInstruct |
+| `timeline/**` create | isMember && `data.by == auth.uid`; update/delete never (append-only) |
+| `tasks/**` create/delete / update | canInstruct / isMember |
+| `presence/{uid}` read / write | isMember / (`auth.uid==uid` && isMember) |
+| `doctorDirectory/{key}` get / list | signed in / never |
+| `doctorDirectory/{key}` create | signed in && `data.uid == auth.uid` |
+| `doctorDirectory/{key}` update / delete | own-uid, non-reassignable / never |
+| `users/{uid}/profile/**` read+write | `auth.uid == uid` (private) |
+
+Consequences: **a link can never grant an admin role** (rule (a) restricts to the four
+resident/assistant roles AND requires the role to equal the invite's role, while `createInvite`
+clamps the invite role — two independent guards). **The head can never be removed** (both delete
+branches require `resource.role != head`) and **can never bare-leave** (client + rule). **Anyone
+else can leave on their own.** **Only head/professor can add/remove/re-role others**, and **only
+the head can grant professor**. **A member can never change their own role.**
+
+### Team screen (`renderV2TeamGroup`) + verbs
+Header shows **"Your StewardMD ID: SMD-XXXXXX"** with a copy button; the member list comes from
+`subscribeMembers` (name, role label, online dot cross-referenced against presence, a "You" badge).
+Admins get a per-member **Remove** (hidden on the head + self), **Invite by link** (role segments,
+default JR → generate + copy URL), and **Add by StewardMD ID or email** (resolve → pick role → add,
+with a clear not-found error). Head sees **Delete unit** in place of **Leave unit**. New additive
+`data-icu-act` verbs: `grpcopyid`, `grpinvlink`, `grpinvrole:<role>`, `grpaddid`, `grpleave`,
+`grpdelete`, `grprm:<uid>`, `grpjoinaccept`, `grpjoindecline` (all existing verbs/ids/classes kept;
+`grpinvite`/`grpinvitesend` now route to the add-by-ID/email flow). CSS is additive, scoped to
+`#icuRoot.icu-v2`, tokens only, ≥44px targets, aria-labels + focus rings consistent with Phase 4.
+
+### Files changed / added
+- `icu-collab.js` — membership subcollection model; `subscribeGroups` (collectionGroup),
+  `subscribeMembers`, `createGroup` (sequential group→head writes), `deleteGroup`, `inviteMember`,
+  `setRole`, `addByIdOrEmail`, `leaveGroup`, `removeMember`; identity/directory (`ensureIdentity`,
+  `myDoctorId`, `resolveDoctor`, `genSmdId`, `emailHash`); invites (`createInvite`, `getInvite`,
+  `joinByInvite`, `inviteUrl`, `parseJoinParam`); expanded API + pure test seams.
+- `icu.js` — Phase-5 state; identity mint in `grpEnsureGroupsSub`; members sub in `grpSelect`;
+  rewritten `renderV2TeamGroup`; add/invite-link/leave/remove/join action fns + `?icujoin=` boot
+  handler; dispatcher verbs; additive CSS.
+- `firestore.rules` — reworked `icuGroups` helpers/block to the subcollection model; added
+  `doctorDirectory` + `users/{uid}/profile`.
+- `firestore.indexes.json` (new) + `firebase.json` (references it).
+- `test/firestore-rules/rules.test.mjs` — extended with membership/directory/invite guarantees.
+- `index.html` (`icu.js`/`icu-collab.js` `?v=` → gold368) + `sw.js` (CACHE → `stewardmd-gold368`).
+
+### Verification (from the worktree root)
+- `node --check icu.js` + `node --check icu-collab.js` → pass.
+- Flag-OFF harness stayed green: `run-icu-nav`, `run-icu-patient-switch`, `run-icu-alerts`,
+  `run-icu-safety-ux`, `run-icu-findpicker`, `run-icu-wardsync`, `run-icu-import`, `run-golden`,
+  `run-interactions`, `run-medlist`, `run-calc-guards` → exit 0 (nav + medlist needed the documented
+  single retry after a back-to-back-run warmup flake; findpicker green once the engine warms up).
+- `run-icu-trends`, `run-icu-dxflow`, `run-icu-labwatch` still fail their SAME single pre-existing
+  assertion (patient-isolation `rows=1` / tour-token-font / Lab-Watch-result-opens-Trends) — not
+  worse.
+- Pure-logic node check (temp, removed): 31/31 assertions — smdId format + ambiguous-char exclusion
+  + collision-regenerate loop, email-hash determinism, resolveDoctor id-vs-email branch, invite URL
+  build/parse round-trip, role matrix (canInstruct/isAdmin/link-role-never-admin), leave-vs-remove
+  head-protection.
+- `npm run build:www` → exit 0.
+
+### Could NOT be verified in the sandbox (needs the emulator / live Firestore / devices)
+- The self-join-via-link + directory + invite **rules** need `@firebase/rules-unit-testing` + a JDK
+  emulator (both absent here). `rules.test.mjs` is the runnable pattern; run it before go-live.
+- Multi-device: a JR taps an invite link on device B and auto-joins device A's unit; add-by-ID/email
+  resolves a real second account; head deletes a unit; presence/online dots; the collectionGroup
+  index must be deployed for `subscribeGroups` to return anything.
+- Note: group mode renders only with **both** `smd_icu_v2` and `smd_icu_groups` on (they ship
+  together); the join membership write itself is gated on `smd_icu_groups` alone.
