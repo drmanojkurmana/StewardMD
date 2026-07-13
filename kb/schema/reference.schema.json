@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stewardmd/kb/reference.schema.json",
+  "title": "StewardMD Reference-only Disease (knowledge object)",
+  "description": "Reference-ONLY disease knowledge (kb/reference/*.json). Unlike a diagnostic disease it has NO matching/scoring block and NO treatment file — it exists purely as cited, RAG-retrievable knowledge. Paraphrased from Harrison 22e, page-cited, never verbatim. A reference disease may later be PROMOTED to the diagnostic tier by adding a matching block and moving it to kb/diseases/ (Phase-2 work).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "class", "referenceOnly", "harrison", "review"],
+  "properties": {
+    "id": { "type": "string", "description": "Stable disease key (lower_snake or SCREAMING form, matching the diagnostic-tier convention)." },
+    "name": { "type": "string" },
+    "aliases": { "type": "array", "items": { "type": "string" }, "description": "Synonyms / lay terms — used for retrieval." },
+    "class": { "type": "string", "enum": ["infective", "non_infective"] },
+    "system": { "type": "string", "description": "Organ system (free text; mapped to a specialty by the coverage/specialty regex)." },
+    "chapter": { "type": ["integer", "null"], "description": "Harrison chapter number (nullable)." },
+    "page": { "type": ["integer", "null"], "description": "Harrison page anchor (nullable)." },
+    "referenceOnly": { "const": true, "description": "MUST be true — this is what distinguishes a reference entry from a diagnostic disease." },
+    "harrison": {
+      "type": "object", "additionalProperties": false,
+      "description": "Paraphrased Harrison reference knowledge (page-cited, not verbatim). Same inner shape as a diagnostic disease's enrichment.harrison, but carried at top level for reference entries.",
+      "properties": {
+        "source": { "type": "string" }, "sourceEdition": { "type": "string" }, "pages": { "type": ["string", "null"] },
+        "clinicalPearls": { "type": "array", "items": { "type": "string" } },
+        "pathophysiology": { "type": ["string", "null"] },
+        "additionalDifferentials": { "type": "array", "items": { "type": "string" } },
+        "infectionMimics": { "type": "array", "items": { "type": "string" } },
+        "nonInfectiousMimics": { "type": "array", "items": { "type": "string" } },
+        "additionalInvestigations": { "type": "array", "items": { "type": "string" } },
+        "redFlags": { "type": "array", "items": { "type": "string" } },
+        "prognosis": { "type": ["string", "null"] },
+        "pitfalls": { "type": "array", "items": { "type": "string" } },
+        "severityClassification": { "type": ["string", "null"] },
+        "references": { "type": "array", "items": { "type": "string" } },
+        "crossLinks": { "type": "array", "items": { "type": "string" }, "description": "Related KB disease ids." },
+        "conflicts": { "type": "array", "items": { "type": "object" } },
+        "importedAt": { "type": ["string", "null"] }, "contentHash": { "type": ["string", "null"] }
+      }
+    },
+    "review": {
+      "type": "object", "additionalProperties": false, "required": ["status"],
+      "properties": {
+        "status": { "type": "string", "enum": ["draft", "ai_drafted", "in_review", "approved", "deprecated"] },
+        "reviewedBy": { "type": ["string", "null"] },
+        "reviewedAt": { "type": ["string", "null"] },
+        "clinicianApproved": { "type": "boolean" }
+      }
+    },
+    "version": { "type": "integer", "minimum": 1 }
+  }
+}
