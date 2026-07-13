@@ -242,6 +242,15 @@
       return v === null ? true : v === "1";
     } catch (e) { return true; }
   }
+  // ICU v2 collaborative redesign (unit board + restyled workspace). Additive, flag-gated,
+  // DEFAULT OFF so the current UI is byte-for-byte unchanged. ?icuv2= overrides.
+  function icuV2On() {
+    try {
+      var q = (location.search.match(/[?&]icuv2=([^&]+)/) || [])[1];
+      if (q != null) return q === "1" || q === "on" || q === "true";
+      return localStorage.getItem("smd_icu_v2") === "1";
+    } catch (e) { return false; }
+  }
   // Modality family + filter bucket from the free-text study title (no structured
   // modality is exposed by GHIS). Original study title is preserved separately.
   function imgModality(title) {
@@ -891,7 +900,133 @@
       '.icu-find-chip.neg{background:var(--danger-soft);color:var(--danger);border-color:color-mix(in srgb,var(--danger) 30%,var(--border))}' +
       '.icu-find-chip.poss{background:var(--warn-soft);color:var(--warn);border-color:color-mix(in srgb,var(--warn) 30%,var(--border))}' +
       '.icu-find-chip.note{background:var(--panel2);color:var(--muted);border-color:var(--border)}' +
-      '.icu-find-chip .fc-mod,.icu-find-chip .fc-x{border:none;background:none;cursor:pointer;color:inherit;font:800 15px var(--font);line-height:1;padding:2px 6px;border-radius:50%;opacity:.75}.icu-find-chip .fc-mod:active,.icu-find-chip .fc-x:active{opacity:1;background:color-mix(in srgb,currentColor 15%,transparent)}';
+      '.icu-find-chip .fc-mod,.icu-find-chip .fc-x{border:none;background:none;cursor:pointer;color:inherit;font:800 15px var(--font);line-height:1;padding:2px 6px;border-radius:50%;opacity:.75}.icu-find-chip .fc-mod:active,.icu-find-chip .fc-x:active{opacity:1;background:color-mix(in srgb,currentColor 15%,transparent)}' +
+      // ===== ICU v2 (smd_icu_v2) — all selectors scoped under #icuRoot.icu-v2. Additive only. =====
+      // On the v2 patient screen the top tabs replace the old bottom bar + the old thin banner.
+      '#icuRoot.icu-v2 .icu-ws-bar{display:none}' +
+      '#icuRoot.icu-v2 .icu-banner{display:none}' +
+      // top tabs (solid segmented control)
+      '#icuRoot.icu-v2 .icu-v2-tabwrap{flex:0 0 auto;background:var(--panel);border-bottom:1px solid var(--border);padding:10px 12px}' +
+      '#icuRoot.icu-v2 .icu-v2-tabs{display:flex;gap:3px;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:4px}' +
+      '#icuRoot.icu-v2 .icu-v2-tab{flex:1 1 0;min-width:0;min-height:44px;display:flex;align-items:center;justify-content:center;white-space:nowrap;border:none;background:none;color:var(--muted);border-radius:9px;font:700 12px var(--font);padding:9px 2px;cursor:pointer}' +
+      '#icuRoot.icu-v2 .icu-v2-tab.on{background:var(--primary);color:#fff;box-shadow:0 1px 3px rgba(15,118,110,.35)}' +
+      // patient banner (acuity-coloured, white text)
+      '#icuRoot.icu-v2 .icu-v2-banner{flex:0 0 auto;color:#fff;padding:calc(10px + env(safe-area-inset-top)) 14px 12px;background:var(--primary)}' +
+      '#icuRoot.icu-v2 .icu-v2-banner.crit,#icuRoot.icu-v2 .icu-v2-banner.critical{background:var(--danger)}' +
+      '#icuRoot.icu-v2 .icu-v2-banner.review{background:var(--warn)}#icuRoot.icu-v2 .icu-v2-banner.stable{background:var(--primary)}' +
+      '#icuRoot.icu-v2 .icu-v2-banner-top{display:flex;align-items:center;gap:8px}' +
+      '#icuRoot.icu-v2 .icu-v2-back,#icuRoot.icu-v2 .icu-v2-handover{flex:0 0 auto;width:44px;height:44px;border-radius:12px;border:none;background:rgba(255,255,255,.18);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-handover .icu-ico{width:19px;height:19px}' +
+      '#icuRoot.icu-v2 .icu-v2-banner-id{flex:1;min-width:0}' +
+      '#icuRoot.icu-v2 .icu-v2-banner-nm{font:800 17px var(--font);display:flex;align-items:center;gap:8px;flex-wrap:wrap}' +
+      '#icuRoot.icu-v2 .icu-v2-banner-pill{font:700 10px var(--font);background:rgba(255,255,255,.22);border-radius:999px;padding:3px 9px;white-space:nowrap}' +
+      '#icuRoot.icu-v2 .icu-v2-banner-meta{font:500 12px var(--font);color:rgba(255,255,255,.85);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '#icuRoot.icu-v2 .icu-v2-banner-vitals{display:flex;gap:7px;margin-top:11px}' +
+      '#icuRoot.icu-v2 .icu-v2-mv{flex:1;background:rgba(255,255,255,.14);border-radius:10px;padding:6px 4px;text-align:center;min-width:0}' +
+      '#icuRoot.icu-v2 .icu-v2-mv-k{font:600 9px var(--font);color:rgba(255,255,255,.8);letter-spacing:.03em}' +
+      '#icuRoot.icu-v2 .icu-v2-mv-v{font:700 15px var(--mono);margin-top:1px;color:#fff}' +
+      // presence + sync
+      '#icuRoot.icu-v2 .icu-v2-presence{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 15px;background:var(--panel);border-bottom:1px solid var(--border)}' +
+      '#icuRoot.icu-v2 .icu-v2-viewer{width:24px;height:24px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 9px var(--font);display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-presence-tx{font:500 11.5px var(--font);color:var(--muted);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '#icuRoot.icu-v2 .icu-v2-synced{display:flex;align-items:center;gap:5px;font:600 11px var(--font);color:var(--ok);flex:0 0 auto}' +
+      '#icuRoot.icu-v2 .icu-v2-dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}' +
+      // restyle the existing sub-nav into a wrapping row of pills (no hidden scroll)
+      '#icuRoot.icu-v2 .icu-subnav{flex-wrap:wrap;overflow:visible;gap:6px;margin:0 0 12px;padding-bottom:0}' +
+      '#icuRoot.icu-v2 .icu-seg{flex:0 0 auto;min-height:40px;border-radius:999px;padding:7px 13px;border:1px solid var(--border);background:var(--panel);color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-seg.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      // board / screen scroll (board bar overlays it, so pad the bottom)
+      '#icuRoot.icu-v2 .icu-v2-scroll{padding:0 0 calc(84px + env(safe-area-inset-bottom))}' +
+      // unit header
+      '#icuRoot.icu-v2 .icu-v2-uhead{background:linear-gradient(160deg,var(--primary2),var(--primary));color:#fff;padding:calc(12px + env(safe-area-inset-top)) 16px 18px}' +
+      '#icuRoot.icu-v2 .icu-v2-uhead-top{display:flex;align-items:center;gap:10px}' +
+      '#icuRoot.icu-v2 .icu-v2-ubtn{position:relative;flex:0 0 auto;width:44px;height:44px;border-radius:12px;border:none;background:rgba(255,255,255,.16);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-ubtn .icu-ico{width:20px;height:20px}' +
+      '#icuRoot.icu-v2 .icu-v2-ubadge{position:absolute;top:5px;right:6px;min-width:16px;height:16px;padding:0 3px;background:var(--danger);border:2px solid var(--primary);border-radius:50%;font:700 9px var(--font);display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-utitle{flex:1;min-width:0;font:700 17px var(--font)}' +
+      '#icuRoot.icu-v2 .icu-v2-usub{font:500 12px var(--font);color:rgba(255,255,255,.82);margin-top:1px}' +
+      '#icuRoot.icu-v2 .icu-v2-strip{display:flex;gap:8px;margin-top:16px}' +
+      '#icuRoot.icu-v2 .icu-v2-scount{flex:1;border:none;border-radius:14px;padding:9px 6px;cursor:pointer;text-align:center;background:rgba(255,255,255,.16);min-height:44px}' +
+      '#icuRoot.icu-v2 .icu-v2-scount b{display:block;font:700 22px var(--mono);color:#fff}#icuRoot.icu-v2 .icu-v2-scount span{display:block;font:700 10px var(--font);letter-spacing:.03em;margin-top:1px;color:#fff}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.total{border:1px solid rgba(255,255,255,.2)}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.crit{background:var(--danger-soft)}#icuRoot.icu-v2 .icu-v2-scount.crit b,#icuRoot.icu-v2 .icu-v2-scount.crit span{color:var(--danger)}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.review{background:var(--warn-soft)}#icuRoot.icu-v2 .icu-v2-scount.review b,#icuRoot.icu-v2 .icu-v2-scount.review span{color:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.stable{background:var(--ok-soft)}#icuRoot.icu-v2 .icu-v2-scount.stable b,#icuRoot.icu-v2 .icu-v2-scount.stable span{color:var(--ok)}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.on{outline:2px solid #fff;outline-offset:1px}' +
+      // board body
+      '#icuRoot.icu-v2 .icu-v2-board{padding:16px}' +
+      '#icuRoot.icu-v2 .icu-v2-sec-lbl{font:700 11px var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 2px 8px}' +
+      '#icuRoot.icu-v2 .icu-v2-attn{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px 4px;padding:0 16px 4px;scrollbar-width:none}#icuRoot.icu-v2 .icu-v2-attn::-webkit-scrollbar{display:none}' +
+      '#icuRoot.icu-v2 .icu-v2-attn-card{flex:0 0 auto;width:212px;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--muted);border-radius:14px;padding:11px 13px;cursor:pointer;box-shadow:var(--sh)}' +
+      '#icuRoot.icu-v2 .icu-v2-attn-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review{border-left-color:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-attn-kind{font:700 11px var(--font);letter-spacing:.02em;color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-attn-card.critical .icu-v2-attn-kind{color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review .icu-v2-attn-kind{color:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-attn-name{font:700 14px var(--font);color:var(--ink);margin-top:6px}' +
+      '#icuRoot.icu-v2 .icu-v2-attn-detail{font:500 12px var(--font);color:var(--muted);margin-top:3px;line-height:1.4}' +
+      '#icuRoot.icu-v2 .icu-v2-filters{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 12px}' +
+      '#icuRoot.icu-v2 .icu-v2-fchip{border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:999px;font:700 12.5px var(--font);padding:8px 14px;min-height:40px;cursor:pointer}' +
+      '#icuRoot.icu-v2 .icu-v2-fchip.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      // patient card
+      '#icuRoot.icu-v2 .icu-v2-card{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:5px solid var(--primary);border-radius:16px;padding:0;cursor:pointer;overflow:hidden;box-shadow:var(--sh);margin-bottom:10px}' +
+      '#icuRoot.icu-v2 .icu-v2-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-card.stable{border-left-color:var(--ok)}' +
+      '#icuRoot.icu-v2 .icu-v2-card-body{padding:13px 15px 11px}' +
+      '#icuRoot.icu-v2 .icu-v2-card-top{display:flex;align-items:center;gap:10px}' +
+      '#icuRoot.icu-v2 .icu-v2-bed{width:44px;height:44px;flex:0 0 auto;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--primary-soft)}' +
+      '#icuRoot.icu-v2 .icu-v2-bed b{font:700 15px var(--mono);line-height:1;color:var(--primary)}#icuRoot.icu-v2 .icu-v2-bed span{font:700 7.5px var(--font);letter-spacing:.05em;color:var(--primary)}' +
+      '#icuRoot.icu-v2 .icu-v2-bed.critical{background:var(--danger-soft)}#icuRoot.icu-v2 .icu-v2-bed.critical b,#icuRoot.icu-v2 .icu-v2-bed.critical span{color:var(--danger)}' +
+      '#icuRoot.icu-v2 .icu-v2-bed.review{background:var(--warn-soft)}#icuRoot.icu-v2 .icu-v2-bed.review b,#icuRoot.icu-v2 .icu-v2-bed.review span{color:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-bed.stable{background:var(--ok-soft)}#icuRoot.icu-v2 .icu-v2-bed.stable b,#icuRoot.icu-v2 .icu-v2-bed.stable span{color:var(--ok)}' +
+      '#icuRoot.icu-v2 .icu-v2-card-id{flex:1;min-width:0}' +
+      '#icuRoot.icu-v2 .icu-v2-card-name{font:700 16px var(--font);color:var(--ink);display:flex;align-items:center;gap:7px;flex-wrap:wrap}' +
+      '#icuRoot.icu-v2 .icu-v2-card-demo{font:600 12px var(--font);color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-card-dx{font:600 13px var(--font);color:var(--ink);opacity:.78;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '#icuRoot.icu-v2 .icu-v2-pill{flex:0 0 auto;font:700 10px var(--font);border-radius:999px;padding:4px 9px;letter-spacing:.02em}' +
+      '#icuRoot.icu-v2 .icu-v2-pill.critical{color:var(--danger);background:var(--danger-soft)}#icuRoot.icu-v2 .icu-v2-pill.review{color:var(--warn);background:var(--warn-soft)}#icuRoot.icu-v2 .icu-v2-pill.stable{color:var(--ok);background:var(--ok-soft)}' +
+      '#icuRoot.icu-v2 .icu-v2-vstrip{display:flex;gap:16px;margin-top:11px;padding-top:10px;border-top:1px solid var(--border)}' +
+      '#icuRoot.icu-v2 .icu-v2-vc{min-width:0}' +
+      '#icuRoot.icu-v2 .icu-v2-vk{font:600 9px var(--font);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}' +
+      '#icuRoot.icu-v2 .icu-v2-vv{font:700 14px var(--mono);color:var(--ink);margin-top:1px}' +
+      '#icuRoot.icu-v2 .icu-v2-vc.crit .icu-v2-vv{color:var(--danger)}#icuRoot.icu-v2 .icu-v2-vc.warn .icu-v2-vv{color:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-card-foot{background:var(--panel2);padding:8px 15px;display:flex;align-items:center;gap:8px;border-top:1px solid var(--border)}' +
+      '#icuRoot.icu-v2 .icu-v2-foot-av{width:22px;height:22px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 9px var(--font);display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-foot-txt{font:700 12px var(--font);color:var(--ink)}' +
+      '#icuRoot.icu-v2 .icu-v2-foot-ago{font:600 11px var(--font);color:var(--muted);margin-left:auto}' +
+      '#icuRoot.icu-v2 .icu-v2-foot-count{text-align:center;font:600 12px var(--font);color:var(--muted);padding:6px 0 2px}' +
+      // empty states
+      '#icuRoot.icu-v2 .icu-v2-empty{text-align:center;padding:40px 20px}' +
+      '#icuRoot.icu-v2 .icu-v2-empty-ic .icu-ico{width:48px;height:48px;color:var(--primary);opacity:.9;stroke-width:1.4}' +
+      '#icuRoot.icu-v2 .icu-v2-empty-t{font:800 18px var(--font);color:var(--ink);margin:12px 0 6px}' +
+      '#icuRoot.icu-v2 .icu-v2-empty-p{font:500 13px var(--font);color:var(--muted);line-height:1.6;max-width:320px;margin:0 auto 4px}' +
+      '#icuRoot.icu-v2 .icu-v2-empty-cta{width:auto!important;display:inline-block;margin-top:14px;padding:13px 24px}' +
+      '#icuRoot.icu-v2 .icu-v2-empty2{font:600 13px var(--font);color:var(--muted);text-align:center;padding:24px 0}' +
+      // screen header (alerts / team)
+      '#icuRoot.icu-v2 .icu-v2-shead{background:var(--primary);color:#fff;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;display:flex;align-items:center;gap:10px}' +
+      '#icuRoot.icu-v2 .icu-v2-sback{flex:0 0 auto;width:44px;height:44px;border-radius:11px;border:none;background:rgba(255,255,255,.16);color:#fff;font-size:18px;cursor:pointer}' +
+      '#icuRoot.icu-v2 .icu-v2-shead-h{font:700 16px var(--font)}#icuRoot.icu-v2 .icu-v2-shead-s{font:500 12px var(--font);color:rgba(255,255,255,.82)}' +
+      '#icuRoot.icu-v2 .icu-v2-slist,#icuRoot.icu-v2 .icu-v2-tlist{padding:14px 16px;display:flex;flex-direction:column;gap:9px}' +
+      '#icuRoot.icu-v2 .icu-v2-note{font:600 12px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:10px 12px;line-height:1.5}#icuRoot.icu-v2 .icu-v2-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-row{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:14px;padding:13px 14px;cursor:pointer}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-row.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-alert-row.review{border-left-color:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-ic{flex:0 0 auto;width:38px;height:38px;border-radius:11px;background:var(--panel2);display:flex;align-items:center;justify-content:center}#icuRoot.icu-v2 .icu-v2-alert-ic .icu-ico{width:18px;height:18px}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-tx{flex:1;min-width:0}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-h{display:block;font:700 13.5px var(--font);color:var(--ink)}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-b{display:block;font:500 12.5px var(--font);color:var(--muted);margin-top:3px;line-height:1.45}' +
+      '#icuRoot.icu-v2 .icu-v2-urg{font:700 9px var(--font);color:var(--danger);background:var(--danger-soft);border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:1px}' +
+      '#icuRoot.icu-v2 .icu-v2-member{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:12px 14px}' +
+      '#icuRoot.icu-v2 .icu-v2-member-av{width:40px;height:40px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 13px var(--font);display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-member-id{flex:1;min-width:0}#icuRoot.icu-v2 .icu-v2-member-nm{display:block;font:700 14.5px var(--font);color:var(--ink)}#icuRoot.icu-v2 .icu-v2-member-role{display:block;font:600 12px var(--font);color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '#icuRoot.icu-v2 .icu-v2-member-state{flex:0 0 auto;font:600 11px var(--font);color:var(--ok);background:var(--ok-soft);border-radius:999px;padding:4px 10px}' +
+      // bottom bar (board / alerts / team only)
+      '#icuRoot.icu-v2 .icu-v2-bottombar{position:absolute;left:0;right:0;bottom:0;z-index:7;display:flex;background:color-mix(in srgb,var(--panel) 92%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);border-top:1px solid var(--border);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}' +
+      '#icuRoot.icu-v2 .icu-v2-navbtn{flex:1;min-height:44px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--muted);font:600 10.5px var(--font)}' +
+      '#icuRoot.icu-v2 .icu-v2-navic{font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;height:22px}#icuRoot.icu-v2 .icu-v2-navbtn .icu-ico{width:22px;height:22px}' +
+      '#icuRoot.icu-v2 .icu-v2-navbtn.on{color:var(--primary)}' +
+      '#icuRoot.icu-v2 .icu-v2-admit{color:var(--primary)}#icuRoot.icu-v2 .icu-v2-admit-ic{width:30px;height:30px;border-radius:10px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}#icuRoot.icu-v2 .icu-v2-admit .icu-ico{width:18px;height:18px;color:#fff}' +
+      // v2 FAB positions (no bottom bar on the patient screen)
+      '#icuRoot.icu-v2 #icuSnap{bottom:calc(24px + env(safe-area-inset-bottom))}' +
+      '#icuRoot.icu-v2 #icuWatch{bottom:calc(90px + env(safe-area-inset-bottom))}' +
+      // dark mode: v2 chrome inherits the token flip; only the badge cut-out border needs the darker teal
+      'body.dark #icuRoot.icu-v2 .icu-v2-ubadge{border-color:var(--primary2)}';
     var st = document.createElement("style"); st.id = "icu-css"; st.textContent = css;
     document.head.appendChild(st);
   }
@@ -2048,6 +2183,8 @@
   var _active = "overview";
   var _ws = "overview";        // current workspace (bottom bar)
   var _wsLast = {};            // workspace id → last member viewed in it
+  var _screen = "board";       // v2 only: "board" | "patient" | "alerts" | "team"
+  var _v2Filter = "all";       // v2 board acuity filter: "all" | "critical" | "review" | "stable"
   var _imgFilter = "all";      // Imaging Notes filter bucket
   var _imgOpen = {};           // imaging card index → expanded (full report)
 
@@ -2384,7 +2521,16 @@
     },
     more: function () {
       var n = rosterCount();
-      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("more", "⋯") + ' More</div>' +
+      var v2 = icuV2On();
+      var v2Card = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("spark", "✨") + ' New ICU workspace (Beta)</div>' +
+        '<p class="icu-doc-sub" style="margin:0 0 10px">' + (v2
+          ? "You’re using the redesigned ICU — a unit patient board plus a cleaner patient workspace."
+          : "Try the redesigned ICU: a unit patient board, acuity triage, and a cleaner patient workspace. Reversible any time.") + '</p>' +
+        '<button class="icu-btn' + (v2 ? " ghost" : "") + '" data-icu-act="v2toggle">' + (v2
+          ? ico("refresh", "↩") + " On — tap to switch back to the classic ICU"
+          : ico("spark", "✨") + " Try the new ICU workspace") + '</button></div>';
+      return v2Card +
+        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("more", "⋯") + ' More</div>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Patient details</button>' +
         '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients' + (n ? " (" + n + ")" : "") + '</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Ward Sync</button>' +
@@ -2566,6 +2712,7 @@
   var _paintTop = false;
   function paint() {
     if (!rootEl) return;
+    if (icuV2On()) { paintV2(); return; }   // v2 (smd_icu_v2): unit board + restyled workspace
     // Preserve scroll across the full innerHTML rebuild. Without this, EVERY state change (ticking a
     // rounds checkbox, marking imaging reviewed, ingesting data…) recreated the .icu-scroll container
     // and snapped the list back to the top — so you couldn't work down the rounds checklist. Genuine
@@ -2581,6 +2728,241 @@
       ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>'
       : "";
     rootEl.innerHTML = renderHeader() + renderBody() + watchFab + fab + renderTabBar();
+    if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
+  }
+
+  /* ================================================================ ICU v2
+   * (smd_icu_v2) — unit patient board + restyled patient workspace. PRESENTATION /
+   * NAV LAYER ONLY: reuses renderBody() for tab bodies, loadRoster() for the board,
+   * every existing engine/threshold/ingest contract untouched. LOCAL data only in
+   * Phase 1 (single-device roster; presence/team/notifications are local stubs
+   * clearly labelled until Phase 2 Firestore). All markup gated behind #icuRoot.icu-v2.
+   */
+  // Acuity derived from RAW values WITHOUT calling recompute (entry.state.alerts is stripped on save).
+  function v2Snapshot(st) {
+    st = st || {};
+    var lv = latestByTs(st.vitals || []);
+    var mp = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
+    var press = (st.infusions || []).filter(function (i) { return isPressor(i.drug); });
+    var L = (st.labs && st.labs.recent) || {};
+    return { map: mp, hr: lv.hr, spo2: lv.spo2, lactate: lv.lactate, temp: lv.temp, pressors: press.length, k: L.k };
+  }
+  function v2Severity(st) {
+    var s = v2Snapshot(st);
+    if ((s.map != null && s.map < 65) || (s.lactate != null && s.lactate > 4) || (s.spo2 != null && s.spo2 < 90) || s.pressors >= 1) return "critical";
+    if ((s.map != null && s.map < 70) || (s.lactate != null && s.lactate > 2) || (s.spo2 != null && s.spo2 < 93) || (s.k != null && (s.k > K_WARN_HI || s.k < K_WARN_LO))) return "review";
+    return "stable";
+  }
+  var V2_LABEL = { critical: "Critical", review: "Needs review", stable: "Stable" };
+  function v2Reason(s) {
+    var r = [];
+    if (s.map != null && s.map < 70) r.push("MAP " + s.map);
+    if (s.lactate != null && s.lactate > 2) r.push("Lactate " + s.lactate);
+    if (s.spo2 != null && s.spo2 < 93) r.push("SpO₂ " + s.spo2 + "%");
+    if (s.pressors >= 1) r.push(s.pressors + " pressor" + (s.pressors > 1 ? "s" : ""));
+    if (s.k != null && (s.k > K_WARN_HI || s.k < K_WARN_LO)) r.push("K⁺ " + s.k);
+    return r.join(" · ");
+  }
+  function v2AccountProfile() { try { return (window.SMD_ACCOUNT && SMD_ACCOUNT.profile) ? SMD_ACCOUNT.profile() : null; } catch (e) { return null; } }
+  function v2AccountName() { var p = v2AccountProfile(); return (p && (p.name || p.email)) || "You"; }
+  function v2Initials(s) {
+    s = String(s || "").trim();
+    if (!s) return "You";
+    if (s.indexOf("@") > 0) s = s.split("@")[0];
+    var parts = s.split(/[\s._-]+/).filter(Boolean);
+    var ini = parts.slice(0, 2).map(function (x) { return x.charAt(0).toUpperCase(); }).join("");
+    return ini || s.charAt(0).toUpperCase();
+  }
+  function v2BedNum(b) { var n = parseInt(String(b == null ? "" : b).replace(/[^0-9]/g, ""), 10); return isNaN(n) ? 9999 : n; }
+  // The unit board list: the LOCAL roster + the current open patient (if it has data and isn't saved yet).
+  function v2BoardList() {
+    var list = loadRoster().map(function (e) {
+      return { id: e.id, name: e.name, dx: e.dx, bed: e.bed, savedAt: e.savedAt, state: e.state || {} };
+    });
+    try {
+      if (hasData()) {
+        var curId = _raw.patient._id || "cur";
+        if (!list.some(function (x) { return x.id === curId; })) {
+          list.unshift({ id: curId, name: _raw.patient.name || "Current patient", dx: _raw.patient.diagnosis || "", bed: _raw.patient.bed || "", savedAt: (_raw.meta && _raw.meta.updated) || nowTs(), state: _raw, _current: true });
+        }
+      }
+    } catch (e) {}
+    list.forEach(function (p) {
+      p.sev = v2Severity(p.state);
+      p.snap = v2Snapshot(p.state);
+      p.age = (p.state.patient && p.state.patient.age != null) ? p.state.patient.age : null;
+      p.sex = (p.state.patient && p.state.patient.sex) || "";
+    });
+    var rank = { critical: 0, review: 1, stable: 2 };
+    list.sort(function (a, b) { var d = (rank[a.sev] || 9) - (rank[b.sev] || 9); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
+    return list;
+  }
+  function v2CardVitals(s) {
+    function mk(k, val, sst) { return { k: k, val: (val == null ? "—" : val), st: sst || "" }; }
+    var v = [];
+    v.push(mk("MAP", s.map, s.map == null ? "" : (s.map < 65 ? "crit" : s.map < 70 ? "warn" : "")));
+    v.push(mk("LACT", s.lactate, s.lactate == null ? "" : (s.lactate > 4 ? "crit" : s.lactate > 2 ? "warn" : "")));
+    v.push(mk("SpO₂", s.spo2 == null ? null : (s.spo2 + "%"), s.spo2 == null ? "" : (s.spo2 < 90 ? "crit" : s.spo2 < 93 ? "warn" : "")));
+    if (s.pressors >= 1) v.push(mk("PRESS", s.pressors, "crit"));
+    return v;
+  }
+  // Sticky, acuity-coloured patient banner (white text) + live mini-vitals.
+  function renderV2Banner() {
+    var p = _raw.patient || {}, sev = v2Severity(_raw), snap = v2Snapshot(_raw);
+    var meta = [];
+    if (p.bed) meta.push("Bed " + esc(p.bed));
+    if (p.age != null) meta.push(esc(p.age) + (p.sex ? "/" + esc(p.sex) : ""));
+    if (p.icuDay != null) meta.push("ICU day " + esc(p.icuDay));
+    if (p.diagnosis) meta.push(esc(p.diagnosis));
+    var mv = [
+      { k: "MAP", val: snap.map != null ? snap.map : "—" },
+      { k: "HR", val: snap.hr != null ? snap.hr : "—" },
+      { k: "SpO₂", val: snap.spo2 != null ? snap.spo2 + "%" : "—" },
+      { k: "LACT", val: snap.lactate != null ? snap.lactate : "—" }
+    ];
+    return '<div class="icu-v2-banner ' + sev + '"><div class="icu-v2-banner-top">' +
+      '<button class="icu-v2-back" data-icu-act="icuboard" aria-label="Back to unit board">‹</button>' +
+      '<div class="icu-v2-banner-id">' +
+        '<div class="icu-v2-banner-nm">' + esc(p.name || "ICU patient") + '<span class="icu-v2-banner-pill">' + V2_LABEL[sev] + '</span></div>' +
+        '<div class="icu-v2-banner-meta">' + (meta.length ? meta.join(" · ") : "Add patient details") + '</div>' +
+      '</div>' +
+      '<button class="icu-v2-handover" data-icu-act="ws:documents" aria-label="Handover / documents">' + ico("copy", "⇄") + '</button>' +
+      '</div><div class="icu-v2-banner-vitals">' + mv.map(function (v) {
+        return '<div class="icu-v2-mv"><div class="icu-v2-mv-k">' + v.k + '</div><div class="icu-v2-mv-v">' + esc(v.val) + '</div></div>';
+      }).join("") + '</div></div>';
+  }
+  // Presence + sync line — Phase 1 is LOCAL/single-user (real presence arrives with Phase 2 Firestore).
+  function renderV2Presence() {
+    return '<div class="icu-v2-presence">' +
+      '<span class="icu-v2-viewer">' + esc(v2Initials(v2AccountName())) + '</span>' +
+      '<span class="icu-v2-presence-tx">Only you are viewing · saved on this device</span>' +
+      '<span class="icu-v2-synced"><span class="icu-v2-dot"></span>Synced</span></div>';
+  }
+  // Five solid segmented top tabs → existing (_ws,_active) via existing dispatch verbs.
+  function renderV2TopTabs() {
+    var tabs = [
+      { label: "Overview", act: "tab:overview", on: _active === "overview" },
+      { label: "Monitoring", act: "ws:monitoring", on: _ws === "monitoring" },
+      { label: "Care Plan", act: "ws:careplan", on: _ws === "careplan" },
+      { label: "Rounds", act: "tab:rounds", on: _active === "rounds" },
+      { label: "Documents", act: "ws:documents", on: _ws === "documents" }
+    ];
+    return '<div class="icu-v2-tabwrap"><div class="icu-v2-tabs">' + tabs.map(function (t) {
+      return '<button class="icu-v2-tab' + (t.on ? " on" : "") + '" data-icu-act="' + t.act + '">' + esc(t.label) + '</button>';
+    }).join("") + '</div></div>';
+  }
+  // Unit board — the "front door". Local roster only in Phase 1.
+  function renderV2Board() {
+    var list = v2BoardList();
+    var counts = { total: list.length, critical: 0, review: 0, stable: 0 };
+    list.forEach(function (p) { counts[p.sev]++; });
+    var unread = counts.critical + counts.review;
+    var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
+      '<button class="icu-v2-ubtn" data-icu-act="icumore" aria-label="Settings">' + ico("settings", "⚙") + '</button>' +
+      '<div class="icu-v2-utitle">My ICU patients<div class="icu-v2-usub">' + counts.total + ' patient' + (counts.total === 1 ? "" : "s") + ' · on this device</div></div>' +
+      '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
+      '</div><div class="icu-v2-strip">' +
+      '<button class="icu-v2-scount total' + (_v2Filter === "all" ? " on" : "") + '" data-icu-act="icufilter:all"><b>' + counts.total + '</b><span>Patients</span></button>' +
+      '<button class="icu-v2-scount crit' + (_v2Filter === "critical" ? " on" : "") + '" data-icu-act="icufilter:critical"><b>' + counts.critical + '</b><span>Critical</span></button>' +
+      '<button class="icu-v2-scount review' + (_v2Filter === "review" ? " on" : "") + '" data-icu-act="icufilter:review"><b>' + counts.review + '</b><span>Review</span></button>' +
+      '<button class="icu-v2-scount stable' + (_v2Filter === "stable" ? " on" : "") + '" data-icu-act="icufilter:stable"><b>' + counts.stable + '</b><span>Stable</span></button>' +
+      '</div></div>';
+    if (!list.length) {
+      return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board"><div class="icu-v2-empty">' +
+        '<div class="icu-v2-empty-ic">' + ico("pulse", "🫀") + '</div>' +
+        '<div class="icu-v2-empty-t">No patients yet</div>' +
+        '<p class="icu-v2-empty-p">Admit your first ICU patient to start tracking vitals, labs, alerts and a round-ready summary — all on this device.</p>' +
+        '<button class="icu-btn icu-v2-empty-cta" data-icu-act="icuadmit">＋ Admit patient</button></div></div></div>';
+    }
+    var attn = list.filter(function (p) { return p.sev !== "stable"; });
+    var attnHTML = (_v2Filter === "all" && attn.length)
+      ? '<div class="icu-v2-sec-lbl">Needs your attention</div><div class="icu-v2-attn">' + attn.map(function (p) {
+          return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '">' +
+            '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
+            '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
+            '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || "Review recommended") + '</div></button>';
+        }).join("") + '</div>'
+      : "";
+    var chips = [{ k: "all", label: "All" }, { k: "critical", label: "Critical" }, { k: "review", label: "Needs review" }, { k: "stable", label: "Stable" }];
+    var filters = '<div class="icu-v2-filters">' + chips.map(function (c) {
+      return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '">' + esc(c.label) + '</button>';
+    }).join("") + '</div>';
+    var shown = _v2Filter === "all" ? list : list.filter(function (p) { return p.sev === _v2Filter; });
+    var ini = esc(v2Initials(v2AccountName()));
+    var cards = shown.length ? shown.map(function (p) {
+      var demo = (p.age != null) ? (p.age + (p.sex ? "/" + p.sex : "")) : "";
+      var vits = v2CardVitals(p.snap);
+      return '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
+        '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
+        '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
+        '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
+        '<span class="icu-v2-pill ' + p.sev + '">' + V2_LABEL[p.sev] + '</span></div>' +
+        '<div class="icu-v2-vstrip">' + vits.map(function (v) {
+          return '<div class="icu-v2-vc ' + v.st + '"><div class="icu-v2-vk">' + v.k + '</div><div class="icu-v2-vv">' + esc(v.val) + '</div></div>';
+        }).join("") + '</div></div>' +
+        '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + ini + '</span><span class="icu-v2-foot-txt">Saved</span>' +
+        '<span class="icu-v2-foot-ago">' + esc(fmtAgo(p.savedAt) || fmtWhen(p.savedAt)) + '</span></div></button>';
+    }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
+    var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
+    return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + attnHTML + filters + cards + foot + '</div></div>';
+  }
+  // Board / alerts / team bottom bar: Unit · Alerts · Team · Admit.
+  function renderV2BottomBar() {
+    var items = [
+      { k: "board", label: "Unit", act: "icuboard", svg: "list", em: "🏥" },
+      { k: "alerts", label: "Alerts", act: "icualerts", svg: "bell", em: "🔔" },
+      { k: "team", label: "Team", act: "icuteam", svg: "user", em: "👥" }
+    ];
+    return '<div class="icu-v2-bottombar">' + items.map(function (it) {
+      return '<button class="icu-v2-navbtn' + (_screen === it.k ? " on" : "") + '" data-icu-act="' + it.act + '"><span class="icu-v2-navic">' + ico(it.svg, it.em) + '</span><span>' + it.label + '</span></button>';
+    }).join("") + '<button class="icu-v2-navbtn icu-v2-admit" data-icu-act="icuadmit"><span class="icu-v2-admit-ic">' + ico("plus", "＋") + '</span><span>Admit</span></button></div>';
+  }
+  // Notifications — deterministic acuity across the local roster (real team events = Phase 2).
+  function renderV2Alerts() {
+    var list = v2BoardList(), rows = [];
+    list.forEach(function (p) {
+      if (p.sev === "stable") return;
+      rows.push({ id: p.id, sev: p.sev, title: V2_LABEL[p.sev] + " · Bed " + (p.bed || "—") + " · " + (p.name || "Patient"), body: v2Reason(p.snap) || "Review recommended" });
+    });
+    rows.sort(function (a, b) { return (a.sev === "critical" ? 0 : 1) - (b.sev === "critical" ? 0 : 1); });
+    var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Notifications</div><div class="icu-v2-shead-s">Only clinically meaningful events</div></div></div>';
+    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Derived from each patient’s latest values on this device. Live team notifications from real events arrive in Phase 2.</div>';
+    var body = rows.length ? rows.map(function (r) {
+      return '<button class="icu-v2-alert-row ' + r.sev + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '">' +
+        '<span class="icu-v2-alert-ic">' + (r.sev === "critical" ? ico("warn", "⚠️") : ico("bell", "🔔")) + '</span>' +
+        '<span class="icu-v2-alert-tx"><span class="icu-v2-alert-h">' + esc(r.title) + (r.sev === "critical" ? '<span class="icu-v2-urg">URGENT</span>' : "") + '</span>' +
+        '<span class="icu-v2-alert-b">' + esc(r.body) + '</span></span></button>';
+    }).join("") : '<div class="icu-v2-empty2">No active alerts across your patients.</div>';
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-slist">' + note + body + '</div></div>';
+  }
+  // Care team — Phase 1 shows the signed-in user only; multi-doctor units/roles = Phase 2.
+  function renderV2Team() {
+    var name = v2AccountName(), p = v2AccountProfile(), email = (p && p.email) || "";
+    var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Care team</div><div class="icu-v2-shead-s">This device</div></div></div>';
+    var member = '<div class="icu-v2-member"><span class="icu-v2-member-av">' + esc(v2Initials(name)) + '</span>' +
+      '<span class="icu-v2-member-id"><span class="icu-v2-member-nm">' + esc(name) + '</span><span class="icu-v2-member-role">' + (email ? esc(email) : "Signed in on this device") + '</span></span>' +
+      '<span class="icu-v2-member-state">You</span></div>';
+    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Multi-doctor units, roles (who can give instructions vs. update status) and a shared audit trail arrive in Phase 2 (smd_icu_groups).</div>';
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-tlist">' + member + note + '</div></div>';
+  }
+  function paintV2() {
+    if (!rootEl) return;
+    var _osc = rootEl.querySelector(".icu-scroll");
+    var _keepTop = (_paintTop || !_osc) ? 0 : _osc.scrollTop;
+    _paintTop = false;
+    if (_screen === "board") {
+      rootEl.innerHTML = renderV2Board() + renderV2BottomBar();
+    } else if (_screen === "alerts") {
+      rootEl.innerHTML = renderV2Alerts() + renderV2BottomBar();
+    } else if (_screen === "team") {
+      rootEl.innerHTML = renderV2Team() + renderV2BottomBar();
+    } else {
+      var fab = isMonWs() ? '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' : "";
+      var watchFab = labWatchOn()
+        ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>'
+        : "";
+      rootEl.innerHTML = renderV2Banner() + renderV2Presence() + renderV2TopTabs() + renderBody() + watchFab + fab;
+    }
     if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
   }
 
@@ -3961,8 +4343,17 @@
     var ix = act.indexOf(":"), cmd = ix < 0 ? act : act.slice(0, ix), arg = ix < 0 ? "" : act.slice(ix + 1);
     switch (cmd) {
       case "close": ICU.close(); break;
-      case "tab": _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
-      case "ws": { _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
+      case "tab": if (icuV2On()) _screen = "patient"; _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
+      case "ws": { if (icuV2On()) _screen = "patient"; _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
+      // ---- ICU v2 (smd_icu_v2) — board / alerts / team / admit / filter, all flag-only ----
+      case "icuboard": _screen = "board"; _paintTop = true; paint(); break;
+      case "icualerts": _screen = "alerts"; _paintTop = true; paint(); break;
+      case "icuteam": _screen = "team"; _paintTop = true; paint(); break;
+      case "icuadmit": _screen = "patient"; newPatient(); break;
+      case "icumore": _screen = "patient"; _active = "more"; _ws = "more"; _paintTop = true; paint(); break;
+      case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
+      case "icufilter": _v2Filter = arg; paint(); break;
+      case "v2toggle": try { if (localStorage.getItem("smd_icu_v2") === "1") localStorage.removeItem("smd_icu_v2"); else localStorage.setItem("smd_icu_v2", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
       case "summary": openSummary(); break;
       case "printsummary": printSummary(); break;
       case "discharge": openDischarge(); break;
@@ -4166,10 +4557,14 @@
         document.body.appendChild(rootEl);
         rootEl.addEventListener("click", onClick);
       }
+      rootEl.classList.toggle("icu-v2", icuV2On());   // v2 (smd_icu_v2) chrome is gated on this class
       // BUG #14: an optional sub-tab id opens the dashboard directly on that workspace —
       // the syringe FAB opens Infusions (its actual purpose), distinct from the Home
       // "ICU" tile which opens Overview. No argument = unchanged (open at current tab).
       if (target && typeof target === "string" && RENDER[target]) { _active = target; _ws = wsOf(target); }
+      // v2: a target tab (syringe FAB / Home tile) opens the patient workspace on that tab;
+      // a plain open lands on the unit board (the front door).
+      if (icuV2On()) _screen = (target && typeof target === "string" && RENDER[target]) ? "patient" : "board";
       paint();
       rootEl.classList.add("on");
       document.body.style.overflow = "hidden";
