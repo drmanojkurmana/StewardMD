@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Anticoagulation reversal + ICP/seizure control + neurosurgical referral",
       "steps": [
         "Non-contrast CT head; neurosurgical referral.",
         "Reverse anticoagulation; correct coagulopathy.",
@@ -18,14 +19,63 @@
         "Small asymptomatic collections: observe with repeat imaging.",
         "Manage raised ICP; seizure precautions."
       ],
+      "drugRefs": [
+        {
+          "composition": "prothrombin complex concentrate",
+          "regimenLabel": "Warfarin reversal",
+          "dose": "25–50 units/kg (per INR/weight)",
+          "route": "IV",
+          "freq": "single dose, guided by INR",
+          "why": "Rapid reversal of vitamin-K-antagonist anticoagulation in intracranial haemorrhage; faster than FFP."
+        },
+        {
+          "composition": "phytomenadione (vitamin K)",
+          "regimenLabel": "Warfarin reversal (co-administer with PCC)",
+          "dose": "5–10 mg",
+          "route": "IV",
+          "freq": "once",
+          "why": "Given with PCC to sustain reversal of warfarin as PCC effect wanes."
+        },
+        {
+          "composition": "idarucizumab",
+          "regimenLabel": "Dabigatran reversal",
+          "dose": "5 g (two 2.5 g vials)",
+          "route": "IV",
+          "freq": "single dose",
+          "why": "Specific reversal agent for dabigatran-associated intracranial bleeding."
+        },
+        {
+          "composition": "mannitol",
+          "regimenLabel": "Osmotic therapy (raised ICP)",
+          "dose": "0.25–1 g/kg",
+          "route": "IV",
+          "freq": "as needed for surges in ICP",
+          "why": "Reduces raised intracranial pressure from mass effect as a temporising measure."
+        },
+        {
+          "composition": "levetiracetam",
+          "regimenLabel": "Seizure treatment/prophylaxis",
+          "dose": "500–1000 mg",
+          "route": "IV/PO",
+          "freq": "twice daily",
+          "why": "Manages/prevents post-haemorrhage seizures; favourable interaction profile."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Traumatic Brain Injury / Intracranial Haemorrhage",
+          "Neurocritical Care Society — Reversal of Antithrombotics in Intracranial Haemorrhage",
+          "Brain Trauma Foundation Guidelines for the Management of Severe TBI"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Neurosurgical referral; reverse anticoagulation"
+  },
+  "antibioticRelevant": false,
   "confirm": "Headache, fluctuating consciousness or cognitive decline, sometimes after (minor) trauma — esp. elderly/anticoagulated. CT shows crescentic collection.",
   "investigations": [
     {
@@ -40,9 +90,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

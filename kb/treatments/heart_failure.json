@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Acute pulmonary oedema — IV diuretic ± nitrate + oxygen/NIV",
       "steps": [
         "Acute pulmonary oedema: sit up, high-flow O2, IV loop diuretic (furosemide), IV nitrate if hypertensive.",
         "Consider CPAP/NIV for severe respiratory distress.",
@@ -18,14 +19,86 @@
         "Daily weights, fluid/salt restriction, monitor renal function and potassium.",
         "Chronic HFrEF: ACEi/ARNI + beta-blocker + MRA + SGLT2 inhibitor."
       ],
+      "drugRefs": [
+        {
+          "composition": "furosemide",
+          "regimenLabel": "IV loop diuretic",
+          "dose": "40–80 mg IV (or at least equal to the usual oral dose)",
+          "route": "IV",
+          "freq": "repeat/infusion titrated to diuresis and symptoms",
+          "why": "Rapidly offloads pulmonary congestion in acute decompensation; monitor renal function and potassium."
+        },
+        {
+          "composition": "glyceryl trinitrate",
+          "regimenLabel": "IV nitrate (if hypertensive)",
+          "dose": "10–200 micrograms/min IV infusion, titrated to BP",
+          "route": "IV infusion",
+          "freq": "continuous, titrated to blood pressure and symptoms",
+          "why": "Venodilatation reduces preload/afterload in hypertensive acute pulmonary oedema; avoid if hypotensive."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ESC HF",
         "refs": [
-          "Harrison 22e · ESC HF"
+          "Harrison's Principles of Internal Medicine, 22e — Heart Failure and Cor Pulmonale",
+          "ESC Guidelines for the Diagnosis and Treatment of Acute and Chronic Heart Failure",
+          "NICE NG106 — Chronic Heart Failure in Adults"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Chronic HFrEF — four-pillar disease-modifying therapy",
+      "drugRefs": [
+        {
+          "composition": "ramipril",
+          "regimenLabel": "ACE inhibitor (or ARNI)",
+          "dose": "start 1.25–2.5 mg once daily, titrate to 10 mg/day (or switch to sacubitril/valsartan)",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Prognostic RAAS blockade in HFrEF; an ARNI (sacubitril/valsartan) is preferred where tolerated."
+        },
+        {
+          "composition": "bisoprolol",
+          "regimenLabel": "Beta-blocker",
+          "dose": "start 1.25 mg once daily, titrate to 10 mg/day",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Reduces mortality in stable HFrEF; up-titrate slowly when euvolaemic."
+        },
+        {
+          "composition": "spironolactone",
+          "regimenLabel": "Mineralocorticoid receptor antagonist",
+          "dose": "25 mg once daily, up to 50 mg/day",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Prognostic MRA in HFrEF; monitor potassium and renal function."
+        },
+        {
+          "composition": "dapagliflozin",
+          "regimenLabel": "SGLT2 inhibitor",
+          "dose": "10 mg once daily",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Reduces heart-failure hospitalisation and mortality across the ejection-fraction spectrum."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC HF",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Heart Failure and Cor Pulmonale",
+          "ESC Guidelines for the Diagnosis and Treatment of Acute and Chronic Heart Failure",
+          "NICE NG106 — Chronic Heart Failure in Adults"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Acute pulmonary oedema — IV diuretic ± nitrate; NIV if severe"
+  },
+  "antibioticRelevant": false,
   "confirm": "Dyspnoea, orthopnoea, raised JVP, basal crackles, oedema; raised BNP/NT-proBNP; echo for ejection fraction.",
   "investigations": [
     {
@@ -43,9 +116,10 @@
     "Harrison 22e · ESC HF"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Resuscitate + endoscopy + IV PPI infusion",
       "steps": [
         "Active bleed: resuscitate (IV access, fluids/blood, transfuse to Hb ~70 g/L threshold); correct coagulopathy.",
         "Urgent endoscopy (within 24 h) for haemostasis; IV PPI infusion for high-risk stigmata.",
@@ -18,14 +19,86 @@
         "Repeat endoscopy/IR embolisation or surgery for rebleeding.",
         "Risk score (Glasgow-Blatchford/Rockall) guides admission and timing."
       ],
+      "drugRefs": [
+        {
+          "composition": "omeprazole",
+          "regimenLabel": "IV PPI (high-risk stigmata post-endoscopy)",
+          "dose": "80 mg IV bolus, then 8 mg/hour infusion for 72 h",
+          "route": "IV",
+          "freq": "bolus then continuous infusion",
+          "why": "Raises intragastric pH to stabilise clot and reduce rebleeding after endoscopic haemostasis of high-risk stigmata."
+        },
+        {
+          "composition": "omeprazole",
+          "regimenLabel": "Oral PPI (continuation / healing)",
+          "dose": "20–40 mg PO once daily",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Continued acid suppression heals the ulcer; step down from IV once oral intake resumes and re-bleeding risk falls."
+        },
+        {
+          "composition": "packed red blood cells",
+          "regimenLabel": "Transfusion (restrictive threshold)",
+          "dose": "transfuse to a restrictive target (Hb ~70 g/L)",
+          "route": "IV",
+          "freq": "as needed to threshold",
+          "why": "Restrictive transfusion improves outcomes in acute upper-GI bleeding except in significant cardiovascular disease."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · NICE/ACG UGIB",
         "refs": [
-          "Harrison 22e · NICE/ACG UGIB"
+          "Harrison's Principles of Internal Medicine, 22e — Peptic Ulcer Disease and Related Disorders",
+          "NICE CG141 — Acute Upper Gastrointestinal Bleeding in Over 16s",
+          "ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "H. pylori eradication (triple therapy) — antibiotic-containing",
+      "drugRefs": [
+        {
+          "composition": "omeprazole",
+          "regimenLabel": "PPI (eradication backbone)",
+          "dose": "20 mg PO twice daily for 7 days",
+          "route": "PO",
+          "freq": "twice daily",
+          "why": "Acid suppression enhances antibiotic efficacy in H. pylori eradication."
+        },
+        {
+          "composition": "amoxicillin",
+          "regimenLabel": "H. pylori eradication antibiotic",
+          "dose": "1 g PO twice daily for 7 days",
+          "route": "PO",
+          "freq": "twice daily",
+          "why": "Component of first-line PPI-based triple therapy for confirmed H. pylori."
+        },
+        {
+          "composition": "clarithromycin",
+          "regimenLabel": "H. pylori eradication antibiotic",
+          "dose": "500 mg PO twice daily for 7 days",
+          "route": "PO",
+          "freq": "twice daily",
+          "why": "Component of first-line PPI-based triple therapy (use metronidazole if penicillin-allergic or high clarithromycin resistance)."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · NICE/ACG UGIB",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Peptic Ulcer Disease and Related Disorders",
+          "NICE CG184 — Gastro-oesophageal Reflux Disease and Dyspepsia (H. pylori eradication)",
+          "ACG Clinical Guideline: Treatment of Helicobacter pylori Infection"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Resuscitate, urgent endoscopy + IV PPI"
+  },
+  "antibioticRelevant": true,
   "confirm": "Epigastric pain ± upper-GI bleed (melaena/haematemesis). Risk-stratify bleed (Glasgow-Blatchford); OGD diagnostic and therapeutic.",
   "investigations": [
     {
@@ -43,9 +116,10 @@
     "Harrison 22e · NICE/ACG UGIB"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

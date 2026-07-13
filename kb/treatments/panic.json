@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "CBT and/or SSRI/SNRI after excluding organic mimics",
       "steps": [
         "EXCLUDE organic mimics first (ACS, PE, arrhythmia, hypoglycaemia, thyrotoxicosis) — especially on first presentation.",
         "Acute: calm reassurance, breathing techniques; benzodiazepines only sparingly/short-term if at all.",
@@ -18,14 +19,54 @@
         "Reduce stimulants (caffeine), alcohol; lifestyle and psychoeducation.",
         "Arrange follow-up and safety-net; screen for depression and substance use."
       ],
+      "drugRefs": [
+        {
+          "composition": "sertraline",
+          "regimenLabel": "SSRI (first-line pharmacotherapy)",
+          "dose": "start 25 mg once daily, titrate to 50–200 mg/day",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "First-line drug treatment for panic disorder alongside CBT; an SNRI (e.g. venlafaxine) is an alternative. Warn of transient early worsening of anxiety."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · NICE anxiety",
         "refs": [
-          "Harrison 22e · NICE anxiety"
+          "Harrison's Principles of Internal Medicine, 22e — Anxiety Disorders",
+          "NICE CG113 — Generalised Anxiety Disorder and Panic Disorder in Adults",
+          "BAP Evidence-Based Guidelines for the Pharmacological Treatment of Anxiety Disorders"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Short-term anxiolysis (use sparingly)",
+      "drugRefs": [
+        {
+          "composition": "lorazepam",
+          "regimenLabel": "Benzodiazepine (short-term only)",
+          "dose": "0.5–1 mg as needed",
+          "route": "oral",
+          "freq": "sparingly, short-term only",
+          "duration": "limit to a few weeks (dependence risk)",
+          "why": "May relieve severe acute anxiety short-term, but not first-line and best avoided due to tolerance/dependence."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · NICE anxiety",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Anxiety Disorders",
+          "NICE CG113 — Generalised Anxiety Disorder and Panic Disorder in Adults"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "green",
+    "label": "CBT + SSRI; exclude organic causes first"
+  },
+  "antibioticRelevant": false,
   "confirm": "Abrupt episodes of intense fear with somatic symptoms (palpitations, dyspnoea, chest tightness, paraesthesia) peaking within minutes — a diagnosis of exclusion after ruling out organic causes.",
   "investigations": [
     {
@@ -40,9 +81,10 @@
     "Harrison 22e · NICE anxiety"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

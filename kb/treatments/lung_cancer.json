@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Staging + MDT-directed definitive therapy; supportive/complication drugs structured below",
       "steps": [
         "CT chest/abdomen and tissue diagnosis (bronchoscopy/biopsy); PET-CT for staging.",
         "Refer to lung-cancer MDT urgently.",
@@ -18,14 +19,47 @@
         "Smoking cessation; manage complications (effusion, SVCO, hypercalcaemia, cord compression).",
         "Early palliative-care involvement improves outcomes."
       ],
+      "drugRefs": [
+        {
+          "composition": "dexamethasone",
+          "regimenLabel": "Corticosteroid for SVCO / metastatic cord compression",
+          "dose": "16 mg/day (e.g. 8 mg twice daily), with PPI cover",
+          "route": "PO/IV",
+          "freq": "daily until definitive treatment",
+          "why": "Reduces peritumoural/spinal-cord oedema in superior vena cava obstruction and metastatic spinal cord compression while urgent radiotherapy/stenting is arranged."
+        },
+        {
+          "composition": "zoledronic acid",
+          "regimenLabel": "Bisphosphonate for malignant hypercalcaemia",
+          "dose": "4 mg IV over ≥15 min (renal-adjusted), after rehydration",
+          "route": "IV infusion",
+          "freq": "single dose, repeat no sooner than 7 days",
+          "why": "Treats malignancy-associated hypercalcaemia (given after saline rehydration) by inhibiting osteoclastic bone resorption."
+        },
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV rehydration for hypercalcaemia",
+          "dose": "IV volume repletion (e.g. 3–4 L/24 h if tolerated)",
+          "route": "IV",
+          "freq": "continuous, titrated to volume status",
+          "why": "First step in malignant hypercalcaemia — restores intravascular volume and promotes calciuresis before bisphosphonate."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · NICE/ESMO",
         "refs": [
-          "Harrison 22e · NICE/ESMO"
+          "Harrison's Principles of Internal Medicine, 22e — Neoplasms of the Lung",
+          "NICE NG122 — Lung Cancer: Diagnosis and Management",
+          "ESMO Clinical Practice Guidelines — NSCLC and SCLC"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Urgent MDT referral; treat oncological emergencies"
+  },
+  "antibioticRelevant": false,
   "confirm": "Cough, haemoptysis, weight loss, or an incidental mass in a smoker; CT chest and tissue diagnosis with staging.",
   "investigations": [
     {
@@ -43,9 +77,10 @@
     "Harrison 22e · NICE/ESMO"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

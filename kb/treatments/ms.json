@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "High-dose corticosteroid for acute disabling relapse",
       "steps": [
         "Exclude infection/fever (pseudo-relapse) before treating.",
         "Acute disabling relapse: high-dose corticosteroids (IV/oral methylprednisolone ~3–5 days).",
@@ -18,14 +19,32 @@
         "Disease-modifying therapy decided by neurology (relapse rate/MRI activity).",
         "Symptomatic care (spasticity, bladder, fatigue) and rehabilitation."
       ],
+      "drugRefs": [
+        {
+          "composition": "methylprednisolone",
+          "regimenLabel": "High-dose corticosteroid",
+          "dose": "500 mg–1 g once daily for 3–5 days",
+          "route": "IV or oral",
+          "freq": "once daily",
+          "duration": "3–5 days (no taper usually needed)",
+          "why": "Shortens the duration of an acute disabling relapse; exclude infection (pseudo-relapse) first. Disease-modifying therapy is selected separately by neurology."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · McDonald criteria",
         "refs": [
-          "Harrison 22e · McDonald criteria"
+          "Harrison's Principles of Internal Medicine, 22e — Multiple Sclerosis and Other Demyelinating Diseases",
+          "ABN Guidelines on the Use of Disease-Modifying Therapies in Multiple Sclerosis",
+          "2017 Revised McDonald Diagnostic Criteria for Multiple Sclerosis"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "High-dose steroids for disabling relapse; exclude pseudo-relapse"
+  },
+  "antibioticRelevant": false,
   "confirm": "Neurological symptoms disseminated in time and space in a young adult; MRI white-matter lesions, oligoclonal bands. Confirm relapse vs pseudo-relapse (exclude infection/heat).",
   "investigations": [
     {
@@ -43,9 +62,10 @@
     "Harrison 22e · McDonald criteria"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "IV corticosteroids + VTE prophylaxis (acute severe UC); oral steroids for Crohn's flare",
       "steps": [
         "EXCLUDE infective colitis (stool culture + C. difficile toxin) before/with immunosuppression.",
         "Acute severe UC: admit, IV corticosteroids, VTE prophylaxis, monitor (Truelove-Witts / day-3 response).",
@@ -18,14 +19,78 @@
         "Crohn's flare: corticosteroids to induce remission; optimise/escalate maintenance (immunomodulator/biologic).",
         "Avoid antimotility agents in severe colitis (toxic megacolon risk); nutrition support."
       ],
+      "drugRefs": [
+        {
+          "composition": "hydrocortisone",
+          "regimenLabel": "IV corticosteroid (acute severe UC)",
+          "dose": "100 mg IV four times daily (or methylprednisolone 60 mg/day)",
+          "route": "IV",
+          "freq": "four times daily",
+          "why": "First-line to induce remission in acute severe UC; assess response at day 3 (stool frequency/CRP) to decide on rescue therapy."
+        },
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Oral corticosteroid (Crohn's / moderate flare)",
+          "dose": "40 mg PO once daily, then taper",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Induces remission in a Crohn's or moderate UC flare; tapered course, not for maintenance."
+        },
+        {
+          "composition": "enoxaparin",
+          "regimenLabel": "VTE prophylaxis",
+          "dose": "40 mg SC once daily",
+          "route": "SC",
+          "freq": "once daily",
+          "why": "Active IBD is strongly prothrombotic; prophylactic LMWH is recommended in hospitalised flares despite rectal bleeding."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ECCO/BSG IBD",
         "refs": [
-          "Harrison 22e · ECCO/BSG IBD"
+          "Harrison's Principles of Internal Medicine, 22e — Inflammatory Bowel Disease",
+          "ECCO Guidelines on Ulcerative Colitis and Crohn's Disease (Medical Management)",
+          "BSG Consensus Guidelines on the Management of IBD in Adults"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Rescue therapy for steroid-refractory acute severe UC",
+      "drugRefs": [
+        {
+          "composition": "ciclosporin",
+          "regimenLabel": "Calcineurin-inhibitor rescue",
+          "dose": "2 mg/kg/day IV infusion (adjust to trough levels)",
+          "route": "IV infusion",
+          "freq": "continuous, monitored",
+          "why": "Rescue option in steroid-refractory acute severe UC to avoid/bridge to colectomy; requires level and renal monitoring."
+        },
+        {
+          "composition": "infliximab",
+          "regimenLabel": "Anti-TNF rescue",
+          "dose": "5 mg/kg IV infusion at weeks 0, 2, 6 (induction)",
+          "route": "IV infusion",
+          "freq": "induction schedule",
+          "why": "Alternative rescue for steroid-refractory acute severe UC; screen for TB/hepatitis B before use."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ECCO/BSG IBD",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Inflammatory Bowel Disease",
+          "ECCO Guidelines on Ulcerative Colitis (Medical Management)",
+          "BSG Consensus Guidelines on the Management of IBD in Adults"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Exclude infection; IV steroids + VTE prophylaxis if severe"
+  },
+  "antibioticRelevant": false,
   "confirm": "Bloody diarrhoea, urgency, abdominal pain ± systemic features in known/new IBD; raised CRP/faecal calprotectin; exclude infection (incl. C. difficile).",
   "investigations": [
     {
@@ -43,9 +108,10 @@
     "Harrison 22e · ECCO/BSG IBD"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

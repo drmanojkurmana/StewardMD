@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "IVIG (or plasma exchange) + supportive/respiratory monitoring",
       "steps": [
         "ADMIT — monitor respiratory function (serial FVC) and autonomic status closely.",
         "IVIG 0.4 g/kg/day ×5 days OR plasma exchange (equivalent efficacy).",
@@ -18,14 +19,52 @@
         "VTE prophylaxis, pain control, physiotherapy, pressure-area care.",
         "Do NOT give corticosteroids (ineffective in GBS)."
       ],
+      "drugRefs": [
+        {
+          "composition": "normal immunoglobulin (IVIG)",
+          "regimenLabel": "Intravenous immunoglobulin",
+          "dose": "0.4 g/kg/day",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "5 days (total 2 g/kg)",
+          "why": "First-line immunotherapy — equivalent efficacy to plasma exchange and usually more practical. Corticosteroids are ineffective and should not be used."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Guillain-Barré Syndrome",
+          "AAN Practice Parameter — Immunotherapy for Guillain-Barré Syndrome"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Supportive adjuncts",
+      "drugRefs": [
+        {
+          "composition": "enoxaparin",
+          "regimenLabel": "Pharmacological VTE prophylaxis",
+          "dose": "40 mg",
+          "route": "subcutaneous",
+          "freq": "once daily",
+          "why": "Immobile patients are at high venous-thromboembolism risk; give prophylactic LMWH unless contraindicated."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Guillain-Barré Syndrome"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "IVIG or plasma exchange + close respiratory monitoring"
+  },
+  "antibioticRelevant": false,
   "confirm": "Progressive ascending weakness with areflexia ± sensory/autonomic involvement, often post-infective; albuminocytological dissociation on CSF; supportive NCS.",
   "investigations": [
     {
@@ -43,9 +82,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

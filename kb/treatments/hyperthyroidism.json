@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Beta-blocker + antithyroid drug",
       "steps": [
         "Beta-blocker (propranolol) for symptomatic relief of adrenergic symptoms.",
         "Antithyroid drug — carbimazole (or PTU in 1st-trimester pregnancy).",
@@ -18,14 +19,46 @@
         "Discuss definitive options: radioactive iodine or surgery.",
         "Monitor TFTs and FBC/LFTs (agranulocytosis, hepatotoxicity warning)."
       ],
+      "drugRefs": [
+        {
+          "composition": "propranolol",
+          "regimenLabel": "Beta-blocker for adrenergic symptoms",
+          "dose": "10–40 mg three to four times daily, titrated to symptoms/heart rate",
+          "route": "oral",
+          "freq": "three to four times daily",
+          "why": "Rapidly controls adrenergic symptoms (tremor, palpitations, anxiety) while antithyroid therapy takes effect; non-selective and also reduces peripheral T4→T3 conversion at higher doses."
+        },
+        {
+          "composition": "carbimazole",
+          "regimenLabel": "Antithyroid drug (first-line)",
+          "dose": "20–40 mg daily initially, then titrated (or block-and-replace)",
+          "route": "oral",
+          "freq": "once daily (or divided), titrated to TFTs",
+          "why": "First-line thionamide that inhibits thyroid hormone synthesis. Warn about agranulocytosis (seek help if fever/sore throat) and monitor FBC/LFTs."
+        },
+        {
+          "composition": "propylthiouracil",
+          "regimenLabel": "Antithyroid drug (first-trimester pregnancy)",
+          "dose": "100 mg three times daily (200–400 mg/day), titrated",
+          "route": "oral",
+          "freq": "two to three times daily",
+          "why": "Preferred thionamide in the first trimester of pregnancy (lower teratogenic risk than carbimazole). Carries a risk of hepatotoxicity."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ATA",
         "refs": [
-          "Harrison 22e · ATA"
+          "Harrison's Principles of Internal Medicine, 22e — Hyperthyroidism and Thyrotoxicosis",
+          "ATA Guidelines for Diagnosis and Management of Hyperthyroidism and Other Causes of Thyrotoxicosis"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Beta-blocker + antithyroid drug"
+  },
+  "antibioticRelevant": false,
   "confirm": "Weight loss, tremor, heat intolerance, palpitations with suppressed TSH and raised free T4/T3 (uncomplicated, no storm).",
   "investigations": [
     {
@@ -43,9 +76,10 @@
     "Harrison 22e · ATA"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

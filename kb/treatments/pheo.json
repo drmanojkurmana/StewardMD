@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Alpha-blockade FIRST, then beta-blockade; volume repletion before surgery",
       "steps": [
         "Crisis: control with a titratable agent (IV phentolamine / nicardipine).",
         "Establish ALPHA-blockade FIRST (phenoxybenzamine/doxazosin) — never beta-block before alpha (unopposed alpha → crisis).",
@@ -18,14 +19,76 @@
         "Liberal salt/fluid to restore volume pre-operatively.",
         "Definitive: surgical resection after adequate blockade (≈2 weeks); endocrine/surgical MDT."
       ],
+      "drugRefs": [
+        {
+          "composition": "phenoxybenzamine",
+          "regimenLabel": "Non-selective alpha-blocker (first)",
+          "dose": "10 mg twice daily starting, titrate up (to ~1 mg/kg/day)",
+          "route": "oral",
+          "freq": "twice daily, uptitrated over ~2 weeks pre-op",
+          "why": "Establish alpha-blockade FIRST to control catecholamine-driven hypertension; never start a beta-blocker before adequate alpha-blockade (risk of unopposed alpha-mediated crisis)."
+        },
+        {
+          "composition": "doxazosin",
+          "regimenLabel": "Selective alpha-1 blocker (alternative)",
+          "dose": "2 mg starting, titrate to 8-16 mg/day",
+          "route": "oral",
+          "freq": "once-twice daily",
+          "why": "Alternative selective alpha-1 blocker for pre-operative preparation."
+        },
+        {
+          "composition": "propranolol",
+          "regimenLabel": "Beta-blocker (ONLY after alpha-blockade)",
+          "dose": "20-40 mg",
+          "route": "oral",
+          "freq": "three times daily",
+          "why": "Added for tachyarrhythmia only after adequate alpha-blockade and volume repletion; giving it first can precipitate a hypertensive crisis."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · Endocrine Society",
         "refs": [
-          "Harrison 22e · Endocrine Society"
+          "Harrison's Principles of Internal Medicine, 22e — Pheochromocytoma",
+          "Endocrine Society Clinical Practice Guideline — Pheochromocytoma and Paraganglioma"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Acute crisis control (titratable IV agents)",
+      "drugRefs": [
+        {
+          "composition": "phentolamine",
+          "regimenLabel": "IV alpha-blocker for hypertensive crisis",
+          "dose": "2.5-5 mg IV bolus, repeat as needed",
+          "route": "IV",
+          "freq": "repeat every 5-10 min / infusion, titrated to BP",
+          "why": "Rapidly reversible alpha-blockade for an acute catecholamine crisis."
+        },
+        {
+          "composition": "nicardipine",
+          "regimenLabel": "IV calcium-channel blocker (crisis, titratable)",
+          "dose": "5 mg/h, titrate to BP (max 15 mg/h)",
+          "route": "IV infusion",
+          "freq": "continuous, titrated",
+          "why": "Titratable BP control alternative for an acute crisis."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · Endocrine Society",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Pheochromocytoma",
+          "Endocrine Society Clinical Practice Guideline — Pheochromocytoma and Paraganglioma"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Alpha-blockade first, beta-blockade only after"
+  },
+  "antibioticRelevant": false,
   "confirm": "Paroxysmal hypertension with headache, sweating, palpitations; raised plasma/urine metanephrines; tumour on imaging.",
   "investigations": [
     {
@@ -43,9 +106,10 @@
     "Harrison 22e · Endocrine Society"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

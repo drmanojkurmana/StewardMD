@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Acetazolamide + weight loss",
       "steps": [
         "MRI + MR venography (exclude mass/venous sinus thrombosis), then LP to confirm raised opening pressure with normal CSF.",
         "Weight loss is central; consider a GLP-1 receptor agonist if unable to lose weight by diet.",
@@ -18,14 +19,39 @@
         "Formal perimetry and urgent ophthalmology if visual loss; severe/progressive loss needs CSF diversion (lumboperitoneal shunt) or optic-nerve-sheath fenestration.",
         "Stop precipitants (tetracyclines, vitamin A, retinoids)."
       ],
+      "drugRefs": [
+        {
+          "composition": "acetazolamide",
+          "regimenLabel": "Carbonic anhydrase inhibitor (first-line)",
+          "dose": "250–500 mg twice daily, up-titrated as tolerated (up to ~1–2 g/day)",
+          "route": "oral",
+          "freq": "twice daily",
+          "why": "First-line agent — reduces CSF production and intracranial pressure; the mainstay medical therapy alongside weight loss."
+        },
+        {
+          "composition": "topiramate",
+          "regimenLabel": "Second-line (acetazolamide-intolerant/ineffective)",
+          "dose": "start 25 mg/day, titrate to ~100 mg/day",
+          "route": "oral",
+          "freq": "once to twice daily",
+          "why": "Alternative when acetazolamide is ineffective/not tolerated; has weak carbonic-anhydrase-inhibiting activity and promotes appetite suppression/weight loss."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · rev. Harrison 22e 116-117,",
         "refs": [
-          "Harrison 22e · rev. Harrison 22e 116-117,"
+          "Harrison's Principles of Internal Medicine, 22e — Idiopathic Intracranial Hypertension",
+          "Consensus Guidelines on Idiopathic Intracranial Hypertension (Mollan et al., JNNP 2018)",
+          "Idiopathic Intracranial Hypertension Treatment Trial (IIHTT), JAMA 2014"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Acetazolamide + weight loss; urgent ophthalmology if visual loss"
+  },
+  "antibioticRelevant": false,
   "confirm": "Headache + visual disturbance with papilloedema, typically a young obese woman; normal imaging; LP opening pressure raised with normal CSF.",
   "investigations": [
     {
@@ -43,9 +69,10 @@
     "Harrison 22e · rev. Harrison 22e 116-117,"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

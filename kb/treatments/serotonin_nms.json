@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Stop the agent + supportive care (cooling, fluids, benzodiazepines)",
       "steps": [
         "STOP the offending agent immediately (serotonergic drug or antipsychotic).",
         "Aggressive cooling and IV fluids; benzodiazepines for agitation/rigidity; ICU for severe cases.",
@@ -18,14 +19,77 @@
         "Monitor for and treat rhabdomyolysis, hyperthermia, renal failure and DIC.",
         "Supportive care; avoid restraints worsening hyperthermia."
       ],
+      "drugRefs": [
+        {
+          "composition": "lorazepam",
+          "regimenLabel": "Benzodiazepine (agitation/rigidity)",
+          "dose": "1–2 mg IV, repeat and titrate to effect",
+          "route": "IV",
+          "freq": "titrate/repeat as needed",
+          "why": "First-line supportive measure for agitation, rigidity and autonomic instability in both serotonin syndrome and NMS; helps lower temperature."
+        },
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV crystalloid",
+          "dose": "titrated to volume status and urine output",
+          "route": "IV",
+          "freq": "continuous",
+          "why": "Rehydration supports cooling and protects renal function against rhabdomyolysis."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Serotonin Syndrome and Neuroleptic Malignant Syndrome",
+          "Boyer & Shannon — The Serotonin Syndrome (NEJM Review)",
+          "Sternbach and Hunter Criteria for Serotonin Toxicity"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Specific antidotes for severe/refractory cases",
+      "drugRefs": [
+        {
+          "composition": "cyproheptadine",
+          "regimenLabel": "Serotonin antagonist (serotonin syndrome)",
+          "dose": "12 mg initially, then 2 mg every 2 h until response (max ~32 mg/day)",
+          "route": "oral / NG",
+          "freq": "titrated to response",
+          "why": "5-HT2A antagonist considered in moderate–severe serotonin syndrome not settling with supportive care."
+        },
+        {
+          "composition": "dantrolene",
+          "regimenLabel": "Muscle relaxant (severe NMS/hyperthermia)",
+          "dose": "1–2.5 mg/kg IV, repeat as needed",
+          "route": "IV",
+          "freq": "repeat/titrate to rigidity and temperature",
+          "why": "Reduces muscle rigidity and heat generation in severe NMS with extreme hyperthermia."
+        },
+        {
+          "composition": "bromocriptine",
+          "regimenLabel": "Dopamine agonist (NMS)",
+          "dose": "2.5 mg every 8 hours",
+          "route": "oral / NG",
+          "freq": "every 8 hours",
+          "why": "Restores dopaminergic tone in NMS; used adjunctively in severe cases."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Serotonin Syndrome and Neuroleptic Malignant Syndrome",
+          "Boyer & Shannon — The Serotonin Syndrome (NEJM Review)"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Stop the agent; aggressive supportive care ± specific antidote"
+  },
+  "antibioticRelevant": false,
   "confirm": "Hyperthermia, rigidity and altered mental state with autonomic instability — serotonergic excess (clonus, hyperreflexia, rapid onset) vs NMS (lead-pipe rigidity, antipsychotic, slower).",
   "investigations": [
     {
@@ -43,9 +107,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

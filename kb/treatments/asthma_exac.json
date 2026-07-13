@@ -11,21 +11,72 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Oxygen + nebulised bronchodilators + systemic corticosteroid",
       "steps": [
-        "High-flow oxygen to SpO2 94–98%; back-to-back nebulised salbutamol (+ ipratropium if severe).",
-        "Oral prednisolone 40–50 mg (or IV hydrocortisone) early.",
+        "High-flow oxygen to SpO2 94-98%; back-to-back nebulised salbutamol (+ ipratropium if severe).",
+        "Oral prednisolone 40-50 mg (or IV hydrocortisone) early.",
         "IV magnesium sulfate for severe/life-threatening attacks.",
         "Reassess with PEF/ABG; escalate to ICU for exhaustion, rising CO2 or silent chest.",
         "Identify trigger; review inhaler technique/adherence and step-up preventer at discharge."
       ],
+      "drugRefs": [
+        {
+          "composition": "salbutamol",
+          "regimenLabel": "Nebulised salbutamol (back-to-back)",
+          "dose": "5 mg",
+          "route": "nebulised (oxygen-driven)",
+          "freq": "repeat every 15-20 min / back-to-back in severe attacks",
+          "why": "First-line bronchodilator — relaxes airway smooth muscle to reverse bronchospasm."
+        },
+        {
+          "composition": "ipratropium bromide",
+          "regimenLabel": "Nebulised anticholinergic (add in severe)",
+          "dose": "500 mcg",
+          "route": "nebulised",
+          "freq": "every 4-6 h",
+          "why": "Added to salbutamol in acute severe/life-threatening asthma for additional bronchodilation."
+        },
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Oral corticosteroid (give early)",
+          "dose": "40-50 mg",
+          "route": "oral",
+          "freq": "once daily",
+          "duration": "typically 5 days",
+          "why": "Reduces airway inflammation and prevents relapse; give as early as possible."
+        },
+        {
+          "composition": "hydrocortisone",
+          "regimenLabel": "IV corticosteroid (if oral not tolerated)",
+          "dose": "100 mg",
+          "route": "IV",
+          "freq": "every 6 h",
+          "why": "Alternative to oral prednisolone when the patient cannot swallow/absorb oral steroid."
+        },
+        {
+          "composition": "magnesium sulfate",
+          "regimenLabel": "IV magnesium (severe / life-threatening)",
+          "dose": "2 g (8 mmol)",
+          "route": "IV infusion over 20 min",
+          "freq": "single dose",
+          "why": "Bronchodilator for severe/life-threatening attacks not responding to initial nebulised therapy."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · GINA/BTS",
         "refs": [
-          "Harrison 22e · GINA/BTS"
+          "Harrison's Principles of Internal Medicine, 22e — Asthma",
+          "Global Initiative for Asthma (GINA) — Management of Exacerbations",
+          "BTS/SIGN British Guideline on the Management of Asthma"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Oxygen + nebulised salbutamol/ipratropium + steroid"
+  },
+  "antibioticRelevant": false,
   "confirm": "Acute wheeze/dyspnoea/cough with reduced PEF; grade severity (PEF, SpO2, ability to speak, silent chest).",
   "investigations": [
     {
@@ -43,9 +94,10 @@
     "Harrison 22e · GINA/BTS"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

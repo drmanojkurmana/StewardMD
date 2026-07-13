@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "RPGN — high-dose corticosteroid + cytotoxic/biologic induction (specialist-directed)",
       "steps": [
         "Assess for rapidly progressive GN (rising creatinine) — nephrology emergency; urgent biopsy.",
         "Send immunology (ANCA, anti-GBM, complement, ANA) before immunosuppression.",
@@ -18,14 +19,68 @@
         "Supportive: BP control (ACEi/ARB), manage fluid/electrolytes, treat any infection trigger.",
         "Treat the specific cause; monitor renal function closely."
       ],
+      "drugRefs": [
+        {
+          "composition": "methylprednisolone",
+          "regimenLabel": "IV corticosteroid pulse (induction)",
+          "dose": "500–1000 mg once daily for 3 days, then oral prednisolone ~1 mg/kg/day (max ~60–80 mg) tapering",
+          "route": "IV then oral",
+          "freq": "pulse x3 days, then daily oral taper",
+          "why": "Rapid suppression of glomerular inflammation in RPGN/crescentic GN. Specialist-directed."
+        },
+        {
+          "composition": "cyclophosphamide",
+          "regimenLabel": "Cytotoxic induction",
+          "dose": "IV 15 mg/kg (max 1.2 g) every 2–3 weeks, or oral 2 mg/kg/day (reduce for age/renal function)",
+          "route": "IV or oral",
+          "freq": "per induction protocol",
+          "why": "Induction immunosuppression for ANCA-associated and anti-GBM crescentic GN. Specialist-directed with PJP prophylaxis."
+        },
+        {
+          "composition": "rituximab",
+          "regimenLabel": "Anti-CD20 induction (alternative to cyclophosphamide)",
+          "dose": "375 mg/m² IV weekly for 4 weeks (or 1 g IV x2, 2 weeks apart)",
+          "route": "IV infusion",
+          "freq": "per induction protocol",
+          "why": "Alternative induction agent for ANCA-associated GN, especially where cyclophosphamide is undesirable. Specialist-directed."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · KDIGO GN",
         "refs": [
-          "Harrison 22e · KDIGO GN"
+          "Harrison's Principles of Internal Medicine, 22e — Glomerular Diseases",
+          "KDIGO Clinical Practice Guideline for the Management of Glomerular Diseases"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Supportive — BP and proteinuria control",
+      "drugRefs": [
+        {
+          "composition": "ramipril",
+          "regimenLabel": "ACE inhibitor (renoprotection/BP)",
+          "dose": "start 2.5 mg once daily, titrate to 10 mg as tolerated",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Reduces proteinuria and controls blood pressure. Monitor potassium and creatinine; an ARB is an alternative if ACEi not tolerated."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · KDIGO GN",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Glomerular Diseases",
+          "KDIGO Clinical Practice Guideline for the Management of Glomerular Diseases"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Admit; nephrology; urgent biopsy if RPGN"
+  },
+  "antibioticRelevant": false,
   "confirm": "Haematuria (dysmorphic RBCs/casts), proteinuria, hypertension ± AKI. Rapidly progressive GN is an emergency.",
   "investigations": [
     {
@@ -43,9 +98,10 @@
     "Harrison 22e · KDIGO GN"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Correct the metabolic cause + supportive care",
       "steps": [
         "Find and correct the cause — glucose, Na, Ca, uraemia, hypercapnia, ammonia, drugs, hypoxia, sepsis.",
         "Support airway, oxygenation and circulation.",
@@ -18,14 +19,38 @@
         "Treat the underlying organ failure; review/stop offending drugs.",
         "Monitor neurological status."
       ],
+      "drugRefs": [
+        {
+          "composition": "thiamine",
+          "regimenLabel": "Empirical thiamine (at-risk patients)",
+          "dose": "100 mg IV (higher, e.g. 500 mg three times daily, if Wernicke encephalopathy suspected)",
+          "route": "IV",
+          "freq": "give before/with any glucose in at-risk patients",
+          "why": "Empirical replacement in malnourished/alcohol-dependent patients to prevent or treat Wernicke encephalopathy; give before glucose to avoid precipitating it."
+        },
+        {
+          "composition": "naloxone",
+          "regimenLabel": "Naloxone (if opioid toxicity suspected)",
+          "dose": "0.4 mg (start lower, 0.04–0.1 mg, if opioid-dependent)",
+          "route": "IV (IM/intranasal if no IV access)",
+          "freq": "repeat every 2–3 min, titrated to respiration",
+          "why": "Reverses opioid-induced depressed consciousness where opioid toxicity is a possible contributor; both diagnostic and therapeutic."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Coma and Metabolic Encephalopathy",
+          "Harrison's Principles of Internal Medicine, 22e — Confusion, Delirium and the Encephalopathies"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Identify and correct the metabolic cause"
+  },
+  "antibioticRelevant": false,
   "confirm": "Diffuse alteration of consciousness without focal deficit; asterixis, myoclonus. Identify the metabolic cause.",
   "investigations": [
     {
@@ -43,9 +68,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

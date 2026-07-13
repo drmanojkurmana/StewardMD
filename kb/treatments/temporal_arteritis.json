@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Immediate high-dose glucocorticoids (IV if visual loss)",
       "steps": [
         "START high-dose oral glucocorticoids IMMEDIATELY on suspicion - do not wait for biopsy (sight-threatening); IV methylprednisolone if visual loss.",
         "Prednisone ~40-80 mg/day (Harrison cites 80 mg daily for the first 4-6 weeks).",
@@ -18,14 +19,77 @@
         "Gastroprotection, bone protection, glucose monitoring; tocilizumab as a steroid-sparing alternative.",
         "Slow steroid taper guided by symptoms and ESR/CRP."
       ],
+      "drugRefs": [
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "High-dose oral corticosteroid (no visual involvement)",
+          "dose": "40–60 mg once daily (Harrison cites up to 80 mg for the first 4–6 weeks), then slow taper",
+          "route": "oral",
+          "freq": "once daily, tapered guided by symptoms and ESR/CRP",
+          "why": "Start immediately on clinical suspicion to prevent irreversible visual loss; do not wait for biopsy."
+        },
+        {
+          "composition": "methylprednisolone",
+          "regimenLabel": "IV pulse corticosteroid (visual loss / impending visual loss)",
+          "dose": "500–1000 mg once daily for 3 days, then switch to oral prednisolone",
+          "route": "IV",
+          "freq": "once daily x3 days",
+          "why": "For established or impending visual loss; more rapid, high-intensity suppression before stepping down to oral steroid."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ACR/EULAR GCA · rev. Harrison 22e 115,",
         "refs": [
-          "Harrison 22e · ACR/EULAR GCA · rev. Harrison 22e 115,"
+          "Harrison's Principles of Internal Medicine, 22e — Polymyalgia Rheumatica and Giant Cell Arteritis",
+          "ACR/EULAR Recommendations for the Management of Giant Cell Arteritis",
+          "BSR Guideline for the Diagnosis and Treatment of Giant Cell Arteritis"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Steroid-sparing & glucocorticoid risk management",
+      "drugRefs": [
+        {
+          "composition": "tocilizumab",
+          "regimenLabel": "IL-6 receptor inhibitor (steroid-sparing)",
+          "dose": "162 mg once weekly",
+          "route": "SC",
+          "freq": "once weekly",
+          "why": "Steroid-sparing biologic that improves sustained remission and reduces cumulative glucocorticoid exposure."
+        },
+        {
+          "composition": "omeprazole",
+          "regimenLabel": "Proton pump inhibitor (gastroprotection)",
+          "dose": "20 mg once daily",
+          "route": "oral",
+          "freq": "once daily while on high-dose steroids",
+          "why": "Gastroprotection during high-dose corticosteroid therapy."
+        },
+        {
+          "composition": "alendronic acid",
+          "regimenLabel": "Bisphosphonate (bone protection)",
+          "dose": "70 mg once weekly (with calcium/vitamin D)",
+          "route": "oral",
+          "freq": "once weekly",
+          "why": "Bone protection given the prolonged high-dose glucocorticoid course typical of GCA."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ACR/EULAR GCA · rev. Harrison 22e 115,",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Polymyalgia Rheumatica and Giant Cell Arteritis",
+          "ACR/EULAR Recommendations for the Management of Giant Cell Arteritis"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate high-dose steroids; urgent biopsy/US"
+  },
+  "antibioticRelevant": false,
   "confirm": "New headache, scalp tenderness, jaw claudication ± visual symptoms in age >50; raised ESR/CRP; temporal artery biopsy or US confirms.",
   "investigations": [
     {
@@ -40,9 +104,10 @@
     "Harrison 22e · ACR/EULAR GCA · rev. Harrison 22e 115,"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

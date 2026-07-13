@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Low-dose oral corticosteroid with slow taper",
       "steps": [
         "Start prednisone 10-20 mg/day for isolated PMR — a prompt, near-complete response supports the diagnosis.",
         "Taper gradually guided by symptoms and ESR/CRP; recurrent symptoms during tapering occur in the majority, so taper cautiously.",
@@ -18,14 +19,76 @@
         "Provide glucocorticoid-related risk management: bone protection (calcium/vitamin D +/- bisphosphonate) and glucose monitoring.",
         "For glucocorticoid-resistant or relapsing disease use an IL-6 receptor inhibitor (sarilumab); methotrexate gives only marginal steroid-sparing benefit."
       ],
+      "drugRefs": [
+        {
+          "composition": "prednisolone",
+          "regimenLabel": "Oral corticosteroid (first-line)",
+          "dose": "15 mg once daily (range 10–20 mg), then slow taper",
+          "route": "oral",
+          "freq": "once daily, tapered over months guided by symptoms and ESR/CRP",
+          "why": "Produces a prompt, near-complete response that supports the diagnosis. Taper cautiously as relapse during tapering is common."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ACR/EULAR PMR · rev. Harrison 22e 2902-2946",
         "refs": [
-          "Harrison 22e · ACR/EULAR PMR · rev. Harrison 22e 2902-2946"
+          "Harrison's Principles of Internal Medicine, 22e — Polymyalgia Rheumatica and Giant Cell Arteritis",
+          "ACR/EULAR Recommendations for the Management of Polymyalgia Rheumatica"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Glucocorticoid risk management & steroid-sparing options",
+      "drugRefs": [
+        {
+          "composition": "colecalciferol with calcium carbonate",
+          "regimenLabel": "Bone protection (calcium/vitamin D)",
+          "dose": "e.g. calcium 1000 mg + colecalciferol 800–1000 units daily",
+          "route": "oral",
+          "freq": "daily during corticosteroid therapy",
+          "why": "Mitigates glucocorticoid-induced bone loss."
+        },
+        {
+          "composition": "alendronic acid",
+          "regimenLabel": "Bisphosphonate (bone protection)",
+          "dose": "70 mg once weekly",
+          "route": "oral",
+          "freq": "once weekly where fracture risk warrants",
+          "why": "Added bone protection for patients at higher fracture risk on prolonged glucocorticoids."
+        },
+        {
+          "composition": "sarilumab",
+          "regimenLabel": "IL-6 receptor inhibitor (resistant/relapsing)",
+          "dose": "200 mg every 2 weeks",
+          "route": "SC",
+          "freq": "every 2 weeks",
+          "why": "For glucocorticoid-resistant or relapsing PMR; steroid-sparing."
+        },
+        {
+          "composition": "methotrexate",
+          "regimenLabel": "DMARD (marginal steroid-sparing)",
+          "dose": "7.5–15 mg once weekly (with folic acid)",
+          "route": "oral/SC",
+          "freq": "once weekly",
+          "why": "Only marginal steroid-sparing benefit; considered in relapsing disease or where steroid toxicity is a concern."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ACR/EULAR PMR · rev. Harrison 22e 2902-2946",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Polymyalgia Rheumatica and Giant Cell Arteritis",
+          "ACR/EULAR Recommendations for the Management of Polymyalgia Rheumatica"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Low-dose steroids; screen for GCA at every visit"
+  },
+  "antibioticRelevant": false,
   "confirm": "Bilateral shoulder/hip girdle pain and stiffness in age >50, raised ESR/CRP, dramatic steroid response. Screen for coexisting GCA.",
   "investigations": [
     {
@@ -40,9 +103,10 @@
     "Harrison 22e · ACR/EULAR PMR · rev. Harrison 22e 2902-2946"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Resuscitate + specific antidotes + decontamination",
       "steps": [
         "Resuscitate (airway, breathing, circulation); treat hypoglycaemia and give thiamine where relevant.",
         "Identify the toxidrome; contact a poisons service (e.g. TOXBASE/Poison Centre) for agent-specific advice.",
@@ -18,14 +19,63 @@
         "Specific antidotes where indicated (naloxone, NAC, flumazenil caution, etc.); supportive monitoring.",
         "Enhanced elimination/dialysis for selected toxins; psychiatric assessment after medical stabilisation."
       ],
+      "drugRefs": [
+        {
+          "composition": "naloxone",
+          "regimenLabel": "Opioid antidote",
+          "dose": "0.4–2 mg, repeat every 2–3 min; infusion if recurrent",
+          "route": "IV/IM/SC/IN",
+          "freq": "titrated to adequate respiration (not full consciousness)",
+          "why": "Reverses opioid-induced respiratory depression; titrate to breathing to avoid precipitating acute withdrawal."
+        },
+        {
+          "composition": "acetylcysteine",
+          "regimenLabel": "Paracetamol (acetaminophen) antidote",
+          "dose": "150 mg/kg over 1 h, then 50 mg/kg over 4 h, then 100 mg/kg over 16 h (21-h regimen)",
+          "route": "IV infusion",
+          "freq": "per nomogram/timing of ingestion",
+          "why": "Replenishes glutathione and prevents hepatotoxicity in paracetamol overdose; most effective within 8 h."
+        },
+        {
+          "composition": "activated charcoal",
+          "regimenLabel": "GI decontamination",
+          "dose": "50 g (1 g/kg)",
+          "route": "PO/NG",
+          "freq": "single dose if within ~1 h and airway protected",
+          "why": "Adsorbs many ingested toxins; only if early, appropriate agent and airway safe (aspiration risk)."
+        },
+        {
+          "composition": "thiamine",
+          "regimenLabel": "Wernicke prophylaxis / at-risk patients",
+          "dose": "100 mg (higher, e.g. 500 mg, if Wernicke suspected)",
+          "route": "IV",
+          "freq": "before/with glucose in alcohol-dependent or malnourished",
+          "why": "Prevents Wernicke's encephalopathy; give with/before glucose in at-risk patients."
+        },
+        {
+          "composition": "flumazenil",
+          "regimenLabel": "Benzodiazepine antidote (use with caution)",
+          "dose": "200 mcg IV over 15 s, then 100 mcg at 1-min intervals (max ~1 mg)",
+          "route": "IV",
+          "freq": "titrated; avoid in mixed/chronic use",
+          "why": "Reverses benzodiazepine sedation but can precipitate seizures/arrhythmia in dependence or co-ingested proconvulsants — rarely used, seek poisons advice."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · Poisons service",
         "refs": [
-          "Harrison 22e · Poisons service"
+          "Harrison's Principles of Internal Medicine, 22e — Poisoning and Drug Overdose",
+          "TOXBASE / National Poisons Information Service guidance",
+          "Position Papers of the American Academy of Clinical Toxicology / EAPCCT (decontamination)"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Resuscitate; antidote by toxidrome + poisons advice"
+  },
+  "antibioticRelevant": false,
   "confirm": "Altered consciousness/toxidrome after suspected ingestion; identify the agent and toxidrome; assess ABCs and risk.",
   "investigations": [
     {
@@ -43,9 +93,10 @@
     "Harrison 22e · Poisons service"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Airway support + titrated naloxone",
       "steps": [
         "Support airway and ventilation (bag-mask) — hypoxia kills, not the drug per se.",
         "NALOXONE titrated to adequate respiration (not full arousal) — start low to avoid acute withdrawal.",
@@ -18,14 +19,53 @@
         "Observe for a prolonged period after the last naloxone dose; monitor for pulmonary oedema.",
         "Address the cause; harm reduction, take-home naloxone, addiction referral."
       ],
+      "drugRefs": [
+        {
+          "composition": "naloxone",
+          "regimenLabel": "IV naloxone (titrated)",
+          "dose": "0.4 mg (start lower, 0.04–0.1 mg, if opioid-dependent)",
+          "route": "IV (IM/intranasal if no IV access)",
+          "freq": "repeat every 2–3 min, titrated to adequate respiration",
+          "why": "Competitive opioid antagonist reversing respiratory depression. Titrate to respiration, not full arousal, to avoid precipitating acute withdrawal. Fentanyl/analogues may need severalfold higher doses."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e",
         "refs": [
-          "Harrison 22e"
+          "Harrison's Principles of Internal Medicine, 22e — Opioid-Related Disorders (Ch.467)",
+          "Harrison's Principles of Internal Medicine, 22e — Poisoning and Drug Overdose (Ch.470)",
+          "WHO Guidelines — Community Management of Opioid Overdose"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Naloxone infusion for long-acting opioids",
+      "drugRefs": [
+        {
+          "composition": "naloxone",
+          "regimenLabel": "IV naloxone infusion",
+          "dose": "~two-thirds of the effective waking bolus per hour, titrated",
+          "route": "IV infusion",
+          "freq": "continuous, titrated to respiration",
+          "duration": "until the opioid effect has worn off; observe after stopping",
+          "why": "Naloxone lasts only 30–90 min while methadone and sustained-release opioids last far longer, so a bolus alone risks re-sedation. Continue with prolonged observation after discontinuation."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Poisoning and Drug Overdose (Ch.470)"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Airway support + titrated naloxone"
+  },
+  "antibioticRelevant": false,
   "confirm": "Reduced consciousness, respiratory depression and PINPOINT pupils; response to naloxone is both diagnostic and therapeutic.",
   "investigations": [
     {
@@ -43,9 +83,10 @@
     "Harrison 22e"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

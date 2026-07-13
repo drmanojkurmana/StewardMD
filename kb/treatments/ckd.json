@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Slow progression + reduce cardiovascular risk",
       "steps": [
         "Treat the cause and slow progression: control BP (ACEi/ARB if albuminuric), glycaemic control, SGLT2 inhibitor where indicated.",
         "Reduce cardiovascular risk (statin, lifestyle, smoking cessation); avoid nephrotoxins; dose-adjust drugs.",
@@ -18,14 +19,102 @@
         "Monitor eGFR/ACR; vaccinate; dietary sodium/protein advice.",
         "Plan renal replacement / transplant and refer nephrology as eGFR declines."
       ],
+      "drugRefs": [
+        {
+          "composition": "ramipril",
+          "regimenLabel": "ACE inhibitor (RAAS blockade)",
+          "dose": "2.5–10 mg",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "First-line for albuminuric CKD/hypertension — reduces proteinuria and slows progression; monitor K⁺ and creatinine after initiation."
+        },
+        {
+          "composition": "dapagliflozin",
+          "regimenLabel": "SGLT2 inhibitor",
+          "dose": "10 mg",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Slows CKD progression and reduces cardiovascular/renal events in albuminuric CKD (diabetic and non-diabetic)."
+        },
+        {
+          "composition": "atorvastatin",
+          "regimenLabel": "Statin (CV risk reduction)",
+          "dose": "20 mg",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "KDIGO recommends statin therapy in adults with CKD to reduce cardiovascular risk."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · KDIGO CKD",
         "refs": [
-          "Harrison 22e · KDIGO CKD"
+          "Harrison's Principles of Internal Medicine, 22e — Chronic Kidney Disease",
+          "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of CKD",
+          "KDIGO Lipid Management in CKD Guideline"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Management of CKD complications",
+      "drugRefs": [
+        {
+          "composition": "ferrous sulfate",
+          "regimenLabel": "Oral iron (anaemia)",
+          "dose": "200 mg",
+          "route": "PO",
+          "freq": "once daily to three times daily",
+          "why": "Correct iron deficiency to support erythropoiesis before/with ESA therapy."
+        },
+        {
+          "composition": "epoetin alfa",
+          "regimenLabel": "Erythropoiesis-stimulating agent",
+          "dose": "50 units/kg (starting dose), titrated to Hb target",
+          "route": "SC",
+          "freq": "three times weekly",
+          "why": "For symptomatic renal anaemia once iron-replete; target Hb ~100–115 g/L, avoid over-correction."
+        },
+        {
+          "composition": "sevelamer",
+          "regimenLabel": "Phosphate binder (CKD-MBD)",
+          "dose": "800 mg",
+          "route": "PO",
+          "freq": "three times daily with meals",
+          "why": "Controls hyperphosphataemia in CKD-mineral-bone disorder; non-calcium binder."
+        },
+        {
+          "composition": "alfacalcidol",
+          "regimenLabel": "Active vitamin D",
+          "dose": "0.25–1 mcg",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Treats secondary hyperparathyroidism/vitamin D deficiency in CKD-MBD."
+        },
+        {
+          "composition": "sodium bicarbonate",
+          "regimenLabel": "Oral alkali (metabolic acidosis)",
+          "dose": "500 mg–1 g",
+          "route": "PO",
+          "freq": "two to three times daily, titrated",
+          "why": "Corrects chronic metabolic acidosis (target serum bicarbonate ≥22 mmol/L), which slows progression."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · KDIGO CKD",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Chronic Kidney Disease",
+          "KDIGO Anaemia in CKD Guideline",
+          "KDIGO CKD-MBD Guideline"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Slow progression + manage complications; nephrology by stage"
+  },
+  "antibioticRelevant": false,
   "confirm": "Reduced eGFR and/or markers of kidney damage (albuminuria) for >3 months; stage by eGFR/albuminuria (KDIGO).",
   "investigations": [
     {
@@ -43,9 +132,10 @@
     "Harrison 22e · KDIGO CKD"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

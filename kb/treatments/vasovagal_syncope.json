@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Non-pharmacological — education, triggers, salt/fluid, counter-pressure manoeuvres",
       "steps": [
         "Reassure once cardiac causes excluded; explain mechanism.",
         "Avoid triggers; ensure hydration and adequate salt intake.",
@@ -18,14 +19,22 @@
         "Review/stop hypotensive drugs; treat orthostatic component (compression, slow rising).",
         "ECG ± monitoring to rule out arrhythmia; refer cardiology if exertional/red-flag features."
       ],
+      "drugRefs": [],
+      "notes": "Management is non-pharmacological. The approved prose prescribes no drug (only review/stop hypotensive medication); therefore no drugRefs are structured. Second-line pharmacotherapy for recurrent refractory reflex syncope (e.g. midodrine or fludrocortisone) is not mentioned in this guidance and has not been added.",
       "evidence": {
         "source": "Harrison 22e · ESC syncope",
         "refs": [
-          "Harrison 22e · ESC syncope"
+          "Harrison's Principles of Internal Medicine, 22e — Syncope",
+          "ESC Guidelines for the Diagnosis and Management of Syncope"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "green",
+    "label": "Non-pharmacological; cardiology only if red flags"
+  },
+  "antibioticRelevant": false,
   "confirm": "Transient LOC with prodrome (warmth, nausea, greying vision), rapid full recovery, typical triggers; orthostatic drop or reflex pattern. Exclude cardiac/structural cause.",
   "investigations": [
     {
@@ -43,9 +52,10 @@
     "Harrison 22e · ESC syncope"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

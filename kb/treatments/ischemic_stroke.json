@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Time-critical reperfusion — thrombolysis ± thrombectomy",
       "steps": [
         "TIME-CRITICAL — activate stroke pathway, non-contrast CT immediately.",
         "IV thrombolysis (alteplase/tenecteplase) if within window and no contraindication.",
@@ -18,14 +19,63 @@
         "Aspirin 300 mg once haemorrhage excluded (delay 24 h after thrombolysis).",
         "Admit to stroke unit; permissive hypertension, glucose/temperature control, swallow screen, early secondary prevention."
       ],
+      "drugRefs": [
+        {
+          "composition": "alteplase",
+          "regimenLabel": "IV thrombolysis",
+          "dose": "0.9 mg/kg (max 90 mg) — 10% as bolus, remainder over 60 min",
+          "route": "IV",
+          "freq": "single treatment course",
+          "why": "Reperfuses ischaemic tissue within the licensed window (typically ≤4.5 h) once haemorrhage is excluded."
+        },
+        {
+          "composition": "tenecteplase",
+          "regimenLabel": "IV thrombolysis (alternative)",
+          "dose": "0.25 mg/kg (max 25 mg) as a single IV bolus",
+          "route": "IV",
+          "freq": "single bolus",
+          "why": "Single-bolus thrombolytic alternative to alteplase, especially where thrombectomy is planned."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · AHA/ASA stroke",
         "refs": [
-          "Harrison 22e · AHA/ASA stroke"
+          "Harrison's Principles of Internal Medicine, 22e — Ischemic Stroke",
+          "AHA/ASA Guidelines for the Early Management of Acute Ischemic Stroke",
+          "NICE NG128 — Stroke and Transient Ischaemic Attack in Over 16s"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Early antiplatelet therapy",
+      "drugRefs": [
+        {
+          "composition": "aspirin",
+          "regimenLabel": "Antiplatelet",
+          "dose": "300 mg once daily",
+          "route": "oral / rectal / NG",
+          "freq": "once daily",
+          "duration": "for 2 weeks, then switch to long-term secondary-prevention antiplatelet",
+          "why": "Reduces early recurrence; start once haemorrhage excluded and delay 24 h after thrombolysis."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AHA/ASA stroke",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Ischemic Stroke",
+          "AHA/ASA Guidelines for the Early Management of Acute Ischemic Stroke",
+          "NICE NG128 — Stroke and Transient Ischaemic Attack in Over 16s"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "red",
+    "label": "Time-critical: thrombolysis and/or thrombectomy"
+  },
+  "antibioticRelevant": false,
   "confirm": "Sudden focal neurological deficit; non-contrast CT to exclude haemorrhage, then confirm ischaemia. Establish last-known-well time.",
   "investigations": [
     {
@@ -43,9 +93,10 @@
     "Harrison 22e · AHA/ASA stroke"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

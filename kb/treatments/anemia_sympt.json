@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Transfuse if symptomatic/severe + treat the deficiency",
       "steps": [
         "Assess haemodynamic tolerance; transfuse for symptomatic/severe anaemia (restrictive threshold ~70 g/L, ~80 if cardiac).",
         "Identify and treat the cause — iron/B12/folate deficiency, bleeding, haemolysis, marrow, chronic disease.",
@@ -18,14 +19,78 @@
         "Replace B12/folate as indicated (give B12 before folate to avoid subacute combined degeneration).",
         "Reticulocyte count and blood film direct further work-up."
       ],
+      "drugRefs": [
+        {
+          "composition": "red blood cells (packed)",
+          "regimenLabel": "Packed red cell transfusion",
+          "dose": "1 unit, then reassess (restrictive threshold ~70 g/L; ~80 g/L if cardiac)",
+          "route": "IV",
+          "freq": "single-unit transfusion, reassess symptoms/Hb between units",
+          "why": "Restores oxygen-carrying capacity in symptomatic or severe anaemia; single-unit, restrictive strategy avoids over-transfusion."
+        },
+        {
+          "composition": "ferrous sulfate",
+          "regimenLabel": "Oral iron replacement",
+          "dose": "200 mg (≈65 mg elemental iron) once daily to twice daily",
+          "route": "oral",
+          "freq": "once daily (alternate-day dosing improves absorption/tolerance)",
+          "duration": "continue ~3 months after Hb normalises to replenish stores",
+          "why": "First-line correction of iron-deficiency anaemia; identify and treat the source of loss."
+        },
+        {
+          "composition": "hydroxocobalamin",
+          "regimenLabel": "Vitamin B12 replacement",
+          "dose": "1 mg IM on alternate days initially, then 1 mg every 2–3 months",
+          "route": "IM",
+          "freq": "loading then maintenance",
+          "why": "Corrects B12 deficiency; give before folate to avoid precipitating subacute combined degeneration of the cord."
+        },
+        {
+          "composition": "folic acid",
+          "regimenLabel": "Folate replacement",
+          "dose": "5 mg once daily",
+          "route": "oral",
+          "freq": "once daily",
+          "why": "Corrects folate-deficiency anaemia; ensure B12 is replete first."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · AABB transfusion",
         "refs": [
-          "Harrison 22e · AABB transfusion"
+          "Harrison's Principles of Internal Medicine, 22e — Anaemia: Diagnosis and Management",
+          "AABB Red Blood Cell Transfusion Thresholds Guidelines",
+          "BSH Guideline on the Management of Iron Deficiency Anaemia"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "IV iron when oral iron unsuitable",
+      "drugRefs": [
+        {
+          "composition": "ferric carboxymaltose",
+          "regimenLabel": "IV iron replacement",
+          "dose": "dose per weight/Hb deficit (commonly up to 1000 mg per infusion)",
+          "route": "IV infusion",
+          "freq": "single/repeat infusions to replace calculated deficit",
+          "why": "For oral-iron intolerance, malabsorption or need for rapid repletion."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AABB transfusion",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Anaemia: Diagnosis and Management",
+          "BSH Guideline on the Management of Iron Deficiency Anaemia"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Transfuse if symptomatic; treat the underlying deficiency"
+  },
+  "antibioticRelevant": false,
   "confirm": "Fatigue, dyspnoea, pallor, tachycardia with low haemoglobin; classify by MCV and look for blood loss/haemolysis.",
   "investigations": [
     {
@@ -43,9 +108,10 @@
     "Harrison 22e · AABB transfusion"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

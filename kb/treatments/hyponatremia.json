@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Hypertonic saline if severe symptoms; correct slowly by cause",
       "steps": [
         "Severe symptoms (seizures, coma): cautious hypertonic 3% saline boluses to raise Na ~4–6 mmol/L.",
         "Correct slowly: ≤8–10 mmol/L per 24 h (avoid osmotic demyelination); recheck Na frequently.",
@@ -18,14 +19,69 @@
         "Identify and remove the cause (drugs, cortisol/thyroid deficiency, malignancy).",
         "Watch for over-correction — re-lower with dextrose/desmopressin if too fast."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 3%",
+          "regimenLabel": "Hypertonic saline bolus (severe symptoms)",
+          "dose": "150 mL over 20 min, repeat to raise serum Na by 4–6 mmol/L",
+          "route": "IV",
+          "freq": "repeat boluses to symptom resolution / target rise; recheck Na frequently",
+          "why": "Rapidly raises sodium to reverse cerebral oedema in severe symptomatic hyponatraemia (seizures/coma); a fluid, not an antibiotic."
+        },
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "Isotonic saline (hypovolaemic hyponatraemia)",
+          "dose": "titrated to volume status/haemodynamics",
+          "route": "IV",
+          "freq": "continuous, with frequent Na monitoring",
+          "why": "Restores volume in hypovolaemic hyponatraemia; not for SIADH (where fluid restriction is used)."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · European hyponatraemia guideline",
         "refs": [
-          "Harrison 22e · European hyponatraemia guideline"
+          "Harrison's Principles of Internal Medicine, 22e — Fluid and Electrolyte Disturbances",
+          "European Clinical Practice Guideline on Diagnosis and Treatment of Hyponatraemia",
+          "US Expert Panel Recommendations on the Treatment of Hyponatraemia"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Rescue for over-rapid correction",
+      "drugRefs": [
+        {
+          "composition": "glucose 5%",
+          "regimenLabel": "IV dextrose (re-lower sodium)",
+          "dose": "electrolyte-free water as 5% glucose, titrated to lower Na back to target",
+          "route": "IV",
+          "freq": "as needed to reverse over-correction",
+          "why": "Free water re-lowers sodium if the 24 h correction limit is exceeded, reducing osmotic demyelination risk."
+        },
+        {
+          "composition": "desmopressin",
+          "regimenLabel": "DDAVP (halt over-correction)",
+          "dose": "1–2 micrograms IV/SC, repeat as needed",
+          "route": "IV / SC",
+          "freq": "as needed to control free-water clearance",
+          "why": "Reintroduces ADH effect to arrest an over-rapid rise in sodium (proactive or reactive strategy)."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · European hyponatraemia guideline",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Fluid and Electrolyte Disturbances",
+          "European Clinical Practice Guideline on Diagnosis and Treatment of Hyponatraemia"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Correct slowly; 3% saline if severe symptoms; avoid over-correction"
+  },
+  "antibioticRelevant": false,
   "confirm": "Symptomatic low sodium; assess volume status and serum/urine osmolality to classify (hypovolaemic / euvolaemic-SIADH / hypervolaemic).",
   "investigations": [
     {
@@ -43,9 +99,10 @@
     "Harrison 22e · European hyponatraemia guideline"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

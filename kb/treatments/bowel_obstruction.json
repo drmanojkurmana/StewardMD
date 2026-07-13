@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Drip and suck + symptom control",
       "steps": [
         "'Drip and suck': NBM, IV fluids + electrolyte correction, nasogastric decompression.",
         "CT to identify cause/level and detect ischaemia/strangulation.",
@@ -18,14 +19,47 @@
         "Adhesional small-bowel obstruction without ischaemia: trial of conservative management.",
         "Analgesia, antiemetics, urinary catheter; surgical review for all."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV crystalloid resuscitation",
+          "dose": "~1 L over the first hour, then titrated to deficit/urine output",
+          "route": "IV",
+          "freq": "continuous, with correction of K⁺/Cl⁻ losses",
+          "why": "Replaces fluid/electrolyte losses from vomiting and third-spacing into the obstructed bowel."
+        },
+        {
+          "composition": "morphine",
+          "regimenLabel": "Opioid analgesia",
+          "dose": "2.5–5 mg IV, titrated to pain",
+          "route": "IV",
+          "freq": "titrate/repeat as needed",
+          "why": "Controls colicky/visceral pain; titrate carefully and reassess for developing peritonism."
+        },
+        {
+          "composition": "ondansetron",
+          "regimenLabel": "Antiemetic",
+          "dose": "4–8 mg",
+          "route": "IV",
+          "freq": "up to three times daily as needed",
+          "why": "Controls vomiting; prokinetic antiemetics are avoided in mechanical obstruction."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · ACS/WSES",
         "refs": [
-          "Harrison 22e · ACS/WSES"
+          "Harrison's Principles of Internal Medicine, 22e — Acute Intestinal Obstruction",
+          "WSES Bologna Guidelines for Adhesive Small Bowel Obstruction",
+          "ACS Surgical Guidance — Management of Bowel Obstruction"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Drip and suck; urgent surgery if strangulation/ischaemia"
+  },
+  "antibioticRelevant": false,
   "confirm": "Colicky abdominal pain, vomiting, distension, absolute constipation; imaging (AXR/CT) confirms level and cause.",
   "investigations": [
     {
@@ -43,9 +77,10 @@
     "Harrison 22e · ACS/WSES"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

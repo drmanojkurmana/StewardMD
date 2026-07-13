@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Emergency/supportive care (fluids, bisphosphonate, VTE prophylaxis); haematology-directed anti-myeloma therapy",
       "steps": [
         "Manage emergencies: hypercalcaemia (fluids + bisphosphonate), AKI (hydration, stop nephrotoxins), cord compression, infection.",
         "Bone disease: bisphosphonate (zoledronic acid) + analgesia ± radiotherapy/vertebroplasty.",
@@ -18,14 +19,47 @@
         "Anaemia support; VTE prophylaxis with immunomodulatory regimens; vaccination/infection prophylaxis.",
         "Confirm with serum/urine electrophoresis, free light chains, marrow and imaging."
       ],
+      "drugRefs": [
+        {
+          "composition": "sodium chloride 0.9%",
+          "regimenLabel": "IV rehydration (hypercalcaemia / AKI)",
+          "dose": "IV volume repletion (e.g. 3–4 L/24 h if tolerated)",
+          "route": "IV",
+          "freq": "continuous, titrated to volume status",
+          "why": "First-line for myeloma hypercalcaemia and cast-nephropathy AKI — restores volume, promotes calciuresis and renal clearance of light chains."
+        },
+        {
+          "composition": "zoledronic acid",
+          "regimenLabel": "Bisphosphonate (bone disease / hypercalcaemia)",
+          "dose": "4 mg IV over ≥15 min (renal-adjusted), after rehydration",
+          "route": "IV infusion",
+          "freq": "monthly for bone disease; single dose for acute hypercalcaemia",
+          "why": "Reduces skeletal events and pain and treats hypercalcaemia; dose-adjust for renal function and ensure dental review (ONJ risk)."
+        },
+        {
+          "composition": "aspirin",
+          "regimenLabel": "VTE prophylaxis with immunomodulatory regimens",
+          "dose": "75–100 mg PO once daily (LMWH if higher thrombotic risk)",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "Thalidomide/lenalidomide-based regimens are strongly prothrombotic; aspirin (or LMWH in high-risk patients) is standard thromboprophylaxis."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · IMWG",
         "refs": [
-          "Harrison 22e · IMWG"
+          "Harrison's Principles of Internal Medicine, 22e — Plasma Cell Disorders",
+          "International Myeloma Working Group (IMWG) Guidelines",
+          "NICE NG35 — Myeloma: Diagnosis and Management"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Treat emergencies; urgent haematology referral"
+  },
+  "antibioticRelevant": false,
   "confirm": "CRAB features — hyperCalcaemia, Renal impairment, Anaemia, Bone lesions/pain — with paraprotein and clonal marrow plasma cells.",
   "investigations": [
     {
@@ -43,9 +77,10 @@
     "Harrison 22e · IMWG"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }

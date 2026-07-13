@@ -11,6 +11,7 @@
     {
       "tier": "guideline",
       "line": "management",
+      "regimenLabel": "Immediate aspirin then short-term dual antiplatelet",
       "steps": [
         "Start aspirin 300 mg immediately (then secondary prevention).",
         "Short-term dual antiplatelet (aspirin + clopidogrel) for ~21 days in high-risk TIA/minor stroke.",
@@ -18,14 +19,70 @@
         "Anticoagulate if AF; high-intensity statin; control BP, diabetes, smoking.",
         "Driving advice."
       ],
+      "drugRefs": [
+        {
+          "composition": "aspirin",
+          "regimenLabel": "Immediate antiplatelet",
+          "dose": "300 mg PO loading immediately, then 75 mg once daily",
+          "route": "PO",
+          "freq": "loading dose then once daily",
+          "why": "Immediate antiplatelet therapy reduces early recurrent stroke risk after TIA (once haemorrhage excluded)."
+        },
+        {
+          "composition": "clopidogrel",
+          "regimenLabel": "Short-term DAPT (high-risk TIA / minor stroke)",
+          "dose": "300 mg PO loading, then 75 mg once daily",
+          "route": "PO",
+          "freq": "once daily with aspirin for ~21 days, then single agent",
+          "why": "Aspirin + clopidogrel for ~21 days reduces recurrent stroke in high-risk TIA (ABCD2 ≥4) / minor stroke; limited duration to minimise bleeding."
+        }
+      ],
       "evidence": {
         "source": "Harrison 22e · AHA/ASA",
         "refs": [
-          "Harrison 22e · AHA/ASA"
+          "Harrison's Principles of Internal Medicine, 22e — Cerebrovascular Diseases",
+          "2021 AHA/ASA Guideline for the Prevention of Stroke in Patients With Stroke and TIA",
+          "NICE NG128 — Stroke and TIA in Over 16s"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "adjunct",
+      "regimenLabel": "Secondary prevention — statin and anticoagulation for AF",
+      "drugRefs": [
+        {
+          "composition": "atorvastatin",
+          "regimenLabel": "High-intensity statin",
+          "dose": "80 mg PO once daily",
+          "route": "PO",
+          "freq": "once daily",
+          "why": "High-intensity statin reduces recurrent vascular events after TIA regardless of baseline cholesterol."
+        },
+        {
+          "composition": "apixaban",
+          "regimenLabel": "Anticoagulation if atrial fibrillation",
+          "dose": "5 mg PO twice daily (2.5 mg BD if dose-reduction criteria)",
+          "route": "PO",
+          "freq": "twice daily",
+          "why": "DOAC anticoagulation (in place of antiplatelets) for AF-related cardioembolic TIA; timing per stroke severity/imaging."
+        }
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AHA/ASA",
+        "refs": [
+          "Harrison's Principles of Internal Medicine, 22e — Cerebrovascular Diseases",
+          "2021 AHA/ASA Guideline for the Prevention of Stroke in Patients With Stroke and TIA",
+          "NICE NG128 — Stroke and TIA in Over 16s"
         ]
       }
     }
   ],
+  "decision": {
+    "status": "amber",
+    "label": "Immediate aspirin; urgent specialist assessment <24 h"
+  },
+  "antibioticRelevant": false,
   "confirm": "Transient focal neurological deficit fully resolving (usually <1 h) without infarction on imaging. Risk-stratify (ABCD2) and image vasculature.",
   "investigations": [
     {
@@ -43,9 +100,10 @@
     "Harrison 22e · AHA/ASA"
   ],
   "review": {
-    "status": "approved",
+    "status": "in_review",
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "clinicianApproved": false
   },
-  "version": 1
+  "version": 2
 }
