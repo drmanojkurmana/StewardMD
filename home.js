@@ -2436,6 +2436,36 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     body.innerHTML = cards + more;
   }
 
+  /* ---- weekly "This Week in Medicine" digest banner + detail ---- */
+  function fetchDigest() {
+    return fetch(NOTIF_API + "/digest", { headers: { "Accept": "application/json" } })
+      .then(function (r) { return r.json(); }).then(function (j) { return j && j.digest; }).catch(function () { return null; });
+  }
+  function renderDigestBanner() {
+    var el = _notifRoot && _notifRoot.querySelector("#ntfDigest"); if (!el) return;
+    fetchDigest().then(function (dg) {
+      if (!dg || !dg.data) { el.innerHTML = ""; return; }
+      var d = dg.data;
+      el.innerHTML = '<button class="dg-banner" id="dgOpen"><div class="dg-badge">📰 This Week in Medicine</div>' +
+        '<div class="dg-h">' + nEsc(d.headline || "Weekly digest") + '</div>' +
+        (d.intro ? '<div class="dg-sub">' + nEsc(String(d.intro).slice(0, 140)) + '</div>' : "") +
+        '<div class="dg-go">Read the weekly digest ›</div></button>';
+      var b = el.querySelector("#dgOpen"); if (b) b.addEventListener("click", function () { openDigest(d); });
+    });
+  }
+  function openDigest(d) {
+    buildDetail(); _detailRoot.classList.add("on");
+    var body = _detailRoot.querySelector("#dtBody"); if (!body) return;
+    var hi = (d.highlights || []).map(function (x) { return "<li>" + nEsc(x) + "</li>"; }).join("");
+    var secs = (d.sections || []).map(function (s) {
+      return '<div class="dt-sec"><h4>' + nEsc(s.label || "") + '</h4><ul>' + (s.items || []).map(function (x) { return "<li>" + nEsc(x) + "</li>"; }).join("") + '</ul></div>';
+    }).join("");
+    body.innerHTML = '<div class="dt-head"><div class="ntf-top"><span class="ntf-cat cat-guideline">📰 Weekly digest</span></div>' +
+      '<h2>' + nEsc(d.headline || "This Week in Medicine") + '</h2></div>' +
+      (d.intro ? '<div class="dt-summary">' + nEsc(d.intro) + '</div>' : "") +
+      (hi ? '<div class="dt-sec"><h4>Highlights</h4><ul>' + hi + '</ul></div>' : "") + secs;
+  }
+
   /* ---- shell ---- */
   function switchTab(t) {
     _activeTab = t; if (!_notifRoot) return;
@@ -2460,6 +2490,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           '<div id="ntfNotices" class="ntf-list"><div class="ntf-empty">Loading…</div></div></div>' +
         '<div id="paneUpdates">' +
           '<div id="ntfPush" class="ntf-push"></div>' +
+          '<div id="ntfDigest" class="ntf-digest"></div>' +
           '<div class="fd-tools"><div class="fd-chips">' + chips + '</div>' +
             '<div class="fd-row2"><select id="fdBranch" class="fd-branch" aria-label="Specialty">' + branchOpts + '</select>' +
             '<input id="fdSearch" class="fd-search" type="search" placeholder="Search…" autocomplete="off"></div></div>' +
@@ -2495,7 +2526,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   }
   function openNotifications() {
     buildNotif(); _notifRoot.classList.add("on"); document.body.classList.add("ntf-lock");
-    switchTab(_activeTab); renderPushRow(); bmMergeFromServer();
+    switchTab(_activeTab); renderPushRow(); bmMergeFromServer(); renderDigestBanner();
     fetchFeed(true).then(function () { renderFeed(); nSetSeen(nMaxTs(_feedItems)); refreshBadge(); });
   }
   function closeNotifications() { if (_notifRoot) { _notifRoot.classList.remove("on"); document.body.classList.remove("ntf-lock"); } }
@@ -2873,7 +2904,14 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       ".np-branches{margin:2px 0 6px;padding:8px 10px;background:var(--teal-soft,#e0f2f1);border-radius:10px}",
       ".np-blabel{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--teal,#0a9396);margin:2px 0 4px}",
       ".np-brow{display:flex;align-items:center;justify-content:space-between;padding:7px 2px;font:600 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);cursor:pointer}",
-      ".np-brow input{width:18px;height:18px;accent-color:var(--teal,#0a9396)}"
+      ".np-brow input{width:18px;height:18px;accent-color:var(--teal,#0a9396)}",
+      // weekly digest banner
+      ".ntf-digest:empty{display:none}.ntf-digest{margin-bottom:12px}",
+      ".dg-banner{display:block;width:100%;text-align:left;cursor:pointer;background:var(--teal,#0a9396);border:none;border-radius:13px;padding:13px 15px;color:#fff}",
+      ".dg-badge{font:800 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.05em;opacity:.9;margin-bottom:5px}",
+      ".dg-h{font:800 15.5px var(--sans,system-ui);line-height:1.3}",
+      ".dg-sub{font:500 12.5px var(--sans,system-ui);opacity:.92;line-height:1.45;margin-top:4px}",
+      ".dg-go{font:700 12px var(--sans,system-ui);opacity:.95;margin-top:9px}"
     ].join("");
     var st = document.createElement("style"); st.id = "ntf-css"; st.textContent = css; document.head.appendChild(st);
   }

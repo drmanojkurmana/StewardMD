@@ -31,7 +31,7 @@
   // Medical Updates pipeline once daily (05:30 UTC); watch-lab lab poll every 15 min.
   // scheduled() branches on event.cron. Requires the secret UPDATES_ADMIN_TOKEN
   // (wrangler secret put UPDATES_ADMIN_TOKEN), matching the Pages project.
-  "triggers": { "crons": ["30 5 * * *", "*/15 * * * *"] },
+  "triggers": { "crons": ["30 5 * * *", "0 6 * * 1", "*/15 * * * *"] },
 
   // Edge rate limiting per client IP (protects the open, read-only API).
   "r2_buckets": [

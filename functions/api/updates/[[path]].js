@@ -25,6 +25,7 @@ import { ownerOK } from "../../_adminauth.js";
 import { identify } from "../../_fbauth.js";
 import * as repo from "../../_updates_repo.js";
 import { runPipeline } from "../../_updates_pipeline.js";
+import { buildDigest } from "../../_digest.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -126,6 +127,10 @@ export async function onRequest(context) {
     });
     return json({ enabled: repo.hasDb(env) || feed.items.length > 0, items: feed.items, nextCursor: feed.nextCursor });
   }
+  // Public: latest weekly "This Week in Medicine" digest (for the feed banner).
+  if (method === "GET" && head === "digest") {
+    return json({ enabled: repo.hasDb(env), digest: await repo.getLatestDigest(env) });
+  }
 
   /* ---------- user-authenticated (any signed-in doctor; NOT owner-only) ---------- */
   if (head === "prefs") {
@@ -176,6 +181,18 @@ export async function onRequest(context) {
       const res = await runPipeline(env);
       if (res && res.items && res.items.length) firePushForItems(context, res.items);
       return json(res.ok === false ? { ok: false, ...res } : { ok: true, ...res });
+    }
+
+    if (method === "POST" && head === "digest") {
+      if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
+      const days = Math.max(1, Math.min(30, parseInt(url.searchParams.get("days"), 10) || 7));
+      const items = await repo.getUpdatesSince(env, Date.now() - days * 86400000, 60);
+      if (!items.length) return json({ ok: true, skipped: "no-items", week: repo.isoWeekKey(Date.now()) });
+      const res = await buildDigest(env, items);
+      if (!res.ok) return json({ ok: false, error: res.error }, 502);
+      const week = repo.isoWeekKey(Date.now());
+      await repo.saveDigest(env, week, JSON.stringify(res.data));
+      return json({ ok: true, week, count: items.length });
     }
 
     if (method === "POST" && head === "migrate") {

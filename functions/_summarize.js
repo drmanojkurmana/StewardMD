@@ -54,7 +54,7 @@ function normWorkspace(v, fallback) { v = String(v || "").toLowerCase().trim(); 
 
 // Build a metering gate that reuses _usage.recordUsage so summaries appear in the
 // existing /api/ai/admin report under byType.updates_summary. Fail-open (no KV → no meter).
-async function meterGate(env, type) {
+export async function meterGate(env, type) {
   const store = usageKv(env);
   if (!store) return { meter: false };
   const cfg = usageConfig(env);
