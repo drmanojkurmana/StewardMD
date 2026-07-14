@@ -2503,6 +2503,190 @@
       var r=Number(v.rass);
       var m={"4":"Combative — immediate danger to staff","3":"Very agitated","2":"Agitated","1":"Restless","0":"Alert and calm","-1":"Drowsy","-2":"Light sedation","-3":"Moderate sedation","-4":"Deep sedation","-5":"Unarousable"};
       return { v:(r>0?"+":"")+r, u:"", i:m[String(r)]+". Target is usually 0 to −2 unless deep sedation indicated. Ref: Sessler, AJRCCM 2002." };
+    } },
+
+  { id:"downes", cat:"Paediatrics", icon:"👶", title:"Downes Score (Neonatal Respiratory Distress)",
+    desc:"Severity of respiratory distress in neonates.",
+    inputs:[
+      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"0",t:"< 60/min"},{v:"1",t:"60–80/min"},{v:"2",t:"> 80/min"}] },
+      { id:"cyan", label:"Cyanosis", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"In room air"},{v:"2",t:"Persists in supplemental O₂"}] },
+      { id:"air", label:"Air entry", type:"select", opts:[{v:"0",t:"Good"},{v:"1",t:"Decreased"},{v:"2",t:"Barely audible"}] },
+      { id:"grunt", label:"Grunting", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Audible with stethoscope"},{v:"2",t:"Audible without stethoscope"}] },
+      { id:"retr", label:"Retractions", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Severe"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.rr)+Number(v.cyan)+Number(v.air)+Number(v.grunt)+Number(v.retr);
+      var b=s<4?"No respiratory distress":s<=6?"Moderate distress — monitor closely":"Impending respiratory failure — urgent support";
+      return { v:s, u:"/10", i:b+". Ref: Downes, Clin Pediatr 1970." };
+    } },
+
+  { id:"pas", cat:"Paediatrics", icon:"👶", title:"Paediatric Appendicitis Score (PAS)",
+    desc:"Likelihood of appendicitis in children with abdominal pain.",
+    inputs:[
+      { id:"cough", label:"Cough / percussion / hopping tenderness in RLQ", type:"check" },
+      { id:"rlq", label:"Right lower quadrant tenderness", type:"check" },
+      { id:"anorexia", label:"Anorexia", type:"check" },
+      { id:"fever", label:"Pyrexia", type:"check" },
+      { id:"nausea", label:"Nausea or vomiting", type:"check" },
+      { id:"migration", label:"Migration of pain to RLQ", type:"check" },
+      { id:"leuko", label:"Leucocytosis", type:"check" },
+      { id:"neutro", label:"Neutrophilia (left shift)", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.cough)s+=2; if(v.rlq)s+=2; if(v.anorexia)s++; if(v.fever)s++; if(v.nausea)s++; if(v.migration)s++; if(v.leuko)s++; if(v.neutro)s++;
+      var b=s<=3?"Low probability — appendicitis unlikely":s<=6?"Indeterminate — observe / consider imaging":"High probability — surgical assessment";
+      return { v:s, u:"/10", i:b+". Ref: Samuel, J Pediatr Surg 2002." };
+    } },
+
+  { id:"pittsburgh_knee", cat:"Musculoskeletal", icon:"🦵", title:"Pittsburgh Knee Rules",
+    desc:"Whether a knee X-ray is indicated after injury.",
+    inputs:[
+      { id:"mech", label:"Blunt trauma or a fall (mechanism)", type:"check" },
+      { id:"young", label:"Age < 12 years", type:"check" },
+      { id:"old", label:"Age > 50 years", type:"check" },
+      { id:"walk", label:"Unable to walk 4 weight-bearing steps", type:"check" }
+    ],
+    compute:function(v){
+      var xr = v.mech && (v.young || v.old || v.walk);
+      return { v: xr?"X-ray indicated":"X-ray not indicated", u:"", i:(xr?"Meets Pittsburgh criteria — radiograph the knee":"Does not meet criteria — imaging can usually be deferred")+". Requires a fall/blunt-trauma mechanism. Ref: Seaberg, Ann Emerg Med 1998." };
+    } },
+
+  { id:"fai", cat:"Endocrine", icon:"🧬", title:"Free Androgen Index (FAI)",
+    desc:"Estimate of bioavailable testosterone.",
+    inputs:[
+      { id:"testo", label:"Total testosterone", type:"number", unit:"nmol/L", step:"0.1" },
+      { id:"shbg", label:"SHBG", type:"number", unit:"nmol/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.testo)||!ok(v.shbg)||v.shbg<=0) return ERR;
+      var fai=(v.testo/v.shbg)*100;
+      return { v:r1(fai), u:"", i:"Raised values support hyperandrogenism (e.g. PCOS); interpret against sex-specific reference ranges. Ref: standard endocrinology." };
+    } },
+
+  { id:"quicki", cat:"Endocrine", icon:"🧬", title:"QUICKI (Insulin Sensitivity)",
+    desc:"Quantitative insulin-sensitivity check index from fasting values.",
+    inputs:[
+      { id:"ins", label:"Fasting insulin", type:"number", unit:"µU/mL", step:"0.1" },
+      { id:"glu", label:"Fasting glucose", type:"number", unit:"mg/dL", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ins)||!ok(v.glu)||v.ins<=0||v.glu<=0) return ERR;
+      var d=Math.log10(v.ins)+Math.log10(v.glu);
+      if(!isFinite(d)||d===0) return ERR;
+      var q=1/d, qr=Math.round(q*1000)/1000;
+      var b=q>=0.45?"Normal insulin sensitivity":q>=0.34?"Reduced sensitivity (insulin resistance)":"Marked insulin resistance";
+      return { v:qr, u:"", i:b+" (glucose entered in mg/dL). Higher = more sensitive. Ref: Katz, J Clin Endocrinol Metab 2000." };
+    } },
+
+  { id:"basdai", cat:"Rheumatology", icon:"🦴", title:"BASDAI (Ankylosing Spondylitis Activity)",
+    desc:"Disease activity in axial spondyloarthritis (each item scored 0–10).",
+    inputs:[
+      { id:"q1", label:"Fatigue / tiredness", type:"number", step:"0.1" },
+      { id:"q2", label:"Spinal pain (neck / back / hip)", type:"number", step:"0.1" },
+      { id:"q3", label:"Peripheral joint pain / swelling", type:"number", step:"0.1" },
+      { id:"q4", label:"Discomfort from tender areas (enthesitis)", type:"number", step:"0.1" },
+      { id:"q5", label:"Morning stiffness — severity", type:"number", step:"0.1" },
+      { id:"q6", label:"Morning stiffness — duration", type:"number", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.q1)||!ok(v.q2)||!ok(v.q3)||!ok(v.q4)||!ok(v.q5)||!ok(v.q6)) return ERR;
+      var s=(v.q1+v.q2+v.q3+v.q4+(v.q5+v.q6)/2)/5;
+      var b=s>=4?"Active disease — consider treatment escalation":"Lower disease activity";
+      return { v:r1(s), u:"/10", i:b+". Ref: Garrett, J Rheumatol 1994 (BASDAI)." };
+    } },
+
+  { id:"forrest", cat:"Gastroenterology", icon:"🩹", title:"Forrest Classification (Ulcer Bleeding)",
+    desc:"Endoscopic appearance of a peptic ulcer and rebleeding risk.",
+    inputs:[
+      { id:"cls", label:"Endoscopic appearance", type:"select", opts:[
+        {v:"ia",t:"Ia — active spurting"},{v:"ib",t:"Ib — active oozing"},{v:"iia",t:"IIa — non-bleeding visible vessel"},
+        {v:"iib",t:"IIb — adherent clot"},{v:"iic",t:"IIc — flat pigmented spot"},{v:"iii",t:"III — clean base"} ] }
+    ],
+    compute:function(v){
+      var m={ia:"High rebleed risk — endoscopic haemostasis indicated",ib:"High rebleed risk — endoscopic haemostasis indicated",iia:"High rebleed risk — endoscopic haemostasis indicated",iib:"Intermediate risk — consider clot removal and treatment",iic:"Low rebleed risk",iii:"Low rebleed risk"};
+      return { v:"Forrest "+v.cls.toUpperCase(), u:"", i:m[v.cls]+". Ref: Forrest, Lancet 1974." };
+    } },
+
+  { id:"gap_ipf", cat:"Respiratory", icon:"🫁", title:"GAP Index (IPF Mortality)",
+    desc:"Mortality staging in idiopathic pulmonary fibrosis.",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"0",t:"Female"},{v:"1",t:"Male"}] },
+      { id:"age", label:"Age", type:"number", unit:"years", step:"1" },
+      { id:"fvc", label:"FVC (% predicted)", type:"number", unit:"%", step:"1" },
+      { id:"nodlco", label:"DLCO cannot be performed", type:"check" },
+      { id:"dlco", label:"DLCO (% predicted)", type:"number", unit:"%", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!ok(v.fvc)) return ERR;
+      if(!v.nodlco && !ok(v.dlco)) return ERR;
+      var s=Number(v.sex);
+      s += v.age<=60?0 : v.age<=65?1 : 2;
+      s += v.fvc>75?0 : v.fvc>=50?1 : 2;
+      s += v.nodlco?3 : (v.dlco>55?0 : v.dlco>=36?1 : 2);
+      var stage=s<=3?"I":s<=5?"II":"III";
+      var b=stage==="I"?"Stage I — lowest mortality":stage==="II"?"Stage II — intermediate mortality":"Stage III — highest mortality";
+      return { v:"Stage "+stage+" ("+s+" pts)", u:"", i:b+". Ref: Ley, Ann Intern Med 2012 (GAP)." };
+    } },
+
+  { id:"canadian_syncope", cat:"Cardiovascular", icon:"❤️", title:"Canadian Syncope Risk Score",
+    desc:"30-day risk of a serious adverse event after emergency-department syncope.",
+    inputs:[
+      { id:"vaso", label:"Predisposition to vasovagal symptoms", type:"check" },
+      { id:"heart", label:"History of heart disease", type:"check" },
+      { id:"bp", label:"Any SBP < 90 or > 180 mmHg", type:"check" },
+      { id:"trop", label:"Elevated troponin (> 99th percentile)", type:"check" },
+      { id:"axis", label:"Abnormal QRS axis", type:"check" },
+      { id:"qrs", label:"QRS duration > 130 ms", type:"check" },
+      { id:"qtc", label:"Corrected QT > 480 ms", type:"check" },
+      { id:"dx", label:"ED probable diagnosis", type:"select", opts:[{v:"0",t:"Neither"},{v:"-2",t:"Vasovagal syncope"},{v:"2",t:"Cardiac syncope"}] }
+    ],
+    compute:function(v){
+      var s=0; if(v.vaso)s-=1; if(v.heart)s+=1; if(v.bp)s+=2; if(v.trop)s+=2; if(v.axis)s+=1; if(v.qrs)s+=1; if(v.qtc)s+=2; s+=Number(v.dx);
+      var b=s<=-2?"Very low risk":s<=0?"Low risk":s<=3?"Medium risk":s<=5?"High risk":"Very high risk";
+      return { v:s, u:"points", i:b+" of a 30-day serious adverse event. Ref: Thiruganasambandamoorthy, JAMA Intern Med 2016." };
+    } },
+
+  { id:"albi", cat:"Hepatology", icon:"🩺", title:"ALBI Grade (Albumin-Bilirubin)",
+    desc:"Liver-function grade (e.g. in hepatocellular carcinoma).",
+    inputs:[
+      { id:"bili", label:"Bilirubin", type:"number", unit:"µmol/L", step:"1" },
+      { id:"alb", label:"Albumin", type:"number", unit:"g/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.bili)||!ok(v.alb)||v.bili<=0||v.alb<=0) return ERR;
+      var score=(Math.log10(v.bili)*0.66)+(v.alb*-0.085);
+      var grade=score<=-2.60?"1":score<=-1.39?"2":"3";
+      var b=grade==="1"?"Grade 1 — best liver function / prognosis":grade==="2"?"Grade 2 — intermediate":"Grade 3 — worst liver function / prognosis";
+      return { v:"Grade "+grade, u:"", i:b+" (bilirubin µmol/L, albumin g/L). Ref: Johnson, J Clin Oncol 2015 (ALBI)." };
+    } },
+
+  { id:"khorana", cat:"Oncology", icon:"🎗️", title:"Khorana Score (Chemotherapy VTE Risk)",
+    desc:"Venous thromboembolism risk in ambulatory cancer patients starting chemotherapy.",
+    inputs:[
+      { id:"site", label:"Cancer site", type:"select", opts:[{v:"0",t:"Other"},{v:"1",t:"High risk (lung, lymphoma, gynae, bladder, testicular)"},{v:"2",t:"Very high risk (stomach, pancreas)"}] },
+      { id:"plt", label:"Platelet count ≥ 350 ×10⁹/L", type:"check" },
+      { id:"hb", label:"Haemoglobin < 10 g/dL or using an ESA", type:"check" },
+      { id:"wbc", label:"Leukocyte count > 11 ×10⁹/L", type:"check" },
+      { id:"bmi", label:"BMI ≥ 35 kg/m²", type:"check" }
+    ],
+    compute:function(v){
+      var s=Number(v.site); if(v.plt)s++; if(v.hb)s++; if(v.wbc)s++; if(v.bmi)s++;
+      var b=s===0?"Low VTE risk":s<=2?"Intermediate VTE risk":"High VTE risk — consider thromboprophylaxis";
+      return { v:s, u:"points", i:b+". Ref: Khorana, Blood 2008." };
+    } },
+
+  { id:"must", cat:"General", icon:"⚖️", title:"MUST (Malnutrition Universal Screening Tool)",
+    desc:"Malnutrition risk in adults.",
+    inputs:[
+      { id:"bmi", label:"BMI", type:"number", unit:"kg/m²", step:"0.1" },
+      { id:"loss", label:"Unplanned weight loss (past 3–6 months)", type:"select", opts:[{v:"0",t:"< 5%"},{v:"1",t:"5–10%"},{v:"2",t:"> 10%"}] },
+      { id:"acute", label:"Acutely ill AND no nutritional intake for > 5 days", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.bmi)) return ERR;
+      var s=0; s += v.bmi>20?0 : v.bmi>=18.5?1 : 2; s+=Number(v.loss); if(v.acute)s+=2;
+      var b=s===0?"Low malnutrition risk — routine care":s===1?"Medium risk — observe and document intake":"High risk — treat / refer to dietitian";
+      return { v:s, u:"points", i:b+". Ref: BAPEN (MUST)." };
     } }
 
   ];
@@ -2626,7 +2810,19 @@
     karnofsky:["karnofsky performance status","kps","performance status"],
     ecog:["ecog performance status","ecog","zubrod","performance status oncology"],
     logmar:["logmar","snellen conversion","visual acuity conversion","acuity"],
-    rass:["richmond agitation sedation scale","rass","sedation scale","agitation score"]
+    rass:["richmond agitation sedation scale","rass","sedation scale","agitation score"],
+    downes:["downes score","neonatal respiratory distress","newborn respiratory score"],
+    pas:["paediatric appendicitis score","pediatric appendicitis","pas","child appendicitis"],
+    pittsburgh_knee:["pittsburgh knee rules","knee x-ray rule","knee radiograph decision"],
+    fai:["free androgen index","fai","bioavailable testosterone","pcos androgen"],
+    quicki:["quicki","insulin sensitivity","insulin resistance index"],
+    basdai:["basdai","ankylosing spondylitis activity","axial spondyloarthritis activity","spondylitis disease activity"],
+    forrest:["forrest classification","ulcer bleeding","peptic ulcer rebleeding","endoscopic bleeding stigmata"],
+    gap_ipf:["gap index","ipf mortality","pulmonary fibrosis prognosis","gap score"],
+    canadian_syncope:["canadian syncope risk score","csrs","syncope risk","fainting risk"],
+    albi:["albi grade","albumin bilirubin","liver function hcc","albi score"],
+    khorana:["khorana score","cancer vte risk","chemotherapy thrombosis risk","cancer thromboprophylaxis"],
+    must:["malnutrition universal screening tool","must score","nutrition screen","malnutrition risk"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -2705,7 +2901,19 @@
     karnofsky:"Karnofsky DA, Burchenal JH. 1949.",
     ecog:"Oken MM, et al. Am J Clin Oncol 1982;5(6):649–55 (ECOG).",
     logmar:"Standard optotype (Snellen → logMAR) conversion.",
-    rass:"Sessler CN, et al. Am J Respir Crit Care Med 2002;166(10):1338–44."
+    rass:"Sessler CN, et al. Am J Respir Crit Care Med 2002;166(10):1338–44.",
+    downes:"Downes JJ, et al. Clin Pediatr 1970;9(6):325–31.",
+    pas:"Samuel M. J Pediatr Surg 2002;37(6):877–81 (PAS).",
+    pittsburgh_knee:"Seaberg DC, et al. Ann Emerg Med 1998;32(1):8–13.",
+    fai:"Standard endocrinology reference (free androgen index).",
+    quicki:"Katz A, et al. J Clin Endocrinol Metab 2000;85(7):2402–10.",
+    basdai:"Garrett S, et al. J Rheumatol 1994;21(12):2286–91 (BASDAI).",
+    forrest:"Forrest JA, et al. Lancet 1974;2(7877):394–7.",
+    gap_ipf:"Ley B, et al. Ann Intern Med 2012;156(10):684–91 (GAP).",
+    canadian_syncope:"Thiruganasambandamoorthy V, et al. JAMA Intern Med 2016;176(6):737–43.",
+    albi:"Johnson PJ, et al. J Clin Oncol 2015;33(6):550–8 (ALBI).",
+    khorana:"Khorana AA, et al. Blood 2008;111(10):4902–7.",
+    must:"BAPEN Malnutrition Universal Screening Tool (MUST)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
