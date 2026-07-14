@@ -2867,6 +2867,166 @@
       var n=Number(v.level);
       var b=n<=3?"Not frail":n===4?"Vulnerable / very mild frailty":n<=6?"Mild-to-moderate frailty":n<=8?"Severe frailty":"Terminally ill";
       return { v:n, u:"/9", i:b+" (higher = more frail; correlates with adverse outcomes). Ref: Rockwood, CMAJ 2005." };
+    } },
+
+  { id:"duke_endocarditis", cat:"Infectious disease", icon:"🦠", title:"Modified Duke Criteria (Infective Endocarditis)",
+    desc:"Diagnostic likelihood of infective endocarditis (clinical criteria).",
+    inputs:[
+      { id:"maj_micro", label:"Major: typical blood cultures for IE", type:"check" },
+      { id:"maj_endo", label:"Major: endocardial involvement (vegetation/abscess/new regurgitation)", type:"check" },
+      { id:"min_predispose", label:"Minor: predisposing heart condition or IV drug use", type:"check" },
+      { id:"min_fever", label:"Minor: fever ≥ 38°C", type:"check" },
+      { id:"min_vascular", label:"Minor: vascular phenomena (emboli, mycotic aneurysm, Janeway lesions)", type:"check" },
+      { id:"min_immuno", label:"Minor: immunologic phenomena (glomerulonephritis, Osler nodes, Roth spots)", type:"check" },
+      { id:"min_micro", label:"Minor: microbiological evidence not meeting a major criterion", type:"check" }
+    ],
+    compute:function(v){
+      var maj=(v.maj_micro?1:0)+(v.maj_endo?1:0);
+      var min=(v.min_predispose?1:0)+(v.min_fever?1:0)+(v.min_vascular?1:0)+(v.min_immuno?1:0)+(v.min_micro?1:0);
+      var def=(maj>=2)||(maj===1&&min>=3)||(min>=5);
+      var poss=!def&&((maj===1&&min>=1)||(min>=3));
+      var r=def?"Definite IE (clinical criteria)":poss?"Possible IE":"IE unlikely by clinical criteria";
+      return { v:r, u:"", i:maj+" major, "+min+" minor. Combine with pathological criteria where available. Ref: Li, Clin Infect Dis 2000 (modified Duke)." };
+    } },
+
+  { id:"stess", cat:"Neurology", icon:"🧠", title:"Status Epilepticus Severity Score (STESS)",
+    desc:"Prognosis in status epilepticus (assessed before treatment).",
+    inputs:[
+      { id:"loc", label:"Level of consciousness", type:"select", opts:[{v:"0",t:"Alert or somnolent/confused"},{v:"1",t:"Stuporous or comatose"}] },
+      { id:"type", label:"Worst seizure type", type:"select", opts:[{v:"0",t:"Simple partial, complex partial or absence"},{v:"1",t:"Generalised convulsive"},{v:"2",t:"Nonconvulsive SE in coma"}] },
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"< 65 years"},{v:"2",t:"≥ 65 years"}] },
+      { id:"prior", label:"History of prior seizures", type:"select", opts:[{v:"0",t:"Yes"},{v:"1",t:"No or unknown"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.loc)+Number(v.type)+Number(v.age)+Number(v.prior);
+      var b=s>=3?"Unfavourable outcome more likely":"Favourable outcome more likely";
+      return { v:s, u:"/6", i:b+". Ref: Rossetti, J Neurol 2008 (STESS)." };
+    } },
+
+  { id:"bicarb_deficit", cat:"Renal", icon:"🧪", title:"Bicarbonate Deficit",
+    desc:"Estimated bicarbonate deficit in metabolic acidosis.",
+    inputs:[
+      { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.1" },
+      { id:"measured", label:"Measured bicarbonate", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"target", label:"Target bicarbonate", type:"number", unit:"mmol/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.wt)||!ok(v.measured)||!ok(v.target)||v.wt<=0) return ERR;
+      var d=0.5*v.wt*(v.target-v.measured);
+      if(d<=0) return { err:"Measured bicarbonate already at or above target" };
+      return { v:r0(d), u:"mmol", i:"Estimated total bicarbonate deficit; replace cautiously and reassess (avoid rapid full correction). Ref: standard acid-base." };
+    } },
+
+  { id:"cat_copd", cat:"Respiratory", icon:"🫁", title:"COPD Assessment Test (CAT)",
+    desc:"Health-status impact of COPD (each item 0–5).",
+    inputs:[
+      { id:"c1", label:"Cough (0 never – 5 all the time)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
+      { id:"c2", label:"Phlegm (0 none – 5 completely full)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
+      { id:"c3", label:"Chest tightness (0 none – 5 very tight)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
+      { id:"c4", label:"Breathlessness on hills/stairs (0 none – 5 very breathless)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
+      { id:"c5", label:"Limitation of home activities (0 none – 5 very limited)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
+      { id:"c6", label:"Confidence leaving home (0 confident – 5 not at all)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
+      { id:"c7", label:"Sleep (0 sound – 5 very poor)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
+      { id:"c8", label:"Energy (0 lots – 5 none)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] }
+    ],
+    compute:function(v){
+      var s=0; for(var i=1;i<=8;i++) s+=Number(v["c"+i]);
+      var b=s<10?"Low impact":s<=20?"Medium impact":s<=30?"High impact":"Very high impact";
+      return { v:s, u:"/40", i:b+" of COPD on health status. Ref: Jones, Eur Respir J 2009 (CAT)." };
+    } },
+
+  { id:"ibw", cat:"General", icon:"⚖️", title:"Ideal Body Weight (Devine)",
+    desc:"Ideal body weight for drug dosing and ventilation.",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"ht", label:"Height", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ht)||v.ht<=0) return ERR;
+      var inch=v.ht/2.54, base=v.sex==="f"?45.5:50;
+      var ibw=base+2.3*(inch-60);
+      if(ibw<30) return { err:"Height too low for the Devine formula" };
+      return { v:r1(ibw), u:"kg", i:"Devine ideal body weight. Adjusted body weight (obesity) = IBW + 0.4×(actual − IBW). Ref: Devine 1974." };
+    } },
+
+  { id:"adjbw", cat:"General", icon:"⚖️", title:"Adjusted Body Weight",
+    desc:"Adjusted body weight in obesity (from ideal and actual weight).",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"ht", label:"Height", type:"number", unit:"cm", step:"0.1" },
+      { id:"wt", label:"Actual body weight", type:"number", unit:"kg", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ht)||!ok(v.wt)||v.ht<=0||v.wt<=0) return ERR;
+      var inch=v.ht/2.54, base=v.sex==="f"?45.5:50;
+      var ibw=base+2.3*(inch-60);
+      if(ibw<30) return { err:"Height too low for the Devine formula" };
+      var adj=ibw+0.4*(v.wt-ibw);
+      return { v:r1(adj), u:"kg", i:"Adjusted body weight (IBW "+r1(ibw)+" kg). Used for dosing some drugs in obesity. Ref: standard pharmacokinetics." };
+    } },
+
+  { id:"hunter_serotonin", cat:"Toxicology", icon:"💊", title:"Hunter Serotonin Toxicity Criteria",
+    desc:"Diagnoses serotonin toxicity in a patient taking a serotonergic agent.",
+    inputs:[
+      { id:"spont", label:"Spontaneous clonus", type:"check" },
+      { id:"induce", label:"Inducible clonus", type:"check" },
+      { id:"ocular", label:"Ocular clonus", type:"check" },
+      { id:"agit", label:"Agitation", type:"check" },
+      { id:"diaph", label:"Diaphoresis", type:"check" },
+      { id:"tremor", label:"Tremor", type:"check" },
+      { id:"hyperref", label:"Hyperreflexia", type:"check" },
+      { id:"hypertonia", label:"Hypertonia", type:"check" },
+      { id:"hyperthermia", label:"Temperature > 38°C", type:"check" }
+    ],
+    compute:function(v){
+      var pos = v.spont
+        || (v.induce && (v.agit||v.diaph))
+        || (v.ocular && (v.agit||v.diaph))
+        || (v.tremor && v.hyperref)
+        || (v.hypertonia && v.hyperthermia && (v.ocular||v.induce));
+      return { v: pos?"Meets serotonin toxicity criteria":"Does not meet criteria", u:"", i:(pos?"Consistent with serotonin toxicity in the context of a serotonergic agent — stop the agent and treat supportively":"Hunter criteria not met; reassess if the picture evolves")+". Ref: Dunkley, QJM 2003 (Hunter)." };
+    } },
+
+  { id:"ganzoni", cat:"Haematology", icon:"🩸", title:"Ganzoni Iron Deficit",
+    desc:"Total iron deficit for iron-replacement dosing.",
+    inputs:[
+      { id:"wt", label:"Body weight", type:"number", unit:"kg", step:"0.1" },
+      { id:"hb", label:"Actual haemoglobin", type:"number", unit:"g/dL", step:"0.1" },
+      { id:"target", label:"Target haemoglobin", type:"number", unit:"g/dL", step:"0.1" },
+      { id:"stores", label:"Iron stores to replace", type:"number", unit:"mg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.wt)||!ok(v.hb)||!ok(v.target)||!ok(v.stores)||v.wt<=0||v.stores<0) return ERR;
+      if(v.target<=v.hb) return { err:"Actual haemoglobin already at or above target" };
+      var d=v.wt*(v.target-v.hb)*2.4+v.stores;
+      return { v:r0(d), u:"mg", i:"Total iron deficit (Ganzoni). Adult iron stores typically ~500 mg. Verify against the chosen iron product. Ref: Ganzoni 1970." };
+    } },
+
+  { id:"fepo4", cat:"Renal", icon:"🫘", title:"Fractional Excretion of Phosphate (FEPO₄)",
+    desc:"Distinguishes renal phosphate wasting from appropriate conservation.",
+    inputs:[
+      { id:"upo4", label:"Urine phosphate", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"pcr", label:"Plasma creatinine", type:"number", unit:"µmol/L", step:"1" },
+      { id:"ppo4", label:"Plasma phosphate", type:"number", unit:"mmol/L", step:"0.01" },
+      { id:"ucr", label:"Urine creatinine (same units as plasma)", type:"number", unit:"µmol/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.upo4)||!ok(v.pcr)||!ok(v.ppo4)||!ok(v.ucr)||v.ppo4<=0||v.ucr<=0) return ERR;
+      var fe=(v.upo4*v.pcr)/(v.ppo4*v.ucr)*100;
+      var b=fe>20?"Elevated — suggests renal phosphate wasting":"Lower — suggests appropriate renal conservation";
+      return { v:r1(fe), u:"%", i:b+" (enter both creatinines in the same unit). Ref: standard nephrology." };
+    } },
+
+  { id:"gcs_p", cat:"Neurology", icon:"🧠", title:"GCS-Pupils Score (GCS-P)",
+    desc:"Glasgow Coma Scale combined with pupil reactivity.",
+    inputs:[
+      { id:"gcs", label:"GCS total (3–15)", type:"number", step:"1" },
+      { id:"pupils", label:"Unreactive pupils", type:"select", opts:[{v:"0",t:"Both reactive"},{v:"1",t:"One unreactive"},{v:"2",t:"Both unreactive"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.gcs)||v.gcs<3||v.gcs>15) return ERR;
+      var s=v.gcs-Number(v.pupils);
+      return { v:s, u:"", i:"GCS-Pupils score (range 1–15); lower values indicate greater severity and worse prognosis. Ref: Brennan & Murray, J Neurosurg 2018." };
     } }
 
   ];
@@ -3014,7 +3174,17 @@
     caspar:["caspar criteria","psoriatic arthritis classification","psa classification"],
     hscore:["hscore","hlh probability","haemophagocytic","macrophage activation syndrome","hemophagocytic"],
     plasmic:["plasmic score","ttp likelihood","adamts13","thrombotic thrombocytopenic purpura","thrombotic microangiopathy"],
-    cfs:["clinical frailty scale","rockwood frailty","frailty score","cfs"]
+    cfs:["clinical frailty scale","rockwood frailty","frailty score","cfs"],
+    duke_endocarditis:["duke criteria","modified duke","infective endocarditis diagnosis","endocarditis criteria"],
+    stess:["status epilepticus severity score","stess","status epilepticus prognosis"],
+    bicarb_deficit:["bicarbonate deficit","hco3 deficit","base deficit replacement","bicarbonate replacement"],
+    cat_copd:["copd assessment test","cat score","copd symptom burden"],
+    ibw:["ideal body weight","devine formula","ibw","dosing weight"],
+    adjbw:["adjusted body weight","adjbw","obesity dosing weight"],
+    hunter_serotonin:["hunter criteria","serotonin syndrome","serotonin toxicity","serotonin"],
+    ganzoni:["ganzoni","iron deficit","total iron dose","iron replacement dose"],
+    fepo4:["fractional excretion of phosphate","fepo4","phosphate wasting","renal phosphate"],
+    gcs_p:["gcs pupils","gcs-p","glasgow coma pupils","gcsp"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -3117,7 +3287,17 @@
     caspar:"Taylor W, et al. Arthritis Rheum 2006;54(8):2665–73 (CASPAR).",
     hscore:"Fardet L, et al. Arthritis Rheumatol 2014;66(9):2613–20 (HScore).",
     plasmic:"Bendapudi PK, et al. Lancet Haematol 2017;4(4):e157–64 (PLASMIC).",
-    cfs:"Rockwood K, et al. CMAJ 2005;173(5):489–95."
+    cfs:"Rockwood K, et al. CMAJ 2005;173(5):489–95.",
+    duke_endocarditis:"Li JS, et al. Clin Infect Dis 2000;30(4):633–8 (modified Duke).",
+    stess:"Rossetti AO, et al. J Neurol 2008;255(10):1561–6 (STESS).",
+    bicarb_deficit:"Standard acid-base reference (0.5 × weight × base deficit).",
+    cat_copd:"Jones PW, et al. Eur Respir J 2009;34(3):648–54 (CAT).",
+    ibw:"Devine BJ. Drug Intell Clin Pharm 1974.",
+    adjbw:"Standard clinical pharmacokinetics reference.",
+    hunter_serotonin:"Dunkley EJC, et al. QJM 2003;96(9):635–42 (Hunter).",
+    ganzoni:"Ganzoni AM. Schweiz Med Wochenschr 1970;100(7):301–3.",
+    fepo4:"Standard nephrology reference (fractional excretion).",
+    gcs_p:"Brennan PM, Murray GD, Teasdale GM. J Neurosurg 2018;128(6):1612–20."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
