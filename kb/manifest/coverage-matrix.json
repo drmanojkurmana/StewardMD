@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3725,
+    "diseases": 3769,
     "diagnostic": 141,
-    "reference": 3584,
+    "reference": 3628,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 10.6,
+    "severity": 10.5,
     "prognosis": 99.8,
-    "diagnosticScoring": 3.8,
-    "management": 3.8,
-    "drugTherapy": 3.5,
-    "dosing": 3.5,
+    "diagnosticScoring": 3.7,
+    "management": 3.7,
+    "drugTherapy": 3.4,
+    "dosing": 3.4,
     "stewardship": 1.4
   },
   "bySpecialty": {
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 527,
+      "total": 540,
       "diagnostic": 20,
-      "reference": 507,
+      "reference": 520,
       "dims": {
-        "overview": 527,
-        "clinicalFeatures": 527,
-        "pathophysiology": 527,
-        "differential": 527,
-        "investigations": 527,
-        "redFlags": 527,
+        "overview": 540,
+        "clinicalFeatures": 540,
+        "pathophysiology": 540,
+        "differential": 540,
+        "investigations": 540,
+        "redFlags": 540,
         "severity": 48,
-        "prognosis": 527,
+        "prognosis": 540,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -100,18 +100,18 @@
       }
     },
     "Genitourinary / Repro": {
-      "total": 87,
+      "total": 98,
       "diagnostic": 6,
-      "reference": 81,
+      "reference": 92,
       "dims": {
-        "overview": 87,
-        "clinicalFeatures": 87,
-        "pathophysiology": 87,
-        "differential": 87,
-        "investigations": 87,
-        "redFlags": 87,
+        "overview": 98,
+        "clinicalFeatures": 98,
+        "pathophysiology": 98,
+        "differential": 98,
+        "investigations": 98,
+        "redFlags": 98,
         "severity": 10,
-        "prognosis": 87,
+        "prognosis": 98,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 230,
+      "total": 250,
       "diagnostic": 5,
-      "reference": 225,
+      "reference": 245,
       "dims": {
-        "overview": 230,
-        "clinicalFeatures": 230,
-        "pathophysiology": 230,
-        "differential": 230,
-        "investigations": 229,
-        "redFlags": 230,
+        "overview": 250,
+        "clinicalFeatures": 250,
+        "pathophysiology": 250,
+        "differential": 250,
+        "investigations": 249,
+        "redFlags": 250,
         "severity": 7,
-        "prognosis": 229,
+        "prognosis": 249,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -5624,6 +5624,28 @@
       }
     },
     {
+      "id": "angiokeratoma_circumscriptum",
+      "name": "Angiokeratoma circumscriptum",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "angular_cheilitis",
       "name": "Angular cheilitis",
       "specialty": "Dermatology",
@@ -5800,6 +5822,28 @@
       }
     },
     {
+      "id": "blue_rubber_bleb_naevus_syndrome",
+      "name": "Blue rubber bleb naevus syndrome",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "blue_rubber_bleb_nevus_syndrome",
       "name": "Blue rubber bleb naevus syndrome",
       "specialty": "Dermatology",
@@ -5866,6 +5910,28 @@
       }
     },
     {
+      "id": "brittle_nail_syndrome",
+      "name": "Brittle nail syndrome",
+      "specialty": "Dermatology",
+      "system": "Skin / Hair and nails",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bullous_pemphigoid",
       "name": "Bullous pemphigoid",
       "specialty": "Dermatology",
@@ -5914,6 +5980,28 @@
       "name": "Calciphylaxis (calcific uraemic arteriolopathy)",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "capillary_malformation",
+      "name": "Capillary malformation",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6200,6 +6288,28 @@
       "name": "Confluent and reticulated papillomatosis (Gougerot-Carteaud)",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_haemangioma",
+      "name": "Congenital haemangioma",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6944,10 +7054,54 @@
       }
     },
     {
+      "id": "erythronychia",
+      "name": "Erythronychia",
+      "specialty": "Dermatology",
+      "system": "Skin / Hair and nails",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "exfoliative_dermatitis",
       "name": "Exfoliative dermatitis (erythroderma workup)",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fibro_adipose_vascular_anomaly",
+      "name": "Fibro-adipose vascular anomaly",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7186,6 +7340,28 @@
       }
     },
     {
+      "id": "green_nail_syndrome",
+      "name": "Green nail syndrome",
+      "specialty": "Dermatology",
+      "system": "Skin / Hair and nails",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "grover_disease",
       "name": "Grover disease (transient acantholytic dermatosis)",
       "specialty": "Dermatology",
@@ -7234,6 +7410,28 @@
       "name": "Hailey-Hailey disease",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "half_and_half_nails",
+      "name": "Half-and-half nails",
+      "specialty": "Dermatology",
+      "system": "Skin / Hair and nails",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7560,6 +7758,28 @@
       }
     },
     {
+      "id": "infantile_haemangioma",
+      "name": "Infantile haemangioma",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "infantile_hemangioma",
       "name": "Infantile Haemangioma",
       "specialty": "Dermatology",
@@ -7674,6 +7894,28 @@
       "name": "Kaposi Sarcoma",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kaposiform_haemangioendothelioma",
+      "name": "Kaposiform haemangioendothelioma",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -8264,10 +8506,76 @@
       }
     },
     {
+      "id": "lymphangioma_circumscriptum",
+      "name": "Lymphangioma circumscriptum",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lymphatic_malformation",
+      "name": "Lymphatic malformation",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lymphedema_distichiasis",
       "name": "Lymphoedema-distichiasis syndrome",
       "specialty": "Dermatology",
       "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "macrocephaly_capillary_malformation",
+      "name": "Macrocephaly-capillary malformation",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -8488,6 +8796,28 @@
       "name": "Morphea",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "muehrcke_lines",
+      "name": "Muehrcke lines",
+      "specialty": "Dermatology",
+      "system": "Skin / Hair and nails",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -9826,6 +10156,28 @@
       }
     },
     {
+      "id": "spindle_cell_haemangioma",
+      "name": "Spindle cell haemangioma",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "steatocystoma_multiplex",
       "name": "Steatocystoma multiplex",
       "specialty": "Dermatology",
@@ -9980,6 +10332,28 @@
       }
     },
     {
+      "id": "subungual_haematoma",
+      "name": "Subungual haematoma",
+      "specialty": "Dermatology",
+      "system": "Skin / Hair and nails",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "subungual_hematoma",
       "name": "Subungual haematoma",
       "specialty": "Dermatology",
@@ -10112,6 +10486,28 @@
       }
     },
     {
+      "id": "terry_nails",
+      "name": "Terry nails",
+      "specialty": "Dermatology",
+      "system": "Skin / Hair and nails",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tinea_versicolor",
       "name": "Tinea Versicolor",
       "specialty": "Dermatology",
@@ -10204,6 +10600,50 @@
       "name": "Trichotillomania",
       "specialty": "Dermatology",
       "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tufted_angioma",
+      "name": "Tufted angioma",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "venous_malformation",
+      "name": "Venous malformation",
+      "specialty": "Dermatology",
+      "system": "Skin / Vascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -30572,6 +31012,28 @@
       }
     },
     {
+      "id": "acute_fatty_liver_of_pregnancy",
+      "name": "Acute fatty liver of pregnancy",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "PYELONEPHRITIS",
       "name": "Acute Pyelonephritis",
       "specialty": "Genitourinary / Repro",
@@ -31122,6 +31584,28 @@
       }
     },
     {
+      "id": "gestational_hypertension",
+      "name": "Gestational hypertension",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gynecologic_malignancies",
       "name": "Gynecologic Malignancies",
       "specialty": "Genitourinary / Repro",
@@ -31170,6 +31654,28 @@
       "name": "Haematospermia",
       "specialty": "Genitourinary / Repro",
       "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hellp_syndrome",
+      "name": "HELLP syndrome",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -31650,6 +32156,72 @@
       }
     },
     {
+      "id": "placenta_praevia",
+      "name": "Placenta praevia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "placental_insufficiency",
+      "name": "Placental insufficiency",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "polyhydramnios",
+      "name": "Polyhydramnios",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "posterior_urethral_polyp",
       "name": "Posterior urethral polyp",
       "specialty": "Genitourinary / Repro",
@@ -31844,6 +32416,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "retained_placenta",
+      "name": "Retained placenta",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -32178,6 +32772,28 @@
       }
     },
     {
+      "id": "umbilical_cord_prolapse",
+      "name": "Umbilical cord prolapse",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "undescended_testis",
       "name": "Undescended Testis",
       "specialty": "Genitourinary / Repro",
@@ -32354,6 +32970,50 @@
       }
     },
     {
+      "id": "uterine_atony",
+      "name": "Uterine atony",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "uterine_rupture",
+      "name": "Uterine rupture",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "vaginismus",
       "name": "Vaginismus",
       "specialty": "Genitourinary / Repro",
@@ -32380,6 +33040,28 @@
       "name": "Varicocele",
       "specialty": "Genitourinary / Repro",
       "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vasa_praevia",
+      "name": "Vasa praevia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Reproductive / Obstetrics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -53782,6 +54464,50 @@
       }
     },
     {
+      "id": "body_dysmorphic_disorder",
+      "name": "Body Dysmorphic Disorder",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "body_integrity_dysphoria",
+      "name": "Body Integrity Dysphoria",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "borjeson_forssman_lehmann_syndrome",
       "name": "Borjeson-Forssman-Lehmann syndrome (PHF6)",
       "specialty": "Neurology",
@@ -55432,6 +56158,72 @@
       }
     },
     {
+      "id": "depersonalisation_derealisation_disorder",
+      "name": "Depersonalisation-Derealisation Disorder",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dhat_syndrome",
+      "name": "Dhat Syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "diogenes_syndrome",
+      "name": "Diogenes Syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "diseases_of_the_spinal_cord",
       "name": "Diseases of the Spinal Cord",
       "specialty": "Neurology",
@@ -56004,6 +56796,28 @@
       }
     },
     {
+      "id": "erotomania",
+      "name": "Erotomania",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "essential_palatal_tremor",
       "name": "Essential palatal tremor",
       "specialty": "Neurology",
@@ -56118,6 +56932,28 @@
       "name": "Facioscapulohumeral muscular dystrophy",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "factitious_disorder",
+      "name": "Factitious Disorder",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -56378,6 +57214,28 @@
       }
     },
     {
+      "id": "folie_a_deux",
+      "name": "Folie à Deux",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "foster_kennedy_syndrome",
       "name": "Foster Kennedy syndrome",
       "specialty": "Neurology",
@@ -56448,6 +57306,28 @@
       "name": "FOXG1 syndrome (congenital Rett variant)",
       "specialty": "Neurology",
       "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fregoli_syndrome",
+      "name": "Fregoli Syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -58336,6 +59216,28 @@
       }
     },
     {
+      "id": "koro",
+      "name": "Koro",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lafora_disease",
       "name": "Lafora disease (progressive myoclonic epilepsy, EPM2A/NHLRC1)",
       "specialty": "Neurology",
@@ -59198,6 +60100,28 @@
       "name": "Miller Fisher syndrome",
       "specialty": "Neurology",
       "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "misophonia",
+      "name": "Misophonia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -60558,6 +61482,28 @@
       }
     },
     {
+      "id": "othello_syndrome",
+      "name": "Othello Syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "painful_legs_moving_toes",
       "name": "Painful legs and moving toes syndrome",
       "specialty": "Neurology",
@@ -61794,6 +62740,28 @@
       "name": "Reducing body myopathy (FHL1)",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "reduplicative_paramnesia",
+      "name": "Reduplicative Paramnesia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Psychiatry",
       "tier": "reference",
       "caps": {
         "overview": true,
