@@ -90,8 +90,19 @@ body.dark {
   --sev-done-fg:     #8AA2B2; --sev-done-bg:     #0D1922; --sev-done-bd:     #22343F;
 }
 
-/* ---- Icons (Material Symbols Rounded; loaded via <link> in index.html) ------
-   Degrades gracefully to ligature text if the CDN font is unavailable (offline/native). */
+/* ---- Icons (Material Symbols Rounded) --------------------------------------
+   SELF-HOSTED so it works in the native app / offline. The Google CDN <link> in
+   index.html uses a media="print" load-trick that doesn't reliably apply inside the
+   WKWebView, so the ligature NAMES showed as text ("monitor_heart", "stethoscope"…).
+   Bundling the woff2 (assets/fonts/) + this @font-face fixes every Material Symbols
+   icon — the rnav home, the classic header, and the sidebar. */
+@font-face {
+  font-family: 'Material Symbols Rounded';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: block;   /* wait for the icon font rather than flash ligature text */
+  src: url(/assets/fonts/material-symbols-rounded.woff2) format('woff2');
+}
 .rds-icon {
   font-family: 'Material Symbols Rounded';
   font-weight: normal; font-style: normal; line-height: 1;
