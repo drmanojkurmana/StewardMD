@@ -1641,6 +1641,161 @@
       var s=0; if(v.fev)s++; if(v.pus)s++; if(v.att)s++; if(v.inf)s++; if(v.noc)s++;
       var band = s<=1?"Low (~13–18% streptococcus) — antibiotics not usually needed":s<=3?"Moderate (~34–40%) — consider delayed prescription":"High (~62–65%) — consider antibiotics";
       return { v:s, u:"/5", i:band+". Ref: Little, BMJ Open 2013 / NICE." };
+    } },
+
+  /* ===== MDCalc-parity expansion — batch 2 (ai_drafted; clinician-verify) ===== */
+
+  { id:"sgarbossa", cat:"Cardiovascular", icon:"❤️", title:"Sgarbossa Criteria (MI in LBBB/paced)",
+    desc:"Identifies acute MI in the presence of left bundle branch block or ventricular pacing.",
+    inputs:[
+      { id:"conc_ste", label:"Concordant ST elevation ≥1 mm in ≥1 lead", type:"check" },
+      { id:"conc_std", label:"Concordant ST depression ≥1 mm in V1–V3", type:"check" },
+      { id:"disc_ste", label:"Discordant ST elevation ≥5 mm", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.conc_ste)s+=5; if(v.conc_std)s+=3; if(v.disc_ste)s+=2;
+      return { v:s, u:"points", i:(s>=3?"≥3 is specific for acute MI in LBBB/paced rhythm":"Below 3 — not specific; consider the modified Sgarbossa (proportional) criteria and clinical context")+". Ref: Sgarbossa, NEJM 1996." };
+    } },
+
+  { id:"fisher", cat:"Neurology", icon:"🧠", title:"Fisher Grade (SAH on CT)",
+    desc:"Amount/pattern of subarachnoid blood on CT; relates to vasospasm risk.",
+    inputs:[
+      { id:"g", label:"CT appearance", type:"select", opts:[
+        {v:"1",t:"1 — No subarachnoid blood detected"},
+        {v:"2",t:"2 — Diffuse or thin layer (<1 mm)"},
+        {v:"3",t:"3 — Localised clot or thick layer (≥1 mm)"},
+        {v:"4",t:"4 — Intracerebral or intraventricular blood with diffuse/absent SAH"} ] }
+    ],
+    compute:function(v){
+      var g=Number(v.g)||1;
+      var vs = g===3?"highest":g===4?"variable":"lower";
+      return { v:g, u:"(1–4)", i:"Grade "+g+"; symptomatic vasospasm risk is "+vs+" (classically greatest with grade 3 thick clot). Ref: Fisher, Neurosurgery 1980." };
+    } },
+
+  { id:"steroid_conv", cat:"Endocrine", icon:"💊", title:"Corticosteroid Conversion",
+    desc:"Glucocorticoid dose equivalence (anti-inflammatory potency).",
+    inputs:[
+      { id:"drug", label:"Current glucocorticoid", type:"select", opts:[
+        {v:"20",t:"Hydrocortisone"},{v:"25",t:"Cortisone"},{v:"5",t:"Prednisolone"},{v:"5p",t:"Prednisone"},
+        {v:"4",t:"Methylprednisolone"},{v:"4t",t:"Triamcinolone"},{v:"0.75",t:"Dexamethasone"},{v:"0.6",t:"Betamethasone"} ] },
+      { id:"dose", label:"Dose", type:"number", unit:"mg", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.dose)) return ERR;
+      var pot=parseFloat(v.drug)||5;
+      var pred=r1(v.dose*5/pot), hc=r1(v.dose*20/pot), dex=r1(v.dose*0.75/pot);
+      return { v:pred, u:"mg prednisolone-equiv", i:"≈ "+hc+" mg hydrocortisone or "+dex+" mg dexamethasone (anti-inflammatory equivalence). Does not account for mineralocorticoid effect or duration of action; taper and stress-dosing per clinical context." };
+    } },
+
+  { id:"mme", cat:"General", icon:"💊", title:"Morphine Milligram Equivalents (MME/day)",
+    desc:"Converts an oral opioid to daily oral morphine equivalents.",
+    inputs:[
+      { id:"drug", label:"Opioid (oral)", type:"select", opts:[
+        {v:"1",t:"Morphine"},{v:"1.5",t:"Oxycodone"},{v:"1",t:"Hydrocodone"},{v:"4",t:"Hydromorphone"},
+        {v:"3",t:"Oxymorphone"},{v:"0.15",t:"Codeine"},{v:"0.1",t:"Tramadol"},{v:"0.4",t:"Tapentadol"} ] },
+      { id:"dose", label:"Total dose in 24 h", type:"number", unit:"mg/day", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.dose)) return ERR;
+      var f=parseFloat(v.drug)||1; var mme=r1(v.dose*f);
+      var band = mme>=90?"≥90 MME/day — high risk; specialist review advised":mme>=50?"≥50 MME/day — increased overdose risk; use caution":"Lower range";
+      return { v:mme, u:"MME/day", i:band+". Methadone and transdermal fentanyl are NOT included (non-linear / route-specific). Ref: CDC opioid guidance." };
+    } },
+
+  { id:"saag", cat:"Hepatology", icon:"🩺", title:"Serum-Ascites Albumin Gradient (SAAG)",
+    desc:"Classifies ascites as portal-hypertensive vs not.",
+    inputs:[
+      { id:"salb", label:"Serum albumin", type:"number", unit:"g/L", step:"1" },
+      { id:"aalb", label:"Ascitic fluid albumin", type:"number", unit:"g/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.salb)||!ok(v.aalb)) return ERR;
+      var g=r1(v.salb - v.aalb);
+      return { v:g, u:"g/L", i:(g>=11?"≥11 g/L — portal hypertension likely (cirrhosis, heart failure, Budd-Chiari)":"<11 g/L — non-portal cause (malignancy, TB, pancreatic, nephrotic)")+". Ref: Runyon, Ann Intern Med 1992." };
+    } },
+
+  { id:"ttkg", cat:"Renal", icon:"🩺", title:"Transtubular Potassium Gradient (TTKG)",
+    desc:"Assesses renal potassium handling in dyskalaemia.",
+    inputs:[
+      { id:"uk", label:"Urine potassium", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"pk", label:"Plasma potassium", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"uosm", label:"Urine osmolality", type:"number", unit:"mOsm/kg", step:"1" },
+      { id:"posm", label:"Plasma osmolality", type:"number", unit:"mOsm/kg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.uk)||!ok(v.pk)||!ok(v.uosm)||!ok(v.posm)||v.pk<=0||v.posm<=0||v.uosm<v.posm) return { err:"Enter valid values (urine osmolality must exceed plasma; requires urine Na adequate)." };
+      var t=r1((v.uk/v.pk)/(v.uosm/v.posm));
+      return { v:t, u:"", i:"In hyperkalaemia TTKG <7 suggests hypoaldosteronism (expected >7); in hypokalaemia >3 suggests renal potassium wasting. Valid only when urine osmolality > plasma and urine Na is adequate. Interpretation is debated." };
+    } },
+
+  { id:"ebv", cat:"General", icon:"🩸", title:"Estimated Blood Volume",
+    desc:"Weight-based estimate of total blood volume.",
+    inputs:[
+      { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.5" },
+      { id:"grp", label:"Patient group", type:"select", opts:[
+        {v:"75",t:"Adult male"},{v:"65",t:"Adult female"},{v:"70",t:"Child (1–12 y)"},{v:"80",t:"Infant (<1 y)"},{v:"85",t:"Term neonate"},{v:"95",t:"Premature neonate"} ] }
+    ],
+    compute:function(v){
+      if(!ok(v.wt)||v.wt<=0) return ERR;
+      var f=parseFloat(v.grp)||70; var ml=r0(v.wt*f);
+      return { v:ml, u:"mL", i:"≈ "+f+" mL/kg for this group. Useful for transfusion, exchange and blood-loss estimates." };
+    } },
+
+  { id:"cows", cat:"Psychiatry", icon:"💊", title:"Clinical Opiate Withdrawal Scale (COWS)",
+    desc:"Severity of opioid withdrawal.",
+    inputs:[
+      { id:"pulse", label:"Resting pulse rate", type:"select", opts:[{v:"0",t:"≤80"},{v:"1",t:"81–100"},{v:"2",t:"101–120"},{v:"4",t:">120"}] },
+      { id:"sweat", label:"Sweating", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Subjective / flushing"},{v:"2",t:"Beads of sweat"},{v:"3",t:"Streaming"}] },
+      { id:"restless", label:"Restlessness", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Fidgety"},{v:"3",t:"Frequent shifting"},{v:"5",t:"Unable to sit still"}] },
+      { id:"pupil", label:"Pupil size", type:"select", opts:[{v:"0",t:"Normal/pinned"},{v:"1",t:"Possibly larger"},{v:"2",t:"Moderately dilated"},{v:"5",t:"So dilated only rim visible"}] },
+      { id:"ache", label:"Bone/joint aches", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Severe diffuse"},{v:"4",t:"Rubbing joints, cannot sit still"}] },
+      { id:"nose", label:"Runny nose / tearing", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Stuffiness/moist eyes"},{v:"2",t:"Running nose/tearing"},{v:"4",t:"Streaming"}] },
+      { id:"gi", label:"GI upset", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Cramps"},{v:"2",t:"Nausea/loose stool"},{v:"3",t:"Vomiting/diarrhoea"},{v:"5",t:"Multiple episodes"}] },
+      { id:"tremor", label:"Tremor", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Felt not seen"},{v:"2",t:"Slight"},{v:"4",t:"Gross"}] },
+      { id:"yawn", label:"Yawning", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Once or twice"},{v:"2",t:"≥3 times"},{v:"4",t:"Several times/minute"}] },
+      { id:"anx", label:"Anxiety/irritability", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Obvious"},{v:"4",t:"So severe participation difficult"}] },
+      { id:"skin", label:"Gooseflesh skin", type:"select", opts:[{v:"0",t:"Smooth"},{v:"3",t:"Piloerection felt"},{v:"5",t:"Prominent piloerection"}] }
+    ],
+    compute:function(v){
+      var s=["pulse","sweat","restless","pupil","ache","nose","gi","tremor","yawn","anx","skin"].reduce(function(a,k){return a+(Number(v[k])||0);},0);
+      var band = s<=4?"Minimal":s<=12?"Mild":s<=24?"Moderate":s<=36?"Moderately severe":"Severe";
+      return { v:s, u:"points", i:band+" withdrawal (5–12 mild, 13–24 moderate, 25–36 moderately severe, >36 severe). Ref: Wesson & Ling, J Psychoactive Drugs 2003." };
+    } },
+
+  { id:"gahs", cat:"Hepatology", icon:"🩺", title:"Glasgow Alcoholic Hepatitis Score (GAHS)",
+    desc:"Prognosis in alcoholic hepatitis (day 1 or day 6–9).",
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"yrs", step:"1" },
+      { id:"wcc", label:"White cell count", type:"number", unit:"×10⁹/L", step:"0.1" },
+      { id:"urea", label:"Urea", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"inr", label:"INR (or PT ratio)", type:"number", step:"0.1" },
+      { id:"bili", label:"Bilirubin", type:"number", unit:"µmol/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!ok(v.wcc)||!ok(v.urea)||!ok(v.inr)||!ok(v.bili)) return ERR;
+      var s=0;
+      s += v.age<50?1:2;
+      s += v.wcc<15?1:2;
+      s += v.urea<5?1:2;
+      s += v.inr<1.5?1:(v.inr<=2.0?2:3);
+      s += v.bili<125?1:(v.bili<=250?2:3);
+      return { v:s, u:"points", i:(s>=9?"≥9 — poor prognosis; corticosteroids may be considered (with Maddrey/MELD and after excluding sepsis/GI bleed)":"<9 — better prognosis")+" (range 5–12). Ref: Forrest, Gut 2005." };
+    } },
+
+  { id:"das28", cat:"Rheumatology", icon:"🦴", title:"DAS28-ESR (rheumatoid activity)",
+    desc:"Composite disease-activity score in rheumatoid arthritis.",
+    inputs:[
+      { id:"tjc", label:"Tender joint count (of 28)", type:"number", step:"1", min:"0" },
+      { id:"sjc", label:"Swollen joint count (of 28)", type:"number", step:"1", min:"0" },
+      { id:"esr", label:"ESR", type:"number", unit:"mm/h", step:"1" },
+      { id:"gh", label:"Patient global health (VAS 0–100)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.tjc)||!ok(v.sjc)||!ok(v.esr)||!ok(v.gh)||v.esr<=0) return ERR;
+      var d = 0.56*Math.sqrt(Math.max(0,v.tjc)) + 0.28*Math.sqrt(Math.max(0,v.sjc)) + 0.70*Math.log(v.esr) + 0.014*v.gh;
+      d = r1(d);
+      var band = d<2.6?"Remission":d<=3.2?"Low activity":d<=5.1?"Moderate activity":"High activity";
+      return { v:d, u:"", i:band+" (remission <2.6, low ≤3.2, moderate ≤5.1, high >5.1). Ref: Prevoo, Arthritis Rheum 1995." };
     } }
 
   ];
@@ -1709,7 +1864,17 @@
     mrs:["modified rankin scale","rankin","stroke disability","functional outcome"],
     hunt_hess:["hunt hess","sah grade","subarachnoid haemorrhage grade","aneurysm grade"],
     cage:["cage questionnaire","alcohol screening","problem drinking"],
-    feverpain:["feverpain score","sore throat","strep throat","pharyngitis","antibiotic sore throat"]
+    feverpain:["feverpain score","sore throat","strep throat","pharyngitis","antibiotic sore throat"],
+    sgarbossa:["sgarbossa","mi in lbbb","paced rhythm mi","stemi lbbb"],
+    fisher:["fisher grade","sah ct","subarachnoid vasospasm","fisher scale"],
+    steroid_conv:["steroid conversion","glucocorticoid equivalent","prednisolone equivalent","dexamethasone equivalent","corticosteroid dose"],
+    mme:["morphine milligram equivalents","mme","opioid conversion","morphine equivalent"],
+    saag:["serum ascites albumin gradient","saag","ascites","portal hypertension ascites"],
+    ttkg:["transtubular potassium gradient","ttkg","potassium handling","hyperkalaemia aldosterone"],
+    ebv:["estimated blood volume","blood volume","transfusion volume","exchange transfusion"],
+    cows:["clinical opiate withdrawal scale","cows","opioid withdrawal"],
+    gahs:["glasgow alcoholic hepatitis score","gahs","alcoholic hepatitis prognosis"],
+    das28:["das28","disease activity score","rheumatoid arthritis activity","das 28 esr"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
