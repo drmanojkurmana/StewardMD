@@ -2605,8 +2605,13 @@
           '<p class="icu-doc-sub" style="margin:0 0 8px">Correlates your findings with available labs, imaging and vitals against StewardMD’s trusted sources — to help identify the diagnosis, flag what doesn’t fit and suggest next checks. Advisory only; you confirm the de-identified context that is sent.</p>' +
           '<button class="icu-btn" data-icu-act="corrdeep"' + ((_corrBusy || !usable) ? " disabled" : "") + (!usable ? ' title="Add findings, labs, imaging or vitals first"' : "") + '>' + ico("pulse", "✨") + " Deep clinical review</button>" +
           (!usable ? '<p class="icu-doc-sub" style="margin:6px 0 0">Add findings, labs, imaging or vitals above to enable deep review.</p>' : "") + dBlock +
-          (extEvidenceOn() && (deepDone || hasDx) ? '<button class="icu-btn ghost" data-icu-act="corrext" style="margin-top:8px">' + ico("search", "🔎") + " Find evidence beyond StewardMD</button>" : "") +
-          (deepDone ? '<p class="icu-doc-sub" style="margin-top:6px">Use the review to choose a working diagnosis below, or find guideline support via “Find evidence beyond StewardMD”.</p>' : "") + '</div>';
+          // "Search trusted sources" — external guideline/evidence lookup (corrext → openEvidenceLookup),
+          // shown directly BELOW Deep clinical review exactly as in the classic ICU: always visible,
+          // NOT gated on a deep review or a working diagnosis (disabled only if turned off in Settings).
+          (extEvidenceOn()
+            ? '<button class="icu-btn ghost" data-icu-act="corrext" style="margin-top:8px">' + ico("search", "🔎") + " Search trusted sources</button>"
+            : '<button class="icu-btn ghost" disabled title="Turned off in Settings" style="margin-top:8px">' + ico("search", "🔎") + " Search trusted sources</button>") +
+          (deepDone ? '<p class="icu-doc-sub" style="margin-top:6px">Use the review to choose a working diagnosis below, or search trusted sources for guideline support.</p>' : "") + '</div>';
       }
 
       // 5) Working diagnosis — set from the review’s suggestion (deterministic differential) or KB
