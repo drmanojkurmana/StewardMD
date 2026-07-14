@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 2773,
+    "diseases": 2829,
     "diagnostic": 141,
-    "reference": 2632,
+    "reference": 2688,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 14.2,
+    "severity": 14,
     "prognosis": 99.7,
-    "diagnosticScoring": 5.1,
-    "management": 5,
-    "drugTherapy": 4.7,
-    "dosing": 4.7,
+    "diagnosticScoring": 5,
+    "management": 4.9,
+    "drugTherapy": 4.6,
+    "dosing": 4.6,
     "stewardship": 1.8
   },
   "bySpecialty": {
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 386,
+      "total": 417,
       "diagnostic": 20,
-      "reference": 366,
+      "reference": 397,
       "dims": {
-        "overview": 386,
-        "clinicalFeatures": 386,
-        "pathophysiology": 386,
-        "differential": 386,
-        "investigations": 386,
-        "redFlags": 386,
+        "overview": 417,
+        "clinicalFeatures": 417,
+        "pathophysiology": 417,
+        "differential": 417,
+        "investigations": 417,
+        "redFlags": 417,
         "severity": 48,
-        "prognosis": 386,
+        "prognosis": 417,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 126,
+      "total": 139,
       "diagnostic": 7,
-      "reference": 119,
+      "reference": 132,
       "dims": {
-        "overview": 126,
-        "clinicalFeatures": 126,
-        "pathophysiology": 126,
-        "differential": 125,
-        "investigations": 126,
-        "redFlags": 126,
+        "overview": 139,
+        "clinicalFeatures": 139,
+        "pathophysiology": 139,
+        "differential": 138,
+        "investigations": 139,
+        "redFlags": 139,
         "severity": 29,
-        "prognosis": 126,
+        "prognosis": 139,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 208,
+      "total": 220,
       "diagnostic": 6,
-      "reference": 202,
+      "reference": 214,
       "dims": {
-        "overview": 208,
-        "clinicalFeatures": 208,
-        "pathophysiology": 208,
-        "differential": 208,
-        "investigations": 208,
-        "redFlags": 208,
+        "overview": 220,
+        "clinicalFeatures": 220,
+        "pathophysiology": 220,
+        "differential": 220,
+        "investigations": 220,
+        "redFlags": 220,
         "severity": 23,
-        "prognosis": 208,
+        "prognosis": 220,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -28162,10 +28162,76 @@
       }
     },
     {
+      "id": "adenosine_deaminase_hyperactivity",
+      "name": "Adenosine deaminase hyperactivity (hereditary haemolytic anaemia)",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "adenylate_kinase_deficiency",
+      "name": "Adenylate kinase deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "al_amyloidosis",
       "name": "AL (light-chain) amyloidosis",
       "specialty": "Hematology",
       "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "aldolase_a_deficiency",
+      "name": "Aldolase A deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28386,6 +28452,28 @@
       "name": "Beta Thalassaemia",
       "specialty": "Hematology",
       "system": "Haematological",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "diphosphoglycerate_mutase_deficiency",
+      "name": "Bisphosphoglycerate mutase deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28910,6 +28998,28 @@
       }
     },
     {
+      "id": "enolase_deficiency",
+      "name": "Erythrocyte enolase deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "essential_thrombocythemia",
       "name": "Essential thrombocythaemia",
       "specialty": "Hematology",
@@ -29042,6 +29152,28 @@
       }
     },
     {
+      "id": "gamma_glutamylcysteine_synthetase_deficiency",
+      "name": "Gamma-glutamylcysteine synthetase deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gata1_related_cytopenia",
       "name": "GATA1-related cytopenia",
       "specialty": "Hematology",
@@ -29086,10 +29218,54 @@
       }
     },
     {
+      "id": "glucose_phosphate_isomerase_deficiency",
+      "name": "Glucose phosphate isomerase deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "g6pd_deficiency",
       "name": "Glucose-6-Phosphate Dehydrogenase Deficiency",
       "specialty": "Hematology",
       "system": "Haematological",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "glutathione_reductase_deficiency",
+      "name": "Glutathione reductase deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29482,6 +29658,28 @@
       }
     },
     {
+      "id": "hexokinase_deficiency",
+      "name": "Hexokinase deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hodgkin_lymphoma",
       "name": "Hodgkin's Lymphoma",
       "specialty": "Hematology",
@@ -29550,6 +29748,28 @@
     {
       "id": "hereditary_hemochromatosis_juvenile",
       "name": "Juvenile hereditary haemochromatosis",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lactate_dehydrogenase_deficiency",
+      "name": "Lactate dehydrogenase deficiency",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
       "tier": "reference",
@@ -30032,6 +30252,28 @@
       }
     },
     {
+      "id": "phosphoglycerate_mutase_deficiency",
+      "name": "Phosphoglycerate mutase deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "plasma_cell_disorders",
       "name": "Plasma Cell Disorders (MGUS, Waldenström)",
       "specialty": "Hematology",
@@ -30278,6 +30520,28 @@
       "name": "Pure red cell aplasia",
       "specialty": "Hematology",
       "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pyrimidine_5_nucleotidase_deficiency",
+      "name": "Pyrimidine 5'-nucleotidase deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -30674,6 +30938,28 @@
       "name": "Transfusion-related acute lung injury",
       "specialty": "Hematology",
       "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "triosephosphate_isomerase_deficiency",
+      "name": "Triosephosphate isomerase deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology / Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -39976,6 +40262,28 @@
       }
     },
     {
+      "id": "adult_polyglucosan_body_disease",
+      "name": "Adult polyglucosan body disease (GBE1)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "agenesis_corpus_callosum",
       "name": "Agenesis of the corpus callosum",
       "specialty": "Neurology",
@@ -40288,6 +40596,28 @@
       "name": "Argyll Robertson pupil",
       "specialty": "Neurology",
       "system": "Nervous system / Neuro-ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "argyrophilic_grain_disease",
+      "name": "Argyrophilic grain disease",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -40878,6 +41208,28 @@
       }
     },
     {
+      "id": "cacna1a_developmental_epileptic_encephalopathy",
+      "name": "CACNA1A developmental and epileptic encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cadasil",
       "name": "CADASIL",
       "specialty": "Neurology",
@@ -41208,6 +41560,28 @@
       }
     },
     {
+      "id": "cerebral_amyloid_angiopathy",
+      "name": "Cerebral amyloid angiopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cerebral_aneurysm",
       "name": "Cerebral aneurysm",
       "specialty": "Neurology",
@@ -41366,6 +41740,28 @@
       "name": "Charles Bonnet syndrome",
       "specialty": "Neurology",
       "system": "Nervous system / Neuro-ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chd2_encephalopathy",
+      "name": "CHD2 encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -42132,6 +42528,28 @@
       }
     },
     {
+      "id": "depdc5_familial_focal_epilepsy",
+      "name": "DEPDC5 familial focal epilepsy with variable foci",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "diseases_of_the_spinal_cord",
       "name": "Diseases of the Spinal Cord",
       "specialty": "Neurology",
@@ -42462,6 +42880,28 @@
       }
     },
     {
+      "id": "eef1a2_encephalopathy",
+      "name": "EEF1A2 developmental and epileptic encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "emery_dreifuss_muscular_dystrophy",
       "name": "Emery-Dreifuss muscular dystrophy",
       "specialty": "Neurology",
@@ -42532,6 +42972,28 @@
       "name": "Epidermal naevus syndrome",
       "specialty": "Neurology",
       "system": "Dermatology / Neurocutaneous",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "malignant_migrating_partial_seizures_infancy",
+      "name": "Epilepsy of infancy with migrating focal seizures (KCNT1)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -42682,6 +43144,28 @@
       }
     },
     {
+      "id": "neuroserpin_inclusion_encephalopathy",
+      "name": "Familial encephalopathy with neuroserpin inclusion bodies (FENIB)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "familial_hemiplegic_migraine",
       "name": "Familial hemiplegic migraine",
       "specialty": "Neurology",
@@ -42708,6 +43192,28 @@
       "name": "Febrile seizure",
       "specialty": "Neurology",
       "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fgf12_encephalopathy",
+      "name": "FGF12 developmental and epileptic encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -43012,6 +43518,28 @@
       }
     },
     {
+      "id": "gabrb3_encephalopathy",
+      "name": "GABRB3 encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gangliocytoma",
       "name": "Gangliocytoma",
       "specialty": "Neurology",
@@ -43254,6 +43782,28 @@
       }
     },
     {
+      "id": "globular_glial_tauopathy",
+      "name": "Globular glial tauopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "glossopharyngeal_neuralgia",
       "name": "Glossopharyngeal neuralgia",
       "specialty": "Neurology",
@@ -43280,6 +43830,50 @@
       "name": "GLUT1 deficiency epilepsy phenotype",
       "specialty": "Neurology",
       "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gnao1_encephalopathy",
+      "name": "GNAO1 encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gnb1_encephalopathy",
+      "name": "GNB1 encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -43386,10 +43980,54 @@
       }
     },
     {
+      "id": "hcn1_encephalopathy",
+      "name": "HCN1 developmental and epileptic encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hemifacial_spasm",
       "name": "Hemifacial spasm",
       "specialty": "Neurology",
       "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hereditary_diffuse_leukoencephalopathy_spheroids",
+      "name": "Hereditary diffuse leukoencephalopathy with spheroids (CSF1R)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -44002,10 +44640,76 @@
       }
     },
     {
+      "id": "kcnb1_encephalopathy",
+      "name": "KCNB1 encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kcnma1_channelopathy",
+      "name": "KCNMA1 channelopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "kcnq2_encephalopathy",
       "name": "KCNQ2 developmental and epileptic encephalopathy",
       "specialty": "Neurology",
       "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kcnt1_epilepsy",
+      "name": "KCNT1-related epilepsy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -45520,6 +46224,28 @@
       }
     },
     {
+      "id": "neuronal_intranuclear_inclusion_disease",
+      "name": "Neuronal intranuclear inclusion disease (NOTCH2NLC)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "SARCOID_NEURO",
       "name": "Neurosarcoidosis",
       "specialty": "Neurology",
@@ -46378,6 +47104,28 @@
       }
     },
     {
+      "id": "posterior_cortical_atrophy",
+      "name": "Posterior cortical atrophy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "primary_and_metastatic_tumors_of",
       "name": "Primary and Metastatic Tumors of the Nervous System",
       "specialty": "Neurology",
@@ -46422,6 +47170,50 @@
       }
     },
     {
+      "id": "primary_lateral_sclerosis",
+      "name": "Primary lateral sclerosis",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_progressive_aphasia",
+      "name": "Primary progressive aphasia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "prion_diseases",
       "name": "Prion Diseases (CJD)",
       "specialty": "Neurology",
@@ -46444,8 +47236,52 @@
       }
     },
     {
+      "id": "progressive_muscular_atrophy",
+      "name": "Progressive muscular atrophy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "progressive_myoclonic_epilepsy",
       "name": "Progressive myoclonic epilepsies (overview)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "progressive_nonfluent_aphasia",
+      "name": "Progressive non-fluent aphasia",
       "specialty": "Neurology",
       "system": "Nervous system / Neurology",
       "tier": "reference",
@@ -46884,10 +47720,54 @@
       }
     },
     {
+      "id": "scn1b_epilepsy",
+      "name": "SCN1B-related epilepsy (GEFS+/Dravet-like)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "scn2a_developmental_epileptic_encephalopathy",
       "name": "SCN2A developmental and epileptic encephalopathy",
       "specialty": "Neurology",
       "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "scn8a_developmental_epileptic_encephalopathy",
+      "name": "SCN8A developmental and epileptic encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -46950,6 +47830,28 @@
       }
     },
     {
+      "id": "semantic_dementia",
+      "name": "Semantic dementia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "senior_loken_syndrome",
       "name": "Senior-Loken syndrome",
       "specialty": "Neurology",
@@ -46976,6 +47878,50 @@
       "name": "Sialadenosis (sialosis)",
       "specialty": "Neurology",
       "system": "Ear-Nose-Throat / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sik1_developmental_epileptic_encephalopathy",
+      "name": "SIK1 developmental and epileptic encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "slc13a5_epilepsy",
+      "name": "SLC13A5 (citrate transporter) epilepsy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurogenetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -47592,6 +48538,28 @@
       "name": "Subependymoma",
       "specialty": "Neurology",
       "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "superficial_siderosis",
+      "name": "Superficial siderosis of the CNS",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neurology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -55464,6 +56432,28 @@
       }
     },
     {
+      "id": "deficiency_adenosine_deaminase2_vasculitis",
+      "name": "ADA2 deficiency vasculitis (paediatric PAN-like)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ADULT_ONSET_STILL",
       "name": "Adult-onset Still disease",
       "specialty": "Rheumatology / MSK",
@@ -56168,6 +57158,28 @@
       }
     },
     {
+      "id": "chronic_nonbacterial_osteomyelitis",
+      "name": "Chronic non-bacterial osteomyelitis (CNO)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chronic_recurrent_multifocal_osteomyelitis",
       "name": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO)",
       "specialty": "Rheumatology / MSK",
@@ -56744,6 +57756,28 @@
       "name": "Ellis-van Creveld syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "enthesitis_related_arthritis",
+      "name": "Enthesitis-related arthritis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -57532,6 +58566,28 @@
       }
     },
     {
+      "id": "juvenile_ankylosing_spondylitis",
+      "name": "Juvenile ankylosing spondylitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "juvenile_dermatomyositis",
       "name": "Juvenile Dermatomyositis",
       "specialty": "Rheumatology / MSK",
@@ -57558,6 +58614,94 @@
       "name": "Juvenile Idiopathic Arthritis",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "juvenile_localized_scleroderma",
+      "name": "Juvenile localised scleroderma (morphoea)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "juvenile_psoriatic_arthritis",
+      "name": "Juvenile psoriatic arthritis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "juvenile_sjogren_syndrome",
+      "name": "Juvenile Sjogren syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "juvenile_systemic_sclerosis",
+      "name": "Juvenile systemic sclerosis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -58082,6 +59226,28 @@
       }
     },
     {
+      "id": "multisystem_inflammatory_syndrome_children",
+      "name": "Multisystem inflammatory syndrome in children (MIS-C)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mycotic_aneurysm",
       "name": "Mycotic (infective) aneurysm",
       "specialty": "Rheumatology / MSK",
@@ -58196,6 +59362,28 @@
       "name": "Nutritional Rickets",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "oligoarticular_juvenile_idiopathic_arthritis",
+      "name": "Oligoarticular juvenile idiopathic arthritis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -58614,6 +59802,28 @@
       "name": "Polyarteritis nodosa",
       "specialty": "Rheumatology / MSK",
       "system": "Rheumatology / MSK",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "polyarticular_juvenile_idiopathic_arthritis",
+      "name": "Polyarticular juvenile idiopathic arthritis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -59428,6 +60638,28 @@
       "name": "Synovial chondromatosis",
       "specialty": "Rheumatology / MSK",
       "system": "Rheumatology / Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "systemic_juvenile_idiopathic_arthritis",
+      "name": "Systemic juvenile idiopathic arthritis (Still disease)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology / Paediatrics",
       "tier": "reference",
       "caps": {
         "overview": true,
