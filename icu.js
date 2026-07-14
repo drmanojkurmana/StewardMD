@@ -2465,6 +2465,11 @@
       "</div></div>";
   }
 
+  // The ACTUAL loaded build (read from icu.js?v=goldNNN on the <script> tag) — shown in More so a
+  // stale native bundle is obvious at a glance (incremental Xcode builds have shipped old public/).
+  function icuBuildVer() {
+    try { var s = document.querySelector('script[src*="icu.js?v="]'); var m = s && String(s.src).match(/[?&]v=([A-Za-z0-9]+)/); return m ? m[1] : ""; } catch (e) { return ""; }
+  }
   var RENDER = {
     // Redesign Overview: Current status (author+time) -> Active problems -> Critical alerts ->
     // Rounds & instructions (group) -> Current treatment -> Lab Watch -> Trends -> Goals. Every
@@ -2845,7 +2850,8 @@
         (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") +
         '<button class="icu-btn ghost" data-icu-act="clearfindings">' + ico("trash", "🧹") + ' Clear current findings</button>' +
         '<button class="icu-btn ghost" data-icu-act="tab:discharge">' + ico("rounds", "📝") + ' Discharge &amp; remove patient</button>' +
-        '</div>';
+        '</div>' +
+        '<p class="icu-doc-sub" style="text-align:center;margin-top:16px;opacity:.55">StewardMD ICU · ' + esc(icuBuildVer() || "build") + '</p>';
     }
   };
 
@@ -4199,10 +4205,13 @@
     var intro = '<div class="icu-v2-note">' + ico("info", "ⓘ") + (instr
       ? ' Tap the instructions you gave. Each becomes a tracked task and posts to the timeline — the whole unit sees it instantly. No typing required.'
       : ' Add a note for the team — it posts to the timeline, author- and time-stamped. Only consultants and senior residents can issue tracked instructions.') + '</div>';
-    var presets = instr ? ('<div class="icu-v2-rpre">' + ROUND_PRESETS.map(function (txt, i) {
+    // Common consultant orders — shown to EVERYONE (tap to add). For instructing roles each becomes a
+    // tracked task; for others they post as a plain note. (Previously gated to instructors, so juniors
+    // saw no suggestions at all.)
+    var presets = '<div class="icu-card" style="padding-bottom:8px"><div class="icu-sec-lbl" style="margin:0 0 10px">' + (instr ? "Common instructions — tap to add" : "Common orders — tap to add a note") + '</div><div class="icu-v2-rpre">' + ROUND_PRESETS.map(function (txt, i) {
       var on = !!_roundSel[i];
       return '<button class="icu-v2-rchip' + (on ? " on" : "") + '" data-icu-act="grproundtog:' + i + '" aria-pressed="' + on + '" aria-label="' + esc(txt) + '"><span class="icu-v2-rbox" aria-hidden="true">' + (on ? "✓" : "") + '</span><span class="icu-v2-rtx">' + esc(txt) + '</span></button>';
-    }).join("") + '</div>') : "";
+    }).join("") + '</div></div>';
     var extra = _roundExtra.length ? ('<div class="icu-v2-rpre">' + _roundExtra.map(function (txt, i) {
       return '<button class="icu-v2-rchip on" data-icu-act="grproundrm:' + i + '" aria-label="' + esc("Remove: " + txt) + '"><span class="icu-v2-rbox" aria-hidden="true">✓</span><span class="icu-v2-rtx">' + esc(txt) + '</span><span class="icu-v2-rx" aria-hidden="true">✕</span></button>';
     }).join("") + '</div>') : "";
