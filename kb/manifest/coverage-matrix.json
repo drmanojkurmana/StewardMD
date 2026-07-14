@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 2549,
+    "diseases": 2605,
     "diagnostic": 141,
-    "reference": 2408,
+    "reference": 2464,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 15.5,
-    "prognosis": 99.6,
-    "diagnosticScoring": 5.5,
-    "management": 5.5,
-    "drugTherapy": 5.1,
-    "dosing": 5.1,
+    "severity": 15.2,
+    "prognosis": 99.7,
+    "diagnosticScoring": 5.4,
+    "management": 5.4,
+    "drugTherapy": 5,
+    "dosing": 5,
     "stewardship": 2
   },
   "bySpecialty": {
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 344,
+      "total": 372,
       "diagnostic": 20,
-      "reference": 324,
+      "reference": 352,
       "dims": {
-        "overview": 344,
-        "clinicalFeatures": 344,
-        "pathophysiology": 344,
-        "differential": 344,
-        "investigations": 344,
-        "redFlags": 344,
+        "overview": 372,
+        "clinicalFeatures": 372,
+        "pathophysiology": 372,
+        "differential": 372,
+        "investigations": 372,
+        "redFlags": 372,
         "severity": 48,
-        "prognosis": 344,
+        "prognosis": 372,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -380,18 +380,18 @@
       }
     },
     "Infectious Diseases": {
-      "total": 159,
+      "total": 173,
       "diagnostic": 0,
-      "reference": 159,
+      "reference": 173,
       "dims": {
-        "overview": 159,
-        "clinicalFeatures": 159,
-        "pathophysiology": 159,
-        "differential": 158,
-        "investigations": 159,
-        "redFlags": 159,
+        "overview": 173,
+        "clinicalFeatures": 173,
+        "pathophysiology": 173,
+        "differential": 172,
+        "investigations": 173,
+        "redFlags": 173,
         "severity": 63,
-        "prognosis": 159,
+        "prognosis": 173,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -452,6 +452,26 @@
         "redFlags": 37,
         "severity": 0,
         "prognosis": 37,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Genetics": {
+      "total": 58,
+      "diagnostic": 0,
+      "reference": 58,
+      "dims": {
+        "overview": 58,
+        "clinicalFeatures": 58,
+        "pathophysiology": 58,
+        "differential": 58,
+        "investigations": 58,
+        "redFlags": 58,
+        "severity": 0,
+        "prognosis": 58,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -552,26 +572,6 @@
         "redFlags": 7,
         "severity": 0,
         "prognosis": 7,
-        "diagnosticScoring": 0,
-        "management": 0,
-        "drugTherapy": 0,
-        "dosing": 0,
-        "stewardship": 0
-      }
-    },
-    "Genetics": {
-      "total": 44,
-      "diagnostic": 0,
-      "reference": 44,
-      "dims": {
-        "overview": 44,
-        "clinicalFeatures": 44,
-        "pathophysiology": 44,
-        "differential": 44,
-        "investigations": 44,
-        "redFlags": 44,
-        "severity": 0,
-        "prognosis": 44,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -20154,6 +20154,28 @@
       }
     },
     {
+      "id": "acromicric_dysplasia",
+      "name": "Acromicric dysplasia",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "alstrom_syndrome",
       "name": "Alstrom syndrome",
       "specialty": "Genetics",
@@ -20266,6 +20288,28 @@
     {
       "id": "cardiofaciocutaneous_syndrome",
       "name": "Cardiofaciocutaneous syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cbl_syndrome",
+      "name": "CBL syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
       "tier": "reference",
@@ -20418,6 +20462,50 @@
       }
     },
     {
+      "id": "de_barsy_syndrome",
+      "name": "De Barsy syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "frank_ter_haar_syndrome",
+      "name": "Frank-ter Haar syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "fraser_syndrome",
       "name": "Fraser syndrome (cryptophthalmos-syndactyly)",
       "specialty": "Genetics",
@@ -20462,10 +20550,76 @@
       }
     },
     {
+      "id": "geleophysic_dysplasia",
+      "name": "Geleophysic dysplasia",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gerodermia_osteodysplastica",
+      "name": "Gerodermia osteodysplastica",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "goldenhar_syndrome",
       "name": "Goldenhar syndrome (oculo-auriculo-vertebral spectrum)",
       "specialty": "Genetics",
       "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hallermann_streiff_syndrome",
+      "name": "Hallermann-Streiff syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -20576,6 +20730,50 @@
       "name": "Klippel-Feil syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "legius_syndrome",
+      "name": "Legius syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lenz_majewski_syndrome",
+      "name": "Lenz-Majewski hyperostotic dwarfism",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -20726,10 +20924,76 @@
       }
     },
     {
+      "id": "myhre_syndrome",
+      "name": "Myhre syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "nager_syndrome",
       "name": "Nager acrofacial dysostosis (SF3B4)",
       "specialty": "Genetics",
       "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "noonan_syndrome_multiple_lentigines",
+      "name": "Noonan syndrome with multiple lentigines",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "oculodentodigital_dysplasia",
+      "name": "Oculodentodigital dysplasia",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -20840,6 +21104,28 @@
       "name": "Poland syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "restrictive_dermopathy",
+      "name": "Restrictive dermopathy",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -21058,6 +21344,28 @@
     {
       "id": "weaver_syndrome",
       "name": "Weaver syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "weill_marchesani_syndrome",
+      "name": "Weill-Marchesani syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
       "tier": "reference",
@@ -30494,6 +30802,28 @@
       }
     },
     {
+      "id": "balantidiasis",
+      "name": "Balantidiasis (Balantidium coli)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bartonellosis",
       "name": "Bartonellosis",
       "specialty": "Infectious Diseases",
@@ -30562,6 +30892,28 @@
     {
       "id": "bejel",
       "name": "Bejel",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "blastocystosis",
+      "name": "Blastocystis infection",
       "specialty": "Infectious Diseases",
       "system": "Infectious disease",
       "tier": "reference",
@@ -31044,6 +31396,50 @@
       }
     },
     {
+      "id": "cyclosporiasis",
+      "name": "Cyclosporiasis (Cyclospora cayetanensis)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cystoisosporiasis",
+      "name": "Cystoisosporiasis (Cystoisospora belli)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cytomegalovirus_infection",
       "name": "Cytomegalovirus (CMV) Infection",
       "specialty": "Infectious Diseases",
@@ -31088,6 +31484,28 @@
       }
     },
     {
+      "id": "dientamoebiasis",
+      "name": "Dientamoeba fragilis infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "diphtheria",
       "name": "Diphtheria",
       "specialty": "Infectious Diseases",
@@ -31101,6 +31519,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "diphyllobothriasis",
+      "name": "Diphyllobothriasis (fish tapeworm)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -31244,6 +31684,28 @@
     {
       "id": "emergomycosis",
       "name": "Emergomycosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "enterobiasis",
+      "name": "Enterobiasis (pinworm)",
       "specialty": "Infectious Diseases",
       "system": "Infectious disease",
       "tier": "reference",
@@ -31704,8 +32166,52 @@
       }
     },
     {
+      "id": "hookworm_infection",
+      "name": "Hookworm infection (Ancylostoma/Necator)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "human_granulocytic_anaplasmosis",
       "name": "Human granulocytic anaplasmosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hymenolepiasis",
+      "name": "Hymenolepiasis (Hymenolepis nana)",
       "specialty": "Infectious Diseases",
       "system": "Infectious disease",
       "tier": "reference",
@@ -31818,6 +32324,28 @@
       "name": "Influenza",
       "specialty": "Infectious Diseases",
       "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "capillariasis",
+      "name": "Intestinal capillariasis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -32223,6 +32751,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "microsporidiosis",
+      "name": "Microsporidiosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -33002,6 +33552,28 @@
       }
     },
     {
+      "id": "sarcocystosis",
+      "name": "Sarcocystosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "scarlet_fever",
       "name": "Scarlet fever",
       "specialty": "Infectious Diseases",
@@ -33244,6 +33816,28 @@
       }
     },
     {
+      "id": "taeniasis",
+      "name": "Taeniasis (Taenia solium/saginata)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "talaromycosis",
       "name": "Talaromycosis",
       "specialty": "Infectious Diseases",
@@ -33446,6 +34040,28 @@
       "name": "Trichomoniasis",
       "specialty": "Infectious Diseases",
       "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trichuriasis",
+      "name": "Trichuriasis (whipworm)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -36544,6 +37160,28 @@
       }
     },
     {
+      "id": "analphalipoproteinemia",
+      "name": "Analphalipoproteinaemia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "andersen_tawil_syndrome",
       "name": "Andersen-Tawil syndrome",
       "specialty": "Neurology",
@@ -36680,6 +37318,28 @@
       "name": "Ataxic hemiparesis",
       "specialty": "Neurology",
       "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "atypical_teratoid_rhabdoid_tumor",
+      "name": "Atypical teratoid/rhabdoid tumour (SMARCB1)",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -37424,6 +38084,28 @@
       }
     },
     {
+      "id": "central_neurocytoma",
+      "name": "Central neurocytoma",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "centronuclear_myopathy",
       "name": "Centronuclear/myotubular myopathy",
       "specialty": "Neurology",
@@ -37688,10 +38370,54 @@
       }
     },
     {
+      "id": "chordoid_glioma",
+      "name": "Chordoid glioma of the third ventricle",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chorea_acanthocytosis",
       "name": "Chorea-acanthocytosis",
       "specialty": "Neurology",
       "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "choroid_plexus_carcinoma",
+      "name": "Choroid plexus carcinoma",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -37908,6 +38634,94 @@
       }
     },
     {
+      "id": "charcot_marie_tooth_1b",
+      "name": "CMT type 1B (MPZ)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "charcot_marie_tooth_2a",
+      "name": "CMT type 2A (MFN2, axonal)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "charcot_marie_tooth_type_4",
+      "name": "CMT type 4 (autosomal recessive demyelinating)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "charcot_marie_tooth_x",
+      "name": "CMT X-linked (GJB1/connexin 32)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "coffin_lowry_syndrome",
       "name": "Coffin-Lowry syndrome (RPS6KA3)",
       "specialty": "Neurology",
@@ -37954,6 +38768,28 @@
     {
       "id": "congenital_fiber_type_disproportion",
       "name": "Congenital fibre-type disproportion",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_hypomyelinating_neuropathy",
+      "name": "Congenital hypomyelinating neuropathy",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
       "tier": "reference",
@@ -38150,6 +38986,28 @@
       }
     },
     {
+      "id": "dejerine_sottas_disease",
+      "name": "Dejerine-Sottas disease (CMT3)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dementia_with_lewy_bodies",
       "name": "Dementia with Lewy Bodies",
       "specialty": "Neurology",
@@ -38282,6 +39140,50 @@
       }
     },
     {
+      "id": "distal_hereditary_motor_neuropathy_type5",
+      "name": "Distal hereditary motor neuropathy type V",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dominant_intermediate_cmt",
+      "name": "Dominant intermediate CMT",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dopa_responsive_dystonia",
       "name": "Dopa-responsive dystonia",
       "specialty": "Neurology",
@@ -38352,6 +39254,28 @@
       "name": "Dysarthria-clumsy hand syndrome",
       "specialty": "Neurology",
       "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dysembryoplastic_neuroepithelial_tumor",
+      "name": "Dysembryoplastic neuroepithelial tumour (DNET)",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -38986,6 +39910,50 @@
       }
     },
     {
+      "id": "gangliocytoma",
+      "name": "Gangliocytoma",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ganglioglioma",
+      "name": "Ganglioglioma",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ganser_syndrome",
       "name": "Ganser syndrome",
       "specialty": "Neurology",
@@ -39268,6 +40236,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hemangioblastoma",
+      "name": "Haemangioblastoma (VHL)",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -40420,6 +41410,28 @@
       "name": "Medial medullary (Dejerine) syndrome",
       "specialty": "Neurology",
       "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "medulloblastoma",
+      "name": "Medulloblastoma",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -41670,6 +42682,28 @@
       }
     },
     {
+      "id": "papillary_tumor_pineal_region",
+      "name": "Papillary tumour of the pineal region",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "paramyotonia_congenita",
       "name": "Paramyotonia congenita",
       "specialty": "Neurology",
@@ -41978,6 +43012,28 @@
       }
     },
     {
+      "id": "pineoblastoma",
+      "name": "Pineoblastoma",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pituitary_apoplexy",
       "name": "Pituitary apoplexy",
       "specialty": "Neurology",
@@ -42004,6 +43060,28 @@
       "name": "PLA2G6-associated neurodegeneration",
       "specialty": "Neurology",
       "system": "Nervous system / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pleomorphic_xanthoastrocytoma",
+      "name": "Pleomorphic xanthoastrocytoma (BRAF V600E)",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -42396,8 +43474,74 @@
       }
     },
     {
+      "id": "rosette_forming_glioneuronal_tumor",
+      "name": "Rosette-forming glioneuronal tumour",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "roussy_levy_syndrome",
+      "name": "Roussy-Levy syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sarcotubular_myopathy",
       "name": "Sarcotubular myopathy (TRIM32)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "scapuloperoneal_spinal_muscular_atrophy",
+      "name": "Scapuloperoneal spinal muscular atrophy",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
       "tier": "reference",
@@ -42730,6 +43874,28 @@
       "name": "Spinal epidural abscess",
       "specialty": "Neurology",
       "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "spinal_muscular_atrophy_lower_extremity",
+      "name": "Spinal muscular atrophy, lower-extremity predominant (DYNC1H1/BICD2)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -43122,6 +44288,28 @@
       }
     },
     {
+      "id": "subependymoma",
+      "name": "Subependymoma",
+      "specialty": "Neurology",
+      "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "superior_laryngeal_neuralgia",
       "name": "Superior laryngeal neuralgia",
       "specialty": "Neurology",
@@ -43214,6 +44402,28 @@
       "name": "Tabes dorsalis",
       "specialty": "Neurology",
       "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tangier_disease",
+      "name": "Tangier disease (ABCA1, analphalipoproteinaemia neuropathy)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -43729,6 +44939,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "x_linked_spinal_muscular_atrophy",
+      "name": "X-linked spinal muscular atrophy (UBA1)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
