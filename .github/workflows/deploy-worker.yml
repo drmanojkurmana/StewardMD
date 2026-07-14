@@ -32,6 +32,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cloudflare/wrangler-action@v3
+        env:
+          # wrangler 4 can't auto-list the account from a resource-scoped API token; supply it.
+          # Kept as a secret (wrangler.jsonc intentionally omits account_id from source control).
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           workingDirectory: worker
