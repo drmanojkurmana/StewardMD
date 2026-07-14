@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 4235,
+    "diseases": 4253,
     "diagnostic": 141,
-    "reference": 4094,
+    "reference": 4112,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 594,
+      "total": 597,
       "diagnostic": 20,
-      "reference": 574,
+      "reference": 577,
       "dims": {
-        "overview": 594,
-        "clinicalFeatures": 594,
-        "pathophysiology": 594,
-        "differential": 594,
-        "investigations": 594,
-        "redFlags": 594,
+        "overview": 597,
+        "clinicalFeatures": 597,
+        "pathophysiology": 597,
+        "differential": 597,
+        "investigations": 597,
+        "redFlags": 597,
         "severity": 48,
-        "prognosis": 594,
+        "prognosis": 597,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -140,18 +140,18 @@
       }
     },
     "GI / Hepatology": {
-      "total": 264,
+      "total": 268,
       "diagnostic": 19,
-      "reference": 245,
+      "reference": 249,
       "dims": {
-        "overview": 264,
-        "clinicalFeatures": 264,
-        "pathophysiology": 264,
-        "differential": 263,
-        "investigations": 264,
-        "redFlags": 264,
+        "overview": 268,
+        "clinicalFeatures": 268,
+        "pathophysiology": 268,
+        "differential": 267,
+        "investigations": 268,
+        "redFlags": 268,
         "severity": 44,
-        "prognosis": 262,
+        "prognosis": 266,
         "diagnosticScoring": 19,
         "management": 19,
         "drugTherapy": 18,
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 245,
+      "total": 248,
       "diagnostic": 7,
-      "reference": 238,
+      "reference": 241,
       "dims": {
-        "overview": 245,
-        "clinicalFeatures": 245,
-        "pathophysiology": 245,
-        "differential": 244,
-        "investigations": 245,
-        "redFlags": 245,
+        "overview": 248,
+        "clinicalFeatures": 248,
+        "pathophysiology": 248,
+        "differential": 247,
+        "investigations": 248,
+        "redFlags": 248,
         "severity": 29,
-        "prognosis": 245,
+        "prognosis": 248,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 475,
+      "total": 477,
       "diagnostic": 10,
-      "reference": 465,
+      "reference": 467,
       "dims": {
-        "overview": 475,
-        "clinicalFeatures": 475,
-        "pathophysiology": 475,
-        "differential": 474,
-        "investigations": 475,
-        "redFlags": 475,
+        "overview": 477,
+        "clinicalFeatures": 477,
+        "pathophysiology": 477,
+        "differential": 476,
+        "investigations": 477,
+        "redFlags": 477,
         "severity": 33,
-        "prognosis": 473,
+        "prognosis": 475,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -540,18 +540,18 @@
       }
     },
     "integumentary": {
-      "total": 15,
+      "total": 21,
       "diagnostic": 0,
-      "reference": 15,
+      "reference": 21,
       "dims": {
-        "overview": 15,
-        "clinicalFeatures": 15,
-        "pathophysiology": 15,
-        "differential": 15,
-        "investigations": 15,
-        "redFlags": 15,
+        "overview": 21,
+        "clinicalFeatures": 21,
+        "pathophysiology": 21,
+        "differential": 21,
+        "investigations": 21,
+        "redFlags": 21,
         "severity": 0,
-        "prognosis": 15,
+        "prognosis": 21,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -22624,6 +22624,28 @@
       }
     },
     {
+      "id": "phenylketonuria_maternal",
+      "name": "phenylketonuria maternal",
+      "specialty": "Endocrine / Metabolic",
+      "system": "metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pheochromocytoma",
       "name": "Pheochromocytoma",
       "specialty": "Endocrine / Metabolic",
@@ -25070,6 +25092,28 @@
       "name": "Type A insulin resistance syndrome",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tyrosinaemia",
+      "name": "tyrosinaemia",
+      "specialty": "Endocrine / Metabolic",
+      "system": "metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -38706,6 +38750,28 @@
       }
     },
     {
+      "id": "eosinophilic_proctocolitis_infant",
+      "name": "Eosinophilic proctocolitis of infancy",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "evaluation_of_liver_function",
       "name": "Evaluation of Liver Function",
       "specialty": "GI / Hepatology",
@@ -39828,6 +39894,28 @@
       }
     },
     {
+      "id": "hirschsprung_associated_enterocolitis",
+      "name": "Hirschsprung-associated enterocolitis",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hollow_visceral_myopathy",
       "name": "Hollow visceral myopathy (chronic intestinal pseudo-obstruction)",
       "specialty": "GI / Hepatology",
@@ -39964,6 +40052,28 @@
       "name": "Incisional hernia",
       "specialty": "GI / Hepatology",
       "system": "GI / Abdominal wall / Surgery",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "infant_dyschezia",
+      "name": "Infant dyschezia",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -42173,6 +42283,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "toddlers_diarrhoea",
+      "name": "Toddler's diarrhoea",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -44624,6 +44756,28 @@
       }
     },
     {
+      "id": "cutaneous_b_cell_lymphoma",
+      "name": "cutaneous b cell lymphoma",
+      "specialty": "Hematology",
+      "system": "Skin / Haematolymphoid",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cyclic_neutropenia",
       "name": "Cyclic neutropenia",
       "specialty": "Hematology",
@@ -46758,6 +46912,28 @@
       }
     },
     {
+      "id": "myeloperoxidase_deficiency",
+      "name": "myeloperoxidase deficiency",
+      "specialty": "Hematology",
+      "system": "Immune system / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "myh9_related_disorder",
       "name": "MYH9-related disorder",
       "specialty": "Hematology",
@@ -47873,6 +48049,28 @@
         "severity": true,
         "prognosis": true,
         "diagnosticScoring": true,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "specific_granule_deficiency",
+      "name": "specific granule deficiency",
+      "specialty": "Hematology",
+      "system": "Immune system / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
         "management": false,
         "drugTherapy": false,
         "dosing": false,
@@ -56526,8 +56724,52 @@
       }
     },
     {
+      "id": "aplasia_cutis_congenita",
+      "name": "aplasia cutis congenita",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "elastosis_perforans_serpiginosa",
       "name": "elastosis perforans serpiginosa",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "erythema_toxicum_neonatorum",
+      "name": "erythema toxicum neonatorum",
       "specialty": "integumentary",
       "system": "integumentary",
       "tier": "reference",
@@ -56570,8 +56812,52 @@
       }
     },
     {
+      "id": "infantile_acropustulosis",
+      "name": "infantile acropustulosis",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "infective_panniculitis",
       "name": "infective panniculitis",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "juvenile_plantar_dermatosis",
+      "name": "juvenile plantar dermatosis",
       "specialty": "integumentary",
       "system": "integumentary",
       "tier": "reference",
@@ -56616,6 +56902,28 @@
     {
       "id": "mucous_membrane_pemphigoid",
       "name": "mucous membrane pemphigoid",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "napkin_dermatitis",
+      "name": "napkin dermatitis",
       "specialty": "integumentary",
       "system": "integumentary",
       "tier": "reference",
@@ -56748,6 +57056,28 @@
     {
       "id": "subcutaneous_fat_necrosis_of_newborn",
       "name": "subcutaneous fat necrosis of newborn",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "transient_neonatal_pustular_melanosis",
+      "name": "transient neonatal pustular melanosis",
       "specialty": "integumentary",
       "system": "integumentary",
       "tier": "reference",
@@ -63788,6 +64118,28 @@
     {
       "id": "drug_induced_chorea",
       "name": "drug induced chorea",
+      "specialty": "Neurology",
+      "system": "nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "drug_induced_parkinsonism",
+      "name": "drug induced parkinsonism",
       "specialty": "Neurology",
       "system": "nervous system",
       "tier": "reference",
@@ -72586,10 +72938,54 @@
       }
     },
     {
+      "id": "tardive_akathisia",
+      "name": "tardive akathisia",
+      "specialty": "Neurology",
+      "system": "nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tardive_dyskinesia",
       "name": "Tardive dyskinesia",
       "specialty": "Neurology",
       "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tardive_dystonia",
+      "name": "tardive dystonia",
+      "specialty": "Neurology",
+      "system": "nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
