@@ -3673,6 +3673,14 @@
     var tasks = vm.tasks || [], tl = vm.timeline || [], pt = vm.patient || {};
     var open = tasks.filter(function (t) { return t.status !== "done"; }).length;
     var out = '<div class="icu-v2-collab">';
+    // Self-heal: the unit CREATOR should be its head. If they aren't (e.g. an older invite-link
+    // self-join demoted them), their round instructions post as plain notes, not tracked tasks —
+    // offer a one-tap restore so the team sees their instructions again.
+    if (_grp && _grp.myRole !== "head" && _grp.createdBy && typeof ownerNow === "function" && _grp.createdBy === ownerNow()) {
+      out += '<div class="icu-card" style="border-color:var(--warn)"><div class="icu-sec-lbl" style="color:var(--warn)">' + ico("warn", "⚠️") + " You are not this unit's head</div>" +
+        '<p class="icu-doc-sub" style="margin:0 0 10px">You created this unit, but your role here is ' + esc(grpRoleLabel(_grp.myRole)) + '. Restore yourself as Unit Head so your round instructions become tracked tasks for the team.</p>' +
+        '<button class="icu-btn" data-icu-act="grpreclaimhead">' + ico("user", "👑") + ' Restore me as Unit Head</button></div>';
+    }
     out += '<div class="icu-sec-lbl">' + ico("pulse", "🩺") + ' Shared unit — ' + esc((_grp && _grp.name) || "ICU") + '</div>';
     out += '<div class="icu-card"><h3>Instructions &amp; tasks <span class="icu-phase">' + open + ' open</span></h3>';
     if (tasks.length) {
@@ -3858,6 +3866,15 @@
       _grpErr = null; if (ICU.isOpen()) paint();
     });
   }
+  function grpReclaimHead() {
+    var api = groupsApi(); if (!api || !api.reclaimHead || !grpActive()) return;
+    api.reclaimHead(_grp.id).then(function () {
+      if (_grp) _grp.myRole = "head";                                  // optimistic — instructions work immediately
+      try { if (api.setActiveGroup) api.setActiveGroup(_grp.id, "head"); } catch (e) {}
+      if (window.toast) toast("You are now the Unit Head");
+      if (ICU.isOpen()) paint();
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t restore head — " + grpErrText(e)); if (ICU.isOpen()) paint(); });
+  }
   function grpDoDelete() {
     var api = groupsApi(); if (!api || !grpActive() || !api.deleteGroup) return;
     if ((_grp && _grp.myRole) !== "head") { if (window.toast) toast("Only the unit head can delete the unit"); return; }
@@ -3959,7 +3976,9 @@
    * and DOM-free — exposed as ICU._grp* test seams and unit-tested without Firestore.
    */
   // Common round instructions (editable). The prototype's exact set. Presets → tracked tasks.
-  var ROUND_PRESETS = ["Increase Noradrenaline", "Repeat ABG in 2 hours", "Maintain MAP above 65", "Nephrology review", "Reduce sedation", "Evening review"];
+  // Common consultant→resident instructions, tap-to-add (no typing). Procedures, investigations,
+  // lines, orders, referrals & monitoring — the everyday things asked on a round.
+  var ROUND_PRESETS = ["Do ABG", "Do ascitic tap", "Send CBNAAT", "Do dressing", "Send blood cultures", "Repeat CBC", "Do ECG", "Chest X-ray", "Insert central line", "Foley catheterisation", "Increase noradrenaline", "Maintain MAP > 65", "Nephrology referral", "Strict I/O charting", "Reduce sedation", "Review antibiotics"];
 
   // PURE: a chosen list of instructions → the tasks to create + the ONE summarising timeline
   // event (never one event per task). Instructors create tracked tasks; everyone else posts a
@@ -5784,6 +5803,7 @@
       case "grpinvrole": grpSetInvRole(arg); break;
       case "grpleave": grpDoLeave(); break;
       case "grpdelete": grpDoDelete(); break;
+      case "grpreclaimhead": grpReclaimHead(); break;
       case "grprm": grpDoRemove(decodeURIComponent(arg)); break;
       case "grpjoinaccept": grpDoJoinAccept(); break;
       case "grpjoindecline": grpDoJoinDecline(); break;

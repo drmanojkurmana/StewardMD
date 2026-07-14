@@ -649,15 +649,47 @@
         fs(function (db) {
           var uid = currentUid();
           if (!db || !uid) return reject(new Error("firestore-unavailable"));
-          invRef(db, gid, code).get().then(function (d) {
-            if (!d || !d.exists) return reject(new Error("invite-not-found"));
-            var inv = d.data() || {}, exp = tsToMs(inv.expiresAt);
-            if (exp != null && exp < nowMs()) return reject(new Error("invite-expired"));
-            var role = normInviteRole(inv.role);   // clamp — a link can never confer head/professor
-            var mdoc = { uid: uid, role: role, name: currentName(), addedBy: "link", joinedAt: fieldValue().serverTimestamp(), via: code };
-            track(memRef(db, gid, uid).set(mdoc)).then(function () { resolve(gid); }, reject);
-          }, reject);
+          function joinFresh() {
+            invRef(db, gid, code).get().then(function (d) {
+              if (!d || !d.exists) return reject(new Error("invite-not-found"));
+              var inv = d.data() || {}, exp = tsToMs(inv.expiresAt);
+              if (exp != null && exp < nowMs()) return reject(new Error("invite-expired"));
+              var role = normInviteRole(inv.role);   // clamp — a link can never confer head/professor
+              var mdoc = { uid: uid, role: role, name: currentName(), addedBy: "link", joinedAt: fieldValue().serverTimestamp(), via: code };
+              track(memRef(db, gid, uid).set(mdoc)).then(function () { resolve(gid); }, reject);
+            }, reject);
+          }
+          // NEVER let clicking an invite DEMOTE an existing member (e.g. the unit head opening their
+          // own link, which previously overwrote their head member doc → junior_resident). If already
+          // a member, joining is a no-op — keep the current role.
+          memRef(db, gid, uid).get().then(function (mine) {
+            if (mine && mine.exists) { resolve(gid); return; }
+            joinFresh();
+          }, function () { joinFresh(); });
         });
+      });
+    });
+  }
+  // Creator self-heal: restore the unit CREATOR to head if they somehow lost it (e.g. an older
+  // self-join demotion). Rules-safe: a member may delete their own non-head doc, and the creator may
+  // bootstrap-create a head doc (createdBy == self). No-op if already head or not the creator.
+  function reclaimHead(gid) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        var uid = currentUid();
+        if (!db || !uid) return reject(new Error("firestore-unavailable"));
+        grpRef(db, gid).get().then(function (g) {
+          if (!g || !g.exists || (g.data() || {}).createdBy !== uid) return reject(new Error("not-the-creator"));
+          var mref = memRef(db, gid, uid);
+          var head = { uid: uid, role: "head", name: currentName(), addedBy: uid, joinedAt: fieldValue().serverTimestamp() };
+          function makeHead() { track(mref.set(head)).then(function () { resolve("head"); }, reject); }
+          mref.get().then(function (m) {
+            if (m && m.exists && (m.data() || {}).role === "head") { resolve("head"); return; }   // already head
+            if (m && m.exists) { track(mref.delete()).then(makeHead, reject); }                    // demoted → delete stale, re-create as head
+            else { makeHead(); }                                                                   // no member doc → bootstrap head
+          }, reject);
+        }, reject);
       });
     });
   }
@@ -879,6 +911,7 @@
     createInvite: createInvite,
     getInvite: getInvite,
     joinByInvite: joinByInvite,
+    reclaimHead: reclaimHead,
     inviteUrl: inviteUrl,
     // patients
     subscribePatients: subscribePatients,
