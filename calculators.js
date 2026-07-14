@@ -3027,6 +3027,170 @@
       if(!ok(v.gcs)||v.gcs<3||v.gcs>15) return ERR;
       var s=v.gcs-Number(v.pupils);
       return { v:s, u:"", i:"GCS-Pupils score (range 1–15); lower values indicate greater severity and worse prognosis. Ref: Brennan & Murray, J Neurosurg 2018." };
+    } },
+
+  { id:"charlson", cat:"General", icon:"⚖️", title:"Charlson Comorbidity Index",
+    desc:"Comorbidity burden and 10-year survival estimate (age-adjusted).",
+    inputs:[
+      { id:"mi", label:"Myocardial infarction", type:"check" },
+      { id:"chf", label:"Congestive heart failure", type:"check" },
+      { id:"pvd", label:"Peripheral vascular disease", type:"check" },
+      { id:"cvd", label:"Cerebrovascular disease (stroke/TIA)", type:"check" },
+      { id:"dementia", label:"Dementia", type:"check" },
+      { id:"copd", label:"Chronic pulmonary disease", type:"check" },
+      { id:"ctd", label:"Connective tissue disease", type:"check" },
+      { id:"pud", label:"Peptic ulcer disease", type:"check" },
+      { id:"hemi", label:"Hemiplegia (+2)", type:"check" },
+      { id:"renal", label:"Moderate–severe renal disease (+2)", type:"check" },
+      { id:"aids", label:"AIDS (+6)", type:"check" },
+      { id:"dm", label:"Diabetes", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Uncomplicated"},{v:"2",t:"With end-organ damage"}] },
+      { id:"liver", label:"Liver disease", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"3",t:"Moderate–severe"}] },
+      { id:"malig", label:"Malignancy", type:"select", opts:[{v:"0",t:"None"},{v:"2",t:"Localised solid tumour, leukaemia or lymphoma"},{v:"6",t:"Metastatic solid tumour"}] },
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"< 50"},{v:"1",t:"50–59"},{v:"2",t:"60–69"},{v:"3",t:"70–79"},{v:"4",t:"≥ 80"}] }
+    ],
+    compute:function(v){
+      var s=0; ["mi","chf","pvd","cvd","dementia","copd","ctd","pud"].forEach(function(k){ if(v[k])s++; });
+      if(v.hemi)s+=2; if(v.renal)s+=2; if(v.aids)s+=6;
+      s+=Number(v.dm)+Number(v.liver)+Number(v.malig)+Number(v.age);
+      var surv=s===0?"~98%":s<=2?"~90%":s<=4?"~50%":"~20% or lower";
+      return { v:s, u:"points", i:"Estimated 10-year survival "+surv+" (age-adjusted CCI; higher = greater comorbidity). Ref: Charlson, J Chronic Dis 1987." };
+    } },
+
+  { id:"add_rs", cat:"Cardiovascular", icon:"❤️", title:"Aortic Dissection Detection Risk Score (ADD-RS)",
+    desc:"Pre-test risk of acute aortic dissection.",
+    inputs:[
+      { id:"predispose", label:"High-risk condition (Marfan, family history, known aortic/valve disease, recent aortic manipulation, thoracic aneurysm)", type:"check" },
+      { id:"pain", label:"High-risk pain (abrupt onset, severe, or ripping/tearing chest/back/abdominal pain)", type:"check" },
+      { id:"exam", label:"High-risk exam (pulse deficit / SBP differential, focal neurological deficit with pain, new aortic regurgitation murmur, hypotension/shock)", type:"check" }
+    ],
+    compute:function(v){
+      var s=(v.predispose?1:0)+(v.pain?1:0)+(v.exam?1:0);
+      var b=s===0?"Low risk — consider D-dimer / alternative diagnoses":s===1?"Intermediate risk — D-dimer or imaging per pathway":"High risk — proceed to definitive aortic imaging";
+      return { v:s, u:"/3", i:b+". Ref: Rogers, Circulation 2011 (ADD-RS)." };
+    } },
+
+  { id:"hat", cat:"Neurology", icon:"🧠", title:"HAT Score (Haemorrhage After Thrombolysis)",
+    desc:"Risk of symptomatic intracranial haemorrhage after IV thrombolysis.",
+    inputs:[
+      { id:"nihss", label:"NIHSS", type:"select", opts:[{v:"0",t:"< 10"},{v:"1",t:"10–19"},{v:"2",t:"≥ 20"}] },
+      { id:"glu", label:"Glucose > 200 mg/dL (> 11.1 mmol/L) or known diabetes", type:"check" },
+      { id:"ct", label:"Hypodensity on baseline CT", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"< 1/3 MCA territory"},{v:"2",t:"≥ 1/3 MCA territory"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.nihss)+(v.glu?1:0)+Number(v.ct);
+      var b=s<=1?"Lower risk of symptomatic haemorrhage":s<=2?"Intermediate risk":"High risk of symptomatic haemorrhage";
+      return { v:s, u:"/5", i:b+". Ref: Lou, Neurology 2008 (HAT)." };
+    } },
+
+  { id:"feua", cat:"Renal", icon:"🫘", title:"Fractional Excretion of Uric Acid (FEUA)",
+    desc:"Renal urate handling (e.g. in the work-up of hyponatraemia).",
+    inputs:[
+      { id:"uua", label:"Urine uric acid", type:"number", unit:"mmol/L", step:"0.01" },
+      { id:"pcr", label:"Plasma creatinine", type:"number", unit:"µmol/L", step:"1" },
+      { id:"pua", label:"Plasma uric acid", type:"number", unit:"mmol/L", step:"0.01" },
+      { id:"ucr", label:"Urine creatinine (same units as plasma)", type:"number", unit:"µmol/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.uua)||!ok(v.pcr)||!ok(v.pua)||!ok(v.ucr)||v.pua<=0||v.ucr<=0) return ERR;
+      var fe=(v.uua*v.pcr)/(v.pua*v.ucr)*100;
+      var b=fe>11?"Elevated — seen in SIADH and renal urate wasting":"Normal or low fractional excretion";
+      return { v:r1(fe), u:"%", i:b+" (enter both creatinines in the same unit). Ref: standard nephrology." };
+    } },
+
+  { id:"mdq", cat:"Psychiatry", icon:"🧠", title:"Mood Disorder Questionnaire (MDQ)",
+    desc:"Screens for a lifetime history of bipolar spectrum disorder.",
+    inputs:[
+      { id:"q1", label:"Felt so good/hyper others thought you were not normal, or got into trouble", type:"check" },
+      { id:"q2", label:"So irritable you shouted or started fights", type:"check" },
+      { id:"q3", label:"Felt much more self-confident than usual", type:"check" },
+      { id:"q4", label:"Got much less sleep and did not miss it", type:"check" },
+      { id:"q5", label:"Much more talkative or spoke faster than usual", type:"check" },
+      { id:"q6", label:"Thoughts raced or you could not slow your mind", type:"check" },
+      { id:"q7", label:"So easily distracted you had trouble concentrating", type:"check" },
+      { id:"q8", label:"Much more energy than usual", type:"check" },
+      { id:"q9", label:"Much more active or did many more things", type:"check" },
+      { id:"q10", label:"Much more social or outgoing", type:"check" },
+      { id:"q11", label:"Much more interested in sex", type:"check" },
+      { id:"q12", label:"Did things unusual, excessive or risky for you", type:"check" },
+      { id:"q13", label:"Spending money got you or your family into trouble", type:"check" },
+      { id:"same", label:"Several of these ever happened during the SAME time period", type:"check" },
+      { id:"problem", label:"Problem severity caused", type:"select", opts:[{v:"0",t:"No problem"},{v:"1",t:"Minor problem"},{v:"2",t:"Moderate problem"},{v:"3",t:"Serious problem"}] }
+    ],
+    compute:function(v){
+      var n=0; for(var i=1;i<=13;i++) if(v["q"+i]) n++;
+      var pos=n>=7 && v.same && Number(v.problem)>=2;
+      return { v: pos?"Positive screen ("+n+"/13)":"Negative screen ("+n+"/13)", u:"", i:(pos?"Suggestive of a bipolar spectrum disorder — warrants clinical evaluation":"Below the MDQ threshold (needs ≥7 symptoms, same time period, and at least moderate problems)")+". A screen, not a diagnosis. Ref: Hirschfeld, Am J Psychiatry 2000 (MDQ)." };
+    } },
+
+  { id:"eutos", cat:"Haematology", icon:"🩸", title:"EUTOS Score (Chronic Myeloid Leukaemia)",
+    desc:"Predicts response and progression-free survival in CML at diagnosis.",
+    inputs:[
+      { id:"baso", label:"Peripheral blood basophils", type:"number", unit:"%", step:"0.1" },
+      { id:"spleen", label:"Spleen size below costal margin", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.baso)||!ok(v.spleen)||v.baso<0||v.spleen<0) return ERR;
+      var s=7*v.baso+4*v.spleen;
+      var b=s>87?"High risk":"Low risk";
+      return { v:r0(s), u:"", i:b+" (threshold 87). Ref: Hasford, Blood 2011 (EUTOS)." };
+    } },
+
+  { id:"chads2", cat:"Cardiovascular", icon:"❤️", title:"CHADS₂ Score",
+    desc:"Stroke risk in non-valvular atrial fibrillation (predecessor of CHA₂DS₂-VASc).",
+    inputs:[
+      { id:"chf", label:"Congestive heart failure", type:"check" },
+      { id:"htn", label:"Hypertension", type:"check" },
+      { id:"age75", label:"Age ≥ 75 years", type:"check" },
+      { id:"dm", label:"Diabetes mellitus", type:"check" },
+      { id:"stroke", label:"Prior stroke / TIA / thromboembolism (2 points)", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.chf)s++; if(v.htn)s++; if(v.age75)s++; if(v.dm)s++; if(v.stroke)s+=2;
+      var b=s===0?"Low risk":s===1?"Low–moderate risk":"Moderate–high risk — anticoagulation usually indicated";
+      return { v:s, u:"points", i:b+". CHA₂DS₂-VASc is now generally preferred. Ref: Gage, JAMA 2001." };
+    } },
+
+  { id:"ca_phos_product", cat:"Renal", icon:"🦴", title:"Calcium-Phosphate Product",
+    desc:"Calcium × phosphate product (CKD-mineral and bone disorder).",
+    inputs:[
+      { id:"ca", label:"Calcium (corrected)", type:"number", unit:"mmol/L", step:"0.01" },
+      { id:"phos", label:"Phosphate", type:"number", unit:"mmol/L", step:"0.01" }
+    ],
+    compute:function(v){
+      if(!ok(v.ca)||!ok(v.phos)||v.ca<0||v.phos<0) return ERR;
+      var p=v.ca*v.phos;
+      var b=p>4.4?"Elevated — increased risk of vascular / soft-tissue calcification":"Within the usually acceptable range";
+      return { v:r1(p), u:"mmol²/L²", i:b+" (units mmol²/L²). Ref: KDIGO CKD-MBD guidance." };
+    } },
+
+  { id:"pecarn_head", cat:"Paediatrics", icon:"👶", title:"PECARN Paediatric Head Injury Rule",
+    desc:"Need for CT after minor head trauma (GCS ≥ 14). Use the row for the child's age.",
+    inputs:[
+      { id:"age", label:"Age group", type:"select", opts:[{v:"lt2",t:"< 2 years"},{v:"ge2",t:"≥ 2 years"}] },
+      { id:"high", label:"High-risk: GCS ≤14, altered mental status, or (<2y) palpable skull fracture / (≥2y) signs of basilar skull fracture", type:"check" },
+      { id:"inter", label:"Intermediate: (<2y) occipital/parietal/temporal haematoma, LOC ≥5s, severe mechanism, not acting normally per parent; (≥2y) any LOC, vomiting, severe mechanism, or severe headache", type:"check" }
+    ],
+    compute:function(v){
+      if(v.high) return { v:"CT recommended", u:"", i:"High-risk predictor present — head CT recommended (higher risk of clinically important TBI). Ref: Kuppermann, Lancet 2009 (PECARN)." };
+      if(v.inter) return { v:"Observation vs CT", u:"", i:"Intermediate risk — observation or CT via shared decision-making (clinician experience, clinical worsening, parental preference, multiple findings). Ref: PECARN 2009." };
+      return { v:"CT not recommended", u:"", i:"No PECARN predictors — very low risk of clinically important TBI; CT not routinely recommended. Ref: PECARN 2009." };
+    } },
+
+  { id:"berlin_ards", cat:"Critical care", icon:"🫁", title:"Berlin Definition (ARDS)",
+    desc:"Diagnosis and severity grading of acute respiratory distress syndrome.",
+    inputs:[
+      { id:"timing", label:"Onset within 1 week of insult / worsening symptoms", type:"check" },
+      { id:"imaging", label:"Bilateral opacities not fully explained by effusions/collapse/nodules", type:"check" },
+      { id:"origin", label:"Not fully explained by cardiac failure / fluid overload", type:"check" },
+      { id:"peep", label:"PEEP / CPAP ≥ 5 cmH₂O", type:"check" },
+      { id:"pf", label:"PaO₂/FiO₂ ratio", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.pf)||v.pf<=0) return ERR;
+      if(!(v.timing&&v.imaging&&v.origin&&v.peep)) return { v:"Criteria not met", u:"", i:"All of: acute timing, bilateral opacities, non-cardiac origin, and PEEP ≥5 are required to define ARDS. Ref: ARDS Definition Task Force, JAMA 2012." };
+      if(v.pf>300) return { v:"Does not meet ARDS", u:"", i:"PaO₂/FiO₂ > 300 on PEEP ≥5 is above the ARDS threshold. Ref: Berlin 2012." };
+      var sev=v.pf>200?"Mild ARDS":v.pf>100?"Moderate ARDS":"Severe ARDS";
+      return { v:sev, u:"", i:"ARDS confirmed on PEEP ≥5. Mild 200–300, moderate 100–200, severe ≤100. Ref: Berlin 2012." };
     } }
 
   ];
@@ -3184,7 +3348,17 @@
     hunter_serotonin:["hunter criteria","serotonin syndrome","serotonin toxicity","serotonin"],
     ganzoni:["ganzoni","iron deficit","total iron dose","iron replacement dose"],
     fepo4:["fractional excretion of phosphate","fepo4","phosphate wasting","renal phosphate"],
-    gcs_p:["gcs pupils","gcs-p","glasgow coma pupils","gcsp"]
+    gcs_p:["gcs pupils","gcs-p","glasgow coma pupils","gcsp"],
+    charlson:["charlson comorbidity index","cci","comorbidity index","10 year survival"],
+    add_rs:["aortic dissection detection","add-rs","aortic dissection risk","dissection score"],
+    hat:["hat score","haemorrhage after thrombolysis","hemorrhage after thrombolysis","sich risk tpa"],
+    feua:["fractional excretion of uric acid","feua","urate excretion","siadh urate"],
+    mdq:["mood disorder questionnaire","mdq","bipolar screen","bipolar screening"],
+    eutos:["eutos score","cml prognosis","chronic myeloid leukaemia risk","chronic myeloid leukemia score"],
+    chads2:["chads2","cha ds2","af stroke risk","atrial fibrillation stroke"],
+    ca_phos_product:["calcium phosphate product","ca x po4","calcium phosphorus product","ckd mbd"],
+    pecarn_head:["pecarn","paediatric head injury","pediatric head ct","child head trauma ct"],
+    berlin_ards:["berlin definition","ards","ards severity","acute respiratory distress syndrome"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -3297,7 +3471,17 @@
     hunter_serotonin:"Dunkley EJC, et al. QJM 2003;96(9):635–42 (Hunter).",
     ganzoni:"Ganzoni AM. Schweiz Med Wochenschr 1970;100(7):301–3.",
     fepo4:"Standard nephrology reference (fractional excretion).",
-    gcs_p:"Brennan PM, Murray GD, Teasdale GM. J Neurosurg 2018;128(6):1612–20."
+    gcs_p:"Brennan PM, Murray GD, Teasdale GM. J Neurosurg 2018;128(6):1612–20.",
+    charlson:"Charlson ME, et al. J Chronic Dis 1987;40(5):373–83.",
+    add_rs:"Rogers AM, et al. Circulation 2011;123(20):2213–8 (ADD-RS).",
+    hat:"Lou M, et al. Neurology 2008;71(18):1417–23 (HAT).",
+    feua:"Standard nephrology reference (fractional excretion of urate).",
+    mdq:"Hirschfeld RMA, et al. Am J Psychiatry 2000;157(11):1873–5 (MDQ).",
+    eutos:"Hasford J, et al. Blood 2011;118(3):686–92 (EUTOS).",
+    chads2:"Gage BF, et al. JAMA 2001;285(22):2864–70.",
+    ca_phos_product:"KDIGO CKD-MBD Work Group. Kidney Int Suppl 2009/2017.",
+    pecarn_head:"Kuppermann N, et al. Lancet 2009;374(9696):1160–70 (PECARN).",
+    berlin_ards:"ARDS Definition Task Force. JAMA 2012;307(23):2526–33 (Berlin)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
