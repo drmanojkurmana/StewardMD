@@ -2303,6 +2303,206 @@
       var dr = (v.ag - 12)/(24 - v.hco3);
       var b = dr<0.4?"Suggests a concurrent normal anion gap metabolic acidosis":dr<=1?"Combined high- and normal-AG metabolic acidosis":dr<=2?"Pure high anion gap metabolic acidosis":"Suggests a concurrent metabolic alkalosis or chronic respiratory acidosis";
       return { v:r1(dr), u:"", i:b+". Ref: standard acid-base." };
+    } },
+
+  { id:"naranjo", cat:"Toxicology", icon:"💊", title:"Naranjo Adverse Drug Reaction Probability Scale",
+    desc:"Likelihood that a clinical event is an adverse drug reaction.",
+    inputs:[
+      { id:"q1", label:"Previous conclusive reports on this reaction?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"1",t:"Yes"}] },
+      { id:"q2", label:"Event appeared after the drug was given?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"2",t:"Yes"}] },
+      { id:"q3", label:"Improved when drug stopped or antagonist given?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"1",t:"Yes"}] },
+      { id:"q4", label:"Reappeared when drug re-administered?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"2",t:"Yes"}] },
+      { id:"q5", label:"Alternative causes could explain it?", type:"select", opts:[{v:"2",t:"No"},{v:"0",t:"Unknown"},{v:"-1",t:"Yes"}] },
+      { id:"q6", label:"Reappeared on placebo?", type:"select", opts:[{v:"1",t:"No"},{v:"0",t:"Unknown"},{v:"-1",t:"Yes"}] },
+      { id:"q7", label:"Drug detected in toxic concentration?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"1",t:"Yes"}] },
+      { id:"q8", label:"More severe with higher dose / less with lower?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"1",t:"Yes"}] },
+      { id:"q9", label:"Similar reaction to the same/similar drug before?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"1",t:"Yes"}] },
+      { id:"q10", label:"Confirmed by any objective evidence?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"1",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.q1)+Number(v.q2)+Number(v.q3)+Number(v.q4)+Number(v.q5)+Number(v.q6)+Number(v.q7)+Number(v.q8)+Number(v.q9)+Number(v.q10);
+      var b=s>=9?"Definite ADR":s>=5?"Probable ADR":s>=1?"Possible ADR":"Doubtful ADR";
+      return { v:s, u:"points", i:b+". Ref: Naranjo, Clin Pharmacol Ther 1981." };
+    } },
+
+  { id:"glasgow_7point", cat:"Dermatology", icon:"🩹", title:"Glasgow 7-Point Checklist (Melanoma)",
+    desc:"Screening of a pigmented skin lesion for referral.",
+    inputs:[
+      { id:"size", label:"Major: change in size", type:"check" },
+      { id:"shape", label:"Major: irregular shape", type:"check" },
+      { id:"colour", label:"Major: irregular colour", type:"check" },
+      { id:"diam", label:"Minor: diameter ≥ 7 mm", type:"check" },
+      { id:"inflam", label:"Minor: inflammation", type:"check" },
+      { id:"ooze", label:"Minor: oozing / crusting", type:"check" },
+      { id:"sensory", label:"Minor: change in sensation", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.size)s+=2; if(v.shape)s+=2; if(v.colour)s+=2; if(v.diam)s++; if(v.inflam)s++; if(v.ooze)s++; if(v.sensory)s++;
+      var b=s>=3?"Refer for specialist assessment (suspicious for melanoma)":"Lower suspicion — assess clinically and safety-net";
+      return { v:s, u:"points", i:b+". Any major feature warrants concern. Ref: MacKie (Glasgow 7-point)." };
+    } },
+
+  { id:"dlqi", cat:"Dermatology", icon:"🩹", title:"Dermatology Life Quality Index (DLQI)",
+    desc:"Impact of skin disease on quality of life over the past week.",
+    inputs:[
+      { id:"q1", label:"Itchy, sore, painful or stinging skin", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
+      { id:"q2", label:"Embarrassed or self-conscious", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
+      { id:"q3", label:"Interfered with shopping / home / garden", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
+      { id:"q4", label:"Influenced the clothes you wore", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
+      { id:"q5", label:"Affected social or leisure activities", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
+      { id:"q6", label:"Made it difficult to do sport", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
+      { id:"q7", label:"Prevented working or studying", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
+      { id:"q8", label:"Problems with partner / friends / relatives", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
+      { id:"q9", label:"Caused sexual difficulties", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
+      { id:"q10", label:"Treatment was a problem (time / mess)", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] }
+    ],
+    compute:function(v){
+      var s=0; for(var i=1;i<=10;i++) s+=Number(v["q"+i]);
+      var b=s<=1?"No effect on the patient's life":s<=5?"Small effect":s<=10?"Moderate effect":s<=20?"Very large effect":"Extremely large effect";
+      return { v:s, u:"/30", i:b+". Ref: Finlay & Khan, Clin Exp Dermatol 1994." };
+    } },
+
+  { id:"bpp", cat:"Obstetrics", icon:"🤰", title:"Biophysical Profile (BPP)",
+    desc:"Fetal wellbeing from ultrasound components plus the non-stress test.",
+    inputs:[
+      { id:"breath", label:"Fetal breathing movements present", type:"check" },
+      { id:"move", label:"Gross body movements present", type:"check" },
+      { id:"tone", label:"Fetal tone (flexion/extension) present", type:"check" },
+      { id:"fluid", label:"Adequate amniotic fluid volume", type:"check" },
+      { id:"nst", label:"Reactive non-stress test", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.breath)s+=2; if(v.move)s+=2; if(v.tone)s+=2; if(v.fluid)s+=2; if(v.nst)s+=2;
+      var b=s>=8?"Normal (low risk of fetal asphyxia)":s===6?"Equivocal — repeat / further assessment":"Abnormal — consider delivery per obstetric judgement";
+      return { v:s, u:"/10", i:b+". Ref: Manning, Am J Obstet Gynecol 1980." };
+    } },
+
+  { id:"calvert", cat:"Oncology", icon:"🎗️", title:"Calvert Formula (Carboplatin Dose)",
+    desc:"Carboplatin dose from target AUC and GFR.",
+    inputs:[
+      { id:"auc", label:"Target AUC", type:"number", unit:"mg/mL·min", step:"0.1" },
+      { id:"gfr", label:"GFR", type:"number", unit:"mL/min", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.auc)||!ok(v.gfr)||v.auc<=0||v.gfr<0) return ERR;
+      var g=v.gfr, note="";
+      if(g>125){ g=125; note=" (GFR capped at 125 mL/min to avoid overdosing)"; }
+      var dose=v.auc*(g+25);
+      return { v:r0(dose), u:"mg", i:"Total carboplatin dose"+note+". Always verify against local chemotherapy protocol. Ref: Calvert, J Clin Oncol 1989." };
+    } },
+
+  { id:"mirels", cat:"Oncology", icon:"🦴", title:"Mirels Score (Pathological Fracture Risk)",
+    desc:"Fracture risk of a long-bone metastasis.",
+    inputs:[
+      { id:"site", label:"Site", type:"select", opts:[{v:"1",t:"Upper limb"},{v:"2",t:"Lower limb"},{v:"3",t:"Peritrochanteric"}] },
+      { id:"pain", label:"Pain", type:"select", opts:[{v:"1",t:"Mild"},{v:"2",t:"Moderate"},{v:"3",t:"Functional / severe"}] },
+      { id:"lesion", label:"Lesion type", type:"select", opts:[{v:"1",t:"Blastic"},{v:"2",t:"Mixed"},{v:"3",t:"Lytic"}] },
+      { id:"size", label:"Size (fraction of cortex involved)", type:"select", opts:[{v:"1",t:"< 1/3"},{v:"2",t:"1/3–2/3"},{v:"3",t:"> 2/3"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.site)+Number(v.pain)+Number(v.lesion)+Number(v.size);
+      var b=s>=9?"Impending fracture — prophylactic fixation generally recommended":s===8?"Borderline — consider fixation":"Lower risk — radiotherapy/observation may be appropriate";
+      return { v:s, u:"points", i:b+". Ref: Mirels, Clin Orthop Relat Res 1989." };
+    } },
+
+  { id:"epds", cat:"Psychiatry", icon:"🧠", title:"Edinburgh Postnatal Depression Scale (EPDS)",
+    desc:"Screens for perinatal depression (past 7 days).",
+    inputs:[
+      { id:"q1", label:"Able to laugh and see the funny side", type:"select", opts:[{v:"0",t:"As much as always"},{v:"1",t:"Not quite so much"},{v:"2",t:"Definitely less"},{v:"3",t:"Not at all"}] },
+      { id:"q2", label:"Looked forward to things with enjoyment", type:"select", opts:[{v:"0",t:"As much as ever"},{v:"1",t:"Rather less"},{v:"2",t:"Definitely less"},{v:"3",t:"Hardly at all"}] },
+      { id:"q3", label:"Blamed myself unnecessarily when things went wrong", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Not very often"},{v:"2",t:"Yes, some of the time"},{v:"3",t:"Yes, most of the time"}] },
+      { id:"q4", label:"Anxious or worried for no good reason", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Hardly ever"},{v:"2",t:"Yes, sometimes"},{v:"3",t:"Yes, very often"}] },
+      { id:"q5", label:"Scared or panicky for no good reason", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"No, not much"},{v:"2",t:"Yes, sometimes"},{v:"3",t:"Yes, quite a lot"}] },
+      { id:"q6", label:"Things have been getting on top of me", type:"select", opts:[{v:"0",t:"Coping as well as ever"},{v:"1",t:"Mostly coping"},{v:"2",t:"Not coping at times"},{v:"3",t:"Not coping at all"}] },
+      { id:"q7", label:"So unhappy I had difficulty sleeping", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Not very often"},{v:"2",t:"Yes, sometimes"},{v:"3",t:"Yes, most of the time"}] },
+      { id:"q8", label:"Felt sad or miserable", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Not very often"},{v:"2",t:"Yes, quite often"},{v:"3",t:"Yes, most of the time"}] },
+      { id:"q9", label:"So unhappy that I have been crying", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Only occasionally"},{v:"2",t:"Yes, quite often"},{v:"3",t:"Yes, most of the time"}] },
+      { id:"q10", label:"Thought of harming myself", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Hardly ever"},{v:"2",t:"Sometimes"},{v:"3",t:"Yes, quite often"}] }
+    ],
+    compute:function(v){
+      var s=0; for(var i=1;i<=10;i++) s+=Number(v["q"+i]);
+      var self=Number(v.q10)>0;
+      var b=s>=13?"Probable depression — further assessment indicated":s>=10?"Possible depression — consider follow-up":"Lower likelihood of depression";
+      return { v:s, u:"/30", i:b+(self?". POSITIVE self-harm item — assess safety urgently":"")+". Ref: Cox, Br J Psychiatry 1987." };
+    } },
+
+  { id:"gds15", cat:"Psychiatry", icon:"🧠", title:"Geriatric Depression Scale (GDS-15)",
+    desc:"Depression screen in older adults. Tick each item that is TRUE for the patient.",
+    inputs:[
+      { id:"ga", label:"NOT satisfied with your life", type:"check" },
+      { id:"gb", label:"Dropped many activities and interests", type:"check" },
+      { id:"gc", label:"Feel that your life is empty", type:"check" },
+      { id:"gd", label:"Often get bored", type:"check" },
+      { id:"ge", label:"NOT in good spirits most of the time", type:"check" },
+      { id:"gf", label:"Afraid something bad will happen to you", type:"check" },
+      { id:"gg", label:"NOT feeling happy most of the time", type:"check" },
+      { id:"gh", label:"Often feel helpless", type:"check" },
+      { id:"gi", label:"Prefer to stay in rather than go out", type:"check" },
+      { id:"gj", label:"More problems with memory than most", type:"check" },
+      { id:"gk", label:"NOT think it wonderful to be alive now", type:"check" },
+      { id:"gl", label:"Feel worthless the way you are now", type:"check" },
+      { id:"gm", label:"NOT feeling full of energy", type:"check" },
+      { id:"gn", label:"Feel your situation is hopeless", type:"check" },
+      { id:"go", label:"Think most people are better off than you", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; ["ga","gb","gc","gd","ge","gf","gg","gh","gi","gj","gk","gl","gm","gn","go"].forEach(function(k){ if(v[k]) s++; });
+      var b=s<=4?"Normal":s<=8?"Mild depression":s<=11?"Moderate depression":"Severe depression";
+      return { v:s, u:"/15", i:b+". Ref: Sheikh & Yesavage, 1986 (GDS-15)." };
+    } },
+
+  { id:"karnofsky", cat:"Oncology", icon:"🎗️", title:"Karnofsky Performance Status",
+    desc:"Functional status in cancer / palliative care.",
+    inputs:[
+      { id:"kps", label:"Performance status", type:"select", opts:[
+        {v:"100",t:"100 — Normal, no complaints"},{v:"90",t:"90 — Minor symptoms"},{v:"80",t:"80 — Normal activity with effort"},
+        {v:"70",t:"70 — Cares for self, cannot work"},{v:"60",t:"60 — Needs occasional assistance"},{v:"50",t:"50 — Needs considerable assistance"},
+        {v:"40",t:"40 — Disabled, needs special care"},{v:"30",t:"30 — Severely disabled"},{v:"20",t:"20 — Very sick, active support needed"},
+        {v:"10",t:"10 — Moribund"},{v:"0",t:"0 — Dead"} ] }
+    ],
+    compute:function(v){
+      var k=Number(v.kps);
+      var b=k>=80?"Able to carry on normal activity; no special care needed":k>=50?"Unable to work; lives at home, varying assistance needed":"Unable to care for self; institutional or hospital care needed";
+      return { v:k, u:"%", i:b+". Ref: Karnofsky & Burchenal 1949." };
+    } },
+
+  { id:"ecog", cat:"Oncology", icon:"🎗️", title:"ECOG Performance Status",
+    desc:"Functional status grade used in oncology.",
+    inputs:[
+      { id:"ps", label:"ECOG grade", type:"select", opts:[
+        {v:"0",t:"0 — Fully active"},{v:"1",t:"1 — Restricted in strenuous activity, ambulatory"},{v:"2",t:"2 — Ambulatory, self-care, up >50% of waking hours"},
+        {v:"3",t:"3 — Limited self-care, confined to bed/chair >50%"},{v:"4",t:"4 — Completely disabled, no self-care"},{v:"5",t:"5 — Dead"} ] }
+    ],
+    compute:function(v){
+      var e=Number(v.ps);
+      var m={0:"Fully active, able to carry on all pre-disease activity",1:"Restricted in strenuous activity but ambulatory and able to do light work",2:"Ambulatory and capable of self-care but unable to work; up >50% of waking hours",3:"Capable of only limited self-care; confined to bed or chair >50% of waking hours",4:"Completely disabled; cannot carry on any self-care; totally confined",5:"Dead"};
+      return { v:e, u:"", i:m[e]+". Ref: Oken, Am J Clin Oncol 1982 (ECOG)." };
+    } },
+
+  { id:"logmar", cat:"Ophthalmology", icon:"👁️", title:"Snellen → logMAR Conversion",
+    desc:"Converts imperial Snellen acuity (20/D) to a logMAR value.",
+    inputs:[
+      { id:"d", label:"Snellen denominator (the D in 20/D)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.d)||v.d<=0) return ERR;
+      var lm=Math.log10(v.d/20);
+      var metric=r0(v.d*0.3);
+      return { v:r1(lm), u:"logMAR", i:"Metric equivalent ≈ 6/"+metric+". Higher logMAR = worse acuity (0.0 = 20/20). Ref: standard optotype conversion." };
+    } },
+
+  { id:"rass", cat:"Critical care", icon:"🚨", title:"Richmond Agitation-Sedation Scale (RASS)",
+    desc:"Level of agitation or sedation in critically ill patients.",
+    inputs:[
+      { id:"rass", label:"Observed state", type:"select", opts:[
+        {v:"4",t:"+4 Combative"},{v:"3",t:"+3 Very agitated"},{v:"2",t:"+2 Agitated"},{v:"1",t:"+1 Restless"},{v:"0",t:"0 Alert and calm"},
+        {v:"-1",t:"−1 Drowsy (>10s eye contact to voice)"},{v:"-2",t:"−2 Light sedation (<10s eye contact)"},{v:"-3",t:"−3 Moderate sedation (movement, no eye contact)"},
+        {v:"-4",t:"−4 Deep sedation (responds to physical stimulus only)"},{v:"-5",t:"−5 Unarousable"} ] }
+    ],
+    compute:function(v){
+      var r=Number(v.rass);
+      var m={"4":"Combative — immediate danger to staff","3":"Very agitated","2":"Agitated","1":"Restless","0":"Alert and calm","-1":"Drowsy","-2":"Light sedation","-3":"Moderate sedation","-4":"Deep sedation","-5":"Unarousable"};
+      return { v:(r>0?"+":"")+r, u:"", i:m[String(r)]+". Target is usually 0 to −2 unless deep sedation indicated. Ref: Sessler, AJRCCM 2002." };
     } }
 
   ];
@@ -2414,7 +2614,19 @@
     mayo_uc:["mayo score","ulcerative colitis activity","mayo clinic score uc","uc disease activity","partial mayo"],
     oxygenation_index:["oxygenation index","oi","paediatric ards","pediatric ards severity","palicc"],
     schwartz:["schwartz equation","bedside schwartz","paediatric egfr","pediatric gfr","child gfr","childhood kidney function"],
-    delta_ratio:["delta ratio","delta gap","delta-delta","mixed acid base","delta delta"]
+    delta_ratio:["delta ratio","delta gap","delta-delta","mixed acid base","delta delta"],
+    naranjo:["naranjo","adverse drug reaction","adr probability","drug causality"],
+    glasgow_7point:["7 point checklist","glasgow melanoma","pigmented lesion referral","mole check","melanoma screen"],
+    dlqi:["dermatology life quality index","dlqi","skin quality of life"],
+    bpp:["biophysical profile","bpp","fetal wellbeing","manning score"],
+    calvert:["calvert formula","carboplatin dose","carboplatin auc","chemotherapy dosing"],
+    mirels:["mirels score","pathological fracture risk","bone metastasis fracture","impending fracture"],
+    epds:["edinburgh postnatal depression","epds","perinatal depression","postnatal depression screen"],
+    gds15:["geriatric depression scale","gds","gds-15","elderly depression screen"],
+    karnofsky:["karnofsky performance status","kps","performance status"],
+    ecog:["ecog performance status","ecog","zubrod","performance status oncology"],
+    logmar:["logmar","snellen conversion","visual acuity conversion","acuity"],
+    rass:["richmond agitation sedation scale","rass","sedation scale","agitation score"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -2481,7 +2693,19 @@
     mayo_uc:"Schroeder KW, et al. N Engl J Med 1987;317(26):1625–9.",
     oxygenation_index:"PALICC. Pediatr Crit Care Med 2015;16(5):428–39.",
     schwartz:"Schwartz GJ, et al. J Am Soc Nephrol 2009;20(3):629–37.",
-    delta_ratio:"Standard acid-base physiology reference (delta-delta gap)."
+    delta_ratio:"Standard acid-base physiology reference (delta-delta gap).",
+    naranjo:"Naranjo CA, et al. Clin Pharmacol Ther 1981;30(2):239–45.",
+    glasgow_7point:"MacKie RM. Glasgow 7-point checklist; NICE melanoma referral guidance.",
+    dlqi:"Finlay AY, Khan GK. Clin Exp Dermatol 1994;19(3):210–6.",
+    bpp:"Manning FA, et al. Am J Obstet Gynecol 1980;136(6):787–95.",
+    calvert:"Calvert AH, et al. J Clin Oncol 1989;7(11):1748–56.",
+    mirels:"Mirels H. Clin Orthop Relat Res 1989;(249):256–64.",
+    epds:"Cox JL, et al. Br J Psychiatry 1987;150:782–6.",
+    gds15:"Sheikh JI, Yesavage JA. Clin Gerontol 1986 (GDS-15).",
+    karnofsky:"Karnofsky DA, Burchenal JH. 1949.",
+    ecog:"Oken MM, et al. Am J Clin Oncol 1982;5(6):649–55 (ECOG).",
+    logmar:"Standard optotype (Snellen → logMAR) conversion.",
+    rass:"Sessler CN, et al. Am J Respir Crit Care Med 2002;166(10):1338–44."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
