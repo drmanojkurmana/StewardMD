@@ -1954,6 +1954,174 @@
     compute:function(v){
       var g=Number(v.g)||1;
       return { v:g, u:"(I–V)", i:"Higher grade correlates with worse outcome after aneurysmal SAH; based mainly on the Glasgow Coma Scale. Ref: WFNS, J Neurosurg 1988." };
+    } },
+
+  /* ===== MDCalc-parity expansion — batch 4 (ai_drafted; clinician-verify) ===== */
+
+  { id:"harvey_bradshaw", cat:"Gastroenterology", icon:"🩺", title:"Harvey-Bradshaw Index (Crohn's)",
+    desc:"Simple clinical activity index for Crohn's disease.",
+    inputs:[
+      { id:"well", label:"General wellbeing", type:"select", opts:[{v:"0",t:"Very well"},{v:"1",t:"Slightly below par"},{v:"2",t:"Poor"},{v:"3",t:"Very poor"},{v:"4",t:"Terrible"}] },
+      { id:"pain", label:"Abdominal pain", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Moderate"},{v:"3",t:"Severe"}] },
+      { id:"stool", label:"Liquid stools per day", type:"number", step:"1", min:"0" },
+      { id:"mass", label:"Abdominal mass", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Dubious"},{v:"2",t:"Definite"},{v:"3",t:"Definite and tender"}] },
+      { id:"comp", label:"Number of complications (arthralgia, uveitis, erythema nodosum, aphthae, pyoderma, fissure, fistula, abscess)", type:"number", step:"1", min:"0" }
+    ],
+    compute:function(v){
+      if(!ok(v.stool)) return ERR;
+      var s = (Number(v.well)||0)+(Number(v.pain)||0)+Math.max(0,v.stool)+(Number(v.mass)||0)+(ok(v.comp)?Math.max(0,v.comp):0);
+      var band = s<5?"Clinical remission":s<=7?"Mild":s<=16?"Moderate":"Severe";
+      return { v:r0(s), u:"points", i:band+" (remission <5, mild 5–7, moderate 8–16, severe >16). Ref: Harvey & Bradshaw, Lancet 1980." };
+    } },
+
+  { id:"truelove_witts", cat:"Gastroenterology", icon:"🩺", title:"Truelove-Witts (UC severity)",
+    desc:"Severity classification of an ulcerative colitis flare.",
+    inputs:[
+      { id:"stool", label:"Bloody stools per day", type:"number", step:"1", min:"0" },
+      { id:"temp", label:"Temperature >37.8 °C", type:"check" },
+      { id:"hr", label:"Heart rate >90/min", type:"check" },
+      { id:"anaemia", label:"Anaemia (Hb <105 g/L)", type:"check" },
+      { id:"esr", label:"ESR >30 mm/h", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.stool)) return ERR;
+      var sys=0; if(v.temp)sys++; if(v.hr)sys++; if(v.anaemia)sys++; if(v.esr)sys++;
+      var cls = (v.stool>=6 && sys>=1) ? "Severe" : (v.stool<4 && sys===0) ? "Mild" : "Moderate";
+      return { v:cls, i:"Severe = ≥6 bloody stools/day plus ≥1 systemic feature (fever, tachycardia, anaemia, raised ESR); mild = <4 stools with no systemic upset. Severe colitis needs inpatient care. Ref: Truelove & Witts, BMJ 1955." };
+    } },
+
+  { id:"aims65", cat:"Gastroenterology", icon:"🩸", title:"AIMS65 (upper GI bleed mortality)",
+    desc:"Predicts in-hospital mortality in acute upper GI bleeding.",
+    inputs:[
+      { id:"alb", label:"Albumin <30 g/L (3.0 g/dL)", type:"check" },
+      { id:"inr", label:"INR >1.5", type:"check" },
+      { id:"ams", label:"Altered mental status", type:"check" },
+      { id:"sbp", label:"Systolic BP ≤90 mmHg", type:"check" },
+      { id:"age", label:"Age >65 years", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.alb)s++; if(v.inr)s++; if(v.ams)s++; if(v.sbp)s++; if(v.age)s++;
+      var band = s<=1?"Lower mortality risk":s===2?"Intermediate risk":"High mortality risk";
+      return { v:s, u:"/5", i:band+"; mortality rises steeply with each additional factor. Ref: Saltzman, Gastrointest Endosc 2011." };
+    } },
+
+  { id:"air_score", cat:"General", icon:"🔪", title:"Appendicitis Inflammatory Response (AIR) Score",
+    desc:"Risk stratification for acute appendicitis.",
+    inputs:[
+      { id:"vom", label:"Vomiting", type:"check" },
+      { id:"rif", label:"Right iliac fossa pain", type:"check" },
+      { id:"reb", label:"Rebound tenderness / guarding", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Light"},{v:"2",t:"Medium"},{v:"3",t:"Strong"}] },
+      { id:"temp", label:"Temperature ≥38.5 °C", type:"check" },
+      { id:"poly", label:"Polymorphonuclear leukocytes", type:"select", opts:[{v:"0",t:"<70%"},{v:"1",t:"70–84%"},{v:"2",t:"≥85%"}] },
+      { id:"wcc", label:"White cell count", type:"select", opts:[{v:"0",t:"<10 ×10⁹/L"},{v:"1",t:"10–14.9"},{v:"2",t:"≥15"}] },
+      { id:"crp", label:"C-reactive protein", type:"select", opts:[{v:"0",t:"<10 mg/L"},{v:"1",t:"10–49"},{v:"2",t:"≥50"}] }
+    ],
+    compute:function(v){
+      var s = (v.vom?1:0)+(v.rif?1:0)+(Number(v.reb)||0)+(v.temp?1:0)+(Number(v.poly)||0)+(Number(v.wcc)||0)+(Number(v.crp)||0);
+      var band = s<=4?"Low probability — outpatient observation may be appropriate":s<=8?"Indeterminate — active observation / imaging":"High probability — surgical assessment";
+      return { v:s, u:"/12", i:band+". Ref: Andersson, World J Surg 2008." };
+    } },
+
+  { id:"kocher", cat:"Paediatrics", icon:"👶", title:"Kocher Criteria (septic hip)",
+    desc:"Differentiates septic arthritis from transient synovitis of the paediatric hip.",
+    inputs:[
+      { id:"nwb", label:"Non-weight-bearing on affected side", type:"check" },
+      { id:"fever", label:"Temperature >38.5 °C", type:"check" },
+      { id:"esr", label:"ESR >40 mm/h", type:"check" },
+      { id:"wcc", label:"White cell count >12 ×10⁹/L", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.nwb)s++; if(v.fever)s++; if(v.esr)s++; if(v.wcc)s++;
+      var prob = ["<0.2%","~3%","~40%","~93%","~99%"][s];
+      return { v:s, u:"/4", i:"Approximate probability of septic arthritis "+prob+" — a high score warrants joint aspiration. Ref: Kocher, J Bone Joint Surg 1999." };
+    } },
+
+  { id:"orbit_bleed", cat:"Cardiovascular", icon:"🩸", title:"ORBIT Bleeding Score (AF)",
+    desc:"Major bleeding risk on anticoagulation for atrial fibrillation.",
+    inputs:[
+      { id:"age", label:"Age ≥74 years", type:"check" },
+      { id:"anaemia", label:"Reduced haemoglobin/haematocrit or anaemia", type:"check" },
+      { id:"bleed", label:"History of bleeding", type:"check" },
+      { id:"renal", label:"Renal impairment (eGFR <60)", type:"check" },
+      { id:"antiplt", label:"Treatment with an antiplatelet agent", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.age)s++; if(v.anaemia)s+=2; if(v.bleed)s+=2; if(v.renal)s++; if(v.antiplt)s++;
+      var band = s<=2?"Low bleeding risk":s===3?"Medium risk":"High bleeding risk";
+      return { v:s, u:"points", i:band+" (0–2 low, 3 medium, ≥4 high). Weigh against stroke risk rather than withholding anticoagulation. Ref: O'Brien, Eur Heart J 2015." };
+    } },
+
+  { id:"urr", cat:"Renal", icon:"🩺", title:"Urea Reduction Ratio (dialysis)",
+    desc:"Adequacy of a haemodialysis session.",
+    inputs:[
+      { id:"pre", label:"Pre-dialysis urea", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"post", label:"Post-dialysis urea", type:"number", unit:"mmol/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.pre)||!ok(v.post)||v.pre<=0) return ERR;
+      var u=r0((v.pre - v.post)/v.pre*100);
+      return { v:u, u:"%", i:(u>=65?"≥65% — generally adequate for thrice-weekly haemodialysis":"<65% — below the usual adequacy target")+". Kt/V is the preferred measure. Ref: NKF-KDOQI." };
+    } },
+
+  { id:"cdai_ra", cat:"Rheumatology", icon:"🦴", title:"CDAI (rheumatoid arthritis)",
+    desc:"Clinical Disease Activity Index — no laboratory value required.",
+    inputs:[
+      { id:"tjc", label:"Tender joint count (of 28)", type:"number", step:"1", min:"0" },
+      { id:"sjc", label:"Swollen joint count (of 28)", type:"number", step:"1", min:"0" },
+      { id:"pga", label:"Patient global assessment (0–10)", type:"number", step:"0.1" },
+      { id:"ega", label:"Evaluator global assessment (0–10)", type:"number", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.tjc)||!ok(v.sjc)||!ok(v.pga)||!ok(v.ega)) return ERR;
+      var s=r1(Math.max(0,v.tjc)+Math.max(0,v.sjc)+v.pga+v.ega);
+      var band = s<=2.8?"Remission":s<=10?"Low activity":s<=22?"Moderate activity":"High activity";
+      return { v:s, u:"", i:band+" (remission ≤2.8, low ≤10, moderate ≤22, high >22). Ref: Aletaha, Arthritis Res Ther 2005." };
+    } },
+
+  { id:"gos", cat:"Neurology", icon:"🧠", title:"Glasgow Outcome Scale (GOS)",
+    desc:"Global outcome after brain injury.",
+    inputs:[
+      { id:"g", label:"Outcome", type:"select", opts:[
+        {v:"1",t:"1 — Death"},
+        {v:"2",t:"2 — Persistent vegetative state"},
+        {v:"3",t:"3 — Severe disability (conscious but dependent)"},
+        {v:"4",t:"4 — Moderate disability (independent but disabled)"},
+        {v:"5",t:"5 — Good recovery"} ] }
+    ],
+    compute:function(v){
+      var g=Number(v.g)||1;
+      var txt=["","Death","Persistent vegetative state","Severe disability","Moderate disability","Good recovery"][g];
+      return { v:g, u:"(1–5)", i:txt+". Higher is better; often dichotomised as favourable (4–5) vs unfavourable (1–3). Ref: Jennett & Bond, Lancet 1975." };
+    } },
+
+  { id:"anc", cat:"Haematology", icon:"🩸", title:"Absolute Neutrophil Count (ANC)",
+    desc:"Neutrophil count and neutropenia grading.",
+    inputs:[
+      { id:"wbc", label:"White cell count", type:"number", unit:"×10⁹/L", step:"0.1" },
+      { id:"neut", label:"Neutrophils (segmented + bands)", type:"number", unit:"%", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.wbc)||!ok(v.neut)||v.wbc<0||v.neut<0) return ERR;
+      var a=r1(v.wbc*v.neut/100);
+      var band = a<0.5?"Severe neutropenia (high infection risk)":a<1.0?"Moderate neutropenia":a<1.5?"Mild neutropenia":"Not neutropenic";
+      return { v:a, u:"×10⁹/L", i:band+" (severe <0.5, moderate <1.0, mild <1.5). Neutropenic fever is an emergency." };
+    } },
+
+  { id:"improve_vte", cat:"Haematology", icon:"🩸", title:"IMPROVE VTE Risk Score",
+    desc:"Venous thromboembolism risk in hospitalised medical patients.",
+    inputs:[
+      { id:"prev", label:"Previous VTE", type:"check" },
+      { id:"throm", label:"Known thrombophilia", type:"check" },
+      { id:"paral", label:"Lower-limb paralysis", type:"check" },
+      { id:"cancer", label:"Current cancer", type:"check" },
+      { id:"immob", label:"Immobilised ≥7 days", type:"check" },
+      { id:"icu", label:"ICU/CCU stay", type:"check" },
+      { id:"age60", label:"Age >60 years", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.prev)s+=3; if(v.throm)s+=2; if(v.paral)s+=2; if(v.cancer)s+=2; if(v.immob)s++; if(v.icu)s++; if(v.age60)s++;
+      var band = s<=1?"Low VTE risk — pharmacological prophylaxis often not warranted":s<=3?"Moderate risk — consider prophylaxis":"High risk — prophylaxis generally indicated (weigh bleeding risk)";
+      return { v:s, u:"points", i:band+". Ref: Spyropoulos, Chest 2011 (IMPROVE)." };
     } }
 
   ];
@@ -2042,7 +2210,18 @@
     sf_syncope:["san francisco syncope rule","chess","syncope risk"],
     bode:["bode index","copd prognosis","copd mortality"],
     ottawa_sah:["ottawa sah rule","subarachnoid rule","thunderclap headache rule","sah rule out"],
-    wfns:["wfns grade","subarachnoid grade","sah grade"]
+    wfns:["wfns grade","subarachnoid grade","sah grade"],
+    harvey_bradshaw:["harvey bradshaw index","crohn activity","hbi","crohn disease activity"],
+    truelove_witts:["truelove witts","ulcerative colitis severity","uc flare severity"],
+    aims65:["aims65","upper gi bleed mortality","gi bleed risk"],
+    air_score:["appendicitis inflammatory response","air score","appendicitis risk"],
+    kocher:["kocher criteria","septic hip","septic arthritis child","transient synovitis"],
+    orbit_bleed:["orbit bleeding score","af bleeding risk","anticoagulation bleeding orbit"],
+    urr:["urea reduction ratio","dialysis adequacy","haemodialysis adequacy"],
+    cdai_ra:["cdai","clinical disease activity index","rheumatoid activity"],
+    gos:["glasgow outcome scale","gos","brain injury outcome"],
+    anc:["absolute neutrophil count","neutropenia","neutrophil count"],
+    improve_vte:["improve vte","vte risk medical","thromboprophylaxis risk"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
