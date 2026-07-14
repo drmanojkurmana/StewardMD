@@ -582,7 +582,12 @@
   function genCode(n) { n = n || 22; var s = ""; for (var i = 0; i < n; i++) s += randChar(INVITE_ALPHABET); return s; }
   var INVITE_TTL_MS = 14 * 24 * 60 * 60 * 1000;   // ~14 days
   function inviteUrl(gid, code) {
-    var origin = ""; try { origin = location.origin; } catch (e) {}
+    var origin = "";
+    try { origin = location.origin || ""; } catch (e) {}
+    // On the native app location.origin is capacitor://localhost (iOS) / http(s)://localhost (Android) —
+    // NOT shareable (it only resolves inside this WebView). Use the canonical web origin so the invite
+    // opens in a browser (or, with universal/app links configured, the app itself).
+    if (!/^https:\/\//.test(origin) || /\/\/localhost\b/.test(origin)) origin = "https://stewardmd.in";
     return origin + "/?icujoin=" + gid + "." + code;
   }
   // Parse a "?icujoin=<gid>.<code>" value → {gid,code} | null. Splits on the FIRST dot (gids and

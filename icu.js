@@ -2666,7 +2666,7 @@
         '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Ward Sync</button>' +
         (labWatchOn() ? '<button class="icu-btn ghost" data-icu-act="labwatch">' + ico("bell", "🔔") + ' Lab Watch' + (lwActive() ? " (watching)" : "") + '</button>' : "") +
         '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share case</button>' +
-        '<button class="icu-btn ghost" data-icu-act="coach">' + ico("info", "ⓘ") + ' How the ICU workstation works</button>' +
+        "" /* classic coach link retired in v2 */ +
         (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") +
         '<button class="icu-btn ghost" data-icu-act="clearfindings">' + ico("trash", "🧹") + ' Clear current findings</button>' +
         '</div>';
@@ -2802,7 +2802,7 @@
     return '<div class="icu-scroll"><div class="icu-wrap">' +
       patientBanner() +
       renderSubNav() +
-      ((isOv && (!icuSeen() || _coachForce)) ? coachCard() : "") +
+      "" /* v2: classic "How it works" coach retired — it overlapped the diagnosis tour and used stale solo-patient copy */ +
       ((isOv && hd) ? severityKey() : "") +
       (mon ? renderWardBanner() : "") +
       renderConflicts() +
