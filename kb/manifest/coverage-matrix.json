@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 4363,
+    "diseases": 4383,
     "diagnostic": 141,
-    "reference": 4222,
+    "reference": 4242,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.9,
     "investigations": 100,
     "redFlags": 100,
-    "severity": 9.1,
+    "severity": 9,
     "prognosis": 99.8,
     "diagnosticScoring": 3.2,
     "management": 3.2,
-    "drugTherapy": 3,
-    "dosing": 3,
+    "drugTherapy": 2.9,
+    "dosing": 2.9,
     "stewardship": 1.2
   },
   "bySpecialty": {
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 603,
+      "total": 606,
       "diagnostic": 20,
-      "reference": 583,
+      "reference": 586,
       "dims": {
-        "overview": 603,
-        "clinicalFeatures": 603,
-        "pathophysiology": 603,
-        "differential": 603,
-        "investigations": 603,
-        "redFlags": 603,
+        "overview": 606,
+        "clinicalFeatures": 606,
+        "pathophysiology": 606,
+        "differential": 606,
+        "investigations": 606,
+        "redFlags": 606,
         "severity": 48,
-        "prognosis": 603,
+        "prognosis": 606,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 280,
+      "total": 285,
       "diagnostic": 5,
-      "reference": 275,
+      "reference": 280,
       "dims": {
-        "overview": 280,
-        "clinicalFeatures": 280,
-        "pathophysiology": 280,
-        "differential": 280,
-        "investigations": 279,
-        "redFlags": 280,
+        "overview": 285,
+        "clinicalFeatures": 285,
+        "pathophysiology": 285,
+        "differential": 285,
+        "investigations": 284,
+        "redFlags": 285,
         "severity": 7,
-        "prognosis": 279,
+        "prognosis": 284,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -160,18 +160,18 @@
       }
     },
     "Cardiology": {
-      "total": 206,
+      "total": 208,
       "diagnostic": 11,
-      "reference": 195,
+      "reference": 197,
       "dims": {
-        "overview": 206,
-        "clinicalFeatures": 206,
-        "pathophysiology": 206,
-        "differential": 204,
-        "investigations": 206,
-        "redFlags": 206,
+        "overview": 208,
+        "clinicalFeatures": 208,
+        "pathophysiology": 208,
+        "differential": 206,
+        "investigations": 208,
+        "redFlags": 208,
         "severity": 48,
-        "prognosis": 205,
+        "prognosis": 207,
         "diagnosticScoring": 11,
         "management": 11,
         "drugTherapy": 9,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 411,
+      "total": 413,
       "diagnostic": 6,
-      "reference": 405,
+      "reference": 407,
       "dims": {
-        "overview": 411,
-        "clinicalFeatures": 411,
-        "pathophysiology": 411,
-        "differential": 411,
-        "investigations": 411,
-        "redFlags": 411,
+        "overview": 413,
+        "clinicalFeatures": 413,
+        "pathophysiology": 413,
+        "differential": 413,
+        "investigations": 413,
+        "redFlags": 413,
         "severity": 23,
-        "prognosis": 411,
+        "prognosis": 413,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -460,18 +460,18 @@
       }
     },
     "Eye": {
-      "total": 186,
+      "total": 187,
       "diagnostic": 0,
-      "reference": 186,
+      "reference": 187,
       "dims": {
-        "overview": 186,
-        "clinicalFeatures": 186,
-        "pathophysiology": 186,
-        "differential": 186,
-        "investigations": 186,
-        "redFlags": 186,
+        "overview": 187,
+        "clinicalFeatures": 187,
+        "pathophysiology": 187,
+        "differential": 187,
+        "investigations": 187,
+        "redFlags": 187,
         "severity": 0,
-        "prognosis": 186,
+        "prognosis": 187,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -540,18 +540,18 @@
       }
     },
     "integumentary": {
-      "total": 26,
+      "total": 33,
       "diagnostic": 0,
-      "reference": 26,
+      "reference": 33,
       "dims": {
-        "overview": 26,
-        "clinicalFeatures": 26,
-        "pathophysiology": 26,
-        "differential": 26,
-        "investigations": 26,
-        "redFlags": 26,
+        "overview": 33,
+        "clinicalFeatures": 33,
+        "pathophysiology": 33,
+        "differential": 33,
+        "investigations": 33,
+        "redFlags": 33,
         "severity": 0,
-        "prognosis": 26,
+        "prognosis": 33,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -3922,6 +3922,28 @@
       }
     },
     {
+      "id": "erythromelalgia_primary",
+      "name": "erythromelalgia primary",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular and vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "fabry_cardiomyopathy",
       "name": "fabry cardiomyopathy",
       "specialty": "Cardiology",
@@ -6078,6 +6100,28 @@
       }
     },
     {
+      "id": "thromboangiitis_obliterans",
+      "name": "thromboangiitis obliterans",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular and vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "timothy_syndrome",
       "name": "Timothy syndrome",
       "specialty": "Cardiology",
@@ -7200,6 +7244,28 @@
       }
     },
     {
+      "id": "acral_persistent_papular_mucinosis",
+      "name": "acral persistent papular mucinosis",
+      "specialty": "Dermatology",
+      "system": "Skin and integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acrokeratosis_verruciformis",
       "name": "Acrokeratosis verruciformis of Hopf",
       "specialty": "Dermatology",
@@ -7270,6 +7336,28 @@
       "name": "Actinic prurigo",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "actinic_reticuloid",
+      "name": "actinic reticuloid",
+      "specialty": "Dermatology",
+      "system": "Skin and integumentary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -10148,6 +10236,28 @@
       }
     },
     {
+      "id": "keratoacanthoma",
+      "name": "keratoacanthoma",
+      "specialty": "Dermatology",
+      "system": "Skin and integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "keratolytic_winter_erythema",
       "name": "Keratolytic winter erythema",
       "specialty": "Dermatology",
@@ -10482,6 +10592,28 @@
       "name": "lipoid proteinosis",
       "specialty": "Dermatology",
       "system": "Skin / Integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "livedo_reticularis",
+      "name": "livedo reticularis",
+      "specialty": "Dermatology",
+      "system": "Skin and integumentary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -11538,6 +11670,28 @@
       "name": "Pemphigus vulgaris",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "perioral_dermatitis",
+      "name": "perioral dermatitis",
+      "specialty": "Dermatology",
+      "system": "Skin and integumentary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28214,6 +28368,28 @@
       "name": "Dacryocystitis",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dacryops",
+      "name": "Dacryops",
+      "specialty": "Eye",
+      "system": "Eye / Orbit and adnexa",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -57756,6 +57932,28 @@
       }
     },
     {
+      "id": "cherry_angioma",
+      "name": "cherry angioma",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chloracne",
       "name": "chloracne",
       "specialty": "integumentary",
@@ -57800,8 +57998,74 @@
       }
     },
     {
+      "id": "dermatosis_papulosa_nigra",
+      "name": "dermatosis papulosa nigra",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "eccrine_poroma",
+      "name": "eccrine poroma",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "elastosis_perforans_serpiginosa",
       "name": "elastosis perforans serpiginosa",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "epidermoid_cyst",
+      "name": "epidermoid cyst",
       "specialty": "integumentary",
       "system": "integumentary",
       "tier": "reference",
@@ -58086,6 +58350,28 @@
       }
     },
     {
+      "id": "pilar_cyst",
+      "name": "pilar cyst",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "poststeroid_panniculitis",
       "name": "poststeroid panniculitis",
       "specialty": "integumentary",
@@ -58110,6 +58396,50 @@
     {
       "id": "sclerema_neonatorum",
       "name": "sclerema neonatorum",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sebaceous_hyperplasia",
+      "name": "sebaceous hyperplasia",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "seborrhoeic_keratosis",
+      "name": "seborrhoeic keratosis",
       "specialty": "integumentary",
       "system": "integumentary",
       "tier": "reference",
@@ -67656,6 +67986,28 @@
       }
     },
     {
+      "id": "hyperkalaemic_periodic_paralysis",
+      "name": "hyperkalaemic periodic paralysis",
+      "specialty": "Neurology",
+      "system": "Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hyperkalemic_periodic_paralysis",
       "name": "Hyperkalaemic periodic paralysis",
       "specialty": "Neurology",
@@ -67682,6 +68034,28 @@
       "name": "Hypnic headache",
       "specialty": "Neurology",
       "system": "Nervous system / Headache",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hypokalaemic_periodic_paralysis",
+      "name": "hypokalaemic periodic paralysis",
+      "specialty": "Neurology",
+      "system": "Neuromuscular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -70300,6 +70674,28 @@
       "name": "Notalgia paraesthetica",
       "specialty": "Neurology",
       "system": "Nervous system / Peripheral nerve",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "numb_chin_syndrome",
+      "name": "Numb chin syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -89040,6 +89436,28 @@
       }
     },
     {
+      "id": "immune_mediated_necrotising_myopathy",
+      "name": "immune mediated necrotising myopathy",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "infantile_myofibromatosis",
       "name": "Infantile myofibromatosis",
       "specialty": "Rheumatology / MSK",
@@ -91288,6 +91706,28 @@
       "name": "Osteosarcoma",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "overlap_myositis",
+      "name": "overlap myositis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
       "tier": "reference",
       "caps": {
         "overview": true,
