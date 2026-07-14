@@ -1449,6 +1449,198 @@
       s += v.hr>=95?5:(v.hr>=75?3:0);
       var band=s<=3?"<b>Low</b> probability (0–3)":s<=10?"<b>Intermediate</b> (4–10)":"<b>High</b> probability (≥11)";
       return { v:s, u:"points", i:band+". Combine with D-dimer / imaging per pathway. Ref: Le Gal, Ann Intern Med 2006 (revised Geneva)." };
+    } },
+
+  /* ===== MDCalc-parity expansion — batch 1 (ai_drafted; clinician-verify) ===== */
+
+  { id:"rcri", cat:"Cardiovascular", icon:"❤️", title:"Revised Cardiac Risk Index (RCRI / Lee)",
+    desc:"Peri-operative risk of major cardiac events in non-cardiac surgery.",
+    inputs:[
+      { id:"surg", label:"High-risk surgery (intraperitoneal, intrathoracic or suprainguinal vascular)", type:"check" },
+      { id:"ihd", label:"History of ischaemic heart disease", type:"check" },
+      { id:"chf", label:"History of congestive heart failure", type:"check" },
+      { id:"cva", label:"History of cerebrovascular disease (stroke/TIA)", type:"check" },
+      { id:"dm", label:"Insulin-treated diabetes mellitus", type:"check" },
+      { id:"cr", label:"Preoperative creatinine >177 µmol/L (>2.0 mg/dL)", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.surg)s++; if(v.ihd)s++; if(v.chf)s++; if(v.cva)s++; if(v.dm)s++; if(v.cr)s++;
+      var risk = s===0?"~3.9%":s===1?"~6.0%":s===2?"~10.1%":"~15%";
+      return { v:s, u:"predictors", i:"Estimated risk of major cardiac event "+risk+" (0, 1, 2, ≥3 predictors). Ref: Lee, Circulation 1999." };
+    } },
+
+  { id:"ottawa_ankle", cat:"Musculoskeletal", icon:"🦴", title:"Ottawa Ankle & Foot Rules",
+    desc:"Whether ankle/foot radiographs are needed after acute injury (adults).",
+    inputs:[
+      { id:"mall_pain", label:"Pain in the malleolar zone", type:"check" },
+      { id:"lat", label:"Bone tenderness — posterior edge/tip of lateral malleolus", type:"check" },
+      { id:"med", label:"Bone tenderness — posterior edge/tip of medial malleolus", type:"check" },
+      { id:"mid_pain", label:"Pain in the midfoot zone", type:"check" },
+      { id:"mt5", label:"Bone tenderness — base of 5th metatarsal", type:"check" },
+      { id:"navic", label:"Bone tenderness — navicular", type:"check" },
+      { id:"noweight", label:"Unable to bear weight 4 steps (both immediately and in ED)", type:"check" }
+    ],
+    compute:function(v){
+      var ankle = v.mall_pain && (v.lat||v.med||v.noweight);
+      var foot  = v.mid_pain && (v.mt5||v.navic||v.noweight);
+      var out = ankle&&foot ? "Ankle AND foot X-ray series indicated"
+              : ankle ? "Ankle X-ray series indicated"
+              : foot ? "Foot X-ray series indicated"
+              : "No X-ray required by the rule";
+      return { v:out, i:"Near-100% sensitive for clinically significant fractures; use to reduce unnecessary imaging. Ref: Stiell, JAMA 1993/1994." };
+    } },
+
+  { id:"ottawa_knee", cat:"Musculoskeletal", icon:"🦴", title:"Ottawa Knee Rule",
+    desc:"Whether a knee radiograph is needed after acute injury (adults).",
+    inputs:[
+      { id:"age55", label:"Age ≥55 years", type:"check" },
+      { id:"fib", label:"Tenderness at the head of the fibula", type:"check" },
+      { id:"pat", label:"Isolated tenderness of the patella", type:"check" },
+      { id:"flex", label:"Unable to flex the knee to 90°", type:"check" },
+      { id:"noweight", label:"Unable to bear weight 4 steps (both immediately and in ED)", type:"check" }
+    ],
+    compute:function(v){
+      var pos = v.age55||v.fib||v.pat||v.flex||v.noweight;
+      return { v: pos?"Knee X-ray indicated":"No X-ray required by the rule", i:"Any positive criterion indicates radiography; highly sensitive for fracture. Ref: Stiell, Ann Emerg Med 1995." };
+    } },
+
+  { id:"nexus_cspine", cat:"Neurology", icon:"🚑", title:"NEXUS C-Spine Criteria",
+    desc:"Whether cervical-spine imaging can be safely avoided after blunt trauma.",
+    inputs:[
+      { id:"midline", label:"Posterior midline cervical tenderness", type:"check" },
+      { id:"deficit", label:"Focal neurological deficit", type:"check" },
+      { id:"alert", label:"Altered level of alertness", type:"check" },
+      { id:"intox", label:"Evidence of intoxication", type:"check" },
+      { id:"distract", label:"Distracting painful injury", type:"check" }
+    ],
+    compute:function(v){
+      var anyPos = v.midline||v.deficit||v.alert||v.intox||v.distract;
+      return { v: anyPos?"Imaging indicated":"No imaging — can clear clinically", i: anyPos?"One or more criteria present — image the cervical spine.":"All five low-risk criteria absent — cervical spine can be cleared clinically. Ref: Hoffman, NEJM 2000." };
+    } },
+
+  { id:"canadian_ct_head", cat:"Neurology", icon:"🧠", title:"Canadian CT Head Rule",
+    desc:"Need for CT after minor head injury (GCS 13–15 with witnessed LOC, amnesia or confusion).",
+    inputs:[
+      { id:"gcs2h", label:"GCS <15 at 2 hours after injury", type:"check" },
+      { id:"openfx", label:"Suspected open or depressed skull fracture", type:"check" },
+      { id:"basalfx", label:"Any sign of basal skull fracture", type:"check" },
+      { id:"vomit", label:"≥2 episodes of vomiting", type:"check" },
+      { id:"age65", label:"Age ≥65 years", type:"check" },
+      { id:"amnesia", label:"Retrograde amnesia ≥30 minutes", type:"check" },
+      { id:"mechanism", label:"Dangerous mechanism (pedestrian, ejection, fall >3 ft/5 stairs)", type:"check" }
+    ],
+    compute:function(v){
+      var high = v.gcs2h||v.openfx||v.basalfx||v.vomit||v.age65;
+      var med = v.amnesia||v.mechanism;
+      var ct = high||med;
+      return { v: ct?"CT head indicated":"CT not required by the rule", i: (high?"High-risk criterion present. ":(med?"Medium-risk criterion present. ":""))+"Applies only to minor head injury (GCS 13–15). Ref: Stiell, Lancet 2001." };
+    } },
+
+  { id:"bishop", cat:"Obstetrics", icon:"🤰", title:"Bishop Score",
+    desc:"Cervical favourability for induction of labour.",
+    inputs:[
+      { id:"dil", label:"Cervical dilation", type:"select", opts:[{v:"0",t:"Closed"},{v:"1",t:"1–2 cm"},{v:"2",t:"3–4 cm"},{v:"3",t:"≥5 cm"}] },
+      { id:"eff", label:"Effacement", type:"select", opts:[{v:"0",t:"0–30%"},{v:"1",t:"40–50%"},{v:"2",t:"60–70%"},{v:"3",t:"≥80%"}] },
+      { id:"sta", label:"Fetal station", type:"select", opts:[{v:"0",t:"−3"},{v:"1",t:"−2"},{v:"2",t:"−1 / 0"},{v:"3",t:"+1 / +2"}] },
+      { id:"con", label:"Cervical consistency", type:"select", opts:[{v:"0",t:"Firm"},{v:"1",t:"Medium"},{v:"2",t:"Soft"}] },
+      { id:"pos", label:"Cervical position", type:"select", opts:[{v:"0",t:"Posterior"},{v:"1",t:"Mid"},{v:"2",t:"Anterior"}] }
+    ],
+    compute:function(v){
+      var s = (Number(v.dil)||0)+(Number(v.eff)||0)+(Number(v.sta)||0)+(Number(v.con)||0)+(Number(v.pos)||0);
+      var band = s>=8?"Favourable cervix — high likelihood of successful induction":s>=5?"Intermediate favourability":"Unfavourable cervix — consider cervical ripening";
+      return { v:s, u:"points", i:band+" (range 0–13). Ref: Bishop, Obstet Gynecol 1964." };
+    } },
+
+  { id:"apgar", cat:"Obstetrics", icon:"👶", title:"APGAR Score",
+    desc:"Rapid assessment of newborn status at 1 and 5 minutes.",
+    inputs:[
+      { id:"col", label:"Appearance (colour)", type:"select", opts:[{v:"0",t:"Blue/pale all over"},{v:"1",t:"Body pink, extremities blue"},{v:"2",t:"Pink all over"}] },
+      { id:"hr", label:"Pulse (heart rate)", type:"select", opts:[{v:"0",t:"Absent"},{v:"1",t:"<100/min"},{v:"2",t:"≥100/min"}] },
+      { id:"gri", label:"Grimace (reflex irritability)", type:"select", opts:[{v:"0",t:"No response"},{v:"1",t:"Grimace"},{v:"2",t:"Cry / cough / sneeze"}] },
+      { id:"act", label:"Activity (muscle tone)", type:"select", opts:[{v:"0",t:"Limp"},{v:"1",t:"Some flexion"},{v:"2",t:"Active motion"}] },
+      { id:"res", label:"Respiration", type:"select", opts:[{v:"0",t:"Absent"},{v:"1",t:"Slow / irregular"},{v:"2",t:"Good / crying"}] }
+    ],
+    compute:function(v){
+      var s = (Number(v.col)||0)+(Number(v.hr)||0)+(Number(v.gri)||0)+(Number(v.act)||0)+(Number(v.res)||0);
+      var band = s>=7?"Reassuring":s>=4?"Moderately abnormal — may need intervention":"Low — resuscitation usually required";
+      return { v:s, u:"/10", i:band+". A low or falling score guides resuscitation; it does not by itself define asphyxia. Ref: Apgar, 1953." };
+    } },
+
+  { id:"westley_croup", cat:"Paediatrics", icon:"👶", title:"Westley Croup Score",
+    desc:"Severity of croup (laryngotracheobronchitis).",
+    inputs:[
+      { id:"loc", label:"Level of consciousness", type:"select", opts:[{v:"0",t:"Normal"},{v:"5",t:"Disoriented / altered"}] },
+      { id:"cya", label:"Cyanosis", type:"select", opts:[{v:"0",t:"None"},{v:"4",t:"With agitation"},{v:"5",t:"At rest"}] },
+      { id:"str", label:"Stridor", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"With agitation"},{v:"2",t:"At rest"}] },
+      { id:"air", label:"Air entry", type:"select", opts:[{v:"0",t:"Normal"},{v:"1",t:"Decreased"},{v:"2",t:"Markedly decreased"}] },
+      { id:"ret", label:"Retractions", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Moderate"},{v:"3",t:"Severe"}] }
+    ],
+    compute:function(v){
+      var s = (Number(v.loc)||0)+(Number(v.cya)||0)+(Number(v.str)||0)+(Number(v.air)||0)+(Number(v.ret)||0);
+      var band = s<=2?"Mild":s<=5?"Moderate":s<=11?"Severe":"Impending respiratory failure";
+      return { v:s, u:"points", i:band+" croup (range 0–17). Ref: Westley, Am J Dis Child 1978." };
+    } },
+
+  { id:"mrs", cat:"Neurology", icon:"🧠", title:"Modified Rankin Scale (mRS)",
+    desc:"Global disability/dependence after stroke.",
+    inputs:[
+      { id:"g", label:"Functional status", type:"select", opts:[
+        {v:"0",t:"0 — No symptoms"},
+        {v:"1",t:"1 — No significant disability despite symptoms"},
+        {v:"2",t:"2 — Slight disability; independent"},
+        {v:"3",t:"3 — Moderate disability; needs some help, walks unaided"},
+        {v:"4",t:"4 — Moderately severe; unable to walk/attend needs unassisted"},
+        {v:"5",t:"5 — Severe disability; bedridden, incontinent"},
+        {v:"6",t:"6 — Dead"} ] }
+    ],
+    compute:function(v){
+      var g = Number(v.g)||0;
+      var txt = ["No symptoms","No significant disability","Slight disability (independent)","Moderate disability","Moderately severe disability","Severe disability","Dead"][g];
+      return { v:g, u:"(0–6)", i:txt+". mRS 0–2 is commonly used as a favourable outcome after stroke." };
+    } },
+
+  { id:"hunt_hess", cat:"Neurology", icon:"🧠", title:"Hunt & Hess Grade (SAH)",
+    desc:"Clinical severity and surgical risk in aneurysmal subarachnoid haemorrhage.",
+    inputs:[
+      { id:"g", label:"Clinical grade", type:"select", opts:[
+        {v:"1",t:"I — Asymptomatic or mild headache"},
+        {v:"2",t:"II — Moderate–severe headache, nuchal rigidity, no deficit (± cranial nerve palsy)"},
+        {v:"3",t:"III — Drowsiness/confusion or mild focal deficit"},
+        {v:"4",t:"IV — Stupor, moderate–severe hemiparesis"},
+        {v:"5",t:"V — Coma, decerebrate posturing"} ] }
+    ],
+    compute:function(v){
+      var g = Number(v.g)||1;
+      var mort = ["","~1–5%","~5–10%","~15–20%","~30–40%","~50–80%"][g];
+      return { v:g, u:"(I–V)", i:"Higher grade indicates worse clinical state and prognosis; approximate mortality "+mort+". Ref: Hunt & Hess, J Neurosurg 1968." };
+    } },
+
+  { id:"cage", cat:"Psychiatry", icon:"🍷", title:"CAGE Questionnaire",
+    desc:"Screening for problem alcohol use.",
+    inputs:[
+      { id:"cut", label:"Felt you should Cut down on drinking", type:"check" },
+      { id:"ann", label:"Annoyed by people criticising your drinking", type:"check" },
+      { id:"gui", label:"Felt Guilty about drinking", type:"check" },
+      { id:"eye", label:"Eye-opener: drink first thing in the morning", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.cut)s++; if(v.ann)s++; if(v.gui)s++; if(v.eye)s++;
+      return { v:s, u:"/4", i:(s>=2?"≥2 is clinically significant — suggests problem drinking; assess further":"Below the usual threshold of 2")+". Screening only. Ref: Ewing, JAMA 1984." };
+    } },
+
+  { id:"feverpain", cat:"Infectious disease", icon:"🦠", title:"FeverPAIN Score",
+    desc:"Likelihood of streptococcal sore throat to guide antibiotic use.",
+    inputs:[
+      { id:"fev", label:"Fever in the past 24 hours", type:"check" },
+      { id:"pus", label:"Purulence (pus on tonsils)", type:"check" },
+      { id:"att", label:"Attend rapidly — symptom onset ≤3 days", type:"check" },
+      { id:"inf", label:"Severely Inflamed tonsils", type:"check" },
+      { id:"noc", label:"No cough or coryza", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.fev)s++; if(v.pus)s++; if(v.att)s++; if(v.inf)s++; if(v.noc)s++;
+      var band = s<=1?"Low (~13–18% streptococcus) — antibiotics not usually needed":s<=3?"Moderate (~34–40%) — consider delayed prescription":"High (~62–65%) — consider antibiotics";
+      return { v:s, u:"/5", i:band+". Ref: Little, BMJ Open 2013 / NICE." };
     } }
 
   ];
@@ -1505,7 +1697,19 @@
     retic:["corrected reticulocyte","reticulocyte index","anaemia marrow"],
     tsat:["transferrin saturation","iron studies","iron saturation"],
     phenytoin:["corrected phenytoin","sheiner tozer","phenytoin level","albumin phenytoin"],
-    mentzer:["mentzer index","thalassaemia iron deficiency","microcytosis"]
+    mentzer:["mentzer index","thalassaemia iron deficiency","microcytosis"],
+    rcri:["revised cardiac risk index","lee index","perioperative cardiac risk","preop cardiac"],
+    ottawa_ankle:["ottawa ankle rule","ottawa foot rule","ankle x-ray","foot fracture rule"],
+    ottawa_knee:["ottawa knee rule","knee x-ray","knee fracture rule"],
+    nexus_cspine:["nexus criteria","cervical spine clearance","c-spine rule","neck imaging"],
+    canadian_ct_head:["canadian ct head rule","cchr","head injury ct","minor head injury"],
+    bishop:["bishop score","cervix favourability","induction of labour","cervical ripening"],
+    apgar:["apgar score","newborn assessment","neonatal score"],
+    westley_croup:["westley croup score","croup severity","laryngotracheobronchitis"],
+    mrs:["modified rankin scale","rankin","stroke disability","functional outcome"],
+    hunt_hess:["hunt hess","sah grade","subarachnoid haemorrhage grade","aneurysm grade"],
+    cage:["cage questionnaire","alcohol screening","problem drinking"],
+    feverpain:["feverpain score","sore throat","strep throat","pharyngitis","antibiotic sore throat"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
