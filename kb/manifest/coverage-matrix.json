@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3697,
+    "diseases": 3711,
     "diagnostic": 141,
-    "reference": 3556,
+    "reference": 3570,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,7 +30,7 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 10.7,
+    "severity": 10.6,
     "prognosis": 99.8,
     "diagnosticScoring": 3.8,
     "management": 3.8,
@@ -160,18 +160,18 @@
       }
     },
     "Cardiology": {
-      "total": 148,
+      "total": 149,
       "diagnostic": 11,
-      "reference": 137,
+      "reference": 138,
       "dims": {
-        "overview": 148,
-        "clinicalFeatures": 148,
-        "pathophysiology": 148,
-        "differential": 146,
-        "investigations": 148,
-        "redFlags": 148,
+        "overview": 149,
+        "clinicalFeatures": 149,
+        "pathophysiology": 149,
+        "differential": 147,
+        "investigations": 149,
+        "redFlags": 149,
         "severity": 48,
-        "prognosis": 147,
+        "prognosis": 148,
         "diagnosticScoring": 11,
         "management": 11,
         "drugTherapy": 9,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 326,
+      "total": 339,
       "diagnostic": 6,
-      "reference": 320,
+      "reference": 333,
       "dims": {
-        "overview": 326,
-        "clinicalFeatures": 326,
-        "pathophysiology": 326,
-        "differential": 326,
-        "investigations": 326,
-        "redFlags": 326,
+        "overview": 339,
+        "clinicalFeatures": 339,
+        "pathophysiology": 339,
+        "differential": 339,
+        "investigations": 339,
+        "redFlags": 339,
         "severity": 23,
-        "prognosis": 326,
+        "prognosis": 339,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -3758,6 +3758,28 @@
       "name": "Popliteal artery entrapment syndrome",
       "specialty": "Cardiology",
       "system": "Cardiovascular / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "popliteal_artery_entrapment_syndrome",
+      "name": "Popliteal artery entrapment syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular / Musculoskeletal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -73868,6 +73890,28 @@
       }
     },
     {
+      "id": "chronic_exertional_compartment_syndrome",
+      "name": "Chronic exertional compartment syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chronic_nonbacterial_osteomyelitis",
       "name": "Chronic non-bacterial osteomyelitis (CNO)",
       "specialty": "Rheumatology / MSK",
@@ -75100,6 +75144,28 @@
       }
     },
     {
+      "id": "gamekeepers_thumb",
+      "name": "Gamekeeper's thumb",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ganglion_cyst",
       "name": "Ganglion cyst",
       "specialty": "Rheumatology / MSK",
@@ -75298,6 +75364,28 @@
       }
     },
     {
+      "id": "greater_trochanteric_pain_syndrome",
+      "name": "Greater trochanteric pain syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "trochanteric_bursitis",
       "name": "Greater trochanteric pain syndrome (trochanteric bursitis)",
       "specialty": "Rheumatology / MSK",
@@ -75430,6 +75518,28 @@
       }
     },
     {
+      "id": "hamstring_strain",
+      "name": "Hamstring strain",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hangman_fracture",
       "name": "Hangman fracture (C2 traumatic spondylolisthesis)",
       "specialty": "Rheumatology / MSK",
@@ -75496,6 +75606,28 @@
       }
     },
     {
+      "id": "high_ankle_sprain",
+      "name": "High ankle sprain",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hill_sachs_lesion",
       "name": "Hill-Sachs lesion",
       "specialty": "Rheumatology / MSK",
@@ -75522,6 +75654,28 @@
       "name": "Hip fracture",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hook_of_hamate_fracture",
+      "name": "Hook of hamate fracture",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -75874,6 +76028,28 @@
       "name": "Jefferson fracture (C1 burst)",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "jersey_finger",
+      "name": "Jersey finger",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -76354,6 +76530,28 @@
       }
     },
     {
+      "id": "little_league_elbow",
+      "name": "Little League elbow",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "loeys_dietz_syndrome",
       "name": "Loeys-Dietz syndrome",
       "specialty": "Rheumatology / MSK",
@@ -76622,6 +76820,28 @@
       "name": "Medial plica syndrome of the knee",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Hand & Peripheral nerve",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "medial_tibial_stress_syndrome",
+      "name": "Medial tibial stress syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -77630,6 +77850,28 @@
       }
     },
     {
+      "id": "patellofemoral_pain_syndrome",
+      "name": "Patellofemoral pain syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pena_shokeir_syndrome",
       "name": "Pena-Shokeir syndrome",
       "specialty": "Rheumatology / MSK",
@@ -77942,6 +78184,28 @@
       "name": "Posterior cruciate ligament injury",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "preiser_disease",
+      "name": "Preiser disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -78624,6 +78888,28 @@
       "name": "Sever disease",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "severs_disease",
+      "name": "Sever's disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -79504,6 +79790,28 @@
       "name": "Tietze syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Rheumatology / Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "triangular_fibrocartilage_complex_injury",
+      "name": "Triangular fibrocartilage complex injury",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal",
       "tier": "reference",
       "caps": {
         "overview": true,
