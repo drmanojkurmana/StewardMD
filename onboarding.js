@@ -290,29 +290,55 @@
     for (var i = 0; i < ids.length; i++) { var el = document.getElementById(ids[i]); if (el && visible(el)) return true; }
     return false;
   }
+  // Positive "the user is actually inside the app" signal. The visibility-based gateUp() check
+  // above is not enough on its own: #homeV2 gets its "on" class EARLY (it renders underneath the
+  // intro/splash/sign-in gates), and the account gate spends its pre-show and fade-in window at
+  // opacity:0/visibility:hidden, so a visible() test misses it and the tour can open over the
+  // sign-in screen. So before auto-opening we also require a chosen entry path — Google sign-in,
+  // a guest session, or a tester/reviewer login — read from the account model. Returns null when
+  // that model is unavailable (older build / native) so we fall back to gateUp() alone.
+  function entered() {
+    try {
+      if (window.SMD_ACCOUNT && typeof SMD_ACCOUNT.profile === "function") {
+        var p = SMD_ACCOUNT.profile() || {};
+        return p.signedIn === true || p.isGuest === true || (p.type != null && p.type !== "");
+      }
+    } catch (e) {}
+    return null;
+  }
   function homeForeground() {
     var h = document.getElementById("homeV2");
     if (!h || !visible(h) || !h.classList.contains("on")) return false;   // home must be the ACTIVE screen
     if (gateUp()) return false;                                           // and not covered by a pre-home gate
+    if (entered() === false) return false;                                // and the sign-in gate must be cleared
     return true;
   }
+  var _arming = false;
   function maybeAuto() {
-    if (_sessionShown) return;
+    if (_sessionShown || _arming) return;
     if (!shouldAuto()) return;
     if (!homeForeground()) return;
-    _sessionShown = true;
-    var s = getState(); s.launchCount = (s.launchCount || 0) + 1; setState(s);
-    setTimeout(function () { try { open(); } catch (e) {} }, 650);
+    // Arm, then confirm again after the settle delay so a gate that appears (or a sign-in that has
+    // not completed) within the window cannot be covered. Only mark shown once we actually open,
+    // so watch() can retry if this arm is aborted.
+    _arming = true;
+    setTimeout(function () {
+      _arming = false;
+      if (_sessionShown || !shouldAuto() || !homeForeground()) return;
+      _sessionShown = true;
+      var s = getState(); s.launchCount = (s.launchCount || 0) + 1; setState(s);
+      try { open(); } catch (e) {}
+    }, 650);
   }
   function watch() {
     var tries = 0;
     var iv = setInterval(function () {
       if (_sessionShown || !shouldAuto()) { clearInterval(iv); return; }
-      if (homeForeground()) { clearInterval(iv); maybeAuto(); return; }
+      if (homeForeground()) { maybeAuto(); return; }   // don't clear yet — maybeAuto sets _sessionShown when it truly opens
       // Only count down while we are genuinely waiting on the home screen. Time spent on the
       // intro / splash / sign-in gates does not burn the budget, so the tour still fires the
       // moment the user finishes signing in, however long that leg takes.
-      if (gateUp()) tries = 0;
+      if (gateUp() || entered() === false) tries = 0;
       else if (++tries > 80) clearInterval(iv);   // ~40s ceiling of non-gate waiting
     }, 500);
   }
