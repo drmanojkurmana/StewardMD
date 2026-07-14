@@ -3331,6 +3331,118 @@
       return { v:r1(r*100)/100, u:"", i:b+". Ref: De Ritis ratio (standard hepatology)." };
     } },
 
+  { id:"barthel", cat:"Neurology", icon:"🧠", title:"Barthel Index (Activities of Daily Living)",
+    desc:"Functional independence in basic activities of daily living.",
+    inputs:[
+      { id:"feed", label:"Feeding", type:"select", opts:[{v:"0",t:"Unable"},{v:"5",t:"Needs help"},{v:"10",t:"Independent"}] },
+      { id:"bathe", label:"Bathing", type:"select", opts:[{v:"0",t:"Dependent"},{v:"5",t:"Independent"}] },
+      { id:"groom", label:"Grooming", type:"select", opts:[{v:"0",t:"Needs help"},{v:"5",t:"Independent"}] },
+      { id:"dress", label:"Dressing", type:"select", opts:[{v:"0",t:"Dependent"},{v:"5",t:"Needs help"},{v:"10",t:"Independent"}] },
+      { id:"bowels", label:"Bowels", type:"select", opts:[{v:"0",t:"Incontinent"},{v:"5",t:"Occasional accident"},{v:"10",t:"Continent"}] },
+      { id:"bladder", label:"Bladder", type:"select", opts:[{v:"0",t:"Incontinent/catheter"},{v:"5",t:"Occasional accident"},{v:"10",t:"Continent"}] },
+      { id:"toilet", label:"Toilet use", type:"select", opts:[{v:"0",t:"Dependent"},{v:"5",t:"Needs some help"},{v:"10",t:"Independent"}] },
+      { id:"transfer", label:"Transfers (bed to chair)", type:"select", opts:[{v:"0",t:"Unable"},{v:"5",t:"Major help"},{v:"10",t:"Minor help"},{v:"15",t:"Independent"}] },
+      { id:"mobility", label:"Mobility on level surfaces", type:"select", opts:[{v:"0",t:"Immobile"},{v:"5",t:"Wheelchair independent"},{v:"10",t:"Walks with help"},{v:"15",t:"Independent"}] },
+      { id:"stairs", label:"Stairs", type:"select", opts:[{v:"0",t:"Unable"},{v:"5",t:"Needs help"},{v:"10",t:"Independent"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.feed)+Number(v.bathe)+Number(v.groom)+Number(v.dress)+Number(v.bowels)+Number(v.bladder)+Number(v.toilet)+Number(v.transfer)+Number(v.mobility)+Number(v.stairs);
+      var b=s<=20?"Total dependence":s<=60?"Severe dependence":s<=90?"Moderate dependence":s<=99?"Slight dependence":"Independent";
+      return { v:s, u:"/100", i:b+" (higher = more independent). Ref: Mahoney & Barthel, Md State Med J 1965." };
+    } },
+
+  { id:"silverman", cat:"Paediatrics", icon:"👶", title:"Silverman-Andersen Retraction Score",
+    desc:"Work of breathing in the newborn (higher = worse; opposite of Apgar).",
+    inputs:[
+      { id:"chest", label:"Upper chest movement", type:"select", opts:[{v:"0",t:"Synchronised"},{v:"1",t:"Lag on inspiration"},{v:"2",t:"See-saw"}] },
+      { id:"intercostal", label:"Lower chest (intercostal retraction)", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Just visible"},{v:"2",t:"Marked"}] },
+      { id:"xiphoid", label:"Xiphoid retraction", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Just visible"},{v:"2",t:"Marked"}] },
+      { id:"nares", label:"Nares dilatation", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Minimal"},{v:"2",t:"Marked"}] },
+      { id:"grunt", label:"Expiratory grunt", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Audible with stethoscope"},{v:"2",t:"Audible unaided"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.chest)+Number(v.intercostal)+Number(v.xiphoid)+Number(v.nares)+Number(v.grunt);
+      var b=s===0?"No respiratory distress":s<=3?"Mild respiratory distress":s<=6?"Moderate respiratory distress":"Severe respiratory distress";
+      return { v:s, u:"/10", i:b+". Ref: Silverman & Andersen, Pediatrics 1956." };
+    } },
+
+  { id:"ashworth", cat:"Neurology", icon:"🧠", title:"Modified Ashworth Scale (Spasticity)",
+    desc:"Muscle tone / spasticity on passive movement.",
+    inputs:[
+      { id:"grade", label:"Tone", type:"select", opts:[
+        {v:"0",t:"0 — No increase in tone"},{v:"1",t:"1 — Slight (catch and release, or minimal resistance at end of ROM)"},{v:"1p",t:"1+ — Slight increase, minimal resistance through < half ROM"},
+        {v:"2",t:"2 — More marked through most of ROM, part still moved easily"},{v:"3",t:"3 — Considerable increase, passive movement difficult"},{v:"4",t:"4 — Rigid in flexion or extension"} ] }
+    ],
+    compute:function(v){
+      var m={"0":"No increase in muscle tone","1":"Slight increase (catch and release)","1p":"Slight increase, resistance through less than half the range","2":"Marked increase through most of the range, but limb moved easily","3":"Considerable increase, passive movement difficult","4":"Rigid in flexion or extension"};
+      return { v:v.grade==="1p"?"1+":v.grade, u:"", i:m[v.grade]+". Ref: Bohannon & Smith, Phys Ther 1987 (Modified Ashworth)." };
+    } },
+
+  { id:"abi", cat:"Cardiovascular", icon:"🦵", title:"Ankle-Brachial Index (ABI)",
+    desc:"Screens for peripheral arterial disease.",
+    inputs:[
+      { id:"ankle", label:"Higher ankle systolic pressure (that leg)", type:"number", unit:"mmHg", step:"1" },
+      { id:"brachial", label:"Higher brachial systolic pressure", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ankle)||!ok(v.brachial)||v.brachial<=0||v.ankle<0) return ERR;
+      var abi=v.ankle/v.brachial;
+      var b=abi>1.4?"Non-compressible / calcified vessels":abi>=1.0?"Normal":abi>=0.9?"Borderline":abi>=0.4?"Mild-to-moderate peripheral arterial disease":"Severe peripheral arterial disease";
+      return { v:r1(abi*100)/100, u:"", i:b+". Ref: standard vascular assessment." };
+    } },
+
+  { id:"pack_years", cat:"General", icon:"🚬", title:"Smoking Pack-Years",
+    desc:"Cumulative cigarette exposure.",
+    inputs:[
+      { id:"cpd", label:"Cigarettes per day", type:"number", step:"1" },
+      { id:"years", label:"Years smoked", type:"number", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.cpd)||!ok(v.years)||v.cpd<0||v.years<0) return ERR;
+      var py=(v.cpd/20)*v.years;
+      return { v:r1(py), u:"pack-years", i:"Cumulative smoking exposure (1 pack-year = 20 cigarettes/day for 1 year). ≥ ~20–30 pack-years markedly raises lung-cancer and COPD risk. Ref: standard definition." };
+    } },
+
+  { id:"phq2", cat:"Psychiatry", icon:"🧠", title:"PHQ-2 (Depression Screen)",
+    desc:"Ultra-brief screen for depression over the past 2 weeks.",
+    inputs:[
+      { id:"q1", label:"Little interest or pleasure in doing things", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q2", label:"Feeling down, depressed or hopeless", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.q1)+Number(v.q2);
+      var b=s>=3?"Positive screen — proceed to a full assessment (e.g. PHQ-9)":"Negative screen";
+      return { v:s, u:"/6", i:b+". Ref: Kroenke, Med Care 2003 (PHQ-2)." };
+    } },
+
+  { id:"whr", cat:"General", icon:"⚖️", title:"Waist-Hip Ratio",
+    desc:"Central adiposity and cardiometabolic risk.",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"waist", label:"Waist circumference", type:"number", unit:"cm", step:"0.1" },
+      { id:"hip", label:"Hip circumference", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.waist)||!ok(v.hip)||v.hip<=0||v.waist<=0) return ERR;
+      var r=v.waist/v.hip;
+      var thr=v.sex==="f"?0.85:0.90;
+      var b=r>thr?"Above the threshold — increased cardiometabolic risk":"Within the lower-risk range";
+      return { v:r1(r*100)/100, u:"", i:b+" (threshold "+thr+" for the selected sex). Ref: WHO waist-hip ratio guidance." };
+    } },
+
+  { id:"bristol", cat:"Gastroenterology", icon:"🩹", title:"Bristol Stool Form Scale",
+    desc:"Classifies stool form as a marker of transit.",
+    inputs:[
+      { id:"type", label:"Stool appearance", type:"select", opts:[
+        {v:"1",t:"Type 1 — separate hard lumps"},{v:"2",t:"Type 2 — lumpy sausage"},{v:"3",t:"Type 3 — sausage with cracks"},{v:"4",t:"Type 4 — smooth soft sausage"},
+        {v:"5",t:"Type 5 — soft blobs with clear edges"},{v:"6",t:"Type 6 — mushy, ragged edges"},{v:"7",t:"Type 7 — entirely liquid"} ] }
+    ],
+    compute:function(v){
+      var n=Number(v.type);
+      var b=n<=2?"Suggests constipation / slow transit":n<=4?"Normal stool form":n===5?"Tending towards loose / lacking fibre":"Suggests diarrhoea / rapid transit";
+      return { v:"Type "+n, u:"", i:b+". Ref: Lewis & Heaton, Scand J Gastroenterol 1997 (Bristol)." };
+    } }
+
   ];
 
   /* search keywords / synonyms per calculator id, so common phrases
@@ -3505,7 +3617,15 @@
     mews:["modified early warning score","mews","track and trigger","early warning"],
     apfel:["apfel score","ponv","postoperative nausea vomiting","nausea risk"],
     borg:["borg scale","dyspnoea scale","breathlessness score","modified borg"],
-    aar:["ast alt ratio","de ritis ratio","aar","transaminase ratio"]
+    aar:["ast alt ratio","de ritis ratio","aar","transaminase ratio"],
+    barthel:["barthel index","activities of daily living","adl score","functional independence"],
+    silverman:["silverman andersen","retraction score","neonatal respiratory distress","newborn work of breathing"],
+    ashworth:["modified ashworth","spasticity scale","muscle tone","ashworth"],
+    abi:["ankle brachial index","abi","peripheral arterial disease","abpi"],
+    pack_years:["pack years","pack-years","smoking history","cigarette exposure"],
+    phq2:["phq-2","phq2","depression screen","brief depression"],
+    whr:["waist hip ratio","waist-to-hip","central obesity","whr"],
+    bristol:["bristol stool","stool chart","stool form","bristol scale"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -3637,7 +3757,15 @@
     mews:"Subbe CP, et al. QJM 2001;94(10):521–6 (MEWS).",
     apfel:"Apfel CC, et al. Anesthesiology 1999;91(3):693–700.",
     borg:"Borg GA. Med Sci Sports Exerc 1982;14(5):377–81 (modified scale).",
-    aar:"De Ritis F. Standard hepatology reference (AST/ALT ratio)."
+    aar:"De Ritis F. Standard hepatology reference (AST/ALT ratio).",
+    barthel:"Mahoney FI, Barthel DW. Md State Med J 1965;14:61–5.",
+    silverman:"Silverman WA, Andersen DH. Pediatrics 1956;17(1):1–10.",
+    ashworth:"Bohannon RW, Smith MB. Phys Ther 1987;67(2):206–7 (Modified Ashworth).",
+    abi:"Standard vascular assessment reference (ankle-brachial index).",
+    pack_years:"Standard definition (cigarettes/day ÷ 20 × years).",
+    phq2:"Kroenke K, et al. Med Care 2003;41(11):1284–92 (PHQ-2).",
+    whr:"WHO. Waist Circumference and Waist-Hip Ratio, 2008.",
+    bristol:"Lewis SJ, Heaton KW. Scand J Gastroenterol 1997;32(9):920–4."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
