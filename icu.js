@@ -676,6 +676,19 @@
       '.icu-sbar-lbl{font:800 11px var(--font);letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}' +
       '.icu-sbar-body{font:500 14px/1.5 var(--font);color:var(--ink)}' +
       '.icu-v2-tabbadge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin-left:5px;border-radius:9px;background:var(--danger);color:#fff;font:800 10px var(--font);vertical-align:middle}' +
+      /* Overview design cards (Active problems · consultant instruction · Current treatment) */
+      '.icu-ov-prob{display:flex;align-items:center;gap:9px}' +
+      '.icu-ov-dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}' +
+      '.icu-ov-prob-nm{font:600 14px var(--font);color:var(--ink);flex:1;min-width:0}' +
+      '.icu-ov-prob-note{font:600 11px var(--font);color:var(--muted);flex:0 0 auto}' +
+      '.icu-ov-instr{background:var(--primary-soft);border-color:color-mix(in srgb,var(--primary) 45%,var(--panel))}' +
+      '.icu-ov-instr-tx{font:600 14.5px/1.5 var(--font);color:var(--ink);margin:0}' +
+      '.icu-ov-instr-by{font:600 12px var(--font);color:var(--primary);margin:6px 0 0}' +
+      '.icu-ov-viewtasks{width:100%;margin-top:12px;border:none;background:var(--primary);color:#fff;border-radius:12px;font:800 14px var(--font);padding:13px;cursor:pointer}' +
+      '.icu-ov-tx{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}' +
+      '.icu-ov-tx:last-child{border-bottom:none}' +
+      '.icu-ov-tx-nm{font:600 13.5px var(--font);color:var(--ink)}' +
+      '.icu-ov-tx-dose{font:600 13px "IBM Plex Mono",ui-monospace,monospace;color:var(--ink);white-space:nowrap}' +
       // live status grid
       '.icu-vitals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}' +
       '@media (max-width:480px){.icu-vitals{grid-template-columns:repeat(3,1fr)}}' +
@@ -2521,36 +2534,40 @@
         '<p class="icu-doc-sub" style="margin:0">' + esc(who) + (updTs ? " · updated " + fmtAgo(updTs) : "") + '</p>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient" style="margin-top:10px">' + ico("edit", "✎") + ' Update status &amp; details</button></div>';
 
-      // 2) Active problems — working dx + structured findings.
-      var problems = [];
-      if (p.workingDx || p.diagnosis) problems.push(p.workingDx || p.diagnosis);
-      finds.slice(0, 8).forEach(function (c) { problems.push(findChipLabel(c)); });
+      // 2) Active problems — colored severity dots + a short note (design parity). Derived from the
+      //    working diagnosis + present structured findings.
+      var sevDot = { critical: "#B91C1C", review: "#92620A", stable: "#15803D" };
+      var probs = [];
+      if (p.workingDx || p.diagnosis) probs.push({ name: (p.workingDx || p.diagnosis), color: (sevDot[sev] || "#92620A"), note: (p.icuDay != null ? "Day " + p.icuDay : "") });
+      finds.filter(function (c) { return c.polarity !== "absent" && c.canonicalFindingId && String(c.canonicalFindingId).indexOf("note:") !== 0; }).slice(0, 6).forEach(function (c) { probs.push({ name: findChipLabel(c), color: "#92620A", note: "" }); });
       out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "🩺") + ' Active problems</div>' +
-        (problems.length ? problems.map(function (x) { return '<div class="icu-row"><span>• ' + esc(x) + '</span></div>'; }).join("")
+        (probs.length ? '<div style="display:flex;flex-direction:column;gap:9px;margin-top:2px">' + probs.map(function (pr) {
+          return '<div class="icu-ov-prob"><span class="icu-ov-dot" style="background:' + pr.color + '"></span><span class="icu-ov-prob-nm">' + esc(pr.name) + '</span>' + (pr.note ? '<span class="icu-ov-prob-note">' + esc(pr.note) + '</span>' : "") + '</div>';
+        }).join("") + '</div>'
           : '<p class="icu-doc-sub" style="margin:0">No problems recorded yet. Set a working diagnosis in Care Plan.</p>') +
-        '<button class="icu-btn ghost" data-icu-act="ws:careplan" style="margin-top:8px">' + ico("search", "🩺") + ' Open Care Plan</button></div>';
+        '<button class="icu-btn ghost" data-icu-act="ws:careplan" style="margin-top:10px">' + ico("search", "🩺") + ' Open Care Plan</button></div>';
 
-      // 3) Critical alerts — keep the engine-grouped detail.
-      out += '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>';
-      out += alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
-
-      // 4) Rounds & instructions (group only) — latest note + open-task count.
+      // 3) Last consultant instruction (group) — teal card + prominent "View N open tasks".
       if (grpActive() && _grpPtVM) {
-        var tasks = _grpPtVM.tasks || [], open = tasks.filter(function (t) { return t.status !== "done"; }).length;
-        var tl = _grpPtVM.timeline || [], last = null, _i;
-        for (_i = 0; _i < tl.length; _i++) { if (!last || ((tl[_i].ts || 0) > (last.ts || 0))) last = tl[_i]; }
-        out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "📋") + ' Rounds &amp; instructions</div>' +
-          (last ? '<p class="icu-dx-cc" style="margin:0 0 8px">' + esc(last.title || last.text || "Update") + (last.byName ? " · " + esc(last.byName) : "") + '</p>' : '<p class="icu-doc-sub" style="margin:0 0 8px">No round notes or instructions yet.</p>') +
-          '<button class="icu-btn" data-icu-act="tab:rounds">' + ico("rounds", "📋") + ' View ' + open + ' open task' + (open === 1 ? "" : "s") + '</button></div>';
+        var gtasks = _grpPtVM.tasks || [], gopen = gtasks.filter(function (t) { return t.status !== "done"; }).length;
+        var latest = null; gtasks.forEach(function (t) { if (!latest || (t.ts || 0) > (latest.ts || 0)) latest = t; });
+        out += '<div class="icu-card icu-ov-instr"><div class="icu-sec-lbl" style="color:var(--primary);margin-bottom:8px">' + ico("rounds", "🩺") + ' Last consultant instruction</div>' +
+          (latest ? '<p class="icu-ov-instr-tx">“' + esc(latest.text || "Instruction") + '”</p><p class="icu-ov-instr-by">' + esc(latest.assignedByName || "Consultant") + (latest.ts ? " · " + fmtAgo(latest.ts) : "") + '</p>'
+            : '<p class="icu-doc-sub" style="margin:0">No instructions yet — add one from Rounds.</p>') +
+          '<button class="icu-ov-viewtasks" data-icu-act="tab:rounds">View ' + gopen + ' open task' + (gopen === 1 ? "" : "s") + ' →</button></div>';
       }
 
-      // 5) Current treatment.
+      // 4) Current treatment — drug + dose rows (design parity), from infusions (+ ventilation).
+      var tx = infusions.map(function (i) { return { name: i.drug, dose: (i.dose != null ? i.dose + (i.unit ? " " + i.unit : "") : (i.rateMlHr != null ? i.rateMlHr + " mL/h" : "")) }; }).filter(function (t) { return t.name; });
+      if (v.mode) tx.push({ name: "Ventilation", dose: v.mode + (v.fio2 ? " · FiO₂ " + v.fio2 + "%" : "") });
       out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("syringe", "💉") + ' Current treatment</div>' +
-        row("On pressors", press.length ? press.map(function (i) { return i.drug; }).join(", ") : "None") +
-        row("Infusions running", infusions.length || "0") +
-        row("Net fluid (24h)", f.net24h, "mL") +
-        row("Ventilator", v.mode ? v.mode + (v.fio2 ? " · FiO₂ " + v.fio2 + "%" : "") : "Not ventilated") +
-        '<button class="icu-btn ghost" data-icu-act="tab:infusions" style="margin-top:8px">' + ico("syringe", "💉") + ' Infusions &amp; vasopressors</button></div>';
+        (tx.length ? tx.map(function (t) { return '<div class="icu-ov-tx"><span class="icu-ov-tx-nm">' + esc(t.name) + '</span><span class="icu-ov-tx-dose">' + esc(t.dose || "—") + '</span></div>'; }).join("")
+          : '<p class="icu-doc-sub" style="margin:0">No infusions recorded.</p>') +
+        '<button class="icu-btn ghost" data-icu-act="tab:infusions" style="margin-top:10px">' + ico("syringe", "💉") + ' Manage infusions &amp; vasopressors</button></div>';
+
+      // 5) Critical alerts — the engine-grouped detail (below the design cards; not in the mock but valuable).
+      out += '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>';
+      out += alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
 
       // 6) Lab Watch toggle (redesign inline card) — only when the feature is on.
       if (labWatchOn()) {
