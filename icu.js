@@ -2658,7 +2658,18 @@
         '<button class="icu-btn' + (v2 ? " ghost" : "") + '" data-icu-act="v2toggle">' + (v2
           ? ico("refresh", "↩") + " On — tap to switch back to the classic ICU"
           : ico("spark", "✨") + " Try the new ICU workspace") + '</button></div>';
-      return v2Card +
+      // Group-mode toggle (Beta) — shown only once v2 is on (group mode needs BOTH flags). Lets a
+      // tester enable shared units on a device where there's no URL bar / console. Additive; with v2
+      // off this is empty, so the classic More tab is unchanged.
+      var grpOn = icuGroupsOn();
+      var grpCard = v2 ? ('<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Groups (Beta) — shared unit</div>' +
+        '<p class="icu-doc-sub" style="margin:0 0 10px">' + (grpOn
+          ? "Group mode is on — create or join a shared ICU unit; changes sync live to your team. Sign in required."
+          : "Turn on shared units: invite your team, admit patients together, and give round instructions as tracked tasks. Sign in required.") + '</p>' +
+        '<button class="icu-btn' + (grpOn ? " ghost" : "") + '" data-icu-act="grptoggle">' + (grpOn
+          ? ico("refresh", "↩") + " On — tap to turn off group mode"
+          : ico("user", "👥") + " Turn on ICU Groups") + '</button></div>') : "";
+      return v2Card + grpCard +
         '<div class="icu-card"><div class="icu-sec-lbl">' + ico("more", "⋯") + ' More</div>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Patient details</button>' +
         '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients' + (n ? " (" + n + ")" : "") + '</button>' +
@@ -5460,6 +5471,7 @@
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
       case "v2toggle": try { if (localStorage.getItem("smd_icu_v2") === "1") localStorage.removeItem("smd_icu_v2"); else localStorage.setItem("smd_icu_v2", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
+      case "grptoggle": try { if (localStorage.getItem("smd_icu_groups") === "1") localStorage.removeItem("smd_icu_groups"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
       // ---- ICU v2 group mode (smd_icu_groups, Phase 2) — unit switcher / create / invite / tasks ----
       case "grppick": grpOpenPicker(); break;
       case "grpsel": { var _gsel = grpById(decodeURIComponent(arg)); if (_gsel) grpSelect(_gsel, false); closeForm(); break; }
