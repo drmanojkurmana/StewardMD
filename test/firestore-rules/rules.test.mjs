@@ -120,6 +120,13 @@ const cases = [
   ["invite: admin creates", await allowed(setDoc(doc(A, "icuGroups/GRPI/invites/INVNEW"), { role: "junior_resident", createdBy: "docA", expiresAt: future, unit: "Unit I", name: "Medicine ICU" })), true, "admin creates invite"],
   ["invite: non-admin creates", await allowed(setDoc(doc(D, "icuGroups/GRPI/invites/INVX"), { role: "junior_resident", createdBy: "docD", expiresAt: future })), false, "only admin creates invites"],
 
+  // ── collectionGroup('members') self-query (subscribeGroups — the on-device fix) ──────────────
+  // Firestore routes a collectionGroup query through the recursive `/{path=**}/members/{mid}` rule.
+  // A member may read ONLY member docs whose `uid` is their own, so the self-scoped query is allowed
+  // and a query for someone else's memberships is denied (can't enumerate who is in which unit).
+  ["members: self collectionGroup query", await allowed(getDocs(query(collectionGroup(A, "members"), where("uid", "==", "docA")))), true, "subscribeGroups self-query"],
+  ["members: query another's memberships", await allowed(getDocs(query(collectionGroup(A, "members"), where("uid", "==", "docB")))), false, "can't list others' memberships"],
+
   // ── doctorDirectory ─────────────────────────────────────────────────────────
   ["dir: signed-in gets by exact key", await allowed(getDoc(doc(C, "doctorDirectory/SMD-AAA111"))), true, "resolve by ID (get only)"],
   ["dir: signed-in gets email entry", await allowed(getDoc(doc(C, "doctorDirectory/e_hashb"))), true, "resolve by email (get only)"],

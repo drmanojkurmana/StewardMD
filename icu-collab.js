@@ -262,9 +262,12 @@
     data = data || {};
     return {
       id: id, text: data.text || "", status: normStatus(data.status),
+      priority: normPriority(data.priority), dueAt: (typeof data.dueAt === "number" ? data.dueAt : null),
       assignedBy: data.assignedBy || null, assignedByName: data.assignedByName || "",
       completedBy: data.completedBy || null, completedByName: data.completedByName || "",
       completedAt: tsToMs(data.completedAt), due: data.due || "", assignedTo: data.assignedTo || null,
+      explanation: data.explanation || "", explainedByName: data.explainedByName || "", explainedAt: tsToMs(data.explainedAt),
+      escalatedAt: (typeof data.escalatedAt === "number" ? data.escalatedAt : tsToMs(data.escalatedAt)),
       ts: tsToMs(data.ts)
     };
   }
@@ -277,12 +280,15 @@
       by: who.uid || null, byName: who.name || "", byRole: who.role || null
     };
   }
+  function normPriority(p) { return (p === "immediate" || p === "high" || p === "moderate" || p === "low") ? p : "moderate"; }
   function buildTask(info, who) {
     info = info || {}; who = who || {};
     return {
       text: info.text || "", status: "pending",
+      priority: normPriority(info.priority), dueAt: (info.dueAt != null ? info.dueAt : null),
       assignedBy: who.uid || null, assignedByName: who.name || "",
       completedBy: null, completedByName: null, completedAt: null,
+      explanation: "", explainedBy: null, explainedByName: null, explainedAt: null,
       due: info.due || "", assignedTo: info.assignedTo || null, ts: null
     };
   }
@@ -582,7 +588,12 @@
   function genCode(n) { n = n || 22; var s = ""; for (var i = 0; i < n; i++) s += randChar(INVITE_ALPHABET); return s; }
   var INVITE_TTL_MS = 14 * 24 * 60 * 60 * 1000;   // ~14 days
   function inviteUrl(gid, code) {
-    var origin = ""; try { origin = location.origin; } catch (e) {}
+    var origin = "";
+    try { origin = location.origin || ""; } catch (e) {}
+    // On the native app location.origin is capacitor://localhost (iOS) / http(s)://localhost (Android) —
+    // NOT shareable (it only resolves inside this WebView). Use the canonical web origin so the invite
+    // opens in a browser (or, with universal/app links configured, the app itself).
+    if (!/^https:\/\//.test(origin) || /\/\/localhost\b/.test(origin)) origin = "https://stewardmd.in";
     return origin + "/?icujoin=" + gid + "." + code;
   }
   // Parse a "?icujoin=<gid>.<code>" value → {gid,code} | null. Splits on the FIRST dot (gids and
@@ -644,15 +655,47 @@
         fs(function (db) {
           var uid = currentUid();
           if (!db || !uid) return reject(new Error("firestore-unavailable"));
-          invRef(db, gid, code).get().then(function (d) {
-            if (!d || !d.exists) return reject(new Error("invite-not-found"));
-            var inv = d.data() || {}, exp = tsToMs(inv.expiresAt);
-            if (exp != null && exp < nowMs()) return reject(new Error("invite-expired"));
-            var role = normInviteRole(inv.role);   // clamp — a link can never confer head/professor
-            var mdoc = { uid: uid, role: role, name: currentName(), addedBy: "link", joinedAt: fieldValue().serverTimestamp(), via: code };
-            track(memRef(db, gid, uid).set(mdoc)).then(function () { resolve(gid); }, reject);
-          }, reject);
+          function joinFresh() {
+            invRef(db, gid, code).get().then(function (d) {
+              if (!d || !d.exists) return reject(new Error("invite-not-found"));
+              var inv = d.data() || {}, exp = tsToMs(inv.expiresAt);
+              if (exp != null && exp < nowMs()) return reject(new Error("invite-expired"));
+              var role = normInviteRole(inv.role);   // clamp — a link can never confer head/professor
+              var mdoc = { uid: uid, role: role, name: currentName(), addedBy: "link", joinedAt: fieldValue().serverTimestamp(), via: code };
+              track(memRef(db, gid, uid).set(mdoc)).then(function () { resolve(gid); }, reject);
+            }, reject);
+          }
+          // NEVER let clicking an invite DEMOTE an existing member (e.g. the unit head opening their
+          // own link, which previously overwrote their head member doc → junior_resident). If already
+          // a member, joining is a no-op — keep the current role.
+          memRef(db, gid, uid).get().then(function (mine) {
+            if (mine && mine.exists) { resolve(gid); return; }
+            joinFresh();
+          }, function () { joinFresh(); });
         });
+      });
+    });
+  }
+  // Creator self-heal: restore the unit CREATOR to head if they somehow lost it (e.g. an older
+  // self-join demotion). Rules-safe: a member may delete their own non-head doc, and the creator may
+  // bootstrap-create a head doc (createdBy == self). No-op if already head or not the creator.
+  function reclaimHead(gid) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        var uid = currentUid();
+        if (!db || !uid) return reject(new Error("firestore-unavailable"));
+        grpRef(db, gid).get().then(function (g) {
+          if (!g || !g.exists || (g.data() || {}).createdBy !== uid) return reject(new Error("not-the-creator"));
+          var mref = memRef(db, gid, uid);
+          var head = { uid: uid, role: "head", name: currentName(), addedBy: uid, joinedAt: fieldValue().serverTimestamp() };
+          function makeHead() { track(mref.set(head)).then(function () { resolve("head"); }, reject); }
+          mref.get().then(function (m) {
+            if (m && m.exists && (m.data() || {}).role === "head") { resolve("head"); return; }   // already head
+            if (m && m.exists) { track(mref.delete()).then(makeHead, reject); }                    // demoted → delete stale, re-create as head
+            else { makeHead(); }                                                                   // no member doc → bootstrap head
+          }, reject);
+        }, reject);
       });
     });
   }
@@ -722,6 +765,18 @@
       });
     });
   }
+  // Remove (discharge) a shared patient from the unit. Deletes icuGroups/{gid}/patients/{pid}; the
+  // rules allow this only for INSTRUCTING roles (canInstruct) — the client also guards before calling.
+  function removePatient(gid, pid) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid || !pid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        if (!db || !currentUid()) return reject(new Error("firestore-unavailable"));
+        if (!canInstruct(_ctx.role)) return reject(new Error("forbidden-role"));
+        track(ptRef(db, gid, pid).delete()).then(function () { resolve(pid); }, reject);
+      });
+    });
+  }
 
   /* ---------------------------------------------------------------- timeline */
   // Append-only audit trail. Never updates/deletes.
@@ -770,6 +825,19 @@
         if (!db || !uid) return reject(new Error("firestore-unavailable"));
         var patch = taskStatusPatch(status, { uid: uid, name: currentName() });
         if (patch.completedAt === "@server") patch.completedAt = fieldValue().serverTimestamp();
+        track(ptRef(db, gid, pid).collection("tasks").doc(taskId).update(patch)).then(function () { resolve(taskId); }, reject);
+      });
+    });
+  }
+  // A resident records why a task wasn't done on time (or the current status). Any member may write it
+  // (rules: task update = isMember). Stamped with author + time; capped.
+  function explainTask(gid, pid, taskId, text) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn()) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        var uid = currentUid();
+        if (!db || !uid) return reject(new Error("firestore-unavailable"));
+        var patch = { explanation: String(text || "").slice(0, 500), explainedBy: uid, explainedByName: currentName(), explainedAt: fieldValue().serverTimestamp() };
         track(ptRef(db, gid, pid).collection("tasks").doc(taskId).update(patch)).then(function () { resolve(taskId); }, reject);
       });
     });
@@ -862,17 +930,20 @@
     createInvite: createInvite,
     getInvite: getInvite,
     joinByInvite: joinByInvite,
+    reclaimHead: reclaimHead,
     inviteUrl: inviteUrl,
     // patients
     subscribePatients: subscribePatients,
     subscribePatient: subscribePatient,
     upsertPatient: upsertPatient,
     setReviewed: setReviewed,
+    removePatient: removePatient,
     // timeline / tasks
     addTimelineEvent: addTimelineEvent,
     subscribeTasks: subscribeTasks,
     addTask: addTask,
     setTaskStatus: setTaskStatus,
+    explainTask: explainTask,
     // presence
     enterPatient: enterPatient,
     leavePatient: leavePatient,

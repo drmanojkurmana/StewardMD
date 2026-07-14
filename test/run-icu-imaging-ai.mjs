@@ -91,7 +91,7 @@ try {
       differentials:["Hypertensive haemorrhage","Underlying vascular lesion"],
       correlateWith:["Blood pressure","Coagulation profile"],
       redFlags:["Midline shift"], nextChecks:["Neurosurgery review","Repeat CT if deteriorating"] }}); };
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     var wsb=root.querySelector('[data-icu-act="ws:documents"]'); if(wsb) wsb.click();
     var seg=root.querySelector('[data-icu-act="tab:imaging"]'); if(seg) seg.click();
     var a=root.querySelector('[data-icu-act^="imgassist:"]'); if(a) a.click();     // opens the assist modal
@@ -137,7 +137,7 @@ try {
     window.SMD_AI.imagingSummary = function(){ return Promise.resolve({ mode:"imaging", summary:{
       summary:"Suggestive of a bleed.", positives:"Right parietal haemorrhage", redFlags:"Midline shift",
       negatives:[], significance:[], differentials:[], correlateWith:[], nextChecks:[] }}); };
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act^="imgassist:"]').click();
@@ -155,7 +155,7 @@ try {
     ICU.ingestWardImaging({ patientId:"PR", source:"Ward Sync", imaging:[{reportId:"RC1",description:"USG Abdomen",report:"IMPRESSION: normal."}] });
     window.__aiResolve=null;
     window.SMD_AI.imagingSummary = function(){ return new Promise(function(res){ window.__aiResolve=res; }); };
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act^="imgassist:"]').click();
@@ -194,7 +194,7 @@ try {
     ICU.reset(); ICU.ingestPatient({name:"A2",age:44,sex:"M"});
     ICU.ingestWardImaging({ patientId:"PA2", source:"Ward Sync", imaging:[{reportId:"AC1",description:"X-ray",report:"IMPRESSION: clear."}] });
     var r=ICU.state().imaging[0]; r.inSummary=true;
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act^="imgassist:"]').click();

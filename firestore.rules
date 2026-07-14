@@ -191,6 +191,14 @@ service cloud.firestore {
       }
     }
 
+    // collectionGroup('members') self-query — lists the units YOU belong to (subscribeGroups).
+    // Firestore routes collection-group queries through a recursive-wildcard rule; the nested
+    // icuGroups/{gid}/members/{uid} rule does NOT cover them, so without this they hit the catch-all
+    // deny. Read-only + self-scoped: you can only read member docs whose `uid` field is your own.
+    match /{path=**}/members/{mid} {
+      allow read: if request.auth != null && request.auth.uid == resource.data.uid;
+    }
+
     // Everything else is denied.
     match /{document=**} {
       allow read, write: if false;

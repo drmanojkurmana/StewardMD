@@ -714,3 +714,42 @@ with a clear not-found error). Head sees **Delete unit** in place of **Leave uni
   index must be deployed for `subscribeGroups` to return anything.
 - Note: group mode renders only with **both** `smd_icu_v2` and `smd_icu_groups` on (they ship
   together); the join membership write itself is gated on `smd_icu_groups` alone.
+
+---
+
+## Consolidation to a single ICU dashboard (gold369, 2026-07-14)
+
+The two-flag "classic vs new / groups on/off" duality was confusing, so the ICU is now **one
+dashboard**: v2 (the unit board + restyled patient workspace) is THE ICU, with a **single Group-mode
+toggle**.
+
+- **v2 is always on.** `icuV2On()` now returns `true` unconditionally (kept as a function — it is
+  called in many places; the `smd_icu_v2` flag and `?icuv2=` param are retained but have no effect).
+  `paint()` always delegates to `paintV2()`. The classic single-patient chrome is unreachable.
+- **Classic chrome retired.** The old `renderHeader()` 9-chip cluster and `renderTabBar()` bottom
+  workspace bar were removed (nothing else referenced them). **Kept:** `renderBody()`, every
+  `RENDER.*` tab body, `renderSubNav`, all forms/sheets, and the whole `data-icu-act` dispatcher —
+  v2 reuses them.
+- **One toggle.** The "Try the new ICU workspace (Beta)" (`v2toggle`) card + dispatcher case were
+  removed. `RENDER.more` now shows a single always-visible **ICU Group mode** toggle (`grptoggle`,
+  flips `smd_icu_groups` + reloads): ON → "shared units, tap to switch to solo"; OFF → "Solo ICU
+  (this device), tap to turn on shared units." Reachable from the board ⚙ (→ More via `icumore`).
+- **Old → new integration (nothing lost).** Every classic header-chip action has a v2 home:
+  Patient details / Save-update / Saved patients / Ward Sync / Lab Watch (per-patient) / Share case /
+  Clear (guarded) all in `RENDER.more`; New/Admit on the board bottom bar; Snapshot 📷 + Lab Watch
+  24/7 FABs in the workspace; Trends (Overview shortcut + Monitoring), Interactions, Discharge,
+  Handover, Imaging all reachable via the workspaces. Fixed a v2 nav gap where `lwOpenAnalyte`
+  (Lab Watch "tap to view trend") and `applyState` (load saved patient) didn't switch to the
+  patient screen (`_screen="patient"`), so they were stuck on the board.
+- **Stale "Phase 2" copy removed.** The Alerts note ("Live team notifications … arrive in Phase 2")
+  and the Team note ("… arrive in Phase 2 (smd_icu_groups)") were reworded; the still-true
+  "derived from this device's data" note is kept.
+- **Firestore rules.** Added the `match /{path=**}/members/{mid}` recursive read rule (self-scoped)
+  that the `collectionGroup('members')` self-query in `subscribeGroups` needs (already LIVE in prod;
+  git now matches). Emulator test **54/54 GREEN** (added 2 collectionGroup self-query cases).
+- **Test migration.** `run-icu-nav` rewritten to drive the v2 board + patient workspace. Other ICU
+  harnesses that opened the dashboard with no target (which now lands on the board) were retargeted
+  to open a tab (`ICU.open('trends'|'dx'|'imaging'|'overview')`): trends, dxflow, findpicker,
+  safety-ux, dx, correlation, evidence, imaging, imaging-ai. All GREEN except the 3 known
+  pre-existing single-assertion fails (trends patient-isolation, dxflow tour-font, labwatch #12
+  highlight — navigation for #12 is now fixed; only the highlight sub-assertion remains).
