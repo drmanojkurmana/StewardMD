@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 2213,
+    "diseases": 2269,
     "diagnostic": 141,
-    "reference": 2072,
+    "reference": 2128,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,28 +30,28 @@
     "differential": 99.7,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 17.8,
+    "severity": 17.4,
     "prognosis": 99.6,
-    "diagnosticScoring": 6.4,
-    "management": 6.3,
-    "drugTherapy": 5.8,
-    "dosing": 5.8,
-    "stewardship": 2.3
+    "diagnosticScoring": 6.2,
+    "management": 6.2,
+    "drugTherapy": 5.7,
+    "dosing": 5.7,
+    "stewardship": 2.2
   },
   "bySpecialty": {
     "Pulmonology": {
-      "total": 75,
+      "total": 89,
       "diagnostic": 20,
-      "reference": 55,
+      "reference": 69,
       "dims": {
-        "overview": 75,
-        "clinicalFeatures": 75,
-        "pathophysiology": 75,
-        "differential": 75,
-        "investigations": 75,
-        "redFlags": 75,
+        "overview": 89,
+        "clinicalFeatures": 89,
+        "pathophysiology": 89,
+        "differential": 89,
+        "investigations": 89,
+        "redFlags": 89,
         "severity": 28,
-        "prognosis": 74,
+        "prognosis": 88,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 18,
@@ -140,18 +140,18 @@
       }
     },
     "GI / Hepatology": {
-      "total": 138,
+      "total": 145,
       "diagnostic": 19,
-      "reference": 119,
+      "reference": 126,
       "dims": {
-        "overview": 138,
-        "clinicalFeatures": 138,
-        "pathophysiology": 138,
-        "differential": 137,
-        "investigations": 138,
-        "redFlags": 138,
+        "overview": 145,
+        "clinicalFeatures": 145,
+        "pathophysiology": 145,
+        "differential": 144,
+        "investigations": 145,
+        "redFlags": 145,
         "severity": 44,
-        "prognosis": 136,
+        "prognosis": 143,
         "diagnosticScoring": 19,
         "management": 19,
         "drugTherapy": 18,
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 99,
+      "total": 112,
       "diagnostic": 7,
-      "reference": 92,
+      "reference": 105,
       "dims": {
-        "overview": 99,
-        "clinicalFeatures": 99,
-        "pathophysiology": 99,
-        "differential": 98,
-        "investigations": 99,
-        "redFlags": 99,
+        "overview": 112,
+        "clinicalFeatures": 112,
+        "pathophysiology": 112,
+        "differential": 111,
+        "investigations": 112,
+        "redFlags": 112,
         "severity": 29,
-        "prognosis": 99,
+        "prognosis": 112,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 325,
+      "total": 332,
       "diagnostic": 10,
-      "reference": 315,
+      "reference": 322,
       "dims": {
-        "overview": 325,
-        "clinicalFeatures": 325,
-        "pathophysiology": 325,
-        "differential": 324,
-        "investigations": 325,
-        "redFlags": 325,
+        "overview": 332,
+        "clinicalFeatures": 332,
+        "pathophysiology": 332,
+        "differential": 331,
+        "investigations": 332,
+        "redFlags": 332,
         "severity": 33,
-        "prognosis": 323,
+        "prognosis": 330,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -320,18 +320,18 @@
       }
     },
     "Toxicology": {
-      "total": 55,
+      "total": 70,
       "diagnostic": 6,
-      "reference": 49,
+      "reference": 64,
       "dims": {
-        "overview": 55,
-        "clinicalFeatures": 55,
-        "pathophysiology": 55,
-        "differential": 55,
-        "investigations": 55,
-        "redFlags": 55,
+        "overview": 70,
+        "clinicalFeatures": 70,
+        "pathophysiology": 70,
+        "differential": 70,
+        "investigations": 70,
+        "redFlags": 70,
         "severity": 10,
-        "prognosis": 54,
+        "prognosis": 69,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -7834,6 +7834,28 @@
       }
     },
     {
+      "id": "amiodarone_induced_thyrotoxicosis",
+      "name": "Amiodarone-induced thyrotoxicosis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "andersen_disease_gsd_iv",
       "name": "Andersen disease (GSD IV, branching enzyme)",
       "specialty": "Endocrine / Metabolic",
@@ -7992,6 +8014,28 @@
       "name": "Aspartylglucosaminuria",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "polyglandular_autoimmune_type1",
+      "name": "Autoimmune polyendocrine syndrome type 1 (APECED, AIRE)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -10100,6 +10144,28 @@
       }
     },
     {
+      "id": "hashimoto_encephalopathy",
+      "name": "Hashimoto encephalopathy (SREAT)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hawkinsinuria",
       "name": "Hawkinsinuria",
       "specialty": "Endocrine / Metabolic",
@@ -10729,6 +10795,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "insulin_autoimmune_syndrome",
+      "name": "Insulin autoimmune syndrome (Hirata disease)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -11926,6 +12014,28 @@
       }
     },
     {
+      "id": "myxedema_coma",
+      "name": "Myxoedema coma",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "n_acetylglutamate_synthase_deficiency",
       "name": "N-acetylglutamate synthase deficiency",
       "specialty": "Endocrine / Metabolic",
@@ -13092,6 +13202,28 @@
       }
     },
     {
+      "id": "riedel_thyroiditis",
+      "name": "Riedel thyroiditis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "saccharopinuria",
       "name": "Saccharopinuria",
       "specialty": "Endocrine / Metabolic",
@@ -13968,6 +14100,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "thyrotoxic_periodic_paralysis",
+      "name": "Thyrotoxic periodic paralysis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -20594,6 +20748,28 @@
       }
     },
     {
+      "id": "congenital_portosystemic_shunt",
+      "name": "Congenital portosystemic shunt (Abernethy malformation)",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "congenital_sodium_diarrhea",
       "name": "Congenital sodium diarrhoea",
       "specialty": "GI / Hepatology",
@@ -20924,6 +21100,28 @@
       }
     },
     {
+      "id": "extrahepatic_portal_vein_obstruction",
+      "name": "Extrahepatic portal vein obstruction / cavernoma",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "familial_gastrointestinal_stromal_tumor",
       "name": "Familial gastrointestinal stromal tumour",
       "specialty": "GI / Hepatology",
@@ -20972,6 +21170,28 @@
       "name": "Fistula-in-ano",
       "specialty": "GI / Hepatology",
       "system": "GI / Anorectal / Surgery",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "focal_nodular_hyperplasia",
+      "name": "Focal nodular hyperplasia",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -21316,6 +21536,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hepatic_adenoma",
+      "name": "Hepatocellular adenoma",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -22002,6 +22244,28 @@
       }
     },
     {
+      "id": "nodular_regenerative_hyperplasia",
+      "name": "Nodular regenerative hyperplasia of the liver",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ogilvie_syndrome",
       "name": "Ogilvie syndrome (acute colonic pseudo-obstruction)",
       "specialty": "GI / Hepatology",
@@ -22354,6 +22618,28 @@
       }
     },
     {
+      "id": "sinusoidal_obstruction_syndrome",
+      "name": "Sinusoidal obstruction syndrome (veno-occlusive disease)",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "splenic_abscess",
       "name": "Splenic abscess",
       "specialty": "GI / Hepatology",
@@ -22684,10 +22970,76 @@
       }
     },
     {
+      "id": "zieve_syndrome",
+      "name": "Zieve syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ZOLLINGER_ELLISON",
       "name": "Zollinger-Ellison syndrome (gastrinoma)",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "acquired_hemophilia",
+      "name": "Acquired haemophilia A (factor VIII autoantibodies)",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "acquired_von_willebrand_syndrome",
+      "name": "Acquired von Willebrand syndrome",
+      "specialty": "Hematology",
+      "system": "Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -22820,6 +23172,28 @@
       "name": "Alpha thalassaemia",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "alpha2_antiplasmin_deficiency",
+      "name": "Alpha-2-antiplasmin deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -23190,6 +23564,50 @@
       }
     },
     {
+      "id": "combined_factor_v_viii_deficiency",
+      "name": "Combined factor V and VIII deficiency (LMAN1/MCFD2)",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vitamin_k_dependent_coagulation_factor_deficiency",
+      "name": "Combined vitamin K-dependent clotting factor deficiency (GGCX/VKORC1)",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "afibrinogenemia",
       "name": "Congenital afibrinogenaemia",
       "specialty": "Hematology",
@@ -23278,6 +23696,28 @@
       }
     },
     {
+      "id": "congenital_ttp_upshaw_schulman",
+      "name": "Congenital TTP (Upshaw-Schulman, ADAMTS13)",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cyclic_neutropenia",
       "name": "Cyclic neutropenia",
       "specialty": "Hematology",
@@ -23340,6 +23780,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dysfibrinogenemia",
+      "name": "Dysfibrinogenaemia",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -24356,6 +24818,50 @@
       }
     },
     {
+      "id": "pai1_deficiency",
+      "name": "Plasminogen activator inhibitor-1 deficiency",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "plasminogen_deficiency",
+      "name": "Plasminogen deficiency (ligneous conjunctivitis)",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "platelet_disorders",
       "name": "Platelet Disorders (Thrombocytopenia)",
       "specialty": "Hematology",
@@ -24369,6 +24875,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "platelet_storage_pool_disease",
+      "name": "Platelet storage pool disease",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -24488,6 +25016,28 @@
       }
     },
     {
+      "id": "prothrombin_g20210a_mutation",
+      "name": "Prothrombin G20210A mutation",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pure_red_cell_aplasia",
       "name": "Pure red cell aplasia",
       "specialty": "Hematology",
@@ -24514,6 +25064,28 @@
       "name": "Pyruvate kinase deficiency (haemolytic anaemia)",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "quebec_platelet_disorder",
+      "name": "Quebec platelet disorder",
+      "specialty": "Hematology",
+      "system": "Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -24591,6 +25163,28 @@
         "severity": true,
         "prognosis": true,
         "diagnosticScoring": true,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sticky_platelet_syndrome",
+      "name": "Sticky platelet syndrome",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
         "management": false,
         "drugTherapy": false,
         "dosing": false,
@@ -42462,6 +43056,28 @@
       }
     },
     {
+      "id": "catamenial_pneumothorax",
+      "name": "Catamenial pneumothorax",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chronic_eosinophilic_pneumonia",
       "name": "Chronic eosinophilic pneumonia",
       "specialty": "Pulmonology",
@@ -42508,6 +43124,28 @@
     {
       "id": "chylothorax",
       "name": "Chylothorax",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "coal_workers_pneumoconiosis",
+      "name": "Coal workers' pneumoconiosis",
       "specialty": "Pulmonology",
       "system": "Respiratory",
       "tier": "reference",
@@ -42880,6 +43518,50 @@
       }
     },
     {
+      "id": "drug_induced_interstitial_lung_disease",
+      "name": "Drug-induced interstitial lung disease",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "flock_workers_lung",
+      "name": "Flock worker's lung",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "foreign_body_aspiration",
       "name": "Foreign Body Aspiration",
       "specialty": "Pulmonology",
@@ -42906,6 +43588,28 @@
       "name": "Haemophilus and Moraxella Infections",
       "specialty": "Pulmonology",
       "system": "Respiratory / Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hard_metal_lung_disease",
+      "name": "Hard metal lung disease",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -43188,6 +43892,28 @@
       }
     },
     {
+      "id": "mounier_kuhn_syndrome",
+      "name": "Mounier-Kuhn syndrome",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "neonatal_rds",
       "name": "Neonatal Respiratory Distress Syndrome",
       "specialty": "Pulmonology",
@@ -43386,6 +44112,28 @@
       }
     },
     {
+      "id": "popcorn_workers_lung",
+      "name": "Popcorn worker's lung",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "primary_ciliary_dyskinesia",
       "name": "Primary ciliary dyskinesia",
       "specialty": "Pulmonology",
@@ -43410,6 +44158,28 @@
     {
       "id": "pulmonary_alveolar_microlithiasis",
       "name": "Pulmonary alveolar microlithiasis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pulmonary_arteriovenous_malformation",
+      "name": "Pulmonary arteriovenous malformation",
       "specialty": "Pulmonology",
       "system": "Respiratory",
       "tier": "reference",
@@ -43606,6 +44376,28 @@
       }
     },
     {
+      "id": "siderosis",
+      "name": "Siderosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "silicosis",
       "name": "Silicosis",
       "specialty": "Pulmonology",
@@ -43694,6 +44486,72 @@
       }
     },
     {
+      "id": "talcosis",
+      "name": "Talcosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tracheobronchomalacia",
+      "name": "Tracheobronchomalacia",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tracheobronchopathia_osteochondroplastica",
+      "name": "Tracheobronchopathia osteochondroplastica",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "transient_tachypnea_of_newborn",
       "name": "Transient Tachypnea of the Newborn",
       "specialty": "Pulmonology",
@@ -43757,6 +44615,50 @@
         "drugTherapy": true,
         "dosing": true,
         "stewardship": true
+      }
+    },
+    {
+      "id": "williams_campbell_syndrome",
+      "name": "Williams-Campbell syndrome",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "yellow_nail_syndrome",
+      "name": "Yellow nail syndrome",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
       }
     },
     {
@@ -48072,6 +48974,28 @@
       }
     },
     {
+      "id": "abacavir_hypersensitivity",
+      "name": "Abacavir hypersensitivity (HLA-B*57:01)",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acquired_methemoglobinemia",
       "name": "Acquired methaemoglobinaemia",
       "specialty": "Toxicology",
@@ -48120,6 +49044,28 @@
       "name": "Amatoxin (Amanita) mushroom poisoning",
       "specialty": "Toxicology",
       "system": "Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "phenytoin_hypersensitivity_syndrome",
+      "name": "Anticonvulsant hypersensitivity syndrome",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -48402,6 +49348,28 @@
       }
     },
     {
+      "id": "dapsone_hypersensitivity_syndrome",
+      "name": "Dapsone hypersensitivity syndrome",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "digoxin_toxicity",
       "name": "Digoxin toxicity",
       "specialty": "Toxicology",
@@ -48437,6 +49405,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "disulfiram_ethanol_reaction",
+      "name": "Disulfiram-ethanol reaction",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -48512,6 +49502,94 @@
       }
     },
     {
+      "id": "drug_induced_liver_injury",
+      "name": "Drug-induced liver injury (DILI)",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "drug_induced_lupus",
+      "name": "Drug-induced lupus erythematosus",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "drug_induced_pemphigus",
+      "name": "Drug-induced pemphigus",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "drug_induced_qt_prolongation",
+      "name": "Drug-induced QT prolongation / torsades",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "electrical_injury",
       "name": "Electrical injury",
       "specialty": "Toxicology",
@@ -48538,6 +49616,28 @@
       "name": "Ethylene glycol poisoning",
       "specialty": "Toxicology",
       "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gray_baby_syndrome",
+      "name": "Gray baby syndrome (chloramphenicol)",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -48754,6 +49854,28 @@
       }
     },
     {
+      "id": "neuroleptic_malignant_syndrome",
+      "name": "Neuroleptic malignant syndrome",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "opioid_od",
       "name": "Opioid overdose",
       "specialty": "Toxicology",
@@ -48877,6 +49999,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "propofol_infusion_syndrome",
+      "name": "Propofol infusion syndrome",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -49022,6 +50166,28 @@
       "name": "Sea snake envenomation",
       "specialty": "Toxicology",
       "system": "Toxicology / Envenomation",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "serotonin_syndrome",
+      "name": "Serotonin syndrome",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -49216,6 +50382,28 @@
       }
     },
     {
+      "id": "thiopurine_tpmt_toxicity",
+      "name": "Thiopurine (TPMT/NUDT15) myelotoxicity",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tick_paralysis",
       "name": "Tick paralysis",
       "specialty": "Toxicology",
@@ -49242,6 +50430,50 @@
       "name": "Tricyclic antidepressant overdose",
       "specialty": "Toxicology",
       "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "red_man_syndrome",
+      "name": "Vancomycin infusion (red man) reaction",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "warfarin_skin_necrosis",
+      "name": "Warfarin-induced skin necrosis",
+      "specialty": "Toxicology",
+      "system": "Clinical pharmacology / Toxicology",
       "tier": "reference",
       "caps": {
         "overview": true,
