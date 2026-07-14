@@ -3375,6 +3375,8 @@
   }
 
   /* --------------------------- subscription lifecycle (no listener leaks) --------------------- */
+  var _grpCreating = false;      // guard: a createGroup is in flight — block duplicate unit creation
+  var _grpJustCreated = null;    // {id, ts}: a just-created unit not yet propagated to the collectionGroup listener
   function grpEnsureGroupsSub() {
     if (!groupMode()) return;
     var api = groupsApi(); if (!api) return;
@@ -3385,12 +3387,16 @@
     _grpSubGroups = api.subscribeGroups(function (groups) {
       _grpList = groups || [];
       if (_grp) {
-        var found = null, i; for (i = 0; i < _grpList.length; i++) if (_grpList[i].id === _grp.id) { found = _grpList[i]; break; }
-        _grp = found || null;                                   // unit may have been left / deleted
-        if (_grp) { try { if (api.setActiveGroup) api.setActiveGroup(_grp.id, _grp.myRole); } catch (e) {} }
-        else {                                                  // Phase 5: left/removed/deleted → drop roster + go back to the board
+        var prev = _grp, found = null, i; for (i = 0; i < _grpList.length; i++) if (_grpList[i].id === prev.id) { found = _grpList[i]; break; }
+        if (found) {                                            // reconcile the optimistic/selected unit to the live doc
+          _grp = found;
+          try { if (api.setActiveGroup) api.setActiveGroup(_grp.id, _grp.myRole); } catch (e) {}
+          if (_grpJustCreated && _grpJustCreated.id === found.id) _grpJustCreated = null;
+        } else if (_grpJustCreated && _grpJustCreated.id === prev.id && (nowTs() - _grpJustCreated.ts) < 20000) {
+          _grp = prev;                                          // a unit we JUST created hasn't reached the collectionGroup listener yet — KEEP it (don't make the create "vanish")
+        } else {                                                // Phase 5: genuinely left/removed/deleted → drop roster + go back to the board
           if (_grpSubMembers) { try { _grpSubMembers(); } catch (e) {} _grpSubMembers = null; }
-          _grpMembers = null; grpTeardownPatient(); _screen = "board";
+          _grpMembers = null; grpTeardownPatient(); _grp = null; _screen = "board";
         }
       }
       if (!_grp && _grpList.length) {
@@ -3733,11 +3739,27 @@
   function grpDoCreate() {
     var api = groupsApi(); if (!api) return;
     var nm = grpVal("#grpNm"); if (!nm.trim()) { if (window.toast) toast("Enter a unit name"); return; }
+    if (_grpCreating) return;                          // a create is already in flight → never make a second unit
+    _grpCreating = true;
+    var unit = grpVal("#grpUnit"), hosp = grpVal("#grpHosp");
     closeForm();
-    api.createGroup({ name: nm, unit: grpVal("#grpUnit"), hospital: grpVal("#grpHosp") }).then(function (id) {
+    api.createGroup({ name: nm, unit: unit, hospital: hosp }).then(function (id) {
+      _grpCreating = false;
       if (window.toast) toast("Unit created");
-      var tries = 0, iv = setInterval(function () { var g = grpById(id); if (g) { clearInterval(iv); grpSelect(g, false); } else if (++tries > 40) clearInterval(iv); }, 150);
-    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t create the unit"); if (ICU.isOpen()) paint(); });
+      // Select the new unit IMMEDIATELY (optimistic). Do NOT wait for the collectionGroup
+      // subscription to round-trip — that delay showed NOTHING, so users thought creation failed
+      // and created DUPLICATE units, then saw both on reopen. The live subscription reconciles _grp
+      // to the real doc when it lands; _grpJustCreated keeps it from being dropped in the meantime.
+      _grpJustCreated = { id: id, ts: nowTs() };
+      try { grpEnsureGroupsSub(); } catch (e) {}
+      var g = grpById(id) || { id: id, name: nm, unit: unit, hospital: hosp, myRole: "head", roles: {}, members: [], createdBy: (typeof ownerNow === "function" ? ownerNow() : null) };
+      grpSelect(g, false);
+    }, function (e) {
+      _grpCreating = false;
+      _grpErr = grpErrText(e);
+      if (window.toast) toast("Couldn’t create the unit — " + grpErrText(e));
+      if (ICU.isOpen()) paint();
+    });
   }
   /* --------------------------- Phase 5: add-by-ID/email + invite-by-link + leave/remove ------- */
   // Add a colleague by StewardMD Doctor ID OR email (admin only). The role picker excludes head
