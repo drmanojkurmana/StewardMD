@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3165,
+    "diseases": 3221,
     "diagnostic": 141,
-    "reference": 3024,
+    "reference": 3080,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 12.5,
+    "severity": 12.3,
     "prognosis": 99.7,
-    "diagnosticScoring": 4.5,
-    "management": 4.4,
-    "drugTherapy": 4.1,
-    "dosing": 4.1,
+    "diagnosticScoring": 4.4,
+    "management": 4.3,
+    "drugTherapy": 4,
+    "dosing": 4,
     "stewardship": 1.6
   },
   "bySpecialty": {
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 159,
+      "total": 200,
       "diagnostic": 5,
-      "reference": 154,
+      "reference": 195,
       "dims": {
-        "overview": 159,
-        "clinicalFeatures": 159,
-        "pathophysiology": 159,
-        "differential": 159,
-        "investigations": 158,
-        "redFlags": 159,
+        "overview": 200,
+        "clinicalFeatures": 200,
+        "pathophysiology": 200,
+        "differential": 200,
+        "investigations": 199,
+        "redFlags": 200,
         "severity": 7,
-        "prognosis": 158,
+        "prognosis": 199,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -160,18 +160,18 @@
       }
     },
     "Cardiology": {
-      "total": 125,
+      "total": 140,
       "diagnostic": 11,
-      "reference": 114,
+      "reference": 129,
       "dims": {
-        "overview": 125,
-        "clinicalFeatures": 125,
-        "pathophysiology": 125,
-        "differential": 123,
-        "investigations": 125,
-        "redFlags": 125,
+        "overview": 140,
+        "clinicalFeatures": 140,
+        "pathophysiology": 140,
+        "differential": 138,
+        "investigations": 140,
+        "redFlags": 140,
         "severity": 48,
-        "prognosis": 124,
+        "prognosis": 139,
         "diagnosticScoring": 11,
         "management": 11,
         "drugTherapy": 9,
@@ -1802,6 +1802,28 @@
       }
     },
     {
+      "id": "atrial_septal_aneurysm",
+      "name": "Atrial septal aneurysm",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "atrial_septal_defect",
       "name": "Atrial Septal Defect",
       "specialty": "Cardiology",
@@ -1834,6 +1856,28 @@
         "clinicalFeatures": true,
         "pathophysiology": true,
         "differential": false,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "bicuspid_aortic_valve",
+      "name": "Bicuspid aortic valve",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
         "investigations": true,
         "redFlags": true,
         "severity": false,
@@ -2092,6 +2136,50 @@
       "name": "Catecholaminergic polymorphic ventricular tachycardia",
       "specialty": "Cardiology",
       "system": "Cardiovascular / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cor_pulmonale_chronic",
+      "name": "Chronic cor pulmonale",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chylopericardium",
+      "name": "Chylopericardium",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -2422,6 +2510,50 @@
       "name": "Ebstein anomaly",
       "specialty": "Cardiology",
       "system": "Cardiovascular / Congenital",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "effusive_constrictive_pericarditis",
+      "name": "Effusive-constrictive pericarditis",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "eisenmenger_syndrome",
+      "name": "Eisenmenger syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -2902,6 +3034,28 @@
       }
     },
     {
+      "id": "lipomatous_atrial_septal_hypertrophy",
+      "name": "Lipomatous hypertrophy of the atrial septum",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lmna_cardiomyopathy",
       "name": "LMNA cardiomyopathy",
       "specialty": "Cardiology",
@@ -2948,6 +3102,72 @@
     {
       "id": "long_qt_syndrome",
       "name": "Long QT syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lutembacher_syndrome",
+      "name": "Lutembacher syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mitral_annular_calcification",
+      "name": "Mitral annular calcification",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mitral_arcade",
+      "name": "Mitral arcade (hammock valve)",
       "specialty": "Cardiology",
       "system": "Cardiovascular",
       "tier": "reference",
@@ -3188,6 +3408,28 @@
       }
     },
     {
+      "id": "patent_foramen_ovale",
+      "name": "Patent foramen ovale",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pericardial_disease",
       "name": "Pericardial Disease",
       "specialty": "Cardiology",
@@ -3267,6 +3509,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pneumopericardium",
+      "name": "Pneumopericardium",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -3408,6 +3672,28 @@
       }
     },
     {
+      "id": "pulmonary_valve_stenosis",
+      "name": "Pulmonary valve stenosis",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pulmonic_valve_disease",
       "name": "Pulmonic Valve Disease",
       "specialty": "Cardiology",
@@ -3434,6 +3720,50 @@
       "name": "Quadricuspid aortic valve",
       "specialty": "Cardiology",
       "system": "Cardiovascular / Congenital",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "quadricuspid_pulmonary_valve",
+      "name": "Quadricuspid pulmonary valve",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "recurrent_pericarditis",
+      "name": "Recurrent pericarditis",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -4728,6 +5058,72 @@
       }
     },
     {
+      "id": "anagen_effluvium",
+      "name": "Anagen effluvium",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "androgenetic_alopecia",
+      "name": "Androgenetic alopecia",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ashy_dermatosis",
+      "name": "Ashy dermatosis (erythema dyschromicum perstans)",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "atopic_dermatitis",
       "name": "Atopic dermatitis",
       "specialty": "Dermatology",
@@ -4754,6 +5150,50 @@
       "name": "Basal Cell Carcinoma",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "beau_lines",
+      "name": "Beau lines",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "becker_nevus",
+      "name": "Becker naevus",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -4820,6 +5260,28 @@
       "name": "Bullous pemphigoid",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cafe_au_lait_macule",
+      "name": "Cafe-au-lait macule",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -4945,6 +5407,28 @@
         "drugTherapy": true,
         "dosing": true,
         "stewardship": true
+      }
+    },
+    {
+      "id": "central_centrifugal_cicatricial_alopecia",
+      "name": "Central centrifugal cicatricial alopecia",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
       }
     },
     {
@@ -5234,10 +5718,54 @@
       }
     },
     {
+      "id": "digital_myxoid_cyst",
+      "name": "Digital myxoid (mucous) cyst",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "discoid_lupus_erythematosus",
       "name": "Discoid Lupus Erythematosus",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dissecting_cellulitis_scalp",
+      "name": "Dissecting cellulitis of the scalp",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -5696,10 +6224,54 @@
       }
     },
     {
+      "id": "folliculitis_decalvans",
+      "name": "Folliculitis decalvans",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "fox_fordyce_disease",
       "name": "Fox-Fordyce disease",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "frontal_fibrosing_alopecia",
+      "name": "Frontal fibrosing alopecia",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -5810,6 +6382,28 @@
       "name": "Grover disease (transient acantholytic dermatosis)",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "habit_tic_deformity",
+      "name": "Habit-tic nail deformity",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6008,6 +6602,28 @@
       "name": "Ichthyosis hystrix",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "idiopathic_guttate_hypomelanosis",
+      "name": "Idiopathic guttate hypomelanosis",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6400,6 +7016,28 @@
       }
     },
     {
+      "id": "koilonychia",
+      "name": "Koilonychia (spoon nails)",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lamellar_ichthyosis",
       "name": "Lamellar ichthyosis",
       "specialty": "Dermatology",
@@ -6448,6 +7086,28 @@
       "name": "Lichen nitidus",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lichen_planopilaris",
+      "name": "Lichen planopilaris",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6598,6 +7258,50 @@
       }
     },
     {
+      "id": "longitudinal_melanonychia",
+      "name": "Longitudinal melanonychia",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "loose_anagen_syndrome",
+      "name": "Loose anagen syndrome",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "loricrin_keratoderma",
       "name": "Loricrin keratoderma",
       "specialty": "Dermatology",
@@ -6708,6 +7412,28 @@
       }
     },
     {
+      "id": "median_nail_dystrophy",
+      "name": "Median canaliform nail dystrophy",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "melasma",
       "name": "Melasma",
       "specialty": "Dermatology",
@@ -6796,6 +7522,28 @@
       }
     },
     {
+      "id": "mongolian_spot",
+      "name": "Mongolian spot (congenital dermal melanocytosis)",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "monilethrix",
       "name": "Monilethrix",
       "specialty": "Dermatology",
@@ -6866,6 +7614,72 @@
       "name": "Naegeli-Franceschetti-Jadassohn syndrome",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nevus_depigmentosus",
+      "name": "Naevus depigmentosus",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nevus_of_ito",
+      "name": "Naevus of Ito",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nevus_of_ota",
+      "name": "Naevus of Ota",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7020,6 +7834,72 @@
       "name": "Olmsted syndrome",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "onychogryphosis",
+      "name": "Onychogryphosis",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "onycholysis",
+      "name": "Onycholysis",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "onychomadesis",
+      "name": "Onychomadesis",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7302,10 +8182,54 @@
       }
     },
     {
+      "id": "pili_torti",
+      "name": "Pili torti",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pilonidal_sinus",
       "name": "Pilonidal sinus",
       "specialty": "Dermatology",
       "system": "Skin / Soft tissue / Surgery",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pincer_nail_deformity",
+      "name": "Pincer nail deformity",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7412,10 +8336,76 @@
       }
     },
     {
+      "id": "poikiloderma_of_civatte",
+      "name": "Poikiloderma of Civatte",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "port_wine_stain",
       "name": "Port-Wine Stain",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "postinflammatory_hyperpigmentation",
+      "name": "Post-inflammatory hyperpigmentation",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "progressive_macular_hypomelanosis",
+      "name": "Progressive macular hypomelanosis",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7570,6 +8560,50 @@
       "name": "Reactive perforating collagenosis",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "retronychia",
+      "name": "Retronychia",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "riehl_melanosis",
+      "name": "Riehl melanosis (pigmented contact dermatitis)",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Pigmentary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7830,6 +8864,72 @@
       }
     },
     {
+      "id": "subungual_exostosis",
+      "name": "Subungual exostosis",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "glomus_tumor_nail",
+      "name": "Subungual glomus tumour",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "subungual_hematoma",
+      "name": "Subungual haematoma",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "superficial_fungal_infections",
       "name": "Superficial Fungal Infections",
       "specialty": "Dermatology",
@@ -7874,10 +8974,120 @@
       }
     },
     {
+      "id": "telogen_effluvium",
+      "name": "Telogen effluvium",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tinea_versicolor",
       "name": "Tinea Versicolor",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trachyonychia",
+      "name": "Trachyonychia (twenty-nail dystrophy)",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Nail",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "traction_alopecia",
+      "name": "Traction alopecia",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trichorrhexis_nodosa",
+      "name": "Trichorrhexis nodosa",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trichotillomania",
+      "name": "Trichotillomania",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7988,6 +9198,28 @@
       "name": "Vohwinkel syndrome",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "woolly_hair",
+      "name": "Woolly hair",
+      "specialty": "Dermatology",
+      "system": "Dermatology / Trichology",
       "tier": "reference",
       "caps": {
         "overview": true,
