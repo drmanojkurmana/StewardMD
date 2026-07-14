@@ -2687,6 +2687,186 @@
       var s=0; s += v.bmi>20?0 : v.bmi>=18.5?1 : 2; s+=Number(v.loss); if(v.acute)s+=2;
       var b=s===0?"Low malnutrition risk — routine care":s===1?"Medium risk — observe and document intake":"High risk — treat / refer to dietitian";
       return { v:s, u:"points", i:b+". Ref: BAPEN (MUST)." };
+    } },
+
+  { id:"nyha", cat:"Cardiovascular", icon:"❤️", title:"NYHA Functional Classification",
+    desc:"Symptom-based functional class in heart failure.",
+    inputs:[
+      { id:"cls", label:"Functional status", type:"select", opts:[
+        {v:"1",t:"I — no limitation of ordinary activity"},{v:"2",t:"II — slight limitation; symptoms with ordinary activity"},
+        {v:"3",t:"III — marked limitation; symptoms with less-than-ordinary activity"},{v:"4",t:"IV — symptoms at rest"} ] }
+    ],
+    compute:function(v){
+      var m={1:"Class I — no limitation of physical activity",2:"Class II — slight limitation; comfortable at rest",3:"Class III — marked limitation; comfortable only at rest",4:"Class IV — symptoms at rest, worsened by any activity"};
+      return { v:"Class "+["","I","II","III","IV"][Number(v.cls)], u:"", i:m[Number(v.cls)]+". Ref: New York Heart Association." };
+    } },
+
+  { id:"hoehn_yahr", cat:"Neurology", icon:"🧠", title:"Hoehn and Yahr Staging (Parkinson's)",
+    desc:"Clinical staging of Parkinson's disease severity.",
+    inputs:[
+      { id:"stage", label:"Stage", type:"select", opts:[
+        {v:"1",t:"1 — unilateral involvement only"},{v:"2",t:"2 — bilateral, no balance impairment"},
+        {v:"3",t:"3 — bilateral with postural instability; physically independent"},{v:"4",t:"4 — severe disability; still able to walk/stand unassisted"},
+        {v:"5",t:"5 — wheelchair-bound or bedridden unless aided"} ] }
+    ],
+    compute:function(v){
+      var m={1:"Unilateral disease — minimal functional impairment",2:"Bilateral disease without balance impairment",3:"Bilateral disease with postural instability; remains independent",4:"Severe disability but still able to walk or stand unassisted",5:"Wheelchair-bound or bedridden without assistance"};
+      return { v:"Stage "+v.stage, u:"", i:m[Number(v.stage)]+". Ref: Hoehn & Yahr, Neurology 1967." };
+    } },
+
+  { id:"epworth", cat:"Neurology", icon:"😴", title:"Epworth Sleepiness Scale",
+    desc:"Daytime sleepiness from the chance of dozing in 8 situations.",
+    inputs:[
+      { id:"s1", label:"Sitting and reading", type:"select", opts:[{v:"0",t:"Would never doze"},{v:"1",t:"Slight chance"},{v:"2",t:"Moderate chance"},{v:"3",t:"High chance"}] },
+      { id:"s2", label:"Watching television", type:"select", opts:[{v:"0",t:"Would never doze"},{v:"1",t:"Slight chance"},{v:"2",t:"Moderate chance"},{v:"3",t:"High chance"}] },
+      { id:"s3", label:"Sitting inactive in a public place", type:"select", opts:[{v:"0",t:"Would never doze"},{v:"1",t:"Slight chance"},{v:"2",t:"Moderate chance"},{v:"3",t:"High chance"}] },
+      { id:"s4", label:"Passenger in a car for an hour without a break", type:"select", opts:[{v:"0",t:"Would never doze"},{v:"1",t:"Slight chance"},{v:"2",t:"Moderate chance"},{v:"3",t:"High chance"}] },
+      { id:"s5", label:"Lying down to rest in the afternoon", type:"select", opts:[{v:"0",t:"Would never doze"},{v:"1",t:"Slight chance"},{v:"2",t:"Moderate chance"},{v:"3",t:"High chance"}] },
+      { id:"s6", label:"Sitting and talking to someone", type:"select", opts:[{v:"0",t:"Would never doze"},{v:"1",t:"Slight chance"},{v:"2",t:"Moderate chance"},{v:"3",t:"High chance"}] },
+      { id:"s7", label:"Sitting quietly after lunch (no alcohol)", type:"select", opts:[{v:"0",t:"Would never doze"},{v:"1",t:"Slight chance"},{v:"2",t:"Moderate chance"},{v:"3",t:"High chance"}] },
+      { id:"s8", label:"In a car, stopped in traffic", type:"select", opts:[{v:"0",t:"Would never doze"},{v:"1",t:"Slight chance"},{v:"2",t:"Moderate chance"},{v:"3",t:"High chance"}] }
+    ],
+    compute:function(v){
+      var s=0; for(var i=1;i<=8;i++) s+=Number(v["s"+i]);
+      var b=s<=5?"Lower normal daytime sleepiness":s<=10?"Higher normal daytime sleepiness":s<=12?"Mild excessive daytime sleepiness":s<=15?"Moderate excessive daytime sleepiness":"Severe excessive daytime sleepiness";
+      return { v:s, u:"/24", i:b+". Ref: Johns, Sleep 1991." };
+    } },
+
+  { id:"spetzler_martin", cat:"Neurology", icon:"🧠", title:"Spetzler-Martin AVM Grade",
+    desc:"Surgical risk grade for a brain arteriovenous malformation.",
+    inputs:[
+      { id:"size", label:"Size of nidus", type:"select", opts:[{v:"1",t:"Small (< 3 cm)"},{v:"2",t:"Medium (3–6 cm)"},{v:"3",t:"Large (> 6 cm)"}] },
+      { id:"eloq", label:"Adjacent eloquent brain", type:"select", opts:[{v:"0",t:"Non-eloquent"},{v:"1",t:"Eloquent"}] },
+      { id:"venous", label:"Venous drainage", type:"select", opts:[{v:"0",t:"Superficial only"},{v:"1",t:"Deep component"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.size)+Number(v.eloq)+Number(v.venous);
+      var b=s<=2?"Lower surgical risk":s===3?"Intermediate surgical risk":"Higher surgical risk";
+      return { v:"Grade "+["","I","II","III","IV","V"][s], u:"", i:b+" (higher grade = greater operative morbidity). Ref: Spetzler & Martin, J Neurosurg 1986." };
+    } },
+
+  { id:"murray", cat:"Critical care", icon:"🫁", title:"Murray Lung Injury Score",
+    desc:"Severity of acute lung injury / ARDS.",
+    inputs:[
+      { id:"cxr", label:"Chest X-ray (quadrants with consolidation)", type:"select", opts:[{v:"0",t:"No consolidation"},{v:"1",t:"1 quadrant"},{v:"2",t:"2 quadrants"},{v:"3",t:"3 quadrants"},{v:"4",t:"4 quadrants"}] },
+      { id:"hypox", label:"Hypoxaemia (PaO₂/FiO₂)", type:"select", opts:[{v:"0",t:"≥ 300"},{v:"1",t:"225–299"},{v:"2",t:"175–224"},{v:"3",t:"100–174"},{v:"4",t:"< 100"}] },
+      { id:"peep", label:"PEEP (if ventilated)", type:"select", opts:[{v:"0",t:"≤ 5"},{v:"1",t:"6–8"},{v:"2",t:"9–11"},{v:"3",t:"12–14"},{v:"4",t:"≥ 15"}] },
+      { id:"comp", label:"Compliance (mL/cmH₂O)", type:"select", opts:[{v:"0",t:"≥ 80"},{v:"1",t:"60–79"},{v:"2",t:"40–59"},{v:"3",t:"20–39"},{v:"4",t:"≤ 19"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.cxr)+Number(v.hypox)+Number(v.peep)+Number(v.comp))/4;
+      var b=s===0?"No lung injury":s<=2.5?"Mild-to-moderate lung injury":"Severe lung injury (ARDS)";
+      return { v:r1(s), u:"", i:b+". Ref: Murray, Am Rev Respir Dis 1988." };
+    } },
+
+  { id:"kdigo_aki", cat:"Renal", icon:"🫘", title:"KDIGO AKI Staging",
+    desc:"Stages acute kidney injury by creatinine and urine output.",
+    inputs:[
+      { id:"cr", label:"Creatinine criterion", type:"select", opts:[
+        {v:"0",t:"No significant rise"},{v:"1",t:"1.5–1.9× baseline or ≥0.3 mg/dL rise"},{v:"2",t:"2.0–2.9× baseline"},{v:"3",t:"≥3× baseline, ≥4.0 mg/dL, or on RRT"} ] },
+      { id:"uo", label:"Urine output criterion", type:"select", opts:[
+        {v:"0",t:"Adequate"},{v:"1",t:"< 0.5 mL/kg/h for 6–12 h"},{v:"2",t:"< 0.5 mL/kg/h for ≥12 h"},{v:"3",t:"< 0.3 mL/kg/h for ≥24 h or anuria ≥12 h"} ] }
+    ],
+    compute:function(v){
+      var s=Math.max(Number(v.cr),Number(v.uo));
+      return { v:s===0?"No AKI":"Stage "+s, u:"", i:(s===0?"Does not meet KDIGO AKI criteria":"AKI stage "+s+" (highest of the creatinine and urine-output criteria)")+". Ref: KDIGO 2012." };
+    } },
+
+  { id:"milan", cat:"Hepatology", icon:"🩺", title:"Milan Criteria (HCC Transplant Eligibility)",
+    desc:"Whether hepatocellular carcinoma meets Milan criteria for transplantation.",
+    inputs:[
+      { id:"single", label:"Single tumour ≤ 5 cm", type:"check" },
+      { id:"multi", label:"Up to 3 nodules, each ≤ 3 cm", type:"check" },
+      { id:"novasc", label:"No macrovascular invasion", type:"check" },
+      { id:"noextra", label:"No extrahepatic spread", type:"check" }
+    ],
+    compute:function(v){
+      var within=(v.single||v.multi)&&v.novasc&&v.noextra;
+      return { v: within?"Within Milan criteria":"Outside Milan criteria", u:"", i:(within?"Generally eligible for liver transplantation on tumour burden":"Exceeds Milan tumour burden — standard criteria not met (consider extended criteria)")+". Ref: Mazzaferro, N Engl J Med 1996." };
+    } },
+
+  { id:"findrisc", cat:"Endocrine", icon:"🧬", title:"FINDRISC (Type 2 Diabetes Risk)",
+    desc:"10-year risk of developing type 2 diabetes.",
+    inputs:[
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"< 45"},{v:"2",t:"45–54"},{v:"3",t:"55–64"},{v:"4",t:"> 64"}] },
+      { id:"bmi", label:"BMI", type:"select", opts:[{v:"0",t:"< 25"},{v:"1",t:"25–30"},{v:"3",t:"> 30"}] },
+      { id:"waist", label:"Waist circumference", type:"select", opts:[{v:"0",t:"Men <94 / Women <80 cm"},{v:"3",t:"Men 94–102 / Women 80–88 cm"},{v:"4",t:"Men >102 / Women >88 cm"}] },
+      { id:"active", label:"≥ 30 min physical activity daily", type:"select", opts:[{v:"0",t:"Yes"},{v:"2",t:"No"}] },
+      { id:"veg", label:"Eats vegetables/fruit daily", type:"select", opts:[{v:"0",t:"Yes"},{v:"1",t:"No"}] },
+      { id:"bpmed", label:"On blood-pressure medication", type:"select", opts:[{v:"0",t:"No"},{v:"2",t:"Yes"}] },
+      { id:"gluc", label:"History of high blood glucose", type:"select", opts:[{v:"0",t:"No"},{v:"5",t:"Yes"}] },
+      { id:"fhx", label:"Family history of diabetes", type:"select", opts:[{v:"0",t:"None"},{v:"3",t:"Grandparent / aunt / uncle / cousin"},{v:"5",t:"Parent / sibling / own child"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.age)+Number(v.bmi)+Number(v.waist)+Number(v.active)+Number(v.veg)+Number(v.bpmed)+Number(v.gluc)+Number(v.fhx);
+      var b=s<7?"Low risk":s<=11?"Slightly elevated risk":s<=14?"Moderate risk":s<=20?"High risk":"Very high risk";
+      return { v:s, u:"points", i:b+" of type 2 diabetes over 10 years. Ref: Lindström & Tuomilehto, Diabetes Care 2003 (FINDRISC)." };
+    } },
+
+  { id:"caspar", cat:"Rheumatology", icon:"🦴", title:"CASPAR Criteria (Psoriatic Arthritis)",
+    desc:"Classification of psoriatic arthritis (requires inflammatory articular disease).",
+    inputs:[
+      { id:"entry", label:"Inflammatory articular disease (joint / spine / entheseal)", type:"check" },
+      { id:"pso", label:"Psoriasis status", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Personal or family history"},{v:"2",t:"Current psoriasis"}] },
+      { id:"nail", label:"Psoriatic nail dystrophy", type:"check" },
+      { id:"rf", label:"Negative rheumatoid factor", type:"check" },
+      { id:"dactyl", label:"Current or prior dactylitis", type:"check" },
+      { id:"xray", label:"Juxta-articular new bone formation on X-ray", type:"check" }
+    ],
+    compute:function(v){
+      var s=Number(v.pso); if(v.nail)s++; if(v.rf)s++; if(v.dactyl)s++; if(v.xray)s++;
+      var meets=v.entry && s>=3;
+      return { v: meets?"Meets CASPAR ("+s+" pts)":"Does not meet ("+s+" pts)", u:"", i:(v.entry?(meets?"Classifiable as psoriatic arthritis":"Inflammatory articular disease present but < 3 criteria points"):"Entry requirement (inflammatory articular disease) not met")+". Ref: Taylor, Arthritis Rheum 2006 (CASPAR)." };
+    } },
+
+  { id:"hscore", cat:"Haematology", icon:"🩸", title:"HScore (Haemophagocytic Syndrome)",
+    desc:"Probability of reactive haemophagocytic lymphohistiocytosis (HLH).",
+    inputs:[
+      { id:"immuno", label:"Known underlying immunosuppression", type:"select", opts:[{v:"0",t:"No"},{v:"18",t:"Yes"}] },
+      { id:"temp", label:"Temperature", type:"select", opts:[{v:"0",t:"< 38.4°C"},{v:"33",t:"38.4–39.4°C"},{v:"49",t:"> 39.4°C"}] },
+      { id:"organ", label:"Organomegaly", type:"select", opts:[{v:"0",t:"None"},{v:"23",t:"Hepatomegaly or splenomegaly"},{v:"38",t:"Both"}] },
+      { id:"cyto", label:"Cytopenias (lineages affected)", type:"select", opts:[{v:"0",t:"1 lineage"},{v:"24",t:"2 lineages"},{v:"34",t:"3 lineages"}] },
+      { id:"ferr", label:"Ferritin", type:"select", opts:[{v:"0",t:"< 2000 ng/mL"},{v:"35",t:"2000–6000 ng/mL"},{v:"50",t:"> 6000 ng/mL"}] },
+      { id:"trig", label:"Triglycerides", type:"select", opts:[{v:"0",t:"< 1.5 mmol/L"},{v:"44",t:"1.5–4 mmol/L"},{v:"64",t:"> 4 mmol/L"}] },
+      { id:"fib", label:"Fibrinogen", type:"select", opts:[{v:"0",t:"> 2.5 g/L"},{v:"30",t:"≤ 2.5 g/L"}] },
+      { id:"ast", label:"AST", type:"select", opts:[{v:"0",t:"< 30 IU/L"},{v:"19",t:"≥ 30 IU/L"}] },
+      { id:"marrow", label:"Haemophagocytosis on marrow aspirate", type:"select", opts:[{v:"0",t:"No"},{v:"35",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.immuno)+Number(v.temp)+Number(v.organ)+Number(v.cyto)+Number(v.ferr)+Number(v.trig)+Number(v.fib)+Number(v.ast)+Number(v.marrow);
+      var b=s<=90?"Low probability of HLH":s<=168?"Intermediate probability":"High probability of HLH";
+      return { v:s, u:"points", i:b+" (~169 approximates 50% probability). Ref: Fardet, Arthritis Rheumatol 2014 (HScore)." };
+    } },
+
+  { id:"plasmic", cat:"Haematology", icon:"🩸", title:"PLASMIC Score (TTP Likelihood)",
+    desc:"Predicts severe ADAMTS13 deficiency (TTP) in thrombotic microangiopathy.",
+    inputs:[
+      { id:"plt", label:"Platelet count < 30 ×10⁹/L", type:"check" },
+      { id:"hemol", label:"Haemolysis (retic >2.5%, undetectable haptoglobin, or raised indirect bilirubin)", type:"check" },
+      { id:"nocancer", label:"No active cancer", type:"check" },
+      { id:"notransplant", label:"No solid-organ or stem-cell transplant", type:"check" },
+      { id:"mcv", label:"MCV < 90 fL", type:"check" },
+      { id:"inr", label:"INR < 1.5", type:"check" },
+      { id:"cr", label:"Creatinine < 2.0 mg/dL", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; ["plt","hemol","nocancer","notransplant","mcv","inr","cr"].forEach(function(k){ if(v[k])s++; });
+      var b=s<=4?"Low probability of severe ADAMTS13 deficiency":s===5?"Intermediate probability":"High probability — consider urgent plasma exchange and ADAMTS13 testing";
+      return { v:s, u:"/7", i:b+". Ref: Bendapudi, Lancet Haematol 2017 (PLASMIC)." };
+    } },
+
+  { id:"cfs", cat:"General", icon:"⚖️", title:"Clinical Frailty Scale (Rockwood)",
+    desc:"Global frailty assessment in older adults.",
+    inputs:[
+      { id:"level", label:"Frailty level", type:"select", opts:[
+        {v:"1",t:"1 — Very fit"},{v:"2",t:"2 — Well"},{v:"3",t:"3 — Managing well"},{v:"4",t:"4 — Living with very mild frailty"},
+        {v:"5",t:"5 — Living with mild frailty"},{v:"6",t:"6 — Living with moderate frailty"},{v:"7",t:"7 — Living with severe frailty"},
+        {v:"8",t:"8 — Living with very severe frailty"},{v:"9",t:"9 — Terminally ill"} ] }
+    ],
+    compute:function(v){
+      var n=Number(v.level);
+      var b=n<=3?"Not frail":n===4?"Vulnerable / very mild frailty":n<=6?"Mild-to-moderate frailty":n<=8?"Severe frailty":"Terminally ill";
+      return { v:n, u:"/9", i:b+" (higher = more frail; correlates with adverse outcomes). Ref: Rockwood, CMAJ 2005." };
     } }
 
   ];
@@ -2822,7 +3002,19 @@
     canadian_syncope:["canadian syncope risk score","csrs","syncope risk","fainting risk"],
     albi:["albi grade","albumin bilirubin","liver function hcc","albi score"],
     khorana:["khorana score","cancer vte risk","chemotherapy thrombosis risk","cancer thromboprophylaxis"],
-    must:["malnutrition universal screening tool","must score","nutrition screen","malnutrition risk"]
+    must:["malnutrition universal screening tool","must score","nutrition screen","malnutrition risk"],
+    nyha:["nyha","new york heart association","heart failure class","functional class"],
+    hoehn_yahr:["hoehn yahr","parkinson staging","parkinsons disease stage"],
+    epworth:["epworth sleepiness scale","ess","daytime sleepiness","sleepiness score"],
+    spetzler_martin:["spetzler martin","avm grade","arteriovenous malformation grade"],
+    murray:["murray lung injury score","lung injury score","lis","ards severity"],
+    kdigo_aki:["kdigo","aki staging","acute kidney injury stage","aki criteria"],
+    milan:["milan criteria","hcc transplant","hepatocellular carcinoma transplant","liver transplant tumour"],
+    findrisc:["findrisc","diabetes risk score","type 2 diabetes risk","t2dm risk"],
+    caspar:["caspar criteria","psoriatic arthritis classification","psa classification"],
+    hscore:["hscore","hlh probability","haemophagocytic","macrophage activation syndrome","hemophagocytic"],
+    plasmic:["plasmic score","ttp likelihood","adamts13","thrombotic thrombocytopenic purpura","thrombotic microangiopathy"],
+    cfs:["clinical frailty scale","rockwood frailty","frailty score","cfs"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -2913,7 +3105,19 @@
     canadian_syncope:"Thiruganasambandamoorthy V, et al. JAMA Intern Med 2016;176(6):737–43.",
     albi:"Johnson PJ, et al. J Clin Oncol 2015;33(6):550–8 (ALBI).",
     khorana:"Khorana AA, et al. Blood 2008;111(10):4902–7.",
-    must:"BAPEN Malnutrition Universal Screening Tool (MUST)."
+    must:"BAPEN Malnutrition Universal Screening Tool (MUST).",
+    nyha:"The Criteria Committee of the New York Heart Association, 1994.",
+    hoehn_yahr:"Hoehn MM, Yahr MD. Neurology 1967;17(5):427–42.",
+    epworth:"Johns MW. Sleep 1991;14(6):540–5.",
+    spetzler_martin:"Spetzler RF, Martin NA. J Neurosurg 1986;65(4):476–83.",
+    murray:"Murray JF, et al. Am Rev Respir Dis 1988;138(3):720–3.",
+    kdigo_aki:"KDIGO AKI Work Group. Kidney Int Suppl 2012;2(1):1–138.",
+    milan:"Mazzaferro V, et al. N Engl J Med 1996;334(11):693–9.",
+    findrisc:"Lindström J, Tuomilehto J. Diabetes Care 2003;26(3):725–31.",
+    caspar:"Taylor W, et al. Arthritis Rheum 2006;54(8):2665–73 (CASPAR).",
+    hscore:"Fardet L, et al. Arthritis Rheumatol 2014;66(9):2613–20 (HScore).",
+    plasmic:"Bendapudi PK, et al. Lancet Haematol 2017;4(4):e157–64 (PLASMIC).",
+    cfs:"Rockwood K, et al. CMAJ 2005;173(5):489–95."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
