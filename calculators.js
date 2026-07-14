@@ -2122,6 +2122,187 @@
       var s=0; if(v.prev)s+=3; if(v.throm)s+=2; if(v.paral)s+=2; if(v.cancer)s+=2; if(v.immob)s++; if(v.icu)s++; if(v.age60)s++;
       var band = s<=1?"Low VTE risk — pharmacological prophylaxis often not warranted":s<=3?"Moderate risk — consider prophylaxis":"High risk — prophylaxis generally indicated (weigh bleeding risk)";
       return { v:s, u:"points", i:band+". Ref: Spyropoulos, Chest 2011 (IMPROVE)." };
+    } },
+
+  { id:"eag", cat:"Endocrine", icon:"🩸", title:"Estimated Average Glucose (eAG) from HbA1c",
+    desc:"Converts HbA1c to an estimated average glucose (ADAG study).",
+    inputs:[
+      { id:"a1c", label:"HbA1c", type:"number", unit:"%", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.a1c)) return ERR;
+      var mg = 28.7*v.a1c - 46.7;
+      var mmol = 1.59*v.a1c - 2.59;
+      if(mg<0) return { err:"HbA1c value too low to estimate an average glucose" };
+      return { v:r0(mg), u:"mg/dL", i:"Estimated average glucose ≈ "+r1(mmol)+" mmol/L, reflecting mean glucose over the preceding ~8–12 weeks. Ref: Nathan, Diabetes Care 2008 (ADAG)." };
+    } },
+
+  { id:"rpi", cat:"Haematology", icon:"🩸", title:"Reticulocyte Production Index (RPI)",
+    desc:"Corrects reticulocyte % for anaemia and maturation to assess marrow response.",
+    inputs:[
+      { id:"retic", label:"Reticulocyte count", type:"number", unit:"%", step:"0.1" },
+      { id:"hct", label:"Haematocrit", type:"number", unit:"%", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.retic)||!ok(v.hct)||v.hct<=0) return ERR;
+      var mf = v.hct>=35?1.0 : v.hct>=25?1.5 : v.hct>=20?2.0 : 2.5;
+      var rpi = (v.retic*(v.hct/45))/mf;
+      var b = rpi>=3?"Adequate marrow response (e.g. haemolysis or blood loss)":rpi<2?"Inadequate response — suggests a hypoproliferative/marrow cause":"Borderline response";
+      return { v:r1(rpi), u:"index", i:b+" (maturation factor "+mf+"). Ref: standard haematology." };
+    } },
+
+  { id:"isth_dic", cat:"Haematology", icon:"🩸", title:"ISTH Overt DIC Score",
+    desc:"Diagnoses overt disseminated intravascular coagulation (requires a compatible underlying disorder).",
+    inputs:[
+      { id:"plt", label:"Platelet count", type:"number", unit:"×10⁹/L", step:"1" },
+      { id:"marker", label:"Fibrin-related marker (D-dimer/FDP)", type:"select", opts:[{v:"0",t:"No increase"},{v:"2",t:"Moderate increase"},{v:"3",t:"Strong increase"}] },
+      { id:"ptp", label:"PT prolongation", type:"number", unit:"sec", step:"0.1" },
+      { id:"fib", label:"Fibrinogen", type:"number", unit:"g/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.plt)||!ok(v.ptp)||!ok(v.fib)) return ERR;
+      var s=0;
+      s += v.plt>100?0 : v.plt>=50?1 : 2;
+      s += Number(v.marker);
+      s += v.ptp>6?2 : v.ptp>=3?1 : 0;
+      s += v.fib<1?1:0;
+      var b = s>=5?"Compatible with overt DIC — repeat scoring daily":"Not suggestive of overt DIC — repeat if clinical suspicion persists";
+      return { v:s, u:"points", i:b+". Ref: Taylor, Thromb Haemost 2001 (ISTH)." };
+    } },
+
+  { id:"sdai", cat:"Rheumatology", icon:"🦴", title:"Simplified Disease Activity Index (SDAI) — RA",
+    desc:"Rheumatoid arthritis disease activity from joint counts, global assessments and CRP.",
+    inputs:[
+      { id:"tjc", label:"Tender joint count (of 28)", type:"number", step:"1" },
+      { id:"sjc", label:"Swollen joint count (of 28)", type:"number", step:"1" },
+      { id:"pga", label:"Patient global assessment (0–10)", type:"number", step:"0.1" },
+      { id:"ega", label:"Evaluator global assessment (0–10)", type:"number", step:"0.1" },
+      { id:"crp", label:"CRP", type:"number", unit:"mg/dL", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.tjc)||!ok(v.sjc)||!ok(v.pga)||!ok(v.ega)||!ok(v.crp)) return ERR;
+      var s = v.tjc+v.sjc+v.pga+v.ega+v.crp;
+      var b = s<=3.3?"Remission":s<=11?"Low disease activity":s<=26?"Moderate disease activity":"High disease activity";
+      return { v:r1(s), u:"points", i:b+". Note: CRP entered in mg/dL. Ref: Smolen, Rheumatology 2003." };
+    } },
+
+  { id:"braden", cat:"General", icon:"🛏️", title:"Braden Scale (Pressure Ulcer Risk)",
+    desc:"Risk of pressure ulcer development in immobile or at-risk patients.",
+    inputs:[
+      { id:"sens", label:"Sensory perception", type:"select", opts:[{v:"1",t:"Completely limited"},{v:"2",t:"Very limited"},{v:"3",t:"Slightly limited"},{v:"4",t:"No impairment"}] },
+      { id:"moist", label:"Moisture", type:"select", opts:[{v:"1",t:"Constantly moist"},{v:"2",t:"Very moist"},{v:"3",t:"Occasionally moist"},{v:"4",t:"Rarely moist"}] },
+      { id:"act", label:"Activity", type:"select", opts:[{v:"1",t:"Bedfast"},{v:"2",t:"Chairfast"},{v:"3",t:"Walks occasionally"},{v:"4",t:"Walks frequently"}] },
+      { id:"mob", label:"Mobility", type:"select", opts:[{v:"1",t:"Completely immobile"},{v:"2",t:"Very limited"},{v:"3",t:"Slightly limited"},{v:"4",t:"No limitation"}] },
+      { id:"nut", label:"Nutrition", type:"select", opts:[{v:"1",t:"Very poor"},{v:"2",t:"Probably inadequate"},{v:"3",t:"Adequate"},{v:"4",t:"Excellent"}] },
+      { id:"fric", label:"Friction and shear", type:"select", opts:[{v:"1",t:"Problem"},{v:"2",t:"Potential problem"},{v:"3",t:"No apparent problem"}] }
+    ],
+    compute:function(v){
+      var s = Number(v.sens)+Number(v.moist)+Number(v.act)+Number(v.mob)+Number(v.nut)+Number(v.fric);
+      var b = s<=9?"Very high risk":s<=12?"High risk":s<=14?"Moderate risk":s<=18?"Mild / at risk":"Minimal risk";
+      return { v:s, u:"points", i:b+" (lower total = higher risk). Ref: Bergstrom, Nurs Res 1987." };
+    } },
+
+  { id:"morse_falls", cat:"General", icon:"🚶", title:"Morse Fall Scale",
+    desc:"Likelihood of an inpatient fall.",
+    inputs:[
+      { id:"hist", label:"History of falling (this admission or ≤3 months)", type:"check" },
+      { id:"dx", label:"Secondary diagnosis (≥2 medical diagnoses)", type:"check" },
+      { id:"aid", label:"Ambulatory aid", type:"select", opts:[{v:"0",t:"None / bed rest / nurse assist"},{v:"15",t:"Crutches / cane / walker"},{v:"30",t:"Furniture"}] },
+      { id:"iv", label:"IV therapy / heparin lock", type:"check" },
+      { id:"gait", label:"Gait", type:"select", opts:[{v:"0",t:"Normal / bed rest / immobile"},{v:"10",t:"Weak"},{v:"20",t:"Impaired"}] },
+      { id:"mental", label:"Mental status", type:"select", opts:[{v:"0",t:"Oriented to own ability"},{v:"15",t:"Overestimates / forgets limitations"}] }
+    ],
+    compute:function(v){
+      var s=0; if(v.hist)s+=25; if(v.dx)s+=15; s+=Number(v.aid); if(v.iv)s+=20; s+=Number(v.gait)+Number(v.mental);
+      var b = s>=45?"High fall risk":s>=25?"Moderate fall risk":"Low fall risk";
+      return { v:s, u:"points", i:b+". Ref: Morse, 1989." };
+    } },
+
+  { id:"bap65", cat:"Respiratory", icon:"🫁", title:"BAP-65 (COPD Exacerbation Severity)",
+    desc:"Risk stratification for an acute exacerbation of COPD.",
+    inputs:[
+      { id:"bun", label:"BUN ≥ 25 mg/dL (urea ≥ ~9 mmol/L)", type:"check" },
+      { id:"ams", label:"Altered mental status", type:"check" },
+      { id:"pulse", label:"Pulse ≥ 109 bpm", type:"check" },
+      { id:"age65", label:"Age ≥ 65 years", type:"check" }
+    ],
+    compute:function(v){
+      var n=0; if(v.bun)n++; if(v.ams)n++; if(v.pulse)n++;
+      var cls;
+      if(n===0) cls = v.age65?"II":"I";
+      else if(n===1) cls="III"; else if(n===2) cls="IV"; else cls="V";
+      var risk = cls==="I"?"Lowest mortality/ventilation risk":cls==="II"?"Low risk (age ≥65, no variables)":cls==="III"?"Intermediate risk":cls==="IV"?"High risk":"Highest risk";
+      return { v:"Class "+cls, u:"", i:risk+". Ref: Shorr, Chest 2011 (BAP-65)." };
+    } },
+
+  { id:"duke_treadmill", cat:"Cardiovascular", icon:"❤️", title:"Duke Treadmill Score",
+    desc:"Prognosis after an exercise (Bruce protocol) treadmill test.",
+    inputs:[
+      { id:"time", label:"Exercise time (Bruce protocol)", type:"number", unit:"min", step:"0.1" },
+      { id:"st", label:"Maximum ST-segment deviation", type:"number", unit:"mm", step:"0.1" },
+      { id:"angina", label:"Exercise angina", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Non-limiting"},{v:"2",t:"Exercise-limiting"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.time)||!ok(v.st)) return ERR;
+      var dts = v.time - 5*v.st - 4*Number(v.angina);
+      var b = dts>=5?"Low risk (excellent 5-year survival)":dts>=-10?"Moderate risk":"High risk (poor prognosis — consider angiography)";
+      return { v:r1(dts), u:"", i:b+". Ref: Mark, N Engl J Med 1991." };
+    } },
+
+  { id:"mayo_uc", cat:"Gastroenterology", icon:"🩹", title:"Mayo Score (Ulcerative Colitis Activity)",
+    desc:"Disease activity in ulcerative colitis (full Mayo score).",
+    inputs:[
+      { id:"stool", label:"Stool frequency", type:"select", opts:[{v:"0",t:"Normal"},{v:"1",t:"1–2 more/day than normal"},{v:"2",t:"3–4 more/day"},{v:"3",t:"≥5 more/day"}] },
+      { id:"bleed", label:"Rectal bleeding", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Streaks < half the time"},{v:"2",t:"Obvious blood most times"},{v:"3",t:"Blood passed alone"}] },
+      { id:"endo", label:"Endoscopy findings", type:"select", opts:[{v:"0",t:"Normal / inactive"},{v:"1",t:"Mild (erythema, reduced vascular pattern)"},{v:"2",t:"Moderate (marked erythema, erosions)"},{v:"3",t:"Severe (spontaneous bleeding, ulceration)"}] },
+      { id:"pga", label:"Physician global assessment", type:"select", opts:[{v:"0",t:"Normal"},{v:"1",t:"Mild"},{v:"2",t:"Moderate"},{v:"3",t:"Severe"}] }
+    ],
+    compute:function(v){
+      var s = Number(v.stool)+Number(v.bleed)+Number(v.endo)+Number(v.pga);
+      var b = s<=2?"Clinical remission":s<=5?"Mild activity":s<=10?"Moderate activity":"Severe activity";
+      return { v:s, u:"points", i:b+". Ref: Schroeder, N Engl J Med 1987." };
+    } },
+
+  { id:"oxygenation_index", cat:"Critical care", icon:"🫁", title:"Oxygenation Index (OI)",
+    desc:"Severity of hypoxaemic respiratory failure (paediatric ARDS grading).",
+    inputs:[
+      { id:"fio2", label:"FiO₂", type:"number", unit:"%", step:"1" },
+      { id:"map", label:"Mean airway pressure", type:"number", unit:"cmH₂O", step:"0.1" },
+      { id:"pao2", label:"PaO₂", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.fio2)||!ok(v.map)||!ok(v.pao2)||v.pao2<=0) return ERR;
+      var oi = (v.fio2*v.map)/v.pao2;
+      var b = oi<4?"No / mild":oi<8?"Mild paediatric ARDS":oi<16?"Moderate paediatric ARDS":"Severe paediatric ARDS";
+      return { v:r1(oi), u:"", i:b+" (higher = worse). Ref: PALICC 2015." };
+    } },
+
+  { id:"schwartz", cat:"Renal", icon:"🫘", title:"Bedside Schwartz eGFR (Paediatric)",
+    desc:"Estimated GFR in children from height and serum creatinine.",
+    inputs:[
+      { id:"ht", label:"Height", type:"number", unit:"cm", step:"0.1" },
+      { id:"scr", label:"Serum creatinine", type:"number", unit:"mg/dL", step:"0.01" }
+    ],
+    compute:function(v){
+      if(!ok(v.ht)||!ok(v.scr)||v.scr<=0) return ERR;
+      var egfr = 0.413*v.ht/v.scr;
+      var b = egfr>=90?"Normal / high":egfr>=60?"Mildly reduced":egfr>=30?"Moderately reduced":egfr>=15?"Severely reduced":"Kidney failure";
+      return { v:r0(egfr), u:"mL/min/1.73m²", i:b+" (creatinine in mg/dL). Ref: Schwartz, J Am Soc Nephrol 2009." };
+    } },
+
+  { id:"delta_ratio", cat:"Renal", icon:"🧪", title:"Delta Ratio (Delta-Delta)",
+    desc:"Detects a mixed metabolic acid-base disorder in a high anion gap acidosis.",
+    inputs:[
+      { id:"ag", label:"Anion gap", type:"number", unit:"mEq/L", step:"0.1" },
+      { id:"hco3", label:"Bicarbonate", type:"number", unit:"mmol/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ag)||!ok(v.hco3)) return ERR;
+      if(v.ag<=12) return { err:"Applies only to a high anion gap acidosis (AG > 12)" };
+      if(v.hco3>=24) return { err:"Applies only when bicarbonate is below normal (metabolic acidosis)" };
+      var dr = (v.ag - 12)/(24 - v.hco3);
+      var b = dr<0.4?"Suggests a concurrent normal anion gap metabolic acidosis":dr<=1?"Combined high- and normal-AG metabolic acidosis":dr<=2?"Pure high anion gap metabolic acidosis":"Suggests a concurrent metabolic alkalosis or chronic respiratory acidosis";
+      return { v:r1(dr), u:"", i:b+". Ref: standard acid-base." };
     } }
 
   ];
@@ -2221,7 +2402,19 @@
     cdai_ra:["cdai","clinical disease activity index","rheumatoid activity"],
     gos:["glasgow outcome scale","gos","brain injury outcome"],
     anc:["absolute neutrophil count","neutropenia","neutrophil count"],
-    improve_vte:["improve vte","vte risk medical","thromboprophylaxis risk"]
+    improve_vte:["improve vte","vte risk medical","thromboprophylaxis risk"],
+    eag:["estimated average glucose","eag","a1c to glucose","adag","hba1c average glucose","glucose from hba1c"],
+    rpi:["reticulocyte production index","rpi","corrected reticulocyte","reticulocyte index","retic index"],
+    isth_dic:["disseminated intravascular coagulation","dic score","isth dic","overt dic","dic"],
+    sdai:["simplified disease activity index","sdai","rheumatoid arthritis activity","ra disease activity"],
+    braden:["braden scale","pressure ulcer risk","pressure sore","bedsore risk","pressure injury"],
+    morse_falls:["morse fall scale","fall risk","falls assessment","inpatient fall"],
+    bap65:["bap-65","bap65","copd exacerbation mortality","copd severity"],
+    duke_treadmill:["duke treadmill score","dts","exercise stress test","treadmill score","exercise ecg prognosis"],
+    mayo_uc:["mayo score","ulcerative colitis activity","mayo clinic score uc","uc disease activity","partial mayo"],
+    oxygenation_index:["oxygenation index","oi","paediatric ards","pediatric ards severity","palicc"],
+    schwartz:["schwartz equation","bedside schwartz","paediatric egfr","pediatric gfr","child gfr","childhood kidney function"],
+    delta_ratio:["delta ratio","delta gap","delta-delta","mixed acid base","delta delta"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -2276,7 +2469,19 @@
     retic:"Reticulocyte production index (Hillman RS, Finch CA).",
     tsat:"Standard iron studies (serum iron ÷ TIBC).",
     phenytoin:"Sheiner LB, Tozer TN. 1978; Winter ME. Basic Clinical Pharmacokinetics.",
-    mentzer:"Mentzer WC. Lancet 1973;1(7808):882."
+    mentzer:"Mentzer WC. Lancet 1973;1(7808):882.",
+    eag:"Nathan DM, et al. Diabetes Care 2008;31(8):1473–8 (ADAG Study).",
+    rpi:"Standard haematology reference (corrected reticulocyte / maturation factor).",
+    isth_dic:"Taylor FB, et al. Thromb Haemost 2001;86(5):1327–30 (ISTH SSC).",
+    sdai:"Smolen JS, et al. Rheumatology (Oxford) 2003;42(2):244–57.",
+    braden:"Bergstrom N, et al. Nurs Res 1987;36(4):205–10.",
+    morse_falls:"Morse JM, et al. Can J Aging 1989;8(4):366–77.",
+    bap65:"Shorr AF, et al. Chest 2011;140(5):1177–83 (BAP-65).",
+    duke_treadmill:"Mark DB, et al. N Engl J Med 1991;325(12):849–53.",
+    mayo_uc:"Schroeder KW, et al. N Engl J Med 1987;317(26):1625–9.",
+    oxygenation_index:"PALICC. Pediatr Crit Care Med 2015;16(5):428–39.",
+    schwartz:"Schwartz GJ, et al. J Am Soc Nephrol 2009;20(3):629–37.",
+    delta_ratio:"Standard acid-base physiology reference (delta-delta gap)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
