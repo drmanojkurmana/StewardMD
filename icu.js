@@ -4264,6 +4264,17 @@
       } catch (e) {}
     });
   }
+  // Immediate push to the unit when an instruction is issued (called from grpDoPostRound). The server
+  // pushes the other members (or the author if solo, so it's verifiable) — no waiting for overdue.
+  function grpNotifyInstruction(gid, pid, chosen, priority) {
+    try {
+      var text = (chosen && chosen[0]) || "New instruction";
+      idToken().then(function (tok) {
+        if (!tok) return;
+        fetch("/api/push/instruction", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, priority: priority, count: (chosen ? chosen.length : 1) }) }).catch(function () {});
+      }, function () {});
+    } catch (e) {}
+  }
   // The Notifications screen in group mode — the LIVE smart feed (replaces the acuity-only stub).
   function renderV2AlertsGroup() {
     var rows = grpNotifRows(), seen = grpNotifSeen();
@@ -4358,6 +4369,9 @@
       (function (task) { try { var pr = api.addTask(gid, pid, task); if (pr && pr.then) pr.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {} })(plan.tasks[i]);
     }
     if (plan.event) { try { var pe = api.addTimelineEvent(gid, pid, plan.event); if (pe && pe.then) pe.then(null, function () {}); } catch (e) {} }
+    // Immediate push to the unit when an instruction is ISSUED (not just when it later goes overdue) —
+    // so residents are alerted the moment a high/immediate order is given.
+    if (instr && plan.tasks.length) { try { grpNotifyInstruction(gid, pid, chosen, _roundPriority); } catch (e) {} }
     _roundSel = {}; _roundExtra = []; _roundText = "";
     if (window.toast) toast(instr ? (plan.tasks.length + " instruction" + (plan.tasks.length === 1 ? "" : "s") + " posted") : "Note posted");
     grpRoundBack();
