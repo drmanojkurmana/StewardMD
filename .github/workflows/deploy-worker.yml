@@ -35,4 +35,9 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           workingDirectory: worker
+          # Pin wrangler v4 — the worker uses wrangler.jsonc (comments), which wrangler 3.x (the
+          # action's stale fallback when node_modules isn't installed in CI) can't read; it then
+          # walked up to the root Pages wrangler.toml and failed ("Workers command in a Pages
+          # project"), silently breaking every worker deploy.
+          wranglerVersion: "4.107.0"
           command: deploy
