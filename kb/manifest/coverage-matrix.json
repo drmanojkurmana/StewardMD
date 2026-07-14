@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 2829,
+    "diseases": 2885,
     "diagnostic": 141,
-    "reference": 2688,
+    "reference": 2744,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 14,
+    "severity": 13.7,
     "prognosis": 99.7,
-    "diagnosticScoring": 5,
+    "diagnosticScoring": 4.9,
     "management": 4.9,
-    "drugTherapy": 4.6,
-    "dosing": 4.6,
+    "drugTherapy": 4.5,
+    "dosing": 4.5,
     "stewardship": 1.8
   },
   "bySpecialty": {
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 139,
+      "total": 169,
       "diagnostic": 7,
-      "reference": 132,
+      "reference": 162,
       "dims": {
-        "overview": 139,
-        "clinicalFeatures": 139,
-        "pathophysiology": 139,
-        "differential": 138,
-        "investigations": 139,
-        "redFlags": 139,
+        "overview": 169,
+        "clinicalFeatures": 169,
+        "pathophysiology": 169,
+        "differential": 168,
+        "investigations": 169,
+        "redFlags": 169,
         "severity": 29,
-        "prognosis": 139,
+        "prognosis": 169,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -380,18 +380,18 @@
       }
     },
     "Infectious Diseases": {
-      "total": 188,
+      "total": 214,
       "diagnostic": 0,
-      "reference": 188,
+      "reference": 214,
       "dims": {
-        "overview": 188,
-        "clinicalFeatures": 188,
-        "pathophysiology": 188,
-        "differential": 187,
-        "investigations": 188,
-        "redFlags": 188,
+        "overview": 214,
+        "clinicalFeatures": 214,
+        "pathophysiology": 214,
+        "differential": 213,
+        "investigations": 214,
+        "redFlags": 214,
         "severity": 63,
-        "prognosis": 188,
+        "prognosis": 214,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -28206,6 +28206,50 @@
       }
     },
     {
+      "id": "adult_t_cell_leukemia_lymphoma",
+      "name": "Adult T-cell leukaemia/lymphoma (HTLV-1)",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "aggressive_nk_cell_leukemia",
+      "name": "Aggressive NK-cell leukaemia",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "al_amyloidosis",
       "name": "AL (light-chain) amyloidosis",
       "specialty": "Hematology",
@@ -28351,6 +28395,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "angioimmunoblastic_t_cell_lymphoma",
+      "name": "Angioimmunoblastic T-cell lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -28527,6 +28593,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "burkitt_lymphoma",
+      "name": "Burkitt lymphoma (MYC)",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -28998,6 +29086,28 @@
       }
     },
     {
+      "id": "enteropathy_associated_t_cell_lymphoma",
+      "name": "Enteropathy-associated T-cell lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "enolase_deficiency",
       "name": "Erythrocyte enolase deficiency",
       "specialty": "Hematology",
@@ -29046,6 +29156,50 @@
       "name": "ETV6-related thrombocytopenia with leukaemia predisposition",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "malt_lymphoma",
+      "name": "Extranodal marginal zone (MALT) lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "extranodal_nk_t_cell_lymphoma",
+      "name": "Extranodal NK/T-cell lymphoma, nasal type",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29134,6 +29288,28 @@
       "name": "Febrile non-haemolytic transfusion reaction",
       "specialty": "Hematology",
       "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "follicular_dendritic_cell_sarcoma",
+      "name": "Follicular dendritic cell sarcoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29288,6 +29464,28 @@
       "name": "Gray platelet syndrome",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gray_zone_lymphoma",
+      "name": "Grey zone lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29570,6 +29768,28 @@
       }
     },
     {
+      "id": "hepatosplenic_t_cell_lymphoma",
+      "name": "Hepatosplenic T-cell lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hereditary_elliptocytosis",
       "name": "Hereditary elliptocytosis",
       "specialty": "Hematology",
@@ -29680,6 +29900,28 @@
       }
     },
     {
+      "id": "histiocytic_sarcoma",
+      "name": "Histiocytic sarcoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hodgkin_lymphoma",
       "name": "Hodgkin's Lymphoma",
       "specialty": "Hematology",
@@ -29720,6 +29962,50 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "indolent_t_cell_lymphoproliferative_gi",
+      "name": "Indolent T-cell lymphoproliferative disorder of the GI tract",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "intravascular_large_b_cell_lymphoma",
+      "name": "Intravascular large B-cell lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -29834,10 +30120,76 @@
       }
     },
     {
+      "id": "lymphomatoid_granulomatosis",
+      "name": "Lymphomatoid granulomatosis (EBV)",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lymphomatoid_papulosis",
+      "name": "Lymphomatoid papulosis",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "macrophage_activation_syndrome",
       "name": "Macrophage Activation Syndrome",
       "specialty": "Hematology",
       "system": "Haematological / Immunological",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mantle_cell_lymphoma",
+      "name": "Mantle cell lymphoma (CCND1/t(11;14))",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -30076,6 +30428,50 @@
       }
     },
     {
+      "id": "nodal_marginal_zone_lymphoma",
+      "name": "Nodal marginal zone lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nodular_lymphocyte_predominant_hodgkin",
+      "name": "Nodular lymphocyte-predominant Hodgkin lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "non_hodgkin_lymphoma",
       "name": "Non-Hodgkin's Lymphoma",
       "specialty": "Hematology",
@@ -30296,6 +30692,50 @@
       }
     },
     {
+      "id": "plasma_cell_leukemia",
+      "name": "Plasma cell leukaemia",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "plasmablastic_lymphoma",
+      "name": "Plasmablastic lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pai1_deficiency",
       "name": "Plasminogen activator inhibitor-1 deficiency",
       "specialty": "Hematology",
@@ -30419,6 +30859,116 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_cns_lymphoma",
+      "name": "Primary CNS lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_cutaneous_anaplastic_large_cell_lymphoma",
+      "name": "Primary cutaneous anaplastic large-cell lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_cutaneous_gamma_delta_t_cell_lymphoma",
+      "name": "Primary cutaneous gamma-delta T-cell lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_effusion_lymphoma",
+      "name": "Primary effusion lymphoma (HHV-8)",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mediastinal_large_b_cell_lymphoma",
+      "name": "Primary mediastinal large B-cell lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -30604,6 +31154,28 @@
       }
     },
     {
+      "id": "richter_transformation",
+      "name": "Richter transformation",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "runx1_familial_platelet_disorder",
       "name": "RUNX1 familial platelet disorder with myeloid malignancy",
       "specialty": "Hematology",
@@ -30630,6 +31202,28 @@
       "name": "Severe congenital neutropenia",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sezary_syndrome",
+      "name": "Sezary syndrome",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -30692,10 +31286,54 @@
       }
     },
     {
+      "id": "splenic_marginal_zone_lymphoma",
+      "name": "Splenic marginal zone lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sticky_platelet_syndrome",
       "name": "Sticky platelet syndrome",
       "specialty": "Hematology",
       "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "subcutaneous_panniculitis_like_t_cell_lymphoma",
+      "name": "Subcutaneous panniculitis-like T-cell lymphoma",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -30732,6 +31370,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "systemic_ebv_t_cell_lymphoma_childhood",
+      "name": "Systemic EBV-positive T-cell lymphoma of childhood",
+      "specialty": "Hematology",
+      "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -33420,6 +34080,50 @@
       }
     },
     {
+      "id": "angiostrongylus_costaricensis",
+      "name": "Abdominal angiostrongyliasis (A. costaricensis)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "acanthocephaliasis",
+      "name": "Acanthocephaliasis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acinetobacter_infections",
       "name": "Acinetobacter Infections",
       "specialty": "Infectious Diseases",
@@ -33486,6 +34190,28 @@
       }
     },
     {
+      "id": "aeromonas_infection",
+      "name": "Aeromonas infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "amoebiasis",
       "name": "Amoebiasis (Intestinal)",
       "specialty": "Infectious Diseases",
@@ -33510,6 +34236,28 @@
     {
       "id": "angiostrongyliasis",
       "name": "Angiostrongyliasis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anisakiasis",
+      "name": "Anisakiasis",
       "specialty": "Infectious Diseases",
       "system": "Infectious disease",
       "tier": "reference",
@@ -33728,6 +34476,28 @@
       }
     },
     {
+      "id": "baylisascariasis",
+      "name": "Baylisascariasis (raccoon roundworm)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bejel",
       "name": "Bejel",
       "specialty": "Infectious Diseases",
@@ -33807,6 +34577,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "botryomycosis",
+      "name": "Botryomycosis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -34058,6 +34850,28 @@
       }
     },
     {
+      "id": "chromobacterium_violaceum_infection",
+      "name": "Chromobacterium violaceum infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "chromoblastomycosis",
       "name": "Chromoblastomycosis",
       "specialty": "Infectious Diseases",
@@ -34115,6 +34929,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "coenurosis",
+      "name": "Coenurosis (Taenia multiceps)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -34366,6 +35202,28 @@
       }
     },
     {
+      "id": "dicrocoeliasis",
+      "name": "Dicrocoeliasis (lancet liver fluke)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dientamoebiasis",
       "name": "Dientamoeba fragilis infection",
       "specialty": "Infectious Diseases",
@@ -34412,6 +35270,28 @@
     {
       "id": "diphyllobothriasis",
       "name": "Diphyllobothriasis (fish tapeworm)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dipylidiasis",
+      "name": "Dipylidiasis (Dipylidium caninum)",
       "specialty": "Infectious Diseases",
       "system": "Infectious disease",
       "tier": "reference",
@@ -34524,6 +35404,28 @@
       "name": "Ebola virus disease",
       "specialty": "Infectious Diseases",
       "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "edwardsiella_infection",
+      "name": "Edwardsiella tarda infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -34740,6 +35642,28 @@
       }
     },
     {
+      "id": "fasciolopsiasis",
+      "name": "Fasciolopsiasis (Fasciolopsis buski)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "filariasis",
       "name": "Filariasis",
       "specialty": "Infectious Diseases",
@@ -34830,6 +35754,28 @@
     {
       "id": "gnathostomiasis",
       "name": "Gnathostomiasis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gongylonemiasis",
+      "name": "Gongylonemiasis",
       "specialty": "Infectious Diseases",
       "system": "Infectious disease",
       "tier": "reference",
@@ -34982,10 +35928,54 @@
       }
     },
     {
+      "id": "hepatic_capillariasis",
+      "name": "Hepatic capillariasis (Capillaria hepatica)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "herpes_simplex",
       "name": "Herpes Simplex Virus Infection",
       "specialty": "Infectious Diseases",
       "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "heterophyiasis",
+      "name": "Heterophyiasis (intestinal fluke)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -35576,6 +36566,50 @@
       }
     },
     {
+      "id": "malakoplakia",
+      "name": "Malakoplakia",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mansonelliasis",
+      "name": "Mansonelliasis (Mansonella filariasis)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "measles",
       "name": "Measles (Rubeola)",
       "specialty": "Infectious Diseases",
@@ -35677,6 +36711,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "metagonimiasis",
+      "name": "Metagonimiasis (intestinal fluke)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -35950,8 +37006,52 @@
       }
     },
     {
+      "id": "oesophagostomiasis",
+      "name": "Oesophagostomiasis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "onchocerciasis",
       "name": "Onchocerciasis (river blindness)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "opisthorchiasis",
+      "name": "Opisthorchiasis (Opisthorchis liver fluke)",
       "specialty": "Infectious Diseases",
       "system": "Infectious disease",
       "tier": "reference",
@@ -36324,6 +37424,28 @@
       }
     },
     {
+      "id": "protothecosis",
+      "name": "Protothecosis (Prototheca algae)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pyomyositis",
       "name": "Pyomyositis",
       "specialty": "Infectious Diseases",
@@ -36447,6 +37569,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rhinoscleroma",
+      "name": "Rhinoscleroma (Klebsiella rhinoscleromatis)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -36742,6 +37886,28 @@
       }
     },
     {
+      "id": "sparganosis",
+      "name": "Sparganosis (Spirometra)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "epidural_abscess",
       "name": "Spinal epidural abscess",
       "specialty": "Infectious Diseases",
@@ -36962,6 +38128,28 @@
       }
     },
     {
+      "id": "thelaziasis",
+      "name": "Thelaziasis (eye worm)",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tick_borne_encephalitis",
       "name": "Tick-borne encephalitis",
       "specialty": "Infectious Diseases",
@@ -37142,6 +38330,28 @@
       "name": "Trichomoniasis",
       "specialty": "Infectious Diseases",
       "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trichostrongyliasis",
+      "name": "Trichostrongyliasis",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -37428,6 +38638,28 @@
       "name": "Vertebral osteomyelitis",
       "specialty": "Infectious Diseases",
       "system": "Infectious Diseases",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vibrio_vulnificus_infection",
+      "name": "Vibrio vulnificus infection",
+      "specialty": "Infectious Diseases",
+      "system": "Infectious disease",
       "tier": "reference",
       "caps": {
         "overview": true,
