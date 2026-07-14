@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3557,
+    "diseases": 3613,
     "diagnostic": 141,
-    "reference": 3416,
+    "reference": 3472,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,9 +30,9 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 11.1,
-    "prognosis": 99.7,
-    "diagnosticScoring": 4,
+    "severity": 10.9,
+    "prognosis": 99.8,
+    "diagnosticScoring": 3.9,
     "management": 3.9,
     "drugTherapy": 3.6,
     "dosing": 3.6,
@@ -379,6 +379,26 @@
         "stewardship": 0
       }
     },
+    "Genetics": {
+      "total": 138,
+      "diagnostic": 0,
+      "reference": 138,
+      "dims": {
+        "overview": 138,
+        "clinicalFeatures": 138,
+        "pathophysiology": 138,
+        "differential": 138,
+        "investigations": 138,
+        "redFlags": 138,
+        "severity": 0,
+        "prognosis": 138,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
     "Infectious Diseases": {
       "total": 236,
       "diagnostic": 0,
@@ -452,26 +472,6 @@
         "redFlags": 37,
         "severity": 0,
         "prognosis": 37,
-        "diagnosticScoring": 0,
-        "management": 0,
-        "drugTherapy": 0,
-        "dosing": 0,
-        "stewardship": 0
-      }
-    },
-    "Genetics": {
-      "total": 82,
-      "diagnostic": 0,
-      "reference": 82,
-      "dims": {
-        "overview": 82,
-        "clinicalFeatures": 82,
-        "pathophysiology": 82,
-        "differential": 82,
-        "investigations": 82,
-        "redFlags": 82,
-        "severity": 0,
-        "prognosis": 82,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -27186,6 +27186,292 @@
       }
     },
     {
+      "id": "chromosome_15q13_deletion",
+      "name": "15q13.3 microdeletion syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chromosome_16p11_deletion",
+      "name": "16p11.2 microdeletion syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chromosome_16p13_deletion",
+      "name": "16p13.11 microdeletion syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chromosome_17q12_deletion",
+      "name": "17q12 deletion syndrome (RCAD)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chromosome_1p36_deletion",
+      "name": "1p36 deletion syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chromosome_1q21_deletion",
+      "name": "1q21.1 deletion syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chromosome_22q11_duplication",
+      "name": "22q11.2 microduplication syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chromosome_2q37_deletion",
+      "name": "2q37 deletion syndrome (brachydactyly-mental retardation)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "3mc_syndrome",
+      "name": "3MC syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chromosome_3q29_deletion",
+      "name": "3q29 deletion syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "xyy_syndrome",
+      "name": "47,XYY syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "xxyy_syndrome",
+      "name": "48,XXYY syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chromosome_8p23_deletion",
+      "name": "8p23.1 deletion syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acrocallosal_syndrome",
       "name": "Acrocallosal syndrome (KIF7)",
       "specialty": "Genetics",
@@ -27252,6 +27538,28 @@
       }
     },
     {
+      "id": "arboleda_tham_syndrome",
+      "name": "Arboleda-Tham syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "arima_syndrome",
       "name": "Arima syndrome (cerebro-oculo-hepato-renal)",
       "specialty": "Genetics",
@@ -27274,10 +27582,76 @@
       }
     },
     {
+      "id": "athabaskan_brainstem_dysgenesis",
+      "name": "Athabaskan brainstem dysgenesis (HOXA1)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bardet_biedl_atypical",
       "name": "Atypical/oligogenic Bardet-Biedl spectrum",
       "specialty": "Genetics",
       "system": "Genetics / Ciliopathy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "au_kline_syndrome",
+      "name": "Au-Kline syndrome (HNRNPK)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "bainbridge_ropers_syndrome",
+      "name": "Bainbridge-Ropers syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -27384,6 +27758,50 @@
       }
     },
     {
+      "id": "bohring_opitz_syndrome",
+      "name": "Bohring-Opitz syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "bosley_salih_alorainy_syndrome",
+      "name": "Bosley-Salih-Alorainy syndrome (HOXA1)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "branchio_oculo_facial_syndrome",
       "name": "Branchio-oculo-facial syndrome (TFAP2A)",
       "specialty": "Genetics",
@@ -27450,10 +27868,54 @@
       }
     },
     {
+      "id": "cat_eye_syndrome",
+      "name": "Cat eye syndrome (22q11 tetrasomy)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cbl_syndrome",
       "name": "CBL syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chung_jansen_syndrome",
+      "name": "Chung-Jansen syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -27582,6 +28044,28 @@
       }
     },
     {
+      "id": "cohen_gibson_syndrome",
+      "name": "Cohen-Gibson syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cornelia_de_lange_syndrome",
       "name": "Cornelia de Lange syndrome",
       "specialty": "Genetics",
@@ -27692,6 +28176,94 @@
       }
     },
     {
+      "id": "distal_18q_deletion",
+      "name": "Distal 18q deletion syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "duane_radial_ray_syndrome",
+      "name": "Duane-radial ray syndrome (Okihiro, SALL4)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "emanuel_syndrome",
+      "name": "Emanuel syndrome (supernumerary der(22))",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "feingold_syndrome",
+      "name": "Feingold syndrome (MYCN)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "frank_ter_haar_syndrome",
       "name": "Frank-ter Haar syndrome",
       "specialty": "Genetics",
@@ -27762,6 +28334,28 @@
       "name": "Geleophysic dysplasia",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "genitopatellar_syndrome",
+      "name": "Genitopatellar syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -27912,8 +28506,52 @@
       }
     },
     {
+      "id": "imagawa_matsumoto_syndrome",
+      "name": "Imagawa-Matsumoto syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hemihyperplasia_isolated",
       "name": "Isolated hemihyperplasia",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "jacobsen_syndrome",
+      "name": "Jacobsen syndrome (11q terminal deletion)",
       "specialty": "Genetics",
       "system": "Genetics",
       "tier": "reference",
@@ -27978,6 +28616,28 @@
       }
     },
     {
+      "id": "kagami_ogata_syndrome",
+      "name": "Kagami-Ogata syndrome (paternal UPD14)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "kleefstra_syndrome",
       "name": "Kleefstra syndrome",
       "specialty": "Genetics",
@@ -28004,6 +28664,28 @@
       "name": "Klippel-Feil syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "koolen_de_vries_syndrome",
+      "name": "Koolen-de Vries syndrome (17q21.31 deletion/KANSL1)",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28132,10 +28814,76 @@
       }
     },
     {
+      "id": "mandibulofacial_dysostosis_guion_almeida",
+      "name": "Mandibulofacial dysostosis with microcephaly",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "maternal_uniparental_disomy_15",
+      "name": "Maternal uniparental disomy 15",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mckusick_kaufman_syndrome",
       "name": "McKusick-Kaufman syndrome (MKKS)",
       "specialty": "Genetics",
       "system": "Genetics / Ciliopathy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "xq28_duplication_mecp2",
+      "name": "MECP2 duplication syndrome (Xq28)",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28180,6 +28928,28 @@
       "name": "Meier-Gorlin syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "menke_hennekam_syndrome",
+      "name": "Menke-Hennekam syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28418,6 +29188,28 @@
       }
     },
     {
+      "id": "noonan_syndrome_cbl",
+      "name": "Noonan syndrome-like disorder with CBL mutation",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "oculodentodigital_dysplasia",
       "name": "Oculodentodigital dysplasia",
       "specialty": "Genetics",
@@ -28528,6 +29320,28 @@
       }
     },
     {
+      "id": "pentasomy_x",
+      "name": "Pentasomy X (49,XXXXX)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "phelan_mcdermid_syndrome",
       "name": "Phelan-McDermid syndrome",
       "specialty": "Genetics",
@@ -28616,6 +29430,72 @@
       }
     },
     {
+      "id": "potocki_lupski_syndrome",
+      "name": "Potocki-Lupski syndrome (17p11.2 duplication)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "potocki_shaffer_syndrome",
+      "name": "Potocki-Shaffer syndrome (11p11.2 deletion)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "proximal_18q_deletion",
+      "name": "Proximal 18q deletion syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "restrictive_dermopathy",
       "name": "Restrictive dermopathy",
       "specialty": "Genetics",
@@ -28638,10 +29518,98 @@
       }
     },
     {
+      "id": "ring_chromosome_14",
+      "name": "Ring chromosome 14 syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ring_chromosome_20",
+      "name": "Ring chromosome 20 syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "rubinstein_taybi_syndrome",
       "name": "Rubinstein-Taybi syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "say_barber_biesecker_syndrome",
+      "name": "Say-Barber-Biesecker-Young-Simpson syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "schaaf_yang_syndrome",
+      "name": "Schaaf-Yang syndrome (MAGEL2)",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28770,6 +29738,28 @@
       }
     },
     {
+      "id": "smith_kingsmore_syndrome",
+      "name": "Smith-Kingsmore syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sotos_syndrome",
       "name": "Sotos syndrome",
       "specialty": "Genetics",
@@ -28836,6 +29826,94 @@
       }
     },
     {
+      "id": "tbck_related_disorder",
+      "name": "TBCK-related intellectual disability syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "temple_syndrome",
+      "name": "Temple syndrome (maternal UPD14)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tetrasomy_18p",
+      "name": "Tetrasomy 18p",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "townes_brocks_syndrome",
+      "name": "Townes-Brocks syndrome (SALL1)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "treacher_collins_syndrome",
       "name": "Treacher Collins syndrome (TCOF1)",
       "specialty": "Genetics",
@@ -28858,10 +29936,120 @@
       }
     },
     {
+      "id": "triple_x_syndrome",
+      "name": "Triple X syndrome (47,XXX)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trisomy_8_mosaicism",
+      "name": "Trisomy 8 mosaicism (Warkany syndrome 2)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trisomy_9_mosaicism",
+      "name": "Trisomy 9 mosaicism",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tuberous_sclerosis_complex",
       "name": "Tuberous sclerosis complex",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "uniparental_disomy_14",
+      "name": "Uniparental disomy 14 (overview)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "uniparental_disomy_7",
+      "name": "Uniparental disomy 7",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28928,6 +30116,50 @@
       "name": "Weill-Marchesani syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "white_sutton_syndrome",
+      "name": "White-Sutton syndrome (POGZ)",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "wiedemann_steiner_syndrome",
+      "name": "Wiedemann-Steiner syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
