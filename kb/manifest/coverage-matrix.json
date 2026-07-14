@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3277,
+    "diseases": 3333,
     "diagnostic": 141,
-    "reference": 3136,
+    "reference": 3192,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,28 +30,28 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 12.1,
+    "severity": 11.9,
     "prognosis": 99.7,
-    "diagnosticScoring": 4.3,
-    "management": 4.3,
+    "diagnosticScoring": 4.2,
+    "management": 4.2,
     "drugTherapy": 3.9,
     "dosing": 3.9,
-    "stewardship": 1.6
+    "stewardship": 1.5
   },
   "bySpecialty": {
     "Pulmonology": {
-      "total": 98,
+      "total": 109,
       "diagnostic": 20,
-      "reference": 78,
+      "reference": 89,
       "dims": {
-        "overview": 98,
-        "clinicalFeatures": 98,
-        "pathophysiology": 98,
-        "differential": 98,
-        "investigations": 98,
-        "redFlags": 98,
+        "overview": 109,
+        "clinicalFeatures": 109,
+        "pathophysiology": 109,
+        "differential": 109,
+        "investigations": 109,
+        "redFlags": 109,
         "severity": 28,
-        "prognosis": 97,
+        "prognosis": 108,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 18,
@@ -140,18 +140,18 @@
       }
     },
     "GI / Hepatology": {
-      "total": 185,
+      "total": 202,
       "diagnostic": 19,
-      "reference": 166,
+      "reference": 183,
       "dims": {
-        "overview": 185,
-        "clinicalFeatures": 185,
-        "pathophysiology": 185,
-        "differential": 184,
-        "investigations": 185,
-        "redFlags": 185,
+        "overview": 202,
+        "clinicalFeatures": 202,
+        "pathophysiology": 202,
+        "differential": 201,
+        "investigations": 202,
+        "redFlags": 202,
         "severity": 44,
-        "prognosis": 183,
+        "prognosis": 200,
         "diagnosticScoring": 19,
         "management": 19,
         "drugTherapy": 18,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 316,
+      "total": 324,
       "diagnostic": 6,
-      "reference": 310,
+      "reference": 318,
       "dims": {
-        "overview": 316,
-        "clinicalFeatures": 316,
-        "pathophysiology": 316,
-        "differential": 316,
-        "investigations": 316,
-        "redFlags": 316,
+        "overview": 324,
+        "clinicalFeatures": 324,
+        "pathophysiology": 324,
+        "differential": 324,
+        "investigations": 324,
+        "redFlags": 324,
         "severity": 23,
-        "prognosis": 316,
+        "prognosis": 324,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -552,6 +552,26 @@
         "redFlags": 13,
         "severity": 0,
         "prognosis": 13,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Paediatric orthopaedics": {
+      "total": 20,
+      "diagnostic": 0,
+      "reference": 20,
+      "dims": {
+        "overview": 20,
+        "clinicalFeatures": 20,
+        "pathophysiology": 20,
+        "differential": 20,
+        "investigations": 20,
+        "redFlags": 20,
+        "severity": 0,
+        "prognosis": 20,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -28618,6 +28638,28 @@
       }
     },
     {
+      "id": "adenomyomatosis_gallbladder",
+      "name": "Adenomyomatosis of the gallbladder",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "afferent_loop_syndrome",
       "name": "Afferent loop syndrome",
       "specialty": "GI / Hepatology",
@@ -28706,10 +28748,54 @@
       }
     },
     {
+      "id": "ampullary_adenoma",
+      "name": "Ampullary adenoma",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "anal_fissure",
       "name": "Anal fissure",
       "specialty": "GI / Hepatology",
       "system": "GI / Anorectal / Surgery",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "annular_pancreas",
+      "name": "Annular pancreas",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28776,6 +28862,28 @@
       "name": "Autoimmune hepatitis",
       "specialty": "GI / Hepatology",
       "system": "Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "autoimmune_pancreatitis",
+      "name": "Autoimmune pancreatitis (type 1 IgG4 / type 2)",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28904,6 +29012,28 @@
       }
     },
     {
+      "id": "biliary_dyskinesia",
+      "name": "Biliary dyskinesia (functional gallbladder disorder)",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "blind_loop_syndrome",
       "name": "Blind loop syndrome (small intestinal bacterial overgrowth)",
       "specialty": "GI / Hepatology",
@@ -28930,6 +29060,28 @@
       "name": "Boerhaave syndrome (spontaneous oesophageal rupture)",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "bouveret_syndrome",
+      "name": "Bouveret syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -30004,6 +30156,28 @@
       }
     },
     {
+      "id": "gallbladder_polyp",
+      "name": "Gallbladder polyp",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gallstone_ileus",
       "name": "Gallstone ileus",
       "specialty": "GI / Hepatology",
@@ -30250,6 +30424,28 @@
       "name": "GRACILE syndrome",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology / Hepatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "groove_pancreatitis",
+      "name": "Groove pancreatitis",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -30576,6 +30772,28 @@
       }
     },
     {
+      "id": "igg4_sclerosing_cholangitis",
+      "name": "IgG4-related sclerosing cholangitis",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "incisional_hernia",
       "name": "Incisional hernia",
       "specialty": "GI / Hepatology",
@@ -30787,6 +31005,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ipmn",
+      "name": "Intraductal papillary mucinous neoplasm",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -31236,6 +31476,50 @@
       }
     },
     {
+      "id": "mirizzi_syndrome",
+      "name": "Mirizzi syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mucinous_cystic_neoplasm_pancreas",
+      "name": "Mucinous cystic neoplasm of the pancreas",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "navajo_neurohepatopathy",
       "name": "Navajo neurohepatopathy",
       "specialty": "GI / Hepatology",
@@ -31412,6 +31696,28 @@
       }
     },
     {
+      "id": "pancreas_divisum",
+      "name": "Pancreas divisum",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pancreatic_pseudocyst",
       "name": "Pancreatic pseudocyst",
       "specialty": "GI / Hepatology",
@@ -31548,6 +31854,28 @@
       "name": "Polycystic liver disease",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology / Hepatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "porcelain_gallbladder",
+      "name": "Porcelain gallbladder",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -31896,6 +32224,28 @@
       }
     },
     {
+      "id": "serous_cystadenoma_pancreas",
+      "name": "Serous cystadenoma of the pancreas",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "short_bowel_syndrome",
       "name": "Short bowel syndrome",
       "specialty": "GI / Hepatology",
@@ -31966,6 +32316,28 @@
       "name": "Sister Mary Joseph nodule",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "solid_pseudopapillary_neoplasm",
+      "name": "Solid pseudopapillary neoplasm of the pancreas",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -32305,6 +32677,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "walled_off_pancreatic_necrosis",
+      "name": "Walled-off pancreatic necrosis",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology / Hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -60188,6 +60582,446 @@
       }
     },
     {
+      "id": "adolescent_idiopathic_scoliosis",
+      "name": "Adolescent idiopathic scoliosis",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "calcaneovalgus_foot",
+      "name": "Calcaneovalgus foot",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_knee_dislocation",
+      "name": "Congenital knee dislocation",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_muscular_torticollis",
+      "name": "Congenital muscular torticollis",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_radioulnar_synostosis",
+      "name": "Congenital radioulnar synostosis",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_scoliosis",
+      "name": "Congenital scoliosis",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_vertical_talus",
+      "name": "Congenital vertical talus",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "genu_valgum",
+      "name": "Genu valgum (knock knees)",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "genu_varum",
+      "name": "Genu varum (bow legs)",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "in_toeing",
+      "name": "In-toeing gait",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "femoral_anteversion",
+      "name": "Increased femoral anteversion",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "infantile_scoliosis",
+      "name": "Infantile idiopathic scoliosis",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "madelung_deformity",
+      "name": "Madelung deformity",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "metatarsus_adductus",
+      "name": "Metatarsus adductus",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "out_toeing",
+      "name": "Out-toeing gait",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trigger_thumb_pediatric",
+      "name": "Paediatric trigger thumb",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "polydactyly",
+      "name": "Polydactyly",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "radial_club_hand",
+      "name": "Radial longitudinal deficiency (radial club hand)",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "syndactyly",
+      "name": "Syndactyly",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tibial_torsion",
+      "name": "Tibial torsion",
+      "specialty": "Paediatric orthopaedics",
+      "system": "Paediatric orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "anorectal_malformation",
       "name": "Anorectal malformation (imperforate anus)",
       "specialty": "Paediatric surgery",
@@ -61816,6 +62650,28 @@
       }
     },
     {
+      "id": "bronchogenic_cyst",
+      "name": "Bronchogenic cyst",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bronchopulmonary_dysplasia",
       "name": "Bronchopulmonary Dysplasia",
       "specialty": "Pulmonology",
@@ -62344,6 +63200,28 @@
       }
     },
     {
+      "id": "fibrothorax",
+      "name": "Fibrothorax",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "flock_workers_lung",
       "name": "Flock worker's lung",
       "specialty": "Pulmonology",
@@ -62718,10 +63596,98 @@
       }
     },
     {
+      "id": "malignant_pleural_mesothelioma",
+      "name": "Malignant pleural mesothelioma",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "meconium_aspiration_syndrome",
       "name": "Meconium Aspiration Syndrome",
       "specialty": "Pulmonology",
       "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mediastinal_germ_cell_tumor",
+      "name": "Mediastinal germ cell tumour",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mediastinal_teratoma",
+      "name": "Mediastinal teratoma",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "morgagni_hernia",
+      "name": "Morgagni hernia",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -62920,6 +63886,28 @@
       "name": "Pleural empyema",
       "specialty": "Pulmonology",
       "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pleural_plaque",
+      "name": "Pleural plaques",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -63422,6 +64410,28 @@
       }
     },
     {
+      "id": "fibrous_tumor_pleura",
+      "name": "Solitary fibrous tumour of the pleura",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sudden_infant_death_syndrome",
       "name": "Sudden Infant Death Syndrome",
       "specialty": "Pulmonology",
@@ -63488,6 +64498,50 @@
       }
     },
     {
+      "id": "thymic_carcinoma",
+      "name": "Thymic carcinoma",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "thymic_cyst",
+      "name": "Thymic cyst",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tracheobronchomalacia",
       "name": "Tracheobronchomalacia",
       "specialty": "Pulmonology",
@@ -63536,6 +64590,28 @@
       "name": "Transient Tachypnea of the Newborn",
       "specialty": "Pulmonology",
       "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trapped_lung",
+      "name": "Trapped lung",
+      "specialty": "Pulmonology",
+      "system": "Respiratory / Thoracic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -64588,6 +65664,28 @@
       }
     },
     {
+      "id": "basic_calcium_phosphate_arthropathy",
+      "name": "Basic calcium phosphate crystal arthropathy",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "beals_congenital_contractural_arachnodactyly",
       "name": "Beals congenital contractural arachnodactyly",
       "specialty": "Rheumatology / MSK",
@@ -64812,6 +65910,28 @@
       "name": "Calcific tendinitis",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Sports & Soft tissue",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "calcium_pyrophosphate_deposition",
+      "name": "Calcium pyrophosphate deposition disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -65120,6 +66240,28 @@
       "name": "Chronic recurrent multifocal osteomyelitis (CRMO/CNO)",
       "specialty": "Rheumatology / MSK",
       "system": "Rheumatology / Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tophaceous_gout",
+      "name": "Chronic tophaceous gout",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -65842,6 +66984,28 @@
       }
     },
     {
+      "id": "enteropathic_arthritis",
+      "name": "Enteropathic arthritis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "enthesitis_related_arthritis",
       "name": "Enthesitis-related arthritis",
       "specialty": "Rheumatology / MSK",
@@ -66370,6 +67534,28 @@
       }
     },
     {
+      "id": "gout",
+      "name": "Gout",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gout_and_other_crystal_associated",
       "name": "Gout and Other Crystal-Associated Arthropathies",
       "specialty": "Rheumatology / MSK",
@@ -66638,6 +67824,28 @@
       "name": "Hip fracture",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hydroxyapatite_deposition_disease",
+      "name": "Hydroxyapatite deposition disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -67866,6 +69074,28 @@
       }
     },
     {
+      "id": "milwaukee_shoulder",
+      "name": "Milwaukee shoulder syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "MCTD",
       "name": "Mixed connective tissue disease",
       "specialty": "Rheumatology / MSK",
@@ -69058,6 +70288,28 @@
       "name": "Pseudoachondroplasia",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pseudogout",
+      "name": "Pseudogout (acute CPP crystal arthritis)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Rheumatology",
       "tier": "reference",
       "caps": {
         "overview": true,
