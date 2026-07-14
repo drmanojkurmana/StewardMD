@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3501,
+    "diseases": 3557,
     "diagnostic": 141,
-    "reference": 3360,
+    "reference": 3416,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,13 +30,13 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 11.3,
+    "severity": 11.1,
     "prognosis": 99.7,
     "diagnosticScoring": 4,
-    "management": 4,
-    "drugTherapy": 3.7,
-    "dosing": 3.7,
-    "stewardship": 1.5
+    "management": 3.9,
+    "drugTherapy": 3.6,
+    "dosing": 3.6,
+    "stewardship": 1.4
   },
   "bySpecialty": {
     "Pulmonology": {
@@ -100,18 +100,18 @@
       }
     },
     "Genitourinary / Repro": {
-      "total": 51,
+      "total": 87,
       "diagnostic": 6,
-      "reference": 45,
+      "reference": 81,
       "dims": {
-        "overview": 51,
-        "clinicalFeatures": 51,
-        "pathophysiology": 51,
-        "differential": 51,
-        "investigations": 51,
-        "redFlags": 51,
+        "overview": 87,
+        "clinicalFeatures": 87,
+        "pathophysiology": 87,
+        "differential": 87,
+        "investigations": 87,
+        "redFlags": 87,
         "severity": 10,
-        "prognosis": 51,
+        "prognosis": 87,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 449,
+      "total": 463,
       "diagnostic": 10,
-      "reference": 439,
+      "reference": 453,
       "dims": {
-        "overview": 449,
-        "clinicalFeatures": 449,
-        "pathophysiology": 449,
-        "differential": 448,
-        "investigations": 449,
-        "redFlags": 449,
+        "overview": 463,
+        "clinicalFeatures": 463,
+        "pathophysiology": 463,
+        "differential": 462,
+        "investigations": 463,
+        "redFlags": 463,
         "severity": 33,
-        "prognosis": 447,
+        "prognosis": 461,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -280,18 +280,18 @@
       }
     },
     "Nephrology": {
-      "total": 114,
+      "total": 120,
       "diagnostic": 6,
-      "reference": 108,
+      "reference": 114,
       "dims": {
-        "overview": 114,
-        "clinicalFeatures": 114,
-        "pathophysiology": 114,
-        "differential": 114,
-        "investigations": 114,
-        "redFlags": 114,
+        "overview": 120,
+        "clinicalFeatures": 120,
+        "pathophysiology": 120,
+        "differential": 120,
+        "investigations": 120,
+        "redFlags": 120,
         "severity": 13,
-        "prognosis": 114,
+        "prognosis": 120,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -14404,6 +14404,28 @@
       }
     },
     {
+      "id": "apparent_cortisone_reductase",
+      "name": "Cortisone reductase deficiency (11-beta-HSD1/H6PD)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "craniodiaphyseal_dysplasia",
       "name": "Craniodiaphyseal dysplasia",
       "specialty": "Endocrine / Metabolic",
@@ -14428,6 +14450,28 @@
     {
       "id": "craniopharyngioma",
       "name": "Craniopharyngioma",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "crooke_cell_adenoma",
+      "name": "Crooke cell adenoma",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine",
       "tier": "reference",
@@ -15178,6 +15222,28 @@
       "name": "Familial hyperaldosteronism type 2",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "familial_hyperaldosteronism_type3",
+      "name": "Familial hyperaldosteronism type 3 (KCNJ5)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -16164,6 +16230,28 @@
       }
     },
     {
+      "id": "paraganglioma_head_neck",
+      "name": "Head and neck paraganglioma",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hereditary_coproporphyria",
       "name": "Hereditary coproporphyria",
       "specialty": "Endocrine / Metabolic",
@@ -16912,6 +17000,28 @@
       }
     },
     {
+      "id": "igg4_hypophysitis",
+      "name": "IgG4-related hypophysitis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "imerslund_grasbeck_syndrome",
       "name": "Imerslund-Grasbeck syndrome",
       "specialty": "Endocrine / Metabolic",
@@ -17048,6 +17158,28 @@
       "name": "Iodine deficiency",
       "specialty": "Endocrine / Metabolic",
       "system": "Nutrition / Metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "isolated_acth_deficiency",
+      "name": "Isolated ACTH deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -18144,6 +18276,28 @@
       }
     },
     {
+      "id": "mineralocorticoid_resistance",
+      "name": "Mineralocorticoid resistance (pseudohypoaldosteronism spectrum overview)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mitochondrial_disease",
       "name": "Mitochondrial disease",
       "specialty": "Endocrine / Metabolic",
@@ -18694,6 +18848,28 @@
       }
     },
     {
+      "id": "nelson_tumor",
+      "name": "Nelson syndrome corticotroph tumour",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "neonatal_adrenoleukodystrophy",
       "name": "Neonatal adrenoleukodystrophy",
       "specialty": "Endocrine / Metabolic",
@@ -19112,6 +19288,28 @@
       }
     },
     {
+      "id": "cushing_disease_pediatric",
+      "name": "Paediatric Cushing disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pagets_disease_bone",
       "name": "Paget's Disease of Bone",
       "specialty": "Endocrine / Metabolic",
@@ -19442,6 +19640,72 @@
       }
     },
     {
+      "id": "pituitary_carcinoma",
+      "name": "Pituitary carcinoma",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pituitary_gigantism",
+      "name": "Pituitary gigantism",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pituitary_stalk_interruption_syndrome",
+      "name": "Pituitary stalk interruption syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pituitary_tumor_syndromes",
       "name": "Pituitary Tumor Syndromes",
       "specialty": "Endocrine / Metabolic",
@@ -19688,6 +19952,28 @@
       "name": "Primary coenzyme Q10 deficiency",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "glucocorticoid_resistance",
+      "name": "Primary generalised glucocorticoid resistance (Chrousos syndrome, NR3C1)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -20084,6 +20370,28 @@
       "name": "Rabson-Mendenhall syndrome (INSR)",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rathke_cleft_cyst",
+      "name": "Rathke cleft cyst",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28770,6 +29078,94 @@
       }
     },
     {
+      "id": "androgen_deficiency_aging_male",
+      "name": "Androgen deficiency in the ageing male (late-onset hypogonadism)",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anejaculation",
+      "name": "Anejaculation",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anorchia",
+      "name": "Anorchia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "balanitis_xerotica_obliterans",
+      "name": "Balanitis xerotica obliterans (genital lichen sclerosus)",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "benign_prostatic_hyperplasia",
       "name": "Benign prostatic hyperplasia",
       "specialty": "Genitourinary / Repro",
@@ -28811,6 +29207,72 @@
         "drugTherapy": true,
         "dosing": true,
         "stewardship": true
+      }
+    },
+    {
+      "id": "prostatitis_chronic_bacterial",
+      "name": "Chronic bacterial prostatitis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "epididymitis_chronic",
+      "name": "Chronic epididymitis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chronic_orchialgia",
+      "name": "Chronic orchialgia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
       }
     },
     {
@@ -28858,10 +29320,54 @@
       }
     },
     {
+      "id": "congenital_absence_vas_deferens",
+      "name": "Congenital bilateral absence of the vas deferens",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "delayed_puberty",
       "name": "Delayed puberty",
       "specialty": "Genitourinary / Repro",
       "system": "Reproductive medicine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "delayed_puberty_male",
+      "name": "Delayed puberty (male)",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29078,6 +29584,28 @@
       }
     },
     {
+      "id": "hematocele",
+      "name": "Haematocele",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hematospermia",
       "name": "Haematospermia",
       "specialty": "Genitourinary / Repro",
@@ -29144,10 +29672,76 @@
       }
     },
     {
+      "id": "orchitis_granulomatous",
+      "name": "Idiopathic granulomatous orchitis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "idiopathic_scrotal_edema",
+      "name": "Idiopathic scrotal oedema",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "interstitial_cystitis",
       "name": "Interstitial Cystitis / Bladder Pain Syndrome",
       "specialty": "Genitourinary / Repro",
       "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "leydig_cell_tumor_testis",
+      "name": "Leydig cell tumour of the testis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29210,6 +29804,28 @@
       }
     },
     {
+      "id": "mullerian_duct_cyst",
+      "name": "Mullerian duct cyst",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "neurogenic_bladder",
       "name": "Neurogenic bladder",
       "specialty": "Genitourinary / Repro",
@@ -29254,8 +29870,140 @@
       }
     },
     {
+      "id": "azoospermia_nonobstructive",
+      "name": "Non-obstructive azoospermia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nonseminomatous_germ_cell_tumor",
+      "name": "Non-seminomatous germ cell tumour",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "azoospermia_obstructive",
+      "name": "Obstructive azoospermia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "oligospermia",
+      "name": "Oligospermia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "erectile_dysfunction_organic",
+      "name": "Organic erectile dysfunction",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "paraphimosis",
       "name": "Paraphimosis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "phimosis_pathological",
+      "name": "Pathological phimosis",
       "specialty": "Genitourinary / Repro",
       "system": "Urology / Andrology",
       "tier": "reference",
@@ -29342,6 +30090,28 @@
       }
     },
     {
+      "id": "posterior_urethral_polyp",
+      "name": "Posterior urethral polyp",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "premature_ejaculation",
       "name": "Premature ejaculation",
       "specialty": "Genitourinary / Repro",
@@ -29408,6 +30178,72 @@
       }
     },
     {
+      "id": "prostate_intraepithelial_neoplasia",
+      "name": "Prostatic intraepithelial neoplasia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "utricle_cyst",
+      "name": "Prostatic utricle cyst",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gynecomastia_pubertal",
+      "name": "Pubertal gynaecomastia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "recurrent_pregnancy_loss",
       "name": "Recurrent pregnancy loss",
       "specialty": "Genitourinary / Repro",
@@ -29452,6 +30288,116 @@
       }
     },
     {
+      "id": "retrograde_ejaculation",
+      "name": "Retrograde ejaculation",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "scrotal_calcinosis",
+      "name": "Scrotal calcinosis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "seminal_vesicle_cyst",
+      "name": "Seminal vesicle cyst",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "seminoma",
+      "name": "Seminoma",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sertoli_cell_tumor_testis",
+      "name": "Sertoli cell tumour of the testis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sexually_transmitted_infections_overview_a",
       "name": "Sexually Transmitted Infections: Overview and Clinical Approach",
       "specialty": "Genitourinary / Repro",
@@ -29465,6 +30411,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "spermatic_cord_lipoma",
+      "name": "Spermatic cord lipoma",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -29518,6 +30486,72 @@
       }
     },
     {
+      "id": "testicular_atrophy",
+      "name": "Testicular atrophy",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "testicular_germ_cell_tumor",
+      "name": "Testicular germ cell tumour (overview)",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "testicular_lymphoma",
+      "name": "Testicular lymphoma",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "testicular_microlithiasis",
       "name": "Testicular microlithiasis",
       "specialty": "Genitourinary / Repro",
@@ -29544,6 +30578,28 @@
       "name": "Testicular torsion",
       "specialty": "Genitourinary / Repro",
       "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "torsion_appendix_testis",
+      "name": "Torsion of the appendix testis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29782,10 +30838,54 @@
       }
     },
     {
+      "id": "verumontanum_hyperplasia",
+      "name": "Verumontanum mucosal gland hyperplasia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "vesicoureteric_reflux",
       "name": "Vesicoureteric reflux",
       "specialty": "Genitourinary / Repro",
       "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "zinner_syndrome",
+      "name": "Zinner syndrome",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -47052,6 +48152,28 @@
       }
     },
     {
+      "id": "adrenal_cyst",
+      "name": "Adrenal cyst",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Adrenal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "alport_syndrome",
       "name": "Alport syndrome",
       "specialty": "Nephrology",
@@ -47584,6 +48706,28 @@
       "name": "Collapsing glomerulopathy",
       "specialty": "Nephrology",
       "system": "Renal / Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_adrenal_hypoplasia",
+      "name": "Congenital adrenal hypoplasia (NR0B1/DAX1)",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Adrenal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -48438,6 +49582,28 @@
       }
     },
     {
+      "id": "adrenal_myelolipoma_large",
+      "name": "Large adrenal myelolipoma",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Adrenal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "liddle_syndrome",
       "name": "Liddle syndrome",
       "specialty": "Nephrology",
@@ -48768,6 +49934,28 @@
       }
     },
     {
+      "id": "adrenal_hemorrhage_neonatal",
+      "name": "Neonatal adrenal haemorrhage",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Adrenal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "nephrocalcinosis",
       "name": "Nephrocalcinosis",
       "specialty": "Nephrology",
@@ -48860,6 +50048,28 @@
       "name": "Nephrotic syndrome (paediatric)",
       "specialty": "Nephrology",
       "system": "Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "adrenal_adenoma_nonfunctioning",
+      "name": "Non-functioning adrenal adenoma",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Adrenal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -49256,6 +50466,28 @@
       "name": "Struvite (infection) nephrolithiasis",
       "specialty": "Nephrology",
       "system": "Renal / Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "subclinical_cushing_syndrome",
+      "name": "Subclinical (mild autonomous cortisol secretion) Cushing syndrome",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Adrenal",
       "tier": "reference",
       "caps": {
         "overview": true,
