@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3627,
+    "diseases": 3641,
     "diagnostic": 141,
-    "reference": 3486,
+    "reference": 3500,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 10.9,
+    "severity": 10.8,
     "prognosis": 99.8,
     "diagnosticScoring": 3.9,
-    "management": 3.9,
-    "drugTherapy": 3.6,
-    "dosing": 3.6,
+    "management": 3.8,
+    "drugTherapy": 3.5,
+    "dosing": 3.5,
     "stewardship": 1.4
   },
   "bySpecialty": {
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 495,
+      "total": 509,
       "diagnostic": 20,
-      "reference": 475,
+      "reference": 489,
       "dims": {
-        "overview": 495,
-        "clinicalFeatures": 495,
-        "pathophysiology": 495,
-        "differential": 495,
-        "investigations": 495,
-        "redFlags": 495,
+        "overview": 509,
+        "clinicalFeatures": 509,
+        "pathophysiology": 509,
+        "differential": 509,
+        "investigations": 509,
+        "redFlags": 509,
         "severity": 48,
-        "prognosis": 495,
+        "prognosis": 509,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -54334,6 +54334,28 @@
       }
     },
     {
+      "id": "cold_stimulus_headache",
+      "name": "Cold-stimulus headache",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "oculomotor_nerve_palsy_compressive",
       "name": "Compressive third nerve palsy",
       "specialty": "Neurology",
@@ -54369,6 +54391,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "confusional_arousals",
+      "name": "Confusional arousals",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -55328,6 +55372,28 @@
       "name": "Essential tremor",
       "specialty": "Neurology",
       "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "external_compression_headache",
+      "name": "External-pressure headache",
+      "specialty": "Neurology",
+      "system": "Nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -58888,6 +58954,50 @@
       }
     },
     {
+      "id": "narcolepsy_type_1",
+      "name": "Narcolepsy type 1",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "narcolepsy_type_2",
+      "name": "Narcolepsy type 2",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "nemaline_myopathy",
       "name": "Nemaline myopathy",
       "specialty": "Neurology",
@@ -59231,6 +59341,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "non_24_hour_sleep_wake_disorder",
+      "name": "Non-24-hour sleep-wake rhythm disorder",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -60296,6 +60428,72 @@
       }
     },
     {
+      "id": "primary_cough_headache",
+      "name": "Primary cough headache",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_exercise_headache",
+      "name": "Primary exercise headache",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_headache_associated_with_sexual_activity",
+      "name": "Primary headache associated with sexual activity",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "primary_lateral_sclerosis",
       "name": "Primary lateral sclerosis",
       "specialty": "Neurology",
@@ -60322,6 +60520,50 @@
       "name": "Primary progressive aphasia",
       "specialty": "Neurology",
       "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_stabbing_headache",
+      "name": "Primary stabbing headache",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_thunderclap_headache",
+      "name": "Primary thunderclap headache",
+      "specialty": "Neurology",
+      "system": "Nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -60630,6 +60872,28 @@
       "name": "Reflex (vasovagal) syncope",
       "specialty": "Neurology",
       "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rem_sleep_behaviour_disorder",
+      "name": "REM sleep behaviour disorder",
+      "specialty": "Neurology",
+      "system": "Nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -61224,6 +61488,50 @@
       "name": "SLC6A1-related disorder (GAT1)",
       "specialty": "Neurology",
       "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sleep_related_hypermotor_epilepsy",
+      "name": "Sleep-related hypermotor epilepsy",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sleep_related_leg_cramps",
+      "name": "Sleep-related leg cramps",
+      "specialty": "Neurology",
+      "system": "Nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
