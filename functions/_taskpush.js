@@ -114,6 +114,38 @@ export async function escalateOverdueTask(env, gid, pid, taskId, now) {
   return { escalated: true, unit: unitName, members: uids.length, sent };
 }
 
+// Immediate notification when an instruction is ISSUED (not only when overdue). Pushes the unit so
+// residents see a new order at once — essential for high/immediate priority. Excludes the author; if
+// the unit has only the author (solo), notifies them so it's still verifiable.
+export async function notifyNewInstruction(env, gid, pid, byUid, info) {
+  info = info || {};
+  if (!nativePushEnabled(env)) return { error: "push-disabled" };
+  if (!gid || !pid) return { error: "bad-args" };
+  const tok = await saTok(env);
+  const [g, p, members] = await Promise.all([
+    fsGet(env, tok, `/icuGroups/${gid}`, ["name"]),
+    fsGet(env, tok, `/icuGroups/${gid}/patients/${pid}`, ["name", "bed"]),
+    fsList(env, tok, `/icuGroups/${gid}/members`),
+  ]);
+  const unitName = (g && g.name) || "ICU unit";
+  const bed = (p && p.bed) || "";
+  const prio = info.priority && PRIO_LABEL[info.priority] ? info.priority : "moderate";
+  const count = Math.max(1, +info.count || 1);
+  const text = String(info.text || "New instruction").slice(0, 90);
+  const urgent = prio === "immediate" || prio === "high";
+  const msg = {
+    title: (urgent ? "🔴 " : "🩺 ") + PRIO_LABEL[prio] + " instruction · " + unitName,
+    body: text + (count > 1 ? " (+" + (count - 1) + " more)" : "") + (bed ? " · Bed " + bed : ""),
+    tag: "icu-instr-" + pid,
+    url: "https://stewardmd.in/",
+  };
+  let recipients = [...new Set((members || []).map((m) => m.uid).filter(Boolean))].filter((u) => u !== byUid);
+  if (!recipients.length && byUid) recipients = [byUid];   // solo unit → notify the author so it's verifiable
+  let sent = 0;
+  for (const uid of recipients) { try { const r = await sendNativeToAll(env, msg, { uid }); sent += (r && r.sent) || 0; } catch (e) { /* skip */ } }
+  return { notified: recipients.length, sent, priority: prio };
+}
+
 // Cron sweep: collectionGroup('tasks') where dueAt < now (single inequality → needs a COLLECTION_GROUP
 // index on tasks.dueAt), then code-filter status!=done && !escalatedAt, and escalate each. Bounded.
 export async function sweepOverdue(env, now) {
