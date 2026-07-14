@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3655,
+    "diseases": 3669,
     "diagnostic": 141,
-    "reference": 3514,
+    "reference": 3528,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -32,7 +32,7 @@
     "redFlags": 100,
     "severity": 10.8,
     "prognosis": 99.8,
-    "diagnosticScoring": 3.9,
+    "diagnosticScoring": 3.8,
     "management": 3.8,
     "drugTherapy": 3.5,
     "dosing": 3.5,
@@ -320,18 +320,18 @@
       }
     },
     "Toxicology": {
-      "total": 70,
+      "total": 84,
       "diagnostic": 6,
-      "reference": 64,
+      "reference": 78,
       "dims": {
-        "overview": 70,
-        "clinicalFeatures": 70,
-        "pathophysiology": 70,
-        "differential": 70,
-        "investigations": 70,
-        "redFlags": 70,
+        "overview": 84,
+        "clinicalFeatures": 84,
+        "pathophysiology": 84,
+        "differential": 84,
+        "investigations": 84,
+        "redFlags": 84,
         "severity": 10,
-        "prognosis": 69,
+        "prognosis": 83,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -79568,6 +79568,28 @@
       }
     },
     {
+      "id": "acquired_methaemoglobinaemia",
+      "name": "Acquired methaemoglobinaemia",
+      "specialty": "Toxicology",
+      "system": "Haematology / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acquired_methemoglobinemia",
       "name": "Acquired methaemoglobinaemia",
       "specialty": "Toxicology",
@@ -79616,6 +79638,28 @@
       "name": "Amatoxin (Amanita) mushroom poisoning",
       "specialty": "Toxicology",
       "system": "Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anticholinergic_toxidrome",
+      "name": "Anticholinergic toxidrome",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Toxicology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -79700,6 +79744,28 @@
       }
     },
     {
+      "id": "beta_blocker_overdose",
+      "name": "Beta-blocker overdose",
+      "specialty": "Toxicology",
+      "system": "Cardiovascular / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "blue_ringed_octopus_envenomation",
       "name": "Blue-ringed octopus envenomation",
       "specialty": "Toxicology",
@@ -79726,6 +79792,50 @@
       "name": "Box jellyfish (Chironex) envenomation",
       "specialty": "Toxicology",
       "system": "Toxicology / Envenomation",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "calcium_channel_blocker_overdose",
+      "name": "Calcium-channel-blocker overdose",
+      "specialty": "Toxicology",
+      "system": "Cardiovascular / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "carbamate_poisoning",
+      "name": "Carbamate poisoning",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Toxicology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -80272,10 +80382,54 @@
       }
     },
     {
+      "id": "hydrofluoric_acid_exposure",
+      "name": "Hydrofluoric acid exposure",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hymenoptera_anaphylaxis",
       "name": "Hymenoptera (bee/wasp) sting anaphylaxis",
       "specialty": "Toxicology",
       "system": "Toxicology / Envenomation",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hymenoptera_sting_reaction",
+      "name": "Hymenoptera sting reaction",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Immunology / Toxicology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -80360,10 +80514,76 @@
       }
     },
     {
+      "id": "isopropanol_poisoning",
+      "name": "Isopropanol poisoning",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "latrodectism",
+      "name": "Latrodectism (widow spider envenomation)",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lithium_toxicity",
       "name": "Lithium toxicity",
       "specialty": "Toxicology",
       "system": "Toxicology / Environmental",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "loxoscelism",
+      "name": "Loxoscelism (recluse spider envenomation)",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Toxicology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -80466,6 +80686,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "opioid_toxidrome",
+      "name": "Opioid toxidrome",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -80822,6 +81064,50 @@
       }
     },
     {
+      "id": "snakebite_envenomation",
+      "name": "Snakebite envenomation",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "stingray_injury",
+      "name": "Stingray injury",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "stonefish_envenomation",
       "name": "Stonefish envenomation",
       "specialty": "Toxicology",
@@ -80870,6 +81156,28 @@
       "name": "Superwarfarin (long-acting anticoagulant rodenticide) poisoning",
       "specialty": "Toxicology",
       "system": "Toxicology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sympathomimetic_toxidrome",
+      "name": "Sympathomimetic toxidrome",
+      "specialty": "Toxicology",
+      "system": "Multisystem / Toxicology",
       "tier": "reference",
       "caps": {
         "overview": true,
