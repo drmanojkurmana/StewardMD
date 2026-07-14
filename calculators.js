@@ -3191,7 +3191,145 @@
       if(v.pf>300) return { v:"Does not meet ARDS", u:"", i:"PaO₂/FiO₂ > 300 on PEEP ≥5 is above the ARDS threshold. Ref: Berlin 2012." };
       var sev=v.pf>200?"Mild ARDS":v.pf>100?"Moderate ARDS":"Severe ARDS";
       return { v:sev, u:"", i:"ARDS confirmed on PEEP ≥5. Mild 200–300, moderate 100–200, severe ≤100. Ref: Berlin 2012." };
-    } }
+    } },
+
+  { id:"four_score", cat:"Neurology", icon:"🧠", title:"FOUR Score (Coma)",
+    desc:"Level of consciousness (alternative to GCS; usable in intubated patients).",
+    inputs:[
+      { id:"eye", label:"Eye response", type:"select", opts:[{v:"4",t:"Eyelids open, tracking or blinking to command"},{v:"3",t:"Open but not tracking"},{v:"2",t:"Open to loud voice"},{v:"1",t:"Open to pain"},{v:"0",t:"Remain closed to pain"}] },
+      { id:"motor", label:"Motor response", type:"select", opts:[{v:"4",t:"Thumbs-up/fist/peace sign to command"},{v:"3",t:"Localising to pain"},{v:"2",t:"Flexion to pain"},{v:"1",t:"Extension to pain"},{v:"0",t:"No response or myoclonus status"}] },
+      { id:"brainstem", label:"Brainstem reflexes", type:"select", opts:[{v:"4",t:"Pupil and corneal reflexes present"},{v:"3",t:"One pupil wide and fixed"},{v:"2",t:"Pupil or corneal absent"},{v:"1",t:"Pupil and corneal absent"},{v:"0",t:"Pupil, corneal and cough absent"}] },
+      { id:"resp", label:"Respiration", type:"select", opts:[{v:"4",t:"Not intubated, regular pattern"},{v:"3",t:"Not intubated, Cheyne-Stokes"},{v:"2",t:"Not intubated, irregular"},{v:"1",t:"Breathes above ventilator rate"},{v:"0",t:"Breathes at ventilator rate or apnoea"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.eye)+Number(v.motor)+Number(v.brainstem)+Number(v.resp);
+      var b=s>=13?"Mild impairment of consciousness":s>=7?"Moderate impairment":"Severe impairment of consciousness";
+      return { v:s, u:"/16", i:b+" (lower = worse; 0 suggests brain death evaluation). Ref: Wijdicks, Ann Neurol 2005 (FOUR)." };
+    } },
+
+  { id:"marburg", cat:"Cardiovascular", icon:"❤️", title:"Marburg Heart Score (Chest Pain)",
+    desc:"Likelihood that chest pain in primary care is due to coronary artery disease.",
+    inputs:[
+      { id:"agesex", label:"Female ≥ 65 or male ≥ 55 years", type:"check" },
+      { id:"cad", label:"Known CAD, cerebrovascular or peripheral vascular disease", type:"check" },
+      { id:"exercise", label:"Pain worse with exercise", type:"check" },
+      { id:"notpalp", label:"Pain NOT reproducible by palpation", type:"check" },
+      { id:"cardiac", label:"Patient assumes the pain is cardiac", type:"check" }
+    ],
+    compute:function(v){
+      var s=(v.agesex?1:0)+(v.cad?1:0)+(v.exercise?1:0)+(v.notpalp?1:0)+(v.cardiac?1:0);
+      var b=s<=2?"CAD unlikely — low probability":"Higher probability — consider further cardiac evaluation";
+      return { v:s, u:"/5", i:b+". Ref: Bösner, CMAJ 2010 (Marburg Heart Score)." };
+    } },
+
+  { id:"effective_osm", cat:"Endocrine", icon:"🧪", title:"Effective Serum Osmolality (Tonicity)",
+    desc:"Effective osmolality (excludes urea) — e.g. in hyperglycaemic emergencies.",
+    inputs:[
+      { id:"na", label:"Sodium", type:"number", unit:"mmol/L", step:"1" },
+      { id:"glu", label:"Glucose", type:"number", unit:"mmol/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.na)||!ok(v.glu)) return ERR;
+      var e=2*v.na+v.glu;
+      var b=e>320?"Markedly raised (as in hyperosmolar hyperglycaemic state)":e>295?"Raised":"Within/near the usual range";
+      return { v:r0(e), u:"mmol/kg", i:b+" (glucose entered in mmol/L; urea excluded). Ref: standard biochemistry." };
+    } },
+
+  { id:"ktv", cat:"Renal", icon:"🫘", title:"Kt/V (Single-pool, Daugirdas)",
+    desc:"Haemodialysis adequacy from pre/post urea.",
+    inputs:[
+      { id:"pre", label:"Pre-dialysis urea", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"post", label:"Post-dialysis urea", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"t", label:"Dialysis session length", type:"number", unit:"h", step:"0.1" },
+      { id:"uf", label:"Ultrafiltration volume", type:"number", unit:"L", step:"0.1" },
+      { id:"wt", label:"Post-dialysis weight", type:"number", unit:"kg", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.pre)||!ok(v.post)||!ok(v.t)||!ok(v.uf)||!ok(v.wt)||v.pre<=0||v.wt<=0||v.t<0) return ERR;
+      var R=v.post/v.pre;
+      var inner=R-0.008*v.t;
+      if(inner<=0) return { err:"Inputs give an invalid logarithm — check urea and time values" };
+      var ktv=-Math.log(inner)+(4-3.5*R)*(v.uf/v.wt);
+      var b=ktv>=1.2?"Adequate single-pool Kt/V (target ≥ 1.2)":"Below target — review dialysis prescription";
+      return { v:r1(ktv*100)/100, u:"", i:b+". Ref: Daugirdas, J Am Soc Nephrol 1993." };
+    } },
+
+  { id:"audit_full", cat:"Psychiatry", icon:"🍺", title:"AUDIT (Alcohol Use Disorders Identification Test)",
+    desc:"10-item screen for hazardous and harmful alcohol use.",
+    inputs:[
+      { id:"q1", label:"How often do you have a drink containing alcohol?", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Monthly or less"},{v:"2",t:"2–4×/month"},{v:"3",t:"2–3×/week"},{v:"4",t:"≥4×/week"}] },
+      { id:"q2", label:"Drinks on a typical drinking day", type:"select", opts:[{v:"0",t:"1–2"},{v:"1",t:"3–4"},{v:"2",t:"5–6"},{v:"3",t:"7–9"},{v:"4",t:"≥10"}] },
+      { id:"q3", label:"How often ≥6 drinks on one occasion?", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Less than monthly"},{v:"2",t:"Monthly"},{v:"3",t:"Weekly"},{v:"4",t:"Daily/almost daily"}] },
+      { id:"q4", label:"Unable to stop drinking once started", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Less than monthly"},{v:"2",t:"Monthly"},{v:"3",t:"Weekly"},{v:"4",t:"Daily/almost daily"}] },
+      { id:"q5", label:"Failed to do what was expected because of drinking", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Less than monthly"},{v:"2",t:"Monthly"},{v:"3",t:"Weekly"},{v:"4",t:"Daily/almost daily"}] },
+      { id:"q6", label:"Needed a drink in the morning", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Less than monthly"},{v:"2",t:"Monthly"},{v:"3",t:"Weekly"},{v:"4",t:"Daily/almost daily"}] },
+      { id:"q7", label:"Guilt or remorse after drinking", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Less than monthly"},{v:"2",t:"Monthly"},{v:"3",t:"Weekly"},{v:"4",t:"Daily/almost daily"}] },
+      { id:"q8", label:"Unable to remember the night before", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Less than monthly"},{v:"2",t:"Monthly"},{v:"3",t:"Weekly"},{v:"4",t:"Daily/almost daily"}] },
+      { id:"q9", label:"You or someone injured due to your drinking", type:"select", opts:[{v:"0",t:"No"},{v:"2",t:"Yes, but not in the last year"},{v:"4",t:"Yes, in the last year"}] },
+      { id:"q10", label:"Others concerned or suggested you cut down", type:"select", opts:[{v:"0",t:"No"},{v:"2",t:"Yes, but not in the last year"},{v:"4",t:"Yes, in the last year"}] }
+    ],
+    compute:function(v){
+      var s=0; for(var i=1;i<=10;i++) s+=Number(v["q"+i]);
+      var b=s<8?"Low risk":s<=15?"Hazardous drinking":s<=19?"Harmful drinking":"Possible alcohol dependence";
+      return { v:s, u:"/40", i:b+". Ref: Saunders, Addiction 1993 (WHO AUDIT)." };
+    } },
+
+  { id:"mews", cat:"Critical care", icon:"🚨", title:"Modified Early Warning Score (MEWS)",
+    desc:"Bedside physiological track-and-trigger score.",
+    inputs:[
+      { id:"sbp", label:"Systolic BP", type:"select", opts:[{v:"3",t:"≤ 70"},{v:"2",t:"71–80"},{v:"1",t:"81–100"},{v:"0",t:"101–199"},{v:"2b",t:"≥ 200"}] },
+      { id:"hr", label:"Heart rate", type:"select", opts:[{v:"2",t:"≤ 40"},{v:"1",t:"41–50"},{v:"0",t:"51–100"},{v:"1b",t:"101–110"},{v:"2b",t:"111–129"},{v:"3",t:"≥ 130"}] },
+      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"2",t:"< 9"},{v:"0",t:"9–14"},{v:"1",t:"15–20"},{v:"2b",t:"21–29"},{v:"3",t:"≥ 30"}] },
+      { id:"temp", label:"Temperature", type:"select", opts:[{v:"2",t:"< 35°C"},{v:"0",t:"35–38.4°C"},{v:"2b",t:"≥ 38.5°C"}] },
+      { id:"avpu", label:"Neurological (AVPU)", type:"select", opts:[{v:"0",t:"Alert"},{v:"1",t:"Reacts to voice"},{v:"2",t:"Reacts to pain"},{v:"3",t:"Unresponsive"}] }
+    ],
+    compute:function(v){
+      function n(x){ return Math.abs(Number(String(x).replace("b",""))); }
+      var s=n(v.sbp)+n(v.hr)+n(v.rr)+n(v.temp)+n(v.avpu);
+      var b=s>=5?"High — urgent clinical review":s>=3?"Intermediate — increase monitoring/review":"Low";
+      return { v:s, u:"points", i:b+" (a score of ≥5, or 3 in any single parameter, should prompt escalation). Ref: Subbe, QJM 2001 (MEWS)." };
+    } },
+
+  { id:"apfel", cat:"General", icon:"🤢", title:"Apfel Score (Postoperative Nausea & Vomiting)",
+    desc:"Risk of postoperative nausea and vomiting.",
+    inputs:[
+      { id:"female", label:"Female sex", type:"check" },
+      { id:"nonsmoker", label:"Non-smoker", type:"check" },
+      { id:"history", label:"History of PONV or motion sickness", type:"check" },
+      { id:"opioids", label:"Expected postoperative opioids", type:"check" }
+    ],
+    compute:function(v){
+      var s=(v.female?1:0)+(v.nonsmoker?1:0)+(v.history?1:0)+(v.opioids?1:0);
+      var risk=["~10%","~20%","~40%","~60%","~80%"][s];
+      var b=s>=2?"Consider prophylactic antiemetics":"Low baseline risk";
+      return { v:s, u:"/4", i:"Approximate PONV risk "+risk+". "+b+". Ref: Apfel, Anesthesiology 1999." };
+    } },
+
+  { id:"borg", cat:"Respiratory", icon:"🫁", title:"Modified Borg Dyspnoea Scale",
+    desc:"Patient-rated breathlessness intensity.",
+    inputs:[
+      { id:"score", label:"Breathlessness rating", type:"select", opts:[
+        {v:"0",t:"0 — Nothing at all"},{v:"0.5",t:"0.5 — Very, very slight"},{v:"1",t:"1 — Very slight"},{v:"2",t:"2 — Slight"},{v:"3",t:"3 — Moderate"},
+        {v:"4",t:"4 — Somewhat severe"},{v:"5",t:"5 — Severe"},{v:"6",t:"6"},{v:"7",t:"7 — Very severe"},{v:"8",t:"8"},{v:"9",t:"9 — Very, very severe"},{v:"10",t:"10 — Maximal"} ] }
+    ],
+    compute:function(v){
+      var s=Number(v.score);
+      var b=s<=1?"Minimal breathlessness":s<=3?"Mild-to-moderate breathlessness":s<=5?"Severe breathlessness":"Very severe breathlessness";
+      return { v:s, u:"/10", i:b+". Useful for tracking change over time. Ref: Borg, Med Sci Sports Exerc 1982 (modified)." };
+    } },
+
+  { id:"aar", cat:"Hepatology", icon:"🩺", title:"AST/ALT Ratio (De Ritis)",
+    desc:"Ratio of aminotransferases, a clue to the type of liver injury.",
+    inputs:[
+      { id:"ast", label:"AST", type:"number", unit:"IU/L", step:"1" },
+      { id:"alt", label:"ALT", type:"number", unit:"IU/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ast)||!ok(v.alt)||v.alt<=0) return ERR;
+      var r=v.ast/v.alt;
+      var b=r>=2?"Ratio ≥ 2 — suggests alcoholic liver disease or advanced fibrosis/cirrhosis":r>=1?"Ratio ≥ 1 — may indicate cirrhosis; interpret with context":"Ratio < 1 — typical of viral hepatitis or non-alcoholic fatty liver disease";
+      return { v:r1(r*100)/100, u:"", i:b+". Ref: De Ritis ratio (standard hepatology)." };
+    } },
 
   ];
 
@@ -3358,7 +3496,16 @@
     chads2:["chads2","cha ds2","af stroke risk","atrial fibrillation stroke"],
     ca_phos_product:["calcium phosphate product","ca x po4","calcium phosphorus product","ckd mbd"],
     pecarn_head:["pecarn","paediatric head injury","pediatric head ct","child head trauma ct"],
-    berlin_ards:["berlin definition","ards","ards severity","acute respiratory distress syndrome"]
+    berlin_ards:["berlin definition","ards","ards severity","acute respiratory distress syndrome"],
+    four_score:["four score","full outline of unresponsiveness","coma scale","consciousness score"],
+    marburg:["marburg heart score","chest pain primary care","cad probability","chest pain rule"],
+    effective_osm:["effective osmolality","tonicity","serum tonicity","hyperosmolar"],
+    ktv:["kt/v","ktv","dialysis adequacy","urea reduction dialysis","haemodialysis adequacy"],
+    audit_full:["audit","alcohol use disorders identification test","alcohol screen","hazardous drinking"],
+    mews:["modified early warning score","mews","track and trigger","early warning"],
+    apfel:["apfel score","ponv","postoperative nausea vomiting","nausea risk"],
+    borg:["borg scale","dyspnoea scale","breathlessness score","modified borg"],
+    aar:["ast alt ratio","de ritis ratio","aar","transaminase ratio"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -3481,7 +3628,16 @@
     chads2:"Gage BF, et al. JAMA 2001;285(22):2864–70.",
     ca_phos_product:"KDIGO CKD-MBD Work Group. Kidney Int Suppl 2009/2017.",
     pecarn_head:"Kuppermann N, et al. Lancet 2009;374(9696):1160–70 (PECARN).",
-    berlin_ards:"ARDS Definition Task Force. JAMA 2012;307(23):2526–33 (Berlin)."
+    berlin_ards:"ARDS Definition Task Force. JAMA 2012;307(23):2526–33 (Berlin).",
+    four_score:"Wijdicks EFM, et al. Ann Neurol 2005;58(4):585–93 (FOUR).",
+    marburg:"Bösner S, et al. CMAJ 2010;182(12):1295–300 (Marburg Heart Score).",
+    effective_osm:"Standard biochemistry reference (effective osmolality/tonicity).",
+    ktv:"Daugirdas JT. J Am Soc Nephrol 1993;4(5):1205–13.",
+    audit_full:"Saunders JB, et al. Addiction 1993;88(6):791–804 (WHO AUDIT).",
+    mews:"Subbe CP, et al. QJM 2001;94(10):521–6 (MEWS).",
+    apfel:"Apfel CC, et al. Anesthesiology 1999;91(3):693–700.",
+    borg:"Borg GA. Med Sci Sports Exerc 1982;14(5):377–81 (modified scale).",
+    aar:"De Ritis F. Standard hepatology reference (AST/ALT ratio)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
