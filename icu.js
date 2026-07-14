@@ -2364,6 +2364,7 @@
   var _ws = "overview";        // current workspace (bottom bar)
   var _wsLast = {};            // workspace id → last member viewed in it
   var _screen = "board";       // v2 only: "board" | "patient" | "alerts" | "team"
+  var _admitting = false;      // true while an Admit-opened patient form is up; cancelling it with no data returns to the board (not a blank patient page)
   var _v2Filter = "all";       // v2 board acuity filter: "all" | "critical" | "review" | "stable"
   var _imgFilter = "all";      // Imaging Notes filter bucket
   var _imgOpen = {};           // imaging card index → expanded (full report)
@@ -2880,6 +2881,7 @@
         '<button class="icu-btn ghost" data-icu-act="clearfindings">' + ico("trash", "🧹") + ' Clear current findings</button>' +
         '<button class="icu-btn ghost" data-icu-act="tab:discharge">' + ico("rounds", "📝") + ' Discharge &amp; remove patient</button>' +
         '</div>' +
+        '<button class="icu-btn ghost" data-icu-act="testpush" style="margin-top:8px">' + ico("bell", "🔔") + ' Send me a test notification</button>' +
         '<p class="icu-doc-sub" style="text-align:center;margin-top:16px;opacity:.55">StewardMD ICU · ' + esc(icuBuildVer() || "build") + '</p>';
     }
   };
@@ -4263,6 +4265,25 @@
         }, function () {});
       } catch (e) {}
     });
+  }
+  // Self-test push (ICU More → "Send me a test notification"): verifies push delivery on THIS device
+  // in one tap, independent of groups/roles. The response tells us if a token is even registered.
+  function grpTestPush() {
+    if (window.toast) toast("Sending a test notification…");
+    try {
+      idToken().then(function (tok) {
+        if (!tok) { if (window.toast) toast("Sign in first, then try the test push"); return; }
+        fetch("/api/push/test", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok } })
+          .then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (!window.toast) return;
+            if (j && j.sent) toast("Test notification sent — check your notifications");
+            else if (j && j.total === 0) toast("No device is registered for push yet. Allow notifications + reopen the app, then retry.");
+            else toast("Couldn't send the test push" + (j && j.error ? " (" + j.error + ")" : ""));
+          })
+          .catch(function () { if (window.toast) toast("Test push failed — check your connection"); });
+      }, function () { if (window.toast) toast("Couldn't get your auth token"); });
+    } catch (e) {}
   }
   // Immediate push to the unit when an instruction is issued (called from grpDoPostRound). The server
   // pushes the other members (or the author if solo, so it's verifiable) — no waiting for overdue.
@@ -5908,8 +5929,9 @@
       case "icuboard": if (grpActive()) grpTeardownPatient(); _screen = "board"; _paintTop = true; paint(); break;
       case "icualerts": if (grpActive()) grpNotifMarkSeen(); _screen = "alerts"; _paintTop = true; paint(); break;
       case "icuteam": _screen = "team"; _paintTop = true; paint(); break;
-      case "icuadmit": _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); break;
+      case "icuadmit": _admitting = true; _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); break;
       case "icumore": _screen = "patient"; _active = "more"; _ws = "more"; _paintTop = true; paint(); break;
+      case "testpush": grpTestPush(); break;
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
       case "grptoggle": try { if (localStorage.getItem("smd_icu_groups") === "1") localStorage.removeItem("smd_icu_groups"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
@@ -6046,8 +6068,15 @@
       case "clearconfirm": clearFindings(); break;
       case "newpt": newPatient(); break;
       case "lyte": _lytesExp[arg] = !_lytesExp[arg]; paint(); break;
-      case "save": saveForm(arg); break;
-      case "closeform": closeForm(); break;
+      case "save": _admitting = false; saveForm(arg); break;
+      case "closeform": {
+        var _wasAdmit = _admitting; _admitting = false;
+        closeForm();
+        // Cancelling an Admit with nothing entered = abandoned admit → go BACK to the unit board,
+        // not left stranded on a blank patient workspace. (A real edit / saved patient has data → stay.)
+        if (_wasAdmit && !hasData()) { if (grpActive()) { try { grpTeardownPatient(); } catch (e) {} } _screen = "board"; _active = "overview"; _ws = "overview"; _paintTop = true; paint(); }
+        break;
+      }
       case "snapshot": openSnapshot(); break;
       case "launch":
         if (arg === "elyte") launch(function () {

@@ -90,6 +90,15 @@ export async function onRequest(context) {
     const res = await escalateOverdueTask(env, gid, pid, taskId);
     return json(res || { error: "failed" });
   }
+  // Self-test: push ONLY the caller's own devices so a solo tester can verify delivery in one tap.
+  // The response reveals whether a device token is even registered (total) vs delivered (sent).
+  if (method === "POST" && seg === "test") {
+    if (!nativePushEnabled(env)) return json({ error: "push-disabled" }, 501);
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    const r = await sendNativeToAll(env, { title: "🔔 StewardMD test", body: "Push notifications are working on this device.", tag: "smd-test", url: "https://stewardmd.in/" }, { uid });
+    return json({ ok: true, sent: (r && r.sent) || 0, total: (r && r.total) || 0 });
+  }
   // New instruction issued → notify the unit IMMEDIATELY (not just when overdue). Member-triggered.
   if (method === "POST" && seg === "instruction") {
     if (!nativePushEnabled(env)) return json({ error: "push-disabled" }, 501);
