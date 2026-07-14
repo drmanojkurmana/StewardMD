@@ -1796,6 +1796,164 @@
       d = r1(d);
       var band = d<2.6?"Remission":d<=3.2?"Low activity":d<=5.1?"Moderate activity":"High activity";
       return { v:d, u:"", i:band+" (remission <2.6, low ≤3.2, moderate ≤5.1, high >5.1). Ref: Prevoo, Arthritis Rheum 1995." };
+    } },
+
+  /* ===== MDCalc-parity expansion — batch 3 (ai_drafted; clinician-verify) ===== */
+
+  { id:"stopbang", cat:"Respiratory", icon:"😴", title:"STOP-BANG (obstructive sleep apnoea)",
+    desc:"Screening risk of obstructive sleep apnoea.",
+    inputs:[
+      { id:"s1", label:"Snoring loudly", type:"check" },
+      { id:"t", label:"Tiredness / daytime sleepiness", type:"check" },
+      { id:"o", label:"Observed apnoea", type:"check" },
+      { id:"p", label:"Pressure (treated hypertension)", type:"check" },
+      { id:"b", label:"BMI >35 kg/m²", type:"check" },
+      { id:"a", label:"Age >50 years", type:"check" },
+      { id:"n", label:"Neck circumference >40 cm", type:"check" },
+      { id:"g", label:"Male sex", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; ["s1","t","o","p","b","a","n","g"].forEach(function(k){ if(v[k])s++; });
+      var band = s<=2?"Low risk":s<=4?"Intermediate risk":"High risk of OSA";
+      return { v:s, u:"/8", i:band+" (0–2 low, 3–4 intermediate, 5–8 high). Consider sleep study for higher scores. Ref: Chung, Anesthesiology 2008." };
+    } },
+
+  { id:"smartcop", cat:"Respiratory", icon:"🫁", title:"SMART-COP (pneumonia — intensive support)",
+    desc:"Predicts need for intensive respiratory or vasopressor support in community-acquired pneumonia.",
+    inputs:[
+      { id:"sbp", label:"Systolic BP <90 mmHg", type:"check" },
+      { id:"multi", label:"Multilobar infiltrates on CXR", type:"check" },
+      { id:"alb", label:"Albumin <3.5 g/dL (35 g/L)", type:"check" },
+      { id:"rr", label:"High respiratory rate (age-adjusted)", type:"check" },
+      { id:"tachy", label:"Tachycardia ≥125/min", type:"check" },
+      { id:"conf", label:"New confusion", type:"check" },
+      { id:"ox", label:"Low oxygen (age-adjusted)", type:"check" },
+      { id:"ph", label:"Arterial pH <7.35", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.sbp)s+=2; if(v.multi)s+=1; if(v.alb)s+=1; if(v.rr)s+=1; if(v.tachy)s+=1; if(v.conf)s+=1; if(v.ox)s+=2; if(v.ph)s+=2;
+      var band = s<=2?"Low risk":s<=4?"Moderate risk (~1 in 8)":s<=6?"High risk (~1 in 3)":"Very high risk (~2 in 3)";
+      return { v:s, u:"points", i:band+" of needing intensive respiratory/vasopressor support. Ref: Charles, Clin Infect Dis 2008." };
+    } },
+
+  { id:"homa_ir", cat:"Endocrine", icon:"🩸", title:"HOMA-IR (insulin resistance)",
+    desc:"Homeostatic model assessment of insulin resistance.",
+    inputs:[
+      { id:"glu", label:"Fasting glucose", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"ins", label:"Fasting insulin", type:"number", unit:"mU/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.glu)||!ok(v.ins)||v.glu<=0||v.ins<=0) return ERR;
+      var h=r1(v.glu*v.ins/22.5);
+      return { v:h, u:"", i:(h>2.5?"Suggests insulin resistance (thresholds vary by population/assay, commonly >~2.5)":"Within the usual reference range")+". Use fasting samples; not validated on insulin therapy. Ref: Matthews, Diabetologia 1985." };
+    } },
+
+  { id:"nafld_fibrosis", cat:"Hepatology", icon:"🩺", title:"NAFLD Fibrosis Score",
+    desc:"Estimates advanced fibrosis in non-alcoholic fatty liver disease.",
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"yrs", step:"1" },
+      { id:"bmi", label:"BMI", type:"number", unit:"kg/m²", step:"0.1" },
+      { id:"dm", label:"Impaired fasting glucose or diabetes", type:"check" },
+      { id:"ast", label:"AST", type:"number", unit:"U/L", step:"1" },
+      { id:"alt", label:"ALT", type:"number", unit:"U/L", step:"1" },
+      { id:"plt", label:"Platelets", type:"number", unit:"×10⁹/L", step:"1" },
+      { id:"alb", label:"Albumin", type:"number", unit:"g/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!ok(v.bmi)||!ok(v.ast)||!ok(v.alt)||!ok(v.plt)||!ok(v.alb)||v.alt<=0||v.plt<=0) return ERR;
+      var s = -1.675 + 0.037*v.age + 0.094*v.bmi + 1.13*(v.dm?1:0) + 0.99*(v.ast/v.alt) - 0.013*v.plt - 0.66*(v.alb/10);
+      s=r1(s*100)/100;
+      var band = s < -1.455 ? "Advanced fibrosis unlikely (F0–F2)" : s > 0.676 ? "Advanced fibrosis likely (F3–F4)" : "Indeterminate — consider further assessment (e.g. elastography)";
+      return { v:s, u:"", i:band+" (low <−1.455, high >0.676). Ref: Angulo, Hepatology 2007." };
+    } },
+
+  { id:"glasgow_imrie", cat:"Critical care", icon:"🩺", title:"Glasgow-Imrie Score (pancreatitis)",
+    desc:"Severity of acute pancreatitis at 48 hours (PANCREAS criteria).",
+    inputs:[
+      { id:"po2", label:"PaO₂ <8 kPa (<60 mmHg)", type:"check" },
+      { id:"age", label:"Age >55 years", type:"check" },
+      { id:"wcc", label:"White cell count >15 ×10⁹/L", type:"check" },
+      { id:"ca", label:"Calcium <2 mmol/L", type:"check" },
+      { id:"urea", label:"Urea >16 mmol/L", type:"check" },
+      { id:"ldh", label:"LDH >600 U/L (or AST >200 U/L)", type:"check" },
+      { id:"alb", label:"Albumin <32 g/L", type:"check" },
+      { id:"glu", label:"Glucose >10 mmol/L", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; ["po2","age","wcc","ca","urea","ldh","alb","glu"].forEach(function(k){ if(v[k])s++; });
+      return { v:s, u:"points", i:(s>=3?"≥3 — predicts severe pancreatitis; consider HDU/ICU care":"<3 — predicts milder course")+". Best applied at 48 h. Ref: Blamey/Imrie, Gut 1984." };
+    } },
+
+  { id:"4at", cat:"Neurology", icon:"🧠", title:"4AT (delirium screening)",
+    desc:"Rapid bedside screen for delirium and cognitive impairment.",
+    inputs:[
+      { id:"alert", label:"Alertness", type:"select", opts:[{v:"0",t:"Normal"},{v:"4",t:"Clearly abnormal (drowsy/agitated)"}] },
+      { id:"amt4", label:"AMT4 (age, DOB, place, current year)", type:"select", opts:[{v:"0",t:"No mistakes"},{v:"1",t:"1 mistake"},{v:"2",t:"≥2 mistakes / untestable"}] },
+      { id:"att", label:"Attention (months of year backwards)", type:"select", opts:[{v:"0",t:"≥7 correct"},{v:"1",t:"<7 / refuses"},{v:"2",t:"Untestable"}] },
+      { id:"acute", label:"Acute change or fluctuating course", type:"select", opts:[{v:"0",t:"No"},{v:"4",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.alert)||0)+(Number(v.amt4)||0)+(Number(v.att)||0)+(Number(v.acute)||0);
+      var band = s>=4?"Possible delirium ± cognitive impairment":s>=1?"Possible cognitive impairment":"Delirium/cognitive impairment unlikely";
+      return { v:s, u:"points", i:band+" (≥4 delirium likely, 1–3 possible cognitive impairment, 0 unlikely). Ref: MacLullich, 4AT (the4at.com)." };
+    } },
+
+  { id:"sf_syncope", cat:"Cardiovascular", icon:"❤️", title:"San Francisco Syncope Rule (CHESS)",
+    desc:"Risk-stratifies syncope for serious short-term outcomes.",
+    inputs:[
+      { id:"chf", label:"History of congestive heart failure", type:"check" },
+      { id:"hct", label:"Haematocrit <30%", type:"check" },
+      { id:"ecg", label:"Abnormal ECG (new changes / non-sinus rhythm)", type:"check" },
+      { id:"sob", label:"Shortness of breath", type:"check" },
+      { id:"sbp", label:"Systolic BP <90 mmHg at triage", type:"check" }
+    ],
+    compute:function(v){
+      var pos = v.chf||v.hct||v.ecg||v.sob||v.sbp;
+      return { v: pos?"High risk":"Low risk", i: pos?"Any CHESS factor present — higher risk of serious 7-day outcome; consider admission/workup.":"No CHESS factor — low risk of serious short-term outcome. Ref: Quinn, Ann Emerg Med 2004." };
+    } },
+
+  { id:"bode", cat:"Respiratory", icon:"🫁", title:"BODE Index (COPD)",
+    desc:"Multidimensional COPD prognosis (mortality).",
+    inputs:[
+      { id:"bmi", label:"BMI", type:"select", opts:[{v:"0",t:">21 kg/m²"},{v:"1",t:"≤21 kg/m²"}] },
+      { id:"fev1", label:"FEV₁ (% predicted)", type:"select", opts:[{v:"0",t:"≥65%"},{v:"1",t:"50–64%"},{v:"2",t:"36–49%"},{v:"3",t:"≤35%"}] },
+      { id:"mmrc", label:"mMRC dyspnoea grade", type:"select", opts:[{v:"0",t:"0–1"},{v:"1",t:"2"},{v:"2",t:"3"},{v:"3",t:"4"}] },
+      { id:"walk", label:"6-minute walk distance", type:"select", opts:[{v:"0",t:"≥350 m"},{v:"1",t:"250–349 m"},{v:"2",t:"150–249 m"},{v:"3",t:"≤149 m"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.bmi)||0)+(Number(v.fev1)||0)+(Number(v.mmrc)||0)+(Number(v.walk)||0);
+      var band = s<=2?"Lower quartile — better 4-year survival":s<=4?"Second quartile":s<=6?"Third quartile":"Highest quartile — worst prognosis";
+      return { v:s, u:"/10", i:band+". Higher BODE predicts higher mortality than FEV₁ alone. Ref: Celli, NEJM 2004." };
+    } },
+
+  { id:"ottawa_sah", cat:"Neurology", icon:"🚑", title:"Ottawa SAH Rule",
+    desc:"Rule-out for subarachnoid haemorrhage in alert adults with acute severe headache.",
+    inputs:[
+      { id:"age40", label:"Age ≥40 years", type:"check" },
+      { id:"neck", label:"Neck pain or stiffness", type:"check" },
+      { id:"los", label:"Witnessed loss of consciousness", type:"check" },
+      { id:"exert", label:"Onset during exertion", type:"check" },
+      { id:"thunder", label:"Thunderclap (instantly peaking pain)", type:"check" },
+      { id:"flex", label:"Limited neck flexion on examination", type:"check" }
+    ],
+    compute:function(v){
+      var pos = v.age40||v.neck||v.los||v.exert||v.thunder||v.flex;
+      return { v: pos?"Investigate for SAH":"No investigation required by the rule", i:"Applies ONLY to alert patients ≥15 y with new severe atraumatic headache peaking within 1 h and no neurological deficit. Highly sensitive (rule-out). Ref: Perry, JAMA 2013." };
+    } },
+
+  { id:"wfns", cat:"Neurology", icon:"🧠", title:"WFNS Grade (SAH)",
+    desc:"World Federation of Neurosurgical Societies grade for subarachnoid haemorrhage.",
+    inputs:[
+      { id:"g", label:"Grade (GCS ± motor deficit)", type:"select", opts:[
+        {v:"1",t:"I — GCS 15, no motor deficit"},
+        {v:"2",t:"II — GCS 13–14, no motor deficit"},
+        {v:"3",t:"III — GCS 13–14 with motor deficit"},
+        {v:"4",t:"IV — GCS 7–12"},
+        {v:"5",t:"V — GCS 3–6"} ] }
+    ],
+    compute:function(v){
+      var g=Number(v.g)||1;
+      return { v:g, u:"(I–V)", i:"Higher grade correlates with worse outcome after aneurysmal SAH; based mainly on the Glasgow Coma Scale. Ref: WFNS, J Neurosurg 1988." };
     } }
 
   ];
@@ -1874,7 +2032,17 @@
     ebv:["estimated blood volume","blood volume","transfusion volume","exchange transfusion"],
     cows:["clinical opiate withdrawal scale","cows","opioid withdrawal"],
     gahs:["glasgow alcoholic hepatitis score","gahs","alcoholic hepatitis prognosis"],
-    das28:["das28","disease activity score","rheumatoid arthritis activity","das 28 esr"]
+    das28:["das28","disease activity score","rheumatoid arthritis activity","das 28 esr"],
+    stopbang:["stop bang","stop-bang","sleep apnoea screening","osa screen"],
+    smartcop:["smart cop","pneumonia icu","cap severity","respiratory support pneumonia"],
+    homa_ir:["homa ir","insulin resistance","homa"],
+    nafld_fibrosis:["nafld fibrosis score","nafld","fatty liver fibrosis","nfs"],
+    glasgow_imrie:["glasgow imrie","imrie score","pancreatitis severity","pancreas score"],
+    "4at":["4at","delirium screen","confusion assessment","cognitive screen"],
+    sf_syncope:["san francisco syncope rule","chess","syncope risk"],
+    bode:["bode index","copd prognosis","copd mortality"],
+    ottawa_sah:["ottawa sah rule","subarachnoid rule","thunderclap headache rule","sah rule out"],
+    wfns:["wfns grade","subarachnoid grade","sah grade"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
