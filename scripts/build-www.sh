@@ -48,6 +48,11 @@ for f in *.png *.webp *.ico *.svg *.gif *.jpg *.jpeg; do
   cp "$f" "$WWW/"
 done
 
+# ── 4a. Self-hosted fonts (Material Symbols Rounded woff2) — the icon font MUST ship
+# in the bundle, else the native WebView can't reach the CDN and every ligature icon
+# renders as its text name ("monitor_heart"…). @font-face lives in redesign-system.css. ─
+if [ -d assets/fonts ]; then mkdir -p "$WWW/assets/fonts"; cp assets/fonts/* "$WWW/assets/fonts/" 2>/dev/null || true; fi
+
 # ── 4b. Offline clinical bundle (native drug monographs, lazy-loaded by
 # offline-clinical.js). Built by scripts/build-offline-clinical.mjs. ────────────
 [ -f data/offline-clinical.json.gz ] && cp data/offline-clinical.json.gz "$WWW/"
