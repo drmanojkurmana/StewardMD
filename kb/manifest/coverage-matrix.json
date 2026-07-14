@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3053,
+    "diseases": 3109,
     "diagnostic": 141,
-    "reference": 2912,
+    "reference": 2968,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,13 +30,13 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 12.9,
+    "severity": 12.7,
     "prognosis": 99.7,
-    "diagnosticScoring": 4.6,
-    "management": 4.6,
-    "drugTherapy": 4.2,
-    "dosing": 4.2,
-    "stewardship": 1.7
+    "diagnosticScoring": 4.5,
+    "management": 4.5,
+    "drugTherapy": 4.1,
+    "dosing": 4.1,
+    "stewardship": 1.6
   },
   "bySpecialty": {
     "Pulmonology": {
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 145,
+      "total": 159,
       "diagnostic": 5,
-      "reference": 140,
+      "reference": 154,
       "dims": {
-        "overview": 145,
-        "clinicalFeatures": 145,
-        "pathophysiology": 145,
-        "differential": 145,
-        "investigations": 144,
-        "redFlags": 145,
+        "overview": 159,
+        "clinicalFeatures": 159,
+        "pathophysiology": 159,
+        "differential": 159,
+        "investigations": 158,
+        "redFlags": 159,
         "severity": 7,
-        "prognosis": 144,
+        "prognosis": 158,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 247,
+      "total": 289,
       "diagnostic": 6,
-      "reference": 241,
+      "reference": 283,
       "dims": {
-        "overview": 247,
-        "clinicalFeatures": 247,
-        "pathophysiology": 247,
-        "differential": 247,
-        "investigations": 247,
-        "redFlags": 247,
+        "overview": 289,
+        "clinicalFeatures": 289,
+        "pathophysiology": 289,
+        "differential": 289,
+        "investigations": 289,
+        "redFlags": 289,
         "severity": 23,
-        "prognosis": 247,
+        "prognosis": 289,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -4378,6 +4378,28 @@
       }
     },
     {
+      "id": "acanthosis_nigricans",
+      "name": "Acanthosis nigricans",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acne_vulgaris",
       "name": "Acne vulgaris",
       "specialty": "Dermatology",
@@ -4818,6 +4840,28 @@
       }
     },
     {
+      "id": "confluent_reticulated_papillomatosis",
+      "name": "Confluent and reticulated papillomatosis (Gougerot-Carteaud)",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "contact_dermatitis",
       "name": "Contact dermatitis",
       "specialty": "Dermatology",
@@ -4998,6 +5042,28 @@
       "name": "Discoid Lupus Erythematosus",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dowling_degos_disease",
+      "name": "Dowling-Degos disease",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -5416,6 +5482,28 @@
       "name": "Focal dermal hypoplasia",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fox_fordyce_disease",
+      "name": "Fox-Fordyce disease",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6072,6 +6160,28 @@
       }
     },
     {
+      "id": "keratosis_pilaris",
+      "name": "Keratosis pilaris",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "keratosis_pilaris_atrophicans",
       "name": "Keratosis pilaris atrophicans",
       "specialty": "Dermatology",
@@ -6116,6 +6226,50 @@
       }
     },
     {
+      "id": "lichen_amyloidosis",
+      "name": "Lichen amyloidosis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lichen_nitidus",
+      "name": "Lichen nitidus",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lichen_planus",
       "name": "Lichen planus",
       "specialty": "Dermatology",
@@ -6142,6 +6296,28 @@
       "name": "Lichen Sclerosus",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lichen_striatus",
+      "name": "Lichen striatus",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6274,6 +6450,28 @@
       "name": "Lymphoedema-distichiasis syndrome",
       "specialty": "Dermatology",
       "system": "Vascular anomalies / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "macular_amyloidosis",
+      "name": "Macular amyloidosis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6666,6 +6864,28 @@
       }
     },
     {
+      "id": "palmoplantar_pustulosis",
+      "name": "Palmoplantar pustulosis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pancreatic_panniculitis",
       "name": "Pancreatic panniculitis",
       "specialty": "Dermatology",
@@ -6908,6 +7128,28 @@
       }
     },
     {
+      "id": "pityriasis_lichenoides",
+      "name": "Pityriasis lichenoides (chronica/PLC spectrum)",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pityriasis_rosea",
       "name": "Pityriasis Rosea",
       "specialty": "Dermatology",
@@ -6932,6 +7174,28 @@
     {
       "id": "pityriasis_rubra_pilaris",
       "name": "Pityriasis rubra pilaris",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pleva",
+      "name": "PLEVA (pityriasis lichenoides et varioliformis acuta)",
       "specialty": "Dermatology",
       "system": "Dermatology",
       "tier": "reference",
@@ -7018,6 +7282,28 @@
       }
     },
     {
+      "id": "prurigo_pigmentosa",
+      "name": "Prurigo pigmentosa",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "psoriasis",
       "name": "Psoriasis",
       "specialty": "Dermatology",
@@ -7064,6 +7350,28 @@
     {
       "id": "PYODERMA_GANGRENOSUM",
       "name": "Pyoderma gangrenosum",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "reactive_perforating_collagenosis",
+      "name": "Reactive perforating collagenosis",
       "specialty": "Dermatology",
       "system": "Dermatology",
       "tier": "reference",
@@ -60566,6 +60874,28 @@
       }
     },
     {
+      "id": "acromioclavicular_joint_injury",
+      "name": "Acromioclavicular joint injury",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "compartment_syndrome",
       "name": "Acute compartment syndrome",
       "specialty": "Rheumatology / MSK",
@@ -60852,6 +61182,28 @@
       }
     },
     {
+      "id": "anterior_cruciate_ligament_injury",
+      "name": "Anterior cruciate ligament injury",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "antiphospholipid_syndrome",
       "name": "Antiphospholipid Syndrome",
       "specialty": "Rheumatology / MSK",
@@ -61028,6 +61380,28 @@
       }
     },
     {
+      "id": "bankart_lesion",
+      "name": "Bankart lesion",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "beals_congenital_contractural_arachnodactyly",
       "name": "Beals congenital contractural arachnodactyly",
       "specialty": "Rheumatology / MSK",
@@ -61094,6 +61468,50 @@
       }
     },
     {
+      "id": "bennett_fracture",
+      "name": "Bennett fracture (thumb base intra-articular)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "biceps_tendon_rupture",
+      "name": "Biceps tendon rupture",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "blount_disease",
       "name": "Blount disease",
       "specialty": "Rheumatology / MSK",
@@ -61138,10 +61556,54 @@
       }
     },
     {
+      "id": "boxers_fracture",
+      "name": "Boxer fracture (fifth metacarpal neck)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bruck_syndrome",
       "name": "Bruck syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "calcific_tendinitis",
+      "name": "Calcific tendinitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -61296,6 +61758,28 @@
       "name": "Cervical spondylosis",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chance_fracture",
+      "name": "Chance fracture (flexion-distraction)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -61864,6 +62348,28 @@
       }
     },
     {
+      "id": "discoid_meniscus",
+      "name": "Discoid meniscus",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "distal_arthrogryposis",
       "name": "Distal arthrogryposis type 1",
       "specialty": "Rheumatology / MSK",
@@ -62216,6 +62722,28 @@
       }
     },
     {
+      "id": "femoroacetabular_impingement",
+      "name": "Femoroacetabular impingement",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "fibrochondrogenesis",
       "name": "Fibrochondrogenesis",
       "specialty": "Rheumatology / MSK",
@@ -62348,6 +62876,28 @@
       }
     },
     {
+      "id": "galeazzi_fracture",
+      "name": "Galeazzi fracture-dislocation",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ganglion_cyst",
       "name": "Ganglion cyst",
       "specialty": "Rheumatology / MSK",
@@ -62396,6 +62946,28 @@
       "name": "Giant cell tumour of bone",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gluteal_tendinopathy",
+      "name": "Gluteal tendinopathy",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -62502,6 +63074,28 @@
       }
     },
     {
+      "id": "trochanteric_bursitis",
+      "name": "Greater trochanteric pain syndrome (trochanteric bursitis)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "guyon_canal_syndrome",
       "name": "Guyon canal syndrome (ulnar nerve at wrist)",
       "specialty": "Rheumatology / MSK",
@@ -62528,6 +63122,28 @@
       "name": "Haglund deformity",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hangman_fracture",
+      "name": "Hangman fracture (C2 traumatic spondylolisthesis)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -62581,6 +63197,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hill_sachs_lesion",
+      "name": "Hill-Sachs lesion",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -62920,10 +63558,54 @@
       }
     },
     {
+      "id": "jefferson_fracture",
+      "name": "Jefferson fracture (C1 burst)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "jeune_syndrome",
       "name": "Jeune syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "jones_fracture",
+      "name": "Jones fracture (fifth metatarsal base)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -63250,6 +63932,28 @@
       }
     },
     {
+      "id": "lateral_epicondylitis",
+      "name": "Lateral epicondylitis (tennis elbow)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "legg_calve_perthes_disease",
       "name": "Legg-Calve-Perthes disease",
       "specialty": "Rheumatology / MSK",
@@ -63298,6 +64002,28 @@
       "name": "Limited cutaneous systemic sclerosis (CREST)",
       "specialty": "Rheumatology / MSK",
       "system": "Rheumatology / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lisfranc_injury",
+      "name": "Lisfranc injury (tarsometatarsal)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -63382,6 +64108,28 @@
       }
     },
     {
+      "id": "maisonneuve_fracture",
+      "name": "Maisonneuve fracture",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mallet_finger",
       "name": "Mallet finger",
       "specialty": "Rheumatology / MSK",
@@ -63448,6 +64196,50 @@
       }
     },
     {
+      "id": "medial_collateral_ligament_injury",
+      "name": "Medial collateral ligament injury",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "medial_epicondylitis",
+      "name": "Medial epicondylitis (golfer elbow)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "plica_syndrome",
       "name": "Medial plica syndrome of the knee",
       "specialty": "Rheumatology / MSK",
@@ -63496,6 +64288,28 @@
       "name": "Meniscal injury",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "meniscal_tear",
+      "name": "Meniscal tear",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -63606,6 +64420,28 @@
       "name": "Mixed connective tissue disease (anti-U1-RNP)",
       "specialty": "Rheumatology / MSK",
       "system": "Rheumatology / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "monteggia_fracture",
+      "name": "Monteggia fracture-dislocation",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -63910,6 +64746,28 @@
       }
     },
     {
+      "id": "olecranon_bursitis",
+      "name": "Olecranon bursitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "oligoarticular_juvenile_idiopathic_arthritis",
       "name": "Oligoarticular juvenile idiopathic arthritis",
       "specialty": "Rheumatology / MSK",
@@ -64002,6 +64860,28 @@
       "name": "Osteoblastoma",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "osteochondral_lesion_of_talus",
+      "name": "Osteochondral lesion of the talus",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -64240,6 +65120,50 @@
       }
     },
     {
+      "id": "patellar_dislocation",
+      "name": "Patellar dislocation",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "patellar_tendinopathy",
+      "name": "Patellar tendinopathy (jumper knee)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "patellofemoral_pain",
       "name": "Patellofemoral pain syndrome",
       "specialty": "Rheumatology / MSK",
@@ -64310,6 +65234,28 @@
       "name": "Perthes' disease",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pes_anserine_bursitis",
+      "name": "Pes anserine bursitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -64482,6 +65428,50 @@
       }
     },
     {
+      "id": "posterior_cruciate_ligament_injury",
+      "name": "Posterior cruciate ligament injury",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "prepatellar_bursitis",
+      "name": "Prepatellar bursitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pseudoachondroplasia",
       "name": "Pseudoachondroplasia",
       "specialty": "Rheumatology / MSK",
@@ -64636,6 +65626,28 @@
       }
     },
     {
+      "id": "retrocalcaneal_bursitis",
+      "name": "Retrocalcaneal bursitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "retroperitoneal_fibrosis",
       "name": "Retroperitoneal fibrosis",
       "specialty": "Rheumatology / MSK",
@@ -64724,6 +65736,28 @@
       }
     },
     {
+      "id": "rolando_fracture",
+      "name": "Rolando fracture (comminuted thumb base)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "rosai_dorfman_disease",
       "name": "Rosai-Dorfman disease",
       "specialty": "Rheumatology / MSK",
@@ -64768,6 +65802,28 @@
       }
     },
     {
+      "id": "rotator_cuff_tendinopathy",
+      "name": "Rotator cuff tendinopathy / subacromial impingement",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "saethre_chotzen_syndrome",
       "name": "Saethre-Chotzen syndrome",
       "specialty": "Rheumatology / MSK",
@@ -64794,6 +65850,28 @@
       "name": "SAPHO syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Rheumatology / Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "scaphoid_fracture",
+      "name": "Scaphoid fracture",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -64944,6 +66022,28 @@
       }
     },
     {
+      "id": "segond_fracture",
+      "name": "Segond fracture",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sever_disease",
       "name": "Sever disease",
       "specialty": "Rheumatology / MSK",
@@ -65076,6 +66176,28 @@
       }
     },
     {
+      "id": "slap_lesion",
+      "name": "SLAP lesion (superior labral anterior-posterior tear)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sle_flare",
       "name": "SLE / autoimmune flare",
       "specialty": "Rheumatology / MSK",
@@ -65120,10 +66242,54 @@
       }
     },
     {
+      "id": "smith_fracture",
+      "name": "Smith fracture (reverse Colles)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "snapping_hip_syndrome",
       "name": "Snapping hip syndrome (coxa saltans)",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Hand & Peripheral nerve",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "snapping_scapula_syndrome",
+      "name": "Snapping scapula syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -65278,6 +66444,28 @@
       "name": "Stress fracture",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "subacromial_bursitis",
+      "name": "Subacromial bursitis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -65560,6 +66748,28 @@
       }
     },
     {
+      "id": "terrible_triad_elbow",
+      "name": "Terrible triad of the elbow",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "thanatophoric_dysplasia",
       "name": "Thanatophoric dysplasia",
       "specialty": "Rheumatology / MSK",
@@ -65674,6 +66884,28 @@
       "name": "Trismus-pseudocamptodactyly syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "turf_toe",
+      "name": "Turf toe (first MTP hyperextension sprain)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Sports & Soft tissue",
       "tier": "reference",
       "caps": {
         "overview": true,
