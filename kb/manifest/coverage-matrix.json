@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 4045,
+    "diseases": 4072,
     "diagnostic": 141,
-    "reference": 3904,
+    "reference": 3931,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,10 +30,10 @@
     "differential": 99.9,
     "investigations": 100,
     "redFlags": 100,
-    "severity": 9.8,
+    "severity": 9.7,
     "prognosis": 99.8,
     "diagnosticScoring": 3.5,
-    "management": 3.5,
+    "management": 3.4,
     "drugTherapy": 3.2,
     "dosing": 3.2,
     "stewardship": 1.3
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 553,
+      "total": 574,
       "diagnostic": 20,
-      "reference": 533,
+      "reference": 554,
       "dims": {
-        "overview": 553,
-        "clinicalFeatures": 553,
-        "pathophysiology": 553,
-        "differential": 553,
-        "investigations": 553,
-        "redFlags": 553,
+        "overview": 574,
+        "clinicalFeatures": 574,
+        "pathophysiology": 574,
+        "differential": 574,
+        "investigations": 574,
+        "redFlags": 574,
         "severity": 48,
-        "prognosis": 553,
+        "prognosis": 574,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 362,
+      "total": 363,
       "diagnostic": 6,
-      "reference": 356,
+      "reference": 357,
       "dims": {
-        "overview": 362,
-        "clinicalFeatures": 362,
-        "pathophysiology": 362,
-        "differential": 362,
-        "investigations": 362,
-        "redFlags": 362,
+        "overview": 363,
+        "clinicalFeatures": 363,
+        "pathophysiology": 363,
+        "differential": 363,
+        "investigations": 363,
+        "redFlags": 363,
         "severity": 23,
-        "prognosis": 362,
+        "prognosis": 363,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -440,18 +440,18 @@
       }
     },
     "Visual system": {
-      "total": 5,
+      "total": 6,
       "diagnostic": 0,
-      "reference": 5,
+      "reference": 6,
       "dims": {
-        "overview": 5,
-        "clinicalFeatures": 5,
-        "pathophysiology": 5,
-        "differential": 5,
-        "investigations": 5,
-        "redFlags": 5,
+        "overview": 6,
+        "clinicalFeatures": 6,
+        "pathophysiology": 6,
+        "differential": 6,
+        "investigations": 6,
+        "redFlags": 6,
         "severity": 0,
-        "prognosis": 5,
+        "prognosis": 6,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -512,6 +512,26 @@
         "redFlags": 37,
         "severity": 0,
         "prognosis": 37,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "integumentary": {
+      "total": 4,
+      "diagnostic": 0,
+      "reference": 4,
+      "dims": {
+        "overview": 4,
+        "clinicalFeatures": 4,
+        "pathophysiology": 4,
+        "differential": 4,
+        "investigations": 4,
+        "redFlags": 4,
+        "severity": 0,
+        "prognosis": 4,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -54846,6 +54866,94 @@
       }
     },
     {
+      "id": "acquired_perforating_dermatosis",
+      "name": "acquired perforating dermatosis",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "elastosis_perforans_serpiginosa",
+      "name": "elastosis perforans serpiginosa",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "kyrle_disease",
+      "name": "kyrle disease",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "perforating_folliculitis",
+      "name": "perforating folliculitis",
+      "specialty": "integumentary",
+      "system": "integumentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "epidermal_naevus_syndrome",
       "name": "Epidermal naevus syndrome",
       "specialty": "Integumentary system",
@@ -58036,6 +58144,28 @@
       }
     },
     {
+      "id": "abdominal_migraine",
+      "name": "Abdominal migraine",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "aceruloplasminemia",
       "name": "Aceruloplasminaemia",
       "specialty": "Neurology",
@@ -58502,6 +58632,50 @@
       "name": "Andersen-Tawil syndrome",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anterior_interosseous_syndrome",
+      "name": "anterior interosseous syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Peripheral nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anterior_spinal_artery_syndrome",
+      "name": "Anterior spinal artery syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Spinal cord (vascular)",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -59070,8 +59244,74 @@
       }
     },
     {
+      "id": "benign_myoclonus_of_infancy",
+      "name": "Benign myoclonus of infancy",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "benign_neonatal_sleep_myoclonus",
+      "name": "Benign neonatal sleep myoclonus",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "benign_paroxysmal_torticollis_of_infancy",
       "name": "Benign paroxysmal torticollis of infancy",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "benign_paroxysmal_vertigo_of_childhood",
+      "name": "Benign paroxysmal vertigo of childhood",
       "specialty": "Neurology",
       "system": "Nervous system",
       "tier": "reference",
@@ -59312,10 +59552,54 @@
       }
     },
     {
+      "id": "breath_holding_spells",
+      "name": "Breath-holding spells",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "brody_myopathy",
       "name": "Brody myopathy",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "brown_sequard_syndrome",
+      "name": "Brown-Sequard syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Spinal cord",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -60434,6 +60718,28 @@
       }
     },
     {
+      "id": "common_peroneal_nerve_palsy",
+      "name": "common peroneal nerve palsy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Peripheral nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "oculomotor_nerve_palsy_compressive",
       "name": "Compressive third nerve palsy",
       "specialty": "Neurology",
@@ -60592,6 +60898,28 @@
       "name": "Congenital myasthenic syndromes",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "conus_medullaris_syndrome",
+      "name": "Conus medullaris syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Spinal cord",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -62788,6 +63116,28 @@
       }
     },
     {
+      "id": "gratification_disorder",
+      "name": "Gratification disorder",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "grin_related_disorder",
       "name": "GRIN1/GRIN2A/GRIN2B-related neurodevelopmental disorder",
       "specialty": "Neurology",
@@ -64702,6 +65052,28 @@
       }
     },
     {
+      "id": "medication_overuse_headache",
+      "name": "Medication-overuse headache",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "medulloblastoma",
       "name": "Medulloblastoma",
       "specialty": "Neurology",
@@ -64794,6 +65166,28 @@
       "name": "Meningioma",
       "specialty": "Neurology",
       "system": "Neurosurgery / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "meralgia_paraesthetica",
+      "name": "meralgia paraesthetica",
+      "specialty": "Neurology",
+      "system": "Nervous system / Peripheral nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -67144,6 +67538,28 @@
       }
     },
     {
+      "id": "posterior_interosseous_syndrome",
+      "name": "posterior interosseous syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Peripheral nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "postprandial_hypotension",
       "name": "Postprandial hypotension",
       "specialty": "Neurology",
@@ -67610,6 +68026,28 @@
       "name": "Pure motor lacunar syndrome",
       "specialty": "Neurology",
       "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "radial_nerve_palsy",
+      "name": "radial nerve palsy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Peripheral nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -68662,6 +69100,28 @@
       }
     },
     {
+      "id": "spinal_dural_arteriovenous_fistula",
+      "name": "Spinal dural arteriovenous fistula",
+      "specialty": "Neurology",
+      "system": "Nervous system / Spinal cord (vascular)",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "spinal_epidural_abscess",
       "name": "Spinal epidural abscess",
       "specialty": "Neurology",
@@ -69124,6 +69584,28 @@
       }
     },
     {
+      "id": "spontaneous_intracranial_hypotension",
+      "name": "Spontaneous intracranial hypotension",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "inclusion_body_myositis",
       "name": "Sporadic inclusion body myositis",
       "specialty": "Neurology",
@@ -69410,10 +69892,54 @@
       }
     },
     {
+      "id": "suprascapular_neuropathy",
+      "name": "suprascapular neuropathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Peripheral nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "syngap1_encephalopathy",
       "name": "SYNGAP1-related intellectual disability",
       "specialty": "Neurology",
       "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "syringobulbia",
+      "name": "Syringobulbia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Spinal cord and brainstem",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -69564,6 +70090,28 @@
       }
     },
     {
+      "id": "thoracic_outlet_neurogenic",
+      "name": "thoracic outlet neurogenic",
+      "specialty": "Neurology",
+      "system": "Nervous system / Peripheral nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tolosa_hunt_syndrome",
       "name": "Tolosa-Hunt syndrome",
       "specialty": "Neurology",
@@ -69634,6 +70182,28 @@
       "name": "Transverse myelitis",
       "specialty": "Neurology",
       "system": "Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trigeminal_autonomic_cephalalgia",
+      "name": "Trigeminal autonomic cephalalgias",
+      "specialty": "Neurology",
+      "system": "Nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -81510,6 +82080,28 @@
       }
     },
     {
+      "id": "ehlers_danlos_hypermobile",
+      "name": "ehlers danlos hypermobile",
+      "specialty": "Rheumatology / MSK",
+      "system": "musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ehlers_danlos_syndrome",
       "name": "Ehlers-Danlos syndrome",
       "specialty": "Rheumatology / MSK",
@@ -90050,6 +90642,28 @@
       "name": "dissociated vertical deviation",
       "specialty": "Visual system",
       "system": "Visual system / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "infantile_esotropia",
+      "name": "Infantile esotropia",
+      "specialty": "Visual system",
+      "system": "Visual system",
       "tier": "reference",
       "caps": {
         "overview": true,
