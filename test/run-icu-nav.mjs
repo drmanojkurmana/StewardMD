@@ -5,10 +5,10 @@
  *    of Unit / Alerts / Team / Admit;
  *  - tapping a patient (openpt:*) opens the patient WORKSPACE with the segmented top-tabs
  *    (Overview / Monitoring / Care Plan / Rounds / Documents);
- *  - Monitoring shows the sub-nav pills (.icu-seg incl. Trends) and the camera FAB (#icuSnap);
+ *  - Monitoring shows the sub-nav pills (.icu-seg — Vitals first, incl. Trends) and the camera FAB (#icuSnap);
  *  - the FAB is contextual (present on Monitoring, absent on Documents + the board);
- *  - Documents lists the Daily summary + Discharge Creator; Overview keeps the one-tap Trends
- *    shortcut; the selected patient name is preserved throughout.
+ *  - Documents = Summary·Imaging·Handover·Discharge sub-tabs (Summary lists the Daily summary);
+ *    Overview keeps the one-tap Trends shortcut; the selected patient name is preserved throughout.
  *
  * Runs SOLO v2 (smd_icu_groups=0) so it never touches Firestore. Nav/presentation layer only —
  * every existing render + its data (RENDER.* bodies, sub-nav, data-icu-act verbs) is preserved.
@@ -73,19 +73,21 @@ try {
   const monFab = await ev(`return !!document.getElementById('icuSnap');`);
   const monSub = JSON.parse(await ev(`return JSON.stringify(Array.prototype.map.call(document.querySelectorAll('.icu-subnav .icu-seg'), function(x){return x.textContent;}));`));
   ok(monFab === true, "camera FAB (#icuSnap) present in Monitoring");
-  ok(monSub.length === 7 && monSub.indexOf("Trends") >= 0, "Monitoring sub-nav pills (.icu-seg) list its members (" + monSub.length + "): " + monSub.join(","));
+  ok(monSub.length === 8 && monSub[0] === "Vitals" && monSub.indexOf("Trends") >= 0, "Monitoring sub-nav pills (.icu-seg) list its members (" + monSub.length + "): " + monSub.join(","));
 
-  // 5) camera FAB absent in Documents; Documents lists Daily summary + Discharge Creator
+  // 5) camera FAB absent in Documents; Documents = Summary·Imaging·Handover·Discharge sub-tabs, Summary lists the Daily summary
   await clickWs("documents");
   ok(await ev(`return !!document.getElementById('icuSnap');`) === false, "camera FAB absent in Documents");
+  const docSub = JSON.parse(await ev(`return JSON.stringify(Array.prototype.map.call(document.querySelectorAll('.icu-subnav .icu-seg'), function(x){return x.textContent;}));`));
   const docBtns = JSON.parse(await ev(`return JSON.stringify(Array.prototype.map.call(document.querySelectorAll('.icu-card .icu-btn'), function(b){return b.textContent.replace(/\\s+/g," ").trim();}));`));
-  ok(docBtns.some(function (b) { return /Discharge Creator/.test(b); }) && docBtns.some(function (b) { return /Daily ICU summary/.test(b); }), "Documents lists Daily summary + Discharge Creator entry");
+  ok(docBtns.some(function (b) { return /Daily ICU summary/.test(b); }), "Documents (Summary) lists the Daily ICU summary");
+  ok(docSub.indexOf("Handover") >= 0 && docSub.indexOf("Discharge") >= 0, "Documents sub-nav includes Handover + Discharge sub-tabs (" + docSub.join(",") + ")");
 
   // 6) Overview keeps the one-tap Trends shortcut
   await clickTab("overview");
   ok(await ev(`return !!document.querySelector('[data-icu-act="tab:trends"]');`) === true, "Overview exposes a one-tap 'View trends' shortcut");
   await clickWs("monitoring");
-  ok((await ev(`return (document.querySelector('.icu-subnav .icu-seg')||{}).textContent||"";`)) === "Trends", "Trends is the first Monitoring sub-tab");
+  ok((await ev(`return (document.querySelector('.icu-subnav .icu-seg')||{}).textContent||"";`)) === "Vitals", "Vitals is the first Monitoring sub-tab");
 
   // 7) bottom-bar Unit returns to the board (no camera FAB there)
   await clickAct(`icuboard`); await sleep(150);

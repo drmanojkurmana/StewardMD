@@ -303,15 +303,16 @@ try {
   const mgAfter = await ev(`return /Management considerations for/.test(document.getElementById('icuRoot').textContent||"") && /advisory/i.test(document.getElementById('icuRoot').textContent||"");`);
   ok(mgBefore === false && mgAfter === true, "management considerations shown only after a working dx is selected (advisory wording)");
 
-  // 32) external-evidence — HIDDEN until a working dx, then reachable from the Care Plan flow (BUG C)
+  // 32) external-evidence "Search trusted sources" — classic-ICU parity: ALWAYS reachable in the Care
+  //     Plan Diagnosis flow (shown below Deep clinical review, NOT gated on a working dx).
   const c32 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"EV",age:60,sex:"M"}); ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
     ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
-    var hiddenBefore = !root.querySelector('[data-icu-act="corrext"]');
+    var before = !!root.querySelector('[data-icu-act="corrext"]');
     ICU._pickWorkingDx("Seizure / epilepsy","deterministic_suggestion"); root.querySelector('[data-icu-act="ws:careplan"]').click();
-    return JSON.stringify({ hiddenBefore: hiddenBefore, ext: !!root.querySelector('[data-icu-act="corrext"]') });
+    return JSON.stringify({ before: before, ext: !!root.querySelector('[data-icu-act="corrext"]') });
   `);
-  ok(c32.hiddenBefore && c32.ext, "external evidence hidden until a working dx, then reachable in Care Plan");
+  ok(c32.before && c32.ext, "Search trusted sources reachable in Care Plan without a working dx (classic parity) and stays reachable after");
 
   // 33) accessibility: differential Select carries an aria-label; confirm sheet + tour are dialogs
   const c33 = await J(`

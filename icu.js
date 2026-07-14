@@ -671,6 +671,11 @@
       '.icu-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px calc(96px + env(safe-area-inset-bottom))}' +
       '.icu-wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px}' +
       '.icu-sec-lbl{font:800 11px var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:2px 2px -4px;display:flex;align-items:center;gap:7px}' +
+      '.icu-sbar-head{margin-bottom:10px}' +
+      '.icu-sbar{border-left:3px solid var(--border);background:var(--panel2);border-radius:10px;padding:11px 13px;margin-bottom:10px}' +
+      '.icu-sbar-lbl{font:800 11px var(--font);letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}' +
+      '.icu-sbar-body{font:500 14px/1.5 var(--font);color:var(--ink)}' +
+      '.icu-v2-tabbadge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin-left:5px;border-radius:9px;background:var(--danger);color:#fff;font:800 10px var(--font);vertical-align:middle}' +
       // live status grid
       '.icu-vitals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}' +
       '@media (max-width:480px){.icu-vitals{grid-template-columns:repeat(3,1fr)}}' +
@@ -2245,6 +2250,57 @@
     return out.join("\n");
   }
 
+  // Build a Situation / Background / Assessment / Recommendation shift handover from RECORDED state.
+  // Every line is derived from data the clinician entered or synced — never invented — and the SBAR
+  // is advisory (reviewed before handover). This is the redesign's Documents -> Handover card, made
+  // real (the prototype only had seed data). Returns [{label,color,body}] in S-B-A-R order.
+  function buildSBAR(st) {
+    var s = st || _raw, p = s.patient || {};
+    var snap = v2Snapshot(s), sev = v2Severity(s), reason = v2Reason(snap);
+    var L = (s.labs && s.labs.recent) || {}, g = s.abg || {};
+    var infusions = s.infusions || [], press = infusions.filter(function (i) { return isPressor(i.drug); });
+    var finds = s.findings || [], goals = s.goals || [];
+    var crit = (s.alerts || []).filter(function (a) { return a.severity === "critical"; });
+    var dx = p.workingDx || p.diagnosis || "";
+
+    var who = [];
+    if (p.age != null) who.push(p.age + (p.sex ? String(p.sex).charAt(0).toUpperCase() : "y"));
+    else if (p.sex) who.push(String(p.sex));
+    if (p.icuDay != null) who.push("ICU day " + p.icuDay);
+    if (p.bed) who.push("Bed " + p.bed);
+
+    // SITUATION — who, working diagnosis, current acuity.
+    var sit = [];
+    if (who.length) sit.push(who.join(", "));
+    if (dx) sit.push(dx);
+    sit.push("Currently " + String(V2_LABEL[sev] || "stable").toLowerCase() + (reason ? " (" + reason + ")" : "") + ".");
+    // BACKGROUND — complaints, structured findings, active infusions.
+    var bg = [];
+    if (p.complaints) bg.push(String(p.complaints));
+    if (finds.length) bg.push("Findings: " + finds.slice(0, 8).map(function (c) { return findChipLabel(c); }).join(", "));
+    if (infusions.length) bg.push("On " + infusions.map(function (i) { return i.drug; }).join(", "));
+    // ASSESSMENT — current haemodynamics, ABG, key labs, trajectory.
+    var asmt = ["HR " + (snap.hr != null ? snap.hr : "—") + ", MAP " + (snap.map != null ? snap.map : "—") + ", SpO₂ " + (snap.spo2 != null ? snap.spo2 + "%" : "—") + ", lactate " + (snap.lactate != null ? snap.lactate : "—") + (press.length ? " on " + press.length + " pressor" + (press.length > 1 ? "s" : "") : "")];
+    if (g.ph != null) { var ab = analyzeABG(g, L); asmt.push("ABG pH " + g.ph + (g.paco2 != null ? " / pCO₂ " + g.paco2 : "") + (g.hco3 != null ? " / HCO₃ " + g.hco3 : "") + (ab && ab.primary ? " → " + ab.primary : "")); }
+    var keyL = ["na", "k", "creat", "hb", "plt", "crp", "lactate"].filter(function (k) { return L[k] != null; }).map(function (k) { return k.toUpperCase() + " " + L[k]; });
+    if (keyL.length) asmt.push("Labs: " + keyL.join(", "));
+    asmt.push(sev === "stable" ? "Clinically stable." : (sev === "review" ? "Needs review" : "Not yet stabilised") + (reason ? " — " + reason : "") + ".");
+    // RECOMMENDATION — goals, active criticals, pending rounds, escalation thresholds.
+    var rec = [];
+    if (goals.length) rec.push("Today's goals: " + goals.slice(0, 5).join("; "));
+    if (crit.length) rec.push("Active critical: " + crit.map(function (a) { return a.title; }).join("; "));
+    var rnds = s.rounds || {}, pend = ROUNDS_ITEMS.filter(function (it) { return !(rnds[it.k] && rnds[it.k].done); });
+    if (pend.length) rec.push("Pending rounds: " + pend.slice(0, 6).map(function (it) { return it.label; }).join(", "));
+    rec.push("Escalate if MAP < 65, SpO₂ < 90%, rising lactate, or urine output < 0.5 mL/kg/h.");
+
+    return [
+      { label: "Situation", color: "#0F766E", body: sit.join(". ") },
+      { label: "Background", color: "#64748B", body: bg.length ? bg.join(". ") : "No background recorded yet." },
+      { label: "Assessment", color: "#92620A", body: asmt.join(". ") },
+      { label: "Recommendation", color: (sev === "critical" ? "#B91C1C" : sev === "review" ? "#92620A" : "#15803D"), body: rec.join(". ") }
+    ];
+  }
+
   /* --------------------------------------------------------------- tabs */
   var TABS = [
     { id: "overview", ic: "❤️", svg: "pulse", label: "Overview" },
@@ -2266,14 +2322,19 @@
   // views) so every section and its saved data is preserved — this is a NAV layer only.
   var WORKSPACES = [
     { id: "overview", label: "Overview", svg: "pulse", members: ["overview", "rounds"] },
-    { id: "monitoring", label: "Monitoring", svg: "heart", members: ["trends", "hemo", "fluids", "lytes", "abg", "vent", "infusions"] },
-    { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "protocols", "goals"] },
-    { id: "documents", label: "Documents", svg: "copy", members: ["documents", "imaging"] },
+    { id: "monitoring", label: "Monitoring", svg: "heart", members: ["vitals", "trends", "hemo", "fluids", "lytes", "abg", "vent", "infusions"] },
+    { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "protocols", "goals", "interactions"] },
+    { id: "documents", label: "Documents", svg: "copy", members: ["documents", "imaging", "handover", "discharge"] },
     { id: "more", label: "More", svg: "more", members: ["more"] }
   ];
   var MEMBER = {}; TABS.forEach(function (t) { MEMBER[t.id] = { label: t.label, svg: t.svg, ic: t.ic }; });
   MEMBER.dx = { label: "Diagnosis", svg: "search", ic: "🩺" };
   MEMBER.imaging = { label: "Imaging", svg: "camera", ic: "🩻" };
+  MEMBER.documents = { label: "Summary", svg: "copy", ic: "📄" };        // Documents sub-tab 1 — "Summary" (design docTabs order: Summary·Imaging·Handover·Discharge)
+  MEMBER.vitals = { label: "Vitals", svg: "pulse", ic: "❤️" };          // Monitoring sub-tab — Live Patient Status grid
+  MEMBER.interactions = { label: "Interactions", svg: "warn", ic: "⚠️" }; // Care Plan sub-tab — drug interactions
+  MEMBER.handover = { label: "Handover", svg: "copy", ic: "⇄" };        // Documents sub-tab — SBAR shift handover
+  MEMBER.discharge = { label: "Discharge", svg: "rounds", ic: "📝" };    // Documents sub-tab — Discharge Creator + remove patient
   function wsOf(m) { for (var i = 0; i < WORKSPACES.length; i++) if (WORKSPACES[i].members.indexOf(m) >= 0) return WORKSPACES[i].id; return "overview"; }
   function wsById(id) { for (var i = 0; i < WORKSPACES.length; i++) if (WORKSPACES[i].id === id) return WORKSPACES[i]; return WORKSPACES[0]; }
   // Workspace members visible under the current feature flags (Imaging is flag-gated,
@@ -2405,26 +2466,75 @@
   }
 
   var RENDER = {
+    // Redesign Overview: Current status (author+time) -> Active problems -> Critical alerts ->
+    // Rounds & instructions (group) -> Current treatment -> Lab Watch -> Trends -> Goals. Every
+    // existing capability is preserved (alerts/trends/goals) and the new design cards fold in.
     overview: function () {
-      var p = _raw.patient, alerts = _raw.alerts || [], f = _raw.fluids || {}, v = _raw.ventilator || {}, mp = curMap();
+      var p = _raw.patient || {}, alerts = _raw.alerts || [], f = _raw.fluids || {}, v = _raw.ventilator || {};
+      var infusions = _raw.infusions || [], press = infusions.filter(function (i) { return isPressor(i.drug); });
+      var finds = _raw.findings || [];
+      var sev = v2Severity(_raw), reason = v2Reason(v2Snapshot(_raw));
+      var updTs = (_raw.meta && _raw.meta.updated) || null;
+      var who = v2AccountName();
+      if (grpActive() && _grpPtVM && _grpPtVM.patient && _grpPtVM.patient.lastUpdate && _grpPtVM.patient.lastUpdate.byName) who = _grpPtVM.patient.lastUpdate.byName;
       var out = "";
-      out += '<div class="icu-sec-lbl">🚨 Critical Alerts</div>';
-      out += alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p>No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
-      // Surface Trends up front (it was buried as the last Monitoring sub-tab) — one tap to the chart.
-      out += '<div class="icu-sec-lbl">' + ico("trend", "📈") + ' Trends</div><div class="icu-card">' +
-        '<p class="icu-doc-sub" style="margin:0 0 8px">See how this patient’s vitals and labs are moving over time.</p>' +
-        '<button class="icu-btn" data-icu-act="tab:trends">' + ico("trend", "📈") + ' View vitals &amp; labs trends</button></div>';
-      out += '<div class="icu-sec-lbl">Snapshot</div><div class="icu-card">' +
-        row("Diagnosis", p.diagnosis) +
-        row("Shock status", mp == null ? null : (mp < 65 ? "Hypotensive (MAP " + mp + ")" : "MAP " + mp + " mmHg")) +
-        row("Current pressors", (_raw.infusions || []).filter(function (i) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine/i.test(i.drug || ""); }).map(function (i) { return i.drug; }).join(", ")) +
-        row("Infusions running", (_raw.infusions || []).length || "0") +
+
+      // 1) Current status (author + time).
+      var statusTx = p.status ? p.status : (V2_LABEL[sev] + (reason ? " — " + reason : ""));
+      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Current status</div>' +
+        '<p class="icu-dx-cur" style="margin:0 0 4px">' + esc(statusTx) + '</p>' +
+        '<p class="icu-doc-sub" style="margin:0">' + esc(who) + (updTs ? " · updated " + fmtAgo(updTs) : "") + '</p>' +
+        '<button class="icu-btn ghost" data-icu-act="edit:patient" style="margin-top:10px">' + ico("edit", "✎") + ' Update status &amp; details</button></div>';
+
+      // 2) Active problems — working dx + structured findings.
+      var problems = [];
+      if (p.workingDx || p.diagnosis) problems.push(p.workingDx || p.diagnosis);
+      finds.slice(0, 8).forEach(function (c) { problems.push(findChipLabel(c)); });
+      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "🩺") + ' Active problems</div>' +
+        (problems.length ? problems.map(function (x) { return '<div class="icu-row"><span>• ' + esc(x) + '</span></div>'; }).join("")
+          : '<p class="icu-doc-sub" style="margin:0">No problems recorded yet. Set a working diagnosis in Care Plan.</p>') +
+        '<button class="icu-btn ghost" data-icu-act="ws:careplan" style="margin-top:8px">' + ico("search", "🩺") + ' Open Care Plan</button></div>';
+
+      // 3) Critical alerts — keep the engine-grouped detail.
+      out += '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>';
+      out += alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
+
+      // 4) Rounds & instructions (group only) — latest note + open-task count.
+      if (grpActive() && _grpPtVM) {
+        var tasks = _grpPtVM.tasks || [], open = tasks.filter(function (t) { return t.status !== "done"; }).length;
+        var tl = _grpPtVM.timeline || [], last = null, _i;
+        for (_i = 0; _i < tl.length; _i++) { if (!last || ((tl[_i].ts || 0) > (last.ts || 0))) last = tl[_i]; }
+        out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "📋") + ' Rounds &amp; instructions</div>' +
+          (last ? '<p class="icu-dx-cc" style="margin:0 0 8px">' + esc(last.title || last.text || "Update") + (last.byName ? " · " + esc(last.byName) : "") + '</p>' : '<p class="icu-doc-sub" style="margin:0 0 8px">No round notes or instructions yet.</p>') +
+          '<button class="icu-btn" data-icu-act="tab:rounds">' + ico("rounds", "📋") + ' View ' + open + ' open task' + (open === 1 ? "" : "s") + '</button></div>';
+      }
+
+      // 5) Current treatment.
+      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("syringe", "💉") + ' Current treatment</div>' +
+        row("On pressors", press.length ? press.map(function (i) { return i.drug; }).join(", ") : "None") +
+        row("Infusions running", infusions.length || "0") +
         row("Net fluid (24h)", f.net24h, "mL") +
         row("Ventilator", v.mode ? v.mode + (v.fio2 ? " · FiO₂ " + v.fio2 + "%" : "") : "Not ventilated") +
-        '</div>';
-      out += '<div class="icu-sec-lbl">Today\'s ICU Goals</div><div class="icu-card">' +
-        ((_raw.goals || []).length ? (_raw.goals).map(function (g) { return row("•", g); }).join("") : '<div class="icu-empty">No goals set</div>') +
-        '<button class="icu-btn ghost" data-icu-act="edit:goals">＋ Edit goals</button></div>';
+        '<button class="icu-btn ghost" data-icu-act="tab:infusions" style="margin-top:8px">' + ico("syringe", "💉") + ' Infusions &amp; vasopressors</button></div>';
+
+      // 6) Lab Watch toggle (redesign inline card) — only when the feature is on.
+      if (labWatchOn()) {
+        var lwOn = lwActive();
+        out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Lab Watch</div>' +
+          '<p class="icu-doc-sub" style="margin:0 0 10px">' + (lwOn ? "Watching this patient’s labs and alerting on critical changes." : "Get alerted when this patient’s labs cross critical thresholds.") + '</p>' +
+          '<button class="icu-btn' + (lwOn ? " ghost" : "") + '" data-icu-act="labwatch">' + ico("bell", "🔔") + (lwOn ? " Manage Lab Watch (on)" : " Turn on Lab Watch") + '</button></div>';
+      }
+
+      // 7) Trends shortcut (kept — one tap to the chart).
+      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("trend", "📈") + ' Trends</div>' +
+        '<p class="icu-doc-sub" style="margin:0 0 8px">See how this patient’s vitals and labs are moving over time.</p>' +
+        '<button class="icu-btn" data-icu-act="tab:trends">' + ico("trend", "📈") + ' View vitals &amp; labs trends</button></div>';
+
+      // 8) Today's goals (kept).
+      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🎯") + " Today's goals</div>" +
+        ((_raw.goals || []).length ? (_raw.goals).map(function (g) { return '<div class="icu-row"><span>• ' + esc(g) + '</span></div>'; }).join("") : '<div class="icu-empty">No goals set</div>') +
+        '<button class="icu-btn ghost" data-icu-act="edit:goals" style="margin-top:8px">＋ Edit goals</button></div>';
+
       return out;
     },
     hemo: function () {
@@ -2641,13 +2751,12 @@
         '<button class="icu-btn ghost" data-icu-act="launch:interactions">' + ico("warn", "⚠️") + ' Check drug interactions</button>';
     },
     documents: function () {
-      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("copy", "📄") + ' Documents</div>' +
+      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("copy", "📄") + ' Summary &amp; documents</div>' +
         '<p class="icu-doc-sub">Generate clinician-reviewable documents from this patient’s recorded data. Nothing is finalised without your review.</p>' +
         '<button class="icu-btn" data-icu-act="summary">' + ico("copy", "📋") + ' Daily ICU summary</button>' +
         '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share case</button>' +
         '<button class="icu-btn ghost" data-icu-act="printsummary">' + ico("upload", "🖨") + ' Print / Export PDF</button>' +
-        '<button class="icu-btn ghost" data-icu-act="discharge">' + ico("rounds", "📝") + ' Discharge Creator</button>' +
-        '</div>' + dischargePatientCard();
+        '</div>';
     },
     imaging: function () {
       if (!icuImagingOn()) return '<div class="icu-card"><p>Imaging Notes is turned off.</p></div>';
@@ -2666,6 +2775,49 @@
         return '<div class="icu-img-hidden"><span>' + esc(r.studyName || "Imaging") + '</span><button class="icu-img-act" data-icu-act="imghide:' + encodeURIComponent(r.id) + '">Unhide</button></div>';
       }).join("")) : "";
       return header + filters + cards + hiddenRows + correlationCard();
+    },
+    // Monitoring -> Vitals sub-tab (redesign parity): the Live Patient Status grid as a first-class
+    // section with Update + Snapshot affordances (was previously only a collapsed <details>).
+    vitals: function () {
+      return '<div class="icu-card">' + renderLiveStatus() +
+        '<div class="icu-img-btns" style="margin-top:10px">' +
+          '<button class="icu-btn" data-icu-act="edit:monitor">' + ico("edit", "✎") + ' Update vitals</button>' +
+          '<button class="icu-btn ghost" data-icu-act="snapshot">' + ico("camera", "📷") + ' Snapshot / Ward Sync</button>' +
+        '</div></div>';
+    },
+    // Care Plan -> Interactions sub-tab (redesign parity): active-med chips + the full DDI checker.
+    interactions: function () {
+      var meds = (_raw.infusions || []).map(function (i) { return i.drug; }).filter(Boolean);
+      var chips = meds.length
+        ? '<div class="icu-elyte-alerts" style="margin-top:8px">' + meds.map(function (m) { return '<span class="icu-chip" style="cursor:default">' + esc(m) + '</span>'; }).join("") + '</div>'
+        : '<p class="icu-doc-sub" style="margin:6px 0 0">No active infusions recorded. Add them under Monitoring → Infusions, or open the full checker to search any drugs.</p>';
+      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("warn", "⚠️") + ' Drug interactions</div>' +
+        '<p class="icu-doc-sub" style="margin:0">Check this patient’s active medications against each other and against any drug you’re considering. Advisory — verify against the full label.</p>' +
+        chips +
+        '<button class="icu-btn" data-icu-act="launch:interactions" style="margin-top:10px">' + ico("warn", "⚠️") + ' Check drug interactions</button></div>';
+    },
+    // Documents -> Handover sub-tab (redesign parity): a real, auto-built SBAR shift handover.
+    handover: function () {
+      var sbar = buildSBAR(_raw), any = hasData();
+      var tlN = (grpActive() && _grpPtVM && (_grpPtVM.timeline || []).length) || 0;
+      var srcNote = "Auto-built from this patient’s recorded data" + (tlN ? " and today’s timeline (" + tlN + " event" + (tlN === 1 ? "" : "s") + ")" : "") + ". Advisory — review before you hand over.";
+      var cards = sbar.map(function (sec) {
+        return '<div class="icu-sbar" style="border-left-color:' + sec.color + '"><div class="icu-sbar-lbl" style="color:' + sec.color + '">' + esc(sec.label) + '</div><div class="icu-sbar-body">' + esc(sec.body) + '</div></div>';
+      }).join("");
+      return '<div class="icu-card icu-sbar-head"><div class="icu-sec-lbl">' + ico("copy", "⇄") + ' Shift handover (SBAR)</div><p class="icu-doc-sub" style="margin:0">' + esc(srcNote) + '</p></div>' +
+        '<div class="icu-card">' + cards +
+          (any ? "" : '<p class="icu-doc-sub" style="margin:8px 0 0">Add patient details, findings, vitals or labs to fill out the handover.</p>') +
+          '<button class="icu-btn" data-icu-act="copyhandover" style="margin-top:12px">' + ico("copy", "⇄") + ' Copy handover</button>' +
+          (grpActive() ? '<button class="icu-btn ghost" data-icu-act="handovershift" style="margin-top:8px">' + ico("check", "→") + ' Hand over to next shift</button>' : "") +
+        '</div>';
+    },
+    // Documents -> Discharge sub-tab (redesign parity): the guided Discharge Creator + the
+    // discharge/remove-patient action (both live under "Discharge").
+    discharge: function () {
+      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "📝") + ' Discharge Creator</div>' +
+        '<p class="icu-doc-sub" style="margin:0 0 10px">Draft a discharge summary from this patient’s recorded course. Every draft is marked “Draft — review required”; nothing is finalised without your review.</p>' +
+        '<button class="icu-btn" data-icu-act="discharge">' + ico("rounds", "📝") + ' Open Discharge Creator</button></div>' +
+        dischargePatientCard();
     },
     more: function () {
       var n = rosterCount();
@@ -2692,7 +2844,8 @@
         "" /* classic coach link retired in v2 */ +
         (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") +
         '<button class="icu-btn ghost" data-icu-act="clearfindings">' + ico("trash", "🧹") + ' Clear current findings</button>' +
-        '</div>' + dischargePatientCard();
+        '<button class="icu-btn ghost" data-icu-act="tab:discharge">' + ico("rounds", "📝") + ' Discharge &amp; remove patient</button>' +
+        '</div>';
     }
   };
 
@@ -2778,6 +2931,22 @@
       if (_raw.ventilator && Object.keys(_raw.ventilator).length) return true;
       if ((_raw.imaging || []).length) return true;
       if (_raw.patient && (_raw.patient.name || _raw.patient.diagnosis)) return true;
+    } catch (e) {}
+    return false;
+  }
+  // State-agnostic version of hasData() — "does this state object carry any real clinical content?"
+  // Used to stop a blank/stale REMOTE snapshot from overwriting good local (possibly-unsynced) data.
+  function stateHasData(st) {
+    try {
+      st = st || {};
+      if (st.labs && Object.keys(st.labs.recent || {}).length) return true;
+      if ((st.vitals || []).length) return true;
+      if (st.abg && Object.keys(st.abg).filter(function (k) { return k !== "ts"; }).length) return true;
+      if (st.ventilator && Object.keys(st.ventilator).length) return true;
+      if ((st.imaging || []).length) return true;
+      if ((st.infusions || []).length) return true;
+      if ((st.findings || []).length) return true;
+      if (st.patient && (st.patient.name || st.patient.diagnosis)) return true;
     } catch (e) {}
     return false;
   }
@@ -2937,7 +3106,7 @@
         '<div class="icu-v2-banner-nm">' + esc(p.name || "ICU patient") + '<span class="icu-v2-banner-pill">' + V2_LABEL[sev] + '</span></div>' +
         '<div class="icu-v2-banner-meta">' + (meta.length ? meta.join(" · ") : "Add patient details") + '</div>' +
       '</div>' +
-      '<button class="icu-v2-handover" data-icu-act="ws:documents" aria-label="Handover / documents">' + ico("copy", "⇄") + '</button>' +
+      '<button class="icu-v2-handover" data-icu-act="tab:handover" aria-label="Shift handover (SBAR)" title="Shift handover (SBAR)">' + ico("copy", "⇄") + '</button>' +
       '</div><div class="icu-v2-banner-vitals">' + mv.map(function (v) {
         return '<div class="icu-v2-mv"><div class="icu-v2-mv-k">' + v.k + '</div><div class="icu-v2-mv-v">' + esc(v.val) + '</div></div>';
       }).join("") + '</div></div>';
@@ -2952,15 +3121,17 @@
   }
   // Five solid segmented top tabs → existing (_ws,_active) via existing dispatch verbs.
   function renderV2TopTabs() {
+    // Rounds carries an open-task badge (design parity) — live in group mode where tasks exist.
+    var openTasks = (grpActive() && _grpPtVM && _grpPtVM.tasks) ? _grpPtVM.tasks.filter(function (t) { return t.status !== "done"; }).length : 0;
     var tabs = [
       { label: "Overview", act: "tab:overview", on: _active === "overview" },
       { label: "Monitoring", act: "ws:monitoring", on: _ws === "monitoring" },
       { label: "Care Plan", act: "ws:careplan", on: _ws === "careplan" },
-      { label: "Rounds", act: "tab:rounds", on: _active === "rounds" },
+      { label: "Rounds", act: "tab:rounds", on: _active === "rounds", badge: openTasks },
       { label: "Documents", act: "ws:documents", on: _ws === "documents" }
     ];
     return '<div class="icu-v2-tabwrap"><div class="icu-v2-tabs">' + tabs.map(function (t) {
-      return '<button class="icu-v2-tab' + (t.on ? " on" : "") + '" data-icu-act="' + t.act + '">' + esc(t.label) + '</button>';
+      return '<button class="icu-v2-tab' + (t.on ? " on" : "") + '" data-icu-act="' + t.act + '">' + esc(t.label) + (t.badge ? '<span class="icu-v2-tabbadge">' + t.badge + '</span>' : "") + '</button>';
     }).join("") + '</div></div>';
   }
   // Unit board — the "front door". Local roster in Phase 1; LIVE shared unit in group mode.
@@ -3099,6 +3270,10 @@
   // echo-suppression hash so the resulting reactive notify() does NOT bounce back to Firestore.
   function grpApplyState(state, id) {
     try {
+      // Defense-in-depth: never let a BLANK/stale remote snapshot wipe good local data for the SAME
+      // patient (e.g. a Ward-Sync fill still queued to sync up). If the incoming remote state has no
+      // clinical content but we currently hold some for this id, keep local and let the mirror push it.
+      if (state && !stateHasData(state) && hasData() && (STATE.patient && STATE.patient._id === id)) return;
       Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (state[k] != null) ? clone(state[k]) : clone(DEFAULT_STATE[k]); });
       STATE.patient._id = id;
       _grpLastHash = grpStateHash(_raw);
@@ -3289,7 +3464,7 @@
     _grpPtId = id; _grpPtVM = { patient: null, timeline: [], tasks: [] }; _grpPresence = [];
     Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = clone(DEFAULT_STATE[k]); });
     STATE.patient._id = id;
-    _grpLastHash = null;                                        // force the first edit to create the shared doc
+    _grpLastHash = grpStateHash(_raw);                          // baseline to the BLANK state: the empty admit is NOT written; the first real edit / Ward-Sync fill changes the hash and creates the doc (no more blank "Patient · No diagnosis" cards from abandoned admits)
     _grpPrevSync = grpMirrorPayload(_raw);                      // Phase 3: blank baseline so the first edits self-log to the timeline
     var api = groupsApi(), gid = _grp.id;
     if (api) {
@@ -5600,6 +5775,24 @@
       case "summary": openSummary(); break;
       case "printsummary": printSummary(); break;
       case "discharge": openDischarge(); break;
+      case "copyhandover": {
+        var _sb = buildSBAR(_raw), _p0 = _raw.patient || {};
+        var _htxt = "SHIFT HANDOVER (SBAR) — " + (_p0.name || "ICU patient") + (_p0.bed ? " · Bed " + _p0.bed : "") + "\n\n" +
+          _sb.map(function (x) { return x.label.toUpperCase() + ":\n" + x.body; }).join("\n\n") +
+          "\n\n— Decision support only; verify against the patient. StewardMD ICU.";
+        grpCopyText(_htxt, "Handover copied — verify before use");
+        break;
+      }
+      case "handovershift": {
+        if (grpActive() && _grpPtId) {
+          var _api2 = groupsApi();
+          if (_api2 && _api2.addTimelineEvent) {
+            var _detail = buildSBAR(_raw).map(function (x) { return x.label + ": " + x.body; }).join(" | ");
+            try { _api2.addTimelineEvent(_grp.id, _grpPtId, { type: "handover", title: "Shift handover", detail: _detail }).then(function () { if (window.toast) toast("Handover posted to the unit timeline"); }, function () { if (window.toast) toast("Couldn’t post handover — try again"); }); } catch (e) {}
+          }
+        } else if (window.toast) { toast("Turn on Group mode to hand over to the unit"); }
+        break;
+      }
       case "dischargecopy": copyDischarge(); break;
       // Lab Watch
       case "labwatch": _lwDraft = null; openLabWatch(); break;
@@ -5884,7 +6077,13 @@
   // bounces back. Engine-scored source tags (ICU_STATE.src) are carried through by upsertPatient;
   // only DERIVED alerts are stripped. Inert unless a shared patient is open in group mode.
   _subs.push(function () {
-    if (!grpActive() || !_grpPtId || _screen !== "patient" || !ICU.isOpen()) return;
+    // NOTE: intentionally NOT gated on _screen. _grpPtId being set ⇒ STATE holds that patient's
+    // data, and grpTeardownPatient() clears _grpPtId on every "leave patient" path — so the mirror
+    // can never fire for a board/foreign context. Gating on _screen === "patient" used to DROP a
+    // Ward-Sync fill: ghis-ward.js calls ICU.open() right after ingest, flipping _screen to "board"
+    // synchronously before the async reactive notify() reached this subscriber → the sync was lost
+    // and only grpAdmit's blank doc survived. (Paired with ghis-ward.js: ICU.open('overview').)
+    if (!grpActive() || !_grpPtId || !ICU.isOpen()) return;
     if (grpStateHash(_raw) === _grpLastHash) return;             // unchanged vs last synced → no write
     if (_grpMirrorT) { try { clearTimeout(_grpMirrorT); } catch (e) {} }
     _grpMirrorT = setTimeout(function () {

@@ -359,7 +359,10 @@
               : ICU.ingestFromWard({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs }));
             // Open the dashboard IMMEDIATELY after the lab sync — imaging must never block it.
             try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
-            ICU.open();
+            // Land on the just-synced patient workspace. 'overview' is a valid RENDER target, so
+            // ICU.open sets _screen="patient" SYNCHRONOUSLY — the group->Firestore mirror is then not
+            // gated out by a board flip, and the user sees the data they just synced (not the board).
+            ICU.open('overview');
             try { if (typeof after === 'function') after(); } catch (e) {}
             try { if (window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
             // Radiology (TEXT only) streams in ASYNCHRONOUSLY when the feature is on. The ICU state
