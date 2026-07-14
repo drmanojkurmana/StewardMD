@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3711,
+    "diseases": 3725,
     "diagnostic": 141,
-    "reference": 3570,
+    "reference": 3584,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 525,
+      "total": 527,
       "diagnostic": 20,
-      "reference": 505,
+      "reference": 507,
       "dims": {
-        "overview": 525,
-        "clinicalFeatures": 525,
-        "pathophysiology": 525,
-        "differential": 525,
-        "investigations": 525,
-        "redFlags": 525,
+        "overview": 527,
+        "clinicalFeatures": 527,
+        "pathophysiology": 527,
+        "differential": 527,
+        "investigations": 527,
+        "redFlags": 527,
         "severity": 48,
-        "prognosis": 525,
+        "prognosis": 527,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -140,18 +140,18 @@
       }
     },
     "GI / Hepatology": {
-      "total": 208,
+      "total": 220,
       "diagnostic": 19,
-      "reference": 189,
+      "reference": 201,
       "dims": {
-        "overview": 208,
-        "clinicalFeatures": 208,
-        "pathophysiology": 208,
-        "differential": 207,
-        "investigations": 208,
-        "redFlags": 208,
+        "overview": 220,
+        "clinicalFeatures": 220,
+        "pathophysiology": 220,
+        "differential": 219,
+        "investigations": 220,
+        "redFlags": 220,
         "severity": 44,
-        "prognosis": 206,
+        "prognosis": 218,
         "diagnosticScoring": 19,
         "management": 19,
         "drugTherapy": 18,
@@ -33036,6 +33036,28 @@
       }
     },
     {
+      "id": "aerophagia",
+      "name": "Aerophagia",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "afferent_loop_syndrome",
       "name": "Afferent loop syndrome",
       "specialty": "GI / Hepatology",
@@ -33546,6 +33568,28 @@
       "name": "Cameron lesion",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cannabinoid_hyperemesis_syndrome",
+      "name": "Cannabinoid hyperemesis syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -34268,6 +34312,28 @@
       }
     },
     {
+      "id": "dyssynergic_defecation",
+      "name": "Dyssynergic defecation",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ENTERIC_FEVER",
       "name": "Enteric Fever (Typhoid)",
       "specialty": "GI / Hepatology",
@@ -34554,10 +34620,98 @@
       }
     },
     {
+      "id": "functional_abdominal_bloating",
+      "name": "Functional abdominal bloating and distension",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "functional_constipation",
+      "name": "Functional constipation",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "functional_diarrhea",
+      "name": "Functional diarrhoea",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "functional_dyspepsia",
       "name": "Functional dyspepsia",
       "specialty": "GI / Hepatology",
       "system": "GI / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "functional_heartburn",
+      "name": "Functional heartburn",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -34690,6 +34844,28 @@
       "name": "Gastric volvulus",
       "specialty": "GI / Hepatology",
       "system": "GI surgery",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gastroesophageal_reflux_disease",
+      "name": "Gastro-oesophageal reflux disease",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -35566,6 +35742,28 @@
       }
     },
     {
+      "id": "irritable_bowel_syndrome",
+      "name": "Irritable bowel syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ischemic_colitis",
       "name": "Ischaemic colitis",
       "specialty": "GI / Hepatology",
@@ -36160,6 +36358,28 @@
       }
     },
     {
+      "id": "opioid_induced_constipation",
+      "name": "Opioid-induced constipation",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "paediatric_functional_constipation",
       "name": "Paediatric functional constipation",
       "specialty": "GI / Hepatology",
@@ -36600,6 +36820,28 @@
       }
     },
     {
+      "id": "reflux_hypersensitivity",
+      "name": "Reflux hypersensitivity",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "rotavirus_gastroenteritis",
       "name": "Rotavirus Gastroenteritis",
       "specialty": "GI / Hepatology",
@@ -36802,6 +37044,28 @@
       "name": "Sister Mary Joseph nodule",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "small_intestinal_bacterial_overgrowth",
+      "name": "Small intestinal bacterial overgrowth",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -53958,6 +54222,28 @@
       }
     },
     {
+      "id": "centrally_mediated_abdominal_pain_syndrome",
+      "name": "Centrally mediated abdominal pain syndrome",
+      "specialty": "Neurology",
+      "system": "Gastrointestinal / Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "centronuclear_myopathy",
       "name": "Centronuclear/myotubular myopathy",
       "specialty": "Neurology",
@@ -59506,6 +59792,28 @@
       "name": "Narcolepsy type 2",
       "specialty": "Neurology",
       "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "narcotic_bowel_syndrome",
+      "name": "Narcotic bowel syndrome",
+      "specialty": "Neurology",
+      "system": "Gastrointestinal / Nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
