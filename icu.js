@@ -1075,14 +1075,33 @@
       // ── Phase 3: round-note composer + timeline author avatar + smart-notification feed ──
       '#icuRoot.icu-v2 .icu-v2-addround{border:2px dashed var(--primary3);background:var(--panel2);color:var(--primary);box-shadow:none}' +
       '#icuRoot.icu-v2 .icu-v2-tlav{width:16px;height:16px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 8px var(--font);display:inline-flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-rbody{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:14px 16px}' +
       '#icuRoot.icu-v2 .icu-v2-rscroll{padding:14px 16px;display:flex;flex-direction:column;gap:10px}' +
-      '#icuRoot.icu-v2 .icu-v2-rpre{display:flex;flex-direction:column;gap:9px}' +
-      '#icuRoot.icu-v2 .icu-v2-rchip{display:flex;align-items:center;gap:12px;text-align:left;background:var(--panel);border:2px solid var(--border);border-radius:14px;padding:14px 15px;cursor:pointer;color:var(--ink)}' +
+      /* suggestions box flexes to fill + scrolls internally; add-your-own + post stay pinned/visible */
+      '#icuRoot.icu-v2 .icu-v2-sugbox{flex:1 1 auto;min-height:96px;display:flex;flex-direction:column;overflow:hidden}' +
+      '#icuRoot.icu-v2 .icu-v2-ownbox{flex:0 0 auto}' +
+      '#icuRoot.icu-v2 .icu-v2-rpre{display:flex;flex-wrap:wrap;gap:9px;align-content:flex-start;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1px 1px 4px}' +
+      '#icuRoot.icu-v2 .icu-v2-sugbox .icu-v2-rpre{margin:-2px -2px 0}' +
+      '#icuRoot.icu-v2 .icu-v2-rchip{display:inline-flex;align-items:center;gap:8px;text-align:left;background:var(--panel2);border:2px solid var(--border);border-radius:13px;padding:10px 12px;cursor:pointer;color:var(--ink)}' +
       '#icuRoot.icu-v2 .icu-v2-rchip.on{border-color:var(--primary);background:var(--primary-soft)}' +
-      '#icuRoot.icu-v2 .icu-v2-rbox{width:26px;height:26px;flex:0 0 auto;border-radius:8px;border:2px solid var(--border);background:var(--panel);color:var(--primary);display:flex;align-items:center;justify-content:center;font:700 14px var(--font)}' +
+      '#icuRoot.icu-v2 .icu-v2-rbox{width:20px;height:20px;flex:0 0 auto;border-radius:6px;border:2px solid var(--border);background:var(--panel);color:transparent;display:flex;align-items:center;justify-content:center;font:800 12px var(--font)}' +
       '#icuRoot.icu-v2 .icu-v2-rchip.on .icu-v2-rbox{background:var(--primary);border-color:var(--primary);color:#fff}' +
-      '#icuRoot.icu-v2 .icu-v2-rtx{flex:1;min-width:0;font:600 15px var(--font);color:var(--ink)}' +
-      '#icuRoot.icu-v2 .icu-v2-rx{flex:0 0 auto;color:var(--muted);font:700 13px var(--font)}' +
+      '#icuRoot.icu-v2 .icu-v2-rtx{min-width:0;font:600 14px var(--font);color:var(--ink)}' +
+      '#icuRoot.icu-v2 .icu-v2-rx{flex:0 0 auto;color:var(--muted);font:700 12px var(--font);margin-left:2px}' +
+      /* priority picker (2x2) */
+      '#icuRoot.icu-v2 .icu-v2-priopick{display:grid;grid-template-columns:1fr 1fr;gap:8px}' +
+      '#icuRoot.icu-v2 .icu-v2-priochip{display:flex;flex-direction:column;align-items:flex-start;gap:3px;border:2px solid var(--border);background:var(--panel2);border-radius:12px;padding:9px 11px;cursor:pointer;color:var(--ink);text-align:left}' +
+      '#icuRoot.icu-v2 .icu-v2-priochip.on{color:#fff}' +
+      '#icuRoot.icu-v2 .icu-v2-prio-top{display:flex;align-items:center;gap:7px;font:700 13.5px var(--font)}' +
+      '#icuRoot.icu-v2 .icu-v2-priodot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}' +
+      '#icuRoot.icu-v2 .icu-v2-priochip.on .icu-v2-priodot{background:#fff!important}' +
+      '#icuRoot.icu-v2 .icu-v2-priosub{font:600 11px var(--font);color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-priochip.on .icu-v2-priosub{color:rgba(255,255,255,.85)}' +
+      /* task priority badge + overdue chip in the Instructions panel */
+      '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:800 10px var(--font);color:#fff;border-radius:6px;padding:2px 6px;letter-spacing:.02em;vertical-align:middle}' +
+      '#icuRoot.icu-v2 .icu-v2-due{font:700 11px var(--font);color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-due.over{color:var(--danger)}' +
+      '#icuRoot.icu-v2 .icu-v2-taskexpl{font:600 11.5px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:6px 8px;margin-top:4px}' +
       '#icuRoot.icu-v2 .icu-v2-rcustom{display:flex;gap:8px;align-items:center}' +
       '#icuRoot.icu-v2 .icu-v2-rcustom input{flex:1;min-width:0;border:1px solid var(--border);border-radius:10px;padding:11px 12px;font:600 14px var(--font);color:var(--ink);background:var(--panel2)}' +
       '#icuRoot.icu-v2 .icu-v2-rcustom .icu-btn{width:auto;flex:0 0 auto;margin-top:0;padding:0 16px;min-height:44px}' +
@@ -2373,6 +2392,16 @@
   var _roundExtra = [];        // round-note composer: custom instructions the user added
   var _roundText = "";         // round-note composer: current "add your own" input (kept across re-renders)
   var _grpNotifiedTs = 0;      // best-effort device-notify de-dupe: newest critical ts already notified
+  var _grpOverdueNotified = {}; // taskId → true once we've locally notified/escalated its overdue
+  // Task priority → time window before it's overdue (+ display). Consultant sets it when instructing.
+  var TASK_PRIORITY = {
+    immediate: { label: "Immediate", short: "NOW", sub: "act now", ms: 15 * 60000, color: "#B91C1C" },
+    high:      { label: "High", short: "<4h", sub: "within 4 hours", ms: 4 * 3600000, color: "#92620A" },
+    moderate:  { label: "Moderate", short: "<12h", sub: "within 12 hours", ms: 12 * 3600000, color: "#0F766E" },
+    low:       { label: "Low", short: "24h", sub: "within 24 hours", ms: 24 * 3600000, color: "#15803D" }
+  };
+  var PRIORITY_ORDER = ["immediate", "high", "moderate", "low"];
+  var _roundPriority = "high"; // round-note composer: selected priority for the instructions being posted
 
   // Plain-language explanations for ICU jargon (A5) — content only, no logic change.
   var JARGON = {
@@ -2889,6 +2918,12 @@
     var s = Math.max(0, Math.round((nowTs() - ts) / 1000));
     if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + " min ago";
     if (s < 86400) return Math.floor(s / 3600) + " h ago"; return Math.floor(s / 86400) + " d ago";
+  }
+  // A bare duration ("20 min", "3 h") for task due/overdue countdowns.
+  function fmtDur(ms) {
+    var s = Math.max(0, Math.round(ms / 1000));
+    if (s < 60) return s + " s"; if (s < 3600) return Math.round(s / 60) + " min";
+    if (s < 86400) return Math.round(s / 3600) + " h"; return Math.round(s / 86400) + " d";
   }
   // Ward Sync status — non-technical, never shows raw API errors.
   function renderWardBanner() {
@@ -3691,12 +3726,21 @@
     out += '<div class="icu-card"><h3>Instructions &amp; tasks <span class="icu-phase">' + open + ' open</span></h3>';
     if (tasks.length) {
       out += tasks.map(function (t) {
+        var overdue = t.dueAt && t.status !== "done" && nowTs() > t.dueAt;
+        var pr = TASK_PRIORITY[t.priority] || TASK_PRIORITY.moderate;
         var mark = t.status === "done" ? "☑" : t.status === "progress" ? "◐" : "☐";
         var col = t.status === "done" ? "var(--ok)" : t.status === "progress" ? "var(--warn)" : "var(--muted)";
-        var meta = (t.due ? t.due : "") + (t.assignedByName ? (t.due ? " · " : "") + t.assignedByName : "") + (t.status === "done" && t.completedByName ? " · done by " + t.completedByName : "");
-        return '<div class="icu-row" style="align-items:flex-start;gap:8px"><button class="icu-v2-tasktog" data-icu-act="grptask:' + encodeURIComponent(t.id) + '" aria-label="Change status of: ' + esc(t.text || "task") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;margin:-6px 0;color:' + col + '">' + mark + '</button>' +
-          '<span style="flex:1"><span style="' + (t.status === "done" ? "text-decoration:line-through;opacity:.6" : "") + '">' + esc(t.text) + '</span>' +
-          (meta ? '<span style="display:block;font:600 11px var(--font);color:var(--muted);margin-top:2px">' + esc(meta) + '</span>' : "") + '</span></div>';
+        var badge = '<span class="icu-v2-prio" style="background:' + pr.color + '">' + esc(pr.short) + "</span> ";
+        var dueTxt = t.status === "done"
+          ? (t.completedByName ? "done by " + t.completedByName : "done")
+          : (t.dueAt ? (overdue ? "Overdue by " + fmtDur(nowTs() - t.dueAt) : "Due in " + fmtDur(t.dueAt - nowTs())) : "");
+        var meta = [t.assignedByName ? "by " + t.assignedByName : "", dueTxt].filter(Boolean).join(" · ");
+        var expl = t.explanation ? '<div class="icu-v2-taskexpl">' + ico("info", "ⓘ") + " " + esc(t.explanation) + (t.explainedByName ? " — " + esc(t.explainedByName) : "") + "</div>" : "";
+        var explBtn = (t.status !== "done") ? '<button class="icu-btn ghost" data-icu-act="grptaskexplain:' + encodeURIComponent(t.id) + '" style="margin-top:6px;padding:6px 10px;min-height:32px;width:auto;font:700 12px var(--font)">' + ico("edit", "✎") + (t.explanation ? " Update explanation" : (overdue ? " Explain the delay" : " Add explanation")) + "</button>" : "";
+        return '<div class="icu-row" style="align-items:flex-start;gap:8px' + (overdue ? ";border-left:3px solid var(--danger);padding-left:9px" : "") + '"><button class="icu-v2-tasktog" data-icu-act="grptask:' + encodeURIComponent(t.id) + '" aria-label="Change status of: ' + esc(t.text || "task") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;margin:-6px 0;color:' + col + '">' + mark + "</button>" +
+          '<span style="flex:1;min-width:0">' + badge + '<span style="' + (t.status === "done" ? "text-decoration:line-through;opacity:.6" : "") + '">' + esc(t.text) + "</span>" +
+          (meta ? '<span class="icu-v2-due' + (overdue ? " over" : "") + '" style="display:block;margin-top:3px">' + esc(meta) + "</span>" : "") +
+          expl + explBtn + "</span></div>";
       }).join("");
     } else {
       out += '<p class="icu-doc-sub" style="margin:0">No open instructions. ' + (grpCanInstruct(_grp && _grp.myRole) ? "Give one on the round and it will appear here for the team." : "Awaiting a consultant instruction.") + '</p>';
@@ -3973,6 +4017,30 @@
     // Completing a task self-logs an author-stamped audit event (see the auto-timeline set).
     if (next === "done") { try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "task", title: "Task completed — " + (t.text || "task") }); } catch (e) {} }
   }
+  // Resident explains why a task is late / not yet done. Opens a small sheet; saves to the task +
+  // posts an author-stamped timeline note so the whole unit sees the reason.
+  var _explainTaskId = null;
+  function grpTaskExplain(taskId) {
+    _explainTaskId = taskId;
+    var t = null, arr = (_grpPtVM && _grpPtVM.tasks) || []; for (var i = 0; i < arr.length; i++) if (arr[i].id === taskId) { t = arr[i]; break; }
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Explain task"><h3>' + ico("edit", "✎") + ' Explanation</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">' + esc((t && t.text) || "Task") + ' — note why it is delayed or not yet done. The whole team will see this.</p>' +
+      '<textarea id="icuExplain" rows="3" style="width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:10px;padding:10px;font:600 14px var(--font);color:var(--ink);background:var(--panel2)" placeholder="e.g. ABG machine down — sample sent to central lab, result expected by 3 PM">' + esc((t && t.explanation) || "") + '</textarea>' +
+      '<button class="icu-btn" data-icu-act="grptaskexplainsave" style="margin-top:10px">Save explanation</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  function grpTaskExplainSave() {
+    var api = groupsApi();
+    var el = modalEl && modalEl.querySelector("#icuExplain"), txt = el ? String(el.value || "").trim() : "";
+    if (!txt) { if (window.toast) toast("Type an explanation first"); return; }
+    if (!api || !api.explainTask || !grpActive() || !_grpPtId || !_explainTaskId) { closeForm(); return; }
+    var id = _explainTaskId, t = null, arr = (_grpPtVM && _grpPtVM.tasks) || []; for (var i = 0; i < arr.length; i++) if (arr[i].id === id) { t = arr[i]; break; }
+    api.explainTask(_grp.id, _grpPtId, id, txt).then(function () { if (window.toast) toast("Explanation saved"); }, function (e) { if (window.toast) toast("Couldn’t save — " + grpErrText(e)); });
+    try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Explanation — " + ((t && t.text) || "task"), detail: txt }); } catch (e) {}
+    _explainTaskId = null; closeForm();
+  }
 
   /* ============================================================ ICU v2 PHASE 3
    * Round-note composer → tasks + one timeline event · automatic audit timeline ·
@@ -3989,14 +4057,16 @@
   // PURE: a chosen list of instructions → the tasks to create + the ONE summarising timeline
   // event (never one event per task). Instructors create tracked tasks; everyone else posts a
   // plain (untracked) note — the UI role-gates and firestore.rules enforce the real boundary.
-  function grpRoundPlan(instructions, canInstruct, authorName) {
+  function grpRoundPlan(instructions, canInstruct, authorName, priority) {
     instructions = (instructions || []).filter(function (s) { return s && String(s).trim(); }).map(function (s) { return String(s).trim(); });
     authorName = authorName || "Clinician";
     var n = instructions.length;
     if (!n) return { tasks: [], event: null };
     if (canInstruct) {
-      var tasks = instructions.map(function (s) { return { text: s }; });
-      return { tasks: tasks, event: { type: "round", title: "Round instruction — " + authorName, detail: n + " instruction" + (n === 1 ? "" : "s") + " given" } };
+      var prio = TASK_PRIORITY[priority] ? priority : "moderate";
+      var dueAt = nowTs() + TASK_PRIORITY[prio].ms;   // client clock — a small skew is fine for a soft deadline
+      var tasks = instructions.map(function (s) { return { text: s, priority: prio, dueAt: dueAt }; });
+      return { tasks: tasks, event: { type: "round", title: "Round instruction — " + authorName, detail: n + " instruction" + (n === 1 ? "" : "s") + " given · " + TASK_PRIORITY[prio].label + " priority" } };
     }
     return { tasks: [], event: { type: "note", title: "Round note — " + authorName, detail: instructions.join("; ") } };
   }
@@ -4122,6 +4192,10 @@
     if (ptVM && openId && byId[openId]) {
       var op = byId[openId];
       (ptVM.tasks || []).forEach(function (t) {
+        // OVERDUE instruction — urgent alert for the whole team (fires a device notification via the
+        // tick). Body flags whether the resident has explained the delay yet.
+        if (t.dueAt && t.status !== "done" && now > t.dueAt)
+          rows.push({ key: "overdue:" + t.id, id: openId, urgent: true, icon: "⏰", title: label(op) + " — Task overdue", body: (t.text || "task") + " · " + ((TASK_PRIORITY[t.priority] || {}).label || "") + (t.explanation ? " · explained" : " · explanation needed"), ts: t.dueAt });
         if (t.assignedTo === myUid && t.status !== "done") rows.push({ key: "task:" + t.id, id: openId, urgent: true, icon: "🩺", title: label(op) + " — Instruction for you", body: t.text || "", ts: t.ts || now });
         else if (t.status === "done" && t.completedAt) rows.push({ key: "taskdone:" + t.id, id: openId, urgent: false, icon: "✅", title: label(op) + " — Task completed", body: (t.text || "") + (t.completedByName ? " · by " + t.completedByName : ""), ts: t.completedAt });
       });
@@ -4196,6 +4270,16 @@
     return out;
   }
   function grpRoundCaptureText() { try { var el = rootEl && rootEl.querySelector("#icuRoundCustom"); if (el) _roundText = String(el.value || ""); } catch (e) {} }
+  // Priority picker (instructing roles only) — sets the deadline window a task must be done within.
+  function priorityPickerHTML() {
+    return '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 10px">Priority — done within</div><div class="icu-v2-priopick">' +
+      PRIORITY_ORDER.map(function (k) {
+        var pr = TASK_PRIORITY[k], on = _roundPriority === k;
+        return '<button class="icu-v2-priochip' + (on ? " on" : "") + '" data-icu-act="grproundprio:' + k + '" aria-pressed="' + on + '"' + (on ? ' style="border-color:' + pr.color + ';background:' + pr.color + '"' : "") + '>' +
+          '<span class="icu-v2-prio-top"><span class="icu-v2-priodot" style="background:' + pr.color + '"></span>' + esc(pr.label) + '</span>' +
+          '<span class="icu-v2-priosub">' + esc(pr.sub) + '</span></button>';
+      }).join("") + '</div></div>';
+  }
   function renderV2RoundNote() {
     var pt = (_grpPtVM && _grpPtVM.patient) || {}, p = _raw.patient || {};
     var bed = pt.bed || p.bed || "—", nm = pt.name || p.name || "Patient";
@@ -4203,34 +4287,35 @@
     var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="grproundback" aria-label="Back to rounds">‹</button>' +
       '<div><div class="icu-v2-shead-h">' + (instr ? "Add round note" : "Add a note") + '</div><div class="icu-v2-shead-s">Bed ' + esc(bed) + ' · ' + esc(nm) + '</div></div></div>';
     var intro = '<div class="icu-v2-note">' + ico("info", "ⓘ") + (instr
-      ? ' Tap the instructions you gave. Each becomes a tracked task and posts to the timeline — the whole unit sees it instantly. No typing required.'
+      ? ' Tap an order to add it — each becomes a tracked task at your chosen priority. Add anything custom below.'
       : ' Add a note for the team — it posts to the timeline, author- and time-stamped. Only consultants and senior residents can issue tracked instructions.') + '</div>';
-    // Common consultant orders — shown to EVERYONE (tap to add). For instructing roles each becomes a
-    // tracked task; for others they post as a plain note. (Previously gated to instructors, so juniors
-    // saw no suggestions at all.)
-    var presets = '<div class="icu-card" style="padding-bottom:8px"><div class="icu-sec-lbl" style="margin:0 0 10px">' + (instr ? "Common instructions — tap to add" : "Common orders — tap to add a note") + '</div><div class="icu-v2-rpre">' + ROUND_PRESETS.map(function (txt, i) {
+    var errNote = _grpErr ? '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") + ' ' + esc(_grpErr) + '</div>' : "";
+    var prio = instr ? priorityPickerHTML() : "";
+    // BOX 1 — suggestions: capped-height, scrolls INSIDE; presets + custom-added chips as wrapping tags.
+    var chips = ROUND_PRESETS.map(function (txt, i) {
       var on = !!_roundSel[i];
       return '<button class="icu-v2-rchip' + (on ? " on" : "") + '" data-icu-act="grproundtog:' + i + '" aria-pressed="' + on + '" aria-label="' + esc(txt) + '"><span class="icu-v2-rbox" aria-hidden="true">' + (on ? "✓" : "") + '</span><span class="icu-v2-rtx">' + esc(txt) + '</span></button>';
-    }).join("") + '</div></div>';
-    var extra = _roundExtra.length ? ('<div class="icu-v2-rpre">' + _roundExtra.map(function (txt, i) {
+    }).join("") + _roundExtra.map(function (txt, i) {
       return '<button class="icu-v2-rchip on" data-icu-act="grproundrm:' + i + '" aria-label="' + esc("Remove: " + txt) + '"><span class="icu-v2-rbox" aria-hidden="true">✓</span><span class="icu-v2-rtx">' + esc(txt) + '</span><span class="icu-v2-rx" aria-hidden="true">✕</span></button>';
-    }).join("") + '</div>') : "";
-    var custom = '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">Add your own</div>' +
+    }).join("");
+    var sugBox = '<div class="icu-card icu-v2-sugbox"><div class="icu-sec-lbl" style="margin:0 0 10px">' + (instr ? "Common instructions — tap to add" : "Common orders — tap to add a note") + '</div><div class="icu-v2-rpre">' + chips + '</div></div>';
+    // BOX 2 — add your own (always visible, right below the suggestions box).
+    var custom = '<div class="icu-card icu-v2-ownbox"><div class="icu-sec-lbl" style="margin:0 0 8px">Add your own</div>' +
       '<div class="icu-v2-rcustom"><input id="icuRoundCustom" type="text" aria-label="Add your own instruction" placeholder="e.g. Increase PEEP to 8" value="' + esc(_roundText) + '"><button class="icu-btn" data-icu-act="grproundadd" aria-label="Add this instruction">Add</button></div></div>';
     var n = grpRoundChosen().length;
     var btnLbl = instr
-      ? (n ? "Post " + n + " instruction" + (n === 1 ? "" : "s") + " to timeline" : "Choose or type an instruction")
+      ? (n ? "Post " + n + " instruction" + (n === 1 ? "" : "s") + " · " + TASK_PRIORITY[_roundPriority].label : "Choose or type an instruction")
       : (n ? "Post note to timeline" : "Type a note first");
     var post = '<div class="icu-v2-rpost"><button class="icu-btn' + (n ? "" : " ghost") + '" data-icu-act="grproundpost"' + (n ? "" : " disabled") + '>' + esc(btnLbl) + '</button></div>';
-    var errNote = _grpErr ? '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") + ' ' + esc(_grpErr) + '</div>' : "";
-    // Phase 4: dialog semantics — a modal step with a labelled region + a focusable close (‹). The
-    // flex wrapper preserves the sticky header / scroll / sticky post-bar layout inside #icuRoot.
+    // Flex column: header (fixed) · body (intro/priority/add-your-own fixed + suggestions box flexes &
+    // scrolls) · post bar (fixed). Both boxes stay on screen; only the suggestions list scrolls.
     return '<div class="icu-v2-dialog" role="dialog" aria-modal="true" aria-label="' + (instr ? "Add round note" : "Add a note") + '" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden">' +
-      header + '<div class="icu-scroll icu-v2-rscroll">' + errNote + intro + presets + extra + custom + '</div>' + post + '</div>';
+      header + '<div class="icu-v2-rbody">' + errNote + intro + prio + sugBox + custom + '</div>' + post + '</div>';
   }
+  function grpRoundSetPriority(k) { grpRoundCaptureText(); if (TASK_PRIORITY[k]) _roundPriority = k; paint(); }
   function grpOpenRound() {
     if (!grpActive() || !_grpPtId) return;
-    _roundSel = {}; _roundExtra = []; _roundText = ""; _grpErr = null;
+    _roundSel = {}; _roundExtra = []; _roundText = ""; _roundPriority = "high"; _grpErr = null;
     _screen = "round"; _paintTop = true; paint();
   }
   function grpRoundToggle(i) { grpRoundCaptureText(); i = +i; _roundSel[i] = !_roundSel[i]; paint(); }
@@ -4248,7 +4333,7 @@
     var api = groupsApi(); if (!api || !grpActive() || !_grpPtId) return;
     var chosen = grpRoundChosen(); if (!chosen.length) return;
     var instr = grpCanInstruct(_grp && _grp.myRole);
-    var plan = grpRoundPlan(chosen, instr, v2AccountName());
+    var plan = grpRoundPlan(chosen, instr, v2AccountName(), _roundPriority);
     var gid = _grp.id, pid = _grpPtId, i;
     for (i = 0; i < plan.tasks.length; i++) {
       (function (task) { try { var pr = api.addTask(gid, pid, task); if (pr && pr.then) pr.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {} })(plan.tasks[i]);
@@ -5804,6 +5889,8 @@
       case "grpinvitesend": grpDoAddById(); break;
       case "grpreviewed": grpDoReviewed(); break;
       case "grptask": grpCycleTask(decodeURIComponent(arg)); break;
+      case "grptaskexplain": grpTaskExplain(decodeURIComponent(arg)); break;
+      case "grptaskexplainsave": grpTaskExplainSave(); break;
       case "grpretry": grpRetry(); break;   // Phase 4: re-subscribe after a connection/error state
       // ---- ICU v2 group mode Phase 5 — doctor ID + membership (add/invite-link/leave/remove/join) ----
       case "grpcopyid": grpCopyId(); break;
@@ -5822,6 +5909,7 @@
       case "grproundtog": grpRoundToggle(arg); break;
       case "grproundadd": grpRoundAddCustom(); break;
       case "grproundrm": grpRoundRemove(arg); break;
+      case "grproundprio": grpRoundSetPriority(arg); break;
       case "grproundpost": grpDoPostRound(); break;
       case "summary": openSummary(); break;
       case "printsummary": printSummary(); break;
@@ -6122,6 +6210,20 @@
 
   // re-render the open dashboard whenever the state changes (any source)
   _subs.push(function () { if (ICU.isOpen()) paint(); });
+
+  // Task-deadline heartbeat: while a shared patient is open, re-check every 60s so due countdowns
+  // tick, tasks flip to OVERDUE on time, and the overdue device-notification fires even when the unit
+  // is otherwise idle. Fully guarded (no-op unless in group mode with a patient open + ICU visible).
+  try {
+    setInterval(function () {
+      try {
+        if (!grpActive() || !_grpPtId || !ICU.isOpen()) return;
+        grpNotifTick();
+        if (_screen === "patient" && (_active === "rounds" || _active === "overview")) paint();
+        else if (_screen === "alerts") paint();
+      } catch (e) {}
+    }, 60000);
+  } catch (e) {}
 
   // Group mode (Phase 2): mirror the open shared patient's ICU_STATE → Firestore on change
   // (debounced). Echo-suppressed via the state hash so a remote snapshot we just applied never

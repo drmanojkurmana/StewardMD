@@ -262,9 +262,11 @@
     data = data || {};
     return {
       id: id, text: data.text || "", status: normStatus(data.status),
+      priority: normPriority(data.priority), dueAt: (typeof data.dueAt === "number" ? data.dueAt : null),
       assignedBy: data.assignedBy || null, assignedByName: data.assignedByName || "",
       completedBy: data.completedBy || null, completedByName: data.completedByName || "",
       completedAt: tsToMs(data.completedAt), due: data.due || "", assignedTo: data.assignedTo || null,
+      explanation: data.explanation || "", explainedByName: data.explainedByName || "", explainedAt: tsToMs(data.explainedAt),
       ts: tsToMs(data.ts)
     };
   }
@@ -277,12 +279,15 @@
       by: who.uid || null, byName: who.name || "", byRole: who.role || null
     };
   }
+  function normPriority(p) { return (p === "immediate" || p === "high" || p === "moderate" || p === "low") ? p : "moderate"; }
   function buildTask(info, who) {
     info = info || {}; who = who || {};
     return {
       text: info.text || "", status: "pending",
+      priority: normPriority(info.priority), dueAt: (info.dueAt != null ? info.dueAt : null),
       assignedBy: who.uid || null, assignedByName: who.name || "",
       completedBy: null, completedByName: null, completedAt: null,
+      explanation: "", explainedBy: null, explainedByName: null, explainedAt: null,
       due: info.due || "", assignedTo: info.assignedTo || null, ts: null
     };
   }
@@ -823,6 +828,19 @@
       });
     });
   }
+  // A resident records why a task wasn't done on time (or the current status). Any member may write it
+  // (rules: task update = isMember). Stamped with author + time; capped.
+  function explainTask(gid, pid, taskId, text) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn()) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        var uid = currentUid();
+        if (!db || !uid) return reject(new Error("firestore-unavailable"));
+        var patch = { explanation: String(text || "").slice(0, 500), explainedBy: uid, explainedByName: currentName(), explainedAt: fieldValue().serverTimestamp() };
+        track(ptRef(db, gid, pid).collection("tasks").doc(taskId).update(patch)).then(function () { resolve(taskId); }, reject);
+      });
+    });
+  }
 
   /* ---------------------------------------------------------------- presence */
   var _presence = { gid: null, pid: null, timer: null };
@@ -924,6 +942,7 @@
     subscribeTasks: subscribeTasks,
     addTask: addTask,
     setTaskStatus: setTaskStatus,
+    explainTask: explainTask,
     // presence
     enterPatient: enterPatient,
     leavePatient: leavePatient,
