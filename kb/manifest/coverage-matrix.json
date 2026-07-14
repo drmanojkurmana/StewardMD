@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3109,
+    "diseases": 3165,
     "diagnostic": 141,
-    "reference": 2968,
+    "reference": 3024,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,10 +30,10 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 12.7,
+    "severity": 12.5,
     "prognosis": 99.7,
     "diagnosticScoring": 4.5,
-    "management": 4.5,
+    "management": 4.4,
     "drugTherapy": 4.1,
     "dosing": 4.1,
     "stewardship": 1.6
@@ -100,18 +100,18 @@
       }
     },
     "Genitourinary / Repro": {
-      "total": 42,
+      "total": 51,
       "diagnostic": 6,
-      "reference": 36,
+      "reference": 45,
       "dims": {
-        "overview": 42,
-        "clinicalFeatures": 42,
-        "pathophysiology": 42,
-        "differential": 42,
-        "investigations": 42,
-        "redFlags": 42,
+        "overview": 51,
+        "clinicalFeatures": 51,
+        "pathophysiology": 51,
+        "differential": 51,
+        "investigations": 51,
+        "redFlags": 51,
         "severity": 10,
-        "prognosis": 42,
+        "prognosis": 51,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -140,18 +140,18 @@
       }
     },
     "GI / Hepatology": {
-      "total": 171,
+      "total": 185,
       "diagnostic": 19,
-      "reference": 152,
+      "reference": 166,
       "dims": {
-        "overview": 171,
-        "clinicalFeatures": 171,
-        "pathophysiology": 171,
-        "differential": 170,
-        "investigations": 171,
-        "redFlags": 171,
+        "overview": 185,
+        "clinicalFeatures": 185,
+        "pathophysiology": 185,
+        "differential": 184,
+        "investigations": 185,
+        "redFlags": 185,
         "severity": 44,
-        "prognosis": 169,
+        "prognosis": 183,
         "diagnosticScoring": 19,
         "management": 19,
         "drugTherapy": 18,
@@ -699,19 +699,39 @@
         "stewardship": 0
       }
     },
-    "Ear-Nose-Throat": {
-      "total": 13,
+    "Gynaecology": {
+      "total": 8,
       "diagnostic": 0,
-      "reference": 13,
+      "reference": 8,
       "dims": {
-        "overview": 13,
-        "clinicalFeatures": 13,
-        "pathophysiology": 13,
-        "differential": 13,
-        "investigations": 13,
-        "redFlags": 13,
+        "overview": 8,
+        "clinicalFeatures": 8,
+        "pathophysiology": 8,
+        "differential": 8,
+        "investigations": 8,
+        "redFlags": 8,
         "severity": 0,
-        "prognosis": 13,
+        "prognosis": 8,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Ear-Nose-Throat": {
+      "total": 30,
+      "diagnostic": 0,
+      "reference": 30,
+      "dims": {
+        "overview": 30,
+        "clinicalFeatures": 30,
+        "pathophysiology": 30,
+        "differential": 30,
+        "investigations": 30,
+        "redFlags": 30,
+        "severity": 0,
+        "prognosis": 30,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -720,18 +740,18 @@
       }
     },
     "Breast": {
-      "total": 1,
+      "total": 9,
       "diagnostic": 0,
-      "reference": 1,
+      "reference": 9,
       "dims": {
-        "overview": 1,
-        "clinicalFeatures": 1,
-        "pathophysiology": 1,
-        "differential": 1,
-        "investigations": 1,
-        "redFlags": 1,
+        "overview": 9,
+        "clinicalFeatures": 9,
+        "pathophysiology": 9,
+        "differential": 9,
+        "investigations": 9,
+        "redFlags": 9,
         "severity": 0,
-        "prognosis": 1,
+        "prognosis": 9,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -1192,6 +1212,182 @@
       "name": "Breast abscess",
       "specialty": "Breast",
       "system": "Breast / Surgery",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fat_necrosis_breast",
+      "name": "Fat necrosis of the breast",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fibroadenoma",
+      "name": "Fibroadenoma of the breast",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "galactocele",
+      "name": "Galactocele",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "granulomatous_mastitis",
+      "name": "Idiopathic granulomatous mastitis",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "intraductal_papilloma",
+      "name": "Intraductal papilloma",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "duct_ectasia",
+      "name": "Mammary duct ectasia",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mondor_disease",
+      "name": "Mondor disease of the breast",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sclerosing_adenosis",
+      "name": "Sclerosing adenosis",
+      "specialty": "Breast",
+      "system": "Breast",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -8360,6 +8556,28 @@
       }
     },
     {
+      "id": "choanal_atresia",
+      "name": "Choanal atresia",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "eustachian_tube_dysfunction",
       "name": "Eustachian tube dysfunction",
       "specialty": "Ear-Nose-Throat",
@@ -8386,6 +8604,204 @@
       "name": "Glomus jugulare tumour (jugular paraganglioma)",
       "specialty": "Ear-Nose-Throat",
       "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "glottic_web",
+      "name": "Glottic web",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "labyrinthine_concussion",
+      "name": "Labyrinthine concussion",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Otology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "laryngeal_cleft",
+      "name": "Laryngeal cleft",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "laryngeal_papilloma",
+      "name": "Laryngeal papilloma",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "laryngocele",
+      "name": "Laryngocele",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "muscle_tension_dysphonia",
+      "name": "Muscle tension dysphonia",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nasal_septal_perforation",
+      "name": "Nasal septal perforation",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "patulous_eustachian_tube",
+      "name": "Patulous eustachian tube",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Otology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "perilymph_fistula",
+      "name": "Perilymph fistula",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Otology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -8492,6 +8908,28 @@
       }
     },
     {
+      "id": "reinke_edema",
+      "name": "Reinke oedema",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "samter_triad",
       "name": "Samter triad (aspirin-exacerbated respiratory disease)",
       "specialty": "Ear-Nose-Throat",
@@ -8536,10 +8974,54 @@
       }
     },
     {
+      "id": "silent_sinus_syndrome",
+      "name": "Silent sinus syndrome",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sinonasal_inverted_papilloma",
       "name": "Sinonasal inverted papilloma",
       "specialty": "Ear-Nose-Throat",
       "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "subglottic_hemangioma",
+      "name": "Subglottic haemangioma",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -8606,6 +9088,94 @@
       "name": "Vestibular schwannoma (acoustic neuroma)",
       "specialty": "Ear-Nose-Throat",
       "system": "Ear-Nose-Throat / Head and Neck",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vocal_cord_granuloma",
+      "name": "Vocal fold granuloma",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vocal_cord_paralysis",
+      "name": "Vocal fold paralysis",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vocal_cord_polyp",
+      "name": "Vocal fold polyp",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vocal_process_granuloma",
+      "name": "Vocal process granuloma",
+      "specialty": "Ear-Nose-Throat",
+      "system": "Ear-Nose-Throat / Laryngology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -24618,6 +25188,28 @@
       }
     },
     {
+      "id": "chronic_pelvic_pain_syndrome",
+      "name": "Chronic pelvic pain syndrome (chronic prostatitis, NIH category III)",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "COMPLICATED_UTI",
       "name": "Complicated Urinary Tract Infection",
       "specialty": "Genitourinary / Repro",
@@ -24688,6 +25280,28 @@
       "name": "Dyspareunia",
       "specialty": "Genitourinary / Repro",
       "system": "Reproductive medicine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "epididymal_cyst",
+      "name": "Epididymal cyst",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -24838,6 +25452,28 @@
       }
     },
     {
+      "id": "hematospermia",
+      "name": "Haematospermia",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hydrocele",
       "name": "Hydrocele",
       "specialty": "Genitourinary / Repro",
@@ -24974,6 +25610,50 @@
       "name": "Nocturnal Enuresis",
       "specialty": "Genitourinary / Repro",
       "system": "Genitourinary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "paraphimosis",
+      "name": "Paraphimosis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "penile_fracture",
+      "name": "Penile fracture",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -25168,10 +25848,54 @@
       }
     },
     {
+      "id": "spermatocele",
+      "name": "Spermatocele",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "stress_incontinence",
       "name": "Stress Urinary Incontinence",
       "specialty": "Genitourinary / Repro",
       "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "testicular_microlithiasis",
+      "name": "Testicular microlithiasis",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -25216,6 +25940,50 @@
       "name": "Undescended Testis",
       "specialty": "Genitourinary / Repro",
       "system": "Genitourinary / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "urethral_caruncle",
+      "name": "Urethral caruncle",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "urethral_diverticulum",
+      "name": "Urethral diverticulum",
+      "specialty": "Genitourinary / Repro",
+      "system": "Urology / Andrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -26180,6 +26948,28 @@
       }
     },
     {
+      "id": "bile_reflux_gastritis",
+      "name": "Bile reflux gastritis",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "biliary_atresia",
       "name": "Biliary Atresia",
       "specialty": "GI / Hepatology",
@@ -26312,10 +27102,54 @@
       }
     },
     {
+      "id": "cameron_lesion",
+      "name": "Cameron lesion",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "caroli_disease",
       "name": "Caroli disease",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology / Hepatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chilaiditi_syndrome",
+      "name": "Chilaiditi syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -26576,6 +27410,28 @@
       }
     },
     {
+      "id": "collagenous_gastritis",
+      "name": "Collagenous gastritis",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "congenital_chloride_diarrhea",
       "name": "Congenital chloride diarrhoea",
       "specialty": "GI / Hepatology",
@@ -26814,6 +27670,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dieulafoy_lesion",
+      "name": "Dieulafoy lesion",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -27258,6 +28136,28 @@
       }
     },
     {
+      "id": "gastric_angiodysplasia",
+      "name": "Gastric angiodysplasia",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gastric_antral_vascular_ectasia",
       "name": "Gastric antral vascular ectasia (watermelon stomach)",
       "specialty": "GI / Hepatology",
@@ -27478,10 +28378,54 @@
       }
     },
     {
+      "id": "hemobilia",
+      "name": "Haemobilia",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hemorrhoids",
       "name": "Haemorrhoids",
       "specialty": "GI / Hepatology",
       "system": "GI / Anorectal / Surgery",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hemosuccus_pancreaticus",
+      "name": "Haemosuccus pancreaticus",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28160,6 +29104,28 @@
       }
     },
     {
+      "id": "lymphocytic_gastritis",
+      "name": "Lymphocytic gastritis",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lysinuric_protein_intolerance",
       "name": "Lysinuric protein intolerance",
       "specialty": "GI / Hepatology",
@@ -28195,6 +29161,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mallory_weiss_tear",
+      "name": "Mallory-Weiss tear",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -28250,6 +29238,28 @@
     {
       "id": "median_arcuate_ligament_syndrome",
       "name": "Median arcuate ligament syndrome (Dunbar)",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "menetrier_disease",
+      "name": "Menetrier disease (hyperplastic gastropathy)",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology",
       "tier": "reference",
@@ -28622,6 +29632,28 @@
       }
     },
     {
+      "id": "pneumatosis_intestinalis",
+      "name": "Pneumatosis intestinalis",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "polycystic_liver_disease",
       "name": "Polycystic liver disease",
       "specialty": "GI / Hepatology",
@@ -28648,6 +29680,28 @@
       "name": "Portal hypertension",
       "specialty": "GI / Hepatology",
       "system": "Hepatobiliary surgery",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "portal_hypertensive_gastropathy",
+      "name": "Portal hypertensive gastropathy",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29000,6 +30054,28 @@
       "name": "Sinusoidal obstruction syndrome (veno-occlusive disease)",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sister_mary_joseph_nodule",
+      "name": "Sister Mary Joseph nodule",
+      "specialty": "GI / Hepatology",
+      "system": "Gastroenterology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29396,6 +30472,182 @@
       "name": "Zollinger-Ellison syndrome (gastrinoma)",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "bartholin_cyst",
+      "name": "Bartholin gland cyst",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "endometrial_polyp",
+      "name": "Endometrial polyp",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "imperforate_hymen",
+      "name": "Imperforate hymen",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lichen_simplex_chronicus",
+      "name": "Lichen simplex chronicus (vulval)",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nabothian_cyst",
+      "name": "Nabothian cyst",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "transverse_vaginal_septum",
+      "name": "Transverse vaginal septum",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vulvar_intraepithelial_neoplasia",
+      "name": "Vulvar intraepithelial neoplasia",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "vulvodynia",
+      "name": "Vulvodynia",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
       "tier": "reference",
       "caps": {
         "overview": true,
