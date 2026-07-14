@@ -328,6 +328,17 @@
             (bgOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0a4a44" onclick="GHIS.watchBackground(\'' + jsq(patientId) + '\',\'' + jsq(name) + '\')">🔔 Lab Watch 24/7 — even when the app is closed</button>' : '') +
             '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
           drawer.style.display = '';
+          // Open at the TOP. The drawer is position:absolute; inset:0 inside #ghisWard, which is a
+          // scrolled container (the patient list). If the list is scrolled down when a patient is
+          // tapped, the drawer's inset:0 top sits above the visible area, so the detail appears
+          // mid-way and the user has to scroll up. Remember the list position, then reset the list
+          // + the drawer's own scroll so the detail opens like a fresh screen from its header.
+          try {
+            var ward = document.getElementById('ghisWard');
+            GHIS._listScroll = ward ? ward.scrollTop : 0;
+            if (ward) ward.scrollTop = 0;
+            drawer.scrollTop = 0;
+          } catch (e) {}
           GHIS.loadRadiology(patientId);
           GHIS.loadLabs(patientId);
         },
@@ -637,6 +648,9 @@
     
       window.closeLabDrawer = function() {
         document.getElementById('ghisLabDrawer').style.display = 'none';
+        // Restore the patient-list scroll position saved when the drawer opened (openLab reset it
+        // to 0 so the detail opened from its top) — back returns you where you were in the list.
+        try { var ward = document.getElementById('ghisWard'); if (ward && window.GHIS && GHIS._listScroll != null) ward.scrollTop = GHIS._listScroll; } catch (e) {}
       };
 
       // Escape closes the lab drawer first (back to list), then the whole panel —
