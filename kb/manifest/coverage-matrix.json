@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3221,
+    "diseases": 3277,
     "diagnostic": 141,
-    "reference": 3080,
+    "reference": 3136,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 12.3,
+    "severity": 12.1,
     "prognosis": 99.7,
-    "diagnosticScoring": 4.4,
+    "diagnosticScoring": 4.3,
     "management": 4.3,
-    "drugTherapy": 4,
-    "dosing": 4,
+    "drugTherapy": 3.9,
+    "dosing": 3.9,
     "stewardship": 1.6
   },
   "bySpecialty": {
@@ -160,18 +160,18 @@
       }
     },
     "Cardiology": {
-      "total": 140,
+      "total": 146,
       "diagnostic": 11,
-      "reference": 129,
+      "reference": 135,
       "dims": {
-        "overview": 140,
-        "clinicalFeatures": 140,
-        "pathophysiology": 140,
-        "differential": 138,
-        "investigations": 140,
-        "redFlags": 140,
+        "overview": 146,
+        "clinicalFeatures": 146,
+        "pathophysiology": 146,
+        "differential": 144,
+        "investigations": 146,
+        "redFlags": 146,
         "severity": 48,
-        "prognosis": 139,
+        "prognosis": 145,
         "diagnosticScoring": 11,
         "management": 11,
         "drugTherapy": 9,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 289,
+      "total": 316,
       "diagnostic": 6,
-      "reference": 283,
+      "reference": 310,
       "dims": {
-        "overview": 289,
-        "clinicalFeatures": 289,
-        "pathophysiology": 289,
-        "differential": 289,
-        "investigations": 289,
-        "redFlags": 289,
+        "overview": 316,
+        "clinicalFeatures": 316,
+        "pathophysiology": 316,
+        "differential": 316,
+        "investigations": 316,
+        "redFlags": 316,
         "severity": 23,
-        "prognosis": 289,
+        "prognosis": 316,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -420,18 +420,18 @@
       }
     },
     "Eye": {
-      "total": 123,
+      "total": 137,
       "diagnostic": 0,
-      "reference": 123,
+      "reference": 137,
       "dims": {
-        "overview": 123,
-        "clinicalFeatures": 123,
-        "pathophysiology": 123,
-        "differential": 123,
-        "investigations": 123,
-        "redFlags": 123,
+        "overview": 137,
+        "clinicalFeatures": 137,
+        "pathophysiology": 137,
+        "differential": 137,
+        "investigations": 137,
+        "redFlags": 137,
         "severity": 0,
-        "prognosis": 123,
+        "prognosis": 137,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -612,6 +612,26 @@
         "redFlags": 11,
         "severity": 0,
         "prognosis": 11,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Colorectal": {
+      "total": 9,
+      "diagnostic": 0,
+      "reference": 9,
+      "dims": {
+        "overview": 9,
+        "clinicalFeatures": 9,
+        "pathophysiology": 9,
+        "differential": 9,
+        "investigations": 9,
+        "redFlags": 9,
+        "severity": 0,
+        "prognosis": 9,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -2132,6 +2152,28 @@
       }
     },
     {
+      "id": "carotid_cavernous_fistula",
+      "name": "Carotid-cavernous fistula",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "catecholaminergic_polymorphic_vt",
       "name": "Catecholaminergic polymorphic ventricular tachycardia",
       "specialty": "Cardiology",
@@ -2158,6 +2200,28 @@
       "name": "Chronic cor pulmonale",
       "specialty": "Cardiology",
       "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chronic_venous_insufficiency",
+      "name": "Chronic venous insufficiency",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular / Vascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -3144,6 +3208,28 @@
       }
     },
     {
+      "id": "may_thurner_syndrome",
+      "name": "May-Thurner syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mitral_annular_calcification",
       "name": "Mitral annular calcification",
       "specialty": "Cardiology",
@@ -3474,6 +3560,28 @@
       }
     },
     {
+      "id": "phlegmasia_cerulea_dolens",
+      "name": "Phlegmasia cerulea dolens",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "physical_examination_of_the_cardiovascular",
       "name": "Physical Examination of the Cardiovascular System",
       "specialty": "Cardiology",
@@ -3564,6 +3672,28 @@
     {
       "id": "popliteal_artery_entrapment",
       "name": "Popliteal artery entrapment syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "post_thrombotic_syndrome",
+      "name": "Post-thrombotic syndrome",
       "specialty": "Cardiology",
       "system": "Cardiovascular / Vascular",
       "tier": "reference",
@@ -4068,6 +4198,28 @@
       }
     },
     {
+      "id": "superior_vena_cava_syndrome",
+      "name": "Superior vena cava syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "supraventricular_tachycardia",
       "name": "Supraventricular tachycardia",
       "specialty": "Cardiology",
@@ -4490,6 +4642,204 @@
       "name": "Wolff-Parkinson-White syndrome",
       "specialty": "Cardiology",
       "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anal_fistula",
+      "name": "Anal fistula",
+      "specialty": "Colorectal",
+      "system": "Colorectal / Pelvic floor",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anismus",
+      "name": "Anismus (dyssynergic defecation)",
+      "specialty": "Colorectal",
+      "system": "Colorectal / Pelvic floor",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "descending_perineum_syndrome",
+      "name": "Descending perineum syndrome",
+      "specialty": "Colorectal",
+      "system": "Colorectal / Pelvic floor",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "levator_ani_syndrome",
+      "name": "Levator ani syndrome",
+      "specialty": "Colorectal",
+      "system": "Colorectal / Pelvic floor",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "obstructed_defecation_syndrome",
+      "name": "Obstructed defecation syndrome",
+      "specialty": "Colorectal",
+      "system": "Colorectal / Pelvic floor",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "perianal_abscess",
+      "name": "Perianal abscess",
+      "specialty": "Colorectal",
+      "system": "Colorectal / Pelvic floor",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pilonidal_disease",
+      "name": "Pilonidal disease",
+      "specialty": "Colorectal",
+      "system": "Colorectal / Pelvic floor",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "proctalgia_fugax",
+      "name": "Proctalgia fugax",
+      "specialty": "Colorectal",
+      "system": "Colorectal / Pelvic floor",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "solitary_rectal_ulcer_syndrome",
+      "name": "Solitary rectal ulcer syndrome",
+      "specialty": "Colorectal",
+      "system": "Colorectal / Pelvic floor",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -23076,6 +23426,28 @@
       }
     },
     {
+      "id": "orbital_pseudotumor",
+      "name": "Idiopathic orbital inflammation",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "congenital_nystagmus",
       "name": "Infantile (congenital) nystagmus",
       "specialty": "Eye",
@@ -23296,6 +23668,28 @@
       }
     },
     {
+      "id": "malignant_glaucoma",
+      "name": "Malignant glaucoma",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "marcus_gunn_jaw_winking",
       "name": "Marcus Gunn jaw-winking synkinesis",
       "specialty": "Eye",
@@ -23408,6 +23802,50 @@
     {
       "id": "morning_glory_disc_anomaly",
       "name": "Morning glory disc anomaly",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "neovascular_glaucoma",
+      "name": "Neovascular glaucoma",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "normal_tension_glaucoma",
+      "name": "Normal tension glaucoma",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -23670,6 +24108,28 @@
       }
     },
     {
+      "id": "orbital_myositis",
+      "name": "Orbital myositis",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "papilloedema",
       "name": "Papilloedema",
       "specialty": "Eye",
@@ -23758,8 +24218,96 @@
       }
     },
     {
+      "id": "phacomorphic_glaucoma",
+      "name": "Phacomorphic glaucoma",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "phlyctenulosis",
       "name": "Phlyctenular keratoconjunctivitis",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pigment_dispersion_glaucoma",
+      "name": "Pigmentary glaucoma",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "plateau_iris_syndrome",
+      "name": "Plateau iris syndrome",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "posner_schlossman_syndrome",
+      "name": "Posner-Schlossman syndrome",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -23802,8 +24350,74 @@
       }
     },
     {
+      "id": "primary_angle_closure_glaucoma",
+      "name": "Primary angle-closure glaucoma",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_glaucoma",
+      "name": "Primary congenital glaucoma",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "primary_open_angle_glaucoma",
       "name": "Primary open-angle glaucoma",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pseudoexfoliation_glaucoma",
+      "name": "Pseudoexfoliation glaucoma",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -24220,8 +24834,52 @@
       }
     },
     {
+      "id": "thyroid_orbitopathy",
+      "name": "Thyroid eye disease",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "coloboma_chard_syndrome",
       "name": "Uveal/ocular coloboma and CHARGE-associated coloboma",
+      "specialty": "Eye",
+      "system": "Eye / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "uveitic_glaucoma",
+      "name": "Uveitic glaucoma",
       "specialty": "Eye",
       "system": "Eye / Ophthalmology",
       "tier": "reference",
@@ -63248,6 +63906,28 @@
       }
     },
     {
+      "id": "accessory_navicular_syndrome",
+      "name": "Accessory navicular syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "achilles_tendinopathy",
       "name": "Achilles tendinopathy",
       "specialty": "Rheumatology / MSK",
@@ -63864,6 +64544,28 @@
       }
     },
     {
+      "id": "baastrup_disease",
+      "name": "Baastrup disease (kissing spines)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bankart_lesion",
       "name": "Bankart lesion",
       "specialty": "Rheumatology / MSK",
@@ -64084,6 +64786,28 @@
       }
     },
     {
+      "id": "bunionette",
+      "name": "Bunionette (tailor's bunion)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "calcific_tendinitis",
       "name": "Calcific tendinitis",
       "specialty": "Rheumatology / MSK",
@@ -64238,10 +64962,54 @@
       }
     },
     {
+      "id": "cervical_radiculopathy",
+      "name": "Cervical radiculopathy",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cervical_spondylosis",
       "name": "Cervical spondylosis",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cervical_spondylotic_myelopathy",
+      "name": "Cervical spondylotic myelopathy",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -64370,6 +65138,28 @@
       }
     },
     {
+      "id": "claw_toe",
+      "name": "Claw toe",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cleidocranial_dysplasia",
       "name": "Cleidocranial dysplasia",
       "specialty": "Rheumatology / MSK",
@@ -64418,6 +65208,28 @@
       "name": "Clubfoot",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "coccydynia",
+      "name": "Coccydynia",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -64638,6 +65450,28 @@
       "name": "De Quervain tenosynovitis",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "degenerative_disc_disease",
+      "name": "Degenerative disc disease",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -65162,6 +65996,28 @@
       }
     },
     {
+      "id": "facet_joint_syndrome",
+      "name": "Facet joint syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "familial_mediterranean_fever_and_other",
       "name": "Familial Mediterranean Fever and Other Hereditary Autoinflammatory Diseases",
       "specialty": "Rheumatology / MSK",
@@ -65606,6 +66462,72 @@
       "name": "Haglund deformity",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hallux_rigidus",
+      "name": "Hallux rigidus",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hallux_valgus",
+      "name": "Hallux valgus (bunion)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hammer_toe",
+      "name": "Hammer toe",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -66548,10 +67470,54 @@
       }
     },
     {
+      "id": "lumbar_disc_herniation",
+      "name": "Lumbar disc herniation",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lumbar_disc_prolapse",
       "name": "Lumbar disc prolapse",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Orthopaedics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lumbar_spinal_stenosis",
+      "name": "Lumbar spinal stenosis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -66618,6 +67584,28 @@
       "name": "Mallet finger",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Hand & Peripheral nerve",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mallet_toe",
+      "name": "Mallet toe",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -66794,6 +67782,28 @@
       "name": "Meniscal tear",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "metatarsalgia",
+      "name": "Metatarsalgia",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -67296,6 +68306,28 @@
       }
     },
     {
+      "id": "os_trigonum_syndrome",
+      "name": "Os trigonum syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "osgood_schlatter_disease",
       "name": "Osgood-Schlatter disease",
       "specialty": "Rheumatology / MSK",
@@ -67758,6 +68790,50 @@
       }
     },
     {
+      "id": "pes_cavus",
+      "name": "Pes cavus",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pes_planus",
+      "name": "Pes planus (flatfoot)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pfeiffer_syndrome",
       "name": "Pfeiffer syndrome",
       "specialty": "Rheumatology / MSK",
@@ -67806,6 +68882,28 @@
       "name": "Plantar fasciitis",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "plantar_plate_tear",
+      "name": "Plantar plate tear",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -68308,6 +69406,28 @@
       }
     },
     {
+      "id": "sacroiliac_joint_dysfunction",
+      "name": "Sacroiliac joint dysfunction",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "saethre_chotzen_syndrome",
       "name": "Saethre-Chotzen syndrome",
       "specialty": "Rheumatology / MSK",
@@ -68510,6 +69630,28 @@
       "name": "Segond fracture",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Sports & Trauma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sesamoiditis",
+      "name": "Sesamoiditis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Foot & Ankle",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -68814,6 +69956,28 @@
       }
     },
     {
+      "id": "spinal_epidural_lipomatosis",
+      "name": "Spinal epidural lipomatosis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "spondyloarthritis",
       "name": "Spondyloarthritis",
       "specialty": "Rheumatology / MSK",
@@ -68862,6 +70026,28 @@
       "name": "Spondyloepiphyseal dysplasia",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "spondylolysis",
+      "name": "Spondylolysis (pars defect)",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -69166,6 +70352,28 @@
       }
     },
     {
+      "id": "tarlov_cyst",
+      "name": "Tarlov (perineural) cyst",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tarsal_coalition",
       "name": "Tarsal coalition",
       "specialty": "Rheumatology / MSK",
@@ -69254,6 +70462,28 @@
       }
     },
     {
+      "id": "tethered_cord_syndrome",
+      "name": "Tethered cord syndrome",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "thanatophoric_dysplasia",
       "name": "Thanatophoric dysplasia",
       "specialty": "Rheumatology / MSK",
@@ -69289,6 +70519,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "thoracic_disc_herniation",
+      "name": "Thoracic disc herniation",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Spine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
