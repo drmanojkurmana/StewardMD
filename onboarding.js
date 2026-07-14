@@ -280,10 +280,20 @@
   }
 
   // ---- auto trigger ------------------------------------------------------------------------
+  // Blocking pre-home gates. Each of these is a full-screen overlay that sits ABOVE the home
+  // layer (home is z-index 90; the sign-in gate is ~301). #homeV2 is rendered with class "on"
+  // underneath them, so a visibility check on home alone is not enough — while any gate is up the
+  // home behind it is not the foreground view and the tour must not auto-open. (A tester saw
+  // "Step 1 of 8" over the sign-in screen before logging in for exactly this reason.)
+  function gateUp() {
+    var ids = ["accountGate", "introPoster", "verifyGate", "splash", "smdBootSplash"];
+    for (var i = 0; i < ids.length; i++) { var el = document.getElementById(ids[i]); if (el && visible(el)) return true; }
+    return false;
+  }
   function homeForeground() {
-    var h = document.getElementById("homeV2"); if (!h || !visible(h)) return false;
-    var sp = document.getElementById("splash");
-    if (sp) { var cs = window.getComputedStyle(sp); if (cs.display !== "none" && cs.visibility !== "hidden" && cs.opacity !== "0") return false; }
+    var h = document.getElementById("homeV2");
+    if (!h || !visible(h) || !h.classList.contains("on")) return false;   // home must be the ACTIVE screen
+    if (gateUp()) return false;                                           // and not covered by a pre-home gate
     return true;
   }
   function maybeAuto() {
@@ -297,10 +307,13 @@
   function watch() {
     var tries = 0;
     var iv = setInterval(function () {
-      tries++;
       if (_sessionShown || !shouldAuto()) { clearInterval(iv); return; }
-      if (homeForeground()) { clearInterval(iv); maybeAuto(); }
-      if (tries > 80) clearInterval(iv);   // ~40s ceiling
+      if (homeForeground()) { clearInterval(iv); maybeAuto(); return; }
+      // Only count down while we are genuinely waiting on the home screen. Time spent on the
+      // intro / splash / sign-in gates does not burn the budget, so the tour still fires the
+      // moment the user finishes signing in, however long that leg takes.
+      if (gateUp()) tries = 0;
+      else if (++tries > 80) clearInterval(iv);   // ~40s ceiling of non-gate waiting
     }, 500);
   }
 
