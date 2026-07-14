@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3445,
+    "diseases": 3501,
     "diagnostic": 141,
-    "reference": 3304,
+    "reference": 3360,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,10 +30,10 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 11.5,
+    "severity": 11.3,
     "prognosis": 99.7,
-    "diagnosticScoring": 4.1,
-    "management": 4.1,
+    "diagnosticScoring": 4,
+    "management": 4,
     "drugTherapy": 3.7,
     "dosing": 3.7,
     "stewardship": 1.5
@@ -180,18 +180,18 @@
       }
     },
     "Oncology": {
-      "total": 99,
+      "total": 114,
       "diagnostic": 3,
-      "reference": 96,
+      "reference": 111,
       "dims": {
-        "overview": 99,
-        "clinicalFeatures": 99,
-        "pathophysiology": 99,
-        "differential": 99,
-        "investigations": 99,
-        "redFlags": 99,
+        "overview": 114,
+        "clinicalFeatures": 114,
+        "pathophysiology": 114,
+        "differential": 114,
+        "investigations": 114,
+        "redFlags": 114,
         "severity": 14,
-        "prognosis": 99,
+        "prognosis": 114,
         "diagnosticScoring": 3,
         "management": 3,
         "drugTherapy": 3,
@@ -220,18 +220,18 @@
       }
     },
     "Emergency / Allergy": {
-      "total": 22,
+      "total": 37,
       "diagnostic": 4,
-      "reference": 18,
+      "reference": 33,
       "dims": {
-        "overview": 22,
-        "clinicalFeatures": 22,
-        "pathophysiology": 22,
-        "differential": 22,
-        "investigations": 22,
-        "redFlags": 22,
+        "overview": 37,
+        "clinicalFeatures": 37,
+        "pathophysiology": 37,
+        "differential": 37,
+        "investigations": 37,
+        "redFlags": 37,
         "severity": 5,
-        "prognosis": 22,
+        "prognosis": 37,
         "diagnosticScoring": 4,
         "management": 4,
         "drugTherapy": 4,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 448,
+      "total": 449,
       "diagnostic": 10,
-      "reference": 438,
+      "reference": 439,
       "dims": {
-        "overview": 448,
-        "clinicalFeatures": 448,
-        "pathophysiology": 448,
-        "differential": 447,
-        "investigations": 448,
-        "redFlags": 448,
+        "overview": 449,
+        "clinicalFeatures": 449,
+        "pathophysiology": 449,
+        "differential": 448,
+        "investigations": 449,
+        "redFlags": 449,
         "severity": 33,
-        "prognosis": 446,
+        "prognosis": 447,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -300,18 +300,18 @@
       }
     },
     "Rheumatology / MSK": {
-      "total": 324,
+      "total": 325,
       "diagnostic": 6,
-      "reference": 318,
+      "reference": 319,
       "dims": {
-        "overview": 324,
-        "clinicalFeatures": 324,
-        "pathophysiology": 324,
-        "differential": 324,
-        "investigations": 324,
-        "redFlags": 324,
+        "overview": 325,
+        "clinicalFeatures": 325,
+        "pathophysiology": 325,
+        "differential": 325,
+        "investigations": 325,
+        "redFlags": 325,
         "severity": 23,
-        "prognosis": 324,
+        "prognosis": 325,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -460,18 +460,18 @@
       }
     },
     "Genetics": {
-      "total": 72,
+      "total": 82,
       "diagnostic": 0,
-      "reference": 72,
+      "reference": 82,
       "dims": {
-        "overview": 72,
-        "clinicalFeatures": 72,
-        "pathophysiology": 72,
-        "differential": 72,
-        "investigations": 72,
-        "redFlags": 72,
+        "overview": 82,
+        "clinicalFeatures": 82,
+        "pathophysiology": 82,
+        "differential": 82,
+        "investigations": 82,
+        "redFlags": 82,
         "severity": 0,
-        "prognosis": 72,
+        "prognosis": 82,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -740,18 +740,18 @@
       }
     },
     "Gynaecology": {
-      "total": 8,
+      "total": 22,
       "diagnostic": 0,
-      "reference": 8,
+      "reference": 22,
       "dims": {
-        "overview": 8,
-        "clinicalFeatures": 8,
-        "pathophysiology": 8,
-        "differential": 8,
-        "investigations": 8,
-        "redFlags": 8,
+        "overview": 22,
+        "clinicalFeatures": 22,
+        "pathophysiology": 22,
+        "differential": 22,
+        "investigations": 22,
+        "redFlags": 22,
         "severity": 0,
-        "prognosis": 8,
+        "prognosis": 22,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -11456,6 +11456,28 @@
       }
     },
     {
+      "id": "acute_mountain_sickness",
+      "name": "Acute mountain sickness",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "anaphylaxis",
       "name": "Anaphylaxis",
       "specialty": "Emergency / Allergy",
@@ -11496,6 +11518,28 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chilblains",
+      "name": "Chilblains (pernio)",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -11548,6 +11592,28 @@
       "name": "Complement deficiency",
       "specialty": "Emergency / Allergy",
       "system": "Immunology / Allergy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "decompression_illness",
+      "name": "Decompression illness",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -11632,6 +11698,28 @@
       }
     },
     {
+      "id": "ear_barotrauma",
+      "name": "Ear barotrauma",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "eosinophilia",
       "name": "Eosinophilia",
       "specialty": "Emergency / Allergy",
@@ -11680,6 +11768,50 @@
       "name": "Food allergy",
       "specialty": "Emergency / Allergy",
       "system": "Immunology / Allergy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "heat_cramps",
+      "name": "Heat cramps",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "heat_exhaustion",
+      "name": "Heat exhaustion",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -11786,10 +11918,164 @@
       }
     },
     {
+      "id": "immersion_foot",
+      "name": "Immersion foot",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "jet_lag_disorder",
+      "name": "Jet lag disorder",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "latex_allergy",
       "name": "Latex allergy",
       "specialty": "Emergency / Allergy",
       "system": "Immunology / Allergy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lightning_injury",
+      "name": "Lightning injury",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mal_de_debarquement_syndrome",
+      "name": "Mal de debarquement syndrome",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "motion_sickness",
+      "name": "Motion sickness",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nitrogen_narcosis",
+      "name": "Nitrogen narcosis",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "oxygen_toxicity",
+      "name": "Oxygen toxicity",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -11856,6 +12142,50 @@
       "name": "Serum sickness",
       "specialty": "Emergency / Allergy",
       "system": "Immunology / Allergy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sinus_barotrauma",
+      "name": "Sinus barotrauma",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "trench_foot",
+      "name": "Trench foot (non-freezing cold injury)",
+      "specialty": "Emergency / Allergy",
+      "system": "Environmental / Emergency",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -18698,6 +19028,28 @@
       "name": "Oto-palato-digital syndrome (FLNA)",
       "specialty": "Endocrine / Metabolic",
       "system": "Musculoskeletal / Metabolic bone",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ovarian_hyperthecosis",
+      "name": "Ovarian hyperthecosis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Gynaecology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -26834,6 +27186,28 @@
       }
     },
     {
+      "id": "cobb_syndrome",
+      "name": "Cobb syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "coffin_siris_syndrome",
       "name": "Coffin-Siris syndrome",
       "specialty": "Genetics",
@@ -27230,6 +27604,28 @@
       }
     },
     {
+      "id": "hemihyperplasia_isolated",
+      "name": "Isolated hemihyperplasia",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "johanson_blizzard_syndrome",
       "name": "Johanson-Blizzard syndrome",
       "specialty": "Genetics",
@@ -27362,10 +27758,54 @@
       }
     },
     {
+      "id": "luscan_lumish_syndrome",
+      "name": "Luscan-Lumish syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mainzer_saldino_syndrome",
       "name": "Mainzer-Saldino syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Ciliopathy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "malan_syndrome",
+      "name": "Malan syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -27494,6 +27934,28 @@
       }
     },
     {
+      "id": "mosaic_variegated_aneuploidy",
+      "name": "Mosaic variegated aneuploidy syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mowat_wilson_syndrome",
       "name": "Mowat-Wilson syndrome",
       "specialty": "Genetics",
@@ -27582,10 +28044,54 @@
       }
     },
     {
+      "id": "neurofibromatosis_type_2",
+      "name": "Neurofibromatosis type 2",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "noonan_syndrome_multiple_lentigines",
       "name": "Noonan syndrome with multiple lentigines",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "noonan_with_multiple_lentigines",
+      "name": "Noonan syndrome with multiple lentigines (LEOPARD syndrome)",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -27674,6 +28180,28 @@
       "name": "Pallister-Killian syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "parry_romberg_syndrome",
+      "name": "Parry-Romberg syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -27824,6 +28352,28 @@
       }
     },
     {
+      "id": "schwannomatosis",
+      "name": "Schwannomatosis",
+      "specialty": "Genetics",
+      "system": "Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "seckel_syndrome",
       "name": "Seckel syndrome",
       "specialty": "Genetics",
@@ -27938,6 +28488,28 @@
       "name": "Sprengel deformity",
       "specialty": "Genetics",
       "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tatton_brown_rahman_syndrome",
+      "name": "Tatton-Brown-Rahman syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -34028,8 +34600,74 @@
       }
     },
     {
+      "id": "corpus_luteum_cyst",
+      "name": "Corpus luteum cyst",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "endometrial_polyp",
       "name": "Endometrial polyp",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "endosalpingiosis",
+      "name": "Endosalpingiosis",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hydrosalpinx",
+      "name": "Hydrosalpinx",
       "specialty": "Gynaecology",
       "system": "Gynaecology",
       "tier": "reference",
@@ -34094,8 +34732,250 @@
       }
     },
     {
+      "id": "massive_ovarian_edema",
+      "name": "Massive ovarian oedema",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "meigs_syndrome",
+      "name": "Meigs syndrome",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mittelschmerz",
+      "name": "Mittelschmerz",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "nabothian_cyst",
       "name": "Nabothian cyst",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ovarian_dermoid_cyst",
+      "name": "Ovarian dermoid cyst (mature cystic teratoma)",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "endometrioma",
+      "name": "Ovarian endometrioma",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "follicular_cyst_ovary",
+      "name": "Ovarian follicular cyst",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ovarian_remnant_syndrome",
+      "name": "Ovarian remnant syndrome",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "paratubal_cyst",
+      "name": "Paratubal cyst",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pelvic_congestion_syndrome",
+      "name": "Pelvic congestion syndrome",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "salpingitis_isthmica_nodosa",
+      "name": "Salpingitis isthmica nodosa",
+      "specialty": "Gynaecology",
+      "system": "Gynaecology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "theca_lutein_cyst",
+      "name": "Theca lutein cyst",
       "specialty": "Gynaecology",
       "system": "Gynaecology",
       "tier": "reference",
@@ -60626,6 +61506,28 @@
       }
     },
     {
+      "id": "brenner_tumor",
+      "name": "Brenner tumour",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "brooke_spiegler_syndrome",
       "name": "Brooke-Spiegler syndrome",
       "specialty": "Oncology",
@@ -60934,6 +61836,28 @@
       }
     },
     {
+      "id": "dysgerminoma",
+      "name": "Dysgerminoma",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ewing_sarcoma",
       "name": "Ewing sarcoma (EWSR1-FLI1)",
       "specialty": "Oncology",
@@ -61154,6 +62078,28 @@
       }
     },
     {
+      "id": "granulosa_cell_tumor",
+      "name": "Granulosa cell tumour",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "head_and_neck_cancer",
       "name": "Head and Neck Cancer",
       "specialty": "Oncology",
@@ -61308,6 +62254,28 @@
       }
     },
     {
+      "id": "immature_teratoma_ovary",
+      "name": "Immature teratoma of the ovary",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "immunotherapy_toxicity",
       "name": "Immunotherapy toxicity",
       "specialty": "Oncology",
@@ -61378,6 +62346,28 @@
       "name": "Klippel-Trenaunay syndrome",
       "specialty": "Oncology",
       "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "krukenberg_tumor",
+      "name": "Krukenberg tumour",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -61576,6 +62566,28 @@
       "name": "Malignant rhabdoid tumour (SMARCB1)",
       "specialty": "Oncology",
       "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mature_cystic_teratoma_ovary",
+      "name": "Mature cystic teratoma of the ovary",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -61902,6 +62914,94 @@
       }
     },
     {
+      "id": "ovarian_fibroma",
+      "name": "Ovarian fibroma",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mucinous_cystadenoma_ovary",
+      "name": "Ovarian mucinous cystadenoma",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "serous_cystadenoma_ovary",
+      "name": "Ovarian serous cystadenoma",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "yolk_sac_tumor_ovary",
+      "name": "Ovarian yolk sac tumour",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pancreatic_cancer",
       "name": "Pancreatic Cancer",
       "specialty": "Oncology",
@@ -62100,6 +63200,28 @@
       }
     },
     {
+      "id": "pseudomyxoma_peritonei",
+      "name": "Pseudomyxoma peritonei",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "radiation_pneumonitis",
       "name": "Radiation pneumonitis",
       "specialty": "Oncology",
@@ -62210,6 +63332,28 @@
       }
     },
     {
+      "id": "sclerosing_stromal_tumor_ovary",
+      "name": "Sclerosing stromal tumour of the ovary",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sdh_deficient_gist",
       "name": "SDH-deficient gastrointestinal stromal tumour",
       "specialty": "Oncology",
@@ -62276,6 +63420,28 @@
       }
     },
     {
+      "id": "sertoli_leydig_cell_tumor",
+      "name": "Sertoli-Leydig cell tumour",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "skin_cancer",
       "name": "Skin Cancer",
       "specialty": "Oncology",
@@ -62289,6 +63455,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "small_cell_carcinoma_ovary",
+      "name": "Small cell carcinoma of the ovary, hypercalcaemic type",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -62346,6 +63534,28 @@
       "name": "Soft-tissue myoepithelioma",
       "specialty": "Oncology",
       "system": "Oncology / Pathology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "steroid_cell_tumor_ovary",
+      "name": "Steroid cell tumour of the ovary",
+      "specialty": "Oncology",
+      "system": "Gynaecology / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -69606,6 +70816,28 @@
       "name": "Escobar syndrome",
       "specialty": "Rheumatology / MSK",
       "system": "Musculoskeletal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "exertional_rhabdomyolysis",
+      "name": "Exertional rhabdomyolysis",
+      "specialty": "Rheumatology / MSK",
+      "system": "Musculoskeletal / Emergency",
       "tier": "reference",
       "caps": {
         "overview": true,
