@@ -182,18 +182,18 @@ try {
 
   // ===== Slice 3 — Deep Review confirm sheet + no-context guard + Care Plan entry =====
 
-  // 20) Care Plan Deep Review — DISABLED until a working dx, then opens the OPT-IN confirm sheet (BUG C)
+  // 20) Care Plan Deep Review — ENABLED as soon as there is clinical context (NOT gated on a working
+  //     dx; the review's output HELPS identify the dx), then opens the OPT-IN confirm sheet.
   const c20 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"DR",age:60,sex:"M"});
     ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
     ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
-    var gated=root.querySelector('[data-icu-act="corrdeep"]'); var gatedDisabled=!!(gated&&gated.disabled);
-    ICU._pickWorkingDx("Seizure / epilepsy","deterministic_suggestion"); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    var noDx=!ICU.state().patient.diagnosis && !ICU.state().patient.workingDx;
     var btn=root.querySelector('[data-icu-act="corrdeep"]'); var enabled=!!(btn&&!btn.disabled); if(btn) btn.click();
     var sheet=document.getElementById('icuDeepSheet');
-    return JSON.stringify({ gatedDisabled:gatedDisabled, enabled:enabled, sheet:!!sheet, review:!!(sheet&&sheet.querySelector('[data-icu-act="deepgo"]')), edit:!!(sheet&&sheet.querySelector('[data-icu-act="deepedit"]')), chk:(sheet?sheet.querySelectorAll('.icu-deep-chk').length:0) });
+    return JSON.stringify({ noDx:noDx, enabled:enabled, sheet:!!sheet, review:!!(sheet&&sheet.querySelector('[data-icu-act="deepgo"]')), edit:!!(sheet&&sheet.querySelector('[data-icu-act="deepedit"]')), chk:(sheet?sheet.querySelectorAll('.icu-deep-chk').length:0) });
   `);
-  ok(c20.gatedDisabled && c20.enabled && c20.sheet && c20.review && c20.edit && c20.chk >= 5, `Deep Review gated until dx, then opens confirm sheet (disabled-before=${c20.gatedDisabled}; ${c20.chk}-item checklist)`);
+  ok(c20.noDx && c20.enabled && c20.sheet && c20.review && c20.edit && c20.chk >= 5, `Deep Review enabled with context, no working dx required, then opens the opt-in confirm sheet (${c20.chk}-item checklist)`);
 
   // 21) no usable context → AI is NOT offered (no "Review" button); confirm sheet steers to add data
   const c21 = await J(`
@@ -372,17 +372,17 @@ try {
   `);
   ok(c36.chev >= 1 && c36.clamp >= 1 && c36.collapsedDetail === 0 && c36.expandedDetail >= 1, `cards collapsed by default (chevrons=${c36.chev}, detail collapsed→expanded ${c36.collapsedDetail}→${c36.expandedDetail})`);
 
-  // 37) BUG C — "Advanced — skip ahead" unlocks Deep Review without a working dx
+  // 37) Deep Review is available WITHOUT a working diagnosis — enabled as soon as there is clinical
+  //     context (findings/labs/imaging/vitals); its output helps IDENTIFY the diagnosis.
   const c37 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"ADV",age:60,sex:"M"});
     ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
     ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
-    var before=root.querySelector('[data-icu-act="corrdeep"]'); var beforeDisabled=!!(before&&before.disabled);
-    var adv=root.querySelector('[data-icu-act="dxadv"]'); if(adv) adv.click();
-    var after=root.querySelector('[data-icu-act="corrdeep"]'); var afterEnabled=!!(after&&!after.disabled);
-    return JSON.stringify({ beforeDisabled:beforeDisabled, afterEnabled:afterEnabled });
+    var noDx=!ICU.state().patient.diagnosis && !ICU.state().patient.workingDx;
+    var btn=root.querySelector('[data-icu-act="corrdeep"]'); var enabled=!!(btn&&!btn.disabled);
+    return JSON.stringify({ noDx:noDx, enabled:enabled });
   `);
-  ok(c37.beforeDisabled && c37.afterEnabled, "Advanced skip-ahead unlocks Deep Review when no working dx chosen");
+  ok(c37.noDx && c37.enabled, "Deep Review available without a working diagnosis (enabled as soon as clinical context is present)");
 
   // 38) BUG E — ICU.ingestInfusion adds to the ICU Infusions section
   const c38 = await J(`

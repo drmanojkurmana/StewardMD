@@ -727,6 +727,18 @@
       });
     });
   }
+  // Remove (discharge) a shared patient from the unit. Deletes icuGroups/{gid}/patients/{pid}; the
+  // rules allow this only for INSTRUCTING roles (canInstruct) — the client also guards before calling.
+  function removePatient(gid, pid) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid || !pid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        if (!db || !currentUid()) return reject(new Error("firestore-unavailable"));
+        if (!canInstruct(_ctx.role)) return reject(new Error("forbidden-role"));
+        track(ptRef(db, gid, pid).delete()).then(function () { resolve(pid); }, reject);
+      });
+    });
+  }
 
   /* ---------------------------------------------------------------- timeline */
   // Append-only audit trail. Never updates/deletes.
@@ -873,6 +885,7 @@
     subscribePatient: subscribePatient,
     upsertPatient: upsertPatient,
     setReviewed: setReviewed,
+    removePatient: removePatient,
     // timeline / tasks
     addTimelineEvent: addTimelineEvent,
     subscribeTasks: subscribeTasks,

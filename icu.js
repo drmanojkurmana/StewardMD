@@ -2555,60 +2555,78 @@
       return '<div class="icu-card"><h3>Daily ICU Rounds <span class="icu-phase">' + done + "/" + ROUNDS_ITEMS.length + " done</span></h3>" + body + "</div>" +
         '<button class="icu-btn" data-icu-act="gensummary">' + ico("copy", "📋") + ' Generate Daily ICU Summary</button>';
     },
+    // Care Plan → Diagnosis. Owner-confirmed ordered flow (one door, forward-flowing):
+    //   1) Presenting complaints  2) Structured findings (single picker)  3) Clinical context (summary)
+    //   4) Deep clinical review (AI — enabled as soon as there IS context; NOT gated on a working dx)
+    //   5) Working diagnosis (deterministic differential / KB search → management brief + protocol).
     dx: function () {
       var p = _raw.patient;
       var pid = p._id || p.name || "cur";
       if (_dxPt !== pid) { _dxPt = pid; _dxShow = false; _dxWhy = {}; _dxAdvanced = false; _corrCache = {}; _corrErr = null; _corrBusy = false; }   // reset guided-dx + correlation state on patient switch (no cross-patient leak)
       if (icuDxFlowOn()) maybeAutoTour();   // first-use guided-diagnosis tour (per account; once)
-      var cc = p.complaints ? esc(p.complaints) : '<span style="color:var(--muted)">Not documented — add manually.</span>';
+      var cc = p.complaints ? esc(p.complaints) : '<span style="color:var(--muted)">Not documented yet.</span>';
       var dxTxt = p.diagnosis ? "<b>" + esc(p.diagnosis) + "</b>" : '<span style="color:var(--muted)">Not set</span>';
       var fchips = findChipsHTML(false);
-      // (smd_icu_dxflow) "Clinical context ready" → Find working diagnosis → deterministic differential.
-      var guided = "";
+      var hasDx = !!(p.workingDx || p.diagnosis);
+
+      // 1) Presenting complaints (FIRST).
+      var out = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("edit", "📝") + ' Presenting complaints</div>' +
+        '<p class="icu-dx-cc">' + cc + "</p>" +
+        '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("edit", "✎") + (p.complaints ? ' Edit complaints &amp; details' : ' Add presenting complaints') + '</button></div>';
+
+      // 2) Structured findings — the searchable picker. ONE "＋ Add findings" (documentation only).
+      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "🧾") + ' Structured findings</div>' +
+        (fchips || '<p class="icu-doc-sub" style="margin:0 0 8px">Add symptoms, signs, vitals, labs or imaging findings from a fast clinical picker. Documentation only — this does not change any diagnosis or scoring.</p>') +
+        '<button class="icu-btn" data-icu-act="findpick" style="margin-top:10px">' + ico("plus", "＋") + ' Add findings</button></div>';
+
       if (icuDxFlowOn()) {
         var present = (_raw.findings || []).filter(function (c) { return c.polarity !== "absent" && c.canonicalFindingId && c.canonicalFindingId.indexOf("note:") !== 0; }).length;
         var labN = Object.keys(_raw.labs.recent || {}).length, imgN = (_raw.imaging || []).filter(function (r) { return !r.hidden; }).length, vitN = latestVitalsSummary().length;
-        var hasCtx = present > 0 || labN > 0 || imgN > 0;
-        if (hasCtx) {
-          var summ = '<div class="icu-corr-meta">' + [present + " finding" + (present === 1 ? "" : "s"), labN + " lab" + (labN === 1 ? "" : "s"), imgN + " imaging", (vitN ? "vitals ✓" : "no vitals")].join(" · ") + "</div>";
-          // Deep Review shares the correlation cache/state; a cached result renders here too.
-          var dKey = (p._id || "cur") + ":" + correlationHash(buildClinicalContext()), dDeep = _corrCache[dKey];   // MUST match runCorrelationDeep's key
-          var dBlock = _corrBusy ? '<div class="icu-assist-msg" style="margin-top:10px">Running deep clinical review…</div>' : (dDeep ? '<div class="icu-corr-deep">' + corrDeepHTML(dDeep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
-          // Sequential gating (BUG C): Deep Review disabled until a working dx is identified/chosen;
-          // external evidence hidden until a dx is selected OR deep review completed. Advanced = escape.
-          var hasDx = !!(p.workingDx || p.diagnosis);
-          var deepDone = !!dDeep;
-          var canDeep = hasDx || _dxAdvanced;
-          var showExt = hasDx || deepDone || _dxAdvanced;
-          guided = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "✅") + ' Clinical context ready</div>' +
-            '<p class="icu-doc-sub" style="margin:0 0 4px">Use your findings with available labs, imaging and vitals to identify a working diagnosis.</p>' + summ +
-            '<button class="icu-btn" data-icu-act="finddx">' + ico("pulse", "🩺") + ' Find working diagnosis</button>' +
-            (_dxShow ? '<div style="margin-top:10px">' + dxDifferentialHTML() + "</div>" : "") +
-            '<button class="icu-btn ghost" data-icu-act="corrdeep" style="margin-top:10px"' + ((_corrBusy || !canDeep) ? " disabled" : "") + ' title="' + (!canDeep ? "First identify or choose a working diagnosis" : "") + '">' + ico("pulse", "✨") + " Deep clinical review</button>" +
-            (!canDeep ? '<p class="icu-doc-sub" style="margin:6px 0 0">First identify or choose a working diagnosis.</p>' : "") + dBlock +
-            (extEvidenceOn() && showExt ? '<button class="icu-btn ghost" data-icu-act="corrext" style="margin-top:8px">' + ico("search", "🔎") + " Find evidence beyond StewardMD</button>" : "") +
-            (deepDone ? '<p class="icu-doc-sub" style="margin-top:6px">Need guideline support? Use “Find evidence beyond StewardMD”.</p>' : "") +
-            (!hasDx && !_dxAdvanced ? '<button class="icu-btn ghost" data-icu-act="dxadv" style="margin-top:8px">' + ico("info", "⏩") + " Advanced — skip ahead</button>" : "") +
-            '<p class="icu-doc-sub" style="margin-top:8px">Deep review sends a de-identified context summary for advisory correlation — you confirm what is sent.</p></div>';
+        var usable = deepReviewUsable();   // findings / labs / imaging / vitals present
+        // Deep Review shares the correlation cache/state; a cached result renders here too.
+        var dKey = (p._id || "cur") + ":" + correlationHash(buildClinicalContext()), dDeep = _corrCache[dKey];   // MUST match runCorrelationDeep's key
+        var deepDone = !!dDeep;
+
+        // 3) Clinical context — a compact auto-summary of what is available for reasoning (no second
+        //    Add-findings door here; when empty it is a HINT, not a button).
+        if (usable) {
+          var summ = '<div class="icu-corr-meta">' + present + " finding" + (present === 1 ? "" : "s") + " · " + labN + " lab" + (labN === 1 ? "" : "s") + " · imaging " + (imgN ? "✓ (" + imgN + ")" : "—") + " · vitals " + (vitN ? "✓" : "—") + "</div>";
+          out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🧠") + ' Clinical context</div>' +
+            '<p class="icu-doc-sub" style="margin:0 0 6px">What is available for reasoning and deep review:</p>' + summ + '</div>';
         } else {
-          guided = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("info", "ⓘ") + ' No clinical context yet</div>' +
-            '<p class="icu-doc-sub" style="margin:0 0 8px">Add findings, labs or imaging to identify a working diagnosis.</p>' +
-            '<button class="icu-btn ghost" data-icu-act="findpick">' + ico("plus", "＋") + ' Add findings</button></div>';
+          out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("info", "🧠") + ' Clinical context</div>' +
+            '<p class="icu-doc-sub" style="margin:0">Add structured findings above, sync labs (Ward Sync), or add imaging / vitals to build the context used to identify a working diagnosis.</p></div>';
         }
+
+        // 4) Deep clinical review (AI) — PROMINENT, ENABLED as soon as there is usable context.
+        //    NOT gated on a working diagnosis: its output HELPS identify the diagnosis + correlate.
+        var dBlock = _corrBusy ? '<div class="icu-assist-msg" style="margin-top:10px">Running deep clinical review…</div>' : (dDeep ? '<div class="icu-corr-deep">' + corrDeepHTML(dDeep) + "</div>" : (_corrErr ? '<div class="icu-corr-deep">' + corrDeepHTML(_corrErr) + "</div>" : ""));
+        out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "✨") + ' Deep clinical review <span class="icu-phase">AI</span></div>' +
+          '<p class="icu-doc-sub" style="margin:0 0 8px">Correlates your findings with available labs, imaging and vitals against StewardMD’s trusted sources — to help identify the diagnosis, flag what doesn’t fit and suggest next checks. Advisory only; you confirm the de-identified context that is sent.</p>' +
+          '<button class="icu-btn" data-icu-act="corrdeep"' + ((_corrBusy || !usable) ? " disabled" : "") + (!usable ? ' title="Add findings, labs, imaging or vitals first"' : "") + '>' + ico("pulse", "✨") + " Deep clinical review</button>" +
+          (!usable ? '<p class="icu-doc-sub" style="margin:6px 0 0">Add findings, labs, imaging or vitals above to enable deep review.</p>' : "") + dBlock +
+          (extEvidenceOn() && (deepDone || hasDx) ? '<button class="icu-btn ghost" data-icu-act="corrext" style="margin-top:8px">' + ico("search", "🔎") + " Find evidence beyond StewardMD</button>" : "") +
+          (deepDone ? '<p class="icu-doc-sub" style="margin-top:6px">Use the review to choose a working diagnosis below, or find guideline support via “Find evidence beyond StewardMD”.</p>' : "") + '</div>';
       }
-      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("edit", "📝") + ' Presenting complaints</div>' +
-        '<p class="icu-dx-cc">' + cc + "</p>" +
-        '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("edit", "✎") + ' Edit complaints &amp; details</button></div>' +
-        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "🧾") + ' Structured findings</div>' +
-        (fchips || '<p class="icu-doc-sub" style="margin:0 0 8px">Add symptoms, signs, vitals, labs or imaging findings from a fast clinical picker. Documentation only — this does not change any diagnosis or scoring.</p>') +
-        '<button class="icu-btn" data-icu-act="findpick" style="margin-top:10px">' + ico("plus", "＋") + ' Add findings</button></div>' +
-        guided +
-        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🩺") + ' Working diagnosis</div>' +
-        '<p class="icu-dx-cur">' + dxTxt + "</p>" +
-        // Management considerations are surfaced ONLY once a working diagnosis is selected, and stay advisory.
-        (icuDxFlowOn() && p.diagnosis ? '<div class="icu-corr-note">' + ico("info", "ⓘ") + ' Management considerations for <b>' + esc(p.diagnosis) + '</b> are <b>advisory</b> — verify against local protocol, ICMR/guideline sources and your clinical judgement. Run <b>Deep clinical review</b> above for correlation and guideline-supported considerations.</div>' : "") +
-        '<button class="icu-btn" data-icu-act="dxsearch">' + ico("search", "🔎") + ' Search &amp; select diagnosis</button>' +
-        '<p class="icu-doc-sub" style="margin-top:8px">Searches StewardMD’s clinical knowledge base and sets the working diagnosis — clinician-editable, never auto-applied.</p></div>';
+
+      // 5) Working diagnosis — set from the review’s suggestion (deterministic differential) or KB
+      //    search. Once set, surface the advisory management brief + an applicable StewardMD protocol.
+      var wdx = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🩺") + ' Working diagnosis</div>' +
+        '<p class="icu-dx-cur">' + dxTxt + "</p>";
+      if (!hasDx) {
+        wdx += '<p class="icu-doc-sub" style="margin:0 0 8px">Use your findings, labs and vitals to generate a working differential, or search the knowledge base.</p>' +
+          (icuDxFlowOn() ? '<button class="icu-btn" data-icu-act="finddx">' + ico("pulse", "🩺") + ' Find working diagnosis</button>' +
+            (_dxShow ? '<div style="margin-top:10px">' + dxDifferentialHTML() + "</div>" : "") : "") +
+          '<button class="icu-btn ghost" data-icu-act="dxsearch" style="margin-top:8px">' + ico("search", "🔎") + ' Search &amp; select diagnosis</button>' +
+          '<p class="icu-doc-sub" style="margin-top:8px">Searches StewardMD’s clinical knowledge base and sets the working diagnosis — clinician-editable, never auto-applied.</p>';
+      } else {
+        // Management / treatment considerations surface ONLY once a working diagnosis is selected, and stay advisory.
+        wdx += (icuDxFlowOn() ? '<div class="icu-corr-note">' + ico("info", "ⓘ") + ' Management considerations for <b>' + esc(p.diagnosis) + '</b> are <b>advisory</b> — verify against local protocol, ICMR/guideline sources and your clinical judgement.</div>' : "") +
+          dxManagementHTML(p.diagnosis) +
+          '<button class="icu-btn ghost" data-icu-act="dxsearch" style="margin-top:10px">' + ico("search", "🔎") + ' Change working diagnosis</button>';
+      }
+      wdx += "</div>";
+      return out + wdx;
     },
     goals: function () {
       var g = _raw.goals || [];
@@ -2624,7 +2642,7 @@
         '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share case</button>' +
         '<button class="icu-btn ghost" data-icu-act="printsummary">' + ico("upload", "🖨") + ' Print / Export PDF</button>' +
         '<button class="icu-btn ghost" data-icu-act="discharge">' + ico("rounds", "📝") + ' Discharge Creator</button>' +
-        '</div>';
+        '</div>' + dischargePatientCard();
     },
     imaging: function () {
       if (!icuImagingOn()) return '<div class="icu-card"><p>Imaging Notes is turned off.</p></div>';
@@ -2669,7 +2687,7 @@
         "" /* classic coach link retired in v2 */ +
         (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") +
         '<button class="icu-btn ghost" data-icu-act="clearfindings">' + ico("trash", "🧹") + ' Clear current findings</button>' +
-        '</div>';
+        '</div>' + dischargePatientCard();
     }
   };
 
@@ -2948,6 +2966,7 @@
     list.forEach(function (p) { counts[p.sev]++; });
     var unread = counts.critical + counts.review;
     var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
+      '<button class="icu-v2-ubtn" data-icu-act="close" aria-label="Close ICU — back to home" title="Close ICU — back to home">' + ico("home", "⌂") + '</button>' +
       '<button class="icu-v2-ubtn" data-icu-act="icumore" aria-label="Settings">' + ico("settings", "⚙") + '</button>' +
       '<div class="icu-v2-utitle">My ICU patients<div class="icu-v2-usub">' + counts.total + ' patient' + (counts.total === 1 ? "" : "s") + ' · on this device</div></div>' +
       '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications' + (unread ? " (" + unread + " unread)" : "") + '">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
@@ -3308,6 +3327,7 @@
     // Phase 3: the bell badge = count of meaningful UNSEEN events (per-user last-seen), not raw acuity.
     var unread = grpActive() ? grpUnreadCount(grpNotifRows(), grpNotifSeen()) : (counts.critical + counts.review);
     var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
+      '<button class="icu-v2-ubtn" data-icu-act="close" aria-label="Close ICU — back to home" title="Close ICU — back to home">' + ico("home", "⌂") + '</button>' +
       '<button class="icu-v2-ubtn" data-icu-act="icumore" aria-label="Settings">' + ico("settings", "⚙") + '</button>' +
       '<button class="icu-v2-utitle icu-v2-gswitch" data-icu-act="grppick" aria-label="Switch or create a unit">' + esc(gname) + ' ▾<div class="icu-v2-usub">' + gsub + '</div></button>' +
       (grpActive() ? grpAvatarsHTML() : "") +
@@ -3561,13 +3581,28 @@
     var idOrEmail = grpVal("#grpAddId").trim(), role = grpVal("#grpAddRole") || "junior_resident";
     if (!idOrEmail) { if (window.toast) toast("Enter a StewardMD ID or email"); return; }
     closeForm();
+    var byEmail = idOrEmail.indexOf("@") >= 0;
     api.addByIdOrEmail(_grp.id, idOrEmail, role).then(function (doc) {
       if (window.toast) toast("Added " + ((doc && doc.name) || "doctor") + " to the unit");
     }, function (e) {
       var m = (e && e.message) || "";
-      if (window.toast) toast(m === "not-found" ? "No StewardMD doctor found for that ID/email" : "Couldn’t add — head/professor only");
+      // not-found = no directory entry for that email/ID. The email→doctor lookup (doctorDirectory/
+      // e_<emailHash>) is created on ensureIdentity — so a colleague who has never opened ICU has no
+      // entry yet. Guide the user with a clear, actionable message (email path gets a full sheet).
+      if (m === "not-found") { if (byEmail) grpAddNotFoundEmail(); else if (window.toast) toast("No StewardMD account found for that ID — check it, or use the invite link instead."); }
+      else if (window.toast) toast("Couldn’t add — head/professor only");
       _grpErr = null; if (ICU.isOpen()) paint();
     });
+  }
+  // No StewardMD account is registered for a typed email (no doctorDirectory/e_<hash> entry). Explain
+  // why and offer the invite link — reachable straight from here.
+  function grpAddNotFoundEmail() {
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="No StewardMD account found"><h3>' + ico("info", "ⓘ") + ' No StewardMD account found</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 12px">No StewardMD account found for that email — ask them to open <b>StewardMD → ICU</b> once (to get a StewardMD ID), then add them by ID or email. Or use the invite link instead.</p>' +
+      '<button class="icu-btn" data-icu-act="grpinvlink">' + ico("share", "🔗") + ' Invite by link instead</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Close</button></div>';
+    modalEl.classList.add("on");
   }
   // Generate a shareable invite LINK (admin only). The role is a LINK role (default JR) — a link
   // can never confer head/professor. On generate we copy the URL to the clipboard; a repeat tap
@@ -4820,6 +4855,67 @@
     _dxShow = false;
     if (window.toast) toast("Working diagnosis set — " + name);
   }
+  // ---- Working-dx → management brief + StewardMD protocol (advisory; verify) --------------------
+  // Resolve a working-dx NAME to its curated DX_MGMT brief. Direct name/synonym match first, then
+  // fall back to the KB search (name → id) — reuses the same DX_MGMT registry the reasoning engine uses.
+  function dxMgmtFor(name) {
+    if (!name || !window.DX_MGMT) return null;
+    var M = window.DX_MGMT, n = String(name).toLowerCase().trim(), id, m, i, syn;
+    for (id in M) {
+      if (!Object.prototype.hasOwnProperty.call(M, id)) continue;
+      m = M[id]; if (!m) continue;
+      if ((m.name || "").toLowerCase() === n) return { id: id, m: m };
+      syn = m.syn || []; for (i = 0; i < syn.length; i++) if (String(syn[i]).toLowerCase() === n) return { id: id, m: m };
+    }
+    try {
+      var hits = (window.SMD_REASON && SMD_REASON.search) ? SMD_REASON.search(name, 6) : [];
+      for (i = 0; i < hits.length; i++) if (hits[i] && M[hits[i].id] && (hits[i].name || "").toLowerCase() === n) return { id: hits[i].id, m: M[hits[i].id] };
+      for (i = 0; i < hits.length; i++) if (hits[i] && M[hits[i].id]) return { id: hits[i].id, m: M[hits[i].id] };
+    } catch (e) {}
+    return null;
+  }
+  // Map a working-dx name → an applicable Critical Care Protocol (index into PROTOCOLS). Word-boundary
+  // matched; sepsis is tested before generic "shock" so septic shock resolves to the sepsis protocol.
+  var PROTO_RE = [
+    /sepsis|septic/,
+    /undifferentiated shock|\bshock\b/,
+    /\bdka\b|\bhhs\b|ketoacidosis|hyperosmolar|diabetic keto/,
+    /gi bleed|gastrointestinal (?:h?a?emorrhage|bleed)|variceal|h[ae]matemesis|mel[ae]na|upper gi bleed/,
+    /coronary|\bacs\b|stemi|nstemi|myocardial infarct|unstable angina/,
+    /\bstroke\b|\bcva\b|cerebrovascular|cerebral infarct|isch[ae]mic stroke/,
+    /\bards\b|acute respiratory distress/,
+    /hyperkal/,
+    /status epilepticus|epilepticus/,
+    /pulmonary embol|\bpe\b/,
+    /anaphylax/
+  ];
+  function protocolIndexFor(name) {
+    if (!name) return -1;
+    var n = String(name).toLowerCase();
+    for (var i = 0; i < PROTO_RE.length; i++) { try { if (PROTO_RE[i].test(n)) return i; } catch (e) {} }
+    return -1;
+  }
+  // Advisory management brief + applicable StewardMD protocol for the selected working dx. Reuses the
+  // DX_MGMT registry (dxmgmt.js) + the existing protocolCard renderer / proto: toggle + protocols tab.
+  function dxManagementHTML(name) {
+    var out = "", mg = dxMgmtFor(name);
+    if (mg && mg.m) {
+      var m = mg.m;
+      out += '<div class="icu-corr-note" style="margin-top:10px"><div class="icu-corr-sub">Treatment considerations (advisory)</div>';
+      if (m.dx) out += '<p class="icu-doc-sub" style="margin:4px 0"><b>Confirm:</b> ' + esc(m.dx) + '</p>';
+      if (m.tx && m.tx.length) out += '<div class="icu-corr-sub" style="margin-top:6px">First-line management</div>' + m.tx.map(function (s) { return '<div class="icu-row"><span>• ' + esc(s) + '</span></div>'; }).join("");
+      if (m.ix && m.ix.length) out += '<div class="icu-corr-sub" style="margin-top:6px">Key investigations</div>' + m.ix.map(function (s) { return '<div class="icu-row"><span>• ' + esc(s) + '</span></div>'; }).join("");
+      if (m.dispo) out += '<p class="icu-doc-sub" style="margin:6px 0 0"><b>Disposition:</b> ' + esc(m.dispo) + '</p>';
+      if (m.src) out += '<p class="icu-doc-sub" style="margin:4px 0 0;color:var(--muted)">Source: ' + esc(m.src) + '</p>';
+      out += '</div>';
+    }
+    var pi = protocolIndexFor(name);
+    if (pi >= 0) {
+      out += '<div style="margin-top:10px"><div class="icu-sec-lbl">' + ico("siren", "🚨") + ' Applicable protocol</div>' + protocolCard(PROTOCOLS[pi], pi) +
+        '<button class="icu-btn ghost" data-icu-act="tab:protocols" style="margin-top:4px">' + ico("siren", "🚨") + ' Open all Critical Care Protocols</button></div>';
+    }
+    return out;
+  }
   function correlationMappedKeys(ev) {
     var keys = {};
     ev.img.forEach(function (c) { if (CONCEPT_KEY[c]) keys[CONCEPT_KEY[c]] = true; });
@@ -4926,7 +5022,7 @@
     { sel: '[data-icu-act="findpick"]', title: "Structured findings", text: "Add symptoms, signs and examination findings in a structured form." },
     { sel: '[data-icu-act="finddx"]', title: "Find working diagnosis", text: "StewardMD combines your findings with available labs, imaging, vitals and trends to suggest working diagnoses." },
     { sel: ".icu-dx-card", title: "You stay in control", text: "Select a suggested diagnosis, add your own, or continue without one — nothing is auto-applied." },
-    { sel: '[data-icu-act="corrdeep"]', title: "Deep Clinical Review", text: "Once you’ve chosen a working diagnosis, Deep review uses the context you confirm for advisory correlation, missing data and guideline-supported considerations. External evidence appears after this." }
+    { sel: '[data-icu-act="corrdeep"]', title: "Deep Clinical Review", text: "As soon as you have clinical context (findings, labs, imaging or vitals), Deep review uses the context you confirm for advisory correlation, missing data and guideline-supported considerations — and helps identify the working diagnosis. External evidence appears after this." }
   ];
   var _tourEl = null, _tourStep = 0, _tourSessionDone = false;
   function tourKey() { try { return "smd_icu_dxtour:" + ownerNow(); } catch (e) { return "smd_icu_dxtour:anon"; } }
@@ -5326,10 +5422,59 @@
       else if (window.toast) toast("Couldn't load that case");
     });
   }
+  // Shared removal: drop a saved case from the local roster + the cloud (best-effort). Returns the
+  // cloud-delete promise. Reused by the roster Delete AND the patient-workspace Discharge/remove.
+  function rosterRemove(id) { saveRoster(loadRoster().filter(function (x) { return x.id !== id; })); return cloudDel(id); }
   function deletePatient(id) {
-    saveRoster(loadRoster().filter(function (x) { return x.id !== id; }));
-    cloudDel(id).then(function () { openRoster(); });
+    rosterRemove(id).then(function () { openRoster(); });
     openRoster();                                            // optimistic refresh
+  }
+  // Destructive "Discharge / remove patient" card for the patient workspace (Documents + More).
+  // Solo → dischargept. Group → grprmpt, only when a patient is open AND the role can instruct.
+  function dischargePatientCard() {
+    if (grpActive()) {
+      var api = groupsApi();
+      var canDel = _grpPtId && api && api.canInstruct && api.canInstruct(_grp && _grp.myRole);
+      if (!canDel) return "";
+      return '<div class="icu-card"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("trash", "🗑") + ' Remove patient</div>' +
+        '<p class="icu-doc-sub" style="margin:0 0 10px">Remove this patient from the shared unit for everyone. This cannot be undone.</p>' +
+        '<button class="icu-btn ghost" data-icu-act="grprmpt" style="color:var(--danger);border-color:var(--danger)">' + ico("trash", "🗑") + ' Remove patient from unit</button></div>';
+    }
+    return '<div class="icu-card"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("trash", "🗑") + ' Discharge / remove patient</div>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">Remove this patient from your board and saved patients. This cannot be undone.</p>' +
+      '<button class="icu-btn ghost" data-icu-act="dischargept" style="color:var(--danger);border-color:var(--danger)">' + ico("trash", "🗑") + ' Discharge / remove patient</button></div>';
+  }
+  // Discharge / remove the CURRENT patient from the workspace → confirm → remove saved copy (if any)
+  // → clear the live state → back to the unit board. Solo mode (group has grpRemovePatient).
+  function dischargePatient() {
+    ensureModal();
+    var nm = (_raw.patient && _raw.patient.name) || "this patient";
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Discharge or remove patient"><h3>' + ico("trash", "🗑") + ' Discharge / remove ' + esc(nm) + '?</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 14px">Removes this patient from your ICU board and your saved patients on this device (and your cloud copy). This cannot be undone — export or share the case first if you need a record.</p>' +
+      '<button class="icu-btn" data-icu-act="dischargeptgo" style="background:var(--danger);background-image:none;box-shadow:none">' + ico("trash", "🗑") + ' Remove patient</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  function dischargePatientGo() {
+    var id = _raw.patient && _raw.patient._id;
+    if (id) rosterRemove(id);                                // remove saved copy locally + cloud (best-effort)
+    ICU.reset();
+    _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {};
+    closeForm(); _screen = "board"; _paintTop = true; paint();
+    if (window.toast) toast("Patient removed");
+  }
+  // Group mode: remove the shared patient doc from the unit (icu-collab; rules allow if canInstruct).
+  function grpRemovePatient() {
+    var api = groupsApi();
+    if (!api || !grpActive() || !_grpPtId || !api.removePatient) return;
+    if (!(api.canInstruct && api.canInstruct(_grp && _grp.myRole))) { if (window.toast) toast("Only instructing roles can remove a patient"); return; }
+    var nm = (_raw.patient && _raw.patient.name) || "this patient";
+    if (!window.confirm("Remove " + nm + " from " + ((_grp && _grp.name) || "the unit") + " for everyone? This cannot be undone.")) return;
+    var gid = _grp.id, pid = _grpPtId;
+    api.removePatient(gid, pid).then(function () {
+      if (window.toast) toast("Patient removed from unit");
+      grpTeardownPatient(); _screen = "board"; _paintTop = true; if (ICU.isOpen()) paint();
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paint(); });
   }
   function newPatient() {
     ICU.reset();
@@ -5521,6 +5666,9 @@
       case "patients": openRoster(); break;
       case "loadpt": loadPatient(arg); break;
       case "delpt": deletePatient(arg); break;
+      case "dischargept": dischargePatient(); break;         // solo: confirm-first discharge/remove of the current patient
+      case "dischargeptgo": dischargePatientGo(); break;
+      case "grprmpt": grpRemovePatient(); break;             // group: remove the shared patient doc (canInstruct)
       case "sharept": sharePatient(arg); break;
       case "sharecase": shareCase(); break;
       case "phiexportgo": { var _pe = _phiPending; _phiPending = null; closeForm(); if (_pe) _pe(); break; }   // KI-H6: confirmed PHI export
