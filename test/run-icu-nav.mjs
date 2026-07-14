@@ -2,7 +2,7 @@
  *
  * v2 is now THE ICU (icuV2On() is always true), so this drives + asserts the v2 UI:
  *  - opening ICU with no target lands on the unit BOARD (.icu-v2-board) with a bottom bar
- *    of Unit / Alerts / Team / Admit;
+ *    of Unit / Alerts / Team / Settings / Admit;
  *  - tapping a patient (openpt:*) opens the patient WORKSPACE with the segmented top-tabs
  *    (Overview / Monitoring / Care Plan / Rounds / Documents);
  *  - Monitoring shows the sub-nav pills (.icu-seg — Vitals first, incl. Trends) and the camera FAB (#icuSnap);
@@ -57,9 +57,9 @@ try {
   ok(await ev(`return !!document.querySelector('.icu-v2-board');`) === true, "opening ICU (no target) lands on the v2 unit board (.icu-v2-board)");
   ok(await ev(`return !document.getElementById('icuSnap');`) === true, "no camera FAB on the board (contextual — monitoring only)");
 
-  // 2) bottom bar: Unit / Alerts / Team / Admit
+  // 2) bottom bar: Unit / Alerts / Team / Settings / Admit
   const bar = JSON.parse(await ev(`return JSON.stringify(Array.prototype.map.call(document.querySelectorAll('.icu-v2-bottombar .icu-v2-navbtn'), function(b){ var s=b.querySelectorAll('span'); return (s[s.length-1]||{}).textContent||""; }));`));
-  ok(JSON.stringify(bar) === JSON.stringify(["Unit", "Alerts", "Team", "Admit"]), "bottom bar: " + bar.join(" / "));
+  ok(JSON.stringify(bar) === JSON.stringify(["Unit", "Alerts", "Team", "Settings", "Admit"]), "bottom bar: " + bar.join(" / "));
 
   // 3) tapping a patient opens the v2 patient WORKSPACE with the segmented top-tabs
   await clickAct(`openpt:cur`); await sleep(150);

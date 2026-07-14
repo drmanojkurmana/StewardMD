@@ -3203,7 +3203,6 @@
     var unread = counts.critical + counts.review;
     var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
       '<button class="icu-v2-ubtn" data-icu-act="close" aria-label="Close ICU — back to home" title="Close ICU — back to home">' + ico("home", "⌂") + '</button>' +
-      '<button class="icu-v2-ubtn" data-icu-act="icumore" aria-label="Settings">' + ico("settings", "⚙") + '</button>' +
       '<div class="icu-v2-utitle">My ICU patients<div class="icu-v2-usub">' + counts.total + ' patient' + (counts.total === 1 ? "" : "s") + ' · on this device</div></div>' +
       '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications' + (unread ? " (" + unread + " unread)" : "") + '">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
       '</div><div class="icu-v2-strip">' +
@@ -3256,10 +3255,12 @@
     var items = [
       { k: "board", label: "Unit", al: "Unit board", act: "icuboard", svg: "list", em: "🏥" },
       { k: "alerts", label: "Alerts", al: "Alerts / notifications", act: "icualerts", svg: "bell", em: "🔔" },
-      { k: "team", label: "Team", al: "Care team", act: "icuteam", svg: "user", em: "👥" }
+      { k: "team", label: "Team", al: "Care team", act: "icuteam", svg: "user", em: "👥" },
+      { k: "more", label: "Settings", al: "Settings & tools", act: "icumore", svg: "sliders", em: "⚙" }
     ];
     return '<nav class="icu-v2-bottombar" aria-label="ICU navigation">' + items.map(function (it) {
-      return '<button class="icu-v2-navbtn' + (_screen === it.k ? " on" : "") + '" data-icu-act="' + it.act + '" aria-label="' + esc(it.al) + '"' + (_screen === it.k ? ' aria-current="page"' : '') + '><span class="icu-v2-navic">' + ico(it.svg, it.em) + '</span><span>' + it.label + '</span></button>';
+      var on = (it.k === "more") ? (_screen === "patient" && _active === "more") : (_screen === it.k);
+      return '<button class="icu-v2-navbtn' + (on ? " on" : "") + '" data-icu-act="' + it.act + '" aria-label="' + esc(it.al) + '"' + (on ? ' aria-current="page"' : '') + '><span class="icu-v2-navic">' + ico(it.svg, it.em) + '</span><span>' + it.label + '</span></button>';
     }).join("") + '<button class="icu-v2-navbtn icu-v2-admit" data-icu-act="icuadmit" aria-label="Admit patient"><span class="icu-v2-admit-ic">' + ico("plus", "＋") + '</span><span>Admit</span></button></nav>';
   }
   // Notifications — deterministic acuity across the roster (local in Phase 1; the LIVE shared unit
@@ -3574,7 +3575,6 @@
     var unread = grpActive() ? grpUnreadCount(grpNotifRows(), grpNotifSeen()) : (counts.critical + counts.review);
     var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
       '<button class="icu-v2-ubtn" data-icu-act="close" aria-label="Close ICU — back to home" title="Close ICU — back to home">' + ico("home", "⌂") + '</button>' +
-      '<button class="icu-v2-ubtn" data-icu-act="icumore" aria-label="Settings">' + ico("settings", "⚙") + '</button>' +
       '<button class="icu-v2-utitle icu-v2-gswitch" data-icu-act="grppick" aria-label="Switch or create a unit">' + esc(gname) + ' ▾<div class="icu-v2-usub">' + gsub + '</div></button>' +
       (grpActive() ? grpAvatarsHTML() : "") +
       '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications' + (unread ? " (" + unread + " unread)" : "") + '">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
