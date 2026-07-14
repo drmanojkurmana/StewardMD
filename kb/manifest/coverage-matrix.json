@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3769,
+    "diseases": 3813,
     "diagnostic": 141,
-    "reference": 3628,
+    "reference": 3672,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,28 +30,28 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 10.5,
+    "severity": 10.4,
     "prognosis": 99.8,
     "diagnosticScoring": 3.7,
     "management": 3.7,
     "drugTherapy": 3.4,
     "dosing": 3.4,
-    "stewardship": 1.4
+    "stewardship": 1.3
   },
   "bySpecialty": {
     "Pulmonology": {
-      "total": 115,
+      "total": 125,
       "diagnostic": 20,
-      "reference": 95,
+      "reference": 105,
       "dims": {
-        "overview": 115,
-        "clinicalFeatures": 115,
-        "pathophysiology": 115,
-        "differential": 115,
-        "investigations": 115,
-        "redFlags": 115,
+        "overview": 125,
+        "clinicalFeatures": 125,
+        "pathophysiology": 125,
+        "differential": 125,
+        "investigations": 125,
+        "redFlags": 125,
         "severity": 28,
-        "prognosis": 114,
+        "prognosis": 124,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 18,
@@ -140,18 +140,18 @@
       }
     },
     "GI / Hepatology": {
-      "total": 220,
+      "total": 233,
       "diagnostic": 19,
-      "reference": 201,
+      "reference": 214,
       "dims": {
-        "overview": 220,
-        "clinicalFeatures": 220,
-        "pathophysiology": 220,
-        "differential": 219,
-        "investigations": 220,
-        "redFlags": 220,
+        "overview": 233,
+        "clinicalFeatures": 233,
+        "pathophysiology": 233,
+        "differential": 232,
+        "investigations": 233,
+        "redFlags": 233,
         "severity": 44,
-        "prognosis": 218,
+        "prognosis": 231,
         "diagnosticScoring": 19,
         "management": 19,
         "drugTherapy": 18,
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 182,
+      "total": 192,
       "diagnostic": 7,
-      "reference": 175,
+      "reference": 185,
       "dims": {
-        "overview": 182,
-        "clinicalFeatures": 182,
-        "pathophysiology": 182,
-        "differential": 181,
-        "investigations": 182,
-        "redFlags": 182,
+        "overview": 192,
+        "clinicalFeatures": 192,
+        "pathophysiology": 192,
+        "differential": 191,
+        "investigations": 192,
+        "redFlags": 192,
         "severity": 29,
-        "prognosis": 182,
+        "prognosis": 192,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -800,18 +800,18 @@
       }
     },
     "Breast": {
-      "total": 9,
+      "total": 20,
       "diagnostic": 0,
-      "reference": 9,
+      "reference": 20,
       "dims": {
-        "overview": 9,
-        "clinicalFeatures": 9,
-        "pathophysiology": 9,
-        "differential": 9,
-        "investigations": 9,
-        "redFlags": 9,
+        "overview": 20,
+        "clinicalFeatures": 20,
+        "pathophysiology": 20,
+        "differential": 20,
+        "investigations": 20,
+        "redFlags": 20,
         "severity": 0,
-        "prognosis": 9,
+        "prognosis": 20,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -1290,6 +1290,50 @@
       }
     },
     {
+      "id": "breast_cyst",
+      "name": "Breast cyst",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "breast_hamartoma",
+      "name": "Breast hamartoma",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "fat_necrosis_breast",
       "name": "Fat necrosis of the breast",
       "specialty": "Breast",
@@ -1334,8 +1378,52 @@
       }
     },
     {
+      "id": "fibrocystic_change",
+      "name": "Fibrocystic change",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "galactocele",
       "name": "Galactocele",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "gynaecomastia",
+      "name": "Gynaecomastia",
       "specialty": "Breast",
       "system": "Breast",
       "tier": "reference",
@@ -1400,7 +1488,51 @@
       }
     },
     {
+      "id": "juvenile_fibroadenoma",
+      "name": "Juvenile fibroadenoma",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "duct_ectasia",
+      "name": "Mammary duct ectasia",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mammary_duct_ectasia",
       "name": "Mammary duct ectasia",
       "specialty": "Breast",
       "system": "Breast",
@@ -1424,6 +1556,116 @@
     {
       "id": "mondor_disease",
       "name": "Mondor disease of the breast",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nipple_adenoma",
+      "name": "Nipple adenoma",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "periductal_mastitis",
+      "name": "Periductal mastitis",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "phyllodes_tumour",
+      "name": "Phyllodes tumour",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pseudoangiomatous_stromal_hyperplasia",
+      "name": "Pseudoangiomatous stromal hyperplasia",
+      "specialty": "Breast",
+      "system": "Breast",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "radial_scar",
+      "name": "Radial scar",
       "specialty": "Breast",
       "system": "Breast",
       "tier": "reference",
@@ -33872,6 +34114,72 @@
       }
     },
     {
+      "id": "anal_intraepithelial_neoplasia",
+      "name": "Anal intraepithelial neoplasia",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anal_skin_tag",
+      "name": "Anal skin tag",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anal_stenosis",
+      "name": "Anal stenosis",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "annular_pancreas",
       "name": "Annular pancreas",
       "specialty": "GI / Hepatology",
@@ -33898,6 +34206,28 @@
       "name": "Anorectal abscess",
       "specialty": "GI / Hepatology",
       "system": "GI / Anorectal / Surgery",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "anorectal_stricture",
+      "name": "Anorectal stricture",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -34840,6 +35170,28 @@
       }
     },
     {
+      "id": "descending_perineum",
+      "name": "Descending perineum syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dieulafoy_lesion",
       "name": "Dieulafoy lesion",
       "specialty": "GI / Hepatology",
@@ -35130,6 +35482,28 @@
       "name": "Extrahepatic portal vein obstruction / cavernoma",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "faecal_impaction",
+      "name": "Faecal impaction",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -35808,6 +36182,50 @@
       }
     },
     {
+      "id": "haemorrhoidal_thrombosis",
+      "name": "Haemorrhoidal thrombosis",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "haemorrhoids",
+      "name": "Haemorrhoids",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hemorrhoids",
       "name": "Haemorrhoids",
       "specialty": "GI / Hepatology",
@@ -36076,6 +36494,28 @@
       "name": "Hypertrophic pyloric stenosis",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hypertrophied_anal_papilla",
+      "name": "Hypertrophied anal papilla",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -36472,6 +36912,28 @@
       "name": "Jackhammer oesophagus (hypercontractile)",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "levator_syndrome",
+      "name": "Levator syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -37194,6 +37656,28 @@
       }
     },
     {
+      "id": "perianal_haematoma",
+      "name": "Perianal haematoma",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "plummer_vinson_syndrome",
       "name": "Plummer-Vinson syndrome",
       "specialty": "GI / Hepatology",
@@ -37484,6 +37968,50 @@
       "name": "Rapunzel syndrome (trichobezoar)",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rectal_intussusception",
+      "name": "Rectal intussusception",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rectocele",
+      "name": "Rectocele",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / Anorectal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -38756,6 +39284,28 @@
       }
     },
     {
+      "id": "acute_haemolytic_transfusion_reaction",
+      "name": "Acute haemolytic transfusion reaction",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion medicine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acute_hemolytic_transfusion_reaction",
       "name": "Acute haemolytic transfusion reaction",
       "specialty": "Hematology",
@@ -39002,6 +39552,28 @@
       "name": "Aldolase A deficiency",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "allergic_transfusion_reaction",
+      "name": "Allergic transfusion reaction",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion medicine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -39504,6 +40076,28 @@
       }
     },
     {
+      "id": "citrate_toxicity",
+      "name": "Citrate toxicity",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion medicine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "coagulation_disorders",
       "name": "Coagulation Disorders",
       "specialty": "Hematology",
@@ -39750,6 +40344,28 @@
       "name": "Cyclic neutropenia",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "delayed_haemolytic_transfusion_reaction",
+      "name": "Delayed haemolytic transfusion reaction",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion medicine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -40058,6 +40674,28 @@
       "name": "Factor XIII deficiency",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "febrile_non_haemolytic_transfusion_reaction",
+      "name": "Febrile non-haemolytic transfusion reaction",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion medicine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -40758,6 +41396,28 @@
       }
     },
     {
+      "id": "hyperhaemolysis_syndrome",
+      "name": "Hyperhaemolysis syndrome",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion medicine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "itp",
       "name": "Immune thrombocytopenia (ITP)",
       "specialty": "Hematology",
@@ -41026,6 +41686,28 @@
       "name": "Massive transfusion",
       "specialty": "Hematology",
       "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "massive_transfusion_coagulopathy",
+      "name": "Massive transfusion coagulopathy",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion medicine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -42474,10 +43156,54 @@
       }
     },
     {
+      "id": "transfusion_associated_graft_versus_host_disease",
+      "name": "Transfusion-associated graft-versus-host disease",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion medicine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "transfusion_associated_gvhd",
       "name": "Transfusion-associated graft-versus-host disease",
       "specialty": "Hematology",
       "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "transfusion_hyperkalaemia",
+      "name": "Transfusion-associated hyperkalaemia",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion medicine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -42522,6 +43248,28 @@
       "name": "Transfusion-related acute lung injury (TRALI)",
       "specialty": "Hematology",
       "system": "Haematology / Transfusion",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "transfusion_related_immunomodulation",
+      "name": "Transfusion-related immunomodulation",
+      "specialty": "Hematology",
+      "system": "Haematology / Transfusion medicine",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -71228,6 +71976,28 @@
       }
     },
     {
+      "id": "acute_interstitial_pneumonia",
+      "name": "Acute interstitial pneumonia",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "PHARYNGITIS",
       "name": "Acute Pharyngitis",
       "specialty": "Pulmonology",
@@ -71668,6 +72438,28 @@
       }
     },
     {
+      "id": "combined_pulmonary_fibrosis_and_emphysema",
+      "name": "Combined pulmonary fibrosis and emphysema",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "common_viral_respiratory_infections_other",
       "name": "Common Viral Respiratory Infections, Other Than COVID-19",
       "specialty": "Pulmonology",
@@ -71802,6 +72594,28 @@
     {
       "id": "croup",
       "name": "Croup (laryngotracheobronchitis)",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cryptogenic_organising_pneumonia",
+      "name": "Cryptogenic organising pneumonia",
       "specialty": "Pulmonology",
       "system": "Respiratory",
       "tier": "reference",
@@ -72350,6 +73164,28 @@
       }
     },
     {
+      "id": "idiopathic_pulmonary_fibrosis",
+      "name": "Idiopathic pulmonary fibrosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ild",
       "name": "Interstitial lung disease",
       "specialty": "Pulmonology",
@@ -72464,6 +73300,28 @@
       "name": "Lymphangioleiomyomatosis",
       "specialty": "Pulmonology",
       "system": "Respiratory / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lymphocytic_interstitial_pneumonia",
+      "name": "Lymphocytic interstitial pneumonia",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -72658,6 +73516,28 @@
       }
     },
     {
+      "id": "nonspecific_interstitial_pneumonia",
+      "name": "Nonspecific interstitial pneumonia",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "obstructive_sleep_apnoea",
       "name": "Obstructive sleep apnoea",
       "specialty": "Pulmonology",
@@ -72812,6 +73692,28 @@
       }
     },
     {
+      "id": "pleuroparenchymal_fibroelastosis",
+      "name": "Pleuroparenchymal fibroelastosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pneumoconiosis",
       "name": "Pneumoconiosis",
       "specialty": "Pulmonology",
@@ -72924,6 +73826,28 @@
     {
       "id": "pulmonary_alveolar_microlithiasis",
       "name": "Pulmonary alveolar microlithiasis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pulmonary_alveolar_proteinosis",
+      "name": "Pulmonary alveolar proteinosis",
       "specialty": "Pulmonology",
       "system": "Respiratory",
       "tier": "reference",
@@ -73098,6 +74022,28 @@
       }
     },
     {
+      "id": "pulmonary_langerhans_cell_histiocytosis",
+      "name": "Pulmonary Langerhans cell histiocytosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pulmonary_langerhans_histiocytosis",
       "name": "Pulmonary Langerhans cell histiocytosis",
       "specialty": "Pulmonology",
@@ -73188,6 +74134,28 @@
     {
       "id": "respiratory_acidosis",
       "name": "Respiratory acidosis",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "respiratory_bronchiolitis_interstitial_lung_disease",
+      "name": "Respiratory bronchiolitis interstitial lung disease",
       "specialty": "Pulmonology",
       "system": "Respiratory",
       "tier": "reference",
