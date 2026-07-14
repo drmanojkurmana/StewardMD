@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3333,
+    "diseases": 3389,
     "diagnostic": 141,
-    "reference": 3192,
+    "reference": 3248,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 11.9,
+    "severity": 11.7,
     "prognosis": 99.7,
     "diagnosticScoring": 4.2,
-    "management": 4.2,
-    "drugTherapy": 3.9,
-    "dosing": 3.9,
+    "management": 4.1,
+    "drugTherapy": 3.8,
+    "dosing": 3.8,
     "stewardship": 1.5
   },
   "bySpecialty": {
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 458,
+      "total": 474,
       "diagnostic": 20,
-      "reference": 438,
+      "reference": 454,
       "dims": {
-        "overview": 458,
-        "clinicalFeatures": 458,
-        "pathophysiology": 458,
-        "differential": 458,
-        "investigations": 458,
-        "redFlags": 458,
+        "overview": 474,
+        "clinicalFeatures": 474,
+        "pathophysiology": 474,
+        "differential": 474,
+        "investigations": 474,
+        "redFlags": 474,
         "severity": 48,
-        "prognosis": 458,
+        "prognosis": 474,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 200,
+      "total": 228,
       "diagnostic": 5,
-      "reference": 195,
+      "reference": 223,
       "dims": {
-        "overview": 200,
-        "clinicalFeatures": 200,
-        "pathophysiology": 200,
-        "differential": 200,
-        "investigations": 199,
-        "redFlags": 200,
+        "overview": 228,
+        "clinicalFeatures": 228,
+        "pathophysiology": 228,
+        "differential": 228,
+        "investigations": 227,
+        "redFlags": 228,
         "severity": 7,
-        "prognosis": 199,
+        "prognosis": 227,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -280,18 +280,18 @@
       }
     },
     "Nephrology": {
-      "total": 102,
+      "total": 114,
       "diagnostic": 6,
-      "reference": 96,
+      "reference": 108,
       "dims": {
-        "overview": 102,
-        "clinicalFeatures": 102,
-        "pathophysiology": 102,
-        "differential": 102,
-        "investigations": 102,
-        "redFlags": 102,
+        "overview": 114,
+        "clinicalFeatures": 114,
+        "pathophysiology": 114,
+        "differential": 114,
+        "investigations": 114,
+        "redFlags": 114,
         "severity": 13,
-        "prognosis": 102,
+        "prognosis": 114,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -5340,10 +5340,76 @@
       }
     },
     {
+      "id": "actinic_granuloma",
+      "name": "Actinic granuloma (annular elastolytic giant cell granuloma)",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "actinic_keratosis",
       "name": "Actinic Keratosis",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "actinic_prurigo",
+      "name": "Actinic prurigo",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "acute_generalized_exanthematous_pustulosis",
+      "name": "Acute generalised exanthematous pustulosis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -5454,6 +5520,50 @@
       "name": "Androgenetic alopecia",
       "specialty": "Dermatology",
       "system": "Dermatology / Trichology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "aquagenic_pruritus",
+      "name": "Aquagenic pruritus",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "aquagenic_urticaria",
+      "name": "Aquagenic urticaria",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -5606,6 +5716,28 @@
     {
       "id": "bowel_associated_dermatosis_arthritis_syndrome",
       "name": "Bowel-associated dermatosis-arthritis syndrome",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "brachioradial_pruritus",
+      "name": "Brachioradial pruritus",
       "specialty": "Dermatology",
       "system": "Dermatology",
       "tier": "reference",
@@ -5846,6 +5978,50 @@
       }
     },
     {
+      "id": "cholinergic_urticaria",
+      "name": "Cholinergic urticaria",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chronic_actinic_dermatitis",
+      "name": "Chronic actinic dermatitis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "clouston_syndrome",
       "name": "Clouston syndrome",
       "specialty": "Dermatology",
@@ -5870,6 +6046,28 @@
     {
       "id": "cold_panniculitis",
       "name": "Cold panniculitis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cold_urticaria",
+      "name": "Cold urticaria",
       "specialty": "Dermatology",
       "system": "Dermatology",
       "tier": "reference",
@@ -5956,6 +6154,28 @@
       }
     },
     {
+      "id": "cutaneous_sarcoidosis",
+      "name": "Cutaneous sarcoidosis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "squamous_cell_carcinoma_skin",
       "name": "Cutaneous Squamous Cell Carcinoma",
       "specialty": "Dermatology",
@@ -6004,6 +6224,28 @@
       "name": "Darier disease",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "delayed_pressure_urticaria",
+      "name": "Delayed pressure urticaria",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -6572,6 +6814,72 @@
       }
     },
     {
+      "id": "erythromelalgia",
+      "name": "Erythromelalgia",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "exfoliative_dermatitis",
+      "name": "Exfoliative dermatitis (erythroderma workup)",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "fixed_drug_eruption",
+      "name": "Fixed drug eruption",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "focal_dermal_hypoplasia",
       "name": "Focal dermal hypoplasia",
       "specialty": "Dermatology",
@@ -6728,6 +7036,28 @@
     {
       "id": "granuloma_faciale",
       "name": "Granuloma faciale",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "granulomatous_rosacea",
+      "name": "Granulomatous rosacea",
       "specialty": "Dermatology",
       "system": "Dermatology",
       "tier": "reference",
@@ -6906,6 +7236,28 @@
       "name": "Huriez syndrome",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hydroa_vacciniforme",
+      "name": "Hydroa vacciniforme",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7144,10 +7496,54 @@
       }
     },
     {
+      "id": "interstitial_granulomatous_dermatitis",
+      "name": "Interstitial granulomatous dermatitis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "junctional_epidermolysis_bullosa",
       "name": "Junctional epidermolysis bullosa",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "juvenile_spring_eruption",
+      "name": "Juvenile spring eruption",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7562,6 +7958,28 @@
       }
     },
     {
+      "id": "lichenoid_drug_eruption",
+      "name": "Lichenoid drug eruption",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "linear_iga_bullous_dermatosis",
       "name": "Linear IgA bullous dermatosis",
       "specialty": "Dermatology",
@@ -7676,6 +8094,28 @@
       "name": "Loricrin keratoderma",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lupus_miliaris_disseminatus_faciei",
+      "name": "Lupus miliaris disseminatus faciei",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -8530,6 +8970,72 @@
       }
     },
     {
+      "id": "photoallergic_dermatitis",
+      "name": "Photoallergic contact dermatitis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "photodistributed_drug_eruption",
+      "name": "Photodistributed drug eruption",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "phytophotodermatitis",
+      "name": "Phytophotodermatitis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pigmented_purpuric_dermatosis",
       "name": "Pigmented purpuric dermatosis",
       "specialty": "Dermatology",
@@ -8728,6 +9234,28 @@
       }
     },
     {
+      "id": "polymorphic_light_eruption",
+      "name": "Polymorphic light eruption",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "port_wine_stain",
       "name": "Port-Wine Stain",
       "specialty": "Dermatology",
@@ -8754,6 +9282,28 @@
       "name": "Post-inflammatory hyperpigmentation",
       "specialty": "Dermatology",
       "system": "Dermatology / Pigmentary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_hyperhidrosis",
+      "name": "Primary focal hyperhidrosis",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -9124,6 +9674,28 @@
       }
     },
     {
+      "id": "solar_urticaria",
+      "name": "Solar urticaria",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "steatocystoma_multiplex",
       "name": "Steatocystoma multiplex",
       "specialty": "Dermatology",
@@ -9324,6 +9896,50 @@
     {
       "id": "sweet_syndrome",
       "name": "Sweet syndrome (acute febrile neutrophilic dermatosis)",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "symmetrical_drug_related_intertriginous_exanthema",
+      "name": "Symmetrical drug-related intertriginous and flexural exanthema (SDRIFE)",
+      "specialty": "Dermatology",
+      "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dermographism",
+      "name": "Symptomatic dermographism",
       "specialty": "Dermatology",
       "system": "Dermatology",
       "tier": "reference",
@@ -44544,10 +45160,76 @@
       }
     },
     {
+      "id": "acute_phosphate_nephropathy",
+      "name": "Acute phosphate nephropathy",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "alport_syndrome",
       "name": "Alport syndrome",
       "specialty": "Nephrology",
       "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ammonium_acid_urate_stone",
+      "name": "Ammonium acid urate stones",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "analgesic_nephropathy",
+      "name": "Analgesic nephropathy",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -44962,6 +45644,28 @@
       }
     },
     {
+      "id": "calcium_oxalate_nephrolithiasis",
+      "name": "Calcium oxalate nephrolithiasis",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ckd",
       "name": "Chronic kidney disease",
       "specialty": "Nephrology",
@@ -45076,6 +45780,28 @@
       "name": "Contrast-induced nephropathy",
       "specialty": "Nephrology",
       "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cystine_nephrolithiasis",
+      "name": "Cystine nephrolithiasis",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -45230,6 +45956,28 @@
       "name": "EAST/SeSAME syndrome (KCNJ10)",
       "specialty": "Nephrology",
       "system": "Renal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "enteric_hyperoxaluria",
+      "name": "Enteric hyperoxaluria",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -46040,6 +46788,28 @@
       }
     },
     {
+      "id": "milk_alkali_syndrome",
+      "name": "Milk-alkali syndrome",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "MINIMAL_CHANGE_DISEASE",
       "name": "Minimal change disease",
       "specialty": "Nephrology",
@@ -46108,6 +46878,28 @@
     {
       "id": "myeloma_cast_nephropathy",
       "name": "Myeloma cast nephropathy",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nephrocalcinosis",
+      "name": "Nephrocalcinosis",
       "specialty": "Nephrology",
       "system": "Renal / Nephrology",
       "tier": "reference",
@@ -46480,6 +47272,28 @@
       }
     },
     {
+      "id": "renal_papillary_necrosis",
+      "name": "Renal papillary necrosis",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "renal_tubular_acidosis",
       "name": "Renal tubular acidosis",
       "specialty": "Nephrology",
@@ -46542,6 +47356,50 @@
         "management": true,
         "drugTherapy": true,
         "dosing": true,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "staghorn_calculus",
+      "name": "Staghorn calculus",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "struvite_nephrolithiasis",
+      "name": "Struvite (infection) nephrolithiasis",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
         "stewardship": false
       }
     },
@@ -46638,6 +47496,28 @@
       "name": "Ureteropelvic junction obstruction",
       "specialty": "Nephrology",
       "system": "Renal / Urology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "uric_acid_nephrolithiasis",
+      "name": "Uric acid nephrolithiasis",
+      "specialty": "Nephrology",
+      "system": "Renal / Nephrology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -47448,6 +48328,28 @@
       }
     },
     {
+      "id": "autonomic_dysreflexia",
+      "name": "Autonomic dysreflexia",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "autosomal_dominant_lateral_temporal_epilepsy",
       "name": "Autosomal dominant lateral temporal epilepsy",
       "specialty": "Neurology",
@@ -47562,6 +48464,28 @@
       "name": "Balo concentric sclerosis",
       "specialty": "Neurology",
       "system": "Nervous system / Neuroimmunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "baroreflex_failure",
+      "name": "Baroreflex failure",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -48046,6 +48970,28 @@
       "name": "CARASIL",
       "specialty": "Neurology",
       "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "carotid_sinus_hypersensitivity",
+      "name": "Carotid sinus hypersensitivity",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -49450,6 +50396,28 @@
       }
     },
     {
+      "id": "dopamine_beta_hydroxylase_deficiency",
+      "name": "Dopamine beta-hydroxylase deficiency",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dravet_syndrome",
       "name": "Dravet syndrome",
       "specialty": "Neurology",
@@ -50286,6 +51254,72 @@
       }
     },
     {
+      "id": "functional_seizures",
+      "name": "Functional (dissociative) seizures",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "functional_neurological_disorder",
+      "name": "Functional neurological disorder",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "functional_tremor",
+      "name": "Functional tremor",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gabab_receptor_encephalitis",
       "name": "GABA-B receptor encephalitis",
       "specialty": "Neurology",
@@ -50770,6 +51804,28 @@
       }
     },
     {
+      "id": "harlequin_syndrome",
+      "name": "Harlequin syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hcn1_encephalopathy",
       "name": "HCN1 developmental and epileptic encephalopathy",
       "specialty": "Neurology",
@@ -51060,6 +52116,28 @@
       "name": "Hereditary spastic paraplegia SPG7 (paraplegin)",
       "specialty": "Neurology",
       "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "holmes_adie_syndrome",
+      "name": "Holmes-Adie syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -54004,6 +55082,28 @@
       }
     },
     {
+      "id": "paroxysmal_sympathetic_hyperactivity",
+      "name": "Paroxysmal sympathetic hyperactivity",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "parsonage_turner_syndrome",
       "name": "Parsonage-Turner syndrome (neuralgic amyotrophy)",
       "specialty": "Neurology",
@@ -54400,6 +55500,50 @@
       }
     },
     {
+      "id": "postprandial_hypotension",
+      "name": "Postprandial hypotension",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "postural_orthostatic_tachycardia_syndrome",
+      "name": "Postural orthostatic tachycardia syndrome (POTS)",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "primary_and_metastatic_tumors_of",
       "name": "Primary and Metastatic Tumors of the Nervous System",
       "specialty": "Neurology",
@@ -54642,6 +55786,28 @@
       }
     },
     {
+      "id": "pure_autonomic_failure",
+      "name": "Pure autonomic failure",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pure_motor_lacunar_syndrome",
       "name": "Pure motor lacunar syndrome",
       "specialty": "Neurology",
@@ -54752,6 +55918,28 @@
       }
     },
     {
+      "id": "reflex_syncope",
+      "name": "Reflex (vasovagal) syncope",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "restless_legs_syndrome",
       "name": "Restless legs syndrome",
       "specialty": "Neurology",
@@ -54844,6 +56032,28 @@
       "name": "Rosette-forming glioneuronal tumour",
       "specialty": "Neurology",
       "system": "Oncology / Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ross_syndrome",
+      "name": "Ross syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -55240,6 +56450,28 @@
       "name": "SLC6A1-related disorder (GAT1)",
       "specialty": "Neurology",
       "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "small_fiber_neuropathy",
+      "name": "Small fibre neuropathy",
+      "specialty": "Neurology",
+      "system": "Nervous system / Autonomic",
       "tier": "reference",
       "caps": {
         "overview": true,
