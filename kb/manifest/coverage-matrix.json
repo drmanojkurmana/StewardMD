@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 3855,
+    "diseases": 3877,
     "diagnostic": 141,
-    "reference": 3714,
+    "reference": 3736,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -32,7 +32,7 @@
     "redFlags": 100,
     "severity": 10.2,
     "prognosis": 99.8,
-    "diagnosticScoring": 3.7,
+    "diagnosticScoring": 3.6,
     "management": 3.6,
     "drugTherapy": 3.3,
     "dosing": 3.3,
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 192,
+      "total": 214,
       "diagnostic": 7,
-      "reference": 185,
+      "reference": 207,
       "dims": {
-        "overview": 192,
-        "clinicalFeatures": 192,
-        "pathophysiology": 192,
-        "differential": 191,
-        "investigations": 192,
-        "redFlags": 192,
+        "overview": 214,
+        "clinicalFeatures": 214,
+        "pathophysiology": 214,
+        "differential": 213,
+        "investigations": 214,
+        "redFlags": 214,
         "severity": 29,
-        "prognosis": 192,
+        "prognosis": 214,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -39874,6 +39874,28 @@
       }
     },
     {
+      "id": "aa_amyloidosis",
+      "name": "AA Amyloidosis (Serum Amyloid A / Reactive Systemic Amyloidosis)",
+      "specialty": "Hematology",
+      "system": "Multisystem / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acquired_hemophilia",
       "name": "Acquired haemophilia A (factor VIII autoantibodies)",
       "specialty": "Hematology",
@@ -40446,6 +40468,94 @@
       }
     },
     {
+      "id": "apolipoprotein_ai_amyloidosis",
+      "name": "Apolipoprotein A-I Amyloidosis (AApoAI)",
+      "specialty": "Hematology",
+      "system": "Multisystem / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "apolipoprotein_aiv_amyloidosis",
+      "name": "Apolipoprotein A-IV Amyloidosis (AApoAIV)",
+      "specialty": "Hematology",
+      "system": "Multisystem / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "attr_amyloidosis",
+      "name": "ATTR Amyloidosis (Transthyretin Amyloidosis)",
+      "specialty": "Hematology",
+      "system": "Multisystem / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "benign_cephalic_histiocytosis",
+      "name": "Benign cephalic histiocytosis",
+      "specialty": "Hematology",
+      "system": "Skin / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "bernard_soulier_syndrome",
       "name": "Bernard-Soulier syndrome (GP Ib-IX-V)",
       "specialty": "Hematology",
@@ -40472,6 +40582,28 @@
       "name": "Beta Thalassaemia",
       "specialty": "Hematology",
       "system": "Haematological",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "beta2_microglobulin_amyloidosis",
+      "name": "Beta-2 Microglobulin Amyloidosis (Dialysis-Related Amyloidosis)",
+      "specialty": "Hematology",
+      "system": "Multisystem / Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -40864,6 +40996,28 @@
       }
     },
     {
+      "id": "congenital_dyserythropoietic_anaemia",
+      "name": "Congenital dyserythropoietic anaemia",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "congenital_dyserythropoietic_anemia",
       "name": "Congenital dyserythropoietic anaemia",
       "specialty": "Hematology",
@@ -40930,6 +41084,28 @@
       }
     },
     {
+      "id": "congenital_sideroblastic_anaemia",
+      "name": "Congenital sideroblastic anaemia",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "congenital_sideroblastic_anemia",
       "name": "Congenital sideroblastic anaemia",
       "specialty": "Hematology",
@@ -40978,6 +41154,28 @@
       "name": "Cyclic neutropenia",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dehydrated_hereditary_stomatocytosis",
+      "name": "Dehydrated hereditary stomatocytosis",
+      "specialty": "Hematology",
+      "system": "Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -41458,6 +41656,50 @@
       }
     },
     {
+      "id": "gelsolin_amyloidosis",
+      "name": "Gelsolin Amyloidosis (AGel, Finnish Type)",
+      "specialty": "Hematology",
+      "system": "Multisystem / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "generalised_eruptive_histiocytosis",
+      "name": "Generalised eruptive histiocytosis",
+      "specialty": "Hematology",
+      "system": "Skin / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "glanzmann_thrombasthenia",
       "name": "Glanzmann thrombasthenia (ITGA2B/ITGB3)",
       "specialty": "Hematology",
@@ -41898,6 +42140,50 @@
       }
     },
     {
+      "id": "hereditary_fibrinogen_amyloidosis",
+      "name": "Hereditary Fibrinogen A Alpha-Chain Amyloidosis (AFib)",
+      "specialty": "Hematology",
+      "system": "Multisystem / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hereditary_pyropoikilocytosis",
+      "name": "Hereditary pyropoikilocytosis",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "hereditary_spherocytosis",
       "name": "Hereditary spherocytosis",
       "specialty": "Hematology",
@@ -42074,6 +42360,28 @@
       }
     },
     {
+      "id": "indeterminate_cell_histiocytosis",
+      "name": "Indeterminate cell histiocytosis",
+      "specialty": "Hematology",
+      "system": "Skin / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "indolent_t_cell_lymphoproliferative_gi",
       "name": "Indolent T-cell lymphoproliferative disorder of the GI tract",
       "specialty": "Hematology",
@@ -42162,6 +42470,28 @@
       }
     },
     {
+      "id": "juvenile_xanthogranuloma",
+      "name": "Juvenile xanthogranuloma",
+      "specialty": "Hematology",
+      "system": "Skin / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lactate_dehydrogenase_deficiency",
       "name": "Lactate dehydrogenase deficiency",
       "specialty": "Hematology",
@@ -42228,6 +42558,50 @@
       }
     },
     {
+      "id": "leukocyte_chemotactic_factor_2_amyloidosis",
+      "name": "Leukocyte Chemotactic Factor 2 Amyloidosis (ALECT2)",
+      "specialty": "Hematology",
+      "system": "Multisystem / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "localised_amyloidosis",
+      "name": "Localised Amyloidosis",
+      "specialty": "Hematology",
+      "system": "Multisystem / Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lymphomatoid_granulomatosis",
       "name": "Lymphomatoid granulomatosis (EBV)",
       "specialty": "Hematology",
@@ -42254,6 +42628,28 @@
       "name": "Lymphomatoid papulosis",
       "specialty": "Hematology",
       "system": "Oncology / Haematologic malignancy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "lysozyme_amyloidosis",
+      "name": "Lysozyme Amyloidosis (ALys)",
+      "specialty": "Hematology",
+      "system": "Multisystem / Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -42562,6 +42958,28 @@
       "name": "MYH9-related disorder",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "necrobiotic_xanthogranuloma",
+      "name": "Necrobiotic xanthogranuloma",
+      "specialty": "Hematology",
+      "system": "Skin / Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -43178,6 +43596,28 @@
       "name": "Primary myelofibrosis",
       "specialty": "Hematology",
       "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "progressive_nodular_histiocytosis",
+      "name": "Progressive nodular histiocytosis",
+      "specialty": "Hematology",
+      "system": "Skin / Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -44054,6 +44494,28 @@
       }
     },
     {
+      "id": "x_linked_sideroblastic_anaemia",
+      "name": "X-linked sideroblastic anaemia",
+      "specialty": "Hematology",
+      "system": "Haematology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "x_linked_sideroblastic_anemia_ataxia",
       "name": "X-linked sideroblastic anaemia with ataxia (ABCB7)",
       "specialty": "Hematology",
@@ -44080,6 +44542,28 @@
       "name": "X-linked thrombocytopenia (WAS mild allelic variant)",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "xanthoma_disseminatum",
+      "name": "Xanthoma disseminatum",
+      "specialty": "Hematology",
+      "system": "Skin / Haematology",
       "tier": "reference",
       "caps": {
         "overview": true,
