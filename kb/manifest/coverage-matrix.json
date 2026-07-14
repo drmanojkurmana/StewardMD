@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 2493,
+    "diseases": 2549,
     "diagnostic": 141,
-    "reference": 2352,
+    "reference": 2408,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,12 +30,12 @@
     "differential": 99.8,
     "investigations": 99.9,
     "redFlags": 100,
-    "severity": 15.8,
+    "severity": 15.5,
     "prognosis": 99.6,
-    "diagnosticScoring": 5.7,
-    "management": 5.6,
-    "drugTherapy": 5.2,
-    "dosing": 5.2,
+    "diagnosticScoring": 5.5,
+    "management": 5.5,
+    "drugTherapy": 5.1,
+    "dosing": 5.1,
     "stewardship": 2
   },
   "bySpecialty": {
@@ -180,18 +180,18 @@
       }
     },
     "Oncology": {
-      "total": 57,
+      "total": 85,
       "diagnostic": 3,
-      "reference": 54,
+      "reference": 82,
       "dims": {
-        "overview": 57,
-        "clinicalFeatures": 57,
-        "pathophysiology": 57,
-        "differential": 57,
-        "investigations": 57,
-        "redFlags": 57,
+        "overview": 85,
+        "clinicalFeatures": 85,
+        "pathophysiology": 85,
+        "differential": 85,
+        "investigations": 85,
+        "redFlags": 85,
         "severity": 14,
-        "prognosis": 57,
+        "prognosis": 85,
         "diagnosticScoring": 3,
         "management": 3,
         "drugTherapy": 3,
@@ -460,18 +460,18 @@
       }
     },
     "Immunology": {
-      "total": 54,
+      "total": 67,
       "diagnostic": 0,
-      "reference": 54,
+      "reference": 67,
       "dims": {
-        "overview": 54,
-        "clinicalFeatures": 54,
-        "pathophysiology": 54,
-        "differential": 54,
-        "investigations": 54,
-        "redFlags": 54,
+        "overview": 67,
+        "clinicalFeatures": 67,
+        "pathophysiology": 67,
+        "differential": 67,
+        "investigations": 67,
+        "redFlags": 67,
         "severity": 1,
-        "prognosis": 54,
+        "prognosis": 67,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -560,18 +560,18 @@
       }
     },
     "Genetics": {
-      "total": 29,
+      "total": 44,
       "diagnostic": 0,
-      "reference": 29,
+      "reference": 44,
       "dims": {
-        "overview": 29,
-        "clinicalFeatures": 29,
-        "pathophysiology": 29,
-        "differential": 29,
-        "investigations": 29,
-        "redFlags": 29,
+        "overview": 44,
+        "clinicalFeatures": 44,
+        "pathophysiology": 44,
+        "differential": 44,
+        "investigations": 44,
+        "redFlags": 44,
         "severity": 0,
-        "prognosis": 29,
+        "prognosis": 44,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -20242,6 +20242,28 @@
       }
     },
     {
+      "id": "branchio_oculo_facial_syndrome",
+      "name": "Branchio-oculo-facial syndrome (TFAP2A)",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cardiofaciocutaneous_syndrome",
       "name": "Cardiofaciocutaneous syndrome",
       "specialty": "Genetics",
@@ -20396,6 +20418,94 @@
       }
     },
     {
+      "id": "fraser_syndrome",
+      "name": "Fraser syndrome (cryptophthalmos-syndactyly)",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "frontonasal_dysplasia",
+      "name": "Frontonasal dysplasia",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "goldenhar_syndrome",
+      "name": "Goldenhar syndrome (oculo-auriculo-vertebral spectrum)",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hemifacial_microsomia",
+      "name": "Hemifacial microsomia",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "johanson_blizzard_syndrome",
       "name": "Johanson-Blizzard syndrome",
       "specialty": "Genetics",
@@ -20462,6 +20572,28 @@
       }
     },
     {
+      "id": "klippel_feil_syndrome",
+      "name": "Klippel-Feil syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "megalencephaly_capillary_malformation",
       "name": "Megalencephaly-capillary malformation syndrome",
       "specialty": "Genetics",
@@ -20488,6 +20620,50 @@
       "name": "Meier-Gorlin syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "miller_syndrome",
+      "name": "Miller syndrome (postaxial acrofacial dysostosis, DHODH)",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "moebius_syndrome",
+      "name": "Moebius syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -20550,6 +20726,28 @@
       }
     },
     {
+      "id": "nager_syndrome",
+      "name": "Nager acrofacial dysostosis (SF3B4)",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pallister_killian_syndrome",
       "name": "Pallister-Killian syndrome",
       "specialty": "Genetics",
@@ -20594,10 +20792,54 @@
       }
     },
     {
+      "id": "pierre_robin_sequence",
+      "name": "Pierre Robin sequence",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pitt_hopkins_syndrome",
       "name": "Pitt-Hopkins syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "poland_syndrome",
+      "name": "Poland syndrome",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -20726,6 +20968,50 @@
       }
     },
     {
+      "id": "sprengel_deformity",
+      "name": "Sprengel deformity",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "treacher_collins_syndrome",
+      "name": "Treacher Collins syndrome (TCOF1)",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tuberous_sclerosis_complex",
       "name": "Tuberous sclerosis complex",
       "specialty": "Genetics",
@@ -20748,10 +21034,54 @@
       }
     },
     {
+      "id": "vacterl_association",
+      "name": "VACTERL association",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "weaver_syndrome",
       "name": "Weaver syndrome",
       "specialty": "Genetics",
       "system": "Genetics / Dysmorphology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "wildervanck_syndrome",
+      "name": "Wildervanck syndrome (cervico-oculo-acoustic)",
+      "specialty": "Genetics",
+      "system": "Genetics / Craniofacial",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28096,6 +28426,28 @@
       }
     },
     {
+      "id": "candle_syndrome",
+      "name": "CANDLE syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cartilage_hair_hypoplasia",
       "name": "Cartilage-hair hypoplasia",
       "specialty": "Immunology",
@@ -28294,6 +28646,50 @@
       }
     },
     {
+      "id": "dira_syndrome",
+      "name": "DIRA (deficiency of the IL-1 receptor antagonist)",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ditra_syndrome",
+      "name": "DITRA (deficiency of the IL-36 receptor antagonist)",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dock8_deficiency",
       "name": "DOCK8 deficiency (autosomal recessive hyper-IgE)",
       "specialty": "Immunology",
@@ -28364,6 +28760,28 @@
       "name": "Griscelli syndrome",
       "specialty": "Immunology",
       "system": "Genetics / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "h_syndrome",
+      "name": "H syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28646,6 +29064,28 @@
       }
     },
     {
+      "id": "majeed_syndrome",
+      "name": "Majeed syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mannose_binding_lectin_deficiency",
       "name": "Mannose-binding lectin deficiency",
       "specialty": "Immunology",
@@ -28756,10 +29196,98 @@
       }
     },
     {
+      "id": "nlrc4_macrophage_activation_syndrome",
+      "name": "NLRC4-associated autoinflammation with macrophage activation syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "nlrp12_autoinflammatory_syndrome",
+      "name": "NLRP12 autoinflammatory syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "omenn_syndrome",
       "name": "Omenn syndrome",
       "specialty": "Immunology",
       "system": "Genetics / Immunology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "otulipenia",
+      "name": "Otulipenia (OTULIN deficiency)",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "papa_syndrome",
+      "name": "PAPA syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28804,6 +29332,28 @@
       "name": "PFAPA Syndrome (Periodic Fever, Aphthous Stomatitis, Pharyngitis, Adenitis)",
       "specialty": "Immunology",
       "system": "Immunological",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "plaid_syndrome",
+      "name": "PLAID (PLCG2-associated antibody deficiency and immune dysregulation)",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -28888,10 +29438,54 @@
       }
     },
     {
+      "id": "savi_syndrome",
+      "name": "SAVI (STING-associated vasculopathy of infancy)",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "schnitzler_syndrome",
       "name": "Schnitzler syndrome",
       "specialty": "Immunology",
       "system": "Immunology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "singleton_merten_syndrome",
+      "name": "Singleton-Merten syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -29090,6 +29684,28 @@
       "name": "X-linked lymphoproliferative disease",
       "specialty": "Immunology",
       "system": "Immunology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "yao_syndrome",
+      "name": "Yao syndrome",
+      "specialty": "Immunology",
+      "system": "Immunology / Autoinflammatory",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -44266,10 +44882,76 @@
       }
     },
     {
+      "id": "adamantinoma_of_bone",
+      "name": "Adamantinoma of long bones",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "anal_cancer",
       "name": "Anal cancer",
       "specialty": "Oncology",
       "system": "Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "angiosarcoma",
+      "name": "Angiosarcoma",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "atypical_fibroxanthoma",
+      "name": "Atypical fibroxanthoma",
+      "specialty": "Oncology",
+      "system": "Dermatology / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -44376,6 +45058,28 @@
       }
     },
     {
+      "id": "brooke_spiegler_syndrome",
+      "name": "Brooke-Spiegler syndrome",
+      "specialty": "Oncology",
+      "system": "Dermatology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "carney_complex",
       "name": "Carney complex",
       "specialty": "Oncology",
@@ -44442,6 +45146,72 @@
       }
     },
     {
+      "id": "chondrosarcoma",
+      "name": "Chondrosarcoma",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chordoma",
+      "name": "Chordoma (brachyury)",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "clear_cell_sarcoma",
+      "name": "Clear cell sarcoma (EWSR1-ATF1, melanoma of soft parts)",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "colorectal_cancer",
       "name": "Colorectal Cancer",
       "specialty": "Oncology",
@@ -44455,6 +45225,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "conjunctival_melanoma",
+      "name": "Conjunctival melanoma",
+      "specialty": "Oncology",
+      "system": "Eye / Ophthalmic Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -44486,10 +45278,120 @@
       }
     },
     {
+      "id": "cutaneous_angiosarcoma",
+      "name": "Cutaneous angiosarcoma",
+      "specialty": "Oncology",
+      "system": "Dermatology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "cylindroma",
+      "name": "Cylindroma",
+      "specialty": "Oncology",
+      "system": "Dermatology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "desmoplastic_small_round_cell_tumor",
+      "name": "Desmoplastic small round cell tumour (EWSR1-WT1)",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dicer1_syndrome",
       "name": "DICER1 syndrome",
       "specialty": "Oncology",
       "system": "Oncology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ewing_sarcoma",
+      "name": "Ewing sarcoma (EWSR1-FLI1)",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sebaceous_carcinoma_eyelid",
+      "name": "Eyelid sebaceous gland carcinoma",
+      "specialty": "Oncology",
+      "system": "Eye / Ophthalmic Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -44882,10 +45784,54 @@
       }
     },
     {
+      "id": "leiomyosarcoma",
+      "name": "Leiomyosarcoma",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "li_fraumeni_syndrome",
       "name": "Li-Fraumeni syndrome",
       "specialty": "Oncology",
       "system": "Oncology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "liposarcoma",
+      "name": "Liposarcoma (WDLPS/DDLPS/myxoid/pleomorphic)",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -44948,10 +45894,76 @@
       }
     },
     {
+      "id": "malignant_peripheral_nerve_sheath_tumor",
+      "name": "Malignant peripheral nerve sheath tumour (NF1-associated)",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "malignant_rhabdoid_tumor",
+      "name": "Malignant rhabdoid tumour (SMARCB1)",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mccune_albright_syndrome",
       "name": "McCune-Albright syndrome",
       "specialty": "Oncology",
       "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "merkel_cell_carcinoma",
+      "name": "Merkel cell carcinoma",
+      "specialty": "Oncology",
+      "system": "Dermatology / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -44992,10 +46004,54 @@
       }
     },
     {
+      "id": "microcystic_adnexal_carcinoma",
+      "name": "Microcystic adnexal carcinoma",
+      "specialty": "Oncology",
+      "system": "Dermatology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "mutyh_associated_polyposis",
       "name": "MUTYH-associated polyposis",
       "specialty": "Oncology",
       "system": "Oncology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "myxofibrosarcoma",
+      "name": "Myxofibrosarcoma",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -45062,6 +46118,28 @@
       "name": "Nijmegen breakage syndrome",
       "specialty": "Oncology",
       "system": "Genetics / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ocular_surface_squamous_neoplasia",
+      "name": "Ocular surface squamous neoplasia",
+      "specialty": "Oncology",
+      "system": "Eye / Ophthalmic Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -45190,6 +46268,28 @@
       }
     },
     {
+      "id": "pilomatricoma",
+      "name": "Pilomatricoma",
+      "specialty": "Oncology",
+      "system": "Dermatology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "prostate_cancer",
       "name": "Prostate Disease (BPH & Cancer)",
       "specialty": "Oncology",
@@ -45278,6 +46378,28 @@
       }
     },
     {
+      "id": "rhabdomyosarcoma",
+      "name": "Rhabdomyosarcoma (embryonal/alveolar)",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "rothmund_thomson_syndrome",
       "name": "Rothmund-Thomson syndrome",
       "specialty": "Oncology",
@@ -45304,6 +46426,28 @@
       "name": "Salivary gland tumor",
       "specialty": "Oncology",
       "system": "Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sebaceous_carcinoma",
+      "name": "Sebaceous carcinoma",
+      "specialty": "Oncology",
+      "system": "Dermatology / Oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -45410,6 +46554,50 @@
       }
     },
     {
+      "id": "synovial_sarcoma",
+      "name": "Synovial sarcoma (SS18-SSX)",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "syringoma",
+      "name": "Syringoma",
+      "specialty": "Oncology",
+      "system": "Dermatology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "testicular_cancer",
       "name": "Testicular Cancer",
       "specialty": "Oncology",
@@ -45454,10 +46642,54 @@
       }
     },
     {
+      "id": "trichoepithelioma",
+      "name": "Trichoepithelioma",
+      "specialty": "Oncology",
+      "system": "Dermatology / Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "TUMOR_LYSIS_SYNDROME",
       "name": "Tumour lysis syndrome",
       "specialty": "Oncology",
       "system": "Oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "undifferentiated_pleomorphic_sarcoma",
+      "name": "Undifferentiated pleomorphic sarcoma",
+      "specialty": "Oncology",
+      "system": "Oncology / Sarcoma",
       "tier": "reference",
       "caps": {
         "overview": true,
