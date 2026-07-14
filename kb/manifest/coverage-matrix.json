@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 4627,
+    "diseases": 4656,
     "diagnostic": 141,
-    "reference": 4486,
+    "reference": 4515,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 657,
+      "total": 661,
       "diagnostic": 20,
-      "reference": 637,
+      "reference": 641,
       "dims": {
-        "overview": 657,
-        "clinicalFeatures": 657,
-        "pathophysiology": 657,
-        "differential": 657,
-        "investigations": 657,
-        "redFlags": 657,
+        "overview": 661,
+        "clinicalFeatures": 661,
+        "pathophysiology": 661,
+        "differential": 661,
+        "investigations": 661,
+        "redFlags": 661,
         "severity": 48,
-        "prognosis": 657,
+        "prognosis": 661,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 518,
+      "total": 531,
       "diagnostic": 10,
-      "reference": 508,
+      "reference": 521,
       "dims": {
-        "overview": 518,
-        "clinicalFeatures": 518,
-        "pathophysiology": 518,
-        "differential": 517,
-        "investigations": 518,
-        "redFlags": 518,
+        "overview": 531,
+        "clinicalFeatures": 531,
+        "pathophysiology": 531,
+        "differential": 530,
+        "investigations": 531,
+        "redFlags": 531,
         "severity": 33,
-        "prognosis": 516,
+        "prognosis": 529,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -280,18 +280,18 @@
       }
     },
     "Nephrology": {
-      "total": 146,
+      "total": 154,
       "diagnostic": 6,
-      "reference": 140,
+      "reference": 148,
       "dims": {
-        "overview": 146,
-        "clinicalFeatures": 146,
-        "pathophysiology": 146,
-        "differential": 146,
-        "investigations": 146,
-        "redFlags": 146,
+        "overview": 154,
+        "clinicalFeatures": 154,
+        "pathophysiology": 154,
+        "differential": 154,
+        "investigations": 154,
+        "redFlags": 154,
         "severity": 13,
-        "prognosis": 146,
+        "prognosis": 154,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -660,18 +660,18 @@
       }
     },
     "Skeletal": {
-      "total": 5,
+      "total": 7,
       "diagnostic": 0,
-      "reference": 5,
+      "reference": 7,
       "dims": {
-        "overview": 5,
-        "clinicalFeatures": 5,
-        "pathophysiology": 5,
-        "differential": 5,
-        "investigations": 5,
-        "redFlags": 5,
+        "overview": 7,
+        "clinicalFeatures": 7,
+        "pathophysiology": 7,
+        "differential": 7,
+        "investigations": 7,
+        "redFlags": 7,
         "severity": 0,
-        "prognosis": 5,
+        "prognosis": 7,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -1192,6 +1192,26 @@
         "redFlags": 1,
         "severity": 0,
         "prognosis": 1,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Hepatic": {
+      "total": 2,
+      "diagnostic": 0,
+      "reference": 2,
+      "dims": {
+        "overview": 2,
+        "clinicalFeatures": 2,
+        "pathophysiology": 2,
+        "differential": 2,
+        "investigations": 2,
+        "redFlags": 2,
+        "severity": 0,
+        "prognosis": 2,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -18146,10 +18166,54 @@
       }
     },
     {
+      "id": "carnitine_palmitoyltransferase_1_deficiency",
+      "name": "Carnitine palmitoyltransferase 1 deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Fatty acid oxidation",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cpt1_deficiency",
       "name": "Carnitine palmitoyltransferase 1 deficiency",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "carnitine_palmitoyltransferase_2_deficiency",
+      "name": "Carnitine palmitoyltransferase 2 deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Fatty acid oxidation",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -18766,6 +18830,28 @@
       "name": "Congenital hypothyroidism",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrinology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_hypothyroidism_dyshormonogenesis",
+      "name": "Congenital hypothyroidism due to dyshormonogenesis",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Thyroid",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -22502,6 +22588,28 @@
       }
     },
     {
+      "id": "long_chain_3_hydroxyacyl_coa_dehydrogenase_deficiency",
+      "name": "Long-chain 3-hydroxyacyl-CoA dehydrogenase deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Fatty acid oxidation",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lymphocytic_hypophysitis",
       "name": "Lymphocytic hypophysitis",
       "specialty": "Endocrine / Metabolic",
@@ -24548,6 +24656,28 @@
       }
     },
     {
+      "id": "permanent_neonatal_diabetes_mellitus",
+      "name": "Permanent neonatal diabetes mellitus",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Monogenic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "persistent_mullerian_duct_syndrome",
       "name": "Persistent mullerian duct syndrome (AMH/AMHR2)",
       "specialty": "Endocrine / Metabolic",
@@ -24834,6 +24964,28 @@
       }
     },
     {
+      "id": "polg_related_disorder",
+      "name": "POLG-related disorder",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Mitochondrial & peroxisomal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pompe_disease",
       "name": "Pompe disease",
       "specialty": "Endocrine / Metabolic",
@@ -25036,6 +25188,28 @@
       "name": "Primary bilateral macronodular adrenal hyperplasia",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_carnitine_deficiency",
+      "name": "Primary carnitine deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Fatty acid oxidation",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -25692,6 +25866,28 @@
       }
     },
     {
+      "id": "rhizomelic_chondrodysplasia_punctata_type_1",
+      "name": "Rhizomelic chondrodysplasia punctata type 1",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Mitochondrial & peroxisomal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "riboflavin_transporter_deficiency",
       "name": "Riboflavin transporter deficiency",
       "specialty": "Endocrine / Metabolic",
@@ -25806,6 +26002,28 @@
       "name": "Saccharopinuria",
       "specialty": "Endocrine / Metabolic",
       "system": "Metabolic / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "salla_disease",
+      "name": "Salla disease",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Mitochondrial & peroxisomal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -27144,6 +27362,28 @@
       }
     },
     {
+      "id": "transient_neonatal_diabetes_mellitus",
+      "name": "Transient neonatal diabetes mellitus",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Monogenic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "trimethylaminuria",
       "name": "Trimethylaminuria (fish-odour syndrome, FMO3)",
       "specialty": "Endocrine / Metabolic",
@@ -27386,6 +27626,28 @@
       }
     },
     {
+      "id": "very_long_chain_acyl_coa_dehydrogenase_deficiency",
+      "name": "Very long-chain acyl-CoA dehydrogenase deficiency",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / Fatty acid oxidation",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "vlcad_deficiency",
       "name": "Very-long-chain acyl-CoA dehydrogenase deficiency",
       "specialty": "Endocrine / Metabolic",
@@ -27584,6 +27846,28 @@
       }
     },
     {
+      "id": "wolcott_rallison_syndrome",
+      "name": "Wolcott-Rallison syndrome",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Monogenic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "wolfram_syndrome",
       "name": "Wolfram syndrome",
       "specialty": "Endocrine / Metabolic",
@@ -27654,6 +27938,28 @@
       "name": "X-linked adrenal hypoplasia congenita (NR0B1/DAX1)",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "x_linked_hypopituitarism",
+      "name": "X-linked hypopituitarism",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine / Pituitary",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -53016,6 +53322,50 @@
       }
     },
     {
+      "id": "crigler_najjar_syndrome_type_1",
+      "name": "Crigler-Najjar Syndrome Type 1",
+      "specialty": "Hepatic",
+      "system": "Hepatic / Bilirubin metabolism",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "crigler_najjar_syndrome_type_2",
+      "name": "Crigler-Najjar Syndrome Type 2",
+      "specialty": "Hepatic",
+      "system": "Hepatic / Bilirubin metabolism",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "apeced_syndrome",
       "name": "APECED syndrome",
       "specialty": "Immune system",
@@ -62630,6 +62980,72 @@
       }
     },
     {
+      "id": "11_beta_hydroxylase_deficiency",
+      "name": "11-beta-hydroxylase deficiency (congenital adrenal hyperplasia)",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Adrenal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "17_alpha_hydroxylase_deficiency",
+      "name": "17-alpha-hydroxylase/17,20-lyase deficiency (congenital adrenal hyperplasia)",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Adrenal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "3_beta_hydroxysteroid_dehydrogenase_deficiency",
+      "name": "3-beta-hydroxysteroid dehydrogenase type 2 deficiency (congenital adrenal hyperplasia)",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Adrenal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "glomerulonephritis",
       "name": "Acute glomerulonephritis",
       "specialty": "Nephrology",
@@ -62964,6 +63380,28 @@
       "name": "Atypical haemolytic uraemic syndrome",
       "specialty": "Nephrology",
       "system": "Renal / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "atypical_haemolytic_uraemic_syndrome",
+      "name": "Atypical Haemolytic Uraemic Syndrome",
+      "specialty": "Nephrology",
+      "system": "Renal / Haematological",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -64522,6 +64960,28 @@
       }
     },
     {
+      "id": "lipoid_congenital_adrenal_hyperplasia",
+      "name": "Lipoid congenital adrenal hyperplasia",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Adrenal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lipoprotein_glomerulopathy",
       "name": "Lipoprotein Glomerulopathy",
       "specialty": "Nephrology",
@@ -65186,6 +65646,72 @@
       "name": "Post-streptococcal Glomerulonephritis",
       "specialty": "Nephrology",
       "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_hyperoxaluria_type_1",
+      "name": "Primary Hyperoxaluria Type 1",
+      "specialty": "Nephrology",
+      "system": "Renal / Hepatic metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_hyperoxaluria_type_2",
+      "name": "Primary Hyperoxaluria Type 2",
+      "specialty": "Nephrology",
+      "system": "Renal / Hepatic metabolic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "primary_hyperoxaluria_type_3",
+      "name": "Primary Hyperoxaluria Type 3",
+      "specialty": "Nephrology",
+      "system": "Renal / Hepatic metabolic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -67210,6 +67736,28 @@
       "name": "Benign paroxysmal vertigo of childhood",
       "specialty": "Neurology",
       "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "beta_propeller_protein_associated_neurodegeneration",
+      "name": "Beta-propeller protein-associated neurodegeneration",
+      "specialty": "Neurology",
+      "system": "Neurology / Neurodegeneration",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -70462,6 +71010,28 @@
       }
     },
     {
+      "id": "fatty_acid_hydroxylase_associated_neurodegeneration",
+      "name": "Fatty acid hydroxylase-associated neurodegeneration",
+      "specialty": "Neurology",
+      "system": "Neurology / Neurodegeneration",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "febrile_infection_related_epilepsy_syndrome",
       "name": "Febrile infection-related epilepsy syndrome",
       "specialty": "Neurology",
@@ -72970,6 +73540,28 @@
       }
     },
     {
+      "id": "kufor_rakeb_syndrome",
+      "name": "Kufor-Rakeb syndrome",
+      "specialty": "Neurology",
+      "system": "Neurology / Neurodegeneration",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "lafora_disease",
       "name": "Lafora disease (progressive myoclonic epilepsy, EPM2A/NHLRC1)",
       "specialty": "Neurology",
@@ -74030,6 +74622,28 @@
       "name": "Misophonia",
       "specialty": "Neurology",
       "system": "Nervous system / Psychiatry",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mitochondrial_membrane_protein_associated_neurodegeneration",
+      "name": "Mitochondrial membrane protein-associated neurodegeneration",
+      "specialty": "Neurology",
+      "system": "Neurology / Neurodegeneration",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -99920,6 +100534,28 @@
       }
     },
     {
+      "id": "cranioectodermal_dysplasia",
+      "name": "Cranioectodermal dysplasia",
+      "specialty": "Skeletal",
+      "system": "Skeletal / Ciliopathy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "enchondromatosis",
       "name": "Enchondromatosis",
       "specialty": "Skeletal",
@@ -99946,6 +100582,28 @@
       "name": "Infantile malignant osteopetrosis",
       "specialty": "Skeletal",
       "system": "Skeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "short_rib_polydactyly_syndrome",
+      "name": "Short-rib polydactyly syndrome",
+      "specialty": "Skeletal",
+      "system": "Skeletal / Ciliopathy",
       "tier": "reference",
       "caps": {
         "overview": true,
