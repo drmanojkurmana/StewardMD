@@ -134,7 +134,7 @@ try {
   // ===== #17: empty K⁺ tile announces "not recorded", not a bare dash =====
   const c17 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"NOK",age:50,sex:"F"});   // no potassium
-    ICU.open();
+    ICU.open('overview');   // v2: land in the patient workspace (Overview) where the vital tiles render
     var tiles = [].slice.call(document.querySelectorAll('#icuRoot .icu-vc'));
     var kt = tiles.filter(function(t){ var a=t.getAttribute('aria-label')||""; return /^K/.test(a); })[0];
     return JSON.stringify({ found: !!kt, aria: kt ? kt.getAttribute('aria-label') : null, hasNa: kt ? !!kt.querySelector('.icu-vc-na[title="Not recorded"]') : false });

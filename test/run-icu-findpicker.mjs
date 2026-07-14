@@ -84,7 +84,7 @@ try {
 
   // 8) the picker button lives in Care Plan → Diagnosis and opens the modal sheet
   const t8 = await J(`
-    ICU.reset(); ICU.ingestPatient({name:"FP1",age:60,sex:"M"}); ICU.open();
+    ICU.reset(); ICU.ingestPatient({name:"FP1",age:60,sex:"M"}); ICU.open('dx');   // v2: patient workspace on Care Plan → Diagnosis
     var cp=document.querySelector('[data-icu-act="ws:careplan"]'); if(cp) cp.click();
     var btn=document.querySelector('[data-icu-act="findpick"]'); var hadBtn=!!btn; if(btn) btn.click();
     return JSON.stringify({ hadBtn:hadBtn, sheet:!!document.getElementById('icuFindSheet'), input:!!document.getElementById('icuFindQ') });
@@ -235,27 +235,29 @@ try {
   ok(t22.cleared === 0 && t22.restored.indexOf("headache:present") >= 0 && t22.restored.indexOf("fever:absent") >= 0,
     `chips save + reopen for the selected patient (cleared→${t22.cleared}, restored [${t22.restored.join(", ")}])`);
 
-  // 23) mobile bottom-sheet does NOT overlap the ICU bottom navigation: the sheet covers the viewport
-  //     bottom (where the nav sits) and the nav is never the topmost element while the picker is open
+  // 23) mobile bottom-sheet does NOT overlap the ICU navigation chrome: the sheet covers the viewport
+  //     bottom, the modal layer sits above the ICU root, and no v2 nav chrome (bottom bar / top-tabs /
+  //     sub-nav) is the topmost element at the bottom while the picker is open. (v2: the picker opens
+  //     from the Care Plan → Diagnosis workspace.)
   const t23 = await J(`
-    ICU.reset(); ICU.ingestPatient({name:"SMOKE-NAV",age:55,sex:"F"}); ICU.open();
+    ICU.reset(); ICU.ingestPatient({name:"SMOKE-NAV",age:55,sex:"F"}); ICU.open('dx');
     var cp=document.querySelector('[data-icu-act="ws:careplan"]'); if(cp) cp.click();
-    var nav=document.querySelector('.icu-tabs'), navZ = nav ? (+getComputedStyle(nav).zIndex||0) : -1;
+    var icuRoot=document.getElementById('icuRoot'); var rootZ = icuRoot ? (+getComputedStyle(icuRoot).zIndex||0) : -1;
     ICU.openFindingPicker();
     var sheet=document.getElementById('icuFindSheet'), modal=document.getElementById('icuModal');
     var modalZ = +getComputedStyle(modal).zIndex||0, sr = sheet ? sheet.getBoundingClientRect() : null;
-    var bx=Math.round(window.innerWidth/2), by=Math.round(window.innerHeight-4);   // bottom-centre = the nav's spot
+    var bx=Math.round(window.innerWidth/2), by=Math.round(window.innerHeight-4);   // bottom-centre = where any nav bar would sit
     var topEl=document.elementFromPoint(bx, by);
     return JSON.stringify({
-      navPresent: !!nav, sheetPresent: !!sheet,
+      rootPresent: !!icuRoot, sheetPresent: !!sheet,
       sheetReachesBottom: !!(sr && sr.bottom >= window.innerHeight-1),
-      modalAboveNav: modalZ > navZ,
+      modalAboveRoot: modalZ > rootZ,
       bottomTopIsModalLayer: !!(topEl && (topEl.closest('#icuFindSheet') || topEl.id==='icuModal')),
-      bottomTopIsNav: !!(topEl && topEl.closest('.icu-tabs'))
+      bottomTopIsNav: !!(topEl && (topEl.closest('.icu-v2-bottombar') || topEl.closest('.icu-v2-tabs') || topEl.closest('.icu-subnav')))
     });
   `);
-  ok(t23.navPresent && t23.sheetPresent && t23.sheetReachesBottom && t23.modalAboveNav && t23.bottomTopIsModalLayer && !t23.bottomTopIsNav,
-    `bottom-sheet does not overlap bottom nav (sheet reaches viewport bottom, modalZ>navZ, nav never topmost)`);
+  ok(t23.rootPresent && t23.sheetPresent && t23.sheetReachesBottom && t23.modalAboveRoot && t23.bottomTopIsModalLayer && !t23.bottomTopIsNav,
+    `bottom-sheet does not overlap ICU nav (sheet reaches viewport bottom, modal above the ICU root, no nav chrome topmost)`);
 
   console.log(fails === 0 ? "\nALL GREEN — ICU finding picker test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

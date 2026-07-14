@@ -57,7 +57,7 @@ try {
 
   // 2) button is enabled in the analysed correlation card; opens the confirm flow
   const btn = await ev(`${STUB}
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act="corranalyse"]').click();
@@ -113,7 +113,7 @@ try {
     ICU.ingestWardImaging({ patientId:"PZ", source:"Ward Sync", imaging:[{reportId:"Z1",description:"CT Chest",report:"IMPRESSION: consolidation."}] });
     window.__en = 0;
     window.SMD_AI.evidence = function(t){ window.__en++; return Promise.resolve(window.__en === 1 ? { error:"quota" } : { mode:"evidence", source:"PubMed (NCBI)", query:t, results:[{ title:"Recovered guideline", journal:"BMJ", year:"2020", pubtype:"Practice Guideline", url:"https://pubmed.ncbi.nlm.nih.gov/1/", pmid:"1" }] }); };
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act="corranalyse"]').click();

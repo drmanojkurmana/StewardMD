@@ -242,15 +242,11 @@
       return v === null ? true : v === "1";
     } catch (e) { return true; }
   }
-  // ICU v2 collaborative redesign (unit board + restyled workspace). Additive, flag-gated,
-  // DEFAULT OFF so the current UI is byte-for-byte unchanged. ?icuv2= overrides.
-  function icuV2On() {
-    try {
-      var q = (location.search.match(/[?&]icuv2=([^&]+)/) || [])[1];
-      if (q != null) return q === "1" || q === "on" || q === "true";
-      return localStorage.getItem("smd_icu_v2") === "1";
-    } catch (e) { return false; }
-  }
+  // ICU v2 (unit board + restyled workspace) is now THE ICU — the only dashboard (consolidation
+  // 2026-07). Kept as a function because it is called in many places, but ALWAYS true: the classic
+  // single-patient chrome is unreachable. The old smd_icu_v2 flag and ?icuv2= param are retained
+  // but have NO effect (harmless).
+  function icuV2On() { return true; }
   // ICU v2 real-time collaboration (Phase 2, smd_icu_groups). ADDITIVE + GATED: only when v2 is
   // on AND groups is on AND the collab module (icu-collab.js) loaded does the board/workspace read
   // LIVE from Firestore; otherwise the Phase-1 LOCAL path is byte-for-byte unchanged. DEFAULT OFF;
@@ -1941,7 +1937,7 @@
   function lwStop() { lwSet(null); _lwDraft = null; _lwBadge = 0; if (window.toast) toast("Lab Watch stopped."); openLabWatch(); }
   function lwPause() { var w = lwGet(); if (!w) return; w.paused = !w.paused; lwSet(w); if (window.toast) toast(w.paused ? "Lab Watch paused." : "Lab Watch resumed."); openLabWatch(); }
   function lwEdit() { var w = lwGet(); _lwDraft = w ? { analytes: (w.analytes || []).slice(), mode: w.mode, dur: w.dur, delivery: w.delivery, q: "" } : { analytes: [], mode: "meaningful", dur: 12, delivery: "inapp", q: "" }; openLabWatch(); }
-  function lwOpenAnalyte(k) { _lwHighlight = k; _lwBadge = 0; closeForm(); _active = "trends"; _ws = wsOf("trends"); _wsLast[_ws] = "trends"; paint(); setTimeout(function () { try { var el = rootEl && rootEl.querySelector('.icu-tr-card.lw-hi'); if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {} }, 60); }
+  function lwOpenAnalyte(k) { _lwHighlight = k; _lwBadge = 0; closeForm(); _screen = "patient"; _active = "trends"; _ws = wsOf("trends"); _wsLast[_ws] = "trends"; paint(); setTimeout(function () { try { var el = rootEl && rootEl.querySelector('.icu-tr-card.lw-hi'); if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {} }, 60); }
   // Clear an "until discharge" watch when a discharge summary is generated.
   function lwOnDischarge() { var w = lwGet(); if (w && w.untilDischarge) { lwSet(null); } }
 
@@ -2650,32 +2646,29 @@
     },
     more: function () {
       var n = rosterCount();
-      var v2 = icuV2On();
-      var v2Card = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("spark", "✨") + ' New ICU workspace (Beta)</div>' +
-        '<p class="icu-doc-sub" style="margin:0 0 10px">' + (v2
-          ? "You’re using the redesigned ICU — a unit patient board plus a cleaner patient workspace."
-          : "Try the redesigned ICU: a unit patient board, acuity triage, and a cleaner patient workspace. Reversible any time.") + '</p>' +
-        '<button class="icu-btn' + (v2 ? " ghost" : "") + '" data-icu-act="v2toggle">' + (v2
-          ? ico("refresh", "↩") + " On — tap to switch back to the classic ICU"
-          : ico("spark", "✨") + " Try the new ICU workspace") + '</button></div>';
-      // Group-mode toggle (Beta) — shown only once v2 is on (group mode needs BOTH flags). Lets a
-      // tester enable shared units on a device where there's no URL bar / console. Additive; with v2
-      // off this is empty, so the classic More tab is unchanged.
+      // The ONE ICU toggle: solo (this device) vs shared Group mode. v2 is now the only ICU, so
+      // there is no longer a separate "new/classic" toggle — just this. Flips smd_icu_groups + reloads.
       var grpOn = icuGroupsOn();
-      var grpCard = v2 ? ('<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Groups (Beta) — shared unit</div>' +
+      var grpCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Group mode</div>' +
         '<p class="icu-doc-sub" style="margin:0 0 10px">' + (grpOn
-          ? "Group mode is on — create or join a shared ICU unit; changes sync live to your team. Sign in required."
-          : "Turn on shared units: invite your team, admit patients together, and give round instructions as tracked tasks. Sign in required.") + '</p>' +
+          ? "Group mode is ON — shared units. Tap to switch to solo ICU."
+          : "Solo ICU (this device). Tap to turn on shared units — invite your team, shared patients & round tasks.") + '</p>' +
         '<button class="icu-btn' + (grpOn ? " ghost" : "") + '" data-icu-act="grptoggle">' + (grpOn
-          ? ico("refresh", "↩") + " On — tap to turn off group mode"
-          : ico("user", "👥") + " Turn on ICU Groups") + '</button></div>') : "";
-      return v2Card + grpCard +
-        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("more", "⋯") + ' More</div>' +
+          ? ico("refresh", "↩") + " Group mode ON — switch to solo ICU"
+          : ico("user", "👥") + " Turn on Group mode (shared units)") + '</button></div>';
+      // Every classic header-chip action folds in here (nothing lost): Patient details, Save/update,
+      // Saved patients, Ward Sync, Lab Watch (per-patient), Share case, and a guarded Clear.
+      return grpCard +
+        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("more", "⋯") + ' Patient &amp; tools</div>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Patient details</button>' +
+        '<button class="icu-btn ghost" data-icu-act="savept">' + ico("save", "💾") + ' Save / update this patient</button>' +
         '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients' + (n ? " (" + n + ")" : "") + '</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Ward Sync</button>' +
+        (labWatchOn() ? '<button class="icu-btn ghost" data-icu-act="labwatch">' + ico("bell", "🔔") + ' Lab Watch' + (lwActive() ? " (watching)" : "") + '</button>' : "") +
+        '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share case</button>' +
         '<button class="icu-btn ghost" data-icu-act="coach">' + ico("info", "ⓘ") + ' How the ICU workstation works</button>' +
         (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") +
+        '<button class="icu-btn ghost" data-icu-act="clearfindings">' + ico("trash", "🧹") + ' Clear current findings</button>' +
         '</div>';
     }
   };
@@ -2688,39 +2681,10 @@
     try { if (window.icon && window.ICONS && window.ICONS.has(name)) return window.icon(name, "icu-ico" + (cls ? " " + cls : "")); } catch (e) {}
     return '<span class="icu-emoji">' + (fallback || "") + "</span>";
   }
-  function renderHeader() {
-    var p = _raw.patient;
-    var meta = [];
-    if (p.age != null) meta.push("<b>" + esc(p.age) + "</b>y");
-    if (p.sex) meta.push("<b>" + esc(p.sex) + "</b>");
-    if (p.weightKg != null) meta.push("<b>" + esc(p.weightKg) + "</b>kg");
-    if (p.bed) meta.push("Bed <b>" + esc(p.bed) + "</b>");
-    if (p.icuDay != null) meta.push("ICU day <b>" + esc(p.icuDay) + "</b>");
-    if (p.hospital) meta.push(esc(p.hospital));
-    if (p.diagnosis) meta.push("<b>" + esc(p.diagnosis) + "</b>");
-    var n = rosterCount();
-    return '<div class="icu-hd"><div class="icu-hd-top">' +
-      '<div class="icu-hd-name">' + (p.name ? esc(p.name) : "ICU Patient") + (p.status ? ' · <span style="font-weight:600;color:var(--muted)">' + esc(p.status) + "</span>" : "") + "</div>" +
-      '<button class="icu-x" data-icu-act="coach" aria-label="How this works" title="How this works">' + ico("info", "ⓘ") + '</button>' +
-      '<button class="icu-x" data-icu-act="close" aria-label="Close ICU">' + ico("close", "✕") + '</button>' +
-      '</div><div class="icu-hd-meta">' + (meta.length ? meta.join("<span>·</span>") : "Tap Patient, then Enter data below") + "</div>" +
-      '<div class="icu-hd-actions">' +
-        '<button class="icu-chip" data-icu-act="edit:patient">' + ico("edit", "✎") + '<span>Patient</span></button>' +
-        '<button class="icu-chip" data-icu-act="savept">' + ico("save", "💾") + '<span>Save</span></button>' +
-        '<button class="icu-chip" data-icu-act="patients">' + ico("folder", "📋") + '<span>Patients' + (n ? " (" + n + ")" : "") + '</span></button>' +
-        (labWatchOn() ? '<button class="icu-chip' + (lwActive() ? " icu-chip-lw" : "") + '" data-icu-act="labwatch" aria-label="Lab Watch — monitor new labs for this patient">' + ico("bell", "🔔") + '<span>' + (lwActive() ? "Watching" : "Lab Watch") + (_lwBadge ? ' <b class="icu-lw-badge">' + _lwBadge + '</b>' : "") + '</span></button>' : "") +
-        (labWatchOn() ? '<button class="icu-chip" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — background lab alerts across your account">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>' : "") +
-        '<button class="icu-chip" data-icu-act="sharecase">' + ico("share", "📤") + '<span>Share</span></button>' +
-        '<button class="icu-chip" data-icu-act="clearfindings">' + ico("trash", "🧹") + '<span>Clear</span></button>' +
-        '<button class="icu-chip icu-chip-primary" data-icu-act="newpt">' + ico("plus", "＋") + '<span>New</span></button>' +
-      '</div></div>';
-  }
-  // Fixed 5-workspace bottom bar (was 10 crowded tabs). Highlights the current workspace.
-  function renderTabBar() {
-    return '<div class="icu-tabs icu-ws-bar">' + WORKSPACES.map(function (w) {
-      return '<button class="icu-tab ' + (w.id === _ws ? "on" : "") + '" data-icu-act="ws:' + w.id + '"><span class="ti">' + ico(w.svg, w.ic) + '</span><span class="tl">' + w.label + "</span></button>";
-    }).join("") + "</div>";
-  }
+  // (Retired 2026-07 consolidation) The classic renderHeader() 9-chip cluster and renderTabBar()
+  // bottom workspace bar are gone — v2 (paintV2) is the only chrome now. Every chip action they
+  // exposed lives on in v2: Patient/Save/Saved/Ward Sync/Lab Watch/Share/Clear in RENDER.more,
+  // New/Admit on the board bottom bar, and the workspace nav is renderV2TopTabs + renderSubNav.
   // Segmented sub-navigation of the current workspace's members (only when >1).
   function renderSubNav() {
     var w = wsById(_ws), mem = wsMembers(w); if (mem.length < 2) return "";
@@ -2852,23 +2816,7 @@
   var _paintTop = false;
   function paint() {
     if (!rootEl) return;
-    if (icuV2On()) { paintV2(); return; }   // v2 (smd_icu_v2): unit board + restyled workspace
-    // Preserve scroll across the full innerHTML rebuild. Without this, EVERY state change (ticking a
-    // rounds checkbox, marking imaging reviewed, ingesting data…) recreated the .icu-scroll container
-    // and snapped the list back to the top — so you couldn't work down the rounds checklist. Genuine
-    // context switches opt out via _paintTop; tab/workspace changes reset to 0 explicitly after paint.
-    var _osc = rootEl.querySelector(".icu-scroll");
-    var _keepTop = (_paintTop || !_osc) ? 0 : _osc.scrollTop;
-    _paintTop = false;
-    // Camera FAB is contextual — only where snapping a monitor/lab/ABG/vent is relevant.
-    var fab = isMonWs() ? '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' : "";
-    // Prominent, ALWAYS-visible "Lab Watch 24/7" FAB (sits just above the Snapshot camera button)
-    // that opens the account's background watched-patients list — alerts even when the app is closed.
-    var watchFab = labWatchOn()
-      ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>'
-      : "";
-    rootEl.innerHTML = renderHeader() + renderBody() + watchFab + fab + renderTabBar();
-    if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
+    paintV2();   // v2 (unit board + restyled workspace) is the only ICU now — classic chrome retired.
   }
 
   /* ================================================================ ICU v2
@@ -3071,8 +3019,8 @@
     rows.sort(function (a, b) { return (a.sev === "critical" ? 0 : 1) - (b.sev === "critical" ? 0 : 1); });
     var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Notifications</div><div class="icu-v2-shead-s">Only clinically meaningful events</div></div></div>';
     var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + (grpActive()
-      ? ' Derived from each patient’s latest values in this shared unit. Event-stream notifications (instructions, uploads, deterioration) arrive in a later phase.'
-      : ' Derived from each patient’s latest values on this device. Live team notifications from real events arrive in Phase 2.') + '</div>';
+      ? ' Derived from each patient’s latest values in this shared unit.'
+      : ' Derived from each patient’s latest values on this device.') + '</div>';
     var body = rows.length ? rows.map(function (r) {
       return '<button class="icu-v2-alert-row ' + r.sev + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '" aria-label="' + esc((r.sev === "critical" ? "Urgent: " : "") + r.title + ". " + (r.body || "") + " — open patient") + '">' +
         '<span class="icu-v2-alert-ic" aria-hidden="true">' + (r.sev === "critical" ? ico("warn", "⚠️") : ico("bell", "🔔")) + '</span>' +
@@ -3089,7 +3037,7 @@
     var member = '<div class="icu-v2-member"><span class="icu-v2-member-av">' + esc(v2Initials(name)) + '</span>' +
       '<span class="icu-v2-member-id"><span class="icu-v2-member-nm">' + esc(name) + '</span><span class="icu-v2-member-role">' + (email ? esc(email) : "Signed in on this device") + '</span></span>' +
       '<span class="icu-v2-member-state">You</span></div>';
-    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Multi-doctor units, roles (who can give instructions vs. update status) and a shared audit trail arrive in Phase 2 (smd_icu_groups).</div>';
+    var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Multi-doctor units — roles (who can give instructions vs. update status) and a shared audit trail — are available in Group mode. Turn it on in More.</div>';
     return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-tlist">' + member + note + '</div></div>';
   }
   /* ============================================================ ICU v2 GROUP MODE
@@ -5365,6 +5313,7 @@
   function applyState(d, id) {
     Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (d[k] != null) ? clone(d[k]) : clone(DEFAULT_STATE[k]); });
     STATE.patient._id = id;
+    _screen = "patient";   // v2: loading a saved patient opens its workspace (not the board)
     _lytesExp = {}; _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); _paintTop = true; paint();
   }
   function loadPatient(id) {
@@ -5470,7 +5419,6 @@
       case "icumore": _screen = "patient"; _active = "more"; _ws = "more"; _paintTop = true; paint(); break;
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
-      case "v2toggle": try { if (localStorage.getItem("smd_icu_v2") === "1") localStorage.removeItem("smd_icu_v2"); else localStorage.setItem("smd_icu_v2", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
       case "grptoggle": try { if (localStorage.getItem("smd_icu_groups") === "1") localStorage.removeItem("smd_icu_groups"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
       // ---- ICU v2 group mode (smd_icu_groups, Phase 2) — unit switcher / create / invite / tasks ----
       case "grppick": grpOpenPicker(); break;

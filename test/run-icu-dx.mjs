@@ -47,7 +47,7 @@ try {
   //    (single synchronous ev — onClick paints synchronously, so no debounce race)
   const r2 = await ev(`
     ICU.reset(); ICU.ingestPatient({name:"DXPT",age:52,sex:"M",complaints:"Fever x5 days, abdominal distension"});
-    ICU.open();
+    ICU.open('dx');
     var cp=document.querySelector('[data-icu-act="ws:careplan"]'); if(cp) cp.click();
     return JSON.stringify({ cc: (document.querySelector('.icu-dx-cc')||{}).textContent||"", stateCc: ICU.state().patient.complaints||"", sub: Array.prototype.map.call(document.querySelectorAll('.icu-subnav .icu-seg'),function(s){return s.textContent;}) });
   `);

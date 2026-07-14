@@ -121,7 +121,7 @@ try {
   ok(sum.unreviewedHidden === 0, "Daily Summary excludes not-reviewed / not-added imaging");
 
   // 9) UI render — reach Documents → Imaging, cards render, critical banner shown (single sync ev)
-  const ui = await ev(`ICU.open();
+  const ui = await ev(`ICU.open('imaging');
     var root=document.getElementById('icuRoot'); if(!root) return JSON.stringify({err:'no root'});
     var wsb=root.querySelector('[data-icu-act="ws:documents"]'); if(wsb) wsb.click();
     var seg=root.querySelector('[data-icu-act="tab:imaging"]'); if(seg) seg.click();
@@ -141,7 +141,7 @@ try {
   // 10) patient isolation + empty state
   const iso = await ev(`ICU.reset(); ICU.ingestPatient({name:"IMGPT2",age:40,sex:"F"});
     var im = ICU.state().imaging;
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     var wsb=root.querySelector('[data-icu-act="ws:documents"]'); if(wsb) wsb.click();
     var seg=root.querySelector('[data-icu-act="tab:imaging"]'); if(seg) seg.click();
     var body=root.textContent||"";
@@ -173,7 +173,7 @@ try {
     ICU.ingestWardImaging({ patientId:"PC", source:"Ward Sync", imaging:[
       {reportId:"C1",description:"USG Abdomen",report:"IMPRESSION: normal."},
       {reportId:"C2",description:"MRI Brain",report:"IMPRESSION: small vessel disease."}]});
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     var wsb=root.querySelector('[data-icu-act="ws:documents"]'); if(wsb) wsb.click();
     var seg=root.querySelector('[data-icu-act="tab:imaging"]'); if(seg) seg.click();
     var cards=root.querySelectorAll('.icu-img-card');

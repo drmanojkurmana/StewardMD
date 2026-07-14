@@ -159,7 +159,7 @@ try {
   const c18 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"UI",age:60,sex:"M"});
     [["alteredSensorium","AMS"],["seizure","Seizure"],["focalNeuroDeficit","Quadriparesis"]].forEach(function(p){ ICU._addFindingChip({canonicalFindingId:p[0],displayLabel:p[1],inReasoning:true},"manual_picker"); });
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('dx'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:careplan"]').click();
     var fbtn=root.querySelector('[data-icu-act="finddx"]'); var hadFind=!!fbtn; if(fbtn) fbtn.click();
     var cards=root.querySelectorAll('.icu-dx-card').length;
@@ -186,7 +186,7 @@ try {
   const c20 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"DR",age:60,sex:"M"});
     ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
-    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
     var gated=root.querySelector('[data-icu-act="corrdeep"]'); var gatedDisabled=!!(gated&&gated.disabled);
     ICU._pickWorkingDx("Seizure / epilepsy","deterministic_suggestion"); root.querySelector('[data-icu-act="ws:careplan"]').click();
     var btn=root.querySelector('[data-icu-act="corrdeep"]'); var enabled=!!(btn&&!btn.disabled); if(btn) btn.click();
@@ -278,7 +278,7 @@ try {
 
   // 29) coach-mark sits ABOVE the bottom nav (higher z + offset from bottom) — no overlap (test 20)
   const c29 = await J(clearTour + `
-    ICU.reset(); ICU.ingestPatient({name:"NAVX",age:60,sex:"M"}); ICU.open();
+    ICU.reset(); ICU.ingestPatient({name:"NAVX",age:60,sex:"M"}); ICU.open('dx');
     ICU._startTour(); var el=document.getElementById('icuTour'), nav=document.querySelector('.icu-tabs');
     var tz=+getComputedStyle(el).zIndex||0, nz=nav?(+getComputedStyle(nav).zIndex||0):-1, bottom=getComputedStyle(el).bottom;
     ${clearTour} return JSON.stringify({ aboveNav: tz>nz, offset: bottom });
@@ -296,7 +296,7 @@ try {
   // ===== Slice 5 — polish: advisory management gate + external-evidence + a11y =====
 
   // 31) management considerations appear ONLY after a working diagnosis is selected (advisory)
-  await ev(`ICU.reset(); ICU.ingestPatient({name:"MG",age:60,sex:"M"}); ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker"); ICU.open(); document.getElementById('icuRoot').querySelector('[data-icu-act="ws:careplan"]').click(); return 1;`);
+  await ev(`ICU.reset(); ICU.ingestPatient({name:"MG",age:60,sex:"M"}); ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker"); ICU.open('dx'); document.getElementById('icuRoot').querySelector('[data-icu-act="ws:careplan"]').click(); return 1;`);
   const mgBefore = await ev(`return /Management considerations for/.test(document.getElementById('icuRoot').textContent||"");`);
   await ev(`ICU._pickWorkingDx("Ischaemic stroke","deterministic_suggestion"); return 1;`);
   await sleep(160);
@@ -306,7 +306,7 @@ try {
   // 32) external-evidence — HIDDEN until a working dx, then reachable from the Care Plan flow (BUG C)
   const c32 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"EV",age:60,sex:"M"}); ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
-    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
     var hiddenBefore = !root.querySelector('[data-icu-act="corrext"]');
     ICU._pickWorkingDx("Seizure / epilepsy","deterministic_suggestion"); root.querySelector('[data-icu-act="ws:careplan"]').click();
     return JSON.stringify({ hiddenBefore: hiddenBefore, ext: !!root.querySelector('[data-icu-act="corrext"]') });
@@ -317,7 +317,7 @@ try {
   const c33 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"A11Y",age:60,sex:"M"});
     [["alteredSensorium","AMS"],["seizure","Seizure"],["focalNeuroDeficit","Quadriparesis"]].forEach(function(p){ ICU._addFindingChip({canonicalFindingId:p[0],displayLabel:p[1],inReasoning:true},"manual_picker"); });
-    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
     root.querySelector('[data-icu-act="finddx"]').click();
     var sel=root.querySelector('[data-icu-act^="dxpick"]'), why=root.querySelector('[data-icu-act^="dxwhy"]');
     ICU._openDeepReviewConfirm(); var sheet=document.getElementById('icuDeepSheet');
@@ -335,7 +335,7 @@ try {
     ICU._pickWorkingDx("Seizure / epilepsy","deterministic_suggestion");
     window.SMD_AI = window.SMD_AI || {}; window.__cc=0;
     window.SMD_AI.correlate = function(){ window.__cc++; return Promise.resolve({ mode:"correlate", correlation:{ clinicalCorrelation:"Advisory correlation text.", topConsiderations:["Status epilepticus"], whyFit:[],alternatives:[],whatDoesntFit:[],missing:[],redFlags:[],nextChecks:[],protocols:[] }}); };
-    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
     root.querySelector('[data-icu-act="corrdeep"]').click(); var dg=document.querySelector('#icuDeepSheet [data-icu-act="deepgo"]'); if(dg) dg.click();
     return 1;
   `);
@@ -350,7 +350,7 @@ try {
     ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
     ICU._pickWorkingDx("Seizure / epilepsy","deterministic_suggestion");
     window.SMD_AI.correlate = function(){ return new Promise(function(){}); };   // never settles
-    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
     root.querySelector('[data-icu-act="corrdeep"]').click(); var dg=document.querySelector('#icuDeepSheet [data-icu-act="deepgo"]'); if(dg) dg.click();
     return 1;
   `);
@@ -362,7 +362,7 @@ try {
   const c36 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"COL",age:60,sex:"M"});
     [["alteredSensorium","AMS"],["seizure","Seizure"],["focalNeuroDeficit","Quadriparesis"]].forEach(function(p){ ICU._addFindingChip({canonicalFindingId:p[0],displayLabel:p[1],inReasoning:true},"manual_picker"); });
-    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
     root.querySelector('[data-icu-act="finddx"]').click();
     var collapsedDetail = document.querySelectorAll('#icuRoot .icu-dx-why').length;
     var chev = document.querySelectorAll('#icuRoot .icu-dx-chev').length, clamp = document.querySelectorAll('#icuRoot .icu-clamp1').length;
@@ -376,7 +376,7 @@ try {
   const c37 = await J(`
     ICU.reset(); ICU.ingestPatient({name:"ADV",age:60,sex:"M"});
     ICU._addFindingChip({canonicalFindingId:"seizure",displayLabel:"Seizure",inReasoning:true},"manual_picker");
-    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
+    ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:careplan"]').click();
     var before=root.querySelector('[data-icu-act="corrdeep"]'); var beforeDisabled=!!(before&&before.disabled);
     var adv=root.querySelector('[data-icu-act="dxadv"]'); if(adv) adv.click();
     var after=root.querySelector('[data-icu-act="corrdeep"]'); var afterEnabled=!!(after&&!after.disabled);
@@ -389,7 +389,7 @@ try {
     ICU.reset(); ICU.ingestPatient({name:"INF",age:60,sex:"M"});
     var okAdd = ICU.ingestInfusion({ drug:"Noradrenaline", dose:0.125, unit:"mcg/kg/min", rateMlHr:6.6, concentration:"4 mg / 50 mL", weightKg:70, source:"calculator" });
     var f=(ICU.state().infusions||[])[0]||{};
-    ICU.open(); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:monitoring"]')&&root.querySelector('[data-icu-act="ws:monitoring"]').click(); var inf=root.querySelector('[data-icu-act="tab:infusions"]'); if(inf) inf.click();
+    ICU.open('dx'); var root=document.getElementById('icuRoot'); root.querySelector('[data-icu-act="ws:monitoring"]')&&root.querySelector('[data-icu-act="ws:monitoring"]').click(); var inf=root.querySelector('[data-icu-act="tab:infusions"]'); if(inf) inf.click();
     return JSON.stringify({ okAdd:okAdd, drug:f.drug, rate:f.rateMlHr, source:f.source, noEmpty: !/No infusions recorded/.test((root.textContent||"")) });
   `);
   ok(c38.okAdd && c38.drug === "Noradrenaline" && c38.rate === 6.6 && c38.source === "calculator" && c38.noEmpty, `ingestInfusion adds to dashboard (drug=${c38.drug}, rate=${c38.rate})`);
