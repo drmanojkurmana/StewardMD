@@ -311,17 +311,19 @@ export default {
   // Scheduled (cron) — distinguished by event.cron:
   //   "30 5 * * *"    → run the Medical Updates pipeline (crawl → dedup → AI-summarize new).
   //   "0 6 * * 1"     → build the weekly "This Week in Medicine" digest (Mon 06:00 UTC).
-  //   "*/15 * * * *"  → poll GHIS for consented watch-lab patients and push new labs.
+  //   "*/15 * * * *"  → poll GHIS for consented watch-lab patients AND sweep overdue ICU round tasks
+  //                     (push the whole unit) — covers units where no member's app is open.
   // All delegate to Pages Functions with the shared admin token. Best-effort.
   async scheduled(event, env, ctx) {
     if (!env.UPDATES_ADMIN_TOKEN) return;
-    let path = "/api/updates/sync";
-    if (event.cron === "*/15 * * * *") path = "/api/watch/run";
-    else if (event.cron === "0 6 * * 1") path = "/api/updates/digest";
-    const run = fetch("https://stewardmd.in" + path, {
-      method: "POST", headers: { "X-Admin-Token": env.UPDATES_ADMIN_TOKEN },
-    }).catch(() => {});
-    ctx.waitUntil(run);
+    const post = (p) => fetch("https://stewardmd.in" + p, { method: "POST", headers: { "X-Admin-Token": env.UPDATES_ADMIN_TOKEN } }).catch(() => {});
+    if (event.cron === "*/15 * * * *") {
+      ctx.waitUntil(post("/api/watch/run"));               // watch-lab: poll GHIS + push new labs
+      ctx.waitUntil(post("/api/push/task-overdue-run"));   // ICU: escalate overdue round tasks → push the unit
+      return;
+    }
+    const path = event.cron === "0 6 * * 1" ? "/api/updates/digest" : "/api/updates/sync";
+    ctx.waitUntil(post(path));
   },
 
   async fetch(request, env, ctx) {
