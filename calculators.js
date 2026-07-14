@@ -3441,6 +3441,49 @@
       var n=Number(v.type);
       var b=n<=2?"Suggests constipation / slow transit":n<=4?"Normal stool form":n===5?"Tending towards loose / lacking fibre":"Suggests diarrhoea / rapid transit";
       return { v:"Type "+n, u:"", i:b+". Ref: Lewis & Heaton, Scand J Gastroenterol 1997 (Bristol)." };
+    } },
+
+  { id:"apache2", cat:"Critical care", icon:"🚨", title:"APACHE II Score",
+    desc:"ICU severity of illness and mortality estimate (worst values in first 24 h).",
+    inputs:[
+      { id:"temp", label:"Temperature (°C, core)", type:"select", opts:[{v:"4",t:"≥ 41"},{v:"3",t:"39–40.9"},{v:"1",t:"38.5–38.9"},{v:"0",t:"36–38.4"},{v:"1b",t:"34–35.9"},{v:"2",t:"32–33.9"},{v:"3b",t:"30–31.9"},{v:"4b",t:"≤ 29.9"}] },
+      { id:"map", label:"Mean arterial pressure (mmHg)", type:"select", opts:[{v:"4",t:"≥ 160"},{v:"3",t:"130–159"},{v:"2",t:"110–129"},{v:"0",t:"70–109"},{v:"2b",t:"50–69"},{v:"4b",t:"≤ 49"}] },
+      { id:"hr", label:"Heart rate", type:"select", opts:[{v:"4",t:"≥ 180"},{v:"3",t:"140–179"},{v:"2",t:"110–139"},{v:"0",t:"70–109"},{v:"2b",t:"55–69"},{v:"3b",t:"40–54"},{v:"4b",t:"≤ 39"}] },
+      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"4",t:"≥ 50"},{v:"3",t:"35–49"},{v:"1",t:"25–34"},{v:"0",t:"12–24"},{v:"1b",t:"10–11"},{v:"2",t:"6–9"},{v:"4b",t:"≤ 5"}] },
+      { id:"oxy", label:"Oxygenation", type:"select", opts:[{v:"0",t:"FiO₂≥0.5: A-a<200, or FiO₂<0.5: PaO₂>70"},{v:"1",t:"FiO₂<0.5: PaO₂ 61–70"},{v:"2",t:"FiO₂≥0.5: A-a 200–349"},{v:"3",t:"FiO₂≥0.5: A-a 350–499, or FiO₂<0.5: PaO₂ 55–60"},{v:"4",t:"FiO₂≥0.5: A-a ≥500, or FiO₂<0.5: PaO₂ <55"}] },
+      { id:"ph", label:"Arterial pH", type:"select", opts:[{v:"4",t:"≥ 7.7"},{v:"3",t:"7.6–7.69"},{v:"1",t:"7.5–7.59"},{v:"0",t:"7.33–7.49"},{v:"2",t:"7.25–7.32"},{v:"3b",t:"7.15–7.24"},{v:"4b",t:"< 7.15"}] },
+      { id:"na", label:"Serum sodium (mmol/L)", type:"select", opts:[{v:"4",t:"≥ 180"},{v:"3",t:"160–179"},{v:"2",t:"155–159"},{v:"1",t:"150–154"},{v:"0",t:"130–149"},{v:"2b",t:"120–129"},{v:"3b",t:"111–119"},{v:"4b",t:"≤ 110"}] },
+      { id:"k", label:"Serum potassium (mmol/L)", type:"select", opts:[{v:"4",t:"≥ 7"},{v:"3",t:"6–6.9"},{v:"1",t:"5.5–5.9"},{v:"0",t:"3.5–5.4"},{v:"1b",t:"3–3.4"},{v:"2",t:"2.5–2.9"},{v:"4b",t:"< 2.5"}] },
+      { id:"cr", label:"Serum creatinine (mg/dL)", type:"select", opts:[{v:"4",t:"≥ 3.5"},{v:"3",t:"2–3.4"},{v:"2",t:"1.5–1.9"},{v:"0",t:"0.6–1.4"},{v:"2b",t:"< 0.6"}] },
+      { id:"arf", label:"Acute renal failure (doubles creatinine points)", type:"check" },
+      { id:"hct", label:"Haematocrit (%)", type:"select", opts:[{v:"4",t:"≥ 60"},{v:"2",t:"50–59.9"},{v:"1",t:"46–49.9"},{v:"0",t:"30–45.9"},{v:"2b",t:"20–29.9"},{v:"4b",t:"< 20"}] },
+      { id:"wbc", label:"White cell count (×10³/mm³)", type:"select", opts:[{v:"4",t:"≥ 40"},{v:"2",t:"20–39.9"},{v:"1",t:"15–19.9"},{v:"0",t:"3–14.9"},{v:"2b",t:"1–2.9"},{v:"4b",t:"< 1"}] },
+      { id:"gcs", label:"Glasgow Coma Scale (3–15)", type:"number", step:"1" },
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"≤ 44"},{v:"2",t:"45–54"},{v:"3",t:"55–64"},{v:"5",t:"65–74"},{v:"6",t:"≥ 75"}] },
+      { id:"chronic", label:"Severe organ insufficiency / immunocompromise", type:"select", opts:[{v:"0",t:"None"},{v:"2",t:"Present, elective postoperative"},{v:"5",t:"Present, non-operative or emergency postoperative"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.gcs)||v.gcs<3||v.gcs>15) return ERR;
+      function P(x){ return Math.abs(Number(String(x).replace(/b/g,""))); }
+      var crPts=P(v.cr)*(v.arf?2:1);
+      var s=P(v.temp)+P(v.map)+P(v.hr)+P(v.rr)+P(v.oxy)+P(v.ph)+P(v.na)+P(v.k)+crPts+P(v.hct)+P(v.wbc)+(15-v.gcs)+Number(v.age)+Number(v.chronic);
+      var mort=s<=4?"~4%":s<=9?"~8%":s<=14?"~15%":s<=19?"~25%":s<=24?"~40%":s<=29?"~55%":s<=34?"~73%":"~85%";
+      return { v:s, u:"points", i:"Approximate non-operative hospital mortality "+mort+" (also depends on diagnosis). Ref: Knaus, Crit Care Med 1985 (APACHE II)." };
+    } },
+
+  { id:"ipss_r", cat:"Haematology", icon:"🩸", title:"IPSS-R (Myelodysplastic Syndrome)",
+    desc:"Revised International Prognostic Scoring System for MDS.",
+    inputs:[
+      { id:"cyto", label:"Cytogenetic risk group", type:"select", opts:[{v:"0",t:"Very good"},{v:"1",t:"Good"},{v:"2",t:"Intermediate"},{v:"3",t:"Poor"},{v:"4",t:"Very poor"}] },
+      { id:"blasts", label:"Bone marrow blasts", type:"select", opts:[{v:"0",t:"≤ 2%"},{v:"1",t:"> 2% to < 5%"},{v:"2",t:"5–10%"},{v:"3",t:"> 10%"}] },
+      { id:"hb", label:"Haemoglobin", type:"select", opts:[{v:"0",t:"≥ 10 g/dL"},{v:"1",t:"8 to < 10 g/dL"},{v:"1.5",t:"< 8 g/dL"}] },
+      { id:"plt", label:"Platelets", type:"select", opts:[{v:"0",t:"≥ 100 ×10⁹/L"},{v:"0.5",t:"50 to < 100 ×10⁹/L"},{v:"1",t:"< 50 ×10⁹/L"}] },
+      { id:"anc", label:"Absolute neutrophil count", type:"select", opts:[{v:"0",t:"≥ 0.8 ×10⁹/L"},{v:"0.5",t:"< 0.8 ×10⁹/L"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.cyto)+Number(v.blasts)+Number(v.hb)+Number(v.plt)+Number(v.anc);
+      var b=s<=1.5?"Very low risk":s<=3?"Low risk":s<=4.5?"Intermediate risk":s<=6?"High risk":"Very high risk";
+      return { v:r1(s), u:"points", i:b+" (IPSS-R prognostic category). Ref: Greenberg, Blood 2012 (IPSS-R)." };
     } }
 
   ];
@@ -3625,7 +3668,9 @@
     pack_years:["pack years","pack-years","smoking history","cigarette exposure"],
     phq2:["phq-2","phq2","depression screen","brief depression"],
     whr:["waist hip ratio","waist-to-hip","central obesity","whr"],
-    bristol:["bristol stool","stool chart","stool form","bristol scale"]
+    bristol:["bristol stool","stool chart","stool form","bristol scale"],
+    apache2:["apache ii","apache 2","icu severity","acute physiology chronic health","critical illness mortality"],
+    ipss_r:["ipss-r","ipss r","myelodysplastic syndrome prognosis","mds risk","revised ipss"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -3765,7 +3810,9 @@
     pack_years:"Standard definition (cigarettes/day ÷ 20 × years).",
     phq2:"Kroenke K, et al. Med Care 2003;41(11):1284–92 (PHQ-2).",
     whr:"WHO. Waist Circumference and Waist-Hip Ratio, 2008.",
-    bristol:"Lewis SJ, Heaton KW. Scand J Gastroenterol 1997;32(9):920–4."
+    bristol:"Lewis SJ, Heaton KW. Scand J Gastroenterol 1997;32(9):920–4.",
+    apache2:"Knaus WA, et al. Crit Care Med 1985;13(10):818–29 (APACHE II).",
+    ipss_r:"Greenberg PL, et al. Blood 2012;120(12):2454–65 (IPSS-R)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
