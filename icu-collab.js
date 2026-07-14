@@ -267,6 +267,7 @@
       completedBy: data.completedBy || null, completedByName: data.completedByName || "",
       completedAt: tsToMs(data.completedAt), due: data.due || "", assignedTo: data.assignedTo || null,
       explanation: data.explanation || "", explainedByName: data.explainedByName || "", explainedAt: tsToMs(data.explainedAt),
+      escalatedAt: (typeof data.escalatedAt === "number" ? data.escalatedAt : tsToMs(data.escalatedAt)),
       ts: tsToMs(data.ts)
     };
   }

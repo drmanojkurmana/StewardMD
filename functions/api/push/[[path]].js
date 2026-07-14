@@ -14,6 +14,7 @@ import { saveSubscription, deleteSubscription, sendPushToAll, pushEnabled } from
 import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
+import { escalateOverdueTask, sweepOverdue, isGroupMember } from "../../_taskpush.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
@@ -73,6 +74,28 @@ export async function onRequest(context) {
       title: msg.title || "StewardMD", body: msg.body || "New medical update", url: msg.url || "/", tag: msg.tag,
     });
     return json({ ok: true, web, native });
+  }
+  // ── ICU overdue-task escalation → push the whole unit ──────────────────────────────────────────
+  // Member-triggered (an open app's heartbeat noticed one of its unit's tasks go overdue). The caller
+  // must be a member of the unit; the task must be genuinely overdue + not already escalated (server
+  // re-checks, so a client can't fabricate a blast). Pushes every member's devices once.
+  if (method === "POST" && seg === "task-overdue") {
+    if (!nativePushEnabled(env)) return json({ error: "push-disabled" }, 501);
+    const uid = await identify(request, env);
+    if (!uid) return json({ error: "auth-required" }, 401);
+    let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+    const { gid, pid, taskId } = body;
+    if (!gid || !pid || !taskId) return json({ error: "bad-args" }, 400);
+    if (!(await isGroupMember(env, gid, uid))) return json({ error: "not-a-member" }, 403);
+    const res = await escalateOverdueTask(env, gid, pid, taskId);
+    return json(res || { error: "failed" });
+  }
+  // Cron sweep (X-Admin-Token): scans ALL units for overdue tasks — covers the case where no member's
+  // app is open. Wire an external scheduler to POST this (see docs/ICU_OVERDUE_PUSH.md).
+  if (method === "POST" && seg === "task-overdue-run") {
+    if (adminOK(request, env) !== true) return json({ error: "unauthorised" }, 401);
+    const res = await sweepOverdue(env);
+    return json(res || { error: "failed" });
   }
   return json({ error: "not-found", seg }, 404);
 }

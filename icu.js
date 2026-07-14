@@ -4244,7 +4244,26 @@
       if (newest > _grpNotifiedTs) _grpNotifiedTs = newest;
     } catch (e) {}
   }
-  function grpNotifTick() { if (!grpActive()) return; try { grpDeviceNotifyNew(grpNotifRows()); } catch (e) {} }
+  function grpNotifTick() { if (!grpActive()) return; try { grpDeviceNotifyNew(grpNotifRows()); } catch (e) {} try { grpEscalateOverdue(); } catch (e) {} }
+  // When a shared task goes overdue, ask the backend to push the WHOLE unit (APNs/FCM) so a member
+  // whose app is CLOSED still gets alerted. The server re-verifies overdue + membership and de-dups
+  // via escalatedAt; we also de-dup per-session (_grpOverdueNotified) to avoid re-hitting the endpoint.
+  function grpEscalateOverdue() {
+    if (!grpActive() || !_grpPtId || !_grpPtVM) return;
+    var gid = _grp.id, pid = _grpPtId, tasks = _grpPtVM.tasks || [], now = nowTs();
+    tasks.forEach(function (t) {
+      if (!t.dueAt || t.status === "done" || now <= t.dueAt) return;    // not overdue
+      if (t.escalatedAt) { _grpOverdueNotified[t.id] = true; return; }  // already pushed (server-stamped)
+      if (_grpOverdueNotified[t.id]) return;                           // already triggered this session
+      _grpOverdueNotified[t.id] = true;
+      try {
+        idToken().then(function (tok) {
+          if (!tok) return;
+          fetch("/api/push/task-overdue", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, taskId: t.id }) }).catch(function () {});
+        }, function () {});
+      } catch (e) {}
+    });
+  }
   // The Notifications screen in group mode — the LIVE smart feed (replaces the acuity-only stub).
   function renderV2AlertsGroup() {
     var rows = grpNotifRows(), seen = grpNotifSeen();
