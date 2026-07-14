@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 4006,
+    "diseases": 4045,
     "diagnostic": 141,
-    "reference": 3865,
+    "reference": 3904,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,7 +30,7 @@
     "differential": 99.9,
     "investigations": 100,
     "redFlags": 100,
-    "severity": 9.9,
+    "severity": 9.8,
     "prognosis": 99.8,
     "diagnosticScoring": 3.5,
     "management": 3.5,
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 551,
+      "total": 553,
       "diagnostic": 20,
-      "reference": 531,
+      "reference": 533,
       "dims": {
-        "overview": 551,
-        "clinicalFeatures": 551,
-        "pathophysiology": 551,
-        "differential": 551,
-        "investigations": 551,
-        "redFlags": 551,
+        "overview": 553,
+        "clinicalFeatures": 553,
+        "pathophysiology": 553,
+        "differential": 553,
+        "investigations": 553,
+        "redFlags": 553,
         "severity": 48,
-        "prognosis": 551,
+        "prognosis": 553,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 258,
+      "total": 262,
       "diagnostic": 5,
-      "reference": 253,
+      "reference": 257,
       "dims": {
-        "overview": 258,
-        "clinicalFeatures": 258,
-        "pathophysiology": 258,
-        "differential": 258,
-        "investigations": 257,
-        "redFlags": 258,
+        "overview": 262,
+        "clinicalFeatures": 262,
+        "pathophysiology": 262,
+        "differential": 262,
+        "investigations": 261,
+        "redFlags": 262,
         "severity": 7,
-        "prognosis": 257,
+        "prognosis": 261,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -140,18 +140,18 @@
       }
     },
     "GI / Hepatology": {
-      "total": 243,
+      "total": 248,
       "diagnostic": 19,
-      "reference": 224,
+      "reference": 229,
       "dims": {
-        "overview": 243,
-        "clinicalFeatures": 243,
-        "pathophysiology": 243,
-        "differential": 242,
-        "investigations": 243,
-        "redFlags": 243,
+        "overview": 248,
+        "clinicalFeatures": 248,
+        "pathophysiology": 248,
+        "differential": 247,
+        "investigations": 248,
+        "redFlags": 248,
         "severity": 44,
-        "prognosis": 241,
+        "prognosis": 246,
         "diagnosticScoring": 19,
         "management": 19,
         "drugTherapy": 18,
@@ -160,18 +160,18 @@
       }
     },
     "Cardiology": {
-      "total": 159,
+      "total": 182,
       "diagnostic": 11,
-      "reference": 148,
+      "reference": 171,
       "dims": {
-        "overview": 159,
-        "clinicalFeatures": 159,
-        "pathophysiology": 159,
-        "differential": 157,
-        "investigations": 159,
-        "redFlags": 159,
+        "overview": 182,
+        "clinicalFeatures": 182,
+        "pathophysiology": 182,
+        "differential": 180,
+        "investigations": 182,
+        "redFlags": 182,
         "severity": 48,
-        "prognosis": 158,
+        "prognosis": 181,
         "diagnosticScoring": 11,
         "management": 11,
         "drugTherapy": 9,
@@ -432,6 +432,26 @@
         "redFlags": 36,
         "severity": 0,
         "prognosis": 36,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Visual system": {
+      "total": 5,
+      "diagnostic": 0,
+      "reference": 5,
+      "dims": {
+        "overview": 5,
+        "clinicalFeatures": 5,
+        "pathophysiology": 5,
+        "differential": 5,
+        "investigations": 5,
+        "redFlags": 5,
+        "severity": 0,
+        "prognosis": 5,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -1850,6 +1870,50 @@
       }
     },
     {
+      "id": "accelerated_idioventricular_rhythm",
+      "name": "accelerated idioventricular rhythm",
+      "specialty": "Cardiology",
+      "system": "cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "acrocyanosis",
+      "name": "acrocyanosis",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "acute_and_chronic_myocarditis",
       "name": "Acute and Chronic Myocarditis",
       "specialty": "Cardiology",
@@ -2224,6 +2288,50 @@
       }
     },
     {
+      "id": "atrial_flutter",
+      "name": "atrial flutter",
+      "specialty": "Cardiology",
+      "system": "cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "atrial_myxoma",
+      "name": "Atrial myxoma",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "atrial_myxoma_and_other_cardiac",
       "name": "Atrial Myxoma and Other Cardiac Tumors",
       "specialty": "Cardiology",
@@ -2272,6 +2380,94 @@
       "name": "Atrial Septal Defect",
       "specialty": "Cardiology",
       "system": "Paediatric cardiology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "atrioventricular_block",
+      "name": "atrioventricular block",
+      "specialty": "Cardiology",
+      "system": "cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "atrioventricular_nodal_reentrant_tachycardia",
+      "name": "atrioventricular nodal reentrant tachycardia",
+      "specialty": "Cardiology",
+      "system": "cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "atrioventricular_reentrant_tachycardia",
+      "name": "atrioventricular reentrant tachycardia",
+      "specialty": "Cardiology",
+      "system": "cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "atrioventricular_septal_defect",
+      "name": "Atrioventricular septal defect",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -2686,6 +2882,28 @@
       }
     },
     {
+      "id": "cholesterol_embolisation_syndrome",
+      "name": "cholesterol embolisation syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cor_pulmonale_chronic",
       "name": "Chronic cor pulmonale",
       "specialty": "Cardiology",
@@ -2818,6 +3036,28 @@
       }
     },
     {
+      "id": "coarctation_of_the_aorta",
+      "name": "Coarctation of the aorta",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "coarctation_of_aorta",
       "name": "Coarctation of the Aorta",
       "specialty": "Cardiology",
@@ -2910,6 +3150,28 @@
       "name": "Cor triatriatum",
       "specialty": "Cardiology",
       "system": "Cardiovascular / Congenital",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "coronary_arteriovenous_fistula",
+      "name": "Coronary arteriovenous fistula",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -3478,6 +3740,28 @@
       }
     },
     {
+      "id": "hypoplastic_left_heart_syndrome",
+      "name": "Hypoplastic left heart syndrome",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "idiopathic_ventricular_fibrillation",
       "name": "Idiopathic ventricular fibrillation",
       "specialty": "Cardiology",
@@ -3579,6 +3863,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "junctional_ectopic_tachycardia",
+      "name": "junctional ectopic tachycardia",
+      "specialty": "Cardiology",
+      "system": "cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -3918,6 +4224,28 @@
       }
     },
     {
+      "id": "multifocal_atrial_tachycardia",
+      "name": "multifocal atrial tachycardia",
+      "specialty": "Cardiology",
+      "system": "cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "multiple_and_mixed_valvular_heart",
       "name": "Multiple and Mixed Valvular Heart Disease",
       "specialty": "Cardiology",
@@ -4030,6 +4358,28 @@
     {
       "id": "papillary_fibroelastoma",
       "name": "Papillary fibroelastoma",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "papillary_muscle_rupture",
+      "name": "Papillary muscle rupture",
       "specialty": "Cardiology",
       "system": "Cardiovascular",
       "tier": "reference",
@@ -4446,6 +4796,28 @@
       }
     },
     {
+      "id": "pulmonary_atresia",
+      "name": "Pulmonary atresia",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pulmonary_hypertension",
       "name": "Pulmonary Hypertension",
       "specialty": "Cardiology",
@@ -4459,6 +4831,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pulmonary_regurgitation",
+      "name": "Pulmonary regurgitation",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -4624,6 +5018,50 @@
     {
       "id": "rheumatic_heart_disease",
       "name": "Rheumatic heart disease",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "rheumatic_mitral_stenosis",
+      "name": "Rheumatic mitral stenosis",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "ruptured_sinus_of_valsalva_aneurysm",
+      "name": "Ruptured sinus of Valsalva aneurysm",
       "specialty": "Cardiology",
       "system": "Cardiovascular",
       "tier": "reference",
@@ -4822,6 +5260,28 @@
     {
       "id": "stable_angina",
       "name": "Stable angina pectoris",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "subaortic_stenosis",
+      "name": "Subaortic stenosis",
       "specialty": "Cardiology",
       "system": "Cardiovascular",
       "tier": "reference",
@@ -5106,6 +5566,50 @@
       }
     },
     {
+      "id": "tricuspid_atresia",
+      "name": "Tricuspid atresia",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tricuspid_regurgitation",
+      "name": "Tricuspid regurgitation",
+      "specialty": "Cardiology",
+      "system": "Cardiovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "tricuspid_valve_disease",
       "name": "Tricuspid Valve Disease",
       "specialty": "Cardiology",
@@ -5308,6 +5812,28 @@
       "name": "Visceral artery aneurysm",
       "specialty": "Cardiology",
       "system": "Cardiovascular / Vascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "wolff_parkinson_white_syndrome",
+      "name": "wolff parkinson white syndrome",
+      "specialty": "Cardiology",
+      "system": "cardiovascular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7042,6 +7568,28 @@
       }
     },
     {
+      "id": "cutis_marmorata",
+      "name": "cutis marmorata",
+      "specialty": "Dermatology",
+      "system": "Skin and subcutaneous tissue",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cutis_marmorata_telangiectatica_congenita",
       "name": "Cutis marmorata telangiectatica congenita",
       "specialty": "Dermatology",
@@ -7068,6 +7616,28 @@
       "name": "Darier disease",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "degos_disease",
+      "name": "degos disease",
+      "specialty": "Dermatology",
+      "system": "Skin and subcutaneous tissue",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -7706,6 +8276,28 @@
       "name": "Erythromelalgia",
       "specialty": "Dermatology",
       "system": "Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "erythromelalgia_secondary",
+      "name": "erythromelalgia secondary",
+      "specialty": "Dermatology",
+      "system": "Skin and subcutaneous tissue",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -10060,6 +10652,28 @@
       "name": "Pemphigus vulgaris",
       "specialty": "Dermatology",
       "system": "Skin / Dermatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pernio_lupus",
+      "name": "pernio lupus",
+      "specialty": "Dermatology",
+      "system": "Skin and subcutaneous tissue",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -36676,6 +37290,28 @@
       }
     },
     {
+      "id": "diffuse_oesophageal_spasm",
+      "name": "diffuse oesophageal spasm",
+      "specialty": "GI / Hepatology",
+      "system": "gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "diseases_of_esophagus",
       "name": "Diseases of the Esophagus",
       "specialty": "GI / Hepatology",
@@ -37446,6 +38082,28 @@
       }
     },
     {
+      "id": "gastric_dumping_syndrome",
+      "name": "gastric dumping syndrome",
+      "specialty": "GI / Hepatology",
+      "system": "gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "gastric_volvulus",
       "name": "Gastric volvulus",
       "specialty": "GI / Hepatology",
@@ -38084,6 +38742,28 @@
       }
     },
     {
+      "id": "hypertensive_lower_oesophageal_sphincter",
+      "name": "hypertensive lower oesophageal sphincter",
+      "specialty": "GI / Hepatology",
+      "system": "gastrointestinal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "pyloric_stenosis",
       "name": "Hypertrophic pyloric stenosis",
       "specialty": "GI / Hepatology",
@@ -38484,6 +39164,28 @@
       "name": "Ischaemic colitis",
       "specialty": "GI / Hepatology",
       "system": "GI / Hepatology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "jackhammer_oesophagus",
+      "name": "jackhammer oesophagus",
+      "specialty": "GI / Hepatology",
+      "system": "gastrointestinal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -39056,6 +39758,28 @@
       "name": "North American Indian childhood cirrhosis",
       "specialty": "GI / Hepatology",
       "system": "Gastroenterology / Hepatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "oesophageal_hypomotility",
+      "name": "oesophageal hypomotility",
+      "specialty": "GI / Hepatology",
+      "system": "gastrointestinal",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -59776,6 +60500,28 @@
       }
     },
     {
+      "id": "congenital_cranial_dysinnervation_disorder",
+      "name": "congenital cranial dysinnervation disorder",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuro-ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "congenital_fiber_type_disproportion",
       "name": "Congenital fibre-type disproportion",
       "specialty": "Neurology",
@@ -64224,6 +64970,28 @@
       "name": "Miyoshi myopathy",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "mobius_syndrome",
+      "name": "Mobius syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / Neuro-ophthalmology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -89216,6 +89984,116 @@
       "name": "Varicose veins",
       "specialty": "Vascular",
       "system": "Vascular / Surgery",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "accommodative_esotropia",
+      "name": "accommodative esotropia",
+      "specialty": "Visual system",
+      "system": "Visual system / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_fibrosis_of_extraocular_muscles",
+      "name": "congenital fibrosis of extraocular muscles",
+      "specialty": "Visual system",
+      "system": "Visual system / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dissociated_vertical_deviation",
+      "name": "dissociated vertical deviation",
+      "specialty": "Visual system",
+      "system": "Visual system / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "intermittent_exotropia",
+      "name": "intermittent exotropia",
+      "specialty": "Visual system",
+      "system": "Visual system / Ophthalmology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "monocular_elevation_deficiency",
+      "name": "monocular elevation deficiency",
+      "specialty": "Visual system",
+      "system": "Visual system / Ophthalmology",
       "tier": "reference",
       "caps": {
         "overview": true,
