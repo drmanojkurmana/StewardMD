@@ -4529,6 +4529,67 @@
       var n=Number(v.type);
       var b=n<=2?"Higher photosensitivity and skin-cancer risk; counsel strict photoprotection":n<=4?"Intermediate photosensitivity":"Lower burn risk but still counsel photoprotection; higher risk of dyspigmentation";
       return { v:"Type "+["","I","II","III","IV","V","VI"][n], u:"", i:b+". Ref: Fitzpatrick 1988." };
+    } },
+
+  { id:"lams", cat:"Neurology", icon:"🧠", title:"Los Angeles Motor Scale (LAMS)",
+    desc:"Prehospital motor severity; screens for large-vessel occlusion.",
+    inputs:[
+      { id:"face", label:"Facial droop", type:"select", opts:[{v:"0",t:"Absent"},{v:"1",t:"Present"}] },
+      { id:"arm", label:"Arm drift", type:"select", opts:[{v:"0",t:"Absent"},{v:"1",t:"Drifts down"},{v:"2",t:"Falls rapidly"}] },
+      { id:"grip", label:"Grip strength", type:"select", opts:[{v:"0",t:"Normal"},{v:"1",t:"Weak"},{v:"2",t:"No grip"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.face)+Number(v.arm)+Number(v.grip);
+      var b=s>=4?"High — suggests large-vessel occlusion; consider a thrombectomy-capable centre":"Lower likelihood of large-vessel occlusion";
+      return { v:s, u:"/5", i:b+". Ref: Nazliel, Stroke 2008 (LAMS)." };
+    } },
+
+  { id:"robson", cat:"Obstetrics", icon:"🤰", title:"Robson Ten-Group Classification (Caesarean)",
+    desc:"Assigns the Robson group for auditing caesarean-section rates.",
+    inputs:[
+      { id:"fetuses", label:"Number of fetuses", type:"select", opts:[{v:"single",t:"Single"},{v:"multiple",t:"Multiple"}] },
+      { id:"lie", label:"Lie / presentation", type:"select", opts:[{v:"cephalic",t:"Cephalic"},{v:"breech",t:"Breech"},{v:"transverse",t:"Transverse / oblique"}] },
+      { id:"gestation", label:"Gestation", type:"select", opts:[{v:"term",t:"≥ 37 weeks"},{v:"preterm",t:"< 37 weeks"}] },
+      { id:"parity", label:"Parity", type:"select", opts:[{v:"nulliparous",t:"Nulliparous"},{v:"multiparous",t:"Multiparous"}] },
+      { id:"prevcs", label:"Previous caesarean", type:"select", opts:[{v:"no",t:"No"},{v:"yes",t:"Yes"}] },
+      { id:"onset", label:"Onset of labour", type:"select", opts:[{v:"spontaneous",t:"Spontaneous"},{v:"induced",t:"Induced"},{v:"prelabour",t:"Caesarean before labour"}] }
+    ],
+    compute:function(v){
+      var g;
+      if(v.fetuses==="multiple") g=8;
+      else if(v.lie==="transverse") g=9;
+      else if(v.lie==="breech") g=(v.parity==="nulliparous")?6:7;
+      else { if(v.gestation==="preterm") g=10; else if(v.prevcs==="yes") g=5; else if(v.parity==="nulliparous") g=(v.onset==="spontaneous")?1:2; else g=(v.onset==="spontaneous")?3:4; }
+      var m={1:"Nulliparous, single cephalic, ≥37wk, spontaneous labour",2:"Nulliparous, single cephalic, ≥37wk, induced or pre-labour CS",3:"Multiparous (no prior CS), single cephalic, ≥37wk, spontaneous",4:"Multiparous (no prior CS), single cephalic, ≥37wk, induced or pre-labour CS",5:"Previous caesarean, single cephalic, ≥37wk",6:"Nulliparous, single breech",7:"Multiparous, single breech (incl. prior CS)",8:"Multiple pregnancy (incl. prior CS)",9:"Transverse or oblique lie (incl. prior CS)",10:"Single cephalic, <37wk (incl. prior CS)"};
+      return { v:"Group "+g, u:"", i:m[g]+". Ref: Robson 2001 (WHO-endorsed CS audit)." };
+    } },
+
+  { id:"acr_eular_ra", cat:"Rheumatology", icon:"🦴", title:"ACR/EULAR Rheumatoid Arthritis Classification (2010)",
+    desc:"Classification of RA (requires ≥1 joint with definite clinical synovitis not better explained by another disease).",
+    inputs:[
+      { id:"joints", label:"Joint involvement", type:"select", opts:[{v:"0",t:"1 large joint"},{v:"1",t:"2–10 large joints"},{v:"2",t:"1–3 small joints"},{v:"3",t:"4–10 small joints"},{v:"5",t:">10 joints (≥1 small)"}] },
+      { id:"serology", label:"Serology (RF and anti-CCP)", type:"select", opts:[{v:"0",t:"Both negative"},{v:"2",t:"Low-positive RF or anti-CCP"},{v:"3",t:"High-positive RF or anti-CCP"}] },
+      { id:"acute", label:"Acute-phase reactants", type:"select", opts:[{v:"0",t:"Normal CRP and ESR"},{v:"1",t:"Abnormal CRP or ESR"}] },
+      { id:"duration", label:"Duration of symptoms", type:"select", opts:[{v:"0",t:"< 6 weeks"},{v:"1",t:"≥ 6 weeks"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.joints)+Number(v.serology)+Number(v.acute)+Number(v.duration);
+      var b=s>=6?"Definite rheumatoid arthritis (score ≥ 6/10)":"Does not meet classification (may still be RA — reassess over time)";
+      return { v:s, u:"/10", i:b+". Ref: Aletaha, Arthritis Rheum 2010 (ACR/EULAR)." };
+    } },
+
+  { id:"corrected_age", cat:"Paediatrics", icon:"👶", title:"Corrected Age for Prematurity",
+    desc:"Adjusts a premature infant's age for the degree of prematurity.",
+    inputs:[
+      { id:"chrono", label:"Chronological age", type:"number", unit:"weeks", step:"1" },
+      { id:"ga", label:"Gestational age at birth", type:"number", unit:"weeks", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.chrono)||!ok(v.ga)||v.chrono<0||v.ga<=0||v.ga>42) return ERR;
+      var corr=v.chrono-(40-v.ga);
+      if(corr<0) corr=0;
+      var wk=Math.floor(corr), d=Math.round((corr-wk)*7);
+      return { v:r1(corr), u:"weeks", i:"Corrected age ≈ "+wk+" wk "+d+" d (chronological age minus weeks of prematurity). Use until ~2–3 years for growth/development assessment. Ref: standard neonatology." };
     } }
 
   ];
@@ -4786,7 +4847,11 @@
     fontaine:["fontaine classification","peripheral arterial disease stage","claudication stage","critical limb ischaemia"],
     rutherford:["rutherford classification","peripheral arterial disease category","limb ischaemia category"],
     salter_harris:["salter harris","physeal fracture","growth plate fracture"],
-    fitzpatrick:["fitzpatrick skin type","skin phototype","photosensitivity type"]
+    fitzpatrick:["fitzpatrick skin type","skin phototype","photosensitivity type"],
+    lams:["los angeles motor scale","lams","large vessel occlusion screen","lvo screen"],
+    robson:["robson classification","ten group classification","caesarean audit","robson group"],
+    acr_eular_ra:["acr eular","rheumatoid arthritis classification","ra classification 2010"],
+    corrected_age:["corrected age","adjusted age prematurity","premature infant age"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -4999,7 +5064,11 @@
     fontaine:"Fontaine R, et al. 1954 (PAD classification).",
     rutherford:"Rutherford RB, et al. J Vasc Surg 1997;26(3):517–38.",
     salter_harris:"Salter RB, Harris WR. J Bone Joint Surg Am 1963;45:587–622.",
-    fitzpatrick:"Fitzpatrick TB. Arch Dermatol 1988;124(6):869–71."
+    fitzpatrick:"Fitzpatrick TB. Arch Dermatol 1988;124(6):869–71.",
+    lams:"Nazliel B, et al. Stroke 2008;39(8):2264–7 (LAMS).",
+    robson:"Robson MS. Fetal Matern Med Rev 2001;12(1):23–39 (WHO-endorsed).",
+    acr_eular_ra:"Aletaha D, et al. Arthritis Rheum 2010;62(9):2569–81.",
+    corrected_age:"Standard neonatology reference (age corrected for prematurity)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
