@@ -3484,6 +3484,99 @@
       var s=Number(v.cyto)+Number(v.blasts)+Number(v.hb)+Number(v.plt)+Number(v.anc);
       var b=s<=1.5?"Very low risk":s<=3?"Low risk":s<=4.5?"Intermediate risk":s<=6?"High risk":"Very high risk";
       return { v:r1(s), u:"points", i:b+" (IPSS-R prognostic category). Ref: Greenberg, Blood 2012 (IPSS-R)." };
+    } },
+
+  { id:"ad8", cat:"Neurology", icon:"🧠", title:"AD8 Dementia Screening Interview",
+    desc:"Informant-rated screen for cognitive change. Tick each item that represents a CHANGE.",
+    inputs:[
+      { id:"q1", label:"Problems with judgment (bad decisions, finances)", type:"check" },
+      { id:"q2", label:"Reduced interest in hobbies/activities", type:"check" },
+      { id:"q3", label:"Repeats questions, stories or statements", type:"check" },
+      { id:"q4", label:"Trouble learning to use a tool/appliance/gadget", type:"check" },
+      { id:"q5", label:"Forgets the correct month or year", type:"check" },
+      { id:"q6", label:"Difficulty handling complex financial affairs", type:"check" },
+      { id:"q7", label:"Difficulty remembering appointments", type:"check" },
+      { id:"q8", label:"Daily problems with thinking and/or memory", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; for(var i=1;i<=8;i++) if(v["q"+i]) s++;
+      var b=s>=2?"Suggests cognitive impairment — further assessment indicated":"Cognitive impairment unlikely on this screen";
+      return { v:s, u:"/8", i:b+". Ref: Galvin, Neurology 2005 (AD8)." };
+    } },
+
+  { id:"rome4_ibs", cat:"Gastroenterology", icon:"🩹", title:"Rome IV Criteria (Irritable Bowel Syndrome)",
+    desc:"Diagnostic criteria for IBS (apply after excluding alarm features / organic disease).",
+    inputs:[
+      { id:"pain", label:"Recurrent abdominal pain, on average ≥ 1 day/week in the last 3 months", type:"check" },
+      { id:"onset", label:"Symptom onset ≥ 6 months ago", type:"check" },
+      { id:"defaec", label:"Pain related to defaecation", type:"check" },
+      { id:"freq", label:"Associated with a change in stool frequency", type:"check" },
+      { id:"form", label:"Associated with a change in stool form/appearance", type:"check" }
+    ],
+    compute:function(v){
+      var assoc=(v.defaec?1:0)+(v.freq?1:0)+(v.form?1:0);
+      var meets=v.pain && v.onset && assoc>=2;
+      return { v: meets?"Meets Rome IV IBS criteria":"Does not meet criteria", u:"", i:(meets?"Consistent with IBS (subtype by predominant stool form)":"Requires abdominal pain ≥1 day/week for 3 months, onset ≥6 months ago, plus ≥2 of the 3 associations")+". Exclude alarm features. Ref: Rome IV, Gastroenterology 2016." };
+    } },
+
+  { id:"dapsa", cat:"Rheumatology", icon:"🦴", title:"DAPSA (Psoriatic Arthritis Activity)",
+    desc:"Disease Activity in Psoriatic Arthritis.",
+    inputs:[
+      { id:"tjc", label:"Tender joint count (of 68)", type:"number", step:"1" },
+      { id:"sjc", label:"Swollen joint count (of 66)", type:"number", step:"1" },
+      { id:"pain", label:"Patient pain (0–10 VAS)", type:"number", step:"0.1" },
+      { id:"global", label:"Patient global activity (0–10 VAS)", type:"number", step:"0.1" },
+      { id:"crp", label:"CRP", type:"number", unit:"mg/dL", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.tjc)||!ok(v.sjc)||!ok(v.pain)||!ok(v.global)||!ok(v.crp)) return ERR;
+      var s=v.tjc+v.sjc+v.pain+v.global+v.crp;
+      var b=s<=4?"Remission":s<=14?"Low disease activity":s<=28?"Moderate disease activity":"High disease activity";
+      return { v:r1(s), u:"", i:b+". Note: CRP entered in mg/dL. Ref: Schoels, Ann Rheum Dis 2010 (DAPSA)." };
+    } },
+
+  { id:"hit_4ts", cat:"Haematology", icon:"🩸", title:"4Ts Score (Heparin-Induced Thrombocytopenia)",
+    desc:"Pre-test probability of heparin-induced thrombocytopenia.",
+    inputs:[
+      { id:"thrombocytopenia", label:"Thrombocytopenia", type:"select", opts:[{v:"2",t:"Fall > 50% and nadir ≥ 20 ×10⁹/L"},{v:"1",t:"Fall 30–50% or nadir 10–19 ×10⁹/L"},{v:"0",t:"Fall < 30% or nadir < 10 ×10⁹/L"}] },
+      { id:"timing", label:"Timing of platelet fall", type:"select", opts:[{v:"2",t:"Days 5–10, or ≤1 day if heparin in past 30 days"},{v:"1",t:"Consistent but unclear, after day 10, or ≤1 day if heparin 30–100 days ago"},{v:"0",t:"Fall < 4 days without recent heparin"}] },
+      { id:"thrombosis", label:"Thrombosis or other sequelae", type:"select", opts:[{v:"2",t:"New thrombosis, skin necrosis, or acute systemic reaction"},{v:"1",t:"Progressive/recurrent or suspected thrombosis"},{v:"0",t:"None"}] },
+      { id:"other", label:"Other cause of thrombocytopenia", type:"select", opts:[{v:"2",t:"None apparent"},{v:"1",t:"Possible"},{v:"0",t:"Definite"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.thrombocytopenia)+Number(v.timing)+Number(v.thrombosis)+Number(v.other);
+      var b=s<=3?"Low probability of HIT":s<=5?"Intermediate probability":"High probability of HIT";
+      return { v:s, u:"/8", i:b+". Guides HIT antibody testing and empirical management. Ref: Lo, J Thromb Haemost 2006 (4Ts)." };
+    } },
+
+  { id:"cornell_lvh", cat:"Cardiovascular", icon:"❤️", title:"Cornell Voltage Criteria (LVH)",
+    desc:"ECG voltage criteria for left ventricular hypertrophy.",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"ravl", label:"R wave in aVL", type:"number", unit:"mm", step:"0.5" },
+      { id:"sv3", label:"S wave in V3", type:"number", unit:"mm", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.ravl)||!ok(v.sv3)||v.ravl<0||v.sv3<0) return ERR;
+      var sum=v.ravl+v.sv3;
+      var thr=v.sex==="f"?20:28;
+      var b=sum>thr?"Meets Cornell voltage criteria for LVH":"Does not meet Cornell voltage criteria";
+      return { v:r1(sum), u:"mm", i:b+" (threshold "+thr+" mm for the selected sex). Ref: Casale, Circulation 1987 (Cornell)." };
+    } },
+
+  { id:"sarcf", cat:"General", icon:"🚶", title:"SARC-F (Sarcopenia Screen)",
+    desc:"Screens for sarcopenia (self-reported functional decline).",
+    inputs:[
+      { id:"strength", label:"Difficulty lifting/carrying ~4.5 kg", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Some"},{v:"2",t:"A lot / unable"}] },
+      { id:"walk", label:"Difficulty walking across a room", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Some"},{v:"2",t:"A lot / unable / use aids"}] },
+      { id:"chair", label:"Difficulty transferring from a chair/bed", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Some"},{v:"2",t:"A lot / unable without help"}] },
+      { id:"stairs", label:"Difficulty climbing a flight of 10 stairs", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Some"},{v:"2",t:"A lot / unable"}] },
+      { id:"falls", label:"Falls in the past year", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"1–3 falls"},{v:"2",t:"≥ 4 falls"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.strength)+Number(v.walk)+Number(v.chair)+Number(v.stairs)+Number(v.falls);
+      var b=s>=4?"Suggestive of sarcopenia — assess muscle strength/mass":"Lower likelihood of sarcopenia";
+      return { v:s, u:"/10", i:b+". Ref: Malmstrom, J Cachexia Sarcopenia Muscle 2016 (SARC-F)." };
     } }
 
   ];
@@ -3670,7 +3763,13 @@
     whr:["waist hip ratio","waist-to-hip","central obesity","whr"],
     bristol:["bristol stool","stool chart","stool form","bristol scale"],
     apache2:["apache ii","apache 2","icu severity","acute physiology chronic health","critical illness mortality"],
-    ipss_r:["ipss-r","ipss r","myelodysplastic syndrome prognosis","mds risk","revised ipss"]
+    ipss_r:["ipss-r","ipss r","myelodysplastic syndrome prognosis","mds risk","revised ipss"],
+    ad8:["ad8","dementia screen","cognitive impairment screen","informant dementia"],
+    rome4_ibs:["rome iv","rome 4","irritable bowel syndrome criteria","ibs diagnosis"],
+    dapsa:["dapsa","psoriatic arthritis activity","psa disease activity"],
+    hit_4ts:["4ts","4 t score","heparin induced thrombocytopenia","hit probability"],
+    cornell_lvh:["cornell voltage","cornell criteria","left ventricular hypertrophy ecg","lvh voltage"],
+    sarcf:["sarc-f","sarcf","sarcopenia screen","muscle loss screen"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -3812,7 +3911,13 @@
     whr:"WHO. Waist Circumference and Waist-Hip Ratio, 2008.",
     bristol:"Lewis SJ, Heaton KW. Scand J Gastroenterol 1997;32(9):920–4.",
     apache2:"Knaus WA, et al. Crit Care Med 1985;13(10):818–29 (APACHE II).",
-    ipss_r:"Greenberg PL, et al. Blood 2012;120(12):2454–65 (IPSS-R)."
+    ipss_r:"Greenberg PL, et al. Blood 2012;120(12):2454–65 (IPSS-R).",
+    ad8:"Galvin JE, et al. Neurology 2005;65(4):559–64 (AD8).",
+    rome4_ibs:"Lacy BE, et al. Gastroenterology 2016;150(6):1393–407 (Rome IV).",
+    dapsa:"Schoels M, et al. Ann Rheum Dis 2010;69(8):1441–7 (DAPSA).",
+    hit_4ts:"Lo GK, et al. J Thromb Haemost 2006;4(4):759–65 (4Ts).",
+    cornell_lvh:"Casale PN, et al. Circulation 1987;75(3):565–72 (Cornell).",
+    sarcf:"Malmstrom TK, et al. J Cachexia Sarcopenia Muscle 2016;7(1):28–36 (SARC-F)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
