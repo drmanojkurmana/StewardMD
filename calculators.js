@@ -4871,6 +4871,202 @@
       var ebv=Number(v.ebv)*v.wt;
       var abl=ebv*(v.hi-v.hf)/v.hi;
       return { v:r0(abl), u:"mL", i:"Estimated maximum allowable blood loss before reaching the chosen haematocrit. Ref: Gross JB, Anesthesiology 1983." };
+    } },
+
+  { id:"sokolow_lyon", cat:"Cardiovascular", icon:"📈", title:"Sokolow-Lyon LVH Criteria",
+    desc:"ECG voltage criteria for left ventricular hypertrophy.",
+    inputs:[
+      { id:"sv1", label:"S wave in V1", type:"number", unit:"mm", step:"0.5" },
+      { id:"rv5", label:"R wave in V5", type:"number", unit:"mm", step:"0.5" },
+      { id:"rv6", label:"R wave in V6", type:"number", unit:"mm", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.sv1)||!ok(v.rv5)||!ok(v.rv6)||v.sv1<0||v.rv5<0||v.rv6<0) return ERR;
+      var sum=v.sv1+Math.max(v.rv5,v.rv6);
+      var b=sum>=35?"Meets Sokolow-Lyon voltage criteria for LVH":"Does not meet voltage criteria";
+      return { v:r1(sum), u:"mm", i:b+" (threshold ≥35 mm; 10 mm = 1 mV at standard calibration). Ref: Sokolow & Lyon, Am Heart J 1949." };
+    } },
+
+  { id:"pesi", cat:"Cardiovascular", icon:"🫁", title:"PESI (Pulmonary Embolism Severity Index)",
+    desc:"30-day mortality risk class in acute pulmonary embolism.",
+    inputs:[
+      { id:"age", label:"Age (years, added as points)", type:"number", step:"1" },
+      { id:"male", label:"Male sex (+10)", type:"check" },
+      { id:"cancer", label:"History of cancer (+30)", type:"check" },
+      { id:"chf", label:"Chronic heart failure (+10)", type:"check" },
+      { id:"lung", label:"Chronic lung disease (+10)", type:"check" },
+      { id:"hr110", label:"Pulse ≥110/min (+20)", type:"check" },
+      { id:"sbp100", label:"Systolic BP <100 mmHg (+30)", type:"check" },
+      { id:"rr30", label:"Respiratory rate ≥30/min (+20)", type:"check" },
+      { id:"temp36", label:"Temperature <36°C (+20)", type:"check" },
+      { id:"ams", label:"Altered mental status (+60)", type:"check" },
+      { id:"sat90", label:"Oxygen saturation <90% (+20)", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||v.age<0) return ERR;
+      var s=Math.round(v.age);
+      if(v.male)s+=10; if(v.cancer)s+=30; if(v.chf)s+=10; if(v.lung)s+=10; if(v.hr110)s+=20;
+      if(v.sbp100)s+=30; if(v.rr30)s+=20; if(v.temp36)s+=20; if(v.ams)s+=60; if(v.sat90)s+=20;
+      var cls=s<=65?"Class I — very low 30-day mortality":s<=85?"Class II — low":s<=105?"Class III — intermediate":s<=125?"Class IV — high":"Class V — very high";
+      return { v:s, u:"points", i:cls+". Classes I–II may be considered for outpatient management. Ref: Aujesky, Am J Respir Crit Care Med 2005." };
+    } },
+
+  { id:"gold_group", cat:"Respiratory", icon:"🫁", title:"GOLD ABE Assessment (COPD)",
+    desc:"2023 GOLD symptom/exacerbation group for stable COPD.",
+    inputs:[
+      { id:"exac", label:"≥2 moderate exacerbations, or ≥1 needing hospitalisation, in the past year", type:"check" },
+      { id:"symp", label:"More symptoms (mMRC ≥2 or CAT ≥10)", type:"check" }
+    ],
+    compute:function(v){
+      var g = v.exac ? "E" : (v.symp ? "B" : "A");
+      var d = g==="E" ? "Group E — high exacerbation risk; consider LABA+LAMA (add ICS if blood eosinophilia)" : g==="B" ? "Group B — more symptoms, low exacerbation risk; LABA+LAMA" : "Group A — few symptoms, low exacerbation risk; a bronchodilator";
+      return { v:"Group "+g, u:"", i:d+". Ref: GOLD 2023 report." };
+    } },
+
+  { id:"scorad", cat:"Dermatology", icon:"🧴", title:"SCORAD (Atopic Dermatitis Severity)",
+    desc:"SCORing Atopic Dermatitis index (extent + intensity + subjective symptoms).",
+    inputs:[
+      { id:"extent", label:"Extent — % body surface affected (0–100)", type:"number", step:"1" },
+      { id:"erythema", label:"Erythema (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
+      { id:"oedema", label:"Oedema/papulation (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
+      { id:"oozing", label:"Oozing/crusting (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
+      { id:"excoriation", label:"Excoriation (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
+      { id:"lichen", label:"Lichenification (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
+      { id:"dryness", label:"Dryness of uninvolved skin (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
+      { id:"pruritus", label:"Pruritus — VAS (0–10)", type:"number", step:"1" },
+      { id:"sleep", label:"Sleeplessness — VAS (0–10)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.extent)||v.extent<0||v.extent>100||!ok(v.pruritus)||v.pruritus<0||v.pruritus>10||!ok(v.sleep)||v.sleep<0||v.sleep>10) return ERR;
+      var B=(Number(v.erythema)||0)+(Number(v.oedema)||0)+(Number(v.oozing)||0)+(Number(v.excoriation)||0)+(Number(v.lichen)||0)+(Number(v.dryness)||0);
+      var C=v.pruritus+v.sleep;
+      var score=v.extent/5 + 7*B/2 + C;
+      var b=score<25?"Mild":score<=50?"Moderate":"Severe";
+      return { v:r1(score), u:"/103", i:b+" atopic dermatitis (mild <25, moderate 25–50, severe >50). Ref: European Task Force on Atopic Dermatitis, Dermatology 1993." };
+    } },
+
+  { id:"afi", cat:"Obstetrics", icon:"🤰", title:"Amniotic Fluid Index (AFI)",
+    desc:"Sum of the deepest vertical pocket in four uterine quadrants.",
+    inputs:[
+      { id:"q1", label:"Quadrant 1 pocket", type:"number", unit:"cm", step:"0.1" },
+      { id:"q2", label:"Quadrant 2 pocket", type:"number", unit:"cm", step:"0.1" },
+      { id:"q3", label:"Quadrant 3 pocket", type:"number", unit:"cm", step:"0.1" },
+      { id:"q4", label:"Quadrant 4 pocket", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.q1)||!ok(v.q2)||!ok(v.q3)||!ok(v.q4)||v.q1<0||v.q2<0||v.q3<0||v.q4<0) return ERR;
+      var afi=v.q1+v.q2+v.q3+v.q4;
+      var b=afi<5?"Oligohydramnios":afi<=25?"Normal":"Polyhydramnios";
+      return { v:r1(afi), u:"cm", i:b+" (oligohydramnios <5, normal 5–25, polyhydramnios >25 cm at term). Ref: Phelan, J Reprod Med 1987." };
+    } },
+
+  { id:"iom_weight_gain", cat:"Obstetrics", icon:"🤰", title:"Pregnancy Weight-Gain Target (IOM)",
+    desc:"Recommended total gestational weight gain (singleton) by pre-pregnancy BMI.",
+    inputs:[
+      { id:"bmi", label:"Pre-pregnancy BMI", type:"number", unit:"kg/m²", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.bmi)||v.bmi<10||v.bmi>80) return ERR;
+      var r;
+      if(v.bmi<18.5) r="12.5–18 kg (underweight)";
+      else if(v.bmi<25) r="11.5–16 kg (normal weight)";
+      else if(v.bmi<30) r="7–11.5 kg (overweight)";
+      else r="5–9 kg (obese)";
+      return { v:r, u:"", i:"Recommended total weight gain for a singleton pregnancy. Ref: Institute of Medicine 2009." };
+    } },
+
+  { id:"flacc", cat:"Paediatrics", icon:"👶", title:"FLACC Pain Scale",
+    desc:"Behavioural pain assessment for young or non-verbal children.",
+    inputs:[
+      { id:"face", label:"Face", type:"select", opts:[{v:"0",t:"0 — no expression/smile"},{v:"1",t:"1 — occasional grimace, withdrawn"},{v:"2",t:"2 — frequent/constant frown, clenched jaw"}] },
+      { id:"legs", label:"Legs", type:"select", opts:[{v:"0",t:"0 — normal/relaxed"},{v:"1",t:"1 — uneasy, restless, tense"},{v:"2",t:"2 — kicking or legs drawn up"}] },
+      { id:"activity", label:"Activity", type:"select", opts:[{v:"0",t:"0 — lying quietly, moves easily"},{v:"1",t:"1 — squirming, tense"},{v:"2",t:"2 — arched, rigid or jerking"}] },
+      { id:"cry", label:"Cry", type:"select", opts:[{v:"0",t:"0 — no cry"},{v:"1",t:"1 — moans/whimpers, occasional complaint"},{v:"2",t:"2 — steady crying, screams, frequent complaints"}] },
+      { id:"consol", label:"Consolability", type:"select", opts:[{v:"0",t:"0 — content, relaxed"},{v:"1",t:"1 — reassured by touch/talk"},{v:"2",t:"2 — difficult to console"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.face)||0)+(Number(v.legs)||0)+(Number(v.activity)||0)+(Number(v.cry)||0)+(Number(v.consol)||0);
+      var b=s===0?"Relaxed and comfortable":s<=3?"Mild discomfort":s<=6?"Moderate pain":"Severe discomfort/pain";
+      return { v:s, u:"/10", i:b+". Ref: Merkel S, Pediatr Nurs 1997 (FLACC)." };
+    } },
+
+  { id:"bacterial_meningitis_score", cat:"Paediatrics", icon:"👶", title:"Bacterial Meningitis Score (Children)",
+    desc:"Risk of bacterial (vs aseptic) meningitis in children with CSF pleocytosis.",
+    inputs:[
+      { id:"gram", label:"Positive CSF Gram stain", type:"check" },
+      { id:"csf_anc", label:"CSF absolute neutrophil count ≥1000/µL", type:"check" },
+      { id:"csf_protein", label:"CSF protein ≥80 mg/dL", type:"check" },
+      { id:"blood_anc", label:"Peripheral blood ANC ≥10 000/µL", type:"check" },
+      { id:"seizure", label:"Seizure at or before presentation", type:"check" }
+    ],
+    compute:function(v){
+      var s=0;["gram","csf_anc","csf_protein","blood_anc","seizure"].forEach(function(k){if(v[k])s++;});
+      var b=s===0?"Very low risk of bacterial meningitis — bacterial meningitis is very unlikely":"Not very low risk — a predictor is present; manage for possible bacterial meningitis";
+      return { v:s, u:"/5", i:b+". Validated in children >2 months, not critically ill and not pre-treated with antibiotics. Ref: Nigrovic, JAMA 2007." };
+    } },
+
+  { id:"modified_fisher", cat:"Neurology", icon:"🧠", title:"Modified Fisher Scale (SAH)",
+    desc:"CT grading of subarachnoid haemorrhage to estimate vasospasm risk.",
+    inputs:[
+      { id:"sah", label:"Subarachnoid blood", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Thin (<1 mm)"},{v:"2",t:"Thick (≥1 mm)"}] },
+      { id:"ivh", label:"Intraventricular haemorrhage present", type:"check" }
+    ],
+    compute:function(v){
+      var sah=Number(v.sah)||0; var ivh=v.ivh?1:0; var g;
+      if(sah===0) g=0;
+      else if(sah===1) g=ivh?2:1;
+      else g=ivh?4:3;
+      var risk=g===0?"Minimal":g<=2?"Low–moderate":g===3?"Higher":"Highest";
+      return { v:g, u:"grade", i:risk+" symptomatic vasospasm risk (grade "+g+"). Ref: Frontera, Neurosurgery 2006 (modified Fisher)." };
+    } },
+
+  { id:"widmark", cat:"Toxicology", icon:"🍷", title:"Widmark Blood Alcohol Estimate",
+    desc:"Estimated blood alcohol concentration (forensic approximation).",
+    inputs:[
+      { id:"grams", label:"Alcohol ingested", type:"number", unit:"g", step:"1" },
+      { id:"wt", label:"Body weight", type:"number", unit:"kg", step:"0.1" },
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male (r≈0.68)"},{v:"f",t:"Female (r≈0.55)"}] },
+      { id:"hours", label:"Hours since drinking", type:"number", unit:"h", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.grams)||!ok(v.wt)||!ok(v.hours)||v.grams<0||v.wt<=0||v.hours<0) return ERR;
+      var r=v.sex==="f"?0.55:0.68;
+      var c=v.grams/(r*v.wt) - 0.15*v.hours;
+      if(c<0) c=0;
+      var pct=Math.round(c/10*1000)/1000;
+      return { v:r1(c), u:"g/L", i:"≈ "+pct+" g/100 mL (%). Forensic approximation only; individual clearance varies widely. One UK unit ≈ 8 g ethanol. Ref: Widmark 1932." };
+    } },
+
+  { id:"dipss", cat:"Haematology", icon:"🩸", title:"DIPSS (Myelofibrosis Prognosis)",
+    desc:"Dynamic International Prognostic Scoring System for primary myelofibrosis.",
+    inputs:[
+      { id:"age", label:"Age >65 (+1)", type:"check" },
+      { id:"wbc", label:"WBC >25 ×10⁹/L (+1)", type:"check" },
+      { id:"hb", label:"Haemoglobin <100 g/L (+2)", type:"check" },
+      { id:"blasts", label:"Peripheral blood blasts ≥1% (+1)", type:"check" },
+      { id:"symptoms", label:"Constitutional symptoms (+1)", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.age)s++; if(v.wbc)s++; if(v.hb)s+=2; if(v.blasts)s++; if(v.symptoms)s++;
+      var b=s===0?"Low risk":s<=2?"Intermediate-1 risk":s<=4?"Intermediate-2 risk":"High risk";
+      return { v:s, u:"/6", i:b+" (anaemia is weighted 2 points in DIPSS). Ref: Passamonti, Blood 2010 (DIPSS)." };
+    } },
+
+  { id:"r_iss", cat:"Haematology", icon:"🩸", title:"R-ISS (Revised ISS, Myeloma)",
+    desc:"Revised International Staging System for multiple myeloma.",
+    inputs:[
+      { id:"iss", label:"ISS stage", type:"select", opts:[{v:"1",t:"Stage I (β2M <3.5 mg/L & albumin ≥35 g/L)"},{v:"2",t:"Stage II"},{v:"3",t:"Stage III (β2M >5.5 mg/L)"}] },
+      { id:"ldh", label:"Serum LDH", type:"select", opts:[{v:"0",t:"Normal (< upper limit)"},{v:"1",t:"Elevated (≥ upper limit)"}] },
+      { id:"cyto", label:"High-risk cytogenetics — del(17p), t(4;14) or t(14;16)", type:"select", opts:[{v:"0",t:"Absent (standard risk)"},{v:"1",t:"Present (high risk)"}] }
+    ],
+    compute:function(v){
+      var iss=Number(v.iss)||1; var highLDH=Number(v.ldh)===1; var highCyto=Number(v.cyto)===1;
+      var stage;
+      if(iss===1 && !highLDH && !highCyto) stage="I";
+      else if(iss===3 && (highLDH || highCyto)) stage="III";
+      else stage="II";
+      var b=stage==="I"?"best prognosis":stage==="III"?"poorest prognosis":"intermediate prognosis";
+      return { v:"R-ISS "+stage, u:"", i:"Revised ISS stage "+stage+" ("+b+"). Ref: Palumbo, J Clin Oncol 2015 (R-ISS)." };
     } }
 
   ];
@@ -5152,7 +5348,19 @@
     tbw_watson:["total body water","watson formula","tbw","body water"],
     nitrogen_balance:["nitrogen balance","protein balance","uun","urea nitrogen","catabolic anabolic"],
     pcl5:["pcl-5","ptsd checklist","post traumatic stress","pcl5"],
-    allowable_blood_loss:["allowable blood loss","abl","maximum blood loss","transfusion threshold","gross formula"]
+    allowable_blood_loss:["allowable blood loss","abl","maximum blood loss","transfusion threshold","gross formula"],
+    sokolow_lyon:["sokolow lyon","lvh","left ventricular hypertrophy","ecg voltage","sv1 rv5"],
+    pesi:["pesi","pulmonary embolism severity index","pe mortality","aujesky"],
+    gold_group:["gold group","gold abe","copd assessment","gold 2023","abcd copd"],
+    scorad:["scorad","atopic dermatitis","eczema severity","scoring atopic dermatitis"],
+    afi:["amniotic fluid index","afi","oligohydramnios","polyhydramnios","four quadrant"],
+    iom_weight_gain:["pregnancy weight gain","iom","gestational weight","weight gain pregnancy"],
+    flacc:["flacc","paediatric pain","non verbal pain","face legs activity cry consolability"],
+    bacterial_meningitis_score:["bacterial meningitis score","nigrovic","csf pleocytosis","meningitis children"],
+    modified_fisher:["modified fisher","sah grading","vasospasm","subarachnoid ct grade"],
+    widmark:["widmark","blood alcohol","bac","alcohol concentration","ethanol"],
+    dipss:["dipss","myelofibrosis prognosis","primary myelofibrosis","passamonti"],
+    r_iss:["r-iss","revised iss","myeloma staging","multiple myeloma prognosis"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -5389,7 +5597,19 @@
     tbw_watson:"Watson PE, et al. Am J Clin Nutr 1980;33(1):27–39 (total body water).",
     nitrogen_balance:"Standard clinical-nutrition reference (protein intake ÷ 6.25 − (UUN + 4)).",
     pcl5:"Blevins CA, et al. J Trauma Stress 2015;28(6):489–98 (PCL-5); US National Center for PTSD.",
-    allowable_blood_loss:"Gross JB. Anesthesiology 1983;58(3):277–80 (allowable blood loss)."
+    allowable_blood_loss:"Gross JB. Anesthesiology 1983;58(3):277–80 (allowable blood loss).",
+    sokolow_lyon:"Sokolow M, Lyon TP. Am Heart J 1949;37(2):161–86.",
+    pesi:"Aujesky D, et al. Am J Respir Crit Care Med 2005;172(8):1041–6 (PESI).",
+    gold_group:"Global Initiative for Chronic Obstructive Lung Disease (GOLD) 2023 report.",
+    scorad:"European Task Force on Atopic Dermatitis. Dermatology 1993;186(1):23–31 (SCORAD).",
+    afi:"Phelan JP, et al. J Reprod Med 1987;32(7):540–2 (amniotic fluid index).",
+    iom_weight_gain:"Institute of Medicine. Weight Gain During Pregnancy: Reexamining the Guidelines. 2009.",
+    flacc:"Merkel SI, et al. Pediatr Nurs 1997;23(3):293–7 (FLACC).",
+    bacterial_meningitis_score:"Nigrovic LE, et al. JAMA 2007;297(1):52–60 (Bacterial Meningitis Score).",
+    modified_fisher:"Frontera JA, et al. Neurosurgery 2006;59(1):21–7 (modified Fisher scale).",
+    widmark:"Widmark EMP. Die theoretischen Grundlagen … der Alkoholbestimmung. 1932.",
+    dipss:"Passamonti F, et al. Blood 2010;115(9):1703–8 (DIPSS).",
+    r_iss:"Palumbo A, et al. J Clin Oncol 2015;33(26):2863–9 (R-ISS)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
