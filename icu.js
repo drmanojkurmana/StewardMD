@@ -33,7 +33,7 @@
   /* -------------------------------------------------- the data model shape */
   var DEFAULT_STATE = {
     patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "" },
-    vitals: [],                 // [{ ts, hr, sbp, dbp, map, rr, spo2, temp, uop, lactate, cvp, etco2 }]
+    vitals: [],                 // [{ ts, hr, sbp, dbp, map, rr, spo2, temp, uop, lactate, cvp, etco2, gcs }]
     labs: { recent: {}, trends: [] },  // recent: { na,k,cl,hco3,ca,mg,po4,glu,creat,alb,wbc,hb,plt,inr,ferritin,trig,fibrinogen,... }
     abg: {},                    // { ts, ph, paco2, pao2, hco3, fio2, lactate, be }
     ventilator: {},             // { mode, fio2, peep, tv, rr, peak, plateau, drivingP, compliance, pf }
@@ -44,6 +44,7 @@
     goals: [],                  // [string]
     rounds: {},                 // checklist state (Phase 3)
     alerts: [],                 // DERIVED — written by recompute()
+    scores: [],                 // DERIVED — auto-computed clinical scores (icu-autoscores.js), written by recompute()
     src: {},                    // per-field provenance: { <field>: { source, ts } } source ∈ Ward Sync|Imported report|Manual
     wardSync: { connected: false, lastTs: null, newUpdate: false, patientId: null },
     conflicts: [],              // [{ key, label, ward, manual, wardTs, manualTs }] — clinician resolves
@@ -175,6 +176,9 @@
     var order = { crit: 0, warn: 1, info: 2 };
     a.sort(function (x, y) { return (order[x.severity] || 9) - (order[y.severity] || 9); });
     s.alerts = a;
+    // ---- auto-computed clinical scores (icu-autoscores.js → MEDCALC formulas) ----
+    try { s.scores = window.ICU_AUTOSCORES ? window.ICU_AUTOSCORES.compute(s, window.MEDCALC) : []; }
+    catch (e) { s.scores = []; }
   }
   recompute(_raw);   // initial derive
 
@@ -183,7 +187,7 @@
   // from captured images. They write into ICU_STATE → the whole dashboard
   // updates with zero UI changes. Manual-entry forms call them too.
   function ingestMonitor(o) {
-    o = o || {}; var v = pick(o, ["hr", "sbp", "dbp", "map", "rr", "spo2", "temp", "uop", "lactate", "cvp", "etco2"]);
+    o = o || {}; var v = pick(o, ["hr", "sbp", "dbp", "map", "rr", "spo2", "temp", "uop", "lactate", "cvp", "etco2", "gcs"]);
     if (v.map == null && v.sbp != null && v.dbp != null) v.map = mapCalc(v.sbp, v.dbp);
     v.ts = o.ts || nowTs();
     STATE.vitals.push(v);
@@ -722,6 +726,15 @@
       '.icu-vc.crit .icu-spark{color:var(--danger);opacity:1}.icu-vc.warn .icu-spark{color:var(--warn);opacity:1}.icu-vc.ok .icu-spark{color:var(--primary)}' +
       // generic card
       '.icu-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:15px;box-shadow:var(--sh)}' +
+      '.icu-score{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer}' +
+      '.icu-score:last-of-type{border-bottom:0}' +
+      '.icu-score-n{font:800 13px var(--font)}' +
+      '.icu-score-v{font:800 13px var(--font);color:var(--primary)}' +
+      '.icu-score-i{flex:1 1 100%;font:600 12px/1.45 var(--font);color:var(--muted)}' +
+      '.icu-score.miss{opacity:.6;cursor:pointer}' +
+      '.icu-score-need{font:600 12px var(--font);color:var(--muted);font-style:italic}' +
+      '.icu-score-sug{margin-top:10px;font:600 12px/1.6 var(--font);color:var(--muted)}' +
+      '.icu-score-chip{font:700 12px var(--font);padding:5px 10px;margin:2px;border:1px solid var(--border);border-radius:14px;background:var(--panel);color:var(--primary);cursor:pointer}' +
       '.icu-card h3{font:800 16px var(--font);margin:0 0 4px}.icu-card p{font:500 13.5px/1.5 var(--font);color:var(--muted);margin:0}' +
       // AI import grid
       '.icu-ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}' +
@@ -2523,6 +2536,28 @@
   function icuBuildVer() {
     try { var s = document.querySelector('script[src*="icu.js?v="]'); var m = s && String(s.src).match(/[?&]v=([A-Za-z0-9]+)/); return m ? m[1] : ""; } catch (e) { return ""; }
   }
+  // Auto-computed clinical scores panel (Feature B; from _raw.scores + CALC_LINKS suggestions).
+  function scoreCalcTitle(id) {
+    try { var arr = (window.MEDCALC && MEDCALC._calcs) || []; for (var i = 0; i < arr.length; i++) if (arr[i].id === id) return arr[i].title; } catch (e) {}
+    return id;
+  }
+  function renderScoresPanel() {
+    var rows = _raw.scores || [];
+    var dx = (_raw.patient && (_raw.patient.workingDx || _raw.patient.diagnosis)) || "";
+    var linkIds = (window.CALC_LINKS && dx) ? CALC_LINKS.forText(dx) : [];
+    var done = {}; rows.forEach(function (r) { done[r.id] = 1; });
+    var suggest = linkIds.filter(function (id) { return !done[id]; });
+    if (!rows.length && !suggest.length) return "";
+    var body = rows.map(function (r) {
+      if (r.missing) return '<div class="icu-score miss" data-icu-act="calc:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-need">needs: ' + esc(r.missing.join(", ")) + '</span></div>';
+      var iv = r.interp ? String(r.interp).replace(/<[^>]*>/g, "") : "";
+      return '<div class="icu-score" data-icu-act="calc:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-v">' + esc(String(r.value) + (r.unit ? " " + r.unit : "")) + '</span>' + (iv ? '<span class="icu-score-i">' + esc(iv) + '</span>' : "") + '</div>';
+    }).join("");
+    var sug = suggest.length ? '<div class="icu-score-sug">Suggested for “' + esc(dx) + '”: ' + suggest.map(function (id) { return '<button type="button" class="icu-score-chip" data-icu-act="calc:' + esc(id) + '">' + esc(scoreCalcTitle(id)) + '</button>'; }).join(" ") + '</div>' : "";
+    return '<div class="icu-sec-lbl">📊 Scores</div><div class="icu-card">' + body + sug +
+      '<p class="icu-doc-sub" style="margin:8px 0 0">Auto-calculated from entered data — tap any score to open the full calculator and confirm. Decision-support only.</p></div>';
+  }
+
   var RENDER = {
     // Redesign Overview: Current status (author+time) -> Active problems -> Critical alerts ->
     // Rounds & instructions (group) -> Current treatment -> Lab Watch -> Trends -> Goals. Every
@@ -2578,6 +2613,9 @@
       // 5) Critical alerts — the engine-grouped detail (below the design cards; not in the mock but valuable).
       out += '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>';
       out += alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
+
+      // 5b) Auto-computed clinical scores (Feature B) — always-on vitals scores + diagnosis-linked.
+      out += renderScoresPanel();
 
       // 6) Lab Watch toggle (redesign inline card) — only when the feature is on.
       if (labWatchOn()) {
@@ -5999,6 +6037,7 @@
     var ix = act.indexOf(":"), cmd = ix < 0 ? act : act.slice(0, ix), arg = ix < 0 ? "" : act.slice(ix + 1);
     switch (cmd) {
       case "close": ICU.close(); break;
+      case "calc": try { if (window.MEDCALC && MEDCALC.open) MEDCALC.open(arg); } catch (e) {} break;
       case "tab": if (icuV2On()) _screen = "patient"; _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
       case "ws": { if (icuV2On()) _screen = "patient"; _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
       // ---- ICU v2 (smd_icu_v2) — board / alerts / team / admit / filter, all flag-only ----
