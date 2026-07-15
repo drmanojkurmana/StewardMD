@@ -36,6 +36,16 @@
     { id: "aty", name: "Atypicals", cols: [
       { id: "atyp", label: "Mycoplasma / Chlamydia" }, { id: "legio", label: "Legionella" } ] }
   ];
+  // Tier-1 Gram-stain bands over the organism groups. Many clinicians don't recognise that
+  // Enterobacterales (E. coli, Klebsiella…), non-fermenters and fastidious GN rods are all
+  // Gram-negative, so those three families sit under an explicit "Gram-negative" banner.
+  // Single-family bands (gpc / ana / aty) span both header rows.
+  var BANDS = [
+    { id: "gpc", name: "Gram-positive", groups: ["gpc"] },
+    { id: "gneg", name: "Gram-negative", groups: ["entero", "nonferm", "fast"] },
+    { id: "ana", name: "Anaerobes", groups: ["ana"] },
+    { id: "aty", name: "Atypicals", groups: ["aty"] }
+  ];
   var COLS = [];
   GROUPS.forEach(function (g) { g.cols.forEach(function (c) { c.group = g.id; COLS.push(c); }); });
 
@@ -263,9 +273,18 @@
 
     // scrollable grid
     h += '<div class="abg-scroll"><table class="abg-grid"><thead>';
-    // group header row
-    h += '<tr class="abg-grp"><th class="abg-rowh abg-corner" rowspan="2">Antibiotic</th>';
-    GROUPS.forEach(function (g) { h += '<th class="abg-gh g-' + g.id + '" colspan="' + g.cols.length + '">' + esc(g.name) + '</th>'; });
+    // tier-1 Gram-stain band row (spells out that Enterobacterales etc. are Gram-negative)
+    var solo = {}; BANDS.forEach(function (b) { if (b.groups.length === 1) solo[b.groups[0]] = 1; });
+    var span = {}; GROUPS.forEach(function (g) { span[g.id] = g.cols.length; });
+    h += '<tr class="abg-band"><th class="abg-rowh abg-corner" rowspan="3">Antibiotic</th>';
+    BANDS.forEach(function (b) {
+      var cs = 0; b.groups.forEach(function (gid) { cs += span[gid] || 0; });
+      var rs = b.groups.length === 1 ? ' rowspan="2"' : '';
+      h += '<th class="abg-gh abg-band-h g-' + b.id + '"' + rs + ' colspan="' + cs + '">' + esc(b.name) + '</th>';
+    });
+    // tier-2 group header row — only multi-family bands fan out into their families here
+    h += '</tr><tr class="abg-grp">';
+    GROUPS.forEach(function (g) { if (!solo[g.id]) h += '<th class="abg-gh g-' + g.id + '" colspan="' + g.cols.length + '">' + esc(g.name) + '</th>'; });
     h += '</tr><tr class="abg-orgh">';
     COLS.forEach(function (c) {
       var on = (covSelType === "org" && covSel === c.id) ? " sel" : "";
@@ -484,7 +503,8 @@
       ".abg-agent{display:block;font:600 12px/1.25 var(--f);color:var(--ink)}",
       ".abg-agent.org{font-weight:700;font-style:italic}",
       ".abg-gh{padding:6px 8px;text-align:center;font:800 10px var(--f);text-transform:uppercase;letter-spacing:.04em;color:#fff}",
-      ".g-gpc{background:#2563EB}.g-entero{background:#B91C1C}.g-nonferm{background:#C2410C}.g-fast{background:#7E22CE}.g-ana{background:#92702a}.g-aty{background:#475569}",
+      ".g-gpc{background:#2563EB}.g-entero{background:#B91C1C}.g-nonferm{background:#C2410C}.g-fast{background:#7E22CE}.g-ana{background:#92702a}.g-aty{background:#475569}.g-gneg{background:#7F1D1D}",
+      ".abg-band-h{font-size:10.5px;letter-spacing:.09em;border-bottom:2px solid var(--panel)}",
       ".abg-orgh th{top:0}",
       ".abg-ch{padding:6px 5px;min-width:56px;max-width:70px;vertical-align:bottom;text-align:center;background:var(--panel)}",
       ".abg-ch span{display:block;font:700 9.5px/1.15 var(--f);color:var(--ink);word-break:break-word}",
