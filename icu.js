@@ -39,6 +39,7 @@
     ventilator: {},             // { mode, fio2, peep, tv, rr, peak, plateau, drivingP, compliance, pf }
     fluids: { intake24h: null, output24h: null, urine24h: null, drains: null, net24h: null, cumulative: null, strategyPhase: "" },
     infusions: [],              // [{ drug, dose, unit, rateMlHr, indication }]
+    treatment: [],              // [{ id, name, dose, route, freq, cat:abx|fluid|supp|other, by, byUid, ts }] — editable Current-Treatment list (any doctor add/remove; group changes logged to timeline). Lives in ICU_STATE so it auto-persists (solo roster) + auto-mirrors to the shared patient doc (whole team sees it).
     imaging: [],                // [{ id, ts, modality, category, studyName, bodyRegion, indication, findingsRaw, impressionRaw, reportRaw, keyPos[], keyNeg[], critical[], parsed, comment, source, reportId, reportDateTime, radiologist, reviewed, inSummary, hidden, importedAt }] — Ward Sync radiology + manual imaging notes (sibling of labs/vitals; NOT scored by any engine)
     findings: [],               // [{ canonicalFindingId(engine id | note:*), displayLabel, polarity:present|absent|possible, temporality:current|historical|resolved, source, clinicianConfirmed, inReasoning, at }] — structured clinician-picked findings (documentation; NOT fed to scoring)
     goals: [],                  // [string]
@@ -56,7 +57,7 @@
   // other's open patient — isolation no longer depends on the auth-reset firing. ownerNow() is a
   // hoisted function; at first load it is "anon" until Firebase resolves, then reconcileOwner()
   // syncs the buffer to the resolved owner exactly once.
-  function bufKey(owner) { return LS_KEY + ":" + (owner || ownerNow()); }
+  function bufKey(owner) { return LS_KEY + ":" + (owner || ownerNow()) + (_wardMode ? ":ward" : ""); }
 
   /* ---------------------------------------------- reactive state (Proxy) */
   // Deep proxy: any nested set/delete schedules a coalesced notify().
@@ -506,6 +507,15 @@
     _lwBadge = 0; _lwHighlight = null; _lwDraft = null;
     _corrCache = {}; _corrErr = null; _corrBusy = false; _corrAnalysed = false;
     _dxShow = false; _dxWhy = {}; _dxAdvanced = false; _dxPt = null; _corrPt = null;
+  }
+  // Load THIS context's solo current-patient buffer into STATE — used when switching ICU ↔ Ward so
+  // each mode keeps its own scratch patient (bufKey is namespaced by _wardMode). Same key-copy shape
+  // as grpApplyState; missing keys fall back to DEFAULT_STATE.
+  function ctxLoadBuffer() {
+    var raw = null;
+    try { raw = JSON.parse(localStorage.getItem(bufKey()) || "null"); } catch (e) {}
+    if (!raw || typeof raw !== "object") raw = clone(DEFAULT_STATE);
+    Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (raw[k] != null) ? clone(raw[k]) : clone(DEFAULT_STATE[k]); });
   }
   // BUG C1 (cross-patient contamination): ingestFromWard/ingestWardHistory MERGE into live STATE
   // (their contract is "callers reset/select the patient before syncing"). Loading a DIFFERENT
@@ -2376,7 +2386,7 @@
   var WORKSPACES = [
     { id: "overview", label: "Overview", svg: "pulse", members: ["overview", "rounds"] },
     { id: "monitoring", label: "Monitoring", svg: "heart", members: ["vitals", "trends", "hemo", "fluids", "lytes", "abg", "vent", "infusions"] },
-    { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "protocols", "goals", "interactions"] },
+    { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "treatment", "protocols", "goals", "interactions"] },
     { id: "documents", label: "Documents", svg: "copy", members: ["documents", "imaging", "handover", "discharge"] },
     { id: "more", label: "More", svg: "more", members: ["more"] }
   ];
@@ -2388,16 +2398,34 @@
   MEMBER.interactions = { label: "Interactions", svg: "warn", ic: "⚠️" }; // Care Plan sub-tab — drug interactions
   MEMBER.handover = { label: "Handover", svg: "copy", ic: "⇄" };        // Documents sub-tab — SBAR shift handover
   MEMBER.discharge = { label: "Discharge", svg: "rounds", ic: "📝" };    // Documents sub-tab — Discharge Creator + remove patient
+  MEMBER.treatment = { label: "Treatment", svg: "syringe", ic: "💊" };   // Care Plan sub-tab — editable Current Treatment (drug DB + custom; any doctor add/remove; timeline-logged)
+  // Treatment categories (colour-coded), shared by RENDER.treatment + the add composer.
+  var TX_CATS = [
+    { k: "abx",   label: "Antibiotics", color: "var(--danger)" },
+    { k: "fluid", label: "Fluids",      color: "var(--primary)" },
+    { k: "supp",  label: "Supportive",  color: "var(--warn)" },
+    { k: "other", label: "Other",       color: "var(--muted)" }
+  ];
+  var TX_FREQS = ["OD", "BD", "TDS", "QID", "q6h", "q8h", "q12h", "STAT", "infusion", "SOS"];
+  function txCatLabel(k) { for (var i = 0; i < TX_CATS.length; i++) if (TX_CATS[i].k === k) return TX_CATS[i].label; return "Other"; }
+  var _txDraft = null;   // add-treatment composer draft { name, dose, route, freq, cat }
+  var _txHits = [];      // transient drug-DB search results (indexed by txpick:N)
   function wsOf(m) { for (var i = 0; i < WORKSPACES.length; i++) if (WORKSPACES[i].members.indexOf(m) >= 0) return WORKSPACES[i].id; return "overview"; }
   function wsById(id) { for (var i = 0; i < WORKSPACES.length; i++) if (WORKSPACES[i].id === id) return WORKSPACES[i]; return WORKSPACES[0]; }
   // Workspace members visible under the current feature flags (Imaging is flag-gated,
   // so the kill-switch hides it from the sub-nav instantly — no reload).
-  function wsMembers(w) { return (w && w.members || []).filter(function (m) { return m === "imaging" ? icuImagingOn() : true; }); }
+  function wsMembers(w) { return (w && w.members || []).filter(function (m) { if (m === "imaging") return icuImagingOn(); if (m === "vent" && _wardMode) return false; return true; }); }
   function isMonWs() { return _ws === "overview" || _ws === "monitoring"; }
   var _active = "overview";
   var _ws = "overview";        // current workspace (bottom bar)
   var _wsLast = {};            // workspace id → last member viewed in it
   var _screen = "board";       // v2 only: "board" | "patient" | "alerts" | "team"
+  // WARD MODE — the SAME dashboard, tuned for ward (not ICU) patients: opened via ICU.openWard()
+  // from the Ward Sync tab. Ward hides the ventilator sub-tab, relabels "ICU" → "Ward", and keeps
+  // a SEPARATE solo patient namespace (:ward roster/buffer) so ward patients never mix with ICU.
+  // Everything else (engines, Treatment, deep review, imaging, discharge, instructions) is reused.
+  var _wardMode = false;
+  function ctxLabel() { return _wardMode ? "Ward" : "ICU"; }
   var _admitting = false;      // true while an Admit-opened patient form is up; cancelling it with no data returns to the board (not a blank patient page)
   var _v2Filter = "all";       // v2 board acuity filter: "all" | "critical" | "review" | "stable"
   var _imgFilter = "all";      // Imaging Notes filter bucket
@@ -2602,13 +2630,18 @@
           '<button class="icu-ov-viewtasks" data-icu-act="tab:rounds">View ' + gopen + ' open task' + (gopen === 1 ? "" : "s") + ' →</button></div>';
       }
 
-      // 4) Current treatment — drug + dose rows (design parity), from infusions (+ ventilation).
-      var tx = infusions.map(function (i) { return { name: i.drug, dose: (i.dose != null ? i.dose + (i.unit ? " " + i.unit : "") : (i.rateMlHr != null ? i.rateMlHr + " mL/h" : "")) }; }).filter(function (t) { return t.name; });
-      if (v.mode) tx.push({ name: "Ventilation", dose: v.mode + (v.fio2 ? " · FiO₂ " + v.fio2 + "%" : "") });
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("syringe", "💉") + ' Current treatment</div>' +
+      // 4) Current treatment — the editable Treatment list (drug DB + free text) when present, else
+      //    fall back to infusions/ventilation (design parity for patients with no explicit treatment).
+      var txList = (_raw.treatment || []).map(function (i) { return { name: i.name, dose: [i.dose, i.route, i.freq].filter(Boolean).join(" · ") }; });
+      var tx = txList;
+      if (!txList.length) {
+        tx = infusions.map(function (i) { return { name: i.drug, dose: (i.dose != null ? i.dose + (i.unit ? " " + i.unit : "") : (i.rateMlHr != null ? i.rateMlHr + " mL/h" : "")) }; }).filter(function (t) { return t.name; });
+        if (v.mode) tx.push({ name: "Ventilation", dose: v.mode + (v.fio2 ? " · FiO₂ " + v.fio2 + "%" : "") });
+      }
+      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment</div>' +
         (tx.length ? tx.map(function (t) { return '<div class="icu-ov-tx"><span class="icu-ov-tx-nm">' + esc(t.name) + '</span><span class="icu-ov-tx-dose">' + esc(t.dose || "—") + '</span></div>'; }).join("")
-          : '<p class="icu-doc-sub" style="margin:0">No infusions recorded.</p>') +
-        '<button class="icu-btn ghost" data-icu-act="tab:infusions" style="margin-top:10px">' + ico("syringe", "💉") + ' Manage infusions &amp; vasopressors</button></div>';
+          : '<p class="icu-doc-sub" style="margin:0">No treatment recorded yet.</p>') +
+        '<button class="icu-btn ghost" data-icu-act="tab:treatment" style="margin-top:10px">' + ico("syringe", "💊") + ' Add / manage treatment</button></div>';
 
       // 5) Critical alerts — the engine-grouped detail (below the design cards; not in the mock but valuable).
       out += '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>';
@@ -2727,6 +2760,37 @@
         '<button class="icu-btn ghost" data-icu-act="edit:infusion">✎ Add infusion</button>' +
         '<button class="icu-btn" data-icu-act="launch:inf">Open full Infusion &amp; Vasopressor Calculator</button></div>';
       return '<div class="icu-sec-lbl">' + ico("syringe", "💉") + ' Infusions</div>' + list + quick;
+    },
+    // Editable Current Treatment — antibiotics / fluids / supportive / other. Any doctor (consultant
+    // or resident) may add (drug DB or free-text) or remove; each change is written to the shared
+    // timeline (group). Stored in ICU_STATE.treatment so it auto-persists + mirrors to the whole team.
+    treatment: function () {
+      var tx = _raw.treatment || [];
+      var out = '<div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment' +
+        (tx.length ? ' <span style="color:var(--muted);font-weight:600">· ' + tx.length + ' item' + (tx.length === 1 ? "" : "s") + '</span>' : "") + '</div>';
+      if (!tx.length) {
+        out += '<div class="icu-card"><div class="icu-empty">No treatment recorded yet. Tap ＋ Add treatment to add antibiotics, fluids or supportive drugs — from the drug database or your own.</div></div>';
+      } else {
+        TX_CATS.forEach(function (c) {
+          var items = tx.filter(function (x) { return (x.cat || "other") === c.k; });
+          if (!items.length) return;
+          out += '<div class="icu-sec-lbl" style="margin:14px 0 6px;font-size:12px">' +
+            '<span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:' + c.color + ';margin-right:7px;vertical-align:middle"></span>' + esc(c.label) + '</div>' +
+            '<div class="icu-card" style="padding:4px 12px">' + items.map(function (x) {
+              var dsg = [x.dose, x.route, x.freq].filter(Boolean).join(" · ");
+              return '<div style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">' +
+                '<span style="flex:0 0 4px;align-self:stretch;border-radius:3px;background:' + c.color + '"></span>' +
+                '<div style="flex:1;min-width:0"><div style="font:800 14.5px var(--font);color:var(--ink)">' + esc(x.name) + '</div>' +
+                (dsg ? '<div style="font-family:var(--mono,monospace);font-size:12.5px;color:var(--primary);margin-top:2px">' + esc(dsg) + '</div>' : "") +
+                (x.by ? '<div style="font:600 10.5px var(--font);color:var(--muted);margin-top:3px">added by ' + esc(x.by) + '</div>' : "") + '</div>' +
+                '<button class="icu-tip" data-icu-act="txdel:' + encodeURIComponent(x.id) + '" title="Remove treatment" aria-label="Remove ' + esc(x.name) + '" style="color:var(--danger);font-size:15px;flex:0 0 auto">🗑</button>' +
+              '</div>';
+            }).join("") + '</div>';
+        });
+      }
+      out += '<button class="icu-btn" data-icu-act="txadd" style="margin-top:12px">＋ Add treatment</button>' +
+        '<p class="icu-doc-sub" style="margin:10px 2px 0;text-align:center">Any doctor — consultant or resident — can add or remove treatment. Every change is recorded on the patient timeline.</p>';
+      return out;
     },
     protocols: function () {
       return '<div class="icu-sec-lbl">🚨 Critical Care Protocols</div>' +
@@ -3038,6 +3102,8 @@
       if (_raw.abg && Object.keys(_raw.abg).filter(function (k) { return k !== "ts"; }).length) return true;
       if (_raw.ventilator && Object.keys(_raw.ventilator).length) return true;
       if ((_raw.imaging || []).length) return true;
+      if ((_raw.infusions || []).length) return true;
+      if ((_raw.treatment || []).length) return true;
       if (_raw.patient && (_raw.patient.name || _raw.patient.diagnosis)) return true;
     } catch (e) {}
     return false;
@@ -3053,6 +3119,7 @@
       if (st.ventilator && Object.keys(st.ventilator).length) return true;
       if ((st.imaging || []).length) return true;
       if ((st.infusions || []).length) return true;
+      if ((st.treatment || []).length) return true;
       if ((st.findings || []).length) return true;
       if (st.patient && (st.patient.name || st.patient.diagnosis)) return true;
     } catch (e) {}
@@ -3250,8 +3317,8 @@
     list.forEach(function (p) { counts[p.sev]++; });
     var unread = counts.critical + counts.review;
     var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
-      '<button class="icu-v2-ubtn" data-icu-act="close" aria-label="Close ICU — back to home" title="Close ICU — back to home">' + ico("home", "⌂") + '</button>' +
-      '<div class="icu-v2-utitle">My ICU patients<div class="icu-v2-usub">' + counts.total + ' patient' + (counts.total === 1 ? "" : "s") + ' · on this device</div></div>' +
+      '<button class="icu-v2-ubtn" data-icu-act="close" aria-label="Close ' + ctxLabel() + ' — back to home" title="Close ' + ctxLabel() + ' — back to home">' + ico("home", "⌂") + '</button>' +
+      '<div class="icu-v2-utitle">My ' + ctxLabel() + ' patients<div class="icu-v2-usub">' + counts.total + ' patient' + (counts.total === 1 ? "" : "s") + ' · on this device</div></div>' +
       '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications' + (unread ? " (" + unread + " unread)" : "") + '">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
       '</div><div class="icu-v2-strip">' +
       '<button class="icu-v2-scount total' + (_v2Filter === "all" ? " on" : "") + '" data-icu-act="icufilter:all"' + v2StripAria("all", counts.total, "All patients") + '><b>' + counts.total + '</b><span>Patients</span></button>' +
@@ -3263,7 +3330,7 @@
       return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board"><div class="icu-v2-empty">' +
         '<div class="icu-v2-empty-ic">' + ico("pulse", "🫀") + '</div>' +
         '<div class="icu-v2-empty-t">No patients yet</div>' +
-        '<p class="icu-v2-empty-p">Admit your first ICU patient to start tracking vitals, labs, alerts and a round-ready summary — all on this device.</p>' +
+        '<p class="icu-v2-empty-p">Admit your first ' + ctxLabel() + ' patient to start tracking vitals, labs, instructions and a round-ready summary — all on this device.</p>' +
         '<button class="icu-btn icu-v2-empty-cta" data-icu-act="icuadmit">＋ Admit patient</button></div></div></div>';
     }
     var attn = list.filter(function (p) { return p.sev !== "stable"; });
@@ -3856,7 +3923,7 @@
         (active ? "● " : "") + '<span style="flex:1">' + esc(g.name || "ICU unit") + (g.unit ? " · " + esc(g.unit) : "") +
         '<span style="display:block;font:600 11px var(--font);color:var(--muted)">' + esc(grpRoleLabel(g.myRole)) + '</span></span></button>';
     }).join("") : '<div class="icu-empty">' + (_grpList === null ? "Connecting to your shared units…" : "No shared units yet.") + '</div>';
-    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Your ICU units"><h3>Your ICU units</h3>' + rows +
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Your ' + ctxLabel() + ' units"><h3>Your ' + ctxLabel() + ' units</h3>' + rows +
       '<button class="icu-btn" data-icu-act="grpnew" style="margin-top:10px">' + ico("plus", "＋") + ' Create a unit</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Close</button></div>';
     modalEl.classList.add("on");
@@ -5784,7 +5851,7 @@
       if (a && a.currentUser && a.currentUser.uid) return a.currentUser.uid; } catch (e) {}
     return "anon";
   }
-  function rosterKey(owner) { return ROSTER_BASE + ":" + (owner || ownerNow()); }
+  function rosterKey(owner) { return ROSTER_BASE + ":" + (owner || ownerNow()) + (_wardMode ? ":ward" : ""); }
   function loadRoster() { try { var r = JSON.parse(localStorage.getItem(rosterKey())); return Array.isArray(r) ? r : []; } catch (e) { return []; } }
   function saveRoster(r) { try { localStorage.setItem(rosterKey(), JSON.stringify(r)); } catch (e) {} }
   // React to sign-in / sign-out / account-switch. Only ever called from Firebase's
@@ -6158,6 +6225,13 @@
       case "drug": launch(function () { if (!window.INF) return; (INF.openDrug ? INF.openDrug(arg) : INF.open()); infWeightBridge(); installInfBridge(); }, "infOverlay"); break;
       case "infdupupd": if (_infDup) { ingestInfusion(Object.assign({}, _infDup.rec, { replaceIndex: _infDup.idx })); if (window.toast) toast(_infDup.rec.drug + " updated."); _infDup = null; } closeForm(); paint(); break;
       case "infdupsep": if (_infDup) { ingestInfusion(_infDup.rec); if (window.toast) toast(_infDup.rec.drug + " added as a separate line."); _infDup = null; } closeForm(); paint(); break;
+      // ---- Current Treatment (editable; any doctor add/remove; group changes → timeline) ----
+      case "txadd": _txDraft = { name: "", dose: "", route: "", freq: "", cat: "other" }; _txHits = []; openTxForm(); break;
+      case "txcat": txSyncInputs(); if (_txDraft) _txDraft.cat = arg; openTxForm(); break;
+      case "txfreq": txSyncInputs(); if (_txDraft) _txDraft.freq = (_txDraft.freq === arg ? "" : arg); openTxForm(); break;
+      case "txpick": { var _th = _txHits[+arg]; if (_th && _txDraft) { txSyncInputs(); _txDraft.name = _th.name; _txDraft.cat = _th.cat || _txDraft.cat; var _tp = txParseDose(_th.dose); if (!_txDraft.dose && _tp.dose) _txDraft.dose = _tp.dose; if (!_txDraft.route && _tp.route) _txDraft.route = _tp.route; if (!_txDraft.freq && _tp.freq) _txDraft.freq = _tp.freq; openTxForm(); } break; }
+      case "txsave": txSave(); break;
+      case "txdel": txDelete(decodeURIComponent(arg)); break;
       case "gensummary": openSummary(); break;
       case "copysummary": copySummary(); break;
       case "edit": openForm(arg); break;
@@ -6257,6 +6331,119 @@
     if (idx >= 0) STATE.infusions[idx] = rec; else STATE.infusions.push(rec);   // Proxy auto-persists + repaints
     return true;
   }
+
+  /* ------------------------------------------------- Current Treatment (editable) ----
+   * ICU_STATE.treatment is an editable list any doctor can add to / remove from. It auto-persists
+   * (solo roster) and auto-mirrors to the shared patient doc (whole team). Group add/remove is also
+   * written to the shared timeline. Drug names + doses come from the Drug Index (window.MEDDRUGS)
+   * the prescription pad uses, or the clinician's own free text. */
+  function txSearchDrugs(q) {
+    q = String(q || "").trim().toLowerCase(); if (q.length < 2) return [];
+    var list = (window.MEDDRUGS && MEDDRUGS._list) || [], out = [];
+    for (var i = 0; i < list.length && out.length < 7; i++) {
+      var d = list[i]; if (!d || !d.generic) continue;
+      var g = String(d.generic).toLowerCase(), cls = String(d.cls || "").toLowerCase();
+      if (g.indexOf(q) >= 0 || cls.indexOf(q) >= 0 || (d.brands || []).some(function (b) { return String(b).toLowerCase().indexOf(q) >= 0; }))
+        out.push({ name: d.generic, dose: d.dose || "", cls: d.cls || "", cat: txGuessCat(d) });
+    }
+    return out;
+  }
+  function txGuessCat(d) {
+    var s = ((d.cat || "") + " " + (d.cls || "") + " " + (d.generic || "")).toLowerCase();
+    if (/antibiot|antimicrob|penicillin|cephalosporin|carbapenem|glycopeptide|macrolide|quinolone|fluoroquinolone|aminoglycoside|antifungal|antiviral|nitroimidazole|metronidazole|linezolid|colistin/.test(s)) return "abx";
+    if (/fluid|saline|crystalloid|ringer|dextrose|colloid|\balbumin\b|\bns\b|\brl\b/.test(s)) return "fluid";
+    return "supp";
+  }
+  // Light heuristic split of a Drug-Index dose string ("40 mg IV/PO once daily") into dose/route/freq.
+  function txParseDose(str) {
+    str = String(str || ""); var o = { dose: "", route: "", freq: "" };
+    var rt = str.match(/\b(IV|PO|SC|IM|NG|PR|SL|neb|inhaled)\b/i); if (rt) o.route = rt[1].toUpperCase();
+    var ds = str.match(/(\d[\d.–—\-]*\s*(?:mcg|µg|mg|g|mL|ml|units?|IU)\b)/i); if (ds) o.dose = ds[1].replace(/\s+/g, " ").trim();
+    if (/\bonce (?:a )?daily\b|\bOD\b|\bq24\s?h?\b/i.test(str)) o.freq = "OD";
+    else if (/\btwice\b|\bBD\b|\bq12\s?h?\b/i.test(str)) o.freq = "BD";
+    else if (/\bthrice\b|three times\b|\bTDS\b|\bq8\s?h?\b|every 8\s?h/i.test(str)) o.freq = "TDS";
+    else if (/four times\b|\bQID\b|\bq6\s?h?\b|every 6\s?h/i.test(str)) o.freq = "q6h";
+    return o;
+  }
+  function txAuthorName() {
+    var nm = v2AccountName();
+    if (grpActive() && _grp && _grp.myRole) return nm + " (" + grpRoleLabel(_grp.myRole) + ")";
+    return nm;
+  }
+  function txLogTimeline(action, item) {
+    if (!grpActive() || !_grpPtId) return;
+    var api = groupsApi(); if (!api || !api.addTimelineEvent) return;
+    var dsg = [item.dose, item.route, item.freq].filter(Boolean).join(" ");
+    var title = (action === "add" ? "Treatment added: " : "Treatment stopped: ") + item.name;
+    var detail = (dsg ? dsg + " · " : "") + txCatLabel(item.cat);
+    try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "treatment", title: title, detail: detail }).then(null, function () {}); } catch (e) {}
+  }
+  function txChip(act, label, on, dotColor) {
+    return '<button class="icu-chip" data-icu-act="' + act + '" style="margin:0 6px 6px 0;' +
+      (on ? "border-color:var(--primary);background:var(--primary-soft);color:var(--primary)" : "") + '">' +
+      (dotColor ? '<span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:' + dotColor + '"></span>' : "") + esc(label) + '</button>';
+  }
+  function openTxForm() {
+    ensureModal();
+    var d = _txDraft || (_txDraft = { name: "", dose: "", route: "", freq: "", cat: "other" });
+    var freqChips = TX_FREQS.map(function (f) { return txChip("txfreq:" + f, f, d.freq === f, null); }).join("");
+    var catChips = TX_CATS.map(function (c) { return txChip("txcat:" + c.k, c.label, d.cat === c.k, c.color); }).join("");
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("syringe", "💊") + ' Add treatment</h3>' +
+      '<div class="icu-fld" style="grid-column:1/-1"><label for="txq">Drug — search the database or type your own</label>' +
+      '<input id="txq" autocomplete="off" placeholder="e.g. Ceftriaxone · Normal Saline · chest physio" value="' + esc(d.name) + '"></div>' +
+      '<div id="txsug" style="margin:-4px 0 6px"></div>' +
+      '<div class="icu-grid2">' +
+        '<div class="icu-fld"><label for="txdose">Dose</label><input id="txdose" autocomplete="off" placeholder="e.g. 1 g" value="' + esc(d.dose) + '"></div>' +
+        '<div class="icu-fld"><label for="txroute">Route</label><input id="txroute" autocomplete="off" placeholder="IV / PO / SC" value="' + esc(d.route) + '"></div>' +
+      '</div>' +
+      '<div class="icu-fld" style="grid-column:1/-1"><label>Frequency</label><div style="display:flex;flex-wrap:wrap">' + freqChips + '</div></div>' +
+      '<div class="icu-fld" style="grid-column:1/-1"><label>Category</label><div style="display:flex;flex-wrap:wrap">' + catChips + '</div></div>' +
+      '<button class="icu-btn" data-icu-act="txsave">Add to treatment</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
+    modalEl.classList.add("on");
+    var q = modalEl.querySelector("#txq");
+    if (q) { q.oninput = function () { if (_txDraft) _txDraft.name = this.value; txRenderSug(this.value); }; txRenderSug(d.name); setTimeout(function () { try { q.focus(); } catch (e) {} }, 40); }
+  }
+  function txRenderSug(q) {
+    var box = modalEl && modalEl.querySelector("#txsug"); if (!box) return;
+    _txHits = txSearchDrugs(q);
+    if (!_txHits.length) { box.innerHTML = ""; return; }
+    box.innerHTML = '<div class="icu-card" style="padding:2px 0;margin:0">' + _txHits.map(function (h, i) {
+      var col = "var(--muted)"; for (var j = 0; j < TX_CATS.length; j++) if (TX_CATS[j].k === h.cat) col = TX_CATS[j].color;
+      return '<button data-icu-act="txpick:' + i + '" style="width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--border);padding:9px 12px;cursor:pointer;color:var(--ink)">' +
+        '<span style="float:right;font:700 9.5px var(--font);color:#fff;background:' + col + ';border-radius:6px;padding:2px 6px">' + esc(txCatLabel(h.cat)) + '</span>' +
+        '<div style="font:700 13.5px var(--font)">' + esc(h.name) + '</div>' +
+        (h.cls ? '<div style="font:600 11px var(--font);color:var(--muted)">' + esc(h.cls) + (h.dose ? " · " + esc(h.dose) : "") + '</div>' : "") + '</button>';
+    }).join("") + '</div>';
+  }
+  function txSyncInputs() {
+    if (!modalEl || !_txDraft) return;
+    var q = modalEl.querySelector("#txq"), dz = modalEl.querySelector("#txdose"), rt = modalEl.querySelector("#txroute");
+    if (q) _txDraft.name = q.value; if (dz) _txDraft.dose = dz.value; if (rt) _txDraft.route = rt.value;
+  }
+  function txSave() {
+    txSyncInputs();
+    var d = _txDraft || {}, name = String(d.name || "").trim();
+    if (name.length < 2) { if (window.toast) toast("Enter a drug or treatment name"); return; }
+    var item = { id: "tx_" + nowTs() + "_" + Math.floor(Math.random() * 1e6), name: name,
+      dose: String(d.dose || "").trim(), route: String(d.route || "").trim(), freq: d.freq || "",
+      cat: d.cat || "other", by: txAuthorName(), ts: nowTs() };
+    STATE.treatment = (_raw.treatment || []).concat([item]);   // reassign → reactive persist + group mirror
+    txLogTimeline("add", item);
+    _txDraft = null; _txHits = [];
+    closeForm();
+    _active = "treatment"; _ws = wsOf("treatment"); _wsLast[_ws] = "treatment"; paint();
+    if (window.toast) toast("Added to treatment" + (grpActive() ? " · logged to timeline" : ""));
+  }
+  function txDelete(id) {
+    var list = _raw.treatment || [], item = null;
+    for (var i = 0; i < list.length; i++) if (String(list[i].id) === String(id)) { item = list[i]; break; }
+    if (!item) return;
+    STATE.treatment = list.filter(function (x) { return String(x.id) !== String(id); });
+    txLogTimeline("del", item);
+    paint();
+    if (window.toast) toast("Removed" + (grpActive() ? " · logged to timeline" : ""));
+  }
   // Seed the frozen calculator's weight from the canonical patient weight (BUG F). Runs AFTER
   // INF.openDrug so the calc's own `a.weight||=70` default cannot clobber it.
   function infWeightBridge() {
@@ -6310,8 +6497,17 @@
 
   /* ------------------------------------------------------------- controller */
   var ICU = {
-    open: function (target) {
+    open: function (target, ward) {
       injectCSS();
+      // Context switch (ICU ↔ Ward): ward has a SEPARATE solo patient namespace, so swap the live
+      // buffer and land on the board so no patient leaks across modes. No-op when the mode is unchanged.
+      var wantWard = !!ward;
+      if (wantWard !== _wardMode) {
+        try { if (grpActive()) grpTeardownPatient(); } catch (e) {}
+        _wardMode = wantWard;
+        try { ctxLoadBuffer(); } catch (e) {}
+        _screen = "board"; _active = "overview"; _ws = "overview"; _grpPtId = null;
+      }
       if (!rootEl) {
         rootEl = document.createElement("div"); rootEl.id = "icuRoot";
         document.body.appendChild(rootEl);
@@ -6337,8 +6533,13 @@
       rootEl.classList.add("on");
       document.body.style.overflow = "hidden";
     },
+    // My Ward — the SAME dashboard tuned for ward patients (ventilator tab hidden, "Ward" labels,
+    // separate solo namespace). Opened from the Ward Sync tab. Reuses every engine + the Treatment
+    // tab + deep review + imaging + discharge + (group) instructions.
+    openWard: function (target) { return ICU.open(target, true); },
     close: function () { if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; try { grpTeardownPatient(); } catch (e) {} },
     isOpen: function () { return !!(rootEl && rootEl.classList.contains("on")); },
+    isWard: function () { return !!_wardMode; },
     // Drug Interactions entry point — delegates to drugs.js's window.MEDDRUGS.openInteractions,
     // the single shared MEDLIST overlay (Task 5/6), same as the "launch:interactions" action.
     openInteractions: function () { if (window.MEDDRUGS && window.MEDDRUGS.openInteractions) window.MEDDRUGS.openInteractions(); },
