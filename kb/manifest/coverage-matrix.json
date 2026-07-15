@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 4744,
+    "diseases": 4760,
     "diagnostic": 141,
-    "reference": 4603,
+    "reference": 4619,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -33,7 +33,7 @@
     "severity": 8.3,
     "prognosis": 99.8,
     "diagnosticScoring": 3,
-    "management": 3,
+    "management": 2.9,
     "drugTherapy": 2.7,
     "dosing": 2.7,
     "stewardship": 1.1
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 690,
+      "total": 704,
       "diagnostic": 20,
-      "reference": 670,
+      "reference": 684,
       "dims": {
-        "overview": 690,
-        "clinicalFeatures": 690,
-        "pathophysiology": 690,
-        "differential": 690,
-        "investigations": 690,
-        "redFlags": 690,
+        "overview": 704,
+        "clinicalFeatures": 704,
+        "pathophysiology": 704,
+        "differential": 704,
+        "investigations": 704,
+        "redFlags": 704,
         "severity": 48,
-        "prognosis": 690,
+        "prognosis": 704,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -200,18 +200,18 @@
       }
     },
     "Systemic / Other": {
-      "total": 18,
+      "total": 19,
       "diagnostic": 4,
-      "reference": 14,
+      "reference": 15,
       "dims": {
-        "overview": 18,
-        "clinicalFeatures": 18,
-        "pathophysiology": 18,
-        "differential": 18,
-        "investigations": 18,
-        "redFlags": 18,
+        "overview": 19,
+        "clinicalFeatures": 19,
+        "pathophysiology": 19,
+        "differential": 19,
+        "investigations": 19,
+        "redFlags": 19,
         "severity": 3,
-        "prognosis": 17,
+        "prognosis": 18,
         "diagnosticScoring": 4,
         "management": 4,
         "drugTherapy": 3,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 540,
+      "total": 541,
       "diagnostic": 10,
-      "reference": 530,
+      "reference": 531,
       "dims": {
-        "overview": 540,
-        "clinicalFeatures": 540,
-        "pathophysiology": 540,
-        "differential": 539,
-        "investigations": 540,
-        "redFlags": 540,
+        "overview": 541,
+        "clinicalFeatures": 541,
+        "pathophysiology": 541,
+        "differential": 540,
+        "investigations": 541,
+        "redFlags": 541,
         "severity": 33,
-        "prognosis": 538,
+        "prognosis": 539,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -25307,6 +25307,28 @@
         "investigations": true,
         "redFlags": true,
         "severity": true,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "phosphaturic_mesenchymal_tumour",
+      "name": "Phosphaturic Mesenchymal Tumour",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Musculoskeletal / Endocrine",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
         "prognosis": true,
         "diagnosticScoring": false,
         "management": false,
@@ -67644,6 +67666,28 @@
       }
     },
     {
+      "id": "alg9_cdg",
+      "name": "ALG9-congenital disorder of glycosylation (ALG9-CDG, CDG type Il)",
+      "specialty": "Neurology",
+      "system": "Neurology / Metabolic genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "alien_hand_syndrome",
       "name": "Alien hand syndrome",
       "specialty": "Neurology",
@@ -70570,6 +70614,28 @@
       }
     },
     {
+      "id": "cog7_cdg",
+      "name": "COG7-congenital disorder of glycosylation (COG7-CDG, CDG type IIe)",
+      "specialty": "Neurology",
+      "system": "Neurology / Metabolic genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "cold_stimulus_headache",
       "name": "Cold-stimulus headache",
       "specialty": "Neurology",
@@ -73364,6 +73430,28 @@
       }
     },
     {
+      "id": "grin1_encephalopathy",
+      "name": "GRIN1-related neurodevelopmental disorder (NMDA receptor GluN1 encephalopathy)",
+      "specialty": "Neurology",
+      "system": "Neurology / Metabolic genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "grin_related_disorder",
       "name": "GRIN1/GRIN2A/GRIN2B-related neurodevelopmental disorder",
       "specialty": "Neurology",
@@ -73940,6 +74028,28 @@
       "name": "Hereditary spastic paraplegia SPG7 (paraplegin)",
       "specialty": "Neurology",
       "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg13",
+      "name": "Hereditary Spastic Paraplegia Type 13 (SPG13)",
+      "specialty": "Neurology",
+      "system": "Neurology / Hereditary ataxia & spastic paraplegia",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -75300,10 +75410,120 @@
       }
     },
     {
+      "id": "limb_girdle_muscular_dystrophy_d2",
+      "name": "Limb-girdle muscular dystrophy D2 (transportin-3-related)",
+      "specialty": "Neurology",
+      "system": "Neuromuscular / Limb-girdle muscular dystrophy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "limb_girdle_muscular_dystrophy_r1",
       "name": "Limb-girdle muscular dystrophy R1 (calpain3-related)",
       "specialty": "Neurology",
       "system": "Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r2",
+      "name": "Limb-girdle muscular dystrophy R2 (dysferlin-related)",
+      "specialty": "Neurology",
+      "system": "Neuromuscular / Limb-girdle muscular dystrophy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r3",
+      "name": "Limb-girdle muscular dystrophy R3 (alpha-sarcoglycan-related)",
+      "specialty": "Neurology",
+      "system": "Neuromuscular / Limb-girdle muscular dystrophy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r4",
+      "name": "Limb-girdle muscular dystrophy R4 (beta-sarcoglycan-related)",
+      "specialty": "Neurology",
+      "system": "Neuromuscular / Limb-girdle muscular dystrophy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "limb_girdle_muscular_dystrophy_r5",
+      "name": "Limb-girdle muscular dystrophy R5 (gamma-sarcoglycan-related)",
+      "specialty": "Neurology",
+      "system": "Neuromuscular / Limb-girdle muscular dystrophy",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -80668,6 +80888,28 @@
       }
     },
     {
+      "id": "spinocerebellar_ataxia_type_11",
+      "name": "Spinocerebellar Ataxia Type 11",
+      "specialty": "Neurology",
+      "system": "Neurology / Hereditary ataxia & spastic paraplegia",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "spinocerebellar_ataxia_type_12",
       "name": "Spinocerebellar ataxia type 12 (PPP2R2B)",
       "specialty": "Neurology",
@@ -80716,6 +80958,28 @@
       "name": "Spinocerebellar ataxia type 14 (PRKCG)",
       "specialty": "Neurology",
       "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_15",
+      "name": "Spinocerebellar Ataxia Type 15",
+      "specialty": "Neurology",
+      "system": "Neurology / Hereditary ataxia & spastic paraplegia",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -80844,6 +81108,28 @@
       }
     },
     {
+      "id": "spinocerebellar_ataxia_type_31",
+      "name": "Spinocerebellar Ataxia Type 31",
+      "specialty": "Neurology",
+      "system": "Neurology / Hereditary ataxia & spastic paraplegia",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "spinocerebellar_ataxia_type_35",
       "name": "Spinocerebellar ataxia type 35 (TGM6)",
       "specialty": "Neurology",
@@ -80892,6 +81178,28 @@
       "name": "Spinocerebellar ataxia type 38",
       "specialty": "Neurology",
       "system": "Neurology / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_42",
+      "name": "Spinocerebellar Ataxia Type 42",
+      "specialty": "Neurology",
+      "system": "Neurology / Hereditary ataxia & spastic paraplegia",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -81046,6 +81354,28 @@
       "name": "Sporadic inclusion body myositis",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "sptan1_encephalopathy",
+      "name": "SPTAN1-related developmental and epileptic encephalopathy (alpha-II spectrin encephalopathy)",
+      "specialty": "Neurology",
+      "system": "Neurology / Metabolic genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -102892,6 +103222,28 @@
       "name": "Aseptic Abscess Syndrome",
       "specialty": "Systemic / Other",
       "system": "Multisystem / Inflammatory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "chronic_infantile_neurological_cutaneous_articular_syndrome",
+      "name": "Chronic Infantile Neurological Cutaneous Articular Syndrome",
+      "specialty": "Systemic / Other",
+      "system": "Multisystem / Autoinflammatory",
       "tier": "reference",
       "caps": {
         "overview": true,
