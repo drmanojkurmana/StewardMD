@@ -1088,12 +1088,12 @@
       // ── Phase 3: round-note composer + timeline author avatar + smart-notification feed ──
       '#icuRoot.icu-v2 .icu-v2-addround{border:2px dashed var(--primary3);background:var(--panel2);color:var(--primary);box-shadow:none}' +
       '#icuRoot.icu-v2 .icu-v2-tlav{width:16px;height:16px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 8px var(--font);display:inline-flex;align-items:center;justify-content:center}' +
-      '#icuRoot.icu-v2 .icu-v2-rbody{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:14px 16px}' +
+      '#icuRoot.icu-v2 .icu-v2-rbody{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:14px 16px;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
       '#icuRoot.icu-v2 .icu-v2-rscroll{padding:14px 16px;display:flex;flex-direction:column;gap:10px}' +
       /* suggestions box flexes to fill + scrolls internally; add-your-own + post stay pinned/visible */
-      '#icuRoot.icu-v2 .icu-v2-sugbox{flex:1 1 auto;min-height:96px;display:flex;flex-direction:column;overflow:hidden}' +
+      '#icuRoot.icu-v2 .icu-v2-sugbox{display:flex;flex-direction:column}' +
       '#icuRoot.icu-v2 .icu-v2-ownbox{flex:0 0 auto}' +
-      '#icuRoot.icu-v2 .icu-v2-rpre{display:flex;flex-wrap:wrap;gap:9px;align-content:flex-start;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1px 1px 4px}' +
+      '#icuRoot.icu-v2 .icu-v2-rpre{display:flex;flex-wrap:wrap;gap:9px;align-content:flex-start;padding:1px 1px 4px}' +
       '#icuRoot.icu-v2 .icu-v2-sugbox .icu-v2-rpre{margin:-2px -2px 0}' +
       '#icuRoot.icu-v2 .icu-v2-rchip{display:inline-flex;align-items:center;gap:8px;text-align:left;background:var(--panel2);border:2px solid var(--border);border-radius:13px;padding:10px 12px;cursor:pointer;color:var(--ink)}' +
       '#icuRoot.icu-v2 .icu-v2-rchip.on{border-color:var(--primary);background:var(--primary-soft)}' +
@@ -4404,7 +4404,7 @@
         var on = _roundOnBehalf === m.uid;
         return '<button class="icu-v2-obchip' + (on ? " on" : "") + '" data-icu-act="grproundbehalf:' + encodeURIComponent(m.uid) + '">' + esc(m.name || grpRoleLabel(m.role)) + (m.role ? ' <span class="icu-v2-obrole">' + esc(grpRoleLabel(m.role)) + '</span>' : "") + '</button>';
       }).join("");
-    return '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">Instructed by</div>' +
+    return '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">Instructed by <span style="opacity:.6">· optional</span></div>' +
       '<p class="icu-doc-sub" style="margin:0 0 9px">Log a colleague’s verbal order under their name — e.g. a consultant’s round instruction.</p>' +
       '<div class="icu-v2-obpick">' + chips + '</div></div>';
   }
@@ -4414,12 +4414,10 @@
     var bed = pt.bed || p.bed || "—", nm = pt.name || p.name || "Patient";
     var instr = grpCanInstruct(_grp && _grp.myRole);
     var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="grproundback" aria-label="Back to rounds">‹</button>' +
-      '<div><div class="icu-v2-shead-h">' + (instr ? "Add round note" : "Add a note") + '</div><div class="icu-v2-shead-s">Bed ' + esc(bed) + ' · ' + esc(nm) + '</div></div></div>';
-    var intro = '<div class="icu-v2-note">' + ico("info", "ⓘ") + (instr
-      ? ' Tap an order to add it — each becomes a tracked task at your chosen priority. Add anything custom below.'
-      : ' Add a note for the team — it posts to the timeline, author- and time-stamped. Only consultants and senior residents can issue tracked instructions.') + '</div>';
+      '<div><div class="icu-v2-shead-h">Add round note</div><div class="icu-v2-shead-s">Bed ' + esc(bed) + ' · ' + esc(nm) + '</div></div></div>';
+    var intro = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Tap an order — each becomes a tracked task at your chosen priority. Add your own below, and optionally log it under the consultant who gave it.</div>';
     var errNote = _grpErr ? '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") + ' ' + esc(_grpErr) + '</div>' : "";
-    var prio = instr ? priorityPickerHTML() : "";
+    var prio = priorityPickerHTML();
     // BOX 1 — suggestions: capped-height, scrolls INSIDE; presets + custom-added chips as wrapping tags.
     var chips = ROUND_PRESETS.map(function (txt, i) {
       var on = !!_roundSel[i];
@@ -4427,19 +4425,17 @@
     }).join("") + _roundExtra.map(function (txt, i) {
       return '<button class="icu-v2-rchip on" data-icu-act="grproundrm:' + i + '" aria-label="' + esc("Remove: " + txt) + '"><span class="icu-v2-rbox" aria-hidden="true">✓</span><span class="icu-v2-rtx">' + esc(txt) + '</span><span class="icu-v2-rx" aria-hidden="true">✕</span></button>';
     }).join("");
-    var sugBox = '<div class="icu-card icu-v2-sugbox"><div class="icu-sec-lbl" style="margin:0 0 10px">' + (instr ? "Common instructions — tap to add" : "Common orders — tap to add a note") + '</div><div class="icu-v2-rpre">' + chips + '</div></div>';
+    var sugBox = '<div class="icu-card icu-v2-sugbox"><div class="icu-sec-lbl" style="margin:0 0 10px">Common instructions — tap to add</div><div class="icu-v2-rpre">' + chips + '</div></div>';
     // BOX 2 — add your own (always visible, right below the suggestions box).
     var custom = '<div class="icu-card icu-v2-ownbox"><div class="icu-sec-lbl" style="margin:0 0 8px">Add your own</div>' +
       '<div class="icu-v2-rcustom"><input id="icuRoundCustom" type="text" aria-label="Add your own instruction" placeholder="e.g. Increase PEEP to 8" value="' + esc(_roundText) + '"><button class="icu-btn" data-icu-act="grproundadd" aria-label="Add this instruction">Add</button></div></div>';
     var n = grpRoundChosen().length;
-    var btnLbl = instr
-      ? (n ? "Post " + n + " instruction" + (n === 1 ? "" : "s") + " · " + TASK_PRIORITY[_roundPriority].label : "Choose or type an instruction")
-      : (n ? "Post note to timeline" : "Type a note first");
+    var btnLbl = n ? "Post " + n + " instruction" + (n === 1 ? "" : "s") + " · " + TASK_PRIORITY[_roundPriority].label : "Choose or type an instruction";
     var post = '<div class="icu-v2-rpost"><button class="icu-btn' + (n ? "" : " ghost") + '" data-icu-act="grproundpost"' + (n ? "" : " disabled") + '>' + esc(btnLbl) + '</button></div>';
     // Flex column: header (fixed) · body (intro/priority/add-your-own fixed + suggestions box flexes &
     // scrolls) · post bar (fixed). Both boxes stay on screen; only the suggestions list scrolls.
-    return '<div class="icu-v2-dialog" role="dialog" aria-modal="true" aria-label="' + (instr ? "Add round note" : "Add a note") + '" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden">' +
-      header + '<div class="icu-v2-rbody">' + errNote + intro + (instr ? onBehalfPickerHTML() : "") + prio + sugBox + custom + '</div>' + post + '</div>';
+    return '<div class="icu-v2-dialog" role="dialog" aria-modal="true" aria-label="Add round note" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden">' +
+      header + '<div class="icu-v2-rbody">' + errNote + intro + prio + sugBox + custom + onBehalfPickerHTML() + '</div>' + post + '</div>';
   }
   function grpRoundSetPriority(k) { grpRoundCaptureText(); if (TASK_PRIORITY[k]) _roundPriority = k; paint(); }
   function grpOpenRound() {
@@ -4461,7 +4457,7 @@
     grpRoundCaptureText();
     var api = groupsApi(); if (!api || !grpActive() || !_grpPtId) return;
     var chosen = grpRoundChosen(); if (!chosen.length) return;
-    var instr = grpCanInstruct(_grp && _grp.myRole);
+    var instr = true;   // any unit member can log a tracked instruction now (the consultant often says it orally + a resident notes it down — attribute via "Instructed by")
     var onBehalf = null;
     if (_roundOnBehalf) { var _m = (_grpMembers || []).filter(function (x) { return x.uid === _roundOnBehalf; })[0]; if (_m) onBehalf = { uid: _m.uid, name: _m.name || grpRoleLabel(_m.role) }; }
     var plan = grpRoundPlan(chosen, instr, v2AccountName(), _roundPriority, onBehalf);
