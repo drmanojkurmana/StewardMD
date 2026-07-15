@@ -522,6 +522,51 @@
     recent: function () { if (typeof openMyCases === "function") openMyCases(); },
     dictate: function () { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); }
   };
+  // --- Resume where you left off. iOS suspends a backgrounded app and, under memory pressure,
+  //     TERMINATES it after a while; the next launch is a COLD START — the WebView reloads index.html
+  //     and lands on Home, losing the screen the user was on (e.g. an ICU patient). There is no true
+  //     background execution on iOS for a WebView app. So: snapshot the currently-open overlay when the
+  //     app backgrounds, and reopen it on the next launch IF it's recent — so the user returns where they
+  //     were. Purely local + defensive; worst case it does nothing and Home shows (today's behaviour). ---
+  var RESUME_KEY = "smd_resume_route";
+  var RESUME_MAX_MS = 12 * 3600 * 1000;   // resume only within ~a shift; a genuinely fresh open still shows Home
+  // Ordered by z-index (ICU/Ward dashboard is topmost → matched first). Each maps an overlay's open
+  // marker to the ACT that reopens it.
+  var RESUME_ROUTES = [
+    { sel: "#icuRoot.on", act: "icu" },
+    { sel: "#ghisPanel.open", act: "ward" },
+    { sel: "#mcOverlay.on", act: "calculators" },
+    { sel: "#mdOverlay.on", act: "drugs" },
+    { sel: "#miOverlay.on", act: "interactions" },
+    { sel: "#abgOverlay.on", act: "antibiogram" },
+    { sel: "#eceOverlay.on", act: "electrolytes" }
+  ];
+  function resumeSnapshot() {
+    try {
+      var hit = null;
+      for (var i = 0; i < RESUME_ROUTES.length; i++) { if (document.querySelector(RESUME_ROUTES[i].sel)) { hit = RESUME_ROUTES[i].act; break; } }
+      // ICU keeps its own richer sub-state (patient/tab/unit) in ICU_STATE; here we only need which overlay.
+      if (hit) localStorage.setItem(RESUME_KEY, JSON.stringify({ act: hit, at: Date.now() }));
+      else localStorage.removeItem(RESUME_KEY);   // on Home → clear, so a plain reload stays on Home
+    } catch (e) {}
+  }
+  function resumeRestore() {
+    try {
+      var d = JSON.parse(localStorage.getItem(RESUME_KEY) || "null");
+      localStorage.removeItem(RESUME_KEY);   // one-shot — consume it so it only fires on this launch
+      if (!d || !d.act || !d.at || (Date.now() - d.at) > RESUME_MAX_MS) return;
+      if (typeof ACT[d.act] === "function") setTimeout(function () { try { ACT[d.act](); } catch (e) {} }, 350);
+    } catch (e) {}
+  }
+  var _resumeWired = false;
+  function initResume() {
+    if (_resumeWired) return; _resumeWired = true;
+    try {
+      document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") resumeSnapshot(); });
+      window.addEventListener("pagehide", resumeSnapshot);
+      window.addEventListener("beforeunload", resumeSnapshot);
+    } catch (e) {}
+  }
   function injectCSS() {
     if (document.getElementById("smd-home-css")) return;
     var st = document.createElement("style"); st.id = "smd-home-css";
@@ -3060,6 +3105,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   })();
   function start() {
     injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases(); wrapSidebar(); try { enhanceAbout(); } catch (e) {}
+    try { initResume(); } catch (e) {}
     if (IS_V2) {
       // show the new home as soon as the user is past splash/login, COVERING the app's own
       // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
@@ -3068,7 +3114,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         tries++;
         var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell");
         var entered = (ms && !ms.classList.contains("hidden")) || (sh && sh.offsetParent !== null);
-        if (entered || tries > 60) { clearInterval(iv); document.body.classList.add("ui-v2"); suppressModeSelect(); showV2(); }
+        if (entered || tries > 60) { clearInterval(iv); document.body.classList.add("ui-v2"); suppressModeSelect(); showV2(); try { resumeRestore(); } catch (e) {} }
       }, 120);
     }
   }
