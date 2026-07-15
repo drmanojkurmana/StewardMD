@@ -48,6 +48,52 @@
     return n;
   }
 
+  /* ---- APACHE II per-variable point bands (emit points; calc's P() collapses b-suffixes) ---- */
+  function apTemp(t) { return t >= 41 ? 4 : t >= 39 ? 3 : t >= 38.5 ? 1 : t >= 36 ? 0 : t >= 34 ? 1 : t >= 32 ? 2 : t >= 30 ? 3 : 4; }
+  function apMap(m) { return m >= 160 ? 4 : m >= 130 ? 3 : m >= 110 ? 2 : m >= 70 ? 0 : m >= 50 ? 2 : 4; }
+  function apHr(h) { return h >= 180 ? 4 : h >= 140 ? 3 : h >= 110 ? 2 : h >= 70 ? 0 : h >= 55 ? 2 : h >= 40 ? 3 : 4; }
+  function apRr(r) { return r >= 50 ? 4 : r >= 35 ? 3 : r >= 25 ? 1 : r >= 12 ? 0 : r >= 10 ? 1 : r >= 6 ? 2 : 4; }
+  function apPh(p) { return p >= 7.7 ? 4 : p >= 7.6 ? 3 : p >= 7.5 ? 1 : p >= 7.33 ? 0 : p >= 7.25 ? 2 : p >= 7.15 ? 3 : 4; }
+  function apNa(n) { return n >= 180 ? 4 : n >= 160 ? 3 : n >= 155 ? 2 : n >= 150 ? 1 : n >= 130 ? 0 : n >= 120 ? 2 : n >= 111 ? 3 : 4; }
+  function apK(k) { return k >= 7 ? 4 : k >= 6 ? 3 : k >= 5.5 ? 1 : k >= 3.5 ? 0 : k >= 3 ? 1 : k >= 2.5 ? 2 : 4; }
+  function apCr(c) { return c >= 3.5 ? 4 : c >= 2 ? 3 : c >= 1.5 ? 2 : c >= 0.6 ? 0 : 2; }
+  function apHct(h) { return h >= 60 ? 4 : h >= 50 ? 2 : h >= 46 ? 1 : h >= 30 ? 0 : h >= 20 ? 2 : 4; }
+  function apWbc(w) { return w >= 40 ? 4 : w >= 20 ? 2 : w >= 15 ? 1 : w >= 3 ? 0 : w >= 1 ? 2 : 4; }
+  function apAge(a) { return a >= 75 ? 6 : a >= 65 ? 5 : a >= 55 ? 3 : a >= 45 ? 2 : 0; }
+  function apOxy(fio2, pao2, paco2) { /* fio2 as fraction */
+    if (fio2 >= 0.5) { var aa = fio2 * 713 - paco2 / 0.8 - pao2; return aa < 200 ? 0 : aa < 350 ? 2 : aa < 500 ? 3 : 4; }
+    return pao2 > 70 ? 0 : pao2 >= 61 ? 1 : pao2 >= 55 ? 3 : 4;
+  }
+
+  /* ---- Child-Pugh clinical-grade detection from recorded findings/diagnosis (conservative;
+     never fabricates a grade — returns null when ungraded → row stays "needs") ---- */
+  function textBlob(s) {
+    var parts = [];
+    if (s.patient && s.patient.diagnosis) parts.push(s.patient.diagnosis);
+    (s.findings || []).forEach(function (f) { if (f.polarity !== "absent") parts.push(f.displayLabel || f.canonicalFindingId || ""); });
+    (s.imaging || []).forEach(function (im) { parts.push((im.impressionRaw || "") + " " + (im.findingsRaw || "")); });
+    return parts.join(" | ").toLowerCase();
+  }
+  function absentIn(s, re) {
+    return (s.findings || []).some(function (f) { return f.polarity === "absent" && re.test((f.displayLabel || f.canonicalFindingId || "").toLowerCase()); });
+  }
+  function cpAscites(s) {
+    var t = textBlob(s);
+    if (absentIn(s, /ascites/) || /\bno ascites\b|without ascites|absence of ascites|resolved ascites/.test(t)) return "1";
+    if (!/ascites/.test(t)) return null;
+    if (/moderate|severe|tense|large|gross|refractory/.test(t)) return "3";
+    if (/mild|minimal|trace|small|controlled|diuretic/.test(t)) return "2";
+    return null;
+  }
+  function cpEnceph(s) {
+    var t = textBlob(s);
+    if (absentIn(s, /encephalopath/) || /\bno (hepatic )?encephalopath|without encephalopath/.test(t)) return "1";
+    if (!/encephalopath/.test(t)) return null;
+    if (/grade\s*(iii|iv|3|4)|stupor|coma|west[- ]?haven\s*[34]/.test(t)) return "3";
+    if (/grade\s*(i|ii|1|2)|mild|asterixis|west[- ]?haven\s*[12]|drowsy/.test(t)) return "2";
+    return null;
+  }
+
   var DEFS = [
     {
       id: "qsofa", label: "qSOFA", always: true, adapt: function (s) {
@@ -120,9 +166,38 @@
       }
     },
     {
-      id: "childpugh", label: "Child-Pugh", dx: /cirrhosis|hepat|liver|variceal|ascites/i, adapt: function () {
-        /* ascites + encephalopathy are clinical, not lab -> always needs */
-        return { __missing: ["ascites grade", "encephalopathy grade"] };
+      id: "childpugh", label: "Child-Pugh", dx: /cirrhosis|hepat|liver|variceal|ascites/i, adapt: function (s) {
+        var l = L(s), m = [];
+        if (!has(l.bili)) m.push("bilirubin"); if (!has(l.alb)) m.push("albumin"); if (!has(l.inr)) m.push("INR");
+        var asc = cpAscites(s), enc = cpEnceph(s);
+        if (!asc) m.push("ascites grade"); if (!enc) m.push("encephalopathy grade");
+        if (m.length) return { __missing: m };
+        return {
+          bili: l.bili < 2 ? "1" : l.bili <= 3 ? "2" : "3",
+          alb: l.alb > 3.5 ? "1" : l.alb >= 2.8 ? "2" : "3",
+          inr: l.inr < 1.7 ? "1" : l.inr <= 2.3 ? "2" : "3",
+          ascites: asc, enceph: enc
+        };
+      }
+    },
+    {
+      id: "apache2", label: "APACHE II", always: true,
+      note: "Assumes no chronic organ insufficiency and no acute renal failure — set these in the full calculator.",
+      adapt: function (s) {
+        var v = V(s), l = L(s), a = s.abg || {}, age = s.patient && s.patient.age, m = [];
+        if (!has(v.temp)) m.push("temp"); if (!has(v.map)) m.push("MAP"); if (!has(v.hr)) m.push("HR"); if (!has(v.rr)) m.push("RR");
+        if (!has(v.gcs)) m.push("GCS"); if (!has(a.ph)) m.push("pH"); if (!has(a.pao2)) m.push("PaO₂"); if (!has(a.fio2)) m.push("FiO₂");
+        if (has(a.fio2) && (a.fio2 > 1 ? a.fio2 / 100 : a.fio2) >= 0.5 && !has(a.paco2)) m.push("PaCO₂");
+        if (!has(l.na)) m.push("Na"); if (!has(l.k)) m.push("K"); if (!has(l.creat)) m.push("creatinine");
+        if (!has(l.hct)) m.push("haematocrit"); if (!has(l.wbc)) m.push("WBC"); if (!has(age)) m.push("age");
+        if (m.length) return { __missing: m.length > 5 ? ["a full physiology panel (ABG, electrolytes, CBC, vitals, GCS, age)"] : m };
+        var fio2 = a.fio2 > 1 ? a.fio2 / 100 : a.fio2;
+        return {
+          temp: apTemp(v.temp), map: apMap(v.map), hr: apHr(v.hr), rr: apRr(v.rr),
+          oxy: apOxy(fio2, a.pao2, a.paco2), ph: apPh(a.ph), na: apNa(l.na), k: apK(l.k),
+          cr: apCr(l.creat), arf: false, hct: apHct(l.hct), wbc: apWbc(l.wbc),
+          gcs: v.gcs, age: String(apAge(age)), chronic: "0"
+        };
       }
     }
   ];
@@ -139,7 +214,7 @@
       if (v && v.__missing) { out.push({ id: def.id, label: def.label, missing: v.__missing }); return; }
       var r; try { r = c.compute(v); } catch (e) { return; }
       if (!r || r.err) { out.push({ id: def.id, label: def.label, missing: ["valid inputs"] }); return; }
-      out.push({ id: def.id, label: def.label, value: r.v, unit: r.u || "", interp: r.i || "", used: Object.keys(v) });
+      out.push({ id: def.id, label: def.label, value: r.v, unit: r.u || "", interp: (r.i || "") + (def.note ? " " + def.note : ""), used: Object.keys(v) });
     });
     return out;
   }
