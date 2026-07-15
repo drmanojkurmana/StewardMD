@@ -4660,6 +4660,91 @@
       var days=8.052*Math.sqrt(v.crl)+23.73;
       var wk=Math.floor(days/7), d=Math.round(days-wk*7);
       return { v:wk+"+"+d, u:"weeks+days", i:"Estimated gestational age ("+r0(days)+" days); most accurate for CRL ~10–84 mm. Ref: Robinson & Fleming 1975." };
+    } },
+
+  { id:"cardiac_index", cat:"Cardiovascular", icon:"❤️", title:"Cardiac Index",
+    desc:"Cardiac output normalised to body surface area.",
+    inputs:[
+      { id:"co", label:"Cardiac output", type:"number", unit:"L/min", step:"0.1" },
+      { id:"bsa", label:"Body surface area", type:"number", unit:"m²", step:"0.01" }
+    ],
+    compute:function(v){
+      if(!ok(v.co)||!ok(v.bsa)||v.bsa<=0||v.co<0) return ERR;
+      var ci=v.co/v.bsa;
+      var b=ci<2.2?"Low — consistent with a cardiogenic-shock / low-output state":ci>4?"High-output state":"Within the usual range";
+      return { v:r1(ci), u:"L/min/m²", i:b+" (normal ~2.5–4.0). Ref: standard haemodynamics." };
+    } },
+
+  { id:"stroke_volume", cat:"Cardiovascular", icon:"❤️", title:"Stroke Volume & Index",
+    desc:"Blood ejected per beat, from cardiac output and heart rate.",
+    inputs:[
+      { id:"co", label:"Cardiac output", type:"number", unit:"L/min", step:"0.1" },
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm", step:"1" },
+      { id:"bsa", label:"Body surface area (optional, for index)", type:"number", unit:"m²", step:"0.01" }
+    ],
+    compute:function(v){
+      if(!ok(v.co)||!ok(v.hr)||v.hr<=0||v.co<0) return ERR;
+      var sv=v.co*1000/v.hr;
+      var svi=(ok(v.bsa)&&v.bsa>0)?"; stroke volume index ≈ "+r1(sv/v.bsa)+" mL/m²":"";
+      var b=sv<60?"Low stroke volume":sv>100?"High stroke volume":"Within the usual range";
+      return { v:r1(sv), u:"mL", i:b+" (normal ~60–100 mL"+svi+"). Ref: standard haemodynamics." };
+    } },
+
+  { id:"homa_b", cat:"Endocrine", icon:"🧬", title:"HOMA-%B (Beta-Cell Function)",
+    desc:"Estimates pancreatic beta-cell function from fasting values.",
+    inputs:[
+      { id:"ins", label:"Fasting insulin", type:"number", unit:"µU/mL", step:"0.1" },
+      { id:"glu", label:"Fasting glucose", type:"number", unit:"mmol/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ins)||!ok(v.glu)||v.ins<0||v.glu<=3.5) return { err:"Fasting glucose must exceed 3.5 mmol/L for this formula" };
+      var b=20*v.ins/(v.glu-3.5);
+      return { v:r0(b), u:"%", i:"Beta-cell function relative to a normal reference (~100%). Interpret alongside HOMA-IR. Ref: Matthews, Diabetologia 1985 (HOMA)." };
+    } },
+
+  { id:"asdas_crp", cat:"Rheumatology", icon:"🦴", title:"ASDAS-CRP (Axial Spondyloarthritis Activity)",
+    desc:"Ankylosing Spondylitis Disease Activity Score using CRP.",
+    inputs:[
+      { id:"backpain", label:"Back pain (BASDAI Q2, 0–10)", type:"number", step:"0.1" },
+      { id:"stiffness", label:"Morning stiffness duration (BASDAI Q6, 0–10)", type:"number", step:"0.1" },
+      { id:"global", label:"Patient global (0–10)", type:"number", step:"0.1" },
+      { id:"peripheral", label:"Peripheral pain/swelling (BASDAI Q3, 0–10)", type:"number", step:"0.1" },
+      { id:"crp", label:"CRP", type:"number", unit:"mg/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.backpain)||!ok(v.stiffness)||!ok(v.global)||!ok(v.peripheral)||!ok(v.crp)||v.crp<0) return ERR;
+      var s=0.12*v.backpain+0.06*v.stiffness+0.11*v.global+0.07*v.peripheral+0.58*Math.log(v.crp+1);
+      var b=s<1.3?"Inactive disease":s<2.1?"Low disease activity":s<=3.5?"High disease activity":"Very high disease activity";
+      return { v:Math.round(s*100)/100, u:"", i:b+" (CRP in mg/L). Ref: Lukas, Ann Rheum Dis 2009 (ASDAS)." };
+    } },
+
+  { id:"ava_continuity", cat:"Cardiovascular", icon:"❤️", title:"Aortic Valve Area (Continuity Equation)",
+    desc:"Echocardiographic aortic valve area in aortic stenosis.",
+    inputs:[
+      { id:"lvot_d", label:"LVOT diameter", type:"number", unit:"cm", step:"0.1" },
+      { id:"lvot_vti", label:"LVOT velocity-time integral", type:"number", unit:"cm", step:"0.1" },
+      { id:"av_vti", label:"Aortic-valve velocity-time integral", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.lvot_d)||!ok(v.lvot_vti)||!ok(v.av_vti)||v.lvot_d<=0||v.lvot_vti<=0||v.av_vti<=0) return ERR;
+      var lvotArea=Math.PI*Math.pow(v.lvot_d/2,2);
+      var ava=(lvotArea*v.lvot_vti)/v.av_vti;
+      var b=ava<1?"Severe aortic stenosis":ava<1.5?"Moderate aortic stenosis":ava<2?"Mild aortic stenosis":"Normal valve area";
+      return { v:Math.round(ava*100)/100, u:"cm²", i:b+" (severe <1.0, moderate 1.0–1.5, mild 1.5–2.0 cm²). Ref: continuity equation (ASE)." };
+    } },
+
+  { id:"svr", cat:"Critical care", icon:"❤️", title:"Systemic Vascular Resistance (SVR)",
+    desc:"Afterload estimate from mean arterial pressure, CVP and cardiac output.",
+    inputs:[
+      { id:"map", label:"Mean arterial pressure", type:"number", unit:"mmHg", step:"1" },
+      { id:"cvp", label:"Central venous pressure", type:"number", unit:"mmHg", step:"1" },
+      { id:"co", label:"Cardiac output", type:"number", unit:"L/min", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.map)||!ok(v.cvp)||!ok(v.co)||v.co<=0) return ERR;
+      var svr=(v.map-v.cvp)/v.co*80;
+      var b=svr<800?"Low SVR — vasodilatory (e.g. sepsis, anaphylaxis)":svr>1200?"High SVR — vasoconstriction (e.g. cardiogenic/hypovolaemic shock)":"Within the usual range";
+      return { v:r0(svr), u:"dyn·s·cm⁻⁵", i:b+" (normal ~800–1200). Ref: standard haemodynamics." };
     } }
 
   ];
@@ -4927,7 +5012,13 @@
     gose:["glasgow outcome scale extended","gos-e","tbi outcome"],
     paeds_weight:["paediatric weight estimate","apls weight","child weight formula","pediatric weight"],
     ett_size:["ett size","endotracheal tube size","paediatric airway","tube depth"],
-    ga_crl:["gestational age crl","crown rump length","robinson fleming","dating scan"]
+    ga_crl:["gestational age crl","crown rump length","robinson fleming","dating scan"],
+    cardiac_index:["cardiac index","ci","cardiac output bsa","haemodynamics"],
+    stroke_volume:["stroke volume","sv","stroke volume index","svi"],
+    homa_b:["homa b","homa beta","beta cell function","insulin secretion","homa-%b"],
+    asdas_crp:["asdas","asdas-crp","ankylosing spondylitis disease activity","axial spondyloarthritis activity"],
+    ava_continuity:["aortic valve area","continuity equation","ava","aortic stenosis echo","lvot vti"],
+    svr:["systemic vascular resistance","svr","afterload","vascular resistance"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -5150,7 +5241,13 @@
     gose:"Wilson JTL, et al. J Neurotrauma 1998;15(8):573–85 (GOS-E).",
     paeds_weight:"Advanced Paediatric Life Support (APLS) weight formulae.",
     ett_size:"Standard paediatric airway reference (age/4 + 4).",
-    ga_crl:"Robinson HP, Fleming JEE. Br J Obstet Gynaecol 1975;82(9):702–10."
+    ga_crl:"Robinson HP, Fleming JEE. Br J Obstet Gynaecol 1975;82(9):702–10.",
+    cardiac_index:"Standard haemodynamic formula (cardiac output ÷ body surface area).",
+    stroke_volume:"Standard haemodynamic formula (cardiac output ÷ heart rate).",
+    homa_b:"Matthews DR, et al. Diabetologia 1985;28(7):412–9 (HOMA model).",
+    asdas_crp:"Lukas C, et al. Ann Rheum Dis 2009;68(1):18–24 (ASDAS).",
+    ava_continuity:"Baumgartner H, et al. Recommendations on the echocardiographic assessment of aortic valve stenosis (ASE/EACVI).",
+    svr:"Standard haemodynamic formula ((MAP − CVP) ÷ CO × 80)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
