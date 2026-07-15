@@ -522,4 +522,23 @@
       return origOpen.apply(this, arguments);
     };
   }
+
+  // ── Universal Links (iOS) / App Links (Android) → invite join ──────────────────────────────
+  // A universal link that opens the app delivers the URL NATIVELY via the @capacitor/app plugin —
+  // the WebView still loads its own start URL, so the ?icujoin= never lands in location. Forward any
+  // invite URL (cold-launch getLaunchUrl + warm appUrlOpen) into the web join flow. Requires the
+  // "Associated Domains" capability (applinks:stewardmd.in) on the app + the hosted AASA/assetlinks.
+  (function () {
+    var P = plugins(); if (!P || !P.App) return;
+    function feed(u) {
+      if (!u || String(u).indexOf("icujoin=") < 0 && String(u).indexOf("/i/") < 0) return;
+      var tries = 0;
+      (function go() {
+        if (window.ICU && ICU.handleJoinUrl) { try { ICU.handleJoinUrl(u); } catch (e) {} return; }
+        if (tries++ < 40) setTimeout(go, 250);   // wait for icu.js to load on a cold launch
+      })();
+    }
+    try { P.App.getLaunchUrl().then(function (r) { if (r && r.url) feed(r.url); }).catch(function () {}); } catch (e) {}
+    try { P.App.addListener("appUrlOpen", function (d) { if (d && d.url) feed(d.url); }); } catch (e) {}
+  })();
 })();
