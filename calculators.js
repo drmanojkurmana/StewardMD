@@ -4226,6 +4226,99 @@
       var stage=v.b2m>=5.5?"III":(v.b2m<3.5&&v.alb>=35)?"I":"II";
       var m={I:"Stage I — best median survival",II:"Stage II — intermediate",III:"Stage III — poorest median survival"};
       return { v:"Stage "+stage, u:"", i:m[stage]+" (albumin in g/L). Consider R-ISS adding LDH and cytogenetics. Ref: Greipp, J Clin Oncol 2005 (ISS)." };
+    } },
+
+  { id:"katz_adl", cat:"General", icon:"🧑‍🦽", title:"Katz Index of Independence in ADL",
+    desc:"Independence in six basic activities of daily living. Tick each performed INDEPENDENTLY.",
+    inputs:[
+      { id:"bathing", label:"Bathing", type:"check" },
+      { id:"dressing", label:"Dressing", type:"check" },
+      { id:"toileting", label:"Toileting", type:"check" },
+      { id:"transferring", label:"Transferring", type:"check" },
+      { id:"continence", label:"Continence", type:"check" },
+      { id:"feeding", label:"Feeding", type:"check" }
+    ],
+    compute:function(v){
+      var s=["bathing","dressing","toileting","transferring","continence","feeding"].filter(function(k){return v[k];}).length;
+      var b=s===6?"Full function":s>=4?"Moderate impairment":"Severe functional impairment";
+      return { v:s, u:"/6", i:b+" (higher = more independent). Ref: Katz, JAMA 1963." };
+    } },
+
+  { id:"lawton_iadl", cat:"General", icon:"🧑‍🦽", title:"Lawton Instrumental ADL Scale",
+    desc:"Independence in eight instrumental activities of daily living. Tick each performed INDEPENDENTLY.",
+    inputs:[
+      { id:"phone", label:"Using the telephone", type:"check" },
+      { id:"shopping", label:"Shopping", type:"check" },
+      { id:"food", label:"Food preparation", type:"check" },
+      { id:"housekeeping", label:"Housekeeping", type:"check" },
+      { id:"laundry", label:"Laundry", type:"check" },
+      { id:"transport", label:"Mode of transport", type:"check" },
+      { id:"meds", label:"Responsibility for own medication", type:"check" },
+      { id:"finances", label:"Ability to handle finances", type:"check" }
+    ],
+    compute:function(v){
+      var s=["phone","shopping","food","housekeeping","laundry","transport","meds","finances"].filter(function(k){return v[k];}).length;
+      var b=s>=8?"Independent":s>=4?"Moderate dependence":"High dependence";
+      return { v:s, u:"/8", i:b+" (higher = more independent; some versions score 5 items for men). Ref: Lawton & Brody 1969." };
+    } },
+
+  { id:"mjoa", cat:"Neurology", icon:"🧠", title:"modified JOA Score (Cervical Myelopathy)",
+    desc:"Severity of degenerative cervical myelopathy.",
+    inputs:[
+      { id:"upper", label:"Motor — upper extremity", type:"select", opts:[{v:"0",t:"0 — cannot feed self"},{v:"1",t:"1 — cannot use knife/fork, feeds with spoon"},{v:"2",t:"2 — uses knife/fork with difficulty"},{v:"3",t:"3 — mild clumsiness"},{v:"4",t:"4 — slight clumsiness"},{v:"5",t:"5 — normal"}] },
+      { id:"lower", label:"Motor — lower extremity", type:"select", opts:[{v:"0",t:"0 — unable to walk"},{v:"1",t:"1 — needs aid on flat ground"},{v:"2",t:"2 — needs rail on stairs"},{v:"3",t:"3 — lacks stability"},{v:"4",t:"4 — walks with mild deficit"},{v:"5",t:"5 — mild clumsiness walking"},{v:"6",t:"6 — walks with slight difficulty"},{v:"7",t:"7 — normal"}] },
+      { id:"sensory", label:"Sensory — upper extremity", type:"select", opts:[{v:"0",t:"0 — severe sensory loss"},{v:"1",t:"1 — mild loss"},{v:"2",t:"2 — minimal loss"},{v:"3",t:"3 — normal"}] },
+      { id:"sphincter", label:"Sphincter function", type:"select", opts:[{v:"0",t:"0 — unable to void"},{v:"1",t:"1 — marked difficulty"},{v:"2",t:"2 — mild difficulty"},{v:"3",t:"3 — normal"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.upper)+Number(v.lower)+Number(v.sensory)+Number(v.sphincter);
+      var b=s>=15?"Mild myelopathy":s>=12?"Moderate myelopathy":"Severe myelopathy";
+      return { v:s, u:"/18", i:b+" (lower = worse; informs surgical decision-making). Ref: modified JOA (Benzel)." };
+    } },
+
+  { id:"dasi", cat:"Cardiovascular", icon:"❤️", title:"Duke Activity Status Index (DASI)",
+    desc:"Functional capacity from activities the patient can do; estimates peak VO₂ / METs.",
+    inputs:[
+      { id:"a1", label:"Take care of yourself (eat, dress, bathe, use toilet)", type:"check" },
+      { id:"a2", label:"Walk indoors, e.g. around your house", type:"check" },
+      { id:"a3", label:"Walk a block or two on level ground", type:"check" },
+      { id:"a4", label:"Climb a flight of stairs or walk up a hill", type:"check" },
+      { id:"a5", label:"Run a short distance", type:"check" },
+      { id:"a6", label:"Light housework (dusting, washing dishes)", type:"check" },
+      { id:"a7", label:"Moderate housework (vacuuming, carrying groceries)", type:"check" },
+      { id:"a8", label:"Heavy housework (scrubbing floors, moving furniture)", type:"check" },
+      { id:"a9", label:"Yard work (raking, weeding, mowing)", type:"check" },
+      { id:"a10", label:"Sexual relations", type:"check" },
+      { id:"a11", label:"Moderate recreation (golf, bowling, dancing, doubles tennis)", type:"check" },
+      { id:"a12", label:"Strenuous sport (swimming, singles tennis, football, skiing)", type:"check" }
+    ],
+    compute:function(v){
+      var w={a1:2.75,a2:1.75,a3:2.75,a4:5.50,a5:8.00,a6:2.70,a7:3.50,a8:8.00,a9:4.50,a10:5.25,a11:6.00,a12:7.50};
+      var s=0; for(var k in w) if(v[k]) s+=w[k];
+      var mets=(0.43*s+9.6)/3.5;
+      return { v:r1(s), u:"points", i:"Estimated peak VO₂ ≈ "+r1(mets)+" METs (max DASI 58.2; higher = better functional capacity). Ref: Hlatky, Am J Cardiol 1989 (DASI)." };
+    } },
+
+  { id:"basfi", cat:"Rheumatology", icon:"🦴", title:"BASFI (Ankylosing Spondylitis Function)",
+    desc:"Functional limitation in axial spondyloarthritis (each item 0–10).",
+    inputs:[
+      { id:"q1", label:"Putting on socks/tights without help", type:"number", step:"0.1" },
+      { id:"q2", label:"Bending from the waist to pick up a pen", type:"number", step:"0.1" },
+      { id:"q3", label:"Reaching up to a high shelf without help", type:"number", step:"0.1" },
+      { id:"q4", label:"Getting up from an armless chair without using hands", type:"number", step:"0.1" },
+      { id:"q5", label:"Getting up off the floor from lying", type:"number", step:"0.1" },
+      { id:"q6", label:"Standing unsupported for 10 minutes", type:"number", step:"0.1" },
+      { id:"q7", label:"Climbing 12–15 steps without a rail", type:"number", step:"0.1" },
+      { id:"q8", label:"Looking over the shoulder without turning the body", type:"number", step:"0.1" },
+      { id:"q9", label:"Doing physically demanding activities", type:"number", step:"0.1" },
+      { id:"q10", label:"Doing a full day of activities (home or work)", type:"number", step:"0.1" }
+    ],
+    compute:function(v){
+      var qs=["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10"];
+      for(var i=0;i<qs.length;i++) if(!ok(v[qs[i]])) return ERR;
+      var s=qs.reduce(function(a,k){return a+v[k];},0)/10;
+      var b=s>=5?"Marked functional limitation":"Lesser functional limitation";
+      return { v:r1(s), u:"/10", i:b+" (higher = worse; track alongside BASDAI). Ref: Calin, J Rheumatol 1994 (BASFI)." };
     } }
 
   ];
@@ -4462,7 +4555,12 @@
     rai:["rai staging","cll staging","chronic lymphocytic leukaemia stage"],
     binet:["binet staging","cll staging","chronic lymphocytic leukaemia stage europe"],
     ann_arbor:["ann arbor","lymphoma staging","hodgkin staging","cotswolds"],
-    iss_myeloma:["iss","international staging system myeloma","multiple myeloma stage"]
+    iss_myeloma:["iss","international staging system myeloma","multiple myeloma stage"],
+    katz_adl:["katz adl","activities of daily living","basic adl","katz index"],
+    lawton_iadl:["lawton iadl","instrumental activities of daily living","iadl"],
+    mjoa:["mjoa","modified japanese orthopaedic association","cervical myelopathy score","myelopathy severity"],
+    dasi:["duke activity status index","dasi","functional capacity","mets estimate","perioperative functional capacity"],
+    basfi:["basfi","ankylosing spondylitis function","axial spondyloarthritis function"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -4654,7 +4752,12 @@
     rai:"Rai KR, et al. Blood 1975;46(2):219–34.",
     binet:"Binet JL, et al. Cancer 1981;48(1):198–206.",
     ann_arbor:"Carbone PP, et al. Cancer Res 1971;31(11):1860–1 (Cotswolds-modified).",
-    iss_myeloma:"Greipp PR, et al. J Clin Oncol 2005;23(15):3412–20 (ISS)."
+    iss_myeloma:"Greipp PR, et al. J Clin Oncol 2005;23(15):3412–20 (ISS).",
+    katz_adl:"Katz S, et al. JAMA 1963;185:914–9.",
+    lawton_iadl:"Lawton MP, Brody EM. Gerontologist 1969;9(3):179–86.",
+    mjoa:"Modified Japanese Orthopaedic Association score (Benzel et al.).",
+    dasi:"Hlatky MA, et al. Am J Cardiol 1989;64(10):651–4 (DASI).",
+    basfi:"Calin A, et al. J Rheumatol 1994;21(12):2281–5 (BASFI)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
