@@ -60,9 +60,45 @@ function readCookie(header, name) {
   return null;
 }
 
+// Universal Links (iOS) + App Links (Android) association files. Served PUBLICLY here (before the
+// coming-soon gate) with a JSON content-type, from BOTH the custom domain and pages.dev, so Apple's
+// CDN + Android's verifier can always fetch them. iOS opens the app for invite links (…?icujoin=…);
+// the app forwards the link into the join flow (see native-bridge.js + ICU.handleJoinUrl).
+// appID = <TeamID>.<bundleId> = 5QY4LUKX23.in.stewardmd.app.
+const AASA = {
+  applinks: {
+    apps: [],
+    details: [
+      { appID: "5QY4LUKX23.in.stewardmd.app", paths: ["/", "/i/*"] },
+      { appIDs: ["5QY4LUKX23.in.stewardmd.app"],
+        components: [{ "?": { icujoin: "?*" }, comment: "ICU/Ward unit invite link" }] }
+    ]
+  }
+};
+// Android App Links. sha256_cert_fingerprints must list EVERY signing cert that ships the installed
+// app. First entry = the local DEBUG keystore (Pixel 9 adb builds). ADD the Google Play "App signing
+// key" SHA-256 (Play Console → Test and release → Setup → App signing) before the Play Store release —
+// Play re-signs the app, so its cert must be here too or App Links won't verify for Play installs.
+const ASSETLINKS = [
+  { relation: ["delegate_permission/common.handle_all_urls"],
+    target: { namespace: "android_app", package_name: "in.stewardmd.app",
+      sha256_cert_fingerprints: [
+        "9A:36:BF:09:5B:CF:6E:23:5C:BD:DE:9E:DD:E0:31:2A:66:C4:76:23:E4:D7:6C:F3:BD:8A:F7:1E:D7:4B:EE:AC"
+        /* , "<PLAY_APP_SIGNING_SHA256>" — add for the Play Store release */
+      ] } }
+];
+
 export async function onRequest(context) {
   const { request, env, next } = context;
   const url = new URL(request.url);
+
+  // App-association files — public, uncached-by-gate, application/json. Must resolve before the gate.
+  if (url.pathname === "/.well-known/apple-app-site-association") {
+    return new Response(JSON.stringify(AASA), { headers: { "content-type": "application/json", "cache-control": "public, max-age=3600" } });
+  }
+  if (url.pathname === "/.well-known/assetlinks.json") {
+    return new Response(JSON.stringify(ASSETLINKS), { headers: { "content-type": "application/json", "cache-control": "public, max-age=3600" } });
+  }
 
   // PREVIEW BYPASS: Cloudflare Pages preview/branch deployments (<hash|branch>.stewardmd.pages.dev)
   // serve the REAL app unconditionally, so changes can be verified (headless eval harness + manual

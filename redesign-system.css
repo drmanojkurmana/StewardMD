@@ -103,6 +103,19 @@ body.dark {
   font-display: block;   /* wait for the icon font rather than flash ligature text */
   src: url(/assets/fonts/material-symbols-rounded.woff2) format('woff2');
 }
+/* ---- Sacramento (the "MaiKnowledge" credit wordmark, .v4-maik-name .mk-s) ----------
+   SELF-HOSTED for the SAME reason as the icon font: the Google CDN <link> uses a
+   media="print" load-trick that doesn't reliably apply in the WKWebView, so the app
+   fell back to a different system cursive (Snell Roundhand) → the credit looked
+   different on the app vs the web. Bundling the woff2 makes it render identically
+   everywhere. font-display:block so the wordmark never flashes in a fallback face. */
+@font-face {
+  font-family: 'Sacramento';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(/assets/fonts/sacramento.woff2) format('woff2');
+}
 .rds-icon {
   font-family: 'Material Symbols Rounded';
   font-weight: normal; font-style: normal; line-height: 1;

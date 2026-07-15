@@ -522,6 +522,77 @@
     recent: function () { if (typeof openMyCases === "function") openMyCases(); },
     dictate: function () { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); }
   };
+  // --- Resume where you left off. iOS suspends a backgrounded app and, under memory pressure,
+  //     TERMINATES it after a while; the next launch is a COLD START — the WebView reloads index.html
+  //     and lands on Home, losing the screen the user was on (e.g. an ICU patient). There is no true
+  //     background execution on iOS for a WebView app. So: snapshot the currently-open overlay when the
+  //     app backgrounds, and reopen it on the next launch IF it's recent — so the user returns where they
+  //     were. Purely local + defensive; worst case it does nothing and Home shows (today's behaviour). ---
+  var RESUME_KEY = "smd_resume_route";
+  var RESUME_MAX_MS = 12 * 3600 * 1000;   // resume only within ~a shift; a genuinely fresh open still shows Home
+  // Ordered by z-index (ICU/Ward dashboard is topmost → matched first). Each maps an overlay's open
+  // marker to the ACT that reopens it.
+  var RESUME_ROUTES = [
+    { sel: "#icuRoot.on", act: "icu" },
+    { sel: "#ghisPanel.open", act: "ward" },
+    { sel: "#mcOverlay.on", act: "calculators" },
+    { sel: "#mdOverlay.on", act: "drugs" },
+    { sel: "#miOverlay.on", act: "interactions" },
+    { sel: "#abgOverlay.on", act: "antibiogram" },
+    { sel: "#eceOverlay.on", act: "electrolytes" }
+  ];
+  function resumeSnapshot() {
+    try {
+      var hit = null;
+      for (var i = 0; i < RESUME_ROUTES.length; i++) { if (document.querySelector(RESUME_ROUTES[i].sel)) { hit = RESUME_ROUTES[i].act; break; } }
+      if (hit) {
+        var rec = { act: hit, at: Date.now() };
+        // ICU/Ward: also capture the exact screen + sub-tab so resume lands on that tab, not just the board.
+        if (hit === "icu" && window.ICU && ICU.curView) { try { rec.view = ICU.curView(); } catch (e) {} }
+        localStorage.setItem(RESUME_KEY, JSON.stringify(rec));
+      } else localStorage.removeItem(RESUME_KEY);   // on Home → clear, so a plain reload stays on Home
+    } catch (e) {}
+  }
+  function resumeRestore() {
+    try {
+      var d = JSON.parse(localStorage.getItem(RESUME_KEY) || "null");
+      localStorage.removeItem(RESUME_KEY);   // one-shot — consume it so it only fires on this launch
+      if (!d || !d.act || !d.at || (Date.now() - d.at) > RESUME_MAX_MS) return;
+      setTimeout(function () {
+        try {
+          // ICU/Ward: resume the exact screen + sub-tab (falls back to a plain open if unavailable).
+          if (d.act === "icu" && window.ICU && ICU.resume) ICU.resume(d.view);
+          else if (typeof ACT[d.act] === "function") ACT[d.act]();
+        } catch (e) {}
+      }, 350);
+    } catch (e) {}
+  }
+  var _resumeWired = false;
+  function initResume() {
+    if (_resumeWired) return; _resumeWired = true;
+    try {
+      document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") resumeSnapshot(); });
+      window.addEventListener("pagehide", resumeSnapshot);
+      window.addEventListener("beforeunload", resumeSnapshot);
+    } catch (e) {}
+  }
+  // Native-feel sidebar: app.js only slides the drawer open — it never locks the page, so on iOS a
+  // touch-drag over the drawer scrolled the page BEHIND it (the "right side goes up/down", web-page
+  // feel). While the drawer is open, allow touch-scroll ONLY inside its menu when the menu actually
+  // overflows; block it everywhere else so the background can't move. One document listener, idempotent.
+  var _sbGuardWired = false;
+  function installSbScrollGuard() {
+    if (_sbGuardWired) return; _sbGuardWired = true;
+    try {
+      document.addEventListener("touchmove", function (e) {
+        var d = document.getElementById("sbDrawer");
+        if (!d || !d.classList.contains("open")) return;   // only while the sidebar is open
+        var sc = e.target && e.target.closest ? e.target.closest("#sbMenu") : null;
+        if (sc && sc.scrollHeight > sc.clientHeight + 1) return;   // real, scrollable menu → allow native scroll
+        try { e.preventDefault(); } catch (x) {}                   // else block (background / short menu / header)
+      }, { passive: false });
+    } catch (e) {}
+  }
   function injectCSS() {
     if (document.getElementById("smd-home-css")) return;
     var st = document.createElement("style"); st.id = "smd-home-css";
@@ -659,6 +730,10 @@
       "body.ui-v2 .system-picker-btn{border:1px solid var(--line)!important;border-radius:12px!important;min-height:48px}",
       "body.ui-v2 .pathogen-tier,body.ui-v2 .tier-very-likely,body.ui-v2 .tier-likely,body.ui-v2 .tier-possible{border-radius:12px!important}",
       "body.ui-v2 .sb-drawer{border-right:1px solid var(--line)}body.ui-v2 .sb-head{border-bottom:1px solid var(--line)}body.ui-v2 #sbMenu>div,body.ui-v2 #sbMenu>button{border-radius:12px}",
+      /* Native-feel sidebar scroll: the drawer scrolls INTERNALLY and never chains to the page behind
+         it (app.js slides the drawer but doesn't lock the page → on iOS a drag over the drawer scrolled
+         the background, feeling like a web page). overscroll-behavior:contain + the touchmove guard fix it. */
+      "#sbDrawer{overscroll-behavior:contain}#sbMenu{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}",
       "body.ui-v2 .sbref-overlay{z-index:140!important}",
       "body.ui-v2 .brandrow{flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;gap:10px}",
       "body.ui-v2 .brandrow>div:first-child{flex:0 1 auto;min-width:0}",
@@ -1137,7 +1212,17 @@
       if (fab.style.display !== want) fab.style.display = want;
     }
     refreshFab();
-    setInterval(refreshFab, 400);
+    // Scroll fluidity: refreshFab reads layout (elementFromPoint + getComputedStyle), which
+    // forces a synchronous reflow. The old blind 400ms poll ran that ~2.5x/s during scroll and
+    // stuttered the UI. Make it event-driven, rAF-coalesced, and NEVER probe mid-scroll — only
+    // once scrolling settles. A slow 1.2s safety net covers anything the events miss.
+    var _fabRaf = 0, _fabScrolling = 0, _fabScrollT = 0;
+    function scheduleFab() { if (_fabRaf) return; _fabRaf = requestAnimationFrame(function () { _fabRaf = 0; if (!_fabScrolling) refreshFab(); }); }
+    ["click", "hashchange", "transitionend", "animationend"].forEach(function (ev) { window.addEventListener(ev, scheduleFab, true); });
+    document.addEventListener("visibilitychange", scheduleFab, true);
+    // Capture-phase catches scrolls on inner scroll containers too (ICU, Ward Sync, drawers).
+    window.addEventListener("scroll", function () { _fabScrolling = 1; clearTimeout(_fabScrollT); _fabScrollT = setTimeout(function () { _fabScrolling = 0; scheduleFab(); }, 140); }, true);
+    setInterval(scheduleFab, 1200);
 
     // Notifications: probe once for unread medical updates, then hourly.
     try { setTimeout(refreshBadge, 1500); setInterval(function () { _notifItems = null; refreshBadge(); }, 3600000); } catch (e) {}
@@ -3060,6 +3145,8 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   })();
   function start() {
     injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases(); wrapSidebar(); try { enhanceAbout(); } catch (e) {}
+    try { initResume(); } catch (e) {}
+    try { installSbScrollGuard(); } catch (e) {}
     if (IS_V2) {
       // show the new home as soon as the user is past splash/login, COVERING the app's own
       // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
@@ -3068,7 +3155,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         tries++;
         var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell");
         var entered = (ms && !ms.classList.contains("hidden")) || (sh && sh.offsetParent !== null);
-        if (entered || tries > 60) { clearInterval(iv); document.body.classList.add("ui-v2"); suppressModeSelect(); showV2(); }
+        if (entered || tries > 60) { clearInterval(iv); document.body.classList.add("ui-v2"); suppressModeSelect(); showV2(); try { resumeRestore(); } catch (e) {} }
       }, 120);
     }
   }

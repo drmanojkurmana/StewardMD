@@ -3783,14 +3783,24 @@
         });
       }
       function fallback() { return Promise.resolve(self.explainGrounded(pkg, opts)).then(replay); }
-      // Native buffers SSE → fetch-whole + typewriter. Also the no-ReadableStream path.
-      if (window.SMD_IS_NATIVE || typeof ReadableStream === "undefined" || !window.TextDecoder) return fallback();
+      // Native buffers SSE → fetch-whole + typewriter. Also the no-ReadableStream / no-AbortController path.
+      if (window.SMD_IS_NATIVE || typeof ReadableStream === "undefined" || !window.TextDecoder || typeof AbortController === "undefined") return fallback();
+      // Watchdog: a stream that OPENS but delivers nothing (seen on iOS WebKit / standalone PWAs and
+      // buffering proxies) would otherwise hang the "Searching…" bubble FOREVER — an SSE stall raises
+      // no error, so the .catch below never fires and the answer never arrives. Abort if no first
+      // token lands in time, or if the stream stalls mid-answer; the abort rejects the read, and we
+      // return whatever already streamed, else fall back to the proven JSON explainGrounded().
+      var ctrl = new AbortController(), settled = false, wd = null;
+      var FIRST_MS = 12000, STALL_MS = 15000;
+      function arm(ms) { if (wd) clearTimeout(wd); wd = setTimeout(function () { if (!settled) { try { ctrl.abort(); } catch (e) {} } }, ms); }
+      function done() { settled = true; if (wd) { clearTimeout(wd); wd = null; } }
+      arm(FIRST_MS);
       return aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
-        return fetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) });
+        return fetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }), signal: ctrl.signal });
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
-        if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) return fallback();
+        if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); return fallback(); }
         var reader = r.body.getReader(), dec = new TextDecoder(), buf = "", acc = "";
         function pump() {
           return reader.read().then(function (res) {
@@ -3801,14 +3811,14 @@
               var data = block.split("\n").filter(function (l) { return l.indexOf("data:") === 0; }).map(function (l) { return l.slice(5).trim(); }).join("");
               if (!data) return;
               var ev; try { ev = JSON.parse(data); } catch (e) { return; }
-              if (ev && ev.delta) { acc += ev.delta; try { if (onDelta) onDelta(acc); } catch (e) {} }
+              if (ev && ev.delta) { acc += ev.delta; arm(STALL_MS); try { if (onDelta) onDelta(acc); } catch (e) {} }
             });
             return pump();
           });
         }
-        return pump().then(function () { return acc ? { text: acc, mode: "grounded-stream", sources: pkg.sources } : fallback(); })
-          .catch(function () { return acc ? { text: acc, mode: "grounded-stream", sources: pkg.sources } : fallback(); });
-      }).catch(function () { return fallback(); });
+        return pump().then(function () { done(); return acc ? { text: acc, mode: "grounded-stream", sources: pkg.sources } : fallback(); })
+          .catch(function () { done(); return acc ? { text: acc, mode: "grounded-stream", sources: pkg.sources } : fallback(); });
+      }).catch(function () { done(); return fallback(); });
     },
     // Imaging Assist — clinician-invoked structured summary of ONE radiology report. Sends a
     // DE-IDENTIFIED packet (report text PHI-redacted client-side; NO name/MRN/bed/other-patient
