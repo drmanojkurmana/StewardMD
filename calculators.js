@@ -5419,6 +5419,196 @@
       var cf_mgdl=1800/v.tdd;
       var cf_mmol=100/v.tdd;
       return { v:r1(icr), u:"g carb/unit", i:"Insulin-to-carbohydrate ratio ≈ 1 unit per "+r1(icr)+" g carbohydrate (500 rule). Correction factor ≈ "+r0(cf_mgdl)+" mg/dL ("+r1(cf_mmol)+" mmol/L) per unit (1800 rule, rapid-acting). A starting estimate only — titrate to the individual. Ref: standard diabetes reference." };
+    } },
+
+  { id:"romhilt_estes", cat:"Cardiovascular", icon:"📈", title:"Romhilt-Estes LVH Point Score",
+    desc:"Point score for left ventricular hypertrophy on ECG.",
+    inputs:[
+      { id:"voltage", label:"Voltage: limb R/S ≥20 mm, or S in V1–V2 ≥30 mm, or R in V5–V6 ≥30 mm (+3)", type:"check" },
+      { id:"strain", label:"ST-T (strain) pattern", type:"select", opts:[{v:"0",t:"Absent (0)"},{v:"3",t:"Present, no digitalis (+3)"},{v:"1",t:"Present, on digitalis (+1)"}] },
+      { id:"la", label:"Left atrial abnormality (P terminal force V1 ≥0.04 mm·s) (+3)", type:"check" },
+      { id:"lad", label:"Left axis deviation ≥ −30° (+2)", type:"check" },
+      { id:"qrs", label:"QRS duration ≥90 ms (+1)", type:"check" },
+      { id:"intrins", label:"Intrinsicoid deflection V5/V6 ≥50 ms (+1)", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.voltage)s+=3; s+=Number(v.strain)||0; if(v.la)s+=3; if(v.lad)s+=2; if(v.qrs)s+=1; if(v.intrins)s+=1;
+      var b=s>=5?"Definite LVH (≥5 points)":s===4?"Probable LVH (4 points)":"LVH not diagnosed by these criteria";
+      return { v:s, u:"points", i:b+". Ref: Romhilt & Estes, Am Heart J 1968." };
+    } },
+
+  { id:"dapt", cat:"Cardiovascular", icon:"💊", title:"DAPT Score",
+    desc:"Benefit vs bleeding of prolonged dual antiplatelet therapy after PCI.",
+    inputs:[
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<65 (0)"},{v:"-1",t:"65–74 (−1)"},{v:"-2",t:"≥75 (−2)"}] },
+      { id:"smoker", label:"Current cigarette smoker (+1)", type:"check" },
+      { id:"dm", label:"Diabetes mellitus (+1)", type:"check" },
+      { id:"mi", label:"MI at presentation (+1)", type:"check" },
+      { id:"priorpci", label:"Prior PCI or prior MI (+1)", type:"check" },
+      { id:"smallstent", label:"Stent diameter <3 mm (+1)", type:"check" },
+      { id:"paclitaxel", label:"Paclitaxel-eluting stent (+1)", type:"check" },
+      { id:"chf", label:"CHF or LVEF <30% (+2)", type:"check" },
+      { id:"vein", label:"Saphenous vein graft stent (+2)", type:"check" }
+    ],
+    compute:function(v){
+      var s=Number(v.age)||0;
+      if(v.smoker)s++; if(v.dm)s++; if(v.mi)s++; if(v.priorpci)s++; if(v.smallstent)s++; if(v.paclitaxel)s++;
+      if(v.chf)s+=2; if(v.vein)s+=2;
+      var b=s>=2?"Score ≥2 — favourable benefit/risk for prolonged DAPT":"Score <2 — prolonged DAPT less likely to be beneficial (bleeding risk may outweigh)";
+      return { v:s, u:"points", i:b+". Applies to patients who completed 12 months of DAPT without event/bleed. Ref: Yeh, JAMA 2016 (DAPT score)." };
+    } },
+
+  { id:"mehran", cat:"Renal", icon:"🧪", title:"Mehran Score (Contrast Nephropathy Risk)",
+    desc:"Risk of contrast-induced nephropathy after percutaneous coronary intervention.",
+    inputs:[
+      { id:"hypotension", label:"Hypotension (+5)", type:"check" },
+      { id:"iabp", label:"Intra-aortic balloon pump (+5)", type:"check" },
+      { id:"chf", label:"Congestive heart failure (+5)", type:"check" },
+      { id:"age75", label:"Age >75 (+4)", type:"check" },
+      { id:"anaemia", label:"Anaemia (+3)", type:"check" },
+      { id:"dm", label:"Diabetes mellitus (+3)", type:"check" },
+      { id:"egfr", label:"eGFR (mL/min/1.73 m²)", type:"select", opts:[{v:"0",t:"≥60 (0)"},{v:"2",t:"40 to <60 (+2)"},{v:"4",t:"20 to <40 (+4)"},{v:"6",t:"<20 (+6)"}] },
+      { id:"contrast", label:"Contrast volume", type:"number", unit:"mL", step:"10" }
+    ],
+    compute:function(v){
+      if(!ok(v.contrast)||v.contrast<0) return ERR;
+      var s=0; if(v.hypotension)s+=5; if(v.iabp)s+=5; if(v.chf)s+=5; if(v.age75)s+=4; if(v.anaemia)s+=3; if(v.dm)s+=3;
+      s+=Number(v.egfr)||0;
+      s+=Math.round(v.contrast/100);
+      var b=s<=5?"Low risk (~7.5% CIN)":s<=10?"Moderate risk (~14%)":s<=15?"High risk (~26%)":"Very high risk (~57%)";
+      return { v:s, u:"points", i:b+" (contrast scored ≈1 point per 100 mL). Ref: Mehran, J Am Coll Cardiol 2004." };
+    } },
+
+  { id:"dragon", cat:"Neurology", icon:"🧠", title:"DRAGON Score (Stroke Thrombolysis Outcome)",
+    desc:"Predicts 3-month functional outcome after IV thrombolysis for ischaemic stroke.",
+    inputs:[
+      { id:"ct", label:"Hyperdense artery / early infarct on CT", type:"select", opts:[{v:"0",t:"Neither (0)"},{v:"1",t:"Either one (+1)"},{v:"2",t:"Both (+2)"}] },
+      { id:"mrs", label:"Pre-stroke mRS >1 (+1)", type:"check" },
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<65 (0)"},{v:"1",t:"65–79 (+1)"},{v:"2",t:"≥80 (+2)"}] },
+      { id:"glucose", label:"Baseline glucose >8 mmol/L (>144 mg/dL) (+1)", type:"check" },
+      { id:"time", label:"Onset-to-treatment >90 min (+1)", type:"check" },
+      { id:"nihss", label:"Baseline NIHSS", type:"select", opts:[{v:"0",t:"0–4 (0)"},{v:"1",t:"5–9 (+1)"},{v:"2",t:"10–15 (+2)"},{v:"3",t:">15 (+3)"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.ct)||0)+(Number(v.age)||0)+(Number(v.nihss)||0); if(v.mrs)s++; if(v.glucose)s++; if(v.time)s++;
+      var b=s<=1?"Very likely good outcome (~90–96%)":s<=3?"Favourable":s<=7?"Intermediate":"High likelihood of poor outcome";
+      return { v:s, u:"/10", i:b+". Ref: Strbian, Neurology 2012 (DRAGON)." };
+    } },
+
+  { id:"isaric_4c", cat:"Respiratory", icon:"🦠", title:"ISARIC 4C Mortality Score (COVID-19)",
+    desc:"In-hospital mortality risk in adults admitted with COVID-19.",
+    inputs:[
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<50 (0)"},{v:"2",t:"50–59 (+2)"},{v:"4",t:"60–69 (+4)"},{v:"6",t:"70–79 (+6)"},{v:"7",t:"≥80 (+7)"}] },
+      { id:"male", label:"Male sex (+1)", type:"check" },
+      { id:"comorb", label:"Comorbidities", type:"select", opts:[{v:"0",t:"None (0)"},{v:"1",t:"1 (+1)"},{v:"2",t:"≥2 (+2)"}] },
+      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"0",t:"<20 (0)"},{v:"1",t:"20–29 (+1)"},{v:"2",t:"≥30 (+2)"}] },
+      { id:"spo2", label:"SpO₂ <92% on room air (+2)", type:"check" },
+      { id:"gcs", label:"Glasgow Coma Scale <15 (+2)", type:"check" },
+      { id:"urea", label:"Urea", type:"select", opts:[{v:"0",t:"≤7 mmol/L (0)"},{v:"1",t:">7 to 14 (+1)"},{v:"3",t:">14 (+3)"}] },
+      { id:"crp", label:"CRP", type:"select", opts:[{v:"0",t:"<50 mg/L (0)"},{v:"1",t:"50–99 (+1)"},{v:"2",t:"≥100 (+2)"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.age)||0)+(Number(v.comorb)||0)+(Number(v.rr)||0)+(Number(v.urea)||0)+(Number(v.crp)||0);
+      if(v.male)s++; if(v.spo2)s+=2; if(v.gcs)s+=2;
+      var b=s<=3?"Low risk (~1–2% mortality)":s<=8?"Intermediate (~10%)":s<=14?"High (~30%)":"Very high (~60%+)";
+      return { v:s, u:"/21", i:b+". Ref: Knight, BMJ 2020 (ISARIC 4C)." };
+    } },
+
+  { id:"rochester_criteria", cat:"Paediatrics", icon:"👶", title:"Rochester Criteria (Febrile Infant)",
+    desc:"Identifies young febrile infants at low risk of serious bacterial infection.",
+    inputs:[
+      { id:"well", label:"Well-appearing", type:"check" },
+      { id:"healthy", label:"Previously healthy (term, no perinatal/chronic problems)", type:"check" },
+      { id:"noinfection", label:"No skin, soft-tissue, bone/joint or ear infection", type:"check" },
+      { id:"wbc", label:"WBC 5–15 ×10⁹/L", type:"check" },
+      { id:"bands", label:"Absolute band count ≤1.5 ×10⁹/L", type:"check" },
+      { id:"urine", label:"Urine ≤10 WBC/hpf", type:"check" },
+      { id:"stool", label:"Stool ≤5 WBC/hpf (if diarrhoea)", type:"check" }
+    ],
+    compute:function(v){
+      var all=v.well&&v.healthy&&v.noinfection&&v.wbc&&v.bands&&v.urine&&v.stool;
+      var b=all?"LOW risk of serious bacterial infection — all Rochester criteria met":"NOT low risk — one or more criteria unmet; manage per protocol for possible serious bacterial infection";
+      return { v:(all?"Low risk":"Not low risk"), u:"", i:b+". A decision aid, not a rule-out; use with clinical judgement and local pathways. Ref: Jaskiewicz, Pediatrics 1994 (Rochester)." };
+    } },
+
+  { id:"hamd", cat:"Psychiatry", icon:"🧠", title:"HAM-D (Hamilton Depression) — interpreter",
+    desc:"Interprets a 17-item Hamilton Depression Rating Scale total.",
+    inputs:[
+      { id:"total", label:"HAM-D 17-item total (0–52)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>52) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=7?"Normal / no depression":s<=13?"Mild depression":s<=18?"Moderate depression":s<=22?"Severe depression":"Very severe depression";
+      return { v:s, u:"/52", i:b+". Common severity bands for the 17-item HDRS. Ref: Hamilton, J Neurol Neurosurg Psychiatry 1960." };
+    } },
+
+  { id:"moca", cat:"Neurology", icon:"🧠", title:"MoCA — score interpreter",
+    desc:"Interprets a Montreal Cognitive Assessment total.",
+    inputs:[
+      { id:"total", label:"MoCA total (0–30)", type:"number", step:"1" },
+      { id:"lowedu", label:"≤12 years of education (add 1 point)", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>30) return ERR;
+      var s=Math.round(v.total)+(v.lowedu?1:0); if(s>30)s=30;
+      var b=s>=26?"Normal range (≥26)":"Below the usual normal threshold — suggests possible cognitive impairment";
+      return { v:s, u:"/30", i:b+" (education-adjusted). MoCA is copyrighted — administer the official version and complete required training. Ref: Nasreddine, J Am Geriatr Soc 2005." };
+    } },
+
+  { id:"madrs", cat:"Psychiatry", icon:"🧠", title:"MADRS — score interpreter",
+    desc:"Interprets a Montgomery-Åsberg Depression Rating Scale total.",
+    inputs:[
+      { id:"total", label:"MADRS total (0–60)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>60) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=6?"Normal / symptom absent":s<=19?"Mild depression":s<=34?"Moderate depression":"Severe depression";
+      return { v:s, u:"/60", i:b+". Administer the full clinician-rated instrument. Ref: Montgomery & Åsberg, Br J Psychiatry 1979." };
+    } },
+
+  { id:"sf_ratio", cat:"Respiratory", icon:"🫁", title:"SpO₂/FiO₂ (S/F) Ratio",
+    desc:"Non-invasive surrogate for the PaO₂/FiO₂ ratio.",
+    inputs:[
+      { id:"spo2", label:"SpO₂", type:"number", unit:"%", step:"1" },
+      { id:"fio2", label:"FiO₂", type:"number", unit:"fraction 0.21–1.0", step:"0.01" }
+    ],
+    compute:function(v){
+      if(!ok(v.spo2)||!ok(v.fio2)||v.spo2<=0||v.spo2>100||v.fio2<0.21||v.fio2>1) return ERR;
+      var sf=v.spo2/v.fio2;
+      var b=sf<235?"Corresponds to roughly P/F <200 (moderate–severe range)":sf<315?"Corresponds to roughly P/F <300 (ARDS range)":"Above the ARDS surrogate threshold";
+      return { v:r0(sf), u:"", i:b+" (S/F 235 ≈ P/F 200; S/F 315 ≈ P/F 300). Most reliable when SpO₂ ≤97%. Ref: Rice, Chest 2007." };
+    } },
+
+  { id:"o2er", cat:"Critical care", icon:"🫁", title:"Oxygen Extraction Ratio (O₂ER)",
+    desc:"Fraction of delivered oxygen extracted by the tissues.",
+    inputs:[
+      { id:"sao2", label:"Arterial O₂ saturation (SaO₂)", type:"number", unit:"%", step:"1" },
+      { id:"svo2", label:"Mixed venous O₂ saturation (SvO₂)", type:"number", unit:"%", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.sao2)||!ok(v.svo2)||v.sao2<=0||v.sao2>100||v.svo2<0||v.svo2>100) return ERR;
+      if(v.svo2>v.sao2) return { err:"Venous saturation cannot exceed arterial saturation" };
+      var er=(v.sao2-v.svo2)/v.sao2;
+      var b=er>0.35?"High extraction — suggests inadequate delivery relative to demand":er<0.2?"Low extraction — impaired utilisation or high delivery (e.g. sepsis, shunt)":"Within the usual range";
+      return { v:Math.round(er*100)/100, u:"O₂ER", i:b+" ("+r0(er*100)+"%; normal ~0.25–0.30). Ref: standard oxygen-transport physiology." };
+    } },
+
+  { id:"h2fpef", cat:"Cardiovascular", icon:"❤️", title:"H₂FPEF Score (HFpEF Probability)",
+    desc:"Probability of heart failure with preserved ejection fraction.",
+    inputs:[
+      { id:"heavy", label:"BMI >30 kg/m² (+2)", type:"check" },
+      { id:"htn", label:"≥2 antihypertensive medications (+1)", type:"check" },
+      { id:"af", label:"Atrial fibrillation (+3)", type:"check" },
+      { id:"ph", label:"Pulmonary hypertension (PASP >35 mmHg) (+1)", type:"check" },
+      { id:"elder", label:"Age >60 (+1)", type:"check" },
+      { id:"filling", label:"Doppler E/e′ >9 (+1)", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.heavy)s+=2; if(v.htn)s++; if(v.af)s+=3; if(v.ph)s++; if(v.elder)s++; if(v.filling)s++;
+      var b=s<=1?"Low probability of HFpEF":s<=5?"Intermediate probability — consider further testing":"High probability of HFpEF";
+      return { v:s, u:"/9", i:b+". Ref: Reddy, Circulation 2018 (H₂FPEF)." };
     } }
 
   ];
@@ -5736,7 +5926,19 @@
     mipi:["mipi","mantle cell lymphoma","mantle cell prognosis"],
     iron_ingestion:["iron ingestion","elemental iron","iron overdose","iron poisoning"],
     mmse:["mmse","mini mental","folstein","cognitive screen","dementia score"],
-    insulin_rules:["insulin dosing","500 rule","1800 rule","carb ratio","correction factor","insulin sensitivity factor"]
+    insulin_rules:["insulin dosing","500 rule","1800 rule","carb ratio","correction factor","insulin sensitivity factor"],
+    romhilt_estes:["romhilt estes","lvh point score","left ventricular hypertrophy ecg"],
+    dapt:["dapt score","dual antiplatelet","stent duration","yeh score"],
+    mehran:["mehran score","contrast induced nephropathy","cin","contrast nephropathy"],
+    dragon:["dragon score","stroke thrombolysis outcome","tpa outcome","ischaemic stroke prognosis"],
+    isaric_4c:["isaric 4c","4c mortality","covid mortality","covid-19 score"],
+    rochester_criteria:["rochester criteria","febrile infant","serious bacterial infection","low risk infant"],
+    hamd:["ham-d","hamilton depression","hdrs","depression scale"],
+    moca:["moca","montreal cognitive assessment","cognitive screen","dementia"],
+    madrs:["madrs","montgomery asberg","depression rating"],
+    sf_ratio:["s/f ratio","spo2 fio2","sf ratio","oxygenation surrogate"],
+    o2er:["oxygen extraction ratio","o2er","oxygen extraction","svo2"],
+    h2fpef:["h2fpef","hfpef probability","preserved ejection fraction","diastolic heart failure"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -6009,7 +6211,19 @@
     mipi:"Hoster E, et al. Blood 2008;111(2):558–65 (MIPI).",
     iron_ingestion:"Standard toxicology reference (elemental iron dose thresholds).",
     mmse:"Folstein MF, et al. J Psychiatr Res 1975;12(3):189–98 (MMSE; © PAR Inc.).",
-    insulin_rules:"Standard diabetes reference (500 rule and 1800/1500 rule)."
+    insulin_rules:"Standard diabetes reference (500 rule and 1800/1500 rule).",
+    romhilt_estes:"Romhilt DW, Estes EH. Am Heart J 1968;75(6):752–8.",
+    dapt:"Yeh RW, et al. JAMA 2016;315(16):1735–49 (DAPT score).",
+    mehran:"Mehran R, et al. J Am Coll Cardiol 2004;44(7):1393–9 (contrast nephropathy).",
+    dragon:"Strbian D, et al. Neurology 2012;78(6):427–32 (DRAGON).",
+    isaric_4c:"Knight SR, et al. BMJ 2020;370:m3339 (ISARIC 4C Mortality Score).",
+    rochester_criteria:"Jaskiewicz JA, et al. Pediatrics 1994;94(3):390–6 (Rochester criteria).",
+    hamd:"Hamilton M. J Neurol Neurosurg Psychiatry 1960;23:56–62 (HDRS).",
+    moca:"Nasreddine ZS, et al. J Am Geriatr Soc 2005;53(4):695–9 (MoCA; © MoCA Clinic).",
+    madrs:"Montgomery SA, Åsberg M. Br J Psychiatry 1979;134:382–9 (MADRS).",
+    sf_ratio:"Rice TW, et al. Chest 2007;132(2):410–7 (SpO₂/FiO₂).",
+    o2er:"Standard oxygen-transport physiology ((SaO₂ − SvO₂)/SaO₂).",
+    h2fpef:"Reddy YNV, et al. Circulation 2018;138(9):861–70 (H₂FPEF)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
