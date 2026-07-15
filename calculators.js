@@ -5067,6 +5067,187 @@
       else stage="II";
       var b=stage==="I"?"best prognosis":stage==="III"?"poorest prognosis":"intermediate prognosis";
       return { v:"R-ISS "+stage, u:"", i:"Revised ISS stage "+stage+" ("+b+"). Ref: Palumbo, J Clin Oncol 2015 (R-ISS)." };
+    } },
+
+  { id:"rvsp", cat:"Cardiovascular", icon:"❤️", title:"RV Systolic Pressure (TR Jet)",
+    desc:"Estimated right-ventricular systolic pressure from tricuspid regurgitation velocity.",
+    inputs:[
+      { id:"trv", label:"Peak TR velocity", type:"number", unit:"m/s", step:"0.1" },
+      { id:"rap", label:"Estimated right atrial pressure", type:"select", opts:[{v:"3",t:"3 mmHg (IVC small, collapses)"},{v:"8",t:"8 mmHg (intermediate)"},{v:"15",t:"15 mmHg (IVC dilated, fixed)"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.trv)||v.trv<=0) return ERR;
+      var p=4*v.trv*v.trv + Number(v.rap);
+      var b=p<36?"Normal estimated systolic pulmonary pressure":p<50?"Mildly elevated":p<70?"Moderately elevated":"Severely elevated";
+      return { v:r0(p), u:"mmHg", i:b+" (equals systolic pulmonary artery pressure in the absence of RVOT obstruction/pulmonary stenosis). Ref: simplified Bernoulli equation." };
+    } },
+
+  { id:"mva_pht", cat:"Cardiovascular", icon:"❤️", title:"Mitral Valve Area (Pressure Half-Time)",
+    desc:"Estimated mitral valve area in mitral stenosis.",
+    inputs:[
+      { id:"pht", label:"Pressure half-time", type:"number", unit:"ms", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.pht)||v.pht<=0) return ERR;
+      var mva=220/v.pht;
+      var b=mva<1?"Severe mitral stenosis":mva<=1.5?"Moderate mitral stenosis":mva<2?"Mild mitral stenosis":"Normal valve area";
+      return { v:Math.round(mva*100)/100, u:"cm²", i:b+" (severe <1.0, moderate 1.0–1.5, mild 1.5–2.0 cm²). The empirical constant 220 is unreliable soon after valvuloplasty or with significant aortic regurgitation. Ref: Hatle, Circulation 1979." };
+    } },
+
+  { id:"cardiac_power", cat:"Cardiovascular", icon:"❤️", title:"Cardiac Power Output",
+    desc:"Cardiac pumping capability; a strong predictor in cardiogenic shock.",
+    inputs:[
+      { id:"map", label:"Mean arterial pressure", type:"number", unit:"mmHg", step:"1" },
+      { id:"co", label:"Cardiac output", type:"number", unit:"L/min", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.map)||!ok(v.co)||v.map<0||v.co<0) return ERR;
+      var cpo=v.map*v.co/451;
+      var b=cpo<0.6?"Low — associated with high mortality in cardiogenic shock":"Above the common cardiogenic-shock threshold";
+      return { v:Math.round(cpo*100)/100, u:"W", i:b+" (a value <0.6 W predicts worse outcomes in cardiogenic shock). Ref: Fincke, J Am Coll Cardiol 2004." };
+    } },
+
+  { id:"do2", cat:"Critical care", icon:"🫁", title:"Oxygen Delivery (DO₂)",
+    desc:"Systemic oxygen delivery from cardiac output and arterial oxygen content.",
+    inputs:[
+      { id:"co", label:"Cardiac output", type:"number", unit:"L/min", step:"0.1" },
+      { id:"hb", label:"Haemoglobin", type:"number", unit:"g/dL", step:"0.1" },
+      { id:"sao2", label:"Arterial O₂ saturation", type:"number", unit:"%", step:"1" },
+      { id:"pao2", label:"PaO₂ (optional)", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.co)||!ok(v.hb)||!ok(v.sao2)||v.co<0||v.hb<0||v.sao2<0||v.sao2>100) return ERR;
+      var dissolved = (ok(v.pao2)&&v.pao2>=0) ? 0.003*v.pao2 : 0;
+      var cao2=1.34*v.hb*(v.sao2/100)+dissolved;
+      var do2=v.co*cao2*10;
+      var b=do2<600?"Below the usual target range":do2>1400?"Above the usual range":"Within the usual range";
+      return { v:r0(do2), u:"mL O₂/min", i:b+" (CaO₂ ≈ "+r1(cao2)+" mL/dL; normal DO₂ ~950–1150). Ref: standard oxygen-transport physiology." };
+    } },
+
+  { id:"lung_compliance", cat:"Critical care", icon:"🫁", title:"Static Lung Compliance",
+    desc:"Respiratory-system compliance during mechanical ventilation.",
+    inputs:[
+      { id:"vt", label:"Tidal volume", type:"number", unit:"mL", step:"10" },
+      { id:"pplat", label:"Plateau pressure", type:"number", unit:"cmH₂O", step:"1" },
+      { id:"peep", label:"PEEP", type:"number", unit:"cmH₂O", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.vt)||!ok(v.pplat)||!ok(v.peep)||v.vt<0) return ERR;
+      var dp=v.pplat-v.peep;
+      if(dp<=0) return { err:"Plateau pressure must exceed PEEP (driving pressure > 0)" };
+      var c=v.vt/dp;
+      var b=c<30?"Reduced compliance (stiff lungs)":"Within/above the usual range";
+      return { v:r1(c), u:"mL/cmH₂O", i:b+" (driving pressure "+r0(dp)+" cmH₂O; normal static compliance ~50–100). Ref: standard ventilator physiology." };
+    } },
+
+  { id:"bohr_deadspace", cat:"Critical care", icon:"🫁", title:"Dead Space Fraction (Bohr-Enghoff)",
+    desc:"Physiological dead space as a fraction of tidal volume.",
+    inputs:[
+      { id:"paco2", label:"Arterial PaCO₂", type:"number", unit:"mmHg", step:"1" },
+      { id:"peco2", label:"Mixed expired PECO₂", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.paco2)||!ok(v.peco2)||v.paco2<=0||v.peco2<0) return ERR;
+      if(v.peco2>v.paco2) return { err:"Mixed expired CO₂ cannot exceed arterial CO₂" };
+      var f=(v.paco2-v.peco2)/v.paco2;
+      var b=f>0.4?"Elevated dead space":"Within the usual range";
+      return { v:Math.round(f*100)/100, u:"Vd/Vt", i:b+" ("+r0(f*100)+"% of each breath; normal ~0.2–0.35). Ref: Bohr equation, Enghoff modification." };
+    } },
+
+  { id:"adrogue_madias", cat:"Renal", icon:"💧", title:"Adrogué-Madias (Na Change per Litre)",
+    desc:"Predicted change in serum sodium from one litre of a chosen infusate.",
+    inputs:[
+      { id:"na", label:"Current serum sodium", type:"number", unit:"mmol/L", step:"1" },
+      { id:"fluid", label:"Infusate", type:"select", opts:[{v:"513",t:"3% saline (Na 513)"},{v:"154",t:"0.9% saline (Na 154)"},{v:"134",t:"Ringer’s lactate (Na+K ≈134)"},{v:"77",t:"0.45% saline (Na 77)"},{v:"0",t:"5% dextrose (Na 0)"}] },
+      { id:"wt", label:"Body weight", type:"number", unit:"kg", step:"0.1" },
+      { id:"sex", label:"TBW fraction", type:"select", opts:[{v:"0.6",t:"Adult male / child (0.6)"},{v:"0.5",t:"Adult female / elderly male (0.5)"},{v:"0.45",t:"Elderly female (0.45)"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.na)||!ok(v.wt)||v.na<=0||v.wt<=0) return ERR;
+      var tbw=Number(v.sex)*v.wt;
+      var change=(Number(v.fluid)-v.na)/(tbw+1);
+      var dir=change>0?"rise":change<0?"fall":"no change";
+      return { v:Math.round(change*100)/100, u:"mmol/L per L", i:"Estimated "+dir+" in serum sodium per litre infused (TBW ≈ "+r1(tbw)+" L). Correct hyponatraemia slowly — generally no more than ~8–10 mmol/L in 24 h. Ref: Adrogué & Madias, N Engl J Med 2000." };
+    } },
+
+  { id:"measured_crcl", cat:"Renal", icon:"🧪", title:"Measured Creatinine Clearance",
+    desc:"Creatinine clearance from a timed urine collection.",
+    inputs:[
+      { id:"ucr", label:"Urine creatinine", type:"number", unit:"µmol/L", step:"1" },
+      { id:"uvol", label:"Urine volume collected", type:"number", unit:"mL", step:"1" },
+      { id:"pcr", label:"Serum creatinine", type:"number", unit:"µmol/L", step:"1" },
+      { id:"hours", label:"Collection duration", type:"number", unit:"h", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.ucr)||!ok(v.uvol)||!ok(v.pcr)||!ok(v.hours)||v.ucr<0||v.uvol<0||v.pcr<=0||v.hours<=0) return ERR;
+      var mins=v.hours*60;
+      var crcl=(v.ucr*v.uvol)/(v.pcr*mins);
+      return { v:r1(crcl), u:"mL/min", i:"Measured creatinine clearance (units cancel provided urine and serum creatinine are in the same units). Consider indexing to body surface area. Ref: standard clearance formula." };
+    } },
+
+  { id:"bard", cat:"Hepatology", icon:"🫀", title:"BARD Score (NAFLD Fibrosis)",
+    desc:"Predicts advanced fibrosis in non-alcoholic fatty liver disease.",
+    inputs:[
+      { id:"bmi", label:"BMI", type:"number", unit:"kg/m²", step:"0.1" },
+      { id:"ast", label:"AST", type:"number", unit:"U/L", step:"1" },
+      { id:"alt", label:"ALT", type:"number", unit:"U/L", step:"1" },
+      { id:"dm", label:"Type 2 diabetes mellitus", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.bmi)||!ok(v.ast)||!ok(v.alt)||v.bmi<=0||v.ast<0||v.alt<=0) return ERR;
+      var ratio=v.ast/v.alt;
+      var s=(v.bmi>=28?1:0)+(ratio>=0.8?2:0)+(v.dm?1:0);
+      var b=s>=2?"Higher risk of advanced fibrosis — consider further assessment":"Low risk — advanced fibrosis unlikely (high negative predictive value)";
+      return { v:s, u:"/4", i:b+" (AST/ALT ratio "+(Math.round(ratio*100)/100)+"). Ref: Harrison, Gut 2008 (BARD)." };
+    } },
+
+  { id:"cpis", cat:"Infectious disease", icon:"🦠", title:"Clinical Pulmonary Infection Score (CPIS)",
+    desc:"Bedside score suggesting ventilator-associated pneumonia.",
+    inputs:[
+      { id:"temp", label:"Temperature", type:"select", opts:[{v:"0",t:"36.5–38.4 °C"},{v:"1",t:"38.5–38.9 °C"},{v:"2",t:"≥39 or ≤36 °C"}] },
+      { id:"wbc", label:"Blood leucocytes", type:"select", opts:[{v:"0",t:"4–11 ×10⁹/L"},{v:"1",t:"<4 or >11 ×10⁹/L"},{v:"2",t:"<4 or >11 with ≥50% band forms"}] },
+      { id:"secretions", label:"Tracheal secretions", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Non-purulent"},{v:"2",t:"Purulent"}] },
+      { id:"oxy", label:"Oxygenation (PaO₂/FiO₂)", type:"select", opts:[{v:"0",t:">240 or ARDS"},{v:"2",t:"≤240 and no ARDS"}] },
+      { id:"cxr", label:"Chest radiograph", type:"select", opts:[{v:"0",t:"No infiltrate"},{v:"1",t:"Diffuse/patchy infiltrate"},{v:"2",t:"Localised infiltrate"}] },
+      { id:"culture", label:"Tracheal aspirate culture", type:"select", opts:[{v:"0",t:"No/light growth"},{v:"1",t:"Moderate/heavy growth"},{v:"2",t:"Moderate/heavy + same organism on Gram stain"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.temp)||0)+(Number(v.wbc)||0)+(Number(v.secretions)||0)+(Number(v.oxy)||0)+(Number(v.cxr)||0)+(Number(v.culture)||0);
+      var b=s>6?"Score >6 supports investigation/treatment for VAP":"Score ≤6 — pneumonia less likely";
+      return { v:s, u:"/12", i:b+". A guide only, with modest accuracy. Ref: Pugin, Am Rev Respir Dis 1991 (CPIS)." };
+    } },
+
+  { id:"kawasaki", cat:"Paediatrics", icon:"👶", title:"Kawasaki Disease Criteria",
+    desc:"Clinical criteria for complete Kawasaki disease (AHA).",
+    inputs:[
+      { id:"fever", label:"Fever ≥5 days", type:"check" },
+      { id:"conj", label:"Bilateral non-exudative conjunctival injection", type:"check" },
+      { id:"oral", label:"Oral mucosal changes (red/cracked lips, strawberry tongue)", type:"check" },
+      { id:"nodes", label:"Cervical lymphadenopathy (≥1.5 cm, usually unilateral)", type:"check" },
+      { id:"extremity", label:"Extremity changes (erythema/oedema, later desquamation)", type:"check" },
+      { id:"rash", label:"Polymorphous rash", type:"check" }
+    ],
+    compute:function(v){
+      var f=0;["conj","oral","nodes","extremity","rash"].forEach(function(k){if(v[k])f++;});
+      var complete = v.fever && f>=4;
+      var b = complete ? "Meets criteria for complete Kawasaki disease ("+f+"/5 principal features with fever)" : v.fever ? "Does not meet complete criteria ("+f+"/5 features) — consider incomplete Kawasaki disease, especially in infants; check CRP/ESR and echocardiography" : "Fever ≥5 days is generally required (diagnosis is possible on day 4 with ≥4 features)";
+      return { v:(complete?"Complete KD":f+"/5 features"), u:"", i:b+". Ref: McCrindle, Circulation 2017 (AHA)." };
+    } },
+
+  { id:"cci_platelet", cat:"Haematology", icon:"🩸", title:"Corrected Count Increment (Platelets)",
+    desc:"Assesses response to platelet transfusion / refractoriness.",
+    inputs:[
+      { id:"pre", label:"Pre-transfusion platelet count", type:"number", unit:"×10⁹/L", step:"1" },
+      { id:"post", label:"Post-transfusion platelet count", type:"number", unit:"×10⁹/L", step:"1" },
+      { id:"bsa", label:"Body surface area", type:"number", unit:"m²", step:"0.01" },
+      { id:"dose", label:"Platelets transfused", type:"number", unit:"×10¹¹", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.pre)||!ok(v.post)||!ok(v.bsa)||!ok(v.dose)||v.bsa<=0||v.dose<=0) return ERR;
+      var inc=v.post-v.pre;
+      var cci=(inc*1000)*v.bsa/v.dose;
+      var b=cci<7500?"Low increment — suggests refractoriness if measured ~10–60 min post-transfusion (consider immune and non-immune causes)":"Adequate increment";
+      return { v:r0(cci), u:"", i:b+" (increment "+r0(inc)+" ×10⁹/L). A 10–60 min CCI <7500 (or 1 h <5000) suggests refractoriness. Ref: standard transfusion reference." };
     } }
 
   ];
@@ -5360,7 +5541,19 @@
     modified_fisher:["modified fisher","sah grading","vasospasm","subarachnoid ct grade"],
     widmark:["widmark","blood alcohol","bac","alcohol concentration","ethanol"],
     dipss:["dipss","myelofibrosis prognosis","primary myelofibrosis","passamonti"],
-    r_iss:["r-iss","revised iss","myeloma staging","multiple myeloma prognosis"]
+    r_iss:["r-iss","revised iss","myeloma staging","multiple myeloma prognosis"],
+    rvsp:["rvsp","pasp","pulmonary artery pressure","tricuspid regurgitation","tr jet","pulmonary hypertension echo"],
+    mva_pht:["mitral valve area","pressure half time","mitral stenosis","pht","hatle"],
+    cardiac_power:["cardiac power output","cpo","cardiogenic shock","fincke"],
+    do2:["oxygen delivery","do2","oxygen transport","cao2 delivery"],
+    lung_compliance:["static compliance","lung compliance","driving pressure","respiratory compliance"],
+    bohr_deadspace:["dead space","bohr","enghoff","vd vt","dead space fraction"],
+    adrogue_madias:["adrogue madias","sodium correction","hyponatraemia infusate","na change per litre"],
+    measured_crcl:["measured creatinine clearance","timed urine","24 hour urine creatinine","clearance"],
+    bard:["bard score","nafld fibrosis","nonalcoholic fatty liver","advanced fibrosis"],
+    cpis:["cpis","clinical pulmonary infection score","ventilator associated pneumonia","vap"],
+    kawasaki:["kawasaki disease","mucocutaneous lymph node","kd criteria","coronary aneurysm children"],
+    cci_platelet:["corrected count increment","cci","platelet refractoriness","platelet transfusion response"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -5609,7 +5802,19 @@
     modified_fisher:"Frontera JA, et al. Neurosurgery 2006;59(1):21–7 (modified Fisher scale).",
     widmark:"Widmark EMP. Die theoretischen Grundlagen … der Alkoholbestimmung. 1932.",
     dipss:"Passamonti F, et al. Blood 2010;115(9):1703–8 (DIPSS).",
-    r_iss:"Palumbo A, et al. J Clin Oncol 2015;33(26):2863–9 (R-ISS)."
+    r_iss:"Palumbo A, et al. J Clin Oncol 2015;33(26):2863–9 (R-ISS).",
+    rvsp:"Simplified Bernoulli equation; ASE guidelines on echocardiographic assessment of pulmonary pressures.",
+    mva_pht:"Hatle L, et al. Circulation 1979;60(5):1096–104 (pressure half-time).",
+    cardiac_power:"Fincke R, et al. J Am Coll Cardiol 2004;44(2):340–8 (cardiac power).",
+    do2:"Standard oxygen-transport physiology (DO₂ = CO × CaO₂ × 10).",
+    lung_compliance:"Standard ventilator mechanics (Vt ÷ (Pplat − PEEP)).",
+    bohr_deadspace:"Bohr equation with Enghoff modification (Vd/Vt = (PaCO₂ − PECO₂)/PaCO₂).",
+    adrogue_madias:"Adrogué HJ, Madias NE. N Engl J Med 2000;342(21):1581–9.",
+    measured_crcl:"Standard timed-urine clearance formula (UCr × V ÷ (PCr × time)).",
+    bard:"Harrison SA, et al. Gut 2008;57(10):1441–7 (BARD score).",
+    cpis:"Pugin J, et al. Am Rev Respir Dis 1991;143(5):1121–9 (CPIS).",
+    kawasaki:"McCrindle BW, et al. Circulation 2017;135(17):e927–99 (AHA Kawasaki).",
+    cci_platelet:"Standard transfusion-medicine reference (corrected count increment)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
