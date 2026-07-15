@@ -60,6 +60,15 @@ try {
   for (let i = 0; i < 20; i++) { await sleep(400); if (await ev(`return !!document.querySelector('#icuRoot.on');`) === true) { restored = true; break; } }
   ok(restored, "after a cold reload, the ICU dashboard is REOPENED automatically (resumed where you left off)");
 
+  // 3b) EXACT sub-tab restore: on a patient's Treatment tab → cold reload → resumes to that tab, not the board
+  await ev(`ICU.reset(); ICU.ingestPatient({name:"RESPT",age:60,sex:"M",bed:"2",diagnosis:"Sepsis"}); ICU.open('treatment'); return 1;`); await sleep(500);
+  ok(await ev(`var v=ICU.curView(); return v.screen==="patient" && v.active==="treatment";`) === true, "on the patient · Treatment tab before backgrounding");
+  await call("Page.navigate", { url: BASE });
+  ok(await bootReady(), "app re-boots (sub-tab case)");
+  let subOk = false;
+  for (let i = 0; i < 20; i++) { await sleep(400); if (await ev(`var v=(window.ICU&&ICU.curView)?ICU.curView():{}; return v.screen==="patient" && v.active==="treatment";`) === true) { subOk = true; break; } }
+  ok(subOk, "after a cold reload, ICU resumes to the EXACT sub-tab (patient · Treatment), not just the board");
+
   // 4) Stale snapshot (older than the window) is ignored → Home
   await ev(`ICU.close(); try{localStorage.setItem("smd_resume_route", JSON.stringify({act:"icu", at: Date.now() - 13*3600*1000}));}catch(e){} return 1;`);
   await sleep(200);

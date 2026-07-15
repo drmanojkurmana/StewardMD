@@ -6759,6 +6759,29 @@
     // Unit picker — hospital → ICU/Ward category → unit type. The full navigation entry (e.g. Ward Sync).
     openUnits: function () { ICU.open(undefined, _unit.cat === "ward"); _screen = "units"; _pickStep = _unit.hospital ? "category" : "hospital"; _pickCat = null; _paintTop = true; paint(); },
     curUnit: function () { return { cat: _unit.cat, type: _unit.type, hospital: _unit.hospital }; },
+    // Resume-where-you-left-off (home.js snapshots this on background; replays it on the next launch).
+    // curView captures the exact screen + sub-tab (+ open shared-patient id); resume reopens ICU in the
+    // SAME unit category (no switch) and resumeView navigates to that exact view.
+    curView: function () { return { screen: _screen, active: _active, ptId: _grpPtId || null }; },
+    resumeView: function (v) {
+      try {
+        if (!v) return;
+        if (v.screen === "patient") {
+          if (grpActive() && v.ptId) {
+            try { grpOpenPatient(v.ptId); } catch (e) {}
+            if (v.active && RENDER[v.active]) setTimeout(function () { try { if (_screen === "patient") { _active = v.active; _ws = wsOf(v.active); _wsLast[_ws] = v.active; paint(); } } catch (e) {} }, 500);
+          } else if (v.active && RENDER[v.active]) {
+            _screen = "patient"; _active = v.active; _ws = wsOf(v.active); _wsLast[_ws] = v.active; _paintTop = true; paint();
+          }
+        } else if (v.screen === "alerts" || v.screen === "team") {
+          _screen = v.screen; _paintTop = true; paint();
+        }
+      } catch (e) {}
+    },
+    resume: function (view) {
+      ICU.open(undefined, _unit.cat === "ward");   // reopen in the SAME unit category (no switch), on the board
+      if (view) { try { ICU.resumeView(view); } catch (e) {} }
+    },
     // Deep link → join a unit. A Universal/App Link (…?icujoin=gid.code, or /i/gid.code) opens the
     // native app; the URL arrives NATIVELY (not in this WebView's location), so native-bridge.js
     // forwards it here. An invite implies shared units → turn Group mode on, stash the code, and run

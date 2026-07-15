@@ -545,9 +545,12 @@
     try {
       var hit = null;
       for (var i = 0; i < RESUME_ROUTES.length; i++) { if (document.querySelector(RESUME_ROUTES[i].sel)) { hit = RESUME_ROUTES[i].act; break; } }
-      // ICU keeps its own richer sub-state (patient/tab/unit) in ICU_STATE; here we only need which overlay.
-      if (hit) localStorage.setItem(RESUME_KEY, JSON.stringify({ act: hit, at: Date.now() }));
-      else localStorage.removeItem(RESUME_KEY);   // on Home → clear, so a plain reload stays on Home
+      if (hit) {
+        var rec = { act: hit, at: Date.now() };
+        // ICU/Ward: also capture the exact screen + sub-tab so resume lands on that tab, not just the board.
+        if (hit === "icu" && window.ICU && ICU.curView) { try { rec.view = ICU.curView(); } catch (e) {} }
+        localStorage.setItem(RESUME_KEY, JSON.stringify(rec));
+      } else localStorage.removeItem(RESUME_KEY);   // on Home → clear, so a plain reload stays on Home
     } catch (e) {}
   }
   function resumeRestore() {
@@ -555,7 +558,13 @@
       var d = JSON.parse(localStorage.getItem(RESUME_KEY) || "null");
       localStorage.removeItem(RESUME_KEY);   // one-shot — consume it so it only fires on this launch
       if (!d || !d.act || !d.at || (Date.now() - d.at) > RESUME_MAX_MS) return;
-      if (typeof ACT[d.act] === "function") setTimeout(function () { try { ACT[d.act](); } catch (e) {} }, 350);
+      setTimeout(function () {
+        try {
+          // ICU/Ward: resume the exact screen + sub-tab (falls back to a plain open if unavailable).
+          if (d.act === "icu" && window.ICU && ICU.resume) ICU.resume(d.view);
+          else if (typeof ACT[d.act] === "function") ACT[d.act]();
+        } catch (e) {}
+      }, 350);
     } catch (e) {}
   }
   var _resumeWired = false;
