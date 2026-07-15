@@ -306,10 +306,20 @@
     } catch (e) {}
     return null;
   }
+  // App screens (ICU/Ward/Calculators/Drugs/Interactions/Antibiogram/Electrolytes) render ABOVE the
+  // home layer while #homeV2 keeps its "on" class underneath — so "home is on" is NOT enough. If any
+  // app overlay is open, home is not the foreground view and the tour must not auto-open (it was
+  // showing "Step 1 of 8" over the ICU unit board on resume-into-ICU). Selectors mirror the
+  // RESUME_ROUTES list in home.js.
+  function appOverlayUp() {
+    var sels = ["#icuRoot.on", "#ghisPanel.open", "#mcOverlay.on", "#mdOverlay.on", "#miOverlay.on", "#abgOverlay.on", "#eceOverlay.on"];
+    for (var i = 0; i < sels.length; i++) { var el = document.querySelector(sels[i]); if (el && visible(el)) return true; }
+    return false;
+  }
   function homeForeground() {
     var h = document.getElementById("homeV2");
     if (!h || !visible(h) || !h.classList.contains("on")) return false;   // home must be the ACTIVE screen
-    if (gateUp()) return false;                                           // and not covered by a pre-home gate
+    if (gateUp() || appOverlayUp()) return false;                         // not covered by a pre-home gate OR an app screen (ICU/Ward/…)
     if (entered() === false) return false;                                // and the sign-in gate must be cleared
     return true;
   }
