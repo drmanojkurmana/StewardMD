@@ -4319,6 +4319,67 @@
       var s=qs.reduce(function(a,k){return a+v[k];},0)/10;
       var b=s>=5?"Marked functional limitation":"Lesser functional limitation";
       return { v:r1(s), u:"/10", i:b+" (higher = worse; track alongside BASDAI). Ref: Calin, J Rheumatol 1994 (BASFI)." };
+    } },
+
+  { id:"ballard", cat:"Paediatrics", icon:"👶", title:"New Ballard Score (Gestational Age)",
+    desc:"Estimates gestational age from neuromuscular and physical maturity (scores per the Ballard figure).",
+    inputs:[
+      { id:"posture", label:"Posture", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"square_window", label:"Square window (wrist)", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"arm_recoil", label:"Arm recoil", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"popliteal_angle", label:"Popliteal angle", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
+      { id:"scarf_sign", label:"Scarf sign", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"heel_to_ear", label:"Heel to ear", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"skin", label:"Skin", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
+      { id:"lanugo", label:"Lanugo", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"plantar", label:"Plantar surface", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"breast", label:"Breast", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"eye_ear", label:"Eye / ear", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"genitals", label:"Genitals", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] }
+    ],
+    compute:function(v){
+      var keys=["posture","square_window","arm_recoil","popliteal_angle","scarf_sign","heel_to_ear","skin","lanugo","plantar","breast","eye_ear","genitals"];
+      var s=keys.reduce(function(a,k){return a+Number(v[k]);},0);
+      var weeks=24+0.4*s;
+      return { v:r0(weeks), u:"weeks", i:"Estimated gestational age (maturity score "+s+", range −10 to 50). Ref: Ballard, J Pediatr 1991 (New Ballard Score)." };
+    } },
+
+  { id:"burn_tbsa", cat:"General", icon:"🔥", title:"Burn TBSA (Rule of Nines, adult)",
+    desc:"Estimates total body surface area burned in adults.",
+    inputs:[
+      { id:"head", label:"Head and neck", type:"select", opts:[{v:"0",t:"None"},{v:"4.5",t:"Half"},{v:"9",t:"Full (9%)"}] },
+      { id:"ant_trunk", label:"Anterior trunk", type:"select", opts:[{v:"0",t:"None"},{v:"9",t:"Half"},{v:"18",t:"Full (18%)"}] },
+      { id:"post_trunk", label:"Posterior trunk", type:"select", opts:[{v:"0",t:"None"},{v:"9",t:"Half"},{v:"18",t:"Full (18%)"}] },
+      { id:"right_arm", label:"Right arm", type:"select", opts:[{v:"0",t:"None"},{v:"4.5",t:"Half"},{v:"9",t:"Full (9%)"}] },
+      { id:"left_arm", label:"Left arm", type:"select", opts:[{v:"0",t:"None"},{v:"4.5",t:"Half"},{v:"9",t:"Full (9%)"}] },
+      { id:"right_leg", label:"Right leg", type:"select", opts:[{v:"0",t:"None"},{v:"9",t:"Half"},{v:"18",t:"Full (18%)"}] },
+      { id:"left_leg", label:"Left leg", type:"select", opts:[{v:"0",t:"None"},{v:"9",t:"Half"},{v:"18",t:"Full (18%)"}] },
+      { id:"perineum", label:"Perineum/genitalia", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Full (1%)"}] }
+    ],
+    compute:function(v){
+      var keys=["head","ant_trunk","post_trunk","right_arm","left_arm","right_leg","left_leg","perineum"];
+      var s=keys.reduce(function(a,k){return a+(Number(v[k])||0);},0);
+      return { v:r1(s), u:"% TBSA", i:"Adult rule of nines (children differ — larger head, smaller legs). For patchy burns the patient's palm ≈ 1% TBSA. Ref: Wallace rule of nines." };
+    } },
+
+  { id:"amts", cat:"Neurology", icon:"🧠", title:"Abbreviated Mental Test Score (AMTS, 10-item)",
+    desc:"Rapid screen for cognitive impairment in older adults. Tick each answered correctly.",
+    inputs:[
+      { id:"age", label:"States their age", type:"check" },
+      { id:"time", label:"States the time (to nearest hour)", type:"check" },
+      { id:"address", label:"Recalls the address given (42 West Street) at the end", type:"check" },
+      { id:"year", label:"States the current year", type:"check" },
+      { id:"place", label:"Names the current place/hospital", type:"check" },
+      { id:"persons", label:"Recognises two persons (e.g. doctor, nurse)", type:"check" },
+      { id:"dob", label:"States their date of birth", type:"check" },
+      { id:"history", label:"Names the year of a well-known historical event", type:"check" },
+      { id:"monarch", label:"Names the current monarch / head of state", type:"check" },
+      { id:"count", label:"Counts backwards from 20 to 1", type:"check" }
+    ],
+    compute:function(v){
+      var s=["age","time","address","year","place","persons","dob","history","monarch","count"].filter(function(k){return v[k];}).length;
+      var b=s<=6?"Suggests cognitive impairment — consider formal assessment":"Normal range";
+      return { v:s, u:"/10", i:b+" (a score of ≤ 6 is the usual cut-off). Ref: Hodkinson, Age Ageing 1972 (AMTS)." };
     } }
 
   ];
@@ -4560,7 +4621,10 @@
     lawton_iadl:["lawton iadl","instrumental activities of daily living","iadl"],
     mjoa:["mjoa","modified japanese orthopaedic association","cervical myelopathy score","myelopathy severity"],
     dasi:["duke activity status index","dasi","functional capacity","mets estimate","perioperative functional capacity"],
-    basfi:["basfi","ankylosing spondylitis function","axial spondyloarthritis function"]
+    basfi:["basfi","ankylosing spondylitis function","axial spondyloarthritis function"],
+    ballard:["ballard score","new ballard","gestational age estimate","neonatal maturity"],
+    burn_tbsa:["rule of nines","burn surface area","tbsa","total body surface area burn","wallace"],
+    amts:["abbreviated mental test","amts","amt10","cognitive screen elderly","hodkinson"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -4757,7 +4821,10 @@
     lawton_iadl:"Lawton MP, Brody EM. Gerontologist 1969;9(3):179–86.",
     mjoa:"Modified Japanese Orthopaedic Association score (Benzel et al.).",
     dasi:"Hlatky MA, et al. Am J Cardiol 1989;64(10):651–4 (DASI).",
-    basfi:"Calin A, et al. J Rheumatol 1994;21(12):2281–5 (BASFI)."
+    basfi:"Calin A, et al. J Rheumatol 1994;21(12):2281–5 (BASFI).",
+    ballard:"Ballard JL, et al. J Pediatr 1991;119(3):417–23 (New Ballard Score).",
+    burn_tbsa:"Wallace AB. Lancet 1951 (rule of nines).",
+    amts:"Hodkinson HM. Age Ageing 1972;1(4):233–8 (AMTS)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
