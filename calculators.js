@@ -3917,6 +3917,103 @@
       var qtcf=v.qt/Math.pow(rr,1/3);
       var b=qtcf>=500?"Markedly prolonged — high torsades risk":qtcf>=470?"Prolonged":"Within the usual range";
       return { v:r0(qtcf), u:"ms", i:b+" (Fridericia; more reliable than Bazett at extremes of heart rate). Ref: Fridericia 1920." };
+    } },
+
+  { id:"nrs2002", cat:"General", icon:"🍎", title:"Nutritional Risk Screening (NRS-2002)",
+    desc:"Screens hospitalised adults for nutritional risk.",
+    inputs:[
+      { id:"nut", label:"Impaired nutritional status", type:"select", opts:[{v:"0",t:"Normal"},{v:"1",t:"Mild — wt loss >5% in 3 months or intake 50–75%"},{v:"2",t:"Moderate — wt loss >5% in 2 months, BMI 18.5–20.5 + impaired condition, or intake 25–50%"},{v:"3",t:"Severe — wt loss >5% in 1 month, BMI <18.5 + impaired condition, or intake 0–25%"}] },
+      { id:"dis", label:"Severity of disease (increased requirements)", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild — chronic illness, hip fracture, cirrhosis, COPD, diabetes, cancer"},{v:"2",t:"Moderate — major abdominal surgery, stroke, severe pneumonia, haematological malignancy"},{v:"3",t:"Severe — head injury, bone-marrow transplant, ICU (APACHE >10)"}] },
+      { id:"age70", label:"Age ≥ 70 years", type:"check" }
+    ],
+    compute:function(v){
+      var s=Number(v.nut)+Number(v.dis)+(v.age70?1:0);
+      var b=s>=3?"At nutritional risk — start a nutritional care plan":"Not currently at risk — rescreen weekly";
+      return { v:s, u:"points", i:b+". Ref: Kondrup, Clin Nutr 2003 (NRS-2002)." };
+    } },
+
+  { id:"harris_benedict", cat:"General", icon:"🍎", title:"Harris-Benedict Equation (Energy Needs)",
+    desc:"Basal metabolic rate and estimated daily energy requirement.",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.1" },
+      { id:"ht", label:"Height", type:"number", unit:"cm", step:"0.1" },
+      { id:"age", label:"Age", type:"number", unit:"years", step:"1" },
+      { id:"activity", label:"Activity / stress factor", type:"select", opts:[{v:"1.2",t:"Sedentary (×1.2)"},{v:"1.375",t:"Light activity (×1.375)"},{v:"1.55",t:"Moderate (×1.55)"},{v:"1.725",t:"Very active (×1.725)"},{v:"1.9",t:"Extra active / high stress (×1.9)"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.wt)||!ok(v.ht)||!ok(v.age)||v.wt<=0||v.ht<=0||v.age<0) return ERR;
+      var bmr=v.sex==="f" ? 447.593+9.247*v.wt+3.098*v.ht-4.330*v.age : 88.362+13.397*v.wt+4.799*v.ht-5.677*v.age;
+      var tdee=bmr*Number(v.activity);
+      return { v:r0(bmr), u:"kcal/day", i:"Basal metabolic rate; estimated total daily energy ≈ "+r0(tdee)+" kcal/day at the selected factor. Ref: Roza & Shizgal 1984 (revised Harris-Benedict)." };
+    } },
+
+  { id:"stool_osmotic_gap", cat:"Gastroenterology", icon:"🩹", title:"Stool Osmotic Gap",
+    desc:"Distinguishes osmotic from secretory diarrhoea.",
+    inputs:[
+      { id:"na", label:"Stool sodium", type:"number", unit:"mmol/L", step:"1" },
+      { id:"k", label:"Stool potassium", type:"number", unit:"mmol/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.na)||!ok(v.k)||v.na<0||v.k<0) return ERR;
+      var gap=290-2*(v.na+v.k);
+      var b=gap>100?"Wide gap — suggests osmotic diarrhoea":gap<50?"Narrow gap — suggests secretory diarrhoea":"Indeterminate range";
+      return { v:r0(gap), u:"mOsm/kg", i:b+" (assumes a stool osmolality of ~290). Ref: standard gastroenterology." };
+    } },
+
+  { id:"abc2_ich_volume", cat:"Neurology", icon:"🧠", title:"ABC/2 Intracerebral Haemorrhage Volume",
+    desc:"Estimates haematoma volume from CT dimensions.",
+    inputs:[
+      { id:"a", label:"Greatest diameter (A)", type:"number", unit:"cm", step:"0.1" },
+      { id:"b", label:"Diameter perpendicular to A (B)", type:"number", unit:"cm", step:"0.1" },
+      { id:"c", label:"Vertical extent (C = slices with blood × slice thickness)", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.a)||!ok(v.b)||!ok(v.c)||v.a<0||v.b<0||v.c<0) return ERR;
+      var vol=(v.a*v.b*v.c)/2;
+      var big=vol>=30?"Large volume — associated with worse outcome. ":"";
+      return { v:r1(vol), u:"mL", i:big+"Ellipsoid approximation of intracerebral haematoma volume. Ref: Kothari, Stroke 1996 (ABC/2)." };
+    } },
+
+  { id:"whtr", cat:"General", icon:"⚖️", title:"Waist-to-Height Ratio",
+    desc:"Central adiposity relative to height.",
+    inputs:[
+      { id:"waist", label:"Waist circumference", type:"number", unit:"cm", step:"0.1" },
+      { id:"height", label:"Height", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.waist)||!ok(v.height)||v.height<=0||v.waist<=0) return ERR;
+      var r=v.waist/v.height;
+      var b=r>=0.6?"High central adiposity / increased cardiometabolic risk":r>=0.5?"Increased risk — consider lifestyle action":"Within the lower-risk range";
+      return { v:r1(r*100)/100, u:"", i:b+" (a simple rule: keep waist under half of height). Ref: Ashwell, standard reference." };
+    } },
+
+  { id:"pbw_ardsnet", cat:"Critical care", icon:"🫁", title:"Predicted Body Weight & Lung-Protective Tidal Volume",
+    desc:"ARDSNet predicted body weight and 6 mL/kg tidal-volume target.",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"ht", label:"Height", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ht)||v.ht<=0) return ERR;
+      var base=v.sex==="f"?45.5:50;
+      var pbw=base+0.91*(v.ht-152.4);
+      if(pbw<20) return { err:"Height too low for the formula" };
+      return { v:r1(pbw), u:"kg", i:"Predicted body weight; lung-protective tidal volume ≈ "+r0(6*pbw)+" mL (6 mL/kg PBW). Ref: ARDSNet, N Engl J Med 2000." };
+    } },
+
+  { id:"fractional_shortening", cat:"Cardiovascular", icon:"❤️", title:"LV Fractional Shortening",
+    desc:"Echocardiographic measure of left-ventricular systolic function.",
+    inputs:[
+      { id:"lvedd", label:"LV end-diastolic diameter", type:"number", unit:"mm", step:"0.1" },
+      { id:"lvesd", label:"LV end-systolic diameter", type:"number", unit:"mm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.lvedd)||!ok(v.lvesd)||v.lvedd<=0||v.lvesd<0) return ERR;
+      if(v.lvesd>=v.lvedd) return { err:"End-systolic diameter should be smaller than end-diastolic" };
+      var fs=(v.lvedd-v.lvesd)/v.lvedd*100;
+      var b=fs>=25?"Normal fractional shortening":"Reduced — suggests impaired LV systolic function";
+      return { v:r1(fs), u:"%", i:b+" (normal ~25–45%). Ref: standard echocardiography." };
     } }
 
   ];
@@ -4130,7 +4227,14 @@
     femg:["fractional excretion of magnesium","femg","magnesium wasting","renal magnesium"],
     gad2:["gad-2","gad2","anxiety screen","brief anxiety"],
     fagerstrom:["fagerstrom","nicotine dependence","ftnd","smoking dependence"],
-    qtcf:["qtcf","fridericia","corrected qt fridericia","qt correction"]
+    qtcf:["qtcf","fridericia","corrected qt fridericia","qt correction"],
+    nrs2002:["nrs-2002","nrs2002","nutritional risk screening","malnutrition screen hospital"],
+    harris_benedict:["harris benedict","basal metabolic rate","bmr","energy requirement","calorie needs"],
+    stool_osmotic_gap:["stool osmotic gap","faecal osmotic gap","osmotic vs secretory diarrhoea"],
+    abc2_ich_volume:["abc/2","abc2","ich volume","haematoma volume","intracerebral haemorrhage volume"],
+    whtr:["waist to height ratio","waist height ratio","whtr","central obesity"],
+    pbw_ardsnet:["predicted body weight","ardsnet","tidal volume","lung protective ventilation","pbw"],
+    fractional_shortening:["fractional shortening","lv function","fs echo","left ventricular shortening"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -4299,7 +4403,14 @@
     femg:"Standard nephrology reference (fractional excretion of magnesium).",
     gad2:"Kroenke K, et al. Ann Intern Med 2007;146(5):317–25 (GAD-2).",
     fagerstrom:"Heatherton TF, et al. Br J Addict 1991;86(9):1119–27 (FTND).",
-    qtcf:"Fridericia LS. 1920 (cube-root QT correction)."
+    qtcf:"Fridericia LS. 1920 (cube-root QT correction).",
+    nrs2002:"Kondrup J, et al. Clin Nutr 2003;22(3):321–36 (NRS-2002).",
+    harris_benedict:"Roza AM, Shizgal HM. Am J Clin Nutr 1984;40(1):168–82.",
+    stool_osmotic_gap:"Standard gastroenterology reference (stool osmotic gap).",
+    abc2_ich_volume:"Kothari RU, et al. Stroke 1996;27(8):1304–5 (ABC/2).",
+    whtr:"Ashwell M, et al. Standard reference (waist-to-height ratio).",
+    pbw_ardsnet:"ARDS Network. N Engl J Med 2000;342(18):1301–8.",
+    fractional_shortening:"Standard echocardiography reference (fractional shortening)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
