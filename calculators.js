@@ -4913,7 +4913,7 @@
         '<div id="mcCats" class="mc-cats"></div>'+
         '<div id="mcList" class="mc-list"></div>'+
         '<button id="mcInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">💊⚠️ Check Drug Interactions</button>'+
-        '<div class="mc-disc">⚠️ Decision support only — verify formulas and thresholds against the individual patient and local protocol.</div>'+
+        '<div class="mc-disc">⚠️ Decision-support only — not a substitute for clinical judgement. These tools are AI-generated and not yet clinician-verified: confirm every formula, threshold and result against the individual patient and your local protocol. Copyright-restricted instruments (e.g. DLQI, MNA-SF, Clinical Frailty Scale, BASDAI/BASFI) must be administered using the official questionnaire from the rights-holder — this app only interprets the score.</div>'+
       '</div>';
     document.body.appendChild(root);
     root.querySelector("#mcClose").addEventListener("click", close);
