@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 4825,
+    "diseases": 4835,
     "diagnostic": 141,
-    "reference": 4684,
+    "reference": 4694,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 731,
+      "total": 734,
       "diagnostic": 20,
-      "reference": 711,
+      "reference": 714,
       "dims": {
-        "overview": 731,
-        "clinicalFeatures": 731,
-        "pathophysiology": 731,
-        "differential": 731,
-        "investigations": 731,
-        "redFlags": 731,
+        "overview": 734,
+        "clinicalFeatures": 734,
+        "pathophysiology": 734,
+        "differential": 734,
+        "investigations": 734,
+        "redFlags": 734,
         "severity": 48,
-        "prognosis": 731,
+        "prognosis": 734,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -140,18 +140,18 @@
       }
     },
     "GI / Hepatology": {
-      "total": 312,
+      "total": 313,
       "diagnostic": 19,
-      "reference": 293,
+      "reference": 294,
       "dims": {
-        "overview": 312,
-        "clinicalFeatures": 312,
-        "pathophysiology": 312,
-        "differential": 311,
-        "investigations": 312,
-        "redFlags": 312,
+        "overview": 313,
+        "clinicalFeatures": 313,
+        "pathophysiology": 313,
+        "differential": 312,
+        "investigations": 313,
+        "redFlags": 313,
         "severity": 44,
-        "prognosis": 310,
+        "prognosis": 311,
         "diagnosticScoring": 19,
         "management": 19,
         "drugTherapy": 18,
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 275,
+      "total": 277,
       "diagnostic": 7,
-      "reference": 268,
+      "reference": 270,
       "dims": {
-        "overview": 275,
-        "clinicalFeatures": 275,
-        "pathophysiology": 275,
-        "differential": 274,
-        "investigations": 275,
-        "redFlags": 275,
+        "overview": 277,
+        "clinicalFeatures": 277,
+        "pathophysiology": 277,
+        "differential": 276,
+        "investigations": 277,
+        "redFlags": 277,
         "severity": 29,
-        "prognosis": 275,
+        "prognosis": 277,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -260,18 +260,18 @@
       }
     },
     "Endocrine / Metabolic": {
-      "total": 554,
+      "total": 557,
       "diagnostic": 10,
-      "reference": 544,
+      "reference": 547,
       "dims": {
-        "overview": 554,
-        "clinicalFeatures": 554,
-        "pathophysiology": 554,
-        "differential": 553,
-        "investigations": 554,
-        "redFlags": 554,
+        "overview": 557,
+        "clinicalFeatures": 557,
+        "pathophysiology": 557,
+        "differential": 556,
+        "investigations": 557,
+        "redFlags": 557,
         "severity": 33,
-        "prognosis": 552,
+        "prognosis": 555,
         "diagnosticScoring": 10,
         "management": 10,
         "drugTherapy": 10,
@@ -1392,6 +1392,26 @@
         "redFlags": 2,
         "severity": 0,
         "prognosis": 2,
+        "diagnosticScoring": 0,
+        "management": 0,
+        "drugTherapy": 0,
+        "dosing": 0,
+        "stewardship": 0
+      }
+    },
+    "Skeletal (skeletal dysplasia)": {
+      "total": 1,
+      "diagnostic": 0,
+      "reference": 1,
+      "dims": {
+        "overview": 1,
+        "clinicalFeatures": 1,
+        "pathophysiology": 1,
+        "differential": 1,
+        "investigations": 1,
+        "redFlags": 1,
+        "severity": 0,
+        "prognosis": 1,
         "diagnosticScoring": 0,
         "management": 0,
         "drugTherapy": 0,
@@ -18826,6 +18846,28 @@
       }
     },
     {
+      "id": "ccdc115_cdg",
+      "name": "CCDC115-related congenital disorder of glycosylation (CDG type IIo)",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Metabolic / hepatic",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "central_precocious_puberty",
       "name": "Central precocious puberty",
       "specialty": "Endocrine / Metabolic",
@@ -23028,6 +23070,28 @@
       }
     },
     {
+      "id": "jansen_metaphyseal_chondrodysplasia",
+      "name": "Jansen metaphyseal chondrodysplasia",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Skeletal / Endocrine genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "juvenile_pagets_disease",
       "name": "Juvenile Paget disease (idiopathic hyperphosphatasia, TNFRSF11B)",
       "specialty": "Endocrine / Metabolic",
@@ -26508,6 +26572,28 @@
       "name": "Pseudohypoparathyroidism (GNAS)",
       "specialty": "Endocrine / Metabolic",
       "system": "Endocrine / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pseudohypoparathyroidism_type_1b",
+      "name": "Pseudohypoparathyroidism type 1B",
+      "specialty": "Endocrine / Metabolic",
+      "system": "Endocrine genetics (imprinting disorder)",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -46260,6 +46346,28 @@
       }
     },
     {
+      "id": "primary_bile_acid_malabsorption",
+      "name": "Primary bile acid malabsorption",
+      "specialty": "GI / Hepatology",
+      "system": "Gastrointestinal / hepatobiliary",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "PRIMARY_BILIARY_CHOLANGITIS",
       "name": "Primary biliary cholangitis",
       "specialty": "GI / Hepatology",
@@ -49960,6 +50068,28 @@
       "name": "Congenital dyserythropoietic anaemia",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "congenital_dyserythropoietic_anaemia_type_2",
+      "name": "Congenital dyserythropoietic anaemia type 2",
+      "specialty": "Hematology",
+      "system": "Haematological",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -54536,6 +54666,28 @@
       "name": "X-linked thrombocytopenia (WAS mild allelic variant)",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "x_linked_thrombocytopenia_thalassaemia",
+      "name": "X-linked thrombocytopenia with thalassaemia",
+      "specialty": "Hematology",
+      "system": "Haematological",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -72132,6 +72284,28 @@
       }
     },
     {
+      "id": "d_2_hydroxyglutaric_aciduria",
+      "name": "D-2-hydroxyglutaric aciduria",
+      "specialty": "Neurology",
+      "system": "Metabolic / nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dandy_walker_malformation",
       "name": "Dandy-Walker malformation",
       "specialty": "Neurology",
@@ -76136,6 +76310,28 @@
       }
     },
     {
+      "id": "iqsec2_encephalopathy",
+      "name": "IQSEC2-related developmental and epileptic encephalopathy",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "isaacs_syndrome",
       "name": "Isaacs Syndrome",
       "specialty": "Neurology",
@@ -76404,6 +76600,28 @@
       "name": "Kufor-Rakeb syndrome",
       "specialty": "Neurology",
       "system": "Neurology / Neurodegeneration",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "l_2_hydroxyglutaric_aciduria",
+      "name": "L-2-hydroxyglutaric aciduria",
+      "specialty": "Neurology",
+      "system": "Metabolic / nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -104080,6 +104298,28 @@
       "name": "Spondyloepiphyseal Dysplasia Congenita",
       "specialty": "Skeletal",
       "system": "Skeletal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "schmid_metaphyseal_chondrodysplasia",
+      "name": "Schmid metaphyseal chondrodysplasia",
+      "specialty": "Skeletal (skeletal dysplasia)",
+      "system": "Skeletal (skeletal dysplasia)",
       "tier": "reference",
       "caps": {
         "overview": true,
