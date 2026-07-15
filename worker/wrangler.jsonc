@@ -24,8 +24,11 @@
     }
   ],
 
-  // account_id intentionally omitted from source control; wrangler uses the
-  // authenticated account. Any secrets go via `wrangler secret put`, never here.
+  // account_id is required in CI: wrangler 4 + a resource-scoped API token can't auto-list the
+  // account ("Failed to automatically retrieve account IDs"), which silently broke every
+  // deploy-worker run. It is NOT a secret (it appears in every dashboard URL and is useless without
+  // the API token). Any real secrets still go via `wrangler secret put`, never here.
+  "account_id": "5476a757e49205bd1cce40b144eb59a9",
   "observability": { "enabled": true },
 
   // Medical Updates pipeline once daily (05:30 UTC); watch-lab lab poll every 15 min.

@@ -104,7 +104,7 @@ try {
     window.SMD_AI.correlate = function(){ window.__cc++; return Promise.resolve({ mode:"correlate", correlation:{
       clinicalCorrelation:"Findings are suggestive of a pulmonary infective process.", topConsiderations:["Community-acquired pneumonia"],
       whyFit:["Consolidation + raised CRP"], alternatives:["Aspiration"], whatDoesntFit:[], missing:["Sputum culture"], redFlags:[], nextChecks:["Blood cultures"], protocols:[] }}); };
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act="corranalyse"]').click();
@@ -134,7 +134,7 @@ try {
   // 9) patient isolation — analysis resets on patient switch (no stale correlation)
   const iso = await ev(`
     ICU.reset(); ICU.ingestPatient({name:"ISO2",age:33,sex:"F"});
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     var body=root.textContent||"";
@@ -155,7 +155,7 @@ try {
     ICU.reset(); ICU.ingestPatient({name:"UMP",age:55,sex:"M"});
     ICU.ingestLabs({ plt:80, lipase:600, crp:220 });   // thrombocytopenia maps; lipase/CRP do NOT
     var q = ICU._runQuickCorrelation();
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act="corranalyse"]').click();
@@ -171,7 +171,7 @@ try {
     window.__n = 0;
     window.SMD_AI = window.SMD_AI || {};
     window.SMD_AI.correlate = function(){ window.__n++; return Promise.resolve(window.__n === 1 ? { error:"quota" } : { mode:"correlate", correlation:{ clinicalCorrelation:"Recovered correlation.", topConsiderations:["Pneumonia"], whyFit:[],alternatives:[],whatDoesntFit:[],missing:[],redFlags:[],nextChecks:[],protocols:[] }}); };
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act="corranalyse"]').click();
@@ -191,7 +191,7 @@ try {
     ICU.ingestWardImaging({ patientId:"PXA", source:"Ward Sync", imaging:[{reportId:"XA1",description:"CT Chest",report:"IMPRESSION: consolidation."}] });
     ICU.ingestLabs({ crp:150 });
     window.SMD_AI.correlate = function(){ return Promise.resolve({ mode:"correlate", correlation:{ clinicalCorrelation:"PATIENT-A-ONLY-NARRATIVE", topConsiderations:["Pneumonia"], whyFit:[],alternatives:[],whatDoesntFit:[],missing:[],redFlags:[],nextChecks:[],protocols:[] }}); };
-    ICU.open(); var root=document.getElementById('icuRoot');
+    ICU.open('imaging'); var root=document.getElementById('icuRoot');
     root.querySelector('[data-icu-act="ws:documents"]').click();
     root.querySelector('[data-icu-act="tab:imaging"]').click();
     root.querySelector('[data-icu-act="corranalyse"]').click();

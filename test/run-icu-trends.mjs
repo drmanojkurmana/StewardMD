@@ -70,7 +70,7 @@ try {
       { date:"01-JUL-2026", tests:[["Creatinine",1.1,"mg/dL"],["Platelet Count",140,"10^3/uL"],["Lipase",980,"U/L"],["Bilirubin Total",1.0,"mg/dL"],["Haemoglobin",10.2,"g/dL"],["Potassium",4.2,"mmol/L"]] },
       { date:"05-JUL-2026", tests:[["Creatinine",2.1,"mg/dL"],["Platelet Count",92,"10^3/uL"],["Lipase",640,"U/L"],["Bilirubin Total",2.4,"mg/dL"],["Haemoglobin",8.7,"g/dL"],["Potassium",6.1,"mmol/L"]] }
     ]);
-    ICU.open();
+    ICU.open('trends');
     var mw = document.querySelector('[data-icu-act="ws:monitoring"]'); if (mw) mw.click(); var tab = document.querySelector('[data-icu-act="tab:trends"]'); if (tab) tab.click();
     return 1;`);
   await sleep(500);
@@ -113,7 +113,7 @@ try {
       { date:"05-JUL-2026", tests:[["Creatinine",1.3,"mg/dL"]] },
       { date:"20-JUL-2026", tests:[["Creatinine",1.4,"mg/dL"]] }
     ]);
-    ICU.open();
+    ICU.open('trends');
     var mw=document.querySelector('[data-icu-act="ws:monitoring"]'); if(mw) mw.click(); var tab=document.querySelector('[data-icu-act="tab:trends"]'); if(tab) tab.click(); return 1;`);
   await sleep(500);
   await ev(`var all=document.querySelector('[data-icu-act="win:0"]'); if(all) all.click(); return 1;`);
@@ -129,7 +129,7 @@ try {
   ok(G.moves >= 2, "chart breaks the line across the 9-day gap (path has " + G.moves + " move commands, not 1 continuous)");
 
   // 5) No patient selected → guided empty state
-  await ev(`ICU.reset && ICU.reset(); ICU.open(); var mw=document.querySelector('[data-icu-act="ws:monitoring"]'); if(mw) mw.click(); var tab=document.querySelector('[data-icu-act="tab:trends"]'); if(tab) tab.click(); return 1;`);
+  await ev(`ICU.reset && ICU.reset(); ICU.open('trends'); var mw=document.querySelector('[data-icu-act="ws:monitoring"]'); if(mw) mw.click(); var tab=document.querySelector('[data-icu-act="tab:trends"]'); if(tab) tab.click(); return 1;`);
   await sleep(500);
   const r5 = await ev(`var root=document.getElementById('icu') || document.body; return JSON.stringify({ empty: /select a patient to view trends/i.test(root.textContent||"") });`);
   ok(JSON.parse(r5).empty, "no patient selected → guided 'Select a patient to view trends' state");

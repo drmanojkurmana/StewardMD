@@ -1124,8 +1124,13 @@
         var cs = window.getComputedStyle(el);
         return cs.display !== "none" && cs.visibility !== "hidden" && parseFloat(cs.opacity || "1") > 0.01;
       });
+      // The notifications list and the Medical-Update detail are full-screen overlays with their
+      // own "‹ Back" button. The Home FAB (z-index 9999) would otherwise float over their bottom
+      // action bar and swallow taps on the buttons there (Open Official Guideline / Bookmark /
+      // Share) — so treat those overlays like a gate and hide the FAB.
+      var overlayUp = !!document.querySelector(".ntf-overlay.on");
       var show;
-      if (gateUp) show = false;
+      if (gateUp || overlayUp) show = false;
       else if (homeV4On() || redesignNavOn()) show = !homeIsForeground(); // v4/redesign: Home button on every inner screen/dialog, hidden only on the bare home
       else show = true;                                // classic UI: keep the persistent behaviour
       var want = show ? "flex" : "none";
@@ -1994,7 +1999,8 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         think.innerHTML = attrHTML + eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
         var cd = think.querySelector(".maik-collapsed"); cd.style.maxHeight = "260px"; cd.style.overflow = "hidden";
         var mb = document.createElement("button"); mb.className = "maik-more"; mb.textContent = "Show more ▾";
-        mb.addEventListener("click", function () { var open = cd.style.maxHeight === "none"; cd.style.maxHeight = open ? "260px" : "none"; mb.textContent = open ? "Show more ▾" : "Show less ▴"; });
+        // Toggle is handled by the delegated body listener (below) so it keeps working after a
+        // saved thread is restored via innerHTML, which would otherwise drop a direct listener.
         think.insertBefore(mb, think.querySelector(".maik-src") || null);
       } else { think.innerHTML = full; }
       // deterministic contextual follow-ups (0 tokens) — appended into the cached HTML; a single
@@ -2133,6 +2139,15 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // Phase 2 — citation chip → reveal the numbered sources footer in the same answer bubble.
       var cite = ev.target && ev.target.closest ? ev.target.closest(".maik-cite") : null;
       if (cite) { var bub = cite.closest(".maik-b.ai") || cite.closest(".maik-b"); var det = bub && bub.querySelector(".maik-src"); if (det) { det.open = true; try { det.scrollIntoView({ block: "nearest" }); } catch (e) {} } return; }
+      // Sources disclosure ("N sources"): WebKit does NOT fire the native <details> toggle when the
+      // <summary> is display:flex (our styling), so the row looks tappable but never opens. Drive it
+      // explicitly — works live and after a cached thread is restored, on any WebKit version.
+      var sum = ev.target && ev.target.closest ? ev.target.closest(".maik-src summary") : null;
+      if (sum) { var dts = sum.parentNode; if (dts && dts.tagName === "DETAILS") { ev.preventDefault(); dts.open = !dts.open; } return; }
+      // Show more / less: delegated (the live-render listener is gone once the thread HTML is rebuilt
+      // from cache), so it keeps working when a saved conversation is reopened.
+      var more = ev.target && ev.target.closest ? ev.target.closest(".maik-more") : null;
+      if (more) { var mbub = more.closest(".maik-b.ai"); var cd2 = mbub && mbub.querySelector(".maik-collapsed"); if (cd2) { var opened = cd2.style.maxHeight === "none"; cd2.style.maxHeight = opened ? "260px" : "none"; cd2.style.overflow = opened ? "hidden" : ""; more.textContent = opened ? "Show more ▾" : "Show less ▴"; } return; }
       var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
       if (!el) return;
       ev.preventDefault();

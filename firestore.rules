@@ -24,6 +24,12 @@ service cloud.firestore {
       allow read, create: if request.auth != null && request.auth.uid == userId;
     }
 
+    // A user's profile — a PRIVATE per-user cache (holds the StewardMD Doctor ID so we never
+    // re-mint). The public-ish lookup surface is doctorDirectory (below), not this doc.
+    match /users/{userId}/profile/{doc} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
     // StewardMD shareable case codes (public by code, 30-day TTL).
     match /sharedCases/{code} {
       // Public read ONLY by exact code (get), and only while unexpired. A share link
@@ -53,6 +59,144 @@ service cloud.firestore {
       // Only the owner may revoke a live share (delete it).
       allow delete: if request.auth != null
                     && resource.data.ownerUid == request.auth.uid;
+    }
+
+    // ── StewardMD Doctor directory (smd_icu_groups) ───────────────────────────
+    // A get-by-exact-key lookup used to add a colleague to a unit by their Doctor ID
+    // (doctorDirectory/{smdId}) or email (doctorDirectory/e_{emailHash} — the raw email is
+    // NEVER stored, only a hash). It is NEVER listable, so it can't be enumerated into a
+    // public roster of every doctor. A user may only create/own the entry that points to
+    // THEIR uid (which also guards smdId uniqueness: nobody can overwrite another's entry).
+    match /doctorDirectory/{key} {
+      allow get: if request.auth != null;
+      allow list: if false;
+      allow create: if request.auth != null
+                    && request.resource.data.uid == request.auth.uid;
+      allow update: if request.auth != null
+                    && resource.data.uid == request.auth.uid
+                    && request.resource.data.uid == resource.data.uid;
+      allow delete: if false;
+    }
+
+    // ── ICU collaboration groups (smd_icu_groups) ─────────────────────────────
+    // A shared, permissioned ICU unit. The access boundary is GROUP MEMBERSHIP, now held in a
+    // per-unit SUBCOLLECTION (icuGroups/{gid}/members/{uid}) so a colleague can SELF-JOIN by a
+    // valid invite link under tight rules. Shared patient docs hold PHI, so only members may
+    // read/write within a group. Roles gate who may INSTRUCT (tasks, patient delete) and who is
+    // an ADMIN (manage membership). The timeline is an append-only audit trail. DENY BY DEFAULT.
+    match /icuGroups/{groupId} {
+      // Membership + role are read from the member's OWN doc in the subcollection. get()/exists()
+      // read committed state (this is why createGroup writes the group then the head member doc
+      // sequentially, not in one batch — a batched member-create would not yet see its group).
+      function isMember(gid) {
+        return request.auth != null
+               && exists(/databases/$(database)/documents/icuGroups/$(gid)/members/$(request.auth.uid));
+      }
+      function roleOf(gid) {
+        return get(/databases/$(database)/documents/icuGroups/$(gid)/members/$(request.auth.uid)).data.role;
+      }
+      function isAdmin(gid) { return isMember(gid) && roleOf(gid) in ['head', 'professor']; }
+      function canInstruct(gid) { return isMember(gid) && roleOf(gid) in ['head', 'professor', 'assistant', 'senior_resident']; }
+
+      // Read the unit if you are a member.
+      allow read: if isMember(groupId);
+      // Create: the creator must stamp THEMSELVES as createdBy (their head member doc follows).
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.createdBy;
+      // Update unit metadata (name/unit/hospital): admins only.
+      allow update: if isAdmin(groupId);
+      // Delete the whole unit: the head only.
+      allow delete: if isMember(groupId) && roleOf(groupId) == 'head';
+
+      // ── Membership (the security-critical surface) ──────────────────────────
+      match /members/{uid} {
+        function invite(code) { return get(/databases/$(database)/documents/icuGroups/$(groupId)/invites/$(code)); }
+        function inviteExists(code) { return exists(/databases/$(database)/documents/icuGroups/$(groupId)/invites/$(code)); }
+
+        allow read: if isMember(groupId);
+
+        // A member doc may be created by exactly ONE of three paths:
+        allow create: if request.auth != null && (
+          // (a) SELF-JOIN VIA LINK — role comes from a valid, unexpired invite and is a LINK role
+          //     ONLY (never head/professor). 'via' names the invite code.
+          ( request.auth.uid == uid
+            && 'via' in request.resource.data
+            && request.resource.data.role in ['assistant', 'senior_resident', 'junior_resident', 'intern']
+            && inviteExists(request.resource.data.via)
+            && invite(request.resource.data.via).data.expiresAt > request.time.toMillis()
+            && request.resource.data.role == invite(request.resource.data.via).data.role )
+          // (b) CREATOR BOOTSTRAP — the createGroup self-head write (only the unit's creator).
+          || ( request.auth.uid == uid
+               && request.resource.data.role == 'head'
+               && get(/databases/$(database)/documents/icuGroups/$(groupId)).data.createdBy == request.auth.uid )
+          // (c) ADMIN-ADD — an admin adds anyone but a head; only the head may grant professor.
+          || ( isAdmin(groupId)
+               && request.resource.data.role != 'head'
+               && (request.resource.data.role != 'professor' || roleOf(groupId) == 'head') )
+        );
+
+        // Role change: admins only; never touch a head (in or out); only the head may grant
+        // professor; and a member may NEVER change their OWN role.
+        allow update: if isAdmin(groupId)
+                      && request.auth.uid != uid
+                      && resource.data.role != 'head'
+                      && request.resource.data.role != 'head'
+                      && (request.resource.data.role != 'professor' || roleOf(groupId) == 'head');
+
+        // Delete: leave on your OWN (any non-head member) OR an admin removes a non-head member.
+        // The head can never be removed by anyone.
+        allow delete: if (request.auth.uid == uid && resource.data.role != 'head')
+                      || (isAdmin(groupId) && resource.data.role != 'head');
+      }
+
+      // ── Invites (shareable join links) ──────────────────────────────────────
+      // A signed-in holder of the code may GET one (to preview/join); the collection is NEVER
+      // listable. Only admins create/manage them. (Client + rules both clamp the role so a link
+      // can never confer head/professor — enforced in members-create (a) above.)
+      match /invites/{code} {
+        allow get: if request.auth != null;
+        allow list: if false;
+        allow create, update, delete: if isAdmin(groupId);
+      }
+
+      // Shared patient docs — every member may read + create/update status; only an
+      // instructing role may delete (discharge / remove) a patient.
+      match /patients/{pid} {
+        allow read: if isMember(groupId);
+        allow create, update: if isMember(groupId);
+        allow delete: if canInstruct(groupId);
+
+        // Append-only audit trail: a member may add an event authored AS THEMSELVES;
+        // events can NEVER be edited or deleted.
+        match /timeline/{eid} {
+          allow read: if isMember(groupId);
+          allow create: if isMember(groupId) && request.resource.data.by == request.auth.uid;
+          allow update, delete: if false;
+        }
+
+        // Tasks: only an instructing role may create / delete; ANY member may update
+        // (mark in-progress / complete).
+        match /tasks/{tid} {
+          allow read: if isMember(groupId);
+          allow create: if canInstruct(groupId);
+          allow update: if isMember(groupId);
+          allow delete: if canInstruct(groupId);
+        }
+
+        // Presence heartbeat: a member may read who's viewing; you may only write
+        // your OWN presence doc.
+        match /presence/{uid} {
+          allow read: if isMember(groupId);
+          allow write: if request.auth.uid == uid && isMember(groupId);
+        }
+      }
+    }
+
+    // collectionGroup('members') self-query — lists the units YOU belong to (subscribeGroups).
+    // Firestore routes collection-group queries through a recursive-wildcard rule; the nested
+    // icuGroups/{gid}/members/{uid} rule does NOT cover them, so without this they hit the catch-all
+    // deny. Read-only + self-scoped: you can only read member docs whose `uid` field is your own.
+    match /{path=**}/members/{mid} {
+      allow read: if request.auth != null && request.auth.uid == resource.data.uid;
     }
 
     // Everything else is denied.

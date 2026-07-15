@@ -174,6 +174,26 @@
       function esc(s) {
         return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
       }
+      // Ward-Sync lab/culture reports arrive from GHIS as raw HTML (styled <div>/<span>,
+      // &nbsp; runs, &quot;/&ldquo; entities). We NEVER render that HTML — we flatten it to
+      // clean, readable text: block tags → line breaks, then DOMParser strips tags + decodes
+      // entities inertly (no resource loads, never inserted into the live DOM), then collapse
+      // &nbsp;/whitespace runs and blank lines. Plain values pass through untouched.
+      function htmlToText(s) {
+        s = String(s == null ? '' : s);
+        if (!/[<&]/.test(s)) return s.trim();
+        s = s.replace(/<\s*br\s*\/?>/gi, '\n').replace(/<\/\s*(div|p|li|tr|h[1-6])\s*>/gi, '\n');
+        var txt;
+        try { var doc = new DOMParser().parseFromString(s, 'text/html'); txt = (doc && doc.body && doc.body.textContent) || ''; }
+        catch (e) { txt = s.replace(/<[^>]*>/g, ''); }
+        txt = txt.replace(/\u00a0/g, " ").replace(/[ \t]+/g, " ");
+        var lines = txt.split('\n').map(function (l) { return l.trim(); }), out = [];
+        for (var i = 0; i < lines.length; i++) { if (lines[i] || (out.length && out[out.length - 1])) out.push(lines[i]); }
+        return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+      }
+      // A result is a NARRATIVE report (culture/Truenat/histopath) rather than a discrete value
+      // when it carries HTML markup or is long — those render full-width, not in the value chip.
+      function isNarrativeResult(v) { v = String(v == null ? '' : v); return /<[a-z!/]/i.test(v) || v.length > 140; }
       // Safe for a value embedded in a single-quoted JS string inside an HTML
       // attribute (e.g. onclick="fn('<here>')"). Backslash-escape \ and ' so they
       // survive HTML-decoding of the attribute, then HTML-escape & < > " for the
@@ -226,13 +246,21 @@
         tests.forEach(function(t) {
           var cls = abnormalClass(t);
           var antibiogram = t.antibiogram && String(t.antibiogram).trim();
-          html += '<div class="ghis-lab-row">' +
-            '<div class="ghis-lab-test">' + esc(t.test || '') + (t.method ? ' <span style="color:var(--slate);font-weight:400;font-size:11px">(' + esc(t.method) + ')</span>' : '') + '</div>' +
-            '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">' +
-              '<div class="ghis-lab-val' + cls + '">' + esc(t.result || '—') + (t.units ? ' <span style="font-weight:400;color:var(--slate)">' + esc(t.units) + '</span>' : '') + '</div>' +
-              (t.range ? '<div class="ghis-lab-date">ref ' + esc(t.range) + '</div>' : '') +
-            '</div>' +
-          '</div>';
+          var testLbl = '<div class="ghis-lab-test">' + esc(t.test || '') + (t.method ? ' <span style="color:var(--slate);font-weight:400;font-size:11px">(' + esc(t.method) + ')</span>' : '') + '</div>';
+          if (isNarrativeResult(t.result)) {
+            // Culture / Truenat / histopath narrative — flatten HTML to clean text and show it
+            // FULL-WIDTH (never squeezed into the value chip, never as raw markup).
+            html += '<div class="ghis-lab-row" style="display:block">' + testLbl +
+              '<div class="ghis-rad-report" style="margin-top:4px">' + esc(htmlToText(t.result)).replace(/\n/g, '<br>') + '</div>' +
+            '</div>';
+          } else {
+            html += '<div class="ghis-lab-row">' + testLbl +
+              '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">' +
+                '<div class="ghis-lab-val' + cls + '">' + esc(htmlToText(t.result) || '—') + (t.units ? ' <span style="font-weight:400;color:var(--slate)">' + esc(t.units) + '</span>' : '') + '</div>' +
+                (t.range ? '<div class="ghis-lab-date">ref ' + esc(t.range) + '</div>' : '') +
+              '</div>' +
+            '</div>';
+          }
           if (antibiogram) {
             html += '<div class="ghis-lab-abx">' + esc(antibiogram).replace(/\n/g, '<br>') + '</div>';
           }
@@ -300,6 +328,17 @@
             (bgOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0a4a44" onclick="GHIS.watchBackground(\'' + jsq(patientId) + '\',\'' + jsq(name) + '\')">🔔 Lab Watch 24/7 — even when the app is closed</button>' : '') +
             '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
           drawer.style.display = '';
+          // Open at the TOP. The drawer is position:absolute; inset:0 inside #ghisWard, which is a
+          // scrolled container (the patient list). If the list is scrolled down when a patient is
+          // tapped, the drawer's inset:0 top sits above the visible area, so the detail appears
+          // mid-way and the user has to scroll up. Remember the list position, then reset the list
+          // + the drawer's own scroll so the detail opens like a fresh screen from its header.
+          try {
+            var ward = document.getElementById('ghisWard');
+            GHIS._listScroll = ward ? ward.scrollTop : 0;
+            if (ward) ward.scrollTop = 0;
+            drawer.scrollTop = 0;
+          } catch (e) {}
           GHIS.loadRadiology(patientId);
           GHIS.loadLabs(patientId);
         },
@@ -359,7 +398,10 @@
               : ICU.ingestFromWard({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs }));
             // Open the dashboard IMMEDIATELY after the lab sync — imaging must never block it.
             try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
-            ICU.open();
+            // Land on the just-synced patient workspace. 'overview' is a valid RENDER target, so
+            // ICU.open sets _screen="patient" SYNCHRONOUSLY — the group->Firestore mirror is then not
+            // gated out by a board flip, and the user sees the data they just synced (not the board).
+            ICU.open('overview');
             try { if (typeof after === 'function') after(); } catch (e) {}
             try { if (window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
             // Radiology (TEXT only) streams in ASYNCHRONOUSLY when the feature is on. The ICU state
@@ -609,6 +651,9 @@
     
       window.closeLabDrawer = function() {
         document.getElementById('ghisLabDrawer').style.display = 'none';
+        // Restore the patient-list scroll position saved when the drawer opened (openLab reset it
+        // to 0 so the detail opened from its top) — back returns you where you were in the list.
+        try { var ward = document.getElementById('ghisWard'); if (ward && window.GHIS && GHIS._listScroll != null) ward.scrollTop = GHIS._listScroll; } catch (e) {}
       };
 
       // Escape closes the lab drawer first (back to list), then the whole panel —
