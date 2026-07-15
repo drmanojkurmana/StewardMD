@@ -2342,24 +2342,16 @@
       return { v:s, u:"points", i:b+". Any major feature warrants concern. Ref: MacKie (Glasgow 7-point)." };
     } },
 
-  { id:"dlqi", cat:"Dermatology", icon:"🩹", title:"Dermatology Life Quality Index (DLQI)",
-    desc:"Impact of skin disease on quality of life over the past week.",
+  { id:"dlqi", cat:"Dermatology", icon:"🩹", title:"DLQI — Score Interpreter",
+    desc:"Interprets a Dermatology Life Quality Index total. Administer the official DLQI (© Cardiff University, free for clinical use from cardiff.ac.uk) and enter the total here.",
     inputs:[
-      { id:"q1", label:"Itchy, sore, painful or stinging skin", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
-      { id:"q2", label:"Embarrassed or self-conscious", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
-      { id:"q3", label:"Interfered with shopping / home / garden", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
-      { id:"q4", label:"Influenced the clothes you wore", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
-      { id:"q5", label:"Affected social or leisure activities", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
-      { id:"q6", label:"Made it difficult to do sport", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
-      { id:"q7", label:"Prevented working or studying", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
-      { id:"q8", label:"Problems with partner / friends / relatives", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
-      { id:"q9", label:"Caused sexual difficulties", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] },
-      { id:"q10", label:"Treatment was a problem (time / mess)", type:"select", opts:[{v:"0",t:"Not at all / not relevant"},{v:"1",t:"A little"},{v:"2",t:"A lot"},{v:"3",t:"Very much"}] }
+      { id:"total", label:"DLQI total (0–30)", type:"number", step:"1" }
     ],
     compute:function(v){
-      var s=0; for(var i=1;i<=10;i++) s+=Number(v["q"+i]);
+      if(!ok(v.total)||v.total<0||v.total>30) return ERR;
+      var s=Math.round(v.total);
       var b=s<=1?"No effect on the patient's life":s<=5?"Small effect":s<=10?"Moderate effect":s<=20?"Very large effect":"Extremely large effect";
-      return { v:s, u:"/30", i:b+". Ref: Finlay & Khan, Clin Exp Dermatol 1994." };
+      return { v:s, u:"/30", i:b+". Obtain the validated questionnaire from Cardiff University. Banding ref: Hongbo, J Invest Dermatol 2005." };
     } },
 
   { id:"bpp", cat:"Obstetrics", icon:"🤰", title:"Biophysical Profile (BPP)",
@@ -2578,21 +2570,15 @@
       return { v:qr, u:"", i:b+" (glucose entered in mg/dL). Higher = more sensitive. Ref: Katz, J Clin Endocrinol Metab 2000." };
     } },
 
-  { id:"basdai", cat:"Rheumatology", icon:"🦴", title:"BASDAI (Ankylosing Spondylitis Activity)",
-    desc:"Disease activity in axial spondyloarthritis (each item scored 0–10).",
+  { id:"basdai", cat:"Rheumatology", icon:"🦴", title:"BASDAI — Score Interpreter",
+    desc:"Interprets a Bath Ankylosing Spondylitis Disease Activity Index result. Administer the official BASDAI and enter the 0–10 score.",
     inputs:[
-      { id:"q1", label:"Fatigue / tiredness", type:"number", step:"0.1" },
-      { id:"q2", label:"Spinal pain (neck / back / hip)", type:"number", step:"0.1" },
-      { id:"q3", label:"Peripheral joint pain / swelling", type:"number", step:"0.1" },
-      { id:"q4", label:"Discomfort from tender areas (enthesitis)", type:"number", step:"0.1" },
-      { id:"q5", label:"Morning stiffness — severity", type:"number", step:"0.1" },
-      { id:"q6", label:"Morning stiffness — duration", type:"number", step:"0.1" }
+      { id:"score", label:"BASDAI score (0–10)", type:"number", step:"0.1" }
     ],
     compute:function(v){
-      if(!ok(v.q1)||!ok(v.q2)||!ok(v.q3)||!ok(v.q4)||!ok(v.q5)||!ok(v.q6)) return ERR;
-      var s=(v.q1+v.q2+v.q3+v.q4+(v.q5+v.q6)/2)/5;
-      var b=s>=4?"Active disease — consider treatment escalation":"Lower disease activity";
-      return { v:r1(s), u:"/10", i:b+". Ref: Garrett, J Rheumatol 1994 (BASDAI)." };
+      if(!ok(v.score)||v.score<0||v.score>10) return ERR;
+      var b=v.score>=4?"Active disease — consider treatment escalation":"Lower disease activity";
+      return { v:r1(v.score), u:"/10", i:b+" (≥4 indicates active disease). Ref: Garrett, J Rheumatol 1994 (BASDAI)." };
     } },
 
   { id:"forrest", cat:"Gastroenterology", icon:"🩹", title:"Forrest Classification (Ulcer Bleeding)",
@@ -2855,18 +2841,16 @@
       return { v:s, u:"/7", i:b+". Ref: Bendapudi, Lancet Haematol 2017 (PLASMIC)." };
     } },
 
-  { id:"cfs", cat:"General", icon:"⚖️", title:"Clinical Frailty Scale (Rockwood)",
-    desc:"Global frailty assessment in older adults.",
+  { id:"cfs", cat:"General", icon:"⚖️", title:"Clinical Frailty Scale — Level Interpreter",
+    desc:"Assign the CFS level (1–9) using the official Rockwood scale (© Dalhousie University; free for non-commercial clinical use), then enter it here for outcome context.",
     inputs:[
-      { id:"level", label:"Frailty level", type:"select", opts:[
-        {v:"1",t:"1 — Very fit"},{v:"2",t:"2 — Well"},{v:"3",t:"3 — Managing well"},{v:"4",t:"4 — Living with very mild frailty"},
-        {v:"5",t:"5 — Living with mild frailty"},{v:"6",t:"6 — Living with moderate frailty"},{v:"7",t:"7 — Living with severe frailty"},
-        {v:"8",t:"8 — Living with very severe frailty"},{v:"9",t:"9 — Terminally ill"} ] }
+      { id:"level", label:"CFS level (1–9)", type:"number", step:"1" }
     ],
     compute:function(v){
-      var n=Number(v.level);
-      var b=n<=3?"Not frail":n===4?"Vulnerable / very mild frailty":n<=6?"Mild-to-moderate frailty":n<=8?"Severe frailty":"Terminally ill";
-      return { v:n, u:"/9", i:b+" (higher = more frail; correlates with adverse outcomes). Ref: Rockwood, CMAJ 2005." };
+      if(!ok(v.level)||v.level<1||v.level>9) return ERR;
+      var n=Math.round(v.level);
+      var b=n<=3?"Not frail":n===4?"Vulnerable":n<=6?"Mild-to-moderate frailty":n<=8?"Severe frailty":"Terminally ill";
+      return { v:n, u:"/9", i:b+" (higher = more frail; correlates with adverse outcomes). Use the official illustrated scale from Dalhousie University for level definitions. Ref: Rockwood, CMAJ 2005." };
     } },
 
   { id:"duke_endocarditis", cat:"Infectious disease", icon:"🦠", title:"Modified Duke Criteria (Infective Endocarditis)",
@@ -4299,26 +4283,15 @@
       return { v:r1(s), u:"points", i:"Estimated peak VO₂ ≈ "+r1(mets)+" METs (max DASI 58.2; higher = better functional capacity). Ref: Hlatky, Am J Cardiol 1989 (DASI)." };
     } },
 
-  { id:"basfi", cat:"Rheumatology", icon:"🦴", title:"BASFI (Ankylosing Spondylitis Function)",
-    desc:"Functional limitation in axial spondyloarthritis (each item 0–10).",
+  { id:"basfi", cat:"Rheumatology", icon:"🦴", title:"BASFI — Score Interpreter",
+    desc:"Interprets a Bath Ankylosing Spondylitis Functional Index result. Administer the official BASFI and enter the 0–10 score.",
     inputs:[
-      { id:"q1", label:"Putting on socks/tights without help", type:"number", step:"0.1" },
-      { id:"q2", label:"Bending from the waist to pick up a pen", type:"number", step:"0.1" },
-      { id:"q3", label:"Reaching up to a high shelf without help", type:"number", step:"0.1" },
-      { id:"q4", label:"Getting up from an armless chair without using hands", type:"number", step:"0.1" },
-      { id:"q5", label:"Getting up off the floor from lying", type:"number", step:"0.1" },
-      { id:"q6", label:"Standing unsupported for 10 minutes", type:"number", step:"0.1" },
-      { id:"q7", label:"Climbing 12–15 steps without a rail", type:"number", step:"0.1" },
-      { id:"q8", label:"Looking over the shoulder without turning the body", type:"number", step:"0.1" },
-      { id:"q9", label:"Doing physically demanding activities", type:"number", step:"0.1" },
-      { id:"q10", label:"Doing a full day of activities (home or work)", type:"number", step:"0.1" }
+      { id:"score", label:"BASFI score (0–10)", type:"number", step:"0.1" }
     ],
     compute:function(v){
-      var qs=["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10"];
-      for(var i=0;i<qs.length;i++) if(!ok(v[qs[i]])) return ERR;
-      var s=qs.reduce(function(a,k){return a+v[k];},0)/10;
-      var b=s>=5?"Marked functional limitation":"Lesser functional limitation";
-      return { v:r1(s), u:"/10", i:b+" (higher = worse; track alongside BASDAI). Ref: Calin, J Rheumatol 1994 (BASFI)." };
+      if(!ok(v.score)||v.score<0||v.score>10) return ERR;
+      var b=v.score>=5?"Marked functional limitation":"Lesser functional limitation";
+      return { v:r1(v.score), u:"/10", i:b+" (higher = worse; track alongside BASDAI). Ref: Calin, J Rheumatol 1994 (BASFI)." };
     } },
 
   { id:"ballard", cat:"Paediatrics", icon:"👶", title:"New Ballard Score (Gestational Age)",
@@ -4407,20 +4380,16 @@
       return { v:s, u:"/56", i:b+". Ref: Hamilton, Br J Med Psychol 1959 (HAM-A)." };
     } },
 
-  { id:"mna_sf", cat:"General", icon:"🍎", title:"Mini Nutritional Assessment — Short Form (MNA-SF)",
-    desc:"Nutritional screening in older adults.",
+  { id:"mna_sf", cat:"General", icon:"🍎", title:"MNA-SF — Score Interpreter",
+    desc:"Interprets a Mini Nutritional Assessment — Short Form total. Administer the official MNA®-SF (© Société des Produits Nestlé; free for clinical use from mna-elderly.com) and enter the total.",
     inputs:[
-      { id:"intake", label:"Decline in food intake over the past 3 months", type:"select", opts:[{v:"0",t:"Severe decrease"},{v:"1",t:"Moderate decrease"},{v:"2",t:"No decrease"}] },
-      { id:"wtloss", label:"Weight loss in the past 3 months", type:"select", opts:[{v:"0",t:"> 3 kg"},{v:"1",t:"Unknown"},{v:"2",t:"1–3 kg"},{v:"3",t:"No weight loss"}] },
-      { id:"mobility", label:"Mobility", type:"select", opts:[{v:"0",t:"Bed or chair bound"},{v:"1",t:"Out of bed but does not go out"},{v:"2",t:"Goes out"}] },
-      { id:"stress", label:"Psychological stress or acute disease in the past 3 months", type:"select", opts:[{v:"0",t:"Yes"},{v:"2",t:"No"}] },
-      { id:"neuro", label:"Neuropsychological problems", type:"select", opts:[{v:"0",t:"Severe dementia or depression"},{v:"1",t:"Mild dementia"},{v:"2",t:"No problems"}] },
-      { id:"bmi", label:"Body mass index", type:"select", opts:[{v:"0",t:"< 19"},{v:"1",t:"19 to < 21"},{v:"2",t:"21 to < 23"},{v:"3",t:"≥ 23"}] }
+      { id:"total", label:"MNA-SF total (0–14)", type:"number", step:"1" }
     ],
     compute:function(v){
-      var s=Number(v.intake)+Number(v.wtloss)+Number(v.mobility)+Number(v.stress)+Number(v.neuro)+Number(v.bmi);
+      if(!ok(v.total)||v.total<0||v.total>14) return ERR;
+      var s=Math.round(v.total);
       var b=s>=12?"Normal nutritional status":s>=8?"At risk of malnutrition":"Malnourished";
-      return { v:s, u:"/14", i:b+". Ref: Rubenstein, J Gerontol 2001 (MNA-SF)." };
+      return { v:s, u:"/14", i:b+". Obtain the validated MNA-SF from mna-elderly.com. Banding ref: Rubenstein, J Gerontol 2001. For a fully free alternative, see MUST or NRS-2002." };
     } },
 
   { id:"absolute_retic", cat:"Haematology", icon:"🩸", title:"Absolute Reticulocyte Count",
