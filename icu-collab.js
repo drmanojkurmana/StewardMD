@@ -790,6 +790,7 @@
         if (!db || !uid) return reject(new Error("firestore-unavailable"));
         var e = buildTimelineEvent(ev, { uid: uid, name: currentName(), role: _ctx.role });
         e.ts = fieldValue().serverTimestamp();
+        e.expiresAt = new Date(nowMs() + 7 * 24 * 3600 * 1000);   // 7-day retention — a Firestore TTL policy on timeline.expiresAt auto-deletes it
         track(ptRef(db, gid, pid).collection("timeline").add(e)).then(function (ref) { resolve(ref.id); }, reject);
       });
     });
@@ -815,6 +816,7 @@
         if (!db || !uid) return reject(new Error("firestore-unavailable"));
         var t = buildTask(info, { uid: uid, name: currentName() });
         t.ts = fieldValue().serverTimestamp();
+        t.expiresAt = new Date(nowMs() + 7 * 24 * 3600 * 1000);   // 7-day retention — Firestore TTL policy on tasks.expiresAt auto-deletes it
         track(ptRef(db, gid, pid).collection("tasks").add(t)).then(function (ref) { resolve(ref.id); }, reject);
       });
     });
