@@ -4590,6 +4590,76 @@
       if(corr<0) corr=0;
       var wk=Math.floor(corr), d=Math.round((corr-wk)*7);
       return { v:r1(corr), u:"weeks", i:"Corrected age ≈ "+wk+" wk "+d+" d (chronological age minus weeks of prematurity). Use until ~2–3 years for growth/development assessment. Ref: standard neonatology." };
+    } },
+
+  { id:"rate_pressure_product", cat:"Cardiovascular", icon:"❤️", title:"Rate-Pressure Product (Double Product)",
+    desc:"Estimate of myocardial oxygen demand.",
+    inputs:[
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm", step:"1" },
+      { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.hr)||!ok(v.sbp)||v.hr<0||v.sbp<0) return ERR;
+      var rpp=v.hr*v.sbp;
+      var b=rpp>25000?"Very high myocardial oxygen demand":rpp>15000?"Elevated demand":"Within the usual resting range";
+      return { v:r0(rpp), u:"mmHg·bpm", i:b+" (rises with exertion; the ischaemic threshold is patient-specific). Ref: standard cardiovascular physiology." };
+    } },
+
+  { id:"corrected_wbc", cat:"Haematology", icon:"🩸", title:"Corrected WBC for Nucleated RBCs",
+    desc:"Corrects an automated white cell count when nucleated red cells are present.",
+    inputs:[
+      { id:"wbc", label:"Measured (uncorrected) WBC", type:"number", unit:"×10⁹/L", step:"0.1" },
+      { id:"nrbc", label:"Nucleated RBCs per 100 WBC", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.wbc)||!ok(v.nrbc)||v.wbc<0||v.nrbc<0) return ERR;
+      var c=v.wbc*100/(100+v.nrbc);
+      return { v:r1(c), u:"×10⁹/L", i:"True white cell count after removing nucleated red cells that were counted as leukocytes. Ref: standard haematology." };
+    } },
+
+  { id:"gose", cat:"Neurology", icon:"🧠", title:"Glasgow Outcome Scale — Extended (GOS-E)",
+    desc:"Functional outcome after traumatic brain injury.",
+    inputs:[
+      { id:"grade", label:"Outcome category", type:"select", opts:[{v:"1",t:"1 — Dead"},{v:"2",t:"2 — Vegetative state"},{v:"3",t:"3 — Lower severe disability"},{v:"4",t:"4 — Upper severe disability"},{v:"5",t:"5 — Lower moderate disability"},{v:"6",t:"6 — Upper moderate disability"},{v:"7",t:"7 — Lower good recovery"},{v:"8",t:"8 — Upper good recovery"}] }
+    ],
+    compute:function(v){
+      var m={"1":"Dead","2":"Vegetative state — unresponsive","3":"Lower severe disability — dependent for daily support","4":"Upper severe disability — dependent but some independence at home","5":"Lower moderate disability — independent but cannot resume prior work/social life","6":"Upper moderate disability — some reduction in work/social capacity","7":"Lower good recovery — minor deficits affecting daily life","8":"Upper good recovery — full recovery or minor residual symptoms"};
+      return { v:"GOS-E "+v.grade, u:"", i:m[v.grade]+". Ref: Wilson, J Neurotrauma 1998 (GOS-E)." };
+    } },
+
+  { id:"paeds_weight", cat:"Paediatrics", icon:"👶", title:"Paediatric Weight Estimate (APLS)",
+    desc:"Estimates a child's weight when it cannot be measured (emergencies).",
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"years", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||v.age<0||v.age>14) return ERR;
+      if(v.age<1) return { err:"Use a length-based method (e.g. Broselow tape) for infants < 1 year" };
+      var wt=(v.age<=5)?2*v.age+8:3*v.age+7;
+      return { v:r1(wt), u:"kg", i:"Estimated weight (APLS: 1–5y = 2×age+8; 6–12y = 3×age+7). An emergency estimate — weigh the child as soon as feasible. Ref: APLS." };
+    } },
+
+  { id:"ett_size", cat:"Paediatrics", icon:"👶", title:"Paediatric ETT Size & Depth",
+    desc:"Estimates endotracheal tube size and insertion depth by age.",
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"years", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||v.age<1||v.age>14) return ERR;
+      var uncuffed=v.age/4+4, cuffed=v.age/4+3.5, depth=v.age/2+12;
+      return { v:r1(uncuffed), u:"mm ID (uncuffed)", i:"Cuffed internal diameter ≈ "+r1(cuffed)+" mm; oral insertion depth ≈ "+r1(depth)+" cm. For age ≥ 1 year (neonates/infants need dedicated sizing). Ref: standard paediatric airway (age/4 + 4)." };
+    } },
+
+  { id:"ga_crl", cat:"Obstetrics", icon:"🤰", title:"Gestational Age from Crown-Rump Length",
+    desc:"First-trimester gestational age from CRL (Robinson-Fleming).",
+    inputs:[
+      { id:"crl", label:"Crown-rump length", type:"number", unit:"mm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.crl)||v.crl<2||v.crl>120) return ERR;
+      var days=8.052*Math.sqrt(v.crl)+23.73;
+      var wk=Math.floor(days/7), d=Math.round(days-wk*7);
+      return { v:wk+"+"+d, u:"weeks+days", i:"Estimated gestational age ("+r0(days)+" days); most accurate for CRL ~10–84 mm. Ref: Robinson & Fleming 1975." };
     } }
 
   ];
@@ -4851,7 +4921,13 @@
     lams:["los angeles motor scale","lams","large vessel occlusion screen","lvo screen"],
     robson:["robson classification","ten group classification","caesarean audit","robson group"],
     acr_eular_ra:["acr eular","rheumatoid arthritis classification","ra classification 2010"],
-    corrected_age:["corrected age","adjusted age prematurity","premature infant age"]
+    corrected_age:["corrected age","adjusted age prematurity","premature infant age"],
+    rate_pressure_product:["rate pressure product","double product","myocardial oxygen demand"],
+    corrected_wbc:["corrected wbc","nucleated rbc correction","nrbc wbc"],
+    gose:["glasgow outcome scale extended","gos-e","tbi outcome"],
+    paeds_weight:["paediatric weight estimate","apls weight","child weight formula","pediatric weight"],
+    ett_size:["ett size","endotracheal tube size","paediatric airway","tube depth"],
+    ga_crl:["gestational age crl","crown rump length","robinson fleming","dating scan"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -5068,7 +5144,13 @@
     lams:"Nazliel B, et al. Stroke 2008;39(8):2264–7 (LAMS).",
     robson:"Robson MS. Fetal Matern Med Rev 2001;12(1):23–39 (WHO-endorsed).",
     acr_eular_ra:"Aletaha D, et al. Arthritis Rheum 2010;62(9):2569–81.",
-    corrected_age:"Standard neonatology reference (age corrected for prematurity)."
+    corrected_age:"Standard neonatology reference (age corrected for prematurity).",
+    rate_pressure_product:"Standard cardiovascular physiology reference (HR × SBP).",
+    corrected_wbc:"Standard haematology reference (WBC × 100/(100+nRBC)).",
+    gose:"Wilson JTL, et al. J Neurotrauma 1998;15(8):573–85 (GOS-E).",
+    paeds_weight:"Advanced Paediatric Life Support (APLS) weight formulae.",
+    ett_size:"Standard paediatric airway reference (age/4 + 4).",
+    ga_crl:"Robinson HP, Fleming JEE. Br J Obstet Gynaecol 1975;82(9):702–10."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
