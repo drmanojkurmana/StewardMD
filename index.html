@@ -46,7 +46,7 @@
      asks for. It was never actually loaded, so it fell back to a different cursive on
      devices without it (e.g. iPhone). Load it so the credit renders as designed everywhere. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/redesign-system.css?v=gold383">
+<link rel="stylesheet" href="/redesign-system.css?v=gold384">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <script>
@@ -1417,11 +1417,11 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=gold383" defer></script>
+<script src="/icu.js?v=gold384" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
-<script src="/icu-collab.js?v=gold383" defer></script>
+<script src="/icu-collab.js?v=gold384" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
 <script src="/native-push.js?v=gold363" defer></script>

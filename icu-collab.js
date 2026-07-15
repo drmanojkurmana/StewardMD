@@ -266,6 +266,7 @@
       assignedBy: data.assignedBy || null, assignedByName: data.assignedByName || "",
       completedBy: data.completedBy || null, completedByName: data.completedByName || "",
       completedAt: tsToMs(data.completedAt), due: data.due || "", assignedTo: data.assignedTo || null,
+      onBehalfOfUid: data.onBehalfOfUid || null, onBehalfOfName: data.onBehalfOfName || "",
       explanation: data.explanation || "", explainedByName: data.explainedByName || "", explainedAt: tsToMs(data.explainedAt),
       escalatedAt: (typeof data.escalatedAt === "number" ? data.escalatedAt : tsToMs(data.escalatedAt)),
       ts: tsToMs(data.ts)
@@ -287,6 +288,7 @@
       text: info.text || "", status: "pending",
       priority: normPriority(info.priority), dueAt: (info.dueAt != null ? info.dueAt : null),
       assignedBy: who.uid || null, assignedByName: who.name || "",
+      onBehalfOfUid: info.onBehalfOfUid || null, onBehalfOfName: info.onBehalfOfName || "",
       completedBy: null, completedByName: null, completedAt: null,
       explanation: "", explainedBy: null, explainedByName: null, explainedAt: null,
       due: info.due || "", assignedTo: info.assignedTo || null, ts: null
