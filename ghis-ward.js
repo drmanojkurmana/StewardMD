@@ -36,6 +36,10 @@
       var wrap = document.createElement('div');
       wrap.innerHTML =
         '<div id="ghisHospital" class="ghis-body">' +
+          '<div style="display:flex;background:var(--panel,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:12px;padding:4px;margin-bottom:16px;gap:4px">' +
+            '<div style="flex:1;text-align:center;padding:9px;border-radius:9px;background:var(--teal,#0e6e63);color:#fff;font-weight:700;font-size:13.5px">🏥 Select hospital</div>' +
+            '<button onclick="ghisOpenMyWard()" style="flex:1;text-align:center;padding:9px;border-radius:9px;background:transparent;border:none;color:var(--slate,#64748b);font-weight:700;font-size:13.5px;font-family:inherit;cursor:pointer">🩺 My Ward</button>' +
+          '</div>' +
           '<div class="ghis-setup-card">' +
             '<div class="ghis-setup-title">Select your hospital</div>' +
             '<div class="ghis-setup-sub">Choose your hospital to connect its ward + labs.</div>' +
@@ -143,6 +147,17 @@
       window.showGhisScreen = showScreen;
       // Hospital picker actions.
       window.ghisSelectHospital = function (id) { if (id === 'gimsr') showScreen('setup'); };
+      // "My Ward" tab — open the StewardMD ward dashboard (the ICU dashboard tuned for ward patients:
+      // ventilator hidden, "Ward" labels, own patient list; Treatment / instructions / deep review /
+      // imaging / discharge reused). The Ward Sync panel (z 18000) sits ABOVE the dashboard (z 10000),
+      // so close it first, then open the dashboard full-screen.
+      window.ghisOpenMyWard = function () {
+        try {
+          if (window.ICU && ICU.openWard) { if (window.closeGHIS) window.closeGHIS(); ICU.openWard(); }
+          else if (window.INF && INF.openDashboard) { if (window.closeGHIS) window.closeGHIS(); INF.openDashboard(); }
+          else if (window.toast) window.toast('Ward dashboard loading…');
+        } catch (e) {}
+      };
       window.ghisSubmitHospitalRequest = function () {
         var g = function (i) { var e = document.getElementById(i); return e ? String(e.value || '').trim() : ''; };
         var st = document.getElementById('ghReqStatus');
