@@ -2,9 +2,9 @@
   "generated": "build-coverage-matrix.mjs",
   "note": "Presence of structured, paraphrased content per capability — no source text is stored. Reflects the runtime store (KB_CORE + KB_ENRICHMENT.byId + KB_RAG.treatments).",
   "totals": {
-    "diseases": 4835,
+    "diseases": 4859,
     "diagnostic": 141,
-    "reference": 4694,
+    "reference": 4718,
     "treatmentsWithDrugTherapy": 129,
     "treatmentsWithDosing": 129
   },
@@ -30,28 +30,28 @@
     "differential": 99.9,
     "investigations": 100,
     "redFlags": 100,
-    "severity": 8.2,
+    "severity": 8.1,
     "prognosis": 99.8,
     "diagnosticScoring": 2.9,
     "management": 2.9,
     "drugTherapy": 2.7,
     "dosing": 2.7,
-    "stewardship": 1.1
+    "stewardship": 1
   },
   "bySpecialty": {
     "Pulmonology": {
-      "total": 159,
+      "total": 162,
       "diagnostic": 20,
-      "reference": 139,
+      "reference": 142,
       "dims": {
-        "overview": 159,
-        "clinicalFeatures": 159,
-        "pathophysiology": 159,
-        "differential": 159,
-        "investigations": 159,
-        "redFlags": 159,
+        "overview": 162,
+        "clinicalFeatures": 162,
+        "pathophysiology": 162,
+        "differential": 162,
+        "investigations": 162,
+        "redFlags": 162,
         "severity": 28,
-        "prognosis": 158,
+        "prognosis": 161,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 18,
@@ -80,18 +80,18 @@
       }
     },
     "Neurology": {
-      "total": 734,
+      "total": 748,
       "diagnostic": 20,
-      "reference": 714,
+      "reference": 728,
       "dims": {
-        "overview": 734,
-        "clinicalFeatures": 734,
-        "pathophysiology": 734,
-        "differential": 734,
-        "investigations": 734,
-        "redFlags": 734,
+        "overview": 748,
+        "clinicalFeatures": 748,
+        "pathophysiology": 748,
+        "differential": 748,
+        "investigations": 748,
+        "redFlags": 748,
         "severity": 48,
-        "prognosis": 734,
+        "prognosis": 748,
         "diagnosticScoring": 20,
         "management": 20,
         "drugTherapy": 19,
@@ -120,18 +120,18 @@
       }
     },
     "Dermatology": {
-      "total": 299,
+      "total": 301,
       "diagnostic": 5,
-      "reference": 294,
+      "reference": 296,
       "dims": {
-        "overview": 299,
-        "clinicalFeatures": 299,
-        "pathophysiology": 299,
-        "differential": 299,
-        "investigations": 298,
-        "redFlags": 299,
+        "overview": 301,
+        "clinicalFeatures": 301,
+        "pathophysiology": 301,
+        "differential": 301,
+        "investigations": 300,
+        "redFlags": 301,
         "severity": 7,
-        "prognosis": 298,
+        "prognosis": 300,
         "diagnosticScoring": 5,
         "management": 5,
         "drugTherapy": 5,
@@ -240,18 +240,18 @@
       }
     },
     "Hematology": {
-      "total": 277,
+      "total": 279,
       "diagnostic": 7,
-      "reference": 270,
+      "reference": 272,
       "dims": {
-        "overview": 277,
-        "clinicalFeatures": 277,
-        "pathophysiology": 277,
-        "differential": 276,
-        "investigations": 277,
-        "redFlags": 277,
+        "overview": 279,
+        "clinicalFeatures": 279,
+        "pathophysiology": 279,
+        "differential": 278,
+        "investigations": 279,
+        "redFlags": 279,
         "severity": 29,
-        "prognosis": 277,
+        "prognosis": 279,
         "diagnosticScoring": 7,
         "management": 6,
         "drugTherapy": 6,
@@ -280,18 +280,18 @@
       }
     },
     "Nephrology": {
-      "total": 158,
+      "total": 161,
       "diagnostic": 6,
-      "reference": 152,
+      "reference": 155,
       "dims": {
-        "overview": 158,
-        "clinicalFeatures": 158,
-        "pathophysiology": 158,
-        "differential": 158,
-        "investigations": 158,
-        "redFlags": 158,
+        "overview": 161,
+        "clinicalFeatures": 161,
+        "pathophysiology": 161,
+        "differential": 161,
+        "investigations": 161,
+        "redFlags": 161,
         "severity": 13,
-        "prognosis": 158,
+        "prognosis": 161,
         "diagnosticScoring": 6,
         "management": 6,
         "drugTherapy": 6,
@@ -13698,6 +13698,28 @@
       }
     },
     {
+      "id": "reticulate_acropigmentation_of_kitamura",
+      "name": "Reticulate Acropigmentation of Kitamura",
+      "specialty": "Dermatology",
+      "system": "Dermatology genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "retronychia",
       "name": "Retronychia",
       "specialty": "Dermatology",
@@ -14780,6 +14802,28 @@
       "name": "X-linked ichthyosis",
       "specialty": "Dermatology",
       "system": "Dermatology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "x_linked_reticulate_pigmentary_disorder",
+      "name": "X-linked Reticulate Pigmentary Disorder",
+      "specialty": "Dermatology",
+      "system": "Dermatology genetics",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -53672,6 +53716,28 @@
       }
     },
     {
+      "id": "revesz_syndrome",
+      "name": "Revesz syndrome",
+      "specialty": "Hematology",
+      "system": "Haematological / multisystem",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "richter_transformation",
       "name": "Richter transformation",
       "specialty": "Hematology",
@@ -54116,6 +54182,28 @@
       "name": "Takenouchi-Kosaki syndrome (CDC42 macrothrombocytopenia)",
       "specialty": "Hematology",
       "system": "Haematology / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "telomere_biology_disorder",
+      "name": "Telomere biology disorder",
+      "specialty": "Hematology",
+      "system": "Haematological / multisystem",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -65156,6 +65244,28 @@
       }
     },
     {
+      "id": "autosomal_dominant_hypocalcaemia",
+      "name": "Autosomal Dominant Hypocalcaemia",
+      "specialty": "Nephrology",
+      "system": "Endocrine / Renal genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "adpkd",
       "name": "Autosomal dominant polycystic kidney disease",
       "specialty": "Nephrology",
@@ -65336,6 +65446,28 @@
       "name": "Bartter syndrome",
       "specialty": "Nephrology",
       "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "bartter_syndrome_type_4",
+      "name": "Bartter Syndrome Type 4",
+      "specialty": "Nephrology",
+      "system": "Renal genetics (renal tubular)",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -67734,6 +67866,28 @@
       "name": "Renal artery stenosis",
       "specialty": "Nephrology",
       "system": "Renal",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "renal_coloboma_syndrome",
+      "name": "Renal Coloboma Syndrome",
+      "specialty": "Nephrology",
+      "system": "Renal genetics / Ophthalmic",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -71800,6 +71954,28 @@
       }
     },
     {
+      "id": "coats_plus_syndrome",
+      "name": "Coats plus syndrome",
+      "specialty": "Neurology",
+      "system": "Nervous system / multisystem",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "coffin_lowry_syndrome",
       "name": "Coffin-Lowry syndrome (RPS6KA3)",
       "specialty": "Neurology",
@@ -72526,6 +72702,28 @@
       }
     },
     {
+      "id": "desmoplastic_infantile_ganglioglioma",
+      "name": "Desmoplastic infantile ganglioglioma",
+      "specialty": "Neurology",
+      "system": "Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "dhat_syndrome",
       "name": "Dhat Syndrome",
       "specialty": "Neurology",
@@ -72882,6 +73080,28 @@
       "name": "Dysarthria-clumsy hand syndrome",
       "specialty": "Neurology",
       "system": "Nervous system / Cerebrovascular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "dysembryoplastic_neuroepithelial_tumour",
+      "name": "Dysembryoplastic neuroepithelial tumour",
+      "specialty": "Neurology",
+      "system": "Neuro-oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -73454,6 +73674,28 @@
       "name": "Facioscapulohumeral muscular dystrophy",
       "specialty": "Neurology",
       "system": "Nervous system / Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "facioscapulohumeral_muscular_dystrophy",
+      "name": "Facioscapulohumeral Muscular Dystrophy",
+      "specialty": "Neurology",
+      "system": "Neuromuscular",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -77542,6 +77784,28 @@
       }
     },
     {
+      "id": "mef2c_haploinsufficiency",
+      "name": "MEF2C Haploinsufficiency Syndrome",
+      "specialty": "Neurology",
+      "system": "Neurology / Neurodevelopmental disorder",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "megalencephalic_leukoencephalopathy",
       "name": "Megalencephalic leukoencephalopathy with subcortical cysts",
       "specialty": "Neurology",
@@ -78444,6 +78708,28 @@
       }
     },
     {
+      "id": "myotonic_dystrophy_type_2",
+      "name": "Myotonic Dystrophy Type 2",
+      "specialty": "Neurology",
+      "system": "Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "nevus_comedonicus_syndrome",
       "name": "Naevus comedonicus syndrome",
       "specialty": "Neurology",
@@ -79324,6 +79610,28 @@
       }
     },
     {
+      "id": "oculopharyngodistal_myopathy",
+      "name": "Oculopharyngodistal Myopathy",
+      "specialty": "Neurology",
+      "system": "Neuromuscular",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "ohtahara_syndrome",
       "name": "Ohtahara syndrome",
       "specialty": "Neurology",
@@ -79614,6 +79922,28 @@
       "name": "Pantothenate kinase-associated neurodegeneration",
       "specialty": "Neurology",
       "system": "Nervous system / Genetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "papillary_craniopharyngioma",
+      "name": "Papillary craniopharyngioma",
+      "specialty": "Neurology",
+      "system": "Neuro-oncology",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -82052,6 +82382,28 @@
       }
     },
     {
+      "id": "slc6a1_epilepsy",
+      "name": "SLC6A1-Related Epilepsy",
+      "specialty": "Neurology",
+      "system": "Neurology / Developmental epileptic encephalopathy",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "sleep_related_hypermotor_epilepsy",
       "name": "Sleep-related hypermotor epilepsy",
       "specialty": "Neurology",
@@ -82602,6 +82954,28 @@
       }
     },
     {
+      "id": "spinocerebellar_ataxia_type_19",
+      "name": "Spinocerebellar ataxia type 19",
+      "specialty": "Neurology",
+      "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "spinocerebellar_ataxia_type_2",
       "name": "Spinocerebellar ataxia type 2 (SCA2)",
       "specialty": "Neurology",
@@ -82672,6 +83046,28 @@
       "name": "Spinocerebellar ataxia type 28 (AFG3L2)",
       "specialty": "Neurology",
       "system": "Nervous system / Neurogenetics",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_29",
+      "name": "Spinocerebellar ataxia type 29",
+      "specialty": "Neurology",
+      "system": "Nervous system",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -83108,6 +83504,28 @@
       }
     },
     {
+      "id": "subependymal_giant_cell_astrocytoma",
+      "name": "Subependymal giant cell astrocytoma",
+      "specialty": "Neurology",
+      "system": "Neuro-oncology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "subependymoma",
       "name": "Subependymoma",
       "specialty": "Neurology",
@@ -83508,6 +83926,28 @@
       "name": "Task-specific (focal) dystonia",
       "specialty": "Neurology",
       "system": "Nervous system / Neurology",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "tbck_syndrome",
+      "name": "TBCK-Related Intellectual Disability Syndrome",
+      "specialty": "Neurology",
+      "system": "Neurology / Neurodevelopmental disorder",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -84234,6 +84674,28 @@
       "name": "Writer's cramp",
       "specialty": "Neurology",
       "system": "Nervous system",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "wwox_encephalopathy",
+      "name": "WWOX-Related Epileptic Encephalopathy",
+      "specialty": "Neurology",
+      "system": "Neurology / Developmental epileptic encephalopathy",
       "tier": "reference",
       "caps": {
         "overview": true,
@@ -92260,6 +92722,28 @@
       }
     },
     {
+      "id": "diffuse_idiopathic_pulmonary_neuroendocrine_cell_hyperplasia",
+      "name": "Diffuse idiopathic pulmonary neuroendocrine cell hyperplasia",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
       "id": "disorders_of_the_mediastinum",
       "name": "Disorders of the Mediastinum",
       "specialty": "Pulmonology",
@@ -92438,6 +92922,28 @@
     {
       "id": "flock_workers_lung",
       "name": "Flock worker's lung",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "follicular_bronchiolitis",
+      "name": "Follicular bronchiolitis",
       "specialty": "Pulmonology",
       "system": "Respiratory",
       "tier": "reference",
@@ -93670,6 +94176,28 @@
     {
       "id": "pulmonary_barotrauma",
       "name": "Pulmonary barotrauma",
+      "specialty": "Pulmonology",
+      "system": "Respiratory",
+      "tier": "reference",
+      "caps": {
+        "overview": true,
+        "clinicalFeatures": true,
+        "pathophysiology": true,
+        "differential": true,
+        "investigations": true,
+        "redFlags": true,
+        "severity": false,
+        "prognosis": true,
+        "diagnosticScoring": false,
+        "management": false,
+        "drugTherapy": false,
+        "dosing": false,
+        "stewardship": false
+      }
+    },
+    {
+      "id": "pulmonary_capillaritis",
+      "name": "Pulmonary capillaritis",
       "specialty": "Pulmonology",
       "system": "Respiratory",
       "tier": "reference",
