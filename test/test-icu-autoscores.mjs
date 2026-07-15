@@ -15,7 +15,7 @@ const get = (rows, id) => rows.find(r => r.id === id);
 const state = {
   patient: { age: 60, diagnosis: "severe acute pancreatitis" },
   vitals: [{ hr: 110, sbp: 95, dbp: 60, map: 72, rr: 24, spo2: 95, temp: 38.5, gcs: 14 }],
-  labs: { recent: { na: 140, cl: 100, hco3: 20, alb: 3.0, plt: 90, wbc: 15, creat: 1.5, bili: 1.0, inr: 1.2, glu: 180, urea: 60 } },
+  labs: { recent: { na: 140, cl: 100, hco3: 20, alb: 3.0, plt: 90, wbc: 15, creat: 1.5, bili: 1.0, inr: 1.2, glu: 180, urea: 60, ca: 8.5, ast: 50, alt: 40 } },
   abg: { pao2: 80, fio2: 0.5 }, ventilator: { fio2: 0.5, peep: 5 }, infusions: []
 };
 const rows = AS.compute(state, MED);
@@ -30,11 +30,18 @@ ok(get(rows, "sofa") && get(rows, "sofa").value === 7, "SOFA=7 for vector");
 ok(!!get(rows, "bisap"), "BISAP present for pancreatitis diagnosis");
 ok(!get(rows, "meld"), "MELD absent (diagnosis not hepatic)");
 
-// hepatic diagnosis surfaces MELD
+// corrected calcium (always-on): 8.5 + 0.8*(4-3.0) = 9.3
+ok(get(rows, "corr_ca") && Math.abs(get(rows, "corr_ca").value - 9.3) < 0.05, "corrected calcium = 9.3");
+// FIB-4 is dx-gated to liver -> absent on a pancreatitis diagnosis
+ok(!get(rows, "fib4"), "FIB-4 absent (non-liver diagnosis)");
+
+// hepatic diagnosis surfaces MELD + FIB-4
 const hep = JSON.parse(JSON.stringify(state)); hep.patient.diagnosis = "decompensated cirrhosis";
 const rowsH = AS.compute(hep, MED);
 ok(!!get(rowsH, "meld"), "MELD present for cirrhosis diagnosis");
 ok(get(rowsH, "childpugh") && get(rowsH, "childpugh").missing, "Child-Pugh greyed (needs ascites/enceph)");
+// FIB-4 = (age*AST)/(plt*sqrt(ALT)) = (60*50)/(90*sqrt(40)) = 5.3
+ok(get(rowsH, "fib4") && Math.abs(get(rowsH, "fib4").value - 5.3) < 0.05, "FIB-4 = 5.3 on hepatic diagnosis");
 
 // missing path: strip labs -> anion gap greyed with needs
 const bare = { patient: {}, vitals: [{}], labs: { recent: {} }, abg: {}, ventilator: {}, infusions: [] };

@@ -149,6 +149,13 @@
       }
     },
     {
+      id: "corr_ca", label: "Corrected calcium", always: true, adapt: function (s) {
+        var l = L(s), m = []; if (!has(l.ca)) m.push("calcium"); if (!has(l.alb)) m.push("albumin");
+        if (m.length) return { __missing: m };
+        return { ca: l.ca, alb: l.alb };
+      }
+    },
+    {
       id: "bisap", label: "BISAP (pancreatitis)", dx: /pancreatit/i, adapt: function (s) {
         var v = V(s), l = L(s), age = s.patient && s.patient.age, m = [];
         if (!has(l.urea)) m.push("urea"); if (!has(age)) m.push("age"); if (!has(v.gcs)) m.push("GCS");
@@ -163,6 +170,14 @@
         var l = L(s), m = [];["bili", "inr", "creat"].forEach(function (k) { if (!has(l[k])) m.push(k); });
         if (m.length) return { __missing: m };
         return { bili: l.bili, inr: l.inr, cr: l.creat, na: has(l.na) ? l.na : 140, dial: false };
+      }
+    },
+    {
+      id: "fib4", label: "FIB-4 (liver fibrosis)", dx: /cirrhosis|hepat|liver|fibrosis|nafld|nash|fatty liver|steato/i, adapt: function (s) {
+        var l = L(s), age = s.patient && s.patient.age, m = [];
+        if (!has(age)) m.push("age"); if (!has(l.ast)) m.push("AST"); if (!has(l.alt)) m.push("ALT"); if (!has(l.plt)) m.push("platelets");
+        if (m.length) return { __missing: m };
+        return { age: age, ast: l.ast, alt: l.alt, plt: l.plt };
       }
     },
     {
