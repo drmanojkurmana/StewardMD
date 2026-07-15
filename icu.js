@@ -52,12 +52,44 @@
     meta: { updated: null }
   };
   var LS_KEY = "stewardmd_icu_state";                       // legacy (unscoped) key — migrated once
+  // ── Unit model: hospital → category (ICU | Ward) → unit type. Each unit is its own workspace with
+  //   its own patient list. Solo: the roster/buffer is namespaced by the unit (unitSuffix). Group: the
+  //   unit is a shared group tagged with kind+unitType; the picker/board filter by category so ICU and
+  //   Ward never mix. Backward-compat: the default ICU unit keeps the LEGACY unsuffixed roster, and
+  //   older groups (no kind) are treated as "icu" — no migration needed.
+  var UNIT_CATS = [
+    { cat: "icu",  label: "ICU",  ic: "🫀", svg: "pulse",    sub: "Critical care", types: ["ICU", "MICU", "SICU", "PICU", "CCU"] },
+    { cat: "ward", label: "Ward", ic: "🏥", svg: "hospital", sub: "General wards", types: ["Male Ward", "Female Ward"] }
+  ];
+  function unitCatMeta(cat) { for (var i = 0; i < UNIT_CATS.length; i++) if (UNIT_CATS[i].cat === cat) return UNIT_CATS[i]; return UNIT_CATS[0]; }
+  function unitTypesOf(cat) { return unitCatMeta(cat).types; }
+  var _unit = { cat: "icu", type: "ICU", hospital: "" };    // current unit context
+  var _lastType = { icu: "ICU", ward: "Male Ward" };         // last-picked type per category (nav memory)
+  var _wardMode = false;                                     // DERIVED: _unit.cat === "ward"
+  function ctxLabel() { return _wardMode ? "Ward" : "ICU"; }
+  function unitPrefKey() { return "smd_icu_unit:" + (typeof ownerNow === "function" ? ownerNow() : "anon"); }
+  function unitLoadPref() {
+    try {
+      var d = JSON.parse(localStorage.getItem(unitPrefKey()) || "null");
+      if (d && d.unit && d.unit.cat) _unit = { cat: d.unit.cat, type: d.unit.type || "", hospital: d.unit.hospital || "" };
+      if (d && d.lastType) { if (d.lastType.icu) _lastType.icu = d.lastType.icu; if (d.lastType.ward) _lastType.ward = d.lastType.ward; }
+    } catch (e) {}
+    _wardMode = (_unit.cat === "ward");
+  }
+  function unitSavePref() { try { localStorage.setItem(unitPrefKey(), JSON.stringify({ unit: _unit, lastType: _lastType })); } catch (e) {} }
+  // Roster/buffer namespace suffix. The default ICU unit (icu/ICU) keeps the LEGACY unsuffixed key
+  // (backward compat); every other unit gets its own patient list.
+  function unitSuffix() {
+    var c = (_unit && _unit.cat) || "icu", t = (_unit && _unit.type) || "";
+    if (c === "icu" && (t === "ICU" || t === "")) return "";
+    return ":" + (c + "-" + t).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  }
   // KI-M3: the live working buffer is PHI (name/bed/labs/imaging). Scope it PER signed-in
   // account (like the roster) so two clinicians sharing one physical device can never read each
   // other's open patient — isolation no longer depends on the auth-reset firing. ownerNow() is a
   // hoisted function; at first load it is "anon" until Firebase resolves, then reconcileOwner()
   // syncs the buffer to the resolved owner exactly once.
-  function bufKey(owner) { return LS_KEY + ":" + (owner || ownerNow()) + (_wardMode ? ":ward" : ""); }
+  function bufKey(owner) { return LS_KEY + ":" + (owner || ownerNow()) + unitSuffix(); }
 
   /* ---------------------------------------------- reactive state (Proxy) */
   // Deep proxy: any nested set/delete schedules a coalesced notify().
@@ -71,6 +103,7 @@
   }
 
   var _raw;
+  unitLoadPref();   // restore the last-used unit context BEFORE the buffer loads, so bufKey resolves right
   // Prefer the per-owner buffer; fall back to the legacy unscoped key ONCE so existing installs
   // don't lose their open patient on upgrade (reconcileOwner migrates it to the owner's key).
   try { _raw = JSON.parse(localStorage.getItem(bufKey()) || localStorage.getItem(LS_KEY)); } catch (e) { _raw = null; }
@@ -516,6 +549,24 @@
     try { raw = JSON.parse(localStorage.getItem(bufKey()) || "null"); } catch (e) {}
     if (!raw || typeof raw !== "object") raw = clone(DEFAULT_STATE);
     Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (raw[k] != null) ? clone(raw[k]) : clone(DEFAULT_STATE[k]); });
+  }
+  var _pickStep = "category";   // unit-picker step: "hospital" | "category" | "units"
+  var _pickCat = null;          // category being drilled into on the "units" step
+  var _grpNewCat = null;        // category (icu|ward) of the unit being created
+  // Switch the active unit (category/type). The current buffer already auto-persisted to its own key;
+  // this loads the TARGET unit's own buffer and lands on the board. Solo: fully local. Group: the
+  // caller resolves the shared group separately (grpSelect sets _unit from the group's kind/type).
+  function selectUnit(u) {
+    if (!u || !u.cat) return;
+    var t = u.type || (u.cat === "ward" ? (_lastType.ward || "Male Ward") : (_lastType.icu || "ICU"));
+    _unit = { cat: u.cat, type: t, hospital: (u.hospital != null ? u.hospital : _unit.hospital) || "" };
+    _lastType[u.cat] = t;
+    _wardMode = (_unit.cat === "ward");
+    unitSavePref();
+    try { if (grpActive()) grpTeardownPatient(); } catch (e) {}
+    _grpPtId = null;
+    try { ctxLoadBuffer(); } catch (e) {}
+    _screen = "board"; _active = "overview"; _ws = "overview"; _wsLast = {};
   }
   // BUG C1 (cross-patient contamination): ingestFromWard/ingestWardHistory MERGE into live STATE
   // (their contract is "callers reset/select the patient before syncing"). Loading a DIFFERENT
@@ -2420,12 +2471,8 @@
   var _ws = "overview";        // current workspace (bottom bar)
   var _wsLast = {};            // workspace id → last member viewed in it
   var _screen = "board";       // v2 only: "board" | "patient" | "alerts" | "team"
-  // WARD MODE — the SAME dashboard, tuned for ward (not ICU) patients: opened via ICU.openWard()
-  // from the Ward Sync tab. Ward hides the ventilator sub-tab, relabels "ICU" → "Ward", and keeps
-  // a SEPARATE solo patient namespace (:ward roster/buffer) so ward patients never mix with ICU.
-  // Everything else (engines, Treatment, deep review, imaging, discharge, instructions) is reused.
-  var _wardMode = false;
-  function ctxLabel() { return _wardMode ? "Ward" : "ICU"; }
+  // (_unit / _wardMode / ctxLabel + the unit model are declared near LS_KEY so the buffer key resolves
+  //  to the right unit at module load. Ward mode = _unit.cat === "ward".)
   var _admitting = false;      // true while an Admit-opened patient form is up; cancelling it with no data returns to the board (not a blank patient page)
   var _v2Filter = "all";       // v2 board acuity filter: "all" | "critical" | "review" | "stable"
   var _imgFilter = "all";      // Imaging Notes filter bucket
@@ -3310,6 +3357,56 @@
     }).join("") + '</div></div>';
   }
   // Unit board — the "front door". Local roster in Phase 1; LIVE shared unit in group mode.
+  // Unit picker card (hospital / category / unit-type / group row).
+  function unitCardHTML(act, iconHtml, title, subtitleHTML, active) {
+    return '<button data-icu-act="' + act + '" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;color:var(--ink);cursor:pointer">' +
+      '<span style="width:42px;height:42px;border-radius:11px;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:20px;flex:0 0 auto">' + iconHtml + '</span>' +
+      '<span style="flex:1;min-width:0"><span style="display:block;font:800 15px var(--font)">' + (active ? "● " : "") + esc(title) + '</span>' +
+      (subtitleHTML ? '<span style="display:block;font:600 12px var(--font);color:var(--muted);margin-top:2px">' + subtitleHTML + '</span>' : "") + '</span>' +
+      '<span style="color:var(--muted);font-size:20px;flex:0 0 auto">›</span></button>';
+  }
+  // Unit navigation: hospital → category (ICU | Ward) → unit type. In group mode the "units" step
+  // lists the user's shared units of that category (kind-filtered) + a create option; in solo mode
+  // it lists the fixed unit types, each with its own patient list.
+  function renderUnitPicker() {
+    var hosp = _unit.hospital || "";
+    var shead = function (backAct, h, s) {
+      return '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="' + backAct + '" aria-label="Back">‹</button>' +
+        '<div><div class="icu-v2-shead-h">' + h + '</div><div class="icu-v2-shead-s">' + s + '</div></div></div>';
+    };
+    if (_pickStep === "hospital") {
+      var hosps = ["GIMSR", "My Hospital"]; if (hosp && hosps.indexOf(hosp) < 0) hosps.unshift(hosp);
+      var hrows = hosps.map(function (h) { return unitCardHTML("unithosp:" + encodeURIComponent(h), ico("hospital", "🏥"), h, "", h === hosp); }).join("");
+      return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("close", "Select hospital", "Choose your hospital") +
+        '<div style="padding:14px 16px">' + hrows + '</div></div>';
+    }
+    if (_pickStep === "category") {
+      var crows = UNIT_CATS.map(function (c) {
+        return unitCardHTML("unitcat:" + c.cat, ico(c.svg, c.ic), c.label, esc(c.sub) + ' · ' + c.types.length + ' units', false);
+      }).join("");
+      var sub = "Select ICU or Ward" + (hosp ? ' · <button class="icu-tip" data-icu-act="unithospchg" style="color:var(--primary)">change hospital</button>' : "");
+      return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("close", esc(hosp || "Choose a unit"), sub) +
+        '<div style="padding:14px 16px">' + crows + '</div></div>';
+    }
+    // units step
+    var cat = _pickCat || "icu", meta = unitCatMeta(cat), body;
+    if (groupMode()) {
+      var mine = (_grpList || []).filter(function (g) { return (g.kind || "icu") === cat; });
+      body = mine.length ? mine.map(function (g) {
+        var active = grpActive() && _grp && _grp.id === g.id;
+        return unitCardHTML("grpsel:" + encodeURIComponent(g.id), ico(meta.svg, meta.ic), g.name || meta.label,
+          esc(g.unitType || g.unit || meta.label) + (g.hospital ? ' · ' + esc(g.hospital) : ""), active);
+      }).join("") : '<div class="icu-empty" style="margin:6px 0 12px">' + (_grpList === null ? "Connecting to your shared units…" : "No shared " + esc(meta.label) + " units yet.") + '</div>';
+      body += '<button class="icu-btn" data-icu-act="unitgrpnew:' + cat + '">' + ico("plus", "＋") + ' Create a ' + esc(meta.label) + ' unit</button>';
+    } else {
+      body = meta.types.map(function (tp) {
+        var active = _unit.cat === cat && _unit.type === tp;
+        return unitCardHTML("unitsel:" + cat + ":" + encodeURIComponent(tp), ico(meta.svg, meta.ic), tp, "", active);
+      }).join("");
+    }
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("unitback", esc(meta.label) + (hosp ? " · " + esc(hosp) : ""), "Choose a unit") +
+      '<div style="padding:14px 16px">' + body + '</div></div>';
+  }
   function renderV2Board() {
     if (groupMode()) return renderV2BoardGroup();   // Phase 2: live Firestore unit (additive, gated)
     var list = v2BoardList();
@@ -3318,7 +3415,7 @@
     var unread = counts.critical + counts.review;
     var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
       '<button class="icu-v2-ubtn" data-icu-act="close" aria-label="Close ' + ctxLabel() + ' — back to home" title="Close ' + ctxLabel() + ' — back to home">' + ico("home", "⌂") + '</button>' +
-      '<div class="icu-v2-utitle">My ' + ctxLabel() + ' patients<div class="icu-v2-usub">' + counts.total + ' patient' + (counts.total === 1 ? "" : "s") + ' · on this device</div></div>' +
+      '<button class="icu-v2-utitle" data-icu-act="unitpick" aria-label="Switch unit" style="background:none;border:none;color:inherit;text-align:left;cursor:pointer;padding:0;width:100%">My ' + ctxLabel() + ' patients <span aria-hidden="true" style="opacity:.55;font-size:13px">▾</span><div class="icu-v2-usub">' + (_unit.type && _unit.type !== ctxLabel() ? esc(_unit.type) + ' · ' : "") + (_unit.hospital ? esc(_unit.hospital) + ' · ' : "") + counts.total + ' patient' + (counts.total === 1 ? "" : "s") + '</div></button>' +
       '<button class="icu-v2-ubtn" data-icu-act="icualerts" aria-label="Notifications' + (unread ? " (" + unread + " unread)" : "") + '">' + ico("bell", "🔔") + (unread ? '<span class="icu-v2-ubadge">' + unread + '</span>' : "") + '</button>' +
       '</div><div class="icu-v2-strip">' +
       '<button class="icu-v2-scount total' + (_v2Filter === "all" ? " on" : "") + '" data-icu-act="icufilter:all"' + v2StripAria("all", counts.total, "All patients") + '><b>' + counts.total + '</b><span>Patients</span></button>' +
@@ -3584,6 +3681,12 @@
   }
   function grpSelect(group, silent) {
     if (!group) return;
+    // A shared unit IS a unit context — adopt its category/type so the dashboard opens in the right
+    // mode (ward hides the ventilator, relabels), and the ICU/Ward split follows the group's kind.
+    _unit = { cat: group.kind || "icu", type: group.unitType || (group.kind === "ward" ? "Ward" : "ICU"), hospital: group.hospital || _unit.hospital || "" };
+    _lastType[_unit.cat] = _unit.type;
+    _wardMode = (_unit.cat === "ward");
+    try { unitSavePref(); } catch (e) {}
     var changed = !_grp || _grp.id !== group.id;
     _grp = group;
     try { localStorage.setItem(grpPrefKey(), group.id); } catch (e) {}
@@ -3916,25 +4019,32 @@
   /* --------------------------- group-mode action sheets + write actions ----------------------- */
   function grpOpenPicker() {
     ensureModal();
-    var list = _grpList || [];
+    // Only units of the CURRENT category (ICU vs Ward) — the two stay separate. Older units without a
+    // kind are treated as ICU (backward compat).
+    var cat = _unit.cat || "icu";
+    var list = (_grpList || []).filter(function (g) { return (g.kind || "icu") === cat; });
     var rows = list.length ? list.map(function (g) {
       var active = _grp && _grp.id === g.id;
       return '<button class="icu-btn ghost" data-icu-act="grpsel:' + encodeURIComponent(g.id) + '" style="justify-content:flex-start;text-align:left">' +
-        (active ? "● " : "") + '<span style="flex:1">' + esc(g.name || "ICU unit") + (g.unit ? " · " + esc(g.unit) : "") +
+        (active ? "● " : "") + '<span style="flex:1">' + esc(g.name || (ctxLabel() + " unit")) + (g.unitType || g.unit ? " · " + esc(g.unitType || g.unit) : "") +
         '<span style="display:block;font:600 11px var(--font);color:var(--muted)">' + esc(grpRoleLabel(g.myRole)) + '</span></span></button>';
-    }).join("") : '<div class="icu-empty">' + (_grpList === null ? "Connecting to your shared units…" : "No shared units yet.") + '</div>';
+    }).join("") : '<div class="icu-empty">' + (_grpList === null ? "Connecting to your shared units…" : "No shared " + ctxLabel() + " units yet.") + '</div>';
     modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Your ' + ctxLabel() + ' units"><h3>Your ' + ctxLabel() + ' units</h3>' + rows +
-      '<button class="icu-btn" data-icu-act="grpnew" style="margin-top:10px">' + ico("plus", "＋") + ' Create a unit</button>' +
+      '<button class="icu-btn" data-icu-act="grpnew" style="margin-top:10px">' + ico("plus", "＋") + ' Create a ' + ctxLabel() + ' unit</button>' +
+      '<button class="icu-btn ghost" data-icu-act="unitpick" style="margin-top:8px">Switch ICU / Ward</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Close</button></div>';
     modalEl.classList.add("on");
   }
-  function grpOpenCreate() {
+  function grpOpenCreate(cat) {
     ensureModal();
-    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Create an ICU unit"><h3>Create an ICU unit</h3>' +
+    _grpNewCat = (cat === "ward" || cat === "icu") ? cat : (_unit.cat || "icu");
+    var meta = unitCatMeta(_grpNewCat);
+    var typeOpts = meta.types.map(function (tp) { return '<option value="' + esc(tp) + '"' + (tp === _unit.type ? " selected" : "") + '>' + esc(tp) + '</option>'; }).join("");
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Create a ' + esc(meta.label) + ' unit"><h3>Create a ' + esc(meta.label) + ' unit</h3>' +
       '<p class="icu-doc-sub" style="margin:0 0 10px">A shared unit lets your team see the same patients, instructions and timeline live. You become the unit head.</p>' +
-      '<div class="icu-fld"><label for="grpNm">Unit name</label><input id="grpNm" type="text" placeholder="e.g. Medicine ICU"></div>' +
-      '<div class="icu-fld"><label for="grpUnit">Ward / unit (optional)</label><input id="grpUnit" type="text" placeholder="e.g. Unit I"></div>' +
-      '<div class="icu-fld"><label for="grpHosp">Hospital (optional)</label><input id="grpHosp" type="text" placeholder="e.g. GIMSR"></div>' +
+      '<div class="icu-fld"><label for="grpType">Unit type</label><select id="grpType">' + typeOpts + '</select></div>' +
+      '<div class="icu-fld"><label for="grpNm">Unit name</label><input id="grpNm" type="text" placeholder="e.g. ' + esc(meta.types[0]) + ' — Unit I"></div>' +
+      '<div class="icu-fld"><label for="grpHosp">Hospital (optional)</label><input id="grpHosp" type="text" placeholder="e.g. GIMSR" value="' + esc(_unit.hospital || "") + '"></div>' +
       '<button class="icu-btn" data-icu-act="grpcreate">Create unit</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
     modalEl.classList.add("on");
@@ -3945,9 +4055,11 @@
     var nm = grpVal("#grpNm"); if (!nm.trim()) { if (window.toast) toast("Enter a unit name"); return; }
     if (_grpCreating) return;                          // a create is already in flight → never make a second unit
     _grpCreating = true;
-    var unit = grpVal("#grpUnit"), hosp = grpVal("#grpHosp");
+    var cat = (_grpNewCat === "ward") ? "ward" : "icu";
+    var utype = grpVal("#grpType") || (cat === "ward" ? "Male Ward" : "ICU");
+    var hosp = grpVal("#grpHosp"), unit = utype;
     closeForm();
-    api.createGroup({ name: nm, unit: unit, hospital: hosp }).then(function (id) {
+    api.createGroup({ name: nm, unit: unit, hospital: hosp, kind: cat, unitType: utype }).then(function (id) {
       _grpCreating = false;
       if (window.toast) toast("Unit created");
       // Select the new unit IMMEDIATELY (optimistic). Do NOT wait for the collectionGroup
@@ -3956,7 +4068,7 @@
       // to the real doc when it lands; _grpJustCreated keeps it from being dropped in the meantime.
       _grpJustCreated = { id: id, ts: nowTs() };
       try { grpEnsureGroupsSub(); } catch (e) {}
-      var g = grpById(id) || { id: id, name: nm, unit: unit, hospital: hosp, myRole: "head", roles: {}, members: [], createdBy: (typeof ownerNow === "function" ? ownerNow() : null) };
+      var g = grpById(id) || { id: id, name: nm, unit: unit, hospital: hosp, kind: cat, unitType: utype, myRole: "head", roles: {}, members: [], createdBy: (typeof ownerNow === "function" ? ownerNow() : null) };
       grpSelect(g, false);
     }, function (e) {
       _grpCreating = false;
@@ -4597,6 +4709,8 @@
     _paintTop = false;
     if (_screen === "board") {
       rootEl.innerHTML = renderV2Board() + renderV2BottomBar();
+    } else if (_screen === "units") {
+      rootEl.innerHTML = renderUnitPicker();
     } else if (_screen === "round") {
       rootEl.innerHTML = renderV2RoundNote();   // Phase 3: full-screen round-note composer (no bottom bar)
     } else if (_screen === "alerts") {
@@ -5851,7 +5965,7 @@
       if (a && a.currentUser && a.currentUser.uid) return a.currentUser.uid; } catch (e) {}
     return "anon";
   }
-  function rosterKey(owner) { return ROSTER_BASE + ":" + (owner || ownerNow()) + (_wardMode ? ":ward" : ""); }
+  function rosterKey(owner) { return ROSTER_BASE + ":" + (owner || ownerNow()) + unitSuffix(); }
   function loadRoster() { try { var r = JSON.parse(localStorage.getItem(rosterKey())); return Array.isArray(r) ? r : []; } catch (e) { return []; } }
   function saveRoster(r) { try { localStorage.setItem(rosterKey(), JSON.stringify(r)); } catch (e) {} }
   // React to sign-in / sign-out / account-switch. Only ever called from Firebase's
@@ -6116,11 +6230,19 @@
       case "testpush": grpTestPush(); break;
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
+      // ---- Unit picker: hospital → category (ICU|Ward) → unit type ----
+      case "unitpick": _screen = "units"; _pickStep = _unit.hospital ? "category" : "hospital"; _pickCat = null; _paintTop = true; paint(); break;
+      case "unithosp": _unit.hospital = decodeURIComponent(arg); unitSavePref(); _pickStep = "category"; _paintTop = true; paint(); break;
+      case "unithospchg": _pickStep = "hospital"; _paintTop = true; paint(); break;
+      case "unitcat": _pickCat = arg; _pickStep = "units"; _paintTop = true; paint(); break;
+      case "unitback": _pickStep = "category"; _paintTop = true; paint(); break;
+      case "unitsel": { var _uc = arg.indexOf(":"); selectUnit({ cat: arg.slice(0, _uc), type: decodeURIComponent(arg.slice(_uc + 1)) }); _paintTop = true; paint(); break; }
+      case "unitgrpnew": grpOpenCreate(arg); break;
       case "grptoggle": try { if (localStorage.getItem("smd_icu_groups") === "1") localStorage.removeItem("smd_icu_groups"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
       // ---- ICU v2 group mode (smd_icu_groups, Phase 2) — unit switcher / create / invite / tasks ----
       case "grppick": grpOpenPicker(); break;
-      case "grpsel": { var _gsel = grpById(decodeURIComponent(arg)); if (_gsel) grpSelect(_gsel, false); closeForm(); break; }
-      case "grpnew": grpOpenCreate(); break;
+      case "grpsel": { var _gsel = grpById(decodeURIComponent(arg)); if (_gsel) grpSelect(_gsel, false); closeForm(); if (_screen === "units") { _screen = "board"; _paintTop = true; paint(); } break; }
+      case "grpnew": grpOpenCreate(_unit.cat); break;
       case "grpcreate": grpDoCreate(); break;
       case "grpinvite": grpOpenInvite(); break;
       case "grpinvitesend": grpDoAddById(); break;
@@ -6499,15 +6621,10 @@
   var ICU = {
     open: function (target, ward) {
       injectCSS();
-      // Context switch (ICU ↔ Ward): ward has a SEPARATE solo patient namespace, so swap the live
-      // buffer and land on the board so no patient leaks across modes. No-op when the mode is unchanged.
-      var wantWard = !!ward;
-      if (wantWard !== _wardMode) {
-        try { if (grpActive()) grpTeardownPatient(); } catch (e) {}
-        _wardMode = wantWard;
-        try { ctxLoadBuffer(); } catch (e) {}
-        _screen = "board"; _active = "overview"; _ws = "overview"; _grpPtId = null;
-      }
+      // Context switch (ICU ↔ Ward): each category has a SEPARATE patient namespace, so swap the live
+      // buffer + land on the board (restoring the last unit type of that category). No-op if unchanged.
+      var wantCat = ward ? "ward" : "icu";
+      if ((_unit.cat || "icu") !== wantCat) selectUnit({ cat: wantCat, type: _lastType[wantCat] });
       if (!rootEl) {
         rootEl = document.createElement("div"); rootEl.id = "icuRoot";
         document.body.appendChild(rootEl);
@@ -6537,6 +6654,9 @@
     // separate solo namespace). Opened from the Ward Sync tab. Reuses every engine + the Treatment
     // tab + deep review + imaging + discharge + (group) instructions.
     openWard: function (target) { return ICU.open(target, true); },
+    // Unit picker — hospital → ICU/Ward category → unit type. The full navigation entry (e.g. Ward Sync).
+    openUnits: function () { ICU.open(undefined, _unit.cat === "ward"); _screen = "units"; _pickStep = _unit.hospital ? "category" : "hospital"; _pickCat = null; _paintTop = true; paint(); },
+    curUnit: function () { return { cat: _unit.cat, type: _unit.type, hospital: _unit.hospital }; },
     close: function () { if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; try { grpTeardownPatient(); } catch (e) {} },
     isOpen: function () { return !!(rootEl && rootEl.classList.contains("on")); },
     isWard: function () { return !!_wardMode; },
