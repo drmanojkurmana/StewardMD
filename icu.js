@@ -3233,6 +3233,26 @@
     if (!rootEl) return;
     paintV2();   // v2 (unit board + restyled workspace) is the only ICU now — classic chrome retired.
   }
+  // Live collab snapshots (roster / presence / members / metadata) fire in bursts — a presence
+  // heartbeat or a pending-write metadata flip can repaint every second or two. paintV2 preserves
+  // scrollTop, but rebuilding innerHTML mid-scroll still CANCELS the in-progress inertial scroll
+  // ("syncing stops the scroll"). So route those repaints through paintLive(): coalesce them and
+  // never rebuild while the user is actively scrolling — apply once scrolling settles (~160ms).
+  // Navigation and user actions still call paint() directly for an immediate response.
+  var _liveRaf = 0, _liveScrolling = 0, _liveScrollT = 0, _livePending = 0, _liveBound = 0;
+  function _bindLiveScroll() {
+    if (_liveBound || !rootEl) return; _liveBound = 1;
+    rootEl.addEventListener("scroll", function () {
+      _liveScrolling = 1; clearTimeout(_liveScrollT);
+      _liveScrollT = setTimeout(function () { _liveScrolling = 0; if (_livePending) { _livePending = 0; paint(); } }, 160);
+    }, true);   // capture: catches the .icu-scroll container that paintV2 recreates each render
+  }
+  function paintLive() {
+    _bindLiveScroll();
+    if (_liveScrolling) { _livePending = 1; return; }   // defer: don't rebuild during an active scroll
+    if (_liveRaf) { _livePending = 1; return; }
+    _liveRaf = requestAnimationFrame(function () { _liveRaf = 0; if (_liveScrolling) { _livePending = 1; return; } paint(); });
+  }
 
   /* ================================================================ ICU v2
    * (smd_icu_v2) — unit patient board + restyled patient workspace. PRESENTATION /
@@ -3642,7 +3662,7 @@
       _grpPatients = null;
       _grpSubPts = api.subscribePatients(_grp.id, function (list) {
         _grpPatients = list || []; grpNotifTick();
-        if (ICU.isOpen() && _screen === "board") paint();
+        if (ICU.isOpen() && _screen === "board") paintLive();
       }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
     }
     _paintTop = true; paint();
@@ -3677,8 +3697,8 @@
         var pref = grpPrefId(), sel = null, j; for (j = 0; j < _grpList.length; j++) if (_grpList[j].id === pref) { sel = _grpList[j]; break; }
         grpSelect(sel || _grpList[0], true);
       }
-      if (ICU.isOpen() && (_screen === "board" || _screen === "team")) paint();
-    }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen() && _screen === "board") paint(); });   // Phase 4: surface a groups-load failure as the error card
+      if (ICU.isOpen() && (_screen === "board" || _screen === "team")) paintLive();
+    }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen() && _screen === "board") paintLive(); });   // Phase 4: surface a groups-load failure as the error card
   }
   function grpSelect(group, silent) {
     if (!group) return;
@@ -3701,14 +3721,14 @@
       if (api) _grpSubPts = api.subscribePatients(group.id, function (list) {
         _grpPatients = list || [];
         grpNotifTick();   // Phase 3: best-effort device notification for a NEW critical event
-        if (ICU.isOpen() && _screen === "board") paint();
-      }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen() && _screen === "board") paint(); });   // Phase 4: unit-load failure → error card + Retry
+        if (ICU.isOpen() && _screen === "board") paintLive();
+      }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen() && _screen === "board") paintLive(); });   // Phase 4: unit-load failure → error card + Retry
       // Phase 5: the live unit roster (members subcollection) — for the Team screen + avatars.
       if (_grpSubMembers) { try { _grpSubMembers(); } catch (e) {} _grpSubMembers = null; }
       _grpMembers = null;
       if (api && api.subscribeMembers) _grpSubMembers = api.subscribeMembers(group.id, function (list) {
         _grpMembers = list || [];
-        if (ICU.isOpen() && (_screen === "team" || _screen === "board")) paint();
+        if (ICU.isOpen() && (_screen === "team" || _screen === "board")) paintLive();
       });
     }
     if (!silent) { _screen = "board"; _paintTop = true; paint(); }
@@ -3732,11 +3752,11 @@
         _grpPtVM = vm || null;
         if (vm && vm.patient && vm.patient.state && grpStateHash(vm.patient.state) !== grpStateHash(_raw)) grpApplyState(vm.patient.state, id);
         grpNotifTick();
-        if (ICU.isOpen() && _screen === "patient") paint();
+        if (ICU.isOpen() && _screen === "patient") paintLive();
       });
       _grpSubPres = api.subscribePresence(gid, id, function (viewers) {
         _grpPresence = viewers || [];
-        if (ICU.isOpen() && _screen === "patient") paint();
+        if (ICU.isOpen() && _screen === "patient") paintLive();
       });
       try { api.enterPatient(gid, id); } catch (e) {}
     }
@@ -3758,9 +3778,9 @@
         _grpPtVM = vm || _grpPtVM;
         if (vm && vm.patient && vm.patient.state && grpStateHash(vm.patient.state) !== grpStateHash(_raw)) grpApplyState(vm.patient.state, id);
         grpNotifTick();
-        if (ICU.isOpen() && _screen === "patient") paint();
+        if (ICU.isOpen() && _screen === "patient") paintLive();
       });
-      _grpSubPres = api.subscribePresence(gid, id, function (v) { _grpPresence = v || []; if (ICU.isOpen() && _screen === "patient") paint(); });
+      _grpSubPres = api.subscribePresence(gid, id, function (v) { _grpPresence = v || []; if (ICU.isOpen() && _screen === "patient") paintLive(); });
       try { api.enterPatient(gid, id); } catch (e) {}
     }
     _active = "overview"; _ws = "overview"; _wsLast = {}; closeForm(); _paintTop = true; paint();
