@@ -4122,6 +4122,110 @@
       var mv=v.rr*v.vt/1000;
       var b=mv>10?"High — seen in metabolic acidosis, sepsis or anxiety":mv<5?"Low — hypoventilation":"Within the usual adult range";
       return { v:r1(mv), u:"L/min", i:b+". Ref: standard respiratory physiology." };
+    } },
+
+  { id:"ferriman_gallwey", cat:"Endocrine", icon:"🧬", title:"Ferriman-Gallwey Hirsutism Score",
+    desc:"Grades terminal hair in 9 androgen-sensitive areas (each 0–4).",
+    inputs:[
+      { id:"lip", label:"Upper lip", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"chin", label:"Chin", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"chest", label:"Chest", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"upper_abdo", label:"Upper abdomen", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"lower_abdo", label:"Lower abdomen", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"arm", label:"Upper arm", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"thigh", label:"Thigh", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"upper_back", label:"Upper back", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
+      { id:"lower_back", label:"Lower back", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] }
+    ],
+    compute:function(v){
+      var keys=["lip","chin","chest","upper_abdo","lower_abdo","arm","thigh","upper_back","lower_back"];
+      var s=keys.reduce(function(a,k){return a+Number(v[k]);},0);
+      var b=s>=8?"Suggests hirsutism — evaluate for androgen excess (e.g. PCOS)":"Below the usual hirsutism threshold";
+      return { v:s, u:"/36", i:b+" (threshold ~8 in many populations; lower in some East Asian groups). Ref: Ferriman & Gallwey 1961." };
+    } },
+
+  { id:"rancho", cat:"Neurology", icon:"🧠", title:"Rancho Los Amigos Cognitive Scale",
+    desc:"Level of cognitive functioning after brain injury.",
+    inputs:[
+      { id:"level", label:"Level", type:"select", opts:[{v:"I",t:"I — No response"},{v:"II",t:"II — Generalised response"},{v:"III",t:"III — Localised response"},{v:"IV",t:"IV — Confused, agitated"},{v:"V",t:"V — Confused, inappropriate, non-agitated"},{v:"VI",t:"VI — Confused, appropriate"},{v:"VII",t:"VII — Automatic, appropriate"},{v:"VIII",t:"VIII — Purposeful, appropriate"},{v:"IX",t:"IX — Purposeful with standby assistance"},{v:"X",t:"X — Purposeful, modified independent"}] }
+    ],
+    compute:function(v){
+      var m={I:"No response to stimuli",II:"Inconsistent, non-purposeful generalised responses",III:"Localised responses to specific stimuli",IV:"Confused and agitated; bizarre behaviour",V:"Confused, inappropriate, non-agitated; needs structure",VI:"Confused but appropriate; follows simple commands",VII:"Automatic-appropriate; robot-like, poor insight",VIII:"Purposeful-appropriate; recalls and integrates, needs some cueing",IX:"Purposeful; independent with standby assistance on request",X:"Purposeful; modified independent with extra time/aids"};
+      return { v:"Level "+v.level, u:"", i:m[v.level]+". Ref: Hagen et al. (Rancho Los Amigos)." };
+    } },
+
+  { id:"asia_impairment", cat:"Neurology", icon:"🧠", title:"ASIA Impairment Scale (Spinal Cord Injury)",
+    desc:"Grades severity of spinal cord injury.",
+    inputs:[
+      { id:"grade", label:"Grade", type:"select", opts:[{v:"A",t:"A — Complete: no motor or sensory function in S4–S5"},{v:"B",t:"B — Sensory incomplete"},{v:"C",t:"C — Motor incomplete: majority of key muscles below level grade < 3"},{v:"D",t:"D — Motor incomplete: majority grade ≥ 3"},{v:"E",t:"E — Normal motor and sensory"}] }
+    ],
+    compute:function(v){
+      var m={A:"Complete injury",B:"Sensory incomplete, motor complete",C:"Motor incomplete, weaker (most key muscles < grade 3)",D:"Motor incomplete, stronger (most key muscles ≥ grade 3)",E:"Normal sensory and motor function"};
+      return { v:"AIS "+v.grade, u:"", i:m[v.grade]+". Ref: ASIA / ISNCSCI standards." };
+    } },
+
+  { id:"house_brackmann", cat:"Neurology", icon:"🧠", title:"House-Brackmann Facial Nerve Grading",
+    desc:"Severity of facial nerve dysfunction.",
+    inputs:[
+      { id:"grade", label:"Grade", type:"select", opts:[{v:"I",t:"I — Normal"},{v:"II",t:"II — Mild dysfunction"},{v:"III",t:"III — Moderate dysfunction"},{v:"IV",t:"IV — Moderately severe dysfunction"},{v:"V",t:"V — Severe dysfunction"},{v:"VI",t:"VI — Total paralysis"}] }
+    ],
+    compute:function(v){
+      var m={I:"Normal facial function",II:"Slight weakness on close inspection; normal symmetry at rest",III:"Obvious but not disfiguring difference; complete eye closure with effort",IV:"Obvious weakness/disfiguring asymmetry; incomplete eye closure",V:"Barely perceptible motion; asymmetry at rest",VI:"No movement (total paralysis)"};
+      return { v:"Grade "+v.grade, u:"", i:m[v.grade]+". Ref: House & Brackmann 1985." };
+    } },
+
+  { id:"rai", cat:"Haematology", icon:"🩸", title:"Rai Staging (Chronic Lymphocytic Leukaemia)",
+    desc:"Prognostic staging of CLL (lymphocytosis assumed present).",
+    inputs:[
+      { id:"nodes", label:"Lymphadenopathy", type:"check" },
+      { id:"organo", label:"Splenomegaly and/or hepatomegaly", type:"check" },
+      { id:"anaemia", label:"Anaemia (Hb < 11 g/dL)", type:"check" },
+      { id:"thrombocytopenia", label:"Thrombocytopenia (platelets < 100 ×10⁹/L)", type:"check" }
+    ],
+    compute:function(v){
+      var stage=v.thrombocytopenia?"IV":v.anaemia?"III":v.organo?"II":v.nodes?"I":"0";
+      var risk=stage==="0"?"Low risk":(stage==="I"||stage==="II")?"Intermediate risk":"High risk";
+      return { v:"Stage "+stage, u:"", i:risk+" (lymphocytosis assumed; stage set by the highest feature present). Ref: Rai, Blood 1975." };
+    } },
+
+  { id:"binet", cat:"Haematology", icon:"🩸", title:"Binet Staging (Chronic Lymphocytic Leukaemia)",
+    desc:"European prognostic staging of CLL.",
+    inputs:[
+      { id:"areas", label:"Involved lymphoid areas (of 5: cervical, axillary, inguinal nodes, spleen, liver)", type:"number", step:"1" },
+      { id:"anaemia", label:"Anaemia (Hb < 10 g/dL)", type:"check" },
+      { id:"thrombocytopenia", label:"Thrombocytopenia (platelets < 100 ×10⁹/L)", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.areas)||v.areas<0||v.areas>5) return ERR;
+      var stage=(v.anaemia||v.thrombocytopenia)?"C":(v.areas>=3)?"B":"A";
+      var m={A:"Stage A — good prognosis",B:"Stage B — intermediate prognosis",C:"Stage C — poorer prognosis"};
+      return { v:"Stage "+stage, u:"", i:m[stage]+". Ref: Binet, Cancer 1981." };
+    } },
+
+  { id:"ann_arbor", cat:"Oncology", icon:"🎗️", title:"Ann Arbor Staging (Lymphoma)",
+    desc:"Anatomical staging of Hodgkin and non-Hodgkin lymphoma.",
+    inputs:[
+      { id:"stage", label:"Extent of disease", type:"select", opts:[{v:"1",t:"I — one node region or single extralymphatic site"},{v:"2",t:"II — ≥2 node regions, same side of diaphragm"},{v:"3",t:"III — node regions both sides of the diaphragm"},{v:"4",t:"IV — diffuse extralymphatic involvement"}] },
+      { id:"bsymptoms", label:"B symptoms (fever, night sweats, >10% weight loss)", type:"check" },
+      { id:"extranodal", label:"Localised extranodal extension (E)", type:"check" }
+    ],
+    compute:function(v){
+      var roman=["","I","II","III","IV"][Number(v.stage)];
+      var suffix=(v.extranodal&&Number(v.stage)<4?"E":"")+(v.bsymptoms?"B":"A");
+      return { v:"Stage "+roman+suffix, u:"", i:"Ann Arbor (Cotswolds-modified); B symptoms and bulky/extranodal disease refine prognosis and treatment. Ref: Carbone 1971." };
+    } },
+
+  { id:"iss_myeloma", cat:"Oncology", icon:"🎗️", title:"ISS (Multiple Myeloma Staging)",
+    desc:"International Staging System for multiple myeloma.",
+    inputs:[
+      { id:"b2m", label:"Serum beta-2 microglobulin", type:"number", unit:"mg/L", step:"0.1" },
+      { id:"alb", label:"Serum albumin", type:"number", unit:"g/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.b2m)||!ok(v.alb)||v.b2m<0||v.alb<0) return ERR;
+      var stage=v.b2m>=5.5?"III":(v.b2m<3.5&&v.alb>=35)?"I":"II";
+      var m={I:"Stage I — best median survival",II:"Stage II — intermediate",III:"Stage III — poorest median survival"};
+      return { v:"Stage "+stage, u:"", i:m[stage]+" (albumin in g/L). Consider R-ISS adding LDH and cytogenetics. Ref: Greipp, J Clin Oncol 2005 (ISS)." };
     } }
 
   ];
@@ -4350,7 +4454,15 @@
     green_king:["green king index","thalassaemia iron deficiency","microcytosis discriminant"],
     qtc_fram:["qtc framingham","framingham qt","corrected qt framingham"],
     qtc_hodges:["qtc hodges","hodges qt","corrected qt hodges"],
-    minute_ventilation:["minute ventilation","minute volume","ve","respiratory minute volume"]
+    minute_ventilation:["minute ventilation","minute volume","ve","respiratory minute volume"],
+    ferriman_gallwey:["ferriman gallwey","hirsutism score","hirsutism","pcos hair"],
+    rancho:["rancho los amigos","cognitive recovery","brain injury cognition","lcfs"],
+    asia_impairment:["asia impairment scale","ais","spinal cord injury grade","isncsci"],
+    house_brackmann:["house brackmann","facial nerve grade","facial palsy grading"],
+    rai:["rai staging","cll staging","chronic lymphocytic leukaemia stage"],
+    binet:["binet staging","cll staging","chronic lymphocytic leukaemia stage europe"],
+    ann_arbor:["ann arbor","lymphoma staging","hodgkin staging","cotswolds"],
+    iss_myeloma:["iss","international staging system myeloma","multiple myeloma stage"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -4534,7 +4646,15 @@
     green_king:"Green R, King R. Blood Cells 1989 (Green & King index).",
     qtc_fram:"Sagie A, et al. Am J Cardiol 1992;70(7):797–801 (Framingham).",
     qtc_hodges:"Hodges M, et al. 1983 (Hodges QT correction).",
-    minute_ventilation:"Standard respiratory physiology reference."
+    minute_ventilation:"Standard respiratory physiology reference.",
+    ferriman_gallwey:"Ferriman D, Gallwey JD. J Clin Endocrinol Metab 1961;21:1440–7.",
+    rancho:"Hagen C, et al. Rancho Los Amigos Levels of Cognitive Functioning.",
+    asia_impairment:"ASIA/ISCoS. International Standards for Neurological Classification of SCI.",
+    house_brackmann:"House JW, Brackmann DE. Otolaryngol Head Neck Surg 1985;93(2):146–7.",
+    rai:"Rai KR, et al. Blood 1975;46(2):219–34.",
+    binet:"Binet JL, et al. Cancer 1981;48(1):198–206.",
+    ann_arbor:"Carbone PP, et al. Cancer Res 1971;31(11):1860–1 (Cotswolds-modified).",
+    iss_myeloma:"Greipp PR, et al. J Clin Oncol 2005;23(15):3412–20 (ISS)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
