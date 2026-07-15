@@ -59,3 +59,7 @@ kb/dist/kb.index.json
 
 # local Capacitor plugin build output (source is tracked; build dirs are not)
 local-plugins/**/build/
+
+# management-generation intermediates (sidecars + batch inputs); the content is
+# merged into kb/reference/*.json by kb/tools/mgmt/apply.mjs, which IS tracked.
+kb/_mgmt/
