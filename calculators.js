@@ -3577,6 +3577,200 @@
       var s=Number(v.strength)+Number(v.walk)+Number(v.chair)+Number(v.stairs)+Number(v.falls);
       var b=s>=4?"Suggestive of sarcopenia — assess muscle strength/mass":"Lower likelihood of sarcopenia";
       return { v:s, u:"/10", i:b+". Ref: Malmstrom, J Cachexia Sarcopenia Muscle 2016 (SARC-F)." };
+    } },
+
+  { id:"cam", cat:"Neurology", icon:"🧠", title:"Confusion Assessment Method (CAM)",
+    desc:"Bedside diagnosis of delirium.",
+    inputs:[
+      { id:"acute", label:"Feature 1: acute onset AND fluctuating course", type:"check" },
+      { id:"inattention", label:"Feature 2: inattention", type:"check" },
+      { id:"disorganized", label:"Feature 3: disorganised thinking", type:"check" },
+      { id:"loc", label:"Feature 4: altered level of consciousness", type:"check" }
+    ],
+    compute:function(v){
+      var pos=v.acute && v.inattention && (v.disorganized || v.loc);
+      return { v: pos?"Delirium likely (CAM positive)":"CAM negative", u:"", i:(pos?"Meets CAM criteria — features 1 and 2 plus 3 or 4":"Does not meet CAM criteria; reassess as delirium fluctuates")+". Ref: Inouye, Ann Intern Med 1990 (CAM)." };
+    } },
+
+  { id:"meld_na", cat:"Hepatology", icon:"🩺", title:"MELD-Na Score",
+    desc:"Liver disease severity incorporating sodium (transplant prioritisation).",
+    inputs:[
+      { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1" },
+      { id:"inr", label:"INR", type:"number", step:"0.1" },
+      { id:"creat", label:"Creatinine", type:"number", unit:"mg/dL", step:"0.1" },
+      { id:"dialysis", label:"Dialysis ≥ twice in the past week", type:"check" },
+      { id:"na", label:"Sodium", type:"number", unit:"mmol/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.bili)||!ok(v.inr)||!ok(v.creat)||!ok(v.na)) return ERR;
+      var b=Math.max(v.bili,1), i=Math.max(v.inr,1);
+      var c=v.dialysis?4:Math.min(Math.max(v.creat,1),4);
+      var meld=Math.round(3.78*Math.log(b)+11.2*Math.log(i)+9.57*Math.log(c)+6.43);
+      var na=Math.min(Math.max(v.na,125),137);
+      var mn=meld>11 ? Math.round(meld + 1.32*(137-na) - (0.033*meld*(137-na))) : meld;
+      var band=mn<=9?"Lower 3-month mortality":mn<=19?"Moderate":mn<=29?"High":"Very high 3-month mortality";
+      return { v:mn, u:"", i:band+" (MELD-Na; sodium bounded 125–137, creatinine capped at 4). Ref: Kim, N Engl J Med 2008." };
+    } },
+
+  { id:"rts", cat:"Critical care", icon:"🚑", title:"Revised Trauma Score (RTS)",
+    desc:"Physiological severity in trauma triage.",
+    inputs:[
+      { id:"gcs", label:"Glasgow Coma Scale (3–15)", type:"number", step:"1" },
+      { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg", step:"1" },
+      { id:"rr", label:"Respiratory rate", type:"number", unit:"/min", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.gcs)||!ok(v.sbp)||!ok(v.rr)||v.gcs<3||v.gcs>15||v.sbp<0||v.rr<0) return ERR;
+      var g=v.gcs>=13?4:v.gcs>=9?3:v.gcs>=6?2:v.gcs>=4?1:0;
+      var s=v.sbp>89?4:v.sbp>=76?3:v.sbp>=50?2:v.sbp>=1?1:0;
+      var r=(v.rr>=10&&v.rr<=29)?4:v.rr>29?3:v.rr>=6?2:v.rr>=1?1:0;
+      var rts=0.9368*g+0.7326*s+0.2908*r;
+      var band=rts>=7?"Low mortality risk":rts>=4?"Intermediate":"High mortality risk";
+      return { v:r1(rts*100)/100, u:"", i:band+" (range 0–7.84; higher = better). Ref: Champion, J Trauma 1989 (RTS)." };
+    } },
+
+  { id:"hestia", cat:"Respiratory", icon:"🫁", title:"Hestia Criteria (Outpatient PE)",
+    desc:"Whether pulmonary embolism can be managed as an outpatient. Any 'yes' excludes outpatient care.",
+    inputs:[
+      { id:"unstable", label:"Haemodynamically unstable", type:"check" },
+      { id:"thrombolysis", label:"Thrombolysis or embolectomy needed", type:"check" },
+      { id:"bleeding", label:"Active bleeding or high bleeding risk", type:"check" },
+      { id:"oxygen", label:"Needs supplemental oxygen to maintain saturations", type:"check" },
+      { id:"anticoag_fail", label:"PE while already on anticoagulation", type:"check" },
+      { id:"pain", label:"Severe pain needing intravenous analgesia", type:"check" },
+      { id:"social", label:"Medical or social reason for admission > 24 h", type:"check" },
+      { id:"renal", label:"Creatinine clearance markedly reduced", type:"check" },
+      { id:"liver", label:"Severe liver impairment", type:"check" },
+      { id:"pregnant", label:"Pregnant", type:"check" },
+      { id:"hit", label:"History of heparin-induced thrombocytopenia", type:"check" }
+    ],
+    compute:function(v){
+      var keys=["unstable","thrombolysis","bleeding","oxygen","anticoag_fail","pain","social","renal","liver","pregnant","hit"];
+      var n=keys.filter(function(k){return v[k];}).length;
+      return { v: n===0?"May be suitable for outpatient care":n+" criterion/criteria present — admit", u:"", i:(n===0?"No Hestia criteria met — consider outpatient PE management with anticoagulation":"One or more Hestia criteria present — outpatient management not advised")+". Ref: Zondag, J Thromb Haemost 2011 (Hestia)." };
+    } },
+
+  { id:"sokal", cat:"Haematology", icon:"🩸", title:"Sokal Index (Chronic Myeloid Leukaemia)",
+    desc:"Prognostic index at diagnosis of chronic-phase CML.",
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"years", step:"1" },
+      { id:"spleen", label:"Spleen below costal margin", type:"number", unit:"cm", step:"0.1" },
+      { id:"plt", label:"Platelet count", type:"number", unit:"×10⁹/L", step:"1" },
+      { id:"blasts", label:"Blasts in peripheral blood", type:"number", unit:"%", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!ok(v.spleen)||!ok(v.plt)||!ok(v.blasts)||v.age<0||v.spleen<0||v.plt<0||v.blasts<0) return ERR;
+      var e=0.0116*(v.age-43.4)+0.0345*(v.spleen-7.51)+0.188*(Math.pow(v.plt/700,2)-0.563)+0.0887*(v.blasts-2.10);
+      var s=Math.exp(e);
+      var band=s<0.8?"Low risk":s<=1.2?"Intermediate risk":"High risk";
+      return { v:r1(s*100)/100, u:"", i:band+". Ref: Sokal, Blood 1984." };
+    } },
+
+  { id:"nlr", cat:"Haematology", icon:"🩸", title:"Neutrophil-Lymphocyte Ratio (NLR)",
+    desc:"Marker of systemic inflammation and physiological stress.",
+    inputs:[
+      { id:"neut", label:"Neutrophil count", type:"number", unit:"×10⁹/L", step:"0.1" },
+      { id:"lymph", label:"Lymphocyte count", type:"number", unit:"×10⁹/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.neut)||!ok(v.lymph)||v.lymph<=0||v.neut<0) return ERR;
+      var r=v.neut/v.lymph;
+      var b=r>=3?"Raised — associated with inflammation, infection or worse prognosis":"Within the usual range";
+      return { v:r1(r), u:"", i:b+". Interpret with the clinical picture. Ref: standard haematology." };
+    } },
+
+  { id:"plr", cat:"Haematology", icon:"🩸", title:"Platelet-Lymphocyte Ratio (PLR)",
+    desc:"Inflammatory and prognostic marker.",
+    inputs:[
+      { id:"plt", label:"Platelet count", type:"number", unit:"×10⁹/L", step:"1" },
+      { id:"lymph", label:"Lymphocyte count", type:"number", unit:"×10⁹/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.plt)||!ok(v.lymph)||v.lymph<=0||v.plt<0) return ERR;
+      var r=v.plt/v.lymph;
+      return { v:r0(r), u:"", i:"Higher values are associated with systemic inflammation and, in some cancers, a worse prognosis. Interpret with context. Ref: standard haematology." };
+    } },
+
+  { id:"aec", cat:"Haematology", icon:"🩸", title:"Absolute Eosinophil Count",
+    desc:"Absolute eosinophils from white cell count and differential.",
+    inputs:[
+      { id:"wbc", label:"White cell count", type:"number", unit:"×10⁹/L", step:"0.1" },
+      { id:"eos", label:"Eosinophils", type:"number", unit:"%", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.wbc)||!ok(v.eos)||v.wbc<0||v.eos<0) return ERR;
+      var aec=v.wbc*v.eos/100;
+      var b=aec>=1.5?"Marked eosinophilia":aec>=0.5?"Eosinophilia":"Normal range";
+      return { v:r1(aec*100)/100, u:"×10⁹/L", i:b+". Ref: standard haematology." };
+    } },
+
+  { id:"alc", cat:"Haematology", icon:"🩸", title:"Absolute Lymphocyte Count",
+    desc:"Absolute lymphocytes from white cell count and differential.",
+    inputs:[
+      { id:"wbc", label:"White cell count", type:"number", unit:"×10⁹/L", step:"0.1" },
+      { id:"lymph", label:"Lymphocytes", type:"number", unit:"%", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.wbc)||!ok(v.lymph)||v.wbc<0||v.lymph<0) return ERR;
+      var alc=v.wbc*v.lymph/100;
+      var b=alc<1.0?"Lymphopenia":alc>4.0?"Lymphocytosis":"Normal range";
+      return { v:r1(alc*100)/100, u:"×10⁹/L", i:b+". Ref: standard haematology." };
+    } },
+
+  { id:"bun_cr_ratio", cat:"Renal", icon:"🫘", title:"BUN/Creatinine Ratio",
+    desc:"Helps distinguish prerenal from intrinsic renal azotaemia.",
+    inputs:[
+      { id:"bun", label:"BUN", type:"number", unit:"mg/dL", step:"1" },
+      { id:"cr", label:"Creatinine", type:"number", unit:"mg/dL", step:"0.01" }
+    ],
+    compute:function(v){
+      if(!ok(v.bun)||!ok(v.cr)||v.cr<=0||v.bun<0) return ERR;
+      var r=v.bun/v.cr;
+      var b=r>20?"Elevated — suggests a prerenal cause or GI bleeding":r<10?"Low — may reflect intrinsic renal disease or low-protein/low-urea states":"Within the usual range";
+      return { v:r0(r), u:"", i:b+" (uses BUN, not urea). Ref: standard nephrology." };
+    } },
+
+  { id:"modified_shock_index", cat:"Critical care", icon:"🚨", title:"Modified Shock Index",
+    desc:"Heart rate divided by mean arterial pressure.",
+    inputs:[
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm", step:"1" },
+      { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg", step:"1" },
+      { id:"dbp", label:"Diastolic BP", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.hr)||!ok(v.sbp)||!ok(v.dbp)||v.hr<0||v.sbp<=0||v.dbp<0) return ERR;
+      var map=v.dbp+(v.sbp-v.dbp)/3;
+      if(map<=0) return ERR;
+      var msi=v.hr/map;
+      var b=msi>1.3?"Elevated — associated with hypovolaemia / haemodynamic stress":msi<0.7?"Low":"Within the usual range";
+      return { v:r1(msi*100)/100, u:"", i:b+" (MAP "+r0(map)+" mmHg). Ref: standard critical care." };
+    } },
+
+  { id:"pulse_pressure", cat:"Cardiovascular", icon:"❤️", title:"Pulse Pressure",
+    desc:"Difference between systolic and diastolic blood pressure.",
+    inputs:[
+      { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg", step:"1" },
+      { id:"dbp", label:"Diastolic BP", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.sbp)||!ok(v.dbp)) return ERR;
+      var pp=v.sbp-v.dbp;
+      if(pp<0) return { err:"Systolic pressure should exceed diastolic" };
+      var b=pp<25?"Narrow — may reflect low stroke volume, tamponade or severe heart failure":pp>100?"Wide — may reflect aortic regurgitation, stiff vessels or a high-output state":"Within the usual range";
+      return { v:r0(pp), u:"mmHg", i:b+". Ref: standard cardiovascular physiology." };
+    } },
+
+  { id:"corrected_anion_gap", cat:"Renal", icon:"🧪", title:"Albumin-Corrected Anion Gap",
+    desc:"Adjusts the anion gap for hypoalbuminaemia.",
+    inputs:[
+      { id:"ag", label:"Measured anion gap", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"alb", label:"Albumin", type:"number", unit:"g/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ag)||!ok(v.alb)||v.alb<0) return ERR;
+      var c=v.ag+0.25*(40-v.alb);
+      var b=c>16?"Raised corrected anion gap — investigate for a high anion gap acidosis":"Corrected anion gap not raised";
+      return { v:r1(c), u:"mmol/L", i:b+" (adds ~0.25 mmol/L per g/L of albumin below 40). Ref: Figge, 1998." };
     } }
 
   ];
@@ -3769,7 +3963,20 @@
     dapsa:["dapsa","psoriatic arthritis activity","psa disease activity"],
     hit_4ts:["4ts","4 t score","heparin induced thrombocytopenia","hit probability"],
     cornell_lvh:["cornell voltage","cornell criteria","left ventricular hypertrophy ecg","lvh voltage"],
-    sarcf:["sarc-f","sarcf","sarcopenia screen","muscle loss screen"]
+    sarcf:["sarc-f","sarcf","sarcopenia screen","muscle loss screen"],
+    cam:["confusion assessment method","cam","delirium","delirium screen"],
+    meld_na:["meld-na","meld sodium","meld na","liver transplant score"],
+    rts:["revised trauma score","rts","trauma triage"],
+    hestia:["hestia criteria","outpatient pe","pulmonary embolism outpatient","home treatment pe"],
+    sokal:["sokal index","sokal score","cml prognosis","chronic myeloid leukaemia risk"],
+    nlr:["neutrophil lymphocyte ratio","nlr","neutrophil to lymphocyte"],
+    plr:["platelet lymphocyte ratio","plr","platelet to lymphocyte"],
+    aec:["absolute eosinophil count","aec","eosinophilia"],
+    alc:["absolute lymphocyte count","alc","lymphopenia","lymphocytosis"],
+    bun_cr_ratio:["bun creatinine ratio","bun/cr","urea creatinine ratio","prerenal"],
+    modified_shock_index:["modified shock index","msi","shock index map"],
+    pulse_pressure:["pulse pressure","widened pulse pressure","narrow pulse pressure"],
+    corrected_anion_gap:["albumin corrected anion gap","corrected anion gap","albumin adjusted anion gap"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -3917,7 +4124,20 @@
     dapsa:"Schoels M, et al. Ann Rheum Dis 2010;69(8):1441–7 (DAPSA).",
     hit_4ts:"Lo GK, et al. J Thromb Haemost 2006;4(4):759–65 (4Ts).",
     cornell_lvh:"Casale PN, et al. Circulation 1987;75(3):565–72 (Cornell).",
-    sarcf:"Malmstrom TK, et al. J Cachexia Sarcopenia Muscle 2016;7(1):28–36 (SARC-F)."
+    sarcf:"Malmstrom TK, et al. J Cachexia Sarcopenia Muscle 2016;7(1):28–36 (SARC-F).",
+    cam:"Inouye SK, et al. Ann Intern Med 1990;113(12):941–8 (CAM).",
+    meld_na:"Kim WR, et al. N Engl J Med 2008;359(10):1018–26 (MELD-Na).",
+    rts:"Champion HR, et al. J Trauma 1989;29(5):623–9 (RTS).",
+    hestia:"Zondag W, et al. J Thromb Haemost 2011;9(8):1500–7 (Hestia).",
+    sokal:"Sokal JE, et al. Blood 1984;63(4):789–99.",
+    nlr:"Standard haematology reference (neutrophil-lymphocyte ratio).",
+    plr:"Standard haematology reference (platelet-lymphocyte ratio).",
+    aec:"Standard haematology reference (WBC × eosinophil fraction).",
+    alc:"Standard haematology reference (WBC × lymphocyte fraction).",
+    bun_cr_ratio:"Standard nephrology reference (BUN/creatinine ratio).",
+    modified_shock_index:"Standard critical-care reference (HR/MAP).",
+    pulse_pressure:"Standard cardiovascular physiology reference.",
+    corrected_anion_gap:"Figge J, et al. 1998 (albumin-corrected anion gap)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
