@@ -4014,6 +4014,114 @@
       var fs=(v.lvedd-v.lvesd)/v.lvedd*100;
       var b=fs>=25?"Normal fractional shortening":"Reduced — suggests impaired LV systolic function";
       return { v:r1(fs), u:"%", i:b+" (normal ~25–45%). Ref: standard echocardiography." };
+    } },
+
+  { id:"mifflin", cat:"General", icon:"🍎", title:"Mifflin-St Jeor Equation (Energy Needs)",
+    desc:"Basal metabolic rate and estimated daily energy requirement.",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.1" },
+      { id:"ht", label:"Height", type:"number", unit:"cm", step:"0.1" },
+      { id:"age", label:"Age", type:"number", unit:"years", step:"1" },
+      { id:"activity", label:"Activity / stress factor", type:"select", opts:[{v:"1.2",t:"Sedentary (×1.2)"},{v:"1.375",t:"Light (×1.375)"},{v:"1.55",t:"Moderate (×1.55)"},{v:"1.725",t:"Very active (×1.725)"},{v:"1.9",t:"Extra active / high stress (×1.9)"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.wt)||!ok(v.ht)||!ok(v.age)||v.wt<=0||v.ht<=0||v.age<0) return ERR;
+      var bmr=10*v.wt+6.25*v.ht-5*v.age+(v.sex==="f"?-161:5);
+      var tdee=bmr*Number(v.activity);
+      return { v:r0(bmr), u:"kcal/day", i:"Basal metabolic rate; total daily energy ≈ "+r0(tdee)+" kcal/day at the selected factor (often preferred over Harris-Benedict). Ref: Mifflin, Am J Clin Nutr 1990." };
+    } },
+
+  { id:"body_fat", cat:"General", icon:"⚖️", title:"Body Fat Percentage (Deurenberg)",
+    desc:"Estimates body fat from BMI, age and sex.",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"bmi", label:"BMI", type:"number", unit:"kg/m²", step:"0.1" },
+      { id:"age", label:"Age", type:"number", unit:"years", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.bmi)||!ok(v.age)||v.bmi<=0||v.age<0) return ERR;
+      var bf=1.20*v.bmi+0.23*v.age-10.8*(v.sex==="m"?1:0)-5.4;
+      return { v:r1(bf), u:"%", i:"Estimated body fat (Deurenberg); a population estimate, less accurate at extremes of physique. Ref: Deurenberg, Br J Nutr 1991." };
+    } },
+
+  { id:"sgarbossa_smith", cat:"Cardiovascular", icon:"❤️", title:"Modified Sgarbossa Criteria (MI in LBBB/Paced)",
+    desc:"Diagnoses acute MI in left bundle branch block or ventricular pacing.",
+    inputs:[
+      { id:"concordant_ste", label:"Concordant ST elevation ≥ 1 mm in ≥ 1 lead", type:"check" },
+      { id:"concordant_std", label:"Concordant ST depression ≥ 1 mm in V1–V3", type:"check" },
+      { id:"discordant_ratio", label:"Discordant ST elevation with ST/S ratio ≤ −0.25 in ≥ 1 lead", type:"check" }
+    ],
+    compute:function(v){
+      var pos=v.concordant_ste||v.concordant_std||v.discordant_ratio;
+      return { v: pos?"Positive — acute MI likely":"Negative", u:"", i:(pos?"At least one modified Sgarbossa criterion met — consistent with acute coronary occlusion":"No criterion met; does not exclude MI — correlate clinically and with serial ECG/troponin")+". Ref: Smith, Ann Emerg Med 2012." };
+    } },
+
+  { id:"cao2", cat:"Critical care", icon:"🫁", title:"Arterial Oxygen Content (CaO₂)",
+    desc:"Total oxygen carried in arterial blood.",
+    inputs:[
+      { id:"hb", label:"Haemoglobin", type:"number", unit:"g/dL", step:"0.1" },
+      { id:"sao2", label:"Arterial oxygen saturation", type:"number", unit:"%", step:"0.1" },
+      { id:"pao2", label:"PaO₂", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.hb)||!ok(v.sao2)||!ok(v.pao2)||v.hb<0||v.sao2<0||v.pao2<0) return ERR;
+      var cao2=1.34*v.hb*(v.sao2/100)+0.003*v.pao2;
+      return { v:r1(cao2), u:"mL O₂/dL", i:"Arterial oxygen content (haemoglobin-bound plus dissolved). Multiply by cardiac output ×10 for oxygen delivery. Ref: standard physiology." };
+    } },
+
+  { id:"green_king", cat:"Haematology", icon:"🩸", title:"Green & King Index (Thalassaemia vs Iron Deficiency)",
+    desc:"Discriminates beta-thalassaemia trait from iron deficiency in microcytosis.",
+    inputs:[
+      { id:"mcv", label:"MCV", type:"number", unit:"fL", step:"0.1" },
+      { id:"rdw", label:"RDW", type:"number", unit:"%", step:"0.1" },
+      { id:"hb", label:"Haemoglobin", type:"number", unit:"g/dL", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.mcv)||!ok(v.rdw)||!ok(v.hb)||v.hb<=0||v.mcv<0||v.rdw<=0) return ERR;
+      var idx=(v.mcv*v.mcv*v.rdw)/(v.hb*100);
+      var b=idx<72?"Favours beta-thalassaemia trait":"Favours iron-deficiency anaemia";
+      return { v:r1(idx), u:"", i:b+" (cut-off ~72; confirm with ferritin and haemoglobin studies). Ref: Green & King 1989." };
+    } },
+
+  { id:"qtc_fram", cat:"Cardiovascular", icon:"❤️", title:"Corrected QT — Framingham (QTcFram)",
+    desc:"Linear heart-rate correction of the QT interval.",
+    inputs:[
+      { id:"qt", label:"Measured QT interval", type:"number", unit:"ms", step:"1" },
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.qt)||!ok(v.hr)||v.qt<=0||v.hr<=0) return ERR;
+      var rr=60/v.hr;
+      var qtc=v.qt+154*(1-rr);
+      var b=qtc>=500?"Markedly prolonged":qtc>=470?"Prolonged":"Within the usual range";
+      return { v:r0(qtc), u:"ms", i:b+" (Framingham linear correction). Ref: Sagie, Am J Cardiol 1992." };
+    } },
+
+  { id:"qtc_hodges", cat:"Cardiovascular", icon:"❤️", title:"Corrected QT — Hodges (QTcH)",
+    desc:"Heart-rate correction of the QT interval (Hodges).",
+    inputs:[
+      { id:"qt", label:"Measured QT interval", type:"number", unit:"ms", step:"1" },
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.qt)||!ok(v.hr)||v.qt<=0||v.hr<=0) return ERR;
+      var qtc=v.qt+1.75*(v.hr-60);
+      var b=qtc>=500?"Markedly prolonged":qtc>=470?"Prolonged":"Within the usual range";
+      return { v:r0(qtc), u:"ms", i:b+" (Hodges correction; performs consistently across heart rates). Ref: Hodges 1983." };
+    } },
+
+  { id:"minute_ventilation", cat:"Critical care", icon:"🫁", title:"Minute Ventilation",
+    desc:"Total volume of gas moved by the lungs per minute.",
+    inputs:[
+      { id:"rr", label:"Respiratory rate", type:"number", unit:"/min", step:"1" },
+      { id:"vt", label:"Tidal volume", type:"number", unit:"mL", step:"10" }
+    ],
+    compute:function(v){
+      if(!ok(v.rr)||!ok(v.vt)||v.rr<0||v.vt<0) return ERR;
+      var mv=v.rr*v.vt/1000;
+      var b=mv>10?"High — seen in metabolic acidosis, sepsis or anxiety":mv<5?"Low — hypoventilation":"Within the usual adult range";
+      return { v:r1(mv), u:"L/min", i:b+". Ref: standard respiratory physiology." };
     } }
 
   ];
@@ -4234,7 +4342,15 @@
     abc2_ich_volume:["abc/2","abc2","ich volume","haematoma volume","intracerebral haemorrhage volume"],
     whtr:["waist to height ratio","waist height ratio","whtr","central obesity"],
     pbw_ardsnet:["predicted body weight","ardsnet","tidal volume","lung protective ventilation","pbw"],
-    fractional_shortening:["fractional shortening","lv function","fs echo","left ventricular shortening"]
+    fractional_shortening:["fractional shortening","lv function","fs echo","left ventricular shortening"],
+    mifflin:["mifflin st jeor","bmr","basal metabolic rate","calorie needs","energy requirement"],
+    body_fat:["body fat percentage","deurenberg","body fat estimate"],
+    sgarbossa_smith:["modified sgarbossa","smith sgarbossa","mi in lbbb","occlusion mi lbbb"],
+    cao2:["arterial oxygen content","cao2","oxygen content","oxygen delivery"],
+    green_king:["green king index","thalassaemia iron deficiency","microcytosis discriminant"],
+    qtc_fram:["qtc framingham","framingham qt","corrected qt framingham"],
+    qtc_hodges:["qtc hodges","hodges qt","corrected qt hodges"],
+    minute_ventilation:["minute ventilation","minute volume","ve","respiratory minute volume"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -4410,7 +4526,15 @@
     abc2_ich_volume:"Kothari RU, et al. Stroke 1996;27(8):1304–5 (ABC/2).",
     whtr:"Ashwell M, et al. Standard reference (waist-to-height ratio).",
     pbw_ardsnet:"ARDS Network. N Engl J Med 2000;342(18):1301–8.",
-    fractional_shortening:"Standard echocardiography reference (fractional shortening)."
+    fractional_shortening:"Standard echocardiography reference (fractional shortening).",
+    mifflin:"Mifflin MD, et al. Am J Clin Nutr 1990;51(2):241–7.",
+    body_fat:"Deurenberg P, et al. Br J Nutr 1991;65(2):105–14.",
+    sgarbossa_smith:"Smith SW, et al. Ann Emerg Med 2012;60(6):766–76.",
+    cao2:"Standard physiology reference (arterial oxygen content).",
+    green_king:"Green R, King R. Blood Cells 1989 (Green & King index).",
+    qtc_fram:"Sagie A, et al. Am J Cardiol 1992;70(7):797–801 (Framingham).",
+    qtc_hodges:"Hodges M, et al. 1983 (Hodges QT correction).",
+    minute_ventilation:"Standard respiratory physiology reference."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
