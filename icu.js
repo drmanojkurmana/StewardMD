@@ -1110,6 +1110,13 @@
       '#icuRoot.icu-v2 .icu-v2-priochip.on .icu-v2-priodot{background:#fff!important}' +
       '#icuRoot.icu-v2 .icu-v2-priosub{font:600 11px var(--font);color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-priochip.on .icu-v2-priosub{color:rgba(255,255,255,.85)}' +
+      /* "Instructed by" picker chips */
+      '#icuRoot.icu-v2 .icu-v2-obpick{display:flex;flex-wrap:wrap;gap:8px}' +
+      '#icuRoot.icu-v2 .icu-v2-obchip{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--border);background:var(--panel2);border-radius:12px;padding:9px 12px;cursor:pointer;color:var(--ink);font:600 13px var(--font)}' +
+      '#icuRoot.icu-v2 .icu-v2-obchip.on{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}' +
+      '#icuRoot.icu-v2 .icu-v2-obchip .icu-ico{width:15px;height:15px}' +
+      '#icuRoot.icu-v2 .icu-v2-obrole{font:600 11px var(--font);color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-obchip.on .icu-v2-obrole{color:var(--primary);opacity:.8}' +
       /* task priority badge + overdue chip in the Instructions panel */
       '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:800 10px var(--font);color:#fff;border-radius:6px;padding:2px 6px;letter-spacing:.02em;vertical-align:middle}' +
       '#icuRoot.icu-v2 .icu-v2-due{font:700 11px var(--font);color:var(--muted)}' +
@@ -2416,6 +2423,7 @@
   };
   var PRIORITY_ORDER = ["immediate", "high", "moderate", "low"];
   var _roundPriority = "high"; // round-note composer: selected priority for the instructions being posted
+  var _roundOnBehalf = null;   // round-note composer: uid the instruction is attributed to (null = me). Lets a resident log a consultant's verbal order under the consultant's name.
 
   // Plain-language explanations for ICU jargon (A5) — content only, no logic change.
   var JARGON = {
@@ -3732,6 +3740,10 @@
     if (!vm) return '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">Loading shared instructions & timeline…</p></div>';
     var tasks = vm.tasks || [], tl = vm.timeline || [], pt = vm.patient || {};
     var open = tasks.filter(function (t) { return t.status !== "done"; }).length;
+    // Auto-declutter: a completed task drops off this list 6h after completion (the completion stays
+    // in the Timeline below). Open + just-completed (<6h) tasks remain visible.
+    var visibleTasks = tasks.filter(function (t) { return t.status !== "done" || !t.completedAt || (nowTs() - t.completedAt) < 6 * 3600000; });
+    var hiddenDone = tasks.length - visibleTasks.length;
     var out = '<div class="icu-v2-collab">';
     // Self-heal: the unit CREATOR should be its head. If they aren't (e.g. an older invite-link
     // self-join demoted them), their round instructions post as plain notes, not tracked tasks —
@@ -3743,8 +3755,8 @@
     }
     out += '<div class="icu-sec-lbl">' + ico("pulse", "🩺") + ' Shared unit — ' + esc((_grp && _grp.name) || "ICU") + '</div>';
     out += '<div class="icu-card"><h3>Instructions &amp; tasks <span class="icu-phase">' + open + ' open</span></h3>';
-    if (tasks.length) {
-      out += tasks.map(function (t) {
+    if (visibleTasks.length) {
+      out += visibleTasks.map(function (t) {
         var overdue = t.dueAt && t.status !== "done" && nowTs() > t.dueAt;
         var pr = TASK_PRIORITY[t.priority] || TASK_PRIORITY.moderate;
         var mark = t.status === "done" ? "☑" : t.status === "progress" ? "◐" : "☐";
@@ -3753,7 +3765,9 @@
         var dueTxt = t.status === "done"
           ? (t.completedByName ? "done by " + t.completedByName : "done")
           : (t.dueAt ? (overdue ? "Overdue by " + fmtDur(nowTs() - t.dueAt) : "Due in " + fmtDur(t.dueAt - nowTs())) : "");
-        var meta = [t.assignedByName ? "by " + t.assignedByName : "", dueTxt].filter(Boolean).join(" · ");
+        var instructorNm = t.onBehalfOfName || t.assignedByName;
+        var byTxt = instructorNm ? ("by " + instructorNm + ((t.onBehalfOfName && t.assignedByName && t.onBehalfOfName !== t.assignedByName) ? " · logged by " + t.assignedByName : "")) : "";
+        var meta = [byTxt, dueTxt].filter(Boolean).join(" · ");
         var expl = t.explanation ? '<div class="icu-v2-taskexpl">' + ico("info", "ⓘ") + " " + esc(t.explanation) + (t.explainedByName ? " — " + esc(t.explainedByName) : "") + "</div>" : "";
         var explBtn = (t.status !== "done") ? '<button class="icu-btn ghost" data-icu-act="grptaskexplain:' + encodeURIComponent(t.id) + '" style="margin-top:6px;padding:6px 10px;min-height:32px;width:auto;font:700 12px var(--font)">' + ico("edit", "✎") + (t.explanation ? " Update explanation" : (overdue ? " Explain the delay" : " Add explanation")) + "</button>" : "";
         return '<div class="icu-row" style="align-items:flex-start;gap:8px' + (overdue ? ";border-left:3px solid var(--danger);padding-left:9px" : "") + '"><button class="icu-v2-tasktog" data-icu-act="grptask:' + encodeURIComponent(t.id) + '" aria-label="Change status of: ' + esc(t.text || "task") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;margin:-6px 0;color:' + col + '">' + mark + "</button>" +
@@ -3764,6 +3778,7 @@
     } else {
       out += '<p class="icu-doc-sub" style="margin:0">No open instructions. ' + (grpCanInstruct(_grp && _grp.myRole) ? "Give one on the round and it will appear here for the team." : "Awaiting a consultant instruction.") + '</p>';
     }
+    if (hiddenDone > 0) out += '<p class="icu-doc-sub" style="margin:8px 0 0;opacity:.7">' + hiddenDone + ' completed task' + (hiddenDone === 1 ? "" : "s") + ' cleared (older than 6h) — kept in the Timeline below.</p>';
     out += '</div>';
     // No-type round-note composer (Phase 3). Instructors post tracked tasks + one timeline event;
     // everyone else can post a plain (untracked) note. Rules enforce the write boundary too.
@@ -4076,16 +4091,18 @@
   // PURE: a chosen list of instructions → the tasks to create + the ONE summarising timeline
   // event (never one event per task). Instructors create tracked tasks; everyone else posts a
   // plain (untracked) note — the UI role-gates and firestore.rules enforce the real boundary.
-  function grpRoundPlan(instructions, canInstruct, authorName, priority) {
+  function grpRoundPlan(instructions, canInstruct, authorName, priority, onBehalf) {
     instructions = (instructions || []).filter(function (s) { return s && String(s).trim(); }).map(function (s) { return String(s).trim(); });
     authorName = authorName || "Clinician";
     var n = instructions.length;
     if (!n) return { tasks: [], event: null };
+    var ob = (onBehalf && onBehalf.uid && onBehalf.name) ? onBehalf : null;   // attribute to a named consultant
     if (canInstruct) {
       var prio = TASK_PRIORITY[priority] ? priority : "moderate";
       var dueAt = nowTs() + TASK_PRIORITY[prio].ms;   // client clock — a small skew is fine for a soft deadline
-      var tasks = instructions.map(function (s) { return { text: s, priority: prio, dueAt: dueAt }; });
-      return { tasks: tasks, event: { type: "round", title: "Round instruction — " + authorName, detail: n + " instruction" + (n === 1 ? "" : "s") + " given · " + TASK_PRIORITY[prio].label + " priority" } };
+      var tasks = instructions.map(function (s) { return { text: s, priority: prio, dueAt: dueAt, onBehalfOfUid: ob ? ob.uid : null, onBehalfOfName: ob ? ob.name : "" }; });
+      var by = ob ? ob.name : authorName;
+      return { tasks: tasks, event: { type: "round", title: "Round instruction — " + by, detail: n + " instruction" + (n === 1 ? "" : "s") + " · " + TASK_PRIORITY[prio].label + " priority" + (ob ? " · logged by " + authorName : "") } };
     }
     return { tasks: [], event: { type: "note", title: "Round note — " + authorName, detail: instructions.join("; ") } };
   }
@@ -4309,7 +4326,15 @@
       var text = (chosen && chosen[0]) || "New instruction";
       idToken().then(function (tok) {
         if (!tok) return;
-        fetch("/api/push/instruction", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, priority: priority, count: (chosen ? chosen.length : 1) }) }).catch(function () {});
+        fetch("/api/push/instruction", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, priority: priority, count: (chosen ? chosen.length : 1) }) })
+          .then(function (r) { return r.json(); })
+          .then(function (j) {
+            // Surface push REACH so it's obvious when teammates aren't registered for notifications.
+            if (!window.toast || !j) return;
+            if (j.sent > 0) toast("Pushed to " + j.sent + " device" + (j.sent === 1 ? "" : "s"));
+            else if (j.notified > 0) toast("No teammate is registered for push yet — ask them to open the app + allow notifications");
+          }, function () {})
+          .catch(function () {});
       }, function () {});
     } catch (e) {}
   }
@@ -4348,6 +4373,22 @@
           '<span class="icu-v2-priosub">' + esc(pr.sub) + '</span></button>';
       }).join("") + '</div></div>';
   }
+  // "Instructed by" picker — attribute an order to a named colleague (a resident logging a
+  // consultant's verbal round order). Shown only when there ARE teammates. Default = Me.
+  function onBehalfPickerHTML() {
+    var members = _grpMembers || [], myUid = (typeof ownerNow === "function") ? ownerNow() : null;
+    var others = members.filter(function (m) { return m.uid && m.uid !== myUid; });
+    if (!others.length) return "";
+    var chips = '<button class="icu-v2-obchip' + (_roundOnBehalf ? "" : " on") + '" data-icu-act="grproundbehalf:self">' + ico("user", "🧑") + ' Me</button>' +
+      others.map(function (m) {
+        var on = _roundOnBehalf === m.uid;
+        return '<button class="icu-v2-obchip' + (on ? " on" : "") + '" data-icu-act="grproundbehalf:' + encodeURIComponent(m.uid) + '">' + esc(m.name || grpRoleLabel(m.role)) + (m.role ? ' <span class="icu-v2-obrole">' + esc(grpRoleLabel(m.role)) + '</span>' : "") + '</button>';
+      }).join("");
+    return '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">Instructed by</div>' +
+      '<p class="icu-doc-sub" style="margin:0 0 9px">Log a colleague’s verbal order under their name — e.g. a consultant’s round instruction.</p>' +
+      '<div class="icu-v2-obpick">' + chips + '</div></div>';
+  }
+  function grpRoundSetBehalf(uid) { grpRoundCaptureText(); _roundOnBehalf = (!uid || uid === "self") ? null : decodeURIComponent(uid); paint(); }
   function renderV2RoundNote() {
     var pt = (_grpPtVM && _grpPtVM.patient) || {}, p = _raw.patient || {};
     var bed = pt.bed || p.bed || "—", nm = pt.name || p.name || "Patient";
@@ -4378,12 +4419,12 @@
     // Flex column: header (fixed) · body (intro/priority/add-your-own fixed + suggestions box flexes &
     // scrolls) · post bar (fixed). Both boxes stay on screen; only the suggestions list scrolls.
     return '<div class="icu-v2-dialog" role="dialog" aria-modal="true" aria-label="' + (instr ? "Add round note" : "Add a note") + '" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden">' +
-      header + '<div class="icu-v2-rbody">' + errNote + intro + prio + sugBox + custom + '</div>' + post + '</div>';
+      header + '<div class="icu-v2-rbody">' + errNote + intro + (instr ? onBehalfPickerHTML() : "") + prio + sugBox + custom + '</div>' + post + '</div>';
   }
   function grpRoundSetPriority(k) { grpRoundCaptureText(); if (TASK_PRIORITY[k]) _roundPriority = k; paint(); }
   function grpOpenRound() {
     if (!grpActive() || !_grpPtId) return;
-    _roundSel = {}; _roundExtra = []; _roundText = ""; _roundPriority = "high"; _grpErr = null;
+    _roundSel = {}; _roundExtra = []; _roundText = ""; _roundPriority = "high"; _roundOnBehalf = null; _grpErr = null;
     _screen = "round"; _paintTop = true; paint();
   }
   function grpRoundToggle(i) { grpRoundCaptureText(); i = +i; _roundSel[i] = !_roundSel[i]; paint(); }
@@ -4401,7 +4442,9 @@
     var api = groupsApi(); if (!api || !grpActive() || !_grpPtId) return;
     var chosen = grpRoundChosen(); if (!chosen.length) return;
     var instr = grpCanInstruct(_grp && _grp.myRole);
-    var plan = grpRoundPlan(chosen, instr, v2AccountName(), _roundPriority);
+    var onBehalf = null;
+    if (_roundOnBehalf) { var _m = (_grpMembers || []).filter(function (x) { return x.uid === _roundOnBehalf; })[0]; if (_m) onBehalf = { uid: _m.uid, name: _m.name || grpRoleLabel(_m.role) }; }
+    var plan = grpRoundPlan(chosen, instr, v2AccountName(), _roundPriority, onBehalf);
     var gid = _grp.id, pid = _grpPtId, i;
     for (i = 0; i < plan.tasks.length; i++) {
       (function (task) { try { var pr = api.addTask(gid, pid, task); if (pr && pr.then) pr.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {} })(plan.tasks[i]);
@@ -4410,8 +4453,8 @@
     // Immediate push to the unit when an instruction is ISSUED (not just when it later goes overdue) —
     // so residents are alerted the moment a high/immediate order is given.
     if (instr && plan.tasks.length) { try { grpNotifyInstruction(gid, pid, chosen, _roundPriority); } catch (e) {} }
-    _roundSel = {}; _roundExtra = []; _roundText = "";
-    if (window.toast) toast(instr ? (plan.tasks.length + " instruction" + (plan.tasks.length === 1 ? "" : "s") + " posted") : "Note posted");
+    _roundSel = {}; _roundExtra = []; _roundText = ""; _roundOnBehalf = null;
+    if (window.toast) toast(instr ? (plan.tasks.length + " instruction" + (plan.tasks.length === 1 ? "" : "s") + " posted" + (onBehalf ? " for " + onBehalf.name : "")) : "Note posted");
     grpRoundBack();
   }
 
@@ -5982,6 +6025,7 @@
       case "grproundadd": grpRoundAddCustom(); break;
       case "grproundrm": grpRoundRemove(arg); break;
       case "grproundprio": grpRoundSetPriority(arg); break;
+      case "grproundbehalf": grpRoundSetBehalf(arg); break;
       case "grproundpost": grpDoPostRound(); break;
       case "summary": openSummary(); break;
       case "printsummary": printSummary(); break;
