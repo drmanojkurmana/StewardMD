@@ -4380,6 +4380,86 @@
       var s=["age","time","address","year","place","persons","dob","history","monarch","count"].filter(function(k){return v[k];}).length;
       var b=s<=6?"Suggests cognitive impairment — consider formal assessment":"Normal range";
       return { v:s, u:"/10", i:b+" (a score of ≤ 6 is the usual cut-off). Ref: Hodkinson, Age Ageing 1972 (AMTS)." };
+    } },
+
+  { id:"hama", cat:"Psychiatry", icon:"🧠", title:"Hamilton Anxiety Rating Scale (HAM-A)",
+    desc:"Clinician-rated severity of anxiety (14 domains, each 0–4).",
+    inputs:[
+      { id:"anxious_mood", label:"Anxious mood", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"tension", label:"Tension", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"fears", label:"Fears", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"insomnia", label:"Insomnia", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"intellectual", label:"Intellectual (cognitive)", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"depressed_mood", label:"Depressed mood", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"somatic_muscular", label:"Somatic (muscular)", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"somatic_sensory", label:"Somatic (sensory)", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"cardiovascular", label:"Cardiovascular symptoms", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"respiratory", label:"Respiratory symptoms", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"gastrointestinal", label:"Gastrointestinal symptoms", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"genitourinary", label:"Genitourinary symptoms", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"autonomic", label:"Autonomic symptoms", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
+      { id:"behaviour", label:"Behaviour at interview", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] }
+    ],
+    compute:function(v){
+      var keys=["anxious_mood","tension","fears","insomnia","intellectual","depressed_mood","somatic_muscular","somatic_sensory","cardiovascular","respiratory","gastrointestinal","genitourinary","autonomic","behaviour"];
+      var s=keys.reduce(function(a,k){return a+(Number(v[k])||0);},0);
+      var b=s<18?"Mild anxiety":s<=24?"Mild-to-moderate anxiety":s<=30?"Moderate-to-severe anxiety":"Severe anxiety";
+      return { v:s, u:"/56", i:b+". Ref: Hamilton, Br J Med Psychol 1959 (HAM-A)." };
+    } },
+
+  { id:"mna_sf", cat:"General", icon:"🍎", title:"Mini Nutritional Assessment — Short Form (MNA-SF)",
+    desc:"Nutritional screening in older adults.",
+    inputs:[
+      { id:"intake", label:"Decline in food intake over the past 3 months", type:"select", opts:[{v:"0",t:"Severe decrease"},{v:"1",t:"Moderate decrease"},{v:"2",t:"No decrease"}] },
+      { id:"wtloss", label:"Weight loss in the past 3 months", type:"select", opts:[{v:"0",t:"> 3 kg"},{v:"1",t:"Unknown"},{v:"2",t:"1–3 kg"},{v:"3",t:"No weight loss"}] },
+      { id:"mobility", label:"Mobility", type:"select", opts:[{v:"0",t:"Bed or chair bound"},{v:"1",t:"Out of bed but does not go out"},{v:"2",t:"Goes out"}] },
+      { id:"stress", label:"Psychological stress or acute disease in the past 3 months", type:"select", opts:[{v:"0",t:"Yes"},{v:"2",t:"No"}] },
+      { id:"neuro", label:"Neuropsychological problems", type:"select", opts:[{v:"0",t:"Severe dementia or depression"},{v:"1",t:"Mild dementia"},{v:"2",t:"No problems"}] },
+      { id:"bmi", label:"Body mass index", type:"select", opts:[{v:"0",t:"< 19"},{v:"1",t:"19 to < 21"},{v:"2",t:"21 to < 23"},{v:"3",t:"≥ 23"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.intake)+Number(v.wtloss)+Number(v.mobility)+Number(v.stress)+Number(v.neuro)+Number(v.bmi);
+      var b=s>=12?"Normal nutritional status":s>=8?"At risk of malnutrition":"Malnourished";
+      return { v:s, u:"/14", i:b+". Ref: Rubenstein, J Gerontol 2001 (MNA-SF)." };
+    } },
+
+  { id:"absolute_retic", cat:"Haematology", icon:"🩸", title:"Absolute Reticulocyte Count",
+    desc:"Converts a reticulocyte percentage to an absolute count.",
+    inputs:[
+      { id:"retic", label:"Reticulocyte percentage", type:"number", unit:"%", step:"0.1" },
+      { id:"rbc", label:"Red cell count", type:"number", unit:"×10¹²/L", step:"0.01" }
+    ],
+    compute:function(v){
+      if(!ok(v.retic)||!ok(v.rbc)||v.retic<0||v.rbc<0) return ERR;
+      var arc=v.retic/100*v.rbc*1000;
+      var b=arc>100?"Elevated — active erythropoiesis (haemolysis, blood loss, treatment response)":arc<25?"Low — inadequate marrow response":"Within the usual range";
+      return { v:r0(arc), u:"×10⁹/L", i:b+". Ref: standard haematology." };
+    } },
+
+  { id:"uacr", cat:"Renal", icon:"🫘", title:"Urine Albumin-to-Creatinine Ratio (uACR)",
+    desc:"Screens for and quantifies albuminuria.",
+    inputs:[
+      { id:"alb", label:"Urine albumin", type:"number", unit:"mg/L", step:"0.1" },
+      { id:"cr", label:"Urine creatinine", type:"number", unit:"mmol/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.alb)||!ok(v.cr)||v.cr<=0||v.alb<0) return ERR;
+      var acr=v.alb/v.cr;
+      var b=acr<3?"A1 — normal to mildly increased":acr<=30?"A2 — moderately increased (microalbuminuria)":"A3 — severely increased (macroalbuminuria)";
+      return { v:r1(acr), u:"mg/mmol", i:b+" (KDIGO albuminuria category). Ref: KDIGO CKD guideline." };
+    } },
+
+  { id:"upcr", cat:"Renal", icon:"🫘", title:"Urine Protein-to-Creatinine Ratio (uPCR)",
+    desc:"Quantifies proteinuria from a spot urine sample.",
+    inputs:[
+      { id:"prot", label:"Urine protein", type:"number", unit:"mg/L", step:"1" },
+      { id:"cr", label:"Urine creatinine", type:"number", unit:"mmol/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.prot)||!ok(v.cr)||v.cr<=0||v.prot<0) return ERR;
+      var pcr=v.prot/v.cr;
+      var b=pcr<15?"Normal-range":pcr<100?"Mild-to-moderate proteinuria":pcr<300?"Heavy proteinuria":"Nephrotic-range proteinuria";
+      return { v:r1(pcr), u:"mg/mmol", i:b+" (nephrotic range roughly ≥ 300 mg/mmol). Ref: standard nephrology." };
     } }
 
   ];
@@ -4624,7 +4704,12 @@
     basfi:["basfi","ankylosing spondylitis function","axial spondyloarthritis function"],
     ballard:["ballard score","new ballard","gestational age estimate","neonatal maturity"],
     burn_tbsa:["rule of nines","burn surface area","tbsa","total body surface area burn","wallace"],
-    amts:["abbreviated mental test","amts","amt10","cognitive screen elderly","hodkinson"]
+    amts:["abbreviated mental test","amts","amt10","cognitive screen elderly","hodkinson"],
+    hama:["hamilton anxiety","ham-a","hars","anxiety rating scale"],
+    mna_sf:["mini nutritional assessment","mna-sf","mna","nutrition screen elderly"],
+    absolute_retic:["absolute reticulocyte count","arc","reticulocyte number"],
+    uacr:["urine albumin creatinine ratio","uacr","acr","albuminuria","microalbuminuria"],
+    upcr:["urine protein creatinine ratio","upcr","pcr","proteinuria","spot protein"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -4824,7 +4909,12 @@
     basfi:"Calin A, et al. J Rheumatol 1994;21(12):2281–5 (BASFI).",
     ballard:"Ballard JL, et al. J Pediatr 1991;119(3):417–23 (New Ballard Score).",
     burn_tbsa:"Wallace AB. Lancet 1951 (rule of nines).",
-    amts:"Hodkinson HM. Age Ageing 1972;1(4):233–8 (AMTS)."
+    amts:"Hodkinson HM. Age Ageing 1972;1(4):233–8 (AMTS).",
+    hama:"Hamilton M. Br J Med Psychol 1959;32(1):50–5 (HAM-A).",
+    mna_sf:"Rubenstein LZ, et al. J Gerontol A Biol Sci Med Sci 2001;56(6):M366–72.",
+    absolute_retic:"Standard haematology reference (retic% × RBC).",
+    uacr:"KDIGO 2012 CKD guideline (albuminuria categories).",
+    upcr:"Standard nephrology reference (spot protein:creatinine ratio)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
