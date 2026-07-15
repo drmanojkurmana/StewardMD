@@ -3771,6 +3771,152 @@
       var c=v.ag+0.25*(40-v.alb);
       var b=c>16?"Raised corrected anion gap — investigate for a high anion gap acidosis":"Corrected anion gap not raised";
       return { v:r1(c), u:"mmol/L", i:b+" (adds ~0.25 mmol/L per g/L of albumin below 40). Ref: Figge, 1998." };
+    } },
+
+  { id:"caprini", cat:"Cardiovascular", icon:"🩸", title:"Caprini VTE Risk Score (2005)",
+    desc:"Venous thromboembolism risk in surgical and medical patients.",
+    inputs:[
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"≤ 40"},{v:"1",t:"41–60"},{v:"2",t:"61–74"},{v:"3",t:"≥ 75"}] },
+      { id:"minor_surgery", label:"Minor surgery", type:"check" },
+      { id:"bmi25", label:"BMI > 25", type:"check" },
+      { id:"swollen_legs", label:"Swollen legs", type:"check" },
+      { id:"varicose", label:"Varicose veins", type:"check" },
+      { id:"sepsis", label:"Sepsis (< 1 month)", type:"check" },
+      { id:"lung", label:"Serious lung disease / pneumonia (< 1 month)", type:"check" },
+      { id:"pft", label:"Abnormal pulmonary function (COPD)", type:"check" },
+      { id:"mi", label:"Acute myocardial infarction", type:"check" },
+      { id:"chf", label:"Congestive heart failure (< 1 month)", type:"check" },
+      { id:"ibd", label:"History of inflammatory bowel disease", type:"check" },
+      { id:"bedrest", label:"Medical patient on bed rest", type:"check" },
+      { id:"ocp", label:"Oral contraceptives or HRT", type:"check" },
+      { id:"pregnancy", label:"Pregnancy or postpartum (< 1 month)", type:"check" },
+      { id:"miscarriage", label:"History of unexplained / recurrent miscarriage", type:"check" },
+      { id:"arthroscopic", label:"Arthroscopic surgery", type:"check" },
+      { id:"major_surgery", label:"Major open surgery > 45 min", type:"check" },
+      { id:"laparoscopic", label:"Laparoscopic surgery > 45 min", type:"check" },
+      { id:"malignancy", label:"Malignancy (present or previous)", type:"check" },
+      { id:"bedrest72", label:"Confined to bed > 72 h", type:"check" },
+      { id:"cast", label:"Immobilising plaster cast (< 1 month)", type:"check" },
+      { id:"cvc", label:"Central venous access", type:"check" },
+      { id:"hx_vte", label:"History of VTE", type:"check" },
+      { id:"fhx_vte", label:"Family history of VTE", type:"check" },
+      { id:"fvl", label:"Factor V Leiden", type:"check" },
+      { id:"pt20210", label:"Prothrombin 20210A", type:"check" },
+      { id:"lupus_ac", label:"Lupus anticoagulant", type:"check" },
+      { id:"acl", label:"Anticardiolipin antibodies", type:"check" },
+      { id:"homocysteine", label:"Elevated serum homocysteine", type:"check" },
+      { id:"hit", label:"Heparin-induced thrombocytopenia", type:"check" },
+      { id:"thrombophilia", label:"Other congenital/acquired thrombophilia", type:"check" },
+      { id:"stroke", label:"Stroke (< 1 month)", type:"check" },
+      { id:"arthroplasty", label:"Elective major lower-limb arthroplasty", type:"check" },
+      { id:"fracture", label:"Hip, pelvis or leg fracture", type:"check" },
+      { id:"sci", label:"Acute spinal cord injury (< 1 month)", type:"check" }
+    ],
+    compute:function(v){
+      var s=Number(v.age);
+      ["minor_surgery","bmi25","swollen_legs","varicose","sepsis","lung","pft","mi","chf","ibd","bedrest","ocp","pregnancy","miscarriage"].forEach(function(k){ if(v[k])s+=1; });
+      ["arthroscopic","major_surgery","laparoscopic","malignancy","bedrest72","cast","cvc"].forEach(function(k){ if(v[k])s+=2; });
+      ["hx_vte","fhx_vte","fvl","pt20210","lupus_ac","acl","homocysteine","hit","thrombophilia"].forEach(function(k){ if(v[k])s+=3; });
+      ["stroke","arthroplasty","fracture","sci"].forEach(function(k){ if(v[k])s+=5; });
+      var b=s===0?"Lowest risk":s<=2?"Low risk":s<=4?"Moderate risk":"High risk — pharmacological prophylaxis usually indicated";
+      return { v:s, u:"points", i:b+" (weigh against bleeding risk). Ref: Caprini, Dis Mon 2005." };
+    } },
+
+  { id:"ldl_friedewald", cat:"Cardiovascular", icon:"❤️", title:"LDL Cholesterol (Friedewald)",
+    desc:"Estimates LDL cholesterol from a fasting lipid profile.",
+    inputs:[
+      { id:"tc", label:"Total cholesterol", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"hdl", label:"HDL cholesterol", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"tg", label:"Triglycerides", type:"number", unit:"mmol/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.tc)||!ok(v.hdl)||!ok(v.tg)||v.tc<0||v.hdl<0||v.tg<0) return ERR;
+      if(v.tg>4.5) return { err:"Not valid when triglycerides exceed ~4.5 mmol/L — measure LDL directly" };
+      var ldl=v.tc-v.hdl-v.tg/2.2;
+      if(ldl<0) return { err:"Calculation gives a negative value — check inputs or measure directly" };
+      return { v:r1(ldl), u:"mmol/L", i:"Estimated LDL cholesterol (Friedewald); invalid in non-fasting samples or high triglycerides. Ref: Friedewald 1972." };
+    } },
+
+  { id:"non_hdl", cat:"Cardiovascular", icon:"❤️", title:"Non-HDL Cholesterol",
+    desc:"Total minus HDL cholesterol; a lipid treatment target valid non-fasting.",
+    inputs:[
+      { id:"tc", label:"Total cholesterol", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"hdl", label:"HDL cholesterol", type:"number", unit:"mmol/L", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.tc)||!ok(v.hdl)||v.tc<0||v.hdl<0) return ERR;
+      var n=v.tc-v.hdl;
+      if(n<0) return { err:"HDL should not exceed total cholesterol" };
+      return { v:r1(n), u:"mmol/L", i:"Non-HDL cholesterol (valid in non-fasting samples); a target in lipid guidelines. Ref: standard lipidology." };
+    } },
+
+  { id:"blood_volume", cat:"General", icon:"🩸", title:"Estimated Blood Volume",
+    desc:"Total blood volume from weight and patient group.",
+    inputs:[
+      { id:"group", label:"Patient group", type:"select", opts:[{v:"75",t:"Adult male (75 mL/kg)"},{v:"65",t:"Adult female (65 mL/kg)"},{v:"80",t:"Child (80 mL/kg)"},{v:"85",t:"Infant (85 mL/kg)"},{v:"90",t:"Neonate (90 mL/kg)"},{v:"95",t:"Premature neonate (95 mL/kg)"}] },
+      { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.wt)||v.wt<=0) return ERR;
+      var vol=Number(v.group)*v.wt;
+      return { v:r0(vol), u:"mL", i:"Estimated total blood volume ("+Number(v.group)+" mL/kg). Useful for exchange transfusion and maximal allowable blood loss. Ref: standard reference." };
+    } },
+
+  { id:"femg", cat:"Renal", icon:"🫘", title:"Fractional Excretion of Magnesium (FEMg)",
+    desc:"Assesses renal magnesium handling in hypomagnesaemia.",
+    inputs:[
+      { id:"umg", label:"Urine magnesium", type:"number", unit:"mmol/L", step:"0.01" },
+      { id:"pcr", label:"Plasma creatinine", type:"number", unit:"µmol/L", step:"1" },
+      { id:"pmg", label:"Plasma magnesium", type:"number", unit:"mmol/L", step:"0.01" },
+      { id:"ucr", label:"Urine creatinine (same units as plasma)", type:"number", unit:"µmol/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.umg)||!ok(v.pcr)||!ok(v.pmg)||!ok(v.ucr)||v.pmg<=0||v.ucr<=0) return ERR;
+      var fe=(v.umg*v.pcr)/(0.7*v.pmg*v.ucr)*100;
+      var b=fe>4?"Elevated — suggests renal magnesium wasting":"Low — suggests appropriate renal conservation (extrarenal loss or low intake)";
+      return { v:r1(fe), u:"%", i:b+" (0.7 factor corrects for protein-bound magnesium; use consistent creatinine units). Ref: standard nephrology." };
+    } },
+
+  { id:"gad2", cat:"Psychiatry", icon:"🧠", title:"GAD-2 (Anxiety Screen)",
+    desc:"Ultra-brief screen for generalised anxiety over the past 2 weeks.",
+    inputs:[
+      { id:"q1", label:"Feeling nervous, anxious or on edge", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q2", label:"Not being able to stop or control worrying", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.q1)+Number(v.q2);
+      var b=s>=3?"Positive screen — consider GAD-7 and further assessment":"Negative screen";
+      return { v:s, u:"/6", i:b+". Ref: Kroenke, Ann Intern Med 2007 (GAD-2)." };
+    } },
+
+  { id:"fagerstrom", cat:"Psychiatry", icon:"🚬", title:"Fagerström Test for Nicotine Dependence",
+    desc:"Severity of physical nicotine dependence.",
+    inputs:[
+      { id:"time", label:"Time to first cigarette after waking", type:"select", opts:[{v:"3",t:"≤ 5 min"},{v:"2",t:"6–30 min"},{v:"1",t:"31–60 min"},{v:"0",t:"> 60 min"}] },
+      { id:"refrain", label:"Difficulty not smoking where it is forbidden", type:"select", opts:[{v:"1",t:"Yes"},{v:"0",t:"No"}] },
+      { id:"giveup", label:"Cigarette you would most hate to give up", type:"select", opts:[{v:"1",t:"The first in the morning"},{v:"0",t:"Any other"}] },
+      { id:"cpd", label:"Cigarettes per day", type:"select", opts:[{v:"0",t:"≤ 10"},{v:"1",t:"11–20"},{v:"2",t:"21–30"},{v:"3",t:"≥ 31"}] },
+      { id:"morning", label:"Smoke more during the first hours after waking", type:"select", opts:[{v:"1",t:"Yes"},{v:"0",t:"No"}] },
+      { id:"ill", label:"Smoke even when ill in bed", type:"select", opts:[{v:"1",t:"Yes"},{v:"0",t:"No"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.time)+Number(v.refrain)+Number(v.giveup)+Number(v.cpd)+Number(v.morning)+Number(v.ill);
+      var b=s<=2?"Very low dependence":s<=4?"Low dependence":s===5?"Medium dependence":s<=7?"High dependence":"Very high dependence";
+      return { v:s, u:"/10", i:b+". Ref: Heatherton, Br J Addict 1991 (FTND)." };
+    } },
+
+  { id:"qtcf", cat:"Cardiovascular", icon:"❤️", title:"Corrected QT — Fridericia (QTcF)",
+    desc:"Rate-corrected QT using the Fridericia (cube-root) formula.",
+    inputs:[
+      { id:"qt", label:"Measured QT interval", type:"number", unit:"ms", step:"1" },
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.qt)||!ok(v.hr)||v.qt<=0||v.hr<=0) return ERR;
+      var rr=60/v.hr;
+      var qtcf=v.qt/Math.pow(rr,1/3);
+      var b=qtcf>=500?"Markedly prolonged — high torsades risk":qtcf>=470?"Prolonged":"Within the usual range";
+      return { v:r0(qtcf), u:"ms", i:b+" (Fridericia; more reliable than Bazett at extremes of heart rate). Ref: Fridericia 1920." };
     } }
 
   ];
@@ -3976,7 +4122,15 @@
     bun_cr_ratio:["bun creatinine ratio","bun/cr","urea creatinine ratio","prerenal"],
     modified_shock_index:["modified shock index","msi","shock index map"],
     pulse_pressure:["pulse pressure","widened pulse pressure","narrow pulse pressure"],
-    corrected_anion_gap:["albumin corrected anion gap","corrected anion gap","albumin adjusted anion gap"]
+    corrected_anion_gap:["albumin corrected anion gap","corrected anion gap","albumin adjusted anion gap"],
+    caprini:["caprini score","vte risk surgical","venous thromboembolism risk","dvt prophylaxis risk"],
+    ldl_friedewald:["ldl cholesterol","friedewald","calculated ldl","ldl estimate"],
+    non_hdl:["non hdl cholesterol","non-hdl","atherogenic cholesterol"],
+    blood_volume:["estimated blood volume","total blood volume","ebv","allowable blood loss"],
+    femg:["fractional excretion of magnesium","femg","magnesium wasting","renal magnesium"],
+    gad2:["gad-2","gad2","anxiety screen","brief anxiety"],
+    fagerstrom:["fagerstrom","nicotine dependence","ftnd","smoking dependence"],
+    qtcf:["qtcf","fridericia","corrected qt fridericia","qt correction"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -4137,7 +4291,15 @@
     bun_cr_ratio:"Standard nephrology reference (BUN/creatinine ratio).",
     modified_shock_index:"Standard critical-care reference (HR/MAP).",
     pulse_pressure:"Standard cardiovascular physiology reference.",
-    corrected_anion_gap:"Figge J, et al. 1998 (albumin-corrected anion gap)."
+    corrected_anion_gap:"Figge J, et al. 1998 (albumin-corrected anion gap).",
+    caprini:"Caprini JA. Dis Mon 2005;51(2-3):70–8.",
+    ldl_friedewald:"Friedewald WT, et al. Clin Chem 1972;18(6):499–502.",
+    non_hdl:"Standard lipidology reference (total − HDL cholesterol).",
+    blood_volume:"Standard reference (weight-based blood volume estimation).",
+    femg:"Standard nephrology reference (fractional excretion of magnesium).",
+    gad2:"Kroenke K, et al. Ann Intern Med 2007;146(5):317–25 (GAD-2).",
+    fagerstrom:"Heatherton TF, et al. Br J Addict 1991;86(9):1119–27 (FTND).",
+    qtcf:"Fridericia LS. 1920 (cube-root QT correction)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
