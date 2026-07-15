@@ -4345,6 +4345,19 @@
       }, function () {});
     } catch (e) {}
   }
+  // "Hand over to next shift" → push the unit (incoming shift) that a handover is ready.
+  function grpNotifyHandover(gid, pid, sbar) {
+    try {
+      var text = (sbar && sbar[0] && sbar[0].body) || "Shift handover";   // the Situation line
+      idToken().then(function (tok) {
+        if (!tok) return;
+        fetch("/api/push/instruction", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, kind: "handover" }) })
+          .then(function (r) { return r.json(); })
+          .then(function (j) { if (window.toast && j && !j.sent && j.notified > 0) toast("Handover recorded — but no teammate is registered for push yet"); }, function () {})
+          .catch(function () {});
+      }, function () {});
+    } catch (e) {}
+  }
   // The Notifications screen in group mode — the LIVE smart feed (replaces the acuity-only stub).
   function renderV2AlertsGroup() {
     var rows = grpNotifRows(), seen = grpNotifSeen();
@@ -6047,13 +6060,16 @@
         break;
       }
       case "handovershift": {
-        if (grpActive() && _grpPtId) {
-          var _api2 = groupsApi();
-          if (_api2 && _api2.addTimelineEvent) {
-            var _detail = buildSBAR(_raw).map(function (x) { return x.label + ": " + x.body; }).join(" | ");
-            try { _api2.addTimelineEvent(_grp.id, _grpPtId, { type: "handover", title: "Shift handover", detail: _detail }).then(function () { if (window.toast) toast("Handover posted to the unit timeline"); }, function () { if (window.toast) toast("Couldn’t post handover — try again"); }); } catch (e) {}
-          }
-        } else if (window.toast) { toast("Turn on Group mode to hand over to the unit"); }
+        if (!grpActive() || !_grpPtId) { if (window.toast) toast("Open a shared (Group) patient to hand over to the unit"); break; }
+        var _api2 = groupsApi();
+        var _sb = buildSBAR(_raw), _detail = _sb.map(function (x) { return x.label + ": " + x.body; }).join(" | ");
+        // 1) record the full SBAR in the shared timeline (the incoming shift reads it there)
+        if (_api2 && _api2.addTimelineEvent) { try { _api2.addTimelineEvent(_grp.id, _grpPtId, { type: "handover", title: "Shift handover", detail: _detail }).then(null, function () {}); } catch (e) {} }
+        // 2) notify the unit (best-effort push to registered teammates = the incoming shift)
+        try { grpNotifyHandover(_grp.id, _grpPtId, _sb); } catch (e) {}
+        if (window.toast) toast("Handover posted to the unit timeline");
+        // 3) jump to Rounds so the handover entry is visible (so it clearly did something)
+        _active = "rounds"; _ws = wsOf("rounds"); _wsLast[_ws] = "rounds"; _tlAll = false; _paintTop = true; paint();
         break;
       }
       case "dischargecopy": copyDischarge(); break;

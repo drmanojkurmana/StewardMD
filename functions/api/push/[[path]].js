@@ -108,7 +108,7 @@ export async function onRequest(context) {
     const { gid, pid } = body;
     if (!gid || !pid) return json({ error: "bad-args" }, 400);
     if (!(await isGroupMember(env, gid, uid))) return json({ error: "not-a-member" }, 403);
-    const res = await notifyNewInstruction(env, gid, pid, uid, { text: body.text, priority: body.priority, count: body.count });
+    const res = await notifyNewInstruction(env, gid, pid, uid, { text: body.text, priority: body.priority, count: body.count, kind: body.kind });
     return json(res || { error: "failed" });
   }
   // Cron sweep (X-Admin-Token): scans ALL units for overdue tasks — covers the case where no member's
