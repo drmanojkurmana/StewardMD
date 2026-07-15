@@ -921,7 +921,7 @@
           '<button class="rnav-qa-btn" data-act="startcase" aria-label="Start a Case">' + ric("stethoscope") + '<span>Start Case</span></button>' +
           '<button class="rnav-qa-btn" data-act="reasoning" aria-label="Dx My Patient">' + ric("neurology") + '<span>Dx Patient</span></button>' +
           '<button class="rnav-qa-btn" data-act="interactions" aria-label="Medicines &amp; scan">' + ric("photo_camera") + '<span>Scan Meds</span></button>' +
-          '<button class="rnav-qa-btn" data-act="dictate" aria-label="Dictate">' + ric("mic") + '<span>Dictate</span></button>' +
+          '<button class="rnav-qa-btn" data-act="calculators" aria-label="Calculators">' + ric("calculate") + '<span>Calculators</span></button>' +
         '</div>' +
         '<section class="rnav-hero"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b style="color:#0a2320">MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
         '<div class="rnav-qrow">' +
@@ -932,7 +932,7 @@
         '</div>' +
         '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' +
         '<div class="rnav-grid">' +
-          rtile("calculators", "calculate", "Calculators", "70+ clinical tools") +
+          rtile("dictate", "mic", "Dictate", "Voice to text") +
           rtile("drugmenu", "medication", "Drugs &amp; Interactions", "Database · checker") +
           rtile("electrolytes", "science", "Electrolytes", "ICU correction") +
           rtile("guidelines", "book_2", "Guides", "Protocols &amp; references") +
