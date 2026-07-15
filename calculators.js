@@ -5785,6 +5785,170 @@
       var s=(Number(v.solid)||0)+(Number(v.liquid)||0)+(Number(v.gas)||0)+(Number(v.pad)||0)+(Number(v.lifestyle)||0);
       var b=s===0?"Perfect continence":s<=9?"Mild–moderate incontinence":s<=15?"Moderate–severe incontinence":"Severe incontinence";
       return { v:s, u:"/20", i:b+". Ref: Jorge JMN, Wexner SD. Dis Colon Rectum 1993." };
+    } },
+
+  { id:"qrs_axis", cat:"Cardiovascular", icon:"📈", title:"QRS Axis (Frontal Plane)",
+    desc:"Estimates the frontal-plane QRS axis from net deflections in leads I and aVF.",
+    inputs:[
+      { id:"lead1", label:"Net QRS in lead I (R minus S)", type:"number", unit:"mm", step:"0.5" },
+      { id:"avf", label:"Net QRS in lead aVF (R minus S)", type:"number", unit:"mm", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.lead1)||!ok(v.avf)) return ERR;
+      if(v.lead1===0&&v.avf===0) return { err:"Both leads isoelectric — axis indeterminate" };
+      var deg=Math.atan2(v.avf, v.lead1)*180/Math.PI;
+      var cls=(deg>=-30&&deg<=90)?"Normal axis":(deg<-30&&deg>=-90)?"Left axis deviation":(deg>90&&deg<=180)?"Right axis deviation":"Extreme axis (northwest)";
+      return { v:r0(deg), u:"°", i:cls+" (normal −30° to +90°). Ref: standard vectorcardiographic convention." };
+    } },
+
+  { id:"teichholz_ef", cat:"Cardiovascular", icon:"❤️", title:"LV Ejection Fraction (Teichholz)",
+    desc:"Estimates LVEF from M-mode/2D LV diameters.",
+    inputs:[
+      { id:"lvidd", label:"LV internal diameter, diastole", type:"number", unit:"cm", step:"0.1" },
+      { id:"lvids", label:"LV internal diameter, systole", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.lvidd)||!ok(v.lvids)||v.lvidd<=0||v.lvids<=0) return ERR;
+      if(v.lvids>=v.lvidd) return { err:"Systolic diameter must be smaller than diastolic diameter" };
+      var edv=7*Math.pow(v.lvidd,3)/(2.4+v.lvidd);
+      var esv=7*Math.pow(v.lvids,3)/(2.4+v.lvids);
+      var ef=(edv-esv)/edv*100;
+      var b=ef>=55?"Normal":ef>=45?"Mildly reduced":ef>=30?"Moderately reduced":"Severely reduced";
+      return { v:r0(ef), u:"%", i:b+" LV systolic function. Teichholz is unreliable with regional wall-motion abnormalities. Ref: Teichholz, Am J Cardiol 1976." };
+    } },
+
+  { id:"mpap", cat:"Cardiovascular", icon:"❤️", title:"Mean Pulmonary Artery Pressure",
+    desc:"Mean PA pressure from systolic and diastolic pulmonary pressures.",
+    inputs:[
+      { id:"spap", label:"Systolic PAP", type:"number", unit:"mmHg", step:"1" },
+      { id:"dpap", label:"Diastolic PAP", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.spap)||!ok(v.dpap)||v.spap<0||v.dpap<0) return ERR;
+      if(v.dpap>v.spap) return { err:"Diastolic pressure cannot exceed systolic pressure" };
+      var mpap=(v.spap+2*v.dpap)/3;
+      var b=mpap>20?"Elevated — meets the current haemodynamic threshold for pulmonary hypertension (>20 mmHg)":"Within normal limits";
+      return { v:r0(mpap), u:"mmHg", i:b+". Ref: standard formula; ESC/ERS 2022 pulmonary hypertension definition." };
+    } },
+
+  { id:"midas", cat:"Neurology", icon:"🧠", title:"MIDAS — migraine disability interpreter",
+    desc:"Interprets a MIDAS total (days lost over 3 months).",
+    inputs:[
+      { id:"total", label:"MIDAS total (sum of Q1–Q5, days)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=5?"Grade I — little or no disability":s<=10?"Grade II — mild disability":s<=20?"Grade III — moderate disability":"Grade IV — severe disability";
+      return { v:s, u:"days", i:b+". Ref: Stewart WF, et al. Neurology 2001 (MIDAS)." };
+    } },
+
+  { id:"isi", cat:"Psychiatry", icon:"🛌", title:"Insomnia Severity Index — interpreter",
+    desc:"Interprets an Insomnia Severity Index total.",
+    inputs:[
+      { id:"total", label:"ISI total (0–28)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>28) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=7?"No clinically significant insomnia":s<=14?"Subthreshold insomnia":s<=21?"Moderate clinical insomnia":"Severe clinical insomnia";
+      return { v:s, u:"/28", i:b+". Ref: Bastien CH, et al. Sleep Med 2001 (ISI)." };
+    } },
+
+  { id:"hit6", cat:"Neurology", icon:"🧠", title:"HIT-6 — headache impact interpreter",
+    desc:"Interprets a Headache Impact Test-6 total.",
+    inputs:[
+      { id:"total", label:"HIT-6 total (36–78)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<36||v.total>78) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=49?"Little or no impact":s<=55?"Some impact":s<=59?"Substantial impact":"Severe impact";
+      return { v:s, u:"/78", i:b+". HIT-6 is copyrighted (QualityMetric) — administer the official form. Ref: Kosinski M, et al. Qual Life Res 2003." };
+    } },
+
+  { id:"hads", cat:"Psychiatry", icon:"🧠", title:"HADS — score interpreter",
+    desc:"Interprets Hospital Anxiety and Depression Scale subscale totals.",
+    inputs:[
+      { id:"anx", label:"Anxiety subscale (0–21)", type:"number", step:"1" },
+      { id:"dep", label:"Depression subscale (0–21)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.anx)||!ok(v.dep)||v.anx<0||v.anx>21||v.dep<0||v.dep>21) return ERR;
+      function band(x){return x<=7?"normal":x<=10?"borderline":"abnormal (probable case)";}
+      return { v:Math.round(v.anx)+" / "+Math.round(v.dep), u:"A / D", i:"Anxiety "+Math.round(v.anx)+" — "+band(v.anx)+"; Depression "+Math.round(v.dep)+" — "+band(v.dep)+" (each subscale: 0–7 normal, 8–10 borderline, 11–21 case). Ref: Zigmond AS, Snaith RP. Acta Psychiatr Scand 1983." };
+    } },
+
+  { id:"womac", cat:"Musculoskeletal", icon:"🦴", title:"WOMAC — osteoarthritis index interpreter",
+    desc:"Interprets a total WOMAC (Likert 3.1) score for hip/knee osteoarthritis.",
+    inputs:[
+      { id:"total", label:"WOMAC total (0–96)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>96) return ERR;
+      var s=Math.round(v.total); var pct=s/96*100;
+      var b=pct<25?"Mild symptoms":pct<50?"Moderate symptoms":pct<75?"Severe symptoms":"Very severe symptoms";
+      return { v:s, u:"/96", i:b+" (~"+r0(pct)+"% of maximum; higher = worse). Subscales: pain 0–20, stiffness 0–8, function 0–68. Ref: Bellamy N, et al. J Rheumatol 1988 (WOMAC)." };
+    } },
+
+  { id:"zarit", cat:"Psychiatry", icon:"🧠", title:"Zarit Burden Interview — interpreter",
+    desc:"Interprets a Zarit caregiver-burden total.",
+    inputs:[
+      { id:"total", label:"Zarit total (0–88)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>88) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=20?"Little or no burden":s<=40?"Mild to moderate burden":s<=60?"Moderate to severe burden":"Severe burden";
+      return { v:s, u:"/88", i:b+". Ref: Zarit SH, et al. Gerontologist 1980 (22-item ZBI)." };
+    } },
+
+  { id:"pucai", cat:"Gastroenterology", icon:"👶", title:"PUCAI (Paediatric UC Activity Index)",
+    desc:"Disease activity in paediatric ulcerative colitis.",
+    inputs:[
+      { id:"pain", label:"Abdominal pain", type:"select", opts:[{v:"0",t:"None (0)"},{v:"5",t:"Can be ignored (5)"},{v:"10",t:"Cannot be ignored (10)"}] },
+      { id:"bleeding", label:"Rectal bleeding", type:"select", opts:[{v:"0",t:"None (0)"},{v:"10",t:"Small, <50% of stools (10)"},{v:"20",t:"Small, most stools (20)"},{v:"30",t:"Large, >50% of stool (30)"}] },
+      { id:"consistency", label:"Stool consistency (of most)", type:"select", opts:[{v:"0",t:"Formed (0)"},{v:"5",t:"Partially formed (5)"},{v:"10",t:"Completely unformed (10)"}] },
+      { id:"number", label:"Stools per 24 h", type:"select", opts:[{v:"0",t:"0–2 (0)"},{v:"5",t:"3–5 (5)"},{v:"10",t:"6–8 (10)"},{v:"15",t:">8 (15)"}] },
+      { id:"nocturnal", label:"Nocturnal stools (waking)", type:"select", opts:[{v:"0",t:"No (0)"},{v:"10",t:"Yes (10)"}] },
+      { id:"activity", label:"Activity level", type:"select", opts:[{v:"0",t:"No limitation (0)"},{v:"5",t:"Occasional limitation (5)"},{v:"10",t:"Severe restriction (10)"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.pain)||0)+(Number(v.bleeding)||0)+(Number(v.consistency)||0)+(Number(v.number)||0)+(Number(v.nocturnal)||0)+(Number(v.activity)||0);
+      var b=s<10?"Remission":s<=34?"Mild activity":s<=64?"Moderate activity":"Severe activity";
+      return { v:s, u:"/85", i:b+" (remission <10, mild 10–34, moderate 35–64, severe ≥65). Ref: Turner D, et al. Gastroenterology 2007 (PUCAI)." };
+    } },
+
+  { id:"braden_q", cat:"Paediatrics", icon:"👶", title:"Braden Q Scale (Paediatric Pressure Injury)",
+    desc:"Pressure-injury risk in paediatric patients (lower total = higher risk).",
+    inputs:[
+      { id:"mobility", label:"Mobility", type:"select", opts:[{v:"1",t:"Completely immobile (1)"},{v:"2",t:"Very limited (2)"},{v:"3",t:"Slightly limited (3)"},{v:"4",t:"No limitation (4)"}] },
+      { id:"activity", label:"Activity", type:"select", opts:[{v:"1",t:"Bedfast (1)"},{v:"2",t:"Chairfast (2)"},{v:"3",t:"Walks occasionally (3)"},{v:"4",t:"Walks frequently (4)"}] },
+      { id:"sensory", label:"Sensory perception", type:"select", opts:[{v:"1",t:"Completely limited (1)"},{v:"2",t:"Very limited (2)"},{v:"3",t:"Slightly limited (3)"},{v:"4",t:"No impairment (4)"}] },
+      { id:"moisture", label:"Moisture", type:"select", opts:[{v:"1",t:"Constantly moist (1)"},{v:"2",t:"Often moist (2)"},{v:"3",t:"Occasionally moist (3)"},{v:"4",t:"Rarely moist (4)"}] },
+      { id:"friction", label:"Friction & shear", type:"select", opts:[{v:"1",t:"Significant problem (1)"},{v:"2",t:"Problem (2)"},{v:"3",t:"Potential problem (3)"},{v:"4",t:"No apparent problem (4)"}] },
+      { id:"nutrition", label:"Nutrition", type:"select", opts:[{v:"1",t:"Very poor (1)"},{v:"2",t:"Inadequate (2)"},{v:"3",t:"Adequate (3)"},{v:"4",t:"Excellent (4)"}] },
+      { id:"perfusion", label:"Tissue perfusion & oxygenation", type:"select", opts:[{v:"1",t:"Extremely compromised (1)"},{v:"2",t:"Compromised (2)"},{v:"3",t:"Adequate (3)"},{v:"4",t:"Excellent (4)"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.mobility)||1)+(Number(v.activity)||1)+(Number(v.sensory)||1)+(Number(v.moisture)||1)+(Number(v.friction)||1)+(Number(v.nutrition)||1)+(Number(v.perfusion)||1);
+      var b=s<=16?"At risk of pressure injury (≤16) — institute prevention":"Lower risk";
+      return { v:s, u:"/28", i:b+" (lower total = higher risk). Ref: Curley MAQ, et al. Nurs Res 2003 (Braden Q)." };
+    } },
+
+  { id:"norton", cat:"General", icon:"🛏️", title:"Norton Pressure Sore Risk Scale",
+    desc:"Pressure-ulcer risk, mainly in elderly inpatients (lower total = higher risk).",
+    inputs:[
+      { id:"physical", label:"Physical condition", type:"select", opts:[{v:"1",t:"Very bad (1)"},{v:"2",t:"Poor (2)"},{v:"3",t:"Fair (3)"},{v:"4",t:"Good (4)"}] },
+      { id:"mental", label:"Mental condition", type:"select", opts:[{v:"1",t:"Stuporous (1)"},{v:"2",t:"Confused (2)"},{v:"3",t:"Apathetic (3)"},{v:"4",t:"Alert (4)"}] },
+      { id:"activity", label:"Activity", type:"select", opts:[{v:"1",t:"Bed (1)"},{v:"2",t:"Chairbound (2)"},{v:"3",t:"Walks with help (3)"},{v:"4",t:"Ambulant (4)"}] },
+      { id:"mobility", label:"Mobility", type:"select", opts:[{v:"1",t:"Immobile (1)"},{v:"2",t:"Very limited (2)"},{v:"3",t:"Slightly limited (3)"},{v:"4",t:"Full (4)"}] },
+      { id:"incontinence", label:"Incontinence", type:"select", opts:[{v:"1",t:"Doubly incontinent (1)"},{v:"2",t:"Usually urine (2)"},{v:"3",t:"Occasional (3)"},{v:"4",t:"None (4)"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.physical)||1)+(Number(v.mental)||1)+(Number(v.activity)||1)+(Number(v.mobility)||1)+(Number(v.incontinence)||1);
+      var b=s<=14?"At risk of pressure ulceration (≤14) — institute prevention":"Lower risk";
+      return { v:s, u:"/20", i:b+" (≤14 at risk, ≤12 high risk). Ref: Norton D, et al. 1962." };
     } }
 
   ];
@@ -6126,7 +6290,19 @@
     ymrs:["ymrs","young mania rating","mania scale","bipolar mania"],
     odi:["oswestry","odi","low back disability","back pain disability"],
     ndi:["neck disability index","ndi","neck pain disability"],
-    wexner:["wexner","faecal incontinence","cleveland clinic incontinence","fecal incontinence"]
+    wexner:["wexner","faecal incontinence","cleveland clinic incontinence","fecal incontinence"],
+    qrs_axis:["qrs axis","frontal axis","ecg axis","left axis deviation","right axis deviation"],
+    teichholz_ef:["teichholz","ejection fraction","lvef","ef from diameters","fractional shortening ef"],
+    mpap:["mean pulmonary artery pressure","mpap","pulmonary hypertension","pa pressure"],
+    midas:["midas","migraine disability","headache disability"],
+    isi:["insomnia severity index","isi","insomnia","sleep"],
+    hit6:["hit-6","headache impact test","migraine impact"],
+    hads:["hads","hospital anxiety depression","anxiety depression scale"],
+    womac:["womac","osteoarthritis index","hip knee oa","arthritis function"],
+    zarit:["zarit","caregiver burden","carer burden","zbi"],
+    pucai:["pucai","paediatric ulcerative colitis","pediatric uc activity"],
+    braden_q:["braden q","paediatric pressure injury","pressure ulcer children"],
+    norton:["norton scale","pressure sore risk","pressure ulcer risk"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -6423,7 +6599,19 @@
     ymrs:"Young RC, et al. Br J Psychiatry 1978;133:429–35 (YMRS).",
     odi:"Fairbank JCT, Pynsent PB. Spine 2000;25(22):2940–52 (ODI).",
     ndi:"Vernon H, Mior S. J Manipulative Physiol Ther 1991;14(7):409–15 (NDI).",
-    wexner:"Jorge JMN, Wexner SD. Dis Colon Rectum 1993;36(1):77–97."
+    wexner:"Jorge JMN, Wexner SD. Dis Colon Rectum 1993;36(1):77–97.",
+    qrs_axis:"Standard vectorcardiographic convention (frontal-plane axis from leads I and aVF).",
+    teichholz_ef:"Teichholz LE, et al. Am J Cardiol 1976;37(1):7–11.",
+    mpap:"Standard formula ((SPAP + 2·DPAP)/3); ESC/ERS 2022 pulmonary hypertension guideline.",
+    midas:"Stewart WF, et al. Neurology 2001;56(6 Suppl 1):S20–8 (MIDAS).",
+    isi:"Bastien CH, et al. Sleep Med 2001;2(4):297–307 (ISI).",
+    hit6:"Kosinski M, et al. Qual Life Res 2003;12(8):963–74 (HIT-6; © QualityMetric).",
+    hads:"Zigmond AS, Snaith RP. Acta Psychiatr Scand 1983;67(6):361–70 (HADS).",
+    womac:"Bellamy N, et al. J Rheumatol 1988;15(12):1833–40 (WOMAC).",
+    zarit:"Zarit SH, et al. Gerontologist 1980;20(6):649–55 (ZBI).",
+    pucai:"Turner D, et al. Gastroenterology 2007;133(2):423–32 (PUCAI).",
+    braden_q:"Curley MAQ, et al. Nurs Res 2003;52(1):22–33 (Braden Q).",
+    norton:"Norton D, McLaren R, Exton-Smith AN. 1962 (Norton scale)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
