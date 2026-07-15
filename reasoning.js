@@ -2293,6 +2293,7 @@
           mm.map(esc).join(", ") + '.</div></div>';
       })() +
       (tools.length ? '<div class="dx-d-row"><b>Related bedside tools</b><div class="dx-tools">' + tools.map(function (t){return '<button class="dx-tool" data-tool="'+t+'">'+esc(TOOLREG[t].icon+" "+TOOLREG[t].label)+'</button>';}).join("") + '</div></div>' : '') +
+      scoreChipsBlock(r) +
       harrisonRef(r.id) +
       '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>' +
       '</div>';
@@ -2664,6 +2665,7 @@
                    : (r.reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(r.reason) + '</p>' : '')) +
         (tx ? '<div class="dx-mgmt-sec tx">💊 Management / Treatment</div><ol class="dx-mgmt-tx">' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
             : '<div class="dx-mgmt-sec">Management</div><p>Specialist-guided management — see the investigations and red flags below and consult full guidelines.</p>') +
+        scoreChipsBlock(r) +
         (ix && ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
         (m && m.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(m.dispo) + '</p>' : '') +
         (r.red && r.red.length ? '<div class="dx-mgmt-sec red">Red flags</div><ul class="dx-mgmt-ul">' + r.red.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
@@ -2789,6 +2791,25 @@
   /* ---------------------------------------------------------------------- *
    * STYLES + launch
    * ---------------------------------------------------------------------- */
+  // Relevant-score suggestion chips for a diagnosis (Feature A; uses window.CALC_LINKS).
+  function scoreChipsBlock(r) {
+    try {
+      if (!window.CALC_LINKS) return "";
+      var ids = CALC_LINKS.forDisease(r && r.id, r && r.name);
+      return CALC_LINKS.chipsHTML(ids);
+    } catch (e) { return ""; }
+  }
+  function wireScoreChips() {
+    if (window.__clScoreWired) return;
+    window.__clScoreWired = true;
+    document.addEventListener("click", function (e) {
+      var b = e.target && e.target.closest && e.target.closest("button.cl-chip[data-calc]");
+      if (!b) return;
+      var id = b.getAttribute("data-calc");
+      try { if (window.SB && SB.calc) SB.calc(id); else if (window.MEDCALC) MEDCALC.open(id); } catch (err) {}
+    });
+  }
+
   function injectCSS() {
     var css = [
       ".dx-imported{margin:0 0 4px}.dx-imp-wrap{border:1px solid var(--teal,#0e6e63);border-radius:12px;padding:12px;margin:8px 0;background:var(--teal-soft,#e3f1ee)}",
@@ -2914,6 +2935,11 @@
       ".dx-f.mis{background:var(--paper);border:1px dashed var(--line);color:var(--slate-soft)}",
       ".dx-tools{display:flex;flex-direction:column;gap:6px}",
       ".dx-tool{text-align:left;background:var(--teal-soft);border:1px solid var(--teal);color:var(--teal);border-radius:9px;padding:9px 11px;font:700 12.5px var(--sans);cursor:pointer}",
+      ".cl-scores{margin-top:10px}",
+      ".cl-scores-h{font-size:12px;font-weight:600;opacity:.7;margin-bottom:6px}",
+      ".cl-scores-row{display:flex;flex-wrap:wrap;gap:6px}",
+      ".cl-chip{font:inherit;font-size:12px;padding:5px 10px;border:1px solid var(--line,#e5e5e0);border-radius:14px;background:var(--panel,#fff);color:inherit;cursor:pointer}",
+      ".cl-chip:active{transform:scale(.97)}",
       ".dx-tool:hover{background:var(--teal);color:#fff}",
       ".dx-none{color:var(--slate-soft);font-size:12px}",
       ".dx-select{margin-top:13px;width:100%;border:none;border-radius:10px;padding:11px;font:800 13px var(--sans);cursor:pointer;color:#fff}",
@@ -3007,7 +3033,7 @@
     b.addEventListener("click", open);
     actions.insertBefore(b, actions.firstChild);
   }
-  function init() { injectCSS(); injectLaunch(); }
+  function init() { injectCSS(); injectLaunch(); wireScoreChips(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
@@ -4452,6 +4478,7 @@
       (syn.reason ? '<div class="card"><div class="simple-section-label">Why this</div><p>' + esc(syn.reason) + '</p></div>' : '') +
       (tx ? '<div class="card"><div class="simple-section-label">💊 Management / Treatment</div><ol>' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol></div>'
           : '<div class="card"><div class="simple-section-label">Management</div><p>Specialist-guided, non-antibiotic management — see the investigations, red flags and Harrison reference below and consult full guidelines.</p></div>') +
+      (function () { var b = scoreChipsBlock(syn); return b ? '<div class="card">' + b + '</div>' : ''; })() +
       (ix && ix.length ? '<div class="card"><div class="simple-section-label">Key investigations</div>' + li(ix, 8) + '</div>' : '') +
       (syn.red && syn.red.length ? '<div class="card"><div class="simple-section-label">Red flags</div>' + li(syn.red, 8) + '</div>' : '') +
       (harrisonRef(syn.id, { expanded: true }) ? '<div class="card">' + harrisonRef(syn.id, { expanded: true }) + '</div>' : '') +
