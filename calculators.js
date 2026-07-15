@@ -5609,6 +5609,182 @@
       var s=0; if(v.heavy)s+=2; if(v.htn)s++; if(v.af)s+=3; if(v.ph)s++; if(v.elder)s++; if(v.filling)s++;
       var b=s<=1?"Low probability of HFpEF":s<=5?"Intermediate probability — consider further testing":"High probability of HFpEF";
       return { v:s, u:"/9", i:b+". Ref: Reddy, Circulation 2018 (H₂FPEF)." };
+    } },
+
+  { id:"atria_bleed", cat:"Cardiovascular", icon:"🩸", title:"ATRIA Bleeding Risk (AF)",
+    desc:"Major-haemorrhage risk on anticoagulation for atrial fibrillation.",
+    inputs:[
+      { id:"anaemia", label:"Anaemia (Hb <13 g/dL men, <12 women) (+3)", type:"check" },
+      { id:"renal", label:"Severe renal disease (eGFR <30 or dialysis) (+3)", type:"check" },
+      { id:"age75", label:"Age ≥75 (+2)", type:"check" },
+      { id:"bleed", label:"Prior haemorrhage (+1)", type:"check" },
+      { id:"htn", label:"Hypertension (+1)", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.anaemia)s+=3; if(v.renal)s+=3; if(v.age75)s+=2; if(v.bleed)s++; if(v.htn)s++;
+      var b=s<=3?"Low risk (~0.8%/yr major bleeding)":s===4?"Intermediate risk (~2.6%/yr)":"High risk (~5.8%/yr)";
+      return { v:s, u:"/10", i:b+". Ref: Fang, J Am Coll Cardiol 2011 (ATRIA)." };
+    } },
+
+  { id:"edacs", cat:"Cardiovascular", icon:"🫀", title:"EDACS (ED Chest Pain Score)",
+    desc:"Emergency Department Assessment of Chest pain Score for risk stratification.",
+    inputs:[
+      { id:"age", label:"Age band", type:"select", opts:[{v:"2",t:"18–45 (+2)"},{v:"4",t:"46–50 (+4)"},{v:"6",t:"51–55 (+6)"},{v:"8",t:"56–60 (+8)"},{v:"10",t:"61–65 (+10)"},{v:"12",t:"66–70 (+12)"},{v:"14",t:"71–75 (+14)"},{v:"16",t:"76–80 (+16)"},{v:"18",t:"81–85 (+18)"},{v:"20",t:"≥86 (+20)"}] },
+      { id:"male", label:"Male sex (+6)", type:"check" },
+      { id:"riskyoung", label:"Age 18–50 with known CAD or ≥3 risk factors (+4)", type:"check" },
+      { id:"diaphoresis", label:"Diaphoresis (+3)", type:"check" },
+      { id:"radiates", label:"Pain radiates to arm/shoulder/neck/jaw (+5)", type:"check" },
+      { id:"inspiration", label:"Pain occurred/worsened with inspiration (−4)", type:"check" },
+      { id:"palpation", label:"Pain reproduced by palpation (−6)", type:"check" }
+    ],
+    compute:function(v){
+      var s=Number(v.age)||0;
+      if(v.male)s+=6; if(v.riskyoung)s+=4; if(v.diaphoresis)s+=3; if(v.radiates)s+=5; if(v.inspiration)s-=4; if(v.palpation)s-=6;
+      var b=s<16?"Low risk (EDACS <16) — with a non-ischaemic ECG and negative troponins, a low-risk pathway may apply":"Not low risk (EDACS ≥16) — further assessment indicated";
+      return { v:s, u:"points", i:b+". Ref: Than, Emerg Med Australas 2014 (EDACS)." };
+    } },
+
+  { id:"years_pe", cat:"Respiratory", icon:"🫁", title:"YEARS Algorithm (Pulmonary Embolism)",
+    desc:"Simplified diagnostic algorithm to rule out pulmonary embolism.",
+    inputs:[
+      { id:"dvt", label:"Clinical signs of DVT", type:"check" },
+      { id:"haemoptysis", label:"Haemoptysis", type:"check" },
+      { id:"pemostlikely", label:"PE is the most likely diagnosis", type:"check" },
+      { id:"ddimer", label:"D-dimer", type:"number", unit:"ng/mL (FEU)", step:"10" }
+    ],
+    compute:function(v){
+      if(!ok(v.ddimer)||v.ddimer<0) return ERR;
+      var items=(v.dvt?1:0)+(v.haemoptysis?1:0)+(v.pemostlikely?1:0);
+      var threshold = items===0 ? 1000 : 500;
+      var excluded = v.ddimer < threshold;
+      var b = excluded ? "PE considered excluded — D-dimer below the applicable threshold ("+threshold+" ng/mL for "+items+" YEARS item"+(items===1?"":"s")+")" : "PE not excluded — CT pulmonary angiography indicated (D-dimer ≥ "+threshold+" ng/mL)";
+      return { v:(excluded?"PE excluded":"CTPA indicated"), u:"", i:b+". Use an FEU-calibrated D-dimer; not validated in haemodynamic instability. Ref: van der Hulle, Lancet 2017 (YEARS)." };
+    } },
+
+  { id:"thrive", cat:"Neurology", icon:"🧠", title:"THRIVE Score (Stroke Outcome)",
+    desc:"Predicts outcome and mortality after acute ischaemic stroke.",
+    inputs:[
+      { id:"nihss", label:"NIHSS", type:"select", opts:[{v:"0",t:"0–10 (0)"},{v:"2",t:"11–20 (+2)"},{v:"4",t:"≥21 (+4)"}] },
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"≤59 (0)"},{v:"1",t:"60–79 (+1)"},{v:"2",t:"≥80 (+2)"}] },
+      { id:"htn", label:"Hypertension (+1)", type:"check" },
+      { id:"dm", label:"Diabetes mellitus (+1)", type:"check" },
+      { id:"af", label:"Atrial fibrillation (+1)", type:"check" }
+    ],
+    compute:function(v){
+      var s=(Number(v.nihss)||0)+(Number(v.age)||0); if(v.htn)s++; if(v.dm)s++; if(v.af)s++;
+      var b=s<=2?"Lower risk — better chance of good outcome":s<=4?"Intermediate":"Higher risk — greater mortality and disability";
+      return { v:s, u:"/9", i:b+". Ref: Flint AC, et al. (THRIVE)." };
+    } },
+
+  { id:"stone_score", cat:"Renal", icon:"🪨", title:"STONE Score (Ureteric Stone)",
+    desc:"Predicts uncomplicated ureteric stone in patients with flank pain.",
+    inputs:[
+      { id:"male", label:"Male sex (+2)", type:"check" },
+      { id:"timing", label:"Duration of pain", type:"select", opts:[{v:"3",t:"<6 h (+3)"},{v:"1",t:"6–24 h (+1)"},{v:"0",t:">24 h (0)"}] },
+      { id:"nonblack", label:"Non-black race/ethnicity (+3)", type:"check" },
+      { id:"nausea", label:"Nausea / vomiting", type:"select", opts:[{v:"0",t:"None (0)"},{v:"1",t:"Nausea alone (+1)"},{v:"2",t:"Vomiting (+2)"}] },
+      { id:"haematuria", label:"Microscopic haematuria (+3)", type:"check" }
+    ],
+    compute:function(v){
+      var s=(Number(v.timing)||0)+(Number(v.nausea)||0); if(v.male)s+=2; if(v.nonblack)s+=3; if(v.haematuria)s+=3;
+      var b=s<=5?"Low probability of ureteric stone":s<=9?"Moderate probability":"High probability of ureteric stone";
+      return { v:s, u:"/13", i:b+". Ref: Moore CL, et al. BMJ 2014 (STONE score)." };
+    } },
+
+  { id:"nexus_chest", cat:"Respiratory", icon:"🫁", title:"NEXUS Chest (Blunt Trauma Imaging)",
+    desc:"Identifies blunt-trauma patients at very low risk of thoracic injury.",
+    inputs:[
+      { id:"age60", label:"Age >60", type:"check" },
+      { id:"decel", label:"Rapid deceleration (fall >6 m or MVC >64 km/h)", type:"check" },
+      { id:"chestpain", label:"Chest pain", type:"check" },
+      { id:"intox", label:"Intoxication", type:"check" },
+      { id:"ams", label:"Altered alertness / mental status", type:"check" },
+      { id:"distracting", label:"Distracting painful injury", type:"check" },
+      { id:"tenderness", label:"Chest-wall tenderness", type:"check" }
+    ],
+    compute:function(v){
+      var any=v.age60||v.decel||v.chestpain||v.intox||v.ams||v.distracting||v.tenderness;
+      var b=any?"NOT very low risk — a criterion is present; chest imaging may be indicated":"Very low risk of thoracic injury — imaging can reasonably be deferred";
+      return { v:(any?"Imaging may be indicated":"Very low risk"), u:"", i:b+". Applies to blunt trauma; use with clinical judgement. Ref: Rodriguez RM, et al. PLoS Med 2015 (NEXUS Chest)." };
+    } },
+
+  { id:"hsi", cat:"Hepatology", icon:"🫀", title:"Hepatic Steatosis Index (HSI)",
+    desc:"Screening index for non-alcoholic fatty liver disease.",
+    inputs:[
+      { id:"alt", label:"ALT", type:"number", unit:"U/L", step:"1" },
+      { id:"ast", label:"AST", type:"number", unit:"U/L", step:"1" },
+      { id:"bmi", label:"BMI", type:"number", unit:"kg/m²", step:"0.1" },
+      { id:"female", label:"Female sex", type:"check" },
+      { id:"dm", label:"Diabetes mellitus", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.alt)||!ok(v.ast)||!ok(v.bmi)||v.alt<=0||v.ast<=0||v.bmi<=0) return ERR;
+      var hsi=8*(v.alt/v.ast)+v.bmi+(v.female?2:0)+(v.dm?2:0);
+      var b=hsi<30?"NAFLD unlikely (HSI <30)":hsi>36?"NAFLD likely (HSI >36)":"Indeterminate (HSI 30–36)";
+      return { v:r1(hsi), u:"", i:b+". Ref: Lee JH, et al. Dig Liver Dis 2010 (HSI)." };
+    } },
+
+  { id:"ybocs", cat:"Psychiatry", icon:"🧠", title:"Y-BOCS — score interpreter",
+    desc:"Interprets a Yale-Brown Obsessive Compulsive Scale total.",
+    inputs:[
+      { id:"total", label:"Y-BOCS total (0–40)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>40) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=7?"Subclinical":s<=15?"Mild":s<=23?"Moderate":s<=31?"Severe":"Extreme";
+      return { v:s, u:"/40", i:b+" OCD symptom severity. Administer the full clinician-rated scale. Ref: Goodman WK, et al. Arch Gen Psychiatry 1989." };
+    } },
+
+  { id:"ymrs", cat:"Psychiatry", icon:"🧠", title:"YMRS — score interpreter",
+    desc:"Interprets a Young Mania Rating Scale total.",
+    inputs:[
+      { id:"total", label:"YMRS total (0–60)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>60) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=12?"Remission / euthymic range":s<=20?"Mild manic symptoms":s<=30?"Moderate mania":"Severe mania";
+      return { v:s, u:"/60", i:b+". Thresholds vary between studies; administer the full clinician-rated scale. Ref: Young RC, et al. Br J Psychiatry 1978 (YMRS)." };
+    } },
+
+  { id:"odi", cat:"Musculoskeletal", icon:"🦴", title:"Oswestry Disability Index — interpreter",
+    desc:"Interprets an Oswestry Disability Index percentage for low-back disability.",
+    inputs:[
+      { id:"pct", label:"ODI (%)", type:"number", unit:"%", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.pct)||v.pct<0||v.pct>100) return ERR;
+      var s=Math.round(v.pct);
+      var b=s<=20?"Minimal disability":s<=40?"Moderate disability":s<=60?"Severe disability":s<=80?"Crippled — back pain impinges on all aspects of life":"Bed-bound or symptom magnification — reassess";
+      return { v:s, u:"%", i:b+". Ref: Fairbank JCT, et al. (ODI)." };
+    } },
+
+  { id:"ndi", cat:"Musculoskeletal", icon:"🦴", title:"Neck Disability Index — interpreter",
+    desc:"Interprets a Neck Disability Index total for neck-related disability.",
+    inputs:[
+      { id:"total", label:"NDI total (0–50)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>50) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=4?"No disability":s<=14?"Mild disability":s<=24?"Moderate disability":s<=34?"Severe disability":"Complete disability";
+      return { v:s, u:"/50", i:b+" ("+(s*2)+"%). Ref: Vernon H, Mior S. J Manipulative Physiol Ther 1991 (NDI)." };
+    } },
+
+  { id:"wexner", cat:"Gastroenterology", icon:"🚽", title:"Wexner Faecal Incontinence Score",
+    desc:"Cleveland Clinic score for severity of faecal incontinence.",
+    inputs:[
+      { id:"solid", label:"Incontinence to solid stool", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely, <1/month (1)"},{v:"2",t:"Sometimes, <1/week (2)"},{v:"3",t:"Usually, <1/day (3)"},{v:"4",t:"Always, ≥1/day (4)"}] },
+      { id:"liquid", label:"Incontinence to liquid stool", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely (1)"},{v:"2",t:"Sometimes (2)"},{v:"3",t:"Usually (3)"},{v:"4",t:"Always (4)"}] },
+      { id:"gas", label:"Incontinence to gas", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely (1)"},{v:"2",t:"Sometimes (2)"},{v:"3",t:"Usually (3)"},{v:"4",t:"Always (4)"}] },
+      { id:"pad", label:"Wears a pad", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely (1)"},{v:"2",t:"Sometimes (2)"},{v:"3",t:"Usually (3)"},{v:"4",t:"Always (4)"}] },
+      { id:"lifestyle", label:"Lifestyle alteration", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely (1)"},{v:"2",t:"Sometimes (2)"},{v:"3",t:"Usually (3)"},{v:"4",t:"Always (4)"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.solid)||0)+(Number(v.liquid)||0)+(Number(v.gas)||0)+(Number(v.pad)||0)+(Number(v.lifestyle)||0);
+      var b=s===0?"Perfect continence":s<=9?"Mild–moderate incontinence":s<=15?"Moderate–severe incontinence":"Severe incontinence";
+      return { v:s, u:"/20", i:b+". Ref: Jorge JMN, Wexner SD. Dis Colon Rectum 1993." };
     } }
 
   ];
@@ -5938,7 +6114,19 @@
     madrs:["madrs","montgomery asberg","depression rating"],
     sf_ratio:["s/f ratio","spo2 fio2","sf ratio","oxygenation surrogate"],
     o2er:["oxygen extraction ratio","o2er","oxygen extraction","svo2"],
-    h2fpef:["h2fpef","hfpef probability","preserved ejection fraction","diastolic heart failure"]
+    h2fpef:["h2fpef","hfpef probability","preserved ejection fraction","diastolic heart failure"],
+    atria_bleed:["atria bleeding","anticoagulation bleeding","af bleeding risk","fang score"],
+    edacs:["edacs","chest pain score","acs risk","emergency chest pain"],
+    years_pe:["years algorithm","pulmonary embolism rule out","years pe","d-dimer pe"],
+    thrive:["thrive score","stroke outcome","stroke mortality","vascular events"],
+    stone_score:["stone score","ureteric stone","renal colic","flank pain stone","kidney stone probability"],
+    nexus_chest:["nexus chest","blunt trauma imaging","thoracic injury","chest ct trauma"],
+    hsi:["hepatic steatosis index","hsi","nafld screen","fatty liver screen"],
+    ybocs:["ybocs","yale brown","obsessive compulsive","ocd severity"],
+    ymrs:["ymrs","young mania rating","mania scale","bipolar mania"],
+    odi:["oswestry","odi","low back disability","back pain disability"],
+    ndi:["neck disability index","ndi","neck pain disability"],
+    wexner:["wexner","faecal incontinence","cleveland clinic incontinence","fecal incontinence"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -6223,7 +6411,19 @@
     madrs:"Montgomery SA, Åsberg M. Br J Psychiatry 1979;134:382–9 (MADRS).",
     sf_ratio:"Rice TW, et al. Chest 2007;132(2):410–7 (SpO₂/FiO₂).",
     o2er:"Standard oxygen-transport physiology ((SaO₂ − SvO₂)/SaO₂).",
-    h2fpef:"Reddy YNV, et al. Circulation 2018;138(9):861–70 (H₂FPEF)."
+    h2fpef:"Reddy YNV, et al. Circulation 2018;138(9):861–70 (H₂FPEF).",
+    atria_bleed:"Fang MC, et al. J Am Coll Cardiol 2011;58(4):395–401 (ATRIA bleeding).",
+    edacs:"Than M, et al. Emerg Med Australas 2014;26(1):34–44 (EDACS).",
+    years_pe:"van der Hulle T, et al. Lancet 2017;390(10091):289–97 (YEARS).",
+    thrive:"Flint AC, et al. Stroke 2010–2013 (THRIVE score).",
+    stone_score:"Moore CL, et al. BMJ 2014;348:g2191 (STONE score).",
+    nexus_chest:"Rodriguez RM, et al. PLoS Med 2015;12(10):e1001883 (NEXUS Chest).",
+    hsi:"Lee JH, et al. Dig Liver Dis 2010;42(7):503–8 (HSI).",
+    ybocs:"Goodman WK, et al. Arch Gen Psychiatry 1989;46(11):1006–11 (Y-BOCS).",
+    ymrs:"Young RC, et al. Br J Psychiatry 1978;133:429–35 (YMRS).",
+    odi:"Fairbank JCT, Pynsent PB. Spine 2000;25(22):2940–52 (ODI).",
+    ndi:"Vernon H, Mior S. J Manipulative Physiol Ther 1991;14(7):409–15 (NDI).",
+    wexner:"Jorge JMN, Wexner SD. Dis Colon Rectum 1993;36(1):77–97."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
