@@ -6759,6 +6759,22 @@
     // Unit picker — hospital → ICU/Ward category → unit type. The full navigation entry (e.g. Ward Sync).
     openUnits: function () { ICU.open(undefined, _unit.cat === "ward"); _screen = "units"; _pickStep = _unit.hospital ? "category" : "hospital"; _pickCat = null; _paintTop = true; paint(); },
     curUnit: function () { return { cat: _unit.cat, type: _unit.type, hospital: _unit.hospital }; },
+    // Deep link → join a unit. A Universal/App Link (…?icujoin=gid.code, or /i/gid.code) opens the
+    // native app; the URL arrives NATIVELY (not in this WebView's location), so native-bridge.js
+    // forwards it here. An invite implies shared units → turn Group mode on, stash the code, and run
+    // the same confirm-then-join flow the web uses. Returns true if the URL carried an invite.
+    handleJoinUrl: function (url) {
+      try {
+        var s = String(url || "");
+        var m = s.match(/[?&]icujoin=([^&#]+)/) || s.match(/\/i\/([^/?#]+)/);
+        if (!m || !m[1]) return false;
+        try { if (localStorage.getItem("smd_icu_groups") !== "1") localStorage.setItem("smd_icu_groups", "1"); } catch (e) {}
+        _grpJoinPending = m[1];
+        try { window.SMD_loadFirebase && window.SMD_loadFirebase(); } catch (e) {}
+        setTimeout(function () { try { grpBootJoin(); } catch (e) {} }, 60);
+        return true;
+      } catch (e) { return false; }
+    },
     close: function () { if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; try { grpTeardownPatient(); } catch (e) {} },
     isOpen: function () { return !!(rootEl && rootEl.classList.contains("on")); },
     isWard: function () { return !!_wardMode; },

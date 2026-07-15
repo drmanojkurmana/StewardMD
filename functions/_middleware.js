@@ -60,9 +60,42 @@ function readCookie(header, name) {
   return null;
 }
 
+// Universal Links (iOS) + App Links (Android) association files. Served PUBLICLY here (before the
+// coming-soon gate) with a JSON content-type, from BOTH the custom domain and pages.dev, so Apple's
+// CDN + Android's verifier can always fetch them. iOS opens the app for invite links (…?icujoin=…);
+// the app forwards the link into the join flow (see native-bridge.js + ICU.handleJoinUrl).
+// appID = <TeamID>.<bundleId> = 5QY4LUKX23.in.stewardmd.app.
+const AASA = {
+  applinks: {
+    apps: [],
+    details: [
+      { appID: "5QY4LUKX23.in.stewardmd.app", paths: ["/", "/i/*"] },
+      { appIDs: ["5QY4LUKX23.in.stewardmd.app"],
+        components: [{ "?": { icujoin: "?*" }, comment: "ICU/Ward unit invite link" }] }
+    ]
+  }
+};
+// Android App Links. NOTE: sha256_cert_fingerprints MUST be the app's RELEASE signing certificate
+// SHA-256 (colon-hex). Placeholder until the owner provides it (get it via:
+// `keytool -list -v -keystore <release.keystore> -alias <alias>` → "SHA256:"). Until then Android
+// falls back to opening the website (which still handles the join). iOS is unaffected.
+const ASSETLINKS = [
+  { relation: ["delegate_permission/common.handle_all_urls"],
+    target: { namespace: "android_app", package_name: "in.stewardmd.app",
+      sha256_cert_fingerprints: ["REPLACE_WITH_RELEASE_SHA256_FINGERPRINT"] } }
+];
+
 export async function onRequest(context) {
   const { request, env, next } = context;
   const url = new URL(request.url);
+
+  // App-association files — public, uncached-by-gate, application/json. Must resolve before the gate.
+  if (url.pathname === "/.well-known/apple-app-site-association") {
+    return new Response(JSON.stringify(AASA), { headers: { "content-type": "application/json", "cache-control": "public, max-age=3600" } });
+  }
+  if (url.pathname === "/.well-known/assetlinks.json") {
+    return new Response(JSON.stringify(ASSETLINKS), { headers: { "content-type": "application/json", "cache-control": "public, max-age=3600" } });
+  }
 
   // PREVIEW BYPASS: Cloudflare Pages preview/branch deployments (<hash|branch>.stewardmd.pages.dev)
   // serve the REAL app unconditionally, so changes can be verified (headless eval harness + manual
