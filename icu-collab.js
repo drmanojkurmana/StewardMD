@@ -806,11 +806,11 @@
         }, function () { cb && cb([]); });
     });
   }
-  // Create a task — INSTRUCTING roles only (rules enforce too).
+  // Create a task — ANY unit member (a resident routinely logs the consultant's verbal round order;
+  // attribution is preserved via assignedBy + onBehalfOf). Rules allow member create too.
   function addTask(gid, pid, info) {
     return new Promise(function (resolve, reject) {
       if (!icuGroupsOn()) return reject(new Error("icu-groups-disabled"));
-      if (!canInstruct(_ctx.role)) return reject(new Error("forbidden-role"));
       fs(function (db) {
         var uid = currentUid();
         if (!db || !uid) return reject(new Error("firestore-unavailable"));

@@ -177,7 +177,9 @@ service cloud.firestore {
         // (mark in-progress / complete).
         match /tasks/{tid} {
           allow read: if isMember(groupId);
-          allow create: if canInstruct(groupId);
+          // ANY member may create a tracked task — a resident routinely logs the consultant's verbal
+          // round order (attribution kept in assignedBy/onBehalfOf). Delete stays instructor-only.
+          allow create: if isMember(groupId);
           allow update: if isMember(groupId);
           allow delete: if canInstruct(groupId);
         }
