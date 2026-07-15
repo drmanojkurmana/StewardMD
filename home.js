@@ -576,6 +576,23 @@
       window.addEventListener("beforeunload", resumeSnapshot);
     } catch (e) {}
   }
+  // Native-feel sidebar: app.js only slides the drawer open — it never locks the page, so on iOS a
+  // touch-drag over the drawer scrolled the page BEHIND it (the "right side goes up/down", web-page
+  // feel). While the drawer is open, allow touch-scroll ONLY inside its menu when the menu actually
+  // overflows; block it everywhere else so the background can't move. One document listener, idempotent.
+  var _sbGuardWired = false;
+  function installSbScrollGuard() {
+    if (_sbGuardWired) return; _sbGuardWired = true;
+    try {
+      document.addEventListener("touchmove", function (e) {
+        var d = document.getElementById("sbDrawer");
+        if (!d || !d.classList.contains("open")) return;   // only while the sidebar is open
+        var sc = e.target && e.target.closest ? e.target.closest("#sbMenu") : null;
+        if (sc && sc.scrollHeight > sc.clientHeight + 1) return;   // real, scrollable menu → allow native scroll
+        try { e.preventDefault(); } catch (x) {}                   // else block (background / short menu / header)
+      }, { passive: false });
+    } catch (e) {}
+  }
   function injectCSS() {
     if (document.getElementById("smd-home-css")) return;
     var st = document.createElement("style"); st.id = "smd-home-css";
@@ -713,6 +730,10 @@
       "body.ui-v2 .system-picker-btn{border:1px solid var(--line)!important;border-radius:12px!important;min-height:48px}",
       "body.ui-v2 .pathogen-tier,body.ui-v2 .tier-very-likely,body.ui-v2 .tier-likely,body.ui-v2 .tier-possible{border-radius:12px!important}",
       "body.ui-v2 .sb-drawer{border-right:1px solid var(--line)}body.ui-v2 .sb-head{border-bottom:1px solid var(--line)}body.ui-v2 #sbMenu>div,body.ui-v2 #sbMenu>button{border-radius:12px}",
+      /* Native-feel sidebar scroll: the drawer scrolls INTERNALLY and never chains to the page behind
+         it (app.js slides the drawer but doesn't lock the page → on iOS a drag over the drawer scrolled
+         the background, feeling like a web page). overscroll-behavior:contain + the touchmove guard fix it. */
+      "#sbDrawer{overscroll-behavior:contain}#sbMenu{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}",
       "body.ui-v2 .sbref-overlay{z-index:140!important}",
       "body.ui-v2 .brandrow{flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;gap:10px}",
       "body.ui-v2 .brandrow>div:first-child{flex:0 1 auto;min-width:0}",
@@ -3115,6 +3136,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   function start() {
     injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases(); wrapSidebar(); try { enhanceAbout(); } catch (e) {}
     try { initResume(); } catch (e) {}
+    try { installSbScrollGuard(); } catch (e) {}
     if (IS_V2) {
       // show the new home as soon as the user is past splash/login, COVERING the app's own
       // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
