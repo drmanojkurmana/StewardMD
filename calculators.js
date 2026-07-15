@@ -5949,6 +5949,159 @@
       var s=(Number(v.physical)||1)+(Number(v.mental)||1)+(Number(v.activity)||1)+(Number(v.mobility)||1)+(Number(v.incontinence)||1);
       var b=s<=14?"At risk of pressure ulceration (≤14) — institute prevention":"Lower risk";
       return { v:s, u:"/20", i:b+" (≤14 at risk, ≤12 high risk). Ref: Norton D, et al. 1962." };
+    } },
+
+  { id:"pvr", cat:"Cardiovascular", icon:"❤️", title:"Pulmonary Vascular Resistance (PVR)",
+    desc:"Resistance across the pulmonary circulation.",
+    inputs:[
+      { id:"mpap", label:"Mean pulmonary artery pressure", type:"number", unit:"mmHg", step:"1" },
+      { id:"pcwp", label:"Pulmonary capillary wedge pressure", type:"number", unit:"mmHg", step:"1" },
+      { id:"co", label:"Cardiac output", type:"number", unit:"L/min", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.mpap)||!ok(v.pcwp)||!ok(v.co)||v.co<=0) return ERR;
+      if(v.pcwp>v.mpap) return { err:"Wedge pressure cannot exceed mean PA pressure" };
+      var wu=(v.mpap-v.pcwp)/v.co;
+      var b=wu>2?"Elevated PVR (>2 Wood units) — supports pre-capillary pulmonary vascular disease":"Normal PVR";
+      return { v:Math.round(wu*100)/100, u:"Wood units", i:b+" ("+r0(wu*80)+" dyn·s·cm⁻⁵). Ref: standard haemodynamics; 2022 PH definition uses PVR >2 WU." };
+    } },
+
+  { id:"tpg", cat:"Cardiovascular", icon:"❤️", title:"Transpulmonary Gradient",
+    desc:"Pressure gradient across the pulmonary vascular bed.",
+    inputs:[
+      { id:"mpap", label:"Mean pulmonary artery pressure", type:"number", unit:"mmHg", step:"1" },
+      { id:"pcwp", label:"Mean pulmonary capillary wedge pressure", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.mpap)||!ok(v.pcwp)) return ERR;
+      if(v.pcwp>v.mpap) return { err:"Wedge pressure cannot exceed mean PA pressure" };
+      var tpg=v.mpap-v.pcwp;
+      var b=tpg>12?"Elevated (>12 mmHg) — suggests a pulmonary vascular (pre-capillary) component":"Not elevated";
+      return { v:r0(tpg), u:"mmHg", i:b+". The diastolic pulmonary gradient (diastolic PAP − wedge) is now often preferred. Ref: standard haemodynamics." };
+    } },
+
+  { id:"cpp", cat:"Critical care", icon:"🧠", title:"Cerebral Perfusion Pressure (CPP)",
+    desc:"Net pressure driving cerebral blood flow.",
+    inputs:[
+      { id:"map", label:"Mean arterial pressure", type:"number", unit:"mmHg", step:"1" },
+      { id:"icp", label:"Intracranial pressure", type:"number", unit:"mmHg", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.map)||!ok(v.icp)) return ERR;
+      var cpp=v.map-v.icp;
+      var b=cpp<60?"Below the usual target — risk of cerebral ischaemia":cpp>70?"Above the usual target range":"Within the common target range (~60–70)";
+      return { v:r0(cpp), u:"mmHg", i:b+" (typical traumatic-brain-injury target ~60–70 mmHg). Ref: Brain Trauma Foundation guidelines." };
+    } },
+
+  { id:"bdi", cat:"Psychiatry", icon:"🧠", title:"Beck Depression Inventory — interpreter",
+    desc:"Interprets a BDI / BDI-II total.",
+    inputs:[
+      { id:"total", label:"BDI-II total (0–63)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>63) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=13?"Minimal depression":s<=19?"Mild depression":s<=28?"Moderate depression":"Severe depression";
+      return { v:s, u:"/63", i:b+". BDI is copyrighted (Pearson) — administer the official form. Ref: Beck AT, et al. 1996 (BDI-II)." };
+    } },
+
+  { id:"bai", cat:"Psychiatry", icon:"🧠", title:"Beck Anxiety Inventory — interpreter",
+    desc:"Interprets a Beck Anxiety Inventory total.",
+    inputs:[
+      { id:"total", label:"BAI total (0–63)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>63) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=7?"Minimal anxiety":s<=15?"Mild anxiety":s<=25?"Moderate anxiety":"Severe anxiety";
+      return { v:s, u:"/63", i:b+". BAI is copyrighted (Pearson) — administer the official form. Ref: Beck AT, et al. 1988 (BAI)." };
+    } },
+
+  { id:"psqi", cat:"Psychiatry", icon:"🛌", title:"PSQI — sleep quality interpreter",
+    desc:"Interprets a Pittsburgh Sleep Quality Index global score.",
+    inputs:[
+      { id:"total", label:"PSQI global score (0–21)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>21) return ERR;
+      var s=Math.round(v.total);
+      var b=s>5?"Poor sleep quality (>5)":"Good sleep quality (≤5)";
+      return { v:s, u:"/21", i:b+". Ref: Buysse DJ, et al. Psychiatry Res 1989 (PSQI)." };
+    } },
+
+  { id:"uas7", cat:"Dermatology", icon:"🧴", title:"UAS7 (Urticaria Activity Score)",
+    desc:"Weekly urticaria activity from daily wheal and itch scores.",
+    inputs:[
+      { id:"total", label:"UAS7 total (sum of 7 daily scores, 0–42)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>42) return ERR;
+      var s=Math.round(v.total);
+      var b=s===0?"Urticaria-free":s<=6?"Well-controlled":s<=15?"Mild activity":s<=27?"Moderate activity":"Severe activity";
+      return { v:s, u:"/42", i:b+" (each day scores wheals 0–3 + itch 0–3). Ref: EAACI/GA²LEN urticaria guideline (Zuberbier)." };
+    } },
+
+  { id:"fe_bicarb", cat:"Renal", icon:"🧪", title:"Fractional Excretion of Bicarbonate",
+    desc:"Helps classify renal tubular acidosis.",
+    inputs:[
+      { id:"ubic", label:"Urine bicarbonate", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"pbic", label:"Plasma bicarbonate", type:"number", unit:"mmol/L", step:"0.1" },
+      { id:"ucr", label:"Urine creatinine", type:"number", unit:"µmol/L", step:"1" },
+      { id:"pcr", label:"Plasma creatinine", type:"number", unit:"µmol/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ubic)||!ok(v.pbic)||!ok(v.ucr)||!ok(v.pcr)||v.pbic<=0||v.ucr<=0||v.pcr<0||v.ubic<0) return ERR;
+      var fe=(v.ubic*v.pcr)/(v.pbic*v.ucr)*100;
+      var b=fe>15?">15% — consistent with proximal (type 2) RTA during bicarbonate loading":fe<5?"<5% — consistent with distal (type 1) RTA":"Intermediate";
+      return { v:Math.round(fe*10)/10, u:"%", i:b+". Interpret during a bicarbonate load / with a normal plasma bicarbonate. Ref: standard nephrology reference." };
+    } },
+
+  { id:"lysholm", cat:"Musculoskeletal", icon:"🦵", title:"Lysholm Knee Score — interpreter",
+    desc:"Interprets a Lysholm knee score.",
+    inputs:[
+      { id:"total", label:"Lysholm total (0–100)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>100) return ERR;
+      var s=Math.round(v.total);
+      var b=s>=95?"Excellent":s>=84?"Good":s>=65?"Fair":"Poor";
+      return { v:s, u:"/100", i:b+" knee function (higher = better). Ref: Lysholm J, Gillquist J. Am J Sports Med 1982." };
+    } },
+
+  { id:"harris_hip", cat:"Musculoskeletal", icon:"🦴", title:"Harris Hip Score — interpreter",
+    desc:"Interprets a Harris Hip Score.",
+    inputs:[
+      { id:"total", label:"Harris Hip Score (0–100)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>100) return ERR;
+      var s=Math.round(v.total);
+      var b=s>=90?"Excellent":s>=80?"Good":s>=70?"Fair":"Poor";
+      return { v:s, u:"/100", i:b+" hip function (higher = better). Ref: Harris WH. J Bone Joint Surg Am 1969." };
+    } },
+
+  { id:"tampa", cat:"Musculoskeletal", icon:"🦴", title:"Tampa Scale of Kinesiophobia — interpreter",
+    desc:"Interprets a Tampa Scale of Kinesiophobia (TSK-17) total.",
+    inputs:[
+      { id:"total", label:"TSK-17 total (17–68)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<17||v.total>68) return ERR;
+      var s=Math.round(v.total);
+      var b=s>37?"High degree of kinesiophobia (fear of movement)":"Low degree of kinesiophobia";
+      return { v:s, u:"/68", i:b+" (a common cut-off is >37). Ref: Miller RP, et al. 1991 (TSK)." };
+    } },
+
+  { id:"constant_shoulder", cat:"Musculoskeletal", icon:"🦴", title:"Constant-Murley Shoulder Score — interpreter",
+    desc:"Interprets a Constant-Murley shoulder score.",
+    inputs:[
+      { id:"total", label:"Constant-Murley total (0–100)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>100) return ERR;
+      var s=Math.round(v.total);
+      var b=s>=90?"Excellent":s>=80?"Good":s>=70?"Fair":"Poor";
+      return { v:s, u:"/100", i:b+" shoulder function (higher = better; ideally compared with the age/sex-adjusted normal). Ref: Constant CR, Murley AHG. Clin Orthop 1987." };
     } }
 
   ];
@@ -6302,7 +6455,19 @@
     zarit:["zarit","caregiver burden","carer burden","zbi"],
     pucai:["pucai","paediatric ulcerative colitis","pediatric uc activity"],
     braden_q:["braden q","paediatric pressure injury","pressure ulcer children"],
-    norton:["norton scale","pressure sore risk","pressure ulcer risk"]
+    norton:["norton scale","pressure sore risk","pressure ulcer risk"],
+    pvr:["pulmonary vascular resistance","pvr","wood units","pulmonary hypertension"],
+    tpg:["transpulmonary gradient","tpg","pulmonary gradient"],
+    cpp:["cerebral perfusion pressure","cpp","map icp","brain perfusion"],
+    bdi:["beck depression","bdi","bdi-ii","depression inventory"],
+    bai:["beck anxiety","bai","anxiety inventory"],
+    psqi:["pittsburgh sleep quality","psqi","sleep quality"],
+    uas7:["urticaria activity score","uas7","chronic urticaria","hives"],
+    fe_bicarb:["fractional excretion bicarbonate","fe hco3","renal tubular acidosis","rta"],
+    lysholm:["lysholm","knee score","knee function"],
+    harris_hip:["harris hip score","hip function","hip replacement outcome"],
+    tampa:["tampa scale","kinesiophobia","fear of movement","tsk"],
+    constant_shoulder:["constant murley","shoulder score","constant score"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -6611,7 +6776,19 @@
     zarit:"Zarit SH, et al. Gerontologist 1980;20(6):649–55 (ZBI).",
     pucai:"Turner D, et al. Gastroenterology 2007;133(2):423–32 (PUCAI).",
     braden_q:"Curley MAQ, et al. Nurs Res 2003;52(1):22–33 (Braden Q).",
-    norton:"Norton D, McLaren R, Exton-Smith AN. 1962 (Norton scale)."
+    norton:"Norton D, McLaren R, Exton-Smith AN. 1962 (Norton scale).",
+    pvr:"Standard haemodynamics ((mPAP − PCWP)/CO); ESC/ERS 2022 PH guideline.",
+    tpg:"Standard haemodynamics (mPAP − mean PCWP).",
+    cpp:"Brain Trauma Foundation guidelines (CPP = MAP − ICP).",
+    bdi:"Beck AT, Steer RA, Brown GK. BDI-II manual, 1996 (© Pearson).",
+    bai:"Beck AT, et al. J Consult Clin Psychol 1988;56(6):893–7 (© Pearson).",
+    psqi:"Buysse DJ, et al. Psychiatry Res 1989;28(2):193–213 (PSQI).",
+    uas7:"Zuberbier T, et al. EAACI/GA²LEN/EDF/WAO urticaria guideline (UAS7).",
+    fe_bicarb:"Standard nephrology reference (fractional excretion of bicarbonate).",
+    lysholm:"Lysholm J, Gillquist J. Am J Sports Med 1982;10(3):150–4.",
+    harris_hip:"Harris WH. J Bone Joint Surg Am 1969;51(4):737–55.",
+    tampa:"Miller RP, Kori SH, Todd DD. 1991 (Tampa Scale of Kinesiophobia).",
+    constant_shoulder:"Constant CR, Murley AHG. Clin Orthop Relat Res 1987;(214):160–4."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
