@@ -4745,6 +4745,132 @@
       var svr=(v.map-v.cvp)/v.co*80;
       var b=svr<800?"Low SVR — vasodilatory (e.g. sepsis, anaphylaxis)":svr>1200?"High SVR — vasoconstriction (e.g. cardiogenic/hypovolaemic shock)":"Within the usual range";
       return { v:r0(svr), u:"dyn·s·cm⁻⁵", i:b+" (normal ~800–1200). Ref: standard haemodynamics." };
+    } },
+
+  { id:"mmrc_dyspnoea", cat:"Respiratory", icon:"🫁", title:"mMRC Dyspnoea Scale",
+    desc:"Modified Medical Research Council breathlessness grade.",
+    inputs:[
+      { id:"grade", label:"Breathlessness", type:"select", opts:[
+        {v:"0",t:"Grade 0 — only with strenuous exercise"},
+        {v:"1",t:"Grade 1 — hurrying on the level or up a slight hill"},
+        {v:"2",t:"Grade 2 — walks slower than peers, or stops for breath at own pace"},
+        {v:"3",t:"Grade 3 — stops for breath after ~100 m or a few minutes on the level"},
+        {v:"4",t:"Grade 4 — too breathless to leave the house / breathless when dressing"}
+      ] }
+    ],
+    compute:function(v){
+      var g=Number(v.grade)||0;
+      var b=g>=2?"More symptoms (mMRC ≥2) — higher symptom-burden category in COPD assessment":"Fewer symptoms (mMRC 0–1)";
+      return { v:g, u:"grade", i:b+". Ref: Fletcher CM; mMRC scale (GOLD)." };
+    } },
+
+  { id:"canadian_cspine", cat:"Neurology", icon:"🦴", title:"Canadian C-Spine Rule",
+    desc:"Need for cervical-spine imaging after trauma (alert, stable, GCS 15).",
+    inputs:[
+      { id:"hr_age", label:"High-risk: age ≥65", type:"check" },
+      { id:"hr_mech", label:"High-risk: dangerous mechanism", type:"check" },
+      { id:"hr_paraes", label:"High-risk: paraesthesiae in the extremities", type:"check" },
+      { id:"lr_rearend", label:"Low-risk: simple rear-end collision", type:"check" },
+      { id:"lr_sitting", label:"Low-risk: sitting position in the department", type:"check" },
+      { id:"lr_ambulatory", label:"Low-risk: ambulatory at any time", type:"check" },
+      { id:"lr_delayed", label:"Low-risk: delayed onset of neck pain", type:"check" },
+      { id:"lr_no_tenderness", label:"Low-risk: no midline cervical tenderness", type:"check" },
+      { id:"rotate", label:"Able to actively rotate neck 45° left and right", type:"check" }
+    ],
+    compute:function(v){
+      var highRisk = v.hr_age||v.hr_mech||v.hr_paraes;
+      var anyLowRisk = v.lr_rearend||v.lr_sitting||v.lr_ambulatory||v.lr_delayed||v.lr_no_tenderness;
+      if(highRisk) return { v:"Imaging indicated", u:"", i:"A high-risk factor is present — radiography is recommended before assessing neck movement." };
+      if(!anyLowRisk) return { v:"Imaging indicated", u:"", i:"No low-risk factor permits safe assessment of movement — radiography is recommended." };
+      if(!v.rotate) return { v:"Imaging indicated", u:"", i:"Low-risk factor present but unable to rotate the neck 45° both ways — radiography is recommended." };
+      return { v:"No imaging", u:"", i:"No high-risk factor, a low-risk factor allows safe assessment, and the neck rotates 45° both ways — imaging can be safely deferred. Applies only when GCS 15 and haemodynamically stable. Ref: Stiell IG, JAMA 2001." };
+    } },
+
+  { id:"nutric", cat:"Critical care", icon:"🍽️", title:"mNUTRIC Score (Nutrition Risk)",
+    desc:"Modified NUTRIC nutritional-risk score for critically ill adults (IL-6 omitted).",
+    inputs:[
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<50"},{v:"1",t:"50–74"},{v:"2",t:"≥75"}] },
+      { id:"apache", label:"APACHE II", type:"select", opts:[{v:"0",t:"<15"},{v:"1",t:"15–19"},{v:"2",t:"20–27"},{v:"3",t:"≥28"}] },
+      { id:"sofa", label:"SOFA", type:"select", opts:[{v:"0",t:"<6"},{v:"1",t:"6–9"},{v:"2",t:"≥10"}] },
+      { id:"comorb", label:"Number of comorbidities", type:"select", opts:[{v:"0",t:"0–1"},{v:"1",t:"≥2"}] },
+      { id:"days", label:"Days from hospital to ICU admission", type:"select", opts:[{v:"0",t:"<1"},{v:"1",t:"≥1"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.age)||0)+(Number(v.apache)||0)+(Number(v.sofa)||0)+(Number(v.comorb)||0)+(Number(v.days)||0);
+      var b=s>=5?"High nutritional risk (5–9) — associated with worse outcomes; likely to benefit from aggressive nutrition support":"Low nutritional risk (0–4)";
+      return { v:s, u:"/9", i:b+". Modified NUTRIC. Ref: Heyland, Crit Care 2011; Rahman, Clin Nutr 2016." };
+    } },
+
+  { id:"lbm", cat:"General", icon:"💪", title:"Lean Body Mass (Boer)",
+    desc:"Estimated lean body mass from weight, height and sex.",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.1" },
+      { id:"ht", label:"Height", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.wt)||!ok(v.ht)||v.wt<=0||v.ht<=0) return ERR;
+      var lbm = v.sex==="f" ? 0.252*v.wt+0.473*v.ht-48.3 : 0.407*v.wt+0.267*v.ht-19.2;
+      if(lbm<=0) return { err:"Inputs give a non-physiological result — check weight and height" };
+      return { v:r1(lbm), u:"kg", i:"Estimated lean body mass (Boer formula); useful for weight-based drug dosing. Ref: Boer P, Am J Physiol 1984." };
+    } },
+
+  { id:"tbw_watson", cat:"Renal", icon:"💧", title:"Total Body Water (Watson)",
+    desc:"Estimated total body water from age, sex, height and weight.",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"age", label:"Age", type:"number", unit:"years", step:"1" },
+      { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.1" },
+      { id:"ht", label:"Height", type:"number", unit:"cm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.wt)||!ok(v.ht)||v.wt<=0||v.ht<=0) return ERR;
+      var tbw;
+      if(v.sex==="f"){ tbw = -2.097 + 0.1069*v.ht + 0.2466*v.wt; }
+      else { if(!ok(v.age)||v.age<=0) return ERR; tbw = 2.447 - 0.09156*v.age + 0.1074*v.ht + 0.3362*v.wt; }
+      if(tbw<=0) return { err:"Inputs give a non-physiological result — check entries" };
+      return { v:r1(tbw), u:"L", i:"Estimated total body water (Watson formula); used in Kt/V and free-water calculations. Ref: Watson PE, Am J Clin Nutr 1980." };
+    } },
+
+  { id:"nitrogen_balance", cat:"Critical care", icon:"🍽️", title:"Nitrogen Balance",
+    desc:"Daily nitrogen balance from protein intake and urinary urea nitrogen.",
+    inputs:[
+      { id:"protein", label:"Protein intake (24 h)", type:"number", unit:"g/day", step:"1" },
+      { id:"uun", label:"Urinary urea nitrogen (24 h)", type:"number", unit:"g/day", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.protein)||!ok(v.uun)||v.protein<0||v.uun<0) return ERR;
+      var nb = v.protein/6.25 - (v.uun + 4);
+      var b = nb>0 ? "Positive balance (anabolic) — intake exceeds estimated losses" : nb<0 ? "Negative balance (catabolic) — losses exceed intake" : "Neutral balance";
+      return { v:r1(nb), u:"g N/day", i:b+". The constant of 4 g approximates non-urea and non-urinary losses. Ref: standard clinical-nutrition reference." };
+    } },
+
+  { id:"pcl5", cat:"Psychiatry", icon:"🧠", title:"PCL-5 (PTSD Checklist) — score interpreter",
+    desc:"Interprets a PCL-5 total for provisional DSM-5 PTSD.",
+    inputs:[
+      { id:"total", label:"PCL-5 total (0–80)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>80) return ERR;
+      var s=Math.round(v.total);
+      var b = s>=33 ? "At or above the common provisional-PTSD cut-off (~31–33) — a diagnostic interview is warranted" : "Below the common provisional-PTSD cut-off (~31–33)";
+      return { v:s, u:"/80", i:b+". Administer the full instrument from the US National Center for PTSD (public domain). Ref: Blevins, J Trauma Stress 2015." };
+    } },
+
+  { id:"allowable_blood_loss", cat:"Critical care", icon:"🩸", title:"Maximum Allowable Blood Loss",
+    desc:"Estimated allowable blood loss before a chosen haematocrit threshold.",
+    inputs:[
+      { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.1" },
+      { id:"ebv", label:"Estimated blood volume", type:"select", opts:[{v:"75",t:"Adult male (75 mL/kg)"},{v:"65",t:"Adult female (65 mL/kg)"},{v:"80",t:"Child (80 mL/kg)"},{v:"85",t:"Infant (85 mL/kg)"},{v:"90",t:"Neonate (90 mL/kg)"}] },
+      { id:"hi", label:"Initial haematocrit", type:"number", unit:"%", step:"0.1" },
+      { id:"hf", label:"Lowest acceptable haematocrit", type:"number", unit:"%", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.wt)||!ok(v.hi)||!ok(v.hf)||v.wt<=0||v.hi<=0||v.hf<=0) return ERR;
+      if(v.hf>=v.hi) return { err:"Lowest acceptable haematocrit must be below the initial value" };
+      var ebv=Number(v.ebv)*v.wt;
+      var abl=ebv*(v.hi-v.hf)/v.hi;
+      return { v:r0(abl), u:"mL", i:"Estimated maximum allowable blood loss before reaching the chosen haematocrit. Ref: Gross JB, Anesthesiology 1983." };
     } }
 
   ];
@@ -5018,7 +5144,15 @@
     homa_b:["homa b","homa beta","beta cell function","insulin secretion","homa-%b"],
     asdas_crp:["asdas","asdas-crp","ankylosing spondylitis disease activity","axial spondyloarthritis activity"],
     ava_continuity:["aortic valve area","continuity equation","ava","aortic stenosis echo","lvot vti"],
-    svr:["systemic vascular resistance","svr","afterload","vascular resistance"]
+    svr:["systemic vascular resistance","svr","afterload","vascular resistance"],
+    mmrc_dyspnoea:["mmrc","dyspnoea scale","breathlessness grade","mrc dyspnea","copd symptoms"],
+    canadian_cspine:["canadian c-spine","cervical spine rule","c-spine imaging","neck trauma","ccr"],
+    nutric:["nutric","mnutric","nutrition risk critically ill","icu nutrition score"],
+    lbm:["lean body mass","boer formula","fat free mass","lbm"],
+    tbw_watson:["total body water","watson formula","tbw","body water"],
+    nitrogen_balance:["nitrogen balance","protein balance","uun","urea nitrogen","catabolic anabolic"],
+    pcl5:["pcl-5","ptsd checklist","post traumatic stress","pcl5"],
+    allowable_blood_loss:["allowable blood loss","abl","maximum blood loss","transfusion threshold","gross formula"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -5247,7 +5381,15 @@
     homa_b:"Matthews DR, et al. Diabetologia 1985;28(7):412–9 (HOMA model).",
     asdas_crp:"Lukas C, et al. Ann Rheum Dis 2009;68(1):18–24 (ASDAS).",
     ava_continuity:"Baumgartner H, et al. Recommendations on the echocardiographic assessment of aortic valve stenosis (ASE/EACVI).",
-    svr:"Standard haemodynamic formula ((MAP − CVP) ÷ CO × 80)."
+    svr:"Standard haemodynamic formula ((MAP − CVP) ÷ CO × 80).",
+    mmrc_dyspnoea:"Fletcher CM, et al. BMJ 1959; modified MRC scale (adopted by GOLD).",
+    canadian_cspine:"Stiell IG, et al. JAMA 2001;286(15):1841–8 (Canadian C-Spine Rule).",
+    nutric:"Heyland DK, et al. Crit Care 2011;15:R268; Rahman A, et al. Clin Nutr 2016 (mNUTRIC).",
+    lbm:"Boer P. Am J Physiol 1984;247(4):F632–6 (lean body mass).",
+    tbw_watson:"Watson PE, et al. Am J Clin Nutr 1980;33(1):27–39 (total body water).",
+    nitrogen_balance:"Standard clinical-nutrition reference (protein intake ÷ 6.25 − (UUN + 4)).",
+    pcl5:"Blevins CA, et al. J Trauma Stress 2015;28(6):489–98 (PCL-5); US National Center for PTSD.",
+    allowable_blood_loss:"Gross JB. Anesthesiology 1983;58(3):277–80 (allowable blood loss)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
