@@ -4429,6 +4429,106 @@
       var pcr=v.prot/v.cr;
       var b=pcr<15?"Normal-range":pcr<100?"Mild-to-moderate proteinuria":pcr<300?"Heavy proteinuria":"Nephrotic-range proteinuria";
       return { v:r1(pcr), u:"mg/mmol", i:b+" (nephrotic range roughly ≥ 300 mg/mmol). Ref: standard nephrology." };
+    } },
+
+  { id:"west_haven", cat:"Hepatology", icon:"🩺", title:"West Haven Grade (Hepatic Encephalopathy)",
+    desc:"Severity of overt hepatic encephalopathy.",
+    inputs:[
+      { id:"grade", label:"Clinical grade", type:"select", opts:[{v:"0",t:"0 — Minimal (covert); no clinical signs"},{v:"1",t:"I — Trivial lack of awareness, altered sleep, mild disorientation"},{v:"2",t:"II — Lethargy, disorientation to time, obvious personality change"},{v:"3",t:"III — Somnolence to stupor, gross disorientation, confusion"},{v:"4",t:"IV — Coma"}] }
+    ],
+    compute:function(v){
+      var m={"0":"Minimal/covert HE — detectable only on specialised testing","1":"Grade I — trivial lack of awareness","2":"Grade II — lethargy and disorientation to time (asterixis usually present)","3":"Grade III — marked confusion and somnolence, rousable","4":"Grade IV — coma, unresponsive"};
+      return { v:"Grade "+(v.grade==="0"?"0":["","I","II","III","IV"][Number(v.grade)]), u:"", i:m[v.grade]+". Ref: Conn / West Haven criteria." };
+    } },
+
+  { id:"cpss", cat:"Neurology", icon:"🧠", title:"Cincinnati Prehospital Stroke Scale",
+    desc:"Rapid prehospital screen for stroke.",
+    inputs:[
+      { id:"face", label:"Facial droop (asymmetry on smiling/showing teeth)", type:"check" },
+      { id:"arm", label:"Arm drift (one arm drifts down)", type:"check" },
+      { id:"speech", label:"Abnormal speech (slurred / wrong words / unable)", type:"check" }
+    ],
+    compute:function(v){
+      var n=(v.face?1:0)+(v.arm?1:0)+(v.speech?1:0);
+      var b=n>=1?"Any abnormality — stroke likely; activate stroke pathway urgently":"No CPSS abnormality (does not fully exclude stroke)";
+      return { v:n, u:"/3", i:b+". Ref: Kothari, Ann Emerg Med 1999 (CPSS)." };
+    } },
+
+  { id:"rosier", cat:"Neurology", icon:"🧠", title:"ROSIER Scale (Stroke Recognition in ED)",
+    desc:"Distinguishes acute stroke from mimics in the emergency department.",
+    inputs:[
+      { id:"loc", label:"Loss of consciousness or syncope", type:"check" },
+      { id:"seizure", label:"Seizure activity", type:"check" },
+      { id:"face", label:"Asymmetric facial weakness", type:"check" },
+      { id:"arm", label:"Asymmetric arm weakness", type:"check" },
+      { id:"leg", label:"Asymmetric leg weakness", type:"check" },
+      { id:"speech", label:"Speech disturbance", type:"check" },
+      { id:"visual", label:"Visual field defect", type:"check" }
+    ],
+    compute:function(v){
+      var s=(v.face?1:0)+(v.arm?1:0)+(v.leg?1:0)+(v.speech?1:0)+(v.visual?1:0)-(v.loc?1:0)-(v.seizure?1:0);
+      var b=s>0?"Stroke likely — assess for acute stroke pathway":"Stroke less likely (score ≤ 0) — consider a mimic, but clinical judgement overrides";
+      return { v:s, u:"points", i:b+". Ref: Nor, Lancet Neurol 2005 (ROSIER)." };
+    } },
+
+  { id:"fick_co", cat:"Cardiovascular", icon:"❤️", title:"Cardiac Output (Fick, estimated)",
+    desc:"Estimates cardiac output from oxygen consumption and arteriovenous O₂ difference.",
+    inputs:[
+      { id:"vo2", label:"O₂ consumption (≈125 × BSA, or measured)", type:"number", unit:"mL/min", step:"1" },
+      { id:"hb", label:"Haemoglobin", type:"number", unit:"g/dL", step:"0.1" },
+      { id:"sao2", label:"Arterial O₂ saturation", type:"number", unit:"%", step:"0.1" },
+      { id:"svo2", label:"Mixed venous O₂ saturation", type:"number", unit:"%", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.vo2)||!ok(v.hb)||!ok(v.sao2)||!ok(v.svo2)||v.hb<=0||v.vo2<0) return ERR;
+      var avd=13.4*v.hb*((v.sao2-v.svo2)/100);
+      if(avd<=0) return { err:"Arterial saturation must exceed venous saturation" };
+      var co=v.vo2/avd;
+      var b=co<4?"Low cardiac output":co>8?"High cardiac output":"Within the usual range";
+      return { v:r1(co), u:"L/min", i:b+" (Fick principle). Ref: standard cardiovascular physiology." };
+    } },
+
+  { id:"fontaine", cat:"Cardiovascular", icon:"🦵", title:"Fontaine Classification (Peripheral Arterial Disease)",
+    desc:"Clinical stage of lower-limb peripheral arterial disease.",
+    inputs:[
+      { id:"stage", label:"Stage", type:"select", opts:[{v:"1",t:"I — Asymptomatic"},{v:"2a",t:"IIa — Mild claudication (>200 m)"},{v:"2b",t:"IIb — Moderate–severe claudication (<200 m)"},{v:"3",t:"III — Ischaemic rest pain"},{v:"4",t:"IV — Ulceration or gangrene"}] }
+    ],
+    compute:function(v){
+      var m={"1":"Asymptomatic disease","2a":"Mild intermittent claudication","2b":"Moderate-to-severe claudication","3":"Ischaemic rest pain (critical limb ischaemia)","4":"Tissue loss — ulceration or gangrene (critical limb ischaemia)"};
+      var lab={"1":"I","2a":"IIa","2b":"IIb","3":"III","4":"IV"};
+      return { v:"Stage "+lab[v.stage], u:"", i:m[v.stage]+". Stages III–IV = critical limb ischaemia. Ref: Fontaine classification." };
+    } },
+
+  { id:"rutherford", cat:"Cardiovascular", icon:"🦵", title:"Rutherford Classification (Peripheral Arterial Disease)",
+    desc:"Category of chronic limb ischaemia.",
+    inputs:[
+      { id:"cat", label:"Category", type:"select", opts:[{v:"0",t:"0 — Asymptomatic"},{v:"1",t:"1 — Mild claudication"},{v:"2",t:"2 — Moderate claudication"},{v:"3",t:"3 — Severe claudication"},{v:"4",t:"4 — Ischaemic rest pain"},{v:"5",t:"5 — Minor tissue loss"},{v:"6",t:"6 — Major tissue loss"}] }
+    ],
+    compute:function(v){
+      var n=Number(v.cat);
+      var m=["Asymptomatic","Mild claudication","Moderate claudication","Severe claudication","Ischaemic rest pain","Minor tissue loss (non-healing ulcer, focal gangrene)","Major tissue loss (extending above transmetatarsal, functional foot no longer salvageable)"];
+      return { v:"Category "+n, u:"", i:m[n]+(n>=4?" — critical limb ischaemia":"")+". Ref: Rutherford, J Vasc Surg 1997." };
+    } },
+
+  { id:"salter_harris", cat:"Musculoskeletal", icon:"🦴", title:"Salter-Harris Classification (Physeal Fracture)",
+    desc:"Classifies growth-plate (physeal) fractures in children.",
+    inputs:[
+      { id:"type", label:"Type", type:"select", opts:[{v:"1",t:"I — through the physis only"},{v:"2",t:"II — physis + metaphysis"},{v:"3",t:"III — physis + epiphysis (intra-articular)"},{v:"4",t:"IV — epiphysis + physis + metaphysis"},{v:"5",t:"V — crush injury of the physis"}] }
+    ],
+    compute:function(v){
+      var m={"1":"Type I — fracture through the growth plate only (often radiographically occult)","2":"Type II — through the physis and metaphysis (commonest)","3":"Type III — through the physis into the epiphysis; intra-articular","4":"Type IV — across metaphysis, physis and epiphysis; intra-articular","5":"Type V — crush of the physis; high risk of growth arrest"};
+      return { v:"Type "+["","I","II","III","IV","V"][Number(v.type)], u:"", i:m[v.type]+" (higher types carry greater growth-disturbance risk). Ref: Salter & Harris 1963." };
+    } },
+
+  { id:"fitzpatrick", cat:"Dermatology", icon:"🩹", title:"Fitzpatrick Skin Phototype",
+    desc:"Classifies skin type by response to ultraviolet light.",
+    inputs:[
+      { id:"type", label:"Phototype", type:"select", opts:[{v:"1",t:"I — always burns, never tans (pale white)"},{v:"2",t:"II — usually burns, tans minimally"},{v:"3",t:"III — sometimes burns, tans uniformly"},{v:"4",t:"IV — burns minimally, tans easily (olive)"},{v:"5",t:"V — rarely burns, tans profusely (brown)"},{v:"6",t:"VI — never burns (deeply pigmented)"}] }
+    ],
+    compute:function(v){
+      var n=Number(v.type);
+      var b=n<=2?"Higher photosensitivity and skin-cancer risk; counsel strict photoprotection":n<=4?"Intermediate photosensitivity":"Lower burn risk but still counsel photoprotection; higher risk of dyspigmentation";
+      return { v:"Type "+["","I","II","III","IV","V","VI"][n], u:"", i:b+". Ref: Fitzpatrick 1988." };
     } }
 
   ];
@@ -4678,7 +4778,15 @@
     mna_sf:["mini nutritional assessment","mna-sf","mna","nutrition screen elderly"],
     absolute_retic:["absolute reticulocyte count","arc","reticulocyte number"],
     uacr:["urine albumin creatinine ratio","uacr","acr","albuminuria","microalbuminuria"],
-    upcr:["urine protein creatinine ratio","upcr","pcr","proteinuria","spot protein"]
+    upcr:["urine protein creatinine ratio","upcr","pcr","proteinuria","spot protein"],
+    west_haven:["west haven","hepatic encephalopathy grade","he grade","conn score"],
+    cpss:["cincinnati prehospital stroke scale","cpss","stroke screen","face arm speech"],
+    rosier:["rosier","stroke recognition","recognition of stroke emergency room"],
+    fick_co:["fick cardiac output","cardiac output","fick principle"],
+    fontaine:["fontaine classification","peripheral arterial disease stage","claudication stage","critical limb ischaemia"],
+    rutherford:["rutherford classification","peripheral arterial disease category","limb ischaemia category"],
+    salter_harris:["salter harris","physeal fracture","growth plate fracture"],
+    fitzpatrick:["fitzpatrick skin type","skin phototype","photosensitivity type"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -4883,7 +4991,15 @@
     mna_sf:"Rubenstein LZ, et al. J Gerontol A Biol Sci Med Sci 2001;56(6):M366–72.",
     absolute_retic:"Standard haematology reference (retic% × RBC).",
     uacr:"KDIGO 2012 CKD guideline (albuminuria categories).",
-    upcr:"Standard nephrology reference (spot protein:creatinine ratio)."
+    upcr:"Standard nephrology reference (spot protein:creatinine ratio).",
+    west_haven:"Conn HO. West Haven criteria; AASLD/EASL HE guideline.",
+    cpss:"Kothari RU, et al. Ann Emerg Med 1999;33(4):373–8 (CPSS).",
+    rosier:"Nor AM, et al. Lancet Neurol 2005;4(11):727–34 (ROSIER).",
+    fick_co:"Standard cardiovascular physiology reference (Fick principle).",
+    fontaine:"Fontaine R, et al. 1954 (PAD classification).",
+    rutherford:"Rutherford RB, et al. J Vasc Surg 1997;26(3):517–38.",
+    salter_harris:"Salter RB, Harris WR. J Bone Joint Surg Am 1963;45:587–622.",
+    fitzpatrick:"Fitzpatrick TB. Arch Dermatol 1988;124(6):869–71."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
