@@ -6102,6 +6102,144 @@
       var s=Math.round(v.total);
       var b=s>=90?"Excellent":s>=80?"Good":s>=70?"Fair":"Poor";
       return { v:s, u:"/100", i:b+" shoulder function (higher = better; ideally compared with the age/sex-adjusted normal). Ref: Constant CR, Murley AHG. Clin Orthop 1987." };
+    } },
+
+  { id:"ascvd", cat:"Cardiovascular", icon:"❤️", title:"ASCVD Risk (Pooled Cohort Equations)",
+    desc:"10-year atherosclerotic cardiovascular disease risk (ACC/AHA 2013).",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"race", label:"Race", type:"select", opts:[{v:"white",t:"White / other"},{v:"aa",t:"African American"}] },
+      { id:"age", label:"Age", type:"number", unit:"years (40–79)", step:"1" },
+      { id:"tc", label:"Total cholesterol", type:"number", unit:"mg/dL", step:"1" },
+      { id:"hdl", label:"HDL cholesterol", type:"number", unit:"mg/dL", step:"1" },
+      { id:"sbp", label:"Systolic blood pressure", type:"number", unit:"mmHg", step:"1" },
+      { id:"treated", label:"On blood-pressure treatment", type:"check" },
+      { id:"smoker", label:"Current smoker", type:"check" },
+      { id:"diabetes", label:"Diabetes mellitus", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!ok(v.tc)||!ok(v.hdl)||!ok(v.sbp)||v.tc<=0||v.hdl<=0||v.sbp<=0) return ERR;
+      if(v.age<40||v.age>79) return { err:"Validated for ages 40–79 only" };
+      var lnA=Math.log(v.age), lnT=Math.log(v.tc), lnH=Math.log(v.hdl), lnS=Math.log(v.sbp);
+      var smk=v.smoker?1:0, dm=v.diabetes?1:0, trt=v.treated?1:0;
+      var white=v.race!=="aa", sum, S0, mean;
+      if(v.sex==="f"){
+        if(white){
+          sum=-29.799*lnA+4.884*lnA*lnA+13.540*lnT-3.114*lnA*lnT-13.578*lnH+3.149*lnA*lnH+(trt?2.019*lnS:1.957*lnS)+7.574*smk-1.665*lnA*smk+0.661*dm;
+          S0=0.9665; mean=-29.18;
+        } else {
+          sum=17.114*lnA+0.940*lnT-18.920*lnH+4.475*lnA*lnH+(trt?29.291*lnS-6.432*lnA*lnS:27.820*lnS-6.087*lnA*lnS)+0.691*smk+0.874*dm;
+          S0=0.9533; mean=86.61;
+        }
+      } else {
+        if(white){
+          sum=12.344*lnA+11.853*lnT-2.664*lnA*lnT-7.990*lnH+1.769*lnA*lnH+(trt?1.797*lnS:1.764*lnS)+7.837*smk-1.795*lnA*smk+0.658*dm;
+          S0=0.9144; mean=61.18;
+        } else {
+          sum=2.469*lnA+0.302*lnT-0.307*lnH+(trt?1.916*lnS:1.809*lnS)+0.549*smk+0.645*dm;
+          S0=0.8954; mean=19.54;
+        }
+      }
+      var risk=(1-Math.pow(S0,Math.exp(sum-mean)))*100;
+      if(risk<0)risk=0; if(risk>100)risk=100;
+      var b=risk<5?"Low risk":risk<7.5?"Borderline risk":risk<20?"Intermediate risk":"High risk";
+      return { v:r1(risk), u:"% (10-yr)", i:b+" (ACC/AHA: <5% low, 5–7.5% borderline, 7.5–20% intermediate, ≥20% high). Validated ages 40–79, no prior ASCVD, not on a statin; cholesterol in mg/dL (mmol/L × 38.67). Ref: Goff DC, et al. ACC/AHA 2013." };
+    } },
+
+  { id:"spherical_equivalent", cat:"Ophthalmology", icon:"👁️", title:"Spherical Equivalent",
+    desc:"Combines sphere and cylinder into a single spherical value.",
+    inputs:[
+      { id:"sphere", label:"Sphere", type:"number", unit:"D", step:"0.25" },
+      { id:"cylinder", label:"Cylinder", type:"number", unit:"D", step:"0.25" }
+    ],
+    compute:function(v){
+      if(!ok(v.sphere)||!ok(v.cylinder)) return ERR;
+      var se=v.sphere+v.cylinder/2;
+      return { v:Math.round(se*100)/100, u:"D", i:"Spherical equivalent = sphere + cylinder/2. Ref: standard optics." };
+    } },
+
+  { id:"srk2_iol", cat:"Ophthalmology", icon:"👁️", title:"IOL Power (SRK II)",
+    desc:"Intraocular lens power for cataract surgery (SRK II regression).",
+    inputs:[
+      { id:"a", label:"A-constant", type:"number", step:"0.1" },
+      { id:"k", label:"Average keratometry", type:"number", unit:"D", step:"0.1" },
+      { id:"axial", label:"Axial length", type:"number", unit:"mm", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.a)||!ok(v.k)||!ok(v.axial)||v.k<=0||v.axial<=0) return ERR;
+      var L=v.axial, a1=v.a;
+      if(L<20) a1=v.a+3; else if(L<21) a1=v.a+2; else if(L<22) a1=v.a+1; else if(L<=24.5) a1=v.a; else a1=v.a-0.5;
+      var p=a1-0.9*v.k-2.5*L;
+      return { v:r1(p), u:"D", i:"Estimated emmetropic IOL power (SRK II). Modern eyes are better served by newer formulae (SRK/T, Barrett). Ref: Sanders, Retzlaff & Kraff (SRK II)." };
+    } },
+
+  { id:"oxford_knee", cat:"Musculoskeletal", icon:"🦵", title:"Oxford Knee Score — interpreter",
+    desc:"Interprets an Oxford Knee Score.",
+    inputs:[
+      { id:"total", label:"Oxford Knee Score (0–48)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>48) return ERR;
+      var s=Math.round(v.total);
+      var b=s>=40?"Satisfactory joint function":s>=30?"Mild to moderate knee arthritis":s>=20?"Moderate to severe knee arthritis":"Severe knee arthritis";
+      return { v:s, u:"/48", i:b+" (higher = better). Ref: Dawson J, et al. J Bone Joint Surg Br 1998 (Oxford Knee Score)." };
+    } },
+
+  { id:"oxford_hip", cat:"Musculoskeletal", icon:"🦴", title:"Oxford Hip Score — interpreter",
+    desc:"Interprets an Oxford Hip Score.",
+    inputs:[
+      { id:"total", label:"Oxford Hip Score (0–48)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>48) return ERR;
+      var s=Math.round(v.total);
+      var b=s>=40?"Satisfactory joint function":s>=30?"Mild to moderate hip arthritis":s>=20?"Moderate to severe hip arthritis":"Severe hip arthritis";
+      return { v:s, u:"/48", i:b+" (higher = better). Ref: Dawson J, et al. J Bone Joint Surg Br 1996 (Oxford Hip Score)." };
+    } },
+
+  { id:"quickdash", cat:"Musculoskeletal", icon:"💪", title:"QuickDASH — interpreter",
+    desc:"Interprets a QuickDASH upper-limb disability score.",
+    inputs:[
+      { id:"total", label:"QuickDASH score (0–100)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>100) return ERR;
+      var s=Math.round(v.total);
+      var b=s<20?"Little disability":s<40?"Mild disability":s<60?"Moderate disability":"Severe disability";
+      return { v:s, u:"/100", i:b+" (higher = more upper-limb disability). Ref: Beaton DE, et al. (QuickDASH)." };
+    } },
+
+  { id:"dn4", cat:"Neurology", icon:"🧠", title:"DN4 (Neuropathic Pain)",
+    desc:"Screens for a neuropathic component to pain.",
+    inputs:[
+      { id:"burning", label:"Burning", type:"check" },
+      { id:"cold", label:"Painful cold", type:"check" },
+      { id:"shocks", label:"Electric shocks", type:"check" },
+      { id:"tingling", label:"Tingling", type:"check" },
+      { id:"pins", label:"Pins and needles", type:"check" },
+      { id:"numbness", label:"Numbness", type:"check" },
+      { id:"itching", label:"Itching", type:"check" },
+      { id:"touch", label:"Hypoaesthesia to touch", type:"check" },
+      { id:"prick", label:"Hypoaesthesia to pinprick", type:"check" },
+      { id:"brushing", label:"Pain provoked/increased by brushing", type:"check" }
+    ],
+    compute:function(v){
+      var keys=["burning","cold","shocks","tingling","pins","numbness","itching","touch","prick","brushing"];
+      var s=0; keys.forEach(function(k){if(v[k])s++;});
+      var b=s>=4?"Suggests a neuropathic component (≥4/10)":"Neuropathic pain less likely (<4/10)";
+      return { v:s, u:"/10", i:b+". Ref: Bouhassira D, et al. Pain 2005 (DN4)." };
+    } },
+
+  { id:"phq15", cat:"Psychiatry", icon:"🧠", title:"PHQ-15 — somatic symptom interpreter",
+    desc:"Interprets a PHQ-15 somatic symptom severity total.",
+    inputs:[
+      { id:"total", label:"PHQ-15 total (0–30)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>30) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=4?"Minimal somatic symptoms":s<=9?"Low":s<=14?"Medium":"High somatic symptom burden";
+      return { v:s, u:"/30", i:b+". Ref: Kroenke K, et al. Psychosom Med 2002 (PHQ-15)." };
     } }
 
   ];
@@ -6467,7 +6605,15 @@
     lysholm:["lysholm","knee score","knee function"],
     harris_hip:["harris hip score","hip function","hip replacement outcome"],
     tampa:["tampa scale","kinesiophobia","fear of movement","tsk"],
-    constant_shoulder:["constant murley","shoulder score","constant score"]
+    constant_shoulder:["constant murley","shoulder score","constant score"],
+    ascvd:["ascvd","pooled cohort","10 year cardiovascular risk","cardiovascular risk","statin risk","acc aha risk"],
+    spherical_equivalent:["spherical equivalent","refraction","sphere cylinder","spectacle power"],
+    srk2_iol:["iol power","srk ii","intraocular lens","cataract lens power","a-constant"],
+    oxford_knee:["oxford knee score","knee arthroplasty outcome","knee replacement score"],
+    oxford_hip:["oxford hip score","hip arthroplasty outcome","hip replacement score"],
+    quickdash:["quickdash","dash","upper limb disability","arm shoulder hand"],
+    dn4:["dn4","neuropathic pain","douleur neuropathique","neuropathic screen"],
+    phq15:["phq-15","somatic symptom","somatization","physical symptoms"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -6788,7 +6934,15 @@
     lysholm:"Lysholm J, Gillquist J. Am J Sports Med 1982;10(3):150–4.",
     harris_hip:"Harris WH. J Bone Joint Surg Am 1969;51(4):737–55.",
     tampa:"Miller RP, Kori SH, Todd DD. 1991 (Tampa Scale of Kinesiophobia).",
-    constant_shoulder:"Constant CR, Murley AHG. Clin Orthop Relat Res 1987;(214):160–4."
+    constant_shoulder:"Constant CR, Murley AHG. Clin Orthop Relat Res 1987;(214):160–4.",
+    ascvd:"Goff DC, et al. 2013 ACC/AHA Guideline on the Assessment of Cardiovascular Risk. Circulation 2014;129(25 Suppl 2):S49–73.",
+    spherical_equivalent:"Standard optics (sphere + cylinder/2).",
+    srk2_iol:"Sanders DR, Retzlaff J, Kraff MC. J Cataract Refract Surg 1988 (SRK II).",
+    oxford_knee:"Dawson J, et al. J Bone Joint Surg Br 1998;80(1):63–9 (Oxford Knee Score).",
+    oxford_hip:"Dawson J, et al. J Bone Joint Surg Br 1996;78(2):185–90 (Oxford Hip Score).",
+    quickdash:"Beaton DE, et al. J Bone Joint Surg Am 2005 (QuickDASH).",
+    dn4:"Bouhassira D, et al. Pain 2005;114(1–2):29–36 (DN4).",
+    phq15:"Kroenke K, et al. Psychosom Med 2002;64(2):258–66 (PHQ-15)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
