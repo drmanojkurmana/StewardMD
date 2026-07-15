@@ -19,6 +19,15 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- App Links: verified https://stewardmd.in links open the app directly (invite links
+                 carry ?icujoin=… → forwarded to the join flow via native-bridge.js). autoVerify checks
+                 /.well-known/assetlinks.json on install; falls back to the browser if unverified. -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="stewardmd.in" />
+            </intent-filter>
         </activity>
 
         <provider

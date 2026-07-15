@@ -75,14 +75,17 @@ const AASA = {
     ]
   }
 };
-// Android App Links. NOTE: sha256_cert_fingerprints MUST be the app's RELEASE signing certificate
-// SHA-256 (colon-hex). Placeholder until the owner provides it (get it via:
-// `keytool -list -v -keystore <release.keystore> -alias <alias>` → "SHA256:"). Until then Android
-// falls back to opening the website (which still handles the join). iOS is unaffected.
+// Android App Links. sha256_cert_fingerprints must list EVERY signing cert that ships the installed
+// app. First entry = the local DEBUG keystore (Pixel 9 adb builds). ADD the Google Play "App signing
+// key" SHA-256 (Play Console → Test and release → Setup → App signing) before the Play Store release —
+// Play re-signs the app, so its cert must be here too or App Links won't verify for Play installs.
 const ASSETLINKS = [
   { relation: ["delegate_permission/common.handle_all_urls"],
     target: { namespace: "android_app", package_name: "in.stewardmd.app",
-      sha256_cert_fingerprints: ["REPLACE_WITH_RELEASE_SHA256_FINGERPRINT"] } }
+      sha256_cert_fingerprints: [
+        "9A:36:BF:09:5B:CF:6E:23:5C:BD:DE:9E:DD:E0:31:2A:66:C4:76:23:E4:D7:6C:F3:BD:8A:F7:1E:D7:4B:EE:AC"
+        /* , "<PLAY_APP_SIGNING_SHA256>" — add for the Play Store release */
+      ] } }
 ];
 
 export async function onRequest(context) {
