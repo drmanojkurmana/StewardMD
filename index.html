@@ -42,11 +42,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..700,0..1,0" media="print" onload="this.media='all'">
-<!-- Sacramento: the script font the "MaiKnowledge" credit (.v4-maik-name .mk-s) already
-     asks for. It was never actually loaded, so it fell back to a different cursive on
-     devices without it (e.g. iPhone). Load it so the credit renders as designed everywhere. -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/redesign-system.css?v=gold387">
+<!-- Sacramento (the "MaiKnowledge" credit wordmark, .v4-maik-name .mk-s) is now SELF-HOSTED via
+     @font-face in redesign-system.css (assets/fonts/sacramento.woff2). The old Google-CDN <link>
+     used a media="print" trick that never loaded in the WKWebView, so the app fell back to a
+     different cursive. Self-hosting renders it identically on web + app. -->
+<link rel="stylesheet" href="/redesign-system.css?v=gold407">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <script>
