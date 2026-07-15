@@ -6240,6 +6240,114 @@
       var s=Math.round(v.total);
       var b=s<=4?"Minimal somatic symptoms":s<=9?"Low":s<=14?"Medium":"High somatic symptom burden";
       return { v:s, u:"/30", i:b+". Ref: Kroenke K, et al. Psychosom Med 2002 (PHQ-15)." };
+    } },
+
+  { id:"framingham", cat:"Cardiovascular", icon:"❤️", title:"Framingham Risk (General CVD, 2008)",
+    desc:"10-year general cardiovascular disease risk (D'Agostino 2008).",
+    inputs:[
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
+      { id:"age", label:"Age", type:"number", unit:"years (30–74)", step:"1" },
+      { id:"tc", label:"Total cholesterol", type:"number", unit:"mg/dL", step:"1" },
+      { id:"hdl", label:"HDL cholesterol", type:"number", unit:"mg/dL", step:"1" },
+      { id:"sbp", label:"Systolic blood pressure", type:"number", unit:"mmHg", step:"1" },
+      { id:"treated", label:"On blood-pressure treatment", type:"check" },
+      { id:"smoker", label:"Current smoker", type:"check" },
+      { id:"diabetes", label:"Diabetes mellitus", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!ok(v.tc)||!ok(v.hdl)||!ok(v.sbp)||v.tc<=0||v.hdl<=0||v.sbp<=0) return ERR;
+      if(v.age<30||v.age>74) return { err:"Validated for ages 30–74" };
+      var lnA=Math.log(v.age), lnT=Math.log(v.tc), lnH=Math.log(v.hdl), lnS=Math.log(v.sbp);
+      var smk=v.smoker?1:0, dm=v.diabetes?1:0, trt=v.treated?1:0, sum, S0, mean;
+      if(v.sex==="f"){
+        sum=2.32888*lnA+1.20904*lnT-0.70833*lnH+(trt?2.82263:2.76157)*lnS+0.52873*smk+0.69154*dm;
+        S0=0.95012; mean=26.1931;
+      } else {
+        sum=3.06117*lnA+1.12370*lnT-0.93263*lnH+(trt?1.99881:1.93303)*lnS+0.65451*smk+0.57367*dm;
+        S0=0.88936; mean=23.9802;
+      }
+      var risk=(1-Math.pow(S0,Math.exp(sum-mean)))*100;
+      if(risk<0)risk=0; if(risk>100)risk=100;
+      var b=risk<10?"Low risk":risk<20?"Intermediate risk":"High risk";
+      return { v:r1(risk), u:"% (10-yr)", i:b+" of a general cardiovascular event (includes coronary, cerebrovascular, heart failure and peripheral disease — runs higher than hard-ASCVD estimates). Cholesterol in mg/dL (mmol/L × 38.67). Ref: D'Agostino, Circulation 2008." };
+    } },
+
+  { id:"epvs", cat:"Cardiovascular", icon:"🩸", title:"Estimated Plasma Volume Status (ePVS)",
+    desc:"Relative plasma volume from haematocrit and haemoglobin (a congestion marker).",
+    inputs:[
+      { id:"hct", label:"Haematocrit", type:"number", unit:"%", step:"0.1" },
+      { id:"hb", label:"Haemoglobin", type:"number", unit:"g/dL", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.hct)||!ok(v.hb)||v.hct<=0||v.hct>=100||v.hb<=0) return ERR;
+      var epvs=(100-v.hct)/v.hb;
+      var b=epvs>5.5?"Elevated — suggests plasma-volume expansion/congestion":"Within the usual range";
+      return { v:Math.round(epvs*100)/100, u:"mL/g", i:b+" (Duarte ratio; higher values track congestion in heart failure). Ref: Duarte K, et al. JACC Heart Fail 2015 (ePVS)." };
+    } },
+
+  { id:"frail_scale", cat:"General", icon:"🧓", title:"FRAIL Scale",
+    desc:"Rapid frailty screen (Fatigue, Resistance, Ambulation, Illnesses, Loss of weight).",
+    inputs:[
+      { id:"fatigue", label:"Fatigue (tired most of the time)", type:"check" },
+      { id:"resistance", label:"Resistance (difficulty climbing a flight of stairs)", type:"check" },
+      { id:"ambulation", label:"Ambulation (difficulty walking ~100 m)", type:"check" },
+      { id:"illness", label:"Illnesses (≥5 chronic illnesses)", type:"check" },
+      { id:"weight", label:"Loss of weight (>5% in the past year)", type:"check" }
+    ],
+    compute:function(v){
+      var s=0;["fatigue","resistance","ambulation","illness","weight"].forEach(function(k){if(v[k])s++;});
+      var b=s===0?"Robust":s<=2?"Pre-frail":"Frail";
+      return { v:s, u:"/5", i:b+" (0 robust, 1–2 pre-frail, ≥3 frail). Ref: Morley JE, et al. J Nutr Health Aging 2012 (FRAIL)." };
+    } },
+
+  { id:"tug", cat:"General", icon:"🚶", title:"Timed Up and Go (TUG)",
+    desc:"Interprets a Timed Up and Go time for mobility and fall risk.",
+    inputs:[
+      { id:"secs", label:"Time to complete", type:"number", unit:"seconds", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.secs)||v.secs<=0) return ERR;
+      var b=v.secs>=30?"Markedly impaired mobility — often dependent for transfers/ADLs":v.secs>=13.5?"Increased fall risk":v.secs>=12?"Borderline — possible increased fall risk":"Within the usual range for independent adults";
+      return { v:r1(v.secs), u:"s", i:b+" (a common fall-risk cut-off is ≥12–13.5 s). Ref: Podsiadlo D, Richardson S. J Am Geriatr Soc 1991 (TUG)." };
+    } },
+
+  { id:"prisma7", cat:"General", icon:"🧓", title:"PRISMA-7 (Frailty Screen)",
+    desc:"Seven-item screen for frailty/disability in older adults.",
+    inputs:[
+      { id:"age85", label:"Age >85 years", type:"check" },
+      { id:"male", label:"Male sex", type:"check" },
+      { id:"health", label:"Health problems that limit activities", type:"check" },
+      { id:"help", label:"Needs someone to help regularly", type:"check" },
+      { id:"home", label:"Health problems that require staying at home", type:"check" },
+      { id:"nosupport", label:"No one to count on for help if needed", type:"check" },
+      { id:"walkaid", label:"Regularly uses a stick / walker / wheelchair", type:"check" }
+    ],
+    compute:function(v){
+      var s=0; if(v.age85)s++; if(v.male)s++; if(v.health)s++; if(v.help)s++; if(v.home)s++; if(v.nosupport)s++; if(v.walkaid)s++;
+      var b=s>=3?"Positive screen (≥3) — further frailty assessment recommended":"Negative screen (<3)";
+      return { v:s, u:"/7", i:b+". Ref: Raîche M, et al. Arch Gerontol Geriatr 2008 (PRISMA-7)." };
+    } },
+
+  { id:"gds30", cat:"Psychiatry", icon:"🧠", title:"Geriatric Depression Scale (GDS-30) — interpreter",
+    desc:"Interprets a 30-item Geriatric Depression Scale total.",
+    inputs:[
+      { id:"total", label:"GDS-30 total (0–30)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>30) return ERR;
+      var s=Math.round(v.total);
+      var b=s<=9?"Normal range":s<=19?"Mild depression":"Moderate to severe depression";
+      return { v:s, u:"/30", i:b+". Ref: Yesavage JA, et al. J Psychiatr Res 1982 (GDS)." };
+    } },
+
+  { id:"cdr", cat:"Neurology", icon:"🧠", title:"Clinical Dementia Rating (global)",
+    desc:"Interprets a Clinical Dementia Rating global score.",
+    inputs:[
+      { id:"score", label:"CDR global score", type:"select", opts:[{v:"0",t:"0 — none"},{v:"0.5",t:"0.5 — very mild / questionable"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"}] }
+    ],
+    compute:function(v){
+      var s=v.score||"0"; var map={"0":"No dementia","0.5":"Questionable / very mild impairment (often MCI)","1":"Mild dementia","2":"Moderate dementia","3":"Severe dementia"};
+      return { v:"CDR "+s, u:"", i:(map[s]||"")+". Derived from the standard box-scoring algorithm across six domains. Ref: Morris JC. Neurology 1993 (CDR)." };
     } }
 
   ];
@@ -6613,7 +6721,14 @@
     oxford_hip:["oxford hip score","hip arthroplasty outcome","hip replacement score"],
     quickdash:["quickdash","dash","upper limb disability","arm shoulder hand"],
     dn4:["dn4","neuropathic pain","douleur neuropathique","neuropathic screen"],
-    phq15:["phq-15","somatic symptom","somatization","physical symptoms"]
+    phq15:["phq-15","somatic symptom","somatization","physical symptoms"],
+    framingham:["framingham risk","general cvd risk","d'agostino","10 year cvd","cardiovascular risk score"],
+    epvs:["estimated plasma volume","epvs","plasma volume status","congestion","duarte"],
+    frail_scale:["frail scale","frailty screen","morley frail"],
+    tug:["timed up and go","tug","fall risk mobility","gait speed"],
+    prisma7:["prisma-7","frailty screen","older adult frailty","disability screen"],
+    gds30:["geriatric depression scale","gds-30","gds 30","elderly depression"],
+    cdr:["clinical dementia rating","cdr","dementia staging","dementia severity"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -6942,7 +7057,14 @@
     oxford_hip:"Dawson J, et al. J Bone Joint Surg Br 1996;78(2):185–90 (Oxford Hip Score).",
     quickdash:"Beaton DE, et al. J Bone Joint Surg Am 2005 (QuickDASH).",
     dn4:"Bouhassira D, et al. Pain 2005;114(1–2):29–36 (DN4).",
-    phq15:"Kroenke K, et al. Psychosom Med 2002;64(2):258–66 (PHQ-15)."
+    phq15:"Kroenke K, et al. Psychosom Med 2002;64(2):258–66 (PHQ-15).",
+    framingham:"D'Agostino RB, et al. Circulation 2008;117(6):743–53 (General CVD risk).",
+    epvs:"Duarte K, et al. JACC Heart Fail 2015;3(11):886–93 (ePVS).",
+    frail_scale:"Morley JE, et al. J Nutr Health Aging 2012;16(7):601–8 (FRAIL).",
+    tug:"Podsiadlo D, Richardson S. J Am Geriatr Soc 1991;39(2):142–8 (TUG).",
+    prisma7:"Raîche M, et al. Arch Gerontol Geriatr 2008;47(1):9–18 (PRISMA-7).",
+    gds30:"Yesavage JA, et al. J Psychiatr Res 1982;17(1):37–49 (GDS).",
+    cdr:"Morris JC. Neurology 1993;43(11):2412–4 (Clinical Dementia Rating)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
