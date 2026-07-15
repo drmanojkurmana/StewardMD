@@ -210,6 +210,9 @@
     data = data || {};
     return {
       id: id, name: data.name || "", unit: data.unit || "", hospital: data.hospital || "",
+      // Category (icu|ward) + unit type (ICU/MICU/… or Male Ward/…). Older units have no kind →
+      // treated as "icu" so ICU and Ward stay separate without a migration.
+      kind: data.kind || "icu", unitType: data.unitType || "",
       roles: {}, members: [], createdBy: data.createdBy || null,
       myRole: role || null
     };
@@ -406,6 +409,8 @@
             name: (info && info.name) || "ICU unit",
             unit: (info && info.unit) || "",
             hospital: (info && info.hospital) || "",
+            kind: (info && info.kind) || "icu",            // icu | ward — keeps the two categories separate
+            unitType: (info && info.unitType) || "",       // ICU/MICU/SICU/PICU/CCU | Male Ward/Female Ward
             createdBy: uid,
             createdAt: fieldValue().serverTimestamp()
           };
