@@ -48,21 +48,22 @@
     return n;
   }
 
-  /* ---- APACHE II per-variable point bands (emit points; calc's P() collapses b-suffixes) ---- */
-  function apTemp(t) { return t >= 41 ? 4 : t >= 39 ? 3 : t >= 38.5 ? 1 : t >= 36 ? 0 : t >= 34 ? 1 : t >= 32 ? 2 : t >= 30 ? 3 : 4; }
-  function apMap(m) { return m >= 160 ? 4 : m >= 130 ? 3 : m >= 110 ? 2 : m >= 70 ? 0 : m >= 50 ? 2 : 4; }
-  function apHr(h) { return h >= 180 ? 4 : h >= 140 ? 3 : h >= 110 ? 2 : h >= 70 ? 0 : h >= 55 ? 2 : h >= 40 ? 3 : 4; }
-  function apRr(r) { return r >= 50 ? 4 : r >= 35 ? 3 : r >= 25 ? 1 : r >= 12 ? 0 : r >= 10 ? 1 : r >= 6 ? 2 : 4; }
-  function apPh(p) { return p >= 7.7 ? 4 : p >= 7.6 ? 3 : p >= 7.5 ? 1 : p >= 7.33 ? 0 : p >= 7.25 ? 2 : p >= 7.15 ? 3 : 4; }
-  function apNa(n) { return n >= 180 ? 4 : n >= 160 ? 3 : n >= 155 ? 2 : n >= 150 ? 1 : n >= 130 ? 0 : n >= 120 ? 2 : n >= 111 ? 3 : 4; }
-  function apK(k) { return k >= 7 ? 4 : k >= 6 ? 3 : k >= 5.5 ? 1 : k >= 3.5 ? 0 : k >= 3 ? 1 : k >= 2.5 ? 2 : 4; }
-  function apCr(c) { return c >= 3.5 ? 4 : c >= 2 ? 3 : c >= 1.5 ? 2 : c >= 0.6 ? 0 : 2; }
-  function apHct(h) { return h >= 60 ? 4 : h >= 50 ? 2 : h >= 46 ? 1 : h >= 30 ? 0 : h >= 20 ? 2 : 4; }
-  function apWbc(w) { return w >= 40 ? 4 : w >= 20 ? 2 : w >= 15 ? 1 : w >= 3 ? 0 : w >= 1 ? 2 : 4; }
+  /* ---- APACHE II per-variable bands: return the EXACT select option value (incl b-suffix)
+     so a pre-filled calculator selects the right band; the calc's P() collapses b for scoring ---- */
+  function apTemp(t) { return t >= 41 ? "4" : t >= 39 ? "3" : t >= 38.5 ? "1" : t >= 36 ? "0" : t >= 34 ? "1b" : t >= 32 ? "2" : t >= 30 ? "3b" : "4b"; }
+  function apMap(m) { return m >= 160 ? "4" : m >= 130 ? "3" : m >= 110 ? "2" : m >= 70 ? "0" : m >= 50 ? "2b" : "4b"; }
+  function apHr(h) { return h >= 180 ? "4" : h >= 140 ? "3" : h >= 110 ? "2" : h >= 70 ? "0" : h >= 55 ? "2b" : h >= 40 ? "3b" : "4b"; }
+  function apRr(r) { return r >= 50 ? "4" : r >= 35 ? "3" : r >= 25 ? "1" : r >= 12 ? "0" : r >= 10 ? "1b" : r >= 6 ? "2" : "4b"; }
+  function apPh(p) { return p >= 7.7 ? "4" : p >= 7.6 ? "3" : p >= 7.5 ? "1" : p >= 7.33 ? "0" : p >= 7.25 ? "2" : p >= 7.15 ? "3b" : "4b"; }
+  function apNa(n) { return n >= 180 ? "4" : n >= 160 ? "3" : n >= 155 ? "2" : n >= 150 ? "1" : n >= 130 ? "0" : n >= 120 ? "2b" : n >= 111 ? "3b" : "4b"; }
+  function apK(k) { return k >= 7 ? "4" : k >= 6 ? "3" : k >= 5.5 ? "1" : k >= 3.5 ? "0" : k >= 3 ? "1b" : k >= 2.5 ? "2" : "4b"; }
+  function apCr(c) { return c >= 3.5 ? "4" : c >= 2 ? "3" : c >= 1.5 ? "2" : c >= 0.6 ? "0" : "2b"; }
+  function apHct(h) { return h >= 60 ? "4" : h >= 50 ? "2" : h >= 46 ? "1" : h >= 30 ? "0" : h >= 20 ? "2b" : "4b"; }
+  function apWbc(w) { return w >= 40 ? "4" : w >= 20 ? "2" : w >= 15 ? "1" : w >= 3 ? "0" : w >= 1 ? "2b" : "4b"; }
   function apAge(a) { return a >= 75 ? 6 : a >= 65 ? 5 : a >= 55 ? 3 : a >= 45 ? 2 : 0; }
-  function apOxy(fio2, pao2, paco2) { /* fio2 as fraction */
-    if (fio2 >= 0.5) { var aa = fio2 * 713 - paco2 / 0.8 - pao2; return aa < 200 ? 0 : aa < 350 ? 2 : aa < 500 ? 3 : 4; }
-    return pao2 > 70 ? 0 : pao2 >= 61 ? 1 : pao2 >= 55 ? 3 : 4;
+  function apOxy(fio2, pao2, paco2) { /* fio2 as fraction; oxy option values are unique 0..4 */
+    if (fio2 >= 0.5) { var aa = fio2 * 713 - paco2 / 0.8 - pao2; return aa < 200 ? "0" : aa < 350 ? "2" : aa < 500 ? "3" : "4"; }
+    return pao2 > 70 ? "0" : pao2 >= 61 ? "1" : pao2 >= 55 ? "3" : "4";
   }
 
   /* ---- Child-Pugh clinical-grade detection from recorded findings/diagnosis (conservative;
@@ -229,7 +230,7 @@
       if (v && v.__missing) { out.push({ id: def.id, label: def.label, missing: v.__missing }); return; }
       var r; try { r = c.compute(v); } catch (e) { return; }
       if (!r || r.err) { out.push({ id: def.id, label: def.label, missing: ["valid inputs"] }); return; }
-      out.push({ id: def.id, label: def.label, value: r.v, unit: r.u || "", interp: (r.i || "") + (def.note ? " " + def.note : ""), used: Object.keys(v) });
+      out.push({ id: def.id, label: def.label, value: r.v, unit: r.u || "", interp: (r.i || "") + (def.note ? " " + def.note : ""), used: Object.keys(v), inputs: v });
     });
     return out;
   }

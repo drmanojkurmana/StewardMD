@@ -6319,7 +6319,7 @@
     var ix = act.indexOf(":"), cmd = ix < 0 ? act : act.slice(0, ix), arg = ix < 0 ? "" : act.slice(ix + 1);
     switch (cmd) {
       case "close": ICU.close(); break;
-      case "calc": try { if (window.MEDCALC && MEDCALC.open) MEDCALC.open(arg); } catch (e) {} break;
+      case "calc": { var _scp = (STATE.scores || []).filter(function (x) { return x.id === arg && x.inputs; })[0]; try { if (window.MEDCALC && MEDCALC.open) MEDCALC.open(arg, _scp ? _scp.inputs : undefined); } catch (e) {} break; }
       case "tab": if (icuV2On()) _screen = "patient"; _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
       case "ws": { if (icuV2On()) _screen = "patient"; _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
       // ---- ICU v2 (smd_icu_v2) — board / alerts / team / admit / filter, all flag-only ----

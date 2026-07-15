@@ -7406,10 +7406,28 @@
     root.classList.add("on"); document.body.classList.add("mc-lock");
     setTimeout(function(){ try{ root.querySelector("#mcSearch").focus(); }catch(e){} }, 60);
   }
-  function open(id){
+  // Prefill a calculator's inputs from a {inputId:value} map, then compute.
+  // Values must match the input type: checkbox->boolean, select->option value
+  // (exact string), number->number. Unknown/blank/NaN values are skipped.
+  function applyPrefill(id, prefill){
+    var c=byId(id); if(!c || !prefill || typeof prefill!=="object") return;
+    c.inputs.forEach(function(f){
+      if(!Object.prototype.hasOwnProperty.call(prefill, f.id)) return;
+      var val=prefill[f.id];
+      if(val==null || (typeof val==="number" && isNaN(val))) return;
+      var el=document.getElementById("mc_"+c.id+"_"+f.id);
+      if(!el) return;
+      if(f.type==="check") el.checked=!!val;
+      else el.value=String(val);
+    });
+    var btn=document.getElementById("mcCalc_"+id);
+    if(btn) btn.click();   // run() reads the DOM we just set and renders the result
+  }
+  function open(id, prefill){
     openList();
     var c=byId(id); if(!c) return;
     activeCat=""; openId=id; renderCats(); renderList();
+    if(prefill) applyPrefill(id, prefill);
     setTimeout(function(){ var el=document.getElementById("mcPanel_"+id); if(el) el.scrollIntoView({behavior:"smooth",block:"center"}); }, 80);
   }
   function close(){ if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
