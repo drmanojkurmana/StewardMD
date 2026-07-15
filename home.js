@@ -1212,7 +1212,17 @@
       if (fab.style.display !== want) fab.style.display = want;
     }
     refreshFab();
-    setInterval(refreshFab, 400);
+    // Scroll fluidity: refreshFab reads layout (elementFromPoint + getComputedStyle), which
+    // forces a synchronous reflow. The old blind 400ms poll ran that ~2.5x/s during scroll and
+    // stuttered the UI. Make it event-driven, rAF-coalesced, and NEVER probe mid-scroll — only
+    // once scrolling settles. A slow 1.2s safety net covers anything the events miss.
+    var _fabRaf = 0, _fabScrolling = 0, _fabScrollT = 0;
+    function scheduleFab() { if (_fabRaf) return; _fabRaf = requestAnimationFrame(function () { _fabRaf = 0; if (!_fabScrolling) refreshFab(); }); }
+    ["click", "hashchange", "transitionend", "animationend"].forEach(function (ev) { window.addEventListener(ev, scheduleFab, true); });
+    document.addEventListener("visibilitychange", scheduleFab, true);
+    // Capture-phase catches scrolls on inner scroll containers too (ICU, Ward Sync, drawers).
+    window.addEventListener("scroll", function () { _fabScrolling = 1; clearTimeout(_fabScrollT); _fabScrollT = setTimeout(function () { _fabScrolling = 0; scheduleFab(); }, 140); }, true);
+    setInterval(scheduleFab, 1200);
 
     // Notifications: probe once for unread medical updates, then hourly.
     try { setTimeout(refreshBadge, 1500); setInterval(function () { _notifItems = null; refreshBadge(); }, 3600000); } catch (e) {}
