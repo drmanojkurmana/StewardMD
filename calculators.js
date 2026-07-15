@@ -5248,6 +5248,177 @@
       var cci=(inc*1000)*v.bsa/v.dose;
       var b=cci<7500?"Low increment — suggests refractoriness if measured ~10–60 min post-transfusion (consider immune and non-immune causes)":"Adequate increment";
       return { v:r0(cci), u:"", i:b+" (increment "+r0(inc)+" ×10⁹/L). A 10–60 min CCI <7500 (or 1 h <5000) suggests refractoriness. Ref: standard transfusion reference." };
+    } },
+
+  { id:"dvi_aortic", cat:"Cardiovascular", icon:"❤️", title:"Dimensionless Index (Aortic Stenosis)",
+    desc:"Velocity ratio for aortic stenosis, independent of LVOT diameter.",
+    inputs:[
+      { id:"lvot", label:"LVOT VTI (or peak velocity)", type:"number", step:"0.1" },
+      { id:"av", label:"Aortic-valve VTI (or peak velocity)", type:"number", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.lvot)||!ok(v.av)||v.lvot<=0||v.av<=0) return ERR;
+      var dvi=v.lvot/v.av;
+      var b=dvi<=0.25?"Severe aortic stenosis":dvi<0.5?"Non-severe / moderate range":"Unlikely severe stenosis";
+      return { v:Math.round(dvi*100)/100, u:"", i:b+" (DVI ≤0.25 indicates severe AS; use the same measure — VTI or peak velocity — for both). Ref: ASE valve-stenosis guideline." };
+    } },
+
+  { id:"lv_mass", cat:"Cardiovascular", icon:"❤️", title:"LV Mass (ASE Cube Formula)",
+    desc:"Left-ventricular mass from linear dimensions (Devereux).",
+    inputs:[
+      { id:"lvidd", label:"LV internal diameter, diastole", type:"number", unit:"cm", step:"0.1" },
+      { id:"ivsd", label:"Interventricular septum, diastole", type:"number", unit:"cm", step:"0.1" },
+      { id:"pwtd", label:"Posterior wall thickness, diastole", type:"number", unit:"cm", step:"0.1" },
+      { id:"bsa", label:"Body surface area (optional, for index)", type:"number", unit:"m²", step:"0.01" }
+    ],
+    compute:function(v){
+      if(!ok(v.lvidd)||!ok(v.ivsd)||!ok(v.pwtd)||v.lvidd<=0||v.ivsd<0||v.pwtd<0) return ERR;
+      var sum=v.lvidd+v.pwtd+v.ivsd;
+      var mass=0.8*(1.04*(Math.pow(sum,3)-Math.pow(v.lvidd,3)))+0.6;
+      var idx = (ok(v.bsa)&&v.bsa>0) ? "; LV mass index ≈ "+r0(mass/v.bsa)+" g/m²" : "";
+      return { v:r0(mass), u:"g", i:"Estimated LV mass"+idx+". Compare with sex-specific reference ranges for LVH. Ref: Devereux, Am J Cardiol 1986 (ASE cube)." };
+    } },
+
+  { id:"e_over_e_prime", cat:"Cardiovascular", icon:"❤️", title:"E/e′ Ratio (LV Filling Pressure)",
+    desc:"Estimates left-atrial pressure from mitral inflow and tissue Doppler.",
+    inputs:[
+      { id:"e", label:"Mitral E velocity", type:"number", unit:"cm/s", step:"1" },
+      { id:"eprime", label:"Average e′ velocity (septal + lateral)/2", type:"number", unit:"cm/s", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.e)||!ok(v.eprime)||v.e<0||v.eprime<=0) return ERR;
+      var r=v.e/v.eprime;
+      var b=r>14?"Elevated — suggests raised LV filling pressure/LAP":r<8?"Normal LV filling pressure":"Indeterminate — use additional diastolic parameters";
+      return { v:Math.round(r*10)/10, u:"", i:b+" (average E/e′ >14 suggests elevated filling pressure; <8 normal). Ref: ASE/EACVI diastolic-function guideline 2016." };
+    } },
+
+  { id:"rsbi", cat:"Critical care", icon:"🫁", title:"Rapid Shallow Breathing Index (RSBI)",
+    desc:"Weaning-readiness index during a spontaneous breathing trial.",
+    inputs:[
+      { id:"rr", label:"Respiratory rate", type:"number", unit:"breaths/min", step:"1" },
+      { id:"vt", label:"Tidal volume", type:"number", unit:"mL", step:"10" }
+    ],
+    compute:function(v){
+      if(!ok(v.rr)||!ok(v.vt)||v.rr<0||v.vt<=0) return ERR;
+      var rsbi=v.rr/(v.vt/1000);
+      var b=rsbi>105?"High — predicts a higher chance of weaning/extubation failure":"≤105 — more consistent with successful weaning";
+      return { v:r0(rsbi), u:"breaths/min/L", i:b+" (threshold ~105). Ref: Yang & Tobin, N Engl J Med 1991." };
+    } },
+
+  { id:"vis_score", cat:"Critical care", icon:"💉", title:"Vasoactive-Inotropic Score (VIS)",
+    desc:"Cumulative intensity of vasoactive/inotrope support.",
+    inputs:[
+      { id:"dopamine", label:"Dopamine", type:"number", unit:"µg/kg/min", step:"0.1" },
+      { id:"dobutamine", label:"Dobutamine", type:"number", unit:"µg/kg/min", step:"0.1" },
+      { id:"milrinone", label:"Milrinone", type:"number", unit:"µg/kg/min", step:"0.1" },
+      { id:"adrenaline", label:"Adrenaline (epinephrine)", type:"number", unit:"µg/kg/min", step:"0.01" },
+      { id:"noradrenaline", label:"Noradrenaline (norepinephrine)", type:"number", unit:"µg/kg/min", step:"0.01" },
+      { id:"vasopressin", label:"Vasopressin", type:"number", unit:"U/kg/min", step:"0.0001" }
+    ],
+    compute:function(v){
+      var dop=Number(v.dopamine)||0, dob=Number(v.dobutamine)||0, mil=Number(v.milrinone)||0, adr=Number(v.adrenaline)||0, nor=Number(v.noradrenaline)||0, vaso=Number(v.vasopressin)||0;
+      if(dop<0||dob<0||mil<0||adr<0||nor<0||vaso<0) return ERR;
+      var vis=dop+dob+10*mil+100*adr+100*nor+10000*vaso;
+      var b=vis>=20?"High vasoactive support — associated with worse outcomes":vis>0?"Moderate/low support":"No vasoactive support";
+      return { v:Math.round(vis*10)/10, u:"", i:b+" (a VIS ≥20–25 has been linked to poorer outcomes). Ref: Gaies, Pediatr Crit Care Med 2010 (VIS)." };
+    } },
+
+  { id:"fli", cat:"Hepatology", icon:"🫀", title:"Fatty Liver Index (FLI)",
+    desc:"Predicts hepatic steatosis from routine measurements.",
+    inputs:[
+      { id:"tg", label:"Triglycerides", type:"number", unit:"mg/dL", step:"1" },
+      { id:"bmi", label:"BMI", type:"number", unit:"kg/m²", step:"0.1" },
+      { id:"ggt", label:"Gamma-GT", type:"number", unit:"U/L", step:"1" },
+      { id:"waist", label:"Waist circumference", type:"number", unit:"cm", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.tg)||!ok(v.bmi)||!ok(v.ggt)||!ok(v.waist)||v.tg<=0||v.bmi<=0||v.ggt<=0||v.waist<=0) return ERR;
+      var L=0.953*Math.log(v.tg)+0.139*v.bmi+0.718*Math.log(v.ggt)+0.053*v.waist-15.745;
+      var fli=Math.exp(L)/(1+Math.exp(L))*100;
+      var b=fli<30?"Steatosis unlikely (FLI <30)":fli>=60?"Steatosis likely (FLI ≥60)":"Indeterminate (FLI 30–60)";
+      return { v:r0(fli), u:"/100", i:b+" (triglycerides in mg/dL). Ref: Bedogni, BMC Gastroenterol 2006 (FLI)." };
+    } },
+
+  { id:"ipi", cat:"Haematology", icon:"🩸", title:"IPI (Lymphoma Prognostic Index)",
+    desc:"International Prognostic Index for aggressive non-Hodgkin lymphoma.",
+    inputs:[
+      { id:"age", label:"Age >60 years", type:"check" },
+      { id:"ldh", label:"LDH above normal", type:"check" },
+      { id:"ecog", label:"ECOG performance status ≥2", type:"check" },
+      { id:"stage", label:"Ann Arbor stage III–IV", type:"check" },
+      { id:"extranodal", label:">1 extranodal site", type:"check" }
+    ],
+    compute:function(v){
+      var s=0;["age","ldh","ecog","stage","extranodal"].forEach(function(k){if(v[k])s++;});
+      var b=s<=1?"Low risk":s===2?"Low-intermediate risk":s===3?"High-intermediate risk":"High risk";
+      return { v:s, u:"/5", i:b+". Ref: International NHL Prognostic Factors Project, N Engl J Med 1993." };
+    } },
+
+  { id:"flipi", cat:"Haematology", icon:"🩸", title:"FLIPI (Follicular Lymphoma IPI)",
+    desc:"Prognostic index for follicular lymphoma.",
+    inputs:[
+      { id:"age", label:"Age ≥60 years", type:"check" },
+      { id:"stage", label:"Ann Arbor stage III–IV", type:"check" },
+      { id:"hb", label:"Haemoglobin <120 g/L", type:"check" },
+      { id:"nodal", label:">4 nodal areas involved", type:"check" },
+      { id:"ldh", label:"LDH above normal", type:"check" }
+    ],
+    compute:function(v){
+      var s=0;["age","stage","hb","nodal","ldh"].forEach(function(k){if(v[k])s++;});
+      var b=s<=1?"Low risk":s===2?"Intermediate risk":"High risk";
+      return { v:s, u:"/5", i:b+". Ref: Solal-Céligny, Blood 2004 (FLIPI)." };
+    } },
+
+  { id:"mipi", cat:"Haematology", icon:"🩸", title:"Simplified MIPI (Mantle Cell Lymphoma)",
+    desc:"Simplified Mantle Cell Lymphoma International Prognostic Index.",
+    inputs:[
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<50"},{v:"1",t:"50–59"},{v:"2",t:"60–69"},{v:"3",t:"≥70"}] },
+      { id:"ecog", label:"ECOG performance status", type:"select", opts:[{v:"0",t:"0–1"},{v:"2",t:"2–4"}] },
+      { id:"ldh", label:"LDH / upper limit of normal", type:"select", opts:[{v:"0",t:"<0.67"},{v:"1",t:"0.67–0.99"},{v:"2",t:"1.00–1.49"},{v:"3",t:"≥1.50"}] },
+      { id:"wbc", label:"WBC (×10⁹/L)", type:"select", opts:[{v:"0",t:"<6.7"},{v:"1",t:"6.7–9.99"},{v:"2",t:"10–14.99"},{v:"3",t:"≥15"}] }
+    ],
+    compute:function(v){
+      var s=(Number(v.age)||0)+(Number(v.ecog)||0)+(Number(v.ldh)||0)+(Number(v.wbc)||0);
+      var b=s<=3?"Low risk":s<=5?"Intermediate risk":"High risk";
+      return { v:s, u:"/11", i:b+". Ref: Hoster, Blood 2008 (MIPI)." };
+    } },
+
+  { id:"iron_ingestion", cat:"Toxicology", icon:"⚗️", title:"Elemental Iron Ingestion",
+    desc:"Estimated elemental iron dose after ingestion.",
+    inputs:[
+      { id:"mg", label:"Total elemental iron ingested", type:"number", unit:"mg", step:"1" },
+      { id:"wt", label:"Body weight", type:"number", unit:"kg", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.mg)||!ok(v.wt)||v.mg<0||v.wt<=0) return ERR;
+      var dose=v.mg/v.wt;
+      var b=dose<20?"Minimal toxicity expected":dose<40?"Mild — usually gastrointestinal symptoms":dose<60?"Moderate — systemic toxicity possible":"Potentially serious/lethal — urgent assessment";
+      return { v:r1(dose), u:"mg/kg", i:b+" (<20 minimal, 20–60 mild–moderate, >60 potentially serious). Ferrous sulfate is ~20% elemental iron. Ref: standard toxicology reference." };
+    } },
+
+  { id:"mmse", cat:"Neurology", icon:"🧠", title:"MMSE — score interpreter",
+    desc:"Interprets a Mini-Mental State Examination total.",
+    inputs:[
+      { id:"total", label:"MMSE total (0–30)", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.total)||v.total<0||v.total>30) return ERR;
+      var s=Math.round(v.total);
+      var b=s>=24?"No / borderline impairment (adjust for age and education)":s>=19?"Mild cognitive impairment":s>=10?"Moderate cognitive impairment":"Severe cognitive impairment";
+      return { v:s, u:"/30", i:b+". The MMSE is copyrighted (PAR Inc.) — administer the official form; banding here is indicative only. Ref: Folstein, J Psychiatr Res 1975." };
+    } },
+
+  { id:"insulin_rules", cat:"Endocrine", icon:"🧬", title:"Insulin Dosing Rules (500 / 1800)",
+    desc:"Estimates carbohydrate ratio and correction factor from total daily dose.",
+    inputs:[
+      { id:"tdd", label:"Total daily insulin dose", type:"number", unit:"units/day", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.tdd)||v.tdd<=0) return ERR;
+      var icr=500/v.tdd;
+      var cf_mgdl=1800/v.tdd;
+      var cf_mmol=100/v.tdd;
+      return { v:r1(icr), u:"g carb/unit", i:"Insulin-to-carbohydrate ratio ≈ 1 unit per "+r1(icr)+" g carbohydrate (500 rule). Correction factor ≈ "+r0(cf_mgdl)+" mg/dL ("+r1(cf_mmol)+" mmol/L) per unit (1800 rule, rapid-acting). A starting estimate only — titrate to the individual. Ref: standard diabetes reference." };
     } }
 
   ];
@@ -5553,7 +5724,19 @@
     bard:["bard score","nafld fibrosis","nonalcoholic fatty liver","advanced fibrosis"],
     cpis:["cpis","clinical pulmonary infection score","ventilator associated pneumonia","vap"],
     kawasaki:["kawasaki disease","mucocutaneous lymph node","kd criteria","coronary aneurysm children"],
-    cci_platelet:["corrected count increment","cci","platelet refractoriness","platelet transfusion response"]
+    cci_platelet:["corrected count increment","cci","platelet refractoriness","platelet transfusion response"],
+    dvi_aortic:["dimensionless index","velocity ratio","aortic stenosis","dvi","lvot av vti"],
+    lv_mass:["lv mass","left ventricular mass","devereux","ase cube","lvh mass"],
+    e_over_e_prime:["e/e prime","e over e","filling pressure","diastolic function","tissue doppler","lap"],
+    rsbi:["rapid shallow breathing index","rsbi","weaning","yang tobin","sbt"],
+    vis_score:["vasoactive inotropic score","vis","inotrope score","vasopressor score"],
+    fli:["fatty liver index","fli","hepatic steatosis","nafld screen"],
+    ipi:["international prognostic index","ipi","dlbcl","aggressive lymphoma prognosis"],
+    flipi:["flipi","follicular lymphoma","lymphoma prognosis"],
+    mipi:["mipi","mantle cell lymphoma","mantle cell prognosis"],
+    iron_ingestion:["iron ingestion","elemental iron","iron overdose","iron poisoning"],
+    mmse:["mmse","mini mental","folstein","cognitive screen","dementia score"],
+    insulin_rules:["insulin dosing","500 rule","1800 rule","carb ratio","correction factor","insulin sensitivity factor"]
   };
   CALCS.forEach(function(c){ c.kw=KW[c.id]||[]; });
 
@@ -5814,7 +5997,19 @@
     bard:"Harrison SA, et al. Gut 2008;57(10):1441–7 (BARD score).",
     cpis:"Pugin J, et al. Am Rev Respir Dis 1991;143(5):1121–9 (CPIS).",
     kawasaki:"McCrindle BW, et al. Circulation 2017;135(17):e927–99 (AHA Kawasaki).",
-    cci_platelet:"Standard transfusion-medicine reference (corrected count increment)."
+    cci_platelet:"Standard transfusion-medicine reference (corrected count increment).",
+    dvi_aortic:"Baumgartner H, et al. ASE/EACVI recommendations on aortic stenosis assessment.",
+    lv_mass:"Devereux RB, et al. Am J Cardiol 1986;57(6):450–8 (ASE cube formula).",
+    e_over_e_prime:"Nagueh SF, et al. J Am Soc Echocardiogr 2016;29(4):277–314 (diastolic function).",
+    rsbi:"Yang KL, Tobin MJ. N Engl J Med 1991;324(21):1445–50 (RSBI).",
+    vis_score:"Gaies MG, et al. Pediatr Crit Care Med 2010;11(2):234–8 (VIS).",
+    fli:"Bedogni G, et al. BMC Gastroenterol 2006;6:33 (Fatty Liver Index).",
+    ipi:"The International NHL Prognostic Factors Project. N Engl J Med 1993;329(14):987–94.",
+    flipi:"Solal-Céligny P, et al. Blood 2004;104(5):1258–65 (FLIPI).",
+    mipi:"Hoster E, et al. Blood 2008;111(2):558–65 (MIPI).",
+    iron_ingestion:"Standard toxicology reference (elemental iron dose thresholds).",
+    mmse:"Folstein MF, et al. J Psychiatr Res 1975;12(3):189–98 (MMSE; © PAR Inc.).",
+    insulin_rules:"Standard diabetes reference (500 rule and 1800/1500 rule)."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
