@@ -133,7 +133,13 @@ export async function notifyNewInstruction(env, gid, pid, byUid, info) {
   const count = Math.max(1, +info.count || 1);
   const text = String(info.text || "New instruction").slice(0, 90);
   const urgent = prio === "immediate" || prio === "high";
-  const msg = {
+  const isHandover = info.kind === "handover";
+  const msg = isHandover ? {
+    title: "⇄ Shift handover · " + unitName,
+    body: (bed ? "Bed " + bed + " — " : "") + text + " · tap to read the full SBAR",
+    tag: "icu-handover-" + pid,
+    url: "https://stewardmd.in/",
+  } : {
     title: (urgent ? "🔴 " : "🩺 ") + PRIO_LABEL[prio] + " instruction · " + unitName,
     body: text + (count > 1 ? " (+" + (count - 1) + " more)" : "") + (bed ? " · Bed " + bed : ""),
     tag: "icu-instr-" + pid,
