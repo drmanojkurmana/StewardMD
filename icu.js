@@ -1116,6 +1116,7 @@
       '#icuRoot.icu-v2 .icu-v2-obchip.on{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}' +
       '#icuRoot.icu-v2 .icu-v2-obchip .icu-ico{width:15px;height:15px}' +
       '#icuRoot.icu-v2 .icu-v2-obrole{font:600 11px var(--font);color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-tlfull{max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
       '#icuRoot.icu-v2 .icu-v2-obchip.on .icu-v2-obrole{color:var(--primary);opacity:.8}' +
       /* task priority badge + overdue chip in the Instructions panel */
       '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:800 10px var(--font);color:#fff;border-radius:6px;padding:2px 6px;letter-spacing:.02em;vertical-align:middle}' +
@@ -2424,6 +2425,7 @@
   var PRIORITY_ORDER = ["immediate", "high", "moderate", "low"];
   var _roundPriority = "high"; // round-note composer: selected priority for the instructions being posted
   var _roundOnBehalf = null;   // round-note composer: uid the instruction is attributed to (null = me). Lets a resident log a consultant's verbal order under the consultant's name.
+  var _tlAll = false;          // timeline: show the FULL history (all events) vs the recent slice
 
   // Plain-language explanations for ICU jargon (A5) — content only, no logic change.
   var JARGON = {
@@ -3786,17 +3788,22 @@
     out += '<button class="icu-btn ghost icu-v2-addround" data-icu-act="grpround">' + ico("plus", "＋") + ' ' + roundLbl + '</button>';
     var revTxt = pt.reviewedAt ? ("Reviewed " + (fmtAgo(pt.reviewedAt) || "") + (pt.reviewedByName ? " by " + pt.reviewedByName : "")) : "Mark reviewed";
     out += '<button class="icu-btn ghost" data-icu-act="grpreviewed">' + ico("check", "✓") + ' ' + esc(revTxt) + '</button>';
-    out += '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("clock", "🕑") + ' Timeline</div>';
+    out += '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("clock", "🕑") + ' Timeline' + (tl.length ? ' <span class="icu-phase">' + tl.length + '</span>' : "") + '</div>';
     if (tl.length) {
-      out += '<div class="icu-card">' + tl.slice(0, 40).map(function (e) {
+      var TL_RECENT = 15, tlShown = _tlAll ? tl : tl.slice(0, TL_RECENT);
+      out += '<div class="icu-card' + (_tlAll ? " icu-v2-tlfull" : "") + '">' + tlShown.map(function (e) {
         var by = (e.byName || "") + (e.byRole ? " · " + grpRoleLabel(e.byRole) : "") + (e.ts ? " · " + (fmtAgo(e.ts) || fmtWhen(e.ts)) : "");
         return '<div class="icu-row" style="align-items:flex-start;gap:8px;border-bottom:1px solid var(--border);padding:7px 0"><span style="flex:0 0 auto;font-size:15px">' + grpTlIcon(e.type) + '</span>' +
           '<span style="flex:1"><b>' + esc(e.title || "Update") + '</b>' + (e.detail ? '<span style="display:block;color:var(--muted);font-size:12px;margin-top:1px">' + esc(e.detail) + '</span>' : "") +
           '<span style="display:flex;align-items:center;gap:5px;margin-top:3px"><span class="icu-v2-tlav">' + esc(v2Initials(e.byName || "")) + '</span><span style="font:600 11px var(--font);color:var(--muted)">' + esc(by) + '</span></span></span></div>';
       }).join("") + '</div>';
+      // Full-history button — the whole audit trail is fetched (no cap); this just reveals it all.
+      if (tl.length > TL_RECENT) out += '<button class="icu-btn ghost" data-icu-act="tlall">' + ico("clock", "🕑") + (_tlAll ? ' Show recent only' : ' View full history (' + tl.length + ' events)') + '</button>';
     } else {
       out += '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No timeline events yet. Actions on this patient appear here, author- and time-stamped.</p></div>';
     }
+    // Retention notice — so doctors know how long the shared history is kept.
+    out += '<p class="icu-doc-sub" style="margin:10px 2px 0;opacity:.75;font-size:11.5px">' + ico("info", "ⓘ") + ' Shared timeline &amp; tasks are kept for 7 days, then cleared automatically — and removed when the patient is discharged. Export or note anything you need to keep.</p>';
     out += '</div>';
     return out;
   }
@@ -6006,6 +6013,7 @@
       case "grptask": grpCycleTask(decodeURIComponent(arg)); break;
       case "grptaskexplain": grpTaskExplain(decodeURIComponent(arg)); break;
       case "grptaskexplainsave": grpTaskExplainSave(); break;
+      case "tlall": _tlAll = !_tlAll; _paintTop = true; paint(); break;
       case "grpretry": grpRetry(); break;   // Phase 4: re-subscribe after a connection/error state
       // ---- ICU v2 group mode Phase 5 — doctor ID + membership (add/invite-link/leave/remove/join) ----
       case "grpcopyid": grpCopyId(); break;
