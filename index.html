@@ -1365,6 +1365,8 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/policy.js?v=gold363" defer></script>
 <script src="/features.js?v=gold363" defer></script>
 <script src="/calculators.js?v=gold363" defer></script>
+<script src="/calc-links.js?v=gold400" defer></script>
+<script src="/icu-autoscores.js?v=gold400" defer></script>
 <script src="/drugs.js?v=gold363" defer></script>
 <script src="/interaction-rules.js?v=gold363" defer></script>
 <script defer src="/medlist.js?v=gold363"></script>
@@ -1382,7 +1384,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script>(function(){var KB=["/kb/dist/kb.core.js?v=gold363","/kb/dist/kb.clinical.js?v=gold363","/kb/dist/kb.enrichment.js?v=gold363","/kb/dist/kb.expanded.js?v=gold363"];window.SMD_KB_READY=new Promise(function(res){function load(i){if(i>=KB.length){try{window.dispatchEvent(new Event("smd-kb-ready"));}catch(e){}res(true);return;}var s=document.createElement("script");s.src=KB[i];s.onload=function(){load(i+1);};s.onerror=function(){load(i+1);};document.head.appendChild(s);}function start(){requestAnimationFrame(function(){requestAnimationFrame(function(){load(0);});});}if(document.readyState==="loading"){window.addEventListener("DOMContentLoaded",start);}else{start();}});})();</script>
 <script src="/dxmgmt.js?v=gold363" defer></script>
 <script src="/clinical-nlp.js?v=gold363" defer></script>
-<script src="/reasoning.js?v=gold363" defer></script>
+<script src="/reasoning.js?v=gold400" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
      smd_privacy_gate=0 (default ON). -->
@@ -1394,7 +1396,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold360" defer></script>
 <script src="/electrolytes.js?v=gold363" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/home.js?v=gold389" defer></script>
+<script src="/home.js?v=gold401" defer></script>
 <!-- Guided tour (SMD_TOUR): first-run interactive onboarding + one-time contextual tips.
      Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
      home.js + account.js so it can read the home DOM and the signed-in account. -->
@@ -1417,11 +1419,11 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=gold389" defer></script>
+<script src="/icu.js?v=gold401" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
-<script src="/icu-collab.js?v=gold389" defer></script>
+<script src="/icu-collab.js?v=gold401" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
 <script src="/native-push.js?v=gold363" defer></script>
@@ -1458,7 +1460,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold389"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold401"; document.body.appendChild(s); }
     ghisHideFab(); ghisWrapSB(); ghisSidebarItem();
     [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { ghisWrapSB(); ghisSidebarItem(); }, ms); });
   }
