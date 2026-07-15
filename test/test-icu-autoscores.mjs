@@ -27,6 +27,7 @@ ok(get(rows, "corr_na") && typeof get(rows, "corr_na").value === "number", "corr
 ok(get(rows, "pf_ratio") && get(rows, "pf_ratio").value === 160, "P/F=160 (fio2 fraction->%)");
 // SOFA bands: resp(P/F160,vent)=3, coag(plt90 <100)=2, liver(bili1.0)=0, cardio(MAP72,no pressor)=0, cns(GCS14)=1, renal(creat1.5)=1 => 7
 ok(get(rows, "sofa") && get(rows, "sofa").value === 7, "SOFA=7 for vector");
+ok(get(rows, "sofa").inputs && get(rows, "sofa").inputs.coag === 2, "computed row carries inputs (SOFA coag band=2) for pre-fill");
 ok(!!get(rows, "bisap"), "BISAP present for pancreatitis diagnosis");
 ok(!get(rows, "meld"), "MELD absent (diagnosis not hepatic)");
 
@@ -66,6 +67,14 @@ const apState = {
 const apRows = AS.compute(apState, MED);
 ok(apRows.find(r => r.id === "apache2") && apRows.find(r => r.id === "apache2").value === 12, "APACHE II = 12 (PaO2 oxygenation path)");
 ok((apRows.find(r => r.id === "apache2").interp || "").indexOf("chronic organ") >= 0, "APACHE II note about chronic health/ARF present");
+// pre-fill faithfulness: rows carry exact select option values + raw numbers
+const apInp = apRows.find(r => r.id === "apache2").inputs;
+ok(apInp && apInp.temp === "1" && apInp.gcs === 14, "APACHE inputs carry option value (temp '1') + raw GCS");
+// hypothermia must map to the CORRECT band option '1b' (34-35.9), not the other 1-point band ('1')
+const apHypo = JSON.parse(JSON.stringify(apState)); apHypo.vitals[0].temp = 34.5;
+const apHypoRow = AS.compute(apHypo, MED).find(r => r.id === "apache2");
+ok(apHypoRow && apHypoRow.inputs.temp === "1b", "APACHE hypothermia -> temp band '1b' (faithful pre-fill)");
+ok(apHypoRow && apHypoRow.value === 12, "APACHE score unchanged by b-suffix (P() collapses -> still 12)");
 
 // A-a path: FiO2 0.6, PaO2 90, PaCO2 40 -> A-a = 0.6*713 - 40/0.8 - 90 = 287.8 -> 2 pts => 14
 const apState2 = JSON.parse(JSON.stringify(apState)); apState2.abg = { ph: 7.30, pao2: 90, fio2: 0.6, paco2: 40 };
