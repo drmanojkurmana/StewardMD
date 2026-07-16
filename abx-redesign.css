@@ -33,9 +33,9 @@ html.abx-ui #inputCard input:focus-visible,
 html.abx-ui #inputCard select:focus-visible,
 html.abx-ui #inputCard label:focus-visible,
 html.abx-ui #outputArea button:focus-visible,
-html.abx-ui .group-tab:focus-visible,
-html.abx-ui .system-picker-btn:focus-visible,
-html.abx-ui .simple-chip:focus-visible {
+html.abx-ui #inputCard .group-tab:focus-visible,
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn:focus-visible,
+html.abx-ui :is(#inputCard, #simpleInputArea) .simple-chip:focus-visible {
   outline: 3px solid var(--teal); outline-offset: 2px;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -57,78 +57,141 @@ html.abx-ui #inputCard > h2 .num {
 }
 
 /* ---- Stepper (group tabs) → premium segmented pills ---------------------- */
-html.abx-ui .group-tabs {
+html.abx-ui #inputCard .group-tabs {
   display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding-bottom: 2px;
 }
-html.abx-ui .group-tab {
+html.abx-ui #inputCard .group-tab {
   min-height: 40px; display: inline-flex; align-items: center; gap: 7px;
   padding: 8px 14px; border-radius: var(--abx-r-pill); cursor: pointer;
   background: var(--panel); border: 1.5px solid var(--line); color: var(--slate);
   font: 700 13px var(--sans); box-shadow: var(--abx-sh-rest);
   transition: background .15s, border-color .15s, color .15s, box-shadow .15s;
 }
-html.abx-ui .group-tab:hover { border-color: var(--teal); color: var(--teal); }
-html.abx-ui .group-tab.active { background: var(--teal); border-color: var(--teal); color: #fff; box-shadow: var(--abx-sh-teal); }
+html.abx-ui #inputCard .group-tab:hover { border-color: var(--teal); color: var(--teal); }
+html.abx-ui #inputCard .group-tab.active { background: var(--teal); border-color: var(--teal); color: #fff; box-shadow: var(--abx-sh-teal); }
 
 /* ---- Step progress bar ---------------------------------------------------- */
-html.abx-ui .step-progress-bar { height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; }
-html.abx-ui .step-progress-fill { background: var(--teal); border-radius: 999px; }
-html.abx-ui .step-progress-label { font: 800 11.5px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--slate-soft); }
+html.abx-ui #inputCard .step-progress-bar { height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; }
+html.abx-ui #inputCard .step-progress-fill { background: var(--teal); border-radius: 999px; }
+html.abx-ui #inputCard .step-progress-label { font: 800 11.5px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--slate-soft); }
 
 /* ---- System picker boxes (Which System?) → tappable cards ---------------- */
-html.abx-ui .system-picker-btn {
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn {
   min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
   border-radius: var(--abx-r-card); border: 1.5px solid var(--line); background: var(--panel);
   color: var(--slate); font: 700 13.5px var(--sans); padding: 14px 10px; cursor: pointer;
   box-shadow: var(--abx-sh-rest); transition: all .15s; text-align: center;
 }
-html.abx-ui .system-picker-btn:hover { border-color: var(--teal); }
-html.abx-ui .system-picker-btn.active { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); box-shadow: 0 2px 8px rgba(14,110,99,.14); }
-html.abx-ui .system-picker-icon { font-size: 26px; line-height: 1; }
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn:hover { border-color: var(--teal); }
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn.active { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); box-shadow: 0 2px 8px rgba(14,110,99,.14); }
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-icon { font-size: 26px; line-height: 1; }
 
-/* ---- Finding chips / checkboxes → big touch targets, clear checked state -- */
-html.abx-ui .simple-chip {
-  min-height: 46px; display: flex; align-items: center; gap: 10px; box-sizing: border-box;
-  padding: 10px 14px; border-radius: var(--abx-r-ctrl); cursor: pointer;
-  background: var(--panel); border: 1.5px solid var(--line); color: var(--ink);
-  font: 600 14px var(--sans); box-shadow: var(--abx-sh-rest);
-  transition: background .15s, border-color .15s, color .15s, box-shadow .15s;
+/* ---- Section wrapper + its (teal uppercase) label ------------------------ */
+html.abx-ui #inputCard .finding-section { margin-top: 4px; }
+html.abx-ui #inputCard .radio-field-wrap { margin: 4px 0 16px; }
+html.abx-ui #inputCard .radio-field-label { font: 700 14px var(--sans); color: var(--ink); margin-bottom: 9px; }
+
+/* ---- Boolean findings (.finding-item) → WRAPPING TEAL PILL CHIPS ----------
+   Design intent: NOT a grid of big boxes — small pills that hug their label and
+   wrap. White + hairline + "+" when unset; solid teal + "✓" when selected.
+   `!important` beats home.js's `body.ui-v2` (border-radius/border/padding/font)
+   and redesign-system.css `body.rds-on` (min-height:52px) so the pill wins. --- */
+html.abx-ui #inputCard .finding-grid {
+  display: flex !important; flex-wrap: wrap; gap: 8px !important; margin-top: 13px;
 }
-html.abx-ui .simple-chip:hover { border-color: var(--teal); }
-html.abx-ui .simple-chip.checked { background: var(--teal); border-color: var(--teal); color: #fff; box-shadow: var(--abx-sh-teal); }
-html.abx-ui .simple-chip input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--teal); flex: 0 0 auto; }
-html.abx-ui .simple-chip.checked input[type="checkbox"] { accent-color: #fff; }
-/* Advanced findings list (#findingSections) — labels/rows get the same premium treatment. */
-html.abx-ui #findingSections label { min-height: 44px; }
-html.abx-ui #findingSections .finding-list-col { gap: 10px; }
-html.abx-ui #findingSections input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--teal); }
+html.abx-ui #inputCard .finding-item {
+  display: inline-flex !important; align-items: center; gap: 6px; width: auto !important;
+  min-height: 40px !important; min-width: 0 !important; padding: 0 14px 0 9px !important;
+  border-radius: 22px !important; cursor: pointer; box-sizing: border-box;
+  background: var(--panel) !important; border: 1.5px solid var(--line) !important;
+  color: var(--slate) !important; font: 600 13.5px var(--sans) !important; box-shadow: none !important;
+  transition: background .12s, border-color .12s, color .12s;
+}
+html.abx-ui #inputCard .finding-item:hover { border-color: var(--teal) !important; }
+html.abx-ui #inputCard .finding-item.checked {
+  background: var(--teal) !important; border-color: var(--teal) !important; color: #fff !important;
+}
+html.abx-ui #inputCard .finding-item > label {
+  cursor: pointer; margin: 0 !important; padding: 0 !important; flex: 0 1 auto;
+  font: inherit !important; color: inherit !important; white-space: nowrap;
+}
+/* native checkbox → a small +/✓ leading indicator (no box) */
+html.abx-ui #inputCard .finding-item > input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none; margin: 0 !important; flex: none;
+  width: 18px; height: 18px; border: none !important; background: transparent !important;
+  box-shadow: none !important; display: grid; place-items: center; cursor: pointer;
+}
+html.abx-ui #inputCard .finding-item > input[type="checkbox"]::after {
+  content: "+"; font: 400 20px/1 var(--sans); color: var(--teal); transition: color .12s;
+}
+html.abx-ui #inputCard .finding-item.checked > input[type="checkbox"]::after { content: "\2713"; font-size: 14px; font-weight: 700; color: #fff; }
 
-/* ---- Numeric / vitals inputs (Advanced) → clean fields ------------------- */
-html.abx-ui .calc-field { gap: 6px; }
-html.abx-ui .calc-label { font: 600 11.5px var(--sans); color: var(--slate-soft); }
-html.abx-ui .calc-input,
-html.abx-ui .calc-select {
+/* ---- Radio option pills (.radio-opt) → clean pills, teal selected -------- */
+html.abx-ui #inputCard .radio-opt-row { display: flex; flex-wrap: wrap; gap: 8px; }
+html.abx-ui #inputCard .radio-opt {
+  display: inline-flex !important; align-items: center; gap: 8px; min-height: 40px !important; width: auto !important;
+  padding: 0 15px !important; border-radius: 22px !important; cursor: pointer;
+  background: var(--panel) !important; border: 1.5px solid var(--line) !important; color: var(--slate) !important;
+  font: 600 13.5px var(--sans) !important; box-shadow: none !important; transition: background .12s, border-color .12s, color .12s;
+}
+html.abx-ui #inputCard .radio-opt:hover { border-color: var(--teal) !important; }
+html.abx-ui #inputCard .radio-opt > input[type="radio"] {
+  appearance: none; -webkit-appearance: none; width: 18px; height: 18px; flex: 0 0 auto; margin: 0;
+  border: 2px solid var(--line); border-radius: 50%; position: relative; cursor: pointer;
+}
+html.abx-ui #inputCard .radio-opt > input[type="radio"]:checked { border-color: var(--teal); }
+html.abx-ui #inputCard .radio-opt > input[type="radio"]:checked::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--teal); }
+html.abx-ui #inputCard .radio-opt.selected { background: var(--teal-soft); border-color: var(--teal); color: var(--teal); }
+html.abx-ui #inputCard .radio-opt.selected > input[type="radio"] { border-color: var(--teal); }
+
+/* ---- Numeric / vitals inputs (.numeric-field) → clean fields ------------- */
+html.abx-ui #inputCard .numeric-field-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+html.abx-ui #inputCard .numeric-field { display: flex; flex-direction: column; gap: 6px; }
+html.abx-ui #inputCard .numeric-field > label { font: 600 11.5px var(--sans); letter-spacing: .02em; color: var(--slate-soft); margin: 0; }
+html.abx-ui #inputCard .numeric-field input,
+html.abx-ui #inputCard .numeric-field select {
   min-height: 44px; border-radius: 10px; border: 1.5px solid var(--line);
-  background: var(--input-bg, #fbfcfb); font: 500 15px var(--mono); padding: 10px 12px; color: var(--ink);
+  background: var(--panel); font: 500 15px var(--mono); padding: 10px 12px; color: var(--ink);
 }
-html.abx-ui .calc-input:focus,
-html.abx-ui .calc-select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(14,110,99,.14); }
+html.abx-ui #inputCard .numeric-field input:focus,
+html.abx-ui #inputCard .numeric-field select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(14,110,99,.14); }
+html.abx-ui #inputCard .numeric-field.filled input,
+html.abx-ui #inputCard .numeric-field.filled select { border-color: var(--teal); }
+
+/* ---- Simple-mode chips (.simple-chip) → same wrapping teal pill ---------- */
+html.abx-ui :is(#inputCard, #simpleInputArea) .simple-chip-grid { display: flex !important; flex-wrap: wrap; gap: 8px !important; }
+html.abx-ui :is(#inputCard, #simpleInputArea) .simple-chip {
+  display: inline-flex !important; align-items: center; gap: 6px; width: auto !important;
+  min-height: 40px !important; padding: 0 14px 0 9px !important; border-radius: 22px !important;
+  cursor: pointer; box-sizing: border-box; background: var(--panel) !important;
+  border: 1.5px solid var(--line) !important; color: var(--slate) !important;
+  font: 600 13.5px var(--sans) !important; box-shadow: none !important; transition: background .12s, border-color .12s, color .12s;
+}
+html.abx-ui :is(#inputCard, #simpleInputArea) .simple-chip:hover { border-color: var(--teal) !important; }
+html.abx-ui :is(#inputCard, #simpleInputArea) .simple-chip > input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none; width: 18px; height: 18px; flex: none; margin: 0 !important;
+  border: none !important; background: transparent !important; box-shadow: none !important; display: grid; place-items: center; cursor: pointer;
+}
+html.abx-ui :is(#inputCard, #simpleInputArea) .simple-chip > input[type="checkbox"]::after { content: "+"; font: 400 20px/1 var(--sans); color: var(--teal); }
+html.abx-ui :is(#inputCard, #simpleInputArea) .simple-chip.checked { background: var(--teal) !important; border-color: var(--teal) !important; color: #fff !important; }
+html.abx-ui :is(#inputCard, #simpleInputArea) .simple-chip.checked > input[type="checkbox"]::after { content: "\2713"; font-size: 14px; font-weight: 700; color: #fff; }
+html.abx-ui :is(#inputCard, #simpleInputArea) .simple-chip > span { color: inherit !important; font: inherit !important; white-space: nowrap; }
 
 /* ---- Counts + nav + primary CTA ------------------------------------------ */
-html.abx-ui .findings-count { font: 700 13px var(--mono); color: var(--slate); }
-html.abx-ui .step-nav-btn,
-html.abx-ui .step-nav-back {
+html.abx-ui #inputCard .findings-count { font: 700 13px var(--mono); color: var(--slate); }
+html.abx-ui #inputCard .step-nav-btn,
+html.abx-ui #inputCard .step-nav-back {
   min-height: 46px; border-radius: var(--abx-r-ctrl); font: 700 14px var(--sans);
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
 }
-html.abx-ui .step-nav-btn { background: var(--teal); border: none; color: #fff; box-shadow: var(--abx-sh-teal); }
-html.abx-ui .step-nav-back { background: var(--panel); border: 1.5px solid var(--line); color: var(--slate); }
-html.abx-ui .run-btn {
+html.abx-ui #inputCard .step-nav-btn { background: var(--teal); border: none; color: #fff; box-shadow: var(--abx-sh-teal); }
+html.abx-ui #inputCard .step-nav-back { background: var(--panel); border: 1.5px solid var(--line); color: var(--slate); }
+html.abx-ui #inputCard .run-btn {
   min-height: 52px; border-radius: 14px; font: 800 15.5px var(--sans); letter-spacing: .01em;
   box-shadow: var(--abx-sh-teal); margin-top: 6px;
 }
-html.abx-ui .run-btn:active { transform: translateY(1px); }
-html.abx-ui .run-btn:disabled { opacity: .45; box-shadow: none; }
+html.abx-ui #inputCard .run-btn:active { transform: translateY(1px); }
+html.abx-ui #inputCard .run-btn:disabled { opacity: .45; box-shadow: none; }
 
 /* ---- Decision output card → premium, severity-tinted (ramp unchanged) ----- */
 html.abx-ui #outputArea .decision-banner {
@@ -142,6 +205,26 @@ html.abx-ui #outputArea .decision-banner.red    { background: var(--red-bg);    
 html.abx-ui #outputArea .decision-status-label { font: 800 13px var(--sans); letter-spacing: .05em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
 html.abx-ui #outputArea .decision-why { margin-top: 8px; line-height: 1.6; text-wrap: pretty; }
 html.abx-ui #outputArea .decision-why .lbl { font: 800 11px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--slate-soft); display: block; margin-bottom: 3px; }
+
+/* ---- Quick-decision hero → light, severity-tinted (same pattern as the
+   decision-banner, so it reads cleanly in BOTH themes instead of the dark
+   gradient that clashed with the light design). Severity ramp preserved. ---- */
+html.abx-ui .quick-answer-card {
+  border-radius: var(--abx-r-card) !important; padding: 16px 18px !important;
+  border: 1px solid var(--line) !important; border-left: 5px solid var(--slate) !important;
+  background: var(--panel) !important; color: var(--ink) !important; box-shadow: var(--abx-sh-card);
+}
+html.abx-ui .quick-answer-card.green  { background: var(--green-bg) !important;  border-color: var(--green-line) !important;  border-left-color: var(--green) !important; }
+html.abx-ui .quick-answer-card.yellow { background: var(--yellow-bg) !important; border-color: var(--yellow-line) !important; border-left-color: var(--yellow) !important; }
+html.abx-ui .quick-answer-card.orange { background: var(--orange-bg) !important; border-color: var(--orange-line) !important; border-left-color: var(--orange) !important; }
+html.abx-ui .quick-answer-card.red    { background: var(--red-bg) !important;    border-color: var(--red-line) !important;    border-left-color: var(--red) !important; }
+html.abx-ui .qa-header { color: var(--slate) !important; }
+html.abx-ui .qa-label  { color: var(--slate-soft) !important; }
+html.abx-ui .qa-value  { color: var(--ink) !important; }
+html.abx-ui .qa-value.qa-abx-yes         { color: var(--orange) !important; }
+html.abx-ui .qa-value.qa-abx-no          { color: var(--green) !important; }
+html.abx-ui .qa-value.qa-abx-conditional { color: var(--yellow) !important; }
+html.abx-ui .qa-value.qa-abx-na          { color: var(--slate) !important; }
 
 /* ---- Empiric regimen drug cards ------------------------------------------ */
 html.abx-ui #outputArea .drug-card {
@@ -161,10 +244,10 @@ html.abx-ui #outputArea .stewardship-list,
 html.abx-ui #outputArea .stewardship-qa {
   background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--abx-sh-card);
 }
-html.abx-ui #outputArea .sqa-row { padding: 12px 14px; border-bottom: 1px solid var(--line-soft, #eef1f0); display: flex; gap: 11px; align-items: flex-start; }
+html.abx-ui #outputArea .sqa-row { padding: 12px 14px; border-bottom: 1px solid var(--line-soft, #eef1f0); display: flex; flex-direction: column; gap: 3px; align-items: stretch; }
 html.abx-ui #outputArea .sqa-row:last-child { border-bottom: none; }
-html.abx-ui #outputArea .sqa-q { font: 700 13.5px var(--sans); color: var(--ink); }
-html.abx-ui #outputArea .sqa-a { font: 500 13.5px/1.55 var(--sans); color: var(--slate); }
+html.abx-ui #outputArea .sqa-q { display: block; font: 700 12.5px var(--sans); color: var(--slate); }
+html.abx-ui #outputArea .sqa-a { display: block; font: 500 13.5px/1.55 var(--sans); color: var(--ink); }
 
 /* ---- Evidence pills / reference chips ------------------------------------ */
 html.abx-ui #outputArea .evidence-pill,

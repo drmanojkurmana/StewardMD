@@ -36,7 +36,8 @@ try {
   async function openWizard() {
     await ev(`["introPoster","splash","accountGate","introOverlay"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
     await ev(`var b=document.querySelector('[data-act="startcase"]'); if(b) b.click(); return 1;`); await sleep(900);
-    await ev(`var c=document.querySelector('.mode-card'); if(c) c.click(); return 1;`); await sleep(1500);
+    await ev(`var c=document.querySelector('[data-m="advanced"]'); if(c) c.click(); return 1;`); await sleep(1600);
+    await ev(`var gt=document.querySelector('#inputCard .group-tab'); if(gt) gt.click(); return 1;`); await sleep(500);
   }
 
   // ---- flag ON (default / ?abxui=1) ----
@@ -46,8 +47,14 @@ try {
   // the 5-step wizard is app.js #inputCard — the restyle must land on IT (not the reasoning overlay)
   ok(await ev(`return !!document.getElementById("inputCard");`) === true, "the 5-step wizard (#inputCard) is present");
   ok(await ev(`var e=document.getElementById("inputCard"); return e ? getComputedStyle(e).borderTopLeftRadius : "";`) === "16px", "wizard card restyled (#inputCard radius 16px)");
-  ok(await ev(`var e=document.getElementById("runBtn"); return e ? getComputedStyle(e).minHeight : "";`) === "52px", "primary CTA restyled (#runBtn min-height 52px)");
-  ok(await ev(`var e=document.querySelector(".simple-chip"); return e ? (parseFloat(getComputedStyle(e).minHeight) >= 44) : true;`) === true, "finding chips are large touch targets (≥44px)");
+  // findings are the DESIGN's wrapping teal pills, not a grid of big boxes
+  ok(await ev(`var g=document.querySelector("#inputCard .finding-grid"); return g ? getComputedStyle(g).display : "";`) === "flex", "findings wrap as pills (.finding-grid is flex, not grid)");
+  ok(await ev(`var e=document.querySelector("#inputCard .finding-item"); return e ? getComputedStyle(e).borderTopLeftRadius : "";`) === "22px", "finding chip is a pill (.finding-item radius 22px)");
+  ok(await ev(`var e=document.querySelector("#inputCard .finding-item"); return e ? getComputedStyle(e).minHeight : "";`) === "40px", "finding chip is a large touch target (min-height 40px)");
+  // toggle the first visible pill, then WAIT for the .12s background transition to settle before reading
+  await ev(`var all=[...document.querySelectorAll("#inputCard .finding-item")].filter(x=>x.offsetParent!==null); if(all.length){all[0].id="abxTestPill"; all[0].querySelector('input[type=checkbox]').click();} return 1;`);
+  await sleep(300);
+  ok(await ev(`var a=document.getElementById("abxTestPill"); if(!a) return true; var sib=[...document.querySelectorAll("#inputCard .finding-item")].filter(x=>x!==a && x.offsetParent!==null)[0]; var checkedBg=getComputedStyle(a).backgroundColor; var uncheckedBg=sib?getComputedStyle(sib).backgroundColor:null; return a.classList.contains('checked') && checkedBg!==uncheckedBg && checkedBg!=='rgba(0, 0, 0, 0)';`) === true, "selected finding pill fills solid teal (.checked, transition settled)");
   ok(await ev(`return !!document.getElementById("runBtn");`) === true, "engine controls intact (Generate Clinical Decision button present)");
 
   // ---- flag OFF (?abxui=0) ----
