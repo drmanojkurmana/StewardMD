@@ -87,6 +87,43 @@
     return a.infectious.concat(a.nonInfectious).filter(function (c) { return c.id === W.locked; })[0] || null;
   }
 
+  // Split the wizard's findings into the classic engine's shape: boolean/radio/select
+  // findings vs numeric vitals — so SMD_restoreCase renders the REAL full output.
+  function classicPayload() {
+    var f = {}, v = {};
+    fg().forEach(function (g) {
+      (g.fields || []).forEach(function (fl) {
+        var val = W.findings[fl.key];
+        if (val == null || val === "" || val === "none") return;
+        if (fl.type === "number") v[fl.key] = val;
+        else if (fl.type === "select" || fl.type === "radio") f[fl.key] = val;
+        else f[fl.key] = true;
+      });
+    });
+    return { f: f, v: v };
+  }
+  // Move the classic engine's #outputArea (with its live safety inputs / accordions)
+  // into `host`, after rendering it for the wizard's findings + locked diagnosis.
+  // The node is BORROWED, not cloned — restoreOutputArea() puts it back.
+  function embedFullOutput(host) {
+    try {
+      var pay = classicPayload();
+      if (window.SMD_restoreCase) window.SMD_restoreCase(pay.f, W.locked, pay.v);
+      var out = document.getElementById("outputArea");
+      if (out) {
+        if (!out.__abxHome) out.__abxHome = { parent: out.parentNode, next: out.nextSibling };
+        out.style.display = "";
+        host.appendChild(out);
+      }
+    } catch (e) {}
+  }
+  function restoreOutputArea() {
+    var out = document.getElementById("outputArea");
+    if (out && out.__abxHome && out.parentElement && out.parentElement.closest && out.parentElement.closest("#abxWizard")) {
+      try { out.__abxHome.parent.insertBefore(out, out.__abxHome.next); } catch (e) {}
+    }
+  }
+
   // ---- tiny DOM helper -----------------------------------------------------
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
   function ms(name) { return '<span class="rds-icon abx-ms" aria-hidden="true">' + name + '</span>'; }
@@ -179,6 +216,7 @@
   // ---- renderers -----------------------------------------------------------
   function render() {
     if (!root) return;
+    restoreOutputArea(); // reclaim the borrowed #outputArea before we wipe the body
     // segmented + stepper + nav
     root.querySelectorAll(".abxw-segb").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-mode") === W.mode); b.setAttribute("aria-selected", b.getAttribute("data-mode") === W.mode); });
     renderStepper();
@@ -402,52 +440,19 @@
     var wrap = el("div", "abxw-step-body");
     var a = assess(); var c = lockedCand(a);
     if (!a || !c) { wrap.appendChild(el("div", "abxw-empty dash", ms("rule") + '<p>Lock a diagnosis first to see the plan.</p>')); return wrap; }
-    var mg = window.DX_MGMT && window.DX_MGMT[c.id];
-    var isInf = a.infectious.some(function (x) { return x.id === c.id; });
-
-    wrap.appendChild(el("h2", "abxw-secttl", ms("medication") + "Empiric regimen"));
-    if (isInf && a.gate.ab) {
-      var tx = mg && (mg.tx || mg.drugs);
-      if (tx && typeof tx === "string") {
-        wrap.appendChild(el("div", "abxw-drug", '<div class="abxw-drugwhy">' + esc(tx) + '</div>'));
-      } else if (tx && tx.length) {
-        tx.slice(0, 4).forEach(function (d) {
-          wrap.appendChild(el("div", "abxw-drug", '<div class="abxw-drugnm">' + esc(d.drug || d.name || d) + '</div>' + (d.dose || d.dosing ? '<div class="abxw-drugdose mono">' + esc(d.dose || d.dosing) + '</div>' : "") + (d.why ? '<div class="abxw-drugwhy">' + esc(d.why) + '</div>' : "")));
-        });
-      } else {
-        var ob = el("div", "abxw-drug", '<div class="abxw-drugwhy">Empiric antibiotics are indicated for this diagnosis. Open the full regimen for agent, dose and duration guided by local antibiogram.</div>');
-        var ref = el("button", "abxw-openref", ms("open_in_new") + "Open full regimen & stewardship"); ref.setAttribute("data-act", "openref"); ref.setAttribute("data-ref", c.treatmentRef || c.id);
-        ob.appendChild(ref); wrap.appendChild(ob);
-      }
-    } else {
-      wrap.appendChild(el("div", "abxw-noabx", ms("block") + '<div><b>No empiric antibiotics</b><p>Supportive care and reassessment are appropriate. Prescribing here adds resistance and harm without benefit.</p></div>'));
+    // Render the REAL, complete engine output (regimen with dosing, Stewardship
+    // Console, patient-specific renal/hepatic/cardiac safety, alternatives,
+    // de-escalation, guideline refs) for the locked diagnosis — nothing dropped.
+    wrap.appendChild(el("h2", "abxw-secttl", ms("verified") + "Regimen & stewardship"));
+    var host = el("div", "abxw-fullout");
+    wrap.appendChild(host);
+    embedFullOutput(host);
+    if (!host.querySelector("#outputArea")) {
+      // engine output unavailable → fall back to the candidate's real reason
+      host.appendChild(el("div", "abxw-why", '<div class="abxw-lbl">Why</div><p>' + esc(c.reason || "") + '</p>'));
+      var ref = el("button", "abxw-openref primary", ms("open_in_new") + "Open full treatment reference"); ref.setAttribute("data-act", "openref"); ref.setAttribute("data-ref", c.treatmentRef || c.id);
+      host.appendChild(ref);
     }
-
-    // investigations
-    if (c.investigations && c.investigations.length) {
-      wrap.appendChild(el("h2", "abxw-secttl", ms("biotech") + "Investigations"));
-      var ix = el("div", "abxw-ixlist"); c.investigations.slice(0, 8).forEach(function (i) { ix.appendChild(el("span", "abxw-ixpill", esc(i))); });
-      wrap.appendChild(ix);
-    }
-
-    // stewardship — golden rule (uses the candidate's real reason + supporting/missing)
-    wrap.appendChild(el("h2", "abxw-secttl", ms("verified") + "Stewardship · the golden rule"));
-    var sq = el("div", "abxw-steward");
-    var rows = [
-      ["biotech", "Which organisms are likely?", (mg && mg.dx) ? mg.dx : (c.system ? c.system + " pathogens per local antibiogram." : "Guided by syndrome and local antibiogram.")],
-      ["pill", "Why this diagnosis?", c.reason || ""],
-      ["shield", "Supporting findings", (c.supporting || []).join(", ") || "—"],
-      ["do_not_disturb_on", "What could this mimic?", (c.mimics || []).slice(0, 3).join("; ") || "—"],
-      ["compress", "When to narrow?", "De-escalate to culture-directed therapy once results return."],
-      ["stop_circle", "When to stop?", "Reassess daily; stop when clinically resolved per guideline duration."]
-    ];
-    rows.forEach(function (r) { sq.appendChild(el("div", "abxw-sqrow", ms(r[0]) + '<div><div class="abxw-sqq">' + r[1] + '</div><div class="abxw-sqa">' + esc(r[2]) + '</div></div>')); });
-    wrap.appendChild(sq);
-
-    var actions = el("div", "abxw-planacts");
-    var ref2 = el("button", "abxw-openref primary", ms("open_in_new") + "Open full treatment reference"); ref2.setAttribute("data-act", "openref"); ref2.setAttribute("data-ref", c.treatmentRef || c.id);
-    actions.appendChild(ref2); wrap.appendChild(actions);
-    wrap.appendChild(el("p", "abxw-disc", "Decision support only. Not a diagnosis. Verify against local antibiogram, institutional protocol and the individual patient before use."));
     return wrap;
   }
 
@@ -462,6 +467,7 @@
     render();
   }
   function close() {
+    restoreOutputArea(); // give the borrowed #outputArea back to the classic engine
     if (root) root.classList.remove("on");
     document.documentElement.classList.remove("abxw-open");
   }

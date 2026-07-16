@@ -187,6 +187,11 @@ html.abx-ui #abxWizard .abxw-openref { display: inline-flex; align-items: center
 html.abx-ui #abxWizard .abxw-openref.primary { background: var(--w-teal); color: #fff; border-color: var(--w-teal); box-shadow: 0 2px 8px rgba(14,110,99,.28); width: 100%; justify-content: center; }
 html.abx-ui #abxWizard .abxw-disc { font: 400 12px/1.5 var(--w-sans); color: var(--w-muted); margin: 14px 0 0; }
 
+/* embedded full engine output (Option 2: real regimen/stewardship/safety) */
+html.abx-ui #abxWizard .abxw-fullout { margin-top: 4px; }
+html.abx-ui #abxWizard .abxw-fullout #outputArea { display: block; }
+html.abx-ui #abxWizard .abxw-fullout #outputArea > *:first-child { margin-top: 0; }
+
 /* sticky bottom nav */
 html.abx-ui #abxWizard .abxw-nav { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; background: color-mix(in srgb, var(--w-panel) 92%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--w-line); padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); }
 html.abx-ui #abxWizard .abxw-navin { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
