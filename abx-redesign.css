@@ -75,16 +75,25 @@ html.abx-ui #inputCard .step-progress-bar { height: 6px; border-radius: 999px; b
 html.abx-ui #inputCard .step-progress-fill { background: var(--teal); border-radius: 999px; }
 html.abx-ui #inputCard .step-progress-label { font: 800 11.5px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--slate-soft); }
 
-/* ---- System picker boxes (Which System?) → tappable cards ---------------- */
-html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn {
-  min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-  border-radius: var(--abx-r-card); border: 1.5px solid var(--line); background: var(--panel);
-  color: var(--slate); font: 700 13.5px var(--sans); padding: 14px 10px; cursor: pointer;
-  box-shadow: var(--abx-sh-rest); transition: all .15s; text-align: center;
+/* ---- System boxes (Which System?) → compact square grid, Material icons ---
+   Design: square-ish boxes minmax(150px), 96px tall, 26px icon, 700/13.5 name,
+   a "Tap to open" caption; active = teal border + teal-soft fill + soft shadow. */
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-grid {
+  display: grid !important; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important; gap: 10px !important;
 }
-html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn:hover { border-color: var(--teal); }
-html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn.active { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); box-shadow: 0 2px 8px rgba(14,110,99,.14); }
-html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-icon { font-size: 26px; line-height: 1; }
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn {
+  min-height: 96px !important; display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  border-radius: var(--abx-r-card) !important; border: 1.5px solid var(--line) !important; background: var(--panel) !important;
+  color: var(--slate) !important; font: 700 13.5px var(--sans) !important; padding: 14px 10px !important; cursor: pointer;
+  box-shadow: var(--abx-sh-rest); transition: border-color .12s, background .12s, box-shadow .12s; text-align: center;
+}
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn:hover { border-color: var(--teal) !important; }
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn.active { border-color: var(--teal) !important; background: var(--teal-soft) !important; color: var(--teal) !important; box-shadow: 0 2px 8px rgba(14,110,99,.14); }
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-icon { font-size: 26px; line-height: 1; color: var(--teal); }
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn.active .system-picker-icon { color: var(--teal); }
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-icon .abx-ms { font-size: 26px; color: inherit; }
+html.abx-ui :is(#inputCard, #simpleInputArea) .abx-sys-cap { font: 600 11.5px var(--sans); color: var(--slate-soft); margin-top: 2px; }
+html.abx-ui :is(#inputCard, #simpleInputArea) .system-picker-btn.active .abx-sys-cap { color: var(--teal); }
 
 /* ---- Section wrapper + its (teal uppercase) label ------------------------ */
 html.abx-ui #inputCard .finding-section { margin-top: 4px; }
@@ -265,6 +274,49 @@ html.abx-ui #dxOverlay .dx-sel-chip { min-height: 40px; display: inline-flex; al
 html.abx-ui #dxOverlay .dx-gate-t { font: 800 20px var(--sans); letter-spacing: -.4px; }
 html.abx-ui #dxOverlay .dx-score,
 html.abx-ui #dxOverlay .dx-conf { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* ============================================================================
+   CHROME LAYER (injected additively by abx-redesign.js) — Material Symbols
+   icons, the ICMR "Hospital policy" banner, and the segmented Simple/Advanced
+   control. Presentation only; the JS touches no engine logic/ids.
+   ============================================================================ */
+
+/* Material Symbols Rounded glyph (font-face ships in redesign-system.css). Made
+   self-sufficient here so the icon renders regardless of .rds-icon's own rule. */
+html.abx-ui .abx-ms {
+  font-family: 'Material Symbols Rounded'; font-weight: normal; font-style: normal;
+  line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap;
+  word-wrap: normal; direction: ltr; display: inline-block; vertical-align: middle;
+  -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ICMR "Hospital policy" banner — teal-soft, matches the handoff. */
+html.abx-ui .abx-policy-banner {
+  display: flex; align-items: center; gap: 10px; box-sizing: border-box;
+  background: var(--teal-soft); border: 1px solid #b8ddd5; border-radius: 12px;
+  padding: 11px 14px; margin: 0 0 14px; font: 500 13px var(--sans); color: var(--ink);
+}
+html body.dark.abx-ui .abx-policy-banner,
+html.abx-ui body.dark .abx-policy-banner { border-color: var(--teal); }
+html.abx-ui .abx-policy-banner > .abx-ms { font-size: 20px; color: var(--teal); flex: none; }
+html.abx-ui .abx-policy-txt { flex: 1; min-width: 0; }
+html.abx-ui .abx-policy-txt b { font-weight: 700; }
+html.abx-ui .abx-policy-rec { color: var(--teal); font-weight: 600; }
+html.abx-ui .abx-policy-pill {
+  flex: none; font: 700 11.5px var(--sans); color: var(--teal); background: var(--panel);
+  border: 1px solid #b8ddd5; border-radius: 20px; padding: 4px 10px; white-space: nowrap;
+}
+
+/* Simple/Advanced toggle → segmented pill look (the app keeps it a single
+   toggle button; this just gives it the design's segmented-control chrome). */
+html.abx-ui [data-abx-seg] {
+  border-radius: 11px !important; border: 1px solid var(--line) !important;
+  background: var(--panel) !important; color: var(--teal) !important;
+  font: 700 13px var(--sans) !important; min-height: 38px !important; padding: 0 14px !important;
+  box-shadow: 0 1px 2px rgba(20,32,43,.04); display: inline-flex; align-items: center; gap: 7px;
+}
+html.abx-ui [data-abx-seg]:hover { border-color: var(--teal) !important; }
 
 /* ---- Dark mode: the app's dark tokens recolor --panel/--paper/etc.; severity
    ramp is theme-invariant by design. Nothing extra needed. --------------------*/
