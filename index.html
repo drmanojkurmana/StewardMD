@@ -51,15 +51,15 @@
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <!-- Antibiotic-engine UI restyle (presentation-only CSS layer, scoped to #dxOverlay/#dxMgmt/classic
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
-<link rel="stylesheet" href="/abx-redesign.css?v=gold432">
-<link rel="stylesheet" href="/abx-wizard.css?v=gold432">
+<link rel="stylesheet" href="/abx-redesign.css?v=gold433">
+<link rel="stylesheet" href="/abx-wizard.css?v=gold433">
 <script>try{var _aq=location.search||"";var _aon=!/[?&]abxui=0\b/.test(_aq)&&(/[?&]abxui=1\b/.test(_aq)||localStorage.getItem("smd_abx_ui")!=="0");if(_aon)document.documentElement.classList.add("abx-ui");}catch(e){}</script>
 <!-- Antibiotic-engine design CHROME layer (additive, presentation-only): Material Symbols icons,
      ICMR policy banner, segmented Simple/Advanced. Gated by html.abx-ui; touches no engine logic. -->
-<script defer src="/abx-redesign.js?v=gold432"></script>
+<script defer src="/abx-redesign.js?v=gold433"></script>
 <!-- 5-step guided wizard (Vitals→Systems→Differential→Decision→Plan): owns #abxWizard, wired to
      the real engine (FIELD_GROUPS + SMD_REASON.assess + DX_MGMT). Start Case opens it. Flag-gated. -->
-<script defer src="/abx-wizard.js?v=gold432"></script>
+<script defer src="/abx-wizard.js?v=gold433"></script>
 <script>
 /* Register the service worker (offline + instant repeat loads). Runs on load so it never
    competes with startup. Network-first HTML in sw.js means this can't trap stale versions. */
@@ -179,14 +179,19 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 <div id="smdBootSplash" role="status" aria-label="Loading StewardMD">
   <div class="sbs-center">
     <img class="sbs-logo" src="/logo.png" alt="StewardMD logo" width="97" height="97">
+    <span class="sbs-mark" aria-hidden="true"></span>
     <div class="sbs-word">Steward<span>MD</span></div>
+    <div class="sbs-tag">Built by clinicians, for clinicians</div>
     <div class="sbs-bar"><span></span></div>
   </div>
   <div class="sbs-foot">
     <span class="sbs-by">developed by</span>
-    <img class="sbs-maik" src="/maik-logo.png" alt="MaiK" height="44">
+    <img class="sbs-maik sbs-maik-light" src="/maik-logo.png" alt="MaiK" height="44">
+    <img class="sbs-maik sbs-maik-dark" src="/maik-logo-white.png" alt="MaiK" height="44">
   </div>
 </div>
+<script>/* splash theme — iOS/web: follow OS light/dark; Android: day (06-18)=light, night=dark. Runs pre-paint, no flash. */
+(function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;var plat="";try{plat=(window.Capacitor&&Capacitor.getPlatform&&Capacitor.getPlatform())||"";}catch(e){}var ua=navigator.userAgent||"",android=plat==="android"||(/Android/i.test(ua)&&!/iPhone|iPad|iPod/i.test(ua)),dark;if(android){var h=new Date().getHours();dark=!(h>=6&&h<18);}else{dark=!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);}if(dark)s.classList.add("sbs-dark");}catch(e){}})();</script>
 <style>
   #smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;transition:opacity .45s ease;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
   #smdBootSplash.sbs-hide{opacity:0;pointer-events:none}
@@ -199,6 +204,23 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash .sbs-foot{position:absolute;left:0;right:0;bottom:34px;display:flex;flex-direction:column;align-items:center;gap:6px}
   #smdBootSplash .sbs-by{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#94a3b8}
   #smdBootSplash .sbs-maik{height:53px;width:auto;object-fit:contain}
+  /* tagline */
+  #smdBootSplash .sbs-tag{font-size:13.5px;font-weight:600;letter-spacing:.005em;color:#5a7184;margin-top:-4px;animation:sbsFade .7s .2s ease both}
+  /* white-masked mark (used in the dark Style-B splash) */
+  #smdBootSplash .sbs-mark{width:107px;height:107px;display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;animation:sbsPop .6s cubic-bezier(.2,.7,.2,1) both}
+  #smdBootSplash .sbs-maik-dark{display:none}
+  /* ── Style B: premium dark teal (iOS dark mode · Android night) ── */
+  #smdBootSplash.sbs-dark{background:radial-gradient(125% 90% at 50% 18%,#0d5049 0%,#08302b 55%,#061f1c 100%)}
+  #smdBootSplash.sbs-dark .sbs-logo{display:none}
+  #smdBootSplash.sbs-dark .sbs-mark{display:block}
+  #smdBootSplash.sbs-dark .sbs-word{color:#fff}
+  #smdBootSplash.sbs-dark .sbs-word span{color:#4fd6c2}
+  #smdBootSplash.sbs-dark .sbs-tag{color:#8fd8cf}
+  #smdBootSplash.sbs-dark .sbs-bar{background:rgba(255,255,255,.15)}
+  #smdBootSplash.sbs-dark .sbs-bar>span{background:#4fd6c2;box-shadow:0 0 12px #4fd6c2}
+  #smdBootSplash.sbs-dark .sbs-by{color:rgba(255,255,255,.45)}
+  #smdBootSplash.sbs-dark .sbs-maik-light{display:none}
+  #smdBootSplash.sbs-dark .sbs-maik-dark{display:inline-block}
   @keyframes sbsPop{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
   @keyframes sbsFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
@@ -1407,7 +1429,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold411" defer></script>
 <script src="/electrolytes.js?v=gold363" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/home.js?v=gold432" defer></script>
+<script src="/home.js?v=gold433" defer></script>
 <!-- Guided tour (SMD_TOUR): first-run interactive onboarding + one-time contextual tips.
      Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
      home.js + account.js so it can read the home DOM and the signed-in account. -->
