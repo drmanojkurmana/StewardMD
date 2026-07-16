@@ -3555,8 +3555,22 @@
   // Only DERIVED alerts + volatile meta are excluded from the hash, so the mirror fires on real
   // clinical changes but not on its own echo (or a no-op meta.updated bump).
   function grpMirrorPayload(st) { var c; try { c = JSON.parse(JSON.stringify(st || {})); } catch (e) { c = {}; } c.alerts = []; if (c.meta) delete c.meta; return c; }
+  // Order-INSENSITIVE stringify: Firestore returns map keys in canonical (sorted) order, which
+  // differs from local insertion order. A plain JSON.stringify then makes the round-tripped remote
+  // state hash DIFFERENTLY from the identical local state, so the echo-check below always fired →
+  // grpApplyState re-applied every snapshot → the mirror re-wrote (severity/updatedAt) → echoed back
+  // → a ~1.4s write loop that hammered Firestore/CapacitorHttp and stalled scrolling. Sorting keys
+  // makes equal data hash equal, so a pure echo is suppressed. (Only affects comparison, never what
+  // is written — grpMirrorPayload is unchanged.)
+  function stableStringify(v) {
+    if (v === null || typeof v !== "object") return JSON.stringify(v);
+    if (Array.isArray(v)) { var a = []; for (var i = 0; i < v.length; i++) a.push(stableStringify(v[i])); return "[" + a.join(",") + "]"; }
+    var ks = Object.keys(v).sort(), out = [];
+    for (var j = 0; j < ks.length; j++) out.push(JSON.stringify(ks[j]) + ":" + stableStringify(v[ks[j]]));
+    return "{" + out.join(",") + "}";
+  }
   function grpStateHash(st) {
-    var s; try { s = JSON.stringify(grpMirrorPayload(st)); } catch (e) { s = ""; }
+    var s; try { s = stableStringify(grpMirrorPayload(st)); } catch (e) { s = ""; }
     var h = 0; for (var i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) | 0; }
     return (h >>> 0).toString(36) + ":" + s.length;
   }
