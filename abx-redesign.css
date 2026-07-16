@@ -313,6 +313,13 @@ html.abx-ui .abx-policy-pill {
   flex: none; font: 700 11.5px var(--sans); color: var(--teal); background: var(--panel);
   border: 1px solid #b8ddd5; border-radius: 20px; padding: 4px 10px; white-space: nowrap;
 }
+/* CLASSIC → MARINAM UI switch (in the injected policy banner) */
+html.abx-ui .abx-uiswitch {
+  flex: none; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 13px;
+  border-radius: 20px; border: 1.5px solid var(--teal); background: var(--teal); color: #fff;
+  font: 700 12px var(--sans); white-space: nowrap; cursor: pointer; box-shadow: var(--abx-sh-teal);
+}
+html.abx-ui .abx-uiswitch .abx-ms { font-size: 17px; color: #fff; }
 
 /* Simple/Advanced toggle → segmented pill look (the app keeps it a single
    toggle button; this just gives it the design's segmented-control chrome). */

@@ -275,9 +275,10 @@
     root.innerHTML =
       '<div class="abxw-scroll"><div class="abxw-wrap">' +
       '<header class="abxw-head">' +
-        '<div class="abxw-brand"><span class="abxw-logo">' + ms("vaccines") + '</span>' +
-          '<div><div class="abxw-brandt">Steward<span>MD</span></div><div class="abxw-brands">Antibiotic decision engine</div></div></div>' +
+        '<div class="abxw-brand"><span class="abxw-logo"><span class="abxw-logo-mark" aria-hidden="true"></span></span>' +
+          '<div><div class="abxw-brandt">Steward<span>MD</span></div><div class="abxw-brands">Antibiotic decision engine · MARINAM UI</div></div></div>' +
         '<div class="abxw-headr">' +
+          '<button class="abxw-uiswitch" data-act="toclassic" aria-label="Switch to Classic UI">' + ms("swap_horiz") + 'Classic UI</button>' +
           '<div class="abxw-seg" role="tablist" aria-label="Mode">' +
             '<button class="abxw-segb" data-mode="simple" role="tab">' + ms("bolt") + 'Simple</button>' +
             '<button class="abxw-segb" data-mode="advanced" role="tab">' + ms("tune") + 'Advanced</button>' +
@@ -314,6 +315,12 @@
     var act = t.getAttribute("data-act");
     if (act === "reset") { W.step = 1; W.findings = {}; W.open = null; W.locked = null; W.query = ""; _pendingResume = null; _resumeOffered = true; clearW(); render(); return; }
     if (act === "close") { close(); return; }
+    if (act === "toclassic") { // switch to CLASSIC UI: set pref, close, reopen Start Case (now not intercepted)
+      try { localStorage.setItem("smd_abx_wizard", "0"); } catch (x) {}
+      close();
+      setTimeout(function () { var sc = document.querySelector('[data-act="startcase"]'); if (sc) sc.click(); }, 60);
+      return;
+    }
     if (act === "tsup") { tsIx = Math.min(TS.length - 1, tsIx + 1); applyTS(); saveTS(); if (window.toast) toast("Text size " + Math.round(TS[tsIx] * 100) + "%"); return; }
     if (act === "tsdown") { tsIx = Math.max(0, tsIx - 1); applyTS(); saveTS(); if (window.toast) toast("Text size " + Math.round(TS[tsIx] * 100) + "%"); return; }
     if (act === "resumeyes") { var s = loadW(); if (s) { W.mode = s.mode; W.step = s.step; W.findings = s.findings || {}; W.open = s.open; W.locked = s.locked; } _resumeOffered = true; _pendingResume = null; render(); return; }
@@ -665,15 +672,25 @@
   // hepatic/cardiac safety, alternatives) — the wizard must render that same real
   // output before it can replace the classic flow. Enable to preview: ?abxwiz=1
   // or localStorage smd_abx_wizard="1".
-  var WIZ_ON = /[?&]abxwiz=1\b/.test(location.search || "");
-  try { if (localStorage.getItem("smd_abx_wizard") === "1") WIZ_ON = true; } catch (e) {}
-  if (WIZ_ON) {
-    document.addEventListener("click", function (e) {
-      var b = e.target.closest && e.target.closest('[data-act="startcase"]');
-      if (!b) return;
-      if (!window.FIELD_GROUPS || !window.SMD_REASON) return; // engine not ready → let the app handle it
-      e.preventDefault(); e.stopPropagation();
-      open();
-    }, true);
+  // UI preference (checked at CLICK time so the MARINAM⇄CLASSIC toggle takes
+  // effect immediately, no reload): MARINAM (wizard) when ?abxwiz=1 or
+  // localStorage smd_abx_wizard==="1"; else CLASSIC (the app's own engine).
+  // ?abxwiz=1/0 SEEDS the persistent pref once (so the in-UI toggle, which writes
+  // localStorage, is the source of truth thereafter and works both ways).
+  try {
+    if (/[?&]abxwiz=1\b/.test(location.search || "")) localStorage.setItem("smd_abx_wizard", "1");
+    else if (/[?&]abxwiz=0\b/.test(location.search || "")) localStorage.setItem("smd_abx_wizard", "0");
+  } catch (e) {}
+  function wizPrefOn() {
+    try { return localStorage.getItem("smd_abx_wizard") === "1"; } catch (e) { return false; }
   }
+  window.ABX_WIZARD.setUI = function (which) { try { localStorage.setItem("smd_abx_wizard", which === "marinam" ? "1" : "0"); } catch (e) {} };
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest('[data-act="startcase"]');
+    if (!b) return;
+    if (!wizPrefOn()) return;                                 // CLASSIC UI → let the app handle Start Case
+    if (!window.FIELD_GROUPS || !window.SMD_REASON) return;   // engine not ready → let the app handle it
+    e.preventDefault(); e.stopPropagation();
+    open();
+  }, true);
 })();

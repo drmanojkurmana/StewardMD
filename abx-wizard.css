@@ -35,6 +35,12 @@ html.abx-ui #abxWizard .abxw-head { position: sticky; top: 0; z-index: 5; backgr
 html.abx-ui #abxWizard .abxw-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
 html.abx-ui #abxWizard .abxw-logo { width: 40px; height: 40px; border-radius: 11px; background: var(--w-teal); display: grid; place-items: center; flex: none; box-shadow: 0 2px 8px rgba(14,110,99,.28); }
 html.abx-ui #abxWizard .abxw-logo .abx-ms { color: #fff; font-size: 24px; }
+/* real StewardMD brand mark (logo.png as a white mask inside the teal lockup) */
+html.abx-ui #abxWizard .abxw-logo-mark { width: 24px; height: 24px; display: block; background: #fff; -webkit-mask: url(/logo.png) center/contain no-repeat; mask: url(/logo.png) center/contain no-repeat; }
+/* MARINAM ⇄ CLASSIC UI switch */
+html.abx-ui #abxWizard .abxw-uiswitch { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 13px; border-radius: 11px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-teal-ink); font: 700 12.5px var(--w-sans); box-shadow: 0 1px 2px rgba(20,32,43,.04); }
+html.abx-ui #abxWizard .abxw-uiswitch .abx-ms { font-size: 18px; color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-uiswitch:hover { border-color: var(--w-teal); }
 html.abx-ui #abxWizard .abxw-brandt { font: 800 19px/1.1 var(--w-sans); letter-spacing: -.3px; color: var(--w-ink); }
 html.abx-ui #abxWizard .abxw-brandt span { color: var(--w-teal); }
 html.abx-ui #abxWizard .abxw-brands { font: 500 12.5px var(--w-sans); color: var(--w-soft); }

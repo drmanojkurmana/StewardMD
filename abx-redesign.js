@@ -80,7 +80,9 @@
       '<span class="rds-icon abx-ms" aria-hidden="true">policy</span>' +
       '<div class="abx-policy-txt"><b>Hospital policy</b> · ICMR (National) · AMRSN 2024 ' +
       '<span class="abx-policy-rec">· Recommended</span></div>' +
-      '<span class="abx-policy-pill">Educational aid</span>';
+      '<span class="abx-policy-pill">Educational aid</span>' +
+      '<button type="button" class="abx-uiswitch" data-abx-tomarinam="1" aria-label="Switch to MARINAM UI">' +
+        '<span class="rds-icon abx-ms" aria-hidden="true">swap_horiz</span>MARINAM UI</button>';
     return b;
   }
   function ensureBanner(host) {
@@ -109,6 +111,15 @@
     if (raf) return;
     raf = (window.requestAnimationFrame || setTimeout)(function () { raf = 0; runAll(); }, 60);
   }
+
+    // Classic → MARINAM UI switch: set the pref and open the wizard overlay.
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-abx-tomarinam]");
+      if (!b) return;
+      e.preventDefault(); e.stopPropagation();
+      try { localStorage.setItem("smd_abx_wizard", "1"); } catch (x) {}
+      if (window.ABX_WIZARD && ABX_WIZARD.open) ABX_WIZARD.open();
+    }, true);
 
   function boot() {
     runAll();
