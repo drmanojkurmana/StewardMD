@@ -3873,9 +3873,13 @@
     visionText: function (text, kind) {
       var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
       var t = String(text == null ? "" : text).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
-      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ text: t, kind: kind }) }); })
-        .then(function (r) { if (r.status === 429) return { error: "quota" }; return r.json(); })
-        .catch(function (e) { return { error: String(e && e.message || e) }; });
+      // Bounded: CapacitorHttp ignores AbortController, so a stalled /vision request would
+      // otherwise leave the scan spinner spinning forever. Fall back to on-device fields/lines.
+      return raceTimeout(
+        aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ text: t, kind: kind }) }); })
+          .then(function (r) { if (r.status === 429) return { error: "quota" }; return r.json(); })
+          .catch(function (e) { return { error: String(e && e.message || e) }; }),
+        30000, { error: "timeout" });
     },
     // MaiK Scribe — extract structured data from a spoken transcript. kind ∈ ICU kinds → { fields };
     // "reasoning" (with catalog=[{key,label}]) → { findings, patient?, unmatched }. Never invents.
@@ -3902,13 +3906,17 @@
     vision: function (dataUrl, kind) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
       var img = String(dataUrl == null ? "" : dataUrl); if (!img) return Promise.resolve({ error: "no-image" });
-      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: img, kind: kind }) }); })
-        .then(function (r) {
-          if (r.status === 429) return { error: "quota" };
-          if (r.status === 401 || r.status === 403) return { error: "entitlement" };
-          if (!r.ok) return { error: "server" };
-          return r.json();
-        }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      // Bounded: CapacitorHttp ignores AbortController, so a stalled /vision request would
+      // otherwise leave the ICU snapshot "Reading with AI Vision…" spinner spinning forever.
+      return raceTimeout(
+        aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: img, kind: kind }) }); })
+          .then(function (r) {
+            if (r.status === 429) return { error: "quota" };
+            if (r.status === 401 || r.status === 403) return { error: "entitlement" };
+            if (!r.ok) return { error: "server" };
+            return r.json();
+          }).catch(function (e) { return { error: String(e && e.message || e) }; }),
+        45000, { error: "timeout" });
     },
     // Private Device OCR — device only, NEVER uploads. Native OCR (Apple Vision / ML Kit
     // bridge) → on-device field parse (labels + reading order preserved) + recognized lines

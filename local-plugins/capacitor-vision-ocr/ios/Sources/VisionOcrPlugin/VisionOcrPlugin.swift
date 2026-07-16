@@ -27,6 +27,35 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("Invalid image data"); return
         }
 
+        // On iOS 18+ use the modern Swift Vision API (`RecognizeTextRequest`). The legacy
+        // `VNRecognizeTextRequest` completion-handler path was observed to stall indefinitely
+        // on newer hardware (e.g. iPhone 17 Pro), leaving the JS "Reading medicines…" spinner
+        // spinning forever. The async request is the supported path on new devices; the legacy
+        // path is kept as a fallback for older OS versions.
+        if #available(iOS 18.0, *) {
+            Task {
+                do {
+                    var request = RecognizeTextRequest()
+                    request.recognitionLevel = .accurate
+                    request.usesLanguageCorrection = true
+                    let observations = try await request.perform(on: cgImage)
+                    var lines: [String] = []
+                    for observation in observations {
+                        if let top = observation.topCandidates(1).first {
+                            lines.append(top.string)
+                        }
+                    }
+                    call.resolve([
+                        "text": lines.joined(separator: "\n"),
+                        "lines": lines
+                    ])
+                } catch {
+                    call.reject(error.localizedDescription)
+                }
+            }
+            return
+        }
+
         let request = VNRecognizeTextRequest { (req, err) in
             if let err = err { call.reject(err.localizedDescription); return }
             var lines: [String] = []

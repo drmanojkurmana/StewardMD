@@ -148,11 +148,22 @@
       if (!(TR && TR.detectText)) return Promise.reject(new Error("ocr-unavailable"));
       var b64 = String(dataUrl || "").replace(/^data:[^;]+;base64,/, "");
       if (!b64) return Promise.reject(new Error("no-image"));
-      return TR.detectText({ base64Image: b64 }).then(function (res) {
+      var recognize = TR.detectText({ base64Image: b64 }).then(function (res) {
         var lines = [];
         try { (res.blocks || []).forEach(function (bl) { (bl.lines || []).forEach(function (ln) { if (ln && ln.text) lines.push(String(ln.text)); }); }); } catch (e) {}
         if (!lines.length && res && res.text) lines = String(res.text).split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
         return { text: (res && res.text) || lines.join("\n"), lines: lines };
+      });
+      // Hard timeout: on some devices/OS builds the native Vision request can stall and never
+      // settle, which would leave the "Reading medicines…" spinner spinning forever. Bound it so
+      // the promise ALWAYS settles and callers can fall back to on-device lines / manual entry.
+      return new Promise(function (resolve, reject) {
+        var settled = false;
+        var timer = setTimeout(function () { if (!settled) { settled = true; reject(new Error("ocr-timeout")); } }, 30000);
+        recognize.then(
+          function (v) { if (!settled) { settled = true; clearTimeout(timer); resolve(v); } },
+          function (e) { if (!settled) { settled = true; clearTimeout(timer); reject(e); } }
+        );
       });
     },
     // MaiK Scribe — native device speech-to-text (@capacitor-community/speech-recognition:

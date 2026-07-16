@@ -237,9 +237,24 @@
           if (f && (Object.keys(f).length || f.medications)) { log("ai success: fields"); return { mode: "fields", fields: f, lines: [], engine: "ai" }; }
         }
         log("ai failure:", (r && r.error) || "no-fields");
-        return aiFallback((r && r.error) || "no-fields", image, kind);
-      }).catch(function () { done(); log("ai failure: error"); return aiFallback("error", image, kind); });
+        return aiRecover((r && r.error) || "no-fields", image, kind);
+      }).catch(function () { done(); log("ai failure: error"); return aiRecover("error", image, kind); });
     });
+  }
+
+  // AI Vision failed. For TECHNICAL failures (network/server/timeout, or the server reached but
+  // returned no usable fields) transparently fall back to on-device OCR when it's available, so a
+  // scan/snapshot NEVER dead-ends on a device where the cloud call can't complete — the image
+  // stays on the device, which only tightens privacy. Cases that need a human choice (Pro
+  // entitlement, AI turned off, offline, or over quota) still surface the chooser dialog.
+  function aiRecover(reason, image, kind) {
+    var autoDevice = { "error": 1, "server": 1, "timeout": 1, "no-fields": 1 };
+    if (autoDevice[reason] && deviceOcrAvailable()) {
+      log("ai failed (" + reason + ") → auto on-device fallback");
+      try { (window.toast || function () {})("AI Vision unavailable — reading privately on device."); } catch (e) {}
+      return routeDevice(image, kind);
+    }
+    return aiFallback(reason, image, kind);
   }
 
   function aiFallback(reason, image, kind) {
