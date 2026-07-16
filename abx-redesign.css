@@ -234,6 +234,12 @@ html.abx-ui .qa-value.qa-abx-yes         { color: var(--orange) !important; }
 html.abx-ui .qa-value.qa-abx-no          { color: var(--green) !important; }
 html.abx-ui .qa-value.qa-abx-conditional { color: var(--yellow) !important; }
 html.abx-ui .qa-value.qa-abx-na          { color: var(--slate) !important; }
+/* first-line regimen + notes inside the hero were white-on-dark → make them
+   readable on the relit light severity card (was rgba(255,255,255,.7)/.15). */
+html.abx-ui .qa-regimen { border-top-color: var(--line) !important; }
+html.abx-ui .qa-regimen-row { color: var(--ink) !important; }
+html.abx-ui .qa-regimen-meta { color: var(--slate) !important; }
+html.abx-ui .qa-pregnancy-note, html.abx-ui .qa-renal-flag { color: var(--slate) !important; }
 
 /* ---- Empiric regimen drug cards ------------------------------------------ */
 html.abx-ui #outputArea .drug-card {
