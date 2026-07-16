@@ -467,12 +467,20 @@
   }
   window.ABX_WIZARD = { open: open, close: close };
 
-  // route "Start Case" -> the 5-step wizard (capture so it wins before the app's chooser).
-  document.addEventListener("click", function (e) {
-    var b = e.target.closest && e.target.closest('[data-act="startcase"]');
-    if (!b) return;
-    if (!window.FIELD_GROUPS || !window.SMD_REASON) return; // engine not ready → let the app handle it
-    e.preventDefault(); e.stopPropagation();
-    open();
-  }, true);
+  // OPT-IN only (default OFF). Start Case keeps opening the FULL classic engine
+  // (complete stewardship console, weight-band regimen, patient-specific renal/
+  // hepatic/cardiac safety, alternatives) — the wizard must render that same real
+  // output before it can replace the classic flow. Enable to preview: ?abxwiz=1
+  // or localStorage smd_abx_wizard="1".
+  var WIZ_ON = /[?&]abxwiz=1\b/.test(location.search || "");
+  try { if (localStorage.getItem("smd_abx_wizard") === "1") WIZ_ON = true; } catch (e) {}
+  if (WIZ_ON) {
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest('[data-act="startcase"]');
+      if (!b) return;
+      if (!window.FIELD_GROUPS || !window.SMD_REASON) return; // engine not ready → let the app handle it
+      e.preventDefault(); e.stopPropagation();
+      open();
+    }, true);
+  }
 })();
