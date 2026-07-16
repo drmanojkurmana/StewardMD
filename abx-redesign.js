@@ -72,23 +72,31 @@
   }
 
   // ---- ICMR "Hospital policy" banner (static, informational) ----------------
+  // Policy-only now; the MARINAM UI switch lives up in the mode row (ensureModeSeg).
   function bannerNode() {
     var b = document.createElement("div");
-    b.className = "abx-policy-banner";
+    b.className = "abx-policy-banner abx-policy-foot";
     b.setAttribute("data-abx-banner", "1");
     b.innerHTML =
       '<span class="rds-icon abx-ms" aria-hidden="true">policy</span>' +
       '<div class="abx-policy-txt"><b>Hospital policy</b> · ICMR (National) · AMRSN 2024 ' +
       '<span class="abx-policy-rec">· Recommended</span></div>' +
-      '<span class="abx-policy-pill">Educational aid</span>' +
-      '<button type="button" class="abx-uisw" role="switch" aria-checked="false" data-abx-tomarinam="1" aria-label="MARINAM UI off — tap to switch on">' +
-        '<span class="abx-uisw-lbl">MARINAM UI</span><span class="abx-uisw-track"><span class="abx-uisw-knob"></span></span></button>';
+      '<span class="abx-policy-pill">Educational aid</span>';
     return b;
   }
   function ensureBanner(host) {
     if (!host || host.querySelector(":scope > .abx-policy-banner")) return;
-    // place it at the very top of the wizard card, above the first heading/tabs
-    host.insertBefore(bannerNode(), host.firstChild);
+    // FOOTER placement: append at the very bottom of the form (matches the MARINAM wizard).
+    host.appendChild(bannerNode());
+  }
+  // MARINAM UI on/off switch — kept near the top mode controls, not in the footer policy bar.
+  function uiSwitchNode() {
+    var s = document.createElement("button");
+    s.type = "button"; s.className = "abx-uisw"; s.setAttribute("role", "switch");
+    s.setAttribute("aria-checked", "false"); s.setAttribute("data-abx-tomarinam", "1");
+    s.setAttribute("aria-label", "MARINAM UI off — tap to switch on");
+    s.innerHTML = '<span class="abx-uisw-lbl">MARINAM UI</span><span class="abx-uisw-track"><span class="abx-uisw-knob"></span></span>';
+    return s;
   }
   function enhanceBanners() {
     var ic = document.getElementById("inputCard");
@@ -123,6 +131,8 @@
       row.insertBefore(seg, row.firstChild);
       row.setAttribute("data-abx-modeseg", "1"); // CSS hides the original label + button
     }
+    // MARINAM UI switch lives up here (top), next to the Simple|Advanced segment.
+    if (!row.querySelector(".abx-uisw")) row.appendChild(uiSwitchNode());
     var cur = classicMode();
     seg.querySelectorAll(".abx-modeseg-b").forEach(function (b) {
       var on = b.getAttribute("data-abx-mode") === cur;

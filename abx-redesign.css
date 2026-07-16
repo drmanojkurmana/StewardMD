@@ -337,6 +337,15 @@ html.abx-ui .abx-modeseg-b.on .abx-ms { color: #fff; }
 /* once the segmented control is injected, hide the original text toggle */
 html.abx-ui #modeSwitchRow[data-abx-modeseg] #modeSwitchLabel,
 html.abx-ui #modeSwitchRow[data-abx-modeseg] #modeSwitchBtn { display: none !important; }
+/* the mode row now holds [Simple|Advanced segment] + [MARINAM switch pushed right] */
+html.abx-ui #modeSwitchRow[data-abx-modeseg] { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+html.abx-ui #modeSwitchRow[data-abx-modeseg] .abx-uisw { margin-left: auto; }
+
+/* FOOTER placement (classic): policy bar appended at the bottom of the form — quieter panel,
+   top margin instead of bottom, mirroring the MARINAM wizard's footer policy. */
+html.abx-ui .abx-policy-banner.abx-policy-foot { margin: 18px 0 6px; background: var(--panel); border-color: var(--line); color: var(--slate-soft); }
+html.abx-ui body.dark .abx-policy-banner.abx-policy-foot { border-color: var(--line); }
+html.abx-ui .abx-policy-banner.abx-policy-foot > .abx-ms { color: var(--teal); }
 
 /* Simple/Advanced toggle → segmented pill look (the app keeps it a single
    toggle button; this just gives it the design's segmented-control chrome). */

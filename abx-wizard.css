@@ -341,15 +341,18 @@ html.abx-ui #abxWizard .abxw-steplbl { overflow-wrap: anywhere; hyphens: auto; }
   html.abx-ui #abxWizard .abxw-stepper { gap: 4px; }
   html.abx-ui #abxWizard .abxw-steplbl { font-size: 10px; }
   html.abx-ui #abxWizard .abxw-cap { display: none; }
-  html.abx-ui #abxWizard .abxw-back, html.abx-ui #abxWizard .abxw-next { flex: none; }
-  /* clean phone header: brand row, then [switch + font] row, then full-width Simple|Advanced */
+  /* clean phone header: brand row, then [small switch ... Aa] row, then full-width Simple|Advanced */
   html.abx-ui #abxWizard .abxw-head { padding: 12px 0 10px; }
-  html.abx-ui #abxWizard .abxw-headr { width: 100%; gap: 8px; align-items: stretch; }
-  html.abx-ui #abxWizard .abxw-headr .abx-uisw { order: 1; flex: 1 1 auto; }
+  html.abx-ui #abxWizard .abxw-headr { width: 100%; gap: 8px; align-items: center; justify-content: space-between; }
+  html.abx-ui #abxWizard .abxw-headr .abx-uisw { order: 1; flex: 0 0 auto; }   /* compact, natural width */
   html.abx-ui #abxWizard .abxw-tswrap { order: 2; flex: none; }
   html.abx-ui #abxWizard .abxw-seg { order: 3; flex-basis: 100%; }
   html.abx-ui #abxWizard .abxw-segb { flex: 1; justify-content: center; padding: 0 10px; }
   html.abx-ui #abxWizard .abxw-tspop { right: 0; left: auto; }
+  /* symmetric footer bar: Back + Add findings share the width equally, Reset a compact square between */
+  html.abx-ui #abxWizard .abxw-navin { gap: 10px; }
+  html.abx-ui #abxWizard .abxw-back { flex: 1 1 0; min-width: 0; justify-content: center; padding: 0 10px; }
+  html.abx-ui #abxWizard .abxw-next { flex: 1 1 0; min-width: 0; justify-content: center; padding: 0 12px; }
+  html.abx-ui #abxWizard .abxw-resetb { flex: 0 0 auto; width: 50px; padding: 0; justify-content: center; }
   html.abx-ui #abxWizard .abxw-resetb .abxw-resetb-t { display: none; }
-  html.abx-ui #abxWizard .abxw-resetb { padding: 0 13px; }
 }

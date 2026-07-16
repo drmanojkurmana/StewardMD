@@ -748,7 +748,15 @@
       /* Native-feel sidebar scroll: the drawer scrolls INTERNALLY and never chains to the page behind
          it (app.js slides the drawer but doesn't lock the page → on iOS a drag over the drawer scrolled
          the background, feeling like a web page). overscroll-behavior:contain + the touchmove guard fix it. */
-      "#sbDrawer{overscroll-behavior:contain}#sbMenu{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}",
+      /* Make #sbMenu the bounded scroller (the touchmove guard only un-blocks a scrollable #sbMenu).
+         app.js lays the drawer out as display:block, so #sbMenu grows to fit ALL items → scrollHeight
+         == clientHeight → guard treats it as "short" and preventDefault()s every drag → nothing scrolls
+         and the footer/last items are clipped. Flex-column the drawer so head/account/foot keep their
+         height and #sbMenu (flex:1;min-height:0) clamps to the leftover space and scrolls natively. */
+      "#sbDrawer{overscroll-behavior:contain;display:flex;flex-direction:column}#sbMenu{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}",
+      /* Remove the stray right-chevron "back" affordance from the Start-a-Case chooser header
+         (it points the wrong way and reads as a random glyph); the title then sits flush-left. */
+      "#v3case .v3-header [data-cx=\"back\"]{display:none}#v3case .v3-header{padding-left:4px}",
       "body.ui-v2 .sbref-overlay{z-index:140!important}",
       "body.ui-v2 .brandrow{flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;gap:10px}",
       "body.ui-v2 .brandrow>div:first-child{flex:0 1 auto;min-width:0}",
