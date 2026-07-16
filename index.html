@@ -51,7 +51,7 @@
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
 <!-- Antibiotic-engine UI restyle (presentation-only CSS layer, scoped to #dxOverlay/#dxMgmt/classic
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
-<link rel="stylesheet" href="/abx-redesign.css?v=gold415">
+<link rel="stylesheet" href="/abx-redesign.css?v=gold417">
 <script>try{var _aq=location.search||"";var _aon=!/[?&]abxui=0\b/.test(_aq)&&(/[?&]abxui=1\b/.test(_aq)||localStorage.getItem("smd_abx_ui")!=="0");if(_aon)document.documentElement.classList.add("abx-ui");}catch(e){}</script>
 <script>
 /* Register the service worker (offline + instant repeat loads). Runs on load so it never
@@ -1400,7 +1400,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold411" defer></script>
 <script src="/electrolytes.js?v=gold363" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/home.js?v=gold414" defer></script>
+<script src="/home.js?v=gold415" defer></script>
 <!-- Guided tour (SMD_TOUR): first-run interactive onboarding + one-time contextual tips.
      Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
      home.js + account.js so it can read the home DOM and the signed-in account. -->

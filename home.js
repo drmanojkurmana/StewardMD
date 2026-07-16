@@ -584,13 +584,28 @@
   function installSbScrollGuard() {
     if (_sbGuardWired) return; _sbGuardWired = true;
     try {
-      document.addEventListener("touchmove", function (e) {
-        var d = document.getElementById("sbDrawer");
-        if (!d || !d.classList.contains("open")) return;   // only while the sidebar is open
+      var d = document.getElementById("sbDrawer");
+      if (!d) return;
+      // Block background scroll ONLY while the sidebar is open — and, critically, ATTACH the
+      // non-passive touchmove listener ONLY for that window, removing it on close. A permanently
+      // registered non-passive `touchmove` on document forces iOS/WKWebView off the fast
+      // (threaded) scroll path and janks ALL scrolling app-wide, even though the old handler
+      // early-returned when the sidebar was closed. overscroll-behavior:contain on
+      // #sbDrawer/#sbMenu already stops scroll chaining; this only cancels drags on the
+      // non-scrolling backdrop while the drawer is open.
+      var block = function (e) {
         var sc = e.target && e.target.closest ? e.target.closest("#sbMenu") : null;
         if (sc && sc.scrollHeight > sc.clientHeight + 1) return;   // real, scrollable menu → allow native scroll
         try { e.preventDefault(); } catch (x) {}                   // else block (background / short menu / header)
-      }, { passive: false });
+      };
+      var attached = false;
+      var sync = function () {
+        var open = d.classList.contains("open");
+        if (open && !attached) { document.addEventListener("touchmove", block, { passive: false }); attached = true; }
+        else if (!open && attached) { document.removeEventListener("touchmove", block, { passive: false }); attached = false; }
+      };
+      new MutationObserver(sync).observe(d, { attributes: true, attributeFilter: ["class"] });
+      sync();
     } catch (e) {}
   }
   function injectCSS() {
