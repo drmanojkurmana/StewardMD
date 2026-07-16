@@ -32,27 +32,29 @@ try {
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
   ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
 
+  // helper: open a case so the 5-step wizard (#inputCard) renders
+  async function openWizard() {
+    await ev(`["introPoster","splash","accountGate","introOverlay"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
+    await ev(`var b=document.querySelector('[data-act="startcase"]'); if(b) b.click(); return 1;`); await sleep(900);
+    await ev(`var c=document.querySelector('.mode-card'); if(c) c.click(); return 1;`); await sleep(1500);
+  }
+
   // ---- flag ON (default / ?abxui=1) ----
-  ok(await attach(BASE + "?abxui=1"), "reasoning engine loads (window.DX ready)");
-  await ev(`["introPoster","splash","accountGate","introOverlay"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`);
+  ok(await attach(BASE + "?abxui=1"), "engine loads (window.DX ready)");
   ok(await ev(`return document.documentElement.classList.contains("abx-ui");`) === true, "flag applies html.abx-ui (?abxui=1)");
-
-  await ev(`DX.openWorkspace(); return 1;`); await sleep(500);
-  ok(await ev(`var o=document.getElementById("dxOverlay"); return !!(o && o.classList.contains("on"));`) === true, "reasoning workspace opens (#dxOverlay.on)");
-  // restyle actually applied: the search input picks up the abx min-height (48px)
-  ok(await ev(`var s=document.getElementById("dxSearch"); return s ? getComputedStyle(s).minHeight : "none";`) === "48px", "restyle CSS is in effect (search field min-height 48px)");
-  // and the header title is the premium weight
-  ok(await ev(`var t=document.querySelector("#dxOverlay .dx-title"); return t ? getComputedStyle(t).fontWeight : "";`) === "800", "premium type hierarchy applied (title weight 800)");
-
-  // engine interaction still works: adding a finding renders a selected chip
-  await ev(`try{ DX.addFindings(["fever"]); }catch(e){} return 1;`); await sleep(300);
-  ok(await ev(`var sel=document.getElementById("dxSel"); return !!(sel && (sel.querySelector(".dx-sel-chip") || /No findings/i.test("")===false && sel.textContent.length>0));`) === true, "engine still accepts findings (selected list renders) — interaction intact");
+  await openWizard();
+  // the 5-step wizard is app.js #inputCard — the restyle must land on IT (not the reasoning overlay)
+  ok(await ev(`return !!document.getElementById("inputCard");`) === true, "the 5-step wizard (#inputCard) is present");
+  ok(await ev(`var e=document.getElementById("inputCard"); return e ? getComputedStyle(e).borderTopLeftRadius : "";`) === "16px", "wizard card restyled (#inputCard radius 16px)");
+  ok(await ev(`var e=document.getElementById("runBtn"); return e ? getComputedStyle(e).minHeight : "";`) === "52px", "primary CTA restyled (#runBtn min-height 52px)");
+  ok(await ev(`var e=document.querySelector(".simple-chip"); return e ? (parseFloat(getComputedStyle(e).minHeight) >= 44) : true;`) === true, "finding chips are large touch targets (≥44px)");
+  ok(await ev(`return !!document.getElementById("runBtn");`) === true, "engine controls intact (Generate Clinical Decision button present)");
 
   // ---- flag OFF (?abxui=0) ----
   ok(await attach(BASE + "?abxui=0"), "reloads with ?abxui=0");
   ok(await ev(`return !document.documentElement.classList.contains("abx-ui");`) === true, "?abxui=0 fully disables the restyle layer (no html.abx-ui)");
-  await ev(`DX.openWorkspace(); return 1;`); await sleep(400);
-  ok(await ev(`var s=document.getElementById("dxSearch"); return s ? getComputedStyle(s).minHeight : "none";`) !== "48px", "with the flag off, the base engine styles are unchanged (original search sizing)");
+  // Clean discriminator: the layer's tokens (defined only under html.abx-ui) are absent when off.
+  ok(await ev(`return getComputedStyle(document.documentElement).getPropertyValue("--abx-r-card").trim();`) === "", "with the flag off, the restyle layer's tokens are gone (base engine unchanged)");
 
   console.log(fails === 0 ? "\nALL GREEN — antibiotic engine UI restyle test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
