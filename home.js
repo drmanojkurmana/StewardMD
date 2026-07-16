@@ -456,35 +456,16 @@
     } catch (e) { toast("Print unavailable"); }
   }
 
-  // Start a Case -> new-design Simple/Advanced chooser (rendered inside the v2 home), wired to the real cards.
+  // Start a Case -> open the engine DIRECTLY (the Simple/Advanced interstitial
+  // "gate" is removed). Advanced is the default; the Simple/Advanced toggle lives
+  // in the engine header, so users can still switch modes anytime.
   function openCaseChooser() {
-    // If a specialty workspace (e.g. Surgery) is active, start the case in THAT engine
-    // instead of the Simple/Advanced Internal-Medicine chooser. IM → falls through below.
+    // A specialty workspace (e.g. Surgery) still starts the case in THAT engine.
     try { if (window.SMD_WS && SMD_WS.startActiveCase && SMD_WS.startActiveCase()) return; } catch (e) {}
-    if (!root) build();
-    root.classList.add("on"); if (fab) fab.classList.remove("on");
-    var p = root.querySelector("#hvCase");
-    if (!p) {
-      p = document.createElement("div"); p.id = "v3case"; p.className = "v3-screen";
-      p.innerHTML =
-        '<header class="v3-header"><button class="v3-ic" data-cx="back" aria-label="Back">' + svg("chev") + '</button><div class="v3-brand"><div style="min-width:0"><div class="v3-brand-tt">Start a Case</div><div class="v3-brand-sub">Choose how to enter findings</div></div></div></header>' +
-        '<main class="v3-main"><div class="v3-stack">' +
-          '<button class="v3-primary" data-m="simple"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Simple</div><div class="sub">Guided, step-by-step — pick the problem, answer a few questions</div></div><div class="arr">' + svg("arrow") + '</div></button>' +
-          '<button class="v3-secondary" data-m="advanced"><div class="ic">' + svg("sliders") + '</div><div style="flex:1;min-width:0"><div class="tt">Advanced</div><div class="sub">Full clinical form — all findings, vitals, labs &amp; risk at once</div></div><div class="arr">' + svg("chev") + '</div></button>' +
-          '<div class="v3-foot">You can switch modes anytime from the header.</div>' +
-        '</div></main>';
-      root.appendChild(p);
-      p.addEventListener("click", function (e) {
-        e.stopPropagation();
-        if (e.target.closest('[data-cx="back"]')) { p.classList.remove("on"); return; }
-        var b = e.target.closest("[data-m]"); if (!b) return;
-        var m = b.getAttribute("data-m");
-        p.classList.remove("on"); hideV2();
-        var card = document.getElementById(m === "advanced" ? "modeAdvancedCard" : "modeSimpleCard");
-        if (card) card.click(); else { var ms = document.getElementById("modeSelect"); if (ms) ms.classList.remove("hidden"); }
-      });
-    }
-    p.classList.add("on");
+    hideV2();
+    var card = document.getElementById("modeAdvancedCard");
+    if (card) { card.click(); return; }
+    var ms = document.getElementById("modeSelect"); if (ms) ms.classList.remove("hidden");
   }
   // --- action delegates. Overlay screens (drawer/search/calculators/drugs/guidelines/about) layer OVER the v2 home
   //     (higher z-index) and return to it when closed — so we DON'T hide the home for them. Only in-shell flows hide it. ---
