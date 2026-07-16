@@ -140,9 +140,19 @@
     });
   }
 
+  // ---- remove the creator credit from the Acknowledgements footer -----------
+  // app.js renders the "Concept, content & development — Dr. …" credit; it's frozen,
+  // so drop that whole ack-group (role + name + hover card) at runtime. Idempotent.
+  function removeCreatorCredit() {
+    var n = document.querySelector("#ackCard .creator-name");
+    if (!n) return;
+    var grp = n.closest(".ack-group");
+    if (grp) grp.remove(); else n.remove();
+  }
+
   var raf = 0;
   function runAll() {
-    try { enhanceSystemBoxes(document); enhanceBanners(); markToggle(); ensureModeSeg(); } catch (e) {}
+    try { enhanceSystemBoxes(document); enhanceBanners(); markToggle(); ensureModeSeg(); removeCreatorCredit(); } catch (e) {}
   }
   function schedule() {
     if (raf) return;
