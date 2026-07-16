@@ -56,11 +56,15 @@ html.abx-ui #inputCard > h2 .num {
   border-radius: 9px; padding: 5px 9px; box-shadow: var(--abx-sh-teal);
 }
 
-/* ---- Stepper (group tabs) → premium segmented pills ---------------------- */
+/* ---- Stepper (group tabs) → ONE clean, swipeable row (no ragged wrapping) -- */
 html.abx-ui #inputCard .group-tabs {
-  display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding-bottom: 2px;
+  display: flex; flex-wrap: nowrap; gap: 8px; margin: 0 0 16px; padding-bottom: 4px;
+  overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; scroll-snap-type: x proximity;
 }
+html.abx-ui #inputCard .group-tabs::-webkit-scrollbar { display: none; }
 html.abx-ui #inputCard .group-tab {
+  flex: none; scroll-snap-align: start; white-space: nowrap;
   min-height: 40px; display: inline-flex; align-items: center; gap: 7px;
   padding: 8px 14px; border-radius: var(--abx-r-pill); cursor: pointer;
   background: var(--panel); border: 1.5px solid var(--line); color: var(--slate);
@@ -356,6 +360,90 @@ html.abx-ui [data-abx-seg] {
   box-shadow: 0 1px 2px rgba(20,32,43,.04); display: inline-flex; align-items: center; gap: 7px;
 }
 html.abx-ui [data-abx-seg]:hover { border-color: var(--teal) !important; }
+
+/* ============================================================================
+   PREMIUM CLASSIC SCREEN — one primary CTA, unified calm sections, 8px rhythm.
+   Presentation-only (html.abx-ui). Goal: the whole screen reads as ONE polished
+   surface (Apple Health / Notion / Linear), not a stack of mismatched cards.
+   Hierarchy: Header → Steps → Findings → Primary CTA. Branding: green/white.
+   ============================================================================ */
+
+/* -- even vertical rhythm: consistent 22px gaps between the card + blocks below */
+html.abx-ui .shell.visible > #inputCard,
+html.abx-ui .shell.visible > .golden-rule-foot,
+html.abx-ui .shell.visible > #ackCard { margin: 0 0 22px !important; }
+html.abx-ui .shell.visible > .app-footer { margin: 6px 0 0 !important; }
+
+/* -- step tabs: fade the LOCKED steps so the ACTIVE step clearly leads the eye */
+html.abx-ui #inputCard .group-tab { font-size: 12.5px; padding: 7px 13px; min-height: 38px; }
+html.abx-ui #inputCard .group-tab.locked { opacity: .5; box-shadow: none; }
+
+/* -- PRIMARY CTA: the single strong action, on-brand teal (was app red) ------ */
+html.abx-ui #inputCard .run-btn { background: var(--teal) !important; color: #fff !important; border: none !important; }
+html.abx-ui #inputCard .run-btn:disabled { background: var(--teal) !important; opacity: .4 !important; box-shadow: none !important; }
+
+/* -- flatten the nested findings sub-card: search + pills sit in the main card */
+html.abx-ui #inputCard #findingSections,
+html.abx-ui #inputCard .finding-section {
+  border: none !important; background: none !important; box-shadow: none !important; padding: 0 !important;
+}
+
+/* -- "or" divider: quiet, hairline-flanked, perfectly centered -------------- */
+html.abx-ui #inputCard .smd-or {
+  display: flex; align-items: center; justify-content: center; gap: 12px; margin: 16px 0;
+  font: 800 10.5px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--slate-soft);
+  background: none !important; border: none !important; padding: 0 !important; text-indent: 0 !important;
+}
+html.abx-ui #inputCard .smd-or::before, html.abx-ui #inputCard .smd-or::after { content: ""; flex: 1 1 0; height: 1px; background: var(--line); }
+
+/* -- SECONDARY CTA: Clinical Reasoning as a calm OUTLINED button ------------- */
+html.abx-ui #inputCard .reason-btn {
+  display: flex !important; flex-direction: column; align-items: center; gap: 3px; width: 100%;
+  min-height: 52px; padding: 11px 16px !important; border-radius: 14px !important; text-align: center;
+  background: var(--panel) !important; border: 1.5px solid var(--line) !important; box-shadow: none !important; cursor: pointer;
+}
+html.abx-ui #inputCard .reason-btn:hover { border-color: var(--teal) !important; }
+html.abx-ui #inputCard .reason-btn:active { transform: translateY(1px); }
+html.abx-ui #inputCard .reason-btn .rb-title { font: 800 15px var(--sans) !important; color: var(--teal) !important; letter-spacing: -.1px; }
+html.abx-ui #inputCard .reason-btn .rb-sub { font: 500 12px/1.35 var(--sans) !important; color: var(--slate-soft) !important; }
+
+/* -- legend: compact muted note; dots recolored to the new teal hierarchy ---- */
+html.abx-ui #inputCard .decision-legend {
+  margin-top: 14px; padding: 12px 14px; border-radius: var(--abx-r-ctrl); background: var(--paper);
+  border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px;
+}
+html.abx-ui #inputCard .decision-legend .dl-row { display: flex; align-items: flex-start; gap: 9px; font: 500 12.5px/1.45 var(--sans); color: var(--slate); }
+html.abx-ui #inputCard .decision-legend .dl-row b { color: var(--ink); font-weight: 700; }
+html.abx-ui #inputCard .decision-legend .dl-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; margin-top: 4px; }
+html.abx-ui #inputCard .decision-legend .dl-dot.dl-red { background: var(--teal); }
+html.abx-ui #inputCard .decision-legend .dl-dot.dl-blue { background: var(--panel); border: 2px solid var(--teal); }
+
+/* -- "Clear all findings": quiet centered text link ------------------------- */
+html.abx-ui #inputCard .reset-link { display: block; text-align: center; font: 600 13px var(--sans) !important; color: var(--slate-soft) !important; margin: 14px 0 2px; }
+
+/* -- Golden rule: one calm, light card (was a heavy tinted block) ------------ */
+html.abx-ui .golden-rule-foot {
+  background: var(--panel) !important; border: 1px solid var(--line) !important; border-radius: var(--abx-r-card) !important;
+  padding: 18px !important; font: 500 13px/1.6 var(--sans) !important; color: var(--slate) !important; box-shadow: none !important;
+}
+html.abx-ui .golden-rule-foot > b:first-child { display: block; font: 800 15px var(--sans); color: var(--ink); margin-bottom: 8px; letter-spacing: -.2px; }
+html.abx-ui .golden-rule-foot ol { margin: 10px 0; padding-left: 22px; display: grid; gap: 7px; }
+html.abx-ui .golden-rule-foot li { color: var(--slate); padding-left: 2px; }
+
+/* -- Acknowledgements: matching calm card ----------------------------------- */
+html.abx-ui #ackCard {
+  background: var(--panel) !important; border: 1px solid var(--line) !important; border-radius: var(--abx-r-card) !important;
+  padding: 18px !important; box-shadow: none !important;
+}
+html.abx-ui #ackCard .ack-title { font: 800 15px var(--sans) !important; color: var(--ink) !important; display: flex; align-items: center; gap: 8px; margin: 0 0 14px !important; }
+html.abx-ui #ackCard .ack-title .num { background: var(--teal); color: #fff; border-radius: 8px; padding: 3px 7px; font-size: 12px; }
+html.abx-ui #ackCard .ack-role { font: 700 10.5px var(--sans) !important; letter-spacing: .07em; text-transform: uppercase; color: var(--slate-soft) !important; margin-bottom: 5px !important; }
+html.abx-ui #ackCard .ack-group { margin-bottom: 14px; }
+
+/* -- Footer: minimal, centered, muted --------------------------------------- */
+html.abx-ui .app-footer { border-top: 1px solid var(--line); padding-top: 18px; text-align: center; }
+html.abx-ui .app-footer-link { color: var(--slate) !important; font: 600 12.5px var(--sans) !important; }
+html.abx-ui .app-footer-copy, html.abx-ui .app-footer-tagline { color: var(--slate-soft) !important; }
 
 /* ---- Dark mode: the app's dark tokens recolor --panel/--paper/etc.; severity
    ramp is theme-invariant by design. Nothing extra needed. --------------------*/
