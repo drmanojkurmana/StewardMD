@@ -1,172 +1,187 @@
 /* ============================================================================
    StewardMD — Clinical Antibiotic Decision Engine · UI/UX restyle (presentation only)
    ----------------------------------------------------------------------------
-   Design handoff: "5-Step Antibiotic Decision Engine (Redesign)". This is a PURE
-   CSS override layer — it does NOT touch reasoning.js/app.js logic, DOM, ids,
-   classes, data-act, globals, flow, or clinical compute. Every rule is scoped
-   under `html.abx-ui` (the feature flag), which both gates it and raises
-   specificity so it overrides the base `dx-styles`/classic styles that are
-   injected at runtime (later in source order).
+   Design-handoff restyle. PURE CSS override layer — touches ZERO JS/DOM/ids/
+   classes/globals/clinical compute. Every rule is scoped under `html.abx-ui`
+   (the feature flag), which gates it AND raises specificity so it overrides the
+   base styles (injected at runtime, later in source order) without reordering.
 
-   Flag: localStorage `smd_abx_ui` (default ON) or `?abxui=1`; kill with `?abxui=0`.
-   Tokens reused from the app (index.html :root / ui-v3.css). The design accent
-   (#0e6e63) IS the app's --teal, and the severity ramp IS --green/--yellow/
-   --orange/--red — so severity stays theme-invariant (a clinical-safety rule).
+   Targets the REAL engine, all in app.js:
+     • the 5-step wizard    → #inputCard.card  (.group-tabs/.group-tab stepper,
+       .step-progress-*, .step-nav-*, .system-picker-btn, .simple-chip findings,
+       .findings-count, .run-btn) + #simpleInputArea + .calc-* numeric inputs.
+     • the decision output  → #outputArea (.decision-banner.{green|yellow|orange|
+       red}, .decision-status-label, .decision-why, .drug-card/.drug-name/
+       .drug-meta/.drug-why, .stewardship-list/.sqa-*, .no-abx-note, .ref-*).
+     • the reasoning workspace (#dxOverlay/.dx-*) gets a light matching pass too.
+
+   Flag: localStorage `smd_abx_ui` (default ON) / `?abxui=1`; kill with `?abxui=0`.
+   The design accent IS the app's --teal (#0e6e63); the severity ramp IS
+   --green/--yellow/--orange/--red — kept THEME-INVARIANT (clinical-safety).
    ============================================================================ */
 
-/* ---- Type + rhythm foundation (scoped to the engine surfaces) ------------- */
-html.abx-ui #dxOverlay,
-html.abx-ui #dxMgmt {
-  --abx-r-chip: 20px; --abx-r-card: 16px; --abx-r-ctrl: 12px;
+html.abx-ui {
+  --abx-r-chip: 12px; --abx-r-card: 16px; --abx-r-ctrl: 12px; --abx-r-pill: 20px;
   --abx-sh-rest: 0 1px 2px rgba(20,32,43,.05);
-  --abx-sh-card: 0 1px 3px rgba(20,32,43,.06), 0 6px 20px rgba(20,32,43,.05);
+  --abx-sh-card: 0 1px 3px rgba(20,32,43,.06), 0 8px 24px rgba(20,32,43,.05);
   --abx-sh-teal: 0 2px 10px rgba(14,110,99,.28);
 }
 
-/* Focus: a single, strong, consistent ring on every interactive element (a11y). */
-html.abx-ui #dxOverlay button:focus-visible,
-html.abx-ui #dxOverlay input:focus-visible,
-html.abx-ui #dxOverlay select:focus-visible,
-html.abx-ui #dxOverlay [role="checkbox"]:focus-visible,
-html.abx-ui #dxMgmt button:focus-visible {
-  outline: 3px solid var(--teal); outline-offset: 2px; border-radius: 10px;
+/* Strong, consistent focus ring on every interactive element (a11y). */
+html.abx-ui #inputCard button:focus-visible,
+html.abx-ui #inputCard input:focus-visible,
+html.abx-ui #inputCard select:focus-visible,
+html.abx-ui #inputCard label:focus-visible,
+html.abx-ui #outputArea button:focus-visible,
+html.abx-ui .group-tab:focus-visible,
+html.abx-ui .system-picker-btn:focus-visible,
+html.abx-ui .simple-chip:focus-visible {
+  outline: 3px solid var(--teal); outline-offset: 2px;
 }
-
-/* Respect reduced-motion (never let transitions affect functionality either way). */
 @media (prefers-reduced-motion: reduce) {
-  html.abx-ui #dxOverlay *, html.abx-ui #dxMgmt * { transition: none !important; animation: none !important; }
+  html.abx-ui #inputCard *, html.abx-ui #outputArea *, html.abx-ui #dxOverlay * { transition: none !important; animation: none !important; }
 }
 
-/* ---- Header / chrome ------------------------------------------------------ */
-html.abx-ui #dxOverlay .dx-top {
-  padding: calc(14px + env(safe-area-inset-top)) 16px 14px;
-  background: rgba(255,255,255,.9); backdrop-filter: saturate(1.1) blur(10px);
-  -webkit-backdrop-filter: saturate(1.1) blur(10px); border-bottom: 1px solid var(--line);
+/* ---- Wizard container + header ------------------------------------------- */
+html.abx-ui #inputCard {
+  border-radius: var(--abx-r-card); box-shadow: var(--abx-sh-card);
+  border: 1px solid var(--line); padding: 18px 18px 20px; background: var(--panel);
 }
-html.abx-ui #dxOverlay .dx-title { font: 800 19px/1.15 var(--sans); letter-spacing: -.4px; }
-html.abx-ui #dxOverlay .dx-back,
-html.abx-ui #dxOverlay .dx-reset {
-  min-height: 44px; padding: 0 16px; border-radius: var(--abx-r-ctrl);
-  font: 700 14px var(--sans); display: inline-flex; align-items: center; gap: 6px;
+html.abx-ui #inputCard > h2 {
+  font: 800 21px/1.15 var(--sans); letter-spacing: -.4px; color: var(--ink);
+  display: flex; align-items: center; gap: 10px; margin: 0 0 14px; text-wrap: pretty;
 }
-html.abx-ui #dxOverlay .dx-back { border-width: 1.5px; }
-html.abx-ui #dxOverlay .dx-reset:hover { border-color: var(--teal); color: var(--teal); }
-
-/* ---- Body spacing (8pt), roomier reading column --------------------------- */
-html.abx-ui #dxOverlay .dx-body { padding: 16px 16px calc(120px + env(safe-area-inset-bottom)); max-width: 1180px; }
-
-/* ---- Info / policy banners → premium teal-soft ---------------------------- */
-html.abx-ui #dxOverlay .dx-discl,
-html.abx-ui #dxOverlay .dx-hosp,
-html.abx-ui #dxOverlay .dx-policy-wrap {
-  background: var(--teal-soft); border: 1px solid var(--teal-soft);
-  border-radius: 14px; padding: 12px 14px; font-size: 12.5px; line-height: 1.55;
+html.abx-ui #inputCard > h2 .num {
+  background: var(--teal); color: #fff; font: 800 12px var(--mono); letter-spacing: .04em;
+  border-radius: 9px; padding: 5px 9px; box-shadow: var(--abx-sh-teal);
 }
-html.abx-ui #dxOverlay .dx-discl { color: var(--slate); }
 
-/* ---- Search box ----------------------------------------------------------- */
-html.abx-ui #dxOverlay .dx-search {
-  min-height: 48px; border-radius: var(--abx-r-ctrl); border: 1.5px solid var(--line);
-  font: 500 15px var(--sans); padding: 12px 16px; box-shadow: var(--abx-sh-rest);
+/* ---- Stepper (group tabs) → premium segmented pills ---------------------- */
+html.abx-ui .group-tabs {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding-bottom: 2px;
 }
-html.abx-ui #dxOverlay .dx-search:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(14,110,99,.14); }
-html.abx-ui #dxOverlay .dx-search-drop { border-radius: 16px; padding: 8px; }
-html.abx-ui #dxOverlay .dx-search-row { min-height: 52px; padding: 14px 14px; font-size: 15px; border-radius: 10px; border-bottom: 1px solid var(--line-soft, #eef1f0); }
-html.abx-ui #dxOverlay .dx-search-row:active,
-html.abx-ui #dxOverlay .dx-search-row.hi { background: var(--teal-soft); }
-html.abx-ui #dxOverlay .dx-sr-plus { width: 26px; height: 26px; }
+html.abx-ui .group-tab {
+  min-height: 40px; display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 14px; border-radius: var(--abx-r-pill); cursor: pointer;
+  background: var(--panel); border: 1.5px solid var(--line); color: var(--slate);
+  font: 700 13px var(--sans); box-shadow: var(--abx-sh-rest);
+  transition: background .15s, border-color .15s, color .15s, box-shadow .15s;
+}
+html.abx-ui .group-tab:hover { border-color: var(--teal); color: var(--teal); }
+html.abx-ui .group-tab.active { background: var(--teal); border-color: var(--teal); color: #fff; box-shadow: var(--abx-sh-teal); }
 
-/* ---- Chips (findings, systems, selected) → 40px targets, pill radius ------ */
+/* ---- Step progress bar ---------------------------------------------------- */
+html.abx-ui .step-progress-bar { height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; }
+html.abx-ui .step-progress-fill { background: var(--teal); border-radius: 999px; }
+html.abx-ui .step-progress-label { font: 800 11.5px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--slate-soft); }
+
+/* ---- System picker boxes (Which System?) → tappable cards ---------------- */
+html.abx-ui .system-picker-btn {
+  min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  border-radius: var(--abx-r-card); border: 1.5px solid var(--line); background: var(--panel);
+  color: var(--slate); font: 700 13.5px var(--sans); padding: 14px 10px; cursor: pointer;
+  box-shadow: var(--abx-sh-rest); transition: all .15s; text-align: center;
+}
+html.abx-ui .system-picker-btn:hover { border-color: var(--teal); }
+html.abx-ui .system-picker-btn.active { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); box-shadow: 0 2px 8px rgba(14,110,99,.14); }
+html.abx-ui .system-picker-icon { font-size: 26px; line-height: 1; }
+
+/* ---- Finding chips / checkboxes → big touch targets, clear checked state -- */
+html.abx-ui .simple-chip {
+  min-height: 46px; display: flex; align-items: center; gap: 10px; box-sizing: border-box;
+  padding: 10px 14px; border-radius: var(--abx-r-ctrl); cursor: pointer;
+  background: var(--panel); border: 1.5px solid var(--line); color: var(--ink);
+  font: 600 14px var(--sans); box-shadow: var(--abx-sh-rest);
+  transition: background .15s, border-color .15s, color .15s, box-shadow .15s;
+}
+html.abx-ui .simple-chip:hover { border-color: var(--teal); }
+html.abx-ui .simple-chip.checked { background: var(--teal); border-color: var(--teal); color: #fff; box-shadow: var(--abx-sh-teal); }
+html.abx-ui .simple-chip input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--teal); flex: 0 0 auto; }
+html.abx-ui .simple-chip.checked input[type="checkbox"] { accent-color: #fff; }
+/* Advanced findings list (#findingSections) — labels/rows get the same premium treatment. */
+html.abx-ui #findingSections label { min-height: 44px; }
+html.abx-ui #findingSections .finding-list-col { gap: 10px; }
+html.abx-ui #findingSections input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--teal); }
+
+/* ---- Numeric / vitals inputs (Advanced) → clean fields ------------------- */
+html.abx-ui .calc-field { gap: 6px; }
+html.abx-ui .calc-label { font: 600 11.5px var(--sans); color: var(--slate-soft); }
+html.abx-ui .calc-input,
+html.abx-ui .calc-select {
+  min-height: 44px; border-radius: 10px; border: 1.5px solid var(--line);
+  background: var(--input-bg, #fbfcfb); font: 500 15px var(--mono); padding: 10px 12px; color: var(--ink);
+}
+html.abx-ui .calc-input:focus,
+html.abx-ui .calc-select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(14,110,99,.14); }
+
+/* ---- Counts + nav + primary CTA ------------------------------------------ */
+html.abx-ui .findings-count { font: 700 13px var(--mono); color: var(--slate); }
+html.abx-ui .step-nav-btn,
+html.abx-ui .step-nav-back {
+  min-height: 46px; border-radius: var(--abx-r-ctrl); font: 700 14px var(--sans);
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+}
+html.abx-ui .step-nav-btn { background: var(--teal); border: none; color: #fff; box-shadow: var(--abx-sh-teal); }
+html.abx-ui .step-nav-back { background: var(--panel); border: 1.5px solid var(--line); color: var(--slate); }
+html.abx-ui .run-btn {
+  min-height: 52px; border-radius: 14px; font: 800 15.5px var(--sans); letter-spacing: .01em;
+  box-shadow: var(--abx-sh-teal); margin-top: 6px;
+}
+html.abx-ui .run-btn:active { transform: translateY(1px); }
+html.abx-ui .run-btn:disabled { opacity: .45; box-shadow: none; }
+
+/* ---- Decision output card → premium, severity-tinted (ramp unchanged) ----- */
+html.abx-ui #outputArea .decision-banner {
+  border-radius: var(--abx-r-card); border: 1px solid var(--line); border-left-width: 5px;
+  padding: 16px 18px; box-shadow: var(--abx-sh-card); margin-bottom: 14px;
+}
+html.abx-ui #outputArea .decision-banner.green  { background: var(--green-bg);  border-color: var(--green-line);  border-left-color: var(--green); }
+html.abx-ui #outputArea .decision-banner.yellow { background: var(--yellow-bg); border-color: var(--yellow-line); border-left-color: var(--yellow); }
+html.abx-ui #outputArea .decision-banner.orange { background: var(--orange-bg); border-color: var(--orange-line); border-left-color: var(--orange); }
+html.abx-ui #outputArea .decision-banner.red    { background: var(--red-bg);    border-color: var(--red-line);    border-left-color: var(--red); }
+html.abx-ui #outputArea .decision-status-label { font: 800 13px var(--sans); letter-spacing: .05em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+html.abx-ui #outputArea .decision-why { margin-top: 8px; line-height: 1.6; text-wrap: pretty; }
+html.abx-ui #outputArea .decision-why .lbl { font: 800 11px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--slate-soft); display: block; margin-bottom: 3px; }
+
+/* ---- Empiric regimen drug cards ------------------------------------------ */
+html.abx-ui #outputArea .drug-card {
+  background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--teal);
+  border-radius: 14px; padding: 14px 16px; box-shadow: var(--abx-sh-card); margin: 10px 0;
+}
+html.abx-ui #outputArea .drug-name { font: 800 16px var(--sans); color: var(--ink); }
+html.abx-ui #outputArea .drug-meta { font: 600 13px var(--mono); color: var(--teal); margin-top: 3px; }
+html.abx-ui #outputArea .drug-why { font: 500 13.5px/1.55 var(--sans); color: var(--slate); margin-top: 6px; }
+html.abx-ui #outputArea .no-abx-note {
+  background: var(--green-bg); border: 1px solid var(--green-line); border-radius: 14px;
+  padding: 14px 16px; color: var(--green); font-weight: 700;
+}
+
+/* ---- Stewardship (8-question framework) ---------------------------------- */
+html.abx-ui #outputArea .stewardship-list,
+html.abx-ui #outputArea .stewardship-qa {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--abx-sh-card);
+}
+html.abx-ui #outputArea .sqa-row { padding: 12px 14px; border-bottom: 1px solid var(--line-soft, #eef1f0); display: flex; gap: 11px; align-items: flex-start; }
+html.abx-ui #outputArea .sqa-row:last-child { border-bottom: none; }
+html.abx-ui #outputArea .sqa-q { font: 700 13.5px var(--sans); color: var(--ink); }
+html.abx-ui #outputArea .sqa-a { font: 500 13.5px/1.55 var(--sans); color: var(--slate); }
+
+/* ---- Evidence pills / reference chips ------------------------------------ */
+html.abx-ui #outputArea .evidence-pill,
+html.abx-ui #outputArea .ref-chip {
+  border-radius: 999px; font: 700 11.5px var(--mono); padding: 4px 10px;
+}
+
+/* ---- Reasoning workspace (#dxOverlay) — light matching pass --------------- */
+html.abx-ui #dxOverlay .dx-title { font: 800 19px var(--sans); letter-spacing: -.4px; }
+html.abx-ui #dxOverlay .dx-search { min-height: 48px; border-radius: 12px; font: 500 15px var(--sans); }
+html.abx-ui #dxOverlay .dx-search:focus { box-shadow: 0 0 0 3px rgba(14,110,99,.14); }
 html.abx-ui #dxOverlay .dx-chip,
 html.abx-ui #dxOverlay .dx-sys,
-html.abx-ui #dxOverlay .dx-sel-chip {
-  min-height: 40px; display: inline-flex; align-items: center; gap: 6px;
-  border-radius: var(--abx-r-chip); padding: 8px 14px; font: 600 13.5px var(--sans);
-  transition: border-color .15s, background .15s, color .15s, box-shadow .15s;
-}
-html.abx-ui #dxOverlay .dx-chip { background: var(--panel); border: 1.5px solid var(--line); color: var(--slate); box-shadow: var(--abx-sh-rest); }
-html.abx-ui #dxOverlay .dx-chip:hover { border-color: var(--teal); color: var(--teal); }
-html.abx-ui #dxOverlay .dx-chip:active { transform: scale(.97); }
-html.abx-ui #dxOverlay .dx-chip.sug { background: var(--teal-soft); border-color: var(--teal); color: var(--teal); }
-html.abx-ui #dxOverlay .dx-sys { background: var(--panel); border: 1.5px solid var(--line); color: var(--slate); box-shadow: var(--abx-sh-rest); }
-html.abx-ui #dxOverlay .dx-sys.on { background: var(--teal); border-color: var(--teal); color: #fff; box-shadow: var(--abx-sh-teal); }
-html.abx-ui #dxOverlay .dx-sel-chip { background: var(--teal); color: #fff; box-shadow: var(--abx-sh-teal); font-weight: 700; }
-
-/* ---- Cards / containers → softer, elevated, roomier ----------------------- */
-html.abx-ui #dxOverlay .dx-picker,
-html.abx-ui #dxOverlay .dx-card,
-html.abx-ui #dxOverlay .dx-gate-card,
-html.abx-ui #dxOverlay .dx-threshold {
-  border-radius: var(--abx-r-card); box-shadow: var(--abx-sh-card); border: 1px solid var(--line);
-}
-html.abx-ui #dxOverlay .dx-picker { padding: 14px 16px; }
-html.abx-ui #dxOverlay .dx-card.open { box-shadow: 0 2px 8px rgba(14,110,99,.14); }
-html.abx-ui #dxOverlay .dx-row-head { padding: 14px 15px; }
-html.abx-ui #dxOverlay .dx-row-name { font: 700 15px var(--sans); }
-html.abx-ui #dxOverlay .dx-row-sys { font-size: 12px; }
-
-/* Section labels → uppercase 800 with tracking (scan-friendly hierarchy). */
-html.abx-ui #dxOverlay .dx-cat-h,
-html.abx-ui #dxOverlay .dx-sugg-h,
-html.abx-ui #dxOverlay .dx-col-h,
-html.abx-ui #dxMgmt .dx-mgmt-sec {
-  font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
-}
-html.abx-ui #dxOverlay .dx-col-h { font-size: 12px; color: var(--slate-soft); text-wrap: balance; }
-
-/* ---- Numbers / dose / confidence → monospace (clinical-data font) --------- */
+html.abx-ui #dxOverlay .dx-sel-chip { min-height: 40px; display: inline-flex; align-items: center; border-radius: var(--abx-r-pill); }
+html.abx-ui #dxOverlay .dx-gate-t { font: 800 20px var(--sans); letter-spacing: -.4px; }
 html.abx-ui #dxOverlay .dx-score,
-html.abx-ui #dxOverlay .dx-sr-count,
-html.abx-ui #dxOverlay .dx-col-n,
 html.abx-ui #dxOverlay .dx-conf { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
-/* ---- Confidence bar → thicker, smoother ----------------------------------- */
-html.abx-ui #dxOverlay .dx-bar { height: 6px; border-radius: 4px; }
-
-/* ---- Decision / gate card → premium, severity-tinted (ramp unchanged) ----- */
-html.abx-ui #dxOverlay .dx-gate-card { padding: 16px 18px; }
-html.abx-ui #dxOverlay .dx-gate-t { font: 800 21px/1.15 var(--sans); letter-spacing: -.4px; text-wrap: pretty; }
-html.abx-ui #dxOverlay .dx-gate-m { font-size: 13.5px; line-height: 1.55; }
-html.abx-ui #dxOverlay .dx-gate-hint { border-radius: 10px; padding: 10px 12px; }
-
-/* ---- Buttons: primary teal, big targets ----------------------------------- */
-html.abx-ui #dxOverlay .dx-tool,
-html.abx-ui #dxOverlay .dx-speak,
-html.abx-ui #dxOverlay .dx-adv-toggle,
-html.abx-ui #dxOverlay .dx-more-btn,
-html.abx-ui #dxOverlay .dx-launch {
-  min-height: 44px; border-radius: var(--abx-r-ctrl); font: 700 13.5px var(--sans);
-  display: inline-flex; align-items: center; gap: 8px;
-}
-html.abx-ui #dxOverlay .dx-speak {
-  width: 100%; justify-content: center; background: var(--teal); border: none; color: #fff;
-  box-shadow: var(--abx-sh-teal); font-size: 14.5px;
-}
-html.abx-ui #dxOverlay .dx-speak-tag { background: rgba(255,255,255,.22); border-radius: 999px; padding: 2px 8px; font: 700 11px var(--mono); }
-
-/* ---- Empty / prompt states → calmer, centered, generous ------------------- */
-html.abx-ui #dxOverlay .dx-prompt,
-html.abx-ui #dxOverlay .dx-sel-empty {
-  color: var(--muted, #7c8b96); font-size: 13.5px;
-}
-html.abx-ui #dxOverlay .dx-prompt { padding: 28px 18px; border-radius: 14px; line-height: 1.6; text-wrap: pretty; }
-
-/* ---- Management / stewardship screen -------------------------------------- */
-html.abx-ui #dxMgmt .dx-mgmt-name { font: 800 22px/1.15 var(--sans); letter-spacing: -.4px; text-wrap: pretty; }
-html.abx-ui #dxMgmt .dx-mgmt-body { max-width: 820px; padding: 20px 18px 120px; }
-html.abx-ui #dxMgmt .dx-mgmt-disc { border-radius: 14px; }
-
-/* ---- Classic Simple flow (#inputCard / #outputArea / #runBtn) ------------- */
-html.abx-ui #inputCard,
-html.abx-ui #outputArea > * { border-radius: 16px; }
-html.abx-ui #runBtn {
-  min-height: 50px; border-radius: 14px; font: 800 15.5px var(--sans); letter-spacing: .01em;
-  box-shadow: var(--abx-sh-teal);
-}
-html.abx-ui #runBtn:active { transform: translateY(1px); }
-
-/* ---- Dark theme: the app's dark tokens already recolor --panel/--paper/etc.,
-   and the severity ramp is theme-invariant by design. Only soften the header
-   translucency so it reads on dark. -------------------------------------------*/
-body.dark html.abx-ui #dxOverlay .dx-top,
-html.abx-ui body.dark #dxOverlay .dx-top { background: rgba(19,32,48,.9); }
+/* ---- Dark mode: the app's dark tokens recolor --panel/--paper/etc.; severity
+   ramp is theme-invariant by design. Nothing extra needed. --------------------*/
