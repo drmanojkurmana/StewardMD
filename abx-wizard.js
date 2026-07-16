@@ -102,27 +102,39 @@
     });
     return { f: f, v: v };
   }
-  // Move the classic engine's #outputArea (with its live safety inputs / accordions)
-  // into `host`, after rendering it for the wizard's findings + locked diagnosis.
-  // The node is BORROWED, not cloned — restoreOutputArea() puts it back.
-  function embedFullOutput(host) {
-    try {
-      var pay = classicPayload();
-      if (window.SMD_restoreCase) window.SMD_restoreCase(pay.f, W.locked, pay.v);
-      var out = document.getElementById("outputArea");
-      if (out) {
-        if (!out.__abxHome) out.__abxHome = { parent: out.parentNode, next: out.nextSibling };
-        out.style.display = "";
-        host.appendChild(out);
+  // Render the classic #outputArea for the wizard's findings + locked dx, then
+  // DISTRIBUTE its section nodes across the Decision (step 4) and Plan (step 5)
+  // steps so neither is one long page. Nodes are MOVED (not cloned) so the live
+  // safety inputs / accordions keep working; a fresh SMD_restoreCase re-creates
+  // the full set each time, so leftover nodes never matter.
+  var DECISION_NUMS = { "02": 1, "SCR": 1, "03": 1, "04": 1 }; // toxicity/severity/syndrome/pathogens
+  function isDecisionSection(k) {
+    if (k.classList) {
+      if (k.classList.contains("quick-answer-card")) return true;      // Quick Decision
+      if (k.classList.contains("safety-warning-banner")) return true;  // red-flag alert
+      if (k.classList.contains("decision-banner")) return true;        // Antibiotics + Why
+      if (k.classList.contains("smd-acc")) {
+        var n = k.querySelector(".num"); return !!(n && DECISION_NUMS[n.textContent.trim()]);
       }
-    } catch (e) {}
-  }
-  function restoreOutputArea() {
-    var out = document.getElementById("outputArea");
-    if (out && out.__abxHome && out.parentElement && out.parentElement.closest && out.parentElement.closest("#abxWizard")) {
-      try { out.__abxHome.parent.insertBefore(out, out.__abxHome.next); } catch (e) {}
     }
+    return false; // console / save / patient-safety / toolbar / 05..10 → Plan
   }
+  // renderNow=true → freshly render #outputArea before splitting.
+  function distributeOutput(host, which, renderNow) {
+    try {
+      if (renderNow && window.SMD_restoreCase) { var pay = classicPayload(); window.SMD_restoreCase(pay.f, W.locked, pay.v); }
+      var out = document.getElementById("outputArea");
+      if (!out) return false;
+      var kids = [].slice.call(out.children), moved = 0;
+      kids.forEach(function (k) {
+        var dec = isDecisionSection(k);
+        if ((which === "decision") === dec) { host.appendChild(k); moved++; }
+      });
+      return moved > 0;
+    } catch (e) { return false; }
+  }
+  // #outputArea itself is never moved (only its children) → nothing to restore.
+  function restoreOutputArea() {}
 
   // ---- tiny DOM helper -----------------------------------------------------
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
@@ -220,6 +232,9 @@
     // segmented + stepper + nav
     root.querySelectorAll(".abxw-segb").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-mode") === W.mode); b.setAttribute("aria-selected", b.getAttribute("data-mode") === W.mode); });
     renderStepper();
+    var scroller = root.querySelector(".abxw-scroll");
+    var prevScroll = scroller ? scroller.scrollTop : 0;
+    var sameView = (W.step === W._renderedStep && W.mode === W._renderedMode);
     var body = root.querySelector(".abxw-body");
     body.innerHTML = "";
     if (W.step === 1 || W.step === 2) body.appendChild(renderFindings());
@@ -231,7 +246,10 @@
     root.querySelector(".abxw-cap").textContent = STEP_CAPTION[W.step - 1] || "";
     root.querySelector(".abxw-nextl").textContent = NEXT_LABEL[W.step - 1] || "Done";
     var nx = root.querySelector(".abxw-next"); nx.disabled = !nextAllowed(); nx.style.opacity = nextAllowed() ? "1" : ".4";
-    root.querySelector(".abxw-scroll").scrollTop = 0;
+    // keep the reader's place on same-step re-renders (e.g. toggling a chip);
+    // only jump to top when the step or mode actually changes.
+    if (scroller) scroller.scrollTop = sameView ? prevScroll : 0;
+    W._renderedStep = W.step; W._renderedMode = W.mode;
   }
 
   function renderStepper() {
@@ -410,45 +428,38 @@
     return isInf ? sevOf(a.gate.cls).k : "green";
   }
 
+  // Step 4 — Decision: Quick Decision + Why + Toxicity + Severity + Syndrome + Pathogens
+  // (the REAL engine sections, split out of #outputArea; renders it fresh here).
   function renderDecision() {
     var wrap = el("div", "abxw-step-body");
     var a = assess(); var c = lockedCand(a);
     if (!a || !c) { wrap.appendChild(el("div", "abxw-empty dash", ms("rule") + '<p>Lock a diagnosis from the differential to see the decision.</p>')); return wrap; }
-    var isInf = a.infectious.some(function (x) { return x.id === c.id; });
-    var sv = isInf ? sevOf(a.gate.cls) : SEV.noninfective;
-    var abx = isInf ? (a.gate.ab ? "Yes" : "Optional") : "Not indicated";
-    var mg = window.DX_MGMT && window.DX_MGMT[c.id];
-    var dispo = (mg && mg.dispo) ? mg.dispo : (sv.k === "red" ? "ICU / HDU" : sv.k === "orange" ? "Ward / admit" : "Ambulatory / review");
-    var card = el("div", "abxw-deccard sev-" + sv.k);
-    card.innerHTML =
-      '<div class="abxw-dechead"><span class="abxw-decic">' + ms(sv.icon) + '</span>' +
-      '<div><div class="abxw-declbl">' + sv.label + '</div><div class="abxw-decdx">' + esc(c.name) + '</div></div></div>' +
-      '<div class="abxw-decgrid">' +
-        '<div class="abxw-decfact"><div class="abxw-lbl">Confidence</div><div class="abxw-decv mono">' + c.confidence + '%</div></div>' +
-        '<div class="abxw-decfact"><div class="abxw-lbl">Antibiotics</div><div class="abxw-decv abx">' + abx + '</div></div>' +
-        '<div class="abxw-decfact"><div class="abxw-lbl">Disposition</div><div class="abxw-decv">' + esc(dispo) + '</div></div>' +
-      '</div>';
-    wrap.appendChild(card);
-    if (c.redFlags && c.redFlags.length) {
-      wrap.appendChild(el("div", "abxw-redflag", ms("warning") + '<div>' + c.redFlags.map(esc).join("<br>") + '</div>'));
+    wrap.appendChild(el("h2", "abxw-secttl", ms("gavel") + "Clinical decision"));
+    var host = el("div", "abxw-fullout"); wrap.appendChild(host);
+    var ok = distributeOutput(host, "decision", true);
+    if (!ok) { // fallback: concise card from assess()
+      var isInf = a.infectious.some(function (x) { return x.id === c.id; });
+      var sv = isInf ? sevOf(a.gate.cls) : SEV.noninfective;
+      var card = el("div", "abxw-deccard sev-" + sv.k);
+      card.innerHTML = '<div class="abxw-dechead"><span class="abxw-decic">' + ms(sv.icon) + '</span><div><div class="abxw-declbl">' + sv.label + '</div><div class="abxw-decdx">' + esc(c.name) + '</div></div></div>';
+      host.appendChild(card);
+      host.appendChild(el("div", "abxw-why", '<div class="abxw-lbl">Why</div><p>' + esc(c.reason || "") + '</p>'));
     }
-    wrap.appendChild(el("div", "abxw-why", '<div class="abxw-lbl">Why</div><p>' + esc(c.reason || "") + '</p>'));
     return wrap;
   }
 
+  // Step 5 — Plan: Regimen + Interactions + Coverage + Stewardship + Investigations
+  // + De-escalation + References (the remaining REAL engine sections). #outputArea
+  // was already rendered in step 4; reuse it (renderNow=false) and take the rest.
   function renderPlan() {
     var wrap = el("div", "abxw-step-body");
     var a = assess(); var c = lockedCand(a);
     if (!a || !c) { wrap.appendChild(el("div", "abxw-empty dash", ms("rule") + '<p>Lock a diagnosis first to see the plan.</p>')); return wrap; }
-    // Render the REAL, complete engine output (regimen with dosing, Stewardship
-    // Console, patient-specific renal/hepatic/cardiac safety, alternatives,
-    // de-escalation, guideline refs) for the locked diagnosis — nothing dropped.
     wrap.appendChild(el("h2", "abxw-secttl", ms("verified") + "Regimen & stewardship"));
-    var host = el("div", "abxw-fullout");
-    wrap.appendChild(host);
-    embedFullOutput(host);
-    if (!host.querySelector("#outputArea")) {
-      // engine output unavailable → fall back to the candidate's real reason
+    var host = el("div", "abxw-fullout"); wrap.appendChild(host);
+    // render fresh (in case Decision wasn't visited this session), then take Plan sections
+    var ok = distributeOutput(host, "plan", true);
+    if (!ok) {
       host.appendChild(el("div", "abxw-why", '<div class="abxw-lbl">Why</div><p>' + esc(c.reason || "") + '</p>'));
       var ref = el("button", "abxw-openref primary", ms("open_in_new") + "Open full treatment reference"); ref.setAttribute("data-act", "openref"); ref.setAttribute("data-ref", c.treatmentRef || c.id);
       host.appendChild(ref);
