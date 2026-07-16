@@ -2652,10 +2652,12 @@
   // Management / treatment panel for a NON-INFECTIVE working diagnosis.
   function openMgmt(r) {
     var m = (window.DX_MGMT && window.DX_MGMT[r.id]) || null;
+    var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId && window.KB_ENRICHMENT.byId[r.id]) || null;
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
-    var tx = (m && m.tx && m.tx.length) ? m.tx : null;
-    var ix = (m && m.ix && m.ix.length) ? m.ix : (r.inv || []);
+    var tx = (m && m.tx && m.tx.length) ? m.tx : ((r.mgmt && r.mgmt.length) ? r.mgmt : ((H && H.management && H.management.length) ? H.management : null));
+    var ix = (m && m.ix && m.ix.length) ? m.ix : (r.inv && r.inv.length ? r.inv : ((H && H.additionalInvestigations) || []));
+    var red = (r.red && r.red.length) ? r.red : ((H && H.redFlags) || []);
     var html = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">‹ Back to differential</button></div>' +
       '<div class="dx-mgmt-body">' +
         '<div class="dx-mgmt-badge">Working diagnosis · non-infective</div>' +
@@ -2668,7 +2670,7 @@
         scoreChipsBlock(r) +
         (ix && ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
         (m && m.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(m.dispo) + '</p>' : '') +
-        (r.red && r.red.length ? '<div class="dx-mgmt-sec red">Red flags</div><ul class="dx-mgmt-ul">' + r.red.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
+        (red && red.length ? '<div class="dx-mgmt-sec red">Red flags</div><ul class="dx-mgmt-ul">' + red.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
         (m && m.src ? '<div class="dx-mgmt-src">Source: ' + esc(m.src) + '</div>' : '') +
         '<div class="dx-mgmt-disc">⚠️ Decision-support only — provisional and aligned to standard guidelines / Harrison\'s 22e. Verify against full guidelines, local protocol and current prescribing references (doses, contraindications, renal/hepatic adjustment, pregnancy) before acting.</div>' +
       '</div>';
@@ -2711,11 +2713,12 @@
     var dm = (window.DX_MGMT || {})[id];
     var refInf = inf && !syn;
     var hasBrief = !!(dm && dm.tx && dm.tx.length);
-    var mgmtHtml = (refInf && hasBrief)
-      ? ('<div class="dx-mgmt-sec tx">💊 Management / Treatment</div><ol class="dx-mgmt-tx">' + dm.tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
-         + (dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '')
-         + (dm.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(dm.dispo) + '</p>' : '')
-         + (dm.src ? '<div class="dx-mgmt-src">Source: ' + esc(dm.src) + '</div>' : ''))
+    var briefTx = hasBrief ? dm.tx : ((H && H.management && H.management.length) ? H.management : null);
+    var mgmtHtml = (refInf && briefTx)
+      ? ('<div class="dx-mgmt-sec tx">💊 Management / Treatment</div><ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
+         + (dm && dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '')
+         + (dm && dm.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(dm.dispo) + '</p>' : '')
+         + (dm && dm.src ? '<div class="dx-mgmt-src">Source: ' + esc(dm.src) + '</div>' : ''))
       : "";
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
@@ -3583,11 +3586,23 @@
     var base = { "Content-Type": "application/json" };
     try {
       var u = window.firebase && firebase.auth && firebase.auth().currentUser;
-      if (u && u.getIdToken) return u.getIdToken().then(function (t) { if (t) base["Authorization"] = "Bearer " + t; return base; }).catch(function () { return base; });
+      if (u && u.getIdToken) return raceTimeout(u.getIdToken().then(function (t) { if (t) base["Authorization"] = "Bearer " + t; return base; }).catch(function () { return base; }), 5000, base);
     } catch (e) {}
     return Promise.resolve(base);
   }
   function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF (MaiK chat / AI commentary)
+  // Bound any network await so a request that NEVER settles can't hang MaiK forever. On the native
+  // app, CapacitorHttp proxies fetch and does NOT honour AbortController, so the AbortController-based
+  // timeouts elsewhere are no-ops there — a stalled /api/ai request (or a hung Firebase getIdToken)
+  // would otherwise leave the "Searching…" bubble spinning indefinitely (web/PWA was unaffected).
+  // Real timeout via Promise.race; resolves to `val` if `p` doesn't settle (or rejects) within `ms`.
+  function raceTimeout(p, ms, val) {
+    return new Promise(function (resolve) {
+      var done = false, t = setTimeout(function () { if (!done) { done = true; resolve(val); } }, ms);
+      Promise.resolve(p).then(function (v) { if (!done) { done = true; clearTimeout(t); resolve(v); } },
+        function () { if (!done) { done = true; clearTimeout(t); resolve(val); } });
+    });
+  }
   // Live differential on/off (default ON) — a per-device switch in the differential header.
   function liveDiffOn() { try { return localStorage.getItem("smd_live_diff") !== "0"; } catch (e) { return true; } }
   function liveToggleHTML() {
@@ -3751,7 +3766,7 @@
           return r.json().then(function (j) { if (j && !j.sources) j.sources = pkg.sources; return j; });
         });
       }
-      return attempt(false).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return raceTimeout(attempt(false).catch(function (e) { return { error: String(e && e.message || e) }; }), 35000, { error: "timeout" });
     },
     // Phase 2 — STREAMING grounded explain (progressive tokens like UpToDate's live answer).
     // onDelta(accumulatedText) is called as tokens arrive. STRICTLY additive: any failure — server
@@ -4473,8 +4488,9 @@
   function renderNIPage(e, syn) {
     var n = document.getElementById("outputArea"); if (!n) return;
     var m = (window.DX_MGMT && window.DX_MGMT[syn.id]) || null;
-    var tx = (m && m.tx && m.tx.length) ? m.tx : null;
-    var ix = (m && m.ix && m.ix.length) ? m.ix : (syn.inv || []);
+    var Hni = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId && window.KB_ENRICHMENT.byId[syn.id]) || null;
+    var tx = (m && m.tx && m.tx.length) ? m.tx : ((Hni && Hni.management && Hni.management.length) ? Hni.management : null);
+    var ix = (m && m.ix && m.ix.length) ? m.ix : (syn.inv && syn.inv.length ? syn.inv : ((Hni && Hni.additionalInvestigations) || []));
     var li = function (arr, n2) { return '<ul>' + arr.slice(0, n2 || 10).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>'; };
     n.innerHTML =
       '<div class="quick-answer-card green">' +

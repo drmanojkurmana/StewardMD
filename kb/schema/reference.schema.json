@@ -44,6 +44,7 @@
         "redFlags": { "type": "array", "items": { "type": "string" } },
         "prognosis": { "type": ["string", "null"] },
         "pitfalls": { "type": "array", "items": { "type": "string" } },
+        "management": { "type": "array", "items": { "type": "string" }, "description": "AI-drafted, dose-free management pillars (definitive/supportive/monitoring/complications/escalation). Decision-support only; not clinician-verified." },
         "severityClassification": { "type": ["string", "null"] },
         "references": { "type": "array", "items": { "type": "string" } },
         "crossLinks": { "type": "array", "items": { "type": "string" }, "description": "Related KB disease ids." },
