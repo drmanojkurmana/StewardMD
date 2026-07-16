@@ -1368,7 +1368,12 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/welcome-email.js?v=gold342" defer></script>
 <script src="/verify.js?v=gold363" defer></script>
 <script src="/prescription.js?v=gold353" defer></script>
-<script src="/ku.js?v=gold363" defer></script>
+<script src="/ku.js?v=gold433" defer></script>
+<!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
+     dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
+<script src="/streak.js?v=gold433" defer></script>
+<script src="/share-card.js?v=gold433" defer></script>
+<script src="/engagement.js?v=gold433" defer></script>
 <!-- Global toast shim: defines window.toast + window.SMD_toast (many modules call these but
      neither was ever defined, so their feedback was silently dropped). Loaded early; idempotent. -->
 <script src="/toast.js?v=gold363" defer></script>
