@@ -54,11 +54,38 @@ html.abx-ui #abxWizard .abxw-reset .abx-ms { font-size: 19px; }
 html.abx-ui #abxWizard .abxw-close { width: 44px; height: 44px; border-radius: 11px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); display: grid; place-items: center; }
 html.abx-ui #abxWizard .abxw-close .abx-ms { font-size: 22px; }
 
+/* compact text-size button → tap reveals a small size slider (small ⇄ big) */
+html.abx-ui #abxWizard .abxw-tswrap { position: relative; }
+html.abx-ui #abxWizard .abxw-tsbtn { width: 44px; height: 44px; border-radius: 11px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); display: grid; place-items: center; }
+html.abx-ui #abxWizard .abxw-tsbtn .abx-ms { font-size: 22px; }
+html.abx-ui #abxWizard .abxw-tsbtn[aria-expanded="true"] { border-color: var(--w-teal); color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-tspop { position: absolute; top: calc(100% + 8px); right: 0; z-index: 20; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--w-line); background: var(--w-panel); box-shadow: 0 12px 30px rgba(20,32,43,.18); }
+html.abx-ui #abxWizard .abxw-tspop[hidden] { display: none; }
+html.abx-ui #abxWizard .abxw-tspop-a { color: var(--w-soft); font-weight: 800; line-height: 1; }
+html.abx-ui #abxWizard .abxw-tspop-sm { font-size: 12px; }
+html.abx-ui #abxWizard .abxw-tspop-lg { font-size: 20px; }
+html.abx-ui #abxWizard .abxw-tsrange { width: 128px; accent-color: var(--w-teal); }
+html.abx-ui #abxWizard .abxw-tspct { min-width: 42px; text-align: right; font: 700 12.5px var(--w-sans); color: var(--w-teal-ink); }
+
+/* Reset moved into the bottom bar, between Back and the primary action */
+html.abx-ui #abxWizard .abxw-resetb { height: 48px; padding: 0 15px; border-radius: 12px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); font: 700 13.5px var(--w-sans); display: inline-flex; align-items: center; gap: 6px; }
+html.abx-ui #abxWizard .abxw-resetb .abx-ms { font-size: 19px; }
+
+/* "Switch to Simple" suggestion shown in Advanced (the new default) */
+html.abx-ui #abxWizard .abxw-modehint { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 2px 0 14px; padding: 10px 13px; border-radius: 12px; background: var(--w-tealsoft); border: 1px solid var(--w-tealbd); }
+html.abx-ui #abxWizard .abxw-modehint > .abx-ms { font-size: 20px; color: var(--w-teal); flex: none; }
+html.abx-ui #abxWizard .abxw-modehint-t { flex: 1; min-width: 150px; font: 500 12.5px/1.35 var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-modehint-b { display: inline-flex; align-items: center; gap: 5px; height: 34px; padding: 0 13px; border: none; border-radius: 9px; background: var(--w-teal); color: #fff; font: 700 12.5px var(--w-sans); flex: none; }
+html.abx-ui #abxWizard .abxw-modehint-b .abx-ms { font-size: 16px; }
+
 /* policy banner */
 html.abx-ui #abxWizard .abxw-policy { display: flex; align-items: center; gap: 10px; background: var(--w-tealsoft); border: 1px solid var(--w-tealbd); border-radius: 12px; padding: 11px 14px; margin-bottom: 14px; font: 500 13px var(--w-sans); color: var(--w-ink); }
 html.abx-ui #abxWizard .abxw-policy > .abx-ms { font-size: 20px; color: var(--w-teal); flex: none; }
 html.abx-ui #abxWizard .abxw-policyt { flex: 1; min-width: 0; }
 html.abx-ui #abxWizard .abxw-rec { color: var(--w-teal); font-weight: 600; }
+/* footer placement: quieter, sits at the end of the scroll content (above the sticky bar) */
+html.abx-ui #abxWizard .abxw-policy-foot { margin: 20px 0 6px; background: var(--w-panel); border-color: var(--w-line); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-policy-foot > .abx-ms { color: var(--w-teal); }
 html.abx-ui #abxWizard .abxw-pill { flex: none; font: 700 11.5px var(--w-sans); color: var(--w-teal); background: var(--w-panel); border: 1px solid var(--w-tealbd); border-radius: 20px; padding: 4px 10px; }
 
 /* stepper */
@@ -315,5 +342,14 @@ html.abx-ui #abxWizard .abxw-steplbl { overflow-wrap: anywhere; hyphens: auto; }
   html.abx-ui #abxWizard .abxw-steplbl { font-size: 10px; }
   html.abx-ui #abxWizard .abxw-cap { display: none; }
   html.abx-ui #abxWizard .abxw-back, html.abx-ui #abxWizard .abxw-next { flex: none; }
-  html.abx-ui #abxWizard .abxw-tsize { order: 3; }
+  /* clean phone header: brand row, then [switch + font] row, then full-width Simple|Advanced */
+  html.abx-ui #abxWizard .abxw-head { padding: 12px 0 10px; }
+  html.abx-ui #abxWizard .abxw-headr { width: 100%; gap: 8px; align-items: stretch; }
+  html.abx-ui #abxWizard .abxw-headr .abx-uisw { order: 1; flex: 1 1 auto; }
+  html.abx-ui #abxWizard .abxw-tswrap { order: 2; flex: none; }
+  html.abx-ui #abxWizard .abxw-seg { order: 3; flex-basis: 100%; }
+  html.abx-ui #abxWizard .abxw-segb { flex: 1; justify-content: center; padding: 0 10px; }
+  html.abx-ui #abxWizard .abxw-tspop { right: 0; left: auto; }
+  html.abx-ui #abxWizard .abxw-resetb .abxw-resetb-t { display: none; }
+  html.abx-ui #abxWizard .abxw-resetb { padding: 0 13px; }
 }

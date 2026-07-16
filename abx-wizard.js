@@ -54,7 +54,7 @@
   var STEP_CAPTION = ["Vitals & labs · all optional", "Add the findings you observe", "Pick the best-fit diagnosis", "Review the recommendation", "Regimen & stewardship"];
 
   // ---- state ---------------------------------------------------------------
-  var W = { mode: "simple", step: 1, findings: {}, open: null, locked: null, query: "" };
+  var W = { mode: "advanced", step: 1, findings: {}, open: null, locked: null, query: "" };
   function fg() { return (window.FIELD_GROUPS || []); }
   function groupByName(name) { return fg().filter(function (g) { return g.group === name; })[0]; }
   function isNumeric(f) { return f.type === "number" || f.type === "select"; }
@@ -189,7 +189,7 @@
   // ---- text-size (A-/A+) via CSS zoom on the content wrappers, persisted ----
   var TS_KEY = "smd_abx_textscale", TS = [0.9, 1, 1.1, 1.2, 1.3, 1.4], tsIx = 1;
   function loadTS() { try { var i = TS.indexOf(parseFloat(localStorage.getItem(TS_KEY))); if (i >= 0) tsIx = i; } catch (e) {} }
-  function applyTS() { if (!root) return; root.style.setProperty("--abxw-zoom", TS[tsIx]); var d = root.querySelector('[data-act="tsdown"]'), u = root.querySelector('[data-act="tsup"]'); if (d) d.disabled = tsIx <= 0; if (u) u.disabled = tsIx >= TS.length - 1; }
+  function applyTS() { if (!root) return; root.style.setProperty("--abxw-zoom", TS[tsIx]); var sl = root.querySelector(".abxw-tsrange"); if (sl && String(tsIx) !== sl.value) sl.value = String(tsIx); var pc = root.querySelector(".abxw-tspct"); if (pc) pc.textContent = Math.round(TS[tsIx] * 100) + "%"; }
   function saveTS() { try { localStorage.setItem(TS_KEY, String(TS[tsIx])); } catch (e) {} }
 
   // ---- resume (persist/restore wizard state, 12h TTL, ask-don't-force) ------
@@ -284,22 +284,26 @@
             '<button class="abxw-segb" data-mode="simple" role="tab">' + ms("bolt") + 'Simple</button>' +
             '<button class="abxw-segb" data-mode="advanced" role="tab">' + ms("tune") + 'Advanced</button>' +
           '</div>' +
-          '<div class="abxw-tsize" role="group" aria-label="Text size">' +
-            '<button class="abxw-ts" data-act="tsdown" aria-label="Smaller text">A<span class="abx-ts-sm">-</span></button>' +
-            '<button class="abxw-ts" data-act="tsup" aria-label="Larger text">A<span class="abx-ts-lg">+</span></button>' +
+          '<div class="abxw-tswrap">' +
+            '<button type="button" class="abxw-tsbtn" data-act="tstoggle" aria-label="Text size" aria-expanded="false">' + ms("format_size") + '</button>' +
+            '<div class="abxw-tspop" hidden role="group" aria-label="Text size">' +
+              '<span class="abxw-tspop-a abxw-tspop-sm" aria-hidden="true">A</span>' +
+              '<input type="range" class="abxw-tsrange" min="0" max="5" step="1" value="1" data-ts-slider aria-label="Text size">' +
+              '<span class="abxw-tspop-a abxw-tspop-lg" aria-hidden="true">A</span>' +
+              '<span class="abxw-tspct">100%</span>' +
+            '</div>' +
           '</div>' +
-          '<button class="abxw-reset" data-act="reset" aria-label="Reset case">' + ms("restart_alt") + 'Reset</button>' +
-          '<button class="abxw-close" data-act="close" aria-label="Close">' + ms("close") + '</button>' +
         '</div>' +
       '</header>' +
-      '<div class="abxw-policy">' + ms("policy") +
-        '<div class="abxw-policyt"><b>Hospital policy</b> · ICMR (National) · AMRSN 2024 <span class="abxw-rec">· Recommended</span></div>' +
-        '<span class="abxw-pill">Educational aid</span></div>' +
       '<nav class="abxw-stepper" role="tablist" aria-label="Progress"></nav>' +
       '<div class="abxw-body"></div>' +
+      '<div class="abxw-policy abxw-policy-foot">' + ms("policy") +
+        '<div class="abxw-policyt"><b>Hospital policy</b> · ICMR (National) · AMRSN 2024 <span class="abxw-rec">· Recommended</span></div>' +
+        '<span class="abxw-pill">Educational aid</span></div>' +
       '</div></div>' +
       '<div class="abxw-nav"><div class="abxw-navin">' +
         '<button class="abxw-back" data-act="back">' + ms("arrow_back") + 'Back</button>' +
+        '<button class="abxw-resetb" data-act="reset" aria-label="Reset case">' + ms("restart_alt") + '<span class="abxw-resetb-t">Reset</span></button>' +
         '<div class="abxw-cap"></div>' +
         '<button class="abxw-next" data-act="next"><span class="abxw-nextl"></span>' + ms("arrow_forward") + '</button>' +
       '</div></div>';
@@ -312,6 +316,11 @@
   function onClick(e) {
     var t = e.target.closest("[data-act],[data-mode],[data-group],[data-fkey],[data-lock],[data-radio]");
     if (!t) return;
+    // any interaction outside the text-size control closes its slider popover
+    var _pop = root.querySelector(".abxw-tspop");
+    if (_pop && !_pop.hasAttribute("hidden") && !(t.closest && t.closest(".abxw-tswrap"))) {
+      _pop.setAttribute("hidden", ""); var _tb = root.querySelector(".abxw-tsbtn"); if (_tb) _tb.setAttribute("aria-expanded", "false");
+    }
     if (t.hasAttribute("data-mode")) { W.mode = t.getAttribute("data-mode"); W.open = null; render(); return; }
     var act = t.getAttribute("data-act");
     if (act === "reset") { W.step = 1; W.findings = {}; W.open = null; W.locked = null; W.query = ""; _pendingResume = null; _resumeOffered = true; clearW(); render(); return; }
@@ -322,8 +331,12 @@
       setTimeout(function () { var sc = document.querySelector('[data-act="startcase"]'); if (sc) sc.click(); }, 60);
       return;
     }
-    if (act === "tsup") { tsIx = Math.min(TS.length - 1, tsIx + 1); applyTS(); saveTS(); if (window.toast) toast("Text size " + Math.round(TS[tsIx] * 100) + "%"); return; }
-    if (act === "tsdown") { tsIx = Math.max(0, tsIx - 1); applyTS(); saveTS(); if (window.toast) toast("Text size " + Math.round(TS[tsIx] * 100) + "%"); return; }
+    if (act === "tstoggle") { // compact font button → reveals a small size slider
+      var pop = root.querySelector(".abxw-tspop");
+      if (pop) { var willOpen = pop.hasAttribute("hidden");
+        if (willOpen) { pop.removeAttribute("hidden"); applyTS(); } else pop.setAttribute("hidden", "");
+        t.setAttribute("aria-expanded", willOpen ? "true" : "false"); }
+      return; }
     if (act === "resumeyes") { var s = loadW(); if (s) { W.mode = s.mode; W.step = s.step; W.findings = s.findings || {}; W.open = s.open; W.locked = s.locked; } _resumeOffered = true; _pendingResume = null; render(); return; }
     if (act === "resumeno") { clearW(); _resumeOffered = true; _pendingResume = null; W.step = 1; W.findings = {}; W.open = null; W.locked = null; W.query = ""; render(); return; }
     // any real work below means the user chose to continue, not resume → dismiss
@@ -342,6 +355,7 @@
   }
   function onInput(e) {
     var t = e.target;
+    if (t.hasAttribute && t.hasAttribute("data-ts-slider")) { tsIx = Math.max(0, Math.min(TS.length - 1, parseInt(t.value, 10) || 0)); applyTS(); saveTS(); return; }
     if (t.hasAttribute && (t.hasAttribute("data-search") || t.hasAttribute("data-num")) && _pendingResume) { _pendingResume = null; _resumeOffered = true; }
     if (t.hasAttribute && t.hasAttribute("data-search")) { // live-filter WITHOUT a full render (keeps focus)
       W.query = t.value;
@@ -446,6 +460,16 @@
       : (isSimple ? "Tap a system, then check the common symptoms. Switch to Advanced for the complete finding list." : "Tap the systems involved, then check every finding that applies.");
     wrap.appendChild(el("h2", "abxw-h", h));
     wrap.appendChild(el("p", "abxw-sub", sub));
+
+    // Advanced is the default (full detail). Gently point new users to the shorter,
+    // guided Simple mode — tapping the chip flips the mode (data-mode handled in onClick).
+    if (!isSimple) {
+      var hint = el("div", "abxw-modehint");
+      hint.innerHTML = ms("lightbulb") +
+        '<span class="abxw-modehint-t">Advanced shows <b>every</b> finding. New here, or want a faster guided path?</span>' +
+        '<button type="button" class="abxw-modehint-b" data-mode="simple">' + ms("bolt") + 'Switch to Simple</button>';
+      wrap.appendChild(hint);
+    }
 
     // fast findings search (typeahead over the full ontology — reaches curated-hidden findings too)
     wrap.appendChild(renderFindSearch());
