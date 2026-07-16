@@ -192,6 +192,16 @@ html.abx-ui #abxWizard .abxw-fullout { margin-top: 4px; }
 html.abx-ui #abxWizard .abxw-fullout #outputArea { display: block; }
 html.abx-ui #abxWizard .abxw-fullout #outputArea > *:first-child { margin-top: 0; }
 
+/* The classic overlays (Antimicrobial Stewardship Console #aspOverlay, search,
+   etc.) default to z-index 100 (--z-overlay) — BELOW the wizard's 12000, so they'd
+   open behind it. While the wizard is open, lift them above it so buttons like
+   "Open Antimicrobial Stewardship Console" are usable. */
+html.abxw-open .asp-overlay,
+html.abxw-open #aspOverlay,
+html.abxw-open #smdSearchPanel,
+html.abxw-open .smd-modal,
+html.abxw-open .smd-modal-backdrop { z-index: 13000 !important; }
+
 /* sticky bottom nav */
 html.abx-ui #abxWizard .abxw-nav { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; background: color-mix(in srgb, var(--w-panel) 92%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--w-line); padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); }
 html.abx-ui #abxWizard .abxw-navin { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
