@@ -37,13 +37,16 @@
     // Bounded: hybrid must never delay a MaiK answer if /api/retrieve is slow.
     var ac = (typeof AbortController !== "undefined") ? new AbortController() : null;
     var to = ac ? setTimeout(function () { try { ac.abort(); } catch (e) {} }, 2500) : null;
-    return p.then(function () {
+    var _q = p.then(function () {
       return fetch(hybridBase(), { method: "POST", headers: headers, body: JSON.stringify({ query: String(query || "").slice(0, 500), k: k || 12 }), signal: ac ? ac.signal : undefined });
     }).then(function (r) { if (to) clearTimeout(to); return r && r.ok ? r.json() : null; }).then(function (j) {
       var ids = [], seen = {};
       ((j && j.matches) || []).forEach(function (m) { var d = m && m.diseaseId; if (d && !seen[d]) { seen[d] = 1; ids.push(d); } });
       return ids;
     }).catch(function () { if (to) clearTimeout(to); return []; });   // any failure/timeout → lexical-only
+    // Real wall-clock bound: on the native app CapacitorHttp ignores AbortController, so the abort
+    // above can't fire — race a hard 3s timer so a stalled /api/retrieve never blocks the answer.
+    return Promise.race([_q, new Promise(function (res) { setTimeout(function () { try { if (ac) ac.abort(); } catch (e) {} res([]); }, 3000); })]);
   }
   var TOP_N = 5;                 // grounded diseases (engine-ranked)
   var PER_DISEASE = 8;           // max knowledge chunks per grounded disease
