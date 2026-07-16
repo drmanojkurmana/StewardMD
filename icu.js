@@ -1094,6 +1094,8 @@
       '#icuRoot.icu-v2 .icu-v2-foot-av{width:22px;height:22px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 9px var(--font);display:flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-foot-txt{font:700 12px var(--font);color:var(--ink)}' +
       '#icuRoot.icu-v2 .icu-v2-foot-ago{font:600 11px var(--font);color:var(--muted);margin-left:auto}' +
+      '#icuRoot.icu-v2 .icu-v2-foot-tasks{display:inline-flex;align-items:center;gap:3px;font:700 11px var(--font);color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,transparent);padding:2px 8px;border-radius:999px}' +
+      '#icuRoot.icu-v2 .icu-v2-foot-tasks svg{width:13px;height:13px}' +
       '#icuRoot.icu-v2 .icu-v2-foot-count{text-align:center;font:600 12px var(--font);color:var(--muted);padding:6px 0 2px}' +
       // empty states
       '#icuRoot.icu-v2 .icu-v2-empty{text-align:center;padding:40px 20px}' +
@@ -2488,6 +2490,8 @@
   var _grpLastHash = null;     // last-synced patient-state hash (mirror echo-suppression)
   var _grpMirrorT = null;      // debounce timer for the ICU_STATE → Firestore mirror
   var _grpSubGroups = null, _grpSubPts = null, _grpSubPt = null, _grpSubPres = null;
+  var _grpTaskSubs = {};       // pid -> unsub for the board's READ-ONLY per-patient open-task listeners (no writes → can't loop)
+  var _grpTaskOpen = {};       // pid -> live open-task count, rendered as a board-card badge
   // ---- ICU v2 group mode Phase 5 (doctor identity + membership subcollection + invites) ----
   var _grpMembers = null;      // live unit roster from subscribeMembers [{uid,role,name,...}] (null = loading)
   var _grpSubMembers = null;   // members subscription teardown
@@ -3469,6 +3473,7 @@
     var cards = shown.length ? shown.map(function (p) {
       var demo = (p.age != null) ? (p.age + (p.sex ? "/" + p.sex : "")) : "";
       var vits = v2CardVitals(p.snap);
+      var tOpen = (grpActive() && _grpTaskOpen[p.id]) || 0;   // live open-task count (board task listeners)
       return '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
         '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
         '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
@@ -3666,6 +3671,33 @@
       renderV2PresenceGroup() +
       '<div class="icu-scroll icu-v2-scroll"><div class="icu-v2-board">' + grpOfflineBar() + v2SkeletonCards(2) + '</div></div>';
   }
+  // Board-only, READ-ONLY per-patient task listeners → a live open-task badge on each card.
+  // Writes NOTHING (so it can never re-introduce a sync loop); it just counts open tasks per
+  // patient and repaints the board (deferred while scrolling, via paintLive). Listeners are
+  // added/removed to match the current roster and cleared when the unit changes or ICU closes.
+  function grpTaskOpenCount(tasks) { var n = 0, a = tasks || []; for (var i = 0; i < a.length; i++) { if (a[i] && a[i].status !== "done") n++; } return n; }
+  function grpSyncTaskSubs(list) {
+    var api = groupsApi(); if (!api || !api.subscribeTasks || !_grp) return;
+    var want = {}; (list || []).forEach(function (p) { if (p && p.id) want[p.id] = 1; });
+    Object.keys(want).forEach(function (pid) {
+      if (_grpTaskSubs[pid]) return;
+      _grpTaskSubs[pid] = api.subscribeTasks(_grp.id, pid, function (tasks) {
+        var n = grpTaskOpenCount(tasks);
+        if (_grpTaskOpen[pid] === n) return;                         // unchanged → no repaint
+        _grpTaskOpen[pid] = n;
+        if (ICU.isOpen() && _screen === "board") paintLive();
+      });
+    });
+    Object.keys(_grpTaskSubs).forEach(function (pid) {
+      if (want[pid]) return;                                         // patient left the board → drop its listener
+      try { _grpTaskSubs[pid](); } catch (e) {}
+      delete _grpTaskSubs[pid]; delete _grpTaskOpen[pid];
+    });
+  }
+  function grpClearTaskSubs() {
+    Object.keys(_grpTaskSubs).forEach(function (pid) { try { _grpTaskSubs[pid](); } catch (e) {} });
+    _grpTaskSubs = {}; _grpTaskOpen = {};
+  }
   // Retry: clear the error and re-open the failed subscription(s). Safe/idempotent.
   function grpRetry() {
     _grpErr = null;
@@ -3675,7 +3707,7 @@
       if (_grpSubPts) { try { _grpSubPts(); } catch (e) {} _grpSubPts = null; }
       _grpPatients = null;
       _grpSubPts = api.subscribePatients(_grp.id, function (list) {
-        _grpPatients = list || []; grpNotifTick();
+        _grpPatients = list || []; grpNotifTick(); grpSyncTaskSubs(_grpPatients);
         if (ICU.isOpen() && _screen === "board") paintLive();
       }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
     }
@@ -3704,7 +3736,7 @@
           _grp = prev;                                          // a unit we JUST created hasn't reached the collectionGroup listener yet — KEEP it (don't make the create "vanish")
         } else {                                                // Phase 5: genuinely left/removed/deleted → drop roster + go back to the board
           if (_grpSubMembers) { try { _grpSubMembers(); } catch (e) {} _grpSubMembers = null; }
-          _grpMembers = null; grpTeardownPatient(); _grp = null; _screen = "board";
+          _grpMembers = null; grpTeardownPatient(); grpClearTaskSubs(); _grp = null; _screen = "board";
         }
       }
       if (!_grp && _grpList.length) {
@@ -3729,12 +3761,14 @@
     try { if (api && api.setActiveGroup) api.setActiveGroup(group.id, group.myRole); } catch (e) {}
     if (changed) {
       grpTeardownPatient();
+      grpClearTaskSubs();   // switching units → drop the previous unit's board task listeners
       _grpNotifiedTs = nowTs();   // Phase 3: seed device-notify baseline so the first snapshot never retro-fires the roster
       if (_grpSubPts) { try { _grpSubPts(); } catch (e) {} _grpSubPts = null; }
       _grpPatients = null; _grpErr = null;
       if (api) _grpSubPts = api.subscribePatients(group.id, function (list) {
         _grpPatients = list || [];
         grpNotifTick();   // Phase 3: best-effort device notification for a NEW critical event
+        grpSyncTaskSubs(_grpPatients);   // keep the board's per-patient open-task listeners in sync with the roster
         if (ICU.isOpen() && _screen === "board") paintLive();
       }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen() && _screen === "board") paintLive(); });   // Phase 4: unit-load failure → error card + Retry
       // Phase 5: the live unit roster (members subcollection) — for the Team screen + avatars.
@@ -3880,6 +3914,7 @@
     var cards = shown.length ? shown.map(function (p) {
       var demo = (p.age != null) ? (p.age + (p.sex ? "/" + p.sex : "")) : "";
       var vits = v2CardVitals(p.snap);
+      var tOpen = (grpActive() && _grpTaskOpen[p.id]) || 0;   // live open-task count (board task listeners)
       var lu = p.lastUpdate || null;
       var footAv = esc(v2Initials(lu && lu.byName ? lu.byName : v2AccountName()));
       var footTxt = lu && lu.text ? esc(lu.text) : (p.reviewed ? "Reviewed" : "Updated");
@@ -3893,6 +3928,7 @@
           return '<div class="icu-v2-vc ' + v.st + '"><div class="icu-v2-vk">' + v.k + '</div><div class="icu-v2-vv">' + esc(v.val) + '</div></div>';
         }).join("") + '</div></div>' +
         '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + footAv + '</span><span class="icu-v2-foot-txt">' + footTxt + '</span>' +
+        (tOpen > 0 ? '<span class="icu-v2-foot-tasks" aria-label="' + tOpen + ' open task' + (tOpen > 1 ? 's' : '') + '">' + ico("rounds", "🗒") + ' ' + tOpen + ' task' + (tOpen > 1 ? 's' : '') + '</span>' : '') +
         '<span class="icu-v2-foot-ago">' + (p.reviewed ? "" : '<span class="icu-v2-unrev">Not reviewed</span> ') + footAgo + '</span></div></button>';
     }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
     var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
