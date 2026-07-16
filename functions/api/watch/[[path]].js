@@ -15,7 +15,7 @@ import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import {
   watchConfigured, saveCred, getCred, getList, addWatch, removeWatch, forget,
-  getSeen, setSeen, labSignature, listWatchUids,
+  getSeen, setSeen, listWatchUids,
 } from "../../_watch.js";
 import { sendNativeToAll } from "../../_nativepush.js";
 
@@ -50,19 +50,44 @@ async function runForUid(env, origin, uid) {
   if (!token) return { pushed: 0, loginFailed: true };
 
   let pushed = 0, delivered = 0, tokenTotal = 0;
+  const ORD_RID = (o) => String((o && (o.renderId || o.orderId)) || "");
+  // Does this order have RESULT VALUES yet? GHIS shows "No values recorded" for an order that has
+  // only been PLACED / is processing — the value lives in the per-order DETAIL, not the order list.
+  // So we alert on actual results, never on a freshly-ordered (empty) test. (This is what the client
+  // does too: it fetches lab-detail and shows "No values recorded" when tests[] is empty.)
+  async function orderHasValues(o) {
+    try {
+      const dr = await fetch(origin + "/api/ghis/lab-detail?renderId=" + encodeURIComponent(o.renderId || "") + "&episodeId=" + encodeURIComponent(o.episodeId || ""),
+        { headers: { "Authorization": "Bearer " + token } });
+      if (!dr.ok) return false;
+      const dj = await dr.json().catch(() => ({}));
+      return ((dj && dj.tests) || []).some((t) => t && String(t.result == null ? "" : t.result).trim() !== "");
+    } catch (e) { return false; }
+  }
+  const CAP = 20;   // max detail fetches per patient per cycle — bounds the one-time baseline cost
   for (const p of list) {
     try {
-      const r = await fetch(origin + "/api/ghis/lab?patientId=" + encodeURIComponent(p.patientId), {
-        headers: { "Authorization": "Bearer " + token },
-      });
+      const r = await fetch(origin + "/api/ghis/lab?patientId=" + encodeURIComponent(p.patientId),
+        { headers: { "Authorization": "Bearer " + token } });
       if (!r.ok) continue;
       const j = await r.json().catch(() => ({}));
-      const sig = labSignature(j && j.orders);
-      const prev = await getSeen(env, uid, p.patientId);
-      if (prev === null || prev === undefined) { await setSeen(env, uid, p.patientId, sig); continue; } // baseline, no alert
-      if (sig !== prev) {
-        await setSeen(env, uid, p.patientId, sig);
-        // No PHI/values in the push — just that something new arrived.
+      const orders = (j && j.orders) || [];
+      // `valued` = the set of order ids ALREADY counted as reported (have values). Persisted as JSON.
+      // First sight (or a legacy string signature) → baseline: classify silently, never alert.
+      let baseline = false, valued;
+      try { const s = await getSeen(env, uid, p.patientId); const pj = s ? JSON.parse(s) : null; if (pj && pj.v === 2 && Array.isArray(pj.valued)) valued = new Set(pj.valued); } catch (e) {}
+      if (!valued) { baseline = true; valued = new Set(); }
+      // Only orders NOT already known-reported need a value check (steady state = just the new/pending ones).
+      const pend = orders.filter((o) => ORD_RID(o) && !valued.has(ORD_RID(o)));
+      let newly = 0;
+      for (let i = 0; i < pend.length; i++) {
+        if (i >= CAP) { valued.add(ORD_RID(pend[i])); continue; }        // beyond cap → mark handled (no alert); rare
+        if (await orderHasValues(pend[i])) { valued.add(ORD_RID(pend[i])); if (!baseline) newly++; }
+        // no values yet → leave UNvalued so a later cycle alerts once results are actually reported
+      }
+      await setSeen(env, uid, p.patientId, JSON.stringify({ v: 2, valued: Array.from(valued).slice(-500) }));
+      if (!baseline && newly > 0) {
+        // Only fires when a watched order actually GAINED values — not on a freshly-placed order.
         const d = (await sendNativeToAll(env, {
           title: "New lab — " + (p.name || "patient"),
           body: "A new result was reported. Open StewardMD to review.",
