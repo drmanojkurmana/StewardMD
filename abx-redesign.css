@@ -203,17 +203,17 @@ html.abx-ui #inputCard .run-btn:active { transform: translateY(1px); }
 html.abx-ui #inputCard .run-btn:disabled { opacity: .45; box-shadow: none; }
 
 /* ---- Decision output card → premium, severity-tinted (ramp unchanged) ----- */
-html.abx-ui #outputArea .decision-banner {
+html.abx-ui :is(#outputArea, #abxWizard) .decision-banner {
   border-radius: var(--abx-r-card); border: 1px solid var(--line); border-left-width: 5px;
   padding: 16px 18px; box-shadow: var(--abx-sh-card); margin-bottom: 14px;
 }
-html.abx-ui #outputArea .decision-banner.green  { background: var(--green-bg);  border-color: var(--green-line);  border-left-color: var(--green); }
-html.abx-ui #outputArea .decision-banner.yellow { background: var(--yellow-bg); border-color: var(--yellow-line); border-left-color: var(--yellow); }
-html.abx-ui #outputArea .decision-banner.orange { background: var(--orange-bg); border-color: var(--orange-line); border-left-color: var(--orange); }
-html.abx-ui #outputArea .decision-banner.red    { background: var(--red-bg);    border-color: var(--red-line);    border-left-color: var(--red); }
-html.abx-ui #outputArea .decision-status-label { font: 800 13px var(--sans); letter-spacing: .05em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
-html.abx-ui #outputArea .decision-why { margin-top: 8px; line-height: 1.6; text-wrap: pretty; }
-html.abx-ui #outputArea .decision-why .lbl { font: 800 11px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--slate-soft); display: block; margin-bottom: 3px; }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.green  { background: var(--green-bg);  border-color: var(--green-line);  border-left-color: var(--green); }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.yellow { background: var(--yellow-bg); border-color: var(--yellow-line); border-left-color: var(--yellow); }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.orange { background: var(--orange-bg); border-color: var(--orange-line); border-left-color: var(--orange); }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.red    { background: var(--red-bg);    border-color: var(--red-line);    border-left-color: var(--red); }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-status-label { font: 800 13px var(--sans); letter-spacing: .05em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-why { margin-top: 8px; line-height: 1.6; text-wrap: pretty; }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-why .lbl { font: 800 11px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--slate-soft); display: block; margin-bottom: 3px; }
 
 /* ---- Quick-decision hero → light, severity-tinted (same pattern as the
    decision-banner, so it reads cleanly in BOTH themes instead of the dark
@@ -242,31 +242,31 @@ html.abx-ui .qa-regimen-meta { color: var(--slate) !important; }
 html.abx-ui .qa-pregnancy-note, html.abx-ui .qa-renal-flag { color: var(--slate) !important; }
 
 /* ---- Empiric regimen drug cards ------------------------------------------ */
-html.abx-ui #outputArea .drug-card {
+html.abx-ui :is(#outputArea, #abxWizard) .drug-card {
   background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--teal);
   border-radius: 14px; padding: 14px 16px; box-shadow: var(--abx-sh-card); margin: 10px 0;
 }
-html.abx-ui #outputArea .drug-name { font: 800 16px var(--sans); color: var(--ink); }
-html.abx-ui #outputArea .drug-meta { font: 600 13px var(--mono); color: var(--teal); margin-top: 3px; }
-html.abx-ui #outputArea .drug-why { font: 500 13.5px/1.55 var(--sans); color: var(--slate); margin-top: 6px; }
-html.abx-ui #outputArea .no-abx-note {
+html.abx-ui :is(#outputArea, #abxWizard) .drug-name { font: 800 16px var(--sans); color: var(--ink); }
+html.abx-ui :is(#outputArea, #abxWizard) .drug-meta { font: 600 13px var(--mono); color: var(--teal); margin-top: 3px; }
+html.abx-ui :is(#outputArea, #abxWizard) .drug-why { font: 500 13.5px/1.55 var(--sans); color: var(--slate); margin-top: 6px; }
+html.abx-ui :is(#outputArea, #abxWizard) .no-abx-note {
   background: var(--green-bg); border: 1px solid var(--green-line); border-radius: 14px;
   padding: 14px 16px; color: var(--green); font-weight: 700;
 }
 
 /* ---- Stewardship (8-question framework) ---------------------------------- */
-html.abx-ui #outputArea .stewardship-list,
-html.abx-ui #outputArea .stewardship-qa {
+html.abx-ui :is(#outputArea, #abxWizard) .stewardship-list,
+html.abx-ui :is(#outputArea, #abxWizard) .stewardship-qa {
   background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--abx-sh-card);
 }
-html.abx-ui #outputArea .sqa-row { padding: 12px 14px; border-bottom: 1px solid var(--line-soft, #eef1f0); display: flex; flex-direction: column; gap: 3px; align-items: stretch; }
-html.abx-ui #outputArea .sqa-row:last-child { border-bottom: none; }
-html.abx-ui #outputArea .sqa-q { display: block; font: 700 12.5px var(--sans); color: var(--slate); }
-html.abx-ui #outputArea .sqa-a { display: block; font: 500 13.5px/1.55 var(--sans); color: var(--ink); }
+html.abx-ui :is(#outputArea, #abxWizard) .sqa-row { padding: 12px 14px; border-bottom: 1px solid var(--line-soft, #eef1f0); display: flex; flex-direction: column; gap: 3px; align-items: stretch; }
+html.abx-ui :is(#outputArea, #abxWizard) .sqa-row:last-child { border-bottom: none; }
+html.abx-ui :is(#outputArea, #abxWizard) .sqa-q { display: block; font: 700 12.5px var(--sans); color: var(--slate); }
+html.abx-ui :is(#outputArea, #abxWizard) .sqa-a { display: block; font: 500 13.5px/1.55 var(--sans); color: var(--ink); }
 
 /* ---- Evidence pills / reference chips ------------------------------------ */
-html.abx-ui #outputArea .evidence-pill,
-html.abx-ui #outputArea .ref-chip {
+html.abx-ui :is(#outputArea, #abxWizard) .evidence-pill,
+html.abx-ui :is(#outputArea, #abxWizard) .ref-chip {
   border-radius: 999px; font: 700 11.5px var(--mono); padding: 4px 10px;
 }
 

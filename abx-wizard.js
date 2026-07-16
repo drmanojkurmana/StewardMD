@@ -54,7 +54,7 @@
   var STEP_CAPTION = ["Vitals & labs · all optional", "Add the findings you observe", "Pick the best-fit diagnosis", "Review the recommendation", "Regimen & stewardship"];
 
   // ---- state ---------------------------------------------------------------
-  var W = { mode: "simple", step: 1, findings: {}, open: null, locked: null };
+  var W = { mode: "simple", step: 1, findings: {}, open: null, locked: null, query: "" };
   function fg() { return (window.FIELD_GROUPS || []); }
   function groupByName(name) { return fg().filter(function (g) { return g.group === name; })[0]; }
   function isNumeric(f) { return f.type === "number" || f.type === "select"; }
@@ -79,8 +79,128 @@
   }
   function anyFindings() { return Object.keys(W.findings).some(function (k) { return W.findings[k]; }); }
 
+  // Expand radio findings into the boolean keys the engine scores on (mirrors
+  // app.js applyCoughDerivedState). Pure: returns a NEW object, drops the raw
+  // radio key (so a "none" answer can't alias to cough via the infectious layer).
+  function deriveRadios(src) {
+    var f = {}; for (var k in src) f[k] = src[k];
+    var c = f.coughRadio; delete f.coughRadio;
+    if (c === "dry" || c === "productive") { f.cough = true; f.productiveCough = (c === "productive"); f.dryCough = (c === "dry"); }
+    return f;
+  }
+
+  // ---- findings search index (boolean fields of FIELD_GROUPS) --------------
+  var _findIdx = null;
+  function findIndex() {
+    if (_findIdx && _findIdx.length) return _findIdx;
+    var out = [], seen = {};
+    fg().forEach(function (g) {
+      (g.fields || []).forEach(function (f) {
+        if (f.type === "radio" || f.type === "number" || f.type === "select") return; // boolean-only (tap sets true)
+        if (seen[f.key]) return; seen[f.key] = 1;
+        out.push({ key: f.key, label: f.label, group: g.group });
+      });
+    });
+    _findIdx = out; return out;
+  }
+  function findSearch(q) {
+    q = (q || "").toLowerCase().trim(); if (q.length < 2) return [];
+    return findIndex().filter(function (f) {
+      return f.label.toLowerCase().indexOf(q) >= 0 || f.key.toLowerCase().indexOf(q) >= 0;
+    }).sort(function (a, b) {
+      var an = a.label.toLowerCase().indexOf(q) === 0 ? 0 : 1, bn = b.label.toLowerCase().indexOf(q) === 0 ? 0 : 1;
+      return an - bn || (a.label < b.label ? -1 : 1);
+    }).slice(0, 24);
+  }
+  function findResultsHTML() {
+    var q = W.query || ""; if (q.trim().length < 2) return "";
+    var hits = findSearch(q);
+    if (!hits.length) return '<div class="abxw-find-empty">No matching finding</div>';
+    return hits.map(function (f) {
+      var on = W.findings[f.key] === true;
+      return '<button type="button" class="abxw-chip abxw-find-hit' + (on ? " on" : "") + '" data-fkey="' + esc(f.key) + '">' +
+        (on ? ms("check") : ms("add")) + '<span class="nm">' + esc(f.label) + '</span><span class="grp">' + esc(f.group) + '</span></button>';
+    }).join("");
+  }
+  function renderFindSearch() {
+    var box = el("div", "abxw-find");
+    var inp = el("input", "abxw-find-input"); inp.type = "search"; inp.setAttribute("autocomplete", "off");
+    inp.setAttribute("data-search", "1"); inp.setAttribute("aria-label", "Search findings");
+    inp.placeholder = "Search findings… cough, rash, altered sensorium"; inp.value = W.query || "";
+    box.appendChild(inp);
+    var res = el("div", "abxw-find-results"); res.id = "abxwFindResults"; res.innerHTML = findResultsHTML();
+    box.appendChild(res);
+    return box;
+  }
+
+  // ---- suggested-next-findings (assess().suggestions = plain finding keys) --
+  function labelFor(key) {
+    var gs = fg();
+    for (var i = 0; i < gs.length; i++) { var fl = gs[i].fields || []; for (var j = 0; j < fl.length; j++) if (fl[j].key === key) return fl[j].label; }
+    return String(key).replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/^./, function (ch) { return ch.toUpperCase(); });
+  }
+  function renderSuggestChips(a, wrap) {
+    // Only offer suggestions that are real boolean FIELD_GROUPS findings — engine
+    // suggestions can include EXTRA_GROUPS-only keys (dyspnea, chestPain…) that
+    // the wizard can't render/remove and that classicPayload would DROP, diverging
+    // the Step 4/5 output from the differential. Intersect with the search index.
+    var idx = {}; findIndex().forEach(function (f) { idx[f.key] = 1; });
+    var keys = ((a && a.suggestions) || []).filter(function (k) { return idx[k] && !W.findings[k]; }).slice(0, 6);
+    if (!keys.length) return;
+    var box = el("div", "abxw-suggest");
+    box.appendChild(el("div", "abxw-suggttl", ms("lightbulb") + "Suggested next findings"));
+    var row = el("div", "abxw-chips");
+    keys.forEach(function (k) { var b = el("button", "abxw-chip sug", ms("add") + esc(labelFor(k))); b.setAttribute("data-fkey", k); b.setAttribute("role", "button"); row.appendChild(b); });
+    box.appendChild(row); wrap.appendChild(box);
+  }
+
+  // ---- confidence consistency: overwrite the classic quick-answer-card % with
+  // the locked candidate's SMD_REASON score (the exact number Step 3 shows) ----
+  function syncQuickCardConfidence() {
+    try {
+      var c = lockedCand(assess()); if (!c || c.confidence == null) return;
+      var out = document.getElementById("outputArea"); if (!out) return;
+      var items = out.querySelectorAll(".quick-answer-card .qa-item");
+      for (var i = 0; i < items.length; i++) {
+        var lbl = items[i].querySelector(".qa-label"), val = items[i].querySelector(".qa-value");
+        if (lbl && val && /confidence/i.test(lbl.textContent)) { val.textContent = c.confidence + "%"; return; }
+      }
+      var grid = out.querySelector(".quick-answer-card .qa-grid"); // non-infective card has no Confidence row → add one
+      if (grid) { var d = document.createElement("div"); d.className = "qa-item"; d.innerHTML = '<span class="qa-label">Confidence</span><span class="qa-value">' + c.confidence + '%</span>'; grid.appendChild(d); }
+    } catch (e) {}
+  }
+
+  // ---- pinned red-flag emergency alert (time-critical syndromes) -----------
+  function renderEmergency(wrap, host, c, isInf) {
+    var lines = [];
+    var sb = (host && host.querySelector(".safety-warning-banner")) || document.querySelector("#outputArea .safety-warning-banner");
+    if (sb) { var t = (sb.textContent || "").replace(/^\s*[⚠️\s]*/, "").trim(); if (t) lines.push(t); if (host && sb.parentNode && host.contains(sb)) sb.parentNode.removeChild(sb); }
+    // Only infectious candidates carry TRUE emergency redFlags (decision.status==="red").
+    // Non-infective candidates' redFlags are calm "when to worry" cautions (shown in
+    // their own Red-flags card) — do NOT escalate them to a pulsing time-critical banner.
+    if (isInf) ((c && c.redFlags) || []).forEach(function (r) { r = String(r || "").trim(); if (r && lines.indexOf(r) < 0) lines.push(r); });
+    if (!lines.length) return;
+    var box = el("div", "abxw-emergency"); box.setAttribute("role", "alert"); box.setAttribute("aria-live", "assertive");
+    box.innerHTML = '<div class="abxw-emerg-hd">' + ms("emergency") + '<span class="abxw-emerg-ttl">Time-critical · act now</span><span class="abxw-emerg-dx">' + esc(c.name) + '</span></div>' +
+      '<ul class="abxw-emerg-list">' + lines.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + '</ul>';
+    wrap.insertBefore(box, wrap.firstChild);
+  }
+
+  // ---- text-size (A-/A+) via CSS zoom on the content wrappers, persisted ----
+  var TS_KEY = "smd_abx_textscale", TS = [0.9, 1, 1.1, 1.2, 1.3, 1.4], tsIx = 1;
+  function loadTS() { try { var i = TS.indexOf(parseFloat(localStorage.getItem(TS_KEY))); if (i >= 0) tsIx = i; } catch (e) {} }
+  function applyTS() { if (!root) return; root.style.setProperty("--abxw-zoom", TS[tsIx]); var d = root.querySelector('[data-act="tsdown"]'), u = root.querySelector('[data-act="tsup"]'); if (d) d.disabled = tsIx <= 0; if (u) u.disabled = tsIx >= TS.length - 1; }
+  function saveTS() { try { localStorage.setItem(TS_KEY, String(TS[tsIx])); } catch (e) {} }
+
+  // ---- resume (persist/restore wizard state, 12h TTL, ask-don't-force) ------
+  var WSTATE_KEY = "smd_abx_wizard_state", WSTATE_TTL = 12 * 3600 * 1000, _resumeOffered = false, _pendingResume = null;
+  function progress() { return anyFindings() || !!W.locked || W.step > 1; }
+  function persistW() { try { if (!progress()) { localStorage.removeItem(WSTATE_KEY); return; } localStorage.setItem(WSTATE_KEY, JSON.stringify({ mode: W.mode, step: W.step, findings: W.findings, open: W.open, locked: W.locked, at: Date.now() })); } catch (e) {} }
+  function loadW() { try { var d = JSON.parse(localStorage.getItem(WSTATE_KEY) || "null"); if (!d || !d.at || (Date.now() - d.at) > WSTATE_TTL) return null; return d; } catch (e) { return null; } }
+  function clearW() { try { localStorage.removeItem(WSTATE_KEY); } catch (e) {} }
+
   function assess() {
-    try { return (window.SMD_REASON && SMD_REASON.assess) ? SMD_REASON.assess(W.findings) : null; } catch (e) { return null; }
+    try { return (window.SMD_REASON && SMD_REASON.assess) ? SMD_REASON.assess(deriveRadios(W.findings)) : null; } catch (e) { return null; }
   }
   function lockedCand(a) {
     if (!W.locked || !a) return null;
@@ -90,16 +210,21 @@
   // Split the wizard's findings into the classic engine's shape: boolean/radio/select
   // findings vs numeric vitals — so SMD_restoreCase renders the REAL full output.
   function classicPayload() {
-    var f = {}, v = {};
+    var src = deriveRadios(W.findings), f = {}, v = {};
     fg().forEach(function (g) {
       (g.fields || []).forEach(function (fl) {
-        var val = W.findings[fl.key];
+        if (fl.type === "radio") return; // already expanded into booleans by deriveRadios
+        var val = src[fl.key];
         if (val == null || val === "" || val === "none") return;
         if (fl.type === "number") v[fl.key] = val;
-        else if (fl.type === "select" || fl.type === "radio") f[fl.key] = val;
+        else if (fl.type === "select") f[fl.key] = val;
         else f[fl.key] = true;
       });
     });
+    // carry the derived cough booleans (not declared as bool fields in FIELD_GROUPS)
+    if (src.cough) f.cough = true;
+    if (src.productiveCough) f.productiveCough = true;
+    if (src.dryCough) f.dryCough = true;
     return { f: f, v: v };
   }
   // Render the classic #outputArea for the wizard's findings + locked dx, then
@@ -122,7 +247,7 @@
   // renderNow=true → freshly render #outputArea before splitting.
   function distributeOutput(host, which, renderNow) {
     try {
-      if (renderNow && window.SMD_restoreCase) { var pay = classicPayload(); window.SMD_restoreCase(pay.f, W.locked, pay.v); }
+      if (renderNow && window.SMD_restoreCase) { var pay = classicPayload(); window.SMD_restoreCase(pay.f, W.locked, pay.v); syncQuickCardConfidence(); }
       var out = document.getElementById("outputArea");
       if (!out) return false;
       var kids = [].slice.call(out.children), moved = 0;
@@ -157,6 +282,10 @@
             '<button class="abxw-segb" data-mode="simple" role="tab">' + ms("bolt") + 'Simple</button>' +
             '<button class="abxw-segb" data-mode="advanced" role="tab">' + ms("tune") + 'Advanced</button>' +
           '</div>' +
+          '<div class="abxw-tsize" role="group" aria-label="Text size">' +
+            '<button class="abxw-ts" data-act="tsdown" aria-label="Smaller text">A<span class="abx-ts-sm">-</span></button>' +
+            '<button class="abxw-ts" data-act="tsup" aria-label="Larger text">A<span class="abx-ts-lg">+</span></button>' +
+          '</div>' +
           '<button class="abxw-reset" data-act="reset" aria-label="Reset case">' + ms("restart_alt") + 'Reset</button>' +
           '<button class="abxw-close" data-act="close" aria-label="Close">' + ms("close") + '</button>' +
         '</div>' +
@@ -183,8 +312,15 @@
     if (!t) return;
     if (t.hasAttribute("data-mode")) { W.mode = t.getAttribute("data-mode"); W.open = null; render(); return; }
     var act = t.getAttribute("data-act");
-    if (act === "reset") { W.step = 1; W.findings = {}; W.open = null; W.locked = null; render(); return; }
+    if (act === "reset") { W.step = 1; W.findings = {}; W.open = null; W.locked = null; W.query = ""; _pendingResume = null; _resumeOffered = true; clearW(); render(); return; }
     if (act === "close") { close(); return; }
+    if (act === "tsup") { tsIx = Math.min(TS.length - 1, tsIx + 1); applyTS(); saveTS(); if (window.toast) toast("Text size " + Math.round(TS[tsIx] * 100) + "%"); return; }
+    if (act === "tsdown") { tsIx = Math.max(0, tsIx - 1); applyTS(); saveTS(); if (window.toast) toast("Text size " + Math.round(TS[tsIx] * 100) + "%"); return; }
+    if (act === "resumeyes") { var s = loadW(); if (s) { W.mode = s.mode; W.step = s.step; W.findings = s.findings || {}; W.open = s.open; W.locked = s.locked; } _resumeOffered = true; _pendingResume = null; render(); return; }
+    if (act === "resumeno") { clearW(); _resumeOffered = true; _pendingResume = null; W.step = 1; W.findings = {}; W.open = null; W.locked = null; W.query = ""; render(); return; }
+    // any real work below means the user chose to continue, not resume → dismiss
+    // the pending offer so persistW() starts saving the CURRENT case again.
+    if (_pendingResume) { _pendingResume = null; _resumeOffered = true; }
     if (act === "back") { if (W.step > 1) { W.step--; render(); } else close(); return; }
     if (act === "next") { next(); return; }
     if (act === "stepdot") { var s = +t.getAttribute("data-step"); if (s <= maxStep()) { W.step = s; render(); } return; }
@@ -198,6 +334,13 @@
   }
   function onInput(e) {
     var t = e.target;
+    if (t.hasAttribute && (t.hasAttribute("data-search") || t.hasAttribute("data-num")) && _pendingResume) { _pendingResume = null; _resumeOffered = true; }
+    if (t.hasAttribute && t.hasAttribute("data-search")) { // live-filter WITHOUT a full render (keeps focus)
+      W.query = t.value;
+      var res = document.getElementById("abxwFindResults");
+      if (res) res.innerHTML = findResultsHTML();
+      return;
+    }
     if (t.hasAttribute && t.hasAttribute("data-num")) {
       var k = t.getAttribute("data-num");
       if (t.value === "" || t.value == null) delete W.findings[k]; else W.findings[k] = t.value;
@@ -235,8 +378,13 @@
     var scroller = root.querySelector(".abxw-scroll");
     var prevScroll = scroller ? scroller.scrollTop : 0;
     var sameView = (W.step === W._renderedStep && W.mode === W._renderedMode);
+    // was the search box focused before we rebuild? only then do we restore focus,
+    // so tapping an unrelated chip / hitting Back doesn't yank the keyboard open.
+    var ae = document.activeElement;
+    var searchWasActive = !!(ae && ae.classList && ae.classList.contains("abxw-find-input"));
     var body = root.querySelector(".abxw-body");
     body.innerHTML = "";
+    if (_pendingResume && !_resumeOffered) body.appendChild(resumeBar());
     if (W.step === 1 || W.step === 2) body.appendChild(renderFindings());
     else if (W.step === 3) body.appendChild(renderDifferential());
     else if (W.step === 4) body.appendChild(renderDecision());
@@ -250,6 +398,22 @@
     // only jump to top when the step or mode actually changes.
     if (scroller) scroller.scrollTop = sameView ? prevScroll : 0;
     W._renderedStep = W.step; W._renderedMode = W.mode;
+    // keep focus in the search box across the click-driven re-render — only if the
+    // user was actually typing there (not on an unrelated tap / Back navigation).
+    if (searchWasActive && W.query && (W.step === 1 || W.step === 2)) {
+      var si = root.querySelector(".abxw-find-input");
+      if (si && document.activeElement !== si) setTimeout(function () { try { si.focus(); var n = si.value.length; si.setSelectionRange(n, n); } catch (e) {} }, 0);
+    }
+    if (!_pendingResume) persistW(); // don't clobber the saved case while a resume offer is pending
+  }
+  function resumeBar() {
+    var s = _pendingResume || {};
+    var bar = el("div", "abxw-resume");
+    bar.innerHTML = '<span class="rds-icon abx-ms" aria-hidden="true">history</span>' +
+      '<div class="abxw-resume-txt">Resume your previous case? <span>step ' + (s.step || 1) + (s.locked ? ' · diagnosis locked' : '') + '</span></div>' +
+      '<button class="abxw-resume-yes" data-act="resumeyes">Resume</button>' +
+      '<button class="abxw-resume-no" data-act="resumeno">Start fresh</button>';
+    return bar;
   }
 
   function renderStepper() {
@@ -274,6 +438,9 @@
       : (isSimple ? "Tap a system, then check the common symptoms. Switch to Advanced for the complete finding list." : "Tap the systems involved, then check every finding that applies.");
     wrap.appendChild(el("h2", "abxw-h", h));
     wrap.appendChild(el("p", "abxw-sub", sub));
+
+    // fast findings search (typeahead over the full ontology — reaches curated-hidden findings too)
+    wrap.appendChild(renderFindSearch());
 
     // selected summary
     var sel = selectedChips();
@@ -307,10 +474,11 @@
       wrap.appendChild(el("div", "abxw-empty", ms("touch_app") + '<p>Choose one or more ' + (W.step === 1 ? "detail groups" : "systems") + ' above to reveal their findings.</p>'));
     }
 
-    // live differential hint
+    // live differential hint + suggested-next-findings
     if (anyFindings()) {
       var a = assess(); var top = a && (a.infectious[0] || a.nonInfectious[0]);
       if (top) wrap.appendChild(el("div", "abxw-livehint", ms("stacked_line_chart") + '<span>Live differential: <b>' + esc(top.name) + '</b> · ' + top.confidence + '%. Continue to review.</span>'));
+      renderSuggestChips(a, wrap);
     }
     return wrap;
   }
@@ -445,6 +613,7 @@
       host.appendChild(card);
       host.appendChild(el("div", "abxw-why", '<div class="abxw-lbl">Why</div><p>' + esc(c.reason || "") + '</p>'));
     }
+    renderEmergency(wrap, host, c, a.infectious.some(function (x) { return x.id === c.id; })); // pin time-critical red-flags
     return wrap;
   }
 
@@ -464,6 +633,7 @@
       var ref = el("button", "abxw-openref primary", ms("open_in_new") + "Open full treatment reference"); ref.setAttribute("data-act", "openref"); ref.setAttribute("data-ref", c.treatmentRef || c.id);
       host.appendChild(ref);
     }
+    renderEmergency(wrap, host, c, a.infectious.some(function (x) { return x.id === c.id; })); // keep the alert on Plan too
     return wrap;
   }
 
@@ -472,7 +642,13 @@
   // ---- open / close --------------------------------------------------------
   function open(mode) {
     if (!root) build();
-    if (mode) W.mode = mode;
+    loadTS(); applyTS();
+    // offer to resume a recent in-progress case (ask, don't force) — only when
+    // this is a fresh session (no findings entered yet).
+    var saved = loadW();
+    _pendingResume = (saved && !progress()) ? saved : null;
+    _resumeOffered = false;
+    if (mode && !_pendingResume) W.mode = mode;
     root.classList.add("on");
     document.documentElement.classList.add("abxw-open");
     render();

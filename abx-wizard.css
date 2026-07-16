@@ -7,7 +7,7 @@
 html.abx-ui #abxWizard {
   --w-paper: #eef1ee; --w-panel: #fff; --w-panel2: #f6f8f7; --w-inputbg: #fbfcfb;
   --w-ink: #14202b; --w-slate: #2d4356; --w-soft: #5a7184; --w-muted: #7c8b96;
-  --w-line: #d7dee3; --w-linesoft: #eef1f0; --w-teal: #0e6e63; --w-tealsoft: #e3f1ee; --w-tealbd: #b8ddd5;
+  --w-line: #d7dee3; --w-linesoft: #eef1f0; --w-teal: #0e6e63; --w-teal-ink: #0e6e63; --w-tealsoft: #e3f1ee; --w-tealbd: #b8ddd5;
   --w-sans: 'Inter', 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
   --w-mono: 'IBM Plex Mono', ui-monospace, monospace;
   /* severity (invariant) */
@@ -22,6 +22,7 @@ html.abx-ui #abxWizard.on { display: block; }
 html body.dark.abx-ui #abxWizard, html.abx-ui body.dark #abxWizard {
   --w-paper:#0d1b26; --w-panel:#132030; --w-panel2:#10202f; --w-inputbg:#0f1c29;
   --w-ink:#e8edf2; --w-slate:#c4d2df; --w-soft:#9bb0c2; --w-muted:#7690a6; --w-line:#29394b; --w-linesoft:#22303f; --w-tealsoft:#12332e; --w-tealbd:#1c5049;
+  --w-teal-ink:#3fc7b3; /* bright teal for TEXT/ICONS on dark (fills keep --w-teal + white text) */
 }
 html.abx-ui #abxWizard .abxw-scroll { position: absolute; inset: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 html.abx-ui #abxWizard .abxw-wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px 130px; }
@@ -209,3 +210,104 @@ html.abx-ui #abxWizard .abxw-back { height: 48px; padding: 0 18px; border-radius
 html.abx-ui #abxWizard .abxw-cap { flex: 1; text-align: center; font: 600 12.5px var(--w-sans); color: var(--w-soft); }
 html.abx-ui #abxWizard .abxw-next { height: 48px; padding: 0 20px; border-radius: 12px; border: none; background: var(--w-teal); color: #fff; font: 700 14px var(--w-sans); display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(14,110,99,.28); }
 html.abx-ui #abxWizard .abxw-back .abx-ms, html.abx-ui #abxWizard .abxw-next .abx-ms { font-size: 20px; }
+
+/* ============================================================================
+   REFINEMENTS (ultracode pass): dark-mode legibility, search, suggested
+   findings, text-size, resume, pinned emergency alert, responsive.
+   ============================================================================ */
+
+/* --- DARK-MODE: teal TEXT/ICONS use the bright accent (fills keep --w-teal + white). */
+html.abx-ui #abxWizard .abxw-brandt span,
+html.abx-ui #abxWizard .abxw-rec,
+html.abx-ui #abxWizard .abxw-pill,
+html.abx-ui #abxWizard .abxw-clear,
+html.abx-ui #abxWizard .abxw-count,
+html.abx-ui #abxWizard .abxw-openref,
+html.abx-ui #abxWizard .abxw-groupnext,
+html.abx-ui #abxWizard .abxw-secttl .abx-ms,
+html.abx-ui #abxWizard .abxw-panelh .abx-ms,
+html.abx-ui #abxWizard .abxw-chip .abx-ms,
+html.abx-ui #abxWizard .abxw-diffnm .abx-ms,
+html.abx-ui #abxWizard .abxw-sqrow .abx-ms,
+html.abx-ui #abxWizard .abxw-livehint .abx-ms,
+html.abx-ui #abxWizard .abxw-policy > .abx-ms,
+html.abx-ui #abxWizard .abxw-sysic .abx-ms { color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-steplbl.cur, html.abx-ui #abxWizard .abxw-step.cur .abxw-steplbl { color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-sysbox.active { color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-sysbox.active .abxw-sysic .abx-ms,
+html.abx-ui #abxWizard .abxw-sysbox.active .abxw-syscap { color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-pill { border-color: var(--w-tealbd); }
+/* theme-VARIANT text placed on theme-INVARIANT severity-bg cards → fix contrast (fallback deccard) */
+html.abx-ui #abxWizard .abxw-deccard[class*="sev-"] .abxw-decdx,
+html.abx-ui #abxWizard .abxw-deccard[class*="sev-"] .abxw-decv { color: #14202b; }
+html.abx-ui #abxWizard .abxw-deccard:not([class*="sev-"]) .abxw-decic .abx-ms { color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-noabx p { color: var(--sv-green-fg); }
+/* inactive stepper dot: readable glyph in BOTH themes (was #fff on #c4cdc9 ≈1.4:1) */
+html.abx-ui #abxWizard .abxw-dot { background: var(--w-line); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-step.done .abxw-dot, html.abx-ui #abxWizard .abxw-step.cur .abxw-dot { background: var(--w-teal); color: #fff; }
+
+/* --- FINDINGS SEARCH ------------------------------------------------------- */
+html.abx-ui #abxWizard .abxw-find { margin: 0 0 14px; }
+html.abx-ui #abxWizard .abxw-find-input {
+  width: 100%; box-sizing: border-box; height: 46px; border-radius: 12px; border: 1.5px solid var(--w-line);
+  background: var(--w-inputbg); color: var(--w-ink); font: 500 15px var(--w-sans); padding: 0 14px;
+  -webkit-appearance: none; appearance: none;
+}
+html.abx-ui #abxWizard .abxw-find-input::placeholder { color: var(--w-muted); }
+html.abx-ui #abxWizard .abxw-find-input:focus { outline: none; border-color: var(--w-teal); box-shadow: 0 0 0 3px rgba(14,110,99,.14); }
+html.abx-ui #abxWizard .abxw-find-results { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+html.abx-ui #abxWizard .abxw-find-hit .nm { font: 600 13.5px var(--w-sans); }
+html.abx-ui #abxWizard .abxw-find-hit .grp { font: 600 11px var(--w-sans); opacity: .6; margin-left: 2px; }
+html.abx-ui #abxWizard .abxw-find-empty { font: 500 13.5px var(--w-sans); color: var(--w-muted); padding: 4px 2px; }
+
+/* --- SUGGESTED-NEXT-FINDINGS ---------------------------------------------- */
+html.abx-ui #abxWizard .abxw-suggest { margin-top: 16px; padding: 13px 14px; background: var(--w-tealsoft); border: 1px solid var(--w-tealbd); border-radius: 14px; }
+html.abx-ui #abxWizard .abxw-suggttl { display: flex; align-items: center; gap: 7px; font: 700 12px var(--w-sans); letter-spacing: .4px; text-transform: uppercase; color: var(--w-teal-ink); margin-bottom: 9px; }
+html.abx-ui #abxWizard .abxw-suggttl .abx-ms { color: var(--w-teal-ink); font-size: 18px; }
+html.abx-ui #abxWizard .abxw-chip.sug { background: var(--w-panel); border-style: dashed; border-color: var(--w-tealbd); color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-chip.sug .abx-ms { color: var(--w-teal-ink); }
+
+/* --- TEXT-SIZE (A-/A+) via CSS zoom on inner content wrappers ------------- */
+html.abx-ui #abxWizard .abxw-wrap { zoom: var(--abxw-zoom, 1); }
+html.abx-ui #abxWizard .abxw-navin { zoom: var(--abxw-zoom, 1); }
+html.abx-ui #abxWizard .abxw-tsize { display: flex; background: var(--w-panel); border: 1px solid var(--w-line); border-radius: 12px; padding: 4px; gap: 2px; box-shadow: 0 1px 2px rgba(20,32,43,.04); }
+html.abx-ui #abxWizard .abxw-ts { width: 40px; height: 38px; border: none; border-radius: 9px; background: transparent; color: var(--w-slate); font: 700 14px var(--w-sans); display: inline-flex; align-items: baseline; justify-content: center; }
+html.abx-ui #abxWizard .abxw-ts .abx-ts-sm { font-size: 11px; }
+html.abx-ui #abxWizard .abxw-ts .abx-ts-lg { font-size: 16px; }
+html.abx-ui #abxWizard .abxw-ts:disabled { opacity: .35; }
+
+/* --- RESUME BAR ------------------------------------------------------------ */
+html.abx-ui #abxWizard .abxw-resume { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--w-tealsoft); border: 1px solid var(--w-tealbd); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
+html.abx-ui #abxWizard .abxw-resume > .abx-ms { color: var(--w-teal-ink); font-size: 22px; flex: none; }
+html.abx-ui #abxWizard .abxw-resume-txt { flex: 1; min-width: 140px; font: 600 13.5px var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-resume-txt span { display: block; font: 500 12px var(--w-sans); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-resume-yes { height: 40px; padding: 0 16px; border-radius: 11px; border: none; background: var(--w-teal); color: #fff; font: 700 13.5px var(--w-sans); }
+html.abx-ui #abxWizard .abxw-resume-no { height: 40px; padding: 0 14px; border-radius: 11px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); font: 700 13.5px var(--w-sans); }
+
+/* --- PINNED EMERGENCY ALERT (time-critical) — theme-invariant red --------- */
+html.abx-ui #abxWizard .abxw-emergency { margin: 0 0 14px; border-radius: 14px; padding: 14px 16px; background: var(--sv-red-bg); border: 1.5px solid var(--sv-red-bar); border-left: 6px solid var(--sv-red-bar); box-shadow: 0 2px 14px rgba(171,28,44,.28); }
+html body.dark.abx-ui #abxWizard .abxw-emergency, html.abx-ui body.dark #abxWizard .abxw-emergency { background: #2a0810; border-color: #e85070; border-left-color: #e85070; box-shadow: 0 2px 16px rgba(232,80,112,.35); }
+html.abx-ui #abxWizard .abxw-emerg-hd { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+html.abx-ui #abxWizard .abxw-emerg-hd .abx-ms { color: var(--sv-red-bar); font-size: 24px; flex: none; }
+html body.dark.abx-ui #abxWizard .abxw-emerg-hd .abx-ms { color: #e85070; }
+html.abx-ui #abxWizard .abxw-emerg-ttl { font: 800 12px var(--w-sans); letter-spacing: .7px; text-transform: uppercase; color: var(--sv-red-fg); }
+html body.dark.abx-ui #abxWizard .abxw-emerg-ttl { color: #ffb3c0; }
+html.abx-ui #abxWizard .abxw-emerg-dx { font: 700 13px var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-emerg-list { margin: 10px 0 0; padding-left: 20px; }
+html.abx-ui #abxWizard .abxw-emerg-list li { font: 600 14px/1.55 var(--w-sans); color: var(--sv-red-fg); margin: 3px 0; }
+html body.dark.abx-ui #abxWizard .abxw-emerg-list li { color: #ffc2cc; }
+@media (prefers-reduced-motion: no-preference) {
+  html.abx-ui #abxWizard .abxw-emergency { animation: abxw-emerg-pulse 1.8s ease-in-out 3; }
+  @keyframes abxw-emerg-pulse { 0%,100% { box-shadow: 0 2px 14px rgba(171,28,44,.28); } 50% { box-shadow: 0 2px 22px rgba(171,28,44,.55); } }
+  html.abx-ui #abxWizard .abxw-step-body { animation: abxw-fade .18s ease; }
+}
+
+/* --- RESPONSIVE (phone) ---------------------------------------------------- */
+html.abx-ui #abxWizard .abxw-steplbl { overflow-wrap: anywhere; hyphens: auto; }
+@media (max-width: 480px) {
+  html.abx-ui #abxWizard .abxw-stepper { gap: 4px; }
+  html.abx-ui #abxWizard .abxw-steplbl { font-size: 10px; }
+  html.abx-ui #abxWizard .abxw-cap { display: none; }
+  html.abx-ui #abxWizard .abxw-back, html.abx-ui #abxWizard .abxw-next { flex: none; }
+  html.abx-ui #abxWizard .abxw-tsize { order: 3; }
+}
