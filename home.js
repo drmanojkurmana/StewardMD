@@ -2018,6 +2018,14 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       }
       var m = q.match(/^(what about|how about|and)\s+(.+)/i);
       if (m && m[2]) { var rest = m[2].replace(/\?+$/, "").trim(); if (rest) return { question: t.topic + " — " + rest + ".", depth: "concise", topic: t.topic + " · " + rest, retrieval: t.topic + " " + rest }; }
+      // Affirmative reply to MaiK's own closing question -> continue on the offered content (or, if the
+      // exact offer wasn't captured, the topic's management). Gated on t.offer/askedMore so a stray
+      // "ok"/"yes" with no pending question still falls through to the casual acknowledgement.
+      if ((t.offer || t.askedMore) && /^(?:y|yes|yeah|yep|yup|sure|ok|okay|okey|please|pls|do it|go ahead|go on|both|either|sounds good|yes please|please do|go for it)\s*\??$/.test(n)) {
+        var off = (t.offer || "").trim();
+        if (off) return { question: t.topic + " — " + off + ".", depth: "detailed", topic: t.topic + " · " + off, retrieval: t.topic + " " + off };
+        return { question: "Continue with the management and treatment of " + t.topic + " — key steps, medications, and monitoring.", depth: "detailed", topic: "management of " + t.topic, retrieval: t.topic + " management treatment medications monitoring" };
+      }
       return null;
     }
     // Phase 2 — streaming is ON by default (self-falls-back on any failure); set localStorage
@@ -2137,7 +2145,18 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       } catch (e) {}
       _maikTurns.push({ q: question, a: md.slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift();
       try { if (window.SMD_KU && question) { var _kh = 0, _ks = String(question); for (var _ki = 0; _ki < _ks.length; _ki++) { _kh = ((_kh << 5) - _kh + _ks.charCodeAt(_ki)) | 0; } SMD_KU.emit("maik", "q" + (_kh >>> 0).toString(36)); } } catch (e) {}   // KU: read a MaiK answer
-      if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() };
+      if (maikV2()) {
+        // Capture MaiK's own closing offer ("Would you like to discuss X?") so a bare "yes"/"sure"
+        // reply can continue on X instead of dead-ending as a casual acknowledgement.
+        var _offer = "";
+        try {
+          var _oq = String(md || "").match(/\b(?:would you like|shall i|do you want|want me to|should i|i can(?: also)?)\b([^?]*)\?/i);
+          if (_oq && _oq[1]) _offer = _oq[1]
+            .replace(/^\s*(?:me\s+)?(?:to\s+)?(?:discuss|explore|delve into|review|go over|hear about|know about|cover|outline|detail|walk you through|provide)\s+/i, "")
+            .replace(/^\s*(?:about|the)\s+/i, "").replace(/\s+/g, " ").trim();
+        } catch (e) {}
+        _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, offer: _offer, askedMore: /\?\s*$/.test(String(md || "").trim()), ts: Date.now() };
+      }
       scroll();
       try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
     }
