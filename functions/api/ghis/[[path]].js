@@ -3,9 +3,11 @@
  * DEPLOY PATH:   functions/api/ghis/[[path]].js   ->  https://stewardmd.in/api/ghis/*
  *
  * Each doctor logs in with their OWN GHIS id + password (proper audit trail).
- * Passwords are NEVER stored: the password is used only to open a GHIS session
- * for this request. The token maps to a short-lived session (cookie jar) in KV;
- * when GHIS times out the doctor logs in again. No silent re-login, no stored creds.
+ * The login password is NEVER stored: it opens a GHIS session for that request only.
+ * The token maps to a short-lived session (cookie jar) in KV; when GHIS times out the
+ * doctor logs in again. EXCEPTION: doctors who explicitly enabled Lab Watch 24/7 have
+ * their creds stored ENCRYPTED (with consent) so the background poll works — for them,
+ * /api/ghis/refresh silently re-mints a session from those same creds (no re-prompt).
  *
  * REQUIRED Cloudflare Pages settings:
  *   KV namespace binding:  GHIS_KV        (stores short-lived sessions only)
@@ -19,6 +21,9 @@
  *        (all require  Authorization: Bearer <token>)
  * ---------------------------------------------------------------------------
  */
+
+import { identify } from '../../_fbauth.js';
+import { getCred } from '../../_watch.js';
 
 const GHIS = 'https://ghis.gitam.edu';
 const SSO  = 'https://gimsrlogin.gitam.edu';
@@ -203,6 +208,24 @@ export async function onRequest(context) {
       // password never leaves this request. Sessions are token-only; on GHIS timeout the
       // doctor logs in again. `body.remember` is accepted but ignored for compatibility.
       return json({ token: t, userId: String(body.userId) });
+    }
+
+    // ---- silent session refresh (Lab Watch 24/7 users only) ----
+    // When the client's short-lived GHIS session times out, re-mint one WITHOUT re-prompting — but
+    // ONLY from the encrypted creds the doctor already CONSENTED to store for 24/7 background alerts
+    // (getCred, keyed by verified Firebase identity). No stored creds → 404 → the client shows login.
+    if (seg === 'refresh' && request.method === 'POST') {
+      const who = await identify(request, env);
+      if (!who) return json({ error: 'auth_required' }, 401);
+      let cred = null;
+      try { cred = await getCred(env, who); } catch (e) { cred = null; }
+      if (!cred || !cred.userId || !cred.password) return json({ error: 'no_stored_creds' }, 404);
+      let sess;
+      try { sess = await loginGhis(String(cred.userId), String(cred.password)); }
+      catch (e) { return json({ error: e.code === 'bad_credentials' ? 'bad_credentials' : 'login_failed' }, 401); }
+      const t = randToken();
+      await env.GHIS_KV.put('sess:' + t, JSON.stringify({ ...sess, userId: String(cred.userId), ts: Date.now() }), { expirationTtl: SESS_KV_TTL });
+      return json({ token: t, userId: String(cred.userId), refreshed: true });
     }
 
     // ---- logout ----

@@ -584,13 +584,28 @@
   function installSbScrollGuard() {
     if (_sbGuardWired) return; _sbGuardWired = true;
     try {
-      document.addEventListener("touchmove", function (e) {
-        var d = document.getElementById("sbDrawer");
-        if (!d || !d.classList.contains("open")) return;   // only while the sidebar is open
+      var d = document.getElementById("sbDrawer");
+      if (!d) return;
+      // Block background scroll ONLY while the sidebar is open — and, critically, ATTACH the
+      // non-passive touchmove listener ONLY for that window, removing it on close. A permanently
+      // registered non-passive `touchmove` on document forces iOS/WKWebView off the fast
+      // (threaded) scroll path and janks ALL scrolling app-wide, even though the old handler
+      // early-returned when the sidebar was closed. overscroll-behavior:contain on
+      // #sbDrawer/#sbMenu already stops scroll chaining; this only cancels drags on the
+      // non-scrolling backdrop while the drawer is open.
+      var block = function (e) {
         var sc = e.target && e.target.closest ? e.target.closest("#sbMenu") : null;
         if (sc && sc.scrollHeight > sc.clientHeight + 1) return;   // real, scrollable menu → allow native scroll
         try { e.preventDefault(); } catch (x) {}                   // else block (background / short menu / header)
-      }, { passive: false });
+      };
+      var attached = false;
+      var sync = function () {
+        var open = d.classList.contains("open");
+        if (open && !attached) { document.addEventListener("touchmove", block, { passive: false }); attached = true; }
+        else if (!open && attached) { document.removeEventListener("touchmove", block, { passive: false }); attached = false; }
+      };
+      new MutationObserver(sync).observe(d, { attributes: true, attributeFilter: ["class"] });
+      sync();
     } catch (e) {}
   }
   function injectCSS() {
@@ -2066,6 +2081,12 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       return html ? '<div class="maik-followups">' + html + '</div>' : "";
     }
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
+      // The provider call has returned and we are rendering the interactive answer, so clear the busy
+      // guard NOW rather than in the trailing .then(). On native the answer is revealed via a
+      // requestAnimationFrame typewriter (explainGroundedStream fallback replay) that held _maikBusy
+      // true for the WHOLE animation, so the follow-up chips were visible but taps silently no-op'd
+      // until the next turn cleared it ("tapped First-line treatment, nothing; sent Hi, then it worked").
+      _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
       if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "rate" ? 'One moment — you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
       if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
