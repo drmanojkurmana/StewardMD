@@ -119,14 +119,39 @@
       })();
       function getToken() { try { return localStorage.getItem(tokenKey()) || ''; } catch (e) { return ''; } }
       function setToken(t) { try { t ? localStorage.setItem(tokenKey(), t) : localStorage.removeItem(tokenKey()); } catch (e) {} }
-      // fetch wrapper that attaches the bearer token; surfaces 401 as login_required
-      function authFetch(path, opts) {
+      // Silent GHIS session refresh: when the short-lived GHIS session times out, re-mint one from
+      // the doctor's SERVER-STORED (consented, Lab Watch 24/7) creds via their Firebase identity —
+      // NO password prompt. Resolves to a fresh token, or null if it can't (not Firebase-signed-in,
+      // or no stored creds → the doctor just logs in again as before).
+      function ghisSilentRefresh() {
+        return new Promise(function (resolve) {
+          try {
+            var u = window.SMD_AUTH && window.SMD_AUTH.currentUser;
+            if (!u || !u.getIdToken) return resolve(null);
+            u.getIdToken().then(function (jwt) {
+              fetch(PROXY + '/refresh', { method: 'POST', headers: { 'Authorization': 'Bearer ' + jwt } })
+                .then(function (r) { return r.ok ? r.json() : null; })
+                .then(function (j) { if (j && j.token) { setToken(j.token); _connected = true; dot(true); resolve(j.token); } else resolve(null); })
+                .catch(function () { resolve(null); });
+            }).catch(function () { resolve(null); });
+          } catch (e) { resolve(null); }
+        });
+      }
+      // fetch wrapper that attaches the bearer token; on 401 it tries a SILENT refresh ONCE and
+      // retries, only falling back to the login screen if that fails.
+      function authFetch(path, opts, _retried) {
         opts = opts || {};
         opts.headers = opts.headers || {};
         var t = getToken();
-        if (t) opts.headers['Authorization'] = 'Bearer ' + t;
+        if (t) opts.headers['Authorization'] = 'Bearer ' + t; else delete opts.headers['Authorization'];
         return fetch(PROXY + path, opts).then(function (r) {
-          if (r.status === 401) { setToken(''); _connected = false; dot(false); showScreen('setup'); throw new Error('login_required'); }
+          if (r.status === 401) {
+            if (_retried) { setToken(''); _connected = false; dot(false); showScreen('setup'); throw new Error('login_required'); }
+            return ghisSilentRefresh().then(function (nt) {
+              if (nt) return authFetch(path, opts, true);   // fresh session → retry once (Authorization re-set from the new token)
+              setToken(''); _connected = false; dot(false); showScreen('setup'); throw new Error('login_required');
+            });
+          }
           return r.json();
         });
       }
