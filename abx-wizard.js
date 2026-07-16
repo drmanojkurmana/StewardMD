@@ -278,7 +278,8 @@
         '<div class="abxw-brand"><span class="abxw-logo"><span class="abxw-logo-mark" aria-hidden="true"></span></span>' +
           '<div><div class="abxw-brandt">Steward<span>MD</span></div><div class="abxw-brands">Antibiotic decision engine · MARINAM UI</div></div></div>' +
         '<div class="abxw-headr">' +
-          '<button class="abxw-uiswitch" data-act="toclassic" aria-label="Switch to Classic UI">' + ms("swap_horiz") + 'Classic UI</button>' +
+          '<button type="button" class="abx-uisw" role="switch" aria-checked="true" data-act="toclassic" aria-label="MARINAM UI on — tap for Classic UI">' +
+            '<span class="abx-uisw-lbl">MARINAM UI</span><span class="abx-uisw-track"><span class="abx-uisw-knob"></span></span></button>' +
           '<div class="abxw-seg" role="tablist" aria-label="Mode">' +
             '<button class="abxw-segb" data-mode="simple" role="tab">' + ms("bolt") + 'Simple</button>' +
             '<button class="abxw-segb" data-mode="advanced" role="tab">' + ms("tune") + 'Advanced</button>' +

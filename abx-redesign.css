@@ -313,13 +313,30 @@ html.abx-ui .abx-policy-pill {
   flex: none; font: 700 11.5px var(--sans); color: var(--teal); background: var(--panel);
   border: 1px solid #b8ddd5; border-radius: 20px; padding: 4px 10px; white-space: nowrap;
 }
-/* CLASSIC → MARINAM UI switch (in the injected policy banner) */
-html.abx-ui .abx-uiswitch {
-  flex: none; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 13px;
-  border-radius: 20px; border: 1.5px solid var(--teal); background: var(--teal); color: #fff;
-  font: 700 12px var(--sans); white-space: nowrap; cursor: pointer; box-shadow: var(--abx-sh-teal);
+/* MARINAM ⇄ CLASSIC single on/off SWITCH (used in BOTH UIs — classic banner +
+   the MARINAM wizard header — via :root --teal/--line/--panel, inherited both). */
+html.abx-ui .abx-uisw {
+  flex: none; display: inline-flex; align-items: center; gap: 9px; height: 36px; padding: 0 8px 0 13px;
+  border-radius: 20px; border: 1px solid var(--line); background: var(--panel); cursor: pointer;
+  font: 700 12px var(--sans); color: var(--slate); white-space: nowrap;
 }
-html.abx-ui .abx-uiswitch .abx-ms { font-size: 17px; color: #fff; }
+html.abx-ui .abx-uisw-lbl { line-height: 1; }
+html.abx-ui .abx-uisw-track { position: relative; flex: none; width: 38px; height: 22px; border-radius: 22px; background: var(--line); transition: background .15s; }
+html.abx-ui .abx-uisw-knob { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(20,32,43,.3); transition: left .15s; }
+html.abx-ui .abx-uisw[aria-checked="true"] { color: var(--teal); border-color: var(--teal); }
+html.abx-ui .abx-uisw[aria-checked="true"] .abx-uisw-track { background: var(--teal); }
+html.abx-ui .abx-uisw[aria-checked="true"] .abx-uisw-knob { left: 18px; }
+html.abx-ui .abx-uisw:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+/* Classic Simple|Advanced → SEGMENTED control matching the MARINAM wizard. */
+html.abx-ui .abx-modeseg { display: inline-flex; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 2px; box-shadow: 0 1px 2px rgba(20,32,43,.04); }
+html.abx-ui .abx-modeseg-b { height: 36px; padding: 0 15px; border: none; border-radius: 9px; background: transparent; color: var(--slate); font: 700 13px var(--sans); display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: background .12s, color .12s; }
+html.abx-ui .abx-modeseg-b .abx-ms { font-size: 18px; }
+html.abx-ui .abx-modeseg-b.on { background: var(--teal); color: #fff; }
+html.abx-ui .abx-modeseg-b.on .abx-ms { color: #fff; }
+/* once the segmented control is injected, hide the original text toggle */
+html.abx-ui #modeSwitchRow[data-abx-modeseg] #modeSwitchLabel,
+html.abx-ui #modeSwitchRow[data-abx-modeseg] #modeSwitchBtn { display: none !important; }
 
 /* Simple/Advanced toggle → segmented pill look (the app keeps it a single
    toggle button; this just gives it the design's segmented-control chrome). */

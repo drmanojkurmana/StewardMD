@@ -81,8 +81,8 @@
       '<div class="abx-policy-txt"><b>Hospital policy</b> · ICMR (National) · AMRSN 2024 ' +
       '<span class="abx-policy-rec">· Recommended</span></div>' +
       '<span class="abx-policy-pill">Educational aid</span>' +
-      '<button type="button" class="abx-uiswitch" data-abx-tomarinam="1" aria-label="Switch to MARINAM UI">' +
-        '<span class="rds-icon abx-ms" aria-hidden="true">swap_horiz</span>MARINAM UI</button>';
+      '<button type="button" class="abx-uisw" role="switch" aria-checked="false" data-abx-tomarinam="1" aria-label="MARINAM UI off — tap to switch on">' +
+        '<span class="abx-uisw-lbl">MARINAM UI</span><span class="abx-uisw-track"><span class="abx-uisw-knob"></span></span></button>';
     return b;
   }
   function ensureBanner(host) {
@@ -103,9 +103,36 @@
     if (t) t.setAttribute("data-abx-seg", "1");
   }
 
+  // classic mode = advanced when #inputCard is the visible one, else simple.
+  function classicMode() {
+    var ic = document.getElementById("inputCard");
+    return (ic && getComputedStyle(ic).display !== "none") ? "advanced" : "simple";
+  }
+  // Inject a Simple|Advanced SEGMENTED control (matching the MARINAM wizard) into
+  // the classic mode row, hide the original label+button, and drive the app's real
+  // mode switch (#modeSwitchBtn toggles + clears findings — same as before).
+  function ensureModeSeg() {
+    var row = document.getElementById("modeSwitchRow");
+    if (!row || !document.getElementById("modeSwitchBtn")) return;
+    var seg = row.querySelector(".abx-modeseg");
+    if (!seg) {
+      seg = document.createElement("div"); seg.className = "abx-modeseg"; seg.setAttribute("role", "tablist"); seg.setAttribute("aria-label", "Mode");
+      seg.innerHTML =
+        '<button type="button" class="abx-modeseg-b" data-abx-mode="simple" role="tab"><span class="rds-icon abx-ms" aria-hidden="true">bolt</span>Simple</button>' +
+        '<button type="button" class="abx-modeseg-b" data-abx-mode="advanced" role="tab"><span class="rds-icon abx-ms" aria-hidden="true">tune</span>Advanced</button>';
+      row.insertBefore(seg, row.firstChild);
+      row.setAttribute("data-abx-modeseg", "1"); // CSS hides the original label + button
+    }
+    var cur = classicMode();
+    seg.querySelectorAll(".abx-modeseg-b").forEach(function (b) {
+      var on = b.getAttribute("data-abx-mode") === cur;
+      b.classList.toggle("on", on); b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+  }
+
   var raf = 0;
   function runAll() {
-    try { enhanceSystemBoxes(document); enhanceBanners(); markToggle(); } catch (e) {}
+    try { enhanceSystemBoxes(document); enhanceBanners(); markToggle(); ensureModeSeg(); } catch (e) {}
   }
   function schedule() {
     if (raf) return;
@@ -119,6 +146,15 @@
       e.preventDefault(); e.stopPropagation();
       try { localStorage.setItem("smd_abx_wizard", "1"); } catch (x) {}
       if (window.ABX_WIZARD && ABX_WIZARD.open) ABX_WIZARD.open();
+    }, true);
+    // Classic segmented Simple|Advanced → drive the app's real mode toggle.
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-abx-mode]");
+      if (!b) return;
+      e.preventDefault(); e.stopPropagation();
+      if (b.getAttribute("data-abx-mode") === classicMode()) return; // already in that mode
+      var sw = document.getElementById("modeSwitchBtn"); if (sw) sw.click(); // toggles + clears (app behavior)
+      setTimeout(ensureModeSeg, 60);
     }, true);
 
   function boot() {
