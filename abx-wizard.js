@@ -692,14 +692,14 @@
   }
   window.ABX_WIZARD = { open: open, close: close };
 
-  // OPT-IN only (default OFF). Start Case keeps opening the FULL classic engine
-  // (complete stewardship console, weight-band regimen, patient-specific renal/
-  // hepatic/cardiac safety, alternatives) — the wizard must render that same real
-  // output before it can replace the classic flow. Enable to preview: ?abxwiz=1
-  // or localStorage smd_abx_wizard="1".
+  // DEFAULT ON (MARINAM wizard). Start Case opens the MARINAM wizard unless the
+  // user has explicitly opted into the FULL classic engine (complete stewardship
+  // console, weight-band regimen, patient-specific renal/hepatic/cardiac safety,
+  // alternatives). Opt OUT of the wizard: ?abxwiz=0 or localStorage
+  // smd_abx_wizard="0" (the in-UI MARINAM⇄CLASSIC toggle is the source of truth).
   // UI preference (checked at CLICK time so the MARINAM⇄CLASSIC toggle takes
-  // effect immediately, no reload): MARINAM (wizard) when ?abxwiz=1 or
-  // localStorage smd_abx_wizard==="1"; else CLASSIC (the app's own engine).
+  // effect immediately, no reload): MARINAM (wizard) by default — CLASSIC (the
+  // app's own engine) only when ?abxwiz=0 or localStorage smd_abx_wizard==="0".
   // ?abxwiz=1/0 SEEDS the persistent pref once (so the in-UI toggle, which writes
   // localStorage, is the source of truth thereafter and works both ways).
   try {
@@ -707,7 +707,8 @@
     else if (/[?&]abxwiz=0\b/.test(location.search || "")) localStorage.setItem("smd_abx_wizard", "0");
   } catch (e) {}
   function wizPrefOn() {
-    try { return localStorage.getItem("smd_abx_wizard") === "1"; } catch (e) { return false; }
+    // MARINAM is the DEFAULT: on unless the user explicitly opted into CLASSIC ("0").
+    try { return localStorage.getItem("smd_abx_wizard") !== "0"; } catch (e) { return true; }
   }
   window.ABX_WIZARD.setUI = function (which) { try { localStorage.setItem("smd_abx_wizard", which === "marinam" ? "1" : "0"); } catch (e) {} };
   document.addEventListener("click", function (e) {
