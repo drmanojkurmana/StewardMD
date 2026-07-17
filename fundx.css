@@ -88,3 +88,102 @@
 
 /* disclaimer */
 #fundxRoot .fundx-disc { margin: 22px 4px 0; font-weight: 500; font-size: 11.5px; line-height: 1.5; color: var(--rds-muted, var(--slate-soft)); text-align: center; }
+
+/* ============ M3 — guided acquisition, review, result ============ */
+
+/* pre-capture: eye picker + 20D-lens primer */
+#fundxRoot .fundx-eyes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#fundxRoot .fundx-eye {
+  display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;
+  padding: 16px; border: 1.5px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px);
+  background: var(--rds-surface, var(--panel, #fff)); color: var(--rds-ink, var(--ink)); font-weight: 700; font-size: 14px;
+}
+#fundxRoot .fundx-eye .rds-icon { color: var(--rds-muted, var(--slate-soft)); }
+#fundxRoot .fundx-eye.on { border-color: var(--rds-primary, var(--teal)); background: var(--rds-primary-soft, var(--teal-soft)); color: var(--rds-primary, var(--teal)); }
+#fundxRoot .fundx-eye.on .rds-icon { color: var(--rds-primary, var(--teal)); }
+#fundxRoot .fundx-primer { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+#fundxRoot .fundx-primer li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px); background: var(--rds-surface, var(--panel, #fff)); }
+#fundxRoot .fundx-primer .rds-icon { color: var(--rds-primary, var(--teal)); flex: 0 0 auto; margin-top: 2px; }
+#fundxRoot .fundx-primer b { display: block; font-weight: 700; font-size: 13.5px; }
+#fundxRoot .fundx-primer span { display: block; font-weight: 500; font-size: 12px; color: var(--rds-muted, var(--slate-soft)); margin-top: 2px; }
+#fundxRoot .fundx-cta[data-fx="startcam"], #fundxRoot .fundx-cta[data-fx="newscan"] { margin-top: 16px; }
+
+/* camera: full-bleed dark, overlay never obstructs the fundus (centre stays clear) */
+#fundxRoot.cam { background: #000; }
+#fundxRoot .fundx-cam { position: absolute; inset: 0; overflow: hidden; background: #000; }
+#fundxRoot .fundx-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
+#fundxRoot .fundx-cam-scrim { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 44%, transparent 34%, rgba(0,0,0,.28) 70%); }
+#fundxRoot .fundx-cam-top { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 10px; padding: 10px 12px; z-index: 6; }
+#fundxRoot .fundx-cam-x {
+  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex: 0 0 auto;
+  border: none; border-radius: 999px; background: rgba(0,0,0,.42); color: #fff; cursor: pointer; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+#fundxRoot .fundx-cam-x.on { background: var(--rds-primary, #0e6e63); }
+#fundxRoot .fundx-state { flex: 1; text-align: center; color: #fff; font-weight: 700; font-size: 14px; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+
+/* reticle + readiness ring + arrow */
+#fundxRoot .fundx-reticle { position: absolute; top: 44%; left: 50%; transform: translate(-50%,-50%); width: 240px; height: 240px; z-index: 5; pointer-events: none; }
+#fundxRoot .fundx-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+#fundxRoot .fundx-ring-bg { fill: none; stroke: rgba(255,255,255,.22); stroke-width: 4; }
+#fundxRoot .fundx-ring-fg { fill: none; stroke: #fff; stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset .18s ease, stroke .25s; }
+#fundxRoot .fundx-ring-fg.lo { stroke: var(--sev-urgent-fg, #C2410C); }
+#fundxRoot .fundx-ring-fg.mid { stroke: var(--sev-warning-fg, #d19a1a); }
+#fundxRoot .fundx-ring-fg.hi { stroke: #34d399; }
+#fundxRoot .fundx-score { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #fff; font: 800 34px var(--rds-mono, monospace); text-shadow: 0 1px 8px rgba(0,0,0,.7); }
+#fundxRoot .fundx-arrow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); opacity: 0; color: #fff; transition: opacity .18s, transform .18s; }
+#fundxRoot .fundx-arrow .rds-icon { font-size: 40px; text-shadow: 0 2px 10px rgba(0,0,0,.7); }
+#fundxRoot .fundx-arrow.show { opacity: .95; animation: fundxPulse 1.1s ease-in-out infinite; }
+#fundxRoot .fundx-arrow.a-left { transform: translate(-120px,-50%); }
+#fundxRoot .fundx-arrow.a-right { transform: translate(88px,-50%); }
+#fundxRoot .fundx-arrow.a-up { transform: translate(-50%,-120px); }
+#fundxRoot .fundx-arrow.a-down { transform: translate(-50%,88px); }
+@keyframes fundxPulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+
+/* bottom coach + gate chips */
+#fundxRoot .fundx-cam-bottom { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 14px 22px; z-index: 6; background: linear-gradient(0deg, rgba(0,0,0,.6), transparent); }
+#fundxRoot .fundx-coach { text-align: center; color: #fff; font-weight: 700; font-size: 16px; min-height: 22px; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
+#fundxRoot .fundx-coach.t-good { color: #6ee7b7; }
+#fundxRoot .fundx-coach.t-warn { color: #fcd34d; }
+#fundxRoot .fundx-chips { display: flex; gap: 6px; overflow-x: auto; padding: 12px 2px 2px; justify-content: center; flex-wrap: wrap; }
+#fundxRoot .fundx-chip { flex: 0 0 auto; font: 700 10px var(--rds-font, system-ui); text-transform: uppercase; letter-spacing: .04em; padding: 5px 9px; border-radius: 999px; background: rgba(255,255,255,.14); color: rgba(255,255,255,.7); transition: background .2s, color .2s; }
+#fundxRoot .fundx-chip.on { background: #34d399; color: #06281f; }
+#fundxRoot .fundx-flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 8; }
+#fundxRoot .fundx-flash.on { animation: fundxFlash .22s ease; }
+@keyframes fundxFlash { 0% { opacity: 0; } 30% { opacity: .85; } 100% { opacity: 0; } }
+
+/* processing */
+#fundxRoot .fundx-proc { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
+#fundxRoot .fundx-proc-ring { position: relative; width: 80px; height: 80px; color: var(--rds-primary, var(--teal)); display: flex; align-items: center; justify-content: center; }
+#fundxRoot .fundx-proc-ring .rds-icon { font-size: 30px; }
+#fundxRoot .fundx-proc-ring svg { position: absolute; inset: 0; animation: fundxSpin 1s linear infinite; }
+#fundxRoot .fundx-proc-c { fill: none; stroke: var(--rds-primary, var(--teal)); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 60 214; }
+@keyframes fundxSpin { to { transform: rotate(360deg); } }
+#fundxRoot .fundx-proc-tx { font-weight: 600; font-size: 14px; color: var(--rds-muted, var(--slate-soft)); }
+
+/* review + result shared */
+#fundxRoot .fundx-shot { position: relative; border-radius: var(--rds-r, 16px); overflow: hidden; background: #0b0b0c; aspect-ratio: 1/1; max-width: 320px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+#fundxRoot .fundx-shot img { width: 100%; height: 100%; object-fit: cover; }
+#fundxRoot .fundx-shot-q { position: absolute; top: 10px; right: 10px; font: 800 15px var(--rds-mono, monospace); color: #fff; padding: 5px 10px; border-radius: 999px; }
+#fundxRoot .fundx-shot-q.ok { background: var(--sev-stable-fg, #1C7A4A); }
+#fundxRoot .fundx-shot-q.bad { background: var(--sev-critical-fg, #B42332); }
+#fundxRoot .fundx-verdict { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding: 12px 14px; border-radius: var(--rds-r-ctl, 12px); font-weight: 700; font-size: 14px; }
+#fundxRoot .fundx-verdict.ok { background: var(--sev-stable-bg, #E7F5EC); color: var(--sev-stable-fg, #1C7A4A); }
+#fundxRoot .fundx-verdict.bad { background: var(--sev-critical-bg, #FBE9EC); color: var(--sev-critical-fg, #B42332); }
+#fundxRoot .fundx-whys { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+#fundxRoot .fundx-why { display: inline-flex; align-items: center; gap: 5px; font: 600 12px var(--rds-font, system-ui); color: var(--sev-urgent-fg, #C2410C); background: var(--sev-urgent-bg, #FDEEE4); padding: 5px 9px; border-radius: 999px; }
+#fundxRoot .fundx-why .rds-icon { font-size: 15px; }
+#fundxRoot .fundx-qbars { display: flex; flex-direction: column; gap: 9px; }
+#fundxRoot .fundx-qbar { display: flex; align-items: center; gap: 10px; font: 600 12.5px var(--rds-font, system-ui); }
+#fundxRoot .fundx-qbar span { flex: 0 0 96px; color: var(--rds-muted, var(--slate-soft)); }
+#fundxRoot .fundx-qbar i { flex: 1; height: 8px; border-radius: 999px; background: var(--rds-surface-2, #eef3f5); overflow: hidden; }
+#fundxRoot .fundx-qbar b { display: block; height: 100%; border-radius: 999px; background: var(--rds-primary, var(--teal)); }
+#fundxRoot .fundx-modelbadge { display: inline-flex; align-items: center; gap: 6px; margin: 12px auto 0; padding: 6px 11px; border-radius: 999px; background: var(--sev-info-bg, #E8F2F9); color: var(--sev-info-fg, #1D6FA3); font: 700 11px var(--rds-font, system-ui); }
+#fundxRoot .fundx-modelbadge .rds-icon { font-size: 15px; }
+#fundxRoot .fundx-findings { display: flex; flex-direction: column; border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px); overflow: hidden; }
+#fundxRoot .fundx-frow { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid var(--rds-line, var(--line)); font-size: 13.5px; }
+#fundxRoot .fundx-frow:last-child { border-bottom: none; }
+#fundxRoot .fundx-frow span { color: var(--rds-muted, var(--slate-soft)); font-weight: 500; }
+#fundxRoot .fundx-frow b { font: 700 14px var(--rds-mono, monospace); }
+#fundxRoot .fundx-actions { display: flex; gap: 10px; margin-top: 18px; }
+#fundxRoot .fundx-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; padding: 14px; border: none; border-radius: var(--rds-r-ctl, 12px); background: var(--rds-primary, var(--teal)); color: #fff; font-weight: 700; font-size: 14px; }
+#fundxRoot .fundx-btn.ghost { background: var(--rds-surface, var(--panel, #fff)); color: var(--rds-ink, var(--ink)); border: 1px solid var(--rds-line, var(--line)); }

@@ -172,5 +172,26 @@ function loadFundxUrl(searchStr) {
 ok("flag: ?fundx=1 forces on", loadFundxUrl("?fundx=1").enabled() === true);
 ok("flag: ?fundx=0 forces off", loadFundxUrl("?fundx=0").enabled() === false);
 
+// ---- M3 capture processing (pure helpers on window.FUNDX) ---------------
+const FX = loadFundx("1");
+const stats = { startTs: 0, attempts: 1, captures: 1, retries: 0, burstCount: 2, readinessTrace: [10, 50, 90] };
+const burst = [
+  { dataUrl: "data:image/jpeg;base64,AAAA", metrics: { focus: 0.9, exposure: 0.85, brightness: 0.5, contrast: 0.6, noise: 0.1, reflection: 0.1, retinaConf: 0.9, discConf: 0.9, maculaConf: 0.9, vesselVisibility: 0.7, fieldOfView: 0.9 } },
+  { dataUrl: "data:image/jpeg;base64,BBBB", metrics: { focus: 0.2, exposure: 0.3, reflection: 0.6, retinaConf: 0.1 } }
+];
+const res = FX._buildResult(burst, { ref: "MRN1", name: "Test" }, "right", stats);
+ok("capture: buildResult picks the best (sharp) frame", res && res.best === 0);
+ok("capture: buildResult quality accepted for good frame", res.quality.accepted === true);
+ok("capture: buildResult findings versioned + engine=vision", res.findings.engine === "vision" && res.findings.schemaVersion === 1);
+ok("capture: buildResult images set (orig+proc)", res.images.original === "data:image/jpeg;base64,AAAA" && !!res.images.processed);
+ok("capture: buildResult null on empty burst", FX._buildResult([], {}, "right", {}) === null);
+
+const rec = FX._buildScanRecord(res, { ref: "MRN1", name: "Test" }, "right", stats, { id: "fx_test", now: 1000 });
+ok("record: passes 9-field validation", V.validate.scanRecord(rec).ok === true);
+ok("record: all nine categories present", !!(rec.originalImage && rec.processedImage && rec.quality && rec.acquisition && rec.vision && rec.patientContext && rec.timestamp && rec.device && rec.provider && rec.audit));
+ok("record: provider carried from findings", rec.provider.provider === "mock");
+ok("record: acquisition captures eye + readiness trace", rec.acquisition.eye === "right" && rec.acquisition.readinessTrace.length === 3);
+ok("record: device app version + audit action present", !!rec.device.appVersion && rec.audit.actions[0].type === "created");
+
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);
