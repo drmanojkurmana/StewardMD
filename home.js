@@ -60,6 +60,9 @@
     }
     function reorganize() {
       var menu = document.getElementById("sbMenu"); if (!menu) return;
+      // The lean sidebar redesign (sidebar-redesign.js) owns #sbMenu when loaded; keep the
+      // harmless ICU-dashboard reroute below but skip the legacy grouped rebuild it replaces.
+      if (window.SMD_SBR) { try { if (window.INF && window.ICU && ICU.open && INF.openDashboard !== ICU.open) INF.openDashboard = ICU.open; } catch (e) {} return; }
       injectCSS();
       // Retire the OLD ICU dashboard: route every INF.openDashboard() caller (base sidebar
       // "ICU Dashboard" item, legacy links) to the NEW flagship ICU.open(). The new dashboard
@@ -2425,6 +2428,8 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     s.querySelectorAll("#hvHead button").forEach(function (b) { b.addEventListener("click", function () { ds.headingStyle = b.getAttribute("data-h"); applyD(); refreshD(); }); });
     refreshD();
   }
+  // Exposed so the sidebar's "Appearance & Theme" row opens the font & display sheet directly.
+  try { window.SMD_openDisplay = openDisplay; } catch (e) {}
   function refreshD() {
     var s = sheetEl(); if (!s) return;
     var fs = s.querySelector("#hvFs"); if (fs) fs.value = Math.round(ds.fontScale * 100);
