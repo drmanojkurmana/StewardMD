@@ -86,7 +86,7 @@
     return ensureConnected().then(function (okConn) {
       if (!okConn) { _busy = false; if (opts.manual) toast("Open Ward Sync and sign in to refresh."); return false; }
       _last[pid] = Date.now();
-      try { GHIS.loadIntoICU(pid, function () { _busy = false; if (opts.manual) toast("Refreshed from Ward Sync ✓"); }); }
+      try { GHIS.loadIntoICU(pid, function () { _busy = false; if (opts.manual) toast("Refreshed from Ward Sync ✓"); }, { silent: true }); }
       catch (e) { _busy = false; }
       // loadIntoICU is fire-and-forget (its own async); release busy shortly in case the callback never fires
       setTimeout(function () { _busy = false; }, 8000);
