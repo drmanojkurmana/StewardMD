@@ -2482,6 +2482,10 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
 
   /* ================= Notifications (🔔 bell → Notifications + Medical Updates) ================= */
   var NOTIF_API = "/api/updates", NOTIF_SEEN = "smd_updates_seen_ts", NOTIF_BM = "smd_updates_bm";
+  // Owner allowlist — mirrors functions/_adminauth.js OWNER_EMAILS. Client gate only shows the
+  // in-app Delete affordance; the server (ownerOK on DELETE /api/updates/:id) is the real enforcement.
+  var NOTIF_OWNERS = ["stewardmd.in@gmail.com", "drmanojkurmana@gmail.com"];
+  function nIsOwner() { try { var u = window.SMD_AUTH && SMD_AUTH.currentUser; return !!(u && u.email && NOTIF_OWNERS.indexOf(String(u.email).toLowerCase()) >= 0); } catch (e) { return false; } }
   var _notifItems = null;                 // Tab 1: manual app notices (auto=0)
   var _feedItems = [], _feedCursor = null, _feedEnd = false, _feedLoading = false;
   var _feedType = "all", _feedQ = "", _feedBranch = "all";
@@ -2709,6 +2713,21 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     if (!arr || !arr.length) return "";
     return '<div class="dt-sec"><h4>' + nEsc(title) + '</h4><ul>' + arr.map(function (x) { return "<li>" + nEsc(x) + "</li>"; }).join("") + '</ul></div>';
   }
+  // Prescribing snapshot for DRUG updates — concise pharma info (class/indications/dose/duration/
+  // contraindications) from the update's structured payload (summary_json.pharma). Only rendered for
+  // drug_approval / drug safety_alert items that actually carry pharma. Inline styles are theme-agnostic.
+  function pharmaSection(it, s) {
+    var ph = s && s.pharma;
+    if (!ph || !(it.type === "drug_approval" || it.type === "safety_alert")) return "";
+    function pr(lbl, val) {
+      if (!val || (Array.isArray(val) && !val.length)) return "";
+      var v = Array.isArray(val) ? val.map(nEsc).join("; ") : nEsc(val);
+      return '<div style="display:flex;gap:12px;padding:7px 0;border-bottom:1px solid rgba(128,128,128,.22)"><span style="flex:0 0 108px;opacity:.6;font-weight:600;font-size:12.5px">' + nEsc(lbl) + '</span><div style="flex:1;font-size:13.5px;line-height:1.5">' + v + '</div></div>';
+    }
+    var rows = pr("Class", ph.drug_class) + pr("Indications", ph.indications) + pr("Dose", ph.dose) + pr("Duration", ph.duration) + pr("Contraindications", ph.contraindications);
+    if (!rows) return "";
+    return '<div class="dt-sec"><h4>💊 Prescribing snapshot</h4>' + rows + '<div style="margin-top:8px;font-size:11.5px;opacity:.6">AI-summarised — verify against the official label before prescribing.</div></div>';
+  }
   function renderDetail(data) {
     var body = _detailRoot && _detailRoot.querySelector("#dtBody"); if (!body) return;
     if (!data || !data.item) { body.innerHTML = '<div class="ntf-empty">Couldn\'t load this update.</div>'; return; }
@@ -2733,6 +2752,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       '<h2>' + nEsc(it.title) + '</h2>' +
       '<div class="dt-sub">' + nEsc(it.organization || it.source || "") + (s.version ? " · " + nEsc(s.version) : "") + (it.ts ? " · " + nEsc(nDate(it.ts)) : "") + (it.workspace ? " · " + nEsc(WSLBL[it.workspace] || it.workspace) : "") + '</div></div>' +
       ((s.summary || it.summary) ? '<div class="dt-summary">' + nEsc(s.summary || it.summary) + '</div>' : "") +
+      pharmaSection(it, s) +
       detailSection("What's New", (s.major_changes || []).concat(s.new_recommendations || [])) +
       wc +
       detailSection("Clinical pearls", s.clinical_pearls) +
@@ -2743,7 +2763,9 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       '<div class="dt-actions">' +
         (it.url ? '<a class="dt-btn primary" href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Open Official Guideline</a>' : "") +
         '<button class="dt-btn" id="dtBookmark">' + (bmHas(it.id) ? "★ Bookmarked" : "☆ Bookmark") + '</button>' +
-        '<button class="dt-btn" id="dtShare">Share</button></div>';
+        '<button class="dt-btn" id="dtShare">Share</button>' +
+        (nIsOwner() ? '<button class="dt-btn" id="dtDelete" style="color:#dc2626;border-color:rgba(220,38,38,.4)">Delete</button>' : "") +
+        '</div>';
     var bm = body.querySelector("#dtBookmark");
     if (bm) bm.addEventListener("click", function () { bm.textContent = bmToggle(it.id) ? "★ Bookmarked" : "☆ Bookmark"; });
     var sh = body.querySelector("#dtShare");
@@ -2751,6 +2773,20 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var url = it.url || location.href, txt = it.title || "StewardMD medical update";
       if (navigator.share) { navigator.share({ title: txt, url: url }).catch(function () {}); }
       else { try { navigator.clipboard.writeText(txt + " — " + url); toast("Link copied"); } catch (e) {} }
+    });
+    var dl = body.querySelector("#dtDelete");
+    if (dl) dl.addEventListener("click", function () {
+      if (!confirm("Delete this notification for everyone? This can't be undone.")) return;
+      dl.disabled = true;
+      idToken().then(function (t) {
+        if (!t) { dl.disabled = false; if (window.toast) toast("Sign in as owner to delete"); return; }
+        fetch(NOTIF_API + "/" + encodeURIComponent(it.id), { method: "DELETE", headers: { "Authorization": "Bearer " + t } })
+          .then(function (r) { return r.json().catch(function () { return {}; }); })
+          .then(function (j) {
+            if (j && j.ok) { if (window.toast) toast("Deleted"); if (_detailRoot) _detailRoot.classList.remove("on"); try { fetchFeed(true).then(renderFeed); } catch (e) {} }
+            else { dl.disabled = false; if (window.toast) toast(j && j.error === "unauthorised" ? "Not an owner account" : "Couldn't delete"); }
+          }, function () { dl.disabled = false; if (window.toast) toast("Couldn't delete — check connection"); });
+      }, function () { dl.disabled = false; });
     });
   }
   function buildDetail() {

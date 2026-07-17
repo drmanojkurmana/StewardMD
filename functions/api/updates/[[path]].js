@@ -264,13 +264,17 @@ export async function onRequest(context) {
       const category = normCategory(body.category);
       const type = normType(body.type) || CAT_TYPE[category] || "guideline";
       const bodyText = String(body.body || "").trim().slice(0, 4000);
+      // Optional structured payload from the AI push box (e.g. a drug's pharma block). Stored in
+      // summary_json so the app detail view (data.structured) can render a prescribing snapshot.
+      const structured = (body.structured && typeof body.structured === "object" && !Array.isArray(body.structured)) ? body.structured : null;
+      const summaryJson = structured ? JSON.stringify(Object.assign({}, structured, { summary: bodyText })).slice(0, 12000) : "";
       const id = await repo.insertUpdate(env, {
         doc_key: String(body.url || "").slice(0, 500) || ("manual:" + repo.newId("m")),
         source_id: "manual", type, organization: String(body.source || "StewardMD").slice(0, 120),
         workspace: normWorkspace(body.workspace), branch: normBranch(body.branch), title, body: bodyText.slice(0, 240),
         category, published_ts: Date.now(), importance: normImportance(body.importance),
         est_read_min: Math.max(1, Math.round(bodyText.split(/\s+/).length / 200)) || 1,
-        summary: bodyText, summary_json: "", official_url: String(body.url || "").slice(0, 500),
+        summary: bodyText, summary_json: summaryJson, official_url: String(body.url || "").slice(0, 500),
         content_hash: "", auto: 0, pinned: !!body.pinned,
       });
       const detail = await repo.getById(env, id);

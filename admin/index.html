@@ -237,7 +237,7 @@
   var $=function(id){return document.getElementById(id);};
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
-  var vFilter="pending", activePane="overview";
+  var vFilter="pending", activePane="overview", _aiStructured=null;
   var PANES=["overview","notif","sources","logs","verif","push","watch","ai"];
   var TITLES={overview:"Overview",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",push:"Push blast",watch:"Lab-watch",ai:"AI usage"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
@@ -298,6 +298,7 @@
         if(dft.workspace) $("nWs").value=dft.workspace;
         $("nImp").value=dft.importance||"normal";
         $("nSrc").value=dft.organization||""; $("nUrl").value=dft.url||url;
+        _aiStructured=(dft.pharma||(dft.keywords&&dft.keywords.length))?{pharma:dft.pharma||null,keywords:dft.keywords||[]}:null;
         var note=(dft.type||"?")+" · "+(dft.workspace||"?")+" · "+(dft.importance||"normal")+(x.d.fetchNote?(" · "+x.d.fetchNote):"");
         if(pushNow){ say("aiMsg","ok","✅ Classified ("+note+") — publishing…"); nPublish(true); }
         else { say("aiMsg","ok","✅ Classified: "+note+". Review below, then Publish."); try{$("nTitle").scrollIntoView({behavior:"smooth",block:"center"});}catch(e){} }
@@ -311,8 +312,8 @@
   function nPublish(fromAi){
     var t=$("nTitle").value.trim(); if(!t){say("nMsg","err","Title required.");return;} say("nMsg","","Publishing…");
     var ty=$("nType").value;
-    api("/api/updates",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:t,body:$("nBody").value,type:(ty==="general"?"":ty),category:TYPE2CAT[ty]||"general",workspace:$("nWs").value,importance:$("nImp").value,source:$("nSrc").value,url:$("nUrl").value,pinned:$("nPin").checked})})
-      .then(function(x){ if(x.s===200&&x.d.ok){say("nMsg","ok","✅ Published & pushed.");$("nTitle").value="";$("nBody").value="";$("nUrl").value="";$("nSrc").value="";$("nPin").checked=false; if(fromAi){$("aiUrl").value="";$("aiPrompt").value="";say("aiMsg","ok","✅ Published & pushed.");} nLoad();} else say("nMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); })
+    api("/api/updates",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:t,body:$("nBody").value,type:(ty==="general"?"":ty),category:TYPE2CAT[ty]||"general",workspace:$("nWs").value,importance:$("nImp").value,source:$("nSrc").value,url:$("nUrl").value,pinned:$("nPin").checked,structured:_aiStructured})})
+      .then(function(x){ if(x.s===200&&x.d.ok){say("nMsg","ok","✅ Published & pushed.");$("nTitle").value="";$("nBody").value="";$("nUrl").value="";$("nSrc").value="";$("nPin").checked=false;_aiStructured=null; if(fromAi){$("aiUrl").value="";$("aiPrompt").value="";say("aiMsg","ok","✅ Published & pushed.");} nLoad();} else say("nMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); })
       .catch(function(){say("nMsg","err","Sign in first.");});
   }
   function nSync(){ say("nMsg","","Running sync…"); api("/api/updates/sync",{method:"POST"}).then(function(x){ if(x.s===200&&x.d.ok!==false){say("nMsg","ok","✅ new="+(x.d.new||0)+" updated="+(x.d.updated||0)+" unchanged="+(x.d.unchanged||0));nLoad();} else say("nMsg","err","Failed: "+(x.d.error||x.s)); }); }

@@ -160,11 +160,17 @@ const CLASSIFY_SYS =
   "Return ONLY JSON (no prose, no markdown fence) with EXACTLY these keys:\n" +
   "{\"type\":\"guideline\"|\"drug_approval\"|\"safety_alert\"|\"trial\", \"workspace\":one of [" + WORKSPACES.join(", ") + "], " +
   "\"title\":string, \"organization\":string, \"summary\":string, \"importance\":\"normal\"|\"high\"|\"critical\", " +
-  "\"keywords\":[string]}.\n" +
+  "\"keywords\":[string], " +
+  "\"pharma\":{\"drug_class\":string, \"indications\":[string], \"dose\":string, \"duration\":string, \"contraindications\":[string]}}.\n" +
   "GUIDANCE: choose the single best type and the single most relevant specialty workspace. \"summary\" is original " +
   "prose, AT MOST 120 words, usable as both a push-notification body and a feed card. \"importance\": 'critical' for " +
   "withdrawals/boxed warnings/bans, 'high' for practice-changing guidelines or major approvals, else 'normal'. " +
-  "\"title\" <= 140 characters. No text outside the JSON.";
+  "\"title\" <= 140 characters.\n" +
+  "PHARMA: fill \"pharma\" ONLY for a drug (type drug_approval, or a safety_alert about a specific drug) — give the " +
+  "drug class, key licensed indication(s), the usual adult dose/route, typical duration, and the main " +
+  "contraindications/black-box cautions, each concise. Use ONLY facts present in the source/note; NEVER invent a dose, " +
+  "number, or contraindication — leave a field empty ('' or []) if not stated. For non-drug items set every pharma " +
+  "field empty. No text outside the JSON.";
 
 export async function classifyDocument(env, meta) {
   meta = meta || {};
@@ -181,11 +187,20 @@ export async function classifyDocument(env, meta) {
   let lastErr = null;
   for (const model of models) {
     try {
-      const text = await callGemini(Object.assign({}, env, { GEMINI_MODEL: model }), [{ text: CLASSIFY_SYS + "\n\n" + block }], 800, { temperature: 0.2 });
+      const text = await callGemini(Object.assign({}, env, { GEMINI_MODEL: model }), [{ text: CLASSIFY_SYS + "\n\n" + block }], 1100, { temperature: 0.2 });
       const p = parseJsonLoose(text);
       if (p && (p.title || p.summary)) {
         if (gate.meter) { try { await recordUsage(gate, { inTok: estTokens(CLASSIFY_SYS.length + block.length), outTok: estTokens((text || "").length), status: "success" }); } catch (e) {} }
         const type = CLASSIFY_TYPES.indexOf(String(p.type || "").toLowerCase().trim()) >= 0 ? String(p.type).toLowerCase().trim() : "guideline";
+        const ph = (p.pharma && typeof p.pharma === "object") ? p.pharma : {};
+        const pharma = {
+          drug_class: String(ph.drug_class || "").slice(0, 140),
+          indications: arr(ph.indications),
+          dose: String(ph.dose || "").slice(0, 400),
+          duration: String(ph.duration || "").slice(0, 300),
+          contraindications: arr(ph.contraindications),
+        };
+        const hasPharma = !!(pharma.drug_class || pharma.dose || pharma.duration || pharma.indications.length || pharma.contraindications.length);
         const draft = {
           type,
           workspace: normWorkspace(p.workspace, "internal_medicine"),
@@ -195,6 +210,8 @@ export async function classifyDocument(env, meta) {
           importance: normImportance(p.importance),
           keywords: arr(p.keywords),
           url: String(meta.url || "").slice(0, 500),
+          // pharma only meaningful for drug items; the app renders it only when non-empty.
+          pharma: (hasPharma && (type === "drug_approval" || type === "safety_alert")) ? pharma : null,
         };
         return { ok: true, draft, model };
       }
