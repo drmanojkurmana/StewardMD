@@ -17,6 +17,18 @@ import { nativePushEnabled, sendNativeToAll } from "./_nativepush.js";
 const PROJECT_DEFAULT = "stewardmd-498ec";
 const PRIO_LABEL = { immediate: "Immediate", high: "High", moderate: "Moderate", low: "Low" };
 
+// identify() (functions/_fbauth.js) namespaces authenticated callers as "fb:<firebaseUid>", and
+// native push TOKENS are stored under that namespaced id. But ICU membership docs
+// (icuGroups/{gid}/members/{uid}) are keyed by the RAW Firebase uid the client writes
+// (currentUser.uid). Membership lookups therefore need the RAW uid; token sends need the namespaced
+// id. Mixing them silently broke BOTH paths — every membership check 403'd ("not-a-member", even for
+// the unit head) and every push resolved to 0 tokens. rawUid() strips the namespace for Firestore
+// membership; tokUid() restores it for the KV token store (member uids ARE Firebase uids, registered
+// via identify() as "fb:"+uid), so both accept either form and normalise correctly.
+const ID_NS = "fb:";
+function rawUid(u) { return typeof u === "string" && u.indexOf(ID_NS) === 0 ? u.slice(ID_NS.length) : u; }
+function tokUid(u) { return ID_NS + rawUid(u); }
+
 function fsBase(env) { return `https://firestore.googleapis.com/v1/projects/${env.FIREBASE_PROJECT_ID || PROJECT_DEFAULT}/databases/(default)/documents`; }
 function saTok(env) { return serviceAccountToken(env, "https://www.googleapis.com/auth/datastore"); }
 
@@ -73,7 +85,7 @@ async function fsPatchField(env, tok, path, field, valueObj) {
 export async function isGroupMember(env, gid, uid) {
   if (!gid || !uid) return false;
   const tok = await saTok(env);
-  const m = await fsGet(env, tok, `/icuGroups/${gid}/members/${uid}`, ["uid"]);
+  const m = await fsGet(env, tok, `/icuGroups/${gid}/members/${rawUid(uid)}`, ["uid"]);
   return !!m;
 }
 
@@ -108,7 +120,7 @@ export async function escalateOverdueTask(env, gid, pid, taskId, now) {
   };
   const uids = [...new Set((members || []).map((m) => m.uid).filter(Boolean))];
   let sent = 0;
-  for (const uid of uids) { try { const r = await sendNativeToAll(env, msg, { uid }); sent += (r && r.sent) || 0; } catch (e) { /* skip */ } }
+  for (const uid of uids) { try { const r = await sendNativeToAll(env, msg, { uid: tokUid(uid) }); sent += (r && r.sent) || 0; } catch (e) { /* skip */ } }
   // Only stamp escalatedAt (which permanently blocks any future retry, here and in the client's
   // matching `if (t.escalatedAt) return` guard) once the push actually reached a device, OR once
   // it's old enough that further retries aren't worth it. BUG FIXED: this used to stamp
@@ -155,10 +167,11 @@ export async function notifyNewInstruction(env, gid, pid, byUid, info) {
     tag: "icu-instr-" + pid,
     url: "https://stewardmd.in/",
   };
-  let recipients = [...new Set((members || []).map((m) => m.uid).filter(Boolean))].filter((u) => u !== byUid);
-  if (!recipients.length && byUid) recipients = [byUid];   // solo unit → notify the author so it's verifiable
+  const byRaw = rawUid(byUid);   // author id normalised to the raw uid the member docs use
+  let recipients = [...new Set((members || []).map((m) => m.uid).filter(Boolean))].filter((u) => rawUid(u) !== byRaw);
+  if (!recipients.length && byRaw) recipients = [byRaw];   // solo unit → notify the author so it's verifiable
   let sent = 0;
-  for (const uid of recipients) { try { const r = await sendNativeToAll(env, msg, { uid }); sent += (r && r.sent) || 0; } catch (e) { /* skip */ } }
+  for (const uid of recipients) { try { const r = await sendNativeToAll(env, msg, { uid: tokUid(uid) }); sent += (r && r.sent) || 0; } catch (e) { /* skip */ } }
   return { notified: recipients.length, sent, priority: prio };
 }
 
