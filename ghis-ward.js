@@ -462,14 +462,15 @@
               .catch(function () {});
           } catch (e) {}
         },
-        loadIntoICU: function(patientId, after) {
-          if (!window.ICU || !ICU.ingestFromWard) { alert('ICU dashboard not loaded.'); return; }
+        loadIntoICU: function(patientId, after, opts) {
+          opts = opts || {};   // opts.silent → background ingest only: no panel change, no navigation, no toast (auto-sync)
+          if (!window.ICU || !ICU.ingestFromWard) { if (!opts.silent) alert('ICU dashboard not loaded.'); return; }
           var p = null, list = (typeof _patients !== 'undefined' && _patients) || [];
           for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
           var dem = demoFromPatient(p);
           var pnl = document.getElementById('ghisPanel');
           var body = pnl ? pnl.querySelector('.ghis-body') : null;
-          if (body) body.innerHTML = '<div class="ghis-loading">Syncing labs into ICU dashboard…</div>';
+          if (!opts.silent && body) body.innerHTML = '<div class="ghis-loading">Syncing labs into ICU dashboard…</div>';
           GHIS._patientId = patientId;
           // Fetch recent lab panels and flatten to test/result/ref rows for ICU's safe mapper.
           var labs = [];
@@ -486,23 +487,23 @@
               ? ICU.ingestWardHistory({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs })
               : ICU.ingestFromWard({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs }));
             // Open the dashboard IMMEDIATELY after the lab sync — imaging must never block it.
-            try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
-            // Land on the just-synced patient workspace. 'overview' is a valid RENDER target, so
-            // ICU.open sets _screen="patient" SYNCHRONOUSLY — the group->Firestore mirror is then not
-            // gated out by a board flip, and the user sees the data they just synced (not the board).
-            ICU.open('overview');
+            // AUTO-SYNC (opts.silent): ingest in the BACKGROUND only — never close the Ward Sync panel,
+            // navigate to the dashboard, or toast. This is what stops auto-sync from yanking the user into
+            // the ICU dashboard while they're on a calculator / home. A user-initiated load (Lab Watch)
+            // still opens the workspace + toasts. Either way the reactive ICU state repaints if it's open.
+            if (!opts.silent) { try { if (pnl) pnl.classList.remove('open'); } catch (e) {} ICU.open('overview'); }
             try { if (typeof after === 'function') after(); } catch (e) {}
-            try { if (window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
+            try { if (!opts.silent && window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
             // Radiology (TEXT only) streams in ASYNCHRONOUSLY when the feature is on. The ICU state
             // subscription repaints the Imaging tab when records arrive; a slow/failed/hung fetch
             // can never stall the dashboard (which already opened above).
             if (ICU.ingestWardImaging && (!ICU.imagingOn || ICU.imagingOn())) {
               GHIS.fetchImaging(patientId).then(function (records) {
                 var ir = ICU.ingestWardImaging({ patientId: patientId, source: 'Ward Sync', imaging: records });
-                try { if (window.toast && ir && ir.added) toast(ir.added + ' imaging report' + (ir.added === 1 ? '' : 's') + ' imported'); } catch (e) {}
+                try { if (!opts.silent && window.toast && ir && ir.added) toast(ir.added + ' imaging report' + (ir.added === 1 ? '' : 's') + ' imported'); } catch (e) {}
               }).catch(function () {});
             }
-          }).catch(function (e) { if (body) body.innerHTML = '<div class="ghis-lab-empty">Couldn’t load labs right now. Please try again.</div>'; });
+          }).catch(function (e) { if (!opts.silent && body) body.innerHTML = '<div class="ghis-lab-empty">Couldn’t load labs right now. Please try again.</div>'; });
         },
         // Tick-to-add: build FULL demographics + fetch labs, then file the patient into the CURRENTLY
         // selected unit's board WITHOUT navigating (ICU.addWardPatientToRoster). Supports multi-add.
