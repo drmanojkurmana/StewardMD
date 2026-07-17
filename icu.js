@@ -49,6 +49,7 @@
     src: {},                    // per-field provenance: { <field>: { source, ts } } source ∈ Ward Sync|Imported report|Manual
     wardSync: { connected: false, lastTs: null, newUpdate: false, patientId: null },
     conflicts: [],              // [{ key, label, ward, manual, wardTs, manualTs }] — clinician resolves
+    manualScores: {},           // { <scoreId>: { value, unit, info, ts } } — results the clinician computed in the full calculator; shown on the Scores panel + persisted with the case
     meta: { updated: null }
   };
   var LS_KEY = "stewardmd_icu_state";                       // legacy (unscoped) key — migrated once
@@ -876,6 +877,7 @@
       '.icu-score-n{font:800 13px var(--font)}' +
       '.icu-score-v{font:800 13px var(--font);color:var(--primary)}' +
       '.icu-score-i{flex:1 1 100%;font:600 12px/1.45 var(--font);color:var(--muted)}' +
+      '.icu-score-calc{font:800 9px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent);border-radius:5px;padding:2px 6px;white-space:nowrap}' +
       '.icu-score.miss{opacity:.6;cursor:pointer}' +
       '.icu-score-need{font:600 12px var(--font);color:var(--muted);font-style:italic}' +
       '.icu-score-sug{margin-top:10px;font:600 12px/1.6 var(--font);color:var(--muted)}' +
@@ -2714,21 +2716,41 @@
     try { var arr = (window.MEDCALC && MEDCALC._calcs) || []; for (var i = 0; i < arr.length; i++) if (arr[i].id === id) return arr[i].title; } catch (e) {}
     return id;
   }
+  // Store a score result the clinician computed in the full calculator (MEDCALC) back onto the
+  // patient, so it shows on the Scores panel + persists with the case. Scalar (out.v) results only;
+  // html/err results are ignored. Passed as MEDCALC.open's onResult (fires on an explicit Calculate).
+  function icuStoreCalcResult(id, out) {
+    if (!id || !out || out.err || out.v == null) return;
+    if (!STATE.manualScores) STATE.manualScores = {};
+    var info = (typeof out.i === "string") ? out.i.replace(/<[^>]*>/g, "") : "";
+    STATE.manualScores[id] = { value: String(out.v), unit: out.u || "", info: info, ts: nowTs() };
+    try { recompute(_raw); } catch (e) {}
+    try { paint(); } catch (e) {}
+  }
   function renderScoresPanel() {
     var rows = _raw.scores || [];
+    var ms = _raw.manualScores || {};
     var dx = (_raw.patient && (_raw.patient.workingDx || _raw.patient.diagnosis)) || "";
     var linkIds = (window.CALC_LINKS && dx) ? CALC_LINKS.forText(dx) : [];
     var done = {}; rows.forEach(function (r) { done[r.id] = 1; });
-    var suggest = linkIds.filter(function (id) { return !done[id]; });
-    if (!rows.length && !suggest.length) return "";
+    var manualExtra = Object.keys(ms).filter(function (id) { return !done[id]; });   // clinician-calculated, not auto-computed (e.g. from a suggested chip)
+    var suggest = linkIds.filter(function (id) { return !done[id] && !ms[id]; });
+    if (!rows.length && !suggest.length && !manualExtra.length) return "";
+    var badge = ' <span class="icu-score-calc">✓ calculated</span>';
+    var scoreRow = function (id, label, val, unit, info, manual) {
+      return '<div class="icu-score" data-icu-act="calc:' + esc(id) + '"><span class="icu-score-n">' + esc(label) + '</span><span class="icu-score-v">' + esc(val + (unit ? " " + unit : "")) + '</span>' + (manual ? badge : "") + (info ? '<span class="icu-score-i">' + esc(info) + '</span>' : "") + '</div>';
+    };
     var body = rows.map(function (r) {
-      if (r.missing) return '<div class="icu-score miss" data-icu-act="calc:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-need">needs: ' + esc(r.missing.join(", ")) + '</span></div>';
+      var m = ms[r.id];
+      if (r.missing && !m) return '<div class="icu-score miss" data-icu-act="calc:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-need">needs: ' + esc(r.missing.join(", ")) + '</span></div>';
+      if (m) return scoreRow(r.id, r.label, m.value, m.unit, m.info, true);
       var iv = r.interp ? String(r.interp).replace(/<[^>]*>/g, "") : "";
-      return '<div class="icu-score" data-icu-act="calc:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-v">' + esc(String(r.value) + (r.unit ? " " + r.unit : "")) + '</span>' + (iv ? '<span class="icu-score-i">' + esc(iv) + '</span>' : "") + '</div>';
+      return scoreRow(r.id, r.label, String(r.value), r.unit || "", iv, false);
     }).join("");
+    body += manualExtra.map(function (id) { var m = ms[id]; return scoreRow(id, scoreCalcTitle(id), m.value, m.unit, m.info, true); }).join("");
     var sug = suggest.length ? '<div class="icu-score-sug">Suggested for “' + esc(dx) + '”: ' + suggest.map(function (id) { return '<button type="button" class="icu-score-chip" data-icu-act="calc:' + esc(id) + '">' + esc(scoreCalcTitle(id)) + '</button>'; }).join(" ") + '</div>' : "";
     return '<div class="icu-sec-lbl">📊 Scores</div><div class="icu-card">' + body + sug +
-      '<p class="icu-doc-sub" style="margin:8px 0 0">Auto-calculated from entered data — tap any score to open the full calculator and confirm. Decision-support only.</p></div>';
+      '<p class="icu-doc-sub" style="margin:8px 0 0">Auto-calculated from entered data — tap any score to open the full calculator; your calculated results are saved here. Decision-support only.</p></div>';
   }
 
   var RENDER = {
@@ -6753,7 +6775,7 @@
     var ix = act.indexOf(":"), cmd = ix < 0 ? act : act.slice(0, ix), arg = ix < 0 ? "" : act.slice(ix + 1);
     switch (cmd) {
       case "close": ICU.close(); break;
-      case "calc": { var _scp = (STATE.scores || []).filter(function (x) { return x.id === arg && x.inputs; })[0]; try { if (window.MEDCALC && MEDCALC.open) { MEDCALC.open(arg, _scp ? _scp.inputs : undefined); var _mc = document.getElementById("mcOverlay"); if (_mc) _mc.style.zIndex = "10030"; /* lift the calculator ABOVE #icuRoot (z 10000), else it opens hidden behind the dashboard */ } } catch (e) {} break; }
+      case "calc": { var _scp = (STATE.scores || []).filter(function (x) { return x.id === arg && x.inputs; })[0]; try { if (window.MEDCALC && MEDCALC.open) { MEDCALC.open(arg, _scp ? _scp.inputs : undefined, icuStoreCalcResult); var _mc = document.getElementById("mcOverlay"); if (_mc) _mc.style.zIndex = "10030"; /* lift the calculator ABOVE #icuRoot (z 10000), else it opens hidden behind the dashboard */ } } catch (e) {} break; }
       case "tab": if (icuV2On()) _screen = "patient"; _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
       case "ws": { if (icuV2On()) _screen = "patient"; _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
       // ---- ICU v2 (smd_icu_v2) — board / alerts / team / admit / filter, all flag-only ----
