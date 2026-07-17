@@ -294,8 +294,10 @@
     try {
       var q = (location.search.match(/[?&]icugroups=([^&]+)/) || [])[1];
       if (q != null) return q === "1" || q === "on" || q === "true";
-      return localStorage.getItem("smd_icu_groups") === "1";
-    } catch (e) { return false; }
+      // Default ON: shared-unit mode is the primary ICU experience now. Only an explicit "0"
+      // (user chose solo in Settings) turns it off.
+      return localStorage.getItem("smd_icu_groups") !== "0";
+    } catch (e) { return true; }
   }
   function groupsApi() { try { return (typeof window !== "undefined" && window.SMD_ICU_GROUPS) || null; } catch (e) { return null; } }
   function groupMode() { return icuV2On() && icuGroupsOn() && !!groupsApi(); }
@@ -3050,33 +3052,22 @@
     },
     more: function () {
       var n = rosterCount();
-      // The ONE ICU toggle: solo (this device) vs shared Group mode. v2 is now the only ICU, so
-      // there is no longer a separate "new/classic" toggle — just this. Flips smd_icu_groups + reloads.
-      var grpOn = icuGroupsOn();
-      var grpCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Group mode</div>' +
-        '<p class="icu-doc-sub" style="margin:0 0 10px">' + (grpOn
-          ? "Group mode is ON — shared units. Tap to switch to solo ICU."
-          : "Solo ICU (this device). Tap to turn on shared units — invite your team, shared patients & round tasks.") + '</p>' +
-        '<button class="icu-btn' + (grpOn ? " ghost" : "") + '" data-icu-act="grptoggle">' + (grpOn
-          ? ico("refresh", "↩") + " Group mode ON — switch to solo ICU"
-          : ico("user", "👥") + " Turn on Group mode (shared units)") + '</button></div>';
-      // Every classic header-chip action folds in here (nothing lost): Patient details, Save/update,
-      // Saved patients, Ward Sync, Lab Watch (per-patient), Share case, and a guarded Clear.
-      return grpCard +
-        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("more", "⋯") + ' Patient &amp; tools</div>' +
+      // PATIENT-scoped tools ONLY. Unit/app settings (Group mode, notification preferences, test
+      // notification) now live on the unit Settings screen (bottom bar → Settings), so per-patient
+      // actions and app-level settings are no longer mixed. Grouped: this patient · library · danger.
+      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "🧑") + ' This patient</div>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Patient details</button>' +
         '<button class="icu-btn ghost" data-icu-act="savept">' + ico("save", "💾") + ' Save / update this patient</button>' +
-        '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients' + (n ? " (" + n + ")" : "") + '</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Ward Sync</button>' +
         (labWatchOn() ? '<button class="icu-btn ghost" data-icu-act="labwatch">' + ico("bell", "🔔") + ' Lab Watch' + (lwActive() ? " (watching)" : "") + '</button>' : "") +
-        '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share case</button>' +
-        "" /* classic coach link retired in v2 */ +
-        (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") +
+        '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share case</button></div>' +
+        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("folder", "📋") + ' Library &amp; help</div>' +
+        '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients' + (n ? " (" + n + ")" : "") + '</button>' +
+        (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") + '</div>' +
+        '<div class="icu-card" style="border-color:var(--danger)"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("warn", "⚠️") + ' Danger zone</div>' +
+        '<p class="icu-doc-sub" style="margin:0 0 10px">Affects only this patient — can\'t be undone.</p>' +
         '<button class="icu-btn ghost" data-icu-act="clearfindings">' + ico("trash", "🧹") + ' Clear current findings</button>' +
-        '<button class="icu-btn ghost" data-icu-act="tab:discharge">' + ico("rounds", "📝") + ' Discharge &amp; remove patient</button>' +
-        '</div>' +
-        '<button class="icu-btn ghost" data-icu-act="testpush" style="margin-top:8px">' + ico("bell", "🔔") + ' Send me a test notification</button>' +
-        (grpActive() ? '<button class="icu-btn ghost" data-icu-act="notifprefs" style="margin-top:8px">' + ico("settings", "⚙️") + ' Notification preferences</button>' : "") +
+        '<button class="icu-btn ghost" data-icu-act="tab:discharge">' + ico("rounds", "📝") + ' Discharge &amp; remove patient</button></div>' +
         '<p class="icu-doc-sub" style="text-align:center;margin-top:16px;opacity:.55">StewardMD ICU · ' + esc(icuBuildVer() || "build") + '</p>';
     }
   };
@@ -3389,7 +3380,8 @@
       { label: "Monitoring", act: "ws:monitoring", on: _ws === "monitoring" },
       { label: "Care Plan", act: "ws:careplan", on: _ws === "careplan" },
       { label: "Rounds", act: "tab:rounds", on: _active === "rounds", badge: openTasks },
-      { label: "Documents", act: "ws:documents", on: _ws === "documents" }
+      { label: "Documents", act: "ws:documents", on: _ws === "documents" },
+      { label: "More", act: "tab:more", on: _active === "more" }
     ];
     return '<div class="icu-v2-tabwrap"><div class="icu-v2-tabs">' + tabs.map(function (t) {
       return '<button class="icu-v2-tab' + (t.on ? " on" : "") + '" data-icu-act="' + t.act + '">' + esc(t.label) + (t.badge ? '<span class="icu-v2-tabbadge">' + t.badge + '</span>' : "") + '</button>';
@@ -3508,12 +3500,32 @@
       { k: "board", label: "Unit", al: "Unit board", act: "icuboard", svg: "list", em: "🏥" },
       { k: "alerts", label: "Alerts", al: "Alerts / notifications", act: "icualerts", svg: "bell", em: "🔔" },
       { k: "team", label: "Team", al: "Care team", act: "icuteam", svg: "user", em: "👥" },
-      { k: "more", label: "Settings", al: "Settings & tools", act: "icumore", svg: "sliders", em: "⚙" }
+      { k: "settings", label: "Settings", al: "Unit settings", act: "icusettings", svg: "sliders", em: "⚙" }
     ];
     return '<nav class="icu-v2-bottombar" aria-label="ICU navigation">' + items.map(function (it) {
-      var on = (it.k === "more") ? (_screen === "patient" && _active === "more") : (_screen === it.k);
+      var on = (_screen === it.k);
       return '<button class="icu-v2-navbtn' + (on ? " on" : "") + '" data-icu-act="' + it.act + '" aria-label="' + esc(it.al) + '"' + (on ? ' aria-current="page"' : '') + '><span class="icu-v2-navic">' + ico(it.svg, it.em) + '</span><span>' + it.label + '</span></button>';
     }).join("") + '<button class="icu-v2-navbtn icu-v2-admit" data-icu-act="icuadmit" aria-label="Admit patient"><span class="icu-v2-admit-ic">' + ico("plus", "＋") + '</span><span>Admit</span></button></nav>';
+  }
+  // Unit-level ICU settings — GLOBAL toggles only (Group mode + notifications), deliberately kept
+  // OUT of the per-patient More tab so patient actions and app settings aren't mixed. Reached from
+  // the bottom bar → Settings; works with or without a patient open.
+  function renderV2Settings() {
+    var grpOn = icuGroupsOn();
+    var grpCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Group mode</div>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">' + (grpOn
+        ? "Group mode is ON — shared units with your team: shared patients, round tasks and alerts. Tap to switch to solo ICU on this device."
+        : "Solo ICU (this device only). Tap to turn on shared units — invite your team, shared patients & round tasks.") + '</p>' +
+      '<button class="icu-btn' + (grpOn ? " ghost" : "") + '" data-icu-act="grptoggle">' + (grpOn
+        ? ico("refresh", "↩") + " Switch to solo ICU"
+        : ico("user", "👥") + " Turn on Group mode") + '</button></div>';
+    var notifCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Notifications</div>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">Choose which unit alerts reach you, and check that push is working on this device.</p>' +
+      (grpActive() ? '<button class="icu-btn ghost" data-icu-act="notifprefs">' + ico("settings", "⚙️") + ' Notification preferences</button>' : "") +
+      '<button class="icu-btn ghost" data-icu-act="testpush"' + (grpActive() ? ' style="margin-top:8px"' : '') + '>' + ico("bell", "🔔") + ' Send me a test notification</button></div>';
+    var ver = '<p class="icu-doc-sub" style="text-align:center;margin:2px 0 0;opacity:.55">StewardMD ICU · ' + esc(icuBuildVer() || "build") + '</p>';
+    var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Settings</div><div class="icu-v2-shead-s">Unit &amp; notifications</div></div></div>';
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-slist">' + grpCard + notifCard + ver + '</div></div>';
   }
   // Notifications — deterministic acuity across the roster (local in Phase 1; the LIVE shared unit
   // in group mode). Real event-stream notifications land in a later phase.
@@ -4792,7 +4804,7 @@
     // shows the origin the request targeted, and the reason gives the HTTP status / error — so one
     // screenshot pinpoints the failing layer instead of a generic "check your connection". Only shows
     // on failure; trim the bracket once push is confirmed working end-to-end on device.
-    var VER = "g418";
+    var VER = "g419";
     var base = window.SMD_API_BASE || "(relative)";
     function fail(reason) { note("error", "Push failed — teammates not alerted. [" + VER + " · " + base + " · " + reason + "]"); }
     try {
@@ -4967,6 +4979,8 @@
       rootEl.innerHTML = renderV2RoundNote();   // Phase 3: full-screen round-note composer (no bottom bar)
     } else if (_screen === "alerts") {
       rootEl.innerHTML = renderV2Alerts() + renderV2BottomBar();
+    } else if (_screen === "settings") {
+      rootEl.innerHTML = renderV2Settings() + renderV2BottomBar();
     } else if (_screen === "team") {
       rootEl.innerHTML = renderV2Team() + renderV2BottomBar();
     } else if (grpActive() && _grpPtId && _grpPtVM === null) {
@@ -6579,6 +6593,7 @@
       case "icuteam": _screen = "team"; _paintTop = true; paint(); break;
       case "icuadmit": _admitting = true; _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); break;
       case "icumore": _screen = "patient"; _active = "more"; _ws = "more"; _paintTop = true; paint(); break;
+      case "icusettings": _screen = "settings"; _paintTop = true; paint(); break;   // unit-level settings (group mode + notifications), separate from per-patient tools
       case "testpush": grpTestPush(); break;
       case "notifprefs": grpOpenNotifPrefs(); break;   // per-user ICU notification category toggles
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
@@ -6591,7 +6606,7 @@
       case "unitback": _pickStep = "category"; _paintTop = true; paint(); break;
       case "unitsel": { var _uc = arg.indexOf(":"); selectUnit({ cat: arg.slice(0, _uc), type: decodeURIComponent(arg.slice(_uc + 1)) }); _paintTop = true; paint(); break; }
       case "unitgrpnew": grpOpenCreate(arg); break;
-      case "grptoggle": try { if (localStorage.getItem("smd_icu_groups") === "1") localStorage.removeItem("smd_icu_groups"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
+      case "grptoggle": try { if (icuGroupsOn()) localStorage.setItem("smd_icu_groups", "0"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
       // ---- ICU v2 group mode (smd_icu_groups, Phase 2) — unit switcher / create / invite / tasks ----
       case "grppick": grpOpenPicker(); break;
       case "grpsel": { var _gsel = grpById(decodeURIComponent(arg)); if (_gsel) grpSelect(_gsel, false); closeForm(); if (_screen === "units") { _screen = "board"; _paintTop = true; paint(); } break; }
