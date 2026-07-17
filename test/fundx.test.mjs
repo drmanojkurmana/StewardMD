@@ -214,5 +214,24 @@ ok("training: L4 needs red reflex", FXt._levelAchieved(4, { redReflex: true }, {
 ok("training: L7 needs readiness.ready", FXt._levelAchieved(7, {}, { ready: true }) === true && FXt._levelAchieved(7, {}, { ready: false }) === false);
 ok("fundx: training screen wired", /function screenTraining\(/.test(fj) && /screen === "training"/.test(fj) && /data-fx="level"/.test(fj));
 
+// ---- M9 Timeline + Compare (pure helpers) -------------------------------
+const FXtl = loadFundx("1");
+function scan(id, ts, q, cdr) { return { id: id, timestamp: ts, quality: { overall: q }, vision: { findings: { optic_disc: { cup_disc_ratio: cdr } } } }; }
+const scans = [scan("a", 300, 90, 0.5), scan("b", 100, 70, 0.4), scan("c", 200, 80, 0.45)];
+const qt = FXtl._trend(scans, "quality");
+ok("timeline: trend sorted ascending by time", qt.length === 3 && qt[0].t === 100 && qt[2].t === 300);
+ok("timeline: quality trend values", qt[0].v === 70 && qt[2].v === 90);
+const ct = FXtl._trend(scans, "cdr");
+ok("timeline: cdr trend reads optic_disc.cup_disc_ratio", ct[2].v === 0.5);
+ok("timeline: trend drops null metrics", FXtl._trend([{ timestamp: 1, quality: {} }], "quality").length === 0);
+const d = FXtl._compareDelta(scan("b", 100, 70, 0.4), scan("a", 300, 90, 0.5));
+ok("compare: quality delta", d.qualityDelta === 20);
+ok("compare: cdr delta rounded", d.cdrDelta === 0.1);
+ok("compare: days apart (200ms → 0 days)", d.days === 0);
+const dDays = FXtl._compareDelta(scan("x", 0, 70, 0.4), scan("y", 3 * 86400000, 90, 0.5));
+ok("compare: days apart (3 days)", dDays.days === 3);
+ok("compare: null-safe when metric missing", FXtl._compareDelta({ timestamp: 1 }, { timestamp: 2 }).qualityDelta === null);
+ok("fundx: timeline + compare screens wired", /function screenTimeline\(/.test(fj) && /function screenCompare\(/.test(fj) && /screen === "timeline"/.test(fj) && /screen === "compare"/.test(fj));
+
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);

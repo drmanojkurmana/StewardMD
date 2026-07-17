@@ -226,3 +226,16 @@
   #fundxRoot .fundx-flash.on { animation: none; opacity: 0; }
   #fundxRoot .fundx-ring-fg { transition: none; }
 }
+
+/* ============ M9 — Timeline + Compare ============ */
+#fundxRoot .fundx-trend { border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px); background: var(--rds-surface, var(--panel, #fff)); padding: 14px; }
+#fundxRoot .fundx-trend-h { display: flex; align-items: baseline; justify-content: space-between; font: 600 12px var(--rds-font, system-ui); color: var(--rds-muted, var(--slate-soft)); }
+#fundxRoot .fundx-trend-h b { font: 800 20px var(--rds-mono, monospace); color: var(--rds-primary, var(--teal)); }
+#fundxRoot .fundx-spark { display: block; width: 100%; height: 48px; margin-top: 8px; }
+#fundxRoot .fundx-spark polyline { fill: none; stroke: var(--rds-primary, var(--teal)); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+#fundxRoot .fundx-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#fundxRoot .fundx-cmp-side { min-width: 0; }
+#fundxRoot .fundx-cmp-lbl { font: 700 11px var(--rds-font, system-ui); color: var(--rds-muted, var(--slate-soft)); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
+#fundxRoot .fundx-cmp .fundx-shot { aspect-ratio: 1/1; max-width: none; }
+#fundxRoot .fundx-frow b.d-up { color: var(--sev-urgent-fg, #C2410C); }
+#fundxRoot .fundx-frow b.d-down { color: var(--sev-stable-fg, #1C7A4A); }

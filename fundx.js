@@ -329,6 +329,83 @@
     st.deleteScan(id).then(function () { haptic("warning"); toast("Scan deleted."); detail = null; show("home"); }).catch(function () { toast("Could not delete scan."); });
   }
 
+  // ---- Timeline + Compare (pure helpers are unit-tested) ------------------
+  // Chronological metric series for a set of scans. key: "quality" | "cdr".
+  function trend(scans, key) {
+    return (scans || []).slice().sort(function (a, b) { return (a.timestamp || 0) - (b.timestamp || 0); })
+      .map(function (s) {
+        var v = null;
+        if (key === "quality") v = s.quality && s.quality.overall != null ? s.quality.overall : null;
+        else if (key === "cdr") { var od = s.vision && s.vision.findings && s.vision.findings.optic_disc; v = od && od.cup_disc_ratio != null ? od.cup_disc_ratio : null; }
+        return { t: s.timestamp || 0, v: v };
+      }).filter(function (p) { return p.v != null; });
+  }
+  // Delta between an older scan `a` and a newer scan `b`.
+  function compareDelta(a, b) {
+    function q(s) { return s && s.quality && s.quality.overall != null ? s.quality.overall : null; }
+    function cdr(s) { var od = s && s.vision && s.vision.findings && s.vision.findings.optic_disc; return od && od.cup_disc_ratio != null ? od.cup_disc_ratio : null; }
+    var qa = q(a), qb = q(b), ca = cdr(a), cb = cdr(b);
+    return {
+      qualityDelta: (qa != null && qb != null) ? (qb - qa) : null,
+      cdrDelta: (ca != null && cb != null) ? +(cb - ca).toFixed(2) : null,
+      days: (a && b && a.timestamp != null && b.timestamp != null) ? Math.round((b.timestamp - a.timestamp) / 86400000) : null
+    };
+  }
+  function sparkline(series, w, h) {
+    if (!series.length) return "";
+    var vs = series.map(function (p) { return p.v; }), mn = Math.min.apply(null, vs), mx = Math.max.apply(null, vs), rng = (mx - mn) || 1;
+    var step = series.length > 1 ? w / (series.length - 1) : w;
+    var pts = series.map(function (p, i) { return (i * step).toFixed(1) + "," + (h - ((p.v - mn) / rng) * (h - 4) - 2).toFixed(1); }).join(" ");
+    return '<svg class="fundx-spark" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" aria-hidden="true"><polyline points="' + pts + '"/></svg>';
+  }
+
+  var timelineScans = [], compare = null;
+  function openTimeline() {
+    var st = STORE(); if (!st) return;
+    st.listScans(ctx && ctx.ref).then(function (list) {
+      timelineScans = (list || []).slice().sort(function (a, b) { return (b.timestamp || 0) - (a.timestamp || 0); });
+      show("timeline");
+    }).catch(function () { timelineScans = []; show("timeline"); });
+  }
+  function screenTimeline() {
+    var qTrend = trend(timelineScans, "quality");
+    var head = '<header class="fundx-head rds-safe-top"><button class="fundx-close" data-fx="home" aria-label="Back">' + ric("arrow_back_ios_new") + '</button><div class="fundx-head-tt"><b>Timeline</b>' + (ctx && ctx.name ? '<div class="fundx-sub">' + esc(ctx.name) + '</div>' : '') + '</div><div class="fundx-head-sp"></div></header>';
+    if (!timelineScans.length) return head + '<main class="fundx-scroll"><div class="fundx-empty">' + ric("timeline") + '<span>No scans yet for this patient.</span></div></main>';
+    var trendCard = qTrend.length >= 2 ? '<div class="fundx-trend"><div class="fundx-trend-h"><span>Image quality trend</span><b>' + qTrend[qTrend.length - 1].v + '</b></div>' + sparkline(qTrend, 260, 48) + '</div>' : '';
+    var cmp = timelineScans.length >= 2 ? '<button class="fundx-btn" data-fx="comparelatest">' + ric("compare") + 'Compare latest two</button>' : '';
+    var rows = timelineScans.map(function (m) {
+      var q = m.quality && m.quality.overall != null ? m.quality.overall : "—";
+      var eye = (m.acquisition && m.acquisition.eye) || m.eye || "";
+      return '<button class="fundx-scan" data-fx="open" data-id="' + esc(m.id) + '">' +
+        (m.thumbnail ? '<img src="' + esc(m.thumbnail) + '" alt="">' : '<span class="fundx-scan-ph">' + ric("visibility") + '</span>') +
+        '<div class="fundx-scan-m"><b>' + esc(eye ? eye.toUpperCase() + " eye" : "Scan") + '</b><span>' + esc(m.timestamp ? new Date(m.timestamp).toLocaleString() : "") + '</span></div>' +
+        '<span class="fundx-q">Q ' + esc(q) + '</span></button>';
+    }).join("");
+    return head + '<main class="fundx-scroll">' + trendCard + (cmp ? '<div class="fundx-actions">' + cmp + '</div>' : '') +
+      '<div class="rds-section-header"><span class="rds-section-title">' + timelineScans.length + ' scan' + (timelineScans.length === 1 ? '' : 's') + '</span></div>' +
+      '<div class="fundx-recent">' + rows + '</div><p class="fundx-disc">' + DISCLAIMER + '</p></main>';
+  }
+  function openCompare(idA, idB) {
+    var st = STORE(); if (!st) return;
+    Promise.all([st.getScan(idA), st.getScan(idB), st.imageUri(idA, "original"), st.imageUri(idB, "original")]).then(function (r) {
+      if (!r[0] || !r[1]) { toast("Need two scans to compare."); return; }
+      compare = { a: r[0], b: r[1], imgA: r[2] || r[0].thumbnail, imgB: r[3] || r[1].thumbnail, delta: compareDelta(r[0], r[1]) };
+      show("compare");
+    }).catch(function () { toast("Could not compare scans."); });
+  }
+  function screenCompare() {
+    if (!compare) return '<main class="fundx-scroll"><div class="fundx-empty">' + ric("compare") + '<span>Nothing to compare.</span></div></main>';
+    var d = compare.delta;
+    function when(m) { return m.timestamp ? new Date(m.timestamp).toLocaleDateString() : ""; }
+    function side(label, m, img) { return '<div class="fundx-cmp-side"><div class="fundx-cmp-lbl">' + label + ' · ' + esc(when(m)) + '</div><div class="fundx-shot">' + (img ? '<img src="' + esc(img) + '" alt="">' : '') + '<div class="fundx-shot-q ' + (m.quality && m.quality.accepted ? 'ok' : 'bad') + '">' + Math.round((m.quality && m.quality.overall) || 0) + '</div></div></div>'; }
+    function deltaRow(l, v, unit) { var cls = v == null ? '' : (v > 0 ? 'up' : v < 0 ? 'down' : ''); var sign = v == null ? '—' : (v > 0 ? '+' : '') + v + (unit || ''); return '<div class="fundx-frow"><span>' + l + '</span><b class="d-' + cls + '">' + sign + '</b></div>'; }
+    return '<header class="fundx-head rds-safe-top"><button class="fundx-close" data-fx="totimeline" aria-label="Back">' + ric("arrow_back_ios_new") + '</button><div class="fundx-head-tt"><b>Compare</b>' + (d.days != null ? '<div class="fundx-sub">' + d.days + ' day' + (d.days === 1 ? '' : 's') + ' apart</div>' : '') + '</div><div class="fundx-head-sp"></div></header>' +
+      '<main class="fundx-scroll"><div class="fundx-cmp">' + side("Previous", compare.a, compare.imgA) + side("Current", compare.b, compare.imgB) + '</div>' +
+      '<div class="rds-section-header"><span class="rds-section-title">Change</span></div>' +
+      '<div class="fundx-findings">' + deltaRow("Image quality", d.qualityDelta, "") + deltaRow("Cup–disc ratio", d.cdrDelta, "") + '</div>' +
+      '<p class="fundx-disc">Comparison of stored measurements. Not a diagnosis. Longitudinal clinical interpretation is Phase C.</p></main>';
+  }
+
   function paintRecent() {
     var box = document.getElementById("fundxRecent"); var st = STORE(); if (!box || !st) return;
     st.listScans(ctx && ctx.ref).then(function (list) {
@@ -560,6 +637,8 @@
     else if (screen === "result") rootEl.innerHTML = screenResult();
     else if (screen === "detail") rootEl.innerHTML = screenDetail();
     else if (screen === "training") rootEl.innerHTML = screenTraining();
+    else if (screen === "timeline") rootEl.innerHTML = screenTimeline();
+    else if (screen === "compare") rootEl.innerHTML = screenCompare();
   }
   function show(s) { screen = s; render(); }
 
@@ -581,7 +660,9 @@
       case "save": return saveScan();
       case "training": haptic("light"); session = null; return show("training");
       case "level": haptic("medium"); return startTraining(parseInt(b.getAttribute("data-level"), 10) || 1);
-      case "gallery": haptic("light"); { var rc = document.getElementById("fundxRecent"); if (rc && rc.scrollIntoView) rc.scrollIntoView({ behavior: "smooth" }); } return toast("Your recent scans are listed below.");
+      case "gallery": haptic("light"); return openTimeline();
+      case "comparelatest": haptic("medium"); return (timelineScans.length >= 2 ? openCompare(timelineScans[1].id, timelineScans[0].id) : toast("Need two scans to compare."));
+      case "totimeline": haptic("light"); return show("timeline");
       case "open": haptic("light"); return openDetail(b.getAttribute("data-id"));
       case "deletescan": haptic("light"); return deleteScan(b.getAttribute("data-id"));
     }
@@ -604,7 +685,9 @@
     _buildResult: _buildResult,
     _buildScanRecord: _buildScanRecord,
     _levelAchieved: levelAchieved,
-    _levels: function () { return LEVELS; }
+    _levels: function () { return LEVELS; },
+    _trend: trend,
+    _compareDelta: compareDelta
   };
   window.FUNDX = FUNDX;
 })();
