@@ -3588,6 +3588,46 @@
     var M = { head: "Unit Head", professor: "Professor", assistant: "Assistant Professor", senior_resident: "Senior Resident", junior_resident: "Junior Resident", intern: "Intern" };
     return M[r] || (r ? String(r) : "Member");
   }
+  // ---- Clinical designations (display TITLE decoupled from permission role) --------------------
+  // A member's shown title = head-assigned designation (Consultant 1 / Head Nurse / custom …) if
+  // set, else the permission-role label. The designation maps to one of the 6 enforced ROLES,
+  // which stays the permission primitive (canInstruct / admin / firestore.rules).
+  function grpDisplayTitle(m) { return (m && m.designation) || grpRoleLabel(m && m.role); }
+  function grpDesignations() {
+    var api = groupsApi(); if (api && api.DESIGNATIONS) return api.DESIGNATIONS;
+    return [
+      { label: "Consultant 1", role: "professor" }, { label: "Consultant 2", role: "professor" },
+      { label: "Consultant 3", role: "professor" }, { label: "Consultant 4", role: "professor" },
+      { label: "Consultant 5", role: "professor" }, { label: "Consultant 6", role: "professor" },
+      { label: "Associate Professor", role: "professor" }, { label: "Assistant Professor", role: "assistant" },
+      { label: "Senior Resident", role: "senior_resident" }, { label: "Junior Resident", role: "junior_resident" },
+      { label: "Intern", role: "intern" }, { label: "Head Nurse", role: "junior_resident" }
+    ];
+  }
+  function grpRoleForDesignation(label) {
+    var api = groupsApi(); if (api && api.roleForDesignation) { try { var r = api.roleForDesignation(label); if (r) return r; } catch (e) {} }
+    var d = grpDesignations().filter(function (x) { return x.label === label; })[0]; return d ? d.role : null;
+  }
+  function grpChecked(sel) { try { var el = modalEl && modalEl.querySelector(sel); return !!(el && el.checked); } catch (e) { return false; } }
+  // Shared designation picker fields for the add-member + change-title sheets. Presets mapping to
+  // 'professor' (Consultant*/Associate Professor) show only to the head (granting professor is
+  // head-only in the rules). A non-empty custom title overrides the dropdown on submit.
+  function grpDesigFieldsHTML(cur) {
+    var iAmHead = (_grp && _grp.myRole) === "head";
+    var list = grpDesignations().filter(function (d) { return d.role !== "professor" || iAmHead; });
+    var sel = cur || "Junior Resident";
+    var opts = list.map(function (d) { return '<option value="' + esc(d.label) + '"' + (d.label === sel ? " selected" : "") + '>' + esc(d.label) + '</option>'; }).join("");
+    return '<div class="icu-fld"><label for="grpDesig">Designation</label><select id="grpDesig">' + opts + '</select></div>' +
+      '<div class="icu-fld"><label for="grpDesigCustom">Or type a custom title (optional)</label><input id="grpDesigCustom" type="text" autocomplete="off" placeholder="e.g. Registrar, Fellow, Staff Nurse"></div>' +
+      '<label style="display:flex;gap:9px;align-items:center;font:600 12.5px var(--font);color:var(--ink);cursor:pointer;margin:-2px 2px 12px"><input id="grpDesigCustomInstruct" type="checkbox" style="width:16px;height:16px;flex:0 0 auto">Custom title can give task instructions</label>';
+  }
+  // Resolve the designation sheet → { designation, role }. A typed custom title wins over the list.
+  function grpResolveDesig() {
+    var custom = grpVal("#grpDesigCustom").trim();
+    if (custom) return { designation: custom, role: (grpChecked("#grpDesigCustomInstruct") ? "assistant" : "junior_resident") };
+    var label = grpVal("#grpDesig") || "Junior Resident";
+    return { designation: label, role: grpRoleForDesignation(label) || "junior_resident" };
+  }
   function grpCanInstruct(role) { var api = groupsApi(); if (api && api.canInstruct) { try { return !!api.canInstruct(role); } catch (e) {} } return ["head", "professor", "assistant", "senior_resident"].indexOf(role) >= 0; }
   // Phase 5: admin (head|professor) may manage membership. UI-gate only — rules are the boundary.
   function grpIsAdmin(role) { var api = groupsApi(); if (api && api.isAdminRole) { try { return !!api.isAdminRole(role); } catch (e) {} } return ["head", "professor"].indexOf(role) >= 0; }
@@ -4052,11 +4092,17 @@
       var order = { head: 0, professor: 1, assistant: 2, senior_resident: 3, junior_resident: 4, intern: 5 };
       rows = members.slice().sort(function (a, b) { return (order[a.role] == null ? 9 : order[a.role]) - (order[b.role] == null ? 9 : order[b.role]); }).map(function (m) {
         var isMe = m.uid === me, isHead = m.role === "head", online = grpMemberOnline(m.uid, me);
-        var nm = isMe ? v2AccountName() : (m.name || grpRoleLabel(m.role));
-        var ini = v2Initials(isMe ? v2AccountName() : (m.name || grpRoleLabel(m.role)));
-        var sub = grpRoleLabel(m.role) + (isMe ? " · you" : "");
-        var rm = (canManage && !isMe && !isHead) ? '<button class="icu-v2-memrm" data-icu-act="grprm:' + encodeURIComponent(m.uid) + '" aria-label="Remove ' + esc(nm) + ' from this unit">Remove</button>' : "";
-        var badge = isMe ? '<span class="icu-v2-member-state">You</span>' : (rm || '<span class="icu-v2-member-role" style="flex:0 0 auto">' + esc(grpRoleLabel(m.role)) + '</span>');
+        var title = grpDisplayTitle(m);
+        var nm = isMe ? v2AccountName() : (m.name || title);
+        var ini = v2Initials(isMe ? v2AccountName() : (m.name || title));
+        var sub = title + (isMe ? " · you" : "");
+        var acts = (canManage && !isMe && !isHead)
+          ? '<button class="icu-v2-memrm" data-icu-act="grpdesig:' + encodeURIComponent(m.uid) + '" aria-label="Change ' + esc(nm) + '’s designation">✎ Title</button>'
+            + '<button class="icu-v2-memrm" data-icu-act="grprm:' + encodeURIComponent(m.uid) + '" aria-label="Remove ' + esc(nm) + ' from this unit">Remove</button>'
+          : "";
+        var badge = isMe ? '<span class="icu-v2-member-state">You</span>'
+          : (acts ? '<span style="display:flex;gap:6px;flex:0 0 auto;flex-wrap:wrap;justify-content:flex-end">' + acts + '</span>'
+                  : '<span class="icu-v2-member-role" style="flex:0 0 auto">' + esc(title) + '</span>');
         return '<div class="icu-v2-member"><span class="icu-v2-member-av' + (online ? " on" : "") + '">' + esc(ini || "DR") + '</span>' +
           '<span class="icu-v2-member-id"><span class="icu-v2-member-nm">' + esc(nm) + '</span><span class="icu-v2-member-role">' + esc(sub) + '</span></span>' +
           badge + '</div>';
@@ -4160,7 +4206,9 @@
     if (tl.length) {
       var TL_RECENT = 15, tlShown = _tlAll ? tl : tl.slice(0, TL_RECENT);
       out += '<div class="icu-card' + (_tlAll ? " icu-v2-tlfull" : "") + '">' + tlShown.map(function (e) {
-        var by = (e.byName || "") + (e.byRole ? " · " + grpRoleLabel(e.byRole) : "") + (e.ts ? " · " + (fmtAgo(e.ts) || fmtWhen(e.ts)) : "");
+        var _bm = (_grpMembers || []).filter(function (x) { return x.uid === e.by; })[0];
+        var byTitle = (_bm && _bm.designation) ? _bm.designation : (e.byRole ? grpRoleLabel(e.byRole) : "");
+        var by = (e.byName || "") + (byTitle ? " · " + byTitle : "") + (e.ts ? " · " + (fmtAgo(e.ts) || fmtWhen(e.ts)) : "");
         return '<div class="icu-row" style="align-items:flex-start;gap:8px;border-bottom:1px solid var(--border);padding:7px 0"><span style="flex:0 0 auto;font-size:15px">' + grpTlIcon(e.type) + '</span>' +
           '<span style="flex:1"><b>' + esc(e.title || "Update") + '</b>' + (e.detail ? '<span style="display:block;color:var(--muted);font-size:12px;margin-top:1px">' + esc(e.detail) + '</span>' : "") +
           '<span style="display:flex;align-items:center;gap:5px;margin-top:3px"><span class="icu-v2-tlav">' + esc(v2Initials(e.byName || "")) + '</span><span style="font:600 11px var(--font);color:var(--muted)">' + esc(by) + '</span></span></span></div>';
@@ -4243,25 +4291,23 @@
   function grpOpenAddById() {
     if (!grpActive() || !grpIsAdmin(_grp && _grp.myRole)) return;
     ensureModal();
-    var iAmHead = (_grp && _grp.myRole) === "head";
-    var roles = ["professor", "assistant", "senior_resident", "junior_resident", "intern"].filter(function (r) { return r !== "professor" || iAmHead; });
-    var opts = roles.map(function (r) { return '<option value="' + r + '"' + (r === "junior_resident" ? " selected" : "") + '>' + esc(grpRoleLabel(r)) + '</option>'; }).join("");
     modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Add a doctor by ID or email"><h3>' + ico("plus", "＋") + ' Add a doctor</h3>' +
       '<p class="icu-doc-sub" style="margin:0 0 10px">Add a colleague to <b>' + esc((_grp && _grp.name) || "this unit") + '</b> by their <b>StewardMD ID</b> (e.g. SMD-7F3K2C) or the email on their StewardMD account.</p>' +
       '<div class="icu-fld"><label for="grpAddId">StewardMD ID or email</label><input id="grpAddId" type="text" autocapitalize="characters" autocomplete="off" placeholder="SMD-XXXXXX or name@hospital.org"></div>' +
-      '<div class="icu-fld"><label for="grpAddRole">Role</label><select id="grpAddRole">' + opts + '</select></div>' +
+      grpDesigFieldsHTML("Junior Resident") +
       '<button class="icu-btn" data-icu-act="grpinvitesend">Add to unit</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
     modalEl.classList.add("on");
   }
   function grpDoAddById() {
     var api = groupsApi(); if (!api || !grpActive() || !api.addByIdOrEmail) return;
-    var idOrEmail = grpVal("#grpAddId").trim(), role = grpVal("#grpAddRole") || "junior_resident";
+    var idOrEmail = grpVal("#grpAddId").trim();
     if (!idOrEmail) { if (window.toast) toast("Enter a StewardMD ID or email"); return; }
+    var d = grpResolveDesig();
     closeForm();
     var byEmail = idOrEmail.indexOf("@") >= 0;
-    api.addByIdOrEmail(_grp.id, idOrEmail, role).then(function (doc) {
-      if (window.toast) toast("Added " + ((doc && doc.name) || "doctor") + " to the unit");
+    api.addByIdOrEmail(_grp.id, idOrEmail, d.role, d.designation).then(function (doc) {
+      if (window.toast) toast("Added " + ((doc && doc.name) || "doctor") + " as " + d.designation);
     }, function (e) {
       var m = (e && e.message) || "";
       // not-found = no directory entry for that email/ID. The email→doctor lookup (doctorDirectory/
@@ -4270,6 +4316,32 @@
       if (m === "not-found") { if (byEmail) grpAddNotFoundEmail(); else if (window.toast) toast("No StewardMD account found for that ID — check it, or use the invite link instead."); }
       else if (window.toast) toast("Couldn’t add — head/professor only");
       _grpErr = null; if (ICU.isOpen()) paint();
+    });
+  }
+  // Change an existing member's designation (+ its derived permission). Admin-only; the sheet is
+  // never offered for the head or yourself. Consultant/Assoc-Prof (→ professor) are head-only —
+  // the rules reject a non-head grant, surfaced as a clear toast.
+  function grpOpenDesig(uid) {
+    if (!grpActive() || !grpIsAdmin(_grp && _grp.myRole)) return;
+    var m = (_grpMembers || []).filter(function (x) { return x.uid === uid; })[0];
+    if (!m || m.role === "head" || m.uid === grpMyUid()) return;
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Change designation"><h3>' + ico("rounds", "🩺") + ' Change designation</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">Set the designation for <b>' + esc(m.name || grpDisplayTitle(m)) + '</b> in <b>' + esc((_grp && _grp.name) || "this unit") + '</b>. This also sets what they can do — give instructions vs. update status.</p>' +
+      grpDesigFieldsHTML(m.designation) +
+      '<button class="icu-btn" data-icu-act="grpdesigsave:' + encodeURIComponent(uid) + '">Save designation</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  function grpDoSetDesig(uid) {
+    var api = groupsApi(); if (!api || !grpActive() || !api.setDesignation || !uid) return;
+    var d = grpResolveDesig(); closeForm();
+    api.setDesignation(_grp.id, uid, d.designation, d.role).then(function () {
+      if (window.toast) toast("Designation set to " + d.designation);
+    }, function (e) {
+      _grpErr = grpErrText(e);
+      if (window.toast) toast(d.role === "professor" ? "Consultant / Associate Professor can be set by the unit head only" : "Couldn’t update — head/professor only");
+      if (ICU.isOpen()) paint();
     });
   }
   // No StewardMD account is registered for a typed email (no doctorDirectory/e_<hash> entry). Explain
@@ -4899,7 +4971,7 @@
     var chips = '<button class="icu-v2-obchip' + (_roundOnBehalf ? "" : " on") + '" data-icu-act="grproundbehalf:self">' + ico("user", "🧑") + ' Me</button>' +
       others.map(function (m) {
         var on = _roundOnBehalf === m.uid;
-        return '<button class="icu-v2-obchip' + (on ? " on" : "") + '" data-icu-act="grproundbehalf:' + encodeURIComponent(m.uid) + '">' + esc(m.name || grpRoleLabel(m.role)) + (m.role ? ' <span class="icu-v2-obrole">' + esc(grpRoleLabel(m.role)) + '</span>' : "") + '</button>';
+        return '<button class="icu-v2-obchip' + (on ? " on" : "") + '" data-icu-act="grproundbehalf:' + encodeURIComponent(m.uid) + '">' + esc(m.name || grpDisplayTitle(m)) + (m.name ? ' <span class="icu-v2-obrole">' + esc(grpDisplayTitle(m)) + '</span>' : "") + '</button>';
       }).join("");
     return '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">Instructed by <span style="opacity:.6">· optional</span></div>' +
       '<p class="icu-doc-sub" style="margin:0 0 9px">Log a colleague’s verbal order under their name — e.g. a consultant’s round instruction.</p>' +
@@ -4956,7 +5028,7 @@
     var chosen = grpRoundChosen(); if (!chosen.length) return;
     var instr = true;   // any unit member can log a tracked instruction now (the consultant often says it orally + a resident notes it down — attribute via "Instructed by")
     var onBehalf = null;
-    if (_roundOnBehalf) { var _m = (_grpMembers || []).filter(function (x) { return x.uid === _roundOnBehalf; })[0]; if (_m) onBehalf = { uid: _m.uid, name: _m.name || grpRoleLabel(_m.role) }; }
+    if (_roundOnBehalf) { var _m = (_grpMembers || []).filter(function (x) { return x.uid === _roundOnBehalf; })[0]; if (_m) onBehalf = { uid: _m.uid, name: _m.name || grpDisplayTitle(_m) }; }
     var plan = grpRoundPlan(chosen, instr, v2AccountName(), _roundPriority, onBehalf);
     var gid = _grp.id, pid = _grpPtId, i;
     for (i = 0; i < plan.tasks.length; i++) {
@@ -6633,6 +6705,8 @@
       case "grpcreate": grpDoCreate(); break;
       case "grpinvite": grpOpenInvite(); break;
       case "grpinvitesend": grpDoAddById(); break;
+      case "grpdesig": grpOpenDesig(decodeURIComponent(arg)); break;
+      case "grpdesigsave": grpDoSetDesig(decodeURIComponent(arg)); break;
       case "grpreviewed": grpDoReviewed(); break;
       case "grptask": grpCycleTask(decodeURIComponent(arg)); break;
       case "grptaskexplain": grpTaskExplain(decodeURIComponent(arg)); break;
