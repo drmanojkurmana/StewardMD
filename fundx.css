@@ -1,0 +1,90 @@
+/* fundx.css — FundX AI presentation layer.
+ * Built on StewardMD's live design tokens (--rds-* / --sev-* + body.dark), so FundX
+ * inherits the real design system rather than hardcoded colours. Additive: every
+ * selector is scoped under #fundxRoot, so nothing leaks into the rest of the app and
+ * removing the module (flag off) leaves no visual trace. */
+
+#fundxRoot {
+  position: fixed; inset: 0; z-index: 10000;
+  display: none; flex-direction: column; overflow: hidden;
+  background: var(--rds-bg, var(--paper, #f6f7f5));
+  color: var(--rds-ink, var(--ink, #14202b));
+  font-family: var(--rds-font, var(--sans, system-ui));
+  -webkit-font-smoothing: antialiased;
+}
+#fundxRoot.on { display: flex; }
+#fundxRoot .rds-icon { font-size: 22px; line-height: 1; }
+
+/* header */
+#fundxRoot .fundx-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; background: var(--rds-surface, var(--panel, #fff));
+  border-bottom: 1px solid var(--rds-line, var(--line, #d7dee3));
+}
+#fundxRoot .fundx-close {
+  display: flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; flex: 0 0 auto; border: none; border-radius: 999px;
+  background: transparent; color: var(--rds-ink, var(--ink)); cursor: pointer;
+}
+#fundxRoot .fundx-close:active { background: var(--rds-surface-2, #eef3f5); }
+#fundxRoot .fundx-head-tt b { font-weight: 800; font-size: 17px; letter-spacing: -.01em; }
+#fundxRoot .fundx-head-tt b span { color: var(--rds-primary, var(--teal, #0e6e63)); margin-left: 1px; }
+#fundxRoot .fundx-sub { font-weight: 500; font-size: 12px; color: var(--rds-muted, var(--slate-soft, #5a7184)); margin-top: 1px; }
+#fundxRoot .fundx-head-sp { flex: 1; }
+
+/* scroll body */
+#fundxRoot .fundx-scroll { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px 16px 40px; }
+
+/* primary CTA */
+#fundxRoot .fundx-cta {
+  display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; cursor: pointer;
+  padding: 18px; border: none; border-radius: var(--rds-r, 16px);
+  background: linear-gradient(135deg, var(--rds-primary, #0e6e63), var(--rds-primary-2, #115E59));
+  color: #fff; box-shadow: var(--rds-el-cta, 0 8px 22px rgba(15,118,110,.28));
+}
+#fundxRoot .fundx-cta .rds-icon { font-size: 30px; }
+#fundxRoot .fundx-cta-tx { flex: 1; min-width: 0; }
+#fundxRoot .fundx-cta-tx b { display: block; font-weight: 800; font-size: 16px; }
+#fundxRoot .fundx-cta-tx span { display: block; font-weight: 500; font-size: 12px; opacity: .92; margin-top: 2px; }
+
+/* tile row */
+#fundxRoot .fundx-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#fundxRoot .fundx-tile {
+  display: flex; flex-direction: column; gap: 4px; align-items: flex-start; text-align: left; cursor: pointer;
+  padding: 14px; border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px);
+  background: var(--rds-surface, var(--panel, #fff)); color: var(--rds-ink, var(--ink));
+}
+#fundxRoot .fundx-tile .rds-icon { color: var(--rds-primary, var(--teal)); font-size: 24px; }
+#fundxRoot .fundx-tile b { font-weight: 700; font-size: 14px; margin-top: 4px; }
+#fundxRoot .fundx-tile span { font-weight: 500; font-size: 11.5px; color: var(--rds-muted, var(--slate-soft)); }
+
+/* section header reuses .rds-section-header from redesign-system.css */
+#fundxRoot .rds-section-header { margin: 20px 0 8px; }
+
+/* recent scans */
+#fundxRoot .fundx-recent { display: flex; flex-direction: column; gap: 8px; }
+#fundxRoot .fundx-scan {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  padding: 10px; border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px);
+  background: var(--rds-surface, var(--panel, #fff)); color: var(--rds-ink, var(--ink));
+}
+#fundxRoot .fundx-scan img, #fundxRoot .fundx-scan-ph {
+  width: 46px; height: 46px; flex: 0 0 auto; border-radius: 10px; object-fit: cover;
+  background: #1a1410; display: flex; align-items: center; justify-content: center; color: #f0a94a;
+}
+#fundxRoot .fundx-scan-m { flex: 1; min-width: 0; }
+#fundxRoot .fundx-scan-m b { display: block; font-weight: 700; font-size: 13.5px; }
+#fundxRoot .fundx-scan-m span { display: block; font-weight: 500; font-size: 11px; color: var(--rds-muted, var(--slate-soft)); }
+#fundxRoot .fundx-q { flex: 0 0 auto; font: 700 11px var(--rds-mono, monospace); color: var(--sev-stable-fg, #1C7A4A); }
+
+/* empty / loading state */
+#fundxRoot .fundx-empty {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
+  padding: 32px 20px; color: var(--rds-muted, var(--slate-soft));
+  border: 1px dashed var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px);
+}
+#fundxRoot .fundx-empty .rds-icon { font-size: 30px; opacity: .7; }
+#fundxRoot .fundx-empty span { font-weight: 500; font-size: 13px; max-width: 30ch; }
+
+/* disclaimer */
+#fundxRoot .fundx-disc { margin: 22px 4px 0; font-weight: 500; font-size: 11.5px; line-height: 1.5; color: var(--rds-muted, var(--slate-soft)); text-align: center; }

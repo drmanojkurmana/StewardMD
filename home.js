@@ -512,7 +512,8 @@
     about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
     account: function () { if (window.SB && SB.open) SB.open(); },
     recent: function () { if (typeof openMyCases === "function") openMyCases(); },
-    dictate: function () { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); }
+    dictate: function () { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); },
+    retinalscan: function () { if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…"); }
   };
   // --- Resume where you left off. iOS suspends a backgrounded app and, under memory pressure,
   //     TERMINATES it after a while; the next launch is a COLD START — the WebView reloads index.html
@@ -1022,6 +1023,16 @@
         '</div>' +
         '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' +
         '<div class="rnav-grid">' +
+          (function () {
+            // FundX AI retinal-scan tile — shown only when the smd_fundx flag is on
+            // (?fundx=1 or Settings). Self-contained + order-independent so it never
+            // depends on fundx.js having loaded first.
+            try {
+              var q = (location.search.match(/[?&]fundx=([^&]+)/) || [])[1];
+              var on = q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_fundx") === "1");
+              return on ? rtile("retinalscan", "visibility", "Retinal Scan", "FundX AI · fundus") : "";
+            } catch (e) { return ""; }
+          })() +
           rtile("dictate", "mic", "Dictate", "Voice to text") +
           rtile("interactions", "photo_camera", "Scan Meds", "Photo scan · interactions") +
           rtile("electrolytes", "science", "Electrolytes", "ICU correction") +

@@ -22,7 +22,10 @@ if (gatingSrc) {
     { getElementById: (id) => {
         if (id === "homeV2") return home;
         return gates.includes(id) ? { _vis: true } : null;
-      } },
+      },
+      // onboarding.js's homeForeground() also probes overlays via querySelector
+      // (appOverlayUp); stub it so the extracted gating fn runs (no overlay in these scenes).
+      querySelector: () => null },
     (el) => !!(el && el._vis)
   );
   const homeUnderGate = { _vis: true, classList: { contains: (c) => c === "on" } };
