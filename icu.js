@@ -4080,6 +4080,11 @@
         '<button class="icu-btn" data-icu-act="grpreclaimhead">' + ico("user", "👑") + ' Restore me as Unit Head</button></div>';
     }
     out += '<div class="icu-sec-lbl">' + ico("pulse", "🩺") + ' Shared unit — ' + esc((_grp && _grp.name) || "ICU") + '</div>';
+    // Primary compose action pinned to the TOP of the panel (above instructions & tasks) so it's the
+    // first thing on the round. Instructors post tracked tasks + a timeline event; everyone else posts
+    // a plain (untracked) note. Rules enforce the write boundary too.
+    var roundLbl = grpCanInstruct(_grp && _grp.myRole) ? "Add round note / instruction" : "Add a note";
+    out += '<button class="icu-btn ghost icu-v2-addround" data-icu-act="grpround">' + ico("plus", "＋") + ' ' + roundLbl + '</button>';
     out += '<div class="icu-card"><h3>Instructions &amp; tasks <span class="icu-phase">' + open + ' open</span></h3>';
     if (visibleTasks.length) {
       out += visibleTasks.map(function (t) {
@@ -4109,10 +4114,6 @@
     }
     if (hiddenDone > 0) out += '<p class="icu-doc-sub" style="margin:8px 0 0;opacity:.7">' + hiddenDone + ' completed task' + (hiddenDone === 1 ? "" : "s") + ' cleared (older than 6h) — kept in the Timeline below.</p>';
     out += '</div>';
-    // No-type round-note composer (Phase 3). Instructors post tracked tasks + one timeline event;
-    // everyone else can post a plain (untracked) note. Rules enforce the write boundary too.
-    var roundLbl = grpCanInstruct(_grp && _grp.myRole) ? "Add round note / instruction" : "Add a note";
-    out += '<button class="icu-btn ghost icu-v2-addround" data-icu-act="grpround">' + ico("plus", "＋") + ' ' + roundLbl + '</button>';
     var revTxt = pt.reviewedAt ? ("Reviewed " + (fmtAgo(pt.reviewedAt) || "") + (pt.reviewedByName ? " by " + pt.reviewedByName : "")) : "Mark reviewed";
     out += '<button class="icu-btn ghost" data-icu-act="grpreviewed">' + ico("check", "✓") + ' ' + esc(revTxt) + '</button>';
     out += '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("clock", "🕑") + ' Timeline' + (tl.length ? ' <span class="icu-phase">' + tl.length + '</span>' : "") + '</div>';
@@ -4779,7 +4780,7 @@
     // shows the origin the request targeted, and the reason gives the HTTP status / error — so one
     // screenshot pinpoints the failing layer instead of a generic "check your connection". Only shows
     // on failure; trim the bracket once push is confirmed working end-to-end on device.
-    var VER = "g415";
+    var VER = "g416";
     var base = window.SMD_API_BASE || "(relative)";
     function fail(reason) { note("error", "Push failed — teammates not alerted. [" + VER + " · " + base + " · " + reason + "]"); }
     try {
