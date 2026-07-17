@@ -155,7 +155,7 @@
         '<div class="fundx-cam-scrim"></div>' +
         '<header class="fundx-cam-top rds-safe-top">' +
           '<button class="fundx-cam-x" data-fx="camclose" aria-label="Close">' + ric("close") + '</button>' +
-          '<div id="fundxState" class="fundx-state">Starting camera…</div>' +
+          '<div id="fundxState" class="fundx-state" role="status" aria-live="polite">Starting camera…</div>' +
           '<button id="fundxVoiceBtn" class="fundx-cam-x' + (VOICE.enabled() ? ' on' : '') + '" data-fx="voice" aria-label="Voice coaching">' + ric(VOICE.enabled() ? "volume_up" : "volume_off") + '</button>' +
         '</header>' +
         ((session && session.mode === "training") ? '<div class="fundx-goal">' + ric("school") + 'Level ' + session.trainLevel + ' · ' + esc((LEVELS[session.trainLevel - 1] || {}).title || "") + '</div>' : '') +
@@ -165,7 +165,7 @@
           '<div id="fundxScore" class="fundx-score">0</div>' +
         '</div>' +
         '<div class="fundx-cam-bottom rds-safe-bottom">' +
-          '<div id="fundxCoach" class="fundx-coach">Point the camera at the eye</div>' +
+          '<div id="fundxCoach" class="fundx-coach" role="status" aria-live="assertive">Point the camera at the eye</div>' +
           '<div id="fundxChips" class="fundx-chips">' + CHIPS.map(function (c) { return '<span class="fundx-chip" data-chip="' + c.k + '">' + c.l + '</span>'; }).join("") + '</div>' +
         '</div>' +
         '<div id="fundxFlash" class="fundx-flash"></div>' +
@@ -551,7 +551,11 @@
   var FUNDX = {
     open: function (context) {
       ctx = context || null; screen = "home"; session = null; result = null; capturing = false;
-      if (!rootEl) { rootEl = document.createElement("div"); rootEl.id = "fundxRoot"; document.body.appendChild(rootEl); rootEl.addEventListener("click", onClick); }
+      if (!rootEl) {
+        rootEl = document.createElement("div"); rootEl.id = "fundxRoot";
+        rootEl.setAttribute("role", "dialog"); rootEl.setAttribute("aria-modal", "true"); rootEl.setAttribute("aria-label", "FundX AI retinal imaging");
+        document.body.appendChild(rootEl); rootEl.addEventListener("click", onClick);
+      }
       render(); rootEl.classList.add("on"); document.body.style.overflow = "hidden"; haptic("tap");
     },
     close: function () { stopCamera(); if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; haptic("tap"); },

@@ -214,3 +214,15 @@
 /* training goal banner over the camera */
 #fundxRoot .fundx-goal { position: absolute; top: 62px; left: 50%; transform: translateX(-50%); z-index: 6; display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; background: rgba(14,110,99,.85); color: #fff; font-weight: 700; font-size: 13px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 #fundxRoot .fundx-goal .rds-icon { font-size: 17px; }
+
+/* ============ M6 — accessibility polish ============ */
+/* keyboard focus visibility for all interactive controls */
+#fundxRoot button:focus-visible, #fundxRoot [tabindex]:focus-visible { outline: 3px solid var(--rds-primary, #0e6e63); outline-offset: 2px; }
+#fundxRoot .fundx-cam-x:focus-visible, #fundxRoot .fundx-cam-bottom button:focus-visible { outline-color: #fff; }
+/* respect reduced-motion: freeze coaching/loader animations */
+@media (prefers-reduced-motion: reduce) {
+  #fundxRoot .fundx-arrow.show { animation: none; opacity: .95; }
+  #fundxRoot .fundx-proc-ring svg { animation: none; }
+  #fundxRoot .fundx-flash.on { animation: none; opacity: 0; }
+  #fundxRoot .fundx-ring-fg { transition: none; }
+}

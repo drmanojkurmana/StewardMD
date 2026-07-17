@@ -53,6 +53,11 @@ done
 # renders as its text name ("monitor_heart"…). @font-face lives in redesign-system.css. ─
 if [ -d assets/fonts ]; then mkdir -p "$WWW/assets/fonts"; cp assets/fonts/* "$WWW/assets/fonts/" 2>/dev/null || true; fi
 
+# ── 4a-bis. Vendored third-party assets (e.g. FundX AI's local MediaPipe wasm/model
+# under assets/vendor/mediapipe/). Copied recursively so a vendored copy actually ships
+# in the bundle + OTA; without this the "vendor locally" path silently 404s at runtime. ─
+if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor/. "$WWW/assets/vendor/" 2>/dev/null || true; fi
+
 # ── 4b. Offline clinical bundle (native drug monographs, lazy-loaded by
 # offline-clinical.js). Built by scripts/build-offline-clinical.mjs. ────────────
 [ -f data/offline-clinical.json.gz ] && cp data/offline-clinical.json.gz "$WWW/"
