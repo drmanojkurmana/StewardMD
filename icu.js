@@ -4779,7 +4779,7 @@
     // shows the origin the request targeted, and the reason gives the HTTP status / error — so one
     // screenshot pinpoints the failing layer instead of a generic "check your connection". Only shows
     // on failure; trim the bracket once push is confirmed working end-to-end on device.
-    var VER = "g414";
+    var VER = "g415";
     var base = window.SMD_API_BASE || "(relative)";
     function fail(reason) { note("error", "Push failed — teammates not alerted. [" + VER + " · " + base + " · " + reason + "]"); }
     try {
@@ -4792,6 +4792,9 @@
             // Surface push REACH so it's obvious when teammates aren't registered for notifications.
             if (j && j.sent > 0) { _grpLastPush = null; if (window.toast) toast("Pushed to " + j.sent + " device" + (j.sent === 1 ? "" : "s")); return; }
             if (j && j.notified > 0) { note("none", "No teammate is registered for push yet — ask them to enable notifications in Settings › Ward Integration."); return; }
+            // Teammates exist but none opted into this category (e.g. a routine order the seniors have
+            // muted) — that's a deliberate preference, not a delivery failure, so don't alarm the sender.
+            if (j && j.eligible > 0) { _grpLastPush = null; if (ICU.isOpen() && _screen === "board") paintLive(); return; }
             fail("HTTP " + status + (j && j.error ? " " + j.error : ""));
           })
           .catch(function (e) { fail("fetch " + ((e && e.message) || e || "failed")); });
