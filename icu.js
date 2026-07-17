@@ -4680,20 +4680,28 @@
   function grpNotifyInstruction(gid, pid, chosen, priority) {
     var text = (chosen && chosen[0]) || "New instruction";
     function note(kind, msg) { _grpLastPush = { ts: nowTs(), kind: kind, text: msg }; if (ICU.isOpen() && _screen === "board") paintLive(); }
+    // Self-diagnosing failure banner: the version tag (g412) proves which build is running, the base
+    // shows the origin the request targeted, and the reason gives the HTTP status / error — so one
+    // screenshot pinpoints the failing layer instead of a generic "check your connection". Only shows
+    // on failure; trim the bracket once push is confirmed working end-to-end on device.
+    var VER = "g413";
+    var base = window.SMD_API_BASE || "(relative)";
+    function fail(reason) { note("error", "Push failed — teammates not alerted. [" + VER + " · " + base + " · " + reason + "]"); }
     try {
       idToken().then(function (tok) {
-        if (!tok) { note("error", "Couldn't reach the push service — you weren't signed in. Teammates won't be alerted for this instruction."); return; }
+        if (!tok) { note("error", "Not signed in — teammates won't be alerted. [" + VER + " · token missing]"); return; }
+        var status = 0;
         fetch(grpPushUrl("/api/push/instruction"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, priority: priority, count: (chosen ? chosen.length : 1) }) })
-          .then(function (r) { return r.json(); })
+          .then(function (r) { status = r.status; return r.json().catch(function () { return null; }); })
           .then(function (j) {
             // Surface push REACH so it's obvious when teammates aren't registered for notifications.
             if (j && j.sent > 0) { _grpLastPush = null; if (window.toast) toast("Pushed to " + j.sent + " device" + (j.sent === 1 ? "" : "s")); return; }
             if (j && j.notified > 0) { note("none", "No teammate is registered for push yet — ask them to enable notifications in Settings › Ward Integration."); return; }
-            if (!j || j.error) note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction. Check your connection.");
-          }, function () { note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction."); })
-          .catch(function () { note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction."); });
-      }, function () { note("error", "Couldn't reach the push service — you weren't signed in. Teammates won't be alerted for this instruction."); });
-    } catch (e) { note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction."); }
+            fail("HTTP " + status + (j && j.error ? " " + j.error : ""));
+          })
+          .catch(function (e) { fail("fetch " + ((e && e.message) || e || "failed")); });
+      }, function () { note("error", "Not signed in — teammates won't be alerted. [" + VER + " · idToken rejected]"); });
+    } catch (e) { fail("throw " + ((e && e.message) || e)); }
   }
   // "Hand over to next shift" → push the unit (incoming shift) that a handover is ready.
   function grpNotifyHandover(gid, pid, sbar) {
