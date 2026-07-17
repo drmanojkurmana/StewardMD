@@ -3004,7 +3004,6 @@
       var p = _raw.patient;
       var pid = p._id || p.name || "cur";
       if (_dxPt !== pid) { _dxPt = pid; _dxShow = false; _dxWhy = {}; _dxAdvanced = false; _corrCache = {}; _corrErr = null; _corrBusy = false; }   // reset guided-dx + correlation state on patient switch (no cross-patient leak)
-      if (icuDxFlowOn()) maybeAutoTour();   // first-use guided-diagnosis tour (per account; once)
       var cc = p.complaints ? esc(p.complaints) : '<span style="color:var(--muted)">Not documented yet.</span>';
       var dxTxt = p.diagnosis ? "<b>" + esc(p.diagnosis) + "</b>" : '<span style="color:var(--muted)">Not set</span>';
       var fchips = findChipsHTML(false);
@@ -3164,7 +3163,7 @@
         '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share case</button></div>' +
         '<div class="icu-card"><div class="icu-sec-lbl">' + ico("folder", "📋") + ' Library &amp; help</div>' +
         '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients' + (n ? " (" + n + ")" : "") + '</button>' +
-        (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") + '</div>' +
+        '</div>' +
         '<div class="icu-card" style="border-color:var(--danger)"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("warn", "⚠️") + ' Danger zone</div>' +
         '<p class="icu-doc-sub" style="margin:0 0 10px">Affects only this patient — can\'t be undone.</p>' +
         '<button class="icu-btn ghost" data-icu-act="clearfindings">' + ico("trash", "🧹") + ' Clear current findings</button>' +
@@ -6234,60 +6233,6 @@
     setTimeout(function () { try { var b = modalEl.querySelector('[data-icu-act="deepgo"],[data-icu-act="deepedit"]'); if (b) b.focus(); } catch (e) {} }, 40);
   }
 
-  /* ===== First-use guided-diagnosis tour (smd_icu_dxflow) — lightweight spotlight ==============
-   * A 4-step coach-mark (built on the tip-pop primitive) that explains the findings → working-dx →
-   * Deep-Review flow. Per-ACCOUNT state (keyed by ownerNow()); never re-triggers the disclaimer;
-   * shows only on the first eligible Diagnosis entry (or one more time after a plain Skip). */
-  var TOUR_VERSION = 1;
-  var TOUR_STEPS = [
-    { sel: '[data-icu-act="findpick"]', title: "Structured findings", text: "Add symptoms, signs and examination findings in a structured form." },
-    { sel: '[data-icu-act="finddx"]', title: "Find working diagnosis", text: "StewardMD combines your findings with available labs, imaging, vitals and trends to suggest working diagnoses." },
-    { sel: ".icu-dx-card", title: "You stay in control", text: "Select a suggested diagnosis, add your own, or continue without one — nothing is auto-applied." },
-    { sel: '[data-icu-act="corrdeep"]', title: "Deep Clinical Review", text: "As soon as you have clinical context (findings, labs, imaging or vitals), Deep review uses the context you confirm for advisory correlation, missing data and guideline-supported considerations — and helps identify the working diagnosis. External evidence appears after this." }
-  ];
-  var _tourEl = null, _tourStep = 0, _tourSessionDone = false;
-  function tourKey() { try { return "smd_icu_dxtour:" + ownerNow(); } catch (e) { return "smd_icu_dxtour:anon"; } }
-  function tourState() { try { return JSON.parse(localStorage.getItem(tourKey())) || {}; } catch (e) { return {}; } }
-  function saveTourState(s) { try { localStorage.setItem(tourKey(), JSON.stringify(s)); } catch (e) {} }
-  function tourShouldShow() {
-    if (!icuDxFlowOn()) return false;
-    var s = tourState();
-    if (s.dontShowAgain) return false;                 // explicit opt-out — never again
-    if (s.completedVersion === TOUR_VERSION) return false;   // completed this version
-    if ((s.skippedCount || 0) >= 2) return false;      // skipped → at most one extra showing
-    return true;
-  }
-  function clearTourHL() { var e; while ((e = document.querySelector(".icu-tour-hl"))) e.classList.remove("icu-tour-hl"); }
-  function ensureTourEl() { if (!_tourEl) { _tourEl = document.createElement("div"); _tourEl.id = "icuTour"; _tourEl.className = "icu-tour"; document.body.appendChild(_tourEl); _tourEl.addEventListener("click", onTourClick); } }
-  function startTour() { ensureTourEl(); _tourStep = 0; renderTour(); }
-  function renderTour() {
-    var n = TOUR_STEPS.length, step = TOUR_STEPS[_tourStep], last = _tourStep === n - 1;
-    clearTourHL();
-    var tgt = document.querySelector(step.sel);
-    if (tgt) { try { tgt.scrollIntoView({ block: "center" }); } catch (e) {} tgt.classList.add("icu-tour-hl"); }
-    _tourEl.innerHTML = '<div class="icu-tour-card" role="dialog" aria-label="ICU diagnosis tour">' +
-      '<div class="icu-tour-step">Step ' + (_tourStep + 1) + " of " + n + "</div>" +
-      '<div class="icu-tour-t">' + esc(step.title) + "</div>" +
-      '<div class="icu-tour-x">' + esc(step.text) + "</div>" +
-      (last ? '<label class="icu-tour-chk"><input type="checkbox" id="icuTourDont"> Don’t show this again</label>' : "") +
-      '<div class="icu-tour-btns">' +
-        (_tourStep > 0 ? '<button class="icu-btn ghost" data-icu-act="tourback">Back</button>' : "") +
-        '<button class="icu-btn ghost" data-icu-act="tourskip">Skip</button>' +
-        (last ? '<button class="icu-btn" data-icu-act="tourdone">Done</button>' : '<button class="icu-btn" data-icu-act="tournext">Next</button>') +
-      "</div></div>";
-    _tourEl.classList.add("on");
-    setTimeout(function () { try { var b = _tourEl.querySelector('[data-icu-act="tournext"],[data-icu-act="tourdone"]'); if (b) b.focus(); } catch (e) {} }, 40);   // keyboard/SR lands on the tour
-  }
-  function closeTour() { clearTourHL(); if (_tourEl) { _tourEl.classList.remove("on"); _tourEl.innerHTML = ""; } }
-  function onTourClick(e) {
-    var b = e.target.closest && e.target.closest("[data-icu-act]"); if (!b) return;
-    var act = b.getAttribute("data-icu-act");
-    if (act === "tourback") { if (_tourStep > 0) _tourStep--; renderTour(); }
-    else if (act === "tournext") { if (_tourStep < TOUR_STEPS.length - 1) _tourStep++; renderTour(); }
-    else if (act === "tourskip") { var s = tourState(); s.skippedVersion = TOUR_VERSION; s.skippedCount = (s.skippedCount || 0) + 1; s.skippedAt = nowTs(); saveTourState(s); closeTour(); }
-    else if (act === "tourdone") { var s2 = tourState(); s2.completedVersion = TOUR_VERSION; s2.completedAt = nowTs(); if ((document.getElementById("icuTourDont") || {}).checked) s2.dontShowAgain = true; saveTourState(s2); closeTour(); }
-  }
-  function maybeAutoTour() { if (!_tourSessionDone && tourShouldShow()) { _tourSessionDone = true; setTimeout(function () { try { startTour(); } catch (e) {} }, 500); } }
 
   /* ---- External trusted-evidence fallback (Phase 4) — opt-in, de-identified TOPIC only ---- */
   var _evCache = {}, _evBusy = false, _evErr = null;
@@ -6924,7 +6869,6 @@
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
       case "adddata": openDataMenu(); break;
       case "coach": _coachForce = true; paint(); break;
-      case "dxtour": startTour(); break;
       case "coachdone": setIcuSeen(); _coachForce = false; paint(); break;
       case "tip": showTip(arg); break;
       case "voice": if (modalEl) modalEl.classList.remove("on"); if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "icu" }); else alert("Voice intake is loading — try again in a moment."); break;
@@ -7283,7 +7227,6 @@
     _buildClinicalContext: buildClinicalContext, _correlationHash: correlationHash, _latestVitalsSummary: latestVitalsSummary, dxFlowOn: icuDxFlowOn,
     _runWorkingDx: runWorkingDx, _pickWorkingDx: pickWorkingDx, _dxFindingKeys: dxFindingKeys,
     _openDeepReviewConfirm: openDeepReviewConfirm, _deepReviewUsable: deepReviewUsable, _deepReviewItems: deepReviewItems,
-    _startTour: startTour, _tourShouldShow: tourShouldShow, _tourState: tourState, _tourKey: tourKey, _tourSteps: TOUR_STEPS,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"
