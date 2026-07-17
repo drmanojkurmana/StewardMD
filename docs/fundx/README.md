@@ -22,6 +22,8 @@ Records → "FundX AI" sub-tab (opens for the current patient).
 | File | Role | Global |
 |---|---|---|
 | `fundx-vision.js` | **Vision Engine core** — pure, DOM-free, reusable, headless-testable | `window.SMD_FUNDX_VISION` |
+| `fundx-enhance.js` | Image-enhancement pipeline (pure), swappable `IEnhancer` | `window.SMD_FUNDX_ENHANCE` |
+| `fundx-providers.js` | Retinal-inference provider abstraction / AI Router | `window.SMD_FUNDX_PROVIDERS` |
 | `fundx-detect.js` | Perception — heuristic pixels, MediaPipe adapter, sim-retina, camera | `window.SMD_FUNDX_DETECT` |
 | `fundx-store.js` | Local persistence (images + metadata index) | `window.SMD_FUNDX_STORE` |
 | `fundx.js` | Overlay UI, screen router, coaching, capture flow, training | `window.FUNDX` |
@@ -52,11 +54,20 @@ selecting → processing → review.
 
 ## Extension / swap points
 
-- **Retinal inference** — `IRetinaModel.analyze(input, ctx) → RetinalFindings`.
-  `MockRetinaModel` is the default (deterministic, `provider:"mock"`, flagged
-  non-diagnostic). Swap in real inference (Vertex AI / Gemini / Cerebras / local ONNX
-  or TFLite) with `SMD_FUNDX_VISION.registerRetinaModel(impl)` — the UI and the persisted
-  `ScanRecord.vision` schema are unchanged. Real providers may return a Promise.
+- **Retinal inference (AI Router)** — the capture flow routes through
+  `SMD_FUNDX_PROVIDERS.analyzeFindings(input, ctx) → RetinalFindings` (async). The registry
+  seeds `mock` (active default, deterministic, non-diagnostic) plus isolated adapters
+  `vertex-gemini`, `cerebras` (cloud; real `fetch` once `configure({endpoint, model})` is
+  set), and `onnx`, `tflite` (on-device; lazy runtime+model once `configure({modelUrl,
+  loader, infer})` is set). Connect a real provider with
+  `SMD_FUNDX_PROVIDERS.configure(id, cfg); SMD_FUNDX_PROVIDERS.setActive(id)` — the router
+  validates the response against the schema and falls back to `mock` on error/invalid
+  output. UI + persisted `ScanRecord.vision` schema are unchanged. (The lower-level
+  `SMD_FUNDX_VISION.registerRetinaModel` still exists for direct swaps.)
+- **Image enhancement** — `SMD_FUNDX_ENHANCE.enhance(imageData, opts) → imageData` (pure,
+  modular pipeline: reflection-suppress · denoise · gray-world WB · contrast/gamma ·
+  unsharp). `registerEnhancer(impl)` swaps the whole enhancer (e.g. a super-resolution
+  model). Produces the persisted **enhanced image**; the original is never mutated.
 - **Live retina/disc/macula signals** — during acquisition these are simulated
   (`SimRetina`) so beginners reach Capture-Ready before a real fundus detector exists.
   Replace via `DetectorHub.setRetinaSignalProvider(fn)` or `makeHub({ mediapipe })`.
@@ -100,9 +111,9 @@ fires when readiness holds.
 
 ## Known limitations (MVP)
 
-- Retinal detection is a swappable **mock**; disc/macula/red-reflex live signals are
-  proxies, not true detection (see design Deviations log).
+- Retinal detection defaults to a swappable **mock** provider; disc/macula/red-reflex live
+  signals are proxies, not true detection (see design Deviations log). Real providers
+  connect through the AI Router (above) with no UI/contract change.
 - MediaPipe loads from CDN unless vendored locally.
 - Voice coaching (TTS) is Web-Speech, off by default; reliable iOS TTS is a fast-follow.
-- Image "processed" = original (enhancement pipeline is a later milestone; path reserved).
 - No cloud sync (local-only by design).

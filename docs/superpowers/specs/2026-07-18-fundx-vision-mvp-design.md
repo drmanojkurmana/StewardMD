@@ -103,7 +103,8 @@ these. Boundary is a versioned schema.
 
 ### `ScanRecord` — every saved scan persists (Addition #3)
 1. **Original image** (raw best frame, on-device)
-2. **Processed image** (enhanced/normalized; MVP = light normalization, path reserved)
+2. **Enhanced image** (real enhancement pipeline `fundx-enhance.js`: reflection-suppress ·
+   denoise · gray-world WB · contrast/gamma · unsharp; original never mutated)
 3. **Quality metrics** (`QualityScore`: focus/blur/exposure/reflection/FOV/visibility/overall)
 4. **Acquisition metadata** (session stats: duration, attempts, motion/lens stability,
    readiness trace, eye R/L, state transitions, capture timing)
@@ -179,6 +180,12 @@ opens overlay, `?fundx=0` no-op; camera/MediaPipe guarded + tested via injected 
 - **M5 Guided Training Mode** — 7 levels + progress + operator stats. Verify.
 - **M6 Polish + docs + PR** — accessibility, canonical states, safety labeling, developer docs
   (architecture, extension points, Phase C handoff), final full verification, push + PR.
+- **M7 Enhancement pipeline** — real `fundx-enhance.js` (pure, swappable `IEnhancer`);
+  persists a genuine enhanced image distinct from the original. Verify.
+- **M8 Provider abstraction / AI Router** — `fundx-providers.js`: register/select/validate/
+  fallback/health; mock active by default; isolated adapters for Vertex(Gemini)/Cerebras
+  (cloud, real fetch when configured) + ONNX/TFLite (on-device, lazy when configured).
+  Capture flow routes findings through the router. Verify.
 
 ## 12. Deviations from Phase A (log)
 Phase A UI is frozen and reproduced. Deviations forced by the web/Capacitor target or by

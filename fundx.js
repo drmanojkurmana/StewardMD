@@ -436,16 +436,55 @@
   }
   function stopCamera() { try { if (cam) cam.stop(); } catch (e) {} VOICE.stop(); }
 
+  // Decode a captured dataURL → ImageData → run the enhancement pipeline → re-encode.
+  // The enhancement ALGORITHM is pure (fundx-enhance.js, unit-tested); this is the
+  // browser wrapper. Resolves null on any failure (caller keeps the original).
+  function enhanceDataUrl(dataUrl) {
+    return new Promise(function (resolve) {
+      var E = window.SMD_FUNDX_ENHANCE;
+      if (!E || !dataUrl || typeof Image === "undefined") return resolve(null);
+      try {
+        var img = new Image();
+        img.onload = function () {
+          try {
+            var iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height, maxW = 1024;
+            var sc = Math.min(1, maxW / (iw || maxW));
+            var w = Math.max(2, Math.round(iw * sc)), h = Math.max(2, Math.round(ih * sc));
+            var c = document.createElement("canvas"); c.width = w; c.height = h;
+            var cx = c.getContext("2d"); cx.drawImage(img, 0, 0, w, h);
+            var out = E.enhance(cx.getImageData(0, 0, w, h));
+            cx.putImageData(out, 0, 0);
+            resolve(c.toDataURL("image/jpeg", 0.9));
+          } catch (e) { resolve(null); }
+        };
+        img.onerror = function () { resolve(null); };
+        img.src = dataUrl;
+      } catch (e) { resolve(null); }
+    });
+  }
+
   function runProcessing(burst) {
     screen = "processing"; render();
     var tx = document.getElementById("fundxProcTx");
-    setTimeout(function () { if (tx) tx.textContent = "Scoring image quality…"; }, 500);
-    setTimeout(function () { if (tx) tx.textContent = "Generating structured findings…"; }, 1100);
-    setTimeout(function () {
-      result = FUNDX._buildResult(burst, ctx, session.eye, session);
-      if (!result) { toast("No usable frames — try again."); screen = "camera"; return startCamera(); }
-      screen = "review"; render();
-    }, 1600);
+    result = FUNDX._buildResult(burst, ctx, session.eye, session);
+    if (!result) { toast("No usable frames — try again."); screen = "camera"; return startCamera(); }
+    // 1) real image enhancement → the persisted "enhanced image" (distinct from original)
+    if (tx) tx.textContent = "Enhancing image…";
+    enhanceDataUrl(result.images.original).then(function (enh) { if (enh) result.images.processed = enh; })
+      .catch(function () {})
+      .then(function () {
+        // 2) retinal inference via the provider abstraction (mock by default; a configured
+        //    real provider — Vertex/Gemini, Cerebras, ONNX, TFLite — transparently overrides)
+        if (tx) tx.textContent = "Generating structured findings…";
+        var P = window.SMD_FUNDX_PROVIDERS;
+        if (P && P.analyzeFindings) {
+          return P.analyzeFindings(
+            { imageDataUrl: result.images.processed || result.images.original, quality: result.quality.overall, metrics: (burst[result.best] || {}).metrics },
+            { patientRef: (ctx && ctx.ref) || null, eye: session.eye, ts: nowMs() }
+          ).then(function (f) { if (f) result.findings = f; }).catch(function () {});
+        }
+      })
+      .then(function () { screen = "review"; render(); });
   }
 
   // ================= PURE HELPERS (unit-tested, DOM-free) =================
