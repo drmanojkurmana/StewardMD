@@ -5,22 +5,16 @@
   "capacitor": {
     "ios": {
       "src": "ios"
-    },
-    "android": {
-      "src": "android"
     }
   },
   "files": [
     "ios/Sources",
-    "android/src",
-    "android/build.gradle",
     "Package.swift",
     "package.json",
     "README.md",
-    "README-ANDROID.md",
     "LICENSE"
   ],
   "author": "StewardMD",
   "license": "MIT",
-  "_vendored": "StewardMD-authored local plugin (SPM on iOS like capacitor-vision-ocr; NDK/JNI on Android). Links whisper.cpp v1.9.1 (MIT, git submodule at android/src/main/cpp/whisper-cpp). No JS dist — accessed via Capacitor.Plugins.Whisper."
+  "_vendored": "StewardMD-authored local plugin (SPM on iOS like capacitor-vision-ocr). Links whisper.cpp v1.9.1 (MIT). No JS dist — accessed via Capacitor.Plugins.Whisper. ANDROID INTENTIONALLY EXCLUDED: the android NDK/JNI build (whisper.cpp) added ~6MB/ABI to the APK and dominated Gradle build time for no use on Android; voice.js already falls back to native STT / Web Speech / cloud when Capacitor.Plugins.Whisper is absent. To re-enable Android, restore the \"android\": {\"src\": \"android\"} entry under capacitor and the android/* files entries, then `npx cap sync android`."
 }
