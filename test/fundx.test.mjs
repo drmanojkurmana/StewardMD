@@ -233,5 +233,16 @@ ok("compare: days apart (3 days)", dDays.days === 3);
 ok("compare: null-safe when metric missing", FXtl._compareDelta({ timestamp: 1 }, { timestamp: 2 }).qualityDelta === null);
 ok("fundx: timeline + compare screens wired", /function screenTimeline\(/.test(fj) && /function screenCompare\(/.test(fj) && /screen === "timeline"/.test(fj) && /screen === "compare"/.test(fj));
 
+// ---- M10 Settings + Export ----------------------------------------------
+const FXset = loadFundx("1");
+const recX = FXset._buildScanRecord(
+  FXset._buildResult([{ dataUrl: "data:,x", metrics: { focus: 0.9, exposure: 0.85, reflection: 0.1, retinaConf: 0.9, discConf: 0.9, maculaConf: 0.9, contrast: 0.6, fieldOfView: 0.9 } }], { ref: "MRN1" }, "right", { startTs: 0 }),
+  { ref: "MRN1", name: "Test" }, "right", { startTs: 0 }, { id: "fx_x", now: 1000 });
+const payload = FXset._exportPayload(recX);
+ok("export: payload schema + timestamp", payload.schema === "fundx.scan.export/1" && payload.exportedAt != null);
+ok("export: carries findings + metadata, NO image bytes", !!(payload.scan.vision && payload.scan.quality && payload.scan.device && payload.scan.audit) && payload.scan.originalImage === undefined);
+ok("export: provider/model version included", !!payload.scan.provider && payload.scan.provider.provider === "mock");
+ok("fundx: settings screen + provider/sensitivity/export wired", /function screenSettings\(/.test(fj) && /data-fx="setprovider"/.test(fj) && /data-fx="setsens"/.test(fj) && /function exportScan\(/.test(fj) && /screen === "settings"/.test(fj));
+
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);

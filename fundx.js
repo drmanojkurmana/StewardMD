@@ -111,6 +111,7 @@
       '<header class="fundx-head rds-safe-top">' +
         '<button class="fundx-close" data-fx="close" aria-label="Close">' + ric("arrow_back_ios_new") + '</button>' +
         '<div class="fundx-head-tt"><b>FundX<span>AI</span></b>' + who + '</div><div class="fundx-head-sp"></div>' +
+        '<button class="fundx-close" data-fx="settings" aria-label="Settings">' + ric("settings") + '</button>' +
       '</header>' +
       '<main class="fundx-scroll">' +
         '<button class="fundx-cta" data-fx="newscan">' + ric("visibility") +
@@ -311,7 +312,8 @@
           row("Device", esc((m.device && m.device.platform) || "—") + " · " + esc((m.device && m.device.appVersion) || "")) +
           row("Operator", esc((m.audit && m.audit.operator) || "—")) +
         '</div>' +
-        '<div class="fundx-actions"><button class="fundx-btn ghost" data-fx="deletescan" data-id="' + esc(m.id) + '">' + ric("delete") + 'Delete scan</button></div>' +
+        '<div class="fundx-actions"><button class="fundx-btn ghost" data-fx="deletescan" data-id="' + esc(m.id) + '">' + ric("delete") + 'Delete</button>' +
+          '<button class="fundx-btn" data-fx="export" data-id="' + esc(m.id) + '">' + ric("ios_share") + 'Export JSON</button></div>' +
         '<p class="fundx-disc">' + esc(f.disclaimer || DISCLAIMER) + '</p>' +
       '</main>';
   }
@@ -404,6 +406,73 @@
       '<div class="rds-section-header"><span class="rds-section-title">Change</span></div>' +
       '<div class="fundx-findings">' + deltaRow("Image quality", d.qualityDelta, "") + deltaRow("Cup–disc ratio", d.cdrDelta, "") + '</div>' +
       '<p class="fundx-disc">Comparison of stored measurements. Not a diagnosis. Longitudinal clinical interpretation is Phase C.</p></main>';
+  }
+
+  // ---- Settings + Export --------------------------------------------------
+  var SENS = { low: { r: 0.82, f: 4 }, med: { r: 0.9, f: 6 }, high: { r: 0.95, f: 8 } };
+  function loadSens() { try { return localStorage.getItem("smd_fundx_sens") || "med"; } catch (e) { return "med"; } }
+  function applySettings() { var Ve = V(); if (!Ve) return; var s = SENS[loadSens()] || SENS.med; Ve.CFG.captureReadiness = s.r; Ve.CFG.readySustainFrames = s.f; }
+
+  function screenSettings() {
+    var P = window.SMD_FUNDX_PROVIDERS;
+    var providers = P && P.health ? P.health() : [];
+    var sens = loadSens();
+    function provRow(p) {
+      return '<button class="fundx-set-row' + (p.active ? ' on' : '') + (p.available ? '' : ' off') + '"' + (p.available ? ' data-fx="setprovider" data-id="' + esc(p.id) + '"' : '') + '>' +
+        '<span class="fundx-set-rl"><b>' + esc(p.id) + '</b><span>' + esc(p.provider) + ' · ' + esc(p.modelVersion) + (p.available ? '' : ' · not configured') + '</span></span>' +
+        (p.active ? ric("radio_button_checked") : ric(p.available ? "radio_button_unchecked" : "lock")) + '</button>';
+    }
+    function sensChip(k, l) { return '<button class="fundx-chip2' + (sens === k ? ' on' : '') + '" data-fx="setsens" data-v="' + k + '">' + l + '</button>'; }
+    return '' +
+      '<header class="fundx-head rds-safe-top"><button class="fundx-close" data-fx="home" aria-label="Back">' + ric("arrow_back_ios_new") + '</button><div class="fundx-head-tt"><b>Settings</b></div><div class="fundx-head-sp"></div></header>' +
+      '<main class="fundx-scroll">' +
+        '<div class="rds-section-header"><span class="rds-section-title">AI provider (retinal inference)</span></div>' +
+        '<div class="fundx-set-list">' + providers.map(provRow).join("") + '</div>' +
+        '<p class="fundx-note">Only providers with configured endpoints/models are selectable. Others connect through the AI Router once credentials are supplied — no app change needed.</p>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Auto-capture sensitivity</span></div>' +
+        '<div class="fundx-chips2">' + sensChip("low", "Easier") + sensChip("med", "Balanced") + sensChip("high", "Strict") + '</div>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Coaching</span></div>' +
+        '<button class="fundx-set-row' + (VOICE.enabled() ? ' on' : '') + '" data-fx="setvoice"><span class="fundx-set-rl"><b>Voice coaching</b><span>Spoken guidance during capture</span></span>' + ric(VOICE.enabled() ? "toggle_on" : "toggle_off") + '</button>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Data</span></div>' +
+        '<button class="fundx-set-row" data-fx="clearall"><span class="fundx-set-rl"><b>Delete all scans</b><span>Removes every stored image + record on this device</span></span>' + ric("delete_forever") + '</button>' +
+        '<p class="fundx-disc">' + DISCLAIMER + '</p>' +
+      '</main>';
+  }
+
+  // Pure: build the export payload for a scan (no image bytes — metadata + findings).
+  function exportPayload(meta) {
+    meta = meta || {};
+    return {
+      schema: "fundx.scan.export/1", exportedAt: nowMs(),
+      scan: { id: meta.id, eye: meta.eye || (meta.acquisition && meta.acquisition.eye) || null, timestamp: meta.timestamp || null, quality: meta.quality || null, acquisition: meta.acquisition || null, vision: meta.vision || null, provider: meta.provider || null, device: meta.device || null, patientContext: meta.patientContext || null, audit: meta.audit || null }
+    };
+  }
+  function exportScan(meta) {
+    var json = JSON.stringify(exportPayload(meta), null, 2);
+    var fname = "fundx-" + (meta && meta.id ? meta.id : "scan") + ".json";
+    try {
+      var C = window.Capacitor, P = C && C.Plugins;
+      if (window.SMD_IS_NATIVE && P && P.Filesystem && P.Share) {
+        return P.Filesystem.writeFile({ path: fname, data: json, directory: "CACHE", encoding: "utf8" })
+          .then(function () { return P.Filesystem.getUri({ path: fname, directory: "CACHE" }); })
+          .then(function (u) { return P.Share.share({ title: "FundX scan", files: [u.uri] }); })
+          .then(function () { toast("Scan exported."); })
+          .catch(function () { toast("Could not export."); });
+      }
+    } catch (e) {}
+    // web fallback: Blob download
+    try {
+      var blob = new Blob([json], { type: "application/json" });
+      var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = fname;
+      document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      toast("Scan exported.");
+    } catch (e) { toast("Could not export."); }
+  }
+  function clearAllScans() {
+    var st = STORE(); if (!st) return;
+    st.listScans().then(function (list) {
+      return Promise.all((list || []).map(function (m) { return st.deleteScan(m.id); }));
+    }).then(function () { haptic("warning"); toast("All scans deleted."); show("home"); }).catch(function () { toast("Could not clear scans."); });
   }
 
   function paintRecent() {
@@ -639,6 +708,7 @@
     else if (screen === "training") rootEl.innerHTML = screenTraining();
     else if (screen === "timeline") rootEl.innerHTML = screenTimeline();
     else if (screen === "compare") rootEl.innerHTML = screenCompare();
+    else if (screen === "settings") rootEl.innerHTML = screenSettings();
   }
   function show(s) { screen = s; render(); }
 
@@ -665,12 +735,19 @@
       case "totimeline": haptic("light"); return show("timeline");
       case "open": haptic("light"); return openDetail(b.getAttribute("data-id"));
       case "deletescan": haptic("light"); return deleteScan(b.getAttribute("data-id"));
+      case "settings": haptic("light"); return show("settings");
+      case "setprovider": { var P = window.SMD_FUNDX_PROVIDERS; if (P && P.setActive(b.getAttribute("data-id"))) { haptic("selection"); toast("Provider: " + b.getAttribute("data-id")); render(); } return; }
+      case "setsens": { try { localStorage.setItem("smd_fundx_sens", b.getAttribute("data-v")); } catch (e) {} applySettings(); haptic("selection"); return render(); }
+      case "setvoice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); return render();
+      case "clearall": haptic("warning"); return clearAllScans();
+      case "export": haptic("light"); { var st = STORE(); if (st) st.getScan(b.getAttribute("data-id")).then(function (m) { if (m) exportScan(m); }); } return;
     }
   }
 
   var FUNDX = {
     open: function (context) {
       ctx = context || null; screen = "home"; session = null; result = null; capturing = false;
+      applySettings();
       if (!rootEl) {
         rootEl = document.createElement("div"); rootEl.id = "fundxRoot";
         rootEl.setAttribute("role", "dialog"); rootEl.setAttribute("aria-modal", "true"); rootEl.setAttribute("aria-label", "FundX AI retinal imaging");
@@ -687,7 +764,8 @@
     _levelAchieved: levelAchieved,
     _levels: function () { return LEVELS; },
     _trend: trend,
-    _compareDelta: compareDelta
+    _compareDelta: compareDelta,
+    _exportPayload: exportPayload
   };
   window.FUNDX = FUNDX;
 })();
