@@ -62,7 +62,7 @@ if [ -d assets/fonts ]; then mkdir -p "$WWW/assets/fonts"; cp assets/fonts/* "$W
 # source/dev dirs (diseases, reference, validation, tools, schema, manifest…) are
 # NOT fetched at runtime and are deliberately excluded.
 for f in kb/dist/kb.core.js kb/dist/kb.clinical.js kb/dist/kb.enrichment.js \
-         kb/dist/kb.expanded.js kb/dist/kb.rag.js; do
+         kb/dist/kb.enrichment.2.js kb/dist/kb.expanded.js kb/dist/kb.rag.js; do
   [ -f "$f" ] && cp "$f" "$WWW/kb/dist/"
 done
 [ -d kb/ai ] && cp -R kb/ai/. "$WWW/kb/ai/"

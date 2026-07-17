@@ -73,5 +73,10 @@
   try { window.addEventListener("beforeunload", function () { if (queue.length) { try { flush(); } catch (e) {} } }); } catch (e) {}
   loadCache();
 
-  window.SMD_KU = { emit: emit, balance: balance, summary: summary, onChange: onChange, signedIn: signedIn, _flush: flush, _queue: function () { return queue.slice(); } };
+  // Absorb a server response (award/qualify/summary) into the cache so balance + listeners update
+  // immediately without a re-fetch. The merged engagement view is a superset of the old summary,
+  // so everything downstream (chip, dashboard) sees fresh data.
+  function absorb(j) { if (j && typeof j.balance === "number") saveCache(j); return j; }
+
+  window.SMD_KU = { emit: emit, balance: balance, summary: summary, onChange: onChange, signedIn: signedIn, _absorb: absorb, _cache: function () { return cache; }, _flush: flush, _queue: function () { return queue.slice(); } };
 })();

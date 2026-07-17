@@ -351,8 +351,14 @@
         }
         cb && cb(out);
       }
+      // NOTE: no includeMetadataChanges — it made this collectionGroup listener fire on every
+      // pending-write / cache↔server metadata flip (twice per write), churning callbacks →
+      // re-render → native-bridge traffic every couple seconds and hitching scroll. We fire only
+      // on real membership changes now. The "Syncing…" pill is unaffected: syncState() derives it
+      // from _inflight (writes in flight, via track()) + navigator online/offline — not this
+      // listener's metadata. _meta is still refreshed opportunistically on each real fire.
       var memOff = db.collectionGroup("members").where("uid", "==", uid)
-        .onSnapshot({ includeMetadataChanges: true }, function (snap) {
+        .onSnapshot(function (snap) {
           try { _meta.fromCache = !!(snap.metadata && snap.metadata.fromCache); _meta.pendingWrites = !!(snap.metadata && snap.metadata.hasPendingWrites); } catch (e) {}
           var seen = {};
           snap.forEach(function (mdoc) {

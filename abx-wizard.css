@@ -1,0 +1,358 @@
+/* ============================================================================
+   StewardMD — Antibiotic Decision Engine · 5-step wizard (#abxWizard) styles.
+   Self-contained overlay matching design_handoff_antibiotic_decision_engine.
+   Tokens default to the handoff's light palette; body.dark remaps surfaces.
+   Severity ramp is THEME-INVARIANT (clinical safety). Gated by html.abx-ui.
+   ============================================================================ */
+html.abx-ui #abxWizard {
+  --w-paper: #eef1ee; --w-panel: #fff; --w-panel2: #f6f8f7; --w-inputbg: #fbfcfb;
+  --w-ink: #14202b; --w-slate: #2d4356; --w-soft: #5a7184; --w-muted: #7c8b96;
+  --w-line: #d7dee3; --w-linesoft: #eef1f0; --w-teal: #0e6e63; --w-teal-ink: #0e6e63; --w-tealsoft: #e3f1ee; --w-tealbd: #b8ddd5;
+  --w-sans: 'Inter', 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --w-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* severity (invariant) */
+  --sv-green-fg:#155e39; --sv-green-bg:#e7f5ec; --sv-green-ln:#aedcc1; --sv-green-bar:#1c7a4a;
+  --sv-yellow-fg:#7a5208; --sv-yellow-bg:#fdf2de; --sv-yellow-ln:#f0d49b; --sv-yellow-bar:#92620a;
+  --sv-orange-fg:#94380c; --sv-orange-bg:#fdebe1; --sv-orange-ln:#f3b88e; --sv-orange-bar:#b5460f;
+  --sv-red-fg:#8c1622; --sv-red-bg:#fbe7e9; --sv-red-ln:#efa9b1; --sv-red-bar:#ab1c2c;
+  position: fixed; inset: 0; z-index: 12000; display: none; background: var(--w-paper);
+  color: var(--w-ink); font-family: var(--w-sans); -webkit-font-smoothing: antialiased;
+}
+html.abx-ui #abxWizard.on { display: block; }
+html body.dark.abx-ui #abxWizard, html.abx-ui body.dark #abxWizard {
+  --w-paper:#0d1b26; --w-panel:#132030; --w-panel2:#10202f; --w-inputbg:#0f1c29;
+  --w-ink:#e8edf2; --w-slate:#c4d2df; --w-soft:#9bb0c2; --w-muted:#7690a6; --w-line:#29394b; --w-linesoft:#22303f; --w-tealsoft:#12332e; --w-tealbd:#1c5049;
+  --w-teal-ink:#3fc7b3; /* bright teal for TEXT/ICONS on dark (fills keep --w-teal + white text) */
+}
+html.abx-ui #abxWizard .abxw-scroll { position: absolute; inset: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+html.abx-ui #abxWizard .abxw-wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px 130px; }
+html.abx-ui #abxWizard .abx-ms { font-family: 'Material Symbols Rounded'; font-weight: normal; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr; display: inline-block; vertical-align: middle; -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; }
+html.abx-ui #abxWizard button { font-family: inherit; cursor: pointer; }
+html.abx-ui #abxWizard button:focus-visible, html.abx-ui #abxWizard input:focus-visible, html.abx-ui #abxWizard select:focus-visible { outline: 3px solid var(--w-teal); outline-offset: 2px; }
+
+/* header */
+html.abx-ui #abxWizard .abxw-head { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--w-paper) 88%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--w-line); padding: 14px 0 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+html.abx-ui #abxWizard .abxw-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+html.abx-ui #abxWizard .abxw-logo { width: 40px; height: 40px; border-radius: 11px; background: var(--w-teal); display: grid; place-items: center; flex: none; box-shadow: 0 2px 8px rgba(14,110,99,.28); }
+html.abx-ui #abxWizard .abxw-logo .abx-ms { color: #fff; font-size: 24px; }
+/* real StewardMD brand mark (logo.png as a white mask inside the teal lockup) */
+html.abx-ui #abxWizard .abxw-logo-mark { width: 24px; height: 24px; display: block; background: #fff; -webkit-mask: url(/logo.png) center/contain no-repeat; mask: url(/logo.png) center/contain no-repeat; }
+/* MARINAM ⇄ CLASSIC UI switch */
+html.abx-ui #abxWizard .abxw-uiswitch { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 13px; border-radius: 11px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-teal-ink); font: 700 12.5px var(--w-sans); box-shadow: 0 1px 2px rgba(20,32,43,.04); }
+html.abx-ui #abxWizard .abxw-uiswitch .abx-ms { font-size: 18px; color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-uiswitch:hover { border-color: var(--w-teal); }
+html.abx-ui #abxWizard .abxw-brandt { font: 800 19px/1.1 var(--w-sans); letter-spacing: -.3px; color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-brandt span { color: var(--w-teal); }
+html.abx-ui #abxWizard .abxw-brands { font: 500 12.5px var(--w-sans); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-headr { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+html.abx-ui #abxWizard .abxw-seg { display: flex; background: var(--w-panel); border: 1px solid var(--w-line); border-radius: 12px; padding: 4px; gap: 2px; box-shadow: 0 1px 2px rgba(20,32,43,.04); }
+html.abx-ui #abxWizard .abxw-segb { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 15px; border: none; border-radius: 9px; background: transparent; color: var(--w-soft); font: 700 13.5px var(--w-sans); transition: background .12s, color .12s; }
+html.abx-ui #abxWizard .abxw-segb .abx-ms { font-size: 19px; }
+html.abx-ui #abxWizard .abxw-segb.on { background: var(--w-teal); color: #fff; }
+html.abx-ui #abxWizard .abxw-reset { height: 44px; padding: 0 16px; border-radius: 11px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); font: 600 14px var(--w-sans); display: inline-flex; align-items: center; gap: 7px; }
+html.abx-ui #abxWizard .abxw-reset .abx-ms { font-size: 19px; }
+html.abx-ui #abxWizard .abxw-close { width: 44px; height: 44px; border-radius: 11px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); display: grid; place-items: center; }
+html.abx-ui #abxWizard .abxw-close .abx-ms { font-size: 22px; }
+
+/* compact text-size button → tap reveals a small size slider (small ⇄ big) */
+html.abx-ui #abxWizard .abxw-tswrap { position: relative; }
+html.abx-ui #abxWizard .abxw-tsbtn { width: 44px; height: 44px; border-radius: 11px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); display: grid; place-items: center; }
+html.abx-ui #abxWizard .abxw-tsbtn .abx-ms { font-size: 22px; }
+html.abx-ui #abxWizard .abxw-tsbtn[aria-expanded="true"] { border-color: var(--w-teal); color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-tspop { position: absolute; top: calc(100% + 8px); right: 0; z-index: 20; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--w-line); background: var(--w-panel); box-shadow: 0 12px 30px rgba(20,32,43,.18); }
+html.abx-ui #abxWizard .abxw-tspop[hidden] { display: none; }
+html.abx-ui #abxWizard .abxw-tspop-a { color: var(--w-soft); font-weight: 800; line-height: 1; }
+html.abx-ui #abxWizard .abxw-tspop-sm { font-size: 12px; }
+html.abx-ui #abxWizard .abxw-tspop-lg { font-size: 20px; }
+html.abx-ui #abxWizard .abxw-tsrange { width: 128px; accent-color: var(--w-teal); }
+html.abx-ui #abxWizard .abxw-tspct { min-width: 42px; text-align: right; font: 700 12.5px var(--w-sans); color: var(--w-teal-ink); }
+
+/* Reset moved into the bottom bar, between Back and the primary action */
+html.abx-ui #abxWizard .abxw-resetb { height: 48px; padding: 0 15px; border-radius: 12px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); font: 700 13.5px var(--w-sans); display: inline-flex; align-items: center; gap: 6px; }
+html.abx-ui #abxWizard .abxw-resetb .abx-ms { font-size: 19px; }
+
+/* "Switch to Simple" suggestion shown in Advanced (the new default) */
+html.abx-ui #abxWizard .abxw-modehint { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 2px 0 14px; padding: 10px 13px; border-radius: 12px; background: var(--w-tealsoft); border: 1px solid var(--w-tealbd); }
+html.abx-ui #abxWizard .abxw-modehint > .abx-ms { font-size: 20px; color: var(--w-teal); flex: none; }
+html.abx-ui #abxWizard .abxw-modehint-t { flex: 1; min-width: 150px; font: 500 12.5px/1.35 var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-modehint-b { display: inline-flex; align-items: center; gap: 5px; height: 34px; padding: 0 13px; border: none; border-radius: 9px; background: var(--w-teal); color: #fff; font: 700 12.5px var(--w-sans); flex: none; }
+html.abx-ui #abxWizard .abxw-modehint-b .abx-ms { font-size: 16px; }
+
+/* policy banner */
+html.abx-ui #abxWizard .abxw-policy { display: flex; align-items: center; gap: 10px; background: var(--w-tealsoft); border: 1px solid var(--w-tealbd); border-radius: 12px; padding: 11px 14px; margin-bottom: 14px; font: 500 13px var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-policy > .abx-ms { font-size: 20px; color: var(--w-teal); flex: none; }
+html.abx-ui #abxWizard .abxw-policyt { flex: 1; min-width: 0; }
+html.abx-ui #abxWizard .abxw-rec { color: var(--w-teal); font-weight: 600; }
+/* footer placement: quieter, sits at the end of the scroll content (above the sticky bar) */
+html.abx-ui #abxWizard .abxw-policy-foot { margin: 20px 0 6px; background: var(--w-panel); border-color: var(--w-line); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-policy-foot > .abx-ms { color: var(--w-teal); }
+html.abx-ui #abxWizard .abxw-pill { flex: none; font: 700 11.5px var(--w-sans); color: var(--w-teal); background: var(--w-panel); border: 1px solid var(--w-tealbd); border-radius: 20px; padding: 4px 10px; }
+
+/* stepper */
+html.abx-ui #abxWizard .abxw-stepper { display: flex; gap: 6px; margin-bottom: 18px; }
+html.abx-ui #abxWizard .abxw-step { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; background: none; border: none; padding: 4px 2px; }
+html.abx-ui #abxWizard .abxw-step.off { opacity: .5; cursor: default; }
+html.abx-ui #abxWizard .abxw-dot { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: #c4cdc9; transition: background .15s, box-shadow .15s; }
+html.abx-ui #abxWizard .abxw-dot .abx-ms { font-size: 17px; }
+html.abx-ui #abxWizard .abxw-step.done .abxw-dot, html.abx-ui #abxWizard .abxw-step.cur .abxw-dot { background: var(--w-teal); }
+html.abx-ui #abxWizard .abxw-step.cur .abxw-dot { box-shadow: 0 0 0 4px rgba(14,110,99,.18); }
+html.abx-ui #abxWizard .abxw-steplbl { font: 600 11.5px var(--w-sans); color: var(--w-soft); text-align: center; line-height: 1.2; }
+html.abx-ui #abxWizard .abxw-step.cur .abxw-steplbl { color: var(--w-teal); font-weight: 700; }
+
+/* headings */
+html.abx-ui #abxWizard .abxw-h { font: 800 22px/1.15 var(--w-sans); letter-spacing: -.4px; margin: 0 0 4px; color: var(--w-ink); text-wrap: balance; }
+html.abx-ui #abxWizard .abxw-sub { margin: 0 0 16px; color: var(--w-soft); font: 400 14.5px/1.5 var(--w-sans); max-width: 60ch; }
+html.abx-ui #abxWizard .abxw-pickttl { font: 700 12px var(--w-sans); letter-spacing: .4px; text-transform: uppercase; color: var(--w-soft); margin: 2px 0 9px; }
+html.abx-ui #abxWizard .abxw-lbl { font: 700 11px var(--w-sans); letter-spacing: .5px; text-transform: uppercase; color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-secttl { display: flex; align-items: center; gap: 8px; font: 800 13px var(--w-sans); letter-spacing: .6px; text-transform: uppercase; color: var(--w-soft); margin: 20px 0 12px; }
+html.abx-ui #abxWizard .abxw-secttl .abx-ms { color: var(--w-teal); font-size: 18px; }
+
+/* selected summary */
+html.abx-ui #abxWizard .abxw-selcard { background: var(--w-panel); border: 1px solid var(--w-line); border-radius: 14px; padding: 13px 14px; margin-bottom: 14px; }
+html.abx-ui #abxWizard .abxw-selhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; }
+html.abx-ui #abxWizard .abxw-clear { border: none; background: none; color: var(--w-teal); font: 600 12.5px var(--w-sans); }
+html.abx-ui #abxWizard .abxw-selrow { display: flex; flex-wrap: wrap; gap: 7px; }
+html.abx-ui #abxWizard .abxw-selchip { display: inline-flex; align-items: center; gap: 5px; height: 34px; padding: 0 8px 0 12px; border-radius: 20px; background: var(--w-teal); color: #fff; border: none; font: 600 13px var(--w-sans); }
+html.abx-ui #abxWizard .abxw-selchip .abx-ms { font-size: 17px; opacity: .85; }
+
+/* system boxes */
+html.abx-ui #abxWizard .abxw-sysgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-bottom: 16px; }
+html.abx-ui #abxWizard .abxw-sysbox { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 96px; padding: 14px 8px; border-radius: 14px; text-align: center; background: var(--w-panel); border: 1.5px solid var(--w-line); color: var(--w-slate); box-shadow: 0 1px 2px rgba(20,32,43,.04); transition: border-color .12s, background .12s; }
+html.abx-ui #abxWizard .abxw-sysbox.active { border-color: var(--w-teal); background: var(--w-tealsoft); color: var(--w-teal); box-shadow: 0 2px 8px rgba(14,110,99,.14); }
+html.abx-ui #abxWizard .abxw-sysic .abx-ms { font-size: 26px; color: var(--w-teal); }
+html.abx-ui #abxWizard .abxw-sysnm { font: 700 13.5px var(--w-sans); line-height: 1.2; }
+html.abx-ui #abxWizard .abxw-syscap { font: 600 11.5px var(--w-sans); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-sysbox.active .abxw-syscap { color: var(--w-teal); }
+
+/* open panel + chips */
+html.abx-ui #abxWizard .abxw-panel { background: var(--w-panel); border: 1px solid var(--w-line); border-radius: 14px; overflow: hidden; margin-bottom: 12px; animation: abxw-fade .16s ease; }
+@keyframes abxw-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { html.abx-ui #abxWizard * { animation: none !important; transition: none !important; } }
+html.abx-ui #abxWizard .abxw-panelh { display: flex; align-items: center; gap: 10px; padding: 14px 15px; border-bottom: 1px solid var(--w-linesoft); }
+html.abx-ui #abxWizard .abxw-panelh .abx-ms { color: var(--w-teal); font-size: 22px; }
+html.abx-ui #abxWizard .abxw-panelh h3 { flex: 1; margin: 0; font: 700 15px var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-count { font: 600 12px var(--w-mono); color: var(--w-teal); background: var(--w-tealsoft); border-radius: 20px; padding: 3px 9px; }
+html.abx-ui #abxWizard .abxw-panelb { padding: 13px 15px; }
+html.abx-ui #abxWizard .abxw-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+html.abx-ui #abxWizard .abxw-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px 0 10px; border-radius: 22px; background: var(--w-panel); color: var(--w-slate); border: 1.5px solid var(--w-line); font: 600 13.5px var(--w-sans); transition: background .12s, border-color .12s, color .12s; }
+html.abx-ui #abxWizard .abxw-chip .abx-ms { font-size: 17px; color: var(--w-teal); }
+html.abx-ui #abxWizard .abxw-chip.on { background: var(--w-teal); color: #fff; border-color: var(--w-teal); }
+html.abx-ui #abxWizard .abxw-chip.on .abx-ms { color: #fff; }
+html.abx-ui #abxWizard .abxw-radiowrap { margin-bottom: 12px; }
+html.abx-ui #abxWizard .abxw-radiolbl { font: 600 12.5px var(--w-sans); color: var(--w-soft); margin-bottom: 7px; }
+html.abx-ui #abxWizard .abxw-radiorow { display: flex; flex-wrap: wrap; gap: 8px; }
+html.abx-ui #abxWizard .abxw-numgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 12px; }
+html.abx-ui #abxWizard .abxw-numfield { display: flex; flex-direction: column; gap: 4px; font: 600 11.5px var(--w-sans); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-numfield input, html.abx-ui #abxWizard .abxw-numfield select { height: 44px; border: 1px solid var(--w-line); border-radius: 10px; padding: 0 11px; font: 500 14px var(--w-mono); color: var(--w-ink); background: var(--w-inputbg); }
+html.abx-ui #abxWizard .abxw-panelnext { display: flex; justify-content: flex-end; margin-top: 14px; }
+html.abx-ui #abxWizard .abxw-groupnext { min-height: 44px; padding: 0 18px; border-radius: 11px; border: 1px solid var(--w-teal); background: var(--w-tealsoft); color: var(--w-teal); font: 700 13.5px var(--w-sans); display: inline-flex; align-items: center; gap: 7px; }
+html.abx-ui #abxWizard .abxw-groupnext .abx-ms { font-size: 19px; }
+
+/* empty states */
+html.abx-ui #abxWizard .abxw-empty { text-align: center; padding: 34px 20px; color: var(--w-muted); }
+html.abx-ui #abxWizard .abxw-empty.dash { background: var(--w-panel); border: 1px dashed var(--w-line); border-radius: 14px; }
+html.abx-ui #abxWizard .abxw-empty .abx-ms { font-size: 40px; color: #c4cdc9; }
+html.abx-ui #abxWizard .abxw-empty p { margin: 8px 0 0; font-size: 14px; }
+html.abx-ui #abxWizard .abxw-livehint { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 11px 14px; background: var(--w-tealsoft); border: 1px solid var(--w-tealbd); border-radius: 12px; font: 500 13.5px var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-livehint .abx-ms { color: var(--w-teal); }
+
+/* differential */
+html.abx-ui #abxWizard .abxw-difflist { display: flex; flex-direction: column; gap: 9px; }
+html.abx-ui #abxWizard .abxw-diff { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 13px 14px; border-radius: 14px; background: var(--w-panel); border: 1.5px solid var(--w-line); box-shadow: 0 1px 2px rgba(20,32,43,.04); transition: border-color .12s, box-shadow .12s; }
+html.abx-ui #abxWizard .abxw-diff.locked { border-color: var(--w-teal); box-shadow: 0 2px 10px rgba(14,110,99,.16); }
+html.abx-ui #abxWizard .abxw-diffrail { width: 4px; align-self: stretch; border-radius: 4px; flex: none; }
+html.abx-ui #abxWizard .abxw-diff.sev-red .abxw-diffrail { background: var(--sv-red-bar); } html.abx-ui #abxWizard .abxw-diff.sev-orange .abxw-diffrail { background: var(--sv-orange-bar); }
+html.abx-ui #abxWizard .abxw-diff.sev-yellow .abxw-diffrail { background: var(--sv-yellow-bar); } html.abx-ui #abxWizard .abxw-diff.sev-green .abxw-diffrail { background: var(--sv-green-bar); }
+html.abx-ui #abxWizard .abxw-diffmain { flex: 1; min-width: 0; }
+html.abx-ui #abxWizard .abxw-diffnm { display: flex; align-items: center; gap: 8px; font: 700 15px var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-diffnm .abx-ms { color: var(--w-teal); font-size: 18px; }
+html.abx-ui #abxWizard .abxw-diffsys { font: 400 12px var(--w-sans); color: var(--w-soft); margin-top: 1px; }
+html.abx-ui #abxWizard .abxw-diffbar { height: 6px; border-radius: 6px; background: var(--w-linesoft); margin-top: 8px; overflow: hidden; }
+html.abx-ui #abxWizard .abxw-diffbar span { display: block; height: 100%; border-radius: 6px; }
+html.abx-ui #abxWizard .abxw-diff.sev-red .abxw-diffbar span { background: var(--sv-red-bar); } html.abx-ui #abxWizard .abxw-diff.sev-orange .abxw-diffbar span { background: var(--sv-orange-bar); }
+html.abx-ui #abxWizard .abxw-diff.sev-yellow .abxw-diffbar span { background: var(--sv-yellow-bar); } html.abx-ui #abxWizard .abxw-diff.sev-green .abxw-diffbar span { background: var(--sv-green-bar); }
+html.abx-ui #abxWizard .abxw-diffpct { font: 700 15px var(--w-mono); flex: none; }
+html.abx-ui #abxWizard .abxw-diff.sev-red .abxw-diffpct { color: var(--sv-red-bar); } html.abx-ui #abxWizard .abxw-diff.sev-orange .abxw-diffpct { color: var(--sv-orange-bar); }
+html.abx-ui #abxWizard .abxw-diff.sev-yellow .abxw-diffpct { color: var(--sv-yellow-bar); } html.abx-ui #abxWizard .abxw-diff.sev-green .abxw-diffpct { color: var(--sv-green-bar); }
+
+/* decision */
+html.abx-ui #abxWizard .abxw-deccard { border-radius: 16px; padding: 18px; border: 1px solid var(--w-line); border-left: 5px solid var(--w-slate); background: var(--w-panel); }
+html.abx-ui #abxWizard .abxw-deccard.sev-green { background: var(--sv-green-bg); border-color: var(--sv-green-ln); border-left-color: var(--sv-green-bar); }
+html.abx-ui #abxWizard .abxw-deccard.sev-yellow { background: var(--sv-yellow-bg); border-color: var(--sv-yellow-ln); border-left-color: var(--sv-yellow-bar); }
+html.abx-ui #abxWizard .abxw-deccard.sev-orange { background: var(--sv-orange-bg); border-color: var(--sv-orange-ln); border-left-color: var(--sv-orange-bar); }
+html.abx-ui #abxWizard .abxw-deccard.sev-red { background: var(--sv-red-bg); border-color: var(--sv-red-ln); border-left-color: var(--sv-red-bar); }
+html.abx-ui #abxWizard .abxw-dechead { display: flex; align-items: flex-start; gap: 12px; }
+html.abx-ui #abxWizard .abxw-decic { width: 44px; height: 44px; border-radius: 12px; flex: none; display: grid; place-items: center; background: #fff; border: 1px solid var(--w-line); }
+html.abx-ui #abxWizard .abxw-deccard.sev-green .abxw-decic .abx-ms { color: var(--sv-green-bar); } html.abx-ui #abxWizard .abxw-deccard.sev-yellow .abxw-decic .abx-ms { color: var(--sv-yellow-bar); }
+html.abx-ui #abxWizard .abxw-deccard.sev-orange .abxw-decic .abx-ms { color: var(--sv-orange-bar); } html.abx-ui #abxWizard .abxw-deccard.sev-red .abxw-decic .abx-ms { color: var(--sv-red-bar); }
+html.abx-ui #abxWizard .abxw-decic .abx-ms { font-size: 24px; }
+html.abx-ui #abxWizard .abxw-declbl { font: 800 11.5px var(--w-sans); letter-spacing: .6px; text-transform: uppercase; opacity: .9; }
+html.abx-ui #abxWizard .abxw-deccard.sev-green .abxw-declbl { color: var(--sv-green-fg); } html.abx-ui #abxWizard .abxw-deccard.sev-yellow .abxw-declbl { color: var(--sv-yellow-fg); }
+html.abx-ui #abxWizard .abxw-deccard.sev-orange .abxw-declbl { color: var(--sv-orange-fg); } html.abx-ui #abxWizard .abxw-deccard.sev-red .abxw-declbl { color: var(--sv-red-fg); }
+html.abx-ui #abxWizard .abxw-decdx { font: 800 21px var(--w-sans); letter-spacing: -.4px; color: var(--w-ink); margin-top: 2px; text-wrap: balance; }
+html.abx-ui #abxWizard .abxw-decgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; margin-top: 16px; }
+html.abx-ui #abxWizard .abxw-decfact { background: rgba(255,255,255,.6); border-radius: 11px; padding: 10px 12px; }
+html body.dark.abx-ui #abxWizard .abxw-decfact { background: rgba(255,255,255,.08); }
+html.abx-ui #abxWizard .abxw-decv { font: 700 18px var(--w-sans); color: var(--w-ink); margin-top: 3px; }
+html.abx-ui #abxWizard .abxw-decv.mono { font-family: var(--w-mono); }
+html.abx-ui #abxWizard .abxw-redflag { display: flex; align-items: flex-start; gap: 10px; background: var(--sv-yellow-bg); border: 1px solid var(--sv-yellow-ln); border-radius: 12px; padding: 12px 14px; margin-top: 12px; font: 600 13.5px var(--w-sans); color: #7a5208; }
+html.abx-ui #abxWizard .abxw-redflag .abx-ms { color: #92620a; font-size: 20px; flex: none; }
+html.abx-ui #abxWizard .abxw-why { background: var(--w-panel); border: 1px solid var(--w-line); border-radius: 14px; padding: 15px 16px; margin-top: 12px; }
+html.abx-ui #abxWizard .abxw-why p { margin: 6px 0 0; font: 400 14.5px/1.6 var(--w-sans); color: var(--w-slate); }
+
+/* plan */
+html.abx-ui #abxWizard .abxw-drug { background: var(--w-panel); border: 1px solid var(--w-line); border-left: 4px solid var(--w-teal); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+html.abx-ui #abxWizard .abxw-drugnm { font: 800 16px var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-drugdose { font: 500 13.5px var(--w-mono); color: var(--w-slate); margin-top: 6px; }
+html.abx-ui #abxWizard .abxw-drugwhy { font: 400 13.5px/1.55 var(--w-sans); color: var(--w-slate); margin-top: 4px; }
+html.abx-ui #abxWizard .abxw-noabx { display: flex; align-items: flex-start; gap: 11px; background: var(--sv-green-bg); border: 1px solid var(--sv-green-ln); border-radius: 12px; padding: 14px 16px; }
+html.abx-ui #abxWizard .abxw-noabx .abx-ms { color: var(--sv-green-bar); font-size: 22px; flex: none; }
+html.abx-ui #abxWizard .abxw-noabx b { color: var(--sv-green-fg); font: 700 15px var(--w-sans); } html.abx-ui #abxWizard .abxw-noabx p { margin: 4px 0 0; font: 400 13.5px var(--w-sans); color: var(--w-slate); }
+html.abx-ui #abxWizard .abxw-ixlist { display: flex; flex-wrap: wrap; gap: 7px; }
+html.abx-ui #abxWizard .abxw-ixpill { font: 600 12.5px var(--w-sans); color: var(--w-slate); background: var(--w-panel); border: 1px solid var(--w-line); border-radius: 20px; padding: 6px 12px; }
+html.abx-ui #abxWizard .abxw-steward { background: var(--w-panel); border: 1px solid var(--w-line); border-radius: 14px; overflow: hidden; }
+html.abx-ui #abxWizard .abxw-sqrow { display: flex; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--w-linesoft); }
+html.abx-ui #abxWizard .abxw-sqrow:last-child { border-bottom: none; }
+html.abx-ui #abxWizard .abxw-sqrow .abx-ms { color: var(--w-teal); font-size: 19px; flex: none; margin-top: 1px; }
+html.abx-ui #abxWizard .abxw-sqq { font: 700 12px var(--w-sans); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-sqa { font: 400 14px/1.5 var(--w-sans); color: var(--w-ink); margin-top: 2px; }
+html.abx-ui #abxWizard .abxw-planacts { margin-top: 14px; }
+html.abx-ui #abxWizard .abxw-openref { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 12px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-teal); font: 700 14.5px var(--w-sans); }
+html.abx-ui #abxWizard .abxw-openref.primary { background: var(--w-teal); color: #fff; border-color: var(--w-teal); box-shadow: 0 2px 8px rgba(14,110,99,.28); width: 100%; justify-content: center; }
+html.abx-ui #abxWizard .abxw-disc { font: 400 12px/1.5 var(--w-sans); color: var(--w-muted); margin: 14px 0 0; }
+
+/* embedded full engine output (Option 2: real regimen/stewardship/safety) */
+html.abx-ui #abxWizard .abxw-fullout { margin-top: 4px; }
+html.abx-ui #abxWizard .abxw-fullout #outputArea { display: block; }
+html.abx-ui #abxWizard .abxw-fullout #outputArea > *:first-child { margin-top: 0; }
+
+/* The classic overlays (Antimicrobial Stewardship Console #aspOverlay, search,
+   etc.) default to z-index 100 (--z-overlay) — BELOW the wizard's 12000, so they'd
+   open behind it. While the wizard is open, lift them above it so buttons like
+   "Open Antimicrobial Stewardship Console" are usable. */
+html.abxw-open .asp-overlay,
+html.abxw-open #aspOverlay,
+html.abxw-open #smdSearchPanel,
+html.abxw-open .smd-modal,
+html.abxw-open .smd-modal-backdrop { z-index: 13000 !important; }
+
+/* sticky bottom nav */
+html.abx-ui #abxWizard .abxw-nav { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; background: color-mix(in srgb, var(--w-panel) 92%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--w-line); padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); }
+html.abx-ui #abxWizard .abxw-navin { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+html.abx-ui #abxWizard .abxw-back { height: 48px; padding: 0 18px; border-radius: 12px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); font: 700 14px var(--w-sans); display: inline-flex; align-items: center; gap: 6px; }
+html.abx-ui #abxWizard .abxw-cap { flex: 1; text-align: center; font: 600 12.5px var(--w-sans); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-next { height: 48px; padding: 0 20px; border-radius: 12px; border: none; background: var(--w-teal); color: #fff; font: 700 14px var(--w-sans); display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(14,110,99,.28); }
+html.abx-ui #abxWizard .abxw-back .abx-ms, html.abx-ui #abxWizard .abxw-next .abx-ms { font-size: 20px; }
+
+/* ============================================================================
+   REFINEMENTS (ultracode pass): dark-mode legibility, search, suggested
+   findings, text-size, resume, pinned emergency alert, responsive.
+   ============================================================================ */
+
+/* --- DARK-MODE: teal TEXT/ICONS use the bright accent (fills keep --w-teal + white). */
+html.abx-ui #abxWizard .abxw-brandt span,
+html.abx-ui #abxWizard .abxw-rec,
+html.abx-ui #abxWizard .abxw-pill,
+html.abx-ui #abxWizard .abxw-clear,
+html.abx-ui #abxWizard .abxw-count,
+html.abx-ui #abxWizard .abxw-openref,
+html.abx-ui #abxWizard .abxw-groupnext,
+html.abx-ui #abxWizard .abxw-secttl .abx-ms,
+html.abx-ui #abxWizard .abxw-panelh .abx-ms,
+html.abx-ui #abxWizard .abxw-chip .abx-ms,
+html.abx-ui #abxWizard .abxw-diffnm .abx-ms,
+html.abx-ui #abxWizard .abxw-sqrow .abx-ms,
+html.abx-ui #abxWizard .abxw-livehint .abx-ms,
+html.abx-ui #abxWizard .abxw-policy > .abx-ms,
+html.abx-ui #abxWizard .abxw-sysic .abx-ms { color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-steplbl.cur, html.abx-ui #abxWizard .abxw-step.cur .abxw-steplbl { color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-sysbox.active { color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-sysbox.active .abxw-sysic .abx-ms,
+html.abx-ui #abxWizard .abxw-sysbox.active .abxw-syscap { color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-pill { border-color: var(--w-tealbd); }
+/* theme-VARIANT text placed on theme-INVARIANT severity-bg cards → fix contrast (fallback deccard) */
+html.abx-ui #abxWizard .abxw-deccard[class*="sev-"] .abxw-decdx,
+html.abx-ui #abxWizard .abxw-deccard[class*="sev-"] .abxw-decv { color: #14202b; }
+html.abx-ui #abxWizard .abxw-deccard:not([class*="sev-"]) .abxw-decic .abx-ms { color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-noabx p { color: var(--sv-green-fg); }
+/* inactive stepper dot: readable glyph in BOTH themes (was #fff on #c4cdc9 ≈1.4:1) */
+html.abx-ui #abxWizard .abxw-dot { background: var(--w-line); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-step.done .abxw-dot, html.abx-ui #abxWizard .abxw-step.cur .abxw-dot { background: var(--w-teal); color: #fff; }
+
+/* --- FINDINGS SEARCH ------------------------------------------------------- */
+html.abx-ui #abxWizard .abxw-find { margin: 0 0 14px; }
+html.abx-ui #abxWizard .abxw-find-input {
+  width: 100%; box-sizing: border-box; height: 46px; border-radius: 12px; border: 1.5px solid var(--w-line);
+  background: var(--w-inputbg); color: var(--w-ink); font: 500 15px var(--w-sans); padding: 0 14px;
+  -webkit-appearance: none; appearance: none;
+}
+html.abx-ui #abxWizard .abxw-find-input::placeholder { color: var(--w-muted); }
+html.abx-ui #abxWizard .abxw-find-input:focus { outline: none; border-color: var(--w-teal); box-shadow: 0 0 0 3px rgba(14,110,99,.14); }
+html.abx-ui #abxWizard .abxw-find-results { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+html.abx-ui #abxWizard .abxw-find-hit .nm { font: 600 13.5px var(--w-sans); }
+html.abx-ui #abxWizard .abxw-find-hit .grp { font: 600 11px var(--w-sans); opacity: .6; margin-left: 2px; }
+html.abx-ui #abxWizard .abxw-find-empty { font: 500 13.5px var(--w-sans); color: var(--w-muted); padding: 4px 2px; }
+
+/* --- SUGGESTED-NEXT-FINDINGS ---------------------------------------------- */
+html.abx-ui #abxWizard .abxw-suggest { margin-top: 16px; padding: 13px 14px; background: var(--w-tealsoft); border: 1px solid var(--w-tealbd); border-radius: 14px; }
+html.abx-ui #abxWizard .abxw-suggttl { display: flex; align-items: center; gap: 7px; font: 700 12px var(--w-sans); letter-spacing: .4px; text-transform: uppercase; color: var(--w-teal-ink); margin-bottom: 9px; }
+html.abx-ui #abxWizard .abxw-suggttl .abx-ms { color: var(--w-teal-ink); font-size: 18px; }
+html.abx-ui #abxWizard .abxw-chip.sug { background: var(--w-panel); border-style: dashed; border-color: var(--w-tealbd); color: var(--w-teal-ink); }
+html.abx-ui #abxWizard .abxw-chip.sug .abx-ms { color: var(--w-teal-ink); }
+
+/* --- TEXT-SIZE (A-/A+) via CSS zoom on inner content wrappers ------------- */
+html.abx-ui #abxWizard .abxw-wrap { zoom: var(--abxw-zoom, 1); }
+html.abx-ui #abxWizard .abxw-navin { zoom: var(--abxw-zoom, 1); }
+html.abx-ui #abxWizard .abxw-tsize { display: flex; background: var(--w-panel); border: 1px solid var(--w-line); border-radius: 12px; padding: 4px; gap: 2px; box-shadow: 0 1px 2px rgba(20,32,43,.04); }
+html.abx-ui #abxWizard .abxw-ts { width: 40px; height: 38px; border: none; border-radius: 9px; background: transparent; color: var(--w-slate); font: 700 14px var(--w-sans); display: inline-flex; align-items: baseline; justify-content: center; }
+html.abx-ui #abxWizard .abxw-ts .abx-ts-sm { font-size: 11px; }
+html.abx-ui #abxWizard .abxw-ts .abx-ts-lg { font-size: 16px; }
+html.abx-ui #abxWizard .abxw-ts:disabled { opacity: .35; }
+
+/* --- RESUME BAR ------------------------------------------------------------ */
+html.abx-ui #abxWizard .abxw-resume { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--w-tealsoft); border: 1px solid var(--w-tealbd); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
+html.abx-ui #abxWizard .abxw-resume > .abx-ms { color: var(--w-teal-ink); font-size: 22px; flex: none; }
+html.abx-ui #abxWizard .abxw-resume-txt { flex: 1; min-width: 140px; font: 600 13.5px var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-resume-txt span { display: block; font: 500 12px var(--w-sans); color: var(--w-soft); }
+html.abx-ui #abxWizard .abxw-resume-yes { height: 40px; padding: 0 16px; border-radius: 11px; border: none; background: var(--w-teal); color: #fff; font: 700 13.5px var(--w-sans); }
+html.abx-ui #abxWizard .abxw-resume-no { height: 40px; padding: 0 14px; border-radius: 11px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); font: 700 13.5px var(--w-sans); }
+
+/* --- PINNED EMERGENCY ALERT (time-critical) — theme-invariant red --------- */
+html.abx-ui #abxWizard .abxw-emergency { margin: 0 0 14px; border-radius: 14px; padding: 14px 16px; background: var(--sv-red-bg); border: 1.5px solid var(--sv-red-bar); border-left: 6px solid var(--sv-red-bar); box-shadow: 0 2px 14px rgba(171,28,44,.28); }
+html body.dark.abx-ui #abxWizard .abxw-emergency, html.abx-ui body.dark #abxWizard .abxw-emergency { background: #2a0810; border-color: #e85070; border-left-color: #e85070; box-shadow: 0 2px 16px rgba(232,80,112,.35); }
+html.abx-ui #abxWizard .abxw-emerg-hd { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+html.abx-ui #abxWizard .abxw-emerg-hd .abx-ms { color: var(--sv-red-bar); font-size: 24px; flex: none; }
+html body.dark.abx-ui #abxWizard .abxw-emerg-hd .abx-ms { color: #e85070; }
+html.abx-ui #abxWizard .abxw-emerg-ttl { font: 800 12px var(--w-sans); letter-spacing: .7px; text-transform: uppercase; color: var(--sv-red-fg); }
+html body.dark.abx-ui #abxWizard .abxw-emerg-ttl { color: #ffb3c0; }
+html.abx-ui #abxWizard .abxw-emerg-dx { font: 700 13px var(--w-sans); color: var(--w-ink); }
+html.abx-ui #abxWizard .abxw-emerg-list { margin: 10px 0 0; padding-left: 20px; }
+html.abx-ui #abxWizard .abxw-emerg-list li { font: 600 14px/1.55 var(--w-sans); color: var(--sv-red-fg); margin: 3px 0; }
+html body.dark.abx-ui #abxWizard .abxw-emerg-list li { color: #ffc2cc; }
+@media (prefers-reduced-motion: no-preference) {
+  html.abx-ui #abxWizard .abxw-emergency { animation: abxw-emerg-pulse 1.8s ease-in-out 3; }
+  @keyframes abxw-emerg-pulse { 0%,100% { box-shadow: 0 2px 14px rgba(171,28,44,.28); } 50% { box-shadow: 0 2px 22px rgba(171,28,44,.55); } }
+  html.abx-ui #abxWizard .abxw-step-body { animation: abxw-fade .18s ease; }
+}
+
+/* --- RESPONSIVE (phone) ---------------------------------------------------- */
+html.abx-ui #abxWizard .abxw-steplbl { overflow-wrap: anywhere; hyphens: auto; }
+@media (max-width: 480px) {
+  html.abx-ui #abxWizard .abxw-stepper { gap: 4px; }
+  html.abx-ui #abxWizard .abxw-steplbl { font-size: 10px; }
+  html.abx-ui #abxWizard .abxw-cap { display: none; }
+  /* clean phone header: brand row, then [small switch ... Aa] row, then full-width Simple|Advanced */
+  html.abx-ui #abxWizard .abxw-head { padding: 12px 0 10px; }
+  html.abx-ui #abxWizard .abxw-headr { width: 100%; gap: 8px; align-items: center; justify-content: space-between; }
+  html.abx-ui #abxWizard .abxw-headr .abx-uisw { order: 1; flex: 0 0 auto; }   /* compact, natural width */
+  html.abx-ui #abxWizard .abxw-tswrap { order: 2; flex: none; }
+  html.abx-ui #abxWizard .abxw-seg { order: 3; flex-basis: 100%; }
+  html.abx-ui #abxWizard .abxw-segb { flex: 1; justify-content: center; padding: 0 10px; }
+  html.abx-ui #abxWizard .abxw-tspop { right: 0; left: auto; }
+  /* symmetric footer bar: Back + Add findings share the width equally, Reset a compact square between */
+  html.abx-ui #abxWizard .abxw-navin { gap: 10px; }
+  html.abx-ui #abxWizard .abxw-back { flex: 1 1 0; min-width: 0; justify-content: center; padding: 0 10px; }
+  html.abx-ui #abxWizard .abxw-next { flex: 1 1 0; min-width: 0; justify-content: center; padding: 0 12px; }
+  html.abx-ui #abxWizard .abxw-resetb { flex: 0 0 auto; width: 50px; padding: 0; justify-content: center; }
+  html.abx-ui #abxWizard .abxw-resetb .abxw-resetb-t { display: none; }
+}

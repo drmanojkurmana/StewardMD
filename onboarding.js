@@ -312,15 +312,27 @@
   // showing "Step 1 of 8" over the ICU unit board on resume-into-ICU). Selectors mirror the
   // RESUME_ROUTES list in home.js.
   function appOverlayUp() {
-    var sels = ["#icuRoot.on", "#ghisPanel.open", "#mcOverlay.on", "#mdOverlay.on", "#miOverlay.on", "#abgOverlay.on", "#eceOverlay.on"];
+    // + the slide-in sidebar/menu drawer (#sbDrawer.open) — the tour was opening over it.
+    var sels = ["#icuRoot.on", "#ghisPanel.open", "#mcOverlay.on", "#mdOverlay.on", "#miOverlay.on", "#abgOverlay.on", "#eceOverlay.on", "#sbDrawer.open"];
     for (var i = 0; i < sels.length; i++) { var el = document.querySelector(sels[i]); if (el && visible(el)) return true; }
     return false;
+  }
+  // General catch-all: is #homeV2 actually the TOP-MOST thing at the screen centre? Any drawer,
+  // sheet, dialog or overlay covering home (even ones not in the lists above) means the element
+  // under the centre point is not inside #homeV2 → home is not the foreground view. Fails OPEN
+  // (returns true) if the probe throws, so the explicit gates above still govern.
+  function homeIsTopmost(h) {
+    try {
+      var el = document.elementFromPoint(Math.round(window.innerWidth / 2), Math.round(window.innerHeight * 0.45));
+      return !el || h.contains(el);
+    } catch (e) { return true; }
   }
   function homeForeground() {
     var h = document.getElementById("homeV2");
     if (!h || !visible(h) || !h.classList.contains("on")) return false;   // home must be the ACTIVE screen
-    if (gateUp() || appOverlayUp()) return false;                         // not covered by a pre-home gate OR an app screen (ICU/Ward/…)
+    if (gateUp() || appOverlayUp()) return false;                         // not covered by a pre-home gate OR an app screen (ICU/Ward/sidebar/…)
     if (entered() === false) return false;                                // and the sign-in gate must be cleared
+    if (!homeIsTopmost(h)) return false;                                  // and nothing else is layered over home at the centre
     return true;
   }
   var _arming = false;
