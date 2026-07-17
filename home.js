@@ -1585,9 +1585,9 @@
     while (body.firstChild) aboutPanel.appendChild(body.firstChild); // move existing About content into its panel
     var nav = document.createElement("div"); nav.className = "smd-ab-tabs";
     nav.innerHTML = '<button class="smd-ab-tab on" data-t="about" type="button">About</button>' +
+      '<button class="smd-ab-tab" data-t="ack" type="button">Acknowledgements</button>' +
       '<button class="smd-ab-tab" data-t="version" type="button">Version history</button>' +
-      '<button class="smd-ab-tab" data-t="facts" type="button">Facts &amp; milestones</button>' +
-      '<button class="smd-ab-tab" data-t="ack" type="button">Acknowledgements</button>';
+      '<button class="smd-ab-tab" data-t="facts" type="button">Facts &amp; milestones</button>';
     var vPanel = document.createElement("div"); vPanel.className = "smd-ab-panel"; vPanel.setAttribute("data-tab", "version"); vPanel.style.display = "none"; vPanel.innerHTML = aboutVersionHTML();
     var fPanel = document.createElement("div"); fPanel.className = "smd-ab-panel"; fPanel.setAttribute("data-tab", "facts"); fPanel.style.display = "none"; fPanel.innerHTML = aboutFactsHTML();
     var aPanel = document.createElement("div"); aPanel.className = "smd-ab-panel"; aPanel.setAttribute("data-tab", "ack"); aPanel.style.display = "none"; aPanel.innerHTML = ackHTML();
