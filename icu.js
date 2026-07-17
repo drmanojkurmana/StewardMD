@@ -231,7 +231,7 @@
     return v;
   }
   function ingestLabs(o) {
-    o = o || {}; var keys = ["na", "k", "cl", "hco3", "ca", "mg", "po4", "glu", "creat", "egfr", "urea", "alb", "wbc", "hb", "plt", "inr", "ferritin", "trig", "fibrinogen", "crp", "bili", "ast", "alt", "alp", "bili_d", "amylase", "lipase", "pct", "neut", "hct"];
+    o = o || {}; var keys = ["na", "k", "cl", "hco3", "ca", "ica", "mg", "po4", "glu", "creat", "egfr", "urea", "alb", "wbc", "hb", "plt", "inr", "ferritin", "trig", "fibrinogen", "crp", "bili", "ast", "alt", "alp", "bili_d", "amylase", "lipase", "pct", "neut", "hct"];
     var rec = pick(o, keys); var ts = o.ts || nowTs();
     Object.keys(rec).forEach(function (k) { STATE.labs.recent[k] = rec[k]; });
     STATE.labs.trends.push(Object.assign({ ts: ts }, rec));
@@ -466,6 +466,7 @@
     { key: "k", kw: /\bpotassium\b|\bserum k\b/i, ex: /urin/i },
     { key: "cl", kw: /\bchloride\b/i, ex: /urin/i },
     { key: "hco3", kw: /bicarbonate|\bhco3\b|\btco2\b|carbon dioxide|(^|[^a-z])co2([^a-z]|$)/i, ex: /partial|pco2|paco2/i },
+    { key: "ica", kw: /(ionis|ioniz|ionic|free)\s*calcium|calcium[\s,]*(ion|ionis|ioniz)|whole ?blood ?calcium|\bi[\s.]?ca\b/i, ex: /urin|24/i },   // IONISED/free calcium (mmol/L) — its OWN analyte; matched BEFORE total Ca (mapWardLab is first-match)
     { key: "ca", kw: /\bcalcium\b/i, ex: /urin|ionis|ioniz|ionic|\bion\b|\bfree\b|whole ?blood|24/i },   // TOTAL calcium only — ionised/free calcium (~1.1 mmol/L, e.g. "Free Calcium"/"Calcium Ion") is tracked separately, never the total field
     { key: "mg", kw: /magnesium/i, ex: /urin/i },
     { key: "po4", kw: /phosphate|phosphorus|\bpo4\b/i, ex: /alkaline|phosphatase|creatine/i }, // exclude Alk Phosphatase / CPK
@@ -1539,7 +1540,7 @@
     })();
   }
 
-  var IMPORT_LBL = { na: "Sodium", k: "Potassium", cl: "Chloride", hco3: "HCO₃", ca: "Calcium", mg: "Magnesium", po4: "Phosphate", glu: "Glucose", creat: "Creatinine", urea: "Urea", alb: "Albumin", wbc: "WBC", hb: "Hb", plt: "Platelets", inr: "INR", crp: "CRP", bili: "Bilirubin", ast: "AST", alt: "ALT", lactate: "Lactate",
+  var IMPORT_LBL = { na: "Sodium", k: "Potassium", cl: "Chloride", hco3: "HCO₃", ca: "Calcium", ica: "Ionised Ca", mg: "Magnesium", po4: "Phosphate", glu: "Glucose", creat: "Creatinine", urea: "Urea", alb: "Albumin", wbc: "WBC", hb: "Hb", plt: "Platelets", inr: "INR", crp: "CRP", bili: "Bilirubin", ast: "AST", alt: "ALT", lactate: "Lactate",
     hr: "Heart rate", sbp: "Systolic BP", dbp: "Diastolic BP", map: "MAP", rr: "Resp rate", spo2: "SpO₂", temp: "Temp", cvp: "CVP", etco2: "EtCO₂",
     ph: "pH", paco2: "PaCO₂", pao2: "PaO₂", be: "Base excess", fio2: "FiO₂", mode: "Mode", peep: "PEEP", tv: "Tidal volume", peak: "Peak", plateau: "Plateau" };
   var IMPORT_GROUP = { labs: "mapped", monitor: "vitals", abg: "abg", ventilator: "ventilator" };
@@ -1912,6 +1913,7 @@
     cl:   { label: "Chloride", unit: "mEq/L", good: null, src: "lab", ref: [98, 107] },
     hco3: { label: "Bicarbonate", unit: "mEq/L", good: null, src: "lab", ref: [22, 28] },
     ca:   { label: "Calcium (total)", unit: "mg/dL", good: null, src: "lab", ref: [8.5, 10.5] },
+    ica:  { label: "Calcium (ionised)", unit: "mmol/L", good: null, src: "lab", ref: [1.1, 1.3] },
     mg:   { label: "Magnesium", unit: "mg/dL", good: null, src: "lab", ref: [1.7, 2.4] },
     po4:  { label: "Phosphate", unit: "mg/dL", good: null, src: "lab", ref: [2.5, 4.5] },
     bili: { label: "Bilirubin (total)", unit: "mg/dL", good: "down", src: "lab", ref: [0.2, 1.2] },
@@ -1936,7 +1938,7 @@
   };
   var TREND_GROUPS = [
     { id: "cbc", name: "CBC / Haematology", keys: ["hb", "hct", "wbc", "neut", "plt"] },
-    { id: "renal", name: "Renal / Electrolytes", keys: ["creat", "urea", "na", "k", "cl", "hco3", "ca", "mg", "po4"] },
+    { id: "renal", name: "Renal / Electrolytes", keys: ["creat", "urea", "na", "k", "cl", "hco3", "ca", "ica", "mg", "po4"] },
     { id: "liver", name: "Liver / Coagulation", keys: ["bili", "bili_d", "ast", "alt", "alp", "alb", "inr"] },
     { id: "panc", name: "Pancreatic / Metabolic", keys: ["amylase", "lipase", "glu", "lactate", "crp", "pct"] },
     { id: "vitals", name: "Vitals / Haemodynamics", keys: ["hr", "map", "spo2", "rr", "temp", "uop"] }
@@ -2548,8 +2550,10 @@
   var WORKSPACES = [
     { id: "overview", label: "Overview", svg: "pulse", members: ["overview", "rounds"] },
     { id: "monitoring", label: "Monitoring", svg: "heart", members: ["vitals", "trends", "hemo", "fluids", "lytes", "abg", "vent", "infusions"] },
-    { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "treatment", "protocols", "goals", "interactions"] },
-    { id: "documents", label: "Records", svg: "copy", members: ["documents", "imaging", "handover", "discharge", "more"] }
+    // Imaging moved here from Records (investigations belong with the care plan). Protocols +
+    // Interactions merged into a single "protocols" sub-tab (RENDER.protocols now renders both).
+    { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "imaging", "treatment", "protocols", "goals"] },
+    { id: "documents", label: "Records", svg: "copy", members: ["documents", "handover", "discharge", "more"] }
   ];
   var MEMBER = {}; TABS.forEach(function (t) { MEMBER[t.id] = { label: t.label, svg: t.svg, ic: t.ic }; });
   MEMBER.dx = { label: "Diagnosis", svg: "search", ic: "🩺" };
@@ -2875,9 +2879,12 @@
     lytes: function () {
       var L = _raw.labs.recent || {}, p = _raw.patient || {};
       function f(k, lo, hi, clo, chi) { return { v: L[k], s: vstat(L[k], lo, hi, clo, chi) }; }
-      var map = { na: f("na", 135, 145, 120, 160), k: f("k", 3.5, 5.0, 2.5, 6.0), cl: f("cl", 98, 107), hco3: f("hco3", 22, 28), ca: f("ca", 2.1, 2.6), mg: f("mg", 0.7, 1.0), po4: f("po4", 0.8, 1.5) };
-      var labels = { na: "Sodium", k: "Potassium", cl: "Chloride", hco3: "Bicarbonate", ca: "Calcium", mg: "Magnesium", po4: "Phosphate" };
-      var keys = ["na", "k", "cl", "hco3", "ca", "mg", "po4"];
+      // Thresholds in CONVENTIONAL units to match stored values (mg/dL for Ca/Mg/PO₄) — the old
+      // mmol/L ranges (ca 2.1–2.6 etc.) mis-flagged a normal 9.5 mg/dL Ca as abnormal. Ionised Ca (ica)
+      // is a separate mmol/L analyte with its own range.
+      var map = { na: f("na", 135, 145, 120, 160), k: f("k", 3.5, 5.0, 2.5, 6.0), cl: f("cl", 98, 107), hco3: f("hco3", 22, 28), ca: f("ca", 8.5, 10.5, 7, 14), ica: f("ica", 1.1, 1.3, 0.8, 1.6), mg: f("mg", 1.7, 2.4), po4: f("po4", 2.5, 4.5) };
+      var labels = { na: "Sodium", k: "Potassium", cl: "Chloride", hco3: "Bicarbonate", ca: "Calcium", ica: "Ionised Ca", mg: "Magnesium", po4: "Phosphate" };
+      var keys = ["na", "k", "cl", "hco3", "ca", "ica", "mg", "po4"];
       var hasAny = keys.some(function (k) { return L[k] != null && L[k] !== ""; });
       var out = '<div class="icu-sec-lbl">' + ico("flask", "🧪") + ' Electrolytes &amp; correction</div>';
       if (!hasAny) {
@@ -2973,10 +2980,12 @@
       return out;
     },
     protocols: function () {
+      // Merged tab: Critical Care Protocols + Drug Interactions (the interactions sub-tab was folded
+      // in here — RENDER.interactions renders the active-med chips + full DDI checker below).
       return '<div class="icu-sec-lbl">🚨 Critical Care Protocols</div>' +
         PROTOCOLS.map(function (p, i) { return protocolCard(p, i); }).join("") +
         '<button class="icu-btn" data-icu-act="launch:protocols">Open full protocol / drug library</button>' +
-        '<button class="icu-btn ghost" data-icu-act="launch:interactions">💊⚠️ Check Drug Interactions</button>';
+        RENDER.interactions();
     },
     vent: function () {
       var v = _raw.ventilator || {}, iv = interpretVent(v, _raw.patient, _raw.abg);
@@ -3265,7 +3274,10 @@
   // Compact electrolyte/renal alert summary from the deterministic ELYTE engine.
   function renderElyteAlerts() {
     var L = _raw.labs.recent || {}, p = _raw.patient || {}, res = [];
-    try { if (window.ELYTE && ELYTE.analyze) res = ELYTE.analyze(L, { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") }, "si"); } catch (e) {}
+    // Labs are stored in CONVENTIONAL units (mg/dL for Ca/Mg/PO₄) — see RENDER.lytes (~line 2898).
+    // Passing "si" made ELYTE multiply Ca/Mg/PO₄ by their SI factor (Ca ×4) → a normal 9.5 mg/dL read
+    // as 38 → false "Severe hypercalcaemia" pill on Overview. Must match the stored (conventional) units.
+    try { if (window.ELYTE && ELYTE.analyze) res = ELYTE.analyze(L, { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") }, "conventional"); } catch (e) {}
     var ab = res.filter(function (r) { return r.level && r.level !== "ok"; });
     if (!ab.length) return "";
     var COLOR = { crit: "var(--danger)", red: "var(--danger)", amber: "var(--warn)" };
@@ -5212,7 +5224,7 @@
       { k: "lactate", l: "Lactate mmol/L", t: "number" }, { k: "cvp", l: "CVP mmHg", t: "number" }, { k: "etco2", l: "EtCO₂ mmHg", t: "number" } ] },
     labs: { title: "Laboratory values", ingest: ingestLabs, fields: [
       { k: "na", l: "Na mEq/L", t: "number" }, { k: "k", l: "K mEq/L", t: "number" }, { k: "cl", l: "Cl mEq/L", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" },
-      { k: "ca", l: "Ca mg/dL", t: "number" }, { k: "mg", l: "Mg mg/dL", t: "number" }, { k: "po4", l: "PO₄ mg/dL", t: "number" }, { k: "creat", l: "Creatinine mg/dL", t: "number" },
+      { k: "ca", l: "Ca mg/dL", t: "number" }, { k: "ica", l: "Ionised Ca mmol/L", t: "number" }, { k: "mg", l: "Mg mg/dL", t: "number" }, { k: "po4", l: "PO₄ mg/dL", t: "number" }, { k: "creat", l: "Creatinine mg/dL", t: "number" },
       { k: "alb", l: "Albumin g/dL", t: "number" }, { k: "glu", l: "Glucose mg/dL", t: "number" }, { k: "wbc", l: "WBC", t: "number" }, { k: "hb", l: "Hb g/dL", t: "number" },
       { k: "plt", l: "Platelets", t: "number" }, { k: "ferritin", l: "Ferritin", t: "number" }, { k: "crp", l: "CRP", t: "number" }, { k: "inr", l: "INR", t: "number" } ] },
     abg: { title: "Arterial blood gas", ingest: function (o) { Object.keys(o).forEach(function (k) { STATE.abg[k] = o[k]; }); STATE.abg.ts = nowTs(); }, fields: [
@@ -5984,7 +5996,7 @@
   }
   function extractLabConcepts() {
     var L = _raw.labs.recent || {}, out = [], seen = {}, add = function (s) { if (s && !seen[s]) { seen[s] = 1; out.push(s); } };
-    try { if (window.ELYTE && ELYTE.analyze) { var p = _raw.patient || {}; ELYTE.analyze(L, { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") }, "si").filter(function (r) { return r.level && r.level !== "ok"; }).forEach(function (r) { add(r.name + (r.severity ? " (" + r.severity + ")" : "")); }); } } catch (e) {}
+    try { if (window.ELYTE && ELYTE.analyze) { var p = _raw.patient || {}; ELYTE.analyze(L, { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") }, "conventional").filter(function (r) { return r.level && r.level !== "ok"; }).forEach(function (r) { add(r.name + (r.severity ? " (" + r.severity + ")" : "")); }); } } catch (e) {}
     if (L.plt != null && L.plt < 150) add("thrombocytopenia");
     if (L.wbc != null && L.wbc > 11) add("leukocytosis"); else if (L.wbc != null && L.wbc < 4) add("leukopenia");
     if (L.hb != null && L.hb < 10) add("anaemia");
