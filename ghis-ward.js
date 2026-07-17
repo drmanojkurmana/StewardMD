@@ -322,6 +322,16 @@
         getSelectedPatient: function() { return GHIS._selectedPatient ? { patientId: GHIS._selectedPatient.patientId, name: GHIS._selectedPatient.name } : null; },
         // Bearer token for authorized GHIS proxy calls (used by GHISMEDS medication fetch).
         getToken: function() { return getToken(); },
+        // Programmatic login for device-local Auto-fetch (autofetch.js): silently sign in with a
+        // credential the doctor stored in the OS Keychain/Keystore ON THIS DEVICE. Same /login as
+        // the manual form; resolves true on success. Never persists the password anywhere here.
+        loginWith: function(userId, password) {
+          if (!userId || !password) return Promise.resolve(false);
+          return fetch(PROXY + '/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: userId, password: password }) })
+            .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, d: d }; }); })
+            .then(function(res) { if (res.ok && res.d && res.d.token) { setToken(res.d.token); _connected = true; try { dot(true); } catch (e) {} return true; } return false; })
+            .catch(function() { return false; });
+        },
         // Proxy base so GHISMEDS uses the SAME endpoint origin as the ward panel.
         getProxyBase: function() { return PROXY; },
         // Clear the selection + any GHIS import draft (called on disconnect / patient-switch).
@@ -367,6 +377,7 @@
           var bgOk = !!(window.SMD_WATCH && window.SMD_AUTH && window.SMD_AUTH.currentUser);
           body.innerHTML =
             (window.ICU ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0F766E" onclick="GHIS.loadIntoICU(\'' + jsq(patientId) + '\')">🏥 Load patient into ICU dashboard</button>' : '') +
+            (window.SMD_AUTOFETCH && SMD_AUTOFETCH.on() ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0e7490" onclick="SMD_AUTOFETCH.openManager(\'' + jsq(patientId) + '\',\'' + jsq(name) + '\')">🔄 Auto-fetch reports (this device) — ' + (SMD_AUTOFETCH.isEnabled(patientId) ? 'ON' : 'set up') + '</button>' : '') +
             (lwOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0d5c54" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">🔔 Lab Watch — alert me on new labs</button>' : '') +
             (bgOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0a4a44" onclick="GHIS.watchBackground(\'' + jsq(patientId) + '\',\'' + jsq(name) + '\')">🔔 Lab Watch 24/7 — even when the app is closed</button>' : '') +
             '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';

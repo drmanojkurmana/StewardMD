@@ -115,6 +115,7 @@
           swRow("maikperf", "Show AI response time", "Prints MaiK first-token + full-answer time under each answer (diagnostics)", flag("smd_maik_perf", false)) +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
+          swRow("autofetch", "Auto-fetch reports", "Keep a linked patient's labs/imaging fresh on launch & resume · GHIS login stored on THIS device only (Keychain/Keystore), per-patient consent · turn on/off per patient from the Ward Sync bar", flag("smd_autofetch", true)) +
           '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync</button>';
         var toolsBody = swRow("whisper", "Clinical Dictation (Beta)", "On-device Whisper voice→text in MaiK Scribe · native app only (model downloads on first use)", flag("smd_whisper_clinical_dictation", false)) +
           ((window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
@@ -144,6 +145,13 @@
               else if (k === "expanded" && window.SMD_setKbExpanded) SMD_setKbExpanded(nv);
               else if (k === "ai" && window.SMD_AI) SMD_AI.setFlag(nv);
               else if (k === "ghis" && window.SMD_setGhis) SMD_setGhis(nv);
+              else if (k === "autofetch") {
+                localStorage.setItem("smd_autofetch", nv ? "1" : "0");
+                // Turning the MASTER switch off also stops it working for every patient, but a
+                // patient's individual enable + saved device credential are left alone (so
+                // re-enabling here resumes exactly where they left off — no need to re-consent).
+                if (!nv) { try { toast("Auto-fetch off. Per-patient settings are kept — turn this back on to resume."); } catch (e) {} }
+              }
               else if (k === "whisper") { localStorage.setItem("smd_whisper_clinical_dictation", nv ? "1" : "0"); }
               else if (k === "maikperf") { localStorage.setItem("smd_maik_perf", nv ? "1" : "0"); }
             } catch (e) {}
