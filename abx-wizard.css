@@ -31,7 +31,7 @@ html.abx-ui #abxWizard button { font-family: inherit; cursor: pointer; }
 html.abx-ui #abxWizard button:focus-visible, html.abx-ui #abxWizard input:focus-visible, html.abx-ui #abxWizard select:focus-visible { outline: 3px solid var(--w-teal); outline-offset: 2px; }
 
 /* header */
-html.abx-ui #abxWizard .abxw-head { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--w-paper) 88%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--w-line); padding: 14px 0 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+html.abx-ui #abxWizard .abxw-head { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--w-paper) 88%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--w-line); padding: calc(14px + env(safe-area-inset-top)) 0 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 html.abx-ui #abxWizard .abxw-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
 html.abx-ui #abxWizard .abxw-logo { width: 40px; height: 40px; border-radius: 11px; background: var(--w-teal); display: grid; place-items: center; flex: none; box-shadow: 0 2px 8px rgba(14,110,99,.28); }
 html.abx-ui #abxWizard .abxw-logo .abx-ms { color: #fff; font-size: 24px; }
@@ -342,7 +342,7 @@ html.abx-ui #abxWizard .abxw-steplbl { overflow-wrap: anywhere; hyphens: auto; }
   html.abx-ui #abxWizard .abxw-steplbl { font-size: 10px; }
   html.abx-ui #abxWizard .abxw-cap { display: none; }
   /* clean phone header: brand row, then [small switch ... Aa] row, then full-width Simple|Advanced */
-  html.abx-ui #abxWizard .abxw-head { padding: 12px 0 10px; }
+  html.abx-ui #abxWizard .abxw-head { padding: calc(12px + env(safe-area-inset-top)) 0 10px; }
   html.abx-ui #abxWizard .abxw-headr { width: 100%; gap: 8px; align-items: center; justify-content: space-between; }
   html.abx-ui #abxWizard .abxw-headr .abx-uisw { order: 1; flex: 0 0 auto; }   /* compact, natural width */
   html.abx-ui #abxWizard .abxw-tswrap { order: 2; flex: none; }
