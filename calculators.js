@@ -355,7 +355,7 @@
     compute:function(v){
       if(!ok(v.hr)||!ok(v.sbp)||v.sbp<=0) return ERR;
       var si=v.hr/v.sbp;
-      return { v:r1(si), u:"", i:(si>=0.9?"Elevated (≥0.9) — suggests haemodynamic compromise / occult hypoperfusion.":"Normal (0.5–0.7).") };
+      return { v:r1(si), u:"", i:(si>=0.9?"Elevated (≥0.9) — suggests haemodynamic compromise / occult hypoperfusion.":si>=0.7?"Borderline (0.7–0.9) — recheck and monitor.":"Normal (≤0.7).") };
     } },
 
   { id:"ldl", cat:"Cardiovascular", icon:"🧈", title:"LDL (Friedewald)",
@@ -604,7 +604,7 @@
     compute:function(v){
       if(!ok(v.uurea)||!ok(v.bun)||!ok(v.ucr)||!ok(v.pcr)||v.bun<=0||v.ucr<=0) return ERR;
       var fe=(v.uurea*v.pcr)/(v.bun*v.ucr)*100;
-      return { v:r1(fe), u:"%", i:(fe<35?"<35% → pre-renal.":">50% → intrinsic (ATN).")+" More reliable than FENa when diuretics have been given." };
+      return { v:r1(fe), u:"%", i:(fe<35?"<35% → pre-renal.":fe<=50?"35–50% → indeterminate.":">50% → intrinsic (ATN).")+" More reliable than FENa when diuretics have been given." };
     } },
 
   { id:"corr_na", cat:"Renal", icon:"🧂", title:"Corrected Na (hyperglycaemia)",
@@ -1742,7 +1742,7 @@
     desc:"Severity of opioid withdrawal.",
     inputs:[
       { id:"pulse", label:"Resting pulse rate", type:"select", opts:[{v:"0",t:"≤80"},{v:"1",t:"81–100"},{v:"2",t:"101–120"},{v:"4",t:">120"}] },
-      { id:"sweat", label:"Sweating", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Subjective / flushing"},{v:"2",t:"Beads of sweat"},{v:"3",t:"Streaming"}] },
+      { id:"sweat", label:"Sweating", type:"select", opts:[{v:"0",t:"No chills or flushing"},{v:"1",t:"Subjective chills or flushing"},{v:"2",t:"Flushed or moist face"},{v:"3",t:"Beads of sweat on brow/face"},{v:"4",t:"Sweat streaming off face"}] },
       { id:"restless", label:"Restlessness", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Fidgety"},{v:"3",t:"Frequent shifting"},{v:"5",t:"Unable to sit still"}] },
       { id:"pupil", label:"Pupil size", type:"select", opts:[{v:"0",t:"Normal/pinned"},{v:"1",t:"Possibly larger"},{v:"2",t:"Moderately dilated"},{v:"5",t:"So dilated only rim visible"}] },
       { id:"ache", label:"Bone/joint aches", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Severe diffuse"},{v:"4",t:"Rubbing joints, cannot sit still"}] },
@@ -2099,8 +2099,8 @@
     ],
     compute:function(v){
       if(!ok(v.wbc)||!ok(v.neut)||v.wbc<0||v.neut<0) return ERR;
-      var a=r1(v.wbc*v.neut/100);
-      var band = a<0.5?"Severe neutropenia (high infection risk)":a<1.0?"Moderate neutropenia":a<1.5?"Mild neutropenia":"Not neutropenic";
+      var raw=v.wbc*v.neut/100, a=r1(raw);
+      var band = raw<0.5?"Severe neutropenia (high infection risk)":raw<1.0?"Moderate neutropenia":raw<1.5?"Mild neutropenia":"Not neutropenic";
       return { v:a, u:"×10⁹/L", i:band+" (severe <0.5, moderate <1.0, mild <1.5). Neutropenic fever is an emergency." };
     } },
 
@@ -3258,10 +3258,10 @@
   { id:"mews", cat:"Critical care", icon:"🚨", title:"Modified Early Warning Score (MEWS)",
     desc:"Bedside physiological track-and-trigger score.",
     inputs:[
-      { id:"sbp", label:"Systolic BP", type:"select", opts:[{v:"3",t:"≤ 70"},{v:"2",t:"71–80"},{v:"1",t:"81–100"},{v:"0",t:"101–199"},{v:"2b",t:"≥ 200"}] },
-      { id:"hr", label:"Heart rate", type:"select", opts:[{v:"2",t:"≤ 40"},{v:"1",t:"41–50"},{v:"0",t:"51–100"},{v:"1b",t:"101–110"},{v:"2b",t:"111–129"},{v:"3",t:"≥ 130"}] },
-      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"2",t:"< 9"},{v:"0",t:"9–14"},{v:"1",t:"15–20"},{v:"2b",t:"21–29"},{v:"3",t:"≥ 30"}] },
-      { id:"temp", label:"Temperature", type:"select", opts:[{v:"2",t:"< 35°C"},{v:"0",t:"35–38.4°C"},{v:"2b",t:"≥ 38.5°C"}] },
+      { id:"sbp", label:"Systolic BP", type:"select", opts:[{v:"0",t:"101–199"},{v:"1",t:"81–100"},{v:"2",t:"71–80"},{v:"3",t:"≤ 70"},{v:"2b",t:"≥ 200"}] },
+      { id:"hr", label:"Heart rate", type:"select", opts:[{v:"0",t:"51–100"},{v:"1",t:"41–50"},{v:"2",t:"≤ 40"},{v:"1b",t:"101–110"},{v:"2b",t:"111–129"},{v:"3",t:"≥ 130"}] },
+      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"0",t:"9–14"},{v:"1",t:"15–20"},{v:"2",t:"< 9"},{v:"2b",t:"21–29"},{v:"3",t:"≥ 30"}] },
+      { id:"temp", label:"Temperature", type:"select", opts:[{v:"0",t:"35–38.4°C"},{v:"2",t:"< 35°C"},{v:"2b",t:"≥ 38.5°C"}] },
       { id:"avpu", label:"Neurological (AVPU)", type:"select", opts:[{v:"0",t:"Alert"},{v:"1",t:"Reacts to voice"},{v:"2",t:"Reacts to pain"},{v:"3",t:"Unresponsive"}] }
     ],
     compute:function(v){
@@ -3427,18 +3427,18 @@
   { id:"apache2", cat:"Critical care", icon:"🚨", title:"APACHE II Score",
     desc:"ICU severity of illness and mortality estimate (worst values in first 24 h).",
     inputs:[
-      { id:"temp", label:"Temperature (°C, core)", type:"select", opts:[{v:"4",t:"≥ 41"},{v:"3",t:"39–40.9"},{v:"1",t:"38.5–38.9"},{v:"0",t:"36–38.4"},{v:"1b",t:"34–35.9"},{v:"2",t:"32–33.9"},{v:"3b",t:"30–31.9"},{v:"4b",t:"≤ 29.9"}] },
-      { id:"map", label:"Mean arterial pressure (mmHg)", type:"select", opts:[{v:"4",t:"≥ 160"},{v:"3",t:"130–159"},{v:"2",t:"110–129"},{v:"0",t:"70–109"},{v:"2b",t:"50–69"},{v:"4b",t:"≤ 49"}] },
-      { id:"hr", label:"Heart rate", type:"select", opts:[{v:"4",t:"≥ 180"},{v:"3",t:"140–179"},{v:"2",t:"110–139"},{v:"0",t:"70–109"},{v:"2b",t:"55–69"},{v:"3b",t:"40–54"},{v:"4b",t:"≤ 39"}] },
-      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"4",t:"≥ 50"},{v:"3",t:"35–49"},{v:"1",t:"25–34"},{v:"0",t:"12–24"},{v:"1b",t:"10–11"},{v:"2",t:"6–9"},{v:"4b",t:"≤ 5"}] },
+      { id:"temp", label:"Temperature (°C, core)", type:"select", opts:[{v:"0",t:"36–38.4"},{v:"1",t:"38.5–38.9"},{v:"3",t:"39–40.9"},{v:"4",t:"≥ 41"},{v:"1b",t:"34–35.9"},{v:"2",t:"32–33.9"},{v:"3b",t:"30–31.9"},{v:"4b",t:"≤ 29.9"}] },
+      { id:"map", label:"Mean arterial pressure (mmHg)", type:"select", opts:[{v:"0",t:"70–109"},{v:"2",t:"110–129"},{v:"3",t:"130–159"},{v:"4",t:"≥ 160"},{v:"2b",t:"50–69"},{v:"4b",t:"≤ 49"}] },
+      { id:"hr", label:"Heart rate", type:"select", opts:[{v:"0",t:"70–109"},{v:"2",t:"110–139"},{v:"3",t:"140–179"},{v:"4",t:"≥ 180"},{v:"2b",t:"55–69"},{v:"3b",t:"40–54"},{v:"4b",t:"≤ 39"}] },
+      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"0",t:"12–24"},{v:"1",t:"25–34"},{v:"3",t:"35–49"},{v:"4",t:"≥ 50"},{v:"1b",t:"10–11"},{v:"2",t:"6–9"},{v:"4b",t:"≤ 5"}] },
       { id:"oxy", label:"Oxygenation", type:"select", opts:[{v:"0",t:"FiO₂≥0.5: A-a<200, or FiO₂<0.5: PaO₂>70"},{v:"1",t:"FiO₂<0.5: PaO₂ 61–70"},{v:"2",t:"FiO₂≥0.5: A-a 200–349"},{v:"3",t:"FiO₂≥0.5: A-a 350–499, or FiO₂<0.5: PaO₂ 55–60"},{v:"4",t:"FiO₂≥0.5: A-a ≥500, or FiO₂<0.5: PaO₂ <55"}] },
-      { id:"ph", label:"Arterial pH", type:"select", opts:[{v:"4",t:"≥ 7.7"},{v:"3",t:"7.6–7.69"},{v:"1",t:"7.5–7.59"},{v:"0",t:"7.33–7.49"},{v:"2",t:"7.25–7.32"},{v:"3b",t:"7.15–7.24"},{v:"4b",t:"< 7.15"}] },
-      { id:"na", label:"Serum sodium (mmol/L)", type:"select", opts:[{v:"4",t:"≥ 180"},{v:"3",t:"160–179"},{v:"2",t:"155–159"},{v:"1",t:"150–154"},{v:"0",t:"130–149"},{v:"2b",t:"120–129"},{v:"3b",t:"111–119"},{v:"4b",t:"≤ 110"}] },
-      { id:"k", label:"Serum potassium (mmol/L)", type:"select", opts:[{v:"4",t:"≥ 7"},{v:"3",t:"6–6.9"},{v:"1",t:"5.5–5.9"},{v:"0",t:"3.5–5.4"},{v:"1b",t:"3–3.4"},{v:"2",t:"2.5–2.9"},{v:"4b",t:"< 2.5"}] },
-      { id:"cr", label:"Serum creatinine (mg/dL)", type:"select", opts:[{v:"4",t:"≥ 3.5"},{v:"3",t:"2–3.4"},{v:"2",t:"1.5–1.9"},{v:"0",t:"0.6–1.4"},{v:"2b",t:"< 0.6"}] },
+      { id:"ph", label:"Arterial pH", type:"select", opts:[{v:"0",t:"7.33–7.49"},{v:"1",t:"7.5–7.59"},{v:"3",t:"7.6–7.69"},{v:"4",t:"≥ 7.7"},{v:"2",t:"7.25–7.32"},{v:"3b",t:"7.15–7.24"},{v:"4b",t:"< 7.15"}] },
+      { id:"na", label:"Serum sodium (mmol/L)", type:"select", opts:[{v:"0",t:"130–149"},{v:"1",t:"150–154"},{v:"2",t:"155–159"},{v:"3",t:"160–179"},{v:"4",t:"≥ 180"},{v:"2b",t:"120–129"},{v:"3b",t:"111–119"},{v:"4b",t:"≤ 110"}] },
+      { id:"k", label:"Serum potassium (mmol/L)", type:"select", opts:[{v:"0",t:"3.5–5.4"},{v:"1",t:"5.5–5.9"},{v:"3",t:"6–6.9"},{v:"4",t:"≥ 7"},{v:"1b",t:"3–3.4"},{v:"2",t:"2.5–2.9"},{v:"4b",t:"< 2.5"}] },
+      { id:"cr", label:"Serum creatinine (mg/dL)", type:"select", opts:[{v:"0",t:"0.6–1.4"},{v:"2",t:"1.5–1.9"},{v:"3",t:"2–3.4"},{v:"4",t:"≥ 3.5"},{v:"2b",t:"< 0.6"}] },
       { id:"arf", label:"Acute renal failure (doubles creatinine points)", type:"check" },
-      { id:"hct", label:"Haematocrit (%)", type:"select", opts:[{v:"4",t:"≥ 60"},{v:"2",t:"50–59.9"},{v:"1",t:"46–49.9"},{v:"0",t:"30–45.9"},{v:"2b",t:"20–29.9"},{v:"4b",t:"< 20"}] },
-      { id:"wbc", label:"White cell count (×10³/mm³)", type:"select", opts:[{v:"4",t:"≥ 40"},{v:"2",t:"20–39.9"},{v:"1",t:"15–19.9"},{v:"0",t:"3–14.9"},{v:"2b",t:"1–2.9"},{v:"4b",t:"< 1"}] },
+      { id:"hct", label:"Haematocrit (%)", type:"select", opts:[{v:"0",t:"30–45.9"},{v:"1",t:"46–49.9"},{v:"2",t:"50–59.9"},{v:"4",t:"≥ 60"},{v:"2b",t:"20–29.9"},{v:"4b",t:"< 20"}] },
+      { id:"wbc", label:"White cell count (×10³/mm³)", type:"select", opts:[{v:"0",t:"3–14.9"},{v:"1",t:"15–19.9"},{v:"2",t:"20–39.9"},{v:"4",t:"≥ 40"},{v:"2b",t:"1–2.9"},{v:"4b",t:"< 1"}] },
       { id:"gcs", label:"Glasgow Coma Scale (3–15)", type:"number", step:"1" },
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"≤ 44"},{v:"2",t:"45–54"},{v:"3",t:"55–64"},{v:"5",t:"65–74"},{v:"6",t:"≥ 75"}] },
       { id:"chronic", label:"Severe organ insufficiency / immunocompromise", type:"select", opts:[{v:"0",t:"None"},{v:"2",t:"Present, elective postoperative"},{v:"5",t:"Present, non-operative or emergency postoperative"}] }
@@ -3519,10 +3519,10 @@
   { id:"hit_4ts", cat:"Haematology", icon:"🩸", title:"4Ts Score (Heparin-Induced Thrombocytopenia)",
     desc:"Pre-test probability of heparin-induced thrombocytopenia.",
     inputs:[
-      { id:"thrombocytopenia", label:"Thrombocytopenia", type:"select", opts:[{v:"2",t:"Fall > 50% and nadir ≥ 20 ×10⁹/L"},{v:"1",t:"Fall 30–50% or nadir 10–19 ×10⁹/L"},{v:"0",t:"Fall < 30% or nadir < 10 ×10⁹/L"}] },
-      { id:"timing", label:"Timing of platelet fall", type:"select", opts:[{v:"2",t:"Days 5–10, or ≤1 day if heparin in past 30 days"},{v:"1",t:"Consistent but unclear, after day 10, or ≤1 day if heparin 30–100 days ago"},{v:"0",t:"Fall < 4 days without recent heparin"}] },
-      { id:"thrombosis", label:"Thrombosis or other sequelae", type:"select", opts:[{v:"2",t:"New thrombosis, skin necrosis, or acute systemic reaction"},{v:"1",t:"Progressive/recurrent or suspected thrombosis"},{v:"0",t:"None"}] },
-      { id:"other", label:"Other cause of thrombocytopenia", type:"select", opts:[{v:"2",t:"None apparent"},{v:"1",t:"Possible"},{v:"0",t:"Definite"}] }
+      { id:"thrombocytopenia", label:"Thrombocytopenia", type:"select", opts:[{v:"0",t:"Fall < 30% or nadir < 10 ×10⁹/L"},{v:"1",t:"Fall 30–50% or nadir 10–19 ×10⁹/L"},{v:"2",t:"Fall > 50% and nadir ≥ 20 ×10⁹/L"}] },
+      { id:"timing", label:"Timing of platelet fall", type:"select", opts:[{v:"0",t:"Fall < 4 days without recent heparin"},{v:"1",t:"Consistent but unclear, after day 10, or ≤1 day if heparin 30–100 days ago"},{v:"2",t:"Days 5–10, or ≤1 day if heparin in past 30 days"}] },
+      { id:"thrombosis", label:"Thrombosis or other sequelae", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Progressive/recurrent or suspected thrombosis"},{v:"2",t:"New thrombosis, skin necrosis, or acute systemic reaction"}] },
+      { id:"other", label:"Other cause of thrombocytopenia", type:"select", opts:[{v:"0",t:"Definite"},{v:"1",t:"Possible"},{v:"2",t:"None apparent"}] }
     ],
     compute:function(v){
       var s=Number(v.thrombocytopenia)+Number(v.timing)+Number(v.thrombosis)+Number(v.other);
@@ -5156,7 +5156,7 @@
     desc:"Predicted change in serum sodium from one litre of a chosen infusate.",
     inputs:[
       { id:"na", label:"Current serum sodium", type:"number", unit:"mmol/L", step:"1" },
-      { id:"fluid", label:"Infusate", type:"select", opts:[{v:"513",t:"3% saline (Na 513)"},{v:"154",t:"0.9% saline (Na 154)"},{v:"134",t:"Ringer’s lactate (Na+K ≈134)"},{v:"77",t:"0.45% saline (Na 77)"},{v:"0",t:"5% dextrose (Na 0)"}] },
+      { id:"fluid", label:"Infusate", type:"select", opts:[{v:"154",t:"0.9% saline (Na 154)"},{v:"513",t:"3% saline (Na 513)"},{v:"134",t:"Ringer’s lactate (Na+K ≈134)"},{v:"77",t:"0.45% saline (Na 77)"},{v:"0",t:"5% dextrose (Na 0)"}] },
       { id:"wt", label:"Body weight", type:"number", unit:"kg", step:"0.1" },
       { id:"sex", label:"TBW fraction", type:"select", opts:[{v:"0.6",t:"Adult male / child (0.6)"},{v:"0.5",t:"Adult female / elderly male (0.5)"},{v:"0.45",t:"Elderly female (0.45)"}] }
     ],
@@ -7069,8 +7069,12 @@
   /* ====================================================================== *
    * RENDERING — full-screen browser overlay + per-calculator panel
    * ====================================================================== */
-  var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","General"];
-  var CAT_ICON = { "Cardiovascular":"🫀","Critical care":"🚨","Infectious disease":"🦠","Renal":"🫘","Hepatology":"🫁","Neurology":"🧠","General":"⚖️" };
+  var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","Respiratory","Endocrine","Gastroenterology","Haematology","Oncology","Rheumatology","Musculoskeletal","Dermatology","Psychiatry","Paediatrics","Obstetrics","Ophthalmology","Toxicology","General"];
+  var CAT_ICON = { "Cardiovascular":"🫀","Critical care":"🚨","Infectious disease":"🦠","Renal":"🫘","Hepatology":"🫁","Neurology":"🧠","General":"⚖️","Respiratory":"🌬️","Endocrine":"🧬","Gastroenterology":"🩻","Haematology":"🩸","Oncology":"🎗️","Rheumatology":"🦴","Musculoskeletal":"🦿","Dermatology":"🧴","Psychiatry":"🛋️","Paediatrics":"👶","Obstetrics":"🤰","Ophthalmology":"👁️","Toxicology":"☠️" };
+  // Guarantee every category actually used by a calculator appears (CAT_ORDER sets priority;
+  // any not listed above are appended). Without this, calcs in an unlisted category are silently
+  // absent from the list AND search. Future-proof: a brand-new category auto-appears at the end.
+  (function(){ var seen={}; CAT_ORDER.forEach(function(c){ seen[c]=1; }); CALCS.forEach(function(c){ if(c.cat && !seen[c.cat]){ seen[c.cat]=1; CAT_ORDER.push(c.cat); } }); })();
   var root = null, q = "", activeCat = "", openId = null;
   var _resultCb = null, _resultCbId = null, _suppressCb = false;   // opener write-back: fired on an explicit Calculate (see open()/run())
 
@@ -7156,8 +7160,10 @@
         return '<label class="mc-check"><input type="checkbox" id="'+fid+'"><span>'+esc(f.label)+'</span></label>';
       }
       if(f.type==="select"){
-        var did0=false;   // default-select the first 0-point option so an untouched select is the NORMAL band, never the worst (APACHE II / MEWS list worst first)
-        var opts=(f.opts||[]).map(function(o){var sel=(!did0&&String(o.v)==="0")?" selected":"";if(sel)did0=true;return '<option value="'+esc(o.v)+'"'+sel+'>'+esc(o.t)+'</option>';}).join("");
+        // First listed option is the default (browser-native). Author responsibility: order each
+        // select so the FIRST option is the clinically-sensible default (normal band for additive
+        // severity scores; best/alert for inverted coma/functional scales).
+        var opts=(f.opts||[]).map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
         return '<div class="mc-field"><label class="mc-lbl" for="'+fid+'">'+esc(f.label)+'</label><select class="mc-input" id="'+fid+'">'+opts+'</select></div>';
       }
       var typ=f.type==="date"?"date":"number";
