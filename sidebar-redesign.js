@@ -57,7 +57,7 @@
       var b = document.querySelector('[data-act="feedback"],#v3FeedbackBtn'); if (b && b !== this) return b.click();
       try { location.href = "mailto:Support@StewardMD.in?subject=StewardMD%20feedback"; } catch (e) {}
     },
-    ack: function () { if (window.openAbout) openAbout("ack"); else if (window.SB && SB.modal) SB.modal("aboutModal"); else if (window.openAck) openAck(); else toast("Acknowledgements loading…"); },
+    ack: function () { if (window.openAbout) openAbout(); else if (window.SB && SB.modal) SB.modal("aboutModal"); else if (window.openAck) openAck(); else toast("Acknowledgements loading…"); },
     offlinedb: function () { if (window.SMD_OFFLINEDB && SMD_OFFLINEDB.open) SMD_OFFLINEDB.open(); else toast("Offline drug database — available in the app"); },
     notifications: function () {
       var b = document.getElementById("v3BellBtn"); if (b) return b.click();
