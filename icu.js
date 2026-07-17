@@ -764,6 +764,8 @@
       '.icu-vitals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}' +
       '@media (max-width:480px){.icu-vitals{grid-template-columns:repeat(3,1fr)}}' +
       '.icu-ward{font:700 12px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:0 0 8px}.icu-ward.on{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}' +
+      '.icu-ward-row{display:flex;align-items:center;gap:8px;margin:0 0 8px}.icu-ward-row .icu-ward{flex:1 1 auto;min-width:0;margin:0}' +
+      '.icu-ward-af{flex:0 0 auto;font:700 11px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px;cursor:pointer;white-space:nowrap}.icu-ward-af.on{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,var(--line));background:color-mix(in srgb,var(--ok) 10%,transparent)}' +
       '.icu-ward-new{font:700 12px var(--font);color:#1d4ed8;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:9px 12px;margin:0 0 8px;cursor:pointer}body.dark .icu-ward-new{background:#0a1a33;border-color:#1e3a8a;color:#93c5fd}' +
       '.icu-elyte-alerts{font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}' +
       '.icu-elyte-pill{font:700 11px var(--font);border:1.5px solid var(--muted);border-radius:999px;padding:2px 9px}' +
@@ -3122,8 +3124,22 @@
     if (w.connected && w.lastTs) s = { c: "ok", t: "🟢 Ward Sync connected · synced " + fmtAgo(w.lastTs) };
     else if (loggedIn) s = { c: "muted", t: "Ward Sync · no ward data for this patient" };
     else s = { c: "muted", t: "Sign in to Ward Sync to auto-fill this patient", act: "wardsync" };
-    return '<div class="icu-ward' + (s.c === "ok" ? " on" : "") + '"' + (s.act ? ' data-icu-act="' + s.act + '" style="cursor:pointer"' : "") + '>' + s.t + "</div>" +
-      (w.newUpdate ? '<div class="icu-ward-new" data-icu-act="dismissupdate">🔵 New laboratory update detected — widgets refreshed. Tap to dismiss.</div>' : "");
+    // Auto-fetch control — sits ON the Ward Sync status bar for a linked patient. Tapping opens the
+    // consent/toggle sheet (turn on with device-secure creds · Refresh now · turn off). Only shown
+    // when Ward Sync is connected to a patient and the feature module is loaded.
+    var afCtl = "";
+    try {
+      var afPid = (w.patientId || (window.SMD_AUTOFETCH && SMD_AUTOFETCH.curWardPid && SMD_AUTOFETCH.curWardPid())) || "";
+      if (window.SMD_AUTOFETCH && SMD_AUTOFETCH.on && SMD_AUTOFETCH.on() && afPid) {
+        var afOn = SMD_AUTOFETCH.isEnabled(afPid);
+        afCtl = '<button class="icu-ward-af' + (afOn ? " on" : "") + '" data-icu-act="autofetch" aria-label="Auto-fetch reports setting">'
+          + (afOn ? '↻ Auto-sync: on' : '↻ Auto-sync: off') + '</button>';
+      }
+    } catch (e) {}
+    return '<div class="icu-ward-row">'
+      + '<div class="icu-ward' + (s.c === "ok" ? " on" : "") + '"' + (s.act ? ' data-icu-act="' + s.act + '" style="cursor:pointer"' : "") + '>' + s.t + "</div>"
+      + afCtl + '</div>'
+      + (w.newUpdate ? '<div class="icu-ward-new" data-icu-act="dismissupdate">🔵 New laboratory update detected — widgets refreshed. Tap to dismiss.</div>' : "");
   }
   // Ward-vs-manual conflicts (clinician resolves; never auto-overwritten).
   function renderConflicts() {
@@ -6744,6 +6760,7 @@
       case "conflict": { var parts = arg.split("|"); ICU.resolveConflict(parts[0], parts[1]); paint(); break; }
       case "dismissupdate": ICU.clearNewUpdate(); paint(); break;
       case "wardsync": try { if (window.openGHIS) openGHIS(); } catch (x) {} break;
+      case "autofetch": try { if (window.SMD_AUTOFETCH) SMD_AUTOFETCH.openManager((_raw.wardSync && _raw.wardSync.patientId) || "", (_raw.patient && _raw.patient.name) || ""); } catch (x) {} break;
       case "savept": savePatient(); break;
       case "patients": openRoster(); break;
       case "loadpt": loadPatient(arg); break;
