@@ -265,3 +265,10 @@
 #fundxRoot .fundx-badge.b-urgent { background: var(--sev-urgent-bg, #FDEEE4); color: var(--sev-urgent-fg, #C2410C); }
 #fundxRoot .fundx-badge.b-critical { background: var(--sev-critical-bg, #FBE9EC); color: var(--sev-critical-fg, #B42332); }
 #fundxRoot .fundx-badge.b-info { background: var(--sev-info-bg, #E8F2F9); color: var(--sev-info-fg, #1D6FA3); }
+
+/* ============ cloud consent card (pre-capture) ============ */
+#fundxRoot .fundx-consent { border: 1px solid var(--sev-info-bd, #B5D4E8); background: var(--sev-info-bg, #E8F2F9); border-radius: var(--rds-r-ctl, 12px); padding: 14px; margin-bottom: 4px; }
+#fundxRoot .fundx-consent-h { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; color: var(--sev-info-fg, #1D6FA3); }
+#fundxRoot .fundx-consent-h .rds-icon { font-size: 20px; }
+#fundxRoot .fundx-consent p { margin: 8px 0 12px; font-weight: 500; font-size: 12.5px; line-height: 1.5; color: var(--rds-ink, var(--ink)); }
+#fundxRoot .fundx-consent .fundx-actions { margin-top: 0; }

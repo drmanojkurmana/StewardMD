@@ -46,7 +46,43 @@
   function toast(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
   function nowMs() { return (typeof Date !== "undefined") ? Date.now() : 0; }
 
-  var DISCLAIMER = 'Vision detection preview — not a diagnosis. Images stay on this device.';
+  var DISC_LOCAL = 'Vision detection preview — not a diagnosis. Images stay on this device.';
+  var DISC_CLOUD = 'Vision preview via StewardMD AI (Google Vertex AI) — images are sent securely for this analysis, not used to train models. Not a diagnosis.';
+
+  // ---- cloud provider selection: health-gated auto-activation + one-time consent ----
+  // Once the FundX backend reports a real provider available (GET /api/fundx/health), the app
+  // AUTO-ACTIVATES it instead of the on-device mock — so it never sits in mock mode when valid
+  // credentials exist. Because cloud analysis sends the image off-device, a one-time consent
+  // is required (null pref → ask at pre-capture); the disclaimer updates to reflect it.
+  function cloudPref() { try { return localStorage.getItem("smd_fundx_cloud"); } catch (e) { return null; } }   // "1" | "0" | null(ask)
+  function cloudEnabled() { return cloudPref() === "1"; }
+  function setCloudPref(v) { try { localStorage.setItem("smd_fundx_cloud", v); } catch (e) {} }
+  var _backend = null;
+  function parseHealth(h) {
+    var av = (h && h.providers ? h.providers : []).filter(function (p) { return p && p.available; }).map(function (p) { return p.name; });
+    var vision = av.indexOf("vertex") >= 0 || av.indexOf("developer") >= 0;
+    return { vision: vision, clinical: vision || av.indexOf("cerebras") >= 0, providers: av };
+  }
+  function checkBackend() {
+    if (_backend) return Promise.resolve(_backend);
+    if (typeof fetch !== "function") { _backend = { vision: false, clinical: false, providers: [] }; return Promise.resolve(_backend); }
+    return fetch("/api/fundx/health").then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (h) { _backend = parseHealth(h); return _backend; })
+      .catch(function () { _backend = { vision: false, clinical: false, providers: [] }; return _backend; });
+  }
+  function providerTarget(enabled, backend) { return (enabled && backend && backend.vision) ? "vertex-gemini" : "mock"; }
+  function cloudActive() { return cloudEnabled() && !!(_backend && _backend.vision); }
+  function applyProviderSelection() {
+    return checkBackend().then(function (b) {
+      try {
+        var P = window.SMD_FUNDX_PROVIDERS; if (P) P.setActive(providerTarget(cloudEnabled(), b));
+        var Cx = window.SMD_FUNDX_CLINICAL; if (Cx) Cx.setActive(cloudEnabled() && b.clinical ? "backend" : "rules");
+      } catch (e) {}
+      if (rootEl && screen === "precapture") render();   // refresh the consent card once health is known
+      return b;
+    });
+  }
+  function disclaimerText() { return cloudActive() ? DISC_CLOUD : DISC_LOCAL; }
 
   // Advisory Clinical Engine (Phase C) is a NESTED flag, default OFF — no clinical advice
   // surfaces unless explicitly enabled. When on, a rule-based advisory assessment renders.
@@ -146,7 +182,7 @@
         '</div>' +
         '<div class="rds-section-header"><span class="rds-section-title">Recent scans</span></div>' +
         '<div id="fundxRecent" class="fundx-recent"><div class="fundx-empty">' + ric("hourglass_empty") + '<span>Loading…</span></div></div>' +
-        '<p class="fundx-disc">' + DISCLAIMER + '</p>' +
+        '<p class="fundx-disc">' + disclaimerText() + '</p>' +
       '</main>';
   }
 
@@ -167,9 +203,13 @@
           '<li>' + ric("center_focus_strong") + '<div><b>Line up phone → lens → pupil</b><span>Keep all three on one axis; the coach will nudge you left/right and closer/farther.</span></div></li>' +
           '<li>' + ric("lightbulb") + '<div><b>Dim the room</b><span>Lower ambient light so the red reflex and retina show through.</span></div></li>' +
         '</ul>' +
+        ((_backend && _backend.vision && cloudPref() === null) ?
+          '<div class="fundx-consent"><div class="fundx-consent-h">' + ric("cloud") + 'AI cloud analysis available</div>' +
+          '<p>This scan can be analysed by StewardMD&rsquo;s AI (Google Vertex AI). The image is sent securely for this analysis and is not used to train models. You can keep analysis on-device instead.</p>' +
+          '<div class="fundx-actions"><button class="fundx-btn ghost" data-fx="cloudno">Keep on-device</button><button class="fundx-btn" data-fx="cloudyes">Use AI analysis</button></div></div>' : '') +
         '<button class="fundx-cta" data-fx="startcam">' + ric("photo_camera") +
           '<div class="fundx-cta-tx"><b>Start guided capture</b><span>' + esc(eye === "right" ? "Right (OD)" : "Left (OS)") + ' · camera opens</span></div>' + ric("chevron_right") + '</button>' +
-        '<p class="fundx-disc">The camera captures automatically when alignment and quality are good — there is no shutter button. ' + DISCLAIMER + '</p>' +
+        '<p class="fundx-disc">The camera captures automatically when alignment and quality are good — there is no shutter button. ' + disclaimerText() + '</p>' +
       '</main>';
   }
 
@@ -225,7 +265,7 @@
           '<div class="fundx-stat"><b>' + (op.avgQuality || 0) + '</b><span>Avg quality</span></div>' +
           '<div class="fundx-stat"><b>' + doneCount + '</b><span>Levels</span></div>' +
         '</div>' +
-        '<p class="fundx-disc">' + DISCLAIMER + '</p>' +
+        '<p class="fundx-disc">' + disclaimerText() + '</p>' +
       '</main>';
   }
 
@@ -263,7 +303,7 @@
           '<button class="fundx-btn ghost" data-fx="retake">' + ric("refresh") + 'Retake</button>' +
           '<button class="fundx-btn" data-fx="toresult">' + (acc ? "Continue" : "Use anyway") + ric("chevron_right") + '</button>' +
         '</div>' +
-        '<p class="fundx-disc">' + DISCLAIMER + '</p>' +
+        '<p class="fundx-disc">' + disclaimerText() + '</p>' +
       '</main>';
   }
 
@@ -296,7 +336,7 @@
           '<button class="fundx-btn ghost" data-fx="discard">' + ric("delete") + 'Discard</button>' +
           '<button class="fundx-btn" data-fx="save">' + ric("save") + 'Save to patient</button>' +
         '</div>' +
-        '<p class="fundx-disc">' + esc(f.disclaimer || DISCLAIMER) + '</p>' +
+        '<p class="fundx-disc">' + esc(f.disclaimer || disclaimerText()) + '</p>' +
       '</main>';
   }
 
@@ -340,7 +380,7 @@
         clinicalCard(m.vision) +
         '<div class="fundx-actions"><button class="fundx-btn ghost" data-fx="deletescan" data-id="' + esc(m.id) + '">' + ric("delete") + 'Delete</button>' +
           '<button class="fundx-btn" data-fx="export" data-id="' + esc(m.id) + '">' + ric("ios_share") + 'Export JSON</button></div>' +
-        '<p class="fundx-disc">' + esc(f.disclaimer || DISCLAIMER) + '</p>' +
+        '<p class="fundx-disc">' + esc(f.disclaimer || disclaimerText()) + '</p>' +
       '</main>';
   }
 
@@ -411,7 +451,7 @@
     }).join("");
     return head + '<main class="fundx-scroll">' + trendCard + (cmp ? '<div class="fundx-actions">' + cmp + '</div>' : '') +
       '<div class="rds-section-header"><span class="rds-section-title">' + timelineScans.length + ' scan' + (timelineScans.length === 1 ? '' : 's') + '</span></div>' +
-      '<div class="fundx-recent">' + rows + '</div><p class="fundx-disc">' + DISCLAIMER + '</p></main>';
+      '<div class="fundx-recent">' + rows + '</div><p class="fundx-disc">' + disclaimerText() + '</p></main>';
   }
   function openCompare(idA, idB) {
     var st = STORE(); if (!st) return;
@@ -455,6 +495,7 @@
         '<div class="rds-section-header"><span class="rds-section-title">AI provider (retinal inference)</span></div>' +
         '<div class="fundx-set-list">' + providers.map(provRow).join("") + '</div>' +
         '<p class="fundx-note">Only providers with configured endpoints/models are selectable. Others connect through the AI Router once credentials are supplied — no app change needed.</p>' +
+        '<button class="fundx-set-row' + (cloudEnabled() ? ' on' : '') + '" data-fx="setcloud"><span class="fundx-set-rl"><b>Cloud AI analysis</b><span>' + (_backend && _backend.vision ? 'Backend available — send scans to StewardMD AI (Vertex/Gemini). Off = on-device only.' : 'Backend not reachable — analysis stays on-device.') + '</span></span>' + ric(cloudEnabled() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Auto-capture sensitivity</span></div>' +
         '<div class="fundx-chips2">' + sensChip("low", "Easier") + sensChip("med", "Balanced") + sensChip("high", "Strict") + '</div>' +
         '<div class="rds-section-header"><span class="rds-section-title">Coaching</span></div>' +
@@ -463,7 +504,7 @@
         '<button class="fundx-set-row' + (clinicalOn() ? ' on' : '') + '" data-fx="setclinical"><span class="fundx-set-rl"><b>Clinical assessment</b><span>Rule-based, advisory severity / referral / follow-up from findings. Never a diagnosis.</span></span>' + ric(clinicalOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Data</span></div>' +
         '<button class="fundx-set-row" data-fx="clearall"><span class="fundx-set-rl"><b>Delete all scans</b><span>Removes every stored image + record on this device</span></span>' + ric("delete_forever") + '</button>' +
-        '<p class="fundx-disc">' + DISCLAIMER + '</p>' +
+        '<p class="fundx-disc">' + disclaimerText() + '</p>' +
       '</main>';
   }
 
@@ -768,6 +809,9 @@
       case "setsens": { try { localStorage.setItem("smd_fundx_sens", b.getAttribute("data-v")); } catch (e) {} applySettings(); haptic("selection"); return render(); }
       case "setvoice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); return render();
       case "setclinical": { try { localStorage.setItem("smd_fundx_clinical", clinicalOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
+      case "cloudyes": setCloudPref("1"); haptic("success"); return applyProviderSelection().then(render);
+      case "cloudno": setCloudPref("0"); haptic("selection"); return applyProviderSelection().then(render);
+      case "setcloud": { setCloudPref(cloudEnabled() ? "0" : "1"); haptic("selection"); return applyProviderSelection().then(render); }
       case "clearall": haptic("warning"); return clearAllScans();
       case "export": haptic("light"); { var st = STORE(); if (st) st.getScan(b.getAttribute("data-id")).then(function (m) { if (m) exportScan(m); }); } return;
     }
@@ -777,6 +821,7 @@
     open: function (context) {
       ctx = context || null; screen = "home"; session = null; result = null; capturing = false;
       applySettings();
+      applyProviderSelection();   // health-gated: auto-activates the backend provider when available
       if (!rootEl) {
         rootEl = document.createElement("div"); rootEl.id = "fundxRoot";
         rootEl.setAttribute("role", "dialog"); rootEl.setAttribute("aria-modal", "true"); rootEl.setAttribute("aria-label", "FundX AI retinal imaging");
@@ -794,7 +839,9 @@
     _levels: function () { return LEVELS; },
     _trend: trend,
     _compareDelta: compareDelta,
-    _exportPayload: exportPayload
+    _exportPayload: exportPayload,
+    _parseHealth: parseHealth,
+    _providerTarget: providerTarget
   };
   window.FUNDX = FUNDX;
 })();

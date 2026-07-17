@@ -247,5 +247,16 @@ ok("fundx: settings screen + provider/sensitivity/export wired", /function scree
 // ---- M11 Clinical Engine integration (nested flag, advisory) ------------
 ok("fundx: clinical card wired behind smd_fundx_clinical", /function clinicalOn\(/.test(fj) && /function clinicalCard\(/.test(fj) && /data-fx="setclinical"/.test(fj) && /SMD_FUNDX_CLINICAL/.test(fj));
 
+// ---- cloud auto-activation (health-gated) -------------------------------
+const FXc = loadFundx("1");
+ok("cloud: parseHealth detects available vertex", FXc._parseHealth({ providers: [{ name: "vertex", available: true }, { name: "cerebras", available: false }] }).vision === true);
+ok("cloud: parseHealth detects developer as vision-capable", FXc._parseHealth({ providers: [{ name: "developer", available: true }] }).vision === true);
+ok("cloud: parseHealth none available → no vision", FXc._parseHealth({ providers: [{ name: "vertex", available: false }] }).vision === false);
+ok("cloud: parseHealth cerebras-only → clinical yes, vision no", (function () { const h = FXc._parseHealth({ providers: [{ name: "cerebras", available: true }] }); return h.vision === false && h.clinical === true; })());
+ok("cloud: providerTarget picks vertex-gemini when enabled + backend vision", FXc._providerTarget(true, { vision: true }) === "vertex-gemini");
+ok("cloud: providerTarget stays mock when disabled", FXc._providerTarget(false, { vision: true }) === "mock");
+ok("cloud: providerTarget stays mock when backend has no vision", FXc._providerTarget(true, { vision: false }) === "mock");
+ok("fundx: cloud consent + auto-activation wired", /function applyProviderSelection\(/.test(fj) && /\/api\/fundx\/health/.test(fj) && /data-fx="cloudyes"/.test(fj) && /data-fx="setcloud"/.test(fj));
+
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);
