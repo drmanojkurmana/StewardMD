@@ -204,5 +204,15 @@ const fj = src("fundx.js");
 ok("fundx: scan detail viewer present", /function openDetail\(/.test(fj) && /screen === "detail"/.test(fj));
 ok("fundx: delete-scan wired", /function deleteScan\(/.test(fj) && /data-fx="deletescan"/.test(fj));
 
+// ---- M5 Guided Training Mode --------------------------------------------
+const FXt = loadFundx("1");
+ok("training: seven levels defined", FXt._levels().length === 7);
+ok("training: level names in order", FXt._levels()[0].key === "find_eye" && FXt._levels()[6].key === "full_capture");
+ok("training: L1 needs eye", FXt._levelAchieved(1, { eye: true }, {}) === true && FXt._levelAchieved(1, { eye: false }, {}) === false);
+ok("training: L2 needs pupil", FXt._levelAchieved(2, { pupil: true }, {}) === true);
+ok("training: L4 needs red reflex", FXt._levelAchieved(4, { redReflex: true }, {}) === true && FXt._levelAchieved(4, {}, {}) === false);
+ok("training: L7 needs readiness.ready", FXt._levelAchieved(7, {}, { ready: true }) === true && FXt._levelAchieved(7, {}, { ready: false }) === false);
+ok("fundx: training screen wired", /function screenTraining\(/.test(fj) && /screen === "training"/.test(fj) && /data-fx="level"/.test(fj));
+
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);

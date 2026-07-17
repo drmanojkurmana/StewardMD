@@ -79,6 +79,31 @@
     return { left: "west", right: "east", up: "north", down: "south", closer: "add", farther: "remove" }[a] || "";
   }
 
+  // Guided Training Mode — 7 acquisition-skill levels (no diagnosis, no saved scan).
+  var LEVELS = [
+    { n: 1, key: "find_eye", title: "Find the eye", desc: "Point the camera so the eye fills the reticle." },
+    { n: 2, key: "center_pupil", title: "Center the pupil", desc: "Move until the pupil sits in the centre." },
+    { n: 3, key: "position_lens", title: "Position the 20D lens", desc: "Bring the lens into view and keep it centred." },
+    { n: 4, key: "red_reflex", title: "Hold the red reflex", desc: "Tilt until the orange-red glow appears and stays." },
+    { n: 5, key: "optic_disc", title: "Find the optic disc", desc: "Steady the view until the disc is framed." },
+    { n: 6, key: "macula", title: "Find the macula", desc: "Shift slightly to bring the macula into frame." },
+    { n: 7, key: "full_capture", title: "Acquire a full image", desc: "Hold everything aligned until capture-ready." }
+  ];
+  // Pure: has the target skill for `level` been achieved this frame?
+  function levelAchieved(level, gates, readiness) {
+    gates = gates || {}; readiness = readiness || {};
+    switch (level) {
+      case 1: return !!gates.eye;
+      case 2: return !!gates.pupil;
+      case 3: return !!gates.lens;
+      case 4: return !!gates.redReflex;
+      case 5: return !!gates.disc;
+      case 6: return !!gates.macula;
+      case 7: return !!readiness.ready;
+      default: return false;
+    }
+  }
+
   // ================= SCREENS =================
   function screenHome() {
     var who = ctx && ctx.name ? '<div class="fundx-sub">' + esc(ctx.name) + (ctx.meta ? ' · ' + esc(ctx.meta) : '') + '</div>' : '';
@@ -133,6 +158,7 @@
           '<div id="fundxState" class="fundx-state">Starting camera…</div>' +
           '<button id="fundxVoiceBtn" class="fundx-cam-x' + (VOICE.enabled() ? ' on' : '') + '" data-fx="voice" aria-label="Voice coaching">' + ric(VOICE.enabled() ? "volume_up" : "volume_off") + '</button>' +
         '</header>' +
+        ((session && session.mode === "training") ? '<div class="fundx-goal">' + ric("school") + 'Level ' + session.trainLevel + ' · ' + esc((LEVELS[session.trainLevel - 1] || {}).title || "") + '</div>' : '') +
         '<div class="fundx-reticle">' +
           '<svg class="fundx-ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="fundx-ring-bg" cx="60" cy="60" r="54"/><circle id="fundxRingFg" class="fundx-ring-fg" cx="60" cy="60" r="54"/></svg>' +
           '<div id="fundxArrow" class="fundx-arrow">' + ric("north") + '</div>' +
@@ -144,6 +170,38 @@
         '</div>' +
         '<div id="fundxFlash" class="fundx-flash"></div>' +
       '</div>';
+  }
+
+  function screenTraining() {
+    var st = STORE();
+    var lp = st ? st.learning.get() : { levels: {} };
+    var op = st ? st.operator.get() : { scans: 0, avgQuality: 0, captures: 0 };
+    var done = (lp && lp.levels) || {};
+    var doneCount = LEVELS.filter(function (L) { return done[L.n] && done[L.n].done; }).length;
+    var rows = LEVELS.map(function (L) {
+      var ok = done[L.n] && done[L.n].done;
+      return '<button class="fundx-lvl' + (ok ? ' done' : '') + '" data-fx="level" data-level="' + L.n + '">' +
+        '<span class="fundx-lvl-n">' + (ok ? ric("check") : L.n) + '</span>' +
+        '<span class="fundx-lvl-tx"><b>' + esc(L.title) + '</b><span>' + esc(L.desc) + '</span></span>' +
+        '<span class="fundx-lvl-go">' + ric("play_circle") + '</span></button>';
+    }).join("");
+    return '' +
+      '<header class="fundx-head rds-safe-top">' +
+        '<button class="fundx-close" data-fx="home" aria-label="Back">' + ric("arrow_back_ios_new") + '</button>' +
+        '<div class="fundx-head-tt"><b>Training</b><div class="fundx-sub">' + doneCount + ' / ' + LEVELS.length + ' levels complete</div></div>' +
+        '<div class="fundx-head-sp"></div>' +
+      '</header>' +
+      '<main class="fundx-scroll">' +
+        '<p class="fundx-primer-note">Practice acquisition skills on a real (or model) eye. No image is saved and no diagnosis is made — just guided coaching until you nail each skill.</p>' +
+        '<div class="fundx-lvls">' + rows + '</div>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Your acquisition stats</span></div>' +
+        '<div class="fundx-stats">' +
+          '<div class="fundx-stat"><b>' + (op.scans || 0) + '</b><span>Scans</span></div>' +
+          '<div class="fundx-stat"><b>' + (op.avgQuality || 0) + '</b><span>Avg quality</span></div>' +
+          '<div class="fundx-stat"><b>' + doneCount + '</b><span>Levels</span></div>' +
+        '</div>' +
+        '<p class="fundx-disc">' + DISCLAIMER + '</p>' +
+      '</main>';
   }
 
   function screenProcessing() {
@@ -323,7 +381,29 @@
     session.readinessTrace.push(Math.round((step.readiness.overall || 0) * 100));
     if (session.readinessTrace.length > 400) session.readinessTrace.shift();
     updateCameraUI(step, fa);
+    if (session.mode === "training") { handleTraining(step); return; }
     if (step.shouldCapture) triggerCapture();
+  }
+  function handleTraining(step) {
+    var lvl = session.trainLevel;
+    if (levelAchieved(lvl, step.gates, step.readiness)) {
+      session.trainHold = (session.trainHold || 0) + 1;
+      if (session.trainHold >= 5) completeTrainingLevel(lvl);
+    } else { session.trainHold = 0; }
+  }
+  function completeTrainingLevel(lvl) {
+    if (capturing) return; capturing = true;     // guard re-entry
+    var st = STORE(); if (st) { try { st.learning.completeLevel(lvl); } catch (e) {} }
+    haptic("success"); VOICE.speak("Level complete");
+    var flash = document.getElementById("fundxFlash"); if (flash) { flash.classList.add("on"); setTimeout(function () { flash.classList.remove("on"); }, 220); }
+    stopCamera();
+    toast("Level " + lvl + " complete!");
+    session = null;
+    setTimeout(function () { show("training"); }, 300);
+  }
+  function startTraining(level) {
+    session = newSession("right"); session.mode = "training"; session.trainLevel = level; session.trainHold = 0;
+    startCamera();
   }
   function updateCameraUI(step, fa) {
     var cue = V().Coach.cueFor(step.state, fa, step.readiness);
@@ -440,6 +520,7 @@
     else if (screen === "review") rootEl.innerHTML = screenReview();
     else if (screen === "result") rootEl.innerHTML = screenResult();
     else if (screen === "detail") rootEl.innerHTML = screenDetail();
+    else if (screen === "training") rootEl.innerHTML = screenTraining();
   }
   function show(s) { screen = s; render(); }
 
@@ -459,7 +540,8 @@
       case "review": return show("review");
       case "discard": haptic("light"); result = null; return show("home");
       case "save": return saveScan();
-      case "training": haptic("light"); return toast("Guided Training Mode arrives in a later milestone.");
+      case "training": haptic("light"); session = null; return show("training");
+      case "level": haptic("medium"); return startTraining(parseInt(b.getAttribute("data-level"), 10) || 1);
       case "gallery": haptic("light"); { var rc = document.getElementById("fundxRecent"); if (rc && rc.scrollIntoView) rc.scrollIntoView({ behavior: "smooth" }); } return toast("Your recent scans are listed below.");
       case "open": haptic("light"); return openDetail(b.getAttribute("data-id"));
       case "deletescan": haptic("light"); return deleteScan(b.getAttribute("data-id"));
@@ -477,7 +559,9 @@
     enabled: function () { return true; },
     _screen: function () { return screen; },
     _buildResult: _buildResult,
-    _buildScanRecord: _buildScanRecord
+    _buildScanRecord: _buildScanRecord,
+    _levelAchieved: levelAchieved,
+    _levels: function () { return LEVELS; }
   };
   window.FUNDX = FUNDX;
 })();

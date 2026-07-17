@@ -187,3 +187,30 @@
 #fundxRoot .fundx-actions { display: flex; gap: 10px; margin-top: 18px; }
 #fundxRoot .fundx-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; padding: 14px; border: none; border-radius: var(--rds-r-ctl, 12px); background: var(--rds-primary, var(--teal)); color: #fff; font-weight: 700; font-size: 14px; }
 #fundxRoot .fundx-btn.ghost { background: var(--rds-surface, var(--panel, #fff)); color: var(--rds-ink, var(--ink)); border: 1px solid var(--rds-line, var(--line)); }
+
+/* ============ M5 — Guided Training Mode ============ */
+#fundxRoot .fundx-primer-note { margin: 4px 4px 14px; font-weight: 500; font-size: 13px; line-height: 1.5; color: var(--rds-muted, var(--slate-soft)); }
+#fundxRoot .fundx-lvls { display: flex; flex-direction: column; gap: 8px; }
+#fundxRoot .fundx-lvl {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  padding: 12px 14px; border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px);
+  background: var(--rds-surface, var(--panel, #fff)); color: var(--rds-ink, var(--ink));
+}
+#fundxRoot .fundx-lvl-n {
+  flex: 0 0 auto; width: 30px; height: 30px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
+  font: 800 14px var(--rds-mono, monospace); background: var(--rds-surface-2, #eef3f5); color: var(--rds-muted, var(--slate-soft));
+}
+#fundxRoot .fundx-lvl.done .fundx-lvl-n { background: var(--sev-stable-fg, #1C7A4A); color: #fff; }
+#fundxRoot .fundx-lvl.done .fundx-lvl-n .rds-icon { font-size: 18px; }
+#fundxRoot .fundx-lvl-tx { flex: 1; min-width: 0; }
+#fundxRoot .fundx-lvl-tx b { display: block; font-weight: 700; font-size: 14px; }
+#fundxRoot .fundx-lvl-tx span { display: block; font-weight: 500; font-size: 12px; color: var(--rds-muted, var(--slate-soft)); margin-top: 1px; }
+#fundxRoot .fundx-lvl-go { flex: 0 0 auto; color: var(--rds-primary, var(--teal)); }
+#fundxRoot .fundx-lvl-go .rds-icon { font-size: 26px; }
+#fundxRoot .fundx-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+#fundxRoot .fundx-stat { text-align: center; padding: 16px 8px; border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px); background: var(--rds-surface, var(--panel, #fff)); }
+#fundxRoot .fundx-stat b { display: block; font: 800 24px var(--rds-mono, monospace); color: var(--rds-primary, var(--teal)); }
+#fundxRoot .fundx-stat span { display: block; font-weight: 600; font-size: 11px; color: var(--rds-muted, var(--slate-soft)); margin-top: 2px; }
+/* training goal banner over the camera */
+#fundxRoot .fundx-goal { position: absolute; top: 62px; left: 50%; transform: translateX(-50%); z-index: 6; display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; background: rgba(14,110,99,.85); color: #fff; font-weight: 700; font-size: 13px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+#fundxRoot .fundx-goal .rds-icon { font-size: 17px; }
