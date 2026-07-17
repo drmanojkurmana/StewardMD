@@ -490,7 +490,19 @@
     });
   }
   if (typeof window.fetch === "function") {
-    var origFetch = window.fetch.bind(window);
+    // Fall-through transport for everything that ISN'T /api/*: prefer the PRISTINE native fetch on
+    // Android. CapacitorHttp (enabled in capacitor.config.json) auto-patches window.fetch, and on the
+    // Android WebView that patched fetch breaks Firestore's transport — every read fails `unavailable`
+    // (verified live via CDP), so ICU group mode never loads its shared units and falls back to the
+    // solo "This device" screen. CapacitorHttp stashes the original browser fetch as
+    // window.CapacitorWebFetch; routing non-/api traffic (Firestore/Google APIs) through it lets
+    // Firestore reach firestore.googleapis.com natively (WebChannel works, like the web PWA).
+    // MUST bind BEFORE Firestore starts (Firestore captures its transport at start): native-bridge.js
+    // runs at boot, ahead of SMD_bootFirebase's first read. iOS/web keep window.fetch unchanged
+    // (WKWebView tolerates the patch); /api/* still goes through the explicit plugin below on both.
+    var _plat = ""; try { _plat = (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform()) || ""; } catch (e) {}
+    var _baseFetch = (_plat === "android" && typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch : window.fetch;
+    var origFetch = _baseFetch.bind(window);
     window.fetch = function (input, init) {
       try {
         var url = (typeof input === "string") ? input : (input && typeof input === "object" ? input.url : null);
