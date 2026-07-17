@@ -1586,10 +1586,12 @@
     var nav = document.createElement("div"); nav.className = "smd-ab-tabs";
     nav.innerHTML = '<button class="smd-ab-tab on" data-t="about" type="button">About</button>' +
       '<button class="smd-ab-tab" data-t="version" type="button">Version history</button>' +
-      '<button class="smd-ab-tab" data-t="facts" type="button">Facts &amp; milestones</button>';
+      '<button class="smd-ab-tab" data-t="facts" type="button">Facts &amp; milestones</button>' +
+      '<button class="smd-ab-tab" data-t="ack" type="button">Acknowledgements</button>';
     var vPanel = document.createElement("div"); vPanel.className = "smd-ab-panel"; vPanel.setAttribute("data-tab", "version"); vPanel.style.display = "none"; vPanel.innerHTML = aboutVersionHTML();
     var fPanel = document.createElement("div"); fPanel.className = "smd-ab-panel"; fPanel.setAttribute("data-tab", "facts"); fPanel.style.display = "none"; fPanel.innerHTML = aboutFactsHTML();
-    body.appendChild(nav); body.appendChild(aboutPanel); body.appendChild(vPanel); body.appendChild(fPanel);
+    var aPanel = document.createElement("div"); aPanel.className = "smd-ab-panel"; aPanel.setAttribute("data-tab", "ack"); aPanel.style.display = "none"; aPanel.innerHTML = ackHTML();
+    body.appendChild(nav); body.appendChild(aboutPanel); body.appendChild(vPanel); body.appendChild(fPanel); body.appendChild(aPanel);
     nav.addEventListener("click", function (e) {
       var b = e.target.closest("[data-t]"); if (!b) return;
       var t = b.getAttribute("data-t");
@@ -1598,6 +1600,28 @@
       body.scrollTop = 0;
     });
   }
+  // Acknowledgements content — shared by the About-box "Acknowledgements" tab and the legacy sheet.
+  function ackHTML() {
+    var src = document.getElementById("ackCard");
+    if (src) {
+      var c = src.cloneNode(true);
+      c.removeAttribute("id");
+      var hdr = c.querySelector(".ack-header-row"); if (hdr) hdr.parentNode.removeChild(hdr);
+      c.classList.add("hv-ack-inline");
+      return '<div class="hv-ack">' + c.outerHTML + '</div>';
+    }
+    return '<div class="hv-ack" style="text-align:center;color:var(--hmut);font:500 13px/1.6 var(--hfont)">' +
+      '<p><b>Concept, content &amp; development</b><br>Dr. Manoj Kumar Kurmana, MD</p>' +
+      '<p>Developed by MaiKnowledge.</p></div>';
+  }
+  // Open the About box (optionally to a tab: about|version|facts|ack). Exposed globally so the
+  // redesigned sidebar's "About & Acknowledgements" item opens it (acknowledgements live in About).
+  function openAbout(tab) {
+    try { enhanceAbout(); } catch (e) {}
+    try { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); } catch (e) {}
+    if (tab) { try { var m = document.getElementById("aboutModal"); var b = m && m.querySelector('.smd-ab-tab[data-t="' + tab + '"]'); if (b) b.click(); } catch (e) {} }
+  }
+  try { window.openAbout = openAbout; window.openAck = openAck; } catch (e) {}
   function openAck() {
     var src = document.getElementById("ackCard");
     var inner = "";
