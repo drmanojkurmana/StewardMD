@@ -1,88 +1,90 @@
-# StewardMD — over-the-air (OTA) updates for the native apps
+# StewardMD — self-hosted OTA updates (Cloudflare, no SaaS)
 
-**Goal:** push web-asset updates (JS/HTML/CSS/KB/calculators/management) to installed iOS/Android apps **without a store release**, while keeping the app fully offline.
+Push web/content updates (JS/HTML/CSS/KB/calculators/management) to installed iOS/Android apps **without an app-store release**, using **only your existing Cloudflare infrastructure**. No Capgo cloud, no recurring subscription.
 
-**Plugin:** [`@capgo/capacitor-updater`](https://github.com/cap-go/capacitor-updater) (Capacitor 8 — match the plugin major to `@capacitor/core` v8).
+## Architecture (what's implemented)
 
----
+- **Plugin (free, MIT):** `@capgo/capacitor-updater` in **self-hosted mode** — it handles download, atomic apply, rollback and integrity. Only Capgo's *cloud backend* is paid; we don't use it.
+- **Backend (your existing Worker):** `worker/src/ota.js`, wired into `stewardmd-api` (`api.stewardmd.in`). Runtime is read-only; reuses R2 bucket `stewardmd-offline` (prefix `ota/`), the per-IP rate limiter, and the `production`-gated deploy workflow.
+- **Content-addressed storage → delta updates:** each web file is stored once by its `sha256` (`ota/files/<hash>`); a version is a manifest of hashes. The device downloads **only changed files** — a `home.js` tweak is a few KB, not the ~60 MB bundle. R2 has **zero egress fees** and immutable files edge-cache hard, so bandwidth/storage cost is negligible and scales well past 5,000 users.
+- **Integrity:** every file + the full zip carry a `sha256` the plugin verifies. Optional **end-to-end signing** (see below) protects against a compromised bucket.
+- **Rollback:** two layers — the plugin auto-reverts a bundle that never calls `notifyAppReady` (wired in `native-ota.js`), and server-side you repoint the channel to any prior version in one command.
+- **Native-version gate:** each manifest has `minNativeBuild`; `/ota/check` won't serve a web bundle to an older native binary than it needs — so **store releases are only ever needed for native code changes**.
+
+R2 layout (bucket `stewardmd-offline`):
+```
+ota/channels/<channel>.json        { version, minNativeBuild, manifestKey }   ← the atomic "publish" pointer
+ota/manifests/<channel>/<v>.json   { version, checksum, minNativeBuild, files:[{file_name,file_hash}] }
+ota/files/<sha256>                 one web file (immutable)
+ota/bundles/<version>.zip          full bundle (url fallback / first install)
+```
 
 ## Read this first — three hard truths
 
-1. **OTA needs ONE more native release to activate.** The plugin must be embedded in the app binary. So you still cut one native build now — but it's the *last* content-only release you'll ever ship.
-2. **It does NOT retroactively update already-installed apps.** Only apps updated to the plugin-enabled build receive OTA afterwards. Everyone on the current build must update once (store/TestFlight) to get onto the OTA track.
-3. **`notifyAppReady()` is mandatory every launch or updates auto-roll-back.** This is already wired in `native-ota.js` (web-safe no-op). **Test it on a device before release** (see step 5) — if it doesn't fire, every OTA bundle silently reverts.
+1. **OTA needs ONE native release to activate** — the plugin must be in the binary. That release is the *last* content-only store submission you'll make.
+2. **It does NOT retroactively update already-installed apps.** Everyone must update to the plugin-enabled build once to get on the OTA track.
+3. **`notifyAppReady()` must fire every launch or updates auto-roll-back.** Already wired in `native-ota.js` (web-safe no-op). **Test on a device before release** (step 6).
 
----
+## One-time setup
 
-## Recommended: Capgo cloud (handles the big bundle with delta)
+1. **Install the plugin** (adds the correct Capacitor-8 version + updates `package.json`):
+   ```bash
+   npm i @capgo/capacitor-updater
+   ```
+   (Config is already in `capacitor.config.json` → `CapacitorUpdater` block pointing at `api.stewardmd.in/ota/*`.)
+2. **Worker secrets/bindings** — already present: R2 `OFFLINE_BUCKET` (`stewardmd-offline`), rate-limit `RL`. Nothing new to add.
+3. **Deploy the Worker** with the OTA endpoints: push `worker/**` to `main` → approve the `production` deployment in GitHub Actions (`deploy-worker.yml`). Verify: `curl https://api.stewardmd.in/ota/check` returns a JSON no-op body (e.g. `{"version":"builtin","message":"no_channel"}`).
+4. **Release tooling env** (local or CI): `CLOUDFLARE_API_TOKEN` (R2 edit) + `CLOUDFLARE_ACCOUNT_ID=5476a757e49205bd1cce40b144eb59a9`, and the `zip` CLI.
 
-StewardMD's bundle is large (~60 MB — the KB shards, disease docs, calculators). Capgo cloud ships **delta updates**: after the first bundle, only *changed* files transfer (a `home.js` tweak = a few KB, not 60 MB). It also gives rollback, channels (beta/prod), and CDN hosting. Self-hosting (below) serves the full zip every time unless you build delta yourself — not worth it for a solo maintainer.
+## Publish the FIRST OTA bundle (before cutting the native release)
 
-### One-time setup
 ```bash
-# in the repo root
-npx @capgo/cli init            # creates a Capgo account/app, installs the plugin,
-                               # adds the CapacitorUpdater block to capacitor.config.json
-                               # (appId = in.stewardmd.app), sets autoUpdate + channel
-npm install                    # ensure the plugin is in node_modules
+npm run ota:release -- --min-native 1 --dry-run   # sanity: hashes + manifest, uploads nothing
+npm run ota:release -- --min-native 1             # publishes to the production channel
 ```
-Confirm `capacitor.config.json` now contains something like:
-```json
-"plugins": {
-  "CapacitorUpdater": { "autoUpdate": true, "appReadyTimeout": 10000, "responseTimeout": 20 }
-}
-```
-(Capgo's default `updateUrl`/`statsUrl` point at Capgo's API — no manual URL needed.)
+Now `curl https://api.stewardmd.in/ota/check` should return `{version, url, manifest, checksum}`.
 
-### Cut the one enabling release
-```bash
-npm run build:www              # assembles www/ from current repo (all latest content)
-npx cap sync                   # copies www + native plugins into ios/ and android/
-npx cap open ios               # → Xcode: bump build number, Archive, upload to TestFlight/App Store
-npx cap open android           # → Android Studio: bump versionCode, build AAB, upload to Play
-```
+## Cut the ONE enabling native release
 
-### Every future content update (NO store release)
 ```bash
 npm run build:www
-npx @capgo/cli bundle upload --channel production   # pushes the new web bundle OTA
+npx cap sync
+npx cap open ios       # Xcode: bump build number, Archive → TestFlight/App Store
+npx cap open android   # Android Studio: bump versionCode, build AAB → Play
 ```
-Installed apps pick it up on next launch (background download, applied on the following open). That's it — calculators, KB, management, home stats all flow this way from now on.
+Set `--min-native` to that build number from now on.
 
----
+## Every future content update (NO store release)
 
-## Alternative: self-hosted on Cloudflare (no vendor cost, no delta)
+```bash
+npm run ota:release -- --min-native <current-native-build>
+```
+Only changed files upload; installed apps download only what changed and apply on next launch.
 
-If you prefer to avoid Capgo's cloud: host the bundle yourself.
+## Rollback / kill-switch (instant)
 
-1. `capacitor.config.json`:
-   ```json
-   "plugins": { "CapacitorUpdater": { "autoUpdate": true,
-     "updateUrl": "https://stewardmd.in/api/ota/check",
-     "statsUrl":  "https://stewardmd.in/api/ota/stats" } }
-   ```
-2. Host the bundle zip on **Cloudflare R2** (NOT Pages — Pages has a 25 MiB per-file limit and the zip is ~60 MB). Public R2 URL or a Worker.
-3. Add a Pages Function `functions/api/ota/check.js` that reads the caller's current version and returns `{ "version": "<latest>", "url": "<r2-zip-url>" }` when newer, else HTTP 204.
-4. Produce bundles: `npx @capgo/cli bundle zip` → upload the zip to R2 and bump the version your `check` endpoint returns.
+```bash
+npm run ota:release -- --rollback <previous-version>    # repoints the channel; no re-upload
+```
 
-Downside: no delta — every update re-downloads the full ~60 MB. Fine over Wi-Fi, heavy on cellular.
+## Native-version gating (keep store releases for native code only)
 
----
+- Pure web/content change → keep `--min-native` at the current native build; ships OTA.
+- Change that needs new **native** code (a new Capacitor plugin, native permission) → cut a native release, then publish OTA with `--min-native` = the NEW build number. Old binaries won't pull the incompatible bundle.
 
-## Verify on a device BEFORE you release (critical)
+## Optional: end-to-end signing (recommended for a medical app)
+
+Beyond TLS + sha256, sign bundles so a compromised bucket can't push tampered code:
+1. Generate a keypair with the Capgo CLI (`npx @capgo/cli key create`) — keep the **private** key offline/CI-only.
+2. Put the **public** key in `capacitor.config.json` → `CapacitorUpdater.publicKey`, and cut a native release.
+3. Encrypt/sign each bundle at release (`npx @capgo/cli bundle encrypt`) and include the returned `sessionKey`+`checksum` in the manifest (the release script has a `sessionKey` slot). Ship signed bundles only.
+
+## Verify on a device BEFORE wide release (critical)
 
 1. Install the plugin-enabled build on a real device.
-2. Confirm `notifyAppReady` fires: check the native log for the Capgo "app ready" line, or add a temporary `console.log` in `native-ota.js`'s `ready()`.
-3. Push a trivial OTA bundle (change a visible string), reopen the app twice, confirm it applies **and persists** (does not roll back on the 2nd launch). If it reverts → `notifyAppReady` isn't being called; fix before shipping.
+2. Confirm `notifyAppReady` fires (native log) — else every OTA rolls back.
+3. `npm run ota:release -- --min-native <n>` with a trivial visible change; reopen twice; confirm it **applies and persists** (doesn't revert on the 2nd launch). Then test `--rollback`.
 
----
+## Cost
 
-## What's already in the repo (done)
-- `native-ota.js` — the `notifyAppReady` bootstrap (web-safe no-op), loaded right after `native-bridge.js` in `index.html`.
-- It's picked up by `scripts/build-www.sh` automatically (copies all root `*.js`).
-
-## What's on you (native/infra — can't be automated from here)
-- Capgo account (or R2 hosting) + `npx @capgo/cli init`.
-- The one native build + store/TestFlight/Play release.
-- On-device test of the rollback behaviour.
-- Telling current users to update once to get onto the OTA track.
+R2: ~$0.015/GB-month storage (a few versions of a 60 MB bundle = pennies) and **$0 egress**. Worker requests are within the cheap/free tier and rate-limited. No per-seat or per-update SaaS fees.

@@ -21,6 +21,7 @@
  */
 
 import { verifyFirebaseToken } from "./auth.js";
+import { handleOta } from "./ota.js";
 
 const ALLOWED_ORIGINS = [
   "https://stewardmd.in", "https://www.stewardmd.in",
@@ -329,6 +330,23 @@ export default {
   async fetch(request, env, ctx) {
     const origin = request.headers.get("Origin");
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(origin) });
+
+    // Self-hosted OTA (@capgo/capacitor-updater backend). Handled BEFORE the
+    // GET-only guard because the plugin POSTs to /ota/stats. Rate-limited per IP.
+    {
+      const otaUrl = new URL(request.url);
+      if (otaUrl.pathname.startsWith("/ota/")) {
+        if (env.RL) {
+          const ip = request.headers.get("CF-Connecting-IP") || "anon";
+          try {
+            const { success } = await env.RL.limit({ key: ip });
+            if (!success) return withCors(json({ error: "rate_limited" }, { status: 429, extra: { "Retry-After": "10" } }), origin);
+          } catch (_) { /* fail open */ }
+        }
+        return withCors(await handleOta(request, env, otaUrl), origin);
+      }
+    }
+
     if (request.method !== "GET") return withCors(json({ error: "method_not_allowed" }, { status: 405 }), origin);
 
     // edge rate limit per client IP
