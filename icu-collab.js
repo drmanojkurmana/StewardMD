@@ -65,6 +65,27 @@
   function isAdminRole(role) { return ADMIN.indexOf(role) >= 0; }
   function roleLabel(r) { return ROLE_LABEL[r] || (r ? String(r) : "Member"); }
   function normRole(r) { return ROLES.indexOf(r) >= 0 ? r : "junior_resident"; }
+  // DISPLAY designations the head/admin can assign to a member. Purely a display title stored on
+  // the member doc; each maps to one of the enforced ROLES above, which stays the permission
+  // primitive (canInstruct/admin/firestore.rules). Consultant/Associate-Professor → 'professor'
+  // (admin), so — since granting 'professor' is head-only in the rules — they are head-only to
+  // assign. Custom (free-text) titles map via the head's instruct/execute pick (see icu.js).
+  var DESIGNATIONS = [
+    { label: "Consultant 1", role: "professor" }, { label: "Consultant 2", role: "professor" },
+    { label: "Consultant 3", role: "professor" }, { label: "Consultant 4", role: "professor" },
+    { label: "Consultant 5", role: "professor" }, { label: "Consultant 6", role: "professor" },
+    { label: "Associate Professor", role: "professor" },
+    { label: "Assistant Professor", role: "assistant" },
+    { label: "Senior Resident", role: "senior_resident" },
+    { label: "Junior Resident", role: "junior_resident" },
+    { label: "Intern", role: "intern" },
+    { label: "Head Nurse", role: "junior_resident" }
+  ];
+  function roleForDesignation(label) {
+    for (var i = 0; i < DESIGNATIONS.length; i++) if (DESIGNATIONS[i].label === label) return DESIGNATIONS[i].role;
+    return null;   // custom / unknown → caller derives role (instruct → assistant, execute → junior_resident)
+  }
+  function normDesignation(d) { return d == null ? "" : String(d).trim().slice(0, 60); }
   // Clamp an invite-link role to a NON-admin role (default junior_resident). A link can never
   // confer head/professor — mirrored server-side in firestore.rules.
   function normInviteRole(r) { return LINK_ROLES.indexOf(r) >= 0 ? r : "junior_resident"; }
@@ -220,7 +241,7 @@
   function mapMemberDoc(id, data) {
     data = data || {};
     return {
-      uid: id, role: data.role || null, name: data.name || "",
+      uid: id, role: data.role || null, name: data.name || "", designation: data.designation || "",
       addedBy: data.addedBy || null, joinedAt: tsToMs(data.joinedAt), via: data.via || null
     };
   }
@@ -461,9 +482,35 @@
       });
     });
   }
+  // Set a member's DISPLAY designation (Consultant 1 / Head Nurse / custom …) AND its derived
+  // permission role in one admin write. Title is display-only; `role` stays the enforced primitive.
+  function setDesignation(gid, uid, designation, role) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid || !uid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        if (!db || !currentUid()) return reject(new Error("firestore-unavailable"));
+        track(memRef(db, gid, uid).update({ role: normRole(role), designation: normDesignation(designation) })).then(function () { resolve(uid); }, reject);
+      });
+    });
+  }
+  // Save the CURRENT user's per-unit notification preferences onto their own members/{uid} doc. The
+  // push server (functions/_taskpush.js) reads members/{uid}.notif during fan-out to decide whether
+  // to send each Tier-2/3 category. Only the three category booleans are written; a member can only
+  // ever write their OWN member doc (rules enforce), so no gid/uid target other than self.
+  function setNotifPrefs(gid, prefs) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        var uid = currentUid();
+        if (!db || !uid) return reject(new Error("firestore-unavailable"));
+        var clean = { orderRoutine: !!(prefs && prefs.orderRoutine), handover: !!(prefs && prefs.handover), activity: !!(prefs && prefs.activity) };
+        track(memRef(db, gid, uid).update({ notif: clean })).then(function () { resolve(uid); }, reject);
+      });
+    });
+  }
   // Add a colleague by their StewardMD Doctor ID or email (admin only; rules enforce). Resolves
   // via the directory (get-by-exact-key only) then creates their members/{uid} doc.
-  function addByIdOrEmail(gid, idOrEmail, role) {
+  function addByIdOrEmail(gid, idOrEmail, role, designation) {
     return new Promise(function (resolve, reject) {
       if (!icuGroupsOn() || !gid) return reject(new Error("icu-groups-disabled"));
       resolveDoctor(idOrEmail).then(function (doc) {
@@ -471,7 +518,7 @@
         fs(function (db) {
           if (!db || !currentUid()) return reject(new Error("firestore-unavailable"));
           var r = normRole(role); if (r === "head") r = "professor";   // never admin-add a head
-          var mdoc = { uid: doc.uid, role: r, name: doc.name || "", addedBy: currentUid(), joinedAt: fieldValue().serverTimestamp() };
+          var mdoc = { uid: doc.uid, role: r, name: doc.name || "", designation: normDesignation(designation), addedBy: currentUid(), joinedAt: fieldValue().serverTimestamp() };
           track(memRef(db, gid, doc.uid).set(mdoc)).then(function () { resolve(doc); }, reject);
         });
       }, reject);
@@ -922,6 +969,8 @@
     canInstruct: canInstruct,
     isAdminRole: isAdminRole,
     roleLabel: roleLabel,
+    DESIGNATIONS: DESIGNATIONS,
+    roleForDesignation: roleForDesignation,
     myRole: myRole,
     setActiveGroup: setActiveGroup,
     setSeverityFn: setSeverityFn,
@@ -934,6 +983,8 @@
     deleteGroup: deleteGroup,
     inviteMember: inviteMember,
     setRole: setRole,
+    setDesignation: setDesignation,
+    setNotifPrefs: setNotifPrefs,
     addByIdOrEmail: addByIdOrEmail,
     leaveGroup: leaveGroup,
     removeMember: removeMember,

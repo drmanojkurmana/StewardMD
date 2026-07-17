@@ -143,6 +143,86 @@ export async function summarizeDocument(env, meta) {
 }
 
 /* ------------------------------------------------------------------ *
+ * Admin "AI push box" classifier. Given an admin note and/or a fetched
+ * page (title + text), pick the content TYPE and specialty WORKSPACE
+ * (which the pipeline summarizer takes from the crawl source, not the AI)
+ * and write a short original summary — so the owner can paste ANY link
+ * (incl. non-FDA / Indian launches the crawler misses) and publish it.
+ * Returns a draft ready for POST /api/updates. Metered as updates_classify.
+ * ------------------------------------------------------------------ */
+const CLASSIFY_TYPES = ["guideline", "drug_approval", "safety_alert", "trial"];
+const CLASSIFY_SYS =
+  "You are a medical content editor for a clinical app used by qualified doctors in India. You are given an admin NOTE " +
+  "and (optionally) the TITLE and TEXT of one official medical item — a clinical guideline, a drug approval/launch, a " +
+  "drug safety alert, or a major trial. Classify it and write an ORIGINAL short summary for busy clinicians.\n" +
+  "STRICT: Do NOT copy or closely paraphrase source wording; summarize in your own words. Never invent facts, doses, " +
+  "numbers, DOIs, or PMIDs. If the text is thin, rely on the note + title and keep it brief.\n" +
+  "Return ONLY JSON (no prose, no markdown fence) with EXACTLY these keys:\n" +
+  "{\"type\":\"guideline\"|\"drug_approval\"|\"safety_alert\"|\"trial\", \"workspace\":one of [" + WORKSPACES.join(", ") + "], " +
+  "\"title\":string, \"organization\":string, \"summary\":string, \"importance\":\"normal\"|\"high\"|\"critical\", " +
+  "\"keywords\":[string], " +
+  "\"pharma\":{\"drug_class\":string, \"indications\":[string], \"dose\":string, \"duration\":string, \"contraindications\":[string]}}.\n" +
+  "GUIDANCE: choose the single best type and the single most relevant specialty workspace. \"summary\" is original " +
+  "prose, AT MOST 120 words, usable as both a push-notification body and a feed card. \"importance\": 'critical' for " +
+  "withdrawals/boxed warnings/bans, 'high' for practice-changing guidelines or major approvals, else 'normal'. " +
+  "\"title\" <= 140 characters.\n" +
+  "PHARMA: fill \"pharma\" ONLY for a drug (type drug_approval, or a safety_alert about a specific drug) — give the " +
+  "drug class, key licensed indication(s), the usual adult dose/route, typical duration, and the main " +
+  "contraindications/black-box cautions, each concise. Use ONLY facts present in the source/note; NEVER invent a dose, " +
+  "number, or contraindication — leave a field empty ('' or []) if not stated. For non-drug items set every pharma " +
+  "field empty. No text outside the JSON.";
+
+export async function classifyDocument(env, meta) {
+  meta = meta || {};
+  const primary = env.UPDATES_MODEL || MODEL_PRIMARY_DEFAULT;
+  const fallback = env.UPDATES_MODEL_FALLBACK || MODEL_FALLBACK_DEFAULT;
+  const models = fallback && fallback !== primary ? [primary, fallback] : [primary];
+  const block = [
+    meta.prompt ? "=== ADMIN NOTE ===\n" + String(meta.prompt).slice(0, 2000) : "",
+    meta.url ? "Official URL: " + meta.url : "",
+    meta.title ? "Title: " + meta.title : "",
+    meta.excerpt ? "\n=== SOURCE TEXT (summarize in your OWN words; do not copy) ===\n" + String(meta.excerpt).slice(0, 8000) : "",
+  ].filter(Boolean).join("\n");
+  const gate = await meterGate(env, "updates_classify");
+  let lastErr = null;
+  for (const model of models) {
+    try {
+      const text = await callGemini(Object.assign({}, env, { GEMINI_MODEL: model }), [{ text: CLASSIFY_SYS + "\n\n" + block }], 1100, { temperature: 0.2 });
+      const p = parseJsonLoose(text);
+      if (p && (p.title || p.summary)) {
+        if (gate.meter) { try { await recordUsage(gate, { inTok: estTokens(CLASSIFY_SYS.length + block.length), outTok: estTokens((text || "").length), status: "success" }); } catch (e) {} }
+        const type = CLASSIFY_TYPES.indexOf(String(p.type || "").toLowerCase().trim()) >= 0 ? String(p.type).toLowerCase().trim() : "guideline";
+        const ph = (p.pharma && typeof p.pharma === "object") ? p.pharma : {};
+        const pharma = {
+          drug_class: String(ph.drug_class || "").slice(0, 140),
+          indications: arr(ph.indications),
+          dose: String(ph.dose || "").slice(0, 400),
+          duration: String(ph.duration || "").slice(0, 300),
+          contraindications: arr(ph.contraindications),
+        };
+        const hasPharma = !!(pharma.drug_class || pharma.dose || pharma.duration || pharma.indications.length || pharma.contraindications.length);
+        const draft = {
+          type,
+          workspace: normWorkspace(p.workspace, "internal_medicine"),
+          title: String(p.title || meta.title || "").trim().slice(0, 200),
+          organization: String(p.organization || "").slice(0, 120),
+          body: clampWords(p.summary, 120),
+          importance: normImportance(p.importance),
+          keywords: arr(p.keywords),
+          url: String(meta.url || "").slice(0, 500),
+          // pharma only meaningful for drug items; the app renders it only when non-empty.
+          pharma: (hasPharma && (type === "drug_approval" || type === "safety_alert")) ? pharma : null,
+        };
+        return { ok: true, draft, model };
+      }
+      lastErr = new Error("classifier returned unparseable JSON");
+    } catch (e) { lastErr = e; }
+  }
+  if (gate.meter) { try { await recordUsage(gate, { inTok: estTokens(CLASSIFY_SYS.length + block.length), outTok: 0, status: "failed" }); } catch (e) {} }
+  return { ok: false, error: String((lastErr && lastErr.message) || lastErr || "classify failed") };
+}
+
+/* ------------------------------------------------------------------ *
  * Phase 3 — "What's Changed": diff a document against its prior version.
  * Runs ONLY when the pipeline detects a changed doc (rare). Produces the
  * Topic / Previous / Current / Impact rows shown on the guideline page.

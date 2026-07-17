@@ -28,7 +28,8 @@ let package = Package(
         .package(name: "CapawesomeCapacitorFilePicker", path: "../../../node_modules/@capawesome/capacitor-file-picker"),
         .package(name: "StewardmdCapacitorAppOrientation", path: "../../../local-plugins/capacitor-app-orientation"),
         .package(name: "StewardmdCapacitorVisionOcr", path: "../../../local-plugins/capacitor-vision-ocr"),
-        .package(name: "StewardmdCapacitorWhisper", path: "../../../local-plugins/capacitor-whisper")
+        .package(name: "StewardmdCapacitorWhisper", path: "../../../local-plugins/capacitor-whisper"),
+        .package(name: "CapacitorSecureStoragePlugin", path: "../../../node_modules/capacitor-secure-storage-plugin")
     ],
     targets: [
         .target(
@@ -52,7 +53,8 @@ let package = Package(
                 .product(name: "CapawesomeCapacitorFilePicker", package: "CapawesomeCapacitorFilePicker"),
                 .product(name: "StewardmdCapacitorAppOrientation", package: "StewardmdCapacitorAppOrientation"),
                 .product(name: "StewardmdCapacitorVisionOcr", package: "StewardmdCapacitorVisionOcr"),
-                .product(name: "StewardmdCapacitorWhisper", package: "StewardmdCapacitorWhisper")
+                .product(name: "StewardmdCapacitorWhisper", package: "StewardmdCapacitorWhisper"),
+                .product(name: "CapacitorSecureStoragePlugin", package: "CapacitorSecureStoragePlugin")
             ]
         )
     ]

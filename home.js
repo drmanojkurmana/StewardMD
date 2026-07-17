@@ -60,6 +60,9 @@
     }
     function reorganize() {
       var menu = document.getElementById("sbMenu"); if (!menu) return;
+      // The lean sidebar redesign (sidebar-redesign.js) owns #sbMenu when loaded; keep the
+      // harmless ICU-dashboard reroute below but skip the legacy grouped rebuild it replaces.
+      if (window.SMD_SBR) { try { if (window.INF && window.ICU && ICU.open && INF.openDashboard !== ICU.open) INF.openDashboard = ICU.open; } catch (e) {} return; }
       injectCSS();
       // Retire the OLD ICU dashboard: route every INF.openDashboard() caller (base sidebar
       // "ICU Dashboard" item, legacy links) to the NEW flagship ICU.open(). The new dashboard
@@ -112,6 +115,7 @@
           swRow("maikperf", "Show AI response time", "Prints MaiK first-token + full-answer time under each answer (diagnostics)", flag("smd_maik_perf", false)) +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
+          (window.SMD_IS_NATIVE ? swRow("autofetch", "Auto-fetch reports", "Keep a linked patient's labs/imaging fresh on launch & resume · GHIS login stored on THIS device only (Keychain/Keystore), per-patient consent · turn on/off per patient from the Ward Sync bar", flag("smd_autofetch", true)) : "") +
           '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync</button>';
         var toolsBody = swRow("whisper", "Clinical Dictation (Beta)", "On-device Whisper voice→text in MaiK Scribe · native app only (model downloads on first use)", flag("smd_whisper_clinical_dictation", false)) +
           ((window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
@@ -141,6 +145,13 @@
               else if (k === "expanded" && window.SMD_setKbExpanded) SMD_setKbExpanded(nv);
               else if (k === "ai" && window.SMD_AI) SMD_AI.setFlag(nv);
               else if (k === "ghis" && window.SMD_setGhis) SMD_setGhis(nv);
+              else if (k === "autofetch") {
+                localStorage.setItem("smd_autofetch", nv ? "1" : "0");
+                // Turning the MASTER switch off also stops it working for every patient, but a
+                // patient's individual enable + saved device credential are left alone (so
+                // re-enabling here resumes exactly where they left off — no need to re-consent).
+                if (!nv) { try { toast("Auto-fetch off. Per-patient settings are kept — turn this back on to resume."); } catch (e) {} }
+              }
               else if (k === "whisper") { localStorage.setItem("smd_whisper_clinical_dictation", nv ? "1" : "0"); }
               else if (k === "maikperf") { localStorage.setItem("smd_maik_perf", nv ? "1" : "0"); }
             } catch (e) {}
@@ -882,7 +893,7 @@
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
         '<div class="v4-greet"><div class="ey">' + dateV4() + '</div><div class="hi">' + greetLineV4() + '</div><div class="q">What would you like to do?</div></div>' +
-        '<section class="v4-hero"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Clinical decision support</span><p class="v4-hero-p">Evidence-based decisions at the point of care — antimicrobials, differentials, ICU &amp; more.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
+        '<section class="v4-hero" data-act="about" role="button" tabindex="0" aria-label="About & Acknowledgements" style="cursor:pointer"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Clinical decision support</span><p class="v4-hero-p">Evidence-based decisions at the point of care — antimicrobials, differentials, ICU &amp; more.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
         '<div class="v4-qrow">' +
           '<button class="v4-qc" data-act="syndromes" aria-label="Syndromes">' + svg("syndromes") + '<span>Syndromes</span></button>' +
           '<button class="v4-qc" data-act="ward" aria-label="Ward Sync">' + svg("ward") + '<span>Ward Sync</span></button>' +
@@ -1002,7 +1013,7 @@
           '<button class="rnav-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + ric("medication") + '<span>Drugs</span></button>' +
           '<button class="rnav-qa-btn" data-act="calculators" aria-label="Calculators">' + ric("calculate") + '<span>Calculators</span></button>' +
         '</div>' +
-        '<section class="rnav-hero"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b style="color:#0a2320">MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
+        '<section class="rnav-hero" data-act="about" role="button" tabindex="0" aria-label="About & Acknowledgements" style="cursor:pointer"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b style="color:#0a2320">MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
         '<div class="rnav-qrow">' +
           '<button class="rnav-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
           '<button class="rnav-qc" data-act="ward" aria-label="Ward Sync">' + ric("local_hospital") + '<span>Ward Sync</span></button>' +
@@ -1234,6 +1245,7 @@
     root.addEventListener("click", function (e) {
       var b = e.target.closest("[data-act]"); if (!b) return;
       var a = b.getAttribute("data-act");
+      if (a === "about") e.stopPropagation();   // hero banner → About & Acknowledgements; keep the StewardMD logo tap from also firing goHome
       if (a === "notifications") return openNotifications();
       if (a === "ku") return openKuPanel();
       if (a === "more") return openMore();
@@ -1539,11 +1551,19 @@
         '<li><b>v7.8</b> — Lab Watch: monitor a patient&#39;s labs for new results — in-app alerts plus optional 24/7 background alerts (Ward Sync / GHIS-linked, consent-gated) even when the app is closed.</li>' +
         '<li><b>v7.9</b> — App-style navigation is now the default (bottom tab bar, quick-action tiles); plus reliability &amp; alignment polish across web, iOS and Android (global toast feedback, home-tile and sidebar alignment fixes).</li>' +
       '</ul></div>' +
-      '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v8 · Reference-grade breadth (current)</span></div><ul>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver">v8 · Reference-grade breadth</div><ul>' +
         '<li><b>v8.0</b> — Calculators expanded to an MDCalc-scale library — <b>400+</b> validated bedside tools across every specialty, each formula executed and checked before shipping.</li>' +
         '<li><b>v8.1</b> — Knowledge base grown to <b>4,800+</b> searchable conditions (Harrison plus Nelson paediatrics, ophthalmology and further specialties), each with a page-cited reference panel.</li>' +
         '<li><b>v8.2</b> — Scores wired to diagnoses: relevant clinical scores are suggested on every diagnosis, and the ICU dashboard now auto-computes scores (SOFA, qSOFA, NEWS2, APACHE II, BISAP, MELD…) from fetched labs and vitals — tap any score to open the calculator pre-filled.</li>' +
         '<li><b>v8.3</b> — Management for every reference condition: condition-specific, guideline-aligned management now appears on all <b>4,600+</b> reference diseases (AI-drafted decision-support — verify before acting).</li>' +
+      '</ul></div>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v9 · Clinical command centre (current)</span></div><ul>' +
+        '<li><b>v9.0</b> — ICU &amp; Ward dashboard: real-time collaborative unit boards (ICU / MICU / wards), a live care team with clinical designations &amp; permissions, shift handover, and task instructions with native push.</li>' +
+        '<li><b>v9.1</b> — Ward Sync 2.0: tick a GHIS patient to add them straight to your unit board; per-patient, device-secure auto-fetch keeps their labs &amp; imaging fresh; full patient info (MR, treating doctor, department) imported.</li>' +
+        '<li><b>v9.2</b> — Doctor verification: an NMC registration check unlocks verified access, with an owner admin console.</li>' +
+        '<li><b>v9.3</b> — Engagement: reading streaks, levels, quests, badges and a shareable stats card.</li>' +
+        '<li><b>v9.4</b> — Prescription generator (℞) and a drug&ndash;drug interaction checker.</li>' +
+        '<li><b>v9.5</b> — Calculator results now flow back to the ICU Scores panel — compute any score in the full calculator and it&#39;s saved on the patient.</li>' +
       '</ul></div>' +
     '</div>' +
     '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD — built and refined case by case at the bedside.</p>';
@@ -1557,7 +1577,7 @@
       '<li><span class="fn">1,465</span> drug monographs in structured &quot;gold&quot; format.</li>' +
       '<li><span class="fn">405</span> bedside clinical calculators — MDCalc-scale, every formula executed &amp; checked.</li>' +
       '<li><span class="fn">13</span> dedicated electrolyte analysis engines.</li>' +
-      '<li><span class="fn">24</span> antibiotics × 12 organism groups in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources — ICMR AMRSN 2024 national + GIMSR hospital resistance rates.</li>' +
+      '<li><span class="fn">47</span> antibiotics × <span class="fn">23</span> organisms (6 clinical groups) in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources — ICMR AMRSN 2024 national + GIMSR hospital resistance rates.</li>' +
       '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic — no frameworks, no build step.</li>' +
       '<li><span class="fn">100%</span> offline-capable PWA — works with no signal at the bedside.</li>' +
       '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
@@ -1574,11 +1594,13 @@
     while (body.firstChild) aboutPanel.appendChild(body.firstChild); // move existing About content into its panel
     var nav = document.createElement("div"); nav.className = "smd-ab-tabs";
     nav.innerHTML = '<button class="smd-ab-tab on" data-t="about" type="button">About</button>' +
+      '<button class="smd-ab-tab" data-t="ack" type="button">Acknowledgements</button>' +
       '<button class="smd-ab-tab" data-t="version" type="button">Version history</button>' +
       '<button class="smd-ab-tab" data-t="facts" type="button">Facts &amp; milestones</button>';
     var vPanel = document.createElement("div"); vPanel.className = "smd-ab-panel"; vPanel.setAttribute("data-tab", "version"); vPanel.style.display = "none"; vPanel.innerHTML = aboutVersionHTML();
     var fPanel = document.createElement("div"); fPanel.className = "smd-ab-panel"; fPanel.setAttribute("data-tab", "facts"); fPanel.style.display = "none"; fPanel.innerHTML = aboutFactsHTML();
-    body.appendChild(nav); body.appendChild(aboutPanel); body.appendChild(vPanel); body.appendChild(fPanel);
+    var aPanel = document.createElement("div"); aPanel.className = "smd-ab-panel"; aPanel.setAttribute("data-tab", "ack"); aPanel.style.display = "none"; aPanel.innerHTML = ackHTML();
+    body.appendChild(nav); body.appendChild(aboutPanel); body.appendChild(vPanel); body.appendChild(fPanel); body.appendChild(aPanel);
     nav.addEventListener("click", function (e) {
       var b = e.target.closest("[data-t]"); if (!b) return;
       var t = b.getAttribute("data-t");
@@ -1587,6 +1609,28 @@
       body.scrollTop = 0;
     });
   }
+  // Acknowledgements content — shared by the About-box "Acknowledgements" tab and the legacy sheet.
+  function ackHTML() {
+    var src = document.getElementById("ackCard");
+    if (src) {
+      var c = src.cloneNode(true);
+      c.removeAttribute("id");
+      var hdr = c.querySelector(".ack-header-row"); if (hdr) hdr.parentNode.removeChild(hdr);
+      c.classList.add("hv-ack-inline");
+      return '<div class="hv-ack">' + c.outerHTML + '</div>';
+    }
+    return '<div class="hv-ack" style="text-align:center;color:var(--hmut);font:500 13px/1.6 var(--hfont)">' +
+      '<p><b>Concept, content &amp; development</b><br>Dr. Manoj Kumar Kurmana, MD</p>' +
+      '<p>Developed by MaiKnowledge.</p></div>';
+  }
+  // Open the About box (optionally to a tab: about|version|facts|ack). Exposed globally so the
+  // redesigned sidebar's "About & Acknowledgements" item opens it (acknowledgements live in About).
+  function openAbout(tab) {
+    try { enhanceAbout(); } catch (e) {}
+    try { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); } catch (e) {}
+    if (tab) { try { var m = document.getElementById("aboutModal"); var b = m && m.querySelector('.smd-ab-tab[data-t="' + tab + '"]'); if (b) b.click(); } catch (e) {} }
+  }
+  try { window.openAbout = openAbout; window.openAck = openAck; } catch (e) {}
   function openAck() {
     var src = document.getElementById("ackCard");
     var inner = "";
@@ -2425,6 +2469,8 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     s.querySelectorAll("#hvHead button").forEach(function (b) { b.addEventListener("click", function () { ds.headingStyle = b.getAttribute("data-h"); applyD(); refreshD(); }); });
     refreshD();
   }
+  // Exposed so the sidebar's "Appearance & Theme" row opens the font & display sheet directly.
+  try { window.SMD_openDisplay = openDisplay; } catch (e) {}
   function refreshD() {
     var s = sheetEl(); if (!s) return;
     var fs = s.querySelector("#hvFs"); if (fs) fs.value = Math.round(ds.fontScale * 100);
@@ -2444,6 +2490,10 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
 
   /* ================= Notifications (🔔 bell → Notifications + Medical Updates) ================= */
   var NOTIF_API = "/api/updates", NOTIF_SEEN = "smd_updates_seen_ts", NOTIF_BM = "smd_updates_bm";
+  // Owner allowlist — mirrors functions/_adminauth.js OWNER_EMAILS. Client gate only shows the
+  // in-app Delete affordance; the server (ownerOK on DELETE /api/updates/:id) is the real enforcement.
+  var NOTIF_OWNERS = ["stewardmd.in@gmail.com", "drmanojkurmana@gmail.com"];
+  function nIsOwner() { try { var u = window.SMD_AUTH && SMD_AUTH.currentUser; return !!(u && u.email && NOTIF_OWNERS.indexOf(String(u.email).toLowerCase()) >= 0); } catch (e) { return false; } }
   var _notifItems = null;                 // Tab 1: manual app notices (auto=0)
   var _feedItems = [], _feedCursor = null, _feedEnd = false, _feedLoading = false;
   var _feedType = "all", _feedQ = "", _feedBranch = "all";
@@ -2671,6 +2721,21 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     if (!arr || !arr.length) return "";
     return '<div class="dt-sec"><h4>' + nEsc(title) + '</h4><ul>' + arr.map(function (x) { return "<li>" + nEsc(x) + "</li>"; }).join("") + '</ul></div>';
   }
+  // Prescribing snapshot for DRUG updates — concise pharma info (class/indications/dose/duration/
+  // contraindications) from the update's structured payload (summary_json.pharma). Only rendered for
+  // drug_approval / drug safety_alert items that actually carry pharma. Inline styles are theme-agnostic.
+  function pharmaSection(it, s) {
+    var ph = s && s.pharma;
+    if (!ph || !(it.type === "drug_approval" || it.type === "safety_alert")) return "";
+    function pr(lbl, val) {
+      if (!val || (Array.isArray(val) && !val.length)) return "";
+      var v = Array.isArray(val) ? val.map(nEsc).join("; ") : nEsc(val);
+      return '<div style="display:flex;gap:12px;padding:7px 0;border-bottom:1px solid rgba(128,128,128,.22)"><span style="flex:0 0 108px;opacity:.6;font-weight:600;font-size:12.5px">' + nEsc(lbl) + '</span><div style="flex:1;font-size:13.5px;line-height:1.5">' + v + '</div></div>';
+    }
+    var rows = pr("Class", ph.drug_class) + pr("Indications", ph.indications) + pr("Dose", ph.dose) + pr("Duration", ph.duration) + pr("Contraindications", ph.contraindications);
+    if (!rows) return "";
+    return '<div class="dt-sec"><h4>💊 Prescribing snapshot</h4>' + rows + '<div style="margin-top:8px;font-size:11.5px;opacity:.6">AI-summarised — verify against the official label before prescribing.</div></div>';
+  }
   function renderDetail(data) {
     var body = _detailRoot && _detailRoot.querySelector("#dtBody"); if (!body) return;
     if (!data || !data.item) { body.innerHTML = '<div class="ntf-empty">Couldn\'t load this update.</div>'; return; }
@@ -2695,6 +2760,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       '<h2>' + nEsc(it.title) + '</h2>' +
       '<div class="dt-sub">' + nEsc(it.organization || it.source || "") + (s.version ? " · " + nEsc(s.version) : "") + (it.ts ? " · " + nEsc(nDate(it.ts)) : "") + (it.workspace ? " · " + nEsc(WSLBL[it.workspace] || it.workspace) : "") + '</div></div>' +
       ((s.summary || it.summary) ? '<div class="dt-summary">' + nEsc(s.summary || it.summary) + '</div>' : "") +
+      pharmaSection(it, s) +
       detailSection("What's New", (s.major_changes || []).concat(s.new_recommendations || [])) +
       wc +
       detailSection("Clinical pearls", s.clinical_pearls) +
@@ -2705,7 +2771,9 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       '<div class="dt-actions">' +
         (it.url ? '<a class="dt-btn primary" href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Open Official Guideline</a>' : "") +
         '<button class="dt-btn" id="dtBookmark">' + (bmHas(it.id) ? "★ Bookmarked" : "☆ Bookmark") + '</button>' +
-        '<button class="dt-btn" id="dtShare">Share</button></div>';
+        '<button class="dt-btn" id="dtShare">Share</button>' +
+        (nIsOwner() ? '<button class="dt-btn" id="dtDelete" style="color:#dc2626;border-color:rgba(220,38,38,.4)">Delete</button>' : "") +
+        '</div>';
     var bm = body.querySelector("#dtBookmark");
     if (bm) bm.addEventListener("click", function () { bm.textContent = bmToggle(it.id) ? "★ Bookmarked" : "☆ Bookmark"; });
     var sh = body.querySelector("#dtShare");
@@ -2713,6 +2781,20 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var url = it.url || location.href, txt = it.title || "StewardMD medical update";
       if (navigator.share) { navigator.share({ title: txt, url: url }).catch(function () {}); }
       else { try { navigator.clipboard.writeText(txt + " — " + url); toast("Link copied"); } catch (e) {} }
+    });
+    var dl = body.querySelector("#dtDelete");
+    if (dl) dl.addEventListener("click", function () {
+      if (!confirm("Delete this notification for everyone? This can't be undone.")) return;
+      dl.disabled = true;
+      idToken().then(function (t) {
+        if (!t) { dl.disabled = false; if (window.toast) toast("Sign in as owner to delete"); return; }
+        fetch(NOTIF_API + "/" + encodeURIComponent(it.id), { method: "DELETE", headers: { "Authorization": "Bearer " + t } })
+          .then(function (r) { return r.json().catch(function () { return {}; }); })
+          .then(function (j) {
+            if (j && j.ok) { if (window.toast) toast("Deleted"); if (_detailRoot) _detailRoot.classList.remove("on"); try { fetchFeed(true).then(renderFeed); } catch (e) {} }
+            else { dl.disabled = false; if (window.toast) toast(j && j.error === "unauthorised" ? "Not an owner account" : "Couldn't delete"); }
+          }, function () { dl.disabled = false; if (window.toast) toast("Couldn't delete — check connection"); });
+      }, function () { dl.disabled = false; });
     });
   }
   function buildDetail() {

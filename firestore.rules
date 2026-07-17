@@ -136,11 +136,15 @@ service cloud.firestore {
 
         // Role change: admins only; never touch a head (in or out); only the head may grant
         // professor; and a member may NEVER change their OWN role.
-        allow update: if isAdmin(groupId)
+        // OR: a member may update ONLY the `notif` field on their OWN doc (notification prefs) —
+        // affectedKeys().hasOnly(['notif']) guarantees they can't touch role/name/anything else.
+        allow update: if (isAdmin(groupId)
                       && request.auth.uid != uid
                       && resource.data.role != 'head'
                       && request.resource.data.role != 'head'
-                      && (request.resource.data.role != 'professor' || roleOf(groupId) == 'head');
+                      && (request.resource.data.role != 'professor' || roleOf(groupId) == 'head'))
+                      || (request.auth.uid == uid
+                          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['notif']));
 
         // Delete: leave on your OWN (any non-head member) OR an admin removes a non-head member.
         // The head can never be removed by anyone.

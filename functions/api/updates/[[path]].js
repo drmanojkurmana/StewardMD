@@ -25,6 +25,7 @@ import { ownerOK } from "../../_adminauth.js";
 import { identify } from "../../_fbauth.js";
 import * as repo from "../../_updates_repo.js";
 import { runPipeline } from "../../_updates_pipeline.js";
+import { classifyDocument } from "../../_summarize.js";
 import { buildDigest } from "../../_digest.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
@@ -64,6 +65,26 @@ function firePush(context, item, workspace) {
       context.waitUntil(sendNativeToAll(context.env, msg, wsOpt));
     }
   } catch (e) {}
+}
+// Fetch a URL and reduce it to a title + bounded plain-text excerpt for the AI classifier
+// (admin "AI push box"). Best-effort: HTML is stripped to text; PDFs/binaries yield little text,
+// so the admin's note carries the gist. Never throws — returns {ok:false} on any failure.
+async function fetchUrlText(u) {
+  try {
+    const r = await fetch(u, { headers: { "User-Agent": "Mozilla/5.0 (StewardMD-admin classifier)" }, redirect: "follow" });
+    if (!r.ok) return { ok: false, status: r.status };
+    const ct = (r.headers.get("content-type") || "").toLowerCase();
+    if (ct.indexOf("html") < 0 && ct.indexOf("text") < 0) return { ok: false, contentType: ct };  // PDF/binary → rely on note
+    const html = (await r.text()).slice(0, 400000);
+    const tm = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+    const title = tm ? tm[1].replace(/\s+/g, " ").trim().slice(0, 240) : "";
+    const text = html
+      .replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&#39;/g, "'").replace(/&quot;/gi, '"')
+      .replace(/\s+/g, " ").trim();
+    return { ok: true, title, text: text.slice(0, 8000) };
+  } catch (e) { return { ok: false, error: String((e && e.message) || e) }; }
 }
 // Group new/updated pipeline items by workspace and fire one targeted push per
 // workspace (a representative item per group — highest importance first).
@@ -183,6 +204,25 @@ export async function onRequest(context) {
       return json(res.ok === false ? { ok: false, ...res } : { ok: true, ...res });
     }
 
+    // AI push box: given a link and/or a note, fetch the page and let Gemini classify it into a
+    // publishable draft (type, specialty workspace, title, summary, importance). Does NOT publish —
+    // the console shows the draft to review/edit, then POSTs /api/updates (which fires the push).
+    if (method === "POST" && head === "classify") {
+      let body = {}; try { body = await request.json(); } catch (e) {}
+      const srcUrl = String(body.url || "").trim().slice(0, 800);
+      const prompt = String(body.prompt || "").trim().slice(0, 2000);
+      if (!srcUrl && !prompt) return json({ error: "url-or-prompt-required" }, 400);
+      let title = "", excerpt = "", fetchNote = "";
+      if (srcUrl) {
+        const f = await fetchUrlText(srcUrl);
+        if (f.ok) { title = f.title; excerpt = f.text; }
+        else fetchNote = "could-not-fetch-page" + (f.status ? "-" + f.status : "");   // classifier falls back to the note+url
+      }
+      const res = await classifyDocument(env, { url: srcUrl, title, excerpt, prompt });
+      if (!res.ok) return json({ ok: false, error: res.error || "classify-failed", fetchNote }, 502);
+      return json({ ok: true, draft: res.draft, model: res.model, fetchNote });
+    }
+
     if (method === "POST" && head === "digest") {
       if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
       const days = Math.max(1, Math.min(30, parseInt(url.searchParams.get("days"), 10) || 7));
@@ -224,13 +264,17 @@ export async function onRequest(context) {
       const category = normCategory(body.category);
       const type = normType(body.type) || CAT_TYPE[category] || "guideline";
       const bodyText = String(body.body || "").trim().slice(0, 4000);
+      // Optional structured payload from the AI push box (e.g. a drug's pharma block). Stored in
+      // summary_json so the app detail view (data.structured) can render a prescribing snapshot.
+      const structured = (body.structured && typeof body.structured === "object" && !Array.isArray(body.structured)) ? body.structured : null;
+      const summaryJson = structured ? JSON.stringify(Object.assign({}, structured, { summary: bodyText })).slice(0, 12000) : "";
       const id = await repo.insertUpdate(env, {
         doc_key: String(body.url || "").slice(0, 500) || ("manual:" + repo.newId("m")),
         source_id: "manual", type, organization: String(body.source || "StewardMD").slice(0, 120),
         workspace: normWorkspace(body.workspace), branch: normBranch(body.branch), title, body: bodyText.slice(0, 240),
         category, published_ts: Date.now(), importance: normImportance(body.importance),
         est_read_min: Math.max(1, Math.round(bodyText.split(/\s+/).length / 200)) || 1,
-        summary: bodyText, summary_json: "", official_url: String(body.url || "").slice(0, 500),
+        summary: bodyText, summary_json: summaryJson, official_url: String(body.url || "").slice(0, 500),
         content_hash: "", auto: 0, pinned: !!body.pinned,
       });
       const detail = await repo.getById(env, id);

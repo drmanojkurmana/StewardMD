@@ -15,7 +15,7 @@
   window.__ghisWardLoaded = true;
 
   var CSS = "#ghisPanel {\n  position: fixed; inset: 0; z-index: 18000;\n  background: var(--paper, #ffffff); display: flex; flex-direction: column;\n  transform: translateX(100%);\n  transition: transform 0.3s cubic-bezier(.4,0,.2,1);\n}\n#ghisPanel.open { transform: translateX(0); }\n.ghis-header {\n  display: flex; align-items: center; gap: 10px;\n  padding: calc(14px + env(safe-area-inset-top)) 16px 14px; border-bottom: 1px solid var(--line, #e2e8f0);\n  background: var(--panel, #f8fafc); flex-shrink: 0;\n}\n.ghis-back { background: none; border: none; cursor: pointer; font-size: 20px; color: var(--teal, #14b8a6); padding: 4px 8px; }\n.ghis-title { flex: 1; font-size: 16px; font-weight: 700; color: var(--ink, #0f172a); display: flex; align-items: center; gap: 8px; }\n.ghis-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }\n.ghis-dot-off { background: #aaa; }\n.ghis-dot-on { background: #22c55e; box-shadow: 0 0 6px #22c55e88; }\n.ghis-refresh-btn { background: none; border: 1px solid var(--line, #e2e8f0); border-radius: 8px; cursor: pointer; font-size: 16px; color: var(--teal, #14b8a6); padding: 4px 10px; }\n.ghis-body { flex: 1; overflow-y: auto; padding: 16px; }\n.ghis-setup-card { background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 14px; padding: 20px; max-width: 480px; margin: 20px auto; }\n.ghis-setup-title { font-size: 15px; font-weight: 700; color: var(--ink, #0f172a); margin-bottom: 14px; }\n.ghis-setup-sub { font-size: 12px; color: var(--slate, #64748b); margin: -8px 0 14px; }\n.ghis-login-input { width: 100%; background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); font-size: 14px; padding: 11px; box-sizing: border-box; margin-bottom: 10px; }\n.ghis-login-input:focus { outline: none; border-color: var(--teal, #14b8a6); }\n.ghis-remember { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--slate, #64748b); margin-bottom: 4px; cursor: pointer; }\n.ghis-remember input { width: 15px; height: 15px; }\n.ghis-setup-steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }\n.ghis-step { font-size: 13px; color: var(--slate, #64748b); display: flex; gap: 10px; align-items: flex-start; }\n.ghis-step-num { background: var(--teal, #14b8a6); color: #fff; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }\n.ghis-step code { background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 5px; padding: 1px 5px; font-size: 12px; color: var(--teal, #14b8a6); }\n.ghis-cookie-input { width: 100%; min-height: 80px; background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); font-size: 11px; padding: 8px; box-sizing: border-box; resize: vertical; font-family: monospace; }\n.ghis-connect-btn { margin-top: 10px; width: 100%; background: var(--teal, #14b8a6); color: #fff; border: none; border-radius: 10px; padding: 11px; font-size: 14px; font-weight: 700; cursor: pointer; }\n.ghis-connect-btn:hover { opacity: 0.88; }\n.ghis-setup-error { color: #ef4444; font-size: 12px; margin-top: 8px; min-height: 16px; }\n.ghis-logout-btn { background: none; border: 1px solid var(--line, #e2e8f0); border-radius: 8px; cursor: pointer; font-size: 14px; color: var(--slate, #64748b); padding: 6px 10px; }\n.ghis-filter-row { display: flex; gap: 8px; margin-bottom: 8px; }\n.ghis-filter-input { flex: 1; background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); padding: 8px 12px; font-size: 13px; }\n.ghis-filter-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }\n@media (min-width: 560px) { .ghis-filter-row2 { grid-template-columns: 1fr 1fr 1fr 1fr; } }\n.ghis-filter-sel { min-width: 0; background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); padding: 8px 10px; font-size: 12.5px; cursor: pointer; }\n.ghis-filter-sel:focus { outline: none; border-color: var(--teal, #14b8a6); }\n.ghis-count { font-size: 12px; color: var(--slate, #64748b); margin: 0 2px 10px; font-weight: 600; }\n.ghis-pt-list { display: flex; flex-direction: column; gap: 8px; }\n.ghis-pt-card { background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: border-color 0.15s; }\n.ghis-pt-card:hover { border-color: var(--teal, #14b8a6); }\n.ghis-pt-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }\n.ghis-pt-name { font-size: 14px; font-weight: 700; color: var(--ink, #0f172a); }\n.ghis-pt-status { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; white-space: nowrap; }\n.ghis-status-occupied { background: #dcfce7; color: #16a34a; }\n.ghis-status-bed { background: #fef9c3; color: #b45309; }\n.ghis-status-discharge { background: #fee2e2; color: #dc2626; }\n.ghis-status-other { background: var(--paper, #ffffff); color: var(--slate, #64748b); }\n.ghis-pt-meta { font-size: 12px; color: var(--slate, #64748b); margin-top: 4px; }\n.ghis-pt-dept { font-size: 12px; color: var(--teal, #14b8a6); font-weight: 600; margin-top: 2px; }\n.ghis-loading { text-align: center; color: var(--slate, #64748b); font-size: 13px; padding: 30px; }\n.ghis-empty { text-align: center; color: var(--slate, #64748b); font-size: 13px; padding: 30px; }\n/* Lab drawer */\n#ghisWard { position: relative; }\n.ghis-lab-drawer { position: absolute; inset: 0; background: var(--paper, #ffffff); overflow-y: auto; z-index: 2; }\n.ghis-lab-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line, #e2e8f0); background: var(--panel, #f8fafc); position: sticky; top: 0; }\n.ghis-back-sm { background: none; border: none; cursor: pointer; font-size: 14px; color: var(--teal, #14b8a6); font-weight: 700; padding: 4px 8px; }\n.ghis-lab-title { font-size: 14px; font-weight: 700; color: var(--ink, #0f172a); }\n.ghis-lab-body { padding: 14px 16px; }\n.ghis-lab-group { margin-bottom: 14px; }\n.ghis-lab-group-name { font-size: 12px; font-weight: 700; color: var(--teal, #14b8a6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }\n.ghis-lab-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line, #e2e8f0); font-size: 13px; }\n.ghis-lab-test { color: var(--ink, #0f172a); }\n.ghis-lab-val { font-weight: 700; }\n.ghis-lab-val.abnormal { color: #ef4444; }\n.ghis-lab-date { font-size: 11px; color: var(--slate, #64748b); }\n.ghis-lab-empty { color: var(--slate, #64748b); font-size: 13px; text-align: center; padding: 20px; }\n.ghis-lab-count { font-size: 12px; color: var(--slate, #64748b); margin-bottom: 10px; }\n.ghis-lab-order { border: 1px solid var(--line, #e2e8f0); border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; cursor: pointer; transition: background .12s; }\n.ghis-lab-order:hover { background: rgba(20,184,166,0.05); }\n.ghis-lab-order.open { border-color: var(--teal, #14b8a6); background: rgba(20,184,166,0.04); }\n.ghis-lab-order-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }\n.ghis-lab-order-name { font-weight: 600; font-size: 13px; color: var(--ink, #0f172a); }\n.ghis-lab-order-dept { font-size: 11px; color: var(--slate, #64748b); white-space: nowrap; }\n.ghis-lab-detail { margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--line, #e2e8f0); }\n.ghis-lab-detail-empty { color: var(--slate, #64748b); font-size: 12px; padding: 6px 0; }\n.ghis-lab-abx { font-size: 12px; color: var(--ink, #0f172a); background: rgba(20,184,166,0.06); border-radius: 6px; padding: 6px 8px; margin: 4px 0 8px; white-space: pre-wrap; }\n.ghis-lab-section-title { font-size: 13px; font-weight: 700; color: var(--ink, #0f172a); margin: 4px 0 10px; }\n.ghis-rad-order { border-color: rgba(99,102,241,0.35); }\n.ghis-rad-order:hover { background: rgba(99,102,241,0.05); }\n.ghis-rad-order.open { border-color: #6366f1; background: rgba(99,102,241,0.05); }\n.ghis-rad-meta { font-size: 11px; color: var(--slate, #64748b); margin-bottom: 6px; }\n.ghis-rad-report { font-size: 13px; line-height: 1.5; color: var(--ink, #0f172a); white-space: pre-wrap; }\n.ghis-rad-divider { height: 1px; background: var(--line, #e2e8f0); margin: 14px 0; }\n/* dark mode overrides */\nbody.dark .ghis-status-occupied { background: #14532d; color: #86efac; }\nbody.dark .ghis-status-bed { background: #451a03; color: #fcd34d; }\nbody.dark .ghis-status-discharge { background: #450a0a; color: #fca5a5; }\n\n.ghis-ward-fab {\n  position: fixed; bottom: calc(20px + env(safe-area-inset-bottom)); right: 20px; z-index: 17000;\n  display: inline-flex; align-items: center; gap: 6px;\n  padding: 10px 16px; border: none; border-radius: 999px; cursor: pointer;\n  background: var(--teal, #14b8a6); color: #fff; font-size: 14px; font-weight: 600;\n  box-shadow: 0 4px 14px rgba(0,0,0,0.18); font-family: inherit;\n}\n.ghis-ward-fab:hover { filter: brightness(1.05); }\n";
-  var PANEL_HTML = "<div id=\"ghisPanel\">\n  <div class=\"ghis-header\">\n    <button class=\"ghis-back\" onclick=\"closeGHIS()\">←</button>\n    <div class=\"ghis-title\">🏥 Ward Sync <span id=\"ghisConnDot\" class=\"ghis-dot ghis-dot-off\"></span></div>\n    <button class=\"ghis-refresh-btn\" id=\"ghisWatchedBtn\" onclick=\"if(window.SMD_WATCH&&window.SMD_WATCH.openManager)window.SMD_WATCH.openManager();else alert('Sign in with your Google/Apple account to see watched patients.')\" title=\"Lab Watch 24/7 — background lab alerts\">🔔</button>\n    <button class=\"ghis-refresh-btn\" id=\"ghisRefreshBtn\" onclick=\"ghisRefresh()\" title=\"Refresh\">↻</button>\n  </div>\n\n  <div id=\"ghisSetup\" class=\"ghis-body\">\n    <div class=\"ghis-setup-card\">\n      <div class=\"ghis-setup-title\">Sign in to GHIS</div>\n      <div class=\"ghis-setup-sub\">Use your own GITAM HIS login.</div>\n      <input id=\"ghisUserId\" class=\"ghis-login-input\" type=\"text\" autocomplete=\"username\" placeholder=\"GHIS User ID\">\n      <input id=\"ghisPassword\" class=\"ghis-login-input\" type=\"password\" autocomplete=\"current-password\" placeholder=\"Password\"\n             onkeydown=\"if(event.key==='Enter') ghisConnect()\">\n      <div class=\"ghis-setup-sub\" style=\"margin:2px 0 12px\">Your password is used only to sign in and is never stored on our servers. If your session times out, just sign in again.</div>\n      <button class=\"ghis-connect-btn\" onclick=\"ghisConnect()\">Sign in</button>\n      <div id=\"ghisSetupError\" class=\"ghis-setup-error\"></div>\n    </div>\n  </div>\n\n  <div id=\"ghisWard\" class=\"ghis-body\" style=\"display:none;\">\n    <button id=\"ghisWatchedBar\" onclick=\"if(window.SMD_WATCH&&window.SMD_WATCH.openManager)window.SMD_WATCH.openManager();else alert('Sign in with your Google/Apple account to see watched patients.')\" style=\"width:100%;box-sizing:border-box;margin:0 0 10px;padding:12px;border:none;border-radius:10px;background:var(--teal,#0e6e63);color:#fff;font-size:14px;font-weight:700;cursor:pointer\">🔔 Lab Watch 24/7</button>\n    <div class=\"ghis-filter-row\">\n      <input id=\"ghisSearchPt\" class=\"ghis-filter-input\" placeholder=\"Search patient ID or name…\" oninput=\"ghisApplyFilters()\" />\n      <button class=\"ghis-logout-btn\" onclick=\"ghisDisconnect()\" title=\"Disconnect\">⏻</button>\n    </div>\n    <div class=\"ghis-filter-row2\">\n      <select id=\"ghisFBranch\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by branch/department\"><option value=\"\">All branches</option></select>\n      <select id=\"ghisFDoctor\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by treating doctor\"><option value=\"\">All doctors</option></select>\n      <select id=\"ghisFGender\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by gender\"><option value=\"\">All genders</option><option value=\"m\">Male</option><option value=\"f\">Female</option></select>\n      <select id=\"ghisFSort\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Sort patients\"><option value=\"\">Default order</option><option value=\"name\">Name A–Z</option><option value=\"branch\">Branch</option><option value=\"doctor\">Doctor</option><option value=\"bed\">Bed</option></select>\n    </div>\n    <div id=\"ghisCount\" class=\"ghis-count\"></div>\n\n    <div id=\"ghisPatientList\" class=\"ghis-pt-list\"></div>\n\n    <div id=\"ghisLabDrawer\" class=\"ghis-lab-drawer\" style=\"display:none;\">\n      <div class=\"ghis-lab-header\">\n        <button class=\"ghis-back-sm\" onclick=\"closeLabDrawer()\">← Back</button>\n        <div class=\"ghis-lab-title\" id=\"ghisLabTitle\"></div>\n      </div>\n      <div id=\"ghisLabBody\" class=\"ghis-lab-body\"></div>\n    </div>\n  </div>\n</div>";
+  var PANEL_HTML = "<div id=\"ghisPanel\">\n  <div class=\"ghis-header\">\n    <button class=\"ghis-back\" onclick=\"closeGHIS()\">←</button>\n    <div class=\"ghis-title\">🏥 Ward Sync <span id=\"ghisConnDot\" class=\"ghis-dot ghis-dot-off\"></span></div>\n    <button class=\"ghis-refresh-btn\" id=\"ghisWatchedBtn\" onclick=\"if(window.SMD_WATCH&&window.SMD_WATCH.openManager)window.SMD_WATCH.openManager();else alert('Sign in with your Google/Apple account to see watched patients.')\" title=\"Lab Watch 24/7 — background lab alerts\">🔔</button>\n    <button class=\"ghis-refresh-btn\" id=\"ghisRefreshBtn\" onclick=\"ghisRefresh()\" title=\"Refresh\">↻</button>\n  </div>\n\n  <div id=\"ghisSetup\" class=\"ghis-body\">\n    <div class=\"ghis-setup-card\">\n      <div class=\"ghis-setup-title\">Sign in to GHIS</div>\n      <div class=\"ghis-setup-sub\">Use your own GITAM HIS login.</div>\n      <input id=\"ghisUserId\" class=\"ghis-login-input\" type=\"text\" autocomplete=\"username\" placeholder=\"GHIS User ID\">\n      <input id=\"ghisPassword\" class=\"ghis-login-input\" type=\"password\" autocomplete=\"current-password\" placeholder=\"Password\"\n             onkeydown=\"if(event.key==='Enter') ghisConnect()\">\n      <div class=\"ghis-setup-sub\" style=\"margin:2px 0 12px\">Your password is used only to sign in and is never stored on our servers. If your session times out, just sign in again.</div>\n      <button class=\"ghis-connect-btn\" onclick=\"ghisConnect()\">Sign in</button>\n      <div id=\"ghisSetupError\" class=\"ghis-setup-error\"></div>\n    </div>\n  </div>\n\n  <div id=\"ghisWard\" class=\"ghis-body\" style=\"display:none;\">\n    <div id=\"ghisAddTarget\" style=\"display:none;align-items:center;box-sizing:border-box;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line,#e4eae8);border-radius:10px;background:var(--paper,#f6f8f6)\"></div>\n    <div class=\"ghis-filter-row\">\n      <input id=\"ghisSearchPt\" class=\"ghis-filter-input\" placeholder=\"Search patient ID or name…\" oninput=\"ghisApplyFilters()\" />\n      <button class=\"ghis-logout-btn\" onclick=\"ghisDisconnect()\" title=\"Disconnect\">⏻</button>\n    </div>\n    <div class=\"ghis-filter-row2\">\n      <select id=\"ghisFBranch\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by branch/department\"><option value=\"\">All branches</option></select>\n      <select id=\"ghisFDoctor\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by treating doctor\"><option value=\"\">All doctors</option></select>\n      <select id=\"ghisFGender\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by gender\"><option value=\"\">All genders</option><option value=\"m\">Male</option><option value=\"f\">Female</option></select>\n      <select id=\"ghisFSort\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Sort patients\"><option value=\"\">Default order</option><option value=\"name\">Name A–Z</option><option value=\"branch\">Branch</option><option value=\"doctor\">Doctor</option><option value=\"bed\">Bed</option></select>\n    </div>\n    <div id=\"ghisCount\" class=\"ghis-count\"></div>\n\n    <div id=\"ghisPatientList\" class=\"ghis-pt-list\"></div>\n\n    <div id=\"ghisLabDrawer\" class=\"ghis-lab-drawer\" style=\"display:none;\">\n      <div class=\"ghis-lab-header\">\n        <button class=\"ghis-back-sm\" onclick=\"closeLabDrawer()\">← Back</button>\n        <div class=\"ghis-lab-title\" id=\"ghisLabTitle\"></div>\n      </div>\n      <div id=\"ghisLabBody\" class=\"ghis-lab-body\"></div>\n    </div>\n  </div>\n</div>";
 
   function inject() {
     if (document.getElementById('ghisPanel')) return;
@@ -92,6 +92,7 @@
         ? 'http://localhost:3456'
         : '/api/ghis');
       var _patients = [];
+      var _addedPids = {};   // ward patientIds ticked "add to dashboard" this session (checkbox state)
       var _connected = false;
     
       // ── auth token (per-doctor GHIS login), persisted so they stay logged in ──
@@ -248,6 +249,38 @@
           .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       }
     
+      // Map a raw GHIS IPWorkList patient → the ICU/Ward patient record. Imports ALL available
+      // fields — MR# (patientId), treating doctor, department — as their OWN fields; does NOT
+      // overload Diagnosis (left blank for the clinician). Shared by loadIntoICU + addToDashboard.
+      function demoFromPatient(p) {
+        var dem = { hospital: 'GHIS Ward', status: 'ward' };
+        if (!p) return dem;
+        if (p.patientFirstName) dem.name = p.patientFirstName;
+        if (p.gender) dem.sex = p.gender;
+        if (p.bedName) dem.bed = p.bedName;
+        if (p.patientId != null && p.patientId !== '') dem.mrn = String(p.patientId);
+        var doc = (p.employeeFirstName || '').trim();
+        if (doc && doc.toLowerCase() !== 'dr' && doc.toLowerCase() !== 'dr.') dem.doctor = doc;
+        if (p.deptDescription) dem.dept = p.deptDescription;
+        var a = parseInt(p.dob, 10); if (!isNaN(a) && a > 0 && a < 130) dem.age = a;
+        return dem;
+      }
+      // "Adding to: <unit> ▾" bar — reflects/switches the dashboard's active unit so ticks file into
+      // the right ICU/Ward unit (resolves "can't select units after sign-in"). Fed by ICU.unitList().
+      function renderAddTarget() {
+        var el = document.getElementById('ghisAddTarget'); if (!el) return;
+        if (!(window.ICU && ICU.unitList)) { el.style.display = 'none'; return; }
+        var units = []; try { units = ICU.unitList() || []; } catch (e) {}
+        el.style.display = 'flex';
+        if (!units.length) {
+          el.innerHTML = '<span style="font:700 12px var(--sans,system-ui);color:var(--slate,#5a7184)">Adding to dashboard</span>' +
+            '<button onclick="if(window.ICU&&ICU.openUnits)ICU.openUnits()" style="margin-left:auto;background:none;border:none;color:var(--teal,#0e6e63);font:700 12px var(--sans,system-ui);cursor:pointer">Set up a unit ›</button>';
+          return;
+        }
+        var opts = units.map(function (u) { return '<option value="' + esc(u.key) + '"' + (u.active ? ' selected' : '') + '>' + esc(u.label) + '</option>'; }).join('');
+        el.innerHTML = '<span style="font:700 12px var(--sans,system-ui);color:var(--slate,#5a7184);flex:0 0 auto">Adding to</span>' +
+          '<select onchange="GHIS.setAddTarget(this.value)" style="flex:1;min-width:0;margin-left:8px;padding:7px 8px;border:1px solid var(--line,#e4eae8);border-radius:8px;font:600 13px var(--sans,system-ui);background:var(--panel,#fff);color:var(--ink,#0f172a)">' + opts + '</select>';
+      }
       function renderPatients(list) {
         var el = document.getElementById('ghisPatientList');
         if (!el) return;
@@ -255,17 +288,26 @@
           el.innerHTML = '<div class="ghis-empty">No patients found. Try searching with no filters.</div>';
           return;
         }
+        renderAddTarget();
         el.innerHTML = list.map(function(p, i) {
           var age = p.dob ? p.dob : '';
+          var nm = (p.patientFirstName && String(p.patientFirstName).trim()) ? p.patientFirstName : '(no name)';
+          var doc = (p.employeeFirstName || '').trim();
+          var showDoc = doc && doc.toLowerCase() !== 'dr' && doc.toLowerCase() !== 'dr.';
+          var dept = (p.deptDescription || '').trim();
+          var added = !!_addedPids[p.patientId];
           return '<div class="ghis-pt-card" onclick="GHIS.onPatient(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')">' +
             '<div class="ghis-pt-top">' +
-              '<div>' +
-                '<div class="ghis-pt-name">' + esc(p.patientFirstName) + ' <span style="font-weight:400;font-size:12px;color:var(--slate)">· ' + esc(p.patientId) + '</span></div>' +
-                '<div class="ghis-pt-meta">' + esc(age) + (p.gender ? ' · ' + esc(p.gender) : '') + (p.bedName ? ' · Bed ' + esc(p.bedName) : '') + '</div>' +
+              '<label style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:0 0 auto;margin-right:10px;cursor:pointer;font:700 10px var(--sans,system-ui);color:' + (added ? 'var(--teal,#0e6e63)' : 'var(--slate,#5a7184)') + '" onclick="event.stopPropagation()" title="Add to the current dashboard unit">' +
+                '<input type="checkbox"' + (added ? ' checked' : '') + ' style="width:20px;height:20px" onchange="GHIS.toggleAdd(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\',this)"><span>' + (added ? 'Added' : 'Add') + '</span>' +
+              '</label>' +
+              '<div style="flex:1;min-width:0">' +
+                '<div class="ghis-pt-name">' + esc(nm) + ' <span style="font-weight:400;font-size:12px;color:var(--slate)">· ' + esc(p.patientId) + '</span></div>' +
+                '<div class="ghis-pt-meta">' + [esc(age), (p.gender ? esc(p.gender) : ''), (p.bedName ? 'Bed ' + esc(p.bedName) : '')].filter(Boolean).join(' · ') + '</div>' +
               '</div>' +
               statusBadge(p.queueStatus) +
             '</div>' +
-            '<div class="ghis-pt-dept">' + esc(p.deptDescription || '') + (p.employeeFirstName ? ' · Dr. ' + esc(p.employeeFirstName) : '') + '</div>' +
+            ((dept || showDoc) ? '<div class="ghis-pt-dept">' + [esc(dept), (showDoc ? 'Dr. ' + esc(doc) : '')].filter(Boolean).join(' · ') + '</div>' : '') +
           '</div>';
         }).join('');
       }
@@ -322,6 +364,16 @@
         getSelectedPatient: function() { return GHIS._selectedPatient ? { patientId: GHIS._selectedPatient.patientId, name: GHIS._selectedPatient.name } : null; },
         // Bearer token for authorized GHIS proxy calls (used by GHISMEDS medication fetch).
         getToken: function() { return getToken(); },
+        // Programmatic login for device-local Auto-fetch (autofetch.js): silently sign in with a
+        // credential the doctor stored in the OS Keychain/Keystore ON THIS DEVICE. Same /login as
+        // the manual form; resolves true on success. Never persists the password anywhere here.
+        loginWith: function(userId, password) {
+          if (!userId || !password) return Promise.resolve(false);
+          return fetch(PROXY + '/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: userId, password: password }) })
+            .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, d: d }; }); })
+            .then(function(res) { if (res.ok && res.d && res.d.token) { setToken(res.d.token); _connected = true; try { dot(true); } catch (e) {} return true; } return false; })
+            .catch(function() { return false; });
+        },
         // Proxy base so GHISMEDS uses the SAME endpoint origin as the ward panel.
         getProxyBase: function() { return PROXY; },
         // Clear the selection + any GHIS import draft (called on disconnect / patient-switch).
@@ -365,10 +417,11 @@
           // Background (closed-app) alerts via native push — only for signed-in doctors, and only
           // when the watch-lab client + a verifiable account are present (SMD_WATCH is consent-gated).
           var bgOk = !!(window.SMD_WATCH && window.SMD_AUTH && window.SMD_AUTH.currentUser);
+          // Compact single header: one Lab Watch control (opens the unified sheet — in-app now, with
+          // "turn on 24/7" inside). Adding to the dashboard is done via the list checkbox; auto-fetch
+          // lives in the dashboard (removed here).
           body.innerHTML =
-            (window.ICU ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0F766E" onclick="GHIS.loadIntoICU(\'' + jsq(patientId) + '\')">🏥 Load patient into ICU dashboard</button>' : '') +
-            (lwOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0d5c54" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">🔔 Lab Watch — alert me on new labs</button>' : '') +
-            (bgOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0a4a44" onclick="GHIS.watchBackground(\'' + jsq(patientId) + '\',\'' + jsq(name) + '\')">🔔 Lab Watch 24/7 — even when the app is closed</button>' : '') +
+            (lwOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0d5c54" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">🔔 Lab Watch — alerts on new labs</button>' : '') +
             '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
           drawer.style.display = '';
           // Open at the TOP. The drawer is position:absolute; inset:0 inside #ghisWard, which is a
@@ -409,21 +462,15 @@
               .catch(function () {});
           } catch (e) {}
         },
-        loadIntoICU: function(patientId, after) {
-          if (!window.ICU || !ICU.ingestFromWard) { alert('ICU dashboard not loaded.'); return; }
+        loadIntoICU: function(patientId, after, opts) {
+          opts = opts || {};   // opts.silent → background ingest only: no panel change, no navigation, no toast (auto-sync)
+          if (!window.ICU || !ICU.ingestFromWard) { if (!opts.silent) alert('ICU dashboard not loaded.'); return; }
           var p = null, list = (typeof _patients !== 'undefined' && _patients) || [];
           for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
-          var dem = { hospital: 'GHIS Ward', status: 'ward' };
-          if (p) {
-            if (p.patientFirstName) dem.name = p.patientFirstName;
-            if (p.gender) dem.sex = p.gender;
-            if (p.bedName) dem.bed = p.bedName;
-            if (p.deptDescription) dem.diagnosis = p.deptDescription;
-            var a = parseInt(p.dob, 10); if (!isNaN(a) && a > 0 && a < 130) dem.age = a;
-          }
+          var dem = demoFromPatient(p);
           var pnl = document.getElementById('ghisPanel');
           var body = pnl ? pnl.querySelector('.ghis-body') : null;
-          if (body) body.innerHTML = '<div class="ghis-loading">Syncing labs into ICU dashboard…</div>';
+          if (!opts.silent && body) body.innerHTML = '<div class="ghis-loading">Syncing labs into ICU dashboard…</div>';
           GHIS._patientId = patientId;
           // Fetch recent lab panels and flatten to test/result/ref rows for ICU's safe mapper.
           var labs = [];
@@ -440,23 +487,56 @@
               ? ICU.ingestWardHistory({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs })
               : ICU.ingestFromWard({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs }));
             // Open the dashboard IMMEDIATELY after the lab sync — imaging must never block it.
-            try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
-            // Land on the just-synced patient workspace. 'overview' is a valid RENDER target, so
-            // ICU.open sets _screen="patient" SYNCHRONOUSLY — the group->Firestore mirror is then not
-            // gated out by a board flip, and the user sees the data they just synced (not the board).
-            ICU.open('overview');
+            // AUTO-SYNC (opts.silent): ingest in the BACKGROUND only — never close the Ward Sync panel,
+            // navigate to the dashboard, or toast. This is what stops auto-sync from yanking the user into
+            // the ICU dashboard while they're on a calculator / home. A user-initiated load (Lab Watch)
+            // still opens the workspace + toasts. Either way the reactive ICU state repaints if it's open.
+            if (!opts.silent) { try { if (pnl) pnl.classList.remove('open'); } catch (e) {} ICU.open('overview'); }
             try { if (typeof after === 'function') after(); } catch (e) {}
-            try { if (window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
+            try { if (!opts.silent && window.toast) { var np = (res && (res.points != null ? res.points : res.mappedLabs)) || 0, nr = (res && res.reports) || 0; toast('ICU synced — ' + np + ' value' + (np === 1 ? '' : 's') + (nr > 1 ? ' across ' + nr + ' reports' : '') + ' from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } } catch (e) {}
             // Radiology (TEXT only) streams in ASYNCHRONOUSLY when the feature is on. The ICU state
             // subscription repaints the Imaging tab when records arrive; a slow/failed/hung fetch
             // can never stall the dashboard (which already opened above).
             if (ICU.ingestWardImaging && (!ICU.imagingOn || ICU.imagingOn())) {
               GHIS.fetchImaging(patientId).then(function (records) {
                 var ir = ICU.ingestWardImaging({ patientId: patientId, source: 'Ward Sync', imaging: records });
-                try { if (window.toast && ir && ir.added) toast(ir.added + ' imaging report' + (ir.added === 1 ? '' : 's') + ' imported'); } catch (e) {}
+                try { if (!opts.silent && window.toast && ir && ir.added) toast(ir.added + ' imaging report' + (ir.added === 1 ? '' : 's') + ' imported'); } catch (e) {}
               }).catch(function () {});
             }
-          }).catch(function (e) { if (body) body.innerHTML = '<div class="ghis-lab-empty">Couldn’t load labs right now. Please try again.</div>'; });
+          }).catch(function (e) { if (!opts.silent && body) body.innerHTML = '<div class="ghis-lab-empty">Couldn’t load labs right now. Please try again.</div>'; });
+        },
+        // Tick-to-add: build FULL demographics + fetch labs, then file the patient into the CURRENTLY
+        // selected unit's board WITHOUT navigating (ICU.addWardPatientToRoster). Supports multi-add.
+        addToDashboard: function(episodeId, patientId, name) {
+          if (!window.ICU || !ICU.addWardPatientToRoster) { alert('Dashboard not loaded.'); return; }
+          var p = null, list = (typeof _patients !== 'undefined' && _patients) || [];
+          for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
+          var dem = demoFromPatient(p), labs = [];
+          authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function (j) {
+            var orders = ((j && j.orders) || []).slice(0, 25);
+            return Promise.all(orders.map(function (o) {
+              return authFetch('/lab-detail?renderId=' + encodeURIComponent(o.renderId) + '&episodeId=' + encodeURIComponent(o.episodeId) + '&patientId=' + encodeURIComponent(patientId))
+                .then(function (d) { (d && d.tests || []).forEach(function (t) { labs.push({ test: t.test, result: t.result, units: t.units, low: t.low, high: t.high, date: o.orderDate || o.date }); }); }).catch(function () {});
+            }));
+          }).catch(function () {}).then(function () {
+            Promise.resolve(ICU.addWardPatientToRoster({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs })).then(function () {
+              _addedPids[patientId] = true;
+              try { if (window.toast) toast('Added ' + (dem.name || 'patient') + ' to ' + (ICU.currentUnitLabel ? ICU.currentUnitLabel() : 'dashboard')); } catch (e) {}
+            }, function () { delete _addedPids[patientId]; try { if (window.toast) toast('Couldn’t add — open the dashboard and choose a unit first.'); } catch (e) {} if (typeof ghisApplyFilters === 'function') ghisApplyFilters(); });
+          });
+        },
+        // Checkbox handler (list). Add-only: unticking reverts (re-tick to re-add) — removal is a
+        // dashboard action. `el` is the checkbox, or null when called from a header button.
+        toggleAdd: function(episodeId, patientId, name, el) {
+          if (el && el.type === 'checkbox' && !el.checked) { el.checked = true; return; }
+          _addedPids[patientId] = true;
+          if (el && el.parentNode) { var sp = el.parentNode.querySelector('span'); if (sp) sp.textContent = 'Added'; }
+          GHIS.addToDashboard(episodeId, patientId, name);
+        },
+        // "Adding to: <unit>" dropdown → switch the dashboard's active unit (no navigation).
+        setAddTarget: function(key) {
+          try { if (window.ICU && ICU.selectUnitByKey) ICU.selectUnitByKey(key); } catch (e) {}
+          try { renderAddTarget(); } catch (e) {}
         },
         // Fetch this patient's radiology reports (TEXT only) with the FULL field set — pulled
         // straight from /radiology + /radiology-report (not the lossy importPatientReports shape,

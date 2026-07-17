@@ -7071,6 +7071,7 @@
   var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","General"];
   var CAT_ICON = { "Cardiovascular":"🫀","Critical care":"🚨","Infectious disease":"🦠","Renal":"🫘","Hepatology":"🫁","Neurology":"🧠","General":"⚖️" };
   var root = null, q = "", activeCat = "", openId = null;
+  var _resultCb = null, _resultCbId = null, _suppressCb = false;   // opener write-back: fired on an explicit Calculate (see open()/run())
 
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function byId(id){ for(var i=0;i<CALCS.length;i++) if(CALCS[i].id===id) return CALCS[i]; return null; }
@@ -7373,7 +7374,7 @@
       '<button class="mc-calc-btn" id="mcCalc_'+id+'">Calculate</button>'+
       '<div class="mc-result" id="mcRes_'+id+'"></div>'+
       (c.ref?'<div class="mc-ref">📚 <b>Reference:</b> '+esc(c.ref)+'</div>':"");
-    function run(){
+    function run(fromBtn){
       var out; try { out=c.compute(readValues(c)); } catch(e){ out={err:"Could not compute — check the inputs."}; }
       var res=document.getElementById("mcRes_"+id);
       if(!out){ res.innerHTML=""; return; }
@@ -7381,16 +7382,19 @@
       try { if (window.SMD_KU) SMD_KU.emit("calc", id); } catch(e){}   // KU: used a calculator (deduped per day server-side)
       if(out.html){ res.innerHTML=out.html; return; }
       res.innerHTML='<div class="mc-res-box"><div class="mc-res-num">'+esc(out.v)+(out.u?' <small>'+esc(out.u)+'</small>':"")+'</div>'+(out.i?'<div class="mc-res-i">'+out.i+'</div>':"")+'</div>';
+      // Write-back: report a scalar result to the opener ONLY on an explicit user Calculate (fromBtn),
+      // never on the auto-prefill click (_suppressCb) or per-keystroke change.
+      if(fromBtn && !_suppressCb && _resultCb && id===_resultCbId){ try { _resultCb(id, out); } catch(e){} }
     }
-    el.querySelector("#mcCalc_"+id).addEventListener("click", run);
+    el.querySelector("#mcCalc_"+id).addEventListener("click", function(){ run(true); });
     el.querySelectorAll(".mc-input").forEach(function(inp){
-      inp.addEventListener("keydown", function(e){ e.stopPropagation(); if(e.key==="Enter") run(); });
+      inp.addEventListener("keydown", function(e){ e.stopPropagation(); if(e.key==="Enter") run(true); });
     });
-    // auto-calc on change for instant feedback
+    // auto-calc on change for instant feedback (no write-back)
     el.querySelectorAll(".mc-input, .mc-check input").forEach(function(inp){
-      inp.addEventListener("change", run);
+      inp.addEventListener("change", function(){ run(false); });
     });
-    if(hasLab) wireAutofill(c, run);
+    if(hasLab) wireAutofill(c, function(){ run(false); });
   }
 
   /* ---- open/close + public API ---- */
@@ -7418,16 +7422,19 @@
       else el.value=String(val);
     });
     var btn=document.getElementById("mcCalc_"+id);
-    if(btn) btn.click();   // run() reads the DOM we just set and renders the result
+    if(btn){ _suppressCb=true; try { btn.click(); } finally { _suppressCb=false; } }   // render the prefilled result WITHOUT reporting it back — only an explicit user Calculate writes to the opener
   }
-  function open(id, prefill){
+  // open(id, prefill, onResult): onResult(scoreId, out) is called when the user hits Calculate, so
+  // an opener (e.g. the ICU dashboard) can store the computed result back on the patient.
+  function open(id, prefill, onResult){
+    _resultCb = (typeof onResult === "function") ? onResult : null; _resultCbId = _resultCb ? id : null;
     openList();
     var c=byId(id); if(!c) return;
     activeCat=""; openId=id; renderCats(); renderList();
     if(prefill) applyPrefill(id, prefill);
     setTimeout(function(){ var el=document.getElementById("mcPanel_"+id); if(el) el.scrollIntoView({behavior:"smooth",block:"center"}); }, 80);
   }
-  function close(){ if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
+  function close(){ _resultCb=null; _resultCbId=null; if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
 
   /* ---- Drug Interactions entry point (Tools) — delegates to drugs.js's
      window.MEDDRUGS.openInteractions, the single shared MEDLIST overlay (Task 5/6). ---- */

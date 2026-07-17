@@ -4,16 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>StewardMD — Admin Console</title>
+<title>StewardMD — App Manager</title>
 <style>
   :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0f766e;--tls:#ccfbf1;--red:#dc2626;--amb:#b45309;--grn:#15803d;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
   @media(prefers-color-scheme:dark){:root{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}}
-  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);padding:0 0 60px}
-  .top{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 18px;position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  .top h1{margin:0;font:800 18px var(--f);flex:1}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f)}
+  .app{display:flex;min-height:100vh}
+  .side{width:236px;flex:0 0 236px;background:var(--panel);border-right:1px solid var(--line);padding:14px 10px 30px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .brand{display:flex;align-items:center;gap:9px;font:800 15px var(--f);padding:6px 10px 12px}
+  .grp{font:800 10.5px var(--f);text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:16px 10px 6px}
+  .nav{display:flex;flex-direction:column;gap:2px}
+  .nav a{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:9px;font:600 13.5px var(--f);color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
+  .nav a .b{margin-left:auto;font:800 10px var(--f);background:var(--amb);color:#fff;border-radius:999px;padding:1px 7px;display:none}
+  .nav a .b.on{display:inline-block}
+  .nav a.on{background:var(--tls);color:var(--tl)}
+  .nav a:hover{background:var(--bg)}
+  .main{flex:1;min-width:0;padding:20px 24px 70px;max-width:940px}
+  .htop{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .htop h2{margin:0;font:800 20px var(--f);flex:1}
   .who{font:600 12.5px var(--f);color:var(--mut)}
-  .wrap{max-width:820px;margin:0 auto;padding:18px}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+  .card>b{font:800 14.5px var(--f)}
   label{display:block;font:700 11.5px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:12px 0 5px}
   input,textarea,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:500 14px var(--f);background:var(--bg);color:var(--ink)}
   input:focus,textarea:focus,select:focus{outline:none;border-color:var(--tl)}
@@ -21,10 +32,8 @@
   .row{display:flex;gap:10px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
   .chk{display:flex;align-items:center;gap:8px;margin-top:14px}.chk input{width:auto}.chk label{margin:0;text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink)}
   button{border:none;border-radius:11px;font:700 14px var(--f);padding:11px 15px;cursor:pointer}
+  button:disabled{opacity:.55;cursor:default}
   .primary{background:var(--tl);color:#fff}.ghost{background:var(--panel);color:var(--tl);border:1px solid var(--line)}
-  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-  .tab{font:700 13px var(--f);border:1px solid var(--line);border-radius:999px;padding:8px 16px;background:var(--panel);color:var(--mut);cursor:pointer}
-  .tab.on{background:var(--tl);color:#fff;border-color:var(--tl)}
   .pane{display:none}.pane.on{display:block}
   .msg{font:600 12.5px var(--f);margin-top:10px;min-height:16px}.msg.ok{color:var(--tl)}.msg.err{color:var(--red)}
   .filters{display:flex;gap:6px;flex-wrap:wrap}
@@ -43,120 +52,182 @@
   .hint{font:500 12px var(--f);color:var(--mut);line-height:1.55}
   .stat{display:inline-block;margin:6px 14px 6px 0;font:700 22px var(--f)}.stat span{display:block;font:600 11px var(--f);color:var(--mut);text-transform:uppercase;letter-spacing:.03em}
   a{color:var(--tl)}code{background:var(--tls);color:var(--tl);border-radius:5px;padding:1px 5px;font-size:12px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(146px,1fr));gap:12px;margin-bottom:16px}
+  .sc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .sc .n{font:800 26px var(--f);line-height:1.1}.sc .l{font:600 11px var(--f);color:var(--mut);text-transform:uppercase;letter-spacing:.03em;margin-top:3px}
+  .aibox{border:1px solid var(--tl)}
+  .aibox .badge{font:800 10px var(--f);text-transform:uppercase;letter-spacing:.05em;color:var(--tl);background:var(--tls);border-radius:6px;padding:3px 9px}
+  .qa{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.qa button{font-size:13px;padding:9px 13px}
+  @media(max-width:760px){
+    .app{flex-direction:column}
+    .side{width:auto;flex:none;height:auto;position:sticky;top:0;z-index:6;border-right:none;border-bottom:1px solid var(--line);padding:8px 8px}
+    .brand{display:none}.grp{display:none}
+    .nav{flex-direction:row;overflow-x:auto;gap:5px}
+    .nav a{padding:8px 13px;border:1px solid var(--line)}
+    .main{padding:16px 14px 70px}
+  }
 </style>
 </head>
 <body>
-  <div class="top">
-    <h1>🛠️ StewardMD — Admin Console</h1>
-    <span class="who" id="who">Checking sign-in…</span>
-    <button class="ghost" id="signInBtn" style="display:none">Sign in with Google</button>
-    <button class="ghost" id="signOutBtn" style="display:none">Sign out</button>
-  </div>
-  <div class="wrap">
-    <div class="tabs" id="tabs">
-      <button class="tab on" data-p="notif">🔔 Notifications</button>
-      <button class="tab" data-p="sources">📚 Medical Sources</button>
-      <button class="tab" data-p="logs">🛰️ Crawl Logs</button>
-      <button class="tab" data-p="verif">🩺 Verifications</button>
-      <button class="tab" data-p="watch">🧪 Lab-watch</button>
-      <button class="tab" data-p="push">📣 Push</button>
-      <button class="tab" data-p="ai">📊 AI Usage</button>
-    </div>
-    <div id="gate" class="card hint">Sign in with your owner Google account to manage StewardMD.</div>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">🛠️ App Manager</div>
+      <div class="grp">Home</div>
+      <nav class="nav" id="nav">
+        <a class="on" data-p="overview">📊 Overview</a>
+        <div class="grp">Content</div>
+        <a data-p="notif">🔔 Publish &amp; notify</a>
+        <a data-p="sources">📚 Medical sources</a>
+        <a data-p="logs">🛰️ Crawl logs</a>
+        <div class="grp">Users</div>
+        <a data-p="verif">🩺 Verifications <span class="b" id="navVerif">0</span></a>
+        <div class="grp">System</div>
+        <a data-p="push">📣 Push blast</a>
+        <a data-p="watch">🧪 Lab-watch</a>
+        <a data-p="ai">💸 AI usage</a>
+      </nav>
+    </aside>
 
-    <!-- NOTIFICATIONS -->
-    <div class="pane" id="pane-notif" data-need-auth>
-      <div class="card">
-        <b>Publish a notification</b>
-        <label for="nTitle">Title *</label>
-        <input id="nTitle" maxlength="200" placeholder="e.g. FDA approves new β-lactamase inhibitor">
-        <label for="nBody">Details</label>
-        <textarea id="nBody" maxlength="4000" placeholder="Short, verified summary."></textarea>
-        <div class="row">
-          <div><label>Category</label><select id="nCat"><option value="approval">✅ Approval</option><option value="safety">⚠️ Safety</option><option value="recall">🚫 Recall</option><option value="drug">💊 Drug</option><option value="guideline">📋 Guideline</option><option value="study">🔬 Study</option><option value="general" selected>📣 General</option></select></div>
-          <div><label>Importance</label><select id="nImp"><option value="normal">Normal</option><option value="high">High</option></select></div>
+    <main class="main">
+      <div class="htop">
+        <h2 id="hTitle">Overview</h2>
+        <span class="who" id="who">Checking sign-in…</span>
+        <button class="ghost" id="signInBtn" style="display:none">Sign in with Google</button>
+        <button class="ghost" id="signOutBtn" style="display:none">Sign out</button>
+      </div>
+      <div id="gate" class="card hint">Sign in with your owner Google account to manage StewardMD.</div>
+
+      <!-- OVERVIEW -->
+      <div class="pane on" id="pane-overview" data-need-auth>
+        <div class="stats">
+          <div class="sc"><div class="n" id="ovVerif">—</div><div class="l">Pending verifications</div></div>
+          <div class="sc"><div class="n" id="ovNotif">—</div><div class="l">Live notifications</div></div>
+          <div class="sc"><div class="n" id="ovAiReq">—</div><div class="l">AI requests today</div></div>
+          <div class="sc"><div class="n" id="ovAiCost">—</div><div class="l">AI cost today</div></div>
+          <div class="sc"><div class="n" id="ovPush" style="font-size:15px;padding-top:6px">—</div><div class="l">Push channels</div></div>
         </div>
-        <div class="row"><div><label>Source</label><input id="nSrc" maxlength="60" placeholder="FDA, ICMR…"></div><div><label>Link</label><input id="nUrl" maxlength="400" placeholder="https://…"></div></div>
-        <div class="chk"><input id="nPin" type="checkbox"><label for="nPin">Pin to top</label></div>
-        <div style="margin-top:14px;display:flex;gap:8px"><button class="primary" id="nPub">Publish</button><button class="ghost" id="nSync">↻ Pull FDA now</button></div>
-        <div class="msg" id="nMsg"></div>
-      </div>
-      <div class="card"><div style="display:flex;align-items:center"><b style="flex:1">Live notifications</b><button class="ghost" id="nReload" style="padding:7px 11px">Reload</button></div><div id="nList" style="margin-top:12px"></div></div>
-    </div>
-
-    <!-- VERIFICATIONS -->
-    <div class="pane" id="pane-verif" data-need-auth>
-      <div class="card">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="flex:1">Doctor verifications</b>
-          <div class="filters" id="vFilters"><button class="pill on" data-f="pending">Pending</button><button class="pill" data-f="verified">Verified</button><button class="pill" data-f="rejected">Rejected</button><button class="pill" data-f="all">All</button></div>
-          <button class="ghost" id="vReload" style="padding:7px 11px">Reload</button></div>
-        <div class="msg" id="vMsg"></div><div id="vList" style="margin-top:12px"></div>
-      </div>
-    </div>
-
-    <!-- LAB-WATCH -->
-    <div class="pane" id="pane-watch" data-need-auth>
-      <div class="card">
-        <b>Lab-watch poll</b>
-        <div class="hint" style="margin:6px 0 12px">Polls GHIS for new labs on all watched patients and pushes alerts. (A cron runs this on a schedule; this button runs it now.)</div>
-        <button class="primary" id="wRun">▶︎ Run poll now</button>
-        <div class="msg" id="wMsg"></div>
-        <div id="wStats" style="margin-top:12px"></div>
-      </div>
-    </div>
-
-    <!-- PUSH -->
-    <div class="pane" id="pane-push" data-need-auth>
-      <div class="card">
-        <b>Send a push blast</b>
-        <div class="hint" id="pStatus" style="margin:6px 0 12px">Checking push status…</div>
-        <label for="pTitle">Title</label><input id="pTitle" maxlength="120" placeholder="StewardMD">
-        <label for="pBody">Message</label><input id="pBody" maxlength="300" placeholder="Message to all subscribed devices">
-        <div style="margin-top:14px"><button class="primary" id="pSend">Send to all devices</button></div>
-        <div class="msg" id="pMsg"></div>
-      </div>
-    </div>
-
-    <!-- MEDICAL SOURCES -->
-    <div class="pane" id="pane-sources" data-need-auth>
-      <div class="card">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="flex:1">Add / edit a source</b>
-          <button class="ghost" id="sSync" style="padding:7px 11px">↻ Force refresh (run pipeline)</button></div>
-        <div class="hint" style="margin:6px 0 4px">Sources drive the daily crawl. <code>rss</code> parses a feed; <code>head</code> HEAD-polls a page and only summarizes when it changes. AI runs only on genuinely new/changed docs.</div>
-        <div class="row"><div><label for="sId">ID (slug) *</label><input id="sId" maxlength="40" placeholder="e.g. esc-cardio"></div><div><label for="sName">Name *</label><input id="sName" maxlength="120" placeholder="European Society of Cardiology"></div></div>
-        <div class="row">
-          <div><label>Workspace</label><select id="sWs"><option value="internal_medicine">Internal Medicine</option><option value="surgery">Surgery</option><option value="ent">ENT</option><option value="ophthalmology">Ophthalmology</option><option value="obstetrics_gynaecology">Obstetrics & Gynaecology</option><option value="urology">Urology</option><option value="dentistry_omfs">Dentistry / OMFS</option><option value="paediatrics">Paediatrics</option></select></div>
-          <div><label>Branch (IM sub-specialty)</label><select id="sBranch"><option value="">— general —</option><option value="cardiology">Cardiology</option><option value="nephrology">Nephrology</option><option value="pulmonology">Pulmonology</option><option value="endocrinology">Endocrinology</option><option value="infectious_diseases">Infectious Diseases</option><option value="critical_care">Critical Care</option><option value="gastroenterology">Gastroenterology</option><option value="hepatology">Hepatology</option><option value="oncology">Oncology</option><option value="emergency_medicine">Emergency Medicine</option><option value="family_medicine">Family Medicine</option></select></div>
-          <div><label>Type</label><select id="sType"><option value="guideline">Guideline</option><option value="drug_approval">Drug approval</option><option value="safety_alert">Safety alert</option><option value="trial">Major trial</option></select></div>
-          <div><label>Parser</label><select id="sParser"><option value="rss">RSS feed</option><option value="head">HEAD poll</option><option value="litapi">Literature API (Europe PMC)</option></select></div>
+        <div class="card">
+          <b>Quick actions</b>
+          <div class="qa">
+            <button class="primary" data-go="notif">🔔 Publish an update</button>
+            <button class="ghost" data-go="verif">🩺 Review verifications</button>
+            <button class="ghost" data-go="sources">↻ Run crawl now</button>
+            <button class="ghost" data-go="push">📣 Push blast</button>
+          </div>
+          <div class="hint" id="ovMsg" style="margin-top:12px"></div>
         </div>
-        <label for="sRss">RSS URL (parser = rss)</label><input id="sRss" maxlength="400" placeholder="https://…/rss.xml">
-        <label for="sPage">Guideline page (parser = head)</label><input id="sPage" maxlength="400" placeholder="https://…/guidelines">
-        <label for="sQuery">Europe PMC query (parser = litapi)</label><input id="sQuery" maxlength="600" placeholder='(AUTH:&quot;KDIGO&quot; OR TITLE:&quot;KDIGO&quot;) AND PUB_TYPE:&quot;Guideline&quot;'>
-        <label for="sHome">Homepage</label><input id="sHome" maxlength="400" placeholder="https://…">
-        <div class="row"><div><label for="sPrio">Priority (lower first)</label><input id="sPrio" type="number" value="100"></div><div class="chk" style="align-self:flex-end"><input id="sEnabled" type="checkbox" checked><label for="sEnabled">Enabled</label></div></div>
-        <div style="margin-top:14px;display:flex;gap:8px"><button class="primary" id="sSave">Save source</button><button class="ghost" id="sClear">Clear form</button></div>
-        <div class="msg" id="sMsg"></div>
       </div>
-      <div class="card"><div style="display:flex;align-items:center"><b style="flex:1">Registered sources</b><button class="ghost" id="sReload" style="padding:7px 11px">Reload</button></div><div id="sList" style="margin-top:12px"></div></div>
-    </div>
 
-    <!-- CRAWL LOGS -->
-    <div class="pane" id="pane-logs" data-need-auth>
-      <div class="card">
-        <div style="display:flex;align-items:center"><b style="flex:1">Crawl logs (newest first)</b><button class="ghost" id="lReload" style="padding:7px 11px">Reload</button></div>
-        <div class="hint" style="margin:6px 0 4px"><code>unchanged</code> = detected but skipped, no AI. <code>new</code>/<code>updated</code> = summarized once. <code>error</code>/<code>skipped</code> as labelled.</div>
-        <div class="msg" id="lMsg"></div><div id="lList" style="margin-top:12px"></div>
+      <!-- PUBLISH & NOTIFY -->
+      <div class="pane" id="pane-notif" data-need-auth>
+        <div class="card aibox">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span class="badge">AI</span><b>AI push box</b></div>
+          <div class="hint" style="margin:2px 0 6px">Paste a guideline/approval link and/or a short note. AI classifies it (type, specialty, importance) and drafts the summary — review below and publish, or push in one tap.</div>
+          <label for="aiUrl">Link (guideline / approval / trial)</label>
+          <input id="aiUrl" maxlength="800" placeholder="https://… (FDA, CDSCO, EMA, ICMR, a journal…)">
+          <label for="aiPrompt">Note / prompt (optional — helps if the link can't be read, e.g. a PDF)</label>
+          <textarea id="aiPrompt" maxlength="2000" placeholder="e.g. CDSCO approved Lipfendra (drug X) for indication Y — cardiology."></textarea>
+          <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="ghost" id="aiClassify">✨ Autoclassify → review</button>
+            <button class="primary" id="aiPush">⚡ Autoclassify &amp; push</button>
+          </div>
+          <div class="msg" id="aiMsg"></div>
+        </div>
+        <div class="card">
+          <b>Publish a notification</b>
+          <div class="hint" style="margin:2px 0 2px">Fill manually, or let the AI box above populate this. Publishing pushes to all subscribed devices in the chosen specialty.</div>
+          <label for="nTitle">Title *</label>
+          <input id="nTitle" maxlength="200" placeholder="e.g. FDA approves new β-lactamase inhibitor">
+          <label for="nBody">Details</label>
+          <textarea id="nBody" maxlength="4000" placeholder="Short, verified summary (shown on the card + as the push body)."></textarea>
+          <div class="row">
+            <div><label>Type</label><select id="nType"><option value="general">📣 General</option><option value="guideline">📋 Guideline</option><option value="drug_approval">✅ Drug approval</option><option value="safety_alert">⚠️ Safety alert</option><option value="trial">🔬 Major trial</option></select></div>
+            <div><label>Specialty (who gets it)</label><select id="nWs"><option value="internal_medicine">Internal Medicine</option><option value="surgery">Surgery</option><option value="ent">ENT</option><option value="ophthalmology">Ophthalmology</option><option value="obstetrics_gynaecology">Obstetrics &amp; Gynaecology</option><option value="urology">Urology</option><option value="dentistry_omfs">Dentistry / OMFS</option><option value="paediatrics">Paediatrics</option></select></div>
+            <div><label>Importance</label><select id="nImp"><option value="normal">Normal</option><option value="high">High</option><option value="critical">Critical</option></select></div>
+          </div>
+          <div class="row"><div><label>Source</label><input id="nSrc" maxlength="60" placeholder="FDA, CDSCO, ICMR…"></div><div><label>Link</label><input id="nUrl" maxlength="500" placeholder="https://…"></div></div>
+          <div class="chk"><input id="nPin" type="checkbox"><label for="nPin">Pin to top</label></div>
+          <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><button class="primary" id="nPub">Publish</button><button class="ghost" id="nSync">↻ Pull FDA/CDSCO/EMA now</button></div>
+          <div class="msg" id="nMsg"></div>
+        </div>
+        <div class="card"><div style="display:flex;align-items:center"><b style="flex:1">Live notifications</b><button class="ghost" id="nReload" style="padding:7px 11px">Reload</button></div><div id="nList" style="margin-top:12px"></div></div>
       </div>
-    </div>
 
-    <div class="pane" id="pane-ai" data-need-auth>
-      <div class="card">
-        <div style="display:flex;align-items:center"><b style="flex:1">AI usage (today)</b><button class="ghost" id="aiReload" style="padding:7px 11px">Reload</button></div>
-        <div class="hint" style="margin:6px 0 4px">Aggregate MaiK + Medical-Updates AI usage. <code>updates_summary</code> / <code>updates_diff</code> / <code>updates_digest</code> are the pipeline calls. Costs are estimated from token counts; no prompts or PHI are stored.</div>
-        <div class="msg" id="aiMsg"></div><div id="aiBox" style="margin-top:12px"></div>
+      <!-- MEDICAL SOURCES -->
+      <div class="pane" id="pane-sources" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="flex:1">Add / edit a source</b>
+            <button class="ghost" id="sSync" style="padding:7px 11px">↻ Force refresh (run pipeline)</button></div>
+          <div class="hint" style="margin:6px 0 4px">Sources drive the daily crawl. <code>rss</code> parses a feed; <code>head</code> HEAD-polls a page and only summarizes when it changes. AI runs only on genuinely new/changed docs.</div>
+          <div class="row"><div><label for="sId">ID (slug) *</label><input id="sId" maxlength="40" placeholder="e.g. esc-cardio"></div><div><label for="sName">Name *</label><input id="sName" maxlength="120" placeholder="European Society of Cardiology"></div></div>
+          <div class="row">
+            <div><label>Workspace</label><select id="sWs"><option value="internal_medicine">Internal Medicine</option><option value="surgery">Surgery</option><option value="ent">ENT</option><option value="ophthalmology">Ophthalmology</option><option value="obstetrics_gynaecology">Obstetrics &amp; Gynaecology</option><option value="urology">Urology</option><option value="dentistry_omfs">Dentistry / OMFS</option><option value="paediatrics">Paediatrics</option></select></div>
+            <div><label>Branch (IM sub-specialty)</label><select id="sBranch"><option value="">— general —</option><option value="cardiology">Cardiology</option><option value="nephrology">Nephrology</option><option value="pulmonology">Pulmonology</option><option value="endocrinology">Endocrinology</option><option value="infectious_diseases">Infectious Diseases</option><option value="critical_care">Critical Care</option><option value="gastroenterology">Gastroenterology</option><option value="hepatology">Hepatology</option><option value="oncology">Oncology</option><option value="emergency_medicine">Emergency Medicine</option><option value="family_medicine">Family Medicine</option></select></div>
+            <div><label>Type</label><select id="sType"><option value="guideline">Guideline</option><option value="drug_approval">Drug approval</option><option value="safety_alert">Safety alert</option><option value="trial">Major trial</option></select></div>
+            <div><label>Parser</label><select id="sParser"><option value="rss">RSS feed</option><option value="head">HEAD poll</option><option value="litapi">Literature API (Europe PMC)</option></select></div>
+          </div>
+          <label for="sRss">RSS URL (parser = rss)</label><input id="sRss" maxlength="400" placeholder="https://…/rss.xml">
+          <label for="sPage">Guideline page (parser = head)</label><input id="sPage" maxlength="400" placeholder="https://…/guidelines">
+          <label for="sQuery">Europe PMC query (parser = litapi)</label><input id="sQuery" maxlength="600" placeholder='(AUTH:&quot;KDIGO&quot; OR TITLE:&quot;KDIGO&quot;) AND PUB_TYPE:&quot;Guideline&quot;'>
+          <label for="sHome">Homepage</label><input id="sHome" maxlength="400" placeholder="https://…">
+          <div class="row"><div><label for="sPrio">Priority (lower first)</label><input id="sPrio" type="number" value="100"></div><div class="chk" style="align-self:flex-end"><input id="sEnabled" type="checkbox" checked><label for="sEnabled">Enabled</label></div></div>
+          <div style="margin-top:14px;display:flex;gap:8px"><button class="primary" id="sSave">Save source</button><button class="ghost" id="sClear">Clear form</button></div>
+          <div class="msg" id="sMsg"></div>
+        </div>
+        <div class="card"><div style="display:flex;align-items:center"><b style="flex:1">Registered sources</b><button class="ghost" id="sReload" style="padding:7px 11px">Reload</button></div><div id="sList" style="margin-top:12px"></div></div>
       </div>
-    </div>
+
+      <!-- CRAWL LOGS -->
+      <div class="pane" id="pane-logs" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">Crawl logs (newest first)</b><button class="ghost" id="lReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:6px 0 4px"><code>unchanged</code> = detected but skipped, no AI. <code>new</code>/<code>updated</code> = summarized once. <code>error</code>/<code>skipped</code> as labelled.</div>
+          <div class="msg" id="lMsg"></div><div id="lList" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <!-- VERIFICATIONS -->
+      <div class="pane" id="pane-verif" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="flex:1">Doctor verifications</b>
+            <div class="filters" id="vFilters"><button class="pill on" data-f="pending">Pending</button><button class="pill" data-f="verified">Verified</button><button class="pill" data-f="rejected">Rejected</button><button class="pill" data-f="all">All</button></div>
+            <button class="ghost" id="vReload" style="padding:7px 11px">Reload</button></div>
+          <div class="msg" id="vMsg"></div><div id="vList" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <!-- PUSH -->
+      <div class="pane" id="pane-push" data-need-auth>
+        <div class="card">
+          <b>Send a push blast</b>
+          <div class="hint" id="pStatus" style="margin:6px 0 12px">Checking push status…</div>
+          <label for="pTitle">Title</label><input id="pTitle" maxlength="120" placeholder="StewardMD">
+          <label for="pBody">Message</label><input id="pBody" maxlength="300" placeholder="Message to all subscribed devices">
+          <div style="margin-top:14px"><button class="primary" id="pSend">Send to all devices</button></div>
+          <div class="msg" id="pMsg"></div>
+        </div>
+      </div>
+
+      <!-- LAB-WATCH -->
+      <div class="pane" id="pane-watch" data-need-auth>
+        <div class="card">
+          <b>Lab-watch poll</b>
+          <div class="hint" style="margin:6px 0 12px">Polls GHIS for new labs on all watched patients and pushes alerts. (A cron runs this on a schedule; this button runs it now.)</div>
+          <button class="primary" id="wRun">▶︎ Run poll now</button>
+          <div class="msg" id="wMsg"></div>
+          <div id="wStats" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <!-- AI USAGE -->
+      <div class="pane" id="pane-ai" data-need-auth>
+        <div class="card">
+          <div style="display:flex;align-items:center"><b style="flex:1">AI usage (today)</b><button class="ghost" id="aiReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:6px 0 4px">Aggregate MaiK + Medical-Updates AI usage. <code>updates_summary</code> / <code>updates_classify</code> / <code>updates_diff</code> are the pipeline + AI-push-box calls. Costs are estimated from token counts; no prompts or PHI are stored.</div>
+          <div class="msg" id="aiMsg"></div><div id="aiBox" style="margin-top:12px"></div>
+        </div>
+      </div>
+    </main>
   </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -166,7 +237,10 @@
   var $=function(id){return document.getElementById(id);};
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
-  var vFilter="pending", activePane="notif";
+  var vFilter="pending", activePane="overview", _aiStructured=null;
+  var PANES=["overview","notif","sources","logs","verif","push","watch","ai"];
+  var TITLES={overview:"Overview",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",push:"Push blast",watch:"Lab-watch",ai:"AI usage"};
+  var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
   function tok(){ var u=auth&&auth.currentUser; return u?u.getIdToken():Promise.resolve(null); }
@@ -178,15 +252,15 @@
   // ---- panes/gate visibility (only show a pane when signed in) ----
   function showActivePane(){
     var signedIn=!!(auth&&auth.currentUser);
-    ["notif","sources","logs","verif","watch","push","ai"].forEach(function(p){ $("pane-"+p).classList.toggle("on", signedIn && p===activePane); });
+    PANES.forEach(function(p){ $("pane-"+p).classList.toggle("on", signedIn && p===activePane); });
     $("gate").style.display=signedIn?"none":"";
+    $("hTitle").textContent=TITLES[activePane]||"App Manager";
+    Array.prototype.forEach.call($("nav").querySelectorAll("[data-p]"),function(a){a.classList.toggle("on",a.getAttribute("data-p")===activePane);});
   }
+  function goPane(p){ if(PANES.indexOf(p)<0)return; activePane=p; showActivePane(); refresh(p); if(window.innerWidth<=760) window.scrollTo(0,0); }
 
-  // ---- tabs ----
-  $("tabs").addEventListener("click",function(e){var b=e.target.closest("[data-p]");if(!b)return;
-    Array.prototype.forEach.call($("tabs").children,function(t){t.classList.toggle("on",t===b);});
-    activePane=b.getAttribute("data-p"); showActivePane(); refresh(activePane);
-  });
+  // ---- nav ----
+  $("nav").addEventListener("click",function(e){var b=e.target.closest("[data-p]");if(!b)return; goPane(b.getAttribute("data-p"));});
 
   // ---- auth UI ----
   function signedInUI(user){
@@ -198,26 +272,63 @@
   $("signInBtn").onclick=function(){ if(auth) auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function(e){alert("Sign-in failed: "+((e&&e.message)||e));}); };
   $("signOutBtn").onclick=function(){ if(auth) auth.signOut(); };
 
-  // ---- Notifications ----
-  function nPublish(){
+  // ---- Overview ----
+  function setN(id,v){ var el=$(id); if(el)el.textContent=v; }
+  function ovLoad(){
+    say("ovMsg","","");
+    fetch("/api/push/status").then(function(r){return r.json();}).then(function(d){ setN("ovPush",(d.enabled?"Web ✓":"Web ✕")+" · "+(d.native?"Native ✓":"Native ✕")); }).catch(function(){});
+    api("/api/ai/admin").then(function(x){ if(x.s===200&&x.d&&x.d.enabled!==false){var day=x.d.daily||{}; setN("ovAiReq",day.requests||0); setN("ovAiCost","₹"+(day.estCostInr||0));} }).catch(function(){});
+    api("/api/verifications?status=pending").then(function(x){ if(x.s===200){var n=((x.d&&x.d.doctors)||[]).length; setN("ovVerif",n); var b=$("navVerif"); if(b){b.textContent=n;b.classList.toggle("on",n>0);}} }).catch(function(){});
+    fetch("/api/updates?limit=100").then(function(r){return r.json();}).then(function(j){ setN("ovNotif",((j&&j.items)||[]).length); }).catch(function(){});
+  }
+  document.querySelectorAll("[data-go]").forEach(function(b){ b.onclick=function(){ var p=b.getAttribute("data-go"); if(p==="sources"){goPane("sources");setTimeout(function(){var s=$("sSync");if(s)s.click();},200);} else goPane(p); }; });
+
+  // ---- AI push box ----
+  function aiRunClassify(pushNow){
+    var url=$("aiUrl").value.trim(), prompt=$("aiPrompt").value.trim();
+    if(!url && !prompt){ say("aiMsg","err","Paste a link or write a note first."); return; }
+    $("aiClassify").disabled=true; $("aiPush").disabled=true; say("aiMsg","","🤖 Reading & classifying…");
+    api("/api/updates/classify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:url,prompt:prompt})})
+      .then(function(x){
+        $("aiClassify").disabled=false; $("aiPush").disabled=false;
+        if(x.s!==200||!x.d||!x.d.ok){ say("aiMsg","err",x.s===401?"Not an owner.":("Failed: "+((x.d&&x.d.error)||x.s))); return; }
+        var dft=x.d.draft||{};
+        $("nTitle").value=dft.title||""; $("nBody").value=dft.body||"";
+        if(dft.type) $("nType").value=dft.type;
+        if(dft.workspace) $("nWs").value=dft.workspace;
+        $("nImp").value=dft.importance||"normal";
+        $("nSrc").value=dft.organization||""; $("nUrl").value=dft.url||url;
+        _aiStructured=(dft.pharma||(dft.keywords&&dft.keywords.length))?{pharma:dft.pharma||null,keywords:dft.keywords||[]}:null;
+        var note=(dft.type||"?")+" · "+(dft.workspace||"?")+" · "+(dft.importance||"normal")+(x.d.fetchNote?(" · "+x.d.fetchNote):"");
+        if(pushNow){ say("aiMsg","ok","✅ Classified ("+note+") — publishing…"); nPublish(true); }
+        else { say("aiMsg","ok","✅ Classified: "+note+". Review below, then Publish."); try{$("nTitle").scrollIntoView({behavior:"smooth",block:"center"});}catch(e){} }
+      })
+      .catch(function(){ $("aiClassify").disabled=false; $("aiPush").disabled=false; say("aiMsg","err","Sign in first."); });
+  }
+  $("aiClassify").onclick=function(){ aiRunClassify(false); };
+  $("aiPush").onclick=function(){ aiRunClassify(true); };
+
+  // ---- Notifications (publish) ----
+  function nPublish(fromAi){
     var t=$("nTitle").value.trim(); if(!t){say("nMsg","err","Title required.");return;} say("nMsg","","Publishing…");
-    api("/api/updates",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:t,body:$("nBody").value,category:$("nCat").value,importance:$("nImp").value,source:$("nSrc").value,url:$("nUrl").value,pinned:$("nPin").checked})})
-      .then(function(x){ if(x.s===200&&x.d.ok){say("nMsg","ok","✅ Published.");$("nTitle").value="";$("nBody").value="";$("nUrl").value="";$("nPin").checked=false;nLoad();} else say("nMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); })
+    var ty=$("nType").value;
+    api("/api/updates",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:t,body:$("nBody").value,type:(ty==="general"?"":ty),category:TYPE2CAT[ty]||"general",workspace:$("nWs").value,importance:$("nImp").value,source:$("nSrc").value,url:$("nUrl").value,pinned:$("nPin").checked,structured:_aiStructured})})
+      .then(function(x){ if(x.s===200&&x.d.ok){say("nMsg","ok","✅ Published & pushed.");$("nTitle").value="";$("nBody").value="";$("nUrl").value="";$("nSrc").value="";$("nPin").checked=false;_aiStructured=null; if(fromAi){$("aiUrl").value="";$("aiPrompt").value="";say("aiMsg","ok","✅ Published & pushed.");} nLoad();} else say("nMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); })
       .catch(function(){say("nMsg","err","Sign in first.");});
   }
   function nSync(){ say("nMsg","","Running sync…"); api("/api/updates/sync",{method:"POST"}).then(function(x){ if(x.s===200&&x.d.ok!==false){say("nMsg","ok","✅ new="+(x.d.new||0)+" updated="+(x.d.updated||0)+" unchanged="+(x.d.unchanged||0));nLoad();} else say("nMsg","err","Failed: "+(x.d.error||x.s)); }); }
   function nDel(id){ if(!confirm("Delete this notification?"))return; api("/api/updates/"+encodeURIComponent(id),{method:"DELETE"}).then(nLoad); }
   function nLoad(){ var el=$("nList"); el.innerHTML='<div class="hint">Loading…</div>';
     fetch("/api/updates").then(function(r){return r.json();}).then(function(j){ var items=(j&&j.items)||[]; if(!items.length){el.innerHTML='<div class="hint">No notifications yet.</div>';return;}
-      el.innerHTML=items.map(function(it){return '<div class="item"><div class="h"><span class="cat">'+esc(it.category||"general")+'</span>'+(it.importance==="high"?'<span class="st pending">Important</span>':'')+(it.auto?'<span class="hint">auto</span>':'')+'<span class="t">'+esc(when(it.ts))+'</span></div><div class="title">'+esc(it.title)+'</div>'+(it.body?'<div class="body">'+esc(it.body)+'</div>':'')+'<div class="foot">'+(it.url?'<a href="'+esc(it.url)+'" target="_blank" rel="noopener">source ↗</a>':'')+'<button class="del" data-del="'+esc(it.id)+'" style="margin-left:auto">Delete</button></div></div>';}).join("");
+      el.innerHTML=items.map(function(it){return '<div class="item"><div class="h"><span class="cat">'+esc(it.type||it.category||"general")+'</span>'+(it.workspace?'<span class="hint">'+esc(it.workspace)+'</span>':'')+(it.importance==="high"||it.importance==="critical"?'<span class="st pending">'+esc(it.importance)+'</span>':'')+(it.auto?'<span class="hint">auto</span>':'<span class="hint">manual</span>')+'<span class="t">'+esc(when(it.ts))+'</span></div><div class="title">'+esc(it.title)+'</div>'+(it.body?'<div class="body">'+esc(it.body)+'</div>':'')+'<div class="foot">'+(it.url?'<a href="'+esc(it.url)+'" target="_blank" rel="noopener">source ↗</a>':'')+'<button class="del" data-del="'+esc(it.id)+'" style="margin-left:auto">Delete</button></div></div>';}).join("");
       el.querySelectorAll("[data-del]").forEach(function(b){b.onclick=function(){nDel(b.getAttribute("data-del"));};});
     }).catch(function(){el.innerHTML='<div class="hint">Could not load.</div>';});
   }
-  $("nPub").onclick=nPublish; $("nSync").onclick=nSync; $("nReload").onclick=nLoad;
+  $("nPub").onclick=function(){nPublish(false);}; $("nSync").onclick=nSync; $("nReload").onclick=nLoad;
 
   // ---- Verifications ----
   $("vFilters").addEventListener("click",function(e){var b=e.target.closest("[data-f]");if(!b)return;vFilter=b.getAttribute("data-f");Array.prototype.forEach.call($("vFilters").children,function(p){p.classList.toggle("on",p===b);});vLoad();});
-  function vAct(path,uid,extra){ api("/api/verifications/"+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.assign({uid:uid},extra||{}))}).then(function(x){ if(x.s===200&&x.d.ok){say("vMsg","ok","✅ "+path+" · "+uid);vLoad();} else say("vMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); }); }
+  function vAct(path,uid,extra){ api("/api/verifications/"+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.assign({uid:uid},extra||{}))}).then(function(x){ if(x.s===200&&x.d.ok){say("vMsg","ok","✅ "+path+" · "+uid);vLoad();ovLoad();} else say("vMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); }); }
   function vLoad(){ var el=$("vList"); el.innerHTML='<div class="hint">Loading…</div>'; say("vMsg","","");
     api("/api/verifications?status="+encodeURIComponent(vFilter)).then(function(x){ if(x.s===401){el.innerHTML='<div class="hint">Your account isn\'t an approved owner.</div>';return;} var docs=(x.d&&x.d.doctors)||[]; if(!docs.length){el.innerHTML='<div class="hint">No '+esc(vFilter)+' verifications.</div>';return;}
       el.innerHTML=docs.map(function(d){var st=d.status||"unverified",reg=d.regNo||d.extractedRegNo||"—",nm=d.name||d.extractedName||"(name not read)"; return '<div class="item"><div class="h"><span class="st '+esc(st)+'">'+esc(st)+'</span>'+(d.reason?'<span class="hint">'+esc(d.reason)+'</span>':'')+(d.source?'<span class="hint">via '+esc(d.source)+'</span>':'')+'<span class="t">'+esc(when(d.verifiedAt||d.updatedAt))+'</span></div><div class="title">'+esc(nm)+'</div><div class="meta"><b>Reg:</b> '+esc(reg)+(d.council?' · '+esc(d.council):'')+'<br><b>Account:</b> '+esc(d.email||"—")+' · <code>'+esc(d.uid||"")+'</code></div><div class="foot">'+(st!=="verified"?'<button class="approve" data-ap="'+esc(d.uid)+'" data-reg="'+esc(reg)+'">✓ Approve</button>':'')+(st!=="rejected"?'<button class="reject" data-rj="'+esc(d.uid)+'">Reject</button>':'')+'</div></div>';}).join("");
@@ -255,30 +366,30 @@
   // ---- Crawl Logs ----
   function lLoad(){ var el=$("lList"); el.innerHTML='<div class="hint">Loading…</div>';
     api("/api/updates/crawl-logs?limit=200").then(function(x){ if(x.s===401){el.innerHTML='<div class="hint">Not an approved owner.</div>';return;} var logs=(x.d&&x.d.logs)||[]; if(!logs.length){el.innerHTML='<div class="hint">No crawl logs yet — run a sync from Medical Sources.</div>';return;}
-      var stc={unchanged:"unverified",new:"verified",updated:"verified",error:"rejected",skipped:"pending"};
+      var stc={unchanged:"unverified","new":"verified",updated:"verified",error:"rejected",skipped:"pending"};
       el.innerHTML=logs.map(function(g){ return '<div class="item"><div class="h"><span class="st '+(stc[g.status]||"unverified")+'">'+esc(g.status)+'</span><span class="cat">'+esc(g.source_id||"—")+'</span>'+(g.ai_used?'<span class="st pending">AI</span>':'')+'<span class="t">'+esc(when(g.ts))+'</span></div>'+(g.detail?'<div class="body">'+esc(g.detail)+'</div>':'')+'</div>'; }).join("");
     }).catch(function(){el.innerHTML='<div class="hint">Could not load.</div>';}); }
   $("lReload").onclick=lLoad;
   $("aiReload").onclick=aiLoad;
 
   // ---- refresh a pane's data when shown / on sign-in ----
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); }
 
   // ---- AI usage ----
-  function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line,#e5e5e0)"><span style="color:var(--slate,#5a7184)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }
+  function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mut)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }
   function aiLoad(){ say("aiMsg","","Loading…"); api("/api/ai/admin").then(function(r){
     if(r.s!==200||!r.d||r.d.enabled===false){ say("aiMsg","err", (r.d&&r.d.error)||"Unavailable (need owner login)."); $("aiBox").innerHTML=""; return; }
     say("aiMsg","","");
     var d=r.d, day=d.daily||{}, bt=d.byType||{}, cb=d.circuitBreaker||{};
     var types=Object.keys(bt).map(function(t){return aiRow(t, bt[t]);}).join("")||'<div class="hint">No calls yet today.</div>';
     $("aiBox").innerHTML=
-      '<div style="font:700 12px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--slate);margin:2px 0 6px">Today ('+esc(d.day||"")+')</div>'+
+      '<div style="font:700 12px var(--f);text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:2px 0 6px">Today ('+esc(d.day||"")+')</div>'+
       aiRow("Requests", day.requests||0)+aiRow("Tokens", (day.tokens||0).toLocaleString())+aiRow("Est. cost (INR)", "₹"+(day.estCostInr||0))+aiRow("Blocked", day.blocked||0)+aiRow("Circuit breaker", cb.status||"ok")+
-      '<div style="font:700 12px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--slate);margin:14px 0 6px">By type</div>'+types+
+      '<div style="font:700 12px var(--f);text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 6px">By type</div>'+types+
       '<div class="hint" style="margin-top:10px">Accounts today: '+(d.accountCount||0)+'</div>';
   }).catch(function(){ say("aiMsg","err","Failed to load."); }); }
 
-  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u){ var on=document.querySelector(".tab.on"); refresh(on?on.getAttribute("data-p"):"notif"); } }); }
+  if(auth){ auth.onAuthStateChanged(function(u){ signedInUI(u); if(u){ refresh(activePane); } }); }
   else { $("who").textContent="Firebase failed to load."; }
 })();
 </script>

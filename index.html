@@ -52,11 +52,11 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <!-- Antibiotic-engine UI restyle (presentation-only CSS layer, scoped to #dxOverlay/#dxMgmt/classic
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
-<link rel="stylesheet" href="/abx-wizard.css?v=gold432">
+<link rel="stylesheet" href="/abx-wizard.css?v=gold433">
 <script>try{var _aq=location.search||"";var _aon=!/[?&]abxui=0\b/.test(_aq)&&(/[?&]abxui=1\b/.test(_aq)||localStorage.getItem("smd_abx_ui")!=="0");if(_aon)document.documentElement.classList.add("abx-ui");}catch(e){}</script>
 <!-- Antibiotic-engine design CHROME layer (additive, presentation-only): Material Symbols icons,
      ICMR policy banner, segmented Simple/Advanced. Gated by html.abx-ui; touches no engine logic. -->
-<script defer src="/abx-redesign.js?v=gold432"></script>
+<script defer src="/abx-redesign.js?v=gold433"></script>
 <!-- 5-step guided wizard (Vitals→Systems→Differential→Decision→Plan): owns #abxWizard, wired to
      the real engine (FIELD_GROUPS + SMD_REASON.assess + DX_MGMT). Start Case opens it. Flag-gated. -->
 <script defer src="/abx-wizard.js?v=gold432"></script>
@@ -861,7 +861,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
               <span class="ctp-avatar">MK</span>
               <span class="ctp-headtext">
                 <strong class="ctp-name">Dr. Manoj Kumar Kurmana</strong>
-                <span class="ctp-deg">MD Internal Medicine · Senior Resident, GIMSR</span>
+                <span class="ctp-deg">MD Internal Medicine · GIMSR</span>
               </span>
             </span>
 
@@ -870,61 +870,14 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
               Clinician, researcher, and builder. Trained across two of India's finest government institutions, published in PubMed, presented at ACC, and building open tools that make antimicrobial stewardship accessible to every doctor — not just the ones with access to expensive systems. Aspiring oncologist, with a particular interest in cancer-related infections and supportive care. Believes good medicine starts with the right question, not the right drug.
             </span>
 
-            <!-- Education -->
-            <span class="ctp-section">🎓 Education</span>
-            <span class="ctp-edu-row">
-              <span class="ctp-edu-badge">MBBS</span>
-              <span>Andhra Medical College, Visakhapatnam<br><span class="ctp-dim">Dr. NTR University · 2014–2020</span></span>
-            </span>
-            <span class="ctp-edu-row">
-              <span class="ctp-edu-badge">MD</span>
-              <span>Govt JLN Medical College, Ajmer<br><span class="ctp-dim">Rajasthan University of Health Sciences · 2022–2025</span></span>
-            </span>
-
-            <!-- PubMed publications -->
-            <span class="ctp-section">🔬 PubMed Publications</span>
-            <a class="ctp-pub" href="https://pubmed.ncbi.nlm.nih.gov/40959673" target="_blank" rel="noopener">
-              <span class="ctp-pub-badge">PMID 40959673</span>
-              <span class="ctp-pub-text">Prognostic utility of PT-INR, IL-6 &amp; HDL in severe sepsis<br><span class="ctp-dim">Cureus · 2025</span></span>
-            </a>
-            <a class="ctp-pub" href="https://pubmed.ncbi.nlm.nih.gov/39105028" target="_blank" rel="noopener">
-              <span class="ctp-pub-badge">PMID 39105028</span>
-              <span class="ctp-pub-text">Rhabdomyolysis, AKI &amp; compartment syndrome after wasp sting<br><span class="ctp-dim">Cureus · 2024</span></span>
-            </a>
-
-            <!-- JACC Poster -->
-            <span class="ctp-section">🏛️ Conference · JACC 2026</span>
-            <span class="ctp-poster">
-              <span class="ctp-poster-badge">Moderated Poster</span>
-              <span class="ctp-poster-text">Single ventricle with AV discordance &amp; Cor Triatriatum<br><span class="ctp-dim">ACC.26 Annual Scientific Session · New Orleans</span><span class="ctp-jacc">Published in Journal of the American College of Cardiology (JACC) · Vol 87, Issue 13 · 2026</span></span>
-            </span>
-
-            <!-- Book -->
-            <span class="ctp-section">📖 Published Author</span>
-            <span class="ctp-book">
-              <span class="ctp-book-icon">📗</span>
-              <span>Approach to Urinary Retention<br><span class="ctp-dim">Ready Reckoner in Medicine · Jaypee Brothers · 2026 · ISBN 9789372027341</span></span>
-            </span>
-
-            <!-- Certifications row -->
-            <span class="ctp-section">🏅 Certifications</span>
-            <span class="ctp-cert-row">
-              <span class="ctp-cert">Stanford AMS 2026</span>
-              <span class="ctp-cert">ACLS</span>
-              <span class="ctp-cert">BLS</span>
-              <span class="ctp-cert">GCLP</span>
-              <span class="ctp-cert">GCP</span>
-            </span>
-
-            <!-- Recognition -->
-            <span class="ctp-section">🏆 Recognition</span>
-            <span class="ctp-line">Institutional Citation · Govt JLNMC Ajmer · 2024</span>
-            <span class="ctp-line">Dainik Bhaskar &amp; Navjyoti · Featured for clinical contributions</span>
-
             <!-- LinkedIn -->
             <a class="ctp-linkedin" href="https://www.linkedin.com/in/manoj-kumar-kurmana-5365882b7" target="_blank" rel="noopener">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
               linkedin.com/in/manoj-kumar-kurmana-5365882b7
+            </a>
+            <a class="ctp-linkedin" href="mailto:drmanojkurmana@gmail.com">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+              drmanojkurmana@gmail.com
             </a>
 
           </span>
@@ -1403,7 +1356,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/native-auth.js?v=gold363" defer></script>
 <script src="/policy.js?v=gold363" defer></script>
 <script src="/features.js?v=gold363" defer></script>
-<script src="/calculators.js?v=gold434" defer></script>
+<script src="/calculators.js?v=gold446" defer></script>
 <script src="/calc-links.js?v=gold400" defer></script>
 <script src="/icu-autoscores.js?v=gold403" defer></script>
 <script src="/drugs.js?v=gold363" defer></script>
@@ -1435,7 +1388,11 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold411" defer></script>
 <script src="/electrolytes.js?v=gold363" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/home.js?v=gold432" defer></script>
+<script src="/home.js?v=gold446" defer></script>
+<!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
+     SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
+     via window.SMD_SBR). Must load AFTER home.js. -->
+<script defer src="/sidebar-redesign.js?v=gold443"></script>
 <!-- Guided tour (SMD_TOUR): first-run interactive onboarding + one-time contextual tips.
      Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
      home.js + account.js so it can read the home DOM and the signed-in account. -->
@@ -1446,7 +1403,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/haptics.js?v=gold348" defer></script>
 <script src="/antibiogram.js?v=gold388" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
-<script src="/swipe-back.js?v=gold363" defer></script>
+<script src="/swipe-back.js?v=gold439" defer></script>
 <script src="/workspaces.js?v=gold363" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
@@ -1458,11 +1415,11 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=gold411" defer></script>
+<script src="/icu.js?v=gold445" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
-<script src="/icu-collab.js?v=gold402" defer></script>
+<script src="/icu-collab.js?v=gold440" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
 <script src="/native-push.js?v=gold363" defer></script>
@@ -1499,7 +1456,11 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold412"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold442"; document.body.appendChild(s); }
+    // Auto-fetch (device-local, opt-in): keeps a linked Ward Sync patient's reports fresh on
+    // launch/resume. Depends on window.GHIS above, so loaded right after it. Flag-gated with GHIS
+    // itself — meaningless without Ward Sync. Consent + toggle live entirely in autofetch.js.
+    if (!document.getElementById("smd-autofetch-script")) { var af = document.createElement("script"); af.id = "smd-autofetch-script"; af.src = "/autofetch.js?v=gold440"; document.body.appendChild(af); }
     ghisHideFab(); ghisWrapSB(); ghisSidebarItem();
     [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { ghisWrapSB(); ghisSidebarItem(); }, ms); });
   }

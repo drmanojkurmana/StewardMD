@@ -32,7 +32,7 @@
 
   /* -------------------------------------------------- the data model shape */
   var DEFAULT_STATE = {
-    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "" },
+    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "", mrn: "", doctor: "", dept: "" },
     vitals: [],                 // [{ ts, hr, sbp, dbp, map, rr, spo2, temp, uop, lactate, cvp, etco2, gcs }]
     labs: { recent: {}, trends: [] },  // recent: { na,k,cl,hco3,ca,mg,po4,glu,creat,alb,wbc,hb,plt,inr,ferritin,trig,fibrinogen,... }
     abg: {},                    // { ts, ph, paco2, pao2, hco3, fio2, lactate, be }
@@ -49,6 +49,7 @@
     src: {},                    // per-field provenance: { <field>: { source, ts } } source ∈ Ward Sync|Imported report|Manual
     wardSync: { connected: false, lastTs: null, newUpdate: false, patientId: null },
     conflicts: [],              // [{ key, label, ward, manual, wardTs, manualTs }] — clinician resolves
+    manualScores: {},           // { <scoreId>: { value, unit, info, ts } } — results the clinician computed in the full calculator; shown on the Scores panel + persisted with the case
     meta: { updated: null }
   };
   var LS_KEY = "stewardmd_icu_state";                       // legacy (unscoped) key — migrated once
@@ -294,8 +295,10 @@
     try {
       var q = (location.search.match(/[?&]icugroups=([^&]+)/) || [])[1];
       if (q != null) return q === "1" || q === "on" || q === "true";
-      return localStorage.getItem("smd_icu_groups") === "1";
-    } catch (e) { return false; }
+      // Default ON: shared-unit mode is the primary ICU experience now. Only an explicit "0"
+      // (user chose solo in Settings) turns it off.
+      return localStorage.getItem("smd_icu_groups") !== "0";
+    } catch (e) { return true; }
   }
   function groupsApi() { try { return (typeof window !== "undefined" && window.SMD_ICU_GROUPS) || null; } catch (e) { return null; } }
   function groupMode() { return icuV2On() && icuGroupsOn() && !!groupsApi(); }
@@ -568,6 +571,33 @@
     try { ctxLoadBuffer(); } catch (e) {}
     _screen = "board"; _active = "overview"; _ws = "overview"; _wsLast = {};
   }
+  // Flat list of switchable units for the "Adding to" bar in Ward Sync (and any quick switcher).
+  // Group mode → the user's shared units per category; solo → the fixed types per category.
+  function unitList() {
+    var out = [];
+    UNIT_CATS.forEach(function (c) {
+      if (groupMode()) {
+        (_grpList || []).filter(function (g) { return (g.kind || "icu") === c.cat; }).forEach(function (g) {
+          out.push({ key: "g:" + g.id, cat: c.cat, label: (g.name || c.label) + (g.hospital ? " · " + g.hospital : ""), active: grpActive() && _grp && _grp.id === g.id });
+        });
+      } else {
+        c.types.forEach(function (tp) { out.push({ key: "s:" + c.cat + ":" + tp, cat: c.cat, label: tp, active: _unit.cat === c.cat && _unit.type === tp }); });
+      }
+    });
+    return out;
+  }
+  // Switch the active unit by an opaque key from unitList() WITHOUT opening/navigating the dashboard
+  // (used by Ward Sync's "Adding to" bar so a tick files the patient into the chosen unit).
+  function selectUnitByKey(key) {
+    if (!key) return;
+    if (key.indexOf("g:") === 0) { var id = key.slice(2); var g = (_grpList || []).filter(function (x) { return x.id === id; })[0]; if (g) grpSelect(g, true); }
+    else if (key.indexOf("s:") === 0) { var p = key.slice(2).split(":"); selectUnit({ cat: p[0], type: decodeURIComponent(p[1] || "") }); }
+    try { if (ICU.isOpen()) paint(); } catch (e) {}
+  }
+  function currentUnitLabel() {
+    if (grpActive() && _grp) return (_grp.name || ctxLabel()) + (_grp.hospital ? " · " + _grp.hospital : "");
+    return (_unit.type || ctxLabel()) + (_unit.hospital ? " · " + _unit.hospital : "");
+  }
   // BUG C1 (cross-patient contamination): ingestFromWard/ingestWardHistory MERGE into live STATE
   // (their contract is "callers reset/select the patient before syncing"). Loading a DIFFERENT
   // ward patient must therefore start clean, or the previous patient's weight/infusions/vitals/
@@ -688,6 +718,55 @@
     return { reports: tsList.length, points: pts, keys: Object.keys(keysSeen), conflicts: conflicts.length };
   }
 
+  // Build a COMPLETE patient state snapshot from a Ward-Sync bundle as a PURE object — never touches
+  // the live STATE (so multi-add via the Ward Sync tick-boxes can't clobber the open patient). Uses
+  // the same pure mappers as ingestWardHistory (mapWardLab + wardToSI + parseWardDate).
+  function buildWardState(bundle) {
+    bundle = bundle || {};
+    var st = clone(DEFAULT_STATE), src = bundle.source || "Ward Sync";
+    var p = bundle.patient || {};
+    Object.keys(p).forEach(function (k) { if (k in st.patient) st.patient[k] = p[k]; });
+    var byTs = {}, tsList = [];
+    (bundle.labs || []).forEach(function (t) {
+      var key = mapWardLab(t.test); if (!key) return;
+      var v = parseFloat(t.result); if (isNaN(v)) return;
+      v = wardToSI(key, v, t.units);
+      var ts = parseWardDate(t.date) || bundle.ts || nowTs();
+      if (!byTs[ts]) { byTs[ts] = {}; tsList.push(ts); }
+      byTs[ts][key] = v;   // last row wins within one report timestamp
+    });
+    tsList.sort(function (a, b) { return a - b; });   // oldest → newest so recent = the last write
+    tsList.forEach(function (ts) {
+      var rec = byTs[ts]; st.labs.trends.push(Object.assign({ ts: ts }, rec));
+      Object.keys(rec).forEach(function (k) { st.labs.recent[k] = rec[k]; st.src[k] = { source: src, ts: ts }; });
+    });
+    st.wardSync = { connected: true, lastTs: nowTs(), newUpdate: false, patientId: bundle.patientId || null };
+    st.meta = { updated: nowTs() };
+    return st;
+  }
+  // Add a Ward-Sync patient to the CURRENTLY-SELECTED unit's board WITHOUT navigating away (supports
+  // ticking several in a row). Group unit → upsert into the shared Firestore unit; solo unit → the
+  // local unit-scoped roster. Deduped by the ward patientId so re-ticking updates, not duplicates.
+  // Returns a Promise. Never disturbs the currently-open live patient (buildWardState is pure).
+  function addWardPatientToRoster(bundle) {
+    var st = buildWardState(bundle), wardId = (st.wardSync && st.wardSync.patientId) || null;
+    if (grpActive() && _grp && _grp.id) {
+      var api = groupsApi(), pid = "w_" + (wardId || nowTs());
+      st.patient._id = pid;
+      if (api && api.upsertPatient) return api.upsertPatient(_grp.id, pid, st, "Added from Ward Sync");
+      return Promise.reject(new Error("group-api-unavailable"));
+    }
+    var id = "pw_" + (wardId || nowTs());
+    st.patient._id = id;
+    var entry = { id: id, name: st.patient.name || "Unnamed", dx: st.patient.diagnosis || "", bed: st.patient.bed || "", mrn: st.patient.mrn || "", savedAt: nowTs(), state: st };
+    var r = loadRoster(), found = false, i;
+    for (i = 0; i < r.length; i++) { if (r[i].id === id) { r[i] = entry; found = true; break; } }
+    if (!found) r.push(entry);
+    saveRoster(capTen(r));
+    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    return Promise.resolve(entry);
+  }
+
   /* ---------------------------------------------------------------- styles */
   function injectCSS() {
     if (document.getElementById("icu-css")) return;
@@ -736,6 +815,10 @@
       '.icu-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px calc(96px + env(safe-area-inset-bottom))}' +
       '.icu-wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px}' +
       '.icu-sec-lbl{font:800 11px var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:2px 2px -4px;display:flex;align-items:center;gap:7px}' +
+      // The -4px above compensates the .icu-wrap flex gap for a STANDALONE eyebrow above a card. But
+      // when an eyebrow is a card's own header (inside .icu-card) there is no flex gap, so it needs a
+      // real bottom gap before the card content instead of being pulled onto it.
+      '.icu-card .icu-sec-lbl{margin:0 0 9px}' +
       '.icu-sbar-head{margin-bottom:10px}' +
       '.icu-sbar{border-left:3px solid var(--border);background:var(--panel2);border-radius:10px;padding:11px 13px;margin-bottom:10px}' +
       '.icu-sbar-lbl{font:800 11px var(--font);letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}' +
@@ -758,6 +841,8 @@
       '.icu-vitals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}' +
       '@media (max-width:480px){.icu-vitals{grid-template-columns:repeat(3,1fr)}}' +
       '.icu-ward{font:700 12px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:0 0 8px}.icu-ward.on{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}' +
+      '.icu-ward-row{display:flex;align-items:center;gap:8px;margin:0 0 8px}.icu-ward-row .icu-ward{flex:1 1 auto;min-width:0;margin:0}' +
+      '.icu-ward-af{flex:0 0 auto;font:700 11px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 12px;cursor:pointer;white-space:nowrap}.icu-ward-af.on{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,var(--line));background:color-mix(in srgb,var(--ok) 10%,transparent)}' +
       '.icu-ward-new{font:700 12px var(--font);color:#1d4ed8;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:9px 12px;margin:0 0 8px;cursor:pointer}body.dark .icu-ward-new{background:#0a1a33;border-color:#1e3a8a;color:#93c5fd}' +
       '.icu-elyte-alerts{font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}' +
       '.icu-elyte-pill{font:700 11px var(--font);border:1.5px solid var(--muted);border-radius:999px;padding:2px 9px}' +
@@ -786,17 +871,18 @@
       '.icu-spark{width:100%;height:18px;display:block;margin-top:5px;color:var(--muted);opacity:.8}' +
       '.icu-vc.crit .icu-spark{color:var(--danger);opacity:1}.icu-vc.warn .icu-spark{color:var(--warn);opacity:1}.icu-vc.ok .icu-spark{color:var(--primary)}' +
       // generic card
-      '.icu-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:15px;box-shadow:var(--sh)}' +
+      '.icu-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:16px 16px 14px;box-shadow:var(--sh)}' +
       '.icu-score{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer}' +
       '.icu-score:last-of-type{border-bottom:0}' +
       '.icu-score-n{font:800 13px var(--font)}' +
       '.icu-score-v{font:800 13px var(--font);color:var(--primary)}' +
       '.icu-score-i{flex:1 1 100%;font:600 12px/1.45 var(--font);color:var(--muted)}' +
+      '.icu-score-calc{font:800 9px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent);border-radius:5px;padding:2px 6px;white-space:nowrap}' +
       '.icu-score.miss{opacity:.6;cursor:pointer}' +
       '.icu-score-need{font:600 12px var(--font);color:var(--muted);font-style:italic}' +
       '.icu-score-sug{margin-top:10px;font:600 12px/1.6 var(--font);color:var(--muted)}' +
       '.icu-score-chip{font:700 12px var(--font);padding:5px 10px;margin:2px;border:1px solid var(--border);border-radius:14px;background:var(--panel);color:var(--primary);cursor:pointer}' +
-      '.icu-card h3{font:800 16px var(--font);margin:0 0 4px}.icu-card p{font:500 13.5px/1.5 var(--font);color:var(--muted);margin:0}' +
+      '.icu-card h3{font:800 16px var(--font);margin:0 0 10px}.icu-card p{font:500 13.5px/1.55 var(--font);color:var(--muted);margin:0}' +
       // AI import grid
       '.icu-ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}' +
       '.icu-ai{background:var(--panel);border:1px dashed var(--border);border-radius:var(--r-sm);padding:13px;text-align:left;cursor:pointer;color:var(--ink);position:relative;transition:transform var(--ease),box-shadow var(--ease)}' +
@@ -805,13 +891,13 @@
       '.icu-badge{display:inline-block;font:800 9px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);border-radius:var(--r-pill);padding:2px 7px;margin-top:8px}' +
       '.icu-ai .man{display:inline-block;margin-top:8px;margin-left:6px;font:700 11px var(--font);color:var(--primary)}' +
       // alert / recommendation / protocol cards
-      '.icu-alert{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--border);border-left-width:4px;border-radius:var(--r-sm);padding:11px 13px;background:var(--panel);margin-bottom:6px}' +
+      '.icu-alert{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--border);border-left-width:4px;border-radius:var(--r-sm);padding:12px 15px;background:var(--panel);margin-bottom:8px}' +
       '.icu-alert-grp{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:10px 0 4px}.icu-alert-grp:first-child{margin-top:0}' +
       '.icu-alert.crit{border-left-color:var(--danger);background:var(--danger-soft)}' +
       '.icu-alert.warn{border-left-color:var(--warn);background:var(--warn-soft)}' +
       '.icu-alert .at{font:700 13.5px var(--font)}.icu-alert .am{font:500 12.5px/1.45 var(--font);color:var(--muted);margin-top:1px}' +
       '.icu-alert .ax{margin-left:auto;font:700 9px var(--font);text-transform:uppercase;color:var(--muted)}' +
-      '.icu-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);font:500 13.5px var(--font)}.icu-row:last-child{border-bottom:none}.icu-row b{font-weight:700}' +
+      '.icu-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font:500 13.5px/1.45 var(--font)}.icu-row:last-child{border-bottom:none}.icu-row b{font-weight:700}' +
       '.icu-ev{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.icu-ev span{font:700 10px var(--font);color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px}' +
       '.icu-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:none;border-radius:var(--r-sm);background:linear-gradient(135deg,var(--primary3),var(--primary) 60%,var(--primary2));color:#fff;font:800 14px var(--font);padding:13px;cursor:pointer;box-shadow:var(--sh);margin-top:12px;transition:filter var(--ease),transform var(--ease)}.icu-btn:active{transform:scale(.985)}.icu-btn:hover{filter:brightness(1.05)}' +
       '.icu-btn.ghost{background:none;border:1px solid var(--border);color:var(--primary);box-shadow:none}' +
@@ -1010,8 +1096,9 @@
       '#icuRoot.icu-v2 .icu-banner{display:none}' +
       // top tabs (solid segmented control)
       '#icuRoot.icu-v2 .icu-v2-tabwrap{flex:0 0 auto;background:var(--panel);border-bottom:1px solid var(--border);padding:10px 12px}' +
-      '#icuRoot.icu-v2 .icu-v2-tabs{display:flex;gap:3px;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:4px}' +
-      '#icuRoot.icu-v2 .icu-v2-tab{flex:1 1 0;min-width:0;min-height:44px;display:flex;align-items:center;justify-content:center;white-space:nowrap;border:none;background:none;color:var(--muted);border-radius:9px;font:700 12px var(--font);padding:9px 2px;cursor:pointer}' +
+      '#icuRoot.icu-v2 .icu-v2-tabs{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:4px}' +
+      '#icuRoot.icu-v2 .icu-v2-tabs::-webkit-scrollbar{display:none}' +
+      '#icuRoot.icu-v2 .icu-v2-tab{flex:0 0 auto;min-height:40px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border:none;background:none;color:var(--muted);border-radius:9px;font:700 12.5px var(--font);padding:8px 14px;cursor:pointer}' +
       '#icuRoot.icu-v2 .icu-v2-tab.on{background:var(--primary);color:#fff;box-shadow:0 1px 3px rgba(15,118,110,.35)}' +
       // patient banner (acuity-coloured, white text)
       '#icuRoot.icu-v2 .icu-v2-banner{flex:0 0 auto;color:#fff;padding:calc(10px + env(safe-area-inset-top)) 14px 12px;background:var(--primary)}' +
@@ -1109,7 +1196,7 @@
       '#icuRoot.icu-v2 .icu-v2-sback{flex:0 0 auto;width:44px;height:44px;border-radius:11px;border:none;background:rgba(255,255,255,.16);color:#fff;font-size:18px;cursor:pointer}' +
       '#icuRoot.icu-v2 .icu-v2-shead-h{font:700 16px var(--font)}#icuRoot.icu-v2 .icu-v2-shead-s{font:500 12px var(--font);color:rgba(255,255,255,.82)}' +
       '#icuRoot.icu-v2 .icu-v2-slist,#icuRoot.icu-v2 .icu-v2-tlist{padding:14px 16px;display:flex;flex-direction:column;gap:9px}' +
-      '#icuRoot.icu-v2 .icu-v2-note{font:600 12px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:10px 12px;line-height:1.5}#icuRoot.icu-v2 .icu-v2-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}' +
+      '#icuRoot.icu-v2 .icu-v2-note{font:600 12.5px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;line-height:1.55;margin:8px 0}#icuRoot.icu-v2 .icu-v2-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}' +
       '#icuRoot.icu-v2 .icu-v2-note-x{flex:0 0 auto;background:none;border:none;color:inherit;font:700 13px var(--font);cursor:pointer;padding:0 2px;line-height:1;opacity:.7}#icuRoot.icu-v2 .icu-v2-note-x:hover{opacity:1}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:14px;padding:13px 14px;cursor:pointer}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-alert-row.review{border-left-color:var(--warn)}' +
@@ -1196,10 +1283,18 @@
       '#icuRoot.icu-v2 .icu-v2-tlfull{max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
       '#icuRoot.icu-v2 .icu-v2-obchip.on .icu-v2-obrole{color:var(--primary);opacity:.8}' +
       /* task priority badge + overdue chip in the Instructions panel */
-      '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:800 10px var(--font);color:#fff;border-radius:6px;padding:2px 6px;letter-spacing:.02em;vertical-align:middle}' +
-      '#icuRoot.icu-v2 .icu-v2-due{font:700 11px var(--font);color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:700 10px var(--font);color:#fff;border-radius:999px;padding:3px 9px;letter-spacing:.03em;vertical-align:middle}' +
+      '#icuRoot.icu-v2 .icu-v2-due{font:600 11.5px/1.5 var(--font);color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-due.over{color:var(--danger)}' +
-      '#icuRoot.icu-v2 .icu-v2-taskexpl{font:600 11.5px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:6px 8px;margin-top:4px}' +
+      '#icuRoot.icu-v2 .icu-v2-taskexpl{font:600 11.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin-top:6px}' +
+      // Rounds/notifications breathing room (2026-07): a calm eyebrow -> title -> list rhythm. Scoped
+      // to .icu-v2-collab so the app-wide .icu-sec-lbl/.icu-card/.icu-row base rules are untouched.
+      '#icuRoot.icu-v2 .icu-v2-collab .icu-sec-lbl{margin:16px 2px 10px}' +
+      '#icuRoot.icu-v2 .icu-v2-collab .icu-card{padding:16px 16px 4px}' +
+      '#icuRoot.icu-v2 .icu-v2-collab .icu-card h3{font-size:15px;margin:0 0 12px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px}' +
+      '#icuRoot.icu-v2 .icu-v2-collab .icu-card h3 .icu-phase{margin-left:0}' +
+      '#icuRoot.icu-v2 .icu-v2-collab .icu-row{padding:13px 0;gap:12px;align-items:flex-start;font-size:14px;line-height:1.45}' +
+      '#icuRoot.icu-v2 .icu-v2-addround{margin:2px 0 16px;padding:13px}' +
       '#icuRoot.icu-v2 .icu-v2-rcustom{display:flex;gap:8px;align-items:center}' +
       '#icuRoot.icu-v2 .icu-v2-rcustom input{flex:1;min-width:0;border:1px solid var(--border);border-radius:10px;padding:11px 12px;font:600 14px var(--font);color:var(--ink);background:var(--panel2)}' +
       '#icuRoot.icu-v2 .icu-v2-rcustom .icu-btn{width:auto;flex:0 0 auto;margin-top:0;padding:0 16px;min-height:44px}' +
@@ -2441,13 +2536,13 @@
     { id: "overview", label: "Overview", svg: "pulse", members: ["overview", "rounds"] },
     { id: "monitoring", label: "Monitoring", svg: "heart", members: ["vitals", "trends", "hemo", "fluids", "lytes", "abg", "vent", "infusions"] },
     { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "treatment", "protocols", "goals", "interactions"] },
-    { id: "documents", label: "Documents", svg: "copy", members: ["documents", "imaging", "handover", "discharge"] },
-    { id: "more", label: "More", svg: "more", members: ["more"] }
+    { id: "documents", label: "Records", svg: "copy", members: ["documents", "imaging", "handover", "discharge", "more"] }
   ];
   var MEMBER = {}; TABS.forEach(function (t) { MEMBER[t.id] = { label: t.label, svg: t.svg, ic: t.ic }; });
   MEMBER.dx = { label: "Diagnosis", svg: "search", ic: "🩺" };
   MEMBER.imaging = { label: "Imaging", svg: "camera", ic: "🩻" };
   MEMBER.documents = { label: "Summary", svg: "copy", ic: "📄" };        // Documents sub-tab 1 — "Summary" (design docTabs order: Summary·Imaging·Handover·Discharge)
+  MEMBER.more = { label: "Tools", svg: "more", ic: "🛠" };               // Records sub-tab — patient tools/settings (merged former "More" tab)
   MEMBER.vitals = { label: "Vitals", svg: "pulse", ic: "❤️" };          // Monitoring sub-tab — Live Patient Status grid
   MEMBER.interactions = { label: "Interactions", svg: "warn", ic: "⚠️" }; // Care Plan sub-tab — drug interactions
   MEMBER.handover = { label: "Handover", svg: "copy", ic: "⇄" };        // Documents sub-tab — SBAR shift handover
@@ -2621,21 +2716,41 @@
     try { var arr = (window.MEDCALC && MEDCALC._calcs) || []; for (var i = 0; i < arr.length; i++) if (arr[i].id === id) return arr[i].title; } catch (e) {}
     return id;
   }
+  // Store a score result the clinician computed in the full calculator (MEDCALC) back onto the
+  // patient, so it shows on the Scores panel + persists with the case. Scalar (out.v) results only;
+  // html/err results are ignored. Passed as MEDCALC.open's onResult (fires on an explicit Calculate).
+  function icuStoreCalcResult(id, out) {
+    if (!id || !out || out.err || out.v == null) return;
+    if (!STATE.manualScores) STATE.manualScores = {};
+    var info = (typeof out.i === "string") ? out.i.replace(/<[^>]*>/g, "") : "";
+    STATE.manualScores[id] = { value: String(out.v), unit: out.u || "", info: info, ts: nowTs() };
+    try { recompute(_raw); } catch (e) {}
+    try { paint(); } catch (e) {}
+  }
   function renderScoresPanel() {
     var rows = _raw.scores || [];
+    var ms = _raw.manualScores || {};
     var dx = (_raw.patient && (_raw.patient.workingDx || _raw.patient.diagnosis)) || "";
     var linkIds = (window.CALC_LINKS && dx) ? CALC_LINKS.forText(dx) : [];
     var done = {}; rows.forEach(function (r) { done[r.id] = 1; });
-    var suggest = linkIds.filter(function (id) { return !done[id]; });
-    if (!rows.length && !suggest.length) return "";
+    var manualExtra = Object.keys(ms).filter(function (id) { return !done[id]; });   // clinician-calculated, not auto-computed (e.g. from a suggested chip)
+    var suggest = linkIds.filter(function (id) { return !done[id] && !ms[id]; });
+    if (!rows.length && !suggest.length && !manualExtra.length) return "";
+    var badge = ' <span class="icu-score-calc">✓ calculated</span>';
+    var scoreRow = function (id, label, val, unit, info, manual) {
+      return '<div class="icu-score" data-icu-act="calc:' + esc(id) + '"><span class="icu-score-n">' + esc(label) + '</span><span class="icu-score-v">' + esc(val + (unit ? " " + unit : "")) + '</span>' + (manual ? badge : "") + (info ? '<span class="icu-score-i">' + esc(info) + '</span>' : "") + '</div>';
+    };
     var body = rows.map(function (r) {
-      if (r.missing) return '<div class="icu-score miss" data-icu-act="calc:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-need">needs: ' + esc(r.missing.join(", ")) + '</span></div>';
+      var m = ms[r.id];
+      if (r.missing && !m) return '<div class="icu-score miss" data-icu-act="calc:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-need">needs: ' + esc(r.missing.join(", ")) + '</span></div>';
+      if (m) return scoreRow(r.id, r.label, m.value, m.unit, m.info, true);
       var iv = r.interp ? String(r.interp).replace(/<[^>]*>/g, "") : "";
-      return '<div class="icu-score" data-icu-act="calc:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-v">' + esc(String(r.value) + (r.unit ? " " + r.unit : "")) + '</span>' + (iv ? '<span class="icu-score-i">' + esc(iv) + '</span>' : "") + '</div>';
+      return scoreRow(r.id, r.label, String(r.value), r.unit || "", iv, false);
     }).join("");
+    body += manualExtra.map(function (id) { var m = ms[id]; return scoreRow(id, scoreCalcTitle(id), m.value, m.unit, m.info, true); }).join("");
     var sug = suggest.length ? '<div class="icu-score-sug">Suggested for “' + esc(dx) + '”: ' + suggest.map(function (id) { return '<button type="button" class="icu-score-chip" data-icu-act="calc:' + esc(id) + '">' + esc(scoreCalcTitle(id)) + '</button>'; }).join(" ") + '</div>' : "";
     return '<div class="icu-sec-lbl">📊 Scores</div><div class="icu-card">' + body + sug +
-      '<p class="icu-doc-sub" style="margin:8px 0 0">Auto-calculated from entered data — tap any score to open the full calculator and confirm. Decision-support only.</p></div>';
+      '<p class="icu-doc-sub" style="margin:8px 0 0">Auto-calculated from entered data — tap any score to open the full calculator; your calculated results are saved here. Decision-support only.</p></div>';
   }
 
   var RENDER = {
@@ -3038,32 +3153,22 @@
     },
     more: function () {
       var n = rosterCount();
-      // The ONE ICU toggle: solo (this device) vs shared Group mode. v2 is now the only ICU, so
-      // there is no longer a separate "new/classic" toggle — just this. Flips smd_icu_groups + reloads.
-      var grpOn = icuGroupsOn();
-      var grpCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Group mode</div>' +
-        '<p class="icu-doc-sub" style="margin:0 0 10px">' + (grpOn
-          ? "Group mode is ON — shared units. Tap to switch to solo ICU."
-          : "Solo ICU (this device). Tap to turn on shared units — invite your team, shared patients & round tasks.") + '</p>' +
-        '<button class="icu-btn' + (grpOn ? " ghost" : "") + '" data-icu-act="grptoggle">' + (grpOn
-          ? ico("refresh", "↩") + " Group mode ON — switch to solo ICU"
-          : ico("user", "👥") + " Turn on Group mode (shared units)") + '</button></div>';
-      // Every classic header-chip action folds in here (nothing lost): Patient details, Save/update,
-      // Saved patients, Ward Sync, Lab Watch (per-patient), Share case, and a guarded Clear.
-      return grpCard +
-        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("more", "⋯") + ' Patient &amp; tools</div>' +
+      // PATIENT-scoped tools ONLY. Unit/app settings (Group mode, notification preferences, test
+      // notification) now live on the unit Settings screen (bottom bar → Settings), so per-patient
+      // actions and app-level settings are no longer mixed. Grouped: this patient · library · danger.
+      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "🧑") + ' This patient</div>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Patient details</button>' +
         '<button class="icu-btn ghost" data-icu-act="savept">' + ico("save", "💾") + ' Save / update this patient</button>' +
-        '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients' + (n ? " (" + n + ")" : "") + '</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Ward Sync</button>' +
         (labWatchOn() ? '<button class="icu-btn ghost" data-icu-act="labwatch">' + ico("bell", "🔔") + ' Lab Watch' + (lwActive() ? " (watching)" : "") + '</button>' : "") +
-        '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share case</button>' +
-        "" /* classic coach link retired in v2 */ +
-        (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") +
+        '<button class="icu-btn ghost" data-icu-act="sharecase">' + ico("share", "📤") + ' Share case</button></div>' +
+        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("folder", "📋") + ' Library &amp; help</div>' +
+        '<button class="icu-btn ghost" data-icu-act="patients">' + ico("folder", "📋") + ' Saved patients' + (n ? " (" + n + ")" : "") + '</button>' +
+        (icuDxFlowOn() ? '<button class="icu-btn ghost" data-icu-act="dxtour">' + ico("pulse", "🧭") + ' Show ICU diagnosis tour</button>' : "") + '</div>' +
+        '<div class="icu-card" style="border-color:var(--danger)"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("warn", "⚠️") + ' Danger zone</div>' +
+        '<p class="icu-doc-sub" style="margin:0 0 10px">Affects only this patient — can\'t be undone.</p>' +
         '<button class="icu-btn ghost" data-icu-act="clearfindings">' + ico("trash", "🧹") + ' Clear current findings</button>' +
-        '<button class="icu-btn ghost" data-icu-act="tab:discharge">' + ico("rounds", "📝") + ' Discharge &amp; remove patient</button>' +
-        '</div>' +
-        '<button class="icu-btn ghost" data-icu-act="testpush" style="margin-top:8px">' + ico("bell", "🔔") + ' Send me a test notification</button>' +
+        '<button class="icu-btn ghost" data-icu-act="tab:discharge">' + ico("rounds", "📝") + ' Discharge &amp; remove patient</button></div>' +
         '<p class="icu-doc-sub" style="text-align:center;margin-top:16px;opacity:.55">StewardMD ICU · ' + esc(icuBuildVer() || "build") + '</p>';
     }
   };
@@ -3117,8 +3222,22 @@
     if (w.connected && w.lastTs) s = { c: "ok", t: "🟢 Ward Sync connected · synced " + fmtAgo(w.lastTs) };
     else if (loggedIn) s = { c: "muted", t: "Ward Sync · no ward data for this patient" };
     else s = { c: "muted", t: "Sign in to Ward Sync to auto-fill this patient", act: "wardsync" };
-    return '<div class="icu-ward' + (s.c === "ok" ? " on" : "") + '"' + (s.act ? ' data-icu-act="' + s.act + '" style="cursor:pointer"' : "") + '>' + s.t + "</div>" +
-      (w.newUpdate ? '<div class="icu-ward-new" data-icu-act="dismissupdate">🔵 New laboratory update detected — widgets refreshed. Tap to dismiss.</div>' : "");
+    // Auto-fetch control — sits ON the Ward Sync status bar for a linked patient. Tapping opens the
+    // consent/toggle sheet (turn on with device-secure creds · Refresh now · turn off). Only shown
+    // when Ward Sync is connected to a patient and the feature module is loaded.
+    var afCtl = "";
+    try {
+      var afPid = (w.patientId || (window.SMD_AUTOFETCH && SMD_AUTOFETCH.curWardPid && SMD_AUTOFETCH.curWardPid())) || "";
+      if (window.SMD_AUTOFETCH && SMD_AUTOFETCH.on && SMD_AUTOFETCH.on() && afPid) {
+        var afOn = SMD_AUTOFETCH.isEnabled(afPid);
+        afCtl = '<button class="icu-ward-af' + (afOn ? " on" : "") + '" data-icu-act="autofetch" aria-label="Auto-fetch reports setting">'
+          + (afOn ? '↻ Auto-sync: on' : '↻ Auto-sync: off') + '</button>';
+      }
+    } catch (e) {}
+    return '<div class="icu-ward-row">'
+      + '<div class="icu-ward' + (s.c === "ok" ? " on" : "") + '"' + (s.act ? ' data-icu-act="' + s.act + '" style="cursor:pointer"' : "") + '>' + s.t + "</div>"
+      + afCtl + '</div>'
+      + (w.newUpdate ? '<div class="icu-ward-new" data-icu-act="dismissupdate">🔵 New laboratory update detected — widgets refreshed. Tap to dismiss.</div>' : "");
   }
   // Ward-vs-manual conflicts (clinician resolves; never auto-overwritten).
   function renderConflicts() {
@@ -3339,8 +3458,11 @@
     var p = _raw.patient || {}, sev = v2Severity(_raw), snap = v2Snapshot(_raw);
     var meta = [];
     if (p.bed) meta.push("Bed " + esc(p.bed));
+    if (p.mrn) meta.push("MR " + esc(p.mrn));
     if (p.age != null) meta.push(esc(p.age) + (p.sex ? "/" + esc(p.sex) : ""));
     if (p.icuDay != null) meta.push("ICU day " + esc(p.icuDay));
+    if (p.dept) meta.push(esc(p.dept));
+    if (p.doctor) meta.push("Dr " + esc(p.doctor));
     if (p.diagnosis) meta.push(esc(p.diagnosis));
     var mv = [
       { k: "MAP", val: snap.map != null ? snap.map : "—" },
@@ -3376,7 +3498,7 @@
       { label: "Monitoring", act: "ws:monitoring", on: _ws === "monitoring" },
       { label: "Care Plan", act: "ws:careplan", on: _ws === "careplan" },
       { label: "Rounds", act: "tab:rounds", on: _active === "rounds", badge: openTasks },
-      { label: "Documents", act: "ws:documents", on: _ws === "documents" }
+      { label: "Records", act: "ws:documents", on: _ws === "documents" }
     ];
     return '<div class="icu-v2-tabwrap"><div class="icu-v2-tabs">' + tabs.map(function (t) {
       return '<button class="icu-v2-tab' + (t.on ? " on" : "") + '" data-icu-act="' + t.act + '">' + esc(t.label) + (t.badge ? '<span class="icu-v2-tabbadge">' + t.badge + '</span>' : "") + '</button>';
@@ -3403,35 +3525,33 @@
     if (_pickStep === "hospital") {
       var hosps = ["GIMSR", "My Hospital"]; if (hosp && hosps.indexOf(hosp) < 0) hosps.unshift(hosp);
       var hrows = hosps.map(function (h) { return unitCardHTML("unithosp:" + encodeURIComponent(h), ico("hospital", "🏥"), h, "", h === hosp); }).join("");
-      return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("close", "Select hospital", "Choose your hospital") +
+      return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("unitback", "Select hospital", "Choose your hospital") +
         '<div style="padding:14px 16px">' + hrows + '</div></div>';
     }
-    if (_pickStep === "category") {
-      var crows = UNIT_CATS.map(function (c) {
-        return unitCardHTML("unitcat:" + c.cat, ico(c.svg, c.ic), c.label, esc(c.sub) + ' · ' + c.types.length + ' units', false);
-      }).join("");
-      var sub = "Select ICU or Ward" + (hosp ? ' · <button class="icu-tip" data-icu-act="unithospchg" style="color:var(--primary)">change hospital</button>' : "");
-      return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("close", esc(hosp || "Choose a unit"), sub) +
-        '<div style="padding:14px 16px">' + crows + '</div></div>';
-    }
-    // units step
-    var cat = _pickCat || "icu", meta = unitCatMeta(cat), body;
-    if (groupMode()) {
-      var mine = (_grpList || []).filter(function (g) { return (g.kind || "icu") === cat; });
-      body = mine.length ? mine.map(function (g) {
-        var active = grpActive() && _grp && _grp.id === g.id;
-        return unitCardHTML("grpsel:" + encodeURIComponent(g.id), ico(meta.svg, meta.ic), g.name || meta.label,
-          esc(g.unitType || g.unit || meta.label) + (g.hospital ? ' · ' + esc(g.hospital) : ""), active);
-      }).join("") : '<div class="icu-empty" style="margin:6px 0 12px">' + (_grpList === null ? "Connecting to your shared units…" : "No shared " + esc(meta.label) + " units yet.") + '</div>';
-      body += '<button class="icu-btn" data-icu-act="unitgrpnew:' + cat + '">' + ico("plus", "＋") + ' Create a ' + esc(meta.label) + ' unit</button>';
-    } else {
-      body = meta.types.map(function (tp) {
-        var active = _unit.cat === cat && _unit.type === tp;
-        return unitCardHTML("unitsel:" + cat + ":" + encodeURIComponent(tp), ico(meta.svg, meta.ic), tp, "", active);
-      }).join("");
-    }
-    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("unitback", esc(meta.label) + (hosp ? " · " + esc(hosp) : ""), "Choose a unit") +
-      '<div style="padding:14px 16px">' + body + '</div></div>';
+    // Single grouped sheet: EVERY unit, sectioned ICU / Ward — one tap switches. Solo mode lists the
+    // fixed types; group mode lists the user's shared units of that category + a "＋ Create" option.
+    var sections = UNIT_CATS.map(function (c) {
+      var rows;
+      if (groupMode()) {
+        var mine = (_grpList || []).filter(function (g) { return (g.kind || "icu") === c.cat; });
+        rows = mine.map(function (g) {
+          var active = grpActive() && _grp && _grp.id === g.id;
+          return unitCardHTML("grpsel:" + encodeURIComponent(g.id), ico(c.svg, c.ic), g.name || c.label,
+            esc(g.unitType || g.unit || c.label) + (g.hospital ? ' · ' + esc(g.hospital) : ""), active);
+        }).join("");
+        if (!mine.length) rows = '<div class="icu-empty" style="margin:2px 0 10px">' + (_grpList === null ? "Connecting…" : "No shared " + esc(c.label) + " units yet.") + '</div>';
+        rows += '<button class="icu-btn ghost" data-icu-act="unitgrpnew:' + c.cat + '" style="margin-bottom:6px">' + ico("plus", "＋") + ' Create a ' + esc(c.label) + ' unit</button>';
+      } else {
+        rows = c.types.map(function (tp) {
+          var active = _unit.cat === c.cat && _unit.type === tp;
+          return unitCardHTML("unitsel:" + c.cat + ":" + encodeURIComponent(tp), ico(c.svg, c.ic), tp, "", active);
+        }).join("");
+      }
+      return '<div style="margin-bottom:6px"><div class="icu-sec-lbl" style="margin:4px 2px 8px">' + c.ic + ' ' + esc(c.label) + ' units</div>' + rows + '</div>';
+    }).join("");
+    var sub = (hosp ? esc(hosp) + ' · ' : "") + '<button class="icu-tip" data-icu-act="unithospchg" style="color:var(--primary)">change hospital</button>';
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("close", "Switch unit", sub) +
+      '<div style="padding:14px 16px">' + sections + '</div></div>';
   }
   function renderV2Board() {
     if (groupMode()) return renderV2BoardGroup();   // Phase 2: live Firestore unit (additive, gated)
@@ -3495,12 +3615,32 @@
       { k: "board", label: "Unit", al: "Unit board", act: "icuboard", svg: "list", em: "🏥" },
       { k: "alerts", label: "Alerts", al: "Alerts / notifications", act: "icualerts", svg: "bell", em: "🔔" },
       { k: "team", label: "Team", al: "Care team", act: "icuteam", svg: "user", em: "👥" },
-      { k: "more", label: "Settings", al: "Settings & tools", act: "icumore", svg: "sliders", em: "⚙" }
+      { k: "settings", label: "Settings", al: "Unit settings", act: "icusettings", svg: "sliders", em: "⚙" }
     ];
     return '<nav class="icu-v2-bottombar" aria-label="ICU navigation">' + items.map(function (it) {
-      var on = (it.k === "more") ? (_screen === "patient" && _active === "more") : (_screen === it.k);
+      var on = (_screen === it.k);
       return '<button class="icu-v2-navbtn' + (on ? " on" : "") + '" data-icu-act="' + it.act + '" aria-label="' + esc(it.al) + '"' + (on ? ' aria-current="page"' : '') + '><span class="icu-v2-navic">' + ico(it.svg, it.em) + '</span><span>' + it.label + '</span></button>';
     }).join("") + '<button class="icu-v2-navbtn icu-v2-admit" data-icu-act="icuadmit" aria-label="Admit patient"><span class="icu-v2-admit-ic">' + ico("plus", "＋") + '</span><span>Admit</span></button></nav>';
+  }
+  // Unit-level ICU settings — GLOBAL toggles only (Group mode + notifications), deliberately kept
+  // OUT of the per-patient More tab so patient actions and app settings aren't mixed. Reached from
+  // the bottom bar → Settings; works with or without a patient open.
+  function renderV2Settings() {
+    var grpOn = icuGroupsOn();
+    var grpCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Group mode</div>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">' + (grpOn
+        ? "Group mode is ON — shared units with your team: shared patients, round tasks and alerts. Tap to switch to solo ICU on this device."
+        : "Solo ICU (this device only). Tap to turn on shared units — invite your team, shared patients & round tasks.") + '</p>' +
+      '<button class="icu-btn' + (grpOn ? " ghost" : "") + '" data-icu-act="grptoggle">' + (grpOn
+        ? ico("refresh", "↩") + " Switch to solo ICU"
+        : ico("user", "👥") + " Turn on Group mode") + '</button></div>';
+    var notifCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Notifications</div>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">Choose which unit alerts reach you, and check that push is working on this device.</p>' +
+      (grpActive() ? '<button class="icu-btn ghost" data-icu-act="notifprefs">' + ico("settings", "⚙️") + ' Notification preferences</button>' : "") +
+      '<button class="icu-btn ghost" data-icu-act="testpush"' + (grpActive() ? ' style="margin-top:8px"' : '') + '>' + ico("bell", "🔔") + ' Send me a test notification</button></div>';
+    var ver = '<p class="icu-doc-sub" style="text-align:center;margin:2px 0 0;opacity:.55">StewardMD ICU · ' + esc(icuBuildVer() || "build") + '</p>';
+    var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Settings</div><div class="icu-v2-shead-s">Unit &amp; notifications</div></div></div>';
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-slist">' + grpCard + notifCard + ver + '</div></div>';
   }
   // Notifications — deterministic acuity across the roster (local in Phase 1; the LIVE shared unit
   // in group mode). Real event-stream notifications land in a later phase.
@@ -3546,6 +3686,46 @@
     var api = groupsApi(); if (api && api.roleLabel) { try { return api.roleLabel(r); } catch (e) {} }
     var M = { head: "Unit Head", professor: "Professor", assistant: "Assistant Professor", senior_resident: "Senior Resident", junior_resident: "Junior Resident", intern: "Intern" };
     return M[r] || (r ? String(r) : "Member");
+  }
+  // ---- Clinical designations (display TITLE decoupled from permission role) --------------------
+  // A member's shown title = head-assigned designation (Consultant 1 / Head Nurse / custom …) if
+  // set, else the permission-role label. The designation maps to one of the 6 enforced ROLES,
+  // which stays the permission primitive (canInstruct / admin / firestore.rules).
+  function grpDisplayTitle(m) { return (m && m.designation) || grpRoleLabel(m && m.role); }
+  function grpDesignations() {
+    var api = groupsApi(); if (api && api.DESIGNATIONS) return api.DESIGNATIONS;
+    return [
+      { label: "Consultant 1", role: "professor" }, { label: "Consultant 2", role: "professor" },
+      { label: "Consultant 3", role: "professor" }, { label: "Consultant 4", role: "professor" },
+      { label: "Consultant 5", role: "professor" }, { label: "Consultant 6", role: "professor" },
+      { label: "Associate Professor", role: "professor" }, { label: "Assistant Professor", role: "assistant" },
+      { label: "Senior Resident", role: "senior_resident" }, { label: "Junior Resident", role: "junior_resident" },
+      { label: "Intern", role: "intern" }, { label: "Head Nurse", role: "junior_resident" }
+    ];
+  }
+  function grpRoleForDesignation(label) {
+    var api = groupsApi(); if (api && api.roleForDesignation) { try { var r = api.roleForDesignation(label); if (r) return r; } catch (e) {} }
+    var d = grpDesignations().filter(function (x) { return x.label === label; })[0]; return d ? d.role : null;
+  }
+  function grpChecked(sel) { try { var el = modalEl && modalEl.querySelector(sel); return !!(el && el.checked); } catch (e) { return false; } }
+  // Shared designation picker fields for the add-member + change-title sheets. Presets mapping to
+  // 'professor' (Consultant*/Associate Professor) show only to the head (granting professor is
+  // head-only in the rules). A non-empty custom title overrides the dropdown on submit.
+  function grpDesigFieldsHTML(cur) {
+    var iAmHead = (_grp && _grp.myRole) === "head";
+    var list = grpDesignations().filter(function (d) { return d.role !== "professor" || iAmHead; });
+    var sel = cur || "Junior Resident";
+    var opts = list.map(function (d) { return '<option value="' + esc(d.label) + '"' + (d.label === sel ? " selected" : "") + '>' + esc(d.label) + '</option>'; }).join("");
+    return '<div class="icu-fld"><label for="grpDesig">Designation</label><select id="grpDesig">' + opts + '</select></div>' +
+      '<div class="icu-fld"><label for="grpDesigCustom">Or type a custom title (optional)</label><input id="grpDesigCustom" type="text" autocomplete="off" placeholder="e.g. Registrar, Fellow, Staff Nurse"></div>' +
+      '<label style="display:flex;gap:9px;align-items:center;font:600 12.5px var(--font);color:var(--ink);cursor:pointer;margin:-2px 2px 12px"><input id="grpDesigCustomInstruct" type="checkbox" style="width:16px;height:16px;flex:0 0 auto">Custom title can give task instructions</label>';
+  }
+  // Resolve the designation sheet → { designation, role }. A typed custom title wins over the list.
+  function grpResolveDesig() {
+    var custom = grpVal("#grpDesigCustom").trim();
+    if (custom) return { designation: custom, role: (grpChecked("#grpDesigCustomInstruct") ? "assistant" : "junior_resident") };
+    var label = grpVal("#grpDesig") || "Junior Resident";
+    return { designation: label, role: grpRoleForDesignation(label) || "junior_resident" };
   }
   function grpCanInstruct(role) { var api = groupsApi(); if (api && api.canInstruct) { try { return !!api.canInstruct(role); } catch (e) {} } return ["head", "professor", "assistant", "senior_resident"].indexOf(role) >= 0; }
   // Phase 5: admin (head|professor) may manage membership. UI-gate only — rules are the boundary.
@@ -4011,11 +4191,17 @@
       var order = { head: 0, professor: 1, assistant: 2, senior_resident: 3, junior_resident: 4, intern: 5 };
       rows = members.slice().sort(function (a, b) { return (order[a.role] == null ? 9 : order[a.role]) - (order[b.role] == null ? 9 : order[b.role]); }).map(function (m) {
         var isMe = m.uid === me, isHead = m.role === "head", online = grpMemberOnline(m.uid, me);
-        var nm = isMe ? v2AccountName() : (m.name || grpRoleLabel(m.role));
-        var ini = v2Initials(isMe ? v2AccountName() : (m.name || grpRoleLabel(m.role)));
-        var sub = grpRoleLabel(m.role) + (isMe ? " · you" : "");
-        var rm = (canManage && !isMe && !isHead) ? '<button class="icu-v2-memrm" data-icu-act="grprm:' + encodeURIComponent(m.uid) + '" aria-label="Remove ' + esc(nm) + ' from this unit">Remove</button>' : "";
-        var badge = isMe ? '<span class="icu-v2-member-state">You</span>' : (rm || '<span class="icu-v2-member-role" style="flex:0 0 auto">' + esc(grpRoleLabel(m.role)) + '</span>');
+        var title = grpDisplayTitle(m);
+        var nm = isMe ? v2AccountName() : (m.name || title);
+        var ini = v2Initials(isMe ? v2AccountName() : (m.name || title));
+        var sub = title + (isMe ? " · you" : "");
+        var acts = (canManage && !isMe && !isHead)
+          ? '<button class="icu-v2-memrm" data-icu-act="grpdesig:' + encodeURIComponent(m.uid) + '" aria-label="Change ' + esc(nm) + '’s designation">✎ Title</button>'
+            + '<button class="icu-v2-memrm" data-icu-act="grprm:' + encodeURIComponent(m.uid) + '" aria-label="Remove ' + esc(nm) + ' from this unit">Remove</button>'
+          : "";
+        var badge = isMe ? '<span class="icu-v2-member-state">You</span>'
+          : (acts ? '<span style="display:flex;gap:6px;flex:0 0 auto;flex-wrap:wrap;justify-content:flex-end">' + acts + '</span>'
+                  : '<span class="icu-v2-member-role" style="flex:0 0 auto">' + esc(title) + '</span>');
         return '<div class="icu-v2-member"><span class="icu-v2-member-av' + (online ? " on" : "") + '">' + esc(ini || "DR") + '</span>' +
           '<span class="icu-v2-member-id"><span class="icu-v2-member-nm">' + esc(nm) + '</span><span class="icu-v2-member-role">' + esc(sub) + '</span></span>' +
           badge + '</div>';
@@ -4079,6 +4265,11 @@
         '<button class="icu-btn" data-icu-act="grpreclaimhead">' + ico("user", "👑") + ' Restore me as Unit Head</button></div>';
     }
     out += '<div class="icu-sec-lbl">' + ico("pulse", "🩺") + ' Shared unit — ' + esc((_grp && _grp.name) || "ICU") + '</div>';
+    // Primary compose action pinned to the TOP of the panel (above instructions & tasks) so it's the
+    // first thing on the round. Instructors post tracked tasks + a timeline event; everyone else posts
+    // a plain (untracked) note. Rules enforce the write boundary too.
+    var roundLbl = grpCanInstruct(_grp && _grp.myRole) ? "Add round note / instruction" : "Add a note";
+    out += '<button class="icu-btn ghost icu-v2-addround" data-icu-act="grpround">' + ico("plus", "＋") + ' ' + roundLbl + '</button>';
     out += '<div class="icu-card"><h3>Instructions &amp; tasks <span class="icu-phase">' + open + ' open</span></h3>';
     if (visibleTasks.length) {
       out += visibleTasks.map(function (t) {
@@ -4095,27 +4286,28 @@
         var meta = [byTxt, dueTxt].filter(Boolean).join(" · ");
         var expl = t.explanation ? '<div class="icu-v2-taskexpl">' + ico("info", "ⓘ") + " " + esc(t.explanation) + (t.explainedByName ? " — " + esc(t.explainedByName) : "") + "</div>" : "";
         var explBtn = (t.status !== "done") ? '<button class="icu-btn ghost" data-icu-act="grptaskexplain:' + encodeURIComponent(t.id) + '" style="margin-top:6px;padding:6px 10px;min-height:32px;width:auto;font:700 12px var(--font)">' + ico("edit", "✎") + (t.explanation ? " Update explanation" : (overdue ? " Explain the delay" : " Add explanation")) + "</button>" : "";
+        // Instructing roles can re-ping the executor roles (SR/JR/intern) to do the task — or, once
+        // it's marked done, to do it again. Server (task-remind) re-checks the caller's role.
+        var nudgeBtn = grpCanInstruct(_grp && _grp.myRole) ? '<button class="icu-btn ghost" data-icu-act="grpnudge:' + encodeURIComponent(t.id) + '" style="margin-top:6px;margin-left:6px;padding:6px 10px;min-height:32px;width:auto;font:700 12px var(--font)">' + ico("bell", "🔔") + (t.status === "done" ? " Remind to redo" : " Nudge") + "</button>" : "";
         return '<div class="icu-row" style="align-items:flex-start;gap:8px' + (overdue ? ";border-left:3px solid var(--danger);padding-left:9px" : "") + '"><button class="icu-v2-tasktog" data-icu-act="grptask:' + encodeURIComponent(t.id) + '" aria-label="Change status of: ' + esc(t.text || "task") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;margin:-6px 0;color:' + col + '">' + mark + "</button>" +
           '<span style="flex:1;min-width:0">' + badge + '<span style="' + (t.status === "done" ? "text-decoration:line-through;opacity:.6" : "") + '">' + esc(t.text) + "</span>" +
           (meta ? '<span class="icu-v2-due' + (overdue ? " over" : "") + '" style="display:block;margin-top:3px">' + esc(meta) + "</span>" : "") +
-          expl + explBtn + "</span></div>";
+          expl + explBtn + nudgeBtn + "</span></div>";
       }).join("");
     } else {
       out += '<p class="icu-doc-sub" style="margin:0">No open instructions. ' + (grpCanInstruct(_grp && _grp.myRole) ? "Give one on the round and it will appear here for the team." : "Awaiting a consultant instruction.") + '</p>';
     }
     if (hiddenDone > 0) out += '<p class="icu-doc-sub" style="margin:8px 0 0;opacity:.7">' + hiddenDone + ' completed task' + (hiddenDone === 1 ? "" : "s") + ' cleared (older than 6h) — kept in the Timeline below.</p>';
     out += '</div>';
-    // No-type round-note composer (Phase 3). Instructors post tracked tasks + one timeline event;
-    // everyone else can post a plain (untracked) note. Rules enforce the write boundary too.
-    var roundLbl = grpCanInstruct(_grp && _grp.myRole) ? "Add round note / instruction" : "Add a note";
-    out += '<button class="icu-btn ghost icu-v2-addround" data-icu-act="grpround">' + ico("plus", "＋") + ' ' + roundLbl + '</button>';
     var revTxt = pt.reviewedAt ? ("Reviewed " + (fmtAgo(pt.reviewedAt) || "") + (pt.reviewedByName ? " by " + pt.reviewedByName : "")) : "Mark reviewed";
     out += '<button class="icu-btn ghost" data-icu-act="grpreviewed">' + ico("check", "✓") + ' ' + esc(revTxt) + '</button>';
     out += '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("clock", "🕑") + ' Timeline' + (tl.length ? ' <span class="icu-phase">' + tl.length + '</span>' : "") + '</div>';
     if (tl.length) {
       var TL_RECENT = 15, tlShown = _tlAll ? tl : tl.slice(0, TL_RECENT);
       out += '<div class="icu-card' + (_tlAll ? " icu-v2-tlfull" : "") + '">' + tlShown.map(function (e) {
-        var by = (e.byName || "") + (e.byRole ? " · " + grpRoleLabel(e.byRole) : "") + (e.ts ? " · " + (fmtAgo(e.ts) || fmtWhen(e.ts)) : "");
+        var _bm = (_grpMembers || []).filter(function (x) { return x.uid === e.by; })[0];
+        var byTitle = (_bm && _bm.designation) ? _bm.designation : (e.byRole ? grpRoleLabel(e.byRole) : "");
+        var by = (e.byName || "") + (byTitle ? " · " + byTitle : "") + (e.ts ? " · " + (fmtAgo(e.ts) || fmtWhen(e.ts)) : "");
         return '<div class="icu-row" style="align-items:flex-start;gap:8px;border-bottom:1px solid var(--border);padding:7px 0"><span style="flex:0 0 auto;font-size:15px">' + grpTlIcon(e.type) + '</span>' +
           '<span style="flex:1"><b>' + esc(e.title || "Update") + '</b>' + (e.detail ? '<span style="display:block;color:var(--muted);font-size:12px;margin-top:1px">' + esc(e.detail) + '</span>' : "") +
           '<span style="display:flex;align-items:center;gap:5px;margin-top:3px"><span class="icu-v2-tlav">' + esc(v2Initials(e.byName || "")) + '</span><span style="font:600 11px var(--font);color:var(--muted)">' + esc(by) + '</span></span></span></div>';
@@ -4198,25 +4390,23 @@
   function grpOpenAddById() {
     if (!grpActive() || !grpIsAdmin(_grp && _grp.myRole)) return;
     ensureModal();
-    var iAmHead = (_grp && _grp.myRole) === "head";
-    var roles = ["professor", "assistant", "senior_resident", "junior_resident", "intern"].filter(function (r) { return r !== "professor" || iAmHead; });
-    var opts = roles.map(function (r) { return '<option value="' + r + '"' + (r === "junior_resident" ? " selected" : "") + '>' + esc(grpRoleLabel(r)) + '</option>'; }).join("");
     modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Add a doctor by ID or email"><h3>' + ico("plus", "＋") + ' Add a doctor</h3>' +
       '<p class="icu-doc-sub" style="margin:0 0 10px">Add a colleague to <b>' + esc((_grp && _grp.name) || "this unit") + '</b> by their <b>StewardMD ID</b> (e.g. SMD-7F3K2C) or the email on their StewardMD account.</p>' +
       '<div class="icu-fld"><label for="grpAddId">StewardMD ID or email</label><input id="grpAddId" type="text" autocapitalize="characters" autocomplete="off" placeholder="SMD-XXXXXX or name@hospital.org"></div>' +
-      '<div class="icu-fld"><label for="grpAddRole">Role</label><select id="grpAddRole">' + opts + '</select></div>' +
+      grpDesigFieldsHTML("Junior Resident") +
       '<button class="icu-btn" data-icu-act="grpinvitesend">Add to unit</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
     modalEl.classList.add("on");
   }
   function grpDoAddById() {
     var api = groupsApi(); if (!api || !grpActive() || !api.addByIdOrEmail) return;
-    var idOrEmail = grpVal("#grpAddId").trim(), role = grpVal("#grpAddRole") || "junior_resident";
+    var idOrEmail = grpVal("#grpAddId").trim();
     if (!idOrEmail) { if (window.toast) toast("Enter a StewardMD ID or email"); return; }
+    var d = grpResolveDesig();
     closeForm();
     var byEmail = idOrEmail.indexOf("@") >= 0;
-    api.addByIdOrEmail(_grp.id, idOrEmail, role).then(function (doc) {
-      if (window.toast) toast("Added " + ((doc && doc.name) || "doctor") + " to the unit");
+    api.addByIdOrEmail(_grp.id, idOrEmail, d.role, d.designation).then(function (doc) {
+      if (window.toast) toast("Added " + ((doc && doc.name) || "doctor") + " as " + d.designation);
     }, function (e) {
       var m = (e && e.message) || "";
       // not-found = no directory entry for that email/ID. The email→doctor lookup (doctorDirectory/
@@ -4225,6 +4415,32 @@
       if (m === "not-found") { if (byEmail) grpAddNotFoundEmail(); else if (window.toast) toast("No StewardMD account found for that ID — check it, or use the invite link instead."); }
       else if (window.toast) toast("Couldn’t add — head/professor only");
       _grpErr = null; if (ICU.isOpen()) paint();
+    });
+  }
+  // Change an existing member's designation (+ its derived permission). Admin-only; the sheet is
+  // never offered for the head or yourself. Consultant/Assoc-Prof (→ professor) are head-only —
+  // the rules reject a non-head grant, surfaced as a clear toast.
+  function grpOpenDesig(uid) {
+    if (!grpActive() || !grpIsAdmin(_grp && _grp.myRole)) return;
+    var m = (_grpMembers || []).filter(function (x) { return x.uid === uid; })[0];
+    if (!m || m.role === "head" || m.uid === grpMyUid()) return;
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Change designation"><h3>' + ico("rounds", "🩺") + ' Change designation</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 10px">Set the designation for <b>' + esc(m.name || grpDisplayTitle(m)) + '</b> in <b>' + esc((_grp && _grp.name) || "this unit") + '</b>. This also sets what they can do — give instructions vs. update status.</p>' +
+      grpDesigFieldsHTML(m.designation) +
+      '<button class="icu-btn" data-icu-act="grpdesigsave:' + encodeURIComponent(uid) + '">Save designation</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  function grpDoSetDesig(uid) {
+    var api = groupsApi(); if (!api || !grpActive() || !api.setDesignation || !uid) return;
+    var d = grpResolveDesig(); closeForm();
+    api.setDesignation(_grp.id, uid, d.designation, d.role).then(function () {
+      if (window.toast) toast("Designation set to " + d.designation);
+    }, function (e) {
+      _grpErr = grpErrText(e);
+      if (window.toast) toast(d.role === "professor" ? "Consultant / Associate Professor can be set by the unit head only" : "Couldn’t update — head/professor only");
+      if (ICU.isOpen()) paint();
     });
   }
   // No StewardMD account is registered for a typed email (no doctorDirectory/e_<hash> entry). Explain
@@ -4634,7 +4850,7 @@
       try {
         idToken().then(function (tok) {
           if (!tok) return;
-          fetch("/api/push/task-overdue", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, taskId: t.id }) }).catch(function () {});
+          fetch(grpPushUrl("/api/push/task-overdue"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, taskId: t.id }) }).catch(function () {});
         }, function () {});
       } catch (e) {}
     });
@@ -4646,7 +4862,7 @@
     try {
       idToken().then(function (tok) {
         if (!tok) { if (window.toast) toast("Sign in first, then try the test push"); return; }
-        fetch("/api/push/test", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok } })
+        fetch(grpPushUrl("/api/push/test"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok } })
           .then(function (r) { return r.json(); })
           .then(function (j) {
             if (!window.toast) return;
@@ -4658,10 +4874,106 @@
       }, function () { if (window.toast) toast("Couldn't get your auth token"); });
     } catch (e) {}
   }
+  // On-demand nudge: re-push a task's reminder to the unit's executor roles (SR/JR/intern), excluding
+  // the sender. Only instructing roles reach here (button is role-gated; server re-checks). For a
+  // task already marked done it sends a "please repeat" instead. Reach is surfaced on the board note.
+  function grpNudgeTask(id) {
+    if (!grpActive() || !_grpPtId || !id) return;
+    if (!grpCanInstruct(_grp && _grp.myRole)) return;
+    var gid = _grp.id, pid = _grpPtId, tasks = (_grpPtVM && _grpPtVM.tasks) || [], t = null;
+    for (var i = 0; i < tasks.length; i++) { if (tasks[i].id === id) { t = tasks[i]; break; } }
+    if (!t) return;
+    var redo = t.status === "done";
+    if (window.toast) toast(redo ? "Asking the team to repeat…" : "Nudging the team…");
+    function note(kind, msg) { _grpLastPush = { ts: nowTs(), kind: kind, text: msg }; if (ICU.isOpen() && _screen === "board") paintLive(); }
+    try {
+      idToken().then(function (tok) {
+        if (!tok) { note("error", "Couldn't send the reminder — you weren't signed in."); return; }
+        fetch(grpPushUrl("/api/push/task-remind"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, taskId: id, redo: redo }) })
+          .then(function (r) { return r.json().catch(function () { return null; }); })
+          .then(function (j) {
+            if (j && j.sent > 0) { _grpLastPush = null; if (ICU.isOpen() && _screen === "board") paintLive(); if (window.toast) toast("Reminder sent to " + j.sent + " device" + (j.sent === 1 ? "" : "s")); return; }
+            if (j && j.error === "forbidden") { if (window.toast) toast("Only instructing roles can nudge."); return; }
+            if (j && j.reminded > 0) { note("none", "Reminder queued, but no resident has notifications on yet — ask them to enable them in Settings."); return; }
+            note("error", "Couldn't send the reminder — no resident is on this unit yet, or the push service is unreachable.");
+          }, function () { note("error", "Couldn't send the reminder — check your connection."); })
+          .catch(function () { note("error", "Couldn't send the reminder — check your connection."); });
+      }, function () { note("error", "Couldn't send the reminder — you weren't signed in."); });
+    } catch (e) {}
+  }
+  // ── Per-user ICU notification preferences ───────────────────────────────────────────────────────
+  // The panel writes the three Tier-2/3 category booleans to the current user's members/{uid}.notif
+  // doc (via icu-collab setNotifPrefs); the push server reads them during fan-out. Tier-1 (critical /
+  // overdue / urgent orders) is shown locked-on and can't be muted.
+  function grpMyUid() { try { return (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid) || null; } catch (e) { return null; } }
+  function grpNotifPrefsGet() {
+    var supervising = ["head", "professor", "assistant"].indexOf(_grp && _grp.myRole) >= 0;
+    var def = { orderRoutine: !supervising, activity: !supervising, handover: true };   // role default (mirrors server)
+    var uid = grpMyUid(), mine = null, i;
+    for (i = 0; _grpMembers && i < _grpMembers.length; i++) { if (_grpMembers[i].uid === uid) { mine = _grpMembers[i]; break; } }
+    var n = mine && mine.notif;
+    if (!n || typeof n !== "object") return def;
+    return {
+      orderRoutine: typeof n.orderRoutine === "boolean" ? n.orderRoutine : def.orderRoutine,
+      activity: typeof n.activity === "boolean" ? n.activity : def.activity,
+      handover: typeof n.handover === "boolean" ? n.handover : def.handover,
+    };
+  }
+  function grpNotifPrefsSave(prefs) {
+    var api = groupsApi(), gid = _grp && _grp.id, uid = grpMyUid(), i;
+    if (_grpMembers && uid) { for (i = 0; i < _grpMembers.length; i++) { if (_grpMembers[i].uid === uid) { _grpMembers[i].notif = prefs; break; } } }   // optimistic
+    if (api && api.setNotifPrefs && gid) { try { api.setNotifPrefs(gid, prefs).catch(function () { if (window.toast) toast("Couldn't save — check your connection."); }); } catch (e) {} }
+  }
+  function grpOpenNotifPrefs() {
+    if (!grpActive() || document.getElementById("icuNotifPrefs")) return;
+    var prefs = grpNotifPrefsGet();
+    var wrap = document.createElement("div");
+    wrap.id = "icuNotifPrefs";
+    wrap.setAttribute("style", "position:fixed;inset:0;z-index:20000;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center");
+    function lockRow(title, sub) {
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 2px;border-bottom:1px solid var(--line,#e4eae8)"><div style="flex:1"><div style="font:600 14px var(--sans,system-ui);color:var(--ink,#16232e)">' + title + '</div><div style="font:500 12px var(--sans,system-ui);color:var(--slate,#5a7184)">' + sub + '</div></div><span style="font:700 12px var(--sans,system-ui);color:var(--teal,#0e6e63);display:flex;align-items:center;gap:4px">' + ico("lock", "🔒") + ' On</span></div>';
+    }
+    function togRow(key, title, sub) {
+      var on = !!prefs[key];
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 2px;border-bottom:1px solid var(--line,#e4eae8)"><div style="flex:1"><div style="font:600 14px var(--sans,system-ui);color:var(--ink,#16232e)">' + title + '</div><div style="font:500 12px var(--sans,system-ui);color:var(--slate,#5a7184)">' + sub + '</div></div>' +
+        '<button data-tog="' + key + '" role="switch" aria-checked="' + on + '" aria-label="' + title + '" style="flex:none;width:44px;height:26px;border-radius:13px;border:none;cursor:pointer;background:' + (on ? "var(--teal,#0e6e63)" : "var(--line,#cfd8d6)") + ';position:relative"><span style="position:absolute;top:3px;left:' + (on ? "21px" : "3px") + ';width:20px;height:20px;border-radius:50%;background:#fff"></span></button></div>';
+    }
+    wrap.innerHTML =
+      '<div role="dialog" aria-label="Notification preferences" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25);max-height:86vh;overflow:auto">' +
+      '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:4px">🔔 Notification preferences</div>' +
+      '<div style="font:500 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:12px">Choose what this unit pings you about. Critical and overdue alerts always come through.</div>' +
+      lockRow("Critical &amp; overdue", "Patient safety — can't be turned off") +
+      lockRow("Urgent orders (immediate / high)", "Time-critical — can't be turned off") +
+      togRow("handover", "Shift handovers", "SBAR when a shift hands over") +
+      togRow("orderRoutine", "Routine orders", "New moderate / low priority tasks") +
+      togRow("activity", "Unit activity", "Task completions, new admissions") +
+      '<button id="icuNotifDone" style="width:100%;margin-top:16px;padding:12px;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans,system-ui);cursor:pointer">Done</button>' +
+      '</div>';
+    document.body.appendChild(wrap);
+    var close = function () { try { wrap.remove(); } catch (e) {} };
+    wrap.addEventListener("click", function (e) { if (e.target === wrap) close(); });
+    wrap.querySelector("#icuNotifDone").addEventListener("click", close);
+    Array.prototype.forEach.call(wrap.querySelectorAll("[data-tog]"), function (btn) {
+      btn.addEventListener("click", function () {
+        var key = btn.getAttribute("data-tog");
+        prefs[key] = !prefs[key];
+        var on = prefs[key];
+        btn.setAttribute("aria-checked", String(on));
+        btn.style.background = on ? "var(--teal,#0e6e63)" : "var(--line,#cfd8d6)";
+        var knob = btn.querySelector("span"); if (knob) knob.style.left = on ? "21px" : "3px";
+        grpNotifPrefsSave({ orderRoutine: prefs.orderRoutine, handover: prefs.handover, activity: prefs.activity });
+      });
+    });
+  }
   // Last on-issue push attempt's outcome, so a 0-reach or failed push stays VISIBLE on the board
   // (not just a toast that auto-dismisses right as grpRoundBack() navigates away — easy to miss
   // mid-rounds). Cleared once a later attempt reaches at least one device. Read by grpPushNoteHTML().
   var _grpLastPush = null;   // { ts, kind: 'none'|'error', text }
+  // On native the WebView origin is https://localhost, so a relative "/api/..." fetch hits the local
+  // app shell (nonexistent) and fails — the real cause of "task assigned but nobody notified". Every
+  // API call MUST be absolute via SMD_API_BASE (empty on web, https://stewardmd.in on device), the
+  // same idiom native-push.js / watch-lab.js already use.
+  function grpPushUrl(p) { return (window.SMD_API_BASE || "") + p; }
   function grpPushNoteHTML() {
     if (!_grpLastPush) return "";
     if ((nowTs() - _grpLastPush.ts) > 30 * 60000) return "";   // stale (>30 min) — stop showing it
@@ -4675,20 +4987,31 @@
   function grpNotifyInstruction(gid, pid, chosen, priority) {
     var text = (chosen && chosen[0]) || "New instruction";
     function note(kind, msg) { _grpLastPush = { ts: nowTs(), kind: kind, text: msg }; if (ICU.isOpen() && _screen === "board") paintLive(); }
+    // Self-diagnosing failure banner: the version tag (g412) proves which build is running, the base
+    // shows the origin the request targeted, and the reason gives the HTTP status / error — so one
+    // screenshot pinpoints the failing layer instead of a generic "check your connection". Only shows
+    // on failure; trim the bracket once push is confirmed working end-to-end on device.
+    var VER = "g421";
+    var base = window.SMD_API_BASE || "(relative)";
+    function fail(reason) { note("error", "Push failed — teammates not alerted. [" + VER + " · " + base + " · " + reason + "]"); }
     try {
       idToken().then(function (tok) {
-        if (!tok) { note("error", "Couldn't reach the push service — you weren't signed in. Teammates won't be alerted for this instruction."); return; }
-        fetch("/api/push/instruction", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, priority: priority, count: (chosen ? chosen.length : 1) }) })
-          .then(function (r) { return r.json(); })
+        if (!tok) { note("error", "Not signed in — teammates won't be alerted. [" + VER + " · token missing]"); return; }
+        var status = 0;
+        fetch(grpPushUrl("/api/push/instruction"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, priority: priority, count: (chosen ? chosen.length : 1) }) })
+          .then(function (r) { status = r.status; return r.json().catch(function () { return null; }); })
           .then(function (j) {
             // Surface push REACH so it's obvious when teammates aren't registered for notifications.
             if (j && j.sent > 0) { _grpLastPush = null; if (window.toast) toast("Pushed to " + j.sent + " device" + (j.sent === 1 ? "" : "s")); return; }
             if (j && j.notified > 0) { note("none", "No teammate is registered for push yet — ask them to enable notifications in Settings › Ward Integration."); return; }
-            if (!j || j.error) note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction. Check your connection.");
-          }, function () { note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction."); })
-          .catch(function () { note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction."); });
-      }, function () { note("error", "Couldn't reach the push service — you weren't signed in. Teammates won't be alerted for this instruction."); });
-    } catch (e) { note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction."); }
+            // Teammates exist but none opted into this category (e.g. a routine order the seniors have
+            // muted) — that's a deliberate preference, not a delivery failure, so don't alarm the sender.
+            if (j && j.eligible > 0) { _grpLastPush = null; if (ICU.isOpen() && _screen === "board") paintLive(); return; }
+            fail("HTTP " + status + (j && j.error ? " " + j.error : ""));
+          })
+          .catch(function (e) { fail("fetch " + ((e && e.message) || e || "failed")); });
+      }, function () { note("error", "Not signed in — teammates won't be alerted. [" + VER + " · idToken rejected]"); });
+    } catch (e) { fail("throw " + ((e && e.message) || e)); }
   }
   // "Hand over to next shift" → push the unit (incoming shift) that a handover is ready.
   function grpNotifyHandover(gid, pid, sbar) {
@@ -4696,7 +5019,7 @@
       var text = (sbar && sbar[0] && sbar[0].body) || "Shift handover";   // the Situation line
       idToken().then(function (tok) {
         if (!tok) return;
-        fetch("/api/push/instruction", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, kind: "handover" }) })
+        fetch(grpPushUrl("/api/push/instruction"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, kind: "handover" }) })
           .then(function (r) { return r.json(); })
           .then(function (j) { if (window.toast && j && !j.sent && j.notified > 0) toast("Handover recorded — but no teammate is registered for push yet"); }, function () {})
           .catch(function () {});
@@ -4747,7 +5070,7 @@
     var chips = '<button class="icu-v2-obchip' + (_roundOnBehalf ? "" : " on") + '" data-icu-act="grproundbehalf:self">' + ico("user", "🧑") + ' Me</button>' +
       others.map(function (m) {
         var on = _roundOnBehalf === m.uid;
-        return '<button class="icu-v2-obchip' + (on ? " on" : "") + '" data-icu-act="grproundbehalf:' + encodeURIComponent(m.uid) + '">' + esc(m.name || grpRoleLabel(m.role)) + (m.role ? ' <span class="icu-v2-obrole">' + esc(grpRoleLabel(m.role)) + '</span>' : "") + '</button>';
+        return '<button class="icu-v2-obchip' + (on ? " on" : "") + '" data-icu-act="grproundbehalf:' + encodeURIComponent(m.uid) + '">' + esc(m.name || grpDisplayTitle(m)) + (m.name ? ' <span class="icu-v2-obrole">' + esc(grpDisplayTitle(m)) + '</span>' : "") + '</button>';
       }).join("");
     return '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">Instructed by <span style="opacity:.6">· optional</span></div>' +
       '<p class="icu-doc-sub" style="margin:0 0 9px">Log a colleague’s verbal order under their name — e.g. a consultant’s round instruction.</p>' +
@@ -4804,7 +5127,7 @@
     var chosen = grpRoundChosen(); if (!chosen.length) return;
     var instr = true;   // any unit member can log a tracked instruction now (the consultant often says it orally + a resident notes it down — attribute via "Instructed by")
     var onBehalf = null;
-    if (_roundOnBehalf) { var _m = (_grpMembers || []).filter(function (x) { return x.uid === _roundOnBehalf; })[0]; if (_m) onBehalf = { uid: _m.uid, name: _m.name || grpRoleLabel(_m.role) }; }
+    if (_roundOnBehalf) { var _m = (_grpMembers || []).filter(function (x) { return x.uid === _roundOnBehalf; })[0]; if (_m) onBehalf = { uid: _m.uid, name: _m.name || grpDisplayTitle(_m) }; }
     var plan = grpRoundPlan(chosen, instr, v2AccountName(), _roundPriority, onBehalf);
     var gid = _grp.id, pid = _grpPtId, i;
     for (i = 0; i < plan.tasks.length; i++) {
@@ -4843,6 +5166,8 @@
       rootEl.innerHTML = renderV2RoundNote();   // Phase 3: full-screen round-note composer (no bottom bar)
     } else if (_screen === "alerts") {
       rootEl.innerHTML = renderV2Alerts() + renderV2BottomBar();
+    } else if (_screen === "settings") {
+      rootEl.innerHTML = renderV2Settings() + renderV2BottomBar();
     } else if (_screen === "team") {
       rootEl.innerHTML = renderV2Team() + renderV2BottomBar();
     } else if (grpActive() && _grpPtId && _grpPtVM === null) {
@@ -4856,6 +5181,9 @@
       rootEl.innerHTML = renderV2Banner() + renderV2Presence() + grpOfflineBar() + renderV2TopTabs() + renderBody() + watchFab + fab;
     }
     if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
+    // Keep the active workspace tab centred in the horizontally-scrollable tab strip so it's never
+    // hidden off-screen (the strip now scrolls instead of cramming all tabs into one fixed row).
+    try { var _tabs = rootEl.querySelector(".icu-v2-tabs"), _onTab = _tabs && _tabs.querySelector(".icu-v2-tab.on"); if (_tabs && _onTab) _tabs.scrollLeft = Math.max(0, _onTab.offsetLeft - (_tabs.clientWidth - _onTab.offsetWidth) / 2); } catch (e) {}
   }
 
   /* ---------------------------------------------------- manual entry forms */
@@ -4863,6 +5191,7 @@
     patient: { title: "Patient details", domain: "patient", fields: [
       { k: "name", l: "Name / initials", t: "text" }, { k: "age", l: "Age", t: "number" }, { k: "sex", l: "Sex", t: "select", opts: ["", "M", "F", "Other"] },
       { k: "weightKg", l: "Weight (kg)", t: "number" }, { k: "heightCm", l: "Height (cm)", t: "number" }, { k: "bed", l: "Bed", t: "text" },
+      { k: "mrn", l: "MR / UHID", t: "text" }, { k: "doctor", l: "Treating doctor", t: "text" }, { k: "dept", l: "Department / specialty", t: "text" },
       { k: "icuDay", l: "ICU day", t: "number" }, { k: "hospital", l: "Hospital", t: "text" }, { k: "complaints", l: "Presenting complaints", t: "textarea", wide: true }, { k: "diagnosis", l: "Working diagnosis", t: "text", wide: true }, { k: "status", l: "Current status", t: "text", wide: true } ] },
     monitor: { title: "Vitals (ICU monitor)", ingest: ingestMonitor, fields: [
       { k: "hr", l: "Heart rate", t: "number" }, { k: "sbp", l: "Systolic BP", t: "number" }, { k: "dbp", l: "Diastolic BP", t: "number" }, { k: "map", l: "MAP (optional)", t: "number" },
@@ -6446,7 +6775,7 @@
     var ix = act.indexOf(":"), cmd = ix < 0 ? act : act.slice(0, ix), arg = ix < 0 ? "" : act.slice(ix + 1);
     switch (cmd) {
       case "close": ICU.close(); break;
-      case "calc": { var _scp = (STATE.scores || []).filter(function (x) { return x.id === arg && x.inputs; })[0]; try { if (window.MEDCALC && MEDCALC.open) MEDCALC.open(arg, _scp ? _scp.inputs : undefined); } catch (e) {} break; }
+      case "calc": { var _scp = (STATE.scores || []).filter(function (x) { return x.id === arg && x.inputs; })[0]; try { if (window.MEDCALC && MEDCALC.open) { MEDCALC.open(arg, _scp ? _scp.inputs : undefined, icuStoreCalcResult); var _mc = document.getElementById("mcOverlay"); if (_mc) _mc.style.zIndex = "10030"; /* lift the calculator ABOVE #icuRoot (z 10000), else it opens hidden behind the dashboard */ } } catch (e) {} break; }
       case "tab": if (icuV2On()) _screen = "patient"; _active = arg; _ws = wsOf(arg); _wsLast[_ws] = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
       case "ws": { if (icuV2On()) _screen = "patient"; _ws = arg; var _m = wsMembers(wsById(arg)), _l = _wsLast[arg]; _active = (_l && _m.indexOf(_l) >= 0) ? _l : _m[0]; paint(); var sc2 = rootEl && rootEl.querySelector(".icu-scroll"); if (sc2) sc2.scrollTop = 0; break; }
       // ---- ICU v2 (smd_icu_v2) — board / alerts / team / admit / filter, all flag-only ----
@@ -6454,19 +6783,21 @@
       case "icualerts": if (grpActive()) grpNotifMarkSeen(); _screen = "alerts"; _paintTop = true; paint(); break;
       case "icuteam": _screen = "team"; _paintTop = true; paint(); break;
       case "icuadmit": _admitting = true; _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); break;
-      case "icumore": _screen = "patient"; _active = "more"; _ws = "more"; _paintTop = true; paint(); break;
+      case "icumore": _screen = "patient"; _active = "more"; _ws = "documents"; _paintTop = true; paint(); break;   // "more" is now the Tools sub-tab of the Records workspace
+      case "icusettings": _screen = "settings"; _paintTop = true; paint(); break;   // unit-level settings (group mode + notifications), separate from per-patient tools
       case "testpush": grpTestPush(); break;
+      case "notifprefs": grpOpenNotifPrefs(); break;   // per-user ICU notification category toggles
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
       // ---- Unit picker: hospital → category (ICU|Ward) → unit type ----
-      case "unitpick": _screen = "units"; _pickStep = _unit.hospital ? "category" : "hospital"; _pickCat = null; _paintTop = true; paint(); break;
-      case "unithosp": _unit.hospital = decodeURIComponent(arg); unitSavePref(); _pickStep = "category"; _paintTop = true; paint(); break;
+      case "unitpick": _screen = "units"; _pickStep = "units"; _pickCat = null; _paintTop = true; paint(); break;
+      case "unithosp": _unit.hospital = decodeURIComponent(arg); unitSavePref(); _pickStep = "units"; _paintTop = true; paint(); break;
       case "unithospchg": _pickStep = "hospital"; _paintTop = true; paint(); break;
       case "unitcat": _pickCat = arg; _pickStep = "units"; _paintTop = true; paint(); break;
-      case "unitback": _pickStep = "category"; _paintTop = true; paint(); break;
+      case "unitback": _pickStep = "units"; _paintTop = true; paint(); break;
       case "unitsel": { var _uc = arg.indexOf(":"); selectUnit({ cat: arg.slice(0, _uc), type: decodeURIComponent(arg.slice(_uc + 1)) }); _paintTop = true; paint(); break; }
       case "unitgrpnew": grpOpenCreate(arg); break;
-      case "grptoggle": try { if (localStorage.getItem("smd_icu_groups") === "1") localStorage.removeItem("smd_icu_groups"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
+      case "grptoggle": try { if (icuGroupsOn()) localStorage.setItem("smd_icu_groups", "0"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
       // ---- ICU v2 group mode (smd_icu_groups, Phase 2) — unit switcher / create / invite / tasks ----
       case "grppick": grpOpenPicker(); break;
       case "grpsel": { var _gsel = grpById(decodeURIComponent(arg)); if (_gsel) grpSelect(_gsel, false); closeForm(); if (_screen === "units") { _screen = "board"; _paintTop = true; paint(); } break; }
@@ -6474,10 +6805,13 @@
       case "grpcreate": grpDoCreate(); break;
       case "grpinvite": grpOpenInvite(); break;
       case "grpinvitesend": grpDoAddById(); break;
+      case "grpdesig": grpOpenDesig(decodeURIComponent(arg)); break;
+      case "grpdesigsave": grpDoSetDesig(decodeURIComponent(arg)); break;
       case "grpreviewed": grpDoReviewed(); break;
       case "grptask": grpCycleTask(decodeURIComponent(arg)); break;
       case "grptaskexplain": grpTaskExplain(decodeURIComponent(arg)); break;
       case "grptaskexplainsave": grpTaskExplainSave(); break;
+      case "grpnudge": grpNudgeTask(decodeURIComponent(arg)); break;   // re-push a task reminder to the executor roles
       case "tlall": _tlAll = !_tlAll; _paintTop = true; paint(); break;
       case "grpretry": grpRetry(); break;   // Phase 4: re-subscribe after a connection/error state
       case "pushnotedismiss": grpPushNoteDismiss(); break;   // dismiss the "teammates weren't alerted" board notice
@@ -6600,6 +6934,7 @@
       case "conflict": { var parts = arg.split("|"); ICU.resolveConflict(parts[0], parts[1]); paint(); break; }
       case "dismissupdate": ICU.clearNewUpdate(); paint(); break;
       case "wardsync": try { if (window.openGHIS) openGHIS(); } catch (x) {} break;
+      case "autofetch": try { if (window.SMD_AUTOFETCH) SMD_AUTOFETCH.openManager((_raw.wardSync && _raw.wardSync.patientId) || "", (_raw.patient && _raw.patient.name) || ""); } catch (x) {} break;
       case "savept": savePatient(); break;
       case "patients": openRoster(); break;
       case "loadpt": loadPatient(arg); break;
@@ -6636,7 +6971,6 @@
         else if (arg === "protocols") launch(function () { if (!window.INF) return; (INF.openProtocols ? INF.openProtocols() : INF.open()); infWeightBridge(); installInfBridge(); }, "infOverlay");
         else if (arg === "interactions") launch(function () { window.MEDDRUGS && window.MEDDRUGS.openInteractions && window.MEDDRUGS.openInteractions(); }, "miOverlay");
         break;
-      case "calc": launch(function () { window.MEDCALC && (MEDCALC.open ? MEDCALC.open(arg) : MEDCALC.openList && MEDCALC.openList()); }, "mcOverlay"); break;
     }
   }
 
@@ -6885,8 +7219,9 @@
     // tab + deep review + imaging + discharge + (group) instructions.
     openWard: function (target) { return ICU.open(target, true); },
     // Unit picker — hospital → ICU/Ward category → unit type. The full navigation entry (e.g. Ward Sync).
-    openUnits: function () { ICU.open(undefined, _unit.cat === "ward"); _screen = "units"; _pickStep = _unit.hospital ? "category" : "hospital"; _pickCat = null; _paintTop = true; paint(); },
+    openUnits: function () { ICU.open(undefined, _unit.cat === "ward"); _screen = "units"; _pickStep = "units"; _pickCat = null; _paintTop = true; paint(); },
     curUnit: function () { return { cat: _unit.cat, type: _unit.type, hospital: _unit.hospital }; },
+    unitList: unitList, selectUnitByKey: selectUnitByKey, currentUnitLabel: currentUnitLabel,
     // Resume-where-you-left-off (home.js snapshots this on background; replays it on the next launch).
     // curView captures the exact screen + sub-tab (+ open shared-patient id); resume reopens ICU in the
     // SAME unit category (no switch) and resumeView navigates to that exact view.
@@ -6940,7 +7275,7 @@
     reset: function () { resetState(); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
     ingestInfusion: ingestInfusion, _bridgeInfusion: bridgeInfusion, _bridgeInfusionFromCalc: bridgeInfusionFromCalc, _installInfBridge: installInfBridge, _infWeightBridge: infWeightBridge,
-    ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
+    ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, addWardPatientToRoster: addWardPatientToRoster, _buildWardState: buildWardState, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
     _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,
     openFindingPicker: openFindingPicker, _addFindingChip: addFindingChip, _applyFindState: applyFindState, _findStateOf: findStateOf, _vocabNlpCtx: vocabNlpCtx,
