@@ -1551,11 +1551,19 @@
         '<li><b>v7.8</b> — Lab Watch: monitor a patient&#39;s labs for new results — in-app alerts plus optional 24/7 background alerts (Ward Sync / GHIS-linked, consent-gated) even when the app is closed.</li>' +
         '<li><b>v7.9</b> — App-style navigation is now the default (bottom tab bar, quick-action tiles); plus reliability &amp; alignment polish across web, iOS and Android (global toast feedback, home-tile and sidebar alignment fixes).</li>' +
       '</ul></div>' +
-      '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v8 · Reference-grade breadth (current)</span></div><ul>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver">v8 · Reference-grade breadth</div><ul>' +
         '<li><b>v8.0</b> — Calculators expanded to an MDCalc-scale library — <b>400+</b> validated bedside tools across every specialty, each formula executed and checked before shipping.</li>' +
         '<li><b>v8.1</b> — Knowledge base grown to <b>4,800+</b> searchable conditions (Harrison plus Nelson paediatrics, ophthalmology and further specialties), each with a page-cited reference panel.</li>' +
         '<li><b>v8.2</b> — Scores wired to diagnoses: relevant clinical scores are suggested on every diagnosis, and the ICU dashboard now auto-computes scores (SOFA, qSOFA, NEWS2, APACHE II, BISAP, MELD…) from fetched labs and vitals — tap any score to open the calculator pre-filled.</li>' +
         '<li><b>v8.3</b> — Management for every reference condition: condition-specific, guideline-aligned management now appears on all <b>4,600+</b> reference diseases (AI-drafted decision-support — verify before acting).</li>' +
+      '</ul></div>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v9 · Clinical command centre (current)</span></div><ul>' +
+        '<li><b>v9.0</b> — ICU &amp; Ward dashboard: real-time collaborative unit boards (ICU / MICU / wards), a live care team with clinical designations &amp; permissions, shift handover, and task instructions with native push.</li>' +
+        '<li><b>v9.1</b> — Ward Sync 2.0: tick a GHIS patient to add them straight to your unit board; per-patient, device-secure auto-fetch keeps their labs &amp; imaging fresh; full patient info (MR, treating doctor, department) imported.</li>' +
+        '<li><b>v9.2</b> — Doctor verification: an NMC registration check unlocks verified access, with an owner admin console.</li>' +
+        '<li><b>v9.3</b> — Engagement: reading streaks, levels, quests, badges and a shareable stats card.</li>' +
+        '<li><b>v9.4</b> — Prescription generator (℞) and a drug&ndash;drug interaction checker.</li>' +
+        '<li><b>v9.5</b> — Calculator results now flow back to the ICU Scores panel — compute any score in the full calculator and it&#39;s saved on the patient.</li>' +
       '</ul></div>' +
     '</div>' +
     '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD — built and refined case by case at the bedside.</p>';
@@ -1569,7 +1577,7 @@
       '<li><span class="fn">1,465</span> drug monographs in structured &quot;gold&quot; format.</li>' +
       '<li><span class="fn">405</span> bedside clinical calculators — MDCalc-scale, every formula executed &amp; checked.</li>' +
       '<li><span class="fn">13</span> dedicated electrolyte analysis engines.</li>' +
-      '<li><span class="fn">24</span> antibiotics × 12 organism groups in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources — ICMR AMRSN 2024 national + GIMSR hospital resistance rates.</li>' +
+      '<li><span class="fn">47</span> antibiotics × <span class="fn">23</span> organisms (6 clinical groups) in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources — ICMR AMRSN 2024 national + GIMSR hospital resistance rates.</li>' +
       '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic — no frameworks, no build step.</li>' +
       '<li><span class="fn">100%</span> offline-capable PWA — works with no signal at the bedside.</li>' +
       '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
