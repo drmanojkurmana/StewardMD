@@ -389,9 +389,24 @@
             myRoles[gid] = (mdoc.data() || {}).role || null;
             if (!groupOffs[gid]) {
               groupData[gid] = undefined;
-              groupOffs[gid] = gref.onSnapshot(function (gd) {
-                groupData[gid] = (gd && gd.exists) ? gd.data() : null; emit();
-              }, function () { groupData[gid] = null; emit(); });
+              // A group-doc read can be TRANSIENTLY permission-denied right after a unit is created:
+              // the read rule checks members/{uid}, which may not have propagated to the rules engine
+              // yet. onSnapshot detaches on that error, so WITHOUT a retry the just-created unit is
+              // dropped from the list (groupData=null → skipped by emit) and only reappears on an app
+              // relaunch → looks like "the new unit didn't save". Retry a few times with a short
+              // backoff so it self-heals within seconds; give up (null) only after that. A genuinely
+              // missing group doc (deleted unit / orphan member) returns exists:false via the SUCCESS
+              // path — not an error — so orphans never trigger the retry loop.
+              (function attach(tries) {
+                groupOffs[gid] = gref.onSnapshot(
+                  function (gd) { groupData[gid] = (gd && gd.exists) ? gd.data() : null; emit(); },
+                  function () {
+                    if (myRoles[gid] !== undefined && tries < 6) {
+                      setTimeout(function () { if (myRoles[gid] !== undefined) attach(tries + 1); }, 1500);
+                    } else { groupData[gid] = null; emit(); }
+                  }
+                );
+              })(0);
             }
           });
           // Drop memberships that vanished (left / removed / unit deleted).
