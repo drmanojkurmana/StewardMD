@@ -37,7 +37,7 @@
   var H = (typeof window !== "undefined" && window.SMD_HAPTICS) || null;
 
   var rootEl = null, ctx = null, screen = "home";
-  var session = null, cam = null, sm = null, hub = null, lastFa = null, result = null;
+  var session = null, cam = null, sm = null, hub = null, lastFa = null, result = null, detail = null;
   var capturing = false, lastHapticState = "", scanSeq = 0;
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
@@ -216,6 +216,61 @@
       '</main>';
   }
 
+  function screenDetail() {
+    var m = (detail && detail.meta) || {};
+    var f = (m.vision && m.vision.findings) || {};
+    var q = m.quality || { overall: 0, subscores: {} };
+    var img = (detail && detail.imgSrc) || m.thumbnail || "";
+    var od = f.optic_disc || {}, mac = f.macula || {};
+    var acq = m.acquisition || {};
+    function row(l, v) { return '<div class="fundx-frow"><span>' + l + '</span><b>' + v + '</b></div>'; }
+    return '' +
+      '<header class="fundx-head rds-safe-top">' +
+        '<button class="fundx-close" data-fx="home" aria-label="Back">' + ric("arrow_back_ios_new") + '</button>' +
+        '<div class="fundx-head-tt"><b>Scan</b><div class="fundx-sub">' + esc((acq.eye || m.eye || "").toUpperCase() + (m.timestamp ? " · " + new Date(m.timestamp).toLocaleString() : "")) + '</div></div>' +
+        '<div class="fundx-head-sp"></div>' +
+      '</header>' +
+      '<main class="fundx-scroll">' +
+        '<div class="fundx-shot">' + (img ? '<img src="' + esc(img) + '" alt="retinal scan">' : '<span class="fundx-scan-ph">' + ric("visibility") + '</span>') +
+          '<div class="fundx-shot-q ' + (q.accepted ? 'ok' : 'bad') + '">' + Math.round(q.overall || 0) + '</div></div>' +
+        '<div class="fundx-modelbadge">' + ric("science") + 'Detection preview · ' + esc((m.provider && m.provider.provider) || "mock") + ' ' + esc((m.provider && m.provider.modelVersion) || "") + '</div>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Structured findings (Vision JSON)</span></div>' +
+        '<div class="fundx-findings">' +
+          row("Image quality", (f.quality != null ? f.quality : "—")) +
+          row("Cup–disc ratio", (od.cup_disc_ratio != null ? od.cup_disc_ratio : "—")) +
+          row("Microaneurysms", (f.microaneurysms != null ? f.microaneurysms : "—")) +
+          row("Haemorrhages", (f.hemorrhages != null ? f.hemorrhages : "—")) +
+          row("Hard exudates", (f.hard_exudates != null ? f.hard_exudates : "—")) +
+          row("Macula", (mac.visible ? (mac.edema ? "oedema" : "visible") : "—")) +
+          row("Model confidence", (f.confidence != null ? f.confidence : "—")) +
+        '</div>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Acquisition</span></div>' +
+        '<div class="fundx-findings">' +
+          row("Eye", esc((acq.eye || m.eye || "—"))) +
+          row("Duration", (acq.durationMs != null ? Math.round(acq.durationMs / 1000) + "s" : "—")) +
+          row("Attempts / retries", esc((acq.attempts != null ? acq.attempts : "—") + " / " + (acq.retries != null ? acq.retries : "—"))) +
+          row("Burst frames", (acq.burstCount != null ? acq.burstCount : "—")) +
+          row("Device", esc((m.device && m.device.platform) || "—") + " · " + esc((m.device && m.device.appVersion) || "")) +
+          row("Operator", esc((m.audit && m.audit.operator) || "—")) +
+        '</div>' +
+        '<div class="fundx-actions"><button class="fundx-btn ghost" data-fx="deletescan" data-id="' + esc(m.id) + '">' + ric("delete") + 'Delete scan</button></div>' +
+        '<p class="fundx-disc">' + esc(f.disclaimer || DISCLAIMER) + '</p>' +
+      '</main>';
+  }
+
+  function openDetail(id) {
+    var st = STORE(); if (!st) return;
+    Promise.all([st.getScan(id), st.imageUri(id, "original")]).then(function (r) {
+      if (!r[0]) { toast("Scan not found."); return; }
+      detail = { meta: r[0], imgSrc: r[1] || r[0].thumbnail || null };
+      show("detail");
+    }).catch(function () { toast("Could not open scan."); });
+  }
+  function deleteScan(id) {
+    var st = STORE(); if (!st) return;
+    st.deleteScan(id).then(function () { haptic("warning"); toast("Scan deleted."); detail = null; show("home"); }).catch(function () { toast("Could not delete scan."); });
+  }
+
   function paintRecent() {
     var box = document.getElementById("fundxRecent"); var st = STORE(); if (!box || !st) return;
     st.listScans(ctx && ctx.ref).then(function (list) {
@@ -384,6 +439,7 @@
     else if (screen === "processing") rootEl.innerHTML = screenProcessing();
     else if (screen === "review") rootEl.innerHTML = screenReview();
     else if (screen === "result") rootEl.innerHTML = screenResult();
+    else if (screen === "detail") rootEl.innerHTML = screenDetail();
   }
   function show(s) { screen = s; render(); }
 
@@ -404,8 +460,9 @@
       case "discard": haptic("light"); result = null; return show("home");
       case "save": return saveScan();
       case "training": haptic("light"); return toast("Guided Training Mode arrives in a later milestone.");
-      case "gallery": haptic("light"); return toast("Scan gallery arrives in a later milestone.");
-      case "open": haptic("light"); return toast("Scan viewer arrives in a later milestone.");
+      case "gallery": haptic("light"); { var rc = document.getElementById("fundxRecent"); if (rc && rc.scrollIntoView) rc.scrollIntoView({ behavior: "smooth" }); } return toast("Your recent scans are listed below.");
+      case "open": haptic("light"); return openDetail(b.getAttribute("data-id"));
+      case "deletescan": haptic("light"); return deleteScan(b.getAttribute("data-id"));
     }
   }
 

@@ -193,5 +193,16 @@ ok("record: provider carried from findings", rec.provider.provider === "mock");
 ok("record: acquisition captures eye + readiness trace", rec.acquisition.eye === "right" && rec.acquisition.readinessTrace.length === 3);
 ok("record: device app version + audit action present", !!rec.device.appVersion && rec.audit.actions[0].type === "created");
 
+// ---- M4 integration regression guards (source presence) -----------------
+const icu = src("icu.js");
+ok("icu: MEMBER.fundx defined", /MEMBER\.fundx\s*=/.test(icu));
+ok("icu: Records workspace includes fundx member", /members:\s*\["documents",\s*"imaging",\s*"fundx"/.test(icu));
+ok("icu: RENDER.fundx sub-tab present", /fundx:\s*function\s*\(\)/.test(icu) && /FundX AI · Retinal imaging/.test(icu));
+ok("icu: launch:fundx opens FUNDX with patient context", /arg === "fundx"/.test(icu) && /FUNDX\.open\(\{\s*ref:/.test(icu));
+
+const fj = src("fundx.js");
+ok("fundx: scan detail viewer present", /function openDetail\(/.test(fj) && /screen === "detail"/.test(fj));
+ok("fundx: delete-scan wired", /function deleteScan\(/.test(fj) && /data-fx="deletescan"/.test(fj));
+
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);

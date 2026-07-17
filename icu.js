@@ -2536,11 +2536,12 @@
     { id: "overview", label: "Overview", svg: "pulse", members: ["overview", "rounds"] },
     { id: "monitoring", label: "Monitoring", svg: "heart", members: ["vitals", "trends", "hemo", "fluids", "lytes", "abg", "vent", "infusions"] },
     { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "treatment", "protocols", "goals", "interactions"] },
-    { id: "documents", label: "Records", svg: "copy", members: ["documents", "imaging", "handover", "discharge", "more"] }
+    { id: "documents", label: "Records", svg: "copy", members: ["documents", "imaging", "fundx", "handover", "discharge", "more"] }
   ];
   var MEMBER = {}; TABS.forEach(function (t) { MEMBER[t.id] = { label: t.label, svg: t.svg, ic: t.ic }; });
   MEMBER.dx = { label: "Diagnosis", svg: "search", ic: "🩺" };
   MEMBER.imaging = { label: "Imaging", svg: "camera", ic: "🩻" };
+  MEMBER.fundx = { label: "FundX AI", svg: "camera", ic: "👁" };
   MEMBER.documents = { label: "Summary", svg: "copy", ic: "📄" };        // Documents sub-tab 1 — "Summary" (design docTabs order: Summary·Imaging·Handover·Discharge)
   MEMBER.more = { label: "Tools", svg: "more", ic: "🛠" };               // Records sub-tab — patient tools/settings (merged former "More" tab)
   MEMBER.vitals = { label: "Vitals", svg: "pulse", ic: "❤️" };          // Monitoring sub-tab — Live Patient Status grid
@@ -3106,6 +3107,17 @@
         return '<div class="icu-img-hidden"><span>' + esc(r.studyName || "Imaging") + '</span><button class="icu-img-act" data-icu-act="imghide:' + encodeURIComponent(r.id) + '">Unhide</button></div>';
       }).join("")) : "";
       return header + filters + cards + hiddenRows + correlationCard();
+    },
+    // Records -> FundX AI sub-tab: entry to the retinal-imaging module. Opens the full-screen
+    // FundX overlay for THIS patient (scans file under the patient). Additive + flag-gated by
+    // FundX itself (smd_fundx); independent of the Imaging-Notes flag. Detection preview only.
+    fundx: function () {
+      var enabled = !!(window.FUNDX && FUNDX.enabled && FUNDX.enabled());
+      var body = enabled
+        ? '<p class="icu-doc-sub" style="margin:0">AI-guided fundus capture with a 20D lens — beginner alignment coaching, automatic capture, quality scoring. Scans file under this patient. Detection preview only, never a diagnosis.</p>' +
+          '<button class="icu-btn" data-icu-act="launch:fundx" style="margin-top:10px">' + ico("camera", "👁") + ' Open FundX AI · Retinal imaging</button>'
+        : '<p class="icu-doc-sub" style="margin:0">FundX AI is turned off. Enable “FundX AI · Retinal (Beta)” in Settings to capture retinal images for this patient.</p>';
+      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("camera", "👁") + ' FundX AI · Retinal imaging</div>' + body + '</div>';
     },
     // Monitoring -> Vitals sub-tab (redesign parity): the Live Patient Status grid as a first-class
     // section with Update + Snapshot affordances (was previously only a collapsed <details>).
@@ -6970,6 +6982,17 @@
         else if (arg === "inf") launch(function () { if (!window.INF) return; INF.open(); infWeightBridge(); installInfBridge(); }, "infOverlay");
         else if (arg === "protocols") launch(function () { if (!window.INF) return; (INF.openProtocols ? INF.openProtocols() : INF.open()); infWeightBridge(); installInfBridge(); }, "infOverlay");
         else if (arg === "interactions") launch(function () { window.MEDDRUGS && window.MEDDRUGS.openInteractions && window.MEDDRUGS.openInteractions(); }, "miOverlay");
+        else if (arg === "fundx") launch(function () {
+          if (!window.FUNDX || !FUNDX.open) return;
+          var p = (_raw && _raw.patient) || {};
+          var meta = [];
+          if (p.age != null && p.age !== "") meta.push(p.age + "y");
+          if (p.sex) meta.push(p.sex);
+          if (p.diagnosis) meta.push(p.diagnosis);
+          FUNDX.open({ ref: p.mrn || p.name || null, name: p.name || (p.bed ? "Bed " + p.bed : null), meta: meta.join(" · "), age: p.age, sex: p.sex });
+          // FundX opens at z-index 10000 like ICU; raise it above the ICU dashboard.
+          try { var el = document.getElementById("fundxRoot"); if (el) el.style.zIndex = "10030"; } catch (e) {}
+        }, "fundxRoot");
         break;
     }
   }
