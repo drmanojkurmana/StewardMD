@@ -1110,6 +1110,7 @@
       '#icuRoot.icu-v2 .icu-v2-shead-h{font:700 16px var(--font)}#icuRoot.icu-v2 .icu-v2-shead-s{font:500 12px var(--font);color:rgba(255,255,255,.82)}' +
       '#icuRoot.icu-v2 .icu-v2-slist,#icuRoot.icu-v2 .icu-v2-tlist{padding:14px 16px;display:flex;flex-direction:column;gap:9px}' +
       '#icuRoot.icu-v2 .icu-v2-note{font:600 12px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:10px 12px;line-height:1.5}#icuRoot.icu-v2 .icu-v2-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}' +
+      '#icuRoot.icu-v2 .icu-v2-note-x{flex:0 0 auto;background:none;border:none;color:inherit;font:700 13px var(--font);cursor:pointer;padding:0 2px;line-height:1;opacity:.7}#icuRoot.icu-v2 .icu-v2-note-x:hover{opacity:1}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:14px;padding:13px 14px;cursor:pointer}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-alert-row.review{border-left-color:var(--warn)}' +
       '#icuRoot.icu-v2 .icu-v2-alert-ic{flex:0 0 auto;width:38px;height:38px;border-radius:11px;background:var(--panel2);display:flex;align-items:center;justify-content:center}#icuRoot.icu-v2 .icu-v2-alert-ic .icu-ico{width:18px;height:18px}' +
@@ -3778,8 +3779,51 @@
         _grpMembers = list || [];
         if (ICU.isOpen() && (_screen === "team" || _screen === "board")) paintLive();
       });
+      // Offer ICU push once, the first time this doctor enters an active shared unit (root cause
+      // of the "task assigned but nobody notified" gap: there was previously NO on-ramp to push
+      // registration from ICU collaboration at all). Small delay so it doesn't compete with the
+      // board's own loading/skeleton paint.
+      setTimeout(function () { try { grpMaybeOfferPush(); } catch (e) {} }, 1500);
     }
     if (!silent) { _screen = "board"; _paintTop = true; paint(); }
+  }
+  // Push opt-in — explain-then-ask, ICU-specific (mirrors the Lab Watch 24/7 / Auto-fetch consent
+  // sheets' tone). Reuses the EXISTING native registration path (window.SMD_enableNativePush,
+  // native-push.js) — there is exactly one place a device token is ever requested/stored; this
+  // sheet only supplies ICU-specific context for WHY, so residents connect "enable notifications"
+  // to "get pinged when a consultant assigns me a task" rather than a generic pitch. Shown once
+  // per account (accept OR decline) so it never nags on every unit open.
+  function grpPushPromptSeen() { try { return localStorage.getItem("smd_icu_push_prompt_seen") === "1"; } catch (e) { return false; } }
+  function grpMarkPushPromptSeen() { try { localStorage.setItem("smd_icu_push_prompt_seen", "1"); } catch (e) {} }
+  function grpMaybeOfferPush() {
+    if (!window.SMD_NATIVE_PUSH) return;                            // native push plugin not present on this build/platform
+    if (window.SMD_nativePushOn && SMD_nativePushOn()) return;       // already enabled
+    if (grpPushPromptSeen()) return;
+    if (document.getElementById("icuPushSheet")) return;
+    grpMarkPushPromptSeen();
+    var wrap = document.createElement("div");
+    wrap.id = "icuPushSheet";
+    wrap.setAttribute("style", "position:fixed;inset:0;z-index:20000;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center");
+    wrap.innerHTML =
+      '<div role="dialog" aria-label="Enable ICU task alerts" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25)">'
+      + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:6px">🔔 Get notified for ICU tasks</div>'
+      + '<div style="font:500 12.5px/1.55 var(--sans,system-ui);color:var(--slate,#5a7184)">Get notified the instant your consultant assigns you a task in this unit — even when the app is closed. You can turn this off anytime in Settings.</div>'
+      + '<div style="display:flex;gap:10px;margin-top:14px">'
+      + '<button id="icuPushLater" style="flex:1;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--panel,#fff);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>'
+      + '<button id="icuPushYes" style="flex:2;padding:12px;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans,system-ui);cursor:pointer">Enable</button>'
+      + '</div></div>';
+    document.body.appendChild(wrap);
+    var close = function () { try { wrap.remove(); } catch (e) {} };
+    wrap.addEventListener("click", function (e) { if (e.target === wrap) close(); });
+    wrap.querySelector("#icuPushLater").addEventListener("click", close);
+    wrap.querySelector("#icuPushYes").addEventListener("click", function () {
+      close();
+      try {
+        window.SMD_enableNativePush().then(function (granted) {
+          if (window.toast) toast(granted ? "Notifications enabled ✅" : "Notifications not enabled.");
+        }, function () { if (window.toast) toast("Couldn’t enable notifications."); });
+      } catch (e) {}
+    });
   }
   function grpTeardownPatient() {
     if (_grpSubPt) { try { _grpSubPt(); } catch (e) {} _grpSubPt = null; }
@@ -3932,7 +3976,7 @@
         '<span class="icu-v2-foot-ago">' + (p.reviewed ? "" : '<span class="icu-v2-unrev">Not reviewed</span> ') + footAgo + '</span></div></button>';
     }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
     var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
-    return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + errNote + attnHTML + filters + cards + foot + '</div></div>';
+    return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + errNote + grpPushNoteHTML() + attnHTML + filters + cards + foot + '</div></div>';
   }
   // Phase 5: the Team screen — your StewardMD Doctor ID (copyable), the live unit roster (from the
   // members subcollection), admin add/invite/remove actions, and leave/delete. Role-gated in the UI
@@ -4614,24 +4658,37 @@
       }, function () { if (window.toast) toast("Couldn't get your auth token"); });
     } catch (e) {}
   }
+  // Last on-issue push attempt's outcome, so a 0-reach or failed push stays VISIBLE on the board
+  // (not just a toast that auto-dismisses right as grpRoundBack() navigates away — easy to miss
+  // mid-rounds). Cleared once a later attempt reaches at least one device. Read by grpPushNoteHTML().
+  var _grpLastPush = null;   // { ts, kind: 'none'|'error', text }
+  function grpPushNoteHTML() {
+    if (!_grpLastPush) return "";
+    if ((nowTs() - _grpLastPush.ts) > 30 * 60000) return "";   // stale (>30 min) — stop showing it
+    return '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn);display:flex;align-items:flex-start;gap:8px">' +
+      '<span style="flex:1">' + ico("warn", "⚠️") + ' ' + esc(_grpLastPush.text) + '</span>' +
+      '<button class="icu-v2-note-x" data-icu-act="pushnotedismiss" aria-label="Dismiss">✕</button></div>';
+  }
+  function grpPushNoteDismiss() { _grpLastPush = null; if (ICU.isOpen()) paintLive(); }
   // Immediate push to the unit when an instruction is issued (called from grpDoPostRound). The server
   // pushes the other members (or the author if solo, so it's verifiable) — no waiting for overdue.
   function grpNotifyInstruction(gid, pid, chosen, priority) {
+    var text = (chosen && chosen[0]) || "New instruction";
+    function note(kind, msg) { _grpLastPush = { ts: nowTs(), kind: kind, text: msg }; if (ICU.isOpen() && _screen === "board") paintLive(); }
     try {
-      var text = (chosen && chosen[0]) || "New instruction";
       idToken().then(function (tok) {
-        if (!tok) return;
+        if (!tok) { note("error", "Couldn't reach the push service — you weren't signed in. Teammates won't be alerted for this instruction."); return; }
         fetch("/api/push/instruction", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, priority: priority, count: (chosen ? chosen.length : 1) }) })
           .then(function (r) { return r.json(); })
           .then(function (j) {
             // Surface push REACH so it's obvious when teammates aren't registered for notifications.
-            if (!window.toast || !j) return;
-            if (j.sent > 0) toast("Pushed to " + j.sent + " device" + (j.sent === 1 ? "" : "s"));
-            else if (j.notified > 0) toast("No teammate is registered for push yet — ask them to open the app + allow notifications");
-          }, function () {})
-          .catch(function () {});
-      }, function () {});
-    } catch (e) {}
+            if (j && j.sent > 0) { _grpLastPush = null; if (window.toast) toast("Pushed to " + j.sent + " device" + (j.sent === 1 ? "" : "s")); return; }
+            if (j && j.notified > 0) { note("none", "No teammate is registered for push yet — ask them to enable notifications in Settings › Ward Integration."); return; }
+            if (!j || j.error) note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction. Check your connection.");
+          }, function () { note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction."); })
+          .catch(function () { note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction."); });
+      }, function () { note("error", "Couldn't reach the push service — you weren't signed in. Teammates won't be alerted for this instruction."); });
+    } catch (e) { note("error", "Couldn't reach the push service — teammates weren't alerted for this instruction."); }
   }
   // "Hand over to next shift" → push the unit (incoming shift) that a handover is ready.
   function grpNotifyHandover(gid, pid, sbar) {
@@ -6423,6 +6480,7 @@
       case "grptaskexplainsave": grpTaskExplainSave(); break;
       case "tlall": _tlAll = !_tlAll; _paintTop = true; paint(); break;
       case "grpretry": grpRetry(); break;   // Phase 4: re-subscribe after a connection/error state
+      case "pushnotedismiss": grpPushNoteDismiss(); break;   // dismiss the "teammates weren't alerted" board notice
       // ---- ICU v2 group mode Phase 5 — doctor ID + membership (add/invite-link/leave/remove/join) ----
       case "grpcopyid": grpCopyId(); break;
       case "grpaddid": grpOpenAddById(); break;
