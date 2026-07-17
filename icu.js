@@ -4634,7 +4634,7 @@
       try {
         idToken().then(function (tok) {
           if (!tok) return;
-          fetch("/api/push/task-overdue", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, taskId: t.id }) }).catch(function () {});
+          fetch(grpPushUrl("/api/push/task-overdue"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, taskId: t.id }) }).catch(function () {});
         }, function () {});
       } catch (e) {}
     });
@@ -4646,7 +4646,7 @@
     try {
       idToken().then(function (tok) {
         if (!tok) { if (window.toast) toast("Sign in first, then try the test push"); return; }
-        fetch("/api/push/test", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok } })
+        fetch(grpPushUrl("/api/push/test"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok } })
           .then(function (r) { return r.json(); })
           .then(function (j) {
             if (!window.toast) return;
@@ -4662,6 +4662,11 @@
   // (not just a toast that auto-dismisses right as grpRoundBack() navigates away — easy to miss
   // mid-rounds). Cleared once a later attempt reaches at least one device. Read by grpPushNoteHTML().
   var _grpLastPush = null;   // { ts, kind: 'none'|'error', text }
+  // On native the WebView origin is https://localhost, so a relative "/api/..." fetch hits the local
+  // app shell (nonexistent) and fails — the real cause of "task assigned but nobody notified". Every
+  // API call MUST be absolute via SMD_API_BASE (empty on web, https://stewardmd.in on device), the
+  // same idiom native-push.js / watch-lab.js already use.
+  function grpPushUrl(p) { return (window.SMD_API_BASE || "") + p; }
   function grpPushNoteHTML() {
     if (!_grpLastPush) return "";
     if ((nowTs() - _grpLastPush.ts) > 30 * 60000) return "";   // stale (>30 min) — stop showing it
@@ -4678,7 +4683,7 @@
     try {
       idToken().then(function (tok) {
         if (!tok) { note("error", "Couldn't reach the push service — you weren't signed in. Teammates won't be alerted for this instruction."); return; }
-        fetch("/api/push/instruction", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, priority: priority, count: (chosen ? chosen.length : 1) }) })
+        fetch(grpPushUrl("/api/push/instruction"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, priority: priority, count: (chosen ? chosen.length : 1) }) })
           .then(function (r) { return r.json(); })
           .then(function (j) {
             // Surface push REACH so it's obvious when teammates aren't registered for notifications.
@@ -4696,7 +4701,7 @@
       var text = (sbar && sbar[0] && sbar[0].body) || "Shift handover";   // the Situation line
       idToken().then(function (tok) {
         if (!tok) return;
-        fetch("/api/push/instruction", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, kind: "handover" }) })
+        fetch(grpPushUrl("/api/push/instruction"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, text: text, kind: "handover" }) })
           .then(function (r) { return r.json(); })
           .then(function (j) { if (window.toast && j && !j.sent && j.notified > 0) toast("Handover recorded — but no teammate is registered for push yet"); }, function () {})
           .catch(function () {});
