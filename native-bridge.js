@@ -490,27 +490,41 @@
     });
   }
   if (typeof window.fetch === "function") {
-    var origFetch = window.fetch.bind(window);
+    // The DEFAULT fetch stays CapacitorHttp-patched (native) — so ALL cross-origin app traffic
+    // (push POSTs to https://stewardmd.in/api/*, models.stewardmd.in, …) keeps its auto-patched
+    // no-CORS behavior. Two carve-outs layer over it:
+    //   (1) /api/* (relative, or the absolute drug/index worker api.stewardmd.in) → the CapacitorHttp
+    //       PLUGIN explicitly (a real native request, no CORS); relative paths are absolutized.
+    //   (2) firestore.googleapis.com on ANDROID → the PRISTINE native fetch. CapacitorHttp auto-patches
+    //       window.fetch, and on the Android WebView that patched fetch breaks Firestore's WebChannel
+    //       transport — every read fails `unavailable` (verified live via CDP) → ICU group mode never
+    //       loads its shared units. CapacitorHttp stashes the original browser fetch as
+    //       window.CapacitorWebFetch; Firestore reaches the server natively over it (like the web PWA).
+    //       MUST be in place before Firestore starts (it captures its transport at start); native-bridge
+    //       runs at boot, ahead of the first read. Scoped to Firestore ONLY so nothing else regresses
+    //       (a broad "native fetch for all non-/api" broke push to stewardmd.in/api — CORS-blocked).
+    // iOS/web are unchanged throughout (WKWebView tolerates the patch).
+    var patchedFetch = window.fetch.bind(window);
+    var _plat = ""; try { _plat = (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform()) || ""; } catch (e) {}
+    var _nativeFetch = (typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch.bind(window) : patchedFetch;
     window.fetch = function (input, init) {
       try {
         var url = (typeof input === "string") ? input : (input && typeof input === "object" ? input.url : null);
-        // Route through CapacitorHttp (a real native request, no CORS): relative "/api/*" AND the
-        // absolute drug/index API worker "https://api.stewardmd.in/*" — the latter is cross-origin
-        // from the WebView (origin https://localhost) and would otherwise leak out as a CORS-blocked
-        // browser request (Drug Database came up empty). Absolute URLs are used as-is.
-        var abs = null;
         if (typeof url === "string") {
+          var abs = null;
           if (url.charAt(0) === "/" && url.lastIndexOf("/api/", 0) === 0) abs = API_ORIGIN + url;
           else if (url.lastIndexOf("https://api.stewardmd.in", 0) === 0 || url.lastIndexOf("http://api.stewardmd.in", 0) === 0) abs = url;
-        }
-        if (abs) {
-          var merged = init || (input && typeof input === "object" ? { method: input.method, headers: input.headers } : {});
-          var r = nativeApiFetch(abs, merged);
-          if (r) return r;                              // native request in flight
-          return origFetch(abs, init);                  // fallback: at least absolutized
+          if (abs) {
+            var merged = init || (input && typeof input === "object" ? { method: input.method, headers: input.headers } : {});
+            var r = nativeApiFetch(abs, merged);
+            if (r) return r;                              // native request in flight
+            return patchedFetch(abs, init);               // fallback: at least absolutized
+          }
+          // Firestore transport ONLY (Android): bypass the broken patch via pristine native fetch.
+          if (_plat === "android" && url.lastIndexOf("https://firestore.googleapis.com", 0) === 0) return _nativeFetch(input, init);
         }
       } catch (e) { /* fall through */ }
-      return origFetch(input, init);
+      return patchedFetch(input, init);
     };
   }
 

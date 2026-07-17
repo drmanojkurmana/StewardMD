@@ -270,7 +270,11 @@
       function renderAddTarget() {
         var el = document.getElementById('ghisAddTarget'); if (!el) return;
         if (!(window.ICU && ICU.unitList)) { el.style.display = 'none'; return; }
-        var units = []; try { units = ICU.unitList() || []; } catch (e) {}
+        // ensureUnits() starts the live group subscription (units load async, even when the ICU
+        // dashboard was never opened) AND registers this fn to re-render as units arrive — so a
+        // just-created ward shows up here instead of only the first-loaded unit.
+        var units = [];
+        try { units = (ICU.ensureUnits ? ICU.ensureUnits(renderAddTarget) : ICU.unitList()) || []; } catch (e) {}
         el.style.display = 'flex';
         if (!units.length) {
           el.innerHTML = '<span style="font:700 12px var(--sans,system-ui);color:var(--slate,#5a7184)">Adding to dashboard</span>' +

@@ -355,7 +355,7 @@
     compute:function(v){
       if(!ok(v.hr)||!ok(v.sbp)||v.sbp<=0) return ERR;
       var si=v.hr/v.sbp;
-      return { v:r1(si), u:"", i:(si>=0.9?"Elevated (≥0.9) — suggests haemodynamic compromise / occult hypoperfusion.":"Normal (0.5–0.7).") };
+      return { v:r1(si), u:"", i:(si>=0.9?"Elevated (≥0.9) — suggests haemodynamic compromise / occult hypoperfusion.":si>=0.7?"Borderline (0.7–0.9) — recheck and monitor.":"Normal (≤0.7).") };
     } },
 
   { id:"ldl", cat:"Cardiovascular", icon:"🧈", title:"LDL (Friedewald)",
@@ -604,7 +604,7 @@
     compute:function(v){
       if(!ok(v.uurea)||!ok(v.bun)||!ok(v.ucr)||!ok(v.pcr)||v.bun<=0||v.ucr<=0) return ERR;
       var fe=(v.uurea*v.pcr)/(v.bun*v.ucr)*100;
-      return { v:r1(fe), u:"%", i:(fe<35?"<35% → pre-renal.":">50% → intrinsic (ATN).")+" More reliable than FENa when diuretics have been given." };
+      return { v:r1(fe), u:"%", i:(fe<35?"<35% → pre-renal.":fe<=50?"35–50% → indeterminate.":">50% → intrinsic (ATN).")+" More reliable than FENa when diuretics have been given." };
     } },
 
   { id:"corr_na", cat:"Renal", icon:"🧂", title:"Corrected Na (hyperglycaemia)",
@@ -1103,10 +1103,10 @@
     desc:"Pre-test probability of heparin-induced thrombocytopenia.",
     kw:["hit","heparin","thrombocytopenia","platelet","4t"],
     inputs:[
-      { id:"thrombo", label:"Thrombocytopenia", type:"select", opts:[{v:"2",t:"Fall >50% & nadir ≥20 (2)"},{v:"1",t:"Fall 30–50% or nadir 10–19 (1)"},{v:"0",t:"Fall <30% or nadir <10 (0)"}] },
-      { id:"timing", label:"Timing of platelet fall", type:"select", opts:[{v:"2",t:"Clear onset day 5–10, or ≤1 day if heparin ≤30 d (2)"},{v:"1",t:"Consistent but unclear / onset after day 10 (1)"},{v:"0",t:"Fall <4 days, no recent heparin (0)"}] },
-      { id:"thrombosis", label:"Thrombosis / sequelae", type:"select", opts:[{v:"2",t:"New thrombosis, skin necrosis, anaphylaxis (2)"},{v:"1",t:"Progressive/recurrent or erythematous skin (1)"},{v:"0",t:"None (0)"}] },
-      { id:"other", label:"Other cause of thrombocytopenia", type:"select", opts:[{v:"2",t:"None apparent (2)"},{v:"1",t:"Possible (1)"},{v:"0",t:"Definite (0)"}] }
+      { id:"thrombo", label:"Thrombocytopenia", type:"select", opts:[{v:"0",t:"Fall <30% or nadir <10 (0)"},{v:"1",t:"Fall 30–50% or nadir 10–19 (1)"},{v:"2",t:"Fall >50% & nadir ≥20 (2)"}] },
+      { id:"timing", label:"Timing of platelet fall", type:"select", opts:[{v:"0",t:"Fall <4 days, no recent heparin (0)"},{v:"1",t:"Consistent but unclear / onset after day 10 (1)"},{v:"2",t:"Clear onset day 5–10, or ≤1 day if heparin ≤30 d (2)"}] },
+      { id:"thrombosis", label:"Thrombosis / sequelae", type:"select", opts:[{v:"0",t:"None (0)"},{v:"1",t:"Progressive/recurrent or erythematous skin (1)"},{v:"2",t:"New thrombosis, skin necrosis, anaphylaxis (2)"}] },
+      { id:"other", label:"Other cause of thrombocytopenia", type:"select", opts:[{v:"0",t:"Definite (0)"},{v:"1",t:"Possible (1)"},{v:"2",t:"None apparent (2)"}] }
     ],
     compute:function(v){
       if(!v.thrombo||!v.timing||!v.thrombosis||!v.other) return ERR;
@@ -1284,7 +1284,7 @@
     ],
     compute:function(v){
       if(!v.cls) return ERR;
-      var mort={1:"~6%",2:"~17%",3:"~38%",4:"~67%"}[v.cls];
+      var mort={1:"~6%",2:"~17%",3:"~38%",4:"~81%"}[v.cls];
       return { v:"Class "+({1:"I",2:"II",3:"III",4:"IV"}[v.cls]), u:"", i:"Approx. historical in-hospital mortality "+mort+" (lower with modern reperfusion). Higher class → worse prognosis. Ref: Killip & Kimball, Am J Cardiol 1967." };
     } },
 
@@ -1742,7 +1742,7 @@
     desc:"Severity of opioid withdrawal.",
     inputs:[
       { id:"pulse", label:"Resting pulse rate", type:"select", opts:[{v:"0",t:"≤80"},{v:"1",t:"81–100"},{v:"2",t:"101–120"},{v:"4",t:">120"}] },
-      { id:"sweat", label:"Sweating", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Subjective / flushing"},{v:"2",t:"Beads of sweat"},{v:"3",t:"Streaming"}] },
+      { id:"sweat", label:"Sweating", type:"select", opts:[{v:"0",t:"No chills or flushing"},{v:"1",t:"Subjective chills or flushing"},{v:"2",t:"Flushed or moist face"},{v:"3",t:"Beads of sweat on brow/face"},{v:"4",t:"Sweat streaming off face"}] },
       { id:"restless", label:"Restlessness", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Fidgety"},{v:"3",t:"Frequent shifting"},{v:"5",t:"Unable to sit still"}] },
       { id:"pupil", label:"Pupil size", type:"select", opts:[{v:"0",t:"Normal/pinned"},{v:"1",t:"Possibly larger"},{v:"2",t:"Moderately dilated"},{v:"5",t:"So dilated only rim visible"}] },
       { id:"ache", label:"Bone/joint aches", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Severe diffuse"},{v:"4",t:"Rubbing joints, cannot sit still"}] },
@@ -2079,11 +2079,11 @@
     desc:"Global outcome after brain injury.",
     inputs:[
       { id:"g", label:"Outcome", type:"select", opts:[
-        {v:"1",t:"1 — Death"},
-        {v:"2",t:"2 — Persistent vegetative state"},
-        {v:"3",t:"3 — Severe disability (conscious but dependent)"},
+        {v:"5",t:"5 — Good recovery"},
         {v:"4",t:"4 — Moderate disability (independent but disabled)"},
-        {v:"5",t:"5 — Good recovery"} ] }
+        {v:"3",t:"3 — Severe disability (conscious but dependent)"},
+        {v:"2",t:"2 — Persistent vegetative state"},
+        {v:"1",t:"1 — Death"} ] }
     ],
     compute:function(v){
       var g=Number(v.g)||1;
@@ -2099,8 +2099,8 @@
     ],
     compute:function(v){
       if(!ok(v.wbc)||!ok(v.neut)||v.wbc<0||v.neut<0) return ERR;
-      var a=r1(v.wbc*v.neut/100);
-      var band = a<0.5?"Severe neutropenia (high infection risk)":a<1.0?"Moderate neutropenia":a<1.5?"Mild neutropenia":"Not neutropenic";
+      var raw=v.wbc*v.neut/100, a=r1(raw);
+      var band = raw<0.5?"Severe neutropenia (high infection risk)":raw<1.0?"Moderate neutropenia":raw<1.5?"Mild neutropenia":"Not neutropenic";
       return { v:a, u:"×10⁹/L", i:band+" (severe <0.5, moderate <1.0, mild <1.5). Neutropenic fever is an emergency." };
     } },
 
@@ -2186,12 +2186,12 @@
   { id:"braden", cat:"General", icon:"🛏️", title:"Braden Scale (Pressure Ulcer Risk)",
     desc:"Risk of pressure ulcer development in immobile or at-risk patients.",
     inputs:[
-      { id:"sens", label:"Sensory perception", type:"select", opts:[{v:"1",t:"Completely limited"},{v:"2",t:"Very limited"},{v:"3",t:"Slightly limited"},{v:"4",t:"No impairment"}] },
-      { id:"moist", label:"Moisture", type:"select", opts:[{v:"1",t:"Constantly moist"},{v:"2",t:"Very moist"},{v:"3",t:"Occasionally moist"},{v:"4",t:"Rarely moist"}] },
-      { id:"act", label:"Activity", type:"select", opts:[{v:"1",t:"Bedfast"},{v:"2",t:"Chairfast"},{v:"3",t:"Walks occasionally"},{v:"4",t:"Walks frequently"}] },
-      { id:"mob", label:"Mobility", type:"select", opts:[{v:"1",t:"Completely immobile"},{v:"2",t:"Very limited"},{v:"3",t:"Slightly limited"},{v:"4",t:"No limitation"}] },
-      { id:"nut", label:"Nutrition", type:"select", opts:[{v:"1",t:"Very poor"},{v:"2",t:"Probably inadequate"},{v:"3",t:"Adequate"},{v:"4",t:"Excellent"}] },
-      { id:"fric", label:"Friction and shear", type:"select", opts:[{v:"1",t:"Problem"},{v:"2",t:"Potential problem"},{v:"3",t:"No apparent problem"}] }
+      { id:"sens", label:"Sensory perception", type:"select", opts:[{v:"4",t:"No impairment"},{v:"3",t:"Slightly limited"},{v:"2",t:"Very limited"},{v:"1",t:"Completely limited"}] },
+      { id:"moist", label:"Moisture", type:"select", opts:[{v:"4",t:"Rarely moist"},{v:"3",t:"Occasionally moist"},{v:"2",t:"Very moist"},{v:"1",t:"Constantly moist"}] },
+      { id:"act", label:"Activity", type:"select", opts:[{v:"4",t:"Walks frequently"},{v:"3",t:"Walks occasionally"},{v:"2",t:"Chairfast"},{v:"1",t:"Bedfast"}] },
+      { id:"mob", label:"Mobility", type:"select", opts:[{v:"4",t:"No limitation"},{v:"3",t:"Slightly limited"},{v:"2",t:"Very limited"},{v:"1",t:"Completely immobile"}] },
+      { id:"nut", label:"Nutrition", type:"select", opts:[{v:"4",t:"Excellent"},{v:"3",t:"Adequate"},{v:"2",t:"Probably inadequate"},{v:"1",t:"Very poor"}] },
+      { id:"fric", label:"Friction and shear", type:"select", opts:[{v:"3",t:"No apparent problem"},{v:"2",t:"Potential problem"},{v:"1",t:"Problem"}] }
     ],
     compute:function(v){
       var s = Number(v.sens)+Number(v.moist)+Number(v.act)+Number(v.mob)+Number(v.nut)+Number(v.fric);
@@ -2306,9 +2306,9 @@
     desc:"Likelihood that a clinical event is an adverse drug reaction.",
     inputs:[
       { id:"q1", label:"Previous conclusive reports on this reaction?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"1",t:"Yes"}] },
-      { id:"q2", label:"Event appeared after the drug was given?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"2",t:"Yes"}] },
+      { id:"q2", label:"Event appeared after the drug was given?", type:"select", opts:[{v:"0",t:"Do not know / not documented"},{v:"2",t:"Yes"},{v:"-1",t:"No"}] },
       { id:"q3", label:"Improved when drug stopped or antagonist given?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"1",t:"Yes"}] },
-      { id:"q4", label:"Reappeared when drug re-administered?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"2",t:"Yes"}] },
+      { id:"q4", label:"Reappeared when drug re-administered?", type:"select", opts:[{v:"0",t:"Do not know / not done"},{v:"2",t:"Yes"},{v:"-1",t:"No"}] },
       { id:"q5", label:"Alternative causes could explain it?", type:"select", opts:[{v:"2",t:"No"},{v:"0",t:"Unknown"},{v:"-1",t:"Yes"}] },
       { id:"q6", label:"Reappeared on placebo?", type:"select", opts:[{v:"1",t:"No"},{v:"0",t:"Unknown"},{v:"-1",t:"Yes"}] },
       { id:"q7", label:"Drug detected in toxic concentration?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"1",t:"Yes"}] },
@@ -2484,7 +2484,7 @@
     desc:"Level of agitation or sedation in critically ill patients.",
     inputs:[
       { id:"rass", label:"Observed state", type:"select", opts:[
-        {v:"4",t:"+4 Combative"},{v:"3",t:"+3 Very agitated"},{v:"2",t:"+2 Agitated"},{v:"1",t:"+1 Restless"},{v:"0",t:"0 Alert and calm"},
+        {v:"0",t:"0 Alert and calm"},{v:"1",t:"+1 Restless"},{v:"2",t:"+2 Agitated"},{v:"3",t:"+3 Very agitated"},{v:"4",t:"+4 Combative"},
         {v:"-1",t:"−1 Drowsy (>10s eye contact to voice)"},{v:"-2",t:"−2 Light sedation (<10s eye contact)"},{v:"-3",t:"−3 Moderate sedation (movement, no eye contact)"},
         {v:"-4",t:"−4 Deep sedation (responds to physical stimulus only)"},{v:"-5",t:"−5 Unarousable"} ] }
     ],
@@ -2505,7 +2505,7 @@
     ],
     compute:function(v){
       var s=Number(v.rr)+Number(v.cyan)+Number(v.air)+Number(v.grunt)+Number(v.retr);
-      var b=s<4?"No respiratory distress":s<=6?"Moderate distress — monitor closely":"Impending respiratory failure — urgent support";
+      var b=s===0?"No respiratory distress":s<4?"Mild respiratory distress":s<=6?"Moderate distress — monitor closely":"Impending respiratory failure — urgent support";
       return { v:s, u:"/10", i:b+". Ref: Downes, Clin Pediatr 1970." };
     } },
 
@@ -2563,8 +2563,8 @@
       var d=Math.log10(v.ins)+Math.log10(v.glu);
       if(!isFinite(d)||d===0) return ERR;
       var q=1/d, qr=Math.round(q*1000)/1000;
-      var b=q>=0.45?"Normal insulin sensitivity":q>=0.34?"Reduced sensitivity (insulin resistance)":"Marked insulin resistance";
-      return { v:qr, u:"", i:b+" (glucose entered in mg/dL). Higher = more sensitive. Ref: Katz, J Clin Endocrinol Metab 2000." };
+      var b=q>=0.37?"Within the insulin-sensitive range":q>=0.33?"Reduced insulin sensitivity":"Marked insulin resistance";
+      return { v:qr, u:"", i:b+" (glucose mg/dL; higher = more sensitive). No universal cut-off — healthy mean ≈0.38, obese ≈0.33, type-2 diabetes ≈0.30; interpret against local reference. Ref: Katz, J Clin Endocrinol Metab 2000." };
     } },
 
   { id:"basdai", cat:"Rheumatology", icon:"🦴", title:"BASDAI — Score Interpreter",
@@ -3258,10 +3258,10 @@
   { id:"mews", cat:"Critical care", icon:"🚨", title:"Modified Early Warning Score (MEWS)",
     desc:"Bedside physiological track-and-trigger score.",
     inputs:[
-      { id:"sbp", label:"Systolic BP", type:"select", opts:[{v:"3",t:"≤ 70"},{v:"2",t:"71–80"},{v:"1",t:"81–100"},{v:"0",t:"101–199"},{v:"2b",t:"≥ 200"}] },
-      { id:"hr", label:"Heart rate", type:"select", opts:[{v:"2",t:"≤ 40"},{v:"1",t:"41–50"},{v:"0",t:"51–100"},{v:"1b",t:"101–110"},{v:"2b",t:"111–129"},{v:"3",t:"≥ 130"}] },
-      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"2",t:"< 9"},{v:"0",t:"9–14"},{v:"1",t:"15–20"},{v:"2b",t:"21–29"},{v:"3",t:"≥ 30"}] },
-      { id:"temp", label:"Temperature", type:"select", opts:[{v:"2",t:"< 35°C"},{v:"0",t:"35–38.4°C"},{v:"2b",t:"≥ 38.5°C"}] },
+      { id:"sbp", label:"Systolic BP", type:"select", opts:[{v:"0",t:"101–199"},{v:"1",t:"81–100"},{v:"2",t:"71–80"},{v:"3",t:"≤ 70"},{v:"2b",t:"≥ 200"}] },
+      { id:"hr", label:"Heart rate", type:"select", opts:[{v:"0",t:"51–100"},{v:"1",t:"41–50"},{v:"2",t:"≤ 40"},{v:"1b",t:"101–110"},{v:"2b",t:"111–129"},{v:"3",t:"≥ 130"}] },
+      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"0",t:"9–14"},{v:"1",t:"15–20"},{v:"2",t:"< 9"},{v:"2b",t:"21–29"},{v:"3",t:"≥ 30"}] },
+      { id:"temp", label:"Temperature", type:"select", opts:[{v:"0",t:"35–38.4°C"},{v:"2",t:"< 35°C"},{v:"2b",t:"≥ 38.5°C"}] },
       { id:"avpu", label:"Neurological (AVPU)", type:"select", opts:[{v:"0",t:"Alert"},{v:"1",t:"Reacts to voice"},{v:"2",t:"Reacts to pain"},{v:"3",t:"Unresponsive"}] }
     ],
     compute:function(v){
@@ -3427,18 +3427,18 @@
   { id:"apache2", cat:"Critical care", icon:"🚨", title:"APACHE II Score",
     desc:"ICU severity of illness and mortality estimate (worst values in first 24 h).",
     inputs:[
-      { id:"temp", label:"Temperature (°C, core)", type:"select", opts:[{v:"4",t:"≥ 41"},{v:"3",t:"39–40.9"},{v:"1",t:"38.5–38.9"},{v:"0",t:"36–38.4"},{v:"1b",t:"34–35.9"},{v:"2",t:"32–33.9"},{v:"3b",t:"30–31.9"},{v:"4b",t:"≤ 29.9"}] },
-      { id:"map", label:"Mean arterial pressure (mmHg)", type:"select", opts:[{v:"4",t:"≥ 160"},{v:"3",t:"130–159"},{v:"2",t:"110–129"},{v:"0",t:"70–109"},{v:"2b",t:"50–69"},{v:"4b",t:"≤ 49"}] },
-      { id:"hr", label:"Heart rate", type:"select", opts:[{v:"4",t:"≥ 180"},{v:"3",t:"140–179"},{v:"2",t:"110–139"},{v:"0",t:"70–109"},{v:"2b",t:"55–69"},{v:"3b",t:"40–54"},{v:"4b",t:"≤ 39"}] },
-      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"4",t:"≥ 50"},{v:"3",t:"35–49"},{v:"1",t:"25–34"},{v:"0",t:"12–24"},{v:"1b",t:"10–11"},{v:"2",t:"6–9"},{v:"4b",t:"≤ 5"}] },
+      { id:"temp", label:"Temperature (°C, core)", type:"select", opts:[{v:"0",t:"36–38.4"},{v:"1",t:"38.5–38.9"},{v:"3",t:"39–40.9"},{v:"4",t:"≥ 41"},{v:"1b",t:"34–35.9"},{v:"2",t:"32–33.9"},{v:"3b",t:"30–31.9"},{v:"4b",t:"≤ 29.9"}] },
+      { id:"map", label:"Mean arterial pressure (mmHg)", type:"select", opts:[{v:"0",t:"70–109"},{v:"2",t:"110–129"},{v:"3",t:"130–159"},{v:"4",t:"≥ 160"},{v:"2b",t:"50–69"},{v:"4b",t:"≤ 49"}] },
+      { id:"hr", label:"Heart rate", type:"select", opts:[{v:"0",t:"70–109"},{v:"2",t:"110–139"},{v:"3",t:"140–179"},{v:"4",t:"≥ 180"},{v:"2b",t:"55–69"},{v:"3b",t:"40–54"},{v:"4b",t:"≤ 39"}] },
+      { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"0",t:"12–24"},{v:"1",t:"25–34"},{v:"3",t:"35–49"},{v:"4",t:"≥ 50"},{v:"1b",t:"10–11"},{v:"2",t:"6–9"},{v:"4b",t:"≤ 5"}] },
       { id:"oxy", label:"Oxygenation", type:"select", opts:[{v:"0",t:"FiO₂≥0.5: A-a<200, or FiO₂<0.5: PaO₂>70"},{v:"1",t:"FiO₂<0.5: PaO₂ 61–70"},{v:"2",t:"FiO₂≥0.5: A-a 200–349"},{v:"3",t:"FiO₂≥0.5: A-a 350–499, or FiO₂<0.5: PaO₂ 55–60"},{v:"4",t:"FiO₂≥0.5: A-a ≥500, or FiO₂<0.5: PaO₂ <55"}] },
-      { id:"ph", label:"Arterial pH", type:"select", opts:[{v:"4",t:"≥ 7.7"},{v:"3",t:"7.6–7.69"},{v:"1",t:"7.5–7.59"},{v:"0",t:"7.33–7.49"},{v:"2",t:"7.25–7.32"},{v:"3b",t:"7.15–7.24"},{v:"4b",t:"< 7.15"}] },
-      { id:"na", label:"Serum sodium (mmol/L)", type:"select", opts:[{v:"4",t:"≥ 180"},{v:"3",t:"160–179"},{v:"2",t:"155–159"},{v:"1",t:"150–154"},{v:"0",t:"130–149"},{v:"2b",t:"120–129"},{v:"3b",t:"111–119"},{v:"4b",t:"≤ 110"}] },
-      { id:"k", label:"Serum potassium (mmol/L)", type:"select", opts:[{v:"4",t:"≥ 7"},{v:"3",t:"6–6.9"},{v:"1",t:"5.5–5.9"},{v:"0",t:"3.5–5.4"},{v:"1b",t:"3–3.4"},{v:"2",t:"2.5–2.9"},{v:"4b",t:"< 2.5"}] },
-      { id:"cr", label:"Serum creatinine (mg/dL)", type:"select", opts:[{v:"4",t:"≥ 3.5"},{v:"3",t:"2–3.4"},{v:"2",t:"1.5–1.9"},{v:"0",t:"0.6–1.4"},{v:"2b",t:"< 0.6"}] },
+      { id:"ph", label:"Arterial pH", type:"select", opts:[{v:"0",t:"7.33–7.49"},{v:"1",t:"7.5–7.59"},{v:"3",t:"7.6–7.69"},{v:"4",t:"≥ 7.7"},{v:"2",t:"7.25–7.32"},{v:"3b",t:"7.15–7.24"},{v:"4b",t:"< 7.15"}] },
+      { id:"na", label:"Serum sodium (mmol/L)", type:"select", opts:[{v:"0",t:"130–149"},{v:"1",t:"150–154"},{v:"2",t:"155–159"},{v:"3",t:"160–179"},{v:"4",t:"≥ 180"},{v:"2b",t:"120–129"},{v:"3b",t:"111–119"},{v:"4b",t:"≤ 110"}] },
+      { id:"k", label:"Serum potassium (mmol/L)", type:"select", opts:[{v:"0",t:"3.5–5.4"},{v:"1",t:"5.5–5.9"},{v:"3",t:"6–6.9"},{v:"4",t:"≥ 7"},{v:"1b",t:"3–3.4"},{v:"2",t:"2.5–2.9"},{v:"4b",t:"< 2.5"}] },
+      { id:"cr", label:"Serum creatinine (mg/dL)", type:"select", opts:[{v:"0",t:"0.6–1.4"},{v:"2",t:"1.5–1.9"},{v:"3",t:"2–3.4"},{v:"4",t:"≥ 3.5"},{v:"2b",t:"< 0.6"}] },
       { id:"arf", label:"Acute renal failure (doubles creatinine points)", type:"check" },
-      { id:"hct", label:"Haematocrit (%)", type:"select", opts:[{v:"4",t:"≥ 60"},{v:"2",t:"50–59.9"},{v:"1",t:"46–49.9"},{v:"0",t:"30–45.9"},{v:"2b",t:"20–29.9"},{v:"4b",t:"< 20"}] },
-      { id:"wbc", label:"White cell count (×10³/mm³)", type:"select", opts:[{v:"4",t:"≥ 40"},{v:"2",t:"20–39.9"},{v:"1",t:"15–19.9"},{v:"0",t:"3–14.9"},{v:"2b",t:"1–2.9"},{v:"4b",t:"< 1"}] },
+      { id:"hct", label:"Haematocrit (%)", type:"select", opts:[{v:"0",t:"30–45.9"},{v:"1",t:"46–49.9"},{v:"2",t:"50–59.9"},{v:"4",t:"≥ 60"},{v:"2b",t:"20–29.9"},{v:"4b",t:"< 20"}] },
+      { id:"wbc", label:"White cell count (×10³/mm³)", type:"select", opts:[{v:"0",t:"3–14.9"},{v:"1",t:"15–19.9"},{v:"2",t:"20–39.9"},{v:"4",t:"≥ 40"},{v:"2b",t:"1–2.9"},{v:"4b",t:"< 1"}] },
       { id:"gcs", label:"Glasgow Coma Scale (3–15)", type:"number", step:"1" },
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"≤ 44"},{v:"2",t:"45–54"},{v:"3",t:"55–64"},{v:"5",t:"65–74"},{v:"6",t:"≥ 75"}] },
       { id:"chronic", label:"Severe organ insufficiency / immunocompromise", type:"select", opts:[{v:"0",t:"None"},{v:"2",t:"Present, elective postoperative"},{v:"5",t:"Present, non-operative or emergency postoperative"}] }
@@ -3519,10 +3519,10 @@
   { id:"hit_4ts", cat:"Haematology", icon:"🩸", title:"4Ts Score (Heparin-Induced Thrombocytopenia)",
     desc:"Pre-test probability of heparin-induced thrombocytopenia.",
     inputs:[
-      { id:"thrombocytopenia", label:"Thrombocytopenia", type:"select", opts:[{v:"2",t:"Fall > 50% and nadir ≥ 20 ×10⁹/L"},{v:"1",t:"Fall 30–50% or nadir 10–19 ×10⁹/L"},{v:"0",t:"Fall < 30% or nadir < 10 ×10⁹/L"}] },
-      { id:"timing", label:"Timing of platelet fall", type:"select", opts:[{v:"2",t:"Days 5–10, or ≤1 day if heparin in past 30 days"},{v:"1",t:"Consistent but unclear, after day 10, or ≤1 day if heparin 30–100 days ago"},{v:"0",t:"Fall < 4 days without recent heparin"}] },
-      { id:"thrombosis", label:"Thrombosis or other sequelae", type:"select", opts:[{v:"2",t:"New thrombosis, skin necrosis, or acute systemic reaction"},{v:"1",t:"Progressive/recurrent or suspected thrombosis"},{v:"0",t:"None"}] },
-      { id:"other", label:"Other cause of thrombocytopenia", type:"select", opts:[{v:"2",t:"None apparent"},{v:"1",t:"Possible"},{v:"0",t:"Definite"}] }
+      { id:"thrombocytopenia", label:"Thrombocytopenia", type:"select", opts:[{v:"0",t:"Fall < 30% or nadir < 10 ×10⁹/L"},{v:"1",t:"Fall 30–50% or nadir 10–19 ×10⁹/L"},{v:"2",t:"Fall > 50% and nadir ≥ 20 ×10⁹/L"}] },
+      { id:"timing", label:"Timing of platelet fall", type:"select", opts:[{v:"0",t:"Fall < 4 days without recent heparin"},{v:"1",t:"Consistent but unclear, after day 10, or ≤1 day if heparin 30–100 days ago"},{v:"2",t:"Days 5–10, or ≤1 day if heparin in past 30 days"}] },
+      { id:"thrombosis", label:"Thrombosis or other sequelae", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Progressive/recurrent or suspected thrombosis"},{v:"2",t:"New thrombosis, skin necrosis, or acute systemic reaction"}] },
+      { id:"other", label:"Other cause of thrombocytopenia", type:"select", opts:[{v:"0",t:"Definite"},{v:"1",t:"Possible"},{v:"2",t:"None apparent"}] }
     ],
     compute:function(v){
       var s=Number(v.thrombocytopenia)+Number(v.timing)+Number(v.thrombosis)+Number(v.other);
@@ -3874,12 +3874,12 @@
   { id:"fagerstrom", cat:"Psychiatry", icon:"🚬", title:"Fagerström Test for Nicotine Dependence",
     desc:"Severity of physical nicotine dependence.",
     inputs:[
-      { id:"time", label:"Time to first cigarette after waking", type:"select", opts:[{v:"3",t:"≤ 5 min"},{v:"2",t:"6–30 min"},{v:"1",t:"31–60 min"},{v:"0",t:"> 60 min"}] },
-      { id:"refrain", label:"Difficulty not smoking where it is forbidden", type:"select", opts:[{v:"1",t:"Yes"},{v:"0",t:"No"}] },
-      { id:"giveup", label:"Cigarette you would most hate to give up", type:"select", opts:[{v:"1",t:"The first in the morning"},{v:"0",t:"Any other"}] },
+      { id:"time", label:"Time to first cigarette after waking", type:"select", opts:[{v:"0",t:"> 60 min"},{v:"1",t:"31–60 min"},{v:"2",t:"6–30 min"},{v:"3",t:"≤ 5 min"}] },
+      { id:"refrain", label:"Difficulty not smoking where it is forbidden", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"giveup", label:"Cigarette you would most hate to give up", type:"select", opts:[{v:"0",t:"Any other"},{v:"1",t:"The first in the morning"}] },
       { id:"cpd", label:"Cigarettes per day", type:"select", opts:[{v:"0",t:"≤ 10"},{v:"1",t:"11–20"},{v:"2",t:"21–30"},{v:"3",t:"≥ 31"}] },
-      { id:"morning", label:"Smoke more during the first hours after waking", type:"select", opts:[{v:"1",t:"Yes"},{v:"0",t:"No"}] },
-      { id:"ill", label:"Smoke even when ill in bed", type:"select", opts:[{v:"1",t:"Yes"},{v:"0",t:"No"}] }
+      { id:"morning", label:"Smoke more during the first hours after waking", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"ill", label:"Smoke even when ill in bed", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] }
     ],
     compute:function(v){
       var s=Number(v.time)+Number(v.refrain)+Number(v.giveup)+Number(v.cpd)+Number(v.morning)+Number(v.ill);
@@ -4047,7 +4047,7 @@
       { id:"pao2", label:"PaO₂", type:"number", unit:"mmHg", step:"1" }
     ],
     compute:function(v){
-      if(!ok(v.hb)||!ok(v.sao2)||!ok(v.pao2)||v.hb<0||v.sao2<0||v.pao2<0) return ERR;
+      if(!ok(v.hb)||!ok(v.sao2)||!ok(v.pao2)||v.hb<0||v.sao2<0||v.sao2>100||v.pao2<0) return ERR;
       var cao2=1.34*v.hb*(v.sao2/100)+0.003*v.pao2;
       return { v:r1(cao2), u:"mL O₂/dL", i:"Arterial oxygen content (haemoglobin-bound plus dissolved). Multiply by cardiac output ×10 for oxygen delivery. Ref: standard physiology." };
     } },
@@ -4062,7 +4062,7 @@
     compute:function(v){
       if(!ok(v.mcv)||!ok(v.rdw)||!ok(v.hb)||v.hb<=0||v.mcv<0||v.rdw<=0) return ERR;
       var idx=(v.mcv*v.mcv*v.rdw)/(v.hb*100);
-      var b=idx<72?"Favours beta-thalassaemia trait":"Favours iron-deficiency anaemia";
+      var b=idx<65?"Favours beta-thalassaemia trait":"Favours iron-deficiency anaemia";
       return { v:r1(idx), u:"", i:b+" (cut-off ~72; confirm with ferritin and haemoglobin studies). Ref: Green & King 1989." };
     } },
 
@@ -4247,10 +4247,10 @@
   { id:"mjoa", cat:"Neurology", icon:"🧠", title:"modified JOA Score (Cervical Myelopathy)",
     desc:"Severity of degenerative cervical myelopathy.",
     inputs:[
-      { id:"upper", label:"Motor — upper extremity", type:"select", opts:[{v:"0",t:"0 — cannot feed self"},{v:"1",t:"1 — cannot use knife/fork, feeds with spoon"},{v:"2",t:"2 — uses knife/fork with difficulty"},{v:"3",t:"3 — mild clumsiness"},{v:"4",t:"4 — slight clumsiness"},{v:"5",t:"5 — normal"}] },
-      { id:"lower", label:"Motor — lower extremity", type:"select", opts:[{v:"0",t:"0 — unable to walk"},{v:"1",t:"1 — needs aid on flat ground"},{v:"2",t:"2 — needs rail on stairs"},{v:"3",t:"3 — lacks stability"},{v:"4",t:"4 — walks with mild deficit"},{v:"5",t:"5 — mild clumsiness walking"},{v:"6",t:"6 — walks with slight difficulty"},{v:"7",t:"7 — normal"}] },
-      { id:"sensory", label:"Sensory — upper extremity", type:"select", opts:[{v:"0",t:"0 — severe sensory loss"},{v:"1",t:"1 — mild loss"},{v:"2",t:"2 — minimal loss"},{v:"3",t:"3 — normal"}] },
-      { id:"sphincter", label:"Sphincter function", type:"select", opts:[{v:"0",t:"0 — unable to void"},{v:"1",t:"1 — marked difficulty"},{v:"2",t:"2 — mild difficulty"},{v:"3",t:"3 — normal"}] }
+      { id:"upper", label:"Motor — upper extremity", type:"select", opts:[{v:"5",t:"5 — normal"},{v:"4",t:"4 — slight clumsiness"},{v:"3",t:"3 — mild clumsiness"},{v:"2",t:"2 — uses knife/fork with difficulty"},{v:"1",t:"1 — cannot use knife/fork, feeds with spoon"},{v:"0",t:"0 — cannot feed self"}] },
+      { id:"lower", label:"Motor — lower extremity", type:"select", opts:[{v:"7",t:"7 — normal"},{v:"6",t:"6 — walks with slight difficulty"},{v:"5",t:"5 — mild clumsiness walking"},{v:"4",t:"4 — walks with mild deficit"},{v:"3",t:"3 — lacks stability"},{v:"2",t:"2 — needs rail on stairs"},{v:"1",t:"1 — needs aid on flat ground"},{v:"0",t:"0 — unable to walk"}] },
+      { id:"sensory", label:"Sensory — upper extremity", type:"select", opts:[{v:"3",t:"3 — normal"},{v:"2",t:"2 — minimal loss"},{v:"1",t:"1 — mild loss"},{v:"0",t:"0 — severe sensory loss"}] },
+      { id:"sphincter", label:"Sphincter function", type:"select", opts:[{v:"3",t:"3 — normal"},{v:"2",t:"2 — mild difficulty"},{v:"1",t:"1 — marked difficulty"},{v:"0",t:"0 — unable to void"}] }
     ],
     compute:function(v){
       var s=Number(v.upper)+Number(v.lower)+Number(v.sensory)+Number(v.sphincter);
@@ -4618,7 +4618,7 @@
   { id:"gose", cat:"Neurology", icon:"🧠", title:"Glasgow Outcome Scale — Extended (GOS-E)",
     desc:"Functional outcome after traumatic brain injury.",
     inputs:[
-      { id:"grade", label:"Outcome category", type:"select", opts:[{v:"1",t:"1 — Dead"},{v:"2",t:"2 — Vegetative state"},{v:"3",t:"3 — Lower severe disability"},{v:"4",t:"4 — Upper severe disability"},{v:"5",t:"5 — Lower moderate disability"},{v:"6",t:"6 — Upper moderate disability"},{v:"7",t:"7 — Lower good recovery"},{v:"8",t:"8 — Upper good recovery"}] }
+      { id:"grade", label:"Outcome category", type:"select", opts:[{v:"8",t:"8 — Upper good recovery"},{v:"7",t:"7 — Lower good recovery"},{v:"6",t:"6 — Upper moderate disability"},{v:"5",t:"5 — Lower moderate disability"},{v:"4",t:"4 — Upper severe disability"},{v:"3",t:"3 — Lower severe disability"},{v:"2",t:"2 — Vegetative state"},{v:"1",t:"1 — Dead"}] }
     ],
     compute:function(v){
       var m={"1":"Dead","2":"Vegetative state — unresponsive","3":"Lower severe disability — dependent for daily support","4":"Upper severe disability — dependent but some independence at home","5":"Lower moderate disability — independent but cannot resume prior work/social life","6":"Upper moderate disability — some reduction in work/social capacity","7":"Lower good recovery — minor deficits affecting daily life","8":"Upper good recovery — full recovery or minor residual symptoms"};
@@ -4631,7 +4631,7 @@
       { id:"age", label:"Age", type:"number", unit:"years", step:"0.5" }
     ],
     compute:function(v){
-      if(!ok(v.age)||v.age<0||v.age>14) return ERR;
+      if(!ok(v.age)||v.age<0||v.age>12) return { err:"For age > 12 use measured or adult weight (APLS estimate validated 1–12 y)" };
       if(v.age<1) return { err:"Use a length-based method (e.g. Broselow tape) for infants < 1 year" };
       var wt=(v.age<=5)?2*v.age+8:3*v.age+7;
       return { v:r1(wt), u:"kg", i:"Estimated weight (APLS: 1–5y = 2×age+8; 6–12y = 3×age+7). An emergency estimate — weigh the child as soon as feasible. Ref: APLS." };
@@ -4711,7 +4711,8 @@
     ],
     compute:function(v){
       if(!ok(v.backpain)||!ok(v.stiffness)||!ok(v.global)||!ok(v.peripheral)||!ok(v.crp)||v.crp<0) return ERR;
-      var s=0.12*v.backpain+0.06*v.stiffness+0.11*v.global+0.07*v.peripheral+0.58*Math.log(v.crp+1);
+      function c10(x){return Math.max(0,Math.min(10,x));} var crp=Math.max(v.crp,2);
+      var s=0.12*c10(v.backpain)+0.06*c10(v.stiffness)+0.11*c10(v.global)+0.07*c10(v.peripheral)+0.58*Math.log(crp+1);
       var b=s<1.3?"Inactive disease":s<2.1?"Low disease activity":s<=3.5?"High disease activity":"Very high disease activity";
       return { v:Math.round(s*100)/100, u:"", i:b+" (CRP in mg/L). Ref: Lukas, Ann Rheum Dis 2009 (ASDAS)." };
     } },
@@ -5156,7 +5157,7 @@
     desc:"Predicted change in serum sodium from one litre of a chosen infusate.",
     inputs:[
       { id:"na", label:"Current serum sodium", type:"number", unit:"mmol/L", step:"1" },
-      { id:"fluid", label:"Infusate", type:"select", opts:[{v:"513",t:"3% saline (Na 513)"},{v:"154",t:"0.9% saline (Na 154)"},{v:"134",t:"Ringer’s lactate (Na+K ≈134)"},{v:"77",t:"0.45% saline (Na 77)"},{v:"0",t:"5% dextrose (Na 0)"}] },
+      { id:"fluid", label:"Infusate", type:"select", opts:[{v:"154",t:"0.9% saline (Na 154)"},{v:"513",t:"3% saline (Na 513)"},{v:"134",t:"Ringer’s lactate (Na+K ≈134)"},{v:"77",t:"0.45% saline (Na 77)"},{v:"0",t:"5% dextrose (Na 0)"}] },
       { id:"wt", label:"Body weight", type:"number", unit:"kg", step:"0.1" },
       { id:"sex", label:"TBW fraction", type:"select", opts:[{v:"0.6",t:"Adult male / child (0.6)"},{v:"0.5",t:"Adult female / elderly male (0.5)"},{v:"0.45",t:"Elderly female (0.45)"}] }
     ],
@@ -5678,7 +5679,7 @@
     desc:"Predicts uncomplicated ureteric stone in patients with flank pain.",
     inputs:[
       { id:"male", label:"Male sex (+2)", type:"check" },
-      { id:"timing", label:"Duration of pain", type:"select", opts:[{v:"3",t:"<6 h (+3)"},{v:"1",t:"6–24 h (+1)"},{v:"0",t:">24 h (0)"}] },
+      { id:"timing", label:"Duration of pain", type:"select", opts:[{v:"0",t:">24 h (0)"},{v:"1",t:"6–24 h (+1)"},{v:"3",t:"<6 h (+3)"}] },
       { id:"nonblack", label:"Non-black race/ethnicity (+3)", type:"check" },
       { id:"nausea", label:"Nausea / vomiting", type:"select", opts:[{v:"0",t:"None (0)"},{v:"1",t:"Nausea alone (+1)"},{v:"2",t:"Vomiting (+2)"}] },
       { id:"haematuria", label:"Microscopic haematuria (+3)", type:"check" }
@@ -5886,7 +5887,7 @@
       if(!ok(v.total)||v.total<0||v.total>96) return ERR;
       var s=Math.round(v.total); var pct=s/96*100;
       var b=pct<25?"Mild symptoms":pct<50?"Moderate symptoms":pct<75?"Severe symptoms":"Very severe symptoms";
-      return { v:s, u:"/96", i:b+" (~"+r0(pct)+"% of maximum; higher = worse). Subscales: pain 0–20, stiffness 0–8, function 0–68. Ref: Bellamy N, et al. J Rheumatol 1988 (WOMAC)." };
+      return { v:s, u:"/96", i:b+" (~"+r0(pct)+"% of maximum; higher = worse; bands approximate — no validated cut-offs). WOMAC is a copyrighted, licence-required instrument — administer the official version. Subscales: pain 0–20, stiffness 0–8, function 0–68. Ref: Bellamy N, et al. J Rheumatol 1988 (WOMAC)." };
     } },
 
   { id:"zarit", cat:"Psychiatry", icon:"🧠", title:"Zarit Burden Interview — interpreter",
@@ -5920,13 +5921,13 @@
   { id:"braden_q", cat:"Paediatrics", icon:"👶", title:"Braden Q Scale (Paediatric Pressure Injury)",
     desc:"Pressure-injury risk in paediatric patients (lower total = higher risk).",
     inputs:[
-      { id:"mobility", label:"Mobility", type:"select", opts:[{v:"1",t:"Completely immobile (1)"},{v:"2",t:"Very limited (2)"},{v:"3",t:"Slightly limited (3)"},{v:"4",t:"No limitation (4)"}] },
-      { id:"activity", label:"Activity", type:"select", opts:[{v:"1",t:"Bedfast (1)"},{v:"2",t:"Chairfast (2)"},{v:"3",t:"Walks occasionally (3)"},{v:"4",t:"Walks frequently (4)"}] },
-      { id:"sensory", label:"Sensory perception", type:"select", opts:[{v:"1",t:"Completely limited (1)"},{v:"2",t:"Very limited (2)"},{v:"3",t:"Slightly limited (3)"},{v:"4",t:"No impairment (4)"}] },
-      { id:"moisture", label:"Moisture", type:"select", opts:[{v:"1",t:"Constantly moist (1)"},{v:"2",t:"Often moist (2)"},{v:"3",t:"Occasionally moist (3)"},{v:"4",t:"Rarely moist (4)"}] },
-      { id:"friction", label:"Friction & shear", type:"select", opts:[{v:"1",t:"Significant problem (1)"},{v:"2",t:"Problem (2)"},{v:"3",t:"Potential problem (3)"},{v:"4",t:"No apparent problem (4)"}] },
-      { id:"nutrition", label:"Nutrition", type:"select", opts:[{v:"1",t:"Very poor (1)"},{v:"2",t:"Inadequate (2)"},{v:"3",t:"Adequate (3)"},{v:"4",t:"Excellent (4)"}] },
-      { id:"perfusion", label:"Tissue perfusion & oxygenation", type:"select", opts:[{v:"1",t:"Extremely compromised (1)"},{v:"2",t:"Compromised (2)"},{v:"3",t:"Adequate (3)"},{v:"4",t:"Excellent (4)"}] }
+      { id:"mobility", label:"Mobility", type:"select", opts:[{v:"4",t:"No limitation (4)"},{v:"3",t:"Slightly limited (3)"},{v:"2",t:"Very limited (2)"},{v:"1",t:"Completely immobile (1)"}] },
+      { id:"activity", label:"Activity", type:"select", opts:[{v:"4",t:"Walks frequently (4)"},{v:"3",t:"Walks occasionally (3)"},{v:"2",t:"Chairfast (2)"},{v:"1",t:"Bedfast (1)"}] },
+      { id:"sensory", label:"Sensory perception", type:"select", opts:[{v:"4",t:"No impairment (4)"},{v:"3",t:"Slightly limited (3)"},{v:"2",t:"Very limited (2)"},{v:"1",t:"Completely limited (1)"}] },
+      { id:"moisture", label:"Moisture", type:"select", opts:[{v:"4",t:"Rarely moist (4)"},{v:"3",t:"Occasionally moist (3)"},{v:"2",t:"Often moist (2)"},{v:"1",t:"Constantly moist (1)"}] },
+      { id:"friction", label:"Friction & shear", type:"select", opts:[{v:"4",t:"No apparent problem (4)"},{v:"3",t:"Potential problem (3)"},{v:"2",t:"Problem (2)"},{v:"1",t:"Significant problem (1)"}] },
+      { id:"nutrition", label:"Nutrition", type:"select", opts:[{v:"4",t:"Excellent (4)"},{v:"3",t:"Adequate (3)"},{v:"2",t:"Inadequate (2)"},{v:"1",t:"Very poor (1)"}] },
+      { id:"perfusion", label:"Tissue perfusion & oxygenation", type:"select", opts:[{v:"4",t:"Excellent (4)"},{v:"3",t:"Adequate (3)"},{v:"2",t:"Compromised (2)"},{v:"1",t:"Extremely compromised (1)"}] }
     ],
     compute:function(v){
       var s=(Number(v.mobility)||1)+(Number(v.activity)||1)+(Number(v.sensory)||1)+(Number(v.moisture)||1)+(Number(v.friction)||1)+(Number(v.nutrition)||1)+(Number(v.perfusion)||1);
@@ -5937,11 +5938,11 @@
   { id:"norton", cat:"General", icon:"🛏️", title:"Norton Pressure Sore Risk Scale",
     desc:"Pressure-ulcer risk, mainly in elderly inpatients (lower total = higher risk).",
     inputs:[
-      { id:"physical", label:"Physical condition", type:"select", opts:[{v:"1",t:"Very bad (1)"},{v:"2",t:"Poor (2)"},{v:"3",t:"Fair (3)"},{v:"4",t:"Good (4)"}] },
-      { id:"mental", label:"Mental condition", type:"select", opts:[{v:"1",t:"Stuporous (1)"},{v:"2",t:"Confused (2)"},{v:"3",t:"Apathetic (3)"},{v:"4",t:"Alert (4)"}] },
-      { id:"activity", label:"Activity", type:"select", opts:[{v:"1",t:"Bed (1)"},{v:"2",t:"Chairbound (2)"},{v:"3",t:"Walks with help (3)"},{v:"4",t:"Ambulant (4)"}] },
-      { id:"mobility", label:"Mobility", type:"select", opts:[{v:"1",t:"Immobile (1)"},{v:"2",t:"Very limited (2)"},{v:"3",t:"Slightly limited (3)"},{v:"4",t:"Full (4)"}] },
-      { id:"incontinence", label:"Incontinence", type:"select", opts:[{v:"1",t:"Doubly incontinent (1)"},{v:"2",t:"Usually urine (2)"},{v:"3",t:"Occasional (3)"},{v:"4",t:"None (4)"}] }
+      { id:"physical", label:"Physical condition", type:"select", opts:[{v:"4",t:"Good (4)"},{v:"3",t:"Fair (3)"},{v:"2",t:"Poor (2)"},{v:"1",t:"Very bad (1)"}] },
+      { id:"mental", label:"Mental condition", type:"select", opts:[{v:"4",t:"Alert (4)"},{v:"3",t:"Apathetic (3)"},{v:"2",t:"Confused (2)"},{v:"1",t:"Stuporous (1)"}] },
+      { id:"activity", label:"Activity", type:"select", opts:[{v:"4",t:"Ambulant (4)"},{v:"3",t:"Walks with help (3)"},{v:"2",t:"Chairbound (2)"},{v:"1",t:"Bed (1)"}] },
+      { id:"mobility", label:"Mobility", type:"select", opts:[{v:"4",t:"Full (4)"},{v:"3",t:"Slightly limited (3)"},{v:"2",t:"Very limited (2)"},{v:"1",t:"Immobile (1)"}] },
+      { id:"incontinence", label:"Incontinence", type:"select", opts:[{v:"4",t:"None (4)"},{v:"3",t:"Occasional (3)"},{v:"2",t:"Usually urine (2)"},{v:"1",t:"Doubly incontinent (1)"}] }
     ],
     compute:function(v){
       var s=(Number(v.physical)||1)+(Number(v.mental)||1)+(Number(v.activity)||1)+(Number(v.mobility)||1)+(Number(v.incontinence)||1);
@@ -6180,7 +6181,7 @@
       if(!ok(v.total)||v.total<0||v.total>48) return ERR;
       var s=Math.round(v.total);
       var b=s>=40?"Satisfactory joint function":s>=30?"Mild to moderate knee arthritis":s>=20?"Moderate to severe knee arthritis":"Severe knee arthritis";
-      return { v:s, u:"/48", i:b+" (higher = better). Ref: Dawson J, et al. J Bone Joint Surg Br 1998 (Oxford Knee Score)." };
+      return { v:s, u:"/48", i:b+" (higher = better; bands indicative). Oxford Knee Score is copyrighted (Oxford University Innovation) — administer the official licensed form. Ref: Dawson J, et al. J Bone Joint Surg Br 1998." };
     } },
 
   { id:"oxford_hip", cat:"Musculoskeletal", icon:"🦴", title:"Oxford Hip Score — interpreter",
@@ -6192,7 +6193,7 @@
       if(!ok(v.total)||v.total<0||v.total>48) return ERR;
       var s=Math.round(v.total);
       var b=s>=40?"Satisfactory joint function":s>=30?"Mild to moderate hip arthritis":s>=20?"Moderate to severe hip arthritis":"Severe hip arthritis";
-      return { v:s, u:"/48", i:b+" (higher = better). Ref: Dawson J, et al. J Bone Joint Surg Br 1996 (Oxford Hip Score)." };
+      return { v:s, u:"/48", i:b+" (higher = better; bands indicative). Oxford Hip Score is copyrighted (Oxford University Innovation) — administer the official licensed form. Ref: Dawson J, et al. J Bone Joint Surg Br 1996." };
     } },
 
   { id:"quickdash", cat:"Musculoskeletal", icon:"💪", title:"QuickDASH — interpreter",
@@ -6204,7 +6205,7 @@
       if(!ok(v.total)||v.total<0||v.total>100) return ERR;
       var s=Math.round(v.total);
       var b=s<20?"Little disability":s<40?"Mild disability":s<60?"Moderate disability":"Severe disability";
-      return { v:s, u:"/100", i:b+" (higher = more upper-limb disability). Ref: Beaton DE, et al. (QuickDASH)." };
+      return { v:s, u:"/100", i:b+" (higher = more upper-limb disability; bands indicative). QuickDASH is owned by the Institute for Work & Health. Ref: Beaton DE, et al. (QuickDASH)." };
     } },
 
   { id:"dn4", cat:"Neurology", icon:"🧠", title:"DN4 (Neuropathic Pain)",
@@ -7069,8 +7070,12 @@
   /* ====================================================================== *
    * RENDERING — full-screen browser overlay + per-calculator panel
    * ====================================================================== */
-  var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","General"];
-  var CAT_ICON = { "Cardiovascular":"🫀","Critical care":"🚨","Infectious disease":"🦠","Renal":"🫘","Hepatology":"🫁","Neurology":"🧠","General":"⚖️" };
+  var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","Respiratory","Endocrine","Gastroenterology","Haematology","Oncology","Rheumatology","Musculoskeletal","Dermatology","Psychiatry","Paediatrics","Obstetrics","Ophthalmology","Toxicology","General"];
+  var CAT_ICON = { "Cardiovascular":"🫀","Critical care":"🚨","Infectious disease":"🦠","Renal":"🫘","Hepatology":"🫁","Neurology":"🧠","General":"⚖️","Respiratory":"🌬️","Endocrine":"🧬","Gastroenterology":"🩻","Haematology":"🩸","Oncology":"🎗️","Rheumatology":"🦴","Musculoskeletal":"🦿","Dermatology":"🧴","Psychiatry":"🛋️","Paediatrics":"👶","Obstetrics":"🤰","Ophthalmology":"👁️","Toxicology":"☠️" };
+  // Guarantee every category actually used by a calculator appears (CAT_ORDER sets priority;
+  // any not listed above are appended). Without this, calcs in an unlisted category are silently
+  // absent from the list AND search. Future-proof: a brand-new category auto-appears at the end.
+  (function(){ var seen={}; CAT_ORDER.forEach(function(c){ seen[c]=1; }); CALCS.forEach(function(c){ if(c.cat && !seen[c.cat]){ seen[c.cat]=1; CAT_ORDER.push(c.cat); } }); })();
   var root = null, q = "", activeCat = "", openId = null;
   var _resultCb = null, _resultCbId = null, _suppressCb = false;   // opener write-back: fired on an explicit Calculate (see open()/run())
 
@@ -7156,8 +7161,10 @@
         return '<label class="mc-check"><input type="checkbox" id="'+fid+'"><span>'+esc(f.label)+'</span></label>';
       }
       if(f.type==="select"){
-        var did0=false;   // default-select the first 0-point option so an untouched select is the NORMAL band, never the worst (APACHE II / MEWS list worst first)
-        var opts=(f.opts||[]).map(function(o){var sel=(!did0&&String(o.v)==="0")?" selected":"";if(sel)did0=true;return '<option value="'+esc(o.v)+'"'+sel+'>'+esc(o.t)+'</option>';}).join("");
+        // First listed option is the default (browser-native). Author responsibility: order each
+        // select so the FIRST option is the clinically-sensible default (normal band for additive
+        // severity scores; best/alert for inverted coma/functional scales).
+        var opts=(f.opts||[]).map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
         return '<div class="mc-field"><label class="mc-lbl" for="'+fid+'">'+esc(f.label)+'</label><select class="mc-input" id="'+fid+'">'+opts+'</select></div>';
       }
       var typ=f.type==="date"?"date":"number";
