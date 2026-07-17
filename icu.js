@@ -3064,6 +3064,7 @@
         '<button class="icu-btn ghost" data-icu-act="tab:discharge">' + ico("rounds", "📝") + ' Discharge &amp; remove patient</button>' +
         '</div>' +
         '<button class="icu-btn ghost" data-icu-act="testpush" style="margin-top:8px">' + ico("bell", "🔔") + ' Send me a test notification</button>' +
+        (grpActive() ? '<button class="icu-btn ghost" data-icu-act="notifprefs" style="margin-top:8px">' + ico("settings", "⚙️") + ' Notification preferences</button>' : "") +
         '<p class="icu-doc-sub" style="text-align:center;margin-top:16px;opacity:.55">StewardMD ICU · ' + esc(icuBuildVer() || "build") + '</p>';
     }
   };
@@ -4095,10 +4096,13 @@
         var meta = [byTxt, dueTxt].filter(Boolean).join(" · ");
         var expl = t.explanation ? '<div class="icu-v2-taskexpl">' + ico("info", "ⓘ") + " " + esc(t.explanation) + (t.explainedByName ? " — " + esc(t.explainedByName) : "") + "</div>" : "";
         var explBtn = (t.status !== "done") ? '<button class="icu-btn ghost" data-icu-act="grptaskexplain:' + encodeURIComponent(t.id) + '" style="margin-top:6px;padding:6px 10px;min-height:32px;width:auto;font:700 12px var(--font)">' + ico("edit", "✎") + (t.explanation ? " Update explanation" : (overdue ? " Explain the delay" : " Add explanation")) + "</button>" : "";
+        // Instructing roles can re-ping the executor roles (SR/JR/intern) to do the task — or, once
+        // it's marked done, to do it again. Server (task-remind) re-checks the caller's role.
+        var nudgeBtn = grpCanInstruct(_grp && _grp.myRole) ? '<button class="icu-btn ghost" data-icu-act="grpnudge:' + encodeURIComponent(t.id) + '" style="margin-top:6px;margin-left:6px;padding:6px 10px;min-height:32px;width:auto;font:700 12px var(--font)">' + ico("bell", "🔔") + (t.status === "done" ? " Remind to redo" : " Nudge") + "</button>" : "";
         return '<div class="icu-row" style="align-items:flex-start;gap:8px' + (overdue ? ";border-left:3px solid var(--danger);padding-left:9px" : "") + '"><button class="icu-v2-tasktog" data-icu-act="grptask:' + encodeURIComponent(t.id) + '" aria-label="Change status of: ' + esc(t.text || "task") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;margin:-6px 0;color:' + col + '">' + mark + "</button>" +
           '<span style="flex:1;min-width:0">' + badge + '<span style="' + (t.status === "done" ? "text-decoration:line-through;opacity:.6" : "") + '">' + esc(t.text) + "</span>" +
           (meta ? '<span class="icu-v2-due' + (overdue ? " over" : "") + '" style="display:block;margin-top:3px">' + esc(meta) + "</span>" : "") +
-          expl + explBtn + "</span></div>";
+          expl + explBtn + nudgeBtn + "</span></div>";
       }).join("");
     } else {
       out += '<p class="icu-doc-sub" style="margin:0">No open instructions. ' + (grpCanInstruct(_grp && _grp.myRole) ? "Give one on the round and it will appear here for the team." : "Awaiting a consultant instruction.") + '</p>';
@@ -4658,6 +4662,97 @@
       }, function () { if (window.toast) toast("Couldn't get your auth token"); });
     } catch (e) {}
   }
+  // On-demand nudge: re-push a task's reminder to the unit's executor roles (SR/JR/intern), excluding
+  // the sender. Only instructing roles reach here (button is role-gated; server re-checks). For a
+  // task already marked done it sends a "please repeat" instead. Reach is surfaced on the board note.
+  function grpNudgeTask(id) {
+    if (!grpActive() || !_grpPtId || !id) return;
+    if (!grpCanInstruct(_grp && _grp.myRole)) return;
+    var gid = _grp.id, pid = _grpPtId, tasks = (_grpPtVM && _grpPtVM.tasks) || [], t = null;
+    for (var i = 0; i < tasks.length; i++) { if (tasks[i].id === id) { t = tasks[i]; break; } }
+    if (!t) return;
+    var redo = t.status === "done";
+    if (window.toast) toast(redo ? "Asking the team to repeat…" : "Nudging the team…");
+    function note(kind, msg) { _grpLastPush = { ts: nowTs(), kind: kind, text: msg }; if (ICU.isOpen() && _screen === "board") paintLive(); }
+    try {
+      idToken().then(function (tok) {
+        if (!tok) { note("error", "Couldn't send the reminder — you weren't signed in."); return; }
+        fetch(grpPushUrl("/api/push/task-remind"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify({ gid: gid, pid: pid, taskId: id, redo: redo }) })
+          .then(function (r) { return r.json().catch(function () { return null; }); })
+          .then(function (j) {
+            if (j && j.sent > 0) { _grpLastPush = null; if (ICU.isOpen() && _screen === "board") paintLive(); if (window.toast) toast("Reminder sent to " + j.sent + " device" + (j.sent === 1 ? "" : "s")); return; }
+            if (j && j.error === "forbidden") { if (window.toast) toast("Only instructing roles can nudge."); return; }
+            if (j && j.reminded > 0) { note("none", "Reminder queued, but no resident has notifications on yet — ask them to enable them in Settings."); return; }
+            note("error", "Couldn't send the reminder — no resident is on this unit yet, or the push service is unreachable.");
+          }, function () { note("error", "Couldn't send the reminder — check your connection."); })
+          .catch(function () { note("error", "Couldn't send the reminder — check your connection."); });
+      }, function () { note("error", "Couldn't send the reminder — you weren't signed in."); });
+    } catch (e) {}
+  }
+  // ── Per-user ICU notification preferences ───────────────────────────────────────────────────────
+  // The panel writes the three Tier-2/3 category booleans to the current user's members/{uid}.notif
+  // doc (via icu-collab setNotifPrefs); the push server reads them during fan-out. Tier-1 (critical /
+  // overdue / urgent orders) is shown locked-on and can't be muted.
+  function grpMyUid() { try { return (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid) || null; } catch (e) { return null; } }
+  function grpNotifPrefsGet() {
+    var supervising = ["head", "professor", "assistant"].indexOf(_grp && _grp.myRole) >= 0;
+    var def = { orderRoutine: !supervising, activity: !supervising, handover: true };   // role default (mirrors server)
+    var uid = grpMyUid(), mine = null, i;
+    for (i = 0; _grpMembers && i < _grpMembers.length; i++) { if (_grpMembers[i].uid === uid) { mine = _grpMembers[i]; break; } }
+    var n = mine && mine.notif;
+    if (!n || typeof n !== "object") return def;
+    return {
+      orderRoutine: typeof n.orderRoutine === "boolean" ? n.orderRoutine : def.orderRoutine,
+      activity: typeof n.activity === "boolean" ? n.activity : def.activity,
+      handover: typeof n.handover === "boolean" ? n.handover : def.handover,
+    };
+  }
+  function grpNotifPrefsSave(prefs) {
+    var api = groupsApi(), gid = _grp && _grp.id, uid = grpMyUid(), i;
+    if (_grpMembers && uid) { for (i = 0; i < _grpMembers.length; i++) { if (_grpMembers[i].uid === uid) { _grpMembers[i].notif = prefs; break; } } }   // optimistic
+    if (api && api.setNotifPrefs && gid) { try { api.setNotifPrefs(gid, prefs).catch(function () { if (window.toast) toast("Couldn't save — check your connection."); }); } catch (e) {} }
+  }
+  function grpOpenNotifPrefs() {
+    if (!grpActive() || document.getElementById("icuNotifPrefs")) return;
+    var prefs = grpNotifPrefsGet();
+    var wrap = document.createElement("div");
+    wrap.id = "icuNotifPrefs";
+    wrap.setAttribute("style", "position:fixed;inset:0;z-index:20000;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center");
+    function lockRow(title, sub) {
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 2px;border-bottom:1px solid var(--line,#e4eae8)"><div style="flex:1"><div style="font:600 14px var(--sans,system-ui);color:var(--ink,#16232e)">' + title + '</div><div style="font:500 12px var(--sans,system-ui);color:var(--slate,#5a7184)">' + sub + '</div></div><span style="font:700 12px var(--sans,system-ui);color:var(--teal,#0e6e63);display:flex;align-items:center;gap:4px">' + ico("lock", "🔒") + ' On</span></div>';
+    }
+    function togRow(key, title, sub) {
+      var on = !!prefs[key];
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 2px;border-bottom:1px solid var(--line,#e4eae8)"><div style="flex:1"><div style="font:600 14px var(--sans,system-ui);color:var(--ink,#16232e)">' + title + '</div><div style="font:500 12px var(--sans,system-ui);color:var(--slate,#5a7184)">' + sub + '</div></div>' +
+        '<button data-tog="' + key + '" role="switch" aria-checked="' + on + '" aria-label="' + title + '" style="flex:none;width:44px;height:26px;border-radius:13px;border:none;cursor:pointer;background:' + (on ? "var(--teal,#0e6e63)" : "var(--line,#cfd8d6)") + ';position:relative"><span style="position:absolute;top:3px;left:' + (on ? "21px" : "3px") + ';width:20px;height:20px;border-radius:50%;background:#fff"></span></button></div>';
+    }
+    wrap.innerHTML =
+      '<div role="dialog" aria-label="Notification preferences" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25);max-height:86vh;overflow:auto">' +
+      '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:4px">🔔 Notification preferences</div>' +
+      '<div style="font:500 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:12px">Choose what this unit pings you about. Critical and overdue alerts always come through.</div>' +
+      lockRow("Critical &amp; overdue", "Patient safety — can't be turned off") +
+      lockRow("Urgent orders (immediate / high)", "Time-critical — can't be turned off") +
+      togRow("handover", "Shift handovers", "SBAR when a shift hands over") +
+      togRow("orderRoutine", "Routine orders", "New moderate / low priority tasks") +
+      togRow("activity", "Unit activity", "Task completions, new admissions") +
+      '<button id="icuNotifDone" style="width:100%;margin-top:16px;padding:12px;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans,system-ui);cursor:pointer">Done</button>' +
+      '</div>';
+    document.body.appendChild(wrap);
+    var close = function () { try { wrap.remove(); } catch (e) {} };
+    wrap.addEventListener("click", function (e) { if (e.target === wrap) close(); });
+    wrap.querySelector("#icuNotifDone").addEventListener("click", close);
+    Array.prototype.forEach.call(wrap.querySelectorAll("[data-tog]"), function (btn) {
+      btn.addEventListener("click", function () {
+        var key = btn.getAttribute("data-tog");
+        prefs[key] = !prefs[key];
+        var on = prefs[key];
+        btn.setAttribute("aria-checked", String(on));
+        btn.style.background = on ? "var(--teal,#0e6e63)" : "var(--line,#cfd8d6)";
+        var knob = btn.querySelector("span"); if (knob) knob.style.left = on ? "21px" : "3px";
+        grpNotifPrefsSave({ orderRoutine: prefs.orderRoutine, handover: prefs.handover, activity: prefs.activity });
+      });
+    });
+  }
   // Last on-issue push attempt's outcome, so a 0-reach or failed push stays VISIBLE on the board
   // (not just a toast that auto-dismisses right as grpRoundBack() navigates away — easy to miss
   // mid-rounds). Cleared once a later attempt reaches at least one device. Read by grpPushNoteHTML().
@@ -4684,7 +4779,7 @@
     // shows the origin the request targeted, and the reason gives the HTTP status / error — so one
     // screenshot pinpoints the failing layer instead of a generic "check your connection". Only shows
     // on failure; trim the bracket once push is confirmed working end-to-end on device.
-    var VER = "g413";
+    var VER = "g414";
     var base = window.SMD_API_BASE || "(relative)";
     function fail(reason) { note("error", "Push failed — teammates not alerted. [" + VER + " · " + base + " · " + reason + "]"); }
     try {
@@ -6469,6 +6564,7 @@
       case "icuadmit": _admitting = true; _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); break;
       case "icumore": _screen = "patient"; _active = "more"; _ws = "more"; _paintTop = true; paint(); break;
       case "testpush": grpTestPush(); break;
+      case "notifprefs": grpOpenNotifPrefs(); break;   // per-user ICU notification category toggles
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
       // ---- Unit picker: hospital → category (ICU|Ward) → unit type ----
@@ -6491,6 +6587,7 @@
       case "grptask": grpCycleTask(decodeURIComponent(arg)); break;
       case "grptaskexplain": grpTaskExplain(decodeURIComponent(arg)); break;
       case "grptaskexplainsave": grpTaskExplainSave(); break;
+      case "grpnudge": grpNudgeTask(decodeURIComponent(arg)); break;   // re-push a task reminder to the executor roles
       case "tlall": _tlAll = !_tlAll; _paintTop = true; paint(); break;
       case "grpretry": grpRetry(); break;   // Phase 4: re-subscribe after a connection/error state
       case "pushnotedismiss": grpPushNoteDismiss(); break;   // dismiss the "teammates weren't alerted" board notice

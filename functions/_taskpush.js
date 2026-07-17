@@ -29,6 +29,55 @@ const ID_NS = "fb:";
 function rawUid(u) { return typeof u === "string" && u.indexOf(ID_NS) === 0 ? u.slice(ID_NS.length) : u; }
 function tokUid(u) { return ID_NS + rawUid(u); }
 
+// ── Notification categories & per-recipient preferences ─────────────────────────────────────────
+// Every fan-out push carries a category. Tier-1 categories (patient-safety) ALWAYS send and ignore
+// preferences. Tier-2/3 categories are filtered by each recipient's own opt-in, stored on their
+// member doc as members/{uid}.notif = { orderRoutine, handover, activity } (booleans). When a member
+// has no stored pref a ROLE default applies: supervising roles (head/professor/assistant) mute the
+// Tier-3 "unit activity" stream so they aren't flooded by every routine order a resident logs, while
+// executor roles get everything. This is why the fan-out iterates full member objects (for role +
+// notif), not just uids.
+const TIER1_CATEGORY = { overdue: true, "order-urgent": true, critical: true };
+const SUPERVISING_ROLE = { head: true, professor: true, assistant: true };
+const EXECUTOR_ROLE = { senior_resident: true, junior_resident: true, intern: true };
+const INSTRUCT_ROLE = { head: true, professor: true, assistant: true, senior_resident: true };
+
+function catPrefKey(category) {
+  if (category === "order-routine") return "orderRoutine";
+  if (category === "handover") return "handover";
+  if (category === "activity") return "activity";
+  return null;   // tier-1 / reminder → not preference-filtered
+}
+function wantsCategory(member, category) {
+  if (TIER1_CATEGORY[category]) return true;                 // patient-safety → never filtered
+  const key = catPrefKey(category);
+  if (!key) return true;                                      // unknown/reminder → don't suppress
+  const prefs = member && member.notif;
+  if (prefs && typeof prefs[key] === "boolean") return prefs[key];
+  if (key === "handover") return true;                        // handovers on for everyone by default
+  return !SUPERVISING_ROLE[member && member.role];            // orderRoutine/activity: executors on, supervisors off
+}
+
+// Fan a message out to a unit's members, deduped by raw uid, honouring each member's category prefs.
+// opts: { excludeRaw } skip the actor · { onlyRoles } restrict to a role set · { force } bypass prefs.
+// Returns { sent } device deliveries and { attempted } recipients that passed the filter.
+async function fanOut(env, members, msg, category, opts) {
+  opts = opts || {};
+  const seen = new Set();
+  let sent = 0, attempted = 0;
+  for (const m of (members || [])) {
+    const uid = m && m.uid; if (!uid) continue;
+    const raw = rawUid(uid);
+    if (seen.has(raw)) continue; seen.add(raw);
+    if (opts.excludeRaw && raw === opts.excludeRaw) continue;
+    if (opts.onlyRoles && !opts.onlyRoles[m.role]) continue;
+    if (!opts.force && !wantsCategory(m, category)) continue;
+    attempted++;
+    try { const r = await sendNativeToAll(env, msg, { uid: tokUid(uid) }); sent += (r && r.sent) || 0; } catch (e) { /* skip */ }
+  }
+  return { sent, attempted };
+}
+
 function fsBase(env) { return `https://firestore.googleapis.com/v1/projects/${env.FIREBASE_PROJECT_ID || PROJECT_DEFAULT}/databases/(default)/documents`; }
 function saTok(env) { return serviceAccountToken(env, "https://www.googleapis.com/auth/datastore"); }
 
@@ -118,9 +167,8 @@ export async function escalateOverdueTask(env, gid, pid, taskId, now) {
     tag: "icu-overdue-" + taskId,
     url: "https://stewardmd.in/",
   };
-  const uids = [...new Set((members || []).map((m) => m.uid).filter(Boolean))];
-  let sent = 0;
-  for (const uid of uids) { try { const r = await sendNativeToAll(env, msg, { uid: tokUid(uid) }); sent += (r && r.sent) || 0; } catch (e) { /* skip */ } }
+  // Overdue is Tier-1 (patient-safety) → sent to every member regardless of their notification prefs.
+  const { sent, attempted } = await fanOut(env, members, msg, "overdue");
   // Only stamp escalatedAt (which permanently blocks any future retry, here and in the client's
   // matching `if (t.escalatedAt) return` guard) once the push actually reached a device, OR once
   // it's old enough that further retries aren't worth it. BUG FIXED: this used to stamp
@@ -133,7 +181,7 @@ export async function escalateOverdueTask(env, gid, pid, taskId, now) {
   const RETRY_CAP_MS = 24 * 3600 * 1000;
   const finalize = sent > 0 || (now - dueAt) >= RETRY_CAP_MS;
   if (finalize) await fsPatchField(env, tok, taskPath, "escalatedAt", { integerValue: String(now) });
-  return { escalated: sent > 0, finalized: finalize, unit: unitName, members: uids.length, sent };
+  return { escalated: sent > 0, finalized: finalize, unit: unitName, members: attempted, sent };
 }
 
 // Immediate notification when an instruction is ISSUED (not only when overdue). Pushes the unit so
@@ -168,11 +216,49 @@ export async function notifyNewInstruction(env, gid, pid, byUid, info) {
     url: "https://stewardmd.in/",
   };
   const byRaw = rawUid(byUid);   // author id normalised to the raw uid the member docs use
-  let recipients = [...new Set((members || []).map((m) => m.uid).filter(Boolean))].filter((u) => rawUid(u) !== byRaw);
-  if (!recipients.length && byRaw) recipients = [byRaw];   // solo unit → notify the author so it's verifiable
-  let sent = 0;
-  for (const uid of recipients) { try { const r = await sendNativeToAll(env, msg, { uid: tokUid(uid) }); sent += (r && r.sent) || 0; } catch (e) { /* skip */ } }
-  return { notified: recipients.length, sent, priority: prio };
+  // Category drives per-recipient filtering: handovers → Tier-2; immediate/high → Tier-1 (locked on
+  // for all); moderate/low → Tier-3 "unit activity" that supervising roles mute by default.
+  const category = isHandover ? "handover" : (urgent ? "order-urgent" : "order-routine");
+  // Real teammates that exist (deduped, minus author) — reported as `eligible` so the client can tell
+  // "nobody else in the unit" apart from "everyone muted this category".
+  const others = [...new Set((members || []).map((m) => rawUid(m.uid)).filter(Boolean))].filter((u) => u !== byRaw);
+  let out = await fanOut(env, members, msg, category, { excludeRaw: byRaw });
+  // Solo unit (author is the only member) → notify the author (force, bypass prefs) so it's verifiable.
+  if (!others.length && byRaw) out = await fanOut(env, [{ uid: byRaw, role: "head" }], msg, category, { force: true });
+  return { notified: out.attempted, sent: out.sent, eligible: others.length, priority: prio, category };
+}
+
+// On-demand "nudge": an instructing member re-pushes a task's reminder to the unit's executor roles
+// (SR / JR / intern), excluding the nudger. Unlike escalateOverdueTask this has NO overdue /
+// escalatedAt / done guards — it's an explicit human action, works before a task is due and again
+// after. `redo` frames it as "please repeat" for a task already marked done. Only an instructing
+// role may nudge (defence-in-depth; the button is also role-gated client-side).
+export async function remindTask(env, gid, pid, taskId, byUid, redo) {
+  if (!nativePushEnabled(env)) return { error: "push-disabled" };
+  if (!gid || !pid || !taskId) return { error: "bad-args" };
+  const tok = await saTok(env);
+  const [t, g, p, members, actor] = await Promise.all([
+    fsGet(env, tok, `/icuGroups/${gid}/patients/${pid}/tasks/${taskId}`),
+    fsGet(env, tok, `/icuGroups/${gid}`, ["name"]),
+    fsGet(env, tok, `/icuGroups/${gid}/patients/${pid}`, ["name", "bed"]),
+    fsList(env, tok, `/icuGroups/${gid}/members`),
+    fsGet(env, tok, `/icuGroups/${gid}/members/${rawUid(byUid)}`, ["name", "role"]),
+  ]);
+  if (!t) return { error: "task-not-found" };
+  if (!actor || !INSTRUCT_ROLE[actor.role]) return { error: "forbidden" };
+  const unitName = (g && g.name) || "ICU unit";
+  const bed = (p && p.bed) || "";
+  const byName = (actor && actor.name) || "A senior";
+  const prLabel = PRIO_LABEL[t.priority] || "";
+  const msg = {
+    title: (redo ? "🔁 Please repeat · " : "⏰ Reminder · ") + unitName,
+    body: byName + ": " + (t.text || "Task") + (prLabel ? " (" + prLabel + ")" : "") + (bed ? " · Bed " + bed : "") + (redo ? " — please do it again." : " — please complete."),
+    tag: "icu-remind-" + taskId,
+    url: "https://stewardmd.in/",
+  };
+  // Reminders bypass category prefs (explicit human ask) but only target executor roles.
+  const out = await fanOut(env, members, msg, "reminder", { excludeRaw: rawUid(byUid), onlyRoles: EXECUTOR_ROLE });
+  return { reminded: out.attempted, sent: out.sent };
 }
 
 // Cron sweep: collectionGroup('tasks') where dueAt < now (single inequality → needs a COLLECTION_GROUP

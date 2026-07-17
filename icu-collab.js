@@ -461,6 +461,21 @@
       });
     });
   }
+  // Save the CURRENT user's per-unit notification preferences onto their own members/{uid} doc. The
+  // push server (functions/_taskpush.js) reads members/{uid}.notif during fan-out to decide whether
+  // to send each Tier-2/3 category. Only the three category booleans are written; a member can only
+  // ever write their OWN member doc (rules enforce), so no gid/uid target other than self.
+  function setNotifPrefs(gid, prefs) {
+    return new Promise(function (resolve, reject) {
+      if (!icuGroupsOn() || !gid) return reject(new Error("icu-groups-disabled"));
+      fs(function (db) {
+        var uid = currentUid();
+        if (!db || !uid) return reject(new Error("firestore-unavailable"));
+        var clean = { orderRoutine: !!(prefs && prefs.orderRoutine), handover: !!(prefs && prefs.handover), activity: !!(prefs && prefs.activity) };
+        track(memRef(db, gid, uid).update({ notif: clean })).then(function () { resolve(uid); }, reject);
+      });
+    });
+  }
   // Add a colleague by their StewardMD Doctor ID or email (admin only; rules enforce). Resolves
   // via the directory (get-by-exact-key only) then creates their members/{uid} doc.
   function addByIdOrEmail(gid, idOrEmail, role) {
@@ -934,6 +949,7 @@
     deleteGroup: deleteGroup,
     inviteMember: inviteMember,
     setRole: setRole,
+    setNotifPrefs: setNotifPrefs,
     addByIdOrEmail: addByIdOrEmail,
     leaveGroup: leaveGroup,
     removeMember: removeMember,
