@@ -2456,13 +2456,13 @@
     { id: "overview", label: "Overview", svg: "pulse", members: ["overview", "rounds"] },
     { id: "monitoring", label: "Monitoring", svg: "heart", members: ["vitals", "trends", "hemo", "fluids", "lytes", "abg", "vent", "infusions"] },
     { id: "careplan", label: "Care Plan", svg: "rounds", members: ["dx", "treatment", "protocols", "goals", "interactions"] },
-    { id: "documents", label: "Documents", svg: "copy", members: ["documents", "imaging", "handover", "discharge"] },
-    { id: "more", label: "More", svg: "more", members: ["more"] }
+    { id: "documents", label: "Records", svg: "copy", members: ["documents", "imaging", "handover", "discharge", "more"] }
   ];
   var MEMBER = {}; TABS.forEach(function (t) { MEMBER[t.id] = { label: t.label, svg: t.svg, ic: t.ic }; });
   MEMBER.dx = { label: "Diagnosis", svg: "search", ic: "🩺" };
   MEMBER.imaging = { label: "Imaging", svg: "camera", ic: "🩻" };
   MEMBER.documents = { label: "Summary", svg: "copy", ic: "📄" };        // Documents sub-tab 1 — "Summary" (design docTabs order: Summary·Imaging·Handover·Discharge)
+  MEMBER.more = { label: "Tools", svg: "more", ic: "🛠" };               // Records sub-tab — patient tools/settings (merged former "More" tab)
   MEMBER.vitals = { label: "Vitals", svg: "pulse", ic: "❤️" };          // Monitoring sub-tab — Live Patient Status grid
   MEMBER.interactions = { label: "Interactions", svg: "warn", ic: "⚠️" }; // Care Plan sub-tab — drug interactions
   MEMBER.handover = { label: "Handover", svg: "copy", ic: "⇄" };        // Documents sub-tab — SBAR shift handover
@@ -3381,8 +3381,7 @@
       { label: "Monitoring", act: "ws:monitoring", on: _ws === "monitoring" },
       { label: "Care Plan", act: "ws:careplan", on: _ws === "careplan" },
       { label: "Rounds", act: "tab:rounds", on: _active === "rounds", badge: openTasks },
-      { label: "Documents", act: "ws:documents", on: _ws === "documents" },
-      { label: "More", act: "tab:more", on: _active === "more" }
+      { label: "Records", act: "ws:documents", on: _ws === "documents" }
     ];
     return '<div class="icu-v2-tabwrap"><div class="icu-v2-tabs">' + tabs.map(function (t) {
       return '<button class="icu-v2-tab' + (t.on ? " on" : "") + '" data-icu-act="' + t.act + '">' + esc(t.label) + (t.badge ? '<span class="icu-v2-tabbadge">' + t.badge + '</span>' : "") + '</button>';
@@ -4805,7 +4804,7 @@
     // shows the origin the request targeted, and the reason gives the HTTP status / error — so one
     // screenshot pinpoints the failing layer instead of a generic "check your connection". Only shows
     // on failure; trim the bracket once push is confirmed working end-to-end on device.
-    var VER = "g420";
+    var VER = "g421";
     var base = window.SMD_API_BASE || "(relative)";
     function fail(reason) { note("error", "Push failed — teammates not alerted. [" + VER + " · " + base + " · " + reason + "]"); }
     try {
@@ -6596,7 +6595,7 @@
       case "icualerts": if (grpActive()) grpNotifMarkSeen(); _screen = "alerts"; _paintTop = true; paint(); break;
       case "icuteam": _screen = "team"; _paintTop = true; paint(); break;
       case "icuadmit": _admitting = true; _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); break;
-      case "icumore": _screen = "patient"; _active = "more"; _ws = "more"; _paintTop = true; paint(); break;
+      case "icumore": _screen = "patient"; _active = "more"; _ws = "documents"; _paintTop = true; paint(); break;   // "more" is now the Tools sub-tab of the Records workspace
       case "icusettings": _screen = "settings"; _paintTop = true; paint(); break;   // unit-level settings (group mode + notifications), separate from per-patient tools
       case "testpush": grpTestPush(); break;
       case "notifprefs": grpOpenNotifPrefs(); break;   // per-user ICU notification category toggles
