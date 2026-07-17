@@ -36,11 +36,13 @@
   var _last = {};                                 // pid -> last fetch ts (in-memory)
   var _busy = false;
 
-  // Feature AVAILABILITY (not per-patient). Default ON so the on-bar control is reachable without
-  // depending on the Settings section rendering; the Settings toggle is a global kill-switch that
-  // sets it to "0". No credential/PHI is ever stored without explicit per-patient consent, so
-  // defaulting this available is safe.
-  function on() { try { return localStorage.getItem("smd_autofetch") !== "0"; } catch (e) { return true; } }
+  // Feature AVAILABILITY (not per-patient). NATIVE-ONLY: the credential lives in the OS secure
+  // store (Keychain/Keystore), which doesn't exist on the web/PWA — so the whole feature (on-bar
+  // pill, lab-drawer button, auto-run) is hidden off-device by gating on window.SMD_IS_NATIVE.
+  // On native it defaults ON (reachable without the Settings section rendering); the Settings
+  // toggle is a global kill-switch that sets it to "0". No credential/PHI is ever stored without
+  // explicit per-patient consent.
+  function on() { try { return !!window.SMD_IS_NATIVE && localStorage.getItem("smd_autofetch") !== "0"; } catch (e) { return !!window.SMD_IS_NATIVE; } }
   function toast(m) { try { (window.SMD_toast || window.toast || function () {})(m); } catch (e) {} }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
@@ -97,6 +99,7 @@
     if (pid && isEnabled(pid)) refreshNow(pid, {});
   }
   function wireResume() {
+    if (!window.SMD_IS_NATIVE) return;   // native-only: never attach resume/tick listeners on web
     try {
       var C = window.Capacitor;
       if (C && C.Plugins && C.Plugins.App && C.Plugins.App.addListener) {
