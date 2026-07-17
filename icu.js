@@ -571,6 +571,19 @@
     try { ctxLoadBuffer(); } catch (e) {}
     _screen = "board"; _active = "overview"; _ws = "overview"; _wsLast = {};
   }
+  // External subscribers (e.g. Ward Sync's "Adding to" bar) that must re-render when the set of
+  // available units changes — the group list loads ASYNChronously, so a one-shot unitList() read
+  // outside the dashboard would miss units that arrive a beat later (symptom: only the first-loaded
+  // unit shows in Ward Sync; a just-created ward is absent).
+  var _unitsCbs = [];
+  function notifyUnitsChanged() { for (var i = 0; i < _unitsCbs.length; i++) { try { _unitsCbs[i](); } catch (e) {} } }
+  // Start the live group subscription (so units actually load outside the dashboard) and, if given a
+  // callback, register it to fire whenever the unit list changes. Returns the current unitList().
+  function ensureUnits(cb) {
+    if (typeof cb === "function" && _unitsCbs.indexOf(cb) < 0) _unitsCbs.push(cb);
+    try { if (groupMode()) grpEnsureGroupsSub(); } catch (e) {}
+    return unitList();
+  }
   // Flat list of switchable units for the "Adding to" bar in Ward Sync (and any quick switcher).
   // Group mode → the user's shared units per category; solo → the fixed types per category.
   function unitList() {
@@ -3906,6 +3919,7 @@
     if (_grpSubGroups) return;
     _grpSubGroups = api.subscribeGroups(function (groups) {
       _grpList = groups || [];
+      try { notifyUnitsChanged(); } catch (e) {}   // let Ward Sync's "Adding to" bar re-render as units load
       if (_grp) {
         var prev = _grp, found = null, i; for (i = 0; i < _grpList.length; i++) if (_grpList[i].id === prev.id) { found = _grpList[i]; break; }
         if (found) {                                            // reconcile the optimistic/selected unit to the live doc
@@ -7165,7 +7179,7 @@
     // Unit picker — hospital → ICU/Ward category → unit type. The full navigation entry (e.g. Ward Sync).
     openUnits: function () { ICU.open(undefined, _unit.cat === "ward"); _screen = "units"; _pickStep = "units"; _pickCat = null; _paintTop = true; paint(); },
     curUnit: function () { return { cat: _unit.cat, type: _unit.type, hospital: _unit.hospital }; },
-    unitList: unitList, selectUnitByKey: selectUnitByKey, currentUnitLabel: currentUnitLabel,
+    unitList: unitList, ensureUnits: ensureUnits, selectUnitByKey: selectUnitByKey, currentUnitLabel: currentUnitLabel,
     // Resume-where-you-left-off (home.js snapshots this on background; replays it on the next launch).
     // curView captures the exact screen + sub-tab (+ open shared-patient id); resume reopens ICU in the
     // SAME unit category (no switch) and resumeView navigates to that exact view.
