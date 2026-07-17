@@ -94,7 +94,7 @@
     }
   },
   { id:"rumack", cat:"Toxicology", icon:"💊", title:"Rumack-Matthew (paracetamol)",
-    desc:"Is the paracetamol (acetaminophen) level above the NAC treatment line? Single acute ingestion, 4–24 h.",
+    desc:"Is the paracetamol (acetaminophen) level above the NAC treatment line? Single acute ingestion, 4–24 h. Uses the US 150 mg/L line; UK/MHRA uses a single 100 mg/L line (since 2012).",
     inputs:[
       { id:"t", label:"Time since ingestion", type:"number", unit:"h", step:"0.5" },
       { id:"lvl", label:"Paracetamol level", type:"number", unit:"µg/mL (=mg/L)", step:"1" }
@@ -106,7 +106,7 @@
       var t=+v.t||0, lvl=+v.lvl||0;
       if(t<4) return { v:"—", u:"", i:"Levels before 4 h are uninterpretable — repeat at 4 h post-ingestion." };
       if(t>24) return { v:"—", u:"", i:"Nomogram not validated beyond 24 h — treat with NAC if any detectable level or hepatotoxicity; seek toxicology advice." };
-      var line = 150 * Math.pow(2, -(t-4)/4);   // 150 µg/mL at 4 h, t½≈4 h (UK/US treatment line, 25% below the original 200 line)
+      var line = 150 * Math.pow(2, -(t-4)/4);   // 150 µg/mL at 4 h, t½≈4 h (US treatment line; UK/MHRA uses a single 100 mg/L line since 2012)
       var treat = lvl >= line;
       return { v:Math.round(line), u:"µg/mL (line at "+t+" h)", i: treat
         ? "<b>Level "+lvl+" ≥ line ("+line.toFixed(0)+") — ABOVE the treatment line: start N-acetylcysteine.</b>"
@@ -255,8 +255,8 @@
       var rr=60/v.hr;
       var baz=v.qt/Math.sqrt(rr), fri=v.qt/Math.cbrt(rr);
       var lim=v.sex==="f"?470:450;
-      var flag=baz>=(v.sex==="f"?480:470)?"prolonged — torsades risk":baz>lim?"borderline prolonged":"normal";
-      return { v:r0(baz), u:"ms (Bazett)", i:"Fridericia QTc = <b>"+r0(fri)+" ms</b>. QTc is <b>"+flag+"</b> (sex threshold "+lim+" ms). Bazett over-corrects at high rates — prefer Fridericia if HR >100." };
+      var flag=baz>500?"markedly prolonged — high torsades-de-pointes risk":baz>=(v.sex==="f"?480:470)?"prolonged":baz>lim?"borderline prolonged":"normal";
+      return { v:r0(baz), u:"ms (Bazett)", i:"Fridericia QTc = <b>"+r0(fri)+" ms</b>. QTc is <b>"+flag+"</b> (sex threshold "+lim+" ms; torsades risk rises sharply above 500 ms). Bazett over-corrects at high rates — prefer Fridericia if HR >100." };
     } },
 
   { id:"map", cat:"Cardiovascular", icon:"🩺", title:"Mean Arterial Pressure",
@@ -520,8 +520,8 @@
   { id:"gbs", cat:"Critical care", icon:"🩸", title:"Glasgow-Blatchford (GI bleed)",
     desc:"Need for intervention in upper GI bleeding.",
     inputs:[
-      { id:"bun", label:"BUN", type:"select", opts:[{v:"0",t:"<18.2 (0)"},{v:"2",t:"18.2–22.3 (2)"},{v:"3",t:"22.4–28 (3)"},{v:"4",t:"28–70 (4)"},{v:"6",t:">70 (6)"}] },
-      { id:"hb", label:"Haemoglobin", type:"select", opts:[{v:"0",t:"Men ≥13 / Women ≥12 (0)"},{v:"1",t:"Men 12–13 (1)"},{v:"3",t:"Men 10–12 / Women 10–12 (3)"},{v:"6",t:"<10 (6)"}] },
+      { id:"bun", label:"Blood urea nitrogen (mg/dL)", type:"select", opts:[{v:"0",t:"<18.2 (0)"},{v:"2",t:"18.2–22.3 (2)"},{v:"3",t:"22.4–28 (3)"},{v:"4",t:"28–70 (4)"},{v:"6",t:">70 (6)"}] },
+      { id:"hb", label:"Haemoglobin (g/dL)", type:"select", opts:[{v:"0",t:"Men ≥13 / Women ≥12 (0)"},{v:"1",t:"Men 12–13 / Women 10–12 (1)"},{v:"3",t:"Men 10–12 (3)"},{v:"6",t:"<10 (6)"}] },
       { id:"sbp", label:"Systolic BP", type:"select", opts:[{v:"0",t:"≥110 (0)"},{v:"1",t:"100–109 (1)"},{v:"2",t:"90–99 (2)"},{v:"3",t:"<90 (3)"}] },
       { id:"other", label:"Pulse ≥100", type:"check" },
       { id:"melena", label:"Melena present", type:"check" },
@@ -687,15 +687,16 @@
       var cr=v.dial?4:Math.max(1,Math.min(4,v.cr));
       var meld=Math.round(3.78*ln(bili)+11.2*ln(inr)+9.57*ln(cr)+6.43);
       meld=Math.max(6,Math.min(40,meld));
-      var out="MELD = <b>"+meld+"</b>.";
+      var out="MELD = <b>"+meld+"</b>.", head=meld, hu="MELD";
       if(ok(v.na)){
         var na=Math.max(125,Math.min(137,v.na));
         var meldna=meld; if(meld>11) meldna=Math.round(meld+1.32*(137-na)-(0.033*meld*(137-na)));
         meldna=Math.max(6,Math.min(40,meldna));
         out="MELD-Na = <b>"+meldna+"</b> (MELD "+meld+").";
+        head=meldna; hu="MELD-Na";
       }
       var mort=meld<=9?"~1.9%":meld<=19?"~6%":meld<=29?"~19.6%":meld<=39?"~52.6%":"~71.3%";
-      return { v:meld, u:"MELD", i:out+" 3-month mortality ≈ "+mort+"." };
+      return { v:head, u:hu, i:out+" 3-month mortality ≈ "+mort+"." };
     } },
 
   { id:"childpugh", cat:"Hepatology", icon:"🫁", title:"Child-Pugh",
@@ -1309,25 +1310,24 @@
     } },
 
   { id:"phq9", cat:"General", icon:"⚖️", title:"PHQ-9 (depression)",
-    desc:"Depression severity screen. Each item 0–3 over the last 2 weeks.",
+    desc:"Depression severity. Over the last 2 weeks, how often bothered by each problem?",
     kw:["phq","depression","mood","screen","mental health"],
     inputs:[
-      { id:"q1", label:"Little interest / pleasure", type:"number" },
-      { id:"q2", label:"Feeling down / depressed / hopeless", type:"number" },
-      { id:"q3", label:"Sleep problems", type:"number" },
-      { id:"q4", label:"Tired / little energy", type:"number" },
-      { id:"q5", label:"Appetite change", type:"number" },
-      { id:"q6", label:"Feeling bad about yourself", type:"number" },
-      { id:"q7", label:"Trouble concentrating", type:"number" },
-      { id:"q8", label:"Slow / restless (psychomotor)", type:"number" },
-      { id:"q9", label:"Thoughts of self-harm", type:"number" }
+      { id:"q1", label:"Little interest or pleasure in doing things", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q2", label:"Feeling down, depressed or hopeless", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q3", label:"Trouble falling/staying asleep, or sleeping too much", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q4", label:"Feeling tired or having little energy", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q5", label:"Poor appetite or overeating", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q6", label:"Feeling bad about yourself / a failure", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q7", label:"Trouble concentrating", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q8", label:"Moving/speaking slowly, or being restless/fidgety", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q9", label:"Thoughts of being better off dead or self-harm", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] }
     ],
     compute:function(v){
       var ks=["q1","q2","q3","q4","q5","q6","q7","q8","q9"];
-      for(var i=0;i<ks.length;i++){ if(!ok(v[ks[i]])) return ERR; }
-      var s=0; for(var j=0;j<ks.length;j++){ s+=Math.max(0,Math.min(3,Math.round(v[ks[j]]))); }
+      var s=0; for(var j=0;j<ks.length;j++){ s += Number(v[ks[j]])||0; }
       var band=s<=4?"Minimal (0–4).":s<=9?"Mild (5–9).":s<=14?"Moderate (10–14).":s<=19?"Moderately severe (15–19).":"Severe (20–27).";
-      var flag=(ok(v.q9)&&v.q9>=1)?" ⚠ Item 9 positive — assess suicide risk.":"";
+      var flag=(Number(v.q9)>=1)?" ⚠ Item 9 positive — assess suicide risk.":"";
       return { v:s, u:"/27", i:"<b>"+band+"</b>"+flag+" ≥10 has good sensitivity/specificity for major depression. Ref: Kroenke, J Gen Intern Med 2001." };
     } },
 
@@ -1702,13 +1702,13 @@
   { id:"saag", cat:"Hepatology", icon:"🩺", title:"Serum-Ascites Albumin Gradient (SAAG)",
     desc:"Classifies ascites as portal-hypertensive vs not.",
     inputs:[
-      { id:"salb", label:"Serum albumin", type:"number", unit:"g/L", step:"1" },
-      { id:"aalb", label:"Ascitic fluid albumin", type:"number", unit:"g/L", step:"1" }
+      { id:"salb", label:"Serum albumin", type:"number", unit:"g/dL", step:"0.1", lab:"alb" },
+      { id:"aalb", label:"Ascitic fluid albumin", type:"number", unit:"g/dL", step:"0.1" }
     ],
     compute:function(v){
       if(!ok(v.salb)||!ok(v.aalb)) return ERR;
       var g=r1(v.salb - v.aalb);
-      return { v:g, u:"g/L", i:(g>=11?"≥11 g/L — portal hypertension likely (cirrhosis, heart failure, Budd-Chiari)":"<11 g/L — non-portal cause (malignancy, TB, pancreatic, nephrotic)")+". Ref: Runyon, Ann Intern Med 1992." };
+      return { v:g, u:"g/dL", i:(g>=1.1?"≥1.1 g/dL — portal hypertension likely (cirrhosis, heart failure, Budd-Chiari)":"<1.1 g/dL — non-portal cause (malignancy, TB, pancreatic, nephrotic)")+". Ref: Runyon, Ann Intern Med 1992." };
     } },
 
   { id:"ttkg", cat:"Renal", icon:"🩺", title:"Transtubular Potassium Gradient (TTKG)",
@@ -1836,12 +1836,12 @@
   { id:"homa_ir", cat:"Endocrine", icon:"🩸", title:"HOMA-IR (insulin resistance)",
     desc:"Homeostatic model assessment of insulin resistance.",
     inputs:[
-      { id:"glu", label:"Fasting glucose", type:"number", unit:"mmol/L", step:"0.1" },
-      { id:"ins", label:"Fasting insulin", type:"number", unit:"mU/L", step:"0.1" }
+      { id:"glu", label:"Fasting glucose", type:"number", unit:"mg/dL", step:"1" },
+      { id:"ins", label:"Fasting insulin", type:"number", unit:"µU/mL", step:"0.1" }
     ],
     compute:function(v){
       if(!ok(v.glu)||!ok(v.ins)||v.glu<=0||v.ins<=0) return ERR;
-      var h=r1(v.glu*v.ins/22.5);
+      var h=r1(v.glu*v.ins/405);
       return { v:h, u:"", i:(h>2.5?"Suggests insulin resistance (thresholds vary by population/assay, commonly >~2.5)":"Within the usual reference range")+". Use fasting samples; not validated on insulin therapy. Ref: Matthews, Diabetologia 1985." };
     } },
 
@@ -3589,6 +3589,7 @@
       var meld=Math.round(3.78*Math.log(b)+11.2*Math.log(i)+9.57*Math.log(c)+6.43);
       var na=Math.min(Math.max(v.na,125),137);
       var mn=meld>11 ? Math.round(meld + 1.32*(137-na) - (0.033*meld*(137-na))) : meld;
+      mn=Math.max(6,Math.min(40,mn));   // UNOS bounds MELD-Na to 6–40
       var band=mn<=9?"Lower 3-month mortality":mn<=19?"Moderate":mn<=29?"High":"Very high 3-month mortality";
       return { v:mn, u:"", i:band+" (MELD-Na; sodium bounded 125–137, creatinine capped at 4). Ref: Kim, N Engl J Med 2008." };
     } },
@@ -3794,7 +3795,7 @@
       { id:"sci", label:"Acute spinal cord injury (< 1 month)", type:"check" }
     ],
     compute:function(v){
-      var s=Number(v.age);
+      var s=Number(v.age)||0;   // unselected age must not become NaN → silent "High risk"
       ["minor_surgery","bmi25","swollen_legs","varicose","sepsis","lung","pft","mi","chf","ibd","bedrest","ocp","pregnancy","miscarriage"].forEach(function(k){ if(v[k])s+=1; });
       ["arthroscopic","major_surgery","laparoscopic","malignancy","bedrest72","cast","cvc"].forEach(function(k){ if(v[k])s+=2; });
       ["hx_vte","fhx_vte","fvl","pt20210","lupus_ac","acl","homocysteine","hit","thrombophilia"].forEach(function(k){ if(v[k])s+=3; });
@@ -7155,7 +7156,8 @@
         return '<label class="mc-check"><input type="checkbox" id="'+fid+'"><span>'+esc(f.label)+'</span></label>';
       }
       if(f.type==="select"){
-        var opts=(f.opts||[]).map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
+        var did0=false;   // default-select the first 0-point option so an untouched select is the NORMAL band, never the worst (APACHE II / MEWS list worst first)
+        var opts=(f.opts||[]).map(function(o){var sel=(!did0&&String(o.v)==="0")?" selected":"";if(sel)did0=true;return '<option value="'+esc(o.v)+'"'+sel+'>'+esc(o.t)+'</option>';}).join("");
         return '<div class="mc-field"><label class="mc-lbl" for="'+fid+'">'+esc(f.label)+'</label><select class="mc-input" id="'+fid+'">'+opts+'</select></div>';
       }
       var typ=f.type==="date"?"date":"number";
