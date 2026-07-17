@@ -113,9 +113,9 @@ ok("plausible day accepted", qualifyDay(g, "20260711", { nowMs: nowMs, tzOffsetM
 // ---- levels ----
 eq("level at 0 KU", levelFor(0).level, 1);
 eq("level name at 0", levelFor(0).name, "Intern");
-eq("level 20 name", levelFor(1900).name, "Evidence Master");
-eq("level 50 name", levelFor(4900).name, "Clinical Legend");
-ok("level >=50 stays legend", levelFor(9000).name === "Clinical Legend");
+eq("level 20 name", levelFor(1900).name, "Steward");
+eq("level 50 name", levelFor(4900).name, "Clinical Luminary");
+ok("level >=50 stays luminary", levelFor(9000).name === "Clinical Luminary");
 
 // ---- quests ----
 let qd = freshDoc();
@@ -151,7 +151,7 @@ eq("progressPct 10", sm.progressPct, 10);
 
 let ps = progressionSummary({ balance: 1900, byType: {}, day: D1, dayCounts: {}, stats: { lifetimeKU: 1900 }, badges: {}, longestStreak: 0 }, D1);
 eq("progression level from lifetime KU", ps.level, 20);
-eq("progression level name", ps.levelName, "Evidence Master");
+eq("progression level name", ps.levelName, "Steward");
 ok("progression has quest", !!ps.quest && typeof ps.quest.done === "boolean");
 ok("progression badge counts present", ps.badgeCounts && ps.badgeCounts.total > 0);
 

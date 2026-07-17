@@ -10,9 +10,9 @@
 // the milestones below (from the product spec). Display-only; gates nothing.
 export const KU_PER_LEVEL = 100;
 const LEVEL_NAMES = [
-  { min: 1, name: "Intern" }, { min: 2, name: "Resident" }, { min: 3, name: "Junior Clinician" },
-  { min: 5, name: "Clinical Learner" }, { min: 10, name: "Clinical Thinker" }, { min: 20, name: "Evidence Master" },
-  { min: 30, name: "Stewardship Expert" }, { min: 40, name: "Consultant" }, { min: 50, name: "Clinical Legend" }
+  { min: 1, name: "Intern" }, { min: 2, name: "Resident" }, { min: 3, name: "Clinician" },
+  { min: 5, name: "Clinical Scholar" }, { min: 10, name: "Evidence Master" }, { min: 20, name: "Steward" },
+  { min: 30, name: "Stewardship Expert" }, { min: 40, name: "Consultant" }, { min: 50, name: "Clinical Luminary" }
 ];
 export function levelFor(ku) {
   ku = Math.max(0, ku || 0);
@@ -105,11 +105,11 @@ export const BADGES = [].concat(
     { t: 50, name: "Quest Master", desc: "Complete 50 daily quests", rarity: "epic" }
   ]),
   tier("levels", "level", [
-    { t: 5, name: "Clinical Learner", desc: "Reach level 5", rarity: "uncommon" },
-    { t: 10, name: "Clinical Thinker", desc: "Reach level 10", rarity: "rare" },
-    { t: 20, name: "Evidence Master", desc: "Reach level 20", rarity: "epic" },
+    { t: 5, name: "Clinical Scholar", desc: "Reach level 5", rarity: "uncommon" },
+    { t: 10, name: "Evidence Master", desc: "Reach level 10", rarity: "rare" },
+    { t: 20, name: "Steward", desc: "Reach level 20", rarity: "epic" },
     { t: 30, name: "Stewardship Expert", desc: "Reach level 30", rarity: "legendary" },
-    { t: 50, name: "Clinical Legend", desc: "Reach level 50", rarity: "mythic" }
+    { t: 50, name: "Clinical Luminary", desc: "Reach level 50", rarity: "mythic" }
   ]),
   tier("combo", "combo", [
     { t: 1, name: "Triple Threat", desc: "Read, solve a case and use a calculator in one day", rarity: "common" },
