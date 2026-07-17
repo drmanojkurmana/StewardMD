@@ -1435,7 +1435,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold411" defer></script>
 <script src="/electrolytes.js?v=gold363" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/home.js?v=gold437" defer></script>
+<script src="/home.js?v=gold438" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -1507,7 +1507,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
     // Auto-fetch (device-local, opt-in): keeps a linked Ward Sync patient's reports fresh on
     // launch/resume. Depends on window.GHIS above, so loaded right after it. Flag-gated with GHIS
     // itself — meaningless without Ward Sync. Consent + toggle live entirely in autofetch.js.
-    if (!document.getElementById("smd-autofetch-script")) { var af = document.createElement("script"); af.id = "smd-autofetch-script"; af.src = "/autofetch.js?v=gold437"; document.body.appendChild(af); }
+    if (!document.getElementById("smd-autofetch-script")) { var af = document.createElement("script"); af.id = "smd-autofetch-script"; af.src = "/autofetch.js?v=gold438"; document.body.appendChild(af); }
     ghisHideFab(); ghisWrapSB(); ghisSidebarItem();
     [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { ghisWrapSB(); ghisSidebarItem(); }, ms); });
   }
