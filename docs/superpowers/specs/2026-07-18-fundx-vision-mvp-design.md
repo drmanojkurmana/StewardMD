@@ -181,8 +181,24 @@ opens overlay, `?fundx=0` no-op; camera/MediaPipe guarded + tested via injected 
   (architecture, extension points, Phase C handoff), final full verification, push + PR.
 
 ## 12. Deviations from Phase A (log)
-None yet. Any UI deviation forced by a web/Capacitor technical limitation is recorded here with
-rationale.
+Phase A UI is frozen and reproduced. Deviations forced by the web/Capacitor target or by
+the absence of trained models are recorded here with rationale:
+
+- **Home entry placement** — the "Retinal Scan" entry sits as the first tile in the Home
+  "Clinical tools" grid rather than as a 5th button in the fixed 4-up quick-action row
+  (that row is a strict 4-column grid; a 5th item would break its layout). Same icon,
+  label, and destination as Phase A; presentation only.
+- **MediaPipe delivery** — real eye/pupil/distance/motion detection loads MediaPipe from
+  the jsDelivr CDN on first camera use, with graceful fallback to heuristic-only if it
+  cannot load. Vendoring the assets locally (see `assets/vendor/mediapipe/README.md`) is a
+  documented follow-up for full offline support; no UI/contract impact either way.
+- **Live retina/disc/macula signals are simulated** — until a real on-device fundus
+  detector exists, `fundx-detect.js` derives retina/disc/macula/FOV presence from image
+  quality + stability (`SimRetina`) so a beginner can be guided to Capture-Ready. This is a
+  swappable provider (`DetectorHub.setRetinaSignalProvider`); real detection replaces it
+  with no engine/UI/contract change. Clearly a proxy, not true detection.
+- **Voice coaching (TTS)** — off by default; Web Speech where available; reliable-iOS TTS
+  (`@capacitor-community/text-to-speech`) is a documented fast-follow, not in this MVP.
 
 ## 13. Phase C handoff notes
 `RetinalFindings` JSON (versioned) + `QualityScore` are the stable Vision→Clinical contract.
