@@ -96,7 +96,20 @@
   }
 
   var rulesProvider = { id: "rules", provider: "rules", version: VERSION, available: function () { return true; }, assess: function (f, p) { return assessRules(f, p); } };
-  var providers = { rules: rulesProvider }, activeId = "rules";
+  // Cloud clinical provider — posts to the FundX backend (/api/fundx/clinical), which routes
+  // to the active server-side LLM (Vertex/Gemini, Cerebras) and returns a schema-validated
+  // ClinicalAssessment. Registered but INACTIVE (rules stay active) until enabled + the
+  // backend has credentials; the router below validates + falls back to rules on any failure.
+  var backendProvider = {
+    id: "backend", provider: "backend", version: "server", available: function () { return typeof fetch === "function"; },
+    assess: function (findingsWrap, patient) {
+      var f = (findingsWrap && findingsWrap.findings) ? findingsWrap.findings : (findingsWrap || {});
+      return fetch("/api/fundx/clinical", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ findings: f, patient: patient || {} }) })
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function (j) { return j.assessment || j; });
+    }
+  };
+  var providers = { rules: rulesProvider, backend: backendProvider }, activeId = "rules";
 
   function validate(a) {
     var errors = [];

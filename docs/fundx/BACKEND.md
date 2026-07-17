@@ -1,0 +1,122 @@
+# FundX AI Backend — Cloudflare Pages Functions
+
+Production backend for FundX retinal inference + clinical reasoning. The app talks **only**
+to these endpoints; provider-specific logic and all credentials stay server-side.
+
+## Endpoints
+
+| Method | Path | Body | Returns |
+|---|---|---|---|
+| POST | `/api/fundx/vision` | `{ image, metrics?, ctx? }` | `{ findings: RetinalFindings }` |
+| POST | `/api/fundx/clinical` | `{ findings, patient? }` | `{ assessment: ClinicalAssessment }` |
+| GET | `/api/fundx/health` | — | `{ ok, providers[], visionOrder, clinicalOrder, model }` |
+
+`image` is a data URL or bare base64 JPEG/PNG/WebP. Responses match the app's existing Vision
+and Clinical interfaces exactly (versioned `schemaVersion`), so the app's provider layer
+consumes them unchanged.
+
+## Architecture
+
+```
+app ──HTTPS──> functions/api/fundx/[[path]].js  (auth · CORS · rate-limit · validate · route)
+                         │
+                         └─> functions/_fundx_ai.js  (provider abstraction + transport)
+                                   ├─ vertex     (Gemini, WIF keyless — vision + text)
+                                   ├─ developer  (AI Studio key — vision + text, dev/failover)
+                                   └─ cerebras   (API key — text/clinical)
+```
+
+- **No keys to the client.** All provider auth is server-side. Vertex uses keyless Workload
+  Identity Federation (self-signed OIDC JWT → Google STS → IAM Credentials access token) —
+  the same secrets MaiK already uses.
+- **Auth.** Same gate as MaiK/GHIS: Cf-Access email, `X-App-Token` (`FUNDX_APP_TOKEN` /
+  `AI_APP_TOKEN` / `GHIS_APP_TOKEN`), or an allowed Origin (stewardmd.in + the native app's
+  `capacitor://localhost` + same-origin empty Origin).
+- **Rate limiting.** Server-derived identity (Firebase ID token / Cf-Access / hashed IP via
+  `_usage.js`), KV-backed (reuses `MAIK_KV`), namespaced apart from MaiK counters:
+  min-interval (`FUNDX_RATE_LIMIT_SECONDS`) + per-identity daily cap (`FUNDX_DAILY_LIMIT`).
+  Fails **open** if no KV is bound.
+- **Robustness.** Request + response validation, JSON extraction (tolerates code fences /
+  prose), output normalization to the schema, per-provider timeout (`FUNDX_TIMEOUT_MS`),
+  Vertex retry-once → developer failover, structured JSON logging (no PHI / no secrets),
+  typed error responses (`{error, code}` + HTTP status).
+- **Provider abstraction.** Add a provider by extending `PROVIDERS` in `_fundx_ai.js`
+  (`{name, modalities, available(env), generate(env, req, opts)}`) and the selection order
+  helpers. No app or router change.
+
+## Environment variables
+
+Set as Cloudflare **Pages** env vars / secrets (Dashboard → Settings → Environment variables,
+or `wrangler pages secret put <NAME>`). Locally, put them in `.dev.vars` (see
+`.dev.vars.example`; gitignored).
+
+| Name | Kind | Notes |
+|---|---|---|
+| `FUNDX_AI_PROVIDER` | var | `vertex` (default) \| `developer` \| `cerebras` |
+| `FUNDX_VISION_PROVIDER` / `FUNDX_CLINICAL_PROVIDER` | var | optional per-task overrides |
+| `FUNDX_MODEL` | var | default `gemini-2.5-flash` |
+| `FUNDX_DAILY_LIMIT` / `FUNDX_RATE_LIMIT_SECONDS` / `FUNDX_TIMEOUT_MS` | var | limits |
+| `FUNDX_APP_TOKEN` | secret | optional app token (Origin gate already covers app+web) |
+| `GCP_PROJECT` / `GCP_LOCATION` / `GCP_SA_EMAIL` | secret | Vertex (shared with MaiK) |
+| `GCP_WIF_PRIVATE_KEY` / `GCP_WIF_AUDIENCE` / `GCP_WIF_KID` / `GCP_WIF_ISSUER` / `GCP_WIF_SUBJECT` | secret | Vertex keyless WIF (shared with MaiK) |
+| `GCP_SA_PRIVATE_KEY` | secret | alt to WIF (only if org allows SA keys) |
+| `GEMINI_API_KEY` | secret | AI Studio dev/failover (optional) |
+| `CEREBRAS_API_KEY` / `CEREBRAS_MODEL` / `CEREBRAS_BASE` | secret/var | Cerebras clinical (optional) |
+
+KV binding `MAIK_KV` is already declared in `wrangler.toml` (production env). No new binding
+is required.
+
+## Local development
+
+```bash
+cp .dev.vars.example .dev.vars      # fill in what you want to exercise
+npm run build:www                   # assemble www/ (static app)
+npx wrangler pages dev . --kv MAIK_KV       # serves functions/ + www/ with .dev.vars
+# health check:
+curl -s http://localhost:8788/api/fundx/health | jq
+```
+
+With no Vertex/Cerebras creds in `.dev.vars`, `/health` reports every provider
+`available:false` and `/vision` + `/clinical` return HTTP 503 `no_*_provider` — the app then
+falls back to the on-device mock (vision) / rule engine (clinical). Add creds to exercise
+real calls.
+
+## Testing
+
+```bash
+node test/fundx-backend.test.mjs    # 33 assertions: validation, prompts, JSON extraction,
+                                    # normalization, provider selection, orchestration via a
+                                    # mock provider, and the router (health/503/CORS/401/405)
+npm test                            # runs the above + all FundX + app suites
+```
+
+These run with **no credentials** — provider calls are exercised via an injected mock, and the
+router is driven with fake Requests. Nothing hits the network.
+
+## Production deployment
+
+Deploys with the existing StewardMD Pages pipeline (`functions/` ships automatically). Steps:
+
+1. Set the env vars above on the Pages project (production). Vertex WIF vars are already set
+   for MaiK — FundX reuses them; you only add optional `CEREBRAS_API_KEY` / `FUNDX_*` tuning.
+2. Deploy: `npm run build:www && npx wrangler pages deploy .` (or the existing CI/Pages Git
+   integration — no special build for functions).
+3. Verify: `curl -s https://stewardmd.in/api/fundx/health` (needs an allowed Origin/token) —
+   confirm the intended provider shows `available:true`.
+4. **Activate in the app:** the app is pre-wired — in FundX Settings pick the `vertex-gemini`
+   vision provider (`SMD_FUNDX_PROVIDERS.setActive`), and/or activate the `backend` clinical
+   provider (`SMD_FUNDX_CLINICAL.setActive("backend")`). Until then mock/rules stay active.
+
+## Remaining configuration steps (credentials-gated)
+
+Everything is complete and tested EXCEPT the final authenticated provider calls, which need
+external credentials that are not present in this environment:
+
+- [ ] Confirm/keep the shared **Vertex WIF** secrets on the Pages project (already used by
+      MaiK). If FundX runs under a different GCP project/SA, set the `GCP_*` vars accordingly.
+- [ ] (Optional) Set `CEREBRAS_API_KEY` to enable the Cerebras clinical provider.
+- [ ] (Optional) Set `GEMINI_API_KEY` for the AI Studio dev/failover path.
+- [ ] Deploy, hit `/api/fundx/health`, confirm `available:true` for the intended provider.
+- [ ] Flip the app's active provider(s) as above.
+
+No code change is required for any of these — they are configuration only.

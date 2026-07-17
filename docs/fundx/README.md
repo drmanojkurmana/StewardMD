@@ -112,6 +112,13 @@ contract change:
 Both need external credentials / a backend endpoint / trained model weights — that is the
 only remaining blocker; everything up to that seam is complete and tested.
 
+The **FundX backend** that fulfils the cloud path is built and documented in
+[`BACKEND.md`](./BACKEND.md): Cloudflare Pages Functions at `/api/fundx/vision`,
+`/api/fundx/clinical`, `/api/fundx/health`, with a server-side provider abstraction
+(Vertex/Gemini · Cerebras · developer), keyless Vertex WIF auth (no keys on the client),
+rate limiting, validation, retries, timeouts, and structured logging. The app is pre-wired
+to it — connecting a real provider is credentials + `setActive`, no code change.
+
 ## Testing
 
 `npm test` runs headless (Node, no browser):

@@ -95,10 +95,13 @@
   var providers = {};
   var activeId = "mock";
   function register(p) { if (p && p.id) providers[p.id] = p; return p; }
-  // seed defaults
+  // seed defaults. The cloud vision provider is PRE-WIRED to the FundX backend
+  // (/api/fundx/vision) so connecting it is just setActive("vertex-gemini") once the
+  // backend has credentials; mock stays active by default. The backend reports real
+  // readiness at GET /api/fundx/health.
   register(mockProvider());
-  register(cloudProvider("vertex-gemini", "vertex"));
-  register(cloudProvider("cerebras", "cerebras"));
+  register(cloudProvider("vertex-gemini", "vertex", { endpoint: "/api/fundx/vision", model: "gemini-2.5-flash" }));
+  register(cloudProvider("cerebras", "cerebras"));   // vision N/A for Cerebras; kept for symmetry
   register(localModelProvider("onnx", "onnx", "local"));
   register(localModelProvider("tflite", "tflite", "local"));
 

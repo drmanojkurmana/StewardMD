@@ -1,0 +1,48 @@
+# FundX AI backend — local dev secrets template.
+# Copy to `.dev.vars` (gitignored) for `npx wrangler pages dev`. In production these are
+# set as Cloudflare Pages env vars / secrets (Dashboard → Settings → Environment variables,
+# or `wrangler pages secret put <NAME>`), NEVER committed. The Vertex vars below are the
+# SAME ones MaiK already uses — in production they are already configured; you only need
+# them locally if you want to exercise real Vertex calls from `pages dev`.
+
+# ---- provider selection (non-secret) ----
+FUNDX_AI_PROVIDER=vertex           # vertex (default) | developer | cerebras
+# FUNDX_VISION_PROVIDER=vertex     # optional per-task override (vision needs a multimodal provider)
+# FUNDX_CLINICAL_PROVIDER=vertex   # vertex | cerebras | developer
+FUNDX_MODEL=gemini-2.5-flash       # do NOT use gemini-2.0-flash
+
+# ---- limits / robustness (non-secret) ----
+FUNDX_DAILY_LIMIT=200
+FUNDX_RATE_LIMIT_SECONDS=2
+FUNDX_TIMEOUT_MS=20000
+
+# ---- app auth token (secret, optional) ----
+# If set, the app may send it as X-App-Token. Origin allow-list already covers the
+# web + native app, so this is optional. Reuses AI_APP_TOKEN / GHIS_APP_TOKEN if present.
+# FUNDX_APP_TOKEN=
+
+# ---- Vertex AI (Gemini) — keyless Workload Identity Federation (SAME as MaiK) ----
+GCP_PROJECT=your-gcp-project-id
+GCP_LOCATION=us-central1
+GCP_SA_EMAIL=maik-vertex@your-gcp-project-id.iam.gserviceaccount.com
+# PKCS8 PEM private key that signs the OIDC JWT (public JWK uploaded to the WIF provider).
+# Paste as a single line with \n escapes, or use `wrangler pages secret put GCP_WIF_PRIVATE_KEY`.
+GCP_WIF_PRIVATE_KEY=
+GCP_WIF_AUDIENCE=//iam.googleapis.com/projects/NNN/locations/global/workloadIdentityPools/POOL/providers/PROVIDER
+GCP_WIF_KID=stewardmd-key-1
+GCP_WIF_ISSUER=https://stewardmd.in
+GCP_WIF_SUBJECT=maik-worker
+# Alternative to WIF (only if org policy allows SA keys): a full SA private key PEM.
+# GCP_SA_PRIVATE_KEY=
+
+# ---- Developer API (AI Studio) — optional dev/failover ----
+# GEMINI_API_KEY=
+
+# ---- Cerebras (clinical text provider) — optional ----
+# CEREBRAS_API_KEY=
+# CEREBRAS_MODEL=llama-3.3-70b
+# CEREBRAS_BASE=https://api.cerebras.ai/v1
+
+# ---- KV for rate limiting (binding, not a var) ----
+# Reuses the existing MAIK_KV namespace (see wrangler.toml). For `pages dev`, bind a
+# preview namespace: `npx wrangler pages dev . --kv MAIK_KV`. Metering fails OPEN if absent.

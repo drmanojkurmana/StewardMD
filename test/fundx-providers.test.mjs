@@ -19,7 +19,8 @@ ok("providers: mock active by default", P.getActive().id === "mock");
 const h = P.health();
 const byId = Object.fromEntries(h.map((x) => [x.id, x]));
 ok("providers: mock available", byId.mock.available === true);
-ok("providers: vertex-gemini unavailable until configured", byId["vertex-gemini"].available === false);
+ok("providers: vertex-gemini pre-wired to backend endpoint (available)", byId["vertex-gemini"].available === true);
+ok("providers: cerebras vision unconfigured (available=false)", byId.cerebras.available === false);
 ok("providers: onnx unavailable until configured", byId.onnx.available === false);
 
 await (async () => {
