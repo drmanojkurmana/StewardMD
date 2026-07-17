@@ -244,5 +244,8 @@ ok("export: carries findings + metadata, NO image bytes", !!(payload.scan.vision
 ok("export: provider/model version included", !!payload.scan.provider && payload.scan.provider.provider === "mock");
 ok("fundx: settings screen + provider/sensitivity/export wired", /function screenSettings\(/.test(fj) && /data-fx="setprovider"/.test(fj) && /data-fx="setsens"/.test(fj) && /function exportScan\(/.test(fj) && /screen === "settings"/.test(fj));
 
+// ---- M11 Clinical Engine integration (nested flag, advisory) ------------
+ok("fundx: clinical card wired behind smd_fundx_clinical", /function clinicalOn\(/.test(fj) && /function clinicalCard\(/.test(fj) && /data-fx="setclinical"/.test(fj) && /SMD_FUNDX_CLINICAL/.test(fj));
+
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);

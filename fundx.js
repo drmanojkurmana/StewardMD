@@ -48,6 +48,30 @@
 
   var DISCLAIMER = 'Vision detection preview — not a diagnosis. Images stay on this device.';
 
+  // Advisory Clinical Engine (Phase C) is a NESTED flag, default OFF — no clinical advice
+  // surfaces unless explicitly enabled. When on, a rule-based advisory assessment renders.
+  function clinicalOn() { try { return localStorage.getItem("smd_fundx_clinical") === "1"; } catch (e) { return false; } }
+  function clinicalCard(findingsWrap) {
+    if (!clinicalOn() || !window.SMD_FUNDX_CLINICAL || !findingsWrap) return "";
+    var a;
+    try { a = window.SMD_FUNDX_CLINICAL.assessSync(findingsWrap, { age: ctx && ctx.age, sex: ctx && ctx.sex, dx: (ctx && ctx.meta) || "" }); } catch (e) { return ""; }
+    var sev = { none: "stable", mild: "stable", moderate: "warning", severe: "critical" }[a.severity] || "info";
+    var urg = { routine: "stable", soon: "warning", urgent: "urgent", emergency: "critical" }[a.urgency] || "info";
+    function badge(cls, txt) { return '<span class="fundx-badge b-' + cls + '">' + esc(txt) + '</span>'; }
+    var ref = a.referral ? '<div class="fundx-frow"><span>Referral</span><b>' + esc(a.referral.to) + ' · ' + esc(a.referral.priority) + '</b></div>' : '';
+    var inv = a.investigations && a.investigations.length ? '<div class="fundx-frow"><span>Suggested</span><b>' + esc(a.investigations.join(", ")) + '</b></div>' : '';
+    var safety = a.safetyFlags && a.safetyFlags.length ? '<div class="fundx-whys">' + a.safetyFlags.map(function (s) { return '<span class="fundx-why">' + ric("shield") + esc(s.replace(/_/g, " ")) + '</span>'; }).join("") + '</div>' : '';
+    return '<div class="rds-section-header"><span class="rds-section-title">Clinical assessment · advisory</span></div>' +
+      '<div class="fundx-clin">' +
+        '<div class="fundx-clin-top"><b>' + esc(a.label) + '</b><span>' + badge(sev, a.severity) + badge(urg, a.urgency) + '</span></div>' +
+        '<div class="fundx-findings" style="margin-top:10px">' + ref + inv +
+          '<div class="fundx-frow"><span>Follow-up</span><b>' + esc(a.followUp.interval) + '</b></div>' +
+          '<div class="fundx-frow"><span>Confidence</span><b>' + a.confidence + '</b></div>' +
+        '</div>' + safety +
+        '<p class="fundx-note">' + esc(a.disclaimer) + ' (' + esc(a.provider) + ' engine)</p>' +
+      '</div>';
+  }
+
   // ---- voice coaching (TTS) — OFF by default, Web Speech, graceful ---------
   var VOICE = (function () {
     var last = "", lastAt = 0;
@@ -267,6 +291,7 @@
           row("Field of view", esc(f.field_of_view || "—")) +
           row("Model confidence", (f.confidence != null ? f.confidence : "—")) +
         '</div>' +
+        clinicalCard(result && result.findings) +
         '<div class="fundx-actions">' +
           '<button class="fundx-btn ghost" data-fx="discard">' + ric("delete") + 'Discard</button>' +
           '<button class="fundx-btn" data-fx="save">' + ric("save") + 'Save to patient</button>' +
@@ -312,6 +337,7 @@
           row("Device", esc((m.device && m.device.platform) || "—") + " · " + esc((m.device && m.device.appVersion) || "")) +
           row("Operator", esc((m.audit && m.audit.operator) || "—")) +
         '</div>' +
+        clinicalCard(m.vision) +
         '<div class="fundx-actions"><button class="fundx-btn ghost" data-fx="deletescan" data-id="' + esc(m.id) + '">' + ric("delete") + 'Delete</button>' +
           '<button class="fundx-btn" data-fx="export" data-id="' + esc(m.id) + '">' + ric("ios_share") + 'Export JSON</button></div>' +
         '<p class="fundx-disc">' + esc(f.disclaimer || DISCLAIMER) + '</p>' +
@@ -433,6 +459,8 @@
         '<div class="fundx-chips2">' + sensChip("low", "Easier") + sensChip("med", "Balanced") + sensChip("high", "Strict") + '</div>' +
         '<div class="rds-section-header"><span class="rds-section-title">Coaching</span></div>' +
         '<button class="fundx-set-row' + (VOICE.enabled() ? ' on' : '') + '" data-fx="setvoice"><span class="fundx-set-rl"><b>Voice coaching</b><span>Spoken guidance during capture</span></span>' + ric(VOICE.enabled() ? "toggle_on" : "toggle_off") + '</button>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Clinical (Phase C · advisory)</span></div>' +
+        '<button class="fundx-set-row' + (clinicalOn() ? ' on' : '') + '" data-fx="setclinical"><span class="fundx-set-rl"><b>Clinical assessment</b><span>Rule-based, advisory severity / referral / follow-up from findings. Never a diagnosis.</span></span>' + ric(clinicalOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Data</span></div>' +
         '<button class="fundx-set-row" data-fx="clearall"><span class="fundx-set-rl"><b>Delete all scans</b><span>Removes every stored image + record on this device</span></span>' + ric("delete_forever") + '</button>' +
         '<p class="fundx-disc">' + DISCLAIMER + '</p>' +
@@ -739,6 +767,7 @@
       case "setprovider": { var P = window.SMD_FUNDX_PROVIDERS; if (P && P.setActive(b.getAttribute("data-id"))) { haptic("selection"); toast("Provider: " + b.getAttribute("data-id")); render(); } return; }
       case "setsens": { try { localStorage.setItem("smd_fundx_sens", b.getAttribute("data-v")); } catch (e) {} applySettings(); haptic("selection"); return render(); }
       case "setvoice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); return render();
+      case "setclinical": { try { localStorage.setItem("smd_fundx_clinical", clinicalOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
       case "clearall": haptic("warning"); return clearAllScans();
       case "export": haptic("light"); { var st = STORE(); if (st) st.getScan(b.getAttribute("data-id")).then(function (m) { if (m) exportScan(m); }); } return;
     }

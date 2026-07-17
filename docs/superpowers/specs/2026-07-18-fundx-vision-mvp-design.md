@@ -186,6 +186,16 @@ opens overlay, `?fundx=0` no-op; camera/MediaPipe guarded + tested via injected 
   fallback/health; mock active by default; isolated adapters for Vertex(Gemini)/Cerebras
   (cloud, real fetch when configured) + ONNX/TFLite (on-device, lazy when configured).
   Capture flow routes findings through the router. Verify.
+- **M9 Timeline + Compare** — per-patient scan history + quality trend; current-vs-previous
+  compare with metric deltas. Verify.
+- **M10 Settings + Export** — AI-provider selector, capture sensitivity, voice toggle,
+  delete-all; scan → JSON export (native Share / web download). Verify.
+- **M11 Clinical Engine foundation (Phase C)** — `fundx-clinical.js`: deterministic,
+  evidence-based, advisory rule engine (findings + patient → severity/urgency/referral/
+  follow-up/safety/confidence/evidence) behind a clinical provider seam; nested flag
+  `smd_fundx_clinical` (default OFF). Verify.
+- **Integration** — `test/run-fundx.mjs`: headless Chrome + fake camera drives the real
+  flow end-to-end (flag→tile→overlay→camera mount→training; ?fundx=0 no-op). 15/15 green.
 
 ## 12. Deviations from Phase A (log)
 Phase A UI is frozen and reproduced. Deviations forced by the web/Capacitor target or by

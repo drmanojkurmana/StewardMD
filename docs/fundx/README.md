@@ -24,6 +24,7 @@ Records → "FundX AI" sub-tab (opens for the current patient).
 | `fundx-vision.js` | **Vision Engine core** — pure, DOM-free, reusable, headless-testable | `window.SMD_FUNDX_VISION` |
 | `fundx-enhance.js` | Image-enhancement pipeline (pure), swappable `IEnhancer` | `window.SMD_FUNDX_ENHANCE` |
 | `fundx-providers.js` | Retinal-inference provider abstraction / AI Router | `window.SMD_FUNDX_PROVIDERS` |
+| `fundx-clinical.js` | Clinical Engine (Phase C) — rule-based advisory, provider-seamed | `window.SMD_FUNDX_CLINICAL` |
 | `fundx-detect.js` | Perception — heuristic pixels, MediaPipe adapter, sim-retina, camera | `window.SMD_FUNDX_DETECT` |
 | `fundx-store.js` | Local persistence (images + metadata index) | `window.SMD_FUNDX_STORE` |
 | `fundx.js` | Overlay UI, screen router, coaching, capture flow, training | `window.FUNDX` |
@@ -88,12 +89,28 @@ selecting → processing → review.
   quality, acquisition, vision (versioned), patientContext, timestamp, device/app
   version, provider/model version, audit. `validate.scanRecord()` enforces presence.
 
-## Phase C handoff
+## Clinical Engine (Phase C foundation)
 
-The Clinical Engine consumes `RetinalFindings` JSON + `QualityScore` + patient context;
-it never touches pixels. Because the boundary is a versioned schema and inference is
-behind `IRetinaModel`, adding Phase C requires **no** refactor of the Vision Engine or
-the UI. `SMD_FUNDX_VISION` is reusable by other StewardMD features as-is.
+`fundx-clinical.js` (`SMD_FUNDX_CLINICAL`) reasons over the Vision `RetinalFindings` JSON +
+patient context → a structured, **advisory** `ClinicalAssessment` (severity · urgency ·
+referral · follow-up · investigations · safety flags · missing-data · continuous confidence
+· evidence trail). It never touches pixels and is **never a diagnosis**. The default is a
+deterministic, evidence-based **rule engine** (real, non-placeholder: DR-grade proxy,
+cup–disc ratio → glaucoma-suspect, disc-oedema → emergency, macular-oedema → urgent, etc.),
+behind a provider seam identical to the Vision AI Router — register a richer LLM clinical
+provider (`SMD_FUNDX_CLINICAL.register(impl); setActive(id)`) and the router validates +
+falls back to rules on error/invalid output. Surfaced in the UI behind the nested flag
+`smd_fundx_clinical` (**default OFF**; Settings toggle) on the Result + Detail screens.
+
+## Phase C handoff / connecting real AI
+
+The engine boundaries are versioned JSON, so real intelligence connects without any UI or
+contract change:
+- **Retinal inference** → `SMD_FUNDX_PROVIDERS.configure("vertex-gemini", {endpoint, model});
+  setActive("vertex-gemini")` (or `cerebras`/`onnx`/`tflite`).
+- **Clinical reasoning** → register an LLM-backed clinical provider on `SMD_FUNDX_CLINICAL`.
+Both need external credentials / a backend endpoint / trained model weights — that is the
+only remaining blocker; everything up to that seam is complete and tested.
 
 ## Testing
 
