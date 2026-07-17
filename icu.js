@@ -1016,8 +1016,9 @@
       '#icuRoot.icu-v2 .icu-banner{display:none}' +
       // top tabs (solid segmented control)
       '#icuRoot.icu-v2 .icu-v2-tabwrap{flex:0 0 auto;background:var(--panel);border-bottom:1px solid var(--border);padding:10px 12px}' +
-      '#icuRoot.icu-v2 .icu-v2-tabs{display:flex;gap:3px;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:4px}' +
-      '#icuRoot.icu-v2 .icu-v2-tab{flex:1 1 0;min-width:0;min-height:44px;display:flex;align-items:center;justify-content:center;white-space:nowrap;border:none;background:none;color:var(--muted);border-radius:9px;font:700 12px var(--font);padding:9px 2px;cursor:pointer}' +
+      '#icuRoot.icu-v2 .icu-v2-tabs{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:4px}' +
+      '#icuRoot.icu-v2 .icu-v2-tabs::-webkit-scrollbar{display:none}' +
+      '#icuRoot.icu-v2 .icu-v2-tab{flex:0 0 auto;min-height:40px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border:none;background:none;color:var(--muted);border-radius:9px;font:700 12.5px var(--font);padding:8px 14px;cursor:pointer}' +
       '#icuRoot.icu-v2 .icu-v2-tab.on{background:var(--primary);color:#fff;box-shadow:0 1px 3px rgba(15,118,110,.35)}' +
       // patient banner (acuity-coloured, white text)
       '#icuRoot.icu-v2 .icu-v2-banner{flex:0 0 auto;color:#fff;padding:calc(10px + env(safe-area-inset-top)) 14px 12px;background:var(--primary)}' +
@@ -4804,7 +4805,7 @@
     // shows the origin the request targeted, and the reason gives the HTTP status / error — so one
     // screenshot pinpoints the failing layer instead of a generic "check your connection". Only shows
     // on failure; trim the bracket once push is confirmed working end-to-end on device.
-    var VER = "g419";
+    var VER = "g420";
     var base = window.SMD_API_BASE || "(relative)";
     function fail(reason) { note("error", "Push failed — teammates not alerted. [" + VER + " · " + base + " · " + reason + "]"); }
     try {
@@ -4994,6 +4995,9 @@
       rootEl.innerHTML = renderV2Banner() + renderV2Presence() + grpOfflineBar() + renderV2TopTabs() + renderBody() + watchFab + fab;
     }
     if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
+    // Keep the active workspace tab centred in the horizontally-scrollable tab strip so it's never
+    // hidden off-screen (the strip now scrolls instead of cramming all tabs into one fixed row).
+    try { var _tabs = rootEl.querySelector(".icu-v2-tabs"), _onTab = _tabs && _tabs.querySelector(".icu-v2-tab.on"); if (_tabs && _onTab) _tabs.scrollLeft = Math.max(0, _onTab.offsetLeft - (_tabs.clientWidth - _onTab.offsetWidth) / 2); } catch (e) {}
   }
 
   /* ---------------------------------------------------- manual entry forms */
