@@ -32,7 +32,8 @@
   }
 
   var CRED_KEY = "smd_ghis_autofetch_cred";     // secure-store key for { u, p }
-  var COOLDOWN_MS = 60 * 1000;                    // don't refetch the same patient more than once/min on rapid resumes
+  var COOLDOWN_MS = 6 * 60 * 60 * 1000;           // background auto-sync: at most once per 6h per patient
+  var OPEN_COOLDOWN_MS = 5 * 60 * 1000;           // opening the ICU dashboard freshens on demand, but not more than once/5min
   var _last = {};                                 // pid -> last fetch ts (in-memory)
   var _busy = false;
 
@@ -78,7 +79,8 @@
     opts = opts || {};
     pid = pid || curWardPid();
     if (!pid || _busy) return Promise.resolve(false);
-    if (!opts.force && _last[pid] && (Date.now() - _last[pid]) < COOLDOWN_MS) return Promise.resolve(false);
+    var _cd = opts.force ? 0 : (opts.cooldown != null ? opts.cooldown : COOLDOWN_MS);
+    if (_last[pid] && (Date.now() - _last[pid]) < _cd) return Promise.resolve(false);
     if (!(window.GHIS && GHIS.loadIntoICU)) return Promise.resolve(false);
     _busy = true;
     return ensureConnected().then(function (okConn) {
@@ -92,11 +94,32 @@
     }).catch(function () { _busy = false; return false; });
   }
 
-  // ── auto trigger: on launch + every foreground resume, refresh the enabled patient ─
+  // ── auto trigger: keep the enabled patient's labs fresh, but SPARINGLY. Background refreshes
+  // (launch + foreground resume) are throttled to once per 6h (COOLDOWN_MS); opening the ICU
+  // dashboard freshens on demand (once per 5min). No per-resume spamming of GHIS.
   function tick() {
     if (!on()) return;
     var pid = curWardPid();
-    if (pid && isEnabled(pid)) refreshNow(pid, {});
+    if (pid && isEnabled(pid)) refreshNow(pid, {});   // 6h cooldown
+  }
+  // Fired when the ICU dashboard opens (e.g. tapping the Home ICU tile) — a natural moment for fresh labs.
+  function onDashboardOpen() {
+    if (!on()) return;
+    var pid = curWardPid();
+    if (pid && isEnabled(pid)) refreshNow(pid, { cooldown: OPEN_COOLDOWN_MS });
+  }
+  // Wrap ICU.open ONCE so opening the dashboard triggers onDashboardOpen (idempotent; polled since
+  // icu.js may define window.ICU just after us). Mirrors home.js's SB.open wrap.
+  function wrapIcuOpen() {
+    try {
+      if (window.ICU && typeof ICU.open === "function" && !ICU.open._afWrapped) {
+        var orig = ICU.open;
+        ICU.open = function () { var r = orig.apply(this, arguments); try { onDashboardOpen(); } catch (e) {} return r; };
+        ICU.open._afWrapped = true;
+        return true;
+      }
+    } catch (e) {}
+    return false;
   }
   function wireResume() {
     if (!window.SMD_IS_NATIVE) return;   // native-only: never attach resume/tick listeners on web
@@ -107,7 +130,9 @@
       }
     } catch (e) {}
     try { document.addEventListener("visibilitychange", function () { if (!document.hidden) tick(); }); } catch (e) {}
-    // initial pass shortly after load (once ICU state + GHIS have settled)
+    // Hook ICU dashboard opens (retry until icu.js has defined window.ICU).
+    if (!wrapIcuOpen()) { var _n = 0, _iv = setInterval(function () { if (wrapIcuOpen() || ++_n > 40) clearInterval(_iv); }, 300); }
+    // initial background pass shortly after load (6h-throttled, so usually a no-op)
     setTimeout(tick, 2500);
   }
 
