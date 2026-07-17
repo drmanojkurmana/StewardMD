@@ -18,14 +18,16 @@
   var isNative = !!(C && typeof C.isNativePlatform === "function" && C.isNativePlatform());
 
   // Back/Close controls across every overlay/menu. Pattern-based (the app uses dozens of
-  // per-screen classes: abg-back, dx-close, mcp-back, ghis-back, sp-close, sb-x, hqp-close …)
-  // rather than an ever-growing explicit list. Candidates are further filtered to interactive
-  // elements so a decorative "*-background" div is never mistaken for a button.
+  // per-screen classes: abg-back, dx-close, mcp-back, ghis-back, sp-close, sb-x, hqp-close,
+  // icu-v2-back/-sback …) rather than an ever-growing explicit list. aria-labels are matched by
+  // PREFIX (^=) so descriptive labels — "Back to unit board", "Close ICU — back to home" — still
+  // count (exact match missed them, so swipe-back silently no-op'd on those screens). Candidates
+  // are filtered to interactive elements so a decorative "*-background" div is never a button.
   var BACK_SEL = [
     '[data-act="close"]', '[data-act="back"]', '[data-dismiss]',
-    '[aria-label="Back"]', '[aria-label="Close"]', '[aria-label="back"]', '[aria-label="close"]',
+    '[aria-label^="Back"]', '[aria-label^="Close"]', '[aria-label^="back"]', '[aria-label^="close"]',
     '.step-nav-back', '.sb-x',
-    '[class*="-back"]', '[class*="-close"]', '[class*="-cancel"]', '[class*="-dismiss"]'
+    '[class*="-back"]', '[class*="-sback"]', '[class*="-close"]', '[class*="-cancel"]', '[class*="-dismiss"]'
   ].join(',');
   function interactive(el) {
     if (el.matches && el.matches('button,a,[role="button"],[data-act],[onclick]')) return true;
