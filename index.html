@@ -128,7 +128,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
     if(loading)return;loading=true;
     (function seq(i){
       if(i>=FILES.length){
-        if(ready()){loaded=true;try{window.SMD_bootFirebase&&window.SMD_bootFirebase();}catch(e){}}
+        if(ready()){loaded=true;try{window.SMD_bootFirebase&&window.SMD_bootFirebase();}catch(e){}try{var _fp=(window.Capacitor&&Capacitor.getPlatform&&Capacitor.getPlatform())||"web";if(window.firebase&&firebase.firestore)firebase.firestore().settings({experimentalForceLongPolling:_fp==="android",merge:true});}catch(e){}}
         else{loading=false;} // let a later call retry instead of reporting a false success
         var f;while(f=cbs.shift()){try{f();}catch(e){}}
         return;
