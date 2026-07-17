@@ -89,8 +89,11 @@
       ".smdt-b.pri{background:#0d9488;color:#fff}.smdt-b.gho{background:transparent;color:#64748b;padding:9px 10px}",
       ".smdt-b:focus-visible{outline:2px solid #0d9488;outline-offset:2px}",
       // one-time contextual tip (lighter, bottom, auto-dismiss)
-      ".smdt-tip{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));z-index:100060;width:min(380px,calc(100vw - 24px));background:#0f172a;color:#f8fafc;border-radius:14px;box-shadow:0 12px 34px rgba(0,0,0,.4);padding:12px 14px;font-family:var(--sans,system-ui,sans-serif);display:flex;align-items:flex-start;gap:10px;opacity:0;transition:opacity .2s,transform .2s}",
-      ".smdt-tip.on{opacity:1}",
+      // pointer-events:none while hidden (opacity 0) — a dismissed tip lingers in the DOM at
+      // position:fixed z-index:100060 over the bottom nav/sheet; without this it silently ate
+      // taps on whatever sat beneath it (e.g. the Drugs sheet's "Drug Database" row).
+      ".smdt-tip{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));z-index:100060;width:min(380px,calc(100vw - 24px));background:#0f172a;color:#f8fafc;border-radius:14px;box-shadow:0 12px 34px rgba(0,0,0,.4);padding:12px 14px;font-family:var(--sans,system-ui,sans-serif);display:flex;align-items:flex-start;gap:10px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}",
+      ".smdt-tip.on{opacity:1;pointer-events:auto}",
       ".smdt-tip .ti{font-size:16px;line-height:1.2}.smdt-tip .tt{font:800 11px/1 inherit;letter-spacing:.05em;text-transform:uppercase;color:#5eead4}.smdt-tip .tx{font:500 13px/1.45 inherit;margin-top:3px}",
       ".smdt-tip .tc{margin-left:auto;background:none;border:0;color:#94a3b8;font-size:17px;cursor:pointer;line-height:1;padding:0 2px}",
       // dark mode
