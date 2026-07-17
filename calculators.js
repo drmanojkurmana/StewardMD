@@ -768,29 +768,29 @@
     } },
 
   { id:"nihss", cat:"Neurology", icon:"🧠", title:"NIHSS (stroke severity)",
-    desc:"NIH Stroke Scale — enter each item's points.",
+    desc:"NIH Stroke Scale — select the finding for each item; the score is calculated for you.",
     inputs:[
-      { id:"loc", label:"1a LOC (0–3)", type:"number", min:"0" },
-      { id:"locq", label:"1b LOC questions (0–2)", type:"number", min:"0" },
-      { id:"locc", label:"1c LOC commands (0–2)", type:"number", min:"0" },
-      { id:"gaze", label:"2 Best gaze (0–2)", type:"number", min:"0" },
-      { id:"vis", label:"3 Visual fields (0–3)", type:"number", min:"0" },
-      { id:"face", label:"4 Facial palsy (0–3)", type:"number", min:"0" },
-      { id:"larm", label:"5a Left arm motor (0–4)", type:"number", min:"0" },
-      { id:"rarm", label:"5b Right arm motor (0–4)", type:"number", min:"0" },
-      { id:"lleg", label:"6a Left leg motor (0–4)", type:"number", min:"0" },
-      { id:"rleg", label:"6b Right leg motor (0–4)", type:"number", min:"0" },
-      { id:"ataxia", label:"7 Limb ataxia (0–2)", type:"number", min:"0" },
-      { id:"sens", label:"8 Sensory (0–2)", type:"number", min:"0" },
-      { id:"lang", label:"9 Language/aphasia (0–3)", type:"number", min:"0" },
-      { id:"dys", label:"10 Dysarthria (0–2)", type:"number", min:"0" },
-      { id:"ext", label:"11 Extinction/neglect (0–2)", type:"number", min:"0" }
+      { id:"loc", label:"1a Level of consciousness", type:"select", opts:[{v:"0",t:"Alert, keenly responsive"},{v:"1",t:"Drowsy — arousable by minor stimulation"},{v:"2",t:"Obtunded — needs repeated/painful stimulation"},{v:"3",t:"Unresponsive, or reflex responses only"}] },
+      { id:"locq", label:"1b LOC questions (month, age)", type:"select", opts:[{v:"0",t:"Both answered correctly"},{v:"1",t:"One answered correctly (or intubated/dysarthric)"},{v:"2",t:"Neither correct (or aphasic/stuporous)"}] },
+      { id:"locc", label:"1c LOC commands (open eyes, grip)", type:"select", opts:[{v:"0",t:"Performs both tasks correctly"},{v:"1",t:"Performs one task"},{v:"2",t:"Performs neither"}] },
+      { id:"gaze", label:"2 Best gaze (horizontal)", type:"select", opts:[{v:"0",t:"Normal"},{v:"1",t:"Partial gaze palsy (overcome by oculocephalic)"},{v:"2",t:"Forced deviation / total gaze paresis"}] },
+      { id:"vis", label:"3 Visual fields", type:"select", opts:[{v:"0",t:"No visual loss"},{v:"1",t:"Partial hemianopia"},{v:"2",t:"Complete hemianopia"},{v:"3",t:"Bilateral hemianopia / cortical blindness"}] },
+      { id:"face", label:"4 Facial palsy", type:"select", opts:[{v:"0",t:"Normal, symmetrical"},{v:"1",t:"Minor (flattened nasolabial fold)"},{v:"2",t:"Partial (lower face)"},{v:"3",t:"Complete (upper + lower face, one or both sides)"}] },
+      { id:"larm", label:"5a Left arm motor drift", type:"select", opts:[{v:"0",t:"No drift (holds 10 s)"},{v:"1",t:"Drift, does not hit bed"},{v:"2",t:"Some effort against gravity, falls to bed"},{v:"3",t:"No effort against gravity, limb falls"},{v:"4",t:"No movement"},{v:"0",t:"Amputation / joint fusion (not scored)"}] },
+      { id:"rarm", label:"5b Right arm motor drift", type:"select", opts:[{v:"0",t:"No drift (holds 10 s)"},{v:"1",t:"Drift, does not hit bed"},{v:"2",t:"Some effort against gravity, falls to bed"},{v:"3",t:"No effort against gravity, limb falls"},{v:"4",t:"No movement"},{v:"0",t:"Amputation / joint fusion (not scored)"}] },
+      { id:"lleg", label:"6a Left leg motor drift", type:"select", opts:[{v:"0",t:"No drift (holds 5 s)"},{v:"1",t:"Drift, hits bed before 5 s"},{v:"2",t:"Some effort against gravity"},{v:"3",t:"No effort against gravity, falls immediately"},{v:"4",t:"No movement"},{v:"0",t:"Amputation / joint fusion (not scored)"}] },
+      { id:"rleg", label:"6b Right leg motor drift", type:"select", opts:[{v:"0",t:"No drift (holds 5 s)"},{v:"1",t:"Drift, hits bed before 5 s"},{v:"2",t:"Some effort against gravity"},{v:"3",t:"No effort against gravity, falls immediately"},{v:"4",t:"No movement"},{v:"0",t:"Amputation / joint fusion (not scored)"}] },
+      { id:"ataxia", label:"7 Limb ataxia", type:"select", opts:[{v:"0",t:"Absent"},{v:"1",t:"Present in one limb"},{v:"2",t:"Present in two limbs"},{v:"0",t:"Amputation / fusion / cannot test (not scored)"}] },
+      { id:"sens", label:"8 Sensory", type:"select", opts:[{v:"0",t:"Normal, no sensory loss"},{v:"1",t:"Mild–moderate loss (pinprick less sharp)"},{v:"2",t:"Severe–total loss (unaware of touch)"}] },
+      { id:"lang", label:"9 Best language / aphasia", type:"select", opts:[{v:"0",t:"No aphasia, normal"},{v:"1",t:"Mild–moderate aphasia"},{v:"2",t:"Severe aphasia"},{v:"3",t:"Mute / global aphasia / coma"}] },
+      { id:"dys", label:"10 Dysarthria", type:"select", opts:[{v:"0",t:"Normal"},{v:"1",t:"Mild–moderate (slurs some words)"},{v:"2",t:"Severe (unintelligible) or mute/anarthric"},{v:"0",t:"Intubated / cannot test (not scored)"}] },
+      { id:"ext", label:"11 Extinction / inattention (neglect)", type:"select", opts:[{v:"0",t:"No abnormality"},{v:"1",t:"Inattention to one modality"},{v:"2",t:"Profound hemi-inattention to >1 modality"}] }
     ],
     compute:function(v){
       var keys=["loc","locq","locc","gaze","vis","face","larm","rarm","lleg","rleg","ataxia","sens","lang","dys","ext"];
-      var s=0; for(var i=0;i<keys.length;i++){ var x=v[keys[i]]; if(ok(x)) s+=x; }
+      var s=0; for(var i=0;i<keys.length;i++){ s += Number(v[keys[i]])||0; }
       var sev=s===0?"no stroke symptoms":s<=4?"minor":s<=15?"moderate":s<=20?"moderate–severe":"severe";
-      return { v:s, u:"/42", i:"<b>"+sev+"</b> stroke. Higher scores predict larger infarcts and worse outcome; informs thrombolysis/thrombectomy decisions." };
+      return { v:s, u:"/42", i:"<b>"+sev+"</b> stroke. Higher scores predict larger infarcts and worse outcome; informs thrombolysis/thrombectomy decisions. Ref: NIH Stroke Scale." };
     } },
 
   { id:"a2ds2", cat:"Neurology", icon:"🫁", title:"A2DS2 (stroke-associated pneumonia)",
@@ -1194,22 +1194,20 @@
     desc:"Severity of alcohol withdrawal; guides symptom-triggered benzodiazepines.",
     kw:["alcohol","withdrawal","ciwa","detox","dts"],
     inputs:[
-      { id:"nau", label:"Nausea / vomiting (0–7)", type:"number" },
-      { id:"tre", label:"Tremor (0–7)", type:"number" },
-      { id:"swe", label:"Paroxysmal sweats (0–7)", type:"number" },
-      { id:"anx", label:"Anxiety (0–7)", type:"number" },
-      { id:"agi", label:"Agitation (0–7)", type:"number" },
-      { id:"tac", label:"Tactile disturbances (0–7)", type:"number" },
-      { id:"aud", label:"Auditory disturbances (0–7)", type:"number" },
-      { id:"vis", label:"Visual disturbances (0–7)", type:"number" },
-      { id:"hea", label:"Headache / fullness (0–7)", type:"number" },
-      { id:"ori", label:"Orientation / clouding (0–4)", type:"number" }
+      { id:"nau", label:"Nausea / vomiting", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild nausea, no vomiting"},{v:"4",t:"Intermittent nausea with dry heaves"},{v:"7",t:"Constant nausea, frequent dry heaves & vomiting"}] },
+      { id:"tre", label:"Tremor (arms extended)", type:"select", opts:[{v:"0",t:"No tremor"},{v:"1",t:"Not visible, felt fingertip to fingertip"},{v:"4",t:"Moderate, with arms extended"},{v:"7",t:"Severe, even with arms not extended"}] },
+      { id:"swe", label:"Paroxysmal sweats", type:"select", opts:[{v:"0",t:"No sweat visible"},{v:"1",t:"Barely perceptible, palms moist"},{v:"4",t:"Beads of sweat obvious on forehead"},{v:"7",t:"Drenching sweats"}] },
+      { id:"anx", label:"Anxiety", type:"select", opts:[{v:"0",t:"None, at ease"},{v:"1",t:"Mildly anxious"},{v:"4",t:"Moderately anxious or guarded"},{v:"7",t:"Acute panic state"}] },
+      { id:"agi", label:"Agitation", type:"select", opts:[{v:"0",t:"Normal activity"},{v:"1",t:"Somewhat more than normal"},{v:"4",t:"Moderately fidgety and restless"},{v:"7",t:"Paces or constantly thrashes about"}] },
+      { id:"tac", label:"Tactile disturbances", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Very mild itch / pins & needles / numbness"},{v:"2",t:"Mild"},{v:"3",t:"Moderate"},{v:"4",t:"Moderately severe hallucinations"},{v:"5",t:"Severe hallucinations"},{v:"6",t:"Extremely severe hallucinations"},{v:"7",t:"Continuous hallucinations"}] },
+      { id:"aud", label:"Auditory disturbances", type:"select", opts:[{v:"0",t:"Not present"},{v:"1",t:"Very mild harshness / ability to frighten"},{v:"2",t:"Mild"},{v:"3",t:"Moderate"},{v:"4",t:"Moderately severe hallucinations"},{v:"5",t:"Severe hallucinations"},{v:"6",t:"Extremely severe hallucinations"},{v:"7",t:"Continuous hallucinations"}] },
+      { id:"vis", label:"Visual disturbances", type:"select", opts:[{v:"0",t:"Not present"},{v:"1",t:"Very mild sensitivity"},{v:"2",t:"Mild"},{v:"3",t:"Moderate"},{v:"4",t:"Moderately severe hallucinations"},{v:"5",t:"Severe hallucinations"},{v:"6",t:"Extremely severe hallucinations"},{v:"7",t:"Continuous hallucinations"}] },
+      { id:"hea", label:"Headache / fullness in head", type:"select", opts:[{v:"0",t:"Not present"},{v:"1",t:"Very mild"},{v:"2",t:"Mild"},{v:"3",t:"Moderate"},{v:"4",t:"Moderately severe"},{v:"5",t:"Severe"},{v:"6",t:"Very severe"},{v:"7",t:"Extremely severe"}] },
+      { id:"ori", label:"Orientation / clouding of sensorium", type:"select", opts:[{v:"0",t:"Oriented, can do serial additions"},{v:"1",t:"Cannot do serial additions / uncertain about date"},{v:"2",t:"Disoriented for date by ≤2 calendar days"},{v:"3",t:"Disoriented for date by >2 days"},{v:"4",t:"Disoriented for place and/or person"}] }
     ],
     compute:function(v){
       var ks=["nau","tre","swe","anx","agi","tac","aud","vis","hea","ori"];
-      for(var i=0;i<ks.length;i++){ if(!ok(v[ks[i]])) return ERR; }
-      function cl(x,mx){return Math.max(0,Math.min(mx,Math.round(x)));}
-      var s=0; for(var j=0;j<9;j++){ s+=cl(v[ks[j]],7); } s+=cl(v.ori,4);
+      var s=0; for(var i=0;i<ks.length;i++){ s += Number(v[ks[i]])||0; }
       var band=s<=8?"<b>Minimal / absent</b> (≤8) — usually no medication.":s<=15?"<b>Mild–moderate</b> (9–15).":s<=20?"<b>Moderate–severe</b> (16–20) — treat.":"<b>Severe</b> (&gt;20) — high risk of seizures / DTs; treat promptly.";
       return { v:s, u:"/67", i:band+" Use symptom-triggered benzodiazepine dosing per protocol; reassess hourly. Ref: Sullivan et al, Br J Addict 1989." };
     } },
@@ -1334,21 +1332,20 @@
     } },
 
   { id:"gad7", cat:"General", icon:"⚖️", title:"GAD-7 (anxiety)",
-    desc:"Generalised anxiety severity screen. Each item 0–3 over the last 2 weeks.",
+    desc:"Generalised anxiety severity. Over the last 2 weeks, how often bothered by each problem?",
     kw:["gad","anxiety","screen","mental health"],
     inputs:[
-      { id:"q1", label:"Feeling nervous / anxious / on edge (0–3)", type:"number" },
-      { id:"q2", label:"Not able to stop / control worrying (0–3)", type:"number" },
-      { id:"q3", label:"Worrying too much about things (0–3)", type:"number" },
-      { id:"q4", label:"Trouble relaxing (0–3)", type:"number" },
-      { id:"q5", label:"Restless, hard to sit still (0–3)", type:"number" },
-      { id:"q6", label:"Easily annoyed / irritable (0–3)", type:"number" },
-      { id:"q7", label:"Feeling afraid something awful might happen (0–3)", type:"number" }
+      { id:"q1", label:"Feeling nervous, anxious or on edge", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q2", label:"Not being able to stop or control worrying", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q3", label:"Worrying too much about different things", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q4", label:"Trouble relaxing", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q5", label:"Being so restless it is hard to sit still", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q6", label:"Becoming easily annoyed or irritable", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
+      { id:"q7", label:"Feeling afraid as if something awful might happen", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] }
     ],
     compute:function(v){
       var ks=["q1","q2","q3","q4","q5","q6","q7"];
-      for(var i=0;i<ks.length;i++){ if(!ok(v[ks[i]])) return ERR; }
-      var s=0; for(var j=0;j<ks.length;j++){ s+=Math.max(0,Math.min(3,Math.round(v[ks[j]]))); }
+      var s=0; for(var j=0;j<ks.length;j++){ s += Number(v[ks[j]])||0; }
       var band=s<=4?"Minimal (0–4).":s<=9?"Mild (5–9).":s<=14?"Moderate (10–14).":"Severe (15–21).";
       return { v:s, u:"/21", i:"<b>"+band+"</b> ≥10 warrants further assessment / treatment. Ref: Spitzer, Arch Intern Med 2006." };
     } },
@@ -4926,15 +4923,15 @@
   { id:"scorad", cat:"Dermatology", icon:"🧴", title:"SCORAD (Atopic Dermatitis Severity)",
     desc:"SCORing Atopic Dermatitis index (extent + intensity + subjective symptoms).",
     inputs:[
-      { id:"extent", label:"Extent — % body surface affected (0–100)", type:"number", step:"1" },
-      { id:"erythema", label:"Erythema (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
-      { id:"oedema", label:"Oedema/papulation (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
-      { id:"oozing", label:"Oozing/crusting (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
-      { id:"excoriation", label:"Excoriation (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
-      { id:"lichen", label:"Lichenification (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
-      { id:"dryness", label:"Dryness of uninvolved skin (0–3)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"}] },
-      { id:"pruritus", label:"Pruritus — VAS (0–10)", type:"number", step:"1" },
-      { id:"sleep", label:"Sleeplessness — VAS (0–10)", type:"number", step:"1" }
+      { id:"extent", label:"Extent — % body surface affected (rule of nines)", type:"number", unit:"%", step:"1" },
+      { id:"erythema", label:"Erythema (redness)", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Moderate"},{v:"3",t:"Severe"}] },
+      { id:"oedema", label:"Oedema / papulation", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Moderate"},{v:"3",t:"Severe"}] },
+      { id:"oozing", label:"Oozing / crusting", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Moderate"},{v:"3",t:"Severe"}] },
+      { id:"excoriation", label:"Excoriation (scratch marks)", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Moderate"},{v:"3",t:"Severe"}] },
+      { id:"lichen", label:"Lichenification (skin thickening)", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Moderate"},{v:"3",t:"Severe"}] },
+      { id:"dryness", label:"Dryness of uninvolved skin", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"2",t:"Moderate"},{v:"3",t:"Severe"}] },
+      { id:"pruritus", label:"Pruritus — patient VAS last 3 days", type:"number", unit:"0–10", step:"1" },
+      { id:"sleep", label:"Sleeplessness — patient VAS last 3 days", type:"number", unit:"0–10", step:"1" }
     ],
     compute:function(v){
       if(!ok(v.extent)||v.extent<0||v.extent>100||!ok(v.pruritus)||v.pruritus<0||v.pruritus>10||!ok(v.sleep)||v.sleep<0||v.sleep>10) return ERR;
