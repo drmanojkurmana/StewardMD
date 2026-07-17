@@ -2,7 +2,7 @@
  * Kept dependency-free so the crawl/dedup logic is unit-testable in plain Node.
  */
 
-export const APPROVAL_RE = /\b(approv|clearance|cleared|clears|authoriz|granted|green[-\s]?light|new indication|expanded indication)/i;
+export const APPROVAL_RE = /\b(approv|clearance|cleared|clears|authoriz|granted|green[-\s]?light|new indication|expanded indication|launch|now available|market(ing)? (authoris|authoriz)|introduc|roll(ing)?[-\s]?out|rolled out|debut|unveil|first[-\s]?in[-\s]?class|receives? marketing)/i;
 export const NON_MEDICAL_RE = /\b(pet food|dog food|cat food|pet treats?|dogs?|cats?|puppy|kitten|veterinary|animal (health|feed)|shampoo|conditioner|lotion|cosmetic|makeup|mascara|eyeliner|fragrance|perfume|undeclared|allergy alert|ice cream|cheese|yogurt|frozen (food|meal)|snack|beverage|seafood|salad|sausage|poultry)\b/i;
 
 export function decodeEntities(s) {
