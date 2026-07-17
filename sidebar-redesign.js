@@ -57,7 +57,8 @@
       var b = document.querySelector('[data-act="feedback"],#v3FeedbackBtn'); if (b && b !== this) return b.click();
       try { location.href = "mailto:Support@StewardMD.in?subject=StewardMD%20feedback"; } catch (e) {}
     },
-    ack: function () { if (window.openAck) openAck(); else toast("Acknowledgements loading…"); },
+    ack: function () { if (window.openAbout) openAbout("ack"); else if (window.SB && SB.modal) SB.modal("aboutModal"); else if (window.openAck) openAck(); else toast("Acknowledgements loading…"); },
+    offlinedb: function () { if (window.SMD_OFFLINEDB && SMD_OFFLINEDB.open) SMD_OFFLINEDB.open(); else toast("Offline drug database — available in the app"); },
     notifications: function () {
       var b = document.getElementById("v3BellBtn"); if (b) return b.click();
       if (window.SMD_openNotifications) return SMD_openNotifications();
@@ -145,6 +146,14 @@
         html += '<div class="smd-nav-row" style="display:block"><div class="sbr-tg-t" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + "</div>";
       }
     } catch (e) {}
+    // Offline drug database (NATIVE + PRO only) — restored under Advanced. Hidden on web where the
+    // plugin is a no-op stub (SMD_OFFLINEDB.open absent).
+    try {
+      if (window.SMD_OFFLINEDB && SMD_OFFLINEDB.open) {
+        html += '<button data-sbr-act="offlinedb" style="display:flex;align-items:center;gap:10px;width:100%;padding:9px 0;border:none;background:none;cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 13px/1.3 var(--sans,system-ui)">' + svg("pills") +
+          '<span style="flex:1">Offline Drug Database</span><span class="sbr-badge">PRO</span></button>';
+      }
+    } catch (e) {}
     html += '<div class="sbr-note">⚗️ Experimental — clinician review required.</div>';
     return html;
   }
@@ -160,7 +169,7 @@
       row("guidelines", "book", "Guidelines &amp; Protocols") +
       row("tour", "info", "How it works · App tour") +
       row("feedback", "edit", "Send Feedback") +
-      row("ack", "award", "Acknowledgements") +
+      row("ack", "award", "About &amp; Acknowledgements") +
       '<div class="sbr-sec">Settings</div>' +
       // Carries verify.js's own [data-smd-verify] marker so its legacy base-styled injector
       // bails (its guard checks for that marker) — we render this row consistently instead.
