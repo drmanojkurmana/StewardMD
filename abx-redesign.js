@@ -143,12 +143,11 @@
   // ---- remove the creator credit from the Acknowledgements footer -----------
   // app.js renders the "Concept, content & development — Dr. …" credit; it's frozen,
   // so drop that whole ack-group (role + name + hover card) at runtime. Idempotent.
-  function removeCreatorCredit() {
-    var n = document.querySelector("#ackCard .creator-name");
-    if (!n) return;
-    var grp = n.closest(".ack-group");
-    if (grp) grp.remove(); else n.remove();
-  }
+  // KEEP the creator credit: #ackCard is a hidden template consumed only by the About-box
+  // Acknowledgements tab / sidebar sheet, so stripping the creator group here just hid
+  // Dr. Manoj Kumar Kurmana from the acknowledgements (app.js's own credit screen is separate).
+  // The creator belongs at the TOP of the acknowledgements, so leave #ackCard intact. No-op.
+  function removeCreatorCredit() { /* intentionally does nothing — see note above */ }
 
   var raf = 0;
   function runAll() {
