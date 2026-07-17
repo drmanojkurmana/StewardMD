@@ -109,9 +109,19 @@ export async function escalateOverdueTask(env, gid, pid, taskId, now) {
   const uids = [...new Set((members || []).map((m) => m.uid).filter(Boolean))];
   let sent = 0;
   for (const uid of uids) { try { const r = await sendNativeToAll(env, msg, { uid }); sent += (r && r.sent) || 0; } catch (e) { /* skip */ } }
-  // Stamp escalatedAt (ms) so this task is never re-pushed.
-  await fsPatchField(env, tok, taskPath, "escalatedAt", { integerValue: String(now) });
-  return { escalated: true, unit: unitName, members: uids.length, sent };
+  // Only stamp escalatedAt (which permanently blocks any future retry, here and in the client's
+  // matching `if (t.escalatedAt) return` guard) once the push actually reached a device, OR once
+  // it's old enough that further retries aren't worth it. BUG FIXED: this used to stamp
+  // unconditionally regardless of `sent` — so a task's very FIRST escalation attempt was its only
+  // chance, and the common case (a teammate who hasn't registered a device for push yet) silenced
+  // it forever, even after that teammate registered five minutes later. Now a 0-recipient attempt
+  // within RETRY_CAP_MS is left unstamped, so the next 15-min cron sweep (or the next member's
+  // heartbeat) retries automatically the moment someone registers — while a task that's been
+  // retried for a full day with zero reach finally gets marked done so it doesn't loop forever.
+  const RETRY_CAP_MS = 24 * 3600 * 1000;
+  const finalize = sent > 0 || (now - dueAt) >= RETRY_CAP_MS;
+  if (finalize) await fsPatchField(env, tok, taskPath, "escalatedAt", { integerValue: String(now) });
+  return { escalated: sent > 0, finalized: finalize, unit: unitName, members: uids.length, sent };
 }
 
 // Immediate notification when an instruction is ISSUED (not only when overdue). Pushes the unit so
