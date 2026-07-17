@@ -1109,7 +1109,7 @@
       '#icuRoot.icu-v2 .icu-v2-sback{flex:0 0 auto;width:44px;height:44px;border-radius:11px;border:none;background:rgba(255,255,255,.16);color:#fff;font-size:18px;cursor:pointer}' +
       '#icuRoot.icu-v2 .icu-v2-shead-h{font:700 16px var(--font)}#icuRoot.icu-v2 .icu-v2-shead-s{font:500 12px var(--font);color:rgba(255,255,255,.82)}' +
       '#icuRoot.icu-v2 .icu-v2-slist,#icuRoot.icu-v2 .icu-v2-tlist{padding:14px 16px;display:flex;flex-direction:column;gap:9px}' +
-      '#icuRoot.icu-v2 .icu-v2-note{font:600 12px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:10px 12px;line-height:1.5}#icuRoot.icu-v2 .icu-v2-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}' +
+      '#icuRoot.icu-v2 .icu-v2-note{font:600 12.5px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;line-height:1.55;margin:8px 0}#icuRoot.icu-v2 .icu-v2-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}' +
       '#icuRoot.icu-v2 .icu-v2-note-x{flex:0 0 auto;background:none;border:none;color:inherit;font:700 13px var(--font);cursor:pointer;padding:0 2px;line-height:1;opacity:.7}#icuRoot.icu-v2 .icu-v2-note-x:hover{opacity:1}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel);border:1px solid var(--border);border-left-width:4px;border-radius:14px;padding:13px 14px;cursor:pointer}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-alert-row.review{border-left-color:var(--warn)}' +
@@ -1196,10 +1196,18 @@
       '#icuRoot.icu-v2 .icu-v2-tlfull{max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
       '#icuRoot.icu-v2 .icu-v2-obchip.on .icu-v2-obrole{color:var(--primary);opacity:.8}' +
       /* task priority badge + overdue chip in the Instructions panel */
-      '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:800 10px var(--font);color:#fff;border-radius:6px;padding:2px 6px;letter-spacing:.02em;vertical-align:middle}' +
-      '#icuRoot.icu-v2 .icu-v2-due{font:700 11px var(--font);color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:700 10px var(--font);color:#fff;border-radius:999px;padding:3px 9px;letter-spacing:.03em;vertical-align:middle}' +
+      '#icuRoot.icu-v2 .icu-v2-due{font:600 11.5px/1.5 var(--font);color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-due.over{color:var(--danger)}' +
-      '#icuRoot.icu-v2 .icu-v2-taskexpl{font:600 11.5px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:6px 8px;margin-top:4px}' +
+      '#icuRoot.icu-v2 .icu-v2-taskexpl{font:600 11.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin-top:6px}' +
+      // Rounds/notifications breathing room (2026-07): a calm eyebrow -> title -> list rhythm. Scoped
+      // to .icu-v2-collab so the app-wide .icu-sec-lbl/.icu-card/.icu-row base rules are untouched.
+      '#icuRoot.icu-v2 .icu-v2-collab .icu-sec-lbl{margin:16px 2px 10px}' +
+      '#icuRoot.icu-v2 .icu-v2-collab .icu-card{padding:16px 16px 4px}' +
+      '#icuRoot.icu-v2 .icu-v2-collab .icu-card h3{font-size:15px;margin:0 0 12px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px}' +
+      '#icuRoot.icu-v2 .icu-v2-collab .icu-card h3 .icu-phase{margin-left:0}' +
+      '#icuRoot.icu-v2 .icu-v2-collab .icu-row{padding:13px 0;gap:12px;align-items:flex-start;font-size:14px;line-height:1.45}' +
+      '#icuRoot.icu-v2 .icu-v2-addround{margin:2px 0 16px;padding:13px}' +
       '#icuRoot.icu-v2 .icu-v2-rcustom{display:flex;gap:8px;align-items:center}' +
       '#icuRoot.icu-v2 .icu-v2-rcustom input{flex:1;min-width:0;border:1px solid var(--border);border-radius:10px;padding:11px 12px;font:600 14px var(--font);color:var(--ink);background:var(--panel2)}' +
       '#icuRoot.icu-v2 .icu-v2-rcustom .icu-btn{width:auto;flex:0 0 auto;margin-top:0;padding:0 16px;min-height:44px}' +
@@ -4780,7 +4788,7 @@
     // shows the origin the request targeted, and the reason gives the HTTP status / error — so one
     // screenshot pinpoints the failing layer instead of a generic "check your connection". Only shows
     // on failure; trim the bracket once push is confirmed working end-to-end on device.
-    var VER = "g416";
+    var VER = "g417";
     var base = window.SMD_API_BASE || "(relative)";
     function fail(reason) { note("error", "Push failed — teammates not alerted. [" + VER + " · " + base + " · " + reason + "]"); }
     try {
