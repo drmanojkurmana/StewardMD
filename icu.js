@@ -32,7 +32,7 @@
 
   /* -------------------------------------------------- the data model shape */
   var DEFAULT_STATE = {
-    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "" },
+    patient: { name: "", age: null, sex: "", weightKg: null, heightCm: null, complaints: "", diagnosis: "", hospital: "", bed: "", icuDay: null, status: "", mrn: "", doctor: "", dept: "" },
     vitals: [],                 // [{ ts, hr, sbp, dbp, map, rr, spo2, temp, uop, lactate, cvp, etco2, gcs }]
     labs: { recent: {}, trends: [] },  // recent: { na,k,cl,hco3,ca,mg,po4,glu,creat,alb,wbc,hb,plt,inr,ferritin,trig,fibrinogen,... }
     abg: {},                    // { ts, ph, paco2, pao2, hco3, fio2, lactate, be }
@@ -570,6 +570,33 @@
     try { ctxLoadBuffer(); } catch (e) {}
     _screen = "board"; _active = "overview"; _ws = "overview"; _wsLast = {};
   }
+  // Flat list of switchable units for the "Adding to" bar in Ward Sync (and any quick switcher).
+  // Group mode → the user's shared units per category; solo → the fixed types per category.
+  function unitList() {
+    var out = [];
+    UNIT_CATS.forEach(function (c) {
+      if (groupMode()) {
+        (_grpList || []).filter(function (g) { return (g.kind || "icu") === c.cat; }).forEach(function (g) {
+          out.push({ key: "g:" + g.id, cat: c.cat, label: (g.name || c.label) + (g.hospital ? " · " + g.hospital : ""), active: grpActive() && _grp && _grp.id === g.id });
+        });
+      } else {
+        c.types.forEach(function (tp) { out.push({ key: "s:" + c.cat + ":" + tp, cat: c.cat, label: tp, active: _unit.cat === c.cat && _unit.type === tp }); });
+      }
+    });
+    return out;
+  }
+  // Switch the active unit by an opaque key from unitList() WITHOUT opening/navigating the dashboard
+  // (used by Ward Sync's "Adding to" bar so a tick files the patient into the chosen unit).
+  function selectUnitByKey(key) {
+    if (!key) return;
+    if (key.indexOf("g:") === 0) { var id = key.slice(2); var g = (_grpList || []).filter(function (x) { return x.id === id; })[0]; if (g) grpSelect(g, true); }
+    else if (key.indexOf("s:") === 0) { var p = key.slice(2).split(":"); selectUnit({ cat: p[0], type: decodeURIComponent(p[1] || "") }); }
+    try { if (ICU.isOpen()) paint(); } catch (e) {}
+  }
+  function currentUnitLabel() {
+    if (grpActive() && _grp) return (_grp.name || ctxLabel()) + (_grp.hospital ? " · " + _grp.hospital : "");
+    return (_unit.type || ctxLabel()) + (_unit.hospital ? " · " + _unit.hospital : "");
+  }
   // BUG C1 (cross-patient contamination): ingestFromWard/ingestWardHistory MERGE into live STATE
   // (their contract is "callers reset/select the patient before syncing"). Loading a DIFFERENT
   // ward patient must therefore start clean, or the previous patient's weight/infusions/vitals/
@@ -688,6 +715,55 @@
     // STATE mutations above go through the reactive proxy, which coalesces a recompute()+render.
     lwScan();   // Lab Watch: detect new results this sync brought in (no-op unless a watch is active)
     return { reports: tsList.length, points: pts, keys: Object.keys(keysSeen), conflicts: conflicts.length };
+  }
+
+  // Build a COMPLETE patient state snapshot from a Ward-Sync bundle as a PURE object — never touches
+  // the live STATE (so multi-add via the Ward Sync tick-boxes can't clobber the open patient). Uses
+  // the same pure mappers as ingestWardHistory (mapWardLab + wardToSI + parseWardDate).
+  function buildWardState(bundle) {
+    bundle = bundle || {};
+    var st = clone(DEFAULT_STATE), src = bundle.source || "Ward Sync";
+    var p = bundle.patient || {};
+    Object.keys(p).forEach(function (k) { if (k in st.patient) st.patient[k] = p[k]; });
+    var byTs = {}, tsList = [];
+    (bundle.labs || []).forEach(function (t) {
+      var key = mapWardLab(t.test); if (!key) return;
+      var v = parseFloat(t.result); if (isNaN(v)) return;
+      v = wardToSI(key, v, t.units);
+      var ts = parseWardDate(t.date) || bundle.ts || nowTs();
+      if (!byTs[ts]) { byTs[ts] = {}; tsList.push(ts); }
+      byTs[ts][key] = v;   // last row wins within one report timestamp
+    });
+    tsList.sort(function (a, b) { return a - b; });   // oldest → newest so recent = the last write
+    tsList.forEach(function (ts) {
+      var rec = byTs[ts]; st.labs.trends.push(Object.assign({ ts: ts }, rec));
+      Object.keys(rec).forEach(function (k) { st.labs.recent[k] = rec[k]; st.src[k] = { source: src, ts: ts }; });
+    });
+    st.wardSync = { connected: true, lastTs: nowTs(), newUpdate: false, patientId: bundle.patientId || null };
+    st.meta = { updated: nowTs() };
+    return st;
+  }
+  // Add a Ward-Sync patient to the CURRENTLY-SELECTED unit's board WITHOUT navigating away (supports
+  // ticking several in a row). Group unit → upsert into the shared Firestore unit; solo unit → the
+  // local unit-scoped roster. Deduped by the ward patientId so re-ticking updates, not duplicates.
+  // Returns a Promise. Never disturbs the currently-open live patient (buildWardState is pure).
+  function addWardPatientToRoster(bundle) {
+    var st = buildWardState(bundle), wardId = (st.wardSync && st.wardSync.patientId) || null;
+    if (grpActive() && _grp && _grp.id) {
+      var api = groupsApi(), pid = "w_" + (wardId || nowTs());
+      st.patient._id = pid;
+      if (api && api.upsertPatient) return api.upsertPatient(_grp.id, pid, st, "Added from Ward Sync");
+      return Promise.reject(new Error("group-api-unavailable"));
+    }
+    var id = "pw_" + (wardId || nowTs());
+    st.patient._id = id;
+    var entry = { id: id, name: st.patient.name || "Unnamed", dx: st.patient.diagnosis || "", bed: st.patient.bed || "", mrn: st.patient.mrn || "", savedAt: nowTs(), state: st };
+    var r = loadRoster(), found = false, i;
+    for (i = 0; i < r.length; i++) { if (r[i].id === id) { r[i] = entry; found = true; break; } }
+    if (!found) r.push(entry);
+    saveRoster(capTen(r));
+    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    return Promise.resolve(entry);
   }
 
   /* ---------------------------------------------------------------- styles */
@@ -3360,8 +3436,11 @@
     var p = _raw.patient || {}, sev = v2Severity(_raw), snap = v2Snapshot(_raw);
     var meta = [];
     if (p.bed) meta.push("Bed " + esc(p.bed));
+    if (p.mrn) meta.push("MR " + esc(p.mrn));
     if (p.age != null) meta.push(esc(p.age) + (p.sex ? "/" + esc(p.sex) : ""));
     if (p.icuDay != null) meta.push("ICU day " + esc(p.icuDay));
+    if (p.dept) meta.push(esc(p.dept));
+    if (p.doctor) meta.push("Dr " + esc(p.doctor));
     if (p.diagnosis) meta.push(esc(p.diagnosis));
     var mv = [
       { k: "MAP", val: snap.map != null ? snap.map : "—" },
@@ -3424,35 +3503,33 @@
     if (_pickStep === "hospital") {
       var hosps = ["GIMSR", "My Hospital"]; if (hosp && hosps.indexOf(hosp) < 0) hosps.unshift(hosp);
       var hrows = hosps.map(function (h) { return unitCardHTML("unithosp:" + encodeURIComponent(h), ico("hospital", "🏥"), h, "", h === hosp); }).join("");
-      return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("close", "Select hospital", "Choose your hospital") +
+      return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("unitback", "Select hospital", "Choose your hospital") +
         '<div style="padding:14px 16px">' + hrows + '</div></div>';
     }
-    if (_pickStep === "category") {
-      var crows = UNIT_CATS.map(function (c) {
-        return unitCardHTML("unitcat:" + c.cat, ico(c.svg, c.ic), c.label, esc(c.sub) + ' · ' + c.types.length + ' units', false);
-      }).join("");
-      var sub = "Select ICU or Ward" + (hosp ? ' · <button class="icu-tip" data-icu-act="unithospchg" style="color:var(--primary)">change hospital</button>' : "");
-      return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("close", esc(hosp || "Choose a unit"), sub) +
-        '<div style="padding:14px 16px">' + crows + '</div></div>';
-    }
-    // units step
-    var cat = _pickCat || "icu", meta = unitCatMeta(cat), body;
-    if (groupMode()) {
-      var mine = (_grpList || []).filter(function (g) { return (g.kind || "icu") === cat; });
-      body = mine.length ? mine.map(function (g) {
-        var active = grpActive() && _grp && _grp.id === g.id;
-        return unitCardHTML("grpsel:" + encodeURIComponent(g.id), ico(meta.svg, meta.ic), g.name || meta.label,
-          esc(g.unitType || g.unit || meta.label) + (g.hospital ? ' · ' + esc(g.hospital) : ""), active);
-      }).join("") : '<div class="icu-empty" style="margin:6px 0 12px">' + (_grpList === null ? "Connecting to your shared units…" : "No shared " + esc(meta.label) + " units yet.") + '</div>';
-      body += '<button class="icu-btn" data-icu-act="unitgrpnew:' + cat + '">' + ico("plus", "＋") + ' Create a ' + esc(meta.label) + ' unit</button>';
-    } else {
-      body = meta.types.map(function (tp) {
-        var active = _unit.cat === cat && _unit.type === tp;
-        return unitCardHTML("unitsel:" + cat + ":" + encodeURIComponent(tp), ico(meta.svg, meta.ic), tp, "", active);
-      }).join("");
-    }
-    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("unitback", esc(meta.label) + (hosp ? " · " + esc(hosp) : ""), "Choose a unit") +
-      '<div style="padding:14px 16px">' + body + '</div></div>';
+    // Single grouped sheet: EVERY unit, sectioned ICU / Ward — one tap switches. Solo mode lists the
+    // fixed types; group mode lists the user's shared units of that category + a "＋ Create" option.
+    var sections = UNIT_CATS.map(function (c) {
+      var rows;
+      if (groupMode()) {
+        var mine = (_grpList || []).filter(function (g) { return (g.kind || "icu") === c.cat; });
+        rows = mine.map(function (g) {
+          var active = grpActive() && _grp && _grp.id === g.id;
+          return unitCardHTML("grpsel:" + encodeURIComponent(g.id), ico(c.svg, c.ic), g.name || c.label,
+            esc(g.unitType || g.unit || c.label) + (g.hospital ? ' · ' + esc(g.hospital) : ""), active);
+        }).join("");
+        if (!mine.length) rows = '<div class="icu-empty" style="margin:2px 0 10px">' + (_grpList === null ? "Connecting…" : "No shared " + esc(c.label) + " units yet.") + '</div>';
+        rows += '<button class="icu-btn ghost" data-icu-act="unitgrpnew:' + c.cat + '" style="margin-bottom:6px">' + ico("plus", "＋") + ' Create a ' + esc(c.label) + ' unit</button>';
+      } else {
+        rows = c.types.map(function (tp) {
+          var active = _unit.cat === c.cat && _unit.type === tp;
+          return unitCardHTML("unitsel:" + c.cat + ":" + encodeURIComponent(tp), ico(c.svg, c.ic), tp, "", active);
+        }).join("");
+      }
+      return '<div style="margin-bottom:6px"><div class="icu-sec-lbl" style="margin:4px 2px 8px">' + c.ic + ' ' + esc(c.label) + ' units</div>' + rows + '</div>';
+    }).join("");
+    var sub = (hosp ? esc(hosp) + ' · ' : "") + '<button class="icu-tip" data-icu-act="unithospchg" style="color:var(--primary)">change hospital</button>';
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("close", "Switch unit", sub) +
+      '<div style="padding:14px 16px">' + sections + '</div></div>';
   }
   function renderV2Board() {
     if (groupMode()) return renderV2BoardGroup();   // Phase 2: live Firestore unit (additive, gated)
@@ -5092,6 +5169,7 @@
     patient: { title: "Patient details", domain: "patient", fields: [
       { k: "name", l: "Name / initials", t: "text" }, { k: "age", l: "Age", t: "number" }, { k: "sex", l: "Sex", t: "select", opts: ["", "M", "F", "Other"] },
       { k: "weightKg", l: "Weight (kg)", t: "number" }, { k: "heightCm", l: "Height (cm)", t: "number" }, { k: "bed", l: "Bed", t: "text" },
+      { k: "mrn", l: "MR / UHID", t: "text" }, { k: "doctor", l: "Treating doctor", t: "text" }, { k: "dept", l: "Department / specialty", t: "text" },
       { k: "icuDay", l: "ICU day", t: "number" }, { k: "hospital", l: "Hospital", t: "text" }, { k: "complaints", l: "Presenting complaints", t: "textarea", wide: true }, { k: "diagnosis", l: "Working diagnosis", t: "text", wide: true }, { k: "status", l: "Current status", t: "text", wide: true } ] },
     monitor: { title: "Vitals (ICU monitor)", ingest: ingestMonitor, fields: [
       { k: "hr", l: "Heart rate", t: "number" }, { k: "sbp", l: "Systolic BP", t: "number" }, { k: "dbp", l: "Diastolic BP", t: "number" }, { k: "map", l: "MAP (optional)", t: "number" },
@@ -6690,11 +6768,11 @@
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
       // ---- Unit picker: hospital → category (ICU|Ward) → unit type ----
-      case "unitpick": _screen = "units"; _pickStep = _unit.hospital ? "category" : "hospital"; _pickCat = null; _paintTop = true; paint(); break;
-      case "unithosp": _unit.hospital = decodeURIComponent(arg); unitSavePref(); _pickStep = "category"; _paintTop = true; paint(); break;
+      case "unitpick": _screen = "units"; _pickStep = "units"; _pickCat = null; _paintTop = true; paint(); break;
+      case "unithosp": _unit.hospital = decodeURIComponent(arg); unitSavePref(); _pickStep = "units"; _paintTop = true; paint(); break;
       case "unithospchg": _pickStep = "hospital"; _paintTop = true; paint(); break;
       case "unitcat": _pickCat = arg; _pickStep = "units"; _paintTop = true; paint(); break;
-      case "unitback": _pickStep = "category"; _paintTop = true; paint(); break;
+      case "unitback": _pickStep = "units"; _paintTop = true; paint(); break;
       case "unitsel": { var _uc = arg.indexOf(":"); selectUnit({ cat: arg.slice(0, _uc), type: decodeURIComponent(arg.slice(_uc + 1)) }); _paintTop = true; paint(); break; }
       case "unitgrpnew": grpOpenCreate(arg); break;
       case "grptoggle": try { if (icuGroupsOn()) localStorage.setItem("smd_icu_groups", "0"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
@@ -7119,8 +7197,9 @@
     // tab + deep review + imaging + discharge + (group) instructions.
     openWard: function (target) { return ICU.open(target, true); },
     // Unit picker — hospital → ICU/Ward category → unit type. The full navigation entry (e.g. Ward Sync).
-    openUnits: function () { ICU.open(undefined, _unit.cat === "ward"); _screen = "units"; _pickStep = _unit.hospital ? "category" : "hospital"; _pickCat = null; _paintTop = true; paint(); },
+    openUnits: function () { ICU.open(undefined, _unit.cat === "ward"); _screen = "units"; _pickStep = "units"; _pickCat = null; _paintTop = true; paint(); },
     curUnit: function () { return { cat: _unit.cat, type: _unit.type, hospital: _unit.hospital }; },
+    unitList: unitList, selectUnitByKey: selectUnitByKey, currentUnitLabel: currentUnitLabel,
     // Resume-where-you-left-off (home.js snapshots this on background; replays it on the next launch).
     // curView captures the exact screen + sub-tab (+ open shared-patient id); resume reopens ICU in the
     // SAME unit category (no switch) and resumeView navigates to that exact view.
@@ -7174,7 +7253,7 @@
     reset: function () { resetState(); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
     ingestInfusion: ingestInfusion, _bridgeInfusion: bridgeInfusion, _bridgeInfusionFromCalc: bridgeInfusionFromCalc, _installInfBridge: installInfBridge, _infWeightBridge: infWeightBridge,
-    ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
+    ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, addWardPatientToRoster: addWardPatientToRoster, _buildWardState: buildWardState, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
     _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,
     openFindingPicker: openFindingPicker, _addFindingChip: addFindingChip, _applyFindState: applyFindState, _findStateOf: findStateOf, _vocabNlpCtx: vocabNlpCtx,
