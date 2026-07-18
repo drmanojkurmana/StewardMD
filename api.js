@@ -283,7 +283,7 @@
   function loadMonograph(name) {
     var c = root.querySelector("#dbMono"); if (!c) return;
     if (monoCache[name] !== undefined) { renderMono(c, monoCache[name]); return; }
-    MEDAPI.monograph(name).then(function (resp) {
+    clinicalLookup(MEDAPI.monograph, name).then(function (resp) {   // strength-stripped base retry (see clinicalKey)
       monoCache[name] = resp || null;
       if (st.name === name) { var cc = root.querySelector("#dbMono"); if (cc) renderMono(cc, resp || null); }
     });
@@ -399,10 +399,63 @@
     if (g) { c.innerHTML = goldHTML(g); return; }
     c.innerHTML = qfGrid(resp.data) + stSections(resp.data, ST_OPEN); wireToggles(c);
   }
+  // Strip strength / concentration / form so a brand-list composition ("Ceftriaxone (1000mg)",
+  // "Ceftriaxone 500 mg", "Vitamin D3 (60000IU)") resolves to its BASE molecule's gold record.
+  // The clinical DB is keyed by molecule ("Ceftriaxone"); the composition list is keyed WITH strength,
+  // so without this a strength variant showed "No structured clinical record" while the plain molecule
+  // worked. Verified vs the live API: /structured?name=Ceftriaxone → found; "Ceftriaxone (1000mg)" → not.
+  function clinicalKey(name) {
+    var s = String(name || "");
+    s = s.replace(/\s*\([^)]*\d[^)]*\)/g, " ");                                          // (1000mg), (5 mg/ml), (60000IU)
+    s = s.replace(/\s+\d+(?:\.\d+)?\s*(?:mg|mcg|µg|ug|g|ml|l|%|iu|units?|meq|mmol)\b/gi, " "); // trailing "500 mg", "1 g", "0.5%"
+    return s.replace(/\s{2,}/g, " ").trim();
+  }
+  // Curated British/BAN ⇄ INN/US spelling pairs (same molecule) — the gold DB and the Indian brand
+  // list often disagree on spelling (e.g. list "Amoxicillin" vs DB "Amoxycillin"), so a base match
+  // still missed. Tried in BOTH directions; only found:true responses are ever accepted, so a curated
+  // pair can only ADD a correct match, never surface a wrong drug. Add pairs here as more surface.
+  var CLIN_SYN = [
+    ["Amoxicillin", "Amoxycillin"], ["Furosemide", "Frusemide"], ["Lidocaine", "Lignocaine"],
+    ["Rifampicin", "Rifampin"], ["Paracetamol", "Acetaminophen"], ["Salbutamol", "Albuterol"],
+    ["Chlorphenamine", "Chlorpheniramine"], ["Cefalexin", "Cephalexin"], ["Cefazolin", "Cephazolin"],
+    ["Sulfamethoxazole", "Sulphamethoxazole"], ["Sulfasalazine", "Sulphasalazine"],
+    ["Noradrenaline", "Norepinephrine"], ["Adrenaline", "Epinephrine"], ["Beclometasone", "Beclomethasone"],
+    ["Guaifenesin", "Guaiphenesin"], ["Oestradiol", "Estradiol"], ["Ciclosporin", "Cyclosporine"],
+    ["Glyceryl Trinitrate", "Nitroglycerin"]
+  ];
+  function synVariants(name) {
+    var out = [], nm = String(name || "");
+    CLIN_SYN.forEach(function (p) {
+      for (var i = 0; i < 2; i++) {
+        var from = p[i], to = p[1 - i];
+        var re = new RegExp(from.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "ig");
+        if (re.test(nm)) { var v = nm.replace(re, to); if (v !== nm && out.indexOf(v) < 0) out.push(v); }
+      }
+    });
+    return out;
+  }
+  // Resolve a clinical record for a brand-list composition: try the name, then the strength-stripped
+  // base, then curated spelling variants — first found:true wins; otherwise the original response is
+  // returned (so the honest "no record" state still renders). `fn` = MEDAPI.structured / .monograph.
+  function clinicalLookup(fn, name) {
+    var base = clinicalKey(name), tries = [], seen = {};
+    function add(n) { if (n && !seen[n]) { seen[n] = 1; tries.push(n); } }
+    add(name); add(base); synVariants(base).forEach(add); if (base !== name) synVariants(name).forEach(add);
+    var first = { done: false };
+    function step(i) {
+      if (i >= tries.length) return Promise.resolve(first.resp);
+      return fn(tries[i]).then(function (resp) {
+        if (!first.done) { first.done = true; first.resp = resp; }
+        if (resp && resp.found) return resp;
+        return step(i + 1);
+      });
+    }
+    return step(0);
+  }
   function loadStructured(name) {
     var c = root.querySelector("#dbMono"); if (!c) return;
     if (monoCache["S:" + name] !== undefined) { renderStructured(c, monoCache["S:" + name]); return; }
-    MEDAPI.structured(name).then(function (resp) {
+    clinicalLookup(MEDAPI.structured, name).then(function (resp) {
       monoCache["S:" + name] = resp || null;
       if (st.name === name) { var cc = root.querySelector("#dbMono"); if (cc) renderStructured(cc, resp || null); }
     });
