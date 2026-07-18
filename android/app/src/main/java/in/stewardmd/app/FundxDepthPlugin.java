@@ -1,6 +1,10 @@
 package in.stewardmd.app;
 
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.media.Image;
+import android.util.Base64;
 import android.opengl.EGL14;
 import android.opengl.EGLConfig;
 import android.opengl.EGLContext;
@@ -52,6 +56,9 @@ public class FundxDepthPlugin extends Plugin {
     private EGLSurface eglSurface = EGL14.EGL_NO_SURFACE;
     private int cameraTexId = 0;
     private int frameCount = 0;
+    private volatile boolean streamImage = true;   // approach A: stream the camera image to JS
+                                                    // so the existing heuristics/MediaPipe run on
+                                                    // native frames while ARCore owns the camera.
 
     // ---- Capability detection (runtime, no manual configuration) --------------------------
     @PluginMethod
@@ -87,6 +94,7 @@ public class FundxDepthPlugin extends Plugin {
     @PluginMethod
     public void start(final PluginCall call) {
         if (running) { call.resolve(started(true, "already running")); return; }
+        streamImage = call.getBoolean("streamImage", true);
         arThread = new HandlerThread("fundx-arcore");
         arThread.start();
         arHandler = new Handler(arThread.getLooper());
@@ -147,7 +155,15 @@ public class FundxDepthPlugin extends Plugin {
                 if (depthImg != null) depthImg.close();
             }
             frameCount++;
+            String camImg = null;
+            if (streamImage && (frameCount % 2 == 0)) {          // throttle image to ~7 Hz
+                Image ci = null;
+                try { ci = frame.acquireCameraImage(); camImg = encodeYuvToJpegDataUrl(ci); }
+                catch (Throwable t) { /* camera image not ready this frame */ }
+                finally { if (ci != null) ci.close(); }
+            }
             JSObject data = new JSObject();
+            if (camImg != null) data.put("cameraImage", camImg);
             if (meters != null) { data.put("distanceMeters", meters); data.put("distanceConfidence", conf); }
             boolean tracking = camera.getTrackingState() == com.google.ar.core.TrackingState.TRACKING;
             if (tracking) {
@@ -194,6 +210,40 @@ public class FundxDepthPlugin extends Plugin {
         double meters = mm.get(mm.size() / 2) / 1000.0;
         double conf = confN > 0 ? Math.min(1.0, (confSum / confN) / 7.0) : 0.5;
         return new double[]{ meters, conf };
+    }
+
+    // YUV_420_888 -> NV21 -> JPEG data URL: the native camera frame the JS heuristics/preview run
+    // on while ARCore owns the camera (the approach-A handoff). Throttled by the caller.
+    private static String encodeYuvToJpegDataUrl(Image image) {
+        if (image == null || image.getFormat() != ImageFormat.YUV_420_888) return null;
+        int w = image.getWidth(), h = image.getHeight();
+        byte[] nv21 = yuv420ToNv21(image);
+        YuvImage yuv = new YuvImage(nv21, ImageFormat.NV21, w, h, null);
+        java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
+        yuv.compressToJpeg(new Rect(0, 0, w, h), 55, out);
+        return "data:image/jpeg;base64," + Base64.encodeToString(out.toByteArray(), Base64.NO_WRAP);
+    }
+
+    private static byte[] yuv420ToNv21(Image image) {
+        int w = image.getWidth(), h = image.getHeight();
+        Image.Plane[] planes = image.getPlanes();
+        java.nio.ByteBuffer yBuf = planes[0].getBuffer();
+        java.nio.ByteBuffer uBuf = planes[1].getBuffer();
+        java.nio.ByteBuffer vBuf = planes[2].getBuffer();
+        int ySize = w * h, cw = w / 2, ch = h / 2;
+        byte[] nv21 = new byte[ySize + 2 * cw * ch];
+        int yRowStride = planes[0].getRowStride(), pos = 0;
+        if (yRowStride == w) { yBuf.get(nv21, 0, ySize); pos = ySize; }
+        else { for (int row = 0; row < h; row++) { yBuf.position(row * yRowStride); yBuf.get(nv21, pos, w); pos += w; } }
+        int uvRowStride = planes[1].getRowStride(), uvPixStride = planes[1].getPixelStride();
+        for (int row = 0; row < ch; row++) {
+            for (int col = 0; col < cw; col++) {
+                int idx = row * uvRowStride + col * uvPixStride;
+                nv21[pos++] = vBuf.get(idx);   // NV21 = Y plane + interleaved V,U
+                nv21[pos++] = uBuf.get(idx);
+            }
+        }
+        return nv21;
     }
 
     private static double quatToRollDeg(float[] q) {

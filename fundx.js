@@ -695,9 +695,26 @@
     var video = document.getElementById("fundxVideo");
     sm = V().createStateMachine();
     cam = Vd.makeCamera();
-    cam.start(video, onFrame, { hub: (hub = Vd.makeHub()), analyzeEveryMs: 110, analyzeScale: 0.25, flash: flashOn() })
-      .then(function () { setState("Point the camera at the eye"); })
-      .catch(function (err) { showCamError(err); });
+    var startOpts = { hub: (hub = Vd.makeHub()), analyzeEveryMs: 110, analyzeScale: 0.25, flash: flashOn() };
+    var useNative = false;
+    try { useNative = depthOn() && !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth); } catch (e) {}
+    var starter;
+    if (useNative) {
+      // Depth mode: ARCore/ARKit owns the camera; render its streamed frames onto a preview
+      // canvas over the (now source-less) <video>. On any failure, fall back to getUserMedia.
+      var pc = document.createElement("canvas"); pc.className = "fundx-video"; pc.id = "fundxNativeCanvas";
+      if (video && video.parentNode) video.parentNode.insertBefore(pc, video);
+      if (video) video.style.display = "none";
+      startOpts.previewCanvas = pc; startOpts.previewCtx = pc.getContext("2d");
+      starter = cam.startNative(video, onFrame, startOpts).catch(function () {
+        try { pc.remove(); if (video) video.style.display = ""; } catch (x) {}
+        delete startOpts.previewCanvas; delete startOpts.previewCtx;
+        return cam.start(video, onFrame, startOpts);
+      });
+    } else {
+      starter = cam.start(video, onFrame, startOpts);
+    }
+    starter.then(function () { setState("Point the camera at the eye"); }).catch(function (err) { showCamError(err); });
   }
   function setState(txt) { var el = document.getElementById("fundxState"); if (el) el.textContent = txt; }
   function showCamError(err) {

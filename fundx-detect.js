@@ -262,7 +262,19 @@
   function makeCamera() {
     var stream = null, videoEl = null, canvas = null, cctx = null, raf = 0, running = false;
     var hub = null, onFrame = null, lastAnalyze = 0, opts = {};
+    var nativeSub = null, nativeImg = null, nativePending = false;   // native-depth (approach A) source
     function now() { return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now(); }
+    // Convert a native FundxDepth frame's metric depth + pose into engine FrameAnalysis fields.
+    function depthFieldsFrom(fr) {
+      var out = {}; if (!fr) return out;
+      if (fr.roll != null) { out.roll = +fr.roll; out.rollState = Math.abs(fr.roll) <= 12 ? "level" : (fr.roll > 0 ? "cw" : "ccw"); }
+      if (fr.distanceMeters != null) {
+        var m = +fr.distanceMeters; out.distanceMm = Math.round(m * 1000);
+        out.distanceState = m < 0.2 ? "near" : (m > 0.55 ? "far" : "ok");
+        out.distanceConfidence = fr.distanceConfidence != null ? +fr.distanceConfidence : 0.8;
+      }
+      return out;
+    }
     function grab(scale) {
       if (!videoEl || !videoEl.videoWidth) return null;
       var vw = videoEl.videoWidth, vh = videoEl.videoHeight;
@@ -332,6 +344,48 @@
             return { hub: hub };
           });
       },
+      // Approach A: when depth mode is active the native session (ARCore/ARKit) owns the camera,
+      // so we drive the SAME engine from native frames (camera image + metric depth + pose via
+      // FundxDepth) instead of getUserMedia. The existing heuristics + MediaPipe run on the native
+      // image; depth/pose feed the fusion. Rejects (-> caller falls back to start()) if the native
+      // plugin/session is unavailable or the camera is busy.
+      startNative: function (video, cb, o) {
+        opts = o || {}; onFrame = cb; videoEl = video;
+        hub = opts.hub || makeHub(opts);
+        if (!canvas) { canvas = document.createElement("canvas"); cctx = canvas.getContext("2d", { willReadFrequently: true }); }
+        var P; try { P = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth; } catch (e) { P = null; }
+        if (!P || !P.start) return Promise.reject(new Error("native depth unavailable"));
+        if (!nativeImg) nativeImg = new Image();
+        function onDepthFrame(fr) {
+          if (!running || !fr || !fr.cameraImage || nativePending) return;
+          nativePending = true;
+          nativeImg.onload = function () {
+            nativePending = false;
+            if (!running) return;
+            try {
+              var sc = opts.analyzeScale || 0.35;
+              canvas.width = Math.max(2, Math.round(nativeImg.width * sc));
+              canvas.height = Math.max(2, Math.round(nativeImg.height * sc));
+              cctx.drawImage(nativeImg, 0, 0, canvas.width, canvas.height);
+              var imgData = cctx.getImageData(0, 0, canvas.width, canvas.height);
+              var mpPart = (hub.mediapipe && hub.mediapipe.available()) ? hub.mediapipe.analyze(canvas, now()) : {};
+              var fa = hub.build({ imageData: imgData, mpPartial: mpPart, posePartial: depthFieldsFrom(fr), ts: now() });
+              if (onFrame) onFrame(fa);
+              if (opts.previewCtx && opts.previewCanvas) { opts.previewCanvas.width = nativeImg.width; opts.previewCanvas.height = nativeImg.height; opts.previewCtx.drawImage(nativeImg, 0, 0); }
+            } catch (e) {}
+          };
+          nativeImg.onerror = function () { nativePending = false; };
+          nativeImg.src = fr.cameraImage;
+        }
+        return Promise.resolve()
+          .then(function () { if (P.addListener) nativeSub = P.addListener("fundxDepthFrame", onDepthFrame); return P.start({ streamImage: true }); })
+          .then(function (res) {
+            if (res && res.started === false) { try { if (nativeSub) Promise.resolve(nativeSub).then(function (h) { if (h && h.remove) h.remove(); }); } catch (e) {} nativeSub = null; throw new Error("native session: " + (res && res.reason)); }
+            running = true;
+            if (hub.sensors && hub.sensors.start) hub.sensors.start();     // IMU still fuses alongside
+            return { hub: hub, native: res };
+          });
+      },
       // Capture a best-frame burst: grab N full-res frames, score, return dataURLs + metrics.
       captureBurst: function (count) {
         count = count || 12; var frames = [];
@@ -354,6 +408,8 @@
         try { if (videoEl) videoEl.srcObject = null; } catch (e) {}
         try { if (hub && hub.pose && hub.pose.detach) hub.pose.detach(); } catch (e) {}
         try { if (hub && hub.sensors && hub.sensors.stop) hub.sensors.stop(); } catch (e) {}
+        try { var P = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth; if (P && P.stop) P.stop(); } catch (e) {}
+        try { if (nativeSub) Promise.resolve(nativeSub).then(function (h) { if (h && h.remove) h.remove(); }); } catch (e) {} nativeSub = null;
         stream = null;
       }
     };
