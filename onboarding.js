@@ -5,8 +5,9 @@
  *   2) a 5-step APP tour that spotlights the REAL home,
  *   3) an ICU v2 tour that spotlights the REAL ICU dashboard end to end — board, group/shared unit,
  *      notifications, the patient workspace, deep clinical review, tasks/rounds, handover and
- *      notification settings; the full walkthrough when the unit has patients, a board-level
- *      orientation when it's empty.
+ *      notification settings. Because a day-one ICU is empty, the tour seeds a clearly-marked demo
+ *      "Test Patient" (septic shock, random vitals/labs), walks the REAL UI on it, and DELETES it
+ *      when the tour ends — seeded solo/local only, so it can never sync to a real team.
  * Plus a first-time ICU contextual tip, a Resume pill, and a "Guided tours" replay centre.
  * It never renders mock screens — every step highlights existing app UI; nothing in the home or
  * ICU design is changed.
@@ -114,7 +115,7 @@
       body: "Everything you enter is saved automatically. In a shared unit you’ll see teammates’ avatars here — who else is viewing — and a live-sync indicator." },
     { group: "patient", live: ".icu-v2-tabwrap,.icu-v2-tabs", title: "Five focused workspaces",
       body: "Overview, Monitoring, Care Plan, Rounds and Records. Each groups the tools for one part of the work, so the screen never feels crowded." },
-    { group: "patient", tab: "overview", live: ".icu-v2-body,#icuRoot .icu-grid", title: "Overview — the full picture",
+    { group: "patient", tab: "overview", live: ".icu-vitals", title: "Overview — the full picture",
       body: "The Overview brings every vital and key lab onto one screen, with today’s goals. Values outside the safe range are flagged so what needs action stands out." },
     { group: "patient", live: '[data-icu-act="ws:monitoring"]', kind: "tap", doneSel: ".icu-subnav,.icu-elyte-alerts", tapHint: "Tap Monitoring", title: "Let’s look at Monitoring",
       body: "Open the Monitoring workspace to see how StewardMD interprets results and guides correction." },
@@ -123,7 +124,7 @@
     { group: "patient", ws: "monitoring", tab: "lytes", live: ".icu-elyte-alerts,.icu-v2-body", title: "Colour tells the story",
       body: "Each electrolyte is colour-coded — red critical, amber out-of-range, normal in white. Tap a tile to enter a value and get a suggested correction." },
     // ── Deep clinical review (Care Plan → Diagnosis) ──
-    { group: "patient", ws: "careplan", tab: "dx", live: '[data-icu-act="corrdeep"]', title: "Deep clinical review",
+    { group: "patient", ws: "careplan", live: '[data-icu-act="corrdeep"]', title: "Deep clinical review",
       body: "In Care Plan → Diagnosis, StewardMD can run a deep clinical review — correlating findings, labs, imaging and vitals against the evidence to sharpen the differential and flag what’s been missed." },
     // ── Rounds & tasks ──
     { group: "patient", tab: "rounds", live: '.icu-v2-addround,[data-icu-act="grpround"],.icu-v2-tab[data-icu-act="tab:rounds"]', title: "Rounds & tasks",
@@ -238,6 +239,26 @@
     for (var i = 0; i < list.length; i++) {
       var els; try { els = scope.querySelectorAll(list[i].trim()); } catch (e) { continue; }
       for (var j = 0; j < els.length; j++) { if (visible(els[j])) return els[j]; }
+    }
+    return null;
+  }
+  // "present" = rendered + not hidden, but IGNORING viewport position — a tour target may be below
+  // the fold (e.g. Deep review low on the Care Plan page); paint() scrolls it into view. Using
+  // firstVisible here would wrongly treat an off-screen-but-rendered target as absent and skip it.
+  function present(el) {
+    if (!el) return false;
+    var r = el.getBoundingClientRect();
+    if (r.width < 2 || r.height < 2) return false;
+    var cs = window.getComputedStyle(el);
+    return cs.display !== "none" && cs.visibility !== "hidden" && cs.opacity !== "0";
+  }
+  function firstPresent(sel, scope) {
+    if (!sel) return null;
+    scope = scope || document;
+    var list = sel.split(",");
+    for (var i = 0; i < list.length; i++) {
+      var els; try { els = scope.querySelectorAll(list[i].trim()); } catch (e) { continue; }
+      for (var j = 0; j < els.length; j++) { if (present(els[j])) return els[j]; }
     }
     return null;
   }
@@ -458,7 +479,7 @@
     return {
       id: "app", icon: "🧭", live: false, steps: APP_TOUR,
       scope: function () { return document.getElementById("homeV2") || document; },
-      resolve: function (s) { return firstVisible(s.sel, this.scope()); },
+      resolve: function (s) { return firstPresent(s.sel, this.scope()); },
       enter: function (s, cb) { cb(); },
       // The user taps the real ICU tile → hand off to the ICU tour immediately (matched by element
       // identity so it survives the app opening/hiding things on the same click). startIcuTour opens
@@ -482,9 +503,10 @@
   function liveHasPatients() { return !!document.querySelector("#icuRoot .icu-v2-card"); }
   function clickLive(sel) { var el = firstVisible(sel, document.getElementById("icuRoot") || document); if (el) { try { el.click(); return true; } catch (e) {} } return false; }
 
-  // Build the step list for THIS run of the ICU tour from what the real unit actually shows.
-  // No demo, no mock screens — we only ever spotlight the existing ICU UI. Patient-workspace steps
-  // are included solely when a real patient card exists; on an empty unit we tour the board only.
+  // Build the step list for THIS run of the ICU tour from what the real unit actually shows. We
+  // spotlight the existing ICU UI (no mock screens) — walking the seeded demo patient (see
+  // seedDemoPatient), so the patient-workspace steps are available even on a day-one empty unit.
+  // Patient/open steps are included only when a patient card is present (the demo makes it so).
   function assembleIcuSteps() {
     var hasCards = liveHasPatients();
     // Board (and the closing card) always run; the patient-open tap and patient-workspace steps only
@@ -508,7 +530,7 @@
     return {
       id: "icu", icon: "🫀", live: true, steps: steps,
       scope: function () { return document.getElementById("icuRoot") || document; },
-      resolve: function (s) { return s.live ? firstVisible(s.live, this.scope()) : null; },
+      resolve: function (s) { return s.live ? firstPresent(s.live, this.scope()) : null; },
       // Drive the REAL ICU into the right state for this step (open a patient / switch workspace+tab),
       // then paint. ws/tab map to real data-icu-act verbs (ws:<x> / tab:<y>).
       enter: function (s, cb) {
@@ -530,21 +552,91 @@
       },
       // Tap steps advance when the real outcome appears (patient opened, monitoring active, board back).
       tapWatch: function (s) { return !!firstVisible(s.doneSel || s.live, document.getElementById("icuRoot") || document); },
-      finish: function (completed) { if (completed) { var st = getState(); st.icuTourDone = true; setState(st); } }
+      finish: function (completed) { try { removeDemoPatient(); } catch (e) {} if (completed) { var st = getState(); st.icuTourDone = true; setState(st); } }
     };
   }
 
-  // Tour the REAL ICU. Open it if needed, wait for the board to paint, then spotlight live elements.
+  // ---- demo patient (walked during the ICU tour) -------------------------------------------
+  // Day one the ICU is empty (no Ward Sync / no patients / no vitals), so the tour seeds a clearly
+  // marked "Test Patient" with realistic septic-shock vitals + labs, walks the REAL ICU UI on it,
+  // and DELETES it the moment the tour ends.
+  //
+  // SAFETY — it can never reach the team: icu.js only upserts to Firestore when grpActive() && a
+  // patient is open (icu.js:7338). We SUSPEND group mode (smd_icu_groups="0") for the tour and seed
+  // ONLY the local unsaved buffer (never savePatient → never the roster or /api/cases). A recovery
+  // record restores group mode + clears any leftover demo buffer if the tour is interrupted.
+  var _demo = null;
+  function icuApiReady() { return !!(window.ICU && ICU.state && ICU.reset && ICU.ingestMonitor && ICU.ingestLabs && ICU.recompute); }
+  function rnd(base, span) { try { return Math.round((base + Math.random() * span) * 10) / 10; } catch (e) { return base; } }
+  function ri(base, span) { return Math.round(rnd(base, span)); }
+
+  function seedDemoPatient() {
+    if (!icuApiReady()) return false;
+    try {
+      _demo = { prevGroups: localStorage.getItem("smd_icu_groups"), savedState: null };
+      localStorage.setItem("smd_icu_groups", "0");                                   // suspend group → no Firestore path
+      localStorage.setItem("smd_tour_icu_demo", JSON.stringify({ prevGroups: _demo.prevGroups }));   // crash-recovery marker
+      try { _demo.savedState = JSON.parse(JSON.stringify(ICU.state())); } catch (e) { _demo.savedState = null; }
+      ICU.reset();
+      var st = ICU.state();
+      st.patient.name = "Test Patient"; st.patient.age = 58; st.patient.sex = "m"; st.patient.bed = "04";
+      st.patient.diagnosis = "Septic shock — demo"; st.patient.weightKg = 70; st.patient.icuDay = 3;
+      st.patient.mrn = "DEMO-TOUR"; st.patient.doctor = "Dr Test";                   // markers for purge
+      try { st.patient._id = "demo_tour_" + Date.now(); } catch (e) {}
+      // Septic-shock picture, randomised within critical bands so it lights every feature.
+      ICU.ingestMonitor({ sbp: ri(74, 8), dbp: ri(42, 6), hr: ri(116, 14), rr: ri(24, 5), spo2: ri(88, 3), temp: rnd(38.6, 0.7), lactate: rnd(4.4, 2.2), uop: ri(12, 12), gcs: 13 });
+      ICU.ingestLabs({ k: rnd(6.2, 0.7), na: ri(146, 5), cl: ri(108, 5), hco3: ri(14, 3), ca: rnd(1.85, 0.15), mg: rnd(0.55, 0.15), creat: rnd(2.3, 0.6), glu: ri(170, 40), hb: rnd(9, 1.2), plt: ri(85, 30), wbc: rnd(15.5, 4) });
+      try { if (ICU.ingestInfusion) ICU.ingestInfusion({ drug: "Noradrenaline", dose: 0.18, unit: "mcg/kg/min", rateMlHr: 11, indication: "Septic shock" }); } catch (e) {}
+      try { ICU.recompute(); } catch (e) {}
+      return true;
+    } catch (e) { _demo = null; return false; }
+  }
+
+  function removeDemoPatient() {
+    if (!_demo) return;
+    var d = _demo; _demo = null;
+    try {
+      if (icuApiReady()) {
+        try { if (ICU.listPatients) (ICU.listPatients() || []).forEach(function (p) { if (p && (/^demo_tour_/.test(p.id || "") || p.name === "Test Patient")) { try { ICU.deletePatient(p.id); } catch (e) {} } }); } catch (e) {}
+        try { ICU.reset(); } catch (e) {}
+        try { if (d.savedState && ICU.update) ICU.update(d.savedState); } catch (e) {}   // restore the user's pre-tour buffer
+        try { ICU.recompute(); } catch (e) {}
+      }
+    } catch (e) {}
+    try { if (d.prevGroups == null) localStorage.removeItem("smd_icu_groups"); else localStorage.setItem("smd_icu_groups", d.prevGroups); } catch (e) {}
+    try { localStorage.removeItem("smd_tour_icu_demo"); } catch (e) {}
+  }
+
+  // On load, if a prior tour was interrupted mid-demo: restore group mode and clear any leftover demo
+  // buffer, so a fake patient can never linger and a real group unit can never stay silently off.
+  function purgeStaleDemo() {
+    var rec; try { rec = JSON.parse(localStorage.getItem("smd_tour_icu_demo") || "null"); } catch (e) { rec = null; }
+    if (!rec) return;
+    try { if (rec.prevGroups == null) localStorage.removeItem("smd_icu_groups"); else localStorage.setItem("smd_icu_groups", rec.prevGroups); } catch (e) {}
+    try { localStorage.removeItem("smd_tour_icu_demo"); } catch (e) {}
+    var tries = 0;
+    (function clear() {
+      if (icuApiReady()) {
+        try { var st = ICU.state(); if (st && st.patient && (st.patient.mrn === "DEMO-TOUR" || st.patient.name === "Test Patient")) { ICU.reset(); ICU.recompute(); } } catch (e) {}
+        try { if (ICU.listPatients) (ICU.listPatients() || []).forEach(function (p) { if (p && (/^demo_tour_/.test(p.id || "") || p.name === "Test Patient")) { try { ICU.deletePatient(p.id); } catch (e) {} } }); } catch (e) {}
+        return;
+      }
+      if (++tries < 20) setTimeout(clear, 500);
+    })();
+  }
+
+  // Tour the REAL ICU, walking a seeded demo patient. Suspend group + seed, open the board, wait for
+  // the demo card, then spotlight live elements. The demo is removed in the controller's finish().
   function startIcuTour() {
     markLaunch(); hideResume(); hideTip();
     if (_startingIcu) return; _startingIcu = true;
-    if (!liveIcuOpen()) {
-      try { if (window.ICU && ICU.open) ICU.open(); else { var t = firstVisible('[data-act="icu"]', document); if (t) t.click(); } } catch (e) {}
-    }
+    try { seedDemoPatient(); } catch (e) {}
+    try { if (window.ICU && ICU.open) ICU.open(); else if (!liveIcuOpen()) { var t = firstVisible('[data-act="icu"]', document); if (t) t.click(); } } catch (e) {}
+    try { if (window.ICU && ICU.recompute) ICU.recompute(); } catch (e) {}
     var waited = 0;
     (function wait() {
-      var boardUp = liveIcuOpen() && (document.querySelector("#icuRoot .icu-v2-uhead") || document.querySelector("#icuRoot .icu-v2-card") || document.querySelector("#icuRoot .icu-v2-strip"));
-      if (boardUp || waited >= 1600) { _startingIcu = false; startRun(icuController(assembleIcuSteps()), 0); return; }
+      var boardUp = liveIcuOpen() && (document.querySelector("#icuRoot .icu-v2-card") || document.querySelector("#icuRoot .icu-v2-uhead") || document.querySelector("#icuRoot .icu-v2-strip"));
+      if (boardUp || waited >= 2000) { _startingIcu = false; startRun(icuController(assembleIcuSteps()), 0); return; }
       waited += 150; setTimeout(wait, 150);
     })();
   }
@@ -746,6 +838,6 @@
     version: TOUR_VERSION
   };
 
-  function boot() { retireLegacyCoach(); watch(); watchIcuTip(); }
+  function boot() { purgeStaleDemo(); retireLegacyCoach(); watch(); watchIcuTip(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 })();
