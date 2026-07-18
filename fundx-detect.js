@@ -144,24 +144,34 @@
   function makeMediaPipe() {
     var landmarker = null, ready = false, failed = false, loading = null, prev = null;
     var CDN = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14";
-    function assetBase() {
-      try { if (window.SMD_FUNDX_DETECT && window.SMD_FUNDX_DETECT.mediapipeAssetBase) return window.SMD_FUNDX_DETECT.mediapipeAssetBase; } catch (e) {}
-      return CDN;
+    var LOCAL = "/assets/vendor/mediapipe";   // vendored assets (offline); shipped by build-www.sh
+    // Candidate asset roots, tried in order until one loads. An explicit override
+    // (SMD_FUNDX_DETECT.mediapipeAssetBase) wins outright with no fallback; otherwise prefer
+    // the vendored LOCAL copy (works offline / no CDN dependency) and fall back to the CDN.
+    function assetBases() {
+      try { if (window.SMD_FUNDX_DETECT && window.SMD_FUNDX_DETECT.mediapipeAssetBase) return [window.SMD_FUNDX_DETECT.mediapipeAssetBase]; } catch (e) {}
+      return [LOCAL, CDN];
+    }
+    async function loadFrom(base) {
+      var mod = await import(base + "/vision_bundle.mjs");
+      var files = await mod.FilesetResolver.forVisionTasks(base + "/wasm");
+      landmarker = await mod.FaceLandmarker.createFromOptions(files, {
+        baseOptions: { modelAssetPath: base + "/face_landmarker.task", delegate: "GPU" },
+        runningMode: "VIDEO", numFaces: 1, outputFaceBlendshapes: false
+      });
     }
     function load() {
       if (ready || failed) return Promise.resolve(ready);
       if (loading) return loading;
       loading = (async function () {
-        try {
-          var base = assetBase();
-          var mod = await import(base + "/vision_bundle.mjs");
-          var files = await mod.FilesetResolver.forVisionTasks(base + "/wasm");
-          landmarker = await mod.FaceLandmarker.createFromOptions(files, {
-            baseOptions: { modelAssetPath: base + "/face_landmarker.task", delegate: "GPU" },
-            runningMode: "VIDEO", numFaces: 1, outputFaceBlendshapes: false
-          });
-          ready = true; return true;
-        } catch (e) { failed = true; ready = false; try { console.warn("[FundX] MediaPipe unavailable — heuristic-only guidance.", e && e.message); } catch (_) {} return false; }
+        var cands = assetBases(), lastErr = null;
+        for (var i = 0; i < cands.length; i++) {
+          try { await loadFrom(cands[i]); ready = true; return true; }
+          catch (e) { lastErr = e; landmarker = null; try { console.warn("[FundX] MediaPipe load failed from " + cands[i] + " — " + (e && e.message)); } catch (_) {} }
+        }
+        failed = true; ready = false;
+        try { console.warn("[FundX] MediaPipe unavailable — heuristic-only guidance.", lastErr && lastErr.message); } catch (_) {}
+        return false;
       })();
       return loading;
     }
@@ -320,7 +330,7 @@
     makeMediaPipe: makeMediaPipe,
     makeHub: makeHub,
     makeCamera: makeCamera,
-    mediapipeAssetBase: null   // set to a local vendored path to prefer it over CDN
+    mediapipeAssetBase: null   // default tries vendored /assets/vendor/mediapipe then CDN; set to force ONE root
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_FUNDX_DETECT = API;
