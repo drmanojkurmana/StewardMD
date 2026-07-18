@@ -2059,6 +2059,21 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         if (off) return { question: t.topic + " — " + off + ".", depth: "detailed", topic: t.topic + " · " + off, retrieval: t.topic + " " + off };
         return { question: "Continue with the management and treatment of " + t.topic + " — key steps, medications, and monitoring.", depth: "detailed", topic: "management of " + t.topic, retrieval: t.topic + " management treatment medications monitoring" };
       }
+      // GENERIC continuation — a short message made ONLY of generic clinical words
+      // ("ok first line treatment?", "complications?", "yes investigations") stays ON
+      // the current topic. Without this, the raw fragment was retrieved standalone and
+      // keyword-matched a random disease (a real case: "Ok First Line Treatment?" after
+      // an ascites answer retrieved FIRST Bite Syndrome). Any non-generic token means
+      // the clinician may be naming a NEW topic → fall through to normal routing.
+      var GENERIC_FU = /^(ok(ay)?|yes|yeah|yep|sure|please|pls|go|ahead|and|so|also|what|whats|about|the|of|for|in|a|an|is|are|its|tell|me|give|now|then|this|that|first|second|third|line|initial|choice|best|treatment|treat|therapy|therapies|management|manage|mx|rx|drug|drugs|medication|medications|dose|doses|dosing|option|options|step|steps|investigation|investigations|workup|work-up|test|tests|lab|labs|complication|complications|cause|causes|sign|signs|symptom|symptoms|prognosis|criteria|classification|type|types|feature|features|diagnosis|differential|differentials|monitoring|follow|followup|up|red|flag|flags)$/;
+      if (wc <= 7) {
+        var toksF = n.replace(/\?/g, "").split(" ").filter(Boolean);   // maikNorm keeps '?' — drop it for token matching
+        if (toksF.length && toksF.every(function (w) { return GENERIC_FU.test(w); })) {
+          var ask = q.replace(/^\s*(ok(ay)?|yes|yeah|yep|sure|please|pls)[,!. ]*/i, "").replace(/\?+$/, "").trim();
+          if (!ask) return null;                                    // bare "ok"/"yes" → let the ack handling reply
+          return { question: t.topic + " — " + ask + ".", depth: "concise", topic: t.topic + " · " + ask, retrieval: t.topic + " " + ask };
+        }
+      }
       return null;
     }
     // Phase 2 — streaming is ON by default (self-falls-back on any failure); set localStorage
@@ -2289,6 +2304,8 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var depth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
       runClinical(q, q, depth, active, topic);
     }
+    // test hook (dev/regression harnesses only — closures are otherwise unreachable)
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; } }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
     function maikNewThread() { _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; maikSaveThread(""); if (body) body.innerHTML = ""; emptyState(); if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
