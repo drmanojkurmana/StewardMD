@@ -131,8 +131,8 @@
       row.insertBefore(seg, row.firstChild);
       row.setAttribute("data-abx-modeseg", "1"); // CSS hides the original label + button
     }
-    // MARINAM UI switch lives up here (top), next to the Simple|Advanced segment.
-    if (!row.querySelector(".abx-uisw")) row.appendChild(uiSwitchNode());
+    // BUG-08: MARINAM UI toggle removed — MARINAM is the only UI, so the classic-side switch
+    // is no longer appended (uiSwitchNode kept but unused).
     var cur = classicMode();
     seg.querySelectorAll(".abx-modeseg-b").forEach(function (b) {
       var on = b.getAttribute("data-abx-mode") === cur;

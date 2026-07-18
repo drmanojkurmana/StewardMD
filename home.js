@@ -1103,11 +1103,17 @@
       if (rc) {
         var list = (window.SMD_RECENT && SMD_RECENT.get) ? (SMD_RECENT.get() || []) : [];
         if (list.length) {
-          var rows = list.slice(0, 5).map(function (it) {
+          // BUG-11: de-duplicate consecutive identical sessions; add a feature icon + relative
+          // timestamp; keep the card styling consistent with the rest of the app.
+          var _rmap = { reasoning: "neurology", decision: "gavel", icu: "monitor_heart", abx: "gavel" };
+          function _rago(ts) { if (!ts) return ""; var m = Math.round((Date.now() - ts) / 60000); if (m < 1) return "just now"; if (m < 60) return m + "m ago"; var h = Math.round(m / 60); if (h < 24) return h + "h ago"; return Math.round(h / 24) + "d ago"; }
+          var _rprev = null;
+          var rows = list.filter(function (it) { var k = (it.title || "") + "|" + (it.summary || ""); if (k === _rprev) return false; _rprev = k; return true; }).slice(0, 5).map(function (it) {
             return '<button class="rds-list-row rnav-recent-row" data-rid="' + escV4(it.caseId) + '">' +
-              '<span class="rds-list-lead rds-icon">history</span><span class="rds-list-main">' +
+              '<span class="rds-list-lead rds-icon">' + (_rmap[it.feature] || "history") + '</span><span class="rds-list-main">' +
               '<span class="rnav-recent-tt">' + escV4(it.title || "Case") + '</span>' +
               (it.summary ? '<span class="rnav-recent-sub">' + escV4(it.summary) + '</span>' : "") + '</span>' +
+              (it.ts ? '<span class="rnav-recent-time" style="margin-left:8px;flex:0 0 auto;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#5a7184);white-space:nowrap">' + _rago(it.ts) + '</span>' : "") +
               '<span class="rds-list-trail">' + svg("chev") + '</span></button>';
           }).join("");
           rc.innerHTML = '<div class="rds-section-header"><span class="rds-section-title">Recent activity</span></div><div class="rds-card rnav-recent">' + rows + '</div>';
@@ -1787,7 +1793,7 @@
 #maikSheet.on{transform:translateY(0)}
 body.dark #maikSheet{
   --mk-bg:#101a2c;--mk-ink:#eaf0f7;--mk-mut:#8c9ab0;--mk-faint:#5d6e86;--mk-bd:#233149;--mk-soft:#182338;--mk-field:#0e1829;
-  --mk-teal:#2dd4bf;--mk-tsoft:#0e2e2b;--mk-acc:#7db3ff;--mk-glow:rgba(45,212,191,.32);
+  --mk-teal:#2dd4bf;--mk-tsoft:#0e2e2b;--mk-acc:#7db3ff;--mk-glow:rgba(45,212,191,.42);
   --mk-userbub:linear-gradient(140deg,#0f766e,#0b5a53);--mk-userink:#eafff9;--mk-usersh:0 4px 12px rgba(0,0,0,.35);
   box-shadow:0 -8px 40px rgba(0,0,0,.6)}
 
@@ -1867,13 +1873,13 @@ body.dark .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px 20px rgba(0,0
 .maik-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--mk-send);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:0 6px 16px rgba(15,118,110,.5)}
 .maik-send:active{transform:scale(.94)}
 
-@keyframes maikGlow{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.08)}}
+@keyframes maikGlow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.92;transform:scale(1.08)}}
 @keyframes maikPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{box-shadow:0 0 0 6px rgba(220,38,38,0)}}
 ` + `
 /* ── support: app behaviors mapped onto the Aurora tokens (not a design change) ── */
 #maikSheet{color:var(--mk-ink)}
 #maikSheet *{box-sizing:border-box}
-body.v3-dark #maikSheet{--mk-bg:#101a2c;--mk-ink:#eaf0f7;--mk-mut:#8c9ab0;--mk-faint:#5d6e86;--mk-bd:#233149;--mk-soft:#182338;--mk-field:#0e1829;--mk-teal:#2dd4bf;--mk-tsoft:#0e2e2b;--mk-acc:#7db3ff;--mk-glow:rgba(45,212,191,.32);--mk-userbub:linear-gradient(140deg,#0f766e,#0b5a53);--mk-userink:#eafff9;--mk-usersh:0 4px 12px rgba(0,0,0,.35);box-shadow:0 -8px 40px rgba(0,0,0,.6)}
+body.v3-dark #maikSheet{--mk-bg:#101a2c;--mk-ink:#eaf0f7;--mk-mut:#8c9ab0;--mk-faint:#5d6e86;--mk-bd:#233149;--mk-soft:#182338;--mk-field:#0e1829;--mk-teal:#2dd4bf;--mk-tsoft:#0e2e2b;--mk-acc:#7db3ff;--mk-glow:rgba(45,212,191,.42);--mk-userbub:linear-gradient(140deg,#0f766e,#0b5a53);--mk-userink:#eafff9;--mk-usersh:0 4px 12px rgba(0,0,0,.35);box-shadow:0 -8px 40px rgba(0,0,0,.6)}
 body.v3-dark .maik-wm{opacity:.06}
 body.v3-dark #maikSheet .maik-b.ai{box-shadow:0 2px 8px rgba(0,0,0,.25)}
 body.v3-dark #maikSheet .maik-card{background:var(--mk-soft);box-shadow:none}
@@ -2445,7 +2451,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         var okTheme = THEMES.some(function (t) { return t.id === o.theme; });
         var okFont = FONTS.some(function (f) { return f.id === o.font; });
         return {
-          fontScale: Math.min(1.5, Math.max(.8, +o.fontScale || 1)),
+          fontScale: Math.min(1.25, Math.max(.8, +o.fontScale || 1)),
           density: o.density, autoFit: !!o.autoFit,
           theme: okTheme ? o.theme : "classic",
           font: okFont ? o.font : "plex",
@@ -2457,7 +2463,15 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   }
   function saveD() { try { localStorage.setItem(DKEY, JSON.stringify(ds)); } catch (e) {} }
   function applyD() {
-    try { document.documentElement.style.zoom = ds.fontScale; } catch (e) {}
+    try {
+      var _sc = Math.min(1.25, Math.max(.8, +ds.fontScale || 1)); ds.fontScale = _sc;   // BUG-07: bound scale to a reachable max
+      document.documentElement.style.zoom = _sc;
+      // BUG-07: keep the Display sheet + its Reset OUT of the app zoom (counter-zoom) so the
+      // controls needed to recover are always reachable, even at max scale.
+      var _inv = 1 / _sc;
+      var _sh = document.getElementById("hvSheet"); if (_sh) _sh.style.zoom = _inv;
+      var _scr = document.getElementById("hvScrim"); if (_scr) _scr.style.zoom = _inv;
+    } catch (e) {}
     document.body.classList.remove("smd-dens-compact", "smd-dens-comfortable", "smd-dens-large");
     if (ds.density !== "default") document.body.classList.add("smd-dens-" + ds.density);
     var el = document.documentElement;
@@ -2474,10 +2488,10 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     if (dpr >= 3 && w >= 400) fs = Math.min(1.2, fs + .05);
     ds.fontScale = fs; ds.density = d; applyD(); refreshD();
   }
-  var DPRE = { default: { fontScale: 1, density: "default" }, small: { fontScale: .9, density: "compact" }, large: { fontScale: 1.15, density: "comfortable" }, senior: { fontScale: 1.4, density: "large" } };
+  var DPRE = { default: { fontScale: 1, density: "default" }, small: { fontScale: .9, density: "compact" }, large: { fontScale: 1.15, density: "comfortable" }, senior: { fontScale: 1.25, density: "large" } };
   function openDisplay() {
     openSheet('<div class="hv-sh-t">Display &amp; Accessibility</div>' +
-      '<div class="hv-d-sec"><div class="hv-d-row"><h4 style="margin:0">Font size</h4><span class="hv-d-val" id="hvFsv">100%</span></div><input type="range" id="hvFs" min="80" max="150" step="5" value="100"></div>' +
+      '<div class="hv-d-sec"><div class="hv-d-row"><h4 style="margin:0">Font size</h4><span class="hv-d-val" id="hvFsv">100%</span></div><input type="range" id="hvFs" min="80" max="125" step="5" value="100"></div>' +
       '<div class="hv-d-sec"><h4>Display density</h4><div class="hv-seg" id="hvDens"><button data-d="compact">Compact</button><button data-d="default">Default</button><button data-d="comfortable">Comfort</button><button data-d="large">Large</button></div></div>' +
       '<div class="hv-d-sec"><h4>Quick presets</h4><div class="hv-pre" id="hvPre"><button data-p="default">Default</button><button data-p="small">Small screen</button><button data-p="large">Large screen</button><button data-p="senior">Senior friendly</button></div></div>' +
       '<div class="hv-d-sec"><h4>Auto fit</h4><div class="hv-sw"><div><div class="lab">Optimise for this device</div><div class="sub" id="hvDet"></div></div><button class="hv-tg" id="hvAuto"></button></div></div>' +
@@ -2492,6 +2506,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       '<button class="hv-reset" id="hvReset">Reset to defaults</button>' +
       '<div class="hv-info" style="margin-top:12px">Changes readability &amp; spacing only — never medical content. Saved on this device.</div>');
     var s = sheetEl();
+    try { var _z = 1 / (Math.min(1.25, Math.max(.8, +ds.fontScale || 1))); s.style.zoom = _z; var _sc0 = document.getElementById("hvScrim"); if (_sc0) _sc0.style.zoom = _z; } catch (e) {}
     s.querySelector("#hvFs").addEventListener("input", function () { ds.autoFit = false; ds.fontScale = (+this.value) / 100; applyD(); refreshD(); });
     s.querySelectorAll("#hvDens button").forEach(function (b) { b.addEventListener("click", function () { ds.autoFit = false; ds.density = b.getAttribute("data-d"); applyD(); refreshD(); }); });
     s.querySelectorAll("#hvPre button").forEach(function (b) { b.addEventListener("click", function () { var p = DPRE[b.getAttribute("data-p")]; ds.autoFit = false; ds.fontScale = p.fontScale; ds.density = p.density; applyD(); refreshD(); }); });

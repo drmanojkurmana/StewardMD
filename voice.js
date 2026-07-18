@@ -274,12 +274,14 @@
             return;
           }
           engEl.textContent =
-            (err === "mic-denied" || err === "mic-permission-denied") ? "Microphone permission denied." :
+            (err === "mic-denied" || err === "mic-permission-denied") ? "Microphone access is off. Enable it in Settings → StewardMD → Microphone, then tap to speak." :
+            // BUG-12: give the AVAudioSession/engine failure an actionable message instead of the raw code.
+            (err === "recording-failure" || err === "transcription-failure") ? "Couldn't start recording. Check microphone access in Settings, close other apps using the mic, then tap to try again." :
             err === "model-download-failed" ? "Model download failed — check your connection and tap to retry." :
             (err === "model-corrupted" || err === "model-missing") ? "Clinical model unavailable — tap to re-download." :
-            err === "insufficient-storage" ? "Not enough free storage for the model." :
+            (err === "insufficient-storage" || err === "low-memory") ? "Not enough free space/memory for the voice model. Free up some space and try again, or use Fast mode." :
             err === "no-voice-engine" ? "No speech engine available on this device." :
-            "Voice error: " + err;
+            "Couldn't capture audio — tap to try again.";
         },
         onState: setState
       });

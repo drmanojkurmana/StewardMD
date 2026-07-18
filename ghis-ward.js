@@ -604,6 +604,9 @@
                   (d && d.tests || []).forEach(function(t) {
                     labs.push({ test: t.test, result: t.result, units: t.units, low: t.low, high: t.high, critical: t.critical });
                     if (t.antibiogram && String(t.antibiogram).trim()) culture.push({ name: (o.serviceName || 'Culture') + ' — ' + (t.test || ''), detail: String(t.antibiogram) });
+                    // ENH-01: capture a blood-culture organism/result even without an antibiogram block,
+                    // so it auto-populates the workup from Ward Sync instead of manual entry.
+                    else if (/blood\s*culture|bactec|blood\s*c\/s/i.test((o.serviceName || '') + ' ' + (t.test || '')) && t.result && String(t.result).trim()) culture.push({ name: (o.serviceName || 'Blood culture') + (t.test ? ' — ' + t.test : ''), detail: String(t.result), bloodCulture: true });
                   });
                   if (/culture|sensitivit/i.test(o.serviceName || '') && (!d || !(d.tests || []).length)) culture.push({ name: o.serviceName, detail: '(open in Ward Sync for full report)' });
                 }).catch(function(){});
