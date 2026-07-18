@@ -38,7 +38,7 @@
 
   var rootEl = null, ctx = null, screen = "home";
   var session = null, cam = null, sm = null, hub = null, lastFa = null, result = null, detail = null;
-  var capturing = false, lastHapticState = "", scanSeq = 0;
+  var capturing = false, lastHapticState = "", scanSeq = 0, lastCoachArrow = null;
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
   function ric(name) { return '<span class="rds-icon" aria-hidden="true">' + name + '</span>'; }
@@ -480,6 +480,7 @@
   var SENS = { low: { r: 0.82, f: 4 }, med: { r: 0.9, f: 6 }, high: { r: 0.95, f: 8 } };
   function loadSens() { try { return localStorage.getItem("smd_fundx_sens") || "med"; } catch (e) { return "med"; } }
   function lensConfirmOn() { try { return localStorage.getItem("smd_fundx_lens_confirm") === "1"; } catch (e) { return false; } }
+  function telOn() { try { return localStorage.getItem("smd_fundx_telemetry") === "1"; } catch (e) { return false; } }
   function applySettings() {
     var Ve = V(); if (!Ve) return;
     var s = SENS[loadSens()] || SENS.med; Ve.CFG.captureReadiness = s.r; Ve.CFG.readySustainFrames = s.f;
@@ -514,6 +515,7 @@
         '<button class="fundx-set-row' + (clinicalOn() ? ' on' : '') + '" data-fx="setclinical"><span class="fundx-set-rl"><b>Clinical assessment</b><span>Rule-based, advisory severity / referral / follow-up from findings. Never a diagnosis.</span></span>' + ric(clinicalOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Data</span></div>' +
         '<button class="fundx-set-row" data-fx="clearall"><span class="fundx-set-rl"><b>Delete all scans</b><span>Removes every stored image + record on this device</span></span>' + ric("delete_forever") + '</button>' +
+        '<button class="fundx-set-row' + (telOn() ? ' on' : '') + '" data-fx="settel"><span class="fundx-set-rl"><b>Acquisition telemetry (anonymous)</b><span>Local, no PHI — guidance steps, quality progression, capture time + outcome. For validation. Off by default.</span></span>' + ric(telOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<p class="fundx-disc">' + disclaimerText() + '</p>' +
       '</main>';
   }
@@ -582,10 +584,16 @@
     map[V0.ASSESSING_QUALITY] = "Checking image quality"; map[V0.READY] = "Hold — capturing";
     map[V0.CAPTURING] = "Capturing"; return map[s] || s;
   }
+  function tel(fn) { try { var T = window.SMD_FUNDX_TELEMETRY; if (T && T[fn]) T[fn].apply(T, Array.prototype.slice.call(arguments, 1)); } catch (e) {} }
   function startCamera() {
     var Vd = DET(); if (!Vd) { toast("FundX perception layer not loaded."); return; }
-    screen = "camera"; capturing = false; lastHapticState = "";
+    screen = "camera"; capturing = false; lastHapticState = ""; lastCoachArrow = null;
     session = session || newSession("right");
+    if (session.mode !== "training") {
+      var plat = "web"; try { var C = window.Capacitor; plat = C ? (typeof C.getPlatform === "function" ? C.getPlatform() : (C.platform || "web")) : "web"; } catch (e) {}
+      var prov = "mock"; try { prov = (window.SMD_FUNDX_PROVIDERS && SMD_FUNDX_PROVIDERS.getActive && SMD_FUNDX_PROVIDERS.getActive().id) || "mock"; } catch (e) {}
+      tel("startSession", { device: plat, appVersion: (window.SMD_APP_VERSION || "fundx-mvp"), provider: prov, sensitivity: loadSens(), eye: session.eye });
+    }
     render();
     var video = document.getElementById("fundxVideo");
     sm = V().createStateMachine();
@@ -611,6 +619,7 @@
     session.readinessTrace.push(Math.round((step.readiness.overall || 0) * 100));
     if (session.readinessTrace.length > 400) session.readinessTrace.shift();
     updateCameraUI(step, fa);
+    if (session.mode !== "training") tel("frame", step, fa.ts);
     if (session.mode === "training") { handleTraining(step); return; }
     if (step.shouldCapture) triggerCapture();
   }
@@ -637,6 +646,7 @@
   }
   function updateCameraUI(step, fa) {
     var cue = V().Coach.cueFor(step.state, fa, step.readiness);
+    if (session.mode !== "training" && cue.arrow && cue.arrow !== lastCoachArrow) { lastCoachArrow = cue.arrow; tel("correction"); }
     var stEl = document.getElementById("fundxState"); if (stEl) stEl.textContent = humanState(step.state);
     var coach = document.getElementById("fundxCoach"); if (coach) { coach.textContent = cue.text; coach.className = "fundx-coach t-" + cue.tone; }
     // readiness ring (circumference 2πr, r=54 → ~339.29)
@@ -700,7 +710,8 @@
     screen = "processing"; render();
     var tx = document.getElementById("fundxProcTx");
     result = FUNDX._buildResult(burst, ctx, session.eye, session);
-    if (!result) { toast("No usable frames — try again."); screen = "camera"; return startCamera(); }
+    if (!result) { tel("capture", { success: false, durationMs: nowMs() - session.startTs, bursts: session.burstCount }); toast("No usable frames — try again."); screen = "camera"; return startCamera(); }
+    tel("capture", { success: true, quality: result.quality.overall, durationMs: nowMs() - session.startTs, bursts: session.burstCount });
     // 1) real image enhancement → the persisted "enhanced image" (distinct from original)
     if (tx) tx.textContent = "Enhancing image…";
     enhanceDataUrl(result.images.original).then(function (enh) { if (enh) result.images.processed = enh; })
@@ -777,6 +788,7 @@
     if (!chk.ok) { toast("Could not save scan (" + chk.errors[0] + ")."); return; }
     st.saveScan(rec).then(function () {
       try { st.operator.record({ quality: result.quality.overall, captures: session.captures, retries: session.retries }); } catch (e) {}
+      tel("endSession", "saved");
       haptic("success"); toast("Scan saved to patient."); result = null; screen = "home"; render();
     }).catch(function () { toast("Could not save scan."); });
   }
@@ -811,11 +823,12 @@
       case "camclose": stopCamera(); haptic("light"); return show("home");
       case "confirmlens": if (sm && sm.confirmLensPositioned) sm.confirmLensPositioned(); haptic("selection"); { var fbb = document.getElementById("fundxFallback"); if (fbb) fbb.style.display = "none"; } toast("Proceeding — capture still needs a clear retinal image."); return;
       case "setlensconfirm": { try { localStorage.setItem("smd_fundx_lens_confirm", lensConfirmOn() ? "0" : "1"); } catch (e) {} applySettings(); haptic("selection"); return render(); }
+      case "settel": { try { localStorage.setItem("smd_fundx_telemetry", telOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
       case "voice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); { var vb = document.getElementById("fundxVoiceBtn"); if (vb) { vb.classList.toggle("on", VOICE.enabled()); vb.innerHTML = ric(VOICE.enabled() ? "volume_up" : "volume_off"); } if (VOICE.enabled()) VOICE.speak("Voice coaching on"); } return;
-      case "retake": haptic("light"); result = null; session.retries++; return startCamera();
+      case "retake": haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "retake"); result = null; session.retries++; return startCamera();
       case "toresult": haptic("medium"); return show("result");
       case "review": return show("review");
-      case "discard": haptic("light"); result = null; return show("home");
+      case "discard": haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "discarded"); result = null; return show("home");
       case "save": return saveScan();
       case "training": haptic("light"); session = null; return show("training");
       case "level": haptic("medium"); return startTraining(parseInt(b.getAttribute("data-level"), 10) || 1);
@@ -849,7 +862,7 @@
       }
       render(); rootEl.classList.add("on"); document.body.style.overflow = "hidden"; haptic("tap");
     },
-    close: function () { stopCamera(); if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; haptic("tap"); },
+    close: function () { stopCamera(); tel("endSession", "abandoned"); if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; haptic("tap"); },
     isOpen: function () { return !!(rootEl && rootEl.classList.contains("on")); },
     enabled: function () { return true; },
     _screen: function () { return screen; },
