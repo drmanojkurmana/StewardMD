@@ -277,7 +277,7 @@
   // ---- spotlight + coach-mark engine -------------------------------------------------------
   // A "run" is driven by a controller: { id, icon, steps, scope(), resolve(step), enter(step,cb),
   //   onDomTap(el,step) -> advanced?, finish(completed) }. Shared card/spotlight for every tour.
-  var _spot = null, _card = null, _veil = null, _block = null, _run = null, _step = 0, _onKey = null, _tapListener = null, _tapTimer = null, _dir = 1;
+  var _spot = null, _card = null, _veil = null, _block = null, _run = null, _step = 0, _onKey = null, _tapListener = null, _tapTimer = null, _dir = 1, _syncTimer = null, _settled = false;
 
   // Robust tap advancement: rather than intercept the click (racy against the app's own handler,
   // which may open ICU / re-render and hide the target on the same event), poll for the OUTCOME the
@@ -317,14 +317,19 @@
     return { top: top, left: left, bottom: top + h, right: left + w, width: w, height: h };
   }
   function positionCard(spot) {
-    var cw = _card.offsetWidth || 320, ch = _card.offsetHeight || 200, vw = window.innerWidth, vh = window.innerHeight, m = 12, gap = 16, top, left;
+    var cw = _card.offsetWidth || 320, ch = _card.offsetHeight || 200, vw = window.innerWidth, vh = window.innerHeight, m = 12, gap = 14, top, left;
     if (!spot) { left = (vw - cw) / 2; top = Math.max(m, (vh - ch) / 2); }
     else {
       left = Math.min(Math.max(m, spot.left + spot.width / 2 - cw / 2), vw - cw - m);
       var below = spot.bottom + gap, above = spot.top - gap - ch;
-      if (below + ch + m <= vh) top = below;
-      else if (above >= m) top = above;
-      else { top = Math.max(m, Math.min((vh - ch) / 2, vh - ch - m)); }   // centre fallback
+      if (below + ch <= vh - m) top = below;          // fits below (use the full height down to the margin)
+      else if (above >= m) top = above;               // else above
+      else {
+        // Too tall to clear the target on either side: pin to whichever side has more room and flush
+        // it to that edge, so the card sits clear of the spotlight instead of centred on top of it —
+        // the highlighted section stays visible (the earlier centre fallback hid it).
+        top = (vh - spot.bottom) >= spot.top ? (vh - ch - m) : m;
+      }
     }
     _card.style.left = left + "px"; _card.style.top = Math.max(m, top) + "px";
   }
@@ -356,12 +361,17 @@
     _block.style.display = tap ? "none" : "block";
     var spot = positionSpot(tgt); positionCard(spot);
     requestAnimationFrame(function () { positionCard(positionSpot(_run.resolve(s))); });
-    if (!tap) setTimeout(function () { try { var b = _card.querySelector('[data-t="next"]'); if (b) b.focus(); } catch (e) {} }, 40);
+    // preventScroll: focusing the (fixed) card button must NOT scroll the home scroller, or the
+    // target slides out from under the spotlight after we've positioned it.
+    if (!tap) setTimeout(function () { try { var b = _card.querySelector('[data-t="next"]'); if (b) b.focus({ preventScroll: true }); } catch (e) {} }, 40);
     if (tap) startTapWatch(s); else clearTapWatch();
+    _settled = true;
     emit("step_view", { tour: _run.id, step: _step });
   }
 
-  function reflow() { if (!_run) return; var s = curStep(); if (!s) return; positionCard(positionSpot(_run.resolve(s))); }
+  // Keep the spotlight glued to its target. The scroll listener misses some layout shifts (the home
+  // re-renders / resets its scroller after we position), so re-sync continuously while a step is up.
+  function reflow() { if (!_run || !_settled) return; var s = curStep(); if (!s) return; positionCard(positionSpot(_run.resolve(s))); }
 
   // Move to a specific step index, letting the controller prepare the screen first.
   function goStep(i) {
@@ -370,6 +380,7 @@
     if (i < 0) i = 0;
     _step = i;
     var s = _run.steps[i];
+    _settled = false;   // suppress the re-sync loop until this step has painted
     showChromeForRun();
     // hide card until the target screen is ready to avoid a flash on the wrong screen
     _run.enter(s, function () {
@@ -406,11 +417,15 @@
       try { _run.onDomTap(e.target, s); } catch (x) {}   // demo taps; non-target clicks pass through
     };
     document.addEventListener("click", _tapListener, true);
+    // continuous re-sync: keeps the spotlight on its target even when the home/ICU re-renders or
+    // scrolls after we've positioned (the scroll event alone misses those). Cheap; cleared on teardown.
+    clearInterval(_syncTimer); _syncTimer = setInterval(reflow, 120);
     emit("started", { tour: _run.id });
     goStep(_step);
   }
   function teardownChrome() {
     clearTapWatch();
+    clearInterval(_syncTimer); _syncTimer = null; _settled = false;
     if (_spot) _spot.style.display = "none";
     if (_veil) _veil.style.display = "none";
     if (_block) _block.style.display = "none";
