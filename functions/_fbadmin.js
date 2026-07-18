@@ -37,7 +37,7 @@ export async function serviceAccountToken(env, scope) {
   return data.access_token;
 }
 
-// Merge-set custom claims for a user (preserves nothing — pass the full claim object).
+// Set custom claims for a user (REPLACES the whole claim object — pass everything you want kept).
 export async function setUserClaims(env, uid, claimsObj) {
   const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
   const saToken = await serviceAccountToken(env);
@@ -47,4 +47,30 @@ export async function setUserClaims(env, uid, claimsObj) {
     body: JSON.stringify({ localId: uid, customAttributes: JSON.stringify(claimsObj) }),
   });
   if (!res.ok) throw new Error("set_claim_failed: " + (await res.text()));
+}
+
+// Read a user's current custom claims ({} if none / on error).
+export async function getUserClaims(env, uid) {
+  const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
+  const saToken = await serviceAccountToken(env);
+  const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:lookup`, {
+    method: "POST",
+    headers: { "Authorization": `Bearer ${saToken}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ localId: [uid] }),
+  });
+  if (!res.ok) return {};
+  const d = await res.json();
+  const u = (d.users || [])[0];
+  if (!u || !u.customAttributes) return {};
+  try { return JSON.parse(u.customAttributes) || {}; } catch (e) { return {}; }
+}
+
+// CLOBBER-SAFE: merge a patch into the user's existing claims (so granting `pro` never wipes
+// `verified`, and vice-versa). Set a patch key to null to delete it.
+export async function mergeUserClaims(env, uid, patch) {
+  const cur = await getUserClaims(env, uid);
+  const next = Object.assign({}, cur, patch);
+  Object.keys(next).forEach((k) => { if (next[k] == null) delete next[k]; });
+  await setUserClaims(env, uid, next);
+  return next;
 }
