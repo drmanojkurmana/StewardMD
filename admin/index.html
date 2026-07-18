@@ -214,6 +214,17 @@
           </div>
           <div class="msg" id="proMsg"></div>
         </div>
+        <div class="card">
+          <b>Send a test email</b>
+          <div class="hint" style="margin:2px 0 8px">Sends the real onboarding template to any address so you can preview the copy. Owner-only.</div>
+          <label for="etEmail">Email</label>
+          <input id="etEmail" placeholder="you@example.com" autocapitalize="off" spellcheck="false">
+          <div class="qa" style="margin-top:12px">
+            <button class="ghost" data-et="welcome">Send Welcome</button>
+            <button class="ghost" data-et="upsell">Send Pro upsell</button>
+          </div>
+          <div class="msg" id="etMsg"></div>
+        </div>
       </div>
 
       <!-- PUSH -->
@@ -380,6 +391,18 @@
   }
   document.querySelectorAll("[data-pro]").forEach(function(b){ b.onclick=function(){ proAct(b.getAttribute("data-pro")); }; });
 
+  // ---- Send a test onboarding email ----
+  function etSend(kind){
+    var v=$("etEmail").value.trim(); if(!v){say("etMsg","err","Enter an email.");return;}
+    say("etMsg","","Sending…");
+    api("/api/email-test",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({kind:kind,email:v})}).then(function(x){
+      var d=x.d||{};
+      if(x.s!==200||!d.ok){ say("etMsg","err", x.s===401?"Not an owner.":("Send failed"+(d.error?": "+d.error:" — check RESEND_API_KEY / sender domain"))); return; }
+      say("etMsg","ok","✅ "+(d.kind==="upsell"?"Pro upsell":"Welcome")+" email sent to "+d.email);
+    }).catch(function(){ say("etMsg","err","Sign in first."); });
+  }
+  document.querySelectorAll("[data-et]").forEach(function(b){ b.onclick=function(){ etSend(b.getAttribute("data-et")); }; });
+
   // ---- Lab-watch ----
   $("wRun").onclick=function(){ say("wMsg","","Polling GHIS…"); $("wRun").disabled=true;
     api("/api/watch/run",{method:"POST"}).then(function(x){ $("wRun").disabled=false; if(x.s===200&&x.d.ok){ say("wMsg","ok","✅ Poll complete."); var d=x.d; $("wStats").innerHTML='<div class="stat">'+d.users+'<span>watched users</span></div><div class="stat">'+d.notifiedUsers+'<span>notified</span></div><div class="stat">'+d.pushed+'<span>new labs</span></div><div class="stat">'+d.delivered+'<span>pushes sent</span></div>'+(d.undeliveredAccounts?'<div class="stat" style="color:var(--amb)">'+d.undeliveredAccounts+'<span>no device</span></div>':''); } else say("wMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); }).catch(function(){$("wRun").disabled=false;say("wMsg","err","Sign in first.");});
@@ -415,7 +438,7 @@
   $("aiReload").onclick=aiLoad;
 
   // ---- refresh a pane's data when shown / on sign-in ----
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} } }
 
   // ---- AI usage ----
   function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mut)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }
