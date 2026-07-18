@@ -1409,6 +1409,7 @@
         '<div class="hv-acct-name">' + smdEsc(nm) + '</div>' +
         (em ? '<div class="hv-acct-email">' + smdEsc(em) + '</div>' : '') +
         '<div class="hv-acct-badge">' + dot + acctProviderLabel(a, true) + '</div>' +
+        '<button class="hv-acct-btn" data-acct="pro" type="button">✨ StewardMD Pro</button>' +
         '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button>' +
         '<button data-acct="delete" type="button" ' + dangerBtn + '>Delete account &amp; data</button></div>';
     } else {
@@ -1424,6 +1425,8 @@
     var s = sheetEl();
     var so = s.querySelector('[data-acct="signout"]');
     if (so) so.addEventListener("click", function () { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(openAccount, 150); });
+    var pro = s.querySelector('[data-acct="pro"]');
+    if (pro) pro.addEventListener("click", function () { try { if (window.SMD_PRO && SMD_PRO.openPaywall) SMD_PRO.openPaywall("account"); } catch (e) {} });
     var si = s.querySelector('[data-acct="signin"]');
     if (si) si.addEventListener("click", function () { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} setTimeout(openAccount, 900); });
     var del = s.querySelector('[data-acct="delete"], [data-acct="erase"]');
