@@ -13,6 +13,13 @@ new Function("window", src("fundx-detect.js"))(win);
 const V = win.SMD_FUNDX_VISION, D = win.SMD_FUNDX_DETECT;
 ok("detect: exposed", !!D && !!D.Heuristic && !!D.makeHub && !!D.makePose);
 ok("detect: simulated retina provider removed", D.makeSimRetina === undefined);
+// auto-flash (torch) guards: safe no-op before a camera stream exists (never throws)
+{
+  const camt = D.makeCamera();
+  ok("cam: torch API present", typeof camt.setTorch === "function" && typeof camt.torchSupported === "function");
+  ok("cam: torchSupported false without stream", camt.torchSupported() === false);
+  ok("cam: setTorch no-op without stream", camt.setTorch(true) === false && camt.torchOn() === false);
+}
 
 // ---- synthetic image builders ------------------------------------------
 function fill(w, h, fn) {

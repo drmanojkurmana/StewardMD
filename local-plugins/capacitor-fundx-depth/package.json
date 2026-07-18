@@ -1,0 +1,17 @@
+{
+  "name": "@stewardmd/capacitor-fundx-depth",
+  "version": "1.0.0",
+  "description": "FundX AI hybrid depth fusion (iOS) — ARKit / LiDAR SceneDepth + camera pose + CoreMotion, streamed to the web fusion engine. Device-gated; falls back to the monocular MediaPipe + CV pipeline when depth is unavailable. Android depth is an app-level ARCore plugin.",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "package.json"
+  ],
+  "author": "StewardMD",
+  "license": "MIT"
+}

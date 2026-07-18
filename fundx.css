@@ -11,6 +11,13 @@
   color: var(--rds-ink, var(--ink, #14202b));
   font-family: var(--rds-font, var(--sans, system-ui));
   -webkit-font-smoothing: antialiased;
+  /* Safe-area insets: prefer the native-injected --sai-* (Android edge-to-edge, set by
+     MainActivity), fall back to env() (iOS/web). Used by the chrome so nothing sits under the
+     status/gesture bars while the camera stays full-bleed. */
+  --fx-sat: var(--sai-top, env(safe-area-inset-top, 0px));
+  --fx-sar: var(--sai-right, env(safe-area-inset-right, 0px));
+  --fx-sab: var(--sai-bottom, env(safe-area-inset-bottom, 0px));
+  --fx-sal: var(--sai-left, env(safe-area-inset-left, 0px));
 }
 #fundxRoot.on { display: flex; }
 #fundxRoot .rds-icon { font-size: 22px; line-height: 1; }
@@ -18,7 +25,7 @@
 /* header */
 #fundxRoot .fundx-head {
   display: flex; align-items: center; gap: 10px;
-  padding: 10px 12px; background: var(--rds-surface, var(--panel, #fff));
+  padding: calc(12px + var(--fx-sat)) calc(14px + var(--fx-sar)) 12px calc(14px + var(--fx-sal)); background: var(--rds-surface, var(--panel, #fff));
   border-bottom: 1px solid var(--rds-line, var(--line, #d7dee3));
 }
 #fundxRoot .fundx-close {
@@ -33,7 +40,7 @@
 #fundxRoot .fundx-head-sp { flex: 1; }
 
 /* scroll body */
-#fundxRoot .fundx-scroll { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px 16px 40px; }
+#fundxRoot .fundx-scroll { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 18px calc(16px + var(--fx-sar)) calc(40px + var(--fx-sab)) calc(16px + var(--fx-sal)); }
 
 /* primary CTA */
 #fundxRoot .fundx-cta {
@@ -113,7 +120,7 @@
 #fundxRoot .fundx-cam { position: absolute; inset: 0; overflow: hidden; background: #000; }
 #fundxRoot .fundx-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
 #fundxRoot .fundx-cam-scrim { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 44%, transparent 34%, rgba(0,0,0,.28) 70%); }
-#fundxRoot .fundx-cam-top { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 10px; padding: 10px 12px; z-index: 6; }
+#fundxRoot .fundx-cam-top { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 10px; padding: calc(10px + var(--fx-sat)) calc(12px + var(--fx-sar)) 10px calc(12px + var(--fx-sal)); z-index: 6; }
 #fundxRoot .fundx-cam-x {
   display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex: 0 0 auto;
   border: none; border-radius: 999px; background: rgba(0,0,0,.42); color: #fff; cursor: pointer; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
@@ -140,7 +147,7 @@
 @keyframes fundxPulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
 
 /* bottom coach + gate chips */
-#fundxRoot .fundx-cam-bottom { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 14px 22px; z-index: 6; background: linear-gradient(0deg, rgba(0,0,0,.6), transparent); }
+#fundxRoot .fundx-cam-bottom { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px calc(14px + var(--fx-sar)) calc(22px + var(--fx-sab)) calc(14px + var(--fx-sal)); z-index: 6; background: linear-gradient(0deg, rgba(0,0,0,.6), transparent); }
 #fundxRoot .fundx-coach { text-align: center; color: #fff; font-weight: 700; font-size: 16px; min-height: 22px; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
 #fundxRoot .fundx-coach.t-good { color: #6ee7b7; }
 #fundxRoot .fundx-coach.t-warn { color: #fcd34d; }
@@ -242,14 +249,28 @@
 
 /* ============ M10 — Settings + Export ============ */
 #fundxRoot .fundx-set-list { display: flex; flex-direction: column; gap: 8px; }
-#fundxRoot .fundx-set-row { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer; padding: 13px 14px; border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px); background: var(--rds-surface, var(--panel, #fff)); color: var(--rds-ink, var(--ink)); }
-#fundxRoot .fundx-set-row.on { border-color: var(--rds-primary, var(--teal)); }
+#fundxRoot .fundx-set-row { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; cursor: pointer; padding: 15px 16px; border: 1px solid var(--rds-line, var(--line)); border-radius: 14px; background: var(--rds-surface, var(--panel, #fff)); color: var(--rds-ink, var(--ink)); transition: border-color .15s ease, background .15s ease; }
+#fundxRoot .fundx-set-row:active { background: var(--rds-surface-2, #eef3f5); }
+#fundxRoot .fundx-set-row.on { border-color: var(--rds-primary, var(--teal)); background: var(--rds-primary-soft, rgba(14,110,99,.055)); }
 #fundxRoot .fundx-set-row.off { opacity: .55; cursor: default; }
-#fundxRoot .fundx-set-row .rds-icon { flex: 0 0 auto; color: var(--rds-primary, var(--teal)); }
+#fundxRoot .fundx-set-row .rds-icon { flex: 0 0 auto; font-size: 26px; color: var(--rds-primary, var(--teal)); }
 #fundxRoot .fundx-set-row.off .rds-icon { color: var(--rds-muted, var(--slate-soft)); }
+#fundxRoot .fundx-set-row.danger .rds-icon, #fundxRoot .fundx-set-row.danger .fundx-set-rl b { color: var(--sev-high-fg, var(--rds-danger, #c0392b)); }
 #fundxRoot .fundx-set-rl { flex: 1; min-width: 0; }
-#fundxRoot .fundx-set-rl b { display: block; font-weight: 700; font-size: 14px; }
-#fundxRoot .fundx-set-rl span { display: block; font-weight: 500; font-size: 12px; color: var(--rds-muted, var(--slate-soft)); margin-top: 1px; word-break: break-word; }
+#fundxRoot .fundx-set-rl b { display: block; font-weight: 600; font-size: 15px; letter-spacing: -.01em; }
+#fundxRoot .fundx-set-rl span { display: block; font-weight: 500; font-size: 12.5px; line-height: 1.45; color: var(--rds-muted, var(--slate-soft)); margin-top: 3px; word-break: break-word; }
+/* section labels — quiet uppercase eyebrows that group the controls */
+#fundxRoot .rds-section-header { margin: 28px 2px 11px; }
+#fundxRoot .fundx-scroll > .rds-section-header:first-of-type { margin-top: 2px; }
+#fundxRoot .rds-section-title { font-weight: 700; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--rds-muted, var(--slate-soft)); }
+/* Developer · Sensors — live status readout */
+#fundxRoot .fundx-devstat { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border: 1px solid var(--rds-line, var(--line)); border-radius: 12px; background: var(--rds-surface, var(--panel, #fff)); }
+#fundxRoot .fundx-kv { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-size: 12.5px; }
+#fundxRoot .fundx-kv > span { color: var(--rds-muted, var(--slate-soft)); flex: 0 0 auto; }
+#fundxRoot .fundx-kv b { font-weight: 600; font-family: var(--rds-mono, monospace); font-size: 11px; text-align: right; word-break: break-all; }
+#fundxRoot .fundx-devlive { margin-top: 4px; padding-top: 8px; border-top: 1px dashed var(--rds-line, var(--line)); font-size: 11.5px; line-height: 1.4; color: var(--rds-muted, var(--slate-soft)); font-family: var(--rds-mono, monospace); }
+#fundxRoot .fundx-kv b.fx-ok { color: var(--sev-stable-fg, #1C7A4A); }
+#fundxRoot .fundx-kv b.fx-off { color: var(--rds-muted, var(--slate-soft)); }
 #fundxRoot .fundx-chips2 { display: flex; gap: 8px; }
 #fundxRoot .fundx-chip2 { flex: 1; cursor: pointer; padding: 11px; border: 1px solid var(--rds-line, var(--line)); border-radius: var(--rds-r-ctl, 12px); background: var(--rds-surface, var(--panel, #fff)); color: var(--rds-ink, var(--ink)); font-weight: 700; font-size: 13px; }
 #fundxRoot .fundx-chip2.on { border-color: var(--rds-primary, var(--teal)); background: var(--rds-primary-soft, var(--teal-soft)); color: var(--rds-primary, var(--teal)); }
@@ -278,7 +299,7 @@
 #fundxRoot .fundx-fallback .rds-icon { font-size: 17px; }
 
 /* ============ developer-mode debug overlay (field testing, flag-gated) ============ */
-#fundxRoot .fundx-debug-wrap { position: absolute; top: 58px; left: 8px; z-index: 9; display: flex; flex-direction: column; gap: 6px; pointer-events: auto; }
+#fundxRoot .fundx-debug-wrap { position: absolute; top: calc(66px + var(--fx-sat)); left: calc(8px + var(--fx-sal)); z-index: 9; display: flex; flex-direction: column; gap: 6px; pointer-events: auto; }
 #fundxRoot .fundx-debug { width: 172px; padding: 8px 9px; border-radius: 10px; background: rgba(0,0,0,.62); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); font: 600 10.5px/1.35 var(--rds-mono, ui-monospace, monospace); color: #cbd5e1; }
 #fundxRoot .fdbg-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 1px 0; }
 #fundxRoot .fdbg-row span { color: #94a3b8; }

@@ -37,6 +37,9 @@
             android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
         </provider>
+        <!-- FundX hybrid depth fusion (Phase 2): ARCore is OPTIONAL — the app runs without it
+             (monocular fallback) and only uses it for depth on supported devices. -->
+        <meta-data android:name="com.google.ar.core" android:value="optional" />
     </application>
 
     <!-- Permissions -->

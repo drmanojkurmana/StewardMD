@@ -220,14 +220,21 @@
     var V = window.SMD_FUNDX_VISION;
     var mp = opts.mediapipe || makeMediaPipe();
     var pose = opts.pose || makePose();
+    // Sensor-fusion (Phase 1: IMU). Active only when SMD_FUNDX_SENSORS is present AND the flag
+    // is on (or an explicit manager is injected). Absent -> the merged partial is untouched ->
+    // the engine behaves EXACTLY as before. Native depth (Phase 2) enters via this same manager.
+    var S = window.SMD_FUNDX_SENSORS;
+    var sensors = opts.sensors ||
+      ((S && S.flagOn && (S.flagOn() || (S.depthFlagOn && S.depthFlagOn())))
+        ? S.makeManager(opts.sensorOpts || {}) : null);
     // Optional real disc/macula/lesion provider (findings-level enrichment; NOT a capture
     // gate). Left null by default — the acquisition flow is driven purely by observable
     // image-quality cues (fundus circle + vessels + focus/exposure/glare), no simulation.
     var retinaProvider = null;
     return {
-      mediapipe: mp, pose: pose,
+      mediapipe: mp, pose: pose, sensors: sensors,
       setRetinaSignalProvider: function (fn) { retinaProvider = (typeof fn === "function") ? fn : null; },
-      resetSession: function () { if (mp && mp.reset) mp.reset(); if (pose && pose.reset) pose.reset(); },
+      resetSession: function () { if (mp && mp.reset) mp.reset(); if (pose && pose.reset) pose.reset(); if (sensors && sensors.reset) sensors.reset(); },
       // parts: { imageData, mpPartial?, posePartial?, ts }. Builds a full FrameAnalysis from
       // observable signals: image heuristics + circular-fundus + vessels + MediaPipe geometry
       // + phone roll. No lens detection anywhere.
@@ -239,6 +246,9 @@
         var mpPart = parts.mpPartial || {};
         var posePart = parts.posePartial || {};
         var merged = Object.assign({ ts: parts.ts != null ? parts.ts : null, vesselScore: vess }, h, fund, mpPart, posePart);
+        // Fuse device-motion sensor signals over the monocular partial (motion + confidence).
+        // read() treats merged.motion as one source, so with no sensor data motion is unchanged.
+        if (sensors && sensors.read) { try { Object.assign(merged, sensors.read(merged) || {}); } catch (e) {} }
         if (retinaProvider) { try { Object.assign(merged, retinaProvider(merged) || {}); } catch (e) {} }
         return V ? V.makeFrameAnalysis(merged) : merged;
       }
@@ -252,7 +262,19 @@
   function makeCamera() {
     var stream = null, videoEl = null, canvas = null, cctx = null, raf = 0, running = false;
     var hub = null, onFrame = null, lastAnalyze = 0, opts = {};
+    var nativeSub = null, nativeImg = null, nativePending = false;   // native-depth (approach A) source
     function now() { return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now(); }
+    // Convert a native FundxDepth frame's metric depth + pose into engine FrameAnalysis fields.
+    function depthFieldsFrom(fr) {
+      var out = {}; if (!fr) return out;
+      if (fr.roll != null) { out.roll = +fr.roll; out.rollState = Math.abs(fr.roll) <= 12 ? "level" : (fr.roll > 0 ? "cw" : "ccw"); }
+      if (fr.distanceMeters != null) {
+        var m = +fr.distanceMeters; out.distanceMm = Math.round(m * 1000);
+        out.distanceState = m < 0.2 ? "near" : (m > 0.55 ? "far" : "ok");
+        out.distanceConfidence = fr.distanceConfidence != null ? +fr.distanceConfidence : 0.8;
+      }
+      return out;
+    }
     function grab(scale) {
       if (!videoEl || !videoEl.videoWidth) return null;
       var vw = videoEl.videoWidth, vh = videoEl.videoHeight;
@@ -279,8 +301,28 @@
       }
       raf = requestAnimationFrame(loop);
     }
+    // ---- Auto-flash (torch) ----------------------------------------------
+    // Illuminate the fundus with the rear-camera torch during capture, via the getUserMedia
+    // torch constraint (Android/Chromium WebView). Graceful no-op where unsupported (e.g. iOS
+    // WKWebView exposes no torch constraint) — never throws.
+    var torchOn = false;
+    function torchTrack() { try { return stream && stream.getVideoTracks && stream.getVideoTracks()[0]; } catch (e) { return null; } }
+    function torchSupported() { try { var t = torchTrack(); var c = t && t.getCapabilities && t.getCapabilities(); return !!(c && c.torch); } catch (e) { return false; } }
+    function setTorch(on) {
+      try {
+        var t = torchTrack();
+        if (!t || !t.applyConstraints) return false;
+        var c = t.getCapabilities && t.getCapabilities();
+        if (!c || !c.torch) return false;
+        t.applyConstraints({ advanced: [{ torch: !!on }] });
+        torchOn = !!on; return true;
+      } catch (e) { return false; }
+    }
     return {
       isRunning: function () { return running; },
+      setTorch: function (on) { return setTorch(on); },
+      torchOn: function () { return torchOn; },
+      torchSupported: function () { return torchSupported(); },
       start: function (video, cb, o) {
         opts = o || {}; onFrame = cb; videoEl = video;
         hub = opts.hub || makeHub(opts);
@@ -293,10 +335,55 @@
           .then(function () {
             running = true; lastAnalyze = 0;
             if (hub.pose && hub.pose.attach) hub.pose.attach();   // phone-roll for rotate coaching
+            if (hub.sensors && hub.sensors.init) { try { hub.sensors.init(); } catch (e) {} }   // probe depth caps
+            if (hub.sensors && hub.sensors.start) hub.sensors.start();   // IMU (P1) + depth (P2) fusion
             if (hub.resetSession) hub.resetSession();
             if (hub.mediapipe && hub.mediapipe.init) hub.mediapipe.init();   // lazy, non-blocking
+            if (opts.flash !== false) { try { setTorch(true); } catch (e) {} }   // auto-flash to illuminate the fundus
             raf = requestAnimationFrame(loop);
             return { hub: hub };
+          });
+      },
+      // Approach A: when depth mode is active the native session (ARCore/ARKit) owns the camera,
+      // so we drive the SAME engine from native frames (camera image + metric depth + pose via
+      // FundxDepth) instead of getUserMedia. The existing heuristics + MediaPipe run on the native
+      // image; depth/pose feed the fusion. Rejects (-> caller falls back to start()) if the native
+      // plugin/session is unavailable or the camera is busy.
+      startNative: function (video, cb, o) {
+        opts = o || {}; onFrame = cb; videoEl = video;
+        hub = opts.hub || makeHub(opts);
+        if (!canvas) { canvas = document.createElement("canvas"); cctx = canvas.getContext("2d", { willReadFrequently: true }); }
+        var P; try { P = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth; } catch (e) { P = null; }
+        if (!P || !P.start) return Promise.reject(new Error("native depth unavailable"));
+        if (!nativeImg) nativeImg = new Image();
+        function onDepthFrame(fr) {
+          if (!running || !fr || !fr.cameraImage || nativePending) return;
+          nativePending = true;
+          nativeImg.onload = function () {
+            nativePending = false;
+            if (!running) return;
+            try {
+              var sc = opts.analyzeScale || 0.35;
+              canvas.width = Math.max(2, Math.round(nativeImg.width * sc));
+              canvas.height = Math.max(2, Math.round(nativeImg.height * sc));
+              cctx.drawImage(nativeImg, 0, 0, canvas.width, canvas.height);
+              var imgData = cctx.getImageData(0, 0, canvas.width, canvas.height);
+              var mpPart = (hub.mediapipe && hub.mediapipe.available()) ? hub.mediapipe.analyze(canvas, now()) : {};
+              var fa = hub.build({ imageData: imgData, mpPartial: mpPart, posePartial: depthFieldsFrom(fr), ts: now() });
+              if (onFrame) onFrame(fa);
+              if (opts.previewCtx && opts.previewCanvas) { opts.previewCanvas.width = nativeImg.width; opts.previewCanvas.height = nativeImg.height; opts.previewCtx.drawImage(nativeImg, 0, 0); }
+            } catch (e) {}
+          };
+          nativeImg.onerror = function () { nativePending = false; };
+          nativeImg.src = fr.cameraImage;
+        }
+        return Promise.resolve()
+          .then(function () { if (P.addListener) nativeSub = P.addListener("fundxDepthFrame", onDepthFrame); return P.start({ streamImage: true }); })
+          .then(function (res) {
+            if (res && res.started === false) { try { if (nativeSub) Promise.resolve(nativeSub).then(function (h) { if (h && h.remove) h.remove(); }); } catch (e) {} nativeSub = null; throw new Error("native session: " + (res && res.reason)); }
+            running = true;
+            if (hub.sensors && hub.sensors.start) hub.sensors.start();     // IMU still fuses alongside
+            return { hub: hub, native: res };
           });
       },
       // Capture a best-frame burst: grab N full-res frames, score, return dataURLs + metrics.
@@ -316,9 +403,13 @@
       },
       stop: function () {
         running = false; if (raf) cancelAnimationFrame(raf); raf = 0;
+        try { setTorch(false); } catch (e) {}   // turn the flash off before releasing the camera
         try { if (stream) stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
         try { if (videoEl) videoEl.srcObject = null; } catch (e) {}
         try { if (hub && hub.pose && hub.pose.detach) hub.pose.detach(); } catch (e) {}
+        try { if (hub && hub.sensors && hub.sensors.stop) hub.sensors.stop(); } catch (e) {}
+        try { var P = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth; if (P && P.stop) P.stop(); } catch (e) {}
+        try { if (nativeSub) Promise.resolve(nativeSub).then(function (h) { if (h && h.remove) h.remove(); }); } catch (e) {} nativeSub = null;
         stream = null;
       }
     };

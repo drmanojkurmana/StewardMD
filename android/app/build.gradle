@@ -37,6 +37,10 @@ dependencies {
     implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
     implementation project(':capacitor-android')
     implementation "com.google.firebase:firebase-common:21.0.0"
+    // FundX hybrid depth fusion (Phase 2) — ARCore + Depth API. Optional at runtime
+    // (com.google.ar.core=optional in the manifest); the app falls back to the monocular
+    // pipeline when ARCore / the Depth API is unavailable.
+    implementation "com.google.ar:core:1.45.0"
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"

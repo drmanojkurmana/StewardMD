@@ -275,7 +275,7 @@ body.dark {
 .rds-state--success .rds-state-icon { color: var(--sev-stable-fg); }
 
 /* ---- Utilities: safe-area + keyboard-safe + a11y ---- */
-.rds-safe-top    { padding-top: env(safe-area-inset-top, 0px); }
+.rds-safe-top    { padding-top: var(--sai-top, env(safe-area-inset-top, 0px)); }
 .rds-safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
 .rds-safe-x      { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
 /* Keyboard-safe: keep the last interactive area above the soft keyboard/home-indicator. */
@@ -302,7 +302,7 @@ body.dark {
    container + the existing .v4-foot/.v4-maik footer styles from ui-v3.css.
    ========================================================================== */
 #homeV2.rnav { background: var(--rds-bg); font-family: var(--rds-font); }
-#homeV2.rnav .rnav-head { display: flex; align-items: center; gap: 6px; padding: calc(10px + env(safe-area-inset-top,0px)) 14px 10px; background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
+#homeV2.rnav .rnav-head { display: flex; align-items: center; gap: 6px; padding: calc(10px + var(--sai-top, env(safe-area-inset-top,0px))) 14px 10px; background: var(--rds-surface); border-bottom: 1px solid var(--rds-line); }
 #homeV2.rnav .rnav-brand { display: flex; align-items: center; gap: 8px; font: 800 17px var(--rds-font); color: var(--rds-ink); }
 #homeV2.rnav .rnav-brand img { width: 26px; height: 26px; object-fit: contain; }
 #homeV2.rnav .rnav-brand b { color: var(--rds-primary); }
