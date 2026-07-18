@@ -147,7 +147,7 @@ export async function onRequest(context) {
   // Legal / support pages are PUBLIC even while the app is private — App Store & Play Store review
   // require reachable Privacy, Terms and Support URLs, and public policy links must always resolve.
   // Match both the clean URL (/privacy) and the .html form (/privacy.html), with or without slashes.
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support"];
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }
