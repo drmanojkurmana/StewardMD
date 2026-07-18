@@ -25,7 +25,7 @@
 /* header */
 #fundxRoot .fundx-head {
   display: flex; align-items: center; gap: 10px;
-  padding: 12px calc(14px + var(--fx-sar)) 12px calc(14px + var(--fx-sal)); background: var(--rds-surface, var(--panel, #fff));
+  padding: calc(12px + var(--fx-sat)) calc(14px + var(--fx-sar)) 12px calc(14px + var(--fx-sal)); background: var(--rds-surface, var(--panel, #fff));
   border-bottom: 1px solid var(--rds-line, var(--line, #d7dee3));
 }
 #fundxRoot .fundx-close {
