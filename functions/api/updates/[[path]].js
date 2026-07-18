@@ -86,6 +86,26 @@ async function fetchUrlText(u) {
     return { ok: true, title, text: text.slice(0, 8000) };
   } catch (e) { return { ok: false, error: String((e && e.message) || e) }; }
 }
+// Web-search enrichment (TinyFish) — turns a thin headline or a bare drug/guideline NAME into rich,
+// authoritative context (prescribing info, indications, doses, official links) so the classifier can
+// produce a real pharma block and pick the best source URL. Best-effort: no key / any error → [].
+async function tinyfishSearch(env, query) {
+  const key = env.TINYFISH_API_KEY;
+  if (!key || !query) return [];
+  try {
+    const r = await fetch("https://api.search.tinyfish.ai?query=" + encodeURIComponent(String(query).slice(0, 300)), {
+      headers: { "X-API-Key": key }, redirect: "follow",
+    });
+    if (!r.ok) return [];
+    const j = await r.json();
+    return ((j && j.results) || []).slice(0, 8).map((x) => ({
+      title: String(x.title || "").slice(0, 200),
+      snippet: String(x.snippet || "").slice(0, 400),
+      url: String(x.url || "").slice(0, 500),
+      site: String(x.site_name || "").slice(0, 120),
+    })).filter((x) => x.title || x.snippet);
+  } catch (e) { return []; }
+}
 // Group new/updated pipeline items by workspace and fire one targeted push per
 // workspace (a representative item per group — highest importance first).
 function firePushForItems(context, items) {
@@ -216,11 +236,15 @@ export async function onRequest(context) {
       if (srcUrl) {
         const f = await fetchUrlText(srcUrl);
         if (f.ok) { title = f.title; excerpt = f.text; }
-        else fetchNote = "could-not-fetch-page" + (f.status ? "-" + f.status : "");   // classifier falls back to the note+url
+        else fetchNote = "could-not-fetch-page" + (f.status ? "-" + f.status : "");   // classifier falls back to the note+url+search
       }
-      const res = await classifyDocument(env, { url: srcUrl, title, excerpt, prompt });
-      if (!res.ok) return json({ ok: false, error: res.error || "classify-failed", fetchNote }, 502);
-      return json({ ok: true, draft: res.draft, model: res.model, fetchNote });
+      // Enrich with a web search (unless caller opts out) — lets a bare drug/guideline name work, and
+      // fills real pharma facts a thin headline lacks. Query = note, else page title, else the URL.
+      const wantSearch = body.search !== false;
+      const search = (wantSearch && (prompt || title || srcUrl)) ? await tinyfishSearch(env, prompt || title || srcUrl) : [];
+      const res = await classifyDocument(env, { url: srcUrl, title, excerpt, prompt, search });
+      if (!res.ok) return json({ ok: false, error: res.error || "classify-failed", fetchNote, searched: search.length }, 502);
+      return json({ ok: true, draft: res.draft, model: res.model, fetchNote, searched: search.length });
     }
 
     if (method === "POST" && head === "digest") {
