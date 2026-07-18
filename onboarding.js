@@ -3,9 +3,11 @@
  * A world-class, replayable, once-per-account interactive tour:
  *   1) a first-launch WELCOME + role picker,
  *   2) a 5-step APP tour that spotlights the REAL home,
- *   3) a 16-step ICU v2 tour that is HYBRID — it drives the REAL ICU when the unit has patients,
- *      and falls back to a self-contained demo (Ravi Kumar, Bed 4, septic shock) when it is empty.
+ *   3) a 16-step ICU v2 tour that spotlights the REAL ICU dashboard — the full patient-workspace
+ *      walkthrough when the unit has patients, a board-level orientation when it's empty.
  * Plus a first-time ICU contextual tip, a Resume pill, and a "Guided tours" replay centre.
+ * It never renders mock screens — every step highlights existing app UI; nothing in the home or
+ * ICU design is changed.
  *
  * Design: mirrors "StewardMD Tour.dc.html" (flow, copy, step order). Engine = dim backdrop with a
  * pulsing spotlight cut-out measured via getBoundingClientRect (re-measured on resize/scroll/step)
@@ -78,9 +80,10 @@
       body: "This is the busiest part of StewardMD, so it has its own guided tour. Go ahead — tap ICU to open it.", then: "icu" }
   ];
 
-  // ICU tour — 16 steps. Each step has a demo target (data-tour in the built-in demo) and a live
-  // target (a real selector). `body` is the rich demo narrative; `liveBody` is the generic copy used
-  // when we drive the user's real, populated unit. Tap steps advance when the user taps the control.
+  // ICU tour — spotlights the REAL ICU. `live` is the real selector; `liveBody` is the copy shown
+  // (generic, since it's the user's own unit). `demo` is just a stable step key used for grouping.
+  // Patient-workspace steps run only when a real patient card exists; tap steps advance on the real
+  // outcome (patient opened / monitoring active / board returned).
   var ICU_TOUR = [
     { scr: "board", demo: "board-title", live: ".icu-v2-uhead-top,.icu-v2-uhead",
       title: "Your whole unit, one screen",
@@ -274,7 +277,7 @@
   // ---- spotlight + coach-mark engine -------------------------------------------------------
   // A "run" is driven by a controller: { id, icon, steps, scope(), resolve(step), enter(step,cb),
   //   onDomTap(el,step) -> advanced?, finish(completed) }. Shared card/spotlight for every tour.
-  var _spot = null, _card = null, _veil = null, _block = null, _run = null, _step = 0, _onKey = null, _tapListener = null, _tapTimer = null;
+  var _spot = null, _card = null, _veil = null, _block = null, _run = null, _step = 0, _onKey = null, _tapListener = null, _tapTimer = null, _dir = 1;
 
   // Robust tap advancement: rather than intercept the click (racy against the app's own handler,
   // which may open ICU / re-render and hide the target on the same event), poll for the OUTCOME the
@@ -369,7 +372,12 @@
     var s = _run.steps[i];
     showChromeForRun();
     // hide card until the target screen is ready to avoid a flash on the wrong screen
-    _run.enter(s, function () { paint(); });
+    _run.enter(s, function () {
+      // Real-UI step whose element isn't present → skip it (in the current direction) rather than
+      // show a coach-mark over nothing. Keeps the tour honest to whatever the live app actually shows.
+      if (s.optional && !_run.resolve(s)) { goStep(_step + (_dir < 0 ? -1 : 1)); return; }
+      paint();
+    });
   }
   function showChromeForRun() {
     ensureEls();
@@ -377,8 +385,8 @@
     if (_card) _card.style.display = "block";
     if (_block) _block.style.display = "block";
   }
-  function next() { var s = curStep(); if (s && s.then === "icu") { startIcuTour(); return; } goStep(_step + 1); }
-  function back() { if (_step > 0) goStep(_step - 1); }
+  function next() { _dir = 1; var s = curStep(); if (s && s.then === "icu") { startIcuTour(); return; } goStep(_step + 1); }
+  function back() { _dir = -1; if (_step > 0) goStep(_step - 1); }
   function onCardClick(e) {
     var b = e.target.closest && e.target.closest("[data-t]"); if (!b) return;
     var t = b.getAttribute("data-t");
@@ -451,224 +459,74 @@
   }
   function startAppTour() { markLaunch(); startRun(appController(), 0); }
 
-  // ---- Demo ICU (self-contained, used when the live unit is empty) -------------------------
-  var _demoWrap = null, _demoState = { screen: "board", tab: "overview" }, _startingIcu = false;
-  function demoRosterHTML() {
-    var S = { critical: { a: "#B91C1C", s: "#FEE2E2", l: "Critical" }, review: { a: "#92620A", s: "#FEF3C7", l: "Needs review" }, stable: { a: "#15803D", s: "#DCFCE7", l: "Stable" } };
-    var R = [
-      ["4", "Ravi Kumar", "64/M", "Septic shock", "critical", "MAP 61 · lactate 4.2 · noradrenaline", ["MAP 61", "LACT 4.2", "SpO₂ 93%"], "8 min ago", true],
-      ["7", "Anita Desai", "58/F", "ARDS · COVID pneumonia", "critical", "SpO₂ 88% · rising FiO₂", ["MAP 66", "LACT 3.1", "SpO₂ 88%"], "2 min ago", false],
-      ["2", "Mohan Rao", "71/M", "Post-op AKI", "review", "Urine output falling", ["MAP 72", "LACT 2.0", "SpO₂ 95%"], "21 min ago", false],
-      ["9", "Fatima Sheikh", "45/F", "DKA — resolving", "review", "K⁺ 5.1 · repeat gas due", ["MAP 78", "LACT 1.8", "SpO₂ 97%"], "34 min ago", false],
-      ["1", "Joseph Mathew", "60/M", "COPD exacerbation", "stable", "", ["MAP 84", "LACT 1.2", "SpO₂ 94%"], "1 h ago", false],
-      ["5", "Lakshmi Nair", "52/F", "Acute pancreatitis", "stable", "", ["MAP 88", "LACT 1.0", "SpO₂ 98%"], "1 h ago", false]
-    ];
-    var attn = R.filter(function (p) { return p[4] !== "stable"; }).map(function (p) {
-      var c = S[p[4]];
-      return '<button class="smdd-btn" data-dtap="openpt" style="flex:0 0 auto;width:210px;text-align:left;background:#fff;border:1px solid #E2E8F0;border-left:4px solid ' + c.a + ';border-radius:14px;padding:11px 13px">' +
-        '<div style="font:700 11px inherit;letter-spacing:.02em;color:' + c.a + '">' + c.l + "</div>" +
-        '<div style="font:700 14px inherit;color:#0F172A;margin-top:6px">Bed ' + p[0] + " · " + esc(p[1]) + "</div>" +
-        '<div style="font:500 12px/1.4 inherit;color:#64748b;margin-top:3px">' + esc(p[5] || "Review recommended") + "</div></button>";
-    }).join("");
-    var cards = R.map(function (p) {
-      var c = S[p[4]];
-      var vit = p[6].map(function (v) { var parts = v.split(" "); var crit = /61|4\.2|88/.test(parts[1] || ""); return '<div><div style="font:600 9px inherit;letter-spacing:.04em;text-transform:uppercase;color:#64748b">' + esc(parts[0]) + '</div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:14px;font-weight:700;margin-top:1px;color:' + (crit ? "#B91C1C" : "#0F172A") + '">' + esc(parts.slice(1).join(" ")) + "</div></div>"; }).join("");
-      return '<button class="smdd-btn' + (p[8] ? " smdd-bed4" : "") + '" data-dtap="openpt" ' + (p[8] ? 'data-tour="patient-card" ' : "") + 'style="display:block;width:100%;text-align:left;background:#fff;border:1px solid #E2E8F0;border-left:5px solid ' + c.a + ';border-radius:16px;overflow:hidden;margin-bottom:10px;box-shadow:0 1px 2px rgba(15,23,42,.05),0 4px 16px rgba(15,23,42,.07)">' +
-        '<div style="padding:13px 15px 11px"><div style="display:flex;align-items:center;gap:10px">' +
-        '<div style="width:44px;height:44px;flex:0 0 auto;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:' + c.s + ';color:' + c.a + '"><b style="font-family:\'IBM Plex Mono\',monospace;font-size:15px;line-height:1">' + p[0] + '</b><span style="font-size:7.5px;font-weight:700;letter-spacing:.05em">BED</span></div>' +
-        '<div style="flex:1;min-width:0"><div style="font:700 16px inherit;color:#0F172A;display:flex;gap:7px;align-items:center;flex-wrap:wrap"><span>' + esc(p[1]) + '</span> <span style="font:600 12px inherit;color:#64748b">' + esc(p[2]) + '</span></div>' +
-        '<div style="font:600 13px inherit;color:#0F172A;opacity:.78;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + esc(p[3]) + '</div></div>' +
-        '<span style="flex:0 0 auto;font:700 10px inherit;border-radius:999px;padding:4px 9px;color:' + c.a + ';background:' + c.s + '">' + c.l + '</span></div>' +
-        '<div style="display:flex;gap:16px;margin-top:11px;padding-top:10px;border-top:1px solid #E2E8F0">' + vit + '</div></div>' +
-        '<div style="background:#F8FAFC;padding:8px 15px;display:flex;align-items:center;gap:8px;border-top:1px solid #E2E8F0"><span style="width:22px;height:22px;border-radius:50%;background:#0F766E;color:#fff;font:700 9px inherit;display:flex;align-items:center;justify-content:center">SR</span><span style="font:700 12px inherit;color:#0F172A">Saved</span><span style="font:600 11px inherit;color:#64748b;margin-left:auto">' + esc(p[7]) + '</span></div></button>';
-    }).join("");
-    return { attn: attn, cards: cards };
-  }
-  function demoBoardHTML() {
-    var d = demoRosterHTML();
-    return '<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#F1F5F9">' +
-      '<div style="flex:none;background:linear-gradient(160deg,#115E59,#0F766E);color:#fff;padding:calc(46px + env(safe-area-inset-top)) 16px 18px">' +
-        '<div style="display:flex;align-items:center;gap:10px">' +
-          '<button class="smdd-btn" data-dtap="close" style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px">‹</button>' +
-          '<div data-tour="board-title" style="flex:1;min-width:0"><div style="font:700 17px inherit">My ICU patients <span style="opacity:.6;font-size:13px">▾</span></div><div style="font:500 12px inherit;color:rgba(255,255,255,.82);margin-top:1px">GIMSR · 6 patients</div></div>' +
-          '<div style="position:relative;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center">🔔<span style="position:absolute;top:5px;right:6px;min-width:16px;height:16px;padding:0 3px;background:#B91C1C;border:2px solid #0F766E;border-radius:50%;font:700 9px inherit;display:flex;align-items:center;justify-content:center">4</span></div>' +
-        "</div>" +
-        '<div data-tour="acuity-strip" style="display:flex;gap:8px;margin-top:16px">' +
-          '<div style="flex:1;border-radius:14px;padding:9px 6px;text-align:center;background:rgba(255,255,255,.16);color:#fff"><b style="display:block;font-family:\'IBM Plex Mono\',monospace;font-size:22px">6</b><span style="font:700 10px inherit">Patients</span></div>' +
-          '<div style="flex:1;border-radius:14px;padding:9px 6px;text-align:center;background:#FEE2E2;color:#B91C1C"><b style="display:block;font-family:\'IBM Plex Mono\',monospace;font-size:22px">2</b><span style="font:700 10px inherit">Critical</span></div>' +
-          '<div style="flex:1;border-radius:14px;padding:9px 6px;text-align:center;background:#FEF3C7;color:#92620A"><b style="display:block;font-family:\'IBM Plex Mono\',monospace;font-size:22px">2</b><span style="font:700 10px inherit">Review</span></div>' +
-          '<div style="flex:1;border-radius:14px;padding:9px 6px;text-align:center;background:#DCFCE7;color:#15803D"><b style="display:block;font-family:\'IBM Plex Mono\',monospace;font-size:22px">2</b><span style="font:700 10px inherit">Stable</span></div>' +
-        "</div>" +
-      "</div>" +
-      '<div class="smdd-scroll" style="flex:1;overflow-y:auto;padding:16px 16px 24px">' +
-        '<div data-tour="attn" style="margin-bottom:6px"><div style="font:700 11px inherit;letter-spacing:.08em;text-transform:uppercase;color:#64748b;margin:0 2px 8px">Needs your attention</div>' +
-        '<div class="smdd-scroll" style="display:flex;gap:10px;overflow-x:auto;margin:0 -16px 4px;padding:0 16px 4px">' + d.attn + "</div></div>" +
-        '<div style="display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 12px">' +
-          '<span style="border-radius:999px;font:700 12.5px inherit;padding:8px 14px;background:#0F766E;color:#fff">All</span>' +
-          '<span style="border-radius:999px;font:700 12.5px inherit;padding:8px 14px;background:#fff;border:1px solid #E2E8F0;color:#64748b">Critical</span>' +
-          '<span style="border-radius:999px;font:700 12.5px inherit;padding:8px 14px;background:#fff;border:1px solid #E2E8F0;color:#64748b">Needs review</span>' +
-          '<span style="border-radius:999px;font:700 12.5px inherit;padding:8px 14px;background:#fff;border:1px solid #E2E8F0;color:#64748b">Stable</span>' +
-        "</div>" + d.cards +
-        '<div style="text-align:center;font:600 12px inherit;color:#64748b;padding:6px 0 2px">Showing 6 of 6</div>' +
-      "</div>" +
-      '<div data-tour="bottombar" style="flex:none;display:flex;background:#fff;border-top:1px solid #E2E8F0;padding:8px 8px calc(18px + env(safe-area-inset-bottom))">' +
-        demoBarBtn("☰", "Unit", "#0F766E") + demoBarBtn("🔔", "Alerts", "#64748b") + demoBarBtn("👥", "Team", "#64748b") + demoBarBtn("⚙️", "Settings", "#64748b") +
-        '<button class="smdd-btn" style="flex:1;min-height:44px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#0F766E;font:600 10.5px inherit"><span style="width:30px;height:30px;border-radius:10px;background:#0F766E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px">＋</span>Admit</button>' +
-      "</div>" +
-    "</div>";
-  }
-  function demoBarBtn(ic, label, col) { return '<button class="smdd-btn" style="flex:1;min-height:44px;display:flex;flex-direction:column;align-items:center;gap:3px;color:' + col + ';font:600 10.5px inherit"><span style="font-size:20px;line-height:1">' + ic + "</span>" + label + "</button>"; }
-  function demoTile(k, v, crit) { return '<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:12px 13px"><div style="font:700 10px inherit;letter-spacing:.04em;color:#64748b">' + k + '</div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:21px;font-weight:700;margin-top:3px;color:' + (crit ? "#B91C1C" : "#0F172A") + '">' + v + "</div></div>"; }
-  function demoLyte(k, v, tone) { var bg = tone === "crit" ? "#FEE2E2" : tone === "warn" ? "#FEF3C7" : "#fff", bd = tone === "crit" ? "#f0b6b6" : tone === "warn" ? "#ecdca0" : "#E2E8F0", col = tone === "crit" ? "#B91C1C" : tone === "warn" ? "#92620A" : "#0F172A"; return '<div style="background:' + bg + ";border:1px solid " + bd + ';border-radius:13px;padding:11px 12px"><div style="font:700 10px inherit;color:' + col + '">' + k + '</div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:22px;font-weight:700;margin-top:3px;color:' + col + '">' + v + "</div></div>"; }
-  function demoPatientHTML() {
-    var mon = _demoState.tab === "monitoring";
-    var tabs = ["Overview", "Monitoring", "Care Plan", "Rounds", "Records"].map(function (t) {
-      var key = t.toLowerCase().replace(" ", "");
-      var on = (mon && key === "monitoring") || (!mon && key === "overview");
-      var dtour = key === "monitoring" ? ' data-tour="icu-tab-monitoring"' : "";
-      return '<button class="smdd-btn"' + dtour + ' data-dtap="tab:' + key + '" style="flex:0 0 auto;min-height:40px;border-radius:9px;padding:8px 14px;font:700 13px inherit;white-space:nowrap;' + (on ? "background:#0F766E;color:#fff;" : "color:#64748b;") + '">' + t + "</button>";
-    }).join("");
-    var overview =
-      '<div data-tour="status-grid"><div style="font:700 11px inherit;letter-spacing:.08em;text-transform:uppercase;color:#64748b;margin-bottom:11px">Live patient status</div>' +
-        '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px">' +
-          demoTile("HEART RATE", "118", true) + demoTile("BP", "88/52") + demoTile("MAP", "61", true) +
-          demoTile("SPO₂", "93") + demoTile("RESP RATE", "26") + demoTile("TEMP", "38.9") +
-          demoTile("URINE", "18", true) + demoTile("LACTATE", "4.2", true) +
-          '<div style="background:#fff;border:1px solid #E2E8F0;border-radius:13px;padding:12px 13px"><div style="font:700 10px inherit;color:#64748b">PRESSORS</div><div style="font:700 14px inherit;color:#0F766E;margin-top:6px">Noradrenaline</div></div>' +
-          demoTile("INFUSIONS", "3") + demoTile("NET FLUID", "+1.4L") + demoTile("K⁺", "6.4", true) +
-        "</div>" +
-        '<div style="background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:15px;margin-top:14px"><div style="font:700 11px inherit;letter-spacing:.06em;text-transform:uppercase;color:#64748b">Today’s ICU goals</div>' +
-          '<div style="display:flex;gap:9px;margin-top:10px"><span style="color:#0F766E;font-weight:700">1.</span><span style="font:500 13.5px/1.5 inherit;color:#0F172A">MAP ≥ 65 — titrate noradrenaline, reassess lactate in 2 h.</span></div>' +
-          '<div style="display:flex;gap:9px;margin-top:8px"><span style="color:#0F766E;font-weight:700">2.</span><span style="font:500 13.5px/1.5 inherit;color:#0F172A">Correct K⁺ 6.4 — insulin-dextrose + review potassium in fluids.</span></div>' +
-        "</div></div>";
-    var monitoring =
-      '<div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">' +
-        ["Hemo", "Fluids", "Lytes", "ABG", "Infusions"].map(function (m) { var on = m === "Lytes"; return '<span style="border-radius:999px;padding:7px 13px;font:700 12.5px inherit;' + (on ? "background:#0F766E;color:#fff;" : "background:#fff;border:1px solid #E2E8F0;color:#64748b;") + '">' + m + "</span>"; }).join("") + "</div>" +
-      '<div data-tour="lytes-alerts" style="background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:15px">' +
-        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:700 14px inherit;color:#0F172A">⚠️ Electrolyte alerts</span><span style="font:700 12px inherit;color:#B91C1C;background:#FEE2E2;border-radius:999px;padding:4px 10px">K⁺ · Severe hyperkalaemia</span></div>' +
-        '<div style="display:flex;flex-direction:column;gap:7px;margin-top:10px;align-items:flex-start"><span style="font:600 12px inherit;color:#92620A;background:#FEF3C7;border-radius:999px;padding:4px 10px">Na · Moderate hyponatraemia</span><span style="font:600 12px inherit;color:#92620A;background:#FEF3C7;border-radius:999px;padding:4px 10px">Mg · Hypomagnesaemia · HCO₃ · Metabolic acidosis</span></div>' +
-      "</div>" +
-      '<div style="font:700 11px inherit;letter-spacing:.06em;text-transform:uppercase;color:#64748b;margin:18px 0 11px">Electrolytes &amp; correction</div>' +
-      '<div data-tour="lytes-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px">' +
-        demoLyte("SODIUM", "128", "warn") + demoLyte("POTASSIUM", "6.4", "crit") + demoLyte("CHLORIDE", "98", "") +
-        demoLyte("BICARB", "16", "warn") + demoLyte("CALCIUM", "1.8", "warn") + demoLyte("MAGNESIUM", "0.55", "warn") +
-      "</div></div>";
-    return '<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#F1F5F9">' +
-      '<div data-tour="banner" style="flex:none;color:#fff;padding:calc(46px + env(safe-area-inset-top)) 14px 12px;background:#B91C1C">' +
-        '<div style="display:flex;align-items:center;gap:8px">' +
-          '<button class="smdd-btn" data-tour="back-board" data-dtap="board" style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center">‹</button>' +
-          '<div style="flex:1;min-width:0"><div style="font:800 17px inherit;color:#fff;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span>Ravi Kumar</span><span style="font:700 10px inherit;background:rgba(255,255,255,.22);border-radius:999px;padding:3px 9px">Critical</span></div><div style="font:500 12px inherit;color:rgba(255,255,255,.85);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Bed 4 · 64/M · ICU day 3 · Septic shock</div></div>' +
-          '<button class="smdd-btn" data-tour="handover" data-dtap="handover" style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px">⇄</button>' +
-        "</div>" +
-        '<div data-tour="mini-vitals" style="display:flex;gap:7px;margin-top:11px">' +
-          demoMv("MAP", "61") + demoMv("HR", "118") + demoMv("SpO₂", "93%") + demoMv("LACT", "4.2") +
-        "</div>" +
-      "</div>" +
-      '<div data-tour="presence" style="flex:none;display:flex;align-items:center;gap:8px;padding:8px 15px;background:#fff;border-bottom:1px solid #E2E8F0"><span style="width:24px;height:24px;border-radius:50%;background:#0F766E;color:#fff;font:700 9px inherit;display:flex;align-items:center;justify-content:center">SR</span><span style="font:500 11.5px inherit;color:#64748b;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Only you are viewing · saved on this device</span><span style="display:flex;align-items:center;gap:5px;font:600 11px inherit;color:#15803D"><span style="width:7px;height:7px;border-radius:50%;background:#15803D"></span>Synced</span></div>' +
-      '<div data-tour="top-tabs" style="flex:none;background:#fff;border-bottom:1px solid #E2E8F0;padding:10px 12px"><div class="smdd-scroll" style="display:flex;gap:6px;overflow-x:auto;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:4px">' + tabs + "</div></div>" +
-      '<div class="smdd-scroll" style="flex:1;overflow-y:auto;padding:16px">' + (mon ? monitoring : overview) + "</div>" +
-    "</div>";
-  }
-  function demoMv(k, v) { return '<div style="flex:1;background:rgba(255,255,255,.14);border-radius:10px;padding:6px 4px;text-align:center"><div style="font:600 9px inherit;color:rgba(255,255,255,.8)">' + k + '</div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:15px;font-weight:700;color:#fff;margin-top:1px">' + v + "</div></div>"; }
-
-  function ensureDemo() {
-    if (_demoWrap) return;
-    _demoWrap = document.createElement("div");
-    _demoWrap.id = "smdTourDemo";
-    _demoWrap.setAttribute("aria-label", "ICU dashboard demo");
-    _demoWrap.style.cssText = "position:fixed;inset:0;z-index:100030;font-family:var(--sans,'Inter',system-ui,sans-serif);background:#F1F5F9";
-    document.body.appendChild(_demoWrap);
-  }
-  function renderDemo() {
-    ensureDemo();
-    _demoWrap.style.display = "block";
-    _demoWrap.innerHTML = _demoState.screen === "patient" ? demoPatientHTML() : demoBoardHTML();
-  }
-  function removeDemo() { if (_demoWrap) { _demoWrap.style.display = "none"; _demoWrap.innerHTML = ""; } }
+  var _startingIcu = false;
 
   // ---- ICU tour (hybrid) -------------------------------------------------------------------
   function liveIcuOpen() { var r = document.getElementById("icuRoot"); return !!(r && visible(r) && r.classList.contains("on")); }
   function liveHasPatients() { return !!document.querySelector("#icuRoot .icu-v2-card"); }
   function clickLive(sel) { var el = firstVisible(sel, document.getElementById("icuRoot") || document); if (el) { try { el.click(); return true; } catch (e) {} } return false; }
 
-  function icuController(mode) {
-    // mode: "demo" | "live"
-    var demo = mode === "demo";
+  // Build the step list for THIS run of the ICU tour from what the real unit actually shows.
+  // No demo, no mock screens — we only ever spotlight the existing ICU UI. Patient-workspace steps
+  // are included solely when a real patient card exists; on an empty unit we tour the board only.
+  function assembleIcuSteps() {
+    var hasCards = liveHasPatients();
+    var boardOnly = { "board-title": 1, "acuity-strip": 1, "attn": 1, "bottombar": 1 };
+    var list = ICU_TOUR.filter(function (s) { return hasCards || boardOnly[s.demo] || !s.live; });
+    list = list.map(function (s) {
+      var step = { scr: s.scr, live: s.live, tab: s.tab, kind: s.kind, doneSel: s.doneSel, title: s.title, cta: s.cta };
+      // On the real UI we always use the generic copy (the demo-specific patient numbers don't apply).
+      step.body = s.liveBody || s.body;
+      // Real-UI steps skip if their element isn't on screen; the closing card (no target) always shows.
+      if (s.live) step.optional = true;
+      return step;
+    });
+    if (!hasCards) {
+      var done = list[list.length - 1];
+      if (done && !done.live) done.body = "Your unit board lives here — patients, acuity and alerts in one place. Admit a patient and you get the full workspace: vitals, labs, goals, electrolyte correction and one-tap handover. Replay this tour any time from Menu → About & Help.";
+    }
+    return list;
+  }
+
+  function icuController(steps) {
     return {
-      id: "icu", icon: "🫀", live: !demo, steps: ICU_TOUR,
-      scope: function () { return demo ? _demoWrap : (document.getElementById("icuRoot") || document); },
-      resolve: function (s) {
-        if (demo) return s.demo ? firstVisible('[data-tour="' + s.demo + '"]', _demoWrap) : null;
-        return s.live ? firstVisible(s.live, document.getElementById("icuRoot") || document) : null;
-      },
-      // Prepare the screen for a step (correct board/patient + tab), then callback when settled.
+      id: "icu", icon: "🫀", live: true, steps: steps,
+      scope: function () { return document.getElementById("icuRoot") || document; },
+      resolve: function (s) { return s.live ? firstVisible(s.live, this.scope()) : null; },
+      // Drive the REAL ICU into the right state for this step (open a patient / switch tab), then paint.
       enter: function (s, cb) {
-        if (demo) {
-          var want = s.scr === "patient" ? "patient" : "board";
-          var wantTab = s.tab || (s.scr === "patient" ? _demoState.tab : _demoState.tab);
-          var changed = false;
-          if (_demoState.screen !== want) { _demoState.screen = want; changed = true; }
-          if (want === "patient" && s.tab && _demoState.tab !== s.tab) { _demoState.tab = s.tab; changed = true; }
-          renderDemo();
-          // let layout settle before measuring
-          setTimeout(cb, changed ? 60 : 20);
+        var root = document.getElementById("icuRoot") || document;
+        if (s.scr === "patient") {
+          if (!root.querySelector(".icu-v2-banner")) { var c = root.querySelector(".icu-v2-card"); if (c) { try { c.click(); } catch (e) {} } }
+          setTimeout(function () {
+            if (s.tab === "monitoring") { clickLive('[data-icu-act="ws:monitoring"]'); setTimeout(cb, 240); }
+            else if (s.tab === "overview") { clickLive('[data-icu-act="tab:overview"]'); setTimeout(cb, 200); }
+            else cb();
+          }, root.querySelector(".icu-v2-banner") ? 20 : 260);
           return;
         }
-        // LIVE: best-effort navigation of the real ICU.
-        var self = this;
-        function ready() { cb(); }
-        if (s.scr === "board") {
-          if (!liveIcuOpen()) { /* board may be closed if user backed out; just paint */ }
-          if (!document.querySelector("#icuRoot .icu-v2-banner") || firstVisible(".icu-v2-uhead", document)) { setTimeout(ready, 30); return; }
-          // if a patient is open and step wants the board, go back
-          clickLive('.icu-v2-back,[data-icu-act="icuboard"]'); setTimeout(ready, 220); return;
-        }
-        // patient step: ensure a patient is open
-        if (!document.querySelector("#icuRoot .icu-v2-banner")) { var c = document.querySelector("#icuRoot .icu-v2-card"); if (c) { try { c.click(); } catch (e) {} } setTimeout(function () { navTab(); }, 260); return; }
-        navTab();
-        function navTab() {
-          if (s.tab === "monitoring") { clickLive('[data-icu-act="ws:monitoring"]'); setTimeout(ready, 240); }
-          else if (s.tab === "overview") { clickLive('[data-icu-act="tab:overview"]'); setTimeout(ready, 200); }
-          else ready();
-        }
+        // board step — if a patient workspace is open, return to the board first
+        if (root.querySelector(".icu-v2-banner") && !firstVisible(".icu-v2-uhead", root)) { clickLive('.icu-v2-back,[data-icu-act="icuboard"]'); setTimeout(cb, 220); return; }
+        setTimeout(cb, 20);
       },
-      // DEMO taps: the demo buttons are ours, so a direct capture handler is safe (no race).
-      onDomTap: demo ? function (target, s) {
-        var b = target.closest && target.closest("[data-dtap]"); if (!b) return false;
-        var v = b.getAttribute("data-dtap"), hit = null;
-        if (s.demo === "patient-card" && v === "openpt") hit = "openpt";
-        else if (s.demo === "icu-tab-monitoring" && v === "tab:monitoring") hit = "mon";
-        else if (s.demo === "back-board" && v === "board") hit = "back";
-        if (!hit) return false;
-        if (hit === "openpt") { _demoState.screen = "patient"; _demoState.tab = "overview"; }
-        else if (hit === "mon") { _demoState.tab = "monitoring"; }
-        else if (hit === "back") { _demoState.screen = "board"; }
-        setTimeout(function () { next(); }, 60);
-        return true;
-      } : null,
-      // LIVE taps: watch for the real outcome (patient opened, monitoring active, board returned).
-      tapWatch: demo ? null : function (s) { return !!firstVisible(s.doneSel || s.live, document.getElementById("icuRoot") || document); },
-      finish: function (completed) {
-        if (demo) { removeDemo(); }
-        if (completed) { var st = getState(); st.icuTourDone = true; setState(st); }
-      }
+      // Tap steps advance when the real outcome appears (patient opened, monitoring active, board back).
+      tapWatch: function (s) { return !!firstVisible(s.doneSel || s.live, document.getElementById("icuRoot") || document); },
+      finish: function (completed) { if (completed) { var st = getState(); st.icuTourDone = true; setState(st); } }
     };
   }
 
+  // Tour the REAL ICU. Open it if needed, wait for the board to paint, then spotlight live elements.
   function startIcuTour() {
     markLaunch(); hideResume(); hideTip();
-    // Hybrid: drive the REAL ICU when it's open with patients; otherwise a self-contained demo.
-    // If the real board is open but still painting, give it a short window before deciding, so a
-    // populated unit isn't misread as empty. When the ICU isn't open at all (replay), go straight
-    // to the demo — we never force the live ICU open just to inspect it.
     if (_startingIcu) return; _startingIcu = true;
+    if (!liveIcuOpen()) {
+      try { if (window.ICU && ICU.open) ICU.open(); else { var t = firstVisible('[data-act="icu"]', document); if (t) t.click(); } } catch (e) {}
+    }
     var waited = 0;
-    (function decide() {
-      if (liveIcuOpen() && liveHasPatients()) { _startingIcu = false; startRun(icuController("live"), 0); return; }
-      if (waited < 800) { waited += 120; setTimeout(decide, 120); return; }   // give a real, populated board time to render
-      _startingIcu = false;
-      _demoState = { screen: "board", tab: "overview" }; renderDemo();
-      setTimeout(function () { startRun(icuController("demo"), 0); }, 40);
+    (function wait() {
+      var boardUp = liveIcuOpen() && (document.querySelector("#icuRoot .icu-v2-uhead") || document.querySelector("#icuRoot .icu-v2-card") || document.querySelector("#icuRoot .icu-v2-strip"));
+      if (boardUp || waited >= 1600) { _startingIcu = false; startRun(icuController(assembleIcuSteps()), 0); return; }
+      waited += 150; setTimeout(wait, 150);
     })();
   }
 
