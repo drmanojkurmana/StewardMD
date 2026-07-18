@@ -485,6 +485,9 @@
   // Sensor fusion (Phase 1: IMU). Delegates to the module's flag helper (smd_fundx_sensors /
   // ?fundxsensors=1). Additive; when off or no motion sensor, the engine is unchanged.
   function sensorsOn() { try { return !!(window.SMD_FUNDX_SENSORS && window.SMD_FUNDX_SENSORS.flagOn && window.SMD_FUNDX_SENSORS.flagOn()); } catch (e) { return false; } }
+  // Auto-flash (torch): illuminate the fundus with the rear-camera light during capture.
+  // Default ON; Android supports it via getUserMedia, iOS WKWebView is a graceful no-op.
+  function flashOn() { try { return localStorage.getItem("smd_fundx_flash") !== "0"; } catch (e) { return true; } }
   // Developer mode: live debug overlay + frame-by-frame metric recording. OFF by default
   // (flag smd_fundx_dev or ?fundxdev=1). Additive; never affects acquisition behaviour.
   function devOn() { try { var q = (location.search.match(/[?&]fundxdev=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_dev") === "1"; } catch (e) { return false; } }
@@ -563,6 +566,7 @@
         '<div class="rds-section-header"><span class="rds-section-title">Data</span></div>' +
         '<button class="fundx-set-row" data-fx="clearall"><span class="fundx-set-rl"><b>Delete all scans</b><span>Removes every stored image + record on this device</span></span>' + ric("delete_forever") + '</button>' +
         '<button class="fundx-set-row' + (telOn() ? ' on' : '') + '" data-fx="settel"><span class="fundx-set-rl"><b>Acquisition telemetry (anonymous)</b><span>Local, no PHI — guidance steps, quality progression, capture time + outcome. For validation. Off by default.</span></span>' + ric(telOn() ? "toggle_on" : "toggle_off") + '</button>' +
+        '<button class="fundx-set-row' + (flashOn() ? ' on' : '') + '" data-fx="setflash"><span class="fundx-set-rl"><b>Auto-flash during capture</b><span>Turns on the rear-camera light to illuminate the fundus while capturing. On by default (Android; iOS WebView has no torch control). Turn off if the reflection is too strong.</span></span>' + ric(flashOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<button class="fundx-set-row' + (sensorsOn() ? ' on' : '') + '" data-fx="setsensors"><span class="fundx-set-rl"><b>Motion sensor fusion</b><span>Fuses the phone motion sensors (accelerometer + gyroscope) with the camera to steady capture and improve timing. Falls back automatically when unavailable. Off by default.</span></span>' + ric(sensorsOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<button class="fundx-set-row' + (devOn() ? ' on' : '') + '" data-fx="setdev"><span class="fundx-set-rl"><b>Developer mode</b><span>Live metric overlay on the camera + frame-by-frame CSV export (focus/glare/motion/distance/roll/reflex/vessel/fundus/diagnostic/decision). Field-testing only.</span></span>' + ric(devOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<p class="fundx-disc">' + disclaimerText() + '</p>' +
@@ -647,7 +651,7 @@
     var video = document.getElementById("fundxVideo");
     sm = V().createStateMachine();
     cam = Vd.makeCamera();
-    cam.start(video, onFrame, { hub: (hub = Vd.makeHub()), analyzeEveryMs: 110, analyzeScale: 0.25 })
+    cam.start(video, onFrame, { hub: (hub = Vd.makeHub()), analyzeEveryMs: 110, analyzeScale: 0.25, flash: flashOn() })
       .then(function () { setState("Point the camera at the eye"); })
       .catch(function (err) { showCamError(err); });
   }
@@ -892,6 +896,7 @@
       case "settel": { try { localStorage.setItem("smd_fundx_telemetry", telOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
       case "setdev": { try { localStorage.setItem("smd_fundx_dev", devOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
       case "setsensors": { try { localStorage.setItem("smd_fundx_sensors", sensorsOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
+      case "setflash": { try { localStorage.setItem("smd_fundx_flash", flashOn() ? "0" : "1"); } catch (e) {} if (cam && cam.setTorch) { try { cam.setTorch(flashOn()); } catch (e) {} } haptic("selection"); return render(); }
       case "devexport": haptic("light"); return exportDevLog();
       case "voice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); { var vb = document.getElementById("fundxVoiceBtn"); if (vb) { vb.classList.toggle("on", VOICE.enabled()); vb.innerHTML = ric(VOICE.enabled() ? "volume_up" : "volume_off"); } if (VOICE.enabled()) VOICE.speak("Voice coaching on"); } return;
       case "retake": haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "retake"); result = null; session.retries++; return startCamera();

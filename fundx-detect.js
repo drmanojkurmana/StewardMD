@@ -288,8 +288,28 @@
       }
       raf = requestAnimationFrame(loop);
     }
+    // ---- Auto-flash (torch) ----------------------------------------------
+    // Illuminate the fundus with the rear-camera torch during capture, via the getUserMedia
+    // torch constraint (Android/Chromium WebView). Graceful no-op where unsupported (e.g. iOS
+    // WKWebView exposes no torch constraint) — never throws.
+    var torchOn = false;
+    function torchTrack() { try { return stream && stream.getVideoTracks && stream.getVideoTracks()[0]; } catch (e) { return null; } }
+    function torchSupported() { try { var t = torchTrack(); var c = t && t.getCapabilities && t.getCapabilities(); return !!(c && c.torch); } catch (e) { return false; } }
+    function setTorch(on) {
+      try {
+        var t = torchTrack();
+        if (!t || !t.applyConstraints) return false;
+        var c = t.getCapabilities && t.getCapabilities();
+        if (!c || !c.torch) return false;
+        t.applyConstraints({ advanced: [{ torch: !!on }] });
+        torchOn = !!on; return true;
+      } catch (e) { return false; }
+    }
     return {
       isRunning: function () { return running; },
+      setTorch: function (on) { return setTorch(on); },
+      torchOn: function () { return torchOn; },
+      torchSupported: function () { return torchSupported(); },
       start: function (video, cb, o) {
         opts = o || {}; onFrame = cb; videoEl = video;
         hub = opts.hub || makeHub(opts);
@@ -305,6 +325,7 @@
             if (hub.sensors && hub.sensors.start) hub.sensors.start();   // IMU fusion (Phase 1)
             if (hub.resetSession) hub.resetSession();
             if (hub.mediapipe && hub.mediapipe.init) hub.mediapipe.init();   // lazy, non-blocking
+            if (opts.flash !== false) { try { setTorch(true); } catch (e) {} }   // auto-flash to illuminate the fundus
             raf = requestAnimationFrame(loop);
             return { hub: hub };
           });
@@ -326,6 +347,7 @@
       },
       stop: function () {
         running = false; if (raf) cancelAnimationFrame(raf); raf = 0;
+        try { setTorch(false); } catch (e) {}   // turn the flash off before releasing the camera
         try { if (stream) stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
         try { if (videoEl) videoEl.srcObject = null; } catch (e) {}
         try { if (hub && hub.pose && hub.pose.detach) hub.pose.detach(); } catch (e) {}
