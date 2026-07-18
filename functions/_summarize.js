@@ -32,11 +32,16 @@ const SUMMARY_SYS =
   "\"major_changes\":[string], \"what_changed\":[string], \"clinical_impact\":string, \"clinical_pearls\":[string], " +
   "\"new_recommendations\":[string], \"removed_recommendations\":[string], \"practice_points\":[string], " +
   "\"evidence_level\":string, \"keywords\":[string], \"official_url\":string, \"official_pdf_url\":string, " +
-  "\"doi\":string, \"pmid\":string}.\n" +
+  "\"doi\":string, \"pmid\":string, " +
+  "\"pharma\":{\"drug_class\":string,\"indications\":[string],\"dose\":string,\"duration\":string,\"contraindications\":[string]}}.\n" +
   "GUIDANCE: \"summary\" is original prose, AT MOST 700 words. \"estimated_read_time\" is whole minutes to read the " +
   "summary. \"importance\": 'critical' for safety withdrawals/boxed warnings/drug bans, 'high' for practice-changing " +
   "guideline updates or major approvals, else 'normal'. Arrays hold short phrases; use [] when genuinely none. Echo " +
-  "official_url/doi/pmid from the metadata when present, else empty string. No text outside the JSON.";
+  "official_url/doi/pmid from the metadata when present, else empty string. Use the WEB SEARCH RESULTS " +
+  "(when provided) as authoritative context. PHARMA: fill \"pharma\" ONLY for a drug (a drug approval, " +
+  "or a safety alert about a specific drug) — drug class, key licensed indication(s), usual adult " +
+  "dose/route, typical duration, and main contraindications/black-box cautions, each concise and taken " +
+  "ONLY from the inputs (NEVER invent a dose or number); empty fields for non-drugs. No text outside the JSON.";
 
 function parseJsonLoose(t) {
   if (!t) return null;
@@ -89,6 +94,10 @@ export async function summarizeDocument(env, meta) {
     "",
     "=== SOURCE EXCERPT (summarize in your OWN words; do not copy) ===",
     String(meta.excerpt || meta.title || "").slice(0, 8000),
+    (Array.isArray(meta.search) && meta.search.length)
+      ? "\n=== WEB SEARCH RESULTS (authoritative context — summarize facts in your OWN words; do not copy) ===\n" +
+        meta.search.slice(0, 8).map((r, i) => (i + 1) + ". " + (r.title || "") + (r.site ? " — " + r.site : "") + "\n" + (r.snippet || "") + "\n" + (r.url || "")).join("\n")
+      : "",
   ].filter(Boolean).join("\n");
 
   const gate = await meterGate(env);
@@ -107,9 +116,13 @@ export async function summarizeDocument(env, meta) {
         if (gate.meter) {
           try { await recordUsage(gate, { inTok: estTokens(SUMMARY_SYS.length + metaBlock.length), outTok: estTokens((text || "").length), status: "success" }); } catch (e) {}
         }
+        const _ph = (parsed.pharma && typeof parsed.pharma === "object") ? parsed.pharma : {};
+        const _pharma = { drug_class: String(_ph.drug_class || "").slice(0, 140), indications: arr(_ph.indications), dose: String(_ph.dose || "").slice(0, 400), duration: String(_ph.duration || "").slice(0, 300), contraindications: arr(_ph.contraindications) };
+        const _hasPharma = !!(_pharma.drug_class || _pharma.dose || _pharma.duration || _pharma.indications.length || _pharma.contraindications.length);
         const data = {
           title: String(parsed.title || meta.title || "").slice(0, 240),
           organization: String(parsed.organization || meta.organization || "").slice(0, 120),
+          pharma: (_hasPharma && (meta.sourceType === "drug_approval" || meta.sourceType === "safety_alert")) ? _pharma : null,
           workspace: normWorkspace(meta.workspace, "internal_medicine"),
           specialty: String(parsed.specialty || "").slice(0, 80),
           release_date: String(parsed.release_date || "").slice(0, 40),

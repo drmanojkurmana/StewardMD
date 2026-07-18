@@ -26,6 +26,7 @@ import { identify } from "../../_fbauth.js";
 import * as repo from "../../_updates_repo.js";
 import { runPipeline } from "../../_updates_pipeline.js";
 import { classifyDocument } from "../../_summarize.js";
+import { tinyfishSearch } from "../../_search.js";
 import { buildDigest } from "../../_digest.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
@@ -85,26 +86,6 @@ async function fetchUrlText(u) {
       .replace(/\s+/g, " ").trim();
     return { ok: true, title, text: text.slice(0, 8000) };
   } catch (e) { return { ok: false, error: String((e && e.message) || e) }; }
-}
-// Web-search enrichment (TinyFish) — turns a thin headline or a bare drug/guideline NAME into rich,
-// authoritative context (prescribing info, indications, doses, official links) so the classifier can
-// produce a real pharma block and pick the best source URL. Best-effort: no key / any error → [].
-async function tinyfishSearch(env, query) {
-  const key = env.TINYFISH_API_KEY;
-  if (!key || !query) return [];
-  try {
-    const r = await fetch("https://api.search.tinyfish.ai?query=" + encodeURIComponent(String(query).slice(0, 300)), {
-      headers: { "X-API-Key": key }, redirect: "follow",
-    });
-    if (!r.ok) return [];
-    const j = await r.json();
-    return ((j && j.results) || []).slice(0, 8).map((x) => ({
-      title: String(x.title || "").slice(0, 200),
-      snippet: String(x.snippet || "").slice(0, 400),
-      url: String(x.url || "").slice(0, 500),
-      site: String(x.site_name || "").slice(0, 120),
-    })).filter((x) => x.title || x.snippet);
-  } catch (e) { return []; }
 }
 // Group new/updated pipeline items by workspace and fire one targeted push per
 // workspace (a representative item per group — highest importance first).

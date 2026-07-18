@@ -11,6 +11,7 @@ import * as repo from "./_updates_repo.js";
 import { summarizeDocument, diffDocument } from "./_summarize.js";
 import { clean, sha256hex, itemHashInput, parseRss, keepItem } from "./_updates_util.js";
 import { fetchLitApi } from "./_litapi.js";
+import { tinyfishSearch } from "./_search.js";
 
 const UA = "StewardMD/1.0 (+https://stewardmd.in)";
 export { parseRss };
@@ -31,7 +32,11 @@ function metaFor(source, item, excerpt) {
 // Persist a summarized document as new, or as an updated version of an existing one.
 async function storeSummary(env, source, item, docKey, hash, mode) {
   const excerpt = String(item.desc || item.title || "").slice(0, 8000);
-  const res = await summarizeDocument(env, metaFor(source, item, excerpt));
+  // Enrich thin RSS headlines (and all drug/safety items) with a web search so the summary + pharma
+  // carry real facts, not just a title. Bounded + best-effort (no key/error → no search).
+  const needsSearch = source.type === "drug_approval" || source.type === "safety_alert" || excerpt.length < 800;
+  const search = needsSearch ? await tinyfishSearch(env, ((item.title || "") + " " + (source.name || "")).trim()) : [];
+  const res = await summarizeDocument(env, Object.assign(metaFor(source, item, excerpt), { search }));
   if (!res.ok) return { ai: true, ok: false, error: res.error };
   const d = res.data;
   const body = (d.summary || "").slice(0, 240);
