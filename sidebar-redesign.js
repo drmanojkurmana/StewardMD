@@ -36,7 +36,8 @@
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>',
     sliders: '<line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/><circle cx="9" cy="8" r="2.4" fill="currentColor" stroke="none"/><circle cx="15" cy="16" r="2.4" fill="currentColor" stroke="none"/>',
     shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/>',
-    spark: '<path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/><path d="M5 15l.7 1.9L8 18l-2.3.6L5 21l-.7-1.9L2 18l2.3-.6Z"/>'
+    spark: '<path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/><path d="M5 15l.7 1.9L8 18l-2.3.6L5 21l-.7-1.9L2 18l2.3-.6Z"/>',
+    steth: '<path d="M4.5 3v6a4.5 4.5 0 0 0 9 0V3"/><path d="M4.5 3H3M13.5 3H12"/><path d="M9 13.5V16a5 5 0 0 0 10 0v-1.2"/><circle cx="19" cy="12.5" r="2.2"/>'
   };
   function svg(name) {
     return '<svg viewBox="0 0 24 24" class="sbr-ic"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[name] || "") + "</g></svg>";
@@ -71,7 +72,9 @@
       if (window.SB && SB.toggleTheme) return SB.toggleTheme();
       document.body.classList.toggle("dark");
     },
-    account: function () { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) SMD_VERIFY.openPanel(); else toast("Account loading…"); }
+    account: function () { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) SMD_VERIFY.openPanel(); else toast("Account loading…"); },
+    // Specialty / branch selector — opens the Clinical Workspaces bottom sheet (workspaces.js).
+    workspace: function () { if (window.SMD_WS && SMD_WS.open) SMD_WS.open(); else toast("Workspaces loading…"); }
     // "settings" is handled specially (expands the Advanced block) — see wiring below.
   };
 
@@ -159,9 +162,25 @@
     return html;
   }
 
+  // Clinical workspace / specialty ("branch") selector — restored here because this file now OWNS
+  // #sbMenu and rebuilds it on every open (which was wiping workspaces.js's own injected switcher).
+  // Rendered as a normal row (consistent styling) → opens the Specialty Workspaces sheet. Only shown
+  // when the feature is live (window.SMD_WS exists — it early-returns when the kill-switch is set).
+  function wsRow() {
+    if (!(window.SMD_WS && SMD_WS.active)) return "";
+    var name = "";
+    try {
+      var id = SMD_WS.active(), reg = SMD_WS.registry || [];   // registry is an ARRAY of {id,name,…}
+      for (var i = 0; i < reg.length; i++) { if (reg[i] && reg[i].id === id) { name = reg[i].name || reg[i].label || ""; break; } }
+    } catch (e) {}
+    return '<div class="sbr-sec">Clinical workspace</div>' +
+      '<button class="sbr-row" data-sbr-act="workspace">' + svg("steth") +
+        '<span class="sbr-lbl">' + (name || "Choose specialty") + '</span><span class="sbr-chev">▾</span></button>';
+  }
   function build(menu) {
     menu.setAttribute("data-sbr", "1");
     menu.innerHTML =
+      wsRow() +
       '<div class="sbr-sec">Tools</div>' +
       row("drugs", "pills", "Drugs Database") +
       row("interactions", "interact", "Interaction Checker") +

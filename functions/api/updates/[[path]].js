@@ -26,6 +26,7 @@ import { identify } from "../../_fbauth.js";
 import * as repo from "../../_updates_repo.js";
 import { runPipeline } from "../../_updates_pipeline.js";
 import { classifyDocument } from "../../_summarize.js";
+import { tinyfishSearch } from "../../_search.js";
 import { buildDigest } from "../../_digest.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
@@ -216,11 +217,15 @@ export async function onRequest(context) {
       if (srcUrl) {
         const f = await fetchUrlText(srcUrl);
         if (f.ok) { title = f.title; excerpt = f.text; }
-        else fetchNote = "could-not-fetch-page" + (f.status ? "-" + f.status : "");   // classifier falls back to the note+url
+        else fetchNote = "could-not-fetch-page" + (f.status ? "-" + f.status : "");   // classifier falls back to the note+url+search
       }
-      const res = await classifyDocument(env, { url: srcUrl, title, excerpt, prompt });
-      if (!res.ok) return json({ ok: false, error: res.error || "classify-failed", fetchNote }, 502);
-      return json({ ok: true, draft: res.draft, model: res.model, fetchNote });
+      // Enrich with a web search (unless caller opts out) — lets a bare drug/guideline name work, and
+      // fills real pharma facts a thin headline lacks. Query = note, else page title, else the URL.
+      const wantSearch = body.search !== false;
+      const search = (wantSearch && (prompt || title || srcUrl)) ? await tinyfishSearch(env, prompt || title || srcUrl) : [];
+      const res = await classifyDocument(env, { url: srcUrl, title, excerpt, prompt, search });
+      if (!res.ok) return json({ ok: false, error: res.error || "classify-failed", fetchNote, searched: search.length }, 502);
+      return json({ ok: true, draft: res.draft, model: res.model, fetchNote, searched: search.length });
     }
 
     if (method === "POST" && head === "digest") {

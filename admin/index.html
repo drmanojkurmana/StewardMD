@@ -122,9 +122,9 @@
       <div class="pane" id="pane-notif" data-need-auth>
         <div class="card aibox">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span class="badge">AI</span><b>AI push box</b></div>
-          <div class="hint" style="margin:2px 0 6px">Paste a guideline/approval link and/or a short note. AI classifies it (type, specialty, importance) and drafts the summary — review below and publish, or push in one tap.</div>
-          <label for="aiUrl">Link (guideline / approval / trial)</label>
-          <input id="aiUrl" maxlength="800" placeholder="https://… (FDA, CDSCO, EMA, ICMR, a journal…)">
+          <div class="hint" style="margin:2px 0 6px">Paste a link, a short note, or <b>even just a drug/guideline name</b> — AI searches the web (TinyFish) for authoritative details, classifies it (type, specialty, importance), and drafts the summary + a prescribing snapshot for drugs. Review below and publish, or push in one tap.</div>
+          <label for="aiUrl">Link (optional — search finds the source if you leave this blank)</label>
+          <input id="aiUrl" maxlength="800" placeholder="https://… (FDA, CDSCO, EMA, ICMR, a journal…) — or leave blank">
           <label for="aiPrompt">Note / prompt (optional — helps if the link can't be read, e.g. a PDF)</label>
           <textarea id="aiPrompt" maxlength="2000" placeholder="e.g. CDSCO approved Lipfendra (drug X) for indication Y — cardiology."></textarea>
           <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
@@ -299,7 +299,7 @@
         $("nImp").value=dft.importance||"normal";
         $("nSrc").value=dft.organization||""; $("nUrl").value=dft.url||url;
         _aiStructured=(dft.pharma||(dft.keywords&&dft.keywords.length))?{pharma:dft.pharma||null,keywords:dft.keywords||[]}:null;
-        var note=(dft.type||"?")+" · "+(dft.workspace||"?")+" · "+(dft.importance||"normal")+(x.d.fetchNote?(" · "+x.d.fetchNote):"");
+        var note=(dft.type||"?")+" · "+(dft.workspace||"?")+" · "+(dft.importance||"normal")+(x.d.searched?(" · "+x.d.searched+" web sources"):"")+(dft.pharma?" · 💊 pharma":"")+(x.d.fetchNote?(" · "+x.d.fetchNote):"");
         if(pushNow){ say("aiMsg","ok","✅ Classified ("+note+") — publishing…"); nPublish(true); }
         else { say("aiMsg","ok","✅ Classified: "+note+". Review below, then Publish."); try{$("nTitle").scrollIntoView({behavior:"smooth",block:"center"});}catch(e){} }
       })

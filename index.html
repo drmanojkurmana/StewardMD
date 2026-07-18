@@ -946,6 +946,30 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
           </span>
         </span>
 
+        <span class="ack-contrib-name" tabindex="0">
+          Mr. S. Sai Niranjan
+          <span class="ack-tip">
+            <strong>Testing &amp; Marketing</strong>
+            Contributed hands-on testing and helped bring StewardMD to the doctors who need it — outreach, adoption, and real-world feedback.
+          </span>
+        </span>
+
+        <span class="ack-contrib-name" tabindex="0">
+          Dr. Rajesh
+          <span class="ack-tip">
+            <strong>Clinical Review — Neurosurgery · MS, MCh</strong>
+            Neurosurgical clinical input and review, helping extend StewardMD's reasoning to neurosurgical and perioperative care.
+          </span>
+        </span>
+
+        <span class="ack-contrib-name" tabindex="0">
+          Dr. Kumar Swamy
+          <span class="ack-tip">
+            <strong>Clinical Review — General Surgery · MS</strong>
+            Surgical clinical review and feedback, grounding StewardMD's guidance in real operative and perioperative practice.
+          </span>
+        </span>
+
       </div>
     </div>
 
@@ -1365,7 +1389,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script defer src="/medlist.js?v=gold363"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js"></script>
-<script src="/api.js?v=gold363" defer></script>
+<script src="/api.js?v=gold462" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
@@ -1387,13 +1411,13 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
 <script src="/image-engine.js?v=gold363" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold411" defer></script>
-<script src="/electrolytes.js?v=gold363" defer></script>
+<script src="/electrolytes.js?v=gold456" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/home.js?v=gold456" defer></script>
+<script src="/home.js?v=gold461" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
-<script defer src="/sidebar-redesign.js?v=gold456"></script>
+<script defer src="/sidebar-redesign.js?v=gold461"></script>
 <!-- Guided tour (SMD_TOUR): first-run interactive onboarding + one-time contextual tips.
      Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
      home.js + account.js so it can read the home DOM and the signed-in account. -->
@@ -1405,7 +1429,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/antibiogram.js?v=gold388" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
 <script src="/swipe-back.js?v=gold439" defer></script>
-<script src="/workspaces.js?v=gold363" defer></script>
+<script src="/workspaces.js?v=gold461" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
 <script src="/ws-ophthalmology.js?v=gold363" defer></script>
@@ -1416,7 +1440,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=gold456" defer></script>
+<script src="/icu.js?v=gold461" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->

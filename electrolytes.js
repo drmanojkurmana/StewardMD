@@ -113,6 +113,28 @@
     }
     return {name:"Calcium",value:(alb!=null?c:ca),unit:"mg/dL",severity:sev,level:level,lines:lines,ev:ev};
   }
+  // Ionised (free) calcium — reported natively in mmol/L; NOT in CONV, so it is never unit-converted
+  // (units-agnostic) and is a SEPARATE analyte from total Ca (which is mg/dL). ICU-preferred: unaffected
+  // by albumin/acid–base. Normal 1.10–1.30 mmol/L.
+  function analyzeICa(L,pt){
+    var ica=N(L.ica); if(ica==null)return null;
+    var lines=[],level,sev,ev=["UpToDate: Ca disorders","Harrison's"];
+    lines.push(["Measured ionised Ca", ica+" mmol/L (ICU-preferred — not confounded by albumin/acid–base)."]);
+    if(ica>=1.10&&ica<=1.30){level="ok";sev="Normal";lines.push(["Status","Ionised Ca normal (1.10–1.30 mmol/L)."]);}
+    else if(ica<1.10){
+      sev=ica<0.80?"Severe hypocalcaemia":ica<1.00?"Moderate hypocalcaemia":"Mild hypocalcaemia"; level=ica<0.80?"red":"amber";
+      lines.push(["IV indication","Symptomatic (tetany, seizures, ↑QTc, arrhythmia) or ionised <0.80 mmol/L."]);
+      lines.push(["Calcium gluconate","10% 10–20 mL (1–2 g) IV over 10–20 min, then infusion 0.5–1.5 mg/kg/h elemental Ca. Peripheral-safe."]);
+      lines.push(["Calcium chloride","10% 5–10 mL via CENTRAL line only (3× elemental Ca; vesicant) — reserve for arrest/refractory."]);
+      lines.push(["Correct magnesium","Replace Mg first/concurrently — hypomagnesaemia causes refractory hypocalcaemia."]);
+      lines.push(["Monitoring","Repeat ionised Ca q4–6 h; continuous ECG if symptomatic."]);
+    } else {
+      sev=ica>1.60?"Severe hypercalcaemia":ica>1.50?"Moderate hypercalcaemia":"Mild hypercalcaemia"; level=ica>1.60?"red":"amber";
+      lines.push(["Management","IV 0.9% saline 200–300 mL/h (volume repletion), then bisphosphonate (zoledronate) ± calcitonin for rapid effect. Treat cause."]);
+      lines.push(["Monitoring","Ionised Ca, renal function, fluid status."]);
+    }
+    return {name:"Ionised calcium",value:ica,unit:"mmol/L",severity:sev,level:level,lines:lines,ev:ev};
+  }
 
   function analyzePO4(L,pt){
     var p=N(L.po4); if(p==null)return null; var wt=N(pt.weight)||70, renal=renalImp(pt,L);
@@ -404,10 +426,10 @@
     rawL = rawL || {}; pt = pt || {};
     var L = {}, k;
     for (k in rawL){ if(!Object.prototype.hasOwnProperty.call(rawL,k)) continue; L[k] = toCanonical(k, N(rawL[k]), units || "conv"); }
-    var fns = [analyzeNa, analyzeK, analyzeMg, analyzeCa, analyzePO4, analyzeCl, analyzeHCO3], out = [], i, r;
+    var fns = [analyzeNa, analyzeK, analyzeMg, analyzeCa, analyzeICa, analyzePO4, analyzeCl, analyzeHCO3], out = [], i, r;
     for (i=0;i<fns.length;i++){ try { r = fns[i](L, pt); if (r) out.push(r); } catch (e) {} }
     return out;
   }
 
-  window.ELYTE = { open:open, close:close, analyze:analyzeAll, _engines:{ correctedNa:correctedNa, correctedCa:correctedCa, anionGap:anionGap, analyzeNa:analyzeNa, analyzeK:analyzeK, analyzeMg:analyzeMg, analyzeCa:analyzeCa, analyzePO4:analyzePO4, analyzeCl:analyzeCl, analyzeHCO3:analyzeHCO3, detectWarnings:detectWarnings, detectInsights:detectInsights, monitoringPlan:monitoringPlan } };
+  window.ELYTE = { open:open, close:close, analyze:analyzeAll, _engines:{ correctedNa:correctedNa, correctedCa:correctedCa, anionGap:anionGap, analyzeNa:analyzeNa, analyzeK:analyzeK, analyzeMg:analyzeMg, analyzeCa:analyzeCa, analyzeICa:analyzeICa, analyzePO4:analyzePO4, analyzeCl:analyzeCl, analyzeHCO3:analyzeHCO3, detectWarnings:detectWarnings, detectInsights:detectInsights, monitoringPlan:monitoringPlan } };
 })();
