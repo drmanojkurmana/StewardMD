@@ -95,7 +95,36 @@ function geminiParts(req) {
   if (req.imageDataUrl) { const im = splitDataUrl(req.imageDataUrl); parts.push({ inlineData: { mimeType: im.mimeType, data: im.data } }); }
   return parts;
 }
-function geminiBody(parts, maxTokens) { return { contents: [{ role: "user", parts }], generationConfig: { temperature: 0.1, maxOutputTokens: maxTokens || 1024, responseMimeType: "application/json", thinkingConfig: { thinkingBudget: 0 } } }; }
+// Safety settings — medical retinal images/text must NOT be over-blocked. Threshold is
+// env-configurable (FUNDX_SAFETY, default BLOCK_ONLY_HIGH). Never "OFF" silently.
+function safetySettings(env) {
+  const thr = (env && env.FUNDX_SAFETY) || "BLOCK_ONLY_HIGH";
+  return ["HARM_CATEGORY_HARASSMENT", "HARM_CATEGORY_HATE_SPEECH", "HARM_CATEGORY_SEXUALLY_EXPLICIT", "HARM_CATEGORY_DANGEROUS_CONTENT"]
+    .map((c) => ({ category: c, threshold: thr }));
+}
+function geminiBody(parts, maxTokens, env) {
+  return {
+    contents: [{ role: "user", parts }],
+    safetySettings: safetySettings(env),
+    generationConfig: { temperature: 0.1, maxOutputTokens: maxTokens || 1024, responseMimeType: "application/json", thinkingConfig: { thinkingBudget: 0 } }
+  };
+}
+
+// ---- token + cost estimation (per-provider accounting) -----------------
+// Estimates only (no exact token API); USD per 1M tokens, env-overridable. Image is
+// approximated at ~1000 tokens for Gemini multimodal.
+const PRICES = { vertex: { in: 0.30, out: 2.50 }, developer: { in: 0.10, out: 0.40 }, cerebras: { in: 0.60, out: 0.60 } };
+export function estTokens(s) { return Math.max(1, Math.ceil((s ? String(s).length : 0) / 4)); }
+export function estCostUsd(provider, inTok, outTok, env) {
+  let p = PRICES[provider] || PRICES.vertex;
+  try { if (env && env.FUNDX_PRICES) { const o = JSON.parse(env.FUNDX_PRICES); if (o[provider]) p = o[provider]; } } catch (e) {}
+  return +((inTok / 1e6) * p.in + (outTok / 1e6) * p.out).toFixed(6);
+}
+function computeMeta(env, provider, req, text, latencyMs) {
+  const inTok = estTokens((req.system || "") + (req.user || "")) + (req.imageDataUrl ? 1000 : 0);
+  const outTok = estTokens(text || "");
+  return { provider: provider, latencyMs: latencyMs, inTok: inTok, outTok: outTok, costUsd: estCostUsd(provider, inTok, outTok, env) };
+}
 function geminiText(data) { const c = data && data.candidates && data.candidates[0]; return (c && c.content && c.content.parts) ? c.content.parts.map((p) => p.text || "").join("") : ""; }
 
 const vertexProvider = {
@@ -106,7 +135,7 @@ const vertexProvider = {
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:generateContent`;
     const token = await vertexAccessToken(env);
     return withTimeout(async (signal) => {
-      const r = await fetch(url, { method: "POST", signal, headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(geminiBody(geminiParts(req), opts && opts.maxTokens)) });
+      const r = await fetch(url, { method: "POST", signal, headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(geminiBody(geminiParts(req), opts && opts.maxTokens, env)) });
       if (!r.ok) throw new Error("vertex HTTP " + r.status);
       return geminiText(await r.json());
     }, timeoutMs(env));
@@ -118,7 +147,7 @@ const developerProvider = {
   generate: async (env, req, opts) => {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`;
     return withTimeout(async (signal) => {
-      const r = await fetch(url, { method: "POST", signal, headers: { "Content-Type": "application/json" }, body: JSON.stringify(geminiBody(geminiParts(req), opts && opts.maxTokens)) });
+      const r = await fetch(url, { method: "POST", signal, headers: { "Content-Type": "application/json" }, body: JSON.stringify(geminiBody(geminiParts(req), opts && opts.maxTokens, env)) });
       if (!r.ok) throw new Error("developer HTTP " + r.status);
       return geminiText(await r.json());
     }, timeoutMs(env));
@@ -250,38 +279,66 @@ export function normalizeAssessment(obj, info) {
 async function runTask(env, order, req, kind, deps) {
   const providers = (deps && deps.providers) || PROVIDERS;
   const ord = (deps && deps.order) || order;
+  const sink = (deps && deps.onMetrics) || null;
+  function metric(m) { const o = Object.assign({ task: kind }, m); logJSON(o); if (sink) { try { sink(o); } catch (e) {} } }
   let lastErr = null;
   for (const name of ord) {
     const p = providers[name];
     if (!p || !p.available(env)) { lastErr = lastErr || httpErr(503, "no_provider", name + " unavailable"); continue; }
     if (kind === "vision" && p.modalities && p.modalities.indexOf("vision") < 0) continue;
-    const attempts = name === "vertex" ? 2 : 1;
+    const attempts = (name === "vertex" || name === "cerebras") ? 2 : 1;   // retry-once before failover
+    const t0 = Date.now();
     try {
-      const t0 = Date.now();
       const text = await retry(() => p.generate(env, req, { maxTokens: kind === "vision" ? 1024 : 1200 }), attempts);
+      const meta = computeMeta(env, name, req, text, Date.now() - t0);
       const obj = extractJSON(text);
-      if (!obj) { lastErr = httpErr(502, "bad_provider_response", name + " returned non-JSON"); logJSON({ task: kind, provider: name, status: "non_json", ms: Date.now() - t0 }); continue; }
-      logJSON({ task: kind, provider: name, status: "ok", ms: Date.now() - t0 });
-      return { obj, provider: name };
-    } catch (e) { lastErr = e; logJSON({ task: kind, provider: name, status: "error", reason: failReason(e) }); }
+      if (!obj) { lastErr = httpErr(502, "bad_provider_response", name + " returned non-JSON"); metric(Object.assign({ provider: name, status: "non_json" }, meta)); continue; }
+      metric(Object.assign({ provider: name, status: "ok" }, meta));
+      return { obj, provider: name, meta: meta };
+    } catch (e) { lastErr = e; metric({ provider: name, status: "error", reason: failReason(e), latencyMs: Date.now() - t0 }); }
   }
   throw (lastErr && lastErr.status) ? lastErr : httpErr(503, "no_" + kind + "_provider", lastErr ? failReason(lastErr) : "no provider configured");
 }
+
+// ---- provider router: primary → secondary → base-order fallback ---------
+// Manual override via FUNDX_PRIMARY / FUNDX_SECONDARY; else the task default order.
+// runTask already skips unavailable providers (health-based) + wrong-modality providers.
+export function routeOrder(env, task) {
+  const base = task === "vision" ? visionOrder(env) : clinicalOrder(env);
+  const primary = env && env.FUNDX_PRIMARY ? String(env.FUNDX_PRIMARY).toLowerCase() : null;
+  if (!primary) return base;
+  const secondary = env && env.FUNDX_SECONDARY ? String(env.FUNDX_SECONDARY).toLowerCase() : null;
+  const order = [primary];
+  if (secondary && secondary !== primary) order.push(secondary);
+  base.forEach((p) => { if (order.indexOf(p) < 0) order.push(p); });
+  return order;
+}
+
+// Capability discovery — every provider's declared interface.
+export function capabilities(env) {
+  return Object.keys(PROVIDERS).map((k) => ({
+    name: k, modalities: PROVIDERS[k].modalities,
+    streaming: false,          // FundX endpoints return a single structured-JSON object (no stream)
+    structuredJson: true, imageInput: PROVIDERS[k].modalities.indexOf("vision") >= 0,
+    available: !!PROVIDERS[k].available(env)
+  }));
+}
 export async function runVision(env, body, deps) {
   const v = validateVisionBody(body); if (!v.ok) throw httpErr(400, "invalid_request", v.errors.join(","));
-  const { obj, provider } = await runTask(env, visionOrder(env), buildVisionRequest(body), "vision", deps);
+  const { obj, provider } = await runTask(env, routeOrder(env, "vision"), buildVisionRequest(body), "vision", deps);
   return normalizeFindings(obj, { provider, model: modelId(env) });
 }
 export async function runClinical(env, body, deps) {
   const v = validateClinicalBody(body); if (!v.ok) throw httpErr(400, "invalid_request", v.errors.join(","));
-  const { obj, provider } = await runTask(env, clinicalOrder(env), buildClinicalRequest(body), "clinical", deps);
+  const { obj, provider } = await runTask(env, routeOrder(env, "clinical"), buildClinicalRequest(body), "clinical", deps);
   return normalizeAssessment(obj, { provider, model: modelId(env) });
 }
 export function health(env) {
   return {
     ok: true, service: "fundx", schema: { vision: SCHEMA_VISION, clinical: SCHEMA_CLINICAL }, model: modelId(env),
-    providers: Object.keys(PROVIDERS).map((k) => ({ name: k, modalities: PROVIDERS[k].modalities, available: !!PROVIDERS[k].available(env) })),
-    visionOrder: visionOrder(env), clinicalOrder: clinicalOrder(env)
+    providers: capabilities(env),
+    routing: { vision: routeOrder(env, "vision"), clinical: routeOrder(env, "clinical"), primary: (env && env.FUNDX_PRIMARY) || null, secondary: (env && env.FUNDX_SECONDARY) || null },
+    config: { timeoutMs: timeoutMs(env), safety: (env && env.FUNDX_SAFETY) || "BLOCK_ONLY_HIGH" }
   };
 }
 export { httpErr };

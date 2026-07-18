@@ -724,6 +724,17 @@
     }, 180);
   }
   function stopCamera() { try { if (cam) cam.stop(); } catch (e) {} VOICE.stop(); }
+  // Lifecycle: releasing the camera when the app is backgrounded (tab hidden / app to
+  // background) prevents the stream + rAF loop running invisibly (battery/thermal). Wired
+  // once; on return the user is on the pre-capture screen and can restart.
+  var _visWired = false;
+  function wireVisibility() {
+    if (_visWired || typeof document === "undefined" || !document.addEventListener) return;
+    _visWired = true;
+    document.addEventListener("visibilitychange", function () {
+      try { if (document.hidden && screen === "camera" && cam && cam.isRunning && cam.isRunning()) { stopCamera(); tel("endSession", "backgrounded"); if (FUNDX.isOpen()) { screen = "precapture"; render(); } } } catch (e) {}
+    });
+  }
 
   // Decode a captured dataURL → ImageData → run the enhancement pipeline → re-encode.
   // The enhancement ALGORITHM is pure (fundx-enhance.js, unit-tested); this is the
@@ -908,6 +919,7 @@
         rootEl.setAttribute("role", "dialog"); rootEl.setAttribute("aria-modal", "true"); rootEl.setAttribute("aria-label", "FundX AI retinal imaging");
         document.body.appendChild(rootEl); rootEl.addEventListener("click", onClick);
       }
+      wireVisibility();
       render(); rootEl.classList.add("on"); document.body.style.overflow = "hidden"; haptic("tap");
     },
     close: function () { stopCamera(); tel("endSession", "abandoned"); if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; haptic("tap"); },

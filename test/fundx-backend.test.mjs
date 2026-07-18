@@ -38,11 +38,23 @@ ok("clinicalOrder: cerebras first when selected", AI.clinicalOrder({ FUNDX_CLINI
 ok("health: no creds → all providers unavailable", AI.health({}).providers.every((p) => p.available === false));
 ok("health: GEMINI_API_KEY → developer available", AI.health({ GEMINI_API_KEY: "x" }).providers.find((p) => p.name === "developer").available === true);
 
+// ---- router + capabilities + cost accounting + safety ------------------
+ok("router: default vision order = base", JSON.stringify(AI.routeOrder({}, "vision")) === JSON.stringify(AI.visionOrder({})));
+ok("router: FUNDX_PRIMARY override puts primary first", AI.routeOrder({ FUNDX_PRIMARY: "developer" }, "vision")[0] === "developer");
+ok("router: primary + secondary then base fallback (deduped)", (function () { const o = AI.routeOrder({ FUNDX_PRIMARY: "cerebras", FUNDX_SECONDARY: "vertex" }, "clinical"); return o[0] === "cerebras" && o[1] === "vertex" && new Set(o).size === o.length; })());
+ok("capabilities: all providers, structured JSON, no streaming", AI.capabilities({}).length === 3 && AI.capabilities({}).every((c) => c.structuredJson === true && c.streaming === false));
+ok("capabilities: only vision-capable providers expose imageInput", AI.capabilities({}).find((c) => c.name === "cerebras").imageInput === false && AI.capabilities({}).find((c) => c.name === "vertex").imageInput === true);
+ok("cost: estTokens ~ chars/4", AI.estTokens("abcd".repeat(25)) === 25);
+ok("cost: estCostUsd non-negative + provider-specific", AI.estCostUsd("vertex", 1000, 1000, {}) > 0 && AI.estCostUsd("cerebras", 1000, 1000, {}) !== AI.estCostUsd("vertex", 1000, 1000, {}));
+ok("health: routing + config surfaced", (function () { const h = AI.health({ FUNDX_PRIMARY: "vertex" }); return !!h.routing && h.routing.primary === "vertex" && h.config.safety === "BLOCK_ONLY_HIGH"; })());
+
 // ---- orchestration via injected mock provider (no network) --------------
 await (async () => {
   const mockVision = { name: "mockv", modalities: ["vision", "text"], available: () => true, generate: async () => JSON.stringify({ quality: 92, retina_visible: true, optic_disc: { visible: true, cup_disc_ratio: 0.42 }, confidence: 0.9 }) };
-  const findings = await AI.runVision({}, { image: "data:image/jpeg;base64,AAAA" }, { providers: { mockv: mockVision }, order: ["mockv"] });
+  const collected = [];
+  const findings = await AI.runVision({}, { image: "data:image/jpeg;base64,AAAA" }, { providers: { mockv: mockVision }, order: ["mockv"], onMetrics: (m) => collected.push(m) });
   ok("runVision: mock provider → normalized findings", findings.quality === 92 && findings.provider === "mockv" && findings.schemaVersion === 1);
+  ok("metrics: onMetrics captures per-provider cost/latency/tokens", collected.length >= 1 && collected[0].status === "ok" && collected[0].provider === "mockv" && typeof collected[0].costUsd === "number" && collected[0].outTok > 0);
 
   const mockClin = { name: "mockc", modalities: ["text"], available: () => true, generate: async () => '```json\n{"severity":"moderate","urgency":"soon","label":"NPDR features","confidence":0.8}\n```' };
   const asmt = await AI.runClinical({}, { findings: { microaneurysms: 4 } }, { providers: { mockc: mockClin }, order: ["mockc"] });

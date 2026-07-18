@@ -5,11 +5,15 @@
 # SAME ones MaiK already uses — in production they are already configured; you only need
 # them locally if you want to exercise real Vertex calls from `pages dev`.
 
-# ---- provider selection (non-secret) ----
+# ---- provider selection + routing (non-secret) ----
 FUNDX_AI_PROVIDER=vertex           # vertex (default) | developer | cerebras
 # FUNDX_VISION_PROVIDER=vertex     # optional per-task override (vision needs a multimodal provider)
 # FUNDX_CLINICAL_PROVIDER=vertex   # vertex | cerebras | developer
+# FUNDX_PRIMARY=vertex             # provider router: forced primary (overrides order)
+# FUNDX_SECONDARY=developer        # provider router: secondary before base-order fallback
 FUNDX_MODEL=gemini-2.5-flash       # do NOT use gemini-2.0-flash
+FUNDX_SAFETY=BLOCK_ONLY_HIGH       # Gemini safety threshold (medical content must not over-block)
+# FUNDX_PRICES={"vertex":{"in":0.30,"out":2.50},"cerebras":{"in":0.60,"out":0.60}}  # USD/1M tokens, cost estimates
 
 # ---- limits / robustness (non-secret) ----
 FUNDX_DAILY_LIMIT=200

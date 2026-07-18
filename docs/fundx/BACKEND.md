@@ -120,3 +120,41 @@ external credentials that are not present in this environment:
 - [ ] Flip the app's active provider(s) as above.
 
 No code change is required for any of these — they are configuration only.
+
+## Provider router, monitoring & cost (production)
+
+**Provider router (`_fundx_ai.js` `routeOrder`).** Per task the order is:
+`FUNDX_PRIMARY` → `FUNDX_SECONDARY` → the task base order (`FUNDX_VISION_PROVIDER` /
+`FUNDX_CLINICAL_PROVIDER` / `FUNDX_AI_PROVIDER`, default `vertex → developer`, clinical adds
+`cerebras`), de-duplicated. `runTask` then applies **health-based** skipping (unavailable
+providers are skipped) and **modality** filtering (vision requests skip text-only providers
+like Cerebras), with **retry-once → automatic failover** to the next provider. Manual
+override = set `FUNDX_PRIMARY`. Client-side manual override = the app's provider selector.
+
+**Streaming.** The FundX endpoints return a single structured-JSON object (findings /
+assessment), so **streaming is not applicable** and `capabilities().streaming === false` for
+all providers — a deliberate design choice, not a gap. (MaiK's chat endpoint streams; FundX
+structured output does not.)
+
+**Safety.** Gemini requests carry `safetySettings` on all four harm categories at
+`FUNDX_SAFETY` (default `BLOCK_ONLY_HIGH`) so medical images/text are not over-blocked; never
+silently `OFF`.
+
+**Monitoring.** Every provider call emits a structured log line (no PHI) and a metric event
+(provider, status, latencyMs, inTok, outTok, costUsd). The router persists per-day, per-provider
+counters to `MAIK_KV` via `ctx.waitUntil` (off the response path); `GET /api/fundx/health`
+returns today's `metrics` = per-provider `{count, errors, errorRate, avgLatencyMs, tokens,
+costUsd}` + total request volume. (A visual dashboard would consume this endpoint / the logs —
+not built in; documented follow-up.)
+
+**Cost.** Token usage is **estimated** (`estTokens` ≈ chars/4; image ≈ 1000 tokens for Gemini
+multimodal — no exact token API) and priced from a per-provider table (USD/1M tokens,
+overridable via `FUNDX_PRICES`). Surfaced in `/health.metrics[provider].costUsd`; use it for
+provider comparison + monthly projection. Rate-limit / cost caps via `FUNDX_DAILY_LIMIT`.
+
+**New env vars:** `FUNDX_PRIMARY`, `FUNDX_SECONDARY` (routing), `FUNDX_SAFETY` (default
+`BLOCK_ONLY_HIGH`), `FUNDX_PRICES` (optional cost override) — all non-secret; see
+`.dev.vars.example`.
+
+**Capability discovery:** `GET /api/fundx/health.providers[]` = `{name, modalities, streaming,
+structuredJson, imageInput, available}` per provider.
