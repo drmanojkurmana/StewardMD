@@ -263,9 +263,14 @@
         '<button data-mode="quick"' + (prefs.lastUsedAssessmentMode !== "advanced" ? ' class="on"' : '') + '>Quick assessment</button>' +
         '<button data-mode="advanced"' + (prefs.lastUsedAssessmentMode === "advanced" ? ' class="on"' : '') + '>Advanced assessment</button></div>';
     }
-    // "this case / make default" choice — shown for the selector too, so picking a branch asks first.
-    h += '<div class="sw-usefor"><label><input type="radio" name="swUse" value="case" checked> ' + (opts.inCase ? "Use for this case only" : "Use for my next case") + '</label>' +
-      '<label><input type="radio" name="swUse" value="default"> Make my default workspace</label></div>';
+    // "this case / make default" choice. From the SIDEBAR branch selector (!inCase) default to
+    // PERSIST ("Make my default") so the chosen branch actually sticks — the old one-shot default
+    // ("Use for my next case") was in-memory only, so if it was lost before Start, activeWorkspace()
+    // fell back to Internal Medicine and "Start a case" opened the IM/MARINAM engine instead of the
+    // selected specialty. In-case switching keeps the one-shot default.
+    var persistDefault = !opts.inCase;
+    h += '<div class="sw-usefor"><label><input type="radio" name="swUse" value="case"' + (persistDefault ? '' : ' checked') + '> ' + (opts.inCase ? "Use for this case only" : "Use for my next case") + '</label>' +
+      '<label><input type="radio" name="swUse" value="default"' + (persistDefault ? ' checked' : '') + '> Make my default workspace</label></div>';
     REG.forEach(function (r) {
       h += '<button class="sw-opt" data-ws="' + r.id + '"><span class="ic">' + ic(ICONS[r.id]) + '</span>' +
         '<span class="tx"><span class="nm">' + r.name + '</span><span class="sb">' + r.subtitle + '</span></span>' +
