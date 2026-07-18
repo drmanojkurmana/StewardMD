@@ -120,6 +120,8 @@
       })();
       function getToken() { try { return localStorage.getItem(tokenKey()) || ''; } catch (e) { return ''; } }
       function setToken(t) { try { t ? localStorage.setItem(tokenKey(), t) : localStorage.removeItem(tokenKey()); } catch (e) {} }
+      // Firebase ID token (for the Pro gate on /login) — resolves '' when signed-out or unavailable.
+      function fbToken() { try { var u = window.SMD_AUTH && window.SMD_AUTH.currentUser; if (u && u.getIdToken) return u.getIdToken().catch(function(){ return ''; }); } catch (e) {} return Promise.resolve(''); }
       // Silent GHIS session refresh: when the short-lived GHIS session times out, re-mint one from
       // the doctor's SERVER-STORED (consented, Lab Watch 24/7) creds via their Firebase identity —
       // NO password prompt. Resolves to a fresh token, or null if it can't (not Firebase-signed-in,
@@ -373,7 +375,10 @@
         // the manual form; resolves true on success. Never persists the password anywhere here.
         loginWith: function(userId, password) {
           if (!userId || !password) return Promise.resolve(false);
-          return fetch(PROXY + '/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: userId, password: password }) })
+          return fbToken().then(function(jwt){
+            var h = { 'Content-Type': 'application/json' }; if (jwt) h['Authorization'] = 'Bearer ' + jwt;
+            return fetch(PROXY + '/login', { method: 'POST', headers: h, body: JSON.stringify({ userId: userId, password: password }) });
+          })
             .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, d: d }; }); })
             .then(function(res) { if (res.ok && res.d && res.d.token) { setToken(res.d.token); _connected = true; try { dot(true); } catch (e) {} return true; } return false; })
             .catch(function() { return false; });
@@ -800,13 +805,18 @@
         var errEl = document.getElementById('ghisSetupError');
         if (!userId || !password) { errEl.textContent = 'Enter your GHIS ID and password.'; return; }
         errEl.textContent = 'Signing in…';
-        fetch(PROXY + '/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId: userId, password: password })
+        fbToken().then(function(jwt){
+          var h = { 'Content-Type': 'application/json' }; if (jwt) h['Authorization'] = 'Bearer ' + jwt;
+          return fetch(PROXY + '/login', { method: 'POST', headers: h, body: JSON.stringify({ userId: userId, password: password }) });
         })
-        .then(function(r) { return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+        .then(function(r) { return r.json().then(function(d){ return { ok: r.ok, s: r.status, d: d }; }); })
         .then(function(res) {
+          if (res.s === 402 || (res.d && res.d.needsPro)) {
+            errEl.textContent = '';
+            try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall('wardsync'); return; } } catch (e) {}
+            errEl.textContent = 'Ward Sync is a StewardMD Pro feature.';
+            return;
+          }
           if (res.ok && res.d.token) {
             setToken(res.d.token);
             document.getElementById('ghisPassword').value = '';

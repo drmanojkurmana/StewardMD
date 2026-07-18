@@ -6,6 +6,18 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // ── Pro entitlement (mirrors functions/_entitlement.js) ───────────────────
+    // Team collaboration (icuGroups) and case sharing (sharedCases) are Pro features. Pro is a
+    // Firebase custom claim (token.pro == true, optional token.proExp in ms). LAUNCH PROMO: until
+    // 16 Sep 2026 (UTC) everyone is treated as Pro so the whole app is open for launch/testing.
+    // Keep this promo cutoff in sync with PRO_FREE_UNTIL in functions/_entitlement.js.
+    function isProUser() {
+      return request.time < timestamp.date(2026, 9, 16)
+             || (request.auth != null
+                 && request.auth.token.pro == true
+                 && (!('proExp' in request.auth.token) || request.auth.token.proExp > request.time.toMillis()));
+    }
+
     // A user's saved cases are PRIVATE to that user. (Previously this allowed any
     // signed-in user to read/write ANY user's cases — broken access control / PHI IDOR.)
     match /users/{userId}/cases/{caseId} {
@@ -43,9 +55,10 @@ service cloud.firestore {
       // (bulk enumeration of all shared clinical content + owner names). Deny it.
       allow list: if false;
 
-      // Signed-in users create their OWN share; expiry is required and capped (~32 days
+      // Signed-in PRO users create their OWN share; expiry is required and capped (~32 days
       // max, so a share can't be made effectively permanent); public payload size bounded.
       allow create: if request.auth != null
+                    && isProUser()
                     && request.resource.data.ownerUid == request.auth.uid
                     && request.resource.data.expiresAt is number
                     && request.resource.data.expiresAt <= request.time.toMillis() + 32 * 24 * 60 * 60 * 1000
@@ -100,8 +113,9 @@ service cloud.firestore {
 
       // Read the unit if you are a member.
       allow read: if isMember(groupId);
-      // Create: the creator must stamp THEMSELVES as createdBy (their head member doc follows).
-      allow create: if request.auth != null && request.auth.uid == request.resource.data.createdBy;
+      // Create: a PRO creator must stamp THEMSELVES as createdBy (their head member doc follows).
+      // Collaboration is a Pro feature; the launch promo keeps it open for everyone until 16 Sep 2026.
+      allow create: if request.auth != null && isProUser() && request.auth.uid == request.resource.data.createdBy;
       // Update unit metadata (name/unit/hospital): admins only.
       allow update: if isAdmin(groupId);
       // Delete the whole unit: the head only.

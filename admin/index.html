@@ -81,6 +81,7 @@
         <a data-p="logs">🛰️ Crawl logs</a>
         <div class="grp">Users</div>
         <a data-p="verif">🩺 Verifications <span class="b" id="navVerif">0</span></a>
+        <a data-p="pro">💳 Pro subscriptions</a>
         <div class="grp">System</div>
         <a data-p="push">📣 Push blast</a>
         <a data-p="watch">🧪 Lab-watch</a>
@@ -196,6 +197,25 @@
         </div>
       </div>
 
+      <!-- PRO SUBSCRIPTIONS -->
+      <div class="pane" id="pane-pro" data-need-auth>
+        <div class="card">
+          <b>Grant / manage Pro</b>
+          <div class="hint" style="margin:2px 0 8px">Enter the doctor's <b>email</b> (or their uid). Granting persists as a Firebase claim and sends them a confirmation email. During the launch promo everyone already has Pro free — these grants take over when the promo ends.</div>
+          <label for="proEmail">User email or uid</label>
+          <input id="proEmail" placeholder="doctor@example.com" autocapitalize="off" spellcheck="false">
+          <div class="qa" style="margin-top:12px">
+            <button class="primary" data-pro="forever">♾️ Pro forever</button>
+            <button class="ghost" data-pro="months:12">1 year</button>
+            <button class="ghost" data-pro="months:1">1 month</button>
+            <button class="ghost" data-pro="trial">7-day trial</button>
+            <button class="ghost" data-pro="lookup">Check status</button>
+            <button class="ghost" data-pro="revoke" style="color:var(--red);border-color:var(--red)">Revoke</button>
+          </div>
+          <div class="msg" id="proMsg"></div>
+        </div>
+      </div>
+
       <!-- PUSH -->
       <div class="pane" id="pane-push" data-need-auth>
         <div class="card">
@@ -238,8 +258,8 @@
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
   var vFilter="pending", activePane="overview", _aiStructured=null;
-  var PANES=["overview","notif","sources","logs","verif","push","watch","ai"];
-  var TITLES={overview:"Overview",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",push:"Push blast",watch:"Lab-watch",ai:"AI usage"};
+  var PANES=["overview","notif","sources","logs","verif","pro","push","watch","ai"];
+  var TITLES={overview:"Overview",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Pro subscriptions",push:"Push blast",watch:"Lab-watch",ai:"AI usage"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
@@ -337,6 +357,28 @@
     }).catch(function(){el.innerHTML='<div class="hint">Could not load.</div>';});
   }
   $("vReload").onclick=vLoad;
+
+  // ---- Pro subscriptions ----
+  function proAct(spec){
+    var v=$("proEmail").value.trim(); if(!v){say("proMsg","err","Enter an email or uid.");return;}
+    var isUid=(v.indexOf("@")<0 && v.length>=20);
+    var payload=isUid?{uid:v}:{email:v}, path="/api/billing/grant";
+    if(spec==="lookup") path="/api/billing/lookup";
+    else if(spec==="revoke"){ if(!confirm("Revoke Pro for "+v+"?")) return; path="/api/billing/revoke"; }
+    else if(spec==="forever") payload.mode="forever";
+    else if(spec==="trial") payload.mode="trial";
+    else if(spec.indexOf("months:")===0){ payload.mode="months"; payload.months=parseInt(spec.split(":")[1],10)||1; }
+    say("proMsg","","Working…");
+    api(path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).then(function(x){
+      var d=x.d||{};
+      if(x.s!==200||d.error){ say("proMsg","err", x.s===401?"Not an owner.":(d.error==="user-not-found"?"No account with that email.":("Failed: "+(d.error||x.s)))); return; }
+      var who=d.email||d.uid||v;
+      if(path.indexOf("lookup")>=0){ say("proMsg",d.pro?"ok":"", (d.pro?("PRO ✓"+(d.source?" ("+d.source+")":"")+(d.promo?" · launch promo":(d.until?" · until "+new Date(d.until).toLocaleDateString():" · no expiry"))):"NOT Pro")+" · "+who); return; }
+      if(path.indexOf("revoke")>=0){ say("proMsg","ok","✅ Revoked · "+who); return; }
+      say("proMsg","ok","✅ Pro granted "+(d.forever?"forever":(d.proExp?("until "+new Date(d.proExp).toLocaleDateString()):""))+(d.emailed?" · ✉️ email sent":"")+" · "+who);
+    }).catch(function(){ say("proMsg","err","Sign in first."); });
+  }
+  document.querySelectorAll("[data-pro]").forEach(function(b){ b.onclick=function(){ proAct(b.getAttribute("data-pro")); }; });
 
   // ---- Lab-watch ----
   $("wRun").onclick=function(){ say("wMsg","","Polling GHIS…"); $("wRun").disabled=true;

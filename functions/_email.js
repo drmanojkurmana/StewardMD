@@ -61,6 +61,25 @@ export function emailVerified(env, { email, name, regNo, council }) {
   });
 }
 
+export function emailProConfirmation(env, { email, name, until, forever, trial }) {
+  var dur = forever ? "lifetime access" : (trial ? "a 7-day free trial" : (until ? "access until " + until : "Pro access"));
+  return sendBranded(env, {
+    to: email,
+    subject: trial ? "Your StewardMD Pro trial is active 🎉" : "StewardMD Pro is active 🎉",
+    title: "You're on StewardMD Pro",
+    preheader: "Pro is active on your account — everything unlocked.",
+    bodyHtml:
+      '<p style="font-size:14px;line-height:1.6">' + (name ? "Dr. " + esc(name) : "Doctor") + ', your StewardMD <b>Pro</b> ' + (trial ? "trial" : "subscription") + ' is now active — ' + esc(dur) + '.</p>' +
+      '<p style="font-size:14px;line-height:1.6;color:#2d4356">You now have the full intelligence layer:</p>' +
+      '<ul style="font-size:14px;line-height:1.8;color:#2d4356;padding-left:18px">' +
+        '<li>MaiK AI — deep review, imaging, scribe, evidence</li>' +
+        '<li>Ward Sync &amp; Lab Watch 24/7</li>' +
+        '<li>Team collaboration, cross-device sync &amp; case sharing</li>' +
+        '<li>Full drug database</li>' +
+      '</ul>' + btn("Open StewardMD"),
+  });
+}
+
 export function emailFailed(env, { email, name, reason }) {
   return sendBranded(env, {
     to: email,

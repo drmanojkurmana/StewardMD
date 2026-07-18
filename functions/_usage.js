@@ -13,6 +13,8 @@
  * so MaiK never breaks purely because metering storage is absent.
  */
 
+import { proFromRequest } from "./_entitlement.js";
+
 const FB_PROJECT_DEFAULT = "stewardmd-498ec";
 const JWK_URL = "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
 
@@ -25,6 +27,7 @@ export function usageConfig(env) {
     caseDaily: n("MAIK_CASE_DAILY_LIMIT", 30),
     dailyTokens: n("MAIK_DAILY_TOKEN_LIMIT", 200000),
     monthlyTokens: n("MAIK_MONTHLY_TOKEN_LIMIT", 3000000),
+    freeMonthlyTokens: n("MAIK_FREE_MONTHLY_TOKEN_LIMIT", 30000),   // non-Pro: ~one full case / month
     maxInputTokens: n("MAIK_MAX_INPUT_TOKENS", 4000),
     maxOutputTokens: n("MAIK_MAX_OUTPUT_TOKENS", 800),
     ocrDaily: n("MAIK_OCR_DAILY_LIMIT", 10),
@@ -98,8 +101,10 @@ export async function checkQuota(env, request, type, opts) {
   const store = usageKv(env); if (!store) return { ok: true, id: null, meter: false };
   const cfg = usageConfig(env);
   const who = await identify(request, env); const id = who.id;
+  let isProCaller = true; try { isProCaller = (await proFromRequest(env, request)).pro; } catch (e) {}
   const now = new Date(), day = dayKey(now), month = monthKey(now);
   const QUOTA_MSG = "MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.";
+  const PRO_MSG = "You've used your free MaiK allowance for this month. Upgrade to StewardMD Pro for unlimited clinical AI, imaging, and evidence review.";
 
   // global circuit breaker (project-wide daily cost)
   const g = (await readJson(store, "maik:global:" + day)) || { cost: 0, req: 0, blocked: 0 };
@@ -117,7 +122,11 @@ export async function checkQuota(env, request, type, opts) {
   const m = (await readJson(store, mKey)) || { tokens: 0 };
 
   if (u.tokens >= cfg.dailyTokens) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
-  if (m.tokens >= cfg.monthlyTokens) return { ok: false, reason: "monthly-tokens", message: QUOTA_MSG, id };
+  const monthlyCap = isProCaller ? cfg.monthlyTokens : cfg.freeMonthlyTokens;
+  if (m.tokens >= monthlyCap) {
+    if (!isProCaller) return { ok: false, reason: "needs-pro", needsPro: true, message: PRO_MSG, id };
+    return { ok: false, reason: "monthly-tokens", message: QUOTA_MSG, id };
+  }
   if (type === "general" || type === "intent") { const lim = who.guest ? cfg.guestDaily : cfg.generalDaily; if (u.general >= lim) return { ok: false, reason: "daily-requests", message: QUOTA_MSG, id }; }
   else if (type === "case") { if (u.case >= cfg.caseDaily) return { ok: false, reason: "daily-requests", message: QUOTA_MSG, id }; }
   else if (type === "ocr") { if (u.ocr >= cfg.ocrDaily) return { ok: false, reason: "ocr-daily", message: QUOTA_MSG, id }; }
