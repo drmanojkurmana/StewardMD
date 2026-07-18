@@ -48,8 +48,13 @@ try {
   // pre-capture → camera (fake stream)
   await ev(`document.querySelector('#fundxRoot [data-fx="newscan"]').click(); return 1;`); await sleep(400);
   ok(await ev(`return !!document.querySelector('#fundxRoot [data-fx="startcam"]') && !!document.querySelector('#fundxRoot [data-fx="eye"]');`) === true, "Pre-capture screen (eye picker + start button)");
+  await ev(`localStorage.setItem("smd_fundx_dev","1"); return 1;`);   // enable developer mode (debug overlay)
   await ev(`document.querySelector('#fundxRoot [data-fx="startcam"]').click(); return 1;`); await sleep(2500);
   ok(await ev(`return !!document.getElementById("fundxVideo");`) === true, "Camera screen mounts a live <video>");
+  ok(await ev(`return !!document.getElementById("fundxDebug");`) === true, "dev mode: debug overlay present in the camera screen");
+  // The per-frame paint depends on the camera analyze loop, which the headless fake device
+  // can't drive; verify the overlay's data path works in the REAL browser bundle instead.
+  ok(await ev(`var s={state:"ready",shouldCapture:true,diagnostic:0.83,gates:{focus:true,quality:true},readiness:{overall:1,ready:true}}; var fa=window.SMD_FUNDX_VISION.makeFrameAnalysis({focus:0.9,reflection:0.1,vesselScore:0.7,fundusConf:0.8}); var m=window.FUNDX._devMetrics(s,fa); return m.length===11 && m.map(function(r){return r[0];}).indexOf("DIAGNOSTIC")>=0;`) === true, "dev mode: overlay metrics compute in-browser (11 live metrics + decision)");
   ok(await ev(`var v=document.getElementById("fundxVideo"); return !!(v && v.srcObject && v.srcObject.getVideoTracks && v.srcObject.getVideoTracks().length > 0 && v.srcObject.getVideoTracks()[0].readyState === "live");`) === true, "getUserMedia resolved: camera stream attached with a live video track");
   ok(await ev(`return !!document.getElementById("fundxRingFg") && !!document.getElementById("fundxChips");`) === true, "AR overlay present (readiness ring + gate chips)");
   ok(await ev(`return document.querySelectorAll('#fundxChips .fundx-chip').length >= 8;`) === true, "gate chips rendered");

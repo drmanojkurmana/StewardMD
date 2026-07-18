@@ -236,6 +236,7 @@
           '<button id="fundxFallback" class="fundx-fallback" data-fx="confirmlens" style="display:none">' + ric("check_circle") + 'Confirm lens is positioned</button>' +
         '</div>' +
         '<div id="fundxFlash" class="fundx-flash"></div>' +
+        (devOn() ? '<div class="fundx-debug-wrap"><div id="fundxDebug" class="fundx-debug"></div><button class="fundx-debug-x" data-fx="devexport">' + ric("download") + 'Export frames</button></div>' : '') +
       '</div>';
   }
 
@@ -481,6 +482,49 @@
   function loadSens() { try { return localStorage.getItem("smd_fundx_sens") || "med"; } catch (e) { return "med"; } }
   function lensConfirmOn() { try { return localStorage.getItem("smd_fundx_lens_confirm") === "1"; } catch (e) { return false; } }
   function telOn() { try { return localStorage.getItem("smd_fundx_telemetry") === "1"; } catch (e) { return false; } }
+  // Developer mode: live debug overlay + frame-by-frame metric recording. OFF by default
+  // (flag smd_fundx_dev or ?fundxdev=1). Additive; never affects acquisition behaviour.
+  function devOn() { try { var q = (location.search.match(/[?&]fundxdev=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_dev") === "1"; } catch (e) { return false; } }
+  var devBuffer = [], DEV_MAX = 6000;
+  function r2(n) { return (n == null || n !== n) ? "" : Math.round(n * 100) / 100; }
+  // Build one debug row {label, value, pass} for a metric vs its live gate.
+  function devMetrics(step, fa) {
+    var g = step.gates || {}, d = step.diagnostic != null ? step.diagnostic : (step.readiness && step.readiness.diagnostic);
+    return [
+      ["focus", r2(fa.focus), g.focus], ["glare (refl)", r2(fa.reflection), g.reflection],
+      ["motion", r2(fa.motion), g.motion], ["distance", fa.distanceState, g.distance],
+      ["roll", (fa.roll == null ? "—" : Math.round(fa.roll) + "° " + fa.rollState), g.level],
+      ["red reflex", r2(fa.redReflex), g.redReflex], ["vessel", r2(fa.vesselScore), g.vessels],
+      ["fundus", r2(fa.fundusConf) + " ·circ " + r2(fa.fundusCircularity), g.fundus],
+      ["DIAGNOSTIC", r2(d), g.quality], ["readiness", r2(step.readiness && step.readiness.overall), step.readiness && step.readiness.ready],
+      ["decision", step.state + (step.shouldCapture ? " ● CAPTURE" : ""), step.shouldCapture]
+    ];
+  }
+  function paintDebug(step, fa) {
+    var el = document.getElementById("fundxDebug"); if (!el) return;
+    el.innerHTML = devMetrics(step, fa).map(function (m) {
+      return '<div class="fdbg-row' + (m[2] === true ? ' ok' : m[2] === false ? ' bad' : '') + '"><span>' + m[0] + '</span><b>' + esc(m[1]) + '</b></div>';
+    }).join("");
+  }
+  function recordDevFrame(step, fa) {
+    if (devBuffer.length >= DEV_MAX) return;
+    var d = step.diagnostic != null ? step.diagnostic : (step.readiness && step.readiness.diagnostic);
+    devBuffer.push({ t: fa.ts, state: step.state, focus: r2(fa.focus), glare: r2(fa.reflection), motion: r2(fa.motion), distance: fa.distanceState, roll: (fa.roll == null ? "" : Math.round(fa.roll)), rollState: fa.rollState, redReflex: r2(fa.redReflex), vessel: r2(fa.vesselScore), fundusConf: r2(fa.fundusConf), fundusCirc: r2(fa.fundusCircularity), diagnostic: r2(d), readiness: r2(step.readiness && step.readiness.overall), eyeConf: r2(fa.eyeConf), pupilOffset: r2(fa.pupilOffset), capture: step.shouldCapture ? 1 : 0 });
+  }
+  function devCsv() {
+    if (!devBuffer.length) return "";
+    var cols = Object.keys(devBuffer[0]);
+    return cols.join(",") + "\n" + devBuffer.map(function (r) { return cols.map(function (c) { return r[c]; }).join(","); }).join("\n");
+  }
+  function exportDevLog() {
+    var csv = devCsv(); if (!csv) { toast("No dev frames recorded yet."); return; }
+    try {
+      var blob = new Blob([csv], { type: "text/csv" }), a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = "fundx-dev-" + nowMs() + ".csv";
+      document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      toast(devBuffer.length + " frames exported.");
+    } catch (e) { toast("Export failed."); }
+  }
   function applySettings() {
     var Ve = V(); if (!Ve) return;
     var s = SENS[loadSens()] || SENS.med; Ve.CFG.captureReadiness = s.r; Ve.CFG.readySustainFrames = s.f;
@@ -516,6 +560,7 @@
         '<div class="rds-section-header"><span class="rds-section-title">Data</span></div>' +
         '<button class="fundx-set-row" data-fx="clearall"><span class="fundx-set-rl"><b>Delete all scans</b><span>Removes every stored image + record on this device</span></span>' + ric("delete_forever") + '</button>' +
         '<button class="fundx-set-row' + (telOn() ? ' on' : '') + '" data-fx="settel"><span class="fundx-set-rl"><b>Acquisition telemetry (anonymous)</b><span>Local, no PHI — guidance steps, quality progression, capture time + outcome. For validation. Off by default.</span></span>' + ric(telOn() ? "toggle_on" : "toggle_off") + '</button>' +
+        '<button class="fundx-set-row' + (devOn() ? ' on' : '') + '" data-fx="setdev"><span class="fundx-set-rl"><b>Developer mode</b><span>Live metric overlay on the camera + frame-by-frame CSV export (focus/glare/motion/distance/roll/reflex/vessel/fundus/diagnostic/decision). Field-testing only.</span></span>' + ric(devOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<p class="fundx-disc">' + disclaimerText() + '</p>' +
       '</main>';
   }
@@ -619,6 +664,7 @@
     session.readinessTrace.push(Math.round((step.readiness.overall || 0) * 100));
     if (session.readinessTrace.length > 400) session.readinessTrace.shift();
     updateCameraUI(step, fa);
+    if (devOn()) { paintDebug(step, fa); recordDevFrame(step, fa); }
     if (session.mode !== "training") tel("frame", step, fa.ts);
     if (session.mode === "training") { handleTraining(step); return; }
     if (step.shouldCapture) triggerCapture();
@@ -824,6 +870,8 @@
       case "confirmlens": if (sm && sm.confirmLensPositioned) sm.confirmLensPositioned(); haptic("selection"); { var fbb = document.getElementById("fundxFallback"); if (fbb) fbb.style.display = "none"; } toast("Proceeding — capture still needs a clear retinal image."); return;
       case "setlensconfirm": { try { localStorage.setItem("smd_fundx_lens_confirm", lensConfirmOn() ? "0" : "1"); } catch (e) {} applySettings(); haptic("selection"); return render(); }
       case "settel": { try { localStorage.setItem("smd_fundx_telemetry", telOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
+      case "setdev": { try { localStorage.setItem("smd_fundx_dev", devOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
+      case "devexport": haptic("light"); return exportDevLog();
       case "voice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); { var vb = document.getElementById("fundxVoiceBtn"); if (vb) { vb.classList.toggle("on", VOICE.enabled()); vb.innerHTML = ric(VOICE.enabled() ? "volume_up" : "volume_off"); } if (VOICE.enabled()) VOICE.speak("Voice coaching on"); } return;
       case "retake": haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "retake"); result = null; session.retries++; return startCamera();
       case "toresult": haptic("medium"); return show("result");
@@ -852,7 +900,7 @@
 
   var FUNDX = {
     open: function (context) {
-      ctx = context || null; screen = "home"; session = null; result = null; capturing = false;
+      ctx = context || null; screen = "home"; session = null; result = null; capturing = false; devBuffer = [];
       applySettings();
       applyProviderSelection();   // health-gated: auto-activates the backend provider when available
       if (!rootEl) {
@@ -874,7 +922,11 @@
     _compareDelta: compareDelta,
     _exportPayload: exportPayload,
     _parseHealth: parseHealth,
-    _providerTarget: providerTarget
+    _providerTarget: providerTarget,
+    _devMetrics: devMetrics,
+    _recordDevFrame: function (step, fa) { recordDevFrame(step, fa); },
+    _devBuffer: function () { return devBuffer; },
+    _devCsv: devCsv
   };
   window.FUNDX = FUNDX;
 })();

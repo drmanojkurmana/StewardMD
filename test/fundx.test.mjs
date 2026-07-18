@@ -277,5 +277,30 @@ ok("cloud: providerTarget stays mock when disabled", FXc._providerTarget(false, 
 ok("cloud: providerTarget stays mock when backend has no vision", FXc._providerTarget(true, { vision: false }) === "mock");
 ok("fundx: cloud consent + auto-activation wired", /function applyProviderSelection\(/.test(fj) && /\/api\/fundx\/health/.test(fj) && /data-fx="cloudyes"/.test(fj) && /data-fx="setcloud"/.test(fj));
 
+// ---- guidance is SIGNAL-DRIVEN (not timers / hard-coded sequences) -------
+// (a) the decision depends only on frame signals, never wall-clock: identical frames
+//     produce identical states/decisions even with wildly different timestamps.
+const smA = V.createStateMachine(), smB = V.createStateMachine();
+let ra, rb; for (let i = 0; i < 8; i++) { ra = smA.step(good, i * 1e7); rb = smB.step(good, i); }
+ok("signal-driven: decision independent of timestamp/wall-clock", ra.state === rb.state && ra.shouldCapture === rb.shouldCapture && ra.state === V.STATE.READY);
+// (b) changing ONE measured signal flips its gate + regresses state (no fixed sequence)
+const smC = V.createStateMachine(); for (let i = 0; i < 8; i++) smC.step(good, i);
+const dStep = smC.step(Object.assign({}, good, { focus: 0.2 }), 99);
+ok("signal-driven: degrading focus alone leaves READY", dStep.gates.focus === false && dStep.state !== V.STATE.READY);
+ok("signal-driven: restoring the signal re-advances", smC.step(good, 100).readiness.ready === true);
+// (c) coaching direction is a pure function of the measured offset
+ok("signal-driven: coach follows the measured offset", V.Coach.cueFor(V.STATE.CENTERING_PUPIL, { pupilDir: { x: -0.8 } }).arrow === "left" && V.Coach.cueFor(V.STATE.CENTERING_PUPIL, { pupilDir: { x: 0.8 } }).arrow === "right");
+
+// ---- developer mode: live overlay metrics + frame-by-frame recorder ------
+const FXd = loadFundx("1");
+const stepGood = { state: V.STATE.READY, shouldCapture: true, diagnostic: 0.83, gates: { focus: true, quality: true, reflection: true, motion: true, distance: true, redReflex: true, vessels: true, fundus: true, level: true }, readiness: { overall: 1, ready: true } };
+const dm = FXd._devMetrics(stepGood, V.makeFrameAnalysis(good));
+const labels = dm.map((m) => m[0]);
+ok("devmode: overlay lists all live metrics + decision", dm.length === 11 && ["focus", "glare (refl)", "motion", "distance", "roll", "red reflex", "vessel", "fundus", "DIAGNOSTIC", "decision"].every((l) => labels.indexOf(l) >= 0));
+FXd._recordDevFrame(stepGood, V.makeFrameAnalysis(good));
+const csv = FXd._devCsv();
+ok("devmode: CSV has every metric column", /(^|,)focus,glare,motion,distance,roll/.test(csv) && /diagnostic,readiness/.test(csv) && /,capture(\n|$)/.test(csv.split("\n")[0] + "\n"));
+ok("devmode: frame recorded", FXd._devBuffer().length === 1);
+
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);

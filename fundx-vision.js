@@ -406,7 +406,7 @@
       // Direction from the OBSERVED fundus-field offset when we have it, else the pupil offset.
       function moveDir() {
         var c = (fa.fundusVisible && fa.fundusCenter) ? fa.fundusCenter : fa.pupilDir;
-        if (c) { if (Math.abs(c.x) >= Math.abs(c.y)) return c.x > 0 ? "right" : "left"; return c.y > 0 ? "down" : "up"; }
+        if (c) { var cx = +c.x || 0, cy = +c.y || 0; if (Math.abs(cx) >= Math.abs(cy)) return cx > 0 ? "right" : "left"; return cy > 0 ? "down" : "up"; }
         return null;
       }
       // Working distance from distance estimate + how much of the frame the fundus fills.
