@@ -39,6 +39,7 @@
   var rootEl = null, ctx = null, screen = "home";
   var session = null, cam = null, sm = null, hub = null, lastFa = null, result = null, detail = null;
   var usingNative = false;   // depth mode: native (ARCore/ARKit) camera owns the pipeline
+  var usingGpu = false;      // GPU preview: native camera surface behind a transparent WebView
   var devLive = { pipeline: null, confidence: null, fps: 0, frames: 0, lastT: 0, depthMm: null, contributions: null };  // live dev telemetry
   var capturing = false, lastHapticState = "", scanSeq = 0, lastCoachArrow = null;
 
@@ -236,6 +237,8 @@
           '<div id="fundxCoach" class="fundx-coach" role="status" aria-live="assertive">Point the camera at the eye</div>' +
           '<div id="fundxChips" class="fundx-chips">' + CHIPS.map(function (c) { return '<span class="fundx-chip" data-chip="' + c.k + '">' + c.l + '</span>'; }).join("") + '</div>' +
           '<button id="fundxFallback" class="fundx-fallback" data-fx="confirmlens" style="display:none">' + ric("check_circle") + 'Confirm lens is positioned</button>' +
+          ((session && session.mode === "training") ? '' :
+            '<button id="fundxCaptureBtn" class="fundx-capture" data-fx="capturebest" disabled aria-label="Capture best frame">' + ric("photo_camera") + '<span>Capture best frame</span></button>') +
         '</div>' +
         '<div id="fundxFlash" class="fundx-flash"></div>' +
         (devOn() ? '<div class="fundx-debug-wrap"><div id="fundxDebug" class="fundx-debug"></div><button class="fundx-debug-x" data-fx="devexport">' + ric("download") + 'Export frames</button></div>' : '') +
@@ -583,6 +586,12 @@
   // Developer mode. Per-sensor enable/disable + force-fallback + live capability/confidence. ----
   function devSF(k, def) { try { var v = localStorage.getItem(k); return v == null ? def : v === "1"; } catch (e) { return def; } }
   function depthOn() { try { var q = (location.search.match(/[?&]fundxdepth=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_depth") === "1"; } catch (e) { return false; } }
+  // Full-res GPU camera preview (native GLSurfaceView / ARKit background behind a transparent WebView).
+  function gpuPreviewOn() { try { var q = (location.search.match(/[?&]fundxgpu=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_gpu_preview") === "1"; } catch (e) { return false; } }
+  // Hybrid capture: "Capture Best Frame" enables at this readiness (0..100, default 60); a capture
+  // below the recommended quality (0..100, default 50) still proceeds but shows a warning.
+  function captureThreshold() { try { var v = parseInt(localStorage.getItem("smd_fundx_capture_threshold"), 10); return isNaN(v) ? 60 : Math.max(0, Math.min(100, v)); } catch (e) { return 60; } }
+  function qualityWarnPct() { try { var v = parseInt(localStorage.getItem("smd_fundx_quality_warn"), 10); return isNaN(v) ? 50 : Math.max(0, Math.min(100, v)); } catch (e) { return 50; } }
   function screenDevSettings() {
     function row(k, label, sub, def) {
       var on = devSF(k, def);
@@ -731,10 +740,26 @@
     var useNative = false;
     try { useNative = depthOn() && !devSF("smd_fundx_dev_forcemono", false) && !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth); } catch (e) {}
     usingNative = useNative;
+    var gpuPreview = useNative && gpuPreviewOn();
+    usingGpu = gpuPreview;
     var starter;
-    if (useNative) {
-      // Depth mode: ARCore/ARKit owns the camera; render its streamed frames onto a preview
-      // canvas over the (now source-less) <video>. On any failure, fall back to getUserMedia.
+    if (gpuPreview) {
+      // GPU preview: the native GLSurfaceView / ARKit camera background (behind the transparent
+      // WebView) IS the preview — full-res, hardware-accelerated. No JS canvas; the streamed
+      // low-res frames drive ONLY the analysis pipeline. body.fundx-gpu makes the camera area
+      // transparent so the native surface shows through. Falls back to getUserMedia on failure.
+      try { document.body.classList.add("fundx-gpu"); } catch (e) {}
+      if (video) video.style.display = "none";
+      startOpts.gpuPreview = true;
+      starter = cam.startNative(video, onFrame, startOpts).catch(function () {
+        usingNative = false; usingGpu = false;
+        try { document.body.classList.remove("fundx-gpu"); if (video) video.style.display = ""; } catch (x) {}
+        delete startOpts.gpuPreview;
+        return cam.start(video, onFrame, startOpts);
+      });
+    } else if (useNative) {
+      // Depth mode (CPU preview): ARCore/ARKit owns the camera; render its streamed frames onto a
+      // preview canvas over the (now source-less) <video>. On any failure, fall back to getUserMedia.
       var pc = document.createElement("canvas"); pc.className = "fundx-video"; pc.id = "fundxNativeCanvas";
       if (video && video.parentNode) video.parentNode.insertBefore(pc, video);
       if (video) video.style.display = "none";
@@ -809,6 +834,8 @@
     var pct = step.readiness.overall || 0; var C = 339.29;
     var ring = document.getElementById("fundxRingFg"); if (ring) { ring.style.strokeDasharray = C; ring.style.strokeDashoffset = C * (1 - pct); ring.setAttribute("class", "fundx-ring-fg " + (pct >= 0.9 ? "hi" : pct >= 0.5 ? "mid" : "lo")); }
     var score = document.getElementById("fundxScore"); if (score) score.textContent = Math.round(pct * 100);
+    var capBtn = document.getElementById("fundxCaptureBtn");
+    if (capBtn) { var canCap = Math.round(pct * 100) >= captureThreshold(); capBtn.disabled = !canCap; capBtn.classList.toggle("ready", canCap); }
     var arrow = document.getElementById("fundxArrow");
     if (arrow) { if (cue.arrow) { arrow.style.opacity = "1"; arrow.firstChild ? (arrow.innerHTML = ric(arrowGlyph(cue.arrow))) : null; arrow.className = "fundx-arrow show a-" + cue.arrow; arrow.innerHTML = ric(arrowGlyph(cue.arrow)); } else { arrow.className = "fundx-arrow"; } }
     var g = step.gates || {};
@@ -820,8 +847,10 @@
     if (step.state !== lastHapticState) { lastHapticState = step.state; if (cue.haptic) haptic(cue.haptic); else haptic("selection"); VOICE.speak(cue.voice); }
     else if (cue.tone === "warn") { VOICE.speak(cue.voice); }
   }
+  function lastReadinessPct() { try { var t = session && session.readinessTrace; return (t && t.length) ? t[t.length - 1] : 0; } catch (e) { return 0; } }
   function triggerCapture() {
     if (capturing) return; capturing = true;
+    session.captureMode = "auto"; session.captureReadinessPct = lastReadinessPct();
     sm.set(V().STATE.CAPTURING); haptic("success"); VOICE.speak("Hold still, capturing");
     var flash = document.getElementById("fundxFlash"); if (flash) { flash.classList.add("on"); setTimeout(function () { flash.classList.remove("on"); }, 220); }
     session.captures++;
@@ -833,7 +862,28 @@
       runProcessing(burst);
     }, 180);
   }
-  function stopCamera() { try { if (cam) cam.stop(); } catch (e) {} VOICE.stop(); }
+  // Hybrid manual capture: on the clinician's press (button enabled at readiness >= threshold),
+  // grab the buffered burst and let BestFrameSelector pick the highest-quality frame — the same
+  // best-of-buffer path the auto-capture uses — so perfect acquisition isn't required.
+  function manualCapture() {
+    if (capturing || !session || !cam) return;
+    var pct = lastReadinessPct();
+    if (pct < captureThreshold()) { haptic("warning"); toast("Keep improving alignment (readiness " + pct + " / " + captureThreshold() + ")."); return; }
+    capturing = true;
+    session.captureMode = "manual"; session.captureReadinessPct = pct;
+    try { sm.set(V().STATE.CAPTURING); } catch (e) {}
+    haptic("success"); VOICE.speak("Capturing best frame");
+    var flash = document.getElementById("fundxFlash"); if (flash) { flash.classList.add("on"); setTimeout(function () { flash.classList.remove("on"); }, 220); }
+    session.captures++;
+    setTimeout(function () {
+      var burst = [];
+      try { burst = cam.captureBurst(20) || []; } catch (e) {}
+      session.burstCount = burst.length;
+      stopCamera();
+      runProcessing(burst);
+    }, 140);
+  }
+  function stopCamera() { try { if (cam) cam.stop(); } catch (e) {} try { document.body.classList.remove("fundx-gpu"); } catch (e) {} usingGpu = false; VOICE.stop(); }
   // Lifecycle: releasing the camera when the app is backgrounded (tab hidden / app to
   // background) prevents the stream + rAF loop running invisibly (battery/thermal). Wired
   // once; on return the user is on the pre-capture screen and can restart.
@@ -879,6 +929,10 @@
     result = FUNDX._buildResult(burst, ctx, session.eye, session);
     if (!result) { tel("capture", { success: false, durationMs: nowMs() - session.startTs, bursts: session.burstCount }); toast("No usable frames — try again."); screen = "camera"; return startCamera(); }
     tel("capture", { success: true, quality: result.quality.overall, durationMs: nowMs() - session.startTs, bursts: session.burstCount });
+    // Quality gate is advisory, not blocking: warn below the recommended threshold but let the
+    // clinician proceed with analysis (the hybrid workflow's point).
+    result.qualityWarn = !!(result.quality && result.quality.overall != null && result.quality.overall * 100 < qualityWarnPct());
+    if (result.qualityWarn) { haptic("warning"); try { toast("Image quality below recommended (" + Math.round(result.quality.overall * 100) + "/100). You can still proceed."); } catch (e) {} }
     // 1) real image enhancement → the persisted "enhanced image" (distinct from original)
     if (tx) tx.textContent = "Enhancing image…";
     enhanceDataUrl(result.images.original).then(function (enh) { if (enh) result.images.processed = enh; })
@@ -914,6 +968,8 @@
     var original = best.dataUrl || null;
     return {
       best: sel.best, quality: quality, findings: findings, selection: sel,
+      captureMode: (stats && stats.captureMode) || "auto",
+      captureReadinessPct: (stats && stats.captureReadinessPct != null) ? stats.captureReadinessPct : null,
       images: { original: original, processed: original, thumbnail: best.thumb || original }
     };
   }
@@ -935,6 +991,8 @@
         eye: eye, durationMs: dur, attempts: (stats && stats.attempts) || 1,
         captures: (stats && stats.captures) || 1, retries: (stats && stats.retries) || 0,
         burstCount: (stats && stats.burstCount) || 0,
+        captureMode: res.captureMode || "auto",
+        captureReadinessPct: (res.captureReadinessPct != null) ? res.captureReadinessPct : null,
         readinessTrace: (stats && stats.readinessTrace) ? stats.readinessTrace.slice(-60) : [],
         stateHistory: (sm && sm.history) ? sm.history.slice(-40) : []
       },
@@ -994,6 +1052,7 @@
         if (sensorsOn() && window.SMD_FUNDX_SENSORS && window.SMD_FUNDX_SENSORS.requestMotionPermission) { try { window.SMD_FUNDX_SENSORS.requestMotionPermission(); } catch (e) {} }
         return startCamera();
       case "camclose": stopCamera(); haptic("light"); return show("home");
+      case "capturebest": return manualCapture();
       case "confirmlens": if (sm && sm.confirmLensPositioned) sm.confirmLensPositioned(); haptic("selection"); { var fbb = document.getElementById("fundxFallback"); if (fbb) fbb.style.display = "none"; } toast("Proceeding — capture still needs a clear retinal image."); return;
       case "setlensconfirm": { try { localStorage.setItem("smd_fundx_lens_confirm", lensConfirmOn() ? "0" : "1"); } catch (e) {} applySettings(); haptic("selection"); return render(); }
       case "settel": { try { localStorage.setItem("smd_fundx_telemetry", telOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }

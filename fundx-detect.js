@@ -378,7 +378,7 @@
           nativeImg.src = fr.cameraImage;
         }
         return Promise.resolve()
-          .then(function () { if (P.addListener) nativeSub = P.addListener("fundxDepthFrame", onDepthFrame); return P.start({ streamImage: true }); })
+          .then(function () { if (P.addListener) nativeSub = P.addListener("fundxDepthFrame", onDepthFrame); return P.start({ streamImage: true, gpuPreview: !!opts.gpuPreview }); })
           .then(function (res) {
             if (res && res.started === false) { try { if (nativeSub) Promise.resolve(nativeSub).then(function (h) { if (h && h.remove) h.remove(); }); } catch (e) {} nativeSub = null; throw new Error("native session: " + (res && res.reason)); }
             running = true;

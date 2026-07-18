@@ -1,8 +1,10 @@
 package in.stewardmd.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Rect;
@@ -10,8 +12,11 @@ import android.graphics.YuvImage;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.media.Image;
+import android.opengl.GLSurfaceView;
 import android.util.Base64;
 import android.view.Surface;
+import android.view.View;
+import android.view.ViewGroup;
 import android.opengl.EGL14;
 import android.opengl.EGLConfig;
 import android.opengl.EGLContext;
@@ -35,6 +40,12 @@ import com.google.ar.core.Session;
 
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import javax.microedition.khronos.opengles.GL10;   // EGLConfig is fully-qualified in ArRenderer to
+                                                    // avoid clashing with android.opengl.EGLConfig
 
 /**
  * FundX AI — hybrid depth-fusion plugin (Android, ARCore).
@@ -79,6 +90,19 @@ public class FundxDepthPlugin extends Plugin {
                                                     // so the existing heuristics/MediaPipe run on
                                                     // native frames while ARCore owns the camera.
 
+    // ---- GPU preview mode (flag smd_fundx_gpu_preview) ------------------------------------
+    // Full-resolution, hardware-accelerated camera preview: a GLSurfaceView behind a transparent
+    // WebView renders ARCore's GPU camera texture at display refresh (FundxBackgroundRenderer),
+    // matching the stock camera. The CPU-image path continues but ONLY feeds analysis (MediaPipe +
+    // heuristics), throttled and decoupled from the preview. Its ARCore Session lives on the
+    // GLSurfaceView render thread (GL-thread-affine), separate from the offscreen path below.
+    private volatile boolean gpuMode = false;
+    private GLSurfaceView glView;
+    private FundxBackgroundRenderer bgRenderer;
+    private Session gpuSession;                      // GPU-mode session (owned by the GL render thread)
+    private volatile int gpuFrameCount = 0;
+    private int analyzeEvery = 6;                    // in GPU mode, analyse ~1 of every 6 draw frames
+
     // ---- Capability detection (runtime, no manual configuration) --------------------------
     @PluginMethod
     public void capabilities(PluginCall call) {
@@ -112,6 +136,7 @@ public class FundxDepthPlugin extends Plugin {
     // ---- Start / stop the depth stream ----------------------------------------------------
     @PluginMethod
     public void start(final PluginCall call) {
+        if (call.getBoolean("gpuPreview", false)) { startGpuPreview(call); return; }
         final Handler h;
         synchronized (lock) {
             if (running) { call.resolve(started(true, "already running")); return; }
@@ -153,6 +178,7 @@ public class FundxDepthPlugin extends Plugin {
 
     @PluginMethod
     public void stop(PluginCall call) {
+        if (gpuMode) { stopGpuPreview(); call.resolve(); return; }
         shutdown();
         call.resolve();
     }
@@ -161,7 +187,7 @@ public class FundxDepthPlugin extends Plugin {
     // even if the JS visibilitychange handler didn't fire. The JS flow re-starts on resume.
     @Override
     protected void handleOnPause() {
-        shutdown();
+        if (gpuMode) stopGpuPreview(); else shutdown();
         super.handleOnPause();
     }
 
@@ -194,6 +220,173 @@ public class FundxDepthPlugin extends Plugin {
         HandlerThread t;
         synchronized (lock) { t = arThread; arThread = null; arHandler = null; }
         if (t != null) t.quitSafely();
+    }
+
+    // ---- GPU preview: GLSurfaceView behind a transparent WebView --------------------------
+    private void startGpuPreview(final PluginCall call) {
+        if (gpuMode || running) { call.resolve(started(true, "already running")); return; }
+        streamImage = call.getBoolean("streamImage", true);
+        final int every = call.getInt("analyzeEvery", 6);
+        final Activity act = getActivity();
+        final View webView = (getBridge() != null) ? getBridge().getWebView() : null;
+        if (act == null || webView == null) { call.resolve(started(false, "no activity/webview")); return; }
+        final AtomicBoolean resolved = new AtomicBoolean(false);
+        act.runOnUiThread(new Runnable() { @Override public void run() {
+            try {
+                analyzeEvery = Math.max(1, every);
+                gpuFrameCount = 0;
+                webView.setBackgroundColor(Color.TRANSPARENT);   // let the GL surface behind show through
+                ViewGroup parent = (ViewGroup) webView.getParent();
+                bgRenderer = new FundxBackgroundRenderer();
+                glView = new GLSurfaceView(act);
+                glView.setEGLContextClientVersion(2);
+                glView.setPreserveEGLContextOnPause(true);
+                glView.setRenderer(new ArRenderer(call, resolved));
+                glView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+                parent.addView(glView, 0, new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));  // BEHIND the WebView
+                gpuMode = true;
+                running = true;
+            } catch (Exception e) {
+                gpuMode = false; running = false;
+                try { webView.setBackgroundColor(Color.WHITE); } catch (Exception ignored) {}
+                resolveOnce(resolved, call, started(false, "gpu setup: " + e.getMessage()));
+            }
+        }});
+    }
+
+    // GLSurfaceView renderer: owns the ARCore Session on the GL render thread, draws the camera
+    // texture full-screen (preview) and throttles a low-res CPU frame to JS for analysis.
+    private class ArRenderer implements GLSurfaceView.Renderer {
+        private final PluginCall call;
+        private final AtomicBoolean resolved;
+        ArRenderer(PluginCall c, AtomicBoolean r) { call = c; resolved = r; }
+
+        @Override public void onSurfaceCreated(GL10 gl, javax.microedition.khronos.egl.EGLConfig config) {
+            try {
+                GLES20.glClearColor(0f, 0f, 0f, 1f);
+                bgRenderer.createOnGlThread();
+                querySensorOrientation();
+                gpuSession = new Session(getContext());
+                Config cfg = new Config(gpuSession);
+                if (gpuSession.isDepthModeSupported(Config.DepthMode.AUTOMATIC)) cfg.setDepthMode(Config.DepthMode.AUTOMATIC);
+                cfg.setFocusMode(Config.FocusMode.AUTO);
+                cfg.setUpdateMode(Config.UpdateMode.LATEST_CAMERA_IMAGE);
+                gpuSession.configure(cfg);
+                gpuSession.setCameraTextureName(bgRenderer.getTextureId());
+                gpuSession.resume();
+                resolveOnce(resolved, call, started(true, "ok-gpu"));
+            } catch (Exception e) {
+                resolveOnce(resolved, call, started(false, "gpu session: " + e.getClass().getSimpleName() + ": " + e.getMessage()));
+            }
+        }
+
+        @Override public void onSurfaceChanged(GL10 gl, int width, int height) {
+            GLES20.glViewport(0, 0, width, height);
+            if (gpuSession != null) gpuSession.setDisplayGeometry(displayRotationSurface(), width, height);
+        }
+
+        @Override public void onDrawFrame(GL10 gl) {
+            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+            if (gpuSession == null) return;
+            try {
+                gpuSession.setCameraTextureName(bgRenderer.getTextureId());
+                Frame frame = gpuSession.update();
+                bgRenderer.draw(frame);                 // full-res GPU camera preview at display refresh
+                gpuFrameCount++;
+                if (gpuFrameCount % analyzeEvery == 0) gpuAnalyze(frame);   // decoupled low-rate analysis
+            } catch (Throwable t) { /* transient (SessionPausedException etc.) */ }
+        }
+    }
+
+    // Depth + pose + a throttled low-res CPU image for the analysis pipeline (NOT the preview).
+    private void gpuAnalyze(Frame frame) {
+        try {
+            Camera camera = frame.getCamera();
+            Double meters = null; double conf = 0.0;
+            Image depthImg = null;
+            try {
+                depthImg = frame.acquireDepthImage16Bits();
+                double[] dm = sampleCenterDepth(depthImg);
+                if (dm != null) { meters = dm[0]; conf = dm[1]; }
+            } catch (Throwable t) { /* depth not ready */ }
+            finally { if (depthImg != null) depthImg.close(); }
+
+            String camImg = null;
+            if (streamImage) {
+                Image ci = null;
+                try {
+                    ci = frame.acquireCameraImage();
+                    int rot = ((sensorOrientation - displayRotationDegrees()) % 360 + 360) % 360;
+                    camImg = encodeYuvToJpegDataUrl(ci, rot);
+                } catch (Throwable t) { /* not ready */ }
+                finally { if (ci != null) ci.close(); }
+            }
+            JSObject data = new JSObject();
+            data.put("gpu", true);                       // JS: preview is the native surface — do not draw a canvas
+            if (camImg != null) data.put("cameraImage", camImg);
+            if (meters != null) { data.put("distanceMeters", meters); data.put("distanceConfidence", conf); }
+            boolean tracking = camera.getTrackingState() == com.google.ar.core.TrackingState.TRACKING;
+            if (tracking) {
+                Pose pose = camera.getPose();
+                float[] q = new float[4];
+                pose.getRotationQuaternion(q, 0);
+                data.put("roll", quatToRollDeg(q));
+                data.put("pitch", quatToPitchDeg(q));
+                data.put("poseConfidence", 0.85);
+            }
+            data.put("frame", gpuFrameCount);
+            data.put("ts", System.currentTimeMillis());
+            data.put("tracking", camera.getTrackingState().toString());
+            data.put("depthReady", meters != null);
+            notifyListeners("fundxDepthFrame", data);
+        } catch (Throwable t) { /* keep the preview alive even if analysis hiccups */ }
+    }
+
+    // Surface.ROTATION_* for ARCore setDisplayGeometry (which wants the constant, not degrees).
+    private int displayRotationSurface() {
+        try {
+            android.view.Display d = null;
+            if (android.os.Build.VERSION.SDK_INT >= 30 && getActivity() != null) d = getActivity().getDisplay();
+            if (d == null && getActivity() != null) d = getActivity().getWindowManager().getDefaultDisplay();
+            if (d != null) return d.getRotation();
+        } catch (Exception e) {}
+        return Surface.ROTATION_0;
+    }
+
+    private void stopGpuPreview() {
+        gpuMode = false;
+        running = false;
+        final Activity act = getActivity();
+        final GLSurfaceView v = glView;
+        final View webView = (getBridge() != null) ? getBridge().getWebView() : null;
+        glView = null;
+        if (act == null || v == null) { closeGpuSessionInline(); return; }
+        act.runOnUiThread(new Runnable() { @Override public void run() {
+            try {
+                // Close the ARCore session on the GL thread (GL-thread-affine), before the surface goes away.
+                final CountDownLatch latch = new CountDownLatch(1);
+                v.queueEvent(new Runnable() { @Override public void run() {
+                    try { if (gpuSession != null) { gpuSession.pause(); gpuSession.close(); } } catch (Exception e) {}
+                    gpuSession = null;
+                    latch.countDown();
+                }});
+                try { latch.await(1500, TimeUnit.MILLISECONDS); } catch (InterruptedException ie) {}
+                v.onPause();
+                ViewGroup parent = (ViewGroup) v.getParent();
+                if (parent != null) parent.removeView(v);
+                if (webView != null) webView.setBackgroundColor(Color.WHITE);
+            } catch (Exception e) {}
+        }});
+    }
+
+    private void closeGpuSessionInline() {
+        try { if (gpuSession != null) { gpuSession.pause(); gpuSession.close(); } } catch (Exception e) {}
+        gpuSession = null;
+    }
+
+    private void resolveOnce(AtomicBoolean flag, PluginCall call, JSObject result) {
+        if (flag.compareAndSet(false, true)) call.resolve(result);
     }
 
     // ---- Frame loop -----------------------------------------------------------------------
