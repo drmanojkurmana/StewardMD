@@ -406,8 +406,7 @@
   // worked. Verified vs the live API: /structured?name=Ceftriaxone → found; "Ceftriaxone (1000mg)" → not.
   function clinicalKey(name) {
     var s = String(name || "");
-    s = s.replace(/\s*\(\s*n\/?a\s*\)/ig, " ");                                          // "(NA)"/"(N/A)" placeholder (no real strength)
-    s = s.replace(/\s*\([^)]*\d[^)]*\)/g, " ");                                          // (1000mg), (5 mg/ml), (60000IU)
+    s = s.replace(/\s*\([^)]*\)/g, " ");                                                 // ANY parenthetical → base molecule: strength "(1000mg)"/"(5 mg/ml)"/"(60000IU)" OR qualifier "(NA)"/"(Micronized)"/"(Natural Micronized)". Safe because clinicalLookup tries the ORIGINAL name first, so a paren-specific record still wins.
     s = s.replace(/\s+\d+(?:\.\d+)?\s*(?:mg|mcg|µg|ug|g|ml|l|%|iu|units?|meq|mmol)\b/gi, " "); // trailing "500 mg", "1 g", "0.5%"
     return s.replace(/\s*\+\s*/g, " + ").replace(/\s{2,}/g, " ").trim();                 // tidy combo spacing after strips
   }
