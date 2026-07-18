@@ -91,8 +91,9 @@ state (active pipeline, fusion mode, confidence %, FPS, last depth mm, per-signa
   heuristics compute on native frames** (verified: FrameAnalysis focus/exposure/fundus/vessel).
   Real metric depth/pose require device motion (non-ToF depth-from-motion; a stationary phone reads
   `tracking:PAUSED`). Developer Settings show the real caps.
-- **iOS (iPhone 17 Pro, on-device):** ARKit + LiDAR + SceneDepth verified; metric depth streams
-  from the LiDAR sensor; Developer Settings show ARKit/LiDAR/SceneDepth = yes.
+- **iOS (iPhone 17 Pro):** code-complete + compile-checked; ARKit `.sceneDepth`/`.smoothedSceneDepth`
+  + LiDAR + CoreMotion mirror the verified Android contract. **On-device verification is PENDING**
+  (build with `npm install` + `cap sync ios` + Xcode). Not yet confirmed on hardware.
 - **Automated:** 38 sensor-fusion unit tests (incl. fallback-identity + depth/pose fusion) + all
   FundX suites + headless fake-camera integration green. `build:www` assembles; Android/iOS builds
   clean.
