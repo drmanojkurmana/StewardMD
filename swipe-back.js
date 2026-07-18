@@ -64,6 +64,9 @@
   function goBack() {
     var now = Date.now();
     if (now - _last < 400) return true;                        // debounce: one back per gesture
+    // 0) FundX AI full-screen overlay owns back while open — step back within it (camera ->
+    //    precapture -> home -> close) instead of the generic scan leaking to the main app.
+    try { if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) { _last = now; return window.FUNDX.back() !== false; } } catch (e) {}
     // 1) top-most open menu/overlay
     var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(function (el) { return onScreen(el) && interactive(el); });
     if (els.length) {
