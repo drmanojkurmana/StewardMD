@@ -220,14 +220,20 @@
     var V = window.SMD_FUNDX_VISION;
     var mp = opts.mediapipe || makeMediaPipe();
     var pose = opts.pose || makePose();
+    // Sensor-fusion (Phase 1: IMU). Active only when SMD_FUNDX_SENSORS is present AND the flag
+    // is on (or an explicit manager is injected). Absent -> the merged partial is untouched ->
+    // the engine behaves EXACTLY as before. Native depth (Phase 2) enters via this same manager.
+    var sensors = opts.sensors ||
+      ((window.SMD_FUNDX_SENSORS && window.SMD_FUNDX_SENSORS.flagOn && window.SMD_FUNDX_SENSORS.flagOn())
+        ? window.SMD_FUNDX_SENSORS.makeManager(opts.sensorOpts || {}) : null);
     // Optional real disc/macula/lesion provider (findings-level enrichment; NOT a capture
     // gate). Left null by default — the acquisition flow is driven purely by observable
     // image-quality cues (fundus circle + vessels + focus/exposure/glare), no simulation.
     var retinaProvider = null;
     return {
-      mediapipe: mp, pose: pose,
+      mediapipe: mp, pose: pose, sensors: sensors,
       setRetinaSignalProvider: function (fn) { retinaProvider = (typeof fn === "function") ? fn : null; },
-      resetSession: function () { if (mp && mp.reset) mp.reset(); if (pose && pose.reset) pose.reset(); },
+      resetSession: function () { if (mp && mp.reset) mp.reset(); if (pose && pose.reset) pose.reset(); if (sensors && sensors.reset) sensors.reset(); },
       // parts: { imageData, mpPartial?, posePartial?, ts }. Builds a full FrameAnalysis from
       // observable signals: image heuristics + circular-fundus + vessels + MediaPipe geometry
       // + phone roll. No lens detection anywhere.
@@ -239,6 +245,9 @@
         var mpPart = parts.mpPartial || {};
         var posePart = parts.posePartial || {};
         var merged = Object.assign({ ts: parts.ts != null ? parts.ts : null, vesselScore: vess }, h, fund, mpPart, posePart);
+        // Fuse device-motion sensor signals over the monocular partial (motion + confidence).
+        // read() treats merged.motion as one source, so with no sensor data motion is unchanged.
+        if (sensors && sensors.read) { try { Object.assign(merged, sensors.read(merged) || {}); } catch (e) {} }
         if (retinaProvider) { try { Object.assign(merged, retinaProvider(merged) || {}); } catch (e) {} }
         return V ? V.makeFrameAnalysis(merged) : merged;
       }
@@ -293,6 +302,7 @@
           .then(function () {
             running = true; lastAnalyze = 0;
             if (hub.pose && hub.pose.attach) hub.pose.attach();   // phone-roll for rotate coaching
+            if (hub.sensors && hub.sensors.start) hub.sensors.start();   // IMU fusion (Phase 1)
             if (hub.resetSession) hub.resetSession();
             if (hub.mediapipe && hub.mediapipe.init) hub.mediapipe.init();   // lazy, non-blocking
             raf = requestAnimationFrame(loop);
@@ -319,6 +329,7 @@
         try { if (stream) stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
         try { if (videoEl) videoEl.srcObject = null; } catch (e) {}
         try { if (hub && hub.pose && hub.pose.detach) hub.pose.detach(); } catch (e) {}
+        try { if (hub && hub.sensors && hub.sensors.stop) hub.sensors.stop(); } catch (e) {}
         stream = null;
       }
     };

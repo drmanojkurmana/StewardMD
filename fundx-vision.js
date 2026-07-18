@@ -107,6 +107,10 @@
       motion: clamp01(p.motion != null ? p.motion : 1),
       roll: p.roll != null ? num(p.roll) : null,      // phone roll in degrees (null = unknown)
       rollState: p.rollState || "unknown",            // "level" | "cw" | "ccw" | "unknown"
+      // sensor-fusion (Phase 1: IMU) — fused-motion trust + unified acquisition confidence.
+      // Defaults keep the engine fallback-identical when no sensors are present.
+      motionConfidence: p.motionConfidence != null ? clamp01(p.motionConfidence) : 1,
+      acqConfidence: p.acqConfidence != null ? clamp01(p.acqConfidence) : null,
       // image quality signals (observable heuristics)
       focus: clamp01(p.focus), exposure: clamp01(p.exposure),
       brightness: clamp01(p.brightness), contrast: clamp01(p.contrast),
