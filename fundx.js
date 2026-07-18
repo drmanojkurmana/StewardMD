@@ -38,6 +38,8 @@
 
   var rootEl = null, ctx = null, screen = "home";
   var session = null, cam = null, sm = null, hub = null, lastFa = null, result = null, detail = null;
+  var usingNative = false;   // depth mode: native (ARCore/ARKit) camera owns the pipeline
+  var devLive = { pipeline: null, confidence: null, fps: 0, frames: 0, lastT: 0, depthMm: null, contributions: null };  // live dev telemetry
   var capturing = false, lastHapticState = "", scanSeq = 0, lastCoachArrow = null;
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
@@ -605,16 +607,51 @@
         row("smd_fundx_dev_arcoredepth", "ARCore Depth API", "Depth-from-motion / ToF metric distance.", true) +
         '<div class="rds-section-header"><span class="rds-section-title">Fallback</span></div>' +
         row("smd_fundx_dev_forcemono", "Force MediaPipe-only", "Ignore all native depth; use the monocular pipeline.", false) +
-        '<div class="rds-section-header"><span class="rds-section-title">Live status</span></div>' +
-        '<div class="fundx-devstat">' +
-          kv("Native depth plugin", caps.nativeDepth ? "present" : "not installed") +
-          kv("DeviceMotion (IMU)", caps.deviceMotion ? ("yes · " + (caps.motionPermission || "")) : "no") +
-          kv("Depth capability", depthCaps ? JSON.stringify(depthCaps) : "unavailable") +
-          kv("Depth fusion", depthOn() ? "ON" : "off") +
-          '<div id="fundxDevLive" class="fundx-devlive">Start a capture to see live confidence, fusion contributions and FPS (needs Developer mode overlay).</div>' +
-        '</div>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Runtime capabilities</span></div>' +
+        '<div class="fundx-devstat" id="fundxDevCaps"><div class="fundx-devlive">Detecting hardware…</div></div>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Live acquisition</span></div>' +
+        '<div class="fundx-devstat" id="fundxDevLive"><div class="fundx-devlive">No capture yet — start a Retinal Scan to populate.</div></div>' +
         '<p class="fundx-disc">Testing/debugging only. Changes take effect on the next capture. Depth is device-gated and never required — the app always falls back to the monocular MediaPipe + CV engine.</p>' +
       '</main>';
+  }
+  // Populate the Developer Settings live panels: async runtime capabilities from the native
+  // FundxDepth plugin + the current/last acquisition state. Called after the screen renders.
+  function wireDevSettings() {
+    function kvh(label, val, state) {
+      var cls = state === true ? "fx-ok" : (state === false ? "fx-off" : "");
+      return '<div class="fundx-kv"><span>' + esc(label) + '</span><b class="' + cls + '">' + esc(String(val)) + '</b></div>';
+    }
+    function yn(b) { return b ? "yes" : "no"; }
+    function paintCaps(c) {
+      c = c || {};
+      var mp = {}; try { mp = (window.SMD_FUNDX_SENSORS && window.SMD_FUNDX_SENSORS.capabilities()) || {}; } catch (e) {}
+      var el = document.getElementById("fundxDevCaps"); if (!el) return;
+      var cm = (c.coreMotion != null) ? c.coreMotion : mp.deviceMotion;
+      el.innerHTML = '' +
+        kvh("Platform", c.platform || (window.Capacitor ? "native" : "web"), c.platform ? true : null) +
+        kvh("ARKit", c.arkit != null ? yn(c.arkit) : "—", c.arkit) +
+        kvh("LiDAR", c.lidar != null ? yn(c.lidar) : "—", c.lidar) +
+        kvh("SceneDepth", c.sceneDepth != null ? yn(c.sceneDepth) : "—", c.sceneDepth) +
+        kvh("ARCore", c.arcore != null ? yn(c.arcore) : "—", c.arcore) +
+        kvh("ARCore Depth", c.arcoreDepth != null ? yn(c.arcoreDepth) : "—", c.arcoreDepth) +
+        kvh("Camera pose", c.pose != null ? yn(c.pose) : "—", c.pose) +
+        kvh("CoreMotion / IMU", cm != null ? yn(cm) : "—", cm) +
+        kvh("Depth fusion flag", depthOn() ? "ON" : "off", depthOn());
+    }
+    paintCaps({});
+    var P; try { P = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth; } catch (e) {}
+    if (P && P.capabilities) { P.capabilities().then(function (c) { paintCaps(c); }, function () {}); }
+    var live = document.getElementById("fundxDevLive"); if (!live) return;
+    var contribs = devLive.contributions || {};
+    var mode = devLive.pipeline === "native-depth" ? "native depth + heuristics + IMU"
+             : devLive.pipeline === "monocular" ? "monocular (MediaPipe + CV + IMU)" : "idle";
+    live.innerHTML = '' +
+      kvh("Active pipeline", devLive.pipeline || "idle (no capture yet)", devLive.pipeline ? true : null) +
+      kvh("Fusion mode", mode) +
+      kvh("Confidence", devLive.confidence != null ? Math.round(devLive.confidence * 100) + "%" : "—") +
+      kvh("FPS", devLive.fps || "—") +
+      kvh("Depth (last)", devLive.depthMm != null ? devLive.depthMm + " mm" : "—") +
+      kvh("Contributions", JSON.stringify({ motion: contribs.motion || [], distance: contribs.distance || [], pose: contribs.pose || [] }));
   }
 
   // Pure: build the export payload for a scan (no image bytes — metadata + findings).
@@ -698,6 +735,7 @@
     var startOpts = { hub: (hub = Vd.makeHub()), analyzeEveryMs: 110, analyzeScale: 0.25, flash: flashOn() };
     var useNative = false;
     try { useNative = depthOn() && !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth); } catch (e) {}
+    usingNative = useNative;
     var starter;
     if (useNative) {
       // Depth mode: ARCore/ARKit owns the camera; render its streamed frames onto a preview
@@ -707,6 +745,7 @@
       if (video) video.style.display = "none";
       startOpts.previewCanvas = pc; startOpts.previewCtx = pc.getContext("2d");
       starter = cam.startNative(video, onFrame, startOpts).catch(function () {
+        usingNative = false;
         try { pc.remove(); if (video) video.style.display = ""; } catch (x) {}
         delete startOpts.previewCanvas; delete startOpts.previewCtx;
         return cam.start(video, onFrame, startOpts);
@@ -729,6 +768,13 @@
   function onFrame(fa) {
     if (!sm || capturing) return;
     lastFa = fa;
+    devLive.frames++;
+    if (devLive.lastT) { var _dt = fa.ts - devLive.lastT; if (_dt > 0) devLive.fps = Math.round(1000 / _dt); }
+    devLive.lastT = fa.ts;
+    devLive.pipeline = usingNative ? "native-depth" : "monocular";
+    if (fa.acqConfidence != null) devLive.confidence = fa.acqConfidence;
+    if (fa.distanceMm != null) devLive.depthMm = fa.distanceMm;
+    try { if (hub && hub.sensors && hub.sensors.contributions) devLive.contributions = hub.sensors.contributions(); } catch (e) {}
     var step = sm.step(fa, fa.ts);
     session.readinessTrace.push(Math.round((step.readiness.overall || 0) * 100));
     if (session.readinessTrace.length > 400) session.readinessTrace.shift();
@@ -934,7 +980,7 @@
     else if (screen === "timeline") rootEl.innerHTML = screenTimeline();
     else if (screen === "compare") rootEl.innerHTML = screenCompare();
     else if (screen === "settings") rootEl.innerHTML = screenSettings();
-    else if (screen === "devsettings") rootEl.innerHTML = screenDevSettings();
+    else if (screen === "devsettings") { rootEl.innerHTML = screenDevSettings(); wireDevSettings(); }
   }
   function show(s) { screen = s; render(); }
 
