@@ -2617,6 +2617,7 @@
       try {
         var vitals = {};
         if (typeof window.SMD_restoreCase === "function") {
+          try { window.__smdDxReturn = true; } catch (e) {}   // BUG-10: remember we drilled in from Clinical Reasoning so Back can return
           close();
           window.SMD_restoreCase(S.f, id, vitals);
           // reveal the classic stewardship output so the rendered #outputArea isn't left hidden

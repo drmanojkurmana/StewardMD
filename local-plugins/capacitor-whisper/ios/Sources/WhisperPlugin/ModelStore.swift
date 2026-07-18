@@ -109,8 +109,9 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
     }
 
     func start(url: URL) {
-        // Refuse to start if there's clearly not enough room (~2x model headroom).
-        if ModelStore.availableBytes() < 140 * 1024 * 1024 {
+        // Refuse to start if there's clearly not enough room. BUG-13: sized for the ~181 MB small.en
+        // model (~2× headroom for staging + verify); the old 140 MB check under-provisioned it.
+        if ModelStore.availableBytes() < 400 * 1024 * 1024 {
             finish(.failure(WhisperError(.insufficientStorage))); return
         }
         let cfg = URLSessionConfiguration.default

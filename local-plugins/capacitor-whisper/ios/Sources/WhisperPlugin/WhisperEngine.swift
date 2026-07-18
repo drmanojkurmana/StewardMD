@@ -23,6 +23,10 @@ final class WhisperEngine {
 
     private var ctx: OpaquePointer?
     private var loadedModelPath: String?
+    // BUG-13: serialize access to `ctx` — inference runs on `work`, but loadModel/deleteModel/deinit
+    // can free it from another thread. Without this, tapping again after a Scribe error (or a model
+    // reload) frees the context while whisper_full is still running → use-after-free → crash to home.
+    private let ctxLock = NSLock()
 
     private let engine = AVAudioEngine()
     private var converter: AVAudioConverter?
@@ -56,8 +60,10 @@ final class WhisperEngine {
     }
 
     func freeContext() {
+        ctxLock.lock()                              // BUG-13: wait for any in-flight whisper_full
         if let c = ctx { whisper_free(c) }
         ctx = nil; loadedModelPath = nil
+        ctxLock.unlock()
     }
 
     // MARK: - Capture
@@ -210,15 +216,21 @@ final class WhisperEngine {
         params.detect_language = language.isEmpty
         if let p = promptC { params.initial_prompt = UnsafePointer(p) }
 
+        // BUG-13: hold ctxLock across whisper_full + segment reads and re-check the live context, so a
+        // concurrent freeContext() (model reload / cancel / deinit) cannot free it mid-call.
+        ctxLock.lock()
+        guard let liveCtx = self.ctx else { ctxLock.unlock(); if !cancelled { onError?(.transcriptionFailure, "ctx freed") }; return }
         let ret: Int32 = audio.withUnsafeBufferPointer { buf in
-            whisper_full(ctx, params, buf.baseAddress, Int32(buf.count))
+            whisper_full(liveCtx, params, buf.baseAddress, Int32(buf.count))
         }
+        var text = ""
+        if ret == 0 {
+            let n = whisper_full_n_segments(liveCtx)
+            if n > 0 { for i in 0..<n { if let c = whisper_full_get_segment_text(liveCtx, i) { text += String(cString: c) } } }
+        }
+        ctxLock.unlock()
         if cancelled { return }
         if ret != 0 { onError?(.transcriptionFailure, "whisper_full \(ret)"); return }
-
-        var text = ""
-        let n = whisper_full_n_segments(ctx)
-        if n > 0 { for i in 0..<n { if let c = whisper_full_get_segment_text(ctx, i) { text += String(cString: c) } } }
         onState?("done")
         onFinal?(text.trimmingCharacters(in: .whitespacesAndNewlines))
     }

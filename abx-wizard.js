@@ -57,8 +57,11 @@
   var W = { mode: "advanced", step: 1, findings: {}, open: null, locked: null, query: "" };
   function fg() { return (window.FIELD_GROUPS || []); }
   function groupByName(name) { return fg().filter(function (g) { return g.group === name; })[0]; }
-  function isNumeric(f) { return f.type === "number" || f.type === "select"; }
-  function boolFields(g) { return (g.fields || []).filter(function (f) { return !isNumeric(f) && f.type !== "radio"; }); }
+  function isNumeric(f) { return f.type === "number"; }
+  // Select fields (Sex, Ascites grade, Encephalopathy grade) render as tappable option CHIPS —
+  // NOT the numeric keypad they used to fall through to (BUG-01 Sex, BUG-04 graded parameters).
+  function selectFields(g) { return (g.fields || []).filter(function (f) { return f.type === "select"; }); }
+  function boolFields(g) { return (g.fields || []).filter(function (f) { return f.type !== "number" && f.type !== "radio" && f.type !== "select"; }); }
   function radioFields(g) { return (g.fields || []).filter(function (f) { return f.type === "radio"; }); }
   function numFields(g) { return (g.fields || []).filter(isNumeric); }
 
@@ -278,8 +281,7 @@
         '<div class="abxw-brand"><span class="abxw-logo"><span class="abxw-logo-mark" aria-hidden="true"></span></span>' +
           '<div><div class="abxw-brandt">Steward<span>MD</span></div><div class="abxw-brands">Antibiotic decision engine · MARINAM UI</div></div></div>' +
         '<div class="abxw-headr">' +
-          '<button type="button" class="abx-uisw" role="switch" aria-checked="true" data-act="toclassic" aria-label="MARINAM UI on — tap for Classic UI">' +
-            '<span class="abx-uisw-lbl">MARINAM UI</span><span class="abx-uisw-track"><span class="abx-uisw-knob"></span></span></button>' +
+          // BUG-08: removed the "MARINAM UI ⇄ Classic" toggle — MARINAM is the only UI now.
           '<div class="abxw-seg" role="tablist" aria-label="Mode">' +
             '<button class="abxw-segb" data-mode="simple" role="tab">' + ms("bolt") + 'Simple</button>' +
             '<button class="abxw-segb" data-mode="advanced" role="tab">' + ms("tune") + 'Advanced</button>' +
@@ -345,13 +347,18 @@
     if (act === "back") { if (W.step > 1) { W.step--; render(); } else close(); return; }
     if (act === "next") { next(); return; }
     if (act === "stepdot") { var s = +t.getAttribute("data-step"); if (s <= maxStep()) { W.step = s; render(); } return; }
-    if (t.hasAttribute("data-group")) { var gn = t.getAttribute("data-group"); W.open = (W.open === gn ? null : gn); render(); return; }
+    if (t.hasAttribute("data-group")) { var gn = t.getAttribute("data-group"); W.open = (W.open === gn ? null : gn); render();
+      // BUG-05: drill straight into the tapped system's findings — scroll the opened panel into
+      // view (it renders below a tall system grid, so without this it looked like nothing happened).
+      if (W.open) { setTimeout(function () { try { var pnl = root.querySelector(".abxw-panel"); if (pnl && pnl.scrollIntoView) pnl.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) {} }, 40); }
+      return; }
     if (t.hasAttribute("data-fkey")) { var k = t.getAttribute("data-fkey"); if (W.findings[k]) delete W.findings[k]; else W.findings[k] = true; render(); return; }
     if (t.hasAttribute("data-radio")) { W.findings[t.getAttribute("data-radio")] = t.getAttribute("data-val"); render(); return; }
     if (t.hasAttribute("data-lock")) { W.locked = t.getAttribute("data-lock"); W.step = 4; render(); return; }
     if (act === "groupnext") { openNextGroup(); return; }
     if (act === "clearall") { W.findings = {}; W.locked = null; render(); return; }
     if (act === "openref") { try { if (window.DX && DX.openRef) DX.openRef(t.getAttribute("data-ref")); } catch (x) {} return; }
+    if (act === "openreasoning") { try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (x) {} return; }  // BUG-08: Clinical Reasoning from MARINAM
   }
   function onInput(e) {
     var t = e.target;
@@ -365,7 +372,27 @@
     }
     if (t.hasAttribute && t.hasAttribute("data-num")) {
       var k = t.getAttribute("data-num");
-      if (t.value === "" || t.value == null) delete W.findings[k]; else W.findings[k] = t.value;
+      var val = t.value;
+      // BUG-03: hard-limit GCS to 3–15 (reject out-of-range, e.g. 20 → 15).
+      if (k === "gcs" && val !== "" && val != null) {
+        var gv = parseInt(val, 10);
+        if (!isNaN(gv)) {
+          if (gv > 15) gv = 15;
+          if (gv < 3 && String(val).length >= 2) gv = 3;   // allow single-digit typing toward 15
+          if (String(gv) !== String(val)) { val = String(gv); t.value = val; }
+        }
+      }
+      if (val === "" || val == null) delete W.findings[k]; else W.findings[k] = val;
+      if (k === "map") W._mapEdited = (val !== "" && val != null);   // manual override wins
+      // BUG-02: auto-populate MAP = DBP + (SBP − DBP)/3 once both BP values exist (still editable).
+      if ((k === "sbp" || k === "dbp") && !W._mapEdited) {
+        var _s = parseFloat(W.findings.sbp), _d = parseFloat(W.findings.dbp);
+        if (!isNaN(_s) && !isNaN(_d) && _s >= _d) {
+          var _m = Math.round(_d + (_s - _d) / 3);
+          W.findings.map = String(_m);
+          try { var mi = root.querySelector('[data-num="map"]'); if (mi) mi.value = _m; } catch (e) {}
+        }
+      }
       // don't full-render (keep focus) — just refresh the live differential if shown
     }
   }
@@ -536,6 +563,22 @@
       wrapf.appendChild(rr); body.appendChild(wrapf);
     });
 
+    // select fields (Sex, grades) → tappable option chips (BUG-01 / BUG-04). Reuse the radio
+    // click path (data-radio/data-val → onClick stores W.findings[key]=val). Shown in every mode.
+    selectFields(g).forEach(function (f) {
+      var wrapf = el("div", "abxw-radiowrap");
+      wrapf.appendChild(el("div", "abxw-radiolbl", esc(f.label)));
+      var rr = el("div", "abxw-radiorow");
+      (f.selectOptions || f.options || []).forEach(function (o) {
+        var on = W.findings[f.key] === o.value;
+        var btn = el("button", "abxw-chip" + (on ? " on" : ""), (on ? ms("check") : ms("add")) + esc(o.label));
+        btn.setAttribute("data-radio", f.key); btn.setAttribute("data-val", o.value);
+        btn.setAttribute("role", "radio"); btn.setAttribute("aria-checked", on ? "true" : "false");
+        rr.appendChild(btn);
+      });
+      wrapf.appendChild(rr); body.appendChild(wrapf);
+    });
+
     // boolean chips
     var bf = boolFields(g);
     if (W.mode === "simple") bf = bf.slice(0, 12); // curated common subset in Simple
@@ -565,6 +608,8 @@
           } else {
             inp = document.createElement("input"); inp.type = "number"; inp.setAttribute("inputmode", "decimal");
             inp.setAttribute("data-num", f.key); if (W.findings[f.key] != null) inp.value = W.findings[f.key];
+            if (f.key === "gcs") { inp.min = 3; inp.max = 15; inp.step = 1; }   // BUG-03: clamp GCS 3–15
+            if (f.min != null) inp.min = f.min; if (f.max != null) inp.max = f.max;
           }
           lab.appendChild(inp); ng.appendChild(lab);
         });
@@ -646,6 +691,11 @@
       host.appendChild(el("div", "abxw-why", '<div class="abxw-lbl">Why</div><p>' + esc(c.reason || "") + '</p>'));
     }
     renderEmergency(wrap, host, c, a.infectious.some(function (x) { return x.id === c.id; })); // pin time-critical red-flags
+    // BUG-08: Clinical Reasoning is now reachable from MARINAM (previously only in the old UI).
+    var crBtn = el("button", "abxw-crbtn", ms("neurology") + "Open Clinical Reasoning");
+    crBtn.setAttribute("data-act", "openreasoning");
+    crBtn.style.cssText = "display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:14px;padding:13px 14px;border:1.5px solid var(--primary,#0e6e63);background:var(--primary-soft,#e3f1ee);color:var(--primary,#0e6e63);border-radius:12px;font:700 14px var(--font,system-ui);cursor:pointer";
+    wrap.appendChild(crBtn);
     return wrap;
   }
 
@@ -707,8 +757,9 @@
     else if (/[?&]abxwiz=0\b/.test(location.search || "")) localStorage.setItem("smd_abx_wizard", "0");
   } catch (e) {}
   function wizPrefOn() {
-    // MARINAM is the DEFAULT: on unless the user explicitly opted into CLASSIC ("0").
-    try { return localStorage.getItem("smd_abx_wizard") !== "0"; } catch (e) { return true; }
+    // BUG-08: MARINAM is now the ONLY UI — the Classic toggle was removed, so Start Case always
+    // opens the MARINAM wizard (ignore any legacy "smd_abx_wizard=0" a tester may have set).
+    return true;
   }
   window.ABX_WIZARD.setUI = function (which) { try { localStorage.setItem("smd_abx_wizard", which === "marinam" ? "1" : "0"); } catch (e) {} };
   document.addEventListener("click", function (e) {

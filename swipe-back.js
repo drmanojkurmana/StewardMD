@@ -82,6 +82,9 @@
     // 2) clinical engine (incl. the Clinical Decision output, which has no visible Back button)
     if (engineActive() && typeof window._SMD_goBack === "function") {
       _last = now;
+      // BUG-10: if this stewardship page was opened by selecting a syndrome from Clinical Reasoning,
+      // Back returns to the reasoning workspace (the screen the user drilled in from), not the engine step.
+      if (window.__smdDxReturn) { window.__smdDxReturn = false; try { if (window.DX && DX.openWorkspace) { DX.openWorkspace(); return true; } } catch (e) {} }
       try { window._SMD_goBack(); } catch (e) {}
       return true;
     }
