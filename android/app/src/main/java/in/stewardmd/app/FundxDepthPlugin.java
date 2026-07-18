@@ -50,6 +50,13 @@ public class FundxDepthPlugin extends Plugin {
     private HandlerThread arThread;
     private Handler arHandler;
     private volatile boolean running = false;
+    // ARCore's Session and the EGL context are THREAD-AFFINE: they are created on arThread and
+    // MUST be destroyed on that same thread. `lock` serialises the start/stop lifecycle so a
+    // stop() racing handleOnPause() (or a rapid start->stop->start) can never tear the session
+    // down twice or off-thread (that crashed natively in ArSession_destroy). `tearingDown` blocks
+    // a new session from starting while a teardown is still in flight.
+    private final Object lock = new Object();
+    private volatile boolean tearingDown = false;
 
     private EGLDisplay eglDisplay = EGL14.EGL_NO_DISPLAY;
     private EGLContext eglContext = EGL14.EGL_NO_CONTEXT;
@@ -93,16 +100,21 @@ public class FundxDepthPlugin extends Plugin {
     // ---- Start / stop the depth stream ----------------------------------------------------
     @PluginMethod
     public void start(final PluginCall call) {
-        if (running) { call.resolve(started(true, "already running")); return; }
-        streamImage = call.getBoolean("streamImage", true);
-        arThread = new HandlerThread("fundx-arcore");
-        arThread.start();
-        arHandler = new Handler(arThread.getLooper());
-        arHandler.post(new Runnable() {
+        final Handler h;
+        synchronized (lock) {
+            if (running) { call.resolve(started(true, "already running")); return; }
+            if (tearingDown) { call.resolve(started(false, "busy: previous session shutting down")); return; }
+            streamImage = call.getBoolean("streamImage", true);
+            arThread = new HandlerThread("fundx-arcore");
+            arThread.start();
+            arHandler = new Handler(arThread.getLooper());
+            h = arHandler;
+        }
+        h.post(new Runnable() {
             @Override public void run() {
                 try {
                     setupEgl();
-                    session = new Session(getContext());
+                    session = new Session(getContext());     // created on arThread; destroyed on arThread
                     Config cfg = new Config(session);
                     if (session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)) cfg.setDepthMode(Config.DepthMode.AUTOMATIC);
                     cfg.setFocusMode(Config.FocusMode.AUTO);
@@ -118,7 +130,8 @@ public class FundxDepthPlugin extends Plugin {
                     loop();
                 } catch (Exception e) {
                     // CameraNotAvailableException (WebView owns the camera), ARCore not installed, etc.
-                    teardown();
+                    teardown();                             // on arThread — safe to release session + EGL here
+                    quitArThread();
                     call.resolve(started(false, e.getClass().getSimpleName() + ": " + e.getMessage()));
                 }
             }
@@ -140,13 +153,34 @@ public class FundxDepthPlugin extends Plugin {
     }
 
     private void shutdown() {
-        running = false;
-        if (arHandler != null) {
-            arHandler.post(new Runnable() { @Override public void run() { teardown(); } });
-        } else {
-            teardown();
+        final Handler h;
+        final HandlerThread t;
+        synchronized (lock) {
+            running = false;
+            if (tearingDown) return;                 // a teardown is already scheduled
+            h = arHandler;
+            t = arThread;
+            if (h == null) return;                   // no live AR thread => session + EGL already released
+            tearingDown = true;
+            arHandler = null;
+            arThread = null;
         }
-        if (arThread != null) { arThread.quitSafely(); arThread = null; arHandler = null; }
+        // teardown() runs on the AR thread that owns the session + EGL context (thread-affine),
+        // then the thread quits. Any concurrent/subsequent stop() sees tearingDown/arHandler==null
+        // and no-ops, so the session can never be closed twice or from the wrong thread.
+        h.post(new Runnable() { @Override public void run() {
+            teardown();
+            t.quitSafely();
+            synchronized (lock) { tearingDown = false; }
+        }});
+    }
+
+    // Release the AR thread from its own failure path (start() setup threw). teardown() has already
+    // run on this thread; here we just retire the looper and clear the fields.
+    private void quitArThread() {
+        HandlerThread t;
+        synchronized (lock) { t = arThread; arThread = null; arHandler = null; }
+        if (t != null) t.quitSafely();
     }
 
     // ---- Frame loop -----------------------------------------------------------------------
