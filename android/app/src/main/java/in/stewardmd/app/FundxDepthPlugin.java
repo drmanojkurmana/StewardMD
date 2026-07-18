@@ -1,10 +1,17 @@
 package in.stewardmd.app;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.media.Image;
 import android.util.Base64;
+import android.view.Surface;
 import android.opengl.EGL14;
 import android.opengl.EGLConfig;
 import android.opengl.EGLContext;
@@ -56,6 +63,11 @@ public class FundxDepthPlugin extends Plugin {
     private EGLSurface eglSurface = EGL14.EGL_NO_SURFACE;
     private int cameraTexId = 0;
     private int frameCount = 0;
+    // Back-camera sensor mount angle (clockwise degrees to upright on the device's NATURAL
+    // orientation), read once from CameraManager at start. ARCore delivers frames in this sensor
+    // orientation (e.g. 640x480 landscape) regardless of how the phone is held; combined with the
+    // live display rotation each frame it gives the angle to rotate the streamed frame display-upright.
+    private int sensorOrientation = 90;
     private volatile boolean streamImage = true;   // approach A: stream the camera image to JS
                                                     // so the existing heuristics/MediaPipe run on
                                                     // native frames while ARCore owns the camera.
@@ -101,6 +113,7 @@ public class FundxDepthPlugin extends Plugin {
         arHandler.post(new Runnable() {
             @Override public void run() {
                 try {
+                    querySensorOrientation();               // read sensor mount BEFORE ARCore opens the camera
                     setupEgl();
                     session = new Session(getContext());
                     Config cfg = new Config(session);
@@ -170,7 +183,15 @@ public class FundxDepthPlugin extends Plugin {
             String camImg = null;
             if (streamImage && (frameCount % 2 == 0)) {          // throttle image to ~7 Hz
                 Image ci = null;
-                try { ci = frame.acquireCameraImage(); camImg = encodeYuvToJpegDataUrl(ci); }
+                try {
+                    ci = frame.acquireCameraImage();
+                    // Rotate the sensor-oriented frame to be upright on the CURRENT display, so the
+                    // JS preview + MediaPipe/heuristics (which share this image) are correctly oriented
+                    // and the pupil-offset coaching arrows match real-world movement. Back camera =
+                    // no mirror. Read live so all four display rotations are handled.
+                    int rot = ((sensorOrientation - displayRotationDegrees()) % 360 + 360) % 360;
+                    camImg = encodeYuvToJpegDataUrl(ci, rot);
+                }
                 catch (Throwable t) { /* camera image not ready this frame */ }
                 finally { if (ci != null) ci.close(); }
             }
@@ -226,14 +247,33 @@ public class FundxDepthPlugin extends Plugin {
 
     // YUV_420_888 -> NV21 -> JPEG data URL: the native camera frame the JS heuristics/preview run
     // on while ARCore owns the camera (the approach-A handoff). Throttled by the caller.
-    private static String encodeYuvToJpegDataUrl(Image image) {
+    // Rotated `rotationDeg` clockwise so the frame is upright on the current display. This is the
+    // SINGLE source of truth for the streamed image, consumed by BOTH the JS preview canvas and the
+    // MediaPipe/heuristics analysis, so both are display-oriented from one rotation. Depth stays
+    // aligned: distance is sampled at the image CENTRE, invariant under a centre rotation (the optical
+    // axis), and the camera pose is a physical measurement independent of image pixels.
+    private static String encodeYuvToJpegDataUrl(Image image, int rotationDeg) {
         if (image == null || image.getFormat() != ImageFormat.YUV_420_888) return null;
         int w = image.getWidth(), h = image.getHeight();
         byte[] nv21 = yuv420ToNv21(image);
         YuvImage yuv = new YuvImage(nv21, ImageFormat.NV21, w, h, null);
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
-        yuv.compressToJpeg(new Rect(0, 0, w, h), 55, out);
-        return "data:image/jpeg;base64," + Base64.encodeToString(out.toByteArray(), Base64.NO_WRAP);
+        yuv.compressToJpeg(new Rect(0, 0, w, h), 70, out);
+        byte[] jpeg = out.toByteArray();
+        if (rotationDeg % 360 != 0) {
+            Bitmap bmp = BitmapFactory.decodeByteArray(jpeg, 0, jpeg.length);
+            if (bmp != null) {
+                Matrix m = new Matrix();
+                m.postRotate(rotationDeg);                   // clockwise; back camera needs no mirror
+                Bitmap rot = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), m, true);
+                java.io.ByteArrayOutputStream out2 = new java.io.ByteArrayOutputStream();
+                rot.compress(Bitmap.CompressFormat.JPEG, 70, out2);
+                jpeg = out2.toByteArray();
+                if (rot != bmp) rot.recycle();
+                bmp.recycle();
+            }
+        }
+        return "data:image/jpeg;base64," + Base64.encodeToString(jpeg, Base64.NO_WRAP);
     }
 
     private static byte[] yuv420ToNv21(Image image) {
@@ -268,6 +308,41 @@ public class FundxDepthPlugin extends Plugin {
         double sinp = 2.0 * (w * y - z * x);
         sinp = Math.max(-1.0, Math.min(1.0, sinp));
         return Math.toDegrees(Math.asin(sinp));
+    }
+
+    // ---- Display-orientation correction --------------------------------------------------
+    // Read the back-camera sensor mount angle once (clockwise degrees to upright on the device's
+    // natural orientation). Default 90 (typical phone) if it can't be read.
+    private void querySensorOrientation() {
+        try {
+            CameraManager cm = (CameraManager) getContext().getSystemService(Context.CAMERA_SERVICE);
+            for (String id : cm.getCameraIdList()) {
+                CameraCharacteristics cc = cm.getCameraCharacteristics(id);
+                Integer facing = cc.get(CameraCharacteristics.LENS_FACING);
+                if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
+                    Integer so = cc.get(CameraCharacteristics.SENSOR_ORIENTATION);
+                    if (so != null) sensorOrientation = so;
+                    return;
+                }
+            }
+        } catch (Exception e) { /* keep default 90 */ }
+    }
+
+    // Current display rotation in degrees (0 / 90 / 180 / 270), read live each frame so all four
+    // orientations are corrected even if the device is rotated mid-capture. Thread-safe read.
+    private int displayRotationDegrees() {
+        try {
+            android.view.Display d = null;
+            if (android.os.Build.VERSION.SDK_INT >= 30 && getActivity() != null) d = getActivity().getDisplay();
+            if (d == null && getActivity() != null) d = getActivity().getWindowManager().getDefaultDisplay();
+            if (d == null) return 0;
+            switch (d.getRotation()) {
+                case Surface.ROTATION_90:  return 90;
+                case Surface.ROTATION_180: return 180;
+                case Surface.ROTATION_270: return 270;
+                default: return 0;
+            }
+        } catch (Exception e) { return 0; }
     }
 
     // ---- Minimal offscreen EGL context (ARCore needs a GL context + camera texture) -------
