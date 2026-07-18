@@ -16,6 +16,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(SafeFirebaseAuthenticationPlugin.class);
         registerPlugin(SpeechRecognition.class);
         registerPlugin(AppOrientationPlugin.class);
+        registerPlugin(FundxDepthPlugin.class);
         super.onCreate(savedInstanceState);
         setupSafeAreaInsets();
     }
