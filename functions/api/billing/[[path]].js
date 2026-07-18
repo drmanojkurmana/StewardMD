@@ -17,7 +17,7 @@
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { entitlementFor, grantPro, revokePro, promoUntil } from "../../_entitlement.js";
-import { lookupUidByEmail } from "../../_fbadmin.js";
+import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
@@ -100,6 +100,9 @@ export async function onRequest(context) {
         uid = u.uid; email = u.email; name = u.name;
       }
       if (!uid) return json({ error: "uid-or-email-required" }, 400);
+      // Granted by uid (or email lookup returned no address): resolve the email so the confirmation
+      // email always has a recipient. Uses accounts:lookup by localId (the known-good query).
+      if (uid && !email) { try { const u = await lookupUserByUid(env, uid); if (u) { email = u.email; if (!name) name = u.name; } } catch (e) {} }
 
       if (seg === "lookup") { const st = await entitlementFor(env, uid); return json(Object.assign({ uid, email, name }, st)); }
       if (seg === "revoke") { const r = await revokePro(env, uid); return json(Object.assign({ uid, email }, r)); }
