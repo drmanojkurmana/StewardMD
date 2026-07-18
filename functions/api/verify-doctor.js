@@ -22,6 +22,7 @@
 import { verifyFirebaseToken } from "../_fbauth.js";
 import { setUserClaims } from "../_fbadmin.js";
 import { emailVerified } from "../_email.js";
+import { markVerified, sendProUpsellOnce } from "../_lifecycle.js";
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
@@ -373,8 +374,9 @@ export async function onRequest(context) {
   }
   console.log("[verify] uid", uid, "→ VERIFIED", match.registrationNo, "(" + source + "/" + (idMode ? "id" : "cert") + ")");
 
-  // Confirmation email to the doctor (best-effort).
+  // Confirmation email to the doctor (best-effort), then the Pro upsell at this high-intent moment.
   try { await emailVerified(env, { email, name: match.firstName, regNo: match.registrationNo, council: match.smcName }); } catch (e) {}
+  try { await markVerified(env, uid); await sendProUpsellOnce(env, uid, { email, name: match.firstName }); } catch (e) {}
 
   return json({ status: "verified", regNo: match.registrationNo, name: match.firstName, council: match.smcName });
 }
