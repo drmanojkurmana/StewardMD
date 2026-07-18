@@ -32,15 +32,22 @@ const na = AI.normalizeAssessment({ severity: "banana", urgency: "emergency", co
 ok("normalizeAssessment: bad severity → none, urgency kept, advisory", na.severity === "none" && na.urgency === "emergency" && na.advisory === true);
 ok("normalizeAssessment: clamps confidence + provider", na.confidence === 1 && na.provider === "cerebras" && na.engine === "clinical");
 
-ok("visionOrder: default vertex→developer", JSON.stringify(AI.visionOrder({})) === JSON.stringify(["vertex", "developer"]));
-ok("visionOrder: developer override", JSON.stringify(AI.visionOrder({ FUNDX_VISION_PROVIDER: "developer" })) === JSON.stringify(["developer"]));
-ok("clinicalOrder: cerebras first when selected", AI.clinicalOrder({ FUNDX_CLINICAL_PROVIDER: "cerebras" })[0] === "cerebras");
+// Production priority: Vertex primary; Developer DEV-ONLY (never in prod); Cerebras LAST fallback
+ok("visionOrder: production = vertex only (no developer, Cerebras has no vision)", JSON.stringify(AI.visionOrder({})) === JSON.stringify(["vertex"]));
+ok("visionOrder: developer re-enabled only in dev", JSON.stringify(AI.visionOrder({ FUNDX_ENV: "development" })) === JSON.stringify(["vertex", "developer"]));
+ok("clinicalOrder: production = [vertex, cerebras] (developer dropped, Cerebras LAST)", JSON.stringify(AI.clinicalOrder({})) === JSON.stringify(["vertex", "cerebras"]));
+ok("clinicalOrder: dev includes developer before cerebras", JSON.stringify(AI.clinicalOrder({ FUNDX_ENV: "development" })) === JSON.stringify(["vertex", "developer", "cerebras"]));
+ok("isProduction: default true; development/preview false; FUNDX_ALLOW_DEVELOPER=1 false", AI.isProduction({}) === true && AI.isProduction({ FUNDX_ENV: "development" }) === false && AI.isProduction({ FUNDX_ALLOW_DEVELOPER: "1" }) === false);
 ok("health: no creds → all providers unavailable", AI.health({}).providers.every((p) => p.available === false));
-ok("health: GEMINI_API_KEY → developer available", AI.health({ GEMINI_API_KEY: "x" }).providers.find((p) => p.name === "developer").available === true);
+ok("health: developer NEVER available in production even with key", AI.health({ GEMINI_API_KEY: "x" }).providers.find((p) => p.name === "developer").available === false);
+ok("health: developer available in dev with key", AI.health({ GEMINI_API_KEY: "x", FUNDX_ENV: "development" }).providers.find((p) => p.name === "developer").available === true);
+ok("health: reports production flag", AI.health({}).production === true);
 
 // ---- router + capabilities + cost accounting + safety ------------------
 ok("router: default vision order = base", JSON.stringify(AI.routeOrder({}, "vision")) === JSON.stringify(AI.visionOrder({})));
-ok("router: FUNDX_PRIMARY override puts primary first", AI.routeOrder({ FUNDX_PRIMARY: "developer" }, "vision")[0] === "developer");
+ok("router: FUNDX_PRIMARY override puts primary first", AI.routeOrder({ FUNDX_PRIMARY: "cerebras" }, "clinical")[0] === "cerebras");
+ok("router: developer primary is DROPPED in production", AI.routeOrder({ FUNDX_PRIMARY: "developer" }, "clinical").indexOf("developer") < 0);
+ok("router: developer primary honored in dev", AI.routeOrder({ FUNDX_PRIMARY: "developer", FUNDX_ENV: "development" }, "clinical")[0] === "developer");
 ok("router: primary + secondary then base fallback (deduped)", (function () { const o = AI.routeOrder({ FUNDX_PRIMARY: "cerebras", FUNDX_SECONDARY: "vertex" }, "clinical"); return o[0] === "cerebras" && o[1] === "vertex" && new Set(o).size === o.length; })());
 ok("capabilities: all providers, structured JSON, no streaming", AI.capabilities({}).length === 3 && AI.capabilities({}).every((c) => c.structuredJson === true && c.streaming === false));
 ok("capabilities: only vision-capable providers expose imageInput", AI.capabilities({}).find((c) => c.name === "cerebras").imageInput === false && AI.capabilities({}).find((c) => c.name === "vertex").imageInput === true);

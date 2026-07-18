@@ -42,10 +42,16 @@ GCP_WIF_SUBJECT=maik-worker
 # ---- Developer API (AI Studio) — optional dev/failover ----
 # GEMINI_API_KEY=
 
-# ---- Cerebras (clinical text provider) — optional ----
+# ---- Cerebras (clinical text provider — LAST production fallback) ----
 # CEREBRAS_API_KEY=
-# CEREBRAS_MODEL=llama-3.3-70b
+CEREBRAS_MODEL=gemma-4-31b          # MUST be one of your account's models (see /v1/models);
+                                    # gemma-4-31b = reliable clean JSON; reasoning models
+                                    # (gpt-oss-120b/zai-glm) may emit non-JSON.
 # CEREBRAS_BASE=https://api.cerebras.ai/v1
+
+# ---- production mode (Developer/Mock provider is DISABLED unless dev) ----
+# FUNDX_ENV=production               # default; set development/preview to re-enable developer
+# FUNDX_ALLOW_DEVELOPER=1            # force-enable the developer/AI-Studio provider (dev only)
 
 # ---- KV for rate limiting (binding, not a var) ----
 # Reuses the existing MAIK_KV namespace (see wrangler.toml). For `pages dev`, bind a

@@ -44,9 +44,17 @@ async function retry(fn, attempts) {
 export function failReason(e) {
   const m = String((e && e.message) || e);
   if (/\b(401|403)\b|unauth|permission|IAM|forbidden|jwt|credential|token|STS|OAuth/i.test(m)) return "auth/permission";
-  if (/\b429\b|quota|rate.?limit|exhausted|RESOURCE_EXHAUSTED/i.test(m)) return "quota/rate-limit";
+  if (/\b(429|402)\b|quota|rate.?limit|exhausted|RESOURCE_EXHAUSTED|payment/i.test(m)) return "quota/billing";
   if (/\b5\d\d\b|unavailable|internal|timeout|deadline|abort|network|fetch failed|ECONN|ENOTFOUND/i.test(m)) return "provider-unavailable";
   return "error";
+}
+
+// Production mode: Developer/AI-Studio is a DEV-ONLY provider and is NEVER used in production.
+// Default is production; only development/preview (or explicit FUNDX_ALLOW_DEVELOPER=1) re-enable it.
+export function isProduction(env) {
+  if (env && env.FUNDX_ALLOW_DEVELOPER === "1") return false;
+  const e = String((env && (env.FUNDX_ENV || env.ENVIRONMENT || env.NODE_ENV)) || "production").toLowerCase();
+  return e !== "development" && e !== "dev" && e !== "preview" && e !== "test";
 }
 
 /* ---------- Vertex OAuth (keyless WIF; mirrors MaiK, same secrets) ---------- */
@@ -143,7 +151,8 @@ const vertexProvider = {
 };
 const developerProvider = {
   name: "developer", modalities: ["vision", "text"],
-  available: (env) => !!(env && env.GEMINI_API_KEY),
+  // DEV-ONLY: unavailable in production regardless of key presence.
+  available: (env) => !!(env && env.GEMINI_API_KEY) && !isProduction(env),
   generate: async (env, req, opts) => {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`;
     return withTimeout(async (signal) => {
@@ -171,12 +180,19 @@ const cerebrasProvider = {
 export const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, cerebras: cerebrasProvider };
 
 // Selection: Vertex primary → developer failover (vision); clinical honours FUNDX_CLINICAL_PROVIDER.
-export function visionOrder(env) { const p = String((env && env.FUNDX_VISION_PROVIDER) || (env && env.FUNDX_AI_PROVIDER) || "vertex").toLowerCase(); return p === "developer" ? ["developer"] : ["vertex", "developer"]; }
+// Priority: Vertex (primary) → Developer (DEV-ONLY, filtered in production) → Cerebras
+// (LAST production fallback; clinical only — Cerebras has no vision modality).
+function dropDevInProd(order, env) { return isProduction(env) ? order.filter((p) => p !== "developer") : order; }
+export function visionOrder(env) {
+  const p = String((env && env.FUNDX_VISION_PROVIDER) || (env && env.FUNDX_AI_PROVIDER) || "vertex").toLowerCase();
+  if (p === "developer" && !isProduction(env)) return ["developer"];
+  return dropDevInProd(["vertex", "developer"], env);          // prod → ["vertex"]
+}
 export function clinicalOrder(env) {
   const p = String((env && env.FUNDX_CLINICAL_PROVIDER) || (env && env.FUNDX_AI_PROVIDER) || "vertex").toLowerCase();
-  if (p === "cerebras") return ["cerebras", "vertex", "developer"];
-  if (p === "developer") return ["developer"];
-  return ["vertex", "developer", "cerebras"];
+  if (p === "cerebras") return dropDevInProd(["cerebras", "vertex", "developer"], env);   // explicit manual override
+  if (p === "developer" && !isProduction(env)) return ["developer"];
+  return dropDevInProd(["vertex", "developer", "cerebras"], env);   // prod → ["vertex","cerebras"] (Cerebras LAST)
 }
 
 /* ---------- pure helpers (validation / prompts / extraction / normalization) ---------- */
@@ -311,7 +327,7 @@ export function routeOrder(env, task) {
   const order = [primary];
   if (secondary && secondary !== primary) order.push(secondary);
   base.forEach((p) => { if (order.indexOf(p) < 0) order.push(p); });
-  return order;
+  return isProduction(env) ? order.filter((p) => p !== "developer") : order;   // never developer in prod
 }
 
 // Capability discovery — every provider's declared interface.
@@ -336,6 +352,7 @@ export async function runClinical(env, body, deps) {
 export function health(env) {
   return {
     ok: true, service: "fundx", schema: { vision: SCHEMA_VISION, clinical: SCHEMA_CLINICAL }, model: modelId(env),
+    production: isProduction(env),
     providers: capabilities(env),
     routing: { vision: routeOrder(env, "vision"), clinical: routeOrder(env, "clinical"), primary: (env && env.FUNDX_PRIMARY) || null, secondary: (env && env.FUNDX_SECONDARY) || null },
     config: { timeoutMs: timeoutMs(env), safety: (env && env.FUNDX_SAFETY) || "BLOCK_ONLY_HIGH" }

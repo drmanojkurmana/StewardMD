@@ -159,26 +159,32 @@ provider comparison + monthly projection. Rate-limit / cost caps via `FUNDX_DAIL
 **Capability discovery:** `GET /api/fundx/health.providers[]` = `{name, modalities, streaming,
 structuredJson, imageInput, available}` per provider.
 
-## Cerebras integration status (verified 2026-07-18)
+## Cerebras integration status (verified 2026-07-18, billing enabled)
 
-- **Secrets stored** (production Pages): `CEREBRAS_API_KEY` and `CEREBRAS_MODEL` (=`gpt-oss-120b`)
+- **Secrets stored** (production Pages): `CEREBRAS_API_KEY` and `CEREBRAS_MODEL` (=`gemma-4-31b`)
   — set via `wrangler pages secret put ... --project-name stewardmd`. Never committed / never
   sent to the client (server-only `env.CEREBRAS_API_KEY`); confirmed absent from git history,
   the client bundle, logs, and API responses.
-- **Model note:** this account exposes `gpt-oss-120b`, `zai-glm-4.7`, `gemma-4-31b` — NOT the
-  code default `llama-3.3-70b`, so **`CEREBRAS_MODEL` MUST be set** to one of the account's
-  models (done). Verify with `curl -s https://api.cerebras.ai/v1/models -H "Authorization: Bearer $KEY"`.
-- **Verified:** the key **authenticates**; `health().providers[cerebras].available === true`;
-  `runClinical` routes to Cerebras (real ~1 s round-trip); **failover works** (real Cerebras
-  failure → Vertex, confirmed: `cerebras:error → vertex:ok`); streaming is N/A (structured JSON).
-- **BLOCKER:** the Cerebras account has **no active billing/quota** — every model returns
-  `payment_required`. A real inference cannot run until **billing is enabled on the Cerebras
-  account**. Once enabled, no code/secret change is needed. Meanwhile Cerebras is only the last
-  clinical fallback (after Vertex/developer), so the 402 is handled by failover.
-- **Rotate this key** if the value was shared over an insecure channel (it was pasted in chat).
+- **Real inference VERIFIED** (billing now active): a real clinical inference succeeds through
+  the backend (`runClinical` → Cerebras) — e.g. severe-DR + macular-oedema findings → `severity:
+  severe, urgency: urgent, referral: Ophthalmology/Retina`. Latency ~0.95–1.45 s, ~230 output
+  tokens, ~$0.0003/call. Structured-JSON contract validated (engine/advisory/schemaVersion).
+- **Model choice:** account exposes `gemma-4-31b`, `gpt-oss-120b`, `zai-glm-4.7` (NOT the code
+  default `llama-3.3-70b`, so `CEREBRAS_MODEL` **must** be set). **`gemma-4-31b` chosen** — clean
+  JSON, concise (~230 tok), cheapest, most reliable. `gpt-oss-120b` works but is a *reasoning*
+  model (separate `reasoning` field, ~2× tokens, occasional non-JSON); `zai-glm-4.7` puts all
+  output in `reasoning` and leaves `content` empty → **not usable** with structured JSON. Since
+  Cerebras is the LAST fallback, reliability was prioritised.
+- **Production priority [verified]:** Vertex (primary) → **Developer/Mock DISABLED in production**
+  → Cerebras (last fallback, clinical only — no vision modality). `isProduction(env)` (default
+  true; dev via `FUNDX_ENV=development`/`preview` or `FUNDX_ALLOW_DEVELOPER=1`) removes developer
+  from every order AND from `available()`, so it can never run in prod. Verified: Vertex-unavail
+  → Cerebras `ok`; no provider → HTTP 503; developer excluded even with `GEMINI_API_KEY` set.
+- **Rotate this key** — it was shared in chat; treat as exposed. Re-run only the
+  `CEREBRAS_API_KEY` secret put after rotating.
 
 ### Setting Cerebras secrets (reference)
 ```bash
 printf '%s' "$CEREBRAS_KEY" | wrangler pages secret put CEREBRAS_API_KEY --project-name stewardmd
-printf '%s' "gpt-oss-120b"  | wrangler pages secret put CEREBRAS_MODEL  --project-name stewardmd
+printf '%s' "gemma-4-31b"  | wrangler pages secret put CEREBRAS_MODEL  --project-name stewardmd
 ```
