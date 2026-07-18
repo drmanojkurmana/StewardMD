@@ -406,10 +406,14 @@
   // worked. Verified vs the live API: /structured?name=Ceftriaxone → found; "Ceftriaxone (1000mg)" → not.
   function clinicalKey(name) {
     var s = String(name || "");
+    s = s.replace(/\s*\(\s*n\/?a\s*\)/ig, " ");                                          // "(NA)"/"(N/A)" placeholder (no real strength)
     s = s.replace(/\s*\([^)]*\d[^)]*\)/g, " ");                                          // (1000mg), (5 mg/ml), (60000IU)
     s = s.replace(/\s+\d+(?:\.\d+)?\s*(?:mg|mcg|µg|ug|g|ml|l|%|iu|units?|meq|mmol)\b/gi, " "); // trailing "500 mg", "1 g", "0.5%"
-    return s.replace(/\s{2,}/g, " ").trim();
+    return s.replace(/\s*\+\s*/g, " + ").replace(/\s{2,}/g, " ").trim();                 // tidy combo spacing after strips
   }
+  // The clinical API is case-SENSITIVE and keyed in Title Case, but the brand list often lowercases
+  // trailing words ("Acetic acid", "Azilsartan medoxomil") — try a Title-Cased candidate too.
+  function titleCase(s) { return String(s || "").replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); }); }
   // Curated British/BAN ⇄ INN/US spelling pairs (same molecule) — the gold DB and the Indian brand
   // list often disagree on spelling (e.g. list "Amoxicillin" vs DB "Amoxycillin"), so a base match
   // still missed. Tried in BOTH directions; only found:true responses are ever accepted, so a curated
@@ -440,7 +444,16 @@
   function clinicalLookup(fn, name) {
     var base = clinicalKey(name), tries = [], seen = {};
     function add(n) { if (n && !seen[n]) { seen[n] = 1; tries.push(n); } }
-    add(name); add(base); synVariants(base).forEach(add); if (base !== name) synVariants(name).forEach(add);
+    // For name and base: the raw form, its Title-Cased form (case-sensitive API), and curated
+    // spelling variants (raw + Title-Cased). Combos ("A + B") are split server-side.
+    // `bare` also drops DESCRIPTIVE parentheticals the strength strip keeps — "(Salmon)", "(hCG)",
+    // "(HES)", "(Including Pvp)" — which block a match when the plain molecule IS in the DB. Additive
+    // (base is still tried first), and only found:true is accepted, so it can't surface a wrong drug.
+    var bare = base.replace(/\s*\([^)]*\)/g, " ").replace(/\s*\+\s*/g, " + ").replace(/\s{2,}/g, " ").trim();
+    [name, base, bare].forEach(function (n) {
+      add(n); add(titleCase(n));
+      synVariants(n).forEach(function (v) { add(v); add(titleCase(v)); });
+    });
     var first = { done: false };
     function step(i) {
       if (i >= tries.length) return Promise.resolve(first.resp);
