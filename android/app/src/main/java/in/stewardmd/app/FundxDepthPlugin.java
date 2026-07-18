@@ -127,6 +127,19 @@ public class FundxDepthPlugin extends Plugin {
 
     @PluginMethod
     public void stop(PluginCall call) {
+        shutdown();
+        call.resolve();
+    }
+
+    // Belt-and-suspenders: release the ARCore session + camera when the Activity is backgrounded,
+    // even if the JS visibilitychange handler didn't fire. The JS flow re-starts on resume.
+    @Override
+    protected void handleOnPause() {
+        shutdown();
+        super.handleOnPause();
+    }
+
+    private void shutdown() {
         running = false;
         if (arHandler != null) {
             arHandler.post(new Runnable() { @Override public void run() { teardown(); } });
@@ -134,7 +147,6 @@ public class FundxDepthPlugin extends Plugin {
             teardown();
         }
         if (arThread != null) { arThread.quitSafely(); arThread = null; arHandler = null; }
-        call.resolve();
     }
 
     // ---- Frame loop -----------------------------------------------------------------------

@@ -584,15 +584,10 @@
   function devSF(k, def) { try { var v = localStorage.getItem(k); return v == null ? def : v === "1"; } catch (e) { return def; } }
   function depthOn() { try { var q = (location.search.match(/[?&]fundxdepth=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_depth") === "1"; } catch (e) { return false; } }
   function screenDevSettings() {
-    var caps = {};
-    try { caps = (window.SMD_FUNDX_SENSORS && window.SMD_FUNDX_SENSORS.capabilities()) || {}; } catch (e) {}
-    var depthCaps = null;
-    try { if (window.SMD_FUNDX_SENSORS) { depthCaps = window.SMD_FUNDX_SENSORS.makeDepthAdapter({}).capabilities(); } } catch (e) {}
     function row(k, label, sub, def) {
       var on = devSF(k, def);
       return '<button class="fundx-set-row' + (on ? ' on' : '') + '" data-fx="setdevsf" data-k="' + k + '" data-def="' + (def ? "1" : "0") + '"><span class="fundx-set-rl"><b>' + esc(label) + '</b><span>' + esc(sub) + '</span></span>' + ric(on ? "toggle_on" : "toggle_off") + '</button>';
     }
-    function kv(label, val) { return '<div class="fundx-kv"><span>' + esc(label) + '</span><b>' + esc(val) + '</b></div>'; }
     return '' +
       '<header class="fundx-head"><button class="fundx-close" data-fx="settings" aria-label="Back">' + ric("arrow_back_ios_new") + '</button><div class="fundx-head-tt"><b>Developer · Sensors</b></div><div class="fundx-head-sp"></div></header>' +
       '<main class="fundx-scroll">' +
@@ -734,7 +729,7 @@
     cam = Vd.makeCamera();
     var startOpts = { hub: (hub = Vd.makeHub()), analyzeEveryMs: 110, analyzeScale: 0.25, flash: flashOn() };
     var useNative = false;
-    try { useNative = depthOn() && !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth); } catch (e) {}
+    try { useNative = depthOn() && !devSF("smd_fundx_dev_forcemono", false) && !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth); } catch (e) {}
     usingNative = useNative;
     var starter;
     if (useNative) {
