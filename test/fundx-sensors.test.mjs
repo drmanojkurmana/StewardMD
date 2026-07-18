@@ -94,5 +94,44 @@ const load = (win) => { new Function("window", src("fundx-sensors.js"))(win); re
   ok("flag: localStorage on", S.flagOn(w) === true);
 }
 
+// ---- Phase 2: depth adapter + distance/pose fusion ----
+{
+  const S = load(makeWin());
+  let handler = null;
+  const plugin = {
+    capabilities: () => Promise.resolve({ depth: true, lidar: true, arkit: true, sceneDepth: true }),
+    addListener: (name, fn) => { handler = fn; return { remove() { handler = null; } }; },
+    start: () => {}, stop: () => {},
+  };
+  const dep = S.makeDepthAdapter({ plugin, window: makeWin() });
+  ok("depth: read null before data", dep.read() === null);
+  dep.start();
+  handler({ distanceMeters: 0.35, distanceConfidence: 0.9, roll: 4, poseConfidence: 0.85 });
+  const dr = dep.read();
+  ok("depth: metric distance emitted", dr && dr.distance && Math.abs(dr.distance.value - 0.35) < 1e-6 && dr.distance.metric === true);
+  ok("depth: pose emitted", dr.pose && dr.pose.roll === 4);
+
+  const mgr = S.makeManager({ window: makeWin(), depth: dep });
+  const r = mgr.read({ motion: 0.1, eyePresent: true, distanceState: "unknown" });
+  ok("mgr: metric distanceMm from depth (350)", r.distanceMm === 350);
+  ok("mgr: distanceState 'ok' within band", r.distanceState === "ok");
+  ok("mgr: distance confidence present", r.distanceConfidence > 0.8);
+  ok("mgr: roll refined by depth pose", r.roll === 4 && r.rollState === "level");
+  ok("mgr: acqConfidence aggregates signals", r.acqConfidence != null && r.acqConfidence > 0);
+  ok("mgr: contributions report depth", mgr.contributions().distance.indexOf("depth") >= 0);
+  handler({ distanceMeters: 0.1, distanceConfidence: 0.9 });
+  ok("mgr: 'near' below workingNearM", mgr.read({}).distanceState === "near");
+  handler({ distanceMeters: 0.8, distanceConfidence: 0.9 });
+  ok("mgr: 'far' above workingFarM", mgr.read({}).distanceState === "far");
+  dep.stop();
+}
+{
+  const S = load(makeWin());
+  ok("depthFlag: default off", S.depthFlagOn(makeWin()) === false);
+  ok("depthFlag: query on", S.depthFlagOn(makeWin({ location: { search: "?fundxdepth=1" } })) === true);
+  const w = makeWin(); w.localStorage.setItem("smd_fundx_depth", "1");
+  ok("depthFlag: localStorage on", S.depthFlagOn(w) === true);
+}
+
 console.log(fail === 0 ? `ALL ${pass} PASS` : `${pass} pass / ${fail} FAIL`);
 process.exit(fail === 0 ? 0 : 1);

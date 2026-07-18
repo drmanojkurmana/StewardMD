@@ -26,7 +26,10 @@
     warmSamples: 8,     // samples before the IMU is fully trusted (confidence ramp)
     disagreeMax: 0.6,   // max spread penalty applied to fused confidence
     mpEyeConf: 0.5,     // trust in the monocular (MediaPipe pupil-delta) motion when an eye is seen
-    mpNoEyeConf: 0.2    // ...and when no eye is present (noisier)
+    mpNoEyeConf: 0.2,   // ...and when no eye is present (noisier)
+    // Phase 2 depth: metric phone->eye working-distance band (needs on-device calibration).
+    workingNearM: 0.20, // < this (m) reads "near" (too close)
+    workingFarM: 0.55   // > this (m) reads "far"; between = "ok"
   };
 
   function capabilities(w) {
@@ -113,17 +116,86 @@
   // Wires the available adapters and fuses their signals with the monocular partial the engine
   // already computes. read(monoPartial) -> the fields the sensors IMPROVE, ready to
   // Object.assign into the partial. Absent sensors -> engine unchanged (fallback-identical).
+  // ---- Depth adapter (Phase 2: native ARKit/LiDAR / ARCore Depth via the FundxDepth plugin) ----
+  // Talks to Capacitor.Plugins.FundxDepth; emits metric distance + pose in the fusion contract.
+  // No-op + available()=false when the plugin is absent (iOS/older devices/web) -> monocular
+  // fallback. Frames arrive via the "fundxDepthFrame" event; _push injects one for tests.
+  function makeDepthAdapter(opts) {
+    opts = opts || {};
+    var w = opts.window || (typeof window !== "undefined" ? window : {});
+    function plug() { try { return opts.plugin || (w.Capacitor && w.Capacitor.Plugins && w.Capacitor.Plugins.FundxDepth) || null; } catch (e) { return null; } }
+    var caps = null, last = null, sub = null, started = false;
+    var lat = { frames: 0, sumMs: 0, lastT: 0, fps: 0 };
+    function onFrame(s) {
+      last = s || null;
+      var t = (typeof performance !== "undefined" && performance.now) ? performance.now() : (opts.now ? opts.now() : 0);
+      if (lat.lastT && t) { var dt = t - lat.lastT; if (dt > 0) { lat.frames++; lat.sumMs += dt; lat.fps = 1000 / dt; } }
+      lat.lastT = t;
+    }
+    return {
+      source: "depth",
+      available: function () { return !!(plug() && caps && caps.depth); },
+      capabilities: function () { return caps; },
+      init: function () {
+        var p = plug();
+        if (!p || !p.capabilities) { caps = null; return Promise.resolve(false); }
+        return p.capabilities().then(function (c) { caps = c || null; return !!(c && c.depth); }, function () { caps = null; return false; });
+      },
+      start: function (config) {
+        var p = plug(); if (!p || !p.start) return;
+        try { if (p.addListener && !sub) { sub = p.addListener("fundxDepthFrame", onFrame); } p.start(config || {}); started = true; } catch (e) {}
+      },
+      stop: function () {
+        var p = plug();
+        try { if (p && p.stop) p.stop(); } catch (e) {}
+        try { if (sub && sub.remove) sub.remove(); } catch (e) {}
+        sub = null; started = false;
+      },
+      reset: function () { last = null; lat = { frames: 0, sumMs: 0, lastT: 0, fps: 0 }; },
+      read: function () {
+        if (!last) return null;
+        var out = {};
+        if (last.distanceMeters != null) out.distance = { value: num(last.distanceMeters), confidence: clamp01(last.distanceConfidence != null ? last.distanceConfidence : 0.75), source: "depth", metric: true };
+        if (last.roll != null || last.pitch != null) out.pose = { roll: last.roll != null ? num(last.roll) : null, pitch: last.pitch != null ? num(last.pitch) : null, confidence: clamp01(last.poseConfidence != null ? last.poseConfidence : 0.8), source: "depth" };
+        return out;
+      },
+      latency: function () { return { fps: Math.round(lat.fps || 0), avgMs: lat.frames ? Math.round(lat.sumMs / lat.frames) : 0, frames: lat.frames }; },
+      _push: onFrame
+    };
+  }
+
+  function depthFlagOn(w) {
+    w = w || (typeof window !== "undefined" ? window : {});
+    try {
+      var q = ((w.location && w.location.search) || "").match(/[?&]fundxdepth=([^&]+)/);
+      if (q) return q[1] === "1";
+      return !!(w.localStorage && w.localStorage.getItem("smd_fundx_depth") === "1");
+    } catch (e) { return false; }
+  }
+  function devForceMono(w) { try { return !!(w.localStorage && w.localStorage.getItem("smd_fundx_dev_forcemono") === "1"); } catch (e) { return false; } }
+  function depthEnabled(w) { return depthFlagOn(w) && !devForceMono(w); }
+
   function makeManager(opts) {
     opts = opts || {};
     var w = opts.window || (typeof window !== "undefined" ? window : {});
     var adapters = [];
     var imu = opts.imu || makeImuAdapter(w);
     adapters.push(imu);
-    if (opts.depth) adapters.push(opts.depth);   // Phase 2 native depth adapter (same contract)
+    var depth = opts.depth;                       // Phase 2 native depth adapter (same contract)
+    if (depth === undefined && depthEnabled(w)) { try { depth = makeDepthAdapter({ window: w }); } catch (e) { depth = null; } }
+    if (depth) adapters.push(depth);
+    var contributions = {};
     var started = false;
     return {
       capabilities: function () { return capabilities(w); },
       adapters: adapters,
+      depthAdapter: depth || null,
+      contributions: function () { return contributions; },
+      latency: function () { return depth && depth.latency ? depth.latency() : { fps: 0, avgMs: 0, frames: 0 }; },
+      init: function () {
+        var ps = adapters.map(function (a) { return a.init ? a.init() : Promise.resolve(true); });
+        return Promise.all(ps).then(function () { return true; }, function () { return false; });
+      },
       start: function () { if (started) return; adapters.forEach(function (a) { try { a.start && a.start(); } catch (e) {} }); started = true; },
       stop: function () { if (!started) return; adapters.forEach(function (a) { try { a.stop && a.stop(); } catch (e) {} }); started = false; },
       reset: function () { adapters.forEach(function (a) { try { a.reset && a.reset(); } catch (e) {} }); },
@@ -131,23 +203,50 @@
         var ps = adapters.map(function (a) { return a.requestPermission ? a.requestPermission() : Promise.resolve(true); });
         return Promise.all(ps).then(function (rs) { return rs.every(Boolean); }, function () { return false; });
       },
-      // monoPartial: the engine's own frame partial (has .motion from MediaPipe pupil-delta).
+      // monoPartial: the engine's own frame partial (motion from MediaPipe pupil-delta,
+      // distanceState/roll from the monocular engine). Fuses every available sensor into the
+      // fields the engine already reads. Absent depth/IMU -> output equals the monocular input.
       read: function (monoPartial) {
         monoPartial = monoPartial || {};
-        var out = {};
+        var out = {}, i, sig, depthSig = null;
+        // ---- motion: monocular pupil-delta + IMU (+ any adapter emitting motion) ----
         var motionSrcs = [];
-        if (monoPartial.motion != null) {
-          motionSrcs.push({ value: num(monoPartial.motion), confidence: monoPartial.eyePresent ? CFG.mpEyeConf : CFG.mpNoEyeConf, source: "mediapipe" });
-        }
-        for (var i = 0; i < adapters.length; i++) {
-          var sig = null; try { sig = adapters[i].read && adapters[i].read(); } catch (e) {}
-          if (sig && sig.motion) motionSrcs.push(sig.motion);
+        if (monoPartial.motion != null) motionSrcs.push({ value: num(monoPartial.motion), confidence: monoPartial.eyePresent ? CFG.mpEyeConf : CFG.mpNoEyeConf, source: "mediapipe" });
+        for (i = 0; i < adapters.length; i++) {
+          sig = null; try { sig = adapters[i].read && adapters[i].read(); } catch (e) {}
+          if (!sig) continue;
+          if (sig.motion) motionSrcs.push(sig.motion);
+          if (sig.distance || sig.pose) depthSig = sig;   // the depth adapter's partial
         }
         var fm = fuse(motionSrcs);
         if (fm) { out.motion = fm.value; out.motionConfidence = fm.confidence; out.motionSources = fm.contributors; }
-        // Unified acquisition confidence (Phase 1: motion-signal richness; Phase 2 folds in
-        // distance/pose confidence). null when there is nothing to fuse.
-        out.acqConfidence = fm ? fm.confidence : (monoPartial.motion != null ? 0.4 : null);
+        // ---- distance: metric depth (high conf) overrides the monocular near/ok/far state ----
+        var distConf = null;
+        if (depthSig && depthSig.distance && depthSig.distance.value != null) {
+          var m = num(depthSig.distance.value);
+          out.distanceMm = Math.round(m * 1000);
+          out.distanceState = m < CFG.workingNearM ? "near" : (m > CFG.workingFarM ? "far" : "ok");
+          out.distanceConfidence = distConf = clamp01(depthSig.distance.confidence);
+        }
+        // ---- pose: depth/AR roll refines the deviceorientation roll when present ----
+        if (depthSig && depthSig.pose && depthSig.pose.roll != null) {
+          out.roll = num(depthSig.pose.roll);
+          out.rollState = Math.abs(out.roll) <= 12 ? "level" : (out.roll > 0 ? "cw" : "ccw");
+          out.poseConfidence = clamp01(depthSig.pose.confidence);
+        }
+        // ---- unified acquisition confidence: mean of the available per-signal confidences ----
+        var confs = [];
+        if (fm) confs.push(fm.confidence);
+        if (distConf != null) confs.push(distConf);
+        if (out.poseConfidence != null) confs.push(out.poseConfidence);
+        out.acqConfidence = confs.length ? (confs.reduce(function (a, b) { return a + b; }, 0) / confs.length) : (monoPartial.motion != null ? 0.4 : null);
+        // ---- contributions (for the Developer Settings panel) ----
+        contributions = {
+          motion: fm ? fm.contributors : [],
+          distance: out.distanceMm != null ? ["depth"] : (monoPartial.distanceState ? ["mediapipe"] : []),
+          pose: out.poseConfidence != null ? ["depth"] : (monoPartial.roll != null ? ["orientation"] : []),
+          acqConfidence: out.acqConfidence
+        };
         return out;
       },
       _fuse: fuse
@@ -183,8 +282,10 @@
     makeImuAdapter: makeImuAdapter,
     fuse: fuse,
     makeManager: makeManager,
+    makeDepthAdapter: makeDepthAdapter,
     requestMotionPermission: requestMotionPermission,
-    flagOn: flagOn
+    flagOn: flagOn,
+    depthFlagOn: depthFlagOn
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_FUNDX_SENSORS = API;

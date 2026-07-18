@@ -571,7 +571,49 @@
         '<button class="fundx-set-row' + (devOn() ? ' on' : '') + '" data-fx="setdev"><span class="fundx-set-rl"><b>Developer mode</b><span>Live metric overlay on the camera + frame-by-frame CSV export (focus/glare/motion/distance/roll/reflex/vessel/fundus/diagnostic/decision). Field-testing only.</span></span>' + ric(devOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Data</span></div>' +
         '<button class="fundx-set-row danger" data-fx="clearall"><span class="fundx-set-rl"><b>Delete all scans</b><span>Removes every stored image + record on this device</span></span>' + ric("delete_forever") + '</button>' +
+        (devOn() ? '<div class="rds-section-header"><span class="rds-section-title">Advanced</span></div>' +
+          '<button class="fundx-set-row" data-fx="devsettings"><span class="fundx-set-rl"><b>Developer · Sensor fusion</b><span>Hybrid depth-engine controls + live sensor status. Testing only.</span></span>' + ric("chevron_right") + '</button>' : '') +
         '<p class="fundx-disc">' + disclaimerText() + '</p>' +
+      '</main>';
+  }
+
+  // ---- Developer Settings (hybrid sensor fusion) — testing/debugging only, hidden behind
+  // Developer mode. Per-sensor enable/disable + force-fallback + live capability/confidence. ----
+  function devSF(k, def) { try { var v = localStorage.getItem(k); return v == null ? def : v === "1"; } catch (e) { return def; } }
+  function depthOn() { try { var q = (location.search.match(/[?&]fundxdepth=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_depth") === "1"; } catch (e) { return false; } }
+  function screenDevSettings() {
+    var caps = {};
+    try { caps = (window.SMD_FUNDX_SENSORS && window.SMD_FUNDX_SENSORS.capabilities()) || {}; } catch (e) {}
+    var depthCaps = null;
+    try { if (window.SMD_FUNDX_SENSORS) { depthCaps = window.SMD_FUNDX_SENSORS.makeDepthAdapter({}).capabilities(); } } catch (e) {}
+    function row(k, label, sub, def) {
+      var on = devSF(k, def);
+      return '<button class="fundx-set-row' + (on ? ' on' : '') + '" data-fx="setdevsf" data-k="' + k + '" data-def="' + (def ? "1" : "0") + '"><span class="fundx-set-rl"><b>' + esc(label) + '</b><span>' + esc(sub) + '</span></span>' + ric(on ? "toggle_on" : "toggle_off") + '</button>';
+    }
+    function kv(label, val) { return '<div class="fundx-kv"><span>' + esc(label) + '</span><b>' + esc(val) + '</b></div>'; }
+    return '' +
+      '<header class="fundx-head"><button class="fundx-close" data-fx="settings" aria-label="Back">' + ric("arrow_back_ios_new") + '</button><div class="fundx-head-tt"><b>Developer · Sensors</b></div><div class="fundx-head-sp"></div></header>' +
+      '<main class="fundx-scroll">' +
+        '<div class="rds-section-header"><span class="rds-section-title">Hybrid depth fusion</span></div>' +
+        row("smd_fundx_depth", "Enable depth fusion", "Master switch for native ARKit/ARCore depth. Off = MediaPipe + CV only.", false) +
+        '<div class="rds-section-header"><span class="rds-section-title">iOS · ARKit / LiDAR</span></div>' +
+        row("smd_fundx_dev_arkit", "ARKit", "World tracking + camera pose.", true) +
+        row("smd_fundx_dev_lidar", "LiDAR", "LiDAR scanner (Pro devices).", true) +
+        row("smd_fundx_dev_scenedepth", "SceneDepth", "Per-pixel metric scene depth.", true) +
+        '<div class="rds-section-header"><span class="rds-section-title">Android · ARCore</span></div>' +
+        row("smd_fundx_dev_arcore", "ARCore", "Motion tracking + camera pose.", true) +
+        row("smd_fundx_dev_arcoredepth", "ARCore Depth API", "Depth-from-motion / ToF metric distance.", true) +
+        '<div class="rds-section-header"><span class="rds-section-title">Fallback</span></div>' +
+        row("smd_fundx_dev_forcemono", "Force MediaPipe-only", "Ignore all native depth; use the monocular pipeline.", false) +
+        '<div class="rds-section-header"><span class="rds-section-title">Live status</span></div>' +
+        '<div class="fundx-devstat">' +
+          kv("Native depth plugin", caps.nativeDepth ? "present" : "not installed") +
+          kv("DeviceMotion (IMU)", caps.deviceMotion ? ("yes · " + (caps.motionPermission || "")) : "no") +
+          kv("Depth capability", depthCaps ? JSON.stringify(depthCaps) : "unavailable") +
+          kv("Depth fusion", depthOn() ? "ON" : "off") +
+          '<div id="fundxDevLive" class="fundx-devlive">Start a capture to see live confidence, fusion contributions and FPS (needs Developer mode overlay).</div>' +
+        '</div>' +
+        '<p class="fundx-disc">Testing/debugging only. Changes take effect on the next capture. Depth is device-gated and never required — the app always falls back to the monocular MediaPipe + CV engine.</p>' +
       '</main>';
   }
 
@@ -875,6 +917,7 @@
     else if (screen === "timeline") rootEl.innerHTML = screenTimeline();
     else if (screen === "compare") rootEl.innerHTML = screenCompare();
     else if (screen === "settings") rootEl.innerHTML = screenSettings();
+    else if (screen === "devsettings") rootEl.innerHTML = screenDevSettings();
   }
   function show(s) { screen = s; render(); }
 
@@ -899,6 +942,8 @@
       case "setdev": { try { localStorage.setItem("smd_fundx_dev", devOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
       case "setsensors": { try { localStorage.setItem("smd_fundx_sensors", sensorsOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
       case "setflash": { try { localStorage.setItem("smd_fundx_flash", flashOn() ? "0" : "1"); } catch (e) {} if (cam && cam.setTorch) { try { cam.setTorch(flashOn()); } catch (e) {} } haptic("selection"); return render(); }
+      case "devsettings": haptic("light"); return show("devsettings");
+      case "setdevsf": { var k = b.getAttribute("data-k"); var def = b.getAttribute("data-def") === "1"; var cur; try { var v = localStorage.getItem(k); cur = v == null ? def : v === "1"; localStorage.setItem(k, cur ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
       case "devexport": haptic("light"); return exportDevLog();
       case "voice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); { var vb = document.getElementById("fundxVoiceBtn"); if (vb) { vb.classList.toggle("on", VOICE.enabled()); vb.innerHTML = ric(VOICE.enabled() ? "volume_up" : "volume_off"); } if (VOICE.enabled()) VOICE.speak("Voice coaching on"); } return;
       case "retake": haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "retake"); result = null; session.retries++; return startCamera();

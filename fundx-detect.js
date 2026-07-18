@@ -223,9 +223,10 @@
     // Sensor-fusion (Phase 1: IMU). Active only when SMD_FUNDX_SENSORS is present AND the flag
     // is on (or an explicit manager is injected). Absent -> the merged partial is untouched ->
     // the engine behaves EXACTLY as before. Native depth (Phase 2) enters via this same manager.
+    var S = window.SMD_FUNDX_SENSORS;
     var sensors = opts.sensors ||
-      ((window.SMD_FUNDX_SENSORS && window.SMD_FUNDX_SENSORS.flagOn && window.SMD_FUNDX_SENSORS.flagOn())
-        ? window.SMD_FUNDX_SENSORS.makeManager(opts.sensorOpts || {}) : null);
+      ((S && S.flagOn && (S.flagOn() || (S.depthFlagOn && S.depthFlagOn())))
+        ? S.makeManager(opts.sensorOpts || {}) : null);
     // Optional real disc/macula/lesion provider (findings-level enrichment; NOT a capture
     // gate). Left null by default — the acquisition flow is driven purely by observable
     // image-quality cues (fundus circle + vessels + focus/exposure/glare), no simulation.
@@ -322,7 +323,8 @@
           .then(function () {
             running = true; lastAnalyze = 0;
             if (hub.pose && hub.pose.attach) hub.pose.attach();   // phone-roll for rotate coaching
-            if (hub.sensors && hub.sensors.start) hub.sensors.start();   // IMU fusion (Phase 1)
+            if (hub.sensors && hub.sensors.init) { try { hub.sensors.init(); } catch (e) {} }   // probe depth caps
+            if (hub.sensors && hub.sensors.start) hub.sensors.start();   // IMU (P1) + depth (P2) fusion
             if (hub.resetSession) hub.resetSession();
             if (hub.mediapipe && hub.mediapipe.init) hub.mediapipe.init();   // lazy, non-blocking
             if (opts.flash !== false) { try { setTorch(true); } catch (e) {} }   // auto-flash to illuminate the fundus
