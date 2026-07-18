@@ -469,6 +469,9 @@
   function refreshSidebarLabel() { var w = activeWorkspace(); var b = document.querySelector("#sbMenu .sw-sbsw .nm"); if (b) b.textContent = meta(w).name; var i2 = document.querySelector("#sbMenu .sw-sbsw .ic"); if (i2) i2.innerHTML = ic(ICONS[w]); }
   function injectSidebarSwitcher() {
     var menu = document.getElementById("sbMenu"); if (!menu || menu.querySelector(".sw-sbsw")) return;
+    // The redesigned sidebar (sidebar-redesign.js) OWNS #sbMenu and renders its own workspace row
+    // (data-sbr-act="workspace") — don't double-inject / flash a legacy row it would just wipe.
+    if (menu.getAttribute("data-sbr")) return;
     // find the "Clinical Reasoning" leaf button
     var target = null, btns = menu.querySelectorAll("button");
     for (var i = 0; i < btns.length; i++) { if (/clinical reasoning/i.test(btns[i].textContent || "")) { target = btns[i]; break; } }
