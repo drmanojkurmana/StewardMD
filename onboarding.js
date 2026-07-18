@@ -3,8 +3,10 @@
  * A world-class, replayable, once-per-account interactive tour:
  *   1) a first-launch WELCOME + role picker,
  *   2) a 5-step APP tour that spotlights the REAL home,
- *   3) a 16-step ICU v2 tour that spotlights the REAL ICU dashboard — the full patient-workspace
- *      walkthrough when the unit has patients, a board-level orientation when it's empty.
+ *   3) an ICU v2 tour that spotlights the REAL ICU dashboard end to end — board, group/shared unit,
+ *      notifications, the patient workspace, deep clinical review, tasks/rounds, handover and
+ *      notification settings; the full walkthrough when the unit has patients, a board-level
+ *      orientation when it's empty.
  * Plus a first-time ICU contextual tip, a Resume pill, and a "Guided tours" replay centre.
  * It never renders mock screens — every step highlights existing app UI; nothing in the home or
  * ICU design is changed.
@@ -80,74 +82,64 @@
       body: "This is the busiest part of StewardMD, so it has its own guided tour. Go ahead — tap ICU to open it.", then: "icu" }
   ];
 
-  // ICU tour — spotlights the REAL ICU. `live` is the real selector; `liveBody` is the copy shown
-  // (generic, since it's the user's own unit). `demo` is just a stable step key used for grouping.
-  // Patient-workspace steps run only when a real patient card exists; tap steps advance on the real
-  // outcome (patient opened / monitoring active / board returned).
+  // ICU tour — spotlights the REAL ICU dashboard end to end: board → group/shared unit →
+  // notifications → open a patient → workspaces → deep clinical review → tasks/rounds → handover →
+  // unit tools → notification settings. Every step targets a real selector (`live`) and, where
+  // needed, navigates the live workspace via `ws`/`tab` (real data-icu-act verbs) before painting.
+  // `group` is board/patient (patient steps run only when a real patient exists). Steps whose target
+  // is absent (feature gated off — e.g. group-only UI on a solo unit) auto-skip.
   var ICU_TOUR = [
-    { scr: "board", demo: "board-title", live: ".icu-v2-uhead-top,.icu-v2-uhead",
-      title: "Your whole unit, one screen",
-      body: "This is the ICU unit board — every patient you’re covering, in one place. The header shows the unit and how many patients are on your list.",
-      liveBody: "This is your ICU unit board — every patient you’re covering in one place. The header shows the unit and how many patients are on your list." },
-    { scr: "board", demo: "acuity-strip", live: ".icu-v2-strip",
-      title: "Triage in a single glance",
-      body: "Patients are counted by acuity — Critical, Needs review, Stable. Tap any count to filter the board, so on a busy shift you see the sickest first.",
-      liveBody: "Patients are counted by acuity — Critical, Needs review, Stable. Tap any count to filter the board, so on a busy shift you see the sickest first." },
-    { scr: "board", demo: "attn", live: ".icu-v2-attn",
-      title: "Who needs you first",
-      body: "“Needs your attention” pulls the critical and review patients to the top, each with the reason — e.g. Bed 4’s MAP 61 and lactate 4.2. Start your round here.",
-      liveBody: "“Needs your attention” pulls the critical and review patients to the top, each with the reason why. Start your round here.", optional: true },
-    { scr: "board", demo: "patient-card", live: ".icu-v2-card", kind: "tap", doneSel: ".icu-v2-banner",
-      title: "Anatomy of a patient card", tapHint: "Tap a patient card",
-      body: "Each card shows the bed, name, diagnosis, an acuity pill and key vitals (MAP · lactate · SpO₂), colour-tinted so danger stands out. Let’s open Bed 4 — Ravi Kumar, in septic shock.",
-      liveBody: "Each card shows the bed, name, diagnosis, an acuity pill and key vitals, colour-tinted so danger stands out. Tap a card to open that patient." },
-    { scr: "patient", demo: "banner", live: ".icu-v2-banner",
-      title: "The patient workspace",
-      body: "The banner takes the patient’s colour — red for critical — so you always know how sick they are. It carries the name, acuity, bed, age/sex, ICU day and diagnosis. Tap ‹ any time to go back.",
-      liveBody: "The banner takes the patient’s acuity colour, and carries the name, bed, age/sex, ICU day and diagnosis. Tap ‹ any time to go back to the board." },
-    { scr: "patient", demo: "mini-vitals", live: ".icu-v2-banner-vitals",
-      title: "Live vitals, always in view",
-      body: "MAP, HR, SpO₂ and lactate stay pinned under the banner as you move between sections — the numbers that decide your next move are never more than a glance away.",
-      liveBody: "Key vitals stay pinned under the banner as you move between sections — never more than a glance away." },
-    { scr: "patient", demo: "presence", live: ".icu-v2-presence",
-      title: "Saved, and in sync",
-      body: "Everything you enter is saved on the device automatically — nothing lost between rounds. In a shared unit, your team sees the same live record and who else is viewing.",
-      liveBody: "Everything you enter is saved automatically. In a shared unit, your team sees the same live record and who else is viewing.", optional: true },
-    { scr: "patient", demo: "top-tabs", live: ".icu-v2-tabwrap,.icu-v2-tabs",
-      title: "Five focused workspaces",
-      body: "Overview, Monitoring, Care Plan, Rounds and Records. Each groups the tools for one part of the work, so the screen never feels crowded.",
-      liveBody: "These workspaces group the tools for each part of the work, so the screen never feels crowded." },
-    { scr: "patient", tab: "overview", demo: "status-grid", live: ".icu-v2-body,#icuRoot .icu-grid",
-      title: "Overview — the full picture",
-      body: "Every vital and key lab on one screen, with today’s ICU goals underneath. Red values are outside the safe range: HR 118, MAP 61, lactate 4.2, K⁺ 6.4 all need action.",
-      liveBody: "The Overview brings every vital and key lab onto one screen. Values outside the safe range are flagged so what needs action stands out." },
-    { scr: "patient", demo: "icu-tab-monitoring", live: '[data-icu-act="ws:monitoring"]', kind: "tap", doneSel: ".icu-elyte-alerts,.icu-subnav",
-      title: "Let’s look at Monitoring", tapHint: "Tap Monitoring",
-      body: "That K⁺ of 6.4 is dangerous. Open the Monitoring workspace to see how StewardMD guides correction.",
-      liveBody: "Open the Monitoring workspace to see how StewardMD interprets results and guides correction." },
-    { scr: "patient", tab: "monitoring", demo: "lytes-alerts", live: ".icu-elyte-alerts",
-      title: "The app flags the danger for you",
-      body: "StewardMD interprets every result and surfaces the alerts first: severe hyperkalaemia, hyponatraemia, metabolic acidosis. You read the clinical picture, not just raw numbers.",
-      liveBody: "StewardMD interprets every result and surfaces the alerts first — so you read the clinical picture, not just raw numbers.", optional: true },
-    { scr: "patient", tab: "monitoring", demo: "lytes-grid", live: ".icu-elyte-alerts,.icu-v2-body",
-      title: "Colour tells the story",
-      body: "Each electrolyte is colour-coded — red critical, amber out-of-range, white normal. Tap any tile to enter a value and StewardMD suggests the correction.",
-      liveBody: "Each electrolyte is colour-coded — red critical, amber out-of-range, normal in white. Tap a tile to enter a value and get a suggested correction." },
-    { scr: "patient", demo: "handover", live: '.icu-v2-handover,[data-icu-act="tab:handover"]',
-      title: "Handover in one tap",
-      body: "The ⇄ button builds a clean SBAR round summary — vitals, labs, active problems and plan — ready to hand to the on-call team or paste into your notes.",
-      liveBody: "The ⇄ button builds a clean SBAR round summary — vitals, labs, active problems and plan — ready for the on-call team.", optional: true },
-    { scr: "patient", demo: "back-board", live: '.icu-v2-back,[data-icu-act="icuboard"]', kind: "tap", doneSel: ".icu-v2-uhead",
-      title: "Back to the whole unit", tapHint: "Tap ‹ to go back",
-      body: "Managing several beds? Tap ‹ to return to the board and switch patients. Each keeps their own vitals, labs, goals and tasks.",
-      liveBody: "Tap ‹ to return to the board and switch patients. Each keeps their own vitals, labs, goals and tasks." },
-    { scr: "board", demo: "bottombar", live: ".icu-v2-bottombar",
-      title: "Your unit tools",
-      body: "Unit takes you here; Alerts collects meaningful events across every bed; Team shows who’s on; Admit adds a new patient. That’s the whole ICU in your pocket.",
-      liveBody: "Unit takes you here; Alerts collects events across every bed; Team shows who’s on; Admit adds a new patient. The whole ICU in your pocket." },
-    { scr: "board", demo: null, live: null, title: "You’re ready to round 🎉", cta: "Finish",
-      body: "That’s the ICU workflow end to end: scan the unit → open a patient → review → correct → hand over → move to the next bed. Replay this tour any time from Menu → About & Help.",
-      liveBody: "That’s the ICU workflow end to end: scan the unit → open a patient → review → correct → hand over → move on. Replay any time from Menu → About & Help." }
+    // ── Board orientation ──
+    { group: "board", live: ".icu-v2-uhead-top,.icu-v2-uhead", title: "Your whole unit, one screen",
+      body: "This is your ICU unit board — every patient you’re covering in one place. The header shows the unit and how many patients are on your list." },
+    { group: "board", live: ".icu-v2-strip", title: "Triage in a single glance",
+      body: "Patients are counted by acuity — Critical, Needs review, Stable. Tap any count to filter the board, so on a busy shift you see the sickest first." },
+    { group: "board", live: ".icu-v2-attn", title: "Who needs you first",
+      body: "“Needs your attention” pulls the critical and review patients to the top, each with the reason why. Start your round here." },
+    // ── Group mode / shared unit ──
+    { group: "board", live: '.icu-v2-gswitch,.icu-v2-utitle,[data-icu-act="grppick"],[data-icu-act="unitpick"]', title: "Work as a team",
+      body: "Tap the unit name to open or create a shared unit. Your whole team then sees the same live board, patients, tasks and handovers in real time — and presence shows who else is viewing." },
+    // ── Notifications ──
+    { group: "board", live: '.icu-v2-ubtn[data-icu-act="icualerts"],[data-icu-act="icualerts"]', title: "Never miss a change",
+      body: "The bell badges unread alerts. Tap it for the Alerts feed — critical changes, new orders, completed tasks and handovers, gathered across every bed." },
+    // ── Open a patient ── (stays on the board so the USER taps; only runs when a real card exists)
+    { group: "board", open: true, live: ".icu-v2-card", kind: "tap", doneSel: ".icu-v2-banner", tapHint: "Tap a patient card", title: "Anatomy of a patient card",
+      body: "Each card shows the bed, name, diagnosis, an acuity pill and key vitals, colour-tinted so danger stands out. Tap a card to open that patient." },
+    // ── Patient workspace ──
+    { group: "patient", live: ".icu-v2-banner", title: "The patient workspace",
+      body: "The banner takes the patient’s acuity colour, and carries the name, bed, age/sex, ICU day and diagnosis. Tap ‹ any time to go back to the board." },
+    { group: "patient", live: ".icu-v2-banner-vitals", title: "Live vitals, always in view",
+      body: "Key vitals stay pinned under the banner as you move between sections — never more than a glance away." },
+    { group: "patient", live: ".icu-v2-presence", title: "Saved, and in sync",
+      body: "Everything you enter is saved automatically. In a shared unit you’ll see teammates’ avatars here — who else is viewing — and a live-sync indicator." },
+    { group: "patient", live: ".icu-v2-tabwrap,.icu-v2-tabs", title: "Five focused workspaces",
+      body: "Overview, Monitoring, Care Plan, Rounds and Records. Each groups the tools for one part of the work, so the screen never feels crowded." },
+    { group: "patient", tab: "overview", live: ".icu-v2-body,#icuRoot .icu-grid", title: "Overview — the full picture",
+      body: "The Overview brings every vital and key lab onto one screen, with today’s goals. Values outside the safe range are flagged so what needs action stands out." },
+    { group: "patient", live: '[data-icu-act="ws:monitoring"]', kind: "tap", doneSel: ".icu-subnav,.icu-elyte-alerts", tapHint: "Tap Monitoring", title: "Let’s look at Monitoring",
+      body: "Open the Monitoring workspace to see how StewardMD interprets results and guides correction." },
+    { group: "patient", ws: "monitoring", tab: "lytes", live: ".icu-elyte-alerts", title: "The app flags the danger for you",
+      body: "StewardMD interprets every result and surfaces the alerts first — severe hyperkalaemia, hyponatraemia, acidosis — so you read the clinical picture, not just raw numbers." },
+    { group: "patient", ws: "monitoring", tab: "lytes", live: ".icu-elyte-alerts,.icu-v2-body", title: "Colour tells the story",
+      body: "Each electrolyte is colour-coded — red critical, amber out-of-range, normal in white. Tap a tile to enter a value and get a suggested correction." },
+    // ── Deep clinical review (Care Plan → Diagnosis) ──
+    { group: "patient", ws: "careplan", tab: "dx", live: '[data-icu-act="corrdeep"]', title: "Deep clinical review",
+      body: "In Care Plan → Diagnosis, StewardMD can run a deep clinical review — correlating findings, labs, imaging and vitals against the evidence to sharpen the differential and flag what’s been missed." },
+    // ── Rounds & tasks ──
+    { group: "patient", tab: "rounds", live: '.icu-v2-addround,[data-icu-act="grpround"],.icu-v2-tab[data-icu-act="tab:rounds"]', title: "Rounds & tasks",
+      body: "Rounds captures instructions and tasks — each with a priority and who it’s for. In a shared unit, posting an instruction pushes it to the right people and tracks it through to completion." },
+    // ── Handover ──
+    { group: "patient", live: '.icu-v2-handover,[data-icu-act="tab:handover"]', title: "Handover in one tap",
+      body: "The ⇄ button builds a clean SBAR summary — vitals, labs, active problems and plan — ready for the on-call team." },
+    { group: "patient", live: '.icu-v2-back,[data-icu-act="icuboard"]', kind: "tap", doneSel: ".icu-v2-uhead", tapHint: "Tap ‹ to go back", title: "Back to the whole unit",
+      body: "Tap ‹ to return to the board and switch patients. Each keeps their own vitals, labs, goals and tasks." },
+    // ── Unit tools + notification settings ──
+    { group: "board", live: ".icu-v2-bottombar", title: "Your unit tools",
+      body: "Unit brings you here; Alerts collects events across every bed; Team shows who’s on and lets you share the unit; Admit adds a new patient." },
+    { group: "board", live: '.icu-v2-bottombar [data-icu-act="icusettings"],[data-icu-act="icusettings"]', title: "Tune it to you",
+      body: "Settings is where you switch on group mode and fine-tune notifications — mute routine chatter while critical and overdue alerts always come through." },
+    { group: "board", live: null, title: "You’re ready to round 🎉", cta: "Finish",
+      body: "That’s the ICU end to end: scan the unit → open a patient → review, correct and reason → assign tasks → hand over → move on, with your team in sync. Replay this tour any time from Menu → About & Help." }
   ];
 
   // ---- CSS (self-contained, light + dark) --------------------------------------------------
@@ -385,8 +377,17 @@
     // hide card until the target screen is ready to avoid a flash on the wrong screen
     _run.enter(s, function () {
       // Real-UI step whose element isn't present → skip it (in the current direction) rather than
-      // show a coach-mark over nothing. Keeps the tour honest to whatever the live app actually shows.
-      if (s.optional && !_run.resolve(s)) { goStep(_step + (_dir < 0 ? -1 : 1)); return; }
+      // show a coach-mark over nothing. But the live workspace may still be painting after we
+      // navigated, so give it ONE short retry before deciding a target is truly absent — otherwise
+      // present-but-not-yet-rendered steps (group switcher, deep review, tasks) get wrongly skipped.
+      if (s.optional && !_run.resolve(s)) {
+        setTimeout(function () {
+          if (!_run || _step !== i) return;                 // moved on / torn down meanwhile
+          if (!_run.resolve(s)) { goStep(_step + (_dir < 0 ? -1 : 1)); return; }
+          paint();
+        }, 220);
+        return;
+      }
       paint();
     });
   }
@@ -460,8 +461,8 @@
       resolve: function (s) { return firstVisible(s.sel, this.scope()); },
       enter: function (s, cb) { cb(); },
       // The user taps the real ICU tile → hand off to the ICU tour immediately (matched by element
-      // identity so it survives the app opening/hiding things on the same click). startIcuTour then
-      // decides live-vs-demo on its own, so this doesn't depend on the real ICU finishing opening.
+      // identity so it survives the app opening/hiding things on the same click). startIcuTour opens
+      // the real ICU and waits for the board before spotlighting.
       onDomTap: function (target, s) {
         if (closestAny(target, '[data-act="icu"]')) {
           setTimeout(function () { if (s.then === "icu") startIcuTour(); else next(); }, 80);
@@ -486,19 +487,19 @@
   // are included solely when a real patient card exists; on an empty unit we tour the board only.
   function assembleIcuSteps() {
     var hasCards = liveHasPatients();
-    var boardOnly = { "board-title": 1, "acuity-strip": 1, "attn": 1, "bottombar": 1 };
-    var list = ICU_TOUR.filter(function (s) { return hasCards || boardOnly[s.demo] || !s.live; });
+    // Board (and the closing card) always run; the patient-open tap and patient-workspace steps only
+    // when a real patient card exists (else the "tap a card" step would hang with nothing to tap).
+    var list = ICU_TOUR.filter(function (s) { return hasCards || (s.group === "board" && !s.open) || !s.live; });
     list = list.map(function (s) {
-      var step = { scr: s.scr, live: s.live, tab: s.tab, kind: s.kind, doneSel: s.doneSel, title: s.title, cta: s.cta };
-      // On the real UI we always use the generic copy (the demo-specific patient numbers don't apply).
-      step.body = s.liveBody || s.body;
-      // Real-UI steps skip if their element isn't on screen; the closing card (no target) always shows.
+      var step = { group: s.group, live: s.live, ws: s.ws, tab: s.tab, kind: s.kind, doneSel: s.doneSel, tapHint: s.tapHint, title: s.title, cta: s.cta, body: s.body };
+      // Real-UI steps skip if their element isn't on screen (feature gated off); the closing card
+      // (no target) always shows.
       if (s.live) step.optional = true;
       return step;
     });
     if (!hasCards) {
       var done = list[list.length - 1];
-      if (done && !done.live) done.body = "Your unit board lives here — patients, acuity and alerts in one place. Admit a patient and you get the full workspace: vitals, labs, goals, electrolyte correction and one-tap handover. Replay this tour any time from Menu → About & Help.";
+      if (done && !done.live) done.body = "Your unit board lives here — patients, acuity and alerts in one place. Admit a patient and you unlock the full workspace: vitals, labs, deep clinical review, tasks and one-tap handover. Replay this tour any time from Menu → About & Help.";
     }
     return list;
   }
@@ -508,16 +509,19 @@
       id: "icu", icon: "🫀", live: true, steps: steps,
       scope: function () { return document.getElementById("icuRoot") || document; },
       resolve: function (s) { return s.live ? firstVisible(s.live, this.scope()) : null; },
-      // Drive the REAL ICU into the right state for this step (open a patient / switch tab), then paint.
+      // Drive the REAL ICU into the right state for this step (open a patient / switch workspace+tab),
+      // then paint. ws/tab map to real data-icu-act verbs (ws:<x> / tab:<y>).
       enter: function (s, cb) {
         var root = document.getElementById("icuRoot") || document;
-        if (s.scr === "patient") {
+        if (s.group === "patient") {
           if (!root.querySelector(".icu-v2-banner")) { var c = root.querySelector(".icu-v2-card"); if (c) { try { c.click(); } catch (e) {} } }
           setTimeout(function () {
-            if (s.tab === "monitoring") { clickLive('[data-icu-act="ws:monitoring"]'); setTimeout(cb, 240); }
-            else if (s.tab === "overview") { clickLive('[data-icu-act="tab:overview"]'); setTimeout(cb, 200); }
-            else cb();
-          }, root.querySelector(".icu-v2-banner") ? 20 : 260);
+            if (s.ws) clickLive('[data-icu-act="ws:' + s.ws + '"]');
+            setTimeout(function () {
+              if (s.tab) clickLive('[data-icu-act="tab:' + s.tab + '"]');
+              setTimeout(cb, s.tab ? 240 : 140);
+            }, s.ws ? 220 : 0);
+          }, root.querySelector(".icu-v2-banner") ? 20 : 280);
           return;
         }
         // board step — if a patient workspace is open, return to the board first
