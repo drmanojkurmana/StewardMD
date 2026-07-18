@@ -4,6 +4,7 @@
    first sign-in. */
 import { verifyFirebaseToken } from "../_fbauth.js";
 import { emailWelcome } from "../_email.js";
+import { markFirstSeen } from "../_lifecycle.js";
 
 function decodePayload(jwt) {
   try {
@@ -25,5 +26,7 @@ export async function onRequestPost({ request, env }) {
   let name = p.name || "";
   try { const b = await request.json(); if (b && b.name) name = String(b.name).slice(0, 120); } catch (e) {}
   await emailWelcome(env, { email, name });
+  // Record first sign-in so the day-3 Pro-upsell sweep can find non-verifiers (idempotent).
+  try { await markFirstSeen(env, uid, { email, name }); } catch (e) {}
   return J({ ok: true });
 }

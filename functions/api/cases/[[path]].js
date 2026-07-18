@@ -28,6 +28,7 @@
  * Config: env.FIREBASE_PROJECT_ID (optional; defaults to the app's project id).
  * Responses are never cached (Cache-Control:no-store; sw.js also bypasses /api/).
  */
+import { requirePro } from "../../_entitlement.js";
 const MAX = 10;
 const FB_PROJECT_DEFAULT = "stewardmd-498ec";
 const JWK_URL = "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
@@ -128,6 +129,8 @@ export async function onRequest(context) {
       return c ? json({ case: c }) : json({ error: "not-found" }, 404);
     }
     if (method === "PUT" && id) {
+      // Cross-device cloud sync is Pro; free users keep on-device storage (client handles 402 silently).
+      if (!(await requirePro(env, request)).ok) return json({ error: "needs-pro", needsPro: true }, 402);
       let body = {};
       try { body = await request.json(); } catch (e) {}
       const entry = {

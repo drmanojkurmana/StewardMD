@@ -15,6 +15,7 @@
  */
 import { setUserClaims } from "../../_fbadmin.js";
 import { emailVerified, emailFailed } from "../../_email.js";
+import { markVerified, sendProUpsellOnce } from "../../_lifecycle.js";
 import { verifyFirebaseToken } from "../../_fbauth.js";
 
 // Owners who may manage verifications (by Google account email). Override via env.OWNER_EMAILS
@@ -87,6 +88,7 @@ async function doApprove(store, env, uid, regNo) {
   await store.put(doctorKey(uid), JSON.stringify(updated));
   if (reg) { try { await store.put(regKey(reg), uid); } catch (e) {} }
   try { await emailVerified(env, { email: rec.email, name: rec.name || rec.firstName, regNo: reg, council: rec.council }); } catch (e) {}
+  try { await markVerified(env, uid); await sendProUpsellOnce(env, uid, { email: rec.email, name: rec.name || rec.firstName }); } catch (e) {}
   return updated;
 }
 async function doReject(store, env, uid, reason) {

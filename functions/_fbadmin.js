@@ -65,6 +65,39 @@ export async function getUserClaims(env, uid) {
   try { return JSON.parse(u.customAttributes) || {}; } catch (e) { return {}; }
 }
 
+// Resolve a Firebase uid from an email (for the admin "grant Pro by email" control). null if none.
+export async function lookupUidByEmail(env, email) {
+  const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
+  const saToken = await serviceAccountToken(env);
+  const norm = String(email || "").trim().toLowerCase();
+  const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:lookup`, {
+    method: "POST",
+    headers: { "Authorization": `Bearer ${saToken}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ email: [norm] }),
+  });
+  if (!res.ok) { try { console.warn("[lookupEmail] http", res.status, (await res.text()).slice(0, 200)); } catch (e) {} return null; }
+  const d = await res.json();
+  const u = (d.users || [])[0];
+  if (!u) { try { console.warn("[lookupEmail] no-match for", norm, "· users:", (d.users || []).length); } catch (e) {} }
+  return u ? { uid: u.localId, email: (u.email || norm).toLowerCase(), name: u.displayName || "" } : null;
+}
+
+// Resolve a user's email/displayName from their uid (accounts:lookup by localId — the SAME query
+// getUserClaims uses, which is known-good). Lets the admin grant by uid and still email the user.
+export async function lookupUserByUid(env, uid) {
+  const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
+  const saToken = await serviceAccountToken(env);
+  const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:lookup`, {
+    method: "POST",
+    headers: { "Authorization": `Bearer ${saToken}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ localId: [String(uid || "").trim()] }),
+  });
+  if (!res.ok) { try { console.warn("[lookupUid] http", res.status); } catch (e) {} return null; }
+  const d = await res.json();
+  const u = (d.users || [])[0];
+  return u ? { uid: u.localId, email: (u.email || "").toLowerCase(), name: u.displayName || "" } : null;
+}
+
 // CLOBBER-SAFE: merge a patch into the user's existing claims (so granting `pro` never wipes
 // `verified`, and vice-versa). Set a patch key to null to delete it.
 export async function mergeUserClaims(env, uid, patch) {

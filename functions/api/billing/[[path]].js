@@ -17,6 +17,8 @@
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { entitlementFor, grantPro, revokePro, promoUntil } from "../../_entitlement.js";
+import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
+import { emailProConfirmation } from "../../_email.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
@@ -86,14 +88,36 @@ export async function onRequest(context) {
       return json({ currency: "INR", plans: plans(env), promoUntil: promoUntil(env) });
     }
 
-    // ---- owner-only management (comps / testing) ----
-    if (method === "POST" && (seg === "grant" || seg === "revoke")) {
+    // ---- owner-only Pro management: grant (forever / months / days / 7-day trial), revoke, lookup ----
+    if (method === "POST" && (seg === "grant" || seg === "revoke" || seg === "lookup")) {
       if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
       let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
-      const uid = rawUid(String(body.uid || "").trim());
-      if (!uid) return json({ error: "uid-required" }, 400);
-      return json(seg === "grant" ? await grantPro(env, uid, { months: body.months, source: body.source || "owner-comp" })
-                                  : await revokePro(env, uid));
+      // Resolve the target by email (preferred — what an admin knows) or a raw uid.
+      let uid = rawUid(String(body.uid || "").trim()), email = String(body.email || "").trim().toLowerCase(), name = "";
+      if (!uid && email) {
+        const u = await lookupUidByEmail(env, email);
+        if (!u) return json({ error: "user-not-found", email }, 404);
+        uid = u.uid; email = u.email; name = u.name;
+      }
+      if (!uid) return json({ error: "uid-or-email-required" }, 400);
+      // Granted by uid (or email lookup returned no address): resolve the email so the confirmation
+      // email always has a recipient. Uses accounts:lookup by localId (the known-good query).
+      if (uid && !email) { try { const u = await lookupUserByUid(env, uid); if (u) { email = u.email; if (!name) name = u.name; } } catch (e) {} }
+
+      if (seg === "lookup") { const st = await entitlementFor(env, uid); return json(Object.assign({ uid, email, name }, st)); }
+      if (seg === "revoke") { const r = await revokePro(env, uid); return json(Object.assign({ uid, email }, r)); }
+
+      // grant — mode: forever | trial (7d) | days:<n> | months:<n> (default 1 month)
+      const mode = String(body.mode || "").toLowerCase();
+      let opts = { source: body.source || "owner-comp" }, trial = false;
+      if (mode === "forever") opts.forever = true;
+      else if (mode === "trial") { opts.days = 7; opts.source = "trial"; trial = true; }
+      else if (mode === "days") opts.days = Math.max(1, +body.days || 7);
+      else opts.months = Math.max(1, +body.months || 1);
+      const res = await grantPro(env, uid, opts);
+      const untilStr = res.proExp ? new Date(res.proExp).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "";
+      if (email) { try { await emailProConfirmation(env, { email, name, until: untilStr, forever: !!res.forever, trial }); } catch (e) {} }
+      return json(Object.assign({ uid, email, emailed: !!email, trial }, res));
     }
 
     // ---- Razorpay (web / off-Play Android) ----

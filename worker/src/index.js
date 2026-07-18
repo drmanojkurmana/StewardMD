@@ -310,7 +310,8 @@ async function handleOfflineDb(request, env) {
 
 export default {
   // Scheduled (cron) — distinguished by event.cron:
-  //   "30 5 * * *"    → run the Medical Updates pipeline (crawl → dedup → AI-summarize new).
+  //   "30 5 * * *"    → daily: run the Medical Updates pipeline (crawl → dedup → AI-summarize new)
+  //                     AND the lifecycle sweep (Pro-upsell email for day-3 non-converters).
   //   "0 6 * * 1"     → build the weekly "This Week in Medicine" digest (Mon 06:00 UTC).
   //   "*/15 * * * *"  → poll GHIS for consented watch-lab patients AND sweep overdue ICU round tasks
   //                     (push the whole unit) — covers units where no member's app is open.
@@ -321,6 +322,11 @@ export default {
     if (event.cron === "*/15 * * * *") {
       ctx.waitUntil(post("/api/watch/run"));               // watch-lab: poll GHIS + push new labs
       ctx.waitUntil(post("/api/push/task-overdue-run"));   // ICU: escalate overdue round tasks → push the unit
+      return;
+    }
+    if (event.cron === "30 5 * * *") {
+      ctx.waitUntil(post("/api/updates/sync"));            // daily Medical Updates crawl
+      ctx.waitUntil(post("/api/lifecycle/run"));           // daily: Pro-upsell email for day-3 non-converters
       return;
     }
     const path = event.cron === "0 6 * * 1" ? "/api/updates/digest" : "/api/updates/sync";

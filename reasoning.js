@@ -3757,6 +3757,9 @@
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
       function attempt(retried) {
         return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: body }); }).then(function (r) {
+          if (r.status === 402) {
+            return r.json().catch(function () { return {}; }).then(function (j) { return { error: "quota", needsPro: true, message: (j && j.message) || "" }; });
+          }
           if (r.status === 429) {
             return r.json().catch(function () { return {}; }).then(function (j) {
               if (j && j.reason === "rate" && !retried) return new Promise(function (res) { setTimeout(res, 3400); }).then(function () { return attempt(true); });
@@ -3840,7 +3843,7 @@
       var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
       if (!packet || !packet.reportText) return Promise.resolve({ error: "no-report" });
       return aiHeaders().then(function (h) { return fetch(b + "/imaging", { method: "POST", headers: h, body: JSON.stringify({ packet: packet }) }); })
-        .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // Trusted external reference lookup (Phase 4) — de-identified TOPIC string only → PubMed
@@ -3849,7 +3852,7 @@
       var b = aiBase(); if (!b) return Promise.resolve({ error: "off" });
       var t = String(topic == null ? "" : topic).slice(0, 200); if (!t) return Promise.resolve({ error: "no-topic" });
       return aiHeaders().then(function (h) { return fetch(b + "/evidence", { method: "POST", headers: h, body: JSON.stringify({ topic: t }) }); })
-        .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // Clinical Correlation (Phase 3) — de-identified imaging+lab evidence packet → advisory
@@ -3858,7 +3861,7 @@
       var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
       if (!packet) return Promise.resolve({ error: "no-evidence" });
       return aiHeaders().then(function (h) { return fetch(b + "/correlate", { method: "POST", headers: h, body: JSON.stringify({ packet: packet }) }); })
-        .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // Opt-in web research (Google-grounded) for topics not in StewardMD's KB. Token-frugal:
@@ -3874,7 +3877,7 @@
       var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
       var t = String(text == null ? "" : text).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
       return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ text: t, kind: kind }) }); })
-        .then(function (r) { if (r.status === 429) return { error: "quota" }; return r.json(); })
+        .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // MaiK Scribe — extract structured data from a spoken transcript. kind ∈ ICU kinds → { fields };
@@ -3884,7 +3887,7 @@
       var t = String(transcript == null ? "" : transcript).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
       var body = { transcript: t, kind: kind }; if (catalog) body.catalog = catalog;
       return aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify(body) }); })
-        .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // AI STT fallback — audio dataURL → { transcript }. Used only where native/Web-Speech STT is absent.
@@ -3892,7 +3895,7 @@
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
       var a = String(audioDataUrl == null ? "" : audioDataUrl); if (!a) return Promise.resolve({ error: "no-audio" });
       return aiHeaders().then(function (h) { return fetch(b + "/transcribe", { method: "POST", headers: h, body: JSON.stringify({ audio: a }) }); })
-        .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // AI Vision — IMAGE mode. Sends the ORIGINAL image { image, kind } so the server can read
@@ -3904,7 +3907,7 @@
       var img = String(dataUrl == null ? "" : dataUrl); if (!img) return Promise.resolve({ error: "no-image" });
       return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: img, kind: kind }) }); })
         .then(function (r) {
-          if (r.status === 429) return { error: "quota" };
+          if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" };
           if (r.status === 401 || r.status === 403) return { error: "entitlement" };
           if (!r.ok) return { error: "server" };
           return r.json();
@@ -4076,8 +4079,15 @@
   }
   // full two-block composition (deterministic assessment ▸ divider ▸ MaiK commentary
   // ▸ disclaimer). Used by the panel handler AND exposed for tests.
+  function maikUpgradeHTML(r) {
+    var msg = (r && r.message) ? maikEsc(r.message) : "You've used your free MaiK allowance for this month. Upgrade to StewardMD Pro for unlimited clinical AI.";
+    return '<div class="maik-note" style="padding:6px 0">' + msg +
+      '<div style="margin-top:8px"><button type="button" onclick="try{if(window.SMD_PRO&&SMD_PRO.openPaywall)SMD_PRO.openPaywall(\'maik\')}catch(e){}" ' +
+      'style="background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:8px;padding:8px 14px;font:700 12.5px var(--sans);cursor:pointer">Upgrade to Pro</button></div></div>';
+  }
   function maikCompose(pkg, r) {
     var body = (r && r.text) ? maikCommentaryHTML(r.text, r.citations)
+      : (r && r.needsPro) ? maikUpgradeHTML(r)
       : '<div class="maik-note">' + ((r && r.error === "ai-off") ? "MaiK is off — enable AI in Settings." : "MaiK unavailable — the StewardMD assessment above stands. (" + maikEsc((r && r.error) || "no response") + ")") + "</div>";
     return maikAssessmentHTML(pkg) + maikDivider() + maikHeaderHTML() + body + maikDisclaimerHTML();
   }

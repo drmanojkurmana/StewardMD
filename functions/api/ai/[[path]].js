@@ -536,7 +536,7 @@ export async function onRequest(context) {
         const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
         const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
         const gate = await checkQuota(env, request, hasDx ? "case" : "general");
-        if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+        if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         const grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
         // Phase 2 — opt-in streaming (client sends ?stream=1 + Accept: text/event-stream). If the
         // provider can't stream we fall straight through to the unchanged JSON path below, so the
@@ -559,7 +559,7 @@ export async function onRequest(context) {
       const summary = String(body.summary || "").slice(0, MAX_IN_CHARS);
       if (!summary) return json({ error: "no summary" }, 400);
       const gate = await checkQuota(env, request, "case");
-      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const prompt = EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "");
       const text = await callGemini(env, [{ text: prompt }], MAX_OUT);
       await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
@@ -583,7 +583,7 @@ export async function onRequest(context) {
       if (Array.isArray(pkt.symptoms) && pkt.symptoms.length) ctx.push("Relevant clinical findings: " + clip(pkt.symptoms.join("; "), 400));
       if (Array.isArray(pkt.labs) && pkt.labs.length) ctx.push("Relevant labs: " + clip(pkt.labs.join(", "), 400));
       const gate = await checkQuota(env, request, "case");
-      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const prompt = IMAGING_SYS + "\n\n=== CONTEXT (de-identified) ===\n" + ctx.join("\n") +
         "\n\n=== RADIOLOGY REPORT TEXT ===\n" + reportText + "\n\n=== TASK ===\n" + IMAGING_TASK;
       let text;
@@ -607,7 +607,7 @@ export async function onRequest(context) {
       L.push("\n=== LABORATORY ABNORMALITIES ===\n" + (labs.map(function (x) { return "• " + clip(String(x), 120); }).join("\n") || "none"));
       if (pkt.clinical && (pkt.clinical.approvedFindings || []).length) L.push("\n=== CLINICIAN-RECORDED FINDINGS ===\n" + clip(pkt.clinical.approvedFindings.join("; "), 500));
       const gate = await checkQuota(env, request, "case");
-      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const prompt = CORRELATE_SYS + "\n\n" + L.join("\n").slice(0, MAX_IN_CHARS) + "\n\n=== TASK ===\n" + CORRELATE_TASK;
       let text;
       try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, { temperature: 0.3 }); }
@@ -625,7 +625,7 @@ export async function onRequest(context) {
       const topic = clip(String(body.topic || "").replace(/[^\w\s,\-]/g, " ").replace(/\b\d+\b/g, " ").replace(/\s+/g, " ").trim(), 200);
       if (!topic) return json({ error: "no-topic" }, 400);
       const gate = await checkQuota(env, request, "general");
-      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const contact = env.NCBI_EMAIL || "contact@stewardmd.in";
       const base = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
       const cred = "&tool=stewardmd&email=" + encodeURIComponent(contact);
@@ -660,7 +660,7 @@ export async function onRequest(context) {
       const ocr = (typeof body.text === "string" ? body.text : "").slice(0, MAX_IN_CHARS).trim();
       if (ocr) {
         const gate = await checkQuota(env, request, "ocr");
-        if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+        if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         const prompt = visionTextPrompt(kind, ocr);
         let text;
         try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
@@ -674,7 +674,7 @@ export async function onRequest(context) {
       b64 = b64.replace(/^data:[^;]+;base64,/, "");
       if (!b64) return json({ error: "no image or text" }, 400);
       const gate = await checkQuota(env, request, "ocr");
-      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       let text;
       try { text = await callGemini(env, [{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
       catch (e) { await recordUsage(gate, { inTok: 1000, outTok: 0, status: "failed" }); throw e; }
@@ -688,7 +688,7 @@ export async function onRequest(context) {
       const q = String(body.question || body.q || "").slice(0, 500);
       if (!q) return json({ error: "no question" }, 400);
       const gate = await checkQuota(env, request, "general");
-      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const RES_MAX = Math.max(256, Math.min(900, Number(env.MAIK_RESEARCH_MAX_OUTPUT) || 600));
       let text;
       try { text = await callGemini(env, [{ text: RESEARCH_SYS + "\n\nQuestion: " + q }], RES_MAX, { webSearch: true, temperature: 0.3 }); }
@@ -702,7 +702,7 @@ export async function onRequest(context) {
       const transcript = String(body.transcript || "").slice(0, MAX_IN_CHARS).trim();
       if (!transcript) return json({ error: "no transcript" }, 400);
       const gate = await checkQuota(env, request, "ocr");
-      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       if (body.kind === "reasoning") {
         const catalog = Array.isArray(body.catalog) ? body.catalog.slice(0, 500) : [];
         const prompt = reasoningExtractPrompt(transcript, catalog).slice(0, MAX_IN_CHARS + 12000);
@@ -741,7 +741,7 @@ export async function onRequest(context) {
       b64 = b64.replace(/^data:[^;]+;base64,/, "");
       if (!b64) return json({ error: "no audio" }, 400);
       const gate = await checkQuota(env, request, "ocr");
-      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const sys = "Transcribe this clinical dictation audio to plain text, VERBATIM. Return ONLY the transcript text — no preamble, labels, quotes, or commentary. If the audio is empty or inaudible, return an empty string.";
       let text;
       try { text = await callGemini(env, [{ text: sys }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }

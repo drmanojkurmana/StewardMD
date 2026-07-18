@@ -88,7 +88,16 @@
         var go = wrap.querySelector("#smdWatchGo"); go.disabled = true; go.textContent = "Enabling…";
         SMD_WATCH.enable(user, pass, patient)
           .then(function (r) { toast("Lab Watch 24/7 on ✅"); close({ ok: true, watching: r.watching }); })
-          .catch(function (e) { go.disabled = false; go.textContent = "Enable alerts"; toast("Couldn't enable: " + (e.message || "try again")); });
+          .catch(function (e) {
+            go.disabled = false; go.textContent = "Enable alerts";
+            if (e && /needs-pro/.test(e.message || "")) {
+              close({ ok: false, needsPro: true });
+              try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall("labwatch"); return; } } catch (x) {}
+              toast("Lab Watch 24/7 is a StewardMD Pro feature.");
+              return;
+            }
+            toast("Couldn't enable: " + (e.message || "try again"));
+          });
       });
     });
   }
