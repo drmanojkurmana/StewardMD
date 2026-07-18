@@ -40,6 +40,33 @@ function timingEqual(a, b) {
   if (!a || !b || a.length !== b.length) return false;
   let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i); return r === 0;
 }
+async function sha256Hex(msg) {
+  const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(msg));
+  return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("");
+}
+
+// PhonePe Standard Checkout v2 (OAuth). Prod vs sandbox by env.PHONEPE_ENV.
+function phonepeCfg(env) {
+  const prod = String(env.PHONEPE_ENV || "prod").toLowerCase() !== "sandbox";
+  return prod
+    ? { oauth: "https://api.phonepe.com/apis/identity-manager/v1/oauth/token", pg: "https://api.phonepe.com/apis/pg" }
+    : { oauth: "https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token", pg: "https://api-preprod.phonepe.com/apis/pg-sandbox" };
+}
+let _ppTok = { token: null, exp: 0 };
+async function phonepeToken(env) {
+  const now = Math.floor(Date.now() / 1000);
+  if (_ppTok.token && now < _ppTok.exp - 60) return _ppTok.token;
+  const cfg = phonepeCfg(env);
+  const body = new URLSearchParams({
+    client_id: env.PHONEPE_CLIENT_ID, client_secret: env.PHONEPE_CLIENT_SECRET,
+    client_version: String(env.PHONEPE_CLIENT_VERSION || "1"), grant_type: "client_credentials",
+  });
+  const r = await fetch(cfg.oauth, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body });
+  const d = await r.json();
+  if (!r.ok || !d.access_token) throw new Error("phonepe-auth-failed");
+  _ppTok = { token: d.access_token, exp: +d.expires_at || (now + 1200) };
+  return d.access_token;
+}
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -103,6 +130,60 @@ export async function onRequest(context) {
         if (uid) { try { await grantPro(env, uid, { months, source: "razorpay" }); } catch (e) {} }
       }
       return json({ ok: true });   // always 200 so Razorpay doesn't retry-storm
+    }
+
+    // ---- PhonePe Standard Checkout v2 (web / off-Play Android) ----
+    if (method === "POST" && seg === "phonepe" && sub === "pay") {
+      if (!env.PHONEPE_CLIENT_ID || !env.PHONEPE_CLIENT_SECRET) return json({ error: "phonepe-not-configured" }, 501);
+      const uid = rawUid(await identify(request, env));
+      if (!uid) return json({ error: "signin-required" }, 401);
+      let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+      const P = plans(env); const plan = P[body.plan] ? body.plan : "monthly";
+      const token = await phonepeToken(env);
+      const cfg = phonepeCfg(env);
+      const merchantOrderId = "SMDPRO" + crypto.randomUUID().replace(/-/g, "").slice(0, 24);
+      const redirectUrl = env.PRO_REDIRECT_URL || "https://stewardmd.in/?pro=return";
+      // uid + months ride in metaInfo (echoed back by the status API) so the webhook grants the
+      // right account for the right duration — no client-supplied entitlement is trusted.
+      const r = await fetch(cfg.pg + "/checkout/v2/pay", {
+        method: "POST",
+        headers: { "Authorization": "O-Bearer " + token, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          merchantOrderId, amount: P[plan].amount,
+          metaInfo: { udf1: uid, udf2: String(P[plan].months), udf3: plan },
+          paymentFlow: { type: "PG_CHECKOUT", merchantUrls: { redirectUrl } },
+        }),
+      });
+      const o = await r.json();
+      if (!r.ok || !o.redirectUrl) return json({ error: "pay-failed", detail: o || null }, 502);
+      return json({ redirectUrl: o.redirectUrl, merchantOrderId, orderId: o.orderId, plan });
+    }
+    if (method === "POST" && seg === "phonepe" && sub === "webhook") {
+      const user = env.PHONEPE_WEBHOOK_USERNAME, pass = env.PHONEPE_WEBHOOK_PASSWORD;
+      if (!user || !pass) return json({ error: "webhook-not-configured" }, 501);
+      const auth = (request.headers.get("Authorization") || "").trim().toLowerCase();
+      const expected = (await sha256Hex(user + ":" + pass)).toLowerCase();
+      if (!timingEqual(auth, expected)) return json({ error: "bad-auth" }, 401);
+      let evt = {}; try { evt = (await request.json()) || {}; } catch (e) {}
+      const p = evt.payload || {};
+      const merchantOrderId = p.merchantOrderId || p.orderId || "";
+      const event = String(evt.event || evt.type || "");
+      // Re-verify against the status API (source of truth) before granting.
+      if (merchantOrderId && (event.indexOf("completed") >= 0 || String(p.state).toUpperCase() === "COMPLETED")) {
+        try {
+          const token = await phonepeToken(env);
+          const cfg = phonepeCfg(env);
+          const sr = await fetch(cfg.pg + "/checkout/v2/order/" + encodeURIComponent(merchantOrderId) + "/status", { headers: { "Authorization": "O-Bearer " + token } });
+          const s = await sr.json();
+          if (sr.ok && String(s.state).toUpperCase() === "COMPLETED") {
+            const mi = s.metaInfo || {};
+            const uid = rawUid(String(mi.udf1 || ""));
+            const months = Math.max(1, +mi.udf2 || 1);
+            if (uid) await grantPro(env, uid, { months, source: "phonepe" });
+          }
+        } catch (e) {}
+      }
+      return json({ ok: true });   // always 200 so PhonePe doesn't retry-storm
     }
 
     // ---- Apple App Store Server Notifications v2 (native iOS IAP) — scaffold ----
