@@ -41,9 +41,8 @@ on the FundX UI. Its sub-components sit behind small interfaces so implementatio
 without touching the engine, the UI, or the data contracts:
 
 ```
-FundxCamera → VisionDetector(Heuristic + MediaPipe) ─┐
-                                                     ├→ DetectorHub → FrameAnalysis
-              SimRetina (swappable retina signals) ──┘
+FundxCamera → Heuristic(focus/exposure/glare/red-reflex/FUNDUS-circle/VESSELS)
+            + MediaPipe(eye/pupil/distance/motion) + Pose(roll) ─→ DetectorHub → FrameAnalysis
 FrameAnalysis → AlignmentEngine → ReadinessScore/gates → AcquisitionStateMachine → CoachDirector
              → SmartCapture (burst) → QualityEngine + BestFrameSelector
              → IRetinaModel.analyze(bestFrame) → Findings JSON  ── the Vision→Clinical contract
@@ -69,9 +68,17 @@ selecting → processing → review.
   modular pipeline: reflection-suppress · denoise · gray-world WB · contrast/gamma ·
   unsharp). `registerEnhancer(impl)` swaps the whole enhancer (e.g. a super-resolution
   model). Produces the persisted **enhanced image**; the original is never mutated.
-- **Live retina/disc/macula signals** — during acquisition these are simulated
-  (`SimRetina`) so beginners reach Capture-Ready before a real fundus detector exists.
-  Replace via `DetectorHub.setRetinaSignalProvider(fn)` or `makeHub({ mediapipe })`.
+- **Acquisition is observable-cue driven (no lens detection).** The state machine progresses
+  on real image-quality signals — eye/pupil (MediaPipe), working distance, red reflex,
+  **circular fundus appearance** + **vessel-like structure** (real pixel heuristics), focus,
+  exposure, glare, motion, and phone **roll** (device orientation) — and auto-captures only
+  when a composite **diagnostic-quality** score is met. Lens power (20D/28D/40D) is never
+  identified or required. An optional operator-confirm fallback (`CFG.lensConfirmFallback`,
+  flag `smd_fundx_lens_confirm`, **off by default**) only un-sticks the setup phase on a
+  stall; it never lets capture happen without a real retinal image.
+- **Findings-level disc/macula/lesions** — enriched by `IRetinaModel` (mock → Vertex) on the
+  captured frame; an optional live provider seam remains via
+  `DetectorHub.setRetinaSignalProvider(fn)` for a future on-device detector.
 - **Eye/pupil/distance detector** — `makeMediaPipe()` behind the hub; any adapter whose
   `analyze()` returns the same partial replaces it. See
   `assets/vendor/mediapipe/README.md` to vendor MediaPipe locally (offline / no CDN).
@@ -135,9 +142,12 @@ fires when readiness holds.
 
 ## Known limitations (MVP)
 
-- Retinal detection defaults to a swappable **mock** provider; disc/macula/red-reflex live
-  signals are proxies, not true detection (see design Deviations log). Real providers
-  connect through the AI Router (above) with no UI/contract change.
-- MediaPipe loads from CDN unless vendored locally.
+- Acquisition signals (red reflex, circular fundus field, vessel structure) are real image
+  heuristics, but they are approximations tuned for common phones/lenses — thresholds in
+  `SMD_FUNDX_VISION.CFG` will need on-device calibration.
+- Final **findings** (cup-disc ratio, microaneurysms, DR grade, etc.) default to a swappable
+  **mock** provider and become real via the AI Router (Vertex/Gemini) with no UI/contract change.
+- MediaPipe loads from CDN unless vendored locally; phone-roll needs a device-orientation
+  sensor (absent on desktop → the "level" cue is simply skipped).
 - Voice coaching (TTS) is Web-Speech, off by default; reliable iOS TTS is a fast-follow.
 - No cloud sync (local-only by design).

@@ -75,36 +75,65 @@
       var reflection = clamp01((specular / n) * 6);
       var redReflex = clamp01(((redAcc / n) / 90) * (0.4 + 0.6 * (brightAcc / n / 255)) * 1.6);
       return { focus: focus, brightness: brightness, exposure: exposure, contrast: contrast, reflection: reflection, redReflex: redReflex };
+    },
+    // Circular fundus appearance — the observed illuminated retinal field seen through ANY
+    // indirect lens (power-agnostic: 20D/28D/40D all present as a warm, roughly circular
+    // central glow). Returns visibility + circularity + centre offset + size.
+    fundus: function (img) {
+      var w = img.width, h = img.height, data = img.data;
+      if (!w || !h || !data) return { fundusVisible: false, fundusConf: 0, fundusCircularity: 0, fundusCenter: null, fundusSize: 0 };
+      var n = w * h, cx = 0, cy = 0, cnt = 0, i, x, y, r, g, b, lum, warm;
+      for (y = 0; y < h; y++) for (x = 0; x < w; x++) { i = (y * w + x) * 4; r = data[i]; g = data[i + 1]; b = data[i + 2]; lum = 0.299 * r + 0.587 * g + 0.114 * b; warm = r - (g + b) / 2; if (lum > 40 && lum < 250 && warm > 16) { cx += x; cy += y; cnt++; } }
+      if (cnt < n * 0.03) return { fundusVisible: false, fundusConf: clamp01(cnt / (n * 0.03)) * 0.3, fundusCircularity: 0, fundusCenter: null, fundusSize: 0 };
+      cx /= cnt; cy /= cnt;
+      var rg2 = 0, dx, dy;
+      for (y = 0; y < h; y++) for (x = 0; x < w; x++) { i = (y * w + x) * 4; r = data[i]; g = data[i + 1]; b = data[i + 2]; lum = 0.299 * r + 0.587 * g + 0.114 * b; warm = r - (g + b) / 2; if (lum > 40 && lum < 250 && warm > 16) { dx = x - cx; dy = y - cy; rg2 += dx * dx + dy * dy; } }
+      var rg = Math.sqrt(rg2 / cnt), rArea = Math.sqrt(cnt / Math.PI), frac = cnt / n;
+      var circ = clamp01(1 - Math.abs(rg * Math.SQRT2 - rArea) / (rArea || 1));   // 1 when a filled disk
+      var size = clamp01(2 * rArea / Math.min(w, h));
+      var conf = clamp01(Math.min(1, frac / 0.15) * (0.5 + 0.5 * circ));
+      function sgn(v) { return v < -1 ? -1 : v > 1 ? 1 : (v !== v ? 0 : v); }
+      return { fundusVisible: frac >= 0.04 && circ >= 0.35 && size > 0.2, fundusConf: conf, fundusCircularity: circ, fundusCenter: { x: sgn((cx - w / 2) / (w / 2)), y: sgn((cy - h / 2) / (h / 2)) }, fundusSize: size };
+    },
+    // Vessel-like structure — dark curvilinear ridges (green channel) in the central field.
+    vessels: function (img, opts) {
+      var w = img.width, h = img.height, data = img.data;
+      if (!w || !h || !data) return 0;
+      var frac = (opts && opts.regionFrac) || 0.6, rw = Math.max(4, Math.floor(w * frac)), rh = Math.max(4, Math.floor(h * frac)), x0 = (w - rw) >> 1, y0 = (h - rh) >> 1;
+      function grn(px, py) { return data[((y0 + py) * w + (x0 + px)) * 4 + 1]; }
+      var gradSum = 0, darkCnt = 0, tot = (rw - 2) * (rh - 2), x, y, c, l, r, u, d, nb;
+      for (y = 1; y < rh - 1; y++) for (x = 1; x < rw - 1; x++) {
+        c = grn(x, y); l = grn(x - 1, y); r = grn(x + 1, y); u = grn(x, y - 1); d = grn(x, y + 1);
+        gradSum += Math.abs(r - l) + Math.abs(d - u);          // region-wide edge energy
+        nb = (l + r + u + d) / 4; if (c < nb - 6) darkCnt++;   // dark curvilinear ridge pixels
+      }
+      if (!tot) return 0;
+      var meanGrad = gradSum / tot, density = darkCnt / tot;
+      return clamp01((meanGrad / 25) * 0.6 + (density / 0.15) * 0.4);
     }
   };
 
-  // ---- Simulated retinal-signal provider (swappable) ---------------------
-  // Live retina/disc/macula/FOV presence, derived from image quality + stability, so a
-  // beginner can be guided all the way to auto-capture before a real fundus detector
-  // exists. Stateful (tracks consecutive good frames). Replace with a real lightweight
-  // on-device detector via DetectorHub.setRetinaSignalProvider(fn).
-  function makeSimRetina() {
-    var goodStreak = 0;
+  // ---- Phone pose (roll) — real, from device orientation -----------------
+  // Roll drives "rotate clockwise / counter-clockwise" coaching. Uses the deviceorientation
+  // gamma (left-right tilt) as the roll proxy. If no sensor/events (web/desktop), roll stays
+  // null → rollState "unknown" → the engine's "level" gate is a no-op (never blocks).
+  function makePose() {
+    var roll = null, attached = false;
+    function onOrient(e) { if (e && e.gamma != null) roll = e.gamma; }
     return {
-      reset: function () { goodStreak = 0; },
-      // h = heuristic result; align = optical acceptable? Returns retina/disc/macula/fov.
-      signal: function (h, aligned) {
-        var glow = h.redReflex >= 0.45 && h.brightness >= 0.25 && h.brightness <= 0.95;
-        var clean = h.focus >= 0.5 && h.reflection <= 0.4;
-        if (glow && clean && aligned) goodStreak++; else goodStreak = Math.max(0, goodStreak - 2);
-        var retinaVisible = glow && aligned;
-        var retinaConf = clamp01((h.redReflex - 0.3) * 1.4);
-        var discVisible = retinaVisible && clean && goodStreak >= 3;
-        var maculaVisible = retinaVisible && clean && goodStreak >= 5;
-        var fieldOfView = clamp01(0.3 + 0.7 * Math.min(1, goodStreak / 6));
-        return {
-          retinaVisible: retinaVisible, retinaConf: retinaConf,
-          discVisible: discVisible, discConf: discVisible ? clamp01(0.5 + h.focus * 0.5) : 0,
-          maculaVisible: maculaVisible, maculaConf: maculaVisible ? clamp01(0.5 + h.contrast * 0.5) : 0,
-          vesselVisibility: clamp01(h.contrast * (retinaVisible ? 1 : 0.3)),
-          fieldOfView: retinaVisible ? fieldOfView : 0,
-          _simulated: true
-        };
+      attach: function () {
+        if (attached || typeof window === "undefined" || !window.addEventListener) return;
+        try {
+          // iOS 13+ needs a permission grant (best-effort; ignored elsewhere).
+          if (typeof DeviceOrientationEvent !== "undefined" && DeviceOrientationEvent.requestPermission) { try { DeviceOrientationEvent.requestPermission().catch(function () {}); } catch (e) {} }
+          window.addEventListener("deviceorientation", onOrient, true); attached = true;
+        } catch (e) {}
+      },
+      detach: function () { if (!attached) return; try { window.removeEventListener("deviceorientation", onOrient, true); } catch (e) {} attached = false; },
+      reset: function () { roll = null; },
+      read: function () {
+        if (roll == null) return { roll: null, rollState: "unknown" };
+        return { roll: roll, rollState: Math.abs(roll) <= 12 ? "level" : (roll > 0 ? "cw" : "ccw") };
       }
     };
   }
@@ -179,24 +208,28 @@
   function makeHub(opts) {
     opts = opts || {};
     var V = window.SMD_FUNDX_VISION;
-    var sim = makeSimRetina();
     var mp = opts.mediapipe || makeMediaPipe();
-    var retinaProvider = function (h, aligned) { return sim.signal(h, aligned); };
+    var pose = opts.pose || makePose();
+    // Optional real disc/macula/lesion provider (findings-level enrichment; NOT a capture
+    // gate). Left null by default — the acquisition flow is driven purely by observable
+    // image-quality cues (fundus circle + vessels + focus/exposure/glare), no simulation.
+    var retinaProvider = null;
     return {
-      mediapipe: mp,
-      setRetinaSignalProvider: function (fn) { if (typeof fn === "function") retinaProvider = fn; },
-      resetSession: function () { sim.reset(); if (mp && mp.reset) mp.reset(); },
-      // parts: { imageData, mpPartial?, aligned?, ts }. Builds a full FrameAnalysis.
+      mediapipe: mp, pose: pose,
+      setRetinaSignalProvider: function (fn) { retinaProvider = (typeof fn === "function") ? fn : null; },
+      resetSession: function () { if (mp && mp.reset) mp.reset(); if (pose && pose.reset) pose.reset(); },
+      // parts: { imageData, mpPartial?, posePartial?, ts }. Builds a full FrameAnalysis from
+      // observable signals: image heuristics + circular-fundus + vessels + MediaPipe geometry
+      // + phone roll. No lens detection anywhere.
       build: function (parts) {
         parts = parts || {};
         var h = parts.imageData ? Heuristic.analyze(parts.imageData, opts) : {};
+        var fund = parts.imageData ? Heuristic.fundus(parts.imageData, opts) : {};
+        var vess = parts.imageData ? Heuristic.vessels(parts.imageData, opts) : 0;
         var mpPart = parts.mpPartial || {};
-        // Optical alignment decided from geometry so far (eye/pupil/distance) — retina
-        // signals should only "appear" once we're roughly aligned + have a red reflex.
-        var aligned = parts.aligned != null ? parts.aligned :
-          (mpPart.eyePresent && (mpPart.pupilOffset == null || mpPart.pupilOffset <= 0.3) && mpPart.distanceState !== "far");
-        var rs = retinaProvider(Object.assign({ focus: 0, brightness: 0, redReflex: 0, reflection: 1, contrast: 0 }, h), !!aligned);
-        var merged = Object.assign({ ts: parts.ts != null ? parts.ts : null }, h, mpPart, rs);
+        var posePart = parts.posePartial || {};
+        var merged = Object.assign({ ts: parts.ts != null ? parts.ts : null, vesselScore: vess }, h, fund, mpPart, posePart);
+        if (retinaProvider) { try { Object.assign(merged, retinaProvider(merged) || {}); } catch (e) {} }
         return V ? V.makeFrameAnalysis(merged) : merged;
       }
     };
@@ -228,7 +261,8 @@
           if (c) {
             var img = cctx.getImageData(0, 0, c.width, c.height);
             var mpPart = (hub && hub.mediapipe && hub.mediapipe.available()) ? hub.mediapipe.analyze(videoEl, t) : {};
-            var fa = hub.build({ imageData: img, mpPartial: mpPart, ts: t });
+            var posePart = (hub && hub.pose && hub.pose.read) ? hub.pose.read() : {};
+            var fa = hub.build({ imageData: img, mpPartial: mpPart, posePartial: posePart, ts: t });
             if (onFrame) onFrame(fa);
           }
         } catch (e) {}
@@ -248,6 +282,7 @@
           })
           .then(function () {
             running = true; lastAnalyze = 0;
+            if (hub.pose && hub.pose.attach) hub.pose.attach();   // phone-roll for rotate coaching
             if (hub.resetSession) hub.resetSession();
             if (hub.mediapipe && hub.mediapipe.init) hub.mediapipe.init();   // lazy, non-blocking
             raf = requestAnimationFrame(loop);
@@ -262,6 +297,9 @@
           if (!c) break;
           var img = cctx.getImageData(0, 0, c.width, c.height);
           var h = Heuristic.analyze(img, opts);
+          var fund = Heuristic.fundus(img);
+          h.fundusConf = fund.fundusConf; h.fundusSize = fund.fundusSize; h.fundusCircularity = fund.fundusCircularity;
+          h.vesselScore = Heuristic.vessels(img, opts);
           frames.push({ dataUrl: c.toDataURL("image/jpeg", 0.9), metrics: h, w: c.width, h: c.height });
         }
         return frames;
@@ -270,6 +308,7 @@
         running = false; if (raf) cancelAnimationFrame(raf); raf = 0;
         try { if (stream) stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
         try { if (videoEl) videoEl.srcObject = null; } catch (e) {}
+        try { if (hub && hub.pose && hub.pose.detach) hub.pose.detach(); } catch (e) {}
         stream = null;
       }
     };
@@ -277,7 +316,7 @@
 
   var API = {
     Heuristic: Heuristic,
-    makeSimRetina: makeSimRetina,
+    makePose: makePose,
     makeMediaPipe: makeMediaPipe,
     makeHub: makeHub,
     makeCamera: makeCamera,

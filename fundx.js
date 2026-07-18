@@ -130,35 +130,36 @@
 
   // ---- gate chips config --------------------------------------------------
   var CHIPS = [
-    { k: "eye", l: "Eye" }, { k: "pupil", l: "Pupil" }, { k: "lens", l: "Lens" },
-    { k: "distance", l: "Distance" }, { k: "redReflex", l: "Reflex" }, { k: "retina", l: "Retina" },
+    { k: "eye", l: "Eye" }, { k: "pupil", l: "Pupil" }, { k: "distance", l: "Distance" },
+    { k: "redReflex", l: "Reflex" }, { k: "fundus", l: "Fundus" }, { k: "vessels", l: "Vessels" },
     { k: "focus", l: "Focus" }, { k: "reflection", l: "Glare" }, { k: "motion", l: "Steady" },
-    { k: "disc", l: "Disc" }, { k: "macula", l: "Macula" }
+    { k: "level", l: "Level" }, { k: "quality", l: "Quality" }
   ];
   function arrowGlyph(a) {
-    return { left: "west", right: "east", up: "north", down: "south", closer: "add", farther: "remove" }[a] || "";
+    return { left: "west", right: "east", up: "north", down: "south", closer: "add", farther: "remove", rot_cw: "rotate_right", rot_ccw: "rotate_left" }[a] || "";
   }
 
-  // Guided Training Mode — 7 acquisition-skill levels (no diagnosis, no saved scan).
+  // Guided Training Mode — 7 acquisition-skill levels (observable-cue driven; no diagnosis,
+  // no saved scan, no lens-power knowledge required).
   var LEVELS = [
-    { n: 1, key: "find_eye", title: "Find the eye", desc: "Point the camera so the eye fills the reticle." },
+    { n: 1, key: "find_eye", title: "Find the eye", desc: "Point the camera so the eye fills the view." },
     { n: 2, key: "center_pupil", title: "Center the pupil", desc: "Move until the pupil sits in the centre." },
-    { n: 3, key: "position_lens", title: "Position the 20D lens", desc: "Bring the lens into view and keep it centred." },
+    { n: 3, key: "working_distance", title: "Set the working distance", desc: "Move closer or back until the distance is right." },
     { n: 4, key: "red_reflex", title: "Hold the red reflex", desc: "Tilt until the orange-red glow appears and stays." },
-    { n: 5, key: "optic_disc", title: "Find the optic disc", desc: "Steady the view until the disc is framed." },
-    { n: 6, key: "macula", title: "Find the macula", desc: "Shift slightly to bring the macula into frame." },
-    { n: 7, key: "full_capture", title: "Acquire a full image", desc: "Hold everything aligned until capture-ready." }
+    { n: 5, key: "retinal_view", title: "Bring up the retinal view", desc: "Get a round, filled fundus field in the centre." },
+    { n: 6, key: "steady_focus", title: "Steady and in focus", desc: "Hold still, level, and glare-free until it sharpens." },
+    { n: 7, key: "diagnostic_capture", title: "Diagnostic-quality capture", desc: "Hold until vessels and quality are good enough to capture." }
   ];
-  // Pure: has the target skill for `level` been achieved this frame?
+  // Pure: has the target skill for `level` been achieved this frame? (observable gates only)
   function levelAchieved(level, gates, readiness) {
     gates = gates || {}; readiness = readiness || {};
     switch (level) {
       case 1: return !!gates.eye;
       case 2: return !!gates.pupil;
-      case 3: return !!gates.lens;
+      case 3: return !!gates.distance;
       case 4: return !!gates.redReflex;
-      case 5: return !!gates.disc;
-      case 6: return !!gates.macula;
+      case 5: return !!gates.fundus;
+      case 6: return !!(gates.focus && gates.motion && gates.reflection && gates.level);
       case 7: return !!readiness.ready;
       default: return false;
     }
@@ -232,6 +233,7 @@
         '<div class="fundx-cam-bottom rds-safe-bottom">' +
           '<div id="fundxCoach" class="fundx-coach" role="status" aria-live="assertive">Point the camera at the eye</div>' +
           '<div id="fundxChips" class="fundx-chips">' + CHIPS.map(function (c) { return '<span class="fundx-chip" data-chip="' + c.k + '">' + c.l + '</span>'; }).join("") + '</div>' +
+          '<button id="fundxFallback" class="fundx-fallback" data-fx="confirmlens" style="display:none">' + ric("check_circle") + 'Confirm lens is positioned</button>' +
         '</div>' +
         '<div id="fundxFlash" class="fundx-flash"></div>' +
       '</div>';
@@ -283,7 +285,7 @@
       var pct = Math.round((val || 0) * 100);
       return '<div class="fundx-qbar"><span>' + label + '</span><i><b style="width:' + pct + '%"></b></i></div>';
     }
-    var reasonNames = { poor_focus: "Focus", poor_exposure: "Exposure", excessive_reflection: "Reflection/glare", retina_not_visible: "Retina not visible", disc_not_visible: "Optic disc not visible", macula_not_visible: "Macula not visible", field_of_view_inadequate: "Field of view" };
+    var reasonNames = { poor_focus: "Focus", poor_exposure: "Exposure", excessive_reflection: "Reflection/glare", fundus_not_visible: "Retinal view not clear", no_vessels_detected: "Vessels not visible", field_of_view_inadequate: "Field of view" };
     var why = (q.reasons || []).map(function (r) { return '<span class="fundx-why">' + ric("error") + (reasonNames[r] || r) + '</span>'; }).join("");
     var s = q.subscores || {};
     return '' +
@@ -298,7 +300,7 @@
           '<span>' + (acc ? "Image accepted — good quality" : "Image rejected — retake recommended") + '</span></div>' +
         (why ? '<div class="fundx-whys">' + why + '</div>' : '') +
         '<div class="rds-section-header"><span class="rds-section-title">Quality breakdown</span></div>' +
-        '<div class="fundx-qbars">' + bar("Focus", s.focus) + bar("Exposure", s.exposure) + bar("Low glare", s.reflection) + bar("Retina", s.retinaVisibility) + bar("Optic disc", s.discVisibility) + bar("Macula", s.maculaVisibility) + bar("Field of view", s.fieldOfView) + '</div>' +
+        '<div class="fundx-qbars">' + bar("Focus", s.focus) + bar("Exposure", s.exposure) + bar("Low glare", s.reflection) + bar("Retinal view", s.fundusVisibility) + bar("Vessels", s.vesselVisibility) + bar("Red reflex", s.redReflex) + bar("Field of view", s.fieldOfView) + '</div>' +
         '<div class="fundx-actions">' +
           '<button class="fundx-btn ghost" data-fx="retake">' + ric("refresh") + 'Retake</button>' +
           '<button class="fundx-btn" data-fx="toresult">' + (acc ? "Continue" : "Use anyway") + ric("chevron_right") + '</button>' +
@@ -477,7 +479,14 @@
   // ---- Settings + Export --------------------------------------------------
   var SENS = { low: { r: 0.82, f: 4 }, med: { r: 0.9, f: 6 }, high: { r: 0.95, f: 8 } };
   function loadSens() { try { return localStorage.getItem("smd_fundx_sens") || "med"; } catch (e) { return "med"; } }
-  function applySettings() { var Ve = V(); if (!Ve) return; var s = SENS[loadSens()] || SENS.med; Ve.CFG.captureReadiness = s.r; Ve.CFG.readySustainFrames = s.f; }
+  function lensConfirmOn() { try { return localStorage.getItem("smd_fundx_lens_confirm") === "1"; } catch (e) { return false; } }
+  function applySettings() {
+    var Ve = V(); if (!Ve) return;
+    var s = SENS[loadSens()] || SENS.med; Ve.CFG.captureReadiness = s.r; Ve.CFG.readySustainFrames = s.f;
+    // Optional operator-confirm fallback is OFF unless the config flag is set; even then it
+    // only un-sticks the optical-setup phase — capture still needs real diagnostic quality.
+    Ve.CFG.lensConfirmFallback = lensConfirmOn();
+  }
 
   function screenSettings() {
     var P = window.SMD_FUNDX_PROVIDERS;
@@ -498,6 +507,7 @@
         '<button class="fundx-set-row' + (cloudEnabled() ? ' on' : '') + '" data-fx="setcloud"><span class="fundx-set-rl"><b>Cloud AI analysis</b><span>' + (_backend && _backend.vision ? 'Backend available — send scans to StewardMD AI (Vertex/Gemini). Off = on-device only.' : 'Backend not reachable — analysis stays on-device.') + '</span></span>' + ric(cloudEnabled() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Auto-capture sensitivity</span></div>' +
         '<div class="fundx-chips2">' + sensChip("low", "Easier") + sensChip("med", "Balanced") + sensChip("high", "Strict") + '</div>' +
+        '<button class="fundx-set-row' + (lensConfirmOn() ? ' on' : '') + '" data-fx="setlensconfirm"><span class="fundx-set-rl"><b>Manual lens-confirm fallback</b><span>If auto-guidance stalls, offer a “Confirm lens is positioned” tap. Off by default; capture still needs a clear retinal image.</span></span>' + ric(lensConfirmOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Coaching</span></div>' +
         '<button class="fundx-set-row' + (VOICE.enabled() ? ' on' : '') + '" data-fx="setvoice"><span class="fundx-set-rl"><b>Voice coaching</b><span>Spoken guidance during capture</span></span>' + ric(VOICE.enabled() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Clinical (Phase C · advisory)</span></div>' +
@@ -565,7 +575,12 @@
     return { eye: eye || "right", startTs: nowMs(), attempts: (session ? session.attempts + 1 : 1), captures: 0, retries: 0, readinessTrace: [], burstCount: 0 };
   }
   function humanState(s) {
-    var V0 = V().STATE, map = {}; map[V0.SEARCHING_EYE] = "Finding the eye"; map[V0.CENTERING_PUPIL] = "Centering the pupil"; map[V0.DETECTING_LENS] = "Detecting the lens"; map[V0.ALIGNING] = "Aligning"; map[V0.RED_REFLEX] = "Finding red reflex"; map[V0.RETINA] = "Retina in view"; map[V0.OPTIMIZING] = "Improving image"; map[V0.FRAMING] = "Framing"; map[V0.READY] = "Hold — capturing"; map[V0.CAPTURING] = "Capturing"; return map[s] || s;
+    var V0 = V().STATE, map = {};
+    map[V0.SEARCHING_EYE] = "Finding the eye"; map[V0.CENTERING_PUPIL] = "Centering the pupil";
+    map[V0.WORKING_DISTANCE] = "Setting distance"; map[V0.RED_REFLEX] = "Finding red reflex";
+    map[V0.LOCATING_FUNDUS] = "Bringing up the retinal view"; map[V0.OPTIMIZING] = "Improving image";
+    map[V0.ASSESSING_QUALITY] = "Checking image quality"; map[V0.READY] = "Hold — capturing";
+    map[V0.CAPTURING] = "Capturing"; return map[s] || s;
   }
   function startCamera() {
     var Vd = DET(); if (!Vd) { toast("FundX perception layer not loaded."); return; }
@@ -632,6 +647,9 @@
     if (arrow) { if (cue.arrow) { arrow.style.opacity = "1"; arrow.firstChild ? (arrow.innerHTML = ric(arrowGlyph(cue.arrow))) : null; arrow.className = "fundx-arrow show a-" + cue.arrow; arrow.innerHTML = ric(arrowGlyph(cue.arrow)); } else { arrow.className = "fundx-arrow"; } }
     var g = step.gates || {};
     CHIPS.forEach(function (c) { var el = document.querySelector('.fundx-chip[data-chip="' + c.k + '"]'); if (el) el.classList.toggle("on", !!g[c.k]); });
+    // optional operator-confirm fallback: only surfaces on a stall AND only when configured
+    var fb = document.getElementById("fundxFallback");
+    if (fb) fb.style.display = (step.stalled && lensConfirmOn() && session.mode !== "training") ? "" : "none";
     // haptic + voice on state change
     if (step.state !== lastHapticState) { lastHapticState = step.state; if (cue.haptic) haptic(cue.haptic); else haptic("selection"); VOICE.speak(cue.voice); }
     else if (cue.tone === "warn") { VOICE.speak(cue.voice); }
@@ -791,6 +809,8 @@
       case "eye": if (session) session.eye = b.getAttribute("data-eye"); haptic("selection"); return render();
       case "startcam": haptic("medium"); return startCamera();
       case "camclose": stopCamera(); haptic("light"); return show("home");
+      case "confirmlens": if (sm && sm.confirmLensPositioned) sm.confirmLensPositioned(); haptic("selection"); { var fbb = document.getElementById("fundxFallback"); if (fbb) fbb.style.display = "none"; } toast("Proceeding — capture still needs a clear retinal image."); return;
+      case "setlensconfirm": { try { localStorage.setItem("smd_fundx_lens_confirm", lensConfirmOn() ? "0" : "1"); } catch (e) {} applySettings(); haptic("selection"); return render(); }
       case "voice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); { var vb = document.getElementById("fundxVoiceBtn"); if (vb) { vb.classList.toggle("on", VOICE.enabled()); vb.innerHTML = ric(VOICE.enabled() ? "volume_up" : "volume_off"); } if (VOICE.enabled()) VOICE.speak("Voice coaching on"); } return;
       case "retake": haptic("light"); result = null; session.retries++; return startCamera();
       case "toresult": haptic("medium"); return show("result");

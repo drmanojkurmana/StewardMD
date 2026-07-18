@@ -24,56 +24,67 @@ const fa0 = V.makeFrameAnalysis({ eyeConf: 5, focus: -3 });
 ok("frameAnalysis: clamps to [0,1]", fa0.eyeConf === 1 && fa0.focus === 0);
 ok("frameAnalysis: defaults present", fa0.schemaVersion === 1 && fa0.reflection === 1 && fa0.motion === 1);
 
-// A fully-passing frame
+// A fully-passing frame — driven by observable optical/image cues, NO lens fields.
 const good = {
-  eyePresent: true, eyeConf: 0.95, pupilCentered: true, pupilOffset: 0.05,
-  lensPresent: true, lensConf: 0.9, lensCentered: true, distanceState: "ok",
-  motion: 0.05, focus: 0.9, exposure: 0.85, brightness: 0.7, contrast: 0.7,
-  noise: 0.1, reflection: 0.1, redReflex: 0.8, retinaVisible: true, retinaConf: 0.9,
-  discVisible: true, discConf: 0.9, maculaVisible: true, maculaConf: 0.9,
-  vesselVisibility: 0.8, fieldOfView: 0.9
+  eyePresent: true, eyeConf: 0.95, pupilCentered: true, pupilOffset: 0.05, distanceState: "ok",
+  motion: 0.05, roll: 3, rollState: "level",
+  focus: 0.9, exposure: 0.85, brightness: 0.7, contrast: 0.7, noise: 0.1, reflection: 0.1,
+  redReflex: 0.8, fundusVisible: true, fundusConf: 0.9, fundusCircularity: 0.8, fundusCenter: { x: 0.02, y: 0.02 }, fundusSize: 0.6,
+  vesselScore: 0.7
 };
 
-// Alignment
-const al = V.AlignmentEngine.compute(good);
-ok("alignment: optical high + acceptable", al.opticalAxisConfidence > 0.9 && al.acceptable === true);
-const alBad = V.AlignmentEngine.compute({});
-ok("alignment: empty not acceptable", alBad.acceptable === false);
+// no lens gate exists anywhere
+ok("engine: no lens gate in the readiness gate map", V.ReadinessScore.compute(good).gates.lens === undefined);
+ok("engine: no DETECTING_LENS state", V.STATE.DETECTING_LENS === undefined && V.STATE.LOCATING_FUNDUS === "locating_fundus");
 
-// Readiness
+// Alignment (eye + pupil + distance + glow; no lens term)
+const al = V.AlignmentEngine.compute(good);
+ok("alignment: optical high + acceptable", al.opticalAxisConfidence > 0.9 && al.acceptable === true && al.lensAlignment === undefined);
+ok("alignment: empty not acceptable", V.AlignmentEngine.compute({}).acceptable === false);
+
+// Readiness — quality-driven gates
 const r = V.ReadinessScore.compute(good);
 ok("readiness: all gates pass → ready", r.ready === true && r.overall >= 0.9);
-ok("readiness: gate map complete", r.gates.eye && r.gates.pupil && r.gates.retina && r.gates.focus);
+ok("readiness: quality-driven gate map", r.gates.eye && r.gates.pupil && r.gates.fundus && r.gates.vessels && r.gates.quality && r.gates.focus);
+ok("readiness: diagnostic composite present + high", r.diagnostic >= V.CFG.diagnosticMin);
 const rEmpty = V.ReadinessScore.compute({});
-ok("readiness: empty frame not ready", rEmpty.ready === false && rEmpty.gates.eye === false);
+ok("readiness: empty frame not ready", rEmpty.ready === false && rEmpty.gates.eye === false && rEmpty.gates.quality === false);
 
-// State machine: empty → searching_eye
+// State machine: empty → searching_eye; good → READY (never blocks on a lens)
 const sm = V.createStateMachine();
-let step = sm.step({});
-ok("stateMachine: empty → searching_eye", step.state === V.STATE.SEARCHING_EYE);
-// good frame → READY, and shouldCapture after sustain
+ok("stateMachine: empty → searching_eye", sm.step({}).state === V.STATE.SEARCHING_EYE);
 let last;
 for (let i = 0; i < V.CFG.readySustainFrames + 1; i++) last = sm.step(good, i);
-ok("stateMachine: good frame → ready", last.state === V.STATE.READY);
+ok("stateMachine: good frame → ready (quality-gated)", last.state === V.STATE.READY);
 ok("stateMachine: sustained ready → shouldCapture", last.shouldCapture === true);
-ok("stateMachine: transitions recorded", sm.history.length >= 1);
-// regression: lose the eye → back to searching_eye
-const back = sm.step({});
-ok("stateMachine: regresses when eye lost", back.state === V.STATE.SEARCHING_EYE);
-// UI-driven state is not overwritten by frame steps
+ok("stateMachine: regresses when eye lost", sm.step({}).state === V.STATE.SEARCHING_EYE);
 sm.set(V.STATE.CAPTURING);
-const held = sm.step(good);
-ok("stateMachine: UI state held during frames", held.state === V.STATE.CAPTURING && held.changed === false);
+ok("stateMachine: UI state held during frames", sm.step(good).state === V.STATE.CAPTURING);
 
-// QualityEngine
+// A frame with good geometry but NO diagnostic image quality must NOT auto-capture,
+// and must NOT stall on any lens step — it waits at the quality/fundus stage.
+const sm2 = V.createStateMachine();
+const geomOnly = { eyePresent: true, eyeConf: 0.9, pupilCentered: true, pupilOffset: 0.05, distanceState: "ok", redReflex: 0.6, motion: 0.05 };
+let s2; for (let i = 0; i < 10; i++) s2 = sm2.step(geomOnly, i);
+ok("stateMachine: no fundus/quality → not READY, not a lens stall", s2.state !== V.STATE.READY && s2.shouldCapture !== true && [V.STATE.LOCATING_FUNDUS, V.STATE.RED_REFLEX, V.STATE.WORKING_DISTANCE].indexOf(s2.state) >= 0);
+
+// Optional operator-confirm fallback: OFF by default; ON only relaxes SETUP, never quality.
+V.CFG.lensConfirmFallback = true;
+const sm3 = V.createStateMachine(); sm3.confirmLensPositioned();
+let s3; for (let i = 0; i < 6; i++) s3 = sm3.step({ eyePresent: true, eyeConf: 0.9, pupilCentered: true, pupilOffset: 0.05, distanceState: "unknown", redReflex: 0.1 }, i);
+ok("fallback: confirm advances past setup proxies (distance/red-reflex)", [V.STATE.LOCATING_FUNDUS, V.STATE.RED_REFLEX].indexOf(s3.state) >= 0 || s3.gates.distance === true);
+ok("fallback: still never auto-captures without diagnostic quality", s3.shouldCapture !== true);
+V.CFG.lensConfirmFallback = false;
+
+// QualityEngine — image quality (fundus + vessels), not disease structures
 const q = V.QualityEngine.score(good);
-ok("quality: good frame accepted", q.accepted === true && q.overall >= 65 && q.reasons.length === 0);
-const qBad = V.QualityEngine.score({ focus: 0.1, exposure: 0.1, reflection: 0.9, retinaConf: 0 });
-ok("quality: bad frame rejected + reasons", qBad.accepted === false && qBad.reasons.indexOf("poor_focus") >= 0 && qBad.reasons.indexOf("retina_not_visible") >= 0);
+ok("quality: good frame accepted, no reasons", q.accepted === true && q.overall >= 65 && q.reasons.length === 0 && q.subscores.fundusVisibility >= 0.8);
+const qBad = V.QualityEngine.score({ focus: 0.1, exposure: 0.1, reflection: 0.9 });
+ok("quality: bad frame rejected + fundus/vessel reasons", qBad.accepted === false && qBad.reasons.indexOf("poor_focus") >= 0 && qBad.reasons.indexOf("fundus_not_visible") >= 0 && qBad.reasons.indexOf("no_vessels_detected") >= 0);
 
 // BestFrameSelector
 const bfs = V.BestFrameSelector.select([{ metrics: { focus: 0.2 } }, { metrics: good }, { metrics: { focus: 0.5 } }]);
-ok("bestFrame: picks the good frame", bfs.best === 1 && bfs.scores.length === 3);
+ok("bestFrame: picks the good frame + fundus/vessel picks", bfs.best === 1 && bfs.scores.length === 3 && bfs.bestFundus === 1 && bfs.bestVessel === 1);
 ok("bestFrame: empty → -1", V.BestFrameSelector.select([]).best === -1);
 
 // MockRetinaModel determinism + swap interface
@@ -98,6 +109,12 @@ ok("findings: validate ok", V.validate.findings(built).ok === true);
 ok("findings: validate catches bad", V.validate.findings({}).ok === false);
 
 // Coach
+// rotate coaching from phone roll
+const cueRot = V.Coach.cueFor(V.STATE.OPTIMIZING, { rollState: "cw", roll: 30, focus: 0.9, exposure: 0.9, reflection: 0.1, motion: 0.05 });
+ok("coach: phone rolled cw → rotate counter-clockwise cue", cueRot.arrow === "rot_ccw" && /counter-clockwise/i.test(cueRot.voice));
+// direction from the observed fundus field offset
+const cueFund = V.Coach.cueFor(V.STATE.LOCATING_FUNDUS, { fundusVisible: true, fundusCenter: { x: -0.6, y: 0.1 }, fundusSize: 0.6, distanceState: "ok" });
+ok("coach: fundus offset left → move left", cueFund.arrow === "left");
 const cue = V.Coach.cueFor(V.STATE.CENTERING_PUPIL, { pupilDir: { x: 0.8, y: 0.1 } });
 ok("coach: centering emits right arrow", cue.arrow === "right" && !!cue.text && !!cue.voice);
 const cueReady = V.Coach.cueFor(V.STATE.READY, good);
@@ -207,10 +224,12 @@ ok("fundx: delete-scan wired", /function deleteScan\(/.test(fj) && /data-fx="del
 // ---- M5 Guided Training Mode --------------------------------------------
 const FXt = loadFundx("1");
 ok("training: seven levels defined", FXt._levels().length === 7);
-ok("training: level names in order", FXt._levels()[0].key === "find_eye" && FXt._levels()[6].key === "full_capture");
+ok("training: level names in order", FXt._levels()[0].key === "find_eye" && FXt._levels()[6].key === "diagnostic_capture");
 ok("training: L1 needs eye", FXt._levelAchieved(1, { eye: true }, {}) === true && FXt._levelAchieved(1, { eye: false }, {}) === false);
 ok("training: L2 needs pupil", FXt._levelAchieved(2, { pupil: true }, {}) === true);
+ok("training: L3 needs working distance (not lens)", FXt._levelAchieved(3, { distance: true }, {}) === true && FXt._levelAchieved(3, {}, {}) === false);
 ok("training: L4 needs red reflex", FXt._levelAchieved(4, { redReflex: true }, {}) === true && FXt._levelAchieved(4, {}, {}) === false);
+ok("training: L5 needs the fundus view (not a lens)", FXt._levelAchieved(5, { fundus: true }, {}) === true && FXt._levelAchieved(5, {}, {}) === false);
 ok("training: L7 needs readiness.ready", FXt._levelAchieved(7, {}, { ready: true }) === true && FXt._levelAchieved(7, {}, { ready: false }) === false);
 ok("fundx: training screen wired", /function screenTraining\(/.test(fj) && /screen === "training"/.test(fj) && /data-fx="level"/.test(fj));
 

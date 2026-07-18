@@ -209,11 +209,14 @@ the absence of trained models are recorded here with rationale:
   the jsDelivr CDN on first camera use, with graceful fallback to heuristic-only if it
   cannot load. Vendoring the assets locally (see `assets/vendor/mediapipe/README.md`) is a
   documented follow-up for full offline support; no UI/contract impact either way.
-- **Live retina/disc/macula signals are simulated** — until a real on-device fundus
-  detector exists, `fundx-detect.js` derives retina/disc/macula/FOV presence from image
-  quality + stability (`SimRetina`) so a beginner can be guided to Capture-Ready. This is a
-  swappable provider (`DetectorHub.setRetinaSignalProvider`); real detection replaces it
-  with no engine/UI/contract change. Clearly a proxy, not true detection.
+- **Acquisition redesigned to observable optical/image-quality cues (no lens detection).**
+  Supersedes the earlier simulated `SimRetina` gating. The state machine progresses on
+  eye/pupil (MediaPipe), working distance, red reflex, real **circular-fundus** + **vessel**
+  heuristics, focus/exposure/glare/motion, and phone **roll**, and auto-captures only when a
+  composite **diagnostic-quality** score is met. Lens power (20D/28D/40D) is never identified
+  or required; an optional operator-confirm fallback (`smd_fundx_lens_confirm`, default off)
+  only un-sticks a stalled setup phase and never bypasses the real image-quality gate. Live
+  disc/macula remain an optional findings-level provider seam (mock → Vertex on the capture).
 - **Voice coaching (TTS)** — off by default; Web Speech where available; reliable-iOS TTS
   (`@capacitor-community/text-to-speech`) is a documented fast-follow, not in this MVP.
 

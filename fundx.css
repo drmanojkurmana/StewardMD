@@ -272,3 +272,7 @@
 #fundxRoot .fundx-consent-h .rds-icon { font-size: 20px; }
 #fundxRoot .fundx-consent p { margin: 8px 0 12px; font-weight: 500; font-size: 12.5px; line-height: 1.5; color: var(--rds-ink, var(--ink)); }
 #fundxRoot .fundx-consent .fundx-actions { margin-top: 0; }
+
+/* ============ optional operator-confirm fallback (stall only, config-gated) ============ */
+#fundxRoot .fundx-fallback { display: flex; align-items: center; gap: 6px; width: fit-content; margin: 10px auto 0; padding: 9px 15px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; background: rgba(0,0,0,.42); color: #fff; font-weight: 700; font-size: 13px; cursor: pointer; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+#fundxRoot .fundx-fallback .rds-icon { font-size: 17px; }
