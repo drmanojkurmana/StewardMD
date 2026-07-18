@@ -550,6 +550,11 @@
       var d = JSON.parse(localStorage.getItem(RESUME_KEY) || "null");
       localStorage.removeItem(RESUME_KEY);   // one-shot — consume it so it only fires on this launch
       if (!d || !d.act || !d.at || (Date.now() - d.at) > RESUME_MAX_MS) return;
+      // Do NOT auto-reopen the ICU/Ward dashboard on launch — it yanked the user straight into a
+      // patient (with an auto-sync "labs synced" flash) on every open. Home shows a "Resume ICU
+      // patient" card instead, so returning is one deliberate tap. Lightweight tool overlays
+      // (calculators/drugs/etc.) still resume — they are quick and do not auto-sync.
+      if (d.act === "icu" || d.act === "ward") return;
       setTimeout(function () {
         try {
           // ICU/Ward: resume the exact screen + sub-tab (falls back to a plain open if unavailable).
