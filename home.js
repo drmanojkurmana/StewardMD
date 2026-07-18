@@ -1409,7 +1409,6 @@
         '<div class="hv-acct-name">' + smdEsc(nm) + '</div>' +
         (em ? '<div class="hv-acct-email">' + smdEsc(em) + '</div>' : '') +
         '<div class="hv-acct-badge">' + dot + acctProviderLabel(a, true) + '</div>' +
-        '<button class="hv-acct-btn" data-acct="pro" type="button">✨ StewardMD Pro</button>' +
         '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button>' +
         '<button data-acct="delete" type="button" ' + dangerBtn + '>Delete account &amp; data</button></div>';
     } else {
@@ -1425,8 +1424,6 @@
     var s = sheetEl();
     var so = s.querySelector('[data-acct="signout"]');
     if (so) so.addEventListener("click", function () { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(openAccount, 150); });
-    var pro = s.querySelector('[data-acct="pro"]');
-    if (pro) pro.addEventListener("click", function () { try { if (window.SMD_PRO && SMD_PRO.openPaywall) SMD_PRO.openPaywall("account"); } catch (e) {} });
     var si = s.querySelector('[data-acct="signin"]');
     if (si) si.addEventListener("click", function () { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} setTimeout(openAccount, 900); });
     var del = s.querySelector('[data-acct="delete"], [data-acct="erase"]');
@@ -1675,6 +1672,8 @@
     if (cl) cl.addEventListener("click", closeSheet);
   }
   function openSubscription() {
+    // Prefer the full Pro paywall (plans + PhonePe checkout); fall back to the simple notice below.
+    try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall("menu"); return; } } catch (e) {}
     openSheet('<div class="hv-sh-t">Subscription</div>' +
       '<div style="text-align:center;padding:6px 4px 2px">' +
         '<div style="font:800 30px/1 var(--hfont);color:var(--hp)"><span style="text-decoration:line-through;color:var(--hmut);font-size:19px;font-weight:700">₹999 / year</span>&nbsp;&nbsp;Free</div>' +

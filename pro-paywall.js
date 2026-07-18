@@ -150,6 +150,10 @@
   function attach() { if (!window.SMD_PRO) return setTimeout(attach, 300); window.SMD_PRO.openPaywall = openPaywall; window.SMD_PRO.refresh = refresh; }
   attach();
 
+  // Deep-link: ?pro=1 / ?pro=open / #pro opens the paywall directly (shareable URL).
+  if (/[?&]pro=(1|open|upgrade)\b/.test(location.search) || location.hash === "#pro") {
+    setTimeout(openPaywall, 800);
+  }
   // After returning from PhonePe (?pro=return), reopen the sheet and poll for the grant to land.
   if (/[?&]pro=return/.test(location.search)) {
     setTimeout(function () {
