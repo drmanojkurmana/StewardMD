@@ -88,7 +88,8 @@
     { id: "expanded", title: "Expanded Harrison KB", sub: "+268 reference diseases as candidates", def: false, key: "smd_kb_expanded" },
     { id: "ghis", title: "GHIS Ward Sync", sub: "Live inpatient labs & radiology", def: true, key: "smd_ghis_ward" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
-    { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" }
+    { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
+    { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" }
   ];
   function setToggle(id, key, on) {
     try {
