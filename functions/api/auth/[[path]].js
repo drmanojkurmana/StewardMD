@@ -45,6 +45,16 @@ async function authed(request, env) {
 }
 
 export async function onRequestPost(context) {
+  try {
+    return await handle(context);
+  } catch (e) {
+    // never surface a raw platform error; 500 (not 502) passes through Cloudflare with our JSON body
+    try { console.warn("[auth] exception:", String((e && (e.stack || e.message)) || e)); } catch (x) {}
+    return json({ ok: false, error: "server-error" }, 500);
+  }
+}
+
+async function handle(context) {
   var request = context.request, env = context.env;
   var store = kv(env);
   if (!store) return json({ ok: false, error: "kv-unavailable" }, 500);
@@ -67,8 +77,10 @@ export async function onRequestPost(context) {
     try { await store.put(otpKey(who.uid), JSON.stringify(rec), { expirationTtl: TTL }); } catch (e) { return json({ ok: false, error: "store-failed" }, 500); }
     var sent = await emailOtp(env, { email: who.email, name: who.name, code: code, minutes: 10 });
     if (!sent || sent.ok === false) {
-      // don't leak whether the address exists; surface a generic soft error but keep the code stored
-      return json({ ok: false, error: "email-failed" }, 502);
+      // Soft-fail with 200 + ok:false so the client can show "tap Resend". NOTE: must NOT use a 502
+      // here — Cloudflare's edge replaces any 502 from a Function with its own error page, so the
+      // JSON never reaches the client. The code stays stored (resend re-sends the same-window code).
+      return json({ ok: false, error: "email-failed" });
     }
     return json({ ok: true, sent: true, ttl: TTL, to: who.email.replace(/^(.).*(@.*)$/, "$1***$2") });
   }
