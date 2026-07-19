@@ -1423,6 +1423,10 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
 <script defer src="/sidebar-redesign.js?v=gold461"></script>
+<!-- Settings ▸ Apple Watch page (SMD_APPLE_WATCH). Additive; the sidebar's Apple Watch row
+     opens it. Auto-detects pairing via the WatchBridge plugin; degrades to an info card on web.
+     Must load after sidebar-redesign.js so the row's action resolves. -->
+<script defer src="/watch-settings.js?v=gold475"></script>
 <!-- Guided tour (SMD_TOUR): first-run interactive onboarding + one-time contextual tips.
      Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
      home.js + account.js so it can read the home DOM and the signed-in account. -->
