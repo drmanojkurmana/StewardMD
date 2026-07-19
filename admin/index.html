@@ -50,6 +50,15 @@
   .foot{display:flex;gap:8px;margin-top:9px}
   .approve{background:var(--grn);color:#fff}.reject,.del{background:none;border:1px solid var(--line);color:var(--red)}
   .hint{font:500 12px var(--f);color:var(--mut);line-height:1.55}
+  .md-prev-wrap{margin-top:10px}
+  .md-prev-h{font:700 10.5px var(--f);color:var(--mut);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+  .md-prev{border:1px dashed var(--line);border-radius:12px;padding:12px 14px;background:var(--bg);font:500 14px var(--f);color:var(--ink);line-height:1.6;max-height:360px;overflow:auto}
+  .md-prev .dt-h{font:800 14.5px var(--f);color:var(--ink);margin:13px 0 5px;letter-spacing:-.01em}
+  .md-prev .dt-h:first-child{margin-top:0}
+  .md-prev .dt-p{margin:8px 0}.md-prev .dt-p:first-child{margin-top:0}
+  .md-prev .dt-ul{margin:5px 0 9px;padding-left:20px}
+  .md-prev .dt-ul>li{margin:4px 0}
+  .md-prev b{font-weight:800;color:var(--ink)}
   .stat{display:inline-block;margin:6px 14px 6px 0;font:700 22px var(--f)}.stat span{display:block;font:600 11px var(--f);color:var(--mut);text-transform:uppercase;letter-spacing:.03em}
   a{color:var(--tl)}code{background:var(--tls);color:var(--tl);border-radius:5px;padding:1px 5px;font-size:12px}
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(146px,1fr));gap:12px;margin-bottom:16px}
@@ -139,8 +148,9 @@
           <div class="hint" style="margin:2px 0 2px">Fill manually, or let the AI box above populate this. Publishing pushes to all subscribed devices in the chosen specialty.</div>
           <label for="nTitle">Title *</label>
           <input id="nTitle" maxlength="200" placeholder="e.g. FDA approves new β-lactamase inhibitor">
-          <label for="nBody">Details</label>
-          <textarea id="nBody" maxlength="4000" placeholder="Short, verified summary (shown on the card + as the push body)."></textarea>
+          <label for="nBody">Details <span class="hint" style="font-weight:500">— use <code>**bold**</code>, <code>• </code> bullets, and <code>**Heading:**</code> lines; the app renders them.</span></label>
+          <textarea id="nBody" maxlength="4000" placeholder="**Lead sentence with key terms in bold.**&#10;&#10;**Section heading:**&#10;• First practical point&#10;• Second point"></textarea>
+          <div class="md-prev-wrap"><div class="md-prev-h">Preview — how it looks in the app</div><div id="nPreview" class="md-prev"><span class="hint">Type above, or run Autoclassify — the rendered preview shows here.</span></div></div>
           <div class="row">
             <div><label>Type</label><select id="nType"><option value="general">📣 General</option><option value="guideline">📋 Guideline</option><option value="drug_approval">✅ Drug approval</option><option value="safety_alert">⚠️ Safety alert</option><option value="trial">🔬 Major trial</option></select></div>
             <div><label>Specialty (who gets it)</label><select id="nWs"><option value="internal_medicine">Internal Medicine</option><option value="surgery">Surgery</option><option value="ent">ENT</option><option value="ophthalmology">Ophthalmology</option><option value="obstetrics_gynaecology">Obstetrics &amp; Gynaecology</option><option value="urology">Urology</option><option value="dentistry_omfs">Dentistry / OMFS</option><option value="paediatrics">Paediatrics</option></select></div>
@@ -276,6 +286,21 @@
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
   function tok(){ var u=auth&&auth.currentUser; return u?u.getIdToken():Promise.resolve(null); }
   function say(id,k,t){ var m=$(id); if(m){m.className="msg "+(k||"");m.textContent=t||"";} }
+  // Light markdown → HTML preview (mirrors home.js nMd; escape-first, safe): **bold**, "• " bullets, bold colon-headings.
+  function nEscA(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+  function nMdInlineA(t){ return nEscA(t).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>").replace(/__([^_]+)__/g,"<b>$1</b>"); }
+  function nMdA(src){ var out=[],list=[],para=[];
+    function fL(){ if(list.length){ out.push('<ul class="dt-ul">'+list.join("")+"</ul>"); list=[]; } }
+    function fP(){ if(para.length){ out.push('<p class="dt-p">'+para.join(" ")+"</p>"); para=[]; } }
+    String(src||"").replace(/\r/g,"").split("\n").forEach(function(raw){ var ln=raw.trim();
+      if(!ln){ fL(); fP(); return; }
+      var b=ln.match(/^[•\-\*]\s+(.+)$/); if(b){ fP(); list.push("<li>"+nMdInlineA(b[1])+"</li>"); return; }
+      fL(); var hb=ln.match(/^\*\*(.+?)\*\*:?$/); var ch=/:$/.test(ln)&&ln.replace(/\*\*/g,"").length<=64&&ln.split(/\s+/).length<=9;
+      if(hb||ch){ fP(); out.push('<div class="dt-h">'+nMdInlineA((hb?hb[1]:ln.replace(/:$/,"")).trim())+"</div>"); return; }
+      para.push(nMdInlineA(ln)); });
+    fL(); fP(); return out.join(""); }
+  function nRenderPreview(){ var el=$("nPreview"),ta=$("nBody"); if(!el||!ta)return; var v=(ta.value||"").trim();
+    el.innerHTML = v ? nMdA(v) : '<span class="hint">Type above, or run Autoclassify — the rendered preview shows here.</span>'; }
 
   // auth-aware fetch
   function api(path,opts){ return tok().then(function(t){ if(!t) throw new Error("not-signed-in"); opts=opts||{}; opts.headers=Object.assign({"Authorization":"Bearer "+t},opts.headers||{}); return fetch(path,opts).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};},function(){return{s:r.status,d:{}};});}); }); }
@@ -324,7 +349,7 @@
         $("aiClassify").disabled=false; $("aiPush").disabled=false;
         if(x.s!==200||!x.d||!x.d.ok){ say("aiMsg","err",x.s===401?"Not an owner.":("Failed: "+((x.d&&x.d.error)||x.s))); return; }
         var dft=x.d.draft||{};
-        $("nTitle").value=dft.title||""; $("nBody").value=dft.body||"";
+        $("nTitle").value=dft.title||""; $("nBody").value=dft.body||""; nRenderPreview();
         if(dft.type) $("nType").value=dft.type;
         if(dft.workspace) $("nWs").value=dft.workspace;
         $("nImp").value=dft.importance||"normal";
@@ -338,13 +363,14 @@
   }
   $("aiClassify").onclick=function(){ aiRunClassify(false); };
   $("aiPush").onclick=function(){ aiRunClassify(true); };
+  try { var _nb=$("nBody"); if(_nb){ _nb.addEventListener("input", nRenderPreview); nRenderPreview(); } } catch(e){}
 
   // ---- Notifications (publish) ----
   function nPublish(fromAi){
     var t=$("nTitle").value.trim(); if(!t){say("nMsg","err","Title required.");return;} say("nMsg","","Publishing…");
     var ty=$("nType").value;
     api("/api/updates",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:t,body:$("nBody").value,type:(ty==="general"?"":ty),category:TYPE2CAT[ty]||"general",workspace:$("nWs").value,importance:$("nImp").value,source:$("nSrc").value,url:$("nUrl").value,pinned:$("nPin").checked,structured:_aiStructured})})
-      .then(function(x){ if(x.s===200&&x.d.ok){say("nMsg","ok","✅ Published & pushed.");$("nTitle").value="";$("nBody").value="";$("nUrl").value="";$("nSrc").value="";$("nPin").checked=false;_aiStructured=null; if(fromAi){$("aiUrl").value="";$("aiPrompt").value="";say("aiMsg","ok","✅ Published & pushed.");} nLoad();} else say("nMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); })
+      .then(function(x){ if(x.s===200&&x.d.ok){say("nMsg","ok","✅ Published & pushed.");$("nTitle").value="";$("nBody").value="";$("nUrl").value="";$("nSrc").value="";$("nPin").checked=false;_aiStructured=null;nRenderPreview(); if(fromAi){$("aiUrl").value="";$("aiPrompt").value="";say("aiMsg","ok","✅ Published & pushed.");} nLoad();} else say("nMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); })
       .catch(function(){say("nMsg","err","Sign in first.");});
   }
   function nSync(){ say("nMsg","","Running sync…"); api("/api/updates/sync",{method:"POST"}).then(function(x){ if(x.s===200&&x.d.ok!==false){say("nMsg","ok","✅ new="+(x.d.new||0)+" updated="+(x.d.updated||0)+" unchanged="+(x.d.unchanged||0));nLoad();} else say("nMsg","err","Failed: "+(x.d.error||x.s)); }); }
