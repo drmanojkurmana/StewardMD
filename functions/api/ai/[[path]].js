@@ -389,6 +389,37 @@ function renderGroundedPrompt(pkg) {
   if (rf.calculators && rf.calculators.length) refLine.push("calculators: " + rf.calculators.join(", "));
   if (rf.icuProtocols && rf.icuProtocols.length) refLine.push("ICU modules: " + rf.icuProtocols.join(", "));
   if (refLine.length) { L.push("\n=== REFERENCES (by reference only) ==="); L.push(refLine.join(" | ")); }
+  // Antibiotic-stewardship STRUCTURE (curated). pkg.refs.stewardship carries the coverage matrix,
+  // empiric/narrowing regimens, de-escalation guidance and toxicity/severity drivers — but was
+  // dropped here (only drug/calculator/ICU refs were serialised), so "when can I de-escalate?" /
+  // "what's the coverage matrix?" fell back to general knowledge. Sibling of the dose-grounding bug
+  // (#482/#483). Emitted compactly (clip + caps) to stay inside MAX_IN_CHARS.
+  const stw = (rf.stewardship || []).filter(Boolean);
+  if (stw.length) {
+    L.push("\n=== ANTIBIOTIC STEWARDSHIP (curated — use for de-escalation, narrowing & coverage questions) ===");
+    stw.slice(0, 2).forEach((s) => {
+      if (s.framework && s.framework.length) L.push("Principles: " + s.framework.slice(0, 4).map((x) => clip(x, 200)).join(" "));
+      if (s.deescalation) L.push("De-escalation: " + clip(s.deescalation, 400));
+      const cm = s.coverageMatrix;
+      if (cm && cm.organisms && cm.organisms.length && cm.drugs && cm.drugs.length && cm.grid && cm.grid.length) {
+        L.push("Coverage matrix (organism → " + cm.drugs.map((d) => clip(d, 40)).join(" / ") + "):");
+        cm.organisms.slice(0, 8).forEach((org, i) => {
+          const row = cm.grid[i] || [];
+          L.push("   • " + clip(org, 60) + ": " + cm.drugs.map((d, j) => clip(d, 40) + " " + (row[j] == null ? "?" : clip(String(row[j]), 20))).join(", "));
+        });
+        if (cm.completeness) L.push("   completeness: " + clip(cm.completeness, 200));
+        if (cm.gaps && cm.gaps.length) L.push("   gaps: " + cm.gaps.slice(0, 4).map((g) => clip(g, 160)).join("; "));
+      }
+      (s.regimens || []).slice(0, 3).forEach((rg) => {
+        const drugs = (rg.drugs || []).slice(0, 4).map((d) => {
+          const dose = [d.dose, d.route, d.frequency, d.duration && ("for " + d.duration)].filter(Boolean).map((x) => clip(x, 120)).join(" · ");
+          return d.drug + (dose ? " (" + dose + ")" : "") + (d.coverage ? " — covers " + clip(d.coverage, 120) : "");
+        });
+        if (drugs.length) L.push((rg.label || "Regimen") + ": " + drugs.join("; "));
+      });
+      if (s.toxicityFactors && s.toxicityFactors.length) L.push("Severity/toxicity drivers: " + s.toxicityFactors.slice(0, 12).map((x) => clip(x, 40)).join(", "));
+    });
+  }
   if (pkg.question) L.push("\n=== CLINICIAN QUESTION ===\n" + clip(pkg.question, 500));
   // Phase 2 — numbered SOURCES for per-claim citations + table formatting hint. The client builds
   // this list (identical numbering to the footer it renders) so [n] markers line up exactly.
