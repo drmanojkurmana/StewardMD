@@ -1460,6 +1460,11 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
 <script src="/voice.js?v=gold994" defer></script>
 <script src="/recent.js?v=gold983" defer></script>
+<!-- Experimental Access framework (window.SMD_DEVICE + window.SMD_XACCESS) — the one-code /
+     one-device beta unlock gate. Loaded before FundX so its tile/Settings entry can gate on it.
+     All validation is server-side (/api/experimental/*); the client keeps only a signed token. -->
+<script src="/device-id.js?v=xa1" defer></script>
+<script src="/experimental.js?v=xa1" defer></script>
 <!-- FundX AI · retinal-imaging module (additive, flag-gated smd_fundx, DEFAULT OFF;
      enable with ?fundx=1 or Settings). Vision Engine core (fundx-vision.js) + local
      persistence (fundx-store.js) + UI/overlay (fundx.js). Loaded after image-engine,

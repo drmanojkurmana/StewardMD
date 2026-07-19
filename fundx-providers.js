@@ -41,6 +41,17 @@
     };
   }
 
+  // Gather the Experimental Access headers: the signed FundX activation token (X-XA-Token, proves a
+  // live one-device beta activation server-side) + the Firebase ID token (uid, for owner bypass +
+  // per-identity metering). Both best-effort — absent when not signed in / not activated.
+  function xaAuthHeaders() {
+    var h = {};
+    try { var t = window.SMD_XACCESS && SMD_XACCESS.token && SMD_XACCESS.token("fundx"); if (t) h["X-XA-Token"] = t; } catch (e) {}
+    var idp = Promise.resolve(null);
+    try { var u = window.firebase && firebase.auth && firebase.auth().currentUser; if (u && u.getIdToken) idp = u.getIdToken().catch(function () { return null; }); } catch (e) {}
+    return idp.then(function (tok) { if (tok) h["Authorization"] = "Bearer " + tok; return h; }, function () { return h; });
+  }
+
   // Cloud vision provider — POSTs the image to a configurable FundX backend endpoint that
   // proxies the real model (e.g. Vertex/Gemini multimodal, Cerebras-hosted, custom). Real
   // production call; unavailable until configure({endpoint}) is set.
@@ -54,8 +65,12 @@
       analyze: function (input, ctx) {
         if (!cfg.endpoint) throw NotConfiguredError(id);
         var body = { image: (input && input.imageDataUrl) || null, metrics: (input && input.metrics) || null, model: cfg.model, ctx: ctx || {} };
-        var headers = Object.assign({ "content-type": "application/json" }, cfg.headers || {});
-        return fetch(cfg.endpoint, { method: "POST", headers: headers, body: JSON.stringify(body) })
+        // Experimental Access: attach the signed FundX activation token (X-XA-Token) + the Firebase
+        // ID token so the server can enforce the one-device beta gate on the compute path itself.
+        return xaAuthHeaders().then(function (auth) {
+          var headers = Object.assign({ "content-type": "application/json" }, cfg.headers || {}, auth);
+          return fetch(cfg.endpoint, { method: "POST", headers: headers, body: JSON.stringify(body) });
+        })
           .then(function (r) { if (!r.ok) throw new Error(id + " HTTP " + r.status); return r.json(); })
           .then(function (j) {
             var f = (j && j.findings) || j || {};
