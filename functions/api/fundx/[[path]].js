@@ -34,12 +34,14 @@ function authorise(request, env) {
   return o === "https://stewardmd.in" || o === "https://www.stewardmd.in" || o === "https://localhost" || o === "capacitor://localhost" || o === "";
 }
 
-// Experimental Access enforcement for the beta AI compute: the caller must present a valid
-// activation token (X-XA-Token) bound to a live one-device activation — the SAME server-authoritative
-// gate the UI shows — or be an owner (who tests freely). Set EXPERIMENTAL_ENFORCE_FUNDX="0" to
-// disable (e.g. during migration). Without this, the one-code/one-device system would be UI-only.
+// Experimental Access enforcement for the beta AI compute. OPT-IN: the compute is gated ONLY when
+// EXPERIMENTAL_ENFORCE_FUNDX="1", so the framework can ship in the OFF state (existing testers keep
+// working) and enforcement is flipped on once codes are issued + test devices activated. When
+// enforced, the caller must be an owner (tests freely) or present a valid activation token
+// (X-XA-Token) bound to a live one-device activation — the SAME server-authoritative gate the UI
+// shows. Until it is enabled, FundX compute is ungated (as it is today), so enable it to lock access.
 async function betaGate(request, env) {
-  if (env.EXPERIMENTAL_ENFORCE_FUNDX === "0") return { ok: true };
+  if (env.EXPERIMENTAL_ENFORCE_FUNDX !== "1") return { ok: true };
   try { if (await ownerOK(request, env)) return { ok: true }; } catch (e) {}
   const tok = request.headers.get("X-XA-Token") || "";
   try { const acc = await checkActive(env, "fundx", tok); if (acc && acc.active) return { ok: true }; } catch (e) {}

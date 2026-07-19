@@ -103,21 +103,19 @@ await (async () => {
   r = await Router.onRequest(ctx("PUT", "/api/fundx/vision", { origin: "" }));
   ok("router: non-POST to vision → 405", r.status === 405);
 
-  // Experimental Access: the compute path is beta-gated by default. Without a valid activation
-  // (X-XA-Token) or owner, it must 403 — this is the server-side enforcement the framework exists for.
-  r = await Router.onRequest(ctx("POST", "/api/fundx/vision", { origin: "", body: { image: "data:image/jpeg;base64,AAAA" } }));
-  ok("router: beta gate ON + no activation → 403 beta_locked", r.status === 403 && (await r.json()).code === "beta_locked");
+  // Experimental Access enforcement is OPT-IN (EXPERIMENTAL_ENFORCE_FUNDX="1"). When ON, the compute
+  // must 403 without a valid activation/owner — the server-side gate the framework exists for.
+  r = await Router.onRequest(ctx("POST", "/api/fundx/vision", { origin: "", env: { EXPERIMENTAL_ENFORCE_FUNDX: "1" }, body: { image: "data:image/jpeg;base64,AAAA" } }));
+  ok("router: enforcement ON + no activation → 403 beta_locked", r.status === 403 && (await r.json()).code === "beta_locked");
 
-  // The rest exercise the COMPUTE path, so disable beta enforcement (the gate itself is tested above
-  // + in experimental.test.mjs). EXPERIMENTAL_ENFORCE_FUNDX="0" is the documented kill-switch.
-  const NOGATE = { EXPERIMENTAL_ENFORCE_FUNDX: "0" };
-  r = await Router.onRequest(ctx("POST", "/api/fundx/vision", { origin: "", env: NOGATE, body: { image: "data:image/jpeg;base64,AAAA" } }));
+  // Default (enforcement OFF) → the compute path runs; these exercise it.
+  r = await Router.onRequest(ctx("POST", "/api/fundx/vision", { origin: "", body: { image: "data:image/jpeg;base64,AAAA" } }));
   ok("router: POST /vision with no provider configured → 503 (graceful)", r.status === 503);
 
-  r = await Router.onRequest(ctx("POST", "/api/fundx/vision", { origin: "", env: NOGATE, body: { notimage: 1 } }));
+  r = await Router.onRequest(ctx("POST", "/api/fundx/vision", { origin: "", body: { notimage: 1 } }));
   ok("router: POST /vision invalid body → 400", r.status === 400);
 
-  r = await Router.onRequest(ctx("POST", "/api/fundx/clinical", { origin: "", env: NOGATE, body: { findings: { microaneurysms: 2 } } }));
+  r = await Router.onRequest(ctx("POST", "/api/fundx/clinical", { origin: "", body: { findings: { microaneurysms: 2 } } }));
   ok("router: POST /clinical with no provider → 503 (graceful)", r.status === 503);
 })();
 

@@ -79,11 +79,14 @@ status (active|revoked), activatedAt, revokedAt
   code for the new device.
 - **Rate-limited** per identity + IP on activate (defence in depth; guessing is already infeasible).
 - **Server-side compute enforcement (not just UI).** The protected resource — the FundX AI compute
-  endpoints `/api/fundx/{vision,clinical}` — requires a valid activation token (`X-XA-Token`, verified
-  against the live record via `checkActive`) or an owner login before running inference. Enforcement
-  is ON by default; `EXPERIMENTAL_ENFORCE_FUNDX="0"` is a kill-switch for migration. The client sends
-  the token automatically (`fundx-providers.js`). So the one-code/one-device gate genuinely restricts
-  the beta compute — a spoofed client cannot reach it.
+  endpoints `/api/fundx/{vision,clinical}` — can require a valid activation token (`X-XA-Token`,
+  verified against the live record via `checkActive`) or an owner login before running inference.
+  Enforcement is **opt-in**: set `EXPERIMENTAL_ENFORCE_FUNDX="1"` to turn it on. It ships **OFF** so
+  the framework can roll out without locking existing testers, then be enabled once codes are issued
+  and test devices activated. The client sends the token automatically (`fundx-providers.js`). Once
+  enabled, the one-code/one-device gate genuinely restricts the beta compute — a spoofed client
+  cannot reach it. **Until enabled, FundX compute is ungated (as it is today) — so enable it to
+  actually lock access.**
 - **Firestore rules** deny all client access; only the service account (which bypasses rules) reads
   or writes these collections.
 
@@ -135,7 +138,7 @@ User-facing messages are exactly: **"Invalid or expired code."** and **"This cod
 | `EXPERIMENTAL_TOKEN_SECRET` | HMAC key for activation tokens. Rotating it forces every device to re-verify (they auto-restore via `/status` if still bound). |
 | `EXPERIMENTAL_APP_TOKEN` | *(optional)* extra `X-App-Token` accepted from the app; the `Origin` gate already covers the native/web app. |
 | `EXPERIMENTAL_ACTIVATE_DAILY_CAP` | *(optional, default 30)* per-identity/IP activate attempts per day. |
-| `EXPERIMENTAL_ENFORCE_FUNDX` | *(default: enforce)* set to `"0"` to disable the server-side beta gate on `/api/fundx` (e.g. while migrating existing testers onto codes). Owners always bypass. |
+| `EXPERIMENTAL_ENFORCE_FUNDX` | *(default: OFF / opt-in)* set to `"1"` to enable the server-side beta gate on `/api/fundx` (requires an activation token or owner). Ships OFF so a rollout doesn't lock existing testers; enable it after issuing codes + activating test devices. Owners always bypass. |
 
 Already present and reused: `FIREBASE_SERVICE_ACCOUNT`, `FIREBASE_PROJECT_ID`, a KV binding
 (`MAIK_KV`/`CASES_KV`/… for rate-limit), `OWNER_EMAILS`.
