@@ -2398,7 +2398,7 @@
   var _lytesExp = {};   // which electrolyte cards are expanded in the Electrolytes tab
   function protocolCard(p, i) {
     var open = !!_openProto[i];
-    var head = '<button data-icu-act="proto:' + i + '" style="width:100%;text-align:left;background:none;border:none;padding:14px 15px;cursor:pointer;color:var(--ink);display:flex;align-items:center;gap:9px"><span style="font-size:18px">' + p.ic + '</span><b style="font:800 15px var(--font);flex:1">' + esc(p.title) + '</b><span style="color:var(--muted)">' + (open ? "▲" : "▼") + "</span></button>";
+    var head = '<button data-icu-act="proto:' + i + '" style="width:100%;text-align:left;background:none;border:none;padding:14px 15px;cursor:pointer;color:var(--ink);display:flex;align-items:center;gap:9px"><span style="font-size:18px">' + ico(({"🦠":"microbe","🩸":"droplet","🍬":"flask","🩹":"stomach","❤️":"heart","🧠":"brain","🫁":"lungs","⚡":"bolt","🌀":"brain","🫀":"lungs","💉":"syringe"})[p.ic] || "siren", p.ic) + '</span><b style="font:800 15px var(--font);flex:1">' + esc(p.title) + '</b><span style="color:var(--muted)">' + (open ? "▲" : "▼") + "</span></button>";
     var body = open ? '<div style="padding:0 15px 14px">' +
       '<div class="icu-sec-lbl" style="margin:2px 0 4px">Checklist</div>' + p.checklist.map(function (c) { return '<div class="icu-row"><span>' + esc(c) + "</span></div>"; }).join("") +
       (p.monitoring ? '<div class="icu-sec-lbl" style="margin:9px 0 4px">Monitoring</div>' + p.monitoring.map(function (c) { return '<div class="icu-row"><span>' + esc(c) + "</span></div>"; }).join("") : "") +
@@ -2895,7 +2895,7 @@
       var grid = '<div class="icu-vitals">' + Object.keys(map).map(function (k) { return vitalCard(labels[k], map[k].v, "", map[k].s); }).join("") + "</div>";
       // provenance line — where these electrolyte values came from + freshness
       var srcs = {}; keys.forEach(function (k) { var s = (_raw.src || {})[k]; if (s && L[k] != null) srcs[s.source] = Math.max(srcs[s.source] || 0, s.ts || 0); });
-      var srcLine = Object.keys(srcs).length ? '<div class="icu-src">' + Object.keys(srcs).map(function (s) { return "📎 " + esc(s) + " · " + fmtAgo(srcs[s]); }).join("  ·  ") + "</div>" : "";
+      var srcLine = Object.keys(srcs).length ? '<div class="icu-src">' + Object.keys(srcs).map(function (s) { return ico("link","📎") + " " + esc(s) + " · " + fmtAgo(srcs[s]); }).join("  ·  ") + "</div>" : "";
       grid += srcLine;
       // Correction guidance rendered INLINE (no redirect) — reuses the validated Electrolyte Engine
       // analyzers via ELYTE.analyze(). ICU labs are now stored in CONVENTIONAL (Indian) units
@@ -3252,7 +3252,7 @@
     var w = _raw.wardSync || {}; var loggedIn = false;
     try { loggedIn = !!localStorage.getItem("ghis_token"); } catch (e) {}
     var s;
-    if (w.connected && w.lastTs) s = { c: "ok", t: "🟢 Ward Sync connected · synced " + fmtAgo(w.lastTs) };
+    if (w.connected && w.lastTs) s = { c: "ok", t: '<span style="color:#16a34a">●</span> Ward Sync connected · synced ' + fmtAgo(w.lastTs) };
     else if (loggedIn) s = { c: "muted", t: "Ward Sync · no ward data for this patient" };
     else s = { c: "muted", t: "Sign in to Ward Sync to auto-fill this patient", act: "wardsync" };
     // Auto-fetch control — sits ON the Ward Sync status bar for a linked patient. Tapping opens the
@@ -3270,7 +3270,7 @@
     return '<div class="icu-ward-row">'
       + '<div class="icu-ward' + (s.c === "ok" ? " on" : "") + '"' + (s.act ? ' data-icu-act="' + s.act + '" style="cursor:pointer"' : "") + '>' + s.t + "</div>"
       + afCtl + '</div>'
-      + (w.newUpdate ? '<div class="icu-ward-new" data-icu-act="dismissupdate">🔵 New laboratory update detected — widgets refreshed. Tap to dismiss.</div>' : "");
+      + (w.newUpdate ? '<div class="icu-ward-new" data-icu-act="dismissupdate"><span style="color:#2563eb">●</span> New laboratory update detected — widgets refreshed. Tap to dismiss.</div>' : "");
   }
   // Ward-vs-manual conflicts (clinician resolves; never auto-overwritten).
   function renderConflicts() {
@@ -3334,9 +3334,9 @@
     return false;
   }
   function coachCard() {
-    return '<div class="icu-coach"><div class="icu-coach-h"><span>👋 How the ICU workstation works</span><button class="icu-coach-x" data-icu-act="coachdone" aria-label="Dismiss">✕</button></div>' +
+    return '<div class="icu-coach"><div class="icu-coach-h"><span>' + ico("info","👋") + ' How the ICU workstation works</span><button class="icu-coach-x" data-icu-act="coachdone" aria-label="Dismiss">' + ico("close","✕") + '</button></div>' +
       '<p class="icu-coach-p">Track one ICU patient — <b>enter, speak, or snap</b> their vitals &amp; labs to get instant interpretation, alerts, and a round-ready summary.</p>' +
-      '<ol class="icu-coach-steps"><li>Tap <b>＋ Add my patient</b> — type it, <b>🎤 speak it</b>, or <b>📷 snap a photo</b>.</li>' +
+      '<ol class="icu-coach-steps"><li>Tap <b>＋ Add my patient</b> — type it, <b>' + ico("mic","🎤") + ' speak it</b>, or <b>' + ico("camera","📷") + ' snap a photo</b>.</li>' +
       '<li>Review the values — nothing is applied until you confirm.</li>' +
       '<li>Read the alerts, trends &amp; round-ready summary across the tabs.</li></ol>' +
       '<button class="icu-btn" data-icu-act="coachdone">Got it</button></div>';
@@ -4023,7 +4023,7 @@
     wrap.setAttribute("style", "position:fixed;inset:0;z-index:20000;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center");
     wrap.innerHTML =
       '<div role="dialog" aria-label="Enable ICU task alerts" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25)">'
-      + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:6px">🔔 Get notified for ICU tasks</div>'
+      + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:6px">' + ico("bell","🔔") + ' Get notified for ICU tasks</div>'
       + '<div style="font:500 12.5px/1.55 var(--sans,system-ui);color:var(--slate,#5a7184)">Get notified the instant your consultant assigns you a task in this unit — even when the app is closed. You can turn this off anytime in Settings.</div>'
       + '<div style="display:flex;gap:10px;margin-top:14px">'
       + '<button id="icuPushLater" style="flex:1;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--panel,#fff);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>'
@@ -4233,7 +4233,7 @@
         var ini = v2Initials(isMe ? v2AccountName() : (m.name || title));
         var sub = title + (isMe ? " · you" : "");
         var acts = (canManage && !isMe && !isHead)
-          ? '<button class="icu-v2-memrm" data-icu-act="grpdesig:' + encodeURIComponent(m.uid) + '" aria-label="Change ' + esc(nm) + '’s designation">✎ Title</button>'
+          ? '<button class="icu-v2-memrm" data-icu-act="grpdesig:' + encodeURIComponent(m.uid) + '" aria-label="Change ' + esc(nm) + '’s designation">' + ico("edit","✎") + ' Title</button>'
             + '<button class="icu-v2-memrm" data-icu-act="grprm:' + encodeURIComponent(m.uid) + '" aria-label="Remove ' + esc(nm) + ' from this unit">Remove</button>'
           : "";
         var badge = isMe ? '<span class="icu-v2-member-state">You</span>'
@@ -4280,7 +4280,7 @@
     var txt = viewers.length ? (grpJoinNames(viewers.map(function (v) { return v.name; })) + (viewers.length === 1 ? " is" : " are") + " also viewing · " + (viewers.length + 1) + " viewing") : "Only you are viewing";
     return '<div class="icu-v2-presence">' + av + '<span class="icu-v2-presence-tx">' + esc(txt) + '</span>' + grpSyncHTML() + '</div>';
   }
-  function grpTlIcon(type) { var m = { round: "🩺", task: "✅", imaging: "🩻", abg: "🫁", vent: "🌬", pressor: "💉", note: "📝" }; return m[type] || "•"; }
+  function grpTlIcon(type) { var m = { round: "🩺", task: "✅", imaging: "🩻", abg: "🫁", vent: "🌬", pressor: "💉", note: "📝" }; var sv = { round: "pulse", task: "check", imaging: "xray", abg: "droplet", vent: "lungs", pressor: "syringe", note: "note" }; return m[type] ? ico(sv[type] || "note", m[type]) : "•"; }
   // Prepended to the Rounds tab in group mode — the LIVE instructions/tasks + append-only timeline
   // from subscribePatient, plus the reviewed state. (The no-type round-note composer is a later phase.)
   function grpRoundsPanel() {

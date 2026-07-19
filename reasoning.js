@@ -610,6 +610,7 @@
   var FW_LOW = {fever:1,headache:1,fatigue:1,weakness:1,malaise:1,tachycardia:1,tachypnea:1,rigors:1,cough:1,nauseaVomiting:1,myalgiaArthralgia:1,weightLoss:1,ageOver50:1};
   function fw(k) { return FW_VERYHIGH[k] ? 3 : (FW_LOW[k] ? 1 : 2); }
 
+  function rIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
   var GROUP_TAG = { "General / Vitals":"GEN","Respiratory":"RESP","Gastrointestinal":"GI","Genitourinary":"GU","Central Nervous System":"CNS","Cardiac":"CVS","Tropical Fever":"ID","Skin / Soft Tissue":"DERM","Sepsis / Oncology-Specific":"GEN" };
   var EXTRA_TAG = { headache:"CNS",thunderclapHeadache:"CNS",chestPain:"CVS",pleuriticChestPain:"RESP",exertionalChestPain:"CVS",dyspnea:"RESP",orthopnea:"CVS",palpitations:"CVS",backPain:"MSK",visualDisturbance:"CNS",polyarthralgia:"MSK",legSwellingUnilateral:"CVS",legSwellingBilateral:"CVS",calfTenderness:"CVS",raisedJVP:"CVS",bilateralCrackles:"RESP",asterixis:"HEP",ecgIschemia:"CVS",ketonemia:"ENDO",polyuriaPolydipsia:"ENDO",knownCAD:"CVS",knownHeartFailure:"CVS",hypertensionHx:"CVS",diabetesHx:"ENDO",steroidUse:"ENDO",drugOverdose:"TOX",anticoagulated:"HEME",atrialFibHx:"CVS",pulsatileMass:"CVS",hematemesis:"GI",hematuria:"GU",jointSwelling:"MSK",ascendingWeakness:"CNS",rigidity:"TOX",hypothermia:"GEN",bradycardia:"CVS",bradypnea:"RESP",miosisSecretions:"TOX",mucocutaneousBleeding:"HEME",oliguria:"RENAL",mucosalLesions:"DERM",facialSwelling:"GEN",sickleCellHx:"HEME",headInjury:"CNS",alcoholExcess:"GEN",ataxia:"CNS",proteinuria:"RENAL",jaundice:"HEP",rightUpperQuadrantPain:"HEP",murphySign:"HEP",ascites:"HEP",flankPain:"GU",dysuria:"GU",feverGU:"GU",costovertebralTenderness:"GU" };
   var FSYS = {}; // findingKey -> organ tag (populated in buildOntology)
@@ -1047,9 +1048,9 @@
         '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">🔬 Advanced workspace ▾</button>' +
         '<div id="dxAdv" class="dx-adv" style="display:none"></div>' +
         '<div class="dx-find-wrap">' +
-          '<button id="dxSpeak" class="dx-speak" type="button" aria-label="Speak about your patient — MaiK Scribe">🎤 Speak about your patient <span class="dx-speak-tag">MaiK Scribe</span></button>' +
+          '<button id="dxSpeak" class="dx-speak" type="button" aria-label="Speak about your patient — MaiK Scribe">' + rIco("mic") + ' Speak about your patient <span class="dx-speak-tag">MaiK Scribe</span></button>' +
           '<div class="dx-search-box">' +
-            '<input id="dxSearch" class="dx-search" type="text" placeholder="🔍 Search findings (e.g. pap → Papilledema, dys → Dysuria/Dysphagia)…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list">' +
+            '<input id="dxSearch" class="dx-search" type="text" placeholder="Search findings (e.g. pap → Papilledema, dys → Dysuria/Dysphagia)…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list">' +
             '<div id="dxSearchDrop" class="dx-search-drop" role="listbox" style="display:none"></div>' +
           '</div>' +
           '<div id="dxSel" class="dx-selected"></div>' +
@@ -1480,11 +1481,11 @@
     el.innerHTML =
       '<textarea id="dxFreeText" class="dx-free" rows="3" placeholder="Describe the case in plain text — e.g. 65M, 2 days fever, neck stiffness, photophobia, drowsy…"></textarea>' +
       '<div class="dx-adv-row">' +
-        '<button class="dx-adv-btn primary" id="dxExtract">✨ Extract findings</button>' +
-        '<button class="dx-adv-btn" id="dxSaveSess">💾 Save session</button>' +
-        '<button class="dx-adv-btn" id="dxExport">📋 Export</button>' +
-        '<button class="dx-adv-btn" id="dxPrint">🖨 Print</button>' +
-        '<button class="dx-adv-btn" id="dxShare">📤 Share</button>' +
+        '<button class="dx-adv-btn primary" id="dxExtract">' + rIco("spark") + ' Extract findings</button>' +
+        '<button class="dx-adv-btn" id="dxSaveSess">' + rIco("save") + ' Save session</button>' +
+        '<button class="dx-adv-btn" id="dxExport">' + rIco("copy") + ' Export</button>' +
+        '<button class="dx-adv-btn" id="dxPrint">' + rIco("print") + ' Print</button>' +
+        '<button class="dx-adv-btn" id="dxShare">' + rIco("share") + ' Share</button>' +
       '</div>' +
       (sessions.length ? '<div class="dx-sess-h">Saved sessions</div><div class="dx-sess">' + sessions.map(function (s, i) { return '<button class="dx-sess-item" data-i="' + i + '">' + esc(s.label) + ' <span>' + esc(s.when) + '</span></button>'; }).join("") + '</div>' : '') +
       (S.timeline.length ? '<div class="dx-tl-h">Reasoning timeline — leading diagnosis & confidence</div><div class="dx-tl">' + S.timeline.map(function (t, i) {
@@ -4376,7 +4377,7 @@
       var items = Array.prototype.slice.call(grid.children).filter(function (n) { return n.nodeType === 1; });
       if (items.length <= PROG_TOP) return;             // short list — leave as-is
       grid.setAttribute("data-smd-prog", "1");
-      var sb = document.createElement("input"); sb.className = "smd-find-search"; sb.type = "text"; sb.placeholder = "🔍 Search findings…";
+      var sb = document.createElement("input"); sb.className = "smd-find-search"; sb.type = "text"; sb.placeholder = "Search findings…";
       sb.addEventListener("input", function () { grid._smdQuery = sb.value; smdProgGrid(grid); });
       grid.parentNode.insertBefore(sb, grid); grid._smdSearch = sb;
       var more = document.createElement("button"); more.type = "button"; more.className = "smd-find-more";
@@ -5098,7 +5099,7 @@
         var tier = crcl < 15 ? "kidney failure / ESRD" : crcl < 30 ? "severe impairment" : crcl < 50 ? "moderate impairment" : "normal / mild";
         renalHead = esc("CrCl ≈ " + crcl + " mL/min (" + tier + ") — " + (crcl < 50 ? "renal dose reduction applies." : "no renal dose reduction needed.") + " Per-drug:");
       }
-      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + renalHead;
+      html += '<div class="smd-safety-row"><span class="smd-safety-ic">' + rIco("kidney") + '</span><div><b>Renal</b> ' + renalHead;
       if (rx.length) html += '<ul class="smd-safety-ul">' + rx.map(function (d) {
         var dose = (crcl !== null) ? smdRenalDoseFor(d.key, d.label, crcl) : null;
         var body;
@@ -5114,7 +5115,7 @@
       if (rx.length) html += '<ul class="smd-safety-ul">' + rx.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.hepatic || "see product label") + '</li>'; }).join("") + '</ul>';
       html += '</div></div>';
       // Cardiac: always shown.
-      html += '<div class="smd-safety-row"><span class="smd-safety-ic">' + (card.ok ? "✅" : "❤️") + '</span><div><b>Cardiac (QT)</b> ' + esc(card.text) + '</div></div>';
+      html += '<div class="smd-safety-row"><span class="smd-safety-ic">' + rIco(card.ok ? "check" : "heart") + '</span><div><b>Cardiac (QT)</b> ' + esc(card.text) + '</div></div>';
       // Alternatives: the syndrome's other regimens.
       if (alts.length) html += '<div class="smd-safety-row"><span class="smd-safety-ic">🔁</span><div><b>Alternatives</b><ul class="smd-safety-ul">' +
         alts.map(function (a) { return '<li><b>' + esc(a.drug) + '</b>' + (a.dose ? " — " + esc(a.dose) : "") + (a.duration ? " · " + esc(a.duration) : "") + (a.coverage ? '<br><span class="smd-safety-sub">' + esc(a.coverage) + '</span>' : "") + '</li>'; }).join("") + '</ul></div></div>';
@@ -5414,7 +5415,7 @@
       });
     } catch (_) {}
     var html = '<div id="smdTbCard" class="smd-tb-card">' +
-      '<div class="smd-tb-h">🫁 Tuberculosis treatment pathway</div>' +
+      '<div class="smd-tb-h">' + rIco("lungs") + ' Tuberculosis treatment pathway</div>' +
       '<div class="smd-tb-policy">NTEP India (primary) · WHO reference · advisory — clinician verifies</div>' +
       smdTbInputsHTML(e) +
       '<div id="smdTbLines"></div></div>';

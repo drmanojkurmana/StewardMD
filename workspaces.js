@@ -24,6 +24,11 @@
 (function () {
   "use strict";
 
+  // Shared inline-SVG catalog accessor → window.ICONS.get("name") yields <svg class="smd-ico">…</svg>.
+  // NOTE: this module declares a LOCAL `var ICONS` (specialty path map) further below which shadows
+  // the global catalog inside this IIFE, so we reach the catalog via window.ICONS explicitly here.
+  function wsIco(n){ return (window.ICONS && window.ICONS.get) ? window.ICONS.get(n) : ""; }
+
   function wsOn() {
     try {
       var q = location.search || "";
@@ -275,7 +280,7 @@
       h += '<button class="sw-opt" data-ws="' + r.id + '"><span class="ic">' + ic(ICONS[r.id]) + '</span>' +
         '<span class="tx"><span class="nm">' + r.name + '</span><span class="sb">' + r.subtitle + '</span></span>' +
         (r.status === "early_access" ? '<span class="ea">Early access</span>' : '') +
-        (r.id === cur ? '<span class="ck">✓</span>' : '') + '</button>';
+        (r.id === cur ? '<span class="ck">' + wsIco("check") + '</span>' : '') + '</button>';
     });
     h += '<div class="sw-auto"><div class="lb">Auto-select specialty</div>' +
       '<input id="swAuto" placeholder="Describe the presenting complaint…"/>' +
@@ -388,7 +393,7 @@
     var res = {}; try { res = _es.syn.assess(selSet()) || {}; } catch (e) { res = {}; }
     var lad = (typeof res.ladder === "number") ? res.ladder : -1;
     var h = '<div class="sw-card sw-out' + (res.emergency ? " emerg" : "") + '">';
-    if (res.emergency) h += '<div class="sw-emerg">⚠ Time-critical — escalate now</div>';
+    if (res.emergency) h += '<div class="sw-emerg">' + wsIco("warn") + ' Time-critical — escalate now</div>';
     h += '<div class="sw-catg">Step 4 · ' + (res.catg || "Select findings above") + '</div>';
     h += '<div class="lab">Step 5 · Management</div>';
     h += '<div class="sw-ladder">' + ABX_LADDER.map(function (x, i) { return '<div class="r ' + (i === lad ? "on" : (lad >= 0 ? "dim" : "")) + '"><span class="d" style="background:' + LADCOL[i] + '"></span>' + x + '</div>'; }).join("") + '</div>';
@@ -411,11 +416,11 @@
     // Point-of-care hand-off: jump into the stewardship / knowledge tools without leaving the flow.
     var poc = '<div class="sw-poc"><div class="lab">Take it further</div><div class="sw-pocrow">';
     if (lad >= 2) {
-      poc += '<button class="sw-pocbtn abx" data-poc="abx">💊 Antibiotic choice</button>';
-      poc += '<button class="sw-pocbtn" data-poc="ix">⚠ Interactions</button>';
+      poc += '<button class="sw-pocbtn abx" data-poc="abx">' + wsIco("pills") + ' Antibiotic choice</button>';
+      poc += '<button class="sw-pocbtn" data-poc="ix">' + wsIco("warn") + ' Interactions</button>';
     }
-    poc += '<button class="sw-pocbtn" data-poc="maik">✦ Ask MaiK</button>';
-    poc += '<button class="sw-pocbtn" data-poc="learn">📖 Learn more</button>';
+    poc += '<button class="sw-pocbtn" data-poc="maik">' + wsIco("spark") + ' Ask MaiK</button>';
+    poc += '<button class="sw-pocbtn" data-poc="learn">' + wsIco("book") + ' Learn more</button>';
     poc += '</div><div class="sw-pocnote">Antibiotic choice + dose per local antibiogram / ICMR &amp; the individual patient — these tools help you decide.</div></div>';
     h += poc;
     h += '<div class="sw-fb" id="swFb"><span class="q">Early access — was this helpful?</span>' +
@@ -467,7 +472,7 @@
       note: (o.note || "").slice(0, 500) };
     try { var K = "stewardmd_ws_fb_" + uid(), log = JSON.parse(localStorage.getItem(K) || "[]"); log.push(payload); if (log.length > 200) log = log.slice(-200); localStorage.setItem(K, JSON.stringify(log)); } catch (e) {}
     try { fetch("/api/ws-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), keepalive: true, cache: "no-store" }).catch(function () {}); } catch (e) {}
-    var fb = document.getElementById("swFb"); if (fb) fb.innerHTML = '<span class="sw-fbthanks">✓ Thanks — your feedback helps improve this.</span>';
+    var fb = document.getElementById("swFb"); if (fb) fb.innerHTML = '<span class="sw-fbthanks">' + wsIco("check") + ' Thanks — your feedback helps improve this.</span>';
   }
 
   /* ───────────────────────────── sidebar switcher (wrap SB.open) ───────────────────────────── */

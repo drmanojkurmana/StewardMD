@@ -17,6 +17,9 @@
 (function () {
   "use strict";
 
+  // Shared inline-SVG icon catalog (window.ICONS) → self-styled line icons replacing OS emoji.
+  function vfIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+
   /* Team bypass during rollout (mirrors account.js TEST_PRO_EMAILS). Leave BETA_VERIFY_ALL
    * false; trim the allowlist before public launch and rely on the claim. */
   var BETA_VERIFY_ALL = false;
@@ -163,7 +166,7 @@
 
       // 1) Auto-verified against NMC → big tick + full access (confirmation email sent server-side).
       if (data.status === "verified") {
-        setStatusMsg("success", "✓ Verified — Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). A confirmation email is on its way. Opening StewardMD…");
+        setStatusMsg("success", vfIco("check") + " Verified — Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). A confirmation email is on its way. Opening StewardMD…");
         try { await u.getIdToken(true); } catch (e) {}
         setTimeout(hideGate, 1200);
         return;
@@ -173,7 +176,7 @@
         var d = data.provisionalDays || 7;
         if (mode === "panel") { render("panel", { status: "pending", provisionalUntil: data.provisionalUntil }); submitting = false; return; }
         setStatusMsg("pending",
-          "✓ Certificate received. We couldn't auto-verify it instantly, so it's gone to our team for a quick manual check. " +
+          vfIco("check") + " Certificate received. We couldn't auto-verify it instantly, so it's gone to our team for a quick manual check. " +
           "You have <b>provisional access for " + d + " days</b> while we verify you — the <b>prescription generator stays locked</b> until then. " +
           "We'll email you once you're approved.");
         setTimeout(function () {
@@ -332,7 +335,7 @@
     var menu = $("sbMenu"); if (!menu || menu.querySelector("[data-smd-verify]")) return;
     var b = document.createElement("button");
     b.className = "sb-main sb-main-link"; b.setAttribute("data-smd-verify", "1");
-    b.innerHTML = '<span class="ic">🩺</span><span>Account &amp; Verification</span>';
+    b.innerHTML = '<span class="ic">' + vfIco("shield") + '</span><span>Account &amp; Verification</span>';
     b.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(openPanel, 80); });
     menu.insertBefore(b, menu.firstChild);
   }

@@ -17,6 +17,9 @@
 (function () {
   "use strict";
 
+  // Shared inline-SVG icon accessor (window.ICONS catalog); text-safe fallback for load-order safety.
+  function vcIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+
   function isIOS() { return /iP(hone|ad|od)/i.test(navigator.userAgent || ""); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function blobToDataURL(b) { return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(r.result); }; r.onerror = rej; r.readAsDataURL(b); }); }
@@ -178,23 +181,23 @@
     // Flag off / web ⇒ empty ⇒ MaiK Scribe is byte-for-byte unchanged (Fast only).
     var modeSel = whisperAvailable()
       ? '<div class="smdv-modes" role="tablist" aria-label="Dictation engine">' +
-          '<button class="smdv-mode on" data-mode="fast" role="tab">⚡ Fast</button>' +
-          '<button class="smdv-mode" data-mode="clinical" role="tab">🩺 Clinical</button>' +
+          '<button class="smdv-mode on" data-mode="fast" role="tab">' + vcIco("spark") + ' Fast</button>' +
+          '<button class="smdv-mode" data-mode="clinical" role="tab">' + vcIco("pulse") + ' Clinical</button>' +
         '</div><div class="smdv-mode-hint" id="smdvModeHint"></div>' +
         '<div class="smdv-model-mgr" id="smdvModelMgr"></div>'
       : "";
     root.innerHTML =
       '<div class="smdv-scrim" data-act="close"></div>' +
       '<div class="smdv-sheet" role="dialog" aria-modal="true" aria-label="MaiK Scribe voice intake">' +
-        '<div class="smdv-hd"><span class="smdv-ttl">🎤 MaiK Scribe</span><button class="smdv-x" data-act="close" aria-label="Close">✕</button></div>' +
+        '<div class="smdv-hd"><span class="smdv-ttl">' + vcIco("mic") + ' MaiK Scribe</span><button class="smdv-x" data-act="close" aria-label="Close">' + vcIco("close") + '</button></div>' +
         '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : target === "text" ? "Speak your question or notes — tap ✓ to drop the text into the chat." : "Describe your patient in plain speech — symptoms, signs, key numbers.") + '</div>' +
         modeSel +
         kindSel +
-        '<button class="smdv-rec" id="smdvRec">🎤 Tap to speak</button>' +
+        '<button class="smdv-rec" id="smdvRec">' + vcIco("mic") + ' Tap to speak</button>' +
         '<div class="smdv-eng" id="smdvEng"></div>' +
         '<textarea class="smdv-ta" id="smdvTa" rows="4" placeholder="Your words appear here — you can edit before extracting."></textarea>' +
         '<div class="smdv-disc">On-device speech stays private (only text is used). AI transcription/extraction sends audio/text to the server — the same as Photo scan. Nothing is applied until you review &amp; confirm.</div>' +
-        '<button class="smdv-extract" id="smdvExtract" disabled>' + (target === "text" ? "✓ Use this text" : "Extract &amp; fill") + '</button>' +
+        '<button class="smdv-extract" id="smdvExtract" disabled>' + (target === "text" ? vcIco("check") + " Use this text" : "Extract &amp; fill") + '</button>' +
         '<div class="smdv-review" id="smdvReview"></div>' +
       '</div>';
     document.body.appendChild(root);
@@ -206,7 +209,7 @@
         var mgr = root && root.querySelector("#smdvModelMgr");
         if (!mgr || !r || !r.installed) return;
         var mb = r.bytes ? Math.round(r.bytes / 1048576) : null;
-        mgr.innerHTML = '<button class="smdv-model-del" data-act="delmodel">🗑 Remove Clinical model' + (mb ? " (frees ~" + mb + " MB)" : "") + '</button>';
+        mgr.innerHTML = '<button class="smdv-model-del" data-act="delmodel">' + vcIco("trash") + ' Remove Clinical model' + (mb ? " (frees ~" + mb + " MB)" : "") + '</button>';
       }).catch(function () {});
     }
 
@@ -318,13 +321,13 @@
     var pt = res.patient || null;
     if (!keys.length && !unmatched.length) { reviewEl.innerHTML = '<div class="smdv-err">No findings recognised. Try rephrasing, or add them by hand.</div>'; return; }
     function render() {
-      var chips = keys.map(function (k) { return '<span class="smdv-chip" data-k="' + esc(k) + '">' + esc(labelOf[k] || k) + '<button class="smdv-chip-x" data-rm="' + esc(k) + '" aria-label="Remove">✕</button></span>'; }).join("");
+      var chips = keys.map(function (k) { return '<span class="smdv-chip" data-k="' + esc(k) + '">' + esc(labelOf[k] || k) + '<button class="smdv-chip-x" data-rm="' + esc(k) + '" aria-label="Remove">' + vcIco("close") + '</button></span>'; }).join("");
       reviewEl.innerHTML =
         (pt && (pt.age || pt.sex) ? '<div class="smdv-pt">Patient: ' + esc([pt.age ? pt.age + "y" : "", pt.sex || ""].filter(Boolean).join(" ")) + '</div>' : "") +
         '<div class="smdv-rv-h">Findings heard (' + keys.length + ') — tap ✕ to remove any that are wrong:</div>' +
         '<div class="smdv-chips">' + (chips || '<span class="smdv-muted">none</span>') + '</div>' +
         (unmatched.length ? '<div class="smdv-rv-h">Heard but not matched — add by hand if needed:</div><div class="smdv-unm">' + unmatched.map(function (u) { return '<span class="smdv-unmatched">' + esc(u) + '</span>'; }).join("") + '</div>' : "") +
-        '<button class="smdv-apply" id="smdvApply"' + (keys.length ? "" : " disabled") + '>＋ Add ' + keys.length + ' finding' + (keys.length === 1 ? "" : "s") + ' to reasoning</button>';
+        '<button class="smdv-apply" id="smdvApply"' + (keys.length ? "" : " disabled") + '>' + vcIco("plus") + ' Add ' + keys.length + ' finding' + (keys.length === 1 ? "" : "s") + ' to reasoning</button>';
       [].forEach.call(reviewEl.querySelectorAll("[data-rm]"), function (b) { b.addEventListener("click", function () { var k = b.getAttribute("data-rm"); keys = keys.filter(function (x) { return x !== k; }); render(); }); });
       var ap = reviewEl.querySelector("#smdvApply");
       if (ap) ap.addEventListener("click", function () {

@@ -29,6 +29,10 @@
 
   var TOUR_VERSION = 2;   // bumped from the legacy 8-step home tour → the unified welcome+app+ICU tour
 
+  // UI-chrome line-icon helper: returns the shared inline-SVG for a catalog name, or "" if the
+  // global catalog isn't loaded yet. Chrome emoji are swapped for these; clinical/prose glyphs stay.
+  function obIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+
   // ---- identity + persistence -------------------------------------------------------------
   function owner() {
     try { if (window.SMD_ACCOUNT && SMD_ACCOUNT.profile) { var p = SMD_ACCOUNT.profile(); if (p && p.email) return p.email; } } catch (e) {}
@@ -60,11 +64,11 @@
 
   // ---- tour content (mirrors StewardMD Tour.dc.html) --------------------------------------
   var ROLES = [
-    { id: "senior", label: "👴 Senior physician" },
+    { id: "senior", icon: "user", label: "Senior physician" },
     { id: "junior", label: "🩺 Junior / resident" },
-    { id: "icu", label: "🫀 ICU specialist" },
-    { id: "gp", label: "🏥 General physician" },
-    { id: "explore", label: "✨ Just exploring" }
+    { id: "icu", icon: "heart", label: "ICU specialist" },
+    { id: "gp", icon: "hospital", label: "General physician" },
+    { id: "explore", icon: "spark", label: "Just exploring" }
   ];
 
   // APP tour — targets the REAL home (rnav layout, scoped to #homeV2). Container-level selectors
@@ -359,7 +363,7 @@
     var body = (_run.live && s.liveBody) ? s.liveBody : s.body;
     var tap = isTapStep(s);
     _card.innerHTML =
-      '<div class="smdt-top"><div class="smdt-eyebrow"><span>' + esc(_run.icon) + "</span><span>STEP " + (_step + 1) + " OF " + n + "</span></div>" +
+      '<div class="smdt-top"><div class="smdt-eyebrow"><span>' + _run.icon + "</span><span>STEP " + (_step + 1) + " OF " + n + "</span></div>" +
         '<button class="smdt-skip" data-t="skip" aria-label="Skip tour">Skip</button></div>' +
       '<div class="smdt-bar"><i style="width:' + Math.round((_step + 1) / n * 100) + '%"></i></div>' +
       '<div class="smdt-title">' + esc(s.title) + "</div>" +
@@ -528,7 +532,7 @@
 
   function icuController(steps) {
     return {
-      id: "icu", icon: "🫀", live: true, steps: steps,
+      id: "icu", icon: obIco("heart"), live: true, steps: steps,
       scope: function () { return document.getElementById("icuRoot") || document; },
       resolve: function (s) { return s.live ? firstPresent(s.live, this.scope()) : null; },
       // Drive the REAL ICU into the right state for this step (open a patient / switch workspace+tab),
@@ -647,7 +651,7 @@
     injectCSS();
     if (!_welEl) { _welEl = document.createElement("div"); _welEl.className = "smdt-wel"; document.body.appendChild(_welEl); }
     _selRole = null;
-    var roles = ROLES.map(function (r) { return '<button class="smdt-role" data-role="' + r.id + '">' + esc(r.label) + "</button>"; }).join("");
+    var roles = ROLES.map(function (r) { return '<button class="smdt-role" data-role="' + r.id + '">' + (r.icon ? obIco(r.icon) + " " : "") + esc(r.label) + "</button>"; }).join("");
     _welEl.innerHTML =
       '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">' +
         '<div class="smdt-wel-ic">🧭</div>' +
@@ -693,7 +697,7 @@
     var s = getState(); s.icuTipSeen = true; setState(s);
     if (!_tipEl) { _tipEl = document.createElement("div"); _tipEl.className = "smdt-tip"; _tipEl.setAttribute("role", "dialog"); _tipEl.setAttribute("aria-label", "ICU tour tip"); document.body.appendChild(_tipEl); }
     _tipEl.innerHTML =
-      '<div class="smdt-tip-row"><span class="i">🫀</span><div><div class="smdt-tip-t">New to the ICU dashboard?</div><div class="smdt-tip-x">Take a 2-minute guided walkthrough of the full clinical workflow.</div></div></div>' +
+      '<div class="smdt-tip-row"><span class="i">' + obIco("heart") + '</span><div><div class="smdt-tip-t">New to the ICU dashboard?</div><div class="smdt-tip-x">Take a 2-minute guided walkthrough of the full clinical workflow.</div></div></div>' +
       '<div class="smdt-tip-btns"><button class="smdt-tip-b gho" data-tt="no">Not now</button><button class="smdt-tip-b pri" data-tt="go">Start the ICU tour</button></div>';
     _tipEl.style.display = "block";
     _tipEl.onclick = function (e) { var b = e.target.closest && e.target.closest("[data-tt]"); if (!b) return; hideTip(); if (b.getAttribute("data-tt") === "go") startIcuTour(); };
@@ -728,16 +732,16 @@
     function card(emoji, name, sub, tour) { return '<div class="smdt-rp-card"><span class="e">' + emoji + '</span><div class="m"><div class="n">' + esc(name) + '</div><div class="s">' + esc(sub) + '</div></div><button class="smdt-rp-go" data-rp="' + tour + '">Replay</button></div>'; }
     function soon(emoji, name) { return '<div class="smdt-rp-card soon"><span class="e">' + emoji + '</span><div class="m"><div class="n">' + esc(name) + '</div><div class="s">Coming soon</div></div><span class="soon-tag">Soon</span></div>'; }
     _replayEl.innerHTML =
-      '<div class="smdt-rp-head"><h2>About &amp; Help</h2><button class="smdt-rp-x" data-rp="close" aria-label="Close">✕</button></div>' +
+      '<div class="smdt-rp-head"><h2>About &amp; Help</h2><button class="smdt-rp-x" data-rp="close" aria-label="Close">' + obIco("close") + '</button></div>' +
       '<div class="smdt-rp-body">' +
         '<div class="smdt-rp-h">Guided tours</div><p class="smdt-rp-p">Replay any walkthrough at your own pace. Nothing you’ve entered is changed.</p>' +
         '<div class="smdt-rp-list">' +
-          card("👋", "First-launch welcome", "Role pick & warm intro · 30s", "welcome") +
+          card(obIco("info"), "First-launch welcome", "Role pick & warm intro · 30s", "welcome") +
           card("🧭", "App overview", "Find your way around home · 1 min", "app") +
-          card("🫀", "ICU Dashboard", "The full clinical workflow · 2 min", "icu") +
+          card(obIco("heart"), "ICU Dashboard", "The full clinical workflow · 2 min", "icu") +
         "</div>" +
         '<div class="smdt-rp-sec">MODULE TOURS</div>' +
-        '<div class="smdt-rp-list">' + soon("🧠", "Clinical Reasoning") + soon("🧮", "Calculators") + "</div>" +
+        '<div class="smdt-rp-list">' + soon(obIco("brain"), "Clinical Reasoning") + soon(obIco("calc"), "Calculators") + "</div>" +
       "</div>";
     _replayEl.style.display = "flex";
     _replayEl.onclick = function (e) {

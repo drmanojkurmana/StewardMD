@@ -82,9 +82,9 @@
       if (crLink) crLink.remove();
       if (drugLink) drugLink.remove();
       var topFrag = document.createDocumentFragment();
-      topFrag.appendChild(topBtn("🩺", "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} }));
-      topFrag.appendChild(topBtn("🏥", "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} }));
-      topFrag.appendChild(topBtn("🫀", "ICU Dashboard", false, function () { try { if (window.ICU && ICU.open) ICU.open(); else if (window.INF) INF.openDashboard(); else toast("ICU loading…"); } catch (e) {} }));
+      topFrag.appendChild(topBtn(svg("brain", "smd-ico"), "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} }));
+      topFrag.appendChild(topBtn(svg("hospital", "smd-ico"), "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} }));
+      topFrag.appendChild(topBtn(svg("pulse", "smd-ico"), "ICU Dashboard", false, function () { try { if (window.ICU && ICU.open) ICU.open(); else if (window.INF) INF.openDashboard(); else toast("ICU loading…"); } catch (e) {} }));
       menu.insertBefore(topFrag, menu.firstChild);
 
       // 1b) Clinical group (sbsub_clinical): fold Dx My Patient + Drugs Database in; drop the
@@ -93,8 +93,8 @@
       if (clin && !clin.querySelector("[data-smd-sub]")) {
         clin.querySelectorAll(".sb-subitem").forEach(function (b) { if (/New clinical decision/i.test(b.textContent)) b.style.display = "none"; });
         var cf = document.createDocumentFragment();
-        cf.appendChild(subItem("🩺", "Dx My Patient", function () { try { openDxChooser(); } catch (e) {} }, "data-smd-sub"));
-        cf.appendChild(subItem("🗄️", "Drugs Database", function () { try { if (window.MEDDB) MEDDB.openList(); else toast("Drugs loading…"); } catch (e) {} }, "data-smd-sub"));
+        cf.appendChild(subItem(svg("brain", "smd-ico"), "Dx My Patient", function () { try { openDxChooser(); } catch (e) {} }, "data-smd-sub"));
+        cf.appendChild(subItem(svg("pills", "smd-ico"), "Drugs Database", function () { try { if (window.MEDDB) MEDDB.openList(); else toast("Drugs loading…"); } catch (e) {} }, "data-smd-sub"));
         clin.insertBefore(cf, clin.firstChild);
       }
 
@@ -110,13 +110,13 @@
         var engineBody = swRow("reason", "Reasoning v2", "Live differential in the workflow", flag("smd_reason_v2", true)) +
           swRow("expanded", "Expanded Harrison KB", "+268 reference diseases as candidates", flag("smd_kb_expanded", false)) +
           swRow("safety", "Organ-safety overlay", "Renal / hepatic / QT flags on antibiotic advice", flag("smd_safety_overlay", true)) +
-          '<div class="smd-nav-note">⚗️ Experimental — for clinician review.</div>';
+          '<div class="smd-nav-note">' + svg("flask", "smd-ico") + ' Experimental — for clinician review.</div>';
         var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", false)) +
           swRow("maikperf", "Show AI response time", "Prints MaiK first-token + full-answer time under each answer (diagnostics)", flag("smd_maik_perf", false)) +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           (window.SMD_IS_NATIVE ? swRow("autofetch", "Auto-fetch reports", "Keep a linked patient's labs/imaging fresh on launch & resume · GHIS login stored on THIS device only (Keychain/Keystore), per-patient consent · turn on/off per patient from the Ward Sync bar", flag("smd_autofetch", true)) : "") +
-          '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync</button>';
+          '<button class="smd-nav-btn" data-open-ghis="1">' + svg("hospital", "smd-ico") + ' Open Ward Sync</button>';
         var toolsBody = swRow("whisper", "Clinical Dictation (Beta)", "On-device Whisper voice→text in MaiK Scribe · native app only (model downloads on first use)", flag("smd_whisper_clinical_dictation", false)) +
           ((window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
             ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
@@ -181,7 +181,7 @@
         if (aboutHead) aboutHead.style.display = "none";
         aboutBody.style.display = "none";
         // App tour — replay the guided onboarding
-        refBody.appendChild(subItem("🧭", "App tour", function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, "data-smd-sub"));
+        refBody.appendChild(subItem(svg("info", "smd-ico"), "App tour", function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, "data-smd-sub"));
         // Rename the Reference header to "Reference & Help"
         var hs = refHead.querySelectorAll("span");
         for (var k = 0; k < hs.length; k++) { if (!hs[k].classList.contains("ic") && !hs[k].classList.contains("chev")) { hs[k].textContent = "Reference & Help"; break; } }
@@ -280,7 +280,9 @@
     target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/>',
     link: '<path d="M10 14a3.5 3.5 0 0 0 5 0l3-3a3.5 3.5 0 0 0-5-5l-1.5 1.5"/><path d="M14 10a3.5 3.5 0 0 0-5 0l-3 3a3.5 3.5 0 0 0 5 5l1.5-1.5"/>',
     clear: '<path d="M8 20H5a2 2 0 0 1-1.4-3.4L14 6a2 2 0 0 1 2.8 0L21 10.2a2 2 0 0 1 0 2.8L13 21H8Z"/><path d="M13 21H8l-3.6-3.6"/><path d="M9 11l4 4"/>',
-    xray: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 7a3 3 0 0 0-2 5c0 1.6 2 2 2 4M12 7a3 3 0 0 1 2 5c0 1.6-2 2-2 4"/><path d="M8 11h8M8.5 14h7"/>'
+    xray: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 7a3 3 0 0 0-2 5c0 1.6 2 2 2 4M12 7a3 3 0 0 1 2 5c0 1.6-2 2-2 4"/><path d="M8 11h8M8.5 14h7"/>',
+    bolt: '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-6Z"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.9 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.9-3.8-9S9.5 5.6 12 3Z"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
@@ -404,8 +406,8 @@
     if (out.querySelector("#smdCaseShare")) return;
     var bar = document.createElement("div");
     bar.id = "smdCaseShare"; bar.className = "smd-caseshare";
-    bar.innerHTML = '<button type="button" data-cs="share">📤 Share case</button>'
-                  + '<button type="button" data-cs="pdf">🖨 Save as PDF</button>';
+    bar.innerHTML = '<button type="button" data-cs="share">' + svg("share", "smd-ico") + ' Share case</button>'
+                  + '<button type="button" data-cs="pdf">' + svg("print", "smd-ico") + ' Save as PDF</button>';
     out.insertBefore(bar, out.firstChild);
     // listeners handled by ONE delegated document listener (watchCaseShare) — survives re-renders.
   }
@@ -1355,12 +1357,12 @@
       sum = sum || { balance: SMD_KU.balance(), tiers: [], byType: {}, streak: 0, nextTier: null, progressPct: 0 };
       var LBL = { read: "Reading", "case": "Cases", calc: "Calculators", maik: "MaiK", streak: "Streak" };
       var brk = Object.keys(sum.byType || {}).map(function (k) { return '<span>' + (LBL[k] || k) + ': ' + (sum.byType[k] || 0) + '</span>'; }).join("");
-      var tiers = (sum.tiers || []).map(function (t) { return '<div class="ku-tier' + (t.unlocked ? ' on' : '') + '"><span>' + (t.unlocked ? '✓ ' : '') + t.ku + ' KU</span><span class="kt-r">' + t.label + '</span></div>'; }).join("");
+      var tiers = (sum.tiers || []).map(function (t) { return '<div class="ku-tier' + (t.unlocked ? ' on' : '') + '"><span>' + (t.unlocked ? svg("check", "smd-ico") + ' ' : '') + t.ku + ' KU</span><span class="kt-r">' + t.label + '</span></div>'; }).join("");
       var goal = sum.nextTier ? ((sum.nextTier.ku - (sum.balance || 0)) + ' KU to ' + sum.nextTier.label) : 'Top tier unlocked 🎉';
       openSheet('<div class="ku-panel">'
         + '<div class="ku-h">Knowledge Points</div>'
         + '<div class="ku-bal"><span class="kudia">◆</span> ' + (sum.balance || 0) + ' <span style="font-size:15px;color:var(--hmut,#64748b)">KU</span></div>'
-        + '<div class="ku-sub">' + (sum.streak ? '🔥 ' + sum.streak + '-day streak · ' : '') + goal + '</div>'
+        + '<div class="ku-sub">' + (sum.streak ? svg("bolt", "smd-ico") + ' ' + sum.streak + '-day streak · ' : '') + goal + '</div>'
         + '<div class="ku-bar"><i style="width:' + (sum.progressPct || 0) + '%"></i></div>'
         + '<div class="ku-tiers">' + tiers + '</div>'
         + (brk ? '<div class="ku-brk">' + brk + '</div>' : '')
@@ -1714,7 +1716,7 @@
       '</div>' +
       '<div style="margin-top:14px;border:1px solid var(--hbd);border-radius:14px;padding:14px;background:var(--hbg)">' +
         '<div style="font:700 12px var(--hfont);text-transform:uppercase;letter-spacing:.05em;color:var(--hmut);margin-bottom:8px">Included</div>' +
-        '<div style="font:500 13px/1.9 var(--hfont);color:var(--hink)">✓ Full antibiotic decision engine<br>✓ 1,465-drug database — doses &amp; brands<br>✓ 400+ calculators · guidelines · ICU tools<br>✓ Clinical Reasoning</div>' +
+        '<div style="font:500 13px/1.9 var(--hfont);color:var(--hink)">' + svg("check", "smd-ico") + ' Full antibiotic decision engine<br>' + svg("check", "smd-ico") + ' 1,465-drug database — doses &amp; brands<br>' + svg("check", "smd-ico") + ' 400+ calculators · guidelines · ICU tools<br>' + svg("check", "smd-ico") + ' Clinical Reasoning</div>' +
       '</div>' +
       '<button class="hv-reset" style="background:var(--hp);color:#fff;border-color:var(--hp);margin-top:14px" data-close="1">Continue — it\'s free</button>');
     var subClose = sheetEl().querySelector("[data-close]");
@@ -1789,7 +1791,7 @@
       '<div class="maik-disc">' + MK.shield + '<span>Grounded &middot; AI-generated, verify independently</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
       '<div class="maik-cmp">' +
-        '<button class="maik-extract" id="maikExtract" type="button">🩺 Extract findings for Clinical Reasoning →</button>' +
+        '<button class="maik-extract" id="maikExtract" type="button">' + svg("brain", "smd-ico") + ' Extract findings for Clinical Reasoning →</button>' +
         '<div class="maik-cmp-in">' +
           '<button class="maik-mic" id="maikMic" type="button" title="Dictate" aria-label="Dictate to MaiK">' + MK.mic + '</button>' +
           '<textarea class="maik-ta" id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea>' +
@@ -2141,13 +2143,13 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     //    share one implementation). Opt-in, one call, clearly labelled non-StewardMD.
     function maikRunWeb(container, q, srcEl) {
       if (srcEl) srcEl.disabled = true;
-      container.insertAdjacentHTML("beforeend", '<div class="maik-webbusy" style="margin-top:8px;color:var(--slate-soft,#64748b)">🌐 Researching the web…</div>');
+      container.insertAdjacentHTML("beforeend", '<div class="maik-webbusy" style="margin-top:8px;color:var(--slate-soft,#64748b)">' + svg("globe", "smd-ico") + ' Researching the web…</div>');
       var busy = container.querySelector(".maik-webbusy");
       return window.SMD_AI.research(q).then(function (r) {
         if (busy) busy.remove();
         if (r && r.text) {
           var bd = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(String(r.text)) : maikEscH(String(r.text));
-          container.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div style="font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;margin-bottom:5px">🌐 Web-sourced (Google) · not StewardMD-verified</div>' + bd + '</div>');
+          container.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div style="font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;margin-bottom:5px">' + svg("globe", "smd-ico") + ' Web-sourced (Google) · not StewardMD-verified</div>' + bd + '</div>');
         } else {
           container.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>');
         }
@@ -2156,7 +2158,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       });
     }
     function maikWebChipEl(q) {
-      var rb = document.createElement("button"); rb.className = "maik-chip"; rb.style.marginTop = "8px"; rb.textContent = "🔎 Research on the web";
+      var rb = document.createElement("button"); rb.className = "maik-chip"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research on the web";
       rb.addEventListener("click", function () { maikRunWeb(rb.parentNode || body, q, rb); });
       return rb;
     }
@@ -2187,7 +2189,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     function maikFollowupsHTML(pkg, question, assume) {
       var chips = maikFollowupChips(pkg, question), html = "";
       chips.forEach(function (c) { html += '<button class="maik-fu" data-maik-q="' + maikEscH(c.q) + '">' + maikEscH(c.label) + '</button>'; });
-      if (assume) html += '<button class="maik-fu" data-maik-web="' + maikEscH(question) + '">🔎 Different topic — search the web</button>';
+      if (assume) html += '<button class="maik-fu" data-maik-web="' + maikEscH(question) + '">' + svg("search", "smd-ico") + ' Different topic — search the web</button>';
       return html ? '<div class="maik-followups">' + html + '</div>' : "";
     }
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
@@ -2268,7 +2270,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
       _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
-      var think = bubble("ai", '<span class="maik-thinking">✨ Searching StewardMD knowledge<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>');
+      var think = bubble("ai", '<span class="maik-thinking">' + svg("spark", "smd-ico") + ' Searching StewardMD knowledge<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>');
       Promise.resolve()
         .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
         .then(function () {
@@ -2425,7 +2427,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       var catalog = []; try { catalog = DX.findingCatalog() || []; } catch (e) {}
       extractBtn.disabled = true; extractBtn.textContent = "Extracting findings…";
       SMD_AI.extract(q, "reasoning", catalog).then(function (r) {
-        extractBtn.disabled = false; extractBtn.textContent = "🩺 Extract findings for Clinical Reasoning →";
+        extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →";
         var raw = (r && r.findings) || [];
         var keys = raw.map(function (f) { return typeof f === "string" ? f : (f && f.key); }).filter(Boolean);
         if (!keys.length) { bubble("ai", '<div class="maik-welcome">I couldn’t map that to any findings in StewardMD’s catalog. Try naming the symptoms, signs, or labs explicitly — e.g. “fever, neck stiffness, photophobia”.</div>'); return; }
@@ -2436,7 +2438,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         var ob = document.createElement("button"); ob.className = "maik-chip"; ob.style.marginTop = "8px"; ob.textContent = "Open Clinical Reasoning →";
         ob.addEventListener("click", function () { close(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else if (window.DX && DX.open) DX.open({ workspace: true }); } catch (e) {} });
         d.appendChild(ob); scroll(); extractBtn.classList.remove("show");
-      }).catch(function () { extractBtn.disabled = false; extractBtn.textContent = "🩺 Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
+      }).catch(function () { extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
     });
     qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; refreshExtract(); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
@@ -2773,7 +2775,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     var branchOpts = '<option value="all">All specialties</option>' + BRANCH_ORDER.map(function (b) { return '<option value="' + b + '"' + (_feedBranch === b ? " selected" : "") + '>' + nEsc(BRANCH_LBL[b]) + '</option>'; }).join("");
     _notifRoot.innerHTML =
       '<div class="ntf-top-bar"><button class="ntf-close" id="ntfClose" aria-label="Close">‹ Close</button>' +
-        '<div class="ntf-h">🔔 Alerts</div><button class="ntf-refresh" id="ntfRefresh" aria-label="Refresh" title="Refresh">↻</button></div>' +
+        '<div class="ntf-h">' + svg("bell","smd-ico") + ' Alerts</div><button class="ntf-refresh" id="ntfRefresh" aria-label="Refresh" title="Refresh">↻</button></div>' +
       '<div class="ntf-tabs"><button class="ntf-tab" data-tab="notices">Notifications</button>' +
         '<button class="ntf-tab on" data-tab="updates">Medical Updates</button></div>' +
       '<div class="ntf-scroll" id="ntfScroll">' +
@@ -3028,7 +3030,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       return;
     }
     if (pushIsOn()) {
-      el.innerHTML = '<div class="ntf-push-on"><span>🔔 Phone alerts are <b>on</b> for this device</span><button class="ntf-push-btn ghost" data-push="off">Turn off</button></div>';
+      el.innerHTML = '<div class="ntf-push-on"><span>' + svg("bell","smd-ico") + ' Phone alerts are <b>on</b> for this device</span><button class="ntf-push-btn ghost" data-push="off">Turn off</button></div>';
     } else if (("Notification" in window) && Notification.permission === "denied") {
       el.innerHTML = '<div class="ntf-push-hint">🔕 Notifications are blocked in your device settings. Enable them for StewardMD to get phone alerts.</div>';
     } else {
@@ -3076,9 +3078,9 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     P.checkPermissions().then(function (res) {
       var st = res && res.receive;
       if (st === "granted") {
-        el.innerHTML = '<div class="ntf-push-on"><span>🔔 Phone alerts are <b>on</b> for this device</span></div>';
+        el.innerHTML = '<div class="ntf-push-on"><span>' + svg("bell","smd-ico") + ' Phone alerts are <b>on</b> for this device</span></div>';
       } else if (st === "denied") {
-        el.innerHTML = '<div class="ntf-push-hint">🔕 Notifications are blocked. Turn them on in <b>iOS Settings › StewardMD › Notifications</b>.</div>';
+        el.innerHTML = '<div class="ntf-push-hint">' + svg("warn","smd-ico") + ' Notifications are blocked. Turn them on in <b>iOS Settings › StewardMD › Notifications</b>.</div>';
       } else {
         el.innerHTML = '<div class="ntf-push-off"><span>Get a phone alert when new medical updates arrive</span><button class="ntf-push-btn" data-pushnative="on">Turn on notifications</button></div>';
         var b = el.querySelector("[data-pushnative]"); if (b) b.addEventListener("click", function () { enablePushNative(); });
