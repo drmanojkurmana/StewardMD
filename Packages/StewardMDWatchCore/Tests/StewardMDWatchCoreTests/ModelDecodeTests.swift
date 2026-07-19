@@ -77,6 +77,20 @@ final class ModelDecodeTests: XCTestCase {
         XCTAssertFalse(s.isValid(now: Date(timeIntervalSince1970: 100)))
     }
 
+    // MARK: Watchlist vitals (relayed) decode — present and absent
+    func testWatchlistEntryDecodesVitals() throws {
+        let j = #"{"id":"P12","name":"Okafor","bed":"12","news2":9,"flag":"septic shock","updatedAt":1.0,"vitals":[{"id":"HR","value":"112","abnormal":true},{"id":"SpO2","value":"91","abnormal":true}]}"#
+        let e = try decode(WatchlistEntry.self, j)
+        XCTAssertEqual(e.vitals?.count, 2)
+        XCTAssertEqual(e.vitals?.first?.id, "HR")
+        XCTAssertEqual(e.vitals?.first?.abnormal, true)
+    }
+    func testWatchlistEntryDecodesWithoutVitals() throws {
+        let j = #"{"id":"P7","name":"Dubois","bed":"7","news2":6,"flag":null,"updatedAt":1.0}"#
+        let e = try decode(WatchlistEntry.self, j)
+        XCTAssertNil(e.vitals)
+    }
+
     // MARK: Watchlist NEWS2 severity bands
     func testWatchlistSeverityBands() {
         func sev(_ n: Int) -> SMDHapticTier {

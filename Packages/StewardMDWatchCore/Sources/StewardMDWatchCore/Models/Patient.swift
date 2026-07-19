@@ -9,10 +9,15 @@ public struct WatchlistEntry: Codable, Sendable, Identifiable, Equatable, Hashab
     public let news2: Int?
     public let flag: String?          // short reason, e.g. "K+ rising"
     public let updatedAt: Double?
+    /// Latest vitals for the patient-glance detail (relayed from the phone's ICU
+    /// state). Nil when unknown (e.g. a GHIS-worklist-only patient).
+    public let vitals: [Vital]?
 
-    public init(id: String, name: String, bed: String?, news2: Int?, flag: String?, updatedAt: Double?) {
+    public init(id: String, name: String, bed: String?, news2: Int?, flag: String?,
+                updatedAt: Double?, vitals: [Vital]? = nil) {
         self.id = id; self.name = name; self.bed = bed
         self.news2 = news2; self.flag = flag; self.updatedAt = updatedAt
+        self.vitals = vitals
     }
 
     /// NEWS2 → severity band (design colors): >=7 red, 5–6 amber, else green.
@@ -26,7 +31,7 @@ public struct WatchlistEntry: Codable, Sendable, Identifiable, Equatable, Hashab
 }
 
 /// A single vital tile on the patient-glance screen.
-public struct Vital: Codable, Sendable, Identifiable, Equatable {
+public struct Vital: Codable, Sendable, Identifiable, Equatable, Hashable {
     public let id: String             // "HR", "BP", "SpO2", "Temp"
     public let value: String
     public let abnormal: Bool

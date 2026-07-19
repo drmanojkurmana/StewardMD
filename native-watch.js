@@ -38,10 +38,31 @@
     catch (e) { return []; }
   }
 
+  // Latest vitals snapshot for a patient-glance tile grid. state.vitals is a
+  // time-series array; take the most recent by ts (fallback last). Returns the
+  // classic four tiles (HR / BP / SpO2 / Temp), omitting absent values, with a
+  // simple abnormal flag for coloring. null when no vitals are recorded.
+  function vitalsFrom(st) {
+    try {
+      var arr = (st && st.vitals) || [];
+      if (!arr.length) return null;
+      var lv = arr[0];
+      for (var i = 1; i < arr.length; i++) { if ((arr[i].ts || 0) >= (lv.ts || 0)) lv = arr[i]; }
+      var out = [];
+      function num(x) { return (typeof x === "number" && isFinite(x)); }
+      if (num(lv.hr)) out.push({ id: "HR", value: String(Math.round(lv.hr)), abnormal: lv.hr < 50 || lv.hr > 110 });
+      if (num(lv.sbp)) out.push({ id: "BP", value: Math.round(lv.sbp) + (num(lv.dbp) ? "/" + Math.round(lv.dbp) : ""), abnormal: lv.sbp < 100 || lv.sbp > 180 });
+      if (num(lv.spo2)) out.push({ id: "SpO2", value: String(Math.round(lv.spo2)), abnormal: lv.spo2 < 93 });
+      if (num(lv.temp)) out.push({ id: "Temp", value: (Math.round(lv.temp * 10) / 10).toFixed(1), abnormal: lv.temp < 36 || lv.temp > 38 });
+      return out.length ? out : null;
+    } catch (e) { return null; }
+  }
+
   // Patient watchlist for the watch's "My patients". Prefers the ICU roster
-  // (the only source carrying a computed NEWS2, via state.scores), falling back
-  // to the GHIS worklist (demographics/bed, no score). All reads are synchronous,
-  // in-memory, and side-effect-free (never trigger a fetch). Capped for the WC payload.
+  // (the only source carrying a computed NEWS2, via state.scores, and vitals),
+  // falling back to the GHIS worklist (demographics/bed, no score/vitals). All
+  // reads are synchronous, in-memory, and side-effect-free (never trigger a fetch).
+  // Capped for the WC payload.
   function watchlist() {
     var out = [];
     try {
@@ -58,7 +79,8 @@
             name: String(e.name || pt.name || "Patient"),
             bed: String(e.bed || pt.bed || ""),
             news2: (typeof n2 === "number") ? Math.round(n2) : null,
-            flag: String(e.dx || pt.diagnosis || "") || null
+            flag: String(e.dx || pt.diagnosis || "") || null,
+            vitals: vitalsFrom(st)
           });
         });
       }
