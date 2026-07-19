@@ -107,6 +107,9 @@ public class FundxDepthPlugin extends Plugin {
     private volatile int gpuFrameCount = 0;
     private int analyzeEvery = 6;                    // in GPU mode, analyse ~1 of every 6 draw frames
     private volatile int gpuTexW = 0, gpuTexH = 0;   // chosen high-res GPU camera-texture size (preview sharpness)
+    private HandlerThread gpuEncThread;              // OFF the GL thread: JPEG-encode + base64 the analysis
+    private Handler gpuEncHandler;                   // frame here so the render loop stays smooth (60fps)
+    private volatile boolean gpuEncBusy = false;     // drop analysis frames if the encoder is behind (no backlog)
 
     // ---- Capability detection (runtime, no manual configuration) --------------------------
     @PluginMethod
@@ -240,6 +243,10 @@ public class FundxDepthPlugin extends Plugin {
             try {
                 analyzeEvery = Math.max(1, every);
                 gpuFrameCount = 0;
+                gpuEncBusy = false;
+                gpuEncThread = new HandlerThread("fundx-gpu-enc");   // off-GL-thread frame encoder
+                gpuEncThread.start();
+                gpuEncHandler = new Handler(gpuEncThread.getLooper());
                 webView.setBackgroundColor(Color.TRANSPARENT);   // let the GL surface behind show through
                 ViewGroup parent = (ViewGroup) webView.getParent();
                 bgRenderer = new FundxBackgroundRenderer();
@@ -291,6 +298,7 @@ public class FundxDepthPlugin extends Plugin {
 
         @Override public void onSurfaceChanged(GL10 gl, int width, int height) {
             GLES20.glViewport(0, 0, width, height);
+            bgRenderer.setViewport(width, height);
             if (gpuSession != null) gpuSession.setDisplayGeometry(displayRotationSurface(), width, height);
         }
 
@@ -307,10 +315,13 @@ public class FundxDepthPlugin extends Plugin {
         }
     }
 
-    // Depth + pose + a throttled low-res CPU image for the analysis pipeline (NOT the preview).
+    // On the GL thread: sample depth + pose + COPY the camera YUV (all fast). The heavy JPEG encode +
+    // base64 + notify are handed to the encoder thread so the 60fps render loop never stalls (that was
+    // the lag). If the encoder is still busy, this frame's image is dropped — the preview stays smooth
+    // and analysis just runs at a slightly lower rate.
     private void gpuAnalyze(Frame frame) {
         try {
-            Camera camera = frame.getCamera();
+            final Camera camera = frame.getCamera();
             Double meters = null; double conf = 0.0;
             Image depthImg = null;
             try {
@@ -320,34 +331,49 @@ public class FundxDepthPlugin extends Plugin {
             } catch (Throwable t) { /* depth not ready */ }
             finally { if (depthImg != null) depthImg.close(); }
 
-            String camImg = null;
-            if (streamImage) {
-                Image ci = null;
-                try {
-                    ci = frame.acquireCameraImage();
-                    int rot = ((sensorOrientation - displayRotationDegrees()) % 360 + 360) % 360;
-                    camImg = encodeYuvToJpegDataUrl(ci, rot);
-                } catch (Throwable t) { /* not ready */ }
-                finally { if (ci != null) ci.close(); }
-            }
-            JSObject data = new JSObject();
-            data.put("gpu", true);                       // JS: preview is the native surface — do not draw a canvas
-            if (camImg != null) data.put("cameraImage", camImg);
-            if (meters != null) { data.put("distanceMeters", meters); data.put("distanceConfidence", conf); }
-            boolean tracking = camera.getTrackingState() == com.google.ar.core.TrackingState.TRACKING;
+            final boolean tracking = camera.getTrackingState() == com.google.ar.core.TrackingState.TRACKING;
+            double roll = 0, pitch = 0;
             if (tracking) {
                 Pose pose = camera.getPose();
                 float[] q = new float[4];
                 pose.getRotationQuaternion(q, 0);
-                data.put("roll", quatToRollDeg(q));
-                data.put("pitch", quatToPitchDeg(q));
-                data.put("poseConfidence", 0.85);
+                roll = quatToRollDeg(q); pitch = quatToPitchDeg(q);
             }
-            data.put("frame", gpuFrameCount);
-            data.put("ts", System.currentTimeMillis());
-            data.put("tracking", camera.getTrackingState().toString());
-            data.put("depthReady", meters != null);
-            notifyListeners("fundxDepthFrame", data);
+
+            byte[] nv21 = null; int iw = 0, ih = 0;
+            if (streamImage && !gpuEncBusy) {            // only grab a fresh frame if the encoder is free
+                Image ci = null;
+                try {
+                    ci = frame.acquireCameraImage();
+                    if (ci.getFormat() == ImageFormat.YUV_420_888) { iw = ci.getWidth(); ih = ci.getHeight(); nv21 = yuv420ToNv21(ci); }
+                } catch (Throwable t) { /* not ready */ }
+                finally { if (ci != null) ci.close(); }
+            }
+
+            final Double fMeters = meters; final double fConf = conf;
+            final double fRoll = roll, fPitch = pitch;
+            final String trackStr = camera.getTrackingState().toString();
+            final int fFrame = gpuFrameCount;
+            final byte[] fnv = nv21; final int fiw = iw, fih = ih;
+            final int rot = ((sensorOrientation - displayRotationDegrees()) % 360 + 360) % 360;
+
+            final Handler h = gpuEncHandler;
+            if (h == null) return;
+            if (fnv != null) gpuEncBusy = true;
+            h.post(new Runnable() { @Override public void run() {
+                try {
+                    String camImg = (fnv != null) ? nv21ToJpegDataUrl(fnv, fiw, fih, rot) : null;
+                    JSObject data = new JSObject();
+                    data.put("gpu", true);               // JS: preview is the native surface — no canvas draw
+                    if (camImg != null) data.put("cameraImage", camImg);
+                    if (fMeters != null) { data.put("distanceMeters", fMeters); data.put("distanceConfidence", fConf); }
+                    if (tracking) { data.put("roll", fRoll); data.put("pitch", fPitch); data.put("poseConfidence", 0.85); }
+                    data.put("frame", fFrame); data.put("ts", System.currentTimeMillis());
+                    data.put("tracking", trackStr); data.put("depthReady", fMeters != null);
+                    notifyListeners("fundxDepthFrame", data);
+                } catch (Throwable t) { /* ignore */ }
+                finally { gpuEncBusy = false; }
+            }});
         } catch (Throwable t) { /* keep the preview alive even if analysis hiccups */ }
     }
 
@@ -390,7 +416,9 @@ public class FundxDepthPlugin extends Plugin {
         final Activity act = getActivity();
         final GLSurfaceView v = glView;
         final View webView = (getBridge() != null) ? getBridge().getWebView() : null;
-        glView = null;
+        final HandlerThread enc = gpuEncThread;
+        glView = null; gpuEncThread = null; gpuEncHandler = null; gpuEncBusy = false;
+        if (enc != null) enc.quitSafely();
         if (act == null || v == null) { closeGpuSessionInline(); return; }
         act.runOnUiThread(new Runnable() { @Override public void run() {
             try {
@@ -511,8 +539,13 @@ public class FundxDepthPlugin extends Plugin {
     // axis), and the camera pose is a physical measurement independent of image pixels.
     private static String encodeYuvToJpegDataUrl(Image image, int rotationDeg) {
         if (image == null || image.getFormat() != ImageFormat.YUV_420_888) return null;
-        int w = image.getWidth(), h = image.getHeight();
-        byte[] nv21 = yuv420ToNv21(image);
+        return nv21ToJpegDataUrl(yuv420ToNv21(image), image.getWidth(), image.getHeight(), rotationDeg);
+    }
+
+    // Shared NV21 -> rotated JPEG data URL. Used by the offscreen CPU path (converts from an Image) and
+    // the GPU encoder thread (from a pre-copied NV21 byte[], so the GL render thread never blocks here).
+    private static String nv21ToJpegDataUrl(byte[] nv21, int w, int h, int rotationDeg) {
+        if (nv21 == null || w <= 0 || h <= 0) return null;
         YuvImage yuv = new YuvImage(nv21, ImageFormat.NV21, w, h, null);
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
         yuv.compressToJpeg(new Rect(0, 0, w, h), 70, out);

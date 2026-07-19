@@ -39,21 +39,46 @@ class FundxBackgroundRenderer {
         "  v_TexCoord = a_TexCoord;\n" +
         "}";
 
+    // ARCore's camera texture is lightly-processed (raw-ish, for AR tracking stability) — it lacks the
+    // vendor ISP's edge-sharpening and local tone-mapping that make the stock preview crisp. This
+    // fragment shader approximates that with an unsharp-mask (edge enhancement) + contrast + saturation,
+    // done on the GPU so it's free. It cannot replicate Google's proprietary HDR+ pipeline exactly.
     private static final String FRAGMENT_SHADER =
         "#extension GL_OES_EGL_image_external : require\n" +
         "precision mediump float;\n" +
         "varying vec2 v_TexCoord;\n" +
         "uniform samplerExternalOES sTexture;\n" +
+        "uniform vec2 u_texel;\n" +
+        "uniform float u_sharpen;\n" +
+        "uniform float u_contrast;\n" +
+        "uniform float u_saturation;\n" +
         "void main() {\n" +
-        "  gl_FragColor = texture2D(sTexture, v_TexCoord);\n" +
+        "  vec3 c = texture2D(sTexture, v_TexCoord).rgb;\n" +
+        "  vec3 blur = (texture2D(sTexture, v_TexCoord + vec2(u_texel.x, 0.0)).rgb\n" +
+        "             + texture2D(sTexture, v_TexCoord - vec2(u_texel.x, 0.0)).rgb\n" +
+        "             + texture2D(sTexture, v_TexCoord + vec2(0.0, u_texel.y)).rgb\n" +
+        "             + texture2D(sTexture, v_TexCoord - vec2(0.0, u_texel.y)).rgb) * 0.25;\n" +
+        "  vec3 col = c + (c - blur) * u_sharpen;\n" +               // unsharp mask
+        "  col = (col - 0.5) * u_contrast + 0.5;\n" +                // contrast about mid-grey
+        "  float l = dot(col, vec3(0.299, 0.587, 0.114));\n" +
+        "  col = mix(vec3(l), col, u_saturation);\n" +               // saturation
+        "  gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);\n" +
         "}";
+
+    // ISP-approximation defaults (subtle — over-processing looks worse than soft).
+    private float sharpen = 0.75f, contrast = 1.12f, saturation = 1.10f;
 
     private FloatBuffer quadCoords;
     private FloatBuffer quadTexCoords;
     private int program;
     private int positionAttrib;
     private int texCoordAttrib;
+    private int texelUniform, sharpenUniform, contrastUniform, saturationUniform;
+    private int surfaceW = 0, surfaceH = 0;
     private int textureId = -1;
+
+    void setViewport(int w, int h) { surfaceW = w; surfaceH = h; }
+    void setEnhancement(float sharpen, float contrast, float saturation) { this.sharpen = sharpen; this.contrast = contrast; this.saturation = saturation; }
 
     int getTextureId() { return textureId; }
 
@@ -89,6 +114,10 @@ class FundxBackgroundRenderer {
         GLES20.glUseProgram(program);
         positionAttrib = GLES20.glGetAttribLocation(program, "a_Position");
         texCoordAttrib = GLES20.glGetAttribLocation(program, "a_TexCoord");
+        texelUniform = GLES20.glGetUniformLocation(program, "u_texel");
+        sharpenUniform = GLES20.glGetUniformLocation(program, "u_sharpen");
+        contrastUniform = GLES20.glGetUniformLocation(program, "u_contrast");
+        saturationUniform = GLES20.glGetUniformLocation(program, "u_saturation");
     }
 
     private int compileShader(int type, String source) {
@@ -124,6 +153,12 @@ class FundxBackgroundRenderer {
         GLES20.glDepthMask(false);
 
         GLES20.glUseProgram(program);
+        float tx = surfaceW > 0 ? 1.0f / surfaceW : 0.0009f;
+        float ty = surfaceH > 0 ? 1.0f / surfaceH : 0.0009f;
+        GLES20.glUniform2f(texelUniform, tx, ty);
+        GLES20.glUniform1f(sharpenUniform, sharpen);
+        GLES20.glUniform1f(contrastUniform, contrast);
+        GLES20.glUniform1f(saturationUniform, saturation);
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, textureId);
         GLES20.glVertexAttribPointer(positionAttrib, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, 0, quadCoords);

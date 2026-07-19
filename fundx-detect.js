@@ -263,6 +263,10 @@
     var stream = null, videoEl = null, canvas = null, cctx = null, raf = 0, running = false;
     var hub = null, onFrame = null, lastAnalyze = 0, opts = {};
     var nativeSub = null, nativeImg = null, nativePending = false;   // native-depth (approach A) source
+    var nativeBuffer = [], NATIVE_BUFFER_MAX = 16;                   // rolling buffer of recent native
+                                                                     // frames (dataUrl+metrics) so
+                                                                     // captureBurst works without a
+                                                                     // getUserMedia <video> (GPU/native)
     function now() { return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now(); }
     // Convert a native FundxDepth frame's metric depth + pose into engine FrameAnalysis fields.
     function depthFieldsFrom(fr) {
@@ -371,6 +375,10 @@
               var mpPart = (hub.mediapipe && hub.mediapipe.available()) ? hub.mediapipe.analyze(canvas, now()) : {};
               var fa = hub.build({ imageData: imgData, mpPartial: mpPart, posePartial: depthFieldsFrom(fr), ts: now() });
               if (onFrame) onFrame(fa);
+              // Roll the full native frame (already a JPEG dataURL — no re-encode) into the buffer so
+              // captureBurst can pick the best recent frame in GPU/native mode (no getUserMedia video).
+              nativeBuffer.push({ dataUrl: fr.cameraImage, metrics: fa, w: nativeImg.width, h: nativeImg.height });
+              if (nativeBuffer.length > NATIVE_BUFFER_MAX) nativeBuffer.shift();
               if (opts.previewCtx && opts.previewCanvas) { opts.previewCanvas.width = nativeImg.width; opts.previewCanvas.height = nativeImg.height; opts.previewCtx.drawImage(nativeImg, 0, 0); }
             } catch (e) {}
           };
@@ -388,7 +396,11 @@
       },
       // Capture a best-frame burst: grab N full-res frames, score, return dataURLs + metrics.
       captureBurst: function (count) {
-        count = count || 12; var frames = [];
+        count = count || 12;
+        // GPU/native mode: return the rolling buffer of recent native frames (already scored);
+        // BestFrameSelector picks the highest-quality one. getUserMedia mode grabs fresh below.
+        if (nativeBuffer.length) return nativeBuffer.slice(-count);
+        var frames = [];
         for (var i = 0; i < count; i++) {
           var c = grab(1);
           if (!c) break;
@@ -403,6 +415,7 @@
       },
       stop: function () {
         running = false; if (raf) cancelAnimationFrame(raf); raf = 0;
+        nativeBuffer = [];
         try { setTorch(false); } catch (e) {}   // turn the flash off before releasing the camera
         try { if (stream) stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
         try { if (videoEl) videoEl.srcObject = null; } catch (e) {}
