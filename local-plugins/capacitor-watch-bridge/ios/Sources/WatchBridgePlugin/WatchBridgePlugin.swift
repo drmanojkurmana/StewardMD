@@ -24,7 +24,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     public let jsName = "WatchBridge"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "publish", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "clear", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "clear", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getStatus", returnType: CAPPluginReturnPromise)
     ]
 
     private let suiteName = "group.in.stewardmd.app"
@@ -35,6 +36,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     private lazy var relay = WatchConnectivityRelay()
 
     override public func load() {
+        // Force the WCSession to activate at plugin load so getStatus() is reliable.
+        _ = relay
         // When the watch asks for a fresh token, re-emit to JS so native-watch.js
         // republishes. Decoupled via a string-keyed notification (same pattern as
         // AppOrientationPlugin) so the plugin owns no cross-module symbols.
@@ -44,6 +47,25 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         ) { [weak self] _ in
             self?.notifyListeners("tokenRequested", data: [:])
         }
+        #endif
+    }
+
+    /// Live WCSession state for the Settings → Apple Watch page (auto-detects
+    /// pairing). iOS-only properties; on any other platform returns supported:false.
+    @objc func getStatus(_ call: CAPPluginCall) {
+        #if canImport(WatchConnectivity)
+        guard WCSession.isSupported() else { call.resolve(["supported": false]); return }
+        let s = WCSession.default
+        call.resolve([
+            "supported": true,
+            "paired": s.isPaired,
+            "watchAppInstalled": s.isWatchAppInstalled,
+            "complicationEnabled": s.isComplicationEnabled,
+            "reachable": s.isReachable,
+            "activationState": s.activationState.rawValue
+        ])
+        #else
+        call.resolve(["supported": false])
         #endif
     }
 
