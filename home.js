@@ -253,7 +253,29 @@
     save: '<path d="M5 4h11l3 3v13H5Z"/><path d="M8 4v5h7"/><rect x="8" y="13" width="8" height="5"/>',
     trash: '<path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="M6 7l1 13h10l1-13"/>',
     list: '<line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>',
-    warn: '<path d="M12 3 1.7 21h20.6L12 3Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.6" r=".6"/>'
+    warn: '<path d="M12 3 1.7 21h20.6L12 3Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.6" r=".6"/>',
+    // ── Specialty line-icons (calculators / knowledge-library categories). Same 24×24,
+    // currentColor, ~1.75 stroke. One per specialty; each calculator inherits its category icon.
+    microbe: '<circle cx="12" cy="12" r="5.5"/><path d="M12 3.3v-1M12 21.7v-1M3.3 12h-1M21.7 12h-1M6.3 6.3l-.8-.8M18.5 18.5l-.8-.8M17.7 6.3l.8-.8M5.5 18.5l.8-.8"/><circle cx="10.3" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="13.7" cy="13.4" r="1" fill="currentColor" stroke="none"/>',
+    kidney: '<path d="M13.8 4C9.5 4 6 7.6 6 12s3.5 8 7.8 8c2.4 0 4.2-1.9 4.2-4 0-1.6-1-2.4-1-4s1-2.4 1-4c0-2.1-1.8-4-4.2-4Z"/><path d="M18 12h-2"/>',
+    liver: '<path d="M3.5 7.5c5-2.2 12-2.2 17 0-.2 4.3-1.4 8.2-5.5 10.2-2 1-4.5 1-6.5 0-3.3-1.7-4.6-5.6-5-10.2Z"/><path d="M15 9c-1.2.8-3 .9-4.3.2"/>',
+    brain: '<path d="M12 4.6a3 3 0 0 0-5 1.6A2.8 2.8 0 0 0 4.6 11a2.8 2.8 0 0 0 1 4.6A2.6 2.6 0 0 0 9 19a2.6 2.6 0 0 0 3 .6"/><path d="M12 4.6a3 3 0 0 1 5 1.6A2.8 2.8 0 0 1 19.4 11a2.8 2.8 0 0 1-1 4.6A2.6 2.6 0 0 1 15 19a2.6 2.6 0 0 1-3 .6"/><path d="M12 5v14"/>',
+    endocrine: '<path d="M12 9c-1.4-2.2-3.8-3-5.6-2.1S4.2 10.4 5 12.6s3.2 2.9 5 1.8C11 13.7 12 11.4 12 9Z"/><path d="M12 9c1.4-2.2 3.8-3 5.6-2.1s2.2 3.5 1.4 5.7-3.2 2.9-5 1.8C13 13.7 12 11.4 12 9Z"/><path d="M12 9v3.5"/>',
+    stomach: '<path d="M8.5 3v3.5c0 1.6-1 2.4-2 3.4a5.5 5.5 0 0 0 4 9.1c3 0 5.5-2.3 5.9-5.3.2-1.6.9-2.4 2.1-2.7a2 2 0 0 0-.5-3.9c-2.6 0-3.4 2-5.1 2S12 9.9 12 6.5V3"/>',
+    ribbon: '<path d="M12 12 8 21l2.6-1.2L12 22l1.4-2.2L16 21Z"/><path d="M12 12c-2.2-1.3-3.7-3.6-3.7-6.2A3.7 3.7 0 0 1 12 2a3.7 3.7 0 0 1 3.7 3.8c0 2.6-1.5 4.9-3.7 6.2Z"/>',
+    joint: '<circle cx="8" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path d="M10 10l4 4"/>',
+    bone: '<path d="M8 16 16 8"/><path d="M8 16a2.2 2.2 0 1 1-1.2-2 2.2 2.2 0 1 1 2-1.2"/><path d="M16 8a2.2 2.2 0 1 0 1.2 2 2.2 2.2 0 1 0-2-1.2"/>',
+    skin: '<rect x="3.5" y="9.5" width="17" height="5" rx="2.5" transform="rotate(-40 12 12)"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="9.6" cy="9.6" r=".6" fill="currentColor" stroke="none"/><circle cx="14.4" cy="14.4" r=".6" fill="currentColor" stroke="none"/>',
+    psych: '<path d="M6 20v-2.5C4.8 16.3 4 14.3 4 12a8 8 0 1 1 16 0c0 2.3-.8 4.3-2 5.5V20"/><circle cx="9.5" cy="11.5" r="1"/><path d="M12.5 10a2 2 0 1 1 1.8 3"/>',
+    baby: '<circle cx="12" cy="7" r="3.2"/><path d="M6 20a6 6 0 0 1 12 0"/><circle cx="10.8" cy="6.7" r=".5" fill="currentColor" stroke="none"/><circle cx="13.2" cy="6.7" r=".5" fill="currentColor" stroke="none"/><path d="M10.9 8.5a2 2 0 0 0 2.2 0"/>',
+    pregnant: '<circle cx="11" cy="4.2" r="2"/><path d="M11 6.5c-1 0-2 .8-2 2v3.5"/><path d="M9 12c0 3.3 1.5 5.5 4.2 5.5A3.8 3.8 0 0 0 17 13.7c0-2.6-2-4.6-4.5-4.7"/><path d="M9 12v8"/>',
+    eye: '<path d="M2.5 12S6 6 12 6s9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6"/>',
+    skull: '<path d="M12 3a7.5 7.5 0 0 0-7.5 7.5c0 2.6 1.3 4.3 2.8 5.4v2.3a1 1 0 0 0 1 1h7.4a1 1 0 0 0 1-1v-2.3c1.5-1.1 2.8-2.8 2.8-5.4A7.5 7.5 0 0 0 12 3Z"/><circle cx="9" cy="11" r="1.5"/><circle cx="15" cy="11" r="1.5"/><path d="M12 14v2M10 19.2v-2M14 19.2v-2"/>',
+    scales: '<path d="M12 3v18M8 21h8"/><path d="M5 7h14"/><path d="M5 7 2.5 13a3 3 0 0 0 5 0Z"/><path d="M19 7l-2.5 6a3 3 0 0 0 5 0Z"/>',
+    // ── UI line-icons
+    cloud: '<path d="M7 18a4.5 4.5 0 0 1-.3-9 6 6 0 0 1 11.5-.5A4 4 0 0 1 17.5 18Z"/>',
+    note: '<path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M8.5 13h7M8.5 16.5h5"/>',
+    aware: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.6"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
