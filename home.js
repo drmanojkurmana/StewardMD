@@ -121,10 +121,17 @@
           ((window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
             ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
             : "");
+        // Experimental Access — the primary "Settings → Experimental Features → FundX AI" entry.
+        // Reusable: future beta features (ECG AI, etc.) add a button here. The gate (experimental.js)
+        // enforces the one-code/one-device access server-side; this is just discovery.
+        var xaActive = false; try { xaActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("fundx")); } catch (e) {}
+        var xaBody = '<div class="smd-nav-note">Private beta — unlock with an access code from the StewardMD team. One code activates one device.</div>' +
+          '<button class="smd-nav-btn' + (xaActive ? ' on' : '') + '" data-xa-open="fundx">' + (xaActive ? '🟢 FundX AI — enabled' : '🔬 FundX AI — enter access code') + '</button>';
         setBody.insertAdjacentHTML("beforeend",
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
           (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
           group("ai", "AI Assistant", aiBody, false) +
+          group("beta", "Experimental Features", xaBody, false) +
           group("ward", "Ward Integration", wardBody, false));
         try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(setBody); } catch (e) {}
         // wire subgroup collapse
@@ -164,6 +171,16 @@
         });
         var og = setBody.querySelector("[data-open-ghis]");
         if (og) og.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { if (window.openGHIS) openGHIS(); } catch (e) {} }, 60); });
+        var xb = setBody.querySelector("[data-xa-open]");
+        if (xb) xb.addEventListener("click", function () {
+          var feat = xb.getAttribute("data-xa-open");
+          try { if (window.SB && SB.close) SB.close(); } catch (e) {}
+          setTimeout(function () {
+            function openFeat() { try { localStorage.setItem("smd_fundx", "1"); } catch (e) {} if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…"); }
+            try { if (window.SMD_XACCESS && SMD_XACCESS.openGate) { SMD_XACCESS.openGate(feat, openFeat); return; } } catch (e) {}
+            openFeat();
+          }, 60);
+        });
       }
 
       // 3) Merge "About & Help" INTO "Reference" -> one "Reference & Help" group. Move the About
@@ -540,7 +557,14 @@
     account: function () { if (window.SB && SB.open) SB.open(); },
     recent: function () { if (typeof openMyCases === "function") openMyCases(); },
     dictate: function () { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); },
-    retinalscan: function () { if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…"); }
+    retinalscan: function () {
+      // FundX is gated by the Experimental Access framework (one code = one device, server-verified).
+      // Debug builds + a valid activation open it directly; otherwise the access gate is shown. If the
+      // framework failed to load, fall back to opening directly so the tile is never bricked.
+      function openFundx() { try { localStorage.setItem("smd_fundx", "1"); } catch (e) {} if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…"); }
+      try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("fundx", openFundx); return; } } catch (e) {}
+      openFundx();
+    }
   };
   // --- Resume where you left off. iOS suspends a backgrounded app and, under memory pressure,
   //     TERMINATES it after a while; the next launch is a COLD START — the WebView reloads index.html

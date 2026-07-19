@@ -12,6 +12,8 @@
  */
 import { runVision, runClinical, health, logJSON, httpErr } from "../../_fundx_ai.js";
 import { identify, usageKv } from "../../_usage.js";
+import { checkActive } from "../../_experimental.js";
+import { ownerOK } from "../../_adminauth.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
 function num(v, d) { const n = Number(v); return Number.isFinite(n) && n > 0 ? n : d; }
@@ -30,6 +32,18 @@ function authorise(request, env) {
   if (tok && (tok === env.FUNDX_APP_TOKEN || tok === env.AI_APP_TOKEN || tok === env.GHIS_APP_TOKEN)) return true;
   const o = request.headers.get("Origin") || "";
   return o === "https://stewardmd.in" || o === "https://www.stewardmd.in" || o === "https://localhost" || o === "capacitor://localhost" || o === "";
+}
+
+// Experimental Access enforcement for the beta AI compute: the caller must present a valid
+// activation token (X-XA-Token) bound to a live one-device activation — the SAME server-authoritative
+// gate the UI shows — or be an owner (who tests freely). Set EXPERIMENTAL_ENFORCE_FUNDX="0" to
+// disable (e.g. during migration). Without this, the one-code/one-device system would be UI-only.
+async function betaGate(request, env) {
+  if (env.EXPERIMENTAL_ENFORCE_FUNDX === "0") return { ok: true };
+  try { if (await ownerOK(request, env)) return { ok: true }; } catch (e) {}
+  const tok = request.headers.get("X-XA-Token") || "";
+  try { const acc = await checkActive(env, "fundx", tok); if (acc && acc.active) return { ok: true }; } catch (e) {}
+  return { ok: false };
 }
 
 // FundX rate limit — server-derived identity, KV-backed, namespaced apart from MaiK.
@@ -108,6 +122,10 @@ export async function onRequest(context) {
 
   const rl = await rateLimit(env, request);
   if (!rl.ok) return json({ error: rl.code, code: rl.code, retryAfter: rl.retryAfter, limit: rl.limit }, rl.status || 429, request);
+
+  // Beta access gate — the compute (Vertex inference) requires a valid one-device activation.
+  const bg = await betaGate(request, env);
+  if (!bg.ok) return json({ error: "beta_locked", code: "beta_locked", message: "FundX AI beta access required — enter your access code in Settings › Experimental Features." }, 403, request);
 
   let body;
   try { body = await request.json(); }
