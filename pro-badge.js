@@ -23,10 +23,13 @@
     var s = document.createElement("style");
     s.id = "smdProSealCSS";
     s.textContent =
-      ".smd-probadge{display:none;align-items:center;margin-left:6px;flex:0 0 auto;vertical-align:baseline;--pro-accent:#0a3d36}" +
-      "body.pro-verified .smd-probadge{display:inline-flex}" +
+      ".smd-probadge{display:none;margin-left:5px;--pro-accent:#0a2320}" +
+      "body.pro-verified .smd-probadge{display:inline}" +
       "body.dark .smd-probadge,body.v3-dark .smd-probadge{--pro-accent:#7fe0cf}" +
-      ".smd-probadge .ptxt{font-weight:800;font-size:0.6em;letter-spacing:.04em;line-height:1;color:var(--pro-accent)}";
+      ".smd-probadge .ptxt{font-weight:800;font-size:0.58em;letter-spacing:.03em;color:var(--pro-accent);vertical-align:0.12em}" +
+      // Gold ring around Pro users' profile picture (large profile-section avatar + the account-menu one).
+      "body.pro-verified .hv-acct-pic{box-shadow:0 0 0 3px #d4af37!important}" +
+      "body.pro-verified .smd-sba-pic{box-shadow:0 0 0 2px #d4af37!important}";
     (document.head || document.documentElement).appendChild(s);
   }
 
