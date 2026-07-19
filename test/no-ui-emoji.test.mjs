@@ -49,7 +49,11 @@ ok(emojiInCatalog === 0, "no emoji leaked into the ICON catalog");
 // ---- emoji scanner for covered files (grows each phase) ----
 // A curated UI-chrome emoji blocklist. Lines with `console.`, comment lines, and regions wrapped in
 // /* @emoji-data-ok */ … /* @end-emoji-data-ok */ (legitimate clinical-data/content) are skipped.
-const BLOCKLIST = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{26FF}\u{2705}\u{274C}\u{2714}\u{2716}\u{2795}\u{2934}\u{2B05}-\u{2B07}\u{1F004}\u{1F0CF}]/u;
+// True emoji / pictographs. Deliberately EXCLUDES ordinary typography still used as UI:
+// geometric shapes (▸ ▾ U+25xx chevrons), angle quotes (‹ U+2039), arrows (← → ↗ U+2190-21FF),
+// General Punctuation (— … ' "). Covers Misc-Symbols+Dingbats (2600-27BF: ❤ ✅ ✍ ☠ ⚖ ⚡ ✔),
+// Misc-Technical (2300-23FF: ⏱ ⌚), Supplemental symbols (2B00-2BFF), and pictographs (1F300-1FAFF).
+const BLOCKLIST = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}\u{20E3}\u{200D}]/u;
 function scanFile(rel) {
   const src = fs.readFileSync(join(ROOT, rel), "utf8");
   const lines = src.split("\n");
@@ -57,6 +61,7 @@ function scanFile(rel) {
   let dataOk = false;
   for (let i = 0; i < lines.length; i++) {
     const ln = lines[i];
+    if (/@emoji-ok\b/.test(ln)) continue;                                        // single-line exception (clinical content)
     if (/@emoji-data-ok/.test(ln)) dataOk = true;
     if (/@end-emoji-data-ok/.test(ln)) { dataOk = false; continue; }
     if (dataOk) continue;
@@ -68,8 +73,8 @@ function scanFile(rel) {
   return hits;
 }
 
-// COVERED grows as each phase cleans a file. P0 cleans none (foundation only).
-const COVERED = [];
+// COVERED grows as each phase cleans a file.
+const COVERED = ["calculators.js"];
 for (const rel of COVERED) {
   const hits = scanFile(rel);
   ok(hits.length === 0, "no UI emoji in " + rel + (hits.length ? "\n   " + hits.join("\n   ") : ""));
