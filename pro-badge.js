@@ -11,13 +11,10 @@
 (function () {
   "use strict";
 
-  // Twitter-style verified: the scalloped badge with a white check. A white disc sits BEHIND the
-  // scallop so the check cutout always reads white (light + dark headers), no alignment fuss.
-  var SEAL =
-    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
-      '<circle class="pseal-white" cx="12" cy="12" r="6"></circle>' +
-      '<path class="pseal-bg" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"></path>' +
-    '</svg>';
+  // Pro mark: a minimalist "Pro" label + a clean filled star, both in a theme-adaptive accent so they
+  // recolor with the app (teal on light, brighter teal on dark) — like the wordmark itself.
+  var STAR = '<svg viewBox="0 0 24 24" class="pstar" aria-hidden="true" focusable="false"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>';
+  var LOCKUP = '<span class="ptxt">Pro</span>' + STAR;
 
   // Elements whose inner end the badge is appended to (right after the "MD" of the wordmark).
   var TARGETS = [".v3-brand-tt", ".rnav-brand > span", ".v4-hero-tt", ".sb-head b"];
@@ -27,21 +24,19 @@
     var s = document.createElement("style");
     s.id = "smdProSealCSS";
     s.textContent =
-      ".smd-proseal{display:none;align-items:center;justify-content:center;width:1.05em;height:1.05em;margin-left:5px;vertical-align:-0.12em;flex:0 0 auto}" +
-      "body.pro-verified .smd-proseal{display:inline-flex}" +
-      ".smd-proseal svg{width:100%;height:100%;display:block}" +
-      ".smd-proseal .pseal-white{fill:#fff}" +
-      ".smd-proseal .pseal-bg{fill:#1d9bf0}";
+      ".smd-probadge{display:none;align-items:center;gap:2px;margin-left:6px;flex:0 0 auto;vertical-align:baseline;--pro-accent:#0e6e63}" +
+      "body.pro-verified .smd-probadge{display:inline-flex}" +
+      "body.dark .smd-probadge,body.v3-dark .smd-probadge{--pro-accent:#5dcaa5}" +
+      ".smd-probadge .ptxt{font-weight:800;font-size:0.6em;letter-spacing:.04em;line-height:1;color:var(--pro-accent)}" +
+      ".smd-probadge .pstar{width:0.78em;height:0.78em;display:block;flex:0 0 auto;fill:var(--pro-accent)}";
     (document.head || document.documentElement).appendChild(s);
   }
 
   function makeBadge() {
     var b = document.createElement("span");
-    b.className = "smd-proseal";
-    b.setAttribute("role", "img");
-    b.setAttribute("aria-label", "StewardMD Pro");
+    b.className = "smd-probadge";
     b.title = "StewardMD Pro";
-    b.innerHTML = SEAL;
+    b.innerHTML = LOCKUP;
     return b;
   }
 
@@ -50,7 +45,7 @@
       var els = document.querySelectorAll(TARGETS[i]);
       for (var j = 0; j < els.length; j++) {
         var el = els[j];
-        if (el.querySelector && el.querySelector(".smd-proseal")) continue;   // already badged
+        if (el.querySelector && el.querySelector(".smd-probadge")) continue;   // already badged
         try { el.appendChild(makeBadge()); } catch (e) {}
       }
     }
