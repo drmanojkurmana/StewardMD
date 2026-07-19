@@ -249,9 +249,10 @@ watch-settings.js                        # Settings ▸ Apple Watch page
   gathers `watchlist()` (ICU roster w/ NEWS2, GHIS worklist fallback) + `census()`
   and publishes them; the plugin forwards them; `WatchConnectivityManager` merges
   the glance (preserving the watch-owned critical badge) and persists the
-  watchlist. My Patients + Ward Sync populate from live GHIS/ICU state. *Not yet
-  relayed:* per-patient glance **vitals** (only NEWS2 + dx today), a true bed
-  denominator, and task counts (no client-side source — see the data-source notes).
+  watchlist. My Patients + Ward Sync populate from live GHIS/ICU state, including
+  **per-patient vitals** (latest HR/BP/SpO₂/Temp from ICU `state.vitals`, shown in
+  the patient glance). *Still not relayed (no client-side source):* a true bed
+  denominator and task counts — see the data-source notes.
 - **`WKExtendedRuntimeSession`** for the Code Blue / sepsis timers so the display
   ticks live in Always-On and the 2-min haptic fires with the wrist down. Timers
   are now wall-clock-accurate on glance; this makes them live-in-background.
