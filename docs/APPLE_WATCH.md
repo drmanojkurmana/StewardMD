@@ -20,7 +20,7 @@ its session from the paired iPhone. Three principles shaped the build:
 1. **Logic lives in a platform-agnostic Swift package** (`StewardMDWatchCore`)
    that compiles and unit-tests on macOS — so the hard parts (models, networking,
    clinical engines, gating, connectivity) are verified with `swift test` even
-   without a watchOS runtime. **128 tests.**
+   without a watchOS runtime. **133 tests.**
 2. **The watch app + widgets are thin SwiftUI shells** over that package.
 3. **Everything is additive** — a new SwiftPM package, two new Xcode targets,
    one new Capacitor plugin, three new backend endpoints, and a settings page.
@@ -69,12 +69,12 @@ Packages/StewardMDWatchCore/            # shared, platform-agnostic, unit-tested
     ViewModels/      CriticalLabs, DrugLookup, CodeBlue, Sepsis, Procedure, ABG,
                      Handover, Watchlist
     Widgets/         GlanceState, RelevanceScorer
-  Tests/StewardMDWatchCoreTests/        # 128 tests, 24 files
+  Tests/StewardMDWatchCoreTests/        # 133 tests, 24 files
 
 ios/StewardMDWatch/                     # watchOS app target (SwiftUI)
   *App.swift, RootListView, {module views}, WatchSessionStore
   System/       AppRouter, WatchServices, FeatureFlagsModel, GlancePublisher,
-                HapticManager, WatchAppDelegate
+                HapticManager, WatchAppDelegate, WatchConnectivityManager
   Components/   SeverityChip, ReferenceGauge
   Notifications/ NotificationController
   Intents/      AppIntents, AppShortcuts
@@ -98,9 +98,9 @@ watch-settings.js                        # Settings ▸ Apple Watch page
 
 ## 3. New files created
 
-**130 new files** (from the branch base). By area:
-- **Core package:** 1 `Package.swift` + 50 sources + 24 test files (128 tests).
-- **Watch app:** 26 files (app, 14 views, 6 System/, 2 Components/, notification
+**131 new files** (from the branch base). By area:
+- **Core package:** 1 `Package.swift` + 51 sources + 24 test files (133 tests).
+- **Watch app:** 27 files (app, 14 views, 7 System/, 2 Components/, notification
   controller, 2 Intents/, Info.plist, entitlements, 3 asset-catalog JSON).
 - **Widget extension:** 6 files.
 - **iOS bridge plugin:** 4 files (`package.json`, `Package.swift`, 2 Swift).
@@ -156,14 +156,24 @@ watch-settings.js                        # Settings ▸ Apple Watch page
 
 ## 6. WatchConnectivity architecture
 
-- **iOS side** (`WatchConnectivityRelay` in the bridge plugin) owns the phone's
-  `WCSession`, activates it at plugin load, and on every `publish()` writes the
-  payload to the App Group **and** calls `updateApplicationContext` (latest-wins,
-  coalesced — ideal for "current session + favorites + relayed state").
-- **Watch side** reads the App Group via `AppGroupStore`; `updateApplicationContext`
-  delivers fresh state when reachable. A **token-refresh request** flows watch→phone
-  via `sendMessage`; the relay re-emits it as a JS event (`tokenRequested`) so
-  `native-watch.js` republishes a fresh Firebase ID token.
+> **Key fact:** App Group `UserDefaults` is **per-device** — it does *not* cross
+> the iPhone↔Watch boundary. It's used only for *on-device* sharing (iPhone
+> app↔bridge on the phone; watch app↔widget extension on the watch). The **only**
+> cross-device transport is WatchConnectivity.
+
+- **iPhone side** (`WatchConnectivityRelay` in the bridge plugin) owns the phone's
+  `WCSession`, activates it at plugin load, and on every `publish()` calls
+  `updateApplicationContext` (latest-wins, coalesced — ideal for "current session
+  + favorites + relayed state"). It also mirrors the payload into the *phone's*
+  App Group (for phone-side reads only).
+- **Watch side** (`WatchConnectivityManager`, a `WCSessionDelegate`) receives
+  `didReceiveApplicationContext` (and reads `receivedApplicationContext` on
+  activation), then persists session/favorites/glance/notifPrefs into the
+  *watch's own* App Group (so the watch app **and** its widget extension read it)
+  and posts `.smdWatchDataUpdated` to refresh the UI. A **token-refresh request**
+  flows watch→phone via `sendMessage(["kind":"tokenRequest"])`; the relay
+  re-emits it as a JS event (`tokenRequested`) so `native-watch.js` republishes a
+  fresh Firebase ID token, which comes back on the next `applicationContext`.
 - **No WC entitlement needed** — it works once both targets exist and are paired.
 - **Message contracts** are Codable (`WCMessage`/`WCMessageKind`) in the core
   package so both ends share one definition.
@@ -209,7 +219,7 @@ watch-settings.js                        # Settings ▸ Apple Watch page
 ## 9. Testing checklist
 
 **Automated (runs here):**
-- [x] `cd Packages/StewardMDWatchCore && swift test` → 128 pass (engines, models,
+- [x] `cd Packages/StewardMDWatchCore && swift test` → 133 pass (engines, models,
       networking, gating, connectivity, timers, ack queue).
 - [x] `npm test` → existing web/rx suites pass (no regression).
 - [x] `node --check` on all new/edited JS + backend functions.
@@ -232,14 +242,28 @@ watch-settings.js                        # Settings ▸ Apple Watch page
 
 ---
 
-## 10. Remaining optional enhancements
+## 10. Remaining work & optional enhancements
 
+**Genuinely remaining to be "fully live" (need phone-side data + Apple APIs):**
+- **Phone-side relay of GHIS census / watchlist / ICU scores + patient-glance
+  vitals.** The watch-side receiver (`WatchConnectivityManager`) already decodes
+  `glance`/`watchlist` from the applicationContext; the iPhone must *gather* and
+  publish them (a JS + plugin addition). Until then My Patients / Ward Sync show
+  honest empty/stale states. Critical-lab pushes and auth **do** flow end-to-end.
+- **`WKExtendedRuntimeSession`** for the Code Blue / sepsis timers so the display
+  ticks live in Always-On and the 2-min haptic fires with the wrist down. Timers
+  are now wall-clock-accurate on glance; this makes them live-in-background.
+- **Structured critical-lab push payload** (analyte/value/severity) so the watch
+  shows the exact value, not just "New result — <patient>" (additive backend).
+
+**Optional enhancements:**
 - Cache last-known Pro state so subscription-gated rows don't lock when offline.
 - Independent watch APNs token + per-topic backend push (phone-unreachable alerts).
 - Interactive complications / Smart Stack actions (acknowledge without opening).
+- Enforce relayed notification-tier prefs on the watch (currently stored, not yet gated).
 - Live 7-day lab trend on the Crown in Lab detail (currently a hook).
+- One Crown-focused field per screen for multi-field calculators (NEWS2/ABG UX).
 - Bundle a distilled offline drug/dose subset for zero-network lookup.
-- Real-time relay of GHIS census / ICU scores + patient glance vitals from the phone.
 - Localization/RTL + mmol/L↔mg/dL unit locale (string catalog scaffolded).
 - Bridge watch-local favorites ↔ `/api/favorites` for full cross-device sync.
 
