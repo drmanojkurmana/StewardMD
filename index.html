@@ -1380,6 +1380,10 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
      neither was ever defined, so their feedback was silently dropped). Loaded early; idempotent. -->
 <script src="/toast.js?v=gold363" defer></script>
 <script src="/native-auth.js?v=gold363" defer></script>
+<!-- Email sign-up/sign-in + Resend OTP verification + doctor profile (hospital/state/city).
+     Additive over Firebase Auth; smd-geo.js is the India states/cities + curated hospital list. -->
+<script src="/smd-geo.js?v=gold472" defer></script>
+<script src="/email-auth.js?v=gold472" defer></script>
 <script src="/policy.js?v=gold363" defer></script>
 <script src="/features.js?v=gold363" defer></script>
 <script src="/calculators.js?v=gold455" defer></script>
