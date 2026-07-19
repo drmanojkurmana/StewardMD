@@ -282,7 +282,8 @@
     clear: '<path d="M8 20H5a2 2 0 0 1-1.4-3.4L14 6a2 2 0 0 1 2.8 0L21 10.2a2 2 0 0 1 0 2.8L13 21H8Z"/><path d="M13 21H8l-3.6-3.6"/><path d="M9 11l4 4"/>',
     xray: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 7a3 3 0 0 0-2 5c0 1.6 2 2 2 4M12 7a3 3 0 0 1 2 5c0 1.6-2 2-2 4"/><path d="M8 11h8M8.5 14h7"/>',
     bolt: '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-6Z"/>',
-    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.9 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.9-3.8-9S9.5 5.6 12 3Z"/>'
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.9 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.9-3.8-9S9.5 5.6 12 3Z"/>',
+    bug: '<path d="M8 8a4 4 0 0 1 8 0v3a4 4 0 0 1-8 0Z"/><path d="M9 7 7.5 5.5M15 7l1.5-1.5"/><path d="M4 11h4M16 11h4M4 16h4M16 16h4M12 12v9"/><path d="M4.5 20 8 18M19.5 20 16 18"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
