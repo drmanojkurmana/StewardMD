@@ -12,7 +12,6 @@ import android.graphics.YuvImage;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.media.Image;
-import android.opengl.GLSurfaceView;
 import android.util.Base64;
 import android.view.Surface;
 import android.view.View;
@@ -48,8 +47,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.microedition.khronos.opengles.GL10;   // EGLConfig is fully-qualified in ArRenderer to
-                                                    // avoid clashing with android.opengl.EGLConfig
 
 /**
  * FundX AI — hybrid depth-fusion plugin (Android, ARCore).
@@ -95,13 +92,21 @@ public class FundxDepthPlugin extends Plugin {
                                                     // native frames while ARCore owns the camera.
 
     // ---- GPU preview mode (flag smd_fundx_gpu_preview) ------------------------------------
-    // Full-resolution, hardware-accelerated camera preview: a GLSurfaceView behind a transparent
-    // WebView renders ARCore's GPU camera texture at display refresh (FundxBackgroundRenderer),
-    // matching the stock camera. The CPU-image path continues but ONLY feeds analysis (MediaPipe +
-    // heuristics), throttled and decoupled from the preview. Its ARCore Session lives on the
-    // GLSurfaceView render thread (GL-thread-affine), separate from the offscreen path below.
+    // Full-resolution, hardware-accelerated camera preview: a TextureView behind a transparent WebView
+    // (html+body transparent) renders ARCore's GPU camera texture on a manual EGL render loop
+    // (FundxBackgroundRenderer), matching the stock camera. A TextureView composites IN-WINDOW so it
+    // shows through the WebView with the UI on top (a SurfaceView is hidden by the opaque app window).
+    // The CPU-image path continues but ONLY feeds analysis (MediaPipe + heuristics), throttled and
+    // decoupled from the preview. The ARCore session is owned by the render thread (thread-affine).
     private volatile boolean gpuMode = false;
-    private GLSurfaceView glView;
+    private android.view.TextureView texView;        // in-window preview (composites through the WebView)
+    private HandlerThread renderThread;              // manual GL render loop on the TextureView surface
+    private Handler renderHandler;
+    private volatile boolean renderRunning = false;
+    private EGLDisplay rDisplay = EGL14.EGL_NO_DISPLAY;
+    private EGLContext rContext = EGL14.EGL_NO_CONTEXT;
+    private EGLSurface rSurface = EGL14.EGL_NO_SURFACE;
+    private final Runnable renderTick = new Runnable() { @Override public void run() { renderLoop(); } };
     private FundxBackgroundRenderer bgRenderer;
     private Session gpuSession;                      // GPU-mode session (owned by the GL render thread)
     private volatile int gpuFrameCount = 0;
@@ -197,8 +202,8 @@ public class FundxDepthPlugin extends Plugin {
     @PluginMethod
     public void setTorch(final PluginCall call) {
         final boolean on = call.getBoolean("on", false);
-        if (gpuMode && glView != null) {
-            glView.queueEvent(new Runnable() { @Override public void run() { applyTorch(gpuSession, on); } });
+        if (gpuMode && renderHandler != null) {
+            renderHandler.post(new Runnable() { @Override public void run() { applyTorch(gpuSession, on); } });
             call.resolve(); return;
         }
         final Handler h = arHandler;
@@ -268,18 +273,31 @@ public class FundxDepthPlugin extends Plugin {
                 analyzeEvery = Math.max(1, every);
                 gpuFrameCount = 0;
                 gpuEncBusy = false;
-                gpuEncThread = new HandlerThread("fundx-gpu-enc");   // off-GL-thread frame encoder
+                gpuEncThread = new HandlerThread("fundx-gpu-enc");   // off-render-thread frame encoder
                 gpuEncThread.start();
                 gpuEncHandler = new Handler(gpuEncThread.getLooper());
-                webView.setBackgroundColor(Color.TRANSPARENT);   // let the GL surface behind show through
+                // A TextureView composites IN-WINDOW (a normal hardware layer, not a punched-out
+                // SurfaceView surface below the window), so it shows through the transparent WebView with
+                // the HTML UI floating on top — no translucent-window/theme hack needed (a SurfaceView was
+                // hidden by the opaque app window and showed white).
+                webView.setBackgroundColor(Color.TRANSPARENT);
+                try { webView.setBackground(null); } catch (Exception ignored) {}
                 ViewGroup parent = (ViewGroup) webView.getParent();
                 bgRenderer = new FundxBackgroundRenderer();
-                glView = new GLSurfaceView(act);
-                glView.setEGLContextClientVersion(2);
-                glView.setPreserveEGLContextOnPause(true);
-                glView.setRenderer(new ArRenderer(call, resolved));
-                glView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
-                parent.addView(glView, 0, new ViewGroup.LayoutParams(
+                texView = new android.view.TextureView(act);
+                texView.setOpaque(false);
+                texView.setSurfaceTextureListener(new android.view.TextureView.SurfaceTextureListener() {
+                    @Override public void onSurfaceTextureAvailable(android.graphics.SurfaceTexture st, int w, int h) { startRender(st, w, h, call, resolved); }
+                    @Override public void onSurfaceTextureSizeChanged(android.graphics.SurfaceTexture st, final int w, final int h) {
+                        if (renderHandler != null) renderHandler.post(new Runnable() { @Override public void run() {
+                            GLES20.glViewport(0, 0, w, h); bgRenderer.setViewport(w, h);
+                            if (gpuSession != null) gpuSession.setDisplayGeometry(displayRotationSurface(), w, h);
+                        }});
+                    }
+                    @Override public boolean onSurfaceTextureDestroyed(android.graphics.SurfaceTexture st) { return true; }
+                    @Override public void onSurfaceTextureUpdated(android.graphics.SurfaceTexture st) {}
+                });
+                parent.addView(texView, 0, new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));  // BEHIND the WebView
                 gpuMode = true;
                 running = true;
@@ -291,15 +309,15 @@ public class FundxDepthPlugin extends Plugin {
         }});
     }
 
-    // GLSurfaceView renderer: owns the ARCore Session on the GL render thread, draws the camera
-    // texture full-screen (preview) and throttles a low-res CPU frame to JS for analysis.
-    private class ArRenderer implements GLSurfaceView.Renderer {
-        private final PluginCall call;
-        private final AtomicBoolean resolved;
-        ArRenderer(PluginCall c, AtomicBoolean r) { call = c; resolved = r; }
-
-        @Override public void onSurfaceCreated(GL10 gl, javax.microedition.khronos.egl.EGLConfig config) {
+    // Manual EGL render loop bound to the TextureView's SurfaceTexture. Owns the ARCore session, draws
+    // the camera texture full-screen, and throttles a low-res CPU frame to JS for analysis.
+    private void startRender(final android.graphics.SurfaceTexture st, final int w, final int h, final PluginCall call, final AtomicBoolean resolved) {
+        renderThread = new HandlerThread("fundx-gl-render");
+        renderThread.start();
+        renderHandler = new Handler(renderThread.getLooper());
+        renderHandler.post(new Runnable() { @Override public void run() {
             try {
+                setupTexEgl(st);
                 GLES20.glClearColor(0f, 0f, 0f, 1f);
                 bgRenderer.createOnGlThread();
                 querySensorOrientation();
@@ -312,31 +330,65 @@ public class FundxDepthPlugin extends Plugin {
                 gpuSession.configure(cfg);
                 gpuSession.setCameraTextureName(bgRenderer.getTextureId());
                 gpuSession.resume();
+                GLES20.glViewport(0, 0, w, h);
+                bgRenderer.setViewport(w, h);
+                gpuSession.setDisplayGeometry(displayRotationSurface(), w, h);
+                renderRunning = true;
                 JSObject r = started(true, "ok-gpu");
                 r.put("textureW", gpuTexW); r.put("textureH", gpuTexH);
                 resolveOnce(resolved, call, r);
+                renderLoop();
             } catch (Exception e) {
-                resolveOnce(resolved, call, started(false, "gpu session: " + e.getClass().getSimpleName() + ": " + e.getMessage()));
+                resolveOnce(resolved, call, started(false, "gpu render: " + e.getClass().getSimpleName() + ": " + e.getMessage()));
             }
-        }
+        }});
+    }
 
-        @Override public void onSurfaceChanged(GL10 gl, int width, int height) {
-            GLES20.glViewport(0, 0, width, height);
-            bgRenderer.setViewport(width, height);
-            if (gpuSession != null) gpuSession.setDisplayGeometry(displayRotationSurface(), width, height);
-        }
-
-        @Override public void onDrawFrame(GL10 gl) {
+    private void renderLoop() {
+        if (!renderRunning || gpuSession == null) return;
+        try {
             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-            if (gpuSession == null) return;
-            try {
-                gpuSession.setCameraTextureName(bgRenderer.getTextureId());
-                Frame frame = gpuSession.update();
-                bgRenderer.draw(frame);                 // full-res GPU camera preview at display refresh
-                gpuFrameCount++;
-                if (gpuFrameCount % analyzeEvery == 0) gpuAnalyze(frame);   // decoupled low-rate analysis
-            } catch (Throwable t) { /* transient (SessionPausedException etc.) */ }
-        }
+            gpuSession.setCameraTextureName(bgRenderer.getTextureId());
+            Frame frame = gpuSession.update();
+            bgRenderer.draw(frame);                     // full-res GPU camera preview
+            EGL14.eglSwapBuffers(rDisplay, rSurface);   // present to the TextureView
+            gpuFrameCount++;
+            if (gpuFrameCount % analyzeEvery == 0) gpuAnalyze(frame);   // decoupled low-rate analysis
+        } catch (Throwable t) { /* transient (SessionPausedException etc.) */ }
+        if (renderRunning && renderHandler != null) renderHandler.postDelayed(renderTick, 8);   // ~120Hz cap
+    }
+
+    // EGL window surface bound to the TextureView's SurfaceTexture (ES2, with alpha).
+    private void setupTexEgl(android.graphics.SurfaceTexture st) {
+        rDisplay = EGL14.eglGetDisplay(EGL14.EGL_DEFAULT_DISPLAY);
+        int[] ver = new int[2];
+        EGL14.eglInitialize(rDisplay, ver, 0, ver, 1);
+        int[] cfgAttr = {
+            EGL14.EGL_RENDERABLE_TYPE, EGL14.EGL_OPENGL_ES2_BIT,
+            EGL14.EGL_SURFACE_TYPE, EGL14.EGL_WINDOW_BIT,
+            EGL14.EGL_RED_SIZE, 8, EGL14.EGL_GREEN_SIZE, 8, EGL14.EGL_BLUE_SIZE, 8, EGL14.EGL_ALPHA_SIZE, 8,
+            EGL14.EGL_NONE
+        };
+        EGLConfig[] cfgs = new EGLConfig[1];
+        int[] n = new int[1];
+        EGL14.eglChooseConfig(rDisplay, cfgAttr, 0, cfgs, 0, 1, n, 0);
+        int[] ctxAttr = { EGL14.EGL_CONTEXT_CLIENT_VERSION, 2, EGL14.EGL_NONE };
+        rContext = EGL14.eglCreateContext(rDisplay, cfgs[0], EGL14.EGL_NO_CONTEXT, ctxAttr, 0);
+        android.view.Surface surface = new android.view.Surface(st);
+        rSurface = EGL14.eglCreateWindowSurface(rDisplay, cfgs[0], surface, new int[]{ EGL14.EGL_NONE }, 0);
+        EGL14.eglMakeCurrent(rDisplay, rSurface, rSurface, rContext);
+    }
+
+    private void teardownTexEgl() {
+        try {
+            if (rDisplay != EGL14.EGL_NO_DISPLAY) {
+                EGL14.eglMakeCurrent(rDisplay, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_CONTEXT);
+                if (rSurface != EGL14.EGL_NO_SURFACE) EGL14.eglDestroySurface(rDisplay, rSurface);
+                if (rContext != EGL14.EGL_NO_CONTEXT) EGL14.eglDestroyContext(rDisplay, rContext);
+                EGL14.eglTerminate(rDisplay);
+            }
+        } catch (Exception ignored) {}
+        rDisplay = EGL14.EGL_NO_DISPLAY; rContext = EGL14.EGL_NO_CONTEXT; rSurface = EGL14.EGL_NO_SURFACE;
     }
 
     // On the GL thread: sample depth + pose + COPY the camera YUV (all fast). The heavy JPEG encode +
@@ -437,29 +489,39 @@ public class FundxDepthPlugin extends Plugin {
     private void stopGpuPreview() {
         gpuMode = false;
         running = false;
+        renderRunning = false;
         final Activity act = getActivity();
-        final GLSurfaceView v = glView;
+        final android.view.TextureView tv = texView;
         final View webView = (getBridge() != null) ? getBridge().getWebView() : null;
         final HandlerThread enc = gpuEncThread;
-        glView = null; gpuEncThread = null; gpuEncHandler = null; gpuEncBusy = false;
+        final HandlerThread rt = renderThread;
+        final Handler rh = renderHandler;
+        texView = null; renderThread = null; renderHandler = null;
+        gpuEncThread = null; gpuEncHandler = null; gpuEncBusy = false;
         if (enc != null) enc.quitSafely();
-        if (act == null || v == null) { closeGpuSessionInline(); return; }
-        act.runOnUiThread(new Runnable() { @Override public void run() {
-            try {
-                // Close the ARCore session on the GL thread (GL-thread-affine), before the surface goes away.
-                final CountDownLatch latch = new CountDownLatch(1);
-                v.queueEvent(new Runnable() { @Override public void run() {
-                    try { if (gpuSession != null) { gpuSession.pause(); gpuSession.close(); } } catch (Exception e) {}
-                    gpuSession = null;
-                    latch.countDown();
-                }});
-                try { latch.await(1500, TimeUnit.MILLISECONDS); } catch (InterruptedException ie) {}
-                v.onPause();
-                ViewGroup parent = (ViewGroup) v.getParent();
-                if (parent != null) parent.removeView(v);
-                if (webView != null) webView.setBackgroundColor(Color.WHITE);
-            } catch (Exception e) {}
-        }});
+        // Close the ARCore session + EGL on the render thread (thread-affine), then quit the thread.
+        if (rh != null && rt != null) {
+            final CountDownLatch latch = new CountDownLatch(1);
+            rh.post(new Runnable() { @Override public void run() {
+                try { if (gpuSession != null) { gpuSession.pause(); gpuSession.close(); } } catch (Exception e) {}
+                gpuSession = null;
+                teardownTexEgl();
+                latch.countDown();
+            }});
+            try { latch.await(1500, TimeUnit.MILLISECONDS); } catch (InterruptedException ie) {}
+            rt.quitSafely();
+        } else {
+            closeGpuSessionInline();
+        }
+        if (act != null && tv != null) {
+            act.runOnUiThread(new Runnable() { @Override public void run() {
+                try {
+                    ViewGroup parent = (ViewGroup) tv.getParent();
+                    if (parent != null) parent.removeView(tv);
+                    if (webView != null) webView.setBackgroundColor(Color.WHITE);
+                } catch (Exception e) {}
+            }});
+        }
     }
 
     private void closeGpuSessionInline() {

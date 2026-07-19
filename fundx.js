@@ -756,12 +756,12 @@
       // WebView) IS the preview — full-res, hardware-accelerated. No JS canvas; the streamed
       // low-res frames drive ONLY the analysis pipeline. body.fundx-gpu makes the camera area
       // transparent so the native surface shows through. Falls back to getUserMedia on failure.
-      try { document.body.classList.add("fundx-gpu"); } catch (e) {}
+      try { document.documentElement.classList.add("fundx-gpu"); document.body.classList.add("fundx-gpu"); } catch (e) {}
       if (video) video.style.display = "none";
       startOpts.gpuPreview = true;
       starter = cam.startNative(video, onFrame, startOpts).catch(function () {
         usingNative = false; usingGpu = false;
-        try { document.body.classList.remove("fundx-gpu"); if (video) video.style.display = ""; } catch (x) {}
+        try { document.documentElement.classList.remove("fundx-gpu"); document.body.classList.remove("fundx-gpu"); if (video) video.style.display = ""; } catch (x) {}
         delete startOpts.gpuPreview;
         return cam.start(video, onFrame, startOpts);
       });
@@ -896,7 +896,7 @@
       runProcessing(burst);
     }, 140);
   }
-  function stopCamera() { try { if (cam) cam.stop(); } catch (e) {} try { document.body.classList.remove("fundx-gpu"); } catch (e) {} usingGpu = false; VOICE.stop(); }
+  function stopCamera() { try { if (cam) cam.stop(); } catch (e) {} try { document.documentElement.classList.remove("fundx-gpu"); document.body.classList.remove("fundx-gpu"); } catch (e) {} usingGpu = false; VOICE.stop(); }
   // Lifecycle: releasing the camera when the app is backgrounded (tab hidden / app to
   // background) prevents the stream + rAF loop running invisibly (battery/thermal). Wired
   // once; on return the user is on the pre-capture screen and can restart.

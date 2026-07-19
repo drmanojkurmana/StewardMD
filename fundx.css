@@ -327,7 +327,7 @@
    Everything covering the camera viewport must be transparent for the GL/ARKit surface to show
    through; only the FundX chrome (header, coach, chips, reticle, debug, button) stays opaque.
    NOTE: transparency/z-order is device-compositor-dependent and needs on-device visual tuning. */
-body.fundx-gpu { background: transparent !important; }
+html.fundx-gpu, body.fundx-gpu { background: transparent !important; background-color: transparent !important; }
 body.fundx-gpu > *:not(#fundxRoot):not(script):not(style) { visibility: hidden !important; }
 body.fundx-gpu #fundxRoot,
 body.fundx-gpu .fundx-cam,
