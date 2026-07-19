@@ -143,12 +143,23 @@ export function createStewardAI(store, opts) {
     const rank = (tier) => { const i = precedence.indexOf(tier); return i < 0 ? 99 : i; };
     const byPref = recs.slice().sort((a, b) => rank(a.tier) - rank(b.tier));
     const def = byPref[0] || null;
+    // Preserve the STRUCTURED dosing (dose/route/freq/why), not just the drug name. Flattening a
+    // rich drugRef {composition,dose,…} down to x.composition dropped every figure, so the grounding
+    // package carried "atropine, pralidoxime" with no numbers — the model then described management
+    // and re-OFFERED the dose it never received. drugRefs stays a string[] of names for backward
+    // compatibility (server join + addDrug); the numbers ride alongside in `dosing`.
+    const dosingOf = (rec) => (rec.drugRefs || []).map((x) => ({
+      drug: x.composition || null, label: x.regimenLabel || null,
+      dose: x.dose || null, route: x.route || null, freq: x.freq || null, why: x.why || null,
+    })).filter((d) => d.drug && (d.dose || d.route || d.freq));
     const out = {
       diseaseId, precedence,
       default: def ? { tier: def.tier || null, line: def.line || null, source: (def.evidence && def.evidence.ref) || null,
-        drugRefs: (def.drugRefs || []).map((x) => x.composition).filter(Boolean) } : null,
+        regimenLabel: def.regimenLabel || null, steps: def.steps || null,
+        drugRefs: (def.drugRefs || []).map((x) => x.composition).filter(Boolean),
+        dosing: dosingOf(def) } : null,
       alternatives: recs.filter((r) => r !== def).map((r) => ({ tier: r.tier || null, line: r.line || null,
-        drugRefs: (r.drugRefs || []).map((x) => x.composition).filter(Boolean) })),
+        drugRefs: (r.drugRefs || []).map((x) => x.composition).filter(Boolean), dosing: dosingOf(r) })),
       overlay: null, overlayApplied: false, conflicts: [],
     };
     if (hospitalId && policies[hospitalId]) {

@@ -308,7 +308,7 @@ const KNOWLEDGE_SYS =
   "- Lead with the direct answer in the first sentence, then add just enough detail.\n" +
   "- ADAPT the format. A simple or factual question -> 1-3 sentences or a few tight bullets, NO headings. A broad 'manage X' / 'in detail' question -> organise with a few short markdown headings or bullets where they genuinely help. Never pour a short answer into a fixed template of empty headings.\n" +
   "- Write in clean, conversational prose; bullets for lists (drugs, steps, differentials), short paragraphs otherwise; bold key terms sparingly.\n" +
-  "- When it helps, end with ONE natural follow-up offer (e.g. 'Want the pregnancy-safe options or the paediatric dose?') — a single line, not a menu.\n" +
+  "- When it helps, end with ONE natural follow-up offer (e.g. 'Want the pregnancy-safe options or the paediatric dose?') — a single line, not a menu. Offer only something you have NOT already offered, and never dangle content you cannot then deliver.\n" +
   "SAFETY & HONESTY (non-negotiable):\n" +
   "1. Answer ONLY what was asked. NEVER describe what is or is not in your knowledge base, and NEVER say things like 'the retrieved knowledge contains...' or 'no specific question was posed'.\n" +
   "2. Always finish — complete every thought and sentence; never trail off mid-answer.\n" +
@@ -316,6 +316,7 @@ const KNOWLEDGE_SYS =
   "4. This is general clinical education, not individualised patient advice. If it is clearly about one specific patient, answer the general question and add a short line suggesting StewardMD's Clinical Reasoning / Dx My Patient. Never use patient identifiers.\n" +
   "5. Do not mention the AI provider, model, retrieval, chunks, or any internal detail, and do not tack on a long disclaimer (the UI already shows one).\n" +
   "6. STAY ON TOPIC: the retrieved knowledge is keyword-matched and can be OFF-TOPIC, especially for short follow-ups. Judge every retrieved chunk against the RECENT CONVERSATION; if it is about a different condition than the one under discussion, IGNORE it completely and continue the conversation's topic from mainstream knowledge. Never switch to an unrelated disease because a chunk shares a word with the question (e.g. a follow-up about 'first-line treatment' of the current topic must never become an answer about 'First Bite Syndrome').\n" +
+  "7. DELIVER, DON'T RE-OFFER: when the clinician affirms an offer you just made ('yes', 'sure', 'go ahead', 'both') or asks a follow-up about it, PROVIDE that content in full right now — the actual doses, options or steps. Never repeat the same offer or ask again if they'd like it; deliver it now. Check the RECENT CONVERSATION so you don't re-describe what you already said.\n" +
   "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content.";
 
 // Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
@@ -366,7 +367,18 @@ function renderGroundedPrompt(pkg) {
     const t = pkg.treatment;
     L.push("\n=== TREATMENT RESOLUTION (precedence " + (t.precedence || []).join(" ▸ ") + ") ===");
     if (t.default) L.push("Default [" + (t.default.tier || "?") + "]: " + clip(t.default.line, 200) + (t.default.drugRefs && t.default.drugRefs.length ? " — drugs: " + t.default.drugRefs.join(", ") : "") + (t.default.source ? " (" + t.default.source + ")" : ""));
-    (t.alternatives || []).slice(0, 4).forEach((a) => L.push("Alt [" + (a.tier || "?") + "]: " + clip(a.line, 160) + (a.drugRefs && a.drugRefs.length ? " — " + a.drugRefs.join(", ") : "")));
+    if (t.default && t.default.steps && t.default.steps.length) t.default.steps.slice(0, 8).forEach((s) => L.push("   - " + clip(s, 200)));
+    // Structured DOSING from the treatment resolution — the exact figures the clinician asks for.
+    // Emitting drug names alone made MaiK re-offer the dose it never received; give it the numbers.
+    if (t.default && t.default.dosing && t.default.dosing.length) {
+      L.push("   Dosing (protocol figures — state these when asked; verify locally):");
+      t.default.dosing.slice(0, 8).forEach((d) => L.push("     • " + d.drug + (d.label ? " (" + clip(d.label, 60) + ")" : "") + ": " +
+        [d.dose, d.route, d.freq].filter(Boolean).map((x) => clip(x, 120)).join(" · ") + (d.why ? " — " + clip(d.why, 160) : "")));
+    }
+    (t.alternatives || []).slice(0, 4).forEach((a) => {
+      L.push("Alt [" + (a.tier || "?") + "]: " + clip(a.line, 160) + (a.drugRefs && a.drugRefs.length ? " — " + a.drugRefs.join(", ") : ""));
+      if (a.dosing && a.dosing.length) a.dosing.slice(0, 6).forEach((d) => L.push("     • " + d.drug + ": " + [d.dose, d.route, d.freq].filter(Boolean).map((x) => clip(x, 120)).join(" · ")));
+    });
     if (t.overlayApplied && t.overlay) L.push("Hospital overlay (" + t.overlay.hospitalId + ", SEPARATE — does not replace the default): " + clip(JSON.stringify(t.overlay.recommendation), 400));
   }
   const rf = pkg.refs || {};
