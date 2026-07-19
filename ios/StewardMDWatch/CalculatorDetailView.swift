@@ -22,7 +22,9 @@ struct CalculatorDetailView: View {
 
 // MARK: qSOFA — three criteria toggles
 private struct QSOFACalc: View {
-    @State private var rr = false, mentation = false, sbp = false
+    @State private var rr = false
+    @State private var mentation = false
+    @State private var sbp = false
     private var score: Int {
         CalculatorEngine.qSOFA(rr: rr ? 24 : 12, alteredMentation: mentation, sbp: sbp ? 90 : 120)
     }
@@ -56,7 +58,9 @@ private struct ShockCalc: View {
 
 // MARK: GCS — eye/verbal/motor steppers
 private struct GCSCalc: View {
-    @State private var eye = 4, verbal = 5, motor = 6
+    @State private var eye = 4
+    @State private var verbal = 5
+    @State private var motor = 6
     private var score: Int { CalculatorEngine.gcs(eye: eye, verbal: verbal, motor: motor) }
     var body: some View {
         List {
@@ -72,8 +76,13 @@ private struct GCSCalc: View {
 
 // MARK: NEWS2 — compact vitals entry
 private struct NEWS2Calc: View {
-    @State private var rr = 16.0, spo2 = 98.0, sbp = 120.0, pulse = 70.0, temp = 37.0
-    @State private var onOxygen = false, alert = true
+    @State private var rr = 16.0
+    @State private var spo2 = 98.0
+    @State private var sbp = 120.0
+    @State private var pulse = 70.0
+    @State private var temp = 37.0
+    @State private var onOxygen = false
+    @State private var alert = true
     private var score: Int {
         CalculatorEngine.news2(rr: Int(rr), spo2: Int(spo2), onOxygen: onOxygen,
                                sbp: Int(sbp), pulse: Int(pulse), alert: alert, tempC: temp)
