@@ -201,7 +201,7 @@ export async function classifyDocument(env, meta) {
     meta.prompt ? "=== ADMIN NOTE ===\n" + String(meta.prompt).slice(0, 2000) : "",
     meta.url ? "Provided URL: " + meta.url : "",
     meta.title ? "Title: " + meta.title : "",
-    meta.excerpt ? "\n=== SOURCE TEXT (summarize in your OWN words; do not copy) ===\n" + String(meta.excerpt).slice(0, 8000) : "",
+    meta.excerpt ? "\n=== SOURCE TEXT (summarize in your OWN words; do not copy) ===\n" + String(meta.excerpt).slice(0, 30000) : "",
     searchBlock,
   ].filter(Boolean).join("\n");
   const gate = await meterGate(env, "updates_classify");

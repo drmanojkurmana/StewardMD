@@ -67,15 +67,43 @@ function firePush(context, item, workspace) {
     }
   } catch (e) {}
 }
+// Extract a PDF's text via Cloudflare Workers AI toMarkdown (env.AI binding). This is what lets the
+// AI push box actually READ a guideline/FDA/EMA PDF instead of falling back to generic filler.
+// Never throws — returns {ok:false, note} so the caller can log why and degrade to note+search.
+async function pdfToText(env, u, resp) {
+  try {
+    if (!(env && env.AI && typeof env.AI.toMarkdown === "function")) return { ok: false, contentType: "application/pdf", note: "no-ai-binding" };
+    const buf = await resp.arrayBuffer();
+    if (buf.byteLength > 30 * 1024 * 1024) return { ok: false, contentType: "application/pdf", note: "pdf-too-large-" + buf.byteLength };
+    const name = ((u.split(/[?#]/)[0].split("/").pop()) || "document.pdf").slice(0, 120) || "document.pdf";
+    const res = await env.AI.toMarkdown({ name, blob: new Blob([buf], { type: "application/pdf" }) });
+    const conv = Array.isArray(res) ? res[0] : res;
+    if (!conv || conv.format !== "markdown" || !conv.data) {
+      try { console.warn("[classify] pdf->md failed:", (conv && conv.error) || "no-data"); } catch (e) {}
+      return { ok: false, contentType: "application/pdf", note: (conv && conv.error) || "pdf-convert-failed" };
+    }
+    const md = String(conv.data).replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim();
+    const hm = md.match(/^#{1,3}\s+(.+)$/m);                                   // first heading = title
+    const title = (hm ? hm[1] : name).replace(/\s+/g, " ").trim().slice(0, 240);
+    try { console.log("[classify] pdf->md ok:", md.length, "chars", conv.tokens ? "(" + conv.tokens + " tok)" : ""); } catch (e) {}
+    return { ok: true, title, text: md.slice(0, 30000) };                     // large slice: key-changes pages sit near the front
+  } catch (e) {
+    try { console.warn("[classify] pdf->md exception:", String((e && e.message) || e)); } catch (x) {}
+    return { ok: false, contentType: "application/pdf", note: "pdf-exception" };
+  }
+}
+
 // Fetch a URL and reduce it to a title + bounded plain-text excerpt for the AI classifier
-// (admin "AI push box"). Best-effort: HTML is stripped to text; PDFs/binaries yield little text,
-// so the admin's note carries the gist. Never throws — returns {ok:false} on any failure.
-async function fetchUrlText(u) {
+// (admin "AI push box"). HTML is stripped to text; PDFs go through Workers AI toMarkdown.
+// Never throws — returns {ok:false} on any failure so the classifier degrades to note+search.
+async function fetchUrlText(env, u) {
   try {
     const r = await fetch(u, { headers: { "User-Agent": "Mozilla/5.0 (StewardMD-admin classifier)" }, redirect: "follow" });
     if (!r.ok) return { ok: false, status: r.status };
     const ct = (r.headers.get("content-type") || "").toLowerCase();
-    if (ct.indexOf("html") < 0 && ct.indexOf("text") < 0) return { ok: false, contentType: ct };  // PDF/binary → rely on note
+    const isPdf = ct.indexOf("pdf") >= 0 || /\.pdf(\?|#|$)/i.test(u);
+    if (isPdf) return await pdfToText(env, u, r);
+    if (ct.indexOf("html") < 0 && ct.indexOf("text") < 0) return { ok: false, contentType: ct };  // other binary → rely on note+search
     const html = (await r.text()).slice(0, 400000);
     const tm = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
     const title = tm ? tm[1].replace(/\s+/g, " ").trim().slice(0, 240) : "";
@@ -84,7 +112,7 @@ async function fetchUrlText(u) {
       .replace(/<[^>]+>/g, " ")
       .replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&#39;/g, "'").replace(/&quot;/gi, '"')
       .replace(/\s+/g, " ").trim();
-    return { ok: true, title, text: text.slice(0, 8000) };
+    return { ok: true, title, text: text.slice(0, 16000) };
   } catch (e) { return { ok: false, error: String((e && e.message) || e) }; }
 }
 // Group new/updated pipeline items by workspace and fire one targeted push per
@@ -215,7 +243,7 @@ export async function onRequest(context) {
       if (!srcUrl && !prompt) return json({ error: "url-or-prompt-required" }, 400);
       let title = "", excerpt = "", fetchNote = "";
       if (srcUrl) {
-        const f = await fetchUrlText(srcUrl);
+        const f = await fetchUrlText(env, srcUrl);
         if (f.ok) { title = f.title; excerpt = f.text; }
         else fetchNote = "could-not-fetch-page" + (f.status ? "-" + f.status : "");   // classifier falls back to the note+url+search
       }
