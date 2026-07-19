@@ -424,9 +424,9 @@
     poc += '</div><div class="sw-pocnote">Antibiotic choice + dose per local antibiogram / ICMR &amp; the individual patient — these tools help you decide.</div></div>';
     h += poc;
     h += '<div class="sw-fb" id="swFb"><span class="q">Early access — was this helpful?</span>' +
-      '<span class="btns"><button class="sw-fbbtn" data-v="up" aria-label="Helpful">👍</button>' +
-      '<button class="sw-fbbtn" data-v="down" aria-label="Not helpful">👎</button>' +
-      '<button class="sw-fbflag" data-v="flag">⚑ Flag an error</button></span></div>';
+      '<span class="btns"><button class="sw-fbbtn" data-v="up" aria-label="Helpful">' + wsIco("thumbUp") + '</button>' +
+      '<button class="sw-fbbtn" data-v="down" aria-label="Not helpful">' + wsIco("thumbDown") + '</button>' +
+      '<button class="sw-fbflag" data-v="flag">' + wsIco("flag") + ' Flag an error</button></span></div>';
     h += '</div>';
     box.innerHTML = h;
     var oi = box.querySelector("#swOutIM"); if (oi) oi.addEventListener("click", openIM);
