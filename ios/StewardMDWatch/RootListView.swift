@@ -32,7 +32,19 @@ struct RootListView: View {
                 ComingSoonDetail(destination: dest)   // delivered in later phases
             }
         }
-        .onAppear { session.reload() }
+        .onAppear {
+            session.reload()
+            publishGlance()
+        }
+        .onChange(of: labs.unacknowledgedCount) { _, _ in publishGlance() }
+    }
+
+    private func publishGlance() {
+        let top = labs.labs.first { !labs.isAcknowledged($0.id) }
+        GlancePublisher.setCritical(
+            count: labs.unacknowledgedCount,
+            top: top.map { "\($0.analyte) \($0.value)" }
+        )
     }
 }
 

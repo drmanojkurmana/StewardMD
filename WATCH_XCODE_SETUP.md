@@ -73,9 +73,11 @@ Confirm the phone `App` target builds and runs as before (no regressions).
    **in.stewardmd.app.watchkitapp.widgets**  ·  Embed in **StewardMDWatch**.
 3. Delete the generated sources / Info.plist for the extension.
 4. **Add Files…** → add everything under `ios/StewardMDWatchWidgets/`
-   (`StewardMDWatchWidgets.swift`, `Info.plist`,
-   `StewardMDWatchWidgets.entitlements`). Target Membership =
-   **StewardMDWatchWidgets**.
+   (`StewardMDWatchWidgets.swift` bundle, `GlanceProvider.swift`,
+   `WidgetViews.swift`, `Complications.swift`, `SmartStackWidgets.swift`,
+   `Info.plist`, `StewardMDWatchWidgets.entitlements`). Target Membership =
+   **StewardMDWatchWidgets** for the `.swift` files (Info.plist/entitlements via
+   build settings, not as resources).
 5. Build Settings:
    - `INFOPLIST_FILE = ios/StewardMDWatchWidgets/Info.plist`
    - `GENERATE_INFOPLIST_FILE = NO`

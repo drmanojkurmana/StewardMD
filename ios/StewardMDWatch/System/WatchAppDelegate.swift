@@ -1,4 +1,5 @@
 import WatchKit
+import WidgetKit
 import UserNotifications
 import StewardMDWatchCore
 
@@ -28,5 +29,11 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate, UNUserNotificatio
                                 willPresent notification: UNNotification) async
         -> UNNotificationPresentationOptions {
         [.banner, .sound, .list]
+    }
+
+    // A silent/background push refreshes complications + Smart Stack timelines.
+    func didReceiveRemoteNotification(_ userInfo: [AnyHashable: Any]) async -> WKBackgroundFetchResult {
+        WidgetCenter.shared.reloadAllTimelines()
+        return .newData
     }
 }
