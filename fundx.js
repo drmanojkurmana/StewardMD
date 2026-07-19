@@ -258,11 +258,87 @@
   function handleUploadFiles(files) {
     var imgs = Array.prototype.slice.call(files || []).filter(function (f) { return f && /^image\//.test(f.type); });
     if (!imgs.length) { toast("Choose an image file."); return; }
-    if (imgs.length > 1) toast("Analyzing the first of " + imgs.length + " — batch analysis is coming.");
-    readFileDataUrl(imgs[0]).then(function (url) {
-      if (!url) { toast("Could not read that image."); return; }
-      processImageUpload(url);
+    // "Add more" from the batch screen sets batchAppendPending — route the whole pick (1 or many)
+    // into the existing batch as an append, rather than switching to the single-image result view.
+    var append = batchAppendPending; batchAppendPending = false;
+    Promise.all(imgs.slice(0, 12).map(readFileDataUrl)).then(function (urls) {
+      urls = urls.filter(Boolean);
+      if (!urls.length) { toast("Could not read the image(s)."); return; }
+      if (append) processBatchUpload(urls, true);
+      else if (urls.length === 1) processImageUpload(urls[0]);
+      else processBatchUpload(urls);
     });
+  }
+  // ---- Batch upload: analyze many fundus images, each through the same pipeline ------------
+  var batchResults = [], batchBusy = false, batchTotal = 0, batchRun = 0, batchAppendPending = false;
+  // Cancel any in-flight batch loop (bump the run token so its recursive next() bails on the next
+  // tick — no more per-image provider calls) and clear the busy flag. Called when the user leaves
+  // the batch screen or starts a different workflow, so an abandoned batch can't keep spending
+  // inference calls, and a newer batch can't race the old one into the shared batchResults array.
+  // Also clears batchResults so the array only ever holds an ACTIVE batch — leaving to home / live /
+  // single-upload / close abandons it. (Keeps batchResults.length a reliable "a live batch exists"
+  // signal and stops a stale batch from leaking across workflows.) The append path does NOT route
+  // through here, so "Add more" still preserves the batch.
+  function cancelBatch() { batchRun++; batchBusy = false; batchAppendPending = false; batchResults = []; }
+  // append=true keeps the existing batchResults and adds the new images (the "Add more" affordance
+  // genuinely accumulates instead of silently replacing already-analyzed acceptable scans).
+  function processBatchUpload(dataUrls, append) {
+    var run = ++batchRun;                 // run token — supersedes any prior in-flight batch
+    if (!append) { batchResults = []; batchTotal = 0; }
+    batchBusy = true; batchTotal += dataUrls.length;
+    if (!session || session.mode !== "upload") { session = newSession((session && session.eye) || "right"); session.mode = "upload"; }
+    session.source = "upload";
+    screen = "batch"; render();
+    var i = 0;
+    // Analyze ONE image; the returned promise settles when it (or its failure) is handled. A
+    // synchronous throw or a non-thenable provider return rejects it, but next()'s terminal handler
+    // still advances — so one bad image can never strand the batch at "analyzing…" (batchBusy stuck).
+    function step(url) {
+      return computeImageMetrics(url).then(function (metrics) {
+        if (run !== batchRun) return;     // superseded/cancelled mid-flight — stop, don't push
+        var r = FUNDX._buildUploadResult(url, metrics, ctx, session.eye);
+        if (!r) return;
+        r.source = "upload"; r._metrics = metrics;
+        return enhanceDataUrl(url).then(function (enh) { if (enh) r.images.processed = enh; }).catch(function () {})
+          .then(function () {
+            var P = window.SMD_FUNDX_PROVIDERS;
+            if (r.quality && r.quality.retinalGate !== false && P && P.analyzeFindings) {
+              return P.analyzeFindings({ imageDataUrl: r.images.processed || r.images.original, quality: r.quality.overall, metrics: metrics }, { patientRef: (ctx && ctx.ref) || null, eye: session.eye, ts: nowMs() }).then(function (f) { if (f) r.findings = f; }).catch(function () {});
+            }
+          })
+          .then(function () { if (run !== batchRun) return; batchResults.push(r); if (screen === "batch") render(); });
+      });
+    }
+    function next() {
+      if (run !== batchRun) return;       // a newer batch (or cancelBatch) took over — end this loop
+      if (i >= dataUrls.length) { batchBusy = false; if (screen === "batch") render(); return; }
+      step(dataUrls[i++]).catch(function () {}).then(function () { next(); });
+    }
+    next();
+  }
+  function screenBatch() {
+    var Ve = V();
+    var rows = batchResults.map(function (r, i) {
+      var gated = r.quality && r.quality.retinalGate === false;
+      var qw = (Ve && Ve.qualityWord) ? Ve.qualityWord(r.quality) : { label: "" };
+      var prim = "";
+      try { if (!gated && clinicalOn() && window.SMD_FUNDX_CLINICAL) { var rep = window.SMD_FUNDX_CLINICAL.buildReport({ vision: r.findings, quality: r.quality, patientContext: patientCtx() }); prim = rep.differential.length ? rep.differential[0].label : "No significant features"; } } catch (e) {}
+      return '<button class="fundx-scan" data-fx="openbatch" data-i="' + i + '">' +
+        (r.images.thumbnail ? '<img src="' + esc(r.images.thumbnail) + '" alt="">' : '<span class="fundx-scan-ph">' + ric("visibility") + '</span>') +
+        '<div class="fundx-scan-m"><b>Image ' + (i + 1) + ' · ' + esc(qw.label) + '</b><span>' + esc(gated ? "Point at the eye — not a retinal image" : (prim || "Tap to review")) + '</span></div>' +
+        '<span class="fundx-q">' + (gated ? '—' : Math.round(r.quality.overall)) + '</span></button>';
+    }).join("");
+    var acceptable = batchResults.filter(function (r) { return r.quality && r.quality.retinalGate !== false; }).length;
+    return '' +
+      '<header class="fundx-head rds-safe-top"><button class="fundx-close" data-fx="home" aria-label="Back">' + ric("arrow_back_ios_new") + '</button><div class="fundx-head-tt"><b>Batch analysis</b><div class="fundx-sub">' + batchResults.length + ' / ' + batchTotal + (batchBusy ? ' · analyzing…' : ' analyzed') + '</div></div><div class="fundx-head-sp"></div></header>' +
+      '<main class="fundx-scroll">' +
+        '<div class="fundx-recent">' + (rows || '<div class="fundx-empty">' + ric(batchBusy ? "hourglass_empty" : "visibility_off") + '<span>' + (batchBusy ? "Analyzing…" : "No retinal images detected.") + '</span></div>') + '</div>' +
+        // "Add more" is available whenever analysis has settled — even when every image failed the
+        // retinal gate (acceptable === 0), so the user can add correct images in place rather than
+        // being stranded with only the back arrow. Save appears only when ≥1 image is acceptable.
+        (!batchBusy ? '<div class="fundx-actions"><button class="fundx-btn ghost" data-fx="batchmore">' + ric("add_photo_alternate") + 'Add more</button>' + (acceptable ? '<button class="fundx-btn" data-fx="saveallbatch">' + ric("save") + 'Save ' + acceptable + ' to patient</button>' : '') + '</div>' : '') +
+        '<p class="fundx-disc">' + disclaimerText() + '</p>' +
+      '</main>';
   }
   function wireUpload() {
     var input = document.getElementById("fundxFileInput");
@@ -487,8 +563,9 @@
         '</div>' +
         clinicalCard(result ? { vision: result.findings, quality: result.quality, eye: session && session.eye, patientContext: patientCtx(), clinicianReview: result.clinicianReview } : null, "result") +
         '<div class="fundx-actions">' +
-          '<button class="fundx-btn ghost" data-fx="discard">' + ric("delete") + 'Discard</button>' +
-          '<button class="fundx-btn" data-fx="save">' + ric("save") + 'Save to patient</button>' +
+          '<button class="fundx-btn ghost sm" data-fx="discard">' + ric("delete") + 'Discard</button>' +
+          '<button class="fundx-btn ghost sm" data-fx="sharereport" data-scope="result">' + ric("ios_share") + 'Share</button>' +
+          '<button class="fundx-btn sm" data-fx="save">' + ric("save") + 'Save</button>' +
         '</div>' +
         '<p class="fundx-disc">' + esc(f.disclaimer || disclaimerText()) + '</p>' +
       '</main>';
@@ -532,8 +609,9 @@
           row("Operator", esc((m.audit && m.audit.operator) || "—")) +
         '</div>' +
         clinicalCard(m, "detail") +
-        '<div class="fundx-actions"><button class="fundx-btn ghost" data-fx="deletescan" data-id="' + esc(m.id) + '">' + ric("delete") + 'Delete</button>' +
-          '<button class="fundx-btn" data-fx="export" data-id="' + esc(m.id) + '">' + ric("ios_share") + 'Export JSON</button></div>' +
+        '<div class="fundx-actions"><button class="fundx-btn ghost sm" data-fx="deletescan" data-id="' + esc(m.id) + '">' + ric("delete") + 'Delete</button>' +
+          '<button class="fundx-btn ghost sm" data-fx="sharereport" data-scope="detail">' + ric("ios_share") + 'Share</button>' +
+          '<button class="fundx-btn sm" data-fx="export" data-id="' + esc(m.id) + '">' + ric("code") + 'JSON</button></div>' +
         '<p class="fundx-disc">' + esc(f.disclaimer || disclaimerText()) + '</p>' +
       '</main>';
   }
@@ -907,6 +985,7 @@
   function tel(fn) { try { var T = window.SMD_FUNDX_TELEMETRY; if (T && T[fn]) T[fn].apply(T, Array.prototype.slice.call(arguments, 1)); } catch (e) {} }
   function startCamera() {
     var Vd = DET(); if (!Vd) { toast("FundX perception layer not loaded."); return; }
+    cancelBatch();   // starting live capture supersedes any in-flight batch run
     screen = "camera"; capturing = false; lastHapticState = ""; lastCoachArrow = null; lastCritical = false; lastCoachText = ""; lastCoachTier = ""; lastCoachDetail = ""; lastStepKey = null;
     session = session || newSession("right");
     if (session.mode !== "training") {
@@ -1182,6 +1261,7 @@
   // Analyze ONE uploaded fundus image through the unified downstream (Quality Review → AI → Report).
   function processImageUpload(dataUrl) {
     if (!dataUrl) return;
+    cancelBatch();   // a single-image analysis supersedes any in-flight batch run
     if (!session || session.mode !== "upload") { session = newSession((session && session.eye) || "right"); session.mode = "upload"; }
     session.source = "upload"; session.burstCount = 1; session.captureMode = "upload";
     screen = "processing"; render();
@@ -1233,7 +1313,9 @@
           ).then(function (f) { if (f) result.findings = f; }).catch(function () {});
         }
       })
-      .then(function () { screen = "review"; render(); });
+      // Both settle paths route to review exactly once — a synchronous throw / non-thenable return
+      // from a misconfigured provider must not leave the operator stuck on "processing…".
+      .then(function () { screen = "review"; render(); }, function () { screen = "review"; render(); });
   }
 
   // ================= PURE HELPERS (unit-tested, DOM-free) =================
@@ -1295,7 +1377,11 @@
         captureMode: res.captureMode || "auto",
         captureReadinessPct: (res.captureReadinessPct != null) ? res.captureReadinessPct : null,
         readinessTrace: (stats && stats.readinessTrace) ? stats.readinessTrace.slice(-60) : [],
-        stateHistory: (sm && sm.history) ? sm.history.slice(-40) : []
+        // stateHistory is a LIVE-capture acquisition trace only. `sm` is a module global that
+        // outlives its capture (stopCamera never nulls it — the live save reads it AFTER teardown),
+        // so an upload saved after any live scan would otherwise embed that prior session's trace.
+        // Gate on source: uploads always get [] regardless of `sm`. (Adversarial-review provenance fix.)
+        stateHistory: (res && res.source !== "upload" && sm && sm.history) ? sm.history.slice(-40) : []
       },
       source: (res && res.source) || "live",
       vision: res.findings,
@@ -1309,6 +1395,88 @@
     };
   }
 
+  // Human-readable structured clinical report (README 09) — for export / share / documentation.
+  function buildReportText(record) {
+    record = record || {};
+    var C = window.SMD_FUNDX_CLINICAL, Ve = V();
+    var rep = null; try { rep = (C && clinicalOn()) ? C.buildReport(record) : null; } catch (e) {}
+    var q = record.quality || {};
+    var qw = (Ve && Ve.qualityWord) ? Ve.qualityWord(q) : { label: "" };
+    var p = record.patientContext || {}, L = [];
+    L.push("FUNDX AI — RETINAL ASSESSMENT (advisory, not a diagnosis)", "");
+    if (p.name || p.ref) L.push("Patient: " + [p.name, p.ref].filter(Boolean).join(" · "));
+    if (p.meta) L.push("Context: " + p.meta);
+    if (record.eye) L.push("Eye: " + String(record.eye).toUpperCase());
+    if (record.timestamp) { try { L.push("Date: " + new Date(record.timestamp).toLocaleString()); } catch (e) {} }
+    L.push("Source: " + (record.source === "upload" ? "Uploaded image" : "Live capture"));
+    L.push("Image quality: " + qw.label + (q.overall != null ? " (" + Math.round(q.overall) + "/100)" : ""), "");
+    if (rep) {
+      if (rep.urgentFindings && rep.urgentFindings.length) L.push("URGENT — " + rep.urgentFindings.map(function (s) { return s.replace(/_/g, " "); }).join(", "), "");
+      L.push("Severity: " + rep.severity + "    Urgency: " + rep.urgency + (rep.confidence != null ? "    Confidence: " + rep.confidence : ""), "");
+      L.push("DIFFERENTIAL (advisory):");
+      if (rep.differential.length) rep.differential.forEach(function (d) { L.push("  " + d.rank + ". " + d.label + " — " + d.severity + " / " + d.likelihood + (d.reasoning ? "  [" + d.reasoning + "]" : "")); });
+      else L.push("  No significant retinal features detected this scan.");
+      L.push("");
+      var rc = rep.recommendations || {};
+      if (rc.referral) L.push("Referral: " + rc.referral.to + " · " + rc.referral.priority + (rc.referral.reason ? " — " + rc.referral.reason : ""));
+      if (rc.followUp) L.push("Follow-up: " + rc.followUp.interval);
+      if (rc.investigations && rc.investigations.length) L.push("Suggested: " + rc.investigations.join(", "));
+      if (rep.safetyFlags && rep.safetyFlags.length) L.push("Flags: " + rep.safetyFlags.map(function (s) { return s.replace(/_/g, " "); }).join(", "));
+      var rv = record.clinicianReview;
+      if (rv && rv.status && rv.status !== "pending") L.push("", "Clinician review: " + rv.status + (rv.note ? " — " + rv.note : "") + (rv.editedConclusion ? "  · edited: " + rv.editedConclusion : ""));
+      L.push("", rep.disclaimer);
+    } else {
+      L.push("(Enable the clinical assessment in Settings for the advisory differential + recommendations.)");
+    }
+    L.push("", "— FundX AI · StewardMD. Advisory clinical decision support; a qualified clinician makes the final decision.");
+    return L.join("\n");
+  }
+  // Share the report via the native share sheet (Capacitor Share), the Web Share API, or clipboard.
+  // Each layer degrades to the next on a GENUINE failure (plugin present but no working share sheet,
+  // Web Share absent, etc.) — but a deliberate user CANCEL is respected, never "recovered" by
+  // silently copying. Previously the Capacitor branch early-returned on mere plugin presence and
+  // swallowed rejections, so a failed share in a browser/WKWebView dead-ended with no feedback.
+  var SHARE_TITLE = "FundX AI retinal assessment";
+  function shareCancelled(e) { try { return !!e && (e.name === "AbortError" || /cancel|abort|dismiss/i.test(e.message || String(e))); } catch (x) { return false; } }
+  function clipboardShare(text) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        // Await the write: writeText rejects when the document isn't focused or permission is denied,
+        // so the toast must reflect the actual result rather than a premature "copied".
+        navigator.clipboard.writeText(text).then(function () { toast("Report copied to clipboard."); }, function () { toast("Sharing not available on this device."); });
+        return;
+      }
+    } catch (e) {}
+    toast("Sharing not available on this device.");
+  }
+  function webShareOrClipboard(text) {
+    try { if (navigator.share) { navigator.share({ title: SHARE_TITLE, text: text }).catch(function (e) { if (!shareCancelled(e)) clipboardShare(text); }); return; } } catch (e) {}
+    clipboardShare(text);
+  }
+  function shareReport(record) {
+    var text = buildReportText(record);
+    try {
+      var Sh = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Share;
+      if (Sh && Sh.share) { Sh.share({ title: SHARE_TITLE, text: text, dialogTitle: "Share assessment" }).catch(function (e) { if (!shareCancelled(e)) webShareOrClipboard(text); }); return; }
+    } catch (e) {}
+    webShareOrClipboard(text);
+  }
+  function resultRecordLike() {
+    if (!result) return null;
+    return { vision: result.findings, quality: result.quality, eye: session && session.eye, patientContext: patientCtx(), source: result.source, timestamp: nowMs(), clinicianReview: result.clinicianReview };
+  }
+
+  function saveBatchAll() {
+    var st = STORE(); if (!st) { toast("Storage unavailable."); return; }
+    var toSave = batchResults.filter(function (r) { return r.quality && r.quality.retinalGate !== false; });
+    if (!toSave.length) { toast("No usable images to save."); return; }
+    var saved = 0;
+    toSave.forEach(function (r) {
+      if (clinicalOn() && window.SMD_FUNDX_CLINICAL && !r.clinical) { try { r.clinical = window.SMD_FUNDX_CLINICAL.assessSync(r.findings, patientCtx()); } catch (e) {} }
+      try { var rec = _buildScanRecord(r, patientCtx(), session.eye, session); if (V().validate.scanRecord(rec).ok) { st.saveScan(rec); saved++; } } catch (e) {}
+    });
+    haptic("success"); toast(saved + " scan" + (saved === 1 ? "" : "s") + " saved to patient."); batchResults = []; screen = "home"; render();
+  }
   function saveScan() {
     if (!result) return;
     var st = STORE(); if (!st) { toast("Storage unavailable."); return; }
@@ -1345,6 +1513,7 @@
     rootEl.classList.toggle("fundx-corridor-on", corridorOn());
     if (screen === "home") { rootEl.innerHTML = screenHome(); paintRecent(); }
     else if (screen === "upload") { rootEl.innerHTML = screenUpload(); wireUpload(); }
+    else if (screen === "batch") rootEl.innerHTML = screenBatch();
     else if (screen === "corridorpreview") rootEl.innerHTML = screenCorridorPreview();
     else if (screen === "precapture") rootEl.innerHTML = screenPrecapture();
     else if (screen === "camera") rootEl.innerHTML = screenCamera();
@@ -1365,10 +1534,14 @@
     var a = b.getAttribute("data-fx");
     switch (a) {
       case "close": return FUNDX.close();
-      case "home": stopCamera(); return show("home");
+      case "home": stopCamera(); cancelBatch(); return show("home");
       case "newscan": haptic("medium"); session = newSession("right"); return show("precapture");
       case "analyzeimg": haptic("light"); return show("upload");
+      case "batchmore": haptic("light"); batchAppendPending = true; return show("upload");   // add to the current batch, not a fresh one
       case "pickimg": { var fi = document.getElementById("fundxFileInput"); if (fi) fi.click(); return; }
+      case "openbatch": { var bi = parseInt(b.getAttribute("data-i"), 10); var br = batchResults[bi]; if (br) { result = br; screen = (br.quality && br.quality.retinalGate === false) ? "review" : "result"; render(); } return; }
+      case "saveallbatch": return saveBatchAll();
+      case "sharereport": { var shSc = b.getAttribute("data-scope"); var shRec = shSc === "detail" ? (detail && detail.meta) : resultRecordLike(); if (shRec) shareReport(shRec); haptic("light"); return; }
       case "corridorpreview": haptic("light"); return startCorridorPreview();
       case "closepreview": stopCorridorPreview(); haptic("light"); return show(devOn() ? "devsettings" : "settings");
       case "eye": if (session) session.eye = b.getAttribute("data-eye"); haptic("selection"); return render();
@@ -1399,7 +1572,19 @@
       case "setdevsf": { var k = b.getAttribute("data-k"); var def = b.getAttribute("data-def") === "1"; var cur; try { var v = localStorage.getItem(k); cur = v == null ? def : v === "1"; localStorage.setItem(k, cur ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
       case "devexport": haptic("light"); return exportDevLog();
       case "voice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); { var vb = document.getElementById("fundxVoiceBtn"); if (vb) { vb.classList.toggle("on", VOICE.enabled()); vb.innerHTML = ric(VOICE.enabled() ? "volume_up" : "volume_off"); } if (VOICE.enabled()) VOICE.speak("Voice coaching on"); } return;
-      case "retake": haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "retake"); result = null; session.retries++; return startCamera();
+      case "retake": { haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "retake");
+        // From the upload/batch workflow, "Retake" means "pick another image" — not launch the live
+        // 20D-lens camera (there is no live scene to point at). Route back to the file picker.
+        var _wasUpload = (result && result.source === "upload") || (session && session.mode === "upload");
+        result = null;
+        if (_wasUpload) {
+          // Retake from within an active batch → the next pick ADDS to it (never wipes the other
+          // already-analyzed, still-unsaved scans). batchResults is only non-empty for a live batch.
+          if (batchResults.length) batchAppendPending = true;
+          return show("upload");
+        }
+        if (session) session.retries++;
+        return startCamera(); }
       case "toresult": haptic("medium"); return show("result");
       case "review": return show("review");
       case "discard": haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "discarded"); result = null; return show("home");
@@ -1446,6 +1631,7 @@
   var FUNDX = {
     open: function (context) {
       ctx = context || null; screen = "home"; session = null; result = null; capturing = false; devBuffer = [];
+      cancelBatch();   // fresh session — never resume a stale batch from a prior open (clears batchResults)
       applySettings();
       applyProviderSelection();   // health-gated: auto-activates the backend provider when available
       if (!rootEl) {
@@ -1456,7 +1642,7 @@
       wireVisibility();
       render(); rootEl.classList.add("on"); document.body.style.overflow = "hidden"; haptic("tap");
     },
-    close: function () { stopCamera(); stopCorridorPreview(); tel("endSession", "abandoned"); if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; haptic("tap"); },
+    close: function () { stopCamera(); stopCorridorPreview(); cancelBatch(); tel("endSession", "abandoned"); if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; haptic("tap"); },
     isOpen: function () { return !!(rootEl && rootEl.classList.contains("on")); },
     enabled: function () { return true; },
     // Android back / swipe-back: step back WITHIN the overlay (camera -> precapture -> home ->
@@ -1464,7 +1650,7 @@
     back: function () {
       if (!(rootEl && rootEl.classList.contains("on"))) return false;
       if (screen === "camera") { stopCamera(); screen = "precapture"; render(); haptic("tap"); return true; }
-      if (screen !== "home") { screen = "home"; render(); haptic("tap"); return true; }
+      if (screen !== "home") { cancelBatch(); screen = "home"; render(); haptic("tap"); return true; }   // same teardown as the on-screen back button
       FUNDX.close(); return true;
     },
     _screen: function () { return screen; },
