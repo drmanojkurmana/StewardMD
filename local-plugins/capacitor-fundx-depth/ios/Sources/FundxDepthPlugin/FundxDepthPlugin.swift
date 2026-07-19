@@ -55,8 +55,20 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate {
             "sceneDepth": sceneDepth,
             "depth": sceneDepth,            // fusion-contract flag consumed by the JS depth adapter
             "pose": arkit,
-            "coreMotion": motion.isDeviceMotionAvailable
+            "coreMotion": motion.isDeviceMotionAvailable,
+            "debug": Self.isDebugBuild()    // JS auto-enables FundX on DEBUG (Xcode) installs; release stays OFF
         ])
+    }
+
+    // DEBUG-scheme builds (Xcode/dev installs) vs Release/App Store. The JS layer uses this to
+    // default the FundX master flag ON for development so a fresh install launches into it, while
+    // App Store builds stay OFF until clinical validation.
+    private static func isDebugBuild() -> Bool {
+        #if DEBUG
+        return true
+        #else
+        return false
+        #endif
     }
 
     // ---- Start / stop ----

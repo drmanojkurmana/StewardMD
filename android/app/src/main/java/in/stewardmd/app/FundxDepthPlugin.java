@@ -137,12 +137,21 @@ public class FundxDepthPlugin extends Plugin {
                 }
             }
         } catch (Exception e) { /* ARCore/Play Services for AR unavailable */ }
+        // Debug build flag (android:debuggable) — the JS layer auto-enables the FundX master
+        // flag on dev (Xcode/adb) installs so a fresh install launches straight into FundX;
+        // release (Play) builds report false and stay OFF until clinical validation.
+        boolean debuggable = false;
+        try {
+            debuggable = (getContext().getApplicationInfo().flags
+                    & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Exception ignored) {}
         ret.put("platform", "android");
         ret.put("arcore", arcore);
         ret.put("arcoreInstalled", installed);
         ret.put("arcoreDepth", depth);
         ret.put("depth", depth);
         ret.put("pose", arcore);
+        ret.put("debug", debuggable);
         call.resolve(ret);
     }
 

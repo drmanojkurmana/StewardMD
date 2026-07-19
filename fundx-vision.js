@@ -75,10 +75,15 @@
     redReflexMin: 0.45,
     fundusMin: 0.5,             // circular fundus-appearance confidence
     fundusCircularityMin: 0.45, // how circular the illuminated field is
-    vesselMin: 0.4,             // vessel-like structure score
+    vesselMin: 0.4,             // vessel-like structure score (capture-quality gate)
+    gateVesselMin: 0.2,         // Stage-1 structural corroboration: a well-focused retinal image
+                                //   must show at least this much vessel/texture structure
+    gateBlurExempt: 0.35,       // ...but frames blurrier than this are exempt (blur suppresses
+                                //   vessels; poor focus is caught by the quality score anyway)
     focusMin: 0.55,
     exposureMin: 0.5,
     reflectionMax: 0.4,         // reflection score (0 = none) below this passes
+    criticalGlare: 0.7,         // reflection at/above this is a CRITICAL (red) blocker — overrides
     motionMax: 0.35,            // motion (0 = still) below this passes
     rollLevelMax: 18,           // |roll| deg within which the phone is "level"
     diagnosticMin: 0.62,        // composite diagnostic image-quality gate for auto-capture
@@ -213,6 +218,9 @@
         if (gates[k]) overall += GATE_WEIGHTS[k];
       }
       var ov = total ? overall / total : 0;
+      // Hard eye gate: without an eye there is nothing to acquire — force readiness to zero so the
+      // UI never shows false progress from incidental image-quality signals (walls, skin, glare).
+      if (!gates.eye) ov = 0;
       return {
         schemaVersion: SCHEMA_VERSION,
         overall: clamp01(ov),
@@ -289,8 +297,13 @@
   // Post-capture image quality scoring. Consumes a frame's metrics (subset of
   // FrameAnalysis) and returns a versioned QualityScore with rejection reasons.
   var QualityEngine = {
-    score: function (m) {
-      m = m || {};
+    score: function (m, opts) {
+      m = m || {}; opts = opts || {};
+      // opts.upload: an EXISTING fundus image (hospital camera / adapter / referral) fills the frame —
+      // it is already the retina, not a live red-reflex glow seen through a lens. So the "circular
+      // illuminated field" requirement is relaxed for uploads; warmth + fundus + vessels + retina
+      // confidence still gate out non-retinal images, so nothing unsafe is accepted.
+      var upload = !!opts.upload;
       // ===== STAGE 1 (REQUIRED): retinal-scene gate =====
       // A valid retinal image must show the DEFINITIVE optical evidence of the fundus: a RED REFLEX
       // (the red glow returning from the retina) AND a confident, CIRCULAR illuminated fundus field.
@@ -300,14 +313,24 @@
       // curtain can satisfy, which is exactly why they must not be scored until this gate passes.)
       var redReflexOk = clamp01(m.redReflex) >= CFG.redReflexMin;
       var fundusOk = !!m.fundusVisible && clamp01(m.fundusConf) >= CFG.fundusMin
-                     && clamp01(m.fundusCircularity) >= CFG.fundusCircularityMin;
+                     && (upload || clamp01(m.fundusCircularity) >= CFG.fundusCircularityMin);
       var retinaOk = clamp01(m.retinaConf != null ? m.retinaConf : m.fundusConf) >= CFG.fundusMin;
-      var retinalGate = redReflexOk && fundusOk && retinaOk;
+      // Structural corroboration: a real fundus shows vessel/texture structure. A featureless warm,
+      // circular, bright disk (a lamp, an ember, sunset through a round window) can mimic a red
+      // reflex + fundus field + retina confidence yet has NO vessels — reject it. Blurred frames are
+      // EXEMPT (blur suppresses vessels), so a genuinely retinal but out-of-focus frame still passes
+      // the gate and is scored — the quality score then rejects it for poor focus, so nothing unsafe
+      // is ever accepted.
+      var focusM = clamp01(m.focus != null ? m.focus : m.sharpness);
+      var vesselOk = clamp01(m.vesselScore != null ? m.vesselScore : m.vesselVisibility) >= CFG.gateVesselMin
+                     || focusM < CFG.gateBlurExempt;
+      var retinalGate = redReflexOk && fundusOk && retinaOk && vesselOk;
       if (!retinalGate) {
         var g = [];
         if (!redReflexOk) g.push("no_red_reflex");
         if (!fundusOk) g.push("no_fundus_field");
         if (!retinaOk) g.push("low_retinal_confidence");
+        if (!vesselOk) g.push("no_retinal_structure");
         return {
           schemaVersion: SCHEMA_VERSION, overall: 0,
           // zeroed (not null) so BestFrameSelector / UI never dereference a missing subscores
@@ -362,6 +385,76 @@
       };
     }
   };
+
+  // ---- CaptureRingBuffer (README 08) -------------------------------------
+  // A rolling circular buffer of recent frames with per-frame metadata + a capture score. The
+  // newest frame is NOT necessarily the best — best() returns the highest-scoring buffered frame.
+  // Pure + testable; both camera paths (getUserMedia + native/GPU) push into one of these so
+  // "Capture Best Frame" and auto-capture select from real quality history, not just the latest.
+  function createCaptureBuffer(opts) {
+    opts = opts || {};
+    var max = Math.max(1, opts.max || 60);        // README 08: 30-90 frames
+    var buf = [];
+    return {
+      capacity: max,
+      size: function () { return buf.length; },
+      clear: function () { buf = []; return this; },
+      frames: function () { return buf.slice(); },
+      recent: function (n) { return buf.slice(-(n > 0 ? n : buf.length)); },
+      // frame: { ts?, dataUrl?, metrics, pose?, motion?, depth?, w?, h? }. Stores the record + its
+      // capture score (retinal-gated QualityEngine.overall) and evicts the oldest past capacity.
+      push: function (frame) {
+        frame = frame || {};
+        var q = QualityEngine.score(frame.metrics || {});
+        var rec = {
+          ts: frame.ts != null ? frame.ts : null,
+          dataUrl: frame.dataUrl != null ? frame.dataUrl : null,
+          metrics: frame.metrics || {},
+          pose: frame.pose != null ? frame.pose : null,
+          motion: frame.motion != null ? frame.motion : (frame.metrics && frame.metrics.motion != null ? frame.metrics.motion : null),
+          depth: frame.depth != null ? frame.depth : null,
+          w: frame.w != null ? frame.w : null, h: frame.h != null ? frame.h : null,
+          score: q.overall, accepted: q.accepted, retinalGate: q.retinalGate, quality: q
+        };
+        buf.push(rec);
+        if (buf.length > max) buf.shift();
+        return rec;
+      },
+      // Highest capture score in the buffer (NOT the newest). null when empty.
+      best: function () {
+        if (!buf.length) return null;
+        var bi = 0, bv = -1;
+        for (var i = 0; i < buf.length; i++) { if (buf[i].score > bv) { bv = buf[i].score; bi = i; } }
+        return { index: bi, frame: buf[bi], score: bv };
+      },
+      // Best frame that also passes the retinal gate + quality accept (an actually-usable capture),
+      // or null if none is acceptable yet — so the UI never "captures" an unusable best-of-bad.
+      bestAccepted: function () {
+        var bi = -1, bv = -1;
+        for (var i = 0; i < buf.length; i++) { if (buf[i].accepted && buf[i].score > bv) { bv = buf[i].score; bi = i; } }
+        return bi < 0 ? null : { index: bi, frame: buf[bi], score: bv };
+      }
+    };
+  }
+
+  // ---- QualityWords (README 03: show words, never scores) ----------------
+  // The clinician-facing quality label. The operator NEVER sees the 0-100 number — only a calm
+  // word + tone. A gated (non-retinal) result maps to a distinct "no retina" message, not a score.
+  var QUALITY_WORDS = [
+    { min: 85, label: "Excellent", tone: "good" },
+    { min: 70, label: "Good", tone: "good" },
+    { min: CFG.qualityAccept, label: "Acceptable", tone: "info" },
+    { min: 0, label: "Retake recommended", tone: "warn" }
+  ];
+  function qualityWord(quality) {
+    if (quality && typeof quality === "object") {
+      if (quality.retinalGate === false) return { label: "No retina detected", tone: "warn", gated: true };
+      quality = quality.overall;
+    }
+    var v = +quality; if (v !== v) v = 0;
+    for (var i = 0; i < QUALITY_WORDS.length; i++) { if (v >= QUALITY_WORDS[i].min) return { label: QUALITY_WORDS[i].label, tone: QUALITY_WORDS[i].tone, gated: false }; }
+    return { label: "Retake recommended", tone: "warn", gated: false };
+  }
 
   // ---- IRetinaModel + MockRetinaModel ------------------------------------
   // The single swap point for retinal foundation-model inference. Any real provider
@@ -483,6 +576,52 @@
         default: text = "";
       }
       return { text: text, arrow: arrow, haptic: haptic, voice: voice, tone: t };
+    },
+    // Beginner-mode verbose explanation for a state (README 03 adaptive guidance). The one-line
+    // cue (cueFor) is always shown; this fuller sentence is shown only in Beginner mode.
+    detailFor: function (state) {
+      switch (state) {
+        case STATE.SEARCHING_EYE: return "Hold the phone about an arm's length away and point the camera at the patient's eye.";
+        case STATE.CENTERING_PUPIL: return "Move the phone so the pupil sits in the middle of the ring.";
+        case STATE.WORKING_DISTANCE: return "Adjust the phone-to-lens distance until the view fills the ring.";
+        case STATE.RED_REFLEX: return "Tilt the phone or lens a little until an orange-red glow appears in the pupil.";
+        case STATE.LOCATING_FUNDUS: return "Bring the glowing retinal view to the centre and keep it there.";
+        case STATE.OPTIMIZING: return "Small, slow adjustments now — reduce glare, hold steady, let it sharpen.";
+        case STATE.ASSESSING_QUALITY: return "Almost there — hold the phone as still as you can.";
+        case STATE.READY: return "Perfect — stay still while it captures.";
+        default: return "";
+      }
+    }
+  };
+
+  // ---- Storyboard (README 03: the named acquisition journey + live progress) --------------
+  // Maps the FSM state to a user-facing step (index/total/title) so the UI can show a calm
+  // "Step N of M · Title" progress indicator. Presentation-only — it never gates capture. The
+  // full 14-step storyboard also includes the pre-capture welcome + lens primer (screenPrecapture)
+  // and the manual-capture button; this covers the LIVE acquisition + review + analysis sequence.
+  var STORYBOARD = [
+    { key: "eye", title: "Find the eye", states: [STATE.SEARCHING_EYE] },
+    { key: "center", title: "Center the eye", states: [STATE.CENTERING_PUPIL] },
+    { key: "distance", title: "Set the distance", states: [STATE.WORKING_DISTANCE] },
+    { key: "reflex", title: "Find the red reflex", states: [STATE.RED_REFLEX] },
+    { key: "retina", title: "Find the retina", states: [STATE.LOCATING_FUNDUS] },
+    { key: "sharpen", title: "Sharpen the image", states: [STATE.OPTIMIZING] },
+    { key: "quality", title: "Check quality", states: [STATE.ASSESSING_QUALITY] },
+    { key: "capture", title: "Hold — capturing", states: [STATE.READY, STATE.CAPTURING, STATE.SELECTING] },
+    { key: "review", title: "Quality review", states: [STATE.PROCESSING, STATE.REVIEW] },
+    { key: "analysis", title: "AI analysis", states: [STATE.DONE] }
+  ];
+  var Storyboard = {
+    steps: STORYBOARD,
+    total: STORYBOARD.length,
+    // { index (1-based), total, key, title, progress (0..1) } for a state, or null (pre-capture).
+    stepFor: function (state) {
+      for (var i = 0; i < STORYBOARD.length; i++) {
+        if (STORYBOARD[i].states.indexOf(state) >= 0) {
+          return { index: i + 1, total: STORYBOARD.length, key: STORYBOARD[i].key, title: STORYBOARD[i].title, progress: (i + 1) / STORYBOARD.length };
+        }
+      }
+      return null;
     }
   };
 
@@ -520,11 +659,14 @@
     createStateMachine: createStateMachine,
     QualityEngine: QualityEngine,
     BestFrameSelector: BestFrameSelector,
+    createCaptureBuffer: createCaptureBuffer,
     MockRetinaModel: MockRetinaModel,
     registerRetinaModel: registerRetinaModel,
     getRetinaModel: getRetinaModel,
     Findings: Findings,
     Coach: Coach,
+    qualityWord: qualityWord,
+    Storyboard: Storyboard,
     validate: validate
   };
 

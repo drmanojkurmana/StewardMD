@@ -110,6 +110,20 @@
       return Promise.resolve(idx.filter(function (m) { return m.id === id; })[0] || null);
     },
 
+    // Patch fields on a stored scan's METADATA in place — no image re-write and NO full-record
+    // validation (the stored meta intentionally has the heavy originalImage/processedImage stripped,
+    // so saveScan() would wrongly reject it). Used for clinician oversight (clinicianReview) and
+    // lightweight annotations. Returns Promise<meta|null> (null if the id is unknown); never rejects.
+    updateScan: function (id, patch) {
+      patch = patch || {};
+      var idx = readIndex();
+      var i = idx.findIndex(function (m) { return m.id === id; });
+      if (i < 0) return Promise.resolve(null);
+      for (var k in patch) { if (patch.hasOwnProperty(k)) idx[i][k] = patch[k]; }
+      writeIndex(idx);
+      return Promise.resolve(idx[i]);
+    },
+
     // Returns a displayable image source (native file URI or web dataURL) or null.
     imageUri: function (id, kind) {
       kind = kind === "processed" ? "processed" : "original";

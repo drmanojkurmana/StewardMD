@@ -56,5 +56,35 @@ await (async () => {
   ok("router: back to rules", C.getActive().id === "rules");
 })();
 
+// ---- Clinical report assembly (README 09) ----
+const rec = {
+  eye: "right", timestamp: 111, patientContext: { ref: "p1", name: "Test", dx: "T2DM" },
+  quality: { overall: 82, accepted: true, retinalGate: true },
+  vision: { findings: { quality: 82, confidence: 0.9, hemorrhages: 10, hard_exudates: 6, optic_disc: { cup_disc_ratio: 0.75 }, macula: { visible: true } } }
+};
+const rep = C.buildReport(rec);
+ok("report: assembled with sections", rep.eye === "right" && rep.patient.ref === "p1" && rep.acquisitionQuality.score === 82 && !!rep.disclaimer);
+ok("report: differential ranked most-severe first", rep.differential.length >= 1 && rep.differential[0].rank === 1 && rep.differential[0].severity === "severe");
+ok("report: differential entries carry reasoning", typeof rep.differential[0].reasoning === "string" && rep.differential[0].reasoning.length > 0);
+ok("report: severity + urgency + recommendations", rep.severity === "severe" && rep.urgency === "urgent" && rep.recommendations && rep.recommendations.referral && rep.recommendations.investigations.length > 0);
+ok("report: urgent findings surfaced", Array.isArray(rep.urgentFindings));
+const cleanRep = C.buildReport({ eye: "left", quality: { overall: 90, accepted: true }, vision: { findings: { quality: 90, confidence: 0.95, optic_disc: { cup_disc_ratio: 0.4 }, macula: { visible: true } } } });
+ok("report: clean scan → none/routine + empty differential-ish", cleanRep.severity === "none" && cleanRep.urgency === "routine");
+ok("report: uses a stored assessment when present", C.buildReport({ clinical: { severity: "moderate", urgency: "soon", considerations: [], safetyFlags: [], confidence: 0.7, disclaimer: "x" } }).severity === "moderate");
+
+// ---- Clinician oversight (accept / reject / comment / edit) ----
+let rv = C.newReview();
+ok("oversight: new review is pending", rv.status === "pending" && rv.history.length === 0);
+rv = C.applyReview(rv, "comment", { note: "vessels unclear" });
+ok("oversight: comment sets note + logs history", rv.note === "vessels unclear" && rv.history.length === 1);
+rv = C.applyReview(rv, "accept", {}, { by: "dr_k" });
+ok("oversight: accept sets status + reviewer", rv.status === "accepted" && rv.reviewedBy === "dr_k" && rv.history.length === 2);
+let rj = C.applyReview(C.newReview(), "reject");
+ok("oversight: reject sets rejected", rj.status === "rejected");
+let ed = C.applyReview(C.newReview(), "edit", { text: "Likely moderate NPDR; correlate clinically" });
+ok("oversight: edit stores edited conclusion + status", ed.status === "edited" && /NPDR/.test(ed.editedConclusion));
+ok("oversight: unknown action is a no-op", C.applyReview(C.newReview(), "bogus").status === "pending");
+ok("oversight: does not mutate the input review (immutability)", (() => { const a = C.newReview(); const b = C.applyReview(a, "accept"); return a.status === "pending" && b.status === "accepted"; })());
+
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);

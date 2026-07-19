@@ -7,6 +7,30 @@
    gate); the classic-ui-stable backup is independent and untouched. */
 (function () {
   "use strict";
+
+  // ── FundX AI · dev-build auto-enable ─────────────────────────────────────
+  // On DEBUG native builds (Xcode / adb installs — dev phones) default the FundX
+  // master flag ON so a fresh install launches straight into it. RELEASE builds
+  // (App Store / Play) report debug=false → FundX stays OFF until clinical
+  // validation. The native plugin's capabilities() reports the build type; on the
+  // very first launch we set the flag once and reload so home.js + fundx.js read it
+  // synchronously on the next paint (both gate the tile/module at load time). The
+  // null-check respects an explicit user choice ("0"/"1") and prevents any reload loop.
+  (function () {
+    try {
+      if (localStorage.getItem("smd_fundx") !== null) return;         // already decided (incl. user-off)
+      if (/[?&]fundx=/.test(location.search)) return;                 // explicit ?fundx= wins
+      var P = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth;
+      if (!P || !P.capabilities) return;                              // not a native build → leave OFF
+      P.capabilities().then(function (c) {
+        if (c && c.debug && localStorage.getItem("smd_fundx") === null) {
+          try { localStorage.setItem("smd_fundx", "1"); } catch (e) { return; }
+          try { location.reload(); } catch (e) {}                     // one-time; next load reads the flag
+        }
+      }, function () {});
+    } catch (e) {}
+  })();
+
   function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.
   var IS_V2 = flagged();
 
