@@ -13,6 +13,7 @@ struct StewardMDWatchApp: App {
     @StateObject private var favorites = FavoritesStore()
     @StateObject private var watchlist = WatchlistModel()
     @StateObject private var router = AppRouter()
+    @StateObject private var features = FeatureFlagsModel()
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -25,10 +26,15 @@ struct StewardMDWatchApp: App {
             .environmentObject(favorites)
             .environmentObject(watchlist)
             .environmentObject(router)
+            .environmentObject(features)
             .preferredColorScheme(.dark)
             .tint(SMDPalette.accent.color)
+            .task { await features.refresh() }
             .onChange(of: scenePhase) { _, phase in
-                if phase == .active { router.consumePending() }
+                if phase == .active {
+                    router.consumePending()
+                    Task { await features.refresh() }
+                }
             }
         }
 

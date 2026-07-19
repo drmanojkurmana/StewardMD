@@ -7,6 +7,7 @@ import StewardMDWatchCore
 struct RootListView: View {
     @EnvironmentObject private var session: WatchSessionStore
     @EnvironmentObject private var labs: CriticalLabsModel
+    @EnvironmentObject private var features: FeatureFlagsModel
 
     var body: some View {
         List {
@@ -14,11 +15,23 @@ struct RootListView: View {
                 HomeHeader()
                     .listRowBackground(Color.clear)
             }
+            if let msg = features.announcement {
+                Text(msg)
+                    .font(.caption2)
+                    .foregroundStyle(SMDPalette.text1.color)
+                    .padding(SMDSpacing.s)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(SMDPalette.ai.color.opacity(0.25), in: RoundedRectangle(cornerRadius: SMDSpacing.radiusChip))
+                    .listRowBackground(Color.clear)
+            }
             ForEach(RootDestination.allCases) { dest in
+                let locked = dest.feature.map { !features.gate.allows($0) } ?? false
                 NavigationLink(value: dest) {
                     RootRow(destination: dest,
-                            badge: dest == .criticalLabs ? labs.unacknowledgedCount : 0)
+                            badge: dest == .criticalLabs ? labs.unacknowledgedCount : 0,
+                            locked: locked)
                 }
+                .disabled(locked)
                 .listRowBackground(SMDPalette.surface.color)
             }
         }
@@ -97,6 +110,18 @@ enum RootDestination: String, CaseIterable, Identifiable, Hashable {
         case .emergency: return SMDPalette.accent
         }
     }
+
+    /// The gateable feature backing this row, if any (patients / emergency are
+    /// always available).
+    var feature: WatchFeature? {
+        switch self {
+        case .criticalLabs: return .criticalLabs
+        case .wardSync: return .wardSync
+        case .drugs: return .drugLookup
+        case .calculators: return .calculators
+        case .patients, .emergency: return nil
+        }
+    }
 }
 
 private struct HomeHeader: View {
@@ -115,15 +140,19 @@ private struct HomeHeader: View {
 private struct RootRow: View {
     let destination: RootDestination
     let badge: Int
+    var locked: Bool = false
     var body: some View {
         HStack(spacing: SMDSpacing.m) {
             Image(systemName: destination.symbol)
-                .foregroundStyle(destination.accent.color)
+                .foregroundStyle(locked ? SMDPalette.text2.color : destination.accent.color)
                 .font(.headline)
             Text(destination.title)
-                .foregroundStyle(SMDPalette.text1.color)
+                .foregroundStyle(locked ? SMDPalette.text2.color : SMDPalette.text1.color)
             Spacer()
-            if badge > 0 {
+            if locked {
+                Image(systemName: "lock.fill")
+                    .font(.caption2).foregroundStyle(SMDPalette.text2.color)
+            } else if badge > 0 {
                 Text("\(badge)")
                     .font(.caption2).bold()
                     .padding(.horizontal, 7).padding(.vertical, 2)
