@@ -11,13 +11,11 @@
 (function () {
   "use strict";
 
-  // Certification seal = two rotated rounded squares (8-point medallion) + a crisp check. Teal adapts
-  // to dark mode via --sealbg (brighter on dark headers); the tick is white in both.
+  // Verified mark: a flat GREEN circle with a white tick — no border, no ring. Same in light + dark.
   var SEAL =
     '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
-      '<g class="pseal-bg"><rect x="4" y="4" width="16" height="16" rx="5"></rect>' +
-      '<rect x="4" y="4" width="16" height="16" rx="5" transform="rotate(45 12 12)"></rect></g>' +
-      '<path class="pseal-tick" d="M8 12.2 l2.7 2.7 l5-5.4" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path>' +
+      '<circle class="pseal-bg" cx="12" cy="12" r="11"></circle>' +
+      '<path class="pseal-tick" d="M7.3 12.5 l3.1 3.1 l6.2-6.8" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>' +
     '</svg>';
 
   // Elements whose inner end the badge is appended to (right after the "MD" of the wordmark).
@@ -28,12 +26,15 @@
     var s = document.createElement("style");
     s.id = "smdProSealCSS";
     s.textContent =
-      ".smd-proseal{display:none;align-items:center;justify-content:center;width:1.02em;height:1.02em;margin-left:5px;vertical-align:-0.12em;flex:0 0 auto;--sealbg:#0e6e63}" +
+      ".smd-proseal{display:none;align-items:center;justify-content:center;width:1.02em;height:1.02em;margin-left:5px;vertical-align:-0.12em;flex:0 0 auto}" +
       "body.pro-verified .smd-proseal{display:inline-flex}" +
-      "body.dark .smd-proseal,body.v3-dark .smd-proseal{--sealbg:#1d9e75}" +
       ".smd-proseal svg{width:100%;height:100%;display:block}" +
-      ".smd-proseal .pseal-bg{fill:var(--sealbg)}" +
-      ".smd-proseal .pseal-tick{stroke:#fff}";
+      ".smd-proseal .pseal-bg{fill:#1da851}" +
+      ".smd-proseal .pseal-tick{stroke:#fff}" +
+      // Pro users: the 'MD' of the wordmark turns gold (deeper on light, brighter on dark headers).
+      "body.pro-verified{--md-gold:#c99700}" +
+      "body.pro-verified.dark,body.pro-verified.v3-dark{--md-gold:#f2c94c}" +
+      "body.pro-verified .v3-md,body.pro-verified .rnav-brand b,body.pro-verified .rnav-hero-tt b,body.pro-verified .sb-head .accent{color:var(--md-gold)!important}";
     (document.head || document.documentElement).appendChild(s);
   }
 
