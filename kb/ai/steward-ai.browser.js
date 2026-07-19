@@ -242,27 +242,11 @@
       var grounding = top.map(function (c) { return trimGrounding(_ai.getGroundingContext(c.id)); }).filter(Boolean);
 
       var treatment = lead ? _ai.resolveTreatment(lead.id, hospitalId) : null;
-
-      // ICU / calculator / drug refs from the disease objects (by reference only)
-      var coreArr = (window.KB_CORE && window.KB_CORE.diseases) || [];
-      var coreById = {}; (Array.isArray(coreArr) ? coreArr : Object.keys(coreArr).map(function (k) { return coreArr[k]; })).forEach(function (d) { if (d && d.id) coreById[d.id] = d; });
-      var refs = { drug: [], calculators: [], icuProtocols: [], stewardship: [] };
-      var seenDrug = {};
-      function addDrug(d) { if (d && !seenDrug[d]) { seenDrug[d] = 1; refs.drug.push(d); } }
-      grounding.forEach(function (g) { (g.drugRefs || []).forEach(addDrug); });
-      top.forEach(function (c) {
-        var d = coreById[c.id]; if (!d) return;
-        (d.drugRefs || []).forEach(function (x) { addDrug(typeof x === "string" ? x : (x && (x.composition || x.name))); });
-        (d.calculatorRefs || []).forEach(function (x) { if (refs.calculators.indexOf(x) < 0) refs.calculators.push(x); });
-        (d.icuModuleRefs || []).forEach(function (x) { if (refs.icuProtocols.indexOf(x) < 0) refs.icuProtocols.push(x); });
-      });
-      // drug references from the resolved treatment (by reference only)
-      if (treatment && treatment.default) (treatment.default.drugRefs || []).forEach(addDrug);
-      if (treatment) (treatment.alternatives || []).forEach(function (a) { (a.drugRefs || []).forEach(addDrug); });
-      if (treatment && treatment.diseaseId) {
-        var t = (window.KB_RAG && window.KB_RAG.treatments && window.KB_RAG.treatments[treatment.diseaseId]) || null;
-        if (t && t.stewardship) refs.stewardship = Array.isArray(t.stewardship) ? t.stewardship.slice(0, 6) : [t.stewardship];
-      }
+      // NOTE: pkg.refs (drug/calculator/ICU/stewardship) is assembled LOWER DOWN, AFTER the
+      // knowledge-question gate — because for a standalone knowledge question lead/grounding/
+      // treatment are only resolved inside that gate. Building refs here left every ref empty
+      // on that path (the coverage matrix, de-escalation regimens and REFERENCES never reached
+      // the model). See the refs block just before the return.
 
       // de-identified case (only the allowed fields; caller supplies caseData)
       var patientCase = {};
@@ -407,6 +391,34 @@
           grounding = []; lead = null; treatment = null; retrieved = [];
           topicMatch = { matched: false, mode: "none", topic: distinctive.join(" ") || String(opts.question).trim(), nearest: (candGc && candGc.name) || candId || null };
         }
+      }
+
+      // ICU / calculator / drug / stewardship refs (by reference only). Assembled HERE — after
+      // the knowledge-question gate — so it reflects the FINAL grounding/treatment: on the
+      // standalone-question path lead/grounding/treatment are resolved inside that gate, so
+      // building refs earlier left every ref empty. Derive disease-object refs from the union of
+      // the case differential (top) AND the grounded diseases, covering both paths.
+      var coreArr = (window.KB_CORE && window.KB_CORE.diseases) || [];
+      var coreById = {}; (Array.isArray(coreArr) ? coreArr : Object.keys(coreArr).map(function (k) { return coreArr[k]; })).forEach(function (d) { if (d && d.id) coreById[d.id] = d; });
+      var refs = { drug: [], calculators: [], icuProtocols: [], stewardship: [] };
+      var seenDrug = {};
+      function addDrug(d) { if (d && !seenDrug[d]) { seenDrug[d] = 1; refs.drug.push(d); } }
+      grounding.forEach(function (g) { (g.drugRefs || []).forEach(addDrug); });
+      var refDiseaseIds = {};
+      top.forEach(function (c) { if (c && c.id) refDiseaseIds[c.id] = 1; });
+      grounding.forEach(function (g) { if (g && g.diseaseId) refDiseaseIds[g.diseaseId] = 1; });
+      Object.keys(refDiseaseIds).forEach(function (id) {
+        var d = coreById[id]; if (!d) return;
+        (d.drugRefs || []).forEach(function (x) { addDrug(typeof x === "string" ? x : (x && (x.composition || x.name))); });
+        (d.calculatorRefs || []).forEach(function (x) { if (refs.calculators.indexOf(x) < 0) refs.calculators.push(x); });
+        (d.icuModuleRefs || []).forEach(function (x) { if (refs.icuProtocols.indexOf(x) < 0) refs.icuProtocols.push(x); });
+      });
+      // drug references from the resolved treatment (by reference only)
+      if (treatment && treatment.default) (treatment.default.drugRefs || []).forEach(addDrug);
+      if (treatment) (treatment.alternatives || []).forEach(function (a) { (a.drugRefs || []).forEach(addDrug); });
+      if (treatment && treatment.diseaseId) {
+        var t = (window.KB_RAG && window.KB_RAG.treatments && window.KB_RAG.treatments[treatment.diseaseId]) || null;
+        if (t && t.stewardship) refs.stewardship = Array.isArray(t.stewardship) ? t.stewardship.slice(0, 6) : [t.stewardship];
       }
 
       return {
