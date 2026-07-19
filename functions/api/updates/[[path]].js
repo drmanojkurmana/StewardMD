@@ -301,19 +301,26 @@ export async function onRequest(context) {
       // summary_json so the app detail view (data.structured) can render a prescribing snapshot.
       const structured = (body.structured && typeof body.structured === "object" && !Array.isArray(body.structured)) ? body.structured : null;
       const summaryJson = structured ? JSON.stringify(Object.assign({}, structured, { summary: bodyText })).slice(0, 12000) : "";
-      const id = await repo.insertUpdate(env, {
-        doc_key: String(body.url || "").slice(0, 500) || ("manual:" + repo.newId("m")),
-        source_id: "manual", type, organization: String(body.source || "StewardMD").slice(0, 120),
+      const docKey = String(body.url || "").slice(0, 500) || ("manual:" + repo.newId("m"));
+      const u = {
+        doc_key: docKey, source_id: "manual", type, organization: String(body.source || "StewardMD").slice(0, 120),
         workspace: normWorkspace(body.workspace), branch: normBranch(body.branch), title, body: bodyText.slice(0, 240),
         category, published_ts: Date.now(), importance: normImportance(body.importance),
         est_read_min: Math.max(1, Math.round(bodyText.split(/\s+/).length / 200)) || 1,
         summary: bodyText, summary_json: summaryJson, official_url: String(body.url || "").slice(0, 500),
         content_hash: "", auto: 0, pinned: !!body.pinned,
-      });
+      };
+      // Re-publishing the SAME url updates the existing item (upgrade its content) instead of failing
+      // on the doc_key UNIQUE constraint. A genuinely new item is inserted AND pushed; an update is not
+      // re-pushed (users who already got it aren't re-notified for a content fix).
+      let id, updated = false;
+      const existing = await repo.getByDocKey(env, docKey);
+      if (existing && existing.id) { await repo.updateExisting(env, existing.id, u); id = existing.id; updated = true; }
+      else { id = await repo.insertUpdate(env, u); }
       const detail = await repo.getById(env, id);
       const item = detail && detail.item;
-      firePush(context, item, item && item.workspace);
-      return json({ ok: true, item });
+      if (!updated) firePush(context, item, item && item.workspace);
+      return json({ ok: true, item, updated });
     }
 
     if (method === "DELETE" && head === "sources" && parts[1]) {

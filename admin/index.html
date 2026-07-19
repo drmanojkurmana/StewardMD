@@ -370,7 +370,7 @@
     var t=$("nTitle").value.trim(); if(!t){say("nMsg","err","Title required.");return;} say("nMsg","","Publishing…");
     var ty=$("nType").value;
     api("/api/updates",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:t,body:$("nBody").value,type:(ty==="general"?"":ty),category:TYPE2CAT[ty]||"general",workspace:$("nWs").value,importance:$("nImp").value,source:$("nSrc").value,url:$("nUrl").value,pinned:$("nPin").checked,structured:_aiStructured})})
-      .then(function(x){ if(x.s===200&&x.d.ok){say("nMsg","ok","✅ Published & pushed.");$("nTitle").value="";$("nBody").value="";$("nUrl").value="";$("nSrc").value="";$("nPin").checked=false;_aiStructured=null;nRenderPreview(); if(fromAi){$("aiUrl").value="";$("aiPrompt").value="";say("aiMsg","ok","✅ Published & pushed.");} nLoad();} else say("nMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); })
+      .then(function(x){ if(x.s===200&&x.d.ok){say("nMsg","ok",x.d.updated?"✅ Updated (existing item refreshed — no new push).":"✅ Published & pushed.");$("nTitle").value="";$("nBody").value="";$("nUrl").value="";$("nSrc").value="";$("nPin").checked=false;_aiStructured=null;nRenderPreview(); if(fromAi){$("aiUrl").value="";$("aiPrompt").value="";say("aiMsg","ok","✅ Published & pushed.");} nLoad();} else say("nMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); })
       .catch(function(){say("nMsg","err","Sign in first.");});
   }
   function nSync(){ say("nMsg","","Running sync…"); api("/api/updates/sync",{method:"POST"}).then(function(x){ if(x.s===200&&x.d.ok!==false){say("nMsg","ok","✅ new="+(x.d.new||0)+" updated="+(x.d.updated||0)+" unchanged="+(x.d.unchanged||0));nLoad();} else say("nMsg","err","Failed: "+(x.d.error||x.s)); }); }
