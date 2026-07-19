@@ -1,5 +1,8 @@
 import Foundation
 import Capacitor
+#if canImport(WatchConnectivity)
+import WatchConnectivity
+#endif
 
 /**
  * WatchBridge — publishes the signed-in session and favorites/recents to the
