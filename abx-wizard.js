@@ -177,7 +177,7 @@
   function renderEmergency(wrap, host, c, isInf) {
     var lines = [];
     var sb = (host && host.querySelector(".safety-warning-banner")) || document.querySelector("#outputArea .safety-warning-banner");
-    if (sb) { var t = (sb.textContent || "").replace(/^\s*[⚠️\s]*/, "").trim(); if (t) lines.push(t); if (host && sb.parentNode && host.contains(sb)) sb.parentNode.removeChild(sb); }
+    if (sb) { var t = (sb.textContent || "").replace(/^\s*[⚠️\s]*/, "").trim(); /* @emoji-ok strips a leading warning glyph from scraped text, not display */ if (t) lines.push(t); if (host && sb.parentNode && host.contains(sb)) sb.parentNode.removeChild(sb); }
     // Only infectious candidates carry TRUE emergency redFlags (decision.status==="red").
     // Non-infective candidates' redFlags are calm "when to worry" cautions (shown in
     // their own Red-flags card) — do NOT escalate them to a pulsing time-critical banner.

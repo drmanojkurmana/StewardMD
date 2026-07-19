@@ -74,7 +74,7 @@ function scanFile(rel) {
 }
 
 // COVERED grows as each phase cleans a file.
-const COVERED = ["calculators.js"];
+const COVERED = ["calculators.js", "medlist.js", "drugs.js", "prescription.js", "abx-wizard.js"];
 for (const rel of COVERED) {
   const hits = scanFile(rel);
   ok(hits.length === 0, "no UI emoji in " + rel + (hits.length ? "\n   " + hits.join("\n   ") : ""));

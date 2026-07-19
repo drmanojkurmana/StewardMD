@@ -275,7 +275,8 @@
     // ── UI line-icons
     cloud: '<path d="M7 18a4.5 4.5 0 0 1-.3-9 6 6 0 0 1 11.5-.5A4 4 0 0 1 17.5 18Z"/>',
     note: '<path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M8.5 13h7M8.5 16.5h5"/>',
-    aware: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.6"/>'
+    aware: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.6"/>',
+    print: '<path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M6 15h12v6H6z"/><circle cx="17.5" cy="12" r=".8" fill="currentColor" stroke="none"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
