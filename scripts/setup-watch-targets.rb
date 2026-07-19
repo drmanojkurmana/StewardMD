@@ -94,6 +94,9 @@ def apply_settings(target, settings)
 end
 
 common = {
+  # new_target leaves PRODUCT_NAME unset, which builds a nameless ".app"/".appex"
+  # and trips "Multiple commands produce …". Set it so each product is named.
+  "PRODUCT_NAME" => "$(TARGET_NAME)",
   "DEVELOPMENT_TEAM" => TEAM,
   "CODE_SIGN_STYLE" => "Automatic",
   "SWIFT_VERSION" => SWIFT_VER,
