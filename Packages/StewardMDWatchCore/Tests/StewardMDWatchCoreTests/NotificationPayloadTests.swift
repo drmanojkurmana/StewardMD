@@ -30,6 +30,24 @@ final class NotificationPayloadTests: XCTestCase {
         XCTAssertNil(NotificationParser.parse(["aps": ["alert": "hello"]]))
     }
 
+    func testGenericLabWatchPayloadFallback() {
+        // The REAL Lab-Watch push: no structured fields, just aps.alert + url.
+        let ui: [AnyHashable: Any] = [
+            "aps": ["alert": ["title": "New lab — R. Okafor", "body": "A new result was reported."]],
+            "url": "/?ghisPatient=P12"
+        ]
+        let a = NotificationParser.parse(ui)
+        XCTAssertNotNil(a)
+        XCTAssertEqual(a?.analyte, "New lab — R. Okafor")
+        XCTAssertEqual(a?.patientLabel, "R. Okafor")
+        XCTAssertEqual(a?.id, "/?ghisPatient=P12")
+        XCTAssertEqual(NotificationParser.patientID(fromURL: a!.id), "P12")
+    }
+
+    func testReturnsNilWhenTrulyEmpty() {
+        XCTAssertNil(NotificationParser.parse(["aps": ["badge": 1]]))
+    }
+
     func testShortLookHasNoPHI() {
         let a = NotificationParser.parse(criticalUserInfo)!
         let text = NotificationParser.shortLookText(a)

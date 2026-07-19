@@ -26,15 +26,18 @@ public actor AckQueue {
         store.save(pending)
     }
 
-    /// Attempts to send every pending ack once; keeps failures for a later retry.
+    /// Attempts to send every currently-pending ack once; keeps failures for a
+    /// later retry. Reentrancy-safe: an `enqueue` during an `await send` is not
+    /// lost — only the acks actually sent in this batch are removed (not the
+    /// whole snapshot).
     public func flush() async {
-        guard !pending.isEmpty else { return }
-        var remaining: [Ack] = []
-        for ack in pending {
-            let ok = await sender.send(ack)
-            if !ok { remaining.append(ack) }
+        let batch = pending
+        guard !batch.isEmpty else { return }
+        var sentIDs = Set<String>()
+        for ack in batch {
+            if await sender.send(ack) { sentIDs.insert(ack.id) }
         }
-        pending = remaining
+        pending.removeAll { sentIDs.contains($0.id) }
         store.save(pending)
     }
 }

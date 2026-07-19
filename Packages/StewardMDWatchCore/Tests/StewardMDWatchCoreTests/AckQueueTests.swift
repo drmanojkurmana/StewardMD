@@ -62,6 +62,28 @@ final class AckQueueTests: XCTestCase {
         XCTAssertEqual(afterSecond, 0)
     }
 
+    func testReentrantEnqueueDuringFlushIsNotLost() async {
+        // Sender that, while sending "a", enqueues "b" into the same queue.
+        actor Reenter: AckSender {
+            var queue: AckQueue?
+            func bind(_ q: AckQueue) { queue = q }
+            func send(_ ack: Ack) async -> Bool {
+                if ack.id == "a", let q = queue {
+                    await q.enqueue(Ack(id: "b", labId: "Lb", patientLabel: nil, ackedAt: 2))
+                }
+                return true   // "a" succeeds
+            }
+        }
+        let sender = Reenter()
+        let q = AckQueue(store: MemAckStore(), sender: sender)
+        await sender.bind(q)
+        await q.enqueue(ack("a"))
+        await q.flush()
+        // "a" was sent; "b" was enqueued mid-flush and must survive (not wiped).
+        let n = await q.pendingCount
+        XCTAssertEqual(n, 1)
+    }
+
     func testPersistsAcrossReload() async {
         let store = MemAckStore()
         let q1 = AckQueue(store: store, sender: FlakySender(failFor: 99))
