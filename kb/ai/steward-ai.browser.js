@@ -70,7 +70,8 @@
   // disease instead of a lexically-adjacent one. Kept SPECIFIC (no bare 'pain'/'fever'/'chest') to
   // avoid new mis-routes. Retrieval-only; the deterministic engine is unaffected.
   var SMD_ALIASES = {
-    acs: "mi stemi nstemi angina acs coronary infarction",
+    acs: "mi stemi nstemi angina acs coronary infarction heart attack heartattack",
+    acute_infectious_diarrheal_diseases_and: "diarrhea diarrhoea loose motion loose motions loose stool loose stools gastroenteritis dysentery watery stools",
     aortic_dissection: "tearing ripping interscapular dissection",
     atrial_fib: "af afib rvr palpitations arrhythmia fibrillation",
     hypoglycemia: "hypo hypoglycaemia neuroglycopenia",
@@ -186,7 +187,7 @@
       return kbReady.then(function () {
         return !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
       }).then(function () {
-        return import("/kb/ai/interface.mjs?v=gold971");
+        return import("/kb/ai/interface.mjs?v=gold973");
       }).then(function (mod) {
         var CORE = (window.KB_CORE && (window.KB_CORE.diseases || window.KB_CORE.byId)) || [];
         var diseases = {}; (Array.isArray(CORE) ? CORE : Object.values(CORE)).forEach(function (d) { if (d && d.id) diseases[d.id] = d; });
@@ -318,19 +319,36 @@
           // so a distinctive term anywhere in it counts — kept as-is for routing parity. This runs only
           // for the candidates actually evaluated (≈1 for a confident rank-0 match, memoized), so it's
           // cheap; the real perf win is the short-circuit + the lazy vector hop, not trimming this.
-          var hay = (String(id) + " " + (gc.name || "") + " " + JSON.stringify(gc)).toLowerCase();
+          var aliasStr = " " + String(SMD_ALIASES[id] || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim() + " ";
+          var hay = (String(id) + " " + (gc.name || "") + " " + aliasStr + JSON.stringify(gc)).toLowerCase();
           var hitT = distinctive.filter(function (t) { return hay.indexOf(t) >= 0; });
           var cov = distinctive.length ? hitT.length / distinctive.length : 1;
-          var nameHit = false, nameToksAll = false;
+          var nameHit = false, nameToksAll = false, headHit = false;
           if (gc.name) {
             var nm = String(gc.name).toLowerCase();
             nameHit = distinctive.some(function (t) { return t.length >= 5 && nm.indexOf(t) >= 0; });
             var nameToks = nm.replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
             nameToksAll = nameToks.length > 0 && nameToks.every(function (t) { return qHay.indexOf(" " + t + " ") >= 0; });
+            // HEAD match: the specific entity usually LEADS a disease name (Dengue…, Enteric…,
+            // Scrub…, Diabetic…). A query token that hits the head is a real topic hit; a lone token
+            // that only hits a NON-head/body position ("hypertension" → Idiopathic intracranial
+            // Hypertension, "management" → Diabetes Mellitus: Management, "high" in a fever body) is a
+            // mis-route — so a single-term query must hit the head (or the whole name) to be confident.
+            headHit = nameToks.length > 0 && qHay.indexOf(" " + nameToks[0] + " ") >= 0;
           }
-          var conf = distinctive.length === 0 || cov >= 0.6 || nameHit || nameToksAll;
+          // ALIAS match: a curated discriminative synonym/abbreviation for THIS disease appears in
+          // the query ("stemi"/"heart attack" → ACS, "loose motions" → diarrhoea). Aliases are
+          // hand-picked to be specific, so an alias hit is a real name-level match even when the
+          // display name is empty (e.g. ACS) or generic.
+          var aliasToks = aliasStr.split(" ").filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
+          var aliasHit = aliasToks.some(function (t) { return qHay.indexOf(" " + t + " ") >= 0; });
+          // Confident when: nothing distinctive to check; the whole name is named; a NAME token or a
+          // curated ALIAS is named; or ≥2 distinct query terms are covered. A LONE BODY-ONLY hit no
+          // longer counts (was `cov >= 0.6`): "high fever" only touched a Tick-borne relapsing fever
+          // body, so it now degrades to general knowledge instead of confidently describing it.
+          var conf = distinctive.length === 0 || nameToksAll || nameHit || aliasHit || (cov >= 0.6 && hitT.length >= 2);
           var res = { id: id, gc: gc, hit: hitT, coverage: cov, missing: distinctive.filter(function (t) { return hay.indexOf(t) < 0; }),
-                      confident: conf, nameHit: nameHit, nameToksAll: nameToksAll };
+                      confident: conf, nameHit: nameHit, nameToksAll: nameToksAll, headHit: headHit, aliasHit: aliasHit };
           if (id) _ecache[id] = res;
           return res;
         }
@@ -377,9 +395,12 @@
           if (!lead) lead = { id: candId, name: candGc.name || candId };
           if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(candId, hospitalId); } catch (e) {} }
           topicMatch = { matched: true, topic: distinctive.join(" "), grounded: candGc.name || candId };
-        } else if (chosen && chosen.hit.length > 0) {
+        } else if (chosen && chosen.hit.length > 0 && (chosen.nameHit || chosen.aliasHit || chosen.hit.length >= 2)) {
           // partial overlap → keep grounding on the nearest topic so nothing off-KB is invented,
           // but flag it as an ASSUMPTION for the caller to state + let the clinician refine.
+          // Require a NAME/ALIAS match or ≥2 distinct hits: a lone BODY-ONLY hit ("high" only in a
+          // Tick-borne relapsing fever body) is a mis-route, so it falls through to "none" → the
+          // model answers from general knowledge instead of confidently describing the wrong disease.
           grounding = [candGc];
           if (!lead) lead = { id: candId, name: candGc.name || candId };
           if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(candId, hospitalId); } catch (e) {} }
