@@ -38,6 +38,76 @@
     catch (e) { return []; }
   }
 
+  // Patient watchlist for the watch's "My patients". Prefers the ICU roster
+  // (the only source carrying a computed NEWS2, via state.scores), falling back
+  // to the GHIS worklist (demographics/bed, no score). All reads are synchronous,
+  // in-memory, and side-effect-free (never trigger a fetch). Capped for the WC payload.
+  function watchlist() {
+    var out = [];
+    try {
+      if (window.ICU && ICU.listPatients) {
+        (ICU.listPatients() || []).forEach(function (e) {
+          if (!e) return;
+          var st = e.state || {}, scores = st.scores || [], n2 = null;
+          for (var i = 0; i < scores.length; i++) {
+            if (scores[i] && scores[i].id === "news2" && scores[i].value != null) { n2 = scores[i].value; break; }
+          }
+          var pt = st.patient || {};
+          out.push({
+            id: String(e.id || ""),
+            name: String(e.name || pt.name || "Patient"),
+            bed: String(e.bed || pt.bed || ""),
+            news2: (typeof n2 === "number") ? Math.round(n2) : null,
+            flag: String(e.dx || pt.diagnosis || "") || null
+          });
+        });
+      }
+    } catch (e) {}
+    try {
+      if (!out.length && window.GHIS && GHIS.getPatients) {
+        (GHIS.getPatients() || []).forEach(function (p) {
+          if (!p) return;
+          out.push({
+            id: String(p.patientId || p.episodeId || ""),
+            name: String(p.patientFirstName || "Patient"),
+            bed: String(p.bedName || ""),
+            news2: null,
+            flag: String(p.deptDescription || "") || null
+          });
+        });
+      }
+    } catch (e) {}
+    return out.filter(function (e) { return e.id; }).slice(0, 30);
+  }
+
+  // Ward Sync census. Only phone-owned fields (the watch keeps its own critical
+  // count). No true bed denominator or task count exists client-side, so we don't
+  // invent them: censusTotal = worklist size; tasksDue = 0.
+  function census() {
+    try {
+      var occupied = 0, ghisN = 0, icuN = 0;
+      if (window.GHIS && GHIS.getPatients) {
+        var ps = GHIS.getPatients() || [];
+        ghisN = ps.length;
+        occupied = ps.filter(function (p) { return p && /occupied/i.test(String(p.queueStatus || "")); }).length;
+      }
+      if (window.ICU && ICU.listPatients) { icuN = (ICU.listPatients() || []).length; }
+      var patientCount = ghisN || icuN;
+      if (!patientCount) return null;                 // nothing meaningful to relay
+      var ward = "";
+      try { if (window.ICU && ICU.currentUnitLabel) ward = ICU.currentUnitLabel() || ""; } catch (e) {}
+      return {
+        patientCount: patientCount,
+        censusOccupied: occupied || patientCount,
+        censusTotal: patientCount,
+        tasksDue: 0,
+        onCall: false,
+        ward: ward,
+        updatedAt: Math.floor(Date.now() / 1000)
+      };
+    } catch (e) { return null; }
+  }
+
   // Automatic sync is on unless the user turned it off in Settings → Apple Watch.
   function autoSyncOn() {
     try { return localStorage.getItem("smd_watch_autosync") !== "0"; } catch (e) { return true; }
@@ -68,14 +138,19 @@
     publishing = true;
     try {
       var res = await u.getIdTokenResult();
-      await p.publish({
+      var payload = {
         uid: u.uid,
         idToken: res.token,
         expiresAt: Math.floor(new Date(res.expirationTime).getTime() / 1000),
         favorites: favorites(),
         recents: recents(),
         notifPrefs: notifPrefs()
-      });
+      };
+      // Only include census/watchlist when we actually have data, so a cold-start
+      // (before Ward Sync/ICU are loaded) never wipes the watch's last-known list.
+      var wl = watchlist(); if (wl.length) payload.watchlist = wl;
+      var cen = census(); if (cen) payload.glance = cen;
+      await p.publish(payload);
       markSynced();
       return true;
     } catch (e) {

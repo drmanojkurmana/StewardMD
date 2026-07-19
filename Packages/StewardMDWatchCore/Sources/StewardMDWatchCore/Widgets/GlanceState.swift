@@ -37,6 +37,30 @@ public struct GlanceState: Codable, Equatable, Sendable {
         var c = self; c.criticalCount = criticalCount; return c
     }
 
+    /// Merges phone-relayed fields (census/patient/ward/on-call/shift) into this
+    /// state, PRESERVING watch-owned fields (criticalCount, topCritical, rounds)
+    /// which the phone doesn't compute. Only keys the phone actually provides
+    /// override — so a relay never clobbers the push-driven critical badge.
+    public func merged(with dict: [String: Any]) -> GlanceState {
+        var g = self
+        func int(_ k: String) -> Int? {
+            (dict[k] as? Int) ?? (dict[k] as? NSNumber)?.intValue ?? (dict[k] as? Double).map { Int($0) }
+        }
+        func dbl(_ k: String) -> Double? {
+            (dict[k] as? Double) ?? (dict[k] as? NSNumber)?.doubleValue
+        }
+        if let v = int("patientCount") { g.patientCount = v }
+        if let v = int("censusOccupied") { g.censusOccupied = v }
+        if let v = int("censusTotal") { g.censusTotal = v }
+        if let v = int("tasksDue") { g.tasksDue = v }
+        if let v = dict["onCall"] as? Bool { g.onCall = v }
+        if let v = dict["ward"] as? String { g.ward = v }
+        if let v = dict["bleep"] as? String { g.bleep = v }
+        if let v = dbl("shiftEndsAt") { g.shiftEndsAt = v }
+        if let v = dbl("updatedAt") { g.updatedAt = v }
+        return g
+    }
+
     /// Rounds completion 0…1 (guards divide-by-zero).
     public var roundsFraction: Double {
         roundsTotal > 0 ? Double(roundsDone) / Double(roundsTotal) : 0

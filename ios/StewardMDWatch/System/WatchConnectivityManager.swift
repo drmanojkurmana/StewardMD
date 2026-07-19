@@ -52,8 +52,11 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         if let d = context["favorites"] as? Data, let f = try? JSONDecoder().decode([Favorite].self, from: d) {
             store.saveFavorites(f)
         }
-        if let d = context["glance"] as? Data, let g = try? JSONDecoder().decode(GlanceState.self, from: d) {
-            store.saveGlance(g)
+        // Merge phone-owned census fields into the stored glance — never clobber
+        // the watch-owned critical count/badge (which is push-driven).
+        if let d = context["glance"] as? Data,
+           let dict = (try? JSONSerialization.jsonObject(with: d)) as? [String: Any] {
+            store.saveGlance(store.loadGlance().merged(with: dict))
         }
         if let d = context["watchlist"] as? Data, let w = try? JSONDecoder().decode([WatchlistEntry].self, from: d) {
             store.saveWatchlist(w)          // persist for relaunch + the widget
