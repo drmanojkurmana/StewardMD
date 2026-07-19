@@ -1,25 +1,36 @@
 import SwiftUI
 import StewardMDWatchCore
 
-/// Root vertical list (design §04): six ways in, one shallow spine. Crown scrolls;
-/// each row pushes a focused, single-purpose detail. Rows are ≥44 pt, severity
-/// paired with an icon + label (never color-only).
+/// Root / Home (design §04 IA + §05 "Home · Today"): a greeting + on-call context
+/// header, then the six-way vertical spine. Crown scrolls; each row pushes a
+/// focused detail. Critical labs carries a live unacknowledged badge.
 struct RootListView: View {
     @EnvironmentObject private var session: WatchSessionStore
+    @EnvironmentObject private var labs: CriticalLabsModel
 
     var body: some View {
         List {
+            Section {
+                HomeHeader()
+                    .listRowBackground(Color.clear)
+            }
             ForEach(RootDestination.allCases) { dest in
                 NavigationLink(value: dest) {
-                    RootRow(destination: dest)
+                    RootRow(destination: dest,
+                            badge: dest == .criticalLabs ? labs.unacknowledgedCount : 0)
                 }
                 .listRowBackground(SMDPalette.surface.color)
             }
         }
         .navigationTitle("StewardMD")
         .navigationDestination(for: RootDestination.self) { dest in
-            // Phase 2 replaces these placeholders with the real module views.
-            PlaceholderDetail(destination: dest)
+            switch dest {
+            case .criticalLabs: CriticalLabsView()
+            case .drugs: DrugLookupView()
+            case .emergency: EmergencyView()
+            case .patients, .wardSync, .calculators:
+                ComingSoonDetail(destination: dest)   // delivered in later phases
+            }
         }
         .onAppear { session.reload() }
     }
@@ -64,8 +75,22 @@ enum RootDestination: String, CaseIterable, Identifiable, Hashable {
     }
 }
 
+private struct HomeHeader: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("StewardMD")
+                .font(.system(.headline, design: .rounded)).bold()
+                .foregroundStyle(SMDPalette.accent.color)
+            Text("On call · Ward 7")
+                .font(.caption2)
+                .foregroundStyle(SMDPalette.text2.color)
+        }
+    }
+}
+
 private struct RootRow: View {
     let destination: RootDestination
+    let badge: Int
     var body: some View {
         HStack(spacing: SMDSpacing.m) {
             Image(systemName: destination.symbol)
@@ -74,22 +99,27 @@ private struct RootRow: View {
             Text(destination.title)
                 .foregroundStyle(SMDPalette.text1.color)
             Spacer()
+            if badge > 0 {
+                Text("\(badge)")
+                    .font(.caption2).bold()
+                    .padding(.horizontal, 7).padding(.vertical, 2)
+                    .background(SMDPalette.critical.color, in: Capsule())
+                    .foregroundStyle(.white)
+            }
         }
         .frame(minHeight: SMDSpacing.minTapTarget)
     }
 }
 
-private struct PlaceholderDetail: View {
+private struct ComingSoonDetail: View {
     let destination: RootDestination
     var body: some View {
         VStack(spacing: SMDSpacing.s) {
             Image(systemName: destination.symbol)
-                .font(.largeTitle)
-                .foregroundStyle(destination.accent.color)
+                .font(.largeTitle).foregroundStyle(destination.accent.color)
             Text(destination.title).font(.headline)
             Text("Coming in the next phase")
-                .font(.caption)
-                .foregroundStyle(SMDPalette.text2.color)
+                .font(.caption).foregroundStyle(SMDPalette.text2.color)
         }
         .navigationTitle(destination.title)
     }

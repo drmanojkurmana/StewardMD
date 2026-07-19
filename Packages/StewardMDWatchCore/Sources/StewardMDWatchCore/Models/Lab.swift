@@ -49,7 +49,7 @@ public struct LabTest: Codable, Sendable, Identifiable, Equatable {
 }
 
 /// A critical-lab alert as consumed from an APNs push payload (design §10).
-public struct LabAlert: Codable, Sendable, Identifiable, Equatable {
+public struct LabAlert: Codable, Sendable, Identifiable, Equatable, Hashable {
     public let id: String
     public let analyte: String       // e.g. "Potassium"
     public let value: String         // e.g. "6.8"

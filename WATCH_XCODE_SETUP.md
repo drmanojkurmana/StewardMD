@@ -49,10 +49,13 @@ Confirm the phone `App` target builds and runs as before (no regressions).
 3. When prompted to activate the new scheme, choose **Activate**.
 4. Delete the Xcode-generated `StewardMDWatchApp.swift`, `ContentView.swift`,
    `Assets.xcassets`, and `Info.plist` from the new target group.
-5. **Add Files to "StewardMDWatch"…** → add everything under
-   `ios/StewardMDWatch/` (`StewardMDWatchApp.swift`, `RootListView.swift`,
-   `WatchSessionStore.swift`, `Assets.xcassets`, `Info.plist`,
-   `StewardMDWatch.entitlements`). Ensure **Target Membership = StewardMDWatch**.
+5. **Add Files to "StewardMDWatch"…** → add the entire `ios/StewardMDWatch/`
+   folder, **"Create groups"**, including its subfolders `System/`,
+   `Components/`, `Notifications/` (app entry + delegate, module views, session
+   store, haptics, notification controller, `Assets.xcassets`, `Info.plist`,
+   `StewardMDWatch.entitlements`). Ensure **Target Membership = StewardMDWatch**
+   for every added file. (Do **not** add `Info.plist`/entitlements as bundle
+   resources — they are referenced via build settings below.)
 6. In the target's **Build Settings**:
    - `INFOPLIST_FILE = ios/StewardMDWatch/Info.plist`
    - `GENERATE_INFOPLIST_FILE = NO`

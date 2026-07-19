@@ -13,10 +13,19 @@ final class WatchSessionStore: ObservableObject {
 
     private let store: AppGroupStore
 
+    /// Shared networking, built once with the bridged-token provider.
+    let apiClient: APIClient
+    let drugAPI: DrugAPI
+    let appAPI: AppAPI
+
     init(store: AppGroupStore = AppGroupStore()) {
         self.store = store
         self.session = store.loadSession() ?? .none
         self.favorites = store.loadFavorites()
+        let client = APIClient(tokenProvider: BridgedTokenProvider(store: store))
+        self.apiClient = client
+        self.drugAPI = DrugAPI(client: client)
+        self.appAPI = AppAPI(client: client)
     }
 
     /// Re-read the shared container (call on `.onAppear` / activation).
