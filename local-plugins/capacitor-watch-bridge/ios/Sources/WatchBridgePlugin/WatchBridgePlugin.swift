@@ -33,6 +33,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     private let favoritesKey = "smd.favorites"
     private let recentsKey = "smd.recents"
     private let notifPrefsKey = "smd.notifPrefs"
+    private let glanceKey = "smd.glance"
+    private let watchlistKey = "smd.watchlist"
 
     private lazy var relay = WatchConnectivityRelay()
 
@@ -81,17 +83,26 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         let favorites: [Any] = call.getArray("favorites") ?? []
         let recents: [Any] = call.getArray("recents") ?? []
         let notifPrefs = call.getObject("notifPrefs")
+        // glance (census/counts) + watchlist are OPTIONAL — only forwarded when the
+        // caller provides them, so a session-only publish never wipes the watch's
+        // last-known census/patient list.
+        let glance = call.getObject("glance")
+        let watchlist = call.getArray("watchlist")
 
         let sessionData = try? JSONSerialization.data(withJSONObject: session)
         let favData = try? JSONSerialization.data(withJSONObject: favorites)
         let recentsData = try? JSONSerialization.data(withJSONObject: recents)
         let notifData = notifPrefs.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
+        let glanceData = glance.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
+        let watchlistData = watchlist.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
 
         if let d = UserDefaults(suiteName: suiteName) {
             d.set(sessionData, forKey: sessionKey)
             d.set(favData, forKey: favoritesKey)
             d.set(recentsData, forKey: recentsKey)
             if let n = notifData { d.set(n, forKey: notifPrefsKey) }
+            if let g = glanceData { d.set(g, forKey: glanceKey) }
+            if let w = watchlistData { d.set(w, forKey: watchlistKey) }
         }
 
         var context: [String: Any] = [:]
@@ -99,6 +110,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         if let f = favData { context["favorites"] = f }
         if let r = recentsData { context["recents"] = r }
         if let n = notifData { context["notifPrefs"] = n }
+        if let g = glanceData { context["glance"] = g }
+        if let w = watchlistData { context["watchlist"] = w }
         relay.updateContext(context)
 
         call.resolve()
@@ -110,6 +123,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             d.removeObject(forKey: favoritesKey)
             d.removeObject(forKey: recentsKey)
             d.removeObject(forKey: notifPrefsKey)
+            d.removeObject(forKey: glanceKey)
+            d.removeObject(forKey: watchlistKey)
         }
         relay.updateContext(["cleared": true])
         call.resolve()

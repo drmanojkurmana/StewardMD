@@ -64,4 +64,19 @@ final class AppGroupStoreTests: XCTestCase {
         XCTAssertNil(store.loadSession())
         UserDefaults(suiteName: suite)?.removePersistentDomain(forName: suite)
     }
+
+    func testWatchlistRoundTrips() {
+        let suite = "test.smd.appgroup.\(UUID().uuidString)"
+        let store = AppGroupStore(suite: suite)
+        XCTAssertTrue(store.loadWatchlist().isEmpty)   // absent → empty
+        let list = [
+            WatchlistEntry(id: "P12", name: "Okafor", bed: "12", news2: 9, flag: "K+ rising", updatedAt: 1),
+            WatchlistEntry(id: "P7", name: "Dubois", bed: "7", news2: 6, flag: nil, updatedAt: 1)
+        ]
+        store.saveWatchlist(list)
+        XCTAssertEqual(store.loadWatchlist().map(\.id), ["P12", "P7"])
+        store.clear()
+        XCTAssertTrue(store.loadWatchlist().isEmpty)
+        UserDefaults(suiteName: suite)?.removePersistentDomain(forName: suite)
+    }
 }

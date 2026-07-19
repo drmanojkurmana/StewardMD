@@ -21,6 +21,8 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     private let store = WatchServices.store
 
     func activate() {
+        // Seed the UI from the last-known relayed data so it isn't empty on launch.
+        WatchServices.watchlist.set(store.loadWatchlist())
         #if canImport(WatchConnectivity)
         guard WCSession.isSupported() else { return }
         WCSession.default.delegate = self
@@ -54,6 +56,7 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
             store.saveGlance(g)
         }
         if let d = context["watchlist"] as? Data, let w = try? JSONDecoder().decode([WatchlistEntry].self, from: d) {
+            store.saveWatchlist(w)          // persist for relaunch + the widget
             WatchServices.watchlist.set(w)
         }
         if let d = context["notifPrefs"] as? Data, let p = try? JSONDecoder().decode([String: Bool].self, from: d) {

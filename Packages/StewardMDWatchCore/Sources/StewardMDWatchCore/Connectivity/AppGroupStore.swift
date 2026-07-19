@@ -10,6 +10,7 @@ public struct AppGroupStore: Sendable {
     private let sessionKey = "smd.session"
     private let favoritesKey = "smd.favorites"
     private let glanceKey = "smd.glance"
+    private let watchlistKey = "smd.watchlist"
     private let notifPrefsKey = "smd.notifPrefs"
     private let pendingRouteKey = "smd.pendingRoute"
 
@@ -45,6 +46,17 @@ public struct AppGroupStore: Sendable {
     public func loadGlance() -> GlanceState {
         guard let d = defaults, let data = d.data(forKey: glanceKey) else { return .empty }
         return (try? JSONDecoder().decode(GlanceState.self, from: data)) ?? .empty
+    }
+
+    /// The patient watchlist relayed from the iPhone (survives relaunch; also
+    /// readable by the widget extension).
+    public func saveWatchlist(_ entries: [WatchlistEntry]) {
+        guard let d = defaults, let data = try? JSONEncoder().encode(entries) else { return }
+        d.set(data, forKey: watchlistKey)
+    }
+    public func loadWatchlist() -> [WatchlistEntry] {
+        guard let d = defaults, let data = d.data(forKey: watchlistKey) else { return [] }
+        return (try? JSONDecoder().decode([WatchlistEntry].self, from: data)) ?? []
     }
 
     /// Notification-tier preferences relayed from the iPhone (critical/warning/info).
@@ -85,6 +97,7 @@ public struct AppGroupStore: Sendable {
         defaults?.removeObject(forKey: sessionKey)
         defaults?.removeObject(forKey: favoritesKey)
         defaults?.removeObject(forKey: glanceKey)
+        defaults?.removeObject(forKey: watchlistKey)
         defaults?.removeObject(forKey: notifPrefsKey)
         defaults?.removeObject(forKey: pendingRouteKey)
     }
