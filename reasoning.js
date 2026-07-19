@@ -3274,10 +3274,10 @@
     branches.sort();
     var f = function (on, attr, val, label) { return '<button class="kblib-f' + (on ? " on" : "") + '" data-' + attr + '="' + val + '">' + label + '</button>'; };
     sec.innerHTML =
-      '<input id="kblibQ" class="kblib-search" placeholder="🔍  Search any disease or clinical detail…" autocomplete="off" value="' + esc(_libState.q) + '">' +
+      '<input id="kblibQ" class="kblib-search" placeholder="Search any disease or clinical detail…" autocomplete="off" value="' + esc(_libState.q) + '">' +
       '<div class="kblib-filters">' +
         '<div class="kblib-grp"><span class="kblib-lbl">Type</span>' +
-          f(_libState.cls === "all", "cls", "all", "All") + f(_libState.cls === "inf", "cls", "inf", "🔴 Infective") + f(_libState.cls === "ni", "cls", "ni", "🟢 Non-infective") + '</div>' +
+          f(_libState.cls === "all", "cls", "all", "All") + f(_libState.cls === "inf", "cls", "inf", '<span class="kbdot" style="color:#dc2626">●</span> Infective') + f(_libState.cls === "ni", "cls", "ni", '<span class="kbdot" style="color:#16a34a">●</span> Non-infective') + '</div>' +
         '<div class="kblib-grp"><span class="kblib-lbl">Source</span>' +
           f(_libState.src === "all", "src", "all", "All") + f(_libState.src === "dx", "src", "dx", "Diagnostic") + f(_libState.src === "ref", "src", "ref", "Reference") + '</div></div>' +
       '<div class="kblib-grp" style="margin:8px 0 4px"><span class="kblib-lbl">System</span>' +
