@@ -43,8 +43,12 @@ export function rrf(a, b, K) {
 }
 
 const STOP = new Set("the a an of to in is are with and or for as on at by from this that without within into be can may not no".split(" "));
+// Two-letter clinical abbreviations that MUST survive tokenisation. The length>2 filter otherwise
+// drops them, so their disease aliases ("mi"→ACS, "af"→atrial fibrillation) never match and the
+// query mis-routes ("how to treat MI" grounded on whatever generic-management chunk ranked first).
+const KEEP_SHORT = new Set(["mi", "af"]);
 function tokenize(s) {
-  return String(s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter((w) => w.length > 2 && !STOP.has(w));
+  return String(s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter((w) => (w.length > 2 || KEEP_SHORT.has(w)) && !STOP.has(w));
 }
 
 export function createStewardAI(store, opts) {
