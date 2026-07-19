@@ -27,8 +27,22 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("Invalid image data"); return
         }
 
+        // Settle the Capacitor promise EXACTLY ONCE. On some devices / first use (text-model
+        // provisioning), or under memory / Neural-Engine pressure, VNRecognizeTextRequest.perform()
+        // can stall and never invoke its completion — which left the JS "Reading medicines…"
+        // spinner hanging forever (works on newer hardware, hangs on others). A watchdog rejects
+        // if nothing has settled in time so the WebView UI always recovers.
+        let settleLock = NSLock()
+        var settled = false
+        func settle(_ block: () -> Void) {
+            settleLock.lock(); defer { settleLock.unlock() }
+            if settled { return }
+            settled = true
+            block()
+        }
+
         let request = VNRecognizeTextRequest { (req, err) in
-            if let err = err { call.reject(err.localizedDescription); return }
+            if let err = err { settle { call.reject(err.localizedDescription) }; return }
             var lines: [String] = []
             if let results = req.results as? [VNRecognizedTextObservation] {
                 for observation in results {
@@ -37,18 +51,28 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin {
                     }
                 }
             }
-            call.resolve([
-                "text": lines.joined(separator: "\n"),
-                "lines": lines
-            ])
+            settle {
+                call.resolve([
+                    "text": lines.joined(separator: "\n"),
+                    "lines": lines
+                ])
+            }
         }
         request.recognitionLevel = .accurate
         request.usesLanguageCorrection = true
+        // Pin to English so Vision never has to load additional language models at request time
+        // (a plausible source of the first-use stall on some devices). Prescriptions here are English.
+        request.recognitionLanguages = ["en-US"]
+
+        // Watchdog: guarantee the promise settles even if perform() stalls indefinitely.
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 20) {
+            settle { call.reject("ocr-timeout") }
+        }
 
         let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
         DispatchQueue.global(qos: .userInitiated).async {
             do { try handler.perform([request]) }
-            catch { call.reject(error.localizedDescription) }
+            catch { settle { call.reject(error.localizedDescription) } }
         }
     }
 }

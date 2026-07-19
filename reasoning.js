@@ -3935,10 +3935,17 @@
     // Resolves: { mode:"fields", fields, lines } | { mode:"lines", lines, reason? }.
     readImage: function (dataUrl, kind) {
       if (!(window.SMD_NATIVE && window.SMD_NATIVE.ocr)) return Promise.reject(new Error("ocr-unavailable"));
+      // Diagnostics: capture where the scan spends time + whether OCR returned any text, so a
+      // device that used to hang can be pinpointed (on-device OCR vs. cloud stage). Mirrors to the
+      // console and to window.__SMD_SCAN_DIAG (surfaced in the UI when a scan errors/times out).
+      var _t0 = Date.now();
+      function diag(o) { try { window.__SMD_SCAN_DIAG = o; console.info("[SMD-SCAN]", JSON.stringify(o)); } catch (e) {} }
       return window.SMD_NATIVE.ocr(dataUrl).then(function (o) {
+        var ocrMs = Date.now() - _t0;
         var lines = (o && o.lines) || [];
         var text = (o && o.text) || lines.join("\n");
         var online = (typeof navigator === "undefined") || navigator.onLine !== false;
+        diag({ stage: "ocr-done", ocrMs: ocrMs, lines: lines.length, online: online });
         // Apple Vision OCR is always done on-device (above). We ALSO parse fields on-device
         // for free/instantly — this is both the offline path and a safety net that fills any
         // field the cloud misses. Cloud (Vertex, from redacted text) is more accurate, so it
@@ -3948,20 +3955,24 @@
           if (Object.keys(localFields).length) return { mode: "fields", fields: localFields, lines: lines, source: "on-device", reason: reason };
           return { mode: "lines", lines: lines, reason: reason };
         }
-        if (!visionAiOn() || !online) return onDevice(visionAiOn() ? "offline" : "ai-off");
+        if (!visionAiOn() || !online) { diag({ stage: "on-device-only", ocrMs: ocrMs, lines: lines.length, reason: visionAiOn() ? "offline" : "ai-off" }); return onDevice(visionAiOn() ? "offline" : "ai-off"); }
         var scrubbed = redactPHI(text);
+        var _tc = Date.now();
         return window.SMD_AI.visionText(scrubbed, kind).then(function (r) {
+          var cloudMs = Date.now() - _tc;
           if (r && !r.error) {
             var f = (r.fields && typeof r.fields === "object") ? r.fields : r;
             if (f && (Object.keys(f).length || f.medications)) {
               var merged = {}; var k;                       // cloud wins, on-device fills gaps
               for (k in localFields) if (localFields.hasOwnProperty(k)) merged[k] = localFields[k];
               for (k in f) if (f.hasOwnProperty(k) && f[k] != null) merged[k] = f[k];
+              diag({ stage: "cloud-done", ocrMs: ocrMs, cloudMs: cloudMs, lines: lines.length, source: "cloud+on-device" });
               return { mode: "fields", fields: merged, lines: lines, source: "cloud+on-device" };
             }
           }
+          diag({ stage: "cloud-fallback", ocrMs: ocrMs, cloudMs: cloudMs, lines: lines.length, reason: (r && r.error) || "no-fields" });
           return onDevice((r && r.error) || "no-fields");   // cloud unavailable → on-device only
-        }).catch(function () { return onDevice("error"); });
+        }).catch(function (e) { diag({ stage: "cloud-error", ocrMs: ocrMs, cloudMs: Date.now() - _tc, lines: lines.length, err: String(e && e.message || e) }); return onDevice("error"); });
       });
     }
   };

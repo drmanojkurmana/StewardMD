@@ -1030,11 +1030,36 @@
     scanProgress("Reading medicines from image…");
     // Call via window.MEDLIST so tests can stub scanExtract.
     var fn = (window.MEDLIST && window.MEDLIST.scanExtract) || scanExtract;
+    // Absolute backstop: on native, a stalled on-device OCR / vision call can otherwise leave
+    // this spinner up forever (seen on some iPhones where Apple Vision OCR never returned).
+    // The native plugin now self-times-out too, but race here as well so the UI ALWAYS recovers
+    // with a clear next step even if the bridge never settles. (CapacitorHttp ignores
+    // AbortController, so a plain setTimeout race is the reliable guard — see reasoning.js.)
+    var settled = false;
+    var _t0 = Date.now();
+    // Diagnostics: append a compact trace (elapsed + last scan stage) to any error/timeout so a
+    // device that struggles can be pinpointed even without a tethered Mac. window.__SMD_SCAN_DIAG
+    // is set by SMD_AI.readImage; also mirrored to the console with the [SMD-SCAN] prefix.
+    function diagLine() {
+      var d = window.__SMD_SCAN_DIAG;
+      var secs = ((Date.now() - _t0) / 1000).toFixed(1);
+      var extra = d ? (" · " + (d.stage || "?") + (d.lines != null ? " · " + d.lines + " lines" : "") + (d.ocrMs != null ? " · ocr " + d.ocrMs + "ms" : "")) : "";
+      return " (" + secs + "s" + extra + ")";
+    }
+    function done(msg, err) { scanProgressDone(); scanProgress(msg + diagLine(), err); try { console.info("[SMD-SCAN] result", msg, window.__SMD_SCAN_DIAG || {}); } catch (e) {} }
+    var timer = setTimeout(function () {
+      if (settled) return; settled = true;
+      done("Reading the image timed out. Try a clearer, well-lit photo, or enter medicines manually.", true);
+    }, 45000);
     Promise.resolve().then(function () { return fn(dataUrl); }).then(function (rows) {
+      if (settled) return; settled = true; clearTimeout(timer);
       scanProgressDone();
-      if (!rows || !rows.length) { scanProgress("No medicines could be read confidently. Please enter them manually.", true); return; }
+      if (!rows || !rows.length) { done("No medicines could be read confidently. Please enter them manually.", true); return; }
       _openScanReview(rows, dataUrl);
-    }).catch(function () { scanProgressDone(); scanProgress("Could not read the image. Enter medicines manually.", true); });
+    }).catch(function () {
+      if (settled) return; settled = true; clearTimeout(timer);
+      done("Could not read the image. Enter medicines manually.", true);
+    });
   }
   // Clinician REVIEW — nothing is added until "Add selected". rows are candidate
   // parse results (or raw OCR rows, which are normalised here).
