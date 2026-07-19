@@ -186,7 +186,7 @@
       return kbReady.then(function () {
         return !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
       }).then(function () {
-        return import("/kb/ai/interface.mjs?v=gold154");
+        return import("/kb/ai/interface.mjs?v=gold482");
       }).then(function (mod) {
         var CORE = (window.KB_CORE && (window.KB_CORE.diseases || window.KB_CORE.byId)) || [];
         var diseases = {}; (Array.isArray(CORE) ? CORE : Object.values(CORE)).forEach(function (d) { if (d && d.id) diseases[d.id] = d; });
