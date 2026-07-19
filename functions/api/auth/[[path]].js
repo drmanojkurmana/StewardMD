@@ -45,6 +45,15 @@ async function authed(request, env) {
 }
 
 export async function onRequestPost(context) {
+  try {
+    return await handle(context);
+  } catch (e) {
+    // never return a raw platform 502 — surface a clean, diagnosable error
+    return json({ ok: false, error: "exception", detail: String((e && (e.stack || e.message)) || e) }, 500);
+  }
+}
+
+async function handle(context) {
   var request = context.request, env = context.env;
   var store = kv(env);
   if (!store) return json({ ok: false, error: "kv-unavailable" }, 500);
