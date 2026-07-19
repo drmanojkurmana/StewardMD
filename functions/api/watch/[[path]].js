@@ -110,6 +110,34 @@ export async function onRequest(context) {
   const method = request.method;
   const origin = new URL(request.url).origin;
 
+  // ── Apple Watch: acknowledge a critical result ──────────────────────────────
+  // Placed BEFORE the Lab-Watch config guard so acks work even where the GHIS
+  // Lab-Watch feature isn't configured. Idempotent by client key; appended to a
+  // per-user audit log. Uses the cases KV (independent of Lab-Watch encryption).
+  if (method === "POST" && seg === "ack") {
+    const auid = await identify(request, env);
+    if (!auid) return json({ error: "auth-required" }, 401);
+    const store = env.CASES_KV || env.GHIS_KV || null;
+    if (!store) return json({ error: "no-store" }, 501);
+    let b = {}; try { b = await request.json(); } catch (e) {}
+    const ackId = String(b.id || "").slice(0, 120);
+    if (!ackId) return json({ error: "missing-id" }, 400);
+    const key = "watchack:" + auid;
+    let log = [];
+    try { log = (await store.get(key, "json")) || []; } catch (e) {}
+    if (log.some((a) => a.id === ackId)) return json({ ok: true, idempotent: true });
+    log.push({
+      id: ackId,
+      labId: String(b.labId || "").slice(0, 120),
+      patient: String(b.patientLabel || "").slice(0, 120),
+      ackedAt: Number(b.ackedAt) || Math.floor(Date.now() / 1000),
+      at: Date.now(),
+    });
+    log = log.slice(-500);
+    await store.put(key, JSON.stringify(log));
+    return json({ ok: true });
+  }
+
   if (!watchConfigured(env)) return json({ error: "watch-not-configured" }, 503);
 
   // ── cron / admin ──
