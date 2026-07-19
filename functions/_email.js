@@ -55,6 +55,20 @@ export async function sendBranded(env, { to, subject, title, bodyHtml, preheader
   return { ok: true };
 }
 
+// One-time passcode for email verification during sign-up. Big, copy-friendly code + short expiry.
+export function emailOtp(env, { email, name, code, minutes }) {
+  return sendBranded(env, {
+    to: email,
+    subject: code + " is your StewardMD verification code",
+    title: "Verify your email",
+    preheader: "Your StewardMD verification code is " + code + " (valid " + (minutes || 10) + " minutes).",
+    bodyHtml:
+      '<p style="font-size:14px;line-height:1.6">' + (name ? "Dr. " + esc(name) : "Hello") + ', enter this code in StewardMD to verify your email and finish setting up your account:</p>' +
+      '<p style="margin:20px 0;text-align:center"><span style="display:inline-block;font:800 30px/1 \'IBM Plex Mono\',monospace;letter-spacing:10px;color:' + TEAL + ';background:#f1f6f5;border:1px solid #d7e6e3;border-radius:12px;padding:16px 22px">' + esc(code) + '</span></p>' +
+      '<p style="font-size:13px;line-height:1.6;color:#5a7184">This code expires in ' + (minutes || 10) + ' minutes. If you didn’t request it, you can safely ignore this email — no changes were made.</p>',
+  });
+}
+
 export function emailVerified(env, { email, name, regNo, council }) {
   return sendBranded(env, {
     to: email,
