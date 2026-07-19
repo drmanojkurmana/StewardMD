@@ -19,6 +19,7 @@ Consequence: a genuinely native watchOS app cannot "reuse existing Swift service
 2. **Verification:** Author + rigorously review; `swift build` + XCTest the platform-agnostic core package on macOS each phase; user does final Xcode build (no watchOS simulator runtime installed in the build environment).
 3. **Favorites:** Build BOTH — watch-local favorites (offline default) AND a small additive backend-backed favorites feature bridged from the phone.
 4. **Backend changes:** Additive only, clearly isolated, flagged for review before deploy.
+5. **Xcode target creation:** Author every source file, `Info.plist`, entitlements, asset catalog, SwiftPM package, widget, complication, App Intent, and supporting file in the correct repo structure. **Do not edit `project.pbxproj`.** Ship `WATCH_XCODE_SETUP.md` with exact click-by-click Xcode steps to add the Watch App target, Widget Extension, capabilities, and package references. Repo must be fully ready so the project builds with no additional code changes after those steps.
 
 **Non-negotiable ground rules:** additive only; do not break existing web/iOS/Android behavior; do not touch the Experimental Access work; small logical commits; recovery tags before milestones; stop with a summary after each phase.
 
@@ -195,7 +196,7 @@ Each phase: small commits, recovery tag before starting, stop with a summary bef
 
 ## 8. Risks & open items
 - **watchOS runtime not installed here** → SwiftUI/WidgetKit shells verified by review only; core package is the compile-tested backbone. User builds in Xcode 27.
-- **`project.pbxproj` edits are fragile** → I'll add targets carefully and provide exact Xcode UI fallback steps; the core package + bridge are decoupled so most work survives even if target wiring needs manual touch-up.
+- **`project.pbxproj` edits are fragile** → per decision 5, I will NOT edit `project.pbxproj`. All files are authored in the correct structure; `WATCH_XCODE_SETUP.md` gives the exact Xcode steps to add targets + package refs + capabilities so the project builds without further code changes.
 - **APNs topic gap** → MVP uses notification mirroring; independent watch push is Phase 6 additive backend work.
 - **GHIS/ICU can't be fetched by the watch** → relayed from phone; if phone unreachable, those views show cached + stale banner.
 - **Apple IAP webhook is a scaffold** → subscription-gated watch features read the existing Pro claim; StoreKit wiring is out of scope unless requested.
