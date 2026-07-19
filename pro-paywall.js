@@ -24,13 +24,14 @@
   }
   function toast(m) { try { if (window.SMD_toast) return SMD_toast(m); if (window.toast) return toast(m); } catch (e) {} }
 
+  function ppIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
   var FEATURES = [
-    ["🤖", "MaiK AI assistant", "Deep review, imaging, scribe, evidence — unlimited"],
-    ["🏥", "Ward Sync", "Pull a patient’s labs, imaging & meds from the hospital"],
-    ["🔔", "Lab Watch 24/7", "Background alerts when a critical result lands"],
-    ["👥", "Team collaboration", "Shared ICU/Ward units, round tasks & handover"],
-    ["☁️", "Sync & share", "Cases across devices + shareable case links"],
-    ["💊", "Full drug database", "Unlimited brand / price / monograph lookups"],
+    ["ai", "MaiK AI assistant", "Deep review, imaging, scribe, evidence — unlimited"],
+    ["hospital", "Ward Sync", "Pull a patient’s labs, imaging & meds from the hospital"],
+    ["bell", "Lab Watch 24/7", "Background alerts when a critical result lands"],
+    ["user", "Team collaboration", "Shared ICU/Ward units, round tasks & handover"],
+    ["cloud", "Sync & share", "Cases across devices + shareable case links"],
+    ["pills", "Full drug database", "Unlimited brand / price / monograph lookups"],
   ];
 
   var _root = null, _plan = "annual", _status = null, _plans = null;
@@ -45,12 +46,12 @@
     return '<div style="position:sticky;top:0;background:var(--paper,#f6f7f5);padding:16px 18px 8px;display:flex;align-items:flex-start;gap:10px;z-index:2">' +
       '<div style="flex:1"><div style="font:800 20px var(--serif,Georgia,serif);color:var(--ink)">StewardMD <span style="color:var(--teal,#0e6e63)">Pro</span></div>' +
       (sub ? '<div style="font:500 12.5px var(--sans);color:var(--slate-soft,#5a7184);margin-top:2px">' + sub + '</div>' : '') + '</div>' +
-      '<button data-pp="close" aria-label="Close" style="flex:none;width:34px;height:34px;border-radius:50%;border:none;background:var(--panel,#fff);color:var(--slate,#2d4356);font-size:18px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)">✕</button></div>';
+      '<button data-pp="close" aria-label="Close" style="flex:none;width:34px;height:34px;border-radius:50%;border:none;background:var(--panel,#fff);color:var(--slate,#2d4356);font-size:18px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)">' + ppIco("close") + '</button></div>';
   }
   function featureList() {
     return '<div style="padding:4px 18px 8px">' + FEATURES.map(function (f) {
       return '<div style="display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line,#d7dee3)">' +
-        '<span style="font-size:19px;flex:none">' + f[0] + '</span><div><div style="font:700 14px var(--sans);color:var(--ink)">' + esc(f[1]) + '</div>' +
+        '<span style="font-size:19px;flex:none;color:var(--teal,#0e6e63)">' + ppIco(f[0]) + '</span><div><div style="font:700 14px var(--sans);color:var(--ink)">' + esc(f[1]) + '</div>' +
         '<div style="font:500 12.5px/1.45 var(--sans);color:var(--slate-soft,#5a7184)">' + esc(f[2]) + '</div></div></div>';
     }).join("") + '</div>';
   }
@@ -79,8 +80,8 @@
     var promoOn = _status && _status.promo;
     var isPaid = _status && _status.pro && !promoOn;
     var banner = "";
-    if (promoOn) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);font:600 12.5px/1.5 var(--sans);color:var(--green,#1c7a4a)">🎉 Launch period — Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
-    else if (isPaid) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 12.5px var(--sans);color:var(--teal,#0e6e63)">✓ Pro active' + (_status.until ? ' until ' + esc(fdate(_status.until)) : '') + '. Thank you!</div>';
+    if (promoOn) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);font:600 12.5px/1.5 var(--sans);color:var(--green,#1c7a4a)">' + ppIco("spark") + ' Launch period — Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
+    else if (isPaid) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 12.5px var(--sans);color:var(--teal,#0e6e63)">' + ppIco("check") + ' Pro active' + (_status.until ? ' until ' + esc(fdate(_status.until)) : '') + '. Thank you!</div>';
 
     var plansHtml = "";
     if (_plans) {
