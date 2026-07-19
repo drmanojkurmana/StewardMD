@@ -1,0 +1,17 @@
+{
+  "name": "@stewardmd/capacitor-watch-bridge",
+  "version": "1.0.0",
+  "description": "Publishes the signed-in session (uid, Firebase ID token, expiry) plus favorites/recents to the paired Apple Watch via a shared App Group and WatchConnectivity. iOS-only; no-op when the watch is unavailable. Additive — never touches existing auth/fetch/push code.",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "package.json"
+  ],
+  "author": "StewardMD",
+  "license": "MIT"
+}
