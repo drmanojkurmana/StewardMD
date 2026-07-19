@@ -2329,6 +2329,21 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
       _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
       var think = bubble("ai", '<span class="maik-thinking">' + svg("spark", "smd-ico") + ' Searching StewardMD knowledge<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>');
+      // Hard client-side ceiling: the grounding chain (KB index load → buildPackage → grounded call)
+      // must never leave the user stuck on 'Searching…' forever if a promise never settles (BUG-05).
+      // On timeout we surface a clear message + a one-tap retry, and free the composer.
+      var _maikDone = false, MAIK_TO_MS = 40000;
+      var _maikTO = setTimeout(function () {
+        if (_maikDone) return; _maikDone = true;
+        try {
+          think.innerHTML = '<div class="maik-welcome">MaiK took too long to respond — the knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
+          var _rl = think.querySelector(".maik-retry");
+          if (_rl) _rl.addEventListener("click", function (ev) { ev.preventDefault(); try { think.parentNode && think.parentNode.removeChild(think); } catch (e) {} runClinical(question, retrieval, depth, active, topicLabel); });
+        } catch (e) {}
+        _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+        try { console.warn("[MaiK] knowledge search timed out after " + MAIK_TO_MS + "ms:", question); } catch (e) {}
+        try { scroll(); } catch (e) {}
+      }, MAIK_TO_MS);
       Promise.resolve()
         .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
         .then(function () {
@@ -2389,8 +2404,8 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             } catch (e) {}
           });
         })
-        .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
-        .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
+        .catch(function (e) { if (!_maikDone) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
+        .then(function () { if (_maikDone) return; _maikDone = true; clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
     }
     function send() {
       if (_maikBusy) return;

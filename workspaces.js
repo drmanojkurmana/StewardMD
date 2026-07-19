@@ -105,7 +105,13 @@
   function loadPrefs() { try { var p = JSON.parse(localStorage.getItem(pkey()) || "null"); if (!p || typeof p !== "object") return Object.assign({}, DEF); return Object.assign({}, DEF, p); } catch (e) { return Object.assign({}, DEF); } }
   function savePrefs() { try { localStorage.setItem(pkey(), JSON.stringify(prefs)); } catch (e) {} }
   var prefs = loadPrefs();
-  var caseWorkspace = null; // per-current-case override (not persisted)
+  var caseWorkspace = null; // per-current-case override
+  // BUG-02: the one-shot "Use for my next case" override was in-memory only, so a guest-expiry reload
+  // (or any reload) between picking the specialty and tapping "Start a new case" lost it and the case
+  // opened in Internal Medicine instead. Persist it to sessionStorage so it reliably carries through;
+  // it's consumed (cleared) when the case actually starts.
+  function persistCaseWs() { try { caseWorkspace ? sessionStorage.setItem("smd_ws_oneshot", caseWorkspace) : sessionStorage.removeItem("smd_ws_oneshot"); } catch (e) {} }
+  try { var _o1 = sessionStorage.getItem("smd_ws_oneshot"); if (_o1) caseWorkspace = _o1; } catch (e) {}
 
   function activeWorkspace() { return caseWorkspace || prefs.defaultClinicalWorkspace || IM; }
   function setDefault(id) { prefs.defaultClinicalWorkspace = id; prefs.lastUsedClinicalWorkspace = id; prefs.lastWorkspaceChangedAt = 0; savePrefs(); }
@@ -314,6 +320,7 @@
     o = o || {};
     if (o.asDefault) { setDefault(id); caseWorkspace = (id === IM ? null : id); }
     else { caseWorkspace = id; }              // "this case / my next case" override (IM ok too)
+    persistCaseWs();
     closeSheet();
     refreshSidebarLabel();
     if (o.selector) {
@@ -332,7 +339,7 @@
   // Called by Home's "Start a new case" (Dx My Patient / Start a Case): if a specialty workspace is
   // active, open its engine and return true; if Internal Medicine, return false so Home runs its own
   // IM flow. The "this case" override is ONE-SHOT — consumed here so the next case reverts to default.
-  function startActiveCase() { var a = activeWorkspace(); if (a === IM) return false; openSpecialtyShell(a); caseWorkspace = null; refreshSidebarLabel(); return true; }
+  function startActiveCase() { var a = activeWorkspace(); if (a === IM) return false; openSpecialtyShell(a); caseWorkspace = null; persistCaseWs(); refreshSidebarLabel(); return true; }
 
   /* ───────────────────────────── specialty shell (interactive engine or framework) ───────────────────────────── */
   var _shell, LADCOL = { 0: "#047857", 1: "#65a30d", 2: "#0e6e63", 3: "#D97706", 4: "#b5460f", 5: "#ab1c2c" }, _es = null, _shellWs = null;
@@ -375,7 +382,7 @@
       });
     }
   }
-  function openIM() { if (_shell) _shell.classList.remove("on"); caseWorkspace = null; refreshSidebarLabel(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
+  function openIM() { if (_shell) _shell.classList.remove("on"); caseWorkspace = null; persistCaseWs(); refreshSidebarLabel(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
 
   function selSet() { var s = new Set(); for (var k in _es.sel) if (_es.sel[k]) s.add(k); return s; }
   function renderSyndrome() {
