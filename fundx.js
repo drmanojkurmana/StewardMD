@@ -610,6 +610,7 @@
       '<main class="fundx-scroll">' +
         '<div class="rds-section-header"><span class="rds-section-title">Hybrid depth fusion</span></div>' +
         row("smd_fundx_depth", "Enable depth fusion", "Master switch for native ARKit/ARCore depth. Off = MediaPipe + CV only.", false) +
+        row("smd_fundx_gpu_preview", "GPU camera preview", "Full-res hardware camera behind the UI (needs depth fusion on). Off = the CPU preview.", false) +
         '<div class="rds-section-header"><span class="rds-section-title">iOS · ARKit / LiDAR</span></div>' +
         row("smd_fundx_dev_arkit", "ARKit", "World tracking + camera pose.", true) +
         row("smd_fundx_dev_lidar", "LiDAR", "LiDAR scanner (Pro devices).", true) +
