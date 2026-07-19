@@ -9,11 +9,13 @@ import StewardMDWatchCore
 struct StewardMDWatchApp: App {
     @WKApplicationDelegateAdaptor(WatchAppDelegate.self) private var delegate
     @StateObject private var session = WatchSessionStore()
-    @StateObject private var labs = CriticalLabsModel(ackQueue: WatchServices.ackQueue)
     @StateObject private var favorites = FavoritesStore()
-    @StateObject private var watchlist = WatchlistModel()
     @StateObject private var router = AppRouter()
     @StateObject private var features = FeatureFlagsModel()
+    // Shared singletons (also fed by the WC receiver + push handler).
+    @ObservedObject private var labs = WatchServices.labs
+    @ObservedObject private var watchlist = WatchServices.watchlist
+    @ObservedObject private var connectivity = WatchConnectivityManager.shared
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -29,7 +31,11 @@ struct StewardMDWatchApp: App {
             .environmentObject(features)
             .preferredColorScheme(.dark)
             .tint(SMDPalette.accent.color)
-            .task { await features.refresh() }
+            .task {
+                connectivity.activate()
+                await features.refresh()
+            }
+            .onOpenURL { router.open($0) }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
                     router.consumePending()

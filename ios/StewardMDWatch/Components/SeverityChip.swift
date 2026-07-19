@@ -24,8 +24,11 @@ struct SeverityChip: View {
         .font(.caption2)
         .padding(.horizontal, 8)
         .padding(.vertical, 3)
-        .foregroundStyle(SMDPalette.text1.color)
+        // Dark text on the bright severity fill clears AA on every tier
+        // (white would fail on warning/success/info used as a background).
+        .foregroundStyle(SMDPalette.canvas.color)
         .background(tier.color.color, in: Capsule())
-        .accessibilityLabel("\(text) \(tier.rawValue)")
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(text), \(tier.rawValue)")
     }
 }

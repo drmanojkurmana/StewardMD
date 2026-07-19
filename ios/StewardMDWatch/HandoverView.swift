@@ -16,6 +16,7 @@ struct HandoverView: View {
                     HStack(spacing: SMDSpacing.s) {
                         Image(systemName: model.isHandedOff(entry.id) ? "checkmark.circle.fill" : "circle")
                             .foregroundStyle(model.isHandedOff(entry.id) ? SMDPalette.success.color : SMDPalette.text2.color)
+                            .accessibilityLabel(model.isHandedOff(entry.id) ? "Handed off" : "Not handed off")
                         VStack(alignment: .leading, spacing: 1) {
                             Text(entry.name).foregroundStyle(SMDPalette.text1.color)
                             if let flag = entry.flag {

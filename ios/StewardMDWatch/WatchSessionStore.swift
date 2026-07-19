@@ -18,11 +18,21 @@ final class WatchSessionStore: ObservableObject {
     var drugAPI: DrugAPI { WatchServices.drugAPI }
     var appAPI: AppAPI { WatchServices.appAPI }
 
+    private var observer: NSObjectProtocol?
+
     init(store: AppGroupStore = WatchServices.store) {
         self.store = store
         self.session = store.loadSession() ?? .none
         self.favorites = store.loadFavorites()
+        // Reload whenever the WatchConnectivity receiver persists fresh data.
+        observer = NotificationCenter.default.addObserver(
+            forName: .smdWatchDataUpdated, object: nil, queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.reload() }
+        }
     }
+
+    deinit { if let o = observer { NotificationCenter.default.removeObserver(o) } }
 
     /// Re-read the shared container (call on `.onAppear` / activation).
     func reload() {
@@ -40,7 +50,10 @@ final class WatchSessionStore: ObservableObject {
 struct BridgedTokenProvider: AuthTokenProvider {
     let store: AppGroupStore
     func currentToken() async -> String? {
-        guard let s = store.loadSession(), s.isValid else { return nil }
-        return s.idToken
+        if let s = store.loadSession(), s.isValid { return s.idToken }
+        // Missing/expired → ask the phone to publish a fresh one; the caller
+        // treats this attempt as unauthenticated and retries after the relay.
+        await MainActor.run { WatchConnectivityManager.shared.requestToken() }
+        return nil
     }
 }

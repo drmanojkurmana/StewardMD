@@ -70,7 +70,7 @@ struct ShiftWidgetView: View {
 
     private var remainingLabel: String {
         guard let end = state.shiftEndsAt else { return "--:--" }
-        return TimeFormat.mmss(max(0, end - Date().timeIntervalSince1970))
+        return TimeFormat.hmmss(max(0, end - Date().timeIntervalSince1970))
     }
 
     var body: some View {

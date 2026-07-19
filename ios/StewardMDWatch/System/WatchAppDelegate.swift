@@ -16,23 +16,44 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate, UNUserNotificatio
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse) async {
         let info = response.notification.request.content.userInfo
-        guard response.actionIdentifier == LabNotifications.ack,
-              let alert = NotificationParser.parse(info) else { return }
-        let ack = Ack(id: "ack-\(alert.id)", labId: alert.id,
-                      patientLabel: alert.patientLabel, ackedAt: Date().timeIntervalSince1970)
-        await WatchServices.ackQueue.enqueue(ack)
-        await WatchServices.ackQueue.flush()
+        guard let alert = NotificationParser.parse(info) else { return }
+        // Make sure the alert is in the list, then act on the chosen action.
+        await MainActor.run { WatchServices.labs.ingest(alert) }
+        switch response.actionIdentifier {
+        case LabNotifications.ack:
+            await WatchServices.labs.acknowledge(alert)   // optimistic + queued idempotent ack
+        case LabNotifications.view, UNNotificationDefaultActionIdentifier:
+            WatchServices.store.savePendingRoute("criticalLabs")   // consumed on activation
+        case LabNotifications.snooze:
+            reschedule(response.notification.request.content, after: 15 * 60)
+        default:
+            break
+        }
     }
 
-    // Show critical alerts even in the foreground.
+    /// Re-delivers the alert after `seconds` (Snooze).
+    private func reschedule(_ content: UNNotificationContent, after seconds: TimeInterval) {
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
+        let req = UNNotificationRequest(identifier: "snooze-\(UUID().uuidString)",
+                                        content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(req)
+    }
+
+    // Show critical alerts even in the foreground, and surface them in-app.
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification) async
         -> UNNotificationPresentationOptions {
-        [.banner, .sound, .list]
+        if let alert = NotificationParser.parse(notification.request.content.userInfo) {
+            await MainActor.run { WatchServices.labs.ingest(alert) }
+        }
+        return [.banner, .sound, .list]
     }
 
-    // A silent/background push refreshes complications + Smart Stack timelines.
+    // A silent/background push feeds the model, refreshes the badge + widget timelines.
     func didReceiveRemoteNotification(_ userInfo: [AnyHashable: Any]) async -> WKBackgroundFetchResult {
+        if let alert = NotificationParser.parse(userInfo) {
+            await MainActor.run { WatchServices.labs.ingest(alert) }
+        }
         WidgetCenter.shared.reloadAllTimelines()
         return .newData
     }

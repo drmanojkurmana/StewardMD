@@ -5,7 +5,7 @@ import StewardMDWatchCore
 /// the public Worker (works without a bridged token). Full monograph deep-links
 /// to the phone (Phase 3).
 struct DrugLookupView: View {
-    @StateObject private var model = DrugLookupModel(api: DrugAPI(client: APIClient()))
+    @StateObject private var model = DrugLookupModel(api: WatchServices.drugAPI)
     @State private var query = ""
 
     var body: some View {
@@ -39,5 +39,12 @@ struct DrugLookupView: View {
             }
         }
         .navigationTitle("Drugs")
+        .onAppear {
+            // Siri "amiodarone dose" prefills + runs the search.
+            if let q = WatchServices.store.takePendingDrug(), !q.isEmpty {
+                query = q
+                Task { await model.search(q) }
+            }
+        }
     }
 }

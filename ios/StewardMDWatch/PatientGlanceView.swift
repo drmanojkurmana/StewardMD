@@ -22,14 +22,22 @@ struct PatientGlanceView: View {
                 if let flag = entry.flag {
                     SeverityChip(tier: entry.severity, text: flag)
                 }
-                Link(destination: URL(string: "stewardmd://patient/\(entry.id)")!) {
-                    Label("Open full chart on iPhone", systemImage: "iphone")
-                        .font(.caption)
+                if let url = chartURL {
+                    Link(destination: url) {
+                        Label("Open full chart on iPhone", systemImage: "iphone")
+                            .font(.caption)
+                    }
+                    .tint(SMDPalette.info.color)
                 }
-                .tint(SMDPalette.info.color)
             }
             .padding(SMDSpacing.screenMargin)
         }
         .navigationTitle(entry.name)
+    }
+
+    /// Percent-encoded deep link (patient ids can contain URL-unsafe characters).
+    private var chartURL: URL? {
+        let enc = entry.id.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        return URL(string: "stewardmd://patient/\(enc)")
     }
 }

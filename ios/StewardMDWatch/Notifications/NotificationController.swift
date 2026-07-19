@@ -39,7 +39,10 @@ final class NotificationController: WKUserNotificationHostingController<LabNotif
     override var body: LabNotificationView { LabNotificationView(alert: alert) }
 
     override func didReceive(_ notification: UNNotification) {
-        alert = NotificationParser.parse(notification.request.content.userInfo)
+        let parsed = NotificationParser.parse(notification.request.content.userInfo)
+        alert = parsed
+        // Surface the alert in the app's Critical Labs list too.
+        if let a = parsed { Task { @MainActor in WatchServices.labs.ingest(a) } }
     }
 }
 

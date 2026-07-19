@@ -8,10 +8,19 @@ import StewardMDWatchCore
 struct CodeBlueView: View {
     @StateObject private var model = CodeBlueModel()
     @State private var running = false
+    @State private var startDate: Date?
     @State private var summary: CodeBlueSummary?
+    @Environment(\.scenePhase) private var scenePhase
 
-    // Drives the timer once per second while running.
+    // Drives periodic UI updates + the cycle haptic while foregrounded; elapsed
+    // is derived from a wall-clock anchor, so Always-On / wrist-down gaps
+    // self-correct on the next update (a missed 2-min boundary still buzzes).
     private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+    private func syncTick() {
+        guard running, let s = startDate else { return }
+        if model.sync(to: Date().timeIntervalSince(s)) { HapticManager.play(.critical) }
+    }
 
     var body: some View {
         ScrollView {
@@ -45,7 +54,8 @@ struct CodeBlueView: View {
 
                 Button(running ? "End" : "Start") {
                     running.toggle()
-                    if !running { summary = model.end() }
+                    if running { startDate = Date().addingTimeInterval(-model.elapsed) }
+                    else { summary = model.end() }
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(running ? SMDPalette.critical.color : SMDPalette.success.color)
@@ -58,9 +68,7 @@ struct CodeBlueView: View {
             .padding(SMDSpacing.screenMargin)
         }
         .navigationTitle("Code Blue")
-        .onReceive(ticker) { _ in
-            guard running else { return }
-            if model.tick(1) { HapticManager.play(.critical) }   // 2-min cycle haptic
-        }
+        .onReceive(ticker) { _ in syncTick() }
+        .onChange(of: scenePhase) { _, phase in if phase == .active { syncTick() } }
     }
 }

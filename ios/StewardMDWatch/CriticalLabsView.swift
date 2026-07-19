@@ -39,6 +39,7 @@ private struct LabRow: View {
                 if acknowledged {
                     Image(systemName: "checkmark").font(.caption2)
                         .foregroundStyle(SMDPalette.success.color)
+                        .accessibilityLabel("Acknowledged")
                 }
             }
             HStack(alignment: .firstTextBaseline, spacing: 5) {

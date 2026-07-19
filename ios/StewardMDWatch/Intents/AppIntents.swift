@@ -44,7 +44,11 @@ struct DrugDoseIntent: AppIntent {
     var drug: String?
 
     func perform() async throws -> some IntentResult {
-        AppGroupStore().savePendingRoute("drugs")
+        let store = AppGroupStore()
+        if let d = drug, !d.trimmingCharacters(in: .whitespaces).isEmpty {
+            store.savePendingDrug(d)   // prefills + runs the search on open
+        }
+        store.savePendingRoute("drugs")
         return .result()
     }
 }

@@ -32,6 +32,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     private let sessionKey = "smd.session"
     private let favoritesKey = "smd.favorites"
     private let recentsKey = "smd.recents"
+    private let notifPrefsKey = "smd.notifPrefs"
 
     private lazy var relay = WatchConnectivityRelay()
 
@@ -79,21 +80,25 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         // JSArray elements are already JSON-compatible (String/NSNumber/NSNull/…).
         let favorites: [Any] = call.getArray("favorites") ?? []
         let recents: [Any] = call.getArray("recents") ?? []
+        let notifPrefs = call.getObject("notifPrefs")
 
         let sessionData = try? JSONSerialization.data(withJSONObject: session)
         let favData = try? JSONSerialization.data(withJSONObject: favorites)
         let recentsData = try? JSONSerialization.data(withJSONObject: recents)
+        let notifData = notifPrefs.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
 
         if let d = UserDefaults(suiteName: suiteName) {
             d.set(sessionData, forKey: sessionKey)
             d.set(favData, forKey: favoritesKey)
             d.set(recentsData, forKey: recentsKey)
+            if let n = notifData { d.set(n, forKey: notifPrefsKey) }
         }
 
         var context: [String: Any] = [:]
         if let s = sessionData { context["session"] = s }
         if let f = favData { context["favorites"] = f }
         if let r = recentsData { context["recents"] = r }
+        if let n = notifData { context["notifPrefs"] = n }
         relay.updateContext(context)
 
         call.resolve()
@@ -104,6 +109,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             d.removeObject(forKey: sessionKey)
             d.removeObject(forKey: favoritesKey)
             d.removeObject(forKey: recentsKey)
+            d.removeObject(forKey: notifPrefsKey)
         }
         relay.updateContext(["cleared": true])
         call.resolve()

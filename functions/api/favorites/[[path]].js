@@ -28,7 +28,8 @@ async function read(store, uid) { try { return (await store.get(key(uid), "json"
 export async function onRequest(context) {
   const { request, env, params } = context;
   const store = kv(env);
-  const id = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
+  const rawId = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
+  const id = rawId.slice(0, 80);   // cap id length (parity with label)
   const method = request.method;
 
   if (!store) {

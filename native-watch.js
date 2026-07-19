@@ -42,8 +42,19 @@
   function autoSyncOn() {
     try { return localStorage.getItem("smd_watch_autosync") !== "0"; } catch (e) { return true; }
   }
+  function lowPower() {
+    try { return localStorage.getItem("smd_watch_lowpower") === "1"; } catch (e) { return false; }
+  }
+  function lastSyncMs() {
+    try { return parseInt(localStorage.getItem("smd_watch_last_sync") || "0", 10) || 0; } catch (e) { return 0; }
+  }
   function markSynced() {
     try { localStorage.setItem("smd_watch_last_sync", String(Date.now())); } catch (e) {}
+  }
+  // Notification-tier preferences (relayed to the watch; Settings → Apple Watch).
+  function notifPrefs() {
+    function on(k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v === "1"; } catch (e) { return d; } }
+    return { critical: on("smd_watch_notif_critical", true), warning: on("smd_watch_notif_warning", true), info: on("smd_watch_notif_info", false) };
   }
 
   var publishing = false;
@@ -62,7 +73,8 @@
         idToken: res.token,
         expiresAt: Math.floor(new Date(res.expirationTime).getTime() / 1000),
         favorites: favorites(),
-        recents: recents()
+        recents: recents(),
+        notifPrefs: notifPrefs()
       });
       markSynced();
       return true;
@@ -77,8 +89,13 @@
   // Manual sync from the Settings → Apple Watch page always runs (ignores the
   // auto-sync toggle). Returns a promise resolving to whether it succeeded.
   window.SMD_APPLE_WATCH_SYNC = function () { return publish(); };
-  // Auto-triggered sync respects the toggle.
-  function autoPublish() { if (autoSyncOn()) publish(); }
+  // Auto-triggered sync respects the toggle and battery-optimization throttle
+  // (min 2h between background syncs when low-power is on).
+  function autoPublish() {
+    if (!autoSyncOn()) return;
+    if (lowPower() && (Date.now() - lastSyncMs()) < 2 * 60 * 60 * 1000) return;
+    publish();
+  }
 
   function start() {
     var a = auth();
