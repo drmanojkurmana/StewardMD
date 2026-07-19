@@ -22,7 +22,7 @@ struct CriticalLabsView: View {
             }
         }
         .navigationTitle("Critical labs")
-        .navigationDestination(for: LabAlert.self) { LabDetailView(alert: $0) }
+        // LabAlert destination is registered at the NavigationStack root.
     }
 }
 

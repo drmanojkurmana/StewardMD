@@ -2,7 +2,7 @@ import Foundation
 
 /// A watchlist row (design §05 "My patients") — sickest first, NEWS2-scored.
 /// Assembled on the phone (GHIS/ICU) and relayed; the watch renders + ranks.
-public struct WatchlistEntry: Codable, Sendable, Identifiable, Equatable {
+public struct WatchlistEntry: Codable, Sendable, Identifiable, Equatable, Hashable {
     public let id: String
     public let name: String
     public let bed: String?

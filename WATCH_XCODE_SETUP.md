@@ -51,11 +51,17 @@ Confirm the phone `App` target builds and runs as before (no regressions).
    `Assets.xcassets`, and `Info.plist` from the new target group.
 5. **Add Files to "StewardMDWatch"…** → add the entire `ios/StewardMDWatch/`
    folder, **"Create groups"**, including its subfolders `System/`,
-   `Components/`, `Notifications/` (app entry + delegate, module views, session
-   store, haptics, notification controller, `Assets.xcassets`, `Info.plist`,
+   `Components/`, `Notifications/`, `Intents/` (app entry + delegate, router,
+   module views, session store, haptics, notification controller, App Intents +
+   Siri shortcuts, `Assets.xcassets`, `Info.plist`,
    `StewardMDWatch.entitlements`). Ensure **Target Membership = StewardMDWatch**
    for every added file. (Do **not** add `Info.plist`/entitlements as bundle
    resources — they are referenced via build settings below.)
+
+   > **Action button (Apple Watch Ultra):** after first launch, assign the
+   > Action button to the "Code Blue" shortcut via **Watch app ▸ Action Button ▸
+   > Shortcut ▸ StewardMD ▸ Start Code Blue** (the intent is registered by
+   > `StewardMDShortcuts`).
 6. In the target's **Build Settings**:
    - `INFOPLIST_FILE = ios/StewardMDWatch/Info.plist`
    - `GENERATE_INFOPLIST_FILE = NO`

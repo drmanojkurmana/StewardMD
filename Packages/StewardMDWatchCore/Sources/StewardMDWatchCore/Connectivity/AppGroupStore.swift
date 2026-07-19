@@ -10,6 +10,7 @@ public struct AppGroupStore: Sendable {
     private let sessionKey = "smd.session"
     private let favoritesKey = "smd.favorites"
     private let glanceKey = "smd.glance"
+    private let pendingRouteKey = "smd.pendingRoute"
 
     public init(suite: String = AppGroupStore.defaultSuite) { self.suite = suite }
 
@@ -45,9 +46,22 @@ public struct AppGroupStore: Sendable {
         return (try? JSONDecoder().decode(GlanceState.self, from: data)) ?? .empty
     }
 
+    /// A deep-link route requested by an App Intent / Siri / Action button, to be
+    /// consumed by the app on activation.
+    public func savePendingRoute(_ route: String) {
+        defaults?.set(route, forKey: pendingRouteKey)
+    }
+    /// Returns and clears any pending route (consume-once).
+    public func takePendingRoute() -> String? {
+        guard let d = defaults, let r = d.string(forKey: pendingRouteKey) else { return nil }
+        d.removeObject(forKey: pendingRouteKey)
+        return r
+    }
+
     public func clear() {
         defaults?.removeObject(forKey: sessionKey)
         defaults?.removeObject(forKey: favoritesKey)
         defaults?.removeObject(forKey: glanceKey)
+        defaults?.removeObject(forKey: pendingRouteKey)
     }
 }

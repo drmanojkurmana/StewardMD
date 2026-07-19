@@ -26,12 +26,24 @@ struct RootListView: View {
         .navigationDestination(for: RootDestination.self) { dest in
             switch dest {
             case .criticalLabs: CriticalLabsView()
+            case .patients: WatchlistView()
+            case .wardSync: WardSyncView()
             case .drugs: DrugLookupView()
+            case .calculators: CalculatorsView()
             case .emergency: EmergencyView()
-            case .patients, .wardSync, .calculators:
-                ComingSoonDetail(destination: dest)   // delivered in later phases
             }
         }
+        .navigationDestination(for: LabAlert.self) { LabDetailView(alert: $0) }
+        .navigationDestination(for: EmergencyRoute.self) { route in
+            switch route {
+            case .codeBlue: CodeBlueView()
+            case .sepsis: SepsisTimerView()
+            case .abg: ABGView()
+            case .procedure: ProcedureTimerView()
+            }
+        }
+        .navigationDestination(for: CalcRoute.self) { CalculatorDetailView(id: $0.id) }
+        .navigationDestination(for: WatchlistEntry.self) { PatientGlanceView(entry: $0) }
         .onAppear {
             session.reload()
             publishGlance()
@@ -123,16 +135,3 @@ private struct RootRow: View {
     }
 }
 
-private struct ComingSoonDetail: View {
-    let destination: RootDestination
-    var body: some View {
-        VStack(spacing: SMDSpacing.s) {
-            Image(systemName: destination.symbol)
-                .font(.largeTitle).foregroundStyle(destination.accent.color)
-            Text(destination.title).font(.headline)
-            Text("Coming in the next phase")
-                .font(.caption).foregroundStyle(SMDPalette.text2.color)
-        }
-        .navigationTitle(destination.title)
-    }
-}

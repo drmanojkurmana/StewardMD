@@ -1,25 +1,25 @@
 import SwiftUI
 import StewardMDWatchCore
 
-/// Emergency entry (design §01 "born on the wrist" + §06 rapid tools). Phase 2
-/// ships Code Blue; the sepsis bundle, procedure timers, ABG, and the rapid-tool
-/// grid arrive in Phase 4. Also reachable via the Action button / Siri.
+/// Emergency hub (design §01 "born on the wrist" + §06). Code Blue, the sepsis
+/// 1-hour bundle, ABG interpreter, and a procedure stopwatch — each one push
+/// away. Also reachable via Siri / the Action button.
 struct EmergencyView: View {
     var body: some View {
         List {
-            NavigationLink { CodeBlueView() } label: {
-                Label("Code Blue", systemImage: "bolt.heart.fill")
-                    .foregroundStyle(SMDPalette.critical.color)
-            }
-            .listRowBackground(SMDPalette.surface.color)
-
-            Label("Sepsis 1-hr bundle", systemImage: "hourglass")
-                .foregroundStyle(SMDPalette.text2.color)
-                .listRowBackground(SMDPalette.surface.color)
-            Label("ABG interpreter", systemImage: "wind")
-                .foregroundStyle(SMDPalette.text2.color)
-                .listRowBackground(SMDPalette.surface.color)
+            row("Code Blue", "bolt.heart.fill", SMDPalette.critical, .codeBlue)
+            row("Sepsis 1-hr bundle", "hourglass", SMDPalette.warning, .sepsis)
+            row("ABG interpreter", "wind", SMDPalette.info, .abg)
+            row("Procedure timer", "stopwatch", SMDPalette.teal, .procedure)
         }
         .navigationTitle("Emergency")
+    }
+
+    private func row(_ title: String, _ symbol: String, _ color: SMDColor,
+                     _ route: EmergencyRoute) -> some View {
+        NavigationLink(value: route) {
+            Label(title, systemImage: symbol).foregroundStyle(color.color)
+        }
+        .listRowBackground(SMDPalette.surface.color)
     }
 }
