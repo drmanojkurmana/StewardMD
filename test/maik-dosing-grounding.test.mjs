@@ -44,5 +44,33 @@ ok(/t\.default\.dosing/.test(srv), "server prompt serialises t.default.dosing");
 ok(/deliver it now|never (?:re-?offer|repeat the same offer)/i.test(srv),
   "server prompt forbids re-offering what an affirmative follow-up asked for");
 
+// ---- round 2: sibling bugs of the SAME class (structured data dropped before it reaches the model/UI) ----
+// A2 — the first fix carried dose/route/freq but DROPPED duration + coverage (149/61 drugRefs carry them).
+const acs = JSON.parse(fs.readFileSync(join(ROOT, "kb/treatments/acs.json"), "utf8"));
+const acsDosing = (createStewardAI({ treatments: { acs } }, { flags: { ai: true } }).resolveTreatment("acs").default.dosing) || [];
+const tica = acsDosing.find((d) => /ticagrelor/i.test(d.drug || ""));
+ok(tica && /12 months/i.test(tica.duration || ""), "A2: regimen DURATION survives resolution (ticagrelor 12 months): " + (tica && tica.duration));
+ok(/d\.duration/.test(srv), "A2: server prompt serialises dosing duration");
+ok(/clip\(JSON\.stringify\(pc\.cultures\), 900\)/.test(srv), "A2: culture-panel clip widened so multi-organism sensitivities aren't truncated");
+
+const home = fs.readFileSync(join(ROOT, "home.js"), "utf8");
+const rx = fs.readFileSync(join(ROOT, "prescription.js"), "utf8");
+const reas = fs.readFileSync(join(ROOT, "reasoning.js"), "utf8");
+
+// D — offer capture now catches the model's OWN coached bare "Want X?" phrasing (previously missed → "Yes" lost the offer)
+const OFFER_RE = /\b(?:would you like|shall i|do you want|want(?: me to)?|should i|i can(?: also)?)\b([^?]*)\?/i;
+ok(OFFER_RE.test("Want the paediatric dose?") && OFFER_RE.test("Want the pregnancy-safe options?"), "D: offer capture catches bare 'Want X?'");
+ok(/want\(\?: me to\)\?/.test(home), "D: home.js offer regex widened to bare 'want'");
+
+// B — 'dose?' follow-up now resolves a drug instead of the clarify looping on its own suggested example
+ok(/_tp\.dosing\[0\]\.drug/.test(home), "B: MaiK sets lastDrug from the answer's treatment (was never assigned → dead branch)");
+ok(/_pop \+ " dosing of " \+ _drug/.test(home), "B: 'dose?'/'X dose' resolves to a real dosing query (no clarify loop)");
+
+// C — Rx 'pre-fill from this' reads the structured dosing (real dose), not names only
+ok(/t\.default\.dosing/.test(rx) && /source: dose \? "kb"/.test(rx), "C: prescription pre-fill reads pkg.treatment dosing (real, trusted dose)");
+
+// F — safety-panel Alternatives carry duration + coverage (not just drug · dose)
+ok(/duration: a\.duration/.test(reas) && /coverage: a\.coverage/.test(reas), "F: safety-panel Alternatives carry duration + coverage");
+
 console.log(fails === 0 ? "\nALL PASS — MaiK grounds drug doses" : `\n${fails} FAILED`);
 process.exit(fails === 0 ? 0 : 1);

@@ -2060,8 +2060,11 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       if (/(antibiotic|antibiotics|abx|antimicrobial|drug of choice|which agent)/.test(n) && wc <= 7) {
         return { question: "Empiric antimicrobial therapy for " + t.topic + " — agent/class choice, severity and host adjustment, and culture-directed de-escalation principles.", depth: "concise", topic: "antibiotics for " + t.topic, retrieval: t.topic + " empiric antibiotics antimicrobial therapy de-escalation" };
       }
-      if (/^(dose|dosage|doses|how much)\b/.test(n) || (/\bdose\b/.test(n) && wc <= 4)) {
-        if (t.lastDrug) return { question: "Adult dosing of " + t.lastDrug + ", with renal-adjustment principles (verify locally).", depth: "concise", topic: "dose of " + t.lastDrug, retrieval: t.lastDrug + " dose dosing renal adjustment" };
+      if (/^(dose|dosage|doses|how much)\b/.test(n) || (/\bdose\b/.test(n) && wc <= 6)) {
+        var _pop = /\b(paediatric|pediatric|child|neonat)/i.test(n) ? "Paediatric" : (/\b(renal|dialysis|ckd)\b/i.test(n) ? "Renal-adjusted" : (/\b(hepatic|liver)\b/i.test(n) ? "Hepatic-adjusted" : (/\bpregnan/i.test(n) ? "Pregnancy" : "Adult")));
+        var _drug = q.replace(/\?+/g, " ").replace(/\b(dose|dosage|doses|dosing|of|the|a|an|in|for|adult|paediatric|pediatric|child|neonatal|neonate|renal|dialysis|ckd|hepatic|liver|pregnancy|pregnant|how|much|what|whats|is|are|please|pls|give|me|and|standard|its|it|treatment|treatments|therapy|regimen|regimens|drug|drugs|medication|medications|agent|agents|antibiotic|antibiotics)\b/gi, " ").replace(/\s+/g, " ").trim();
+        _drug = _drug || t.lastDrug;
+        if (_drug) return { question: _pop + " dosing of " + _drug + " for " + t.topic + " \u2014 dose, route, titration and renal-adjustment principles. Verify locally.", depth: "concise", topic: "dose of " + _drug, retrieval: _drug + " " + t.topic + " dose dosing route renal adjustment" };
         return { clarify: "Which drug’s dose would you like — e.g. “ceftriaxone dose” or “atropine dose in OP poisoning”?" };
       }
       if (/^(what next|whats next|next|next steps?|then( what)?|and then|what to do next)\b/.test(n) || (/\bnext\b/.test(n) && wc <= 4)) {
@@ -2222,12 +2225,14 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         // reply can continue on X instead of dead-ending as a casual acknowledgement.
         var _offer = "";
         try {
-          var _oq = String(md || "").match(/\b(?:would you like|shall i|do you want|want me to|should i|i can(?: also)?)\b([^?]*)\?/i);
+          var _oq = String(md || "").match(/\b(?:would you like|shall i|do you want|want(?: me to)?|should i|i can(?: also)?)\b([^?]*)\?/i);
           if (_oq && _oq[1]) _offer = _oq[1]
             .replace(/^\s*(?:me\s+)?(?:to\s+)?(?:discuss|explore|delve into|review|go over|hear about|know about|cover|outline|detail|walk you through|provide)\s+/i, "")
             .replace(/^\s*(?:about|the)\s+/i, "").replace(/\s+/g, " ").trim();
         } catch (e) {}
-        _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, offer: _offer, askedMore: /\?\s*$/.test(String(md || "").trim()), ts: Date.now() };
+        var _ld = (_maikTopic && _maikTopic.lastDrug) || null;
+        try { var _tp = pkg && pkg.treatment && pkg.treatment.default; if (_tp && _tp.dosing && _tp.dosing.length && _tp.dosing[0].drug) _ld = _tp.dosing[0].drug; else if (_tp && _tp.drugRefs && _tp.drugRefs.length) _ld = _tp.drugRefs[0]; } catch (e) {}
+        _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: _ld, offer: _offer, askedMore: /\?\s*$/.test(String(md || "").trim()), ts: Date.now() };
       }
       scroll();
       try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}

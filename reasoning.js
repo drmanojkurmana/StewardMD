@@ -5069,7 +5069,7 @@
       var syn = _safetyId && window.SYNDROMES && window.SYNDROMES[_safetyId]; if (!syn) return [];
       var alts = syn.alternatives || (syn.decision && syn.decision.alternatives) || [];
       return alts.slice(0, 4).map(function (a) {
-        return { drug: a.drug || "", dose: [a.dose, a.route, a.frequency].filter(Boolean).join(" · ") };
+        return { drug: a.drug || "", dose: [a.dose, a.route, a.frequency].filter(Boolean).join(" · "), duration: a.duration || "", coverage: a.coverage || "" };
       }).filter(function (a) { return a.drug; });
     } catch (e) { return []; }
   }
@@ -5117,7 +5117,7 @@
       html += '<div class="smd-safety-row"><span class="smd-safety-ic">' + (card.ok ? "✅" : "❤️") + '</span><div><b>Cardiac (QT)</b> ' + esc(card.text) + '</div></div>';
       // Alternatives: the syndrome's other regimens.
       if (alts.length) html += '<div class="smd-safety-row"><span class="smd-safety-ic">🔁</span><div><b>Alternatives</b><ul class="smd-safety-ul">' +
-        alts.map(function (a) { return '<li><b>' + esc(a.drug) + '</b>' + (a.dose ? " — " + esc(a.dose) : "") + '</li>'; }).join("") + '</ul></div></div>';
+        alts.map(function (a) { return '<li><b>' + esc(a.drug) + '</b>' + (a.dose ? " — " + esc(a.dose) : "") + (a.duration ? " · " + esc(a.duration) : "") + (a.coverage ? '<br><span class="smd-safety-sub">' + esc(a.coverage) + '</span>' : "") + '</li>'; }).join("") + '</ul></div></div>';
       lines.innerHTML = html;
     } catch (e) { /* never break the page */ }
   }

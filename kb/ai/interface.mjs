@@ -150,8 +150,9 @@ export function createStewardAI(store, opts) {
     // compatibility (server join + addDrug); the numbers ride alongside in `dosing`.
     const dosingOf = (rec) => (rec.drugRefs || []).map((x) => ({
       drug: x.composition || null, label: x.regimenLabel || null,
-      dose: x.dose || null, route: x.route || null, freq: x.freq || null, why: x.why || null,
-    })).filter((d) => d.drug && (d.dose || d.route || d.freq));
+      dose: x.dose || null, route: x.route || null, freq: x.freq || null,
+      duration: x.duration || null, coverage: x.coverage || null, why: x.why || null,
+    })).filter((d) => d.drug && (d.dose || d.route || d.freq || d.duration));
     const out = {
       diseaseId, precedence,
       default: def ? { tier: def.tier || null, line: def.line || null, source: (def.evidence && def.evidence.ref) || null,
