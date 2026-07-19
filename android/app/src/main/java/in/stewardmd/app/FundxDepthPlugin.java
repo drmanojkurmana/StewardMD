@@ -33,6 +33,8 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
+import com.google.ar.core.CameraConfig;
+import com.google.ar.core.CameraConfigFilter;
 import com.google.ar.core.Config;
 import com.google.ar.core.Frame;
 import com.google.ar.core.Pose;
@@ -40,6 +42,8 @@ import com.google.ar.core.Session;
 
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -102,6 +106,7 @@ public class FundxDepthPlugin extends Plugin {
     private Session gpuSession;                      // GPU-mode session (owned by the GL render thread)
     private volatile int gpuFrameCount = 0;
     private int analyzeEvery = 6;                    // in GPU mode, analyse ~1 of every 6 draw frames
+    private volatile int gpuTexW = 0, gpuTexH = 0;   // chosen high-res GPU camera-texture size (preview sharpness)
 
     // ---- Capability detection (runtime, no manual configuration) --------------------------
     @PluginMethod
@@ -268,6 +273,7 @@ public class FundxDepthPlugin extends Plugin {
                 bgRenderer.createOnGlThread();
                 querySensorOrientation();
                 gpuSession = new Session(getContext());
+                selectHighResCameraConfig(gpuSession);   // full-res GPU texture (default is often 640x480)
                 Config cfg = new Config(gpuSession);
                 if (gpuSession.isDepthModeSupported(Config.DepthMode.AUTOMATIC)) cfg.setDepthMode(Config.DepthMode.AUTOMATIC);
                 cfg.setFocusMode(Config.FocusMode.AUTO);
@@ -275,7 +281,9 @@ public class FundxDepthPlugin extends Plugin {
                 gpuSession.configure(cfg);
                 gpuSession.setCameraTextureName(bgRenderer.getTextureId());
                 gpuSession.resume();
-                resolveOnce(resolved, call, started(true, "ok-gpu"));
+                JSObject r = started(true, "ok-gpu");
+                r.put("textureW", gpuTexW); r.put("textureH", gpuTexH);
+                resolveOnce(resolved, call, r);
             } catch (Exception e) {
                 resolveOnce(resolved, call, started(false, "gpu session: " + e.getClass().getSimpleName() + ": " + e.getMessage()));
             }
@@ -352,6 +360,28 @@ public class FundxDepthPlugin extends Plugin {
             if (d != null) return d.getRotation();
         } catch (Exception e) {}
         return Surface.ROTATION_0;
+    }
+
+    // Pick the ARCore camera config with the LARGEST GPU texture (the preview surface). ARCore's
+    // default config is often 640x480 — the cause of the soft/upscaled GPU preview. On a texture-size
+    // tie, prefer the smaller CPU image (analysis doesn't need resolution). Must run before resume().
+    private void selectHighResCameraConfig(Session s) {
+        try {
+            CameraConfigFilter filter = new CameraConfigFilter(s);
+            filter.setTargetFps(EnumSet.of(CameraConfig.TargetFps.TARGET_FPS_30, CameraConfig.TargetFps.TARGET_FPS_60));
+            List<CameraConfig> configs = s.getSupportedCameraConfigs(filter);
+            CameraConfig best = null; long bestTex = -1, bestCpu = Long.MAX_VALUE;
+            for (CameraConfig c : configs) {
+                long tex = (long) c.getTextureSize().getWidth() * c.getTextureSize().getHeight();
+                long cpu = (long) c.getImageSize().getWidth() * c.getImageSize().getHeight();
+                if (tex > bestTex || (tex == bestTex && cpu < bestCpu)) { best = c; bestTex = tex; bestCpu = cpu; }
+            }
+            if (best != null) {
+                s.setCameraConfig(best);
+                gpuTexW = best.getTextureSize().getWidth();
+                gpuTexH = best.getTextureSize().getHeight();
+            }
+        } catch (Exception e) { /* keep default config */ }
     }
 
     private void stopGpuPreview() {
