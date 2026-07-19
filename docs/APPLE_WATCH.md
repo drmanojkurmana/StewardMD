@@ -245,11 +245,13 @@ watch-settings.js                        # Settings ▸ Apple Watch page
 ## 10. Remaining work & optional enhancements
 
 **Genuinely remaining to be "fully live" (need phone-side data + Apple APIs):**
-- **Phone-side relay of GHIS census / watchlist / ICU scores + patient-glance
-  vitals.** The watch-side receiver (`WatchConnectivityManager`) already decodes
-  `glance`/`watchlist` from the applicationContext; the iPhone must *gather* and
-  publish them (a JS + plugin addition). Until then My Patients / Ward Sync show
-  honest empty/stale states. Critical-lab pushes and auth **do** flow end-to-end.
+- ~~Phone-side relay of GHIS census / watchlist.~~ **Done** — `native-watch.js`
+  gathers `watchlist()` (ICU roster w/ NEWS2, GHIS worklist fallback) + `census()`
+  and publishes them; the plugin forwards them; `WatchConnectivityManager` merges
+  the glance (preserving the watch-owned critical badge) and persists the
+  watchlist. My Patients + Ward Sync populate from live GHIS/ICU state. *Not yet
+  relayed:* per-patient glance **vitals** (only NEWS2 + dx today), a true bed
+  denominator, and task counts (no client-side source — see the data-source notes).
 - **`WKExtendedRuntimeSession`** for the Code Blue / sepsis timers so the display
   ticks live in Always-On and the 2-min haptic fires with the wrist down. Timers
   are now wall-clock-accurate on glance; this makes them live-in-background.
