@@ -10,6 +10,7 @@ public struct AppGroupStore: Sendable {
     private let sessionKey = "smd.session"
     private let favoritesKey = "smd.favorites"
     private let glanceKey = "smd.glance"
+    private let notifPrefsKey = "smd.notifPrefs"
     private let pendingRouteKey = "smd.pendingRoute"
 
     public init(suite: String = AppGroupStore.defaultSuite) { self.suite = suite }
@@ -46,6 +47,19 @@ public struct AppGroupStore: Sendable {
         return (try? JSONDecoder().decode(GlanceState.self, from: data)) ?? .empty
     }
 
+    /// Notification-tier preferences relayed from the iPhone (critical/warning/info).
+    public func saveNotifPrefs(_ prefs: [String: Bool]) {
+        guard let d = defaults, let data = try? JSONEncoder().encode(prefs) else { return }
+        d.set(data, forKey: notifPrefsKey)
+    }
+    public func loadNotifPrefs() -> [String: Bool] {
+        guard let d = defaults, let data = d.data(forKey: notifPrefsKey) else {
+            return ["critical": true, "warning": true, "info": false]
+        }
+        return (try? JSONDecoder().decode([String: Bool].self, from: data))
+            ?? ["critical": true, "warning": true, "info": false]
+    }
+
     /// A deep-link route requested by an App Intent / Siri / Action button, to be
     /// consumed by the app on activation.
     public func savePendingRoute(_ route: String) {
@@ -58,10 +72,20 @@ public struct AppGroupStore: Sendable {
         return r
     }
 
+    private var pendingDrugKey: String { "smd.pendingDrug" }
+    /// A drug query requested by Siri ("<drug> dose"), consumed once by the lookup screen.
+    public func savePendingDrug(_ q: String) { defaults?.set(q, forKey: pendingDrugKey) }
+    public func takePendingDrug() -> String? {
+        guard let d = defaults, let q = d.string(forKey: pendingDrugKey) else { return nil }
+        d.removeObject(forKey: pendingDrugKey)
+        return q
+    }
+
     public func clear() {
         defaults?.removeObject(forKey: sessionKey)
         defaults?.removeObject(forKey: favoritesKey)
         defaults?.removeObject(forKey: glanceKey)
+        defaults?.removeObject(forKey: notifPrefsKey)
         defaults?.removeObject(forKey: pendingRouteKey)
     }
 }

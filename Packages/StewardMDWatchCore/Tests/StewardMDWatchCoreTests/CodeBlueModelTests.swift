@@ -26,6 +26,17 @@ final class CodeBlueModelTests: XCTestCase {
         XCTAssertTrue(m.nextDrug.contains("Amiodarone"))
     }
 
+    func testSyncToWallClockCrossesBoundary() {
+        let m = CodeBlueModel()
+        // Wrist down 0 → 130s in one jump (AOD): must report a boundary crossed
+        // so the missed rhythm-check haptic still fires on resume.
+        XCTAssertTrue(m.sync(to: 130))
+        XCTAssertEqual(m.cycle, 2)
+        XCTAssertEqual(m.elapsedLabel, "2:10")
+        // A further sync within the same cycle does not re-cross.
+        XCTAssertFalse(m.sync(to: 150))
+    }
+
     func testSummaryCountsAndROSC() {
         let m = CodeBlueModel()
         m.tick(600)                 // 10 min

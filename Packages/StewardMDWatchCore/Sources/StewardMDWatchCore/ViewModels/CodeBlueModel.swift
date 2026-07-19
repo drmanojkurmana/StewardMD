@@ -44,6 +44,16 @@ public final class CodeBlueModel: ObservableObject {
         return crossed
     }
 
+    /// Sets elapsed from a wall-clock reading (AOD/background-safe). Returns true
+    /// if a rhythm-check boundary was crossed since the last value, so the caller
+    /// still fires the cycle haptic even when the wrist was down across it.
+    @discardableResult
+    public func sync(to seconds: TimeInterval) -> Bool {
+        let crossed = timer.set(seconds)
+        elapsed = timer.elapsed
+        return crossed
+    }
+
     public func recordAdrenaline() { adrenalineCount += 1 }
     public func recordShock() { shockCount += 1 }
     public func markROSC() { rosc = true }

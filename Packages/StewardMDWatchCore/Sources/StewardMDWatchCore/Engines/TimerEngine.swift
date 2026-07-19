@@ -27,6 +27,15 @@ public struct CodeBlueTimer: Sendable {
         elapsed += dt
         return Int(elapsed / Self.cycleSeconds) > before
     }
+
+    /// Sets elapsed absolutely from a wall-clock reading (AOD/background-safe).
+    /// Returns true if the jump crossed one or more rhythm-check boundaries.
+    @discardableResult
+    public mutating func set(_ seconds: TimeInterval) -> Bool {
+        let before = Int(elapsed / Self.cycleSeconds)
+        elapsed = max(0, seconds)
+        return Int(elapsed / Self.cycleSeconds) > before
+    }
 }
 
 /// Surviving-Sepsis 1-hour bundle timer (design §06): a 60-minute countdown with
@@ -44,4 +53,7 @@ public struct SepsisBundleTimer: Sendable {
     public var shouldNudge: Bool { remaining > 0 && remaining <= Self.nudgeWindow }
 
     public mutating func tick(_ dt: TimeInterval) { elapsed += dt }
+
+    /// Sets elapsed absolutely from a wall-clock reading (AOD/background-safe).
+    public mutating func set(_ seconds: TimeInterval) { elapsed = max(0, seconds) }
 }

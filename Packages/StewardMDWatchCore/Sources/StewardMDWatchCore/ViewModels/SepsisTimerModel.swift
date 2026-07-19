@@ -28,6 +28,12 @@ public final class SepsisTimerModel: ObservableObject {
         elapsed = timer.elapsed
     }
 
+    /// Sets elapsed from a wall-clock reading (AOD/background-safe).
+    public func sync(to seconds: TimeInterval) {
+        timer.set(seconds)
+        elapsed = timer.elapsed
+    }
+
     public func toggle(_ step: Step) {
         if done.contains(step) { done.remove(step) } else { done.insert(step) }
     }
@@ -38,5 +44,10 @@ public final class SepsisTimerModel: ObservableObject {
     public var shouldNudge: Bool { timer.shouldNudge }
     public var isExpired: Bool { timer.isExpired }
     public var allDone: Bool { done.count == Step.allCases.count }
+    /// Checklist completion 0…1.
     public var progress: Double { Double(done.count) / Double(Step.allCases.count) }
+    /// Elapsed fraction of the 60-minute window 0…1 (the countdown ring).
+    public var timeFraction: Double {
+        min(1, elapsed / SepsisBundleTimer.totalSeconds)
+    }
 }

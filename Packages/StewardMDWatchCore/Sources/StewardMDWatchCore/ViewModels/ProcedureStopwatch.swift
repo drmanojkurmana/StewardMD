@@ -19,5 +19,11 @@ public final class ProcedureStopwatch: ObservableObject {
         elapsed += dt
     }
 
+    /// Sets elapsed from a wall-clock reading while running (AOD/background-safe).
+    public func sync(to seconds: TimeInterval) {
+        guard running else { return }
+        elapsed = max(0, seconds)
+    }
+
     public var label: String { TimeFormat.mmss(elapsed) }
 }
