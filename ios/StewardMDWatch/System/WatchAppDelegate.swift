@@ -18,10 +18,10 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate, UNUserNotificatio
         let info = response.notification.request.content.userInfo
         guard let alert = NotificationParser.parse(info) else { return }
         // Make sure the alert is in the list, then act on the chosen action.
-        await MainActor.run { WatchServices.labs.ingest(alert) }
+        await ingest(alert)
         switch response.actionIdentifier {
         case LabNotifications.ack:
-            await WatchServices.labs.acknowledge(alert)   // optimistic + queued idempotent ack
+            await acknowledge(alert)   // optimistic + queued idempotent ack
         case LabNotifications.view, UNNotificationDefaultActionIdentifier:
             WatchServices.store.savePendingRoute("criticalLabs")   // consumed on activation
         case LabNotifications.snooze:
@@ -44,7 +44,7 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate, UNUserNotificatio
                                 willPresent notification: UNNotification) async
         -> UNNotificationPresentationOptions {
         if let alert = NotificationParser.parse(notification.request.content.userInfo) {
-            await MainActor.run { WatchServices.labs.ingest(alert) }
+            await ingest(alert)
         }
         return [.banner, .sound, .list]
     }
@@ -52,9 +52,14 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate, UNUserNotificatio
     // A silent/background push feeds the model, refreshes the badge + widget timelines.
     func didReceiveRemoteNotification(_ userInfo: [AnyHashable: Any]) async -> WKBackgroundFetchResult {
         if let alert = NotificationParser.parse(userInfo) {
-            await MainActor.run { WatchServices.labs.ingest(alert) }
+            await ingest(alert)
         }
         WidgetCenter.shared.reloadAllTimelines()
         return .newData
     }
+
+    // Labs is main-actor-isolated; route access through these helpers so the
+    // nonisolated delegate callbacks hop correctly (Swift 6 concurrency).
+    @MainActor private func ingest(_ alert: LabAlert) { WatchServices.labs.ingest(alert) }
+    @MainActor private func acknowledge(_ alert: LabAlert) async { await WatchServices.labs.acknowledge(alert) }
 }
