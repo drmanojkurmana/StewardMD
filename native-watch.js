@@ -38,14 +38,22 @@
     catch (e) { return []; }
   }
 
+  // Automatic sync is on unless the user turned it off in Settings → Apple Watch.
+  function autoSyncOn() {
+    try { return localStorage.getItem("smd_watch_autosync") !== "0"; } catch (e) { return true; }
+  }
+  function markSynced() {
+    try { localStorage.setItem("smd_watch_last_sync", String(Date.now())); } catch (e) {}
+  }
+
   var publishing = false;
   async function publish() {
-    if (publishing) return;
+    if (publishing) return false;
     var p = plugin(); var a = auth();
-    if (!p) return;
-    if (!a) return;
+    if (!p) return false;
+    if (!a) return false;
     var u = a.currentUser;
-    if (!u) { try { await p.clear(); } catch (e) {} return; }
+    if (!u) { try { await p.clear(); } catch (e) {} return false; }
     publishing = true;
     try {
       var res = await u.getIdTokenResult();
@@ -56,34 +64,44 @@
         favorites: favorites(),
         recents: recents()
       });
+      markSynced();
+      return true;
     } catch (e) {
       // Never surface — the watch degrades to cached/offline on a stale token.
+      return false;
     } finally {
       publishing = false;
     }
   }
 
+  // Manual sync from the Settings → Apple Watch page always runs (ignores the
+  // auto-sync toggle). Returns a promise resolving to whether it succeeded.
+  window.SMD_APPLE_WATCH_SYNC = function () { return publish(); };
+  // Auto-triggered sync respects the toggle.
+  function autoPublish() { if (autoSyncOn()) publish(); }
+
   function start() {
     var a = auth();
-    if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { publish(); }); }
+    if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { autoPublish(); }); }
     else { setTimeout(start, 1500); return; }        // Firebase not booted yet — retry
 
     // Refresh well before the ~1h ID-token expiry.
-    setInterval(publish, 50 * 60 * 1000);
+    setInterval(autoPublish, 50 * 60 * 1000);
 
     // Republish when the recent-cases list changes (recent.js exposes onChange).
-    try { if (window.SMD_RECENT && window.SMD_RECENT.onChange) window.SMD_RECENT.onChange(publish); }
+    try { if (window.SMD_RECENT && window.SMD_RECENT.onChange) window.SMD_RECENT.onChange(autoPublish); }
     catch (e) {}
 
     // Republish when the app returns to the foreground (token may be near expiry).
-    document.addEventListener("visibilitychange", function () { if (!document.hidden) publish(); });
+    document.addEventListener("visibilitychange", function () { if (!document.hidden) autoPublish(); });
 
-    // The watch can ask for a fresh token (plugin re-emits the WC request).
+    // The watch can ask for a fresh token (plugin re-emits the WC request) —
+    // always honor a token request even if auto-sync is off.
     var p = plugin();
     try { if (p && p.addListener) p.addListener("tokenRequested", function () { publish(); }); }
     catch (e) {}
 
-    publish();
+    autoPublish();
   }
 
   if (document.readyState === "loading") {
