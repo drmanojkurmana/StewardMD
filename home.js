@@ -2549,6 +2549,28 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   var _feedType = "all", _feedQ = "", _feedBranch = "all";
   var _notifRoot = null, _activeTab = "updates", _detailRoot = null;
   function nEsc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  // Inline: escape, then render **bold**/__bold__ only (safe — no raw HTML passthrough).
+  function nMdInline(t) { return nEsc(t).replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/__([^_]+)__/g, "<b>$1</b>"); }
+  // Light markdown → HTML for update summaries: bold, "• " bullets, and bold colon-headings.
+  // Escapes first, so AI-authored text can never inject markup. Plain prose still renders fine.
+  function nMd(src) {
+    var out = [], list = [], para = [];
+    function flushList() { if (list.length) { out.push('<ul class="dt-ul">' + list.join("") + "</ul>"); list = []; } }
+    function flushPara() { if (para.length) { out.push('<p class="dt-p">' + para.join(" ") + "</p>"); para = []; } }
+    String(src || "").replace(/\r/g, "").split("\n").forEach(function (raw) {
+      var ln = raw.trim();
+      if (!ln) { flushList(); flushPara(); return; }
+      var b = ln.match(/^[•\-\*]\s+(.+)$/);                                  // bullet line
+      if (b) { flushPara(); list.push("<li>" + nMdInline(b[1]) + "</li>"); return; }
+      flushList();
+      var hb = ln.match(/^\*\*(.+?)\*\*:?$/);                                // whole-line bold = heading
+      var colonHead = /:$/.test(ln) && ln.replace(/\*\*/g, "").length <= 64 && ln.split(/\s+/).length <= 9;
+      if (hb || colonHead) { flushPara(); out.push('<div class="dt-h">' + nMdInline((hb ? hb[1] : ln.replace(/:$/, "")).trim()) + "</div>"); return; }
+      para.push(nMdInline(ln));
+    });
+    flushList(); flushPara();
+    return out.join("");
+  }
   function nSeen() { try { return parseInt(localStorage.getItem(NOTIF_SEEN) || "0", 10) || 0; } catch (e) { return 0; } }
   function nSetSeen(ts) { try { localStorage.setItem(NOTIF_SEEN, String(ts || Date.now())); } catch (e) {} }
   function nMaxTs(items) { var m = 0; (items || []).forEach(function (x) { if ((x.ts || 0) > m) m = x.ts; }); return m; }
@@ -2654,7 +2676,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     var ws = it.workspace ? '<span class="fd-ws">' + nEsc(WSLBL[it.workspace] || it.workspace) + '</span>' : "";
     var org = it.organization || it.source || "";
     var prev = String(it.summary || it.body || "");
-    var lead = prev.split("\n")[0];                                  // lead sentence only for the card; full bullets render in the detail view
+    var lead = prev.split("\n")[0].replace(/\*\*/g, "").replace(/^[•\-\*]\s+/, "");   // lead sentence, markdown stripped for the teaser; full bullets render in detail
     var more = prev.length > lead.length || lead.length > 220;
     return '<div class="fd-card' + (hi ? " hi" : "") + '" data-uid="' + nEsc(it.id) + '" role="button" tabindex="0">' +
       '<div class="ntf-top"><span class="ntf-cat cat-' + nEsc(it.category || "general") + '">' + tag + '</span>' + badge +
@@ -2699,7 +2721,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     }).join("");
     body.innerHTML = '<div class="dt-head"><div class="ntf-top"><span class="ntf-cat cat-guideline">📰 Weekly digest</span></div>' +
       '<h2>' + nEsc(d.headline || "This Week in Medicine") + '</h2></div>' +
-      (d.intro ? '<div class="dt-summary">' + nEsc(d.intro) + '</div>' : "") +
+      (d.intro ? '<div class="dt-summary">' + nMd(d.intro) + '</div>' : "") +
       (hi ? '<div class="dt-sec"><h4>Highlights</h4><ul>' + hi + '</ul></div>' : "") + secs;
   }
 
@@ -2771,7 +2793,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
   /* ---- Guideline / update detail overlay ---- */
   function detailSection(title, arr) {
     if (!arr || !arr.length) return "";
-    return '<div class="dt-sec"><h4>' + nEsc(title) + '</h4><ul>' + arr.map(function (x) { return "<li>" + nEsc(x) + "</li>"; }).join("") + '</ul></div>';
+    return '<div class="dt-sec"><h4>' + nEsc(title) + '</h4><ul>' + arr.map(function (x) { return "<li>" + nMdInline(x) + "</li>"; }).join("") + '</ul></div>';
   }
   // Prescribing snapshot for DRUG updates — concise pharma info (class/indications/dose/duration/
   // contraindications) from the update's structured payload (summary_json.pharma). Only rendered for
@@ -2811,7 +2833,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         (it.est_read_min ? '<span class="fd-read">⏱ ' + it.est_read_min + ' min</span>' : "") + '</div>' +
       '<h2>' + nEsc(it.title) + '</h2>' +
       '<div class="dt-sub">' + nEsc(it.organization || it.source || "") + (s.version ? " · " + nEsc(s.version) : "") + (it.ts ? " · " + nEsc(nDate(it.ts)) : "") + (it.workspace ? " · " + nEsc(WSLBL[it.workspace] || it.workspace) : "") + '</div></div>' +
-      ((s.summary || it.summary) ? '<div class="dt-summary">' + nEsc(s.summary || it.summary) + '</div>' : "") +
+      ((s.summary || it.summary) ? '<div class="dt-summary">' + nMd(s.summary || it.summary) + '</div>' : "") +
       pharmaSection(it, s) +
       detailSection("What's New", (s.major_changes || []).concat(s.new_recommendations || [])) +
       wc +
@@ -3145,7 +3167,13 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       ".dt-body{max-width:720px}",
       ".dt-head h2{font:800 20px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.25;margin:8px 0 4px}",
       ".dt-sub{font:600 12.5px var(--sans,system-ui);color:var(--slate-soft,#888);line-height:1.5}",
-      ".dt-summary{font:500 14.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.65;margin:14px 0;white-space:pre-wrap}",
+      ".dt-summary{font:500 14.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.65;margin:14px 0}",
+      ".dt-summary .dt-p{margin:9px 0}",
+      ".dt-summary .dt-h{font:800 15px var(--sans,system-ui);color:var(--ink,#14202b);margin:16px 0 6px;letter-spacing:-.01em}",
+      ".dt-summary .dt-h:first-child{margin-top:2px}",
+      ".dt-summary .dt-ul{margin:6px 0 10px;padding-left:20px}",
+      ".dt-summary .dt-ul>li{margin:5px 0;line-height:1.55}",
+      ".dt-summary b,.dt-sec li b{font-weight:800;color:var(--ink,#14202b)}",
       ".dt-sec{margin:16px 0;border-top:1px solid var(--line,#e5e5e0);padding-top:14px}",
       ".dt-sec h4{font:800 13px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--teal,#0a9396);margin:0 0 8px}",
       ".dt-sec ul{margin:0;padding-left:18px}.dt-sec li{font:500 13.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.6;margin-bottom:5px}",

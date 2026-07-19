@@ -34,7 +34,12 @@ const SUMMARY_SYS =
   "\"evidence_level\":string, \"keywords\":[string], \"official_url\":string, \"official_pdf_url\":string, " +
   "\"doi\":string, \"pmid\":string, " +
   "\"pharma\":{\"drug_class\":string,\"indications\":[string],\"dose\":string,\"duration\":string,\"contraindications\":[string]}}.\n" +
-  "GUIDANCE: \"summary\" is original prose, AT MOST 700 words. \"estimated_read_time\" is whole minutes to read the " +
+  "GUIDANCE: \"summary\" is a high-yield clinical brief in LIGHT MARKDOWN, NOT prose paragraphs: a 1-2 sentence " +
+  "**bold**-highlighted lead, then 2-6 SECTIONS each with a bold mini-heading alone on its line ending in a colon " +
+  "(e.g. \"**Antibiotics:**\"), and under each 2-5 bullets that EACH start with \"• \" (key terms in **bold**, one " +
+  "actionable point per bullet). Use ONLY **bold**, \"• \" bullets, and bold colon-headings — no #, tables, or " +
+  "numbered lists. Put the practical clinical points HERE (thresholds, drugs, doses, do/don't); keep the detail " +
+  "arrays a SHORT recap (a few phrases each), not a duplicate of the summary. \"estimated_read_time\" is whole minutes to read the " +
   "summary. \"importance\": 'critical' for safety withdrawals/boxed warnings/drug bans, 'high' for practice-changing " +
   "guideline updates or major approvals, else 'normal'. Arrays hold short phrases; use [] when genuinely none. Echo " +
   "official_url/doi/pmid from the metadata when present, else empty string. Use the WEB SEARCH RESULTS " +
@@ -62,7 +67,7 @@ function tidySummary(s) {
     .replace(/[ \t]*\n[ \t]*/g, "\n")
     .replace(/\n{3,}/g, "\n\n")
     .trim()
-    .slice(0, 1500);
+    .slice(0, 4000);
 }
 function arr(x) { return Array.isArray(x) ? x.filter(Boolean).map((v) => String(v)).slice(0, 12) : []; }
 function normImportance(v) { v = String(v || "").toLowerCase().trim(); return (v === "high" || v === "critical") ? v : "normal"; }
@@ -140,7 +145,7 @@ export async function summarizeDocument(env, meta) {
           version: String(parsed.version || "").slice(0, 60),
           importance: normImportance(parsed.importance),
           est_read_min: Math.max(1, Math.min(60, parseInt(parsed.estimated_read_time, 10) || 3)),
-          summary: clampWords(parsed.summary, 700),
+          summary: tidySummary(parsed.summary),
           major_changes: arr(parsed.major_changes),
           what_changed: arr(parsed.what_changed),
           clinical_impact: String(parsed.clinical_impact || "").slice(0, 1200),
@@ -186,11 +191,15 @@ const CLASSIFY_SYS =
   "\"title\":string, \"organization\":string, \"summary\":string, \"importance\":\"normal\"|\"high\"|\"critical\", " +
   "\"keywords\":[string], \"official_url\":string, " +
   "\"pharma\":{\"drug_class\":string, \"indications\":[string], \"dose\":string, \"duration\":string, \"contraindications\":[string]}}.\n" +
-  "GUIDANCE: choose the single best type and the single most relevant specialty workspace. \"summary\" is a scannable " +
-  "clinical brief for busy doctors: ONE short lead sentence saying what this item is, then 3-8 concise bullet points " +
-  "(each line beginning with the bullet character \"• \") covering the key changes or practice points, separated " +
-  "by newlines. Keep it under ~130 words; plain text only (no markdown headings, no **bold**, no numbered lists); the " +
-  "lead sentence must read well on its own as a push-notification line. \"importance\": 'critical' for " +
+  "GUIDANCE: choose the single best type and the single most relevant specialty workspace. \"summary\" is a high-yield, " +
+  "Marrow-style clinical brief in LIGHT MARKDOWN — practical points a doctor can act on, NEVER prose paragraphs. " +
+  "Structure it EXACTLY like this: (1) a 1-2 sentence lead stating what this is / what changed, with the few most " +
+  "important terms in **bold**; then (2) 2-5 short SECTIONS, each a bold mini-heading alone on its own line ending with " +
+  "a colon (e.g. \"**Antibiotics:**\", \"**When to operate:**\", \"**Do not use:**\"); under each heading put 2-5 bullet " +
+  "lines that EACH start with \"• \" — one crisp, actionable clinical point per bullet, with the key term(s) in **bold**. " +
+  "Use ONLY **bold**, \"• \" bullets, and these bold colon-headings — NO #, tables, links, or numbered lists. Favour " +
+  "thresholds, drugs, doses, and clear do / don't. The lead sentence must read well on its own as a push line. " +
+  "~120-220 words. \"importance\": 'critical' for " +
   "withdrawals/boxed warnings/bans, 'high' for practice-changing guidelines or major approvals, else 'normal'. " +
   "\"title\" <= 140 characters.\n" +
   "PHARMA: fill \"pharma\" ONLY for a drug (type drug_approval, or a safety_alert about a specific drug) — give the " +

@@ -60,7 +60,7 @@ function firePush(context, item, workspace) {
       // IN-APP deep link (/?u=<id>) so tapping opens the summary, not the PDF in Safari.
       const msg = item
         ? { title: pushLabel(item) + ": " + (item.title || "StewardMD"),
-            body: String(item.body || item.summary || item.organization || item.source || "New medical update").slice(0, 180),
+            body: String(item.body || item.summary || item.organization || item.source || "New medical update").split("\n")[0].replace(/\*\*/g, "").replace(/^[•\-*]\s+/, "").slice(0, 180),
             url: item.id ? "/?u=" + item.id : "/", tag: item.id ? "smd-" + item.id : undefined }
         : { title: "StewardMD", body: "New medical update", url: "/" };
       context.waitUntil(sendNativeToAll(context.env, msg, wsOpt));
