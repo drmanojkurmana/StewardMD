@@ -352,7 +352,7 @@ function renderGroundedPrompt(pkg) {
   if (pc.findings) L.push("Findings: " + pc.findings.join(", "));
   if (pc.abnormalLabs) L.push("Abnormal labs: " + clip(JSON.stringify(pc.abnormalLabs), 600));
   if (pc.labTrends) L.push("Lab trends: " + clip(JSON.stringify(pc.labTrends), 400));
-  if (pc.cultures) L.push("Cultures: " + clip(JSON.stringify(pc.cultures), 500));
+  if (pc.cultures) L.push("Cultures: " + clip(JSON.stringify(pc.cultures), 900));
   if (pc.radiologyImpressions) L.push("Radiology impressions: " + clip(JSON.stringify(pc.radiologyImpressions), 500));
   L.push("\n=== RETRIEVED STEWARDMD KNOWLEDGE (PRIMARY SOURCE — reason from THIS) ===");
   (pkg.grounding || []).forEach((g) => {
@@ -373,13 +373,15 @@ function renderGroundedPrompt(pkg) {
     if (t.default && t.default.dosing && t.default.dosing.length) {
       L.push("   Dosing (protocol figures — state these when asked; verify locally):");
       t.default.dosing.slice(0, 8).forEach((d) => L.push("     • " + d.drug + (d.label ? " (" + clip(d.label, 60) + ")" : "") + ": " +
-        [d.dose, d.route, d.freq].filter(Boolean).map((x) => clip(x, 120)).join(" · ") + (d.why ? " — " + clip(d.why, 160) : "")));
+        [d.dose, d.route, d.freq, d.duration && ("for " + d.duration)].filter(Boolean).map((x) => clip(x, 140)).join(" · ") +
+        (d.coverage ? " — covers " + clip(d.coverage, 140) : "") + (d.why ? " — " + clip(d.why, 160) : "")));
     }
     (t.alternatives || []).slice(0, 4).forEach((a) => {
       L.push("Alt [" + (a.tier || "?") + "]: " + clip(a.line, 160) + (a.drugRefs && a.drugRefs.length ? " — " + a.drugRefs.join(", ") : ""));
-      if (a.dosing && a.dosing.length) a.dosing.slice(0, 6).forEach((d) => L.push("     • " + d.drug + ": " + [d.dose, d.route, d.freq].filter(Boolean).map((x) => clip(x, 120)).join(" · ")));
+      if (a.dosing && a.dosing.length) a.dosing.slice(0, 6).forEach((d) => L.push("     • " + d.drug + ": " +
+        [d.dose, d.route, d.freq, d.duration && ("for " + d.duration)].filter(Boolean).map((x) => clip(x, 120)).join(" · ")));
     });
-    if (t.overlayApplied && t.overlay) L.push("Hospital overlay (" + t.overlay.hospitalId + ", SEPARATE — does not replace the default): " + clip(JSON.stringify(t.overlay.recommendation), 400));
+    if (t.overlayApplied && t.overlay) L.push("Hospital overlay (" + t.overlay.hospitalId + ", SEPARATE — does not replace the default): " + clip(JSON.stringify(t.overlay.recommendation), 700));
   }
   const rf = pkg.refs || {};
   const refLine = [];

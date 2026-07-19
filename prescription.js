@@ -209,14 +209,30 @@
     return out;
   }
 
-  // Regimen from the grounded package: advice + de-duped drug names (doses filled by the core).
+  // Regimen from the grounded package: advice + de-duped drugs. PREFER the structured `dosing`
+  // (indication-specific dose/route/freq/duration the answer used) so "(pre-fill from this)" fills
+  // the REAL dose — not a generic Drug-Index default or a blank ⚠ line. Falls back to name-only
+  // drugRefs for drugs without structured dosing (the core then backfills / flags them).
   function regimenFromCtx(ctx) {
     var reg = [{ name: "Lifestyle & general measures", isAdvice: true }];
-    var drugs = [], t = ctx && ctx.pkg && ctx.pkg.treatment;
+    var t = ctx && ctx.pkg && ctx.pkg.treatment;
+    var seen = {}, added = 0;
+    var dosing = [];
+    if (t && t.default && t.default.dosing) dosing = dosing.concat(t.default.dosing);
+    (t && t.alternatives || []).forEach(function (a) { dosing = dosing.concat(a.dosing || []); });
+    dosing.forEach(function (d) {
+      var nm = String((d && d.drug) || "").split(/[—,;(]/)[0].trim(); if (!nm) return;
+      var k = nm.toLowerCase(); if (seen[k]) return; seen[k] = 1;
+      var dose = (d.dose || "").trim();
+      if (dose && d.route && dose.toLowerCase().indexOf(String(d.route).toLowerCase()) < 0) dose += " " + d.route;
+      // source:"kb" → the safety core trusts this authored dose (not flagged unverified).
+      reg.push({ name: nm, dose: dose || null, freq: d.freq || null, duration: d.duration || null, source: dose ? "kb" : undefined });
+      added++;
+    });
+    var drugs = [];
     if (t && t.default && t.default.drugRefs) drugs = drugs.concat(t.default.drugRefs);
     (t && t.alternatives || []).forEach(function (a) { drugs = drugs.concat(a.drugRefs || []); });
     if (ctx && ctx.pkg && ctx.pkg.refs && ctx.pkg.refs.drug) drugs = drugs.concat(ctx.pkg.refs.drug);
-    var seen = {}, added = 0;
     drugs.forEach(function (d) {
       var nm = String(d || "").split(/[—,;(]/)[0].trim(); if (!nm) return;
       var k = nm.toLowerCase(); if (seen[k]) return; seen[k] = 1; reg.push({ name: nm }); added++;
