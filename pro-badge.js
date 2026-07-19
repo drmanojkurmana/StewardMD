@@ -11,24 +11,22 @@
 (function () {
   "use strict";
 
-  // Pro mark: a minimalist "Pro" label + a clean filled star, both in a theme-adaptive accent so they
-  // recolor with the app (teal on light, brighter teal on dark) — like the wordmark itself.
-  var STAR = '<svg viewBox="0 0 24 24" class="pstar" aria-hidden="true" focusable="false"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>';
-  var LOCKUP = '<span class="ptxt">Pro</span>' + STAR;
+  // Pro mark: just a small "Pro" label in a theme-adaptive accent (dark teal on light, bright teal on
+  // dark) so it recolors with the app — like the wordmark itself.
+  var LOCKUP = '<span class="ptxt">Pro</span>';
 
   // Elements whose inner end the badge is appended to (right after the "MD" of the wordmark).
-  var TARGETS = [".v3-brand-tt", ".rnav-brand > span", ".v4-hero-tt", ".sb-head b"];
+  var TARGETS = [".v3-brand-tt", ".rnav-brand > span", ".v4-hero-tt", ".rnav-hero-tt", ".v3-h-hero", ".sb-head b"];
 
   function injectCSS() {
     if (document.getElementById("smdProSealCSS")) return;
     var s = document.createElement("style");
     s.id = "smdProSealCSS";
     s.textContent =
-      ".smd-probadge{display:none;align-items:center;gap:2px;margin-left:6px;flex:0 0 auto;vertical-align:baseline;--pro-accent:#0e6e63}" +
+      ".smd-probadge{display:none;align-items:center;margin-left:6px;flex:0 0 auto;vertical-align:baseline;--pro-accent:#0a3d36}" +
       "body.pro-verified .smd-probadge{display:inline-flex}" +
-      "body.dark .smd-probadge,body.v3-dark .smd-probadge{--pro-accent:#5dcaa5}" +
-      ".smd-probadge .ptxt{font-weight:800;font-size:0.6em;letter-spacing:.04em;line-height:1;color:var(--pro-accent)}" +
-      ".smd-probadge .pstar{width:0.78em;height:0.78em;display:block;flex:0 0 auto;fill:var(--pro-accent)}";
+      "body.dark .smd-probadge,body.v3-dark .smd-probadge{--pro-accent:#7fe0cf}" +
+      ".smd-probadge .ptxt{font-weight:800;font-size:0.6em;letter-spacing:.04em;line-height:1;color:var(--pro-accent)}";
     (document.head || document.documentElement).appendChild(s);
   }
 
