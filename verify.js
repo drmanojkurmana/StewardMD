@@ -89,7 +89,7 @@
       $("verifyAccReg").textContent = (data && data.regNo) || (verified ? "—" : "not linked yet");
       var badge = $("verifyBadge");
       badge.className = "verify-badge " + (st === "trial" ? "pending" : st);   // reuse pending styling for trial
-      badge.textContent = ({ verified: "✓ Verified", pending: "Under review", trial: "Trial access", rejected: "Rejected", unverified: "Not verified" })[st] || st;
+      badge.innerHTML = ({ verified: vfIco("check") + " Verified", pending: "Under review", trial: "Trial access", rejected: "Rejected", unverified: "Not verified" })[st] || st;
     }
 
     $("verifyTitle").textContent = verified ? "Your account is verified" : (trial ? "You're on a 7-day trial" : (pending ? "Verification under review" : "Verify you're a registered doctor"));
@@ -241,7 +241,7 @@
         btn = $("verifySubmit"), input = $("verifyFile"), drop = $("verifyDrop");
     var idMode = !!(reg && reg.value.trim());
     var hasFile = !!(input && input.files && input.files[0]);
-    if (label && !hasFile) label.textContent = idMode ? "🪪 Choose a photo ID" : "📄 Choose your registration certificate";
+    if (label && !hasFile) label.innerHTML = idMode ? vfIco("idcard") + " Choose a photo ID" : vfIco("note") + " Choose your registration certificate";
     if (sub) sub.textContent = idMode ? "Any government photo ID · we read only your name · never stored" : "JPG, PNG or PDF · from NMC / State Medical Council";
     if (btn && !btn.disabled) btn.textContent = hasFile ? (idMode ? "Verify with ID" : "Verify & continue") : (idMode ? "Choose photo ID" : "Choose certificate");
     if (drop) drop.classList.toggle("has-file", hasFile);
@@ -254,7 +254,7 @@
       input._smdWired = true;
       input.addEventListener("change", function () {
         var f = input.files && input.files[0];
-        if (f) { if (label) label.textContent = "📄 " + f.name; if (drop) drop.classList.add("has-file"); if (btn) btn.disabled = false; }
+        if (f) { if (label) (label.innerHTML = vfIco("note"), label.appendChild(document.createTextNode(" " + f.name))); if (drop) drop.classList.add("has-file"); if (btn) btn.disabled = false; }
         else { if (drop) drop.classList.remove("has-file"); if (btn) btn.disabled = false; }
         syncMode();
       });

@@ -252,12 +252,12 @@
     });
 
     function setState(state, engine) {
-      if (state === "listening") { recBtn.textContent = "⏹ Listening… tap to stop"; recBtn.classList.add("live"); engEl.textContent = engine ? engine + " · speak now" : ""; }
-      else if (state === "recording") { recBtn.textContent = "⏹ Recording… tap to stop"; recBtn.classList.add("live"); engEl.textContent = "AI · recording (transcribes when you stop)"; }
-      else if (state === "transcribing") { recBtn.textContent = "⏳ Transcribing…"; recBtn.classList.remove("live"); engEl.textContent = (engine || "AI") + " · transcribing"; }
-      else if (state === "downloading") { recBtn.textContent = "⏬ Downloading model…"; recBtn.classList.remove("live"); }
-      else if (state === "preparing") { recBtn.textContent = "⏳ Preparing…"; recBtn.classList.remove("live"); engEl.textContent = (engine || "") + " · preparing"; }
-      else { recBtn.textContent = "🎤 Tap to speak"; recBtn.classList.remove("live"); recording = false; }
+      if (state === "listening") { recBtn.innerHTML = vcIco("stop") + " Listening… tap to stop"; recBtn.classList.add("live"); engEl.textContent = engine ? engine + " · speak now" : ""; }
+      else if (state === "recording") { recBtn.innerHTML = vcIco("stop") + " Recording… tap to stop"; recBtn.classList.add("live"); engEl.textContent = "AI · recording (transcribes when you stop)"; }
+      else if (state === "transcribing") { recBtn.innerHTML = vcIco("hourglass") + " Transcribing…"; recBtn.classList.remove("live"); engEl.textContent = (engine || "AI") + " · transcribing"; }
+      else if (state === "downloading") { recBtn.innerHTML = vcIco("download") + " Downloading model…"; recBtn.classList.remove("live"); }
+      else if (state === "preparing") { recBtn.innerHTML = vcIco("hourglass") + " Preparing…"; recBtn.classList.remove("live"); engEl.textContent = (engine || "") + " · preparing"; }
+      else { recBtn.innerHTML = vcIco("mic") + " Tap to speak"; recBtn.classList.remove("live"); recording = false; }
     }
 
     recBtn.addEventListener("click", function () {
