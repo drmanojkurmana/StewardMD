@@ -33,7 +33,7 @@
   var CALCS = [
 
   /* ===== ICU-flagship additions — verified published formulas (ai_drafted; clinician-verify) ===== */
-  { id:"meld3", cat:"Hepatology", icon:"🩺", title:"MELD 3.0",
+  { id:"meld3", cat:"Hepatology", icon:"", title:"MELD 3.0",
     desc:"90-day mortality in chronic liver disease & transplant priority (2021; replaces MELD-Na).",
     inputs:[
       { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1" },
@@ -59,7 +59,7 @@
       return { v:s, u:"points", i:"Approx. 90-day mortality "+mort+". Higher = greater transplant priority (range 6–40)." };
     }
   },
-  { id:"egfr_cysc", cat:"Renal", icon:"🩺", title:"eGFR (cystatin C, CKD-EPI)",
+  { id:"egfr_cysc", cat:"Renal", icon:"", title:"eGFR (cystatin C, CKD-EPI)",
     desc:"Race-free estimated GFR from serum cystatin C (CKD-EPI cystatin C) — useful when creatinine is confounded.",
     inputs:[
       { id:"cysc", label:"Cystatin C", type:"number", unit:"mg/L", step:"0.01" },
@@ -76,7 +76,7 @@
       return { v:e, u:"mL/min/1.73m²", i:"CKD stage <b>"+stage+"</b>. Race-free; helpful in low muscle mass / amputees where creatinine misleads." };
     }
   },
-  { id:"burch", cat:"Endocrine", icon:"🦋", title:"Burch-Wartofsky (thyroid storm)",
+  { id:"burch", cat:"Endocrine", icon:"", title:"Burch-Wartofsky (thyroid storm)",
     desc:"Likelihood of thyroid storm in thyrotoxicosis (point scale).",
     inputs:[
       { id:"temp", label:"Temperature", type:"select", opts:[{v:"0",t:"<37.2 °C"},{v:"5",t:"37.2–37.7"},{v:"10",t:"37.8–38.2"},{v:"15",t:"38.3–38.8"},{v:"20",t:"38.9–39.2"},{v:"25",t:"39.3–39.9"},{v:"30",t:"≥40 °C"}] },
@@ -93,7 +93,7 @@
       return { v:s, u:"points", i:i+"." };
     }
   },
-  { id:"rumack", cat:"Toxicology", icon:"💊", title:"Rumack-Matthew (paracetamol)",
+  { id:"rumack", cat:"Toxicology", icon:"", title:"Rumack-Matthew (paracetamol)",
     desc:"Is the paracetamol (acetaminophen) level above the NAC treatment line? Single acute ingestion, 4–24 h. Uses the US 150 mg/L line; UK/MHRA uses a single 100 mg/L line (since 2012).",
     inputs:[
       { id:"t", label:"Time since ingestion", type:"number", unit:"h", step:"0.5" },
@@ -113,7 +113,7 @@
         : "Level "+lvl+" &lt; line ("+line.toFixed(0)+") — below the treatment line. Treat anyway if staggered/unknown-time ingestion or clinical concern." };
     }
   },
-  { id:"scorten", cat:"Dermatology", icon:"🩹", title:"SCORTEN (SJS/TEN)",
+  { id:"scorten", cat:"Dermatology", icon:"", title:"SCORTEN (SJS/TEN)",
     desc:"Mortality in Stevens-Johnson syndrome / toxic epidermal necrolysis (assess at 24 h & day 3).",
     inputs:[
       { id:"age", label:"Age ≥40 years", type:"check" },
@@ -130,7 +130,7 @@
       return { v:s, u:"points", i:"Predicted mortality ≈ <b>"+mort+"</b>." };
     }
   },
-  { id:"kings", cat:"Hepatology", icon:"🩺", title:"King's College criteria (ALF)",
+  { id:"kings", cat:"Hepatology", icon:"", title:"King's College criteria (ALF)",
     desc:"Liver-transplant criteria in acute liver failure. Choose aetiology, tick the features present.",
     inputs:[
       { id:"aeti", label:"Aetiology", type:"select", opts:[{v:"para",t:"Paracetamol"},{v:"non",t:"Non-paracetamol"}] },
@@ -159,7 +159,7 @@
         : "Not met (need INR >6.5 alone, or ≥3 of 5 minor criteria — currently "+n5+"/5)." };
     }
   },
-  { id:"psi", cat:"Respiratory", icon:"🫁", title:"PSI / PORT (pneumonia)",
+  { id:"psi", cat:"Respiratory", icon:"", title:"PSI / PORT (pneumonia)",
     desc:"30-day mortality risk in community-acquired pneumonia; guides admission vs outpatient.",
     inputs:[
       { id:"age", label:"Age", type:"number", unit:"yrs", step:"1" },
@@ -202,7 +202,7 @@
   },
 
   /* ----------------------------- CARDIOVASCULAR ----------------------------- */
-  { id:"chadsvasc", cat:"Cardiovascular", icon:"🫀", title:"CHA₂DS₂-VASc",
+  { id:"chadsvasc", cat:"Cardiovascular", icon:"", title:"CHA₂DS₂-VASc",
     desc:"Stroke risk in non-valvular atrial fibrillation.",
     inputs:[
       { id:"chf", label:"Congestive heart failure / LV dysfunction", type:"check" },
@@ -224,7 +224,7 @@
       return { v:s, u:"points", i:"Adjusted annual stroke/TE risk ≈ <b>"+rate+"%</b>. Oral anticoagulation recommended at ≥2 (men) / ≥3 (women); consider at 1 (men) / 2 (women)." };
     } },
 
-  { id:"hasbled", cat:"Cardiovascular", icon:"🩸", title:"HAS-BLED bleeding risk",
+  { id:"hasbled", cat:"Cardiovascular", icon:"", title:"HAS-BLED bleeding risk",
     desc:"Major bleeding risk on anticoagulation in AF.",
     inputs:[
       { id:"htn", label:"Uncontrolled hypertension (SBP >160)", type:"check" },
@@ -243,7 +243,7 @@
       return { v:s, u:"points", i:risk+"." };
     } },
 
-  { id:"qtc", cat:"Cardiovascular", icon:"📈", title:"Corrected QT (QTc)",
+  { id:"qtc", cat:"Cardiovascular", icon:"", title:"Corrected QT (QTc)",
     desc:"Rate-correct the QT interval (Bazett & Fridericia).",
     inputs:[
       { id:"qt", label:"QT interval", type:"number", unit:"ms", step:"1" },
@@ -259,7 +259,7 @@
       return { v:r0(baz), u:"ms (Bazett)", i:"Fridericia QTc = <b>"+r0(fri)+" ms</b>. QTc is <b>"+flag+"</b> (sex threshold "+lim+" ms; torsades risk rises sharply above 500 ms). Bazett over-corrects at high rates — prefer Fridericia if HR >100." };
     } },
 
-  { id:"map", cat:"Cardiovascular", icon:"🩺", title:"Mean Arterial Pressure",
+  { id:"map", cat:"Cardiovascular", icon:"", title:"Mean Arterial Pressure",
     desc:"MAP from systolic and diastolic BP.",
     inputs:[
       { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg" },
@@ -271,7 +271,7 @@
       return { v:r0(map), u:"mmHg", i:(map<65?"Below 65 mmHg — inadequate organ perfusion; resuscitate.":"≥65 mmHg — usual resuscitation target in sepsis/shock.") };
     } },
 
-  { id:"timi_nstemi", cat:"Cardiovascular", icon:"❤️", title:"TIMI risk (UA/NSTEMI)",
+  { id:"timi_nstemi", cat:"Cardiovascular", icon:"", title:"TIMI risk (UA/NSTEMI)",
     desc:"14-day risk of death/MI/urgent revascularisation.",
     inputs:[
       { id:"age", label:"Age ≥65", type:"check" },
@@ -288,7 +288,7 @@
       return { v:s, u:"/7", i:"14-day risk of death / MI / urgent revascularisation ≈ <b>"+rate+"%</b>. Score ≥3 favours early invasive strategy." };
     } },
 
-  { id:"wells_pe", cat:"Cardiovascular", icon:"🫁", title:"Wells score — PE",
+  { id:"wells_pe", cat:"Cardiovascular", icon:"", title:"Wells score — PE",
     desc:"Pre-test probability of pulmonary embolism.",
     inputs:[
       { id:"dvt", label:"Clinical signs of DVT", type:"check" },
@@ -306,7 +306,7 @@
       return { v:s, u:"points", i:"3-tier: <b>"+tier+"</b> probability. 2-tier: <b>"+two+"</b>." };
     } },
 
-  { id:"wells_dvt", cat:"Cardiovascular", icon:"🦵", title:"Wells score — DVT",
+  { id:"wells_dvt", cat:"Cardiovascular", icon:"", title:"Wells score — DVT",
     desc:"Pre-test probability of deep vein thrombosis.",
     inputs:[
       { id:"cancer", label:"Active cancer", type:"check" },
@@ -328,7 +328,7 @@
       return { v:s, u:"points", i:"3-tier: <b>"+tier+"</b> probability. 2-tier: <b>"+two+"</b>." };
     } },
 
-  { id:"perc", cat:"Cardiovascular", icon:"✅", title:"PERC rule (PE rule-out)",
+  { id:"perc", cat:"Cardiovascular", icon:"", title:"PERC rule (PE rule-out)",
     desc:"Rule out PE in low pre-test probability without testing.",
     inputs:[
       { id:"age", label:"Age <50", type:"check" },
@@ -346,7 +346,7 @@
       return { v:met, u:"/8 criteria met", i:neg?"<b>PERC negative</b> — in a low pre-test-probability patient, PE is excluded; no D-dimer needed.":"<b>PERC positive</b> — cannot exclude PE on PERC; pursue D-dimer/imaging." };
     } },
 
-  { id:"shock_index", cat:"Cardiovascular", icon:"⚡", title:"Shock Index",
+  { id:"shock_index", cat:"Cardiovascular", icon:"", title:"Shock Index",
     desc:"Heart rate / systolic BP — occult shock marker.",
     inputs:[
       { id:"hr", label:"Heart rate", type:"number", unit:"bpm" },
@@ -358,7 +358,7 @@
       return { v:r1(si), u:"", i:(si>=0.9?"Elevated (≥0.9) — suggests haemodynamic compromise / occult hypoperfusion.":si>=0.7?"Borderline (0.7–0.9) — recheck and monitor.":"Normal (≤0.7).") };
     } },
 
-  { id:"ldl", cat:"Cardiovascular", icon:"🧈", title:"LDL (Friedewald)",
+  { id:"ldl", cat:"Cardiovascular", icon:"", title:"LDL (Friedewald)",
     desc:"Estimated LDL cholesterol.",
     inputs:[
       { id:"tc", label:"Total cholesterol", type:"number", unit:"mg/dL", lab:"chol" },
@@ -373,7 +373,7 @@
     } },
 
   /* ----------------------------- CRITICAL CARE ----------------------------- */
-  { id:"curb65", cat:"Critical care", icon:"🫁", title:"CURB-65 (pneumonia)",
+  { id:"curb65", cat:"Critical care", icon:"", title:"CURB-65 (pneumonia)",
     desc:"Community-acquired pneumonia severity / disposition.",
     inputs:[
       { id:"conf", label:"Confusion (new disorientation)", type:"check" },
@@ -388,7 +388,7 @@
       return { v:s, u:"/5", i:"<b>"+d+"</b>. 30-day mortality rises steeply at ≥3." };
     } },
 
-  { id:"qsofa", cat:"Critical care", icon:"🚨", title:"qSOFA",
+  { id:"qsofa", cat:"Critical care", icon:"", title:"qSOFA",
     desc:"Bedside screen for sepsis with poor outcome.",
     inputs:[
       { id:"rr", label:"Respiratory rate ≥22", type:"check" },
@@ -400,7 +400,7 @@
       return { v:s, u:"/3", i:(s>=2?"<b>≥2 — high risk</b>: assess for organ dysfunction, escalate, consider sepsis.":"Low risk by qSOFA — does not rule out sepsis; reassess.") };
     } },
 
-  { id:"sofa", cat:"Critical care", icon:"📊", title:"SOFA score",
+  { id:"sofa", cat:"Critical care", icon:"", title:"SOFA score",
     desc:"Sequential Organ Failure Assessment (0–4 per system).",
     inputs:[
       { id:"resp", label:"Respiration (PaO₂/FiO₂)", type:"select", opts:[{v:"0",t:"≥400 (0)"},{v:"1",t:"<400 (1)"},{v:"2",t:"<300 (2)"},{v:"3",t:"<200 + support (3)"},{v:"4",t:"<100 + support (4)"}] },
@@ -416,7 +416,7 @@
       return { v:s, u:"/24", i:mort+". Trend (ΔSOFA over 24–48 h) predicts outcome better than a single reading; an acute rise of ≥2 from baseline with suspected infection defines sepsis (Sepsis-3)." };
     } },
 
-  { id:"pf_ratio", cat:"Critical care", icon:"🌬️", title:"PaO₂/FiO₂ ratio",
+  { id:"pf_ratio", cat:"Critical care", icon:"", title:"PaO₂/FiO₂ ratio",
     desc:"Oxygenation / ARDS severity (Berlin).",
     inputs:[
       { id:"pao2", label:"PaO₂", type:"number", unit:"mmHg" },
@@ -429,7 +429,7 @@
       return { v:r0(pf), u:"mmHg", i:"Berlin (with PEEP ≥5): <b>"+berlin+"</b>." };
     } },
 
-  { id:"aa_gradient", cat:"Critical care", icon:"💨", title:"A–a oxygen gradient",
+  { id:"aa_gradient", cat:"Critical care", icon:"", title:"A–a oxygen gradient",
     desc:"Alveolar-arterial O₂ difference.",
     inputs:[
       { id:"fio2", label:"FiO₂", type:"number", unit:"%", def:"21" },
@@ -445,7 +445,7 @@
       return { v:r0(aa), u:"mmHg", i:(exp!=null?"Expected for age ≈ "+r0(exp)+" mmHg. ":"")+(exp!=null&&aa>exp?"Elevated — V/Q mismatch, shunt, or diffusion defect.":"Within expected range — consider hypoventilation/low FiO₂ if hypoxic.") };
     } },
 
-  { id:"anion_gap", cat:"Critical care", icon:"🧮", title:"Anion gap (corrected)",
+  { id:"anion_gap", cat:"Critical care", icon:"", title:"Anion gap (corrected)",
     desc:"Serum anion gap with albumin correction.",
     inputs:[
       { id:"na", label:"Sodium", type:"number", unit:"mEq/L", lab:"na" },
@@ -460,7 +460,7 @@
       return { v:r1(ag), u:"mEq/L", i:"Albumin-corrected AG = <b>"+r1(cag)+" mEq/L</b> (normal 8–12). High AG → MUDPILES; correct for low albumin to avoid masking." };
     } },
 
-  { id:"winters", cat:"Critical care", icon:"🌡️", title:"Winter's formula",
+  { id:"winters", cat:"Critical care", icon:"", title:"Winter's formula",
     desc:"Expected PaCO₂ in metabolic acidosis.",
     inputs:[
       { id:"hco3", label:"Bicarbonate", type:"number", unit:"mEq/L", lab:"hco3" },
@@ -474,7 +474,7 @@
       return { v:r0(exp), u:"mmHg (target)", i:msg };
     } },
 
-  { id:"osm", cat:"Critical care", icon:"💧", title:"Serum osmolality & gap",
+  { id:"osm", cat:"Critical care", icon:"", title:"Serum osmolality & gap",
     desc:"Calculated osmolality and osmolar gap.",
     inputs:[
       { id:"na", label:"Sodium", type:"number", unit:"mEq/L", lab:"na" },
@@ -490,7 +490,7 @@
       return { v:r0(calc), u:"mOsm/kg", i:msg };
     } },
 
-  { id:"parkland", cat:"Critical care", icon:"🔥", title:"Parkland (burns)",
+  { id:"parkland", cat:"Critical care", icon:"", title:"Parkland (burns)",
     desc:"24-hour fluid resuscitation for major burns.",
     inputs:[
       { id:"wt", label:"Weight", type:"number", unit:"kg" },
@@ -503,7 +503,7 @@
       return { v:r0(total), u:"mL / 24 h (Ringer's lactate)", i:"Give <b>"+r0(total/2)+" mL over first 8 h</b> (from time of burn), remainder over next 16 h. Titrate to urine output 0.5–1 mL/kg/h." };
     } },
 
-  { id:"ranson", cat:"Critical care", icon:"🩻", title:"Ranson's criteria (admission)",
+  { id:"ranson", cat:"Critical care", icon:"", title:"Ranson's criteria (admission)",
     desc:"Admission severity of acute pancreatitis (non-gallstone).",
     inputs:[
       { id:"age", label:"Age >55", type:"check" },
@@ -517,7 +517,7 @@
       return { v:s, u:"/5 (admission)", i:"Admission component only — 48-hour criteria add to the total. ≥3 of the full 11 suggests severe pancreatitis." };
     } },
 
-  { id:"gbs", cat:"Critical care", icon:"🩸", title:"Glasgow-Blatchford (GI bleed)",
+  { id:"gbs", cat:"Critical care", icon:"", title:"Glasgow-Blatchford (GI bleed)",
     desc:"Need for intervention in upper GI bleeding.",
     inputs:[
       { id:"bun", label:"Blood urea nitrogen (mg/dL)", type:"select", opts:[{v:"0",t:"<18.2 (0)"},{v:"2",t:"18.2–22.3 (2)"},{v:"3",t:"22.4–28 (3)"},{v:"4",t:"28–70 (4)"},{v:"6",t:">70 (6)"}] },
@@ -536,7 +536,7 @@
     } },
 
   /* ----------------------------- RENAL / ELECTROLYTES ----------------------------- */
-  { id:"crcl", cat:"Renal", icon:"🧮", title:"CrCl (Cockcroft-Gault)",
+  { id:"crcl", cat:"Renal", icon:"", title:"CrCl (Cockcroft-Gault)",
     desc:"Creatinine clearance for drug dosing.",
     inputs:[
       { id:"age", label:"Age", type:"number", unit:"yrs", demo:"age" },
@@ -551,7 +551,7 @@
       return { v:r0(crcl), u:"mL/min", i:"Use actual body weight unless obese (use adjusted). Renal dosing thresholds typically at <50, <30, <15 mL/min." };
     } },
 
-  { id:"ckdepi", cat:"Renal", icon:"🫘", title:"eGFR (CKD-EPI 2021)",
+  { id:"ckdepi", cat:"Renal", icon:"", title:"eGFR (CKD-EPI 2021)",
     desc:"Race-free creatinine eGFR.",
     inputs:[
       { id:"scr", label:"Serum creatinine", type:"number", unit:"mg/dL", step:"0.1", lab:"creat" },
@@ -566,7 +566,7 @@
       return { v:r0(egfr), u:"mL/min/1.73m²", i:"CKD stage <b>"+stage+"</b>. 2021 equation omits the race coefficient." };
     } },
 
-  { id:"mdrd", cat:"Renal", icon:"🫘", title:"eGFR (MDRD, race-free)",
+  { id:"mdrd", cat:"Renal", icon:"", title:"eGFR (MDRD, race-free)",
     desc:"4-variable MDRD eGFR.",
     inputs:[
       { id:"scr", label:"Serum creatinine", type:"number", unit:"mg/dL", step:"0.1", lab:"creat" },
@@ -579,7 +579,7 @@
       return { v:r0(egfr), u:"mL/min/1.73m²", i:"CKD-EPI 2021 is preferred over MDRD for accuracy, especially at higher GFR." };
     } },
 
-  { id:"fena", cat:"Renal", icon:"💧", title:"FENa",
+  { id:"fena", cat:"Renal", icon:"", title:"FENa",
     desc:"Fractional excretion of sodium — pre-renal vs ATN.",
     inputs:[
       { id:"una", label:"Urine sodium", type:"number", unit:"mEq/L" },
@@ -593,7 +593,7 @@
       return { v:r1(fe), u:"%", i:(fe<1?"<1% → pre-renal (or contrast/glomerular).":fe>2?">2% → intrinsic (ATN).":"1–2% → indeterminate.")+" Unreliable on diuretics — use FEUrea instead." };
     } },
 
-  { id:"feurea", cat:"Renal", icon:"💧", title:"FEUrea",
+  { id:"feurea", cat:"Renal", icon:"", title:"FEUrea",
     desc:"Fractional excretion of urea (valid on diuretics).",
     inputs:[
       { id:"uurea", label:"Urine urea", type:"number", unit:"mg/dL" },
@@ -607,7 +607,7 @@
       return { v:r1(fe), u:"%", i:(fe<35?"<35% → pre-renal.":fe<=50?"35–50% → indeterminate.":">50% → intrinsic (ATN).")+" More reliable than FENa when diuretics have been given." };
     } },
 
-  { id:"corr_na", cat:"Renal", icon:"🧂", title:"Corrected Na (hyperglycaemia)",
+  { id:"corr_na", cat:"Renal", icon:"", title:"Corrected Na (hyperglycaemia)",
     desc:"Sodium corrected for serum glucose.",
     inputs:[
       { id:"na", label:"Measured sodium", type:"number", unit:"mEq/L", lab:"na" },
@@ -620,7 +620,7 @@
       return { v:r1(corr), u:"mEq/L", i:"Katz (×1.6). Hillier/Adrogué (×2.4) = <b>"+r1(katz)+" mEq/L</b>. Corrected value reflects true sodium once glucose is normalised." };
     } },
 
-  { id:"fw_deficit", cat:"Renal", icon:"🚰", title:"Free water deficit",
+  { id:"fw_deficit", cat:"Renal", icon:"", title:"Free water deficit",
     desc:"Water deficit in hypernatraemia.",
     inputs:[
       { id:"wt", label:"Weight", type:"number", unit:"kg" },
@@ -634,7 +634,7 @@
       return { v:r1(def), u:"L", i:"Replace slowly — lower serum Na by ≤10 mEq/L/24 h (cerebral oedema risk). Add ongoing losses." };
     } },
 
-  { id:"na_deficit", cat:"Renal", icon:"🧂", title:"Sodium deficit (hyponatraemia)",
+  { id:"na_deficit", cat:"Renal", icon:"", title:"Sodium deficit (hyponatraemia)",
     desc:"Na needed to reach a target.",
     inputs:[
       { id:"wt", label:"Weight", type:"number", unit:"kg" },
@@ -649,7 +649,7 @@
       return { v:r0(def), u:"mEq Na", i:"Correct ≤8 mEq/L per 24 h (osmotic demyelination risk). Use Adrogué-Madias to predict the rise per litre of infusate." };
     } },
 
-  { id:"corr_ca", cat:"Renal", icon:"🦴", title:"Corrected calcium",
+  { id:"corr_ca", cat:"Renal", icon:"", title:"Corrected calcium",
     desc:"Calcium corrected for albumin.",
     inputs:[
       { id:"ca", label:"Measured calcium", type:"number", unit:"mg/dL", step:"0.1", lab:"ca" },
@@ -661,7 +661,7 @@
       return { v:r1(c), u:"mg/dL", i:(c>10.5?"Corrected calcium high — investigate hypercalcaemia.":c<8.5?"Corrected calcium low.":"Within normal range (8.5–10.5).")+" Ionised calcium is definitive if acid-base disturbed." };
     } },
 
-  { id:"holliday", cat:"Renal", icon:"🍼", title:"Maintenance fluids (4-2-1)",
+  { id:"holliday", cat:"Renal", icon:"", title:"Maintenance fluids (4-2-1)",
     desc:"Holliday-Segar hourly maintenance fluid.",
     inputs:[ { id:"wt", label:"Weight", type:"number", unit:"kg" } ],
     compute:function(v){
@@ -672,7 +672,7 @@
     } },
 
   /* ----------------------------- HEPATOLOGY ----------------------------- */
-  { id:"meld", cat:"Hepatology", icon:"🫀", title:"MELD & MELD-Na",
+  { id:"meld", cat:"Hepatology", icon:"", title:"MELD & MELD-Na",
     desc:"End-stage liver disease 90-day mortality.",
     inputs:[
       { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1", lab:"bili" },
@@ -699,7 +699,7 @@
       return { v:head, u:hu, i:out+" 3-month mortality ≈ "+mort+"." };
     } },
 
-  { id:"childpugh", cat:"Hepatology", icon:"🫁", title:"Child-Pugh",
+  { id:"childpugh", cat:"Hepatology", icon:"", title:"Child-Pugh",
     desc:"Cirrhosis severity classification.",
     inputs:[
       { id:"bili", label:"Bilirubin", type:"select", opts:[{v:"1",t:"<2 mg/dL (1)"},{v:"2",t:"2–3 mg/dL (2)"},{v:"3",t:">3 mg/dL (3)"}] },
@@ -714,7 +714,7 @@
       return { v:s, u:"/15", i:"Class <b>"+cls+"</b>. 1-yr survival ≈ A 100%, B 80%, C 45%." };
     } },
 
-  { id:"maddrey", cat:"Hepatology", icon:"🍺", title:"Maddrey's DF",
+  { id:"maddrey", cat:"Hepatology", icon:"", title:"Maddrey's DF",
     desc:"Discriminant function in alcoholic hepatitis.",
     inputs:[
       { id:"pt", label:"Patient PT", type:"number", unit:"sec", lab:"pt" },
@@ -727,7 +727,7 @@
       return { v:r1(df), u:"", i:(df>=32?"≥32 — severe alcoholic hepatitis; high short-term mortality. Consider corticosteroids (assess infection, calculate Lille at day 7).":"<32 — non-severe.") };
     } },
 
-  { id:"fib4", cat:"Hepatology", icon:"🔬", title:"FIB-4 index",
+  { id:"fib4", cat:"Hepatology", icon:"", title:"FIB-4 index",
     desc:"Non-invasive liver fibrosis estimate.",
     inputs:[
       { id:"age", label:"Age", type:"number", unit:"yrs", demo:"age" },
@@ -741,7 +741,7 @@
       return { v:r1(f), u:"", i:(f<1.3?"<1.3 — advanced fibrosis unlikely (use 2.0 if age >65).":f<=2.67?"1.3–2.67 — indeterminate; consider elastography.":">2.67 — advanced fibrosis likely.") };
     } },
 
-  { id:"apri", cat:"Hepatology", icon:"🔬", title:"APRI score",
+  { id:"apri", cat:"Hepatology", icon:"", title:"APRI score",
     desc:"AST-to-platelet ratio index for fibrosis.",
     inputs:[
       { id:"ast", label:"AST", type:"number", unit:"U/L", lab:"ast" },
@@ -755,7 +755,7 @@
     } },
 
   /* ----------------------------- NEUROLOGY ----------------------------- */
-  { id:"gcs", cat:"Neurology", icon:"🧠", title:"Glasgow Coma Scale",
+  { id:"gcs", cat:"Neurology", icon:"", title:"Glasgow Coma Scale",
     desc:"Level of consciousness (E+V+M).",
     inputs:[
       { id:"e", label:"Eye opening", type:"select", opts:[{v:"4",t:"Spontaneous (4)"},{v:"3",t:"To speech (3)"},{v:"2",t:"To pain (2)"},{v:"1",t:"None (1)"}] },
@@ -768,7 +768,7 @@
       return { v:s, u:"/15", i:"E"+v.e+" V"+v.vrb+" M"+v.m+" — <b>"+sev+"</b> brain injury. GCS ≤8 → consider airway protection." };
     } },
 
-  { id:"nihss", cat:"Neurology", icon:"🧠", title:"NIHSS (stroke severity)",
+  { id:"nihss", cat:"Neurology", icon:"", title:"NIHSS (stroke severity)",
     desc:"NIH Stroke Scale — select the finding for each item; the score is calculated for you.",
     inputs:[
       { id:"loc", label:"1a Level of consciousness", type:"select", opts:[{v:"0",t:"Alert, keenly responsive"},{v:"1",t:"Drowsy — arousable by minor stimulation"},{v:"2",t:"Obtunded — needs repeated/painful stimulation"},{v:"3",t:"Unresponsive, or reflex responses only"}] },
@@ -794,7 +794,7 @@
       return { v:s, u:"/42", i:"<b>"+sev+"</b> stroke. Higher scores predict larger infarcts and worse outcome; informs thrombolysis/thrombectomy decisions. Ref: NIH Stroke Scale." };
     } },
 
-  { id:"a2ds2", cat:"Neurology", icon:"🫁", title:"A2DS2 (stroke-associated pneumonia)",
+  { id:"a2ds2", cat:"Neurology", icon:"", title:"A2DS2 (stroke-associated pneumonia)",
     desc:"Risk of pneumonia after acute ischaemic stroke.",
     inputs:[
       { id:"age", label:"Age ≥75", type:"check" },
@@ -808,7 +808,7 @@
       return { v:s, u:"/10", i:(s>=5?"Higher score — substantially increased stroke-associated pneumonia risk; heighten aspiration precautions and monitoring.":"Lower score — lower pneumonia risk.") };
     } },
 
-  { id:"abcd2", cat:"Neurology", icon:"⏱️", title:"ABCD² (TIA stroke risk)",
+  { id:"abcd2", cat:"Neurology", icon:"", title:"ABCD² (TIA stroke risk)",
     desc:"Early stroke risk after TIA.",
     inputs:[
       { id:"age", label:"Age ≥60", type:"check" },
@@ -823,7 +823,7 @@
       return { v:s, u:"/7", i:"2-day stroke risk <b>"+risk+"</b>. Many units admit/expedite ≥4." };
     } },
 
-  { id:"ich", cat:"Neurology", icon:"🩸", title:"ICH score",
+  { id:"ich", cat:"Neurology", icon:"", title:"ICH score",
     desc:"30-day mortality after intracerebral haemorrhage.",
     inputs:[
       { id:"gcs", label:"GCS", type:"select", opts:[{v:"0",t:"13–15 (0)"},{v:"1",t:"5–12 (1)"},{v:"2",t:"3–4 (2)"}] },
@@ -838,7 +838,7 @@
       return { v:s, u:"/6", i:"30-day mortality ≈ <b>"+mort+"</b>." };
     } },
 
-  { id:"centor", cat:"Neurology", icon:"👄", title:"Centor / McIsaac (pharyngitis)",
+  { id:"centor", cat:"Neurology", icon:"", title:"Centor / McIsaac (pharyngitis)",
     desc:"Likelihood of streptococcal pharyngitis.",
     inputs:[
       { id:"exudate", label:"Tonsillar exudate", type:"check" },
@@ -854,7 +854,7 @@
     } },
 
   /* ----------------------------- GENERAL / METABOLIC ----------------------------- */
-  { id:"bmi", cat:"General", icon:"⚖️", title:"BMI · IBW · AdjBW",
+  { id:"bmi", cat:"General", icon:"", title:"BMI · IBW · AdjBW",
     desc:"Body mass index and dosing body weights.",
     inputs:[
       { id:"ht", label:"Height", type:"number", unit:"cm" },
@@ -875,7 +875,7 @@
       return { v:r1(bmi), u:"kg/m²", i:"<b>"+cat+"</b>. IBW (Devine) = "+r1(ibw)+" kg; adjusted BW = "+r1(adj)+" kg (use AdjBW for hydrophilic drug dosing when obese)." };
     } },
 
-  { id:"bsa", cat:"General", icon:"📐", title:"Body Surface Area",
+  { id:"bsa", cat:"General", icon:"", title:"Body Surface Area",
     desc:"Mosteller & DuBois BSA.",
     inputs:[
       { id:"ht", label:"Height", type:"number", unit:"cm" },
@@ -888,7 +888,7 @@
       return { v:Math.round(mos*100)/100, u:"m² (Mosteller)", i:"DuBois = <b>"+(Math.round(du*100)/100)+" m²</b>. Used for chemotherapy and cardiac-index dosing." };
     } },
 
-  { id:"hba1c", cat:"General", icon:"🍬", title:"HbA1c → eAG",
+  { id:"hba1c", cat:"General", icon:"", title:"HbA1c → eAG",
     desc:"Estimated average glucose from HbA1c.",
     inputs:[ { id:"a1c", label:"HbA1c", type:"number", unit:"%", step:"0.1", lab:"a1c" } ],
     compute:function(v){
@@ -897,7 +897,7 @@
       return { v:r0(eag), u:"mg/dL", i:"= "+r1((eag)/18*10)/10+" mmol/L. ADA diabetes diagnosis at HbA1c ≥6.5%; typical target <7% (individualise)." };
     } },
 
-  { id:"edd", cat:"General", icon:"🤰", title:"EDD (Naegele's rule)",
+  { id:"edd", cat:"General", icon:"", title:"EDD (Naegele's rule)",
     desc:"Estimated due date from LMP.",
     inputs:[ { id:"lmp", label:"First day of last menstrual period", type:"date" } ],
     compute:function(v){
@@ -909,7 +909,7 @@
       return { v:edd.toLocaleDateString(), u:"EDD", i:"≈ 40 weeks from LMP. Current gestational age ≈ <b>"+(ga>=0?wks+" wk "+days+" d":"pre-LMP date")+"</b> (assumes regular 28-day cycle)." };
     } },
 
-  { id:"retic", cat:"General", icon:"🩸", title:"Corrected reticulocyte",
+  { id:"retic", cat:"General", icon:"", title:"Corrected reticulocyte",
     desc:"Reticulocyte count adjusted for anaemia.",
     inputs:[
       { id:"retic", label:"Reticulocyte", type:"number", unit:"%", step:"0.1", lab:"retic" },
@@ -921,7 +921,7 @@
       return { v:r1(c), u:"%", i:"Corrected retic <b>"+r1(c)+"%</b>. >2% suggests adequate marrow response (haemolysis/blood loss); <2% suggests hypoproliferation." };
     } },
 
-  { id:"tsat", cat:"General", icon:"🧲", title:"Transferrin saturation",
+  { id:"tsat", cat:"General", icon:"", title:"Transferrin saturation",
     desc:"Iron status — serum iron / TIBC.",
     inputs:[
       { id:"iron", label:"Serum iron", type:"number", unit:"µg/dL", lab:"iron" },
@@ -933,7 +933,7 @@
       return { v:r0(t), u:"%", i:(t<20?"<20% — iron deficiency.":t>45?">45% — iron overload / haemochromatosis screening.":"Normal (20–45%).") };
     } },
 
-  { id:"phenytoin", cat:"General", icon:"💊", title:"Corrected phenytoin",
+  { id:"phenytoin", cat:"General", icon:"", title:"Corrected phenytoin",
     desc:"Albumin-corrected phenytoin level.",
     inputs:[
       { id:"level", label:"Measured phenytoin", type:"number", unit:"µg/mL", step:"0.1" },
@@ -947,7 +947,7 @@
       return { v:r1(corr), u:"µg/mL", i:"Sheiner-Tozer corrected level (therapeutic 10–20). Uses factor "+factor+" "+(v.renal?"(renal impairment)":"(normal renal function)")+"." };
     } },
 
-  { id:"mentzer", cat:"General", icon:"🔴", title:"Mentzer index",
+  { id:"mentzer", cat:"General", icon:"", title:"Mentzer index",
     desc:"Microcytosis — thalassaemia trait vs iron deficiency.",
     inputs:[
       { id:"mcv", label:"MCV", type:"number", unit:"fL", lab:"mcv" },
@@ -960,7 +960,7 @@
     } },
 
   /* ----------------------------- INFECTIOUS DISEASE ----------------------------- */
-  { id:"sirs", cat:"Infectious disease", icon:"🦠", title:"SIRS criteria",
+  { id:"sirs", cat:"Infectious disease", icon:"", title:"SIRS criteria",
     desc:"Systemic inflammatory response syndrome — ≥2 of 4 criteria.",
     kw:["sepsis","infection","systemic","inflammatory"],
     inputs:[
@@ -981,7 +981,7 @@
       return { v:s, u:"/4", i:(s>=2?"<b>SIRS positive</b> (≥2 criteria). ":"<b>SIRS not met.</b> ")+"Sensitive but non-specific — for sepsis use organ-dysfunction scores (qSOFA / SOFA). Ref: ACCP/SCCM 1992; Sepsis-3, JAMA 2016." };
     } },
 
-  { id:"mascc", cat:"Infectious disease", icon:"🦠", title:"MASCC febrile neutropenia",
+  { id:"mascc", cat:"Infectious disease", icon:"", title:"MASCC febrile neutropenia",
     desc:"Identifies low-risk febrile neutropenia (candidate for oral/outpatient therapy).",
     kw:["febrile","neutropenia","cancer","chemo","risk"],
     inputs:[
@@ -1006,7 +1006,7 @@
       return { v:s, u:"/26", i:(s>=21?"<b>Low risk</b> (≥21) — consider oral / outpatient antibiotics per protocol.":"<b>High risk</b> (&lt;21) — IV antibiotics & admission.")+" Ref: Klastersky, MASCC, J Clin Oncol 2000; IDSA FN 2010." };
     } },
 
-  { id:"drip", cat:"Infectious disease", icon:"🦠", title:"DRIP score (drug-resistant pneumonia)",
+  { id:"drip", cat:"Infectious disease", icon:"", title:"DRIP score (drug-resistant pneumonia)",
     desc:"Predicts pneumonia due to drug-resistant pathogens. High risk ≥4.",
     kw:["pneumonia","resistant","mrsa","pseudomonas","hcap"],
     inputs:[
@@ -1029,7 +1029,7 @@
     } },
 
   /* ----------------------------- CRITICAL CARE (additions) ----------------------------- */
-  { id:"news2", cat:"Critical care", icon:"🚨", title:"NEWS2 (early warning)",
+  { id:"news2", cat:"Critical care", icon:"", title:"NEWS2 (early warning)",
     desc:"National Early Warning Score 2 — deterioration / sepsis screening (Scale 1).",
     kw:["news","deterioration","sepsis","early warning","track trigger"],
     inputs:[
@@ -1056,7 +1056,7 @@
       return { v:s, u:"points", i:band+" Ref: Royal College of Physicians, NEWS2, 2017." };
     } },
 
-  { id:"padua", cat:"Critical care", icon:"🚨", title:"Padua VTE prediction",
+  { id:"padua", cat:"Critical care", icon:"", title:"Padua VTE prediction",
     desc:"VTE risk in hospitalised medical patients. High risk ≥4 (consider prophylaxis).",
     kw:["vte","dvt","thromboprophylaxis","clot","padua"],
     inputs:[
@@ -1081,7 +1081,7 @@
     } },
 
   /* ----------------------------- CARDIOVASCULAR (addition) ----------------------------- */
-  { id:"heart", cat:"Cardiovascular", icon:"🫀", title:"HEART score (chest pain)",
+  { id:"heart", cat:"Cardiovascular", icon:"", title:"HEART score (chest pain)",
     desc:"Risk of major adverse cardiac event (MACE) at 6 weeks in undifferentiated chest pain.",
     kw:["chest pain","mace","acs","troponin","heart"],
     inputs:[
@@ -1099,7 +1099,7 @@
     } },
 
   /* ----------------------------- GENERAL (additions) ----------------------------- */
-  { id:"fourts", cat:"General", icon:"⚖️", title:"4Ts score (HIT)",
+  { id:"fourts", cat:"General", icon:"", title:"4Ts score (HIT)",
     desc:"Pre-test probability of heparin-induced thrombocytopenia.",
     kw:["hit","heparin","thrombocytopenia","platelet","4t"],
     inputs:[
@@ -1115,7 +1115,7 @@
       return { v:s, u:"/8", i:band+" Ref: Lo, Warkentin, J Thromb Haemost 2006." };
     } },
 
-  { id:"lights", cat:"General", icon:"⚖️", title:"Light's criteria (pleural fluid)",
+  { id:"lights", cat:"General", icon:"", title:"Light's criteria (pleural fluid)",
     desc:"Distinguishes pleural exudate from transudate.",
     kw:["pleural","effusion","exudate","transudate","light"],
     inputs:[
@@ -1132,7 +1132,7 @@
       return { v:ex?"Exudate":"Transudate", u:"", i:"Protein ratio "+r1(pr)+" (>0.5), LDH ratio "+r1(lr)+" (>0.6), pleural LDH "+(c3?"&gt;":"≤")+" ⅔ ULN. <b>"+(ex?"Exudate":"Transudate")+"</b> — exudate if ANY criterion met. Ref: Light et al, Ann Intern Med 1972." };
     } },
 
-  { id:"alvarado", cat:"General", icon:"⚖️", title:"Alvarado score (appendicitis)",
+  { id:"alvarado", cat:"General", icon:"", title:"Alvarado score (appendicitis)",
     desc:"Likelihood of acute appendicitis (MANTRELS).",
     kw:["appendicitis","abdominal","rlq","mantrels","alvarado"],
     inputs:[
@@ -1156,7 +1156,7 @@
       return { v:s, u:"/10", i:band+" Ref: Alvarado, Ann Emerg Med 1986." };
     } },
 
-  { id:"pitt", cat:"Infectious disease", icon:"🦠", title:"Pitt bacteraemia score",
+  { id:"pitt", cat:"Infectious disease", icon:"", title:"Pitt bacteraemia score",
     desc:"Mortality risk severity in bloodstream infection.",
     kw:["bacteremia","bacteraemia","sepsis","bsi","mortality"],
     inputs:[
@@ -1173,7 +1173,7 @@
       return { v:s, u:"points", i:(s>=4?"<b>High acuity</b> (≥4) — markedly increased mortality.":"<b>Lower acuity</b> (&lt;4).")+" Useful for risk-adjustment in bacteraemia. Ref: Paterson, Ann Intern Med 2004 (Pitt bacteraemia score)." };
     } },
 
-  { id:"rockall", cat:"Critical care", icon:"🚨", title:"Rockall score (UGIB)",
+  { id:"rockall", cat:"Critical care", icon:"", title:"Rockall score (UGIB)",
     desc:"Rebleeding & mortality risk after upper-GI bleed (post-endoscopy).",
     kw:["gi bleed","ugib","rebleed","endoscopy","rockall"],
     inputs:[
@@ -1191,7 +1191,7 @@
       return { v:s, u:"/11", i:band+" (Pre-endoscopy 'clinical' Rockall = age + shock + comorbidity.) Ref: Rockall et al, Gut 1996." };
     } },
 
-  { id:"ciwa", cat:"Neurology", icon:"🧠", title:"CIWA-Ar (alcohol withdrawal)",
+  { id:"ciwa", cat:"Neurology", icon:"", title:"CIWA-Ar (alcohol withdrawal)",
     desc:"Severity of alcohol withdrawal; guides symptom-triggered benzodiazepines.",
     kw:["alcohol","withdrawal","ciwa","detox","dts"],
     inputs:[
@@ -1213,7 +1213,7 @@
       return { v:s, u:"/67", i:band+" Use symptom-triggered benzodiazepine dosing per protocol; reassess hourly. Ref: Sullivan et al, Br J Addict 1989." };
     } },
 
-  { id:"crb65", cat:"Infectious disease", icon:"🦠", title:"CRB-65 (CAP, no labs)",
+  { id:"crb65", cat:"Infectious disease", icon:"", title:"CRB-65 (CAP, no labs)",
     desc:"Community-acquired pneumonia severity without urea — primary-care friendly.",
     kw:["pneumonia","cap","severity","outpatient","crb"],
     inputs:[
@@ -1234,7 +1234,7 @@
       return { v:s, u:"/4", i:band+" Ref: Lim et al, Thorax 2003 (BTS)." };
     } },
 
-  { id:"bisap", cat:"Critical care", icon:"🚨", title:"BISAP (pancreatitis severity)",
+  { id:"bisap", cat:"Critical care", icon:"", title:"BISAP (pancreatitis severity)",
     desc:"Early mortality risk in acute pancreatitis (first 24 h).",
     kw:["pancreatitis","bisap","severity","mortality"],
     inputs:[
@@ -1252,7 +1252,7 @@
       return { v:s, u:"/5", i:band+" Ref: Wu et al, Gut 2008 (BISAP)." };
     } },
 
-  { id:"spesi", cat:"Cardiovascular", icon:"🫀", title:"sPESI (PE severity)",
+  { id:"spesi", cat:"Cardiovascular", icon:"", title:"sPESI (PE severity)",
     desc:"Simplified Pulmonary Embolism Severity Index — 30-day risk.",
     kw:["pe","pulmonary embolism","spesi","outpatient","risk"],
     inputs:[
@@ -1272,7 +1272,7 @@
       return { v:s, u:"points", i:band+" Ref: Jiménez et al, Arch Intern Med 2010." };
     } },
 
-  { id:"killip", cat:"Cardiovascular", icon:"🫀", title:"Killip classification",
+  { id:"killip", cat:"Cardiovascular", icon:"", title:"Killip classification",
     desc:"Heart-failure severity in acute coronary syndrome.",
     kw:["killip","acs","mi","heart failure","class"],
     inputs:[
@@ -1288,7 +1288,7 @@
       return { v:"Class "+({1:"I",2:"II",3:"III",4:"IV"}[v.cls]), u:"", i:"Approx. historical in-hospital mortality "+mort+" (lower with modern reperfusion). Higher class → worse prognosis. Ref: Killip & Kimball, Am J Cardiol 1967." };
     } },
 
-  { id:"decaf", cat:"General", icon:"⚖️", title:"DECAF (COPD exacerbation)",
+  { id:"decaf", cat:"General", icon:"", title:"DECAF (COPD exacerbation)",
     desc:"In-hospital mortality in acute COPD exacerbation.",
     kw:["copd","aecopd","decaf","exacerbation","mortality"],
     inputs:[
@@ -1309,7 +1309,7 @@
       return { v:s, u:"/6", i:band+" Ref: Steer et al, Thorax 2012 (DECAF)." };
     } },
 
-  { id:"phq9", cat:"General", icon:"⚖️", title:"PHQ-9 (depression)",
+  { id:"phq9", cat:"General", icon:"", title:"PHQ-9 (depression)",
     desc:"Depression severity. Over the last 2 weeks, how often bothered by each problem?",
     kw:["phq","depression","mood","screen","mental health"],
     inputs:[
@@ -1327,11 +1327,11 @@
       var ks=["q1","q2","q3","q4","q5","q6","q7","q8","q9"];
       var s=0; for(var j=0;j<ks.length;j++){ s += Number(v[ks[j]])||0; }
       var band=s<=4?"Minimal (0–4).":s<=9?"Mild (5–9).":s<=14?"Moderate (10–14).":s<=19?"Moderately severe (15–19).":"Severe (20–27).";
-      var flag=(Number(v.q9)>=1)?" ⚠ Item 9 positive — assess suicide risk.":"";
+      var flag=(Number(v.q9)>=1)?" ⚠ Item 9 positive — assess suicide risk.":""; // @emoji-ok clinical safety flag in PHQ-9 result
       return { v:s, u:"/27", i:"<b>"+band+"</b>"+flag+" ≥10 has good sensitivity/specificity for major depression. Ref: Kroenke, J Gen Intern Med 2001." };
     } },
 
-  { id:"gad7", cat:"General", icon:"⚖️", title:"GAD-7 (anxiety)",
+  { id:"gad7", cat:"General", icon:"", title:"GAD-7 (anxiety)",
     desc:"Generalised anxiety severity. Over the last 2 weeks, how often bothered by each problem?",
     kw:["gad","anxiety","screen","mental health"],
     inputs:[
@@ -1350,7 +1350,7 @@
       return { v:s, u:"/21", i:"<b>"+band+"</b> ≥10 warrants further assessment / treatment. Ref: Spitzer, Arch Intern Med 2006." };
     } },
 
-  { id:"auditc", cat:"General", icon:"⚖️", title:"AUDIT-C (alcohol)",
+  { id:"auditc", cat:"General", icon:"", title:"AUDIT-C (alcohol)",
     desc:"Brief alcohol-use screen (3 items).",
     kw:["audit","alcohol","screen","drinking"],
     inputs:[
@@ -1366,7 +1366,7 @@
       return { v:s, u:"/12", i:(s>=thr?"<b>Positive</b> (≥"+thr+" for "+(v.sex==="f"?"women":"men")+") — likely hazardous use; assess further.":"<b>Negative</b> (&lt;"+thr+").")+" Ref: Bush, Arch Intern Med 1998." };
     } },
 
-  { id:"rox", cat:"Critical care", icon:"🚨", title:"ROX index (HFNC)",
+  { id:"rox", cat:"Critical care", icon:"", title:"ROX index (HFNC)",
     desc:"Predicts high-flow nasal cannula success. ROX = (SpO₂/FiO₂)/RR.",
     kw:["rox","hfnc","high flow","oxygen","niv","respiratory"],
     inputs:[
@@ -1382,7 +1382,7 @@
       return { v:rox, u:"", i:band+" Validate at 2, 6 and 12 h. Ref: Roca et al, Am J Respir Crit Care Med 2019." };
     } },
 
-  { id:"uag", cat:"Renal", icon:"🫘", title:"Urine anion gap",
+  { id:"uag", cat:"Renal", icon:"", title:"Urine anion gap",
     desc:"Assesses urinary NH₄⁺ excretion in normal-anion-gap metabolic acidosis.",
     kw:["urine anion gap","rta","nagma","ammonium","acidosis"],
     inputs:[
@@ -1397,7 +1397,7 @@
       return { v:uag, u:"mEq/L", i:i+" Interpret only in hyperchloraemic (normal-AG) metabolic acidosis. Ref: Goldstein, Am J Nephrol 1986." };
     } },
 
-  { id:"timistemi", cat:"Cardiovascular", icon:"🫀", title:"TIMI risk (STEMI)",
+  { id:"timistemi", cat:"Cardiovascular", icon:"", title:"TIMI risk (STEMI)",
     desc:"30-day mortality risk in ST-elevation MI.",
     kw:["timi","stemi","mi","mortality","acs"],
     inputs:[
@@ -1425,7 +1425,7 @@
       return { v:s, u:"/14", i:"<b>"+band+"</b> — 30-day mortality rises steeply with score (≈0.8% at 0 to >35% at ≥8). Ref: Morrow, Circulation 2000." };
     } },
 
-  { id:"geneva", cat:"Cardiovascular", icon:"🫀", title:"Geneva score (revised, PE)",
+  { id:"geneva", cat:"Cardiovascular", icon:"", title:"Geneva score (revised, PE)",
     desc:"Clinical pre-test probability of pulmonary embolism.",
     kw:["geneva","pe","pulmonary embolism","pretest","probability"],
     inputs:[
@@ -1450,7 +1450,7 @@
 
   /* ===== MDCalc-parity expansion — batch 1 (ai_drafted; clinician-verify) ===== */
 
-  { id:"rcri", cat:"Cardiovascular", icon:"❤️", title:"Revised Cardiac Risk Index (RCRI / Lee)",
+  { id:"rcri", cat:"Cardiovascular", icon:"", title:"Revised Cardiac Risk Index (RCRI / Lee)",
     desc:"Peri-operative risk of major cardiac events in non-cardiac surgery.",
     inputs:[
       { id:"surg", label:"High-risk surgery (intraperitoneal, intrathoracic or suprainguinal vascular)", type:"check" },
@@ -1466,7 +1466,7 @@
       return { v:s, u:"predictors", i:"Estimated risk of major cardiac event "+risk+" (0, 1, 2, ≥3 predictors). Ref: Lee, Circulation 1999." };
     } },
 
-  { id:"ottawa_ankle", cat:"Musculoskeletal", icon:"🦴", title:"Ottawa Ankle & Foot Rules",
+  { id:"ottawa_ankle", cat:"Musculoskeletal", icon:"", title:"Ottawa Ankle & Foot Rules",
     desc:"Whether ankle/foot radiographs are needed after acute injury (adults).",
     inputs:[
       { id:"mall_pain", label:"Pain in the malleolar zone", type:"check" },
@@ -1487,7 +1487,7 @@
       return { v:out, i:"Near-100% sensitive for clinically significant fractures; use to reduce unnecessary imaging. Ref: Stiell, JAMA 1993/1994." };
     } },
 
-  { id:"ottawa_knee", cat:"Musculoskeletal", icon:"🦴", title:"Ottawa Knee Rule",
+  { id:"ottawa_knee", cat:"Musculoskeletal", icon:"", title:"Ottawa Knee Rule",
     desc:"Whether a knee radiograph is needed after acute injury (adults).",
     inputs:[
       { id:"age55", label:"Age ≥55 years", type:"check" },
@@ -1501,7 +1501,7 @@
       return { v: pos?"Knee X-ray indicated":"No X-ray required by the rule", i:"Any positive criterion indicates radiography; highly sensitive for fracture. Ref: Stiell, Ann Emerg Med 1995." };
     } },
 
-  { id:"nexus_cspine", cat:"Neurology", icon:"🚑", title:"NEXUS C-Spine Criteria",
+  { id:"nexus_cspine", cat:"Neurology", icon:"", title:"NEXUS C-Spine Criteria",
     desc:"Whether cervical-spine imaging can be safely avoided after blunt trauma.",
     inputs:[
       { id:"midline", label:"Posterior midline cervical tenderness", type:"check" },
@@ -1515,7 +1515,7 @@
       return { v: anyPos?"Imaging indicated":"No imaging — can clear clinically", i: anyPos?"One or more criteria present — image the cervical spine.":"All five low-risk criteria absent — cervical spine can be cleared clinically. Ref: Hoffman, NEJM 2000." };
     } },
 
-  { id:"canadian_ct_head", cat:"Neurology", icon:"🧠", title:"Canadian CT Head Rule",
+  { id:"canadian_ct_head", cat:"Neurology", icon:"", title:"Canadian CT Head Rule",
     desc:"Need for CT after minor head injury (GCS 13–15 with witnessed LOC, amnesia or confusion).",
     inputs:[
       { id:"gcs2h", label:"GCS <15 at 2 hours after injury", type:"check" },
@@ -1533,7 +1533,7 @@
       return { v: ct?"CT head indicated":"CT not required by the rule", i: (high?"High-risk criterion present. ":(med?"Medium-risk criterion present. ":""))+"Applies only to minor head injury (GCS 13–15). Ref: Stiell, Lancet 2001." };
     } },
 
-  { id:"bishop", cat:"Obstetrics", icon:"🤰", title:"Bishop Score",
+  { id:"bishop", cat:"Obstetrics", icon:"", title:"Bishop Score",
     desc:"Cervical favourability for induction of labour.",
     inputs:[
       { id:"dil", label:"Cervical dilation", type:"select", opts:[{v:"0",t:"Closed"},{v:"1",t:"1–2 cm"},{v:"2",t:"3–4 cm"},{v:"3",t:"≥5 cm"}] },
@@ -1548,7 +1548,7 @@
       return { v:s, u:"points", i:band+" (range 0–13). Ref: Bishop, Obstet Gynecol 1964." };
     } },
 
-  { id:"apgar", cat:"Obstetrics", icon:"👶", title:"APGAR Score",
+  { id:"apgar", cat:"Obstetrics", icon:"", title:"APGAR Score",
     desc:"Rapid assessment of newborn status at 1 and 5 minutes.",
     inputs:[
       { id:"col", label:"Appearance (colour)", type:"select", opts:[{v:"0",t:"Blue/pale all over"},{v:"1",t:"Body pink, extremities blue"},{v:"2",t:"Pink all over"}] },
@@ -1563,7 +1563,7 @@
       return { v:s, u:"/10", i:band+". A low or falling score guides resuscitation; it does not by itself define asphyxia. Ref: Apgar, 1953." };
     } },
 
-  { id:"westley_croup", cat:"Paediatrics", icon:"👶", title:"Westley Croup Score",
+  { id:"westley_croup", cat:"Paediatrics", icon:"", title:"Westley Croup Score",
     desc:"Severity of croup (laryngotracheobronchitis).",
     inputs:[
       { id:"loc", label:"Level of consciousness", type:"select", opts:[{v:"0",t:"Normal"},{v:"5",t:"Disoriented / altered"}] },
@@ -1578,7 +1578,7 @@
       return { v:s, u:"points", i:band+" croup (range 0–17). Ref: Westley, Am J Dis Child 1978." };
     } },
 
-  { id:"mrs", cat:"Neurology", icon:"🧠", title:"Modified Rankin Scale (mRS)",
+  { id:"mrs", cat:"Neurology", icon:"", title:"Modified Rankin Scale (mRS)",
     desc:"Global disability/dependence after stroke.",
     inputs:[
       { id:"g", label:"Functional status", type:"select", opts:[
@@ -1596,7 +1596,7 @@
       return { v:g, u:"(0–6)", i:txt+". mRS 0–2 is commonly used as a favourable outcome after stroke." };
     } },
 
-  { id:"hunt_hess", cat:"Neurology", icon:"🧠", title:"Hunt & Hess Grade (SAH)",
+  { id:"hunt_hess", cat:"Neurology", icon:"", title:"Hunt & Hess Grade (SAH)",
     desc:"Clinical severity and surgical risk in aneurysmal subarachnoid haemorrhage.",
     inputs:[
       { id:"g", label:"Clinical grade", type:"select", opts:[
@@ -1612,7 +1612,7 @@
       return { v:g, u:"(I–V)", i:"Higher grade indicates worse clinical state and prognosis; approximate mortality "+mort+". Ref: Hunt & Hess, J Neurosurg 1968." };
     } },
 
-  { id:"cage", cat:"Psychiatry", icon:"🍷", title:"CAGE Questionnaire",
+  { id:"cage", cat:"Psychiatry", icon:"", title:"CAGE Questionnaire",
     desc:"Screening for problem alcohol use.",
     inputs:[
       { id:"cut", label:"Felt you should Cut down on drinking", type:"check" },
@@ -1625,7 +1625,7 @@
       return { v:s, u:"/4", i:(s>=2?"≥2 is clinically significant — suggests problem drinking; assess further":"Below the usual threshold of 2")+". Screening only. Ref: Ewing, JAMA 1984." };
     } },
 
-  { id:"feverpain", cat:"Infectious disease", icon:"🦠", title:"FeverPAIN Score",
+  { id:"feverpain", cat:"Infectious disease", icon:"", title:"FeverPAIN Score",
     desc:"Likelihood of streptococcal sore throat to guide antibiotic use.",
     inputs:[
       { id:"fev", label:"Fever in the past 24 hours", type:"check" },
@@ -1642,7 +1642,7 @@
 
   /* ===== MDCalc-parity expansion — batch 2 (ai_drafted; clinician-verify) ===== */
 
-  { id:"sgarbossa", cat:"Cardiovascular", icon:"❤️", title:"Sgarbossa Criteria (MI in LBBB/paced)",
+  { id:"sgarbossa", cat:"Cardiovascular", icon:"", title:"Sgarbossa Criteria (MI in LBBB/paced)",
     desc:"Identifies acute MI in the presence of left bundle branch block or ventricular pacing.",
     inputs:[
       { id:"conc_ste", label:"Concordant ST elevation ≥1 mm in ≥1 lead", type:"check" },
@@ -1654,7 +1654,7 @@
       return { v:s, u:"points", i:(s>=3?"≥3 is specific for acute MI in LBBB/paced rhythm":"Below 3 — not specific; consider the modified Sgarbossa (proportional) criteria and clinical context")+". Ref: Sgarbossa, NEJM 1996." };
     } },
 
-  { id:"fisher", cat:"Neurology", icon:"🧠", title:"Fisher Grade (SAH on CT)",
+  { id:"fisher", cat:"Neurology", icon:"", title:"Fisher Grade (SAH on CT)",
     desc:"Amount/pattern of subarachnoid blood on CT; relates to vasospasm risk.",
     inputs:[
       { id:"g", label:"CT appearance", type:"select", opts:[
@@ -1669,7 +1669,7 @@
       return { v:g, u:"(1–4)", i:"Grade "+g+"; symptomatic vasospasm risk is "+vs+" (classically greatest with grade 3 thick clot). Ref: Fisher, Neurosurgery 1980." };
     } },
 
-  { id:"steroid_conv", cat:"Endocrine", icon:"💊", title:"Corticosteroid Conversion",
+  { id:"steroid_conv", cat:"Endocrine", icon:"", title:"Corticosteroid Conversion",
     desc:"Glucocorticoid dose equivalence (anti-inflammatory potency).",
     inputs:[
       { id:"drug", label:"Current glucocorticoid", type:"select", opts:[
@@ -1684,7 +1684,7 @@
       return { v:pred, u:"mg prednisolone-equiv", i:"≈ "+hc+" mg hydrocortisone or "+dex+" mg dexamethasone (anti-inflammatory equivalence). Does not account for mineralocorticoid effect or duration of action; taper and stress-dosing per clinical context." };
     } },
 
-  { id:"mme", cat:"General", icon:"💊", title:"Morphine Milligram Equivalents (MME/day)",
+  { id:"mme", cat:"General", icon:"", title:"Morphine Milligram Equivalents (MME/day)",
     desc:"Converts an oral opioid to daily oral morphine equivalents.",
     inputs:[
       { id:"drug", label:"Opioid (oral)", type:"select", opts:[
@@ -1699,7 +1699,7 @@
       return { v:mme, u:"MME/day", i:band+". Methadone and transdermal fentanyl are NOT included (non-linear / route-specific). Ref: CDC opioid guidance." };
     } },
 
-  { id:"saag", cat:"Hepatology", icon:"🩺", title:"Serum-Ascites Albumin Gradient (SAAG)",
+  { id:"saag", cat:"Hepatology", icon:"", title:"Serum-Ascites Albumin Gradient (SAAG)",
     desc:"Classifies ascites as portal-hypertensive vs not.",
     inputs:[
       { id:"salb", label:"Serum albumin", type:"number", unit:"g/dL", step:"0.1", lab:"alb" },
@@ -1711,7 +1711,7 @@
       return { v:g, u:"g/dL", i:(g>=1.1?"≥1.1 g/dL — portal hypertension likely (cirrhosis, heart failure, Budd-Chiari)":"<1.1 g/dL — non-portal cause (malignancy, TB, pancreatic, nephrotic)")+". Ref: Runyon, Ann Intern Med 1992." };
     } },
 
-  { id:"ttkg", cat:"Renal", icon:"🩺", title:"Transtubular Potassium Gradient (TTKG)",
+  { id:"ttkg", cat:"Renal", icon:"", title:"Transtubular Potassium Gradient (TTKG)",
     desc:"Assesses renal potassium handling in dyskalaemia.",
     inputs:[
       { id:"uk", label:"Urine potassium", type:"number", unit:"mmol/L", step:"0.1" },
@@ -1725,7 +1725,7 @@
       return { v:t, u:"", i:"In hyperkalaemia TTKG <7 suggests hypoaldosteronism (expected >7); in hypokalaemia >3 suggests renal potassium wasting. Valid only when urine osmolality > plasma and urine Na is adequate. Interpretation is debated." };
     } },
 
-  { id:"ebv", cat:"General", icon:"🩸", title:"Estimated Blood Volume",
+  { id:"ebv", cat:"General", icon:"", title:"Estimated Blood Volume",
     desc:"Weight-based estimate of total blood volume.",
     inputs:[
       { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.5" },
@@ -1738,7 +1738,7 @@
       return { v:ml, u:"mL", i:"≈ "+f+" mL/kg for this group. Useful for transfusion, exchange and blood-loss estimates." };
     } },
 
-  { id:"cows", cat:"Psychiatry", icon:"💊", title:"Clinical Opiate Withdrawal Scale (COWS)",
+  { id:"cows", cat:"Psychiatry", icon:"", title:"Clinical Opiate Withdrawal Scale (COWS)",
     desc:"Severity of opioid withdrawal.",
     inputs:[
       { id:"pulse", label:"Resting pulse rate", type:"select", opts:[{v:"0",t:"≤80"},{v:"1",t:"81–100"},{v:"2",t:"101–120"},{v:"4",t:">120"}] },
@@ -1759,7 +1759,7 @@
       return { v:s, u:"points", i:band+" withdrawal (5–12 mild, 13–24 moderate, 25–36 moderately severe, >36 severe). Ref: Wesson & Ling, J Psychoactive Drugs 2003." };
     } },
 
-  { id:"gahs", cat:"Hepatology", icon:"🩺", title:"Glasgow Alcoholic Hepatitis Score (GAHS)",
+  { id:"gahs", cat:"Hepatology", icon:"", title:"Glasgow Alcoholic Hepatitis Score (GAHS)",
     desc:"Prognosis in alcoholic hepatitis (day 1 or day 6–9).",
     inputs:[
       { id:"age", label:"Age", type:"number", unit:"yrs", step:"1" },
@@ -1779,7 +1779,7 @@
       return { v:s, u:"points", i:(s>=9?"≥9 — poor prognosis; corticosteroids may be considered (with Maddrey/MELD and after excluding sepsis/GI bleed)":"<9 — better prognosis")+" (range 5–12). Ref: Forrest, Gut 2005." };
     } },
 
-  { id:"das28", cat:"Rheumatology", icon:"🦴", title:"DAS28-ESR (rheumatoid activity)",
+  { id:"das28", cat:"Rheumatology", icon:"", title:"DAS28-ESR (rheumatoid activity)",
     desc:"Composite disease-activity score in rheumatoid arthritis.",
     inputs:[
       { id:"tjc", label:"Tender joint count (of 28)", type:"number", step:"1", min:"0" },
@@ -1797,7 +1797,7 @@
 
   /* ===== MDCalc-parity expansion — batch 3 (ai_drafted; clinician-verify) ===== */
 
-  { id:"stopbang", cat:"Respiratory", icon:"😴", title:"STOP-BANG (obstructive sleep apnoea)",
+  { id:"stopbang", cat:"Respiratory", icon:"", title:"STOP-BANG (obstructive sleep apnoea)",
     desc:"Screening risk of obstructive sleep apnoea.",
     inputs:[
       { id:"s1", label:"Snoring loudly", type:"check" },
@@ -1815,7 +1815,7 @@
       return { v:s, u:"/8", i:band+" (0–2 low, 3–4 intermediate, 5–8 high). Consider sleep study for higher scores. Ref: Chung, Anesthesiology 2008." };
     } },
 
-  { id:"smartcop", cat:"Respiratory", icon:"🫁", title:"SMART-COP (pneumonia — intensive support)",
+  { id:"smartcop", cat:"Respiratory", icon:"", title:"SMART-COP (pneumonia — intensive support)",
     desc:"Predicts need for intensive respiratory or vasopressor support in community-acquired pneumonia.",
     inputs:[
       { id:"sbp", label:"Systolic BP <90 mmHg", type:"check" },
@@ -1833,7 +1833,7 @@
       return { v:s, u:"points", i:band+" of needing intensive respiratory/vasopressor support. Ref: Charles, Clin Infect Dis 2008." };
     } },
 
-  { id:"homa_ir", cat:"Endocrine", icon:"🩸", title:"HOMA-IR (insulin resistance)",
+  { id:"homa_ir", cat:"Endocrine", icon:"", title:"HOMA-IR (insulin resistance)",
     desc:"Homeostatic model assessment of insulin resistance.",
     inputs:[
       { id:"glu", label:"Fasting glucose", type:"number", unit:"mg/dL", step:"1" },
@@ -1845,7 +1845,7 @@
       return { v:h, u:"", i:(h>2.5?"Suggests insulin resistance (thresholds vary by population/assay, commonly >~2.5)":"Within the usual reference range")+". Use fasting samples; not validated on insulin therapy. Ref: Matthews, Diabetologia 1985." };
     } },
 
-  { id:"nafld_fibrosis", cat:"Hepatology", icon:"🩺", title:"NAFLD Fibrosis Score",
+  { id:"nafld_fibrosis", cat:"Hepatology", icon:"", title:"NAFLD Fibrosis Score",
     desc:"Estimates advanced fibrosis in non-alcoholic fatty liver disease.",
     inputs:[
       { id:"age", label:"Age", type:"number", unit:"yrs", step:"1" },
@@ -1864,7 +1864,7 @@
       return { v:s, u:"", i:band+" (low <−1.455, high >0.676). Ref: Angulo, Hepatology 2007." };
     } },
 
-  { id:"glasgow_imrie", cat:"Critical care", icon:"🩺", title:"Glasgow-Imrie Score (pancreatitis)",
+  { id:"glasgow_imrie", cat:"Critical care", icon:"", title:"Glasgow-Imrie Score (pancreatitis)",
     desc:"Severity of acute pancreatitis at 48 hours (PANCREAS criteria).",
     inputs:[
       { id:"po2", label:"PaO₂ <8 kPa (<60 mmHg)", type:"check" },
@@ -1881,7 +1881,7 @@
       return { v:s, u:"points", i:(s>=3?"≥3 — predicts severe pancreatitis; consider HDU/ICU care":"<3 — predicts milder course")+". Best applied at 48 h. Ref: Blamey/Imrie, Gut 1984." };
     } },
 
-  { id:"4at", cat:"Neurology", icon:"🧠", title:"4AT (delirium screening)",
+  { id:"4at", cat:"Neurology", icon:"", title:"4AT (delirium screening)",
     desc:"Rapid bedside screen for delirium and cognitive impairment.",
     inputs:[
       { id:"alert", label:"Alertness", type:"select", opts:[{v:"0",t:"Normal"},{v:"4",t:"Clearly abnormal (drowsy/agitated)"}] },
@@ -1895,7 +1895,7 @@
       return { v:s, u:"points", i:band+" (≥4 delirium likely, 1–3 possible cognitive impairment, 0 unlikely). Ref: MacLullich, 4AT (the4at.com)." };
     } },
 
-  { id:"sf_syncope", cat:"Cardiovascular", icon:"❤️", title:"San Francisco Syncope Rule (CHESS)",
+  { id:"sf_syncope", cat:"Cardiovascular", icon:"", title:"San Francisco Syncope Rule (CHESS)",
     desc:"Risk-stratifies syncope for serious short-term outcomes.",
     inputs:[
       { id:"chf", label:"History of congestive heart failure", type:"check" },
@@ -1909,7 +1909,7 @@
       return { v: pos?"High risk":"Low risk", i: pos?"Any CHESS factor present — higher risk of serious 7-day outcome; consider admission/workup.":"No CHESS factor — low risk of serious short-term outcome. Ref: Quinn, Ann Emerg Med 2004." };
     } },
 
-  { id:"bode", cat:"Respiratory", icon:"🫁", title:"BODE Index (COPD)",
+  { id:"bode", cat:"Respiratory", icon:"", title:"BODE Index (COPD)",
     desc:"Multidimensional COPD prognosis (mortality).",
     inputs:[
       { id:"bmi", label:"BMI", type:"select", opts:[{v:"0",t:">21 kg/m²"},{v:"1",t:"≤21 kg/m²"}] },
@@ -1923,7 +1923,7 @@
       return { v:s, u:"/10", i:band+". Higher BODE predicts higher mortality than FEV₁ alone. Ref: Celli, NEJM 2004." };
     } },
 
-  { id:"ottawa_sah", cat:"Neurology", icon:"🚑", title:"Ottawa SAH Rule",
+  { id:"ottawa_sah", cat:"Neurology", icon:"", title:"Ottawa SAH Rule",
     desc:"Rule-out for subarachnoid haemorrhage in alert adults with acute severe headache.",
     inputs:[
       { id:"age40", label:"Age ≥40 years", type:"check" },
@@ -1938,7 +1938,7 @@
       return { v: pos?"Investigate for SAH":"No investigation required by the rule", i:"Applies ONLY to alert patients ≥15 y with new severe atraumatic headache peaking within 1 h and no neurological deficit. Highly sensitive (rule-out). Ref: Perry, JAMA 2013." };
     } },
 
-  { id:"wfns", cat:"Neurology", icon:"🧠", title:"WFNS Grade (SAH)",
+  { id:"wfns", cat:"Neurology", icon:"", title:"WFNS Grade (SAH)",
     desc:"World Federation of Neurosurgical Societies grade for subarachnoid haemorrhage.",
     inputs:[
       { id:"g", label:"Grade (GCS ± motor deficit)", type:"select", opts:[
@@ -1955,7 +1955,7 @@
 
   /* ===== MDCalc-parity expansion — batch 4 (ai_drafted; clinician-verify) ===== */
 
-  { id:"harvey_bradshaw", cat:"Gastroenterology", icon:"🩺", title:"Harvey-Bradshaw Index (Crohn's)",
+  { id:"harvey_bradshaw", cat:"Gastroenterology", icon:"", title:"Harvey-Bradshaw Index (Crohn's)",
     desc:"Simple clinical activity index for Crohn's disease.",
     inputs:[
       { id:"well", label:"General wellbeing", type:"select", opts:[{v:"0",t:"Very well"},{v:"1",t:"Slightly below par"},{v:"2",t:"Poor"},{v:"3",t:"Very poor"},{v:"4",t:"Terrible"}] },
@@ -1971,7 +1971,7 @@
       return { v:r0(s), u:"points", i:band+" (remission <5, mild 5–7, moderate 8–16, severe >16). Ref: Harvey & Bradshaw, Lancet 1980." };
     } },
 
-  { id:"truelove_witts", cat:"Gastroenterology", icon:"🩺", title:"Truelove-Witts (UC severity)",
+  { id:"truelove_witts", cat:"Gastroenterology", icon:"", title:"Truelove-Witts (UC severity)",
     desc:"Severity classification of an ulcerative colitis flare.",
     inputs:[
       { id:"stool", label:"Bloody stools per day", type:"number", step:"1", min:"0" },
@@ -1987,7 +1987,7 @@
       return { v:cls, i:"Severe = ≥6 bloody stools/day plus ≥1 systemic feature (fever, tachycardia, anaemia, raised ESR); mild = <4 stools with no systemic upset. Severe colitis needs inpatient care. Ref: Truelove & Witts, BMJ 1955." };
     } },
 
-  { id:"aims65", cat:"Gastroenterology", icon:"🩸", title:"AIMS65 (upper GI bleed mortality)",
+  { id:"aims65", cat:"Gastroenterology", icon:"", title:"AIMS65 (upper GI bleed mortality)",
     desc:"Predicts in-hospital mortality in acute upper GI bleeding.",
     inputs:[
       { id:"alb", label:"Albumin <30 g/L (3.0 g/dL)", type:"check" },
@@ -2002,7 +2002,7 @@
       return { v:s, u:"/5", i:band+"; mortality rises steeply with each additional factor. Ref: Saltzman, Gastrointest Endosc 2011." };
     } },
 
-  { id:"air_score", cat:"General", icon:"🔪", title:"Appendicitis Inflammatory Response (AIR) Score",
+  { id:"air_score", cat:"General", icon:"", title:"Appendicitis Inflammatory Response (AIR) Score",
     desc:"Risk stratification for acute appendicitis.",
     inputs:[
       { id:"vom", label:"Vomiting", type:"check" },
@@ -2019,7 +2019,7 @@
       return { v:s, u:"/12", i:band+". Ref: Andersson, World J Surg 2008." };
     } },
 
-  { id:"kocher", cat:"Paediatrics", icon:"👶", title:"Kocher Criteria (septic hip)",
+  { id:"kocher", cat:"Paediatrics", icon:"", title:"Kocher Criteria (septic hip)",
     desc:"Differentiates septic arthritis from transient synovitis of the paediatric hip.",
     inputs:[
       { id:"nwb", label:"Non-weight-bearing on affected side", type:"check" },
@@ -2033,7 +2033,7 @@
       return { v:s, u:"/4", i:"Approximate probability of septic arthritis "+prob+" — a high score warrants joint aspiration. Ref: Kocher, J Bone Joint Surg 1999." };
     } },
 
-  { id:"orbit_bleed", cat:"Cardiovascular", icon:"🩸", title:"ORBIT Bleeding Score (AF)",
+  { id:"orbit_bleed", cat:"Cardiovascular", icon:"", title:"ORBIT Bleeding Score (AF)",
     desc:"Major bleeding risk on anticoagulation for atrial fibrillation.",
     inputs:[
       { id:"age", label:"Age ≥74 years", type:"check" },
@@ -2048,7 +2048,7 @@
       return { v:s, u:"points", i:band+" (0–2 low, 3 medium, ≥4 high). Weigh against stroke risk rather than withholding anticoagulation. Ref: O'Brien, Eur Heart J 2015." };
     } },
 
-  { id:"urr", cat:"Renal", icon:"🩺", title:"Urea Reduction Ratio (dialysis)",
+  { id:"urr", cat:"Renal", icon:"", title:"Urea Reduction Ratio (dialysis)",
     desc:"Adequacy of a haemodialysis session.",
     inputs:[
       { id:"pre", label:"Pre-dialysis urea", type:"number", unit:"mmol/L", step:"0.1" },
@@ -2060,7 +2060,7 @@
       return { v:u, u:"%", i:(u>=65?"≥65% — generally adequate for thrice-weekly haemodialysis":"<65% — below the usual adequacy target")+". Kt/V is the preferred measure. Ref: NKF-KDOQI." };
     } },
 
-  { id:"cdai_ra", cat:"Rheumatology", icon:"🦴", title:"CDAI (rheumatoid arthritis)",
+  { id:"cdai_ra", cat:"Rheumatology", icon:"", title:"CDAI (rheumatoid arthritis)",
     desc:"Clinical Disease Activity Index — no laboratory value required.",
     inputs:[
       { id:"tjc", label:"Tender joint count (of 28)", type:"number", step:"1", min:"0" },
@@ -2075,7 +2075,7 @@
       return { v:s, u:"", i:band+" (remission ≤2.8, low ≤10, moderate ≤22, high >22). Ref: Aletaha, Arthritis Res Ther 2005." };
     } },
 
-  { id:"gos", cat:"Neurology", icon:"🧠", title:"Glasgow Outcome Scale (GOS)",
+  { id:"gos", cat:"Neurology", icon:"", title:"Glasgow Outcome Scale (GOS)",
     desc:"Global outcome after brain injury.",
     inputs:[
       { id:"g", label:"Outcome", type:"select", opts:[
@@ -2091,7 +2091,7 @@
       return { v:g, u:"(1–5)", i:txt+". Higher is better; often dichotomised as favourable (4–5) vs unfavourable (1–3). Ref: Jennett & Bond, Lancet 1975." };
     } },
 
-  { id:"anc", cat:"Haematology", icon:"🩸", title:"Absolute Neutrophil Count (ANC)",
+  { id:"anc", cat:"Haematology", icon:"", title:"Absolute Neutrophil Count (ANC)",
     desc:"Neutrophil count and neutropenia grading.",
     inputs:[
       { id:"wbc", label:"White cell count", type:"number", unit:"×10⁹/L", step:"0.1" },
@@ -2104,7 +2104,7 @@
       return { v:a, u:"×10⁹/L", i:band+" (severe <0.5, moderate <1.0, mild <1.5). Neutropenic fever is an emergency." };
     } },
 
-  { id:"improve_vte", cat:"Haematology", icon:"🩸", title:"IMPROVE VTE Risk Score",
+  { id:"improve_vte", cat:"Haematology", icon:"", title:"IMPROVE VTE Risk Score",
     desc:"Venous thromboembolism risk in hospitalised medical patients.",
     inputs:[
       { id:"prev", label:"Previous VTE", type:"check" },
@@ -2121,7 +2121,7 @@
       return { v:s, u:"points", i:band+". Ref: Spyropoulos, Chest 2011 (IMPROVE)." };
     } },
 
-  { id:"eag", cat:"Endocrine", icon:"🩸", title:"Estimated Average Glucose (eAG) from HbA1c",
+  { id:"eag", cat:"Endocrine", icon:"", title:"Estimated Average Glucose (eAG) from HbA1c",
     desc:"Converts HbA1c to an estimated average glucose (ADAG study).",
     inputs:[
       { id:"a1c", label:"HbA1c", type:"number", unit:"%", step:"0.1" }
@@ -2134,7 +2134,7 @@
       return { v:r0(mg), u:"mg/dL", i:"Estimated average glucose ≈ "+r1(mmol)+" mmol/L, reflecting mean glucose over the preceding ~8–12 weeks. Ref: Nathan, Diabetes Care 2008 (ADAG)." };
     } },
 
-  { id:"rpi", cat:"Haematology", icon:"🩸", title:"Reticulocyte Production Index (RPI)",
+  { id:"rpi", cat:"Haematology", icon:"", title:"Reticulocyte Production Index (RPI)",
     desc:"Corrects reticulocyte % for anaemia and maturation to assess marrow response.",
     inputs:[
       { id:"retic", label:"Reticulocyte count", type:"number", unit:"%", step:"0.1" },
@@ -2148,7 +2148,7 @@
       return { v:r1(rpi), u:"index", i:b+" (maturation factor "+mf+"). Ref: standard haematology." };
     } },
 
-  { id:"isth_dic", cat:"Haematology", icon:"🩸", title:"ISTH Overt DIC Score",
+  { id:"isth_dic", cat:"Haematology", icon:"", title:"ISTH Overt DIC Score",
     desc:"Diagnoses overt disseminated intravascular coagulation (requires a compatible underlying disorder).",
     inputs:[
       { id:"plt", label:"Platelet count", type:"number", unit:"×10⁹/L", step:"1" },
@@ -2167,7 +2167,7 @@
       return { v:s, u:"points", i:b+". Ref: Taylor, Thromb Haemost 2001 (ISTH)." };
     } },
 
-  { id:"sdai", cat:"Rheumatology", icon:"🦴", title:"Simplified Disease Activity Index (SDAI) — RA",
+  { id:"sdai", cat:"Rheumatology", icon:"", title:"Simplified Disease Activity Index (SDAI) — RA",
     desc:"Rheumatoid arthritis disease activity from joint counts, global assessments and CRP.",
     inputs:[
       { id:"tjc", label:"Tender joint count (of 28)", type:"number", step:"1" },
@@ -2183,7 +2183,7 @@
       return { v:r1(s), u:"points", i:b+". Note: CRP entered in mg/dL. Ref: Smolen, Rheumatology 2003." };
     } },
 
-  { id:"braden", cat:"General", icon:"🛏️", title:"Braden Scale (Pressure Ulcer Risk)",
+  { id:"braden", cat:"General", icon:"", title:"Braden Scale (Pressure Ulcer Risk)",
     desc:"Risk of pressure ulcer development in immobile or at-risk patients.",
     inputs:[
       { id:"sens", label:"Sensory perception", type:"select", opts:[{v:"4",t:"No impairment"},{v:"3",t:"Slightly limited"},{v:"2",t:"Very limited"},{v:"1",t:"Completely limited"}] },
@@ -2199,7 +2199,7 @@
       return { v:s, u:"points", i:b+" (lower total = higher risk). Ref: Bergstrom, Nurs Res 1987." };
     } },
 
-  { id:"morse_falls", cat:"General", icon:"🚶", title:"Morse Fall Scale",
+  { id:"morse_falls", cat:"General", icon:"", title:"Morse Fall Scale",
     desc:"Likelihood of an inpatient fall.",
     inputs:[
       { id:"hist", label:"History of falling (this admission or ≤3 months)", type:"check" },
@@ -2215,7 +2215,7 @@
       return { v:s, u:"points", i:b+". Ref: Morse, 1989." };
     } },
 
-  { id:"bap65", cat:"Respiratory", icon:"🫁", title:"BAP-65 (COPD Exacerbation Severity)",
+  { id:"bap65", cat:"Respiratory", icon:"", title:"BAP-65 (COPD Exacerbation Severity)",
     desc:"Risk stratification for an acute exacerbation of COPD.",
     inputs:[
       { id:"bun", label:"BUN ≥ 25 mg/dL (urea ≥ ~9 mmol/L)", type:"check" },
@@ -2232,7 +2232,7 @@
       return { v:"Class "+cls, u:"", i:risk+". Ref: Shorr, Chest 2011 (BAP-65)." };
     } },
 
-  { id:"duke_treadmill", cat:"Cardiovascular", icon:"❤️", title:"Duke Treadmill Score",
+  { id:"duke_treadmill", cat:"Cardiovascular", icon:"", title:"Duke Treadmill Score",
     desc:"Prognosis after an exercise (Bruce protocol) treadmill test.",
     inputs:[
       { id:"time", label:"Exercise time (Bruce protocol)", type:"number", unit:"min", step:"0.1" },
@@ -2246,7 +2246,7 @@
       return { v:r1(dts), u:"", i:b+". Ref: Mark, N Engl J Med 1991." };
     } },
 
-  { id:"mayo_uc", cat:"Gastroenterology", icon:"🩹", title:"Mayo Score (Ulcerative Colitis Activity)",
+  { id:"mayo_uc", cat:"Gastroenterology", icon:"", title:"Mayo Score (Ulcerative Colitis Activity)",
     desc:"Disease activity in ulcerative colitis (full Mayo score).",
     inputs:[
       { id:"stool", label:"Stool frequency", type:"select", opts:[{v:"0",t:"Normal"},{v:"1",t:"1–2 more/day than normal"},{v:"2",t:"3–4 more/day"},{v:"3",t:"≥5 more/day"}] },
@@ -2260,7 +2260,7 @@
       return { v:s, u:"points", i:b+". Ref: Schroeder, N Engl J Med 1987." };
     } },
 
-  { id:"oxygenation_index", cat:"Critical care", icon:"🫁", title:"Oxygenation Index (OI)",
+  { id:"oxygenation_index", cat:"Critical care", icon:"", title:"Oxygenation Index (OI)",
     desc:"Severity of hypoxaemic respiratory failure (paediatric ARDS grading).",
     inputs:[
       { id:"fio2", label:"FiO₂", type:"number", unit:"%", step:"1" },
@@ -2274,7 +2274,7 @@
       return { v:r1(oi), u:"", i:b+" (higher = worse). Ref: PALICC 2015." };
     } },
 
-  { id:"schwartz", cat:"Renal", icon:"🫘", title:"Bedside Schwartz eGFR (Paediatric)",
+  { id:"schwartz", cat:"Renal", icon:"", title:"Bedside Schwartz eGFR (Paediatric)",
     desc:"Estimated GFR in children from height and serum creatinine.",
     inputs:[
       { id:"ht", label:"Height", type:"number", unit:"cm", step:"0.1" },
@@ -2287,7 +2287,7 @@
       return { v:r0(egfr), u:"mL/min/1.73m²", i:b+" (creatinine in mg/dL). Ref: Schwartz, J Am Soc Nephrol 2009." };
     } },
 
-  { id:"delta_ratio", cat:"Renal", icon:"🧪", title:"Delta Ratio (Delta-Delta)",
+  { id:"delta_ratio", cat:"Renal", icon:"", title:"Delta Ratio (Delta-Delta)",
     desc:"Detects a mixed metabolic acid-base disorder in a high anion gap acidosis.",
     inputs:[
       { id:"ag", label:"Anion gap", type:"number", unit:"mEq/L", step:"0.1" },
@@ -2302,7 +2302,7 @@
       return { v:r1(dr), u:"", i:b+". Ref: standard acid-base." };
     } },
 
-  { id:"naranjo", cat:"Toxicology", icon:"💊", title:"Naranjo Adverse Drug Reaction Probability Scale",
+  { id:"naranjo", cat:"Toxicology", icon:"", title:"Naranjo Adverse Drug Reaction Probability Scale",
     desc:"Likelihood that a clinical event is an adverse drug reaction.",
     inputs:[
       { id:"q1", label:"Previous conclusive reports on this reaction?", type:"select", opts:[{v:"0",t:"No / unknown"},{v:"1",t:"Yes"}] },
@@ -2322,7 +2322,7 @@
       return { v:s, u:"points", i:b+". Ref: Naranjo, Clin Pharmacol Ther 1981." };
     } },
 
-  { id:"glasgow_7point", cat:"Dermatology", icon:"🩹", title:"Glasgow 7-Point Checklist (Melanoma)",
+  { id:"glasgow_7point", cat:"Dermatology", icon:"", title:"Glasgow 7-Point Checklist (Melanoma)",
     desc:"Screening of a pigmented skin lesion for referral.",
     inputs:[
       { id:"size", label:"Major: change in size", type:"check" },
@@ -2339,7 +2339,7 @@
       return { v:s, u:"points", i:b+". Any major feature warrants concern. Ref: MacKie (Glasgow 7-point)." };
     } },
 
-  { id:"dlqi", cat:"Dermatology", icon:"🩹", title:"DLQI — Score Interpreter",
+  { id:"dlqi", cat:"Dermatology", icon:"", title:"DLQI — Score Interpreter",
     desc:"Interprets a Dermatology Life Quality Index total. Administer the official DLQI (© Cardiff University, free for clinical use from cardiff.ac.uk) and enter the total here.",
     inputs:[
       { id:"total", label:"DLQI total (0–30)", type:"number", step:"1" }
@@ -2351,7 +2351,7 @@
       return { v:s, u:"/30", i:b+". Obtain the validated questionnaire from Cardiff University. Banding ref: Hongbo, J Invest Dermatol 2005." };
     } },
 
-  { id:"bpp", cat:"Obstetrics", icon:"🤰", title:"Biophysical Profile (BPP)",
+  { id:"bpp", cat:"Obstetrics", icon:"", title:"Biophysical Profile (BPP)",
     desc:"Fetal wellbeing from ultrasound components plus the non-stress test.",
     inputs:[
       { id:"breath", label:"Fetal breathing movements present", type:"check" },
@@ -2366,7 +2366,7 @@
       return { v:s, u:"/10", i:b+". Ref: Manning, Am J Obstet Gynecol 1980." };
     } },
 
-  { id:"calvert", cat:"Oncology", icon:"🎗️", title:"Calvert Formula (Carboplatin Dose)",
+  { id:"calvert", cat:"Oncology", icon:"", title:"Calvert Formula (Carboplatin Dose)",
     desc:"Carboplatin dose from target AUC and GFR.",
     inputs:[
       { id:"auc", label:"Target AUC", type:"number", unit:"mg/mL·min", step:"0.1" },
@@ -2380,7 +2380,7 @@
       return { v:r0(dose), u:"mg", i:"Total carboplatin dose"+note+". Always verify against local chemotherapy protocol. Ref: Calvert, J Clin Oncol 1989." };
     } },
 
-  { id:"mirels", cat:"Oncology", icon:"🦴", title:"Mirels Score (Pathological Fracture Risk)",
+  { id:"mirels", cat:"Oncology", icon:"", title:"Mirels Score (Pathological Fracture Risk)",
     desc:"Fracture risk of a long-bone metastasis.",
     inputs:[
       { id:"site", label:"Site", type:"select", opts:[{v:"1",t:"Upper limb"},{v:"2",t:"Lower limb"},{v:"3",t:"Peritrochanteric"}] },
@@ -2394,7 +2394,7 @@
       return { v:s, u:"points", i:b+". Ref: Mirels, Clin Orthop Relat Res 1989." };
     } },
 
-  { id:"epds", cat:"Psychiatry", icon:"🧠", title:"Edinburgh Postnatal Depression Scale (EPDS)",
+  { id:"epds", cat:"Psychiatry", icon:"", title:"Edinburgh Postnatal Depression Scale (EPDS)",
     desc:"Screens for perinatal depression (past 7 days).",
     inputs:[
       { id:"q1", label:"Able to laugh and see the funny side", type:"select", opts:[{v:"0",t:"As much as always"},{v:"1",t:"Not quite so much"},{v:"2",t:"Definitely less"},{v:"3",t:"Not at all"}] },
@@ -2415,7 +2415,7 @@
       return { v:s, u:"/30", i:b+(self?". POSITIVE self-harm item — assess safety urgently":"")+". Ref: Cox, Br J Psychiatry 1987." };
     } },
 
-  { id:"gds15", cat:"Psychiatry", icon:"🧠", title:"Geriatric Depression Scale (GDS-15)",
+  { id:"gds15", cat:"Psychiatry", icon:"", title:"Geriatric Depression Scale (GDS-15)",
     desc:"Depression screen in older adults. Tick each item that is TRUE for the patient.",
     inputs:[
       { id:"ga", label:"NOT satisfied with your life", type:"check" },
@@ -2440,7 +2440,7 @@
       return { v:s, u:"/15", i:b+". Ref: Sheikh & Yesavage, 1986 (GDS-15)." };
     } },
 
-  { id:"karnofsky", cat:"Oncology", icon:"🎗️", title:"Karnofsky Performance Status",
+  { id:"karnofsky", cat:"Oncology", icon:"", title:"Karnofsky Performance Status",
     desc:"Functional status in cancer / palliative care.",
     inputs:[
       { id:"kps", label:"Performance status", type:"select", opts:[
@@ -2455,7 +2455,7 @@
       return { v:k, u:"%", i:b+". Ref: Karnofsky & Burchenal 1949." };
     } },
 
-  { id:"ecog", cat:"Oncology", icon:"🎗️", title:"ECOG Performance Status",
+  { id:"ecog", cat:"Oncology", icon:"", title:"ECOG Performance Status",
     desc:"Functional status grade used in oncology.",
     inputs:[
       { id:"ps", label:"ECOG grade", type:"select", opts:[
@@ -2468,7 +2468,7 @@
       return { v:e, u:"", i:m[e]+". Ref: Oken, Am J Clin Oncol 1982 (ECOG)." };
     } },
 
-  { id:"logmar", cat:"Ophthalmology", icon:"👁️", title:"Snellen → logMAR Conversion",
+  { id:"logmar", cat:"Ophthalmology", icon:"", title:"Snellen → logMAR Conversion",
     desc:"Converts imperial Snellen acuity (20/D) to a logMAR value.",
     inputs:[
       { id:"d", label:"Snellen denominator (the D in 20/D)", type:"number", step:"1" }
@@ -2480,7 +2480,7 @@
       return { v:r1(lm), u:"logMAR", i:"Metric equivalent ≈ 6/"+metric+". Higher logMAR = worse acuity (0.0 = 20/20). Ref: standard optotype conversion." };
     } },
 
-  { id:"rass", cat:"Critical care", icon:"🚨", title:"Richmond Agitation-Sedation Scale (RASS)",
+  { id:"rass", cat:"Critical care", icon:"", title:"Richmond Agitation-Sedation Scale (RASS)",
     desc:"Level of agitation or sedation in critically ill patients.",
     inputs:[
       { id:"rass", label:"Observed state", type:"select", opts:[
@@ -2494,7 +2494,7 @@
       return { v:(r>0?"+":"")+r, u:"", i:m[String(r)]+". Target is usually 0 to −2 unless deep sedation indicated. Ref: Sessler, AJRCCM 2002." };
     } },
 
-  { id:"downes", cat:"Paediatrics", icon:"👶", title:"Downes Score (Neonatal Respiratory Distress)",
+  { id:"downes", cat:"Paediatrics", icon:"", title:"Downes Score (Neonatal Respiratory Distress)",
     desc:"Severity of respiratory distress in neonates.",
     inputs:[
       { id:"rr", label:"Respiratory rate", type:"select", opts:[{v:"0",t:"< 60/min"},{v:"1",t:"60–80/min"},{v:"2",t:"> 80/min"}] },
@@ -2509,7 +2509,7 @@
       return { v:s, u:"/10", i:b+". Ref: Downes, Clin Pediatr 1970." };
     } },
 
-  { id:"pas", cat:"Paediatrics", icon:"👶", title:"Paediatric Appendicitis Score (PAS)",
+  { id:"pas", cat:"Paediatrics", icon:"", title:"Paediatric Appendicitis Score (PAS)",
     desc:"Likelihood of appendicitis in children with abdominal pain.",
     inputs:[
       { id:"cough", label:"Cough / percussion / hopping tenderness in RLQ", type:"check" },
@@ -2527,7 +2527,7 @@
       return { v:s, u:"/10", i:b+". Ref: Samuel, J Pediatr Surg 2002." };
     } },
 
-  { id:"pittsburgh_knee", cat:"Musculoskeletal", icon:"🦵", title:"Pittsburgh Knee Rules",
+  { id:"pittsburgh_knee", cat:"Musculoskeletal", icon:"", title:"Pittsburgh Knee Rules",
     desc:"Whether a knee X-ray is indicated after injury.",
     inputs:[
       { id:"mech", label:"Blunt trauma or a fall (mechanism)", type:"check" },
@@ -2540,7 +2540,7 @@
       return { v: xr?"X-ray indicated":"X-ray not indicated", u:"", i:(xr?"Meets Pittsburgh criteria — radiograph the knee":"Does not meet criteria — imaging can usually be deferred")+". Requires a fall/blunt-trauma mechanism. Ref: Seaberg, Ann Emerg Med 1998." };
     } },
 
-  { id:"fai", cat:"Endocrine", icon:"🧬", title:"Free Androgen Index (FAI)",
+  { id:"fai", cat:"Endocrine", icon:"", title:"Free Androgen Index (FAI)",
     desc:"Estimate of bioavailable testosterone.",
     inputs:[
       { id:"testo", label:"Total testosterone", type:"number", unit:"nmol/L", step:"0.1" },
@@ -2552,7 +2552,7 @@
       return { v:r1(fai), u:"", i:"Raised values support hyperandrogenism (e.g. PCOS); interpret against sex-specific reference ranges. Ref: standard endocrinology." };
     } },
 
-  { id:"quicki", cat:"Endocrine", icon:"🧬", title:"QUICKI (Insulin Sensitivity)",
+  { id:"quicki", cat:"Endocrine", icon:"", title:"QUICKI (Insulin Sensitivity)",
     desc:"Quantitative insulin-sensitivity check index from fasting values.",
     inputs:[
       { id:"ins", label:"Fasting insulin", type:"number", unit:"µU/mL", step:"0.1" },
@@ -2567,7 +2567,7 @@
       return { v:qr, u:"", i:b+" (glucose mg/dL; higher = more sensitive). No universal cut-off — healthy mean ≈0.38, obese ≈0.33, type-2 diabetes ≈0.30; interpret against local reference. Ref: Katz, J Clin Endocrinol Metab 2000." };
     } },
 
-  { id:"basdai", cat:"Rheumatology", icon:"🦴", title:"BASDAI — Score Interpreter",
+  { id:"basdai", cat:"Rheumatology", icon:"", title:"BASDAI — Score Interpreter",
     desc:"Interprets a Bath Ankylosing Spondylitis Disease Activity Index result. Administer the official BASDAI and enter the 0–10 score.",
     inputs:[
       { id:"score", label:"BASDAI score (0–10)", type:"number", step:"0.1" }
@@ -2578,7 +2578,7 @@
       return { v:r1(v.score), u:"/10", i:b+" (≥4 indicates active disease). Ref: Garrett, J Rheumatol 1994 (BASDAI)." };
     } },
 
-  { id:"forrest", cat:"Gastroenterology", icon:"🩹", title:"Forrest Classification (Ulcer Bleeding)",
+  { id:"forrest", cat:"Gastroenterology", icon:"", title:"Forrest Classification (Ulcer Bleeding)",
     desc:"Endoscopic appearance of a peptic ulcer and rebleeding risk.",
     inputs:[
       { id:"cls", label:"Endoscopic appearance", type:"select", opts:[
@@ -2590,7 +2590,7 @@
       return { v:"Forrest "+v.cls.toUpperCase(), u:"", i:m[v.cls]+". Ref: Forrest, Lancet 1974." };
     } },
 
-  { id:"gap_ipf", cat:"Respiratory", icon:"🫁", title:"GAP Index (IPF Mortality)",
+  { id:"gap_ipf", cat:"Respiratory", icon:"", title:"GAP Index (IPF Mortality)",
     desc:"Mortality staging in idiopathic pulmonary fibrosis.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"0",t:"Female"},{v:"1",t:"Male"}] },
@@ -2611,7 +2611,7 @@
       return { v:"Stage "+stage+" ("+s+" pts)", u:"", i:b+". Ref: Ley, Ann Intern Med 2012 (GAP)." };
     } },
 
-  { id:"canadian_syncope", cat:"Cardiovascular", icon:"❤️", title:"Canadian Syncope Risk Score",
+  { id:"canadian_syncope", cat:"Cardiovascular", icon:"", title:"Canadian Syncope Risk Score",
     desc:"30-day risk of a serious adverse event after emergency-department syncope.",
     inputs:[
       { id:"vaso", label:"Predisposition to vasovagal symptoms", type:"check" },
@@ -2629,7 +2629,7 @@
       return { v:s, u:"points", i:b+" of a 30-day serious adverse event. Ref: Thiruganasambandamoorthy, JAMA Intern Med 2016." };
     } },
 
-  { id:"albi", cat:"Hepatology", icon:"🩺", title:"ALBI Grade (Albumin-Bilirubin)",
+  { id:"albi", cat:"Hepatology", icon:"", title:"ALBI Grade (Albumin-Bilirubin)",
     desc:"Liver-function grade (e.g. in hepatocellular carcinoma).",
     inputs:[
       { id:"bili", label:"Bilirubin", type:"number", unit:"µmol/L", step:"1" },
@@ -2643,7 +2643,7 @@
       return { v:"Grade "+grade, u:"", i:b+" (bilirubin µmol/L, albumin g/L). Ref: Johnson, J Clin Oncol 2015 (ALBI)." };
     } },
 
-  { id:"khorana", cat:"Oncology", icon:"🎗️", title:"Khorana Score (Chemotherapy VTE Risk)",
+  { id:"khorana", cat:"Oncology", icon:"", title:"Khorana Score (Chemotherapy VTE Risk)",
     desc:"Venous thromboembolism risk in ambulatory cancer patients starting chemotherapy.",
     inputs:[
       { id:"site", label:"Cancer site", type:"select", opts:[{v:"0",t:"Other"},{v:"1",t:"High risk (lung, lymphoma, gynae, bladder, testicular)"},{v:"2",t:"Very high risk (stomach, pancreas)"}] },
@@ -2658,7 +2658,7 @@
       return { v:s, u:"points", i:b+". Ref: Khorana, Blood 2008." };
     } },
 
-  { id:"must", cat:"General", icon:"⚖️", title:"MUST (Malnutrition Universal Screening Tool)",
+  { id:"must", cat:"General", icon:"", title:"MUST (Malnutrition Universal Screening Tool)",
     desc:"Malnutrition risk in adults.",
     inputs:[
       { id:"bmi", label:"BMI", type:"number", unit:"kg/m²", step:"0.1" },
@@ -2672,7 +2672,7 @@
       return { v:s, u:"points", i:b+". Ref: BAPEN (MUST)." };
     } },
 
-  { id:"nyha", cat:"Cardiovascular", icon:"❤️", title:"NYHA Functional Classification",
+  { id:"nyha", cat:"Cardiovascular", icon:"", title:"NYHA Functional Classification",
     desc:"Symptom-based functional class in heart failure.",
     inputs:[
       { id:"cls", label:"Functional status", type:"select", opts:[
@@ -2684,7 +2684,7 @@
       return { v:"Class "+["","I","II","III","IV"][Number(v.cls)], u:"", i:m[Number(v.cls)]+". Ref: New York Heart Association." };
     } },
 
-  { id:"hoehn_yahr", cat:"Neurology", icon:"🧠", title:"Hoehn and Yahr Staging (Parkinson's)",
+  { id:"hoehn_yahr", cat:"Neurology", icon:"", title:"Hoehn and Yahr Staging (Parkinson's)",
     desc:"Clinical staging of Parkinson's disease severity.",
     inputs:[
       { id:"stage", label:"Stage", type:"select", opts:[
@@ -2697,7 +2697,7 @@
       return { v:"Stage "+v.stage, u:"", i:m[Number(v.stage)]+". Ref: Hoehn & Yahr, Neurology 1967." };
     } },
 
-  { id:"epworth", cat:"Neurology", icon:"😴", title:"Epworth Sleepiness Scale",
+  { id:"epworth", cat:"Neurology", icon:"", title:"Epworth Sleepiness Scale",
     desc:"Daytime sleepiness from the chance of dozing in 8 situations.",
     inputs:[
       { id:"s1", label:"Sitting and reading", type:"select", opts:[{v:"0",t:"Would never doze"},{v:"1",t:"Slight chance"},{v:"2",t:"Moderate chance"},{v:"3",t:"High chance"}] },
@@ -2715,7 +2715,7 @@
       return { v:s, u:"/24", i:b+". Ref: Johns, Sleep 1991." };
     } },
 
-  { id:"spetzler_martin", cat:"Neurology", icon:"🧠", title:"Spetzler-Martin AVM Grade",
+  { id:"spetzler_martin", cat:"Neurology", icon:"", title:"Spetzler-Martin AVM Grade",
     desc:"Surgical risk grade for a brain arteriovenous malformation.",
     inputs:[
       { id:"size", label:"Size of nidus", type:"select", opts:[{v:"1",t:"Small (< 3 cm)"},{v:"2",t:"Medium (3–6 cm)"},{v:"3",t:"Large (> 6 cm)"}] },
@@ -2728,7 +2728,7 @@
       return { v:"Grade "+["","I","II","III","IV","V"][s], u:"", i:b+" (higher grade = greater operative morbidity). Ref: Spetzler & Martin, J Neurosurg 1986." };
     } },
 
-  { id:"murray", cat:"Critical care", icon:"🫁", title:"Murray Lung Injury Score",
+  { id:"murray", cat:"Critical care", icon:"", title:"Murray Lung Injury Score",
     desc:"Severity of acute lung injury / ARDS.",
     inputs:[
       { id:"cxr", label:"Chest X-ray (quadrants with consolidation)", type:"select", opts:[{v:"0",t:"No consolidation"},{v:"1",t:"1 quadrant"},{v:"2",t:"2 quadrants"},{v:"3",t:"3 quadrants"},{v:"4",t:"4 quadrants"}] },
@@ -2742,7 +2742,7 @@
       return { v:r1(s), u:"", i:b+". Ref: Murray, Am Rev Respir Dis 1988." };
     } },
 
-  { id:"kdigo_aki", cat:"Renal", icon:"🫘", title:"KDIGO AKI Staging",
+  { id:"kdigo_aki", cat:"Renal", icon:"", title:"KDIGO AKI Staging",
     desc:"Stages acute kidney injury by creatinine and urine output.",
     inputs:[
       { id:"cr", label:"Creatinine criterion", type:"select", opts:[
@@ -2755,7 +2755,7 @@
       return { v:s===0?"No AKI":"Stage "+s, u:"", i:(s===0?"Does not meet KDIGO AKI criteria":"AKI stage "+s+" (highest of the creatinine and urine-output criteria)")+". Ref: KDIGO 2012." };
     } },
 
-  { id:"milan", cat:"Hepatology", icon:"🩺", title:"Milan Criteria (HCC Transplant Eligibility)",
+  { id:"milan", cat:"Hepatology", icon:"", title:"Milan Criteria (HCC Transplant Eligibility)",
     desc:"Whether hepatocellular carcinoma meets Milan criteria for transplantation.",
     inputs:[
       { id:"single", label:"Single tumour ≤ 5 cm", type:"check" },
@@ -2768,7 +2768,7 @@
       return { v: within?"Within Milan criteria":"Outside Milan criteria", u:"", i:(within?"Generally eligible for liver transplantation on tumour burden":"Exceeds Milan tumour burden — standard criteria not met (consider extended criteria)")+". Ref: Mazzaferro, N Engl J Med 1996." };
     } },
 
-  { id:"findrisc", cat:"Endocrine", icon:"🧬", title:"FINDRISC (Type 2 Diabetes Risk)",
+  { id:"findrisc", cat:"Endocrine", icon:"", title:"FINDRISC (Type 2 Diabetes Risk)",
     desc:"10-year risk of developing type 2 diabetes.",
     inputs:[
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"< 45"},{v:"2",t:"45–54"},{v:"3",t:"55–64"},{v:"4",t:"> 64"}] },
@@ -2786,7 +2786,7 @@
       return { v:s, u:"points", i:b+" of type 2 diabetes over 10 years. Ref: Lindström & Tuomilehto, Diabetes Care 2003 (FINDRISC)." };
     } },
 
-  { id:"caspar", cat:"Rheumatology", icon:"🦴", title:"CASPAR Criteria (Psoriatic Arthritis)",
+  { id:"caspar", cat:"Rheumatology", icon:"", title:"CASPAR Criteria (Psoriatic Arthritis)",
     desc:"Classification of psoriatic arthritis (requires inflammatory articular disease).",
     inputs:[
       { id:"entry", label:"Inflammatory articular disease (joint / spine / entheseal)", type:"check" },
@@ -2802,7 +2802,7 @@
       return { v: meets?"Meets CASPAR ("+s+" pts)":"Does not meet ("+s+" pts)", u:"", i:(v.entry?(meets?"Classifiable as psoriatic arthritis":"Inflammatory articular disease present but < 3 criteria points"):"Entry requirement (inflammatory articular disease) not met")+". Ref: Taylor, Arthritis Rheum 2006 (CASPAR)." };
     } },
 
-  { id:"hscore", cat:"Haematology", icon:"🩸", title:"HScore (Haemophagocytic Syndrome)",
+  { id:"hscore", cat:"Haematology", icon:"", title:"HScore (Haemophagocytic Syndrome)",
     desc:"Probability of reactive haemophagocytic lymphohistiocytosis (HLH).",
     inputs:[
       { id:"immuno", label:"Known underlying immunosuppression", type:"select", opts:[{v:"0",t:"No"},{v:"18",t:"Yes"}] },
@@ -2821,7 +2821,7 @@
       return { v:s, u:"points", i:b+" (~169 approximates 50% probability). Ref: Fardet, Arthritis Rheumatol 2014 (HScore)." };
     } },
 
-  { id:"plasmic", cat:"Haematology", icon:"🩸", title:"PLASMIC Score (TTP Likelihood)",
+  { id:"plasmic", cat:"Haematology", icon:"", title:"PLASMIC Score (TTP Likelihood)",
     desc:"Predicts severe ADAMTS13 deficiency (TTP) in thrombotic microangiopathy.",
     inputs:[
       { id:"plt", label:"Platelet count < 30 ×10⁹/L", type:"check" },
@@ -2838,7 +2838,7 @@
       return { v:s, u:"/7", i:b+". Ref: Bendapudi, Lancet Haematol 2017 (PLASMIC)." };
     } },
 
-  { id:"cfs", cat:"General", icon:"⚖️", title:"Clinical Frailty Scale — Level Interpreter",
+  { id:"cfs", cat:"General", icon:"", title:"Clinical Frailty Scale — Level Interpreter",
     desc:"Assign the CFS level (1–9) using the official Rockwood scale (© Dalhousie University; free for non-commercial clinical use), then enter it here for outcome context.",
     inputs:[
       { id:"level", label:"CFS level (1–9)", type:"number", step:"1" }
@@ -2850,7 +2850,7 @@
       return { v:n, u:"/9", i:b+" (higher = more frail; correlates with adverse outcomes). Use the official illustrated scale from Dalhousie University for level definitions. Ref: Rockwood, CMAJ 2005." };
     } },
 
-  { id:"duke_endocarditis", cat:"Infectious disease", icon:"🦠", title:"Modified Duke Criteria (Infective Endocarditis)",
+  { id:"duke_endocarditis", cat:"Infectious disease", icon:"", title:"Modified Duke Criteria (Infective Endocarditis)",
     desc:"Diagnostic likelihood of infective endocarditis (clinical criteria).",
     inputs:[
       { id:"maj_micro", label:"Major: typical blood cultures for IE", type:"check" },
@@ -2870,7 +2870,7 @@
       return { v:r, u:"", i:maj+" major, "+min+" minor. Combine with pathological criteria where available. Ref: Li, Clin Infect Dis 2000 (modified Duke)." };
     } },
 
-  { id:"stess", cat:"Neurology", icon:"🧠", title:"Status Epilepticus Severity Score (STESS)",
+  { id:"stess", cat:"Neurology", icon:"", title:"Status Epilepticus Severity Score (STESS)",
     desc:"Prognosis in status epilepticus (assessed before treatment).",
     inputs:[
       { id:"loc", label:"Level of consciousness", type:"select", opts:[{v:"0",t:"Alert or somnolent/confused"},{v:"1",t:"Stuporous or comatose"}] },
@@ -2884,7 +2884,7 @@
       return { v:s, u:"/6", i:b+". Ref: Rossetti, J Neurol 2008 (STESS)." };
     } },
 
-  { id:"bicarb_deficit", cat:"Renal", icon:"🧪", title:"Bicarbonate Deficit",
+  { id:"bicarb_deficit", cat:"Renal", icon:"", title:"Bicarbonate Deficit",
     desc:"Estimated bicarbonate deficit in metabolic acidosis.",
     inputs:[
       { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.1" },
@@ -2898,7 +2898,7 @@
       return { v:r0(d), u:"mmol", i:"Estimated total bicarbonate deficit; replace cautiously and reassess (avoid rapid full correction). Ref: standard acid-base." };
     } },
 
-  { id:"cat_copd", cat:"Respiratory", icon:"🫁", title:"COPD Assessment Test (CAT)",
+  { id:"cat_copd", cat:"Respiratory", icon:"", title:"COPD Assessment Test (CAT)",
     desc:"Health-status impact of COPD (each item 0–5).",
     inputs:[
       { id:"c1", label:"Cough (0 never – 5 all the time)", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
@@ -2916,7 +2916,7 @@
       return { v:s, u:"/40", i:b+" of COPD on health status. Ref: Jones, Eur Respir J 2009 (CAT)." };
     } },
 
-  { id:"ibw", cat:"General", icon:"⚖️", title:"Ideal Body Weight (Devine)",
+  { id:"ibw", cat:"General", icon:"", title:"Ideal Body Weight (Devine)",
     desc:"Ideal body weight for drug dosing and ventilation.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -2930,7 +2930,7 @@
       return { v:r1(ibw), u:"kg", i:"Devine ideal body weight. Adjusted body weight (obesity) = IBW + 0.4×(actual − IBW). Ref: Devine 1974." };
     } },
 
-  { id:"adjbw", cat:"General", icon:"⚖️", title:"Adjusted Body Weight",
+  { id:"adjbw", cat:"General", icon:"", title:"Adjusted Body Weight",
     desc:"Adjusted body weight in obesity (from ideal and actual weight).",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -2946,7 +2946,7 @@
       return { v:r1(adj), u:"kg", i:"Adjusted body weight (IBW "+r1(ibw)+" kg). Used for dosing some drugs in obesity. Ref: standard pharmacokinetics." };
     } },
 
-  { id:"hunter_serotonin", cat:"Toxicology", icon:"💊", title:"Hunter Serotonin Toxicity Criteria",
+  { id:"hunter_serotonin", cat:"Toxicology", icon:"", title:"Hunter Serotonin Toxicity Criteria",
     desc:"Diagnoses serotonin toxicity in a patient taking a serotonergic agent.",
     inputs:[
       { id:"spont", label:"Spontaneous clonus", type:"check" },
@@ -2968,7 +2968,7 @@
       return { v: pos?"Meets serotonin toxicity criteria":"Does not meet criteria", u:"", i:(pos?"Consistent with serotonin toxicity in the context of a serotonergic agent — stop the agent and treat supportively":"Hunter criteria not met; reassess if the picture evolves")+". Ref: Dunkley, QJM 2003 (Hunter)." };
     } },
 
-  { id:"ganzoni", cat:"Haematology", icon:"🩸", title:"Ganzoni Iron Deficit",
+  { id:"ganzoni", cat:"Haematology", icon:"", title:"Ganzoni Iron Deficit",
     desc:"Total iron deficit for iron-replacement dosing.",
     inputs:[
       { id:"wt", label:"Body weight", type:"number", unit:"kg", step:"0.1" },
@@ -2983,7 +2983,7 @@
       return { v:r0(d), u:"mg", i:"Total iron deficit (Ganzoni). Adult iron stores typically ~500 mg. Verify against the chosen iron product. Ref: Ganzoni 1970." };
     } },
 
-  { id:"fepo4", cat:"Renal", icon:"🫘", title:"Fractional Excretion of Phosphate (FEPO₄)",
+  { id:"fepo4", cat:"Renal", icon:"", title:"Fractional Excretion of Phosphate (FEPO₄)",
     desc:"Distinguishes renal phosphate wasting from appropriate conservation.",
     inputs:[
       { id:"upo4", label:"Urine phosphate", type:"number", unit:"mmol/L", step:"0.1" },
@@ -2998,7 +2998,7 @@
       return { v:r1(fe), u:"%", i:b+" (enter both creatinines in the same unit). Ref: standard nephrology." };
     } },
 
-  { id:"gcs_p", cat:"Neurology", icon:"🧠", title:"GCS-Pupils Score (GCS-P)",
+  { id:"gcs_p", cat:"Neurology", icon:"", title:"GCS-Pupils Score (GCS-P)",
     desc:"Glasgow Coma Scale combined with pupil reactivity.",
     inputs:[
       { id:"gcs", label:"GCS total (3–15)", type:"number", step:"1" },
@@ -3010,7 +3010,7 @@
       return { v:s, u:"", i:"GCS-Pupils score (range 1–15); lower values indicate greater severity and worse prognosis. Ref: Brennan & Murray, J Neurosurg 2018." };
     } },
 
-  { id:"charlson", cat:"General", icon:"⚖️", title:"Charlson Comorbidity Index",
+  { id:"charlson", cat:"General", icon:"", title:"Charlson Comorbidity Index",
     desc:"Comorbidity burden and 10-year survival estimate (age-adjusted).",
     inputs:[
       { id:"mi", label:"Myocardial infarction", type:"check" },
@@ -3037,7 +3037,7 @@
       return { v:s, u:"points", i:"Estimated 10-year survival "+surv+" (age-adjusted CCI; higher = greater comorbidity). Ref: Charlson, J Chronic Dis 1987." };
     } },
 
-  { id:"add_rs", cat:"Cardiovascular", icon:"❤️", title:"Aortic Dissection Detection Risk Score (ADD-RS)",
+  { id:"add_rs", cat:"Cardiovascular", icon:"", title:"Aortic Dissection Detection Risk Score (ADD-RS)",
     desc:"Pre-test risk of acute aortic dissection.",
     inputs:[
       { id:"predispose", label:"High-risk condition (Marfan, family history, known aortic/valve disease, recent aortic manipulation, thoracic aneurysm)", type:"check" },
@@ -3050,7 +3050,7 @@
       return { v:s, u:"/3", i:b+". Ref: Rogers, Circulation 2011 (ADD-RS)." };
     } },
 
-  { id:"hat", cat:"Neurology", icon:"🧠", title:"HAT Score (Haemorrhage After Thrombolysis)",
+  { id:"hat", cat:"Neurology", icon:"", title:"HAT Score (Haemorrhage After Thrombolysis)",
     desc:"Risk of symptomatic intracranial haemorrhage after IV thrombolysis.",
     inputs:[
       { id:"nihss", label:"NIHSS", type:"select", opts:[{v:"0",t:"< 10"},{v:"1",t:"10–19"},{v:"2",t:"≥ 20"}] },
@@ -3063,7 +3063,7 @@
       return { v:s, u:"/5", i:b+". Ref: Lou, Neurology 2008 (HAT)." };
     } },
 
-  { id:"feua", cat:"Renal", icon:"🫘", title:"Fractional Excretion of Uric Acid (FEUA)",
+  { id:"feua", cat:"Renal", icon:"", title:"Fractional Excretion of Uric Acid (FEUA)",
     desc:"Renal urate handling (e.g. in the work-up of hyponatraemia).",
     inputs:[
       { id:"uua", label:"Urine uric acid", type:"number", unit:"mmol/L", step:"0.01" },
@@ -3078,7 +3078,7 @@
       return { v:r1(fe), u:"%", i:b+" (enter both creatinines in the same unit). Ref: standard nephrology." };
     } },
 
-  { id:"mdq", cat:"Psychiatry", icon:"🧠", title:"Mood Disorder Questionnaire (MDQ)",
+  { id:"mdq", cat:"Psychiatry", icon:"", title:"Mood Disorder Questionnaire (MDQ)",
     desc:"Screens for a lifetime history of bipolar spectrum disorder.",
     inputs:[
       { id:"q1", label:"Felt so good/hyper others thought you were not normal, or got into trouble", type:"check" },
@@ -3103,7 +3103,7 @@
       return { v: pos?"Positive screen ("+n+"/13)":"Negative screen ("+n+"/13)", u:"", i:(pos?"Suggestive of a bipolar spectrum disorder — warrants clinical evaluation":"Below the MDQ threshold (needs ≥7 symptoms, same time period, and at least moderate problems)")+". A screen, not a diagnosis. Ref: Hirschfeld, Am J Psychiatry 2000 (MDQ)." };
     } },
 
-  { id:"eutos", cat:"Haematology", icon:"🩸", title:"EUTOS Score (Chronic Myeloid Leukaemia)",
+  { id:"eutos", cat:"Haematology", icon:"", title:"EUTOS Score (Chronic Myeloid Leukaemia)",
     desc:"Predicts response and progression-free survival in CML at diagnosis.",
     inputs:[
       { id:"baso", label:"Peripheral blood basophils", type:"number", unit:"%", step:"0.1" },
@@ -3116,7 +3116,7 @@
       return { v:r0(s), u:"", i:b+" (threshold 87). Ref: Hasford, Blood 2011 (EUTOS)." };
     } },
 
-  { id:"chads2", cat:"Cardiovascular", icon:"❤️", title:"CHADS₂ Score",
+  { id:"chads2", cat:"Cardiovascular", icon:"", title:"CHADS₂ Score",
     desc:"Stroke risk in non-valvular atrial fibrillation (predecessor of CHA₂DS₂-VASc).",
     inputs:[
       { id:"chf", label:"Congestive heart failure", type:"check" },
@@ -3131,7 +3131,7 @@
       return { v:s, u:"points", i:b+". CHA₂DS₂-VASc is now generally preferred. Ref: Gage, JAMA 2001." };
     } },
 
-  { id:"ca_phos_product", cat:"Renal", icon:"🦴", title:"Calcium-Phosphate Product",
+  { id:"ca_phos_product", cat:"Renal", icon:"", title:"Calcium-Phosphate Product",
     desc:"Calcium × phosphate product (CKD-mineral and bone disorder).",
     inputs:[
       { id:"ca", label:"Calcium (corrected)", type:"number", unit:"mmol/L", step:"0.01" },
@@ -3144,7 +3144,7 @@
       return { v:r1(p), u:"mmol²/L²", i:b+" (units mmol²/L²). Ref: KDIGO CKD-MBD guidance." };
     } },
 
-  { id:"pecarn_head", cat:"Paediatrics", icon:"👶", title:"PECARN Paediatric Head Injury Rule",
+  { id:"pecarn_head", cat:"Paediatrics", icon:"", title:"PECARN Paediatric Head Injury Rule",
     desc:"Need for CT after minor head trauma (GCS ≥ 14). Use the row for the child's age.",
     inputs:[
       { id:"age", label:"Age group", type:"select", opts:[{v:"lt2",t:"< 2 years"},{v:"ge2",t:"≥ 2 years"}] },
@@ -3157,7 +3157,7 @@
       return { v:"CT not recommended", u:"", i:"No PECARN predictors — very low risk of clinically important TBI; CT not routinely recommended. Ref: PECARN 2009." };
     } },
 
-  { id:"berlin_ards", cat:"Critical care", icon:"🫁", title:"Berlin Definition (ARDS)",
+  { id:"berlin_ards", cat:"Critical care", icon:"", title:"Berlin Definition (ARDS)",
     desc:"Diagnosis and severity grading of acute respiratory distress syndrome.",
     inputs:[
       { id:"timing", label:"Onset within 1 week of insult / worsening symptoms", type:"check" },
@@ -3174,7 +3174,7 @@
       return { v:sev, u:"", i:"ARDS confirmed on PEEP ≥5. Mild 200–300, moderate 100–200, severe ≤100. Ref: Berlin 2012." };
     } },
 
-  { id:"four_score", cat:"Neurology", icon:"🧠", title:"FOUR Score (Coma)",
+  { id:"four_score", cat:"Neurology", icon:"", title:"FOUR Score (Coma)",
     desc:"Level of consciousness (alternative to GCS; usable in intubated patients).",
     inputs:[
       { id:"eye", label:"Eye response", type:"select", opts:[{v:"4",t:"Eyelids open, tracking or blinking to command"},{v:"3",t:"Open but not tracking"},{v:"2",t:"Open to loud voice"},{v:"1",t:"Open to pain"},{v:"0",t:"Remain closed to pain"}] },
@@ -3188,7 +3188,7 @@
       return { v:s, u:"/16", i:b+" (lower = worse; 0 suggests brain death evaluation). Ref: Wijdicks, Ann Neurol 2005 (FOUR)." };
     } },
 
-  { id:"marburg", cat:"Cardiovascular", icon:"❤️", title:"Marburg Heart Score (Chest Pain)",
+  { id:"marburg", cat:"Cardiovascular", icon:"", title:"Marburg Heart Score (Chest Pain)",
     desc:"Likelihood that chest pain in primary care is due to coronary artery disease.",
     inputs:[
       { id:"agesex", label:"Female ≥ 65 or male ≥ 55 years", type:"check" },
@@ -3203,7 +3203,7 @@
       return { v:s, u:"/5", i:b+". Ref: Bösner, CMAJ 2010 (Marburg Heart Score)." };
     } },
 
-  { id:"effective_osm", cat:"Endocrine", icon:"🧪", title:"Effective Serum Osmolality (Tonicity)",
+  { id:"effective_osm", cat:"Endocrine", icon:"", title:"Effective Serum Osmolality (Tonicity)",
     desc:"Effective osmolality (excludes urea) — e.g. in hyperglycaemic emergencies.",
     inputs:[
       { id:"na", label:"Sodium", type:"number", unit:"mmol/L", step:"1" },
@@ -3216,7 +3216,7 @@
       return { v:r0(e), u:"mmol/kg", i:b+" (glucose entered in mmol/L; urea excluded). Ref: standard biochemistry." };
     } },
 
-  { id:"ktv", cat:"Renal", icon:"🫘", title:"Kt/V (Single-pool, Daugirdas)",
+  { id:"ktv", cat:"Renal", icon:"", title:"Kt/V (Single-pool, Daugirdas)",
     desc:"Haemodialysis adequacy from pre/post urea.",
     inputs:[
       { id:"pre", label:"Pre-dialysis urea", type:"number", unit:"mmol/L", step:"0.1" },
@@ -3235,7 +3235,7 @@
       return { v:r1(ktv*100)/100, u:"", i:b+". Ref: Daugirdas, J Am Soc Nephrol 1993." };
     } },
 
-  { id:"audit_full", cat:"Psychiatry", icon:"🍺", title:"AUDIT (Alcohol Use Disorders Identification Test)",
+  { id:"audit_full", cat:"Psychiatry", icon:"", title:"AUDIT (Alcohol Use Disorders Identification Test)",
     desc:"10-item screen for hazardous and harmful alcohol use.",
     inputs:[
       { id:"q1", label:"How often do you have a drink containing alcohol?", type:"select", opts:[{v:"0",t:"Never"},{v:"1",t:"Monthly or less"},{v:"2",t:"2–4×/month"},{v:"3",t:"2–3×/week"},{v:"4",t:"≥4×/week"}] },
@@ -3255,7 +3255,7 @@
       return { v:s, u:"/40", i:b+". Ref: Saunders, Addiction 1993 (WHO AUDIT)." };
     } },
 
-  { id:"mews", cat:"Critical care", icon:"🚨", title:"Modified Early Warning Score (MEWS)",
+  { id:"mews", cat:"Critical care", icon:"", title:"Modified Early Warning Score (MEWS)",
     desc:"Bedside physiological track-and-trigger score.",
     inputs:[
       { id:"sbp", label:"Systolic BP", type:"select", opts:[{v:"0",t:"101–199"},{v:"1",t:"81–100"},{v:"2",t:"71–80"},{v:"3",t:"≤ 70"},{v:"2b",t:"≥ 200"}] },
@@ -3271,7 +3271,7 @@
       return { v:s, u:"points", i:b+" (a score of ≥5, or 3 in any single parameter, should prompt escalation). Ref: Subbe, QJM 2001 (MEWS)." };
     } },
 
-  { id:"apfel", cat:"General", icon:"🤢", title:"Apfel Score (Postoperative Nausea & Vomiting)",
+  { id:"apfel", cat:"General", icon:"", title:"Apfel Score (Postoperative Nausea & Vomiting)",
     desc:"Risk of postoperative nausea and vomiting.",
     inputs:[
       { id:"female", label:"Female sex", type:"check" },
@@ -3286,7 +3286,7 @@
       return { v:s, u:"/4", i:"Approximate PONV risk "+risk+". "+b+". Ref: Apfel, Anesthesiology 1999." };
     } },
 
-  { id:"borg", cat:"Respiratory", icon:"🫁", title:"Modified Borg Dyspnoea Scale",
+  { id:"borg", cat:"Respiratory", icon:"", title:"Modified Borg Dyspnoea Scale",
     desc:"Patient-rated breathlessness intensity.",
     inputs:[
       { id:"score", label:"Breathlessness rating", type:"select", opts:[
@@ -3299,7 +3299,7 @@
       return { v:s, u:"/10", i:b+". Useful for tracking change over time. Ref: Borg, Med Sci Sports Exerc 1982 (modified)." };
     } },
 
-  { id:"aar", cat:"Hepatology", icon:"🩺", title:"AST/ALT Ratio (De Ritis)",
+  { id:"aar", cat:"Hepatology", icon:"", title:"AST/ALT Ratio (De Ritis)",
     desc:"Ratio of aminotransferases, a clue to the type of liver injury.",
     inputs:[
       { id:"ast", label:"AST", type:"number", unit:"IU/L", step:"1" },
@@ -3312,7 +3312,7 @@
       return { v:r1(r*100)/100, u:"", i:b+". Ref: De Ritis ratio (standard hepatology)." };
     } },
 
-  { id:"barthel", cat:"Neurology", icon:"🧠", title:"Barthel Index (Activities of Daily Living)",
+  { id:"barthel", cat:"Neurology", icon:"", title:"Barthel Index (Activities of Daily Living)",
     desc:"Functional independence in basic activities of daily living.",
     inputs:[
       { id:"feed", label:"Feeding", type:"select", opts:[{v:"0",t:"Unable"},{v:"5",t:"Needs help"},{v:"10",t:"Independent"}] },
@@ -3332,7 +3332,7 @@
       return { v:s, u:"/100", i:b+" (higher = more independent). Ref: Mahoney & Barthel, Md State Med J 1965." };
     } },
 
-  { id:"silverman", cat:"Paediatrics", icon:"👶", title:"Silverman-Andersen Retraction Score",
+  { id:"silverman", cat:"Paediatrics", icon:"", title:"Silverman-Andersen Retraction Score",
     desc:"Work of breathing in the newborn (higher = worse; opposite of Apgar).",
     inputs:[
       { id:"chest", label:"Upper chest movement", type:"select", opts:[{v:"0",t:"Synchronised"},{v:"1",t:"Lag on inspiration"},{v:"2",t:"See-saw"}] },
@@ -3347,7 +3347,7 @@
       return { v:s, u:"/10", i:b+". Ref: Silverman & Andersen, Pediatrics 1956." };
     } },
 
-  { id:"ashworth", cat:"Neurology", icon:"🧠", title:"Modified Ashworth Scale (Spasticity)",
+  { id:"ashworth", cat:"Neurology", icon:"", title:"Modified Ashworth Scale (Spasticity)",
     desc:"Muscle tone / spasticity on passive movement.",
     inputs:[
       { id:"grade", label:"Tone", type:"select", opts:[
@@ -3359,7 +3359,7 @@
       return { v:v.grade==="1p"?"1+":v.grade, u:"", i:m[v.grade]+". Ref: Bohannon & Smith, Phys Ther 1987 (Modified Ashworth)." };
     } },
 
-  { id:"abi", cat:"Cardiovascular", icon:"🦵", title:"Ankle-Brachial Index (ABI)",
+  { id:"abi", cat:"Cardiovascular", icon:"", title:"Ankle-Brachial Index (ABI)",
     desc:"Screens for peripheral arterial disease.",
     inputs:[
       { id:"ankle", label:"Higher ankle systolic pressure (that leg)", type:"number", unit:"mmHg", step:"1" },
@@ -3372,7 +3372,7 @@
       return { v:r1(abi*100)/100, u:"", i:b+". Ref: standard vascular assessment." };
     } },
 
-  { id:"pack_years", cat:"General", icon:"🚬", title:"Smoking Pack-Years",
+  { id:"pack_years", cat:"General", icon:"", title:"Smoking Pack-Years",
     desc:"Cumulative cigarette exposure.",
     inputs:[
       { id:"cpd", label:"Cigarettes per day", type:"number", step:"1" },
@@ -3384,7 +3384,7 @@
       return { v:r1(py), u:"pack-years", i:"Cumulative smoking exposure (1 pack-year = 20 cigarettes/day for 1 year). ≥ ~20–30 pack-years markedly raises lung-cancer and COPD risk. Ref: standard definition." };
     } },
 
-  { id:"phq2", cat:"Psychiatry", icon:"🧠", title:"PHQ-2 (Depression Screen)",
+  { id:"phq2", cat:"Psychiatry", icon:"", title:"PHQ-2 (Depression Screen)",
     desc:"Ultra-brief screen for depression over the past 2 weeks.",
     inputs:[
       { id:"q1", label:"Little interest or pleasure in doing things", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
@@ -3396,7 +3396,7 @@
       return { v:s, u:"/6", i:b+". Ref: Kroenke, Med Care 2003 (PHQ-2)." };
     } },
 
-  { id:"whr", cat:"General", icon:"⚖️", title:"Waist-Hip Ratio",
+  { id:"whr", cat:"General", icon:"", title:"Waist-Hip Ratio",
     desc:"Central adiposity and cardiometabolic risk.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -3411,7 +3411,7 @@
       return { v:r1(r*100)/100, u:"", i:b+" (threshold "+thr+" for the selected sex). Ref: WHO waist-hip ratio guidance." };
     } },
 
-  { id:"bristol", cat:"Gastroenterology", icon:"🩹", title:"Bristol Stool Form Scale",
+  { id:"bristol", cat:"Gastroenterology", icon:"", title:"Bristol Stool Form Scale",
     desc:"Classifies stool form as a marker of transit.",
     inputs:[
       { id:"type", label:"Stool appearance", type:"select", opts:[
@@ -3424,7 +3424,7 @@
       return { v:"Type "+n, u:"", i:b+". Ref: Lewis & Heaton, Scand J Gastroenterol 1997 (Bristol)." };
     } },
 
-  { id:"apache2", cat:"Critical care", icon:"🚨", title:"APACHE II Score",
+  { id:"apache2", cat:"Critical care", icon:"", title:"APACHE II Score",
     desc:"ICU severity of illness and mortality estimate (worst values in first 24 h).",
     inputs:[
       { id:"temp", label:"Temperature (°C, core)", type:"select", opts:[{v:"0",t:"36–38.4"},{v:"1",t:"38.5–38.9"},{v:"3",t:"39–40.9"},{v:"4",t:"≥ 41"},{v:"1b",t:"34–35.9"},{v:"2",t:"32–33.9"},{v:"3b",t:"30–31.9"},{v:"4b",t:"≤ 29.9"}] },
@@ -3452,7 +3452,7 @@
       return { v:s, u:"points", i:"Approximate non-operative hospital mortality "+mort+" (also depends on diagnosis). Ref: Knaus, Crit Care Med 1985 (APACHE II)." };
     } },
 
-  { id:"ipss_r", cat:"Haematology", icon:"🩸", title:"IPSS-R (Myelodysplastic Syndrome)",
+  { id:"ipss_r", cat:"Haematology", icon:"", title:"IPSS-R (Myelodysplastic Syndrome)",
     desc:"Revised International Prognostic Scoring System for MDS.",
     inputs:[
       { id:"cyto", label:"Cytogenetic risk group", type:"select", opts:[{v:"0",t:"Very good"},{v:"1",t:"Good"},{v:"2",t:"Intermediate"},{v:"3",t:"Poor"},{v:"4",t:"Very poor"}] },
@@ -3467,7 +3467,7 @@
       return { v:r1(s), u:"points", i:b+" (IPSS-R prognostic category). Ref: Greenberg, Blood 2012 (IPSS-R)." };
     } },
 
-  { id:"ad8", cat:"Neurology", icon:"🧠", title:"AD8 Dementia Screening Interview",
+  { id:"ad8", cat:"Neurology", icon:"", title:"AD8 Dementia Screening Interview",
     desc:"Informant-rated screen for cognitive change. Tick each item that represents a CHANGE.",
     inputs:[
       { id:"q1", label:"Problems with judgment (bad decisions, finances)", type:"check" },
@@ -3485,7 +3485,7 @@
       return { v:s, u:"/8", i:b+". Ref: Galvin, Neurology 2005 (AD8)." };
     } },
 
-  { id:"rome4_ibs", cat:"Gastroenterology", icon:"🩹", title:"Rome IV Criteria (Irritable Bowel Syndrome)",
+  { id:"rome4_ibs", cat:"Gastroenterology", icon:"", title:"Rome IV Criteria (Irritable Bowel Syndrome)",
     desc:"Diagnostic criteria for IBS (apply after excluding alarm features / organic disease).",
     inputs:[
       { id:"pain", label:"Recurrent abdominal pain, on average ≥ 1 day/week in the last 3 months", type:"check" },
@@ -3500,7 +3500,7 @@
       return { v: meets?"Meets Rome IV IBS criteria":"Does not meet criteria", u:"", i:(meets?"Consistent with IBS (subtype by predominant stool form)":"Requires abdominal pain ≥1 day/week for 3 months, onset ≥6 months ago, plus ≥2 of the 3 associations")+". Exclude alarm features. Ref: Rome IV, Gastroenterology 2016." };
     } },
 
-  { id:"dapsa", cat:"Rheumatology", icon:"🦴", title:"DAPSA (Psoriatic Arthritis Activity)",
+  { id:"dapsa", cat:"Rheumatology", icon:"", title:"DAPSA (Psoriatic Arthritis Activity)",
     desc:"Disease Activity in Psoriatic Arthritis.",
     inputs:[
       { id:"tjc", label:"Tender joint count (of 68)", type:"number", step:"1" },
@@ -3516,7 +3516,7 @@
       return { v:r1(s), u:"", i:b+". Note: CRP entered in mg/dL. Ref: Schoels, Ann Rheum Dis 2010 (DAPSA)." };
     } },
 
-  { id:"hit_4ts", cat:"Haematology", icon:"🩸", title:"4Ts Score (Heparin-Induced Thrombocytopenia)",
+  { id:"hit_4ts", cat:"Haematology", icon:"", title:"4Ts Score (Heparin-Induced Thrombocytopenia)",
     desc:"Pre-test probability of heparin-induced thrombocytopenia.",
     inputs:[
       { id:"thrombocytopenia", label:"Thrombocytopenia", type:"select", opts:[{v:"0",t:"Fall < 30% or nadir < 10 ×10⁹/L"},{v:"1",t:"Fall 30–50% or nadir 10–19 ×10⁹/L"},{v:"2",t:"Fall > 50% and nadir ≥ 20 ×10⁹/L"}] },
@@ -3530,7 +3530,7 @@
       return { v:s, u:"/8", i:b+". Guides HIT antibody testing and empirical management. Ref: Lo, J Thromb Haemost 2006 (4Ts)." };
     } },
 
-  { id:"cornell_lvh", cat:"Cardiovascular", icon:"❤️", title:"Cornell Voltage Criteria (LVH)",
+  { id:"cornell_lvh", cat:"Cardiovascular", icon:"", title:"Cornell Voltage Criteria (LVH)",
     desc:"ECG voltage criteria for left ventricular hypertrophy.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -3545,7 +3545,7 @@
       return { v:r1(sum), u:"mm", i:b+" (threshold "+thr+" mm for the selected sex). Ref: Casale, Circulation 1987 (Cornell)." };
     } },
 
-  { id:"sarcf", cat:"General", icon:"🚶", title:"SARC-F (Sarcopenia Screen)",
+  { id:"sarcf", cat:"General", icon:"", title:"SARC-F (Sarcopenia Screen)",
     desc:"Screens for sarcopenia (self-reported functional decline).",
     inputs:[
       { id:"strength", label:"Difficulty lifting/carrying ~4.5 kg", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Some"},{v:"2",t:"A lot / unable"}] },
@@ -3560,7 +3560,7 @@
       return { v:s, u:"/10", i:b+". Ref: Malmstrom, J Cachexia Sarcopenia Muscle 2016 (SARC-F)." };
     } },
 
-  { id:"cam", cat:"Neurology", icon:"🧠", title:"Confusion Assessment Method (CAM)",
+  { id:"cam", cat:"Neurology", icon:"", title:"Confusion Assessment Method (CAM)",
     desc:"Bedside diagnosis of delirium.",
     inputs:[
       { id:"acute", label:"Feature 1: acute onset AND fluctuating course", type:"check" },
@@ -3573,7 +3573,7 @@
       return { v: pos?"Delirium likely (CAM positive)":"CAM negative", u:"", i:(pos?"Meets CAM criteria — features 1 and 2 plus 3 or 4":"Does not meet CAM criteria; reassess as delirium fluctuates")+". Ref: Inouye, Ann Intern Med 1990 (CAM)." };
     } },
 
-  { id:"meld_na", cat:"Hepatology", icon:"🩺", title:"MELD-Na Score",
+  { id:"meld_na", cat:"Hepatology", icon:"", title:"MELD-Na Score",
     desc:"Liver disease severity incorporating sodium (transplant prioritisation).",
     inputs:[
       { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1" },
@@ -3594,7 +3594,7 @@
       return { v:mn, u:"", i:band+" (MELD-Na; sodium bounded 125–137, creatinine capped at 4). Ref: Kim, N Engl J Med 2008." };
     } },
 
-  { id:"rts", cat:"Critical care", icon:"🚑", title:"Revised Trauma Score (RTS)",
+  { id:"rts", cat:"Critical care", icon:"", title:"Revised Trauma Score (RTS)",
     desc:"Physiological severity in trauma triage.",
     inputs:[
       { id:"gcs", label:"Glasgow Coma Scale (3–15)", type:"number", step:"1" },
@@ -3611,7 +3611,7 @@
       return { v:r1(rts*100)/100, u:"", i:band+" (range 0–7.84; higher = better). Ref: Champion, J Trauma 1989 (RTS)." };
     } },
 
-  { id:"hestia", cat:"Respiratory", icon:"🫁", title:"Hestia Criteria (Outpatient PE)",
+  { id:"hestia", cat:"Respiratory", icon:"", title:"Hestia Criteria (Outpatient PE)",
     desc:"Whether pulmonary embolism can be managed as an outpatient. Any 'yes' excludes outpatient care.",
     inputs:[
       { id:"unstable", label:"Haemodynamically unstable", type:"check" },
@@ -3632,7 +3632,7 @@
       return { v: n===0?"May be suitable for outpatient care":n+" criterion/criteria present — admit", u:"", i:(n===0?"No Hestia criteria met — consider outpatient PE management with anticoagulation":"One or more Hestia criteria present — outpatient management not advised")+". Ref: Zondag, J Thromb Haemost 2011 (Hestia)." };
     } },
 
-  { id:"sokal", cat:"Haematology", icon:"🩸", title:"Sokal Index (Chronic Myeloid Leukaemia)",
+  { id:"sokal", cat:"Haematology", icon:"", title:"Sokal Index (Chronic Myeloid Leukaemia)",
     desc:"Prognostic index at diagnosis of chronic-phase CML.",
     inputs:[
       { id:"age", label:"Age", type:"number", unit:"years", step:"1" },
@@ -3648,7 +3648,7 @@
       return { v:r1(s*100)/100, u:"", i:band+". Ref: Sokal, Blood 1984." };
     } },
 
-  { id:"nlr", cat:"Haematology", icon:"🩸", title:"Neutrophil-Lymphocyte Ratio (NLR)",
+  { id:"nlr", cat:"Haematology", icon:"", title:"Neutrophil-Lymphocyte Ratio (NLR)",
     desc:"Marker of systemic inflammation and physiological stress.",
     inputs:[
       { id:"neut", label:"Neutrophil count", type:"number", unit:"×10⁹/L", step:"0.1" },
@@ -3661,7 +3661,7 @@
       return { v:r1(r), u:"", i:b+". Interpret with the clinical picture. Ref: standard haematology." };
     } },
 
-  { id:"plr", cat:"Haematology", icon:"🩸", title:"Platelet-Lymphocyte Ratio (PLR)",
+  { id:"plr", cat:"Haematology", icon:"", title:"Platelet-Lymphocyte Ratio (PLR)",
     desc:"Inflammatory and prognostic marker.",
     inputs:[
       { id:"plt", label:"Platelet count", type:"number", unit:"×10⁹/L", step:"1" },
@@ -3673,7 +3673,7 @@
       return { v:r0(r), u:"", i:"Higher values are associated with systemic inflammation and, in some cancers, a worse prognosis. Interpret with context. Ref: standard haematology." };
     } },
 
-  { id:"aec", cat:"Haematology", icon:"🩸", title:"Absolute Eosinophil Count",
+  { id:"aec", cat:"Haematology", icon:"", title:"Absolute Eosinophil Count",
     desc:"Absolute eosinophils from white cell count and differential.",
     inputs:[
       { id:"wbc", label:"White cell count", type:"number", unit:"×10⁹/L", step:"0.1" },
@@ -3686,7 +3686,7 @@
       return { v:r1(aec*100)/100, u:"×10⁹/L", i:b+". Ref: standard haematology." };
     } },
 
-  { id:"alc", cat:"Haematology", icon:"🩸", title:"Absolute Lymphocyte Count",
+  { id:"alc", cat:"Haematology", icon:"", title:"Absolute Lymphocyte Count",
     desc:"Absolute lymphocytes from white cell count and differential.",
     inputs:[
       { id:"wbc", label:"White cell count", type:"number", unit:"×10⁹/L", step:"0.1" },
@@ -3699,7 +3699,7 @@
       return { v:r1(alc*100)/100, u:"×10⁹/L", i:b+". Ref: standard haematology." };
     } },
 
-  { id:"bun_cr_ratio", cat:"Renal", icon:"🫘", title:"BUN/Creatinine Ratio",
+  { id:"bun_cr_ratio", cat:"Renal", icon:"", title:"BUN/Creatinine Ratio",
     desc:"Helps distinguish prerenal from intrinsic renal azotaemia.",
     inputs:[
       { id:"bun", label:"BUN", type:"number", unit:"mg/dL", step:"1" },
@@ -3712,7 +3712,7 @@
       return { v:r0(r), u:"", i:b+" (uses BUN, not urea). Ref: standard nephrology." };
     } },
 
-  { id:"modified_shock_index", cat:"Critical care", icon:"🚨", title:"Modified Shock Index",
+  { id:"modified_shock_index", cat:"Critical care", icon:"", title:"Modified Shock Index",
     desc:"Heart rate divided by mean arterial pressure.",
     inputs:[
       { id:"hr", label:"Heart rate", type:"number", unit:"bpm", step:"1" },
@@ -3728,7 +3728,7 @@
       return { v:r1(msi*100)/100, u:"", i:b+" (MAP "+r0(map)+" mmHg). Ref: standard critical care." };
     } },
 
-  { id:"pulse_pressure", cat:"Cardiovascular", icon:"❤️", title:"Pulse Pressure",
+  { id:"pulse_pressure", cat:"Cardiovascular", icon:"", title:"Pulse Pressure",
     desc:"Difference between systolic and diastolic blood pressure.",
     inputs:[
       { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg", step:"1" },
@@ -3742,7 +3742,7 @@
       return { v:r0(pp), u:"mmHg", i:b+". Ref: standard cardiovascular physiology." };
     } },
 
-  { id:"corrected_anion_gap", cat:"Renal", icon:"🧪", title:"Albumin-Corrected Anion Gap",
+  { id:"corrected_anion_gap", cat:"Renal", icon:"", title:"Albumin-Corrected Anion Gap",
     desc:"Adjusts the anion gap for hypoalbuminaemia.",
     inputs:[
       { id:"ag", label:"Measured anion gap", type:"number", unit:"mmol/L", step:"0.1" },
@@ -3755,7 +3755,7 @@
       return { v:r1(c), u:"mmol/L", i:b+" (adds ~0.25 mmol/L per g/L of albumin below 40). Ref: Figge, 1998." };
     } },
 
-  { id:"caprini", cat:"Cardiovascular", icon:"🩸", title:"Caprini VTE Risk Score (2005)",
+  { id:"caprini", cat:"Cardiovascular", icon:"", title:"Caprini VTE Risk Score (2005)",
     desc:"Venous thromboembolism risk in surgical and medical patients.",
     inputs:[
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"≤ 40"},{v:"1",t:"41–60"},{v:"2",t:"61–74"},{v:"3",t:"≥ 75"}] },
@@ -3804,7 +3804,7 @@
       return { v:s, u:"points", i:b+" (weigh against bleeding risk). Ref: Caprini, Dis Mon 2005." };
     } },
 
-  { id:"ldl_friedewald", cat:"Cardiovascular", icon:"❤️", title:"LDL Cholesterol (Friedewald)",
+  { id:"ldl_friedewald", cat:"Cardiovascular", icon:"", title:"LDL Cholesterol (Friedewald)",
     desc:"Estimates LDL cholesterol from a fasting lipid profile.",
     inputs:[
       { id:"tc", label:"Total cholesterol", type:"number", unit:"mmol/L", step:"0.1" },
@@ -3819,7 +3819,7 @@
       return { v:r1(ldl), u:"mmol/L", i:"Estimated LDL cholesterol (Friedewald); invalid in non-fasting samples or high triglycerides. Ref: Friedewald 1972." };
     } },
 
-  { id:"non_hdl", cat:"Cardiovascular", icon:"❤️", title:"Non-HDL Cholesterol",
+  { id:"non_hdl", cat:"Cardiovascular", icon:"", title:"Non-HDL Cholesterol",
     desc:"Total minus HDL cholesterol; a lipid treatment target valid non-fasting.",
     inputs:[
       { id:"tc", label:"Total cholesterol", type:"number", unit:"mmol/L", step:"0.1" },
@@ -3832,7 +3832,7 @@
       return { v:r1(n), u:"mmol/L", i:"Non-HDL cholesterol (valid in non-fasting samples); a target in lipid guidelines. Ref: standard lipidology." };
     } },
 
-  { id:"blood_volume", cat:"General", icon:"🩸", title:"Estimated Blood Volume",
+  { id:"blood_volume", cat:"General", icon:"", title:"Estimated Blood Volume",
     desc:"Total blood volume from weight and patient group.",
     inputs:[
       { id:"group", label:"Patient group", type:"select", opts:[{v:"75",t:"Adult male (75 mL/kg)"},{v:"65",t:"Adult female (65 mL/kg)"},{v:"80",t:"Child (80 mL/kg)"},{v:"85",t:"Infant (85 mL/kg)"},{v:"90",t:"Neonate (90 mL/kg)"},{v:"95",t:"Premature neonate (95 mL/kg)"}] },
@@ -3844,7 +3844,7 @@
       return { v:r0(vol), u:"mL", i:"Estimated total blood volume ("+Number(v.group)+" mL/kg). Useful for exchange transfusion and maximal allowable blood loss. Ref: standard reference." };
     } },
 
-  { id:"femg", cat:"Renal", icon:"🫘", title:"Fractional Excretion of Magnesium (FEMg)",
+  { id:"femg", cat:"Renal", icon:"", title:"Fractional Excretion of Magnesium (FEMg)",
     desc:"Assesses renal magnesium handling in hypomagnesaemia.",
     inputs:[
       { id:"umg", label:"Urine magnesium", type:"number", unit:"mmol/L", step:"0.01" },
@@ -3859,7 +3859,7 @@
       return { v:r1(fe), u:"%", i:b+" (0.7 factor corrects for protein-bound magnesium; use consistent creatinine units). Ref: standard nephrology." };
     } },
 
-  { id:"gad2", cat:"Psychiatry", icon:"🧠", title:"GAD-2 (Anxiety Screen)",
+  { id:"gad2", cat:"Psychiatry", icon:"", title:"GAD-2 (Anxiety Screen)",
     desc:"Ultra-brief screen for generalised anxiety over the past 2 weeks.",
     inputs:[
       { id:"q1", label:"Feeling nervous, anxious or on edge", type:"select", opts:[{v:"0",t:"Not at all"},{v:"1",t:"Several days"},{v:"2",t:"More than half the days"},{v:"3",t:"Nearly every day"}] },
@@ -3871,7 +3871,7 @@
       return { v:s, u:"/6", i:b+". Ref: Kroenke, Ann Intern Med 2007 (GAD-2)." };
     } },
 
-  { id:"fagerstrom", cat:"Psychiatry", icon:"🚬", title:"Fagerström Test for Nicotine Dependence",
+  { id:"fagerstrom", cat:"Psychiatry", icon:"", title:"Fagerström Test for Nicotine Dependence",
     desc:"Severity of physical nicotine dependence.",
     inputs:[
       { id:"time", label:"Time to first cigarette after waking", type:"select", opts:[{v:"0",t:"> 60 min"},{v:"1",t:"31–60 min"},{v:"2",t:"6–30 min"},{v:"3",t:"≤ 5 min"}] },
@@ -3887,7 +3887,7 @@
       return { v:s, u:"/10", i:b+". Ref: Heatherton, Br J Addict 1991 (FTND)." };
     } },
 
-  { id:"qtcf", cat:"Cardiovascular", icon:"❤️", title:"Corrected QT — Fridericia (QTcF)",
+  { id:"qtcf", cat:"Cardiovascular", icon:"", title:"Corrected QT — Fridericia (QTcF)",
     desc:"Rate-corrected QT using the Fridericia (cube-root) formula.",
     inputs:[
       { id:"qt", label:"Measured QT interval", type:"number", unit:"ms", step:"1" },
@@ -3901,7 +3901,7 @@
       return { v:r0(qtcf), u:"ms", i:b+" (Fridericia; more reliable than Bazett at extremes of heart rate). Ref: Fridericia 1920." };
     } },
 
-  { id:"nrs2002", cat:"General", icon:"🍎", title:"Nutritional Risk Screening (NRS-2002)",
+  { id:"nrs2002", cat:"General", icon:"", title:"Nutritional Risk Screening (NRS-2002)",
     desc:"Screens hospitalised adults for nutritional risk.",
     inputs:[
       { id:"nut", label:"Impaired nutritional status", type:"select", opts:[{v:"0",t:"Normal"},{v:"1",t:"Mild — wt loss >5% in 3 months or intake 50–75%"},{v:"2",t:"Moderate — wt loss >5% in 2 months, BMI 18.5–20.5 + impaired condition, or intake 25–50%"},{v:"3",t:"Severe — wt loss >5% in 1 month, BMI <18.5 + impaired condition, or intake 0–25%"}] },
@@ -3914,7 +3914,7 @@
       return { v:s, u:"points", i:b+". Ref: Kondrup, Clin Nutr 2003 (NRS-2002)." };
     } },
 
-  { id:"harris_benedict", cat:"General", icon:"🍎", title:"Harris-Benedict Equation (Energy Needs)",
+  { id:"harris_benedict", cat:"General", icon:"", title:"Harris-Benedict Equation (Energy Needs)",
     desc:"Basal metabolic rate and estimated daily energy requirement.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -3930,7 +3930,7 @@
       return { v:r0(bmr), u:"kcal/day", i:"Basal metabolic rate; estimated total daily energy ≈ "+r0(tdee)+" kcal/day at the selected factor. Ref: Roza & Shizgal 1984 (revised Harris-Benedict)." };
     } },
 
-  { id:"stool_osmotic_gap", cat:"Gastroenterology", icon:"🩹", title:"Stool Osmotic Gap",
+  { id:"stool_osmotic_gap", cat:"Gastroenterology", icon:"", title:"Stool Osmotic Gap",
     desc:"Distinguishes osmotic from secretory diarrhoea.",
     inputs:[
       { id:"na", label:"Stool sodium", type:"number", unit:"mmol/L", step:"1" },
@@ -3943,7 +3943,7 @@
       return { v:r0(gap), u:"mOsm/kg", i:b+" (assumes a stool osmolality of ~290). Ref: standard gastroenterology." };
     } },
 
-  { id:"abc2_ich_volume", cat:"Neurology", icon:"🧠", title:"ABC/2 Intracerebral Haemorrhage Volume",
+  { id:"abc2_ich_volume", cat:"Neurology", icon:"", title:"ABC/2 Intracerebral Haemorrhage Volume",
     desc:"Estimates haematoma volume from CT dimensions.",
     inputs:[
       { id:"a", label:"Greatest diameter (A)", type:"number", unit:"cm", step:"0.1" },
@@ -3957,7 +3957,7 @@
       return { v:r1(vol), u:"mL", i:big+"Ellipsoid approximation of intracerebral haematoma volume. Ref: Kothari, Stroke 1996 (ABC/2)." };
     } },
 
-  { id:"whtr", cat:"General", icon:"⚖️", title:"Waist-to-Height Ratio",
+  { id:"whtr", cat:"General", icon:"", title:"Waist-to-Height Ratio",
     desc:"Central adiposity relative to height.",
     inputs:[
       { id:"waist", label:"Waist circumference", type:"number", unit:"cm", step:"0.1" },
@@ -3970,7 +3970,7 @@
       return { v:r1(r*100)/100, u:"", i:b+" (a simple rule: keep waist under half of height). Ref: Ashwell, standard reference." };
     } },
 
-  { id:"pbw_ardsnet", cat:"Critical care", icon:"🫁", title:"Predicted Body Weight & Lung-Protective Tidal Volume",
+  { id:"pbw_ardsnet", cat:"Critical care", icon:"", title:"Predicted Body Weight & Lung-Protective Tidal Volume",
     desc:"ARDSNet predicted body weight and 6 mL/kg tidal-volume target.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -3984,7 +3984,7 @@
       return { v:r1(pbw), u:"kg", i:"Predicted body weight; lung-protective tidal volume ≈ "+r0(6*pbw)+" mL (6 mL/kg PBW). Ref: ARDSNet, N Engl J Med 2000." };
     } },
 
-  { id:"fractional_shortening", cat:"Cardiovascular", icon:"❤️", title:"LV Fractional Shortening",
+  { id:"fractional_shortening", cat:"Cardiovascular", icon:"", title:"LV Fractional Shortening",
     desc:"Echocardiographic measure of left-ventricular systolic function.",
     inputs:[
       { id:"lvedd", label:"LV end-diastolic diameter", type:"number", unit:"mm", step:"0.1" },
@@ -3998,7 +3998,7 @@
       return { v:r1(fs), u:"%", i:b+" (normal ~25–45%). Ref: standard echocardiography." };
     } },
 
-  { id:"mifflin", cat:"General", icon:"🍎", title:"Mifflin-St Jeor Equation (Energy Needs)",
+  { id:"mifflin", cat:"General", icon:"", title:"Mifflin-St Jeor Equation (Energy Needs)",
     desc:"Basal metabolic rate and estimated daily energy requirement.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -4014,7 +4014,7 @@
       return { v:r0(bmr), u:"kcal/day", i:"Basal metabolic rate; total daily energy ≈ "+r0(tdee)+" kcal/day at the selected factor (often preferred over Harris-Benedict). Ref: Mifflin, Am J Clin Nutr 1990." };
     } },
 
-  { id:"body_fat", cat:"General", icon:"⚖️", title:"Body Fat Percentage (Deurenberg)",
+  { id:"body_fat", cat:"General", icon:"", title:"Body Fat Percentage (Deurenberg)",
     desc:"Estimates body fat from BMI, age and sex.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -4027,7 +4027,7 @@
       return { v:r1(bf), u:"%", i:"Estimated body fat (Deurenberg); a population estimate, less accurate at extremes of physique. Ref: Deurenberg, Br J Nutr 1991." };
     } },
 
-  { id:"sgarbossa_smith", cat:"Cardiovascular", icon:"❤️", title:"Modified Sgarbossa Criteria (MI in LBBB/Paced)",
+  { id:"sgarbossa_smith", cat:"Cardiovascular", icon:"", title:"Modified Sgarbossa Criteria (MI in LBBB/Paced)",
     desc:"Diagnoses acute MI in left bundle branch block or ventricular pacing.",
     inputs:[
       { id:"concordant_ste", label:"Concordant ST elevation ≥ 1 mm in ≥ 1 lead", type:"check" },
@@ -4039,7 +4039,7 @@
       return { v: pos?"Positive — acute MI likely":"Negative", u:"", i:(pos?"At least one modified Sgarbossa criterion met — consistent with acute coronary occlusion":"No criterion met; does not exclude MI — correlate clinically and with serial ECG/troponin")+". Ref: Smith, Ann Emerg Med 2012." };
     } },
 
-  { id:"cao2", cat:"Critical care", icon:"🫁", title:"Arterial Oxygen Content (CaO₂)",
+  { id:"cao2", cat:"Critical care", icon:"", title:"Arterial Oxygen Content (CaO₂)",
     desc:"Total oxygen carried in arterial blood.",
     inputs:[
       { id:"hb", label:"Haemoglobin", type:"number", unit:"g/dL", step:"0.1" },
@@ -4052,7 +4052,7 @@
       return { v:r1(cao2), u:"mL O₂/dL", i:"Arterial oxygen content (haemoglobin-bound plus dissolved). Multiply by cardiac output ×10 for oxygen delivery. Ref: standard physiology." };
     } },
 
-  { id:"green_king", cat:"Haematology", icon:"🩸", title:"Green & King Index (Thalassaemia vs Iron Deficiency)",
+  { id:"green_king", cat:"Haematology", icon:"", title:"Green & King Index (Thalassaemia vs Iron Deficiency)",
     desc:"Discriminates beta-thalassaemia trait from iron deficiency in microcytosis.",
     inputs:[
       { id:"mcv", label:"MCV", type:"number", unit:"fL", step:"0.1" },
@@ -4066,7 +4066,7 @@
       return { v:r1(idx), u:"", i:b+" (cut-off ~72; confirm with ferritin and haemoglobin studies). Ref: Green & King 1989." };
     } },
 
-  { id:"qtc_fram", cat:"Cardiovascular", icon:"❤️", title:"Corrected QT — Framingham (QTcFram)",
+  { id:"qtc_fram", cat:"Cardiovascular", icon:"", title:"Corrected QT — Framingham (QTcFram)",
     desc:"Linear heart-rate correction of the QT interval.",
     inputs:[
       { id:"qt", label:"Measured QT interval", type:"number", unit:"ms", step:"1" },
@@ -4080,7 +4080,7 @@
       return { v:r0(qtc), u:"ms", i:b+" (Framingham linear correction). Ref: Sagie, Am J Cardiol 1992." };
     } },
 
-  { id:"qtc_hodges", cat:"Cardiovascular", icon:"❤️", title:"Corrected QT — Hodges (QTcH)",
+  { id:"qtc_hodges", cat:"Cardiovascular", icon:"", title:"Corrected QT — Hodges (QTcH)",
     desc:"Heart-rate correction of the QT interval (Hodges).",
     inputs:[
       { id:"qt", label:"Measured QT interval", type:"number", unit:"ms", step:"1" },
@@ -4093,7 +4093,7 @@
       return { v:r0(qtc), u:"ms", i:b+" (Hodges correction; performs consistently across heart rates). Ref: Hodges 1983." };
     } },
 
-  { id:"minute_ventilation", cat:"Critical care", icon:"🫁", title:"Minute Ventilation",
+  { id:"minute_ventilation", cat:"Critical care", icon:"", title:"Minute Ventilation",
     desc:"Total volume of gas moved by the lungs per minute.",
     inputs:[
       { id:"rr", label:"Respiratory rate", type:"number", unit:"/min", step:"1" },
@@ -4106,7 +4106,7 @@
       return { v:r1(mv), u:"L/min", i:b+". Ref: standard respiratory physiology." };
     } },
 
-  { id:"ferriman_gallwey", cat:"Endocrine", icon:"🧬", title:"Ferriman-Gallwey Hirsutism Score",
+  { id:"ferriman_gallwey", cat:"Endocrine", icon:"", title:"Ferriman-Gallwey Hirsutism Score",
     desc:"Grades terminal hair in 9 androgen-sensitive areas (each 0–4).",
     inputs:[
       { id:"lip", label:"Upper lip", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
@@ -4126,7 +4126,7 @@
       return { v:s, u:"/36", i:b+" (threshold ~8 in many populations; lower in some East Asian groups). Ref: Ferriman & Gallwey 1961." };
     } },
 
-  { id:"rancho", cat:"Neurology", icon:"🧠", title:"Rancho Los Amigos Cognitive Scale",
+  { id:"rancho", cat:"Neurology", icon:"", title:"Rancho Los Amigos Cognitive Scale",
     desc:"Level of cognitive functioning after brain injury.",
     inputs:[
       { id:"level", label:"Level", type:"select", opts:[{v:"I",t:"I — No response"},{v:"II",t:"II — Generalised response"},{v:"III",t:"III — Localised response"},{v:"IV",t:"IV — Confused, agitated"},{v:"V",t:"V — Confused, inappropriate, non-agitated"},{v:"VI",t:"VI — Confused, appropriate"},{v:"VII",t:"VII — Automatic, appropriate"},{v:"VIII",t:"VIII — Purposeful, appropriate"},{v:"IX",t:"IX — Purposeful with standby assistance"},{v:"X",t:"X — Purposeful, modified independent"}] }
@@ -4136,7 +4136,7 @@
       return { v:"Level "+v.level, u:"", i:m[v.level]+". Ref: Hagen et al. (Rancho Los Amigos)." };
     } },
 
-  { id:"asia_impairment", cat:"Neurology", icon:"🧠", title:"ASIA Impairment Scale (Spinal Cord Injury)",
+  { id:"asia_impairment", cat:"Neurology", icon:"", title:"ASIA Impairment Scale (Spinal Cord Injury)",
     desc:"Grades severity of spinal cord injury.",
     inputs:[
       { id:"grade", label:"Grade", type:"select", opts:[{v:"A",t:"A — Complete: no motor or sensory function in S4–S5"},{v:"B",t:"B — Sensory incomplete"},{v:"C",t:"C — Motor incomplete: majority of key muscles below level grade < 3"},{v:"D",t:"D — Motor incomplete: majority grade ≥ 3"},{v:"E",t:"E — Normal motor and sensory"}] }
@@ -4146,7 +4146,7 @@
       return { v:"AIS "+v.grade, u:"", i:m[v.grade]+". Ref: ASIA / ISNCSCI standards." };
     } },
 
-  { id:"house_brackmann", cat:"Neurology", icon:"🧠", title:"House-Brackmann Facial Nerve Grading",
+  { id:"house_brackmann", cat:"Neurology", icon:"", title:"House-Brackmann Facial Nerve Grading",
     desc:"Severity of facial nerve dysfunction.",
     inputs:[
       { id:"grade", label:"Grade", type:"select", opts:[{v:"I",t:"I — Normal"},{v:"II",t:"II — Mild dysfunction"},{v:"III",t:"III — Moderate dysfunction"},{v:"IV",t:"IV — Moderately severe dysfunction"},{v:"V",t:"V — Severe dysfunction"},{v:"VI",t:"VI — Total paralysis"}] }
@@ -4156,7 +4156,7 @@
       return { v:"Grade "+v.grade, u:"", i:m[v.grade]+". Ref: House & Brackmann 1985." };
     } },
 
-  { id:"rai", cat:"Haematology", icon:"🩸", title:"Rai Staging (Chronic Lymphocytic Leukaemia)",
+  { id:"rai", cat:"Haematology", icon:"", title:"Rai Staging (Chronic Lymphocytic Leukaemia)",
     desc:"Prognostic staging of CLL (lymphocytosis assumed present).",
     inputs:[
       { id:"nodes", label:"Lymphadenopathy", type:"check" },
@@ -4170,7 +4170,7 @@
       return { v:"Stage "+stage, u:"", i:risk+" (lymphocytosis assumed; stage set by the highest feature present). Ref: Rai, Blood 1975." };
     } },
 
-  { id:"binet", cat:"Haematology", icon:"🩸", title:"Binet Staging (Chronic Lymphocytic Leukaemia)",
+  { id:"binet", cat:"Haematology", icon:"", title:"Binet Staging (Chronic Lymphocytic Leukaemia)",
     desc:"European prognostic staging of CLL.",
     inputs:[
       { id:"areas", label:"Involved lymphoid areas (of 5: cervical, axillary, inguinal nodes, spleen, liver)", type:"number", step:"1" },
@@ -4184,7 +4184,7 @@
       return { v:"Stage "+stage, u:"", i:m[stage]+". Ref: Binet, Cancer 1981." };
     } },
 
-  { id:"ann_arbor", cat:"Oncology", icon:"🎗️", title:"Ann Arbor Staging (Lymphoma)",
+  { id:"ann_arbor", cat:"Oncology", icon:"", title:"Ann Arbor Staging (Lymphoma)",
     desc:"Anatomical staging of Hodgkin and non-Hodgkin lymphoma.",
     inputs:[
       { id:"stage", label:"Extent of disease", type:"select", opts:[{v:"1",t:"I — one node region or single extralymphatic site"},{v:"2",t:"II — ≥2 node regions, same side of diaphragm"},{v:"3",t:"III — node regions both sides of the diaphragm"},{v:"4",t:"IV — diffuse extralymphatic involvement"}] },
@@ -4197,7 +4197,7 @@
       return { v:"Stage "+roman+suffix, u:"", i:"Ann Arbor (Cotswolds-modified); B symptoms and bulky/extranodal disease refine prognosis and treatment. Ref: Carbone 1971." };
     } },
 
-  { id:"iss_myeloma", cat:"Oncology", icon:"🎗️", title:"ISS (Multiple Myeloma Staging)",
+  { id:"iss_myeloma", cat:"Oncology", icon:"", title:"ISS (Multiple Myeloma Staging)",
     desc:"International Staging System for multiple myeloma.",
     inputs:[
       { id:"b2m", label:"Serum beta-2 microglobulin", type:"number", unit:"mg/L", step:"0.1" },
@@ -4210,7 +4210,7 @@
       return { v:"Stage "+stage, u:"", i:m[stage]+" (albumin in g/L). Consider R-ISS adding LDH and cytogenetics. Ref: Greipp, J Clin Oncol 2005 (ISS)." };
     } },
 
-  { id:"katz_adl", cat:"General", icon:"🧑‍🦽", title:"Katz Index of Independence in ADL",
+  { id:"katz_adl", cat:"General", icon:"", title:"Katz Index of Independence in ADL",
     desc:"Independence in six basic activities of daily living. Tick each performed INDEPENDENTLY.",
     inputs:[
       { id:"bathing", label:"Bathing", type:"check" },
@@ -4226,7 +4226,7 @@
       return { v:s, u:"/6", i:b+" (higher = more independent). Ref: Katz, JAMA 1963." };
     } },
 
-  { id:"lawton_iadl", cat:"General", icon:"🧑‍🦽", title:"Lawton Instrumental ADL Scale",
+  { id:"lawton_iadl", cat:"General", icon:"", title:"Lawton Instrumental ADL Scale",
     desc:"Independence in eight instrumental activities of daily living. Tick each performed INDEPENDENTLY.",
     inputs:[
       { id:"phone", label:"Using the telephone", type:"check" },
@@ -4244,7 +4244,7 @@
       return { v:s, u:"/8", i:b+" (higher = more independent; some versions score 5 items for men). Ref: Lawton & Brody 1969." };
     } },
 
-  { id:"mjoa", cat:"Neurology", icon:"🧠", title:"modified JOA Score (Cervical Myelopathy)",
+  { id:"mjoa", cat:"Neurology", icon:"", title:"modified JOA Score (Cervical Myelopathy)",
     desc:"Severity of degenerative cervical myelopathy.",
     inputs:[
       { id:"upper", label:"Motor — upper extremity", type:"select", opts:[{v:"5",t:"5 — normal"},{v:"4",t:"4 — slight clumsiness"},{v:"3",t:"3 — mild clumsiness"},{v:"2",t:"2 — uses knife/fork with difficulty"},{v:"1",t:"1 — cannot use knife/fork, feeds with spoon"},{v:"0",t:"0 — cannot feed self"}] },
@@ -4258,7 +4258,7 @@
       return { v:s, u:"/18", i:b+" (lower = worse; informs surgical decision-making). Ref: modified JOA (Benzel)." };
     } },
 
-  { id:"dasi", cat:"Cardiovascular", icon:"❤️", title:"Duke Activity Status Index (DASI)",
+  { id:"dasi", cat:"Cardiovascular", icon:"", title:"Duke Activity Status Index (DASI)",
     desc:"Functional capacity from activities the patient can do; estimates peak VO₂ / METs.",
     inputs:[
       { id:"a1", label:"Take care of yourself (eat, dress, bathe, use toilet)", type:"check" },
@@ -4281,7 +4281,7 @@
       return { v:r1(s), u:"points", i:"Estimated peak VO₂ ≈ "+r1(mets)+" METs (max DASI 58.2; higher = better functional capacity). Ref: Hlatky, Am J Cardiol 1989 (DASI)." };
     } },
 
-  { id:"basfi", cat:"Rheumatology", icon:"🦴", title:"BASFI — Score Interpreter",
+  { id:"basfi", cat:"Rheumatology", icon:"", title:"BASFI — Score Interpreter",
     desc:"Interprets a Bath Ankylosing Spondylitis Functional Index result. Administer the official BASFI and enter the 0–10 score.",
     inputs:[
       { id:"score", label:"BASFI score (0–10)", type:"number", step:"0.1" }
@@ -4292,7 +4292,7 @@
       return { v:r1(v.score), u:"/10", i:b+" (higher = worse; track alongside BASDAI). Ref: Calin, J Rheumatol 1994 (BASFI)." };
     } },
 
-  { id:"ballard", cat:"Paediatrics", icon:"👶", title:"New Ballard Score (Gestational Age)",
+  { id:"ballard", cat:"Paediatrics", icon:"", title:"New Ballard Score (Gestational Age)",
     desc:"Estimates gestational age from neuromuscular and physical maturity (scores per the Ballard figure).",
     inputs:[
       { id:"posture", label:"Posture", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
@@ -4315,7 +4315,7 @@
       return { v:r0(weeks), u:"weeks", i:"Estimated gestational age (maturity score "+s+", range −10 to 50). Ref: Ballard, J Pediatr 1991 (New Ballard Score)." };
     } },
 
-  { id:"burn_tbsa", cat:"General", icon:"🔥", title:"Burn TBSA (Rule of Nines, adult)",
+  { id:"burn_tbsa", cat:"General", icon:"", title:"Burn TBSA (Rule of Nines, adult)",
     desc:"Estimates total body surface area burned in adults.",
     inputs:[
       { id:"head", label:"Head and neck", type:"select", opts:[{v:"0",t:"None"},{v:"4.5",t:"Half"},{v:"9",t:"Full (9%)"}] },
@@ -4333,7 +4333,7 @@
       return { v:r1(s), u:"% TBSA", i:"Adult rule of nines (children differ — larger head, smaller legs). For patchy burns the patient's palm ≈ 1% TBSA. Ref: Wallace rule of nines." };
     } },
 
-  { id:"amts", cat:"Neurology", icon:"🧠", title:"Abbreviated Mental Test Score (AMTS, 10-item)",
+  { id:"amts", cat:"Neurology", icon:"", title:"Abbreviated Mental Test Score (AMTS, 10-item)",
     desc:"Rapid screen for cognitive impairment in older adults. Tick each answered correctly.",
     inputs:[
       { id:"age", label:"States their age", type:"check" },
@@ -4353,7 +4353,7 @@
       return { v:s, u:"/10", i:b+" (a score of ≤ 6 is the usual cut-off). Ref: Hodkinson, Age Ageing 1972 (AMTS)." };
     } },
 
-  { id:"hama", cat:"Psychiatry", icon:"🧠", title:"Hamilton Anxiety Rating Scale (HAM-A)",
+  { id:"hama", cat:"Psychiatry", icon:"", title:"Hamilton Anxiety Rating Scale (HAM-A)",
     desc:"Clinician-rated severity of anxiety (14 domains, each 0–4).",
     inputs:[
       { id:"anxious_mood", label:"Anxious mood", type:"select", opts:[{v:"0",t:"0 — absent"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"},{v:"4",t:"4 — very severe"}] },
@@ -4378,7 +4378,7 @@
       return { v:s, u:"/56", i:b+". Ref: Hamilton, Br J Med Psychol 1959 (HAM-A)." };
     } },
 
-  { id:"mna_sf", cat:"General", icon:"🍎", title:"MNA-SF — Score Interpreter",
+  { id:"mna_sf", cat:"General", icon:"", title:"MNA-SF — Score Interpreter",
     desc:"Interprets a Mini Nutritional Assessment — Short Form total. Administer the official MNA®-SF (© Société des Produits Nestlé; free for clinical use from mna-elderly.com) and enter the total.",
     inputs:[
       { id:"total", label:"MNA-SF total (0–14)", type:"number", step:"1" }
@@ -4390,7 +4390,7 @@
       return { v:s, u:"/14", i:b+". Obtain the validated MNA-SF from mna-elderly.com. Banding ref: Rubenstein, J Gerontol 2001. For a fully free alternative, see MUST or NRS-2002." };
     } },
 
-  { id:"absolute_retic", cat:"Haematology", icon:"🩸", title:"Absolute Reticulocyte Count",
+  { id:"absolute_retic", cat:"Haematology", icon:"", title:"Absolute Reticulocyte Count",
     desc:"Converts a reticulocyte percentage to an absolute count.",
     inputs:[
       { id:"retic", label:"Reticulocyte percentage", type:"number", unit:"%", step:"0.1" },
@@ -4403,7 +4403,7 @@
       return { v:r0(arc), u:"×10⁹/L", i:b+". Ref: standard haematology." };
     } },
 
-  { id:"uacr", cat:"Renal", icon:"🫘", title:"Urine Albumin-to-Creatinine Ratio (uACR)",
+  { id:"uacr", cat:"Renal", icon:"", title:"Urine Albumin-to-Creatinine Ratio (uACR)",
     desc:"Screens for and quantifies albuminuria.",
     inputs:[
       { id:"alb", label:"Urine albumin", type:"number", unit:"mg/L", step:"0.1" },
@@ -4416,7 +4416,7 @@
       return { v:r1(acr), u:"mg/mmol", i:b+" (KDIGO albuminuria category). Ref: KDIGO CKD guideline." };
     } },
 
-  { id:"upcr", cat:"Renal", icon:"🫘", title:"Urine Protein-to-Creatinine Ratio (uPCR)",
+  { id:"upcr", cat:"Renal", icon:"", title:"Urine Protein-to-Creatinine Ratio (uPCR)",
     desc:"Quantifies proteinuria from a spot urine sample.",
     inputs:[
       { id:"prot", label:"Urine protein", type:"number", unit:"mg/L", step:"1" },
@@ -4429,7 +4429,7 @@
       return { v:r1(pcr), u:"mg/mmol", i:b+" (nephrotic range roughly ≥ 300 mg/mmol). Ref: standard nephrology." };
     } },
 
-  { id:"west_haven", cat:"Hepatology", icon:"🩺", title:"West Haven Grade (Hepatic Encephalopathy)",
+  { id:"west_haven", cat:"Hepatology", icon:"", title:"West Haven Grade (Hepatic Encephalopathy)",
     desc:"Severity of overt hepatic encephalopathy.",
     inputs:[
       { id:"grade", label:"Clinical grade", type:"select", opts:[{v:"0",t:"0 — Minimal (covert); no clinical signs"},{v:"1",t:"I — Trivial lack of awareness, altered sleep, mild disorientation"},{v:"2",t:"II — Lethargy, disorientation to time, obvious personality change"},{v:"3",t:"III — Somnolence to stupor, gross disorientation, confusion"},{v:"4",t:"IV — Coma"}] }
@@ -4439,7 +4439,7 @@
       return { v:"Grade "+(v.grade==="0"?"0":["","I","II","III","IV"][Number(v.grade)]), u:"", i:m[v.grade]+". Ref: Conn / West Haven criteria." };
     } },
 
-  { id:"cpss", cat:"Neurology", icon:"🧠", title:"Cincinnati Prehospital Stroke Scale",
+  { id:"cpss", cat:"Neurology", icon:"", title:"Cincinnati Prehospital Stroke Scale",
     desc:"Rapid prehospital screen for stroke.",
     inputs:[
       { id:"face", label:"Facial droop (asymmetry on smiling/showing teeth)", type:"check" },
@@ -4452,7 +4452,7 @@
       return { v:n, u:"/3", i:b+". Ref: Kothari, Ann Emerg Med 1999 (CPSS)." };
     } },
 
-  { id:"rosier", cat:"Neurology", icon:"🧠", title:"ROSIER Scale (Stroke Recognition in ED)",
+  { id:"rosier", cat:"Neurology", icon:"", title:"ROSIER Scale (Stroke Recognition in ED)",
     desc:"Distinguishes acute stroke from mimics in the emergency department.",
     inputs:[
       { id:"loc", label:"Loss of consciousness or syncope", type:"check" },
@@ -4469,7 +4469,7 @@
       return { v:s, u:"points", i:b+". Ref: Nor, Lancet Neurol 2005 (ROSIER)." };
     } },
 
-  { id:"fick_co", cat:"Cardiovascular", icon:"❤️", title:"Cardiac Output (Fick, estimated)",
+  { id:"fick_co", cat:"Cardiovascular", icon:"", title:"Cardiac Output (Fick, estimated)",
     desc:"Estimates cardiac output from oxygen consumption and arteriovenous O₂ difference.",
     inputs:[
       { id:"vo2", label:"O₂ consumption (≈125 × BSA, or measured)", type:"number", unit:"mL/min", step:"1" },
@@ -4486,7 +4486,7 @@
       return { v:r1(co), u:"L/min", i:b+" (Fick principle). Ref: standard cardiovascular physiology." };
     } },
 
-  { id:"fontaine", cat:"Cardiovascular", icon:"🦵", title:"Fontaine Classification (Peripheral Arterial Disease)",
+  { id:"fontaine", cat:"Cardiovascular", icon:"", title:"Fontaine Classification (Peripheral Arterial Disease)",
     desc:"Clinical stage of lower-limb peripheral arterial disease.",
     inputs:[
       { id:"stage", label:"Stage", type:"select", opts:[{v:"1",t:"I — Asymptomatic"},{v:"2a",t:"IIa — Mild claudication (>200 m)"},{v:"2b",t:"IIb — Moderate–severe claudication (<200 m)"},{v:"3",t:"III — Ischaemic rest pain"},{v:"4",t:"IV — Ulceration or gangrene"}] }
@@ -4497,7 +4497,7 @@
       return { v:"Stage "+lab[v.stage], u:"", i:m[v.stage]+". Stages III–IV = critical limb ischaemia. Ref: Fontaine classification." };
     } },
 
-  { id:"rutherford", cat:"Cardiovascular", icon:"🦵", title:"Rutherford Classification (Peripheral Arterial Disease)",
+  { id:"rutherford", cat:"Cardiovascular", icon:"", title:"Rutherford Classification (Peripheral Arterial Disease)",
     desc:"Category of chronic limb ischaemia.",
     inputs:[
       { id:"cat", label:"Category", type:"select", opts:[{v:"0",t:"0 — Asymptomatic"},{v:"1",t:"1 — Mild claudication"},{v:"2",t:"2 — Moderate claudication"},{v:"3",t:"3 — Severe claudication"},{v:"4",t:"4 — Ischaemic rest pain"},{v:"5",t:"5 — Minor tissue loss"},{v:"6",t:"6 — Major tissue loss"}] }
@@ -4508,7 +4508,7 @@
       return { v:"Category "+n, u:"", i:m[n]+(n>=4?" — critical limb ischaemia":"")+". Ref: Rutherford, J Vasc Surg 1997." };
     } },
 
-  { id:"salter_harris", cat:"Musculoskeletal", icon:"🦴", title:"Salter-Harris Classification (Physeal Fracture)",
+  { id:"salter_harris", cat:"Musculoskeletal", icon:"", title:"Salter-Harris Classification (Physeal Fracture)",
     desc:"Classifies growth-plate (physeal) fractures in children.",
     inputs:[
       { id:"type", label:"Type", type:"select", opts:[{v:"1",t:"I — through the physis only"},{v:"2",t:"II — physis + metaphysis"},{v:"3",t:"III — physis + epiphysis (intra-articular)"},{v:"4",t:"IV — epiphysis + physis + metaphysis"},{v:"5",t:"V — crush injury of the physis"}] }
@@ -4518,7 +4518,7 @@
       return { v:"Type "+["","I","II","III","IV","V"][Number(v.type)], u:"", i:m[v.type]+" (higher types carry greater growth-disturbance risk). Ref: Salter & Harris 1963." };
     } },
 
-  { id:"fitzpatrick", cat:"Dermatology", icon:"🩹", title:"Fitzpatrick Skin Phototype",
+  { id:"fitzpatrick", cat:"Dermatology", icon:"", title:"Fitzpatrick Skin Phototype",
     desc:"Classifies skin type by response to ultraviolet light.",
     inputs:[
       { id:"type", label:"Phototype", type:"select", opts:[{v:"1",t:"I — always burns, never tans (pale white)"},{v:"2",t:"II — usually burns, tans minimally"},{v:"3",t:"III — sometimes burns, tans uniformly"},{v:"4",t:"IV — burns minimally, tans easily (olive)"},{v:"5",t:"V — rarely burns, tans profusely (brown)"},{v:"6",t:"VI — never burns (deeply pigmented)"}] }
@@ -4529,7 +4529,7 @@
       return { v:"Type "+["","I","II","III","IV","V","VI"][n], u:"", i:b+". Ref: Fitzpatrick 1988." };
     } },
 
-  { id:"lams", cat:"Neurology", icon:"🧠", title:"Los Angeles Motor Scale (LAMS)",
+  { id:"lams", cat:"Neurology", icon:"", title:"Los Angeles Motor Scale (LAMS)",
     desc:"Prehospital motor severity; screens for large-vessel occlusion.",
     inputs:[
       { id:"face", label:"Facial droop", type:"select", opts:[{v:"0",t:"Absent"},{v:"1",t:"Present"}] },
@@ -4542,7 +4542,7 @@
       return { v:s, u:"/5", i:b+". Ref: Nazliel, Stroke 2008 (LAMS)." };
     } },
 
-  { id:"robson", cat:"Obstetrics", icon:"🤰", title:"Robson Ten-Group Classification (Caesarean)",
+  { id:"robson", cat:"Obstetrics", icon:"", title:"Robson Ten-Group Classification (Caesarean)",
     desc:"Assigns the Robson group for auditing caesarean-section rates.",
     inputs:[
       { id:"fetuses", label:"Number of fetuses", type:"select", opts:[{v:"single",t:"Single"},{v:"multiple",t:"Multiple"}] },
@@ -4562,7 +4562,7 @@
       return { v:"Group "+g, u:"", i:m[g]+". Ref: Robson 2001 (WHO-endorsed CS audit)." };
     } },
 
-  { id:"acr_eular_ra", cat:"Rheumatology", icon:"🦴", title:"ACR/EULAR Rheumatoid Arthritis Classification (2010)",
+  { id:"acr_eular_ra", cat:"Rheumatology", icon:"", title:"ACR/EULAR Rheumatoid Arthritis Classification (2010)",
     desc:"Classification of RA (requires ≥1 joint with definite clinical synovitis not better explained by another disease).",
     inputs:[
       { id:"joints", label:"Joint involvement", type:"select", opts:[{v:"0",t:"1 large joint"},{v:"1",t:"2–10 large joints"},{v:"2",t:"1–3 small joints"},{v:"3",t:"4–10 small joints"},{v:"5",t:">10 joints (≥1 small)"}] },
@@ -4576,7 +4576,7 @@
       return { v:s, u:"/10", i:b+". Ref: Aletaha, Arthritis Rheum 2010 (ACR/EULAR)." };
     } },
 
-  { id:"corrected_age", cat:"Paediatrics", icon:"👶", title:"Corrected Age for Prematurity",
+  { id:"corrected_age", cat:"Paediatrics", icon:"", title:"Corrected Age for Prematurity",
     desc:"Adjusts a premature infant's age for the degree of prematurity.",
     inputs:[
       { id:"chrono", label:"Chronological age", type:"number", unit:"weeks", step:"1" },
@@ -4590,7 +4590,7 @@
       return { v:r1(corr), u:"weeks", i:"Corrected age ≈ "+wk+" wk "+d+" d (chronological age minus weeks of prematurity). Use until ~2–3 years for growth/development assessment. Ref: standard neonatology." };
     } },
 
-  { id:"rate_pressure_product", cat:"Cardiovascular", icon:"❤️", title:"Rate-Pressure Product (Double Product)",
+  { id:"rate_pressure_product", cat:"Cardiovascular", icon:"", title:"Rate-Pressure Product (Double Product)",
     desc:"Estimate of myocardial oxygen demand.",
     inputs:[
       { id:"hr", label:"Heart rate", type:"number", unit:"bpm", step:"1" },
@@ -4603,7 +4603,7 @@
       return { v:r0(rpp), u:"mmHg·bpm", i:b+" (rises with exertion; the ischaemic threshold is patient-specific). Ref: standard cardiovascular physiology." };
     } },
 
-  { id:"corrected_wbc", cat:"Haematology", icon:"🩸", title:"Corrected WBC for Nucleated RBCs",
+  { id:"corrected_wbc", cat:"Haematology", icon:"", title:"Corrected WBC for Nucleated RBCs",
     desc:"Corrects an automated white cell count when nucleated red cells are present.",
     inputs:[
       { id:"wbc", label:"Measured (uncorrected) WBC", type:"number", unit:"×10⁹/L", step:"0.1" },
@@ -4615,7 +4615,7 @@
       return { v:r1(c), u:"×10⁹/L", i:"True white cell count after removing nucleated red cells that were counted as leukocytes. Ref: standard haematology." };
     } },
 
-  { id:"gose", cat:"Neurology", icon:"🧠", title:"Glasgow Outcome Scale — Extended (GOS-E)",
+  { id:"gose", cat:"Neurology", icon:"", title:"Glasgow Outcome Scale — Extended (GOS-E)",
     desc:"Functional outcome after traumatic brain injury.",
     inputs:[
       { id:"grade", label:"Outcome category", type:"select", opts:[{v:"8",t:"8 — Upper good recovery"},{v:"7",t:"7 — Lower good recovery"},{v:"6",t:"6 — Upper moderate disability"},{v:"5",t:"5 — Lower moderate disability"},{v:"4",t:"4 — Upper severe disability"},{v:"3",t:"3 — Lower severe disability"},{v:"2",t:"2 — Vegetative state"},{v:"1",t:"1 — Dead"}] }
@@ -4625,7 +4625,7 @@
       return { v:"GOS-E "+v.grade, u:"", i:m[v.grade]+". Ref: Wilson, J Neurotrauma 1998 (GOS-E)." };
     } },
 
-  { id:"paeds_weight", cat:"Paediatrics", icon:"👶", title:"Paediatric Weight Estimate (APLS)",
+  { id:"paeds_weight", cat:"Paediatrics", icon:"", title:"Paediatric Weight Estimate (APLS)",
     desc:"Estimates a child's weight when it cannot be measured (emergencies).",
     inputs:[
       { id:"age", label:"Age", type:"number", unit:"years", step:"0.5" }
@@ -4637,7 +4637,7 @@
       return { v:r1(wt), u:"kg", i:"Estimated weight (APLS: 1–5y = 2×age+8; 6–12y = 3×age+7). An emergency estimate — weigh the child as soon as feasible. Ref: APLS." };
     } },
 
-  { id:"ett_size", cat:"Paediatrics", icon:"👶", title:"Paediatric ETT Size & Depth",
+  { id:"ett_size", cat:"Paediatrics", icon:"", title:"Paediatric ETT Size & Depth",
     desc:"Estimates endotracheal tube size and insertion depth by age.",
     inputs:[
       { id:"age", label:"Age", type:"number", unit:"years", step:"0.5" }
@@ -4648,7 +4648,7 @@
       return { v:r1(uncuffed), u:"mm ID (uncuffed)", i:"Cuffed internal diameter ≈ "+r1(cuffed)+" mm; oral insertion depth ≈ "+r1(depth)+" cm. For age ≥ 1 year (neonates/infants need dedicated sizing). Ref: standard paediatric airway (age/4 + 4)." };
     } },
 
-  { id:"ga_crl", cat:"Obstetrics", icon:"🤰", title:"Gestational Age from Crown-Rump Length",
+  { id:"ga_crl", cat:"Obstetrics", icon:"", title:"Gestational Age from Crown-Rump Length",
     desc:"First-trimester gestational age from CRL (Robinson-Fleming).",
     inputs:[
       { id:"crl", label:"Crown-rump length", type:"number", unit:"mm", step:"0.1" }
@@ -4660,7 +4660,7 @@
       return { v:wk+"+"+d, u:"weeks+days", i:"Estimated gestational age ("+r0(days)+" days); most accurate for CRL ~10–84 mm. Ref: Robinson & Fleming 1975." };
     } },
 
-  { id:"cardiac_index", cat:"Cardiovascular", icon:"❤️", title:"Cardiac Index",
+  { id:"cardiac_index", cat:"Cardiovascular", icon:"", title:"Cardiac Index",
     desc:"Cardiac output normalised to body surface area.",
     inputs:[
       { id:"co", label:"Cardiac output", type:"number", unit:"L/min", step:"0.1" },
@@ -4673,7 +4673,7 @@
       return { v:r1(ci), u:"L/min/m²", i:b+" (normal ~2.5–4.0). Ref: standard haemodynamics." };
     } },
 
-  { id:"stroke_volume", cat:"Cardiovascular", icon:"❤️", title:"Stroke Volume & Index",
+  { id:"stroke_volume", cat:"Cardiovascular", icon:"", title:"Stroke Volume & Index",
     desc:"Blood ejected per beat, from cardiac output and heart rate.",
     inputs:[
       { id:"co", label:"Cardiac output", type:"number", unit:"L/min", step:"0.1" },
@@ -4688,7 +4688,7 @@
       return { v:r1(sv), u:"mL", i:b+" (normal ~60–100 mL"+svi+"). Ref: standard haemodynamics." };
     } },
 
-  { id:"homa_b", cat:"Endocrine", icon:"🧬", title:"HOMA-%B (Beta-Cell Function)",
+  { id:"homa_b", cat:"Endocrine", icon:"", title:"HOMA-%B (Beta-Cell Function)",
     desc:"Estimates pancreatic beta-cell function from fasting values.",
     inputs:[
       { id:"ins", label:"Fasting insulin", type:"number", unit:"µU/mL", step:"0.1" },
@@ -4700,7 +4700,7 @@
       return { v:r0(b), u:"%", i:"Beta-cell function relative to a normal reference (~100%). Interpret alongside HOMA-IR. Ref: Matthews, Diabetologia 1985 (HOMA)." };
     } },
 
-  { id:"asdas_crp", cat:"Rheumatology", icon:"🦴", title:"ASDAS-CRP (Axial Spondyloarthritis Activity)",
+  { id:"asdas_crp", cat:"Rheumatology", icon:"", title:"ASDAS-CRP (Axial Spondyloarthritis Activity)",
     desc:"Ankylosing Spondylitis Disease Activity Score using CRP.",
     inputs:[
       { id:"backpain", label:"Back pain (BASDAI Q2, 0–10)", type:"number", step:"0.1" },
@@ -4717,7 +4717,7 @@
       return { v:Math.round(s*100)/100, u:"", i:b+" (CRP in mg/L). Ref: Lukas, Ann Rheum Dis 2009 (ASDAS)." };
     } },
 
-  { id:"ava_continuity", cat:"Cardiovascular", icon:"❤️", title:"Aortic Valve Area (Continuity Equation)",
+  { id:"ava_continuity", cat:"Cardiovascular", icon:"", title:"Aortic Valve Area (Continuity Equation)",
     desc:"Echocardiographic aortic valve area in aortic stenosis.",
     inputs:[
       { id:"lvot_d", label:"LVOT diameter", type:"number", unit:"cm", step:"0.1" },
@@ -4732,7 +4732,7 @@
       return { v:Math.round(ava*100)/100, u:"cm²", i:b+" (severe <1.0, moderate 1.0–1.5, mild 1.5–2.0 cm²). Ref: continuity equation (ASE)." };
     } },
 
-  { id:"svr", cat:"Critical care", icon:"❤️", title:"Systemic Vascular Resistance (SVR)",
+  { id:"svr", cat:"Critical care", icon:"", title:"Systemic Vascular Resistance (SVR)",
     desc:"Afterload estimate from mean arterial pressure, CVP and cardiac output.",
     inputs:[
       { id:"map", label:"Mean arterial pressure", type:"number", unit:"mmHg", step:"1" },
@@ -4746,7 +4746,7 @@
       return { v:r0(svr), u:"dyn·s·cm⁻⁵", i:b+" (normal ~800–1200). Ref: standard haemodynamics." };
     } },
 
-  { id:"mmrc_dyspnoea", cat:"Respiratory", icon:"🫁", title:"mMRC Dyspnoea Scale",
+  { id:"mmrc_dyspnoea", cat:"Respiratory", icon:"", title:"mMRC Dyspnoea Scale",
     desc:"Modified Medical Research Council breathlessness grade.",
     inputs:[
       { id:"grade", label:"Breathlessness", type:"select", opts:[
@@ -4763,7 +4763,7 @@
       return { v:g, u:"grade", i:b+". Ref: Fletcher CM; mMRC scale (GOLD)." };
     } },
 
-  { id:"canadian_cspine", cat:"Neurology", icon:"🦴", title:"Canadian C-Spine Rule",
+  { id:"canadian_cspine", cat:"Neurology", icon:"", title:"Canadian C-Spine Rule",
     desc:"Need for cervical-spine imaging after trauma (alert, stable, GCS 15).",
     inputs:[
       { id:"hr_age", label:"High-risk: age ≥65", type:"check" },
@@ -4785,7 +4785,7 @@
       return { v:"No imaging", u:"", i:"No high-risk factor, a low-risk factor allows safe assessment, and the neck rotates 45° both ways — imaging can be safely deferred. Applies only when GCS 15 and haemodynamically stable. Ref: Stiell IG, JAMA 2001." };
     } },
 
-  { id:"nutric", cat:"Critical care", icon:"🍽️", title:"mNUTRIC Score (Nutrition Risk)",
+  { id:"nutric", cat:"Critical care", icon:"", title:"mNUTRIC Score (Nutrition Risk)",
     desc:"Modified NUTRIC nutritional-risk score for critically ill adults (IL-6 omitted).",
     inputs:[
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<50"},{v:"1",t:"50–74"},{v:"2",t:"≥75"}] },
@@ -4800,7 +4800,7 @@
       return { v:s, u:"/9", i:b+". Modified NUTRIC. Ref: Heyland, Crit Care 2011; Rahman, Clin Nutr 2016." };
     } },
 
-  { id:"lbm", cat:"General", icon:"💪", title:"Lean Body Mass (Boer)",
+  { id:"lbm", cat:"General", icon:"", title:"Lean Body Mass (Boer)",
     desc:"Estimated lean body mass from weight, height and sex.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -4814,7 +4814,7 @@
       return { v:r1(lbm), u:"kg", i:"Estimated lean body mass (Boer formula); useful for weight-based drug dosing. Ref: Boer P, Am J Physiol 1984." };
     } },
 
-  { id:"tbw_watson", cat:"Renal", icon:"💧", title:"Total Body Water (Watson)",
+  { id:"tbw_watson", cat:"Renal", icon:"", title:"Total Body Water (Watson)",
     desc:"Estimated total body water from age, sex, height and weight.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -4831,7 +4831,7 @@
       return { v:r1(tbw), u:"L", i:"Estimated total body water (Watson formula); used in Kt/V and free-water calculations. Ref: Watson PE, Am J Clin Nutr 1980." };
     } },
 
-  { id:"nitrogen_balance", cat:"Critical care", icon:"🍽️", title:"Nitrogen Balance",
+  { id:"nitrogen_balance", cat:"Critical care", icon:"", title:"Nitrogen Balance",
     desc:"Daily nitrogen balance from protein intake and urinary urea nitrogen.",
     inputs:[
       { id:"protein", label:"Protein intake (24 h)", type:"number", unit:"g/day", step:"1" },
@@ -4844,7 +4844,7 @@
       return { v:r1(nb), u:"g N/day", i:b+". The constant of 4 g approximates non-urea and non-urinary losses. Ref: standard clinical-nutrition reference." };
     } },
 
-  { id:"pcl5", cat:"Psychiatry", icon:"🧠", title:"PCL-5 (PTSD Checklist) — score interpreter",
+  { id:"pcl5", cat:"Psychiatry", icon:"", title:"PCL-5 (PTSD Checklist) — score interpreter",
     desc:"Interprets a PCL-5 total for provisional DSM-5 PTSD.",
     inputs:[
       { id:"total", label:"PCL-5 total (0–80)", type:"number", step:"1" }
@@ -4856,7 +4856,7 @@
       return { v:s, u:"/80", i:b+". Administer the full instrument from the US National Center for PTSD (public domain). Ref: Blevins, J Trauma Stress 2015." };
     } },
 
-  { id:"allowable_blood_loss", cat:"Critical care", icon:"🩸", title:"Maximum Allowable Blood Loss",
+  { id:"allowable_blood_loss", cat:"Critical care", icon:"", title:"Maximum Allowable Blood Loss",
     desc:"Estimated allowable blood loss before a chosen haematocrit threshold.",
     inputs:[
       { id:"wt", label:"Weight", type:"number", unit:"kg", step:"0.1" },
@@ -4872,7 +4872,7 @@
       return { v:r0(abl), u:"mL", i:"Estimated maximum allowable blood loss before reaching the chosen haematocrit. Ref: Gross JB, Anesthesiology 1983." };
     } },
 
-  { id:"sokolow_lyon", cat:"Cardiovascular", icon:"📈", title:"Sokolow-Lyon LVH Criteria",
+  { id:"sokolow_lyon", cat:"Cardiovascular", icon:"", title:"Sokolow-Lyon LVH Criteria",
     desc:"ECG voltage criteria for left ventricular hypertrophy.",
     inputs:[
       { id:"sv1", label:"S wave in V1", type:"number", unit:"mm", step:"0.5" },
@@ -4886,7 +4886,7 @@
       return { v:r1(sum), u:"mm", i:b+" (threshold ≥35 mm; 10 mm = 1 mV at standard calibration). Ref: Sokolow & Lyon, Am Heart J 1949." };
     } },
 
-  { id:"pesi", cat:"Cardiovascular", icon:"🫁", title:"PESI (Pulmonary Embolism Severity Index)",
+  { id:"pesi", cat:"Cardiovascular", icon:"", title:"PESI (Pulmonary Embolism Severity Index)",
     desc:"30-day mortality risk class in acute pulmonary embolism.",
     inputs:[
       { id:"age", label:"Age (years, added as points)", type:"number", step:"1" },
@@ -4910,7 +4910,7 @@
       return { v:s, u:"points", i:cls+". Classes I–II may be considered for outpatient management. Ref: Aujesky, Am J Respir Crit Care Med 2005." };
     } },
 
-  { id:"gold_group", cat:"Respiratory", icon:"🫁", title:"GOLD ABE Assessment (COPD)",
+  { id:"gold_group", cat:"Respiratory", icon:"", title:"GOLD ABE Assessment (COPD)",
     desc:"2023 GOLD symptom/exacerbation group for stable COPD.",
     inputs:[
       { id:"exac", label:"≥2 moderate exacerbations, or ≥1 needing hospitalisation, in the past year", type:"check" },
@@ -4922,7 +4922,7 @@
       return { v:"Group "+g, u:"", i:d+". Ref: GOLD 2023 report." };
     } },
 
-  { id:"scorad", cat:"Dermatology", icon:"🧴", title:"SCORAD (Atopic Dermatitis Severity)",
+  { id:"scorad", cat:"Dermatology", icon:"", title:"SCORAD (Atopic Dermatitis Severity)",
     desc:"SCORing Atopic Dermatitis index (extent + intensity + subjective symptoms).",
     inputs:[
       { id:"extent", label:"Extent — % body surface affected (rule of nines)", type:"number", unit:"%", step:"1" },
@@ -4944,7 +4944,7 @@
       return { v:r1(score), u:"/103", i:b+" atopic dermatitis (mild <25, moderate 25–50, severe >50). Ref: European Task Force on Atopic Dermatitis, Dermatology 1993." };
     } },
 
-  { id:"afi", cat:"Obstetrics", icon:"🤰", title:"Amniotic Fluid Index (AFI)",
+  { id:"afi", cat:"Obstetrics", icon:"", title:"Amniotic Fluid Index (AFI)",
     desc:"Sum of the deepest vertical pocket in four uterine quadrants.",
     inputs:[
       { id:"q1", label:"Quadrant 1 pocket", type:"number", unit:"cm", step:"0.1" },
@@ -4959,7 +4959,7 @@
       return { v:r1(afi), u:"cm", i:b+" (oligohydramnios <5, normal 5–25, polyhydramnios >25 cm at term). Ref: Phelan, J Reprod Med 1987." };
     } },
 
-  { id:"iom_weight_gain", cat:"Obstetrics", icon:"🤰", title:"Pregnancy Weight-Gain Target (IOM)",
+  { id:"iom_weight_gain", cat:"Obstetrics", icon:"", title:"Pregnancy Weight-Gain Target (IOM)",
     desc:"Recommended total gestational weight gain (singleton) by pre-pregnancy BMI.",
     inputs:[
       { id:"bmi", label:"Pre-pregnancy BMI", type:"number", unit:"kg/m²", step:"0.1" }
@@ -4974,7 +4974,7 @@
       return { v:r, u:"", i:"Recommended total weight gain for a singleton pregnancy. Ref: Institute of Medicine 2009." };
     } },
 
-  { id:"flacc", cat:"Paediatrics", icon:"👶", title:"FLACC Pain Scale",
+  { id:"flacc", cat:"Paediatrics", icon:"", title:"FLACC Pain Scale",
     desc:"Behavioural pain assessment for young or non-verbal children.",
     inputs:[
       { id:"face", label:"Face", type:"select", opts:[{v:"0",t:"0 — no expression/smile"},{v:"1",t:"1 — occasional grimace, withdrawn"},{v:"2",t:"2 — frequent/constant frown, clenched jaw"}] },
@@ -4989,7 +4989,7 @@
       return { v:s, u:"/10", i:b+". Ref: Merkel S, Pediatr Nurs 1997 (FLACC)." };
     } },
 
-  { id:"bacterial_meningitis_score", cat:"Paediatrics", icon:"👶", title:"Bacterial Meningitis Score (Children)",
+  { id:"bacterial_meningitis_score", cat:"Paediatrics", icon:"", title:"Bacterial Meningitis Score (Children)",
     desc:"Risk of bacterial (vs aseptic) meningitis in children with CSF pleocytosis.",
     inputs:[
       { id:"gram", label:"Positive CSF Gram stain", type:"check" },
@@ -5004,7 +5004,7 @@
       return { v:s, u:"/5", i:b+". Validated in children >2 months, not critically ill and not pre-treated with antibiotics. Ref: Nigrovic, JAMA 2007." };
     } },
 
-  { id:"modified_fisher", cat:"Neurology", icon:"🧠", title:"Modified Fisher Scale (SAH)",
+  { id:"modified_fisher", cat:"Neurology", icon:"", title:"Modified Fisher Scale (SAH)",
     desc:"CT grading of subarachnoid haemorrhage to estimate vasospasm risk.",
     inputs:[
       { id:"sah", label:"Subarachnoid blood", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Thin (<1 mm)"},{v:"2",t:"Thick (≥1 mm)"}] },
@@ -5019,7 +5019,7 @@
       return { v:g, u:"grade", i:risk+" symptomatic vasospasm risk (grade "+g+"). Ref: Frontera, Neurosurgery 2006 (modified Fisher)." };
     } },
 
-  { id:"widmark", cat:"Toxicology", icon:"🍷", title:"Widmark Blood Alcohol Estimate",
+  { id:"widmark", cat:"Toxicology", icon:"", title:"Widmark Blood Alcohol Estimate",
     desc:"Estimated blood alcohol concentration (forensic approximation).",
     inputs:[
       { id:"grams", label:"Alcohol ingested", type:"number", unit:"g", step:"1" },
@@ -5036,7 +5036,7 @@
       return { v:r1(c), u:"g/L", i:"≈ "+pct+" g/100 mL (%). Forensic approximation only; individual clearance varies widely. One UK unit ≈ 8 g ethanol. Ref: Widmark 1932." };
     } },
 
-  { id:"dipss", cat:"Haematology", icon:"🩸", title:"DIPSS (Myelofibrosis Prognosis)",
+  { id:"dipss", cat:"Haematology", icon:"", title:"DIPSS (Myelofibrosis Prognosis)",
     desc:"Dynamic International Prognostic Scoring System for primary myelofibrosis.",
     inputs:[
       { id:"age", label:"Age >65 (+1)", type:"check" },
@@ -5051,7 +5051,7 @@
       return { v:s, u:"/6", i:b+" (anaemia is weighted 2 points in DIPSS). Ref: Passamonti, Blood 2010 (DIPSS)." };
     } },
 
-  { id:"r_iss", cat:"Haematology", icon:"🩸", title:"R-ISS (Revised ISS, Myeloma)",
+  { id:"r_iss", cat:"Haematology", icon:"", title:"R-ISS (Revised ISS, Myeloma)",
     desc:"Revised International Staging System for multiple myeloma.",
     inputs:[
       { id:"iss", label:"ISS stage", type:"select", opts:[{v:"1",t:"Stage I (β2M <3.5 mg/L & albumin ≥35 g/L)"},{v:"2",t:"Stage II"},{v:"3",t:"Stage III (β2M >5.5 mg/L)"}] },
@@ -5068,7 +5068,7 @@
       return { v:"R-ISS "+stage, u:"", i:"Revised ISS stage "+stage+" ("+b+"). Ref: Palumbo, J Clin Oncol 2015 (R-ISS)." };
     } },
 
-  { id:"rvsp", cat:"Cardiovascular", icon:"❤️", title:"RV Systolic Pressure (TR Jet)",
+  { id:"rvsp", cat:"Cardiovascular", icon:"", title:"RV Systolic Pressure (TR Jet)",
     desc:"Estimated right-ventricular systolic pressure from tricuspid regurgitation velocity.",
     inputs:[
       { id:"trv", label:"Peak TR velocity", type:"number", unit:"m/s", step:"0.1" },
@@ -5081,7 +5081,7 @@
       return { v:r0(p), u:"mmHg", i:b+" (equals systolic pulmonary artery pressure in the absence of RVOT obstruction/pulmonary stenosis). Ref: simplified Bernoulli equation." };
     } },
 
-  { id:"mva_pht", cat:"Cardiovascular", icon:"❤️", title:"Mitral Valve Area (Pressure Half-Time)",
+  { id:"mva_pht", cat:"Cardiovascular", icon:"", title:"Mitral Valve Area (Pressure Half-Time)",
     desc:"Estimated mitral valve area in mitral stenosis.",
     inputs:[
       { id:"pht", label:"Pressure half-time", type:"number", unit:"ms", step:"1" }
@@ -5093,7 +5093,7 @@
       return { v:Math.round(mva*100)/100, u:"cm²", i:b+" (severe <1.0, moderate 1.0–1.5, mild 1.5–2.0 cm²). The empirical constant 220 is unreliable soon after valvuloplasty or with significant aortic regurgitation. Ref: Hatle, Circulation 1979." };
     } },
 
-  { id:"cardiac_power", cat:"Cardiovascular", icon:"❤️", title:"Cardiac Power Output",
+  { id:"cardiac_power", cat:"Cardiovascular", icon:"", title:"Cardiac Power Output",
     desc:"Cardiac pumping capability; a strong predictor in cardiogenic shock.",
     inputs:[
       { id:"map", label:"Mean arterial pressure", type:"number", unit:"mmHg", step:"1" },
@@ -5106,7 +5106,7 @@
       return { v:Math.round(cpo*100)/100, u:"W", i:b+" (a value <0.6 W predicts worse outcomes in cardiogenic shock). Ref: Fincke, J Am Coll Cardiol 2004." };
     } },
 
-  { id:"do2", cat:"Critical care", icon:"🫁", title:"Oxygen Delivery (DO₂)",
+  { id:"do2", cat:"Critical care", icon:"", title:"Oxygen Delivery (DO₂)",
     desc:"Systemic oxygen delivery from cardiac output and arterial oxygen content.",
     inputs:[
       { id:"co", label:"Cardiac output", type:"number", unit:"L/min", step:"0.1" },
@@ -5123,7 +5123,7 @@
       return { v:r0(do2), u:"mL O₂/min", i:b+" (CaO₂ ≈ "+r1(cao2)+" mL/dL; normal DO₂ ~950–1150). Ref: standard oxygen-transport physiology." };
     } },
 
-  { id:"lung_compliance", cat:"Critical care", icon:"🫁", title:"Static Lung Compliance",
+  { id:"lung_compliance", cat:"Critical care", icon:"", title:"Static Lung Compliance",
     desc:"Respiratory-system compliance during mechanical ventilation.",
     inputs:[
       { id:"vt", label:"Tidal volume", type:"number", unit:"mL", step:"10" },
@@ -5139,7 +5139,7 @@
       return { v:r1(c), u:"mL/cmH₂O", i:b+" (driving pressure "+r0(dp)+" cmH₂O; normal static compliance ~50–100). Ref: standard ventilator physiology." };
     } },
 
-  { id:"bohr_deadspace", cat:"Critical care", icon:"🫁", title:"Dead Space Fraction (Bohr-Enghoff)",
+  { id:"bohr_deadspace", cat:"Critical care", icon:"", title:"Dead Space Fraction (Bohr-Enghoff)",
     desc:"Physiological dead space as a fraction of tidal volume.",
     inputs:[
       { id:"paco2", label:"Arterial PaCO₂", type:"number", unit:"mmHg", step:"1" },
@@ -5153,7 +5153,7 @@
       return { v:Math.round(f*100)/100, u:"Vd/Vt", i:b+" ("+r0(f*100)+"% of each breath; normal ~0.2–0.35). Ref: Bohr equation, Enghoff modification." };
     } },
 
-  { id:"adrogue_madias", cat:"Renal", icon:"💧", title:"Adrogué-Madias (Na Change per Litre)",
+  { id:"adrogue_madias", cat:"Renal", icon:"", title:"Adrogué-Madias (Na Change per Litre)",
     desc:"Predicted change in serum sodium from one litre of a chosen infusate.",
     inputs:[
       { id:"na", label:"Current serum sodium", type:"number", unit:"mmol/L", step:"1" },
@@ -5169,7 +5169,7 @@
       return { v:Math.round(change*100)/100, u:"mmol/L per L", i:"Estimated "+dir+" in serum sodium per litre infused (TBW ≈ "+r1(tbw)+" L). Correct hyponatraemia slowly — generally no more than ~8–10 mmol/L in 24 h. Ref: Adrogué & Madias, N Engl J Med 2000." };
     } },
 
-  { id:"measured_crcl", cat:"Renal", icon:"🧪", title:"Measured Creatinine Clearance",
+  { id:"measured_crcl", cat:"Renal", icon:"", title:"Measured Creatinine Clearance",
     desc:"Creatinine clearance from a timed urine collection.",
     inputs:[
       { id:"ucr", label:"Urine creatinine", type:"number", unit:"µmol/L", step:"1" },
@@ -5184,7 +5184,7 @@
       return { v:r1(crcl), u:"mL/min", i:"Measured creatinine clearance (units cancel provided urine and serum creatinine are in the same units). Consider indexing to body surface area. Ref: standard clearance formula." };
     } },
 
-  { id:"bard", cat:"Hepatology", icon:"🫀", title:"BARD Score (NAFLD Fibrosis)",
+  { id:"bard", cat:"Hepatology", icon:"", title:"BARD Score (NAFLD Fibrosis)",
     desc:"Predicts advanced fibrosis in non-alcoholic fatty liver disease.",
     inputs:[
       { id:"bmi", label:"BMI", type:"number", unit:"kg/m²", step:"0.1" },
@@ -5200,7 +5200,7 @@
       return { v:s, u:"/4", i:b+" (AST/ALT ratio "+(Math.round(ratio*100)/100)+"). Ref: Harrison, Gut 2008 (BARD)." };
     } },
 
-  { id:"cpis", cat:"Infectious disease", icon:"🦠", title:"Clinical Pulmonary Infection Score (CPIS)",
+  { id:"cpis", cat:"Infectious disease", icon:"", title:"Clinical Pulmonary Infection Score (CPIS)",
     desc:"Bedside score suggesting ventilator-associated pneumonia.",
     inputs:[
       { id:"temp", label:"Temperature", type:"select", opts:[{v:"0",t:"36.5–38.4 °C"},{v:"1",t:"38.5–38.9 °C"},{v:"2",t:"≥39 or ≤36 °C"}] },
@@ -5216,7 +5216,7 @@
       return { v:s, u:"/12", i:b+". A guide only, with modest accuracy. Ref: Pugin, Am Rev Respir Dis 1991 (CPIS)." };
     } },
 
-  { id:"kawasaki", cat:"Paediatrics", icon:"👶", title:"Kawasaki Disease Criteria",
+  { id:"kawasaki", cat:"Paediatrics", icon:"", title:"Kawasaki Disease Criteria",
     desc:"Clinical criteria for complete Kawasaki disease (AHA).",
     inputs:[
       { id:"fever", label:"Fever ≥5 days", type:"check" },
@@ -5233,7 +5233,7 @@
       return { v:(complete?"Complete KD":f+"/5 features"), u:"", i:b+". Ref: McCrindle, Circulation 2017 (AHA)." };
     } },
 
-  { id:"cci_platelet", cat:"Haematology", icon:"🩸", title:"Corrected Count Increment (Platelets)",
+  { id:"cci_platelet", cat:"Haematology", icon:"", title:"Corrected Count Increment (Platelets)",
     desc:"Assesses response to platelet transfusion / refractoriness.",
     inputs:[
       { id:"pre", label:"Pre-transfusion platelet count", type:"number", unit:"×10⁹/L", step:"1" },
@@ -5249,7 +5249,7 @@
       return { v:r0(cci), u:"", i:b+" (increment "+r0(inc)+" ×10⁹/L). A 10–60 min CCI <7500 (or 1 h <5000) suggests refractoriness. Ref: standard transfusion reference." };
     } },
 
-  { id:"dvi_aortic", cat:"Cardiovascular", icon:"❤️", title:"Dimensionless Index (Aortic Stenosis)",
+  { id:"dvi_aortic", cat:"Cardiovascular", icon:"", title:"Dimensionless Index (Aortic Stenosis)",
     desc:"Velocity ratio for aortic stenosis, independent of LVOT diameter.",
     inputs:[
       { id:"lvot", label:"LVOT VTI (or peak velocity)", type:"number", step:"0.1" },
@@ -5262,7 +5262,7 @@
       return { v:Math.round(dvi*100)/100, u:"", i:b+" (DVI ≤0.25 indicates severe AS; use the same measure — VTI or peak velocity — for both). Ref: ASE valve-stenosis guideline." };
     } },
 
-  { id:"lv_mass", cat:"Cardiovascular", icon:"❤️", title:"LV Mass (ASE Cube Formula)",
+  { id:"lv_mass", cat:"Cardiovascular", icon:"", title:"LV Mass (ASE Cube Formula)",
     desc:"Left-ventricular mass from linear dimensions (Devereux).",
     inputs:[
       { id:"lvidd", label:"LV internal diameter, diastole", type:"number", unit:"cm", step:"0.1" },
@@ -5278,7 +5278,7 @@
       return { v:r0(mass), u:"g", i:"Estimated LV mass"+idx+". Compare with sex-specific reference ranges for LVH. Ref: Devereux, Am J Cardiol 1986 (ASE cube)." };
     } },
 
-  { id:"e_over_e_prime", cat:"Cardiovascular", icon:"❤️", title:"E/e′ Ratio (LV Filling Pressure)",
+  { id:"e_over_e_prime", cat:"Cardiovascular", icon:"", title:"E/e′ Ratio (LV Filling Pressure)",
     desc:"Estimates left-atrial pressure from mitral inflow and tissue Doppler.",
     inputs:[
       { id:"e", label:"Mitral E velocity", type:"number", unit:"cm/s", step:"1" },
@@ -5291,7 +5291,7 @@
       return { v:Math.round(r*10)/10, u:"", i:b+" (average E/e′ >14 suggests elevated filling pressure; <8 normal). Ref: ASE/EACVI diastolic-function guideline 2016." };
     } },
 
-  { id:"rsbi", cat:"Critical care", icon:"🫁", title:"Rapid Shallow Breathing Index (RSBI)",
+  { id:"rsbi", cat:"Critical care", icon:"", title:"Rapid Shallow Breathing Index (RSBI)",
     desc:"Weaning-readiness index during a spontaneous breathing trial.",
     inputs:[
       { id:"rr", label:"Respiratory rate", type:"number", unit:"breaths/min", step:"1" },
@@ -5304,7 +5304,7 @@
       return { v:r0(rsbi), u:"breaths/min/L", i:b+" (threshold ~105). Ref: Yang & Tobin, N Engl J Med 1991." };
     } },
 
-  { id:"vis_score", cat:"Critical care", icon:"💉", title:"Vasoactive-Inotropic Score (VIS)",
+  { id:"vis_score", cat:"Critical care", icon:"", title:"Vasoactive-Inotropic Score (VIS)",
     desc:"Cumulative intensity of vasoactive/inotrope support.",
     inputs:[
       { id:"dopamine", label:"Dopamine", type:"number", unit:"µg/kg/min", step:"0.1" },
@@ -5322,7 +5322,7 @@
       return { v:Math.round(vis*10)/10, u:"", i:b+" (a VIS ≥20–25 has been linked to poorer outcomes). Ref: Gaies, Pediatr Crit Care Med 2010 (VIS)." };
     } },
 
-  { id:"fli", cat:"Hepatology", icon:"🫀", title:"Fatty Liver Index (FLI)",
+  { id:"fli", cat:"Hepatology", icon:"", title:"Fatty Liver Index (FLI)",
     desc:"Predicts hepatic steatosis from routine measurements.",
     inputs:[
       { id:"tg", label:"Triglycerides", type:"number", unit:"mg/dL", step:"1" },
@@ -5338,7 +5338,7 @@
       return { v:r0(fli), u:"/100", i:b+" (triglycerides in mg/dL). Ref: Bedogni, BMC Gastroenterol 2006 (FLI)." };
     } },
 
-  { id:"ipi", cat:"Haematology", icon:"🩸", title:"IPI (Lymphoma Prognostic Index)",
+  { id:"ipi", cat:"Haematology", icon:"", title:"IPI (Lymphoma Prognostic Index)",
     desc:"International Prognostic Index for aggressive non-Hodgkin lymphoma.",
     inputs:[
       { id:"age", label:"Age >60 years", type:"check" },
@@ -5353,7 +5353,7 @@
       return { v:s, u:"/5", i:b+". Ref: International NHL Prognostic Factors Project, N Engl J Med 1993." };
     } },
 
-  { id:"flipi", cat:"Haematology", icon:"🩸", title:"FLIPI (Follicular Lymphoma IPI)",
+  { id:"flipi", cat:"Haematology", icon:"", title:"FLIPI (Follicular Lymphoma IPI)",
     desc:"Prognostic index for follicular lymphoma.",
     inputs:[
       { id:"age", label:"Age ≥60 years", type:"check" },
@@ -5368,7 +5368,7 @@
       return { v:s, u:"/5", i:b+". Ref: Solal-Céligny, Blood 2004 (FLIPI)." };
     } },
 
-  { id:"mipi", cat:"Haematology", icon:"🩸", title:"Simplified MIPI (Mantle Cell Lymphoma)",
+  { id:"mipi", cat:"Haematology", icon:"", title:"Simplified MIPI (Mantle Cell Lymphoma)",
     desc:"Simplified Mantle Cell Lymphoma International Prognostic Index.",
     inputs:[
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<50"},{v:"1",t:"50–59"},{v:"2",t:"60–69"},{v:"3",t:"≥70"}] },
@@ -5382,7 +5382,7 @@
       return { v:s, u:"/11", i:b+". Ref: Hoster, Blood 2008 (MIPI)." };
     } },
 
-  { id:"iron_ingestion", cat:"Toxicology", icon:"⚗️", title:"Elemental Iron Ingestion",
+  { id:"iron_ingestion", cat:"Toxicology", icon:"", title:"Elemental Iron Ingestion",
     desc:"Estimated elemental iron dose after ingestion.",
     inputs:[
       { id:"mg", label:"Total elemental iron ingested", type:"number", unit:"mg", step:"1" },
@@ -5395,7 +5395,7 @@
       return { v:r1(dose), u:"mg/kg", i:b+" (<20 minimal, 20–60 mild–moderate, >60 potentially serious). Ferrous sulfate is ~20% elemental iron. Ref: standard toxicology reference." };
     } },
 
-  { id:"mmse", cat:"Neurology", icon:"🧠", title:"MMSE — score interpreter",
+  { id:"mmse", cat:"Neurology", icon:"", title:"MMSE — score interpreter",
     desc:"Interprets a Mini-Mental State Examination total.",
     inputs:[
       { id:"total", label:"MMSE total (0–30)", type:"number", step:"1" }
@@ -5407,7 +5407,7 @@
       return { v:s, u:"/30", i:b+". The MMSE is copyrighted (PAR Inc.) — administer the official form; banding here is indicative only. Ref: Folstein, J Psychiatr Res 1975." };
     } },
 
-  { id:"insulin_rules", cat:"Endocrine", icon:"🧬", title:"Insulin Dosing Rules (500 / 1800)",
+  { id:"insulin_rules", cat:"Endocrine", icon:"", title:"Insulin Dosing Rules (500 / 1800)",
     desc:"Estimates carbohydrate ratio and correction factor from total daily dose.",
     inputs:[
       { id:"tdd", label:"Total daily insulin dose", type:"number", unit:"units/day", step:"1" }
@@ -5420,7 +5420,7 @@
       return { v:r1(icr), u:"g carb/unit", i:"Insulin-to-carbohydrate ratio ≈ 1 unit per "+r1(icr)+" g carbohydrate (500 rule). Correction factor ≈ "+r0(cf_mgdl)+" mg/dL ("+r1(cf_mmol)+" mmol/L) per unit (1800 rule, rapid-acting). A starting estimate only — titrate to the individual. Ref: standard diabetes reference." };
     } },
 
-  { id:"romhilt_estes", cat:"Cardiovascular", icon:"📈", title:"Romhilt-Estes LVH Point Score",
+  { id:"romhilt_estes", cat:"Cardiovascular", icon:"", title:"Romhilt-Estes LVH Point Score",
     desc:"Point score for left ventricular hypertrophy on ECG.",
     inputs:[
       { id:"voltage", label:"Voltage: limb R/S ≥20 mm, or S in V1–V2 ≥30 mm, or R in V5–V6 ≥30 mm (+3)", type:"check" },
@@ -5436,7 +5436,7 @@
       return { v:s, u:"points", i:b+". Ref: Romhilt & Estes, Am Heart J 1968." };
     } },
 
-  { id:"dapt", cat:"Cardiovascular", icon:"💊", title:"DAPT Score",
+  { id:"dapt", cat:"Cardiovascular", icon:"", title:"DAPT Score",
     desc:"Benefit vs bleeding of prolonged dual antiplatelet therapy after PCI.",
     inputs:[
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<65 (0)"},{v:"-1",t:"65–74 (−1)"},{v:"-2",t:"≥75 (−2)"}] },
@@ -5457,7 +5457,7 @@
       return { v:s, u:"points", i:b+". Applies to patients who completed 12 months of DAPT without event/bleed. Ref: Yeh, JAMA 2016 (DAPT score)." };
     } },
 
-  { id:"mehran", cat:"Renal", icon:"🧪", title:"Mehran Score (Contrast Nephropathy Risk)",
+  { id:"mehran", cat:"Renal", icon:"", title:"Mehran Score (Contrast Nephropathy Risk)",
     desc:"Risk of contrast-induced nephropathy after percutaneous coronary intervention.",
     inputs:[
       { id:"hypotension", label:"Hypotension (+5)", type:"check" },
@@ -5478,7 +5478,7 @@
       return { v:s, u:"points", i:b+" (contrast scored ≈1 point per 100 mL). Ref: Mehran, J Am Coll Cardiol 2004." };
     } },
 
-  { id:"dragon", cat:"Neurology", icon:"🧠", title:"DRAGON Score (Stroke Thrombolysis Outcome)",
+  { id:"dragon", cat:"Neurology", icon:"", title:"DRAGON Score (Stroke Thrombolysis Outcome)",
     desc:"Predicts 3-month functional outcome after IV thrombolysis for ischaemic stroke.",
     inputs:[
       { id:"ct", label:"Hyperdense artery / early infarct on CT", type:"select", opts:[{v:"0",t:"Neither (0)"},{v:"1",t:"Either one (+1)"},{v:"2",t:"Both (+2)"}] },
@@ -5494,7 +5494,7 @@
       return { v:s, u:"/10", i:b+". Ref: Strbian, Neurology 2012 (DRAGON)." };
     } },
 
-  { id:"isaric_4c", cat:"Respiratory", icon:"🦠", title:"ISARIC 4C Mortality Score (COVID-19)",
+  { id:"isaric_4c", cat:"Respiratory", icon:"", title:"ISARIC 4C Mortality Score (COVID-19)",
     desc:"In-hospital mortality risk in adults admitted with COVID-19.",
     inputs:[
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<50 (0)"},{v:"2",t:"50–59 (+2)"},{v:"4",t:"60–69 (+4)"},{v:"6",t:"70–79 (+6)"},{v:"7",t:"≥80 (+7)"}] },
@@ -5513,7 +5513,7 @@
       return { v:s, u:"/21", i:b+". Ref: Knight, BMJ 2020 (ISARIC 4C)." };
     } },
 
-  { id:"rochester_criteria", cat:"Paediatrics", icon:"👶", title:"Rochester Criteria (Febrile Infant)",
+  { id:"rochester_criteria", cat:"Paediatrics", icon:"", title:"Rochester Criteria (Febrile Infant)",
     desc:"Identifies young febrile infants at low risk of serious bacterial infection.",
     inputs:[
       { id:"well", label:"Well-appearing", type:"check" },
@@ -5530,7 +5530,7 @@
       return { v:(all?"Low risk":"Not low risk"), u:"", i:b+". A decision aid, not a rule-out; use with clinical judgement and local pathways. Ref: Jaskiewicz, Pediatrics 1994 (Rochester)." };
     } },
 
-  { id:"hamd", cat:"Psychiatry", icon:"🧠", title:"HAM-D (Hamilton Depression) — interpreter",
+  { id:"hamd", cat:"Psychiatry", icon:"", title:"HAM-D (Hamilton Depression) — interpreter",
     desc:"Interprets a 17-item Hamilton Depression Rating Scale total.",
     inputs:[
       { id:"total", label:"HAM-D 17-item total (0–52)", type:"number", step:"1" }
@@ -5542,7 +5542,7 @@
       return { v:s, u:"/52", i:b+". Common severity bands for the 17-item HDRS. Ref: Hamilton, J Neurol Neurosurg Psychiatry 1960." };
     } },
 
-  { id:"moca", cat:"Neurology", icon:"🧠", title:"MoCA — score interpreter",
+  { id:"moca", cat:"Neurology", icon:"", title:"MoCA — score interpreter",
     desc:"Interprets a Montreal Cognitive Assessment total.",
     inputs:[
       { id:"total", label:"MoCA total (0–30)", type:"number", step:"1" },
@@ -5555,7 +5555,7 @@
       return { v:s, u:"/30", i:b+" (education-adjusted). MoCA is copyrighted — administer the official version and complete required training. Ref: Nasreddine, J Am Geriatr Soc 2005." };
     } },
 
-  { id:"madrs", cat:"Psychiatry", icon:"🧠", title:"MADRS — score interpreter",
+  { id:"madrs", cat:"Psychiatry", icon:"", title:"MADRS — score interpreter",
     desc:"Interprets a Montgomery-Åsberg Depression Rating Scale total.",
     inputs:[
       { id:"total", label:"MADRS total (0–60)", type:"number", step:"1" }
@@ -5567,7 +5567,7 @@
       return { v:s, u:"/60", i:b+". Administer the full clinician-rated instrument. Ref: Montgomery & Åsberg, Br J Psychiatry 1979." };
     } },
 
-  { id:"sf_ratio", cat:"Respiratory", icon:"🫁", title:"SpO₂/FiO₂ (S/F) Ratio",
+  { id:"sf_ratio", cat:"Respiratory", icon:"", title:"SpO₂/FiO₂ (S/F) Ratio",
     desc:"Non-invasive surrogate for the PaO₂/FiO₂ ratio.",
     inputs:[
       { id:"spo2", label:"SpO₂", type:"number", unit:"%", step:"1" },
@@ -5580,7 +5580,7 @@
       return { v:r0(sf), u:"", i:b+" (S/F 235 ≈ P/F 200; S/F 315 ≈ P/F 300). Most reliable when SpO₂ ≤97%. Ref: Rice, Chest 2007." };
     } },
 
-  { id:"o2er", cat:"Critical care", icon:"🫁", title:"Oxygen Extraction Ratio (O₂ER)",
+  { id:"o2er", cat:"Critical care", icon:"", title:"Oxygen Extraction Ratio (O₂ER)",
     desc:"Fraction of delivered oxygen extracted by the tissues.",
     inputs:[
       { id:"sao2", label:"Arterial O₂ saturation (SaO₂)", type:"number", unit:"%", step:"1" },
@@ -5594,7 +5594,7 @@
       return { v:Math.round(er*100)/100, u:"O₂ER", i:b+" ("+r0(er*100)+"%; normal ~0.25–0.30). Ref: standard oxygen-transport physiology." };
     } },
 
-  { id:"h2fpef", cat:"Cardiovascular", icon:"❤️", title:"H₂FPEF Score (HFpEF Probability)",
+  { id:"h2fpef", cat:"Cardiovascular", icon:"", title:"H₂FPEF Score (HFpEF Probability)",
     desc:"Probability of heart failure with preserved ejection fraction.",
     inputs:[
       { id:"heavy", label:"BMI >30 kg/m² (+2)", type:"check" },
@@ -5610,7 +5610,7 @@
       return { v:s, u:"/9", i:b+". Ref: Reddy, Circulation 2018 (H₂FPEF)." };
     } },
 
-  { id:"atria_bleed", cat:"Cardiovascular", icon:"🩸", title:"ATRIA Bleeding Risk (AF)",
+  { id:"atria_bleed", cat:"Cardiovascular", icon:"", title:"ATRIA Bleeding Risk (AF)",
     desc:"Major-haemorrhage risk on anticoagulation for atrial fibrillation.",
     inputs:[
       { id:"anaemia", label:"Anaemia (Hb <13 g/dL men, <12 women) (+3)", type:"check" },
@@ -5625,7 +5625,7 @@
       return { v:s, u:"/10", i:b+". Ref: Fang, J Am Coll Cardiol 2011 (ATRIA)." };
     } },
 
-  { id:"edacs", cat:"Cardiovascular", icon:"🫀", title:"EDACS (ED Chest Pain Score)",
+  { id:"edacs", cat:"Cardiovascular", icon:"", title:"EDACS (ED Chest Pain Score)",
     desc:"Emergency Department Assessment of Chest pain Score for risk stratification.",
     inputs:[
       { id:"age", label:"Age band", type:"select", opts:[{v:"2",t:"18–45 (+2)"},{v:"4",t:"46–50 (+4)"},{v:"6",t:"51–55 (+6)"},{v:"8",t:"56–60 (+8)"},{v:"10",t:"61–65 (+10)"},{v:"12",t:"66–70 (+12)"},{v:"14",t:"71–75 (+14)"},{v:"16",t:"76–80 (+16)"},{v:"18",t:"81–85 (+18)"},{v:"20",t:"≥86 (+20)"}] },
@@ -5643,7 +5643,7 @@
       return { v:s, u:"points", i:b+". Ref: Than, Emerg Med Australas 2014 (EDACS)." };
     } },
 
-  { id:"years_pe", cat:"Respiratory", icon:"🫁", title:"YEARS Algorithm (Pulmonary Embolism)",
+  { id:"years_pe", cat:"Respiratory", icon:"", title:"YEARS Algorithm (Pulmonary Embolism)",
     desc:"Simplified diagnostic algorithm to rule out pulmonary embolism.",
     inputs:[
       { id:"dvt", label:"Clinical signs of DVT", type:"check" },
@@ -5660,7 +5660,7 @@
       return { v:(excluded?"PE excluded":"CTPA indicated"), u:"", i:b+". Use an FEU-calibrated D-dimer; not validated in haemodynamic instability. Ref: van der Hulle, Lancet 2017 (YEARS)." };
     } },
 
-  { id:"thrive", cat:"Neurology", icon:"🧠", title:"THRIVE Score (Stroke Outcome)",
+  { id:"thrive", cat:"Neurology", icon:"", title:"THRIVE Score (Stroke Outcome)",
     desc:"Predicts outcome and mortality after acute ischaemic stroke.",
     inputs:[
       { id:"nihss", label:"NIHSS", type:"select", opts:[{v:"0",t:"0–10 (0)"},{v:"2",t:"11–20 (+2)"},{v:"4",t:"≥21 (+4)"}] },
@@ -5675,7 +5675,7 @@
       return { v:s, u:"/9", i:b+". Ref: Flint AC, et al. (THRIVE)." };
     } },
 
-  { id:"stone_score", cat:"Renal", icon:"🪨", title:"STONE Score (Ureteric Stone)",
+  { id:"stone_score", cat:"Renal", icon:"", title:"STONE Score (Ureteric Stone)",
     desc:"Predicts uncomplicated ureteric stone in patients with flank pain.",
     inputs:[
       { id:"male", label:"Male sex (+2)", type:"check" },
@@ -5690,7 +5690,7 @@
       return { v:s, u:"/13", i:b+". Ref: Moore CL, et al. BMJ 2014 (STONE score)." };
     } },
 
-  { id:"nexus_chest", cat:"Respiratory", icon:"🫁", title:"NEXUS Chest (Blunt Trauma Imaging)",
+  { id:"nexus_chest", cat:"Respiratory", icon:"", title:"NEXUS Chest (Blunt Trauma Imaging)",
     desc:"Identifies blunt-trauma patients at very low risk of thoracic injury.",
     inputs:[
       { id:"age60", label:"Age >60", type:"check" },
@@ -5707,7 +5707,7 @@
       return { v:(any?"Imaging may be indicated":"Very low risk"), u:"", i:b+". Applies to blunt trauma; use with clinical judgement. Ref: Rodriguez RM, et al. PLoS Med 2015 (NEXUS Chest)." };
     } },
 
-  { id:"hsi", cat:"Hepatology", icon:"🫀", title:"Hepatic Steatosis Index (HSI)",
+  { id:"hsi", cat:"Hepatology", icon:"", title:"Hepatic Steatosis Index (HSI)",
     desc:"Screening index for non-alcoholic fatty liver disease.",
     inputs:[
       { id:"alt", label:"ALT", type:"number", unit:"U/L", step:"1" },
@@ -5723,7 +5723,7 @@
       return { v:r1(hsi), u:"", i:b+". Ref: Lee JH, et al. Dig Liver Dis 2010 (HSI)." };
     } },
 
-  { id:"ybocs", cat:"Psychiatry", icon:"🧠", title:"Y-BOCS — score interpreter",
+  { id:"ybocs", cat:"Psychiatry", icon:"", title:"Y-BOCS — score interpreter",
     desc:"Interprets a Yale-Brown Obsessive Compulsive Scale total.",
     inputs:[
       { id:"total", label:"Y-BOCS total (0–40)", type:"number", step:"1" }
@@ -5735,7 +5735,7 @@
       return { v:s, u:"/40", i:b+" OCD symptom severity. Administer the full clinician-rated scale. Ref: Goodman WK, et al. Arch Gen Psychiatry 1989." };
     } },
 
-  { id:"ymrs", cat:"Psychiatry", icon:"🧠", title:"YMRS — score interpreter",
+  { id:"ymrs", cat:"Psychiatry", icon:"", title:"YMRS — score interpreter",
     desc:"Interprets a Young Mania Rating Scale total.",
     inputs:[
       { id:"total", label:"YMRS total (0–60)", type:"number", step:"1" }
@@ -5747,7 +5747,7 @@
       return { v:s, u:"/60", i:b+". Thresholds vary between studies; administer the full clinician-rated scale. Ref: Young RC, et al. Br J Psychiatry 1978 (YMRS)." };
     } },
 
-  { id:"odi", cat:"Musculoskeletal", icon:"🦴", title:"Oswestry Disability Index — interpreter",
+  { id:"odi", cat:"Musculoskeletal", icon:"", title:"Oswestry Disability Index — interpreter",
     desc:"Interprets an Oswestry Disability Index percentage for low-back disability.",
     inputs:[
       { id:"pct", label:"ODI (%)", type:"number", unit:"%", step:"1" }
@@ -5759,7 +5759,7 @@
       return { v:s, u:"%", i:b+". Ref: Fairbank JCT, et al. (ODI)." };
     } },
 
-  { id:"ndi", cat:"Musculoskeletal", icon:"🦴", title:"Neck Disability Index — interpreter",
+  { id:"ndi", cat:"Musculoskeletal", icon:"", title:"Neck Disability Index — interpreter",
     desc:"Interprets a Neck Disability Index total for neck-related disability.",
     inputs:[
       { id:"total", label:"NDI total (0–50)", type:"number", step:"1" }
@@ -5771,7 +5771,7 @@
       return { v:s, u:"/50", i:b+" ("+(s*2)+"%). Ref: Vernon H, Mior S. J Manipulative Physiol Ther 1991 (NDI)." };
     } },
 
-  { id:"wexner", cat:"Gastroenterology", icon:"🚽", title:"Wexner Faecal Incontinence Score",
+  { id:"wexner", cat:"Gastroenterology", icon:"", title:"Wexner Faecal Incontinence Score",
     desc:"Cleveland Clinic score for severity of faecal incontinence.",
     inputs:[
       { id:"solid", label:"Incontinence to solid stool", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely, <1/month (1)"},{v:"2",t:"Sometimes, <1/week (2)"},{v:"3",t:"Usually, <1/day (3)"},{v:"4",t:"Always, ≥1/day (4)"}] },
@@ -5786,7 +5786,7 @@
       return { v:s, u:"/20", i:b+". Ref: Jorge JMN, Wexner SD. Dis Colon Rectum 1993." };
     } },
 
-  { id:"qrs_axis", cat:"Cardiovascular", icon:"📈", title:"QRS Axis (Frontal Plane)",
+  { id:"qrs_axis", cat:"Cardiovascular", icon:"", title:"QRS Axis (Frontal Plane)",
     desc:"Estimates the frontal-plane QRS axis from net deflections in leads I and aVF.",
     inputs:[
       { id:"lead1", label:"Net QRS in lead I (R minus S)", type:"number", unit:"mm", step:"0.5" },
@@ -5800,7 +5800,7 @@
       return { v:r0(deg), u:"°", i:cls+" (normal −30° to +90°). Ref: standard vectorcardiographic convention." };
     } },
 
-  { id:"teichholz_ef", cat:"Cardiovascular", icon:"❤️", title:"LV Ejection Fraction (Teichholz)",
+  { id:"teichholz_ef", cat:"Cardiovascular", icon:"", title:"LV Ejection Fraction (Teichholz)",
     desc:"Estimates LVEF from M-mode/2D LV diameters.",
     inputs:[
       { id:"lvidd", label:"LV internal diameter, diastole", type:"number", unit:"cm", step:"0.1" },
@@ -5816,7 +5816,7 @@
       return { v:r0(ef), u:"%", i:b+" LV systolic function. Teichholz is unreliable with regional wall-motion abnormalities. Ref: Teichholz, Am J Cardiol 1976." };
     } },
 
-  { id:"mpap", cat:"Cardiovascular", icon:"❤️", title:"Mean Pulmonary Artery Pressure",
+  { id:"mpap", cat:"Cardiovascular", icon:"", title:"Mean Pulmonary Artery Pressure",
     desc:"Mean PA pressure from systolic and diastolic pulmonary pressures.",
     inputs:[
       { id:"spap", label:"Systolic PAP", type:"number", unit:"mmHg", step:"1" },
@@ -5830,7 +5830,7 @@
       return { v:r0(mpap), u:"mmHg", i:b+". Ref: standard formula; ESC/ERS 2022 pulmonary hypertension definition." };
     } },
 
-  { id:"midas", cat:"Neurology", icon:"🧠", title:"MIDAS — migraine disability interpreter",
+  { id:"midas", cat:"Neurology", icon:"", title:"MIDAS — migraine disability interpreter",
     desc:"Interprets a MIDAS total (days lost over 3 months).",
     inputs:[
       { id:"total", label:"MIDAS total (sum of Q1–Q5, days)", type:"number", step:"1" }
@@ -5842,7 +5842,7 @@
       return { v:s, u:"days", i:b+". Ref: Stewart WF, et al. Neurology 2001 (MIDAS)." };
     } },
 
-  { id:"isi", cat:"Psychiatry", icon:"🛌", title:"Insomnia Severity Index — interpreter",
+  { id:"isi", cat:"Psychiatry", icon:"", title:"Insomnia Severity Index — interpreter",
     desc:"Interprets an Insomnia Severity Index total.",
     inputs:[
       { id:"total", label:"ISI total (0–28)", type:"number", step:"1" }
@@ -5854,7 +5854,7 @@
       return { v:s, u:"/28", i:b+". Ref: Bastien CH, et al. Sleep Med 2001 (ISI)." };
     } },
 
-  { id:"hit6", cat:"Neurology", icon:"🧠", title:"HIT-6 — headache impact interpreter",
+  { id:"hit6", cat:"Neurology", icon:"", title:"HIT-6 — headache impact interpreter",
     desc:"Interprets a Headache Impact Test-6 total.",
     inputs:[
       { id:"total", label:"HIT-6 total (36–78)", type:"number", step:"1" }
@@ -5866,7 +5866,7 @@
       return { v:s, u:"/78", i:b+". HIT-6 is copyrighted (QualityMetric) — administer the official form. Ref: Kosinski M, et al. Qual Life Res 2003." };
     } },
 
-  { id:"hads", cat:"Psychiatry", icon:"🧠", title:"HADS — score interpreter",
+  { id:"hads", cat:"Psychiatry", icon:"", title:"HADS — score interpreter",
     desc:"Interprets Hospital Anxiety and Depression Scale subscale totals.",
     inputs:[
       { id:"anx", label:"Anxiety subscale (0–21)", type:"number", step:"1" },
@@ -5878,7 +5878,7 @@
       return { v:Math.round(v.anx)+" / "+Math.round(v.dep), u:"A / D", i:"Anxiety "+Math.round(v.anx)+" — "+band(v.anx)+"; Depression "+Math.round(v.dep)+" — "+band(v.dep)+" (each subscale: 0–7 normal, 8–10 borderline, 11–21 case). Ref: Zigmond AS, Snaith RP. Acta Psychiatr Scand 1983." };
     } },
 
-  { id:"womac", cat:"Musculoskeletal", icon:"🦴", title:"WOMAC — osteoarthritis index interpreter",
+  { id:"womac", cat:"Musculoskeletal", icon:"", title:"WOMAC — osteoarthritis index interpreter",
     desc:"Interprets a total WOMAC (Likert 3.1) score for hip/knee osteoarthritis.",
     inputs:[
       { id:"total", label:"WOMAC total (0–96)", type:"number", step:"1" }
@@ -5890,7 +5890,7 @@
       return { v:s, u:"/96", i:b+" (~"+r0(pct)+"% of maximum; higher = worse; bands approximate — no validated cut-offs). WOMAC is a copyrighted, licence-required instrument — administer the official version. Subscales: pain 0–20, stiffness 0–8, function 0–68. Ref: Bellamy N, et al. J Rheumatol 1988 (WOMAC)." };
     } },
 
-  { id:"zarit", cat:"Psychiatry", icon:"🧠", title:"Zarit Burden Interview — interpreter",
+  { id:"zarit", cat:"Psychiatry", icon:"", title:"Zarit Burden Interview — interpreter",
     desc:"Interprets a Zarit caregiver-burden total.",
     inputs:[
       { id:"total", label:"Zarit total (0–88)", type:"number", step:"1" }
@@ -5902,7 +5902,7 @@
       return { v:s, u:"/88", i:b+". Ref: Zarit SH, et al. Gerontologist 1980 (22-item ZBI)." };
     } },
 
-  { id:"pucai", cat:"Gastroenterology", icon:"👶", title:"PUCAI (Paediatric UC Activity Index)",
+  { id:"pucai", cat:"Gastroenterology", icon:"", title:"PUCAI (Paediatric UC Activity Index)",
     desc:"Disease activity in paediatric ulcerative colitis.",
     inputs:[
       { id:"pain", label:"Abdominal pain", type:"select", opts:[{v:"0",t:"None (0)"},{v:"5",t:"Can be ignored (5)"},{v:"10",t:"Cannot be ignored (10)"}] },
@@ -5918,7 +5918,7 @@
       return { v:s, u:"/85", i:b+" (remission <10, mild 10–34, moderate 35–64, severe ≥65). Ref: Turner D, et al. Gastroenterology 2007 (PUCAI)." };
     } },
 
-  { id:"braden_q", cat:"Paediatrics", icon:"👶", title:"Braden Q Scale (Paediatric Pressure Injury)",
+  { id:"braden_q", cat:"Paediatrics", icon:"", title:"Braden Q Scale (Paediatric Pressure Injury)",
     desc:"Pressure-injury risk in paediatric patients (lower total = higher risk).",
     inputs:[
       { id:"mobility", label:"Mobility", type:"select", opts:[{v:"4",t:"No limitation (4)"},{v:"3",t:"Slightly limited (3)"},{v:"2",t:"Very limited (2)"},{v:"1",t:"Completely immobile (1)"}] },
@@ -5935,7 +5935,7 @@
       return { v:s, u:"/28", i:b+" (lower total = higher risk). Ref: Curley MAQ, et al. Nurs Res 2003 (Braden Q)." };
     } },
 
-  { id:"norton", cat:"General", icon:"🛏️", title:"Norton Pressure Sore Risk Scale",
+  { id:"norton", cat:"General", icon:"", title:"Norton Pressure Sore Risk Scale",
     desc:"Pressure-ulcer risk, mainly in elderly inpatients (lower total = higher risk).",
     inputs:[
       { id:"physical", label:"Physical condition", type:"select", opts:[{v:"4",t:"Good (4)"},{v:"3",t:"Fair (3)"},{v:"2",t:"Poor (2)"},{v:"1",t:"Very bad (1)"}] },
@@ -5950,7 +5950,7 @@
       return { v:s, u:"/20", i:b+" (≤14 at risk, ≤12 high risk). Ref: Norton D, et al. 1962." };
     } },
 
-  { id:"pvr", cat:"Cardiovascular", icon:"❤️", title:"Pulmonary Vascular Resistance (PVR)",
+  { id:"pvr", cat:"Cardiovascular", icon:"", title:"Pulmonary Vascular Resistance (PVR)",
     desc:"Resistance across the pulmonary circulation.",
     inputs:[
       { id:"mpap", label:"Mean pulmonary artery pressure", type:"number", unit:"mmHg", step:"1" },
@@ -5965,7 +5965,7 @@
       return { v:Math.round(wu*100)/100, u:"Wood units", i:b+" ("+r0(wu*80)+" dyn·s·cm⁻⁵). Ref: standard haemodynamics; 2022 PH definition uses PVR >2 WU." };
     } },
 
-  { id:"tpg", cat:"Cardiovascular", icon:"❤️", title:"Transpulmonary Gradient",
+  { id:"tpg", cat:"Cardiovascular", icon:"", title:"Transpulmonary Gradient",
     desc:"Pressure gradient across the pulmonary vascular bed.",
     inputs:[
       { id:"mpap", label:"Mean pulmonary artery pressure", type:"number", unit:"mmHg", step:"1" },
@@ -5979,7 +5979,7 @@
       return { v:r0(tpg), u:"mmHg", i:b+". The diastolic pulmonary gradient (diastolic PAP − wedge) is now often preferred. Ref: standard haemodynamics." };
     } },
 
-  { id:"cpp", cat:"Critical care", icon:"🧠", title:"Cerebral Perfusion Pressure (CPP)",
+  { id:"cpp", cat:"Critical care", icon:"", title:"Cerebral Perfusion Pressure (CPP)",
     desc:"Net pressure driving cerebral blood flow.",
     inputs:[
       { id:"map", label:"Mean arterial pressure", type:"number", unit:"mmHg", step:"1" },
@@ -5992,7 +5992,7 @@
       return { v:r0(cpp), u:"mmHg", i:b+" (typical traumatic-brain-injury target ~60–70 mmHg). Ref: Brain Trauma Foundation guidelines." };
     } },
 
-  { id:"bdi", cat:"Psychiatry", icon:"🧠", title:"Beck Depression Inventory — interpreter",
+  { id:"bdi", cat:"Psychiatry", icon:"", title:"Beck Depression Inventory — interpreter",
     desc:"Interprets a BDI / BDI-II total.",
     inputs:[
       { id:"total", label:"BDI-II total (0–63)", type:"number", step:"1" }
@@ -6004,7 +6004,7 @@
       return { v:s, u:"/63", i:b+". BDI is copyrighted (Pearson) — administer the official form. Ref: Beck AT, et al. 1996 (BDI-II)." };
     } },
 
-  { id:"bai", cat:"Psychiatry", icon:"🧠", title:"Beck Anxiety Inventory — interpreter",
+  { id:"bai", cat:"Psychiatry", icon:"", title:"Beck Anxiety Inventory — interpreter",
     desc:"Interprets a Beck Anxiety Inventory total.",
     inputs:[
       { id:"total", label:"BAI total (0–63)", type:"number", step:"1" }
@@ -6016,7 +6016,7 @@
       return { v:s, u:"/63", i:b+". BAI is copyrighted (Pearson) — administer the official form. Ref: Beck AT, et al. 1988 (BAI)." };
     } },
 
-  { id:"psqi", cat:"Psychiatry", icon:"🛌", title:"PSQI — sleep quality interpreter",
+  { id:"psqi", cat:"Psychiatry", icon:"", title:"PSQI — sleep quality interpreter",
     desc:"Interprets a Pittsburgh Sleep Quality Index global score.",
     inputs:[
       { id:"total", label:"PSQI global score (0–21)", type:"number", step:"1" }
@@ -6028,7 +6028,7 @@
       return { v:s, u:"/21", i:b+". Ref: Buysse DJ, et al. Psychiatry Res 1989 (PSQI)." };
     } },
 
-  { id:"uas7", cat:"Dermatology", icon:"🧴", title:"UAS7 (Urticaria Activity Score)",
+  { id:"uas7", cat:"Dermatology", icon:"", title:"UAS7 (Urticaria Activity Score)",
     desc:"Weekly urticaria activity from daily wheal and itch scores.",
     inputs:[
       { id:"total", label:"UAS7 total (sum of 7 daily scores, 0–42)", type:"number", step:"1" }
@@ -6040,7 +6040,7 @@
       return { v:s, u:"/42", i:b+" (each day scores wheals 0–3 + itch 0–3). Ref: EAACI/GA²LEN urticaria guideline (Zuberbier)." };
     } },
 
-  { id:"fe_bicarb", cat:"Renal", icon:"🧪", title:"Fractional Excretion of Bicarbonate",
+  { id:"fe_bicarb", cat:"Renal", icon:"", title:"Fractional Excretion of Bicarbonate",
     desc:"Helps classify renal tubular acidosis.",
     inputs:[
       { id:"ubic", label:"Urine bicarbonate", type:"number", unit:"mmol/L", step:"0.1" },
@@ -6055,7 +6055,7 @@
       return { v:Math.round(fe*10)/10, u:"%", i:b+". Interpret during a bicarbonate load / with a normal plasma bicarbonate. Ref: standard nephrology reference." };
     } },
 
-  { id:"lysholm", cat:"Musculoskeletal", icon:"🦵", title:"Lysholm Knee Score — interpreter",
+  { id:"lysholm", cat:"Musculoskeletal", icon:"", title:"Lysholm Knee Score — interpreter",
     desc:"Interprets a Lysholm knee score.",
     inputs:[
       { id:"total", label:"Lysholm total (0–100)", type:"number", step:"1" }
@@ -6067,7 +6067,7 @@
       return { v:s, u:"/100", i:b+" knee function (higher = better). Ref: Lysholm J, Gillquist J. Am J Sports Med 1982." };
     } },
 
-  { id:"harris_hip", cat:"Musculoskeletal", icon:"🦴", title:"Harris Hip Score — interpreter",
+  { id:"harris_hip", cat:"Musculoskeletal", icon:"", title:"Harris Hip Score — interpreter",
     desc:"Interprets a Harris Hip Score.",
     inputs:[
       { id:"total", label:"Harris Hip Score (0–100)", type:"number", step:"1" }
@@ -6079,7 +6079,7 @@
       return { v:s, u:"/100", i:b+" hip function (higher = better). Ref: Harris WH. J Bone Joint Surg Am 1969." };
     } },
 
-  { id:"tampa", cat:"Musculoskeletal", icon:"🦴", title:"Tampa Scale of Kinesiophobia — interpreter",
+  { id:"tampa", cat:"Musculoskeletal", icon:"", title:"Tampa Scale of Kinesiophobia — interpreter",
     desc:"Interprets a Tampa Scale of Kinesiophobia (TSK-17) total.",
     inputs:[
       { id:"total", label:"TSK-17 total (17–68)", type:"number", step:"1" }
@@ -6091,7 +6091,7 @@
       return { v:s, u:"/68", i:b+" (a common cut-off is >37). Ref: Miller RP, et al. 1991 (TSK)." };
     } },
 
-  { id:"constant_shoulder", cat:"Musculoskeletal", icon:"🦴", title:"Constant-Murley Shoulder Score — interpreter",
+  { id:"constant_shoulder", cat:"Musculoskeletal", icon:"", title:"Constant-Murley Shoulder Score — interpreter",
     desc:"Interprets a Constant-Murley shoulder score.",
     inputs:[
       { id:"total", label:"Constant-Murley total (0–100)", type:"number", step:"1" }
@@ -6103,7 +6103,7 @@
       return { v:s, u:"/100", i:b+" shoulder function (higher = better; ideally compared with the age/sex-adjusted normal). Ref: Constant CR, Murley AHG. Clin Orthop 1987." };
     } },
 
-  { id:"ascvd", cat:"Cardiovascular", icon:"❤️", title:"ASCVD Risk (Pooled Cohort Equations)",
+  { id:"ascvd", cat:"Cardiovascular", icon:"", title:"ASCVD Risk (Pooled Cohort Equations)",
     desc:"10-year atherosclerotic cardiovascular disease risk (ACC/AHA 2013).",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -6145,7 +6145,7 @@
       return { v:r1(risk), u:"% (10-yr)", i:b+" (ACC/AHA: <5% low, 5–7.5% borderline, 7.5–20% intermediate, ≥20% high). Validated ages 40–79, no prior ASCVD, not on a statin; cholesterol in mg/dL (mmol/L × 38.67). Ref: Goff DC, et al. ACC/AHA 2013." };
     } },
 
-  { id:"spherical_equivalent", cat:"Ophthalmology", icon:"👁️", title:"Spherical Equivalent",
+  { id:"spherical_equivalent", cat:"Ophthalmology", icon:"", title:"Spherical Equivalent",
     desc:"Combines sphere and cylinder into a single spherical value.",
     inputs:[
       { id:"sphere", label:"Sphere", type:"number", unit:"D", step:"0.25" },
@@ -6157,7 +6157,7 @@
       return { v:Math.round(se*100)/100, u:"D", i:"Spherical equivalent = sphere + cylinder/2. Ref: standard optics." };
     } },
 
-  { id:"srk2_iol", cat:"Ophthalmology", icon:"👁️", title:"IOL Power (SRK II)",
+  { id:"srk2_iol", cat:"Ophthalmology", icon:"", title:"IOL Power (SRK II)",
     desc:"Intraocular lens power for cataract surgery (SRK II regression).",
     inputs:[
       { id:"a", label:"A-constant", type:"number", step:"0.1" },
@@ -6172,7 +6172,7 @@
       return { v:r1(p), u:"D", i:"Estimated emmetropic IOL power (SRK II). Modern eyes are better served by newer formulae (SRK/T, Barrett). Ref: Sanders, Retzlaff & Kraff (SRK II)." };
     } },
 
-  { id:"oxford_knee", cat:"Musculoskeletal", icon:"🦵", title:"Oxford Knee Score — interpreter",
+  { id:"oxford_knee", cat:"Musculoskeletal", icon:"", title:"Oxford Knee Score — interpreter",
     desc:"Interprets an Oxford Knee Score.",
     inputs:[
       { id:"total", label:"Oxford Knee Score (0–48)", type:"number", step:"1" }
@@ -6184,7 +6184,7 @@
       return { v:s, u:"/48", i:b+" (higher = better; bands indicative). Oxford Knee Score is copyrighted (Oxford University Innovation) — administer the official licensed form. Ref: Dawson J, et al. J Bone Joint Surg Br 1998." };
     } },
 
-  { id:"oxford_hip", cat:"Musculoskeletal", icon:"🦴", title:"Oxford Hip Score — interpreter",
+  { id:"oxford_hip", cat:"Musculoskeletal", icon:"", title:"Oxford Hip Score — interpreter",
     desc:"Interprets an Oxford Hip Score.",
     inputs:[
       { id:"total", label:"Oxford Hip Score (0–48)", type:"number", step:"1" }
@@ -6196,7 +6196,7 @@
       return { v:s, u:"/48", i:b+" (higher = better; bands indicative). Oxford Hip Score is copyrighted (Oxford University Innovation) — administer the official licensed form. Ref: Dawson J, et al. J Bone Joint Surg Br 1996." };
     } },
 
-  { id:"quickdash", cat:"Musculoskeletal", icon:"💪", title:"QuickDASH — interpreter",
+  { id:"quickdash", cat:"Musculoskeletal", icon:"", title:"QuickDASH — interpreter",
     desc:"Interprets a QuickDASH upper-limb disability score.",
     inputs:[
       { id:"total", label:"QuickDASH score (0–100)", type:"number", step:"1" }
@@ -6208,7 +6208,7 @@
       return { v:s, u:"/100", i:b+" (higher = more upper-limb disability; bands indicative). QuickDASH is owned by the Institute for Work & Health. Ref: Beaton DE, et al. (QuickDASH)." };
     } },
 
-  { id:"dn4", cat:"Neurology", icon:"🧠", title:"DN4 (Neuropathic Pain)",
+  { id:"dn4", cat:"Neurology", icon:"", title:"DN4 (Neuropathic Pain)",
     desc:"Screens for a neuropathic component to pain.",
     inputs:[
       { id:"burning", label:"Burning", type:"check" },
@@ -6229,7 +6229,7 @@
       return { v:s, u:"/10", i:b+". Ref: Bouhassira D, et al. Pain 2005 (DN4)." };
     } },
 
-  { id:"phq15", cat:"Psychiatry", icon:"🧠", title:"PHQ-15 — somatic symptom interpreter",
+  { id:"phq15", cat:"Psychiatry", icon:"", title:"PHQ-15 — somatic symptom interpreter",
     desc:"Interprets a PHQ-15 somatic symptom severity total.",
     inputs:[
       { id:"total", label:"PHQ-15 total (0–30)", type:"number", step:"1" }
@@ -6241,7 +6241,7 @@
       return { v:s, u:"/30", i:b+". Ref: Kroenke K, et al. Psychosom Med 2002 (PHQ-15)." };
     } },
 
-  { id:"framingham", cat:"Cardiovascular", icon:"❤️", title:"Framingham Risk (General CVD, 2008)",
+  { id:"framingham", cat:"Cardiovascular", icon:"", title:"Framingham Risk (General CVD, 2008)",
     desc:"10-year general cardiovascular disease risk (D'Agostino 2008).",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -6271,7 +6271,7 @@
       return { v:r1(risk), u:"% (10-yr)", i:b+" of a general cardiovascular event (includes coronary, cerebrovascular, heart failure and peripheral disease — runs higher than hard-ASCVD estimates). Cholesterol in mg/dL (mmol/L × 38.67). Ref: D'Agostino, Circulation 2008." };
     } },
 
-  { id:"epvs", cat:"Cardiovascular", icon:"🩸", title:"Estimated Plasma Volume Status (ePVS)",
+  { id:"epvs", cat:"Cardiovascular", icon:"", title:"Estimated Plasma Volume Status (ePVS)",
     desc:"Relative plasma volume from haematocrit and haemoglobin (a congestion marker).",
     inputs:[
       { id:"hct", label:"Haematocrit", type:"number", unit:"%", step:"0.1" },
@@ -6284,7 +6284,7 @@
       return { v:Math.round(epvs*100)/100, u:"mL/g", i:b+" (Duarte ratio; higher values track congestion in heart failure). Ref: Duarte K, et al. JACC Heart Fail 2015 (ePVS)." };
     } },
 
-  { id:"frail_scale", cat:"General", icon:"🧓", title:"FRAIL Scale",
+  { id:"frail_scale", cat:"General", icon:"", title:"FRAIL Scale",
     desc:"Rapid frailty screen (Fatigue, Resistance, Ambulation, Illnesses, Loss of weight).",
     inputs:[
       { id:"fatigue", label:"Fatigue (tired most of the time)", type:"check" },
@@ -6299,7 +6299,7 @@
       return { v:s, u:"/5", i:b+" (0 robust, 1–2 pre-frail, ≥3 frail). Ref: Morley JE, et al. J Nutr Health Aging 2012 (FRAIL)." };
     } },
 
-  { id:"tug", cat:"General", icon:"🚶", title:"Timed Up and Go (TUG)",
+  { id:"tug", cat:"General", icon:"", title:"Timed Up and Go (TUG)",
     desc:"Interprets a Timed Up and Go time for mobility and fall risk.",
     inputs:[
       { id:"secs", label:"Time to complete", type:"number", unit:"seconds", step:"0.1" }
@@ -6310,7 +6310,7 @@
       return { v:r1(v.secs), u:"s", i:b+" (a common fall-risk cut-off is ≥12–13.5 s). Ref: Podsiadlo D, Richardson S. J Am Geriatr Soc 1991 (TUG)." };
     } },
 
-  { id:"prisma7", cat:"General", icon:"🧓", title:"PRISMA-7 (Frailty Screen)",
+  { id:"prisma7", cat:"General", icon:"", title:"PRISMA-7 (Frailty Screen)",
     desc:"Seven-item screen for frailty/disability in older adults.",
     inputs:[
       { id:"age85", label:"Age >85 years", type:"check" },
@@ -6327,7 +6327,7 @@
       return { v:s, u:"/7", i:b+". Ref: Raîche M, et al. Arch Gerontol Geriatr 2008 (PRISMA-7)." };
     } },
 
-  { id:"gds30", cat:"Psychiatry", icon:"🧠", title:"Geriatric Depression Scale (GDS-30) — interpreter",
+  { id:"gds30", cat:"Psychiatry", icon:"", title:"Geriatric Depression Scale (GDS-30) — interpreter",
     desc:"Interprets a 30-item Geriatric Depression Scale total.",
     inputs:[
       { id:"total", label:"GDS-30 total (0–30)", type:"number", step:"1" }
@@ -6339,7 +6339,7 @@
       return { v:s, u:"/30", i:b+". Ref: Yesavage JA, et al. J Psychiatr Res 1982 (GDS)." };
     } },
 
-  { id:"cdr", cat:"Neurology", icon:"🧠", title:"Clinical Dementia Rating (global)",
+  { id:"cdr", cat:"Neurology", icon:"", title:"Clinical Dementia Rating (global)",
     desc:"Interprets a Clinical Dementia Rating global score.",
     inputs:[
       { id:"score", label:"CDR global score", type:"select", opts:[{v:"0",t:"0 — none"},{v:"0.5",t:"0.5 — very mild / questionable"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"}] }
@@ -7071,7 +7071,12 @@
    * RENDERING — full-screen browser overlay + per-calculator panel
    * ====================================================================== */
   var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","Respiratory","Endocrine","Gastroenterology","Haematology","Oncology","Rheumatology","Musculoskeletal","Dermatology","Psychiatry","Paediatrics","Obstetrics","Ophthalmology","Toxicology","General"];
-  var CAT_ICON = { "Cardiovascular":"🫀","Critical care":"🚨","Infectious disease":"🦠","Renal":"🫘","Hepatology":"🫁","Neurology":"🧠","General":"⚖️","Respiratory":"🌬️","Endocrine":"🧬","Gastroenterology":"🩻","Haematology":"🩸","Oncology":"🎗️","Rheumatology":"🦴","Musculoskeletal":"🦿","Dermatology":"🧴","Psychiatry":"🛋️","Paediatrics":"👶","Obstetrics":"🤰","Ophthalmology":"👁️","Toxicology":"☠️" };
+  // Category → shared line-icon NAME (window.ICONS catalog). Each calculator inherits its
+  // category's icon (no per-calc emoji). Replaces the old emoji map for a consistent, pro look.
+  var CAT_ICON = { "Cardiovascular":"heart","Critical care":"siren","Infectious disease":"microbe","Renal":"kidney","Hepatology":"liver","Neurology":"brain","General":"scales","Respiratory":"lungs","Endocrine":"endocrine","Gastroenterology":"stomach","Haematology":"droplet","Oncology":"ribbon","Rheumatology":"joint","Musculoskeletal":"bone","Dermatology":"skin","Psychiatry":"psych","Paediatrics":"baby","Obstetrics":"pregnant","Ophthalmology":"eye","Toxicology":"skull" };
+  // Icon accessor — guarded for load order; falls back to empty string (never a crash / emoji).
+  function mcIco(name, cls){ return (window.ICONS && ICONS.get) ? ICONS.get(name, cls || "mc-ico") : ""; }
+  function mcCatIco(cat, cls){ return mcIco(CAT_ICON[cat] || "calc", cls); }
   // Guarantee every category actually used by a calculator appears (CAT_ORDER sets priority;
   // any not listed above are appended). Without this, calcs in an unlisted category are silently
   // absent from the list AND search. Future-proof: a brand-new category auto-appears at the end.
@@ -7094,11 +7099,11 @@
         '<span style="width:64px"></span>'+
       '</div>'+
       '<div class="mc-body">'+
-        '<input id="mcSearch" class="mc-search" type="text" placeholder="🔍 Search calculators (e.g. MELD, sepsis, sodium, stroke)…" autocomplete="off">'+
+        '<input id="mcSearch" class="mc-search" type="text" placeholder="Search calculators (e.g. MELD, sepsis, sodium, stroke)…" autocomplete="off">'+
         '<div id="mcCats" class="mc-cats"></div>'+
         '<div id="mcList" class="mc-list"></div>'+
-        '<button id="mcInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">💊⚠️ Check Drug Interactions</button>'+
-        '<div class="mc-disc">⚠️ Decision-support only — not a substitute for clinical judgement. These tools are AI-generated and not yet clinician-verified: confirm every formula, threshold and result against the individual patient and your local protocol. Copyright-restricted instruments (e.g. DLQI, MNA-SF, Clinical Frailty Scale, BASDAI/BASFI) must be administered using the official questionnaire from the rights-holder — this app only interprets the score.</div>'+
+        '<button id="mcInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">'+mcIco("interact")+' Check Drug Interactions</button>'+
+        '<div class="mc-disc">'+mcIco("warn")+' Decision-support only — not a substitute for clinical judgement. These tools are AI-generated and not yet clinician-verified: confirm every formula, threshold and result against the individual patient and your local protocol. Copyright-restricted instruments (e.g. DLQI, MNA-SF, Clinical Frailty Scale, BASDAI/BASFI) must be administered using the official questionnaire from the rights-holder — this app only interprets the score.</div>'+
       '</div>';
     document.body.appendChild(root);
     root.querySelector("#mcClose").addEventListener("click", close);
@@ -7114,7 +7119,7 @@
     var chips=['<button class="mc-cat'+(activeCat===""?" on":"")+'" data-cat="">All</button>'];
     CAT_ORDER.forEach(function(c){
       var n=CALCS.filter(function(x){return x.cat===c;}).length;
-      chips.push('<button class="mc-cat'+(activeCat===c?" on":"")+'" data-cat="'+esc(c)+'">'+(CAT_ICON[c]||"")+" "+esc(c)+' <span>'+n+'</span></button>');
+      chips.push('<button class="mc-cat'+(activeCat===c?" on":"")+'" data-cat="'+esc(c)+'">'+mcCatIco(c)+" "+esc(c)+' <span>'+n+'</span></button>');
     });
     el.innerHTML=chips.join("");
     el.querySelectorAll(".mc-cat").forEach(function(b){
@@ -7137,10 +7142,10 @@
     CAT_ORDER.forEach(function(cat){
       var inCat=list.filter(function(c){return c.cat===cat;});
       if(!inCat.length) return;
-      html+='<div class="mc-grp-h">'+(CAT_ICON[cat]||"")+" "+esc(cat)+'</div><div class="mc-grid">';
+      html+='<div class="mc-grp-h">'+mcCatIco(cat)+" "+esc(cat)+'</div><div class="mc-grid">';
       inCat.forEach(function(c){
         html+='<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'">'+
-          '<button class="mc-card-head" data-open="'+c.id+'"><span class="mc-ic">'+(c.icon||"🧮")+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
+          '<button class="mc-card-head" data-open="'+c.id+'"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
           (openId===c.id?'<div class="mc-panel" id="mcPanel_'+c.id+'"></div>':"")+
         '</div>';
       });
@@ -7308,14 +7313,14 @@
         filled.push({ label:f.label, val:got.value, units:got.units, src:src });
       } else if(photoRec && photoRec[f.lab]!=null && !isNaN(parseFloat(photoRec[f.lab]))){
         inp.value=parseFloat(photoRec[f.lab]);
-        filled.push({ label:f.label, val:parseFloat(photoRec[f.lab]), units:"", src:"📷 Imported report" });
+        filled.push({ label:f.label, val:parseFloat(photoRec[f.lab]), units:"", src:"Imported report" });
       } else { missing.push(f.label); }
     });
     return { filled:filled, missing:missing };
   }
   function afNoteRows(r){
     var h="";
-    if(r.filled.length) h+='<div class="mc-af-ok">'+r.filled.map(function(x){ return '✓ '+esc(x.label)+': <b>'+esc(x.val)+'</b>'+(x.units?" "+esc(x.units):"")+' <span>'+esc(x.src)+'</span>'; }).join("")+'</div>';
+    if(r.filled.length) h+='<div class="mc-af-ok">'+r.filled.map(function(x){ return mcIco("check")+' '+esc(x.label)+': <b>'+esc(x.val)+'</b>'+(x.units?" "+esc(x.units):"")+' <span>'+esc(x.src)+'</span>'; }).join("")+'</div>';
     if(r.missing.length) h+='<div class="mc-af-miss">Not found — enter manually: '+r.missing.map(esc).join(", ")+'</div>';
     if(!r.filled.length && !r.missing.length) h+='<div class="mc-af-miss">No matching lab values found for this patient.</div>';
     return h;
@@ -7328,13 +7333,13 @@
     function photo(){ return window.ICU_STATE && ICU_STATE.labs && ICU_STATE.labs.recent; }
     function photoName(){ return (window.ICU_STATE && ICU_STATE.patient && ICU_STATE.patient.name) || ""; }
     function photoHasNeeds(){ var p=photo(); if(!p) return false; return calcLabKeys(c).some(function(k){ return p[k]!=null && !isNaN(parseFloat(p[k])); }); }
-    function photoBtnHTML(){ return photoHasNeeds()?'<button class="mc-af-photo" id="mcAFph_'+c.id+'">📷 Use last imported report'+(photoName()?' ('+esc(photoName())+')':'')+'</button>':""; }
+    function photoBtnHTML(){ return photoHasNeeds()?'<button class="mc-af-photo" id="mcAFph_'+c.id+'">'+mcIco("camera")+' Use last imported report'+(photoName()?' ('+esc(photoName())+')':'')+'</button>':""; }
     function wirePhotoBtn(){
       var b=document.getElementById("mcAFph_"+c.id); if(!b) return;
       b.addEventListener("click", function(){
         var pt=(window.ICU_STATE && ICU_STATE.patient)||{};
-        var r=fillFields(c, {}, photo(), { age:pt.age, sex:pt.sex, src:"📷 Imported" }); run();
-        body.innerHTML='<div class="mc-af-note"><div class="mc-af-note-h">📷 From imported report'+(photoName()?' · '+esc(photoName()):'')+'</div>'+afNoteRows(r)+'<div class="mc-af-verify">⚠️ Verify against the source report before relying on the result.</div></div>';
+        var r=fillFields(c, {}, photo(), { age:pt.age, sex:pt.sex, src:"Imported" }); run();
+        body.innerHTML='<div class="mc-af-note"><div class="mc-af-note-h">'+mcIco("camera")+' From imported report'+(photoName()?' · '+esc(photoName()):'')+'</div>'+afNoteRows(r)+'<div class="mc-af-verify">'+mcIco("warn")+' Verify against the source report before relying on the result.</div></div>';
       });
     }
     function pick(p){
@@ -7344,18 +7349,18 @@
         var ageP=parseInt(p.dob,10);
         var demo={ age:(!isNaN(ageP)&&ageP>0&&ageP<130)?ageP:null, sex:p.gender, src:"Ward Sync" };
         var r=fillFields(c, extractAnalytes(rows), photo(), demo); run();
-        body.innerHTML='<div class="mc-af-note"><div class="mc-af-note-h">☁ '+esc(p.patientFirstName||p.patientId)+' · Ward Sync</div>'+afNoteRows(r)+'<div class="mc-af-verify">⚠️ Auto-filled from the hospital record — verify each value before relying on the result.</div></div>';
+        body.innerHTML='<div class="mc-af-note"><div class="mc-af-note-h">'+mcIco("cloud")+' '+esc(p.patientFirstName||p.patientId)+' · Ward Sync</div>'+afNoteRows(r)+'<div class="mc-af-verify">'+mcIco("warn")+' Auto-filled from the hospital record — verify each value before relying on the result.</div></div>';
       }).catch(function(){ body.innerHTML='<div class="mc-af-msg">Couldn’t fetch labs — check the Ward Sync connection and try again.</div>'; });
     }
     function renderPicker(){
       var connected = window.GHIS && GHIS.isConnected && GHIS.isConnected();
       if(!connected){
-        body.innerHTML='<div class="mc-af-msg">Ward Sync isn’t connected. Open 🏥 <b>Ward</b> and sign in to fetch a patient’s labs.<button class="mc-af-open" id="mcAFopen_'+c.id+'">Open Ward Sync</button></div>'+photoBtnHTML();
+        body.innerHTML='<div class="mc-af-msg">Ward Sync isn’t connected. Open '+mcIco("hospital")+' <b>Ward</b> and sign in to fetch a patient’s labs.<button class="mc-af-open" id="mcAFopen_'+c.id+'">Open Ward Sync</button></div>'+photoBtnHTML();
         var o=document.getElementById("mcAFopen_"+c.id); if(o) o.addEventListener("click", function(){ try{ window.openGHIS && openGHIS(); }catch(e){} });
         wirePhotoBtn(); return;
       }
       var pts = (GHIS.getPatients && GHIS.getPatients()) || [];
-      body.innerHTML='<input class="mc-af-search" id="mcAFq_'+c.id+'" placeholder="🔍 Select patient — name or ID…" autocomplete="off"><div class="mc-af-list" id="mcAFlist_'+c.id+'"></div>'+photoBtnHTML();
+      body.innerHTML='<input class="mc-af-search" id="mcAFq_'+c.id+'" placeholder="Select patient — name or ID…" autocomplete="off"><div class="mc-af-list" id="mcAFlist_'+c.id+'"></div>'+photoBtnHTML();
       var q=document.getElementById("mcAFq_"+c.id);
       q.addEventListener("keydown", function(e){ e.stopPropagation(); });
       q.addEventListener("input", function(){ list(q.value); });
@@ -7378,11 +7383,11 @@
     var el=document.getElementById("mcPanel_"+id); if(!el) return;
     var hasLab=calcHasLab(c);
     el.innerHTML=
-      (hasLab?'<div class="mc-af"><button class="mc-af-btn" id="mcAFbtn_'+id+'">🔬 Auto-fill labs from patient</button><div class="mc-af-body" id="mcAFbody_'+id+'"></div></div>':"")+
+      (hasLab?'<div class="mc-af"><button class="mc-af-btn" id="mcAFbtn_'+id+'">'+mcIco("flask")+' Auto-fill labs from patient</button><div class="mc-af-body" id="mcAFbody_'+id+'"></div></div>':"")+
       '<div class="mc-inputs">'+inputHTML(c)+'</div>'+
       '<button class="mc-calc-btn" id="mcCalc_'+id+'">Calculate</button>'+
       '<div class="mc-result" id="mcRes_'+id+'"></div>'+
-      (c.ref?'<div class="mc-ref">📚 <b>Reference:</b> '+esc(c.ref)+'</div>':"");
+      (c.ref?'<div class="mc-ref">'+mcIco("book")+' <b>Reference:</b> '+esc(c.ref)+'</div>':"");
     function run(fromBtn){
       var out; try { out=c.compute(readValues(c)); } catch(e){ out={err:"Could not compute — check the inputs."}; }
       var res=document.getElementById("mcRes_"+id);
@@ -7479,7 +7484,12 @@
       ".mc-card{border:1px solid var(--line,#e5e5e0);border-radius:12px;background:var(--panel,#fff);overflow:hidden}",
       ".mc-card.open{border-color:var(--teal,#0a9396);grid-column:1/-1}",
       ".mc-card-head{display:flex;align-items:center;gap:11px;padding:12px 13px;cursor:pointer;width:100%;background:transparent;border:none;text-align:left}",
-      ".mc-ic{font-size:20px;flex:0 0 auto}",
+      ".mc-ic{font-size:20px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}",
+      ".mc-ico{width:15px;height:15px;vertical-align:-2px;display:inline-block;flex:0 0 auto}",
+      ".mc-ic svg{width:22px;height:22px;color:var(--teal,#0a9396)}",
+      ".mc-cat svg,.mc-grp-h svg{width:14px;height:14px;vertical-align:-2px;margin-right:4px}",
+      ".mc-grp-h svg{color:var(--teal,#0a9396)}",
+      ".mc-ref svg,.mc-af-btn svg,.mc-af-note-h svg,.mc-af-verify svg,.mc-af-ok svg,.mc-af-photo svg,.mc-af-msg svg,.mc-disc svg,#mcInteractionsBtn svg{width:14px;height:14px;vertical-align:-2px;margin-right:4px;flex:0 0 auto}",
       ".mc-card-main{flex:1;min-width:0}",
       ".mc-card-t{display:block;font:700 13.5px var(--sans,system-ui);color:var(--ink,#1a1a1a)}",
       ".mc-card-d{display:block;font:500 11.5px var(--sans,system-ui);color:var(--slate-soft,#888);margin-top:2px}",
