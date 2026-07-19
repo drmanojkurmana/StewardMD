@@ -263,6 +263,10 @@
     var stream = null, videoEl = null, canvas = null, cctx = null, raf = 0, running = false;
     var hub = null, onFrame = null, lastAnalyze = 0, opts = {};
     var nativeSub = null, nativeImg = null, nativePending = false;   // native-depth (approach A) source
+    var nativeBuf = null, NATIVE_BUFFER_MAX = 60;                    // rolling capture-record buffer
+                                                                     // (README 08: 30-90 frames, per-frame
+                                                                     // metadata + score) so captureBurst
+                                                                     // works without a getUserMedia <video>
     function now() { return (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now(); }
     // Convert a native FundxDepth frame's metric depth + pose into engine FrameAnalysis fields.
     function depthFieldsFrom(fr) {
@@ -289,7 +293,12 @@
       if (t - lastAnalyze >= (opts.analyzeEveryMs || 120)) {
         lastAnalyze = t;
         try {
-          var c = grab(opts.analyzeScale || 0.25);
+          // Resolution tiers (README 08): analysis runs on a small, fixed-width downscale so a
+          // high capture/preview resolution never inflates inference cost. Cap the analysis width
+          // (analyzeWidth) regardless of the source's resolution.
+          var vw0 = (videoEl && videoEl.videoWidth) || 1280;
+          var aScale = Math.min(opts.analyzeScale || 0.25, (opts.analyzeWidth || 384) / vw0);
+          var c = grab(aScale);
           if (c) {
             var img = cctx.getImageData(0, 0, c.width, c.height);
             var mpPart = (hub && hub.mediapipe && hub.mediapipe.available()) ? hub.mediapipe.analyze(videoEl, t) : {};
@@ -307,8 +316,16 @@
     // WKWebView exposes no torch constraint) — never throws.
     var torchOn = false;
     function torchTrack() { try { return stream && stream.getVideoTracks && stream.getVideoTracks()[0]; } catch (e) { return null; } }
-    function torchSupported() { try { var t = torchTrack(); var c = t && t.getCapabilities && t.getCapabilities(); return !!(c && c.torch); } catch (e) { return false; } }
+    function torchSupported() {
+      try { if (nativeSub) return true; } catch (e) {}   // native/GPU: flash via ARCore FlashMode
+      try { var t = torchTrack(); var c = t && t.getCapabilities && t.getCapabilities(); return !!(c && c.torch); } catch (e) { return false; }
+    }
     function setTorch(on) {
+      // Native/GPU mode: ARCore owns the camera — toggle the flash through the plugin (FlashMode).
+      try {
+        var P = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth;
+        if (nativeSub && P && P.setTorch) { P.setTorch({ on: !!on }); torchOn = !!on; return true; }
+      } catch (e) {}
       try {
         var t = torchTrack();
         if (!t || !t.applyConstraints) return false;
@@ -327,7 +344,13 @@
         opts = o || {}; onFrame = cb; videoEl = video;
         hub = opts.hub || makeHub(opts);
         if (!canvas) { canvas = document.createElement("canvas"); cctx = canvas.getContext("2d", { willReadFrequently: true }); }
-        return navigator.mediaDevices.getUserMedia({ video: { facingMode: opts.facingMode || "environment", width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false })
+        // Request a HIGH capture/preview resolution (README 08: capture res optimised for quality).
+        // The device picks the closest supported mode; the analysis loop downscales independently,
+        // so captured best-frames are full-resolution while inference stays cheap. NOTE: the actual
+        // resolution achieved + a full-sensor still (ImageCapture.takePhoto / native captureStill)
+        // must be validated on-device — see M6.
+        var camW = opts.captureWidth || 1920, camH = opts.captureHeight || 1080;
+        return navigator.mediaDevices.getUserMedia({ video: { facingMode: opts.facingMode || "environment", width: { ideal: camW }, height: { ideal: camH } }, audio: false })
           .then(function (s) {
             stream = s; videoEl.srcObject = s; videoEl.setAttribute("playsinline", ""); videoEl.muted = true;
             return videoEl.play().catch(function () {});
@@ -356,6 +379,8 @@
         var P; try { P = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth; } catch (e) { P = null; }
         if (!P || !P.start) return Promise.reject(new Error("native depth unavailable"));
         if (!nativeImg) nativeImg = new Image();
+        var _VB = (typeof window !== "undefined") ? window.SMD_FUNDX_VISION : null;
+        nativeBuf = (_VB && _VB.createCaptureBuffer) ? _VB.createCaptureBuffer({ max: NATIVE_BUFFER_MAX }) : null;
         function onDepthFrame(fr) {
           if (!running || !fr || !fr.cameraImage || nativePending) return;
           nativePending = true;
@@ -371,6 +396,9 @@
               var mpPart = (hub.mediapipe && hub.mediapipe.available()) ? hub.mediapipe.analyze(canvas, now()) : {};
               var fa = hub.build({ imageData: imgData, mpPartial: mpPart, posePartial: depthFieldsFrom(fr), ts: now() });
               if (onFrame) onFrame(fa);
+              // Roll the full native frame (already a JPEG dataURL — no re-encode) into the buffer so
+              // captureBurst can pick the best recent frame in GPU/native mode (no getUserMedia video).
+              if (nativeBuf) nativeBuf.push({ ts: now(), dataUrl: fr.cameraImage, metrics: fa, pose: (fr.roll != null ? { roll: +fr.roll } : null), depth: (fr.distanceMeters != null ? +fr.distanceMeters : null), w: nativeImg.width, h: nativeImg.height });
               if (opts.previewCtx && opts.previewCanvas) { opts.previewCanvas.width = nativeImg.width; opts.previewCanvas.height = nativeImg.height; opts.previewCtx.drawImage(nativeImg, 0, 0); }
             } catch (e) {}
           };
@@ -378,7 +406,7 @@
           nativeImg.src = fr.cameraImage;
         }
         return Promise.resolve()
-          .then(function () { if (P.addListener) nativeSub = P.addListener("fundxDepthFrame", onDepthFrame); return P.start({ streamImage: true }); })
+          .then(function () { if (P.addListener) nativeSub = P.addListener("fundxDepthFrame", onDepthFrame); return P.start({ streamImage: true, gpuPreview: !!opts.gpuPreview }); })
           .then(function (res) {
             if (res && res.started === false) { try { if (nativeSub) Promise.resolve(nativeSub).then(function (h) { if (h && h.remove) h.remove(); }); } catch (e) {} nativeSub = null; throw new Error("native session: " + (res && res.reason)); }
             running = true;
@@ -388,7 +416,11 @@
       },
       // Capture a best-frame burst: grab N full-res frames, score, return dataURLs + metrics.
       captureBurst: function (count) {
-        count = count || 12; var frames = [];
+        count = count || 12;
+        // GPU/native mode: return the rolling buffer of recent native frames (already scored);
+        // BestFrameSelector picks the highest-quality one. getUserMedia mode grabs fresh below.
+        if (nativeBuf && nativeBuf.size()) return nativeBuf.recent(count).map(function (r) { return { dataUrl: r.dataUrl, metrics: r.metrics, w: r.w, h: r.h }; });
+        var frames = [];
         for (var i = 0; i < count; i++) {
           var c = grab(1);
           if (!c) break;
@@ -403,6 +435,7 @@
       },
       stop: function () {
         running = false; if (raf) cancelAnimationFrame(raf); raf = 0;
+        if (nativeBuf) nativeBuf.clear();
         try { setTorch(false); } catch (e) {}   // turn the flash off before releasing the camera
         try { if (stream) stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
         try { if (videoEl) videoEl.srcObject = null; } catch (e) {}

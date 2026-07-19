@@ -79,8 +79,114 @@ V.CFG.lensConfirmFallback = false;
 // QualityEngine — image quality (fundus + vessels), not disease structures
 const q = V.QualityEngine.score(good);
 ok("quality: good frame accepted, no reasons", q.accepted === true && q.overall >= 65 && q.reasons.length === 0 && q.subscores.fundusVisibility >= 0.8);
+// A non-retinal frame (no red reflex / fundus) is STAGE-1 GATED — no retinal quality is computed.
 const qBad = V.QualityEngine.score({ focus: 0.1, exposure: 0.1, reflection: 0.9 });
-ok("quality: bad frame rejected + fundus/vessel reasons", qBad.accepted === false && qBad.reasons.indexOf("poor_focus") >= 0 && qBad.reasons.indexOf("fundus_not_visible") >= 0 && qBad.reasons.indexOf("no_vessels_detected") >= 0);
+ok("quality: non-retinal frame gated (retinalGate false, no red reflex)", qBad.retinalGate === false && qBad.accepted === false && qBad.reasons.indexOf("no_red_reflex") >= 0);
+// A RETINAL frame (passes the gate) with poor image quality is rejected with the quality reasons.
+const qPoor = V.QualityEngine.score({ redReflex: 0.7, fundusVisible: true, fundusConf: 0.7, fundusCircularity: 0.6, retinaConf: 0.7, focus: 0.1, exposure: 0.1, reflection: 0.9, vesselScore: 0.1, fundusSize: 0.6 });
+ok("quality: retinal-but-poor frame scored + rejected + reasons", qPoor.retinalGate === true && qPoor.accepted === false && qPoor.reasons.indexOf("poor_focus") >= 0);
+
+// ===== STAGE-1 RETINAL GATE: every non-retinal scene must be REJECTED before scoring =====
+// Realistic heuristic values (sharp focus, some texture → false fundus/vessel), but no red reflex
+// and no circular fundus — exactly what let the curtain scene through before the gate.
+const nonRetinal = {
+  room:     { focus: 0.60, exposure: 0.60, reflection: 0.10, redReflex: 0.02, fundusVisible: true, fundusConf: 0.20, fundusCircularity: 0.10, vesselScore: 0.20 },
+  window:   { focus: 0.85, exposure: 0.90, reflection: 0.05, redReflex: 0.05, fundusVisible: true, fundusConf: 0.40, fundusCircularity: 0.15, vesselScore: 0.50 },
+  curtains: { focus: 0.84, exposure: 0.85, reflection: 0.00, redReflex: 0.09, fundusVisible: true, fundusConf: 0.52, fundusCircularity: 0.13, vesselScore: 0.72 }, // the reported bug
+  wall:     { focus: 0.50, exposure: 0.70, reflection: 0.05, redReflex: 0.00, fundusVisible: false, fundusConf: 0.10, fundusCircularity: 0.05, vesselScore: 0.05 },
+  desk:     { focus: 0.70, exposure: 0.65, reflection: 0.10, redReflex: 0.03, fundusVisible: true, fundusConf: 0.30, fundusCircularity: 0.20, vesselScore: 0.30 },
+  laptop:   { focus: 0.90, exposure: 0.80, reflection: 0.15, redReflex: 0.04, fundusVisible: true, fundusConf: 0.35, fundusCircularity: 0.20, vesselScore: 0.60 },
+  phone:    { focus: 0.85, exposure: 0.75, reflection: 0.20, redReflex: 0.05, fundusVisible: true, fundusConf: 0.30, fundusCircularity: 0.25, vesselScore: 0.40 },
+  clothing: { focus: 0.60, exposure: 0.60, reflection: 0.08, redReflex: 0.08, fundusVisible: true, fundusConf: 0.30, fundusCircularity: 0.20, vesselScore: 0.60 },
+  face:     { eyePresent: true, eyeConf: 0.90, pupilCentered: true, focus: 0.80, exposure: 0.70, reflection: 0.10, redReflex: 0.15, fundusVisible: true, fundusConf: 0.30, fundusCircularity: 0.30, vesselScore: 0.40 },
+  hand:     { focus: 0.70, exposure: 0.65, reflection: 0.10, redReflex: 0.10, fundusVisible: true, fundusConf: 0.25, fundusCircularity: 0.20, vesselScore: 0.30 },
+  ceiling:  { focus: 0.50, exposure: 0.80, reflection: 0.05, redReflex: 0.00, fundusVisible: false, fundusConf: 0.10, fundusCircularity: 0.05, vesselScore: 0.10 }
+};
+Object.keys(nonRetinal).forEach(function (name) {
+  const qs = V.QualityEngine.score(nonRetinal[name]);
+  ok("retinal-gate: " + name + " REJECTED before scoring", qs.retinalGate === false && qs.accepted === false && qs.overall === 0);
+});
+// Positive control: a genuine fundus view PASSES the gate and IS scored.
+const qFundus = V.QualityEngine.score({ redReflex: 0.75, fundusVisible: true, fundusConf: 0.85, fundusCircularity: 0.75, retinaConf: 0.8, vesselScore: 0.7, focus: 0.85, exposure: 0.8, reflection: 0.1, fundusSize: 0.6 });
+ok("retinal-gate: genuine fundus PASSES + accepted", qFundus.retinalGate === true && qFundus.accepted === true && qFundus.overall >= 60);
+// BestFrameSelector over a burst of non-retinal frames must not accept any.
+const bfsBad = V.BestFrameSelector.select(Object.keys(nonRetinal).map(function (k) { return { metrics: nonRetinal[k] }; }));
+ok("retinal-gate: best of an all-non-retinal burst is not accepted", bfsBad.scores.every(function (s) { return s.accepted === false && s.retinalGate === false; }));
+
+// ===== expanded adversarial corpus: warm, circular, BRIGHT but FEATURELESS (no vessels) =====
+// A SHARP warm glowing disk (lamp, ember, sunset through a round window) can clear red-reflex +
+// circular-fundus + retina-confidence yet has NO retinal vessels. Before Stage-1 structural
+// corroboration this was the remaining hole — it must now be REJECTED with no_retinal_structure.
+const featurelessWarm = {
+  lamp:     { redReflex: 0.72, fundusVisible: true, fundusConf: 0.62, fundusCircularity: 0.70, retinaConf: 0.62, vesselScore: 0.05, focus: 0.85, exposure: 0.80 },
+  glowDisk: { redReflex: 0.60, fundusVisible: true, fundusConf: 0.58, fundusCircularity: 0.55, retinaConf: 0.58, vesselScore: 0.08, focus: 0.75, exposure: 0.75 },
+  ember:    { redReflex: 0.90, fundusVisible: true, fundusConf: 0.55, fundusCircularity: 0.60, retinaConf: 0.55, vesselScore: 0.02, focus: 0.70, exposure: 0.85 }
+};
+Object.keys(featurelessWarm).forEach(function (name) {
+  const qs = V.QualityEngine.score(featurelessWarm[name]);
+  ok("retinal-gate: featureless warm '" + name + "' REJECTED (no vessel structure)", qs.retinalGate === false && qs.accepted === false && qs.overall === 0 && qs.reasons.indexOf("no_retinal_structure") >= 0);
+});
+// A genuinely retinal but OUT-OF-FOCUS frame is EXEMPT from the vessel requirement (blur suppresses
+// vessels) — it still passes the gate and is scored, then rejected for poor focus. Nothing unsafe
+// is accepted, but a real (recoverable) fundus view is never wrongly gated as "not an eye".
+const qBlurryReal = V.QualityEngine.score({ redReflex: 0.7, fundusVisible: true, fundusConf: 0.7, fundusCircularity: 0.6, retinaConf: 0.7, vesselScore: 0.08, focus: 0.15, exposure: 0.6 });
+ok("retinal-gate: blurry-but-real fundus passes gate (blur-exempt) then quality-rejected", qBlurryReal.retinalGate === true && qBlurryReal.accepted === false);
+
+// ===== Workflow 2 · upload mode: an EXISTING full-frame fundus fills the frame (low circularity) =====
+// It must be REJECTED by the live "circular red-reflex glow" gate but ACCEPTED in upload mode, while
+// upload mode still rejects genuinely non-retinal images (warmth + vessels remain required).
+const fullFrameFundus = { redReflex: 0.7, fundusVisible: true, fundusConf: 0.8, fundusCircularity: 0.2, retinaConf: 0.8, vesselScore: 0.6, focus: 0.7, exposure: 0.7 };
+ok("upload: full-frame fundus rejected in LIVE mode (needs circular glow)", V.QualityEngine.score(fullFrameFundus).retinalGate === false);
+ok("upload: full-frame fundus PASSES in upload mode (circularity relaxed) + scored", V.QualityEngine.score(fullFrameFundus, { upload: true }).retinalGate === true && V.QualityEngine.score(fullFrameFundus, { upload: true }).overall > 0);
+ok("upload: non-retinal still rejected in upload mode", V.QualityEngine.score({ redReflex: 0.05, fundusVisible: false, fundusConf: 0.1, retinaConf: 0.1, vesselScore: 0.05, focus: 0.8 }, { upload: true }).retinalGate === false);
+ok("upload: circularity still enforced in live (default) mode", V.QualityEngine.score(fullFrameFundus, {}).retinalGate === false);
+
+// ===== hard eye gate: no eye → zero readiness (never fake acquisition progress) =====
+// Everything else is perfect, but there is no eye — readiness must be zero, not a misleading
+// partial score from incidental fundus-like signals.
+const rNoEye = V.ReadinessScore.compute({ eyePresent: false, eyeConf: 0, redReflex: 0.8, fundusVisible: true, fundusConf: 0.9, fundusCircularity: 0.9, focus: 0.9, exposure: 0.8, reflection: 0.05, motion: 0.05, vesselScore: 0.7, distanceState: "ok" });
+ok("hard-eye-gate: no eye → readiness 0 + not ready", rNoEye.overall === 0 && rNoEye.ready === false);
+ok("hard-eye-gate: with eye, readiness scored normally", V.ReadinessScore.compute(good).overall > 0.5);
+
+// ===== CaptureRingBuffer (README 08): capacity cap + best = highest score, not newest =====
+const cb = V.createCaptureBuffer({ max: 5 });
+ok("capture-buffer: starts empty", cb.size() === 0 && cb.best() === null);
+for (let i = 0; i < 8; i++) cb.push({ ts: i, metrics: { focus: 0.1 }, dataUrl: "d" + i });
+ok("capture-buffer: capacity caps size + evicts oldest", cb.size() === 5 && cb.frames()[0].ts === 3);
+ok("capture-buffer: recent(n) returns the last n", cb.recent(2).length === 2 && cb.recent(2)[1].ts === 7);
+// a high-quality frame in the MIDDLE, low-quality after → best() finds the middle one, not newest
+const cb2 = V.createCaptureBuffer({ max: 10 });
+cb2.push({ ts: 0, metrics: { focus: 0.2 } });
+cb2.push({ ts: 1, metrics: good, dataUrl: "BEST" });   // genuine fundus → high score
+cb2.push({ ts: 2, metrics: { focus: 0.2 } });           // newest, but low score
+const cbBest = cb2.best();
+ok("capture-buffer: best = highest score, NOT newest", cbBest && cbBest.frame.dataUrl === "BEST" && cbBest.frame.ts === 1 && cbBest.score >= 60);
+ok("capture-buffer: push computes retinal-gated score", cb2.frames()[0].retinalGate === false && cb2.frames()[1].retinalGate === true);
+// bestAccepted returns only a usable (retinal + quality) frame, else null — never a best-of-bad
+const cbBad = V.createCaptureBuffer({ max: 4 });
+[nonRetinal.room, nonRetinal.wall, nonRetinal.desk].forEach((m) => cbBad.push({ metrics: m }));
+ok("capture-buffer: bestAccepted null when nothing usable", cbBad.bestAccepted() === null && cbBad.best().score === 0);
+
+// ===== QualityWords (README 03: clinician sees words, never scores) =====
+ok("quality-words: 90 → Excellent", V.qualityWord(90).label === "Excellent" && V.qualityWord(90).tone === "good");
+ok("quality-words: 75 → Good", V.qualityWord(75).label === "Good");
+ok("quality-words: 62 → Acceptable", V.qualityWord(62).label === "Acceptable");
+ok("quality-words: 40 → Retake recommended", V.qualityWord(40).label === "Retake recommended" && V.qualityWord(40).tone === "warn");
+ok("quality-words: gated result → No retina detected", V.qualityWord({ retinalGate: false, overall: 0 }).label === "No retina detected" && V.qualityWord({ retinalGate: false }).gated === true);
+ok("quality-words: accepts a QualityScore object", V.qualityWord({ retinalGate: true, overall: 88 }).label === "Excellent");
+
+// ===== Coach.detailFor (beginner-mode verbose coaching) =====
+ok("coach-detail: searching_eye has a full sentence", V.Coach.detailFor(V.STATE.SEARCHING_EYE).length > 20);
+ok("coach-detail: ready has a sentence", V.Coach.detailFor(V.STATE.READY).length > 5);
+ok("coach-detail: unknown state → empty", V.Coach.detailFor("nope") === "");
+
+// ===== Storyboard (README 03 live progress model) =====
+ok("storyboard: 10 named steps", V.Storyboard.total === 10 && V.Storyboard.steps.length === 10);
+ok("storyboard: searching_eye → step 1", V.Storyboard.stepFor(V.STATE.SEARCHING_EYE).index === 1 && V.Storyboard.stepFor(V.STATE.SEARCHING_EYE).total === 10);
+ok("storyboard: ready + capturing → capture step", V.Storyboard.stepFor(V.STATE.READY).key === "capture" && V.Storyboard.stepFor(V.STATE.CAPTURING).key === "capture");
+ok("storyboard: review states → review step", V.Storyboard.stepFor(V.STATE.REVIEW).key === "review");
+ok("storyboard: progress increases with the journey", V.Storyboard.stepFor(V.STATE.RED_REFLEX).progress > V.Storyboard.stepFor(V.STATE.SEARCHING_EYE).progress);
+ok("storyboard: pre/unknown state → null", V.Storyboard.stepFor("idle") === null);
 
 // BestFrameSelector
 const bfs = V.BestFrameSelector.select([{ metrics: { focus: 0.2 } }, { metrics: good }, { metrics: { focus: 0.5 } }]);
@@ -154,6 +260,12 @@ await (async () => {
   await STORE.saveScan(goodRec);
   const all = await STORE.listScans();
   ok("store: re-save updates in place (no dupe)", all.filter((m) => m.id === "s1").length === 1);
+  // updateScan: metadata-only patch (clinician oversight) — must NOT require the stripped images
+  const upd = await STORE.updateScan("s1", { clinicianReview: { status: "accepted", history: [{ action: "accept" }] } });
+  ok("store: updateScan patches meta without image re-validation", upd && upd.clinicianReview && upd.clinicianReview.status === "accepted");
+  const reGot = await STORE.getScan("s1");
+  ok("store: updateScan persists clinicianReview", reGot && reGot.clinicianReview && reGot.clinicianReview.status === "accepted");
+  ok("store: updateScan on unknown id → null (no throw)", (await STORE.updateScan("nope", { x: 1 })) === null);
   await STORE.deleteScan("s1");
   const after = await STORE.listScans();
   ok("store: deleteScan removes record", after.length === 0);
@@ -193,7 +305,7 @@ ok("flag: ?fundx=0 forces off", loadFundxUrl("?fundx=0").enabled() === false);
 const FX = loadFundx("1");
 const stats = { startTs: 0, attempts: 1, captures: 1, retries: 0, burstCount: 2, readinessTrace: [10, 50, 90] };
 const burst = [
-  { dataUrl: "data:image/jpeg;base64,AAAA", metrics: { focus: 0.9, exposure: 0.85, brightness: 0.5, contrast: 0.6, noise: 0.1, reflection: 0.1, retinaConf: 0.9, discConf: 0.9, maculaConf: 0.9, vesselVisibility: 0.7, fieldOfView: 0.9 } },
+  { dataUrl: "data:image/jpeg;base64,AAAA", metrics: { focus: 0.9, exposure: 0.85, brightness: 0.5, contrast: 0.6, noise: 0.1, reflection: 0.1, redReflex: 0.75, fundusVisible: true, fundusConf: 0.85, fundusCircularity: 0.7, retinaConf: 0.9, discConf: 0.9, maculaConf: 0.9, vesselVisibility: 0.7, fieldOfView: 0.9 } },
   { dataUrl: "data:image/jpeg;base64,BBBB", metrics: { focus: 0.2, exposure: 0.3, reflection: 0.6, retinaConf: 0.1 } }
 ];
 const res = FX._buildResult(burst, { ref: "MRN1", name: "Test" }, "right", stats);
@@ -293,13 +405,15 @@ ok("signal-driven: coach follows the measured offset", V.Coach.cueFor(V.STATE.CE
 
 // ---- developer mode: live overlay metrics + frame-by-frame recorder ------
 const FXd = loadFundx("1");
-const stepGood = { state: V.STATE.READY, shouldCapture: true, diagnostic: 0.83, gates: { focus: true, quality: true, reflection: true, motion: true, distance: true, redReflex: true, vessels: true, fundus: true, level: true }, readiness: { overall: 1, ready: true } };
+// stepGood mirrors the Decision Engine's observe() output (a superset of sm.step) — what
+// onFrame now feeds the dev overlay: adds capture{decision}, confidence{level}, failure, stability.
+const stepGood = { state: V.STATE.READY, shouldCapture: true, diagnostic: 0.83, gates: { focus: true, quality: true, reflection: true, motion: true, distance: true, redReflex: true, vessels: true, fundus: true, level: true }, readiness: { overall: 1, ready: true }, capture: { decision: "capture", reason: "ok", canManual: true, ready: true, sustained: true }, confidence: { overall: 0.95, level: "high", subsystems: {} }, failure: null, stability: { smoothedReadiness: 0.95, stable: true, trend: "steady" } };
 const dm = FXd._devMetrics(stepGood, V.makeFrameAnalysis(good));
 const labels = dm.map((m) => m[0]);
-ok("devmode: overlay lists all live metrics + decision", dm.length === 11 && ["focus", "glare (refl)", "motion", "distance", "roll", "red reflex", "vessel", "fundus", "DIAGNOSTIC", "decision"].every((l) => labels.indexOf(l) >= 0));
+ok("devmode: overlay lists all live metrics + decision + perf", dm.length === 16 && ["focus", "glare (refl)", "motion", "distance", "roll", "red reflex", "vessel", "fundus", "DIAGNOSTIC", "confidence", "blocker", "decision", "pipeline", "fps · latency", "stages a·d·r ms"].every((l) => labels.indexOf(l) >= 0));
 FXd._recordDevFrame(stepGood, V.makeFrameAnalysis(good));
 const csv = FXd._devCsv();
-ok("devmode: CSV has every metric column", /(^|,)focus,glare,motion,distance,roll/.test(csv) && /diagnostic,readiness/.test(csv) && /,capture(\n|$)/.test(csv.split("\n")[0] + "\n"));
+ok("devmode: CSV has every metric column", /(^|,)focus,glare,motion,distance,roll/.test(csv) && /diagnostic,readiness/.test(csv) && /,capture,decision,confidence,confLevel,blocker,smoothed(\n|$)/.test(csv.split("\n")[0] + "\n"));
 ok("devmode: frame recorded", FXd._devBuffer().length === 1);
 
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));

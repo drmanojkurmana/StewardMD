@@ -121,8 +121,65 @@
     return { ok: errors.length === 0, errors: errors };
   }
 
+  // ---- Clinical report assembly (README 09) -------------------------------
+  // Assembles a structured, exportable report from a ScanRecord + its ClinicalAssessment. Pure
+  // presentation-of-data — NO new inference. If the record has no stored assessment, the rule
+  // engine is run on its findings. Differential is ranked (most severe / most likely first).
+  var LIKELY = ["unlikely", "possible", "likely"];
+  function buildReport(record, opts) {
+    record = record || {}; opts = opts || {};
+    var vision = record.vision || {}, findings = vision.findings || {};
+    var quality = record.quality || {};
+    var assessment = record.clinical || (opts.assess === false ? null : assessRules(vision, record.patientContext || {}));
+    var considerations = (assessment && assessment.considerations) || [];
+    var differential = considerations.slice().sort(function (a, b) {
+      var s = SEV.indexOf(b.severity) - SEV.indexOf(a.severity);
+      return s !== 0 ? s : (LIKELY.indexOf(b.likelihood) - LIKELY.indexOf(a.likelihood));
+    }).map(function (c, i) { return { rank: i + 1, key: c.key, label: c.label, likelihood: c.likelihood, severity: c.severity, reasoning: (c.evidence || []).join("; ") }; });
+    return {
+      schemaVersion: SCHEMA_VERSION,
+      generatedAt: (typeof Date !== "undefined" ? Date.now() : 0),
+      patient: record.patientContext || { ref: null, name: null },
+      eye: record.eye || (record.acquisition && record.acquisition.eye) || null,
+      timestamp: record.timestamp || null,
+      acquisitionQuality: { score: quality.overall != null ? quality.overall : null, accepted: !!quality.accepted, retinalGate: quality.retinalGate !== false },
+      findings: findings,
+      differential: differential,
+      severity: assessment ? assessment.severity : "none",
+      urgency: assessment ? assessment.urgency : "routine",
+      confidence: assessment ? assessment.confidence : null,
+      recommendations: assessment ? { referral: assessment.referral, followUp: assessment.followUp, investigations: assessment.investigations || [] } : null,
+      urgentFindings: ((assessment && assessment.safetyFlags) || []).filter(function (s) { return /emergency|urgent/.test(s); }),
+      safetyFlags: assessment ? assessment.safetyFlags : [],
+      evidence: assessment ? assessment.evidence : [],
+      disclaimer: (assessment && assessment.disclaimer) || "Advisory only. Not a diagnosis. A qualified clinician must review all findings.",
+      clinicianReview: record.clinicianReview || null
+    };
+  }
+
+  // ---- Clinician oversight (README 09: accept / reject / edit / comment) ---
+  // The final record belongs to the clinician. Pure state transitions on a review object; the
+  // caller persists the returned review onto the ScanRecord.
+  function newReview() { return { status: "pending", note: "", editedConclusion: null, reviewedBy: null, reviewedAt: null, history: [] }; }
+  function applyReview(review, action, payload, meta) {
+    review = review || newReview(); payload = payload || {}; meta = meta || {};
+    var now = (typeof Date !== "undefined" ? Date.now() : 0);
+    var r = { status: review.status, note: review.note, editedConclusion: review.editedConclusion, reviewedBy: review.reviewedBy, reviewedAt: review.reviewedAt, history: (review.history || []).slice() };
+    switch (action) {
+      case "accept": r.status = "accepted"; break;
+      case "reject": r.status = "rejected"; break;
+      case "comment": r.note = String(payload.note || ""); break;
+      case "edit": r.editedConclusion = String(payload.text || ""); r.status = "edited"; break;
+      default: return review;
+    }
+    r.reviewedBy = meta.by || review.reviewedBy || "clinician"; r.reviewedAt = now;
+    r.history.push({ action: action, at: now, by: r.reviewedBy });
+    return r;
+  }
+
   var API = {
     VERSION: VERSION, SCHEMA_VERSION: SCHEMA_VERSION,
+    buildReport: buildReport, newReview: newReview, applyReview: applyReview,
     register: function (p) { if (p && p.id) providers[p.id] = p; return p; },
     list: function () { return Object.keys(providers); },
     get: function (id) { return providers[id] || null; },

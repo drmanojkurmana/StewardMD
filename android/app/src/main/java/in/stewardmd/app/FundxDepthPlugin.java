@@ -1,10 +1,21 @@
 package in.stewardmd.app;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.ImageFormat;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.media.Image;
 import android.util.Base64;
+import android.view.Surface;
+import android.view.View;
+import android.view.ViewGroup;
 import android.opengl.EGL14;
 import android.opengl.EGLConfig;
 import android.opengl.EGLContext;
@@ -21,6 +32,8 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
+import com.google.ar.core.CameraConfig;
+import com.google.ar.core.CameraConfigFilter;
 import com.google.ar.core.Config;
 import com.google.ar.core.Frame;
 import com.google.ar.core.Pose;
@@ -28,6 +41,12 @@ import com.google.ar.core.Session;
 
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 
 /**
  * FundX AI — hybrid depth-fusion plugin (Android, ARCore).
@@ -50,15 +69,52 @@ public class FundxDepthPlugin extends Plugin {
     private HandlerThread arThread;
     private Handler arHandler;
     private volatile boolean running = false;
+    // ARCore's Session and the EGL context are THREAD-AFFINE: they are created on arThread and
+    // MUST be destroyed on that same thread. `lock` serialises the start/stop lifecycle so a
+    // stop() racing handleOnPause() (or a rapid start->stop->start) can never tear the session
+    // down twice or off-thread (that crashed natively in ArSession_destroy). `tearingDown` blocks
+    // a new session from starting while a teardown is still in flight.
+    private final Object lock = new Object();
+    private volatile boolean tearingDown = false;
 
     private EGLDisplay eglDisplay = EGL14.EGL_NO_DISPLAY;
     private EGLContext eglContext = EGL14.EGL_NO_CONTEXT;
     private EGLSurface eglSurface = EGL14.EGL_NO_SURFACE;
     private int cameraTexId = 0;
     private int frameCount = 0;
+    // Back-camera sensor mount angle (clockwise degrees to upright on the device's NATURAL
+    // orientation), read once from CameraManager at start. ARCore delivers frames in this sensor
+    // orientation (e.g. 640x480 landscape) regardless of how the phone is held; combined with the
+    // live display rotation each frame it gives the angle to rotate the streamed frame display-upright.
+    private int sensorOrientation = 90;
     private volatile boolean streamImage = true;   // approach A: stream the camera image to JS
                                                     // so the existing heuristics/MediaPipe run on
                                                     // native frames while ARCore owns the camera.
+
+    // ---- GPU preview mode (flag smd_fundx_gpu_preview) ------------------------------------
+    // Full-resolution, hardware-accelerated camera preview: a TextureView behind a transparent WebView
+    // (html+body transparent) renders ARCore's GPU camera texture on a manual EGL render loop
+    // (FundxBackgroundRenderer), matching the stock camera. A TextureView composites IN-WINDOW so it
+    // shows through the WebView with the UI on top (a SurfaceView is hidden by the opaque app window).
+    // The CPU-image path continues but ONLY feeds analysis (MediaPipe + heuristics), throttled and
+    // decoupled from the preview. The ARCore session is owned by the render thread (thread-affine).
+    private volatile boolean gpuMode = false;
+    private android.view.TextureView texView;        // in-window preview (composites through the WebView)
+    private HandlerThread renderThread;              // manual GL render loop on the TextureView surface
+    private Handler renderHandler;
+    private volatile boolean renderRunning = false;
+    private EGLDisplay rDisplay = EGL14.EGL_NO_DISPLAY;
+    private EGLContext rContext = EGL14.EGL_NO_CONTEXT;
+    private EGLSurface rSurface = EGL14.EGL_NO_SURFACE;
+    private final Runnable renderTick = new Runnable() { @Override public void run() { renderLoop(); } };
+    private FundxBackgroundRenderer bgRenderer;
+    private Session gpuSession;                      // GPU-mode session (owned by the GL render thread)
+    private volatile int gpuFrameCount = 0;
+    private int analyzeEvery = 6;                    // in GPU mode, analyse ~1 of every 6 draw frames
+    private volatile int gpuTexW = 0, gpuTexH = 0;   // chosen high-res GPU camera-texture size (preview sharpness)
+    private HandlerThread gpuEncThread;              // OFF the GL thread: JPEG-encode + base64 the analysis
+    private Handler gpuEncHandler;                   // frame here so the render loop stays smooth (60fps)
+    private volatile boolean gpuEncBusy = false;     // drop analysis frames if the encoder is behind (no backlog)
 
     // ---- Capability detection (runtime, no manual configuration) --------------------------
     @PluginMethod
@@ -81,28 +137,44 @@ public class FundxDepthPlugin extends Plugin {
                 }
             }
         } catch (Exception e) { /* ARCore/Play Services for AR unavailable */ }
+        // Debug build flag (android:debuggable) — the JS layer auto-enables the FundX master
+        // flag on dev (Xcode/adb) installs so a fresh install launches straight into FundX;
+        // release (Play) builds report false and stay OFF until clinical validation.
+        boolean debuggable = false;
+        try {
+            debuggable = (getContext().getApplicationInfo().flags
+                    & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Exception ignored) {}
         ret.put("platform", "android");
         ret.put("arcore", arcore);
         ret.put("arcoreInstalled", installed);
         ret.put("arcoreDepth", depth);
         ret.put("depth", depth);
         ret.put("pose", arcore);
+        ret.put("debug", debuggable);
         call.resolve(ret);
     }
 
     // ---- Start / stop the depth stream ----------------------------------------------------
     @PluginMethod
     public void start(final PluginCall call) {
-        if (running) { call.resolve(started(true, "already running")); return; }
-        streamImage = call.getBoolean("streamImage", true);
-        arThread = new HandlerThread("fundx-arcore");
-        arThread.start();
-        arHandler = new Handler(arThread.getLooper());
-        arHandler.post(new Runnable() {
+        if (call.getBoolean("gpuPreview", false)) { startGpuPreview(call); return; }
+        final Handler h;
+        synchronized (lock) {
+            if (running) { call.resolve(started(true, "already running")); return; }
+            if (tearingDown) { call.resolve(started(false, "busy: previous session shutting down")); return; }
+            streamImage = call.getBoolean("streamImage", true);
+            arThread = new HandlerThread("fundx-arcore");
+            arThread.start();
+            arHandler = new Handler(arThread.getLooper());
+            h = arHandler;
+        }
+        h.post(new Runnable() {
             @Override public void run() {
                 try {
+                    querySensorOrientation();               // read sensor mount BEFORE ARCore opens the camera
                     setupEgl();
-                    session = new Session(getContext());
+                    session = new Session(getContext());     // created on arThread; destroyed on arThread
                     Config cfg = new Config(session);
                     if (session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)) cfg.setDepthMode(Config.DepthMode.AUTOMATIC);
                     cfg.setFocusMode(Config.FocusMode.AUTO);
@@ -118,7 +190,8 @@ public class FundxDepthPlugin extends Plugin {
                     loop();
                 } catch (Exception e) {
                     // CameraNotAvailableException (WebView owns the camera), ARCore not installed, etc.
-                    teardown();
+                    teardown();                             // on arThread — safe to release session + EGL here
+                    quitArThread();
                     call.resolve(started(false, e.getClass().getSimpleName() + ": " + e.getMessage()));
                 }
             }
@@ -127,26 +200,346 @@ public class FundxDepthPlugin extends Plugin {
 
     @PluginMethod
     public void stop(PluginCall call) {
+        if (gpuMode) { stopGpuPreview(); call.resolve(); return; }
         shutdown();
         call.resolve();
+    }
+
+    // Torch/flash for the fundal exam. ARCore owns the camera, so the getUserMedia torch constraint
+    // doesn't apply — control the flash via the ARCore session config (FlashMode.TORCH/OFF),
+    // reconfigured on the thread that owns the active session (GL thread in GPU mode, arThread otherwise).
+    @PluginMethod
+    public void setTorch(final PluginCall call) {
+        final boolean on = call.getBoolean("on", false);
+        if (gpuMode && renderHandler != null) {
+            renderHandler.post(new Runnable() { @Override public void run() { applyTorch(gpuSession, on); } });
+            call.resolve(); return;
+        }
+        final Handler h = arHandler;
+        if (h != null) h.post(new Runnable() { @Override public void run() { applyTorch(session, on); } });
+        call.resolve();
+    }
+
+    private void applyTorch(Session s, boolean on) {
+        try {
+            if (s == null) return;
+            Config cfg = s.getConfig();
+            cfg.setFlashMode(on ? Config.FlashMode.TORCH : Config.FlashMode.OFF);
+            s.configure(cfg);
+        } catch (Throwable t) { /* FlashMode may be unsupported with the active camera config */ }
     }
 
     // Belt-and-suspenders: release the ARCore session + camera when the Activity is backgrounded,
     // even if the JS visibilitychange handler didn't fire. The JS flow re-starts on resume.
     @Override
     protected void handleOnPause() {
-        shutdown();
+        if (gpuMode) stopGpuPreview(); else shutdown();
         super.handleOnPause();
     }
 
     private void shutdown() {
-        running = false;
-        if (arHandler != null) {
-            arHandler.post(new Runnable() { @Override public void run() { teardown(); } });
-        } else {
-            teardown();
+        final Handler h;
+        final HandlerThread t;
+        synchronized (lock) {
+            running = false;
+            if (tearingDown) return;                 // a teardown is already scheduled
+            h = arHandler;
+            t = arThread;
+            if (h == null) return;                   // no live AR thread => session + EGL already released
+            tearingDown = true;
+            arHandler = null;
+            arThread = null;
         }
-        if (arThread != null) { arThread.quitSafely(); arThread = null; arHandler = null; }
+        // teardown() runs on the AR thread that owns the session + EGL context (thread-affine),
+        // then the thread quits. Any concurrent/subsequent stop() sees tearingDown/arHandler==null
+        // and no-ops, so the session can never be closed twice or from the wrong thread.
+        h.post(new Runnable() { @Override public void run() {
+            teardown();
+            t.quitSafely();
+            synchronized (lock) { tearingDown = false; }
+        }});
+    }
+
+    // Release the AR thread from its own failure path (start() setup threw). teardown() has already
+    // run on this thread; here we just retire the looper and clear the fields.
+    private void quitArThread() {
+        HandlerThread t;
+        synchronized (lock) { t = arThread; arThread = null; arHandler = null; }
+        if (t != null) t.quitSafely();
+    }
+
+    // ---- GPU preview: GLSurfaceView behind a transparent WebView --------------------------
+    private void startGpuPreview(final PluginCall call) {
+        if (gpuMode || running) { call.resolve(started(true, "already running")); return; }
+        streamImage = call.getBoolean("streamImage", true);
+        final int every = call.getInt("analyzeEvery", 6);
+        final Activity act = getActivity();
+        final View webView = (getBridge() != null) ? getBridge().getWebView() : null;
+        if (act == null || webView == null) { call.resolve(started(false, "no activity/webview")); return; }
+        final AtomicBoolean resolved = new AtomicBoolean(false);
+        act.runOnUiThread(new Runnable() { @Override public void run() {
+            try {
+                analyzeEvery = Math.max(1, every);
+                gpuFrameCount = 0;
+                gpuEncBusy = false;
+                gpuEncThread = new HandlerThread("fundx-gpu-enc");   // off-render-thread frame encoder
+                gpuEncThread.start();
+                gpuEncHandler = new Handler(gpuEncThread.getLooper());
+                // A TextureView composites IN-WINDOW (a normal hardware layer, not a punched-out
+                // SurfaceView surface below the window), so it shows through the transparent WebView with
+                // the HTML UI floating on top — no translucent-window/theme hack needed (a SurfaceView was
+                // hidden by the opaque app window and showed white).
+                webView.setBackgroundColor(Color.TRANSPARENT);
+                try { webView.setBackground(null); } catch (Exception ignored) {}
+                ViewGroup parent = (ViewGroup) webView.getParent();
+                bgRenderer = new FundxBackgroundRenderer();
+                texView = new android.view.TextureView(act);
+                texView.setOpaque(false);
+                texView.setSurfaceTextureListener(new android.view.TextureView.SurfaceTextureListener() {
+                    @Override public void onSurfaceTextureAvailable(android.graphics.SurfaceTexture st, int w, int h) { startRender(st, w, h, call, resolved); }
+                    @Override public void onSurfaceTextureSizeChanged(android.graphics.SurfaceTexture st, final int w, final int h) {
+                        if (renderHandler != null) renderHandler.post(new Runnable() { @Override public void run() {
+                            GLES20.glViewport(0, 0, w, h); bgRenderer.setViewport(w, h);
+                            if (gpuSession != null) gpuSession.setDisplayGeometry(displayRotationSurface(), w, h);
+                        }});
+                    }
+                    @Override public boolean onSurfaceTextureDestroyed(android.graphics.SurfaceTexture st) { return true; }
+                    @Override public void onSurfaceTextureUpdated(android.graphics.SurfaceTexture st) {}
+                });
+                parent.addView(texView, 0, new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));  // BEHIND the WebView
+                gpuMode = true;
+                running = true;
+            } catch (Exception e) {
+                gpuMode = false; running = false;
+                try { webView.setBackgroundColor(Color.WHITE); } catch (Exception ignored) {}
+                resolveOnce(resolved, call, started(false, "gpu setup: " + e.getMessage()));
+            }
+        }});
+    }
+
+    // Manual EGL render loop bound to the TextureView's SurfaceTexture. Owns the ARCore session, draws
+    // the camera texture full-screen, and throttles a low-res CPU frame to JS for analysis.
+    private void startRender(final android.graphics.SurfaceTexture st, final int w, final int h, final PluginCall call, final AtomicBoolean resolved) {
+        renderThread = new HandlerThread("fundx-gl-render");
+        renderThread.start();
+        renderHandler = new Handler(renderThread.getLooper());
+        renderHandler.post(new Runnable() { @Override public void run() {
+            try {
+                setupTexEgl(st);
+                GLES20.glClearColor(0f, 0f, 0f, 1f);
+                bgRenderer.createOnGlThread();
+                querySensorOrientation();
+                gpuSession = new Session(getContext());
+                selectHighResCameraConfig(gpuSession);   // full-res GPU texture (default is often 640x480)
+                Config cfg = new Config(gpuSession);
+                if (gpuSession.isDepthModeSupported(Config.DepthMode.AUTOMATIC)) cfg.setDepthMode(Config.DepthMode.AUTOMATIC);
+                cfg.setFocusMode(Config.FocusMode.AUTO);
+                cfg.setUpdateMode(Config.UpdateMode.LATEST_CAMERA_IMAGE);
+                gpuSession.configure(cfg);
+                gpuSession.setCameraTextureName(bgRenderer.getTextureId());
+                gpuSession.resume();
+                GLES20.glViewport(0, 0, w, h);
+                bgRenderer.setViewport(w, h);
+                gpuSession.setDisplayGeometry(displayRotationSurface(), w, h);
+                renderRunning = true;
+                JSObject r = started(true, "ok-gpu");
+                r.put("textureW", gpuTexW); r.put("textureH", gpuTexH);
+                resolveOnce(resolved, call, r);
+                renderLoop();
+            } catch (Exception e) {
+                resolveOnce(resolved, call, started(false, "gpu render: " + e.getClass().getSimpleName() + ": " + e.getMessage()));
+            }
+        }});
+    }
+
+    private void renderLoop() {
+        if (!renderRunning || gpuSession == null) return;
+        try {
+            GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+            gpuSession.setCameraTextureName(bgRenderer.getTextureId());
+            Frame frame = gpuSession.update();
+            bgRenderer.draw(frame);                     // full-res GPU camera preview
+            EGL14.eglSwapBuffers(rDisplay, rSurface);   // present to the TextureView
+            gpuFrameCount++;
+            if (gpuFrameCount % analyzeEvery == 0) gpuAnalyze(frame);   // decoupled low-rate analysis
+        } catch (Throwable t) { /* transient (SessionPausedException etc.) */ }
+        if (renderRunning && renderHandler != null) renderHandler.postDelayed(renderTick, 8);   // ~120Hz cap
+    }
+
+    // EGL window surface bound to the TextureView's SurfaceTexture (ES2, with alpha).
+    private void setupTexEgl(android.graphics.SurfaceTexture st) {
+        rDisplay = EGL14.eglGetDisplay(EGL14.EGL_DEFAULT_DISPLAY);
+        int[] ver = new int[2];
+        EGL14.eglInitialize(rDisplay, ver, 0, ver, 1);
+        int[] cfgAttr = {
+            EGL14.EGL_RENDERABLE_TYPE, EGL14.EGL_OPENGL_ES2_BIT,
+            EGL14.EGL_SURFACE_TYPE, EGL14.EGL_WINDOW_BIT,
+            EGL14.EGL_RED_SIZE, 8, EGL14.EGL_GREEN_SIZE, 8, EGL14.EGL_BLUE_SIZE, 8, EGL14.EGL_ALPHA_SIZE, 8,
+            EGL14.EGL_NONE
+        };
+        EGLConfig[] cfgs = new EGLConfig[1];
+        int[] n = new int[1];
+        EGL14.eglChooseConfig(rDisplay, cfgAttr, 0, cfgs, 0, 1, n, 0);
+        int[] ctxAttr = { EGL14.EGL_CONTEXT_CLIENT_VERSION, 2, EGL14.EGL_NONE };
+        rContext = EGL14.eglCreateContext(rDisplay, cfgs[0], EGL14.EGL_NO_CONTEXT, ctxAttr, 0);
+        android.view.Surface surface = new android.view.Surface(st);
+        rSurface = EGL14.eglCreateWindowSurface(rDisplay, cfgs[0], surface, new int[]{ EGL14.EGL_NONE }, 0);
+        EGL14.eglMakeCurrent(rDisplay, rSurface, rSurface, rContext);
+    }
+
+    private void teardownTexEgl() {
+        try {
+            if (rDisplay != EGL14.EGL_NO_DISPLAY) {
+                EGL14.eglMakeCurrent(rDisplay, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_CONTEXT);
+                if (rSurface != EGL14.EGL_NO_SURFACE) EGL14.eglDestroySurface(rDisplay, rSurface);
+                if (rContext != EGL14.EGL_NO_CONTEXT) EGL14.eglDestroyContext(rDisplay, rContext);
+                EGL14.eglTerminate(rDisplay);
+            }
+        } catch (Exception ignored) {}
+        rDisplay = EGL14.EGL_NO_DISPLAY; rContext = EGL14.EGL_NO_CONTEXT; rSurface = EGL14.EGL_NO_SURFACE;
+    }
+
+    // On the GL thread: sample depth + pose + COPY the camera YUV (all fast). The heavy JPEG encode +
+    // base64 + notify are handed to the encoder thread so the 60fps render loop never stalls (that was
+    // the lag). If the encoder is still busy, this frame's image is dropped — the preview stays smooth
+    // and analysis just runs at a slightly lower rate.
+    private void gpuAnalyze(Frame frame) {
+        try {
+            final Camera camera = frame.getCamera();
+            Double meters = null; double conf = 0.0;
+            Image depthImg = null;
+            try {
+                depthImg = frame.acquireDepthImage16Bits();
+                double[] dm = sampleCenterDepth(depthImg);
+                if (dm != null) { meters = dm[0]; conf = dm[1]; }
+            } catch (Throwable t) { /* depth not ready */ }
+            finally { if (depthImg != null) depthImg.close(); }
+
+            final boolean tracking = camera.getTrackingState() == com.google.ar.core.TrackingState.TRACKING;
+            double roll = 0, pitch = 0;
+            if (tracking) {
+                Pose pose = camera.getPose();
+                float[] q = new float[4];
+                pose.getRotationQuaternion(q, 0);
+                roll = quatToRollDeg(q); pitch = quatToPitchDeg(q);
+            }
+
+            byte[] nv21 = null; int iw = 0, ih = 0;
+            if (streamImage && !gpuEncBusy) {            // only grab a fresh frame if the encoder is free
+                Image ci = null;
+                try {
+                    ci = frame.acquireCameraImage();
+                    if (ci.getFormat() == ImageFormat.YUV_420_888) { iw = ci.getWidth(); ih = ci.getHeight(); nv21 = yuv420ToNv21(ci); }
+                } catch (Throwable t) { /* not ready */ }
+                finally { if (ci != null) ci.close(); }
+            }
+
+            final Double fMeters = meters; final double fConf = conf;
+            final double fRoll = roll, fPitch = pitch;
+            final String trackStr = camera.getTrackingState().toString();
+            final int fFrame = gpuFrameCount;
+            final byte[] fnv = nv21; final int fiw = iw, fih = ih;
+            final int rot = ((sensorOrientation - displayRotationDegrees()) % 360 + 360) % 360;
+
+            final Handler h = gpuEncHandler;
+            if (h == null) return;
+            if (fnv != null) gpuEncBusy = true;
+            h.post(new Runnable() { @Override public void run() {
+                try {
+                    String camImg = (fnv != null) ? nv21ToJpegDataUrl(fnv, fiw, fih, rot) : null;
+                    JSObject data = new JSObject();
+                    data.put("gpu", true);               // JS: preview is the native surface — no canvas draw
+                    if (camImg != null) data.put("cameraImage", camImg);
+                    if (fMeters != null) { data.put("distanceMeters", fMeters); data.put("distanceConfidence", fConf); }
+                    if (tracking) { data.put("roll", fRoll); data.put("pitch", fPitch); data.put("poseConfidence", 0.85); }
+                    data.put("frame", fFrame); data.put("ts", System.currentTimeMillis());
+                    data.put("tracking", trackStr); data.put("depthReady", fMeters != null);
+                    notifyListeners("fundxDepthFrame", data);
+                } catch (Throwable t) { /* ignore */ }
+                finally { gpuEncBusy = false; }
+            }});
+        } catch (Throwable t) { /* keep the preview alive even if analysis hiccups */ }
+    }
+
+    // Surface.ROTATION_* for ARCore setDisplayGeometry (which wants the constant, not degrees).
+    private int displayRotationSurface() {
+        try {
+            android.view.Display d = null;
+            if (android.os.Build.VERSION.SDK_INT >= 30 && getActivity() != null) d = getActivity().getDisplay();
+            if (d == null && getActivity() != null) d = getActivity().getWindowManager().getDefaultDisplay();
+            if (d != null) return d.getRotation();
+        } catch (Exception e) {}
+        return Surface.ROTATION_0;
+    }
+
+    // Pick the ARCore camera config with the LARGEST GPU texture (the preview surface). ARCore's
+    // default config is often 640x480 — the cause of the soft/upscaled GPU preview. On a texture-size
+    // tie, prefer the smaller CPU image (analysis doesn't need resolution). Must run before resume().
+    private void selectHighResCameraConfig(Session s) {
+        try {
+            CameraConfigFilter filter = new CameraConfigFilter(s);
+            filter.setTargetFps(EnumSet.of(CameraConfig.TargetFps.TARGET_FPS_30, CameraConfig.TargetFps.TARGET_FPS_60));
+            List<CameraConfig> configs = s.getSupportedCameraConfigs(filter);
+            CameraConfig best = null; long bestTex = -1, bestCpu = Long.MAX_VALUE;
+            for (CameraConfig c : configs) {
+                long tex = (long) c.getTextureSize().getWidth() * c.getTextureSize().getHeight();
+                long cpu = (long) c.getImageSize().getWidth() * c.getImageSize().getHeight();
+                if (tex > bestTex || (tex == bestTex && cpu < bestCpu)) { best = c; bestTex = tex; bestCpu = cpu; }
+            }
+            if (best != null) {
+                s.setCameraConfig(best);
+                gpuTexW = best.getTextureSize().getWidth();
+                gpuTexH = best.getTextureSize().getHeight();
+            }
+        } catch (Exception e) { /* keep default config */ }
+    }
+
+    private void stopGpuPreview() {
+        gpuMode = false;
+        running = false;
+        renderRunning = false;
+        final Activity act = getActivity();
+        final android.view.TextureView tv = texView;
+        final View webView = (getBridge() != null) ? getBridge().getWebView() : null;
+        final HandlerThread enc = gpuEncThread;
+        final HandlerThread rt = renderThread;
+        final Handler rh = renderHandler;
+        texView = null; renderThread = null; renderHandler = null;
+        gpuEncThread = null; gpuEncHandler = null; gpuEncBusy = false;
+        if (enc != null) enc.quitSafely();
+        // Close the ARCore session + EGL on the render thread (thread-affine), then quit the thread.
+        if (rh != null && rt != null) {
+            final CountDownLatch latch = new CountDownLatch(1);
+            rh.post(new Runnable() { @Override public void run() {
+                try { if (gpuSession != null) { gpuSession.pause(); gpuSession.close(); } } catch (Exception e) {}
+                gpuSession = null;
+                teardownTexEgl();
+                latch.countDown();
+            }});
+            try { latch.await(1500, TimeUnit.MILLISECONDS); } catch (InterruptedException ie) {}
+            rt.quitSafely();
+        } else {
+            closeGpuSessionInline();
+        }
+        if (act != null && tv != null) {
+            act.runOnUiThread(new Runnable() { @Override public void run() {
+                try {
+                    ViewGroup parent = (ViewGroup) tv.getParent();
+                    if (parent != null) parent.removeView(tv);
+                    if (webView != null) webView.setBackgroundColor(Color.WHITE);
+                } catch (Exception e) {}
+            }});
+        }
+    }
+
+    private void closeGpuSessionInline() {
+        try { if (gpuSession != null) { gpuSession.pause(); gpuSession.close(); } } catch (Exception e) {}
+        gpuSession = null;
+    }
+
+    private void resolveOnce(AtomicBoolean flag, PluginCall call, JSObject result) {
+        if (flag.compareAndSet(false, true)) call.resolve(result);
     }
 
     // ---- Frame loop -----------------------------------------------------------------------
@@ -170,7 +563,15 @@ public class FundxDepthPlugin extends Plugin {
             String camImg = null;
             if (streamImage && (frameCount % 2 == 0)) {          // throttle image to ~7 Hz
                 Image ci = null;
-                try { ci = frame.acquireCameraImage(); camImg = encodeYuvToJpegDataUrl(ci); }
+                try {
+                    ci = frame.acquireCameraImage();
+                    // Rotate the sensor-oriented frame to be upright on the CURRENT display, so the
+                    // JS preview + MediaPipe/heuristics (which share this image) are correctly oriented
+                    // and the pupil-offset coaching arrows match real-world movement. Back camera =
+                    // no mirror. Read live so all four display rotations are handled.
+                    int rot = ((sensorOrientation - displayRotationDegrees()) % 360 + 360) % 360;
+                    camImg = encodeYuvToJpegDataUrl(ci, rot);
+                }
                 catch (Throwable t) { /* camera image not ready this frame */ }
                 finally { if (ci != null) ci.close(); }
             }
@@ -226,14 +627,38 @@ public class FundxDepthPlugin extends Plugin {
 
     // YUV_420_888 -> NV21 -> JPEG data URL: the native camera frame the JS heuristics/preview run
     // on while ARCore owns the camera (the approach-A handoff). Throttled by the caller.
-    private static String encodeYuvToJpegDataUrl(Image image) {
+    // Rotated `rotationDeg` clockwise so the frame is upright on the current display. This is the
+    // SINGLE source of truth for the streamed image, consumed by BOTH the JS preview canvas and the
+    // MediaPipe/heuristics analysis, so both are display-oriented from one rotation. Depth stays
+    // aligned: distance is sampled at the image CENTRE, invariant under a centre rotation (the optical
+    // axis), and the camera pose is a physical measurement independent of image pixels.
+    private static String encodeYuvToJpegDataUrl(Image image, int rotationDeg) {
         if (image == null || image.getFormat() != ImageFormat.YUV_420_888) return null;
-        int w = image.getWidth(), h = image.getHeight();
-        byte[] nv21 = yuv420ToNv21(image);
+        return nv21ToJpegDataUrl(yuv420ToNv21(image), image.getWidth(), image.getHeight(), rotationDeg);
+    }
+
+    // Shared NV21 -> rotated JPEG data URL. Used by the offscreen CPU path (converts from an Image) and
+    // the GPU encoder thread (from a pre-copied NV21 byte[], so the GL render thread never blocks here).
+    private static String nv21ToJpegDataUrl(byte[] nv21, int w, int h, int rotationDeg) {
+        if (nv21 == null || w <= 0 || h <= 0) return null;
         YuvImage yuv = new YuvImage(nv21, ImageFormat.NV21, w, h, null);
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
-        yuv.compressToJpeg(new Rect(0, 0, w, h), 55, out);
-        return "data:image/jpeg;base64," + Base64.encodeToString(out.toByteArray(), Base64.NO_WRAP);
+        yuv.compressToJpeg(new Rect(0, 0, w, h), 70, out);
+        byte[] jpeg = out.toByteArray();
+        if (rotationDeg % 360 != 0) {
+            Bitmap bmp = BitmapFactory.decodeByteArray(jpeg, 0, jpeg.length);
+            if (bmp != null) {
+                Matrix m = new Matrix();
+                m.postRotate(rotationDeg);                   // clockwise; back camera needs no mirror
+                Bitmap rot = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), m, true);
+                java.io.ByteArrayOutputStream out2 = new java.io.ByteArrayOutputStream();
+                rot.compress(Bitmap.CompressFormat.JPEG, 70, out2);
+                jpeg = out2.toByteArray();
+                if (rot != bmp) rot.recycle();
+                bmp.recycle();
+            }
+        }
+        return "data:image/jpeg;base64," + Base64.encodeToString(jpeg, Base64.NO_WRAP);
     }
 
     private static byte[] yuv420ToNv21(Image image) {
@@ -268,6 +693,41 @@ public class FundxDepthPlugin extends Plugin {
         double sinp = 2.0 * (w * y - z * x);
         sinp = Math.max(-1.0, Math.min(1.0, sinp));
         return Math.toDegrees(Math.asin(sinp));
+    }
+
+    // ---- Display-orientation correction --------------------------------------------------
+    // Read the back-camera sensor mount angle once (clockwise degrees to upright on the device's
+    // natural orientation). Default 90 (typical phone) if it can't be read.
+    private void querySensorOrientation() {
+        try {
+            CameraManager cm = (CameraManager) getContext().getSystemService(Context.CAMERA_SERVICE);
+            for (String id : cm.getCameraIdList()) {
+                CameraCharacteristics cc = cm.getCameraCharacteristics(id);
+                Integer facing = cc.get(CameraCharacteristics.LENS_FACING);
+                if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
+                    Integer so = cc.get(CameraCharacteristics.SENSOR_ORIENTATION);
+                    if (so != null) sensorOrientation = so;
+                    return;
+                }
+            }
+        } catch (Exception e) { /* keep default 90 */ }
+    }
+
+    // Current display rotation in degrees (0 / 90 / 180 / 270), read live each frame so all four
+    // orientations are corrected even if the device is rotated mid-capture. Thread-safe read.
+    private int displayRotationDegrees() {
+        try {
+            android.view.Display d = null;
+            if (android.os.Build.VERSION.SDK_INT >= 30 && getActivity() != null) d = getActivity().getDisplay();
+            if (d == null && getActivity() != null) d = getActivity().getWindowManager().getDefaultDisplay();
+            if (d == null) return 0;
+            switch (d.getRotation()) {
+                case Surface.ROTATION_90:  return 90;
+                case Surface.ROTATION_180: return 180;
+                case Surface.ROTATION_270: return 270;
+                default: return 0;
+            }
+        } catch (Exception e) { return 0; }
     }
 
     // ---- Minimal offscreen EGL context (ARCore needs a GL context + camera texture) -------
