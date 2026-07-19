@@ -72,5 +72,21 @@ ok(/t\.default\.dosing/.test(rx) && /source: dose \? "kb"/.test(rx), "C: prescri
 // F — safety-panel Alternatives carry duration + coverage (not just drug · dose)
 ok(/duration: a\.duration/.test(reas) && /coverage: a\.coverage/.test(reas), "F: safety-panel Alternatives carry duration + coverage");
 
+// G — antibiotic-stewardship STRUCTURE reaches the model (sibling of the dose bug).
+// kb/ai/steward-ai.browser.js builds pkg.refs.stewardship {coverageMatrix, regimens,
+// toxicityFactors, deescalation, framework}, but renderGroundedPrompt() serialised ONLY
+// refs.drug/calculators/icuProtocols — so "when can I de-escalate/narrow antibiotics?" and
+// "what's the coverage matrix?" fell back to general knowledge (framework/deescalation are
+// partly reachable as retrieval chunks; coverageMatrix/regimens/toxicityFactors had NO path).
+// The serializer must now emit a compact stewardship block.
+ok(/rf\.stewardship|refs\.stewardship/.test(srv),
+  "G: server prompt serialises refs.stewardship (was dropped — sibling of the dose-grounding bug)");
+ok(/coverageMatrix/.test(srv),
+  "G: server prompt serialises the antibiotic coverage matrix (organism × drug grid)");
+ok(/\bdeescalation\b/.test(srv),
+  "G: server prompt serialises de-escalation guidance");
+ok(/toxicityFactors/.test(srv),
+  "G: server prompt serialises key toxicity/severity factors");
+
 console.log(fails === 0 ? "\nALL PASS — MaiK grounds drug doses" : `\n${fails} FAILED`);
 process.exit(fails === 0 ? 0 : 1);
