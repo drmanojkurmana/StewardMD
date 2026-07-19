@@ -79,8 +79,39 @@ V.CFG.lensConfirmFallback = false;
 // QualityEngine — image quality (fundus + vessels), not disease structures
 const q = V.QualityEngine.score(good);
 ok("quality: good frame accepted, no reasons", q.accepted === true && q.overall >= 65 && q.reasons.length === 0 && q.subscores.fundusVisibility >= 0.8);
+// A non-retinal frame (no red reflex / fundus) is STAGE-1 GATED — no retinal quality is computed.
 const qBad = V.QualityEngine.score({ focus: 0.1, exposure: 0.1, reflection: 0.9 });
-ok("quality: bad frame rejected + fundus/vessel reasons", qBad.accepted === false && qBad.reasons.indexOf("poor_focus") >= 0 && qBad.reasons.indexOf("fundus_not_visible") >= 0 && qBad.reasons.indexOf("no_vessels_detected") >= 0);
+ok("quality: non-retinal frame gated (retinalGate false, no red reflex)", qBad.retinalGate === false && qBad.accepted === false && qBad.reasons.indexOf("no_red_reflex") >= 0);
+// A RETINAL frame (passes the gate) with poor image quality is rejected with the quality reasons.
+const qPoor = V.QualityEngine.score({ redReflex: 0.7, fundusVisible: true, fundusConf: 0.7, fundusCircularity: 0.6, retinaConf: 0.7, focus: 0.1, exposure: 0.1, reflection: 0.9, vesselScore: 0.1, fundusSize: 0.6 });
+ok("quality: retinal-but-poor frame scored + rejected + reasons", qPoor.retinalGate === true && qPoor.accepted === false && qPoor.reasons.indexOf("poor_focus") >= 0);
+
+// ===== STAGE-1 RETINAL GATE: every non-retinal scene must be REJECTED before scoring =====
+// Realistic heuristic values (sharp focus, some texture → false fundus/vessel), but no red reflex
+// and no circular fundus — exactly what let the curtain scene through before the gate.
+const nonRetinal = {
+  room:     { focus: 0.60, exposure: 0.60, reflection: 0.10, redReflex: 0.02, fundusVisible: true, fundusConf: 0.20, fundusCircularity: 0.10, vesselScore: 0.20 },
+  window:   { focus: 0.85, exposure: 0.90, reflection: 0.05, redReflex: 0.05, fundusVisible: true, fundusConf: 0.40, fundusCircularity: 0.15, vesselScore: 0.50 },
+  curtains: { focus: 0.84, exposure: 0.85, reflection: 0.00, redReflex: 0.09, fundusVisible: true, fundusConf: 0.52, fundusCircularity: 0.13, vesselScore: 0.72 }, // the reported bug
+  wall:     { focus: 0.50, exposure: 0.70, reflection: 0.05, redReflex: 0.00, fundusVisible: false, fundusConf: 0.10, fundusCircularity: 0.05, vesselScore: 0.05 },
+  desk:     { focus: 0.70, exposure: 0.65, reflection: 0.10, redReflex: 0.03, fundusVisible: true, fundusConf: 0.30, fundusCircularity: 0.20, vesselScore: 0.30 },
+  laptop:   { focus: 0.90, exposure: 0.80, reflection: 0.15, redReflex: 0.04, fundusVisible: true, fundusConf: 0.35, fundusCircularity: 0.20, vesselScore: 0.60 },
+  phone:    { focus: 0.85, exposure: 0.75, reflection: 0.20, redReflex: 0.05, fundusVisible: true, fundusConf: 0.30, fundusCircularity: 0.25, vesselScore: 0.40 },
+  clothing: { focus: 0.60, exposure: 0.60, reflection: 0.08, redReflex: 0.08, fundusVisible: true, fundusConf: 0.30, fundusCircularity: 0.20, vesselScore: 0.60 },
+  face:     { eyePresent: true, eyeConf: 0.90, pupilCentered: true, focus: 0.80, exposure: 0.70, reflection: 0.10, redReflex: 0.15, fundusVisible: true, fundusConf: 0.30, fundusCircularity: 0.30, vesselScore: 0.40 },
+  hand:     { focus: 0.70, exposure: 0.65, reflection: 0.10, redReflex: 0.10, fundusVisible: true, fundusConf: 0.25, fundusCircularity: 0.20, vesselScore: 0.30 },
+  ceiling:  { focus: 0.50, exposure: 0.80, reflection: 0.05, redReflex: 0.00, fundusVisible: false, fundusConf: 0.10, fundusCircularity: 0.05, vesselScore: 0.10 }
+};
+Object.keys(nonRetinal).forEach(function (name) {
+  const qs = V.QualityEngine.score(nonRetinal[name]);
+  ok("retinal-gate: " + name + " REJECTED before scoring", qs.retinalGate === false && qs.accepted === false && qs.overall === 0);
+});
+// Positive control: a genuine fundus view PASSES the gate and IS scored.
+const qFundus = V.QualityEngine.score({ redReflex: 0.75, fundusVisible: true, fundusConf: 0.85, fundusCircularity: 0.75, retinaConf: 0.8, vesselScore: 0.7, focus: 0.85, exposure: 0.8, reflection: 0.1, fundusSize: 0.6 });
+ok("retinal-gate: genuine fundus PASSES + accepted", qFundus.retinalGate === true && qFundus.accepted === true && qFundus.overall >= 60);
+// BestFrameSelector over a burst of non-retinal frames must not accept any.
+const bfsBad = V.BestFrameSelector.select(Object.keys(nonRetinal).map(function (k) { return { metrics: nonRetinal[k] }; }));
+ok("retinal-gate: best of an all-non-retinal burst is not accepted", bfsBad.scores.every(function (s) { return s.accepted === false && s.retinalGate === false; }));
 
 // BestFrameSelector
 const bfs = V.BestFrameSelector.select([{ metrics: { focus: 0.2 } }, { metrics: good }, { metrics: { focus: 0.5 } }]);
@@ -193,7 +224,7 @@ ok("flag: ?fundx=0 forces off", loadFundxUrl("?fundx=0").enabled() === false);
 const FX = loadFundx("1");
 const stats = { startTs: 0, attempts: 1, captures: 1, retries: 0, burstCount: 2, readinessTrace: [10, 50, 90] };
 const burst = [
-  { dataUrl: "data:image/jpeg;base64,AAAA", metrics: { focus: 0.9, exposure: 0.85, brightness: 0.5, contrast: 0.6, noise: 0.1, reflection: 0.1, retinaConf: 0.9, discConf: 0.9, maculaConf: 0.9, vesselVisibility: 0.7, fieldOfView: 0.9 } },
+  { dataUrl: "data:image/jpeg;base64,AAAA", metrics: { focus: 0.9, exposure: 0.85, brightness: 0.5, contrast: 0.6, noise: 0.1, reflection: 0.1, redReflex: 0.75, fundusVisible: true, fundusConf: 0.85, fundusCircularity: 0.7, retinaConf: 0.9, discConf: 0.9, maculaConf: 0.9, vesselVisibility: 0.7, fieldOfView: 0.9 } },
   { dataUrl: "data:image/jpeg;base64,BBBB", metrics: { focus: 0.2, exposure: 0.3, reflection: 0.6, retinaConf: 0.1 } }
 ];
 const res = FX._buildResult(burst, { ref: "MRN1", name: "Test" }, "right", stats);

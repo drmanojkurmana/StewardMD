@@ -225,6 +225,7 @@
         '<header class="fundx-cam-top rds-safe-top">' +
           '<button class="fundx-cam-x" data-fx="camclose" aria-label="Close">' + ric("close") + '</button>' +
           '<div id="fundxState" class="fundx-state" role="status" aria-live="polite">Starting camera…</div>' +
+          '<button id="fundxFlashBtn" class="fundx-cam-x' + (flashOn() ? ' on' : '') + '" data-fx="torch" aria-label="Flash">' + ric(flashOn() ? "flash_on" : "flash_off") + '</button>' +
           '<button id="fundxVoiceBtn" class="fundx-cam-x' + (VOICE.enabled() ? ' on' : '') + '" data-fx="voice" aria-label="Voice coaching">' + ric(VOICE.enabled() ? "volume_up" : "volume_off") + '</button>' +
         '</header>' +
         ((session && session.mode === "training") ? '<div class="fundx-goal">' + ric("school") + 'Level ' + session.trainLevel + ' · ' + esc((LEVELS[session.trainLevel - 1] || {}).title || "") + '</div>' : '') +
@@ -294,22 +295,29 @@
     var reasonNames = { poor_focus: "Focus", poor_exposure: "Exposure", excessive_reflection: "Reflection/glare", fundus_not_visible: "Retinal view not clear", no_vessels_detected: "Vessels not visible", field_of_view_inadequate: "Field of view" };
     var why = (q.reasons || []).map(function (r) { return '<span class="fundx-why">' + ric("error") + (reasonNames[r] || r) + '</span>'; }).join("");
     var s = q.subscores || {};
+    // Stage-1 retinal gate failed → this is not a retinal image. No score, no accept, no Continue.
+    var gated = q.retinalGate === false;
     return '' +
       '<header class="fundx-head rds-safe-top">' +
         '<button class="fundx-close" data-fx="retake" aria-label="Retake">' + ric("arrow_back_ios_new") + '</button>' +
         '<div class="fundx-head-tt"><b>Quality review</b></div><div class="fundx-head-sp"></div>' +
       '</header>' +
       '<main class="fundx-scroll">' +
-        '<div class="fundx-shot">' + (img ? '<img src="' + esc(img) + '" alt="captured retinal frame">' : '') +
-          '<div class="fundx-shot-q ' + (acc ? 'ok' : 'bad') + '">' + Math.round(q.overall) + '</div></div>' +
-        '<div class="fundx-verdict ' + (acc ? 'ok' : 'bad') + '">' + ric(acc ? "check_circle" : "cancel") +
-          '<span>' + (acc ? "Image accepted — good quality" : "Image rejected — retake recommended") + '</span></div>' +
-        (why ? '<div class="fundx-whys">' + why + '</div>' : '') +
-        '<div class="rds-section-header"><span class="rds-section-title">Quality breakdown</span></div>' +
-        '<div class="fundx-qbars">' + bar("Focus", s.focus) + bar("Exposure", s.exposure) + bar("Low glare", s.reflection) + bar("Retinal view", s.fundusVisibility) + bar("Vessels", s.vesselVisibility) + bar("Red reflex", s.redReflex) + bar("Field of view", s.fieldOfView) + '</div>' +
+        '<div class="fundx-shot">' + (img ? '<img src="' + esc(img) + '" alt="captured frame">' : '') +
+          (gated ? '' : '<div class="fundx-shot-q ' + (acc ? 'ok' : 'bad') + '">' + Math.round(q.overall) + '</div>') + '</div>' +
+        (gated
+          ? '<div class="fundx-verdict bad">' + ric("visibility_off") + '<span>No eye detected</span></div>' +
+            '<div class="fundx-whys"><span class="fundx-why">' + ric("info") + "Point the camera at the patient's eye. Quality is only scored once a retinal view (red reflex + fundus) is detected." + '</span></div>'
+          : '<div class="fundx-verdict ' + (acc ? 'ok' : 'bad') + '">' + ric(acc ? "check_circle" : "cancel") +
+              '<span>' + (acc ? "Image accepted — good quality" : "Image rejected — retake recommended") + '</span></div>' +
+            (why ? '<div class="fundx-whys">' + why + '</div>' : '') +
+            '<div class="rds-section-header"><span class="rds-section-title">Quality breakdown</span></div>' +
+            '<div class="fundx-qbars">' + bar("Focus", s.focus) + bar("Exposure", s.exposure) + bar("Low glare", s.reflection) + bar("Retinal view", s.fundusVisibility) + bar("Vessels", s.vesselVisibility) + bar("Red reflex", s.redReflex) + bar("Field of view", s.fieldOfView) + '</div>') +
         '<div class="fundx-actions">' +
-          '<button class="fundx-btn ghost" data-fx="retake">' + ric("refresh") + 'Retake</button>' +
-          '<button class="fundx-btn" data-fx="toresult">' + (acc ? "Continue" : "Use anyway") + ric("chevron_right") + '</button>' +
+          (gated
+            ? '<button class="fundx-btn" data-fx="retake">' + ric("photo_camera") + 'Point at the eye</button>'
+            : '<button class="fundx-btn ghost" data-fx="retake">' + ric("refresh") + 'Retake</button>' +
+              '<button class="fundx-btn" data-fx="toresult">' + (acc ? "Continue" : "Use anyway") + ric("chevron_right") + '</button>') +
         '</div>' +
         '<p class="fundx-disc">' + disclaimerText() + '</p>' +
       '</main>';
@@ -773,7 +781,12 @@
     } else {
       starter = cam.start(video, onFrame, startOpts);
     }
-    starter.then(function () { setState("Point the camera at the eye"); }).catch(function (err) { showCamError(err); });
+    starter.then(function () {
+      setState("Point the camera at the eye");
+      // Fundal exam needs illumination: auto-enable the torch in native/GPU mode (getUserMedia mode
+      // already turns it on in cam.start). The flash button in the header toggles it.
+      if (usingNative && flashOn() && cam && cam.setTorch) { try { cam.setTorch(true); } catch (e) {} }
+    }).catch(function (err) { showCamError(err); });
   }
   function setState(txt) { var el = document.getElementById("fundxState"); if (el) el.textContent = txt; }
   function showCamError(err) {
@@ -928,6 +941,12 @@
     var tx = document.getElementById("fundxProcTx");
     result = FUNDX._buildResult(burst, ctx, session.eye, session);
     if (!result) { tel("capture", { success: false, durationMs: nowMs() - session.startTs, bursts: session.burstCount }); toast("No usable frames — try again."); screen = "camera"; return startCamera(); }
+    // STAGE-1 retinal gate: if the best frame is not a retinal scene (no red reflex + fundus), do NOT
+    // score it, do NOT run AI analysis, and route to the gated review ("No eye detected", no Continue).
+    if (result.quality && result.quality.retinalGate === false) {
+      tel("capture", { success: false, gated: true, durationMs: nowMs() - session.startTs, bursts: session.burstCount });
+      haptic("warning"); screen = "review"; render(); return;
+    }
     tel("capture", { success: true, quality: result.quality.overall, durationMs: nowMs() - session.startTs, bursts: session.burstCount });
     // Quality gate is advisory, not blocking: warn below the recommended threshold but let the
     // clinician proceed with analysis (the hybrid workflow's point).
@@ -1053,6 +1072,15 @@
         return startCamera();
       case "camclose": stopCamera(); haptic("light"); return show("home");
       case "capturebest": return manualCapture();
+      case "torch": {
+        var tOn = (cam && cam.torchOn) ? cam.torchOn() : false;
+        var tNext = !tOn;
+        if (cam && cam.setTorch) { try { cam.setTorch(tNext); } catch (e) {} }
+        haptic("selection");
+        var fbn = document.getElementById("fundxFlashBtn");
+        if (fbn) { fbn.classList.toggle("on", tNext); fbn.innerHTML = ric(tNext ? "flash_on" : "flash_off"); }
+        return;
+      }
       case "confirmlens": if (sm && sm.confirmLensPositioned) sm.confirmLensPositioned(); haptic("selection"); { var fbb = document.getElementById("fundxFallback"); if (fbb) fbb.style.display = "none"; } toast("Proceeding — capture still needs a clear retinal image."); return;
       case "setlensconfirm": { try { localStorage.setItem("smd_fundx_lens_confirm", lensConfirmOn() ? "0" : "1"); } catch (e) {} applySettings(); haptic("selection"); return render(); }
       case "settel": { try { localStorage.setItem("smd_fundx_telemetry", telOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }

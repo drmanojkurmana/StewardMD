@@ -191,6 +191,30 @@ public class FundxDepthPlugin extends Plugin {
         call.resolve();
     }
 
+    // Torch/flash for the fundal exam. ARCore owns the camera, so the getUserMedia torch constraint
+    // doesn't apply — control the flash via the ARCore session config (FlashMode.TORCH/OFF),
+    // reconfigured on the thread that owns the active session (GL thread in GPU mode, arThread otherwise).
+    @PluginMethod
+    public void setTorch(final PluginCall call) {
+        final boolean on = call.getBoolean("on", false);
+        if (gpuMode && glView != null) {
+            glView.queueEvent(new Runnable() { @Override public void run() { applyTorch(gpuSession, on); } });
+            call.resolve(); return;
+        }
+        final Handler h = arHandler;
+        if (h != null) h.post(new Runnable() { @Override public void run() { applyTorch(session, on); } });
+        call.resolve();
+    }
+
+    private void applyTorch(Session s, boolean on) {
+        try {
+            if (s == null) return;
+            Config cfg = s.getConfig();
+            cfg.setFlashMode(on ? Config.FlashMode.TORCH : Config.FlashMode.OFF);
+            s.configure(cfg);
+        } catch (Throwable t) { /* FlashMode may be unsupported with the active camera config */ }
+    }
+
     // Belt-and-suspenders: release the ARCore session + camera when the Activity is backgrounded,
     // even if the JS visibilitychange handler didn't fire. The JS flow re-starts on resume.
     @Override

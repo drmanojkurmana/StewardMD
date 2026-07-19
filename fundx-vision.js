@@ -291,6 +291,32 @@
   var QualityEngine = {
     score: function (m) {
       m = m || {};
+      // ===== STAGE 1 (REQUIRED): retinal-scene gate =====
+      // A valid retinal image must show the DEFINITIVE optical evidence of the fundus: a RED REFLEX
+      // (the red glow returning from the retina) AND a confident, CIRCULAR illuminated fundus field.
+      // Non-retinal scenes (room, window, wall, desk, laptop, phone, clothing, face, hand, ceiling)
+      // physically cannot produce these — so NO retinal quality score is computed, the image is not
+      // accepted, and Continue is blocked. (Focus/exposure/glare/vessels are generic image features a
+      // curtain can satisfy, which is exactly why they must not be scored until this gate passes.)
+      var redReflexOk = clamp01(m.redReflex) >= CFG.redReflexMin;
+      var fundusOk = !!m.fundusVisible && clamp01(m.fundusConf) >= CFG.fundusMin
+                     && clamp01(m.fundusCircularity) >= CFG.fundusCircularityMin;
+      var retinaOk = clamp01(m.retinaConf != null ? m.retinaConf : m.fundusConf) >= CFG.fundusMin;
+      var retinalGate = redReflexOk && fundusOk && retinaOk;
+      if (!retinalGate) {
+        var g = [];
+        if (!redReflexOk) g.push("no_red_reflex");
+        if (!fundusOk) g.push("no_fundus_field");
+        if (!retinaOk) g.push("low_retinal_confidence");
+        return {
+          schemaVersion: SCHEMA_VERSION, overall: 0,
+          // zeroed (not null) so BestFrameSelector / UI never dereference a missing subscores
+          subscores: { focus: 0, sharpness: 0, exposure: 0, brightness: 0, contrast: 0, noise: 1,
+            reflection: 0, fundusVisibility: 0, vesselVisibility: 0, redReflex: clamp01(m.redReflex), fieldOfView: 0 },
+          accepted: false, retinalGate: false, reasons: g.length ? g : ["no_retinal_scene"]
+        };
+      }
+      // ===== quality scoring — ONLY reached when the retinal gate passes =====
       // Capture quality is IMAGE quality (fundus field + vessels + focus/exposure/glare),
       // not disease structures — those come from the vision model post-capture.
       var sub = {
@@ -317,7 +343,7 @@
       if (sub.fieldOfView < 0.4) reasons.push("field_of_view_inadequate");
       return {
         schemaVersion: SCHEMA_VERSION, overall: overall, subscores: sub,
-        accepted: overall >= CFG.qualityAccept, reasons: reasons
+        accepted: overall >= CFG.qualityAccept, retinalGate: true, reasons: reasons
       };
     }
   };

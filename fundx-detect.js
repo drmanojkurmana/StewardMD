@@ -311,8 +311,16 @@
     // WKWebView exposes no torch constraint) — never throws.
     var torchOn = false;
     function torchTrack() { try { return stream && stream.getVideoTracks && stream.getVideoTracks()[0]; } catch (e) { return null; } }
-    function torchSupported() { try { var t = torchTrack(); var c = t && t.getCapabilities && t.getCapabilities(); return !!(c && c.torch); } catch (e) { return false; } }
+    function torchSupported() {
+      try { if (nativeSub) return true; } catch (e) {}   // native/GPU: flash via ARCore FlashMode
+      try { var t = torchTrack(); var c = t && t.getCapabilities && t.getCapabilities(); return !!(c && c.torch); } catch (e) { return false; }
+    }
     function setTorch(on) {
+      // Native/GPU mode: ARCore owns the camera — toggle the flash through the plugin (FlashMode).
+      try {
+        var P = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth;
+        if (nativeSub && P && P.setTorch) { P.setTorch({ on: !!on }); torchOn = !!on; return true; }
+      } catch (e) {}
       try {
         var t = torchTrack();
         if (!t || !t.applyConstraints) return false;

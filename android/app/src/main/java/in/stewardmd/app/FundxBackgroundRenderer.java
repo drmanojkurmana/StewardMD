@@ -48,21 +48,8 @@ class FundxBackgroundRenderer {
         "precision mediump float;\n" +
         "varying vec2 v_TexCoord;\n" +
         "uniform samplerExternalOES sTexture;\n" +
-        "uniform vec2 u_texel;\n" +
-        "uniform float u_sharpen;\n" +
-        "uniform float u_contrast;\n" +
-        "uniform float u_saturation;\n" +
         "void main() {\n" +
-        "  vec3 c = texture2D(sTexture, v_TexCoord).rgb;\n" +
-        "  vec3 blur = (texture2D(sTexture, v_TexCoord + vec2(u_texel.x, 0.0)).rgb\n" +
-        "             + texture2D(sTexture, v_TexCoord - vec2(u_texel.x, 0.0)).rgb\n" +
-        "             + texture2D(sTexture, v_TexCoord + vec2(0.0, u_texel.y)).rgb\n" +
-        "             + texture2D(sTexture, v_TexCoord - vec2(0.0, u_texel.y)).rgb) * 0.25;\n" +
-        "  vec3 col = c + (c - blur) * u_sharpen;\n" +               // unsharp mask
-        "  col = (col - 0.5) * u_contrast + 0.5;\n" +                // contrast about mid-grey
-        "  float l = dot(col, vec3(0.299, 0.587, 0.114));\n" +
-        "  col = mix(vec3(l), col, u_saturation);\n" +               // saturation
-        "  gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);\n" +
+        "  gl_FragColor = texture2D(sTexture, v_TexCoord);\n" +      // plain, known-good full-res draw
         "}";
 
     // ISP-approximation defaults (subtle — over-processing looks worse than soft).
