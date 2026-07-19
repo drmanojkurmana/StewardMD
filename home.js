@@ -324,7 +324,11 @@
     xray: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 7a3 3 0 0 0-2 5c0 1.6 2 2 2 4M12 7a3 3 0 0 1 2 5c0 1.6-2 2-2 4"/><path d="M8 11h8M8.5 14h7"/>',
     bolt: '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-6Z"/>',
     globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.9 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.9-3.8-9S9.5 5.6 12 3Z"/>',
-    bug: '<path d="M8 8a4 4 0 0 1 8 0v3a4 4 0 0 1-8 0Z"/><path d="M9 7 7.5 5.5M15 7l1.5-1.5"/><path d="M4 11h4M16 11h4M4 16h4M16 16h4M12 12v9"/><path d="M4.5 20 8 18M19.5 20 16 18"/>'
+    bug: '<path d="M8 8a4 4 0 0 1 8 0v3a4 4 0 0 1-8 0Z"/><path d="M9 7 7.5 5.5M15 7l1.5-1.5"/><path d="M4 11h4M16 11h4M4 16h4M16 16h4M12 12v9"/><path d="M4.5 20 8 18M19.5 20 16 18"/>',
+    thumbUp: '<path d="M7 11v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z"/><path d="M7 11l4-7a2 2 0 0 1 3.8 1v3.5h4.2a2 2 0 0 1 2 2.4l-1.3 6A2 2 0 0 1 17.7 20H7"/>',
+    thumbDown: '<path d="M17 13V4h3a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1Z"/><path d="M17 13l-4 7a2 2 0 0 1-3.8-1v-3.5H5a2 2 0 0 1-2-2.4l1.3-6A2 2 0 0 1 6.3 4H17"/>',
+    flag: '<path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/>',
+    play: '<path d="M7 4.5v15l13-7.5Z"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
@@ -2664,13 +2668,13 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     try { return new Date(ts).toLocaleDateString([], { month: "short", day: "numeric" }); } catch (e) { return ""; }
   }
   function nDate(ts) { try { return ts ? new Date(ts).toLocaleDateString([], { year: "numeric", month: "short", day: "numeric" }) : ""; } catch (e) { return ""; } }
-  var NCAT = { drug: "💊 Drug", approval: "✅ Approval", safety: "⚠️ Safety", recall: "🚫 Recall", guideline: "📋 Guideline", study: "🔬 Study", general: "📣 Update" };
+  var NCAT = { drug: svg("pills","smd-ico")+" Drug", approval: svg("check","smd-ico")+" Approval", safety: svg("warn","smd-ico")+" Safety", recall: svg("close","smd-ico")+" Recall", guideline: svg("list","smd-ico")+" Guideline", study: svg("flask","smd-ico")+" Study", general: svg("bell","smd-ico")+" Update" };
   var WSLBL = { internal_medicine: "Internal Medicine", surgery: "Surgery", ent: "ENT", ophthalmology: "Ophthalmology", obstetrics_gynaecology: "Obstetrics & Gynaecology", urology: "Urology", dentistry_omfs: "Dentistry / OMFS", paediatrics: "Paediatrics" };
   // Internal-Medicine sub-specialties ("branches") — used to filter the feed and in Notification preferences.
   var BRANCH_ORDER = ["cardiology", "nephrology", "pulmonology", "endocrinology", "infectious_diseases", "critical_care", "gastroenterology", "hepatology", "oncology", "emergency_medicine", "family_medicine"];
   var BRANCH_LBL = { cardiology: "Cardiology", nephrology: "Nephrology", pulmonology: "Pulmonology", endocrinology: "Endocrinology", infectious_diseases: "Infectious Diseases", critical_care: "Critical Care", gastroenterology: "Gastroenterology", hepatology: "Hepatology", oncology: "Oncology", emergency_medicine: "Emergency Medicine", family_medicine: "Family Medicine" };
   var TYPE_FILTERS = [["all", "All"], ["guideline", "Guidelines"], ["drug_approval", "Drug Approvals"], ["safety_alert", "Safety Alerts"], ["trial", "Major Trials"]];
-  var TYPE_TAG = { guideline: "📋 Guideline", drug_approval: "✅ Approval", safety_alert: "⚠️ Safety", trial: "🔬 Trial" };
+  var TYPE_TAG = { guideline: svg("list","smd-ico")+" Guideline", drug_approval: svg("check","smd-ico")+" Approval", safety_alert: svg("warn","smd-ico")+" Safety", trial: svg("flask","smd-ico")+" Trial" };
 
   function bmGet() { try { return JSON.parse(localStorage.getItem(NOTIF_BM) || "[]") || []; } catch (e) { return []; } }
   function bmHas(id) { return bmGet().indexOf(id) >= 0; }

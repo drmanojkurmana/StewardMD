@@ -681,7 +681,7 @@
   function showResume() {
     if (!_pausedAt) return; injectCSS();
     if (!_resumeEl) { _resumeEl = document.createElement("button"); _resumeEl.className = "smdt-resume"; _resumeEl.setAttribute("aria-label", "Resume tour"); document.body.appendChild(_resumeEl); _resumeEl.onclick = resumeTour; }
-    _resumeEl.innerHTML = '<span>▶</span><span>Resume tour</span>';
+    _resumeEl.innerHTML = '<span>' + obIco("play") + '</span><span>Resume tour</span>';
     _resumeEl.style.display = "flex";
   }
   function hideResume() { if (_resumeEl) _resumeEl.style.display = "none"; }
