@@ -53,6 +53,17 @@ function clampWords(s, max) {
   const w = String(s || "").trim().split(/\s+/);
   return w.length <= max ? String(s || "").trim() : w.slice(0, max).join(" ") + "…";
 }
+// Like clampWords but PRESERVES line breaks — so a lead sentence + bullet list stays scannable
+// (the app renders the summary with white-space:pre-wrap). Collapses runs of spaces/blank lines.
+function tidySummary(s) {
+  return String(s || "")
+    .replace(/\r/g, "")
+    .replace(/[ \t]+/g, " ")
+    .replace(/[ \t]*\n[ \t]*/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim()
+    .slice(0, 1500);
+}
 function arr(x) { return Array.isArray(x) ? x.filter(Boolean).map((v) => String(v)).slice(0, 12) : []; }
 function normImportance(v) { v = String(v || "").toLowerCase().trim(); return (v === "high" || v === "critical") ? v : "normal"; }
 function normWorkspace(v, fallback) { v = String(v || "").toLowerCase().trim(); return WORKSPACES.indexOf(v) >= 0 ? v : (fallback || "internal_medicine"); }
@@ -175,8 +186,11 @@ const CLASSIFY_SYS =
   "\"title\":string, \"organization\":string, \"summary\":string, \"importance\":\"normal\"|\"high\"|\"critical\", " +
   "\"keywords\":[string], \"official_url\":string, " +
   "\"pharma\":{\"drug_class\":string, \"indications\":[string], \"dose\":string, \"duration\":string, \"contraindications\":[string]}}.\n" +
-  "GUIDANCE: choose the single best type and the single most relevant specialty workspace. \"summary\" is original " +
-  "prose, AT MOST 120 words, usable as both a push-notification body and a feed card. \"importance\": 'critical' for " +
+  "GUIDANCE: choose the single best type and the single most relevant specialty workspace. \"summary\" is a scannable " +
+  "clinical brief for busy doctors: ONE short lead sentence saying what this item is, then 3-8 concise bullet points " +
+  "(each line beginning with the bullet character \"• \") covering the key changes or practice points, separated " +
+  "by newlines. Keep it under ~130 words; plain text only (no markdown headings, no **bold**, no numbered lists); the " +
+  "lead sentence must read well on its own as a push-notification line. \"importance\": 'critical' for " +
   "withdrawals/boxed warnings/bans, 'high' for practice-changing guidelines or major approvals, else 'normal'. " +
   "\"title\" <= 140 characters.\n" +
   "PHARMA: fill \"pharma\" ONLY for a drug (type drug_approval, or a safety_alert about a specific drug) — give the " +
@@ -227,7 +241,7 @@ export async function classifyDocument(env, meta) {
           workspace: normWorkspace(p.workspace, "internal_medicine"),
           title: String(p.title || meta.title || "").trim().slice(0, 200),
           organization: String(p.organization || "").slice(0, 120),
-          body: clampWords(p.summary, 120),
+          body: tidySummary(p.summary),
           importance: normImportance(p.importance),
           keywords: arr(p.keywords),
           url: String(p.official_url || meta.url || "").slice(0, 500),   // AI picks the most authoritative link from search/URL

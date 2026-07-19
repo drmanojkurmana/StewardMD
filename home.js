@@ -2654,12 +2654,14 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     var ws = it.workspace ? '<span class="fd-ws">' + nEsc(WSLBL[it.workspace] || it.workspace) + '</span>' : "";
     var org = it.organization || it.source || "";
     var prev = String(it.summary || it.body || "");
+    var lead = prev.split("\n")[0];                                  // lead sentence only for the card; full bullets render in the detail view
+    var more = prev.length > lead.length || lead.length > 220;
     return '<div class="fd-card' + (hi ? " hi" : "") + '" data-uid="' + nEsc(it.id) + '" role="button" tabindex="0">' +
       '<div class="ntf-top"><span class="ntf-cat cat-' + nEsc(it.category || "general") + '">' + tag + '</span>' + badge +
         '<span class="ntf-time">' + nEsc(nDate(it.ts)) + '</span></div>' +
       '<div class="ntf-title">' + nEsc(it.title) + '</div>' +
       (org ? '<div class="fd-org">' + nEsc(org) + '</div>' : "") +
-      (prev ? '<div class="ntf-body">' + nEsc(prev.slice(0, 220)) + (prev.length > 220 ? "…" : "") + '</div>' : "") +
+      (prev ? '<div class="ntf-body">' + nEsc(lead.slice(0, 220)) + (more ? "…" : "") + '</div>' : "") +
       '<div class="fd-meta">' + ws + read + '<span class="fd-open">Open ›</span></div></div>';
   }
   function renderFeed() {
