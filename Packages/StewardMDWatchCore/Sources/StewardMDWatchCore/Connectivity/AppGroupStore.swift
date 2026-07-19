@@ -9,6 +9,7 @@ public struct AppGroupStore: Sendable {
     private let suite: String
     private let sessionKey = "smd.session"
     private let favoritesKey = "smd.favorites"
+    private let glanceKey = "smd.glance"
 
     public init(suite: String = AppGroupStore.defaultSuite) { self.suite = suite }
 
@@ -34,8 +35,19 @@ public struct AppGroupStore: Sendable {
         return (try? JSONDecoder().decode([Favorite].self, from: data)) ?? []
     }
 
+    public func saveGlance(_ g: GlanceState) {
+        guard let d = defaults, let data = try? JSONEncoder().encode(g) else { return }
+        d.set(data, forKey: glanceKey)
+    }
+
+    public func loadGlance() -> GlanceState {
+        guard let d = defaults, let data = d.data(forKey: glanceKey) else { return .empty }
+        return (try? JSONDecoder().decode(GlanceState.self, from: data)) ?? .empty
+    }
+
     public func clear() {
         defaults?.removeObject(forKey: sessionKey)
         defaults?.removeObject(forKey: favoritesKey)
+        defaults?.removeObject(forKey: glanceKey)
     }
 }
