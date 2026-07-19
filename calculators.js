@@ -7485,7 +7485,7 @@
       ".mc-card.open{border-color:var(--teal,#0a9396);grid-column:1/-1}",
       ".mc-card-head{display:flex;align-items:center;gap:11px;padding:12px 13px;cursor:pointer;width:100%;background:transparent;border:none;text-align:left}",
       ".mc-ic{font-size:20px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}",
-      ".mc-ico{width:15px;height:15px;vertical-align:-2px;display:inline-block;flex:0 0 auto}",
+      ".mc-ico{width:15px;height:15px;vertical-align:-2px;display:inline-block;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}",
       ".mc-ic svg{width:22px;height:22px;color:var(--teal,#0a9396)}",
       ".mc-cat svg,.mc-grp-h svg{width:14px;height:14px;vertical-align:-2px;margin-right:4px}",
       ".mc-grp-h svg{color:var(--teal,#0a9396)}",
