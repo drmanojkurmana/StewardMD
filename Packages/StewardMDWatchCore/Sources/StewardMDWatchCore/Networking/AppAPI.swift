@@ -29,4 +29,24 @@ public struct AppAPI: Sendable {
     public func cases() async throws -> CasesResponse {
         try await get("api/cases", as: CasesResponse.self)
     }
+
+    /// `GET /api/watch-config` — remote feature flags (public; token attached
+    /// harmlessly). Falls back to shipped defaults handled by the caller.
+    public func watchConfig() async throws -> FeatureFlags {
+        try await get("api/watch-config", as: FeatureFlags.self)
+    }
+
+    /// `POST /api/watch/ack` — durable, idempotent acknowledge sync.
+    public func acknowledge(_ ack: Ack) async throws {
+        let body = try JSONEncoder().encode(ack)
+        _ = try await client.send(
+            Endpoint(method: "POST",
+                     url: Self.base.appendingPathComponent("api/watch/ack"),
+                     body: body, requiresAuth: true),
+            as: OKResponse.self
+        )
+    }
 }
+
+/// Minimal `{ ok }` acknowledgement envelope.
+struct OKResponse: Codable, Sendable { let ok: Bool? }

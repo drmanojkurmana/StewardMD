@@ -32,5 +32,24 @@ public struct FeatureFlags: Codable, Equatable, Sendable {
         return flags[key] ?? false
     }
 
+    /// True when the running app is below the remotely-set minimum version.
+    public func requiresUpdate(currentVersion: String) -> Bool {
+        guard let minV = minVersion else { return false }
+        return SemVer.compare(currentVersion, minV) < 0
+    }
+
     public static let empty = FeatureFlags(flags: [:], minVersion: nil, announcement: nil, killSwitch: false)
+
+    /// The offline fallback: what the current build ships with enabled, so that
+    /// with no network the shipped features still work (only server config can
+    /// override these). Mirrors the backend `/api/watch-config` defaults.
+    public static let shippedDefaults = FeatureFlags(
+        flags: [
+            "criticalLabs": true, "drugLookup": true, "codeBlue": true,
+            "wardSync": true, "calculators": true, "sepsisTimer": true,
+            "procedureTimer": true, "abg": true, "handover": true,
+            "antibioticSummary": false, "icuDeterioration": false
+        ],
+        minVersion: "1.0.0", announcement: nil, killSwitch: false
+    )
 }

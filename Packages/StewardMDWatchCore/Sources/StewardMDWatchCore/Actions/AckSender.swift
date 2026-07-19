@@ -30,10 +30,19 @@ public struct UserDefaultsAckStore: AckStore {
     }
 }
 
-/// Offline-safe default: records the ack to a local audit trail and reports
-/// success so the queue drains. Replace with the HTTP sender once the backend
-/// `/api/watch/ack` endpoint exists (Phase 6).
+/// Offline-safe default: reports success so the queue drains locally when no
+/// network sender is wired (e.g. previews / tests).
 public struct LoggingAckSender: AckSender {
     public init() {}
     public func send(_ ack: Ack) async -> Bool { true }
+}
+
+/// Production sender — POSTs to `/api/watch/ack` (idempotent server-side).
+/// Returns false on any failure so the `AckQueue` retries later.
+public struct HTTPAckSender: AckSender {
+    let api: AppAPI
+    public init(api: AppAPI) { self.api = api }
+    public func send(_ ack: Ack) async -> Bool {
+        do { try await api.acknowledge(ack); return true } catch { return false }
+    }
 }
