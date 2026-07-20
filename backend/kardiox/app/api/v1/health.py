@@ -23,6 +23,8 @@ async def health(settings: Settings = Depends(get_settings), providers: Provider
         # Optional specialist model classifiers (MI/rare/conduction/morphology/beat) — Not Ready until
         # a validated checkpoint is configured; reported separately so the core stage list is stable.
         "specialists": await providers.specialist_health(),
+        # Foundation encoders (feature extractors / fine-tune bases) — Not Ready until a checkpoint is wired.
+        "encoders": await providers.encoder_health(),
         # In live mode, "modelsReady" means every core stage is implemented AND its deps/config are satisfied.
         "modelsReady": all(r["ready"] for r in reports) if settings.mode == "live" else True,
     }

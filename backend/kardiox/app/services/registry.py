@@ -35,6 +35,9 @@ class Providers:
         self.specialists = specialists.build_specialists(s)
         # EcgLib pretrained classifiers (Apache-2.0) — an ensemble of binary pathology models (opt-in).
         self.ecglib = ecglib_provider.EcgLibClassifier()
+        # Foundation encoders (ECG-FM/DeepECG-SSL/HeartGPT) — feature extractors / fine-tune bases (opt-in).
+        from app.services.models.encoders import build_encoders
+        self.encoders = build_encoders(s)
 
     def all(self):
         return [self.preprocessing, self.quality, self.digitization, self.wfdb, self.rhythm,
@@ -48,6 +51,9 @@ class Providers:
 
     async def specialist_health(self) -> list[dict]:
         return await asyncio.gather(*(p.health() for p in [*self.specialists, self.ecglib]))
+
+    async def encoder_health(self) -> list[dict]:
+        return await asyncio.gather(*(e.health() for e in self.encoders))
 
 
 def build_providers(s: Settings) -> Providers:

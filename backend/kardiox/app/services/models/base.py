@@ -71,6 +71,14 @@ class ModelBackend(ABC):
     def infer(self, x_np):
         """Run inference on a numpy (1, C, T) input → numpy class-probability vector."""
 
+    def raw(self, x_np):
+        """Run the model and return its RAW output (no softmax) — for encoders/embeddings.
+
+        Default subclasses may override for efficiency; the base runs infer()'s underlying model without
+        the probability normalization. Concrete backends provide a proper raw() where it differs.
+        """
+        raise NotImplementedError(f"{self.kind} backend does not implement raw()")
+
     def predict(self, x_np) -> dict:
         import numpy as np
         probs = self.infer(x_np)

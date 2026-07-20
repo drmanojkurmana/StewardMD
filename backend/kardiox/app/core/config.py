@@ -79,6 +79,9 @@ class Settings(BaseSettings):
     # EcgLib (ispras, Apache-2.0) pretrained binary classifiers. Comma-separated pathology codes to enable
     # (AFIB,1AVB,STACH,SBRAD,IRBBB,CRBBB,PVC); empty = disabled/Not-Ready. ecglib fetches the weights.
     ecglib_pathologies: str = ""
+    # Foundation encoders (ECG-FM/DeepECG-SSL/HeartGPT). JSON registry name -> {path, kind}; empty {} =
+    # all Not-Ready (KardioX ships no weights). Export each encoder to ONNX/TorchScript first (docs/ENCODERS.md).
+    encoders_json: str = "{}"
     # Multi-digitizer consensus members (comma-separated: classical, external). Extra members flagged
     # Not Ready are skipped; a single available member still yields a (single-source) result.
     digitizer_consensus_members: str = "classical"
@@ -120,6 +123,15 @@ class Settings(BaseSettings):
     @property
     def consensus_members_list(self) -> list[str]:
         return [s.strip() for s in self.digitizer_consensus_members.split(",") if s.strip()] or ["classical"]
+
+    @property
+    def encoders_config(self) -> dict:
+        import json
+        try:
+            v = json.loads(self.encoders_json or "{}")
+            return v if isinstance(v, dict) else {}
+        except (ValueError, TypeError):
+            return {}
 
     @property
     def cors_list(self) -> list[str]:

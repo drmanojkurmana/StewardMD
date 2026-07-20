@@ -36,11 +36,14 @@ class TorchScriptBackend(ModelBackend):
         return m
 
     def infer(self, x_np):
+        return softmax(self.raw(x_np))
+
+    def raw(self, x_np):
         import torch
         m = self.load()
         with torch.no_grad():
             out = m(torch.from_numpy(x_np))
-        return softmax(out.detach().cpu().numpy())
+        return out.detach().cpu().numpy()
 
 
 class OnnxBackend(ModelBackend):
@@ -62,10 +65,12 @@ class OnnxBackend(ModelBackend):
         return self._model
 
     def infer(self, x_np):
+        return softmax(self.raw(x_np))
+
+    def raw(self, x_np):
         sess = self.load()
         name = sess.get_inputs()[0].name
-        out = sess.run(None, {name: x_np})[0]
-        return softmax(out)
+        return sess.run(None, {name: x_np})[0]
 
 
 class StateDictBackend(ModelBackend):
@@ -96,11 +101,14 @@ class StateDictBackend(ModelBackend):
         return model
 
     def infer(self, x_np):
+        return softmax(self.raw(x_np))
+
+    def raw(self, x_np):
         import torch
         m = self.load()
         with torch.no_grad():
             out = m(torch.from_numpy(x_np))
-        return softmax(out.detach().cpu().numpy())
+        return out.detach().cpu().numpy()
 
 
 class SavedModelBackend(ModelBackend):
@@ -122,12 +130,14 @@ class SavedModelBackend(ModelBackend):
         return self._model
 
     def infer(self, x_np):
+        return softmax(self.raw(x_np))
+
+    def raw(self, x_np):
         import numpy as np
         m = self.load()
         fn = getattr(m, "signatures", {}).get("serving_default") if hasattr(m, "signatures") else None
         out = (fn(**{list(fn.structured_input_signature[1])[0]: x_np}) if fn else m(x_np))
-        arr = list(out.values())[0].numpy() if isinstance(out, dict) else np.asarray(out)
-        return softmax(arr)
+        return list(out.values())[0].numpy() if isinstance(out, dict) else np.asarray(out)
 
 
 class EnsembleBackend(ModelBackend):
@@ -153,6 +163,13 @@ class EnsembleBackend(ModelBackend):
             raise UpstreamUnavailable("ensemble has no members", stage="rhythm")
         stacked = np.stack([np.asarray(m.infer(x_np), dtype="float64").ravel() for m in self.members], axis=0)
         return stacked.mean(axis=0)
+
+    def raw(self, x_np):
+        # For encoders: CONCATENATE member embeddings (supports multiple foundation models simultaneously).
+        import numpy as np
+        if not self.members:
+            raise UpstreamUnavailable("ensemble has no members", stage="rhythm")
+        return np.concatenate([np.asarray(m.raw(x_np), dtype="float64").ravel() for m in self.members])
 
 
 _BACKENDS = {

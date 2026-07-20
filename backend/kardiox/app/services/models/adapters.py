@@ -105,6 +105,10 @@ INPUT_SPECS: dict[str, ModelInputSpec] = {
     "ptbxl_100hz_10s": ModelInputSpec(fs=100, num_samples=1000, leads=list(STANDARD_12)),
     "torch_ecg_12lead": ModelInputSpec(fs=500, num_samples=5000, leads=list(STANDARD_12)),
     "lead_ii_500hz_10s": ModelInputSpec(fs=500, num_samples=5000, leads=["II"]),
+    # Foundation-encoder input contracts (confirm each vs its checkpoint/model card).
+    "ecgfm_500hz_5s": ModelInputSpec(fs=500, num_samples=2500, leads=list(STANDARD_12)),      # ECG-FM (wav2vec2)
+    "deepecg_250hz_10s": ModelInputSpec(fs=250, num_samples=2500, leads=list(STANDARD_12)),   # DeepECG-SSL
+    "heartgpt_leadii": ModelInputSpec(fs=100, num_samples=1000, leads=["II"], normalize="minmax"),  # HeartGPT (single-lead, tokenized upstream)
 }
 
 
