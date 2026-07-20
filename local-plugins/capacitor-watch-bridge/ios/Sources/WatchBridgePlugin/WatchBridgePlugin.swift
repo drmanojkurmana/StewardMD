@@ -68,6 +68,13 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
                 self.notifyListeners("codeBlueActive", data: ["running": state.running])
             }
         }
+        // Reset from the watch → dismiss the on-screen alert + re-arm for the next code.
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.codeBlueReset, object: nil, queue: .main
+        ) { [weak self] _ in
+            self?.lastCodeBlueRunning = false
+            self?.notifyListeners("codeBlueActive", data: ["running": false])
+        }
         // When the watch asks for a fresh token, re-emit to JS so native-watch.js
         // republishes. Decoupled via a string-keyed notification (same pattern as
         // AppOrientationPlugin) so the plugin owns no cross-module symbols.

@@ -56,6 +56,8 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
             NotificationCenter.default.post(name: WatchConnectivityRelay.labAckRequested, object: nil, userInfo: message)
         case "codeBlueLive", "codeBlueSnapshot":
             NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReceived, object: nil, userInfo: message)
+        case "codeBlueReset":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReset, object: nil)
         default:
             NotificationCenter.default.post(name: WatchConnectivityRelay.tokenRequested, object: nil)   // token-request (legacy)
         }
@@ -129,6 +131,8 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
         case "codeBlueSnapshot":
             NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReceived,
                                             object: nil, userInfo: userInfo)
+        case "codeBlueReset":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReset, object: nil)
         default:
             break
         }
@@ -137,7 +141,9 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
     /// Watch → phone application context (coalesced, survives phone relaunch). Used
     /// to recover the latest Code Blue snapshot after the phone app is restarted.
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        if let state = applicationContext["codeBlueSnapshot"] {
+        if applicationContext["codeBlueReset"] != nil {
+            NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReset, object: nil)
+        } else if let state = applicationContext["codeBlueSnapshot"] {
             NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReceived, object: nil,
                                             userInfo: ["kind": "codeBlueSnapshot", "state": state])
         }
@@ -148,6 +154,7 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
     static let watchTokenReceived = Notification.Name("SMDWatchPushTokenReceived")
     static let labAckRequested = Notification.Name("SMDWatchLabAckRequested")
     static let codeBlueReceived = Notification.Name("SMDCodeBlueReceived")
+    static let codeBlueReset = Notification.Name("SMDCodeBlueReset")
 }
 #else
 /// Non-iOS fallback so the package still compiles everywhere.

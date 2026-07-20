@@ -107,6 +107,17 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         #endif
     }
 
+    /// Tell the phone to wipe its Code Blue records (Reset). Sent immediately + queued,
+    /// and overwrites the app context so a phone relaunch never restores stale state.
+    func sendCodeBlueReset() {
+        #if canImport(WatchConnectivity)
+        guard WCSession.isSupported() else { return }
+        relaySend(["kind": "codeBlueReset"])
+        let s = WCSession.default
+        if s.activationState == .activated { try? s.updateApplicationContext(["codeBlueReset": true]) }
+        #endif
+    }
+
     /// Relay a task-status change to the phone (→ SMD_ICU_GROUPS.setTaskStatus).
     /// Uses `transferUserInfo` — guaranteed, FIFO, background delivery even when
     /// the phone app is not foregrounded (unlike `sendMessage`).

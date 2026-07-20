@@ -45,6 +45,19 @@ struct CodeBlueView: View {
                 startEndButton
 
                 if let s = summary { summaryLine(s) }
+
+                if !running && !model.events.isEmpty {
+                    Button("Reset") {
+                        model.reset()
+                        summary = nil
+                        ResusAlerts.cancel(["codeblue-cycle"])
+                        WatchConnectivityManager.shared.sendCodeBlueReset()
+                        HapticManager.play(.success)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(SMDPalette.text2.color)
+                    .accessibilityHint("Deletes this code's records on the watch and iPhone")
+                }
                 Text(CodeSummary.disclaimerText)
                     .font(.system(size: 10)).foregroundStyle(SMDPalette.text2.color)
                     .multilineTextAlignment(.center)

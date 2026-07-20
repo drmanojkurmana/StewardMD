@@ -116,6 +116,9 @@ struct CommandCenterView: View {
             }.buttonStyle(.borderedProminent).tint(.red)
             Button { showShare = true } label: { Label("Share…", systemImage: "square.and.arrow.up").frame(maxWidth: .infinity) }
                 .buttonStyle(.bordered)
+            Button(role: .destructive) { model.clearLocal() } label: {
+                Label("Clear records", systemImage: "trash").frame(maxWidth: .infinity)
+            }.buttonStyle(.bordered).tint(.secondary)
         }.padding().background(Color.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 16))
     }
 
