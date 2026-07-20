@@ -39,6 +39,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     private let glanceKey = "smd.glance"
     private let watchlistKey = "smd.watchlist"
     private let criticalsKey = "smd.criticals"
+    private let tasksKey = "smd.tasks"
 
     private lazy var relay = WatchConnectivityRelay()
 
@@ -53,6 +54,12 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             forName: WatchConnectivityRelay.tokenRequested, object: nil, queue: .main
         ) { [weak self] _ in
             self?.notifyListeners("tokenRequested", data: [:])
+        }
+        // Watch → phone task-status write-back → JS (SMD_ICU_GROUPS.setTaskStatus).
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.taskStatusRequested, object: nil, queue: .main
+        ) { [weak self] note in
+            self?.notifyListeners("taskStatus", data: (note.userInfo as? [String: Any]) ?? [:])
         }
         #endif
     }
@@ -93,6 +100,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         let glance = call.getObject("glance")
         let watchlist = call.getArray("watchlist")
         let criticals = call.getArray("criticals")
+        let tasks = call.getArray("tasks")
+        let role = call.getString("role")
 
         let sessionData = try? JSONSerialization.data(withJSONObject: session)
         let favData = try? JSONSerialization.data(withJSONObject: favorites)
@@ -101,6 +110,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         let glanceData = glance.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
         let watchlistData = watchlist.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
         let criticalsData = criticals.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
+        let tasksData = tasks.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
 
         if let d = UserDefaults(suiteName: suiteName) {
             d.set(sessionData, forKey: sessionKey)
@@ -110,6 +120,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             if let g = glanceData { d.set(g, forKey: glanceKey) }
             if let w = watchlistData { d.set(w, forKey: watchlistKey) }
             if let c = criticalsData { d.set(c, forKey: criticalsKey) }
+            if let t = tasksData { d.set(t, forKey: tasksKey) }
         }
 
         var context: [String: Any] = [:]
@@ -120,6 +131,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         if let g = glanceData { context["glance"] = g }
         if let w = watchlistData { context["watchlist"] = w }
         if let c = criticalsData { context["criticals"] = c }
+        if let t = tasksData { context["tasks"] = t }
+        if let r = role { context["role"] = r }
 
         // DIAGNOSTIC (systematic-debugging evidence): what the phone is publishing.
         NSLog("[SMD-Watch] publish uid=%@ favs=%d recents=%d glance=%@ watchlist=%d criticals=%d",
@@ -141,6 +154,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             d.removeObject(forKey: glanceKey)
             d.removeObject(forKey: watchlistKey)
             d.removeObject(forKey: criticalsKey)
+            d.removeObject(forKey: tasksKey)
         }
         relay.updateContext(["cleared": true])
         call.resolve()

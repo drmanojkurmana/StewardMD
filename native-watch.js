@@ -280,6 +280,51 @@
     return out.slice(0, 20);
   }
 
+  // Flatten every shared unit's tasks into the relay shape. assignedTo carries
+  // the executor uid; role gates visibility on the watch. id IS the raw Firestore
+  // task id (globally unique) so the watch can write status back with it.
+  function tasks() {
+    var out = [];
+    try {
+      Object.keys(_grp.patients).forEach(function (gid) {
+        var pts = _grp.patients[gid] || [];
+        var byId = {}; pts.forEach(function (p) { if (p && p.id) byId[p.id] = p; });
+        Object.keys(_grp.tasks).forEach(function (key) {
+          if (key.indexOf(gid + "/") !== 0) return;
+          var pid = key.slice((gid + "/").length), p = byId[pid] || {};
+          var label = [p.bed ? ("Bed " + p.bed) : null, p.name].filter(Boolean).join(" · ");
+          (_grp.tasks[key] || []).forEach(function (t) {
+            if (!t || !t.id) return;
+            out.push({
+              id: String(t.id),
+              groupId: String(gid), patientId: String(pid),
+              patientLabel: label || null,
+              text: String(t.text || ""), priority: String(t.priority || "moderate"),
+              status: String(t.status || "pending"),
+              assignedByName: t.assignedByName || null, assignedToUid: t.assignedTo || null,
+              dueAt: (typeof t.dueAt === "number" ? Math.floor(t.dueAt / 1000) : null),
+              ts: (typeof t.ts === "number" ? Math.floor(t.ts / 1000) : null)
+            });
+          });
+        });
+      });
+    } catch (e) {}
+    return out.slice(0, 100);
+  }
+  // The doctor's most-senior role across their units (watch-side visibility gate;
+  // instruct roles see all unit tasks).
+  function roleForRelay() {
+    try {
+      var order = ["head", "professor", "assistant", "senior_resident", "junior_resident", "intern"];
+      var best = null, bestRank = 99;
+      Object.keys(_grp.role).forEach(function (gid) {
+        var idx = order.indexOf(_grp.role[gid]);
+        if (idx >= 0 && idx < bestRank) { bestRank = idx; best = _grp.role[gid]; }
+      });
+      return best;
+    } catch (e) { return null; }
+  }
+
   // Ward Sync census. patientCount is the deduped watchlist size (so the open
   // patient counts even with an empty roster/GHIS cache). No true bed denominator
   // or task count exists client-side, so we don't invent them.
@@ -347,6 +392,8 @@
       // last-known data.
       var wl = watchlist(); if (wl.length) payload.watchlist = wl;
       var crit = criticals(); if (crit.length) payload.criticals = crit;
+      var tk = tasks(); if (tk.length) payload.tasks = tk;
+      var role = roleForRelay(); if (role) payload.role = role;
       var cen = census(wl.length); if (cen) payload.glance = cen;
       await p.publish(payload);
       markSynced();
@@ -393,6 +440,19 @@
     var p = plugin();
     try { if (p && p.addListener) p.addListener("tokenRequested", function () { publish(); }); }
     catch (e) {}
+
+    // Watch → phone: apply a task-status change to Firestore. taskId is the raw
+    // Firestore id (== WatchTask.id); groupId/patientId locate the task doc.
+    try {
+      if (p && p.addListener) p.addListener("taskStatus", function (a) {
+        try {
+          var api = groupsApi(); if (!api || !api.setTaskStatus || !a) return;
+          if (a.groupId && a.patientId && a.taskId && a.status) {
+            api.setTaskStatus(a.groupId, a.patientId, a.taskId, a.status);
+          }
+        } catch (e) {}
+      });
+    } catch (e) {}
 
     autoPublish();
   }

@@ -102,7 +102,7 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
             store.saveTasks(t)          // persist for relaunch + patient-less syncs
             WatchServices.tasks.ingest(t)
         }
-        if let d = context["role"] as? Data, let s = try? JSONDecoder().decode(String.self, from: d) {
+        if let s = context["role"] as? String {
             role = s
         }
         if let d = context["notifPrefs"] as? Data, let p = try? JSONDecoder().decode([String: Bool].self, from: d) {

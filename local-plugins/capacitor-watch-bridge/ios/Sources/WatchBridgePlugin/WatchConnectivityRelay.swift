@@ -62,7 +62,17 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
         NotificationCenter.default.post(name: WatchConnectivityRelay.tokenRequested, object: nil)
     }
 
+    /// Watch → phone: a task-status change to write back to Firestore. Re-broadcast
+    /// so the plugin can hand it to `native-watch.js` (→ SMD_ICU_GROUPS.setTaskStatus).
+    /// `transferUserInfo` (used by the watch) is delivered here, guaranteed + FIFO.
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
+        guard (userInfo["kind"] as? String) == "taskStatus" else { return }
+        NotificationCenter.default.post(name: WatchConnectivityRelay.taskStatusRequested,
+                                        object: nil, userInfo: userInfo)
+    }
+
     static let tokenRequested = Notification.Name("SMDWatchTokenRequested")
+    static let taskStatusRequested = Notification.Name("SMDWatchTaskStatusRequested")
 }
 #else
 /// Non-iOS fallback so the package still compiles everywhere.
