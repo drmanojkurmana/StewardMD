@@ -40,6 +40,17 @@ final class ModelDecodeTests: XCTestCase {
         XCTAssertNil(r.data)
     }
 
+    func testLabAlertDecodesTrend() throws {
+        let j = #"{"id":"a1","analyte":"Critical hyperkalaemia","value":"7","units":"mEq/L","refRange":null,"patientLabel":"Bed 3","severity":"critical","ts":1.0,"trend":[5.2,6.1,7.0]}"#
+        let a = try decode(LabAlert.self, j)
+        XCTAssertEqual(a.trend, [5.2, 6.1, 7.0])
+    }
+    func testLabAlertDecodesWithoutTrend() throws {
+        let j = #"{"id":"a2","analyte":"K","value":"7","units":null,"refRange":null,"patientLabel":null,"severity":"warning","ts":null}"#
+        let a = try decode(LabAlert.self, j)
+        XCTAssertNil(a.trend)   // back-compat: trend optional
+    }
+
     // MARK: Lab Watch (/api/watch/status)
     func testWatchStatusDecodes() throws {
         let j = #"{"consented":true,"watching":[{"patientId":"P12","episodeId":"E1","name":"Okafor","since":1.0}]}"#

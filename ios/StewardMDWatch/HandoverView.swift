@@ -19,8 +19,12 @@ struct HandoverView: View {
                             .accessibilityLabel(model.isHandedOff(entry.id) ? "Handed off" : "Not handed off")
                         VStack(alignment: .leading, spacing: 1) {
                             Text(entry.name).foregroundStyle(SMDPalette.text1.color)
-                            if let flag = entry.flag {
-                                Text(flag).font(.caption2).foregroundStyle(entry.severity.color.color)
+                            // Unit-aware: show which unit + the flag, so a cross-unit
+                            // end-of-shift handover is unambiguous.
+                            let sub = [entry.unit, entry.bed.map { "Bed \($0)" }, entry.flag]
+                                .compactMap { $0 }.joined(separator: " · ")
+                            if !sub.isEmpty {
+                                Text(sub).font(.caption2).foregroundStyle(entry.severity.color.color)
                             }
                         }
                     }

@@ -242,6 +242,36 @@
   // "Critical hyperkalaemia"). severity "crit"/"warn" → the watch's
   // "critical"/"warning". Roster patients' saved alerts are stripped, so only the
   // open patient's criticals are relayed today.
+  // Map an alert's title/msg → an ICU labs.trends key so the watch detail can show
+  // a recent trend. First match wins; null when unmappable.
+  function analyteKeyFor(text) {
+    var t = String(text || "").toLowerCase();
+    if (/hyperkal|hypokal|potassium|\bk[\s⁺+]/.test(t)) return "k";
+    if (/hypernatr|hyponatr|sodium|\bna[\s⁺+]/.test(t)) return "na";
+    if (/gluc|glyca?emi|\bbsl\b|\brbs\b/.test(t)) return "glu";
+    if (/creatin|\baki\b|\bckd\b/.test(t)) return "creat";
+    if (/bicarb|hco3|acidos|alkalos/.test(t)) return "hco3";
+    if (/calc|\bca[\s²⁺+]/.test(t)) return "ca";
+    if (/magnes|\bmg[\s²⁺+]/.test(t)) return "mg";
+    if (/phosph|\bpo4\b/.test(t)) return "po4";
+    if (/chlorid|\bcl[\s⁻-]/.test(t)) return "cl";
+    if (/h(a)?emoglob|an(a)?emi|\bhb\b/.test(t)) return "hb";
+    if (/platelet|thrombocyt|\bplt\b/.test(t)) return "plt";
+    if (/leu?k(o|a)?cyt|\bwbc\b|neutrop/.test(t)) return "wbc";
+    if (/\binr\b|coagulop/.test(t)) return "inr";
+    if (/album/.test(t)) return "alb";
+    return null;
+  }
+  function trendFor(st, key) {
+    try {
+      if (!key || !st || !st.labs || !st.labs.trends) return null;
+      var vals = [];
+      st.labs.trends.forEach(function (r) { if (r && typeof r[key] === "number" && isFinite(r[key])) vals.push(r[key]); });
+      if (vals.length < 2) return null;
+      return vals.slice(-8);   // last 8 readings, oldest→newest
+    } catch (e) { return null; }
+  }
+
   function criticals() {
     var out = [];
     try {
@@ -259,7 +289,8 @@
             refRange: null,
             patientLabel: label || null,
             severity: a.severity === "crit" ? "critical" : "warning",
-            ts: Math.floor(Date.now() / 1000)
+            ts: Math.floor(Date.now() / 1000),
+            trend: trendFor(st, analyteKeyFor((a.title || "") + " " + (a.msg || "")))
           });
         });
       }
@@ -280,7 +311,8 @@
               value: m ? m[1] : "", units: (m && m[2]) ? m[2] : null, refRange: null,
               patientLabel: label || null,
               severity: a.severity === "crit" ? "critical" : "warning",
-              ts: Math.floor(Date.now() / 1000)
+              ts: Math.floor(Date.now() / 1000),
+              trend: trendFor(st2, analyteKeyFor((a.title || "") + " " + (a.msg || "")))
             });
           });
         });

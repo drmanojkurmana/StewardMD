@@ -58,10 +58,14 @@ public struct LabAlert: Codable, Sendable, Identifiable, Equatable, Hashable {
     public let patientLabel: String? // "Bed 12 · Okafor · 71M" (initials/bed only on AOD)
     public let severity: String      // "critical" | "warning"
     public let ts: Double?
+    /// Recent values of this analyte (oldest→newest) from the phone's ICU labs
+    /// history, for the detail-screen trend. Nil when no history is available.
+    public let trend: [Double]?
 
     public init(id: String, analyte: String, value: String, units: String?, refRange: String?,
-                patientLabel: String?, severity: String, ts: Double?) {
+                patientLabel: String?, severity: String, ts: Double?, trend: [Double]? = nil) {
         self.id = id; self.analyte = analyte; self.value = value; self.units = units
-        self.refRange = refRange; self.patientLabel = patientLabel; self.severity = severity; self.ts = ts
+        self.refRange = refRange; self.patientLabel = patientLabel; self.severity = severity
+        self.ts = ts; self.trend = trend
     }
 }

@@ -38,6 +38,17 @@ struct LabDetailView: View {
                     }
                 }
 
+                if let trend = alert.trend, trend.count >= 2 {
+                    Text("Recent trend").font(.caption2).foregroundStyle(SMDPalette.text2.color)
+                    TrendSparkline(values: trend, tint: tier.color.color).frame(height: 32)
+                    if let prev = trend.dropLast().last, let now = trend.last {
+                        let d = now - prev
+                        Text("Prev \(fmt(prev)) → \(fmt(now))  (\(d >= 0 ? "+" : "")\(fmt(d)))")
+                            .font(.caption2).foregroundStyle(SMDPalette.text2.color)
+                            .accessibilityLabel("Trend: previous \(fmt(prev)), now \(fmt(now))")
+                    }
+                }
+
                 if let p = alert.patientLabel {
                     Text(p).font(.caption2).foregroundStyle(SMDPalette.text2.color)
                 }
@@ -80,8 +91,32 @@ struct LabDetailView: View {
     private func numeric(_ s: String) -> String {
         s.filter { "0123456789.".contains($0) }
     }
+    private func fmt(_ v: Double) -> String { String(format: "%g", v) }
     private func timeNow() -> String {
         let c = Calendar.current.dateComponents([.hour, .minute], from: Date())
         return String(format: "%02d:%02d", c.hour ?? 0, c.minute ?? 0)
+    }
+}
+
+/// A lightweight line sparkline for a lab trend (oldest→newest), drawn with Path
+/// so it needs no charting framework.
+private struct TrendSparkline: View {
+    let values: [Double]
+    let tint: Color
+    var body: some View {
+        GeometryReader { geo in
+            let mn = values.min() ?? 0, mx = values.max() ?? 1
+            let range = (mx - mn) == 0 ? 1 : (mx - mn)
+            let w = geo.size.width, h = geo.size.height
+            Path { p in
+                for (i, v) in values.enumerated() {
+                    let x = values.count == 1 ? 0 : w * CGFloat(i) / CGFloat(values.count - 1)
+                    let y = h - h * CGFloat((v - mn) / range)
+                    if i == 0 { p.move(to: CGPoint(x: x, y: y)) } else { p.addLine(to: CGPoint(x: x, y: y)) }
+                }
+            }
+            .stroke(tint, style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+        }
+        .accessibilityHidden(true)
     }
 }
