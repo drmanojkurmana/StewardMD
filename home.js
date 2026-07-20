@@ -2207,7 +2207,20 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         if (busy) busy.remove();
         if (r && r.text) {
           var bd = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(String(r.text)) : maikEscH(String(r.text));
-          container.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div style="font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;margin-bottom:5px">' + svg("globe", "smd-ico") + ' Web-sourced (Google) · not StewardMD-verified</div>' + bd + '</div>');
+          // Clickable source links — the TinyFish fast path returns r.sources = [{title,url,site}]
+          // (numbered to match the [n] citations in the answer); the Gemini-grounding fallback
+          // returns none. URLs are scheme-validated (http/https only) + escaped to stay XSS-safe.
+          var srcHTML = "";
+          if (r.sources && r.sources.length) {
+            var items = r.sources.map(function (s) {
+              var t = maikEscH((s && (s.title || s.site || s.url)) || "source");
+              var safeU = (s && s.url && /^https?:\/\//i.test(s.url)) ? maikEscH(s.url) : "";
+              var siteTag = (s && s.site) ? ' <span style="color:var(--slate-soft,#94a3b8)">· ' + maikEscH(s.site) + '</span>' : '';
+              return '<li>' + (safeU ? '<a href="' + safeU + '" target="_blank" rel="noopener noreferrer" style="color:#0e6e63">' + t + '</a>' : t) + siteTag + '</li>';
+            }).join("");
+            srcHTML = '<details class="maik-src" style="margin-top:6px"><summary>' + MK.book + r.sources.length + ' web source' + (r.sources.length > 1 ? 's' : '') + '</summary><ol>' + items + '</ol></details>';
+          }
+          container.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div style="font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;margin-bottom:5px">' + svg("globe", "smd-ico") + ' Web-sourced · not StewardMD-verified</div>' + bd + srcHTML + '</div>');
         } else {
           container.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>');
         }
