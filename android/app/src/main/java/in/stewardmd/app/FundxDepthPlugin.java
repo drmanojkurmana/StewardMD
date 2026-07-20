@@ -31,6 +31,7 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.google.ar.core.ArCoreApk;
+import com.google.ar.core.Anchor;
 import com.google.ar.core.Camera;
 import com.google.ar.core.CameraConfig;
 import com.google.ar.core.CameraConfigFilter;
@@ -38,6 +39,7 @@ import com.google.ar.core.Config;
 import com.google.ar.core.Frame;
 import com.google.ar.core.Pose;
 import com.google.ar.core.Session;
+import com.google.ar.core.TrackingState;
 
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
@@ -108,6 +110,19 @@ public class FundxDepthPlugin extends Plugin {
     private EGLSurface rSurface = EGL14.EGL_NO_SURFACE;
     private final Runnable renderTick = new Runnable() { @Override public void run() { renderLoop(); } };
     private FundxBackgroundRenderer bgRenderer;
+    // ---- Spatial-AR guide (ARCore mirror of the iOS SceneKit corridor) ----
+    private FundxGuideRenderer guideRenderer;        // hand-rolled GL corridor, drawn on the GL thread
+    private Anchor eyeAnchor;                         // world anchor on the optical axis at the eye
+    private volatile boolean spatialMode = false;     // draw + world-anchor the guide (gpuPreview implies it)
+    private final float[] projMtx = new float[16];    // scratch: ARCore projection
+    private final float[] viewMtx = new float[16];    // scratch: ARCore view
+    private final float[] modelMtx = new float[16];   // scratch: anchor model
+    private static final float WORKING_DIST = 0.40f;  // target camera standoff along the axis (m)
+    private static final float DIST_TOL = 0.06f;      // +/- along-axis tolerance (m)
+    private static final float LAT_TOL = 0.045f;      // max lateral off-axis error (m)
+    private volatile boolean lastAligned = false;     // emitted to JS for the fused capture gate
+    private volatile double lastLateral = 999;        // latest lateral off-axis error (m)
+    private volatile double lastAlong = 0;            // latest along-axis standoff (m)
     private Session gpuSession;                      // GPU-mode session (owned by the GL render thread)
     private volatile int gpuFrameCount = 0;
     private int analyzeEvery = 6;                    // in GPU mode, analyse ~1 of every 6 draw frames
@@ -329,6 +344,10 @@ public class FundxDepthPlugin extends Plugin {
                 setupTexEgl(st);
                 GLES20.glClearColor(0f, 0f, 0f, 1f);
                 bgRenderer.createOnGlThread();
+                guideRenderer = new FundxGuideRenderer();     // spatial-AR corridor (mirror of iOS SceneKit)
+                guideRenderer.createOnGlThread();
+                spatialMode = true;                            // engage the guide whenever the GPU preview is up
+                eyeAnchor = null;
                 querySensorOrientation();
                 gpuSession = new Session(getContext());
                 selectHighResCameraConfig(gpuSession);   // full-res GPU texture (default is often 640x480)
@@ -360,11 +379,56 @@ public class FundxDepthPlugin extends Plugin {
             gpuSession.setCameraTextureName(bgRenderer.getTextureId());
             Frame frame = gpuSession.update();
             bgRenderer.draw(frame);                     // full-res GPU camera preview
+            if (spatialMode && guideRenderer != null) drawGuide(frame);   // 3D corridor on top of the camera
             EGL14.eglSwapBuffers(rDisplay, rSurface);   // present to the TextureView
             gpuFrameCount++;
             if (gpuFrameCount % analyzeEvery == 0) gpuAnalyze(frame);   // decoupled low-rate analysis
         } catch (Throwable t) { /* transient (SessionPausedException etc.) */ }
         if (renderRunning && renderHandler != null) renderHandler.postDelayed(renderTick, 8);   // ~120Hz cap
+    }
+
+    // Spatial-AR guide (GL thread): world-anchor the corridor on the optical axis and draw it each frame,
+    // decomposing the camera pose vs the anchor into along-axis distance + lateral off-axis error to tint
+    // it. Mirrors the iOS FundxDepthPlugin (Phases 1-2). Phase 3 (Vision/ML Kit eye-lock) re-places the
+    // anchor onto the detected eye; until then it seeds on the centred optical axis at the working distance.
+    private void drawGuide(Frame frame) {
+        try {
+            Camera camera = frame.getCamera();
+            if (camera.getTrackingState() != TrackingState.TRACKING) return;
+            Pose camPose = camera.getPose();
+            float[] z = camPose.getZAxis();                          // camera +Z in world (points toward viewer)
+            float camX = camPose.tx(), camY = camPose.ty(), camZ = camPose.tz();
+
+            if (eyeAnchor == null) {
+                // Seed on the optical axis ~WORKING_DIST ahead (forward = -zAxis), adopting the camera
+                // orientation so the anchor's local +Z is the eye->camera axis (matches iOS).
+                float ex = camX - z[0] * WORKING_DIST, ey = camY - z[1] * WORKING_DIST, ez = camZ - z[2] * WORKING_DIST;
+                float[] q = new float[4]; camPose.getRotationQuaternion(q, 0);
+                try { eyeAnchor = gpuSession.createAnchor(new Pose(new float[]{ ex, ey, ez }, q)); }
+                catch (Throwable t) { return; }
+            }
+
+            Pose aPose = eyeAnchor.getPose();
+            float ax = aPose.tx(), ay = aPose.ty(), az = aPose.tz();
+            float[] axis = aPose.getZAxis();                         // anchor +Z = eye->camera direction
+            float vx = camX - ax, vy = camY - ay, vz = camZ - az;
+            float along = vx * axis[0] + vy * axis[1] + vz * axis[2];
+            float lx = vx - along * axis[0], ly = vy - along * axis[1], lz = vz - along * axis[2];
+            float lateral = (float) Math.sqrt(lx * lx + ly * ly + lz * lz);
+            float distErr = along - WORKING_DIST;
+
+            // Recenter if swung well off the corridor / past the eye (mirror iOS): drop + re-place.
+            if (lateral > 0.30f || along < 0.10f) { try { eyeAnchor.detach(); } catch (Throwable t) {} eyeAnchor = null; return; }
+
+            boolean onAxis = lateral < LAT_TOL, atDist = Math.abs(distErr) < DIST_TOL;
+            int state = (onAxis && atDist) ? 2 : ((lateral < LAT_TOL * 2.2f && Math.abs(distErr) < DIST_TOL * 2.2f) ? 1 : 0);
+            lastAligned = (state == 2); lastLateral = lateral; lastAlong = along;
+
+            camera.getProjectionMatrix(projMtx, 0, 0.05f, 5.0f);
+            camera.getViewMatrix(viewMtx, 0);
+            aPose.toMatrix(modelMtx, 0);
+            guideRenderer.draw(projMtx, viewMtx, modelMtx, state);
+        } catch (Throwable t) { /* never let the guide stall the preview */ }
     }
 
     // EGL window surface bound to the TextureView's SurfaceTexture (ES2, with alpha).
@@ -455,6 +519,11 @@ public class FundxDepthPlugin extends Plugin {
                     if (tracking) { data.put("roll", fRoll); data.put("pitch", fPitch); data.put("poseConfidence", 0.85); }
                     data.put("frame", fFrame); data.put("ts", System.currentTimeMillis());
                     data.put("tracking", trackStr); data.put("depthReady", fMeters != null);
+                    if (spatialMode) {   // Phase 4 fusion: native spatial alignment for the capture gate
+                        data.put("aligned", lastAligned);
+                        data.put("axisLateral", lastLateral);
+                        data.put("axisAlong", lastAlong);
+                    }
                     notifyListeners("fundxDepthFrame", data);
                 } catch (Throwable t) { /* ignore */ }
                 finally { gpuEncBusy = false; }
@@ -499,6 +568,9 @@ public class FundxDepthPlugin extends Plugin {
         gpuMode = false;
         running = false;
         renderRunning = false;
+        spatialMode = false;
+        eyeAnchor = null;            // owned by gpuSession; closing the session releases it
+        guideRenderer = null;
         final Activity act = getActivity();
         final android.view.TextureView tv = texView;
         final View webView = (getBridge() != null) ? getBridge().getWebView() : null;
