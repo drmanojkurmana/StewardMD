@@ -36,10 +36,22 @@ import com.google.ar.core.Camera;
 import com.google.ar.core.CameraConfig;
 import com.google.ar.core.CameraConfigFilter;
 import com.google.ar.core.Config;
+import com.google.ar.core.Coordinates2d;
 import com.google.ar.core.Frame;
+import com.google.ar.core.HitResult;
 import com.google.ar.core.Pose;
 import com.google.ar.core.Session;
 import com.google.ar.core.TrackingState;
+
+import android.graphics.PointF;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.face.Face;
+import com.google.mlkit.vision.face.FaceDetection;
+import com.google.mlkit.vision.face.FaceDetector;
+import com.google.mlkit.vision.face.FaceDetectorOptions;
+import com.google.mlkit.vision.face.FaceLandmark;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnFailureListener;
 
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
@@ -123,6 +135,12 @@ public class FundxDepthPlugin extends Plugin {
     private volatile boolean lastAligned = false;     // emitted to JS for the fused capture gate
     private volatile double lastLateral = 999;        // latest lateral off-axis error (m)
     private volatile double lastAlong = 0;            // latest along-axis standoff (m)
+    // ---- Phase 3: eye localisation (ML Kit face landmarks — ARCore mirror of iOS Vision) ----
+    private FaceDetector faceDetector;
+    private volatile boolean faceBusy = false;         // one ML Kit request in flight at a time
+    private volatile float[] pendingEyeImageNorm = null; // detected eye in IMAGE_NORMALIZED (consumed on GL thread)
+    private int eyeTargetGrace = 0;                    // frames the eye lock stays authoritative after a detection
+    private volatile int viewW = 0, viewH = 0;         // GL surface size (px) for VIEW_NORMALIZED -> pixel hitTest
     private Session gpuSession;                      // GPU-mode session (owned by the GL render thread)
     private volatile int gpuFrameCount = 0;
     private int analyzeEvery = 6;                    // in GPU mode, analyse ~1 of every 6 draw frames
@@ -315,6 +333,7 @@ public class FundxDepthPlugin extends Plugin {
                     @Override public void onSurfaceTextureSizeChanged(android.graphics.SurfaceTexture st, final int w, final int h) {
                         if (renderHandler != null) renderHandler.post(new Runnable() { @Override public void run() {
                             GLES20.glViewport(0, 0, w, h); bgRenderer.setViewport(w, h);
+                            viewW = w; viewH = h;
                             if (gpuSession != null) gpuSession.setDisplayGeometry(displayRotationSurface(), w, h);
                         }});
                     }
@@ -347,7 +366,14 @@ public class FundxDepthPlugin extends Plugin {
                 guideRenderer = new FundxGuideRenderer();     // spatial-AR corridor (mirror of iOS SceneKit)
                 guideRenderer.createOnGlThread();
                 spatialMode = true;                            // engage the guide whenever the GPU preview is up
-                eyeAnchor = null;
+                eyeAnchor = null; eyeTargetGrace = 0; pendingEyeImageNorm = null; faceBusy = false;
+                viewW = w; viewH = h;
+                try {
+                    faceDetector = FaceDetection.getClient(new FaceDetectorOptions.Builder()
+                        .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL)
+                        .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
+                        .build());
+                } catch (Throwable t) { faceDetector = null; }
                 querySensorOrientation();
                 gpuSession = new Session(getContext());
                 selectHighResCameraConfig(gpuSession);   // full-res GPU texture (default is often 640x480)
@@ -399,9 +425,37 @@ public class FundxDepthPlugin extends Plugin {
             float[] z = camPose.getZAxis();                          // camera +Z in world (points toward viewer)
             float camX = camPose.tx(), camY = camPose.ty(), camZ = camPose.tz();
 
+            // Phase 3: consume a pending ML Kit eye detection -> view point -> hitTest -> re-anchor onto
+            // the eye (only when it moved >4 cm, so a still eye stays steady). Holds ~45 frames of grace.
+            float[] eyeN = pendingEyeImageNorm;
+            if (eyeN != null && viewW > 0 && viewH > 0) {
+                pendingEyeImageNorm = null;
+                try {
+                    float[] vn = new float[2];
+                    frame.transformCoordinates2d(Coordinates2d.IMAGE_NORMALIZED, new float[]{ eyeN[0], eyeN[1] }, Coordinates2d.VIEW_NORMALIZED, vn);
+                    List<HitResult> hits = frame.hitTest(vn[0] * viewW, vn[1] * viewH);
+                    if (hits != null && !hits.isEmpty()) {
+                        Pose hp = hits.get(0).getHitPose();
+                        boolean move = true;
+                        if (eyeAnchor != null) {
+                            Pose ap = eyeAnchor.getPose();
+                            float dx = hp.tx() - ap.tx(), dy = hp.ty() - ap.ty(), dz = hp.tz() - ap.tz();
+                            move = (dx * dx + dy * dy + dz * dz) > (0.04f * 0.04f);
+                        }
+                        if (move) {
+                            float[] q = new float[4]; camPose.getRotationQuaternion(q, 0);
+                            try { if (eyeAnchor != null) eyeAnchor.detach(); } catch (Throwable t) {}
+                            try { eyeAnchor = gpuSession.createAnchor(new Pose(new float[]{ hp.tx(), hp.ty(), hp.tz() }, q)); } catch (Throwable t) {}
+                        }
+                        eyeTargetGrace = 45;
+                    }
+                } catch (Throwable t) { /* transform / hitTest not ready this frame */ }
+            }
+            if (eyeTargetGrace > 0) eyeTargetGrace--;
+
             if (eyeAnchor == null) {
-                // Seed on the optical axis ~WORKING_DIST ahead (forward = -zAxis), adopting the camera
-                // orientation so the anchor's local +Z is the eye->camera axis (matches iOS).
+                // No eye yet: seed on the centred optical axis ~WORKING_DIST ahead (forward = -zAxis),
+                // adopting the camera orientation so the anchor's local +Z is the eye->camera axis (iOS).
                 float ex = camX - z[0] * WORKING_DIST, ey = camY - z[1] * WORKING_DIST, ez = camZ - z[2] * WORKING_DIST;
                 float[] q = new float[4]; camPose.getRotationQuaternion(q, 0);
                 try { eyeAnchor = gpuSession.createAnchor(new Pose(new float[]{ ex, ey, ez }, q)); }
@@ -413,12 +467,15 @@ public class FundxDepthPlugin extends Plugin {
             float[] axis = aPose.getZAxis();                         // anchor +Z = eye->camera direction
             float vx = camX - ax, vy = camY - ay, vz = camZ - az;
             float along = vx * axis[0] + vy * axis[1] + vz * axis[2];
-            float lx = vx - along * axis[0], ly = vy - along * axis[1], lz = vz - along * axis[2];
-            float lateral = (float) Math.sqrt(lx * lx + ly * ly + lz * lz);
+            float lxx = vx - along * axis[0], lyy = vy - along * axis[1], lzz = vz - along * axis[2];
+            float lateral = (float) Math.sqrt(lxx * lxx + lyy * lyy + lzz * lzz);
             float distErr = along - WORKING_DIST;
 
-            // Recenter if swung well off the corridor / past the eye (mirror iOS): drop + re-place.
-            if (lateral > 0.30f || along < 0.10f) { try { eyeAnchor.detach(); } catch (Throwable t) {} eyeAnchor = null; return; }
+            // Recenter ONLY when not actively eye-locked (a seeded anchor stranded off-screen): drop + re-seed.
+            if (eyeTargetGrace == 0 && (lateral > 0.30f || along < 0.10f)) {
+                try { eyeAnchor.detach(); } catch (Throwable t) {}
+                eyeAnchor = null; return;
+            }
 
             boolean onAxis = lateral < LAT_TOL, atDist = Math.abs(distErr) < DIST_TOL;
             int state = (onAxis && atDist) ? 2 : ((lateral < LAT_TOL * 2.2f && Math.abs(distErr) < DIST_TOL * 2.2f) ? 1 : 0);
@@ -528,7 +585,48 @@ public class FundxDepthPlugin extends Plugin {
                 } catch (Throwable t) { /* ignore */ }
                 finally { gpuEncBusy = false; }
             }});
+
+            // Phase 3: ML Kit face detection on the same NV21 frame (async, off the GL thread). The
+            // success callback stores the nearest-centre eye in IMAGE_NORMALIZED; drawGuide consumes it
+            // on the GL thread (transformCoordinates2d + hitTest) to re-anchor the corridor onto the eye.
+            if (spatialMode && faceDetector != null && !faceBusy && fnv != null && fiw > 0 && fih > 0) {
+                faceBusy = true;
+                final int uw = (rot == 90 || rot == 270) ? fih : fiw;
+                final int uh = (rot == 90 || rot == 270) ? fiw : fih;
+                try {
+                    InputImage img = InputImage.fromByteArray(fnv, fiw, fih, rot, InputImage.IMAGE_FORMAT_NV21);
+                    faceDetector.process(img)
+                        .addOnSuccessListener(new OnSuccessListener<List<Face>>() {
+                            @Override public void onSuccess(List<Face> faces) { pendingEyeImageNorm = nearestEyeNorm(faces, uw, uh); faceBusy = false; }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override public void onFailure(Exception e) { faceBusy = false; }
+                        });
+                } catch (Throwable t) { faceBusy = false; }
+            }
         } catch (Throwable t) { /* keep the preview alive even if analysis hiccups */ }
+    }
+
+    // Nearest-to-centre eye in IMAGE_NORMALIZED (mirror of the iOS eyePoint): scan every detected face's
+    // LEFT/RIGHT eye landmark (pixels in the upright uw x uh image) and return the one closest to centre,
+    // so pointing at the right/left eye locks THAT eye. Returns null if no eye landmark was found.
+    private float[] nearestEyeNorm(List<Face> faces, int uw, int uh) {
+        if (faces == null || faces.isEmpty() || uw <= 0 || uh <= 0) return null;
+        float cx = uw / 2f, cy = uh / 2f, bestD = Float.MAX_VALUE;
+        PointF best = null;
+        for (Face f : faces) {
+            FaceLandmark[] eyes = { f.getLandmark(FaceLandmark.LEFT_EYE), f.getLandmark(FaceLandmark.RIGHT_EYE) };
+            for (FaceLandmark lm : eyes) {
+                if (lm == null) continue;
+                PointF p = lm.getPosition();
+                float dx = p.x - cx, dy = p.y - cy, d = dx * dx + dy * dy;
+                if (d < bestD) { bestD = d; best = p; }
+            }
+        }
+        if (best == null) return null;
+        float nx = Math.max(0f, Math.min(1f, best.x / uw));
+        float ny = Math.max(0f, Math.min(1f, best.y / uh));
+        return new float[] { nx, ny };
     }
 
     // Surface.ROTATION_* for ARCore setDisplayGeometry (which wants the constant, not degrees).
@@ -571,6 +669,8 @@ public class FundxDepthPlugin extends Plugin {
         spatialMode = false;
         eyeAnchor = null;            // owned by gpuSession; closing the session releases it
         guideRenderer = null;
+        pendingEyeImageNorm = null; eyeTargetGrace = 0; faceBusy = false;
+        if (faceDetector != null) { try { faceDetector.close(); } catch (Throwable t) {} faceDetector = null; }
         final Activity act = getActivity();
         final android.view.TextureView tv = texView;
         final View webView = (getBridge() != null) ? getBridge().getWebView() : null;
