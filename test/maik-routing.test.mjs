@@ -67,6 +67,13 @@ await expect("pseudomembranous colitis", /difficile|clostridioides/i, "FIX 'pseu
 // --- SAFE: the C_DIFF alias must NOT hijack a plain diarrhoea query ---
 await forbid("diarrhoea treatment", /difficile|clostridioides/i, "SAFE plain diarrhoea NOT hijacked to C. difficile");
 
+// --- FIX: instant nearest-KB resolver rescues typos/variants to the VERIFIED KB (assume),
+//     instead of dead-ending to slow web research ---
+await expect("clostridiym", /difficile|clostridioides/i, "RESOLVER 'clostridiym' (typo) → C. difficile");
+await expect("clostridum infection", /difficile|clostridioides/i, "RESOLVER 'clostridum' (typo) → C. difficile");
+{ const r = await routeOf("wibblewobble floxytron"); ok(r.mode === "none", "SAFE resolver leaves true gibberish as none (not force-matched)  →  [" + r.mode + "]"); }
+{ const r = await routeOf("clostridiym"); ok(r.mode === "assume", "RESOLVER typo lands as ASSUME (stated assumption + refine chip), not silent match  →  [" + r.mode + "]"); }
+
 // --- SAFE: a lone body-only hit must NOT confidently ground a wrong disease ---
 await forbid("high fever what to do", /tick|relapsing/i, "SAFE 'high fever what to do' NOT grounded on Tick-borne relapsing fever");
 
@@ -87,6 +94,7 @@ ok(/C_DIFF\s*:/.test(src) && /clostridium/.test(src) && /pseudomembranous/.test(
 ok(/toks: tokenize\([^)]*c\.aliases/.test(iface), "aliases are retrievable — folded into the lexical toks bag (not just nameToks)");
 const reasoning = fs.readFileSync(join(ROOT, "reasoning.js"), "utf8");
 ok(/research:\s*function[\s\S]{0,1400}?raceTimeout\(/.test(reasoning), "web research is timeout-bounded (raceTimeout) so the spinner can't hang forever");
+ok(/function fuzzyResolve/.test(src) && /fuzzyResolve\(distinctive\)/.test(src) && /function editWithin/.test(src), "instant nearest-KB resolver present (fuzzy/typo tolerance) on the miss path");
 
 console.log(fails === 0 ? "\nALL PASS — MaiK routes short/lay queries correctly" : `\n${fails} FAILED`);
 process.exit(fails === 0 ? 0 : 1);
