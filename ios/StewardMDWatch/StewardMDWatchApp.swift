@@ -15,6 +15,7 @@ struct StewardMDWatchApp: App {
     // Shared singletons (also fed by the WC receiver + push handler).
     @ObservedObject private var labs = WatchServices.labs
     @ObservedObject private var watchlist = WatchServices.watchlist
+    @ObservedObject private var tasks = WatchServices.tasks
     @ObservedObject private var connectivity = WatchConnectivityManager.shared
     @Environment(\.scenePhase) private var scenePhase
 
@@ -27,6 +28,7 @@ struct StewardMDWatchApp: App {
             .environmentObject(labs)
             .environmentObject(favorites)
             .environmentObject(watchlist)
+            .environmentObject(tasks)
             .environmentObject(router)
             .environmentObject(features)
             .preferredColorScheme(.dark)

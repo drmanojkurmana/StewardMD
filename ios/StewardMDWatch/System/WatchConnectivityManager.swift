@@ -18,16 +18,33 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     static let shared = WatchConnectivityManager()
 
     @Published private(set) var lastReceived: Date?
+    /// The clinician's role in the shared unit (relayed) — gates task visibility.
+    @Published private(set) var role: String?
     private let store = WatchServices.store
 
     func activate() {
         // Seed the UI from the last-known relayed data so it isn't empty on launch.
         WatchServices.watchlist.set(store.loadWatchlist())
         WatchServices.labs.ingest(store.loadCriticals())
+        WatchServices.tasks.ingest(store.loadTasks())
+        WatchServices.tasks.onAction = { [weak self] action in self?.sendTaskAction(action) }
         #if canImport(WatchConnectivity)
         guard WCSession.isSupported() else { return }
         WCSession.default.delegate = self
         WCSession.default.activate()
+        #endif
+    }
+
+    /// Relay a task-status change to the phone (→ SMD_ICU_GROUPS.setTaskStatus).
+    /// Uses `transferUserInfo` — guaranteed, FIFO, background delivery even when
+    /// the phone app is not foregrounded (unlike `sendMessage`).
+    func sendTaskAction(_ action: WatchTaskAction) {
+        #if canImport(WatchConnectivity)
+        guard WCSession.isSupported() else { return }
+        guard let data = try? JSONEncoder().encode(action),
+              var info = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any] else { return }
+        info["kind"] = "taskStatus"
+        WCSession.default.transferUserInfo(info)
         #endif
     }
 
@@ -80,6 +97,13 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
                 NSLog("[SMD-Watch] watch apply: criticals DECODE FAILED: %@ raw=%@",
                       String(describing: error), String(data: d, encoding: .utf8) ?? "nil")
             }
+        }
+        if let d = context["tasks"] as? Data, let t = try? JSONDecoder().decode([WatchTask].self, from: d) {
+            store.saveTasks(t)          // persist for relaunch + patient-less syncs
+            WatchServices.tasks.ingest(t)
+        }
+        if let d = context["role"] as? Data, let s = try? JSONDecoder().decode(String.self, from: d) {
+            role = s
         }
         if let d = context["notifPrefs"] as? Data, let p = try? JSONDecoder().decode([String: Bool].self, from: d) {
             store.saveNotifPrefs(p)
