@@ -117,12 +117,24 @@
     };
   }
 
-  // Live assembly is wired in M3 (EncryptedEcgStore) + M5 (RemoteAnalyzer/KardioXApiClient). Until then
-  // it falls back to the mock so the app is always functional.
-  function liveProviders(/* session */) { return mockProviders(); }
+  // Live assembly: the ENCRYPTED on-device store (M3) is real; analyzer stays mock until the backend
+  // lands (M5), and library/learning use bundled content once M4 authors it. Always fully functional.
+  function liveProviders(opts) {
+    opts = opts || {};
+    var store = (typeof window !== "undefined" && window.SMD_KARDIOX_STORE && window.SMD_KARDIOX_STORE.create)
+      ? window.SMD_KARDIOX_STORE.create() : mockEcgStore(opts.seedAnalyses);
+    return {
+      kind: "live",
+      analyzer: mockAnalyzer(),                 // → RemoteAnalyzer in M5 (provider swap, no view change)
+      imageProcessor: mockImageProcessor(),
+      ecgStore: store,                          // encrypted, on-device
+      library: mockLibrary(opts.content),       // → bundled 100-ECG content in M4
+      learning: mockLearning({ cards: opts.cards, library: opts.content })
+    };
+  }
 
   var _active = null;
-  function current() { if (!_active) _active = mockProviders(); return _active; }
+  function current() { if (!_active) _active = liveProviders(); return _active; }
   function use(assembly) { _active = assembly; return _active; }
 
   var API = { mockProviders: mockProviders, liveProviders: liveProviders, current: current, use: use, sm2: sm2 };
