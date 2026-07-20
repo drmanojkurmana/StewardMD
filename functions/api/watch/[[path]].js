@@ -19,6 +19,7 @@ import {
   getSeen, setSeen, listWatchUids,
 } from "../../_watch.js";
 import { sendNativeToAll } from "../../_nativepush.js";
+import { watchSetTaskStatus, watchAppendTimeline } from "../../_icuwrite.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
@@ -136,6 +137,25 @@ export async function onRequest(context) {
     log = log.slice(-500);
     await store.put(key, JSON.stringify(log));
     return json({ ok: true });
+  }
+
+  // ── Apple Watch: write an ICU action straight to Firestore (task status +
+  // timeline) — the direct-API path, independent of the phone relay. The caller's
+  // uid comes from the verified token; every write is gated on unit membership.
+  if (method === "POST" && seg === "task") {
+    const wuid = await identify(request, env);
+    if (!wuid) return json({ error: "auth-required" }, 401);
+    let b = {}; try { b = await request.json(); } catch (e) {}
+    const r = await watchSetTaskStatus(env, wuid, String(b.gid || ""), String(b.pid || ""), String(b.taskId || ""), String(b.status || ""));
+    return json(r, r.ok ? 200 : (r.error === "forbidden" ? 403 : 400));
+  }
+  if (method === "POST" && seg === "timeline") {
+    const wuid = await identify(request, env);
+    if (!wuid) return json({ error: "auth-required" }, 401);
+    let b = {}; try { b = await request.json(); } catch (e) {}
+    const r = await watchAppendTimeline(env, wuid, String(b.gid || ""), String(b.pid || ""),
+      { type: b.type, title: String(b.title || "").slice(0, 180), detail: String(b.detail || "").slice(0, 500) });
+    return json(r, r.ok ? 200 : (r.error === "forbidden" ? 403 : 400));
   }
 
   if (!watchConfigured(env)) return json({ error: "watch-not-configured" }, 503);

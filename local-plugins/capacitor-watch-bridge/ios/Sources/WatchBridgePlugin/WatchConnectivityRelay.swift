@@ -48,7 +48,15 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
     /// Watch → phone: a request to mint a fresh ID token. Re-broadcast so
     /// `native-watch.js` (listening via the plugin) can publish an update.
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        NotificationCenter.default.post(name: WatchConnectivityRelay.tokenRequested, object: nil)
+        // sendMessage (immediate relay) — route by kind, same targets as transferUserInfo.
+        switch message["kind"] as? String {
+        case "taskStatus":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.taskStatusRequested, object: nil, userInfo: message)
+        case "labAck":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.labAckRequested, object: nil, userInfo: message)
+        default:
+            NotificationCenter.default.post(name: WatchConnectivityRelay.tokenRequested, object: nil)   // token-request (legacy)
+        }
     }
 
     /// Watch → phone: a task-status change to write back to Firestore. Re-broadcast
@@ -106,6 +114,10 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
     """
 
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
+        NSLog("[SMD-Watch] phone rx userInfo kind=%@ gid=%@ pid=%@ tid=%@ status=%@",
+              (userInfo["kind"] as? String) ?? "nil", (userInfo["gid"] as? String) ?? (userInfo["groupId"] as? String) ?? "-",
+              (userInfo["pid"] as? String) ?? (userInfo["patientId"] as? String) ?? "-",
+              (userInfo["taskId"] as? String) ?? "-", (userInfo["status"] as? String) ?? "-")
         switch userInfo["kind"] as? String {
         case "taskStatus":
             NotificationCenter.default.post(name: WatchConnectivityRelay.taskStatusRequested,

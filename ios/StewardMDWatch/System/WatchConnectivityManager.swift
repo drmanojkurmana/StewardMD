@@ -31,13 +31,57 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         WatchServices.labs.ingest(store.loadCriticals())
         WatchServices.tasks.ingest(store.loadTasks())
         GlancePublisher.setOpenTasks(WatchServices.tasks.openCount)
-        WatchServices.tasks.onAction = { [weak self] action in self?.sendTaskAction(action) }
-        WatchServices.labs.onAcknowledge = { [weak self] alert in self?.sendLabAck(alert) }
+        WatchServices.tasks.onAction = { [weak self] action in Task { await self?.writeTaskAction(action) } }
+        WatchServices.labs.onAcknowledge = { [weak self] alert in Task { await self?.writeLabAck(alert) } }
         WatchServices.calcs.set(store.loadCalcs())
         #if canImport(WatchConnectivity)
         guard WCSession.isSupported() else { return }
         WCSession.default.delegate = self
         WCSession.default.activate()
+        #endif
+    }
+
+    /// Task write-back — DIRECT API first (writes status + timeline server-side,
+    /// no phone needed), falling back to the phone relay on any failure (queued,
+    /// applied by native-watch.js). Belt-and-braces so one path always lands it.
+    func writeTaskAction(_ action: WatchTaskAction) async {
+        do {
+            try await WatchServices.appAPI.setTaskStatus(gid: action.groupId, pid: action.patientId,
+                                                         taskId: action.taskId, status: action.status)
+            NSLog("[SMD-Watch] task write-back: direct API OK")
+        } catch {
+            NSLog("[SMD-Watch] task write-back: direct failed (%@) → relay", String(describing: error))
+            sendTaskAction(action)
+        }
+    }
+
+    /// Critical-ack write-back — direct API first, relay fallback. Group patients
+    /// only (gid/pid); open/local criticals have no shared timeline.
+    func writeLabAck(_ alert: LabAlert) async {
+        guard let gid = alert.groupId, let pid = alert.patientId, !gid.isEmpty, !pid.isEmpty else { return }
+        let label = [alert.analyte, alert.value].filter { !$0.isEmpty }.joined(separator: " ")
+        do {
+            try await WatchServices.appAPI.appendTimeline(gid: gid, pid: pid,
+                title: "Acknowledged — " + (label.isEmpty ? "critical value" : label))
+            NSLog("[SMD-Watch] ack write-back: direct API OK")
+        } catch {
+            NSLog("[SMD-Watch] ack write-back: direct failed (%@) → relay", String(describing: error))
+            sendLabAck(alert)
+        }
+    }
+
+    /// Send a relay payload to the phone: `sendMessage` when reachable (immediate),
+    /// else `transferUserInfo` (guaranteed, queued, delivered when reachable). The
+    /// phone routes both by `kind`.
+    private func relaySend(_ info: [String: Any]) {
+        #if canImport(WatchConnectivity)
+        let s = WCSession.default
+        guard WCSession.isSupported() else { return }
+        if s.isReachable {
+            s.sendMessage(info, replyHandler: nil, errorHandler: { _ in s.transferUserInfo(info) })
+        } else {
+            s.transferUserInfo(info)
+        }
         #endif
     }
 
@@ -50,7 +94,7 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         guard let data = try? JSONEncoder().encode(action),
               var info = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any] else { return }
         info["kind"] = "taskStatus"
-        WCSession.default.transferUserInfo(info)
+        relaySend(info)
         #endif
     }
 
@@ -70,10 +114,7 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         #if canImport(WatchConnectivity)
         guard WCSession.isSupported(), let gid = alert.groupId, let pid = alert.patientId,
               !gid.isEmpty, !pid.isEmpty else { return }
-        WCSession.default.transferUserInfo([
-            "kind": "labAck", "gid": gid, "pid": pid,
-            "analyte": alert.analyte, "value": alert.value
-        ])
+        relaySend(["kind": "labAck", "gid": gid, "pid": pid, "analyte": alert.analyte, "value": alert.value])
         #endif
     }
 
