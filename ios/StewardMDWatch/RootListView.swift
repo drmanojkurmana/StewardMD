@@ -7,6 +7,7 @@ import StewardMDWatchCore
 struct RootListView: View {
     @EnvironmentObject private var session: WatchSessionStore
     @EnvironmentObject private var labs: CriticalLabsModel
+    @EnvironmentObject private var tasksModel: TasksModel
     @EnvironmentObject private var features: FeatureFlagsModel
 
     var body: some View {
@@ -28,7 +29,8 @@ struct RootListView: View {
                 let locked = dest.feature.map { !features.gate.allows($0) } ?? false
                 NavigationLink(value: dest) {
                     RootRow(destination: dest,
-                            badge: dest == .criticalLabs ? labs.unacknowledgedCount : 0,
+                            badge: dest == .criticalLabs ? labs.unacknowledgedCount
+                                 : dest == .tasks ? tasksModel.openCount : 0,
                             locked: locked)
                 }
                 .disabled(locked)
@@ -40,6 +42,7 @@ struct RootListView: View {
             switch dest {
             case .criticalLabs: CriticalLabsView()
             case .patients: WatchlistView()
+            case .tasks: TasksView()
             case .wardSync: WardSyncView()
             case .drugs: DrugLookupView()
             case .calculators: CalculatorsView()
@@ -75,13 +78,14 @@ struct RootListView: View {
 
 /// The six root modules, in priority order (Critical labs first).
 enum RootDestination: String, CaseIterable, Identifiable, Hashable {
-    case criticalLabs, patients, wardSync, drugs, calculators, emergency
+    case criticalLabs, patients, tasks, wardSync, drugs, calculators, emergency
     var id: String { rawValue }
 
     var title: String {
         switch self {
         case .criticalLabs: return "Critical labs"
         case .patients: return "My patients"
+        case .tasks: return "Tasks"
         case .wardSync: return "Ward Sync"
         case .drugs: return "Drugs & doses"
         case .calculators: return "Calculators"
@@ -93,6 +97,7 @@ enum RootDestination: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .criticalLabs: return "cross.case.fill"
         case .patients: return "person.2.fill"
+        case .tasks: return "checklist"
         case .wardSync: return "arrow.triangle.2.circlepath"
         case .drugs: return "pills.fill"
         case .calculators: return "function"
@@ -104,6 +109,7 @@ enum RootDestination: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .criticalLabs: return SMDPalette.critical
         case .patients: return SMDPalette.teal
+        case .tasks: return SMDPalette.accent
         case .wardSync: return SMDPalette.info
         case .drugs: return SMDPalette.ai
         case .calculators: return SMDPalette.success
@@ -119,7 +125,7 @@ enum RootDestination: String, CaseIterable, Identifiable, Hashable {
         case .wardSync: return .wardSync
         case .drugs: return .drugLookup
         case .calculators: return .calculators
-        case .patients, .emergency: return nil
+        case .patients, .tasks, .emergency: return nil
         }
     }
 }

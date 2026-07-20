@@ -31,6 +31,7 @@ final class AppRouter: ObservableObject {
         case "criticalLabs": path.append(RootDestination.criticalLabs)
         case "drugs": path.append(RootDestination.drugs)
         case "patients", "patient": path.append(RootDestination.patients)
+        case "tasks": path.append(RootDestination.tasks)
         case "wardSync": path.append(RootDestination.wardSync)
         case "calculators": path.append(RootDestination.calculators)
         case "emergency": path.append(RootDestination.emergency)
