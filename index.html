@@ -69,7 +69,13 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
    buys nothing there. On native we unregister any existing SW + purge its caches (one-time reload
    to flush this launch's already-stale JS), and never register it. Web PWA behaviour is unchanged. */
 (function () {
-  var isNative = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+  // Robust native detection, independent of the Capacitor JS-bridge injection timing: the native app
+  // is served from the capacitor:// (iOS) / localhost (Android) scheme, never from stewardmd.in. If we
+  // ever mis-detect native as web we would (re)register the SW on the app and pin stale JS again, so
+  // fall back to the URL scheme/host, which is always available synchronously.
+  var isNative = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform())
+    || location.protocol === "capacitor:" || location.protocol === "ionic:"
+    || location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.hostname === "";
   if (isNative) {
     if ("serviceWorker" in navigator) {
       var hadController = !!navigator.serviceWorker.controller;
