@@ -200,8 +200,11 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         // Spatial AR: once tracking is solid + we have a metric depth to the centred eye, drop ONE
         // world anchor on the optical axis at that depth. ARKit then keeps the SceneKit guide fixed in
         // 3D space (renderer(_:didAdd:) attaches the guide to this anchor's node).
+        // Phase-1 test window: drop the anchor on ANY tracked surface (~5 cm–2.5 m) so the guide is
+        // easy to see + verify for world-locking. (The clinical range tightens to the working distance
+        // once the corridor + lens fusion land.)
         if spatialMode, eyeAnchor == nil, case .normal = frame.camera.trackingState,
-           let meters = data["distanceMeters"] as? Double, meters > 0.02, meters < 0.6 {
+           let meters = data["distanceMeters"] as? Double, meters > 0.05, meters < 2.5 {
             let fwd = simd_make_float3(-cx.columns.2.x, -cx.columns.2.y, -cx.columns.2.z)   // camera looks down -Z
             let camPos = simd_make_float3(cx.columns.3.x, cx.columns.3.y, cx.columns.3.z)
             let eyePos = camPos + fwd * Float(meters)
@@ -300,7 +303,9 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         node.addChildNode(guide)
     }
 
-    // Phase 1 guide: a ring marking the eye in 3D space. (Phase 2 adds the corridor funnel + target ring.)
+    // Phase 1 guide: a ring marking the eye in 3D space + a world-axes gizmo so anchor placement and
+    // orientation stability are unmistakable during the on-device stability test. (Phase 2 adds the
+    // corridor funnel + target ring; the debug axes come out once the corridor lands.)
     private func buildEyeGuide() -> SCNNode {
         let root = SCNNode()
         let ring = SCNTorus(ringRadius: 0.011, pipeRadius: 0.0016)      // ~22 mm ring at the eye
@@ -308,7 +313,22 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         let ringNode = SCNNode(geometry: ring)
         ringNode.eulerAngles.x = Float.pi / 2                           // face the phone (torus XZ-plane → XY)
         root.addChildNode(ringNode)
+        root.addChildNode(axisNode(SCNVector3(0.05, 0, 0), .systemRed))    // X
+        root.addChildNode(axisNode(SCNVector3(0, 0.05, 0), .systemGreen))  // Y
+        root.addChildNode(axisNode(SCNVector3(0, 0, 0.05), .systemBlue))   // Z
         return root
+    }
+
+    // A 5 cm coloured axis rod from the anchor origin toward `end` (world-anchored debug gizmo).
+    private func axisNode(_ end: SCNVector3, _ color: UIColor) -> SCNNode {
+        let rod = SCNCylinder(radius: 0.0015, height: 0.05)
+        let m = SCNMaterial(); m.diffuse.contents = color; m.emission.contents = color; m.lightingModel = .constant
+        rod.materials = [m]
+        let n = SCNNode(geometry: rod)
+        n.position = SCNVector3(end.x / 2, end.y / 2, end.z / 2)        // cylinder is centred; shift to midpoint
+        if end.x != 0 { n.eulerAngles.z = Float.pi / 2 }               // cylinder axis is Y → rotate onto X
+        else if end.z != 0 { n.eulerAngles.x = Float.pi / 2 }          // → rotate onto Z
+        return n
     }
 
     private func guideMaterial() -> SCNMaterial {
