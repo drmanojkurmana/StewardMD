@@ -39,6 +39,7 @@ final class CoreMotionCompressionDetector: CompressionDetecting {
             let t = dm.timestamp
             Task { @MainActor in
                 guard let self, self.isRunning else { return }
+                CaptureLog.shared.record(t, vertical)   // dev: raw-trace capture (no-op unless armed)
                 let tick = self.analyzer.ingest(CompressionSample(t: t, value: vertical))
                 self.onChange?(self.analyzer.state, tick)
             }

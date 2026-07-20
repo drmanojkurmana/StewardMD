@@ -10,7 +10,7 @@ project = Xcodeproj::Project.open(PROJECT)
 target  = project.targets.find { |t| t.name == "StewardMDWatch" }
 abort("✗ StewardMDWatch target not found") unless target
 
-FILES = ["CoreMotionCompressionDetector.swift", "HealthKitWorkoutKeepAlive.swift"]
+FILES = ["CoreMotionCompressionDetector.swift", "HealthKitWorkoutKeepAlive.swift", "CaptureLog.swift"]
 anchor = project.files.find { |f| f.display_name == "WatchConnectivityManager.swift" }
 abort("✗ anchor not found") unless anchor
 group = anchor.parent

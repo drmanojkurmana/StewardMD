@@ -16,6 +16,8 @@ struct CodeBlueView: View {
     @State private var startDate: Date?
     @State private var summary: CodeSummary?
     @State private var crown = 0.0
+    @State private var captureOn = false
+    @State private var captureNote: String?
     @Environment(\.scenePhase) private var scenePhase
     private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -62,6 +64,20 @@ struct CodeBlueView: View {
                     .font(.system(size: 10)).foregroundStyle(SMDPalette.text2.color)
                     .multilineTextAlignment(.center)
                     .accessibilityLabel("Motion-based estimates. Not a measure of CPR quality or depth.")
+
+                // DEV: capture the raw motion trace to tune the detector (prints to console).
+                Button(captureOn ? "◉ Capturing…" : "○ Capture trace (dev)") {
+                    captureOn.toggle()
+                    if captureOn { CaptureLog.shared.begin(); captureNote = nil }
+                    else { captureNote = CaptureLog.shared.end(appCount: model.compressionCount) }
+                }
+                .font(.system(size: 11))
+                .buttonStyle(.bordered)
+                .tint(captureOn ? SMDPalette.critical.color : SMDPalette.text2.color)
+                if let note = captureNote {
+                    Text(note).font(.system(size: 9)).foregroundStyle(SMDPalette.text2.color)
+                        .multilineTextAlignment(.center)
+                }
             }
             .padding(SMDSpacing.screenMargin)
         }
@@ -142,6 +158,7 @@ struct CodeBlueView: View {
             if running {
                 startDate = Date().addingTimeInterval(-model.elapsed)
                 model.startCode()
+                if captureOn { CaptureLog.shared.begin(); captureNote = nil }   // fresh trace per code
                 // Guaranteed alert to the iPhone even when the app is force-quit: a
                 // direct backend push (only APNs shows on a terminated/locked phone).
                 Task { try? await WatchServices.appAPI.codeBlueStart() }
@@ -154,6 +171,7 @@ struct CodeBlueView: View {
             } else {
                 ResusAlerts.cancel(["codeblue-cycle"])
                 summary = model.endCode()
+                if captureOn { captureNote = CaptureLog.shared.end(appCount: model.compressionCount); captureOn = false }
                 WatchConnectivityManager.shared.streamCodeBlueSnapshot(model.snapshot(batteryLevel: WKDeviceId.battery))
             }
         }
