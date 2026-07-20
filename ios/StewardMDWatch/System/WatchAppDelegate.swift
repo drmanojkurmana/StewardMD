@@ -1,5 +1,4 @@
 import WatchKit
-import WidgetKit
 import UserNotifications
 import StewardMDWatchCore
 
@@ -66,16 +65,9 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate, UNUserNotificatio
         return [.banner, .sound, .list]
     }
 
-    // A silent/background push feeds the model, refreshes the badge + widget timelines.
-    // nonisolated so the system's non-Sendable userInfo stays off the main actor;
-    // we hop to the main actor only with the parsed (Sendable) LabAlert.
-    nonisolated func didReceiveRemoteNotification(_ userInfo: [AnyHashable: Any]) async -> WKBackgroundFetchResult {
-        if let alert = NotificationParser.parse(userInfo) {
-            await ingest(alert)
-        }
-        WidgetCenter.shared.reloadAllTimelines()
-        return .newData
-    }
+    // Note: no `didReceiveRemoteNotification` (silent/background) override — alert
+    // pushes are shown by the system and ingested on tap (didReceive) or foreground
+    // (willPresent); the WC relay + activate() reconcile the model on next launch.
 
     // Labs is main-actor-isolated; route access through these helpers so the
     // nonisolated delegate callbacks hop correctly (Swift 6 concurrency).
