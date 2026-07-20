@@ -49,10 +49,11 @@ function rendered(minLen) { return host._html && host._html.length > (minLen || 
 R.mountLanding(host);
 ok("landing renders", rendered(300) && /Analyze an ECG/i.test(host._html));
 
-for (const key of ["source", "permission", "processing", "analysis"]) {
+for (const key of ["source", "permission", "processing", "analysis", "history", "comparison", "privacy", "settings", "empty", "states", "library", "lesson", "quiz", "flashcards", "daily"]) {
   host._html = "";
   R.nav(key);
-  ok("screen renders: " + key, rendered(150));
+  await delay(40);   // async screens (library/quiz) render a placeholder then hydrate from mock providers
+  ok("screen renders: " + key, rendered(120));
 }
 
 // full mock pipeline: source card tap → processing → analysis → report (AF verdict)
