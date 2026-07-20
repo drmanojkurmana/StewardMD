@@ -1,15 +1,55 @@
-# KardioX — Producing the Classifier Weights (the Phase-8 unblock recipe)
+# KardioX — Training / Fine-Tuning Guide
 
-KardioX ships **no model weights**. The classifier providers (rhythm, beat, conduction, morphology, MI)
-are Not Ready because **no public, commercially-licensed, pretrained ECG classifier exists** that we can
-drop in (per the frozen `MODEL_LANDSCAPE.md`: `torch_ecg` is MIT but ships architectures only;
-`ecg_ptbxl_benchmarking` has weights but is GPL-3.0 → excluded for a commercial product; ECG-GPT is a
-demo with no license). This document is the concrete, reproducible recipe to **train + export ONNX
-weights** that plug into the existing seam with **zero code change**. It is a reference recipe — run it in
-a GPU training environment, not in the app.
+Three ways to get a model into KardioX (all plug into the existing seam by **config, no code change**),
+in order of least effort:
 
-> This recipe produces the models; it does not certify them. Clinical validation + clinician sign-off +
+1. **Turnkey pretrained classifiers — EcgLib (Apache-2.0), already integrated.** No training. Enable:
+   ```
+   KARDIOX_ECGLIB_PATHOLOGIES=AFIB,1AVB,STACH,SBRAD,IRBBB,CRBBB,PVC   # + pip install ecglib torch
+   ```
+   `EcgLibClassifier` fetches the weights and feeds positives to the fusion / Differential engine.
+   (Clinical validation on KardioX's own pipeline is still required before `smd_kardiox`.)
+2. **Fine-tune a foundation encoder** (§ *Foundation-model fine-tuning* below) — ECG-FM / DeepECG-SSL /
+   HeartGPT provide commercially-licensed public **encoders**; attach + fine-tune a head for your labels.
+3. **Train from scratch** with torch_ecg on PTB-XL (§ *De-novo recipe* below) for labels nothing covers.
+
+Everything runs in a **training environment** (GPU, PyTorch) through the KardioX `TrainingPipeline` /
+`FineTuningPipeline` (`app/training/`), which handle streaming datasets, 80/20 stratified splits, the
+LR-finder, early-stop-on-weighted-val-loss, ONNX export, and `ModelRegistry` registration. KardioX ships
+the **orchestration**, not the weights.
+
+> Training produces models; it does not certify them. Clinical validation + clinician sign-off +
 > regulatory review are still required before `smd_kardiox` is enabled.
+
+## Foundation-model fine-tuning (ECG-FM / DeepECG-SSL / HeartGPT)
+
+These are self-supervised **encoders** (public, commercially-licensed weights — MIT / Apache-2.0), not
+ready classifiers: attach a head and fine-tune on a labelled dataset (PTB-XL etc.). Use
+`FineTuningPipeline` — it does **automatic classification-head adaptation** to your label count, head-only
+or full modes, and records base-model provenance in the `ModelCard`.
+
+```python
+from app.data.registry import get_dataset
+from app.training.finetune import FineTuningPipeline
+from app.training.config import HyperparameterConfig
+from app.training.model_registry import ModelRegistry
+
+ds = get_dataset("ptb-xl", root="/data/ptb-xl")
+reg = ModelRegistry("/models")
+ft = FineTuningPipeline(HyperparameterConfig(mode="head_only", normalize="zscore", lr=1e-3),
+                        registry=reg)
+ft.run(ds, backend=my_encoder_backend, base_model="ecg-fm",   # your backend loads the HF/torch encoder
+       run_id="ptbxl-ecgfm-head-v1", spec_name="ptbxl_500hz_10s")
+```
+Encoder input contracts (set the matching `inputSpec` / backend preprocessing): ECG-FM 12-lead 500 Hz 5 s
+z-scored; DeepECG-SSL 12-lead 250 Hz 10 s; HeartGPT tokenized single-lead. The `backend` object (which
+loads the actual encoder + head) implements the small `FineTuneBackend` protocol
+(`load_base`/`adapt_head`/`freeze_encoder`/`fit_epoch`/`evaluate`/`export_onnx`).
+
+## De-novo recipe (torch_ecg on PTB-XL → ONNX)
+
+For labels no pretrained model covers, train a fresh classifier. `torch_ecg` (MIT) provides architectures;
+train on PTB-XL (CC-BY-4.0) and export ONNX in the KardioX input contract.
 
 ## Ingredients (all permissive / open)
 - **torch_ecg** (MIT) — model architectures + training utilities. `pip install torch-ecg`.

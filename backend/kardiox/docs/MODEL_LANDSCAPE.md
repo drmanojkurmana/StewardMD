@@ -1,105 +1,80 @@
 # KardioX — Open-Source ECG Model Landscape, Comparison & Recommendation
 
-Research date: 2026-07-21. Purpose: choose which open-source ECG projects to integrate for (a) image
-**digitization**, (b) **signal analysis/measurement**, and (c) **classification/rhythm**, judged on
-license, input requirements, validation datasets, maintenance, and **commercial-integration suitability**
-for KardioX AI.
+Research dates: 2026-07-21 (initial) + foundation-model audit (verified from primary sources — repo
+LICENSE files + Hugging Face model cards). Purpose: choose which open-source ECG projects to integrate for
+(a) image **digitization**, (b) **signal analysis/measurement**, (c) **classification/rhythm**, and
+(d) **foundation encoders**, judged on license, weights availability, input, datasets, maintenance, ONNX
+feasibility, and **commercial-integration suitability**.
 
-> Honesty guardrails: license + maintenance facts below were checked against each project's repository/
-> paper on the research date and **must be re-confirmed at integration time** (licenses change). This
-> document makes **no diagnostic-performance claim** for KardioX; performance numbers cited are what the
-> upstream authors report for *their* systems, not validated in KardioX.
+> Honesty guardrails: license + weight-availability facts were checked against each project's repository /
+> HF card and **must be re-confirmed at integration time** (licenses/gating change). This document makes
+> **no diagnostic-performance claim** for KardioX; upstream numbers are the authors' for *their* systems.
 
-## The three sub-problems
+## Verdict summary
 
-1. **Digitization** (photo/scan of paper ECG → per-lead signal) — the hardest, most model-dependent step.
-2. **Signal analysis** (beats, intervals, axis, ST) — largely deterministic; mature libraries exist.
-3. **Classification** (rhythm/morphology/diagnosis) — needs a trained, validated model.
+| Project | Role | License | Weights public | Verdict | KardioX status |
+|---|---|---|---|---|---|
+| **NeuroKit2** | signal analysis / measurement | MIT | n/a (algorithms) | INTEGRATE_FULL | **operational** (measurement) |
+| **WFDB** | signal I/O + calibration | MIT | n/a | INTEGRATE_FULL | **operational** (signal extraction) |
+| **EcgLib** (ispras) | **pretrained classifiers** | **Apache-2.0** | **yes** (28 `.pt`, GH release) | **INTEGRATE_FULL** | **integrated** (`ecglib_provider`), Not-Ready until enabled |
+| **ECG-Digitiser** (felixkrones) | image→signal digitizer | **BSD-2** | **yes** (Git-LFS nnU-Net) | INTEGRATE_FULL | integration path (external digitizer entrypoint) |
+| **ECG-FM** (bowang-lab) | foundation encoder | **MIT** | yes (HF `wanglab/ecg-fm`) | INTEGRATE_ENCODER | encoder seam + fine-tune recipe |
+| **DeepECG-SSL** (HeartWise-AI) | foundation encoder | Apache-2.0* | yes (HF `heartwise`) | INTEGRATE_ENCODER | encoder seam (*confirm bare-encoder license) |
+| **HeartGPT** (H. Davies) | foundation encoder | **MIT** | yes (in-repo) | INTEGRATE_ENCODER | encoder seam |
+| **torch_ecg** (DeepPSP) | classifier framework | MIT | no (train) | NEEDS_TRAIN | training recipe (`TRAINING.md`) |
+| **ecg_ptbxl_benchmarking** | reference benchmark | **GPL-3.0** ⚠️ | yes | REJECT (copyleft) | reference only — never linked |
+| **ECGxAI** (UMCUtrecht) | explainable VAE | **AGPL-3.0** ⚠️ + no weights | no | **REJECT** | not integrable |
+| **ECG-GPT** (Yale CarDS) | image→report demo | none published | no | REJECT | research demo — not integrable |
 
-## Comparison
+### Datasets (for training/validation)
+PTB-XL (CC-BY-4.0), MIT-BIH (ODC-BY), Chapman (CC-BY-4.0), CPSC-2018 (CC-BY-4.0), CODE-15% (Zenodo),
+**MIMIC-IV-ECG** + **MEETI** (PhysioNet **credentialed + DUA** — adapter+docs only, never redistributed).
+All wired via the streaming `DatasetProvider` layer (`docs/DATASETS.md`).
 
-| Project | Role | License | Maintained | Ships weights | Input | Datasets / validation | Commercial fit |
-|---|---|---|---|---|---|---|---|
-| **NeuroKit2** | signal analysis | **MIT** | yes | n/a (algorithms) | 1-lead signal + fs | broadly benchmarked | ✅ integrated (5C) |
-| **WFDB (wfdb-python)** | signal I/O | **MIT** | yes | n/a | WFDB records | PhysioNet standard | ✅ integrated (5C) |
-| **ECG-Digitiser** (felixkrones) | digitization | **BSD-2** | yes | **yes** (nnU-Net, Git LFS) | 3×4 + 10s rhythm image @25mm/s·10mm/mV | **PhysioNet Challenge 2024 — 1st place** | ✅ **recommended** for learned digitization |
-| **ecg-image-kit** (alphanumericslab) | image gen + digitize utils | **BSD-3** | v1.0.0 (2024) | n/a | time-series → synthetic images | used by PhysioNet 2024 | ✅ **recommended** for synthetic training data |
-| **torch_ecg** (DeepPSP) | classifier architectures | **MIT** | yes (v0.0.31, 2025) | no (train yourself) | configurable fs (~400–500 Hz), 12-lead, ~4000–5000 samples | MIT-BIH, CinC2020/21, CPSC | ✅ **recommended** as the model framework (train + export) |
-| **ecg_ptbxl_benchmarking** (helme) | reference benchmark | **GPL-3.0** ⚠️ | yes | yes (research) | PTB-XL 100/500 Hz, 12-lead | PTB-XL | ⚠️ **reference only — do NOT link into the product** (copyleft) |
-| **ECG-GPT** (Yale CarDS) | image → report (vision enc-dec) | not published / web demo | web app | no public weights | 12-lead ECG **image** | multinational (EHJ-DH 2026) | ❌ **not integrable** (demo/research only, "not for clinical use", no license/weights) |
-| **WAVIE** (CinC 2024) | digitization | see repo | 2024 | — | paper ECG | PhysioNet 2024 | 🔍 candidate; confirm license |
-| **"Digitizing paper ECGs at scale"** (npj Digit Med 2025) | digitization | see repo | 2025 | — | paper ECG | clinical-research cohort | 🔍 candidate; confirm license |
+## The commercial-license trap (verified)
+- **`ecg_ptbxl_benchmarking` = GPL-3.0** and **`ECGxAI` = AGPL-3.0**: strong/network copyleft — **not usable**
+  in a closed commercial product; both **rejected** for linking (ECGxAI additionally ships no weights).
+- **`ECG-GPT`** is a research web demo with **no published weights or license** — rejected.
+- The commercially-safe set is **MIT/BSD/Apache/CC-BY**: EcgLib (Apache-2.0), ECG-Digitiser (BSD-2),
+  ECG-FM/HeartGPT (MIT), DeepECG-SSL (Apache-2.0), torch_ecg (MIT), NeuroKit2/WFDB (MIT), PTB-XL (CC-BY).
 
-### Dataset licenses (for training your own model)
-- **PTB-XL** — **CC-BY-4.0** (commercial OK with attribution); 21k 12-lead, SCP-coded. Primary choice.
-- **MIT-BIH / CPSC / PhysioNet CinC** — open via PhysioNet data-use agreements; confirm per-set terms.
-- **PhysioNet/CinC 2024 ECG-image set** + ecg-image-kit synthetic generation — for the digitizer.
+## Recommended architecture (implemented)
 
-## The commercial-license trap (important)
-`ecg_ptbxl_benchmarking` is **GPL-3.0**: excellent as a *reference* and for reproducing benchmarks, but
-**linking or distributing derivative code** brings copyleft obligations that conflict with a closed
-commercial product. **Do not import it into the KardioX backend.** Prefer permissive stacks: train with
-**torch_ecg (MIT)** on **PTB-XL (CC-BY)**, and integrate **ECG-Digitiser (BSD-2)** for digitization.
-`ECG-GPT` is a strong image-to-report *reference*, but it is a research web demo with no published weights
-or license — not integrable, and explicitly "not for clinical use."
+**ONNX-first interchange** on the KardioX provider seam, with three model tiers:
 
-## Recommended architecture
+1. **Turnkey pretrained classifiers → EcgLib (Apache-2.0).** Real binary 12-lead models
+   (AFIB/1AVB/STACH/SBRAD/IRBBB/CRBBB/PVC) run via `create_model(pretrained=True)`; positives become
+   **fusion candidates** the Rule Engine validates. Integrated as `EcgLibClassifier` (Not-Ready until
+   `KARDIOX_ECGLIB_PATHOLOGIES` set + ecglib installed).
+2. **Foundation encoders → ECG-FM / DeepECG-SSL / HeartGPT.** Load as feature extractors; attach + fine-tune
+   a head for KardioX's label set (they are self-supervised backbones, not ready classifiers). Integration =
+   the model-backend seam + the `FineTuningPipeline` (head adaptation) with the exact fine-tune recipe in
+   `TRAINING.md`. Encoders are used *now*; clinical heads require fine-tuning + validation.
+3. **Custom trained models → torch_ecg on PTB-XL → ONNX.** For labels no pretrained model covers.
 
-**Interchange format = ONNX.** Train in PyTorch (torch_ecg) or adapt any framework, then **export to
-ONNX** and serve via `onnxruntime`. This (a) decouples KardioX from any single framework's license/runtime,
-(b) runs CPU or GPU, and (c) lets a model be swapped by dropping a `.onnx` file + changing config — which
-is exactly what the Phase-6F `ModelBackend` seam already provides (`OnnxBackend`, `TorchScriptBackend`, …).
+**Digitization:** ECG-Digitiser (BSD-2, pretrained) via the `external` digitizer entrypoint +
+`ConsensusDigitization`. **Signal analysis:** NeuroKit2 + WFDB (operational). **Fusion → calibration →
+explainability → Differential Diagnosis Engine → FHIR** remains KardioX's deterministic clinical layer,
+into which every model output flows as weighted evidence (never a bare model verdict).
 
-Pipeline mapping (no backend/frontend change needed — all seams already exist):
-
-```
-image → [ECG-Digitiser, BSD-2]  →  signal → [NeuroKit2/WFDB, MIT]  →  measurements ┐
-              (DigitizationProvider = "external", entrypoint wrapper)               ├→ Rule Engine → report
-        (optional) → [torch_ecg→ONNX classifier]  → rhythm/morphology candidates ───┘   (validates every
-                        (RhythmProvider = "torchecg" + ONNX backend + adapters)            model output)
-```
-
-- **Digitization:** integrate **ECG-Digitiser** behind `provider_digitization=external` + a thin
-  `KARDIOX_DIGITIZER_ENTRYPOINT="yourpkg.ecgdig:digitize"` wrapper returning our traces dict. Its expected
-  layout (3×4 + 10s strip, 25mm/s·10mm/mV) matches KardioX's assumption. Use ecg-image-kit to generate
-  training/eval images. Classical baseline stays as the fallback.
-- **Signal analysis:** keep **NeuroKit2 + WFDB** (already real, Phase 5C).
-- **Classification:** train a **torch_ecg** model on **PTB-XL** (+ CPSC/MIT-BIH), export **ONNX**, serve
-  via `OnnxBackend`. Feed outputs through the deterministic **Rule Engine** — a model never diagnoses
-  unvalidated.
-- **Explanation:** Gemini, constrained to rule-validated findings (already real).
-
-## How this plugs in (adapters — implemented this phase)
-
-`app/services/models/adapters.py`:
-- **`ModelInputSpec` + `adapt_signal`** — resample to the model's fs, fit sample count, order/zero-fill
-  leads, normalize. Named presets (`ptbxl_500hz_10s`, `ptbxl_100hz_10s`, `torch_ecg_12lead`,
-  `lead_ii_500hz_10s`) are **templates — confirm against the checkpoint's model card.**
-- **`LabelMap`** — translate a model's native classes (e.g. PTB-XL SCP superclasses) into KardioX
-  vocabulary; model labels are **candidates the Rule Engine still validates**.
-- **`resolve_entrypoint`** — dynamically load an external digitizer/model wrapper by `module:function`.
-- **`ExternalDigitization`** provider — plug a learned digitizer in by config, with **no backend change**.
-
-Config to activate (once a validated model/checkpoint exists — KardioX ships none):
-```
-KARDIOX_PROVIDER_DIGITIZATION=external   KARDIOX_DIGITIZER_ENTRYPOINT=yourpkg.ecgdig:digitize
-KARDIOX_PROVIDER_RHYTHM=torchecg  KARDIOX_RHYTHM_MODEL_KIND=onnx  KARDIOX_RHYTHM_MODEL_PATH=/models/rhythm.onnx
-KARDIOX_RHYTHM_MODEL_INPUT_SPEC=ptbxl_500hz_10s  KARDIOX_RHYTHM_LABEL_MAP=ptbxl_superclass
-KARDIOX_RHYTHM_MODEL_LABELS=NORM,MI,STTC,CD,HYP
-```
+## Model-input contracts (confirm per checkpoint)
+- EcgLib: 12-lead, ~500 Hz (`ptbxl_500hz_10s` spec) — confirm length vs installed ecglib.
+- ECG-FM: 12-lead 500 Hz, 5 s segments (2500), z-scored (wav2vec2, via fairseq-signals).
+- DeepECG-SSL: 12-lead 250 Hz, 10 s (2500).
+- HeartGPT: tokenized single-lead time-series (GPT-style).
+Adapters (`app/services/models/adapters.py` `INPUT_SPECS` + `LabelMap`) normalize KardioX signals to each.
 
 ## What KardioX does NOT do
-Ship weights, fabricate inference, or claim diagnostic performance. Until a permissively-licensed,
-**clinically validated** model is trained/obtained and signed off, the model-backed providers stay
-`ready=false` and `smd_kardiox` stays OFF.
+Ship weights, fabricate inference, or claim diagnostic performance. Model-backed providers stay Not-Ready
+(raise `pipeline_unavailable`) until enabled + validated; `smd_kardiox` stays OFF until clinical validation
++ clinician sign-off + regulatory review.
 
-## Sources (checked 2026-07-21)
-- torch_ecg — https://github.com/DeepPSP/torch_ecg (MIT)
-- ECG-Digitiser — https://github.com/felixkrones/ECG-Digitiser (BSD-2; PhysioNet 2024 winner)
-- ecg-image-kit — https://github.com/alphanumericslab/ecg-image-kit (BSD-3) · paper https://arxiv.org/abs/2307.01946
-- ecg_ptbxl_benchmarking — https://github.com/helme/ecg_ptbxl_benchmarking (GPL-3.0)
-- PTB-XL — https://physionet.org/content/ptb-xl/ (CC-BY-4.0) · https://www.nature.com/articles/s41597-020-0495-6
-- PhysioNet/CinC Challenge 2024 — https://moody-challenge.physionet.org/2024/
-- "Digitizing paper ECGs at scale" — https://www.nature.com/articles/s41746-025-02327-1 · https://arxiv.org/pdf/2510.19590
-- ECG-GPT (Yale CarDS) — https://www.cards-lab.org/ecg-gpt · https://www.medrxiv.org/content/10.1101/2024.02.17.24302976v2.full
-- NeuroKit2 (MIT), WFDB-python (MIT), onnxruntime (MIT) — per each project's repository.
+## Sources (verified)
+- EcgLib — https://github.com/ispras/EcgLib (Apache-2.0; release v1.1.0 weights)
+- ECG-Digitiser — https://github.com/felixkrones/ECG-Digitiser (BSD-2; PhysioNet-2024 winner)
+- ECG-FM — https://github.com/bowang-lab/ECG-FM + https://huggingface.co/wanglab/ecg-fm (MIT)
+- DeepECG-SSL — https://github.com/HeartWise-AI/DeepECG_Docker + HF `heartwise` (Apache-2.0*)
+- HeartGPT — https://github.com/harryjdavies/HeartGPT (MIT)
+- torch_ecg — https://github.com/DeepPSP/torch_ecg (MIT); PTB-XL — https://physionet.org/content/ptb-xl (CC-BY-4.0)
+- REJECTED: ecg_ptbxl_benchmarking (GPL-3.0), ECGxAI https://github.com/UMCUtrecht-ECGxAI/ecgxai (AGPL-3.0, no weights),
+  ECG-GPT https://www.cards-lab.org/ecg-gpt (demo, no license/weights)

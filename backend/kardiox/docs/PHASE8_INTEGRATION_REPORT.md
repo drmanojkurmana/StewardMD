@@ -1,77 +1,73 @@
-# KardioX AI — Phase 8 Real-Model Integration Report
+# KardioX AI — Real-Model Integration Report (Phases 8–9)
 
 Date: 2026-07-21 · Branch `feat/kardiox-ai` · PR #511 · Flag `smd_kardiox`: **OFF**
 
-**Executive summary.** Phase 8 replaced "Not-Ready" providers with real models **wherever a suitable
-public, commercially-licensed model actually exists**. The honest finding — grounded in the frozen
-`MODEL_LANDSCAPE.md`, not new research — is that **the ECG deep-learning ecosystem has no drop-in,
-permissively-licensed, pretrained 12-lead classifier**. Consequently:
+**Executive summary.** A verified foundation-model audit (primary sources — repo LICENSE files + HF cards)
+**overturned** the earlier "no drop-in classifier" conclusion: **EcgLib** ships pretrained, **Apache-2.0**
+binary 12-lead classifiers and is now **integrated** as real inference. Signal analysis is operational
+(NeuroKit2 + WFDB). Three commercially-licensed **foundation encoders** (ECG-FM/DeepECG-SSL/HeartGPT) and a
+pretrained **digitizer** (ECG-Digitiser) have real integration paths (encoder now, fine-tuned head next).
+Copyleft/demo projects (ecg_ptbxl_benchmarking GPL, ECGxAI AGPL, ECG-GPT) are **rejected** with reasons.
+**No inference is fabricated; no weights are shipped; nothing is enabled for end users.**
 
-- The **signal-analysis engines are operational** on validated open-source libraries (NeuroKit2 + WFDB).
-- The **five learned classifiers remain adapters, BLOCKED on unavailable public weights** — each is
-  documented with the exact evidence required, and `docs/TRAINING.md` gives the reproducible recipe to
-  produce them. **No inference is fabricated.**
+## 1. Operational (real inference, validated engine)
 
-This environment cannot download weights, install torch/onnxruntime, or hold PTB-XL, so model *training*
-and *clinical validation* happen outside it; what could be built + validated here (measurement against
-synthetic ground truth) was.
-
-## 1. Operational providers (real inference, validated engine)
-
-| Stage | Engine | License | Validation status |
+| Stage | Engine | License | Status |
 |---|---|---|---|
-| **Measurement** (HR/PR/QRS/QT/QTc/axis/per-lead/T-wave) | **NeuroKit2** | MIT | **Validated vs synthetic ground truth** (HR within ±8 bpm at 55/75/100; intervals physiologic; T-wave polarity) — `tests/test_measurement_validation.py`. `implemented=True`. |
-| **Signal extraction** (px→mV/ms calibration) | WFDB / NumPy | MIT/BSD | Deterministic, unit-validated (amplitude + timing). `implemented=True`. |
-| **Rule validation** (criteria + morphology dx + confidence) | Built-in (ported) | in-house | Deterministic, unit-tested. `implemented=True`. |
-| **Clinical explanation** (constrained) | Gemini | Apache-2.0 (SDK) | Real; disclaimer-enforced; needs an API key. `implemented=True`. |
-| **Rhythm — rate/regularity only** | NeuroKit2 (deterministic) | MIT | Real rate/regularity; **NOT a diagnostic classifier** (see §2). |
-| Quality gate / layout / classical digitization | OpenCV (classical) | Apache-2.0 | Real code; thresholds/accuracy need real-photo calibration → `implemented=False`. |
+| **Measurement** (HR/PR/QRS/QT/QTc/axis/per-lead/T-wave) | NeuroKit2 | MIT | **Validated vs synthetic ground truth**; `implemented=True` |
+| **Signal extraction** (px→mV/ms) | WFDB/NumPy | MIT/BSD | Deterministic, unit-validated; `implemented=True` |
+| **Rule validation + morphology dx + fusion + calibration + explainability + Differential Diagnosis Engine + FHIR** | in-house | — | Deterministic clinical layer, unit-tested + executed here |
 
-The deterministic decision layer — **evidence fusion, confidence calibration, explainability, serial
-comparison, FHIR/report** — is fully operational and feeds off whatever providers are active.
+## 2. Integrated model providers (real code; Not-Ready until enabled + libs/weights present — never faked)
 
-## 2. Remaining adapters — BLOCKED (kept, documented, never faked)
+| Provider | Source | License | What it does | Enable |
+|---|---|---|---|---|
+| **EcgLib** (`ecglib_provider`) | ispras/EcgLib | **Apache-2.0** | Pretrained binary classifiers AFIB/1AVB/STACH/SBRAD/IRBBB/CRBBB/PVC → fusion candidates | `KARDIOX_ECGLIB_PATHOLOGIES=…` + `pip install ecglib torch` |
+| **ECG-Digitiser** | felixkrones | BSD-2 | Pretrained image→signal digitizer (nnU-Net) | `KARDIOX_PROVIDER_DIGITIZATION=external` + entrypoint |
+| **Foundation encoders** | ECG-FM (MIT) / DeepECG-SSL (Apache-2.0) / HeartGPT (MIT) | permissive | Feature extractors; fine-tune a head via `FineTuningPipeline` | model-backend seam + `docs/TRAINING.md` |
+| **torch_ecg** | DeepPSP | MIT | Architectures to train custom heads | `docs/TRAINING.md` |
 
-| Priority | Provider | Why blocked | Evidence required to enable |
-|---|---|---|---|
-| 1 | **Rhythm (diagnostic)** `torchecg` | torch_ecg ships architectures, **no weights**; GPL alternative excluded | Train on PTB-XL → ONNX (`docs/TRAINING.md`) + validation |
-| 2 | **Beat classification** | no permissive pretrained beat model | Train on MIT-BIH → ONNX + validation |
-| 3 | **Conduction disorders** | no permissive pretrained model | PTB-XL (CD) model; fuse with deterministic BBB/AVB rules |
-| 4 | **Morphology** (LVH/STTC) | no permissive pretrained model | PTB-XL (HYP/STTC) model + validation |
-| 5 | **MI detection** | no permissive pretrained model | PTB-XL (MI) model; per-lead labels for territory |
-| 7 | **Learned digitization** (ECG-Digitiser) | **weights exist (BSD-2)** but require install + on-device validation; cannot run in this sandbox | `pip install` ECG-Digitiser + wire `KARDIOX_DIGITIZER_ENTRYPOINT`; validate digitization accuracy |
-| — | **OOD / novelty** (quality) | no shipped model | Train an OOD detector on the target distribution |
+Each raises `pipeline_unavailable` (a clean Not-Ready) until configured; outputs flow into the
+weighted-fusion → Differential Diagnosis Engine (the Rule Engine validates every model finding).
 
-Every blocked provider stays in its safe **Not-Ready** state: it raises `pipeline_unavailable` (never
-fabricates a label) until a validated checkpoint is configured, and plugs in by **config alone**.
+## 3. Rejected (documented)
+- **`ecg_ptbxl_benchmarking` — GPL-3.0** (copyleft): reference/benchmark only, never linked.
+- **`ECGxAI` — AGPL-3.0 + no public weights**: not commercially usable, nothing to run.
+- **`ECG-GPT` (Yale CarDS) — research web demo, no license/weights**: not integrable.
 
-## 3. Model sources & licenses (from the frozen landscape)
-- **torch_ecg** — MIT — architectures for all classifiers (train yourself). https://github.com/DeepPSP/torch_ecg
-- **PTB-XL** — CC-BY-4.0 (commercial OK) — training/validation data. https://physionet.org/content/ptb-xl/
-- **ECG-Digitiser** — BSD-2 — pretrained digitizer (nnU-Net). https://github.com/felixkrones/ECG-Digitiser
-- **ecg-image-kit** — BSD-3 — synthetic training images. **NeuroKit2 / WFDB / onnxruntime** — MIT.
-- **Excluded:** `ecg_ptbxl_benchmarking` (GPL-3.0 — copyleft), ECG-GPT (research demo, no weights/license).
+## 4. Data + training platform (this phase)
+Streaming `DatasetProvider` layer (no data bundled): **MIMIC-IV-ECG** (full, credentialed) + **MEETI**
+(credentialed, multimodal) + PTB-XL / MIT-BIH / Chapman / CPSC / CODE-15% (open). `TrainingPipeline` /
+`FineTuningPipeline` (auto head-adaptation + provenance) / `BenchmarkPipeline` (cross-dataset, ExChanGeAI
+metrics) / `ValidationPipeline`, `ModelRegistry` (ONNX-first + provenance), `ExperimentTracker`. Adopts
+ExChanGeAI (MIT) practices (`docs/PLATFORM_COMPARISON.md`, `docs/DATASETS.md`). Orchestration executed here
+with stub backends; the DL step runs in a training environment.
 
-## 4. Validation status
-- **Measurement:** in-project synthetic-ground-truth validation (this repo, CI `test-ml`). PTB-XL
-  reference-interval validation pending (needs data + runtime).
-- **Classifiers:** none integrated → none validated. Validation protocol specified in `docs/TRAINING.md`.
-- **Confidence calibration:** framework operational; **identity (uncalibrated) until temperature is fit**
-  on a validation set — honestly reported as `calibrated=false`.
+## 5. Validation status
+- **Measurement**: in-repo synthetic-ground-truth validation (CI). PTB-XL reference validation pending.
+- **EcgLib / foundation models**: upstream-validated by their authors; **KardioX-pipeline validation
+  (on digitized signals) + calibration fitting pending** — this is the gate to `implemented`/enable.
+- **Confidence calibration**: framework operational; identity (`calibrated=false`) until a temperature is fit.
+- **Differential Diagnosis Engine**: deterministic; 6 tests executed here — no fabrication.
 
-## 5. Benchmark results
-Benchmarks are defined as CI tests (`test_measurement_validation.py::test_benchmark_completes_quickly`
-+ the `/metrics` per-stage histograms). **They are not measured in this sandbox** (no ML runtime here);
-they execute in the CI `test-ml` job and against a deployed pipeline. Targets: measurement < ~2 s/10-s
-record on CPU; end-to-end classical pipeline < ~3 s; p95 end-to-end < 90 s (client timeout).
+## 6. Benchmarks
+Defined as CI tests + `BenchmarkPipeline` (weighted/macro/micro F1, Brier, ECE, bootstrapped CI, Fmax,
+latency, cross-dataset). **Not measured in this sandbox** (no ML runtime); run in CI `test-ml` + on a
+deployed pipeline. Targets: measurement < ~2 s/10-s record CPU; classical pipeline < ~3 s; p95 < 90 s.
 
-## 6. Remaining blockers before enabling `smd_kardiox`
-1. **Train + validate** the classifier ONNX models (rhythm/beat/conduction/morphology/MI) per
-   `docs/TRAINING.md`; wire via config.
-2. **Integrate + validate ECG-Digitiser** for robust photo→signal digitization.
-3. **PTB-XL / reference validation** of measurements + **clinician sign-off** of rules + Learn-ECG content.
-4. **Deploy** the pipeline (container + R2/env) and run the benchmarks on target hardware.
-5. **Regulatory / SaMD** determination.
+## 7. Production readiness
+- **Infrastructure + platform + clinical layer:** high (provider seam, fusion, DDx, datasets, training
+  pipelines, ONNX registry, security/serving from Phase 6).
+- **Clinical AI:** EcgLib gives a real classifier path; still needs KardioX-pipeline validation +
+  calibration + clinician sign-off.
+- **Overall: NOT READY for end users** (flag OFF).
 
-Until 1–5 close, KardioX stays flag-OFF. The architecture is complete and every real model plugs in by
-configuration; the gap is trained weights + clinical validation, not engineering.
+## 8. Blockers before enabling `smd_kardiox`
+1. Enable + **validate EcgLib** on KardioX-digitized signals; fit confidence calibration.
+2. **Fine-tune** a foundation encoder (or train torch_ecg) for labels EcgLib doesn't cover; validate.
+3. **Integrate + validate ECG-Digitiser** for robust photo→signal.
+4. **PTB-XL / reference validation** of measurements + **clinician sign-off** of rules + Learn-ECG content.
+5. **Deploy** (container + R2/env) + run benchmarks; **regulatory / SaMD** review.
+
+The architecture is complete and every real model plugs in by configuration; the remaining gap is
+**validation + clinical/regulatory sign-off**, not engineering.
