@@ -58,38 +58,69 @@
     } catch (e) { return null; }
   }
 
-  // Patient watchlist for the watch's "My patients". Prefers the ICU roster
-  // (the only source carrying a computed NEWS2, via state.scores, and vitals),
-  // falling back to the GHIS worklist (demographics/bed, no score/vitals). All
-  // reads are synchronous, in-memory, and side-effect-free (never trigger a fetch).
-  // Capped for the WC payload.
+  // The currently-open ICU patient (the one the clinician is actively viewing).
+  // Available even when nothing is saved to the roster and the GHIS cache is
+  // empty — which is the common case — so it's the PRIMARY watchlist source.
+  function openState() {
+    try { return (window.ICU && ICU.state) ? ICU.state() : null; } catch (e) { return null; }
+  }
+  function news2Of(st) {
+    var scores = (st && st.scores) || [];
+    for (var i = 0; i < scores.length; i++) {
+      if (scores[i] && scores[i].id === "news2" && scores[i].value != null) return Math.round(scores[i].value);
+    }
+    return null;
+  }
+
+  // Patient watchlist for the watch's "My patients". Sources, deduped by name+bed:
+  //   1. the OPEN ICU patient (ICU.state()) — live scores/vitals,
+  //   2. the saved ICU roster (ICU.listPatients()) — NEWS2 + vitals,
+  //   3. GHIS worklist fallback (demographics/bed only).
+  // All reads are synchronous, in-memory, side-effect-free. Capped for the WC payload.
   function watchlist() {
-    var out = [];
+    var out = [], seen = {};
+    function push(e) {
+      if (!e || !e.id) return;
+      var k = (e.name || "") + "|" + (e.bed || "");
+      if (seen[k]) return; seen[k] = 1; out.push(e);
+    }
+    // 1. Open patient
+    try {
+      var st = openState(), pt = st && st.patient;
+      if (pt && pt.name) {
+        push({
+          id: String(pt.mrn || pt.name || "current"),
+          name: String(pt.name),
+          bed: String(pt.bed || ""),
+          news2: news2Of(st),
+          flag: String(pt.diagnosis || "") || null,
+          vitals: vitalsFrom(st)
+        });
+      }
+    } catch (e) {}
+    // 2. Saved ICU roster
     try {
       if (window.ICU && ICU.listPatients) {
         (ICU.listPatients() || []).forEach(function (e) {
           if (!e) return;
-          var st = e.state || {}, scores = st.scores || [], n2 = null;
-          for (var i = 0; i < scores.length; i++) {
-            if (scores[i] && scores[i].id === "news2" && scores[i].value != null) { n2 = scores[i].value; break; }
-          }
-          var pt = st.patient || {};
-          out.push({
-            id: String(e.id || ""),
-            name: String(e.name || pt.name || "Patient"),
-            bed: String(e.bed || pt.bed || ""),
-            news2: (typeof n2 === "number") ? Math.round(n2) : null,
-            flag: String(e.dx || pt.diagnosis || "") || null,
-            vitals: vitalsFrom(st)
+          var st2 = e.state || {}, pt2 = st2.patient || {};
+          push({
+            id: String(e.id || pt2.mrn || e.name || ""),
+            name: String(e.name || pt2.name || "Patient"),
+            bed: String(e.bed || pt2.bed || ""),
+            news2: news2Of(st2),
+            flag: String(e.dx || pt2.diagnosis || "") || null,
+            vitals: vitalsFrom(st2)
           });
         });
       }
     } catch (e) {}
+    // 3. GHIS worklist fallback (only if we still have nothing)
     try {
       if (!out.length && window.GHIS && GHIS.getPatients) {
         (GHIS.getPatients() || []).forEach(function (p) {
           if (!p) return;
-          out.push({
+          push({
             id: String(p.patientId || p.episodeId || ""),
             name: String(p.patientFirstName || "Patient"),
             bed: String(p.bedName || ""),
@@ -99,22 +130,48 @@
         });
       }
     } catch (e) {}
-    return out.filter(function (e) { return e.id; }).slice(0, 30);
+    return out.slice(0, 30);
   }
 
-  // Ward Sync census. Only phone-owned fields (the watch keeps its own critical
-  // count). No true bed denominator or task count exists client-side, so we don't
-  // invent them: censusTotal = worklist size; tasksDue = 0.
-  function census() {
+  // Critical alerts for the watch's "Critical labs". The OPEN ICU patient's live
+  // alert list (ICU.state().alerts) carries the crit/warn flags (e.g. K⁺ >6.5 →
+  // "Critical hyperkalaemia"). severity "crit"/"warn" → the watch's
+  // "critical"/"warning". Roster patients' saved alerts are stripped, so only the
+  // open patient's criticals are relayed today.
+  function criticals() {
+    var out = [];
     try {
-      var occupied = 0, ghisN = 0, icuN = 0;
-      if (window.GHIS && GHIS.getPatients) {
-        var ps = GHIS.getPatients() || [];
-        ghisN = ps.length;
-        occupied = ps.filter(function (p) { return p && /occupied/i.test(String(p.queueStatus || "")); }).length;
+      var st = openState(), pt = st && st.patient, alerts = st && st.alerts;
+      if (pt && alerts && alerts.length) {
+        var label = [pt.bed ? ("Bed " + pt.bed) : null, pt.name].filter(Boolean).join(" · ");
+        alerts.forEach(function (a) {
+          if (!a || (a.severity !== "crit" && a.severity !== "warn")) return;
+          var m = String(a.msg || "").match(/([\d.]+)\s*([A-Za-z%\/]+)?/);
+          out.push({
+            id: "icu-" + String(pt.mrn || pt.name || "cur") + "-" + String(a.title || ""),
+            analyte: String(a.title || "Alert"),
+            value: m ? m[1] : "",
+            units: (m && m[2]) ? m[2] : null,
+            refRange: null,
+            patientLabel: label || null,
+            severity: a.severity === "crit" ? "critical" : "warning",
+            ts: Math.floor(Date.now() / 1000)
+          });
+        });
       }
-      if (window.ICU && ICU.listPatients) { icuN = (ICU.listPatients() || []).length; }
-      var patientCount = ghisN || icuN;
+    } catch (e) {}
+    return out.slice(0, 20);
+  }
+
+  // Ward Sync census. patientCount is the deduped watchlist size (so the open
+  // patient counts even with an empty roster/GHIS cache). No true bed denominator
+  // or task count exists client-side, so we don't invent them.
+  function census(patientCount) {
+    try {
+      var occupied = 0;
+      if (window.GHIS && GHIS.getPatients) {
+        occupied = (GHIS.getPatients() || []).filter(function (p) { return p && /occupied/i.test(String(p.queueStatus || "")); }).length;
+      }
       if (!patientCount) return null;                 // nothing meaningful to relay
       var ward = "";
       try { if (window.ICU && ICU.currentUnitLabel) ward = ICU.currentUnitLabel() || ""; } catch (e) {}
@@ -168,10 +225,12 @@
         recents: recents(),
         notifPrefs: notifPrefs()
       };
-      // Only include census/watchlist when we actually have data, so a cold-start
-      // (before Ward Sync/ICU are loaded) never wipes the watch's last-known list.
+      // Only include census/watchlist/criticals when we actually have data, so a
+      // cold-start (before ICU/Ward Sync are loaded) never wipes the watch's
+      // last-known data.
       var wl = watchlist(); if (wl.length) payload.watchlist = wl;
-      var cen = census(); if (cen) payload.glance = cen;
+      var crit = criticals(); if (crit.length) payload.criticals = crit;
+      var cen = census(wl.length); if (cen) payload.glance = cen;
       await p.publish(payload);
       markSynced();
       return true;

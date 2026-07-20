@@ -67,6 +67,9 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
             store.saveWatchlist(w)          // persist for relaunch + the widget
             WatchServices.watchlist.set(w)
         }
+        if let d = context["criticals"] as? Data, let c = try? JSONDecoder().decode([LabAlert].self, from: d) {
+            WatchServices.labs.ingest(c)    // feeds the Critical Labs screen + badge
+        }
         if let d = context["notifPrefs"] as? Data, let p = try? JSONDecoder().decode([String: Bool].self, from: d) {
             store.saveNotifPrefs(p)
         }
