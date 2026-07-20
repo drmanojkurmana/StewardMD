@@ -1,5 +1,6 @@
 import Foundation
 import Capacitor
+import SwiftUI
 #if canImport(WatchConnectivity)
 import WatchConnectivity
 #endif
@@ -28,7 +29,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "publish", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "clear", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "getStatus", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "getStatus", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "openCodeBlue", returnType: CAPPluginReturnPromise)
     ]
 
     private let suiteName = "group.in.stewardmd.app"
@@ -47,6 +49,9 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     override public func load() {
         // Force the WCSession to activate at plugin load so getStatus() is reliable.
         _ = relay
+        // Start the phone-side Code Blue live mirror so it ingests + persists even
+        // before the Command Center screen is opened.
+        DispatchQueue.main.async { CodeBlueLiveModel.shared.begin() }
         // When the watch asks for a fresh token, re-emit to JS so native-watch.js
         // republishes. Decoupled via a string-keyed notification (same pattern as
         // AppOrientationPlugin) so the plugin owns no cross-module symbols.
@@ -170,5 +175,25 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         }
         relay.updateContext(["cleared": true])
         call.resolve()
+    }
+
+    /// Present the native SwiftUI Code Blue Command Center full-screen from the web
+    /// home card (design §4.1). Export taps are relayed to JS via `codeBlueExport`.
+    @objc func openCodeBlue(_ call: CAPPluginCall) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, let presenter = self.bridge?.viewController else {
+                call.reject("no-vc"); return
+            }
+            let root = CommandCenterView(
+                onExport: { [weak self] detail in
+                    self?.notifyListeners("codeBlueExport", data: ["detail": detail])
+                },
+                onClose: { presenter.presentedViewController?.dismiss(animated: true) }
+            )
+            let host = UIHostingController(rootView: root)
+            host.modalPresentationStyle = .fullScreen
+            presenter.present(host, animated: true)
+            call.resolve()
+        }
     }
 }
