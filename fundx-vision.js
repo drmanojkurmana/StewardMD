@@ -136,6 +136,12 @@
       fieldOfView: clamp01(p.fieldOfView != null ? p.fieldOfView : p.fundusSize),
       // lens fields retained for backward-compat ONLY — never used to gate acquisition
       lensPresent: bool(p.lensPresent), lensConf: clamp01(p.lensConf), lensCentered: bool(p.lensCentered),
+      // Phase 4: native ARKit spatial alignment (spatial-AR corridor). null when not in spatial mode,
+      // so consumers must treat null as "no signal" (do not block on it). Never gates the FSM itself.
+      spatialAligned: p.spatialAligned != null ? bool(p.spatialAligned) : null,
+      eyeLocked: p.eyeLocked != null ? bool(p.eyeLocked) : null,
+      axisLateral: p.axisLateral != null ? num(p.axisLateral) : null,
+      axisAlong: p.axisAlong != null ? num(p.axisAlong) : null,
       ts: p.ts != null ? num(p.ts) : null
     };
   }

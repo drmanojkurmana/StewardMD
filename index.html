@@ -53,7 +53,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug808">
-<link rel="stylesheet" href="/fundx.css?v=gold469">
+<link rel="stylesheet" href="/fundx.css?v=sar1">
 <script>try{var _aq=location.search||"";var _aon=!/[?&]abxui=0\b/.test(_aq)&&(/[?&]abxui=1\b/.test(_aq)||localStorage.getItem("smd_abx_ui")!=="0");if(_aon)document.documentElement.classList.add("abx-ui");}catch(e){}</script>
 <!-- Antibiotic-engine design CHROME layer (additive, presentation-only): Material Symbols icons,
      ICMR policy banner, segmented Simple/Advanced. Gated by html.abx-ui; touches no engine logic. -->
@@ -62,9 +62,40 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
      the real engine (FIELD_GROUPS + SMD_REASON.assess + DX_MGMT). Start Case opens it. Flag-gated. -->
 <script defer src="/abx-wizard.js?v=gold475"></script>
 <script>
-/* Register the service worker (offline + instant repeat loads). Runs on load so it never
-   competes with startup. Network-first HTML in sw.js means this can't trap stale versions. */
-if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(e){console.warn("[StewardMD] SW registration failed:",e&&e.message);});});}
+/* Service worker (offline + instant repeat loads) — WEB ONLY.
+   On the NATIVE app (Capacitor) the SW is disabled: its stale-while-revalidate cache pins the
+   bundled JS at the same-URL cached copy, so JS edits never reach the WKWebView on a plain native
+   rebuild (this cost real debugging time). Assets are already local in the native app, so the SW
+   buys nothing there. On native we unregister any existing SW + purge its caches, and never register
+   it. We deliberately do NOT reload to "flush" the current launch — that reload could loop into a
+   blink/black (the SW controller stays attached right after a reload, and sessionStorage did not
+   reliably survive the reload in WKWebView to guard it). Freshness converges on the next launch
+   anyway once the SW is gone. Web PWA behaviour is unchanged. */
+(function () {
+  // Robust native detection, independent of the Capacitor JS-bridge injection timing: the native app
+  // is served from the capacitor:// (iOS) / localhost (Android) scheme, never from stewardmd.in. If we
+  // ever mis-detect native as web we would (re)register the SW on the app and pin stale JS again, so
+  // fall back to the URL scheme/host, which is always available synchronously.
+  var isNative = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform())
+    || location.protocol === "capacitor:" || location.protocol === "ionic:"
+    || location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.hostname === "";
+  if (isNative) {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (rs) {
+        rs.forEach(function (r) { r.unregister(); });
+      }).catch(function () {});
+    }
+    if (window.caches && caches.keys) {
+      caches.keys().then(function (ks) { ks.forEach(function (k) { caches.delete(k); }); }).catch(function () {});
+    }
+    return;
+  }
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("/sw.js").catch(function (e) { console.warn("[StewardMD] SW registration failed:", e && e.message); });
+    });
+  }
+})();
 </script>
 
 <!-- ===== SEO ===== -->
@@ -1471,7 +1502,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
      persistence (fundx-store.js) + UI/overlay (fundx.js). Loaded after image-engine,
      haptics and swipe-back so those globals are available at runtime. When the flag
      is off, fundx.js returns early and the module is a complete no-op. -->
-<script src="/fundx-flags.js?v=gold474" defer></script>
+<script src="/fundx-flags.js?v=sar1" defer></script>
 <script src="/fundx-vision.js?v=gold463" defer></script>
 <script src="/fundx-engine.js?v=gold474" defer></script>
 <script src="/fundx-hud.js?v=gold475" defer></script>
@@ -1479,10 +1510,10 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <script src="/fundx-providers.js?v=gold456" defer></script>
 <script src="/fundx-clinical.js?v=gold456" defer></script>
 <script src="/fundx-sensors.js?v=gold467" defer></script>
-<script src="/fundx-detect.js?v=gold468" defer></script>
+<script src="/fundx-detect.js?v=sar1" defer></script>
 <script src="/fundx-store.js?v=gold456" defer></script>
 <script src="/fundx-telemetry.js?v=gold456" defer></script>
-<script src="/fundx.js?v=gold474" defer></script>
+<script src="/fundx.js?v=sar1" defer></script>
 <!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
      ghis-ward.js self-injects a 🏥 Ward button + #ghisPanel. Each doctor signs in
      with their OWN GHIS id/password; the token is stored client-side and sent as

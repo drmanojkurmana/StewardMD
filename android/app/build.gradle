@@ -7,7 +7,7 @@ android {
         applicationId "in.stewardmd.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
+        versionCode 6
         versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
@@ -41,6 +41,9 @@ dependencies {
     // (com.google.ar.core=optional in the manifest); the app falls back to the monocular
     // pipeline when ARCore / the Depth API is unavailable.
     implementation "com.google.ar:core:1.45.0"
+    // FundX Spatial AR — Phase 3 eye localisation (ARCore mirror of iOS Vision). Bundled (not the
+    // Play-services downloadable model) so face detection works offline on first run.
+    implementation "com.google.mlkit:face-detection:16.1.7"
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"

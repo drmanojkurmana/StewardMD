@@ -400,6 +400,10 @@ body.fundx-gpu #fundxNativeCanvas { display: none !important; }
 
 /* ===== Optical Corridor HUD (SVG spatial-AR overlay) — handoff §06 z-index ===== */
 #fundxRoot .fundx-corridor-host { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+/* Spatial AR active: the native 3D SceneKit guide (world-anchored) IS the guide, so hide the 2D
+   flat ring + SVG corridor overlay — otherwise they'd double up over the AR camera. */
+#fundxRoot.fundx-spatial-active .fundx-reticle,
+#fundxRoot.fundx-spatial-active .fundx-corridor-host { display: none !important; }
 #fundxRoot .fundx-corridor { position: absolute; inset: 0; width: 100%; height: 100%; }
 /* When the corridor is on, the legacy flat reticle (ring + arrow + score) is faded — the corridor
    replaces it. Everything else (coach, chips, step, buttons) stays. Reduced-motion is honoured
