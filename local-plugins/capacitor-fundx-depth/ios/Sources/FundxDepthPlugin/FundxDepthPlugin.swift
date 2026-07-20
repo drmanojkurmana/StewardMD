@@ -56,6 +56,19 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
     private var webViewOpaque = true         // mirror of webView.isOpaque, emitted for the on-device HUD diagnostic
     private var loggedNormal = false         // log tracking=NORMAL once per session (device-log evidence)
 
+    // ---- Phase 2: optical-corridor funnel + directional guidance ----
+    // The anchor adopts the CAMERA orientation at placement, so its local +Z runs eye -> camera along
+    // the true optical axis. A funnel of receding rings + a target gate ring hang on that axis; each
+    // frame we decompose the camera position into along-axis distance + lateral off-axis error and
+    // tint the corridor green when the clinician is on-axis at the working distance. Presentation-only
+    // + additive — Phase-1 world-lock is untouched. Distances are Phase-2 test values, tuned on-device.
+    private weak var corridorRoot: SCNNode?  // the funnel/target node graph (child of the eye anchor node)
+    private var workingDist: Float = 0.40    // target camera standoff from the eye along the axis (m)
+    private var distTol: Float = 0.06        // +/- along-axis tolerance for "at the right distance" (m)
+    private var latTol: Float = 0.045        // max lateral off-axis error for "on the optical axis" (m)
+    private var lastAlignState = -1          // 0=far-off 1=near-but-off 2=aligned; recolour only on change
+    private var loggedAligned = false        // log the first time full alignment is reached (evidence)
+
     // Device-log evidence for the on-device AR bring-up (independent of the WebView/HUD, which runs
     // aggressively-cached JS). print() reaches `devicectl ... --console`; NSLog reaches the unified log.
     private func dbg(_ s: String) { print(s); NSLog("%@", s) }
@@ -240,11 +253,15 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             let fwd = simd_make_float3(-cx.columns.2.x, -cx.columns.2.y, -cx.columns.2.z)   // camera looks down -Z
             let camPos = simd_make_float3(cx.columns.3.x, cx.columns.3.y, cx.columns.3.z)
             let eyePos = camPos + fwd * Float(meters)
-            var eyeXform = matrix_identity_float4x4
+            // Adopt the camera's ORIENTATION at placement so the anchor's local +Z runs eye -> camera
+            // along the true optical axis (Phase 2 corridor axis); translation is the eye position.
+            var eyeXform = cx
             eyeXform.columns.3 = simd_make_float4(eyePos.x, eyePos.y, eyePos.z, 1)
             let a = ARAnchor(name: "fundxEye", transform: eyeXform)
             self.eyeAnchor = a
             self.arSession?.add(anchor: a)
+            self.lastAlignState = -1
+            self.loggedAligned = false
             data["anchorPlaced"] = true
             dbg("FUNDX_DBG anchor PLACED at \(meters)m opaque=\(webViewOpaque) scnUp=\(arView != nil)")
         }
@@ -346,40 +363,73 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
     // fixed in 3D space as the phone moves — the clinician moves back onto the optical axis toward it.
     public func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard spatialMode, anchor.name == "fundxEye" else { return }
-        dbg("FUNDX_DBG renderer didAdd fundxEye — 3D guide attached to world anchor")
-        let guide = buildEyeGuide()
+        dbg("FUNDX_DBG renderer didAdd fundxEye — corridor guide attached to world anchor")
+        let guide = buildCorridorGuide()
         guide.name = guideRootName
         node.addChildNode(guide)
+        self.corridorRoot = guide
     }
 
-    // Phase 1 guide: a ring marking the eye in 3D space + a world-axes gizmo so anchor placement and
-    // orientation stability are unmistakable during the on-device stability test. (Phase 2 adds the
-    // corridor funnel + target ring; the debug axes come out once the corridor lands.)
-    private func buildEyeGuide() -> SCNNode {
+    // Per-frame (render thread, safe for SceneKit mutation): steer the clinician onto the optical axis.
+    // Decompose the current camera position relative to the eye anchor into along-axis distance +
+    // lateral off-axis error, then recolour the corridor: green = on-axis at the working distance,
+    // amber = close-ish, dim = far off. Purely presentational; capture timing stays with the engine.
+    public func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        guard spatialMode, let anchor = eyeAnchor, let scn = arView,
+              let frame = scn.session.currentFrame, corridorRoot != nil else { return }
+        let A = anchor.transform
+        let anchorPos = simd_make_float3(A.columns.3.x, A.columns.3.y, A.columns.3.z)
+        let axis = simd_normalize(simd_make_float3(A.columns.2.x, A.columns.2.y, A.columns.2.z)) // eye -> camera
+        let C = frame.camera.transform.columns.3
+        let v = simd_make_float3(C.x, C.y, C.z) - anchorPos
+        let along = simd_dot(v, axis)                                   // standoff distance along the axis (m)
+        let lateral = simd_length(v - along * axis)                     // perpendicular off-axis error (m)
+        let distErr = along - workingDist
+        let onAxis = lateral < latTol
+        let atDist = abs(distErr) < distTol
+        let state = (onAxis && atDist) ? 2 : ((lateral < latTol * 2.2 && abs(distErr) < distTol * 2.2) ? 1 : 0)
+        if state == 2, !loggedAligned {
+            loggedAligned = true
+            dbg("FUNDX_DBG ALIGNED — on-axis \(String(format: "%.3f", lateral))m, standoff \(String(format: "%.3f", along))m")
+        }
+        guard state != lastAlignState else { return }                  // recolour only on a state change
+        lastAlignState = state
+        let color: UIColor = state == 2 ? .systemGreen
+                           : state == 1 ? .systemOrange
+                           : UIColor(white: 0.85, alpha: 0.9)
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.2
+        corridorRoot?.enumerateChildNodes { n, _ in
+            n.geometry?.materials.forEach { $0.diffuse.contents = color; $0.emission.contents = color }
+        }
+        SCNTransaction.commit()
+    }
+
+    // Phase 2 guide: the OPTICAL CORRIDOR. Concentric rings recede from the eye (anchor origin) out
+    // along local +Z (the optical axis, toward the camera), narrowing toward the eye so they read as a
+    // funnel converging on the pupil. A brighter TARGET gate ring sits at the working standoff — the
+    // clinician moves the phone until the rings look concentric (on-axis) and the target ring frames
+    // the view (right distance). Rings lie in the local XY plane (torus default axis Y -> rotate onto
+    // Z). All children are recoloured together by renderer(updateAtTime:) for the alignment feedback.
+    private func buildCorridorGuide() -> SCNNode {
         let root = SCNNode()
-        let ring = SCNTorus(ringRadius: 0.04, pipeRadius: 0.006)        // ~80 mm ring — big + obvious for the world-lock test
-        ring.materials = [guideMaterial()]
-        let ringNode = SCNNode(geometry: ring)
-        ringNode.eulerAngles.x = Float.pi / 2                           // face the phone (torus XZ-plane → XY)
-        root.addChildNode(ringNode)
-        root.addChildNode(axisNode(SCNVector3(0.12, 0, 0), .systemRed))    // X
-        root.addChildNode(axisNode(SCNVector3(0, 0.12, 0), .systemGreen))  // Y
-        root.addChildNode(axisNode(SCNVector3(0, 0, 0.12), .systemBlue))   // Z
+        // A small solid pip AT the eye so the pupil target is unambiguous even before alignment.
+        let pip = SCNSphere(radius: 0.006); pip.materials = [guideMaterial()]
+        root.addChildNode(SCNNode(geometry: pip))
+        // Funnel: rings from just in front of the eye out to the working distance, radius widening with z.
+        let zs: [Float] = [0.08, 0.16, 0.24, 0.32, workingDist]
+        let radii: [CGFloat] = [0.016, 0.022, 0.028, 0.036, 0.048]
+        for i in 0..<zs.count {
+            let isTarget = (i == zs.count - 1)
+            let torus = SCNTorus(ringRadius: radii[i], pipeRadius: isTarget ? 0.004 : 0.0025)
+            torus.materials = [guideMaterial()]
+            let n = SCNNode(geometry: torus)
+            n.eulerAngles.x = Float.pi / 2                             // torus axis Y -> align with local Z (faces down the axis)
+            n.position = SCNVector3(0, 0, zs[i])
+            if isTarget { n.name = "fundxTarget" }
+            root.addChildNode(n)
+        }
         return root
-    }
-
-    // A coloured axis rod from the anchor origin toward `end` (world-anchored debug gizmo).
-    // Rod length tracks |end| so it spans the full axis rather than a fixed stub.
-    private func axisNode(_ end: SCNVector3, _ color: UIColor) -> SCNNode {
-        let len = sqrt(end.x * end.x + end.y * end.y + end.z * end.z)
-        let rod = SCNCylinder(radius: 0.004, height: CGFloat(len))
-        let m = SCNMaterial(); m.diffuse.contents = color; m.emission.contents = color; m.lightingModel = .constant
-        rod.materials = [m]
-        let n = SCNNode(geometry: rod)
-        n.position = SCNVector3(end.x / 2, end.y / 2, end.z / 2)        // cylinder is centred; shift to midpoint
-        if end.x != 0 { n.eulerAngles.z = Float.pi / 2 }               // cylinder axis is Y → rotate onto X
-        else if end.z != 0 { n.eulerAngles.x = Float.pi / 2 }          // → rotate onto Z
-        return n
     }
 
     private func guideMaterial() -> SCNMaterial {
