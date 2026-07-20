@@ -64,7 +64,10 @@ _LEAD_MIN_INK_FRAC = 0.004        # a lead cell below this ink fraction is "miss
 # hough
 _HOUGH_VOTES = 150                # min collinear votes for a Hough line
 
-_HARD_CHECKS = ("blur", "resolution", "contrast", "glare", "cropping")
+# Hard checks REJECT; everything else WARNs. Cropping is intentionally SOFT: a border-ink heuristic
+# cannot distinguish a legitimately full-frame ECG (common) from a truly cropped one, so it must not
+# hard-block. True missing-lead loss is surfaced by the (soft) missingLeads check + layout detection.
+_HARD_CHECKS = ("blur", "resolution", "contrast", "glare")
 _CHECK_ORDER = ("blur", "rotation", "shadow", "resolution", "noise", "contrast",
                 "glare", "grid", "speedGain", "cropping", "missingLeads", "ood")
 

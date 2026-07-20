@@ -83,5 +83,11 @@ class ECGAnalysis(BaseModel):
     redFlag: RedFlag | None = None
     whatToVerify: str | None = None
     educationalRef: str | None = None
+    # Phase 7 advanced-pipeline outputs (all additive + optional; the iOS decoder ignores unknown fields).
+    qualityReport: dict | None = None       # QualityEngine.assess (image quality gate + per-check detail)
+    signalQuality: float | None = None      # 0..1 signal-usability score
+    consensus: dict | None = None           # evidence-fusion / consensus-engine result
+    explanations: list[dict] = Field(default_factory=list)  # per-finding explainability
+    calibrated: bool | None = None          # was the confidence calibrated (vs identity)
     # Provenance / audit (per README regulatory posture: model + content versions per analysis).
     modelVersions: dict[str, str] | None = None
