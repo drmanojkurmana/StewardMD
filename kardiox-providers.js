@@ -121,15 +121,18 @@
   // lands (M5), and library/learning use bundled content once M4 authors it. Always fully functional.
   function liveProviders(opts) {
     opts = opts || {};
+    var C = (typeof window !== "undefined") ? window.SMD_KARDIOX_CONTENT : null;
+    var content = opts.content || (C && C.ecgs) || [];
+    var cards = opts.cards || (C && C.flashcards ? C.flashcards() : []);
     var store = (typeof window !== "undefined" && window.SMD_KARDIOX_STORE && window.SMD_KARDIOX_STORE.create)
       ? window.SMD_KARDIOX_STORE.create() : mockEcgStore(opts.seedAnalyses);
     return {
       kind: "live",
-      analyzer: mockAnalyzer(),                 // → RemoteAnalyzer in M5 (provider swap, no view change)
+      analyzer: mockAnalyzer(),                 // → RemoteAnalyzer (SMD_KARDIOX_NET) once a backend is configured
       imageProcessor: mockImageProcessor(),
       ecgStore: store,                          // encrypted, on-device
-      library: mockLibrary(opts.content),       // → bundled 100-ECG content in M4
-      learning: mockLearning({ cards: opts.cards, library: opts.content })
+      library: mockLibrary(content),            // bundled 100-ECG content (M4)
+      learning: mockLearning({ cards: cards, library: content })
     };
   }
 
