@@ -22,6 +22,7 @@
   if (window.StewardRAG) return;
 
   var _ai = null, _initP = null, _rrf = null;
+  var _tokIdx = null, _uniqToks = null;   // instant nearest-KB resolver index (built in init)
   // Hybrid retrieval (flag smd_hybrid, default OFF). Vector arm = POST /api/retrieve
   // (Workers AI embed → Vectorize). Fully degradation-safe: flag off OR empty/failed
   // vector arm → identical to lexical-only.
@@ -184,6 +185,66 @@
     return out;
   }
 
+  // ── Instant nearest-KB resolver (deterministic; 0 tokens; offline/native-safe) ──────────
+  // On a routing MISS, match the query's distinctive tokens against every KB entry's name +
+  // alias tokens — exact first, then bounded edit-distance for typos/variants — and ground on
+  // the nearest entry under a STATED assumption instead of dead-ending to slow web research.
+  // Runs ONLY when the gate already found no lexical/semantic candidate, so it can never
+  // override a confident/assume decision; web stays the last resort when nothing is close.
+  function buildNameIndex(chunks) {
+    var byId = {}, tokIdx = {}, uniq = {};
+    (chunks || []).forEach(function (c) {
+      if (!c || !c.diseaseId) return;
+      var id = c.diseaseId; if (!byId[id]) byId[id] = {};
+      (String(c.diseaseName || "") + " " + String(c.aliases || "")).toLowerCase()
+        .replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).forEach(function (t) { if (t.length >= 4) byId[id][t] = 1; });
+    });
+    Object.keys(byId).forEach(function (id) {
+      Object.keys(byId[id]).forEach(function (t) { (tokIdx[t] = tokIdx[t] || []).push(id); if (t.length >= 5) uniq[t] = 1; });
+    });
+    _tokIdx = tokIdx; _uniqToks = Object.keys(uniq);
+  }
+  // Bounded Levenshtein: returns the edit distance, or max+1 as soon as the budget is blown.
+  function editWithin(a, b, max) {
+    var la = a.length, lb = b.length;
+    if (Math.abs(la - lb) > max) return max + 1;
+    var prev = []; for (var j = 0; j <= lb; j++) prev[j] = j;
+    for (var i = 1; i <= la; i++) {
+      var cur = [i], best = i;
+      for (var k = 1; k <= lb; k++) {
+        var cost = a.charCodeAt(i - 1) === b.charCodeAt(k - 1) ? 0 : 1;
+        cur[k] = Math.min(prev[k] + 1, cur[k - 1] + 1, prev[k - 1] + cost);
+        if (cur[k] < best) best = cur[k];
+      }
+      if (best > max) return max + 1;   // whole row over budget → prune
+      prev = cur;
+    }
+    return prev[lb];
+  }
+  // Typo tolerance scales with token length: short tokens are exact-only (fuzzing them is unsafe).
+  function fuzzThreshold(len) { return len >= 8 ? 2 : (len >= 5 ? 1 : 0); }
+  // Resolve distinctive query tokens to the nearest KB disease id, or null when nothing is close.
+  function fuzzyResolve(distinctive) {
+    if (!_tokIdx || !distinctive || !distinctive.length) return null;
+    var score = {};
+    distinctive.forEach(function (q) {
+      if (q.length < 4) return;
+      if (_tokIdx[q]) _tokIdx[q].forEach(function (id) { score[id] = (score[id] || 0) + 2; });   // exact = strong
+      var thr = fuzzThreshold(q.length); if (thr <= 0) return;
+      var bestTok = null, bestEd = thr + 1;
+      for (var i = 0; i < _uniqToks.length; i++) {
+        var t = _uniqToks[i];
+        if (Math.abs(t.length - q.length) > thr || (t === q)) continue;
+        var ed = editWithin(q, t, thr);
+        if (ed <= thr && ed < bestEd) { bestEd = ed; bestTok = t; if (ed === 1) break; }
+      }
+      if (bestTok) (_tokIdx[bestTok] || []).forEach(function (id) { score[id] = (score[id] || 0) + (bestEd === 1 ? 1.5 : 1); });
+    });
+    var bestId = null, best = 0;
+    Object.keys(score).forEach(function (id) { if (score[id] > best) { best = score[id]; bestId = id; } });
+    return (bestId && best >= 1.5) ? { id: bestId, score: best } : null;   // need one exact or one ed-1 fuzzy hit
+  }
+
   function init() {
     if (_initP) return _initP;
     _initP = (function () {
@@ -196,13 +257,15 @@
       }).then(function (mod) {
         var CORE = (window.KB_CORE && (window.KB_CORE.diseases || window.KB_CORE.byId)) || [];
         var diseases = {}; (Array.isArray(CORE) ? CORE : Object.values(CORE)).forEach(function (d) { if (d && d.id) diseases[d.id] = d; });
+        var _chunks = deriveChunks();
         var store = {
           diseases: diseases,
           treatments: (window.KB_RAG && window.KB_RAG.treatments) || {},
           policies: (window.KB_RAG && window.KB_RAG.policies) || {},
-          index: { chunks: deriveChunks() }
+          index: { chunks: _chunks }
         };
         _ai = mod.createStewardAI(store, { flags: { ai: true, ragRetrieval: true } });
+        buildNameIndex(_chunks);   // instant nearest-KB resolver index (typo/variant tolerance)
         _rrf = mod.rrf || null;   // hybrid fusion (available when smd_hybrid on)
         return true;
       }).catch(function (e) { _ai = null; return false; });
@@ -413,9 +476,22 @@
             nearest: candGc.name || candId, assume: { id: candId, name: candGc.name || candId },
             coverage: Math.round(chosen.coverage * 100) / 100, missing: chosen.missing };
         } else {
-          // topic genuinely not in the KB → drop the near-miss grounding so nothing wrong is described
-          grounding = []; lead = null; treatment = null; retrieved = [];
-          topicMatch = { matched: false, mode: "none", topic: distinctive.join(" ") || String(opts.question).trim(), nearest: (candGc && candGc.name) || candId || null };
+          // No lexical/semantic candidate. Before dead-ending to slow web research, try the
+          // deterministic nearest-KB resolver (typo/variant/old-name tolerance, 0 tokens) so
+          // messy input still gets a FAST verified answer under a stated assumption.
+          var fz = fuzzyResolve(distinctive);
+          var fzGc = fz ? trimGrounding(_ai.getGroundingContext(fz.id)) : null;
+          if (fzGc) {
+            grounding = [fzGc];
+            if (!lead) lead = { id: fz.id, name: fzGc.name || fz.id };
+            if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(fz.id, hospitalId); } catch (e) {} }
+            topicMatch = { matched: false, mode: "assume", topic: distinctive.join(" ") || String(opts.question).trim(),
+              nearest: fzGc.name || fz.id, assume: { id: fz.id, name: fzGc.name || fz.id }, resolver: "fuzzy" };
+          } else {
+            // topic genuinely not in the KB → drop the near-miss grounding so nothing wrong is described
+            grounding = []; lead = null; treatment = null; retrieved = [];
+            topicMatch = { matched: false, mode: "none", topic: distinctive.join(" ") || String(opts.question).trim(), nearest: (candGc && candGc.name) || candId || null };
+          }
         }
       }
 
