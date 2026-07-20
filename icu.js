@@ -3189,7 +3189,12 @@
       // PATIENT-scoped tools ONLY. Unit/app settings (Group mode, notification preferences, test
       // notification) now live on the unit Settings screen (bottom bar → Settings), so per-patient
       // actions and app-level settings are no longer mixed. Grouped: this patient · library · danger.
-      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "🧑") + ' This patient</div>' +
+      return (window.SMD_IS_NATIVE
+          ? '<div class="icu-card" style="border-color:var(--danger)"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("codeblue", "🫀") + ' Emergency</div>' +
+            '<p class="icu-doc-sub" style="margin:0 0 10px">Live CPR command center on your Apple Watch — compressions, rate, shocks, drugs &amp; ROSC.</p>' +
+            '<button class="icu-btn" data-icu-act="codeblue">' + ico("codeblue", "🫀") + ' Open Code Blue</button></div>'
+          : '') +
+        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "🧑") + ' This patient</div>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Patient details</button>' +
         '<button class="icu-btn ghost" data-icu-act="savept">' + ico("save", "💾") + ' Save / update this patient</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Ward Sync</button>' +
@@ -6916,6 +6921,7 @@
       case "conflict": { var parts = arg.split("|"); ICU.resolveConflict(parts[0], parts[1]); paint(); break; }
       case "dismissupdate": ICU.clearNewUpdate(); paint(); break;
       case "wardsync": try { if (window.openGHIS) openGHIS(); } catch (x) {} break;
+      case "codeblue": try { var cbp = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.WatchBridge; if (cbp && cbp.openCodeBlue) cbp.openCodeBlue(); } catch (x) {} break;
       case "autofetch": try { if (window.SMD_AUTOFETCH) SMD_AUTOFETCH.openManager((_raw.wardSync && _raw.wardSync.patientId) || "", (_raw.patient && _raw.patient.name) || ""); } catch (x) {} break;
       case "savept": savePatient(); break;
       case "patients": openRoster(); break;

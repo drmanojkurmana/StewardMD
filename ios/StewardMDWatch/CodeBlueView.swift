@@ -57,6 +57,12 @@ struct CodeBlueView: View {
         .digitalCrownRotation($crown)
         .onReceive(ticker) { _ in syncTick() }
         .onChange(of: scenePhase) { _, phase in if phase == .active { syncTick() } }
+        // Clear any orphaned cycle reminder from a prior session on entry; the
+        // repeating notification lives in the system but `running` is view-local.
+        .onAppear { if !running { ResusAlerts.cancel(["codeblue-cycle"]) } }
+        // Leaving the Code Blue screen ends the reminder — a code session is tied to
+        // this view being present, so the repeating alert must never outlive it.
+        .onDisappear { ResusAlerts.cancel(["codeblue-cycle"]) }
     }
 
     private var cprDashboard: some View {
