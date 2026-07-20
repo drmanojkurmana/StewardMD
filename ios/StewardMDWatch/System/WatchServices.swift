@@ -18,6 +18,7 @@ enum WatchServices {
     @MainActor static let labs = CriticalLabsModel(ackQueue: ackQueue)
     @MainActor static let watchlist = WatchlistModel()
     @MainActor static let tasks = TasksModel()
+    @MainActor static let calcs = CalcsModel()
 
     /// Running app version, for the min-version gate.
     static var appVersion: String {

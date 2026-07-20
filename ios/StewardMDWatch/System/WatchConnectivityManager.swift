@@ -28,6 +28,7 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         WatchServices.labs.ingest(store.loadCriticals())
         WatchServices.tasks.ingest(store.loadTasks())
         WatchServices.tasks.onAction = { [weak self] action in self?.sendTaskAction(action) }
+        WatchServices.calcs.set(store.loadCalcs())
         #if canImport(WatchConnectivity)
         guard WCSession.isSupported() else { return }
         WCSession.default.delegate = self
@@ -99,6 +100,10 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         }
         if let s = context["role"] as? String {
             role = s
+        }
+        if let d = context["calcDefs"] as? Data, let c = try? JSONDecoder().decode([RelayedCalc].self, from: d) {
+            store.saveCalcs(c)          // persist favorited calculators for offline use
+            WatchServices.calcs.set(c)
         }
         if let d = context["notifPrefs"] as? Data, let p = try? JSONDecoder().decode([String: Bool].self, from: d) {
             store.saveNotifPrefs(p)

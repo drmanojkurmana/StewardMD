@@ -16,6 +16,7 @@ struct StewardMDWatchApp: App {
     @ObservedObject private var labs = WatchServices.labs
     @ObservedObject private var watchlist = WatchServices.watchlist
     @ObservedObject private var tasks = WatchServices.tasks
+    @ObservedObject private var calcs = WatchServices.calcs
     @ObservedObject private var connectivity = WatchConnectivityManager.shared
     @Environment(\.scenePhase) private var scenePhase
 
@@ -29,6 +30,7 @@ struct StewardMDWatchApp: App {
             .environmentObject(favorites)
             .environmentObject(watchlist)
             .environmentObject(tasks)
+            .environmentObject(calcs)
             .environmentObject(router)
             .environmentObject(features)
             .preferredColorScheme(.dark)

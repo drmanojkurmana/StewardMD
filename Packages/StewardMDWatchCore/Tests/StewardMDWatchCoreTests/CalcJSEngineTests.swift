@@ -1,6 +1,7 @@
 import XCTest
 @testable import StewardMDWatchCore
 
+#if canImport(JavaScriptCore)
 @MainActor
 final class CalcJSEngineTests: XCTestCase {
 
@@ -47,3 +48,5 @@ final class CalcJSEngineTests: XCTestCase {
         XCTAssertNotNil(out.error)
     }
 }
+
+#endif

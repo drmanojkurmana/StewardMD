@@ -1,4 +1,5 @@
 import Foundation
+#if canImport(JavaScriptCore)
 import JavaScriptCore
 
 /// Runs a relayed calculator's `compute(v)` on the watch via JavaScriptCore, so
@@ -62,3 +63,5 @@ public final class CalcJSEngine {
                   .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
+
+#endif
