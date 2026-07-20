@@ -46,7 +46,17 @@ function r2Put(key, file, contentType) {
   if (DRY) { console.log(`  [dry] put ${key}`); return; }
   const a = ["r2", "object", "put", `${BUCKET}/${key}`, "--file", file, "--remote"];
   if (contentType) a.push("--content-type", contentType);
-  wrangler(a);
+  // R2 occasionally returns a transient 500 / connectivity blip on a single object; retry with
+  // backoff so one hiccup doesn't abort a 283-file release.
+  let lastErr;
+  for (let attempt = 1; attempt <= 6; attempt++) {
+    try { wrangler(a); return; }
+    catch (e) {
+      lastErr = e;
+      if (attempt < 6) { try { console.warn(`  r2 put retry ${attempt}/5 — ${key.slice(-12)}`); execFileSync("sleep", [String(attempt * 2)]); } catch (x) {} }
+    }
+  }
+  throw lastErr;
 }
 function r2GetJson(key) {
   if (DRY) return null;                     // dry-run stays fully offline (no wrangler/network)
