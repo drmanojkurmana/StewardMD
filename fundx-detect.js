@@ -381,7 +381,9 @@
         if (!nativeImg) nativeImg = new Image();
         var _VB = (typeof window !== "undefined") ? window.SMD_FUNDX_VISION : null;
         nativeBuf = (_VB && _VB.createCaptureBuffer) ? _VB.createCaptureBuffer({ max: NATIVE_BUFFER_MAX }) : null;
+        var firstFrameCb = null;   // watchdog: fires on the first native frame (session is alive)
         function onDepthFrame(fr) {
+          if (fr && firstFrameCb) { var _ff = firstFrameCb; firstFrameCb = null; try { _ff(); } catch (e) {} }
           if (!running || !fr || !fr.cameraImage || nativePending) return;
           nativePending = true;
           nativeImg.onload = function () {
@@ -406,12 +408,25 @@
           nativeImg.src = fr.cameraImage;
         }
         return Promise.resolve()
-          .then(function () { if (P.addListener) nativeSub = P.addListener("fundxDepthFrame", onDepthFrame); return P.start({ streamImage: true, gpuPreview: !!opts.gpuPreview }); })
+          .then(function () { if (P.addListener) nativeSub = P.addListener("fundxDepthFrame", onDepthFrame); return P.start({ streamImage: true, gpuPreview: !!opts.gpuPreview, spatialAr: !!opts.spatialAr }); })
           .then(function (res) {
             if (res && res.started === false) { try { if (nativeSub) Promise.resolve(nativeSub).then(function (h) { if (h && h.remove) h.remove(); }); } catch (e) {} nativeSub = null; throw new Error("native session: " + (res && res.reason)); }
             running = true;
             if (hub.sensors && hub.sensors.start) hub.sensors.start();     // IMU still fuses alongside
-            return { hub: hub, native: res };
+            // WATCHDOG (black-camera guard): resolve ONLY once the native session actually delivers a
+            // frame. If none arrives in time the native preview is dead (ARKit failed to start / no
+            // camera surface), so reject → the caller (startCamera) tears this down and falls back to
+            // the working getUserMedia pipeline. Prevents the silent black camera we hit on iOS.
+            return new Promise(function (resolve, reject) {
+              var settled = false;
+              var to = setTimeout(function () {
+                if (settled) return; settled = true; running = false;
+                try { if (nativeSub) Promise.resolve(nativeSub).then(function (h) { if (h && h.remove) h.remove(); }); } catch (e) {} nativeSub = null;
+                try { if (P.stop) P.stop(); } catch (e) {}
+                reject(new Error("native session: no frames within " + (opts.nativeFirstFrameMs || 2600) + "ms"));
+              }, opts.nativeFirstFrameMs || 2600);
+              firstFrameCb = function () { if (settled) return; settled = true; clearTimeout(to); resolve({ hub: hub, native: res }); };
+            });
           });
       },
       // Capture a best-frame burst: grab N full-res frames, score, return dataURLs + metrics.

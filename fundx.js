@@ -41,6 +41,7 @@
   function perfNow() { return (typeof performance !== "undefined" && performance.now) ? performance.now() : (typeof Date !== "undefined" ? Date.now() : 0); }
   var usingNative = false;   // depth mode: native (ARCore/ARKit) camera owns the pipeline
   var usingGpu = false;      // GPU preview: native camera surface behind a transparent WebView
+  var lastGuidePhase = "";   // spatial-AR: last phase pushed to the native SceneKit guide (change-gated)
   var devLive = { pipeline: null, confidence: null, fps: 0, frames: 0, lastT: 0, depthMm: null, contributions: null, perf: null };  // live dev telemetry
   var capturing = false, lastHapticState = "", scanSeq = 0, lastCoachArrow = null, lastCritical = false, lastCoachText = "", lastCoachTier = "", lastCoachDetail = "", lastStepKey = null;
 
@@ -804,6 +805,7 @@
         '<button class="fundx-set-row' + (flashOn() ? ' on' : '') + '" data-fx="setflash"><span class="fundx-set-rl"><b>Auto-flash during capture</b><span>Turns on the rear-camera light to illuminate the fundus while capturing. On by default (Android; iOS WebView has no torch control). Turn off if the reflection is too strong.</span></span>' + ric(flashOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<button class="fundx-set-row' + (autoCaptureOn() ? ' on' : '') + '" data-fx="setflag" data-k="smd_fundx_autocapture" data-def="1"><span class="fundx-set-rl"><b>Auto-capture</b><span>Capture automatically when a diagnostic-quality retinal image is held steady. Off = capture only with the manual button (manual shutter).</span></span>' + ric(autoCaptureOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<button class="fundx-set-row' + (arGuidanceOn() ? ' on' : '') + '" data-fx="setflag" data-k="smd_fundx_ar_guidance" data-def="1"><span class="fundx-set-rl"><b>AR guidance overlays</b><span>Arrows, alignment ring and gate chips over the camera. Off = a minimal camera + text coaching only.</span></span>' + ric(arGuidanceOn() ? "toggle_on" : "toggle_off") + '</button>' +
+        '<button class="fundx-set-row' + (spatialArOn() ? ' on' : '') + '" data-fx="setflag" data-k="smd_fundx_spatial_ar" data-def="0"><span class="fundx-set-rl"><b>3D AR corridor (beta)</b><span>True world-anchored ARKit guide (iOS + LiDAR). Off = the 2D overlay / flat ring. Experimental — under on-device tuning.</span></span>' + ric(spatialArOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<button class="fundx-set-row' + (sensorsOn() ? ' on' : '') + '" data-fx="setsensors"><span class="fundx-set-rl"><b>Motion sensor fusion</b><span>Fuses the phone motion sensors (accelerometer + gyroscope) with the camera to steady capture and improve timing. Falls back automatically when unavailable. Off by default.</span></span>' + ric(sensorsOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Diagnostics</span></div>' +
         '<button class="fundx-set-row' + (telOn() ? ' on' : '') + '" data-fx="settel"><span class="fundx-set-rl"><b>Acquisition telemetry (anonymous)</b><span>Local, no PHI — guidance steps, quality progression, capture time + outcome. For validation. Off by default.</span></span>' + ric(telOn() ? "toggle_on" : "toggle_off") + '</button>' +
@@ -829,6 +831,9 @@
   function depthOn() { try { var q = (location.search.match(/[?&]fundxdepth=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_depth") === "1"; } catch (e) { return false; } }
   // Full-res GPU camera preview (native GLSurfaceView / ARKit background behind a transparent WebView).
   function gpuPreviewOn() { try { var q = (location.search.match(/[?&]fundxgpu=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_gpu_preview") === "1"; } catch (e) { return false; } }
+  // TRUE 3D AR corridor: native SceneKit guide world-anchored to the eye via ARKit (needs the native
+  // depth pipeline + ARSCNView). Default OFF; ?fundxspatial=1 or the flag turns it on (iOS + ARKit).
+  function spatialArOn() { try { var q = (location.search.match(/[?&]fundxspatial=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_spatial_ar") === "1"; } catch (e) { return false; } }
   // Optical Corridor HUD (SVG spatial-AR overlay). Off (default) = the legacy flat ring — an instant,
   // no-deploy revert. Presentation only: consumes the engine, never gates capture.
   function corridorOn() { try { var q = (location.search.match(/[?&]fundxcorridor=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_corridor") === "1"; } catch (e) { return false; } }
@@ -1011,9 +1016,10 @@
     cam = Vd.makeCamera();
     var startOpts = { hub: (hub = Vd.makeHub()), analyzeEveryMs: 110, analyzeScale: 0.25, flash: flashOn() };
     var useNative = false;
-    try { useNative = depthOn() && !devSF("smd_fundx_dev_forcemono", false) && !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth); } catch (e) {}
+    try { useNative = (depthOn() || spatialArOn()) && !devSF("smd_fundx_dev_forcemono", false) && !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth); } catch (e) {}
     usingNative = useNative;
-    var gpuPreview = useNative && gpuPreviewOn();
+    var useSpatial = useNative && spatialArOn();                       // true 3D AR corridor (world-anchored SceneKit)
+    var gpuPreview = (useNative && gpuPreviewOn()) || useSpatial;      // spatial AR needs the ARSCNView camera background
     usingGpu = gpuPreview;
     var starter;
     if (gpuPreview) {
@@ -1023,7 +1029,7 @@
       // transparent so the native surface shows through. Falls back to getUserMedia on failure.
       try { document.documentElement.classList.add("fundx-gpu"); document.body.classList.add("fundx-gpu"); } catch (e) {}
       if (video) video.style.display = "none";
-      startOpts.gpuPreview = true;
+      startOpts.gpuPreview = true; startOpts.spatialAr = useSpatial;
       starter = cam.startNative(video, onFrame, startOpts).catch(function () {
         usingNative = false; usingGpu = false;
         try { document.documentElement.classList.remove("fundx-gpu"); document.body.classList.remove("fundx-gpu"); if (video) video.style.display = ""; } catch (x) {}
@@ -1075,6 +1081,14 @@
     if (fa.distanceMm != null) devLive.depthMm = fa.distanceMm;
     try { if (hub && hub.sensors && hub.sensors.contributions) devLive.contributions = hub.sensors.contributions(); } catch (e) {}
     var step = eng ? eng.observe(fa, fa.ts) : sm.step(fa, fa.ts);
+    // Spatial-AR fusion: push the engine's phase to the native SceneKit guide so the 3D corridor
+    // reflects the SAME readiness/gates as the rest of FundX. Change-gated (not every frame).
+    if (usingGpu && spatialArOn()) {
+      try {
+        var _ph = step.shouldCapture ? "locked" : ((step.readiness && step.readiness.overall > 0.4) ? "aligning" : "searching");
+        if (_ph !== lastGuidePhase) { lastGuidePhase = _ph; var _P = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.FundxDepth; if (_P && _P.updateGuide) _P.updateGuide({ phase: _ph, aligned: !!step.shouldCapture }); }
+      } catch (e) {}
+    }
     var _tD = perfNow();
     session.readinessTrace.push(Math.round((step.readiness.overall || 0) * 100));
     if (session.readinessTrace.length > 400) session.readinessTrace.shift();
