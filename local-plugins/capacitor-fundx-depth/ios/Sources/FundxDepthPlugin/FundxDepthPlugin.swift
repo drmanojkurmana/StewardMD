@@ -91,7 +91,11 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         let gpuPreview = call.getBool("gpuPreview", false) || spatial   // spatial AR needs the ARSCNView camera background
         streamImage = call.getBool("streamImage", true)
         analyzeEvery = max(1, call.getInt("analyzeEvery", 6))
-        self.spatialMode = spatial
+        // Engage the world-anchored guide whenever the ARSCNView camera preview is up (gpuPreview),
+        // NOT only when the JS sends the newer spatialAr flag. The shipped/cached JS already turns
+        // GPU preview on, so the 3D guide comes alive on a native rebuild without depending on any
+        // JS update reaching the WebView (the WebView aggressively caches JS; native updates reliably).
+        self.spatialMode = gpuPreview
         self.eyeAnchor = nil
         self.guidePhase = "searching"; self.guideAligned = false
         DispatchQueue.main.async {
@@ -207,8 +211,11 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         // Phase-1 test window: drop the anchor on ANY tracked surface (~5 cm–2.5 m) so the guide is
         // easy to see + verify for world-locking. (The clinical range tightens to the working distance
         // once the corridor + lens fusion land.)
-        if spatialMode, eyeAnchor == nil, case .normal = frame.camera.trackingState,
-           let meters = data["distanceMeters"] as? Double, meters > 0.05, meters < 2.5 {
+        if spatialMode, eyeAnchor == nil, case .normal = frame.camera.trackingState {
+            // Drop the anchor on the optical axis. Use the metric depth if it's in a sane range,
+            // else fall back to 0.4 m so the guide reliably appears even without a LiDAR return.
+            let d = data["distanceMeters"] as? Double
+            let meters = (d != nil && d! > 0.05 && d! < 5.0) ? d! : 0.4
             let fwd = simd_make_float3(-cx.columns.2.x, -cx.columns.2.y, -cx.columns.2.z)   // camera looks down -Z
             let camPos = simd_make_float3(cx.columns.3.x, cx.columns.3.y, cx.columns.3.z)
             let eyePos = camPos + fwd * Float(meters)
@@ -327,20 +334,22 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
     // corridor funnel + target ring; the debug axes come out once the corridor lands.)
     private func buildEyeGuide() -> SCNNode {
         let root = SCNNode()
-        let ring = SCNTorus(ringRadius: 0.011, pipeRadius: 0.0016)      // ~22 mm ring at the eye
+        let ring = SCNTorus(ringRadius: 0.04, pipeRadius: 0.006)        // ~80 mm ring — big + obvious for the world-lock test
         ring.materials = [guideMaterial()]
         let ringNode = SCNNode(geometry: ring)
         ringNode.eulerAngles.x = Float.pi / 2                           // face the phone (torus XZ-plane → XY)
         root.addChildNode(ringNode)
-        root.addChildNode(axisNode(SCNVector3(0.05, 0, 0), .systemRed))    // X
-        root.addChildNode(axisNode(SCNVector3(0, 0.05, 0), .systemGreen))  // Y
-        root.addChildNode(axisNode(SCNVector3(0, 0, 0.05), .systemBlue))   // Z
+        root.addChildNode(axisNode(SCNVector3(0.12, 0, 0), .systemRed))    // X
+        root.addChildNode(axisNode(SCNVector3(0, 0.12, 0), .systemGreen))  // Y
+        root.addChildNode(axisNode(SCNVector3(0, 0, 0.12), .systemBlue))   // Z
         return root
     }
 
-    // A 5 cm coloured axis rod from the anchor origin toward `end` (world-anchored debug gizmo).
+    // A coloured axis rod from the anchor origin toward `end` (world-anchored debug gizmo).
+    // Rod length tracks |end| so it spans the full axis rather than a fixed stub.
     private func axisNode(_ end: SCNVector3, _ color: UIColor) -> SCNNode {
-        let rod = SCNCylinder(radius: 0.0015, height: 0.05)
+        let len = sqrt(end.x * end.x + end.y * end.y + end.z * end.z)
+        let rod = SCNCylinder(radius: 0.004, height: CGFloat(len))
         let m = SCNMaterial(); m.diffuse.contents = color; m.emission.contents = color; m.lightingModel = .constant
         rod.materials = [m]
         let n = SCNNode(geometry: rod)
