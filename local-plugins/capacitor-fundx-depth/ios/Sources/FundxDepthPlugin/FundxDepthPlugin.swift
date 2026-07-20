@@ -265,6 +265,25 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             data["anchorPlaced"] = true
             dbg("FUNDX_DBG anchor PLACED at \(meters)m opaque=\(webViewOpaque) scnUp=\(arView != nil)")
         }
+        // Re-centre: if the clinician has swung well off the corridor (lost it) or moved past/too close
+        // to the eye, drop the anchor so it re-places centred on the next tracked frame — the guide
+        // reappears in view instead of stranded off-screen. Fine alignment stays world-locked (the
+        // thresholds are deliberately loose so normal steering never triggers a re-place).
+        if spatialMode, let a = eyeAnchor, case .normal = frame.camera.trackingState {
+            let A = a.transform
+            let ap = simd_make_float3(A.columns.3.x, A.columns.3.y, A.columns.3.z)
+            let ax = simd_normalize(simd_make_float3(A.columns.2.x, A.columns.2.y, A.columns.2.z))
+            let vv = simd_make_float3(cx.columns.3.x, cx.columns.3.y, cx.columns.3.z) - ap
+            let al = simd_dot(vv, ax)
+            let lat = simd_length(vv - al * ax)
+            if lat > 0.30 || al < 0.10 {
+                self.arSession?.remove(anchor: a)
+                self.eyeAnchor = nil
+                self.corridorRoot = nil
+                self.lastAlignState = -1
+                self.loggedAligned = false
+            }
+        }
         if eyeAnchor != nil { data["anchor"] = true }
         data["opaque"] = self.webViewOpaque       // HUD diagnostic: WebView transparent (camera can show through)?
         data["scnUp"] = (self.arView != nil)      // HUD diagnostic: ARSCNView present
@@ -413,20 +432,24 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
     // Z). All children are recoloured together by renderer(updateAtTime:) for the alignment feedback.
     private func buildCorridorGuide() -> SCNNode {
         let root = SCNNode()
-        // A small solid pip AT the eye so the pupil target is unambiguous even before alignment.
-        let pip = SCNSphere(radius: 0.006); pip.materials = [guideMaterial()]
+        // A small solid pip AT the eye (anchor origin) marks the pupil target.
+        let pip = SCNSphere(radius: 0.005); pip.materials = [guideMaterial()]
         root.addChildNode(SCNNode(geometry: pip))
-        // Funnel: rings from just in front of the eye out to the working distance, radius widening with z.
-        let zs: [Float] = [0.08, 0.16, 0.24, 0.32, workingDist]
-        let radii: [CGFloat] = [0.016, 0.022, 0.028, 0.036, 0.048]
+        // Funnel: rings receding from the eye toward the camera, STOPPING SHORT of the working
+        // distance (0.27 m of 0.40 m) so the nearest gate does not sit on top of the lens — that was
+        // what made the corridor fill the whole screen. Radii narrow toward the eye so perspective
+        // reads as a tunnel converging on the pupil; the outermost ring is the brighter "gate" the
+        // clinician frames the view with. Sizes tuned so the gate sits in the central ~half of the view.
+        let zs: [Float] = [0.06, 0.13, 0.20, 0.27]
+        let radii: [CGFloat] = [0.013, 0.019, 0.025, 0.031]
         for i in 0..<zs.count {
-            let isTarget = (i == zs.count - 1)
-            let torus = SCNTorus(ringRadius: radii[i], pipeRadius: isTarget ? 0.004 : 0.0025)
+            let isGate = (i == zs.count - 1)
+            let torus = SCNTorus(ringRadius: radii[i], pipeRadius: isGate ? 0.0035 : 0.0022)
             torus.materials = [guideMaterial()]
             let n = SCNNode(geometry: torus)
-            n.eulerAngles.x = Float.pi / 2                             // torus axis Y -> align with local Z (faces down the axis)
+            n.eulerAngles.x = Float.pi / 2                             // torus axis Y -> local Z (faces down the axis)
             n.position = SCNVector3(0, 0, zs[i])
-            if isTarget { n.name = "fundxTarget" }
+            if isGate { n.name = "fundxTarget" }
             root.addChildNode(n)
         }
         return root
