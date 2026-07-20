@@ -2098,6 +2098,13 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         .replace(/([a-z])\1{2,}/g, "$1$1")          // collapse 3+ repeats: heyyy→heyy, hellooo→helloo
         .replace(/\s+/g, " ").trim();
     }
+    // Normalise common txt-speak / typos so a casual follow-up ("wat iz da treatment doze?") is still
+    // recognised as a continuation of the current topic instead of dead-ending to a web search on a
+    // garbage token ("doze"). Only unambiguous non-clinical slang — applied ONLY in follow-up resolution.
+    var _MAIK_DESLANG = { iz: "is", da: "the", doze: "dose", pls: "please", plz: "please", ur: "your", wat: "what", abt: "about", nd: "and", hw: "how" };
+    function maikDeslang(s) {
+      return String(s || "").replace(/\b(iz|da|doze|pls|plz|ur|wat|abt|nd|hw)\b/gi, function (w) { return _MAIK_DESLANG[w.toLowerCase()] || w; });
+    }
     var MAIK_CASUAL = ["hi", "hii", "hey", "helo", "hello", "yo", "hiya", "sup", "namaste", "hai"];
     var MAIK_ACK = ["thanks", "thank", "thankyou", "thx", "ty", "ok", "okay", "k", "kk", "cool", "great", "nice", "got", "gotit", "fine", "alright", "sure", "yep", "yes", "no"];
     function maikRoute(q, active) {
@@ -2141,6 +2148,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     function maikResolveFollowup(q) {
       var t = _maikTopic; if (!t || !t.topic) return null;
       if (t.ts && (Date.now() - t.ts) > 30 * 60 * 1000) { _maikTopic = null; return null; }   // session continuity only
+      q = maikDeslang(q);   // "wat iz da treatment doze?" → "what is the treatment dose?" so the branches below match
       var n = maikNorm(q), wc = n.split(" ").filter(Boolean).length;
       if (/(in (more )?detail|more detail|detailed answer|full(er)? answer|elaborate|explain (more|further)|go on|tell me more|in depth)/.test(n) || /^(more|detail|details|elaborate|expand|continue)\b/.test(n)) {
         return { question: "Provide a detailed, complete clinical answer on the management of " + t.topic + ".", depth: "detailed", topic: t.topic, retrieval: t.topic + " detailed management" };
