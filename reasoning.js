@@ -3871,7 +3871,13 @@
     research: function (question) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       var q = String(question || "").slice(0, 500); if (!q) return Promise.resolve({ error: "no-question" });
-      return aiHeaders().then(function (h) { return fetch(b + "/research", { method: "POST", headers: h, body: JSON.stringify({ question: q }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      // Web research does an extra Google-grounding round-trip so it can run longer than a plain
+      // explain — but it MUST still be bounded, or a stalled /research (Gemini grounding hang, flaky
+      // network) leaves the "Researching the web…" bubble spinning forever. raceTimeout, not an
+      // AbortController: on native CapacitorHttp proxies fetch and ignores AbortController, so the
+      // Promise.race guard is the only reliable timeout there (same reason explainGrounded uses it).
+      var p = aiHeaders().then(function (h) { return fetch(b + "/research", { method: "POST", headers: h, body: JSON.stringify({ question: q }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return raceTimeout(p, 45000, { error: "timeout" });
     },
     // Cloud extraction from OCR TEXT ONLY (never an image). POSTs the scrubbed text to
     // /api/ai/vision → { kind, fields }. 429/offline/off are surfaced as { error }.
