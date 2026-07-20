@@ -2213,6 +2213,13 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         }
         try { scroll(); } catch (e) {}
         try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+      }).catch(function () {
+        // research() bounds itself (raceTimeout → {error}) so this is belt-and-suspenders: if it
+        // ever rejects/throws, still clear the spinner and fail gracefully rather than hang forever.
+        if (busy) busy.remove();
+        container.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now. Please verify against a reference source.</div>');
+        try { scroll(); } catch (e) {}
+        try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
       });
     }
     function maikWebChipEl(q) {

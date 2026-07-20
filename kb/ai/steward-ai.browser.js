@@ -72,6 +72,11 @@
   var SMD_ALIASES = {
     acs: "mi stemi nstemi angina acs coronary infarction heart attack heartattack",
     acute_infectious_diarrheal_diseases_and: "diarrhea diarrhoea loose motion loose motions loose stool loose stools gastroenteritis dysentery watery stools",
+    // C. difficile is indexed under its 2016 genus rename "Clostridioides"; clinicians still
+    // type the old genus "Clostridium", the abbreviations "c diff"/"cdiff", and the classic
+    // presentation "pseudomembranous colitis" — none of which match "Clostridioides" in the body
+    // text, so without these aliases the query mis-routed to web / to a wrong colitis entry.
+    C_DIFF: "clostridium clostridioides difficile cdiff diff pseudomembranous colitis",
     aortic_dissection: "tearing ripping interscapular dissection",
     atrial_fib: "af afib rvr palpitations arrhythmia fibrillation",
     hypoglycemia: "hypo hypoglycaemia neuroglycopenia",
@@ -187,7 +192,7 @@
       return kbReady.then(function () {
         return !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
       }).then(function () {
-        return import("/kb/ai/interface.mjs?v=gold973");
+        return import("/kb/ai/interface.mjs?v=gold1010");
       }).then(function (mod) {
         var CORE = (window.KB_CORE && (window.KB_CORE.diseases || window.KB_CORE.byId)) || [];
         var diseases = {}; (Array.isArray(CORE) ? CORE : Object.values(CORE)).forEach(function (d) { if (d && d.id) diseases[d.id] = d; });

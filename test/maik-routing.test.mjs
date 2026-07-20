@@ -57,6 +57,16 @@ await expect("heart attack treatment", /coronary|myocardial|ischemic heart/i, "F
 await expect("AF treatment", /atrial fib/i, "FIX 'AF treatment' → atrial fibrillation");
 await expect("loose motions treatment", /diarrhea|diarrhoea|dysentery/i, "FIX 'loose motions' → acute diarrhoea (lay-term alias)");
 
+// --- FIXES: C. difficile old-genus / lay / abbreviated forms (KB indexes it as "Clostridioides",
+//     so "Clostridium"/"c diff"/"cdiff"/"pseudomembranous colitis" mis-routed to web / wrong colitis) ---
+await expect("what is clostridium", /difficile|clostridioides/i, "FIX 'clostridium' (old genus) → C. difficile");
+await expect("c diff", /difficile|clostridioides/i, "FIX 'c diff' (abbrev) → C. difficile");
+await expect("cdiff treatment", /difficile|clostridioides/i, "FIX 'cdiff' → C. difficile");
+await expect("pseudomembranous colitis", /difficile|clostridioides/i, "FIX 'pseudomembranous colitis' → C. difficile (was Ischaemic colitis)");
+
+// --- SAFE: the C_DIFF alias must NOT hijack a plain diarrhoea query ---
+await forbid("diarrhoea treatment", /difficile|clostridioides/i, "SAFE plain diarrhoea NOT hijacked to C. difficile");
+
 // --- SAFE: a lone body-only hit must NOT confidently ground a wrong disease ---
 await forbid("high fever what to do", /tick|relapsing/i, "SAFE 'high fever what to do' NOT grounded on Tick-borne relapsing fever");
 
@@ -73,6 +83,10 @@ const iface = fs.readFileSync(join(ROOT, "kb/ai/interface.mjs"), "utf8");
 ok(/KEEP_SHORT/.test(iface) && /"mi"/.test(iface) && /"af"/.test(iface) && /KEEP_SHORT\.has\(w\)/.test(iface), "tokenize keeps {mi,af}");
 ok(/heart attack/.test(src) && /loose motion/.test(src), "SMD_ALIASES add lay terms (heart attack, loose motions)");
 ok(/aliasHit/.test(src) && /nameToksAll \|\| nameHit \|\| aliasHit/.test(src), "gate confidence is name/alias-aware (no lone body-cov)");
+ok(/C_DIFF\s*:/.test(src) && /clostridium/.test(src) && /pseudomembranous/.test(src), "SMD_ALIASES has C_DIFF (clostridium/cdiff/pseudomembranous)");
+ok(/toks: tokenize\([^)]*c\.aliases/.test(iface), "aliases are retrievable — folded into the lexical toks bag (not just nameToks)");
+const reasoning = fs.readFileSync(join(ROOT, "reasoning.js"), "utf8");
+ok(/research:\s*function[\s\S]{0,1400}?raceTimeout\(/.test(reasoning), "web research is timeout-bounded (raceTimeout) so the spinner can't hang forever");
 
 console.log(fails === 0 ? "\nALL PASS — MaiK routes short/lay queries correctly" : `\n${fails} FAILED`);
 process.exit(fails === 0 ? 0 : 1);
