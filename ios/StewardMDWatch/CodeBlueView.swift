@@ -37,47 +37,28 @@ struct CodeBlueView: View {
                 Text(model.elapsedLabel)
                     .font(.system(size: 40, weight: .bold, design: .rounded))
                     .monospacedDigit().foregroundStyle(SMDPalette.text1.color)
-                Text("cycle \(model.cycle) · rhythm in \(model.rhythmCountdownLabel)")
-                    .font(.caption2).foregroundStyle(SMDPalette.text2.color)
 
-                if running { cprDashboard }
+                // Live tools show only while a code runs — keeps the idle screen glanceable.
+                if running {
+                    Text("cycle \(model.cycle) · rhythm in \(model.rhythmCountdownLabel)")
+                        .font(.caption2).foregroundStyle(SMDPalette.text2.color)
+                    cprDashboard
+                    nextDrugCard
+                    drugButtons
+                }
 
-                nextDrugCard
-                drugButtons
                 startEndButton
 
-                if let s = summary { summaryLine(s) }
+                if let s = summary, !running { summaryLine(s) }
 
-                if !running && !model.events.isEmpty {
-                    Button("Reset") {
-                        model.reset()
-                        summary = nil
-                        ResusAlerts.cancel(["codeblue-cycle"])
-                        WatchConnectivityManager.shared.sendCodeBlueReset()
-                        HapticManager.play(.success)
-                    }
-                    .buttonStyle(.bordered)
-                    .tint(SMDPalette.text2.color)
-                    .accessibilityHint("Deletes this code's records on the watch and iPhone")
-                }
+                resetButton      // always visible (design request) — aborts a running code + clears
+
                 Text(CodeSummary.disclaimerText)
                     .font(.system(size: 10)).foregroundStyle(SMDPalette.text2.color)
                     .multilineTextAlignment(.center)
                     .accessibilityLabel("Motion-based estimates. Not a measure of CPR quality or depth.")
 
-                // DEV: capture the raw motion trace to tune the detector (prints to console).
-                Button(captureOn ? "◉ Capturing…" : "○ Capture trace (dev)") {
-                    captureOn.toggle()
-                    if captureOn { CaptureLog.shared.begin(); captureNote = nil }
-                    else { captureNote = CaptureLog.shared.end(appCount: model.compressionCount) }
-                }
-                .font(.system(size: 11))
-                .buttonStyle(.bordered)
-                .tint(captureOn ? SMDPalette.critical.color : SMDPalette.text2.color)
-                if let note = captureNote {
-                    Text(note).font(.system(size: 9)).foregroundStyle(SMDPalette.text2.color)
-                        .multilineTextAlignment(.center)
-                }
+                captureControls
             }
             .padding(SMDSpacing.screenMargin)
         }
@@ -182,6 +163,41 @@ struct CodeBlueView: View {
     private func summaryLine(_ s: CodeSummary) -> some View {
         Text("Duration \(s.durationLabel) · \(s.totalCompressions) comp · ~\(s.averageRateCPM)/min · \(s.shockCount) shock\(s.rosc ? " · ROSC ✓" : "")")
             .font(.caption2).foregroundStyle(SMDPalette.text2.color)
+    }
+
+    /// Always-visible Reset: aborts a running code (stops sensors), clears the watch
+    /// timeline/counts, and tells the iPhone to clear its records too.
+    private var resetButton: some View {
+        Button("Reset") {
+            running = false
+            ResusAlerts.cancel(["codeblue-cycle"])
+            model.reset()
+            summary = nil
+            captureOn = false
+            WatchConnectivityManager.shared.sendCodeBlueReset()
+            HapticManager.play(.success)
+        }
+        .buttonStyle(.bordered)
+        .tint(SMDPalette.text2.color)
+        .font(.caption)
+        .accessibilityHint("Stops and deletes this code's records on the watch and iPhone")
+    }
+
+    /// DEV: capture the raw motion trace to tune the detector (prints to console).
+    private var captureControls: some View {
+        VStack(spacing: 2) {
+            Button(captureOn ? "◉ Capturing…" : "○ Capture trace (dev)") {
+                captureOn.toggle()
+                if captureOn { CaptureLog.shared.begin(); captureNote = nil }
+                else { captureNote = CaptureLog.shared.end(appCount: model.compressionCount) }
+            }
+            .font(.system(size: 11)).buttonStyle(.bordered)
+            .tint(captureOn ? SMDPalette.critical.color : SMDPalette.text2.color)
+            if let note = captureNote {
+                Text(note).font(.system(size: 9)).foregroundStyle(SMDPalette.text2.color)
+                    .multilineTextAlignment(.center)
+            }
+        }
     }
 }
 

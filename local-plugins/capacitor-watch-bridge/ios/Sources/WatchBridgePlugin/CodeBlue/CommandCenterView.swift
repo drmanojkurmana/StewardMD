@@ -8,6 +8,7 @@ struct CommandCenterView: View {
     var onExport: (String) -> Void = { _ in }
     var onClose: () -> Void = {}
     @State private var showShare = false
+    @State private var showClearConfirm = false
 
     private var s: CodeBlueState { model.state }
 
@@ -29,10 +30,22 @@ struct CommandCenterView: View {
             }
             .background(Color.black.ignoresSafeArea())
             .navigationTitle("Code Blue")
-            .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Close", action: onClose) } }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) { Button("Close", action: onClose) }
+                ToolbarItem(placement: .primaryAction) {
+                    Button(role: .destructive) { showClearConfirm = true } label: {
+                        Label("Reset", systemImage: "trash")
+                    }
+                }
+            }
         }
         .preferredColorScheme(.dark)
         .sheet(isPresented: $showShare) { ShareSheet(text: model.summary().formattedDetail()) }
+        .confirmationDialog("Clear all Code Blue records on this iPhone?",
+                            isPresented: $showClearConfirm, titleVisibility: .visible) {
+            Button("Clear records", role: .destructive) { model.clearLocal() }
+            Button("Cancel", role: .cancel) {}
+        }
     }
 
     private var connectionRow: some View {
@@ -116,9 +129,6 @@ struct CommandCenterView: View {
             }.buttonStyle(.borderedProminent).tint(.red)
             Button { showShare = true } label: { Label("Share…", systemImage: "square.and.arrow.up").frame(maxWidth: .infinity) }
                 .buttonStyle(.bordered)
-            Button(role: .destructive) { model.clearLocal() } label: {
-                Label("Clear records", systemImage: "trash").frame(maxWidth: .infinity)
-            }.buttonStyle(.bordered).tint(.secondary)
         }.padding().background(Color.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 16))
     }
 
