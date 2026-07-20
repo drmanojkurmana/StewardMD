@@ -67,6 +67,11 @@ class Settings(BaseSettings):
     rate_limit_per_min: int = 0
     rate_limit_burst: int = 20
 
+    # ── Phase 7 advanced subsystems (feature-flagged; all additive, none enabled for end users) ──────
+    calibration_temperature: float = 1.0     # 1.0 = identity (uncalibrated); fit + set after validation
+    enable_consensus_fusion: bool = True     # run the evidence-fusion/consensus engine in the pipeline
+    enable_explainability: bool = True       # attach per-finding explanations to the report
+
     # ── Rhythm model (stages 6/7/9, TorchECG) — ship NO weights. Empty path → provider raises
     #    UpstreamUnavailable (never fakes a label). A validated checkpoint is required to enable.
     rhythm_model_path: str = ""
