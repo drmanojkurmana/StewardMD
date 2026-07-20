@@ -2118,10 +2118,19 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
         || /^(hello|hey|hi)\b/.test(n) || /^good (morning|afternoon|evening|night)\b/.test(n) || /^how (are|r) (you|u)\b/.test(n) || /^how'?s it going\b/.test(n) || /^whats up\b|^what'?s up\b/.test(n);
       var ackHit = isShort && MAIK_ACK.some(function (w) { return toks.indexOf(w) >= 0 || maikLev(first, w) <= 1; });
       var byeHit = isShort && /^(bye|goodbye|see ya|cya|good night)\b/.test(n);
+      // A greeting is only "casual" when the message is essentially JUST the greeting. If a real
+      // question follows it ("hi rx of uti", "hey dose of atropine"), answer that instead of the
+      // scripted hello. (The old guard was a narrow keyword allow-list that missed rx/uti and most
+      // disease names, so "hi <anything clinical>" wrongly got the canned reply.)
+      var afterGreet = n
+        .replace(/^(hi+|hey+|hello|helo|yo|hiya|sup|namaste|hai|greetings|good (morning|afternoon|evening|night))\b/i, "")
+        .replace(/^\s*(there|doc|doctor|team|everyone|all|maik|sir|ma'?am|maam)\b/i, "")
+        .replace(/[\s,!.?]+/g, " ").trim();
+      var greetOnly = afterGreet.split(" ").filter(function (w) { return w.length >= 2 && MAIK_CASUAL.indexOf(w) < 0; }).length === 0;
       if (isShort && /how (are|r) (you|u)/.test(n)) return { kind: "casual", reply: "I’m well, thank you. I’m here to support clinical questions, drug information, calculations, or patient assessment. What would you like to discuss?" };
       if (byeHit) return { kind: "casual", reply: "Goodbye — StewardMD is here whenever you need clinical support." };
       if (isShort && /(thanks|thank you|thankyou|thx|^ty\b)/.test(n)) return { kind: "casual", reply: "You’re welcome. Let me know if you want to review a clinical topic or assess a patient." };
-      if (casualHit && isShort && !/(treat|manage|dose|sign|symptom|approach|explain|what is|whats|difference|poison|fever|pain|shock|dka|patient)/.test(n)) return { kind: "casual", reply: "Hello. I can help with clinical knowledge, drug information, calculators, or a patient assessment. What would you like to discuss?" };
+      if (casualHit && isShort && greetOnly) return { kind: "casual", reply: "Hello. I can help with clinical knowledge, drug information, calculators, or a patient assessment. What would you like to discuss?" };
       if (ackHit && !/(treat|manage|dose|sign|approach|explain|patient|what|how|why|which)/.test(n)) return { kind: "casual", reply: "Sure — let me know if you’d like to review a clinical topic, look up a drug, or assess a patient." };
       // B product/help
       if (/what (can|do) you do|what is maik|who are you|how (do i|to) use|how (do i|to) start|how does this work|where('?s| is)? (the )?(drug|calculator|calc|ward|icu|dx)/.test(n)) return { kind: "help" };
