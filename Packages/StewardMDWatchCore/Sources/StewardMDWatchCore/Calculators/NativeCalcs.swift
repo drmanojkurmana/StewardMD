@@ -118,6 +118,90 @@ public enum NativeCalcCatalog {
             let s = [flag(v, "conf"), flag(v, "urea"), flag(v, "rr"), flag(v, "bp"), flag(v, "age")].filter { $0 }.count
             let band = s <= 1 ? "Low — consider outpatient" : (s == 2 ? "Moderate — consider admission" : "Severe — admit; assess ICU")
             return CalcOutput(value: "\(s)", unit: "/5", interp: band, error: nil)
+        },
+
+        NativeCalc(id: "wellsdvt", title: "Wells score (DVT)", category: "Haematology",
+                   inputs: [chk("cancer", "Active cancer"), chk("immob", "Paralysis/paresis or recent immobilisation"),
+                            chk("bed", "Bedridden >3d or major surgery <12wk"), chk("tender", "Tenderness along deep veins"),
+                            chk("swell", "Entire leg swollen"), chk("calf", "Calf >3cm larger than other"),
+                            chk("edema", "Pitting oedema (symptomatic leg)"), chk("collateral", "Collateral superficial veins"),
+                            chk("priordvt", "Previously documented DVT"), chk("altdx", "Alternative dx as likely (−2)")]) { v in
+            var s = 0
+            for k in ["cancer", "immob", "bed", "tender", "swell", "calf", "edema", "collateral", "priordvt"] where flag(v, k) { s += 1 }
+            if flag(v, "altdx") { s -= 2 }
+            let band = s >= 3 ? "High probability" : (s >= 1 ? "Moderate" : "Low probability")
+            return CalcOutput(value: "\(s)", unit: "points", interp: band, error: nil)
+        },
+
+        NativeCalc(id: "wellspe", title: "Wells score (PE)", category: "Respiratory",
+                   inputs: [chk("dvt", "Clinical signs of DVT (+3)"), chk("alt", "PE most likely dx (+3)"),
+                            chk("hr", "HR >100 (+1.5)"), chk("immob", "Immobilisation/surgery ≤4wk (+1.5)"),
+                            chk("prior", "Previous DVT/PE (+1.5)"), chk("hemop", "Haemoptysis (+1)"), chk("malig", "Malignancy (+1)")]) { v in
+            var s = 0.0
+            if flag(v, "dvt") { s += 3 }; if flag(v, "alt") { s += 3 }; if flag(v, "hr") { s += 1.5 }
+            if flag(v, "immob") { s += 1.5 }; if flag(v, "prior") { s += 1.5 }; if flag(v, "hemop") { s += 1 }; if flag(v, "malig") { s += 1 }
+            let three = s > 6 ? "High" : (s >= 2 ? "Moderate" : "Low")
+            let two = s > 4 ? "PE likely" : "PE unlikely"
+            return CalcOutput(value: String(format: "%g", s), unit: "points", interp: "\(three) (3-tier) · \(two) (2-tier)", error: nil)
+        },
+
+        NativeCalc(id: "chadsvasc", title: "CHA₂DS₂-VASc", category: "Cardiology",
+                   inputs: [n("age", "Age", unit: "yrs", def: 65), chk("female", "Female"), chk("chf", "CHF / LV dysfunction"),
+                            chk("htn", "Hypertension"), chk("dm", "Diabetes"), chk("stroke", "Stroke/TIA/TE (+2)"), chk("vasc", "Vascular disease")]) { v in
+            guard let age = num(v, "age") else { return need() }
+            var s = 0
+            if age >= 75 { s += 2 } else if age >= 65 { s += 1 }
+            if flag(v, "female") { s += 1 }; if flag(v, "chf") { s += 1 }; if flag(v, "htn") { s += 1 }
+            if flag(v, "dm") { s += 1 }; if flag(v, "stroke") { s += 2 }; if flag(v, "vasc") { s += 1 }
+            let band = s == 0 ? "Low — no anticoagulation" : (s == 1 ? "Consider anticoagulation" : "Anticoagulation recommended")
+            return CalcOutput(value: "\(s)", unit: "points", interp: band, error: nil)
+        },
+
+        NativeCalc(id: "hasbled", title: "HAS-BLED", category: "Cardiology",
+                   inputs: [chk("htn", "Uncontrolled HTN (SBP >160)"), chk("renal", "Abnormal renal function"),
+                            chk("liver", "Abnormal liver function"), chk("stroke", "Stroke history"), chk("bleed", "Bleeding history/predisposition"),
+                            chk("inr", "Labile INR"), chk("elderly", "Age >65"), chk("drugs", "Antiplatelet / NSAID"), chk("alcohol", "Alcohol ≥8 units/wk")]) { v in
+            var s = 0
+            for k in ["htn", "renal", "liver", "stroke", "bleed", "inr", "elderly", "drugs", "alcohol"] where flag(v, k) { s += 1 }
+            return CalcOutput(value: "\(s)", unit: "points", interp: s >= 3 ? "High bleeding risk — caution + review" : "Lower risk", error: nil)
+        },
+
+        NativeCalc(id: "parkland", title: "Parkland formula (burns)", category: "Emergency",
+                   inputs: [n("wt", "Weight", unit: "kg", def: 70), n("tbsa", "TBSA burned", unit: "%", def: 20)]) { v in
+            guard let wt = num(v, "wt"), let tbsa = num(v, "tbsa"), wt > 0, tbsa > 0 else { return need() }
+            let total = 4 * wt * tbsa
+            return CalcOutput(value: String(Int(total.rounded())), unit: "mL / 24h",
+                              interp: "Give half (\(Int((total / 2).rounded())) mL) in the first 8h from the burn, rest over 16h. Lactated Ringer's.", error: nil)
+        },
+
+        NativeCalc(id: "ibw", title: "Ideal body weight (Devine)", category: "General",
+                   inputs: [n("ht", "Height", unit: "cm", def: 170), chk("female", "Female")]) { v in
+            guard let ht = num(v, "ht"), ht > 0 else { return need() }
+            let inches = ht / 2.54
+            let base = flag(v, "female") ? 45.5 : 50.0
+            let ibw = base + 2.3 * max(0, inches - 60)
+            return CalcOutput(value: String(format: "%.1f", ibw), unit: "kg", interp: "Devine formula", error: nil)
+        },
+
+        NativeCalc(id: "maint421", title: "Maintenance fluids (4-2-1)", category: "General",
+                   inputs: [n("wt", "Weight", unit: "kg", def: 20)]) { v in
+            guard let wt = num(v, "wt"), wt > 0 else { return need() }
+            var rate = min(wt, 10) * 4
+            if wt > 10 { rate += min(wt - 10, 10) * 2 }
+            if wt > 20 { rate += (wt - 20) * 1 }
+            return CalcOutput(value: String(Int(rate.rounded())), unit: "mL/h",
+                              interp: "Holliday-Segar; daily ≈ \(Int((rate * 24).rounded())) mL", error: nil)
+        },
+
+        NativeCalc(id: "aagrad", title: "A–a oxygen gradient", category: "Respiratory",
+                   inputs: [n("fio2", "FiO₂", unit: "%", def: 21), n("pao2", "PaO₂", unit: "mmHg", def: 90),
+                            n("paco2", "PaCO₂", unit: "mmHg", def: 40), n("age", "Age", unit: "yrs", def: 40)]) { v in
+            guard let fio2 = num(v, "fio2"), let pao2 = num(v, "pao2"), let paco2 = num(v, "paco2") else { return need() }
+            let pAO2 = (fio2 / 100) * (760 - 47) - paco2 / 0.8
+            let aa = pAO2 - pao2
+            let expected = (num(v, "age") ?? 40) / 4 + 4
+            return CalcOutput(value: String(Int(aa.rounded())), unit: "mmHg",
+                              interp: aa > expected ? "Raised (expected ≈\(Int(expected.rounded()))) — V/Q mismatch, shunt or diffusion defect" : "Normal (≈\(Int(expected.rounded())))", error: nil)
         }
     ]
 
