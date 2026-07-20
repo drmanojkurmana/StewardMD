@@ -19,4 +19,32 @@ public final class WatchlistModel: ObservableObject {
     }
 
     public var sickest: WatchlistEntry? { entries.first }
+
+    /// One patient in the list per shared unit, so the UI can offer unit tabs.
+    public struct UnitGroup: Identifiable, Sendable, Equatable {
+        public let id: String            // unit name (== tab label)
+        public let kind: String?         // "icu" | "ward" | nil
+        public let entries: [WatchlistEntry]
+    }
+
+    /// Patients grouped by unit (severity order preserved within each), ordered
+    /// ICU units first, then wards, then any untagged ("Current"). Empty when no
+    /// patients; a single group when only one unit is present (no tabs needed).
+    public var unitGroups: [UnitGroup] {
+        var order: [String] = []
+        var kinds: [String: String?] = [:]
+        var buckets: [String: [WatchlistEntry]] = [:]
+        for e in entries {
+            let u = (e.unit?.isEmpty == false ? e.unit! : nil) ?? "Current"
+            if buckets[u] == nil { buckets[u] = []; order.append(u); kinds[u] = e.unitKind }
+            buckets[u, default: []].append(e)
+        }
+        func rank(_ k: String?) -> Int { k == "icu" ? 0 : (k == "ward" ? 1 : 2) }
+        return order
+            .sorted { a, b in
+                let ra = rank(kinds[a] ?? nil), rb = rank(kinds[b] ?? nil)
+                return ra != rb ? ra < rb : a < b
+            }
+            .map { UnitGroup(id: $0, kind: kinds[$0] ?? nil, entries: buckets[$0] ?? []) }
+    }
 }

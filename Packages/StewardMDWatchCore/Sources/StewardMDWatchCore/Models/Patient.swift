@@ -12,12 +12,18 @@ public struct WatchlistEntry: Codable, Sendable, Identifiable, Equatable, Hashab
     /// Latest vitals for the patient-glance detail (relayed from the phone's ICU
     /// state). Nil when unknown (e.g. a GHIS-worklist-only patient).
     public let vitals: [Vital]?
+    /// The shared unit this patient belongs to (name, e.g. "ICU" / "Gastro ward")
+    /// and its kind ("icu" | "ward"), so the watch can tab by unit. Nil for the
+    /// currently-open / local patient with no unit.
+    public let unit: String?
+    public let unitKind: String?
 
     public init(id: String, name: String, bed: String?, news2: Int?, flag: String?,
-                updatedAt: Double?, vitals: [Vital]? = nil) {
+                updatedAt: Double?, vitals: [Vital]? = nil,
+                unit: String? = nil, unitKind: String? = nil) {
         self.id = id; self.name = name; self.bed = bed
         self.news2 = news2; self.flag = flag; self.updatedAt = updatedAt
-        self.vitals = vitals
+        self.vitals = vitals; self.unit = unit; self.unitKind = unitKind
     }
 
     /// NEWS2 → severity band (design colors): >=7 red, 5–6 amber, else green.

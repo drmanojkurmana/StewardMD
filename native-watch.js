@@ -43,7 +43,7 @@
   // watch mirrors "ICU and my ward" — not just the one open unit. Reads only the
   // PUBLIC SMD_ICU_GROUPS API (never icu.js internals). Re-publishes (debounced)
   // on any snapshot change.
-  var _grp = { groups: [], patients: {}, tasks: {}, role: {}, subs: [], ptSubs: {} };
+  var _grp = { groups: [], patients: {}, tasks: {}, role: {}, meta: {}, subs: [], ptSubs: {} };
   var _grpMax = 6;            // cap live units
   var _grpPtMax = 40;         // cap total patients we hold task listeners for
   function groupsApi() { try { return window.SMD_ICU_GROUPS || null; } catch (e) { return null; } }
@@ -62,7 +62,11 @@
     _grp.subs.push(api.subscribeGroups(function (groups) {
       _grp.groups = (groups || []).slice(0, _grpMax);
       _grp.role = {};
-      _grp.groups.forEach(function (g) { _grp.role[g.id] = g.myRole || null; });
+      _grp.meta = {};
+      _grp.groups.forEach(function (g) {
+        _grp.role[g.id] = g.myRole || null;
+        _grp.meta[g.id] = { name: g.name || "", kind: g.kind || "" };
+      });
       rebuildGroupPatientSubs();
       republishSoon();
     }, function () {}));
@@ -179,6 +183,9 @@
     // 1b. Shared-unit patients (group mode) — ALL the doctor's units.
     try {
       Object.keys(_grp.patients).forEach(function (gid) {
+        var m = _grp.meta[gid] || {};
+        var kind = m.kind || "";
+        var unitName = m.name || (kind === "ward" ? "Ward" : "ICU");
         (_grp.patients[gid] || []).forEach(function (p) {
           if (!p) return;
           var st2 = p.state || {};
@@ -188,7 +195,9 @@
             bed: String(p.bed || (st2.patient && st2.patient.bed) || ""),
             news2: news2Of(st2),
             flag: String(p.dx || (st2.patient && st2.patient.diagnosis) || "") || null,
-            vitals: vitalsFrom(st2)
+            vitals: vitalsFrom(st2),
+            unit: unitName,
+            unitKind: kind || null
           });
         });
       });
