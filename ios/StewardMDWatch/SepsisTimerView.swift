@@ -50,7 +50,16 @@ struct SepsisTimerView: View {
 
                 Button(running ? "Pause" : "Start") {
                     running.toggle()
-                    if running { startDate = Date().addingTimeInterval(-model.elapsed) }
+                    if running {
+                        startDate = Date().addingTimeInterval(-model.elapsed)
+                        ResusAlerts.requestAuth()
+                        ResusAlerts.schedule(id: "sepsis-nudge", after: max(0, 3000 - model.elapsed),
+                                             title: "Sepsis bundle", body: "10 minutes left in the 1-hour bundle.")
+                        ResusAlerts.schedule(id: "sepsis-deadline", after: max(0, 3600 - model.elapsed),
+                                             title: "Sepsis 1-hour bundle", body: "The hour has elapsed — complete/review the bundle.")
+                    } else {
+                        ResusAlerts.cancel(["sepsis-nudge", "sepsis-deadline"])
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(SMDPalette.warning.color)

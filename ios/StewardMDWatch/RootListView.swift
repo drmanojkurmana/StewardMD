@@ -1,5 +1,25 @@
 import SwiftUI
+import UserNotifications
 import StewardMDWatchCore
+
+/// Schedules local notifications for resus timers so their alerts fire even with
+/// the wrist down / app backgrounded (a foreground-only `Timer` can't). The in-app
+/// haptics still play when frontmost; these are the belt-and-braces background copy.
+enum ResusAlerts {
+    static func requestAuth() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
+    }
+    static func schedule(id: String, after seconds: TimeInterval, title: String, body: String, repeats: Bool = false) {
+        guard seconds > 0 else { return }
+        let c = UNMutableNotificationContent()
+        c.title = title; c.body = body; c.sound = .default
+        let t = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: repeats)
+        UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: id, content: c, trigger: t))
+    }
+    static func cancel(_ ids: [String]) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
+    }
+}
 
 /// Root / Home (design §04 IA + §05 "Home · Today"): a greeting + on-call context
 /// header, then the six-way vertical spine. Crown scrolls; each row pushes a

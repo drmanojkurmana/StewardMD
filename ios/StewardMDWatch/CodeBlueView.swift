@@ -55,8 +55,16 @@ struct CodeBlueView: View {
 
                 Button(running ? "End" : "Start") {
                     running.toggle()
-                    if running { startDate = Date().addingTimeInterval(-model.elapsed) }
-                    else { summary = model.end() }
+                    if running {
+                        startDate = Date().addingTimeInterval(-model.elapsed)
+                        ResusAlerts.requestAuth()
+                        // Repeating 2-min rhythm-check prompt — fires wrist-down too.
+                        ResusAlerts.schedule(id: "codeblue-cycle", after: 120,
+                                             title: "Code Blue", body: "Rhythm check — pulse & rhythm.", repeats: true)
+                    } else {
+                        ResusAlerts.cancel(["codeblue-cycle"])
+                        summary = model.end()
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(running ? SMDPalette.critical.color : SMDPalette.success.color)
