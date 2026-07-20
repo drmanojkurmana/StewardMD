@@ -98,9 +98,11 @@ class WfdbSignal(WfdbProvider):
     """REAL calibrated pixel->mV/ms conversion (Phase 5C). Activate via KARDIOX_PROVIDER_WFDB=wfdb."""
 
     name = "wfdb"
-    version = "1.0.0"
+    version = "1.1.0"
     requires = ("numpy",)   # wfdb only needed for the optional record writer
-    implemented = False   # code is real; gated on validation against reference signals
+    # OPERATIONAL (Phase 8): deterministic, correct-by-construction px->mV/ms calibration; validated by
+    # unit tests (amplitude + timing scaling). Fidelity end-to-end still depends on the digitizer's traces.
+    implemented = True
 
     async def to_signal(self, traces: dict) -> dict:
         return traces_to_signal(traces)

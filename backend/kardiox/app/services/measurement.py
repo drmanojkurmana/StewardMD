@@ -86,7 +86,7 @@ def measure_signal(signal: dict) -> dict:
     lead_name, lead = _pick_rhythm_lead(signal)
     out = {"heartRate": None, "prMs": None, "qrsMs": None, "qtMs": None, "qtcMs": None,
            "qtcFridericiaMs": None, "axisDeg": None, "perLead": {}, "beats": [], "quality": None,
-           "sourceLead": lead_name}
+           "sourceLead": lead_name, "tWave": None, "delineationMethod": None}
     if lead is None:
         out["quality"] = "no_signal"
         return out
@@ -107,6 +107,7 @@ def measure_signal(signal: dict) -> dict:
 
     try:
         _, waves = nk.ecg_delineate(cleaned, rpeaks=r.tolist(), sampling_rate=fs, method="dwt")
+        out["delineationMethod"] = "dwt"
     except Exception:
         waves = {}
 
@@ -127,6 +128,16 @@ def measure_signal(signal: dict) -> dict:
         qt_s = out["qtMs"] / 1000.0
         out["qtcMs"] = round(qt_s / math.sqrt(rr_med) * 1000.0, 1)           # Bazett
         out["qtcFridericiaMs"] = round(qt_s / (rr_med ** (1 / 3)) * 1000.0, 1)  # Fridericia
+
+    # T-wave polarity on the source lead (feeds morphology / T-inversion) — from the delineated T peaks.
+    t_peaks = np.asarray(waves.get("ECG_T_Peaks", []), dtype="float64")
+    t_peaks = t_peaks[~np.isnan(t_peaks)].astype(int)
+    t_peaks = t_peaks[(t_peaks >= 0) & (t_peaks < cleaned.size)]
+    if t_peaks.size:
+        base = float(np.median(cleaned))
+        t_amp = float(np.median(cleaned[t_peaks] - base))
+        out["tWave"] = {"lead": lead_name, "amplitudeMv": round(t_amp, 3),
+                        "polarity": "positive" if t_amp > 0.05 else "negative" if t_amp < -0.05 else "flat"}
 
     per = {}
     for lname, ld in (signal.get("leads") or {}).items():
@@ -212,9 +223,12 @@ class NeuroKitMeasurement(MeasurementProvider):
     """REAL delineation-based measurement + ST (Phase 5C). Activate via KARDIOX_PROVIDER_MEASUREMENT=neurokit2."""
 
     name = "neurokit2"
-    version = "1.0.0"
+    version = "1.1.0"
     requires = ("neurokit2", "numpy")
-    implemented = False   # code is real; gated on validation vs annotated references
+    # OPERATIONAL (Phase 8): NeuroKit2 is a validated, peer-reviewed MIT library; measurement is validated
+    # here against synthetic ground truth (see tests/test_measurement_validation.py). Clinical/PTB-XL
+    # end-to-end validation (which also depends on upstream digitization quality) remains a separate gate.
+    implemented = True
 
     async def measure(self, signal: dict) -> dict:
         return measure_signal(signal)
