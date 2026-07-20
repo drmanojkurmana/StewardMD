@@ -113,6 +113,9 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
         case "watchPushToken":
             NotificationCenter.default.post(name: WatchConnectivityRelay.watchTokenReceived,
                                             object: nil, userInfo: userInfo)
+        case "labAck":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.labAckRequested,
+                                            object: nil, userInfo: userInfo)
         default:
             break
         }
@@ -121,6 +124,7 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
     static let tokenRequested = Notification.Name("SMDWatchTokenRequested")
     static let taskStatusRequested = Notification.Name("SMDWatchTaskStatusRequested")
     static let watchTokenReceived = Notification.Name("SMDWatchPushTokenReceived")
+    static let labAckRequested = Notification.Name("SMDWatchLabAckRequested")
 }
 #else
 /// Non-iOS fallback so the package still compiles everywhere.

@@ -61,11 +61,17 @@ public struct LabAlert: Codable, Sendable, Identifiable, Equatable, Hashable {
     /// Recent values of this analyte (oldest→newest) from the phone's ICU labs
     /// history, for the detail-screen trend. Nil when no history is available.
     public let trend: [Double]?
+    /// The shared unit + patient this critical belongs to, when it comes from a
+    /// group patient — lets an acknowledge write back to that patient's ICU
+    /// timeline (nil for the open/local patient, which has no shared doc).
+    public let groupId: String?
+    public let patientId: String?
 
     public init(id: String, analyte: String, value: String, units: String?, refRange: String?,
-                patientLabel: String?, severity: String, ts: Double?, trend: [Double]? = nil) {
+                patientLabel: String?, severity: String, ts: Double?, trend: [Double]? = nil,
+                groupId: String? = nil, patientId: String? = nil) {
         self.id = id; self.analyte = analyte; self.value = value; self.units = units
         self.refRange = refRange; self.patientLabel = patientLabel; self.severity = severity
-        self.ts = ts; self.trend = trend
+        self.ts = ts; self.trend = trend; self.groupId = groupId; self.patientId = patientId
     }
 }

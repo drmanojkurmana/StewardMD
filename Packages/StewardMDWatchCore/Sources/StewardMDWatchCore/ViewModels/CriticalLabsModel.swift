@@ -10,6 +10,10 @@ public final class CriticalLabsModel: ObservableObject {
 
     private let ackQueue: AckQueue
 
+    /// Called when an alert is acknowledged, so the app can also relay it to the
+    /// phone to append an ICU-timeline event (for group-patient criticals).
+    public var onAcknowledge: ((LabAlert) -> Void)?
+
     public init(ackQueue: AckQueue = AckQueue()) {
         self.ackQueue = ackQueue
     }
@@ -49,6 +53,7 @@ public final class CriticalLabsModel: ObservableObject {
     public func acknowledge(_ alert: LabAlert, now: Date = Date()) async {
         guard !acknowledgedIDs.contains(alert.id) else { return }
         acknowledgedIDs.insert(alert.id)
+        onAcknowledge?(alert)               // relay to the phone → ICU timeline
         let ack = Ack(id: "ack-\(alert.id)", labId: alert.id,
                       patientLabel: alert.patientLabel, ackedAt: now.timeIntervalSince1970)
         await ackQueue.enqueue(ack)

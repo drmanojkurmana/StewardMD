@@ -49,4 +49,17 @@ final class CriticalLabsModelTests: XCTestCase {
         await m.acknowledge(m.labs[0])
         XCTAssertEqual(m.unacknowledgedCount, 0)
     }
+
+    func testAcknowledgeFiresOnAcknowledgeForTimelineRelay() async {
+        let m = CriticalLabsModel(ackQueue: AckQueue(store: MemAckStore2(), sender: LoggingAckSender()))
+        m.ingest(alert("b", "critical", ts: 50))
+        var relayed: LabAlert?
+        m.onAcknowledge = { relayed = $0 }
+        await m.acknowledge(m.labs[0])
+        XCTAssertEqual(relayed?.id, "b")            // relayed once, with the alert
+        // idempotent: a second ack must NOT re-fire the relay
+        relayed = nil
+        await m.acknowledge(m.labs[0])
+        XCTAssertNil(relayed)
+    }
 }

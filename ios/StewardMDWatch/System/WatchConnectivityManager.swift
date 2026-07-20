@@ -32,6 +32,7 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         WatchServices.tasks.ingest(store.loadTasks())
         GlancePublisher.setOpenTasks(WatchServices.tasks.openCount)
         WatchServices.tasks.onAction = { [weak self] action in self?.sendTaskAction(action) }
+        WatchServices.labs.onAcknowledge = { [weak self] alert in self?.sendLabAck(alert) }
         WatchServices.calcs.set(store.loadCalcs())
         #if canImport(WatchConnectivity)
         guard WCSession.isSupported() else { return }
@@ -59,6 +60,20 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         #if canImport(WatchConnectivity)
         guard WCSession.isSupported() else { return }
         WCSession.default.transferUserInfo(["kind": "watchPushToken", "token": token])
+        #endif
+    }
+
+    /// Relay a critical-lab acknowledge to the phone so it appends an ICU-timeline
+    /// event. Only for group-patient criticals (which carry gid/pid); the open/
+    /// local patient has no shared doc, so its ack stays the HTTP audit only.
+    func sendLabAck(_ alert: LabAlert) {
+        #if canImport(WatchConnectivity)
+        guard WCSession.isSupported(), let gid = alert.groupId, let pid = alert.patientId,
+              !gid.isEmpty, !pid.isEmpty else { return }
+        WCSession.default.transferUserInfo([
+            "kind": "labAck", "gid": gid, "pid": pid,
+            "analyte": alert.analyte, "value": alert.value
+        ])
         #endif
     }
 
