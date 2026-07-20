@@ -25,7 +25,25 @@ jobs:
           pip install pytest ruff
       - name: Lint
         run: ruff check app tests || true   # non-blocking initially; tighten later
-      - name: Test
+      - name: Test (contract + rules + gemini; vision/signal importorskip)
+        run: pytest -q
+
+  test-ml:
+    # Runs the REAL Phase 5A/5C tests with the light ML deps (no torch, which is heavy).
+    # torch/torch_ecg (5D) tests importorskip here; they run in the model-serving image.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install (+ light ML)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+          pip install "numpy>=1.26" "scipy>=1.11" "opencv-python-headless>=4.9" "neurokit2>=0.2.7" "wfdb>=4.1"
+      - name: Test (executes preprocessing + signal tests for real)
         run: pytest -q
 
   docker:
