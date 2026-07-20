@@ -78,6 +78,7 @@
         (isSignup ? '<label class="smdea-lbl">Full name</label><input class="smdea-in" id="eaName" type="text" autocomplete="name" placeholder="Dr Jane Doe">' : "") +
         '<label class="smdea-lbl">Email</label><input class="smdea-in" id="eaEmail" type="email" autocomplete="email" inputmode="email" placeholder="you@hospital.org">' +
         '<label class="smdea-lbl">Password</label><input class="smdea-in" id="eaPw" type="password" autocomplete="' + (isSignup ? "new-password" : "current-password") + '" placeholder="At least 8 characters">' +
+        (isSignup ? "" : '<div style="text-align:right;margin-top:8px"><button class="smdea-link" data-ea="forgot">Forgot password?</button></div>') +
         '<div class="smdea-err"></div>' +
         '<button class="smdea-btn" data-ea="submit">' + (isSignup ? "Create account" : "Sign in") + "</button>" +
         '<div style="text-align:center;margin-top:14px;font:500 13px var(--sans,system-ui);color:var(--mut,#5a7184)">' +
@@ -91,9 +92,105 @@
       var a = b.getAttribute("data-ea");
       if (a === "cancel") return close();
       if (a === "toggle") return openEmail(isSignup ? "signin" : "signup");
+      if (a === "forgot") return openForgot((_el.querySelector("#eaEmail") || {}).value || "");
       if (a === "submit") return submitEmail(isSignup);
     };
     setTimeout(function () { var f = _el.querySelector(isSignup ? "#eaName" : "#eaEmail"); if (f) f.focus(); }, 60);
+  }
+
+  // ---- forgot password: OTP reset (primary) + temp-password fallback -----------------------
+  function openForgot(prefillEmail) {
+    _state.reset = { email: (prefillEmail || _state.email || "").trim() };
+    shell().innerHTML =
+      '<div class="smdea-card">' +
+        '<div class="smdea-h">Reset your password</div>' +
+        '<div class="smdea-sub">Enter your account email — we’ll send a 6-digit code to reset it.</div>' +
+        '<label class="smdea-lbl">Email</label><input class="smdea-in" id="rqEmail" type="email" inputmode="email" autocomplete="email" value="' + esc(_state.reset.email) + '" placeholder="you@hospital.org">' +
+        '<div class="smdea-err"></div>' +
+        '<button class="smdea-btn" data-ea="reqCode">Send reset code</button>' +
+        '<div style="text-align:center;margin-top:14px;font:500 12.5px var(--sans,system-ui);color:var(--mut,#5a7184)">Prefer a password by email? <button class="smdea-link" data-ea="reqTemp">Email me a temporary password</button></div>' +
+        '<button class="smdea-ghost" data-ea="backSignin">Back to sign in</button>' +
+      "</div>";
+    _el.onclick = function (e) {
+      var b = e.target.closest && e.target.closest("[data-ea]"); if (!b) return;
+      var a = b.getAttribute("data-ea");
+      if (a === "backSignin") return openEmail("signin");
+      if (a === "reqCode") return requestReset("otp");
+      if (a === "reqTemp") return requestReset("temp");
+    };
+    setTimeout(function () { var f = _el.querySelector("#rqEmail"); if (f) f.focus(); }, 60);
+  }
+
+  function requestReset(mode) {
+    var email = ((_el.querySelector("#rqEmail") || {}).value || "").trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err("Please enter a valid email address."); return; }
+    err(""); busy(true); _state.reset.email = email;
+    fetch("/api/auth/reset-request", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: email, mode: mode }) })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (j) {
+        busy(false);
+        if (j && j.error === "bad-email") { err("Please enter a valid email address."); return; }
+        // enumeration-safe: server always returns ok. Route by the chosen mode.
+        if (mode === "temp") openResetDone("temp", email);
+        else openResetCode(email);
+      }).catch(function () { busy(false); err("Network error. Please try again."); });
+  }
+
+  function openResetCode(email) {
+    shell().innerHTML =
+      '<div class="smdea-card">' +
+        '<div class="smdea-h">Enter the code</div>' +
+        '<div class="smdea-sub">If an account exists for <b>' + esc(email) + '</b>, we’ve sent a 6-digit code. Enter it and choose a new password.</div>' +
+        '<label class="smdea-lbl">Reset code</label><input class="smdea-otp" id="rvCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••">' +
+        '<label class="smdea-lbl">New password</label><input class="smdea-in" id="rvPw" type="password" autocomplete="new-password" placeholder="At least 8 characters">' +
+        '<div class="smdea-err"></div>' +
+        '<button class="smdea-btn" data-ea="doReset">Reset &amp; sign in</button>' +
+        '<div style="text-align:center;margin-top:12px;font:500 12.5px var(--sans,system-ui);color:var(--mut,#5a7184)">Didn’t get it? <button class="smdea-link" data-ea="resendReset">Resend code</button></div>' +
+        '<button class="smdea-ghost" data-ea="backSignin">Back to sign in</button>' +
+      "</div>";
+    _el.onclick = function (e) {
+      var b = e.target.closest && e.target.closest("[data-ea]"); if (!b) return;
+      var a = b.getAttribute("data-ea");
+      if (a === "backSignin") return openEmail("signin");
+      if (a === "resendReset") { requestReset("otp"); toast("If the account exists, a new code is on its way"); return; }
+      if (a === "doReset") return doReset(email);
+    };
+    setTimeout(function () { var f = _el.querySelector("#rvCode"); if (f) f.focus(); }, 60);
+  }
+
+  function doReset(email) {
+    var code = ((_el.querySelector("#rvCode") || {}).value || "").replace(/\D/g, "");
+    var pw = (_el.querySelector("#rvPw") || {}).value || "";
+    if (code.length !== 6) { err("Enter the 6-digit code."); return; }
+    if (pw.length < 8) { err("New password must be at least 8 characters."); return; }
+    err(""); busy(true);
+    fetch("/api/auth/reset-verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: email, code: code, newPassword: pw }) })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (j) {
+        if (j && j.ok) {
+          // password changed → sign in with it
+          var a = auth();
+          if (a) return a.signInWithEmailAndPassword(email, pw).then(function () { busy(false); close(); toast("Password reset — signed in"); }).catch(function () { busy(false); openEmail("signin"); toast("Password reset — please sign in"); });
+          busy(false); openEmail("signin"); toast("Password reset — please sign in");
+        } else {
+          busy(false);
+          if (j && j.error === "mismatch") err("Incorrect code. " + (j.triesLeft != null ? j.triesLeft + " tries left." : ""));
+          else if (j && j.error === "expired") err("That code expired. Tap Resend for a new one.");
+          else if (j && j.error === "locked") err("Too many attempts. Tap Resend for a new code.");
+          else if (j && j.error === "weak-password") err("New password must be at least 8 characters.");
+          else err("Couldn’t reset. Please try again.");
+        }
+      }).catch(function () { busy(false); err("Network error. Please try again."); });
+  }
+
+  function openResetDone(kind, email) {
+    shell().innerHTML =
+      '<div class="smdea-card">' +
+        '<div class="smdea-h">Check your email</div>' +
+        '<div class="smdea-sub">If an account exists for <b>' + esc(email) + '</b>, we’ve emailed a temporary password. Sign in with it, then change it from Account.</div>' +
+        '<button class="smdea-btn" data-ea="backSignin">Back to sign in</button>' +
+      "</div>";
+    _el.onclick = function (e) { var b = e.target.closest && e.target.closest("[data-ea]"); if (b && b.getAttribute("data-ea") === "backSignin") openEmail("signin"); };
   }
 
   function submitEmail(isSignup) {
