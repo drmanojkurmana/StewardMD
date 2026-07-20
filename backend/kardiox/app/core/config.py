@@ -63,6 +63,10 @@ class Settings(BaseSettings):
     # ── Upload validation (edge + pipeline) ────────────────────────────────────────────────────────
     max_upload_bytes: int = 12 * 1024 * 1024  # 12 MiB hard cap on an ECG image
 
+    # ── Rate limiting (pipeline defense-in-depth; 0 = disabled, the edge is the primary gate) ────────
+    rate_limit_per_min: int = 0
+    rate_limit_burst: int = 20
+
     # ── Rhythm model (stages 6/7/9, TorchECG) — ship NO weights. Empty path → provider raises
     #    UpstreamUnavailable (never fakes a label). A validated checkpoint is required to enable.
     rhythm_model_path: str = ""

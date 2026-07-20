@@ -17,12 +17,37 @@
  */
 
 const MEDIA = "application/vnd.kardiox.v1+json";
+const MAX_BYTES = 12 * 1024 * 1024;                          // 12 MiB hard cap on an ECG image
+const OK_TYPE = /^image\/(jpe?g|png|heic|heif|webp)$/i;      // MIME allow-list
 
 function log(obj) { try { console.log(JSON.stringify({ svc: "kardiox-edge", ...obj })); } catch (e) {} }
 function uuid() { try { return crypto.randomUUID(); } catch (e) { return "kx-" + Date.now() + "-" + Math.floor(Math.random() * 1e9); } }
+
+// Security headers on every response (defense-in-depth; CF adds TLS/HSTS at the edge).
+function secHeaders(extra) {
+  return Object.assign({
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "no-referrer",
+    "Cache-Control": "no-store",
+  }, extra || {});
+}
 function err(status, code, message, stage) {
   return new Response(JSON.stringify({ error: { code, message, stage: stage || "report" } }),
-    { status, headers: { "content-type": MEDIA } });
+    { status, headers: secHeaders({ "content-type": MEDIA }) });
+}
+
+// Magic-byte sniff of the first bytes — reject anything that is not a real image regardless of MIME.
+async function sniffImage(file) {
+  try {
+    const b = new Uint8Array(await file.slice(0, 16).arrayBuffer());
+    if (b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff) return "image/jpeg";
+    if (b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47) return "image/png";
+    if (b[0] === 0x52 && b[1] === 0x49 && b[2] === 0x46 && b[3] === 0x46 &&
+        b[8] === 0x57 && b[9] === 0x45 && b[10] === 0x42 && b[11] === 0x50) return "image/webp";
+    if (b[4] === 0x66 && b[5] === 0x74 && b[6] === 0x79 && b[7] === 0x70) return "image/heic"; // ftyp box
+    return null;
+  } catch (e) { return null; }
 }
 
 // Auth hook. StewardMD's coming-soon _middleware already gates /api/*; add an optional app-token check.
@@ -56,6 +81,11 @@ async function handleAnalyze(request, env) {
   try { form = await request.formData(); } catch (e) { return err(400, "bad_image", "Malformed multipart body", "upload"); }
   const image = form.get("image");
   if (!image || typeof image === "string") return err(400, "bad_image", "No image in upload", "upload");
+  // upload validation: size cap, MIME allow-list, magic-byte sniff (defense-in-depth with the pipeline).
+  if (typeof image.size === "number" && image.size > MAX_BYTES) return err(400, "bad_image", "Image too large", "upload");
+  if (image.type && !OK_TYPE.test(image.type)) return err(400, "bad_image", "Unsupported image type", "upload");
+  const sniffed = await sniffImage(image);
+  if (!sniffed) return err(400, "bad_image", "File is not a recognized image", "upload");
   const layoutHint = form.get("layoutHint") || null;
   const pages = form.get("pages") ? parseInt(form.get("pages"), 10) : null;
 
@@ -70,7 +100,7 @@ async function handleAnalyze(request, env) {
     const out = await pipeline(env, sessionId, { sessionId, layoutHint, pages }, "POST", "/v1/ecg/analyze");
     log({ sessionId, ev: "pipeline", status: out.status, ms: Date.now() - t0 });
     if (out.ok && out.json) {
-      return new Response(JSON.stringify(out.json), { status: 200, headers: { "content-type": MEDIA } });
+      return new Response(JSON.stringify(out.json), { status: 200, headers: secHeaders({ "content-type": MEDIA }) });
     }
     const e = (out.json && out.json.error) || {};
     return err(out.status || 502, e.code || "pipeline_unavailable", e.message || "Pipeline error", e.stage);
@@ -86,7 +116,7 @@ async function handleAnalyze(request, env) {
 async function handleHealth(env) {
   const out = await pipeline(env, "health", null, "GET", "/v1/health");
   return new Response(JSON.stringify({ edge: "ok", pipeline: out.ok ? (out.json || "ok") : "unreachable", status: out.ok ? "ok" : "degraded" }),
-    { status: 200, headers: { "content-type": "application/json" } });
+    { status: 200, headers: secHeaders({ "content-type": "application/json" }) });
 }
 
 export async function onRequest(context) {

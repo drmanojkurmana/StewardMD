@@ -50,6 +50,11 @@ def create_app() -> FastAPI:
             clear_request()
         response.headers["X-Request-ID"] = rid
         response.headers["X-Correlation-ID"] = cid
+        # API hardening headers (defense-in-depth; the edge/CF add TLS + HSTS).
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["Referrer-Policy"] = "no-referrer"
+        response.headers["Cache-Control"] = "no-store"
         return response
 
     install_exception_handlers(app)

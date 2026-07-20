@@ -15,8 +15,9 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from app.api.deps import get_providers, get_r2
 from app.core.config import Settings, get_settings
 from app.core.errors import KardioXError, PipelineTimeout, UpstreamUnavailable
-from app.core.logging import bind_request, get_logger
+from app.core.logging import audit, bind_request, get_logger
 from app.core.metrics import METRICS, latency
+from app.core.ratelimit import rate_limit
 from app.core.security import require_pipeline_auth
 from app.core.versioning import MEDIA_TYPE
 from app.models.ecg import AnalyzeRequest, ECGAnalysis
@@ -35,25 +36,31 @@ def _json(analysis: ECGAnalysis) -> JSONResponse:
     return JSONResponse(content=analysis.model_dump(exclude_none=True), media_type=MEDIA_TYPE)
 
 
-@router.post("/analyze", summary="Analyze an ECG image (by sessionId)", dependencies=[Depends(require_pipeline_auth)])
+@router.post("/analyze", summary="Analyze an ECG image (by sessionId)",
+             dependencies=[Depends(require_pipeline_auth), Depends(rate_limit)])
 async def analyze(req: AnalyzeRequest, settings: Settings = Depends(get_settings),
                   providers: Providers = Depends(get_providers), r2: R2Client = Depends(get_r2)):
     bind_request(session_id=req.sessionId, mode=settings.mode)
     log.info("analyze.start")
+    audit("analyze.requested", session_id=req.sessionId, mode=settings.mode)
     METRICS.inc("kardiox_analyze_total", {"mode": settings.mode})
     METRICS.add_gauge("kardiox_analyze_inflight", 1)
     try:
         with latency("kardiox_analyze_duration_seconds", {"mode": settings.mode}):
             if settings.mode == "mock":
+                audit("analyze.completed", session_id=req.sessionId, mode="mock")
                 return _json(af_sample(req.sessionId))
             analysis = await asyncio.wait_for(run_pipeline(req, providers, r2), timeout=settings.request_timeout_s)
         log.info("analyze.done")
+        audit("analyze.completed", session_id=req.sessionId, mode=settings.mode, severity=analysis.severity)
         return _json(analysis)
     except KardioXError as e:
         METRICS.inc("kardiox_analyze_errors_total", {"code": e.code})
+        audit("analyze.failed", session_id=req.sessionId, code=e.code, stage=e.stage)
         raise
     except TimeoutError as e:
         METRICS.inc("kardiox_analyze_errors_total", {"code": "timeout"})
+        audit("analyze.failed", session_id=req.sessionId, code="timeout", stage="report")
         raise PipelineTimeout("Analysis exceeded the time budget") from e
     finally:
         METRICS.add_gauge("kardiox_analyze_inflight", -1)

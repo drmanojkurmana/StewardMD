@@ -92,6 +92,10 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
     t_pipeline = time.monotonic()
     await emit("upload", "done", 5)
     image = await r2.get_image(sid)
+    # defense-in-depth: re-validate the bytes we read from R2 (size + magic) before any decode.
+    from app.core.config import get_settings
+    from app.core.upload import validate_image_bytes
+    validate_image_bytes(image, get_settings())
     try:
         # enhancement (critical)
         image, _ = await run_stage("enhancement", providers.preprocessing,

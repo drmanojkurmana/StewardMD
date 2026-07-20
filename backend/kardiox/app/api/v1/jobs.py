@@ -22,6 +22,7 @@ from app.core.config import Settings, get_settings
 from app.core.errors import KardioXError
 from app.core.logging import get_logger
 from app.core.metrics import METRICS
+from app.core.ratelimit import rate_limit
 from app.core.security import require_pipeline_auth
 from app.models.ecg import AnalyzeRequest
 from app.mock.sample import af_sample
@@ -61,7 +62,7 @@ async def _run(job_id: str, req: AnalyzeRequest, settings: Settings, providers: 
 
 
 @router.post("/jobs", summary="Submit an async analysis job", status_code=202,
-             dependencies=[Depends(require_pipeline_auth)])
+             dependencies=[Depends(require_pipeline_auth), Depends(rate_limit)])
 async def submit(req: AnalyzeRequest, settings: Settings = Depends(get_settings),
                  providers: Providers = Depends(get_providers), r2: R2Client = Depends(get_r2)):
     job_id = uuid.uuid4().hex
