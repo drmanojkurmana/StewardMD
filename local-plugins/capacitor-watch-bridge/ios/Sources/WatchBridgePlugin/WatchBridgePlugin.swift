@@ -40,6 +40,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     private let watchlistKey = "smd.watchlist"
     private let criticalsKey = "smd.criticals"
     private let tasksKey = "smd.tasks"
+    private let calcsKey = "smd.calcs"
 
     private lazy var relay = WatchConnectivityRelay()
 
@@ -108,6 +109,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         let criticals = call.getArray("criticals")
         let tasks = call.getArray("tasks")
         let role = call.getString("role")
+        let calcDefs = call.getArray("calcDefs")
 
         let sessionData = try? JSONSerialization.data(withJSONObject: session)
         let favData = try? JSONSerialization.data(withJSONObject: favorites)
@@ -117,6 +119,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         let watchlistData = watchlist.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
         let criticalsData = criticals.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
         let tasksData = tasks.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
+        let calcDefsData = calcDefs.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
 
         if let d = UserDefaults(suiteName: suiteName) {
             d.set(sessionData, forKey: sessionKey)
@@ -127,6 +130,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             if let w = watchlistData { d.set(w, forKey: watchlistKey) }
             if let c = criticalsData { d.set(c, forKey: criticalsKey) }
             if let t = tasksData { d.set(t, forKey: tasksKey) }
+            if let c = calcDefsData { d.set(c, forKey: calcsKey) }
         }
 
         var context: [String: Any] = [:]
@@ -139,6 +143,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         if let c = criticalsData { context["criticals"] = c }
         if let t = tasksData { context["tasks"] = t }
         if let r = role { context["role"] = r }
+        if let c = calcDefsData { context["calcDefs"] = c }
 
         relay.updateContext(context)
 
@@ -155,6 +160,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             d.removeObject(forKey: watchlistKey)
             d.removeObject(forKey: criticalsKey)
             d.removeObject(forKey: tasksKey)
+            d.removeObject(forKey: calcsKey)
         }
         relay.updateContext(["cleared": true])
         call.resolve()

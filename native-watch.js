@@ -325,6 +325,38 @@
     } catch (e) { return null; }
   }
 
+  // Calculators the doctor starred on the phone (localStorage) → relayed as
+  // {id,title,category,inputs,computeSrc}. The watch renders the inputs and has
+  // the PHONE compute the result (watchOS has no JS engine). Types are coerced so
+  // the Swift CalcField decodes cleanly (step/min/def as numbers).
+  function calcFavIds() {
+    try { var a = JSON.parse(localStorage.getItem("smd_watch_calc_favs") || "[]"); return Array.isArray(a) ? a : []; }
+    catch (e) { return []; }
+  }
+  function calcDefs() {
+    var out = [];
+    try {
+      var mc = window.MEDCALC; if (!mc || !mc._calcs) return out;
+      var favs = calcFavIds(); if (!favs.length) return out;
+      var byId = {}; mc._calcs.forEach(function (c) { if (c && c.id) byId[c.id] = c; });
+      favs.forEach(function (id) {
+        var c = byId[id]; if (!c || typeof c.compute !== "function") return;
+        var inputs = (c.inputs || []).map(function (f) {
+          var o = { id: String(f.id), label: String(f.label || f.id), type: String(f.type || "number") };
+          if (f.unit != null) o.unit = String(f.unit);
+          if (f.step != null && !isNaN(parseFloat(f.step))) o.step = parseFloat(f.step);
+          if (f.min != null && !isNaN(parseFloat(f.min))) o.min = parseFloat(f.min);
+          if (f.def != null && !isNaN(parseFloat(f.def))) o.def = parseFloat(f.def);
+          if (Array.isArray(f.opts)) o.opts = f.opts.map(function (op) { return { v: String(op.v), t: String(op.t) }; });
+          return o;
+        });
+        out.push({ id: String(c.id), title: String(c.title || c.id), category: String(c.cat || ""),
+                   inputs: inputs, computeSrc: String(c.compute.toString()) });
+      });
+    } catch (e) {}
+    return out.slice(0, 40);
+  }
+
   // Ward Sync census. patientCount is the deduped watchlist size (so the open
   // patient counts even with an empty roster/GHIS cache). No true bed denominator
   // or task count exists client-side, so we don't invent them.
@@ -394,6 +426,7 @@
       var crit = criticals(); if (crit.length) payload.criticals = crit;
       var tk = tasks(); if (tk.length) payload.tasks = tk;
       var role = roleForRelay(); if (role) payload.role = role;
+      var cd = calcDefs(); if (cd.length) payload.calcDefs = cd;
       var cen = census(wl.length); if (cen) payload.glance = cen;
       await p.publish(payload);
       markSynced();
