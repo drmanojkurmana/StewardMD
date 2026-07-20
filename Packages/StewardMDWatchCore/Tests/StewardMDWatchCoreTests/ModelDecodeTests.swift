@@ -24,6 +24,22 @@ final class ModelDecodeTests: XCTestCase {
         XCTAssertNil(r.results.first?.brands)
     }
 
+    func testDrugFactsDecodes() throws {
+        let j = #"{"composition":"Pantoprazole","found":true,"data":{"composition":"Pantoprazole","summary":"PPI.","therapeutic_class":"PPI","adult_dose":"40 mg OD","ped_dose":"weight-based","renal_adjust":"None","hepatic_adjust":"Severe: 20 mg","administration":"Before breakfast","common_se":"Headache"}}"#
+        let r = try decode(DrugFactsResponse.self, j)
+        XCTAssertTrue(r.found)
+        XCTAssertEqual(r.data?.adultDose, "40 mg OD")
+        XCTAssertEqual(r.data?.renalAdjust, "None")
+        XCTAssertEqual(r.data?.therapeuticClass, "PPI")
+    }
+
+    func testDrugFactsDecodesNotFound() throws {
+        let j = #"{"composition":"Zzz","found":false,"data":null}"#
+        let r = try decode(DrugFactsResponse.self, j)
+        XCTAssertFalse(r.found)
+        XCTAssertNil(r.data)
+    }
+
     // MARK: Lab Watch (/api/watch/status)
     func testWatchStatusDecodes() throws {
         let j = #"{"consented":true,"watching":[{"patientId":"P12","episodeId":"E1","name":"Okafor","since":1.0}]}"#
