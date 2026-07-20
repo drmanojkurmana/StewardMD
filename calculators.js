@@ -7157,7 +7157,7 @@
       inCat.forEach(function(c){
         var favOn=isWatchFav(c.id);
         html+='<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'" style="position:relative">'+
-          '<button data-fav="'+c.id+'" aria-label="'+(favOn?"Remove from":"Add to")+' Apple Watch" title="Show on Apple Watch" style="position:absolute;top:6px;right:8px;background:none;border:none;font:17px/1 system-ui;cursor:pointer;color:'+(favOn?"#e0a800":"#c2c2c2")+';z-index:2;padding:2px">'+(favOn?"★":"☆")+'</button>'+
+          '<button data-fav="'+c.id+'" aria-label="'+(favOn?"Remove from":"Add to")+' Apple Watch" title="Show on Apple Watch" style="position:absolute;top:6px;right:8px;background:none;border:none;cursor:pointer;color:'+(favOn?"#e0a800":"#c2c2c2")+';z-index:2;padding:2px;line-height:0">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
           '<button class="mc-card-head" data-open="'+c.id+'" style="padding-right:34px"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
           (openId===c.id?'<div class="mc-panel" id="mcPanel_'+c.id+'"></div>':"")+
         '</div>';
@@ -7502,6 +7502,8 @@
       ".mc-card-head{display:flex;align-items:center;gap:11px;padding:12px 13px;cursor:pointer;width:100%;background:transparent;border:none;text-align:left}",
       ".mc-ic{font-size:20px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}",
       ".mc-ico{width:15px;height:15px;vertical-align:-2px;display:inline-block;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}",
+      ".mc-fav{width:17px;height:17px;display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round}",
+      ".mc-fav.on{fill:currentColor;stroke:currentColor}",
       ".mc-ic svg{width:22px;height:22px;color:var(--teal,#0a9396)}",
       ".mc-cat svg,.mc-grp-h svg{width:14px;height:14px;vertical-align:-2px;margin-right:4px}",
       ".mc-grp-h svg{color:var(--teal,#0a9396)}",
