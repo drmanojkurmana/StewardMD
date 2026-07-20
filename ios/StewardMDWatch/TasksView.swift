@@ -29,6 +29,7 @@ struct TasksView: View {
             }
         }
         .navigationTitle("Tasks")
+        .safeAreaInset(edge: .top) { ConnectivityBanner() }
     }
 }
 

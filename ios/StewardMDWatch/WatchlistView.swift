@@ -38,6 +38,7 @@ struct WatchlistView: View {
             }
         }
         .navigationTitle(groups.count > 1 ? (current?.id ?? "My patients") : "My patients")
+        .safeAreaInset(edge: .top) { ConnectivityBanner() }
     }
 
     /// Horizontal unit selector — one tab per shared unit (ICU units first).

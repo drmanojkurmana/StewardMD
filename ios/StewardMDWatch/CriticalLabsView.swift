@@ -22,6 +22,7 @@ struct CriticalLabsView: View {
             }
         }
         .navigationTitle("Critical labs")
+        .safeAreaInset(edge: .top) { ConnectivityBanner() }
         // LabAlert destination is registered at the NavigationStack root.
     }
 }

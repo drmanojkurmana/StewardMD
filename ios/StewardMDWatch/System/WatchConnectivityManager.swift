@@ -20,6 +20,9 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     @Published private(set) var lastReceived: Date?
     /// The clinician's role in the shared unit (relayed) — gates task visibility.
     @Published private(set) var role: String?
+    /// Whether the paired iPhone is currently reachable (drives the "not connected"
+    /// banner + gates phone-side compute / task write-back).
+    @Published private(set) var isReachable: Bool = false
     private let store = WatchServices.store
 
     func activate() {
@@ -155,11 +158,20 @@ extension WatchConnectivityManager: WCSessionDelegate {
                              activationDidCompleteWith activationState: WCSessionActivationState,
                              error: Error?) {
         let ctx = session.receivedApplicationContext   // latest, even if sent pre-activation
-        Task { @MainActor in if !ctx.isEmpty { self.apply(ctx) } }
+        let reachable = session.isReachable
+        Task { @MainActor in
+            self.isReachable = reachable
+            if !ctx.isEmpty { self.apply(ctx) }
+        }
     }
 
     nonisolated func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
         Task { @MainActor in self.apply(applicationContext) }
+    }
+
+    nonisolated func sessionReachabilityDidChange(_ session: WCSession) {
+        let reachable = session.isReachable
+        Task { @MainActor in self.isReachable = reachable }
     }
 }
 #endif

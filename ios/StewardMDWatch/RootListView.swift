@@ -76,6 +76,26 @@ struct RootListView: View {
     }
 }
 
+/// A thin amber bar shown on phone-tethered screens when the iPhone isn't
+/// reachable, so an empty list reads as "out of range" — not "no data". Renders
+/// nothing when connected.
+struct ConnectivityBanner: View {
+    @ObservedObject private var conn = WatchConnectivityManager.shared
+    var body: some View {
+        if !conn.isReachable {
+            HStack(spacing: 5) {
+                Image(systemName: "iphone.slash").font(.system(size: 11))
+                Text("iPhone not connected").font(.caption2)
+            }
+            .foregroundStyle(SMDPalette.warning.color)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 3)
+            .background(SMDPalette.warning.color.opacity(0.18))
+            .accessibilityLabel("iPhone not connected — data may be out of date")
+        }
+    }
+}
+
 /// The six root modules, in priority order (Critical labs first).
 enum RootDestination: String, CaseIterable, Identifiable, Hashable {
     case criticalLabs, patients, tasks, wardSync, drugs, calculators, emergency
