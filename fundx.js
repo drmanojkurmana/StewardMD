@@ -1077,7 +1077,7 @@
     devLive.frames++;
     if (devLive.lastT) { var _dt = fa.ts - devLive.lastT; if (_dt > 0) devLive.fps = Math.round(1000 / _dt); }
     devLive.lastT = fa.ts;
-    devLive.pipeline = usingNative ? "native-depth" : "monocular";
+    devLive.pipeline = usingNative ? ("native-depth" + (fa.opaque != null ? (" op" + (fa.opaque ? "1" : "0") + " scn" + (fa.scnUp ? "1" : "0") + " anc" + (fa.anchor ? "1" : "0")) : "")) : "monocular";
     if (fa.acqConfidence != null) devLive.confidence = fa.acqConfidence;
     if (fa.distanceMm != null) devLive.depthMm = fa.distanceMm;
     try { if (hub && hub.sensors && hub.sensors.contributions) devLive.contributions = hub.sensors.contributions(); } catch (e) {}

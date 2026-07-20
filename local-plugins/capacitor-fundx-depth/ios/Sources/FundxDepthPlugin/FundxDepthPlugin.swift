@@ -7,6 +7,7 @@ import UIKit
 import AVFoundation
 import CoreMotion
 import simd
+import WebKit
 
 /**
  * FundX AI — hybrid depth-fusion plugin (iOS: ARKit / LiDAR / SceneDepth / CoreMotion).
@@ -52,6 +53,7 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
     private let guideRootName = "fundxGuideRoot"
     private var guidePhase = "searching"     // searching | aligning | locked (driven by the JS engine)
     private var guideAligned = false
+    private var webViewOpaque = true         // mirror of webView.isOpaque, emitted for the on-device HUD diagnostic
 
     // ---- Runtime capability detection (no manual configuration) ----
     @objc func capabilities(_ call: CAPPluginCall) {
@@ -113,12 +115,13 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
                 self.arSession = scn.session
                 // Transparent WebView so the camera behind shows through (html/body are made transparent
                 // by the shared JS/CSS — html.fundx-gpu / body.fundx-gpu).
-                webView.isOpaque = false
-                webView.backgroundColor = .clear
-                webView.scrollView.backgroundColor = .clear
-                parent.insertSubview(scn, belowSubview: webView)
+                self.applyTransparent(webView, scn, parent)
                 scn.session.run(config, options: [.resetTracking, .removeExistingAnchors])
                 self.gpuMode = true
+                // Re-assert transparency after Capacitor/layout settle — the WebView opacity can get
+                // reset, hiding the ARSCNView behind an opaque WebView (the intermittent black camera).
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { self.applyTransparent(webView, scn, parent) }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { self.applyTransparent(webView, scn, parent) }
             } else {
                 let session = ARSession()
                 session.delegate = self
@@ -147,6 +150,7 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
                     webView.isOpaque = true
                     webView.backgroundColor = .white
                     webView.scrollView.backgroundColor = .white
+                    self.webViewOpaque = true
                 }
             }
             self.gpuMode = false
@@ -216,6 +220,8 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             data["anchorPlaced"] = true
         }
         if eyeAnchor != nil { data["anchor"] = true }
+        data["opaque"] = self.webViewOpaque       // HUD diagnostic: WebView transparent (camera can show through)?
+        data["scnUp"] = (self.arView != nil)      // HUD diagnostic: ARSCNView present
 
         // Low-res camera image for the JS analysis pipeline (MediaPipe + heuristics), throttled + encoded
         // off the main thread so the ARSCNView preview stays smooth (mirrors Android's encoder thread).
@@ -290,6 +296,19 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         guard !samples.isEmpty else { return nil }
         samples.sort()
         return Double(samples[samples.count / 2])            // median metres
+    }
+
+    // Make the WebView (+ scrollView + container) transparent so the ARSCNView camera shows through,
+    // and keep the ARSCNView directly behind + full-size. Idempotent; re-called on a delay to beat the
+    // Capacitor/layout opacity race that intermittently left the camera black.
+    private func applyTransparent(_ webView: WKWebView, _ scn: ARSCNView, _ parent: UIView) {
+        webView.isOpaque = false
+        webView.backgroundColor = .clear
+        webView.scrollView.backgroundColor = .clear
+        parent.backgroundColor = .clear
+        scn.frame = parent.bounds
+        parent.insertSubview(scn, belowSubview: webView)
+        self.webViewOpaque = false
     }
 
     // MARK: - Spatial-AR guide (ARSCNViewDelegate)

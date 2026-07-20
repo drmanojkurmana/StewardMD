@@ -277,6 +277,9 @@
         out.distanceState = m < 0.2 ? "near" : (m > 0.55 ? "far" : "ok");
         out.distanceConfidence = fr.distanceConfidence != null ? +fr.distanceConfidence : 0.8;
       }
+      if (fr.opaque != null) out.opaque = fr.opaque;     // spatial-AR diagnostic: WebView transparent?
+      if (fr.scnUp != null) out.scnUp = fr.scnUp;        // ARSCNView present?
+      if (fr.anchor != null) out.anchor = fr.anchor;     // world anchor placed?
       return out;
     }
     function grab(scale) {
