@@ -98,7 +98,10 @@ Pages project. In the Pages project settings add:
 3. **Signal extraction (WFDB/NumPy)** — px→mV/ms → `WfdbSignal.to_signal`.
 4. **Rhythm / beats / morphology (TorchECG)** — train/adapt models → `TorchECGRhythm.*` (needs labelled datasets, e.g. PhysioNet, + GPU serving).
 5. **Measurement + ST (NeuroKit2)** — delineation, intervals, axis, J-point ST → `NeuroKitMeasurement.*`.
-6. **Gemini explanation** — constrained prompt, server-side key → `GeminiExplainer.explain`.
+6. ~~**Gemini explanation**~~ — ✅ IMPLEMENTED (`GeminiExplainer.explain`): constrained prompt built only
+   from validated findings, strict no-additions system instruction, server-side disclaimer enforcement,
+   real `generate_content_async` call. Activate with `KARDIOX_PROVIDER_GEMINI=gemini` + `KARDIOX_GEMINI_API_KEY`.
+   (Reachable end-to-end only once the upstream image/signal stages land.)
 7. **Quality gate** — add a provider that scores usability and routes poor images to `bad_image`.
 8. **Validation + regulatory** — clinical validation of the end-to-end pipeline, clinician sign-off of
    the RuleEngine + Learn-ECG content, and an intended-use/SaMD review before any clinical launch.
