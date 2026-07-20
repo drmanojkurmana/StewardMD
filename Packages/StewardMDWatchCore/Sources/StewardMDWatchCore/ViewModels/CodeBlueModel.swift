@@ -29,6 +29,7 @@ public final class CodeBlueModel: ObservableObject {
     @Published public private(set) var pauseSeconds: TimeInterval = 0
     @Published public private(set) var coachZone: RateZone = .idle
     @Published public private(set) var events: [CodeEvent] = []
+    @Published public private(set) var isRunning = false
 
     private var timer = CodeBlueTimer()
     private var detector: CompressionDetecting?
@@ -112,6 +113,7 @@ public final class CodeBlueModel: ObservableObject {
 
     /// Begin a code: start sensors + keep-alive, log the start event.
     public func startCode() {
+        isRunning = true
         workout?.begin()
         detector?.start()
         append(.cprStart)
@@ -120,6 +122,7 @@ public final class CodeBlueModel: ObservableObject {
     /// End a code: stop sensors + keep-alive (battery), log the end event, build summary.
     public func endCode() -> CodeSummary {
         append(.cprEnd)
+        isRunning = false
         detector?.stop()
         workout?.end()
         return CodeSummary.build(events: events, durationSeconds: elapsed, cycles: cycle,
@@ -136,7 +139,7 @@ public final class CodeBlueModel: ObservableObject {
 
     /// Build the live snapshot streamed to the phone (design §5).
     public func snapshot(batteryLevel: Double) -> CodeBlueState {
-        CodeBlueState(running: true, elapsed: elapsed, cycle: cycle,
+        CodeBlueState(running: isRunning, elapsed: elapsed, cycle: cycle,
                       compressionCount: compressionCount, instantaneousRateCPM: instantaneousRateCPM,
                       averageRateCPM: averageRateCPM, coachZone: coachZone, paused: paused,
                       pauseSeconds: pauseSeconds, adrenalineCount: adrenalineCount,

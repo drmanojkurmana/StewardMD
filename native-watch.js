@@ -561,33 +561,52 @@
       });
     } catch (e) {}
 
-    // Code Blue Command Center launcher — a floating button shown only in the
-    // native iOS app with a paired watch (Code Blue is an emergency tool, so it's
-    // reachable from any screen). Export taps route the on-device summary to the
-    // currently-open ICU patient's timeline, if any.
+    // Code Blue alert banner — appears center-screen when a code is started on the
+    // watch: a blue StewardMD badge flips in with a blinking "CODE BLUE". Tap the
+    // badge to open the Command Center; tap the backdrop to dismiss (the code keeps
+    // running). Driven by the plugin's `codeBlueActive` event (native + watch only).
     try {
-      if (p && p.getStatus) {
-        p.getStatus().then(function (s) {
-          try { console.log("[SMD-CodeBlue] watch status", JSON.stringify(s)); } catch (e) {}
-          if (!(s && s.supported && s.paired && s.watchAppInstalled)) return;
-          if (document.getElementById("codeBlueFab")) return;
-          var fab = document.createElement("button");
-          fab.id = "codeBlueFab";
-          fab.type = "button";
-          fab.setAttribute("aria-label", "Open Code Blue Command Center");
-          fab.textContent = "🫀 Code Blue";
-          fab.style.cssText = [
-            "position:fixed", "right:16px",
-            "bottom:calc(env(safe-area-inset-bottom,0px) + 20px)",
-            "z-index:9999", "padding:12px 16px", "border:none", "border-radius:24px",
-            "background:#dc2626", "color:#fff",
-            "font:600 15px system-ui,-apple-system,sans-serif",
-            "box-shadow:0 6px 18px rgba(220,38,38,.45)", "cursor:pointer"
-          ].join(";");
-          fab.addEventListener("click", function () { if (p.openCodeBlue) p.openCodeBlue().catch(function () {}); });
-          document.body.appendChild(fab);
-        }).catch(function () {});
+      var cbShownForCode = false;   // shown once per code — don't nag after dismiss
+      function cbEnsure() {
+        if (document.getElementById("cbAlert")) return;
+        var css = document.createElement("style");
+        css.textContent =
+          "#cbAlert{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;" +
+          "background:rgba(2,6,23,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}" +
+          "#cbAlert.show{display:flex}" +
+          "#cbAlert .cbc{cursor:pointer;text-align:center;padding:30px 38px;border-radius:22px;" +
+          "background:linear-gradient(160deg,#0b3a8f,#1e40af 58%,#2563eb);" +
+          "box-shadow:0 18px 50px rgba(37,99,235,.55),inset 0 0 0 1px rgba(255,255,255,.12);" +
+          "animation:cbFlip .7s cubic-bezier(.2,.7,.2,1) both,cbPulse 1.6s ease-in-out .7s infinite;transform-style:preserve-3d}" +
+          "#cbAlert .cbl{font:800 30px system-ui,-apple-system,sans-serif;color:#fff;letter-spacing:.5px}" +
+          "#cbAlert .cbl span{color:#93c5fd}" +
+          "#cbAlert .cbf{margin-top:10px;font:900 42px system-ui,-apple-system,sans-serif;letter-spacing:3px;color:#fff;" +
+          "text-shadow:0 0 18px rgba(147,197,253,.9);animation:cbBlink 1s steps(1,end) infinite}" +
+          "#cbAlert .cbh{margin-top:12px;font:600 14px system-ui;color:#dbeafe;opacity:.9}" +
+          "@keyframes cbFlip{0%{transform:rotateY(90deg) scale(.82);opacity:0}100%{transform:rotateY(0) scale(1);opacity:1}}" +
+          "@keyframes cbPulse{0%,100%{box-shadow:0 18px 50px rgba(37,99,235,.45),inset 0 0 0 1px rgba(255,255,255,.12)}" +
+          "50%{box-shadow:0 18px 72px rgba(59,130,246,.9),inset 0 0 0 1px rgba(255,255,255,.22)}}" +
+          "@keyframes cbBlink{0%,49%{opacity:1}50%,100%{opacity:.25}}";
+        document.head.appendChild(css);
+        var el = document.createElement("div");
+        el.id = "cbAlert"; el.setAttribute("role", "alertdialog");
+        el.setAttribute("aria-label", "Code Blue active — tap to open the Command Center");
+        el.innerHTML = '<div class="cbc"><div class="cbl">Steward<span>MD</span></div>' +
+          '<div class="cbf">CODE BLUE</div><div class="cbh">Tap to open Command Center</div></div>';
+        el.addEventListener("click", function (e) {
+          if (e.target.closest(".cbc")) { if (p && p.openCodeBlue) p.openCodeBlue().catch(function () {}); }
+          el.classList.remove("show");   // tapping the card (opened) or the backdrop (dismiss) both hide it
+        });
+        document.body.appendChild(el);
       }
+      function cbShow() { cbEnsure(); var el = document.getElementById("cbAlert"); if (el) el.classList.add("show"); }
+      function cbHide() { var el = document.getElementById("cbAlert"); if (el) el.classList.remove("show"); }
+      if (p && p.addListener) p.addListener("codeBlueActive", function (ev) {
+        var running = !!(ev && ev.running);
+        if (running) { if (!cbShownForCode) { cbShownForCode = true; cbShow(); } }
+        else { cbShownForCode = false; cbHide(); }
+      });
+
       // Export tap on the native Command Center → append to the open ICU patient timeline.
       if (p && p.addListener) p.addListener("codeBlueExport", function (ev) {
         try {

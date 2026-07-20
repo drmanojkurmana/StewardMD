@@ -1,6 +1,7 @@
 import Foundation
 import Capacitor
 import SwiftUI
+import StewardMDWatchCore
 #if canImport(WatchConnectivity)
 import WatchConnectivity
 #endif
@@ -45,6 +46,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
     private let calcsKey = "smd.calcs"
 
     private lazy var relay = WatchConnectivityRelay()
+    /// Last Code Blue running state emitted to JS — so `codeBlueActive` fires only on change.
+    private var lastCodeBlueRunning: Bool?
 
     override public func load() {
         // Force the WCSession to activate at plugin load so getStatus() is reliable.
@@ -52,6 +55,19 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         // Start the phone-side Code Blue live mirror so it ingests + persists even
         // before the Command Center screen is opened.
         DispatchQueue.main.async { CodeBlueLiveModel.shared.begin() }
+        // Tell the web layer when a code goes active/inactive (drives the on-screen
+        // "CODE BLUE" alert banner). Fires only on a running-state change.
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.codeBlueReceived, object: nil, queue: .main
+        ) { [weak self] note in
+            guard let self = self,
+                  let data = note.userInfo?["state"] as? Data,
+                  let state = try? JSONDecoder().decode(CodeBlueState.self, from: data) else { return }
+            if self.lastCodeBlueRunning != state.running {
+                self.lastCodeBlueRunning = state.running
+                self.notifyListeners("codeBlueActive", data: ["running": state.running])
+            }
+        }
         // When the watch asks for a fresh token, re-emit to JS so native-watch.js
         // republishes. Decoupled via a string-keyed notification (same pattern as
         // AppOrientationPlugin) so the plugin owns no cross-module symbols.
