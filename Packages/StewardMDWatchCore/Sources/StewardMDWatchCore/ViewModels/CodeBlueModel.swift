@@ -21,9 +21,30 @@ public final class CodeBlueModel: ObservableObject {
     @Published public private(set) var shockCount = 0
     @Published public private(set) var rosc = false
 
+    // MARK: CPR Assist (additive — design §3.3)
+    @Published public private(set) var compressionCount = 0
+    @Published public private(set) var instantaneousRateCPM = 0
+    @Published public private(set) var averageRateCPM = 0
+    @Published public private(set) var paused = false
+    @Published public private(set) var pauseSeconds: TimeInterval = 0
+    @Published public private(set) var coachZone: RateZone = .idle
+    @Published public private(set) var events: [CodeEvent] = []
+
     private var timer = CodeBlueTimer()
+    private var detector: CompressionDetecting?
+    private var workout: WorkoutKeepAlive?
+    private var deviceId = "watch"
+    private var eventSeq = 0
 
     public init() {}
+
+    /// DI initialiser for CPR Assist. The no-arg `init()` remains for existing call sites.
+    public convenience init(detector: CompressionDetecting, workout: WorkoutKeepAlive,
+                            deviceId: String) {
+        self.init()
+        self.detector = detector; self.workout = workout; self.deviceId = deviceId
+        detector.onChange = { [weak self] state, tick in self?.apply(state, tick) }
+    }
 
     public var cycle: Int { timer.cycle }
     public var elapsedLabel: String { TimeFormat.mmss(elapsed) }
@@ -54,12 +75,72 @@ public final class CodeBlueModel: ObservableObject {
         return crossed
     }
 
-    public func recordAdrenaline() { adrenalineCount += 1 }
-    public func recordShock() { shockCount += 1 }
-    public func markROSC() { rosc = true }
+    public func recordAdrenaline() { adrenalineCount += 1; append(.drug, "Epinephrine") }
+    public func recordShock() { shockCount += 1; append(.shock, "Shock #\(shockCount)") }
+    public func markROSC() { rosc = true; append(.rosc, "ROSC") }
 
     public func end() -> CodeBlueSummary {
         CodeBlueSummary(durationLabel: TimeFormat.mmss(elapsed), cycles: cycle,
                         adrenalineCount: adrenalineCount, shockCount: shockCount, rosc: rosc)
+    }
+
+    // MARK: CPR Assist (additive — design §3.3)
+
+    private func nextId(_ kind: CodeEventKind) -> String {
+        eventSeq += 1; return "\(deviceId)-\(kind.rawValue)-\(eventSeq)"
+    }
+
+    private func append(_ kind: CodeEventKind, _ label: String = "") {
+        events.append(CodeEvent(id: nextId(kind), elapsed: elapsed, kind: kind,
+                                label: label, sourceDeviceId: deviceId))
+    }
+
+    /// Apply a detector batch: update measured stats + emit pause/resume events.
+    private func apply(_ state: CompressionState, _ tick: AnalyzerTick) {
+        compressionCount = state.count
+        instantaneousRateCPM = state.instantaneousRateCPM
+        averageRateCPM = state.averageRateCPM
+        paused = state.paused
+        pauseSeconds = state.pauseSeconds
+        coachZone = RateCoach.zone(forRateCPM: state.instantaneousRateCPM, active: !state.paused)
+        if tick.pauseStarted { append(.pauseStart) }
+        if tick.resumed { append(.resume) }
+    }
+
+    /// Test-only hook so pause/resume mapping is verifiable without CoreMotion.
+    public func ingestForTest(state: CompressionState, tick: AnalyzerTick) { apply(state, tick) }
+
+    /// Begin a code: start sensors + keep-alive, log the start event.
+    public func startCode() {
+        workout?.begin()
+        detector?.start()
+        append(.cprStart)
+    }
+
+    /// End a code: stop sensors + keep-alive (battery), log the end event, build summary.
+    public func endCode() -> CodeSummary {
+        append(.cprEnd)
+        detector?.stop()
+        workout?.end()
+        return CodeSummary.build(events: events, durationSeconds: elapsed, cycles: cycle,
+                                 totalCompressions: compressionCount, averageRateCPM: averageRateCPM)
+    }
+
+    public func recordDrug(_ name: String) {
+        let n = name.lowercased()
+        if n.contains("epinephrine") || n.contains("adrenaline") { adrenalineCount += 1 }
+        append(.drug, name)
+    }
+
+    public func markSwitchCompressor() { append(.switchCompressor, "Switch compressor") }
+
+    /// Build the live snapshot streamed to the phone (design §5).
+    public func snapshot(batteryLevel: Double) -> CodeBlueState {
+        CodeBlueState(running: true, elapsed: elapsed, cycle: cycle,
+                      compressionCount: compressionCount, instantaneousRateCPM: instantaneousRateCPM,
+                      averageRateCPM: averageRateCPM, coachZone: coachZone, paused: paused,
+                      pauseSeconds: pauseSeconds, adrenalineCount: adrenalineCount,
+                      shockCount: shockCount, rosc: rosc, batteryLevel: batteryLevel,
+                      events: events, updatedElapsed: elapsed)
     }
 }
