@@ -13,6 +13,7 @@ public struct AppGroupStore: Sendable {
     private let watchlistKey = "smd.watchlist"
     private let criticalsKey = "smd.criticals"
     private let tasksKey = "smd.tasks"
+    private let calcsKey = "smd.calcs"
     private let notifPrefsKey = "smd.notifPrefs"
     private let pendingRouteKey = "smd.pendingRoute"
 
@@ -85,6 +86,17 @@ public struct AppGroupStore: Sendable {
         return (try? JSONDecoder().decode([WatchTask].self, from: data)) ?? []
     }
 
+    /// Calculators favorited on the phone and relayed to the watch (inputs +
+    /// compute source). Persisted so the wrist keeps them offline.
+    public func saveCalcs(_ calcs: [RelayedCalc]) {
+        guard let d = defaults, let data = try? JSONEncoder().encode(calcs) else { return }
+        d.set(data, forKey: calcsKey)
+    }
+    public func loadCalcs() -> [RelayedCalc] {
+        guard let d = defaults, let data = d.data(forKey: calcsKey) else { return [] }
+        return (try? JSONDecoder().decode([RelayedCalc].self, from: data)) ?? []
+    }
+
     /// Notification-tier preferences relayed from the iPhone (critical/warning/info).
     public func saveNotifPrefs(_ prefs: [String: Bool]) {
         guard let d = defaults, let data = try? JSONEncoder().encode(prefs) else { return }
@@ -126,6 +138,7 @@ public struct AppGroupStore: Sendable {
         defaults?.removeObject(forKey: watchlistKey)
         defaults?.removeObject(forKey: criticalsKey)
         defaults?.removeObject(forKey: tasksKey)
+        defaults?.removeObject(forKey: calcsKey)
         defaults?.removeObject(forKey: notifPrefsKey)
         defaults?.removeObject(forKey: pendingRouteKey)
     }

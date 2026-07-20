@@ -112,4 +112,21 @@ final class AppGroupStoreTests: XCTestCase {
         XCTAssertTrue(store.loadTasks().isEmpty)
         UserDefaults(suiteName: suite)?.removePersistentDomain(forName: suite)
     }
+
+    func testCalcsRoundTrips() {
+        let suite = "test.smd.appgroup.\(UUID().uuidString)"
+        let store = AppGroupStore(suite: suite)
+        XCTAssertTrue(store.loadCalcs().isEmpty)
+        let calcs = [
+            RelayedCalc(id: "shock", title: "Shock index", category: "ICU",
+                        inputs: [CalcField(id: "hr", label: "HR", type: "number", unit: "bpm", step: 1)],
+                        computeSrc: "function(v){ return { v:r1(v.hr/v.sbp), u:'', i:'' }; }")
+        ]
+        store.saveCalcs(calcs)
+        XCTAssertEqual(store.loadCalcs().map(\.id), ["shock"])
+        XCTAssertEqual(store.loadCalcs().first?.inputs.first?.unit, "bpm")
+        store.clear()
+        XCTAssertTrue(store.loadCalcs().isEmpty)
+        UserDefaults(suiteName: suite)?.removePersistentDomain(forName: suite)
+    }
 }
