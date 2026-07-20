@@ -18,8 +18,12 @@ struct CodeBlueView: View {
     @State private var crown = 0.0
     @State private var captureOn = false
     @State private var captureNote: String?
+    @State private var metronomeOn = false
+    @State private var showRhythmPicker = false
     @Environment(\.scenePhase) private var scenePhase
     private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    // Haptic metronome at the mid-target rate (110/min ≈ every 0.545 s).
+    private let metronome = Timer.publish(every: 60.0 / 110.0, on: .main, in: .common).autoconnect()
 
     private func syncTick() {
         guard running, let s = startDate else { return }
@@ -43,6 +47,7 @@ struct CodeBlueView: View {
                     Text("cycle \(model.cycle) · rhythm in \(model.rhythmCountdownLabel)")
                         .font(.caption2).foregroundStyle(SMDPalette.text2.color)
                     cprDashboard
+                    metronomeButton
                     nextDrugCard
                     drugButtons
                 }
@@ -66,7 +71,17 @@ struct CodeBlueView: View {
         .focusable(running)
         .digitalCrownRotation($crown)
         .onReceive(ticker) { _ in syncTick() }
+        .onReceive(metronome) { _ in
+            if metronomeOn && running && !model.paused { WKInterfaceDevice.current().play(.click) }
+        }
         .onChange(of: scenePhase) { _, phase in if phase == .active { syncTick() } }
+        .confirmationDialog("Log rhythm", isPresented: $showRhythmPicker, titleVisibility: .visible) {
+            Button("VF") { logRhythm("VF") }
+            Button("VT") { logRhythm("VT") }
+            Button("PEA") { logRhythm("PEA") }
+            Button("Asystole") { logRhythm("Asystole") }
+            Button("Cancel", role: .cancel) {}
+        }
         // Clear any orphaned cycle reminder from a prior session on entry; the
         // repeating notification lives in the system but `running` is view-local.
         .onAppear { if !running { ResusAlerts.cancel(["codeblue-cycle"]) } }
@@ -126,11 +141,23 @@ struct CodeBlueView: View {
                     .tint(SMDPalette.critical.color)
             }.font(.caption)
             HStack {
-                Button("Rhythm") { HapticManager.play(.warning) }.tint(SMDPalette.info.color)
+                Button("Rhythm") { showRhythmPicker = true }.tint(SMDPalette.info.color)
                 Button("ROSC") { model.markROSC(); HapticManager.play(.success) }
                     .tint(SMDPalette.success.color)
             }.font(.caption)
         }
+    }
+
+    private func logRhythm(_ r: String) { model.recordRhythm(r); HapticManager.play(.warning) }
+
+    /// Haptic metronome toggle — ticks the wrist at the mid-target rate to pace CPR.
+    private var metronomeButton: some View {
+        Button(metronomeOn ? "♪ Pacing 110/min" : "♪ Metronome 110/min") {
+            metronomeOn.toggle()
+            if metronomeOn { WKInterfaceDevice.current().play(.start) }
+        }
+        .buttonStyle(.bordered).font(.caption)
+        .tint(metronomeOn ? SMDPalette.info.color : SMDPalette.text2.color)
     }
 
     private var startEndButton: some View {
@@ -161,7 +188,7 @@ struct CodeBlueView: View {
     }
 
     private func summaryLine(_ s: CodeSummary) -> some View {
-        Text("Duration \(s.durationLabel) · \(s.totalCompressions) comp · ~\(s.averageRateCPM)/min · CCF ~\(s.compressionFractionPct)% · \(s.shockCount) shock\(s.rosc ? " · ROSC ✓" : "")")
+        Text("Duration \(s.durationLabel) · \(s.totalCompressions) comp · ~\(s.averageRateCPM)/min · CCF ~\(s.compressionFractionPct)% · tgt ~\(s.targetRatePct)% · \(s.shockCount) shock\(s.rosc ? " · ROSC ✓" : "")")
             .font(.caption2).foregroundStyle(SMDPalette.text2.color)
     }
 
