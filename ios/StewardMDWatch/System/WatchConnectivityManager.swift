@@ -30,6 +30,7 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         WatchServices.watchlist.set(store.loadWatchlist())
         WatchServices.labs.ingest(store.loadCriticals())
         WatchServices.tasks.ingest(store.loadTasks())
+        GlancePublisher.setOpenTasks(WatchServices.tasks.openCount)
         WatchServices.tasks.onAction = { [weak self] action in self?.sendTaskAction(action) }
         WatchServices.calcs.set(store.loadCalcs())
         #if canImport(WatchConnectivity)
@@ -126,6 +127,7 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         if let d = context["tasks"] as? Data, let t = try? JSONDecoder().decode([WatchTask].self, from: d) {
             store.saveTasks(t)          // persist for relaunch + patient-less syncs
             WatchServices.tasks.ingest(t)
+            GlancePublisher.setOpenTasks(WatchServices.tasks.openCount)   // Rounds/Tasks glance
         }
         if let s = context["role"] as? String {
             role = s

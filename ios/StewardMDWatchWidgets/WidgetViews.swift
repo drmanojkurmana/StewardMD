@@ -87,6 +87,33 @@ struct ShiftWidgetView: View {
     }
 }
 
+/// Open-tasks Smart Stack card / circular complication (Head→JR flow).
+struct TasksWidgetView: View {
+    @Environment(\.widgetFamily) private var family
+    let state: GlanceState
+    var body: some View {
+        switch family {
+        case .accessoryInline:
+            Text("\(state.tasksDue) tasks due")
+        case .accessoryCircular:
+            VStack(spacing: 0) {
+                Image(systemName: "checklist").font(.caption2)
+                Text("\(state.tasksDue)").font(.system(.title3, design: .rounded)).bold().monospacedDigit()
+            }
+            .foregroundStyle(state.tasksDue > 0 ? SMDPalette.accent.color : SMDPalette.text2.color)
+        default:
+            HStack(spacing: SMDSpacing.s) {
+                Image(systemName: "checklist")
+                    .foregroundStyle(state.tasksDue > 0 ? SMDPalette.accent.color : SMDPalette.text2.color)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(state.tasksDue > 0 ? "\(state.tasksDue) open tasks" : "No open tasks").font(.headline)
+                    Text("Tap to review").font(.caption2).foregroundStyle(.secondary)
+                }
+            }
+        }
+    }
+}
+
 /// Today's-patients Smart Stack card.
 struct PatientsWidgetView: View {
     let state: GlanceState

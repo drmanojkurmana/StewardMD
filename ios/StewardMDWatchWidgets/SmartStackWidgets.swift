@@ -18,6 +18,22 @@ struct PatientsWidget: Widget {
     }
 }
 
+/// Smart Stack card + circular complication — open tasks (Head→JR flow). Reuses
+/// the rounds relevance so it rises during working hours.
+struct TasksWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "StewardMDTasks",
+                            provider: GlanceProvider(kind: .rounds)) { entry in
+            TasksWidgetView(state: entry.state)
+                .widgetURL(URL(string: "stewardmd://tasks"))
+                .containerBackground(.clear, for: .widget)
+        }
+        .configurationDisplayName("Tasks")
+        .description("Open tasks assigned to you.")
+        .supportedFamilies([.accessoryRectangular, .accessoryCircular, .accessoryInline])
+    }
+}
+
 /// Smart Stack card — on-call status (rises when the bleep is held).
 struct OnCallWidget: Widget {
     var body: some WidgetConfiguration {

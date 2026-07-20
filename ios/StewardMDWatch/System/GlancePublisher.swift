@@ -19,4 +19,10 @@ enum GlancePublisher {
     static func setCritical(count: Int, top: String?) {
         publish { $0.criticalCount = count; $0.topCritical = top }
     }
+
+    /// Open (not-done) task count → glance, so the Rounds complication + Tasks
+    /// Smart Stack card show a real number (was a relayed stub).
+    static func setOpenTasks(_ count: Int) {
+        publish { $0.tasksDue = count }
+    }
 }

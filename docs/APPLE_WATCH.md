@@ -301,3 +301,26 @@ watch-settings.js                        # Settings ▸ Apple Watch page
 - **Provisioning (user):** enable App Groups on the `in.stewardmd.app` App ID and
   add the watch bundle ids under team `5QY4LUKX23`.
 - **App icon art** is a design deliverable (the asset slot + color set are in place).
+
+## Operational notes / known behaviours
+
+- **Phone-tethered clinical data (by design).** watchOS has no independent backend
+  session for the shared-unit (Firestore) data, so patients, tasks, unit-wide
+  criticals, and favourited-calc *compute* flow through the iPhone over
+  WatchConnectivity. Drug search + the 18 offline calculators work with no phone.
+  The "iPhone not connected" banner marks when data may be stale.
+- **APNs environment must match.** The watch entitlement ships `aps-environment:
+  development` (sandbox). A build run from Xcode to a device uses **sandbox** APNs;
+  a **TestFlight/App Store** build uses **production** — the entitlement flips under
+  distribution signing and the backend `APNS_ENV` secret must match, or pushes
+  silently don't arrive. Watch topic = `in.stewardmd.app.watchkitapp` (token-based
+  `.p8` key is team-wide, so it covers the watch app id).
+- **No silent/background push handler.** `didReceiveRemoteNotification`
+  (content-available) is intentionally omitted — watchOS Swift 6 can't type-check it
+  cleanly with the system's non-Sendable payload. Alert pushes are shown by the
+  system and ingested on tap / foreground; the WC relay + `activate()` reconcile the
+  model on next open. This does not affect the wrist-buzz (alert pushes still fire).
+- **Favourited-calc compute needs the phone reachable** (JavaScriptCore is iOS-only,
+  absent on watchOS); the phone evaluates and replies. Offline native calcs don't.
+- **Resus timers** schedule local notifications (sepsis deadline + 10-min warning;
+  Code Blue 2-min cycle) so alerts fire wrist-down; in-app haptics play when frontmost.

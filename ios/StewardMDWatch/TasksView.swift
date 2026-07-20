@@ -86,5 +86,6 @@ private struct PriorityChip: View {
             .padding(.horizontal, 6).padding(.vertical, 1)
             .background(color.color.opacity(0.25), in: Capsule())
             .foregroundStyle(color.color)
+            .accessibilityLabel("\(priority) priority")
     }
 }

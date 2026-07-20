@@ -108,6 +108,15 @@ final class ModelDecodeTests: XCTestCase {
         let j = #"{"id":"P7","name":"Dubois","bed":"7","news2":6,"flag":null,"updatedAt":1.0}"#
         let e = try decode(WatchlistEntry.self, j)
         XCTAssertNil(e.vitals)
+        XCTAssertNil(e.unit)   // back-compat: unit optional
+    }
+
+    // Relay payload with unit tags (drives the ICU/ward tabs).
+    func testWatchlistEntryDecodesUnit() throws {
+        let j = #"{"id":"P1","name":"Rao","bed":"3","news2":4,"flag":null,"updatedAt":1.0,"unit":"Gastro ward","unitKind":"ward"}"#
+        let e = try decode(WatchlistEntry.self, j)
+        XCTAssertEqual(e.unit, "Gastro ward")
+        XCTAssertEqual(e.unitKind, "ward")
     }
 
     // MARK: Watchlist NEWS2 severity bands

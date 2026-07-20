@@ -17,6 +17,7 @@ struct StewardMDWatchWidgets: WidgetBundle {
         RoundsComplication()
         ShiftComplication()
         PatientsWidget()
+        TasksWidget()
         OnCallWidget()
     }
 }

@@ -144,6 +144,8 @@ struct CalcRunnerView: View {
             }
         }
         .listRowBackground(Color.clear)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(output.map { $0.error ?? "\($0.value) \($0.unit). \($0.interp)" } ?? "Enter values")
     }
 
     private func seedDefaults() {
