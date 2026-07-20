@@ -148,6 +148,13 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
             trace.append({"stage": "specialists", "status": "done", "candidates": len(specialist_candidates)})
         except Exception as e:  # noqa: BLE001 — never let specialists affect the deterministic path
             log.info("specialists.isolated", reason=type(e).__name__)
+        # EcgLib pretrained classifiers (Apache-2.0) — optional + isolated; positives join the candidates.
+        try:
+            ecglib_found = await providers.ecglib.classify(signal)
+            specialist_candidates = specialist_candidates + (ecglib_found or [])
+            trace.append({"stage": "ecglib", "status": "done", "positives": len(ecglib_found or [])})
+        except Exception as e:  # noqa: BLE001 — Not Ready / error -> isolated
+            log.info("ecglib.isolated", reason=type(e).__name__)
 
         # rhythm (critical) + beats (optional)
         rhythm, _ = await run_stage("rhythm", providers.rhythm,

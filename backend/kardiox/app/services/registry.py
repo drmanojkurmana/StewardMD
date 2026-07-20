@@ -5,8 +5,8 @@ from __future__ import annotations
 import asyncio
 
 from app.core.config import Settings
-from app.services import (digitization, gemini, measurement, preprocessing, quality, rhythm, rules,
-                          specialists, wfdb_io)
+from app.services import (digitization, ecglib_provider, gemini, measurement, preprocessing, quality,
+                          rhythm, rules, specialists, wfdb_io)
 
 _PREPROC = {"none": preprocessing.NonePreprocessing, "opencv": preprocessing.OpenCVPreprocessing}
 _QUALITY = {"none": quality.NoneQuality, "opencv": quality.OpenCVQuality}
@@ -33,6 +33,8 @@ class Providers:
         self.gemini = _GEM.get(s.provider_gemini, gemini.NoneGemini)()
         # Specialist model classifiers (optional, config-activated; each Not Ready until a checkpoint exists).
         self.specialists = specialists.build_specialists(s)
+        # EcgLib pretrained classifiers (Apache-2.0) — an ensemble of binary pathology models (opt-in).
+        self.ecglib = ecglib_provider.EcgLibClassifier()
 
     def all(self):
         return [self.preprocessing, self.quality, self.digitization, self.wfdb, self.rhythm,
@@ -45,7 +47,7 @@ class Providers:
         return await asyncio.gather(*(p.health() for p in self.all()))
 
     async def specialist_health(self) -> list[dict]:
-        return await asyncio.gather(*(p.health() for p in self.specialists))
+        return await asyncio.gather(*(p.health() for p in [*self.specialists, self.ecglib]))
 
 
 def build_providers(s: Settings) -> Providers:

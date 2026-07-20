@@ -76,6 +76,9 @@ class Settings(BaseSettings):
     # registry maps task -> {path, kind, labels, inputSpec, labelMap}. Empty {} = every specialist is
     # NOT READY (KardioX ships no weights). Adding a specialist needs no code — just a registry entry.
     specialists_json: str = "{}"
+    # EcgLib (ispras, Apache-2.0) pretrained binary classifiers. Comma-separated pathology codes to enable
+    # (AFIB,1AVB,STACH,SBRAD,IRBBB,CRBBB,PVC); empty = disabled/Not-Ready. ecglib fetches the weights.
+    ecglib_pathologies: str = ""
     # Multi-digitizer consensus members (comma-separated: classical, external). Extra members flagged
     # Not Ready are skipped; a single available member still yields a (single-source) result.
     digitizer_consensus_members: str = "classical"
