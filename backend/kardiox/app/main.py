@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import PlainTextResponse
 
 from app.api.v1.router import router as v1_router
 from app.core.config import get_settings
@@ -40,6 +41,12 @@ def create_app() -> FastAPI:
     async def root() -> dict:
         return {"service": settings.app_name, "apiVersion": API_VERSION, "mode": settings.mode,
                 "docs": "/docs", "health": f"{V1_PREFIX}/health"}
+
+    @app.get("/metrics", include_in_schema=False)
+    async def metrics() -> PlainTextResponse:
+        # Prometheus text exposition. Restrict to the internal network in production.
+        from app.core.metrics import METRICS
+        return PlainTextResponse(METRICS.render(), media_type="text/plain; version=0.0.4")
 
     log.info("startup", mode=settings.mode, api_version=API_VERSION)
     return app

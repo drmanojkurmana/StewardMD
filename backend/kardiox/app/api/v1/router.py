@@ -3,8 +3,9 @@ from __future__ import annotations
 
 from fastapi import APIRouter
 
-from app.api.v1 import analyze, health
+from app.api.v1 import analyze, health, jobs
 
 router = APIRouter()
 router.include_router(health.router)
 router.include_router(analyze.router)
+router.include_router(jobs.router)
