@@ -3,10 +3,10 @@
  * PWA / desktop browsers; this handles the native Capacitor apps where Web Push is
  * unavailable (notably iOS, where Web Push does not work inside a WKWebView).
  *
- * Token record: { token, platform: "ios"|"android", uid|null, ts }
+ * Token record: { token, platform: "ios"|"android"|"watch", uid|null, ts }
  */
 import { pushKv } from "./_webpush.js";
-import { apnsConfigured, sendApns } from "./_apns.js";
+import { apnsConfigured, sendApns, apnsWatchBundleId } from "./_apns.js";
 import { fcmConfigured, sendFcm } from "./_fcm.js";
 
 const NAT_PREFIX = "push:native:";
@@ -57,6 +57,7 @@ export async function sendNativeToAll(env, msg, opts) {
     try {
       let r;
       if (t.platform === "ios") { if (!apnsConfigured(env)) return; r = await sendApns(env, t.token, msg); }
+      else if (t.platform === "watch") { if (!apnsConfigured(env)) return; r = await sendApns(env, t.token, msg, apnsWatchBundleId(env)); }
       else if (t.platform === "android") { if (!fcmConfigured(env)) return; r = await sendFcm(env, t.token, msg); }
       else return;
       if (r && r.ok) sent++;

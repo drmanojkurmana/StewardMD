@@ -7133,6 +7133,17 @@
     return (c.title+" "+c.desc+" "+c.cat+" "+c.id+" "+(c.kw||[]).join(" ")).toLowerCase().indexOf(q)>=0;
   }
 
+  // Apple Watch favourites: which calculators to relay to the wrist. Stored as a
+  // localStorage id list; toggling triggers an immediate watch re-sync (native only).
+  function watchFavs(){ try{ var a=JSON.parse(localStorage.getItem("smd_watch_calc_favs")||"[]"); return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+  function isWatchFav(id){ return watchFavs().indexOf(id)>=0; }
+  function toggleWatchFav(id){
+    var a=watchFavs(), i=a.indexOf(id);
+    if(i>=0) a.splice(i,1); else a.push(id);
+    try{ localStorage.setItem("smd_watch_calc_favs", JSON.stringify(a)); }catch(e){}
+    try{ if(window.SMD_APPLE_WATCH_SYNC) window.SMD_APPLE_WATCH_SYNC(); }catch(e){}
+  }
+
   function renderList(){
     var el=root.querySelector("#mcList");
     var list=CALCS.filter(matches);
@@ -7144,8 +7155,10 @@
       if(!inCat.length) return;
       html+='<div class="mc-grp-h">'+mcCatIco(cat)+" "+esc(cat)+'</div><div class="mc-grid">';
       inCat.forEach(function(c){
-        html+='<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'">'+
-          '<button class="mc-card-head" data-open="'+c.id+'"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
+        var favOn=isWatchFav(c.id);
+        html+='<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'" style="position:relative">'+
+          '<button data-fav="'+c.id+'" aria-label="'+(favOn?"Remove from":"Add to")+' Apple Watch" title="Show on Apple Watch" style="position:absolute;top:6px;right:8px;background:none;border:none;font:17px/1 system-ui;cursor:pointer;color:'+(favOn?"#e0a800":"#c2c2c2")+';z-index:2;padding:2px">'+(favOn?"★":"☆")+'</button>'+
+          '<button class="mc-card-head" data-open="'+c.id+'" style="padding-right:34px"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
           (openId===c.id?'<div class="mc-panel" id="mcPanel_'+c.id+'"></div>':"")+
         '</div>';
       });
@@ -7154,6 +7167,9 @@
     el.innerHTML=html;
     el.querySelectorAll("[data-open]").forEach(function(b){
       b.addEventListener("click", function(){ var id=b.getAttribute("data-open"); openId=(openId===id?null:id); renderList(); });
+    });
+    el.querySelectorAll("[data-fav]").forEach(function(b){
+      b.addEventListener("click", function(ev){ ev.stopPropagation(); toggleWatchFav(b.getAttribute("data-fav")); renderList(); });
     });
     if(openId) renderPanel(openId);
   }
