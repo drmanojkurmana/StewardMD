@@ -476,16 +476,6 @@
       var role = roleForRelay(); if (role) payload.role = role;
       var cd = calcDefs(); if (cd.length) payload.calcDefs = cd;
       var cen = census(wl.length); if (cen) payload.glance = cen;
-      // DIAGNOSTIC (temp): which source populated the watchlist? Logged by the plugin.
-      try {
-        var _gp = 0, _os = openState();
-        Object.keys(_grp.patients).forEach(function (g) { _gp += (_grp.patients[g] || []).length; });
-        payload._dbg = "groupsOn=" + (groupsOn() ? 1 : 0) +
-          " open=" + ((_os && _os.patient) ? 1 : 0) +
-          " groups=" + ((_grp.groups || []).length) + " groupPts=" + _gp +
-          " roster=" + ((window.ICU && ICU.listPatients) ? (ICU.listPatients() || []).length : -1) +
-          " wl=" + wl.length;
-      } catch (e) {}
       await p.publish(payload);
       markSynced();
       return true;

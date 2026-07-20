@@ -48,10 +48,8 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         do {
             try await WatchServices.appAPI.setTaskStatus(gid: action.groupId, pid: action.patientId,
                                                          taskId: action.taskId, status: action.status)
-            NSLog("[SMD-Watch] task write-back: direct API OK")
         } catch {
-            NSLog("[SMD-Watch] task write-back: direct failed (%@) → relay", String(describing: error))
-            sendTaskAction(action)
+            sendTaskAction(action)   // direct write failed → fall back to the phone relay
         }
     }
 
@@ -63,10 +61,8 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         do {
             try await WatchServices.appAPI.appendTimeline(gid: gid, pid: pid,
                 title: "Acknowledged — " + (label.isEmpty ? "critical value" : label))
-            NSLog("[SMD-Watch] ack write-back: direct API OK")
         } catch {
-            NSLog("[SMD-Watch] ack write-back: direct failed (%@) → relay", String(describing: error))
-            sendLabAck(alert)
+            sendLabAck(alert)   // direct write failed → fall back to the phone relay
         }
     }
 

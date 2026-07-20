@@ -114,10 +114,6 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
     """
 
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
-        NSLog("[SMD-Watch] phone rx userInfo kind=%@ gid=%@ pid=%@ tid=%@ status=%@",
-              (userInfo["kind"] as? String) ?? "nil", (userInfo["gid"] as? String) ?? (userInfo["groupId"] as? String) ?? "-",
-              (userInfo["pid"] as? String) ?? (userInfo["patientId"] as? String) ?? "-",
-              (userInfo["taskId"] as? String) ?? "-", (userInfo["status"] as? String) ?? "-")
         switch userInfo["kind"] as? String {
         case "taskStatus":
             NotificationCenter.default.post(name: WatchConnectivityRelay.taskStatusRequested,
