@@ -18,34 +18,20 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
 
     func updateContext(_ dict: [String: Any]) {
         latest = dict
-        guard WCSession.isSupported() else { NSLog("[SMD-Watch] WCSession not supported"); return }
+        guard WCSession.isSupported() else { return }
         let s = WCSession.default
-        // DIAGNOSTIC (systematic-debugging evidence): the delivery boundary state.
-        NSLog("[SMD-Watch] relay: activation=%ld paired=%d watchAppInstalled=%d reachable=%d keys=[%@]",
-              s.activationState.rawValue, s.isPaired, s.isWatchAppInstalled, s.isReachable,
-              dict.keys.sorted().joined(separator: ","))
-        guard s.activationState == .activated else {
-            NSLog("[SMD-Watch] relay: session not activated yet — queued, will flush on activation")
-            return
-        }
-        do {
-            try s.updateApplicationContext(dict)
-            NSLog("[SMD-Watch] relay: updateApplicationContext OK")
-        } catch {
-            NSLog("[SMD-Watch] relay: updateApplicationContext FAILED: %@", String(describing: error))
-        }
+        // Queue until the session is activated; the delegate flushes on activation.
+        guard s.activationState == .activated else { return }
+        try? s.updateApplicationContext(dict)
     }
 
     // MARK: WCSessionDelegate
     func session(_ session: WCSession,
                  activationDidCompleteWith activationState: WCSessionActivationState,
                  error: Error?) {
-        NSLog("[SMD-Watch] relay: activationDidComplete state=%ld error=%@ hasQueued=%d",
-              activationState.rawValue, error.map { String(describing: $0) } ?? "nil", latest.isEmpty ? 0 : 1)
         // Flush any state queued before activation completed.
         if activationState == .activated, !latest.isEmpty {
-            do { try session.updateApplicationContext(latest); NSLog("[SMD-Watch] relay: queued flush OK") }
-            catch { NSLog("[SMD-Watch] relay: queued flush FAILED: %@", String(describing: error)) }
+            try? session.updateApplicationContext(latest)
         }
     }
 

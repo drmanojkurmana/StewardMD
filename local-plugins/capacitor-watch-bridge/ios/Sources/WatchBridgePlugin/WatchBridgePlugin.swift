@@ -140,12 +140,6 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         if let t = tasksData { context["tasks"] = t }
         if let r = role { context["role"] = r }
 
-        // DIAGNOSTIC (systematic-debugging evidence): what the phone is publishing.
-        NSLog("[SMD-Watch] publish uid=%@ favs=%d recents=%d glance=%@ watchlist=%d criticals=%d",
-              (session["uid"] as? String) != nil ? "set" : "nil",
-              favorites.count, recents.count,
-              glance == nil ? "nil" : "set", watchlist?.count ?? -1, criticals?.count ?? -1)
-
         relay.updateContext(context)
 
         call.resolve()
