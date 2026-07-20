@@ -38,6 +38,84 @@
     catch (e) { return []; }
   }
 
+  // ---- Shared-unit (group mode) live cache ----------------------------------
+  // Subscribe to ALL the doctor's shared units and their patients/tasks, so the
+  // watch mirrors "ICU and my ward" — not just the one open unit. Reads only the
+  // PUBLIC SMD_ICU_GROUPS API (never icu.js internals). Re-publishes (debounced)
+  // on any snapshot change.
+  var _grp = { groups: [], patients: {}, tasks: {}, role: {}, subs: [], ptSubs: {} };
+  var _grpMax = 6;            // cap live units
+  var _grpPtMax = 40;         // cap total patients we hold task listeners for
+  function groupsApi() { try { return window.SMD_ICU_GROUPS || null; } catch (e) { return null; } }
+  function groupsOn() { var a = groupsApi(); try { return !!(a && a.enabled && a.enabled()); } catch (e) { return !!a; } }
+
+  var _repubT = null;
+  function republishSoon() {
+    if (_repubT) return;
+    _repubT = setTimeout(function () { _repubT = null; autoPublish(); }, 400);
+  }
+
+  function startGroupSync() {
+    var api = groupsApi();
+    if (!api || !api.subscribeGroups || !groupsOn()) return;
+    // one groups listener; (re)build per-group patient + task listeners on change
+    _grp.subs.push(api.subscribeGroups(function (groups) {
+      _grp.groups = (groups || []).slice(0, _grpMax);
+      _grp.role = {};
+      _grp.groups.forEach(function (g) { _grp.role[g.id] = g.myRole || null; });
+      rebuildGroupPatientSubs();
+      republishSoon();
+    }, function () {}));
+  }
+
+  function rebuildGroupPatientSubs() {
+    var api = groupsApi(); if (!api) return;
+    var wanted = {};
+    _grp.groups.forEach(function (g) {
+      wanted[g.id] = 1;
+      if (!_grp.ptSubs[g.id]) {
+        _grp.ptSubs[g.id] = { patientsOff: null, taskOffs: {} };
+        _grp.ptSubs[g.id].patientsOff = api.subscribePatients(g.id, function (pts) {
+          _grp.patients[g.id] = pts || [];
+          syncTaskSubs(g.id, pts || []);
+          republishSoon();
+        }, function () {});
+      }
+    });
+    // tear down units we've left
+    Object.keys(_grp.ptSubs).forEach(function (gid) {
+      if (!wanted[gid]) { teardownGroup(gid); }
+    });
+  }
+
+  function syncTaskSubs(gid, pts) {
+    var api = groupsApi(); if (!api || !api.subscribeTasks) return;
+    var slot = _grp.ptSubs[gid]; if (!slot) return;
+    var want = {};
+    var total = 0; Object.keys(_grp.ptSubs).forEach(function (k) { total += Object.keys(_grp.ptSubs[k].taskOffs).length; });
+    pts.forEach(function (p) {
+      if (!p || !p.id) return;
+      want[p.id] = 1;
+      if (!slot.taskOffs[p.id] && total < _grpPtMax) {
+        total++;
+        slot.taskOffs[p.id] = api.subscribeTasks(gid, p.id, function (tasks) {
+          _grp.tasks[gid + "/" + p.id] = tasks || [];
+          republishSoon();
+        });
+      }
+    });
+    Object.keys(slot.taskOffs).forEach(function (pid) {
+      if (!want[pid]) { try { slot.taskOffs[pid](); } catch (e) {} delete slot.taskOffs[pid]; delete _grp.tasks[gid + "/" + pid]; }
+    });
+  }
+
+  function teardownGroup(gid) {
+    var slot = _grp.ptSubs[gid]; if (!slot) return;
+    try { slot.patientsOff && slot.patientsOff(); } catch (e) {}
+    Object.keys(slot.taskOffs).forEach(function (pid) { try { slot.taskOffs[pid](); } catch (e) {} delete _grp.tasks[gid + "/" + pid]; });
+    delete _grp.ptSubs[gid]; delete _grp.patients[gid];
+  }
+
   // Latest vitals snapshot for a patient-glance tile grid. state.vitals is a
   // time-series array; take the most recent by ts (fallback last). Returns the
   // classic four tiles (HR / BP / SpO2 / Temp), omitting absent values, with a
@@ -97,6 +175,23 @@
           vitals: vitalsFrom(st)
         });
       }
+    } catch (e) {}
+    // 1b. Shared-unit patients (group mode) — ALL the doctor's units.
+    try {
+      Object.keys(_grp.patients).forEach(function (gid) {
+        (_grp.patients[gid] || []).forEach(function (p) {
+          if (!p) return;
+          var st2 = p.state || {};
+          push({
+            id: String(gid + ":" + (p.id || "")),
+            name: String(p.name || (st2.patient && st2.patient.name) || "Patient"),
+            bed: String(p.bed || (st2.patient && st2.patient.bed) || ""),
+            news2: news2Of(st2),
+            flag: String(p.dx || (st2.patient && st2.patient.diagnosis) || "") || null,
+            vitals: vitalsFrom(st2)
+          });
+        });
+      });
     } catch (e) {}
     // 2. Saved ICU roster
     try {
@@ -159,6 +254,28 @@
           });
         });
       }
+    } catch (e) {}
+    // Unit-wide: every shared patient's alerts across all the doctor's units.
+    try {
+      Object.keys(_grp.patients).forEach(function (gid) {
+        (_grp.patients[gid] || []).forEach(function (p) {
+          var st2 = p.state || {}, alerts = st2.alerts || [];
+          if (!alerts.length) return;
+          var label = [p.bed ? ("Bed " + p.bed) : null, p.name].filter(Boolean).join(" · ");
+          alerts.forEach(function (a) {
+            if (!a || (a.severity !== "crit" && a.severity !== "warn")) return;
+            var m = String(a.msg || "").match(/([\d.]+)\s*([A-Za-z%\/]+)?/);
+            out.push({
+              id: "icu-" + String(gid + ":" + (p.id || "")) + "-" + String(a.title || ""),
+              analyte: String(a.title || "Alert"),
+              value: m ? m[1] : "", units: (m && m[2]) ? m[2] : null, refRange: null,
+              patientLabel: label || null,
+              severity: a.severity === "crit" ? "critical" : "warning",
+              ts: Math.floor(Date.now() / 1000)
+            });
+          });
+        });
+      });
     } catch (e) {}
     return out.slice(0, 20);
   }
@@ -257,6 +374,9 @@
     var a = auth();
     if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { autoPublish(); }); }
     else { setTimeout(start, 1500); return; }        // Firebase not booted yet — retry
+
+    // Live shared-unit sync (ICU + ward) — publishes on any snapshot change.
+    startGroupSync();
 
     // Refresh well before the ~1h ID-token expiry.
     setInterval(autoPublish, 50 * 60 * 1000);
