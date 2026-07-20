@@ -1,0 +1,9 @@
+# KardioX pipeline — ML/vision deps. Install these (plus requirements.txt) in the model-serving image
+# once each stage is implemented. Kept separate so the API image is lightweight until then.
+numpy>=1.26
+opencv-python-headless>=4.9      # preprocessing + digitization (stages 2-3)
+wfdb>=4.1                        # signal I/O + PhysioNet interop (stage 4)
+neurokit2>=0.2.7                 # delineation, intervals, HRV (stage 8/10)
+torch>=2.2                       # TorchECG backbone (stages 6/7/9)
+torch-ecg>=0.0.27                # rhythm/beat/morphology models
+google-generativeai>=0.5        # Gemini clinical explanation (stage 12)

@@ -1,0 +1,154 @@
+/* kardiox.css — KardioX AI · module styles (sibling of fundx.css).
+ *
+ * ALL selectors are scoped to #kardioxRoot / .kx-* — additive, zero global leakage (Developer Notes +
+ * Deployment gate in the README). Reuses StewardMD design tokens (--rds-*) and severity tokens
+ * (--sev-*) so light/dark themes and future re-theming flow through with no extra work. Module-local
+ * --kx-* tokens are defined ON #kardioxRoot only. Flag-gated by smd_kardiox (default OFF); when off,
+ * kardiox.js never mounts #kardioxRoot so none of this applies.
+ *
+ * M0 scope: design tokens, the flagship Home card (screen 01), the module overlay shell + landing
+ * stub, and the named keyframes. Per-screen .kx-* component styles are added in M2, mined pixel-exact
+ * from the design handoff (KardioX AI.dc.html).
+ */
+
+/* ─────────────────────────── Design tokens (module-local, on the root only) ─────────────────────── */
+#kardioxRoot {
+  /* From the design handoff panel: reuse --rds-*; --kx-cardiac is fixed (ECG/heart accent). */
+  --kx-primary: var(--rds-primary, #0F766E);
+  --kx-primary-2: var(--rds-primary-2, #115E59);
+  --kx-soft: var(--rds-soft, #E4F2EF);
+  --kx-cardiac: #E5484D;
+  --kx-bg: var(--rds-bg, #F5F8F9);
+  --kx-surf-2: var(--rds-surf-2, #EEF3F5);
+  --kx-ink: var(--rds-ink, #0D1B24);
+  --kx-text: var(--rds-text, #0D1B24);
+  --kx-text-2: var(--rds-text-2, #5B7083);
+  --kx-muted: var(--rds-muted, #8CA2B1);
+  --kx-hairline: var(--rds-hairline, #E3EAEE);
+  --kx-card: var(--rds-card, #ffffff);
+  /* Severity — theme-invariant; prefer --sev-* if StewardMD defines them, else the design hexes. */
+  --kx-sev-critical: var(--sev-critical, #B42332);
+  --kx-sev-urgent: var(--sev-urgent, #C2410C);
+  --kx-sev-warn: var(--sev-warn, #996007);
+  --kx-sev-stable: var(--sev-stable, #1C7A4A);
+  --kx-sev-info: var(--sev-info, #1D6FA3);
+  --kx-green: #34d399;
+  /* Shape + motion. */
+  --kx-r: 16px;
+  --kx-r-ctl: 12px;
+  --kx-ease: cubic-bezier(.2, .7, .2, 1);
+  --kx-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --kx-sans: "IBM Plex Sans", var(--rds-font, system-ui), -apple-system, sans-serif;
+}
+
+/* ─────────────────────────── Module overlay shell ───────────────────────────────────────────────── */
+#kardioxRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;                       /* above the app shell, sibling of #fundxRoot's overlay layer */
+  display: none;                        /* kardiox.js flips this to flex when opened */
+  flex-direction: column;
+  background: var(--kx-bg);
+  color: var(--kx-text);
+  font-family: var(--kx-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+#kardioxRoot.kx-open { display: flex; }
+#kardioxRoot .kx-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: env(safe-area-inset-bottom, 0); }
+/* Tablet / desktop (README §Platform Adaptation): keep the mobile-first content readable by centering
+   it with gutters rather than stretching phone-width UI edge-to-edge. Full iPad two-pane split-view is
+   tracked for the on-device M6 design pass. */
+@media (min-width: 820px) {
+  #kardioxRoot .kx-scroll { padding-left: max(16px, calc((100% - 760px) / 2)); padding-right: max(16px, calc((100% - 760px) / 2)); }
+}
+
+/* Clinical numbers are always monospaced, tabular (design principle #5). */
+#kardioxRoot .kx-data { font-family: var(--kx-mono); font-variant-numeric: tabular-nums; }
+
+/* ─────────────────────────── Flagship Home card (screen 01) ─────────────────────────────────────── */
+/* Lives INSIDE the StewardMD home surface (injected by home.js), so it is scoped by .kx-home-card,
+   not #kardioxRoot (the card must render before the module overlay exists). */
+.kx-home-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  padding: 18px;
+  color: #fff;
+  background: linear-gradient(155deg, #0d423c, #0f2a30, #131e28);
+  box-shadow: 0 10px 30px rgba(13, 27, 36, .18);
+  cursor: pointer;
+  isolation: isolate;
+}
+.kx-home-card::after {                  /* red radial glow */
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(120% 80% at 80% 10%, rgba(229, 72, 77, .28), transparent 60%);
+}
+.kx-home-card > * { position: relative; z-index: 1; }
+.kx-home-trace { display: block; width: 100%; height: 46px; margin: 8px 0 12px; overflow: visible; }
+.kx-home-trace path {
+  fill: none; stroke: #E5484D; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(229, 72, 77, .5));
+  stroke-dasharray: 1200; stroke-dashoffset: 1200;
+  animation: kxDraw 3.4s var(--kx-ease, ease) infinite;
+}
+.kx-home-head { display: flex; align-items: center; gap: 10px; }
+.kx-home-heart { color: #E5484D; display: inline-flex; animation: kxPulse 1.5s ease-in-out infinite; }
+.kx-home-pill {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px;
+  background: rgba(255, 255, 255, .12); color: #eafff8;
+}
+.kx-home-title { font-size: 22px; font-weight: 800; letter-spacing: -.02em; margin: 4px 0 2px; }
+.kx-home-sub { font-size: 13px; color: rgba(234, 255, 248, .78); }
+.kx-home-cta {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 9px 15px;
+  border-radius: 999px; background: #fff; color: #0d423c; font-weight: 700; font-size: 14px; border: 0;
+}
+.kx-home-conf { margin-top: 10px; font-size: 12px; color: rgba(234, 255, 248, .7); }
+.kx-home-conf b { font-family: var(--kx-mono); }
+.kx-home-foot { margin-top: 12px; font-size: 11px; color: rgba(234, 255, 248, .55); display: flex; align-items: center; gap: 5px; }
+/* sibling tiles row (FundX / Antibiogram) rendered by home.js beneath the card use existing tile styles */
+
+/* ─────────────────────────── Landing (screen 02) — M0 stub, fleshed out in M2 ───────────────────── */
+#kardioxRoot .kx-topbar {
+  display: flex; align-items: center; gap: 10px; padding: 14px 16px calc(14px + env(safe-area-inset-top, 0));
+  padding-top: max(14px, env(safe-area-inset-top, 0));
+  border-bottom: 1px solid var(--kx-hairline); background: var(--kx-card);
+}
+#kardioxRoot .kx-topbar h1 { font-size: 17px; font-weight: 800; letter-spacing: -.01em; flex: 1; margin: 0; }
+#kardioxRoot .kx-topbar h1 span { color: var(--kx-primary); }
+#kardioxRoot .kx-iconbtn {
+  width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--kx-hairline);
+  background: var(--kx-card); color: var(--kx-text-2); display: inline-flex; align-items: center;
+  justify-content: center; cursor: pointer;
+}
+
+/* ─────────────────────────── Buttons (base) ─────────────────────────────────────────────────────── */
+#kardioxRoot .kx-btn { min-height: 44px; border-radius: var(--kx-r-ctl); font-weight: 700; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; border: 1px solid transparent; }
+#kardioxRoot .kx-btn-primary { background: var(--kx-primary); color: #fff; box-shadow: 0 6px 16px rgba(15, 118, 110, .28); }
+#kardioxRoot .kx-btn-secondary { background: var(--kx-card); color: var(--kx-text); border-color: var(--kx-hairline); }
+#kardioxRoot .kx-btn-ghost { background: transparent; color: var(--kx-primary); }
+#kardioxRoot .kx-btn-danger { background: var(--kx-sev-critical); color: #fff; }
+#kardioxRoot .kx-btn:focus-visible, .kx-home-card:focus-visible { outline: 2px solid var(--kx-primary); outline-offset: 2px; }
+/* Blanket visible-focus for every interactive control in the module (buttons, [role=button], chips,
+   tiles, links, inputs) — README a11y requires a visible focus ring on all controls. */
+#kardioxRoot button:focus-visible, #kardioxRoot [role="button"]:focus-visible, #kardioxRoot a:focus-visible,
+#kardioxRoot [tabindex]:focus-visible, #kardioxRoot input:focus-visible, #kardioxRoot select:focus-visible {
+  outline: 2px solid var(--kx-primary); outline-offset: 2px; border-radius: 6px;
+}
+
+/* ─────────────────────────── Named keyframes (Animations & Motion table) ────────────────────────── */
+@keyframes kxDraw { to { stroke-dashoffset: 0; } }
+@keyframes kxPulse { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.14); } 70% { transform: scale(1.02); } }
+@keyframes kxSweep { from { transform: translateX(-120%); } to { transform: translateX(220%); } }
+@keyframes kxSpin { to { transform: rotate(360deg); } }
+@keyframes kxShimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes kxRise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ─────────────────────────── Reduced motion — freeze all traces/loaders/sweeps ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .kx-home-trace path { animation: none; stroke-dashoffset: 0; }
+  .kx-home-heart { animation: none; }
+  #kardioxRoot *, #kardioxRoot *::before, #kardioxRoot *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+}

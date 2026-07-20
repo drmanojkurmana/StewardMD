@@ -1,0 +1,1667 @@
+/* kardiox-screens.css — KardioX AI · per-screen .kx-* styles (M2/M3/M4), assembled. De-dashed. */
+/* .msr = Material Symbols Rounded (some M4 screens emit <span class="msr">name</span>). */
+#kardioxRoot .msr { font-family: "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; }
+#kardioxRoot .msr.fill { font-variation-settings: "FILL" 1; }
+
+/* ===== landing ===== */
+/* ─────────────────────────── Landing (screen 02) - mined pixel-exact from KardioX AI.dc.html ──────
+   All selectors scoped to #kardioxRoot / .kx-*. Tokens + keyframes come from kardiox.css (not redefined).
+   Trace stroke colours are the design's bright ECG-on-dark hexes (not the AA text severity tokens),
+   so they read on the #131e28 thumbnail; kept as classes (no inline styles). */
+
+#kardioxRoot .kx-landing { padding: 16px; animation: kxRise .32s var(--kx-ease) both; }
+
+/* Header (per-screen; supersedes the M0 shell stub .kx-topbar - see notes) */
+#kardioxRoot .kx-land-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px;
+  border-bottom: 1px solid var(--kx-hairline);
+  background: var(--kx-bg);
+  position: sticky; top: 0; z-index: 2;
+}
+#kardioxRoot .kx-land-close,
+#kardioxRoot .kx-land-gear {
+  flex: 0 0 auto; width: 40px; height: 40px; padding: 0;
+  border: 0; border-radius: 999px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-land-close { background: transparent; color: var(--kx-ink); }
+#kardioxRoot .kx-land-gear { background: var(--kx-surf-2); color: var(--kx-text-2); }
+#kardioxRoot .kx-land-close .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-land-gear .material-symbols-rounded { font-size: 22px; }
+#kardioxRoot .kx-land-titles { flex: 1; min-width: 0; }
+#kardioxRoot .kx-land-title { font-weight: 700; font-size: 17px; letter-spacing: -.01em; color: var(--kx-text); }
+#kardioxRoot .kx-land-title span { color: var(--kx-primary); }
+#kardioxRoot .kx-land-sub { margin-top: 1px; font-size: 12px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Primary CTA */
+#kardioxRoot .kx-cta {
+  display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+  padding: 18px; border: 0; border-radius: var(--kx-r); cursor: pointer;
+  background: linear-gradient(135deg, var(--kx-primary), var(--kx-primary-2));
+  color: #fff; box-shadow: 0 8px 22px rgba(15, 118, 110, .28);
+}
+#kardioxRoot .kx-cta-ic { flex: 0 0 auto; display: inline-flex; }
+#kardioxRoot .kx-cta-ic .material-symbols-rounded { font-size: 30px; }
+#kardioxRoot .kx-cta-txt { flex: 1; min-width: 0; }
+#kardioxRoot .kx-cta-title { display: block; font-weight: 700; font-size: 16px; }
+#kardioxRoot .kx-cta-sub { display: block; margin-top: 2px; font-size: 12px; font-weight: 500; opacity: .92; }
+#kardioxRoot .kx-cta-go { flex: 0 0 auto; display: inline-flex; opacity: .9; }
+#kardioxRoot .kx-cta-go .material-symbols-rounded { font-size: 22px; }
+
+/* 2×2 quick-actions grid */
+#kardioxRoot .kx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#kardioxRoot .kx-tile {
+  display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+  min-height: 44px; padding: 14px; cursor: pointer;
+  border: 1px solid var(--kx-hairline); border-radius: 14px; background: var(--kx-card);
+}
+#kardioxRoot .kx-tile-ic { display: inline-flex; color: var(--kx-primary); }
+#kardioxRoot .kx-tile-ic--cardiac { color: var(--kx-cardiac); }
+#kardioxRoot .kx-tile-ic .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-tile-title { margin-top: 6px; font-weight: 700; font-size: 14px; color: var(--kx-text); }
+#kardioxRoot .kx-tile-sub { font-size: 11.5px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Section header */
+#kardioxRoot .kx-sec-head { display: flex; align-items: center; justify-content: space-between; margin: 22px 2px 10px; }
+#kardioxRoot .kx-sec-title { font-weight: 700; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--kx-text-2); }
+#kardioxRoot .kx-seeall { padding: 6px 2px; border: 0; background: transparent; cursor: pointer; font-size: 12px; font-weight: 600; color: var(--kx-primary); }
+
+/* Recent analyses list */
+#kardioxRoot .kx-recent { display: flex; flex-direction: column; gap: 8px; }
+#kardioxRoot .kx-rec {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+  padding: 10px; cursor: pointer;
+  border: 1px solid var(--kx-hairline); border-radius: var(--kx-r-ctl); background: var(--kx-card);
+}
+#kardioxRoot .kx-rec-thumb {
+  flex: 0 0 auto; width: 46px; height: 46px; border-radius: 10px; overflow: hidden;
+  background: #131e28; display: flex; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-rec-thumb svg { display: block; }
+#kardioxRoot .kx-trace { fill: none; stroke-width: 2; }
+#kardioxRoot .kx-trace--critical,
+#kardioxRoot .kx-trace--urgent { stroke: #FF6B6B; }
+#kardioxRoot .kx-trace--warn { stroke: #E0A800; }
+#kardioxRoot .kx-trace--stable { stroke: #5BD08F; }
+#kardioxRoot .kx-trace--info { stroke: #7FB8DD; }
+#kardioxRoot .kx-rec-body { flex: 1; min-width: 0; }
+#kardioxRoot .kx-rec-title { display: block; font-weight: 700; font-size: 13.5px; color: var(--kx-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#kardioxRoot .kx-rec-meta { display: block; font-size: 11px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Severity pill - COLOUR + ICON + LABEL (mono, tabular via .kx-data) */
+#kardioxRoot .kx-pill {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 3px;
+  padding: 4px 8px; border-radius: 999px; font-weight: 700; font-size: 11px;
+}
+#kardioxRoot .kx-pill .material-symbols-rounded { font-size: 13px; }
+#kardioxRoot .kx-pill--critical { color: var(--kx-sev-critical); background: #F7E3E5; }
+#kardioxRoot .kx-pill--urgent { color: var(--kx-sev-urgent); background: #FDEEE4; }
+#kardioxRoot .kx-pill--warn { color: var(--kx-sev-warn); background: #FBF1DD; }
+#kardioxRoot .kx-pill--stable { color: var(--kx-sev-stable); background: #E7F5EC; }
+#kardioxRoot .kx-pill--info { color: var(--kx-sev-info); background: #E8F2F9; }
+
+/* Recent - empty state (shown only for live providers with no saved ECGs) */
+#kardioxRoot .kx-empty {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px;
+  padding: 26px 16px; border: 1px dashed var(--kx-hairline); border-radius: var(--kx-r-ctl); background: var(--kx-card);
+}
+#kardioxRoot .kx-empty-ic .material-symbols-rounded { font-size: 30px; color: var(--kx-muted); }
+#kardioxRoot .kx-empty-title { font-weight: 700; font-size: 13.5px; color: var(--kx-text); }
+#kardioxRoot .kx-empty-sub { font-size: 12px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Footer privacy line */
+#kardioxRoot .kx-foot {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 18px; font-size: 11px; font-weight: 500; color: var(--kx-muted);
+}
+#kardioxRoot .kx-foot .material-symbols-rounded { font-size: 14px; color: var(--kx-sev-stable); }
+
+/* Focus visibility for this screen's interactive elements */
+#kardioxRoot .kx-cta:focus-visible,
+#kardioxRoot .kx-tile:focus-visible,
+#kardioxRoot .kx-rec:focus-visible,
+#kardioxRoot .kx-seeall:focus-visible,
+#kardioxRoot .kx-land-close:focus-visible,
+#kardioxRoot .kx-land-gear:focus-visible { outline: 2px solid var(--kx-primary); outline-offset: 2px; }
+
+/* ===== source ===== */
+/* ─────────────────────────── Add an ECG · source picker (screen 03) ──────────────────────────────── */
+#kardioxRoot .kx-src { animation: kxRise .4s var(--kx-ease) both; }
+
+/* Screen header */
+#kardioxRoot .kx-src-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px; border-bottom: 1px solid var(--kx-hairline);
+}
+#kardioxRoot .kx-src-back {
+  width: 44px; height: 44px; margin-left: -6px; flex: 0 0 auto;
+  border: 0; border-radius: 999px; background: transparent; color: var(--kx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#kardioxRoot .kx-src-back .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-src-title { flex: 1; margin: 0; font-weight: 700; font-size: 17px; letter-spacing: -.01em; color: var(--kx-text); }
+
+#kardioxRoot .kx-src-body { padding: 16px; }
+
+/* Dashed drop-zone */
+#kardioxRoot .kx-drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; text-align: center; padding: 30px 18px;
+  border: 2px dashed #C7D3D9; border-radius: 18px; background: var(--kx-surf-2);
+}
+#kardioxRoot .kx-drop-ic { color: var(--kx-primary); display: inline-flex; }
+#kardioxRoot .kx-drop-ic .material-symbols-rounded { font-size: 40px; }
+#kardioxRoot .kx-drop-title { font-weight: 700; font-size: 15px; color: var(--kx-text); }
+#kardioxRoot .kx-drop-sub { font-size: 12px; font-weight: 500; color: var(--kx-text-2); max-width: 24ch; }
+
+/* 2x2 source cards */
+#kardioxRoot .kx-src-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#kardioxRoot .kx-src-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0;
+  min-height: 44px; padding: 16px 14px; text-align: left; cursor: pointer;
+  border: 1px solid var(--kx-hairline); border-radius: 14px; background: var(--kx-card);
+  font-family: var(--kx-sans); color: var(--kx-text);
+  transition: transform .15s var(--kx-ease), box-shadow .15s var(--kx-ease), border-color .15s var(--kx-ease);
+}
+#kardioxRoot .kx-src-card:hover { border-color: var(--kx-primary); box-shadow: 0 4px 14px rgba(13, 27, 36, .06); }
+#kardioxRoot .kx-src-card:active { transform: scale(.98); }
+#kardioxRoot .kx-src-ic { color: var(--kx-primary); display: inline-flex; }
+#kardioxRoot .kx-src-ic .material-symbols-rounded { font-size: 26px; }
+#kardioxRoot .kx-src-card--pdf .kx-src-ic { color: var(--kx-cardiac); }
+#kardioxRoot .kx-src-name { margin-top: 8px; font-weight: 700; font-size: 14px; color: var(--kx-text); }
+#kardioxRoot .kx-src-hint { font-size: 11px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Blue capture-tip banner */
+#kardioxRoot .kx-tip {
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 14px;
+  padding: 12px 14px; border-radius: var(--kx-r-ctl);
+  background: #E8F2F9; border: 1px solid #B5D4E8;
+}
+#kardioxRoot .kx-tip-ic { flex: 0 0 auto; color: var(--kx-sev-info); display: inline-flex; }
+#kardioxRoot .kx-tip-ic .material-symbols-rounded { font-size: 19px; }
+#kardioxRoot .kx-tip-txt { font-size: 12px; line-height: 1.45; font-weight: 500; color: var(--kx-text); }
+
+/* Privacy footer */
+#kardioxRoot .kx-src-foot {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 16px; font-size: 11px; font-weight: 500; color: var(--kx-muted);
+}
+#kardioxRoot .kx-src-foot .material-symbols-rounded { font-size: 14px; color: var(--kx-sev-stable); }
+
+/* Focus */
+#kardioxRoot .kx-src-card:focus-visible,
+#kardioxRoot .kx-src-back:focus-visible { outline: 2px solid var(--kx-primary); outline-offset: 2px; }
+
+/* ===== permission ===== */
+/* ─────────────────────────── Screen 16 · Camera permission ──────────────────────────────────────── */
+/* Dark scrim + bottom sheet. Full-viewport modal layer inside the module overlay. */
+#kardioxRoot .kx-perm {
+  position: fixed; inset: 0; z-index: 5;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+}
+#kardioxRoot .kx-perm-scrim {
+  position: absolute; inset: 0; margin: 0; padding: 0; border: 0;
+  background: rgba(13, 25, 34, .6);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+#kardioxRoot .kx-perm-sheet {
+  position: relative; z-index: 1;
+  width: calc(100% - 28px); max-width: 460px;
+  margin: 0 0 calc(14px + env(safe-area-inset-bottom, 0));
+  padding: 24px 20px 18px;
+  text-align: center;
+  background: var(--kx-bg);
+  border-radius: 24px;
+  box-shadow: 0 -8px 40px rgba(13, 27, 36, .3);
+  animation: kxRise .28s var(--kx-ease) both;
+}
+#kardioxRoot .kx-perm-icon {
+  width: 64px; height: 64px; border-radius: 20px; background: var(--kx-soft);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-perm-icon .material-symbols-rounded { font-size: 34px; color: var(--kx-primary); }
+#kardioxRoot .kx-perm-title {
+  margin: 14px 0 0; font-size: 19px; font-weight: 700; letter-spacing: -.01em; color: var(--kx-text);
+}
+#kardioxRoot .kx-perm-body {
+  margin: 8px 0 0; font-size: 13px; font-weight: 500; line-height: 1.5; color: var(--kx-text-2);
+}
+#kardioxRoot .kx-perm-assure {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  margin-top: 12px; font-size: 11.5px; font-weight: 600; color: var(--kx-sev-stable);
+}
+#kardioxRoot .kx-perm-assure .material-symbols-rounded { font-size: 15px; }
+#kardioxRoot .kx-perm-allow {
+  width: 100%; min-height: 44px; margin-top: 18px; padding: 15px; border: 0; border-radius: 14px;
+  background: var(--kx-primary); color: #fff; font-family: var(--kx-sans); font-weight: 700; font-size: 15px;
+  box-shadow: 0 8px 22px rgba(15, 118, 110, .28); cursor: pointer;
+}
+#kardioxRoot .kx-perm-deny {
+  width: 100%; min-height: 44px; margin-top: 8px; padding: 13px; border: 0; border-radius: 14px;
+  background: transparent; color: var(--kx-text-2); font-family: var(--kx-sans); font-weight: 700; font-size: 14px;
+  cursor: pointer;
+}
+#kardioxRoot .kx-perm-allow:focus-visible,
+#kardioxRoot .kx-perm-deny:focus-visible { outline: 2px solid var(--kx-primary); outline-offset: 2px; }
+
+/* ===== processing ===== */
+/* ─────────────────────── Screen 04 · Image processing (dark) ─────────────────────
+   Intentionally dark regardless of app theme (matches the design handoff). Reuses
+   --kx-primary / --kx-green from the root; the deep-navy chrome hexes are screen-local. */
+#kardioxRoot .kx-proc {
+  --kx-proc-bg: #0d1922;
+  --kx-proc-preview: #0a0f14;
+  --kx-proc-line: #16283a;
+  --kx-proc-preview-line: #1c2b38;
+  --kx-proc-grid: #2a3a2f;
+  --kx-proc-muted: #8AA2B2;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--kx-proc-bg);
+  color: #fff;
+}
+
+/* Header */
+#kardioxRoot .kx-proc-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 8px 16px 12px;
+  padding-top: max(8px, env(safe-area-inset-top, 0));
+}
+#kardioxRoot .kx-proc-close {
+  width: 44px; height: 44px;
+  flex: 0 0 auto;
+  border: 0; border-radius: 999px;
+  background: transparent; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; padding: 0;
+}
+#kardioxRoot .kx-proc-close:active { background: rgba(255, 255, 255, .08); }
+#kardioxRoot .kx-proc-close .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-proc-close:focus-visible { outline: 2px solid var(--kx-green); outline-offset: 2px; }
+#kardioxRoot .kx-proc-title { flex: 1; margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+
+/* Body */
+#kardioxRoot .kx-proc-body { padding: 8px 20px 26px; }
+
+/* ECG preview on dark grid */
+#kardioxRoot .kx-proc-preview {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--kx-proc-preview);
+  border: 1px solid var(--kx-proc-preview-line);
+}
+#kardioxRoot .kx-proc-svg { display: block; width: 100%; height: 100%; }
+#kardioxRoot .kx-proc-gridline { stroke: var(--kx-proc-grid); stroke-width: 1; }
+#kardioxRoot .kx-proc-trace {
+  stroke: var(--kx-green);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Green sweep overlay (kxSweep) */
+#kardioxRoot .kx-proc-sweep {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: 70px;
+  background: linear-gradient(90deg, transparent, rgba(52, 211, 153, .35), transparent);
+  animation: kxSweep 1.9s linear infinite;
+  pointer-events: none;
+}
+#kardioxRoot .kx-proc-badge {
+  position: absolute; top: 10px; left: 10px;
+  font-family: var(--kx-mono);
+  font-weight: 700; font-size: 10px; letter-spacing: .04em;
+  color: var(--kx-green);
+  background: rgba(6, 36, 15, .7);
+  padding: 4px 8px; border-radius: 999px;
+}
+#kardioxRoot .kx-proc-badge.is-error { color: var(--kx-sev-warn); background: rgba(60, 40, 6, .75); }
+
+/* Progress bar */
+#kardioxRoot .kx-proc-progress { margin-top: 20px; }
+#kardioxRoot .kx-proc-progress-row { display: flex; justify-content: space-between; align-items: baseline; }
+#kardioxRoot .kx-proc-progress-label { font-size: 12.5px; font-weight: 600; color: var(--kx-proc-muted); }
+#kardioxRoot .kx-proc-progress-pct { font-weight: 700; font-size: 13px; color: var(--kx-green); }
+#kardioxRoot .kx-proc-track {
+  height: 6px; margin-top: 8px;
+  border-radius: 999px;
+  background: var(--kx-proc-line);
+  overflow: hidden;
+}
+#kardioxRoot .kx-proc-bar {
+  width: 60%; height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--kx-primary), var(--kx-green));
+  transition: width .5s var(--kx-ease);
+}
+
+/* 5-step checklist */
+#kardioxRoot .kx-proc-steps {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#kardioxRoot .kx-proc-step { display: flex; align-items: center; gap: 11px; }
+#kardioxRoot .kx-proc-step-ico { font-size: 20px; line-height: 1; display: inline-flex; flex: 0 0 auto; }
+#kardioxRoot .kx-proc-step-label { font-size: 13.5px; font-weight: 600; }
+
+#kardioxRoot .kx-proc-step.is-done .kx-proc-step-ico {
+  color: var(--kx-green);
+  font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+}
+#kardioxRoot .kx-proc-step.is-active .kx-proc-step-ico {
+  color: var(--kx-green);
+  animation: kxSpin 1s linear infinite;
+}
+#kardioxRoot .kx-proc-step.is-pending { opacity: .5; }
+#kardioxRoot .kx-proc-step.is-pending .kx-proc-step-ico { color: var(--kx-proc-muted); }
+#kardioxRoot .kx-proc-step.is-error .kx-proc-step-ico {
+  color: var(--kx-sev-warn);
+  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+}
+#kardioxRoot .kx-proc-step.is-error .kx-proc-step-label { color: var(--kx-sev-warn); }
+
+/* Graceful failure - names the failing step */
+#kardioxRoot .kx-proc-fail { margin-top: 20px; }
+#kardioxRoot .kx-proc-fail[hidden] { display: none; }
+#kardioxRoot .kx-proc-fail-head {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: 13px; font-weight: 500; line-height: 1.45;
+  color: #E7EEF2;
+}
+#kardioxRoot .kx-proc-fail-ico { color: var(--kx-sev-warn); font-size: 20px; flex: 0 0 auto; }
+#kardioxRoot .kx-proc-fail-acts { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+#kardioxRoot .kx-proc-fail-acts .kx-btn { width: 100%; }
+
+/* Screen-reader progress announcements */
+#kardioxRoot .kx-proc-live {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* Reduced motion: root rule already freezes sweep/spin; keep the bar snap-only */
+@media (prefers-reduced-motion: reduce) {
+  #kardioxRoot .kx-proc-bar { transition: none; }
+}
+
+/* ===== analysis ===== */
+/* ─────────────────────────── Screen 05 · Live AI analysis (DARK) ─────────────────────────────────
+   Full-bleed dark analysis view mounted into #kxScroll. Confidence ring + staged progress + the
+   encrypted/ephemeral privacy line. Dark surface hexes (no light/dark token exists for them) are
+   scoped module-locals on .kx-analysis; the accent reuses --kx-green and motion reuses kxSpin. */
+#kardioxRoot .kx-analysis {
+  --kxa-bg: #0d1922;      /* dark surface */
+  --kxa-line: #16283a;    /* ring track + bar track + hairline */
+  --kxa-muted: #8AA2B2;   /* secondary text */
+  --kxa-link: #6FB4E0;    /* encrypted footer line */
+  box-sizing: border-box;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 22px calc(32px + env(safe-area-inset-bottom, 0));
+  background: var(--kxa-bg);
+  color: #fff;
+}
+#kardioxRoot .kx-analysis-inner { width: 100%; max-width: 340px; text-align: center; }
+
+/* Confidence ring */
+#kardioxRoot .kx-conf-ring { position: relative; width: 118px; height: 118px; margin: 8px auto 0; }
+#kardioxRoot .kx-conf-svg { position: absolute; inset: 0; width: 118px; height: 118px; transform: rotate(-90deg); }
+#kardioxRoot .kx-conf-track { fill: none; stroke: var(--kxa-line); stroke-width: 8; }
+#kardioxRoot .kx-conf-arc {
+  fill: none; stroke: var(--kx-green); stroke-width: 8; stroke-linecap: round;
+  transition: stroke-dashoffset .9s var(--kx-ease);
+}
+#kardioxRoot .kx-conf-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-conf-val { font-size: 34px; font-weight: 700; line-height: 1; color: #fff; }
+#kardioxRoot .kx-conf-cap { font-size: 10px; font-weight: 700; letter-spacing: .06em; color: var(--kxa-muted); margin-top: 3px; }
+
+/* Headline + subtitle */
+#kardioxRoot .kx-analysis-title { font-size: 17px; font-weight: 700; margin: 18px 0 0; }
+#kardioxRoot .kx-analysis-sub { font-size: 12.5px; font-weight: 500; color: var(--kxa-muted); margin: 3px 0 0; }
+
+/* Staged progress bars */
+#kardioxRoot .kx-stages { display: flex; flex-direction: column; gap: 11px; margin-top: 22px; text-align: left; }
+#kardioxRoot .kx-stage.is-pending { opacity: .55; }
+#kardioxRoot .kx-stage-head {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12.5px; font-weight: 600; margin-bottom: 5px;
+}
+#kardioxRoot .kx-stage-name { display: inline-flex; align-items: center; gap: 7px; }
+#kardioxRoot .kx-stage-name .material-symbols-rounded { font-size: 16px; color: var(--kx-green); }
+#kardioxRoot .kx-stage.is-pending .kx-stage-name .material-symbols-rounded { color: var(--kxa-muted); }
+#kardioxRoot .kx-stage.is-done .kx-stage-name .material-symbols-rounded { font-variation-settings: 'FILL' 1; }
+#kardioxRoot .kx-stage.is-active .kx-stage-name .material-symbols-rounded { animation: kxSpin 1s linear infinite; }
+#kardioxRoot .kx-stage-val { color: var(--kxa-muted); }
+#kardioxRoot .kx-stage-track { height: 5px; border-radius: 999px; background: var(--kxa-line); overflow: hidden; }
+#kardioxRoot .kx-stage-fill { width: 0; height: 100%; border-radius: 999px; background: var(--kx-green); transition: width .6s var(--kx-ease); }
+
+/* Encrypted / ephemeral footer */
+#kardioxRoot .kx-analysis-foot {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 22px; font-size: 11px; font-weight: 500; color: var(--kxa-link);
+}
+#kardioxRoot .kx-analysis-foot .material-symbols-rounded { font-size: 14px; }
+
+/* While this screen is mounted, carry the dark theme onto the shared overlay shell (scoped to
+   #kardioxRoot via :has, fully reversible when the router swaps screens - no global leakage). */
+#kardioxRoot:has(.kx-analysis) { background: #0d1922; }
+#kardioxRoot:has(.kx-analysis) .kx-topbar { background: #0d1922; border-bottom-color: #16283a; }
+#kardioxRoot:has(.kx-analysis) .kx-topbar h1 { color: #fff; }
+#kardioxRoot:has(.kx-analysis) .kx-iconbtn { background: transparent; border-color: #16283a; color: #8AA2B2; }
+
+/* Respect reduced motion - freeze the draw/fill transitions (the spinner is already clamped by the
+   module-wide reduced-motion rule in kardiox.css). */
+@media (prefers-reduced-motion: reduce) {
+  #kardioxRoot .kx-conf-arc { transition: none; }
+  #kardioxRoot .kx-stage-fill { transition: none; }
+}
+
+/* ===== report ===== */
+/* Screen 06 - AI Report (full dashboard) */
+#kardioxRoot .kx-rpt-head { display: flex; align-items: center; gap: 11px; padding: 10px 16px 12px; border-bottom: 1px solid var(--kx-hairline); background: var(--kx-card); }
+#kardioxRoot .kx-rpt-back, #kardioxRoot .kx-rpt-share { width: 40px; height: 40px; flex: 0 0 auto; border: 0; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+#kardioxRoot .kx-rpt-back { background: transparent; color: var(--kx-text); }
+#kardioxRoot .kx-rpt-share { background: var(--kx-surf-2); color: var(--kx-text-2); }
+#kardioxRoot .kx-rpt-back .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-rpt-share .material-symbols-rounded { font-size: 21px; }
+#kardioxRoot .kx-rpt-titles { flex: 1; min-width: 0; }
+#kardioxRoot .kx-rpt-title { font-weight: 700; font-size: 16px; letter-spacing: -.01em; color: var(--kx-text); }
+#kardioxRoot .kx-rpt-sub { font-size: 11.5px; font-weight: 500; color: var(--kx-text-2); }
+#kardioxRoot .kx-rpt-body { padding: 16px; }
+
+#kardioxRoot .kx-rpt-empty { padding: 56px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+#kardioxRoot .kx-rpt-empty .material-symbols-rounded { font-size: 40px; color: var(--kx-muted); }
+#kardioxRoot .kx-rpt-empty-t { font-weight: 700; font-size: 15px; color: var(--kx-text); }
+#kardioxRoot .kx-rpt-empty-s { font-size: 13px; color: var(--kx-text-2); }
+
+#kardioxRoot .kx-sec { display: flex; align-items: center; gap: 8px; margin: 20px 2px 10px; }
+#kardioxRoot .kx-sec .material-symbols-rounded { font-size: 17px; color: var(--kx-text-2); }
+#kardioxRoot .kx-sec-t { font-weight: 700; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--kx-text-2); }
+
+#kardioxRoot .kx-verdict { --va: var(--kx-sev-info); border: 1px solid; border-color: color-mix(in srgb, var(--va) 42%, transparent); border-radius: 18px; overflow: hidden; background: var(--kx-card); animation: kxRise .4s var(--kx-ease) both; }
+#kardioxRoot .kx-verdict--critical, #kardioxRoot .kx-verdict--urgent { --va: var(--kx-sev-critical); }
+#kardioxRoot .kx-verdict--warn { --va: var(--kx-sev-warn); }
+#kardioxRoot .kx-verdict--stable { --va: var(--kx-sev-stable); }
+#kardioxRoot .kx-verdict--info { --va: var(--kx-sev-info); }
+#kardioxRoot .kx-verdict-top { padding: 16px 16px 14px; background: linear-gradient(180deg, color-mix(in srgb, var(--va) 14%, var(--kx-card)), var(--kx-card)); }
+#kardioxRoot .kx-verdict-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+#kardioxRoot .kx-sev-pill { display: inline-flex; align-items: center; gap: 5px; font: 700 10.5px var(--kx-sans); letter-spacing: .06em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; color: var(--va); background: color-mix(in srgb, var(--va) 12%, var(--kx-card)); border: 1px solid color-mix(in srgb, var(--va) 38%, transparent); }
+#kardioxRoot .kx-sev-pill .material-symbols-rounded { font-size: 13px; }
+#kardioxRoot .kx-ai-mark { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--kx-text-2); }
+#kardioxRoot .kx-ai-mark .material-symbols-rounded { font-size: 15px; color: var(--kx-primary); }
+#kardioxRoot .kx-verdict-dx { font-size: 22px; font-weight: 700; letter-spacing: -.02em; margin-top: 10px; color: var(--kx-text); }
+#kardioxRoot .kx-verdict-qual { font-size: 13px; font-weight: 500; color: var(--kx-text-2); margin-top: 2px; }
+#kardioxRoot .kx-conf { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+#kardioxRoot .kx-conf-bar { flex: 1; height: 8px; border-radius: 999px; background: var(--kx-surf-2); overflow: hidden; }
+#kardioxRoot .kx-conf-fill { width: var(--kx-conf, 0%); height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--kx-primary), var(--kx-green)); transition: width .6s var(--kx-ease); }
+#kardioxRoot .kx-conf-val { font: 700 13px var(--kx-mono); color: var(--kx-primary); }
+#kardioxRoot .kx-conf-band { font-size: 11px; font-weight: 500; color: var(--kx-muted); margin-top: 5px; }
+
+#kardioxRoot .kx-verdict-strip { padding: 8px 12px 12px; background: color-mix(in srgb, var(--kx-cardiac) 5%, #fff); }
+#kardioxRoot .kx-strip-svg { display: block; width: 100%; height: 76px; }
+#kardioxRoot .kx-strip-label { text-align: center; font-size: 9.5px; font-weight: 600; letter-spacing: .04em; color: color-mix(in srgb, var(--kx-cardiac) 55%, var(--kx-muted)); }
+
+#kardioxRoot .kx-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+#kardioxRoot .kx-metric { padding: 11px; border: 1px solid var(--kx-hairline); border-radius: var(--kx-r-ctl); background: var(--kx-card); }
+#kardioxRoot .kx-metric-k { font: 700 9px var(--kx-sans); text-transform: uppercase; letter-spacing: .05em; color: var(--kx-text-2); }
+#kardioxRoot .kx-metric-v { font-size: 20px; font-weight: 700; line-height: 1.2; margin: 1px 0; color: var(--kx-text); }
+#kardioxRoot .kx-metric-s { font-size: 10px; font-weight: 500; color: var(--kx-muted); }
+#kardioxRoot .kx-metric--urgent { border-color: color-mix(in srgb, var(--kx-sev-urgent) 40%, transparent); background: color-mix(in srgb, var(--kx-sev-urgent) 10%, var(--kx-card)); }
+#kardioxRoot .kx-metric--urgent .kx-metric-k, #kardioxRoot .kx-metric--urgent .kx-metric-v { color: var(--kx-sev-urgent); }
+#kardioxRoot .kx-metric--urgent .kx-metric-s { color: color-mix(in srgb, var(--kx-sev-urgent) 62%, var(--kx-muted)); }
+#kardioxRoot .kx-metric--stable { border-color: color-mix(in srgb, var(--kx-sev-stable) 40%, transparent); background: color-mix(in srgb, var(--kx-sev-stable) 10%, var(--kx-card)); }
+#kardioxRoot .kx-metric--stable .kx-metric-k, #kardioxRoot .kx-metric--stable .kx-metric-v { color: var(--kx-sev-stable); }
+#kardioxRoot .kx-metric--stable .kx-metric-s { color: color-mix(in srgb, var(--kx-sev-stable) 62%, var(--kx-muted)); }
+#kardioxRoot .kx-metric--warn { border-color: color-mix(in srgb, var(--kx-sev-warn) 44%, transparent); background: color-mix(in srgb, var(--kx-sev-warn) 12%, var(--kx-card)); }
+#kardioxRoot .kx-metric--warn .kx-metric-k, #kardioxRoot .kx-metric--warn .kx-metric-v { color: var(--kx-sev-warn); }
+#kardioxRoot .kx-metric--warn .kx-metric-s { color: color-mix(in srgb, var(--kx-sev-warn) 62%, var(--kx-muted)); }
+#kardioxRoot .kx-metric--muted .kx-metric-v { color: var(--kx-muted); }
+
+#kardioxRoot .kx-morph { border: 1px solid var(--kx-hairline); border-radius: var(--kx-r-ctl); overflow: hidden; background: var(--kx-card); }
+#kardioxRoot .kx-morph-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border-bottom: 1px solid color-mix(in srgb, var(--kx-hairline) 55%, var(--kx-card)); }
+#kardioxRoot .kx-morph-row:last-child { border-bottom: 0; }
+#kardioxRoot .kx-morph-k { font-size: 13px; font-weight: 500; color: var(--kx-text-2); }
+#kardioxRoot .kx-morph-v { font: 700 13px var(--kx-mono); color: var(--kx-text); }
+#kardioxRoot .kx-morph-pill { display: inline-flex; align-items: center; gap: 5px; font: 700 12px var(--kx-sans); padding: 3px 8px; border-radius: 999px; }
+#kardioxRoot .kx-morph-pill .material-symbols-rounded { font-size: 12px; }
+#kardioxRoot .kx-morph-pill--stable { color: var(--kx-sev-stable); background: color-mix(in srgb, var(--kx-sev-stable) 12%, var(--kx-card)); }
+#kardioxRoot .kx-morph-pill--urgent { color: var(--kx-sev-urgent); background: color-mix(in srgb, var(--kx-sev-urgent) 12%, var(--kx-card)); }
+#kardioxRoot .kx-morph-pill--info { color: var(--kx-sev-info); background: color-mix(in srgb, var(--kx-sev-info) 12%, var(--kx-card)); }
+
+#kardioxRoot .kx-interp { padding: 14px; border: 1px solid var(--kx-hairline); border-radius: 14px; background: var(--kx-card); font-size: 13.5px; line-height: 1.6; color: var(--kx-text); }
+#kardioxRoot .kx-interp b { font-weight: 700; }
+
+#kardioxRoot .kx-why { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; text-align: left; cursor: pointer; margin-top: 10px; padding: 14px; border: 1px solid color-mix(in srgb, var(--kx-sev-info) 32%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--kx-sev-info) 8%, var(--kx-card)); color: var(--kx-sev-info); }
+#kardioxRoot .kx-why > .material-symbols-rounded:first-child { font-size: 24px; }
+#kardioxRoot .kx-why > .material-symbols-rounded:last-child { font-size: 22px; }
+#kardioxRoot .kx-why-txt { flex: 1; }
+#kardioxRoot .kx-why-txt b { display: block; font-size: 14px; }
+#kardioxRoot .kx-why-sub { display: block; font-size: 11.5px; font-weight: 500; opacity: .9; }
+
+#kardioxRoot .kx-redflag { display: flex; align-items: flex-start; gap: 11px; margin-top: 10px; padding: 13px 14px; border: 1px solid color-mix(in srgb, var(--kx-sev-critical) 40%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--kx-sev-critical) 10%, var(--kx-card)); }
+#kardioxRoot .kx-redflag > .material-symbols-rounded { font-size: 20px; color: var(--kx-sev-critical); flex: 0 0 auto; }
+#kardioxRoot .kx-redflag-t { display: block; font-size: 13px; font-weight: 700; color: var(--kx-sev-critical); }
+#kardioxRoot .kx-redflag-b { font-size: 12px; line-height: 1.45; font-weight: 500; color: color-mix(in srgb, var(--kx-sev-critical) 70%, var(--kx-text)); }
+
+#kardioxRoot .kx-learn { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; text-align: left; cursor: pointer; margin-top: 10px; padding: 13px 14px; border: 1px solid var(--kx-hairline); border-radius: 14px; background: var(--kx-card); }
+#kardioxRoot .kx-learn > .material-symbols-rounded:first-child { font-size: 22px; color: var(--kx-primary); }
+#kardioxRoot .kx-learn > .material-symbols-rounded:last-child { font-size: 22px; color: var(--kx-muted); }
+#kardioxRoot .kx-learn-t { flex: 1; font-size: 13.5px; font-weight: 600; color: var(--kx-text); }
+
+#kardioxRoot .kx-note { display: flex; align-items: center; gap: 7px; width: 100%; min-height: 44px; text-align: left; cursor: pointer; margin-top: 10px; padding: 13px 14px; border: 1px dashed color-mix(in srgb, var(--kx-muted) 55%, var(--kx-hairline)); border-radius: 14px; background: var(--kx-card); }
+#kardioxRoot .kx-note .material-symbols-rounded { font-size: 19px; color: var(--kx-text-2); }
+#kardioxRoot .kx-note-t { font-size: 13px; font-weight: 600; color: var(--kx-text-2); }
+
+#kardioxRoot .kx-actions { display: flex; gap: 10px; margin-top: 16px; }
+#kardioxRoot .kx-actions .kx-btn { flex: 1; }
+#kardioxRoot .kx-actions .kx-btn .material-symbols-rounded { font-size: 19px; }
+#kardioxRoot .kx-actions .kx-btn-secondary .material-symbols-rounded { color: var(--kx-primary); }
+#kardioxRoot .kx-disc { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 16px; font-size: 10.5px; font-weight: 500; line-height: 1.4; text-align: center; color: var(--kx-muted); }
+#kardioxRoot .kx-disc .material-symbols-rounded { font-size: 14px; }
+
+/* ===== why ===== */
+/* ─────────────── Screen 07 · Explainable AI ("Why this diagnosis?") ─────────────── */
+#kardioxRoot .kx-why { animation: kxRise .32s var(--kx-ease) both; }
+
+/* Header (back + titles) */
+#kardioxRoot .kx-why-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px; border-bottom: 1px solid var(--kx-hairline);
+  background: var(--kx-card);
+}
+#kardioxRoot .kx-why-back {
+  flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px;
+  border: 0; background: transparent; color: var(--kx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#kardioxRoot .kx-why-back .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-why-back:active { background: var(--kx-surf-2); }
+#kardioxRoot .kx-why-titles { flex: 1; min-width: 0; }
+#kardioxRoot .kx-why-titles h2 {
+  margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -.01em; color: var(--kx-text);
+}
+#kardioxRoot .kx-why-titles p {
+  margin: 1px 0 0; font-size: 11.5px; font-weight: 500; color: var(--kx-text-2);
+}
+
+/* Body */
+#kardioxRoot .kx-why-body { padding: 16px; }
+
+/* ECG region with highlighted lead boxes */
+#kardioxRoot .kx-ecg {
+  position: relative; border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--kx-hairline); background: #fff5f5;
+}
+#kardioxRoot .kx-ecg-svg { display: block; width: 100%; height: 118px; }
+#kardioxRoot .kx-ecg-grid { fill: none; stroke: #f6d3d3; stroke-width: 1; }
+#kardioxRoot .kx-ecg-trace { fill: none; stroke: #161616; stroke-width: 1.5; stroke-linejoin: round; }
+#kardioxRoot .kx-hl {
+  stroke-width: 1.5; stroke-dasharray: 4 3;
+  transition: filter .2s var(--kx-ease);
+}
+#kardioxRoot .kx-hl--rr { fill: rgba(229, 72, 77, .12); stroke: var(--kx-cardiac); }
+#kardioxRoot .kx-hl--fwave { fill: rgba(29, 111, 163, .12); stroke: var(--kx-sev-info); }
+#kardioxRoot .kx-hl.is-lit { animation: kxPulse .6s var(--kx-ease) 2; }
+#kardioxRoot .kx-ecg-tag {
+  position: absolute; font-size: 9px; font-weight: 700; line-height: 1;
+  background: rgba(255, 245, 245, .9); padding: 2px 6px; border-radius: 6px;
+}
+#kardioxRoot .kx-ecg-tag--rr { left: 14px; bottom: 18px; color: var(--kx-cardiac); }
+#kardioxRoot .kx-ecg-tag--fwave { right: 82px; top: 8px; color: var(--kx-sev-info); }
+#kardioxRoot .kx-ecg-tag.is-lit { animation: kxPulse .6s var(--kx-ease) 2; }
+
+/* Question chips (segmented control) */
+#kardioxRoot .kx-why-chips { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 14px; }
+#kardioxRoot .kx-chip {
+  min-height: 44px; padding: 8px 14px; border-radius: 999px; cursor: pointer;
+  font-family: var(--kx-sans); font-size: 12px; font-weight: 600;
+  color: var(--kx-text-2); background: var(--kx-card); border: 1.5px solid var(--kx-hairline);
+  display: inline-flex; align-items: center;
+}
+#kardioxRoot .kx-chip.is-selected {
+  color: var(--kx-primary); font-weight: 700;
+  background: var(--kx-soft); border-color: var(--kx-primary);
+}
+#kardioxRoot .kx-chip:focus-visible { outline: 2px solid var(--kx-primary); outline-offset: 2px; }
+
+/* Section labels */
+#kardioxRoot .kx-why-label {
+  margin: 18px 2px 10px; font-size: 11.5px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--kx-text-2);
+}
+
+/* Matched-criteria cards (green) */
+#kardioxRoot .kx-crit-list { display: flex; flex-direction: column; gap: 8px; }
+#kardioxRoot .kx-crit {
+  display: flex; align-items: center; gap: 11px; width: 100%; min-height: 44px;
+  padding: 12px; text-align: left; cursor: pointer;
+  border: 1px solid #B5DFC6; border-radius: var(--kx-r-ctl); background: #E7F5EC;
+}
+#kardioxRoot .kx-crit[data-hl=""] { cursor: default; }
+#kardioxRoot .kx-crit:focus-visible { outline: 2px solid var(--kx-sev-stable); outline-offset: 2px; }
+#kardioxRoot .kx-crit-ic { flex: 0 0 auto; display: inline-flex; }
+#kardioxRoot .kx-crit-ic .material-symbols-rounded {
+  font-size: 20px; color: var(--kx-sev-stable); font-variation-settings: 'FILL' 1;
+}
+#kardioxRoot .kx-crit-body { flex: 1; min-width: 0; }
+#kardioxRoot .kx-crit-body b {
+  display: block; font-size: 13px; font-weight: 700; color: var(--kx-text);
+}
+#kardioxRoot .kx-crit-body span {
+  display: block; font-size: 11px; font-weight: 500; color: var(--kx-text-2); margin-top: 1px;
+}
+#kardioxRoot .kx-crit-w { flex: 0 0 auto; font-size: 12px; font-weight: 700; color: var(--kx-sev-stable); }
+
+/* Differentials bars */
+#kardioxRoot .kx-diffs { display: flex; flex-direction: column; gap: 9px; }
+#kardioxRoot .kx-diff-top {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 12.5px; font-weight: 600; margin-bottom: 4px;
+}
+#kardioxRoot .kx-diff-label { color: var(--kx-text-2); }
+#kardioxRoot .kx-diff.is-primary .kx-diff-label { color: var(--kx-text); }
+#kardioxRoot .kx-diff-pct { font-size: 12.5px; font-weight: 600; color: var(--kx-muted); }
+#kardioxRoot .kx-diff.is-primary .kx-diff-pct { color: var(--kx-primary); }
+#kardioxRoot .kx-diff-track {
+  height: 6px; border-radius: 999px; background: var(--kx-surf-2); overflow: hidden;
+}
+#kardioxRoot .kx-diff-fill { height: 100%; background: var(--kx-muted); }
+#kardioxRoot .kx-diff.is-primary .kx-diff-fill { background: var(--kx-primary); }
+
+/* "What you should verify" (blue banner) */
+#kardioxRoot .kx-verify {
+  display: flex; gap: 11px; align-items: flex-start; margin-top: 16px;
+  padding: 13px 14px; border: 1px solid #B5D4E8; border-radius: 14px; background: #E8F2F9;
+}
+#kardioxRoot .kx-verify-ic { flex: 0 0 auto; display: inline-flex; }
+#kardioxRoot .kx-verify-ic .material-symbols-rounded { font-size: 20px; color: var(--kx-sev-info); }
+#kardioxRoot .kx-verify b { display: block; font-size: 13px; font-weight: 700; color: var(--kx-sev-info); }
+#kardioxRoot .kx-verify span { font-size: 12px; line-height: 1.45; font-weight: 500; color: var(--kx-text); }
+
+/* Empty fallbacks */
+#kardioxRoot .kx-empty {
+  display: flex; align-items: center; gap: 10px; padding: 14px;
+  border: 1px dashed var(--kx-hairline); border-radius: var(--kx-r-ctl);
+  color: var(--kx-text-2); font-size: 13px; font-weight: 500;
+}
+#kardioxRoot .kx-empty .material-symbols-rounded { font-size: 20px; color: var(--kx-muted); }
+
+/* ===== history ===== */
+/* ─────────────────────────── Screen 13 · History timeline & trends ───────────────────────────────
+ * New .kx-* only. Reuses: .kx-land-head/.kx-land-close/.kx-land-titles/.kx-land-title/.kx-land-sub/
+ * .kx-land-gear (header), .kx-recent/.kx-rec/.kx-rec-thumb/.kx-trace/.kx-rec-body/.kx-rec-title/
+ * .kx-rec-meta (entry rows), .kx-pill/.kx-pill--* (severity), .kx-data (clinical numbers), and the
+ * kxRise/kxDraw keyframes. Tokens from #kardioxRoot; nothing redefined; no inline styles. */
+
+#kardioxRoot .kx-hist { padding: 16px; }
+
+/* QTc TREND card - accent driven by severity of the latest QTc: --tacc (value/line/dot),
+   --tacc2 (delta/direction). Handoff default = borderline (warn value, urgent rise). */
+#kardioxRoot .kx-hist-trend {
+  --tacc: var(--kx-sev-warn); --tacc2: var(--kx-sev-urgent);
+  border: 1px solid var(--kx-hairline); border-radius: 14px;
+  background: var(--kx-card); padding: 14px;
+  animation: kxRise .4s var(--kx-ease) both;
+}
+#kardioxRoot .kx-hist-trend--stable { --tacc: var(--kx-sev-stable); --tacc2: var(--kx-sev-stable); }
+#kardioxRoot .kx-hist-trend--warn   { --tacc: var(--kx-sev-warn);   --tacc2: var(--kx-sev-urgent); }
+#kardioxRoot .kx-hist-trend--urgent { --tacc: var(--kx-sev-urgent); --tacc2: var(--kx-sev-critical); }
+
+#kardioxRoot .kx-hist-trend-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+#kardioxRoot .kx-hist-trend-lbl { font-size: 12px; font-weight: 600; color: var(--kx-text-2); }
+#kardioxRoot .kx-hist-trend-val { font-size: 20px; font-weight: 700; line-height: 1; color: var(--tacc); }
+#kardioxRoot .kx-hist-trend-unit { font-size: 11px; font-weight: 700; color: var(--kx-muted); }
+
+#kardioxRoot .kx-hist-spark { display: block; width: 100%; height: 52px; margin-top: 8px; overflow: visible; }
+#kardioxRoot .kx-hist-spark polyline {
+  stroke: var(--tacc);
+  stroke-dasharray: 320; stroke-dashoffset: 320;
+  animation: kxDraw 1.1s var(--kx-ease) .1s forwards;
+}
+#kardioxRoot .kx-hist-spark circle { fill: var(--tacc); }
+
+#kardioxRoot .kx-hist-trend-delta {
+  display: flex; align-items: center; gap: 5px; margin-top: 2px;
+  font-size: 11px; font-weight: 600; color: var(--tacc2);
+}
+#kardioxRoot .kx-hist-trend-delta .material-symbols-rounded { font-size: 15px; }
+
+/* Date-group section labels */
+#kardioxRoot .kx-hist-group {
+  margin: 18px 2px 10px; font-weight: 700; font-size: 11.5px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--kx-text-2);
+}
+#kardioxRoot .kx-hist-trend + [data-hook="groups"] > .kx-hist-group:first-child,
+#kardioxRoot .kx-hist > [data-hook="trend"] + [data-hook="groups"] > .kx-hist-group:first-child { margin-top: 20px; }
+
+/* Compare CTA */
+#kardioxRoot .kx-hist-compare {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; min-height: 44px; margin-top: 16px; padding: 14px;
+  border: 1px solid var(--kx-hairline); border-radius: 13px;
+  background: var(--kx-card); color: var(--kx-ink);
+  font-family: var(--kx-sans); font-weight: 700; font-size: 14px; cursor: pointer;
+}
+#kardioxRoot .kx-hist-compare .material-symbols-rounded { font-size: 19px; color: var(--kx-primary); }
+
+/* Reduced motion: the global #kardioxRoot rule already freezes these animations; kxDraw's
+   end-state (dashoffset 0) leaves the line fully drawn, so no extra override is needed. */
+
+/* ===== comparison ===== */
+/* ───────────────────── Screen 14 · Comparison / difference viewer (.kx-cmp-*) ───────────────────── */
+#kardioxRoot .kx-cmp-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px; background: var(--kx-card);
+  border-bottom: 1px solid var(--kx-hairline);
+}
+#kardioxRoot .kx-cmp-back {
+  flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px;
+  border: 0; background: transparent; color: var(--kx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#kardioxRoot .kx-cmp-back .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-cmp-titles { flex: 1; min-width: 0; }
+#kardioxRoot .kx-cmp-title {
+  font-weight: 700; font-size: 16px; letter-spacing: -.01em; color: var(--kx-text);
+}
+#kardioxRoot .kx-cmp-sub {
+  font-size: 11.5px; font-weight: 500; color: var(--kx-text-2); margin-top: 1px;
+}
+
+#kardioxRoot .kx-cmp-body {
+  padding: 16px;
+  animation: kxRise .3s var(--kx-ease) both;
+}
+
+/* Two side-by-side ECG panels */
+#kardioxRoot .kx-cmp-panels {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+#kardioxRoot .kx-cmp-plabel {
+  margin-bottom: 6px; font-size: 10.5px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase; color: var(--kx-text-2);
+}
+#kardioxRoot .kx-cmp-plabel--current { color: var(--kx-primary); }
+#kardioxRoot .kx-cmp-trace {
+  border-radius: 10px; overflow: hidden; border: 1px solid var(--kx-hairline);
+  background-color: #fff5f5;
+  background-image:
+    linear-gradient(#f6d3d3 1px, transparent 1px),
+    linear-gradient(90deg, #f6d3d3 1px, transparent 1px);
+  background-size: 7px 7px;
+}
+#kardioxRoot .kx-cmp-trace--current { border: 1.5px solid var(--kx-primary); }
+#kardioxRoot .kx-cmp-svg { display: block; }
+#kardioxRoot .kx-cmp-svg polyline {
+  fill: none; stroke: #161616; stroke-width: 1.4;
+}
+#kardioxRoot .kx-cmp-verdict {
+  margin-top: 6px; font-size: 12px; font-weight: 700;
+}
+#kardioxRoot .kx-cmp-verdict--prior { color: var(--kx-sev-stable); }
+#kardioxRoot .kx-cmp-verdict--current { color: var(--kx-sev-urgent); }
+
+/* "What changed" section label */
+#kardioxRoot .kx-cmp-changed {
+  margin: 20px 2px 10px; font-size: 11.5px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--kx-text-2);
+}
+
+/* Change table (old -> trend -> new) */
+#kardioxRoot .kx-cmp-table {
+  border: 1px solid var(--kx-hairline); border-radius: var(--kx-r-ctl);
+  overflow: hidden; background: var(--kx-card);
+}
+#kardioxRoot .kx-cmp-row {
+  display: grid; grid-template-columns: 1fr auto auto auto; gap: 8px;
+  align-items: center; padding: 11px 14px; font-size: 13px;
+  border-bottom: 1px solid var(--kx-hairline);
+}
+#kardioxRoot .kx-cmp-row.is-last { border-bottom: 0; }
+#kardioxRoot .kx-cmp-rlabel { color: var(--kx-text-2); font-weight: 500; }
+#kardioxRoot .kx-cmp-old { font-size: 12px; font-weight: 600; color: var(--kx-muted); }
+#kardioxRoot .kx-cmp-new { font-size: 12px; font-weight: 700; }
+#kardioxRoot .kx-cmp-trend { display: inline-flex; align-items: center; }
+#kardioxRoot .kx-cmp-trend .material-symbols-rounded { font-size: 16px; }
+#kardioxRoot .kx-cmp-t-urgent { color: var(--kx-sev-urgent); }
+#kardioxRoot .kx-cmp-t-warn { color: var(--kx-sev-warn); }
+
+/* New-onset AF banner (pink) */
+#kardioxRoot .kx-cmp-banner {
+  display: flex; gap: 11px; align-items: flex-start; margin-top: 14px;
+  padding: 13px 14px; border: 1px solid #F0B7C0; border-radius: 14px; background: #FBE9EC;
+}
+#kardioxRoot .kx-cmp-bolt { flex: 0 0 auto; display: inline-flex; }
+#kardioxRoot .kx-cmp-bolt .material-symbols-rounded {
+  font-size: 20px; color: var(--kx-sev-critical); font-variation-settings: 'FILL' 1;
+}
+#kardioxRoot .kx-cmp-banner-body b {
+  display: block; font-size: 13px; font-weight: 700; color: var(--kx-sev-critical);
+}
+#kardioxRoot .kx-cmp-banner-body span {
+  display: block; font-size: 12px; line-height: 1.45; font-weight: 500; color: #7a2a35;
+}
+
+/* ===== privacy ===== */
+/* ── Screen 15 · Privacy (a feature) ─────────────────────────────── */
+#kardioxRoot .kx-priv-head {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 10px 12px; padding-top: max(8px, env(safe-area-inset-top, 0));
+  background: var(--kx-card); border-bottom: 1px solid var(--kx-hairline);
+}
+#kardioxRoot .kx-priv-back {
+  width: 44px; height: 44px; border-radius: 999px; border: 0; background: transparent;
+  color: var(--kx-text); flex: 0 0 auto; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-priv-back .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-priv-htitle {
+  margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -.01em; color: var(--kx-text);
+}
+
+#kardioxRoot .kx-priv-body {
+  padding: 24px 16px calc(20px + env(safe-area-inset-bottom, 0)); text-align: center;
+}
+
+#kardioxRoot .kx-priv-hero {
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--kx-primary); animation: kxRise .4s var(--kx-ease) both;
+}
+#kardioxRoot .kx-priv-hero .material-symbols-rounded {
+  font-size: 54px; font-variation-settings: 'FILL' 1;
+}
+#kardioxRoot .kx-priv-title {
+  margin-top: 10px; font-size: 20px; font-weight: 700; letter-spacing: -.02em; color: var(--kx-text);
+  animation: kxRise .4s var(--kx-ease) both; animation-delay: .04s;
+}
+#kardioxRoot .kx-priv-sub {
+  margin: 6px auto 0; max-width: 30ch; font-size: 13px; font-weight: 500;
+  line-height: 1.5; color: var(--kx-text-2);
+  animation: kxRise .4s var(--kx-ease) both; animation-delay: .06s;
+}
+
+#kardioxRoot .kx-priv-rows {
+  display: flex; flex-direction: column; gap: 8px; margin-top: 20px; text-align: left;
+}
+#kardioxRoot .kx-priv-row {
+  display: flex; gap: 12px; align-items: flex-start; padding: 13px 14px;
+  border: 1px solid var(--kx-hairline); border-radius: 13px; background: var(--kx-card);
+  animation: kxRise .4s var(--kx-ease) both;
+}
+#kardioxRoot .kx-priv-row:nth-child(1) { animation-delay: .10s; }
+#kardioxRoot .kx-priv-row:nth-child(2) { animation-delay: .14s; }
+#kardioxRoot .kx-priv-row:nth-child(3) { animation-delay: .18s; }
+#kardioxRoot .kx-priv-row:nth-child(4) { animation-delay: .22s; }
+#kardioxRoot .kx-priv-row-ic { flex: 0 0 auto; color: var(--kx-primary); line-height: 1; }
+#kardioxRoot .kx-priv-row-ic .material-symbols-rounded { font-size: 22px; }
+#kardioxRoot .kx-priv-row-tx { display: flex; flex-direction: column; min-width: 0; }
+#kardioxRoot .kx-priv-row-t { font-size: 13.5px; font-weight: 600; color: var(--kx-text); }
+#kardioxRoot .kx-priv-row-s {
+  margin-top: 2px; font-size: 12px; font-weight: 500; line-height: 1.45; color: var(--kx-text-2);
+}
+
+#kardioxRoot .kx-priv-manage {
+  width: 100%; margin-top: 16px; padding: 14px; font-size: 14px; font-weight: 700;
+}
+
+/* ===== settings ===== */
+/* ── Screen 17 · Settings (scoped #kardioxRoot / .kx-* only) ───────────────── */
+#kardioxRoot .kx-set-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px;
+  padding-top: max(8px, env(safe-area-inset-top, 0));
+  background: var(--kx-card);
+  border-bottom: 1px solid var(--kx-hairline);
+}
+#kardioxRoot .kx-set-back {
+  width: 44px; height: 44px; margin-left: -4px; flex: 0 0 auto;
+  border: 0; border-radius: 999px; background: transparent;
+  color: var(--kx-text); font-size: 24px; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; padding: 0; -webkit-appearance: none; appearance: none;
+}
+#kardioxRoot .kx-set-back > * { font-size: inherit; }
+#kardioxRoot .kx-set-title {
+  flex: 1; margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -.01em; color: var(--kx-text);
+}
+
+#kardioxRoot .kx-set-wrap {
+  padding: 16px;
+  animation: kxRise .3s var(--kx-ease) both;
+}
+#kardioxRoot .kx-set-label {
+  font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--kx-text-2); margin: 20px 2px 9px;
+}
+#kardioxRoot .kx-set-wrap > .kx-set-label:first-child { margin-top: 2px; }
+#kardioxRoot .kx-set-group { display: flex; flex-direction: column; gap: 8px; }
+
+#kardioxRoot .kx-settings-row {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; min-height: 44px; padding: 14px 16px;
+  border: 1px solid var(--kx-hairline); border-radius: 14px;
+  background: var(--kx-card); color: var(--kx-text);
+  font-family: var(--kx-sans); text-align: left; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+  transition: transform .12s var(--kx-ease), border-color .15s var(--kx-ease);
+}
+#kardioxRoot button.kx-settings-row:active { transform: scale(.99); }
+#kardioxRoot div.kx-settings-row { cursor: default; }
+
+#kardioxRoot .kx-sr-ic {
+  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 24px; line-height: 1; color: var(--kx-primary);
+}
+#kardioxRoot .kx-sr-ic > * { font-size: inherit; }
+#kardioxRoot .kx-sr-body { flex: 1; min-width: 0; }
+#kardioxRoot .kx-sr-title { display: block; font-size: 14.5px; font-weight: 600; color: var(--kx-text); }
+#kardioxRoot .kx-sr-sub { display: block; margin-top: 1px; font-size: 12px; font-weight: 500; color: var(--kx-text-2); }
+#kardioxRoot .kx-sr-chev {
+  flex: 0 0 auto; display: inline-flex; align-items: center;
+  font-size: 22px; line-height: 1; color: var(--kx-muted);
+}
+#kardioxRoot .kx-sr-chev > * { font-size: inherit; }
+#kardioxRoot .kx-sr-val {
+  flex: 0 0 auto; font-size: 12px; font-weight: 600; color: var(--kx-muted);
+}
+
+/* Danger variant - Clear local ECGs */
+#kardioxRoot .kx-settings-row.kx-danger {
+  border-color: color-mix(in srgb, var(--kx-sev-critical) 30%, var(--kx-card));
+}
+#kardioxRoot .kx-settings-row.kx-danger .kx-sr-ic,
+#kardioxRoot .kx-settings-row.kx-danger .kx-sr-title { color: var(--kx-sev-critical); }
+
+/* Toggle control */
+#kardioxRoot .kx-sr-toggle {
+  position: relative; flex: 0 0 auto; width: 44px; height: 26px; border-radius: 999px;
+  background: var(--kx-surf-2); transition: background .18s var(--kx-ease);
+}
+#kardioxRoot .kx-sr-toggle.kx-on { background: var(--kx-primary); }
+#kardioxRoot .kx-sr-knob {
+  position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; border-radius: 999px;
+  background: #fff; box-shadow: 0 1px 3px rgba(13,27,36,.28);
+  transition: left .18s var(--kx-ease);
+}
+#kardioxRoot .kx-sr-toggle.kx-on .kx-sr-knob { left: 20px; }
+
+/* Coming-soon (dimmed + SOON pill) */
+#kardioxRoot .kx-settings-row.kx-soon { opacity: .6; }
+#kardioxRoot .kx-settings-row.kx-soon .kx-sr-ic { color: var(--kx-text-2); }
+#kardioxRoot .kx-soon-pill {
+  flex: 0 0 auto; font-family: var(--kx-sans); font-weight: 700; font-size: 9.5px; letter-spacing: .04em;
+  color: var(--kx-text-2); background: var(--kx-surf-2); padding: 3px 8px; border-radius: 999px;
+}
+
+/* ===== empty ===== */
+/* ===== screen 18 · History - empty state ===== */
+/* Scoped to #kardioxRoot / .kx-hist-* only. Reuses --kx-* tokens + kxRise keyframe; defines nothing
+   global and does NOT redefine tokens. Namespaced .kx-hist-* to avoid the landing's small .kx-empty. */
+#kardioxRoot .kx-hist { animation: kxRise .4s var(--kx-ease) both; }
+
+/* Screen header (back + title) - mirrors the handoff in-app header (not the phone status chrome). */
+#kardioxRoot .kx-hist-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px; background: var(--kx-card);
+  border-bottom: 1px solid var(--kx-hairline);
+}
+#kardioxRoot .kx-hist-back {
+  width: 44px; height: 44px; margin-left: -6px; flex: 0 0 auto;   /* 44px tap target, icon aligned to edge */
+  border: 0; border-radius: 999px; background: transparent; color: var(--kx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#kardioxRoot .kx-hist-back .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-hist-title {
+  flex: 1; margin: 0; font-weight: 700; font-size: 16px;
+  letter-spacing: -.01em; color: var(--kx-text);
+}
+
+/* Empty state */
+#kardioxRoot .kx-hist-empty {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 70px 28px;
+}
+#kardioxRoot .kx-hist-empty-ring {
+  width: 96px; height: 96px; flex: 0 0 auto;
+  border-radius: 999px; border: 2px dashed #C7D3D9;   /* one-off dashed grey (no matching --kx-* token) */
+  display: inline-flex; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-hist-empty-ring .material-symbols-rounded {
+  font-size: 44px; color: var(--kx-primary);
+}
+#kardioxRoot .kx-hist-empty-title {
+  margin-top: 20px; font-weight: 700; font-size: 18px;
+  letter-spacing: -.01em; color: var(--kx-text);
+}
+#kardioxRoot .kx-hist-empty-sub {
+  margin-top: 6px; max-width: 28ch;
+  font-size: 13px; font-weight: 500; line-height: 1.5; color: var(--kx-text-2);
+}
+#kardioxRoot .kx-hist-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 22px; padding: 14px 22px; min-height: 44px;
+  border: 0; border-radius: 14px; cursor: pointer;
+  background: var(--kx-primary); color: #fff;
+  font-family: var(--kx-sans); font-weight: 700; font-size: 15px;
+  box-shadow: 0 8px 22px rgba(15, 118, 110, .28);
+}
+#kardioxRoot .kx-hist-cta .material-symbols-rounded { font-size: 20px; }
+
+/* Visible focus (a11y) - the global blanket rule already covers these; kept explicit for this screen. */
+#kardioxRoot .kx-hist-back:focus-visible,
+#kardioxRoot .kx-hist-cta:focus-visible {
+  outline: 2px solid var(--kx-primary); outline-offset: 2px;
+}
+
+/* ===== states ===== */
+/* ─────────────── Screen 19 · System states (.kx-st-*) ───────────────
+   Scoped to #kardioxRoot; reuses --kx-* tokens + the kxShimmer keyframe
+   (both defined in kardiox.css - never redefined here). */
+#kardioxRoot .kx-st { padding: 16px; }
+
+/* Sub-block section labels (repeated above each state) */
+#kardioxRoot .kx-st-label {
+  font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--kx-text-2); margin: 18px 2px 9px;
+}
+#kardioxRoot .kx-st-label:first-child { margin-top: 4px; }
+
+/* (1) Poor-image ERROR card */
+#kardioxRoot .kx-st-err {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;
+  padding: 22px 18px; border: 1px solid #F0B7C0; border-radius: var(--kx-r);
+  background: var(--kx-card);
+}
+#kardioxRoot .kx-st-err-ico { display: inline-flex; line-height: 1; }
+#kardioxRoot .kx-st-err-ico > * { font-size: 36px; color: var(--kx-sev-critical); line-height: 1; }
+#kardioxRoot .kx-st-err-title { font-size: 14.5px; font-weight: 700; color: var(--kx-text); }
+#kardioxRoot .kx-st-err-body {
+  font-size: 12px; font-weight: 500; color: var(--kx-text-2);
+  line-height: 1.45; max-width: 26ch;
+}
+#kardioxRoot .kx-st-retake { margin-top: 4px; font-size: 13px; padding: 0 18px; }
+
+/* (2) OFFLINE amber card */
+#kardioxRoot .kx-st-off {
+  display: flex; align-items: center; gap: 12px; padding: 14px;
+  border: 1px solid #EAD28F; border-radius: 14px; background: #FBF3DC;
+}
+#kardioxRoot .kx-st-off-ico { display: inline-flex; line-height: 1; }
+#kardioxRoot .kx-st-off-ico > * { font-size: 26px; color: var(--kx-sev-warn); line-height: 1; }
+#kardioxRoot .kx-st-off-txt { min-width: 0; }
+#kardioxRoot .kx-st-off-title { font-size: 13.5px; font-weight: 700; color: var(--kx-sev-warn); }
+#kardioxRoot .kx-st-off-body {
+  display: block; margin-top: 1px; font-size: 12px; font-weight: 500;
+  color: #5a4a1a; line-height: 1.4;
+}
+
+/* (3) Loading SKELETON shimmer (reuses kxShimmer) */
+#kardioxRoot .kx-st-skel {
+  border: 1px solid var(--kx-hairline); border-radius: 14px;
+  background: var(--kx-card); padding: 14px;
+}
+#kardioxRoot .kx-st-skel-block {
+  height: 64px; border-radius: 10px; overflow: hidden;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent) no-repeat, var(--kx-surf-2);
+  background-size: 200% 100%, auto;
+  animation: kxShimmer 1.3s linear infinite;
+}
+#kardioxRoot .kx-st-skel-line {
+  height: 12px; border-radius: 6px; background: var(--kx-surf-2); margin-top: 12px;
+}
+#kardioxRoot .kx-st-skel-line--60 { width: 60%; }
+#kardioxRoot .kx-st-skel-line--40 { width: 40%; margin-top: 8px; }
+
+/* (4) Success TOAST (dark, green check) */
+#kardioxRoot .kx-st-toast {
+  display: flex; align-items: center; gap: 11px; padding: 13px 15px;
+  border-radius: 13px; background: var(--kx-ink); color: #fff;
+  box-shadow: 0 12px 40px rgba(13, 27, 36, .2);
+}
+#kardioxRoot .kx-st-toast-ico { display: inline-flex; line-height: 1; }
+#kardioxRoot .kx-st-toast-ico > * {
+  font-size: 20px; line-height: 1; color: #5BD08F;
+  font-variation-settings: 'FILL' 1;   /* filled check_circle */
+}
+#kardioxRoot .kx-st-toast-msg { flex: 1; font-size: 13.5px; font-weight: 600; color: #fff; }
+#kardioxRoot .kx-st-toast-view {
+  min-height: 44px; display: inline-flex; align-items: center; padding: 0 6px;
+  background: transparent; border: 0; cursor: pointer;
+  font-family: var(--kx-sans); font-size: 12.5px; font-weight: 700; color: #5BD08F;
+}
+
+/* ===== library ===== */
+/* ─── Screen 08 · Learn library (kx-lib-*) - scoped to #kardioxRoot, additive ─── */
+#kardioxRoot .kx-lib-head {
+  position: sticky; top: 0; z-index: 2;
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px; background: var(--kx-card);
+  border-bottom: 1px solid var(--kx-hairline);
+}
+#kardioxRoot .kx-lib-back,
+#kardioxRoot .kx-lib-bm {
+  width: 40px; height: 40px; flex: 0 0 auto; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; cursor: pointer;
+}
+#kardioxRoot .kx-lib-back { background: transparent; color: var(--kx-text); }
+#kardioxRoot .kx-lib-back .msr { font-size: 24px; }
+#kardioxRoot .kx-lib-title { flex: 1; min-width: 0; font-weight: 700; font-size: 17px; letter-spacing: -.01em; color: var(--kx-text); }
+#kardioxRoot .kx-lib-bm { background: var(--kx-surf-2); color: var(--kx-text-2); }
+#kardioxRoot .kx-lib-bm .msr { font-size: 21px; }
+#kardioxRoot .kx-lib-bm.is-on { background: var(--kx-soft); color: var(--kx-primary); }
+#kardioxRoot .kx-lib-bm.is-on .msr { font-variation-settings: 'FILL' 1; }
+
+#kardioxRoot .kx-lib-body { padding: 16px; }
+
+/* Progress hero (teal) */
+#kardioxRoot .kx-lib-hero {
+  display: flex; align-items: center; gap: 16px;
+  border-radius: 18px; padding: 16px; color: #fff;
+  background: linear-gradient(135deg, var(--kx-primary), var(--kx-primary-2));
+  box-shadow: 0 8px 22px rgba(15, 118, 110, .28);
+}
+#kardioxRoot .kx-lib-ring { position: relative; width: 72px; height: 72px; flex: 0 0 auto; }
+#kardioxRoot .kx-lib-ring svg { transform: rotate(-90deg); transform-origin: center; }
+#kardioxRoot .kx-lib-ring-track { stroke: rgba(255, 255, 255, .25); }
+#kardioxRoot .kx-lib-ring-fill { stroke: #fff; stroke-linecap: round; transition: stroke-dashoffset .6s var(--kx-ease); }
+#kardioxRoot .kx-lib-ring-lbl {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-lib-ring-num { font-size: 20px; font-weight: 700; }
+#kardioxRoot .kx-lib-ring-of { font-size: 9px; font-weight: 600; opacity: .8; }
+#kardioxRoot .kx-lib-hero-main { flex: 1; min-width: 0; }
+#kardioxRoot .kx-lib-hero-t { font-weight: 700; font-size: 16px; }
+#kardioxRoot .kx-lib-hero-s { font-size: 12px; font-weight: 500; opacity: .9; margin-top: 2px; }
+#kardioxRoot .kx-lib-streak {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 8px;
+  font-size: 11.5px; font-weight: 700; padding: 4px 9px; border-radius: 999px;
+  background: rgba(255, 255, 255, .16);
+}
+#kardioxRoot .kx-lib-flame { font-size: 14px; color: #FFB84D; }
+
+/* Search */
+#kardioxRoot .kx-lib-search {
+  display: flex; align-items: center; gap: 8px; margin-top: 14px;
+  padding: 0 12px; height: 44px; border: 1.5px solid var(--kx-hairline);
+  border-radius: var(--kx-r-ctl); background: var(--kx-card);
+}
+#kardioxRoot .kx-lib-search > .msr { font-size: 20px; color: var(--kx-muted); }
+#kardioxRoot .kx-lib-search input {
+  flex: 1; min-width: 0; border: 0; background: transparent; outline: none;
+  font: 500 13.5px var(--kx-sans); color: var(--kx-text);
+}
+#kardioxRoot .kx-lib-search input::placeholder { color: var(--kx-muted); }
+#kardioxRoot .kx-lib-search input:focus-visible { outline: none; }
+#kardioxRoot .kx-lib-search:focus-within { border-color: var(--kx-primary); }
+
+/* Filter chips */
+#kardioxRoot .kx-lib-chips { display: flex; gap: 7px; margin-top: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+#kardioxRoot .kx-lib-chips::-webkit-scrollbar { display: none; }
+#kardioxRoot .kx-lib-chip {
+  flex: 0 0 auto; white-space: nowrap; cursor: pointer;
+  font: 600 11.5px var(--kx-sans); color: var(--kx-text-2);
+  background: var(--kx-card); border: 1.5px solid var(--kx-hairline);
+  padding: 6px 11px; border-radius: 999px;
+}
+#kardioxRoot .kx-lib-chip.is-on {
+  color: var(--kx-primary); background: var(--kx-soft);
+  border-color: var(--kx-primary); font-weight: 700;
+}
+
+/* Grouped sections */
+#kardioxRoot .kx-lib-group {
+  font-weight: 700; font-size: 11.5px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--kx-text-2); margin: 18px 2px 10px;
+}
+#kardioxRoot .kx-lib-rows { display: flex; flex-direction: column; gap: 8px; }
+
+/* Rows */
+#kardioxRoot .kx-lib-row {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px;
+  padding: 10px; text-align: left; cursor: pointer;
+  border: 1px solid var(--kx-hairline); border-radius: var(--kx-r-ctl);
+  background: var(--kx-card); color: var(--kx-text);
+}
+#kardioxRoot .kx-lib-row:active { background: var(--kx-surf-2); }
+#kardioxRoot .kx-lib-thumb {
+  width: 44px; height: 38px; flex: 0 0 auto; border-radius: 8px;
+  background: #131e28; display: flex; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-lib-thumb polyline { fill: none; stroke-width: 1.8; }
+#kardioxRoot .kx-lib-thumb.t-core polyline { stroke: #5BD08F; }
+#kardioxRoot .kx-lib-thumb.t-emergency polyline { stroke: #FF6B6B; }
+#kardioxRoot .kx-lib-thumb.t-rare polyline { stroke: #F0A36B; }
+#kardioxRoot .kx-lib-row-main { flex: 1; min-width: 0; }
+#kardioxRoot .kx-lib-row-t {
+  display: block; font-size: 13.5px; font-weight: 700; color: var(--kx-text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#kardioxRoot .kx-lib-row-s { display: block; font-size: 11px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Row affordances */
+#kardioxRoot .kx-lib-check { flex: 0 0 auto; font-size: 20px; color: var(--kx-sev-stable); }
+#kardioxRoot .kx-lib-chev { flex: 0 0 auto; font-size: 20px; color: var(--kx-muted); }
+#kardioxRoot .kx-lib-pct { flex: 0 0 auto; font-size: 11px; font-weight: 700; color: var(--kx-primary); }
+#kardioxRoot .kx-lib-pill {
+  flex: 0 0 auto; font: 700 9.5px var(--kx-sans); color: var(--kx-sev-critical);
+  background: #FBE9EC; padding: 3px 7px; border-radius: 999px;
+}
+
+#kardioxRoot .kx-lib-empty { padding: 30px 16px; text-align: center; color: var(--kx-text-2); font-size: 13px; }
+
+/* ===== lesson ===== */
+/* ═══════════ Screen 09 · Lesson detail ═══════════════════════════════════
+ * All selectors scoped to #kardioxRoot / .kx-lesson-*. Reuses --kx-* tokens
+ * and the shared .kx-ecg / .kx-btn primitives. Pastel banner bg/borders use
+ * the handoff hexes (same approach as .kx-verify) with token text colours. */
+
+#kardioxRoot .kx-lesson-body { }
+
+/* Header: back · title/sub · filled bookmark */
+#kardioxRoot .kx-lesson-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px; border-bottom: 1px solid var(--kx-hairline);
+  background: var(--kx-card);
+}
+#kardioxRoot .kx-lesson-back {
+  flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px;
+  border: 0; background: transparent; color: var(--kx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#kardioxRoot .kx-lesson-back .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-lesson-back:active { background: var(--kx-surf-2); }
+#kardioxRoot .kx-lesson-titles { flex: 1; min-width: 0; }
+#kardioxRoot .kx-lesson-title {
+  font-size: 16px; font-weight: 700; letter-spacing: -.01em; color: var(--kx-text);
+}
+#kardioxRoot .kx-lesson-sub {
+  font-size: 11.5px; font-weight: 500; color: var(--kx-text-2); margin-top: 1px;
+}
+#kardioxRoot .kx-lesson-bm {
+  flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px; border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--kx-soft); color: var(--kx-primary);
+}
+#kardioxRoot .kx-lesson-bm .material-symbols-rounded { font-size: 21px; font-variation-settings: 'FILL' 1; }
+#kardioxRoot .kx-lesson-bm[aria-pressed="false"] { background: var(--kx-surf-2); color: var(--kx-text-2); }
+#kardioxRoot .kx-lesson-bm[aria-pressed="false"] .material-symbols-rounded { font-variation-settings: 'FILL' 0; }
+
+/* Tabs (local segmented switch) */
+#kardioxRoot .kx-lesson-tabs { display: flex; gap: 6px; padding: 12px 16px 0; }
+#kardioxRoot .kx-lesson-tab {
+  flex: 1; min-height: 44px; padding: 8px; cursor: pointer;
+  text-align: center; border: 0; border-radius: 9px; background: transparent;
+  font-family: var(--kx-sans); font-size: 12.5px; font-weight: 600; color: var(--kx-text-2);
+}
+#kardioxRoot .kx-lesson-tab.is-active { font-weight: 700; color: var(--kx-primary); background: var(--kx-soft); }
+
+/* Panels */
+#kardioxRoot .kx-lesson-panel { display: none; padding: 14px 16px 16px; }
+#kardioxRoot .kx-lesson-panel.is-active { display: block; }
+
+/* ECG strip (rounded, ECG-paper background; trace/grid via shared .kx-ecg-*) */
+#kardioxRoot .kx-lesson-strip { border-radius: 12px; }
+#kardioxRoot .kx-lesson-ecg-svg { height: 72px; }
+
+/* Finding tags (urgent/amber chips) */
+#kardioxRoot .kx-lesson-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+#kardioxRoot .kx-lesson-tag {
+  font-size: 11px; font-weight: 600; line-height: 1; padding: 4px 9px; border-radius: 999px;
+  color: var(--kx-sev-urgent); background: #FDEEE4; border: 1px solid #F5C6A5;
+}
+
+/* Section label */
+#kardioxRoot .kx-lesson-label {
+  margin: 18px 2px 8px; font-size: 11.5px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--kx-text-2);
+}
+
+/* Diagnostic criteria - plain green-check rows */
+#kardioxRoot .kx-lesson-crit-list { display: flex; flex-direction: column; gap: 7px; }
+#kardioxRoot .kx-lesson-crit {
+  display: flex; gap: 9px; font-size: 13px; line-height: 1.4; color: var(--kx-text);
+}
+#kardioxRoot .kx-lesson-crit-ic { flex: 0 0 auto; display: inline-flex; }
+#kardioxRoot .kx-lesson-crit-ic .material-symbols-rounded {
+  font-size: 17px; color: var(--kx-sev-stable); font-variation-settings: 'FILL' 1;
+}
+
+/* Pearl (amber) / Pitfall (pink) notes */
+#kardioxRoot .kx-lesson-note {
+  margin-top: 10px; padding: 13px 14px; border-radius: 12px; border: 1px solid transparent;
+}
+#kardioxRoot .kx-lesson-note:first-of-type { margin-top: 16px; }
+#kardioxRoot .kx-lesson-note-hd { display: flex; align-items: center; gap: 7px; }
+#kardioxRoot .kx-lesson-note-hd .material-symbols-rounded { font-size: 18px; }
+#kardioxRoot .kx-lesson-note-hd b { font-size: 12.5px; }
+#kardioxRoot .kx-lesson-note span {
+  display: block; margin-top: 5px; font-size: 12.5px; line-height: 1.5; font-weight: 500;
+}
+#kardioxRoot .kx-lesson-note--pearl { background: #FBF3DC; border-color: #EAD28F; }
+#kardioxRoot .kx-lesson-note--pearl .kx-lesson-note-hd .material-symbols-rounded,
+#kardioxRoot .kx-lesson-note--pearl .kx-lesson-note-hd b { color: var(--kx-sev-warn); }
+#kardioxRoot .kx-lesson-note--pearl span { color: #5a4a1a; }
+#kardioxRoot .kx-lesson-note--pitfall { background: #FBE9EC; border-color: #F0B7C0; }
+#kardioxRoot .kx-lesson-note--pitfall .kx-lesson-note-hd .material-symbols-rounded,
+#kardioxRoot .kx-lesson-note--pitfall .kx-lesson-note-hd b { color: var(--kx-sev-critical); }
+#kardioxRoot .kx-lesson-note--pitfall span { color: #7a2a35; }
+
+/* Ask the AI Tutor (info/blue) */
+#kardioxRoot .kx-lesson-tutor {
+  display: flex; align-items: center; gap: 11px; width: 100%; min-height: 44px;
+  margin-top: 14px; padding: 14px; cursor: pointer; text-align: left;
+  border: 1px solid #B5D4E8; border-radius: 14px; background: #E8F2F9; color: var(--kx-sev-info);
+}
+#kardioxRoot .kx-lesson-tutor .material-symbols-rounded { font-size: 23px; }
+#kardioxRoot .kx-lesson-tutor-body { flex: 1; min-width: 0; }
+#kardioxRoot .kx-lesson-tutor-body b { display: block; font-size: 14px; font-weight: 700; }
+#kardioxRoot .kx-lesson-tutor-body span { font-size: 11px; font-weight: 500; opacity: .9; }
+#kardioxRoot .kx-lesson-tutor .material-symbols-rounded:last-child { font-size: 20px; }
+
+/* Take the quiz (primary) */
+#kardioxRoot .kx-lesson-quiz { width: 100%; margin-top: 10px; min-height: 50px; }
+#kardioxRoot .kx-lesson-quiz .material-symbols-rounded { font-size: 20px; }
+
+/* Quiz-tab intro */
+#kardioxRoot .kx-lesson-quiz-intro {
+  font-size: 13px; line-height: 1.5; font-weight: 500; color: var(--kx-text-2); margin-bottom: 14px;
+}
+
+/* ===== quiz ===== */
+/* ─────────────── KardioX screen 10 · Quiz / exam mode ───────────────
+   Scoped to #kardioxRoot, .kx-* only. Tokens reused, none redefined. */
+
+/* Header: close + progress + timer */
+#kardioxRoot .kx-quiz-top{ display:flex; align-items:center; gap:11px; padding:8px 16px 10px; background:var(--kx-card); border-bottom:1px solid var(--kx-hairline); }
+#kardioxRoot .kx-quiz-close{ width:44px; height:44px; flex:0 0 auto; border:0; background:transparent; color:var(--kx-text); border-radius:999px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; }
+#kardioxRoot .kx-quiz-close .msr{ font-size:24px; }
+#kardioxRoot .kx-quiz-progress{ flex:1; height:6px; border-radius:999px; background:var(--kx-surf-2); overflow:hidden; }
+#kardioxRoot .kx-quiz-progress-fill{ height:100%; width:0; background:var(--kx-primary); border-radius:999px; transition:width .35s var(--kx-ease); }
+#kardioxRoot .kx-quiz-timer{ display:inline-flex; align-items:center; gap:4px; flex:0 0 auto; font-weight:700; font-size:13px; color:var(--kx-sev-urgent); }
+#kardioxRoot .kx-quiz-timer .msr{ font-size:17px; }
+
+/* Body */
+#kardioxRoot .kx-quiz-body{ padding:8px 16px 18px; }
+#kardioxRoot .kx-quiz-meta{ font-size:12px; font-weight:600; color:var(--kx-text-2); }
+#kardioxRoot .kx-quiz-stem{ margin-top:10px; border:1px solid var(--kx-hairline); border-radius:var(--kx-r-ctl); overflow:hidden; background:#fff5f5; }
+#kardioxRoot .kx-quiz-stem svg,
+#kardioxRoot .kx-quiz-stem-img{ display:block; width:100%; height:82px; object-fit:cover; }
+#kardioxRoot .kx-quiz-q{ margin:16px 0 0; font-size:16px; font-weight:700; letter-spacing:-.01em; color:var(--kx-text); }
+
+/* Options (radio cards) */
+#kardioxRoot .kx-quiz-options{ display:flex; flex-direction:column; gap:9px; margin-top:14px; }
+#kardioxRoot .kx-quiz-option{ display:flex; align-items:center; gap:11px; width:100%; text-align:left; padding:14px; min-height:44px; border:1.5px solid var(--kx-hairline); border-radius:13px; background:var(--kx-card); color:var(--kx-text); font-family:inherit; cursor:pointer; transition:border-color .15s var(--kx-ease), background .15s var(--kx-ease); }
+#kardioxRoot .kx-quiz-radio{ width:24px; height:24px; flex:0 0 auto; box-sizing:border-box; border-radius:999px; border:1.5px solid #C7D3D9; display:inline-flex; align-items:center; justify-content:center; }
+#kardioxRoot .kx-quiz-letter{ font-family:var(--kx-mono); font-weight:700; font-size:12px; color:var(--kx-muted); }
+#kardioxRoot .kx-quiz-ico{ display:none; align-items:center; justify-content:center; }
+#kardioxRoot .kx-quiz-ico .msr{ font-size:16px; color:#fff; }
+#kardioxRoot .kx-quiz-opt-label{ font-size:13.5px; font-weight:600; color:var(--kx-text); }
+
+/* selected (pre-submit) + correct (post-submit): teal fill + check */
+#kardioxRoot .kx-quiz-option.is-selected,
+#kardioxRoot .kx-quiz-option.is-correct{ border-color:var(--kx-primary); background:var(--kx-soft); }
+#kardioxRoot .kx-quiz-option.is-selected .kx-quiz-radio,
+#kardioxRoot .kx-quiz-option.is-correct .kx-quiz-radio{ background:var(--kx-primary); border-color:var(--kx-primary); }
+#kardioxRoot .kx-quiz-option.is-selected .kx-quiz-letter,
+#kardioxRoot .kx-quiz-option.is-correct .kx-quiz-letter{ display:none; }
+#kardioxRoot .kx-quiz-option.is-selected .kx-quiz-ico-ok,
+#kardioxRoot .kx-quiz-option.is-correct .kx-quiz-ico-ok{ display:inline-flex; }
+#kardioxRoot .kx-quiz-option.is-selected .kx-quiz-opt-label,
+#kardioxRoot .kx-quiz-option.is-correct .kx-quiz-opt-label{ font-weight:700; color:var(--kx-primary); }
+
+/* incorrect (post-submit, chosen wrong): red fill + cross */
+#kardioxRoot .kx-quiz-option.is-incorrect{ border-color:var(--kx-sev-critical); background:#FDECEC; }
+#kardioxRoot .kx-quiz-option.is-incorrect .kx-quiz-radio{ background:var(--kx-sev-critical); border-color:var(--kx-sev-critical); }
+#kardioxRoot .kx-quiz-option.is-incorrect .kx-quiz-letter{ display:none; }
+#kardioxRoot .kx-quiz-option.is-incorrect .kx-quiz-ico-no{ display:inline-flex; }
+#kardioxRoot .kx-quiz-option.is-incorrect .kx-quiz-opt-label{ font-weight:700; color:var(--kx-sev-critical); }
+
+/* lock interaction after submit */
+#kardioxRoot .kx-quiz-options.kx-quiz-locked .kx-quiz-option{ cursor:default; pointer-events:none; }
+
+/* Submit / Next */
+#kardioxRoot .kx-quiz-submit{ width:100%; margin-top:16px; padding:15px; border-radius:14px; font-size:15px; }
+#kardioxRoot .kx-quiz-submit:disabled{ opacity:.55; cursor:default; box-shadow:none; }
+#kardioxRoot .kx-quiz-submit.kx-quiz-done{ background:var(--kx-sev-stable); color:#fff; opacity:1; }
+
+/* Explanation reveal */
+#kardioxRoot .kx-quiz-explain{ margin-top:14px; padding:13px 14px; border-radius:var(--kx-r-ctl); border-left:3px solid var(--kx-hairline); animation:kxRise .3s var(--kx-ease) both; }
+#kardioxRoot .kx-quiz-explain.is-correct{ background:#EAF7F0; border-left-color:var(--kx-sev-stable); }
+#kardioxRoot .kx-quiz-explain.is-wrong{ background:#FFF4EC; border-left-color:var(--kx-sev-urgent); }
+#kardioxRoot .kx-quiz-explain-head{ display:flex; align-items:center; gap:7px; font-size:14px; }
+#kardioxRoot .kx-quiz-explain.is-correct .kx-quiz-explain-head{ color:var(--kx-sev-stable); }
+#kardioxRoot .kx-quiz-explain.is-wrong .kx-quiz-explain-head{ color:var(--kx-sev-urgent); }
+#kardioxRoot .kx-quiz-explain-head .msr{ font-size:19px; }
+#kardioxRoot .kx-quiz-explain-answer{ display:block; margin-top:6px; font-size:12.5px; font-weight:700; color:var(--kx-text); }
+#kardioxRoot .kx-quiz-explain-body{ margin:6px 0 0; font-size:13px; line-height:1.5; color:var(--kx-text-2); }
+
+/* ===== flashcards ===== */
+/* ═══════════════════════ Screen 11 · Flashcards (spaced repetition) ═══════════════════════
+   Scoped to #kardioxRoot, .kx-fc-*. Reuses --kx-* tokens only; no token redefs, no inline styles. */
+
+/* Header - close/back + titles + progress counter */
+#kardioxRoot .kx-fc-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 12px 10px;
+  background: var(--kx-card); border-bottom: 1px solid var(--kx-hairline);
+}
+#kardioxRoot .kx-fc-close {
+  width: 44px; height: 44px; flex: 0 0 auto; border-radius: 999px;
+  border: 0; background: transparent; color: var(--kx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#kardioxRoot .kx-fc-close .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-fc-titles { flex: 1; min-width: 0; }
+#kardioxRoot .kx-fc-title { font-weight: 700; font-size: 15px; letter-spacing: -.01em; color: var(--kx-text); }
+#kardioxRoot .kx-fc-sub { font-size: 11px; font-weight: 500; color: var(--kx-text-2); margin-top: 1px; }
+#kardioxRoot .kx-fc-count { font-weight: 700; font-size: 12px; color: var(--kx-primary); flex: 0 0 auto; }
+
+#kardioxRoot .kx-fc-body { padding: 20px 16px 16px; }
+
+/* Flip card - 3D flip between front / answer */
+#kardioxRoot .kx-fc-cardwrap { perspective: 1600px; }
+#kardioxRoot .kx-fc-card {
+  position: relative; display: block; width: 100%; min-height: 250px;
+  padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform-style: preserve-3d;
+  transition: transform .55s var(--kx-ease);
+}
+#kardioxRoot .kx-fc-card.is-revealed { transform: rotateY(180deg); }
+#kardioxRoot .kx-fc-face {
+  border-radius: 20px; border: 1px solid var(--kx-hairline);
+  background: var(--kx-card); box-shadow: 0 10px 30px rgba(13, 27, 36, .1);
+  padding: 22px 20px; min-height: 250px;
+  display: flex; flex-direction: column;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+}
+#kardioxRoot .kx-fc-front { position: relative; }
+#kardioxRoot .kx-fc-back  { position: absolute; inset: 0; transform: rotateY(180deg); }
+
+#kardioxRoot .kx-fc-label {
+  font-weight: 700; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--kx-primary);
+}
+#kardioxRoot .kx-fc-label--back { color: var(--kx-sev-stable); }
+
+/* Decorative ECG strip on the card front */
+#kardioxRoot .kx-fc-strip {
+  border-radius: 12px; overflow: hidden; margin-top: 12px;
+  border: 1px solid var(--kx-hairline);
+  background: color-mix(in srgb, var(--kx-cardiac) 6%, var(--kx-card));
+}
+#kardioxRoot .kx-fc-strip-svg { display: block; }
+#kardioxRoot .kx-fc-strip-grid {
+  fill: none; stroke: color-mix(in srgb, var(--kx-cardiac) 24%, var(--kx-card)); stroke-width: 1;
+}
+#kardioxRoot .kx-fc-strip-trace {
+  fill: none; stroke: var(--kx-ink); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round;
+}
+
+#kardioxRoot .kx-fc-prompt {
+  font-size: 17px; font-weight: 700; letter-spacing: -.01em; margin-top: 18px; color: var(--kx-text);
+}
+#kardioxRoot .kx-fc-answer {
+  font-size: 16px; font-weight: 600; line-height: 1.5; margin-top: 12px; color: var(--kx-text);
+}
+#kardioxRoot .kx-fc-spacer { flex: 1 1 auto; }
+#kardioxRoot .kx-fc-hint {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 14px; font-size: 12px; font-weight: 600; color: var(--kx-muted);
+}
+#kardioxRoot .kx-fc-hint .material-symbols-rounded { font-size: 17px; }
+
+/* Grade row - SM-2 (Again / Hard / Good / Easy), color + label + interval */
+#kardioxRoot .kx-fc-grades-label {
+  font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--kx-text-2); margin: 18px 2px 9px;
+}
+#kardioxRoot .kx-fc-grades {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px;
+}
+#kardioxRoot .kx-fc-grade {
+  min-height: 48px; text-align: center; padding: 8px 4px; border-radius: 11px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  border: 1px solid transparent;
+  transition: transform .12s var(--kx-ease), filter .12s var(--kx-ease);
+}
+#kardioxRoot .kx-fc-grade:active { transform: translateY(1px); filter: brightness(.97); }
+#kardioxRoot .kx-fc-grade-t { font-weight: 700; font-size: 12.5px; }
+#kardioxRoot .kx-fc-grade-i { font-size: 9.5px; font-weight: 600; }
+
+#kardioxRoot .kx-fc-grade.is-again {
+  color: var(--kx-sev-critical);
+  background: color-mix(in srgb, var(--kx-sev-critical) 12%, var(--kx-card));
+  border-color: color-mix(in srgb, var(--kx-sev-critical) 34%, transparent);
+}
+#kardioxRoot .kx-fc-grade.is-hard {
+  color: var(--kx-sev-urgent);
+  background: color-mix(in srgb, var(--kx-sev-urgent) 12%, var(--kx-card));
+  border-color: color-mix(in srgb, var(--kx-sev-urgent) 34%, transparent);
+}
+#kardioxRoot .kx-fc-grade.is-good {
+  color: var(--kx-sev-stable);
+  background: color-mix(in srgb, var(--kx-sev-stable) 12%, var(--kx-card));
+  border-color: color-mix(in srgb, var(--kx-sev-stable) 34%, transparent);
+}
+#kardioxRoot .kx-fc-grade.is-easy {
+  color: var(--kx-sev-info);
+  background: color-mix(in srgb, var(--kx-sev-info) 12%, var(--kx-card));
+  border-color: color-mix(in srgb, var(--kx-sev-info) 34%, transparent);
+}
+
+/* Done + loading states */
+#kardioxRoot .kx-fc-done {
+  text-align: center; padding: 48px 24px; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  animation: kxRise .3s var(--kx-ease) both;
+}
+#kardioxRoot .kx-fc-done-ic { color: var(--kx-primary); }
+#kardioxRoot .kx-fc-done-ic .material-symbols-rounded { font-size: 44px; }
+#kardioxRoot .kx-fc-done h3 { margin: 6px 0 0; font-size: 18px; font-weight: 800; letter-spacing: -.01em; color: var(--kx-text); }
+#kardioxRoot .kx-fc-done p { margin: 0 0 6px; font-size: 13px; color: var(--kx-text-2); max-width: 260px; }
+#kardioxRoot .kx-fc-done .kx-btn { margin-top: 10px; }
+
+#kardioxRoot .kx-fc-loading {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  padding: 64px 24px; color: var(--kx-text-2); font-size: 13px; font-weight: 600;
+}
+#kardioxRoot .kx-fc-spin { color: var(--kx-primary); display: inline-flex; }
+#kardioxRoot .kx-fc-spin .material-symbols-rounded { font-size: 30px; animation: kxSpin 1s linear infinite; }
+
+/* Reduced motion - freeze the flip transition + spinner */
+@media (prefers-reduced-motion: reduce) {
+  #kardioxRoot .kx-fc-card { transition: none; }
+  #kardioxRoot .kx-fc-spin .material-symbols-rounded { animation: none; }
+}
+
+/* ===== daily ===== */
+/* ─────────────────────────── Screen 12 · Daily challenge + achievements ─────────────────────────── */
+/* Scoped to #kardioxRoot, .kx-* only. Reuses the shared header (.kx-rpt-head / .kx-rpt-back) and
+   section labels (.kx-sec-head / .kx-sec-title) already defined for the module. No token redefs. */
+#kardioxRoot .kx-daily { padding: 16px; }
+
+/* ECG of the Day - dark challenge card */
+#kardioxRoot .kx-dc-card {
+  position: relative; overflow: hidden; border-radius: 18px; padding: 18px; color: #fff;
+  background: linear-gradient(150deg, #131e28, #0f2a30);
+}
+#kardioxRoot .kx-dc-card::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(240px 100px at 90% 0%, rgba(229, 72, 77, .28), transparent 70%);
+}
+#kardioxRoot .kx-dc-in { position: relative; }
+#kardioxRoot .kx-dc-pill {
+  display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 10px;
+  letter-spacing: .06em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px;
+  background: rgba(255, 255, 255, .15);
+}
+#kardioxRoot .kx-dc-pill .material-symbols-rounded { font-size: 13px; color: #FFB84D; font-variation-settings: 'FILL' 1; }
+#kardioxRoot .kx-dc-trace {
+  display: block; width: 100%; height: 54px; margin: 12px 0; border-radius: 10px;
+  overflow: hidden; background: #fff5f5;
+}
+#kardioxRoot .kx-dc-q { font-size: 16px; font-weight: 700; }
+#kardioxRoot .kx-dc-meta { font-size: 12px; font-weight: 500; opacity: .85; margin-top: 2px; }
+#kardioxRoot .kx-dc-start {
+  display: inline-flex; align-items: center; gap: 7px; min-height: 44px; margin-top: 14px;
+  padding: 0 16px; border: 0; border-radius: 999px; cursor: pointer;
+  background: #fff; color: #131e28; font-weight: 700; font-size: 13px;
+}
+#kardioxRoot .kx-dc-start .material-symbols-rounded { font-size: 17px; }
+
+/* This week - 7-day streak row */
+#kardioxRoot .kx-week { display: flex; justify-content: space-between; gap: 5px; }
+#kardioxRoot .kx-week-day { flex: 1; text-align: center; }
+#kardioxRoot .kx-week-box {
+  width: 100%; aspect-ratio: 1; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-week-box .material-symbols-rounded { font-size: 18px; }
+#kardioxRoot .kx-week-box.is-done { background: var(--kx-primary); color: #fff; }
+#kardioxRoot .kx-week-box.is-done .material-symbols-rounded { font-variation-settings: 'FILL' 1; }
+#kardioxRoot .kx-week-box.is-current { background: var(--kx-soft); border: 2px solid var(--kx-primary); color: var(--kx-primary); }
+#kardioxRoot .kx-week-box.is-empty { background: var(--kx-surf-2); }
+#kardioxRoot .kx-week-l { font-size: 10px; font-weight: 600; color: var(--kx-text-2); margin-top: 4px; }
+#kardioxRoot .kx-week-l.is-now { font-weight: 700; color: var(--kx-primary); }
+#kardioxRoot .kx-week-l.is-off { color: var(--kx-muted); }
+
+/* Achievements grid */
+#kardioxRoot .kx-ach-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; }
+#kardioxRoot .kx-ach {
+  text-align: center; padding: 13px 6px; border: 1px solid var(--kx-hairline);
+  border-radius: 13px; background: var(--kx-card);
+}
+#kardioxRoot .kx-ach.is-locked { background: var(--kx-surf-2); opacity: .55; }
+#kardioxRoot .kx-ach-ic .material-symbols-rounded { font-size: 26px; color: var(--kx-primary); font-variation-settings: 'FILL' 1; }
+#kardioxRoot .kx-ach-ic--gold .material-symbols-rounded { color: #FFB84D; }
+#kardioxRoot .kx-ach-ic--cardiac .material-symbols-rounded { color: var(--kx-cardiac); }
+#kardioxRoot .kx-ach.is-locked .kx-ach-ic .material-symbols-rounded { color: var(--kx-muted); font-variation-settings: 'FILL' 0; }
+#kardioxRoot .kx-ach-t { font-size: 10.5px; font-weight: 700; margin-top: 5px; color: var(--kx-text); }
+#kardioxRoot .kx-ach.is-locked .kx-ach-t { color: var(--kx-muted); }
+
+/* Focus-next insight (info/blue) */
+#kardioxRoot .kx-focus {
+  margin-top: 16px; padding: 13px 14px; border-radius: 12px;
+  background: #E8F2F9; border: 1px solid #B5D4E8;
+}
+#kardioxRoot .kx-focus[hidden] { display: none; }
+#kardioxRoot .kx-focus-head { display: flex; align-items: center; gap: 7px; }
+#kardioxRoot .kx-focus-head .material-symbols-rounded { font-size: 18px; color: var(--kx-sev-info); }
+#kardioxRoot .kx-focus-title { font-size: 12.5px; color: var(--kx-sev-info); }
+#kardioxRoot .kx-focus-body { display: block; font-size: 12px; line-height: 1.45; color: var(--kx-ink); font-weight: 500; margin-top: 5px; }
