@@ -52,7 +52,7 @@
     var st = document.createElement("style"); st.id = "smdaw-css";
     st.textContent = [
       ".smdaw-ov{position:fixed;inset:0;z-index:100000;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);display:flex;flex-direction:column;font-family:var(--sans,system-ui,-apple-system,sans-serif);overflow:hidden}",
-      ".smdaw-hd{display:flex;align-items:center;gap:10px;padding:16px 16px 12px;border-bottom:1px solid var(--line,#d7dee3);background:var(--panel,#fff)}",
+      ".smdaw-hd{display:flex;align-items:center;gap:10px;padding:calc(16px + env(safe-area-inset-top,0px)) calc(16px + env(safe-area-inset-right,0px)) 12px calc(16px + env(safe-area-inset-left,0px));border-bottom:1px solid var(--line,#d7dee3);background:var(--panel,#fff)}",
       ".smdaw-hd h2{margin:0;font-size:18px;font-weight:700;flex:1}",
       ".smdaw-x{border:none;background:var(--paper,#eef2f0);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;color:var(--ink,#14202b)}",
       ".smdaw-bd{flex:1;overflow-y:auto;padding:12px 14px 40px;-webkit-overflow-scrolling:touch}",
