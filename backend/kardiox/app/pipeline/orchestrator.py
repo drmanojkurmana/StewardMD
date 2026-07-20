@@ -134,9 +134,20 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
         traces, _ = await run_stage("digitization", providers.digitization,
                                     lambda: providers.digitization.digitize(image),
                                     critical=True, emit=emit, pct_active=30, pct_done=36, trace=trace)
+        digitizer_consensus = (traces or {}).get("consensus")   # present when the consensus digitizer ran
         signal, _ = await run_stage("signalExtraction", providers.wfdb,
                                     lambda: providers.wfdb.to_signal(traces),
                                     critical=True, emit=emit, pct_active=40, pct_done=46, trace=trace)
+
+        # specialist model classifiers (MI/rare/conduction/morphology/beat) — OPTIONAL + isolated. Each is
+        # Not Ready until a validated checkpoint is configured; outputs are candidates for fusion.
+        specialist_candidates = []
+        try:
+            from app.services.specialists import run_specialists
+            specialist_candidates = await run_specialists(signal, providers.specialists)
+            trace.append({"stage": "specialists", "status": "done", "candidates": len(specialist_candidates)})
+        except Exception as e:  # noqa: BLE001 — never let specialists affect the deterministic path
+            log.info("specialists.isolated", reason=type(e).__name__)
 
         # rhythm (critical) + beats (optional)
         rhythm, _ = await run_stage("rhythm", providers.rhythm,
@@ -179,7 +190,9 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
         interpretation = interp or ""
 
         analysis = _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
-                             quality_report=quality_report, layout_info=layout_info)
+                             quality_report=quality_report, layout_info=layout_info,
+                             specialist_candidates=specialist_candidates,
+                             digitizer_consensus=digitizer_consensus)
         total_ms = round((time.monotonic() - t_pipeline) * 1000, 1)
         METRICS.observe("kardiox_pipeline_duration_seconds", time.monotonic() - t_pipeline, {"mode": "live"})
         log.info("pipeline.done", total_ms=total_ms, stages=len(trace))
@@ -210,7 +223,8 @@ def _measurement_consistency(rhythm: dict, meas: dict):
 
 
 def _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
-              quality_report=None, layout_info=None):
+              quality_report=None, layout_info=None, specialist_candidates=None,
+              digitizer_consensus=None):
     """Build the ECGAnalysis contract from the real stage outputs + Phase-7 fusion/calibration/explain."""
     from app.core.config import get_settings
     from app.models.ecg import Differential, ECGFinding, Evidence, MorphologyRow, RedFlag
@@ -244,6 +258,11 @@ def _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
             if rhythm.get("method") == "torchecg" and rhythm.get("label"):
                 candidates.append({"source": "torchecg", "label": rhythm["label"],
                                    "confidence": float(rhythm.get("confidence") or 0.5), "weight": 1.0})
+            for c in (specialist_candidates or []):   # MI/rare/conduction/morphology/beat model outputs
+                if c.get("label"):
+                    candidates.append({"source": c.get("source", c.get("task", "specialist")),
+                                       "label": c["label"], "confidence": float(c.get("confidence") or 0.5),
+                                       "weight": 1.0})
             consensus = fuse(candidates, validated, signal_quality, meas_consistency)
             if consensus.get("findings"):
                 confidence = float(consensus.get("overallConfidence", confidence))
@@ -316,6 +335,7 @@ def _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
         whatToVerify=what_to_verify,
         qualityReport=quality_report,
         layout=layout_info,
+        digitizerConsensus=digitizer_consensus,
         signalQuality=signal_quality,
         consensus=consensus,
         explanations=explanations,

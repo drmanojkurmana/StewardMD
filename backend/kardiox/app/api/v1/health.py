@@ -20,7 +20,10 @@ async def health(settings: Settings = Depends(get_settings), providers: Provider
         "mode": settings.mode,
         "environment": settings.environment,
         "providers": reports,
-        # In live mode, "modelsReady" means every stage is implemented AND its deps/config are satisfied.
+        # Optional specialist model classifiers (MI/rare/conduction/morphology/beat) — Not Ready until
+        # a validated checkpoint is configured; reported separately so the core stage list is stable.
+        "specialists": await providers.specialist_health(),
+        # In live mode, "modelsReady" means every core stage is implemented AND its deps/config are satisfied.
         "modelsReady": all(r["ready"] for r in reports) if settings.mode == "live" else True,
     }
 

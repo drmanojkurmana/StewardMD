@@ -57,6 +57,30 @@ members = [load_backend("torchscript", "/models/a.pt"), load_backend("onnx", "/m
 ens = EnsembleBackend(members, labels=[...])
 ```
 
+## Specialist model classifiers (multi-model, Phase 7)
+
+MI / rare-disease / conduction / morphology / beat (and any custom task) plug in via ONE registry — no
+code change. Each is Not Ready (raises `pipeline_unavailable`) until its checkpoint is configured; outputs
+are candidates the Rule Engine still validates. Set a single env var:
+
+```
+KARDIOX_SPECIALISTS_JSON='{"mi": {"path": "/models/mi.onnx", "kind": "onnx",
+  "labels": "normal,stemi,nstemi", "inputSpec": "ptbxl_500hz_10s", "labelMap": "ptbxl_superclass"}}'
+```
+
+`/v1/health` reports each specialist under `specialists[]` (ready only when a checkpoint is wired + its
+runtime is present). Readiness is operational wiring; clinical validation remains the external gate.
+
+## Multi-digitizer consensus
+
+Run several digitizers and reconcile them (per-lead correlation → agreement + confidence, disagreement
+flag). Members that are Not Ready are skipped; a single available member still yields a result.
+
+```
+KARDIOX_PROVIDER_DIGITIZATION=consensus
+KARDIOX_DIGITIZER_CONSENSUS_MEMBERS=classical,external   # + KARDIOX_DIGITIZER_ENTRYPOINT for 'external'
+```
+
 ## Non-negotiables
 - **Never fabricate output.** A missing runtime/checkpoint → `UpstreamUnavailable`, never a fake label.
 - A model producing a *diagnosis* still flows through the deterministic **Rule Engine** for validation +

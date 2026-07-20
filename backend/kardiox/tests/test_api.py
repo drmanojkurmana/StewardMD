@@ -29,6 +29,9 @@ def test_health(client):
     assert stages["ruleValidation"]["implemented"] is True         # builtin is real
     assert stages["enhancement"]["implemented"] is False           # models pending
     assert "quality" in stages and "version" in stages["ruleValidation"]
+    # specialist classifiers reported separately (Not Ready until configured) — core stage list stays 8
+    specs = {s["name"] for s in body["specialists"]}
+    assert "mi-model" in specs and all(s["ready"] is False for s in body["specialists"])
 
 
 def test_analyze_mock_returns_af(client):

@@ -72,6 +72,14 @@ class Settings(BaseSettings):
     enable_consensus_fusion: bool = True     # run the evidence-fusion/consensus engine in the pipeline
     enable_explainability: bool = True       # attach per-finding explanations to the report
 
+    # Specialist model classifiers (MI / rare-disease / conduction / morphology / beat). ONE JSON
+    # registry maps task -> {path, kind, labels, inputSpec, labelMap}. Empty {} = every specialist is
+    # NOT READY (KardioX ships no weights). Adding a specialist needs no code — just a registry entry.
+    specialists_json: str = "{}"
+    # Multi-digitizer consensus members (comma-separated: classical, external). Extra members flagged
+    # Not Ready are skipped; a single available member still yields a (single-source) result.
+    digitizer_consensus_members: str = "classical"
+
     # ── Rhythm model (stages 6/7/9, TorchECG) — ship NO weights. Empty path → provider raises
     #    UpstreamUnavailable (never fakes a label). A validated checkpoint is required to enable.
     rhythm_model_path: str = ""
@@ -91,6 +99,19 @@ class Settings(BaseSettings):
     @property
     def rhythm_labels_list(self) -> list[str]:
         return [s.strip() for s in self.rhythm_model_labels.split(",") if s.strip()]
+
+    @property
+    def specialists_config(self) -> dict:
+        import json
+        try:
+            v = json.loads(self.specialists_json or "{}")
+            return v if isinstance(v, dict) else {}
+        except (ValueError, TypeError):
+            return {}
+
+    @property
+    def consensus_members_list(self) -> list[str]:
+        return [s.strip() for s in self.digitizer_consensus_members.split(",") if s.strip()] or ["classical"]
 
     @property
     def cors_list(self) -> list[str]:

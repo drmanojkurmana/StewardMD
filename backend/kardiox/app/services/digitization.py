@@ -146,6 +146,100 @@ class OpenCVDigitization(ClassicalDigitization):
     name = "opencv"
 
 
+def _completeness(traces: dict) -> float:
+    """Fraction of the 12 standard leads the digitizer recovered (rhythm strip not counted)."""
+    leads = (traces or {}).get("leads", {}) or {}
+    std = {"I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"}
+    got = sum(1 for k in leads if k in std and leads[k])
+    return round(got / 12.0, 3)
+
+
+def _trace_corr(a, b, np) -> float | None:
+    """Pearson correlation of two pixel traces after length-alignment + z-score. None if degenerate."""
+    xa = np.asarray(a, dtype="float64")
+    xb = np.asarray(b, dtype="float64")
+    n = min(xa.size, xb.size)
+    if n < 8:
+        return None
+    xa, xb = xa[:n], xb[:n]
+    sa, sb = xa.std(), xb.std()
+    if sa < 1e-9 or sb < 1e-9:
+        return None
+    xa = (xa - xa.mean()) / sa
+    xb = (xb - xb.mean()) / sb
+    return float(np.clip(np.mean(xa * xb), -1.0, 1.0))
+
+
+def _agreement(results: list[tuple[str, dict]], np) -> float | None:
+    """Mean |correlation| over ALL member pairs across the leads they share. None if <2 members / no overlap."""
+    if len(results) < 2:
+        return None
+    corrs = []
+    for i in range(len(results)):
+        la = results[i][1].get("leads", {}) or {}
+        for j in range(i + 1, len(results)):
+            lb = results[j][1].get("leads", {}) or {}
+            for lead in set(la) & set(lb):
+                c = _trace_corr(la[lead], lb[lead], np)
+                if c is not None:
+                    corrs.append(abs(c))
+    return round(float(sum(corrs) / len(corrs)), 3) if corrs else None
+
+
+def _pick_best(results: list[tuple[str, dict]]) -> tuple[str, dict]:
+    """Choose the most complete digitization (most standard leads recovered)."""
+    return max(results, key=lambda nr: _completeness(nr[1]))
+
+
+class ConsensusDigitization(DigitizationProvider):
+    """Run several digitizers and reconcile them (Phase 7). Members come from
+    KARDIOX_DIGITIZER_CONSENSUS_MEMBERS (classical, external). Members that are Not Ready (e.g. no learned
+    digitizer configured) are skipped; a single available member still yields a result (single-source,
+    lower confidence). Attaches a `consensus` block: per-member lead counts, inter-member agreement,
+    disagreement flag, chosen member, and a confidence from completeness + agreement.
+
+    Failure modes: no member produces traces -> LayoutUndetected(422). Never fabricates traces."""
+
+    name = "consensus"
+    version = "1.0.0"
+    requires = ("cv2", "numpy")
+    _DISAGREE_BELOW = 0.6   # mean inter-member correlation below this flags disagreement
+
+    async def digitize(self, image: bytes) -> dict:
+        _, np = _lazy()
+        from app.core.config import get_settings
+        registry = {"classical": ClassicalDigitization, "opencv": OpenCVDigitization,
+                    "external": ExternalDigitization}
+        results: list[tuple[str, dict]] = []
+        members_meta: list[dict] = []
+        for member in get_settings().consensus_members_list:
+            provider = registry.get(member)
+            if provider is None:
+                members_meta.append({"name": member, "ok": False, "error": "unknown member"})
+                continue
+            try:
+                traces = await provider().digitize(image)
+                results.append((member, traces))
+                members_meta.append({"name": member, "ok": True, "leads": len(traces.get("leads", {}))})
+            except Exception as e:  # noqa: BLE001 — a Not-Ready / failing member is skipped, not fatal
+                members_meta.append({"name": member, "ok": False, "error": type(e).__name__})
+
+        if not results:
+            raise LayoutUndetected("No digitizer produced traces (all members unavailable)", stage="digitization")
+
+        chosen_name, chosen = _pick_best(results)
+        agreement = _agreement(results, np)
+        disagreement = bool(agreement is not None and agreement < self._DISAGREE_BELOW)
+        completeness = _completeness(chosen)
+        # single member -> confidence = completeness; multi -> blend completeness with agreement
+        confidence = round(completeness if agreement is None else 0.5 * completeness + 0.5 * agreement, 3)
+
+        out = dict(chosen)
+        out["consensus"] = {"members": members_meta, "chosen": chosen_name, "agreement": agreement,
+                            "disagreement": disagreement, "confidence": confidence}
+        return out
+
+
 class ExternalDigitization(DigitizationProvider):
     """Plug in a learned digitizer (e.g. the PhysioNet-2024-winning ECG-Digitiser, BSD-2) WITHOUT changing
     the backend: set KARDIOX_DIGITIZER_ENTRYPOINT="module:function" to a callable(image_bytes)->traces
