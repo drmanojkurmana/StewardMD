@@ -14,7 +14,7 @@ final class DrugLookupModelTests: XCTestCase {
 
     func testResultsState() async {
         let m = model { req in
-            let body = #"{"query":"amiod","count":1,"results":[{"composition":"Amiodarone","class":"Antiarrhythmic","brands":["Cordarone"]}]}"#
+            let body = #"{"query":"amiod","count":1,"results":[{"composition":"Amiodarone","class":"Antiarrhythmic","brands":3}]}"#
             return (HTTPURLResponse(url: req.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!, Data(body.utf8))
         }
         await m.search("amiod")

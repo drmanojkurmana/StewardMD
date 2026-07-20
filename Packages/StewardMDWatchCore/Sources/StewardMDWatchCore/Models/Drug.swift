@@ -11,7 +11,7 @@ public struct DrugSearchResponse: Codable, Sendable {
 public struct DrugSearchResult: Codable, Sendable, Identifiable, Equatable {
     public let composition: String
     public let drugClass: String?
-    public let brands: [String]?
+    public let brands: Int?          // brand-count for this composition (API returns a number)
 
     public var id: String { composition }
 

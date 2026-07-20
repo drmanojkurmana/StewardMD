@@ -8,17 +8,20 @@ final class ModelDecodeTests: XCTestCase {
 
     // MARK: Drug (api.stewardmd.in/search)
     func testDrugSearchDecodes() throws {
-        let j = #"{"query":"amiod","count":1,"results":[{"composition":"Amiodarone","class":"Antiarrhythmic","brands":["Cordarone"]}]}"#
+        // Real Worker shape: `brands` is a COUNT (e.g. 2679), not an array.
+        let j = #"{"query":"amiod","count":1,"results":[{"composition":"Amiodarone","class":"Antiarrhythmic","brands":42}]}"#
         let r = try decode(DrugSearchResponse.self, j)
         XCTAssertEqual(r.count, 1)
         XCTAssertEqual(r.results.first?.composition, "Amiodarone")
         XCTAssertEqual(r.results.first?.drugClass, "Antiarrhythmic")
+        XCTAssertEqual(r.results.first?.brands, 42)
     }
 
     func testDrugSearchDecodesWithNullClass() throws {
         let j = #"{"query":"x","count":1,"results":[{"composition":"Foo","class":null,"brands":null}]}"#
         let r = try decode(DrugSearchResponse.self, j)
         XCTAssertNil(r.results.first?.drugClass)
+        XCTAssertNil(r.results.first?.brands)
     }
 
     // MARK: Lab Watch (/api/watch/status)
