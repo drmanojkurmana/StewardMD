@@ -11,6 +11,7 @@ public struct AppGroupStore: Sendable {
     private let favoritesKey = "smd.favorites"
     private let glanceKey = "smd.glance"
     private let watchlistKey = "smd.watchlist"
+    private let criticalsKey = "smd.criticals"
     private let notifPrefsKey = "smd.notifPrefs"
     private let pendingRouteKey = "smd.pendingRoute"
 
@@ -59,6 +60,19 @@ public struct AppGroupStore: Sendable {
         return (try? JSONDecoder().decode([WatchlistEntry].self, from: data)) ?? []
     }
 
+    /// The critical-lab alerts relayed from the iPhone. Persisted (like the
+    /// watchlist) so the Critical Labs screen survives relaunch and a later
+    /// patient-less sync — the relay only includes `criticals` while an ICU
+    /// patient is open, so without this they'd vanish on the next publish.
+    public func saveCriticals(_ alerts: [LabAlert]) {
+        guard let d = defaults, let data = try? JSONEncoder().encode(alerts) else { return }
+        d.set(data, forKey: criticalsKey)
+    }
+    public func loadCriticals() -> [LabAlert] {
+        guard let d = defaults, let data = d.data(forKey: criticalsKey) else { return [] }
+        return (try? JSONDecoder().decode([LabAlert].self, from: data)) ?? []
+    }
+
     /// Notification-tier preferences relayed from the iPhone (critical/warning/info).
     public func saveNotifPrefs(_ prefs: [String: Bool]) {
         guard let d = defaults, let data = try? JSONEncoder().encode(prefs) else { return }
@@ -98,6 +112,7 @@ public struct AppGroupStore: Sendable {
         defaults?.removeObject(forKey: favoritesKey)
         defaults?.removeObject(forKey: glanceKey)
         defaults?.removeObject(forKey: watchlistKey)
+        defaults?.removeObject(forKey: criticalsKey)
         defaults?.removeObject(forKey: notifPrefsKey)
         defaults?.removeObject(forKey: pendingRouteKey)
     }

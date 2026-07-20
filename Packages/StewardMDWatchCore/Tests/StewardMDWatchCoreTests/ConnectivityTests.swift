@@ -79,4 +79,21 @@ final class AppGroupStoreTests: XCTestCase {
         XCTAssertTrue(store.loadWatchlist().isEmpty)
         UserDefaults(suiteName: suite)?.removePersistentDomain(forName: suite)
     }
+
+    func testCriticalsRoundTrips() {
+        let suite = "test.smd.appgroup.\(UUID().uuidString)"
+        let store = AppGroupStore(suite: suite)
+        XCTAssertTrue(store.loadCriticals().isEmpty)   // absent → empty
+        let alerts = [
+            LabAlert(id: "icu-P12-K", analyte: "Critical hyperkalaemia", value: "7", units: "mEq/L",
+                     refRange: nil, patientLabel: "Bed 12 · Okafor", severity: "critical", ts: 1),
+            LabAlert(id: "icu-P12-Lac", analyte: "Lactate", value: "4.2", units: "mmol/L",
+                     refRange: nil, patientLabel: "Bed 12 · Okafor", severity: "warning", ts: 1)
+        ]
+        store.saveCriticals(alerts)
+        XCTAssertEqual(store.loadCriticals().map(\.id), ["icu-P12-K", "icu-P12-Lac"])
+        store.clear()
+        XCTAssertTrue(store.loadCriticals().isEmpty)
+        UserDefaults(suiteName: suite)?.removePersistentDomain(forName: suite)
+    }
 }

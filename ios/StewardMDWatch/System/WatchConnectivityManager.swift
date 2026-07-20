@@ -23,6 +23,7 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     func activate() {
         // Seed the UI from the last-known relayed data so it isn't empty on launch.
         WatchServices.watchlist.set(store.loadWatchlist())
+        WatchServices.labs.ingest(store.loadCriticals())
         #if canImport(WatchConnectivity)
         guard WCSession.isSupported() else { return }
         WCSession.default.delegate = self
@@ -43,9 +44,10 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     fileprivate func apply(_ context: [String: Any]) {
         // DIAGNOSTIC (systematic-debugging evidence): what the watch received.
         let wl = (context["watchlist"] as? Data).flatMap { try? JSONDecoder().decode([WatchlistEntry].self, from: $0) }
-        NSLog("[SMD-Watch] watch apply: keys=[%@] watchlist=%d glance=%@",
+        NSLog("[SMD-Watch] watch apply: keys=[%@] watchlist=%d glance=%@ criticalsKey=%@",
               context.keys.sorted().joined(separator: ","),
-              wl?.count ?? -1, context["glance"] == nil ? "nil" : "set")
+              wl?.count ?? -1, context["glance"] == nil ? "nil" : "set",
+              context["criticals"] == nil ? "nil" : "present")
         if context["cleared"] as? Bool == true {
             store.clear()
             broadcast()
@@ -67,8 +69,17 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
             store.saveWatchlist(w)          // persist for relaunch + the widget
             WatchServices.watchlist.set(w)
         }
-        if let d = context["criticals"] as? Data, let c = try? JSONDecoder().decode([LabAlert].self, from: d) {
-            WatchServices.labs.ingest(c)    // feeds the Critical Labs screen + badge
+        if let d = context["criticals"] as? Data {
+            do {
+                let c = try JSONDecoder().decode([LabAlert].self, from: d)
+                store.saveCriticals(c)          // persist for relaunch + patient-less syncs
+                WatchServices.labs.ingest(c)    // feeds the Critical Labs screen + badge
+                NSLog("[SMD-Watch] watch apply: criticals decoded=%d ingested; labs now=%d",
+                      c.count, WatchServices.labs.labs.count)
+            } catch {
+                NSLog("[SMD-Watch] watch apply: criticals DECODE FAILED: %@ raw=%@",
+                      String(describing: error), String(data: d, encoding: .utf8) ?? "nil")
+            }
         }
         if let d = context["notifPrefs"] as? Data, let p = try? JSONDecoder().decode([String: Bool].self, from: d) {
             store.saveNotifPrefs(p)
