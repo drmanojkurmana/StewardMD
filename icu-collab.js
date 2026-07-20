@@ -941,6 +941,11 @@
     writePresence();
     try { _presence.timer = setInterval(writePresence, 20000); } catch (e) {}
   }
+  // The currently-open shared patient ({gid,pid}) or null — used to route a
+  // watch Code Blue summary export to the right ICU timeline.
+  function currentOpenPatient() {
+    return (_presence.gid && _presence.pid) ? { gid: _presence.gid, pid: _presence.pid } : null;
+  }
   function leavePatient() {
     if (_presence.timer) { try { clearInterval(_presence.timer); } catch (e) {} _presence.timer = null; }
     var g = _presence.gid, p = _presence.pid;
@@ -1028,6 +1033,7 @@
     // presence
     enterPatient: enterPatient,
     leavePatient: leavePatient,
+    currentOpenPatient: currentOpenPatient,
     subscribePresence: subscribePresence,
     // pure test seams (deterministic transforms — used by the rules/logic harness)
     _mapGroupDoc: mapGroupDoc, _mapMemberDoc: mapMemberDoc, _mapPatientDoc: mapPatientDoc, _mapTimeline: mapTimeline, _mapTask: mapTask,

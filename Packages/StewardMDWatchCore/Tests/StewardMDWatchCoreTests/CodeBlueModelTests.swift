@@ -51,4 +51,54 @@ final class CodeBlueModelTests: XCTestCase {
         XCTAssertEqual(s.durationLabel, "10:00")
         XCTAssertEqual(s.cycles, 6)  // 600 / 120 + 1
     }
+
+    func test_timelineAndStats_fromDetector() {
+        let mock = MockCompressionDetector()
+        let model = CodeBlueModel(detector: mock, workout: NoopWorkoutKeepAlive(), deviceId: "watch")
+        model.startCode()
+        XCTAssertTrue(mock.isRunning)
+        XCTAssertTrue(model.events.contains { $0.kind == .cprStart })
+
+        mock.emit(count: 30, rate: 110, counted: true)
+        XCTAssertEqual(model.compressionCount, 30)
+        XCTAssertEqual(model.instantaneousRateCPM, 110)
+        XCTAssertEqual(model.coachZone, .onTarget)
+
+        model.recordShock()
+        model.recordDrug("Epinephrine")
+        model.markROSC()
+        XCTAssertEqual(model.events.filter { $0.kind == .shock }.count, 1)
+        XCTAssertEqual(model.events.filter { $0.kind == .drug }.count, 1)
+        XCTAssertTrue(model.rosc)
+
+        let snap = model.snapshot(batteryLevel: 0.5)
+        XCTAssertEqual(snap.compressionCount, 30)
+        XCTAssertEqual(snap.shockCount, 1)
+        XCTAssertTrue(snap.rosc)
+
+        let summary = model.endCode()
+        XCTAssertFalse(mock.isRunning)          // detector stopped (battery)
+        XCTAssertEqual(summary.totalCompressions, 30)
+        XCTAssertEqual(summary.shockCount, 1)
+        XCTAssertTrue(summary.rosc)
+    }
+
+    func test_pauseEmitsEvents() {
+        let mock = MockCompressionDetector()
+        let model = CodeBlueModel(detector: mock, workout: NoopWorkoutKeepAlive(), deviceId: "watch")
+        model.startCode()
+        mock.emit(count: 10, rate: 110, counted: true)
+
+        var paused = CompressionState(); paused.count = 10; paused.paused = true; paused.pauseSeconds = 3.1
+        var pauseTick = AnalyzerTick(); pauseTick.pauseStarted = true
+        model.ingestForTest(state: paused, tick: pauseTick)
+        XCTAssertTrue(model.paused)
+        XCTAssertTrue(model.events.contains { $0.kind == .pauseStart })
+
+        var resumed = CompressionState(); resumed.count = 11; resumed.paused = false
+        var resumeTick = AnalyzerTick(); resumeTick.resumed = true
+        model.ingestForTest(state: resumed, tick: resumeTick)
+        XCTAssertFalse(model.paused)
+        XCTAssertTrue(model.events.contains { $0.kind == .resume })
+    }
 }

@@ -1,83 +1,153 @@
 import SwiftUI
 import Combine
+import WatchKit
 import StewardMDWatchCore
 
-/// Code Blue toolkit (design §06/§07 Flow B): an ACLS timer that runs on the
-/// always-on display, pulses a haptic every 2-minute rhythm-check cycle, shows
-/// the next drug, and tallies adrenaline/shocks. Fully local — never depends on
-/// the network.
+/// Code Blue toolkit + CPR Assist (design §3.3). Preserves the ACLS timer, 2-min
+/// cycle haptic, next-drug prompt, and Start/End; adds a live compression counter,
+/// rate coach, pause banner, and event logging while a code is running. Motion is
+/// captured through an injected detector — this view never imports CoreMotion.
 struct CodeBlueView: View {
-    @StateObject private var model = CodeBlueModel()
+    @StateObject private var model = CodeBlueModel(
+        detector: CoreMotionCompressionDetector(),
+        workout: HealthKitWorkoutKeepAlive(),
+        deviceId: WKDeviceId.current)
     @State private var running = false
     @State private var startDate: Date?
-    @State private var summary: CodeBlueSummary?
+    @State private var summary: CodeSummary?
+    @State private var crown = 0.0
     @Environment(\.scenePhase) private var scenePhase
-
-    // Drives periodic UI updates + the cycle haptic while foregrounded; elapsed
-    // is derived from a wall-clock anchor, so Always-On / wrist-down gaps
-    // self-correct on the next update (a missed 2-min boundary still buzzes).
     private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     private func syncTick() {
         guard running, let s = startDate else { return }
-        if model.sync(to: Date().timeIntervalSince(s)) { HapticManager.play(.critical) }
+        if model.sync(to: Date().timeIntervalSince(s)) {
+            HapticManager.play(.critical)
+            model.markSwitchCompressor()          // 2-min boundary → "Switch Compressor"
+        }
+        WatchConnectivityManager.shared.streamCodeBlue(model.snapshot(batteryLevel: WKDeviceId.battery))
     }
 
     var body: some View {
         ScrollView {
             VStack(spacing: SMDSpacing.s) {
                 SeverityChip(tier: .critical, text: "CODE BLUE")
-
                 Text(model.elapsedLabel)
-                    .font(.system(size: 46, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                    .foregroundStyle(SMDPalette.text1.color)
+                    .font(.system(size: 40, weight: .bold, design: .rounded))
+                    .monospacedDigit().foregroundStyle(SMDPalette.text1.color)
                 Text("cycle \(model.cycle) · rhythm in \(model.rhythmCountdownLabel)")
                     .font(.caption2).foregroundStyle(SMDPalette.text2.color)
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("NEXT").font(.caption2).foregroundStyle(SMDPalette.text2.color)
-                    Text(model.nextDrug).font(.headline).foregroundStyle(SMDPalette.accent.color)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(SMDSpacing.cardPadding)
-                .background(SMDPalette.surface.color, in: RoundedRectangle(cornerRadius: SMDSpacing.radiusCard))
+                if running { cprDashboard }
 
-                HStack {
-                    Button("Rhythm") { HapticManager.play(.warning) }
-                        .tint(SMDPalette.info.color)
-                    Button("Adren.") { model.recordAdrenaline(); HapticManager.play(.success) }
-                        .tint(SMDPalette.accent.color)
-                    Button("Shock") { model.recordShock(); HapticManager.play(.warning) }
-                        .tint(SMDPalette.critical.color)
-                }
-                .font(.caption)
+                nextDrugCard
+                drugButtons
+                startEndButton
 
-                Button(running ? "End" : "Start") {
-                    running.toggle()
-                    if running {
-                        startDate = Date().addingTimeInterval(-model.elapsed)
-                        ResusAlerts.requestAuth()
-                        // Repeating 2-min rhythm-check prompt — fires wrist-down too.
-                        ResusAlerts.schedule(id: "codeblue-cycle", after: 120,
-                                             title: "Code Blue", body: "Rhythm check — pulse & rhythm.", repeats: true)
-                    } else {
-                        ResusAlerts.cancel(["codeblue-cycle"])
-                        summary = model.end()
-                    }
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(running ? SMDPalette.critical.color : SMDPalette.success.color)
-
-                if let s = summary {
-                    Text("Duration \(s.durationLabel) · \(s.cycles) cycles · \(s.adrenalineCount) adren · \(s.shockCount) shocks\(s.rosc ? " · ROSC ✓" : "")")
-                        .font(.caption2).foregroundStyle(SMDPalette.text2.color)
-                }
+                if let s = summary { summaryLine(s) }
+                Text(CodeSummary.disclaimerText)
+                    .font(.system(size: 10)).foregroundStyle(SMDPalette.text2.color)
+                    .multilineTextAlignment(.center)
+                    .accessibilityLabel("Motion-based estimates. Not a measure of CPR quality or depth.")
             }
             .padding(SMDSpacing.screenMargin)
         }
         .navigationTitle("Code Blue")
+        .focusable(running)
+        .digitalCrownRotation($crown)
         .onReceive(ticker) { _ in syncTick() }
         .onChange(of: scenePhase) { _, phase in if phase == .active { syncTick() } }
+    }
+
+    private var cprDashboard: some View {
+        VStack(spacing: 4) {
+            if model.paused {
+                Text("CPR PAUSED · \(TimeFormat.mmss(model.pauseSeconds))")
+                    .font(.headline).foregroundStyle(SMDPalette.critical.color)
+                    .accessibilityLabel("CPR paused \(Int(model.pauseSeconds)) seconds")
+            } else {
+                Text("\(model.instantaneousRateCPM) /min est.")
+                    .font(.system(size: 22, weight: .semibold, design: .rounded))
+                    .foregroundStyle(coachColor)
+                Text(RateCoach.guidance(model.coachZone)).font(.caption).foregroundStyle(coachColor)
+            }
+            Text("\(model.compressionCount) compressions")
+                .font(.system(size: 30, weight: .bold, design: .rounded)).monospacedDigit()
+                .foregroundStyle(SMDPalette.text1.color)
+        }
+        .frame(maxWidth: .infinity).padding(SMDSpacing.cardPadding)
+        .background(SMDPalette.surface.color, in: RoundedRectangle(cornerRadius: SMDSpacing.radiusCard))
+        .onChange(of: model.coachZone) { _, z in
+            if z == .tooSlow || z == .tooFast { HapticManager.play(.warning) }
+        }
+    }
+
+    private var coachColor: Color {
+        switch model.coachZone {
+        case .onTarget: return SMDPalette.success.color
+        case .tooSlow, .tooFast: return SMDPalette.accent.color
+        case .idle: return SMDPalette.text2.color
+        }
+    }
+
+    private var nextDrugCard: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("NEXT").font(.caption2).foregroundStyle(SMDPalette.text2.color)
+            Text(model.nextDrug).font(.headline).foregroundStyle(SMDPalette.accent.color)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading).padding(SMDSpacing.cardPadding)
+        .background(SMDPalette.surface.color, in: RoundedRectangle(cornerRadius: SMDSpacing.radiusCard))
+    }
+
+    private var drugButtons: some View {
+        VStack(spacing: 4) {
+            HStack {
+                Button("Epi") { model.recordDrug("Epinephrine"); HapticManager.play(.success) }
+                    .tint(SMDPalette.accent.color)
+                Button("Amio") { model.recordDrug("Amiodarone"); HapticManager.play(.success) }
+                    .tint(SMDPalette.accent.color)
+                Button("Shock") { model.recordShock(); HapticManager.play(.warning) }
+                    .tint(SMDPalette.critical.color)
+            }.font(.caption)
+            HStack {
+                Button("Rhythm") { HapticManager.play(.warning) }.tint(SMDPalette.info.color)
+                Button("ROSC") { model.markROSC(); HapticManager.play(.success) }
+                    .tint(SMDPalette.success.color)
+            }.font(.caption)
+        }
+    }
+
+    private var startEndButton: some View {
+        Button(running ? "End" : "Start") {
+            running.toggle()
+            if running {
+                startDate = Date().addingTimeInterval(-model.elapsed)
+                model.startCode()
+                ResusAlerts.requestAuth()
+                ResusAlerts.schedule(id: "codeblue-cycle", after: 120,
+                                     title: "Code Blue", body: "Rhythm check — switch compressor.", repeats: true)
+            } else {
+                ResusAlerts.cancel(["codeblue-cycle"])
+                summary = model.endCode()
+                WatchConnectivityManager.shared.streamCodeBlueSnapshot(model.snapshot(batteryLevel: WKDeviceId.battery))
+            }
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(running ? SMDPalette.critical.color : SMDPalette.success.color)
+    }
+
+    private func summaryLine(_ s: CodeSummary) -> some View {
+        Text("Duration \(s.durationLabel) · \(s.totalCompressions) comp · ~\(s.averageRateCPM)/min · \(s.shockCount) shock\(s.rosc ? " · ROSC ✓" : "")")
+            .font(.caption2).foregroundStyle(SMDPalette.text2.color)
+    }
+}
+
+/// Stable per-device id + battery reading for Code Blue streaming.
+enum WKDeviceId {
+    static let current: String = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "watch"
+    static var battery: Double {
+        WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
+        let lvl = WKInterfaceDevice.current().batteryLevel
+        return lvl < 0 ? -1 : Double(lvl)
     }
 }

@@ -54,6 +54,8 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
             NotificationCenter.default.post(name: WatchConnectivityRelay.taskStatusRequested, object: nil, userInfo: message)
         case "labAck":
             NotificationCenter.default.post(name: WatchConnectivityRelay.labAckRequested, object: nil, userInfo: message)
+        case "codeBlueLive", "codeBlueSnapshot":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReceived, object: nil, userInfo: message)
         default:
             NotificationCenter.default.post(name: WatchConnectivityRelay.tokenRequested, object: nil)   // token-request (legacy)
         }
@@ -124,8 +126,20 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
         case "labAck":
             NotificationCenter.default.post(name: WatchConnectivityRelay.labAckRequested,
                                             object: nil, userInfo: userInfo)
+        case "codeBlueSnapshot":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReceived,
+                                            object: nil, userInfo: userInfo)
         default:
             break
+        }
+    }
+
+    /// Watch → phone application context (coalesced, survives phone relaunch). Used
+    /// to recover the latest Code Blue snapshot after the phone app is restarted.
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        if let state = applicationContext["codeBlueSnapshot"] {
+            NotificationCenter.default.post(name: WatchConnectivityRelay.codeBlueReceived, object: nil,
+                                            userInfo: ["kind": "codeBlueSnapshot", "state": state])
         }
     }
 
@@ -133,6 +147,7 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
     static let taskStatusRequested = Notification.Name("SMDWatchTaskStatusRequested")
     static let watchTokenReceived = Notification.Name("SMDWatchPushTokenReceived")
     static let labAckRequested = Notification.Name("SMDWatchLabAckRequested")
+    static let codeBlueReceived = Notification.Name("SMDCodeBlueReceived")
 }
 #else
 /// Non-iOS fallback so the package still compiles everywhere.

@@ -561,6 +561,33 @@
       });
     } catch (e) {}
 
+    // Code Blue Command Center launcher (native iOS + paired watch only). The card
+    // stays hidden on web / when no watch app is installed. Export taps route the
+    // on-device summary to the currently-open ICU patient's timeline, if any.
+    try {
+      var cbCard = document.getElementById("codeBlueCard");
+      if (p && cbCard) {
+        if (p.getStatus) p.getStatus().then(function (s) {
+          if (s && s.supported && s.paired && s.watchAppInstalled) cbCard.classList.remove("hidden");
+        }).catch(function () {});
+        cbCard.addEventListener("click", function () { if (p.openCodeBlue) p.openCodeBlue().catch(function () {}); });
+        if (p.addListener) p.addListener("codeBlueExport", function (ev) {
+          try {
+            var detail = (ev && ev.detail) || "";
+            var api = groupsApi();
+            if (api && api.currentOpenPatient && api.addTimelineEvent) {
+              var pt = api.currentOpenPatient();
+              if (pt && pt.gid && pt.pid) {
+                api.addTimelineEvent(pt.gid, pt.pid, { type: "codeblue", title: "Code Blue summary", detail: detail });
+                return;
+              }
+            }
+            console.log("[SMD-CodeBlue] export (no patient in context) — kept on device only");
+          } catch (e) {}
+        });
+      }
+    } catch (e) {}
+
     // Watch → phone: register the watch's APNs token with the backend so the
     // wrist can be pushed directly (platform "watch"; server topic differs).
     try {

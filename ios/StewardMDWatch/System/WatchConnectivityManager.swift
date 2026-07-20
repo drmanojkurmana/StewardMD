@@ -81,6 +81,32 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         #endif
     }
 
+    /// Live Code Blue state → phone. `sendMessage` when reachable (immediate, for the
+    /// live-feeling Command Center); silently dropped when unreachable — the periodic
+    /// snapshot (below) guarantees eventual delivery + recovery.
+    func streamCodeBlue(_ state: CodeBlueState) {
+        #if canImport(WatchConnectivity)
+        guard WCSession.isSupported(), let data = try? JSONEncoder().encode(state) else { return }
+        let s = WCSession.default
+        if s.activationState == .activated, s.isReachable {
+            s.sendMessage(["kind": "codeBlueLive", "state": data], replyHandler: nil, errorHandler: nil)
+        }
+        #endif
+    }
+
+    /// Guaranteed snapshot → phone: `transferUserInfo` (queued, FIFO, background-safe)
+    /// for auto-recovery after a disconnect, plus `updateApplicationContext` (coalesced,
+    /// survives phone relaunch). Call periodically and on End/ROSC.
+    func streamCodeBlueSnapshot(_ state: CodeBlueState) {
+        #if canImport(WatchConnectivity)
+        guard WCSession.isSupported(), let data = try? JSONEncoder().encode(state) else { return }
+        let s = WCSession.default
+        guard s.activationState == .activated else { return }
+        s.transferUserInfo(["kind": "codeBlueSnapshot", "state": data])
+        try? s.updateApplicationContext(["codeBlueSnapshot": data])
+        #endif
+    }
+
     /// Relay a task-status change to the phone (→ SMD_ICU_GROUPS.setTaskStatus).
     /// Uses `transferUserInfo` — guaranteed, FIFO, background delivery even when
     /// the phone app is not foregrounded (unlike `sendMessage`).
