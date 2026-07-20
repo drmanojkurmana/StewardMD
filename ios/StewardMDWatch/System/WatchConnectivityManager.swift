@@ -58,6 +58,32 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         #endif
     }
 
+    /// Ask the iPhone to compute a relayed calculator (watchOS lacks JavaScriptCore).
+    /// Returns a result when the phone is reachable, else a friendly error.
+    func computeOnPhone(src: String, values: [String: Any]) async -> CalcOutput {
+        #if canImport(WatchConnectivity)
+        let s = WCSession.default
+        guard WCSession.isSupported(), s.activationState == .activated, s.isReachable else {
+            return CalcOutput(value: "—", unit: "", interp: "", error: "Open StewardMD on your iPhone (nearby) to compute this.")
+        }
+        return await withCheckedContinuation { cont in
+            s.sendMessage(["kind": "calcCompute", "src": src, "values": values], replyHandler: { reply in
+                if let e = reply["err"] as? String {
+                    cont.resume(returning: CalcOutput(value: "—", unit: "", interp: "", error: e))
+                } else {
+                    cont.resume(returning: CalcOutput(value: reply["v"] as? String ?? "—",
+                                                      unit: reply["u"] as? String ?? "",
+                                                      interp: reply["i"] as? String ?? "", error: nil))
+                }
+            }, errorHandler: { _ in
+                cont.resume(returning: CalcOutput(value: "—", unit: "", interp: "", error: "Couldn't reach iPhone."))
+            })
+        }
+        #else
+        return CalcOutput(value: "—", unit: "", interp: "", error: "unavailable")
+        #endif
+    }
+
     /// Ask the paired iPhone to mint + publish a fresh ID token.
     func requestToken() {
         #if canImport(WatchConnectivity)
