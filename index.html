@@ -62,9 +62,41 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
      the real engine (FIELD_GROUPS + SMD_REASON.assess + DX_MGMT). Start Case opens it. Flag-gated. -->
 <script defer src="/abx-wizard.js?v=gold475"></script>
 <script>
-/* Register the service worker (offline + instant repeat loads). Runs on load so it never
-   competes with startup. Network-first HTML in sw.js means this can't trap stale versions. */
-if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(e){console.warn("[StewardMD] SW registration failed:",e&&e.message);});});}
+/* Service worker (offline + instant repeat loads) — WEB ONLY.
+   On the NATIVE app (Capacitor) the SW is disabled: its stale-while-revalidate cache pins the
+   bundled JS at the same-URL cached copy, so JS edits never reach the WKWebView on a plain native
+   rebuild (this cost real debugging time). Assets are already local in the native app, so the SW
+   buys nothing there. On native we unregister any existing SW + purge its caches (one-time reload
+   to flush this launch's already-stale JS), and never register it. Web PWA behaviour is unchanged. */
+(function () {
+  var isNative = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+  if (isNative) {
+    if ("serviceWorker" in navigator) {
+      var hadController = !!navigator.serviceWorker.controller;
+      var jobs = [];
+      jobs.push(navigator.serviceWorker.getRegistrations().then(function (rs) {
+        return Promise.all(rs.map(function (r) { return r.unregister(); }));
+      }).catch(function () {}));
+      if (window.caches && caches.keys) {
+        jobs.push(caches.keys().then(function (ks) {
+          return Promise.all(ks.map(function (k) { return caches.delete(k); }));
+        }).catch(function () {}));
+      }
+      Promise.all(jobs).then(function () {
+        // If a SW was controlling this page, the JS on THIS launch may be the stale cached copy.
+        // One reload (only ever on the first launch after this ships — afterwards there is no
+        // controller) now serves the freshly-bundled assets. No flash on subsequent launches.
+        if (hadController) { try { location.reload(); } catch (e) {} }
+      });
+    }
+    return;
+  }
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("/sw.js").catch(function (e) { console.warn("[StewardMD] SW registration failed:", e && e.message); });
+    });
+  }
+})();
 </script>
 
 <!-- ===== SEO ===== -->
