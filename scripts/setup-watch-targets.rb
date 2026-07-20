@@ -8,7 +8,9 @@
 #   Run:     ruby scripts/setup-watch-targets.rb
 #            (QUIT Xcode first — editing the project while it's open loses changes.)
 #
-# What it does (purely additive — the existing "App" target is NOT modified):
+# What it does (additive; the ONLY change to the existing "App" target is an
+# "Embed Watch Content" build phase + dependency so the watch app ships inside
+# the iPhone app):
 #   • Creates target  StewardMDWatch          (watchOS app,  in.stewardmd.app.watchkitapp)
 #   • Creates target  StewardMDWatchWidgets    (widget ext,   in.stewardmd.app.watchkitapp.widgets)
 #   • Adds the local Swift package  Packages/StewardMDWatchCore  and links it to both
@@ -16,10 +18,9 @@
 #     with correct target membership; wires Info.plist / entitlements via build settings
 #   • Sets App Groups (via the entitlements files), team, deployment target (watchOS 10)
 #   • Embeds the widget inside the watch app
-#
-# NOT done automatically (do it in Xcode if you archive for distribution):
-#   • "Embed Watch Content" on the App target — not needed to build/run the watch
-#     scheme in the simulator, and left out so the production App target is untouched.
+#   • Adds an "Embed Watch Content" phase to the App target so the watch app is
+#     bundled inside the iPhone app — required for it to auto-install on the paired
+#     Apple Watch and show its Home Screen icon.
 #
 # Idempotent-ish: aborts if a StewardMDWatch target already exists (reset first).
 
@@ -140,6 +141,19 @@ embed.symbol_dst_subfolder_spec = :plug_ins
 bf = embed.add_file_reference(widget.product_reference, true)
 bf.settings = { "ATTRIBUTES" => ["RemoveHeadersOnCopy"] }
 
+# ── Embed the watch app inside the iOS App target ─────────────────────────────
+# Bundles StewardMDWatch.app under App.app/Watch/. Without this the watch app is
+# never shipped inside the iPhone app, so it won't auto-install on the paired
+# Apple Watch and no Home Screen icon appears there.
+app = project.targets.find { |t| t.name == "App" }
+abort("✗ Could not find the iOS 'App' target to embed watch content") unless app
+app.add_dependency(watch)
+embed_watch = app.new_copy_files_build_phase("Embed Watch Content")
+embed_watch.symbol_dst_subfolder_spec = :products_directory   # 16
+embed_watch.dst_path = "$(CONTENTS_FOLDER_PATH)/Watch"
+wbf = embed_watch.add_file_reference(watch.product_reference, true)
+wbf.settings = { "ATTRIBUTES" => ["RemoveHeadersOnCopy"] }
+
 project.save
 
 puts "✓ Added targets: #{project.targets.map(&:name).join(', ')}"
@@ -150,4 +164,5 @@ puts "Next:"
 puts "  1) Open Xcode → Signing & Capabilities → confirm App Groups '#{GROUP_ID}' on"
 puts "     App, StewardMDWatch, StewardMDWatchWidgets (automatic signing, team #{TEAM})."
 puts "  2) Select the StewardMDWatch scheme + a paired iPhone/Watch simulator → Build & Run."
-puts "  3) (Archive only) add an 'Embed Watch Content' phase to the App target."
+puts "  3) To verify auto-install: run the App scheme to a paired iPhone; the watch"
+puts "     app installs on the paired Apple Watch (Watch app → General → automatic)."
