@@ -19,6 +19,7 @@
   function mockAnalyzer() {
     var models = M();
     return {
+      kind: "mock",
       analyze: function (image, onStage) {
         var stages = (models && models.ANALYSIS_STAGES) || [];
         return new Promise(function (resolve) {
@@ -117,8 +118,31 @@
     };
   }
 
-  // Live assembly: the ENCRYPTED on-device store (M3) is real; analyzer stays mock until the backend
-  // lands (M5), and library/learning use bundled content once M4 authors it. Always fully functional.
+  // ── Backend activation (health-gated). When smd_kardiox_backend is on AND the pipeline health check
+  //    passed, the analyzer is the RemoteAnalyzer (kardiox-net.js → /api/kardiox); otherwise the
+  //    on-device mock. Everything else (store/library/learning) stays local + offline regardless. ──
+  var _backendHealthy = false;
+  function backendFlag() { try { return !!(typeof window !== "undefined" && window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool("smd_kardiox_backend")); } catch (e) { return false; } }
+  function remoteAnalyzer() {
+    try {
+      if (typeof window !== "undefined" && window.SMD_KARDIOX_NET && window.SMD_KARDIOX_NET.remoteAnalyzer) {
+        var r = window.SMD_KARDIOX_NET.remoteAnalyzer({ baseUrl: "/api/kardiox", path: "/v1/ecg/analyze" });
+        return { kind: "remote", analyze: r.analyze };
+      }
+    } catch (e) {}
+    return null;
+  }
+  function useRemote() { return backendFlag() && _backendHealthy && !!remoteAnalyzer(); }
+  // Ping /api/kardiox/v1/health; on success flip to the remote analyzer (rebuild the active assembly).
+  function checkBackend() {
+    if (!backendFlag() || typeof fetch !== "function") { _backendHealthy = false; return Promise.resolve(false); }
+    return fetch("/api/kardiox/v1/health").then(function (r) { return r && r.ok; }).then(function (ok) {
+      _backendHealthy = !!ok; _active = null; return _backendHealthy;    // force rebuild with the chosen analyzer
+    }).catch(function () { _backendHealthy = false; return false; });
+  }
+
+  // Live assembly: ENCRYPTED on-device store (M3) + bundled 100-ECG content (M4) + a health-gated analyzer
+  // (RemoteAnalyzer when the backend is live, else the deterministic on-device mock). Always functional.
   function liveProviders(opts) {
     opts = opts || {};
     var C = (typeof window !== "undefined") ? window.SMD_KARDIOX_CONTENT : null;
@@ -126,9 +150,10 @@
     var cards = opts.cards || (C && C.flashcards ? C.flashcards() : []);
     var store = (typeof window !== "undefined" && window.SMD_KARDIOX_STORE && window.SMD_KARDIOX_STORE.create)
       ? window.SMD_KARDIOX_STORE.create() : mockEcgStore(opts.seedAnalyses);
+    var analyzer = (opts.remote || useRemote()) ? (remoteAnalyzer() || mockAnalyzer()) : mockAnalyzer();
     return {
       kind: "live",
-      analyzer: mockAnalyzer(),                 // → RemoteAnalyzer (SMD_KARDIOX_NET) once a backend is configured
+      analyzer: analyzer,
       imageProcessor: mockImageProcessor(),
       ecgStore: store,                          // encrypted, on-device
       library: mockLibrary(content),            // bundled 100-ECG content (M4)
@@ -140,7 +165,8 @@
   function current() { if (!_active) _active = liveProviders(); return _active; }
   function use(assembly) { _active = assembly; return _active; }
 
-  var API = { mockProviders: mockProviders, liveProviders: liveProviders, current: current, use: use, sm2: sm2 };
+  var API = { mockProviders: mockProviders, liveProviders: liveProviders, current: current, use: use, sm2: sm2,
+              checkBackend: checkBackend, backendActive: useRemote };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_KARDIOX_PROVIDERS = API;
 })();

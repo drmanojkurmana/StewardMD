@@ -17,7 +17,8 @@
     smd_kardiox_cloud:      { type: "tri",  def: null,      query: null,          desc: "Cloud ECG-analysis consent (null = ask once). Off = mock/offline only." },
     smd_kardiox_confidence: { type: "bool", def: true,      query: null,          desc: "Always show the AI confidence % (Settings · Intelligence)." },
     smd_kardiox_haptics:    { type: "bool", def: true,      query: null,          desc: "Haptic feedback for taps / report-ready / urgent / quiz." },
-    smd_kardiox_dev:        { type: "bool", def: false,     query: "kardioxdev",  desc: "Developer overlay (pipeline stages, provider, timings)." }
+    smd_kardiox_dev:        { type: "bool", def: false,     query: "kardioxdev",  desc: "Developer overlay (pipeline stages, provider, timings)." },
+    smd_kardiox_backend:    { type: "bool", def: false,     query: "kardioxbackend", desc: "Use the live KardioX pipeline backend (RemoteAnalyzer via /api/kardiox) instead of the on-device mock. Health-gated: falls back to mock if the pipeline is unreachable. DEFAULT OFF." }
   };
 
   function store() { try { return localStorage; } catch (e) { return null; } }

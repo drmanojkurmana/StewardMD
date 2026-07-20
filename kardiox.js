@@ -72,6 +72,9 @@
     el.classList.add("kx-open");
     document.documentElement.classList.add("kx-lock");
     haptic("light");
+    // Health-gate the live backend (flag smd_kardiox_backend): flips the analyzer to RemoteAnalyzer if
+    // the pipeline is reachable, else stays on the on-device mock. Non-blocking; default OFF.
+    try { if (window.SMD_KARDIOX_PROVIDERS && SMD_KARDIOX_PROVIDERS.checkBackend) SMD_KARDIOX_PROVIDERS.checkBackend(); } catch (e) {}
     try { if (window.SMD_KARDIOX_ROUTER && SMD_KARDIOX_ROUTER.mountLanding) SMD_KARDIOX_ROUTER.mountLanding(document.getElementById("kxScroll")); } catch (e) {}
   }
 
