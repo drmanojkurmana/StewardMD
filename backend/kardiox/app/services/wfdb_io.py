@@ -32,8 +32,13 @@ def _lazy_np():
 
 
 def traces_to_signal(traces: dict, fs: int = DEFAULT_FS) -> dict:
-    np = _lazy_np()
     traces = traces or {}
+    # Pre-digitized passthrough: a LEARNED digitizer (e.g. ECG-Digitiser) already emits calibrated mV,
+    # so it supplies a ready "signal" block — use it directly (no lossy pixel->mV round-trip).
+    pre = traces.get("signal")
+    if isinstance(pre, dict) and pre.get("leads"):
+        return pre
+    np = _lazy_np()
     cal = traces.get("calibration", {}) or {}
     mm_per_s = float(cal.get("mmPerS") or 25)
     mm_per_mv = float(cal.get("mmPerMv") or 10)

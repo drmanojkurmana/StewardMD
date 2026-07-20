@@ -94,6 +94,11 @@ class Settings(BaseSettings):
 
     # ── External digitizer (image → signal) plug-in, e.g. an ECG-Digitiser wrapper ─────────────────
     digitizer_entrypoint: str = ""           # "module:function" resolved at runtime; empty = not ready
+    # ECG-Digitiser (felixkrones, BSD-2) — operator-installed. Command with {input}/{output} placeholders;
+    # empty = Not Ready. See app/integrations/ecg_digitiser.py + docs/DIGITISER.md.
+    ecg_digitiser_cmd: str = ""
+    ecg_digitiser_fs: int = 500
+    ecg_digitiser_timeout_s: float = 120.0
 
     # ── Gemini (stage-12 explanation) — future ─────────────────────────────────────────────────────
     gemini_api_key: str = ""
