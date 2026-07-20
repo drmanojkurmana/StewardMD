@@ -56,6 +56,17 @@ public struct AppAPI: Sendable {
                      body: body, requiresAuth: true), as: OKResponse.self)
     }
 
+    /// `POST /api/watch/codeblue` — a code started on the watch; the backend pushes a
+    /// guaranteed alert to the clinician's own iPhone (fires even when the app is
+    /// force-quit, which a local notification can't).
+    public func codeBlueStart() async throws {
+        struct Body: Encodable { let event: String }
+        let body = try JSONEncoder().encode(Body(event: "start"))
+        _ = try await client.send(
+            Endpoint(method: "POST", url: Self.base.appendingPathComponent("api/watch/codeblue"),
+                     body: body, requiresAuth: true), as: OKResponse.self)
+    }
+
     /// `POST /api/watch/ack` — durable, idempotent acknowledge sync.
     public func acknowledge(_ ack: Ack) async throws {
         let body = try JSONEncoder().encode(ack)

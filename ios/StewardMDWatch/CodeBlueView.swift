@@ -142,9 +142,11 @@ struct CodeBlueView: View {
             if running {
                 startDate = Date().addingTimeInterval(-model.elapsed)
                 model.startCode()
-                // Guaranteed snapshot (transferUserInfo + app-context) wakes the iPhone
-                // app in the background so it can alert even when closed. sendMessage
-                // alone (the per-second live stream) can't wake a suspended app.
+                // Guaranteed alert to the iPhone even when the app is force-quit: a
+                // direct backend push (only APNs shows on a terminated/locked phone).
+                Task { try? await WatchServices.appAPI.codeBlueStart() }
+                // Belt-and-braces: a guaranteed WC snapshot (transferUserInfo + app-context)
+                // wakes a merely-backgrounded app to alert locally too.
                 WatchConnectivityManager.shared.streamCodeBlueSnapshot(model.snapshot(batteryLevel: WKDeviceId.battery))
                 ResusAlerts.requestAuth()
                 ResusAlerts.schedule(id: "codeblue-cycle", after: 120,

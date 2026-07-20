@@ -127,6 +127,12 @@
       try {
         var data = a && a.notification && a.notification.data;
         var url = (data && (data.url || data.URL)) || "/";
+        // Code Blue push → open the native Command Center (also handles cold-launch
+        // when the app was force-quit and relaunched by the tap).
+        if (url === "codeblue") {
+          var cbp = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.WatchBridge;
+          if (cbp && cbp.openCodeBlue) { cbp.openCodeBlue().catch(function () {}); return; }
+        }
         routeUrl(url);
       } catch (x) {}
     });
