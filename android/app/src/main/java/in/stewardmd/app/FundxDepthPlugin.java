@@ -44,6 +44,7 @@ import com.google.ar.core.Session;
 import com.google.ar.core.TrackingState;
 
 import android.graphics.PointF;
+import android.util.Log;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
 import com.google.mlkit.vision.face.FaceDetection;
@@ -139,8 +140,12 @@ public class FundxDepthPlugin extends Plugin {
     private FaceDetector faceDetector;
     private volatile boolean faceBusy = false;         // one ML Kit request in flight at a time
     private volatile float[] pendingEyeImageNorm = null; // detected eye in IMAGE_NORMALIZED (consumed on GL thread)
+    private volatile float[] lastEyeNorm = null;        // smoothed locked eye (temporal stability across detections)
     private int eyeTargetGrace = 0;                    // frames the eye lock stays authoritative after a detection
     private volatile int viewW = 0, viewH = 0;         // GL surface size (px) for VIEW_NORMALIZED -> pixel hitTest
+    private boolean loggedSeed = false, loggedAligned = false, loggedKick = false;   // one-shot device-log evidence (logcat FUNDX_DBG)
+    private void dbg(String s) { Log.i("FUNDX_DBG", s); }
+    private static String fmt(float v) { return String.format(java.util.Locale.US, "%.3f", v); }
     private Session gpuSession;                      // GPU-mode session (owned by the GL render thread)
     private volatile int gpuFrameCount = 0;
     private int analyzeEvery = 6;                    // in GPU mode, analyse ~1 of every 6 draw frames
@@ -366,14 +371,16 @@ public class FundxDepthPlugin extends Plugin {
                 guideRenderer = new FundxGuideRenderer();     // spatial-AR corridor (mirror of iOS SceneKit)
                 guideRenderer.createOnGlThread();
                 spatialMode = true;                            // engage the guide whenever the GPU preview is up
-                eyeAnchor = null; eyeTargetGrace = 0; pendingEyeImageNorm = null; faceBusy = false;
+                eyeAnchor = null; eyeTargetGrace = 0; pendingEyeImageNorm = null; lastEyeNorm = null; faceBusy = false;
+                loggedSeed = false; loggedAligned = false; loggedKick = false;
                 viewW = w; viewH = h;
                 try {
                     faceDetector = FaceDetection.getClient(new FaceDetectorOptions.Builder()
                         .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL)
                         .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
                         .build());
-                } catch (Throwable t) { faceDetector = null; }
+                } catch (Throwable t) { faceDetector = null; dbg("faceDetector INIT FAILED: " + t.getMessage()); }
+                dbg("faceDetector init=" + (faceDetector != null));
                 querySensorOrientation();
                 gpuSession = new Session(getContext());
                 selectHighResCameraConfig(gpuSession);   // full-res GPU texture (default is often 640x480)
@@ -434,13 +441,14 @@ public class FundxDepthPlugin extends Plugin {
                     float[] vn = new float[2];
                     frame.transformCoordinates2d(Coordinates2d.IMAGE_NORMALIZED, new float[]{ eyeN[0], eyeN[1] }, Coordinates2d.VIEW_NORMALIZED, vn);
                     List<HitResult> hits = frame.hitTest(vn[0] * viewW, vn[1] * viewH);
+                    dbg("eyeCAL imgN=(" + fmt(eyeN[0]) + "," + fmt(eyeN[1]) + ") viewN=(" + fmt(vn[0]) + "," + fmt(vn[1]) + ") viewPx=(" + (int)(vn[0] * viewW) + "," + (int)(vn[1] * viewH) + ") of " + viewW + "x" + viewH + " hit=" + (hits != null && !hits.isEmpty()));
                     if (hits != null && !hits.isEmpty()) {
                         Pose hp = hits.get(0).getHitPose();
                         boolean move = true;
                         if (eyeAnchor != null) {
                             Pose ap = eyeAnchor.getPose();
                             float dx = hp.tx() - ap.tx(), dy = hp.ty() - ap.ty(), dz = hp.tz() - ap.tz();
-                            move = (dx * dx + dy * dy + dz * dz) > (0.04f * 0.04f);
+                            move = (dx * dx + dy * dy + dz * dz) > (0.03f * 0.03f);
                         }
                         if (move) {
                             float[] q = new float[4]; camPose.getRotationQuaternion(q, 0);
@@ -460,6 +468,7 @@ public class FundxDepthPlugin extends Plugin {
                 float[] q = new float[4]; camPose.getRotationQuaternion(q, 0);
                 try { eyeAnchor = gpuSession.createAnchor(new Pose(new float[]{ ex, ey, ez }, q)); }
                 catch (Throwable t) { return; }
+                if (!loggedSeed) { loggedSeed = true; dbg("anchor SEEDED at centre (spatialMode=" + spatialMode + " viewW=" + viewW + ")"); }
             }
 
             Pose aPose = eyeAnchor.getPose();
@@ -474,12 +483,13 @@ public class FundxDepthPlugin extends Plugin {
             // Recenter ONLY when not actively eye-locked (a seeded anchor stranded off-screen): drop + re-seed.
             if (eyeTargetGrace == 0 && (lateral > 0.30f || along < 0.10f)) {
                 try { eyeAnchor.detach(); } catch (Throwable t) {}
-                eyeAnchor = null; return;
+                eyeAnchor = null; lastEyeNorm = null; return;   // reset the lock so it re-acquires fresh
             }
 
             boolean onAxis = lateral < LAT_TOL, atDist = Math.abs(distErr) < DIST_TOL;
             int state = (onAxis && atDist) ? 2 : ((lateral < LAT_TOL * 2.2f && Math.abs(distErr) < DIST_TOL * 2.2f) ? 1 : 0);
             lastAligned = (state == 2); lastLateral = lateral; lastAlong = along;
+            if (state == 2 && !loggedAligned) { loggedAligned = true; dbg("ALIGNED lateral=" + fmt(lateral) + " along=" + fmt(along)); }
 
             camera.getProjectionMatrix(projMtx, 0, 0.05f, 5.0f);
             camera.getViewMatrix(viewMtx, 0);
@@ -593,41 +603,57 @@ public class FundxDepthPlugin extends Plugin {
                 faceBusy = true;
                 final int uw = (rot == 90 || rot == 270) ? fih : fiw;
                 final int uh = (rot == 90 || rot == 270) ? fiw : fih;
+                if (!loggedKick) { loggedKick = true; dbg("faceDetect KICK " + fiw + "x" + fih + " rot=" + rot + " upright=" + uw + "x" + uh); }
                 try {
                     InputImage img = InputImage.fromByteArray(fnv, fiw, fih, rot, InputImage.IMAGE_FORMAT_NV21);
                     faceDetector.process(img)
                         .addOnSuccessListener(new OnSuccessListener<List<Face>>() {
-                            @Override public void onSuccess(List<Face> faces) { pendingEyeImageNorm = nearestEyeNorm(faces, uw, uh); faceBusy = false; }
+                            @Override public void onSuccess(List<Face> faces) {
+                                float[] e = pickEyeNorm(faces, uw, uh);
+                                if (faces != null && !faces.isEmpty()) dbg("faceDetect OK faces=" + faces.size() + " eye=" + (e != null ? ("(" + fmt(e[0]) + "," + fmt(e[1]) + ")") : "none"));
+                                pendingEyeImageNorm = e; faceBusy = false;
+                            }
                         })
                         .addOnFailureListener(new OnFailureListener() {
-                            @Override public void onFailure(Exception e) { faceBusy = false; }
+                            @Override public void onFailure(Exception e) { dbg("faceDetect FAIL " + e.getMessage()); faceBusy = false; }
                         });
-                } catch (Throwable t) { faceBusy = false; }
+                } catch (Throwable t) { dbg("faceDetect EXC " + t.getMessage()); faceBusy = false; }
             }
         } catch (Throwable t) { /* keep the preview alive even if analysis hiccups */ }
     }
 
-    // Nearest-to-centre eye in IMAGE_NORMALIZED (mirror of the iOS eyePoint): scan every detected face's
-    // LEFT/RIGHT eye landmark (pixels in the upright uw x uh image) and return the one closest to centre,
-    // so pointing at the right/left eye locks THAT eye. Returns null if no eye landmark was found.
-    private float[] nearestEyeNorm(List<Face> faces, int uw, int uh) {
-        if (faces == null || faces.isEmpty() || uw <= 0 || uh <= 0) return null;
-        float cx = uw / 2f, cy = uh / 2f, bestD = Float.MAX_VALUE;
-        PointF best = null;
+    // Stable eye pick in IMAGE_NORMALIZED. Fundoscopy examines ONE eye up close, and the scene often has
+    // several background faces, so: (1) take only the LARGEST face (the subject nearest the camera);
+    // (2) among its two eyes prefer the one nearest the PREVIOUS lock (temporal stability — stops the
+    // target flipping between eyes/faces frame to frame), falling back to frame-centre on first lock;
+    // (3) EMA-smooth to damp jitter. Returns the last lock (holds steady) when nothing usable is found.
+    private float[] pickEyeNorm(List<Face> faces, int uw, int uh) {
+        if (faces == null || faces.isEmpty() || uw <= 0 || uh <= 0) return lastEyeNorm;
+        Face big = null; float bigArea = -1f;
         for (Face f : faces) {
-            FaceLandmark[] eyes = { f.getLandmark(FaceLandmark.LEFT_EYE), f.getLandmark(FaceLandmark.RIGHT_EYE) };
-            for (FaceLandmark lm : eyes) {
-                if (lm == null) continue;
-                PointF p = lm.getPosition();
-                float dx = p.x - cx, dy = p.y - cy, d = dx * dx + dy * dy;
-                if (d < bestD) { bestD = d; best = p; }
-            }
+            android.graphics.Rect b = f.getBoundingBox();
+            float a = (float) b.width() * (float) b.height();
+            if (a > bigArea) { bigArea = a; big = f; }
         }
-        if (best == null) return null;
-        float nx = Math.max(0f, Math.min(1f, best.x / uw));
-        float ny = Math.max(0f, Math.min(1f, best.y / uh));
-        return new float[] { nx, ny };
+        if (big == null) return lastEyeNorm;
+        float[] prev = lastEyeNorm;
+        float rx = (prev != null) ? prev[0] : 0.5f, ry = (prev != null) ? prev[1] : 0.5f;
+        float[] cand = null; float bestD = Float.MAX_VALUE;
+        FaceLandmark[] eyes = { big.getLandmark(FaceLandmark.LEFT_EYE), big.getLandmark(FaceLandmark.RIGHT_EYE) };
+        for (FaceLandmark lm : eyes) {
+            if (lm == null) continue;
+            PointF p = lm.getPosition();
+            float nx = clampf(p.x / uw), ny = clampf(p.y / uh);
+            float dx = nx - rx, dy = ny - ry, d = dx * dx + dy * dy;
+            if (d < bestD) { bestD = d; cand = new float[]{ nx, ny }; }
+        }
+        if (cand == null) return lastEyeNorm;
+        if (prev != null) { cand[0] = 0.5f * cand[0] + 0.5f * prev[0]; cand[1] = 0.5f * cand[1] + 0.5f * prev[1]; }
+        lastEyeNorm = cand;
+        return cand;
     }
+
+    private static float clampf(float v) { return v < 0f ? 0f : (v > 1f ? 1f : v); }
 
     // Surface.ROTATION_* for ARCore setDisplayGeometry (which wants the constant, not degrees).
     private int displayRotationSurface() {
