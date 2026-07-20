@@ -9,8 +9,19 @@ struct CommandCenterView: View {
     var onClose: () -> Void = {}
     @State private var showShare = false
     @State private var showClearConfirm = false
+    @State private var showShockEnergy = false
+    @State private var showRhythm = false
 
     private var s: CodeBlueState { model.state }
+
+    // Unified counters derived from the merged timeline, so events logged on the phone
+    // (scribe) count alongside the watch's and survive the next watch snapshot.
+    private var shockCount: Int { s.events.filter { $0.kind == .shock }.count }
+    private var epiCount: Int {
+        s.events.filter { $0.kind == .drug &&
+            ($0.label.lowercased().contains("epinephrine") || $0.label.lowercased().contains("adrenaline")) }.count
+    }
+    private var roscDone: Bool { s.events.contains { $0.kind == .rosc } }
 
     var body: some View {
         NavigationView {
@@ -21,8 +32,9 @@ struct CommandCenterView: View {
                     if s.paused { pausedBanner } else { rateBlock }
                     compressionsBlock
                     countersRow
+                    if s.running { scribePanel }
                     timelineSection
-                    if !s.running && !s.events.isEmpty { summarySection }
+                    if !s.events.isEmpty { summarySection }
                     Text(CodeSummary.disclaimerText)
                         .font(.footnote).foregroundStyle(.secondary).multilineTextAlignment(.center)
                 }
@@ -40,12 +52,48 @@ struct CommandCenterView: View {
             }
         }
         .preferredColorScheme(.dark)
-        .sheet(isPresented: $showShare) { ShareSheet(text: model.summary().formattedDetail()) }
+        .sheet(isPresented: $showShare) { ShareSheet(text: model.codeSheetText()) }
         .confirmationDialog("Clear all Code Blue records on this iPhone?",
                             isPresented: $showClearConfirm, titleVisibility: .visible) {
             Button("Clear records", role: .destructive) { model.clearLocal() }
             Button("Cancel", role: .cancel) {}
         }
+        .confirmationDialog("Shock energy", isPresented: $showShockEnergy, titleVisibility: .visible) {
+            Button("150 J") { model.logShock(energyJ: 150) }
+            Button("200 J") { model.logShock(energyJ: 200) }
+            Button("360 J") { model.logShock(energyJ: 360) }
+            Button("Log without energy") { model.logShock(energyJ: nil) }
+            Button("Cancel", role: .cancel) {}
+        }
+        .confirmationDialog("Log rhythm", isPresented: $showRhythm, titleVisibility: .visible) {
+            Button("VF") { model.logRhythm("VF") }
+            Button("VT") { model.logRhythm("VT") }
+            Button("PEA") { model.logRhythm("PEA") }
+            Button("Asystole") { model.logRhythm("Asystole") }
+            Button("Cancel", role: .cancel) {}
+        }
+    }
+
+    private var scribePanel: some View {
+        VStack(spacing: 8) {
+            Text("Log (scribe)").font(.headline).foregroundStyle(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack(spacing: 8) {
+                scribeBtn("Epi", .blue) { model.logDrug("Epinephrine") }
+                scribeBtn("Amiodarone", .blue) { model.logDrug("Amiodarone") }
+                scribeBtn("Other", .blue) { model.logDrug("Other drug") }
+            }
+            HStack(spacing: 8) {
+                scribeBtn("Shock", .orange) { showShockEnergy = true }
+                scribeBtn("Rhythm", .teal) { showRhythm = true }
+                scribeBtn("ROSC", .green) { model.logROSC() }
+            }
+        }.padding().background(Color.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 16))
+    }
+
+    private func scribeBtn(_ title: String, _ tint: Color, _ action: @escaping () -> Void) -> some View {
+        Button(action: action) { Text(title).font(.caption).frame(maxWidth: .infinity).padding(.vertical, 8) }
+            .buttonStyle(.bordered).tint(tint)
     }
 
     private var connectionRow: some View {
@@ -94,9 +142,9 @@ struct CommandCenterView: View {
 
     private var countersRow: some View {
         HStack(spacing: 12) {
-            counter("Shocks", "\(s.shockCount)", .orange)
-            counter("Epi", "\(s.adrenalineCount)", .blue)
-            counter("ROSC", s.rosc ? "✓" : "—", s.rosc ? .green : .gray)
+            counter("Shocks", "\(shockCount)", .orange)
+            counter("Epi", "\(epiCount)", .blue)
+            counter("ROSC", roscDone ? "✓" : "—", roscDone ? .green : .gray)
         }
     }
 
@@ -123,7 +171,7 @@ struct CommandCenterView: View {
             Text("Code summary").font(.headline).foregroundStyle(.white)
             Text(model.summary().formattedDetail()).font(.footnote).foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Button { onExport(model.summary().formattedDetail()) } label: {
+            Button { onExport(model.codeSheetText()) } label: {
                 Label("Export to patient record", systemImage: "square.and.arrow.up.on.square")
                     .frame(maxWidth: .infinity)
             }.buttonStyle(.borderedProminent).tint(.red)
@@ -141,7 +189,7 @@ struct CommandCenterView: View {
         case .shock: return e.label.isEmpty ? "Shock" : e.label
         case .drug: return e.label; case .pauseStart: return "Paused"
         case .resume: return "Resumed"; case .switchCompressor: return "Switch compressor"
-        case .rosc: return "ROSC"
+        case .rosc: return "ROSC"; case .rhythm: return "Rhythm — \(e.label)"
         }
     }
 }

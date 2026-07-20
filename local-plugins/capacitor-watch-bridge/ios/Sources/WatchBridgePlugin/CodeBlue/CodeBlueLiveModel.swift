@@ -58,7 +58,34 @@ final class CodeBlueLiveModel: ObservableObject {
     func summary() -> CodeSummary {
         CodeSummary.build(events: state.events, durationSeconds: state.elapsed,
                           cycles: state.cycle, totalCompressions: state.compressionCount,
-                          averageRateCPM: state.averageRateCPM)
+                          averageRateCPM: state.averageRateCPM, targetRatePct: state.targetRatePct)
+    }
+
+    /// Full chronological code record for the chart / export.
+    func codeSheetText() -> String {
+        let df = DateFormatter(); df.dateFormat = "yyyy-MM-dd HH:mm"
+        return summary().codeSheet(events: state.events, header: "Recorded \(df.string(from: Date()))")
+    }
+
+    // MARK: Scribe — log events from the phone (design §F2). Each is tagged
+    // sourceDeviceId "phone" and merged into the unified timeline by id.
+    func logDrug(_ name: String) { logEvent(.drug, name) }
+    func logRhythm(_ label: String) { logEvent(.rhythm, label) }
+    func logROSC() { logEvent(.rosc, "ROSC") }
+    func logShock(energyJ: Int?) {
+        let n = state.events.filter { $0.kind == .shock }.count + 1
+        logEvent(.shock, "Shock #\(n)" + (energyJ.map { " · \($0)J" } ?? ""))
+    }
+
+    private func logEvent(_ kind: CodeEventKind, _ label: String) {
+        guard state.running else { return }
+        var s = state
+        let id = "phone-\(kind.rawValue)-\(UUID().uuidString.prefix(8))"
+        let ev = CodeEvent(id: id, elapsed: s.elapsed, kind: kind, label: label, sourceDeviceId: "phone")
+        s.events = mergeEvents(s.events, [ev])
+        state = s
+        lastUpdate = Date()
+        store.save(s)
     }
 
     /// Clear local logs (privacy — offered on sign-out).
