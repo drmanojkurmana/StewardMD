@@ -24,6 +24,11 @@
 (function () {
   "use strict";
 
+  // Shared inline-SVG catalog accessor → window.ICONS.get("name") yields <svg class="smd-ico">…</svg>.
+  // NOTE: this module declares a LOCAL `var ICONS` (specialty path map) further below which shadows
+  // the global catalog inside this IIFE, so we reach the catalog via window.ICONS explicitly here.
+  function wsIco(n){ return (window.ICONS && window.ICONS.get) ? window.ICONS.get(n) : ""; }
+
   function wsOn() {
     try {
       var q = location.search || "";
@@ -100,7 +105,13 @@
   function loadPrefs() { try { var p = JSON.parse(localStorage.getItem(pkey()) || "null"); if (!p || typeof p !== "object") return Object.assign({}, DEF); return Object.assign({}, DEF, p); } catch (e) { return Object.assign({}, DEF); } }
   function savePrefs() { try { localStorage.setItem(pkey(), JSON.stringify(prefs)); } catch (e) {} }
   var prefs = loadPrefs();
-  var caseWorkspace = null; // per-current-case override (not persisted)
+  var caseWorkspace = null; // per-current-case override
+  // BUG-02: the one-shot "Use for my next case" override was in-memory only, so a guest-expiry reload
+  // (or any reload) between picking the specialty and tapping "Start a new case" lost it and the case
+  // opened in Internal Medicine instead. Persist it to sessionStorage so it reliably carries through;
+  // it's consumed (cleared) when the case actually starts.
+  function persistCaseWs() { try { caseWorkspace ? sessionStorage.setItem("smd_ws_oneshot", caseWorkspace) : sessionStorage.removeItem("smd_ws_oneshot"); } catch (e) {} }
+  try { var _o1 = sessionStorage.getItem("smd_ws_oneshot"); if (_o1) caseWorkspace = _o1; } catch (e) {}
 
   function activeWorkspace() { return caseWorkspace || prefs.defaultClinicalWorkspace || IM; }
   function setDefault(id) { prefs.defaultClinicalWorkspace = id; prefs.lastUsedClinicalWorkspace = id; prefs.lastWorkspaceChangedAt = 0; savePrefs(); }
@@ -275,7 +286,7 @@
       h += '<button class="sw-opt" data-ws="' + r.id + '"><span class="ic">' + ic(ICONS[r.id]) + '</span>' +
         '<span class="tx"><span class="nm">' + r.name + '</span><span class="sb">' + r.subtitle + '</span></span>' +
         (r.status === "early_access" ? '<span class="ea">Early access</span>' : '') +
-        (r.id === cur ? '<span class="ck">✓</span>' : '') + '</button>';
+        (r.id === cur ? '<span class="ck">' + wsIco("check") + '</span>' : '') + '</button>';
     });
     h += '<div class="sw-auto"><div class="lb">Auto-select specialty</div>' +
       '<input id="swAuto" placeholder="Describe the presenting complaint…"/>' +
@@ -309,6 +320,7 @@
     o = o || {};
     if (o.asDefault) { setDefault(id); caseWorkspace = (id === IM ? null : id); }
     else { caseWorkspace = id; }              // "this case / my next case" override (IM ok too)
+    persistCaseWs();
     closeSheet();
     refreshSidebarLabel();
     if (o.selector) {
@@ -327,7 +339,7 @@
   // Called by Home's "Start a new case" (Dx My Patient / Start a Case): if a specialty workspace is
   // active, open its engine and return true; if Internal Medicine, return false so Home runs its own
   // IM flow. The "this case" override is ONE-SHOT — consumed here so the next case reverts to default.
-  function startActiveCase() { var a = activeWorkspace(); if (a === IM) return false; openSpecialtyShell(a); caseWorkspace = null; refreshSidebarLabel(); return true; }
+  function startActiveCase() { var a = activeWorkspace(); if (a === IM) return false; openSpecialtyShell(a); caseWorkspace = null; persistCaseWs(); refreshSidebarLabel(); return true; }
 
   /* ───────────────────────────── specialty shell (interactive engine or framework) ───────────────────────────── */
   var _shell, LADCOL = { 0: "#047857", 1: "#65a30d", 2: "#0e6e63", 3: "#D97706", 4: "#b5460f", 5: "#ab1c2c" }, _es = null, _shellWs = null;
@@ -370,7 +382,7 @@
       });
     }
   }
-  function openIM() { if (_shell) _shell.classList.remove("on"); caseWorkspace = null; refreshSidebarLabel(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
+  function openIM() { if (_shell) _shell.classList.remove("on"); caseWorkspace = null; persistCaseWs(); refreshSidebarLabel(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
 
   function selSet() { var s = new Set(); for (var k in _es.sel) if (_es.sel[k]) s.add(k); return s; }
   function renderSyndrome() {
@@ -388,7 +400,7 @@
     var res = {}; try { res = _es.syn.assess(selSet()) || {}; } catch (e) { res = {}; }
     var lad = (typeof res.ladder === "number") ? res.ladder : -1;
     var h = '<div class="sw-card sw-out' + (res.emergency ? " emerg" : "") + '">';
-    if (res.emergency) h += '<div class="sw-emerg">⚠ Time-critical — escalate now</div>';
+    if (res.emergency) h += '<div class="sw-emerg">' + wsIco("warn") + ' Time-critical — escalate now</div>';
     h += '<div class="sw-catg">Step 4 · ' + (res.catg || "Select findings above") + '</div>';
     h += '<div class="lab">Step 5 · Management</div>';
     h += '<div class="sw-ladder">' + ABX_LADDER.map(function (x, i) { return '<div class="r ' + (i === lad ? "on" : (lad >= 0 ? "dim" : "")) + '"><span class="d" style="background:' + LADCOL[i] + '"></span>' + x + '</div>'; }).join("") + '</div>';
@@ -411,17 +423,17 @@
     // Point-of-care hand-off: jump into the stewardship / knowledge tools without leaving the flow.
     var poc = '<div class="sw-poc"><div class="lab">Take it further</div><div class="sw-pocrow">';
     if (lad >= 2) {
-      poc += '<button class="sw-pocbtn abx" data-poc="abx">💊 Antibiotic choice</button>';
-      poc += '<button class="sw-pocbtn" data-poc="ix">⚠ Interactions</button>';
+      poc += '<button class="sw-pocbtn abx" data-poc="abx">' + wsIco("pills") + ' Antibiotic choice</button>';
+      poc += '<button class="sw-pocbtn" data-poc="ix">' + wsIco("warn") + ' Interactions</button>';
     }
-    poc += '<button class="sw-pocbtn" data-poc="maik">✦ Ask MaiK</button>';
-    poc += '<button class="sw-pocbtn" data-poc="learn">📖 Learn more</button>';
+    poc += '<button class="sw-pocbtn" data-poc="maik">' + wsIco("spark") + ' Ask MaiK</button>';
+    poc += '<button class="sw-pocbtn" data-poc="learn">' + wsIco("book") + ' Learn more</button>';
     poc += '</div><div class="sw-pocnote">Antibiotic choice + dose per local antibiogram / ICMR &amp; the individual patient — these tools help you decide.</div></div>';
     h += poc;
     h += '<div class="sw-fb" id="swFb"><span class="q">Early access — was this helpful?</span>' +
-      '<span class="btns"><button class="sw-fbbtn" data-v="up" aria-label="Helpful">👍</button>' +
-      '<button class="sw-fbbtn" data-v="down" aria-label="Not helpful">👎</button>' +
-      '<button class="sw-fbflag" data-v="flag">⚑ Flag an error</button></span></div>';
+      '<span class="btns"><button class="sw-fbbtn" data-v="up" aria-label="Helpful">' + wsIco("thumbUp") + '</button>' +
+      '<button class="sw-fbbtn" data-v="down" aria-label="Not helpful">' + wsIco("thumbDown") + '</button>' +
+      '<button class="sw-fbflag" data-v="flag">' + wsIco("flag") + ' Flag an error</button></span></div>';
     h += '</div>';
     box.innerHTML = h;
     var oi = box.querySelector("#swOutIM"); if (oi) oi.addEventListener("click", openIM);
@@ -467,7 +479,7 @@
       note: (o.note || "").slice(0, 500) };
     try { var K = "stewardmd_ws_fb_" + uid(), log = JSON.parse(localStorage.getItem(K) || "[]"); log.push(payload); if (log.length > 200) log = log.slice(-200); localStorage.setItem(K, JSON.stringify(log)); } catch (e) {}
     try { fetch("/api/ws-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), keepalive: true, cache: "no-store" }).catch(function () {}); } catch (e) {}
-    var fb = document.getElementById("swFb"); if (fb) fb.innerHTML = '<span class="sw-fbthanks">✓ Thanks — your feedback helps improve this.</span>';
+    var fb = document.getElementById("swFb"); if (fb) fb.innerHTML = '<span class="sw-fbthanks">' + wsIco("check") + ' Thanks — your feedback helps improve this.</span>';
   }
 
   /* ───────────────────────────── sidebar switcher (wrap SB.open) ───────────────────────────── */

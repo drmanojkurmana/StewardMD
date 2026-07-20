@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -33,6 +34,7 @@ public class WhisperEngine {
     public ErrCb onError;
 
     private static final int SAMPLE_RATE = 16000;
+    private static final String TAG = "WhisperEngine";
 
     private final Context context;
     private final ExecutorService work = Executors.newSingleThreadExecutor();
@@ -85,6 +87,7 @@ public class WhisperEngine {
 
     /** Begin recording. {@code modelPath} must already be installed & verified. */
     public void start(String modelPath) {
+        Log.i(TAG, "start() model=" + modelPath + " nativeAvailable=" + WhisperNative.isAvailable());
         if (recording.get()) return; // duplicate-start guard
         cancelled.set(false);
 
@@ -108,6 +111,7 @@ public class WhisperEngine {
         }
         recording.set(true);
         emitState("listening");
+        Log.i(TAG, "start() OK — listening");
     }
 
     private void startCapture() throws WhisperException {
@@ -153,8 +157,9 @@ public class WhisperEngine {
         if (!recording.get()) return;
         recording.set(false);
         stopCapture();
-        if (cancelled.get()) return;
+        if (cancelled.get()) { Log.i(TAG, "stopAndTranscribe: cancelled, aborting"); return; }
         emitState("transcribing");
+        Log.i(TAG, "stopAndTranscribe: samples=" + samples.size() + " → dispatching worker");
         work.execute(() -> {
             float[] audio;
             synchronized (samplesLock) {
@@ -163,6 +168,7 @@ public class WhisperEngine {
                 samples.clear();
                 samples.trimToSize();
             }
+            Log.i(TAG, "worker started, audio samples=" + audio.length);
             transcribe(audio, language, initialPrompt);
         });
     }
@@ -209,15 +215,23 @@ public class WhisperEngine {
             if (onFinal != null) onFinal.on("");
             return;
         }
-        int nThreads = Math.max(1, Math.min(6, Runtime.getRuntime().availableProcessors() - 1));
+        // 4 threads (of the available cores). The earlier "spinning forever" was NOT a threadpool
+        // bug — it was the -O0 debug native build being ~50x too slow (now fixed via
+        // CMAKE_BUILD_TYPE=Release in build.gradle). Multithreading is safe and much faster.
+        int nThreads = Math.max(1, Math.min(4, Runtime.getRuntime().availableProcessors() - 1));
+        Log.i(TAG, "transcribe(): calling native, samples=" + audio.length + " threads=" + nThreads);
+        long t0 = System.currentTimeMillis();
         String text;
         try {
             text = WhisperNative.fullTranscribe(
                 ctx, audio, language.isEmpty() ? "auto" : language, initialPrompt, nThreads, 5);
         } catch (Throwable t) {
+            Log.e(TAG, "native fullTranscribe threw", t);
             emitError(WhisperErr.TRANSCRIPTION_FAILURE, t.getClass().getSimpleName());
             return;
         }
+        Log.i(TAG, "transcribe(): native returned in " + (System.currentTimeMillis() - t0) + "ms, textLen="
+            + (text == null ? -1 : text.length()));
         if (cancelled.get()) return;
         if (text == null) {
             emitError(WhisperErr.TRANSCRIPTION_FAILURE, "whisper_full");

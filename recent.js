@@ -185,10 +185,11 @@
   }
 
   /* ---------------- Recent Cases overlay UI ---------------- */
+  function rcIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n, "rc-ico") : ""; }
   var FEAT = {
-    reasoning: { icon: "🧠", label: "Clinical reasoning", color: "#0F766E" },
-    decision: { icon: "💊", label: "Clinical decision", color: "#B45309" },
-    icu: { icon: "🏥", label: "ICU", color: "#7C3AED" }
+    reasoning: { icon: "brain", label: "Clinical reasoning", color: "#0F766E" },
+    decision: { icon: "pills", label: "Clinical decision", color: "#B45309" },
+    icu: { icon: "hospital", label: "ICU", color: "#7C3AED" }
   };
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function ago(ts) {
@@ -214,6 +215,8 @@
       ".rc-card{display:flex;align-items:center;gap:12px;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:13px 14px;cursor:pointer;text-align:left;width:100%;border-left:4px solid var(--line,#e5e5e0)}",
       ".rc-card:active{transform:scale(.995)}",
       ".rc-ic{flex:none;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;background:var(--teal-soft,#e0f2f1)}",
+      ".rc-ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}",
+      ".rc-h .rc-ico{width:16px;height:16px;vertical-align:-2px;margin-right:4px;color:var(--teal,#0a9396)}",
       ".rc-main{flex:1;min-width:0}",
       ".rc-feat{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px}",
       ".rc-title{font:800 15px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
@@ -230,7 +233,7 @@
     _root = document.createElement("div"); _root.className = "rc-ov"; _root.id = "smdRecentOv"; _root.setAttribute("role", "dialog"); _root.setAttribute("aria-modal", "true"); _root.setAttribute("aria-label", "Recent Cases");
     _root.innerHTML =
       '<div class="rc-bar"><button class="rc-x" id="rcClose">‹ Back</button>' +
-      '<div class="rc-h">🕐 Recent Cases</div>' +
+      '<div class="rc-h">'+rcIco("clock")+' Recent Cases</div>' +
       '<button class="rc-clr" id="rcClear">Clear</button></div>' +
       '<div class="rc-scroll"><div class="rc-note">Your last ' + MAX + ' cases across Clinical reasoning, Clinical decision and ICU. Tap one to reopen it. Kept on this device only — the oldest is erased as new cases arrive.</div>' +
       '<div class="rc-list" id="rcList"></div></div>';
@@ -247,9 +250,9 @@
     var el = _root.querySelector("#rcList");
     if (!list.length) { el.innerHTML = '<div class="rc-empty">No recent cases yet.<br>Work a case in Clinical reasoning, Clinical decision or ICU and it will appear here.</div>'; return; }
     el.innerHTML = list.map(function (c) {
-      var f = FEAT[c.feature] || { icon: "📋", label: "Case", color: "#0F766E" };
+      var f = FEAT[c.feature] || { icon: "stcase", label: "Case", color: "#0F766E" };
       return '<button class="rc-card" data-cid="' + esc(c.caseId) + '" style="border-left-color:' + f.color + '">' +
-        '<span class="rc-ic">' + f.icon + '</span>' +
+        '<span class="rc-ic" style="color:' + f.color + '">' + rcIco(f.icon) + '</span>' +
         '<span class="rc-main"><span class="rc-feat" style="color:' + f.color + '">' + esc(f.label) + '</span>' +
         '<span class="rc-title">' + esc(c.title || f.label) + '</span>' +
         (c.summary ? '<span class="rc-sub">' + esc(c.summary) + '</span>' : '') + '</span>' +

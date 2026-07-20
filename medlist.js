@@ -390,12 +390,16 @@
     opts = opts || {};
     if (opts.cls) e.className = opts.cls;
     if (opts.text != null) e.textContent = opts.text;
+    if (opts.html != null) e.innerHTML = opts.html;
     if (opts.attrs) for (var k in opts.attrs) e.setAttribute(k, opts.attrs[k]);
     if (opts.disabled) e.disabled = true;
     if (opts.type) e.type = opts.type;
     if (opts.placeholder) e.placeholder = opts.placeholder;
     return e;
   }
+
+  // Shared line-icon accessor (window.ICONS catalog); guarded for load order, empty fallback.
+  function mlIco(name, cls) { return (window.ICONS && ICONS.get) ? ICONS.get(name, cls || "ml-ico") : ""; }
 
   function fieldLine(med) {
     var parts = [];
@@ -555,14 +559,14 @@
     row.appendChild(main);
 
     var acts = el("div", { cls: "ml-row-acts" });
-    var editBtn = el("button", { cls: "ml-icon-btn", text: "✎", attrs: { "data-ml-edit": med.id, "aria-label": "Edit", title: "Edit", type: "button" } });
+    var editBtn = el("button", { cls: "ml-icon-btn", html: mlIco("edit"), attrs: { "data-ml-edit": med.id, "aria-label": "Edit", title: "Edit", type: "button" } });
     editBtn.addEventListener("click", function () {
       clearUndoTimer(); _undoingId = null;
       _manualState.value = med.raw || med.generic || "";
       _manualState.parsed = parseEntry(_manualState.value);
       remove(med.id); _openAdd = "manual"; render();
     });
-    var removeBtn = el("button", { cls: "ml-icon-btn ml-remove-btn", text: "🗑", attrs: { "data-ml-remove": med.id, "aria-label": "Remove", title: "Remove", type: "button" } });
+    var removeBtn = el("button", { cls: "ml-icon-btn ml-remove-btn", html: mlIco("trash"), attrs: { "data-ml-remove": med.id, "aria-label": "Remove", title: "Remove", type: "button" } });
     removeBtn.addEventListener("click", function () {
       remove(med.id); _undoingId = med.id; render();
       clearUndoTimer();
@@ -618,21 +622,21 @@
     var grid = el("div", { cls: "ml-action-grid" });
     function card(cls, ic, t, d, attrs, onClick) {
       var c = el("button", { cls: "ml-action-card " + cls, attrs: Object.assign({ type: "button" }, attrs || {}) });
-      c.appendChild(el("span", { cls: "ml-action-ic", text: ic }));
+      c.appendChild(el("span", { cls: "ml-action-ic", html: ic }));
       c.appendChild(el("span", { cls: "ml-action-t", text: t }));
       c.appendChild(el("span", { cls: "ml-action-d", text: d }));
       c.addEventListener("click", onClick);
       grid.appendChild(c);
       return c;
     }
-    card("ml-action-primary", "🔍", "Search Drug Index", "Find generic or brand medicines",
+    card("ml-action-primary", mlIco("search"), "Search Drug Index", "Find generic or brand medicines",
       { "data-ml-open": "index" }, function () { _openAdd = "index"; render(); });
-    card("", "✍️", "Type / Paste list", "e.g. metformin 500 mg BD",
+    card("", mlIco("edit"), "Type / Paste list", "e.g. metformin 500 mg BD",
       { "data-ml-open": "paste" }, function () { _openAdd = "paste"; render(); });
     // Scan = on-device-first AI Vision (native ML Kit OCR) — hide on web.
-    if (window.SMD_IS_NATIVE) card("", "📷", "Scan prescription", "Prescription, OPD ticket, case sheet, PDF",
+    if (window.SMD_IS_NATIVE) card("", mlIco("camera"), "Scan prescription", "Prescription, OPD ticket, case sheet, PDF",
       { "data-ml-scan": "1" }, function () { startScan(); });
-    card("", "🏥", "Ward Sync", "Import current medication chart",
+    card("", mlIco("hospital"), "Ward Sync", "Import current medication chart",
       { "data-ml-wardsync-card": "1" }, function () { wardPrimaryAction(); });
     container.appendChild(grid);
 
@@ -666,7 +670,7 @@
   function renderWardCard(container) {
     var w = wardReadyState();
     var card = el("div", { cls: "ml-ward-card" });
-    card.appendChild(el("div", { cls: "ml-ward-ic", text: "🏥" }));
+    card.appendChild(el("div", { cls: "ml-ward-ic", html: mlIco("hospital") }));
     var body = el("div", { cls: "ml-ward-body" });
     if (w.ready) {
       body.appendChild(el("div", { cls: "ml-ward-t", text: "Ward Sync — " + ptInitials(w.pt.name) }));
@@ -695,7 +699,7 @@
     titles.appendChild(el("div", { cls: "ml-sheet-title", text: opts.title || "" }));
     if (opts.sub) titles.appendChild(el("div", { cls: "ml-sheet-sub", text: opts.sub }));
     head.appendChild(titles);
-    var closeBtn = el("button", { cls: "ml-sheet-close", text: "✕", attrs: { "aria-label": "Close", type: "button" } });
+    var closeBtn = el("button", { cls: "ml-sheet-close", html: mlIco("close"), attrs: { "aria-label": "Close", type: "button" } });
     head.appendChild(closeBtn);
     wrap.appendChild(head);
     var body = el("div", { cls: "ml-sheet-body" });
@@ -1026,11 +1030,36 @@
     scanProgress("Reading medicines from image…");
     // Call via window.MEDLIST so tests can stub scanExtract.
     var fn = (window.MEDLIST && window.MEDLIST.scanExtract) || scanExtract;
+    // Absolute backstop: on native, a stalled on-device OCR / vision call can otherwise leave
+    // this spinner up forever (seen on some iPhones where Apple Vision OCR never returned).
+    // The native plugin now self-times-out too, but race here as well so the UI ALWAYS recovers
+    // with a clear next step even if the bridge never settles. (CapacitorHttp ignores
+    // AbortController, so a plain setTimeout race is the reliable guard — see reasoning.js.)
+    var settled = false;
+    var _t0 = Date.now();
+    // Diagnostics: append a compact trace (elapsed + last scan stage) to any error/timeout so a
+    // device that struggles can be pinpointed even without a tethered Mac. window.__SMD_SCAN_DIAG
+    // is set by SMD_AI.readImage; also mirrored to the console with the [SMD-SCAN] prefix.
+    function diagLine() {
+      var d = window.__SMD_SCAN_DIAG;
+      var secs = ((Date.now() - _t0) / 1000).toFixed(1);
+      var extra = d ? (" · " + (d.stage || "?") + (d.lines != null ? " · " + d.lines + " lines" : "") + (d.ocrMs != null ? " · ocr " + d.ocrMs + "ms" : "")) : "";
+      return " (" + secs + "s" + extra + ")";
+    }
+    function done(msg, err) { scanProgressDone(); scanProgress(msg + diagLine(), err); try { console.info("[SMD-SCAN] result", msg, window.__SMD_SCAN_DIAG || {}); } catch (e) {} }
+    var timer = setTimeout(function () {
+      if (settled) return; settled = true;
+      done("Reading the image timed out. Try a clearer, well-lit photo, or enter medicines manually.", true);
+    }, 45000);
     Promise.resolve().then(function () { return fn(dataUrl); }).then(function (rows) {
+      if (settled) return; settled = true; clearTimeout(timer);
       scanProgressDone();
-      if (!rows || !rows.length) { scanProgress("No medicines could be read confidently. Please enter them manually.", true); return; }
+      if (!rows || !rows.length) { done("No medicines could be read confidently. Please enter them manually.", true); return; }
       _openScanReview(rows, dataUrl);
-    }).catch(function () { scanProgressDone(); scanProgress("Could not read the image. Enter medicines manually.", true); });
+    }).catch(function () {
+      if (settled) return; settled = true; clearTimeout(timer);
+      done("Could not read the image. Enter medicines manually.", true);
+    });
   }
   // Clinician REVIEW — nothing is added until "Add selected". rows are candidate
   // parse results (or raw OCR rows, which are normalised here).
@@ -1100,7 +1129,7 @@
       card.appendChild(edit);
 
       if (flagged) {
-        var flag = el("div", { cls: "ml-scan-flag", text: "⚠ Review manually — not confidently mapped" });
+        var flag = el("div", { cls: "ml-scan-flag", html: mlIco("warn") + " Review manually — not confidently mapped" });
         card.appendChild(flag);
         if (entry.candidates && entry.candidates.length) {
           renderCandidateChips(card, entry.candidates, function (c) {
@@ -1394,7 +1423,7 @@
       whatBody.appendChild(el("div", { cls: "mlr-whatnow-label", text: "Remove a medicine and re-check:" }));
       var acts = el("div", { cls: "mlr-whatnow-actions" });
       inList.forEach(function (g) {
-        var b = el("button", { cls: "mlr-remove-drug", text: "✕ Remove " + cap(g), attrs: { type: "button" } });
+        var b = el("button", { cls: "mlr-remove-drug", text: "× Remove " + cap(g), attrs: { type: "button" } });
         b.addEventListener("click", function () { removeGenericAndRecheck(g); });
         acts.appendChild(b);
       });
@@ -1498,7 +1527,7 @@
     var unchecked = (cov.unchecked || []), unclassified = (cov.unclassified || []);
     if (unchecked.length || unclassified.length) {
       var warn = el("div", { cls: "mlr-coverage-warn" });
-      warn.appendChild(el("div", { cls: "mlr-coverage-warn-title", text: "⚠ Not fully checked" }));
+      warn.appendChild(el("div", { cls: "mlr-coverage-warn-title", html: mlIco("warn") + " Not fully checked" }));
       if (unchecked.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
         text: "Not recognised — NOT checked for any interaction: " + unchecked.join(", ") + ". Verify the name/spelling or check these manually." }));
       if (unclassified.length) warn.appendChild(el("div", { cls: "mlr-coverage-warn-line",
@@ -1581,7 +1610,13 @@
 ".ml-action-card{display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .12s,box-shadow .12s;min-height:88px}",
 ".ml-action-card:hover{border-color:var(--teal,#0e6e63);box-shadow:0 2px 10px rgba(14,110,99,.08)}",
 ".ml-action-card:active{transform:scale(.99)}",
-".ml-action-ic{font-size:22px;line-height:1}",
+".ml-action-ic{font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center}",
+".ml-ico{width:16px;height:16px;vertical-align:-3px;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}",
+".ml-action-ic svg{width:26px;height:26px;color:var(--teal,#0a9396)}",
+".ml-ward-ic svg{width:24px;height:24px;color:var(--teal,#0a9396)}",
+".ml-icon-btn svg{width:17px;height:17px}",
+".ml-sheet-close svg{width:16px;height:16px}",
+".ml-scan-flag svg,.mlr-coverage-warn-title svg{width:14px;height:14px;vertical-align:-2px;margin-right:4px}",
 ".ml-action-t{font:700 14px var(--sans);color:var(--ink,#14202b)}",
 ".ml-action-d{font:500 11.5px var(--sans);color:var(--slate-soft,#5a7184);line-height:1.35}",
 ".ml-action-primary{border-color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee)}",

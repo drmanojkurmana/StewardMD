@@ -219,6 +219,19 @@ service cloud.firestore {
       allow read: if request.auth != null && request.auth.uid == resource.data.uid;
     }
 
+    // ── Experimental Access framework (functions/_experimental.js) ────────────
+    // Access codes + device activations are managed ENTIRELY server-side via the Firebase service
+    // account (which BYPASSES these rules). No client — neither the app nor the admin console —
+    // ever reads or writes them directly; every operation goes through /api/experimental/*. The
+    // catch-all below would already deny these, but we deny them EXPLICITLY so a future rule edit
+    // can never accidentally expose hashed codes or let a client forge/activate a binding.
+    match /experimentalCodes/{codeId} {
+      allow read, write: if false;
+    }
+    match /experimentalActivations/{activationId} {
+      allow read, write: if false;
+    }
+
     // Everything else is denied.
     match /{document=**} {
       allow read, write: if false;

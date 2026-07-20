@@ -7,7 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EE51F971E8F2449C416BA85 /* SeverityChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A94E8B160DB336D8882CB9 /* SeverityChip.swift */; };
+		10E793FAC38049EF46827A4E /* StewardMDWatchWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB59296FF1B65DA08543CEF0 /* StewardMDWatchWidgets.swift */; };
+		1BE35EFA0D03A09DC0333B5F /* CalculatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9AF4B5082182356C7C2A81 /* CalculatorsView.swift */; };
+		242D72C9FFF6237CC64CB74F /* Complications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498218112516F224AA01CE53 /* Complications.swift */; };
+		2709EF0D5E484D73CD621E86 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C33ECF3172C77C9010AB8D /* TasksView.swift */; };
+		2BD93E1B6D736083F39AB841 /* AppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1332C5BF7265C3D39F2CA587 /* AppShortcuts.swift */; };
+		2E057E67660222A8AA7D20DC /* SmartStackWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F71D747D325FDCC0EF2E0B4 /* SmartStackWidgets.swift */; };
+		2F208498423AA46F30DBC64F /* EmergencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ADBBE55C3DC1DAB997576 /* EmergencyView.swift */; };
+		2F48CBA54F557E0D99C125B9 /* PatientGlanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616FFD3939304E49A9A92C08 /* PatientGlanceView.swift */; };
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
+		3855C091FDBBE70EA4B9B819 /* AppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74D181CE253D17BFC6361AC /* AppIntents.swift */; };
+		38795F221D357E6BB4395C40 /* ABGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2217A704E7FD2F5CB1D18290 /* ABGView.swift */; };
+		44D0BC81136655E59666D9FE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A847959833F896D0E6F8CF26 /* NotificationController.swift */; };
+		46CAC9902B4F2C3CE9C13B31 /* CodeBlueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC3FCD66887F56C7D09E695 /* CodeBlueView.swift */; };
+		47FE4902D56366EAF6BD7704 /* HealthKitWorkoutKeepAlive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AE7647807FF03EB641C19B /* HealthKitWorkoutKeepAlive.swift */; };
 		4D22ABE92AF431CB00220026 /* CapApp-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = 4D22ABE82AF431CB00220026 /* CapApp-SPM */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
@@ -15,12 +29,100 @@
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
+		5BB56729C2FC89FE0851F823 /* WatchlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD1EFE535FCA5ECF5699BE5 /* WatchlistView.swift */; };
+		609723A7F0D6CFEE962FA782 /* WidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E3549499CEB6DBC70AEE29 /* WidgetViews.swift */; };
+		6366AD955099C50368EC024C /* StewardMDWatchWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 67391FBC62E08BF4BBC47984 /* StewardMDWatchWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		688A842689091544CC36BCC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91E2AE1458EB339385306072 /* Assets.xcassets */; };
+		6BB162818495E902D36275FF /* DrugLookupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189908410136B39DB0F7CA6C /* DrugLookupView.swift */; };
+		8062C4DE0BD84ACEF6B6D5A0 /* GlancePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E2442E0554CE39673AE689 /* GlancePublisher.swift */; };
+		862FEA45057A1C3A0F096705 /* StewardMDWatchCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2C39ECE45AC5F875C41154F8 /* StewardMDWatchCore */; };
+		8D196793C78622E04EC4B60E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3C540FAEE1A804CEC2CF562 /* Foundation.framework */; };
+		927DFB1EB0415FCDA3F140A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3C540FAEE1A804CEC2CF562 /* Foundation.framework */; };
+		94291BC1674B1D16320B56AA /* WatchServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1E3804321B7BFF48CCD52 /* WatchServices.swift */; };
+		94B78EF587835CF1D88CDEF4 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A7637C6EBF4C18C442C57 /* WatchConnectivityManager.swift */; };
+		96446A68FE56A3AFC234BC8B /* HandoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A15566CE257AB5016233F /* HandoverView.swift */; };
+		9F668DCEE3618475CBCCF82C /* WardSyncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F968246DA3B85ACF4DD711B5 /* WardSyncView.swift */; };
+		A150FE64757CC8A0968F3C52 /* CoreMotionCompressionDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB3B052EB4EA9A1470056E1 /* CoreMotionCompressionDetector.swift */; };
+		A2C4BE94D3CAE4C7D17882F1 /* WatchAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A09F8BA987D4011CA6AE718 /* WatchAppDelegate.swift */; };
+		AEF7E27A9AD67FF6D8111580 /* FeatureFlagsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A793C9DBB32C59822ED00E2C /* FeatureFlagsModel.swift */; };
+		B8731D5D034970ADE09D4FF8 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0317D6703B3A091AB78A63A /* HapticManager.swift */; };
+		B897D6CA0F7E5F2145DA5A8B /* CriticalLabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE1E6ED6AABEFA8C6A35EAE /* CriticalLabsView.swift */; };
+		BFED5C9DD942983182D201EC /* StewardMDWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 02DAB70050CD079FDE101F07 /* StewardMDWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C1EAA8852472A836C0BAC1FB /* ProcedureTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC540592C55863D8F5369554 /* ProcedureTimerView.swift */; };
+		C29675E1861308BE857E7A93 /* CalculatorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A6233B253891C783A271B7 /* CalculatorDetailView.swift */; };
+		D2F6359DE60F7B0232C5B0D6 /* SepsisTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A04EEB9E8BCA566C29D7BF1 /* SepsisTimerView.swift */; };
+		D56EFCBA122688F6BA3B8AA0 /* CaptureLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9014FB256AF3B9A99AA9A2 /* CaptureLog.swift */; };
+		D75636B6588071D3EB2ED39F /* RootListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E7623FFBFC46A500B679F6 /* RootListView.swift */; };
+		D8046BFEA76AFB6859BA8AF3 /* WatchSessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5AE586BE3B368CDAFEBA00 /* WatchSessionStore.swift */; };
+		DD67B0DA01B01963EE3CC764 /* LabDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ACCF20829205F8234AF5BD /* LabDetailView.swift */; };
+		EC0EBD0C0E810E5924753203 /* ReferenceGauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C388BCD1A278CBFA7016CCB /* ReferenceGauge.swift */; };
+		EC82DE89E633CE88838D4CBA /* StewardMDWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1A11CA3EED1EE79D8C0698 /* StewardMDWatchApp.swift */; };
+		F0FE3E640595B25C3BCEA8A7 /* GlanceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88CC99F79B9CFDDDB5B768D /* GlanceProvider.swift */; };
 		F3F0D0FB2FFBD2D600669E55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3F0D0FA2FFBD2D600669E55 /* GoogleService-Info.plist */; };
+		F427052757D6449ED13E3872 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AB96E6B44082D5A156F1A4 /* AppRouter.swift */; };
+		F522340F9324B0F6BE1B95DF /* StewardMDWatchCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1C90F802EAA5AC287545C6F0 /* StewardMDWatchCore */; };
 		FE0000000000000000000002 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = FE0000000000000000000001 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		96A3C78162AE65775EAAA8AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE40D4F41B6077727F605178;
+			remoteInfo = StewardMDWatch;
+		};
+		F668DDDF5CB93D5F94441D89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9467A3F1DF82675802A6C0F;
+			remoteInfo = StewardMDWatchWidgets;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		621D5DDB446340D5A32A5CA4 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6366AD955099C50368EC024C /* StewardMDWatchWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB97A289F606458ADC44A470 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				BFED5C9DD942983182D201EC /* StewardMDWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		02DAB70050CD079FDE101F07 /* StewardMDWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StewardMDWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		08E1E3804321B7BFF48CCD52 /* WatchServices.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchServices.swift; sourceTree = "<group>"; };
+		0A04EEB9E8BCA566C29D7BF1 /* SepsisTimerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SepsisTimerView.swift; sourceTree = "<group>"; };
+		0AB3B052EB4EA9A1470056E1 /* CoreMotionCompressionDetector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CoreMotionCompressionDetector.swift; sourceTree = "<group>"; };
+		0BC3FCD66887F56C7D09E695 /* CodeBlueView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CodeBlueView.swift; sourceTree = "<group>"; };
+		0D03DD04D5510DB4B85DC603 /* StewardMDWatch.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = StewardMDWatch.entitlements; sourceTree = "<group>"; };
+		0E5AE586BE3B368CDAFEBA00 /* WatchSessionStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchSessionStore.swift; sourceTree = "<group>"; };
+		1332C5BF7265C3D39F2CA587 /* AppShortcuts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppShortcuts.swift; sourceTree = "<group>"; };
+		17A94E8B160DB336D8882CB9 /* SeverityChip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SeverityChip.swift; sourceTree = "<group>"; };
+		189908410136B39DB0F7CA6C /* DrugLookupView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DrugLookupView.swift; sourceTree = "<group>"; };
+		2217A704E7FD2F5CB1D18290 /* ABGView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ABGView.swift; sourceTree = "<group>"; };
+		27FE5F0CFEB5D57BFAAF2F0E /* StewardMDWatchWidgets.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = StewardMDWatchWidgets.entitlements; sourceTree = "<group>"; };
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
+		3AFABCE28D9A5BFE10775EE5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42C33ECF3172C77C9010AB8D /* TasksView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		498218112516F224AA01CE53 /* Complications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Complications.swift; sourceTree = "<group>"; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
 		504EC3041FED79650016851F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -29,12 +131,52 @@
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+		5F71D747D325FDCC0EF2E0B4 /* SmartStackWidgets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartStackWidgets.swift; sourceTree = "<group>"; };
+		616FFD3939304E49A9A92C08 /* PatientGlanceView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PatientGlanceView.swift; sourceTree = "<group>"; };
+		62E2442E0554CE39673AE689 /* GlancePublisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GlancePublisher.swift; sourceTree = "<group>"; };
+		67391FBC62E08BF4BBC47984 /* StewardMDWatchWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StewardMDWatchWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE1E6ED6AABEFA8C6A35EAE /* CriticalLabsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CriticalLabsView.swift; sourceTree = "<group>"; };
+		77A6233B253891C783A271B7 /* CalculatorDetailView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalculatorDetailView.swift; sourceTree = "<group>"; };
+		7C1A11CA3EED1EE79D8C0698 /* StewardMDWatchApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StewardMDWatchApp.swift; sourceTree = "<group>"; };
+		80AE7647807FF03EB641C19B /* HealthKitWorkoutKeepAlive.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HealthKitWorkoutKeepAlive.swift; sourceTree = "<group>"; };
+		89E7623FFBFC46A500B679F6 /* RootListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RootListView.swift; sourceTree = "<group>"; };
+		8A09F8BA987D4011CA6AE718 /* WatchAppDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchAppDelegate.swift; sourceTree = "<group>"; };
+		8B9AF4B5082182356C7C2A81 /* CalculatorsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalculatorsView.swift; sourceTree = "<group>"; };
+		8BD1EFE535FCA5ECF5699BE5 /* WatchlistView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchlistView.swift; sourceTree = "<group>"; };
+		8D0A7637C6EBF4C18C442C57 /* WatchConnectivityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManager.swift; sourceTree = "<group>"; };
+		90AB96E6B44082D5A156F1A4 /* AppRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		91E2AE1458EB339385306072 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
+		9C388BCD1A278CBFA7016CCB /* ReferenceGauge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReferenceGauge.swift; sourceTree = "<group>"; };
+		A793C9DBB32C59822ED00E2C /* FeatureFlagsModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeatureFlagsModel.swift; sourceTree = "<group>"; };
+		A847959833F896D0E6F8CF26 /* NotificationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		A88CC99F79B9CFDDDB5B768D /* GlanceProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GlanceProvider.swift; sourceTree = "<group>"; };
+		AB59296FF1B65DA08543CEF0 /* StewardMDWatchWidgets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StewardMDWatchWidgets.swift; sourceTree = "<group>"; };
+		B4F44732ECAD3D574C5E7699 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1E3549499CEB6DBC70AEE29 /* WidgetViews.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetViews.swift; sourceTree = "<group>"; };
+		D0317D6703B3A091AB78A63A /* HapticManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		D08ADBBE55C3DC1DAB997576 /* EmergencyView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EmergencyView.swift; sourceTree = "<group>"; };
+		D4ACCF20829205F8234AF5BD /* LabDetailView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LabDetailView.swift; sourceTree = "<group>"; };
+		DB4A15566CE257AB5016233F /* HandoverView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HandoverView.swift; sourceTree = "<group>"; };
+		DB9014FB256AF3B9A99AA9A2 /* CaptureLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CaptureLog.swift; sourceTree = "<group>"; };
+		DC540592C55863D8F5369554 /* ProcedureTimerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProcedureTimerView.swift; sourceTree = "<group>"; };
+		E3C540FAEE1A804CEC2CF562 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		F3F0D0FA2FFBD2D600669E55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F74D181CE253D17BFC6361AC /* AppIntents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppIntents.swift; sourceTree = "<group>"; };
+		F968246DA3B85ACF4DD711B5 /* WardSyncView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WardSyncView.swift; sourceTree = "<group>"; };
 		FE0000000000000000000001 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1FFB4D8CB257E6F4994454A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				927DFB1EB0415FCDA3F140A2 /* Foundation.framework in Frameworks */,
+				F522340F9324B0F6BE1B95DF /* StewardMDWatchCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		504EC3011FED79650016851F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -43,15 +185,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		866EE1AD9C6F5C47A55E66CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D196793C78622E04EC4B60E /* Foundation.framework in Frameworks */,
+				862FEA45057A1C3A0F096705 /* StewardMDWatchCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08533240716DDA15F33A4C8A /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				A847959833F896D0E6F8CF26 /* NotificationController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		504EC2FB1FED79650016851F = {
 			isa = PBXGroup;
 			children = (
 				958DCC722DB07C7200EA8C5F /* debug.xcconfig */,
 				504EC3061FED79650016851F /* App */,
 				504EC3051FED79650016851F /* Products */,
+				EE561586C8EAAA5DE1C420C9 /* Frameworks */,
+				693D6486FF14A1E7719C064C /* StewardMDWatch */,
+				79F03F4D1E446BA3F0969D01 /* StewardMDWatchWidgets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				504EC3041FED79650016851F /* App.app */,
+				02DAB70050CD079FDE101F07 /* StewardMDWatch.app */,
+				67391FBC62E08BF4BBC47984 /* StewardMDWatchWidgets.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,6 +244,105 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		693D6486FF14A1E7719C064C /* StewardMDWatch */ = {
+			isa = PBXGroup;
+			children = (
+				2217A704E7FD2F5CB1D18290 /* ABGView.swift */,
+				91E2AE1458EB339385306072 /* Assets.xcassets */,
+				77A6233B253891C783A271B7 /* CalculatorDetailView.swift */,
+				8B9AF4B5082182356C7C2A81 /* CalculatorsView.swift */,
+				0BC3FCD66887F56C7D09E695 /* CodeBlueView.swift */,
+				7D8EA77C486CD2BF18C02FCA /* Components */,
+				6CE1E6ED6AABEFA8C6A35EAE /* CriticalLabsView.swift */,
+				189908410136B39DB0F7CA6C /* DrugLookupView.swift */,
+				D08ADBBE55C3DC1DAB997576 /* EmergencyView.swift */,
+				DB4A15566CE257AB5016233F /* HandoverView.swift */,
+				3AFABCE28D9A5BFE10775EE5 /* Info.plist */,
+				9336E5E2CD9E8D994C4C8ACA /* Intents */,
+				D4ACCF20829205F8234AF5BD /* LabDetailView.swift */,
+				08533240716DDA15F33A4C8A /* Notifications */,
+				616FFD3939304E49A9A92C08 /* PatientGlanceView.swift */,
+				DC540592C55863D8F5369554 /* ProcedureTimerView.swift */,
+				89E7623FFBFC46A500B679F6 /* RootListView.swift */,
+				0A04EEB9E8BCA566C29D7BF1 /* SepsisTimerView.swift */,
+				0D03DD04D5510DB4B85DC603 /* StewardMDWatch.entitlements */,
+				7C1A11CA3EED1EE79D8C0698 /* StewardMDWatchApp.swift */,
+				B9E8E654E38D15200BC3824F /* System */,
+				F968246DA3B85ACF4DD711B5 /* WardSyncView.swift */,
+				0E5AE586BE3B368CDAFEBA00 /* WatchSessionStore.swift */,
+				8BD1EFE535FCA5ECF5699BE5 /* WatchlistView.swift */,
+				42C33ECF3172C77C9010AB8D /* TasksView.swift */,
+			);
+			name = StewardMDWatch;
+			path = ../StewardMDWatch;
+			sourceTree = "<group>";
+		};
+		70A51C8088E80849B83F1CD6 /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				E3C540FAEE1A804CEC2CF562 /* Foundation.framework */,
+			);
+			name = watchOS;
+			sourceTree = "<group>";
+		};
+		79F03F4D1E446BA3F0969D01 /* StewardMDWatchWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				498218112516F224AA01CE53 /* Complications.swift */,
+				A88CC99F79B9CFDDDB5B768D /* GlanceProvider.swift */,
+				B4F44732ECAD3D574C5E7699 /* Info.plist */,
+				5F71D747D325FDCC0EF2E0B4 /* SmartStackWidgets.swift */,
+				27FE5F0CFEB5D57BFAAF2F0E /* StewardMDWatchWidgets.entitlements */,
+				AB59296FF1B65DA08543CEF0 /* StewardMDWatchWidgets.swift */,
+				C1E3549499CEB6DBC70AEE29 /* WidgetViews.swift */,
+			);
+			name = StewardMDWatchWidgets;
+			path = ../StewardMDWatchWidgets;
+			sourceTree = "<group>";
+		};
+		7D8EA77C486CD2BF18C02FCA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				9C388BCD1A278CBFA7016CCB /* ReferenceGauge.swift */,
+				17A94E8B160DB336D8882CB9 /* SeverityChip.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		9336E5E2CD9E8D994C4C8ACA /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				F74D181CE253D17BFC6361AC /* AppIntents.swift */,
+				1332C5BF7265C3D39F2CA587 /* AppShortcuts.swift */,
+			);
+			path = Intents;
+			sourceTree = "<group>";
+		};
+		B9E8E654E38D15200BC3824F /* System */ = {
+			isa = PBXGroup;
+			children = (
+				90AB96E6B44082D5A156F1A4 /* AppRouter.swift */,
+				A793C9DBB32C59822ED00E2C /* FeatureFlagsModel.swift */,
+				62E2442E0554CE39673AE689 /* GlancePublisher.swift */,
+				D0317D6703B3A091AB78A63A /* HapticManager.swift */,
+				8A09F8BA987D4011CA6AE718 /* WatchAppDelegate.swift */,
+				8D0A7637C6EBF4C18C442C57 /* WatchConnectivityManager.swift */,
+				08E1E3804321B7BFF48CCD52 /* WatchServices.swift */,
+				0AB3B052EB4EA9A1470056E1 /* CoreMotionCompressionDetector.swift */,
+				80AE7647807FF03EB641C19B /* HealthKitWorkoutKeepAlive.swift */,
+				DB9014FB256AF3B9A99AA9A2 /* CaptureLog.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		EE561586C8EAAA5DE1C420C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70A51C8088E80849B83F1CD6 /* watchOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -90,10 +353,12 @@
 				504EC3001FED79650016851F /* Sources */,
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
+				EB97A289F606458ADC44A470 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9BA663798674D08903D8B07B /* PBXTargetDependency */,
 			);
 			name = App;
 			packageProductDependencies = (
@@ -102,6 +367,48 @@
 			productName = App;
 			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
+		};
+		CE40D4F41B6077727F605178 /* StewardMDWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADF6B93E22ECAD416B3C23C8 /* Build configuration list for PBXNativeTarget "StewardMDWatch" */;
+			buildPhases = (
+				332E8B710C07E63FEDCFD297 /* Sources */,
+				1FFB4D8CB257E6F4994454A9 /* Frameworks */,
+				A2E0CECC8AD96AFA2DDA007A /* Resources */,
+				621D5DDB446340D5A32A5CA4 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E785D4D3F57E74EED0D9D9E /* PBXTargetDependency */,
+			);
+			name = StewardMDWatch;
+			packageProductDependencies = (
+				1C90F802EAA5AC287545C6F0 /* StewardMDWatchCore */,
+			);
+			productName = StewardMDWatch;
+			productReference = 02DAB70050CD079FDE101F07 /* StewardMDWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F9467A3F1DF82675802A6C0F /* StewardMDWatchWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B85583918CEE1F6D00BAF5DA /* Build configuration list for PBXNativeTarget "StewardMDWatchWidgets" */;
+			buildPhases = (
+				0705F46BBBEEEC1B6CA9302C /* Sources */,
+				866EE1AD9C6F5C47A55E66CD /* Frameworks */,
+				43BC71EB04FEDA825BB5DD14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StewardMDWatchWidgets;
+			packageProductDependencies = (
+				2C39ECE45AC5F875C41154F8 /* StewardMDWatchCore */,
+			);
+			productName = StewardMDWatchWidgets;
+			productReference = 67391FBC62E08BF4BBC47984 /* StewardMDWatchWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -130,17 +437,27 @@
 			mainGroup = 504EC2FB1FED79650016851F;
 			packageReferences = (
 				D4C12C0A2AAA248700AAC8A2 /* XCLocalSwiftPackageReference "CapApp-SPM" */,
+				0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "StewardMDWatchCore" */,
 			);
 			productRefGroup = 504EC3051FED79650016851F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				504EC3031FED79650016851F /* App */,
+				CE40D4F41B6077727F605178 /* StewardMDWatch */,
+				F9467A3F1DF82675802A6C0F /* StewardMDWatchWidgets */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		43BC71EB04FEDA825BB5DD14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		504EC3021FED79650016851F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -156,9 +473,69 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A2E0CECC8AD96AFA2DDA007A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				688A842689091544CC36BCC9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0705F46BBBEEEC1B6CA9302C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				242D72C9FFF6237CC64CB74F /* Complications.swift in Sources */,
+				F0FE3E640595B25C3BCEA8A7 /* GlanceProvider.swift in Sources */,
+				2E057E67660222A8AA7D20DC /* SmartStackWidgets.swift in Sources */,
+				10E793FAC38049EF46827A4E /* StewardMDWatchWidgets.swift in Sources */,
+				609723A7F0D6CFEE962FA782 /* WidgetViews.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		332E8B710C07E63FEDCFD297 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38795F221D357E6BB4395C40 /* ABGView.swift in Sources */,
+				C29675E1861308BE857E7A93 /* CalculatorDetailView.swift in Sources */,
+				1BE35EFA0D03A09DC0333B5F /* CalculatorsView.swift in Sources */,
+				46CAC9902B4F2C3CE9C13B31 /* CodeBlueView.swift in Sources */,
+				EC0EBD0C0E810E5924753203 /* ReferenceGauge.swift in Sources */,
+				0EE51F971E8F2449C416BA85 /* SeverityChip.swift in Sources */,
+				B897D6CA0F7E5F2145DA5A8B /* CriticalLabsView.swift in Sources */,
+				6BB162818495E902D36275FF /* DrugLookupView.swift in Sources */,
+				2F208498423AA46F30DBC64F /* EmergencyView.swift in Sources */,
+				96446A68FE56A3AFC234BC8B /* HandoverView.swift in Sources */,
+				3855C091FDBBE70EA4B9B819 /* AppIntents.swift in Sources */,
+				2BD93E1B6D736083F39AB841 /* AppShortcuts.swift in Sources */,
+				DD67B0DA01B01963EE3CC764 /* LabDetailView.swift in Sources */,
+				44D0BC81136655E59666D9FE /* NotificationController.swift in Sources */,
+				2F48CBA54F557E0D99C125B9 /* PatientGlanceView.swift in Sources */,
+				C1EAA8852472A836C0BAC1FB /* ProcedureTimerView.swift in Sources */,
+				D75636B6588071D3EB2ED39F /* RootListView.swift in Sources */,
+				D2F6359DE60F7B0232C5B0D6 /* SepsisTimerView.swift in Sources */,
+				EC82DE89E633CE88838D4CBA /* StewardMDWatchApp.swift in Sources */,
+				F427052757D6449ED13E3872 /* AppRouter.swift in Sources */,
+				AEF7E27A9AD67FF6D8111580 /* FeatureFlagsModel.swift in Sources */,
+				8062C4DE0BD84ACEF6B6D5A0 /* GlancePublisher.swift in Sources */,
+				B8731D5D034970ADE09D4FF8 /* HapticManager.swift in Sources */,
+				A2C4BE94D3CAE4C7D17882F1 /* WatchAppDelegate.swift in Sources */,
+				94B78EF587835CF1D88CDEF4 /* WatchConnectivityManager.swift in Sources */,
+				94291BC1674B1D16320B56AA /* WatchServices.swift in Sources */,
+				9F668DCEE3618475CBCCF82C /* WardSyncView.swift in Sources */,
+				D8046BFEA76AFB6859BA8AF3 /* WatchSessionStore.swift in Sources */,
+				5BB56729C2FC89FE0851F823 /* WatchlistView.swift in Sources */,
+				2709EF0D5E484D73CD621E86 /* TasksView.swift in Sources */,
+				A150FE64757CC8A0968F3C52 /* CoreMotionCompressionDetector.swift in Sources */,
+				47FE4902D56366EAF6BD7704 /* HealthKitWorkoutKeepAlive.swift in Sources */,
+				D56EFCBA122688F6BA3B8AA0 /* CaptureLog.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		504EC3001FED79650016851F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -168,6 +545,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3E785D4D3F57E74EED0D9D9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = StewardMDWatchWidgets;
+			target = F9467A3F1DF82675802A6C0F /* StewardMDWatchWidgets */;
+			targetProxy = F668DDDF5CB93D5F94441D89 /* PBXContainerItemProxy */;
+		};
+		9BA663798674D08903D8B07B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = StewardMDWatch;
+			target = CE40D4F41B6077727F605178 /* StewardMDWatch */;
+			targetProxy = 96A3C78162AE65775EAAA8AF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		504EC30B1FED79650016851F /* Main.storyboard */ = {
@@ -189,6 +581,26 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3F55C2CE3CEBB0AFFCD06AAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ../StewardMDWatchWidgets/StewardMDWatchWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ../StewardMDWatchWidgets/Info.plist;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.watchkitapp.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
 		504EC3141FED79650016851F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 958DCC722DB07C7200EA8C5F /* debug.xcconfig */;
@@ -306,7 +718,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5QY4LUKX23;
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
@@ -332,7 +744,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5QY4LUKX23;
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
@@ -347,6 +759,76 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9B1447695530074931E74106 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ../StewardMDWatch/StewardMDWatch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ../StewardMDWatch/Info.plist;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		D5CD5908CFB9E53852443343 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ../StewardMDWatch/StewardMDWatch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ../StewardMDWatch/Info.plist;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		E80676F815D5DCB78EE8682A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ../StewardMDWatchWidgets/StewardMDWatchWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ../StewardMDWatchWidgets/Info.plist;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.watchkitapp.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -371,9 +853,31 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		ADF6B93E22ECAD416B3C23C8 /* Build configuration list for PBXNativeTarget "StewardMDWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B1447695530074931E74106 /* Release */,
+				D5CD5908CFB9E53852443343 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B85583918CEE1F6D00BAF5DA /* Build configuration list for PBXNativeTarget "StewardMDWatchWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E80676F815D5DCB78EE8682A /* Release */,
+				3F55C2CE3CEBB0AFFCD06AAD /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "StewardMDWatchCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../Packages/StewardMDWatchCore;
+		};
 		D4C12C0A2AAA248700AAC8A2 /* XCLocalSwiftPackageReference "CapApp-SPM" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "CapApp-SPM";
@@ -381,6 +885,16 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1C90F802EAA5AC287545C6F0 /* StewardMDWatchCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "StewardMDWatchCore" */;
+			productName = StewardMDWatchCore;
+		};
+		2C39ECE45AC5F875C41154F8 /* StewardMDWatchCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E3A3A4D945C5172FA4E4427 /* XCLocalSwiftPackageReference "StewardMDWatchCore" */;
+			productName = StewardMDWatchCore;
+		};
 		4D22ABE82AF431CB00220026 /* CapApp-SPM */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D4C12C0A2AAA248700AAC8A2 /* XCLocalSwiftPackageReference "CapApp-SPM" */;

@@ -1,0 +1,52 @@
+name: OTA Release (live update)
+
+# Publishes the CURRENT main web build as an OTA bundle (Cloudflare R2 + the stewardmd-api Worker)
+# that installed native apps pick up on next launch — NO App Store release. Triggered from the admin
+# console (POST /api/ota/release → workflow_dispatch) or manually from the GitHub Actions UI.
+#
+# Requires repo/environment secrets: CLOUDFLARE_API_TOKEN (with R2 edit) + CLOUDFLARE_ACCOUNT_ID
+# (already used by deploy-worker). Reuses the "production" Environment so an OTA push can require a
+# one-tap reviewer approval, same as the Worker deploy.
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: "OTA channel"
+        type: choice
+        options: ["production", "beta"]
+        default: "production"
+      min_native:
+        description: "Minimum native build number that accepts this bundle (the first build shipped WITH the updater plugin)"
+        required: true
+        default: "3"
+
+permissions:
+  contents: read
+
+# Never run two OTA releases at once (they both repoint the same channel pointer).
+concurrency:
+  group: ota-release-${{ github.event.inputs.channel }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # Gated by the "production" Environment (add a required reviewer there for a one-tap approval gate).
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      # build:www is a buildless bash assembly (no deps); ota-release.mjs uses node built-ins + npx wrangler + zip.
+      - name: Assemble web bundle
+        run: npm run build:www
+      - name: Publish OTA bundle
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node scripts/ota-release.mjs --min-native "${{ github.event.inputs.min_native }}" --channel "${{ github.event.inputs.channel }}"
+      - name: Summary
+        if: always()
+        run: echo "OTA channel=${{ github.event.inputs.channel }} min-native=${{ github.event.inputs.min_native }} — see the step logs for the published version." >> "$GITHUB_STEP_SUMMARY"

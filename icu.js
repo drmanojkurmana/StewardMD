@@ -1591,7 +1591,7 @@
   function importProgress(msg, err) {
     var el = document.getElementById("icuImpOv");
     if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
-    el.innerHTML = '<div class="icu-imp-box">' + '<button class="icu-imp-x" id="icuImpX" aria-label="Close">✕</button>' + (err ? '<div class="icu-imp-err">' + esc(msg) + '</div><button class="icu-btn" id="icuImpClose">Close</button>' : '<div class="icu-imp-spin">◐</div><div>' + esc(msg) + "</div>") + "</div>";
+    el.innerHTML = '<div class="icu-imp-box">' + '<button class="icu-imp-x" id="icuImpX" aria-label="Close">' + ico("close","✕") + '</button>' + (err ? '<div class="icu-imp-err">' + esc(msg) + '</div><button class="icu-btn" id="icuImpClose">Close</button>' : '<div class="icu-imp-spin">◐</div><div>' + esc(msg) + "</div>") + "</div>";
     var x = el.querySelector("#icuImpX"); if (x) x.addEventListener("click", function () { el.remove(); });   // always-present dismiss, even while the spinner is shown
     var c = el.querySelector("#icuImpClose"); if (c) c.addEventListener("click", function () { el.remove(); });
   }
@@ -1715,21 +1715,21 @@
         '<input data-impk="' + k + '" aria-label="' + esc(IMPORT_LBL[k] || k) + '" value="' + esc(val) + '" ' + (k === "mode" ? 'type="text"' : 'type="number" step="any" inputmode="decimal"') + '>' + dup + "</label>";
     }).join("");
     var linesPanel = lines.length ? (
-      '<div class="icu-imp-note" style="margin-top:8px">📝 <b>Recognized on-device</b> — tap a value to drop it into the focused box.</div>' +
+      '<div class="icu-imp-note" style="margin-top:8px">' + ico("note","📝") + ' <b>Recognized on-device</b> — tap a value to drop it into the focused box.</div>' +
       '<div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;max-height:170px;overflow:auto">' +
       lines.map(function (ln) { return '<button type="button" class="icu-imp-line" data-line="' + esc(ln) + '" style="font:600 12px var(--font);background:var(--panel2,#0F1A2B);border:1px solid var(--border,#1E2B43);color:var(--ink,#E7EDF5);border-radius:8px;padding:6px 9px;cursor:pointer;text-align:left">' + esc(ln) + '</button>'; }).join("") +
       '</div>'
     ) : "";
     var manual = (source === "Manual");
-    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
+    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values<button class="icu-imp-x" id="icuImpX">' + ico("close","✕") + '</button></div>' +
       '<div class="icu-imp-note">' + (manual
-        ? '✎ <b>Manual entry</b> — confirm your values (checked against the current reading) before they enter the patient record.'
+        ? ico("edit","✎") + ' <b>Manual entry</b> — confirm your values (checked against the current reading) before they enter the patient record.'
         : (aiMode
-          ? '📷 Read on-device, structured by AI — <b>verify every value</b> against the report before applying.'
-          : '📷 Read on-device — tap the recognized values below or type them. <b>Verify every value.</b>')) + ' Nothing is added until you confirm.</div>' +
+          ? ico("camera","📷") + ' Read on-device, structured by AI — <b>verify every value</b> against the report before applying.'
+          : ico("camera","📷") + ' Read on-device — tap the recognized values below or type them. <b>Verify every value.</b>')) + ' Nothing is added until you confirm.</div>' +
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + rows + "</div>" + linesPanel +
-      '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">✓ Add to patient context</button></div></div>';
+      '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">' + ico("check","✓") + ' Add to patient context</button></div></div>';
     function close() { el.remove(); }
     var focused = el.querySelector("[data-impk]");
     el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });
@@ -1798,15 +1798,15 @@
       return '<div style="font:800 12px var(--font);color:var(--primary,#0f766e);margin:12px 0 6px;text-transform:uppercase;letter-spacing:.04em">' + m[1] + '</div>' + rows;
     }).join("");
     var linesPanel = lines.length ? (
-      '<div class="icu-imp-note" style="margin-top:8px">📝 <b>Recognized on-device</b> — tap a value to drop it into the focused box.</div>' +
+      '<div class="icu-imp-note" style="margin-top:8px">' + ico("note","📝") + ' <b>Recognized on-device</b> — tap a value to drop it into the focused box.</div>' +
       '<div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;max-height:150px;overflow:auto">' +
       lines.map(function (ln) { return '<button type="button" class="icu-imp-line" data-line="' + esc(ln) + '" style="font:600 12px var(--font);background:var(--panel2,#0F1A2B);border:1px solid var(--border,#1E2B43);color:var(--ink,#E7EDF5);border-radius:8px;padding:6px 9px;cursor:pointer;text-align:left">' + esc(ln) + '</button>'; }).join("") + '</div>'
     ) : "";
-    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values' + (note ? ' <span style="font:600 11px var(--font);color:var(--muted)">· ' + esc(note) + '</span>' : '') + '<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
-      '<div class="icu-imp-note">' + (aiMode ? '📷 Read from your report(s) — <b>verify every value</b> before applying.' : '📷 Tap the recognized values below or type them. <b>Verify every value.</b>') + ' Nothing is added until you confirm.</div>' +
+    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values' + (note ? ' <span style="font:600 11px var(--font);color:var(--muted)">· ' + esc(note) + '</span>' : '') + '<button class="icu-imp-x" id="icuImpX">' + ico("close","✕") + '</button></div>' +
+      '<div class="icu-imp-note">' + (aiMode ? ico("camera","📷") + ' Read from your report(s) — <b>verify every value</b> before applying.' : ico("camera","📷") + ' Tap the recognized values below or type them. <b>Verify every value.</b>') + ' Nothing is added until you confirm.</div>' +
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + groupsHTML + "</div>" + linesPanel +
-      '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">✓ Add to patient context</button></div></div>';
+      '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">' + ico("check","✓") + ' Add to patient context</button></div></div>';
     function close() { el.remove(); }
     var focused = el.querySelector("[data-impk]");
     el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });
@@ -1883,7 +1883,7 @@
   function trendCard(title, series, opts) { return '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">' + esc(title) + "</div>" + trendGraph(series, opts) + "</div>"; }
   function recsCard(title, recs, flags, ev) {
     return '<div class="icu-card"><h3>' + esc(title) + "</h3>" +
-      ((flags && flags.length) ? flags.map(function (f) { return '<div class="icu-alert warn"><div><div class="am">⚠ ' + esc(f) + "</div></div></div>"; }).join("") : "") +
+      ((flags && flags.length) ? flags.map(function (f) { return '<div class="icu-alert warn"><div><div class="am">' + ico("warn","⚠") + ' ' + esc(f) + "</div></div></div>"; }).join("") : "") +
       (recs || []).map(function (r) { return '<p style="margin:9px 0 0">• ' + esc(r) + "</p>"; }).join("") + evidenceBadges(ev) + "</div>";
   }
   function winSelector() {
@@ -2197,13 +2197,13 @@
   function lwGroupChip(grp, sel) {
     var inGrp = grp.keys.filter(function (k) { return TREND_INTERP[k]; });
     var all = inGrp.length && inGrp.every(function (k) { return sel.indexOf(k) >= 0; });
-    return '<button class="icu-lw-grpall' + (all ? " on" : "") + '" data-icu-act="lwgrp:' + grp.id + '">' + (all ? "✓ " : "") + esc(grp.name) + '</button>';
+    return '<button class="icu-lw-grpall' + (all ? " on" : "") + '" data-icu-act="lwgrp:' + grp.id + '">' + (all ? ico("check","✓") + " " : "") + esc(grp.name) + '</button>';
   }
   function lwListHTML(d) {
     var sel = d.analytes || [], q = (d.q || "").trim();
     var total = 0; TREND_GROUPS.forEach(function (grp) { grp.keys.forEach(function (k) { if (TREND_INTERP[k]) total++; }); });
     var ctrl = '<div class="icu-lw-allrow" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">' +
-      '<button class="icu-lw-grpall' + (total && sel.length >= total ? " on" : "") + '" data-icu-act="lwall">' + (total && sel.length >= total ? "✓ " : "") + 'Select all</button>' +
+      '<button class="icu-lw-grpall' + (total && sel.length >= total ? " on" : "") + '" data-icu-act="lwall">' + (total && sel.length >= total ? ico("check","✓") + " " : "") + 'Select all</button>' +
       '<button class="icu-lw-grpall" data-icu-act="lwclear">Clear</button>' +
       '<span style="margin-left:auto;font:600 11.5px var(--font,system-ui);color:var(--muted,#94a3b8)">' + sel.length + ' / ' + total + ' selected</span>' +
       '</div>';
@@ -2212,7 +2212,7 @@
       if (!keys.length) return "";
       var chips = keys.map(function (k) {
         var on = sel.indexOf(k) >= 0, m = TREND_INTERP[k];
-        return '<button class="icu-lw-an' + (on ? " on" : "") + '" data-icu-act="lwtog:' + k + '" aria-pressed="' + on + '">' + (on ? "✓ " : "") + esc(m.label) + '</button>';
+        return '<button class="icu-lw-an' + (on ? " on" : "") + '" data-icu-act="lwtog:' + k + '" aria-pressed="' + on + '">' + (on ? ico("check","✓") + " " : "") + esc(m.label) + '</button>';
       }).join("");
       return '<div class="icu-lw-grp"><div class="icu-lw-grp-h">' + lwGroupChip(grp, sel) + '</div><div class="icu-lw-chips">' + chips + '</div></div>';
     }).join("");
@@ -2398,7 +2398,7 @@
   var _lytesExp = {};   // which electrolyte cards are expanded in the Electrolytes tab
   function protocolCard(p, i) {
     var open = !!_openProto[i];
-    var head = '<button data-icu-act="proto:' + i + '" style="width:100%;text-align:left;background:none;border:none;padding:14px 15px;cursor:pointer;color:var(--ink);display:flex;align-items:center;gap:9px"><span style="font-size:18px">' + p.ic + '</span><b style="font:800 15px var(--font);flex:1">' + esc(p.title) + '</b><span style="color:var(--muted)">' + (open ? "▲" : "▼") + "</span></button>";
+    var head = '<button data-icu-act="proto:' + i + '" style="width:100%;text-align:left;background:none;border:none;padding:14px 15px;cursor:pointer;color:var(--ink);display:flex;align-items:center;gap:9px"><span style="font-size:18px">' + ico(({"🦠":"microbe","🩸":"droplet","🍬":"flask","🩹":"stomach","❤️":"heart","🧠":"brain","🫁":"lungs","⚡":"bolt","🌀":"brain","🫀":"lungs","💉":"syringe"})[p.ic] || "siren", p.ic) + '</span><b style="font:800 15px var(--font);flex:1">' + esc(p.title) + '</b><span style="color:var(--muted)">' + (open ? "▲" : "▼") + "</span></button>";
     var body = open ? '<div style="padding:0 15px 14px">' +
       '<div class="icu-sec-lbl" style="margin:2px 0 4px">Checklist</div>' + p.checklist.map(function (c) { return '<div class="icu-row"><span>' + esc(c) + "</span></div>"; }).join("") +
       (p.monitoring ? '<div class="icu-sec-lbl" style="margin:9px 0 4px">Monitoring</div>' + p.monitoring.map(function (c) { return '<div class="icu-row"><span>' + esc(c) + "</span></div>"; }).join("") : "") +
@@ -2658,7 +2658,7 @@
     var j = JARGON[key]; if (!j) return;
     var old = document.getElementById("icuTipPop"); if (old) { try { old.remove(); } catch (e) {} }
     var pop = document.createElement("div"); pop.id = "icuTipPop"; pop.className = "icu-tip-pop";
-    pop.innerHTML = '<div class="icu-tip-h"><span>' + esc(j[0]) + '</span><button class="icu-tip-x" type="button" aria-label="Close">✕</button></div><div class="icu-tip-b">' + esc(j[1]) + '</div>';
+    pop.innerHTML = '<div class="icu-tip-h"><span>' + esc(j[0]) + '</span><button class="icu-tip-x" type="button" aria-label="Close">' + ico("close","✕") + '</button></div><div class="icu-tip-b">' + esc(j[1]) + '</div>';
     document.body.appendChild(pop);
     requestAnimationFrame(function () { pop.classList.add("on"); });
     function close() { pop.classList.remove("on"); setTimeout(function () { try { pop.remove(); } catch (e) {} }, 220); }
@@ -2716,9 +2716,9 @@
       crit + impBlock + expanded +
       '<div class="icu-img-acts">' +
         '<button class="icu-img-act" data-icu-act="imgexpand:' + eid + '">' + (open ? "Collapse" : "Open full report") + "</button>" +
-        '<button class="icu-img-act' + (rec.reviewed ? " on" : "") + '" data-icu-act="imgreview:' + eid + '">' + (rec.reviewed ? "✓ Reviewed" : "Mark reviewed") + "</button>" +
-        '<button class="icu-img-act' + (rec.inSummary ? " on" : "") + '" data-icu-act="imgsummary:' + eid + '">' + (rec.inSummary ? "✓ In summary" : "Add to summary") + "</button>" +
-        '<button class="icu-img-act" data-icu-act="imgassist:' + eid + '">' + (rec.assist ? "✦ AI Assist ✓" : "✦ AI Assist") + "</button>" +
+        '<button class="icu-img-act' + (rec.reviewed ? " on" : "") + '" data-icu-act="imgreview:' + eid + '">' + (rec.reviewed ? ico("check","✓") + " Reviewed" : "Mark reviewed") + "</button>" +
+        '<button class="icu-img-act' + (rec.inSummary ? " on" : "") + '" data-icu-act="imgsummary:' + eid + '">' + (rec.inSummary ? ico("check","✓") + " In summary" : "Add to summary") + "</button>" +
+        '<button class="icu-img-act" data-icu-act="imgassist:' + eid + '">' + (rec.assist ? ico("spark","✦") + " AI Assist " + ico("check","✓") : ico("spark","✦") + " AI Assist") + "</button>" +
         '<button class="icu-img-act" data-icu-act="imgedit:' + eid + '">Annotate</button>' +
         '<button class="icu-img-act" data-icu-act="imghide:' + eid + '">Hide</button>' +
       "</div></div>";
@@ -2754,7 +2754,7 @@
     var manualExtra = Object.keys(ms).filter(function (id) { return !done[id]; });   // clinician-calculated, not auto-computed (e.g. from a suggested chip)
     var suggest = linkIds.filter(function (id) { return !done[id] && !ms[id]; });
     if (!rows.length && !suggest.length && !manualExtra.length) return "";
-    var badge = ' <span class="icu-score-calc">✓ calculated</span>';
+    var badge = ' <span class="icu-score-calc">' + ico("check","✓") + ' calculated</span>';
     var scoreRow = function (id, label, val, unit, info, manual) {
       return '<div class="icu-score" data-icu-act="calc:' + esc(id) + '"><span class="icu-score-n">' + esc(label) + '</span><span class="icu-score-v">' + esc(val + (unit ? " " + unit : "")) + '</span>' + (manual ? badge : "") + (info ? '<span class="icu-score-i">' + esc(info) + '</span>' : "") + '</div>';
     };
@@ -2767,7 +2767,7 @@
     }).join("");
     body += manualExtra.map(function (id) { var m = ms[id]; return scoreRow(id, scoreCalcTitle(id), m.value, m.unit, m.info, true); }).join("");
     var sug = suggest.length ? '<div class="icu-score-sug">Suggested for “' + esc(dx) + '”: ' + suggest.map(function (id) { return '<button type="button" class="icu-score-chip" data-icu-act="calc:' + esc(id) + '">' + esc(scoreCalcTitle(id)) + '</button>'; }).join(" ") + '</div>' : "";
-    return '<div class="icu-sec-lbl">📊 Scores</div><div class="icu-card">' + body + sug +
+    return '<div class="icu-sec-lbl">' + ico("trend","📊") + ' Scores</div><div class="icu-card">' + body + sug +
       '<p class="icu-doc-sub" style="margin:8px 0 0">Auto-calculated from entered data — tap any score to open the full calculator; your calculated results are saved here. Decision-support only.</p></div>';
   }
 
@@ -2861,7 +2861,7 @@
         row("MAP", h.map, "mmHg") + row("Shock index", h.si != null ? h.si.toFixed(2) : null) + row("Heart rate", lv.hr, "bpm") +
         row("BP", (lv.sbp != null ? lv.sbp + "/" + lv.dbp : null)) + row("Lactate", lv.lactate, "mmol/L") +
         row("Urine output", lv.uop, "mL/h") + row("On vasopressors", h.pressors.length ? h.pressors.map(function (p) { return p.drug; }).join(", ") : "No") +
-        '<button class="icu-btn ghost" data-icu-act="edit:monitor">✎ Update vitals</button></div>' +
+        '<button class="icu-btn ghost" data-icu-act="edit:monitor">' + ico("edit","✎") + ' Update vitals</button></div>' +
         recsCard("Interpretation & recommendations", h.recs, h.flags, ["Surviving Sepsis", "SCCM"]) +
         trendCard("MAP trend", mapSeries(_trendWin), { band: [65, 110], unit: "mmHg" }) +
         trendCard("Lactate trend", vitalSeries("lactate", _trendWin), { unit: "mmol/L" }) +
@@ -2873,7 +2873,7 @@
       return '<div class="icu-card"><h3>Fluid Management</h3>' +
         row("Phase", r.phase) + row("Intake (24h)", f.intake24h, "mL") + row("Output (24h)", f.output24h, "mL") +
         row("Urine (24h)", f.urine24h, "mL") + r.rows.map(function (x) { return row(x[0], x[1]); }).join("") +
-        '<button class="icu-btn ghost" data-icu-act="edit:flowsheet">✎ Update fluid balance</button></div>' +
+        '<button class="icu-btn ghost" data-icu-act="edit:flowsheet">' + ico("edit","✎") + ' Update fluid balance</button></div>' +
         recsCard("Strategy & warnings", r.recs, r.flags, ["Surviving Sepsis", "ROSE concept", "KDIGO"]) +
         trendCard("Urine output trend", vitalSeries("uop", _trendWin), { unit: "mL/h" });
     },
@@ -2890,12 +2890,12 @@
       var out = '<div class="icu-sec-lbl">' + ico("flask", "🧪") + ' Electrolytes &amp; correction</div>';
       if (!hasAny) {
         return out + '<div class="icu-card"><div class="icu-empty">No electrolyte values entered yet.</div>' +
-          '<button class="icu-btn" data-icu-act="edit:labs">✎ Enter electrolytes</button></div>';
+          '<button class="icu-btn" data-icu-act="edit:labs">' + ico("edit","✎") + ' Enter electrolytes</button></div>';
       }
       var grid = '<div class="icu-vitals">' + Object.keys(map).map(function (k) { return vitalCard(labels[k], map[k].v, "", map[k].s); }).join("") + "</div>";
       // provenance line — where these electrolyte values came from + freshness
       var srcs = {}; keys.forEach(function (k) { var s = (_raw.src || {})[k]; if (s && L[k] != null) srcs[s.source] = Math.max(srcs[s.source] || 0, s.ts || 0); });
-      var srcLine = Object.keys(srcs).length ? '<div class="icu-src">' + Object.keys(srcs).map(function (s) { return "📎 " + esc(s) + " · " + fmtAgo(srcs[s]); }).join("  ·  ") + "</div>" : "";
+      var srcLine = Object.keys(srcs).length ? '<div class="icu-src">' + Object.keys(srcs).map(function (s) { return ico("link","📎") + " " + esc(s) + " · " + fmtAgo(srcs[s]); }).join("  ·  ") + "</div>" : "";
       grid += srcLine;
       // Correction guidance rendered INLINE (no redirect) — reuses the validated Electrolyte Engine
       // analyzers via ELYTE.analyze(). ICU labs are now stored in CONVENTIONAL (Indian) units
@@ -2919,7 +2919,7 @@
         '</div>';
       }).join("");
       return out + grid + '<div class="icu-sec-lbl" style="margin-top:8px">Correction targets · tap to expand</div>' + cards +
-        '<div class="icu-card"><button class="icu-btn ghost" data-icu-act="edit:labs">✎ Update electrolytes</button>' +
+        '<div class="icu-card"><button class="icu-btn ghost" data-icu-act="edit:labs">' + ico("edit","✎") + ' Update electrolytes</button>' +
         '<button class="icu-btn ghost" data-icu-act="launch:elyte">Open full Electrolyte Engine (all analytes · unit toggle)</button>' +
         '<p style="margin:8px 0 0;color:var(--muted);font:600 11px var(--font)">Conventional (Indian) units — mg/dL · mEq/L · g/dL, as entered in Labs.</p></div>';
     },
@@ -2928,13 +2928,13 @@
       var head = '<div class="icu-card"><h3>ABG &amp; Acid–Base</h3>' +
         row("pH", g.ph) + row("PaCO₂", g.paco2, "mmHg") + row("PaO₂", g.pao2, "mmHg") +
         row("HCO₃⁻", g.hco3, "mEq/L") + row("FiO₂", g.fio2, "%") + row("Base excess", g.be) +
-        '<button class="icu-btn ghost" data-icu-act="edit:abg">✎ Update ABG</button></div>';
+        '<button class="icu-btn ghost" data-icu-act="edit:abg">' + ico("edit","✎") + ' Update ABG</button></div>';
       if (!r) return head + '<div class="icu-card"><div class="icu-empty">Enter pH, PaCO₂ and HCO₃ to interpret. (Anion gap also uses Na/Cl/albumin from Labs.)</div></div>';
       var sev = /Mixed|acidosis/.test(r.primary) ? "warn" : "";
       return head + '<div class="icu-card"><h3>Interpretation</h3>' +
         '<div class="icu-alert ' + sev + '"><div><div class="at">' + esc(r.primary) + "</div>" + (r.comp ? '<div class="am">' + esc(r.comp) + "</div>" : "") + "</div></div>" +
         r.rows.map(function (x) { return row(x[0], x[1]); }).join("") +
-        (r.flags.length ? r.flags.map(function (f) { return '<p style="margin:8px 0 0;color:var(--warn)">⚠ ' + esc(f) + "</p>"; }).join("") : "") +
+        (r.flags.length ? r.flags.map(function (f) { return '<p style="margin:8px 0 0;color:var(--warn)">' + ico("warn","⚠") + ' ' + esc(f) + "</p>"; }).join("") : "") +
         evidenceBadges(["Harrison", "Winter 1967"]) + "</div>";
     },
     infusions: function () {
@@ -2945,7 +2945,7 @@
       var quick = '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">Quick vasopressors — tap for pump rate</div><div class="icu-vitals">' +
         common.map(function (d) { return '<button class="icu-vc" style="cursor:pointer;text-align:left;border-color:var(--primary-soft)" data-icu-act="drug:' + esc(d.toLowerCase()) + '"><div class="vl">weight-based</div><div class="vv" style="font:700 13px var(--font);color:var(--primary)">' + esc(d) + "</div></button>"; }).join("") + "</div>" +
         evidenceBadges(["Marino ICU", "Surviving Sepsis", "PADIS"]) +
-        '<button class="icu-btn ghost" data-icu-act="edit:infusion">✎ Add infusion</button>' +
+        '<button class="icu-btn ghost" data-icu-act="edit:infusion">' + ico("edit","✎") + ' Add infusion</button>' +
         '<button class="icu-btn" data-icu-act="launch:inf">Open full Infusion &amp; Vasopressor Calculator</button></div>';
       return '<div class="icu-sec-lbl">' + ico("syringe", "💉") + ' Infusions</div>' + list + quick;
     },
@@ -2971,7 +2971,7 @@
                 '<div style="flex:1;min-width:0"><div style="font:800 14.5px var(--font);color:var(--ink)">' + esc(x.name) + '</div>' +
                 (dsg ? '<div style="font-family:var(--mono,monospace);font-size:12.5px;color:var(--primary);margin-top:2px">' + esc(dsg) + '</div>' : "") +
                 (x.by ? '<div style="font:600 10.5px var(--font);color:var(--muted);margin-top:3px">added by ' + esc(x.by) + '</div>' : "") + '</div>' +
-                '<button class="icu-tip" data-icu-act="txdel:' + encodeURIComponent(x.id) + '" title="Remove treatment" aria-label="Remove ' + esc(x.name) + '" style="color:var(--danger);font-size:15px;flex:0 0 auto">🗑</button>' +
+                '<button class="icu-tip" data-icu-act="txdel:' + encodeURIComponent(x.id) + '" title="Remove treatment" aria-label="Remove ' + esc(x.name) + '" style="color:var(--danger);font-size:15px;flex:0 0 auto">' + ico("trash","🗑") + '</button>' +
               '</div>';
             }).join("") + '</div>';
         });
@@ -2983,7 +2983,7 @@
     protocols: function () {
       // Merged tab: Critical Care Protocols + Drug Interactions (the interactions sub-tab was folded
       // in here — RENDER.interactions renders the active-med chips + full DDI checker below).
-      return '<div class="icu-sec-lbl">🚨 Critical Care Protocols</div>' +
+      return '<div class="icu-sec-lbl">' + ico("siren","🚨") + ' Critical Care Protocols</div>' +
         PROTOCOLS.map(function (p, i) { return protocolCard(p, i); }).join("") +
         '<button class="icu-btn" data-icu-act="launch:protocols">Open full protocol / drug library</button>' +
         RENDER.interactions();
@@ -2994,7 +2994,7 @@
       return '<div class="icu-card"><h3>Ventilator settings</h3>' +
         row("Mode", v.mode) + row("FiO₂", v.fio2, "%") + row("PEEP", v.peep, "cmH₂O") +
         row("Tidal volume", v.tv, "mL") + row("Resp rate", v.rr, "/min") + row("Plateau", v.plateau, "cmH₂O") +
-        '<button class="icu-btn ghost" data-icu-act="edit:ventilator">✎ Update ventilator</button></div>' +
+        '<button class="icu-btn ghost" data-icu-act="edit:ventilator">' + ico("edit","✎") + ' Update ventilator</button></div>' +
         '<div class="icu-card"><h3>Protective ventilation & ARDS</h3>' + iv.rows.map(function (x) { return row(x[0], x[1]); }).join("") + evidenceBadges(["ARDSNet", "ESICM"]) + "</div>" +
         recsCard("Recommendations", iv.recs, iv.flags, ["ARDSNet", "ESICM"]) +
         '<div class="icu-card"><h3>Extubation readiness</h3>' + extub.map(function (t) { return '<div class="icu-row"><span>' + esc(t) + '</span><b>☐</b></div>'; }).join("") + evidenceBadges(["ESICM", "SCCM"]) + "</div>";
@@ -3189,7 +3189,12 @@
       // PATIENT-scoped tools ONLY. Unit/app settings (Group mode, notification preferences, test
       // notification) now live on the unit Settings screen (bottom bar → Settings), so per-patient
       // actions and app-level settings are no longer mixed. Grouped: this patient · library · danger.
-      return '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "🧑") + ' This patient</div>' +
+      return (window.SMD_IS_NATIVE
+          ? '<div class="icu-card" style="border-color:var(--danger)"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("codeblue", "🫀") + ' Emergency</div>' +
+            '<p class="icu-doc-sub" style="margin:0 0 10px">Live CPR command center on your Apple Watch — compressions, rate, shocks, drugs &amp; ROSC.</p>' +
+            '<button class="icu-btn" data-icu-act="codeblue">' + ico("codeblue", "🫀") + ' Open Code Blue</button></div>'
+          : '') +
+        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "🧑") + ' This patient</div>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Patient details</button>' +
         '<button class="icu-btn ghost" data-icu-act="savept">' + ico("save", "💾") + ' Save / update this patient</button>' +
         '<button class="icu-btn ghost" data-icu-act="wardfetch">' + ico("hospital", "🏥") + ' Ward Sync</button>' +
@@ -3252,7 +3257,7 @@
     var w = _raw.wardSync || {}; var loggedIn = false;
     try { loggedIn = !!localStorage.getItem("ghis_token"); } catch (e) {}
     var s;
-    if (w.connected && w.lastTs) s = { c: "ok", t: "🟢 Ward Sync connected · synced " + fmtAgo(w.lastTs) };
+    if (w.connected && w.lastTs) s = { c: "ok", t: '<span style="color:#16a34a">●</span> Ward Sync connected · synced ' + fmtAgo(w.lastTs) };
     else if (loggedIn) s = { c: "muted", t: "Ward Sync · no ward data for this patient" };
     else s = { c: "muted", t: "Sign in to Ward Sync to auto-fill this patient", act: "wardsync" };
     // Auto-fetch control — sits ON the Ward Sync status bar for a linked patient. Tapping opens the
@@ -3270,7 +3275,7 @@
     return '<div class="icu-ward-row">'
       + '<div class="icu-ward' + (s.c === "ok" ? " on" : "") + '"' + (s.act ? ' data-icu-act="' + s.act + '" style="cursor:pointer"' : "") + '>' + s.t + "</div>"
       + afCtl + '</div>'
-      + (w.newUpdate ? '<div class="icu-ward-new" data-icu-act="dismissupdate">🔵 New laboratory update detected — widgets refreshed. Tap to dismiss.</div>' : "");
+      + (w.newUpdate ? '<div class="icu-ward-new" data-icu-act="dismissupdate"><span style="color:#2563eb">●</span> New laboratory update detected — widgets refreshed. Tap to dismiss.</div>' : "");
   }
   // Ward-vs-manual conflicts (clinician resolves; never auto-overwritten).
   function renderConflicts() {
@@ -3334,9 +3339,9 @@
     return false;
   }
   function coachCard() {
-    return '<div class="icu-coach"><div class="icu-coach-h"><span>👋 How the ICU workstation works</span><button class="icu-coach-x" data-icu-act="coachdone" aria-label="Dismiss">✕</button></div>' +
+    return '<div class="icu-coach"><div class="icu-coach-h"><span>' + ico("info","👋") + ' How the ICU workstation works</span><button class="icu-coach-x" data-icu-act="coachdone" aria-label="Dismiss">' + ico("close","✕") + '</button></div>' +
       '<p class="icu-coach-p">Track one ICU patient — <b>enter, speak, or snap</b> their vitals &amp; labs to get instant interpretation, alerts, and a round-ready summary.</p>' +
-      '<ol class="icu-coach-steps"><li>Tap <b>＋ Add my patient</b> — type it, <b>🎤 speak it</b>, or <b>📷 snap a photo</b>.</li>' +
+      '<ol class="icu-coach-steps"><li>Tap <b>＋ Add my patient</b> — type it, <b>' + ico("mic","🎤") + ' speak it</b>, or <b>' + ico("camera","📷") + ' snap a photo</b>.</li>' +
       '<li>Review the values — nothing is applied until you confirm.</li>' +
       '<li>Read the alerts, trends &amp; round-ready summary across the tabs.</li></ol>' +
       '<button class="icu-btn" data-icu-act="coachdone">Got it</button></div>';
@@ -4023,7 +4028,7 @@
     wrap.setAttribute("style", "position:fixed;inset:0;z-index:20000;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center");
     wrap.innerHTML =
       '<div role="dialog" aria-label="Enable ICU task alerts" style="background:var(--panel,#fff);color:var(--ink,#0f172a);width:100%;max-width:460px;border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));font-family:var(--sans,system-ui);box-shadow:0 -10px 40px rgba(0,0,0,.25)">'
-      + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:6px">🔔 Get notified for ICU tasks</div>'
+      + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:6px">' + ico("bell","🔔") + ' Get notified for ICU tasks</div>'
       + '<div style="font:500 12.5px/1.55 var(--sans,system-ui);color:var(--slate,#5a7184)">Get notified the instant your consultant assigns you a task in this unit — even when the app is closed. You can turn this off anytime in Settings.</div>'
       + '<div style="display:flex;gap:10px;margin-top:14px">'
       + '<button id="icuPushLater" style="flex:1;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--panel,#fff);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>'
@@ -4233,7 +4238,7 @@
         var ini = v2Initials(isMe ? v2AccountName() : (m.name || title));
         var sub = title + (isMe ? " · you" : "");
         var acts = (canManage && !isMe && !isHead)
-          ? '<button class="icu-v2-memrm" data-icu-act="grpdesig:' + encodeURIComponent(m.uid) + '" aria-label="Change ' + esc(nm) + '’s designation">✎ Title</button>'
+          ? '<button class="icu-v2-memrm" data-icu-act="grpdesig:' + encodeURIComponent(m.uid) + '" aria-label="Change ' + esc(nm) + '’s designation">' + ico("edit","✎") + ' Title</button>'
             + '<button class="icu-v2-memrm" data-icu-act="grprm:' + encodeURIComponent(m.uid) + '" aria-label="Remove ' + esc(nm) + ' from this unit">Remove</button>'
           : "";
         var badge = isMe ? '<span class="icu-v2-member-state">You</span>'
@@ -4280,7 +4285,7 @@
     var txt = viewers.length ? (grpJoinNames(viewers.map(function (v) { return v.name; })) + (viewers.length === 1 ? " is" : " are") + " also viewing · " + (viewers.length + 1) + " viewing") : "Only you are viewing";
     return '<div class="icu-v2-presence">' + av + '<span class="icu-v2-presence-tx">' + esc(txt) + '</span>' + grpSyncHTML() + '</div>';
   }
-  function grpTlIcon(type) { var m = { round: "🩺", task: "✅", imaging: "🩻", abg: "🫁", vent: "🌬", pressor: "💉", note: "📝" }; return m[type] || "•"; }
+  function grpTlIcon(type) { var m = { round: "🩺", task: "✅", imaging: "🩻", abg: "🫁", vent: "🌬", pressor: "💉", note: "📝" }; var sv = { round: "pulse", task: "check", imaging: "xray", abg: "droplet", vent: "lungs", pressor: "syringe", note: "note" }; return m[type] ? ico(sv[type] || "note", m[type]) : "•"; }
   // Prepended to the Rounds tab in group mode — the LIVE instructions/tasks + append-only timeline
   // from subscribePatient, plus the reviewed state. (The no-type round-note composer is a later phase.)
   function grpRoundsPanel() {
@@ -6916,6 +6921,7 @@
       case "conflict": { var parts = arg.split("|"); ICU.resolveConflict(parts[0], parts[1]); paint(); break; }
       case "dismissupdate": ICU.clearNewUpdate(); paint(); break;
       case "wardsync": try { if (window.openGHIS) openGHIS(); } catch (x) {} break;
+      case "codeblue": try { var cbp = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.WatchBridge; if (cbp && cbp.openCodeBlue) cbp.openCodeBlue(); } catch (x) {} break;
       case "autofetch": try { if (window.SMD_AUTOFETCH) SMD_AUTOFETCH.openManager((_raw.wardSync && _raw.wardSync.patientId) || "", (_raw.patient && _raw.patient.name) || ""); } catch (x) {} break;
       case "savept": savePatient(); break;
       case "patients": openRoster(); break;

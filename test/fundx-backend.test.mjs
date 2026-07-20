@@ -103,6 +103,12 @@ await (async () => {
   r = await Router.onRequest(ctx("PUT", "/api/fundx/vision", { origin: "" }));
   ok("router: non-POST to vision → 405", r.status === 405);
 
+  // Experimental Access enforcement is OPT-IN (EXPERIMENTAL_ENFORCE_FUNDX="1"). When ON, the compute
+  // must 403 without a valid activation/owner — the server-side gate the framework exists for.
+  r = await Router.onRequest(ctx("POST", "/api/fundx/vision", { origin: "", env: { EXPERIMENTAL_ENFORCE_FUNDX: "1" }, body: { image: "data:image/jpeg;base64,AAAA" } }));
+  ok("router: enforcement ON + no activation → 403 beta_locked", r.status === 403 && (await r.json()).code === "beta_locked");
+
+  // Default (enforcement OFF) → the compute path runs; these exercise it.
   r = await Router.onRequest(ctx("POST", "/api/fundx/vision", { origin: "", body: { image: "data:image/jpeg;base64,AAAA" } }));
   ok("router: POST /vision with no provider configured → 503 (graceful)", r.status === 503);
 

@@ -29,6 +29,10 @@
 
   var TOUR_VERSION = 2;   // bumped from the legacy 8-step home tour → the unified welcome+app+ICU tour
 
+  // UI-chrome line-icon helper: returns the shared inline-SVG for a catalog name, or "" if the
+  // global catalog isn't loaded yet. Chrome emoji are swapped for these; clinical/prose glyphs stay.
+  function obIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+
   // ---- identity + persistence -------------------------------------------------------------
   function owner() {
     try { if (window.SMD_ACCOUNT && SMD_ACCOUNT.profile) { var p = SMD_ACCOUNT.profile(); if (p && p.email) return p.email; } } catch (e) {}
@@ -60,11 +64,11 @@
 
   // ---- tour content (mirrors StewardMD Tour.dc.html) --------------------------------------
   var ROLES = [
-    { id: "senior", label: "👴 Senior physician" },
+    { id: "senior", icon: "user", label: "Senior physician" },
     { id: "junior", label: "🩺 Junior / resident" },
-    { id: "icu", label: "🫀 ICU specialist" },
-    { id: "gp", label: "🏥 General physician" },
-    { id: "explore", label: "✨ Just exploring" }
+    { id: "icu", icon: "heart", label: "ICU specialist" },
+    { id: "gp", icon: "hospital", label: "General physician" },
+    { id: "explore", icon: "spark", label: "Just exploring" }
   ];
 
   // APP tour — targets the REAL home (rnav layout, scoped to #homeV2). Container-level selectors
@@ -174,7 +178,7 @@
       // welcome (full-screen, first launch + replay)
       ".smdt-wel{position:fixed;inset:0;z-index:100055;background:radial-gradient(120% 80% at 50% -10%,#0f766e 0%,#0b5b54 42%,#073d39 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(56px + env(safe-area-inset-top)) 28px calc(28px + env(safe-area-inset-bottom));font-family:var(--sans,'Inter',system-ui,sans-serif);animation:smdtFade .4s ease}",
       "@keyframes smdtFade{from{opacity:0}to{opacity:1}}",
-      ".smdt-wel-ic{width:72px;height:72px;border-radius:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:34px}",
+      ".smdt-wel-ic{width:72px;height:72px;border-radius:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:34px}.smdt-wel-ic img{width:46px;height:46px;object-fit:contain;display:block}",
       ".smdt-wel-brand{font:700 26px/1 'IBM Plex Mono',monospace;letter-spacing:-.5px;color:#fff;margin-top:20px}.smdt-wel-brand b{color:#8fe3d4;font-weight:700}",
       ".smdt-wel-h{font:600 28px/1.15 inherit;color:#fff;margin-top:18px;letter-spacing:-.3px}",
       ".smdt-wel-p{font:500 15px/1.55 inherit;color:rgba(255,255,255,.82);margin:12px 0 0;max-width:300px}",
@@ -359,7 +363,7 @@
     var body = (_run.live && s.liveBody) ? s.liveBody : s.body;
     var tap = isTapStep(s);
     _card.innerHTML =
-      '<div class="smdt-top"><div class="smdt-eyebrow"><span>' + esc(_run.icon) + "</span><span>STEP " + (_step + 1) + " OF " + n + "</span></div>" +
+      '<div class="smdt-top"><div class="smdt-eyebrow"><span>' + _run.icon + "</span><span>STEP " + (_step + 1) + " OF " + n + "</span></div>" +
         '<button class="smdt-skip" data-t="skip" aria-label="Skip tour">Skip</button></div>' +
       '<div class="smdt-bar"><i style="width:' + Math.round((_step + 1) / n * 100) + '%"></i></div>' +
       '<div class="smdt-title">' + esc(s.title) + "</div>" +
@@ -528,7 +532,7 @@
 
   function icuController(steps) {
     return {
-      id: "icu", icon: "🫀", live: true, steps: steps,
+      id: "icu", icon: obIco("heart"), live: true, steps: steps,
       scope: function () { return document.getElementById("icuRoot") || document; },
       resolve: function (s) { return s.live ? firstPresent(s.live, this.scope()) : null; },
       // Drive the REAL ICU into the right state for this step (open a patient / switch workspace+tab),
@@ -647,10 +651,10 @@
     injectCSS();
     if (!_welEl) { _welEl = document.createElement("div"); _welEl.className = "smdt-wel"; document.body.appendChild(_welEl); }
     _selRole = null;
-    var roles = ROLES.map(function (r) { return '<button class="smdt-role" data-role="' + r.id + '">' + esc(r.label) + "</button>"; }).join("");
+    var roles = ROLES.map(function (r) { return '<button class="smdt-role" data-role="' + r.id + '">' + (r.icon ? obIco(r.icon) + " " : "") + esc(r.label) + "</button>"; }).join("");
     _welEl.innerHTML =
       '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">' +
-        '<div class="smdt-wel-ic">🧭</div>' +
+        '<div class="smdt-wel-ic"><img src="/mark-white.png" alt="StewardMD"></div>' +
         '<div class="smdt-wel-brand">Steward<b>MD</b></div>' +
         '<div class="smdt-wel-h">Welcome, Doctor.</div>' +
         '<p class="smdt-wel-p">Let’s take two minutes to get you comfortable. First — which best describes you? We’ll tailor the tour.</p>' +
@@ -677,7 +681,7 @@
   function showResume() {
     if (!_pausedAt) return; injectCSS();
     if (!_resumeEl) { _resumeEl = document.createElement("button"); _resumeEl.className = "smdt-resume"; _resumeEl.setAttribute("aria-label", "Resume tour"); document.body.appendChild(_resumeEl); _resumeEl.onclick = resumeTour; }
-    _resumeEl.innerHTML = '<span>▶</span><span>Resume tour</span>';
+    _resumeEl.innerHTML = '<span>' + obIco("play") + '</span><span>Resume tour</span>';
     _resumeEl.style.display = "flex";
   }
   function hideResume() { if (_resumeEl) _resumeEl.style.display = "none"; }
@@ -693,7 +697,7 @@
     var s = getState(); s.icuTipSeen = true; setState(s);
     if (!_tipEl) { _tipEl = document.createElement("div"); _tipEl.className = "smdt-tip"; _tipEl.setAttribute("role", "dialog"); _tipEl.setAttribute("aria-label", "ICU tour tip"); document.body.appendChild(_tipEl); }
     _tipEl.innerHTML =
-      '<div class="smdt-tip-row"><span class="i">🫀</span><div><div class="smdt-tip-t">New to the ICU dashboard?</div><div class="smdt-tip-x">Take a 2-minute guided walkthrough of the full clinical workflow.</div></div></div>' +
+      '<div class="smdt-tip-row"><span class="i">' + obIco("heart") + '</span><div><div class="smdt-tip-t">New to the ICU dashboard?</div><div class="smdt-tip-x">Take a 2-minute guided walkthrough of the full clinical workflow.</div></div></div>' +
       '<div class="smdt-tip-btns"><button class="smdt-tip-b gho" data-tt="no">Not now</button><button class="smdt-tip-b pri" data-tt="go">Start the ICU tour</button></div>';
     _tipEl.style.display = "block";
     _tipEl.onclick = function (e) { var b = e.target.closest && e.target.closest("[data-tt]"); if (!b) return; hideTip(); if (b.getAttribute("data-tt") === "go") startIcuTour(); };
@@ -728,16 +732,16 @@
     function card(emoji, name, sub, tour) { return '<div class="smdt-rp-card"><span class="e">' + emoji + '</span><div class="m"><div class="n">' + esc(name) + '</div><div class="s">' + esc(sub) + '</div></div><button class="smdt-rp-go" data-rp="' + tour + '">Replay</button></div>'; }
     function soon(emoji, name) { return '<div class="smdt-rp-card soon"><span class="e">' + emoji + '</span><div class="m"><div class="n">' + esc(name) + '</div><div class="s">Coming soon</div></div><span class="soon-tag">Soon</span></div>'; }
     _replayEl.innerHTML =
-      '<div class="smdt-rp-head"><h2>About &amp; Help</h2><button class="smdt-rp-x" data-rp="close" aria-label="Close">✕</button></div>' +
+      '<div class="smdt-rp-head"><h2>About &amp; Help</h2><button class="smdt-rp-x" data-rp="close" aria-label="Close">' + obIco("close") + '</button></div>' +
       '<div class="smdt-rp-body">' +
         '<div class="smdt-rp-h">Guided tours</div><p class="smdt-rp-p">Replay any walkthrough at your own pace. Nothing you’ve entered is changed.</p>' +
         '<div class="smdt-rp-list">' +
-          card("👋", "First-launch welcome", "Role pick & warm intro · 30s", "welcome") +
+          card(obIco("info"), "First-launch welcome", "Role pick & warm intro · 30s", "welcome") +
           card("🧭", "App overview", "Find your way around home · 1 min", "app") +
-          card("🫀", "ICU Dashboard", "The full clinical workflow · 2 min", "icu") +
+          card(obIco("heart"), "ICU Dashboard", "The full clinical workflow · 2 min", "icu") +
         "</div>" +
         '<div class="smdt-rp-sec">MODULE TOURS</div>' +
-        '<div class="smdt-rp-list">' + soon("🧠", "Clinical Reasoning") + soon("🧮", "Calculators") + "</div>" +
+        '<div class="smdt-rp-list">' + soon(obIco("brain"), "Clinical Reasoning") + soon(obIco("calc"), "Calculators") + "</div>" +
       "</div>";
     _replayEl.style.display = "flex";
     _replayEl.onclick = function (e) {

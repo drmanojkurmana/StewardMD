@@ -28,6 +28,9 @@
   ];
   var LBL = { read: "Reading", "case": "Cases", calc: "Calculators", maik: "MaiK", streak: "Streak", open: "Daily open", combo: "Combo", weekly: "Weekly bonus", monthly: "Monthly bonus", quest: "Quest" };
 
+  // Chrome line-icons from the shared catalog (guarded; returns "" if unavailable).
+  function egIco(n) { return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
   function fmt(n) { try { return Number(n || 0).toLocaleString("en-US"); } catch (e) { return String(n || 0); } }
   function pct(a, b) { return b > 0 ? Math.max(0, Math.min(100, Math.round((a / b) * 100))) : 0; }
@@ -107,11 +110,11 @@
     var tier = s.nextTier;
     var discount = tier
       ? '<div class="smd-row"><span style="font:500 12.5px">' + fmt(tier.ku - (s.balance || 0)) + ' KU to ' + esc(tier.label) + '</span><span class="smd-muted" style="font:600 12px">' + (s.progressPct || 0) + '%</span></div><div class="smd-bar"><i style="width:' + (s.progressPct || 0) + '%"></i></div>'
-      : '<div style="font:500 13px">All reward tiers unlocked 🎉</div>';
+      : '<div style="font:500 13px">All reward tiers unlocked ' + egIco("spark") + '</div>';
     var sp = streakP || { seconds: 0, target: 300, done: false };
     var mins = Math.floor(sp.seconds / 60), tmin = Math.round(sp.target / 60);
     var streakToday = sp.done
-      ? '<div style="font:600 13px;color:' + TEAL + '">✓ Today\'s 5 minutes complete — streak secured</div>'
+      ? '<div style="font:600 13px;color:' + TEAL + '">' + egIco("check") + ' Today\'s 5 minutes complete — streak secured</div>'
       : '<div class="smd-row"><span style="font:500 12.5px">Today: ' + mins + ' of ' + tmin + ' min active</span><span class="smd-muted" style="font:600 12px">' + pct(sp.seconds, sp.target) + '%</span></div><div class="smd-bar amber"><i style="width:' + pct(sp.seconds, sp.target) + '%"></i></div>';
 
     return (
@@ -119,12 +122,12 @@
         '<div class="smd-row"><div><div style="font:700 11px;letter-spacing:1px;text-transform:uppercase;opacity:.85">Level ' + (s.level || 1) + '</div><div style="font:600 20px;margin-top:2px">' + esc(s.levelName || "Intern") + '</div></div>' +
         '<div style="text-align:right"><div style="font:600 30px;line-height:1">' + fmt(s.balance || 0) + '</div><div class="smd-muted" style="font:600 11px">Knowledge Units</div></div></div>' +
         '<div style="margin-top:14px"><div class="smd-row"><span class="smd-muted" style="font:600 11.5px">' + fmt(lvlToNext) + ' KU to level ' + ((s.level || 1) + 1) + '</span><span class="smd-muted" style="font:600 11.5px">+' + tot + ' KU today</span></div><div class="smd-bar"><i style="width:' + (s.levelPct || 0) + '%"></i></div></div>' +
-        '<div class="smd-row" style="margin-top:14px"><div><div style="font:600 22px">🔥 ' + (s.streak || 0) + '</div><div class="smd-muted" style="font:600 11px">Current streak</div></div>' +
-        '<div style="text-align:right"><div style="font:600 22px">🏆 ' + (s.longestStreak || 0) + '</div><div class="smd-muted" style="font:600 11px">Longest streak</div></div></div>' +
+        '<div class="smd-row" style="margin-top:14px"><div><div style="font:600 22px">' + egIco("bolt") + ' ' + (s.streak || 0) + '</div><div class="smd-muted" style="font:600 11px">Current streak</div></div>' +
+        '<div style="text-align:right"><div style="font:600 22px">' + egIco("award") + ' ' + (s.longestStreak || 0) + '</div><div class="smd-muted" style="font:600 11px">Longest streak</div></div></div>' +
       '</div>' +
       '<div class="smd-card"><h4>Today\'s streak</h4>' + streakToday + '</div>' +
       '<div class="smd-card"><h4>Today\'s progress · +' + tot + ' KU</h4>' + srcRow("read", "Reading") + srcRow("case", "Cases") + srcRow("calc", "Calculators") + srcRow("maik", "MaiK") + '</div>' +
-      '<div class="smd-card"><h4>Daily quest' + (q.completedToday ? ' · ✓ complete (+' + (q.reward || 20) + ' KU)' : '') + '</h4><div style="font:500 13px;margin-bottom:10px">' + esc(q.label || "") + '</div>' + questGoals + '</div>' +
+      '<div class="smd-card"><h4>Daily quest' + (q.completedToday ? ' · ' + egIco("check") + ' complete (+' + (q.reward || 20) + ' KU)' : '') + '</h4><div style="font:500 13px;margin-bottom:10px">' + esc(q.label || "") + '</div>' + questGoals + '</div>' +
       '<div class="smd-card"><h4>Reward progress</h4>' + discount + '</div>' +
       '<button class="smd-btn" data-eng="share">Share achievement</button>'
     );

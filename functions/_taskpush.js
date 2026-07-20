@@ -209,11 +209,13 @@ export async function notifyNewInstruction(env, gid, pid, byUid, info) {
     body: (bed ? "Bed " + bed + " — " : "") + text + " · tap to read the full SBAR",
     tag: "icu-handover-" + pid,
     url: "https://stewardmd.in/",
+    route: "tasks",   // watch deep-link target (ignored by phone/web)
   } : {
     title: (urgent ? "🔴 " : "🩺 ") + PRIO_LABEL[prio] + " instruction · " + unitName,
     body: text + (count > 1 ? " (+" + (count - 1) + " more)" : "") + (bed ? " · Bed " + bed : ""),
     tag: "icu-instr-" + pid,
     url: "https://stewardmd.in/",
+    route: "tasks",   // watch deep-link target (ignored by phone/web)
   };
   const byRaw = rawUid(byUid);   // author id normalised to the raw uid the member docs use
   // Category drives per-recipient filtering: handovers → Tier-2; immediate/high → Tier-1 (locked on

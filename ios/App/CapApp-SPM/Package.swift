@@ -26,7 +26,9 @@ let package = Package(
         .package(name: "CapacitorSplashScreen", path: "../../../node_modules/@capacitor/splash-screen"),
         .package(name: "CapacitorStatusBar", path: "../../../node_modules/@capacitor/status-bar"),
         .package(name: "CapawesomeCapacitorFilePicker", path: "../../../node_modules/@capawesome/capacitor-file-picker"),
+        .package(name: "CapgoCapacitorUpdater", path: "../../../node_modules/@capgo/capacitor-updater"),
         .package(name: "StewardmdCapacitorAppOrientation", path: "../../../local-plugins/capacitor-app-orientation"),
+        .package(name: "StewardmdCapacitorFundxDepth", path: "../../../local-plugins/capacitor-fundx-depth"),
         .package(name: "StewardmdCapacitorVisionOcr", path: "../../../local-plugins/capacitor-vision-ocr"),
         .package(name: "StewardmdCapacitorWhisper", path: "../../../local-plugins/capacitor-whisper"),
         .package(name: "CapacitorSecureStoragePlugin", path: "../../../node_modules/capacitor-secure-storage-plugin")
@@ -51,7 +53,9 @@ let package = Package(
                 .product(name: "CapacitorSplashScreen", package: "CapacitorSplashScreen"),
                 .product(name: "CapacitorStatusBar", package: "CapacitorStatusBar"),
                 .product(name: "CapawesomeCapacitorFilePicker", package: "CapawesomeCapacitorFilePicker"),
+                .product(name: "CapgoCapacitorUpdater", package: "CapgoCapacitorUpdater"),
                 .product(name: "StewardmdCapacitorAppOrientation", package: "StewardmdCapacitorAppOrientation"),
+                .product(name: "StewardmdCapacitorFundxDepth", package: "StewardmdCapacitorFundxDepth"),
                 .product(name: "StewardmdCapacitorVisionOcr", package: "StewardmdCapacitorVisionOcr"),
                 .product(name: "StewardmdCapacitorWhisper", package: "StewardmdCapacitorWhisper"),
                 .product(name: "CapacitorSecureStoragePlugin", package: "CapacitorSecureStoragePlugin")

@@ -22,6 +22,7 @@
   if (window.StewardRAG) return;
 
   var _ai = null, _initP = null, _rrf = null;
+  var _tokIdx = null, _uniqToks = null;   // instant nearest-KB resolver index (built in init)
   // Hybrid retrieval (flag smd_hybrid, default OFF). Vector arm = POST /api/retrieve
   // (Workers AI embed → Vectorize). Fully degradation-safe: flag off OR empty/failed
   // vector arm → identical to lexical-only.
@@ -70,7 +71,13 @@
   // disease instead of a lexically-adjacent one. Kept SPECIFIC (no bare 'pain'/'fever'/'chest') to
   // avoid new mis-routes. Retrieval-only; the deterministic engine is unaffected.
   var SMD_ALIASES = {
-    acs: "mi stemi nstemi angina acs coronary infarction",
+    acs: "mi stemi nstemi angina acs coronary infarction heart attack heartattack",
+    acute_infectious_diarrheal_diseases_and: "diarrhea diarrhoea loose motion loose motions loose stool loose stools gastroenteritis dysentery watery stools",
+    // C. difficile is indexed under its 2016 genus rename "Clostridioides"; clinicians still
+    // type the old genus "Clostridium", the abbreviations "c diff"/"cdiff", and the classic
+    // presentation "pseudomembranous colitis" — none of which match "Clostridioides" in the body
+    // text, so without these aliases the query mis-routed to web / to a wrong colitis entry.
+    C_DIFF: "clostridium clostridioides difficile cdiff diff pseudomembranous colitis",
     aortic_dissection: "tearing ripping interscapular dissection",
     atrial_fib: "af afib rvr palpitations arrhythmia fibrillation",
     hypoglycemia: "hypo hypoglycaemia neuroglycopenia",
@@ -178,6 +185,66 @@
     return out;
   }
 
+  // ── Instant nearest-KB resolver (deterministic; 0 tokens; offline/native-safe) ──────────
+  // On a routing MISS, match the query's distinctive tokens against every KB entry's name +
+  // alias tokens — exact first, then bounded edit-distance for typos/variants — and ground on
+  // the nearest entry under a STATED assumption instead of dead-ending to slow web research.
+  // Runs ONLY when the gate already found no lexical/semantic candidate, so it can never
+  // override a confident/assume decision; web stays the last resort when nothing is close.
+  function buildNameIndex(chunks) {
+    var byId = {}, tokIdx = {}, uniq = {};
+    (chunks || []).forEach(function (c) {
+      if (!c || !c.diseaseId) return;
+      var id = c.diseaseId; if (!byId[id]) byId[id] = {};
+      (String(c.diseaseName || "") + " " + String(c.aliases || "")).toLowerCase()
+        .replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).forEach(function (t) { if (t.length >= 4) byId[id][t] = 1; });
+    });
+    Object.keys(byId).forEach(function (id) {
+      Object.keys(byId[id]).forEach(function (t) { (tokIdx[t] = tokIdx[t] || []).push(id); if (t.length >= 5) uniq[t] = 1; });
+    });
+    _tokIdx = tokIdx; _uniqToks = Object.keys(uniq);
+  }
+  // Bounded Levenshtein: returns the edit distance, or max+1 as soon as the budget is blown.
+  function editWithin(a, b, max) {
+    var la = a.length, lb = b.length;
+    if (Math.abs(la - lb) > max) return max + 1;
+    var prev = []; for (var j = 0; j <= lb; j++) prev[j] = j;
+    for (var i = 1; i <= la; i++) {
+      var cur = [i], best = i;
+      for (var k = 1; k <= lb; k++) {
+        var cost = a.charCodeAt(i - 1) === b.charCodeAt(k - 1) ? 0 : 1;
+        cur[k] = Math.min(prev[k] + 1, cur[k - 1] + 1, prev[k - 1] + cost);
+        if (cur[k] < best) best = cur[k];
+      }
+      if (best > max) return max + 1;   // whole row over budget → prune
+      prev = cur;
+    }
+    return prev[lb];
+  }
+  // Typo tolerance scales with token length: short tokens are exact-only (fuzzing them is unsafe).
+  function fuzzThreshold(len) { return len >= 8 ? 2 : (len >= 5 ? 1 : 0); }
+  // Resolve distinctive query tokens to the nearest KB disease id, or null when nothing is close.
+  function fuzzyResolve(distinctive) {
+    if (!_tokIdx || !distinctive || !distinctive.length) return null;
+    var score = {};
+    distinctive.forEach(function (q) {
+      if (q.length < 4) return;
+      if (_tokIdx[q]) _tokIdx[q].forEach(function (id) { score[id] = (score[id] || 0) + 2; });   // exact = strong
+      var thr = fuzzThreshold(q.length); if (thr <= 0) return;
+      var bestTok = null, bestEd = thr + 1;
+      for (var i = 0; i < _uniqToks.length; i++) {
+        var t = _uniqToks[i];
+        if (Math.abs(t.length - q.length) > thr || (t === q)) continue;
+        var ed = editWithin(q, t, thr);
+        if (ed <= thr && ed < bestEd) { bestEd = ed; bestTok = t; if (ed === 1) break; }
+      }
+      if (bestTok) (_tokIdx[bestTok] || []).forEach(function (id) { score[id] = (score[id] || 0) + (bestEd === 1 ? 1.5 : 1); });
+    });
+    var bestId = null, best = 0;
+    Object.keys(score).forEach(function (id) { if (score[id] > best) { best = score[id]; bestId = id; } });
+    return (bestId && best >= 1.5) ? { id: bestId, score: best } : null;   // need one exact or one ed-1 fuzzy hit
+  }
+
   function init() {
     if (_initP) return _initP;
     _initP = (function () {
@@ -186,17 +253,19 @@
       return kbReady.then(function () {
         return !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
       }).then(function () {
-        return import("/kb/ai/interface.mjs?v=gold971");
+        return import("/kb/ai/interface.mjs?v=gold1010");
       }).then(function (mod) {
         var CORE = (window.KB_CORE && (window.KB_CORE.diseases || window.KB_CORE.byId)) || [];
         var diseases = {}; (Array.isArray(CORE) ? CORE : Object.values(CORE)).forEach(function (d) { if (d && d.id) diseases[d.id] = d; });
+        var _chunks = deriveChunks();
         var store = {
           diseases: diseases,
           treatments: (window.KB_RAG && window.KB_RAG.treatments) || {},
           policies: (window.KB_RAG && window.KB_RAG.policies) || {},
-          index: { chunks: deriveChunks() }
+          index: { chunks: _chunks }
         };
         _ai = mod.createStewardAI(store, { flags: { ai: true, ragRetrieval: true } });
+        buildNameIndex(_chunks);   // instant nearest-KB resolver index (typo/variant tolerance)
         _rrf = mod.rrf || null;   // hybrid fusion (available when smd_hybrid on)
         return true;
       }).catch(function (e) { _ai = null; return false; });
@@ -242,27 +311,11 @@
       var grounding = top.map(function (c) { return trimGrounding(_ai.getGroundingContext(c.id)); }).filter(Boolean);
 
       var treatment = lead ? _ai.resolveTreatment(lead.id, hospitalId) : null;
-
-      // ICU / calculator / drug refs from the disease objects (by reference only)
-      var coreArr = (window.KB_CORE && window.KB_CORE.diseases) || [];
-      var coreById = {}; (Array.isArray(coreArr) ? coreArr : Object.keys(coreArr).map(function (k) { return coreArr[k]; })).forEach(function (d) { if (d && d.id) coreById[d.id] = d; });
-      var refs = { drug: [], calculators: [], icuProtocols: [], stewardship: [] };
-      var seenDrug = {};
-      function addDrug(d) { if (d && !seenDrug[d]) { seenDrug[d] = 1; refs.drug.push(d); } }
-      grounding.forEach(function (g) { (g.drugRefs || []).forEach(addDrug); });
-      top.forEach(function (c) {
-        var d = coreById[c.id]; if (!d) return;
-        (d.drugRefs || []).forEach(function (x) { addDrug(typeof x === "string" ? x : (x && (x.composition || x.name))); });
-        (d.calculatorRefs || []).forEach(function (x) { if (refs.calculators.indexOf(x) < 0) refs.calculators.push(x); });
-        (d.icuModuleRefs || []).forEach(function (x) { if (refs.icuProtocols.indexOf(x) < 0) refs.icuProtocols.push(x); });
-      });
-      // drug references from the resolved treatment (by reference only)
-      if (treatment && treatment.default) (treatment.default.drugRefs || []).forEach(addDrug);
-      if (treatment) (treatment.alternatives || []).forEach(function (a) { (a.drugRefs || []).forEach(addDrug); });
-      if (treatment && treatment.diseaseId) {
-        var t = (window.KB_RAG && window.KB_RAG.treatments && window.KB_RAG.treatments[treatment.diseaseId]) || null;
-        if (t && t.stewardship) refs.stewardship = Array.isArray(t.stewardship) ? t.stewardship.slice(0, 6) : [t.stewardship];
-      }
+      // NOTE: pkg.refs (drug/calculator/ICU/stewardship) is assembled LOWER DOWN, AFTER the
+      // knowledge-question gate — because for a standalone knowledge question lead/grounding/
+      // treatment are only resolved inside that gate. Building refs here left every ref empty
+      // on that path (the coverage matrix, de-escalation regimens and REFERENCES never reached
+      // the model). See the refs block just before the return.
 
       // de-identified case (only the allowed fields; caller supplies caseData)
       var patientCase = {};
@@ -334,19 +387,36 @@
           // so a distinctive term anywhere in it counts — kept as-is for routing parity. This runs only
           // for the candidates actually evaluated (≈1 for a confident rank-0 match, memoized), so it's
           // cheap; the real perf win is the short-circuit + the lazy vector hop, not trimming this.
-          var hay = (String(id) + " " + (gc.name || "") + " " + JSON.stringify(gc)).toLowerCase();
+          var aliasStr = " " + String(SMD_ALIASES[id] || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim() + " ";
+          var hay = (String(id) + " " + (gc.name || "") + " " + aliasStr + JSON.stringify(gc)).toLowerCase();
           var hitT = distinctive.filter(function (t) { return hay.indexOf(t) >= 0; });
           var cov = distinctive.length ? hitT.length / distinctive.length : 1;
-          var nameHit = false, nameToksAll = false;
+          var nameHit = false, nameToksAll = false, headHit = false;
           if (gc.name) {
             var nm = String(gc.name).toLowerCase();
             nameHit = distinctive.some(function (t) { return t.length >= 5 && nm.indexOf(t) >= 0; });
             var nameToks = nm.replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
             nameToksAll = nameToks.length > 0 && nameToks.every(function (t) { return qHay.indexOf(" " + t + " ") >= 0; });
+            // HEAD match: the specific entity usually LEADS a disease name (Dengue…, Enteric…,
+            // Scrub…, Diabetic…). A query token that hits the head is a real topic hit; a lone token
+            // that only hits a NON-head/body position ("hypertension" → Idiopathic intracranial
+            // Hypertension, "management" → Diabetes Mellitus: Management, "high" in a fever body) is a
+            // mis-route — so a single-term query must hit the head (or the whole name) to be confident.
+            headHit = nameToks.length > 0 && qHay.indexOf(" " + nameToks[0] + " ") >= 0;
           }
-          var conf = distinctive.length === 0 || cov >= 0.6 || nameHit || nameToksAll;
+          // ALIAS match: a curated discriminative synonym/abbreviation for THIS disease appears in
+          // the query ("stemi"/"heart attack" → ACS, "loose motions" → diarrhoea). Aliases are
+          // hand-picked to be specific, so an alias hit is a real name-level match even when the
+          // display name is empty (e.g. ACS) or generic.
+          var aliasToks = aliasStr.split(" ").filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
+          var aliasHit = aliasToks.some(function (t) { return qHay.indexOf(" " + t + " ") >= 0; });
+          // Confident when: nothing distinctive to check; the whole name is named; a NAME token or a
+          // curated ALIAS is named; or ≥2 distinct query terms are covered. A LONE BODY-ONLY hit no
+          // longer counts (was `cov >= 0.6`): "high fever" only touched a Tick-borne relapsing fever
+          // body, so it now degrades to general knowledge instead of confidently describing it.
+          var conf = distinctive.length === 0 || nameToksAll || nameHit || aliasHit || (cov >= 0.6 && hitT.length >= 2);
           var res = { id: id, gc: gc, hit: hitT, coverage: cov, missing: distinctive.filter(function (t) { return hay.indexOf(t) < 0; }),
-                      confident: conf, nameHit: nameHit, nameToksAll: nameToksAll };
+                      confident: conf, nameHit: nameHit, nameToksAll: nameToksAll, headHit: headHit, aliasHit: aliasHit };
           if (id) _ecache[id] = res;
           return res;
         }
@@ -393,9 +463,12 @@
           if (!lead) lead = { id: candId, name: candGc.name || candId };
           if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(candId, hospitalId); } catch (e) {} }
           topicMatch = { matched: true, topic: distinctive.join(" "), grounded: candGc.name || candId };
-        } else if (chosen && chosen.hit.length > 0) {
+        } else if (chosen && chosen.hit.length > 0 && (chosen.nameHit || chosen.aliasHit || chosen.hit.length >= 2)) {
           // partial overlap → keep grounding on the nearest topic so nothing off-KB is invented,
           // but flag it as an ASSUMPTION for the caller to state + let the clinician refine.
+          // Require a NAME/ALIAS match or ≥2 distinct hits: a lone BODY-ONLY hit ("high" only in a
+          // Tick-borne relapsing fever body) is a mis-route, so it falls through to "none" → the
+          // model answers from general knowledge instead of confidently describing the wrong disease.
           grounding = [candGc];
           if (!lead) lead = { id: candId, name: candGc.name || candId };
           if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(candId, hospitalId); } catch (e) {} }
@@ -403,10 +476,51 @@
             nearest: candGc.name || candId, assume: { id: candId, name: candGc.name || candId },
             coverage: Math.round(chosen.coverage * 100) / 100, missing: chosen.missing };
         } else {
-          // topic genuinely not in the KB → drop the near-miss grounding so nothing wrong is described
-          grounding = []; lead = null; treatment = null; retrieved = [];
-          topicMatch = { matched: false, mode: "none", topic: distinctive.join(" ") || String(opts.question).trim(), nearest: (candGc && candGc.name) || candId || null };
+          // No lexical/semantic candidate. Before dead-ending to slow web research, try the
+          // deterministic nearest-KB resolver (typo/variant/old-name tolerance, 0 tokens) so
+          // messy input still gets a FAST verified answer under a stated assumption.
+          var fz = fuzzyResolve(distinctive);
+          var fzGc = fz ? trimGrounding(_ai.getGroundingContext(fz.id)) : null;
+          if (fzGc) {
+            grounding = [fzGc];
+            if (!lead) lead = { id: fz.id, name: fzGc.name || fz.id };
+            if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(fz.id, hospitalId); } catch (e) {} }
+            topicMatch = { matched: false, mode: "assume", topic: distinctive.join(" ") || String(opts.question).trim(),
+              nearest: fzGc.name || fz.id, assume: { id: fz.id, name: fzGc.name || fz.id }, resolver: "fuzzy" };
+          } else {
+            // topic genuinely not in the KB → drop the near-miss grounding so nothing wrong is described
+            grounding = []; lead = null; treatment = null; retrieved = [];
+            topicMatch = { matched: false, mode: "none", topic: distinctive.join(" ") || String(opts.question).trim(), nearest: (candGc && candGc.name) || candId || null };
+          }
         }
+      }
+
+      // ICU / calculator / drug / stewardship refs (by reference only). Assembled HERE — after
+      // the knowledge-question gate — so it reflects the FINAL grounding/treatment: on the
+      // standalone-question path lead/grounding/treatment are resolved inside that gate, so
+      // building refs earlier left every ref empty. Derive disease-object refs from the union of
+      // the case differential (top) AND the grounded diseases, covering both paths.
+      var coreArr = (window.KB_CORE && window.KB_CORE.diseases) || [];
+      var coreById = {}; (Array.isArray(coreArr) ? coreArr : Object.keys(coreArr).map(function (k) { return coreArr[k]; })).forEach(function (d) { if (d && d.id) coreById[d.id] = d; });
+      var refs = { drug: [], calculators: [], icuProtocols: [], stewardship: [] };
+      var seenDrug = {};
+      function addDrug(d) { if (d && !seenDrug[d]) { seenDrug[d] = 1; refs.drug.push(d); } }
+      grounding.forEach(function (g) { (g.drugRefs || []).forEach(addDrug); });
+      var refDiseaseIds = {};
+      top.forEach(function (c) { if (c && c.id) refDiseaseIds[c.id] = 1; });
+      grounding.forEach(function (g) { if (g && g.diseaseId) refDiseaseIds[g.diseaseId] = 1; });
+      Object.keys(refDiseaseIds).forEach(function (id) {
+        var d = coreById[id]; if (!d) return;
+        (d.drugRefs || []).forEach(function (x) { addDrug(typeof x === "string" ? x : (x && (x.composition || x.name))); });
+        (d.calculatorRefs || []).forEach(function (x) { if (refs.calculators.indexOf(x) < 0) refs.calculators.push(x); });
+        (d.icuModuleRefs || []).forEach(function (x) { if (refs.icuProtocols.indexOf(x) < 0) refs.icuProtocols.push(x); });
+      });
+      // drug references from the resolved treatment (by reference only)
+      if (treatment && treatment.default) (treatment.default.drugRefs || []).forEach(addDrug);
+      if (treatment) (treatment.alternatives || []).forEach(function (a) { (a.drugRefs || []).forEach(addDrug); });
+      if (treatment && treatment.diseaseId) {
+        var t = (window.KB_RAG && window.KB_RAG.treatments && window.KB_RAG.treatments[treatment.diseaseId]) || null;
+        if (t && t.stewardship) refs.stewardship = Array.isArray(t.stewardship) ? t.stewardship.slice(0, 6) : [t.stewardship];
       }
 
       return {

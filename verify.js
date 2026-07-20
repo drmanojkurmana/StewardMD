@@ -17,6 +17,9 @@
 (function () {
   "use strict";
 
+  // Shared inline-SVG icon catalog (window.ICONS) → self-styled line icons replacing OS emoji.
+  function vfIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+
   /* Team bypass during rollout (mirrors account.js TEST_PRO_EMAILS). Leave BETA_VERIFY_ALL
    * false; trim the allowlist before public launch and rely on the claim. */
   var BETA_VERIFY_ALL = false;
@@ -86,7 +89,7 @@
       $("verifyAccReg").textContent = (data && data.regNo) || (verified ? "—" : "not linked yet");
       var badge = $("verifyBadge");
       badge.className = "verify-badge " + (st === "trial" ? "pending" : st);   // reuse pending styling for trial
-      badge.textContent = ({ verified: "✓ Verified", pending: "Under review", trial: "Trial access", rejected: "Rejected", unverified: "Not verified" })[st] || st;
+      badge.innerHTML = ({ verified: vfIco("check") + " Verified", pending: "Under review", trial: "Trial access", rejected: "Rejected", unverified: "Not verified" })[st] || st;
     }
 
     $("verifyTitle").textContent = verified ? "Your account is verified" : (trial ? "You're on a 7-day trial" : (pending ? "Verification under review" : "Verify you're a registered doctor"));
@@ -163,7 +166,7 @@
 
       // 1) Auto-verified against NMC → big tick + full access (confirmation email sent server-side).
       if (data.status === "verified") {
-        setStatusMsg("success", "✓ Verified — Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). A confirmation email is on its way. Opening StewardMD…");
+        setStatusMsg("success", vfIco("check") + " Verified — Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). A confirmation email is on its way. Opening StewardMD…");
         try { await u.getIdToken(true); } catch (e) {}
         setTimeout(hideGate, 1200);
         return;
@@ -173,7 +176,7 @@
         var d = data.provisionalDays || 7;
         if (mode === "panel") { render("panel", { status: "pending", provisionalUntil: data.provisionalUntil }); submitting = false; return; }
         setStatusMsg("pending",
-          "✓ Certificate received. We couldn't auto-verify it instantly, so it's gone to our team for a quick manual check. " +
+          vfIco("check") + " Certificate received. We couldn't auto-verify it instantly, so it's gone to our team for a quick manual check. " +
           "You have <b>provisional access for " + d + " days</b> while we verify you — the <b>prescription generator stays locked</b> until then. " +
           "We'll email you once you're approved.");
         setTimeout(function () {
@@ -238,7 +241,7 @@
         btn = $("verifySubmit"), input = $("verifyFile"), drop = $("verifyDrop");
     var idMode = !!(reg && reg.value.trim());
     var hasFile = !!(input && input.files && input.files[0]);
-    if (label && !hasFile) label.textContent = idMode ? "🪪 Choose a photo ID" : "📄 Choose your registration certificate";
+    if (label && !hasFile) label.innerHTML = idMode ? vfIco("idcard") + " Choose a photo ID" : vfIco("note") + " Choose your registration certificate";
     if (sub) sub.textContent = idMode ? "Any government photo ID · we read only your name · never stored" : "JPG, PNG or PDF · from NMC / State Medical Council";
     if (btn && !btn.disabled) btn.textContent = hasFile ? (idMode ? "Verify with ID" : "Verify & continue") : (idMode ? "Choose photo ID" : "Choose certificate");
     if (drop) drop.classList.toggle("has-file", hasFile);
@@ -251,7 +254,7 @@
       input._smdWired = true;
       input.addEventListener("change", function () {
         var f = input.files && input.files[0];
-        if (f) { if (label) label.textContent = "📄 " + f.name; if (drop) drop.classList.add("has-file"); if (btn) btn.disabled = false; }
+        if (f) { if (label) (label.innerHTML = vfIco("note"), label.appendChild(document.createTextNode(" " + f.name))); if (drop) drop.classList.add("has-file"); if (btn) btn.disabled = false; }
         else { if (drop) drop.classList.remove("has-file"); if (btn) btn.disabled = false; }
         syncMode();
       });
@@ -332,7 +335,7 @@
     var menu = $("sbMenu"); if (!menu || menu.querySelector("[data-smd-verify]")) return;
     var b = document.createElement("button");
     b.className = "sb-main sb-main-link"; b.setAttribute("data-smd-verify", "1");
-    b.innerHTML = '<span class="ic">🩺</span><span>Account &amp; Verification</span>';
+    b.innerHTML = '<span class="ic">' + vfIco("shield") + '</span><span>Account &amp; Verification</span>';
     b.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(openPanel, 80); });
     menu.insertBefore(b, menu.firstChild);
   }

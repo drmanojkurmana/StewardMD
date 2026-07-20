@@ -19,6 +19,7 @@ import {
   getSeen, setSeen, listWatchUids,
 } from "../../_watch.js";
 import { sendNativeToAll } from "../../_nativepush.js";
+import { watchSetTaskStatus, watchAppendTimeline } from "../../_icuwrite.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
@@ -109,6 +110,69 @@ export async function onRequest(context) {
   const seg = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
   const method = request.method;
   const origin = new URL(request.url).origin;
+
+  // ── Apple Watch: acknowledge a critical result ──────────────────────────────
+  // Placed BEFORE the Lab-Watch config guard so acks work even where the GHIS
+  // Lab-Watch feature isn't configured. Idempotent by client key; appended to a
+  // per-user audit log. Uses the cases KV (independent of Lab-Watch encryption).
+  if (method === "POST" && seg === "ack") {
+    const auid = await identify(request, env);
+    if (!auid) return json({ error: "auth-required" }, 401);
+    const store = env.CASES_KV || env.GHIS_KV || null;
+    if (!store) return json({ error: "no-store" }, 501);
+    let b = {}; try { b = await request.json(); } catch (e) {}
+    const ackId = String(b.id || "").slice(0, 120);
+    if (!ackId) return json({ error: "missing-id" }, 400);
+    const key = "watchack:" + auid;
+    let log = [];
+    try { log = (await store.get(key, "json")) || []; } catch (e) {}
+    if (log.some((a) => a.id === ackId)) return json({ ok: true, idempotent: true });
+    log.push({
+      id: ackId,
+      labId: String(b.labId || "").slice(0, 120),
+      patient: String(b.patientLabel || "").slice(0, 120),
+      ackedAt: Number(b.ackedAt) || Math.floor(Date.now() / 1000),
+      at: Date.now(),
+    });
+    log = log.slice(-500);
+    await store.put(key, JSON.stringify(log));
+    return json({ ok: true });
+  }
+
+  // ── Apple Watch: write an ICU action straight to Firestore (task status +
+  // timeline) — the direct-API path, independent of the phone relay. The caller's
+  // uid comes from the verified token; every write is gated on unit membership.
+  if (method === "POST" && seg === "task") {
+    const wuid = await identify(request, env);
+    if (!wuid) return json({ error: "auth-required" }, 401);
+    let b = {}; try { b = await request.json(); } catch (e) {}
+    const r = await watchSetTaskStatus(env, wuid, String(b.gid || ""), String(b.pid || ""), String(b.taskId || ""), String(b.status || ""));
+    return json(r, r.ok ? 200 : (r.error === "forbidden" ? 403 : 400));
+  }
+  if (method === "POST" && seg === "timeline") {
+    const wuid = await identify(request, env);
+    if (!wuid) return json({ error: "auth-required" }, 401);
+    let b = {}; try { b = await request.json(); } catch (e) {}
+    const r = await watchAppendTimeline(env, wuid, String(b.gid || ""), String(b.pid || ""),
+      { type: b.type, title: String(b.title || "").slice(0, 180), detail: String(b.detail || "").slice(0, 500) });
+    return json(r, r.ok ? 200 : (r.error === "forbidden" ? 403 : 400));
+  }
+
+  // Code Blue started on the watch → push a guaranteed alert to the clinician's own
+  // iPhone (shows even when the app is force-quit; local notifications can't). Tapping
+  // it (url "codeblue") opens the app → Command Center. iOS phone only, not the watch.
+  if (method === "POST" && seg === "codeblue") {
+    const wuid = await identify(request, env);
+    if (!wuid) return json({ error: "auth-required" }, 401);
+    let b = {}; try { b = await request.json(); } catch (e) {}
+    if (String(b.event || "start") !== "start") return json({ ok: true });   // only "start" alerts
+    const r = await sendNativeToAll(env, {
+      title: "CODE BLUE",
+      body: "A code is active — tap to open the Command Center.",
+      url: "codeblue", tag: "codeblue",
+    }, { uid: wuid, platform: "ios" });
+    return json({ ok: true, pushed: (r && r.sent) || 0 });
+  }
 
   if (!watchConfigured(env)) return json({ error: "watch-not-configured" }, 503);
 

@@ -13,6 +13,8 @@
 (function () {
   "use strict";
 
+  function abIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+
   /* ─────────────────────────  COVERAGE DATA  ─────────────────────────
      Organism columns grouped; coverage is the classic spectrum-of-activity
      (ref: github.com/aetherist/antibiogram, educational). */
@@ -231,7 +233,7 @@
     if (!root || root.querySelector("#abgRotate")) return;
     var h = document.createElement("div");
     h.className = "abg-rotate"; h.id = "abgRotate";
-    h.innerHTML = '<span class="abg-rotate-ic">🔄</span><span class="abg-rotate-tx">Rotate your phone for a wider view of the grid.</span><button class="abg-rotate-x" data-act="rotate-dismiss" aria-label="Dismiss">✕</button>';
+    h.innerHTML = '<span class="abg-rotate-ic">🔄</span><span class="abg-rotate-tx">Rotate your phone for a wider view of the grid.</span><button class="abg-rotate-x" data-act="rotate-dismiss" aria-label="Dismiss">' + abIco("close") + '</button>';
     root.appendChild(h);
     requestAnimationFrame(function () { h.classList.add("on"); });
     h.addEventListener("click", function (e) { if (e.target.closest("[data-act='rotate-dismiss']")) hideRotateHint(); });
@@ -319,13 +321,13 @@
     if (covSelType === "drug") {
       var d = COVERAGE[covSel];
       var keys = Object.keys(d.cov).sort(function (a, b) { return (d.cov[b] || 0) - (d.cov[a] || 0); });   // reliable (2) first
-      return '<button class="abg-clear" data-act="clearcov">✕</button><b>' + esc(d.agent) + '</b> covers: ' +
+      return '<button class="abg-clear" data-act="clearcov">' + abIco("close") + '</button><b>' + esc(d.agent) + '</b> covers: ' +
         (keys.length ? '<span class="abg-tags">' + keys.map(function (id) { return '<em class="' + (d.cov[id] === 1 ? "part" : "") + '">' + esc(colLabel(id)) + '</em>'; }).join("") + '</span>' : '—') +
         (d.note ? '<span class="abg-note-sm">' + esc(d.note) + '</span>' : '');
     }
     // org selected — any tier active, reliable (2) listed first
     var hits = COVERAGE.filter(function (x) { return x.cov[covSel]; }).sort(function (a, b) { return (b.cov[covSel] || 0) - (a.cov[covSel] || 0); });
-    return '<button class="abg-clear" data-act="clearcov">✕</button><b>' + esc(colLabel(covSel)) + '</b> is covered by: ' +
+    return '<button class="abg-clear" data-act="clearcov">' + abIco("close") + '</button><b>' + esc(colLabel(covSel)) + '</b> is covered by: ' +
       (hits.length ? '<span class="abg-tags">' + hits.map(function (x) { return '<em class="' + (x.cov[covSel] === 1 ? "part" : "") + '">' + esc(x.agent) + '</em>'; }).join("") + '</span>' : '—');
   }
   function colLabel(id) { for (var i = 0; i < COLS.length; i++) if (COLS[i].id === id) return COLS[i].label; return id; }
@@ -336,7 +338,7 @@
   function resistanceView() {
     var src = abgData();
     if (!src || !src.org || !Object.keys(src.org).length)
-      return '<div class="abg-empty"><div class="abg-empty-ic">📊</div><b>Antibiogram unavailable</b><p>The susceptibility dataset has not loaded yet, or this profile has no antibiogram. Reopen this screen in a moment.</p></div>';
+      return '<div class="abg-empty"><div class="abg-empty-ic">' + abIco("trend") + '</div><b>Antibiogram unavailable</b><p>The susceptibility dataset has not loaded yet, or this profile has no antibiogram. Reopen this screen in a moment.</p></div>';
 
     var curId = (window.HOSPITAL && window.HOSPITAL.current) ? window.HOSPITAL.current().id : "ICMR";
     var h = '<div class="abg-srcbar"><label class="abg-srclab">Source</label>' +
@@ -356,7 +358,7 @@
       Object.keys(drugs).forEach(function (k) {
         var v = drugs[k], s = v.s;
         var prov = v.src ? ' data-org="' + esc(name) + '" data-drug="' + esc(k) + '"' : '';
-        h += '<div class="abg-dr' + (v.src ? ' abg-dr-prov' : '') + '"' + prov + '><span class="abg-dr-n">' + esc(drugLabel(k)) + (v.src ? ' <i class="abg-prov" title="tap for source">ⓘ</i>' : '') + '</span>';
+        h += '<div class="abg-dr' + (v.src ? ' abg-dr-prov' : '') + '"' + prov + '><span class="abg-dr-n">' + esc(drugLabel(k)) + (v.src ? ' <i class="abg-prov" title="tap for source">' + abIco("info") + '</i>' : '') + '</span>';
         if (s == null) {
           h += '<span class="abg-dr-q">' + esc(v.q || "—") + '</span>';
         } else {

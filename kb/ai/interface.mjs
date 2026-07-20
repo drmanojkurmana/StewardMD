@@ -43,8 +43,12 @@ export function rrf(a, b, K) {
 }
 
 const STOP = new Set("the a an of to in is are with and or for as on at by from this that without within into be can may not no".split(" "));
+// Two-letter clinical abbreviations that MUST survive tokenisation. The length>2 filter otherwise
+// drops them, so their disease aliases ("mi"→ACS, "af"→atrial fibrillation) never match and the
+// query mis-routes ("how to treat MI" grounded on whatever generic-management chunk ranked first).
+const KEEP_SHORT = new Set(["mi", "af"]);
 function tokenize(s) {
-  return String(s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter((w) => w.length > 2 && !STOP.has(w));
+  return String(s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter((w) => (w.length > 2 || KEEP_SHORT.has(w)) && !STOP.has(w));
 }
 
 export function createStewardAI(store, opts) {
@@ -59,7 +63,12 @@ export function createStewardAI(store, opts) {
   // precompute per-chunk token bags for deterministic lexical retrieval.
   // nameToks are tracked separately so a query that NAMES a disease ranks that
   // disease's own chunks above chunks that merely mention it (e.g. a differential).
-  const bags = chunks.map((c) => ({ c, toks: tokenize(c.text + " " + c.diseaseName + " " + c.section),
+  // Aliases are folded into BOTH bags: nameToks (so an alias hit ranks the disease's own chunks
+  // above chunks that merely mention it) AND toks (so a query that uses ONLY an alias term —
+  // "clostridium"/"c diff" for Clostridioides difficile, absent from the body text — still scores
+  // s>0 and survives the `s>0` retrieval filter; previously aliases only re-ranked, they could not
+  // make a disease retrievable when the alias word appeared nowhere in its text/name).
+  const bags = chunks.map((c) => ({ c, toks: tokenize(c.text + " " + c.diseaseName + " " + c.section + " " + (c.aliases || "")),
     nameToks: new Set(tokenize(c.diseaseName + " " + c.diseaseId + " " + (c.aliases || ""))) }));
   const df = {};
   bags.forEach((b) => { const seen = new Set(); b.toks.forEach((t) => { if (!seen.has(t)) { seen.add(t); df[t] = (df[t] || 0) + 1; } }); });

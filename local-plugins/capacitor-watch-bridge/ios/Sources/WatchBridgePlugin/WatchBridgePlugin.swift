@@ -1,0 +1,252 @@
+import Foundation
+import Capacitor
+import SwiftUI
+import UserNotifications
+import StewardMDWatchCore
+#if canImport(WatchConnectivity)
+import WatchConnectivity
+#endif
+
+/**
+ * WatchBridge — publishes the signed-in session and favorites/recents to the
+ * paired Apple Watch (StewardMD watchOS app + widgets).
+ *
+ * Exposed to JS as `Capacitor.Plugins.WatchBridge.publish({...})` / `.clear()`.
+ * Called only from `native-watch.js`, which is `SMD_IS_NATIVE`-gated and no-ops
+ * on the web build — so this plugin never affects the existing web/native flows.
+ *
+ * Transport is dual, for reliability:
+ *   1. Shared App Group `UserDefaults` (group.in.stewardmd.app) — read by the
+ *      watch app AND the WidgetKit extension. Persists across launches.
+ *   2. `WCSession.updateApplicationContext` — pushes the latest state to the
+ *      watch immediately when it is reachable (coalesced, latest-wins).
+ *
+ * Keys written to the App Group match `AppGroupStore` in StewardMDWatchCore
+ * ("smd.session", "smd.favorites") so the watch decodes them directly.
+ */
+@objc(WatchBridgePlugin)
+public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
+    public let identifier = "WatchBridgePlugin"
+    public let jsName = "WatchBridge"
+    public let pluginMethods: [CAPPluginMethod] = [
+        CAPPluginMethod(name: "publish", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "clear", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getStatus", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "openCodeBlue", returnType: CAPPluginReturnPromise)
+    ]
+
+    private let suiteName = "group.in.stewardmd.app"
+    private let sessionKey = "smd.session"
+    private let favoritesKey = "smd.favorites"
+    private let recentsKey = "smd.recents"
+    private let notifPrefsKey = "smd.notifPrefs"
+    private let glanceKey = "smd.glance"
+    private let watchlistKey = "smd.watchlist"
+    private let criticalsKey = "smd.criticals"
+    private let tasksKey = "smd.tasks"
+    private let calcsKey = "smd.calcs"
+
+    private lazy var relay = WatchConnectivityRelay()
+    /// Last Code Blue running state emitted to JS — so `codeBlueActive` fires only on change.
+    private var lastCodeBlueRunning: Bool?
+
+    override public func load() {
+        // Force the WCSession to activate at plugin load so getStatus() is reliable.
+        _ = relay
+        // Start the phone-side Code Blue live mirror so it ingests + persists even
+        // before the Command Center screen is opened.
+        DispatchQueue.main.async { CodeBlueLiveModel.shared.begin() }
+        // Tell the web layer when a code goes active/inactive (drives the on-screen
+        // "CODE BLUE" alert banner). Fires only on a running-state change.
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.codeBlueReceived, object: nil, queue: .main
+        ) { [weak self] note in
+            guard let self = self,
+                  let data = note.userInfo?["state"] as? Data,
+                  let state = try? JSONDecoder().decode(CodeBlueState.self, from: data) else { return }
+            if self.lastCodeBlueRunning != state.running {
+                self.lastCodeBlueRunning = state.running
+                self.notifyListeners("codeBlueActive", data: ["running": state.running])
+                // Local alert so the phone notifies even when the app is closed/backgrounded
+                // (WatchConnectivity woke it to deliver this). Cleared when the code ends.
+                if state.running { self.postCodeBlueAlert() } else { self.clearCodeBlueAlert() }
+            }
+        }
+        // Reset from the watch → dismiss the on-screen alert + re-arm for the next code.
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.codeBlueReset, object: nil, queue: .main
+        ) { [weak self] _ in
+            self?.lastCodeBlueRunning = false
+            self?.notifyListeners("codeBlueActive", data: ["running": false])
+            self?.clearCodeBlueAlert()
+        }
+        // When the watch asks for a fresh token, re-emit to JS so native-watch.js
+        // republishes. Decoupled via a string-keyed notification (same pattern as
+        // AppOrientationPlugin) so the plugin owns no cross-module symbols.
+        #if canImport(WatchConnectivity)
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.tokenRequested, object: nil, queue: .main
+        ) { [weak self] _ in
+            self?.notifyListeners("tokenRequested", data: [:])
+        }
+        // Watch → phone task-status write-back → JS (SMD_ICU_GROUPS.setTaskStatus).
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.taskStatusRequested, object: nil, queue: .main
+        ) { [weak self] note in
+            self?.notifyListeners("taskStatus", data: (note.userInfo as? [String: Any]) ?? [:])
+        }
+        // Watch → phone APNs token → JS (POST /api/push/register-native, platform "watch").
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.watchTokenReceived, object: nil, queue: .main
+        ) { [weak self] note in
+            self?.notifyListeners("watchPushToken", data: (note.userInfo as? [String: Any]) ?? [:])
+        }
+        // Watch → phone critical-ack → JS (SMD_ICU_GROUPS.addTimelineEvent).
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.labAckRequested, object: nil, queue: .main
+        ) { [weak self] note in
+            self?.notifyListeners("labAck", data: (note.userInfo as? [String: Any]) ?? [:])
+        }
+        #endif
+    }
+
+    /// Live WCSession state for the Settings → Apple Watch page (auto-detects
+    /// pairing). iOS-only properties; on any other platform returns supported:false.
+    @objc func getStatus(_ call: CAPPluginCall) {
+        #if canImport(WatchConnectivity)
+        guard WCSession.isSupported() else { call.resolve(["supported": false]); return }
+        let s = WCSession.default
+        call.resolve([
+            "supported": true,
+            "paired": s.isPaired,
+            "watchAppInstalled": s.isWatchAppInstalled,
+            "complicationEnabled": s.isComplicationEnabled,
+            "reachable": s.isReachable,
+            "activationState": s.activationState.rawValue
+        ])
+        #else
+        call.resolve(["supported": false])
+        #endif
+    }
+
+    @objc func publish(_ call: CAPPluginCall) {
+        // Session — encode {uid, idToken, expiresAt} exactly as StewardMDWatchCore.Session.
+        var session: [String: Any] = [:]
+        if let uid = call.getString("uid") { session["uid"] = uid }
+        if let token = call.getString("idToken") { session["idToken"] = token }
+        if let exp = call.getDouble("expiresAt") { session["expiresAt"] = exp }
+
+        // JSArray elements are already JSON-compatible (String/NSNumber/NSNull/…).
+        let favorites: [Any] = call.getArray("favorites") ?? []
+        let recents: [Any] = call.getArray("recents") ?? []
+        let notifPrefs = call.getObject("notifPrefs")
+        // glance (census/counts) + watchlist are OPTIONAL — only forwarded when the
+        // caller provides them, so a session-only publish never wipes the watch's
+        // last-known census/patient list.
+        let glance = call.getObject("glance")
+        let watchlist = call.getArray("watchlist")
+        let criticals = call.getArray("criticals")
+        let tasks = call.getArray("tasks")
+        let role = call.getString("role")
+        let calcDefs = call.getArray("calcDefs")
+
+        let sessionData = try? JSONSerialization.data(withJSONObject: session)
+        let favData = try? JSONSerialization.data(withJSONObject: favorites)
+        let recentsData = try? JSONSerialization.data(withJSONObject: recents)
+        let notifData = notifPrefs.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
+        let glanceData = glance.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
+        let watchlistData = watchlist.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
+        let criticalsData = criticals.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
+        let tasksData = tasks.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
+        let calcDefsData = calcDefs.flatMap { try? JSONSerialization.data(withJSONObject: $0) }
+
+        if let d = UserDefaults(suiteName: suiteName) {
+            d.set(sessionData, forKey: sessionKey)
+            d.set(favData, forKey: favoritesKey)
+            d.set(recentsData, forKey: recentsKey)
+            if let n = notifData { d.set(n, forKey: notifPrefsKey) }
+            if let g = glanceData { d.set(g, forKey: glanceKey) }
+            if let w = watchlistData { d.set(w, forKey: watchlistKey) }
+            if let c = criticalsData { d.set(c, forKey: criticalsKey) }
+            if let t = tasksData { d.set(t, forKey: tasksKey) }
+            if let c = calcDefsData { d.set(c, forKey: calcsKey) }
+        }
+
+        var context: [String: Any] = [:]
+        if let s = sessionData { context["session"] = s }
+        if let f = favData { context["favorites"] = f }
+        if let r = recentsData { context["recents"] = r }
+        if let n = notifData { context["notifPrefs"] = n }
+        if let g = glanceData { context["glance"] = g }
+        if let w = watchlistData { context["watchlist"] = w }
+        if let c = criticalsData { context["criticals"] = c }
+        if let t = tasksData { context["tasks"] = t }
+        if let r = role { context["role"] = r }
+        if let c = calcDefsData { context["calcDefs"] = c }
+
+        relay.updateContext(context)
+
+        call.resolve()
+    }
+
+    @objc func clear(_ call: CAPPluginCall) {
+        if let d = UserDefaults(suiteName: suiteName) {
+            d.removeObject(forKey: sessionKey)
+            d.removeObject(forKey: favoritesKey)
+            d.removeObject(forKey: recentsKey)
+            d.removeObject(forKey: notifPrefsKey)
+            d.removeObject(forKey: glanceKey)
+            d.removeObject(forKey: watchlistKey)
+            d.removeObject(forKey: criticalsKey)
+            d.removeObject(forKey: tasksKey)
+            d.removeObject(forKey: calcsKey)
+        }
+        // Privacy: clear the on-device Code Blue log on sign-out (design §10).
+        DispatchQueue.main.async { CodeBlueLiveModel.shared.clearLocal() }
+        relay.updateContext(["cleared": true])
+        call.resolve()
+    }
+
+    private static let codeBlueAlertId = "smd-codeblue-alert"
+
+    /// Post an immediate local notification when a code starts, so the clinician is
+    /// alerted even with the app closed/backgrounded. Tapping it opens the app, where
+    /// the on-screen "CODE BLUE" banner is already showing to enter the Command Center.
+    private func postCodeBlueAlert() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { _, _ in }
+        let content = UNMutableNotificationContent()
+        content.title = "CODE BLUE"
+        content.body = "A code is active. Tap to open the Command Center."
+        content.sound = .default
+        content.userInfo = ["smdCodeBlue": true]
+        let req = UNNotificationRequest(identifier: Self.codeBlueAlertId, content: content, trigger: nil)
+        center.add(req, withCompletionHandler: nil)
+    }
+
+    private func clearCodeBlueAlert() {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [Self.codeBlueAlertId])
+        center.removeDeliveredNotifications(withIdentifiers: [Self.codeBlueAlertId])
+    }
+
+    /// Present the native SwiftUI Code Blue Command Center full-screen from the web
+    /// home card (design §4.1). Export taps are relayed to JS via `codeBlueExport`.
+    @objc func openCodeBlue(_ call: CAPPluginCall) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, let presenter = self.bridge?.viewController else {
+                call.reject("no-vc"); return
+            }
+            let root = CommandCenterView(
+                onExport: { [weak self] detail in
+                    self?.notifyListeners("codeBlueExport", data: ["detail": detail])
+                },
+                onClose: { presenter.presentedViewController?.dismiss(animated: true) }
+            )
+            let host = UIHostingController(rootView: root)
+            host.modalPresentationStyle = .fullScreen
+            presenter.present(host, animated: true)
+            call.resolve()
+        }
+    }
+}

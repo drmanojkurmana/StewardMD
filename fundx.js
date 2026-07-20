@@ -37,10 +37,13 @@
   var H = (typeof window !== "undefined" && window.SMD_HAPTICS) || null;
 
   var rootEl = null, ctx = null, screen = "home";
-  var session = null, cam = null, sm = null, hub = null, lastFa = null, result = null, detail = null;
+  var session = null, cam = null, sm = null, eng = null, perfMeter = null, hud = null, hub = null, lastFa = null, result = null, detail = null;
+  function perfNow() { return (typeof performance !== "undefined" && performance.now) ? performance.now() : (typeof Date !== "undefined" ? Date.now() : 0); }
   var usingNative = false;   // depth mode: native (ARCore/ARKit) camera owns the pipeline
-  var devLive = { pipeline: null, confidence: null, fps: 0, frames: 0, lastT: 0, depthMm: null, contributions: null };  // live dev telemetry
-  var capturing = false, lastHapticState = "", scanSeq = 0, lastCoachArrow = null;
+  var usingGpu = false;      // GPU preview: native camera surface behind a transparent WebView
+  var lastGuidePhase = "";   // spatial-AR: last phase pushed to the native SceneKit guide (change-gated)
+  var devLive = { pipeline: null, confidence: null, fps: 0, frames: 0, lastT: 0, depthMm: null, contributions: null, perf: null };  // live dev telemetry
+  var capturing = false, lastHapticState = "", scanSeq = 0, lastCoachArrow = null, lastCritical = false, lastCoachText = "", lastCoachTier = "", lastCoachDetail = "", lastStepKey = null;
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
   function ric(name) { return '<span class="rds-icon" aria-hidden="true">' + name + '</span>'; }
@@ -89,24 +92,64 @@
   // Advisory Clinical Engine (Phase C) is a NESTED flag, default OFF — no clinical advice
   // surfaces unless explicitly enabled. When on, a rule-based advisory assessment renders.
   function clinicalOn() { try { return localStorage.getItem("smd_fundx_clinical") === "1"; } catch (e) { return false; } }
-  function clinicalCard(findingsWrap) {
-    if (!clinicalOn() || !window.SMD_FUNDX_CLINICAL || !findingsWrap) return "";
-    var a;
-    try { a = window.SMD_FUNDX_CLINICAL.assessSync(findingsWrap, { age: ctx && ctx.age, sex: ctx && ctx.sex, dx: (ctx && ctx.meta) || "" }); } catch (e) { return ""; }
-    var sev = { none: "stable", mild: "stable", moderate: "warning", severe: "critical" }[a.severity] || "info";
-    var urg = { routine: "stable", soon: "warning", urgent: "urgent", emergency: "critical" }[a.urgency] || "info";
+  // ONE patient-context mapping for BOTH the live report and the frozen (saved) assessment, so the
+  // clinician reviews exactly what is persisted. assessRules regexes .dx for diabetes/HTN and reads
+  // .hba1c/.sbp/.age; ctx.meta carries the joined history string, so it maps to .dx.
+  function patientCtx() {
+    var c = ctx || {};
+    return { ref: c.ref || null, name: c.name || null, age: c.age, sex: c.sex, meta: c.meta, dx: c.meta || c.dx || c.diagnosis || "", hba1c: c.hba1c, sbp: c.sbp };
+  }
+  var SEVCLS = { none: "stable", mild: "stable", moderate: "warning", severe: "critical" };
+  function reviewBadge(status) {
+    var m = { accepted: ["check_circle", "Accepted", "stable"], rejected: ["cancel", "Rejected", "critical"], edited: ["edit", "Edited", "warning"], pending: ["hourglass_empty", "Pending review", "info"] };
+    var x = m[status] || m.pending;
+    return '<span class="fundx-rev-badge b-' + x[2] + '">' + ric(x[0]) + esc(x[1]) + '</span>';
+  }
+  // Full structured clinical REPORT (README 09) + clinician oversight. `record` is a ScanRecord-like
+  // object (needs .vision + .quality + .patientContext + .clinicianReview); `scope` is "result" or
+  // "detail" so oversight actions know where to persist. Advisory only — never a diagnosis.
+  function clinicalCard(record, scope) {
+    if (!clinicalOn() || !window.SMD_FUNDX_CLINICAL || !record) return "";
+    var C = window.SMD_FUNDX_CLINICAL, rep;
+    try { rep = C.buildReport(record); } catch (e) { return ""; }
     function badge(cls, txt) { return '<span class="fundx-badge b-' + cls + '">' + esc(txt) + '</span>'; }
-    var ref = a.referral ? '<div class="fundx-frow"><span>Referral</span><b>' + esc(a.referral.to) + ' · ' + esc(a.referral.priority) + '</b></div>' : '';
-    var inv = a.investigations && a.investigations.length ? '<div class="fundx-frow"><span>Suggested</span><b>' + esc(a.investigations.join(", ")) + '</b></div>' : '';
-    var safety = a.safetyFlags && a.safetyFlags.length ? '<div class="fundx-whys">' + a.safetyFlags.map(function (s) { return '<span class="fundx-why">' + ric("shield") + esc(s.replace(/_/g, " ")) + '</span>'; }).join("") + '</div>' : '';
+    var sevCls = SEVCLS[rep.severity] || "info";
+    var urgCls = { routine: "stable", soon: "warning", urgent: "urgent", emergency: "critical" }[rep.urgency] || "info";
+    var urgent = rep.urgentFindings.length ? '<div class="fundx-verdict bad">' + ric("emergency") + '<span>Urgent — ' + esc(rep.urgentFindings.map(function (s) { return s.replace(/_/g, " "); }).join(", ")) + '</span></div>' : '';
+    var diff = rep.differential.length
+      ? '<div class="fundx-diff-list">' + rep.differential.slice(0, 4).map(function (d) {
+          return '<div class="fundx-diff"><div class="fundx-diff-h"><b>' + d.rank + '. ' + esc(d.label) + '</b><span class="fundx-badge b-' + (SEVCLS[d.severity] || "info") + '">' + esc(d.severity) + ' · ' + esc(d.likelihood) + '</span></div>' + (d.reasoning ? '<span class="fundx-diff-r">' + esc(d.reasoning) + '</span>' : '') + '</div>';
+        }).join("") + '</div>'
+      : '<p class="fundx-note">No significant retinal features detected this scan.</p>';
+    var rc = rep.recommendations || {};
+    var ref = rc.referral ? '<div class="fundx-frow"><span>Referral</span><b>' + esc(rc.referral.to) + ' · ' + esc(rc.referral.priority) + '</b></div>' : '';
+    var inv = (rc.investigations && rc.investigations.length) ? '<div class="fundx-frow"><span>Suggested</span><b>' + esc(rc.investigations.join(", ")) + '</b></div>' : '';
+    var fu = rc.followUp ? '<div class="fundx-frow"><span>Follow-up</span><b>' + esc(rc.followUp.interval) + '</b></div>' : '';
+    // Non-urgent safety flags (poor image quality, clinician-review-required, simulated findings)
+    // must stay visible — they caution the clinician about confidence/validity (README 09 safety).
+    var cautions = (rep.safetyFlags || []).filter(function (s) { return rep.urgentFindings.indexOf(s) < 0; });
+    var cautionRow = cautions.length ? '<div class="fundx-whys">' + cautions.map(function (s) { return '<span class="fundx-why">' + ric("shield") + esc(s.replace(/_/g, " ")) + '</span>'; }).join("") + '</div>' : '';
+    var rv = record.clinicianReview || null;
+    var oversight = '<div class="rds-section-header"><span class="rds-section-title">Clinician oversight</span></div>' +
+      '<div class="fundx-oversight">' + reviewBadge(rv ? rv.status : "pending") +
+        (rv && rv.note ? '<div class="fundx-rev-note">' + ric("sticky_note_2") + esc(rv.note) + '</div>' : '') +
+        (rv && rv.editedConclusion ? '<div class="fundx-rev-note">' + ric("edit_note") + esc(rv.editedConclusion) + '</div>' : '') +
+        '<div class="fundx-rev-actions">' +
+          '<button class="fundx-btn ghost sm" data-fx="reviewact" data-act="accept" data-scope="' + scope + '">' + ric("check") + 'Accept</button>' +
+          '<button class="fundx-btn ghost sm" data-fx="reviewact" data-act="reject" data-scope="' + scope + '">' + ric("close") + 'Reject</button>' +
+          '<button class="fundx-btn ghost sm" data-fx="reviewact" data-act="comment" data-scope="' + scope + '">' + ric("add_comment") + 'Note</button>' +
+          '<button class="fundx-btn ghost sm" data-fx="reviewact" data-act="edit" data-scope="' + scope + '">' + ric("edit") + 'Edit</button>' +
+        '</div></div>';
     return '<div class="rds-section-header"><span class="rds-section-title">Clinical assessment · advisory</span></div>' +
-      '<div class="fundx-clin">' +
-        '<div class="fundx-clin-top"><b>' + esc(a.label) + '</b><span>' + badge(sev, a.severity) + badge(urg, a.urgency) + '</span></div>' +
-        '<div class="fundx-findings" style="margin-top:10px">' + ref + inv +
-          '<div class="fundx-frow"><span>Follow-up</span><b>' + esc(a.followUp.interval) + '</b></div>' +
-          '<div class="fundx-frow"><span>Confidence</span><b>' + a.confidence + '</b></div>' +
-        '</div>' + safety +
-        '<p class="fundx-note">' + esc(a.disclaimer) + ' (' + esc(a.provider) + ' engine)</p>' +
+      '<div class="fundx-clin">' + urgent +
+        '<div class="fundx-clin-top"><b>' + esc(rep.differential.length ? rep.differential[0].label : "No significant features detected") + '</b><span>' + badge(sevCls, rep.severity) + badge(urgCls, rep.urgency) + '</span></div>' +
+        diff +
+        '<div class="fundx-findings" style="margin-top:10px">' + ref + inv + fu +
+          '<div class="fundx-frow"><span>Confidence</span><b>' + (rep.confidence != null ? rep.confidence : "—") + '</b></div>' +
+        '</div>' +
+        cautionRow +
+        oversight +
+        '<p class="fundx-note">' + esc(rep.disclaimer) + '</p>' +
       '</div>';
   }
 
@@ -179,6 +222,8 @@
       '<main class="fundx-scroll">' +
         '<button class="fundx-cta" data-fx="newscan">' + ric("visibility") +
           '<div class="fundx-cta-tx"><b>New retinal scan</b><span>Guided capture with the 20D lens</span></div>' + ric("chevron_right") + '</button>' +
+        (uploadOn() ? '<button class="fundx-cta fundx-cta-2" data-fx="analyzeimg">' + ric("add_photo_alternate") +
+          '<div class="fundx-cta-tx"><b>Analyze fundus image</b><span>Upload an existing retinal photo</span></div>' + ric("chevron_right") + '</button>' : '') +
         '<div class="fundx-row2">' +
           '<button class="fundx-tile" data-fx="training">' + ric("school") + '<b>Training</b><span>Learn to align the lens</span></button>' +
           '<button class="fundx-tile" data-fx="gallery">' + ric("collections") + '<b>Scans</b><span>Review captures</span></button>' +
@@ -187,6 +232,173 @@
         '<div id="fundxRecent" class="fundx-recent"><div class="fundx-empty">' + ric("hourglass_empty") + '<span>Loading…</span></div></div>' +
         '<p class="fundx-disc">' + disclaimerText() + '</p>' +
       '</main>';
+  }
+
+  // Workflow 2 · upload picker (drag-drop / camera roll / files / recent). Feeds the unified pipeline.
+  function screenUpload() {
+    return '' +
+      '<header class="fundx-head rds-safe-top">' +
+        '<button class="fundx-close" data-fx="home" aria-label="Back">' + ric("arrow_back_ios_new") + '</button>' +
+        '<div class="fundx-head-tt"><b>Analyze fundus image</b></div><div class="fundx-head-sp"></div>' +
+      '</header>' +
+      '<main class="fundx-scroll">' +
+        '<div id="fundxDrop" class="fundx-drop" data-fx="pickimg" role="button" tabindex="0" aria-label="Add retinal image">' + ric("add_photo_alternate") +
+          '<b>Add retinal image</b><span>Tap to choose from Camera roll / Files — or drag &amp; drop</span></div>' +
+        '<input id="fundxFileInput" type="file" accept="image/*" multiple style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none" aria-hidden="true">' +
+        '<p class="fundx-note">Hospital fundus camera, smartphone adapter, referral, research or teaching image. Each is quality-checked, enhanced (non-destructively), and analyzed through the same pipeline as a live scan — then flows into the same report and history.</p>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Recent</span></div>' +
+        '<div id="fundxRecent" class="fundx-recent"><div class="fundx-empty">' + ric("hourglass_empty") + '<span>Loading…</span></div></div>' +
+        '<p class="fundx-disc">' + disclaimerText() + '</p>' +
+      '</main>';
+  }
+  function readFileDataUrl(file) {
+    return new Promise(function (resolve) {
+      try { var r = new FileReader(); r.onload = function () { resolve(r.result); }; r.onerror = function () { resolve(null); }; r.readAsDataURL(file); } catch (e) { resolve(null); }
+    });
+  }
+  function handleUploadFiles(files) {
+    var imgs = Array.prototype.slice.call(files || []).filter(function (f) { return f && /^image\//.test(f.type); });
+    if (!imgs.length) { toast("Choose an image file."); return; }
+    // "Add more" from the batch screen sets batchAppendPending — route the whole pick (1 or many)
+    // into the existing batch as an append, rather than switching to the single-image result view.
+    var append = batchAppendPending; batchAppendPending = false;
+    Promise.all(imgs.slice(0, 12).map(readFileDataUrl)).then(function (urls) {
+      urls = urls.filter(Boolean);
+      if (!urls.length) { toast("Could not read the image(s)."); return; }
+      if (append) processBatchUpload(urls, true);
+      else if (urls.length === 1) processImageUpload(urls[0]);
+      else processBatchUpload(urls);
+    });
+  }
+  // ---- Batch upload: analyze many fundus images, each through the same pipeline ------------
+  var batchResults = [], batchBusy = false, batchTotal = 0, batchRun = 0, batchAppendPending = false;
+  // Cancel any in-flight batch loop (bump the run token so its recursive next() bails on the next
+  // tick — no more per-image provider calls) and clear the busy flag. Called when the user leaves
+  // the batch screen or starts a different workflow, so an abandoned batch can't keep spending
+  // inference calls, and a newer batch can't race the old one into the shared batchResults array.
+  // Also clears batchResults so the array only ever holds an ACTIVE batch — leaving to home / live /
+  // single-upload / close abandons it. (Keeps batchResults.length a reliable "a live batch exists"
+  // signal and stops a stale batch from leaking across workflows.) The append path does NOT route
+  // through here, so "Add more" still preserves the batch.
+  function cancelBatch() { batchRun++; batchBusy = false; batchAppendPending = false; batchResults = []; }
+  // append=true keeps the existing batchResults and adds the new images (the "Add more" affordance
+  // genuinely accumulates instead of silently replacing already-analyzed acceptable scans).
+  function processBatchUpload(dataUrls, append) {
+    var run = ++batchRun;                 // run token — supersedes any prior in-flight batch
+    if (!append) { batchResults = []; batchTotal = 0; }
+    batchBusy = true; batchTotal += dataUrls.length;
+    if (!session || session.mode !== "upload") { session = newSession((session && session.eye) || "right"); session.mode = "upload"; }
+    session.source = "upload";
+    screen = "batch"; render();
+    var i = 0;
+    // Analyze ONE image; the returned promise settles when it (or its failure) is handled. A
+    // synchronous throw or a non-thenable provider return rejects it, but next()'s terminal handler
+    // still advances — so one bad image can never strand the batch at "analyzing…" (batchBusy stuck).
+    function step(url) {
+      return computeImageMetrics(url).then(function (metrics) {
+        if (run !== batchRun) return;     // superseded/cancelled mid-flight — stop, don't push
+        var r = FUNDX._buildUploadResult(url, metrics, ctx, session.eye);
+        if (!r) return;
+        r.source = "upload"; r._metrics = metrics;
+        return enhanceDataUrl(url).then(function (enh) { if (enh) r.images.processed = enh; }).catch(function () {})
+          .then(function () {
+            var P = window.SMD_FUNDX_PROVIDERS;
+            if (r.quality && r.quality.retinalGate !== false && P && P.analyzeFindings) {
+              return P.analyzeFindings({ imageDataUrl: r.images.processed || r.images.original, quality: r.quality.overall, metrics: metrics }, { patientRef: (ctx && ctx.ref) || null, eye: session.eye, ts: nowMs() }).then(function (f) { if (f) r.findings = f; }).catch(function () {});
+            }
+          })
+          .then(function () { if (run !== batchRun) return; batchResults.push(r); if (screen === "batch") render(); });
+      });
+    }
+    function next() {
+      if (run !== batchRun) return;       // a newer batch (or cancelBatch) took over — end this loop
+      if (i >= dataUrls.length) { batchBusy = false; if (screen === "batch") render(); return; }
+      step(dataUrls[i++]).catch(function () {}).then(function () { next(); });
+    }
+    next();
+  }
+  function screenBatch() {
+    var Ve = V();
+    var rows = batchResults.map(function (r, i) {
+      var gated = r.quality && r.quality.retinalGate === false;
+      var qw = (Ve && Ve.qualityWord) ? Ve.qualityWord(r.quality) : { label: "" };
+      var prim = "";
+      try { if (!gated && clinicalOn() && window.SMD_FUNDX_CLINICAL) { var rep = window.SMD_FUNDX_CLINICAL.buildReport({ vision: r.findings, quality: r.quality, patientContext: patientCtx() }); prim = rep.differential.length ? rep.differential[0].label : "No significant features"; } } catch (e) {}
+      return '<button class="fundx-scan" data-fx="openbatch" data-i="' + i + '">' +
+        (r.images.thumbnail ? '<img src="' + esc(r.images.thumbnail) + '" alt="">' : '<span class="fundx-scan-ph">' + ric("visibility") + '</span>') +
+        '<div class="fundx-scan-m"><b>Image ' + (i + 1) + ' · ' + esc(qw.label) + '</b><span>' + esc(gated ? "Point at the eye — not a retinal image" : (prim || "Tap to review")) + '</span></div>' +
+        '<span class="fundx-q">' + (gated ? '—' : Math.round(r.quality.overall)) + '</span></button>';
+    }).join("");
+    var acceptable = batchResults.filter(function (r) { return r.quality && r.quality.retinalGate !== false; }).length;
+    return '' +
+      '<header class="fundx-head rds-safe-top"><button class="fundx-close" data-fx="home" aria-label="Back">' + ric("arrow_back_ios_new") + '</button><div class="fundx-head-tt"><b>Batch analysis</b><div class="fundx-sub">' + batchResults.length + ' / ' + batchTotal + (batchBusy ? ' · analyzing…' : ' analyzed') + '</div></div><div class="fundx-head-sp"></div></header>' +
+      '<main class="fundx-scroll">' +
+        '<div class="fundx-recent">' + (rows || '<div class="fundx-empty">' + ric(batchBusy ? "hourglass_empty" : "visibility_off") + '<span>' + (batchBusy ? "Analyzing…" : "No retinal images detected.") + '</span></div>') + '</div>' +
+        // "Add more" is available whenever analysis has settled — even when every image failed the
+        // retinal gate (acceptable === 0), so the user can add correct images in place rather than
+        // being stranded with only the back arrow. Save appears only when ≥1 image is acceptable.
+        (!batchBusy ? '<div class="fundx-actions"><button class="fundx-btn ghost" data-fx="batchmore">' + ric("add_photo_alternate") + 'Add more</button>' + (acceptable ? '<button class="fundx-btn" data-fx="saveallbatch">' + ric("save") + 'Save ' + acceptable + ' to patient</button>' : '') + '</div>' : '') +
+        '<p class="fundx-disc">' + disclaimerText() + '</p>' +
+      '</main>';
+  }
+  function wireUpload() {
+    var input = document.getElementById("fundxFileInput");
+    var drop = document.getElementById("fundxDrop");
+    if (input && !input._wired) {
+      input._wired = true;
+      input.addEventListener("change", function () { if (input.files && input.files.length) handleUploadFiles(input.files); input.value = ""; });
+    }
+    if (drop && !drop._wired) {
+      drop._wired = true;
+      ["dragover", "dragenter"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add("over"); }); });
+      ["dragleave", "dragend"].forEach(function (ev) { drop.addEventListener(ev, function () { drop.classList.remove("over"); }); });
+      drop.addEventListener("drop", function (e) { e.preventDefault(); drop.classList.remove("over"); if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) handleUploadFiles(e.dataTransfer.files); });
+    }
+    try { paintRecent(); } catch (e) {}
+  }
+
+  // ---- Lensless Corridor Preview (design demo — no camera, no capture, no findings) --------
+  var previewHud = null, previewRaf = 0, previewT0 = 0;
+  function screenCorridorPreview() {
+    return '' +
+      '<div class="fundx-cam fundx-preview">' +
+        '<div class="fundx-preview-bg"></div>' +
+        '<header class="fundx-cam-top rds-safe-top">' +
+          '<button class="fundx-cam-x" data-fx="closepreview" aria-label="Close">' + ric("close") + '</button>' +
+          '<div id="fundxState" class="fundx-state" role="status" aria-live="polite">Optical Corridor</div>' +
+          '<span class="fundx-preview-badge">PREVIEW</span>' +
+        '</header>' +
+        '<div id="fundxCorridor" class="fundx-corridor-host" aria-hidden="true"></div>' +
+        '<div class="fundx-cam-bottom rds-safe-bottom">' +
+          '<div id="fundxCoach" class="fundx-coach" role="status" aria-live="polite">Scripted demo — no camera, no capture</div>' +
+          '<button class="fundx-btn ghost" data-fx="closepreview">' + ric("check") + 'Done</button>' +
+        '</div>' +
+      '</div>';
+  }
+  function startCorridorPreview() {
+    stopCorridorPreview();
+    screen = "corridorpreview"; render();
+    if (!window.SMD_FUNDX_HUD) { toast("Corridor module unavailable."); return; }
+    try { previewHud = window.SMD_FUNDX_HUD.create(); var host = document.getElementById("fundxCorridor"); if (host) previewHud.mount(host); else { previewHud = null; return; } } catch (e) { previewHud = null; return; }
+    previewT0 = perfNow();
+    var DEMO = window.SMD_FUNDX_HUD.DEMO_MS || 14000;
+    var lastHap = "";
+    function loop() {
+      if (screen !== "corridorpreview" || !previewHud) return;
+      var t = (perfNow() - previewT0) % (DEMO + 1600);            // loop, with a short breath at the end
+      var f = window.SMD_FUNDX_HUD.demoStep(Math.min(t, DEMO));
+      previewHud.push(f.step, f.fa);
+      var cue = V() ? V().Coach.cueFor(f.step.state, f.fa, f.step.readiness) : { text: "", haptic: null };
+      var coach = document.getElementById("fundxCoach"); if (coach) coach.textContent = cue.text || "";
+      var stEl = document.getElementById("fundxState"); if (stEl) stEl.textContent = humanState(f.step.state);
+      if (f.step.state !== lastHap) { lastHap = f.step.state; haptic(cue.haptic || "selection"); }  // stage-transition ticks
+      previewRaf = requestAnimationFrame(loop);
+    }
+    previewRaf = requestAnimationFrame(loop);
+  }
+  function stopCorridorPreview() {
+    if (previewRaf) { try { cancelAnimationFrame(previewRaf); } catch (e) {} previewRaf = 0; }
+    try { if (previewHud) previewHud.unmount(); } catch (e) {} previewHud = null;
   }
 
   function screenPrecapture() {
@@ -221,12 +433,14 @@
       '<div class="fundx-cam">' +
         '<video id="fundxVideo" class="fundx-video" playsinline muted autoplay></video>' +
         '<div class="fundx-cam-scrim"></div>' +
+        (corridorOn() ? '<div id="fundxCorridor" class="fundx-corridor-host" aria-hidden="true"></div>' : '') +
         '<header class="fundx-cam-top rds-safe-top">' +
           '<button class="fundx-cam-x" data-fx="camclose" aria-label="Close">' + ric("close") + '</button>' +
           '<div id="fundxState" class="fundx-state" role="status" aria-live="polite">Starting camera…</div>' +
+          '<button id="fundxFlashBtn" class="fundx-cam-x' + (flashOn() ? ' on' : '') + '" data-fx="torch" aria-label="Flash">' + ric(flashOn() ? "flash_on" : "flash_off") + '</button>' +
           '<button id="fundxVoiceBtn" class="fundx-cam-x' + (VOICE.enabled() ? ' on' : '') + '" data-fx="voice" aria-label="Voice coaching">' + ric(VOICE.enabled() ? "volume_up" : "volume_off") + '</button>' +
         '</header>' +
-        ((session && session.mode === "training") ? '<div class="fundx-goal">' + ric("school") + 'Level ' + session.trainLevel + ' · ' + esc((LEVELS[session.trainLevel - 1] || {}).title || "") + '</div>' : '') +
+        ((session && session.mode === "training") ? '<div class="fundx-goal">' + ric("school") + 'Level ' + session.trainLevel + ' · ' + esc((LEVELS[session.trainLevel - 1] || {}).title || "") + '</div>' : '<div id="fundxStep" class="fundx-step"></div>') +
         '<div class="fundx-reticle">' +
           '<svg class="fundx-ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="fundx-ring-bg" cx="60" cy="60" r="54"/><circle id="fundxRingFg" class="fundx-ring-fg" cx="60" cy="60" r="54"/></svg>' +
           '<div id="fundxArrow" class="fundx-arrow">' + ric("north") + '</div>' +
@@ -234,8 +448,11 @@
         '</div>' +
         '<div class="fundx-cam-bottom rds-safe-bottom">' +
           '<div id="fundxCoach" class="fundx-coach" role="status" aria-live="assertive">Point the camera at the eye</div>' +
+          '<div id="fundxCoachDetail" class="fundx-coach-detail" aria-live="polite"></div>' +
           '<div id="fundxChips" class="fundx-chips">' + CHIPS.map(function (c) { return '<span class="fundx-chip" data-chip="' + c.k + '">' + c.l + '</span>'; }).join("") + '</div>' +
           '<button id="fundxFallback" class="fundx-fallback" data-fx="confirmlens" style="display:none">' + ric("check_circle") + 'Confirm lens is positioned</button>' +
+          ((session && session.mode === "training") ? '' :
+            '<button id="fundxCaptureBtn" class="fundx-capture" data-fx="capturebest" disabled aria-label="Capture best frame">' + ric("photo_camera") + '<span>Capture best frame</span></button>') +
         '</div>' +
         '<div id="fundxFlash" class="fundx-flash"></div>' +
         (devOn() ? '<div class="fundx-debug-wrap"><div id="fundxDebug" class="fundx-debug"></div><button class="fundx-debug-x" data-fx="devexport">' + ric("download") + 'Export frames</button></div>' : '') +
@@ -283,6 +500,8 @@
   function screenReview() {
     var q = result && result.quality ? result.quality : { overall: 0, subscores: {}, accepted: false, reasons: [] };
     var acc = q.accepted;
+    // Clinician-facing quality as a WORD, never a score (README 03).
+    var qw = (V() && V().qualityWord) ? V().qualityWord(q) : { label: acc ? "Good" : "Retake recommended", tone: acc ? "good" : "warn" };
     var img = result && result.images ? result.images.original : "";
     function bar(label, val) {
       var pct = Math.round((val || 0) * 100);
@@ -291,22 +510,29 @@
     var reasonNames = { poor_focus: "Focus", poor_exposure: "Exposure", excessive_reflection: "Reflection/glare", fundus_not_visible: "Retinal view not clear", no_vessels_detected: "Vessels not visible", field_of_view_inadequate: "Field of view" };
     var why = (q.reasons || []).map(function (r) { return '<span class="fundx-why">' + ric("error") + (reasonNames[r] || r) + '</span>'; }).join("");
     var s = q.subscores || {};
+    // Stage-1 retinal gate failed → this is not a retinal image. No score, no accept, no Continue.
+    var gated = q.retinalGate === false;
     return '' +
       '<header class="fundx-head rds-safe-top">' +
         '<button class="fundx-close" data-fx="retake" aria-label="Retake">' + ric("arrow_back_ios_new") + '</button>' +
         '<div class="fundx-head-tt"><b>Quality review</b></div><div class="fundx-head-sp"></div>' +
       '</header>' +
       '<main class="fundx-scroll">' +
-        '<div class="fundx-shot">' + (img ? '<img src="' + esc(img) + '" alt="captured retinal frame">' : '') +
-          '<div class="fundx-shot-q ' + (acc ? 'ok' : 'bad') + '">' + Math.round(q.overall) + '</div></div>' +
-        '<div class="fundx-verdict ' + (acc ? 'ok' : 'bad') + '">' + ric(acc ? "check_circle" : "cancel") +
-          '<span>' + (acc ? "Image accepted — good quality" : "Image rejected — retake recommended") + '</span></div>' +
-        (why ? '<div class="fundx-whys">' + why + '</div>' : '') +
-        '<div class="rds-section-header"><span class="rds-section-title">Quality breakdown</span></div>' +
-        '<div class="fundx-qbars">' + bar("Focus", s.focus) + bar("Exposure", s.exposure) + bar("Low glare", s.reflection) + bar("Retinal view", s.fundusVisibility) + bar("Vessels", s.vesselVisibility) + bar("Red reflex", s.redReflex) + bar("Field of view", s.fieldOfView) + '</div>' +
+        '<div class="fundx-shot">' + (img ? '<img src="' + esc(img) + '" alt="captured frame">' : '') +
+          (gated ? '' : '<div class="fundx-shot-q ' + (acc ? 'ok' : 'bad') + '" aria-label="' + esc(qw.label) + '">' + ric(acc ? "check_circle" : "error") + '</div>') + '</div>' +
+        (gated
+          ? '<div class="fundx-verdict bad">' + ric("visibility_off") + '<span>No eye detected</span></div>' +
+            '<div class="fundx-whys"><span class="fundx-why">' + ric("info") + "Point the camera at the patient's eye. Quality is only scored once a retinal view (red reflex + fundus) is detected." + '</span></div>'
+          : '<div class="fundx-verdict ' + (acc ? 'ok' : 'bad') + '">' + ric(acc ? "check_circle" : "cancel") +
+              '<span>' + esc(qw.label) + '</span></div>' +
+            (why ? '<div class="fundx-whys">' + why + '</div>' : '') +
+            '<div class="rds-section-header"><span class="rds-section-title">Quality breakdown</span></div>' +
+            '<div class="fundx-qbars">' + bar("Focus", s.focus) + bar("Exposure", s.exposure) + bar("Low glare", s.reflection) + bar("Retinal view", s.fundusVisibility) + bar("Vessels", s.vesselVisibility) + bar("Red reflex", s.redReflex) + bar("Field of view", s.fieldOfView) + '</div>') +
         '<div class="fundx-actions">' +
-          '<button class="fundx-btn ghost" data-fx="retake">' + ric("refresh") + 'Retake</button>' +
-          '<button class="fundx-btn" data-fx="toresult">' + (acc ? "Continue" : "Use anyway") + ric("chevron_right") + '</button>' +
+          (gated
+            ? '<button class="fundx-btn" data-fx="retake">' + ric("photo_camera") + 'Point at the eye</button>'
+            : '<button class="fundx-btn ghost" data-fx="retake">' + ric("refresh") + 'Retake</button>' +
+              '<button class="fundx-btn" data-fx="toresult">' + (acc ? "Continue" : "Use anyway") + ric("chevron_right") + '</button>') +
         '</div>' +
         '<p class="fundx-disc">' + disclaimerText() + '</p>' +
       '</main>';
@@ -336,10 +562,11 @@
           row("Field of view", esc(f.field_of_view || "—")) +
           row("Model confidence", (f.confidence != null ? f.confidence : "—")) +
         '</div>' +
-        clinicalCard(result && result.findings) +
+        clinicalCard(result ? { vision: result.findings, quality: result.quality, eye: session && session.eye, patientContext: patientCtx(), clinicianReview: result.clinicianReview } : null, "result") +
         '<div class="fundx-actions">' +
-          '<button class="fundx-btn ghost" data-fx="discard">' + ric("delete") + 'Discard</button>' +
-          '<button class="fundx-btn" data-fx="save">' + ric("save") + 'Save to patient</button>' +
+          '<button class="fundx-btn ghost sm" data-fx="discard">' + ric("delete") + 'Discard</button>' +
+          '<button class="fundx-btn ghost sm" data-fx="sharereport" data-scope="result">' + ric("ios_share") + 'Share</button>' +
+          '<button class="fundx-btn sm" data-fx="save">' + ric("save") + 'Save</button>' +
         '</div>' +
         '<p class="fundx-disc">' + esc(f.disclaimer || disclaimerText()) + '</p>' +
       '</main>';
@@ -382,9 +609,10 @@
           row("Device", esc((m.device && m.device.platform) || "—") + " · " + esc((m.device && m.device.appVersion) || "")) +
           row("Operator", esc((m.audit && m.audit.operator) || "—")) +
         '</div>' +
-        clinicalCard(m.vision) +
-        '<div class="fundx-actions"><button class="fundx-btn ghost" data-fx="deletescan" data-id="' + esc(m.id) + '">' + ric("delete") + 'Delete</button>' +
-          '<button class="fundx-btn" data-fx="export" data-id="' + esc(m.id) + '">' + ric("ios_share") + 'Export JSON</button></div>' +
+        clinicalCard(m, "detail") +
+        '<div class="fundx-actions"><button class="fundx-btn ghost sm" data-fx="deletescan" data-id="' + esc(m.id) + '">' + ric("delete") + 'Delete</button>' +
+          '<button class="fundx-btn ghost sm" data-fx="sharereport" data-scope="detail">' + ric("ios_share") + 'Share</button>' +
+          '<button class="fundx-btn sm" data-fx="export" data-id="' + esc(m.id) + '">' + ric("code") + 'JSON</button></div>' +
         '<p class="fundx-disc">' + esc(f.disclaimer || disclaimerText()) + '</p>' +
       '</main>';
   }
@@ -505,7 +733,12 @@
       ["red reflex", r2(fa.redReflex), g.redReflex], ["vessel", r2(fa.vesselScore), g.vessels],
       ["fundus", r2(fa.fundusConf) + " ·circ " + r2(fa.fundusCircularity), g.fundus],
       ["DIAGNOSTIC", r2(d), g.quality], ["readiness", r2(step.readiness && step.readiness.overall), step.readiness && step.readiness.ready],
-      ["decision", step.state + (step.shouldCapture ? " ● CAPTURE" : ""), step.shouldCapture]
+      ["confidence", (step.confidence ? step.confidence.level + " " + r2(step.confidence.overall) : ""), step.confidence ? step.confidence.overall >= 0.5 : undefined],
+      ["blocker", (step.failure ? step.failure.code : "—"), step.failure ? false : undefined],
+      ["decision", (step.capture ? step.capture.decision.toUpperCase() + " · " : "") + step.state + (step.shouldCapture ? " ●" : ""), step.shouldCapture],
+      ["pipeline", (devLive.pipeline || ""), undefined],
+      ["fps · latency", (devLive.perf ? devLive.perf.fps + " · " + (devLive.perf.latencyMs != null ? devLive.perf.latencyMs + "ms" : "—") : ""), undefined],
+      ["stages a·d·r ms", (devLive.perf ? [devLive.perf.analyzeMs, devLive.perf.decideMs, devLive.perf.renderMs].map(function (x) { return x != null ? x : "—"; }).join(" · ") : ""), undefined]
     ];
   }
   function paintDebug(step, fa) {
@@ -517,7 +750,7 @@
   function recordDevFrame(step, fa) {
     if (devBuffer.length >= DEV_MAX) return;
     var d = step.diagnostic != null ? step.diagnostic : (step.readiness && step.readiness.diagnostic);
-    devBuffer.push({ t: fa.ts, state: step.state, focus: r2(fa.focus), glare: r2(fa.reflection), motion: r2(fa.motion), distance: fa.distanceState, roll: (fa.roll == null ? "" : Math.round(fa.roll)), rollState: fa.rollState, redReflex: r2(fa.redReflex), vessel: r2(fa.vesselScore), fundusConf: r2(fa.fundusConf), fundusCirc: r2(fa.fundusCircularity), diagnostic: r2(d), readiness: r2(step.readiness && step.readiness.overall), eyeConf: r2(fa.eyeConf), pupilOffset: r2(fa.pupilOffset), capture: step.shouldCapture ? 1 : 0 });
+    devBuffer.push({ t: fa.ts, state: step.state, focus: r2(fa.focus), glare: r2(fa.reflection), motion: r2(fa.motion), distance: fa.distanceState, roll: (fa.roll == null ? "" : Math.round(fa.roll)), rollState: fa.rollState, redReflex: r2(fa.redReflex), vessel: r2(fa.vesselScore), fundusConf: r2(fa.fundusConf), fundusCirc: r2(fa.fundusCircularity), diagnostic: r2(d), readiness: r2(step.readiness && step.readiness.overall), eyeConf: r2(fa.eyeConf), pupilOffset: r2(fa.pupilOffset), capture: step.shouldCapture ? 1 : 0, decision: (step.capture ? step.capture.decision : ""), confidence: r2(step.confidence && step.confidence.overall), confLevel: (step.confidence ? step.confidence.level : ""), blocker: (step.failure ? step.failure.code : ""), smoothed: r2(step.stability && step.stability.smoothedReadiness) });
   }
   function devCsv() {
     if (!devBuffer.length) return "";
@@ -551,6 +784,9 @@
         (p.active ? ric("radio_button_checked") : ric(p.available ? "radio_button_unchecked" : "lock")) + '</button>';
     }
     function sensChip(k, l) { return '<button class="fundx-chip2' + (sens === k ? ' on' : '') + '" data-fx="setsens" data-v="' + k + '">' + l + '</button>'; }
+    var mode = fundxMode();
+    function modeChip(k, l) { return '<button class="fundx-chip2' + (mode === k ? ' on' : '') + '" data-fx="setmode" data-v="' + k + '">' + l + '</button>'; }
+    function a11yRow(k, l, sub) { var on = a11yOn(k); return '<button class="fundx-set-row' + (on ? ' on' : '') + '" data-fx="seta11y" data-k="' + k + '"><span class="fundx-set-rl"><b>' + l + '</b><span>' + sub + '</span></span>' + ric(on ? "toggle_on" : "toggle_off") + '</button>'; }
     return '' +
       '<header class="fundx-head rds-safe-top"><button class="fundx-close" data-fx="home" aria-label="Back">' + ric("arrow_back_ios_new") + '</button><div class="fundx-head-tt"><b>Settings</b></div><div class="fundx-head-sp"></div></header>' +
       '<main class="fundx-scroll">' +
@@ -567,10 +803,20 @@
         '<button class="fundx-set-row' + (clinicalOn() ? ' on' : '') + '" data-fx="setclinical"><span class="fundx-set-rl"><b>Clinical assessment</b><span>Rule-based, advisory severity / referral / follow-up from findings. Never a diagnosis.</span></span>' + ric(clinicalOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Capture</span></div>' +
         '<button class="fundx-set-row' + (flashOn() ? ' on' : '') + '" data-fx="setflash"><span class="fundx-set-rl"><b>Auto-flash during capture</b><span>Turns on the rear-camera light to illuminate the fundus while capturing. On by default (Android; iOS WebView has no torch control). Turn off if the reflection is too strong.</span></span>' + ric(flashOn() ? "toggle_on" : "toggle_off") + '</button>' +
+        '<button class="fundx-set-row' + (autoCaptureOn() ? ' on' : '') + '" data-fx="setflag" data-k="smd_fundx_autocapture" data-def="1"><span class="fundx-set-rl"><b>Auto-capture</b><span>Capture automatically when a diagnostic-quality retinal image is held steady. Off = capture only with the manual button (manual shutter).</span></span>' + ric(autoCaptureOn() ? "toggle_on" : "toggle_off") + '</button>' +
+        '<button class="fundx-set-row' + (arGuidanceOn() ? ' on' : '') + '" data-fx="setflag" data-k="smd_fundx_ar_guidance" data-def="1"><span class="fundx-set-rl"><b>AR guidance overlays</b><span>Arrows, alignment ring and gate chips over the camera. Off = a minimal camera + text coaching only.</span></span>' + ric(arGuidanceOn() ? "toggle_on" : "toggle_off") + '</button>' +
+        '<button class="fundx-set-row' + (spatialArOn() ? ' on' : '') + '" data-fx="setflag" data-k="smd_fundx_spatial_ar" data-def="0"><span class="fundx-set-rl"><b>3D AR corridor (beta)</b><span>True world-anchored ARKit guide (iOS + LiDAR). Off = the 2D overlay / flat ring. Experimental — under on-device tuning.</span></span>' + ric(spatialArOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<button class="fundx-set-row' + (sensorsOn() ? ' on' : '') + '" data-fx="setsensors"><span class="fundx-set-rl"><b>Motion sensor fusion</b><span>Fuses the phone motion sensors (accelerometer + gyroscope) with the camera to steady capture and improve timing. Falls back automatically when unavailable. Off by default.</span></span>' + ric(sensorsOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">Diagnostics</span></div>' +
         '<button class="fundx-set-row' + (telOn() ? ' on' : '') + '" data-fx="settel"><span class="fundx-set-rl"><b>Acquisition telemetry (anonymous)</b><span>Local, no PHI — guidance steps, quality progression, capture time + outcome. For validation. Off by default.</span></span>' + ric(telOn() ? "toggle_on" : "toggle_off") + '</button>' +
         '<button class="fundx-set-row' + (devOn() ? ' on' : '') + '" data-fx="setdev"><span class="fundx-set-rl"><b>Developer mode</b><span>Live metric overlay on the camera + frame-by-frame CSV export (focus/glare/motion/distance/roll/reflex/vessel/fundus/diagnostic/decision). Field-testing only.</span></span>' + ric(devOn() ? "toggle_on" : "toggle_off") + '</button>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Guidance mode</span></div>' +
+        '<div class="fundx-chips2">' + modeChip("beginner", "Beginner") + modeChip("standard", "Standard") + modeChip("expert", "Expert") + '</div>' +
+        '<p class="fundx-note">Beginner adds extra coaching + larger arrows; Expert keeps it minimal. Capture timing is identical in every mode.</p>' +
+        '<div class="rds-section-header"><span class="rds-section-title">Accessibility</span></div>' +
+        a11yRow("contrast", "High contrast", "Stronger contrast for coaching and overlays.") +
+        a11yRow("large", "Large text", "Bigger coaching text and labels.") +
+        a11yRow("cvd", "Color-blind-safe cues", "Adds an icon to every colour cue so meaning never relies on colour alone.") +
         '<div class="rds-section-header"><span class="rds-section-title">Data</span></div>' +
         '<button class="fundx-set-row danger" data-fx="clearall"><span class="fundx-set-rl"><b>Delete all scans</b><span>Removes every stored image + record on this device</span></span>' + ric("delete_forever") + '</button>' +
         (devOn() ? '<div class="rds-section-header"><span class="rds-section-title">Advanced</span></div>' +
@@ -583,6 +829,42 @@
   // Developer mode. Per-sensor enable/disable + force-fallback + live capability/confidence. ----
   function devSF(k, def) { try { var v = localStorage.getItem(k); return v == null ? def : v === "1"; } catch (e) { return def; } }
   function depthOn() { try { var q = (location.search.match(/[?&]fundxdepth=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_depth") === "1"; } catch (e) { return false; } }
+  // Full-res GPU camera preview (native GLSurfaceView / ARKit background behind a transparent WebView).
+  function gpuPreviewOn() { try { var q = (location.search.match(/[?&]fundxgpu=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_gpu_preview") === "1"; } catch (e) { return false; } }
+  // TRUE 3D AR corridor: native SceneKit guide world-anchored to the eye via ARKit (needs the native
+  // depth pipeline + ARSCNView). Default OFF; ?fundxspatial=1 or the flag turns it on (iOS + ARKit).
+  function spatialArOn() { try { var q = (location.search.match(/[?&]fundxspatial=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_spatial_ar") === "1"; } catch (e) { return false; } }
+  // Optical Corridor HUD (SVG spatial-AR overlay). Off (default) = the legacy flat ring — an instant,
+  // no-deploy revert. Presentation only: consumes the engine, never gates capture.
+  function corridorOn() { try { var q = (location.search.match(/[?&]fundxcorridor=([^&]+)/) || [])[1]; if (q != null) return q === "1"; return localStorage.getItem("smd_fundx_corridor") === "1"; } catch (e) { return false; } }
+  // Hybrid capture: "Capture Best Frame" enables at this readiness (0..100, default 60); a capture
+  // below the recommended quality (0..100, default 50) still proceeds but shows a warning.
+  function captureThreshold() { try { var v = parseInt(localStorage.getItem("smd_fundx_capture_threshold"), 10); return isNaN(v) ? 60 : Math.max(0, Math.min(100, v)); } catch (e) { return 60; } }
+  function qualityWarnPct() { try { var v = parseInt(localStorage.getItem("smd_fundx_quality_warn"), 10); return isNaN(v) ? 50 : Math.max(0, Math.min(100, v)); } catch (e) { return 50; } }
+  // Guidance mode (README 03: Beginner/Standard/Expert) — verbosity only; capture timing is identical.
+  function fundxMode() { try { var q = (location.search.match(/[?&]fundxmode=([^&]+)/) || [])[1]; var v = q != null ? q : localStorage.getItem("smd_fundx_mode"); return (v === "beginner" || v === "expert") ? v : "standard"; } catch (e) { return "standard"; } }
+  // Accessibility toggles (README 03): high-contrast / large-text / color-blind-safe cues.
+  function a11yOn(k) { try { return localStorage.getItem("smd_fundx_a11y_" + k) === "1"; } catch (e) { return false; } }
+  // Tone → icon so guidance meaning is conveyed by SHAPE, not colour alone (color-blind-safe).
+  function toneGlyph(t) { return t === "critical" ? "report" : t === "warn" ? "warning" : t === "good" ? "check_circle" : "info"; }
+  // Auto-capture (default ON): when OFF the app never auto-captures — the clinician uses the
+  // manual shutter (the "Capture best frame" button). AR guidance overlays (default ON): when OFF,
+  // only the camera + text coach show (no arrows/ring/chips) for a minimal experience.
+  function autoCaptureOn() { try { return localStorage.getItem("smd_fundx_autocapture") !== "0"; } catch (e) { return true; } }
+  function arGuidanceOn() { try { return localStorage.getItem("smd_fundx_ar_guidance") !== "0"; } catch (e) { return true; } }
+  // Phase 4 fusion (default ON): when the true 3D spatial-AR corridor is active, require the clinician
+  // to be spatially ON-AXIS (native ARKit alignment) before auto-capture fires. This only ever TIGHTENS
+  // the validated FSM's capture timing (adds a precondition), never loosens it. No-op when spatial AR
+  // is off or no native alignment signal has arrived yet (fa.spatialAligned == null), so it can never
+  // block the non-spatial / web pipeline.
+  function requireAlignmentOn() { try { return localStorage.getItem("smd_fundx_require_alignment") !== "0"; } catch (e) { return true; } }
+  function spatialCaptureOk(fa) {
+    if (!requireAlignmentOn() || !spatialArOn()) return true;   // gating off, or not in spatial mode
+    if (!fa || fa.spatialAligned == null) return true;          // no native alignment signal yet — don't block
+    return !!fa.spatialAligned;                                 // hold auto-capture until on the optical axis
+  }
+  // Workflow 2 — Analyze existing fundus image (upload). Default ON. Reuses the whole downstream.
+  function uploadOn() { try { return localStorage.getItem("smd_fundx_upload") !== "0"; } catch (e) { return true; } }
   function screenDevSettings() {
     function row(k, label, sub, def) {
       var on = devSF(k, def);
@@ -593,6 +875,9 @@
       '<main class="fundx-scroll">' +
         '<div class="rds-section-header"><span class="rds-section-title">Hybrid depth fusion</span></div>' +
         row("smd_fundx_depth", "Enable depth fusion", "Master switch for native ARKit/ARCore depth. Off = MediaPipe + CV only.", false) +
+        row("smd_fundx_gpu_preview", "GPU camera preview", "Full-res hardware camera behind the UI (needs depth fusion on). Off = the CPU preview.", false) +
+        row("smd_fundx_corridor", "Optical Corridor HUD", "Spatial-AR acquisition overlay — rings receding to the optical axis, red-reflex bloom, hold ring (replaces the flat ring). Presentation only; never gates capture.", false) +
+        '<button class="fundx-set-row" data-fx="corridorpreview"><span class="fundx-set-rl"><b>Preview the Optical Corridor</b><span>Play a scripted demo of the full corridor (no lens or camera needed) to evaluate the interaction design.</span></span>' + ric("play_circle") + '</button>' +
         '<div class="rds-section-header"><span class="rds-section-title">iOS · ARKit / LiDAR</span></div>' +
         row("smd_fundx_dev_arkit", "ARKit", "World tracking + camera pose.", true) +
         row("smd_fundx_dev_lidar", "LiDAR", "LiDAR scanner (Pro devices).", true) +
@@ -716,7 +1001,8 @@
   function tel(fn) { try { var T = window.SMD_FUNDX_TELEMETRY; if (T && T[fn]) T[fn].apply(T, Array.prototype.slice.call(arguments, 1)); } catch (e) {} }
   function startCamera() {
     var Vd = DET(); if (!Vd) { toast("FundX perception layer not loaded."); return; }
-    screen = "camera"; capturing = false; lastHapticState = ""; lastCoachArrow = null;
+    cancelBatch();   // starting live capture supersedes any in-flight batch run
+    screen = "camera"; capturing = false; lastHapticState = ""; lastCoachArrow = null; lastCritical = false; lastCoachText = ""; lastCoachTier = ""; lastCoachDetail = ""; lastStepKey = null;
     session = session || newSession("right");
     if (session.mode !== "training") {
       var plat = "web"; try { var C = window.Capacitor; plat = C ? (typeof C.getPlatform === "function" ? C.getPlatform() : (C.platform || "web")) : "web"; } catch (e) {}
@@ -724,17 +1010,47 @@
       tel("startSession", { device: plat, appVersion: (window.SMD_APP_VERSION || "fundx-mvp"), provider: prov, sensitivity: loadSens(), eye: session.eye });
     }
     render();
+    // Optical Corridor HUD: mount the SVG overlay when the flag is on (presentation only). If it
+    // fails or the flag is off, the legacy ring/arrow render exactly as before.
+    hud = null; try { if (corridorOn() && window.SMD_FUNDX_HUD) { hud = window.SMD_FUNDX_HUD.create(); var _ch = document.getElementById("fundxCorridor"); if (_ch) hud.mount(_ch); else hud = null; } } catch (e) { hud = null; }
+    // Hide the legacy reticle ONLY when the HUD actually mounted — if fundx-hud.js is missing/broken
+    // the flat ring/arrow/score must still render (never leave the operator with no readiness feedback).
+    try { if (rootEl) rootEl.classList.toggle("fundx-hud-active", !!hud); } catch (e) {}
     var video = document.getElementById("fundxVideo");
     sm = V().createStateMachine();
+    // Acquisition Decision Engine (README 05) wraps this SAME state machine and adds confidence
+    // fusion + a Capture/Wait/Continue/Restart decision + failure→recovery + temporal stability +
+    // explainability. observe() returns a superset of step() so the UI is unchanged; if the module
+    // isn't loaded, onFrame falls back to sm.step() directly.
+    eng = null; try { if (window.SMD_FUNDX_ENGINE) eng = window.SMD_FUNDX_ENGINE.create({ vision: V(), stateMachine: sm, mode: fundxMode() }); } catch (e) { eng = null; }
+    perfMeter = null; try { if (window.SMD_FUNDX_ENGINE && window.SMD_FUNDX_ENGINE.createPerfMeter) perfMeter = window.SMD_FUNDX_ENGINE.createPerfMeter({ window: 30 }); } catch (e) { perfMeter = null; }
     cam = Vd.makeCamera();
     var startOpts = { hub: (hub = Vd.makeHub()), analyzeEveryMs: 110, analyzeScale: 0.25, flash: flashOn() };
     var useNative = false;
-    try { useNative = depthOn() && !devSF("smd_fundx_dev_forcemono", false) && !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth); } catch (e) {}
+    try { useNative = (depthOn() || spatialArOn()) && !devSF("smd_fundx_dev_forcemono", false) && !!(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.FundxDepth); } catch (e) {}
     usingNative = useNative;
+    var useSpatial = useNative && spatialArOn();                       // true 3D AR corridor (world-anchored SceneKit)
+    var gpuPreview = (useNative && gpuPreviewOn()) || useSpatial;      // spatial AR needs the ARSCNView camera background
+    usingGpu = gpuPreview;
+    try { if (rootEl) rootEl.classList.toggle("fundx-spatial-active", !!useSpatial); } catch (e) {}   // native 3D guide replaces the 2D overlay
     var starter;
-    if (useNative) {
-      // Depth mode: ARCore/ARKit owns the camera; render its streamed frames onto a preview
-      // canvas over the (now source-less) <video>. On any failure, fall back to getUserMedia.
+    if (gpuPreview) {
+      // GPU preview: the native GLSurfaceView / ARKit camera background (behind the transparent
+      // WebView) IS the preview — full-res, hardware-accelerated. No JS canvas; the streamed
+      // low-res frames drive ONLY the analysis pipeline. body.fundx-gpu makes the camera area
+      // transparent so the native surface shows through. Falls back to getUserMedia on failure.
+      try { document.documentElement.classList.add("fundx-gpu"); document.body.classList.add("fundx-gpu"); } catch (e) {}
+      if (video) video.style.display = "none";
+      startOpts.gpuPreview = true; startOpts.spatialAr = useSpatial;
+      starter = cam.startNative(video, onFrame, startOpts).catch(function () {
+        usingNative = false; usingGpu = false;
+        try { document.documentElement.classList.remove("fundx-gpu"); document.body.classList.remove("fundx-gpu"); if (video) video.style.display = ""; } catch (x) {}
+        delete startOpts.gpuPreview;
+        return cam.start(video, onFrame, startOpts);
+      });
+    } else if (useNative) {
+      // Depth mode (CPU preview): ARCore/ARKit owns the camera; render its streamed frames onto a
+      // preview canvas over the (now source-less) <video>. On any failure, fall back to getUserMedia.
       var pc = document.createElement("canvas"); pc.className = "fundx-video"; pc.id = "fundxNativeCanvas";
       if (video && video.parentNode) video.parentNode.insertBefore(pc, video);
       if (video) video.style.display = "none";
@@ -748,7 +1064,12 @@
     } else {
       starter = cam.start(video, onFrame, startOpts);
     }
-    starter.then(function () { setState("Point the camera at the eye"); }).catch(function (err) { showCamError(err); });
+    starter.then(function () {
+      setState("Point the camera at the eye");
+      // Fundal exam needs illumination: auto-enable the torch in native/GPU mode (getUserMedia mode
+      // already turns it on in cam.start). The flash button in the header toggles it.
+      if (usingNative && flashOn() && cam && cam.setTorch) { try { cam.setTorch(true); } catch (e) {} }
+    }).catch(function (err) { showCamError(err); });
   }
   function setState(txt) { var el = document.getElementById("fundxState"); if (el) el.textContent = txt; }
   function showCamError(err) {
@@ -762,22 +1083,35 @@
   }
   function onFrame(fa) {
     if (!sm || capturing) return;
+    var _tA = perfNow();
     lastFa = fa;
     devLive.frames++;
     if (devLive.lastT) { var _dt = fa.ts - devLive.lastT; if (_dt > 0) devLive.fps = Math.round(1000 / _dt); }
     devLive.lastT = fa.ts;
-    devLive.pipeline = usingNative ? "native-depth" : "monocular";
+    devLive.pipeline = usingNative ? ("native-depth" + (fa.opaque != null ? (" op" + (fa.opaque ? "1" : "0") + " scn" + (fa.scnUp ? "1" : "0") + " anc" + (fa.anchor ? "1" : "0")) : "")) : "monocular";
     if (fa.acqConfidence != null) devLive.confidence = fa.acqConfidence;
     if (fa.distanceMm != null) devLive.depthMm = fa.distanceMm;
     try { if (hub && hub.sensors && hub.sensors.contributions) devLive.contributions = hub.sensors.contributions(); } catch (e) {}
-    var step = sm.step(fa, fa.ts);
+    var step = eng ? eng.observe(fa, fa.ts) : sm.step(fa, fa.ts);
+    // Spatial-AR fusion: push the engine's phase to the native SceneKit guide so the 3D corridor
+    // reflects the SAME readiness/gates as the rest of FundX. Change-gated (not every frame).
+    if (usingGpu && spatialArOn()) {
+      try {
+        var _ph = step.shouldCapture ? "locked" : ((step.readiness && step.readiness.overall > 0.4) ? "aligning" : "searching");
+        if (_ph !== lastGuidePhase) { lastGuidePhase = _ph; var _P = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.FundxDepth; if (_P && _P.updateGuide) _P.updateGuide({ phase: _ph, aligned: !!step.shouldCapture }); }
+      } catch (e) {}
+    }
+    var _tD = perfNow();
     session.readinessTrace.push(Math.round((step.readiness.overall || 0) * 100));
     if (session.readinessTrace.length > 400) session.readinessTrace.shift();
     updateCameraUI(step, fa);
+    // Per-stage frame timing (README 08): capture (native/grab) → analyze (JS receive) → decide
+    // (engine) → render (UI). JS-side latencies are real; native camera/GPU latency needs a device.
+    if (perfMeter) { perfMeter.mark({ capture: fa.ts, analyze: _tA, decide: _tD, render: perfNow() }); if (devOn()) devLive.perf = perfMeter.stats(); }
     if (devOn()) { paintDebug(step, fa); recordDevFrame(step, fa); }
     if (session.mode !== "training") tel("frame", step, fa.ts);
     if (session.mode === "training") { handleTraining(step); return; }
-    if (step.shouldCapture) triggerCapture();
+    if (step.shouldCapture && autoCaptureOn() && spatialCaptureOk(fa)) triggerCapture();
   }
   function handleTraining(step) {
     var lvl = session.trainLevel;
@@ -801,14 +1135,37 @@
     startCamera();
   }
   function updateCameraUI(step, fa) {
-    var cue = V().Coach.cueFor(step.state, fa, step.readiness);
+    // Prefer the Decision Engine's consolidated guidance (adds tier/detail + Safety-1 critical
+    // override); fall back to the Coach cue if the engine module isn't present.
+    var cue = step.guidance || V().Coach.cueFor(step.state, fa, step.readiness);
+    var tier = cue.tier || cue.tone;
     if (session.mode !== "training" && cue.arrow && cue.arrow !== lastCoachArrow) { lastCoachArrow = cue.arrow; tel("correction"); }
     var stEl = document.getElementById("fundxState"); if (stEl) stEl.textContent = humanState(step.state);
-    var coach = document.getElementById("fundxCoach"); if (coach) { coach.textContent = cue.text; coach.className = "fundx-coach t-" + cue.tone; }
+    // Only rebuild the coach when the instruction/tier actually changes — #fundxCoach is an
+    // aria-live="assertive" region, so mutating it every frame makes screen readers re-announce the
+    // same instruction (defeats the one-instruction rule for VoiceOver/TalkBack users).
+    var coach = document.getElementById("fundxCoach");
+    if (coach && (cue.text !== lastCoachText || tier !== lastCoachTier)) {
+      coach.className = "fundx-coach t-" + tier;
+      coach.innerHTML = (tier === "info" ? "" : ric(toneGlyph(tier))) + '<span class="fundx-coach-tx">' + esc(cue.text) + '</span>';
+      lastCoachText = cue.text; lastCoachTier = tier;
+    }
+    var cdet = document.getElementById("fundxCoachDetail"); if (cdet && (cue.detail || "") !== lastCoachDetail) { cdet.textContent = cue.detail || ""; lastCoachDetail = cue.detail || ""; }
+    // Optical Corridor HUD — push the engine frame; the HUD interpolates on its own 60fps loop.
+    if (hud) { try { hud.push(step, fa); } catch (e) {} }
+    // Storyboard step indicator (README 03) — updated only when the named step changes.
+    var stepEl = document.getElementById("fundxStep"); var st = step.step;
+    if (stepEl && (st ? st.key : null) !== lastStepKey) {
+      lastStepKey = st ? st.key : null;
+      if (st) { stepEl.innerHTML = '<span class="fundx-step-lbl">Step ' + st.index + ' / ' + st.total + ' · ' + esc(st.title) + '</span><i class="fundx-step-bar"><b style="width:' + Math.round(st.progress * 100) + '%"></b></i>'; stepEl.style.display = "block"; }
+      else stepEl.style.display = "none";
+    }
     // readiness ring (circumference 2πr, r=54 → ~339.29)
     var pct = step.readiness.overall || 0; var C = 339.29;
     var ring = document.getElementById("fundxRingFg"); if (ring) { ring.style.strokeDasharray = C; ring.style.strokeDashoffset = C * (1 - pct); ring.setAttribute("class", "fundx-ring-fg " + (pct >= 0.9 ? "hi" : pct >= 0.5 ? "mid" : "lo")); }
     var score = document.getElementById("fundxScore"); if (score) score.textContent = Math.round(pct * 100);
+    var capBtn = document.getElementById("fundxCaptureBtn");
+    if (capBtn) { var canCap = Math.round(pct * 100) >= captureThreshold(); capBtn.disabled = !canCap; capBtn.classList.toggle("ready", canCap); }
     var arrow = document.getElementById("fundxArrow");
     if (arrow) { if (cue.arrow) { arrow.style.opacity = "1"; arrow.firstChild ? (arrow.innerHTML = ric(arrowGlyph(cue.arrow))) : null; arrow.className = "fundx-arrow show a-" + cue.arrow; arrow.innerHTML = ric(arrowGlyph(cue.arrow)); } else { arrow.className = "fundx-arrow"; } }
     var g = step.gates || {};
@@ -816,12 +1173,18 @@
     // optional operator-confirm fallback: only surfaces on a stall AND only when configured
     var fb = document.getElementById("fundxFallback");
     if (fb) fb.style.display = (step.stalled && lensConfirmOn() && session.mode !== "training") ? "" : "none";
-    // haptic + voice on state change
+    // haptic + voice: on state change, on a NEW Safety-1 critical even mid-state (the warning
+    // haptic + spoken alert must fire when severe glare appears without a state change), and
+    // re-announce for warn / critical each frame so the more-severe critical is never quieter.
+    var isCrit = tier === "critical";
     if (step.state !== lastHapticState) { lastHapticState = step.state; if (cue.haptic) haptic(cue.haptic); else haptic("selection"); VOICE.speak(cue.voice); }
-    else if (cue.tone === "warn") { VOICE.speak(cue.voice); }
+    else { if (isCrit && !lastCritical) haptic(cue.haptic || "warning"); if (cue.tone === "warn" || isCrit) VOICE.speak(cue.voice); }
+    lastCritical = isCrit;
   }
+  function lastReadinessPct() { try { var t = session && session.readinessTrace; return (t && t.length) ? t[t.length - 1] : 0; } catch (e) { return 0; } }
   function triggerCapture() {
     if (capturing) return; capturing = true;
+    session.captureMode = "auto"; session.captureReadinessPct = lastReadinessPct();
     sm.set(V().STATE.CAPTURING); haptic("success"); VOICE.speak("Hold still, capturing");
     var flash = document.getElementById("fundxFlash"); if (flash) { flash.classList.add("on"); setTimeout(function () { flash.classList.remove("on"); }, 220); }
     session.captures++;
@@ -833,7 +1196,28 @@
       runProcessing(burst);
     }, 180);
   }
-  function stopCamera() { try { if (cam) cam.stop(); } catch (e) {} VOICE.stop(); }
+  // Hybrid manual capture: on the clinician's press (button enabled at readiness >= threshold),
+  // grab the buffered burst and let BestFrameSelector pick the highest-quality frame — the same
+  // best-of-buffer path the auto-capture uses — so perfect acquisition isn't required.
+  function manualCapture() {
+    if (capturing || !session || !cam) return;
+    var pct = lastReadinessPct();
+    if (pct < captureThreshold()) { haptic("warning"); toast("Keep improving alignment (readiness " + pct + " / " + captureThreshold() + ")."); return; }
+    capturing = true;
+    session.captureMode = "manual"; session.captureReadinessPct = pct;
+    try { sm.set(V().STATE.CAPTURING); } catch (e) {}
+    haptic("success"); VOICE.speak("Capturing best frame");
+    var flash = document.getElementById("fundxFlash"); if (flash) { flash.classList.add("on"); setTimeout(function () { flash.classList.remove("on"); }, 220); }
+    session.captures++;
+    setTimeout(function () {
+      var burst = [];
+      try { burst = cam.captureBurst(20) || []; } catch (e) {}
+      session.burstCount = burst.length;
+      stopCamera();
+      runProcessing(burst);
+    }, 140);
+  }
+  function stopCamera() { try { if (cam) cam.stop(); } catch (e) {} try { if (hud) hud.unmount(); } catch (e) {} hud = null; try { if (rootEl) rootEl.classList.remove("fundx-hud-active"); } catch (e) {} try { if (rootEl) rootEl.classList.remove("fundx-spatial-active"); } catch (e) {} try { document.documentElement.classList.remove("fundx-gpu"); document.body.classList.remove("fundx-gpu"); } catch (e) {} usingGpu = false; VOICE.stop(); }
   // Lifecycle: releasing the camera when the app is backgrounded (tab hidden / app to
   // background) prevents the stream + rAF loop running invisibly (battery/thermal). Wired
   // once; on return the user is on the pre-capture screen and can restart.
@@ -842,7 +1226,10 @@
     if (_visWired || typeof document === "undefined" || !document.addEventListener) return;
     _visWired = true;
     document.addEventListener("visibilitychange", function () {
-      try { if (document.hidden && screen === "camera" && cam && cam.isRunning && cam.isRunning()) { stopCamera(); tel("endSession", "backgrounded"); if (FUNDX.isOpen()) { screen = "precapture"; render(); } } } catch (e) {}
+      try {
+        if (document.hidden && screen === "camera" && (hud || (cam && cam.isRunning && cam.isRunning()))) { stopCamera(); tel("endSession", "backgrounded"); if (FUNDX.isOpen()) { screen = "precapture"; render(); } }
+        else if (document.hidden && screen === "corridorpreview") { stopCorridorPreview(); if (FUNDX.isOpen()) { screen = devOn() ? "devsettings" : "settings"; render(); } }
+      } catch (e) {}
     });
   }
 
@@ -873,12 +1260,69 @@
     });
   }
 
+  // ---- Workflow 2 · Analyze existing fundus image (upload) ----------------
+  // Decode an uploaded image → downscaled ImageData → the SAME Heuristic signals the live camera
+  // produces, so an uploaded fundus flows through the identical quality + vision + report pipeline.
+  function computeImageMetrics(dataUrl) {
+    return new Promise(function (resolve) {
+      var D = DET(); var H = D && D.Heuristic;
+      if (!H || !dataUrl || typeof Image === "undefined") return resolve({});
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height, maxW = 480;
+          var sc = Math.min(1, maxW / (iw || maxW));
+          var w = Math.max(2, Math.round(iw * sc)), h = Math.max(2, Math.round(ih * sc));
+          var c = document.createElement("canvas"); c.width = w; c.height = h;
+          var cx = c.getContext("2d", { willReadFrequently: true }); cx.drawImage(img, 0, 0, w, h);
+          var id = cx.getImageData(0, 0, w, h);
+          var base = H.analyze(id, {}), fund = H.fundus(id), vess = H.vessels(id, {});
+          resolve(Object.assign({}, base, fund, { vesselScore: vess, retinaConf: fund.fundusConf, srcW: iw, srcH: ih }));
+        } catch (e) { resolve({}); }
+      };
+      img.onerror = function () { resolve({}); };
+      img.src = dataUrl;
+    });
+  }
+  // Analyze ONE uploaded fundus image through the unified downstream (Quality Review → AI → Report).
+  function processImageUpload(dataUrl) {
+    if (!dataUrl) return;
+    cancelBatch();   // a single-image analysis supersedes any in-flight batch run
+    if (!session || session.mode !== "upload") { session = newSession((session && session.eye) || "right"); session.mode = "upload"; }
+    session.source = "upload"; session.burstCount = 1; session.captureMode = "upload";
+    screen = "processing"; render();
+    computeImageMetrics(dataUrl).then(function (metrics) {
+      result = FUNDX._buildUploadResult(dataUrl, metrics, ctx, session.eye);
+      if (!result) { toast("Could not read that image."); screen = "upload"; return render(); }
+      finishProcessing([{ dataUrl: dataUrl, metrics: metrics }]);
+    });
+  }
+
   function runProcessing(burst) {
     screen = "processing"; render();
-    var tx = document.getElementById("fundxProcTx");
     result = FUNDX._buildResult(burst, ctx, session.eye, session);
     if (!result) { tel("capture", { success: false, durationMs: nowMs() - session.startTs, bursts: session.burstCount }); toast("No usable frames — try again."); screen = "camera"; return startCamera(); }
-    tel("capture", { success: true, quality: result.quality.overall, durationMs: nowMs() - session.startTs, bursts: session.burstCount });
+    result.source = "live";
+    finishProcessing(burst);
+  }
+  // Shared downstream for BOTH workflows — live capture AND uploaded fundus image (Workflow 2):
+  // Stage-1 retinal gate → non-destructive enhancement → AI inference (provider abstraction) →
+  // Quality Review. `burst` supplies the frame metrics for the provider call. `result` is already
+  // built (live: _buildResult; upload: _buildUploadResult) and carries result.source.
+  function finishProcessing(burst) {
+    var tx = document.getElementById("fundxProcTx");
+    if (!result) { screen = "home"; return render(); }
+    // STAGE-1 retinal gate: if the image is not a retinal scene, do NOT score it, do NOT run AI, and
+    // route to the gated review ("No retina detected", no Continue). Same guarantee for both workflows.
+    if (result.quality && result.quality.retinalGate === false) {
+      tel("capture", { success: false, gated: true, source: result.source });
+      haptic("warning"); screen = "review"; render(); return;
+    }
+    tel("capture", { success: true, quality: result.quality.overall, source: result.source, bursts: (session && session.burstCount) });
+    // Quality gate is advisory, not blocking: warn below the recommended threshold but let the
+    // clinician proceed with analysis (the hybrid workflow's point).
+    result.qualityWarn = !!(result.quality && result.quality.overall != null && result.quality.overall * 100 < qualityWarnPct());
+    if (result.qualityWarn) { haptic("warning"); try { toast("Image quality below recommended (" + Math.round(result.quality.overall * 100) + "/100). You can still proceed."); } catch (e) {} }
     // 1) real image enhancement → the persisted "enhanced image" (distinct from original)
     if (tx) tx.textContent = "Enhancing image…";
     enhanceDataUrl(result.images.original).then(function (enh) { if (enh) result.images.processed = enh; })
@@ -890,12 +1334,14 @@
         var P = window.SMD_FUNDX_PROVIDERS;
         if (P && P.analyzeFindings) {
           return P.analyzeFindings(
-            { imageDataUrl: result.images.processed || result.images.original, quality: result.quality.overall, metrics: (burst[result.best] || {}).metrics },
-            { patientRef: (ctx && ctx.ref) || null, eye: session.eye, ts: nowMs() }
+            { imageDataUrl: result.images.processed || result.images.original, quality: result.quality.overall, metrics: ((burst && burst[result.best]) || {}).metrics },
+            { patientRef: (ctx && ctx.ref) || null, eye: (session && session.eye), ts: nowMs() }
           ).then(function (f) { if (f) result.findings = f; }).catch(function () {});
         }
       })
-      .then(function () { screen = "review"; render(); });
+      // Both settle paths route to review exactly once — a synchronous throw / non-thenable return
+      // from a misconfigured provider must not leave the operator stuck on "processing…".
+      .then(function () { screen = "review"; render(); }, function () { screen = "review"; render(); });
   }
 
   // ================= PURE HELPERS (unit-tested, DOM-free) =================
@@ -914,7 +1360,26 @@
     var original = best.dataUrl || null;
     return {
       best: sel.best, quality: quality, findings: findings, selection: sel,
+      captureMode: (stats && stats.captureMode) || "auto",
+      captureReadinessPct: (stats && stats.captureReadinessPct != null) ? stats.captureReadinessPct : null,
       images: { original: original, processed: original, thumbnail: best.thumb || original }
+    };
+  }
+  // Build a result from an UPLOADED fundus image (Workflow 2): upload-mode quality (circular-glow
+  // requirement relaxed — an existing fundus fills the frame) + the same Findings contract as live
+  // capture, so it flows through the identical enhance/AI/review/report/history downstream. DOM-free.
+  function _buildUploadResult(dataUrl, metrics, context, eye) {
+    var Ve = V(); if (!Ve || !dataUrl) return null;
+    var quality = Ve.QualityEngine.score(metrics || {}, { upload: true });
+    var findings = Ve.Findings.build({
+      input: { quality: quality.overall, metrics: metrics },
+      ctx: { patientRef: (context && context.ref) || null, eye: eye, ts: nowMs() },
+      quality: quality
+    });
+    return {
+      best: 0, quality: quality, findings: findings, selection: { best: 0, scores: [quality] },
+      source: "upload", captureMode: "upload", captureReadinessPct: null,
+      images: { original: dataUrl, processed: dataUrl, thumbnail: dataUrl }
     };
   }
   // Build the full, versioned ScanRecord with all nine mandated fields + audit.
@@ -935,10 +1400,19 @@
         eye: eye, durationMs: dur, attempts: (stats && stats.attempts) || 1,
         captures: (stats && stats.captures) || 1, retries: (stats && stats.retries) || 0,
         burstCount: (stats && stats.burstCount) || 0,
+        captureMode: res.captureMode || "auto",
+        captureReadinessPct: (res.captureReadinessPct != null) ? res.captureReadinessPct : null,
         readinessTrace: (stats && stats.readinessTrace) ? stats.readinessTrace.slice(-60) : [],
-        stateHistory: (sm && sm.history) ? sm.history.slice(-40) : []
+        // stateHistory is a LIVE-capture acquisition trace only. `sm` is a module global that
+        // outlives its capture (stopCamera never nulls it — the live save reads it AFTER teardown),
+        // so an upload saved after any live scan would otherwise embed that prior session's trace.
+        // Gate on source: uploads always get [] regardless of `sm`. (Adversarial-review provenance fix.)
+        stateHistory: (res && res.source !== "upload" && sm && sm.history) ? sm.history.slice(-40) : []
       },
+      source: (res && res.source) || "live",
       vision: res.findings,
+      clinical: (res && res.clinical) || null,
+      clinicianReview: (res && res.clinicianReview) || null,
       patientContext: context || { ref: null, name: null },
       timestamp: t,
       device: { platform: plat, appVersion: (window.SMD_APP_VERSION || "fundx-mvp"), userAgent: (typeof navigator !== "undefined" ? navigator.userAgent : "") },
@@ -947,10 +1421,97 @@
     };
   }
 
+  // Human-readable structured clinical report (README 09) — for export / share / documentation.
+  function buildReportText(record) {
+    record = record || {};
+    var C = window.SMD_FUNDX_CLINICAL, Ve = V();
+    var rep = null; try { rep = (C && clinicalOn()) ? C.buildReport(record) : null; } catch (e) {}
+    var q = record.quality || {};
+    var qw = (Ve && Ve.qualityWord) ? Ve.qualityWord(q) : { label: "" };
+    var p = record.patientContext || {}, L = [];
+    L.push("FUNDX AI — RETINAL ASSESSMENT (advisory, not a diagnosis)", "");
+    if (p.name || p.ref) L.push("Patient: " + [p.name, p.ref].filter(Boolean).join(" · "));
+    if (p.meta) L.push("Context: " + p.meta);
+    if (record.eye) L.push("Eye: " + String(record.eye).toUpperCase());
+    if (record.timestamp) { try { L.push("Date: " + new Date(record.timestamp).toLocaleString()); } catch (e) {} }
+    L.push("Source: " + (record.source === "upload" ? "Uploaded image" : "Live capture"));
+    L.push("Image quality: " + qw.label + (q.overall != null ? " (" + Math.round(q.overall) + "/100)" : ""), "");
+    if (rep) {
+      if (rep.urgentFindings && rep.urgentFindings.length) L.push("URGENT — " + rep.urgentFindings.map(function (s) { return s.replace(/_/g, " "); }).join(", "), "");
+      L.push("Severity: " + rep.severity + "    Urgency: " + rep.urgency + (rep.confidence != null ? "    Confidence: " + rep.confidence : ""), "");
+      L.push("DIFFERENTIAL (advisory):");
+      if (rep.differential.length) rep.differential.forEach(function (d) { L.push("  " + d.rank + ". " + d.label + " — " + d.severity + " / " + d.likelihood + (d.reasoning ? "  [" + d.reasoning + "]" : "")); });
+      else L.push("  No significant retinal features detected this scan.");
+      L.push("");
+      var rc = rep.recommendations || {};
+      if (rc.referral) L.push("Referral: " + rc.referral.to + " · " + rc.referral.priority + (rc.referral.reason ? " — " + rc.referral.reason : ""));
+      if (rc.followUp) L.push("Follow-up: " + rc.followUp.interval);
+      if (rc.investigations && rc.investigations.length) L.push("Suggested: " + rc.investigations.join(", "));
+      if (rep.safetyFlags && rep.safetyFlags.length) L.push("Flags: " + rep.safetyFlags.map(function (s) { return s.replace(/_/g, " "); }).join(", "));
+      var rv = record.clinicianReview;
+      if (rv && rv.status && rv.status !== "pending") L.push("", "Clinician review: " + rv.status + (rv.note ? " — " + rv.note : "") + (rv.editedConclusion ? "  · edited: " + rv.editedConclusion : ""));
+      L.push("", rep.disclaimer);
+    } else {
+      L.push("(Enable the clinical assessment in Settings for the advisory differential + recommendations.)");
+    }
+    L.push("", "— FundX AI · StewardMD. Advisory clinical decision support; a qualified clinician makes the final decision.");
+    return L.join("\n");
+  }
+  // Share the report via the native share sheet (Capacitor Share), the Web Share API, or clipboard.
+  // Each layer degrades to the next on a GENUINE failure (plugin present but no working share sheet,
+  // Web Share absent, etc.) — but a deliberate user CANCEL is respected, never "recovered" by
+  // silently copying. Previously the Capacitor branch early-returned on mere plugin presence and
+  // swallowed rejections, so a failed share in a browser/WKWebView dead-ended with no feedback.
+  var SHARE_TITLE = "FundX AI retinal assessment";
+  function shareCancelled(e) { try { return !!e && (e.name === "AbortError" || /cancel|abort|dismiss/i.test(e.message || String(e))); } catch (x) { return false; } }
+  function clipboardShare(text) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        // Await the write: writeText rejects when the document isn't focused or permission is denied,
+        // so the toast must reflect the actual result rather than a premature "copied".
+        navigator.clipboard.writeText(text).then(function () { toast("Report copied to clipboard."); }, function () { toast("Sharing not available on this device."); });
+        return;
+      }
+    } catch (e) {}
+    toast("Sharing not available on this device.");
+  }
+  function webShareOrClipboard(text) {
+    try { if (navigator.share) { navigator.share({ title: SHARE_TITLE, text: text }).catch(function (e) { if (!shareCancelled(e)) clipboardShare(text); }); return; } } catch (e) {}
+    clipboardShare(text);
+  }
+  function shareReport(record) {
+    var text = buildReportText(record);
+    try {
+      var Sh = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Share;
+      if (Sh && Sh.share) { Sh.share({ title: SHARE_TITLE, text: text, dialogTitle: "Share assessment" }).catch(function (e) { if (!shareCancelled(e)) webShareOrClipboard(text); }); return; }
+    } catch (e) {}
+    webShareOrClipboard(text);
+  }
+  function resultRecordLike() {
+    if (!result) return null;
+    return { vision: result.findings, quality: result.quality, eye: session && session.eye, patientContext: patientCtx(), source: result.source, timestamp: nowMs(), clinicianReview: result.clinicianReview };
+  }
+
+  function saveBatchAll() {
+    var st = STORE(); if (!st) { toast("Storage unavailable."); return; }
+    var toSave = batchResults.filter(function (r) { return r.quality && r.quality.retinalGate !== false; });
+    if (!toSave.length) { toast("No usable images to save."); return; }
+    var saved = 0;
+    toSave.forEach(function (r) {
+      if (clinicalOn() && window.SMD_FUNDX_CLINICAL && !r.clinical) { try { r.clinical = window.SMD_FUNDX_CLINICAL.assessSync(r.findings, patientCtx()); } catch (e) {} }
+      try { var rec = _buildScanRecord(r, patientCtx(), session.eye, session); if (V().validate.scanRecord(rec).ok) { st.saveScan(rec); saved++; } } catch (e) {}
+    });
+    haptic("success"); toast(saved + " scan" + (saved === 1 ? "" : "s") + " saved to patient."); batchResults = []; screen = "home"; render();
+  }
   function saveScan() {
     if (!result) return;
     var st = STORE(); if (!st) { toast("Storage unavailable."); return; }
-    var rec = _buildScanRecord(result, ctx, session.eye, session);
+    // Freeze the advisory clinical assessment into the record at save time (so the report + any
+    // clinician review persist with the scan; buildReport recomputes only if absent).
+    if (clinicalOn() && window.SMD_FUNDX_CLINICAL && result && !result.clinical) {
+      try { result.clinical = window.SMD_FUNDX_CLINICAL.assessSync(result.findings, patientCtx()); } catch (e) {}
+    }
+    var rec = _buildScanRecord(result, patientCtx(), session.eye, session);
     var chk = V().validate.scanRecord(rec);
     if (!chk.ok) { toast("Could not save scan (" + chk.errors[0] + ")."); return; }
     st.saveScan(rec).then(function () {
@@ -963,8 +1524,23 @@
   // ================= CONTROLLER =================
   function render() {
     if (!rootEl) return;
+    // Central teardown: leaving the corridor preview by ANY path (back, home, start-camera, close)
+    // must unmount previewHud so its internal 60fps rAF loop can't orphan/leak (P2 review fix).
+    if (previewHud && screen !== "corridorpreview") stopCorridorPreview();
     rootEl.classList.toggle("cam", screen === "camera");
+    // Guidance mode + accessibility surface as root classes (CSS-only presentation, README 03).
+    var _mode = fundxMode();
+    rootEl.classList.toggle("fundx-mode-beginner", _mode === "beginner");
+    rootEl.classList.toggle("fundx-mode-expert", _mode === "expert");
+    rootEl.classList.toggle("fundx-a11y-contrast", a11yOn("contrast"));
+    rootEl.classList.toggle("fundx-a11y-large", a11yOn("large"));
+    rootEl.classList.toggle("fundx-a11y-cvd", a11yOn("cvd"));
+    rootEl.classList.toggle("fundx-ar-off", !arGuidanceOn());
+    rootEl.classList.toggle("fundx-corridor-on", corridorOn());
     if (screen === "home") { rootEl.innerHTML = screenHome(); paintRecent(); }
+    else if (screen === "upload") { rootEl.innerHTML = screenUpload(); wireUpload(); }
+    else if (screen === "batch") rootEl.innerHTML = screenBatch();
+    else if (screen === "corridorpreview") rootEl.innerHTML = screenCorridorPreview();
     else if (screen === "precapture") rootEl.innerHTML = screenPrecapture();
     else if (screen === "camera") rootEl.innerHTML = screenCamera();
     else if (screen === "processing") rootEl.innerHTML = screenProcessing();
@@ -984,8 +1560,16 @@
     var a = b.getAttribute("data-fx");
     switch (a) {
       case "close": return FUNDX.close();
-      case "home": stopCamera(); return show("home");
+      case "home": stopCamera(); cancelBatch(); return show("home");
       case "newscan": haptic("medium"); session = newSession("right"); return show("precapture");
+      case "analyzeimg": haptic("light"); return show("upload");
+      case "batchmore": haptic("light"); batchAppendPending = true; return show("upload");   // add to the current batch, not a fresh one
+      case "pickimg": { var fi = document.getElementById("fundxFileInput"); if (fi) fi.click(); return; }
+      case "openbatch": { var bi = parseInt(b.getAttribute("data-i"), 10); var br = batchResults[bi]; if (br) { result = br; screen = (br.quality && br.quality.retinalGate === false) ? "review" : "result"; render(); } return; }
+      case "saveallbatch": return saveBatchAll();
+      case "sharereport": { var shSc = b.getAttribute("data-scope"); var shRec = shSc === "detail" ? (detail && detail.meta) : resultRecordLike(); if (shRec) shareReport(shRec); haptic("light"); return; }
+      case "corridorpreview": haptic("light"); return startCorridorPreview();
+      case "closepreview": stopCorridorPreview(); haptic("light"); return show(devOn() ? "devsettings" : "settings");
       case "eye": if (session) session.eye = b.getAttribute("data-eye"); haptic("selection"); return render();
       case "startcam": haptic("medium");
         // iOS 13+ requires DeviceMotion permission be requested from THIS user gesture, or the
@@ -994,6 +1578,16 @@
         if (sensorsOn() && window.SMD_FUNDX_SENSORS && window.SMD_FUNDX_SENSORS.requestMotionPermission) { try { window.SMD_FUNDX_SENSORS.requestMotionPermission(); } catch (e) {} }
         return startCamera();
       case "camclose": stopCamera(); haptic("light"); return show("home");
+      case "capturebest": return manualCapture();
+      case "torch": {
+        var tOn = (cam && cam.torchOn) ? cam.torchOn() : false;
+        var tNext = !tOn;
+        if (cam && cam.setTorch) { try { cam.setTorch(tNext); } catch (e) {} }
+        haptic("selection");
+        var fbn = document.getElementById("fundxFlashBtn");
+        if (fbn) { fbn.classList.toggle("on", tNext); fbn.innerHTML = ric(tNext ? "flash_on" : "flash_off"); }
+        return;
+      }
       case "confirmlens": if (sm && sm.confirmLensPositioned) sm.confirmLensPositioned(); haptic("selection"); { var fbb = document.getElementById("fundxFallback"); if (fbb) fbb.style.display = "none"; } toast("Proceeding — capture still needs a clear retinal image."); return;
       case "setlensconfirm": { try { localStorage.setItem("smd_fundx_lens_confirm", lensConfirmOn() ? "0" : "1"); } catch (e) {} applySettings(); haptic("selection"); return render(); }
       case "settel": { try { localStorage.setItem("smd_fundx_telemetry", telOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
@@ -1004,11 +1598,39 @@
       case "setdevsf": { var k = b.getAttribute("data-k"); var def = b.getAttribute("data-def") === "1"; var cur; try { var v = localStorage.getItem(k); cur = v == null ? def : v === "1"; localStorage.setItem(k, cur ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
       case "devexport": haptic("light"); return exportDevLog();
       case "voice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); { var vb = document.getElementById("fundxVoiceBtn"); if (vb) { vb.classList.toggle("on", VOICE.enabled()); vb.innerHTML = ric(VOICE.enabled() ? "volume_up" : "volume_off"); } if (VOICE.enabled()) VOICE.speak("Voice coaching on"); } return;
-      case "retake": haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "retake"); result = null; session.retries++; return startCamera();
+      case "retake": { haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "retake");
+        // From the upload/batch workflow, "Retake" means "pick another image" — not launch the live
+        // 20D-lens camera (there is no live scene to point at). Route back to the file picker.
+        var _wasUpload = (result && result.source === "upload") || (session && session.mode === "upload");
+        result = null;
+        if (_wasUpload) {
+          // Retake from within an active batch → the next pick ADDS to it (never wipes the other
+          // already-analyzed, still-unsaved scans). batchResults is only non-empty for a live batch.
+          if (batchResults.length) batchAppendPending = true;
+          return show("upload");
+        }
+        if (session) session.retries++;
+        return startCamera(); }
       case "toresult": haptic("medium"); return show("result");
       case "review": return show("review");
       case "discard": haptic("light"); if (result && result.quality) tel("reject", result.quality.reasons); tel("endSession", "discarded"); result = null; return show("home");
       case "save": return saveScan();
+      case "reviewact": {
+        var Cx = window.SMD_FUNDX_CLINICAL; if (!Cx) return;
+        var rvAct = b.getAttribute("data-act"), rvScope = b.getAttribute("data-scope"), rvPayload = {};
+        if (rvAct === "comment") { var note = (typeof prompt === "function") ? prompt("Clinician note:", "") : ""; if (note == null) return; rvPayload.note = note; }
+        if (rvAct === "edit") { var txt = (typeof prompt === "function") ? prompt("Edited conclusion (advisory):", "") : ""; if (txt == null) return; rvPayload.text = txt; }
+        var rvTarget = rvScope === "detail" ? (detail && detail.meta) : result;
+        if (!rvTarget) return;
+        rvTarget.clinicianReview = Cx.applyReview(rvTarget.clinicianReview, rvAct, rvPayload, { by: (window.SMD_OPERATOR_ID || "clinician") });
+        // Detail scope = an already-saved scan: persist via updateScan (a metadata-only patch). The
+        // stored record has its images stripped, so saveScan would fail validation; updateScan does
+        // not re-validate. Result scope persists later when the clinician taps "Save to patient".
+        if (rvScope === "detail" && detail && detail.meta && detail.meta.id) {
+          try { var stR = STORE(); if (stR && stR.updateScan) { stR.updateScan(detail.meta.id, { clinicianReview: rvTarget.clinicianReview }).catch(function () {}); } } catch (e) {}
+        }
+        haptic("selection"); toast("Review: " + rvTarget.clinicianReview.status); return render();
+      }
       case "training": haptic("light"); session = null; return show("training");
       case "level": haptic("medium"); return startTraining(parseInt(b.getAttribute("data-level"), 10) || 1);
       case "gallery": haptic("light"); return openTimeline();
@@ -1021,6 +1643,9 @@
       case "setsens": { try { localStorage.setItem("smd_fundx_sens", b.getAttribute("data-v")); } catch (e) {} applySettings(); haptic("selection"); return render(); }
       case "setvoice": VOICE.setEnabled(!VOICE.enabled()); haptic("selection"); return render();
       case "setclinical": { try { localStorage.setItem("smd_fundx_clinical", clinicalOn() ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
+      case "setmode": { try { localStorage.setItem("smd_fundx_mode", b.getAttribute("data-v")); } catch (e) {} if (eng && eng.setMode) { try { eng.setMode(fundxMode()); } catch (e) {} } haptic("selection"); return render(); }
+      case "seta11y": { var ak = b.getAttribute("data-k"); try { localStorage.setItem("smd_fundx_a11y_" + ak, a11yOn(ak) ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
+      case "setflag": { var flk = b.getAttribute("data-k"), fldef = b.getAttribute("data-def") !== "0"; try { var flcur = localStorage.getItem(flk); var flon = flcur == null ? fldef : flcur === "1"; localStorage.setItem(flk, flon ? "0" : "1"); } catch (e) {} haptic("selection"); return render(); }
       case "cloudyes": setCloudPref("1"); haptic("success"); return applyProviderSelection().then(render);
       case "cloudno": setCloudPref("0"); haptic("selection"); return applyProviderSelection().then(render);
       case "setcloud": { setCloudPref(cloudEnabled() ? "0" : "1"); haptic("selection"); return applyProviderSelection().then(render); }
@@ -1032,6 +1657,7 @@
   var FUNDX = {
     open: function (context) {
       ctx = context || null; screen = "home"; session = null; result = null; capturing = false; devBuffer = [];
+      cancelBatch();   // fresh session — never resume a stale batch from a prior open (clears batchResults)
       applySettings();
       applyProviderSelection();   // health-gated: auto-activates the backend provider when available
       if (!rootEl) {
@@ -1042,7 +1668,7 @@
       wireVisibility();
       render(); rootEl.classList.add("on"); document.body.style.overflow = "hidden"; haptic("tap");
     },
-    close: function () { stopCamera(); tel("endSession", "abandoned"); if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; haptic("tap"); },
+    close: function () { stopCamera(); stopCorridorPreview(); cancelBatch(); tel("endSession", "abandoned"); if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; haptic("tap"); },
     isOpen: function () { return !!(rootEl && rootEl.classList.contains("on")); },
     enabled: function () { return true; },
     // Android back / swipe-back: step back WITHIN the overlay (camera -> precapture -> home ->
@@ -1050,11 +1676,12 @@
     back: function () {
       if (!(rootEl && rootEl.classList.contains("on"))) return false;
       if (screen === "camera") { stopCamera(); screen = "precapture"; render(); haptic("tap"); return true; }
-      if (screen !== "home") { screen = "home"; render(); haptic("tap"); return true; }
+      if (screen !== "home") { cancelBatch(); screen = "home"; render(); haptic("tap"); return true; }   // same teardown as the on-screen back button
       FUNDX.close(); return true;
     },
     _screen: function () { return screen; },
     _buildResult: _buildResult,
+    _buildUploadResult: _buildUploadResult,
     _buildScanRecord: _buildScanRecord,
     _levelAchieved: levelAchieved,
     _levels: function () { return LEVELS; },

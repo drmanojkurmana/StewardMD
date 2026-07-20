@@ -14,13 +14,21 @@
   var CONV={ ca:{si:"mmol/L",f:4.0}, mg:{si:"mmol/L",f:2.43}, po4:{si:"mmol/L",f:3.1}, glu:{si:"mmol/L",f:18}, creat:{si:"µmol/L",f:1/88.4}, alb:{si:"g/L",f:0.1} };
   function toCanonical(k,val,units){ if(val==null)return null; return (units==="si"&&CONV[k])? val*CONV[k].f : val; }
   function toDisplay(k,canon,units){ if(canon==null)return null; return (units==="si"&&CONV[k])? canon/CONV[k].f : canon; }
+  // Physiologically PLAUSIBLE ranges in CONVENTIONAL (=canonical) units. Anything outside is a data
+  // error (mis-mapped prefill, stale/tour placeholder, or a typo) and is DROPPED — never shown as a
+  // real value and never fed to the engine, so it can't drive a bogus recommendation (BUG-03/04).
+  var RANGES={ na:[100,190], k:[1,9.5], cl:[50,160], hco3:[3,55], ca:[2,20], ica:[0.2,3.5], alb:[0.5,7], mg:[0.2,12], po4:[0.2,20], creat:[0.1,30], egfr:[1,250], glu:[10,2000], ph:[6.5,7.9], osm:[200,450], urea:[1,400] };
+  function inRange(k,canon){ if(canon==null)return false; var r=RANGES[k]; return r? (canon>=r[0]&&canon<=r[1]) : true; }
   var NAME2KEY={ Calcium:"ca", Magnesium:"mg", Phosphate:"po4" }; // result analytes that convert
   function tbwFactor(pt){var f=(pt.sex==="f")?0.5:0.6; if(N(pt.age)!=null&&pt.age>=65) f-=0.1; return f;}
   function highOdsRisk(pt,L){return !!(pt.liver||pt.dialysis||pt.malnutrition||pt.alcohol||(N(L&&L.k)!=null&&L.k<3.0));}
   function renalImp(pt,L){return !!(pt.renal||pt.dialysis)||(N(L&&L.egfr)!=null&&L.egfr<30);}
 
   function correctedNa(na,glu){if(na==null)return null;if(glu==null||glu<=100)return na;return r1(na+1.6*((glu-100)/100));}
-  function correctedCa(ca,alb){if(ca==null)return null;if(alb==null)return ca;return r1(ca+0.8*(4.0-alb));}
+  // Albumin outside its physiological range (≈1–6 g/dL) is NOT trusted for correction — fall back to
+  // the measured Ca rather than applying the formula to a bad albumin. Result is clamped ≥0: a serum
+  // calcium can never be negative, so we never surface an impossible value that drives treatment (BUG-04).
+  function correctedCa(ca,alb){if(ca==null)return null;if(alb==null||alb<1||alb>6)return r1(ca);return r1(Math.max(0,ca+0.8*(4.0-alb)));}
   function anionGap(na,cl,hco3,alb){if(na==null||cl==null||hco3==null)return null;var ag=na-(cl+hco3);if(alb!=null)ag=ag+2.5*(4.0-alb);return r1(ag);}
 
   function analyzeNa(L,pt){
@@ -257,14 +265,14 @@
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 
   // open() optionally PREFILLS from a patient context (e.g. ICU dashboard). prefill:
-  // { labs:{na,k,... in SI/mmol-L}, pt:{weight,age,sex,...} } — values are stored in the
-  // engine's canonical units so the SI display matches the source. Deterministic engine
-  // logic is unchanged; this only pre-populates the input fields.
+  // { labs:{na,k,ca,alb,glu,... in CONVENTIONAL units — the same units the ICU dashboard stores},
+  //   pt:{weight,age,sex,diagnosis|dx,...} }. Conventional == the engine's canonical, so values are
+  // stored as-is (NOT re-converted as SI — that was BUG-03, which corrupted every prefilled value).
+  // Physiologically impossible values are dropped so stale/mis-mapped placeholders never appear.
   function open(prefill){
     if(prefill && (prefill.labs || prefill.pt)){
-      S.units = "si";
-      if(prefill.labs) Object.keys(prefill.labs).forEach(function(k){ var v=prefill.labs[k]; if(v!=null&&v!==""&&!isNaN(parseFloat(v))) S.labs[k]=toCanonical(k, parseFloat(v), "si"); });
-      if(prefill.pt) Object.keys(prefill.pt).forEach(function(k){ if(prefill.pt[k]!=null&&prefill.pt[k]!=="") S.pt[k]=prefill.pt[k]; });
+      if(prefill.labs) Object.keys(prefill.labs).forEach(function(k){ var v=parseFloat(prefill.labs[k]); if(!isNaN(v)&&inRange(k,v)) S.labs[k]=v; });
+      if(prefill.pt) Object.keys(prefill.pt).forEach(function(k){ if(prefill.pt[k]!=null&&prefill.pt[k]!=="") S.pt[(k==="dx"?"diagnosis":k)]=prefill.pt[k]; });
       S.analyzed=false; S.results=null;
       if(root){ root.innerHTML=view(); bind(); }
     }
@@ -425,7 +433,7 @@
   function analyzeAll(rawL, pt, units){
     rawL = rawL || {}; pt = pt || {};
     var L = {}, k;
-    for (k in rawL){ if(!Object.prototype.hasOwnProperty.call(rawL,k)) continue; L[k] = toCanonical(k, N(rawL[k]), units || "conv"); }
+    for (k in rawL){ if(!Object.prototype.hasOwnProperty.call(rawL,k)) continue; var _c=toCanonical(k, N(rawL[k]), units || "conv"); L[k] = inRange(k,_c)? _c : null; }   // drop physiologically-impossible inputs
     var fns = [analyzeNa, analyzeK, analyzeMg, analyzeCa, analyzeICa, analyzePO4, analyzeCl, analyzeHCO3], out = [], i, r;
     for (i=0;i<fns.length;i++){ try { r = fns[i](L, pt); if (r) out.push(r); } catch (e) {} }
     return out;
