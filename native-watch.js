@@ -561,31 +561,48 @@
       });
     } catch (e) {}
 
-    // Code Blue Command Center launcher (native iOS + paired watch only). The card
-    // stays hidden on web / when no watch app is installed. Export taps route the
-    // on-device summary to the currently-open ICU patient's timeline, if any.
+    // Code Blue Command Center launcher — a floating button shown only in the
+    // native iOS app with a paired watch (Code Blue is an emergency tool, so it's
+    // reachable from any screen). Export taps route the on-device summary to the
+    // currently-open ICU patient's timeline, if any.
     try {
-      var cbCard = document.getElementById("codeBlueCard");
-      if (p && cbCard) {
-        if (p.getStatus) p.getStatus().then(function (s) {
-          if (s && s.supported && s.paired && s.watchAppInstalled) cbCard.classList.remove("hidden");
+      if (p && p.getStatus) {
+        p.getStatus().then(function (s) {
+          try { console.log("[SMD-CodeBlue] watch status", JSON.stringify(s)); } catch (e) {}
+          if (!(s && s.supported && s.paired && s.watchAppInstalled)) return;
+          if (document.getElementById("codeBlueFab")) return;
+          var fab = document.createElement("button");
+          fab.id = "codeBlueFab";
+          fab.type = "button";
+          fab.setAttribute("aria-label", "Open Code Blue Command Center");
+          fab.textContent = "🫀 Code Blue";
+          fab.style.cssText = [
+            "position:fixed", "right:16px",
+            "bottom:calc(env(safe-area-inset-bottom,0px) + 20px)",
+            "z-index:9999", "padding:12px 16px", "border:none", "border-radius:24px",
+            "background:#dc2626", "color:#fff",
+            "font:600 15px system-ui,-apple-system,sans-serif",
+            "box-shadow:0 6px 18px rgba(220,38,38,.45)", "cursor:pointer"
+          ].join(";");
+          fab.addEventListener("click", function () { if (p.openCodeBlue) p.openCodeBlue().catch(function () {}); });
+          document.body.appendChild(fab);
         }).catch(function () {});
-        cbCard.addEventListener("click", function () { if (p.openCodeBlue) p.openCodeBlue().catch(function () {}); });
-        if (p.addListener) p.addListener("codeBlueExport", function (ev) {
-          try {
-            var detail = (ev && ev.detail) || "";
-            var api = groupsApi();
-            if (api && api.currentOpenPatient && api.addTimelineEvent) {
-              var pt = api.currentOpenPatient();
-              if (pt && pt.gid && pt.pid) {
-                api.addTimelineEvent(pt.gid, pt.pid, { type: "codeblue", title: "Code Blue summary", detail: detail });
-                return;
-              }
-            }
-            console.log("[SMD-CodeBlue] export (no patient in context) — kept on device only");
-          } catch (e) {}
-        });
       }
+      // Export tap on the native Command Center → append to the open ICU patient timeline.
+      if (p && p.addListener) p.addListener("codeBlueExport", function (ev) {
+        try {
+          var detail = (ev && ev.detail) || "";
+          var api = groupsApi();
+          if (api && api.currentOpenPatient && api.addTimelineEvent) {
+            var pt = api.currentOpenPatient();
+            if (pt && pt.gid && pt.pid) {
+              api.addTimelineEvent(pt.gid, pt.pid, { type: "codeblue", title: "Code Blue summary", detail: detail });
+              return;
+            }
+          }
+          console.log("[SMD-CodeBlue] export (no patient in context) — kept on device only");
+        } catch (e) {}
+      });
     } catch (e) {}
 
     // Watch → phone: register the watch's APNs token with the backend so the
