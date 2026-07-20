@@ -83,6 +83,36 @@ final class CodeBlueModelTests: XCTestCase {
         XCTAssertTrue(summary.rosc)
     }
 
+    func test_reset_wipesEverything() {
+        let mock = MockCompressionDetector()
+        let model = CodeBlueModel(detector: mock, workout: NoopWorkoutKeepAlive(), deviceId: "watch")
+        model.startCode()
+        model.tick(200)
+        mock.emit(count: 40, rate: 115, counted: true)
+        model.recordShock(); model.recordDrug("Epinephrine"); model.markROSC()
+        XCTAssertFalse(model.events.isEmpty)
+
+        model.reset()
+        XCTAssertEqual(model.events.count, 0)
+        XCTAssertEqual(model.compressionCount, 0)
+        XCTAssertEqual(model.shockCount, 0)
+        XCTAssertEqual(model.adrenalineCount, 0)
+        XCTAssertEqual(model.elapsed, 0)
+        XCTAssertFalse(model.rosc)
+        XCTAssertFalse(model.isRunning)
+        XCTAssertFalse(mock.isRunning)
+    }
+
+    func test_startCode_startsFreshAfterAPriorCode() {
+        let mock = MockCompressionDetector()
+        let model = CodeBlueModel(detector: mock, workout: NoopWorkoutKeepAlive(), deviceId: "watch")
+        model.startCode(); model.recordShock(); _ = model.endCode()
+        XCTAssertEqual(model.events.filter { $0.kind == .shock }.count, 1)
+        model.startCode()   // a new code must not carry the prior code's events
+        XCTAssertEqual(model.events.filter { $0.kind == .shock }.count, 0)
+        XCTAssertEqual(model.events.filter { $0.kind == .cprStart }.count, 1)
+    }
+
     func test_pauseEmitsEvents() {
         let mock = MockCompressionDetector()
         let model = CodeBlueModel(detector: mock, workout: NoopWorkoutKeepAlive(), deviceId: "watch")

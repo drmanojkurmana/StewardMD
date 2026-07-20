@@ -28,12 +28,19 @@ final class CoreMotionCompressionDetector: CompressionDetecting {
         queue.maxConcurrentOperationCount = 1
         motion.startDeviceMotionUpdates(to: queue) { [weak self] dm, _ in
             guard let dm else { return }
-            let a = dm.userAcceleration
-            let mag = (a.x * a.x + a.y * a.y + a.z * a.z).squareRoot()
+            // Project user acceleration onto the gravity (vertical) axis so the signal
+            // oscillates ONCE per compression. |acceleration| peaks twice per stroke
+            // (down-thrust + recoil) and would double-count.
+            let a = dm.userAcceleration, g = dm.gravity
+            let gmag = (g.x * g.x + g.y * g.y + g.z * g.z).squareRoot()
+            let vertical = gmag > 0
+                ? (a.x * g.x + a.y * g.y + a.z * g.z) / gmag
+                : (a.x * a.x + a.y * a.y + a.z * a.z).squareRoot()
             let t = dm.timestamp
             Task { @MainActor in
                 guard let self, self.isRunning else { return }
-                let tick = self.analyzer.ingest(CompressionSample(t: t, magnitude: mag))
+                CaptureLog.shared.record(t, vertical)   // dev: raw-trace capture (no-op unless armed)
+                let tick = self.analyzer.ingest(CompressionSample(t: t, value: vertical))
                 self.onChange?(self.analyzer.state, tick)
             }
         }

@@ -29,6 +29,7 @@ public final class CodeBlueModel: ObservableObject {
     @Published public private(set) var pauseSeconds: TimeInterval = 0
     @Published public private(set) var coachZone: RateZone = .idle
     @Published public private(set) var events: [CodeEvent] = []
+    @Published public private(set) var isRunning = false
 
     private var timer = CodeBlueTimer()
     private var detector: CompressionDetecting?
@@ -110,8 +111,32 @@ public final class CodeBlueModel: ObservableObject {
     /// Test-only hook so pause/resume mapping is verifiable without CoreMotion.
     public func ingestForTest(state: CompressionState, tick: AnalyzerTick) { apply(state, tick) }
 
-    /// Begin a code: start sensors + keep-alive, log the start event.
+    /// Wipe all state back to new — clears the timeline, counts, timer, and
+    /// compression stats. Stops sensors if a code was active.
+    public func reset() {
+        detector?.stop()
+        workout?.end()
+        timer = CodeBlueTimer()
+        elapsed = 0
+        adrenalineCount = 0
+        shockCount = 0
+        rosc = false
+        compressionCount = 0
+        instantaneousRateCPM = 0
+        averageRateCPM = 0
+        paused = false
+        pauseSeconds = 0
+        coachZone = .idle
+        events = []
+        isRunning = false
+        eventSeq = 0
+    }
+
+    /// Begin a code: reset to a clean slate first (each code stands alone), then
+    /// start sensors + keep-alive and log the start event.
     public func startCode() {
+        reset()
+        isRunning = true
         workout?.begin()
         detector?.start()
         append(.cprStart)
@@ -120,6 +145,7 @@ public final class CodeBlueModel: ObservableObject {
     /// End a code: stop sensors + keep-alive (battery), log the end event, build summary.
     public func endCode() -> CodeSummary {
         append(.cprEnd)
+        isRunning = false
         detector?.stop()
         workout?.end()
         return CodeSummary.build(events: events, durationSeconds: elapsed, cycles: cycle,
@@ -136,7 +162,7 @@ public final class CodeBlueModel: ObservableObject {
 
     /// Build the live snapshot streamed to the phone (design §5).
     public func snapshot(batteryLevel: Double) -> CodeBlueState {
-        CodeBlueState(running: true, elapsed: elapsed, cycle: cycle,
+        CodeBlueState(running: isRunning, elapsed: elapsed, cycle: cycle,
                       compressionCount: compressionCount, instantaneousRateCPM: instantaneousRateCPM,
                       averageRateCPM: averageRateCPM, coachZone: coachZone, paused: paused,
                       pauseSeconds: pauseSeconds, adrenalineCount: adrenalineCount,

@@ -44,13 +44,15 @@ export async function listNativeTokens(env) {
 
 /* Fan a single alert out to every stored native token. Prunes dead tokens.
  * msg = { title, body, url, tag }. opts.uid targets one user's devices; opts.workspace
- * targets subscribers of that workspace (legacy tokens with no workspaces = all). */
+ * targets subscribers of that workspace (legacy tokens with no workspaces = all);
+ * opts.platform restricts to one platform ("ios"|"watch"|"android"). */
 export async function sendNativeToAll(env, msg, opts) {
   if (!nativePushEnabled(env)) return { sent: 0, total: 0, disabled: true };
   msg = msg || {};
   let toks = await listNativeTokens(env);
   if (opts && opts.uid) toks = toks.filter((t) => t.uid === opts.uid);
   if (opts && opts.workspace) toks = toks.filter((t) => !t.workspaces || !t.workspaces.length || t.workspaces.indexOf(opts.workspace) >= 0);
+  if (opts && opts.platform) toks = toks.filter((t) => t.platform === opts.platform);
   const store = pushKv(env);
   let sent = 0;
   await Promise.all(toks.map(async (t) => {

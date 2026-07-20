@@ -30,6 +30,9 @@ final class CodeBlueLiveModel: ObservableObject {
     func begin() {
         sync.onState = { [weak self] incoming in self?.ingest(incoming) }
         sync.start()
+        // Watch tapped Reset → wipe the phone's records too.
+        NotificationCenter.default.addObserver(forName: WatchConnectivityRelay.codeBlueReset,
+                                               object: nil, queue: .main) { [weak self] _ in self?.clearLocal() }
         refreshReachability()
         reachTimer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
             .sink { [weak self] _ in self?.refreshReachability() }

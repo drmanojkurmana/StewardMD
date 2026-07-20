@@ -158,6 +158,22 @@ export async function onRequest(context) {
     return json(r, r.ok ? 200 : (r.error === "forbidden" ? 403 : 400));
   }
 
+  // Code Blue started on the watch → push a guaranteed alert to the clinician's own
+  // iPhone (shows even when the app is force-quit; local notifications can't). Tapping
+  // it (url "codeblue") opens the app → Command Center. iOS phone only, not the watch.
+  if (method === "POST" && seg === "codeblue") {
+    const wuid = await identify(request, env);
+    if (!wuid) return json({ error: "auth-required" }, 401);
+    let b = {}; try { b = await request.json(); } catch (e) {}
+    if (String(b.event || "start") !== "start") return json({ ok: true });   // only "start" alerts
+    const r = await sendNativeToAll(env, {
+      title: "CODE BLUE",
+      body: "A code is active — tap to open the Command Center.",
+      url: "codeblue", tag: "codeblue",
+    }, { uid: wuid, platform: "ios" });
+    return json({ ok: true, pushed: (r && r.sent) || 0 });
+  }
+
   if (!watchConfigured(env)) return json({ error: "watch-not-configured" }, 503);
 
   // ── cron / admin ──

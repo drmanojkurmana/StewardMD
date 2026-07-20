@@ -1,10 +1,13 @@
 import Foundation
 
-/// One acceleration-magnitude sample (gravity removed): `magnitude` = |userAcceleration| in g.
+/// One acceleration sample. `value` is a 1-D compression signal — the signed
+/// vertical component of user acceleration (userAcceleration projected onto gravity),
+/// which oscillates once per compression (unlike |acceleration|, which peaks twice
+/// per stroke and double-counts).
 public struct CompressionSample: Sendable, Equatable {
     public let t: TimeInterval
-    public let magnitude: Double
-    public init(t: TimeInterval, magnitude: Double) { self.t = t; self.magnitude = magnitude }
+    public let value: Double
+    public init(t: TimeInterval, value: Double) { self.t = t; self.value = value }
 }
 
 /// Measured compression state (design §3.1). No quality/depth — counts + rate + pause only.
@@ -25,87 +28,95 @@ public struct AnalyzerTick: Sendable, Equatable {
     public init() {}
 }
 
-/// Detects chest-compression peaks from a stream of acceleration-magnitude samples
-/// and derives count + estimated rate + pause state (design §3.1). Pure and
-/// deterministic — no CoreMotion, no clock; advanced solely by `ingest`.
+/// Counts chest compressions + estimated rate from a 1-D acceleration signal
+/// (design §3.1). Pure and deterministic — no CoreMotion, no clock; advanced only by
+/// `ingest`.
 ///
-/// Algorithm: a rising→falling state machine finds local maxima; a peak counts only
-/// if it clears a minimum prominence AND at least `refractory` seconds have passed
-/// since the last peak (rejects double-counting / caps ~240 cpm). A **repetition
-/// gate** withholds counting until `repetitionGate` consecutive rhythmic peaks are
-/// seen (rejects a single accidental movement). Absence of a qualifying peak for
-/// `pauseTimeout` seconds marks a pause; the next qualifying peak resumes.
+/// Accuracy design (fixes one-compression-counted-twice):
+///  • **Hysteresis / Schmitt trigger** — a compression is counted only when the
+///    smoothed signal rises above an upper threshold *after* having fallen below a
+///    lower threshold. A secondary bump within the same stroke never dips below the
+///    low threshold, so it can't add a second count.
+///  • **Adaptive thresholds** — high/low track a slow baseline ± a fraction of the
+///    running amplitude, so it self-scales to how hard/deep the compressions are.
+///  • **Low-pass smoothing** removes jitter that would otherwise fragment a peak.
+///  • **Refractory backstop** caps the max plausible rate.
+///  • **Repetition gate** withholds counting until several rhythmic compressions are
+///    seen (rejects a single accidental movement).
+///  • **Pause detection** — no compression for `pauseTimeout` → paused; auto-resume.
 public struct CompressionAnalyzer: Sendable {
     public var refractory: TimeInterval
     public var pauseTimeout: TimeInterval
     public var repetitionGate: Int
-    public var minPeakG: Double
+    public var minAmplitude: Double     // g — floor so flat noise never crosses the gate
+    public var hysteresis: Double       // fraction of amplitude for the high/low band
+    public var smoothing: Double        // EMA alpha for the input (0…1; higher = less smoothing)
 
     public private(set) var state = CompressionState()
 
-    private var prev: Double = 0
-    private var rising = false
+    private var smoothed: Double?
+    private var baseline = 0.0
+    private var dev = 0.2
+    private var armed = false               // has dipped below `low` since the last count
     private var lastPeakT: TimeInterval?
-    private var lastSampleT: TimeInterval = 0
-    private var armed = false
-    private var provisionalPeaks = 0
-    private var intervals: [TimeInterval] = []   // recent inter-peak intervals (rolling)
+    private var counting = false            // repetition gate satisfied
+    private var provisional = 0
+    private var intervals: [TimeInterval] = []
 
-    public init(refractory: TimeInterval = 0.25, pauseTimeout: TimeInterval = 3.0,
-                repetitionGate: Int = 3, minPeakG: Double = 0.6) {
+    public init(refractory: TimeInterval = 0.28, pauseTimeout: TimeInterval = 3.0,
+                repetitionGate: Int = 3, minAmplitude: Double = 0.15,
+                hysteresis: Double = 0.5, smoothing: Double = 0.35) {
         self.refractory = refractory; self.pauseTimeout = pauseTimeout
-        self.repetitionGate = repetitionGate; self.minPeakG = minPeakG
+        self.repetitionGate = repetitionGate; self.minAmplitude = minAmplitude
+        self.hysteresis = hysteresis; self.smoothing = smoothing
     }
 
     public mutating func ingest(_ s: CompressionSample) -> AnalyzerTick {
         var tick = AnalyzerTick()
-        lastSampleT = s.t
 
-        // Pause detection: no qualifying peak within pauseTimeout.
+        // Low-pass smooth, then track a slow baseline + running amplitude.
+        let x = smoothed.map { $0 + smoothing * (s.value - $0) } ?? s.value
+        smoothed = x
+        baseline += 0.02 * (x - baseline)
+        dev += 0.05 * (abs(x - baseline) - dev)
+        let amp = max(minAmplitude, dev)
+        let high = baseline + hysteresis * amp
+        let low = baseline - hysteresis * amp
+
+        // Pause: no counted compression within the timeout.
         if let lp = lastPeakT {
             let gap = s.t - lp
             if !state.paused, gap >= pauseTimeout {
-                state.paused = true; tick.pauseStarted = true
-                state.instantaneousRateCPM = 0
+                state.paused = true; tick.pauseStarted = true; state.instantaneousRateCPM = 0
             }
             if state.paused { state.pauseSeconds = gap }
         }
 
-        // Peak state machine on the raw magnitude.
-        let goingUp = s.magnitude > prev
-        var peak = false
-        if rising && !goingUp { peak = true }   // just turned from rising to falling
-        rising = goingUp
-
-        if peak, prev >= minPeakG {
-            let dtSincePeak = lastPeakT.map { s.t - $0 } ?? .infinity
-            if dtSincePeak >= refractory {
-                registerPeak(at: s.t, interval: lastPeakT == nil ? nil : dtSincePeak, tick: &tick)
+        // Schmitt trigger: arm on a low excursion, count on the next high crossing.
+        if x < low { armed = true }
+        if x > high, armed {
+            armed = false
+            let interval = lastPeakT.map { s.t - $0 }
+            if interval == nil || interval! >= refractory {
+                register(at: s.t, interval: interval, tick: &tick)
             }
         }
-        prev = s.magnitude
         return tick
     }
 
-    private mutating func registerPeak(at t: TimeInterval, interval: TimeInterval?,
-                                       tick: inout AnalyzerTick) {
-        // Rhythm consistency for the repetition gate: interval within 0.25…1.5 s (40–240 cpm).
-        let rhythmic = interval.map { $0 >= 0.25 && $0 <= 1.5 } ?? false
+    private mutating func register(at t: TimeInterval, interval: TimeInterval?, tick: inout AnalyzerTick) {
+        let rhythmic = interval.map { $0 >= 0.30 && $0 <= 1.5 } ?? false   // 40–200 cpm
 
         if state.paused {
             state.paused = false; state.pauseSeconds = 0; tick.resumed = true
             intervals.removeAll()
         }
 
-        if !armed {
-            if rhythmic || provisionalPeaks == 0 {
-                provisionalPeaks += 1
-            } else {
-                provisionalPeaks = 1
-            }
-            if provisionalPeaks >= repetitionGate {
-                armed = true
-                state.count = provisionalPeaks          // backfill the gate peaks
+        if !counting {
+            if rhythmic || provisional == 0 { provisional += 1 } else { provisional = 1 }
+            if provisional >= repetitionGate {
+                counting = true
+                state.count = provisional        // backfill the gate compressions
                 tick.compressionCounted = true
             }
         } else {
