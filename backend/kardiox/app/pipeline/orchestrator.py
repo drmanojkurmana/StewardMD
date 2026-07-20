@@ -105,9 +105,10 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
         # quality gate — a deliberate GATE: BadImage rejects (propagate); no gate configured -> skip;
         # an unexpected quality-provider error is isolated (never reject a good image on a bug).
         await emit("quality", "active", 22)
+        quality_report: dict | None = None
         try:
-            await asyncio.wait_for(providers.quality.assess(image), timeout=providers.quality.timeout_s)
-            trace.append({"stage": "quality", "status": "done"})
+            quality_report = await asyncio.wait_for(providers.quality.assess(image), timeout=providers.quality.timeout_s)
+            trace.append({"stage": "quality", "status": "done", "gate": (quality_report or {}).get("gate")})
         except StageNotImplemented:
             trace.append({"stage": "quality", "status": "skipped"})
         except BadImage:
@@ -118,6 +119,16 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
             log.warning("quality.isolated", reason=type(e).__name__)
             trace.append({"stage": "quality", "status": "isolated"})
         await emit("quality", "done", 26)
+
+        # layout + grid detection (best-effort, non-critical) — informs the report + digitizers
+        layout_info: dict | None = None
+        try:
+            from app.services import layout as _layout
+            layout_info = await asyncio.to_thread(_layout.detect_layout, image)
+            trace.append({"stage": "layout", "status": "done", "layout": (layout_info or {}).get("layout")})
+        except Exception as e:  # noqa: BLE001 — isolated; the classical digitizer detects layout too
+            log.info("layout.isolated", reason=type(e).__name__)
+            trace.append({"stage": "layout", "status": "isolated"})
 
         # digitization → signal (critical)
         traces, _ = await run_stage("digitization", providers.digitization,
@@ -167,7 +178,8 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
                                     critical=False, emit=emit, pct_active=97, pct_done=98, trace=trace)
         interpretation = interp or ""
 
-        analysis = _assemble(sid, rhythm, meas, st, validated, interpretation, providers)
+        analysis = _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
+                             quality_report=quality_report, layout_info=layout_info)
         total_ms = round((time.monotonic() - t_pipeline) * 1000, 1)
         METRICS.observe("kardiox_pipeline_duration_seconds", time.monotonic() - t_pipeline, {"mode": "live"})
         log.info("pipeline.done", total_ms=total_ms, stages=len(trace))
@@ -184,12 +196,30 @@ def _as_int(v):
         return None
 
 
-def _assemble(sid, rhythm, meas, st, validated, interpretation, providers):
-    """Build the ECGAnalysis contract from the real stage outputs (Phase 5F)."""
+def _signal_quality(meas: dict):
+    q = meas.get("quality")
+    return float(q) if isinstance(q, (int, float)) else None
+
+
+def _measurement_consistency(rhythm: dict, meas: dict):
+    """1.0 when the rhythm-stage rate and the measurement-stage HR agree; lower as they diverge."""
+    a, b = rhythm.get("rateBpm"), meas.get("heartRate")
+    if isinstance(a, (int, float)) and isinstance(b, (int, float)) and max(a, b) > 0:
+        return round(max(0.0, 1.0 - abs(a - b) / max(a, b)), 3)
+    return None
+
+
+def _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
+              quality_report=None, layout_info=None):
+    """Build the ECGAnalysis contract from the real stage outputs + Phase-7 fusion/calibration/explain."""
+    from app.core.config import get_settings
     from app.models.ecg import Differential, ECGFinding, Evidence, MorphologyRow, RedFlag
 
+    settings = get_settings()
     diagnoses = validated.get("diagnoses", []) or []
     top = diagnoses[0] if diagnoses else None
+    signal_quality = _signal_quality(meas)
+    meas_consistency = _measurement_consistency(rhythm, meas)
 
     if top:
         verdict = top["label"]
@@ -203,6 +233,45 @@ def _assemble(sid, rhythm, meas, st, validated, interpretation, providers):
         confidence = float(validated.get("confidence", 0.0))
         differentials = []
         what_to_verify = validated.get("whatToVerify")
+
+    # ── Evidence fusion / consensus (only real MODEL outputs become candidates; deterministic-only
+    #    pipelines fall back to the rule engine inside fuse). Fail-safe: degrade to the rule confidence.
+    consensus = None
+    if settings.enable_consensus_fusion:
+        try:
+            from app.services.fusion import fuse
+            candidates = []
+            if rhythm.get("method") == "torchecg" and rhythm.get("label"):
+                candidates.append({"source": "torchecg", "label": rhythm["label"],
+                                   "confidence": float(rhythm.get("confidence") or 0.5), "weight": 1.0})
+            consensus = fuse(candidates, validated, signal_quality, meas_consistency)
+            if consensus.get("findings"):
+                confidence = float(consensus.get("overallConfidence", confidence))
+        except Exception as e:  # noqa: BLE001 — fusion must never break the pipeline
+            log.info("fusion.skipped", reason=type(e).__name__)
+            consensus = None
+
+    # ── Confidence calibration (identity + calibrated=False until fitted). Fail-safe.
+    calibrated = None
+    try:
+        from app.services.calibration import ConfidenceCalibrator
+        calibrator = ConfidenceCalibrator.from_config(settings)
+        confidence = float(calibrator.calibrate(confidence))
+        calibrated = bool(calibrator.is_calibrated)
+    except Exception as e:  # noqa: BLE001
+        log.info("calibration.skipped", reason=type(e).__name__)
+
+    # ── Explainability for the top findings. Fail-safe.
+    explanations = []
+    if settings.enable_explainability and diagnoses:
+        try:
+            from app.services.explain import explain_finding
+            ctx = {"measurements": meas, "st": st, "rhythm": rhythm, "validated": validated,
+                   "fusion": consensus, "delineation": None, "fs": None}
+            explanations = [explain_finding(dx, ctx) for dx in diagnoses[:3]]
+        except Exception as e:  # noqa: BLE001
+            log.info("explain.skipped", reason=type(e).__name__)
+            explanations = []
 
     # findings ← every matched rule criterion (explainability)
     findings = []
@@ -245,6 +314,13 @@ def _assemble(sid, rhythm, meas, st, validated, interpretation, providers):
         differentials=differentials,
         redFlag=red_flag,
         whatToVerify=what_to_verify,
+        qualityReport=quality_report,
+        layout=layout_info,
+        signalQuality=signal_quality,
+        consensus=consensus,
+        explanations=explanations,
+        calibrated=calibrated,
         modelVersions={"rules": providers.rules.name, "rhythm": providers.rhythm.name,
-                       "measurement": providers.measurement.name, "digitization": providers.digitization.name},
+                       "measurement": providers.measurement.name, "digitization": providers.digitization.name,
+                       "quality": providers.quality.name},
     )

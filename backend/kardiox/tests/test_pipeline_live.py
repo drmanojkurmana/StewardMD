@@ -68,4 +68,8 @@ def test_live_pipeline_end_to_end(monkeypatch):
     assert analysis.clinicalInterpretation == ""             # gemini=none skipped, did NOT block
     assert analysis.confidenceBand in ("low", "medium", "high")
     assert r2.deleted is True                                # ephemeral upload erased
+    # Phase 7 wiring flows through: consensus (fusion) attached; calibration ran (identity → False)
+    assert isinstance(analysis.consensus, dict) and analysis.consensus.get("method") == "logodds-consensus"
+    assert analysis.calibrated is False                      # temperature 1.0 = uncalibrated (honest)
+    assert isinstance(analysis.explanations, list)
     get_settings.cache_clear()

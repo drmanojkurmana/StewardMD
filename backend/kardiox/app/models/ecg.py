@@ -85,6 +85,7 @@ class ECGAnalysis(BaseModel):
     educationalRef: str | None = None
     # Phase 7 advanced-pipeline outputs (all additive + optional; the iOS decoder ignores unknown fields).
     qualityReport: dict | None = None       # QualityEngine.assess (image quality gate + per-check detail)
+    layout: dict | None = None              # detected panel layout + grid (layout.detect_layout)
     signalQuality: float | None = None      # 0..1 signal-usability score
     consensus: dict | None = None           # evidence-fusion / consensus-engine result
     explanations: list[dict] = Field(default_factory=list)  # per-finding explainability
