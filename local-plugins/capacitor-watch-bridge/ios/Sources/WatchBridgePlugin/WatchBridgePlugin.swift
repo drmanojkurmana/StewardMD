@@ -1,6 +1,7 @@
 import Foundation
 import Capacitor
 import SwiftUI
+import UserNotifications
 import StewardMDWatchCore
 #if canImport(WatchConnectivity)
 import WatchConnectivity
@@ -66,6 +67,9 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             if self.lastCodeBlueRunning != state.running {
                 self.lastCodeBlueRunning = state.running
                 self.notifyListeners("codeBlueActive", data: ["running": state.running])
+                // Local alert so the phone notifies even when the app is closed/backgrounded
+                // (WatchConnectivity woke it to deliver this). Cleared when the code ends.
+                if state.running { self.postCodeBlueAlert() } else { self.clearCodeBlueAlert() }
             }
         }
         // Reset from the watch → dismiss the on-screen alert + re-arm for the next code.
@@ -74,6 +78,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         ) { [weak self] _ in
             self?.lastCodeBlueRunning = false
             self?.notifyListeners("codeBlueActive", data: ["running": false])
+            self?.clearCodeBlueAlert()
         }
         // When the watch asks for a fresh token, re-emit to JS so native-watch.js
         // republishes. Decoupled via a string-keyed notification (same pattern as
@@ -200,6 +205,29 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         DispatchQueue.main.async { CodeBlueLiveModel.shared.clearLocal() }
         relay.updateContext(["cleared": true])
         call.resolve()
+    }
+
+    private static let codeBlueAlertId = "smd-codeblue-alert"
+
+    /// Post an immediate local notification when a code starts, so the clinician is
+    /// alerted even with the app closed/backgrounded. Tapping it opens the app, where
+    /// the on-screen "CODE BLUE" banner is already showing to enter the Command Center.
+    private func postCodeBlueAlert() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { _, _ in }
+        let content = UNMutableNotificationContent()
+        content.title = "CODE BLUE"
+        content.body = "A code is active. Tap to open the Command Center."
+        content.sound = .default
+        content.userInfo = ["smdCodeBlue": true]
+        let req = UNNotificationRequest(identifier: Self.codeBlueAlertId, content: content, trigger: nil)
+        center.add(req, withCompletionHandler: nil)
+    }
+
+    private func clearCodeBlueAlert() {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [Self.codeBlueAlertId])
+        center.removeDeliveredNotifications(withIdentifiers: [Self.codeBlueAlertId])
     }
 
     /// Present the native SwiftUI Code Blue Command Center full-screen from the web

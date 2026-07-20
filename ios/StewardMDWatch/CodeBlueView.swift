@@ -142,6 +142,10 @@ struct CodeBlueView: View {
             if running {
                 startDate = Date().addingTimeInterval(-model.elapsed)
                 model.startCode()
+                // Guaranteed snapshot (transferUserInfo + app-context) wakes the iPhone
+                // app in the background so it can alert even when closed. sendMessage
+                // alone (the per-second live stream) can't wake a suspended app.
+                WatchConnectivityManager.shared.streamCodeBlueSnapshot(model.snapshot(batteryLevel: WKDeviceId.battery))
                 ResusAlerts.requestAuth()
                 ResusAlerts.schedule(id: "codeblue-cycle", after: 120,
                                      title: "Code Blue", body: "Rhythm check — switch compressor.", repeats: true)

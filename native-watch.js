@@ -578,6 +578,8 @@
           "background:linear-gradient(160deg,#0b3a8f,#1e40af 58%,#2563eb);" +
           "box-shadow:0 18px 50px rgba(37,99,235,.55),inset 0 0 0 1px rgba(255,255,255,.12);" +
           "animation:cbFlip .7s cubic-bezier(.2,.7,.2,1) both,cbPulse 1.6s ease-in-out .7s infinite;transform-style:preserve-3d}" +
+          "#cbAlert .cbmark{width:56px;height:56px;margin:0 auto 8px;background:#fff;" +
+          "-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}" +
           "#cbAlert .cbl{font:800 30px system-ui,-apple-system,sans-serif;color:#fff;letter-spacing:.5px}" +
           "#cbAlert .cbl span{color:#93c5fd}" +
           "#cbAlert .cbf{margin-top:10px;font:900 42px system-ui,-apple-system,sans-serif;letter-spacing:3px;color:#fff;" +
@@ -591,7 +593,7 @@
         var el = document.createElement("div");
         el.id = "cbAlert"; el.setAttribute("role", "alertdialog");
         el.setAttribute("aria-label", "Code Blue active — tap to open the Command Center");
-        el.innerHTML = '<div class="cbc"><div class="cbl">Steward<span>MD</span></div>' +
+        el.innerHTML = '<div class="cbc"><div class="cbmark"></div><div class="cbl">Steward<span>MD</span></div>' +
           '<div class="cbf">CODE BLUE</div><div class="cbh">Tap to open Command Center</div></div>';
         el.addEventListener("click", function (e) {
           if (e.target.closest(".cbc")) { if (p && p.openCodeBlue) p.openCodeBlue().catch(function () {}); }
