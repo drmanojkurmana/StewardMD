@@ -9,7 +9,8 @@ _PREPROC = {"none": preprocessing.NonePreprocessing, "opencv": preprocessing.Ope
 _DIGI = {"none": digitization.NoneDigitization, "classical": digitization.ClassicalDigitization,
          "opencv": digitization.OpenCVDigitization}
 _WFDB = {"none": wfdb_io.NoneWfdb, "wfdb": wfdb_io.WfdbSignal}
-_RHY = {"none": rhythm.NoneRhythm, "torchecg": rhythm.TorchECGRhythm}
+_RHY = {"none": rhythm.NoneRhythm, "deterministic": rhythm.DeterministicRhythm,
+        "torchecg": rhythm.TorchECGRhythm}
 _MEAS = {"none": measurement.NoneMeasurement, "neurokit2": measurement.NeuroKitMeasurement}
 _RULES = {"none": rules.NoneRules, "builtin": rules.BuiltinRules}
 _GEM = {"none": gemini.NoneGemini, "gemini": gemini.GeminiExplainer}

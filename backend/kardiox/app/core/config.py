@@ -51,9 +51,19 @@ class Settings(BaseSettings):
     provider_rules: str = "builtin"   # the deterministic rule engine is real; safe to keep on
     provider_gemini: str = "none"
 
+    # ── Rhythm model (stages 6/7/9, TorchECG) — ship NO weights. Empty path → provider raises
+    #    UpstreamUnavailable (never fakes a label). A validated checkpoint is required to enable.
+    rhythm_model_path: str = ""
+    rhythm_model_fs: int = 500
+    rhythm_model_labels: str = ""   # comma-separated label map bundled with the checkpoint
+
     # ── Gemini (stage-12 explanation) — future ─────────────────────────────────────────────────────
     gemini_api_key: str = ""
     gemini_model: str = "gemini-1.5-pro"
+
+    @property
+    def rhythm_labels_list(self) -> list[str]:
+        return [s.strip() for s in self.rhythm_model_labels.split(",") if s.strip()]
 
     @property
     def cors_list(self) -> list[str]:
