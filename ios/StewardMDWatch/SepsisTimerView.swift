@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 import StewardMDWatchCore
 
 /// Sepsis 1-hour bundle (design §06): amber countdown ring + live checklist with

@@ -35,7 +35,7 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate, UNUserNotificatio
         }
         guard let alert = NotificationParser.parse(info) else { return }
         // Make sure the alert is in the list, then act on the chosen action.
-        await ingest(alert)
+        ingest(alert)
         switch response.actionIdentifier {
         case LabNotifications.ack:
             await acknowledge(alert)   // optimistic + queued idempotent ack
@@ -61,13 +61,15 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate, UNUserNotificatio
                                 willPresent notification: UNNotification) async
         -> UNNotificationPresentationOptions {
         if let alert = NotificationParser.parse(notification.request.content.userInfo) {
-            await ingest(alert)
+            ingest(alert)
         }
         return [.banner, .sound, .list]
     }
 
     // A silent/background push feeds the model, refreshes the badge + widget timelines.
-    func didReceiveRemoteNotification(_ userInfo: [AnyHashable: Any]) async -> WKBackgroundFetchResult {
+    // nonisolated so the system's non-Sendable userInfo stays off the main actor;
+    // we hop to the main actor only with the parsed (Sendable) LabAlert.
+    nonisolated func didReceiveRemoteNotification(_ userInfo: [AnyHashable: Any]) async -> WKBackgroundFetchResult {
         if let alert = NotificationParser.parse(userInfo) {
             await ingest(alert)
         }
