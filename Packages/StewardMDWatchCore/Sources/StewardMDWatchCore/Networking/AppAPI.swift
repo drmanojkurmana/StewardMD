@@ -36,6 +36,26 @@ public struct AppAPI: Sendable {
         try await get("api/watch-config", as: FeatureFlags.self)
     }
 
+    /// `POST /api/watch/task` — set a shared task's status directly on the server
+    /// (+ a "Task completed" timeline on done). The direct-API write-back path.
+    public func setTaskStatus(gid: String, pid: String, taskId: String, status: String) async throws {
+        struct Body: Encodable { let gid, pid, taskId, status: String }
+        let body = try JSONEncoder().encode(Body(gid: gid, pid: pid, taskId: taskId, status: status))
+        _ = try await client.send(
+            Endpoint(method: "POST", url: Self.base.appendingPathComponent("api/watch/task"),
+                     body: body, requiresAuth: true), as: OKResponse.self)
+    }
+
+    /// `POST /api/watch/timeline` — append a timeline event directly (critical-ack).
+    public func appendTimeline(gid: String, pid: String, title: String,
+                               type: String = "note", detail: String = "") async throws {
+        struct Body: Encodable { let gid, pid, type, title, detail: String }
+        let body = try JSONEncoder().encode(Body(gid: gid, pid: pid, type: type, title: title, detail: detail))
+        _ = try await client.send(
+            Endpoint(method: "POST", url: Self.base.appendingPathComponent("api/watch/timeline"),
+                     body: body, requiresAuth: true), as: OKResponse.self)
+    }
+
     /// `POST /api/watch/ack` — durable, idempotent acknowledge sync.
     public func acknowledge(_ ack: Ack) async throws {
         let body = try JSONEncoder().encode(ack)

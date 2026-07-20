@@ -58,6 +58,11 @@
   function startGroupSync() {
     var api = groupsApi();
     if (!api || !api.subscribeGroups || !groupsOn()) return;
+    if (_grp.subs.length) return;                 // idempotent — subscribe once
+    // subscribeGroups bails (empty, no listener, no retry) if there's no uid yet,
+    // so only subscribe once Firebase auth has resolved a currentUser. start()
+    // calls this again on every auth-state change, so it self-heals post-login.
+    try { if (!(auth() && auth().currentUser)) return; } catch (e) { return; }
     // one groups listener; (re)build per-group patient + task listeners on change
     _grp.subs.push(api.subscribeGroups(function (groups) {
       _grp.groups = (groups || []).slice(0, _grpMax);
@@ -471,6 +476,16 @@
       var role = roleForRelay(); if (role) payload.role = role;
       var cd = calcDefs(); if (cd.length) payload.calcDefs = cd;
       var cen = census(wl.length); if (cen) payload.glance = cen;
+      // DIAGNOSTIC (temp): which source populated the watchlist? Logged by the plugin.
+      try {
+        var _gp = 0, _os = openState();
+        Object.keys(_grp.patients).forEach(function (g) { _gp += (_grp.patients[g] || []).length; });
+        payload._dbg = "groupsOn=" + (groupsOn() ? 1 : 0) +
+          " open=" + ((_os && _os.patient) ? 1 : 0) +
+          " groups=" + ((_grp.groups || []).length) + " groupPts=" + _gp +
+          " roster=" + ((window.ICU && ICU.listPatients) ? (ICU.listPatients() || []).length : -1) +
+          " wl=" + wl.length;
+      } catch (e) {}
       await p.publish(payload);
       markSynced();
       return true;
@@ -495,7 +510,10 @@
 
   function start() {
     var a = auth();
-    if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { autoPublish(); }); }
+    // Attach the shared-unit sync on auth-state change too: subscribeGroups needs a
+    // resolved currentUser, which isn't ready at boot. startGroupSync() is idempotent,
+    // so firing it here (login) + below (in case auth already resolved) is safe.
+    if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { startGroupSync(); autoPublish(); }); }
     else { setTimeout(start, 1500); return; }        // Firebase not booted yet — retry
 
     // Live shared-unit sync (ICU + ward) — publishes on any snapshot change.

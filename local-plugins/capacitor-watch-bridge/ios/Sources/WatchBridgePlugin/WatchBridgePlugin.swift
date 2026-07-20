@@ -60,6 +60,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         NotificationCenter.default.addObserver(
             forName: WatchConnectivityRelay.taskStatusRequested, object: nil, queue: .main
         ) { [weak self] note in
+            NSLog("[SMD-Watch] phone→JS emit taskStatus")
             self?.notifyListeners("taskStatus", data: (note.userInfo as? [String: Any]) ?? [:])
         }
         // Watch → phone APNs token → JS (POST /api/push/register-native, platform "watch").
@@ -72,6 +73,7 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         NotificationCenter.default.addObserver(
             forName: WatchConnectivityRelay.labAckRequested, object: nil, queue: .main
         ) { [weak self] note in
+            NSLog("[SMD-Watch] phone→JS emit labAck")
             self?.notifyListeners("labAck", data: (note.userInfo as? [String: Any]) ?? [:])
         }
         #endif
@@ -116,6 +118,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         let tasks = call.getArray("tasks")
         let role = call.getString("role")
         let calcDefs = call.getArray("calcDefs")
+        // DIAGNOSTIC (temp): which relay source populated the watchlist.
+        NSLog("[SMD-Watch] gather %@ | published watchlist=%d", call.getString("_dbg") ?? "nil", (call.getArray("watchlist") ?? []).count)
 
         let sessionData = try? JSONSerialization.data(withJSONObject: session)
         let favData = try? JSONSerialization.data(withJSONObject: favorites)
