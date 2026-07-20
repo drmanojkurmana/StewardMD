@@ -504,24 +504,19 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             do { try handler.perform([req]) } catch { return }
             guard let face = (req.results as? [VNFaceObservation])?.first,
                   let oriented = self.eyePoint(face) else { return }
-            // Vision returns points in the ORIENTED (portrait, bottom-left) space. The mapping to the
-            // raw capturedImage normalized space (top-left, which ARKit's displayTransform expects)
-            // depends on the orientation convention — CALIBRATION MODE: compute all four candidates and
-            // log them so one on-device capture (face held centred) reveals which lands on the eye.
-            func vp(_ raw: CGPoint) -> CGPoint { let n = raw.applying(dt); return CGPoint(x: n.x * viewSize.width, y: n.y * viewSize.height) }
-            let ox = oriented.x, oy = oriented.y
-            let candA = vp(CGPoint(x: 1 - oy, y: 1 - ox))
-            let candB = vp(CGPoint(x: ox, y: oy))
-            let candC = vp(CGPoint(x: oy, y: ox))
-            let candD = vp(CGPoint(x: 1 - ox, y: 1 - oy))
-            let viewPoint = candA     // current pick; the log tells us if another candidate is correct
-            self.dbg("FUNDX_DBG eyeCAL orient=(\(String(format: "%.3f", ox)),\(String(format: "%.3f", oy))) A=\(fmtP(candA)) B=\(fmtP(candB)) C=\(fmtP(candC)) D=\(fmtP(candD)) view=\(Int(viewSize.width))x\(Int(viewSize.height))")
+            // Vision returns points in the ORIENTED (portrait, bottom-left) space. Convert to the raw
+            // capturedImage normalized space (top-left) for .right — raw = (1 - oy, 1 - ox) — then
+            // ARKit's displayTransform maps that to the aspect-fill view. Confirmed on device: this
+            // lands on the eye (matches the aspect-fill crop math for the 4:3 sensor in portrait).
+            let viewN = CGPoint(x: 1 - oriented.y, y: 1 - oriented.x).applying(dt)
+            let viewPoint = CGPoint(x: viewN.x * viewSize.width, y: viewN.y * viewSize.height)
             DispatchQueue.main.async {
                 let hits = scn.hitTest(viewPoint, types: [.featurePoint])
                 guard let h = hits.first else { return }
                 let w = h.worldTransform.columns.3
                 self.eyeTargetWorld = simd_make_float3(w.x, w.y, w.z)
                 self.eyeTargetGrace = 45     // hold the lock ~45 frames past the last detection
+                if !self.loggedEyeLock { self.loggedEyeLock = true; self.dbg("FUNDX_DBG eye LOCKED (Vision) viewPoint=\(self.fmtP(viewPoint))") }
             }
         }
     }
@@ -539,10 +534,18 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             return CGPoint(x: bb.origin.x + (sx / n) * bb.size.width,
                            y: bb.origin.y + (sy / n) * bb.size.height)
         }
+        // ONE eye at a time (fundoscopy): lock the eye the clinician is aiming at — the region centroid
+        // nearest the frame centre — so pointing at the right/left eye targets THAT eye, not the
+        // midpoint between them (which was landing on the nose bridge).
         let l = centroid(face.landmarks?.leftEye)
         let r = centroid(face.landmarks?.rightEye)
-        if let l = l, let r = r { return CGPoint(x: (l.x + r.x) / 2, y: (l.y + r.y) / 2) }
-        return l ?? r ?? CGPoint(x: bb.midX, y: bb.midY)
+        func d2c(_ p: CGPoint) -> CGFloat { let dx = p.x - 0.5, dy = p.y - 0.5; return dx * dx + dy * dy }
+        switch (l, r) {
+        case let (l?, r?): return d2c(l) <= d2c(r) ? l : r
+        case let (l?, nil): return l
+        case let (nil, r?): return r
+        default: return CGPoint(x: bb.midX, y: bb.midY)
+        }
     }
 
     private func guideMaterial() -> SCNMaterial {
