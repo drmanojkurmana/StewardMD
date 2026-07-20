@@ -115,6 +115,13 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         if let n = notifData { context["notifPrefs"] = n }
         if let g = glanceData { context["glance"] = g }
         if let w = watchlistData { context["watchlist"] = w }
+
+        // DIAGNOSTIC (systematic-debugging evidence): what the phone is publishing.
+        NSLog("[SMD-Watch] publish uid=%@ favs=%d recents=%d glance=%@ watchlist=%d",
+              (session["uid"] as? String) != nil ? "set" : "nil",
+              favorites.count, recents.count,
+              glance == nil ? "nil" : "set", watchlist?.count ?? -1)
+
         relay.updateContext(context)
 
         call.resolve()

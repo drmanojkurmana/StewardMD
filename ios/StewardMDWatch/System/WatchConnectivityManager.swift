@@ -41,6 +41,11 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
 
     /// Decode a received context and fan it out to the App Group + shared models.
     fileprivate func apply(_ context: [String: Any]) {
+        // DIAGNOSTIC (systematic-debugging evidence): what the watch received.
+        let wl = (context["watchlist"] as? Data).flatMap { try? JSONDecoder().decode([WatchlistEntry].self, from: $0) }
+        NSLog("[SMD-Watch] watch apply: keys=[%@] watchlist=%d glance=%@",
+              context.keys.sorted().joined(separator: ","),
+              wl?.count ?? -1, context["glance"] == nil ? "nil" : "set")
         if context["cleared"] as? Bool == true {
             store.clear()
             broadcast()
