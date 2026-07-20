@@ -324,3 +324,15 @@ watch-settings.js                        # Settings ▸ Apple Watch page
   absent on watchOS); the phone evaluates and replies. Offline native calcs don't.
 - **Resus timers** schedule local notifications (sepsis deadline + 10-min warning;
   Code Blue 2-min cycle) so alerts fire wrist-down; in-app haptics play when frontmost.
+
+## Code Blue CPR Assist — HealthKit capability (one-time, manual)
+
+CPR Assist starts a short `HKWorkoutSession` during a code so motion sampling keeps
+running wrist-down. Enable it once (quit + reopen the project first is fine):
+
+1. Open `ios/App/App.xcodeproj` in Xcode.
+2. Select the **StewardMDWatch Watch App** target → **Signing & Capabilities**.
+3. **+ Capability → HealthKit**. Tick **Workout Processing** (background) if offered.
+4. Confirm the two `NSHealth*UsageDescription` strings are present in the target's Info.
+5. Build. If HealthKit is ever unavailable/denied, CPR Assist falls back to
+   CoreMotion-only automatically — no code change needed.
