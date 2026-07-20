@@ -141,6 +141,9 @@ public class FundxDepthPlugin extends Plugin {
     private volatile boolean faceBusy = false;         // one ML Kit request in flight at a time
     private volatile float[] pendingEyeImageNorm = null; // detected eye in IMAGE_NORMALIZED (consumed on GL thread)
     private volatile float[] lastEyeNorm = null;        // smoothed locked eye (temporal stability across detections)
+    private boolean eyeLocked = false;                 // once true, the corridor is world-locked onto the eye
+    private float[] lockQuat = null;                    // orientation captured ONCE at lock (no wobble on re-anchor)
+    private float[] eyeWorld = null;                    // world-space EMA of the eye position (depth-noise damping)
     private int eyeTargetGrace = 0;                    // frames the eye lock stays authoritative after a detection
     private volatile int viewW = 0, viewH = 0;         // GL surface size (px) for VIEW_NORMALIZED -> pixel hitTest
     private boolean loggedSeed = false, loggedAligned = false, loggedKick = false;   // one-shot device-log evidence (logcat FUNDX_DBG)
@@ -372,6 +375,7 @@ public class FundxDepthPlugin extends Plugin {
                 guideRenderer.createOnGlThread();
                 spatialMode = true;                            // engage the guide whenever the GPU preview is up
                 eyeAnchor = null; eyeTargetGrace = 0; pendingEyeImageNorm = null; lastEyeNorm = null; faceBusy = false;
+                eyeLocked = false; lockQuat = null; eyeWorld = null;
                 loggedSeed = false; loggedAligned = false; loggedKick = false;
                 viewW = w; viewH = h;
                 try {
@@ -441,19 +445,27 @@ public class FundxDepthPlugin extends Plugin {
                     float[] vn = new float[2];
                     frame.transformCoordinates2d(Coordinates2d.IMAGE_NORMALIZED, new float[]{ eyeN[0], eyeN[1] }, Coordinates2d.VIEW_NORMALIZED, vn);
                     List<HitResult> hits = frame.hitTest(vn[0] * viewW, vn[1] * viewH);
-                    dbg("eyeCAL imgN=(" + fmt(eyeN[0]) + "," + fmt(eyeN[1]) + ") viewN=(" + fmt(vn[0]) + "," + fmt(vn[1]) + ") viewPx=(" + (int)(vn[0] * viewW) + "," + (int)(vn[1] * viewH) + ") of " + viewW + "x" + viewH + " hit=" + (hits != null && !hits.isEmpty()));
-                    if (hits != null && !hits.isEmpty()) {
+                    boolean gotHit = hits != null && !hits.isEmpty();
+                    dbg("eyeCAL imgN=(" + fmt(eyeN[0]) + "," + fmt(eyeN[1]) + ") viewPx=(" + (int)(vn[0] * viewW) + "," + (int)(vn[1] * viewH) + ") of " + viewW + "x" + viewH + " hit=" + gotHit);
+                    if (gotHit) {
                         Pose hp = hits.get(0).getHitPose();
-                        boolean move = true;
-                        if (eyeAnchor != null) {
+                        float hx = hp.tx(), hy = hp.ty(), hz = hp.tz();
+                        // World-space EMA so hitTest depth noise doesn't jitter the anchor position.
+                        if (eyeWorld == null) eyeWorld = new float[]{ hx, hy, hz };
+                        else { eyeWorld[0] = 0.65f * eyeWorld[0] + 0.35f * hx; eyeWorld[1] = 0.65f * eyeWorld[1] + 0.35f * hy; eyeWorld[2] = 0.65f * eyeWorld[2] + 0.35f * hz; }
+                        // (Re)anchor ONLY on the first lock, or when the eye has physically moved a lot
+                        // (>8 cm). Reuse a FIXED orientation captured once at lock, so moving/rotating the
+                        // phone never re-tilts the corridor — it stays world-locked + steady (like Ph1/2).
+                        boolean need = (eyeAnchor == null) || !eyeLocked;
+                        if (!need) {
                             Pose ap = eyeAnchor.getPose();
-                            float dx = hp.tx() - ap.tx(), dy = hp.ty() - ap.ty(), dz = hp.tz() - ap.tz();
-                            move = (dx * dx + dy * dy + dz * dz) > (0.03f * 0.03f);
+                            float dx = ap.tx() - eyeWorld[0], dy = ap.ty() - eyeWorld[1], dz = ap.tz() - eyeWorld[2];
+                            need = (dx * dx + dy * dy + dz * dz) > (0.08f * 0.08f);
                         }
-                        if (move) {
-                            float[] q = new float[4]; camPose.getRotationQuaternion(q, 0);
+                        if (need) {
+                            if (lockQuat == null) { lockQuat = new float[4]; camPose.getRotationQuaternion(lockQuat, 0); }
                             try { if (eyeAnchor != null) eyeAnchor.detach(); } catch (Throwable t) {}
-                            try { eyeAnchor = gpuSession.createAnchor(new Pose(new float[]{ hp.tx(), hp.ty(), hp.tz() }, q)); } catch (Throwable t) {}
+                            try { eyeAnchor = gpuSession.createAnchor(new Pose(new float[]{ eyeWorld[0], eyeWorld[1], eyeWorld[2] }, lockQuat)); eyeLocked = true; } catch (Throwable t) {}
                         }
                         eyeTargetGrace = 45;
                     }
@@ -483,7 +495,8 @@ public class FundxDepthPlugin extends Plugin {
             // Recenter ONLY when not actively eye-locked (a seeded anchor stranded off-screen): drop + re-seed.
             if (eyeTargetGrace == 0 && (lateral > 0.30f || along < 0.10f)) {
                 try { eyeAnchor.detach(); } catch (Throwable t) {}
-                eyeAnchor = null; lastEyeNorm = null; return;   // reset the lock so it re-acquires fresh
+                eyeAnchor = null; lastEyeNorm = null;           // reset the lock so it re-acquires fresh
+                eyeLocked = false; lockQuat = null; eyeWorld = null; return;
             }
 
             boolean onAxis = lateral < LAT_TOL, atDist = Math.abs(distErr) < DIST_TOL;
