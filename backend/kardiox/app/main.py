@@ -34,6 +34,24 @@ def create_app() -> FastAPI:
         allow_methods=["GET", "POST", "OPTIONS"],
         allow_headers=["*"],
     )
+    @app.middleware("http")
+    async def request_context(request, call_next):
+        # Request-ID + correlation-ID for every request → bound to structured logs + echoed on the
+        # response. Honors inbound X-Request-ID / X-Correlation-ID (edge Worker can propagate them).
+        import uuid
+
+        from app.core.logging import bind_request, clear_request
+        rid = request.headers.get("x-request-id") or uuid.uuid4().hex
+        cid = request.headers.get("x-correlation-id") or rid
+        bind_request(request_id=rid, correlation_id=cid)
+        try:
+            response = await call_next(request)
+        finally:
+            clear_request()
+        response.headers["X-Request-ID"] = rid
+        response.headers["X-Correlation-ID"] = cid
+        return response
+
     install_exception_handlers(app)
     app.include_router(v1_router, prefix=V1_PREFIX)
 

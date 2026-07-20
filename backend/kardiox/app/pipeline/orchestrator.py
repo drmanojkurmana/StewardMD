@@ -8,9 +8,13 @@ real assembly. Only the per-stage model calls are pending.
 """
 from __future__ import annotations
 
+import asyncio
+import time
 from collections.abc import Awaitable, Callable
 
+from app.core.errors import BadImage, KardioXError, PipelineTimeout, StageNotImplemented, UpstreamUnavailable
 from app.core.logging import get_logger
+from app.core.metrics import METRICS
 from app.core.versioning import SCHEMA_VERSION
 from app.models.ecg import AnalyzeRequest, ECGAnalysis, ECGMeasurements
 from app.models.progress import StageProgress
@@ -21,47 +25,126 @@ log = get_logger("pipeline")
 ProgressCB = Callable[[StageProgress], Awaitable[None]] | None
 
 
+def _to_kardiox(exc: BaseException, stage: str) -> KardioXError:
+    if isinstance(exc, KardioXError):
+        return exc
+    if isinstance(exc, (TimeoutError, asyncio.TimeoutError)):
+        return PipelineTimeout(f"stage '{stage}' timed out", stage=stage)
+    return UpstreamUnavailable(f"stage '{stage}' failed: {type(exc).__name__}", stage=stage)
+
+
+async def run_stage(name, provider, fn, *, critical, emit, pct_active, pct_done, trace):
+    """Execute one stage with timeout + transient-retry + metrics + tracing + FAILURE ISOLATION.
+
+    Returns (result, ok). A critical stage that ultimately fails raises a typed KardioXError (mapped to
+    the contract, so the pipeline surfaces a clean 4xx/5xx naming the stage — never an unhandled crash).
+    A non-critical stage that fails is isolated: it returns (None, False) and the pipeline continues with
+    a partial result. Cancellation propagates (supports request cancellation).
+    """
+    await emit(name, "active", pct_active)
+    attempts = (getattr(provider, "max_retries", 0) or 0) + 1
+    timeout_s = getattr(provider, "timeout_s", 30.0)
+    retry_on = getattr(provider, "retry_on", (UpstreamUnavailable,))
+    t0 = time.monotonic()
+    last: KardioXError | None = None
+
+    for attempt in range(1, attempts + 1):
+        try:
+            result = await asyncio.wait_for(fn(), timeout=timeout_s)
+        except asyncio.CancelledError:
+            trace.append({"stage": name, "status": "cancelled"})
+            raise
+        except BaseException as exc:  # noqa: BLE001 — mapped to a typed error below
+            last = _to_kardiox(exc, name)
+            if attempt < attempts and isinstance(last, retry_on):
+                METRICS.inc("kardiox_stage_retries_total", {"stage": name})
+                log.info("stage.retry", stage=name, attempt=attempt, code=last.code)
+                await asyncio.sleep(min(2.0, 0.2 * attempt))
+                continue
+            break
+        else:
+            elapsed = time.monotonic() - t0
+            METRICS.inc("kardiox_stage_total", {"stage": name})
+            METRICS.observe("kardiox_stage_duration_seconds", elapsed, {"stage": name})
+            trace.append({"stage": name, "status": "done", "ms": round(elapsed * 1000, 1), "attempts": attempt})
+            log.info("stage.done", stage=name, ms=round(elapsed * 1000, 1), attempts=attempt)
+            await emit(name, "done", pct_done)
+            return result, True
+
+    elapsed = time.monotonic() - t0
+    code = getattr(last, "code", "pipeline_unavailable")
+    METRICS.inc("kardiox_stage_errors_total", {"stage": name, "code": code})
+    trace.append({"stage": name, "status": "failed", "ms": round(elapsed * 1000, 1), "code": code, "critical": critical})
+    log.warning("stage.failed", stage=name, ms=round(elapsed * 1000, 1), code=code, critical=critical)
+    await emit(name, "failed", pct_done)
+    if critical:
+        raise last if last else UpstreamUnavailable(f"stage '{name}' failed", stage=name)
+    return None, False
+
+
 async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, on_progress: ProgressCB = None) -> ECGAnalysis:
     async def emit(stage: str, status: str, pct: int, detail: str | None = None) -> None:
         if on_progress:
             await on_progress(StageProgress(stage=stage, status=status, pct=pct, detail=detail))
 
     sid = req.sessionId
+    trace: list[dict] = []
+    t_pipeline = time.monotonic()
     await emit("upload", "done", 5)
     image = await r2.get_image(sid)
     try:
-        await emit("enhancement", "active", 12)
-        image = await providers.preprocessing.enhance(image)
-        await emit("enhancement", "done", 18)
+        # enhancement (critical)
+        image, _ = await run_stage("enhancement", providers.preprocessing,
+                                   lambda: providers.preprocessing.enhance(image),
+                                   critical=True, emit=emit, pct_active=12, pct_done=18, trace=trace)
 
-        await emit("digitization", "active", 24)
-        traces = await providers.digitization.digitize(image)
-        await emit("digitization", "done", 32)
+        # quality gate — a deliberate GATE: BadImage rejects (propagate); no gate configured -> skip;
+        # an unexpected quality-provider error is isolated (never reject a good image on a bug).
+        await emit("quality", "active", 22)
+        try:
+            await asyncio.wait_for(providers.quality.assess(image), timeout=providers.quality.timeout_s)
+            trace.append({"stage": "quality", "status": "done"})
+        except StageNotImplemented:
+            trace.append({"stage": "quality", "status": "skipped"})
+        except BadImage:
+            trace.append({"stage": "quality", "status": "rejected"})
+            METRICS.inc("kardiox_stage_errors_total", {"stage": "quality", "code": "bad_image"})
+            raise
+        except Exception as e:  # noqa: BLE001 — isolate provider bugs, don't reject a good image
+            log.warning("quality.isolated", reason=type(e).__name__)
+            trace.append({"stage": "quality", "status": "isolated"})
+        await emit("quality", "done", 26)
 
-        await emit("signalExtraction", "active", 38)
-        signal = await providers.wfdb.to_signal(traces)
-        await emit("signalExtraction", "done", 44)
+        # digitization → signal (critical)
+        traces, _ = await run_stage("digitization", providers.digitization,
+                                    lambda: providers.digitization.digitize(image),
+                                    critical=True, emit=emit, pct_active=30, pct_done=36, trace=trace)
+        signal, _ = await run_stage("signalExtraction", providers.wfdb,
+                                    lambda: providers.wfdb.to_signal(traces),
+                                    critical=True, emit=emit, pct_active=40, pct_done=46, trace=trace)
 
-        await emit("quality", "done", 48)  # quality gate belongs here (a provider hook can be added)
+        # rhythm (critical) + beats (optional)
+        rhythm, _ = await run_stage("rhythm", providers.rhythm,
+                                    lambda: providers.rhythm.rhythm(signal),
+                                    critical=True, emit=emit, pct_active=52, pct_done=58, trace=trace)
+        _beats, _ = await run_stage("beats", providers.rhythm,
+                                    lambda: providers.rhythm.beats(signal),
+                                    critical=False, emit=emit, pct_active=60, pct_done=64, trace=trace)
 
-        await emit("rhythm", "active", 55)
-        rhythm = await providers.rhythm.rhythm(signal)
-        await emit("beats", "active", 60)
-        _beats = await providers.rhythm.beats(signal)
-        await emit("beats", "done", 64)
+        # measurement (critical), morphology + ST (optional)
+        meas, _ = await run_stage("measurement", providers.measurement,
+                                  lambda: providers.measurement.measure(signal),
+                                  critical=True, emit=emit, pct_active=68, pct_done=76, trace=trace)
+        morph, _ = await run_stage("morphology", providers.rhythm,
+                                   lambda: providers.rhythm.morphology(signal),
+                                   critical=False, emit=emit, pct_active=80, pct_done=84, trace=trace)
+        st, _ = await run_stage("st", providers.measurement,
+                                lambda: providers.measurement.st(signal),
+                                critical=False, emit=emit, pct_active=86, pct_done=88, trace=trace)
+        morph = morph or {}
+        st = st or {}
 
-        await emit("measurement", "active", 70)
-        meas = await providers.measurement.measure(signal)
-        await emit("measurement", "done", 76)
-
-        await emit("morphology", "active", 82)
-        morph = await providers.rhythm.morphology(signal)
-        await emit("st", "active", 86)
-        st = await providers.measurement.st(signal)
-        await emit("st", "done", 88)
-
-        # Deterministic rule validation → explainability + confidence cap + morphology diagnoses.
-        await emit("ruleValidation", "active", 92)
+        # rule validation (critical)
         features = {
             "regularity": rhythm.get("regularity"),
             "ventRateBpm": rhythm.get("rateBpm"),
@@ -70,21 +153,20 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
             "prMs": meas.get("prMs"), "qrsMs": meas.get("qrsMs"), "qtcMs": meas.get("qtcMs"),
             "axisDeg": meas.get("axisDeg"), "perLead": meas.get("perLead"), "st": st,
         }
-        validated = await providers.rules.validate(features)
-        await emit("ruleValidation", "done", 95)
+        validated, _ = await run_stage("ruleValidation", providers.rules,
+                                       lambda: providers.rules.validate(features),
+                                       critical=True, emit=emit, pct_active=92, pct_done=95, trace=trace)
 
-        # Clinical explanation is OPTIONAL and constrained to validated findings. It must NEVER block
-        # the analysis (missing key / no explainer / upstream error → empty interpretation, pipeline
-        # still returns the deterministic result).
-        await emit("clinicalExplanation", "active", 97)
-        interpretation = ""
-        try:
-            interpretation = await providers.gemini.explain({"features": features, "validated": validated})
-        except Exception as e:  # StageNotImplemented / UpstreamUnavailable / network
-            log.info("explanation_skipped", reason=type(e).__name__)
-        await emit("clinicalExplanation", "done", 98)
+        # clinical explanation (OPTIONAL, constrained, non-blocking)
+        interp, _ = await run_stage("clinicalExplanation", providers.gemini,
+                                    lambda: providers.gemini.explain({"features": features, "validated": validated}),
+                                    critical=False, emit=emit, pct_active=97, pct_done=98, trace=trace)
+        interpretation = interp or ""
 
         analysis = _assemble(sid, rhythm, meas, st, validated, interpretation, providers)
+        total_ms = round((time.monotonic() - t_pipeline) * 1000, 1)
+        METRICS.observe("kardiox_pipeline_duration_seconds", time.monotonic() - t_pipeline, {"mode": "live"})
+        log.info("pipeline.done", total_ms=total_ms, stages=len(trace))
         await emit("report", "done", 100)
         return analysis
     finally:
