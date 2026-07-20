@@ -1,0 +1,10 @@
+"""Model-integration seam (Phase 6F). A trained ECG model plugs in as a ModelBackend, selected by config
+— no change to providers, orchestrator, routes, or the iOS app. See docs/MODEL_INTEGRATION.md."""
+from __future__ import annotations
+
+from app.services.models.backends import (EnsembleBackend, OnnxBackend, SavedModelBackend,
+                                          StateDictBackend, TorchScriptBackend, load_backend)
+from app.services.models.base import STANDARD_LEADS, ModelBackend, signal_tensor, softmax
+
+__all__ = ["ModelBackend", "signal_tensor", "softmax", "STANDARD_LEADS", "load_backend",
+           "TorchScriptBackend", "OnnxBackend", "StateDictBackend", "SavedModelBackend", "EnsembleBackend"]

@@ -167,53 +167,27 @@ class TorchECGRhythm(RhythmProvider):
             return [f"rhythm checkpoint not found: {s.rhythm_model_path}"]
         return []
 
-    def _load(self):
+    def _backend(self):
+        # Built on the Phase-6F model seam: the artifact kind + path come from config, so a TorchScript,
+        # ONNX, state_dict, or TF checkpoint hot-swaps with no code change here.
         from app.core.config import get_settings
+        from app.services.models import load_backend
         s = get_settings()
         if not s.rhythm_model_path:
             raise UpstreamUnavailable(
-                "No rhythm model checkpoint (set KARDIOX_RHYTHM_MODEL_PATH). A TorchECG model trained + "
-                "validated on labelled datasets (PTB-XL/MIT-BIH) is required; KardioX ships no weights.",
+                "No rhythm model checkpoint (set KARDIOX_RHYTHM_MODEL_PATH). A model trained + validated "
+                "on labelled datasets (PTB-XL/MIT-BIH) is required; KardioX ships no weights.",
                 stage="rhythm")
-        try:
-            import torch
-        except ImportError as e:  # pragma: no cover
-            raise UpstreamUnavailable("torch not installed", stage="rhythm") from e
-        try:
-            model = torch.jit.load(s.rhythm_model_path, map_location="cpu")
-            model.eval()
-            return torch, model, s
-        except Exception as e:
-            raise UpstreamUnavailable(f"Failed to load rhythm model: {type(e).__name__}", stage="rhythm") from e
-
-    def _prepare(self, torch, signal: dict):
-        """Signal -> normalized (1, C, T) tensor. Real preprocessing; the exact channel order/length
-        must match the checkpoint (documented alongside the model)."""
-        import numpy as np
-        leads = signal.get("leads", {}) or {}
-        order = ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"]
-        chans = []
-        for name in order:
-            mv = leads.get(name, {}).get("mv")
-            if mv:
-                x = np.asarray(mv, dtype="float32")
-                x = (x - x.mean()) / (x.std() + 1e-6)
-                chans.append(x)
-        if not chans:
-            raise UpstreamUnavailable("No leads to classify", stage="rhythm")
-        length = min(len(c) for c in chans)
-        arr = np.stack([c[:length] for c in chans], axis=0)[None, :, :]
-        return torch.from_numpy(arr)
+        return load_backend(s.rhythm_model_kind, s.rhythm_model_path, labels=s.rhythm_labels_list)
 
     async def _infer(self, signal: dict):
-        torch, model, s = self._load()
-        x = self._prepare(torch, signal)
-        with torch.no_grad():
-            logits = model(x)
-        probs = torch.softmax(logits, dim=-1).squeeze(0)
-        labels = s.rhythm_labels_list or [f"class_{i}" for i in range(probs.numel())]
-        idx = int(torch.argmax(probs).item())
-        return (labels[idx] if idx < len(labels) else f"class_{idx}"), float(probs[idx].item())
+        import asyncio
+
+        from app.services.models import signal_tensor
+        backend = self._backend()
+        x = signal_tensor(signal)
+        pred = await asyncio.to_thread(backend.predict, x)   # load+run off the event loop
+        return pred["label"], float(pred["confidence"])
 
     async def rhythm(self, signal: dict) -> dict:
         label, conf = await self._infer(signal)

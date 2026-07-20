@@ -70,6 +70,7 @@ class Settings(BaseSettings):
     # ── Rhythm model (stages 6/7/9, TorchECG) — ship NO weights. Empty path → provider raises
     #    UpstreamUnavailable (never fakes a label). A validated checkpoint is required to enable.
     rhythm_model_path: str = ""
+    rhythm_model_kind: str = "torchscript"   # torchscript | onnx | torch_statedict | tensorflow
     rhythm_model_fs: int = 500
     rhythm_model_labels: str = ""   # comma-separated label map bundled with the checkpoint
 
