@@ -44,12 +44,24 @@ class Settings(BaseSettings):
     # ── Provider selection (per stage). Default "none" → NotImplemented. Swap to real impl names as
     #    the ML models land (e.g. preprocessing="opencv", rhythm="torchecg"). See services/registry.py.
     provider_preprocessing: str = "none"
+    provider_quality: str = "none"    # → opencv (real image-quality gate)
     provider_digitization: str = "none"
     provider_rhythm: str = "none"
     provider_measurement: str = "none"
     provider_wfdb: str = "none"
     provider_rules: str = "builtin"   # the deterministic rule engine is real; safe to keep on
     provider_gemini: str = "none"
+
+    # ── Quality gate thresholds (stage 5) ──────────────────────────────────────────────────────────
+    quality_min_resolution: int = 400        # px on the short edge
+    quality_min_focus: float = 60.0          # variance of Laplacian (below = blurry)
+    quality_min_contrast: float = 25.0       # grayscale std-dev
+    quality_max_glare_frac: float = 0.10     # fraction of near-white pixels
+    quality_min_brightness: float = 40.0
+    quality_max_brightness: float = 225.0
+
+    # ── Upload validation (edge + pipeline) ────────────────────────────────────────────────────────
+    max_upload_bytes: int = 12 * 1024 * 1024  # 12 MiB hard cap on an ECG image
 
     # ── Rhythm model (stages 6/7/9, TorchECG) — ship NO weights. Empty path → provider raises
     #    UpstreamUnavailable (never fakes a label). A validated checkpoint is required to enable.

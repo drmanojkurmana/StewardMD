@@ -25,9 +25,10 @@ def test_health(client):
     body = r.json()
     assert body["status"] == "ok" and body["mode"] == "mock"
     stages = {s["stage"]: s for s in body["providers"]}
-    assert len(stages) == 7
+    assert len(stages) == 8                                        # + quality gate (Phase 6)
     assert stages["ruleValidation"]["implemented"] is True         # builtin is real
     assert stages["enhancement"]["implemented"] is False           # models pending
+    assert "quality" in stages and "version" in stages["ruleValidation"]
 
 
 def test_analyze_mock_returns_af(client):

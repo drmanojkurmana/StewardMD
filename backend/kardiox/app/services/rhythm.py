@@ -133,6 +133,8 @@ class DeterministicRhythm(RhythmProvider):
     """REAL model-free rate/regularity/P-wave analysis (Phase 5D). Emits NO diagnosis."""
 
     name = "deterministic"
+    version = "1.0.0"
+    requires = ("neurokit2", "numpy")
     implemented = False   # code is real; gated on end-to-end validation
 
     async def rhythm(self, signal: dict) -> dict:
@@ -149,7 +151,21 @@ class TorchECGRhythm(RhythmProvider):
     """REAL learned-classifier integration (TorchECG). Ships no weights; requires a validated checkpoint."""
 
     name = "torchecg"
+    version = "0.1.0"
+    requires = ("torch",)
+    timeout_s = 60.0
+    max_retries = 1
     implemented = False
+
+    def validate_config(self) -> list[str]:
+        import os
+        from app.core.config import get_settings
+        s = get_settings()
+        if not s.rhythm_model_path:
+            return ["KARDIOX_RHYTHM_MODEL_PATH not set (no trained checkpoint)"]
+        if not os.path.exists(s.rhythm_model_path):
+            return [f"rhythm checkpoint not found: {s.rhythm_model_path}"]
+        return []
 
     def _load(self):
         from app.core.config import get_settings

@@ -98,6 +98,8 @@ class WfdbSignal(WfdbProvider):
     """REAL calibrated pixel->mV/ms conversion (Phase 5C). Activate via KARDIOX_PROVIDER_WFDB=wfdb."""
 
     name = "wfdb"
+    version = "1.0.0"
+    requires = ("numpy",)   # wfdb only needed for the optional record writer
     implemented = False   # code is real; gated on validation against reference signals
 
     async def to_signal(self, traces: dict) -> dict:

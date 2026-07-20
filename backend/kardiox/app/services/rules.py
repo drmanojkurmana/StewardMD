@@ -266,6 +266,7 @@ def morphology_diagnoses(features: dict) -> list[dict]:
 
 class BuiltinRules(RuleEngineProvider):
     name = "builtin"
+    version = "1.1.0"
     implemented = True
 
     async def validate(self, features: dict) -> dict:

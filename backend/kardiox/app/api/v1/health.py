@@ -13,13 +13,31 @@ router = APIRouter(tags=["health"])
 
 @router.get("/health", summary="Liveness + provider readiness")
 async def health(settings: Settings = Depends(get_settings), providers: Providers = Depends(get_providers)) -> dict:
-    stages = providers.status()
+    reports = await providers.health_report()
     return {
         "status": "ok",
         "apiVersion": API_VERSION,
         "mode": settings.mode,
         "environment": settings.environment,
-        "providers": stages,
-        # In live mode, "ready" means every stage has a real implementation.
-        "modelsReady": all(s["implemented"] for s in stages) if settings.mode == "live" else True,
+        "providers": reports,
+        # In live mode, "modelsReady" means every stage is implemented AND its deps/config are satisfied.
+        "modelsReady": all(r["ready"] for r in reports) if settings.mode == "live" else True,
     }
+
+
+@router.get("/ready", summary="Readiness probe (are the configured providers usable?)")
+async def ready(settings: Settings = Depends(get_settings), providers: Providers = Depends(get_providers)):
+    """Kubernetes-style readiness: 200 when the service can serve its CONFIGURED mode.
+
+    mock mode is always ready. live mode is ready only when every provider reports ready — otherwise 503
+    with the not-ready stages named (so an orchestrator doesn't route traffic to a half-wired pipeline).
+    """
+    from fastapi.responses import JSONResponse
+    if settings.mode == "mock":
+        return {"ready": True, "mode": "mock"}
+    reports = await providers.health_report()
+    not_ready = [{"stage": r["stage"], "name": r["name"], "configIssues": r["configIssues"]}
+                 for r in reports if not r["ready"]]
+    if not_ready:
+        return JSONResponse(status_code=503, content={"ready": False, "mode": "live", "notReady": not_ready})
+    return {"ready": True, "mode": "live"}

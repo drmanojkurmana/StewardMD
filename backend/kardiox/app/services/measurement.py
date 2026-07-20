@@ -212,6 +212,8 @@ class NeuroKitMeasurement(MeasurementProvider):
     """REAL delineation-based measurement + ST (Phase 5C). Activate via KARDIOX_PROVIDER_MEASUREMENT=neurokit2."""
 
     name = "neurokit2"
+    version = "1.0.0"
+    requires = ("neurokit2", "numpy")
     implemented = False   # code is real; gated on validation vs annotated references
 
     async def measure(self, signal: dict) -> dict:

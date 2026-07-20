@@ -133,6 +133,8 @@ class ClassicalDigitization(DigitizationProvider):
     """REAL classical column-scan digitizer (Phase 5B). Activate via KARDIOX_PROVIDER_DIGITIZATION=classical."""
 
     name = "classical"
+    version = "1.0.0"
+    requires = ("cv2", "numpy")
     implemented = False   # real baseline; accuracy gated on validation + the learned upgrade
 
     async def digitize(self, image: bytes) -> dict:

@@ -70,7 +70,14 @@ class NoneGemini(GeminiProvider):
 
 class GeminiExplainer(GeminiProvider):
     name = "gemini"
-    implemented = True
+    version = "1.0.0"
+    requires = ("google.generativeai",)
+    timeout_s = 20.0
+    max_retries = 2
+    implemented = True   # the explainer code is complete; readiness is gated on the API key (validate_config)
+
+    def validate_config(self) -> list[str]:
+        return [] if get_settings().gemini_api_key else ["KARDIOX_GEMINI_API_KEY not set"]
 
     async def explain(self, validated: dict) -> str:
         settings = get_settings()

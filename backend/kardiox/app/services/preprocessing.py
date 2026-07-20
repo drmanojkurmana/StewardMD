@@ -243,6 +243,8 @@ class OpenCVPreprocessing(PreprocessingProvider):
     """REAL classical preprocessing (Phase 5A). Activate via KARDIOX_PROVIDER_PREPROCESSING=opencv."""
 
     name = "opencv"
+    version = "1.0.0"
+    requires = ("cv2", "numpy")
     implemented = False   # code is real; flip True after validation on a labelled real-photo set
 
     async def enhance(self, image: bytes) -> bytes:
