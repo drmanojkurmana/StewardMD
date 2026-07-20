@@ -1,0 +1,698 @@
+/* kardiox-screens.css — KardioX AI · per-screen .kx-* styles (M2), assembled from the build workflow.
+   Scoped to #kardioxRoot; reuses --kx-*/--rds-*/--sev-* tokens from kardiox.css. De-dashed. */
+/* ===== screen 02-landing ===== */
+/* ─────────────────────────── Landing (screen 02) - mined pixel-exact from KardioX AI.dc.html ──────
+   All selectors scoped to #kardioxRoot / .kx-*. Tokens + keyframes come from kardiox.css (not redefined).
+   Trace stroke colours are the design's bright ECG-on-dark hexes (not the AA text severity tokens),
+   so they read on the #131e28 thumbnail; kept as classes (no inline styles). */
+
+#kardioxRoot .kx-landing { padding: 16px; animation: kxRise .32s var(--kx-ease) both; }
+
+/* Header (per-screen; supersedes the M0 shell stub .kx-topbar - see notes) */
+#kardioxRoot .kx-land-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px;
+  border-bottom: 1px solid var(--kx-hairline);
+  background: var(--kx-bg);
+  position: sticky; top: 0; z-index: 2;
+}
+#kardioxRoot .kx-land-close,
+#kardioxRoot .kx-land-gear {
+  flex: 0 0 auto; width: 40px; height: 40px; padding: 0;
+  border: 0; border-radius: 999px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-land-close { background: transparent; color: var(--kx-ink); }
+#kardioxRoot .kx-land-gear { background: var(--kx-surf-2); color: var(--kx-text-2); }
+#kardioxRoot .kx-land-close .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-land-gear .material-symbols-rounded { font-size: 22px; }
+#kardioxRoot .kx-land-titles { flex: 1; min-width: 0; }
+#kardioxRoot .kx-land-title { font-weight: 700; font-size: 17px; letter-spacing: -.01em; color: var(--kx-text); }
+#kardioxRoot .kx-land-title span { color: var(--kx-primary); }
+#kardioxRoot .kx-land-sub { margin-top: 1px; font-size: 12px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Primary CTA */
+#kardioxRoot .kx-cta {
+  display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+  padding: 18px; border: 0; border-radius: var(--kx-r); cursor: pointer;
+  background: linear-gradient(135deg, var(--kx-primary), var(--kx-primary-2));
+  color: #fff; box-shadow: 0 8px 22px rgba(15, 118, 110, .28);
+}
+#kardioxRoot .kx-cta-ic { flex: 0 0 auto; display: inline-flex; }
+#kardioxRoot .kx-cta-ic .material-symbols-rounded { font-size: 30px; }
+#kardioxRoot .kx-cta-txt { flex: 1; min-width: 0; }
+#kardioxRoot .kx-cta-title { display: block; font-weight: 700; font-size: 16px; }
+#kardioxRoot .kx-cta-sub { display: block; margin-top: 2px; font-size: 12px; font-weight: 500; opacity: .92; }
+#kardioxRoot .kx-cta-go { flex: 0 0 auto; display: inline-flex; opacity: .9; }
+#kardioxRoot .kx-cta-go .material-symbols-rounded { font-size: 22px; }
+
+/* 2×2 quick-actions grid */
+#kardioxRoot .kx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#kardioxRoot .kx-tile {
+  display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+  min-height: 44px; padding: 14px; cursor: pointer;
+  border: 1px solid var(--kx-hairline); border-radius: 14px; background: var(--kx-card);
+}
+#kardioxRoot .kx-tile-ic { display: inline-flex; color: var(--kx-primary); }
+#kardioxRoot .kx-tile-ic--cardiac { color: var(--kx-cardiac); }
+#kardioxRoot .kx-tile-ic .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-tile-title { margin-top: 6px; font-weight: 700; font-size: 14px; color: var(--kx-text); }
+#kardioxRoot .kx-tile-sub { font-size: 11.5px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Section header */
+#kardioxRoot .kx-sec-head { display: flex; align-items: center; justify-content: space-between; margin: 22px 2px 10px; }
+#kardioxRoot .kx-sec-title { font-weight: 700; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--kx-text-2); }
+#kardioxRoot .kx-seeall { padding: 6px 2px; border: 0; background: transparent; cursor: pointer; font-size: 12px; font-weight: 600; color: var(--kx-primary); }
+
+/* Recent analyses list */
+#kardioxRoot .kx-recent { display: flex; flex-direction: column; gap: 8px; }
+#kardioxRoot .kx-rec {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+  padding: 10px; cursor: pointer;
+  border: 1px solid var(--kx-hairline); border-radius: var(--kx-r-ctl); background: var(--kx-card);
+}
+#kardioxRoot .kx-rec-thumb {
+  flex: 0 0 auto; width: 46px; height: 46px; border-radius: 10px; overflow: hidden;
+  background: #131e28; display: flex; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-rec-thumb svg { display: block; }
+#kardioxRoot .kx-trace { fill: none; stroke-width: 2; }
+#kardioxRoot .kx-trace--critical,
+#kardioxRoot .kx-trace--urgent { stroke: #FF6B6B; }
+#kardioxRoot .kx-trace--warn { stroke: #E0A800; }
+#kardioxRoot .kx-trace--stable { stroke: #5BD08F; }
+#kardioxRoot .kx-trace--info { stroke: #7FB8DD; }
+#kardioxRoot .kx-rec-body { flex: 1; min-width: 0; }
+#kardioxRoot .kx-rec-title { display: block; font-weight: 700; font-size: 13.5px; color: var(--kx-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#kardioxRoot .kx-rec-meta { display: block; font-size: 11px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Severity pill - COLOUR + ICON + LABEL (mono, tabular via .kx-data) */
+#kardioxRoot .kx-pill {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 3px;
+  padding: 4px 8px; border-radius: 999px; font-weight: 700; font-size: 11px;
+}
+#kardioxRoot .kx-pill .material-symbols-rounded { font-size: 13px; }
+#kardioxRoot .kx-pill--critical { color: var(--kx-sev-critical); background: #F7E3E5; }
+#kardioxRoot .kx-pill--urgent { color: var(--kx-sev-urgent); background: #FDEEE4; }
+#kardioxRoot .kx-pill--warn { color: var(--kx-sev-warn); background: #FBF1DD; }
+#kardioxRoot .kx-pill--stable { color: var(--kx-sev-stable); background: #E7F5EC; }
+#kardioxRoot .kx-pill--info { color: var(--kx-sev-info); background: #E8F2F9; }
+
+/* Recent - empty state (shown only for live providers with no saved ECGs) */
+#kardioxRoot .kx-empty {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px;
+  padding: 26px 16px; border: 1px dashed var(--kx-hairline); border-radius: var(--kx-r-ctl); background: var(--kx-card);
+}
+#kardioxRoot .kx-empty-ic .material-symbols-rounded { font-size: 30px; color: var(--kx-muted); }
+#kardioxRoot .kx-empty-title { font-weight: 700; font-size: 13.5px; color: var(--kx-text); }
+#kardioxRoot .kx-empty-sub { font-size: 12px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Footer privacy line */
+#kardioxRoot .kx-foot {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 18px; font-size: 11px; font-weight: 500; color: var(--kx-muted);
+}
+#kardioxRoot .kx-foot .material-symbols-rounded { font-size: 14px; color: var(--kx-sev-stable); }
+
+/* Focus visibility for this screen's interactive elements */
+#kardioxRoot .kx-cta:focus-visible,
+#kardioxRoot .kx-tile:focus-visible,
+#kardioxRoot .kx-rec:focus-visible,
+#kardioxRoot .kx-seeall:focus-visible,
+#kardioxRoot .kx-land-close:focus-visible,
+#kardioxRoot .kx-land-gear:focus-visible { outline: 2px solid var(--kx-primary); outline-offset: 2px; }
+
+/* ===== screen 03 ===== */
+/* ─────────────────────────── Add an ECG · source picker (screen 03) ──────────────────────────────── */
+#kardioxRoot .kx-src { animation: kxRise .4s var(--kx-ease) both; }
+
+/* Screen header */
+#kardioxRoot .kx-src-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px; border-bottom: 1px solid var(--kx-hairline);
+}
+#kardioxRoot .kx-src-back {
+  width: 44px; height: 44px; margin-left: -6px; flex: 0 0 auto;
+  border: 0; border-radius: 999px; background: transparent; color: var(--kx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#kardioxRoot .kx-src-back .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-src-title { flex: 1; margin: 0; font-weight: 700; font-size: 17px; letter-spacing: -.01em; color: var(--kx-text); }
+
+#kardioxRoot .kx-src-body { padding: 16px; }
+
+/* Dashed drop-zone */
+#kardioxRoot .kx-drop {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; text-align: center; padding: 30px 18px;
+  border: 2px dashed #C7D3D9; border-radius: 18px; background: var(--kx-surf-2);
+}
+#kardioxRoot .kx-drop-ic { color: var(--kx-primary); display: inline-flex; }
+#kardioxRoot .kx-drop-ic .material-symbols-rounded { font-size: 40px; }
+#kardioxRoot .kx-drop-title { font-weight: 700; font-size: 15px; color: var(--kx-text); }
+#kardioxRoot .kx-drop-sub { font-size: 12px; font-weight: 500; color: var(--kx-text-2); max-width: 24ch; }
+
+/* 2x2 source cards */
+#kardioxRoot .kx-src-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#kardioxRoot .kx-src-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0;
+  min-height: 44px; padding: 16px 14px; text-align: left; cursor: pointer;
+  border: 1px solid var(--kx-hairline); border-radius: 14px; background: var(--kx-card);
+  font-family: var(--kx-sans); color: var(--kx-text);
+  transition: transform .15s var(--kx-ease), box-shadow .15s var(--kx-ease), border-color .15s var(--kx-ease);
+}
+#kardioxRoot .kx-src-card:hover { border-color: var(--kx-primary); box-shadow: 0 4px 14px rgba(13, 27, 36, .06); }
+#kardioxRoot .kx-src-card:active { transform: scale(.98); }
+#kardioxRoot .kx-src-ic { color: var(--kx-primary); display: inline-flex; }
+#kardioxRoot .kx-src-ic .material-symbols-rounded { font-size: 26px; }
+#kardioxRoot .kx-src-card--pdf .kx-src-ic { color: var(--kx-cardiac); }
+#kardioxRoot .kx-src-name { margin-top: 8px; font-weight: 700; font-size: 14px; color: var(--kx-text); }
+#kardioxRoot .kx-src-hint { font-size: 11px; font-weight: 500; color: var(--kx-text-2); }
+
+/* Blue capture-tip banner */
+#kardioxRoot .kx-tip {
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 14px;
+  padding: 12px 14px; border-radius: var(--kx-r-ctl);
+  background: #E8F2F9; border: 1px solid #B5D4E8;
+}
+#kardioxRoot .kx-tip-ic { flex: 0 0 auto; color: var(--kx-sev-info); display: inline-flex; }
+#kardioxRoot .kx-tip-ic .material-symbols-rounded { font-size: 19px; }
+#kardioxRoot .kx-tip-txt { font-size: 12px; line-height: 1.45; font-weight: 500; color: var(--kx-text); }
+
+/* Privacy footer */
+#kardioxRoot .kx-src-foot {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 16px; font-size: 11px; font-weight: 500; color: var(--kx-muted);
+}
+#kardioxRoot .kx-src-foot .material-symbols-rounded { font-size: 14px; color: var(--kx-sev-stable); }
+
+/* Focus */
+#kardioxRoot .kx-src-card:focus-visible,
+#kardioxRoot .kx-src-back:focus-visible { outline: 2px solid var(--kx-primary); outline-offset: 2px; }
+
+/* ===== screen 16 ===== */
+/* ─────────────────────────── Screen 16 · Camera permission ──────────────────────────────────────── */
+/* Dark scrim + bottom sheet. Full-viewport modal layer inside the module overlay. */
+#kardioxRoot .kx-perm {
+  position: fixed; inset: 0; z-index: 5;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+}
+#kardioxRoot .kx-perm-scrim {
+  position: absolute; inset: 0; margin: 0; padding: 0; border: 0;
+  background: rgba(13, 25, 34, .6);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+#kardioxRoot .kx-perm-sheet {
+  position: relative; z-index: 1;
+  width: calc(100% - 28px); max-width: 460px;
+  margin: 0 0 calc(14px + env(safe-area-inset-bottom, 0));
+  padding: 24px 20px 18px;
+  text-align: center;
+  background: var(--kx-bg);
+  border-radius: 24px;
+  box-shadow: 0 -8px 40px rgba(13, 27, 36, .3);
+  animation: kxRise .28s var(--kx-ease) both;
+}
+#kardioxRoot .kx-perm-icon {
+  width: 64px; height: 64px; border-radius: 20px; background: var(--kx-soft);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-perm-icon .material-symbols-rounded { font-size: 34px; color: var(--kx-primary); }
+#kardioxRoot .kx-perm-title {
+  margin: 14px 0 0; font-size: 19px; font-weight: 700; letter-spacing: -.01em; color: var(--kx-text);
+}
+#kardioxRoot .kx-perm-body {
+  margin: 8px 0 0; font-size: 13px; font-weight: 500; line-height: 1.5; color: var(--kx-text-2);
+}
+#kardioxRoot .kx-perm-assure {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  margin-top: 12px; font-size: 11.5px; font-weight: 600; color: var(--kx-sev-stable);
+}
+#kardioxRoot .kx-perm-assure .material-symbols-rounded { font-size: 15px; }
+#kardioxRoot .kx-perm-allow {
+  width: 100%; min-height: 44px; margin-top: 18px; padding: 15px; border: 0; border-radius: 14px;
+  background: var(--kx-primary); color: #fff; font-family: var(--kx-sans); font-weight: 700; font-size: 15px;
+  box-shadow: 0 8px 22px rgba(15, 118, 110, .28); cursor: pointer;
+}
+#kardioxRoot .kx-perm-deny {
+  width: 100%; min-height: 44px; margin-top: 8px; padding: 13px; border: 0; border-radius: 14px;
+  background: transparent; color: var(--kx-text-2); font-family: var(--kx-sans); font-weight: 700; font-size: 14px;
+  cursor: pointer;
+}
+#kardioxRoot .kx-perm-allow:focus-visible,
+#kardioxRoot .kx-perm-deny:focus-visible { outline: 2px solid var(--kx-primary); outline-offset: 2px; }
+
+/* ===== screen 04 ===== */
+/* ─────────────────────── Screen 04 · Image processing (dark) ─────────────────────
+   Intentionally dark regardless of app theme (matches the design handoff). Reuses
+   --kx-primary / --kx-green from the root; the deep-navy chrome hexes are screen-local. */
+#kardioxRoot .kx-proc {
+  --kx-proc-bg: #0d1922;
+  --kx-proc-preview: #0a0f14;
+  --kx-proc-line: #16283a;
+  --kx-proc-preview-line: #1c2b38;
+  --kx-proc-grid: #2a3a2f;
+  --kx-proc-muted: #8AA2B2;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--kx-proc-bg);
+  color: #fff;
+}
+
+/* Header */
+#kardioxRoot .kx-proc-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 8px 16px 12px;
+  padding-top: max(8px, env(safe-area-inset-top, 0));
+}
+#kardioxRoot .kx-proc-close {
+  width: 44px; height: 44px;
+  flex: 0 0 auto;
+  border: 0; border-radius: 999px;
+  background: transparent; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; padding: 0;
+}
+#kardioxRoot .kx-proc-close:active { background: rgba(255, 255, 255, .08); }
+#kardioxRoot .kx-proc-close .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-proc-close:focus-visible { outline: 2px solid var(--kx-green); outline-offset: 2px; }
+#kardioxRoot .kx-proc-title { flex: 1; margin: 0; font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+
+/* Body */
+#kardioxRoot .kx-proc-body { padding: 8px 20px 26px; }
+
+/* ECG preview on dark grid */
+#kardioxRoot .kx-proc-preview {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--kx-proc-preview);
+  border: 1px solid var(--kx-proc-preview-line);
+}
+#kardioxRoot .kx-proc-svg { display: block; width: 100%; height: 100%; }
+#kardioxRoot .kx-proc-gridline { stroke: var(--kx-proc-grid); stroke-width: 1; }
+#kardioxRoot .kx-proc-trace {
+  stroke: var(--kx-green);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Green sweep overlay (kxSweep) */
+#kardioxRoot .kx-proc-sweep {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: 70px;
+  background: linear-gradient(90deg, transparent, rgba(52, 211, 153, .35), transparent);
+  animation: kxSweep 1.9s linear infinite;
+  pointer-events: none;
+}
+#kardioxRoot .kx-proc-badge {
+  position: absolute; top: 10px; left: 10px;
+  font-family: var(--kx-mono);
+  font-weight: 700; font-size: 10px; letter-spacing: .04em;
+  color: var(--kx-green);
+  background: rgba(6, 36, 15, .7);
+  padding: 4px 8px; border-radius: 999px;
+}
+#kardioxRoot .kx-proc-badge.is-error { color: var(--kx-sev-warn); background: rgba(60, 40, 6, .75); }
+
+/* Progress bar */
+#kardioxRoot .kx-proc-progress { margin-top: 20px; }
+#kardioxRoot .kx-proc-progress-row { display: flex; justify-content: space-between; align-items: baseline; }
+#kardioxRoot .kx-proc-progress-label { font-size: 12.5px; font-weight: 600; color: var(--kx-proc-muted); }
+#kardioxRoot .kx-proc-progress-pct { font-weight: 700; font-size: 13px; color: var(--kx-green); }
+#kardioxRoot .kx-proc-track {
+  height: 6px; margin-top: 8px;
+  border-radius: 999px;
+  background: var(--kx-proc-line);
+  overflow: hidden;
+}
+#kardioxRoot .kx-proc-bar {
+  width: 60%; height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--kx-primary), var(--kx-green));
+  transition: width .5s var(--kx-ease);
+}
+
+/* 5-step checklist */
+#kardioxRoot .kx-proc-steps {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#kardioxRoot .kx-proc-step { display: flex; align-items: center; gap: 11px; }
+#kardioxRoot .kx-proc-step-ico { font-size: 20px; line-height: 1; display: inline-flex; flex: 0 0 auto; }
+#kardioxRoot .kx-proc-step-label { font-size: 13.5px; font-weight: 600; }
+
+#kardioxRoot .kx-proc-step.is-done .kx-proc-step-ico {
+  color: var(--kx-green);
+  font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+}
+#kardioxRoot .kx-proc-step.is-active .kx-proc-step-ico {
+  color: var(--kx-green);
+  animation: kxSpin 1s linear infinite;
+}
+#kardioxRoot .kx-proc-step.is-pending { opacity: .5; }
+#kardioxRoot .kx-proc-step.is-pending .kx-proc-step-ico { color: var(--kx-proc-muted); }
+#kardioxRoot .kx-proc-step.is-error .kx-proc-step-ico {
+  color: var(--kx-sev-warn);
+  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+}
+#kardioxRoot .kx-proc-step.is-error .kx-proc-step-label { color: var(--kx-sev-warn); }
+
+/* Graceful failure - names the failing step */
+#kardioxRoot .kx-proc-fail { margin-top: 20px; }
+#kardioxRoot .kx-proc-fail[hidden] { display: none; }
+#kardioxRoot .kx-proc-fail-head {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: 13px; font-weight: 500; line-height: 1.45;
+  color: #E7EEF2;
+}
+#kardioxRoot .kx-proc-fail-ico { color: var(--kx-sev-warn); font-size: 20px; flex: 0 0 auto; }
+#kardioxRoot .kx-proc-fail-acts { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+#kardioxRoot .kx-proc-fail-acts .kx-btn { width: 100%; }
+
+/* Screen-reader progress announcements */
+#kardioxRoot .kx-proc-live {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* Reduced motion: root rule already freezes sweep/spin; keep the bar snap-only */
+@media (prefers-reduced-motion: reduce) {
+  #kardioxRoot .kx-proc-bar { transition: none; }
+}
+
+/* ===== screen 05 ===== */
+/* ─────────────────────────── Screen 05 · Live AI analysis (DARK) ─────────────────────────────────
+   Full-bleed dark analysis view mounted into #kxScroll. Confidence ring + staged progress + the
+   encrypted/ephemeral privacy line. Dark surface hexes (no light/dark token exists for them) are
+   scoped module-locals on .kx-analysis; the accent reuses --kx-green and motion reuses kxSpin. */
+#kardioxRoot .kx-analysis {
+  --kxa-bg: #0d1922;      /* dark surface */
+  --kxa-line: #16283a;    /* ring track + bar track + hairline */
+  --kxa-muted: #8AA2B2;   /* secondary text */
+  --kxa-link: #6FB4E0;    /* encrypted footer line */
+  box-sizing: border-box;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 22px calc(32px + env(safe-area-inset-bottom, 0));
+  background: var(--kxa-bg);
+  color: #fff;
+}
+#kardioxRoot .kx-analysis-inner { width: 100%; max-width: 340px; text-align: center; }
+
+/* Confidence ring */
+#kardioxRoot .kx-conf-ring { position: relative; width: 118px; height: 118px; margin: 8px auto 0; }
+#kardioxRoot .kx-conf-svg { position: absolute; inset: 0; width: 118px; height: 118px; transform: rotate(-90deg); }
+#kardioxRoot .kx-conf-track { fill: none; stroke: var(--kxa-line); stroke-width: 8; }
+#kardioxRoot .kx-conf-arc {
+  fill: none; stroke: var(--kx-green); stroke-width: 8; stroke-linecap: round;
+  transition: stroke-dashoffset .9s var(--kx-ease);
+}
+#kardioxRoot .kx-conf-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+#kardioxRoot .kx-conf-val { font-size: 34px; font-weight: 700; line-height: 1; color: #fff; }
+#kardioxRoot .kx-conf-cap { font-size: 10px; font-weight: 700; letter-spacing: .06em; color: var(--kxa-muted); margin-top: 3px; }
+
+/* Headline + subtitle */
+#kardioxRoot .kx-analysis-title { font-size: 17px; font-weight: 700; margin: 18px 0 0; }
+#kardioxRoot .kx-analysis-sub { font-size: 12.5px; font-weight: 500; color: var(--kxa-muted); margin: 3px 0 0; }
+
+/* Staged progress bars */
+#kardioxRoot .kx-stages { display: flex; flex-direction: column; gap: 11px; margin-top: 22px; text-align: left; }
+#kardioxRoot .kx-stage.is-pending { opacity: .55; }
+#kardioxRoot .kx-stage-head {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12.5px; font-weight: 600; margin-bottom: 5px;
+}
+#kardioxRoot .kx-stage-name { display: inline-flex; align-items: center; gap: 7px; }
+#kardioxRoot .kx-stage-name .material-symbols-rounded { font-size: 16px; color: var(--kx-green); }
+#kardioxRoot .kx-stage.is-pending .kx-stage-name .material-symbols-rounded { color: var(--kxa-muted); }
+#kardioxRoot .kx-stage.is-done .kx-stage-name .material-symbols-rounded { font-variation-settings: 'FILL' 1; }
+#kardioxRoot .kx-stage.is-active .kx-stage-name .material-symbols-rounded { animation: kxSpin 1s linear infinite; }
+#kardioxRoot .kx-stage-val { color: var(--kxa-muted); }
+#kardioxRoot .kx-stage-track { height: 5px; border-radius: 999px; background: var(--kxa-line); overflow: hidden; }
+#kardioxRoot .kx-stage-fill { width: 0; height: 100%; border-radius: 999px; background: var(--kx-green); transition: width .6s var(--kx-ease); }
+
+/* Encrypted / ephemeral footer */
+#kardioxRoot .kx-analysis-foot {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 22px; font-size: 11px; font-weight: 500; color: var(--kxa-link);
+}
+#kardioxRoot .kx-analysis-foot .material-symbols-rounded { font-size: 14px; }
+
+/* While this screen is mounted, carry the dark theme onto the shared overlay shell (scoped to
+   #kardioxRoot via :has, fully reversible when the router swaps screens - no global leakage). */
+#kardioxRoot:has(.kx-analysis) { background: #0d1922; }
+#kardioxRoot:has(.kx-analysis) .kx-topbar { background: #0d1922; border-bottom-color: #16283a; }
+#kardioxRoot:has(.kx-analysis) .kx-topbar h1 { color: #fff; }
+#kardioxRoot:has(.kx-analysis) .kx-iconbtn { background: transparent; border-color: #16283a; color: #8AA2B2; }
+
+/* Respect reduced motion - freeze the draw/fill transitions (the spinner is already clamped by the
+   module-wide reduced-motion rule in kardiox.css). */
+@media (prefers-reduced-motion: reduce) {
+  #kardioxRoot .kx-conf-arc { transition: none; }
+  #kardioxRoot .kx-stage-fill { transition: none; }
+}
+
+/* ===== screen 06 ===== */
+/* Screen 06 - AI Report (full dashboard) */
+#kardioxRoot .kx-rpt-head { display: flex; align-items: center; gap: 11px; padding: 10px 16px 12px; border-bottom: 1px solid var(--kx-hairline); background: var(--kx-card); }
+#kardioxRoot .kx-rpt-back, #kardioxRoot .kx-rpt-share { width: 40px; height: 40px; flex: 0 0 auto; border: 0; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+#kardioxRoot .kx-rpt-back { background: transparent; color: var(--kx-text); }
+#kardioxRoot .kx-rpt-share { background: var(--kx-surf-2); color: var(--kx-text-2); }
+#kardioxRoot .kx-rpt-back .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-rpt-share .material-symbols-rounded { font-size: 21px; }
+#kardioxRoot .kx-rpt-titles { flex: 1; min-width: 0; }
+#kardioxRoot .kx-rpt-title { font-weight: 700; font-size: 16px; letter-spacing: -.01em; color: var(--kx-text); }
+#kardioxRoot .kx-rpt-sub { font-size: 11.5px; font-weight: 500; color: var(--kx-text-2); }
+#kardioxRoot .kx-rpt-body { padding: 16px; }
+
+#kardioxRoot .kx-rpt-empty { padding: 56px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+#kardioxRoot .kx-rpt-empty .material-symbols-rounded { font-size: 40px; color: var(--kx-muted); }
+#kardioxRoot .kx-rpt-empty-t { font-weight: 700; font-size: 15px; color: var(--kx-text); }
+#kardioxRoot .kx-rpt-empty-s { font-size: 13px; color: var(--kx-text-2); }
+
+#kardioxRoot .kx-sec { display: flex; align-items: center; gap: 8px; margin: 20px 2px 10px; }
+#kardioxRoot .kx-sec .material-symbols-rounded { font-size: 17px; color: var(--kx-text-2); }
+#kardioxRoot .kx-sec-t { font-weight: 700; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--kx-text-2); }
+
+#kardioxRoot .kx-verdict { --va: var(--kx-sev-info); border: 1px solid; border-color: color-mix(in srgb, var(--va) 42%, transparent); border-radius: 18px; overflow: hidden; background: var(--kx-card); animation: kxRise .4s var(--kx-ease) both; }
+#kardioxRoot .kx-verdict--critical, #kardioxRoot .kx-verdict--urgent { --va: var(--kx-sev-critical); }
+#kardioxRoot .kx-verdict--warn { --va: var(--kx-sev-warn); }
+#kardioxRoot .kx-verdict--stable { --va: var(--kx-sev-stable); }
+#kardioxRoot .kx-verdict--info { --va: var(--kx-sev-info); }
+#kardioxRoot .kx-verdict-top { padding: 16px 16px 14px; background: linear-gradient(180deg, color-mix(in srgb, var(--va) 14%, var(--kx-card)), var(--kx-card)); }
+#kardioxRoot .kx-verdict-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+#kardioxRoot .kx-sev-pill { display: inline-flex; align-items: center; gap: 5px; font: 700 10.5px var(--kx-sans); letter-spacing: .06em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; color: var(--va); background: color-mix(in srgb, var(--va) 12%, var(--kx-card)); border: 1px solid color-mix(in srgb, var(--va) 38%, transparent); }
+#kardioxRoot .kx-sev-pill .material-symbols-rounded { font-size: 13px; }
+#kardioxRoot .kx-ai-mark { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--kx-text-2); }
+#kardioxRoot .kx-ai-mark .material-symbols-rounded { font-size: 15px; color: var(--kx-primary); }
+#kardioxRoot .kx-verdict-dx { font-size: 22px; font-weight: 700; letter-spacing: -.02em; margin-top: 10px; color: var(--kx-text); }
+#kardioxRoot .kx-verdict-qual { font-size: 13px; font-weight: 500; color: var(--kx-text-2); margin-top: 2px; }
+#kardioxRoot .kx-conf { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+#kardioxRoot .kx-conf-bar { flex: 1; height: 8px; border-radius: 999px; background: var(--kx-surf-2); overflow: hidden; }
+#kardioxRoot .kx-conf-fill { width: var(--kx-conf, 0%); height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--kx-primary), var(--kx-green)); transition: width .6s var(--kx-ease); }
+#kardioxRoot .kx-conf-val { font: 700 13px var(--kx-mono); color: var(--kx-primary); }
+#kardioxRoot .kx-conf-band { font-size: 11px; font-weight: 500; color: var(--kx-muted); margin-top: 5px; }
+
+#kardioxRoot .kx-verdict-strip { padding: 8px 12px 12px; background: color-mix(in srgb, var(--kx-cardiac) 5%, #fff); }
+#kardioxRoot .kx-strip-svg { display: block; width: 100%; height: 76px; }
+#kardioxRoot .kx-strip-label { text-align: center; font-size: 9.5px; font-weight: 600; letter-spacing: .04em; color: color-mix(in srgb, var(--kx-cardiac) 55%, var(--kx-muted)); }
+
+#kardioxRoot .kx-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+#kardioxRoot .kx-metric { padding: 11px; border: 1px solid var(--kx-hairline); border-radius: var(--kx-r-ctl); background: var(--kx-card); }
+#kardioxRoot .kx-metric-k { font: 700 9px var(--kx-sans); text-transform: uppercase; letter-spacing: .05em; color: var(--kx-text-2); }
+#kardioxRoot .kx-metric-v { font-size: 20px; font-weight: 700; line-height: 1.2; margin: 1px 0; color: var(--kx-text); }
+#kardioxRoot .kx-metric-s { font-size: 10px; font-weight: 500; color: var(--kx-muted); }
+#kardioxRoot .kx-metric--urgent { border-color: color-mix(in srgb, var(--kx-sev-urgent) 40%, transparent); background: color-mix(in srgb, var(--kx-sev-urgent) 10%, var(--kx-card)); }
+#kardioxRoot .kx-metric--urgent .kx-metric-k, #kardioxRoot .kx-metric--urgent .kx-metric-v { color: var(--kx-sev-urgent); }
+#kardioxRoot .kx-metric--urgent .kx-metric-s { color: color-mix(in srgb, var(--kx-sev-urgent) 62%, var(--kx-muted)); }
+#kardioxRoot .kx-metric--stable { border-color: color-mix(in srgb, var(--kx-sev-stable) 40%, transparent); background: color-mix(in srgb, var(--kx-sev-stable) 10%, var(--kx-card)); }
+#kardioxRoot .kx-metric--stable .kx-metric-k, #kardioxRoot .kx-metric--stable .kx-metric-v { color: var(--kx-sev-stable); }
+#kardioxRoot .kx-metric--stable .kx-metric-s { color: color-mix(in srgb, var(--kx-sev-stable) 62%, var(--kx-muted)); }
+#kardioxRoot .kx-metric--warn { border-color: color-mix(in srgb, var(--kx-sev-warn) 44%, transparent); background: color-mix(in srgb, var(--kx-sev-warn) 12%, var(--kx-card)); }
+#kardioxRoot .kx-metric--warn .kx-metric-k, #kardioxRoot .kx-metric--warn .kx-metric-v { color: var(--kx-sev-warn); }
+#kardioxRoot .kx-metric--warn .kx-metric-s { color: color-mix(in srgb, var(--kx-sev-warn) 62%, var(--kx-muted)); }
+#kardioxRoot .kx-metric--muted .kx-metric-v { color: var(--kx-muted); }
+
+#kardioxRoot .kx-morph { border: 1px solid var(--kx-hairline); border-radius: var(--kx-r-ctl); overflow: hidden; background: var(--kx-card); }
+#kardioxRoot .kx-morph-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border-bottom: 1px solid color-mix(in srgb, var(--kx-hairline) 55%, var(--kx-card)); }
+#kardioxRoot .kx-morph-row:last-child { border-bottom: 0; }
+#kardioxRoot .kx-morph-k { font-size: 13px; font-weight: 500; color: var(--kx-text-2); }
+#kardioxRoot .kx-morph-v { font: 700 13px var(--kx-mono); color: var(--kx-text); }
+#kardioxRoot .kx-morph-pill { display: inline-flex; align-items: center; gap: 5px; font: 700 12px var(--kx-sans); padding: 3px 8px; border-radius: 999px; }
+#kardioxRoot .kx-morph-pill .material-symbols-rounded { font-size: 12px; }
+#kardioxRoot .kx-morph-pill--stable { color: var(--kx-sev-stable); background: color-mix(in srgb, var(--kx-sev-stable) 12%, var(--kx-card)); }
+#kardioxRoot .kx-morph-pill--urgent { color: var(--kx-sev-urgent); background: color-mix(in srgb, var(--kx-sev-urgent) 12%, var(--kx-card)); }
+#kardioxRoot .kx-morph-pill--info { color: var(--kx-sev-info); background: color-mix(in srgb, var(--kx-sev-info) 12%, var(--kx-card)); }
+
+#kardioxRoot .kx-interp { padding: 14px; border: 1px solid var(--kx-hairline); border-radius: 14px; background: var(--kx-card); font-size: 13.5px; line-height: 1.6; color: var(--kx-text); }
+#kardioxRoot .kx-interp b { font-weight: 700; }
+
+#kardioxRoot .kx-why { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; text-align: left; cursor: pointer; margin-top: 10px; padding: 14px; border: 1px solid color-mix(in srgb, var(--kx-sev-info) 32%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--kx-sev-info) 8%, var(--kx-card)); color: var(--kx-sev-info); }
+#kardioxRoot .kx-why > .material-symbols-rounded:first-child { font-size: 24px; }
+#kardioxRoot .kx-why > .material-symbols-rounded:last-child { font-size: 22px; }
+#kardioxRoot .kx-why-txt { flex: 1; }
+#kardioxRoot .kx-why-txt b { display: block; font-size: 14px; }
+#kardioxRoot .kx-why-sub { display: block; font-size: 11.5px; font-weight: 500; opacity: .9; }
+
+#kardioxRoot .kx-redflag { display: flex; align-items: flex-start; gap: 11px; margin-top: 10px; padding: 13px 14px; border: 1px solid color-mix(in srgb, var(--kx-sev-critical) 40%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--kx-sev-critical) 10%, var(--kx-card)); }
+#kardioxRoot .kx-redflag > .material-symbols-rounded { font-size: 20px; color: var(--kx-sev-critical); flex: 0 0 auto; }
+#kardioxRoot .kx-redflag-t { display: block; font-size: 13px; font-weight: 700; color: var(--kx-sev-critical); }
+#kardioxRoot .kx-redflag-b { font-size: 12px; line-height: 1.45; font-weight: 500; color: color-mix(in srgb, var(--kx-sev-critical) 70%, var(--kx-text)); }
+
+#kardioxRoot .kx-learn { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; text-align: left; cursor: pointer; margin-top: 10px; padding: 13px 14px; border: 1px solid var(--kx-hairline); border-radius: 14px; background: var(--kx-card); }
+#kardioxRoot .kx-learn > .material-symbols-rounded:first-child { font-size: 22px; color: var(--kx-primary); }
+#kardioxRoot .kx-learn > .material-symbols-rounded:last-child { font-size: 22px; color: var(--kx-muted); }
+#kardioxRoot .kx-learn-t { flex: 1; font-size: 13.5px; font-weight: 600; color: var(--kx-text); }
+
+#kardioxRoot .kx-note { display: flex; align-items: center; gap: 7px; width: 100%; min-height: 44px; text-align: left; cursor: pointer; margin-top: 10px; padding: 13px 14px; border: 1px dashed color-mix(in srgb, var(--kx-muted) 55%, var(--kx-hairline)); border-radius: 14px; background: var(--kx-card); }
+#kardioxRoot .kx-note .material-symbols-rounded { font-size: 19px; color: var(--kx-text-2); }
+#kardioxRoot .kx-note-t { font-size: 13px; font-weight: 600; color: var(--kx-text-2); }
+
+#kardioxRoot .kx-actions { display: flex; gap: 10px; margin-top: 16px; }
+#kardioxRoot .kx-actions .kx-btn { flex: 1; }
+#kardioxRoot .kx-actions .kx-btn .material-symbols-rounded { font-size: 19px; }
+#kardioxRoot .kx-actions .kx-btn-secondary .material-symbols-rounded { color: var(--kx-primary); }
+#kardioxRoot .kx-disc { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 16px; font-size: 10.5px; font-weight: 500; line-height: 1.4; text-align: center; color: var(--kx-muted); }
+#kardioxRoot .kx-disc .material-symbols-rounded { font-size: 14px; }
+
+/* ===== screen 07 ===== */
+/* ─────────────── Screen 07 · Explainable AI ("Why this diagnosis?") ─────────────── */
+#kardioxRoot .kx-why { animation: kxRise .32s var(--kx-ease) both; }
+
+/* Header (back + titles) */
+#kardioxRoot .kx-why-head {
+  display: flex; align-items: center; gap: 11px;
+  padding: 8px 16px 12px; border-bottom: 1px solid var(--kx-hairline);
+  background: var(--kx-card);
+}
+#kardioxRoot .kx-why-back {
+  flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px;
+  border: 0; background: transparent; color: var(--kx-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+#kardioxRoot .kx-why-back .material-symbols-rounded { font-size: 24px; }
+#kardioxRoot .kx-why-back:active { background: var(--kx-surf-2); }
+#kardioxRoot .kx-why-titles { flex: 1; min-width: 0; }
+#kardioxRoot .kx-why-titles h2 {
+  margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -.01em; color: var(--kx-text);
+}
+#kardioxRoot .kx-why-titles p {
+  margin: 1px 0 0; font-size: 11.5px; font-weight: 500; color: var(--kx-text-2);
+}
+
+/* Body */
+#kardioxRoot .kx-why-body { padding: 16px; }
+
+/* ECG region with highlighted lead boxes */
+#kardioxRoot .kx-ecg {
+  position: relative; border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--kx-hairline); background: #fff5f5;
+}
+#kardioxRoot .kx-ecg-svg { display: block; width: 100%; height: 118px; }
+#kardioxRoot .kx-ecg-grid { fill: none; stroke: #f6d3d3; stroke-width: 1; }
+#kardioxRoot .kx-ecg-trace { fill: none; stroke: #161616; stroke-width: 1.5; stroke-linejoin: round; }
+#kardioxRoot .kx-hl {
+  stroke-width: 1.5; stroke-dasharray: 4 3;
+  transition: filter .2s var(--kx-ease);
+}
+#kardioxRoot .kx-hl--rr { fill: rgba(229, 72, 77, .12); stroke: var(--kx-cardiac); }
+#kardioxRoot .kx-hl--fwave { fill: rgba(29, 111, 163, .12); stroke: var(--kx-sev-info); }
+#kardioxRoot .kx-hl.is-lit { animation: kxPulse .6s var(--kx-ease) 2; }
+#kardioxRoot .kx-ecg-tag {
+  position: absolute; font-size: 9px; font-weight: 700; line-height: 1;
+  background: rgba(255, 245, 245, .9); padding: 2px 6px; border-radius: 6px;
+}
+#kardioxRoot .kx-ecg-tag--rr { left: 14px; bottom: 18px; color: var(--kx-cardiac); }
+#kardioxRoot .kx-ecg-tag--fwave { right: 82px; top: 8px; color: var(--kx-sev-info); }
+#kardioxRoot .kx-ecg-tag.is-lit { animation: kxPulse .6s var(--kx-ease) 2; }
+
+/* Question chips (segmented control) */
+#kardioxRoot .kx-why-chips { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 14px; }
+#kardioxRoot .kx-chip {
+  min-height: 44px; padding: 8px 14px; border-radius: 999px; cursor: pointer;
+  font-family: var(--kx-sans); font-size: 12px; font-weight: 600;
+  color: var(--kx-text-2); background: var(--kx-card); border: 1.5px solid var(--kx-hairline);
+  display: inline-flex; align-items: center;
+}
+#kardioxRoot .kx-chip.is-selected {
+  color: var(--kx-primary); font-weight: 700;
+  background: var(--kx-soft); border-color: var(--kx-primary);
+}
+#kardioxRoot .kx-chip:focus-visible { outline: 2px solid var(--kx-primary); outline-offset: 2px; }
+
+/* Section labels */
+#kardioxRoot .kx-why-label {
+  margin: 18px 2px 10px; font-size: 11.5px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--kx-text-2);
+}
+
+/* Matched-criteria cards (green) */
+#kardioxRoot .kx-crit-list { display: flex; flex-direction: column; gap: 8px; }
+#kardioxRoot .kx-crit {
+  display: flex; align-items: center; gap: 11px; width: 100%; min-height: 44px;
+  padding: 12px; text-align: left; cursor: pointer;
+  border: 1px solid #B5DFC6; border-radius: var(--kx-r-ctl); background: #E7F5EC;
+}
+#kardioxRoot .kx-crit[data-hl=""] { cursor: default; }
+#kardioxRoot .kx-crit:focus-visible { outline: 2px solid var(--kx-sev-stable); outline-offset: 2px; }
+#kardioxRoot .kx-crit-ic { flex: 0 0 auto; display: inline-flex; }
+#kardioxRoot .kx-crit-ic .material-symbols-rounded {
+  font-size: 20px; color: var(--kx-sev-stable); font-variation-settings: 'FILL' 1;
+}
+#kardioxRoot .kx-crit-body { flex: 1; min-width: 0; }
+#kardioxRoot .kx-crit-body b {
+  display: block; font-size: 13px; font-weight: 700; color: var(--kx-text);
+}
+#kardioxRoot .kx-crit-body span {
+  display: block; font-size: 11px; font-weight: 500; color: var(--kx-text-2); margin-top: 1px;
+}
+#kardioxRoot .kx-crit-w { flex: 0 0 auto; font-size: 12px; font-weight: 700; color: var(--kx-sev-stable); }
+
+/* Differentials bars */
+#kardioxRoot .kx-diffs { display: flex; flex-direction: column; gap: 9px; }
+#kardioxRoot .kx-diff-top {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 12.5px; font-weight: 600; margin-bottom: 4px;
+}
+#kardioxRoot .kx-diff-label { color: var(--kx-text-2); }
+#kardioxRoot .kx-diff.is-primary .kx-diff-label { color: var(--kx-text); }
+#kardioxRoot .kx-diff-pct { font-size: 12.5px; font-weight: 600; color: var(--kx-muted); }
+#kardioxRoot .kx-diff.is-primary .kx-diff-pct { color: var(--kx-primary); }
+#kardioxRoot .kx-diff-track {
+  height: 6px; border-radius: 999px; background: var(--kx-surf-2); overflow: hidden;
+}
+#kardioxRoot .kx-diff-fill { height: 100%; background: var(--kx-muted); }
+#kardioxRoot .kx-diff.is-primary .kx-diff-fill { background: var(--kx-primary); }
+
+/* "What you should verify" (blue banner) */
+#kardioxRoot .kx-verify {
+  display: flex; gap: 11px; align-items: flex-start; margin-top: 16px;
+  padding: 13px 14px; border: 1px solid #B5D4E8; border-radius: 14px; background: #E8F2F9;
+}
+#kardioxRoot .kx-verify-ic { flex: 0 0 auto; display: inline-flex; }
+#kardioxRoot .kx-verify-ic .material-symbols-rounded { font-size: 20px; color: var(--kx-sev-info); }
+#kardioxRoot .kx-verify b { display: block; font-size: 13px; font-weight: 700; color: var(--kx-sev-info); }
+#kardioxRoot .kx-verify span { font-size: 12px; line-height: 1.45; font-weight: 500; color: var(--kx-text); }
+
+/* Empty fallbacks */
+#kardioxRoot .kx-empty {
+  display: flex; align-items: center; gap: 10px; padding: 14px;
+  border: 1px dashed var(--kx-hairline); border-radius: var(--kx-r-ctl);
+  color: var(--kx-text-2); font-size: 13px; font-weight: 500;
+}
+#kardioxRoot .kx-empty .material-symbols-rounded { font-size: 20px; color: var(--kx-muted); }

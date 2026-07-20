@@ -58,24 +58,11 @@
     el.setAttribute("role", "dialog");
     el.setAttribute("aria-modal", "true");
     el.setAttribute("aria-label", "KardioX AI");
-    el.innerHTML =
-      '<div class="kx-topbar">' +
-        '<button class="kx-iconbtn" type="button" data-act="kardiox-close" aria-label="Close KardioX">' + ic("close") + '</button>' +
-        '<h1>KardioX <span>AI</span> · ECG interpretation &amp; learning</h1>' +
-        '<button class="kx-iconbtn" type="button" data-act="kardiox-settings" aria-label="KardioX settings">' + ic("settings") + '</button>' +
-      '</div>' +
-      '<div class="kx-scroll" id="kxScroll"></div>';
+    // Each screen renders its own header (landing/report/etc.); the shell is just the scroll host.
+    // All click delegation + navigation is owned by SMD_KARDIOX_ROUTER (kardiox-screens.js).
+    el.innerHTML = '<div class="kx-scroll" id="kxScroll"></div>';
     document.body.appendChild(el);
-    el.addEventListener("click", onRootClick);
     return el;
-  }
-
-  function onRootClick(e) {
-    var t = e.target.closest && e.target.closest("[data-act]");
-    if (!t) return;
-    var act = t.getAttribute("data-act");
-    if (act === "kardiox-close") { haptic("light"); close(); }
-    // kardiox-settings + inner navigation wired in M2/M3.
   }
 
   function open() {

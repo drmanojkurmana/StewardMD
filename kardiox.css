@@ -125,6 +125,12 @@
 #kardioxRoot .kx-btn-ghost { background: transparent; color: var(--kx-primary); }
 #kardioxRoot .kx-btn-danger { background: var(--kx-sev-critical); color: #fff; }
 #kardioxRoot .kx-btn:focus-visible, .kx-home-card:focus-visible { outline: 2px solid var(--kx-primary); outline-offset: 2px; }
+/* Blanket visible-focus for every interactive control in the module (buttons, [role=button], chips,
+   tiles, links, inputs) — README a11y requires a visible focus ring on all controls. */
+#kardioxRoot button:focus-visible, #kardioxRoot [role="button"]:focus-visible, #kardioxRoot a:focus-visible,
+#kardioxRoot [tabindex]:focus-visible, #kardioxRoot input:focus-visible, #kardioxRoot select:focus-visible {
+  outline: 2px solid var(--kx-primary); outline-offset: 2px; border-radius: 6px;
+}
 
 /* ─────────────────────────── Named keyframes (Animations & Motion table) ────────────────────────── */
 @keyframes kxDraw { to { stroke-dashoffset: 0; } }
