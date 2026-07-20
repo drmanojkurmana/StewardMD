@@ -49,6 +49,18 @@ export async function setUserClaims(env, uid, claimsObj) {
   if (!res.ok) throw new Error("set_claim_failed: " + (await res.text()));
 }
 
+// Set a user's password (admin). Used by the forgot-password flow (OTP reset + temp password).
+export async function setUserPassword(env, uid, password) {
+  const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
+  const saToken = await serviceAccountToken(env);
+  const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:update`, {
+    method: "POST",
+    headers: { "Authorization": `Bearer ${saToken}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ localId: uid, password: password }),
+  });
+  if (!res.ok) throw new Error("set_password_failed: " + (await res.text()));
+}
+
 // Read a user's current custom claims ({} if none / on error).
 export async function getUserClaims(env, uid) {
   const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;

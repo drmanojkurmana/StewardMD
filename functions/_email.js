@@ -69,6 +69,34 @@ export function emailOtp(env, { email, name, code, minutes }) {
   });
 }
 
+// Password-reset code (OTP): the doctor enters this + chooses a new password in-app.
+export function emailResetCode(env, { email, name, code, minutes }) {
+  return sendBranded(env, {
+    to: email,
+    subject: code + " is your StewardMD password reset code",
+    title: "Reset your password",
+    preheader: "Your StewardMD password reset code is " + code + " (valid " + (minutes || 10) + " minutes).",
+    bodyHtml:
+      '<p style="font-size:14px;line-height:1.6">' + (name ? "Dr. " + esc(name) : "Hello") + ', use this code in StewardMD to reset your password. You’ll choose a new password after entering it:</p>' +
+      '<p style="margin:20px 0;text-align:center"><span style="display:inline-block;font:800 30px/1 \'IBM Plex Mono\',monospace;letter-spacing:10px;color:' + TEAL + ';background:#f1f6f5;border:1px solid #d7e6e3;border-radius:12px;padding:16px 22px">' + esc(code) + '</span></p>' +
+      '<p style="font-size:13px;line-height:1.6;color:#5a7184">This code expires in ' + (minutes || 10) + ' minutes. If you didn’t request a password reset, ignore this email — your password is unchanged.</p>',
+  });
+}
+
+// Temporary password fallback: a strong one-time password the doctor signs in with, then changes.
+export function emailTempPassword(env, { email, name, password }) {
+  return sendBranded(env, {
+    to: email,
+    subject: "Your StewardMD temporary password",
+    title: "Temporary password",
+    preheader: "Sign in with this temporary password, then change it in Account.",
+    bodyHtml:
+      '<p style="font-size:14px;line-height:1.6">' + (name ? "Dr. " + esc(name) : "Hello") + ', here is a temporary password for your StewardMD account. Sign in with it, then change it from <b>Account</b>:</p>' +
+      '<p style="margin:20px 0;text-align:center"><span style="display:inline-block;font:800 22px/1 \'IBM Plex Mono\',monospace;letter-spacing:2px;color:' + TEAL + ';background:#f1f6f5;border:1px solid #d7e6e3;border-radius:12px;padding:14px 20px">' + esc(password) + '</span></p>' +
+      '<p style="font-size:13px;line-height:1.6;color:#5a7184">For your security, change this password as soon as you sign in. If you didn’t request this, contact <a href="mailto:Support@StewardMD.in">Support@StewardMD.in</a>.</p>',
+  });
+}
+
 export function emailVerified(env, { email, name, regNo, council }) {
   return sendBranded(env, {
     to: email,

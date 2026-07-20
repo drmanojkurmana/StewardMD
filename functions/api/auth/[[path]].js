@@ -13,18 +13,27 @@
  * doctor-verification records. No PII beyond the account email is stored, and it self-expires.
  */
 import { verifyFirebaseToken } from "../../_fbauth.js";
-import { mergeUserClaims } from "../../_fbadmin.js";
-import { emailOtp } from "../../_email.js";
+import { mergeUserClaims, lookupUidByEmail, setUserPassword } from "../../_fbadmin.js";
+import { emailOtp, emailResetCode, emailTempPassword } from "../../_email.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 const TTL = 600;            // 10 minutes
-const RESEND_THROTTLE = 30; // seconds between sends
+const RESEND_THROTTLE = 30; // seconds between OTP sends
+const RESET_THROTTLE = 60;  // seconds between password-reset requests per email
 const MAX_TRIES = 5;
 
 function kv(env) { return env.CASES_KV || env.GHIS_KV || null; }
 function otpKey(uid) { return "otp:email:" + uid; }
 function now() { return Math.floor(Date.now() / 1000); }
 function gen6() { var a = new Uint32Array(1); crypto.getRandomValues(a); return String(a[0] % 1000000).padStart(6, "0"); }
+function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || "")); }
+// Strong, copy-friendly temp password (unambiguous alphabet — no 0/O/1/l/I).
+function genTempPassword() {
+  var A = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
+  var n = 14, a = new Uint32Array(n); crypto.getRandomValues(a);
+  var s = ""; for (var i = 0; i < n; i++) s += A[a[i] % A.length];
+  return s;
+}
 
 // Decode the (already cryptographically-verified) token payload to read the account email + name.
 function tokenPayload(tok) {
@@ -61,6 +70,11 @@ async function handle(context) {
 
   var route = (context.params && context.params.path) || [];
   var action = Array.isArray(route) ? route[0] : route;
+
+  // Password-reset is UNAUTHENTICATED (the user is locked out, so there's no token). Both paths are
+  // enumeration-safe (always a generic ok) and rate-limited per email.
+  if (action === "reset-request") return resetRequest(request, env, store);
+  if (action === "reset-verify") return resetVerify(request, env, store);
 
   var who = await authed(request, env);
   if (!who) return json({ ok: false, error: "signin-required" }, 401);
@@ -107,4 +121,59 @@ async function handle(context) {
   }
 
   return json({ ok: false, error: "not-found" }, 404);
+}
+
+// ---- forgot password (unauthenticated) ---------------------------------------------------
+// Always returns a generic { ok:true } for a valid email format so callers can't enumerate which
+// addresses have accounts. Rate-limited per email. mode:"temp" emails an auto-generated password;
+// otherwise emails a 6-digit code the user redeems in reset-verify with a new password of their own.
+async function resetRequest(request, env, store) {
+  var body = {}; try { body = await request.json(); } catch (e) {}
+  var email = String((body && body.email) || "").trim().toLowerCase();
+  var mode = (body && body.mode) === "temp" ? "temp" : "otp";
+  if (!validEmail(email)) return json({ ok: false, error: "bad-email" }, 400);
+  var generic = json({ ok: true, sent: true });
+
+  var rlKey = "reset:rl:" + email;
+  try { var rl = await store.get(rlKey, "json"); if (rl && rl.at && (now() - rl.at) < RESET_THROTTLE) return generic; } catch (e) {}
+
+  var uid = null;
+  try { uid = await lookupUidByEmail(env, email); } catch (e) {}
+  if (!uid) return generic;                                  // no account → still generic (no enumeration)
+  try { await store.put(rlKey, JSON.stringify({ at: now() }), { expirationTtl: RESET_THROTTLE }); } catch (e) {}
+
+  if (mode === "temp") {
+    var pw = genTempPassword();
+    try { await setUserPassword(env, uid, pw); } catch (e) { return generic; }
+    try { await emailTempPassword(env, { email: email, password: pw }); } catch (e) {}
+  } else {
+    var code = gen6();
+    try { await store.put("reset:otp:" + email, JSON.stringify({ code: code, uid: uid, exp: now() + TTL, tries: 0 }), { expirationTtl: TTL }); } catch (e) {}
+    try { await emailResetCode(env, { email: email, code: code, minutes: 10 }); } catch (e) {}
+  }
+  return generic;
+}
+
+// Redeem a reset code + set the user's chosen new password.
+async function resetVerify(request, env, store) {
+  var body = {}; try { body = await request.json(); } catch (e) {}
+  var email = String((body && body.email) || "").trim().toLowerCase();
+  var code = String((body && body.code) || "").replace(/\D/g, "");
+  var newPassword = String((body && body.newPassword) || "");
+  if (!validEmail(email) || code.length !== 6) return json({ ok: false, error: "bad-code" }, 400);
+  if (newPassword.length < 8) return json({ ok: false, error: "weak-password" }, 400);
+
+  var key = "reset:otp:" + email, rec = null;
+  try { rec = await store.get(key, "json"); } catch (e) {}
+  if (!rec) return json({ ok: false, error: "expired" }, 400);
+  if (rec.exp && now() > rec.exp) { try { await store.delete(key); } catch (e) {} return json({ ok: false, error: "expired" }, 400); }
+  if ((rec.tries || 0) >= MAX_TRIES) { try { await store.delete(key); } catch (e) {} return json({ ok: false, error: "locked" }, 429); }
+  if (String(rec.code) !== code) {
+    rec.tries = (rec.tries || 0) + 1;
+    try { await store.put(key, JSON.stringify(rec), { expirationTtl: Math.max(1, (rec.exp || now()) - now()) }); } catch (e) {}
+    return json({ ok: false, error: "mismatch", triesLeft: Math.max(0, MAX_TRIES - rec.tries) }, 400);
+  }
+  try { await setUserPassword(env, rec.uid, newPassword); } catch (e) { return json({ ok: false, error: "set-failed" }, 500); }
+  try { await store.delete(key); } catch (e) {}
+  return json({ ok: true, reset: true });
 }
