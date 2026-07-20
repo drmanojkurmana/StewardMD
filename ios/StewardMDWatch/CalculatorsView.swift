@@ -12,6 +12,12 @@ struct CalculatorsView: View {
     var body: some View {
         List {
             Section("Offline") {
+                // Bespoke Crown-driven quick scores first (best wrist UX)…
+                ForEach(CalculatorCatalog.all) { def in
+                    NavigationLink(value: CalcRoute(id: def.id)) { calcRow(def.name, def.subtitle) }
+                        .listRowBackground(SMDPalette.surface.color)
+                }
+                // …then the data-driven native formulas.
                 ForEach(NativeCalcCatalog.all) { c in
                     NavigationLink {
                         CalcRunnerView(title: c.title, inputs: c.inputs) { c.compute($0) }
@@ -37,12 +43,6 @@ struct CalculatorsView: View {
                 }
             }
 
-            Section("Built-in") {
-                ForEach(CalculatorCatalog.all) { def in
-                    NavigationLink(value: CalcRoute(id: def.id)) { calcRow(def.name, def.subtitle) }
-                        .listRowBackground(SMDPalette.surface.color)
-                }
-            }
         }
         .navigationTitle("Calculators")
     }
