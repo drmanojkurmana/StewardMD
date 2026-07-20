@@ -132,7 +132,6 @@ async function resetRequest(request, env, store) {
   var email = String((body && body.email) || "").trim().toLowerCase();
   var mode = (body && body.mode) === "temp" ? "temp" : "otp";
   if (!validEmail(email)) return json({ ok: false, error: "bad-email" }, 400);
-  var dbg = false; try { dbg = new URL(request.url).searchParams.get("debug") === "1"; } catch (e) {}
   var generic = json({ ok: true, sent: true });
 
   var rlKey = "reset:rl:" + email;
@@ -145,7 +144,7 @@ async function resetRequest(request, env, store) {
 
   if (mode === "temp") {
     var pw = genTempPassword();
-    try { await setUserPassword(env, uid, pw); } catch (e) { var d = String((e && e.message) || e); try { console.warn("[reset:temp] setpw failed:", d); } catch (x) {} return dbg ? json({ ok: false, error: "setpw-failed", detail: d.slice(0, 300) }) : generic; }
+    try { await setUserPassword(env, uid, pw); } catch (e) { try { console.warn("[reset:temp] setpw failed:", String((e && e.message) || e)); } catch (x) {} return generic; }
     try { await emailTempPassword(env, { email: email, password: pw }); } catch (e) {}
   } else {
     var code = gen6();
