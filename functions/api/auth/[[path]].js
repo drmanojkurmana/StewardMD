@@ -138,7 +138,7 @@ async function resetRequest(request, env, store) {
   try { var rl = await store.get(rlKey, "json"); if (rl && rl.at && (now() - rl.at) < RESET_THROTTLE) return generic; } catch (e) {}
 
   var uid = null;
-  try { uid = await lookupUidByEmail(env, email); } catch (e) {}
+  try { var found = await lookupUidByEmail(env, email); uid = found && found.uid; } catch (e) {}  // returns {uid,email,name}
   if (!uid) return generic;                                  // no account → still generic (no enumeration)
   try { await store.put(rlKey, JSON.stringify({ at: now() }), { expirationTtl: RESET_THROTTLE }); } catch (e) {}
 
