@@ -183,11 +183,20 @@ class TorchECGRhythm(RhythmProvider):
     async def _infer(self, signal: dict):
         import asyncio
 
-        from app.services.models import signal_tensor
+        from app.core.config import get_settings
+        from app.services.models import adapt_signal, get_input_spec, get_label_map, signal_tensor
+        s = get_settings()
         backend = self._backend()
-        x = signal_tensor(signal)
+        # Use a named input preset if configured (exact fs/samples/leads/normalization the model wants);
+        # otherwise the generic tensor. This is what lets a third-party checkpoint plug in unchanged.
+        spec = get_input_spec(s.rhythm_model_input_spec)
+        x = adapt_signal(signal, spec) if spec else signal_tensor(signal)
         pred = await asyncio.to_thread(backend.predict, x)   # load+run off the event loop
-        return pred["label"], float(pred["confidence"])
+        label = pred["label"]
+        lmap = get_label_map(s.rhythm_label_map)
+        if lmap:
+            label = lmap.translate(label)                    # → KardioX vocabulary (still Rule-validated)
+        return label, float(pred["confidence"])
 
     async def rhythm(self, signal: dict) -> dict:
         label, conf = await self._infer(signal)

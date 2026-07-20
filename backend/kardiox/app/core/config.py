@@ -72,7 +72,12 @@ class Settings(BaseSettings):
     rhythm_model_path: str = ""
     rhythm_model_kind: str = "torchscript"   # torchscript | onnx | torch_statedict | tensorflow
     rhythm_model_fs: int = 500
-    rhythm_model_labels: str = ""   # comma-separated label map bundled with the checkpoint
+    rhythm_model_labels: str = ""            # comma-separated label map bundled with the checkpoint
+    rhythm_model_input_spec: str = ""        # named preset in models.INPUT_SPECS (e.g. ptbxl_500hz_10s)
+    rhythm_label_map: str = ""               # named preset in models.LABEL_MAPS (e.g. ptbxl_superclass)
+
+    # ── External digitizer (image → signal) plug-in, e.g. an ECG-Digitiser wrapper ─────────────────
+    digitizer_entrypoint: str = ""           # "module:function" resolved at runtime; empty = not ready
 
     # ── Gemini (stage-12 explanation) — future ─────────────────────────────────────────────────────
     gemini_api_key: str = ""

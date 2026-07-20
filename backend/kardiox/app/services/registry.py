@@ -10,7 +10,7 @@ from app.services import (digitization, gemini, measurement, preprocessing, qual
 _PREPROC = {"none": preprocessing.NonePreprocessing, "opencv": preprocessing.OpenCVPreprocessing}
 _QUALITY = {"none": quality.NoneQuality, "opencv": quality.OpenCVQuality}
 _DIGI = {"none": digitization.NoneDigitization, "classical": digitization.ClassicalDigitization,
-         "opencv": digitization.OpenCVDigitization}
+         "opencv": digitization.OpenCVDigitization, "external": digitization.ExternalDigitization}
 _WFDB = {"none": wfdb_io.NoneWfdb, "wfdb": wfdb_io.WfdbSignal}
 _RHY = {"none": rhythm.NoneRhythm, "deterministic": rhythm.DeterministicRhythm,
         "torchecg": rhythm.TorchECGRhythm}

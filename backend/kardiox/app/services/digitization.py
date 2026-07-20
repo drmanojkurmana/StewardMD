@@ -144,3 +144,34 @@ class ClassicalDigitization(DigitizationProvider):
 # Back-compat alias: the registry / config referred to "opencv"; keep it pointing at the real baseline.
 class OpenCVDigitization(ClassicalDigitization):
     name = "opencv"
+
+
+class ExternalDigitization(DigitizationProvider):
+    """Plug in a learned digitizer (e.g. the PhysioNet-2024-winning ECG-Digitiser, BSD-2) WITHOUT changing
+    the backend: set KARDIOX_DIGITIZER_ENTRYPOINT="module:function" to a callable(image_bytes)->traces
+    dict ({"leads":{lead:[px...]}, "calibration":{...}}). Ships nothing itself; raises UpstreamUnavailable
+    until an entrypoint is configured (never fabricates traces)."""
+
+    name = "external"
+    version = "0.1.0"
+
+    def validate_config(self) -> list[str]:
+        from app.core.config import get_settings
+        return [] if get_settings().digitizer_entrypoint else ["KARDIOX_DIGITIZER_ENTRYPOINT not set"]
+
+    async def digitize(self, image: bytes) -> dict:
+        import asyncio
+
+        from app.core.config import get_settings
+        from app.core.errors import UpstreamUnavailable
+        from app.services.models import resolve_entrypoint
+        ep = get_settings().digitizer_entrypoint
+        if not ep:
+            raise UpstreamUnavailable(
+                "No external digitizer configured (KARDIOX_DIGITIZER_ENTRYPOINT=module:function, e.g. an "
+                "ECG-Digitiser wrapper). KardioX ships no learned digitizer weights.", stage="digitization")
+        fn = resolve_entrypoint(ep)
+        result = await asyncio.to_thread(fn, image)
+        if not isinstance(result, dict) or "leads" not in result:
+            raise UpstreamUnavailable("external digitizer returned an unexpected shape", stage="digitization")
+        return result
