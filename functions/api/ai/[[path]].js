@@ -84,6 +84,7 @@ function withCors(request, resp) {
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens } from "../../_usage.js";
 import { ownerOK } from "../../_adminauth.js";
+import { tinyfishSearch } from "../../_search.js";
 function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
 // thinkingBudget:0 disables gemini-2.5-flash's dynamic "thinking" — otherwise it silently
 // consumes the maxOutputTokens budget and the visible clinician answer truncates mid-sentence.
@@ -324,6 +325,11 @@ const KNOWLEDGE_SYS =
 // synthesis in one grounded call; we keep the answer short to conserve tokens.
 const RESEARCH_SYS =
   "You are MaiK researching a clinical question that StewardMD's own knowledge base does not cover. Use web search to find current, authoritative medical/toxicology sources. Answer CONCISELY — 4-6 short bullet points covering the key management/answer only, no preamble, no headings. Be specific and bedside-useful (agents, doses, antidotes, monitoring). If evidence is weak or sources disagree, say so in one line. End with exactly: 'Web-sourced — not StewardMD-verified; confirm against local protocol.'";
+// FAST PATH prompt: the search is done externally (TinyFish), so the model only SUMMARISES the
+// provided snippets — no internal Google grounding hop. Grounded strictly on the given results
+// (must not invent beyond them), prefers authoritative/official sources, cites inline as [n].
+const RESEARCH_SYS_SNIPPETS =
+  "You are MaiK answering a clinical question that StewardMD's own knowledge base does not cover, using ONLY the web search results provided below. Answer CONCISELY — 4-6 short bullet points covering the key management/answer only, no preamble, no headings. Be specific and bedside-useful (agents, doses, antidotes, monitoring). Prefer authoritative/official sources (guidelines, regulators, major references) and cite them inline as [n] matching the numbered results. Do NOT state anything not supported by the results; if the results are weak, off-topic or conflict, say so in one line. End with exactly: 'Web-sourced — not StewardMD-verified; confirm against local protocol.'";
 
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
 function renderGroundedPrompt(pkg) {
@@ -728,18 +734,42 @@ export async function onRequest(context) {
       return json({ kind: kind, fields: parseJsonLoose(text) || {}, mode: "image" });
     }
     if (seg === "research") {
-      // Opt-in web research for topics NOT in StewardMD's KB. Token-frugal: single Google-
-      // grounded Gemini call, short output cap, only reached on an explicit user tap.
+      // Opt-in web research for topics NOT in StewardMD's KB, only reached on an explicit tap /
+      // auto-run after the KB miss. FAST PATH: TinyFish (the search API we already use in the
+      // Medical-Updates pipeline) does the search in ONE round-trip, then a cheap flash call just
+      // SUMMARISES the returned snippets — no internal Gemini google_search grounding (the slow
+      // multi-hop). Lower tokens (we own the context) + real source links. FALLBACK: if TinyFish
+      // returns nothing (no key / empty / error — it never throws), fall back to Gemini's own
+      // grounded search so nothing regresses. Worst case === the previous behaviour.
       const q = String(body.question || body.q || "").slice(0, 500);
       if (!q) return json({ error: "no question" }, 400);
       const gate = await checkQuota(env, request, "general");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const RES_MAX = Math.max(256, Math.min(900, Number(env.MAIK_RESEARCH_MAX_OUTPUT) || 600));
-      let text;
-      try { text = await callGemini(env, [{ text: RESEARCH_SYS + "\n\nQuestion: " + q }], RES_MAX, { webSearch: true, temperature: 0.3 }); }
-      catch (e) { await recordUsage(gate, { inTok: estTokens(RESEARCH_SYS.length + q.length), outTok: 0, status: "failed" }); return json({ error: "research-failed", detail: String(e && e.message || e) }, 502); }
-      await recordUsage(gate, { inTok: estTokens(RESEARCH_SYS.length + q.length), outTok: estTokens((text || "").length), status: "success" });
-      return json({ text: text, mode: "web" });
+
+      let results = [];
+      try { results = await tinyfishSearch(env, q); } catch (e) { results = []; }
+
+      let text = null, mode = "web", sources = [], inTok = estTokens(RESEARCH_SYS.length + q.length);
+      if (results.length) {
+        const ctx = results.map(function (r, i) {
+          return "[" + (i + 1) + "] " + r.title + (r.site ? " (" + r.site + ")" : "") + "\n" + (r.snippet || "") + "\n" + r.url;
+        }).join("\n\n");
+        const prompt = RESEARCH_SYS_SNIPPETS + "\n\nQuestion: " + q + "\n\nWeb results:\n" + ctx;
+        inTok = estTokens(prompt.length);
+        try {
+          text = await callGemini(env, [{ text: prompt }], RES_MAX, { temperature: 0.2 });
+          sources = results.map(function (r) { return { title: r.title, url: r.url, site: r.site }; });
+          mode = "web-tinyfish";
+        } catch (e) { text = null; }   // summarise failed → fall through to Gemini grounding
+      }
+      if (!text) {
+        inTok = estTokens(RESEARCH_SYS.length + q.length);
+        try { text = await callGemini(env, [{ text: RESEARCH_SYS + "\n\nQuestion: " + q }], RES_MAX, { webSearch: true, temperature: 0.3 }); mode = "web-grounded"; }
+        catch (e) { await recordUsage(gate, { inTok: inTok, outTok: 0, status: "failed" }); return json({ error: "research-failed", detail: String(e && e.message || e) }, 502); }
+      }
+      await recordUsage(gate, { inTok: inTok, outTok: estTokens((text || "").length), status: "success" });
+      return json({ text: text, mode: mode, sources: sources });
     }
     if (seg === "extract") {
       // Voice intake (MaiK Scribe): a transcript → structured ICU fields, OR (kind:"reasoning")
