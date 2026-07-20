@@ -36,8 +36,17 @@ public final class CodeBlueModel: ObservableObject {
     private var workout: WorkoutKeepAlive?
     private var deviceId = "watch"
     private var eventSeq = 0
+    private var activeRateSeconds = 0.0
+    private var onTargetSeconds = 0.0
+    private var lastRateElapsed = 0.0
 
     public init() {}
+
+    /// % of active (non-paused) time spent in the 100–120 cpm band — a measured
+    /// debrief metric, not a quality verdict.
+    public var targetRatePct: Int {
+        activeRateSeconds > 0 ? Int((onTargetSeconds / activeRateSeconds * 100).rounded()) : 0
+    }
 
     /// DI initialiser for CPR Assist. The no-arg `init()` remains for existing call sites.
     public convenience init(detector: CompressionDetecting, workout: WorkoutKeepAlive,
@@ -63,6 +72,7 @@ public final class CodeBlueModel: ObservableObject {
     public func tick(_ dt: TimeInterval) -> Bool {
         let crossed = timer.tick(dt)
         elapsed = timer.elapsed
+        accountRate(to: elapsed)
         return crossed
     }
 
@@ -73,11 +83,26 @@ public final class CodeBlueModel: ObservableObject {
     public func sync(to seconds: TimeInterval) -> Bool {
         let crossed = timer.set(seconds)
         elapsed = timer.elapsed
+        accountRate(to: elapsed)
         return crossed
     }
 
+    /// Time-weighted accounting for the time-in-target-rate metric. Ignores backward
+    /// or large jumps (AOD gaps) so they neither inflate nor corrupt the fraction.
+    private func accountRate(to newElapsed: TimeInterval) {
+        let dt = newElapsed - lastRateElapsed
+        lastRateElapsed = newElapsed
+        guard isRunning, !paused, dt > 0, dt < 5 else { return }
+        activeRateSeconds += dt
+        if coachZone == .onTarget { onTargetSeconds += dt }
+    }
+
     public func recordAdrenaline() { adrenalineCount += 1; append(.drug, "Epinephrine") }
-    public func recordShock() { shockCount += 1; append(.shock, "Shock #\(shockCount)") }
+    public func recordShock(energyJ: Int? = nil) {
+        shockCount += 1
+        append(.shock, "Shock #\(shockCount)" + (energyJ.map { " · \($0)J" } ?? ""))
+    }
+    public func recordRhythm(_ label: String) { append(.rhythm, label) }
     public func markROSC() { rosc = true; append(.rosc, "ROSC") }
 
     public func end() -> CodeBlueSummary {
@@ -130,6 +155,9 @@ public final class CodeBlueModel: ObservableObject {
         events = []
         isRunning = false
         eventSeq = 0
+        activeRateSeconds = 0
+        onTargetSeconds = 0
+        lastRateElapsed = 0
     }
 
     /// Begin a code: reset to a clean slate first (each code stands alone), then
@@ -149,7 +177,8 @@ public final class CodeBlueModel: ObservableObject {
         detector?.stop()
         workout?.end()
         return CodeSummary.build(events: events, durationSeconds: elapsed, cycles: cycle,
-                                 totalCompressions: compressionCount, averageRateCPM: averageRateCPM)
+                                 totalCompressions: compressionCount, averageRateCPM: averageRateCPM,
+                                 targetRatePct: targetRatePct)
     }
 
     public func recordDrug(_ name: String) {
@@ -167,6 +196,6 @@ public final class CodeBlueModel: ObservableObject {
                       averageRateCPM: averageRateCPM, coachZone: coachZone, paused: paused,
                       pauseSeconds: pauseSeconds, adrenalineCount: adrenalineCount,
                       shockCount: shockCount, rosc: rosc, batteryLevel: batteryLevel,
-                      events: events, updatedElapsed: elapsed)
+                      targetRatePct: targetRatePct, events: events, updatedElapsed: elapsed)
     }
 }

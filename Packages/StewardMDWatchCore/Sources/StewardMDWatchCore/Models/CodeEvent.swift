@@ -5,7 +5,7 @@ import Foundation
 /// `sourceDeviceId` tags the originating device so a future multi-source timeline
 /// merges cleanly (single source — "watch" — today).
 public enum CodeEventKind: String, Codable, Sendable {
-    case cprStart, shock, drug, pauseStart, resume, switchCompressor, rosc, cprEnd
+    case cprStart, shock, drug, pauseStart, resume, switchCompressor, rosc, cprEnd, rhythm
 }
 
 public struct CodeEvent: Codable, Sendable, Equatable, Identifiable {
