@@ -3,6 +3,8 @@ contract exception handlers. Run: `uvicorn app.main:app`.
 """
 from __future__ import annotations
 
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
@@ -11,13 +13,28 @@ from app.api.v1.router import router as v1_router
 from app.core.config import get_settings
 from app.core.errors import install_exception_handlers
 from app.core.logging import configure_logging, get_logger
+from app.core.startup import validate_startup
 from app.core.versioning import API_VERSION, V1_PREFIX
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    settings = get_settings()
+    log = get_logger("startup")
+    problems = validate_startup(settings)
+    for p in problems:
+        log.warning("startup.config", issue=p)
+    fatal = [p for p in problems if p.startswith("FATAL")]
+    if fatal:   # fail fast in prod (validate_startup only marks FATAL when environment=prod)
+        raise RuntimeError("Startup validation failed: " + "; ".join(fatal))
+    log.info("startup", mode=settings.mode, api_version=API_VERSION, environment=settings.environment)
+    yield
+    log.info("shutdown.graceful")   # uvicorn --timeout-graceful-shutdown drains in-flight requests
 
 
 def create_app() -> FastAPI:
     settings = get_settings()
     configure_logging(settings.log_level)
-    log = get_logger("startup")
 
     app = FastAPI(
         title=settings.app_name,
@@ -26,6 +43,7 @@ def create_app() -> FastAPI:
         docs_url="/docs",
         redoc_url="/redoc",
         openapi_url="/openapi.json",
+        lifespan=lifespan,
     )
     app.add_middleware(
         CORSMiddleware,
@@ -71,7 +89,6 @@ def create_app() -> FastAPI:
         from app.core.metrics import METRICS
         return PlainTextResponse(METRICS.render(), media_type="text/plain; version=0.0.4")
 
-    log.info("startup", mode=settings.mode, api_version=API_VERSION)
     return app
 
 

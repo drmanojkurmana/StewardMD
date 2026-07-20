@@ -10,13 +10,16 @@ services:
     env_file: .env
     environment:
       KARDIOX_MODE: ${KARDIOX_MODE:-mock}
+      KARDIOX_ENVIRONMENT: ${KARDIOX_ENVIRONMENT:-dev}
     ports:
       - "8000:8000"
     restart: unless-stopped
+    stop_grace_period: 25s          # allow the FastAPI lifespan graceful drain (uvicorn 20s) to finish
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/v1/health').status==200 else 1)"]
       interval: 30s
       timeout: 5s
+      start_period: 15s
       retries: 3
 
   # redis:                      # uncomment when adding a background model-worker queue
