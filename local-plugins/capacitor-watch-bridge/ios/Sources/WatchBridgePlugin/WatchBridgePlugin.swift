@@ -173,6 +173,8 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
             d.removeObject(forKey: tasksKey)
             d.removeObject(forKey: calcsKey)
         }
+        // Privacy: clear the on-device Code Blue log on sign-out (design §10).
+        DispatchQueue.main.async { CodeBlueLiveModel.shared.clearLocal() }
         relay.updateContext(["cleared": true])
         call.resolve()
     }
