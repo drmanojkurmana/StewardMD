@@ -68,6 +68,12 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         ) { [weak self] note in
             self?.notifyListeners("watchPushToken", data: (note.userInfo as? [String: Any]) ?? [:])
         }
+        // Watch → phone critical-ack → JS (SMD_ICU_GROUPS.addTimelineEvent).
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.labAckRequested, object: nil, queue: .main
+        ) { [weak self] note in
+            self?.notifyListeners("labAck", data: (note.userInfo as? [String: Any]) ?? [:])
+        }
         #endif
     }
 

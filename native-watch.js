@@ -312,7 +312,9 @@
               patientLabel: label || null,
               severity: a.severity === "crit" ? "critical" : "warning",
               ts: Math.floor(Date.now() / 1000),
-              trend: trendFor(st2, analyteKeyFor((a.title || "") + " " + (a.msg || "")))
+              trend: trendFor(st2, analyteKeyFor((a.title || "") + " " + (a.msg || ""))),
+              groupId: String(gid),
+              patientId: String(p.id || "")
             });
           });
         });
@@ -521,9 +523,32 @@
       if (p && p.addListener) p.addListener("taskStatus", function (a) {
         try {
           var api = groupsApi(); if (!api || !api.setTaskStatus || !a) return;
-          if (a.groupId && a.patientId && a.taskId && a.status) {
-            api.setTaskStatus(a.groupId, a.patientId, a.taskId, a.status);
+          if (!(a.groupId && a.patientId && a.taskId && a.status)) return;
+          api.setTaskStatus(a.groupId, a.patientId, a.taskId, a.status);
+          // Mirror the phone: completing a task appends an author-stamped timeline
+          // event (setTaskStatus only updates the task doc). Look up the task text
+          // from the live cache for a matching title.
+          if (a.status === "done" && api.addTimelineEvent) {
+            var text = "";
+            try {
+              (_grp.tasks[a.groupId + "/" + a.patientId] || []).forEach(function (t) {
+                if (t && String(t.id) === String(a.taskId)) text = t.text || "";
+              });
+            } catch (e) {}
+            try { api.addTimelineEvent(a.groupId, a.patientId, { type: "task", title: "Task completed — " + (text || "task") }); } catch (e) {}
           }
+        } catch (e) {}
+      });
+    } catch (e) {}
+
+    // Watch → phone: a critical acknowledged on the wrist → append an ICU-timeline
+    // event on that shared patient (mirrors the phone; open/local patients omit gid/pid).
+    try {
+      if (p && p.addListener) p.addListener("labAck", function (a) {
+        try {
+          var api = groupsApi(); if (!api || !api.addTimelineEvent || !a || !a.gid || !a.pid) return;
+          var label = [a.analyte, a.value].filter(Boolean).join(" ");
+          api.addTimelineEvent(a.gid, a.pid, { type: "note", title: "Acknowledged — " + (label || "critical value") });
         } catch (e) {}
       });
     } catch (e) {}
