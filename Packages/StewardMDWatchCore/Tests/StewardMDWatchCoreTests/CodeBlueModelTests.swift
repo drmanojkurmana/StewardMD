@@ -113,6 +113,27 @@ final class CodeBlueModelTests: XCTestCase {
         XCTAssertEqual(model.events.filter { $0.kind == .cprStart }.count, 1)
     }
 
+    func test_timeInTarget_accumulatesByZone() {
+        let mock = MockCompressionDetector()
+        let m = CodeBlueModel(detector: mock, workout: NoopWorkoutKeepAlive(), deviceId: "watch")
+        m.startCode()
+        mock.emit(count: 10, rate: 110, counted: true)      // on target
+        for _ in 0..<10 { m.tick(1) }                        // 10 s on target
+        XCTAssertEqual(m.targetRatePct, 100)
+        mock.emit(count: 20, rate: 80, counted: true)        // too slow
+        for _ in 0..<10 { m.tick(1) }                        // 10 s off target
+        XCTAssertEqual(m.targetRatePct, 50)                  // 10 / 20 s
+    }
+
+    func test_recordShockEnergy_andRhythm() {
+        let m = CodeBlueModel()
+        m.startCode()
+        m.recordShock(energyJ: 200)
+        m.recordRhythm("VF")
+        XCTAssertTrue(m.events.contains { $0.kind == .shock && $0.label.contains("200J") })
+        XCTAssertTrue(m.events.contains { $0.kind == .rhythm && $0.label == "VF" })
+    }
+
     func test_pauseEmitsEvents() {
         let mock = MockCompressionDetector()
         let model = CodeBlueModel(detector: mock, workout: NoopWorkoutKeepAlive(), deviceId: "watch")

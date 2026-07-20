@@ -35,6 +35,25 @@ final class CodeSummaryTests: XCTestCase {
         XCTAssertTrue(s.formattedDetail().contains("Shock #1"))
     }
 
+    func test_codeSheet_listsAllEventsChronologically() {
+        let events: [CodeEvent] = [
+            ev(0, .cprStart), ev(30, .rhythm, "VF"), ev(31, .shock, "Shock #1 · 200J"),
+            ev(45, .drug, "Epinephrine"), ev(200, .rosc), ev(210, .cprEnd),
+        ]
+        let s = CodeSummary.build(events: events, durationSeconds: 210, cycles: 2,
+                                  totalCompressions: 300, averageRateCPM: 110, targetRatePct: 80)
+        let sheet = s.codeSheet(events: events, header: "2026-07-20 14:00")
+        XCTAssertTrue(sheet.contains("CODE BLUE RECORD"))
+        XCTAssertTrue(sheet.contains("Rhythm — VF"))
+        XCTAssertTrue(sheet.contains("Shock #1 · 200J"))
+        XCTAssertTrue(sheet.contains("Drug — Epinephrine"))
+        XCTAssertTrue(sheet.contains("on target ~80%"))
+        XCTAssertTrue(sheet.contains("2026-07-20 14:00"))
+        // chronological: "CPR started" (t=0) precedes "CPR ended" (t=210) in the timeline
+        XCTAssertLessThan(sheet.range(of: "CPR started")!.lowerBound,
+                          sheet.range(of: "CPR ended")!.lowerBound)
+    }
+
     func test_codeBlueState_roundTripsCodable() throws {
         let st = CodeBlueState(running: true, elapsed: 42, cycle: 1, compressionCount: 70,
                                instantaneousRateCPM: 110, averageRateCPM: 108, coachZone: .onTarget,
