@@ -178,7 +178,7 @@
       // welcome (full-screen, first launch + replay)
       ".smdt-wel{position:fixed;inset:0;z-index:100055;background:radial-gradient(120% 80% at 50% -10%,#0f766e 0%,#0b5b54 42%,#073d39 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(56px + env(safe-area-inset-top)) 28px calc(28px + env(safe-area-inset-bottom));font-family:var(--sans,'Inter',system-ui,sans-serif);animation:smdtFade .4s ease}",
       "@keyframes smdtFade{from{opacity:0}to{opacity:1}}",
-      ".smdt-wel-ic{width:72px;height:72px;border-radius:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:34px}",
+      ".smdt-wel-ic{width:72px;height:72px;border-radius:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:34px}.smdt-wel-ic img{width:46px;height:46px;object-fit:contain;display:block}",
       ".smdt-wel-brand{font:700 26px/1 'IBM Plex Mono',monospace;letter-spacing:-.5px;color:#fff;margin-top:20px}.smdt-wel-brand b{color:#8fe3d4;font-weight:700}",
       ".smdt-wel-h{font:600 28px/1.15 inherit;color:#fff;margin-top:18px;letter-spacing:-.3px}",
       ".smdt-wel-p{font:500 15px/1.55 inherit;color:rgba(255,255,255,.82);margin:12px 0 0;max-width:300px}",
@@ -654,7 +654,7 @@
     var roles = ROLES.map(function (r) { return '<button class="smdt-role" data-role="' + r.id + '">' + (r.icon ? obIco(r.icon) + " " : "") + esc(r.label) + "</button>"; }).join("");
     _welEl.innerHTML =
       '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">' +
-        '<div class="smdt-wel-ic">🧭</div>' +
+        '<div class="smdt-wel-ic"><img src="/mark-white.png" alt="StewardMD"></div>' +
         '<div class="smdt-wel-brand">Steward<b>MD</b></div>' +
         '<div class="smdt-wel-h">Welcome, Doctor.</div>' +
         '<p class="smdt-wel-p">Let’s take two minutes to get you comfortable. First — which best describes you? We’ll tailor the tour.</p>' +
