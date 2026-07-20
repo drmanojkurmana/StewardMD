@@ -146,8 +146,10 @@ export async function onRequest(context) {
 
   // Legal / support pages are PUBLIC even while the app is private — App Store & Play Store review
   // require reachable Privacy, Terms and Support URLs, and public policy links must always resolve.
+  // "delete-account" is the login-free account/data-deletion page required by Google Play & Apple —
+  // it MUST resolve for the reviewer's crawler, so it can never be hidden behind the coming-soon gate.
   // Match both the clean URL (/privacy) and the .html form (/privacy.html), with or without slashes.
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds"];
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }
