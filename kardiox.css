@@ -56,6 +56,12 @@
 }
 #kardioxRoot.kx-open { display: flex; }
 #kardioxRoot .kx-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: env(safe-area-inset-bottom, 0); }
+/* Tablet / desktop (README §Platform Adaptation): keep the mobile-first content readable by centering
+   it with gutters rather than stretching phone-width UI edge-to-edge. Full iPad two-pane split-view is
+   tracked for the on-device M6 design pass. */
+@media (min-width: 820px) {
+  #kardioxRoot .kx-scroll { padding-left: max(16px, calc((100% - 760px) / 2)); padding-right: max(16px, calc((100% - 760px) / 2)); }
+}
 
 /* Clinical numbers are always monospaced, tabular (design principle #5). */
 #kardioxRoot .kx-data { font-family: var(--kx-mono); font-variant-numeric: tabular-nums; }
