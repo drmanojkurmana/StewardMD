@@ -31,9 +31,22 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags '-O3 -std=c++17 -fexceptions -frtti'
-                // ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON makes the NDK link every .so with
-                // max-page-size=16384 (16 KB-aligned LOAD segments) — see the ndkVersion note.
-                arguments '-DANDROID_STL=c++_shared', '-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON'
+                // CMAKE_BUILD_TYPE=Release is CRITICAL: the default `assembleDebug` builds native
+                // code at -O0, and ggml/whisper.cpp at -O0 is ~50x slower (inference took >70s
+                // single-threaded on a 3s clip). Release → -O3 -DNDEBUG for the whole ggml subproject.
+                //
+                // ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON links every .so with max-page-size=16384
+                // (16 KB-aligned LOAD segments) — required for Android 15 16 KB-page devices.
+                //
+                // GGML_CPU_ARM_ARCH: with GGML_NATIVE=OFF (required for cross-compile) ggml otherwise
+                // builds baseline armv8-a with NO dot-product SIMD (much slower q5_1 matmul).
+                // armv8.2-a+dotprod+fp16 enables the int8 dot-product kernels; supported by ~all
+                // arm64 phones from ~2018 on.
+                arguments '-DCMAKE_BUILD_TYPE=Release',
+                          '-DANDROID_STL=c++_shared',
+                          '-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON',
+                          '-DGGML_NATIVE=OFF',
+                          '-DGGML_CPU_ARM_ARCH=armv8.2-a+dotprod+fp16'
             }
         }
     }
