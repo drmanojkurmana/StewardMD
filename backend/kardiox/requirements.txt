@@ -1,0 +1,10 @@
+# KardioX pipeline — API runtime (slim). ML deps live in requirements-ml.txt and are installed only
+# once real models are wired, so the base image stays small + fast to deploy.
+fastapi>=0.111,<1.0
+uvicorn[standard]>=0.30
+pydantic>=2.7,<3.0
+pydantic-settings>=2.3
+structlog>=24.1
+httpx>=0.27
+boto3>=1.34            # R2 (S3-compatible) access
+python-multipart>=0.0.9

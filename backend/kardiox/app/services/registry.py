@@ -1,0 +1,35 @@
+"""Provider registry / DI. Maps config names → provider classes and assembles the active set. Swapping
+in a real model is a one-line env change (e.g. KARDIOX_PROVIDER_RHYTHM=torchecg) — routes never change."""
+from __future__ import annotations
+
+from app.core.config import Settings
+from app.services import digitization, gemini, measurement, preprocessing, rhythm, rules, wfdb_io
+
+_PREPROC = {"none": preprocessing.NonePreprocessing, "opencv": preprocessing.OpenCVPreprocessing}
+_DIGI = {"none": digitization.NoneDigitization, "opencv": digitization.OpenCVDigitization}
+_WFDB = {"none": wfdb_io.NoneWfdb, "wfdb": wfdb_io.WfdbSignal}
+_RHY = {"none": rhythm.NoneRhythm, "torchecg": rhythm.TorchECGRhythm}
+_MEAS = {"none": measurement.NoneMeasurement, "neurokit2": measurement.NeuroKitMeasurement}
+_RULES = {"none": rules.NoneRules, "builtin": rules.BuiltinRules}
+_GEM = {"none": gemini.NoneGemini, "gemini": gemini.GeminiExplainer}
+
+
+class Providers:
+    def __init__(self, s: Settings):
+        self.preprocessing = _PREPROC.get(s.provider_preprocessing, preprocessing.NonePreprocessing)()
+        self.digitization = _DIGI.get(s.provider_digitization, digitization.NoneDigitization)()
+        self.wfdb = _WFDB.get(s.provider_wfdb, wfdb_io.NoneWfdb)()
+        self.rhythm = _RHY.get(s.provider_rhythm, rhythm.NoneRhythm)()
+        self.measurement = _MEAS.get(s.provider_measurement, measurement.NoneMeasurement)()
+        self.rules = _RULES.get(s.provider_rules, rules.NoneRules)()
+        self.gemini = _GEM.get(s.provider_gemini, gemini.NoneGemini)()
+
+    def all(self):
+        return [self.preprocessing, self.digitization, self.wfdb, self.rhythm, self.measurement, self.rules, self.gemini]
+
+    def status(self) -> list[dict]:
+        return [{"stage": p.stage, "name": p.name, "implemented": p.implemented} for p in self.all()]
+
+
+def build_providers(s: Settings) -> Providers:
+    return Providers(s)

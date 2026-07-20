@@ -1,0 +1,24 @@
+# KardioX pipeline — local + single-node deployment.
+#   docker compose up --build      → API on http://localhost:8000 (docs at /docs)
+# Scaling note: for heavy GPU inference, split into an `api` (this) + a `worker` service behind a queue
+# (Redis/Celery or a model server like Triton). The provider interfaces already isolate that boundary —
+# a worker would implement the Real* providers; the API/orchestrator contract does not change.
+services:
+  api:
+    build: .
+    image: kardiox-pipeline:latest
+    env_file: .env
+    environment:
+      KARDIOX_MODE: ${KARDIOX_MODE:-mock}
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/v1/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # redis:                      # uncomment when adding a background model-worker queue
+  #   image: redis:7-alpine
+  #   restart: unless-stopped
