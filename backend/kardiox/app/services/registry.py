@@ -6,7 +6,8 @@ from app.core.config import Settings
 from app.services import digitization, gemini, measurement, preprocessing, rhythm, rules, wfdb_io
 
 _PREPROC = {"none": preprocessing.NonePreprocessing, "opencv": preprocessing.OpenCVPreprocessing}
-_DIGI = {"none": digitization.NoneDigitization, "opencv": digitization.OpenCVDigitization}
+_DIGI = {"none": digitization.NoneDigitization, "classical": digitization.ClassicalDigitization,
+         "opencv": digitization.OpenCVDigitization}
 _WFDB = {"none": wfdb_io.NoneWfdb, "wfdb": wfdb_io.WfdbSignal}
 _RHY = {"none": rhythm.NoneRhythm, "torchecg": rhythm.TorchECGRhythm}
 _MEAS = {"none": measurement.NoneMeasurement, "neurokit2": measurement.NeuroKitMeasurement}
