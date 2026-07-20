@@ -161,7 +161,7 @@ struct CodeBlueView: View {
     }
 
     private func summaryLine(_ s: CodeSummary) -> some View {
-        Text("Duration \(s.durationLabel) · \(s.totalCompressions) comp · ~\(s.averageRateCPM)/min · \(s.shockCount) shock\(s.rosc ? " · ROSC ✓" : "")")
+        Text("Duration \(s.durationLabel) · \(s.totalCompressions) comp · ~\(s.averageRateCPM)/min · CCF ~\(s.compressionFractionPct)% · \(s.shockCount) shock\(s.rosc ? " · ROSC ✓" : "")")
             .font(.caption2).foregroundStyle(SMDPalette.text2.color)
     }
 

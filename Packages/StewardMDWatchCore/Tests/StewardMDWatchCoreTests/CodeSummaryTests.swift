@@ -28,6 +28,7 @@ final class CodeSummaryTests: XCTestCase {
         XCTAssertEqual(s.pauseCount, 2)
         XCTAssertEqual(s.totalPauseSeconds, 16, accuracy: 0.001)
         XCTAssertEqual(s.longestPauseSeconds, 12, accuracy: 0.001)
+        XCTAssertEqual(s.compressionFractionPct, 92)   // (210 − 16) / 210 ≈ 92%
         XCTAssertTrue(s.rosc)
         XCTAssertEqual(s.durationLabel, "3:30")
         XCTAssertTrue(s.disclaimer.contains("not a measure of CPR quality"))

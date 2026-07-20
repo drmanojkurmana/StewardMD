@@ -21,6 +21,16 @@ public struct CodeSummary: Codable, Sendable, Equatable {
     public static let disclaimerText =
         "Motion-based estimates — not a measure of CPR quality or depth."
 
+    /// Chest-Compression Fraction — the % of the code spent actively compressing
+    /// (not paused). A measurable *process* metric (guideline-endorsed) — NOT a depth
+    /// or CPR-quality judgement. Estimate: pauses shorter than the detector's pause
+    /// threshold count as active, so this reads slightly high for very brief hands-off.
+    public var compressionFractionPct: Int {
+        guard durationSeconds > 0 else { return 0 }
+        let active = max(0, durationSeconds - totalPauseSeconds)
+        return Int((min(1, active / durationSeconds) * 100).rounded())
+    }
+
     /// Aggregate a summary from the raw event timeline + measured compression stats.
     public static func build(events: [CodeEvent], durationSeconds: TimeInterval,
                              cycles: Int, totalCompressions: Int,
@@ -53,7 +63,8 @@ public struct CodeSummary: Codable, Sendable, Equatable {
     public func formattedDetail() -> String {
         var lines = ["Code Blue summary", "Duration \(durationLabel) · \(cycles) cycles",
                      "Compressions \(totalCompressions) (avg ~\(averageRateCPM)/min, est.)",
-                     "Pauses \(pauseCount) · total \(TimeFormat.mmss(totalPauseSeconds)) · longest \(TimeFormat.mmss(longestPauseSeconds))"]
+                     "Pauses \(pauseCount) · total \(TimeFormat.mmss(totalPauseSeconds)) · longest \(TimeFormat.mmss(longestPauseSeconds))",
+                     "Compression fraction ~\(compressionFractionPct)% of code (est.)"]
         for s in shocks { lines.append("\(TimeFormat.mmss(s.elapsed)) — \(s.label.isEmpty ? "Shock" : s.label)") }
         for d in drugs { lines.append("\(TimeFormat.mmss(d.elapsed)) — \(d.label)") }
         lines.append(rosc ? "ROSC achieved" : "No ROSC recorded")
