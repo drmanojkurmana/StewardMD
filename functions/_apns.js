@@ -16,6 +16,10 @@ export function apnsConfigured(env) {
   return !!(env.APNS_KEY_P8 && env.APNS_KEY_ID && env.APNS_TEAM_ID);
 }
 export function apnsBundleId(env) { return env.APNS_BUNDLE_ID || "in.stewardmd.app"; }
+/// The watchOS app's own APNs topic (its bundle id). Defaults to the phone
+/// bundle id + ".watchkitapp" — the watch target's id — so a watch token is
+/// pushed on its own topic, not the phone's.
+export function apnsWatchBundleId(env) { return env.APNS_WATCH_BUNDLE_ID || (apnsBundleId(env) + ".watchkitapp"); }
 function apnsHost(env) {
   return (env.APNS_ENV === "sandbox" || env.APNS_ENV === "development")
     ? "https://api.sandbox.push.apple.com" : "https://api.push.apple.com";
@@ -55,21 +59,23 @@ async function providerJwt(env) {
 
 /* Send one alert to one iOS device token.
  * Returns { ok } on success or { prune } when Apple says the token is dead. */
-export async function sendApns(env, deviceToken, msg) {
+export async function sendApns(env, deviceToken, msg, topic) {
   const jwt = await providerJwt(env);
-  const body = JSON.stringify({
+  const payload = {
     aps: {
       alert: { title: msg.title || "StewardMD", body: msg.body || "" },
       sound: "default",
       "thread-id": msg.tag || "smd",
     },
     url: msg.url || "/",
-  });
+  };
+  if (msg.route) payload.route = msg.route;   // watch deep-link target (e.g. "tasks")
+  const body = JSON.stringify(payload);
   const res = await fetch(apnsHost(env) + "/3/device/" + deviceToken, {
     method: "POST",
     headers: {
       "authorization": "bearer " + jwt,
-      "apns-topic": apnsBundleId(env),
+      "apns-topic": topic || apnsBundleId(env),
       "apns-push-type": "alert",
       "apns-priority": "10",
     },

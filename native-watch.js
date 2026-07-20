@@ -454,6 +454,26 @@
       });
     } catch (e) {}
 
+    // Watch → phone: register the watch's APNs token with the backend so the
+    // wrist can be pushed directly (platform "watch"; server topic differs).
+    try {
+      if (p && p.addListener) p.addListener("watchPushToken", function (t) {
+        try {
+          var tok = t && t.token; if (!tok) return;
+          var a2 = auth(), u2 = a2 && a2.currentUser;
+          if (!u2 || !u2.getIdToken) return;
+          u2.getIdToken().then(function (jwt) {
+            var headers = { "Content-Type": "application/json" };
+            if (jwt) headers["Authorization"] = "Bearer " + jwt;
+            return fetch(((window.SMD_API_BASE || "") + "/api/push/register-native"), {
+              method: "POST", headers: headers,
+              body: JSON.stringify({ token: tok, platform: "watch" })
+            });
+          }).catch(function () {});
+        } catch (e) {}
+      });
+    } catch (e) {}
+
     autoPublish();
   }
 

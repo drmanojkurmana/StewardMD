@@ -11,11 +11,28 @@ final class WatchAppDelegate: NSObject, WKApplicationDelegate, UNUserNotificatio
     func applicationDidFinishLaunching() {
         UNUserNotificationCenter.current().delegate = self
         LabNotifications.register()
+        // Register for APNs so criticals + task assignments can buzz the wrist
+        // directly (the phone registers this token with the backend).
+        WKApplication.shared().registerForRemoteNotifications()
+    }
+
+    func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
+        let hex = deviceToken.map { String(format: "%02x", $0) }.joined()
+        Task { @MainActor in WatchConnectivityManager.shared.sendWatchPushToken(hex) }
+    }
+
+    func didFailToRegisterForRemoteNotificationsWithError(_ error: Error) {
+        // Non-fatal: the watch still works via the phone relay + local notifications.
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse) async {
         let info = response.notification.request.content.userInfo
+        // Non-lab pushes (e.g. a task assignment) deep-link via an explicit route.
+        if let route = info["route"] as? String, NotificationParser.parse(info) == nil {
+            WatchServices.store.savePendingRoute(route)
+            return
+        }
         guard let alert = NotificationParser.parse(info) else { return }
         // Make sure the alert is in the list, then act on the chosen action.
         await ingest(alert)

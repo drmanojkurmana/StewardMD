@@ -61,6 +61,12 @@ public class WatchBridgePlugin: CAPPlugin, CAPBridgedPlugin {
         ) { [weak self] note in
             self?.notifyListeners("taskStatus", data: (note.userInfo as? [String: Any]) ?? [:])
         }
+        // Watch → phone APNs token → JS (POST /api/push/register-native, platform "watch").
+        NotificationCenter.default.addObserver(
+            forName: WatchConnectivityRelay.watchTokenReceived, object: nil, queue: .main
+        ) { [weak self] note in
+            self?.notifyListeners("watchPushToken", data: (note.userInfo as? [String: Any]) ?? [:])
+        }
         #endif
     }
 

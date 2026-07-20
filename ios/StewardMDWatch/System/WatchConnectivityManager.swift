@@ -48,6 +48,15 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
         #endif
     }
 
+    /// Relay this watch's APNs device token to the phone, which registers it with
+    /// the backend (`/api/push/register-native`, platform "watch").
+    func sendWatchPushToken(_ token: String) {
+        #if canImport(WatchConnectivity)
+        guard WCSession.isSupported() else { return }
+        WCSession.default.transferUserInfo(["kind": "watchPushToken", "token": token])
+        #endif
+    }
+
     /// Ask the paired iPhone to mint + publish a fresh ID token.
     func requestToken() {
         #if canImport(WatchConnectivity)

@@ -66,13 +66,21 @@ final class WatchConnectivityRelay: NSObject, WCSessionDelegate {
     /// so the plugin can hand it to `native-watch.js` (→ SMD_ICU_GROUPS.setTaskStatus).
     /// `transferUserInfo` (used by the watch) is delivered here, guaranteed + FIFO.
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
-        guard (userInfo["kind"] as? String) == "taskStatus" else { return }
-        NotificationCenter.default.post(name: WatchConnectivityRelay.taskStatusRequested,
-                                        object: nil, userInfo: userInfo)
+        switch userInfo["kind"] as? String {
+        case "taskStatus":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.taskStatusRequested,
+                                            object: nil, userInfo: userInfo)
+        case "watchPushToken":
+            NotificationCenter.default.post(name: WatchConnectivityRelay.watchTokenReceived,
+                                            object: nil, userInfo: userInfo)
+        default:
+            break
+        }
     }
 
     static let tokenRequested = Notification.Name("SMDWatchTokenRequested")
     static let taskStatusRequested = Notification.Name("SMDWatchTaskStatusRequested")
+    static let watchTokenReceived = Notification.Name("SMDWatchPushTokenReceived")
 }
 #else
 /// Non-iOS fallback so the package still compiles everywhere.
