@@ -323,13 +323,21 @@ const KNOWLEDGE_SYS =
 // Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
 // and the clinician explicitly taps "Research on the web". Gemini does the Google search +
 // synthesis in one grounded call; we keep the answer short to conserve tokens.
+// Web-research answers must read like a knowledgeable medical AI (OpenEvidence/ChatGPT), NOT a
+// search-results digest: fluent, complete, confident prose that happens to cite sources — never a
+// terse bullet list of snippet fragments. The UI shows the advisory/verify note, so no disclaimer.
 const RESEARCH_SYS =
-  "You are MaiK researching a clinical question that StewardMD's own knowledge base does not cover. Use web search to find current, authoritative medical/toxicology sources. Answer CONCISELY — 4-6 short bullet points covering the key management/answer only, no preamble, no headings. Be specific and bedside-useful (agents, doses, antidotes, monitoring). If evidence is weak or sources disagree, say so in one line. End with exactly: 'Web-sourced — not StewardMD-verified; confirm against local protocol.'";
-// FAST PATH prompt: the search is done externally (TinyFish), so the model only SUMMARISES the
-// provided snippets — no internal Google grounding hop. Grounded strictly on the given results
-// (must not invent beyond them), prefers authoritative/official sources, cites inline as [n].
+  "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. The clinician has asked a question StewardMD's own knowledge base does not cover — answer it directly, thoroughly and naturally, the way a sharp senior colleague would and the way a modern medical AI does, using web search to ground current, authoritative specifics. " +
+  "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
+  "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer — the interface already shows one.";
+// FAST PATH prompt: the search is done externally (TinyFish); the model writes the ANSWER from its
+// own medical knowledge and uses the provided results to ground specifics + cite [n] — it must NOT
+// merely summarise the snippets or limit itself to what they happen to mention.
 const RESEARCH_SYS_SNIPPETS =
-  "You are MaiK answering a clinical question that StewardMD's own knowledge base does not cover, using ONLY the web search results provided below. Answer CONCISELY — 4-6 short bullet points covering the key management/answer only, no preamble, no headings. Be specific and bedside-useful (agents, doses, antidotes, monitoring). Prefer authoritative/official sources (guidelines, regulators, major references) and cite them inline as [n] matching the numbered results. Do NOT state anything not supported by the results; if the results are weak, off-topic or conflict, say so in one line. End with exactly: 'Web-sourced — not StewardMD-verified; confirm against local protocol.'";
+  "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. Answer the clinician's question directly, thoroughly and naturally — the way a sharp, warm senior colleague would explain it, and the way a modern medical AI answers. " +
+  "Draw on solid, widely-accepted medical knowledge for the substance of the answer; the numbered WEB RESULTS below are recent supporting sources — use them to ground specifics (agents, doses, current guidance) and cite the relevant ones inline as [n] matching the list, but do NOT merely summarise the snippets or limit yourself to what they happen to mention. " +
+  "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
+  "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer — the interface already shows one.";
 
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
 function renderGroundedPrompt(pkg) {
@@ -568,10 +576,11 @@ export async function onRequest(context) {
   // breaker are layered in a follow-up (functions/_usage.js + KV) — these caps are the
   // no-auth floor that bounds per-request cost immediately.
   // Output cap. LATENCY: the streamed answer isn't done until generation finishes, so a shorter
-  // concise answer completes ~2x sooner (the #1 driver of MaiK's perceived speed). Default concise
-  // = 768 (~a tight 250–400-word bedside answer); the client's "Show more" + follow-up chips + the
-  // "detailed" depth cover length on demand. Override with MAIK_MAX_OUTPUT_TOKENS. Was 1400.
-  const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 768));
+  // answer completes sooner — but 768 was clipping thorough answers and made MaiK read like a terse
+  // search digest rather than a knowledgeable medical AI. Default now 1100 (~a full, well-organised
+  // bedside answer); streaming keeps perceived speed fine, and the model still adapts short answers
+  // short. "detailed" depth doubles it. Override with MAIK_MAX_OUTPUT_TOKENS. Was 768/1400.
+  const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1100));
   const MAX_OUT = (body && body.depth === "detailed") ? Math.min(2048, Math.round(OUT_BASE * 2)) : OUT_BASE;
   const MAX_IN_CHARS = Math.max(2000, (Number(env.MAIK_MAX_INPUT_TOKENS) || 4000) * 4);
 
@@ -745,7 +754,7 @@ export async function onRequest(context) {
       if (!q) return json({ error: "no question" }, 400);
       const gate = await checkQuota(env, request, "general");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
-      const RES_MAX = Math.max(256, Math.min(900, Number(env.MAIK_RESEARCH_MAX_OUTPUT) || 600));
+      const RES_MAX = Math.max(256, Math.min(1600, Number(env.MAIK_RESEARCH_MAX_OUTPUT) || 1200));
 
       let results = [];
       try { results = await tinyfishSearch(env, q); } catch (e) { results = []; }

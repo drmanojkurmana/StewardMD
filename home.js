@@ -2201,7 +2201,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     //    share one implementation). Opt-in, one call, clearly labelled non-StewardMD.
     function maikRunWeb(container, q, srcEl) {
       if (srcEl) srcEl.disabled = true;
-      container.insertAdjacentHTML("beforeend", '<div class="maik-webbusy" style="margin-top:8px;color:var(--slate-soft,#64748b)">' + svg("globe", "smd-ico") + ' Researching the web…</div>');
+      container.insertAdjacentHTML("beforeend", '<div class="maik-webbusy" style="margin-top:8px;color:var(--slate-soft,#64748b)">' + svg("spark", "smd-ico") + ' Researching…</div>');
       var busy = container.querySelector(".maik-webbusy");
       return window.SMD_AI.research(q).then(function (r) {
         if (busy) busy.remove();
@@ -2220,7 +2220,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             }).join("");
             srcHTML = '<details class="maik-src" style="margin-top:6px"><summary>' + MK.book + r.sources.length + ' web source' + (r.sources.length > 1 ? 's' : '') + '</summary><ol>' + items + '</ol></details>';
           }
-          container.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div style="font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;margin-bottom:5px">' + svg("globe", "smd-ico") + ' Web-sourced · not StewardMD-verified</div>' + bd + srcHTML + '</div>');
+          container.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div class="maik-attr" style="display:flex;align-items:center;gap:6px;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#94a3b8);margin-bottom:6px">' + svg("spark", "smd-ico") + '<span>MaiK</span><span style="opacity:.7">· web-sourced, verify independently</span></div>' + bd + srcHTML + '</div>');
         } else {
           container.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>');
         }
@@ -2384,7 +2384,7 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           // a lexically-near but different condition; the web tier researches the ACTUAL topic.
           if (tm && tm.matched === false && tm.mode !== "assume") {
             var tp = maikEscH(tm.topic || question);
-            think.innerHTML = '<div class="maik-welcome">Not in StewardMD’s knowledge base — researching the web for <b>' + tp + '</b>…</div>';
+            think.innerHTML = '<div class="maik-welcome">' + svg("spark", "smd-ico") + ' Researching <b>' + tp + '</b>…</div>';
             try { maikRunWeb(think, question); } catch (e) { think.appendChild(maikWebChipEl(question)); }
             try { scroll(); } catch (e) {}
             return;
