@@ -84,14 +84,16 @@ class EcgLibClassifier(Provider):
         cache[pathology] = model
         return model
 
-    async def classify(self, signal: dict) -> list[dict]:
+    async def probabilities(self, signal: dict) -> dict:
+        """ALL enabled-pathology probabilities (unthresholded) — for VALIDATION / threshold tuning /
+        calibration fitting. {pathology: prob in [0,1]}. Not-Ready-safe; never fabricates."""
         import asyncio
         paths = self._pathologies()
         if not paths:
             raise UpstreamUnavailable("EcgLib NOT READY: no pathologies enabled "
                                       "(KARDIOX_ECGLIB_PATHOLOGIES)", stage=self.stage)
 
-        def _run() -> list[dict]:
+        def _run() -> dict:
             try:
                 import numpy as np
                 import torch
@@ -102,15 +104,18 @@ class EcgLibClassifier(Provider):
             x = adapt_signal(signal, spec)                      # (1, 12, 5000)
             tensor = torch.from_numpy(np.asarray(x, dtype="float32"))
             cache: dict = {}
-            out: list[dict] = []
+            probs: dict = {}
             for p in paths:
                 model = self._load_model(p, cache)
                 with torch.no_grad():
                     logit = model(tensor)
-                prob = float(torch.sigmoid(logit).flatten()[0].item())
-                if prob >= _POSITIVE_THRESHOLD:
-                    out.append({"source": "ecglib", "pathology": p, "label": label_for(p),
-                                "confidence": round(prob, 3)})
-            return out
+                probs[p] = round(float(torch.sigmoid(logit).flatten()[0].item()), 4)
+            return probs
 
         return await asyncio.to_thread(_run)
+
+    async def classify(self, signal: dict) -> list[dict]:
+        """Positive findings (prob >= threshold) as fusion candidates."""
+        probs = await self.probabilities(signal)
+        return [{"source": "ecglib", "pathology": p, "label": label_for(p), "confidence": prob}
+                for p, prob in probs.items() if prob >= _POSITIVE_THRESHOLD]

@@ -158,3 +158,46 @@ class ConfidenceCalibrator:
         Boundary:        bins are not sourced from config; supply them explicitly once measured.
         """
         return cls(temperature=getattr(settings, "calibration_temperature", 1.0))
+
+
+# ── Offline fitting utilities (run on a HELD-OUT labelled validation set; not in the hot path) ─────
+def expected_calibration_error(probs, labels, n_bins: int = 10) -> float:
+    """ECE: mean |accuracy - confidence| across equal-width probability bins. 0 = perfectly calibrated."""
+    pairs = [(_coerce_prob(p), int(y)) for p, y in zip(probs, labels) if int(y) in (0, 1)]
+    if not pairs:
+        return 0.0
+    n = len(pairs)
+    ece = 0.0
+    for b in range(n_bins):
+        lo, hi = b / n_bins, (b + 1) / n_bins
+        grp = [(p, y) for p, y in pairs if (lo < p <= hi) or (b == 0 and p <= hi)]
+        if not grp:
+            continue
+        conf = sum(p for p, _ in grp) / len(grp)
+        acc = sum(y for _, y in grp) / len(grp)
+        ece += (len(grp) / n) * abs(acc - conf)
+    return round(ece, 4)
+
+
+def fit_temperature(probs, labels, grid: list[float] | None = None) -> float:
+    """Fit a scalar temperature by minimizing binary cross-entropy on a HELD-OUT set (deterministic grid
+    search — no deps). Returns T > 0 to pass to ConfidenceCalibrator / KARDIOX_CALIBRATION_TEMPERATURE.
+
+    Honest: with <2 samples or a single class (no signal to fit), returns 1.0 (identity) rather than a
+    spurious temperature. Never fabricates calibration.
+    """
+    pairs = [(_coerce_prob(p), int(y)) for p, y in zip(probs, labels) if int(y) in (0, 1)]
+    if len(pairs) < 2 or len({y for _, y in pairs}) < 2:
+        return 1.0
+    logits = [(math.log(p / (1.0 - p)), y) for p, y in pairs]
+    if grid is None:
+        grid = [round(0.5 + 0.05 * i, 2) for i in range(91)]   # 0.50 .. 5.00
+
+    def bce(t: float) -> float:
+        s = 0.0
+        for lg, y in logits:
+            q = _clamp_open(_sigmoid(lg / t))
+            s += -(y * math.log(q) + (1 - y) * math.log(1.0 - q))
+        return s / len(logits)
+
+    return min(grid, key=bce)

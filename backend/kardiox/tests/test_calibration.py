@@ -93,3 +93,25 @@ def test_from_config_reads_temperature():
     # missing attribute -> honest identity default
     c2 = ConfidenceCalibrator.from_config(SimpleNamespace())
     assert c2.temperature == 1.0 and c2.is_calibrated is False
+
+
+# ── offline fitting utilities (Validation Runbook §4) ────────────────────────────────────────────
+
+def test_fit_temperature_tempers_overconfidence():
+    from app.services.calibration import fit_temperature
+    # confident (0.97/0.03) but only ~50% correct -> temperature should temper (T > 1)
+    probs = [0.97, 0.03] * 50
+    labels = ([1, 0] * 25) + ([0, 1] * 25)
+    assert fit_temperature(probs, labels) > 1.0
+
+
+def test_fit_temperature_identity_on_single_class():
+    from app.services.calibration import fit_temperature
+    assert fit_temperature([0.6, 0.7, 0.8], [1, 1, 1]) == 1.0   # no signal -> honest identity
+    assert fit_temperature([], []) == 1.0
+
+
+def test_expected_calibration_error():
+    from app.services.calibration import expected_calibration_error
+    assert expected_calibration_error([0.0, 1.0] * 20, [0, 1] * 20) == 0.0        # perfectly calibrated
+    assert expected_calibration_error([0.99] * 10, [0] * 5 + [1] * 5) > 0.4       # over-confident
