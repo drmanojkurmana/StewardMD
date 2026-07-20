@@ -84,6 +84,7 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
     // Device-log evidence for the on-device AR bring-up (independent of the WebView/HUD, which runs
     // aggressively-cached JS). print() reaches `devicectl ... --console`; NSLog reaches the unified log.
     private func dbg(_ s: String) { print(s); NSLog("%@", s) }
+    private func fmtP(_ p: CGPoint) -> String { "(\(Int(p.x)),\(Int(p.y)))" }
 
     // ---- Runtime capability detection (no manual configuration) ----
     @objc func capabilities(_ call: CAPPluginCall) {
@@ -503,23 +504,24 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             do { try handler.perform([req]) } catch { return }
             guard let face = (req.results as? [VNFaceObservation])?.first,
                   let oriented = self.eyePoint(face) else { return }
-            // Vision returns points in the ORIENTED (portrait, bottom-left) space. Convert to the raw
-            // capturedImage normalized space (top-left) that ARKit's displayTransform expects. For
-            // .right orientation the upright view is the raw image rotated 90° CW: raw.x = 1 - oy,
-            // raw.y = 1 - ox (derived; verified/tuned against the logged view point on device).
-            let rawN = CGPoint(x: 1 - oriented.y, y: 1 - oriented.x)
-            let viewN = rawN.applying(dt)
-            let viewPoint = CGPoint(x: viewN.x * viewSize.width, y: viewN.y * viewSize.height)
+            // Vision returns points in the ORIENTED (portrait, bottom-left) space. The mapping to the
+            // raw capturedImage normalized space (top-left, which ARKit's displayTransform expects)
+            // depends on the orientation convention — CALIBRATION MODE: compute all four candidates and
+            // log them so one on-device capture (face held centred) reveals which lands on the eye.
+            func vp(_ raw: CGPoint) -> CGPoint { let n = raw.applying(dt); return CGPoint(x: n.x * viewSize.width, y: n.y * viewSize.height) }
+            let ox = oriented.x, oy = oriented.y
+            let candA = vp(CGPoint(x: 1 - oy, y: 1 - ox))
+            let candB = vp(CGPoint(x: ox, y: oy))
+            let candC = vp(CGPoint(x: oy, y: ox))
+            let candD = vp(CGPoint(x: 1 - ox, y: 1 - oy))
+            let viewPoint = candA     // current pick; the log tells us if another candidate is correct
+            self.dbg("FUNDX_DBG eyeCAL orient=(\(String(format: "%.3f", ox)),\(String(format: "%.3f", oy))) A=\(fmtP(candA)) B=\(fmtP(candB)) C=\(fmtP(candC)) D=\(fmtP(candD)) view=\(Int(viewSize.width))x\(Int(viewSize.height))")
             DispatchQueue.main.async {
                 let hits = scn.hitTest(viewPoint, types: [.featurePoint])
                 guard let h = hits.first else { return }
                 let w = h.worldTransform.columns.3
                 self.eyeTargetWorld = simd_make_float3(w.x, w.y, w.z)
                 self.eyeTargetGrace = 45     // hold the lock ~45 frames past the last detection
-                if !self.loggedEyeLock {
-                    self.loggedEyeLock = true
-                    self.dbg("FUNDX_DBG eye LOCKED (Vision) viewPoint=\(viewPoint) of \(viewSize)")
-                }
             }
         }
     }
