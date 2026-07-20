@@ -599,6 +599,14 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
       <div class="mode-card-desc">Full clinical form — all findings, vitals, labs, and risk factors visible at once. Best for complex cases and experienced users.</div>
     </div>
 
+    <button type="button" class="mode-card hidden" id="codeBlueCard"
+            style="border:1px solid rgba(220,38,38,.4);background:linear-gradient(180deg,rgba(220,38,38,.10),rgba(0,0,0,0));text-align:left;width:100%"
+            aria-label="Open Code Blue Command Center">
+      <div class="mode-card-icon">🫀</div>
+      <div class="mode-card-title">Code Blue</div>
+      <div class="mode-card-desc">Live CPR command center — compressions, rate, shocks, drugs, and ROSC from your Apple Watch. On-device only.</div>
+    </button>
+
     <button type="button" id="modeSkip" aria-label="Skip and continue"
             style="margin-top:16px;background:none;border:none;color:var(--teal,#0a9396);font:600 13px system-ui,sans-serif;cursor:pointer;text-decoration:underline;padding:6px"
             onclick="var c=document.getElementById('modeAdvancedCard'); if(c) c.click();">Skip for now → (you can switch anytime from the header)</button>
