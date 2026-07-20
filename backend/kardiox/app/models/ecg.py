@@ -89,6 +89,7 @@ class ECGAnalysis(BaseModel):
     digitizerConsensus: dict | None = None  # multi-digitizer agreement/confidence (ConsensusDigitization)
     signalQuality: float | None = None      # 0..1 signal-usability score
     consensus: dict | None = None           # evidence-fusion / consensus-engine result
+    differential: dict | None = None        # ranked differential diagnoses + uncertainty + next-step
     explanations: list[dict] = Field(default_factory=list)  # per-finding explainability
     calibrated: bool | None = None          # was the confidence calibrated (vs identity)
     # Provenance / audit (per README regulatory posture: model + content versions per analysis).

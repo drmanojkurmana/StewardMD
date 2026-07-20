@@ -253,16 +253,19 @@ def _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
     consensus = None
     if settings.enable_consensus_fusion:
         try:
+            from app.services.differential import source_weight
             from app.services.fusion import fuse
             candidates = []
             if rhythm.get("method") == "torchecg" and rhythm.get("label"):
                 candidates.append({"source": "torchecg", "label": rhythm["label"],
-                                   "confidence": float(rhythm.get("confidence") or 0.5), "weight": 1.0})
+                                   "confidence": float(rhythm.get("confidence") or 0.5),
+                                   "weight": source_weight("torchecg")})
             for c in (specialist_candidates or []):   # MI/rare/conduction/morphology/beat model outputs
                 if c.get("label"):
-                    candidates.append({"source": c.get("source", c.get("task", "specialist")),
-                                       "label": c["label"], "confidence": float(c.get("confidence") or 0.5),
-                                       "weight": 1.0})
+                    src = c.get("source", c.get("task", "specialist"))
+                    candidates.append({"source": src, "label": c["label"],
+                                       "confidence": float(c.get("confidence") or 0.5),
+                                       "weight": source_weight(src)})
             consensus = fuse(candidates, validated, signal_quality, meas_consistency)
             if consensus.get("findings"):
                 confidence = float(consensus.get("overallConfidence", confidence))
@@ -291,6 +294,22 @@ def _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
         except Exception as e:  # noqa: BLE001
             log.info("explain.skipped", reason=type(e).__name__)
             explanations = []
+
+    # ── Differential Diagnosis Engine — ranked differentials + uncertainty + next-step. Fail-safe.
+    differential = None
+    try:
+        from app.services.differential import build_differential
+        differential = build_differential(validated, consensus, meas, st, quality_report, signal_quality,
+                                          morphology=morph, rhythm=rhythm, explanations=explanations)
+        if differential and differential.get("primary"):
+            # the ranked differentials become the analysis's top-N (label + confidence)
+            differentials = [Differential(label=r["label"], probability=float(r.get("confidence", 0.0)))
+                             for r in differential.get("differentials", [])]
+            verdict = differential["primary"]["label"] or verdict
+            severity = differential["primary"].get("severity", severity)
+            what_to_verify = differential.get("nextStep") or what_to_verify
+    except Exception as e:  # noqa: BLE001 — the DDx layer must never break the pipeline
+        log.info("differential.skipped", reason=type(e).__name__)
 
     # findings ← every matched rule criterion (explainability)
     findings = []
@@ -338,6 +357,7 @@ def _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
         digitizerConsensus=digitizer_consensus,
         signalQuality=signal_quality,
         consensus=consensus,
+        differential=differential,
         explanations=explanations,
         calibrated=calibrated,
         modelVersions={"rules": providers.rules.name, "rhythm": providers.rhythm.name,
