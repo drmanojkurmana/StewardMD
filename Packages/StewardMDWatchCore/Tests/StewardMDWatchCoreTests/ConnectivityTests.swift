@@ -96,4 +96,20 @@ final class AppGroupStoreTests: XCTestCase {
         XCTAssertTrue(store.loadCriticals().isEmpty)
         UserDefaults(suiteName: suite)?.removePersistentDomain(forName: suite)
     }
+
+    func testTasksRoundTrips() {
+        let suite = "test.smd.appgroup.\(UUID().uuidString)"
+        let store = AppGroupStore(suite: suite)
+        XCTAssertTrue(store.loadTasks().isEmpty)
+        let list = [
+            WatchTask(id: "t1", groupId: "g", patientId: "p", patientLabel: "Bed 1",
+                      text: "ABG", priority: "high", status: "pending", assignedByName: "Head",
+                      assignedToUid: "u2", dueAt: nil, ts: 1)
+        ]
+        store.saveTasks(list)
+        XCTAssertEqual(store.loadTasks().map(\.id), ["t1"])
+        store.clear()
+        XCTAssertTrue(store.loadTasks().isEmpty)
+        UserDefaults(suiteName: suite)?.removePersistentDomain(forName: suite)
+    }
 }

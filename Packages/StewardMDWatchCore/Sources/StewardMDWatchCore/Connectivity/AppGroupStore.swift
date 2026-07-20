@@ -12,6 +12,7 @@ public struct AppGroupStore: Sendable {
     private let glanceKey = "smd.glance"
     private let watchlistKey = "smd.watchlist"
     private let criticalsKey = "smd.criticals"
+    private let tasksKey = "smd.tasks"
     private let notifPrefsKey = "smd.notifPrefs"
     private let pendingRouteKey = "smd.pendingRoute"
 
@@ -73,6 +74,17 @@ public struct AppGroupStore: Sendable {
         return (try? JSONDecoder().decode([LabAlert].self, from: data)) ?? []
     }
 
+    /// Round tasks relayed from the shared unit (persisted like the watchlist so
+    /// the Tasks screen survives relaunch + patient-less syncs).
+    public func saveTasks(_ tasks: [WatchTask]) {
+        guard let d = defaults, let data = try? JSONEncoder().encode(tasks) else { return }
+        d.set(data, forKey: tasksKey)
+    }
+    public func loadTasks() -> [WatchTask] {
+        guard let d = defaults, let data = d.data(forKey: tasksKey) else { return [] }
+        return (try? JSONDecoder().decode([WatchTask].self, from: data)) ?? []
+    }
+
     /// Notification-tier preferences relayed from the iPhone (critical/warning/info).
     public func saveNotifPrefs(_ prefs: [String: Bool]) {
         guard let d = defaults, let data = try? JSONEncoder().encode(prefs) else { return }
@@ -113,6 +125,7 @@ public struct AppGroupStore: Sendable {
         defaults?.removeObject(forKey: glanceKey)
         defaults?.removeObject(forKey: watchlistKey)
         defaults?.removeObject(forKey: criticalsKey)
+        defaults?.removeObject(forKey: tasksKey)
         defaults?.removeObject(forKey: notifPrefsKey)
         defaults?.removeObject(forKey: pendingRouteKey)
     }
