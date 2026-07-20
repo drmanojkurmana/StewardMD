@@ -54,6 +54,11 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
     private var guidePhase = "searching"     // searching | aligning | locked (driven by the JS engine)
     private var guideAligned = false
     private var webViewOpaque = true         // mirror of webView.isOpaque, emitted for the on-device HUD diagnostic
+    private var loggedNormal = false         // log tracking=NORMAL once per session (device-log evidence)
+
+    // Device-log evidence for the on-device AR bring-up (independent of the WebView/HUD, which runs
+    // aggressively-cached JS). print() reaches `devicectl ... --console`; NSLog reaches the unified log.
+    private func dbg(_ s: String) { print(s); NSLog("%@", s) }
 
     // ---- Runtime capability detection (no manual configuration) ----
     @objc func capabilities(_ call: CAPPluginCall) {
@@ -88,16 +93,20 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             call.resolve(["started": false, "reason": "ARKit not supported"]); return
         }
         let spatial = call.getBool("spatialAr", false)
-        let gpuPreview = call.getBool("gpuPreview", false) || spatial   // spatial AR needs the ARSCNView camera background
+        let jsGpu = call.getBool("gpuPreview", false)
+        // ROOT-CAUSE FIX: whether the ARSCNView camera preview + 3D guide engage must NOT depend on a
+        // JS flag — the WebView serves aggressively-cached/stale JS, so that flag arrives inconsistently
+        // (camera live one launch, black the next). On DEBUG (Xcode/dev) builds we ALWAYS bring up the
+        // preview + world-anchored guide from native, so a plain rebuild reliably shows them with no JS
+        // dependency. Release/App-Store builds still require the explicit gpuPreview/spatialAr flag.
+        let gpuPreview = jsGpu || spatial || Self.isDebugBuild()
         streamImage = call.getBool("streamImage", true)
         analyzeEvery = max(1, call.getInt("analyzeEvery", 6))
-        // Engage the world-anchored guide whenever the ARSCNView camera preview is up (gpuPreview),
-        // NOT only when the JS sends the newer spatialAr flag. The shipped/cached JS already turns
-        // GPU preview on, so the 3D guide comes alive on a native rebuild without depending on any
-        // JS update reaching the WebView (the WebView aggressively caches JS; native updates reliably).
-        self.spatialMode = gpuPreview
+        self.spatialMode = false          // set true only once the ARSCNView is actually built (below)
         self.eyeAnchor = nil
         self.guidePhase = "searching"; self.guideAligned = false
+        self.loggedNormal = false
+        dbg("FUNDX_DBG start jsGpu=\(jsGpu) spatial=\(spatial) debug=\(Self.isDebugBuild()) -> gpuPreview=\(gpuPreview)")
         DispatchQueue.main.async {
             let config = ARWorldTrackingConfiguration()
             if ARWorldTrackingConfiguration.supportsFrameSemantics(.smoothedSceneDepth) {
@@ -109,6 +118,7 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             self.encBusy = false
 
             if gpuPreview, let webView = self.bridge?.webView, let parent = webView.superview {
+                self.dbg("FUNDX_DBG gpu-branch OK — building ARSCNView (parent bounds=\(parent.bounds))")
                 // GPU preview: ARSCNView renders the camera background behind the transparent WebView.
                 let scn = ARSCNView(frame: parent.bounds)
                 scn.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -117,16 +127,23 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
                 scn.automaticallyUpdatesLighting = true
                 self.arView = scn
                 self.arSession = scn.session
+                self.spatialMode = true             // ARSCNView is up → the world-anchored guide can render
                 // Transparent WebView so the camera behind shows through (html/body are made transparent
                 // by the shared JS/CSS — html.fundx-gpu / body.fundx-gpu).
                 self.applyTransparent(webView, scn, parent)
                 scn.session.run(config, options: [.resetTracking, .removeExistingAnchors])
                 self.gpuMode = true
-                // Re-assert transparency after Capacitor/layout settle — the WebView opacity can get
-                // reset, hiding the ARSCNView behind an opaque WebView (the intermittent black camera).
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { self.applyTransparent(webView, scn, parent) }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { self.applyTransparent(webView, scn, parent) }
+                // Re-assert transparency repeatedly over the first few seconds. Capacitor/layout can
+                // reset the WebView opacity AFTER we clear it, hiding the ARSCNView behind an opaque
+                // WebView (the intermittent black camera). A single delayed re-assert lost this race, so
+                // hammer it on a short schedule until layout settles.
+                for t in [0.1, 0.3, 0.6, 1.0, 1.5, 2.2, 3.0] {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + t) { [weak self] in
+                        self?.applyTransparent(webView, scn, parent)
+                    }
+                }
             } else {
+                self.dbg("FUNDX_DBG else-branch — PLAIN ARSession (gpuPreview=\(gpuPreview) webView=\(self.bridge?.webView != nil)) — NO camera preview, NO guide")
                 let session = ARSession()
                 session.delegate = self
                 session.run(config, options: [.resetTracking, .removeExistingAnchors])
@@ -211,6 +228,10 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         // Phase-1 test window: drop the anchor on ANY tracked surface (~5 cm–2.5 m) so the guide is
         // easy to see + verify for world-locking. (The clinical range tightens to the working distance
         // once the corridor + lens fusion land.)
+        if case .normal = frame.camera.trackingState, !loggedNormal {
+            loggedNormal = true
+            dbg("FUNDX_DBG tracking=NORMAL spatialMode=\(spatialMode) gpuMode=\(gpuMode) opaque=\(webViewOpaque) frame=\(frameCount)")
+        }
         if spatialMode, eyeAnchor == nil, case .normal = frame.camera.trackingState {
             // Drop the anchor on the optical axis. Use the metric depth if it's in a sane range,
             // else fall back to 0.4 m so the guide reliably appears even without a LiDAR return.
@@ -225,6 +246,7 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             self.eyeAnchor = a
             self.arSession?.add(anchor: a)
             data["anchorPlaced"] = true
+            dbg("FUNDX_DBG anchor PLACED at \(meters)m opaque=\(webViewOpaque) scnUp=\(arView != nil)")
         }
         if eyeAnchor != nil { data["anchor"] = true }
         data["opaque"] = self.webViewOpaque       // HUD diagnostic: WebView transparent (camera can show through)?
@@ -324,6 +346,7 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
     // fixed in 3D space as the phone moves — the clinician moves back onto the optical axis toward it.
     public func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard spatialMode, anchor.name == "fundxEye" else { return }
+        dbg("FUNDX_DBG renderer didAdd fundxEye — 3D guide attached to world anchor")
         let guide = buildEyeGuide()
         guide.name = guideRootName
         node.addChildNode(guide)
