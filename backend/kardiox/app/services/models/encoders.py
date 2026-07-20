@@ -60,13 +60,17 @@ class FoundationEncoder:
 
     def validate_config(self) -> list[str]:
         import os
+        issues = []
         p = self.path()
         if not p:
-            return [f"encoder '{self.name}' has no checkpoint (KARDIOX_ENCODERS_JSON[{self.name}].path); "
-                    "export it per docs/ENCODERS.md — KardioX ships no weights"]
-        if "://" not in p and not os.path.exists(p):
-            return [f"encoder '{self.name}' checkpoint not found: {p}"]
-        return []
+            issues.append(f"encoder '{self.name}' has no checkpoint (KARDIOX_ENCODERS_JSON[{self.name}].path); "
+                          "export it per docs/ENCODERS.md — KardioX ships no weights")
+        elif "://" not in p and not os.path.exists(p):
+            issues.append(f"encoder '{self.name}' checkpoint not found: {p}")
+        if not self.input_spec:
+            # without an input contract encode() cannot run — report Not-Ready honestly (matches encode()).
+            issues.append(f"encoder '{self.name}' has no input spec configured")
+        return issues
 
     # -- inference ---------------------------------------------------------------------------------
     def encode(self, signal: dict):

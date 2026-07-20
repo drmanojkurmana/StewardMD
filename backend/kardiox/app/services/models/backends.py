@@ -39,8 +39,8 @@ class TorchScriptBackend(ModelBackend):
         return softmax(self.raw(x_np))
 
     def raw(self, x_np):
+        m = self.load()          # load() imports torch under a guard -> UpstreamUnavailable if absent
         import torch
-        m = self.load()
         with torch.no_grad():
             out = m(torch.from_numpy(x_np))
         return out.detach().cpu().numpy()
@@ -104,8 +104,8 @@ class StateDictBackend(ModelBackend):
         return softmax(self.raw(x_np))
 
     def raw(self, x_np):
+        m = self.load()          # load() imports torch under a guard -> UpstreamUnavailable if absent
         import torch
-        m = self.load()
         with torch.no_grad():
             out = m(torch.from_numpy(x_np))
         return out.detach().cpu().numpy()

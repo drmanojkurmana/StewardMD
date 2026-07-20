@@ -50,11 +50,15 @@ def test_torchscript_backend_no_checkpoint_raises():
 
 
 class _Stub:
-    def __init__(self, probs):
+    def __init__(self, probs, emb=None):
         self._p = np.asarray(probs, dtype="float64")
+        self._emb = np.asarray(emb if emb is not None else probs, dtype="float64")
 
     def infer(self, x_np):
         return self._p
+
+    def raw(self, x_np):
+        return self._emb
 
 
 def test_ensemble_averages_and_predicts():
@@ -68,3 +72,10 @@ def test_ensemble_averages_and_predicts():
 def test_ensemble_empty_raises():
     with pytest.raises(UpstreamUnavailable):
         EnsembleBackend([]).infer(np.zeros((1, 2, 10)))
+
+
+def test_ensemble_raw_concatenates_embeddings():
+    # encoders: raw() CONCATENATES member embeddings (not averaged) — enables multiple encoders at once
+    ens = EnsembleBackend([_Stub([0.0], emb=[1.0, 2.0]), _Stub([0.0], emb=[3.0, 4.0, 5.0])])
+    cat = ens.raw(np.zeros((1, 2, 10)))
+    assert list(cat) == [1.0, 2.0, 3.0, 4.0, 5.0]
