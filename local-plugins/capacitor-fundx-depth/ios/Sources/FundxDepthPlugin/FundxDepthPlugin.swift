@@ -1,6 +1,7 @@
 import Foundation
 import Capacitor
 import ARKit
+import Vision
 import SceneKit
 import CoreImage
 import UIKit
@@ -69,6 +70,17 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
     private var lastAlignState = -1          // 0=far-off 1=near-but-off 2=aligned; recolour only on change
     private var loggedAligned = false        // log the first time full alignment is reached (evidence)
 
+    // ---- Phase 3: lock the corridor onto the real eye (native Vision face landmarks) ----
+    // Detection runs on the raw ARKit frame off the session/render path; when a face/eye is found we
+    // raycast it into the world and re-anchor the corridor there so it FOLLOWS the eye. No detection
+    // just leaves the centre-seeded fallback (Phase 2 behaviour) untouched. All ADDITIVE.
+    private let visionQueue = DispatchQueue(label: "in.stewardmd.fundx.vision", qos: .userInitiated)
+    private var visionBusy = false
+    private var eyeTargetWorld: simd_float3? // last detected eye position in world space
+    private var eyeTargetGrace = 0           // frames the detected target stays valid after a detection
+    private var loggedEyeLock = false
+    private var cachedViewSize = CGSize.zero // ARSCNView bounds, cached on the main thread for off-main use
+
     // Device-log evidence for the on-device AR bring-up (independent of the WebView/HUD, which runs
     // aggressively-cached JS). print() reaches `devicectl ... --console`; NSLog reaches the unified log.
     private func dbg(_ s: String) { print(s); NSLog("%@", s) }
@@ -119,6 +131,7 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         self.eyeAnchor = nil
         self.guidePhase = "searching"; self.guideAligned = false
         self.loggedNormal = false
+        self.eyeTargetWorld = nil; self.eyeTargetGrace = 0; self.loggedEyeLock = false; self.visionBusy = false
         dbg("FUNDX_DBG start jsGpu=\(jsGpu) spatial=\(spatial) debug=\(Self.isDebugBuild()) -> gpuPreview=\(gpuPreview)")
         DispatchQueue.main.async {
             let config = ARWorldTrackingConfiguration()
@@ -190,6 +203,7 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             self.gpuMode = false
             self.spatialMode = false
             self.eyeAnchor = nil
+            self.eyeTargetWorld = nil; self.eyeTargetGrace = 0; self.visionBusy = false
             self.motion.stopDeviceMotionUpdates()
             call.resolve()
         }
@@ -245,46 +259,48 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             loggedNormal = true
             dbg("FUNDX_DBG tracking=NORMAL spatialMode=\(spatialMode) gpuMode=\(gpuMode) opaque=\(webViewOpaque) frame=\(frameCount)")
         }
-        if spatialMode, eyeAnchor == nil, case .normal = frame.camera.trackingState {
-            // Drop the anchor on the optical axis. Use the metric depth if it's in a sane range,
-            // else fall back to 0.4 m so the guide reliably appears even without a LiDAR return.
-            let d = data["distanceMeters"] as? Double
-            let meters = (d != nil && d! > 0.05 && d! < 5.0) ? d! : 0.4
-            let fwd = simd_make_float3(-cx.columns.2.x, -cx.columns.2.y, -cx.columns.2.z)   // camera looks down -Z
+        // ---- Anchor management (Phase 3: prefer the detected eye; centre-seed as fallback) ----
+        if spatialMode, case .normal = frame.camera.trackingState {
             let camPos = simd_make_float3(cx.columns.3.x, cx.columns.3.y, cx.columns.3.z)
-            let eyePos = camPos + fwd * Float(meters)
-            // Adopt the camera's ORIENTATION at placement so the anchor's local +Z runs eye -> camera
-            // along the true optical axis (Phase 2 corridor axis); translation is the eye position.
-            var eyeXform = cx
-            eyeXform.columns.3 = simd_make_float4(eyePos.x, eyePos.y, eyePos.z, 1)
-            let a = ARAnchor(name: "fundxEye", transform: eyeXform)
-            self.eyeAnchor = a
-            self.arSession?.add(anchor: a)
-            self.lastAlignState = -1
-            self.loggedAligned = false
-            data["anchorPlaced"] = true
-            dbg("FUNDX_DBG anchor PLACED at \(meters)m opaque=\(webViewOpaque) scnUp=\(arView != nil)")
-        }
-        // Re-centre: if the clinician has swung well off the corridor (lost it) or moved past/too close
-        // to the eye, drop the anchor so it re-places centred on the next tracked frame — the guide
-        // reappears in view instead of stranded off-screen. Fine alignment stays world-locked (the
-        // thresholds are deliberately loose so normal steering never triggers a re-place).
-        if spatialMode, let a = eyeAnchor, case .normal = frame.camera.trackingState {
-            let A = a.transform
-            let ap = simd_make_float3(A.columns.3.x, A.columns.3.y, A.columns.3.z)
-            let ax = simd_normalize(simd_make_float3(A.columns.2.x, A.columns.2.y, A.columns.2.z))
-            let vv = simd_make_float3(cx.columns.3.x, cx.columns.3.y, cx.columns.3.z) - ap
-            let al = simd_dot(vv, ax)
-            let lat = simd_length(vv - al * ax)
-            if lat > 0.30 || al < 0.10 {
-                self.arSession?.remove(anchor: a)
-                self.eyeAnchor = nil
-                self.corridorRoot = nil
-                self.lastAlignState = -1
-                self.loggedAligned = false
+            if eyeTargetGrace > 0, let eyePos = eyeTargetWorld {
+                // A real eye was just detected: lock the corridor onto it and follow it as it moves
+                // (re-anchor only when it shifts >4 cm, so a still eye stays rock-steady).
+                var moved = true
+                if let a = eyeAnchor {
+                    let ap = simd_make_float3(a.transform.columns.3.x, a.transform.columns.3.y, a.transform.columns.3.z)
+                    moved = simd_distance(ap, eyePos) > 0.04
+                }
+                if moved { placeEyeAnchor(at: eyePos, orientation: cx); data["anchorPlaced"] = true }
+            } else if eyeAnchor == nil {
+                // No eye detected yet: seed the guide at the centre depth so it is visible + testable.
+                let d = data["distanceMeters"] as? Double
+                let meters = (d != nil && d! > 0.05 && d! < 5.0) ? d! : 0.4
+                let fwd = simd_make_float3(-cx.columns.2.x, -cx.columns.2.y, -cx.columns.2.z)   // camera looks down -Z
+                placeEyeAnchor(at: camPos + fwd * Float(meters), orientation: cx)
+                data["anchorPlaced"] = true
+                dbg("FUNDX_DBG anchor SEEDED at centre \(meters)m opaque=\(webViewOpaque) scnUp=\(arView != nil)")
+            } else if let a = eyeAnchor {
+                // Holding a centre-seeded anchor with no eye: re-centre if the clinician swings well off.
+                let A = a.transform
+                let ap = simd_make_float3(A.columns.3.x, A.columns.3.y, A.columns.3.z)
+                let ax = simd_normalize(simd_make_float3(A.columns.2.x, A.columns.2.y, A.columns.2.z))
+                let vv = camPos - ap
+                let al = simd_dot(vv, ax)
+                let lat = simd_length(vv - al * ax)
+                if lat > 0.30 || al < 0.10 {
+                    self.arSession?.remove(anchor: a); self.eyeAnchor = nil
+                    self.corridorRoot = nil; self.lastAlignState = -1; self.loggedAligned = false
+                }
             }
+            eyeTargetGrace = max(0, eyeTargetGrace - 1)
+        }
+        // Throttled native eye detection on the raw frame (off the session/render path).
+        if spatialMode, gpuMode, !visionBusy, frameCount % 5 == 0, let scn = arView, cachedViewSize.width > 1 {
+            visionBusy = true
+            detectEye(frame, cachedViewSize, scn)
         }
         if eyeAnchor != nil { data["anchor"] = true }
+        if eyeTargetGrace > 0 { data["eyeLocked"] = true }
         data["opaque"] = self.webViewOpaque       // HUD diagnostic: WebView transparent (camera can show through)?
         data["scnUp"] = (self.arView != nil)      // HUD diagnostic: ARSCNView present
 
@@ -374,6 +390,7 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         scn.frame = parent.bounds
         parent.insertSubview(scn, belowSubview: webView)
         self.webViewOpaque = false
+        self.cachedViewSize = parent.bounds.size    // cached on main for the off-main Vision mapping
     }
 
     // MARK: - Spatial-AR guide (ARSCNViewDelegate)
@@ -453,6 +470,77 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
             root.addChildNode(n)
         }
         return root
+    }
+
+    // (Re)place the world anchor at `world` with the camera's orientation (so the corridor's local +Z
+    // stays the eye->camera optical axis). Removing + re-adding is how we MOVE the guide to follow the
+    // detected eye (ARAnchor transforms are immutable). Cheap — the corridor graph is a handful of nodes.
+    private func placeEyeAnchor(at world: simd_float3, orientation cx: matrix_float4x4) {
+        if let old = eyeAnchor { arSession?.remove(anchor: old) }
+        var x = cx
+        x.columns.3 = simd_make_float4(world.x, world.y, world.z, 1)
+        let a = ARAnchor(name: "fundxEye", transform: x)
+        eyeAnchor = a
+        corridorRoot = nil
+        lastAlignState = -1
+        loggedAligned = false
+        arSession?.add(anchor: a)
+    }
+
+    // Native eye localisation: run Vision face landmarks on the raw ARKit frame, map the eye point
+    // into the view, and raycast it to a world position that the anchor tracks. Runs on a background
+    // queue so it never stalls the camera. Capturing `frame` in the closure keeps its capturedImage
+    // valid for Vision. Coordinate mapping (Vision-oriented -> raw-image -> view) is the part most
+    // likely to need on-device tuning; FUNDX_DBG logs the computed view point so it can be corrected.
+    private func detectEye(_ frame: ARFrame, _ viewSize: CGSize, _ scn: ARSCNView) {
+        let dt = frame.displayTransform(for: .portrait, viewportSize: viewSize)
+        visionQueue.async { [weak self] in
+            guard let self = self else { return }
+            defer { self.visionBusy = false }
+            let pb = frame.capturedImage    // referencing `frame` retains the ARFrame -> buffer valid
+            let req = VNDetectFaceLandmarksRequest()
+            let handler = VNImageRequestHandler(cvPixelBuffer: pb, orientation: .right, options: [:])
+            do { try handler.perform([req]) } catch { return }
+            guard let face = (req.results as? [VNFaceObservation])?.first,
+                  let oriented = self.eyePoint(face) else { return }
+            // Vision returns points in the ORIENTED (portrait, bottom-left) space. Convert to the raw
+            // capturedImage normalized space (top-left) that ARKit's displayTransform expects. For
+            // .right orientation the upright view is the raw image rotated 90° CW: raw.x = 1 - oy,
+            // raw.y = 1 - ox (derived; verified/tuned against the logged view point on device).
+            let rawN = CGPoint(x: 1 - oriented.y, y: 1 - oriented.x)
+            let viewN = rawN.applying(dt)
+            let viewPoint = CGPoint(x: viewN.x * viewSize.width, y: viewN.y * viewSize.height)
+            DispatchQueue.main.async {
+                let hits = scn.hitTest(viewPoint, types: [.featurePoint])
+                guard let h = hits.first else { return }
+                let w = h.worldTransform.columns.3
+                self.eyeTargetWorld = simd_make_float3(w.x, w.y, w.z)
+                self.eyeTargetGrace = 45     // hold the lock ~45 frames past the last detection
+                if !self.loggedEyeLock {
+                    self.loggedEyeLock = true
+                    self.dbg("FUNDX_DBG eye LOCKED (Vision) viewPoint=\(viewPoint) of \(viewSize)")
+                }
+            }
+        }
+    }
+
+    // Eye centre in image-normalized coords (Vision bottom-left origin): mean of the two eye-region
+    // centroids, falling back to one eye, then the face bounding-box centre. Vision landmark points are
+    // normalized WITHIN the face bounding box, so lift them into full-image coords via the bbox.
+    private func eyePoint(_ face: VNFaceObservation) -> CGPoint? {
+        let bb = face.boundingBox
+        func centroid(_ region: VNFaceLandmarkRegion2D?) -> CGPoint? {
+            guard let r = region, r.pointCount > 0 else { return nil }
+            var sx: CGFloat = 0, sy: CGFloat = 0
+            for p in r.normalizedPoints { sx += CGFloat(p.x); sy += CGFloat(p.y) }
+            let n = CGFloat(r.pointCount)
+            return CGPoint(x: bb.origin.x + (sx / n) * bb.size.width,
+                           y: bb.origin.y + (sy / n) * bb.size.height)
+        }
+        let l = centroid(face.landmarks?.leftEye)
+        let r = centroid(face.landmarks?.rightEye)
+        if let l = l, let r = r { return CGPoint(x: (l.x + r.x) / 2, y: (l.y + r.y) / 2) }
+        return l ?? r ?? CGPoint(x: bb.midX, y: bb.midY)
     }
 
     private func guideMaterial() -> SCNMaterial {
