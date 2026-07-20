@@ -83,10 +83,18 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
         }).catch(function () {}));
       }
       Promise.all(jobs).then(function () {
-        // If a SW was controlling this page, the JS on THIS launch may be the stale cached copy.
-        // One reload (only ever on the first launch after this ships — afterwards there is no
-        // controller) now serves the freshly-bundled assets. No flash on subsequent launches.
-        if (hadController) { try { location.reload(); } catch (e) {} }
+        // If a SW was controlling this page, the JS on THIS launch may be the stale cached copy, so
+        // reload once to pick up the freshly-bundled assets. GUARD: the controller stays non-null
+        // immediately AFTER the reload (the SW only releases control on the next navigation), so an
+        // unguarded reload loops forever (blink → black). sessionStorage survives reloads within the
+        // session, so this fires AT MOST ONCE. If sessionStorage is unavailable, treat as already
+        // flushed and never reload — no loop is possible under any condition.
+        if (!hadController) return;
+        var already = true;
+        try { already = sessionStorage.getItem("smd_sw_flushed") === "1"; } catch (e) { already = true; }
+        if (already) return;
+        try { sessionStorage.setItem("smd_sw_flushed", "1"); } catch (e) {}
+        try { location.reload(); } catch (e) {}
       });
     }
     return;
