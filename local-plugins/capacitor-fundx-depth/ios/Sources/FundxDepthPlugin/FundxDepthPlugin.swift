@@ -69,6 +69,9 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
     private var latTol: Float = 0.045        // max lateral off-axis error for "on the optical axis" (m)
     private var lastAlignState = -1          // 0=far-off 1=near-but-off 2=aligned; recolour only on change
     private var loggedAligned = false        // log the first time full alignment is reached (evidence)
+    private var lastAligned = false          // latest spatial alignment (emitted to JS for the capture gate)
+    private var lastLateral: Float = 999     // latest lateral off-axis error (m)
+    private var lastAlong: Float = 0         // latest along-axis standoff (m)
 
     // ---- Phase 3: lock the corridor onto the real eye (native Vision face landmarks) ----
     // Detection runs on the raw ARKit frame off the session/render path; when a face/eye is found we
@@ -302,6 +305,11 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         }
         if eyeAnchor != nil { data["anchor"] = true }
         if eyeTargetGrace > 0 { data["eyeLocked"] = true }
+        if spatialMode {                          // Phase 4: spatial alignment for the fused capture gate
+            data["aligned"] = self.lastAligned
+            data["axisLateral"] = Double(self.lastLateral)
+            data["axisAlong"] = Double(self.lastAlong)
+        }
         data["opaque"] = self.webViewOpaque       // HUD diagnostic: WebView transparent (camera can show through)?
         data["scnUp"] = (self.arView != nil)      // HUD diagnostic: ARSCNView present
 
@@ -425,6 +433,9 @@ public class FundxDepthPlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate, A
         let onAxis = lateral < latTol
         let atDist = abs(distErr) < distTol
         let state = (onAxis && atDist) ? 2 : ((lateral < latTol * 2.2 && abs(distErr) < distTol * 2.2) ? 1 : 0)
+        self.lastAligned = (state == 2)      // emitted to JS (session didUpdate) for the fused capture gate
+        self.lastLateral = lateral
+        self.lastAlong = along
         if state == 2, !loggedAligned {
             loggedAligned = true
             dbg("FUNDX_DBG ALIGNED — on-axis \(String(format: "%.3f", lateral))m, standoff \(String(format: "%.3f", along))m")

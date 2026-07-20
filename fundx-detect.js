@@ -280,6 +280,12 @@
       if (fr.opaque != null) out.opaque = fr.opaque;     // spatial-AR diagnostic: WebView transparent?
       if (fr.scnUp != null) out.scnUp = fr.scnUp;        // ARSCNView present?
       if (fr.anchor != null) out.anchor = fr.anchor;     // world anchor placed?
+      // Phase 4 fusion: native ARKit spatial alignment (corridor on-axis at working distance) so the
+      // engine's auto-capture can require the clinician be spatially aligned, not just clinically ready.
+      if (fr.aligned != null) out.spatialAligned = !!fr.aligned;
+      if (fr.axisLateral != null) out.axisLateral = +fr.axisLateral;   // metres off the optical axis
+      if (fr.axisAlong != null) out.axisAlong = +fr.axisAlong;         // metres standoff along the axis
+      if (fr.eyeLocked != null) out.eyeLocked = !!fr.eyeLocked;        // Vision locked the corridor to an eye
       return out;
     }
     function grab(scale) {

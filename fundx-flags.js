@@ -33,7 +33,8 @@
     smd_fundx_ar_guidance:       { type: "bool", def: true,        query: null,         desc: "AR overlays (arrows / ring / chips); off = camera + text coach only" },
     smd_fundx_upload:            { type: "bool", def: true,        query: null,         desc: "Workflow 2: analyze an existing/uploaded fundus image (same downstream as live capture)" },
     smd_fundx_corridor:          { type: "bool", def: false,       query: "fundxcorridor", desc: "Optical Corridor HUD (SVG spatial-AR acquisition overlay). Off = the legacy flat ring." },
-    smd_fundx_spatial_ar:        { type: "bool", def: false,       query: "fundxspatial",  desc: "TRUE 3D AR corridor: native SceneKit guide world-anchored to the eye via ARKit (iOS + ARKit only). Off = the 2D SVG corridor / flat ring." }
+    smd_fundx_spatial_ar:        { type: "bool", def: false,       query: "fundxspatial",  desc: "TRUE 3D AR corridor: native SceneKit guide world-anchored to the eye via ARKit (iOS + ARKit only). Off = the 2D SVG corridor / flat ring." },
+    smd_fundx_require_alignment: { type: "bool", def: true,        query: "fundxreqalign", desc: "Phase 4 fusion: require native ARKit spatial alignment (on the optical axis) before auto-capture. Only tightens FSM capture timing; no-op unless spatial AR is active." }
   };
 
   function store() { try { return localStorage; } catch (e) { return null; } }

@@ -852,6 +852,17 @@
   // only the camera + text coach show (no arrows/ring/chips) for a minimal experience.
   function autoCaptureOn() { try { return localStorage.getItem("smd_fundx_autocapture") !== "0"; } catch (e) { return true; } }
   function arGuidanceOn() { try { return localStorage.getItem("smd_fundx_ar_guidance") !== "0"; } catch (e) { return true; } }
+  // Phase 4 fusion (default ON): when the true 3D spatial-AR corridor is active, require the clinician
+  // to be spatially ON-AXIS (native ARKit alignment) before auto-capture fires. This only ever TIGHTENS
+  // the validated FSM's capture timing (adds a precondition), never loosens it. No-op when spatial AR
+  // is off or no native alignment signal has arrived yet (fa.spatialAligned == null), so it can never
+  // block the non-spatial / web pipeline.
+  function requireAlignmentOn() { try { return localStorage.getItem("smd_fundx_require_alignment") !== "0"; } catch (e) { return true; } }
+  function spatialCaptureOk(fa) {
+    if (!requireAlignmentOn() || !spatialArOn()) return true;   // gating off, or not in spatial mode
+    if (!fa || fa.spatialAligned == null) return true;          // no native alignment signal yet — don't block
+    return !!fa.spatialAligned;                                 // hold auto-capture until on the optical axis
+  }
   // Workflow 2 — Analyze existing fundus image (upload). Default ON. Reuses the whole downstream.
   function uploadOn() { try { return localStorage.getItem("smd_fundx_upload") !== "0"; } catch (e) { return true; } }
   function screenDevSettings() {
@@ -1100,7 +1111,7 @@
     if (devOn()) { paintDebug(step, fa); recordDevFrame(step, fa); }
     if (session.mode !== "training") tel("frame", step, fa.ts);
     if (session.mode === "training") { handleTraining(step); return; }
-    if (step.shouldCapture && autoCaptureOn()) triggerCapture();
+    if (step.shouldCapture && autoCaptureOn() && spatialCaptureOk(fa)) triggerCapture();
   }
   function handleTraining(step) {
     var lvl = session.trainLevel;
