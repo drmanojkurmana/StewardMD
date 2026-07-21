@@ -30,6 +30,7 @@ let package = Package(
         .package(name: "StewardmdCapacitorAppOrientation", path: "../../../local-plugins/capacitor-app-orientation"),
         .package(name: "StewardmdCapacitorFundxDepth", path: "../../../local-plugins/capacitor-fundx-depth"),
         .package(name: "StewardmdCapacitorVisionOcr", path: "../../../local-plugins/capacitor-vision-ocr"),
+        .package(name: "StewardmdCapacitorWatchBridge", path: "../../../local-plugins/capacitor-watch-bridge"),
         .package(name: "StewardmdCapacitorWhisper", path: "../../../local-plugins/capacitor-whisper"),
         .package(name: "CapacitorSecureStoragePlugin", path: "../../../node_modules/capacitor-secure-storage-plugin")
     ],
@@ -57,6 +58,7 @@ let package = Package(
                 .product(name: "StewardmdCapacitorAppOrientation", package: "StewardmdCapacitorAppOrientation"),
                 .product(name: "StewardmdCapacitorFundxDepth", package: "StewardmdCapacitorFundxDepth"),
                 .product(name: "StewardmdCapacitorVisionOcr", package: "StewardmdCapacitorVisionOcr"),
+                .product(name: "StewardmdCapacitorWatchBridge", package: "StewardmdCapacitorWatchBridge"),
                 .product(name: "StewardmdCapacitorWhisper", package: "StewardmdCapacitorWhisper"),
                 .product(name: "CapacitorSecureStoragePlugin", package: "CapacitorSecureStoragePlugin")
             ]
