@@ -7,6 +7,7 @@
 (function () {
   "use strict";
   function FUSION() { return (typeof window !== "undefined" && window.SMD_KARDIOX_FUSION) || (typeof require !== "undefined" ? require("./kardiox-fusion.js") : null); }
+  function STEMI() { return (typeof window !== "undefined" && window.SMD_KARDIOX_STEMI) || (typeof require !== "undefined" ? require("./kardiox-stemi.js") : null); }
 
   // Canonical clinical labels (so "AF" from one engine fuses with "AFIB" from another).
   // group: rhythm | conduction | morphology | ischemia. severity drives emergency flags + verdict rank.
@@ -145,6 +146,24 @@
         });
       });
     }, Promise.resolve([])).then(function (engineResults) {
+      // HYBRID STEMI: opt-in (ctx.stemi) rule-based ST-elevation detector fused as an independent
+      // source. STEMI is the rarest/most territory-skewed class, so the NN alone is unreliable; the
+      // deterministic ST-measurement rule covers every territory. The NN's conduction call (CRBBB/RBBB/
+      // LBBB probabilities, gathered here) informs the rule so BBB secondary ST changes don't misfire.
+      // Requires CALIBRATED mV leads. Only contributes when it actually fires (never a phantom finding).
+      var S = STEMI();
+      if (ctx.stemi && S) {
+        var probOf = function (codes) {
+          var p = 0; engineResults.forEach(function (r) { r.dx.forEach(function (d) { if (codes.indexOf(d.code) >= 0) p = Math.max(p, d.prob); }); }); return p;
+        };
+        var stemiOpts = { fs: ctx.fs || 500, rbbb: probOf(["CRBBB", "RBBB", "IRBBB"]), lbbb: probOf(["LBBB"]),
+          sex: (ctx.stemi && ctx.stemi.sex) || (ctx.patient && ctx.patient.sex), wideQRS: ctx.stemi && ctx.stemi.wideQRS };
+        try {
+          var cand = S.candidate(leads, stemiOpts);
+          if (cand && cand.fired) engineResults.push({ engine: "stemi-rule", weight: cand.weight, dx: [{ code: "STE", prob: cand.confidence }], ruleDetail: cand.detail });
+          else if (cand && cand.detail && cand.detail.advisory) ctx._stemiAdvisory = cand.detail.advisory;   // wide-QRS/LBBB: Sgarbossa advisory, not a diagnosis
+        } catch (e) { /* rule failure must never break the ensemble */ }
+      }
       // Candidates for the EXISTING fusion engine — one per (engine, fired code).
       var candidates = [];
       engineResults.forEach(function (r) {
@@ -206,8 +225,8 @@
         (agree.length ? agree.length + " diagnosis(es) corroborated by >=2 engines. " : "") +
         (disagree.length ? disagree.length + " under disagreement (all shown). " : "") +
         (skipped.length ? "Not-ready engines skipped: " + skipped.join(", ") + ". " : "") + "Decision support, not a diagnosis.",
-      recommendations: emergency.length ? ["Urgent clinician review — " + emergency.join(", ")] : ["Correlate with clinical context; confirm findings on the full trace."],
-      warnings: fused.warnings || [],
+      recommendations: (emergency.length ? ["Urgent clinician review — " + emergency.join(", ")] : ["Correlate with clinical context; confirm findings on the full trace."]).concat(ctx._stemiAdvisory ? [ctx._stemiAdvisory] : []),
+      warnings: (fused.warnings || []).concat(ctx._stemiAdvisory ? [ctx._stemiAdvisory] : []),
       enginesRun: engineResults.map(function (r) { return r.engine; }), enginesSkipped: skipped
     };
   }

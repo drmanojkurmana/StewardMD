@@ -122,6 +122,112 @@ def digitize_bytes(image: bytes, layout_hint: str | None = None) -> dict:
     }
 
 
+# ── Automatic multi-layout digitization (standard hospital print layouts) ──────────────────────────
+# Detects the print layout from the image, digitizes each lead cell, and emits the reconstruction-layer
+# format {leads:{name:{mv,fs}}, rhythmLead, layoutHint, calibration} that SMD_KARDIOX_RECONSTRUCT consumes
+# (which then places each lead at its true column time-offset, masks the unprinted portion, and gates a
+# dense signal to full-coverage only). Reuses the classical column-scan primitives; no learned model.
+_STD12 = ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"]
+_LAYOUT_GRID = {
+    "3x4": [["I", "aVR", "V1", "V4"], ["II", "aVL", "V2", "V5"], ["III", "aVF", "V3", "V6"]],
+    "6x2": [["I", "V1"], ["II", "V2"], ["III", "V3"], ["aVR", "V4"], ["aVL", "V5"], ["aVF", "V6"]],
+    "12x1": [[l] for l in _STD12],
+}
+_LAYOUT_CELL_S = {"3x4": 2.5, "6x2": 5.0, "12x1": 10.0}
+
+
+def detect_print_layout(image: bytes) -> dict:
+    """Auto-detect the print layout from ink row/column structure: count contiguous horizontal trace
+    bands (rows) + a full-width bottom band (rhythm strip). 3 rows->3x4, 6->6x2, >=10->12x1."""
+    cv2, np = _lazy()
+    gray = cv2.imdecode(np.frombuffer(image, dtype=np.uint8), cv2.IMREAD_GRAYSCALE)
+    if gray is None:
+        raise LayoutUndetected("Could not decode image for layout detection", stage="digitization")
+    H, W = gray.shape[:2]
+    ink = gray < 128
+    rowink = ink.mean(axis=1)
+    thr = max(float(rowink.mean()) * 0.5, 0.002)
+    bands, inb, s = [], False, 0
+    for y in range(H):
+        if rowink[y] > thr and not inb:
+            inb, s = True, y
+        elif rowink[y] <= thr and inb:
+            inb = False
+            if (y - s) > H * 0.02:
+                bands.append((s, y))
+    if inb:
+        bands.append((s, H))
+    nb = len(bands)
+    has_strip = False
+    if bands:
+        s, e = bands[-1]
+        colcov = float((ink[s:e].mean(axis=0) > 0.01).mean())
+        has_strip = bool(colcov > 0.85 and nb in (4, 7, 13))
+    trace_rows = int(nb - (1 if has_strip else 0))
+    if trace_rows >= 10:
+        layout = "12x1"
+    elif trace_rows == 6:
+        layout = "6x2"
+    elif trace_rows == 3:
+        layout = "3x4"
+    else:
+        layout = "12x1" if trace_rows > 6 else ("6x2" if trace_rows >= 5 else "3x4")
+    return {"layout": layout, "rows": trace_rows, "hasRhythmStrip": has_strip}
+
+
+def digitize_auto(image: bytes, layout_hint: str | None = None) -> dict:
+    """Layout-aware digitization -> reconstruction-layer format (per-lead mV windows + a rhythm strip).
+    Auto-detects the layout unless `layout_hint` is given. Calibrated via grid-FFT (else geometry)."""
+    cv2, np = _lazy()
+    det = {"layout": layout_hint, "hasRhythmStrip": layout_hint == "3x4"} if layout_hint in _LAYOUT_GRID else detect_print_layout(image)
+    layout, has_strip = det["layout"], det.get("hasRhythmStrip", False)
+    gray = cv2.imdecode(np.frombuffer(image, dtype=np.uint8), cv2.IMREAD_GRAYSCALE)
+    H, W = gray.shape[:2]
+    ink = gray < 128
+    px_per_mm = estimate_px_per_mm(gray, np)
+    calib_method = "grid" if px_per_mm else "geometry"
+    grid = _LAYOUT_GRID[layout]
+    nrows, ncols = len(grid), len(grid[0])
+    cell_s = _LAYOUT_CELL_S[layout]
+    band_h = int(H * (0.78 if (layout == "3x4" and has_strip) else 1.0)) // nrows
+    cell_w = W // ncols
+    if not px_per_mm:
+        px_per_mm = cell_w / (cell_s * _MM_PER_S)                     # geometry: cell columns == cell_s seconds
+    fs = 500
+    leads: dict = {}
+
+    def cell_to_mv(sub, n_samples):
+        trace = _extract_trace(sub, np)
+        if trace is None:
+            return None
+        baseline = float(np.median(trace))
+        mv = (baseline - trace) / (px_per_mm * _MM_PER_MV)            # px -> mV (invert: image y grows down)
+        xs = np.linspace(0, len(mv) - 1, n_samples)
+        return [round(float(v), 4) for v in np.interp(xs, np.arange(len(mv)), mv)]
+
+    for r in range(nrows):
+        for c in range(ncols):
+            lead = grid[r][c]
+            y, x = r * band_h, c * cell_w
+            mv = cell_to_mv(ink[y:y + band_h, x:x + cell_w], int(round(cell_s * fs)))
+            if mv is not None:
+                leads[lead] = {"mv": mv, "fs": fs}
+    rhythm = None
+    if has_strip and layout == "3x4":
+        y = int(H * 0.78)
+        mv = cell_to_mv(ink[y:H, 0:W], int(round(10.0 * fs)))
+        if mv is not None:
+            leads["II"] = {"mv": mv, "fs": fs}
+            rhythm = "II"
+    if len(leads) < _MIN_LEADS:
+        raise LayoutUndetected(f"Only {len(leads)} readable leads in {layout} layout", stage="digitization")
+    return {
+        "leads": leads, "rhythmLead": rhythm, "layoutHint": layout, "layout": layout,
+        "calibration": {"mmPerS": _MM_PER_S, "mmPerMv": _MM_PER_MV, "pxPerMm": round(float(px_per_mm), 3), "method": calib_method},
+        "method": "classical-multilayout",
+    }
+
+
 class NoneDigitization(DigitizationProvider):
     name = "none"
 
