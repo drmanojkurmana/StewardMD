@@ -123,10 +123,20 @@
   //    on-device mock. Everything else (store/library/learning) stays local + offline regardless. ──
   var _backendHealthy = false;
   function backendFlag() { try { return !!(typeof window !== "undefined" && window.SMD_KARDIOX_FLAGS && window.SMD_KARDIOX_FLAGS.bool("smd_kardiox_backend")); } catch (e) { return false; } }
+  // The native (Capacitor) app calls the deployed KardioX backend DIRECTLY — its local www has no
+  // same-origin /api proxy — via the zero-storage direct-upload endpoint. The web build keeps the
+  // same-origin Cloudflare edge proxy (which holds any server-side auth).
+  function isNative() { try { return !!(typeof window !== "undefined" && window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()); } catch (e) { return false; } }
+  var KX_BACKEND_URL = "https://kardiox-pipeline-yislqrddsq-uc.a.run.app";
+  var KX_BACKEND_TOKEN = "fa63300e91a3d835de701a006b997e17a10f26da9c8390f2";  // beta device-test secret; rotate / move to the edge before any public release
+  function backendBase() { return isNative() ? KX_BACKEND_URL : "/api/kardiox"; }
   function remoteAnalyzer() {
     try {
       if (typeof window !== "undefined" && window.SMD_KARDIOX_NET && window.SMD_KARDIOX_NET.remoteAnalyzer) {
-        var r = window.SMD_KARDIOX_NET.remoteAnalyzer({ baseUrl: "/api/kardiox", path: "/v1/ecg/analyze" });
+        var cfg = isNative()
+          ? { baseUrl: KX_BACKEND_URL, path: "/v1/ecg/analyze-upload", token: KX_BACKEND_TOKEN }
+          : { baseUrl: "/api/kardiox", path: "/v1/ecg/analyze" };
+        var r = window.SMD_KARDIOX_NET.remoteAnalyzer(cfg);
         return { kind: "remote", analyze: r.analyze };
       }
     } catch (e) {}
@@ -176,7 +186,7 @@
   // Ping /api/kardiox/v1/health; on success flip to the remote analyzer (rebuild the active assembly).
   function checkBackend() {
     if (!backendFlag() || typeof fetch !== "function") { _backendHealthy = false; return Promise.resolve(false); }
-    return fetch("/api/kardiox/v1/health").then(function (r) { return r && r.ok; }).then(function (ok) {
+    return fetch(backendBase() + "/v1/health").then(function (r) { return r && r.ok; }).then(function (ok) {
       _backendHealthy = !!ok; _active = null; return _backendHealthy;    // force rebuild with the chosen analyzer
     }).catch(function () { _backendHealthy = false; return false; });
   }
