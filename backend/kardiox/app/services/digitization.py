@@ -228,6 +228,39 @@ def digitize_auto(image: bytes, layout_hint: str | None = None) -> dict:
     }
 
 
+class ReconstructionDigitization(DigitizationProvider):
+    """Layout-aware digitiser (default for hospital printouts). Auto-detects the layout, digitises each
+    lead cell to calibrated mV via digitize_auto, and emits a pre-digitised passthrough `signal` block
+    (so wfdb.to_signal returns it directly — no pixel round-trip). CRUCIALLY it does NOT stitch the
+    discontinuous 2.5 s cells into a fake continuous 12-lead: for 3x4 the rhythm strip is lead "II"
+    (continuous 10 s) so rhythm is assessed from it, and `full` is True only for a genuine 12x1
+    full-disclosure. The orchestrator uses `layout`/`full` to run the 12-lead ensemble only when a real
+    continuous 12-lead exists, and to defer (mark unavailable) otherwise."""
+
+    name = "reconstruction"
+    version = "1.0.0"
+    requires = ("cv2", "numpy")
+    implemented = True
+
+    async def digitize(self, image: bytes) -> dict:
+        d = digitize_auto(image)                          # {leads:{name:{mv,fs}}, rhythmLead, layout, calibration}
+        leads = d.get("leads", {}) or {}
+        layout = d.get("layout", "12x1")
+        got12 = sum(1 for n in _STD12 if n in leads and leads[n].get("mv"))
+        full = (layout == "12x1" and got12 >= 12)
+        fs0 = next((v.get("fs", 500) for v in leads.values()), 500)
+        dur = max((len(v.get("mv", [])) / (v.get("fs") or fs0) for v in leads.values()), default=0.0)
+        return {
+            "signal": {"leads": leads, "duration_s": round(dur, 3)},   # to_signal passthrough (calibrated mV)
+            "layout": layout, "full": bool(full), "rhythmLead": d.get("rhythmLead"),
+            "calibration": d.get("calibration"), "method": d.get("method", "classical-multilayout"),
+            # The classical column-scan recovers TIMING well (rate/rhythm) but NOT calibrated amplitudes
+            # (baseline/gain error) — so amplitude-dependent diagnosis (ST/ischemia, axis, LVH, ML
+            # classifiers) is NOT reliable from it. A learned/external digitiser sets this True.
+            "amplitudeReliable": False,
+        }
+
+
 class NoneDigitization(DigitizationProvider):
     name = "none"
 

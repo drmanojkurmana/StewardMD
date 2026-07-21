@@ -47,7 +47,9 @@ _RULES = [
      lambda f: f.get("regularity") == "irregular",
      lambda f: f"RR variance {f.get('rrSdSec', '-')}s"),
     ("RHY-PWAVE-ABSENT", "Absent P waves", 0.29, "urgent", "af",
-     lambda f: f.get("pWaves") == "absent" or f.get("prMs", "x") is None,
+     # only when P-wave morphology was actually ASSESSED and found absent — an UNMEASURED PR (prMs None)
+     # means "unknown", NOT "absent" (conflating them manufactured false AF on the rhythm-only path).
+     lambda f: f.get("pWaves") == "absent",
      lambda f: "No consistent atrial activity"),
     ("MOR-FWAVE-01", "Fibrillatory baseline", 0.19, "info", "af",
      lambda f: f.get("fWaves") is True,
@@ -296,7 +298,12 @@ class BuiltinRules(RuleEngineProvider):
         # ── Phase 5F — assemble the full diagnosis list (AF cluster + deterministic morphology dx) ──
         diagnoses = []
         af_crit = [m for m in matched if m["cluster"] == "af"]
-        if af_crit:
+        # AF requires BOTH an irregular R-R AND positive atrial evidence (absent P waves or f-waves).
+        # Irregular R-R ALONE is not AF (sinus arrhythmia, ectopy, MAT, artefact) — don't guess AF; the
+        # descriptive rhythm ("irregular rhythm, rate X") is reported instead.
+        _af_ids = {m["ruleId"] for m in af_crit}
+        af_confirmed = ("RHY-AF-01" in _af_ids) and (("RHY-PWAVE-ABSENT" in _af_ids) or ("MOR-FWAVE-01" in _af_ids))
+        if af_crit and af_confirmed:
             diagnoses.append(_mk(
                 "DX-AF", "Atrial fibrillation", "urgent",
                 [{"id": m["ruleId"], "description": m["title"], "measuredValue": m["detail"], "weight": m["weight"], "matched": True} for m in af_crit],
