@@ -2049,6 +2049,10 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
     requestAnimationFrame(function () { scrim.classList.add("on"); sheet.classList.add("on"); });
+    // Warm-up (fire-and-forget, zero tokens): kick off the KB load + wake the backend Worker NOW, while
+    // the clinician is still reading/typing, so the FIRST question isn't stuck behind a cold start.
+    try { if (window.StewardRAG && StewardRAG.ready) StewardRAG.ready(); } catch (e) {}
+    try { fetch("/api/ai/health", { method: "GET" }).catch(function () {}); } catch (e) {}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
     function close() { try { if (body && body.innerHTML.trim()) { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } } catch (e) {} sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260); }
     function scroll() { body.scrollTop = body.scrollHeight; }

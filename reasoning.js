@@ -3800,24 +3800,35 @@
         });
       }
       function fallback() { return Promise.resolve(self.explainGrounded(pkg, opts)).then(replay); }
-      // Native buffers SSE → fetch-whole + typewriter. Also the no-ReadableStream / no-AbortController path.
-      if (window.SMD_IS_NATIVE || typeof ReadableStream === "undefined" || !window.TextDecoder || typeof AbortController === "undefined") return fallback();
+      // Transport. On NATIVE the app's window.fetch is the CapacitorHttp bridge, which BUFFERS SSE (can't
+      // stream) — but window.CapacitorWebFetch is the PRISTINE WebView fetch that CAN stream a cross-origin
+      // SSE (the /explain response echoes CORS, so capacitor:// is allowed). Web uses the normal fetch.
+      // This lets native stream like the web (first token in seconds) instead of waiting for the whole
+      // answer; if the pristine stream misbehaves we fall straight back to the proven whole-fetch path.
+      var isNative = !!window.SMD_IS_NATIVE;
+      var sfetch = isNative ? ((typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch.bind(window) : null) : (typeof fetch === "function" ? fetch : null);
+      // Remember a native stream failure for the session so we don't keep paying the probe timeout.
+      function nsBad(set) { try { if (set === undefined) return sessionStorage.getItem("smd_maik_nstream_bad") === "1"; if (set) sessionStorage.setItem("smd_maik_nstream_bad", "1"); else sessionStorage.removeItem("smd_maik_nstream_bad"); } catch (e) {} return false; }
+      if (!sfetch || typeof ReadableStream === "undefined" || !window.TextDecoder || typeof AbortController === "undefined") return fallback();
+      if (isNative && nsBad()) return fallback();
       // Watchdog: a stream that OPENS but delivers nothing (seen on iOS WebKit / standalone PWAs and
       // buffering proxies) would otherwise hang the "Searching…" bubble FOREVER — an SSE stall raises
       // no error, so the .catch below never fires and the answer never arrives. Abort if no first
       // token lands in time, or if the stream stalls mid-answer; the abort rejects the read, and we
       // return whatever already streamed, else fall back to the proven JSON explainGrounded().
-      var ctrl = new AbortController(), settled = false, wd = null;
-      var FIRST_MS = 12000, STALL_MS = 15000;
+      var ctrl = new AbortController(), settled = false, wd = null, gotDone = false;
+      // Native first-token budget is SHORT: if the pristine cross-origin SSE doesn't start quickly
+      // (WKWebView quirk / CORS strip), abort fast and fall back rather than stalling the clinician.
+      var FIRST_MS = isNative ? 6000 : 12000, STALL_MS = isNative ? 12000 : 15000;
       function arm(ms) { if (wd) clearTimeout(wd); wd = setTimeout(function () { if (!settled) { try { ctrl.abort(); } catch (e) {} } }, ms); }
       function done() { settled = true; if (wd) { clearTimeout(wd); wd = null; } }
       arm(FIRST_MS);
       return aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
-        return fetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }), signal: ctrl.signal });
+        return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }), signal: ctrl.signal });
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
-        if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); return fallback(); }
+        if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); if (isNative) nsBad(true); return fallback(); }
         var reader = r.body.getReader(), dec = new TextDecoder(), buf = "", acc = "";
         function pump() {
           return reader.read().then(function (res) {
@@ -3829,13 +3840,26 @@
               if (!data) return;
               var ev; try { ev = JSON.parse(data); } catch (e) { return; }
               if (ev && ev.delta) { acc += ev.delta; arm(STALL_MS); try { if (onDelta) onDelta(acc); } catch (e) {} }
+              if (ev && ev.done) { gotDone = true; }
             });
             return pump();
           });
         }
-        return pump().then(function () { done(); return acc ? { text: acc, mode: "grounded-stream", sources: pkg.sources } : fallback(); })
-          .catch(function () { done(); return acc ? { text: acc, mode: "grounded-stream", sources: pkg.sources } : fallback(); });
-      }).catch(function () { done(); return fallback(); });
+        // Accept the streamed text only on CLEAN completion. On native an incomplete/aborted stream must
+        // NOT surface as a truncated clinical answer — fall back to the proven whole-answer fetch (the
+        // transient streamed tokens are then replaced by the full answer). Web keeps its lenient behavior.
+        return pump().then(function () {
+          done();
+          if (acc && (gotDone || !isNative)) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources }; }
+          if (isNative) nsBad(true);
+          return fallback();
+        }).catch(function () {
+          done();
+          if (acc && gotDone) { if (isNative) nsBad(false); return { text: acc, mode: "grounded-stream", sources: pkg.sources }; }
+          if (isNative) nsBad(true);
+          return fallback();
+        });
+      }).catch(function () { done(); if (isNative) nsBad(true); return fallback(); });
     },
     // Imaging Assist — clinician-invoked structured summary of ONE radiology report. Sends a
     // DE-IDENTIFIED packet (report text PHI-redacted client-side; NO name/MRN/bed/other-patient
