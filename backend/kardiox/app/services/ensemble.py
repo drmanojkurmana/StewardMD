@@ -198,3 +198,29 @@ def classify(signal, threshold=0.5):
         })
     diagnoses.sort(key=lambda dd: (-_SEV_RANK.get(dd["severity"], 0), -dd["confidence"]))
     return diagnoses
+
+
+def classify_rhythm_strip(strip_mv, fs=500, threshold=0.5):
+    """Single-lead AFib from a continuous rhythm strip (lead II) via HeartGPT — usable when the full
+    12-lead cannot be reconstructed (3x4 / amplitude-unreliable). So a simple AF is still called AF.
+    Returns rules-format diagnoses ([] if Not Ready, no strip, or below threshold)."""
+    d = _models_dir()
+    if not d or not strip_mv or len(strip_mv) < 100:
+        return []
+    np, _ = _lazy()
+    x = np.zeros((12, len(strip_mv)), dtype="float64")
+    x[1] = np.asarray(strip_mv, dtype="float64")            # HeartGPT reads lead II only
+    eng = next((e for e in _ENGINES if e["name"] == "heartgpt"), None)
+    if not eng or not _resolve(d, eng["file"]):
+        return []
+    out = []
+    for code, prob in _run_engine(eng, x, np, d):
+        if prob >= threshold:
+            label, severity, group = _LABEL.get(code, (code, "info", "morphology"))
+            out.append({"id": "DX-STRIP-" + code, "label": label, "severity": severity, "group": group,
+                        "confidence": round(prob, 2),
+                        "differentials": [{"label": label, "probability": round(prob, 2)}],
+                        "criteria": [{"id": "ENS-heartgpt", "description": "HeartGPT single-lead AFib (rhythm strip)", "measuredValue": "", "weight": 0.0, "matched": True}],
+                        "whatToVerify": "Single-lead (lead II) AF screen from the rhythm strip; confirm on a full 12-lead.",
+                        "supportingModels": ["heartgpt"]})
+    return out

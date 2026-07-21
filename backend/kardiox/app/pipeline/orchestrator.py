@@ -221,6 +221,20 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
                     "without fabricating data. Rhythm and rate were assessed from the continuous rhythm strip. "
                     "Capture a true 12x1 full-disclosure (or a longer rhythm strip) for complete analysis.")
                 trace.append({"stage": "layoutGate", "status": "partial-layout", "layout": layout})
+                # single-lead AF screen from the continuous rhythm strip (HeartGPT) — so a simple AF is
+                # still diagnosed even when the full 12-lead cannot be reconstructed from a 3x4/6x2 print.
+                try:
+                    from app.services import ensemble as _ensemble
+                    _leads = (signal or {}).get("leads", {}) or {}
+                    _rl = (traces or {}).get("rhythmLead") or "II"
+                    _strip = ((_leads.get(_rl) or _leads.get("II") or {}).get("mv"))
+                    _fs = int((_leads.get(_rl) or _leads.get("II") or {}).get("fs") or 500)
+                    ensemble_dx = _ensemble.classify_rhythm_strip(_strip, fs=_fs) or []
+                    if ensemble_dx:
+                        availability = "Rhythm-strip AF screen (single-lead HeartGPT) applied. " + availability
+                        trace.append({"stage": "stripAf", "status": "done", "n": len(ensemble_dx)})
+                except Exception as e:  # noqa: BLE001 — never break the deferral path
+                    log.info("stripAf.isolated", reason=type(e).__name__)
             else:
                 availability = (
                     ("The trained 12-lead ML ensemble (rhythm/conduction/AF classifiers) was applied. " if ensemble_dx else "")
