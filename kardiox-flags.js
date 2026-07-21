@@ -13,12 +13,12 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_kardiox:            { type: "bool", def: false,     query: "kardiox",     desc: "KardioX AI master flag (home card + module). DEFAULT OFF." },
+    smd_kardiox:            { type: "bool", def: true,      query: "kardiox",     desc: "KardioX AI master flag (home card + module). DEFAULT OFF." },
     smd_kardiox_cloud:      { type: "tri",  def: null,      query: null,          desc: "Cloud ECG-analysis consent (null = ask once). Off = mock/offline only." },
     smd_kardiox_confidence: { type: "bool", def: true,      query: null,          desc: "Always show the AI confidence % (Settings · Intelligence)." },
     smd_kardiox_haptics:    { type: "bool", def: true,      query: null,          desc: "Haptic feedback for taps / report-ready / urgent / quiz." },
     smd_kardiox_dev:        { type: "bool", def: false,     query: "kardioxdev",  desc: "Developer overlay (pipeline stages, provider, timings)." },
-    smd_kardiox_backend:    { type: "bool", def: false,     query: "kardioxbackend", desc: "Use the live KardioX pipeline backend (RemoteAnalyzer via /api/kardiox) instead of the on-device mock. Health-gated: falls back to mock if the pipeline is unreachable. DEFAULT OFF." },
+    smd_kardiox_backend:    { type: "bool", def: true,      query: "kardioxbackend", desc: "Use the live KardioX pipeline backend (RemoteAnalyzer via /api/kardiox) instead of the on-device mock. Health-gated: falls back to mock if the pipeline is unreachable. DEFAULT OFF." },
     smd_kardiox_demo:       { type: "bool", def: false,     query: "kardioxdemo",  desc: "EXPLICIT demo mode — use the deterministic mock analyzer (canned sample, no real inference). Off by default: Analyze runs the REAL pipeline (backend/on-device ONNX) or reports 'inference unavailable', never a fabricated result." }
   };
 

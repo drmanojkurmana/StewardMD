@@ -35,6 +35,7 @@
     var fetchImpl = opts.fetch || (typeof fetch !== "undefined" ? fetch : null);
     var base = opts.baseUrl || "/api/kardiox";
     var path = opts.path || "/v1/ecg/analyze";
+    var token = opts.token || null;                    // X-Pipeline-Token when calling the backend directly
     var backoff = opts.backoffMs || [500, 2000, 8000];
     var maxRetries = opts.maxRetries != null ? opts.maxRetries : 3;
     var timeoutMs = opts.timeoutMs != null ? opts.timeoutMs : 90000;
@@ -60,7 +61,9 @@
       var to = sleep(timeoutMs, timerFn).then(function () { timedOut = true; if (ctrl) ctrl.abort(); });
       var req = Promise.resolve(fetchImpl(base + path, {
         method: "POST", body: body, signal: ctrl ? ctrl.signal : undefined,
-        headers: { "Accept": "application/vnd.kardiox.v1+json", "X-Session-ID": sessionId }
+        headers: token
+          ? { "Accept": "application/vnd.kardiox.v1+json", "X-Session-ID": sessionId, "X-Pipeline-Token": token }
+          : { "Accept": "application/vnd.kardiox.v1+json", "X-Session-ID": sessionId }
       })).then(function (res) {
         return Promise.resolve(res.json ? res.json().catch(function () { return null; }) : null).then(function (j) { return { status: res.status, json: j }; });
       }, function (err) { if (timedOut) { var e = apiError(504, {}); throw e; } throw err; });
