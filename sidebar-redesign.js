@@ -38,7 +38,9 @@
     shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/>',
     spark: '<path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/><path d="M5 15l.7 1.9L8 18l-2.3.6L5 21l-.7-1.9L2 18l2.3-.6Z"/>',
     steth: '<path d="M4.5 3v6a4.5 4.5 0 0 0 9 0V3"/><path d="M4.5 3H3M13.5 3H12"/><path d="M9 13.5V16a5 5 0 0 0 10 0v-1.2"/><circle cx="19" cy="12.5" r="2.2"/>',
-    watch: '<rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6l.7-3h4.6l.7 3M9 18l.7 3h4.6l.7-3"/><path d="M12 9v3l2 1"/>'
+    watch: '<rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6l.7-3h4.6l.7 3M9 18l.7 3h4.6l.7-3"/><path d="M12 9v3l2 1"/>',
+    refresh: '<path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/>',
+    download: '<path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/>'
   };
   function svg(name) {
     return '<svg viewBox="0 0 24 24" class="sbr-ic"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[name] || "") + "</g></svg>";
@@ -91,7 +93,8 @@
     { id: "ghis", title: "GHIS Ward Sync", sub: "Live inpatient labs & radiology", def: true, key: "smd_ghis_ward" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
     { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
-    { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" }
+    { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" },
+    { id: "kardiox", title: "KardioX AI · ECG (Beta)", sub: "AI ECG interpretation · reload to apply", def: false, key: "smd_kardiox" }
   ];
   function setToggle(id, key, on) {
     try {
@@ -160,6 +163,17 @@
           '<span style="flex:1">Offline Drug Database</span><span class="sbr-badge">PRO</span></button>';
       }
     } catch (e) {}
+    // Software update (native only) — Apple-style: Automatic toggle + Check + Download & install.
+    try {
+      if (window.SMD_OTA && SMD_OTA.available()) {
+        var oAuto = SMD_OTA.isAuto();
+        html += '<div class="sbr-tg"><div class="sbr-tg-l"><span class="sbr-tg-t">Automatic updates</span><span class="sbr-tg-s">Fetch new versions in the background</span></div>' +
+          '<button class="sbr-sw' + (oAuto ? " on" : "") + '" data-sbr-otaauto="1" role="switch" aria-checked="' + oAuto + '" aria-label="Automatic updates"><span></span></button></div>' +
+          '<div class="sbr-tg-s" id="sbrOtaStatus" style="padding:2px 0 4px">Version ' + (SMD_OTA.currentVersion() || "current") + '</div>' +
+          '<button class="sbr-row" data-sbr-otacheck="1" style="padding-left:0">' + svg("refresh") + '<span class="sbr-lbl">Check for updates</span></button>' +
+          '<button class="sbr-row" data-sbr-otainstall="1" style="padding-left:0;display:none">' + svg("download") + '<span class="sbr-lbl">Download &amp; install</span></button>';
+      }
+    } catch (e) {}
     html += '<div class="sbr-note">⚗️ Experimental — clinician review required.</div>';
     return html;
   }
@@ -220,6 +234,37 @@
         var id = sw.getAttribute("data-sbr-tg"), key = sw.getAttribute("data-sbr-key"), on = !sw.classList.contains("on");
         setToggle(id, key, on);
         sw.classList.toggle("on", on); sw.setAttribute("aria-checked", on);
+        return;
+      }
+      // OTA: automatic-updates switch
+      var otaSw = t.closest("[data-sbr-otaauto]");
+      if (otaSw) {
+        var oon = !otaSw.classList.contains("on");
+        try { if (window.SMD_OTA) SMD_OTA.setAuto(oon); } catch (x) {}
+        otaSw.classList.toggle("on", oon); otaSw.setAttribute("aria-checked", oon);
+        return;
+      }
+      // OTA: check for updates
+      if (t.closest("[data-sbr-otacheck]")) {
+        var oSt = menu.querySelector("#sbrOtaStatus"), oIn = menu.querySelector("[data-sbr-otainstall]");
+        if (!window.SMD_OTA) return;
+        if (oSt) oSt.textContent = "Checking…";
+        SMD_OTA.check().then(function (rr) {
+          rr = rr || {};
+          if (rr.status === "available") { menu.__otaPending = rr; if (oSt) oSt.textContent = "Update available: v" + rr.version; if (oIn) oIn.style.display = ""; }
+          else if (rr.status === "uptodate") { menu.__otaPending = null; if (oSt) oSt.textContent = "You're up to date" + (rr.current ? " (v" + rr.current + ")" : ""); if (oIn) oIn.style.display = "none"; }
+          else { if (oSt) oSt.textContent = "Couldn't check — " + (rr.error || "try again"); }
+        });
+        return;
+      }
+      // OTA: download & install
+      if (t.closest("[data-sbr-otainstall]")) {
+        var oSt2 = menu.querySelector("#sbrOtaStatus");
+        if (!window.SMD_OTA || !menu.__otaPending) return;
+        SMD_OTA.install(menu.__otaPending, function (pct) { if (oSt2) oSt2.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
+          if (res && res.ok) { if (oSt2) oSt2.textContent = "Update ready — reopening…"; }
+          else { if (oSt2) oSt2.textContent = "Install failed — " + ((res && res.error) || "try again"); }
+        });
         return;
       }
       // Everything else → its action global

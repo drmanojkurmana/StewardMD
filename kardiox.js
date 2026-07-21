@@ -84,13 +84,9 @@
     document.documentElement.classList.remove("kx-lock");
   }
 
-  // Launch from the home card — re-verify Experimental Access on each open (server-side,
-  // revocable), exactly like FundX. Falls back to a direct open if the gate isn't present
-  // (e.g. dev bypass / offline-cached token handled inside SMD_XACCESS.gate).
-  function launch() {
-    try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("kardiox", open); return; } } catch (e) {}
-    open();
-  }
+  // Launch from the home card. KardioX is flag-gated (smd_kardiox), enabled from the sidebar
+  // "KardioX AI · ECG (Beta)" toggle exactly like FundX — no access code, so open directly.
+  function launch() { open(); }
 
   /* ── Home-card auto-mount (additive; home.js is NOT modified) ────────────────────────────────────
      When smd_kardiox is on, inject the flagship card into the home content stack after the hero, and
