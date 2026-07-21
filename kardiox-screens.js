@@ -1645,22 +1645,42 @@
         diagnosticCriteria: (e.diagnosticCriteria && e.diagnosticCriteria.length) ? e.diagnosticCriteria : AF_DEFAULT.diagnosticCriteria,
         pearl: e.pearl || AF_DEFAULT.pearl,
         pitfall: e.pitfall || AF_DEFAULT.pitfall,
-        quizCount: qs || AF_DEFAULT.quizCount
+        quizCount: qs || AF_DEFAULT.quizCount,
+        // Per-diagnosis content (content-only enrichment; UI components reused). Empty → block skipped.
+        ecgStrip: e.ecgStrip || '',
+        overview: e.overview || '',
+        differentials: (e.differentials && e.differentials.length) ? e.differentials : [],
+        management: (e.management && e.management.length) ? e.management : [],
+        emergency: e.emergency || '',
+        measurements: e.measurements || '',
+        prognosis: e.prognosis || ''
       };
     }
   
     function tierLabel(t) { t = String(t || ''); return t ? t.charAt(0).toUpperCase() + t.slice(1) : ''; }
   
     /* The lesson ECG strip (rhythm-strip art from the handoff; colour via CSS). */
-    function ecgStrip() {
+    var DEFAULT_STRIP = "0,48 10,46 18,50 26,47 30,48 33,52 36,26 39,60 42,48 60,47 72,50 84,48 88,48 91,52 94,26 97,60 100,48 118,47 130,48 134,48 137,52 140,28 143,60 146,48 172,47 190,48 194,52 197,26 200,60 203,48 230,47 250,48 254,52 257,27 260,60 263,48 290,47 306,48 310,52 313,27 316,60 320,48";
+    function ecgStrip(vm) {
+      var pts = (vm && vm.ecgStrip) ? vm.ecgStrip : DEFAULT_STRIP;   // per-diagnosis strip; default only pre-hydration
       return '<div class="kx-ecg kx-lesson-strip">' +
         '<svg class="kx-ecg-svg kx-lesson-ecg-svg" viewBox="0 0 320 80" width="100%" height="72" preserveAspectRatio="none" aria-hidden="true">' +
           '<defs><pattern id="kxEcgPaper09" width="8" height="8" patternUnits="userSpaceOnUse">' +
             '<path class="kx-ecg-grid" d="M8 0H0V8"></path></pattern></defs>' +
           '<rect width="320" height="80" fill="url(#kxEcgPaper09)"></rect>' +
-          '<polyline class="kx-ecg-trace" points="0,48 10,46 18,50 26,47 30,48 33,52 36,26 39,60 42,48 60,47 72,50 84,48 88,48 91,52 94,26 97,60 100,48 118,47 130,48 134,48 137,52 140,28 143,60 146,48 172,47 190,48 194,52 197,26 200,60 203,48 230,47 250,48 254,52 257,27 260,60 263,48 290,47 306,48 310,52 313,27 316,60 320,48"></polyline>' +
+          '<polyline class="kx-ecg-trace" points="' + esc(pts) + '"></polyline>' +
         '</svg>' +
       '</div>';
+    }
+    // Content-enrichment helpers — reuse existing lesson CSS classes; each renders nothing when empty.
+    function pill(label, text) { return text ? ('<div class="kx-lesson-label">' + esc(label) + '</div><p class="kx-lesson-overview">' + esc(text) + '</p>') : ''; }
+    function listBlock(label, items, icon) {
+      if (!items || !items.length) return '';
+      return '<div class="kx-lesson-label">' + esc(label) + '</div><div class="kx-lesson-crit-list">' +
+        items.map(function (c) { return '<div class="kx-lesson-crit"><span class="kx-lesson-crit-ic">' + ic(icon || 'chevron_right') + '</span><span>' + esc(c) + '</span></div>'; }).join('') + '</div>';
+    }
+    function emergencyNote(vm) {
+      return vm.emergency ? ('<div class="kx-lesson-note kx-lesson-note--pitfall"><div class="kx-lesson-note-hd">' + ic('emergency') + '<b>Emergency considerations</b></div><span>' + esc(vm.emergency) + '</span></div>') : '';
     }
   
     function tagsHtml(vm) {
@@ -1738,17 +1758,23 @@
   
       var overview =
         '<section class="kx-lesson-panel is-active" role="tabpanel" data-panel="overview">' +
-          ecgStrip() +
+          ecgStrip(vm) +
+          pill('Overview', vm.overview) +
           tagsHtml(vm) +
           criteriaHtml(vm) +
+          pill('Key measurements', vm.measurements) +
+          listBlock('Differential diagnoses', vm.differentials, 'compare_arrows') +
+          listBlock('Management', vm.management, 'medical_services') +
+          emergencyNote(vm) +
           pearlPitfallHtml(vm) +
+          pill('Prognosis', vm.prognosis) +
           tutorBtn() +
           quizBtn(vm) +
         '</section>';
-  
+
       var ecgPanel =
         '<section class="kx-lesson-panel" role="tabpanel" data-panel="ecg" hidden>' +
-          ecgStrip() +
+          ecgStrip(vm) +
           tagsHtml(vm) +
           criteriaHtml(vm) +
         '</section>';

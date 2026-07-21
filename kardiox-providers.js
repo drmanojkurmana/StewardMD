@@ -132,6 +132,20 @@
     } catch (e) {}
     return null;
   }
+  // On-device REAL inference: the EcgLib 7-head ONNX ensemble via ONNX Runtime Web (kardiox-ort.js),
+  // feeding the Evidence Fusion Engine (kardiox-fusion.js). Selected whenever the ORT runtime
+  // (window.ort) + the provider are present (i.e. the model bundle is loaded); the deterministic demo
+  // mock is only the last resort when no ONNX runtime is available (and it self-labels as a demo).
+  function ortAnalyzer() {
+    try {
+      if (typeof window !== "undefined" && window.SMD_KARDIOX_ORT && window.ort) {
+        return window.SMD_KARDIOX_ORT.makeOrtAnalyzer({ baseUrl: "kardiox-models" });
+      }
+    } catch (e) {}
+    return null;
+  }
+  function ortActive() { return !!ortAnalyzer(); }
+
   function useRemote() { return backendFlag() && _backendHealthy && !!remoteAnalyzer(); }
   // Ping /api/kardiox/v1/health; on success flip to the remote analyzer (rebuild the active assembly).
   function checkBackend() {
@@ -150,7 +164,8 @@
     var cards = opts.cards || (C && C.flashcards ? C.flashcards() : []);
     var store = (typeof window !== "undefined" && window.SMD_KARDIOX_STORE && window.SMD_KARDIOX_STORE.create)
       ? window.SMD_KARDIOX_STORE.create() : mockEcgStore(opts.seedAnalyses);
-    var analyzer = (opts.remote || useRemote()) ? (remoteAnalyzer() || mockAnalyzer()) : mockAnalyzer();
+    var analyzer = (opts.remote || useRemote()) ? (remoteAnalyzer() || mockAnalyzer())
+                 : (ortAnalyzer() || mockAnalyzer());   // REAL on-device ensemble first; mock only w/o ORT runtime
     return {
       kind: "live",
       analyzer: analyzer,
@@ -166,7 +181,7 @@
   function use(assembly) { _active = assembly; return _active; }
 
   var API = { mockProviders: mockProviders, liveProviders: liveProviders, current: current, use: use, sm2: sm2,
-              checkBackend: checkBackend, backendActive: useRemote };
+              checkBackend: checkBackend, backendActive: useRemote, ortActive: ortActive };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_KARDIOX_PROVIDERS = API;
 })();
