@@ -2454,6 +2454,53 @@
   function toggleConfidence() { try { var F = window.SMD_KARDIOX_FLAGS; if (F) { F.set("smd_kardiox_confidence", !F.bool("smd_kardiox_confidence")); toast("Confidence display " + (F.bool("smd_kardiox_confidence") ? "on" : "off") + "."); show("settings"); } } catch (e) {} }
   function toggleBookmark() { var P = providers(); if (P && P.library && state.lessonId) { Promise.resolve(P.library.toggleBookmark(state.lessonId)).then(function () { haptic("light"); }); } }
 
+  // Capture a real ECG image and return its bytes as a Blob. Native: Capacitor Camera (camera/photo) or
+  // FilePicker (files/pdf); Web: a hidden <input type=file>. Rejects with {cancelled:true} on user cancel.
+  function captureImage(source) {
+    return new Promise(function (resolve, reject) {
+      var Cap = (typeof window !== "undefined" && window.Capacitor) || null;
+      var Plugins = Cap && Cap.Plugins;
+      var b64ToBlob = function (b64, mime) {
+        var bin = atob(b64), arr = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+        return new Blob([arr], { type: mime || "image/jpeg" });
+      };
+      // ── Native (Capacitor) ──
+      if (Cap && Cap.isNativePlatform && Cap.isNativePlatform() && Plugins) {
+        if ((source === "camera" || source === "photoLibrary") && Plugins.Camera) {
+          Plugins.Camera.getPhoto({ quality: 92, resultType: "dataUrl", allowEditing: false,
+            source: source === "camera" ? "CAMERA" : "PHOTOS" })
+            .then(function (p) {
+              var du = p && (p.dataUrl || p.webPath);
+              if (!du) return reject(new Error("no image"));
+              return fetch(du).then(function (r) { return r.blob(); }).then(resolve);
+            })
+            .catch(function (err) { reject(/cancel/i.test((err && err.message) || "") ? { cancelled: true } : err); });
+          return;
+        }
+        if (Plugins.FilePicker) {
+          Plugins.FilePicker.pickFiles({ types: source === "pdf" ? ["application/pdf"] : ["image/*"], readData: true, limit: 1 })
+            .then(function (res) {
+              var f = res && res.files && res.files[0];
+              if (!f) return reject({ cancelled: true });
+              if (f.data) return resolve(b64ToBlob(f.data, f.mimeType));
+              if (f.path && Cap.convertFileSrc) return fetch(Cap.convertFileSrc(f.path)).then(function (r) { return r.blob(); }).then(resolve);
+              reject(new Error("no file data"));
+            })
+            .catch(function (err) { reject(/cancel/i.test((err && err.message) || "") ? { cancelled: true } : err); });
+          return;
+        }
+      }
+      // ── Web fallback ──
+      try {
+        var inp = document.createElement("input");
+        inp.type = "file"; inp.accept = source === "pdf" ? "application/pdf,image/*" : "image/*";
+        inp.onchange = function () { var f = inp.files && inp.files[0]; f ? resolve(f) : reject({ cancelled: true }); };
+        inp.click();
+      } catch (e) { reject(new Error("image capture unavailable")); }
+    });
+  }
+
   function onClick(e) {
     var t = e.target.closest && e.target.closest("[data-act]"); if (!t) return;
     var act = t.getAttribute("data-act") || "";
@@ -2470,7 +2517,17 @@
       case "kxnav:privacy": go("privacy"); return;
       case "kxnav:settings": case "kxnav:storage": go("settings"); return;
       case "kxnav:why": haptic("light"); go("why"); return;
-      case "kx-source": case "kardiox-pick": case "kardiox-cam-allow": haptic("light"); runPipeline({ id: "kx-" + Date.now(), source: t.getAttribute("data-src") || "photoLibrary" }); return;
+      case "kx-source": case "kardiox-pick": case "kardiox-cam-allow": {
+        haptic("light");
+        var src = t.getAttribute("data-src") || "photoLibrary";
+        captureImage(src).then(function (blob) {
+          runPipeline({ id: "kx-" + Date.now(), source: src, data: blob, leadLayout: null });
+        }).catch(function (err) {
+          if (err && err.cancelled) return;                      // user backed out of the picker — no error
+          toast("Couldn't open the " + (src === "camera" ? "camera" : "picker") + ". " + ((err && err.message) || ""));
+        });
+        return;
+      }
       case "kardiox-cam-deny": case "kardiox-retry": show("source"); return;
       case "kardiox-open": case "report": openStored(t.getAttribute("data-id")); return;
       case "kxnav:lesson": state.lessonId = t.getAttribute("data-id"); haptic("light"); go("lesson"); return;
