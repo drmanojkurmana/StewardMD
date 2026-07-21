@@ -84,6 +84,14 @@
     document.documentElement.classList.remove("kx-lock");
   }
 
+  // Launch from the home card — re-verify Experimental Access on each open (server-side,
+  // revocable), exactly like FundX. Falls back to a direct open if the gate isn't present
+  // (e.g. dev bypass / offline-cached token handled inside SMD_XACCESS.gate).
+  function launch() {
+    try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("kardiox", open); return; } } catch (e) {}
+    open();
+  }
+
   /* ── Home-card auto-mount (additive; home.js is NOT modified) ────────────────────────────────────
      When smd_kardiox is on, inject the flagship card into the home content stack after the hero, and
      keep it present across home re-renders via a MutationObserver. If the home markup isn't found the
@@ -107,12 +115,12 @@
     // Delegate the card tap (the card lives outside #kardioxRoot).
     document.addEventListener("click", function (e) {
       var c = e.target.closest && e.target.closest('.kx-home-card[data-act="kardiox"]');
-      if (c) { e.preventDefault(); haptic("light"); open(); }
+      if (c) { e.preventDefault(); haptic("light"); launch(); }
     });
     document.addEventListener("keydown", function (e) {
       if (e.key !== "Enter" && e.key !== " ") return;
       var c = e.target.closest && e.target.closest('.kx-home-card[data-act="kardiox"]');
-      if (c) { e.preventDefault(); haptic("light"); open(); }
+      if (c) { e.preventDefault(); haptic("light"); launch(); }
     });
     // Mount now + on every home re-render (home.js rebuilds .v3-stack on navigation).
     mountHomeCard();

@@ -28,6 +28,7 @@ import * as FS from "./_fbfirestore.js";
 // ---- feature registry (add a line to unlock a new beta feature) ------------------------
 export const FEATURES = {
   fundx: { id: "fundx", label: "FundX AI", prefix: "FUNDX", blurb: "AI-guided retinal imaging" },
+  kardiox: { id: "kardiox", label: "KardioX AI", prefix: "KARDX", blurb: "AI ECG interpretation" },
   // ecg:      { id: "ecg",      label: "ECG AI",          prefix: "ECG",   blurb: "12-lead ECG interpretation" },
   // ultrasound:{ id: "ultrasound", label: "Ultrasound AI", prefix: "USG",   blurb: "POCUS assistance" },
   // copilot:  { id: "copilot",  label: "Clinical Copilot", prefix: "COPILOT", blurb: "Bedside reasoning copilot" },
