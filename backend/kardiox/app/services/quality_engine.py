@@ -67,7 +67,10 @@ _HOUGH_VOTES = 150                # min collinear votes for a Hough line
 # Hard checks REJECT; everything else WARNs. Cropping is intentionally SOFT: a border-ink heuristic
 # cannot distinguish a legitimately full-frame ECG (common) from a truly cropped one, so it must not
 # hard-block. True missing-lead loss is surfaced by the (soft) missingLeads check + layout detection.
-_HARD_CHECKS = ("blur", "resolution", "contrast", "glare")
+# glare is a SOFT warning, not a hard reject: an uncalibrated bright-pixel heuristic must not block a
+# clean white-paper ECG (the genuinely-unusable cases are caught by blur/contrast/resolution). It still
+# degrades the quality score + warns.
+_HARD_CHECKS = ("blur", "resolution", "contrast")
 _CHECK_ORDER = ("blur", "rotation", "shadow", "resolution", "noise", "contrast",
                 "glare", "grid", "speedGain", "cropping", "missingLeads", "ood")
 
@@ -196,14 +199,33 @@ def contrast_std(gray) -> float:
 
 
 def glare_fraction(gray) -> float:
-    """Fraction of near-saturated (>= `_GLARE_LEVEL`) pixels — specular glare / blow-out.
+    """Fraction of the image covered by LARGE contiguous specular blow-out (flash glare).
+
+    A plain white ECG paper is near-saturated almost everywhere, so counting every bright pixel
+    (the old behaviour) wrongly rejected clean ECGs as "glare". Real glare is a specular highlight: a
+    LARGE contiguous saturated region with no trace/grid detail. We therefore erode the saturated mask
+    with a kernel scaled to the image, so thin bright gaps between grid lines / around the trace vanish
+    and only substantial blow-out blobs remain.
 
     Expected input:  2-D grayscale array. Expected output: float in [0, 1].
     Failure modes:   numpy absent -> UpstreamUnavailable; empty array -> 0.0.
     """
-    _, np = _lazy()
+    cv2, np = _lazy()
     g = np.asarray(gray)
-    return float((g >= _GLARE_LEVEL).mean()) if g.size else 0.0
+    if not g.size:
+        return 0.0
+    sat = (g >= _GLARE_LEVEL)
+    if not sat.any():
+        return 0.0
+    # "detail" = anything below saturation: grid lines, trace ink, text. A clean ECG has detail spread
+    # across the whole sheet, so near_detail ~ the whole image and glare ~ 0. A real specular blow-out is
+    # a large uniform saturated region with NO grid/trace nearby → those pixels are flagged.
+    detail = (g < _GLARE_LEVEL).astype("uint8")
+    k = max(15, int(min(g.shape[:2]) * 0.05)) | 1        # ~5% of the short side, odd
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k))
+    near_detail = cv2.dilate(detail, kernel)             # within k px of any sub-saturated detail
+    glare = np.logical_and(sat, near_detail == 0)        # saturated AND far from any detail = blow-out
+    return float(glare.mean())
 
 
 def _grid_period(proj, np) -> float | None:

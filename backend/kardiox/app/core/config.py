@@ -86,6 +86,11 @@ class Settings(BaseSettings):
     # Not Ready are skipped; a single available member still yields a (single-source) result.
     digitizer_consensus_members: str = "classical"
 
+    # ── Trained ONNX ensemble (EcgLib 7 heads + ECG-Diagnosis + HeartGPT) — real 12-lead classifiers.
+    #    Dir with ecglib_*.onnx + ecg_diagnosis.onnx / heartgpt_afib.onnx (root or engines/). Empty ->
+    #    ensemble Not Ready (skipped). The ensemble z-norms per lead so it is robust to digitiser amplitude.
+    ensemble_models_dir: str = ""
+
     # ── Rhythm model (stages 6/7/9, TorchECG) — ship NO weights. Empty path → provider raises
     #    UpstreamUnavailable (never fakes a label). A validated checkpoint is required to enable.
     rhythm_model_path: str = ""

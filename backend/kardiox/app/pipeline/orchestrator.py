@@ -96,6 +96,7 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
     from app.core.config import get_settings
     from app.core.upload import validate_image_bytes
     validate_image_bytes(image, get_settings())
+    original_image = image   # kept for the reconstruction digitiser (see digitization stage)
     try:
         # enhancement (critical)
         image, _ = await run_stage("enhancement", providers.preprocessing,
@@ -130,52 +131,104 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
             log.info("layout.isolated", reason=type(e).__name__)
             trace.append({"stage": "layout", "status": "isolated"})
 
-        # digitization → signal (critical)
+        # digitization → signal (critical). The reconstruction digitiser does its OWN ink extraction, so
+        # the photo-oriented OpenCV enhancement (grid removal + adaptive-threshold binarisation) DISTORTS
+        # its trace — feed it the ORIGINAL image. The classical digitiser still wants the enhanced image.
+        digi_input = original_image if getattr(providers.digitization, "name", "") == "reconstruction" else image
         traces, _ = await run_stage("digitization", providers.digitization,
-                                    lambda: providers.digitization.digitize(image),
+                                    lambda: providers.digitization.digitize(digi_input),
                                     critical=True, emit=emit, pct_active=30, pct_done=36, trace=trace)
         digitizer_consensus = (traces or {}).get("consensus")   # present when the consensus digitizer ran
         signal, _ = await run_stage("signalExtraction", providers.wfdb,
                                     lambda: providers.wfdb.to_signal(traces),
                                     critical=True, emit=emit, pct_active=40, pct_done=46, trace=trace)
 
-        # specialist model classifiers (MI/rare/conduction/morphology/beat) — OPTIONAL + isolated. Each is
-        # Not Ready until a validated checkpoint is configured; outputs are candidates for fusion.
+        # ── Layout gate (correctness). A printed ECG is ONE 10 s acquisition sliced into column time
+        #    windows; a continuous 10 s x 12 signal exists ONLY for a true 12x1 full-disclosure. For a
+        #    3x4/6x2 print we NEVER fabricate a continuous 12-lead from discontinuous 2.5 s / 5 s cells:
+        #    rhythm/rate is taken from the continuous rhythm strip, and the 12-lead morphology / axis /
+        #    ischemia analysis + ML classifiers are marked UNAVAILABLE (deferred), not guessed. ──
+        layout = (traces or {}).get("layout")
+        full12 = bool((traces or {}).get("full")) if isinstance(traces, dict) and "full" in traces else True
+        # amplitude-dependent diagnosis (ST/ischemia, axis, LVH, ML classifiers) is only trustworthy when
+        # the digitiser recovers calibrated amplitudes. The classical digitiser does not → rhythm only.
+        amp_ok = bool((traces or {}).get("amplitudeReliable", True))
+        run_twelve = full12 and amp_ok
+        run_ensemble = full12          # the trained ONNX ensemble z-norms per lead → amplitude-robust
+        availability = None
         specialist_candidates = []
-        try:
-            from app.services.specialists import run_specialists
-            specialist_candidates = await run_specialists(signal, providers.specialists)
-            trace.append({"stage": "specialists", "status": "done", "candidates": len(specialist_candidates)})
-        except Exception as e:  # noqa: BLE001 — never let specialists affect the deterministic path
-            log.info("specialists.isolated", reason=type(e).__name__)
-        # EcgLib pretrained classifiers (Apache-2.0) — optional + isolated; positives join the candidates.
-        try:
-            ecglib_found = await providers.ecglib.classify(signal)
-            specialist_candidates = specialist_candidates + (ecglib_found or [])
-            trace.append({"stage": "ecglib", "status": "done", "positives": len(ecglib_found or [])})
-        except Exception as e:  # noqa: BLE001 — Not Ready / error -> isolated
-            log.info("ecglib.isolated", reason=type(e).__name__)
+        ensemble_dx = []
 
-        # rhythm (critical) + beats (optional)
+        if run_twelve:
+            # specialist classifiers (MI/rare/conduction/morphology/beat) — OPTIONAL + isolated.
+            try:
+                from app.services.specialists import run_specialists
+                specialist_candidates = await run_specialists(signal, providers.specialists)
+                trace.append({"stage": "specialists", "status": "done", "candidates": len(specialist_candidates)})
+            except Exception as e:  # noqa: BLE001
+                log.info("specialists.isolated", reason=type(e).__name__)
+            # EcgLib pretrained classifiers (Apache-2.0) — optional + isolated; positives join candidates.
+            try:
+                ecglib_found = await providers.ecglib.classify(signal)
+                specialist_candidates = specialist_candidates + (ecglib_found or [])
+                trace.append({"stage": "ecglib", "status": "done", "positives": len(ecglib_found or [])})
+            except Exception as e:  # noqa: BLE001
+                log.info("ecglib.isolated", reason=type(e).__name__)
+
+        # Trained ONNX ensemble (EcgLib + ECG-Diagnosis + HeartGPT) — REAL 12-lead classifiers. Runs on any
+        # continuous 12-lead: it z-normalises each lead, so it is robust to the digitiser's amplitude error
+        # (unlike the amplitude-based rules) and drives the verdict even when those rules are deferred.
+        # Isolated + Not-Ready-safe (classify returns [] when no models are configured — never fabricates).
+        if run_ensemble:
+            try:
+                from app.services import ensemble as _ensemble
+                ensemble_dx = await asyncio.to_thread(_ensemble.classify, signal)
+                trace.append({"stage": "ensemble", "status": "done", "diagnoses": len(ensemble_dx)})
+            except Exception as e:  # noqa: BLE001 — the ensemble must never break the pipeline
+                log.info("ensemble.isolated", reason=type(e).__name__)
+
+        # rhythm (critical) — for 3x4 the signal's "II" is the continuous 10 s rhythm strip; for 6x2 it is
+        # the 5 s column-0 lead II. Rate/regularity from a continuous lead is valid regardless of layout.
         rhythm, _ = await run_stage("rhythm", providers.rhythm,
                                     lambda: providers.rhythm.rhythm(signal),
                                     critical=True, emit=emit, pct_active=52, pct_done=58, trace=trace)
-        _beats, _ = await run_stage("beats", providers.rhythm,
-                                    lambda: providers.rhythm.beats(signal),
-                                    critical=False, emit=emit, pct_active=60, pct_done=64, trace=trace)
 
-        # measurement (critical), morphology + ST (optional)
-        meas, _ = await run_stage("measurement", providers.measurement,
-                                  lambda: providers.measurement.measure(signal),
-                                  critical=True, emit=emit, pct_active=68, pct_done=76, trace=trace)
-        morph, _ = await run_stage("morphology", providers.rhythm,
-                                   lambda: providers.rhythm.morphology(signal),
-                                   critical=False, emit=emit, pct_active=80, pct_done=84, trace=trace)
-        st, _ = await run_stage("st", providers.measurement,
-                                lambda: providers.measurement.st(signal),
-                                critical=False, emit=emit, pct_active=86, pct_done=88, trace=trace)
-        morph = morph or {}
-        st = st or {}
+        if run_twelve:
+            _beats, _ = await run_stage("beats", providers.rhythm,
+                                        lambda: providers.rhythm.beats(signal),
+                                        critical=False, emit=emit, pct_active=60, pct_done=64, trace=trace)
+            meas, _ = await run_stage("measurement", providers.measurement,
+                                      lambda: providers.measurement.measure(signal),
+                                      critical=True, emit=emit, pct_active=68, pct_done=76, trace=trace)
+            morph, _ = await run_stage("morphology", providers.rhythm,
+                                       lambda: providers.rhythm.morphology(signal),
+                                       critical=False, emit=emit, pct_active=80, pct_done=84, trace=trace)
+            st, _ = await run_stage("st", providers.measurement,
+                                    lambda: providers.measurement.st(signal),
+                                    critical=False, emit=emit, pct_active=86, pct_done=88, trace=trace)
+            morph = morph or {}
+            st = st or {}
+        else:
+            # No trustworthy basis for 12-lead morphology/axis/ST-ischemia + ML classifiers → mark
+            # UNAVAILABLE (never guess). Rhythm/rate ONLY, from the continuous lead. Two causes:
+            meas, morph, st = {}, {}, {}
+            if not full12:
+                secs = "2.5 s" if layout == "3x4" else ("5 s" if layout == "6x2" else "short")
+                availability = (
+                    "Full 12-lead analysis (morphology, axis, ST/ischemia territories, ML classifiers) is "
+                    f"UNAVAILABLE for a {layout or 'multi-column'} print layout — each lead cell is only ~{secs} "
+                    "and the leads are not simultaneous, so a continuous 12-lead signal cannot be formed "
+                    "without fabricating data. Rhythm and rate were assessed from the continuous rhythm strip. "
+                    "Capture a true 12x1 full-disclosure (or a longer rhythm strip) for complete analysis.")
+                trace.append({"stage": "layoutGate", "status": "partial-layout", "layout": layout})
+            else:
+                availability = (
+                    ("The trained 12-lead ML ensemble (rhythm/conduction/AF classifiers) was applied. " if ensemble_dx else "")
+                    + "Amplitude-based analysis (ST/ischemia territories, axis, LVH voltage) is UNAVAILABLE "
+                    "because the classical image digitiser does not recover calibrated amplitudes reliably — "
+                    "those findings would be a guess. A validated (learned) digitiser is required for "
+                    "ST/ischemia + voltage criteria; rhythm/rate is from the continuous lead.")
+                trace.append({"stage": "layoutGate", "status": "amplitude-unreliable", "layout": layout, "ensemble": bool(ensemble_dx)})
 
         # rule validation (critical)
         features = {
@@ -190,6 +243,13 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
                                        lambda: providers.rules.validate(features),
                                        critical=True, emit=emit, pct_active=92, pct_done=95, trace=trace)
 
+        # The trained ONNX ensemble's diagnoses drive the verdict — merge them ahead of the deterministic
+        # rule diagnoses (sorted by confidence). _assemble picks diagnoses[0] as the verdict.
+        if ensemble_dx:
+            merged = list(ensemble_dx) + list(validated.get("diagnoses") or [])
+            merged.sort(key=lambda d: -float(d.get("confidence", 0.0)))
+            validated["diagnoses"] = merged
+
         # clinical explanation (OPTIONAL, constrained, non-blocking)
         interp, _ = await run_stage("clinicalExplanation", providers.gemini,
                                     lambda: providers.gemini.explain({"features": features, "validated": validated}),
@@ -199,7 +259,7 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
         analysis = _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
                              quality_report=quality_report, layout_info=layout_info,
                              specialist_candidates=specialist_candidates,
-                             digitizer_consensus=digitizer_consensus)
+                             digitizer_consensus=digitizer_consensus, availability=availability)
         total_ms = round((time.monotonic() - t_pipeline) * 1000, 1)
         METRICS.observe("kardiox_pipeline_duration_seconds", time.monotonic() - t_pipeline, {"mode": "live"})
         log.info("pipeline.done", total_ms=total_ms, stages=len(trace))
@@ -231,7 +291,7 @@ def _measurement_consistency(rhythm: dict, meas: dict):
 
 def _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
               quality_report=None, layout_info=None, specialist_candidates=None,
-              digitizer_consensus=None):
+              digitizer_consensus=None, availability=None):
     """Build the ECGAnalysis contract from the real stage outputs + Phase-7 fusion/calibration/explain."""
     from app.core.config import get_settings
     from app.models.ecg import Differential, ECGFinding, Evidence, MorphologyRow, RedFlag
@@ -339,6 +399,12 @@ def _assemble(sid, rhythm, meas, st, validated, interpretation, providers,
     if top and top["severity"] == "critical":
         red_flag = RedFlag(title=f"{top['label']} — urgent", body=top.get("whatToVerify", ""))
 
+    # PARTIAL-layout honesty: surface the "12-lead unavailable" notice + never over-state confidence when
+    # only the rhythm strip was analysed (the verdict is the descriptive rhythm, not a 12-lead diagnosis).
+    if availability:
+        interpretation = (availability + (" " + interpretation if interpretation else "")).strip()
+        what_to_verify = availability if not what_to_verify else (availability + " " + what_to_verify)
+        confidence = min(confidence, 0.6)
     band = "high" if confidence >= 0.85 else "medium" if confidence >= 0.6 else "low"
     return ECGAnalysis(
         schemaVersion=SCHEMA_VERSION,

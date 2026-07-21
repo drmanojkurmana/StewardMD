@@ -12,7 +12,8 @@ _PREPROC = {"none": preprocessing.NonePreprocessing, "opencv": preprocessing.Ope
 _QUALITY = {"none": quality.NoneQuality, "opencv": quality.OpenCVQuality}
 _DIGI = {"none": digitization.NoneDigitization, "classical": digitization.ClassicalDigitization,
          "opencv": digitization.OpenCVDigitization, "external": digitization.ExternalDigitization,
-         "consensus": digitization.ConsensusDigitization}
+         "consensus": digitization.ConsensusDigitization,
+         "reconstruction": digitization.ReconstructionDigitization}
 _WFDB = {"none": wfdb_io.NoneWfdb, "wfdb": wfdb_io.WfdbSignal}
 _RHY = {"none": rhythm.NoneRhythm, "deterministic": rhythm.DeterministicRhythm,
         "torchecg": rhythm.TorchECGRhythm}
