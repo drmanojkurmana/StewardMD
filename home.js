@@ -2381,18 +2381,34 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
       // Hard client-side ceiling: the grounding chain (KB index load → buildPackage → grounded call)
       // must never leave the user stuck on 'Searching…' forever if a promise never settles (BUG-05).
       // On timeout we surface a clear message + a one-tap retry, and free the composer.
-      var _maikDone = false, MAIK_TO_MS = 40000;
-      var _maikTO = setTimeout(function () {
-        if (_maikDone) return; _maikDone = true;
+      var _maikDone = false, MAIK_TO_MS = 90000, _maikTO = null, _streamStarted = false, _stageT = [];
+      function _clearStages() { _stageT.forEach(function (t) { try { clearTimeout(t); } catch (e) {} }); _stageT = []; }
+      // Watchdog, NOT a fixed total ceiling. On web (real SSE) onDelta resets it on every streamed token so
+      // a long but ACTIVELY-STREAMING answer is never killed. On native there is no SSE (CapacitorHttp
+      // buffers it) — the answer is fetched whole then typed out — so nothing lands until the end and the
+      // ceiling must comfortably cover a cold Vertex/KB start + a full grounded answer. The old fixed 40s
+      // nuked in-flight answers ("took too long" WHILE it was still generating). Fires only if truly stuck.
+      function _maikTimedOut() {
+        if (_maikDone) return; _maikDone = true; _clearStages();
         try {
           think.innerHTML = '<div class="maik-welcome">MaiK took too long to respond — the knowledge search may be busy. <a href="#" class="maik-retry" style="color:var(--mk-teal,#0e6e63);font-weight:700;text-decoration:none">Tap to retry</a></div>';
           var _rl = think.querySelector(".maik-retry");
           if (_rl) _rl.addEventListener("click", function (ev) { ev.preventDefault(); try { think.parentNode && think.parentNode.removeChild(think); } catch (e) {} runClinical(question, retrieval, depth, active, topicLabel); });
         } catch (e) {}
         _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
-        try { console.warn("[MaiK] knowledge search timed out after " + MAIK_TO_MS + "ms:", question); } catch (e) {}
+        try { console.warn("[MaiK] knowledge search timed out after " + MAIK_TO_MS + "ms with no progress:", question); } catch (e) {}
         try { scroll(); } catch (e) {}
-      }, MAIK_TO_MS);
+      }
+      function _armTO() { clearTimeout(_maikTO); _maikTO = setTimeout(_maikTimedOut, MAIK_TO_MS); }
+      // Reassurance while a (native) answer generates — otherwise the bubble sits on one "Searching…" line
+      // for the whole wait and reads as frozen/broken. Neutered the instant tokens/answer land.
+      [[7000, "Reviewing the evidence"], [16000, "Composing your answer"], [30000, "Almost there — finalizing"]].forEach(function (s) {
+        _stageT.push(setTimeout(function () {
+          if (_maikDone || _streamStarted) return;
+          try { think.innerHTML = '<span class="maik-thinking">' + svg("spark", "smd-ico") + ' ' + s[1] + '<span class="d">.</span><span class="d d2">.</span><span class="d d3">.</span></span>'; scroll(); } catch (e) {}
+        }, s[0]));
+      });
+      _armTO();
       Promise.resolve()
         .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
         .then(function () {
@@ -2428,6 +2444,8 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
           // to the non-stream call on any hiccup, so this can't regress the answer.
           var _perfT0 = maikNow(), _perfTTFT = 0;
           var onDelta = function (acc) {
+            if (_maikDone) return;                              // a timeout already fired — don't paint over the retry prompt
+            _streamStarted = true; _clearStages(); _armTO();    // progress: stop reassurance + reset the no-progress watchdog
             if (!_perfTTFT) _perfTTFT = maikNow();
             var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(acc) : maikEscH(acc);
             think.innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';
@@ -2453,8 +2471,8 @@ body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-
             } catch (e) {}
           });
         })
-        .catch(function (e) { if (!_maikDone) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
-        .then(function () { if (_maikDone) return; _maikDone = true; clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
+        .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
+        .then(function () { if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
     }
     function send() {
       if (_maikBusy) return;
