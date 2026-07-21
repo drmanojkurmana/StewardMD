@@ -56,7 +56,7 @@
         '<div class="kx-home-title">KardioX AI</div>' +
         '<div class="kx-home-sub">ECG interpretation · learning · decision support</div>' +
         '<button class="kx-home-cta" type="button" tabindex="-1">Analyze an ECG ' + ic("arrow_forward") + '</button>' +
-        '<div class="kx-home-conf"><b class="kx-data">98%</b> avg confidence</div>' +
+        '<div class="kx-home-conf">' + ic("science") + 'Demo preview</div>' +
         '<div class="kx-home-foot">' + ic("lock") + 'ECGs stay on your device.</div>' +
       '</div>';
   }
