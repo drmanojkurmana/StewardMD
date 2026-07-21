@@ -56,7 +56,11 @@ for (const key of ["source", "permission", "processing", "analysis", "history", 
   ok("screen renders: " + key, rendered(120));
 }
 
-// full mock pipeline: source card tap → processing → analysis → report (AF verdict)
+// full pipeline UI smoke: source card tap → processing → analysis → report. Uses the EXPLICIT mock
+// analyzer (a demo sample) to exercise the report rendering — real inference (backend / bundled on-device
+// ONNX) is unavailable headless, and Analyze is now wired to the real pipeline by default (proven in
+// kardiox-backend.test.mjs), with the mock reserved for explicit demo mode.
+globalThis.SMD_KARDIOX_PROVIDERS.use(globalThis.SMD_KARDIOX_PROVIDERS.mockProviders({}));
 host._html = "";
 R.runPipeline({ id: "smoke", source: "photoLibrary" });
 await delay(400);   // mock analyzer streams 13 stages @ ~8ms then resolves + mounts report
