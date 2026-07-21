@@ -150,9 +150,20 @@
         // enforces the one-code/one-device access server-side; this is just discovery.
         var xaActive = false; try { xaActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("fundx")); } catch (e) {}
         var kxActive = false; try { kxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("kardiox")); } catch (e) {}
+        // Software update (native only) — Apple-style: Automatic toggle + Check + Download & install.
+        var otaBlk = "";
+        try {
+          if (window.SMD_OTA && SMD_OTA.available()) {
+            otaBlk = '<div class="smd-nav-note" style="margin-top:14px">' + svg("download", "smd-ico") + ' Software update</div>' +
+              swRow("ota_auto", "Automatic updates", "Fetch new versions in the background", SMD_OTA.isAuto()) +
+              '<div class="smd-nav-sub" id="otaStatus" style="padding:0 0 6px">Version ' + (SMD_OTA.currentVersion() || "current") + '</div>' +
+              '<button class="smd-nav-btn" id="otaCheck">' + svg("refresh", "smd-ico") + ' Check for updates</button>' +
+              '<button class="smd-nav-btn" id="otaInstall" style="display:none">' + svg("download", "smd-ico") + ' Download &amp; install</button>';
+          }
+        } catch (e) {}
         var xaBody = '<div class="smd-nav-note">Private beta — unlock with an access code from the StewardMD team. One code activates one device.</div>' +
           '<button class="smd-nav-btn' + (xaActive ? ' on' : '') + '" data-xa-open="fundx">' + (xaActive ? '🟢 FundX AI — enabled' : '🔬 FundX AI — enter access code') + '</button>' +
-          '<button class="smd-nav-btn' + (kxActive ? ' on' : '') + '" data-xa-open="kardiox">' + (kxActive ? '🟢 KardioX AI — enabled' : '🫀 KardioX AI — enter access code') + '</button>';
+          '<button class="smd-nav-btn' + (kxActive ? ' on' : '') + '" data-xa-open="kardiox">' + (kxActive ? '🟢 KardioX AI — enabled' : '🫀 KardioX AI — enter access code') + '</button>' + otaBlk;
         setBody.insertAdjacentHTML("beforeend",
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
           (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
@@ -187,6 +198,7 @@
               }
               else if (k === "whisper") { localStorage.setItem("smd_whisper_clinical_dictation", nv ? "1" : "0"); }
               else if (k === "maikperf") { localStorage.setItem("smd_maik_perf", nv ? "1" : "0"); }
+              else if (k === "ota_auto" && window.SMD_OTA) { SMD_OTA.setAuto(nv); }
             } catch (e) {}
             sw.classList.toggle("on", nv); sw.setAttribute("aria-checked", nv);
           });
@@ -216,6 +228,30 @@
             }, 60);
           });
         });
+        // wire the "Software update" controls (Check for updates / Download & install)
+        (function () {
+          var otaCheck = setBody.querySelector("#otaCheck"), otaInstall = setBody.querySelector("#otaInstall"), otaStatus = setBody.querySelector("#otaStatus");
+          if (!otaCheck && !otaInstall) return;
+          var pending = null;
+          if (otaCheck) otaCheck.addEventListener("click", function () {
+            if (!window.SMD_OTA) return;
+            otaCheck.disabled = true; if (otaStatus) otaStatus.textContent = "Checking…";
+            SMD_OTA.check().then(function (r) {
+              otaCheck.disabled = false; r = r || {};
+              if (r.status === "available") { pending = r; if (otaStatus) otaStatus.textContent = "Update available: v" + r.version; if (otaInstall) otaInstall.style.display = ""; }
+              else if (r.status === "uptodate") { pending = null; if (otaStatus) otaStatus.textContent = "You're up to date" + (r.current ? " (v" + r.current + ")" : ""); if (otaInstall) otaInstall.style.display = "none"; }
+              else { if (otaStatus) otaStatus.textContent = "Couldn't check — " + (r.error || "try again"); }
+            });
+          });
+          if (otaInstall) otaInstall.addEventListener("click", function () {
+            if (!window.SMD_OTA || !pending) return;
+            otaInstall.disabled = true;
+            SMD_OTA.install(pending, function (pct) { if (otaStatus) otaStatus.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
+              if (res && res.ok) { if (otaStatus) otaStatus.textContent = "Update ready — reopening…"; }
+              else { otaInstall.disabled = false; if (otaStatus) otaStatus.textContent = "Install failed — " + ((res && res.error) || "try again"); }
+            });
+          });
+        })();
       }
 
       // 3) Merge "About & Help" INTO "Reference" -> one "Reference & Help" group. Move the About
