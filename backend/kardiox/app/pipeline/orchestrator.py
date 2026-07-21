@@ -96,6 +96,7 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
     from app.core.config import get_settings
     from app.core.upload import validate_image_bytes
     validate_image_bytes(image, get_settings())
+    original_image = image   # kept for the reconstruction digitiser (see digitization stage)
     try:
         # enhancement (critical)
         image, _ = await run_stage("enhancement", providers.preprocessing,
@@ -130,9 +131,12 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
             log.info("layout.isolated", reason=type(e).__name__)
             trace.append({"stage": "layout", "status": "isolated"})
 
-        # digitization → signal (critical)
+        # digitization → signal (critical). The reconstruction digitiser does its OWN ink extraction, so
+        # the photo-oriented OpenCV enhancement (grid removal + adaptive-threshold binarisation) DISTORTS
+        # its trace — feed it the ORIGINAL image. The classical digitiser still wants the enhanced image.
+        digi_input = original_image if getattr(providers.digitization, "name", "") == "reconstruction" else image
         traces, _ = await run_stage("digitization", providers.digitization,
-                                    lambda: providers.digitization.digitize(image),
+                                    lambda: providers.digitization.digitize(digi_input),
                                     critical=True, emit=emit, pct_active=30, pct_done=36, trace=trace)
         digitizer_consensus = (traces or {}).get("consensus")   # present when the consensus digitizer ran
         signal, _ = await run_stage("signalExtraction", providers.wfdb,
@@ -150,8 +154,10 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
         # the digitiser recovers calibrated amplitudes. The classical digitiser does not → rhythm only.
         amp_ok = bool((traces or {}).get("amplitudeReliable", True))
         run_twelve = full12 and amp_ok
+        run_ensemble = full12          # the trained ONNX ensemble z-norms per lead → amplitude-robust
         availability = None
         specialist_candidates = []
+        ensemble_dx = []
 
         if run_twelve:
             # specialist classifiers (MI/rare/conduction/morphology/beat) — OPTIONAL + isolated.
@@ -168,6 +174,18 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
                 trace.append({"stage": "ecglib", "status": "done", "positives": len(ecglib_found or [])})
             except Exception as e:  # noqa: BLE001
                 log.info("ecglib.isolated", reason=type(e).__name__)
+
+        # Trained ONNX ensemble (EcgLib + ECG-Diagnosis + HeartGPT) — REAL 12-lead classifiers. Runs on any
+        # continuous 12-lead: it z-normalises each lead, so it is robust to the digitiser's amplitude error
+        # (unlike the amplitude-based rules) and drives the verdict even when those rules are deferred.
+        # Isolated + Not-Ready-safe (classify returns [] when no models are configured — never fabricates).
+        if run_ensemble:
+            try:
+                from app.services import ensemble as _ensemble
+                ensemble_dx = await asyncio.to_thread(_ensemble.classify, signal)
+                trace.append({"stage": "ensemble", "status": "done", "diagnoses": len(ensemble_dx)})
+            except Exception as e:  # noqa: BLE001 — the ensemble must never break the pipeline
+                log.info("ensemble.isolated", reason=type(e).__name__)
 
         # rhythm (critical) — for 3x4 the signal's "II" is the continuous 10 s rhythm strip; for 6x2 it is
         # the 5 s column-0 lead II. Rate/regularity from a continuous lead is valid regardless of layout.
@@ -205,12 +223,12 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
                 trace.append({"stage": "layoutGate", "status": "partial-layout", "layout": layout})
             else:
                 availability = (
-                    "Rhythm and rate only. 12-lead morphology, axis and ST/ischemia analysis (and the ML "
-                    "classifiers) are UNAVAILABLE because the classical image digitiser does not recover "
-                    "calibrated amplitudes reliably — amplitude-based diagnosis would be a guess. A validated "
-                    "(learned) digitiser is required for full 12-lead diagnosis; rhythm/rate (timing-based) "
-                    "is reported from the continuous lead.")
-                trace.append({"stage": "layoutGate", "status": "amplitude-unreliable", "layout": layout})
+                    ("The trained 12-lead ML ensemble (rhythm/conduction/AF classifiers) was applied. " if ensemble_dx else "")
+                    + "Amplitude-based analysis (ST/ischemia territories, axis, LVH voltage) is UNAVAILABLE "
+                    "because the classical image digitiser does not recover calibrated amplitudes reliably — "
+                    "those findings would be a guess. A validated (learned) digitiser is required for "
+                    "ST/ischemia + voltage criteria; rhythm/rate is from the continuous lead.")
+                trace.append({"stage": "layoutGate", "status": "amplitude-unreliable", "layout": layout, "ensemble": bool(ensemble_dx)})
 
         # rule validation (critical)
         features = {
@@ -224,6 +242,13 @@ async def run_pipeline(req: AnalyzeRequest, providers: Providers, r2: R2Client, 
         validated, _ = await run_stage("ruleValidation", providers.rules,
                                        lambda: providers.rules.validate(features),
                                        critical=True, emit=emit, pct_active=92, pct_done=95, trace=trace)
+
+        # The trained ONNX ensemble's diagnoses drive the verdict — merge them ahead of the deterministic
+        # rule diagnoses (sorted by confidence). _assemble picks diagnoses[0] as the verdict.
+        if ensemble_dx:
+            merged = list(ensemble_dx) + list(validated.get("diagnoses") or [])
+            merged.sort(key=lambda d: -float(d.get("confidence", 0.0)))
+            validated["diagnoses"] = merged
 
         # clinical explanation (OPTIONAL, constrained, non-blocking)
         interp, _ = await run_stage("clinicalExplanation", providers.gemini,
