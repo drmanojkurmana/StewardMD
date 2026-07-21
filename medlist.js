@@ -641,7 +641,7 @@
     container.appendChild(grid);
 
     // quick single-medicine typing entry (keeps a data-ml-open='manual' hook)
-    var typeLink = el("button", { cls: "ml-mini-btn", text: "＋ Type one medicine",
+    var typeLink = el("button", { cls: "ml-mini-btn", html: mlIco("plus") + " Type one medicine",
       attrs: { "data-ml-open": "manual", type: "button" }, });
     typeLink.style.marginTop = "10px";
     typeLink.addEventListener("click", function () { _openAdd = "manual"; render(); });
@@ -733,7 +733,7 @@
     }
     info.addEventListener("click", function () { openDoseSheet(r); });
     row.appendChild(info);
-    var addBtn = el("button", { cls: "ml-index-add", text: "＋ Add", attrs: { type: "button", "data-ml-index-result": "1" } });
+    var addBtn = el("button", { cls: "ml-index-add", html: mlIco("plus") + " Add", attrs: { type: "button", "data-ml-index-result": "1" } });
     addBtn.addEventListener("click", function () { addFromResult(r); });
     row.appendChild(addBtn);
     return row;
@@ -774,7 +774,7 @@
 
     function drawState(node, kind) {
       var box = el("div", { cls: "ml-state" + (kind === "offline" ? " ml-state-offline" : "") });
-      if (kind === "loading") { box.innerHTML = '<span class="ml-spin">◐</span>'; box.appendChild(el("span", { text: " Searching…" })); }
+      if (kind === "loading") { box.innerHTML = '<span class="ml-spin" aria-hidden="true"></span>'; box.appendChild(el("span", { text: " Searching…" })); }
       else if (kind === "offline") { box.appendChild(el("span", { text: "Search unavailable — showing offline formulary." })); box.appendChild(el("span", { cls: "ml-state-sub", text: "Type the medicine name manually if it isn't listed." })); }
       else { box.appendChild(el("span", { text: "No medicines found." })); box.appendChild(el("span", { cls: "ml-state-sub", text: "Check spelling, or add it via Type / Paste." })); }
       node.appendChild(box);
@@ -970,7 +970,7 @@
       close.addEventListener("click", function () { ov.remove(); });
       box.appendChild(close);
     } else {
-      box.appendChild(el("div", { cls: "ml-scan-spin", text: "◐" }));
+      box.appendChild(el("div", { cls: "ml-scan-spin", attrs: { "aria-hidden": "true" } }));
       box.appendChild(el("div", { text: msg }));
     }
     ov.appendChild(box);
@@ -1230,7 +1230,7 @@
       main.appendChild(lh);
 
       var actions = el("div", { cls: "ml-list-actions" });
-      var addMore = el("button", { cls: "ml-mini-btn ml-mini-btn-primary", text: "＋ Add medicine", attrs: { type: "button", "data-ml-add-more": "1" } });
+      var addMore = el("button", { cls: "ml-mini-btn ml-mini-btn-primary", html: mlIco("plus") + " Add medicine", attrs: { type: "button", "data-ml-add-more": "1" } });
       addMore.addEventListener("click", function () { _openAdd = "index"; render(); });
       var clearBtn = el("button", { cls: "ml-mini-btn", text: "Clear all", attrs: { type: "button" } });
       clearBtn.addEventListener("click", function () { clearAll(); _openAdd = null; render(); });
@@ -1343,26 +1343,16 @@
     minor: "Minor",
     monitor: "Monitor"
   };
-  // Color-INDEPENDENT text markers so severity never relies on color alone.
-  var SEVERITY_MARK = {
-    critical: "!!!",
-    major: "!!",
-    moderate: "!",
-    minor: "•",
-    monitor: "◆"
-  };
-
   function findingCard(finding) {
-    // severity conveyed by TEXT (label + mark), never color alone.
+    // Severity is conveyed by the TEXT label (Critical / Major / … — color-independent),
+    // not by a standalone symbol glyph.
     var bucket = SEVERITY_BUCKET_CLASS[finding.severity] || "monitor";
     var card = el("div", { cls: "mlr-card mlr-card-" + bucket });
 
     var head = el("div", { cls: "mlr-card-head" });
     head.appendChild(el("div", { cls: "mlr-card-pair", text: (finding.drugs || []).join(" + ") || "Medicine" }));
     var sevLabel = SEVERITY_LABEL[bucket] || "Caution";
-    var sevMark = SEVERITY_MARK[bucket] || "◆";
     var badge = el("span", { cls: "mlr-sev mlr-sev-" + bucket });
-    badge.appendChild(el("span", { cls: "mlr-sev-mark", text: sevMark, attrs: { "aria-hidden": "true" } }));
     badge.appendChild(el("span", { cls: "mlr-sev-text", text: sevLabel }));
     head.appendChild(badge);
     card.appendChild(head);
@@ -1721,7 +1711,7 @@
 ".ml-state{padding:22px 12px;text-align:center;font:600 13px var(--sans);color:var(--slate,#2d4356)}",
 ".ml-state-sub{display:block;font:500 12px var(--sans);color:var(--slate-soft,#5a7184);margin-top:5px}",
 ".ml-state-offline{color:var(--amber,#92620a)}",
-".ml-spin{display:inline-block;animation:mlspin 1s linear infinite;font-size:18px}@keyframes mlspin{to{transform:rotate(360deg)}}",
+".ml-spin{display:inline-block;width:14px;height:14px;box-sizing:border-box;border:2px solid var(--line,#d7dee3);border-top-color:var(--teal,#0e6e63);border-radius:50%;vertical-align:-2px;animation:mlspin 1s linear infinite}@keyframes mlspin{to{transform:rotate(360deg)}}",
 /* dose sheet */
 ".ml-dose-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}",
 ".ml-field{display:flex;flex-direction:column;gap:5px}",
@@ -1771,7 +1761,6 @@
 ".mlr-sev-moderate{background:var(--yellow-bg,#fdf2de);color:var(--yellow,#92620a);border:1px solid var(--yellow-line,#f0d49b)}",
 ".mlr-sev-monitor{background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border:1px solid #a6d9d8}",
 ".mlr-sev-minor{background:var(--paper,#f6f7f5);color:var(--slate,#2d4356);border:1px solid var(--line,#d7dee3)}",
-".mlr-sev-mark{font-weight:900}",
 ".mlr-consequence{font:600 13px var(--sans);color:var(--ink,#14202b);line-height:1.45}",
 ".mlr-detail{display:flex;flex-direction:column;gap:1px;margin-top:7px}",
 ".mlr-detail-label{font:800 10px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184)}",
@@ -1807,7 +1796,7 @@
 /* ---- scan review ---- */
 ".ml-scan-ov{position:fixed;inset:0;z-index:45;display:flex;align-items:center;justify-content:center;background:rgba(8,18,26,.5);padding:16px}",
 ".ml-scan-box{background:var(--panel,#fff);border-radius:16px;padding:22px;text-align:center;color:var(--ink,#14202b);font:600 13.5px var(--sans);max-width:320px}",
-".ml-scan-spin{font-size:26px;animation:mlspin 1s linear infinite;margin-bottom:8px}",
+".ml-scan-spin{width:26px;height:26px;box-sizing:border-box;border:3px solid var(--line,#d7dee3);border-top-color:var(--teal,#0e6e63);border-radius:50%;margin:0 auto 8px;animation:mlspin 1s linear infinite}",
 ".ml-scan-err{color:var(--red,#ab1c2c);font:600 13.5px/1.5 var(--sans);margin-bottom:12px}",
 ".ml-scan-rows{display:flex;flex-direction:column;gap:10px}",
 ".ml-scan-row{border:1px solid var(--line,#d7dee3);border-radius:12px;padding:11px 12px;background:var(--panel,#fff)}",

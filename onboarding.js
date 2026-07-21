@@ -188,7 +188,10 @@
       ".smdt-wel-cta{width:100%;max-width:330px;margin-top:auto;background:#fff;color:#0b5b54;font:700 16px inherit;border:0;border-radius:16px;padding:17px;cursor:pointer;box-shadow:0 10px 24px -10px rgba(0,0,0,.4)}",
       ".smdt-wel-skip{background:none;border:0;color:rgba(255,255,255,.8);font:500 13.5px inherit;padding:16px;cursor:pointer;margin-top:4px}",
       // resume pill
-      ".smdt-resume{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom));z-index:100045;display:flex;align-items:center;gap:9px;background:#0f172a;color:#fff;border:0;border-radius:22px;padding:11px 18px;font:600 13.5px var(--sans,system-ui,sans-serif);cursor:pointer;box-shadow:0 12px 26px -12px rgba(0,0,0,.6);animation:smdtToast .3s ease}",
+      ".smdt-resume{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom));z-index:100045;display:flex;align-items:center;gap:2px;background:#0f172a;color:#fff;border:0;border-radius:22px;padding:4px 6px 4px 14px;box-shadow:0 12px 26px -12px rgba(0,0,0,.6);animation:smdtToast .3s ease}",
+      ".smdt-resume-go{display:flex;align-items:center;gap:9px;background:none;border:0;color:inherit;font:600 13.5px var(--sans,system-ui,sans-serif);cursor:pointer;padding:7px 2px}",
+      ".smdt-resume-x{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.14);border:0;color:inherit;cursor:pointer;padding:0}",
+      ".smdt-resume-x svg,.smdt-resume-x img{width:16px;height:16px}",
       // contextual tip
       ".smdt-tip{position:fixed;left:14px;right:14px;bottom:calc(96px + env(safe-area-inset-bottom));z-index:100046;max-width:380px;margin:0 auto;background:#0f172a;color:#f8fafc;border-radius:18px;box-shadow:0 16px 34px -14px rgba(0,0,0,.6);padding:16px;font-family:var(--sans,system-ui,sans-serif);animation:smdtToast .3s ease}",
       ".smdt-tip-row{display:flex;align-items:flex-start;gap:11px}.smdt-tip-row .i{font-size:20px}",
@@ -463,19 +466,18 @@
   function endRun(completed, silent) {
     var r = _run; _run = null; _step = 0;
     teardownChrome();
+    _pausedAt = null; hideResume();   // ANY teardown (skip, complete, restart) removes the resume pill
     if (completed) {
       var s = getState(); s.completedVersion = TOUR_VERSION; s.lastCompletedAt = new Date().toISOString(); setState(s);
-      _pausedAt = null; hideResume();
     }
     if (r && r.finish) { try { r.finish(completed); } catch (e) {} }
     if (!silent) emit(completed ? "completed" : "skipped", { tour: r && r.id });
   }
   function finishRun(completed) { var wasLast = _run && _step === _run.steps.length - 1; endRun(completed, false); if (completed) toast("Tour complete 🎉"); }
   function skipRun() {
-    var s = getState(); s.skippedVersion = TOUR_VERSION; s.skippedCount = (s.skippedCount || 0) + 1; setState(s);
-    var paused = _run ? { tour: _run.id, step: _step } : null;
+    var s = getState(); s.skippedVersion = TOUR_VERSION; s.skippedCount = (s.skippedCount || 0) + 1; s.resumeDismissed = true; setState(s);
+    // Skip is a true dismissal — no resume pill. endRun() clears _pausedAt + hides the pill.
     endRun(false, false);
-    _pausedAt = paused; if (paused) showResume();
   }
 
   // ---- APP tour (real home) ----------------------------------------------------------------
@@ -680,11 +682,20 @@
   var _pausedAt = null, _resumeEl = null;
   function showResume() {
     if (!_pausedAt) return; injectCSS();
-    if (!_resumeEl) { _resumeEl = document.createElement("button"); _resumeEl.className = "smdt-resume"; _resumeEl.setAttribute("aria-label", "Resume tour"); document.body.appendChild(_resumeEl); _resumeEl.onclick = resumeTour; }
-    _resumeEl.innerHTML = '<span>' + obIco("play") + '</span><span>Resume tour</span>';
+    try { if (getState().resumeDismissed) return; } catch (e) {}   // stays gone once dismissed
+    if (!_resumeEl) {
+      _resumeEl = document.createElement("div"); _resumeEl.className = "smdt-resume"; _resumeEl.setAttribute("role", "group"); _resumeEl.setAttribute("aria-label", "Resume tour"); document.body.appendChild(_resumeEl);
+      _resumeEl.onclick = function (e) {
+        if (e && e.target && e.target.closest && e.target.closest("[data-resume-x]")) { dismissResume(); return; }
+        resumeTour();
+      };
+    }
+    _resumeEl.innerHTML = '<button class="smdt-resume-go" type="button"><span>' + obIco("play") + '</span><span>Resume tour</span></button>' +
+      '<button class="smdt-resume-x" type="button" data-resume-x aria-label="Dismiss tour">' + obIco("close") + '</button>';
     _resumeEl.style.display = "flex";
   }
   function hideResume() { if (_resumeEl) _resumeEl.style.display = "none"; }
+  function dismissResume() { _pausedAt = null; hideResume(); try { var s = getState(); s.resumeDismissed = true; setState(s); } catch (e) {} }
   function resumeTour() { if (!_pausedAt) return; var p = _pausedAt; _pausedAt = null; hideResume(); if (p.tour === "icu") startIcuTour(); else startAppTour(); }
 
   // ---- contextual ICU tip ------------------------------------------------------------------

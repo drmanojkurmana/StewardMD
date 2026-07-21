@@ -7,9 +7,15 @@ public struct Session: Codable, Equatable, Sendable {
     public let uid: String?
     public let idToken: String?
     public let expiresAt: Double?     // epoch seconds
+    public let doctorName: String?    // signed-in clinician's display name (optional)
+    public let hospital: String?      // clinician's hospital / institution (optional)
 
-    public init(uid: String?, idToken: String?, expiresAt: Double?) {
+    // doctorName/hospital default to nil so existing 3-arg callers stay source-compatible,
+    // and old persisted blobs (without these keys) still decode via synthesized Codable.
+    public init(uid: String?, idToken: String?, expiresAt: Double?,
+                doctorName: String? = nil, hospital: String? = nil) {
         self.uid = uid; self.idToken = idToken; self.expiresAt = expiresAt
+        self.doctorName = doctorName; self.hospital = hospital
     }
 
     /// Token present and more than 60s from expiry (clock injectable for tests).

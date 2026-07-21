@@ -88,7 +88,7 @@
   var TOGGLES = [
     { id: "reason", title: "Reasoning v2", sub: "Live differential in the workflow", def: true, key: "smd_reason_v2" },
     { id: "safety", title: "Organ-safety overlay", sub: "Renal / hepatic / QT flags on advice", def: true, key: "smd_safety_overlay" },
-    { id: "ai", title: "MaiK — Medical AI", sub: "Grounded knowledge assistant", def: false, key: "smd_ai" },
+    { id: "ai", title: "Ask Maik — Medical AI", sub: "Grounded knowledge assistant", def: false, key: "smd_ai" },
     { id: "expanded", title: "Expanded Harrison KB", sub: "+268 reference diseases as candidates", def: false, key: "smd_kb_expanded" },
     { id: "ghis", title: "GHIS Ward Sync", sub: "Live inpatient labs & radiology", def: true, key: "smd_ghis_ward" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
@@ -174,7 +174,7 @@
           '<button class="sbr-row" data-sbr-otainstall="1" style="padding-left:0;display:none">' + svg("download") + '<span class="sbr-lbl">Download &amp; install</span></button>';
       }
     } catch (e) {}
-    html += '<div class="sbr-note">⚗️ Experimental — clinician review required.</div>';
+    html += '<div class="sbr-note">Experimental. Clinician review required.</div>';
     return html;
   }
 

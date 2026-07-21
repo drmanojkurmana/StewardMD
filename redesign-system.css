@@ -341,7 +341,8 @@ body.dark {
 #homeV2.rnav .rnav-resume-nm { font: 700 15px var(--rds-font); color: var(--rds-ink); }
 #homeV2.rnav .rnav-resume-mt { font: 500 12px var(--rds-font); color: var(--rds-muted); }
 #homeV2.rnav .rnav-recent { padding: 0; overflow: hidden; }
-#homeV2.rnav .rnav-recent-row { width: 100%; text-align: left; cursor: pointer; }
+#homeV2.rnav .rnav-recent-row { width: 100%; text-align: left; cursor: pointer; appearance: none; -webkit-appearance: none; border: 0; border-bottom: 1px solid var(--rds-line-soft); background: var(--rds-surface); box-sizing: border-box; }
+#homeV2.rnav .rnav-recent-row:last-child { border-bottom: 0; }
 #homeV2.rnav .rnav-recent-tt { font: 600 14px var(--rds-font); color: var(--rds-ink); display: block; }
 #homeV2.rnav .rnav-recent-sub { font: 500 12px var(--rds-font); color: var(--rds-muted); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #homeV2.rnav .rnav-foot { margin-top: auto; padding-top: 8px; }
