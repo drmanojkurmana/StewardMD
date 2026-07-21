@@ -19,6 +19,18 @@
 
   function flags() { return (typeof window !== "undefined" && window.SMD_KARDIOX_FLAGS) || null; }
   function on() { var f = flags(); return !!(f && f.bool("smd_kardiox")); }
+  function betaOn() { var f = flags(); return !!(f && f.bool("smd_kardiox_beta")); }
+  // Experimental-beta banner (TestFlight/internal builds): an unmissable "not a diagnosis / not for
+  // clinical use" bar. Shown only when smd_kardiox_beta is set (default OFF on public/web main).
+  function ensureBetaBanner(el) {
+    if (!betaOn() || !el || el.querySelector(".kx-beta-banner")) return;
+    var b = document.createElement("div");
+    b.className = "kx-beta-banner";
+    b.setAttribute("role", "note");
+    b.innerHTML = ic("science") +
+      "<span>EXPERIMENTAL BETA &mdash; AI decision support, <b>not a diagnosis</b>. Not for clinical use.</span>";
+    el.insertBefore(b, el.firstChild);
+  }
   function haptic(kind) { try { if (window.SMD_KARDIOX_FLAGS && SMD_KARDIOX_FLAGS.bool("smd_kardiox_haptics") && window.SMD_HAPTICS) SMD_HAPTICS[kind || "light"] && SMD_HAPTICS[kind || "light"](); } catch (e) {} }
 
   // Material Symbols glyph via a span (matches StewardMD's icon usage in FundX).
@@ -68,6 +80,7 @@
   function open() {
     if (!on()) return;                 // hard gate: default OFF → complete no-op
     var el = root();
+    ensureBetaBanner(el);              // experimental-beta safety bar (beta builds only)
     // Landing (screen 02) + inner screens are built in M2; M0 mounts the shell only.
     el.classList.add("kx-open");
     document.documentElement.classList.add("kx-lock");

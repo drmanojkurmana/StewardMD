@@ -13,7 +13,8 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_kardiox:            { type: "bool", def: false,     query: "kardiox",     desc: "KardioX AI master flag (home card + module). DEFAULT OFF." },
+    smd_kardiox:            { type: "bool", def: true,      query: "kardiox",     desc: "KardioX AI master flag (home card + module). BETA BUILD: default ON (public/web main keeps this OFF)." },
+    smd_kardiox_beta:       { type: "bool", def: true,      query: "kardioxbeta", desc: "Experimental-beta build marker: shows the 'not a diagnosis / not for clinical use' beta banner. ON only in TestFlight/internal builds." },
     smd_kardiox_cloud:      { type: "tri",  def: null,      query: null,          desc: "Cloud ECG-analysis consent (null = ask once). Off = mock/offline only." },
     smd_kardiox_confidence: { type: "bool", def: true,      query: null,          desc: "Always show the AI confidence % (Settings · Intelligence)." },
     smd_kardiox_haptics:    { type: "bool", def: true,      query: null,          desc: "Haptic feedback for taps / report-ready / urgent / quiz." },
