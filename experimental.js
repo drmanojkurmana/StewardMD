@@ -22,7 +22,7 @@
 (function () {
   "use strict";
   var BASE = "/api/experimental";
-  var TITLES = { fundx: "FundX AI" };
+  var TITLES = { fundx: "FundX AI", kardiox: "KardioX AI" };
   var listeners = [];
 
   function C() { try { return window.Capacitor; } catch (e) { return null; } }
