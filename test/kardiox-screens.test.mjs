@@ -62,6 +62,9 @@ R.runPipeline({ id: "smoke", source: "photoLibrary" });
 await delay(400);   // mock analyzer streams 13 stages @ ~8ms then resolves + mounts report
 ok("pipeline → report shows AF verdict", /Atrial fibrillation/i.test(host._html) && host._html.indexOf("kx-") >= 0);
 ok("report shows confidence 91%", /91/.test(host._html));
+// HONESTY: with no validated model the mock result MUST be flagged a demo sample, never a real read.
+ok("report flags the mock result as a DEMO SAMPLE (not your ECG)",
+  /DEMO SAMPLE/i.test(host._html) && /not your ECG/i.test(host._html) && /kx-demo-note/.test(host._html));
 
 // why screen (needs analysis in state — set by the pipeline above)
 host._html = "";

@@ -32,7 +32,11 @@
               // Fast but visible staging; deterministic order. setTimeout keeps the UI responsive.
               (typeof setTimeout === "function" ? setTimeout(step, 8) : step());
             } else {
+              // NO validated model is connected → this is a FIXED demo sample, NOT an analysis of the
+              // uploaded image. Tag it so the report shows an unmistakable "demo sample" banner and never
+              // masquerades as a real per-ECG diagnosis (same output for any/no image is expected here).
               var a = models.makeAnalysis(models.samples.afWithRvr);
+              a.demo = true;
               if (image && image.id) a.image = image;
               resolve(a);
             }

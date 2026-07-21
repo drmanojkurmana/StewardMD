@@ -45,6 +45,7 @@ const seen = [];
 const result = await prov.analyzer.analyze({ id: "img1" }, (stage) => seen.push(stage));
 ok("analyzer streamed 13 stages in order", seen.length === 13 && seen[0] === "upload" && seen[12] === "report");
 ok("analyzer resolved AF analysis w/ image", result.verdict === "Atrial fibrillation" && result.image && result.image.id === "img1");
+ok("mock result flagged demo (no validated model → not a real per-ECG diagnosis)", result.demo === true);
 
 // store CRUD + deleteAll + search
 await prov.ecgStore.save(result);

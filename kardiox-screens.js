@@ -616,7 +616,8 @@
         '<div class="kx-verdict-top">' +
           '<div class="kx-verdict-row">' +
             '<span class="kx-sev-pill">' + ic(sev.icon) + esc(sev.label) + '</span>' +
-            '<span class="kx-ai-mark">' + ic("auto_awesome") + 'KardioX AI</span>' +
+            '<span class="kx-ai-mark' + (a.demo ? ' kx-ai-mark--demo' : '') + '">' +
+              ic(a.demo ? "science" : "auto_awesome") + (a.demo ? 'DEMO SAMPLE' : 'KardioX AI') + '</span>' +
           '</div>' +
           '<div class="kx-verdict-dx">' + esc(a.verdict) + '</div>' +
           (a.verdictQualifier ? '<div class="kx-verdict-qual">' + esc(a.verdictQualifier) + '</div>' : '') +
@@ -646,8 +647,16 @@
   
     var noteLabel = a.physicianNote ? a.physicianNote : "Add physician note";
   
+    var demoBanner = a.demo ?
+      '<div class="kx-demo-note" role="note">' + ic("science") +
+        '<div><b>DEMO SAMPLE &mdash; not your ECG.</b> No validated AI model is connected, so this is a ' +
+        'fixed example (the same for any or no image), not an analysis of what you uploaded. ' +
+        'Do NOT use for any clinical decision.</div>' +
+      '</div>' : '';
+
     var body =
       '<div class="kx-rpt-body">' +
+        demoBanner +
         hero +
         section("straighten", "Measurements &amp; intervals") +
         '<div class="kx-metrics">' + metricsHtml + '</div>' +

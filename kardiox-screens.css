@@ -1665,3 +1665,10 @@
 #kardioxRoot .kx-focus-head .material-symbols-rounded { font-size: 18px; color: var(--kx-sev-info); }
 #kardioxRoot .kx-focus-title { font-size: 12.5px; color: var(--kx-sev-info); }
 #kardioxRoot .kx-focus-body { display: block; font-size: 12px; line-height: 1.45; color: var(--kx-ink); font-weight: 500; margin-top: 5px; }
+
+/* ─── Demo-sample notice (shown when NO validated model is connected; the analyzer is the fixed mock) ─── */
+#kardioxRoot .kx-demo-note { display: flex; gap: 8px; align-items: flex-start; margin: 0 0 12px; padding: 12px 14px; border-radius: var(--kx-r-ctl, 12px); background: #7A3E00; color: #FFF7ED; font-size: 12.5px; line-height: 1.4; }
+#kardioxRoot .kx-demo-note .material-symbols-rounded { font-size: 20px; flex: 0 0 auto; }
+#kardioxRoot .kx-demo-note b { font-weight: 800; }
+#kardioxRoot .kx-ai-mark--demo { color: #B45309; font-weight: 800; }
+#kardioxRoot .kx-ai-mark--demo .material-symbols-rounded { color: #B45309; }
